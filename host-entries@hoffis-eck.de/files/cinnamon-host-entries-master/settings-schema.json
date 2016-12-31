@@ -1,0 +1,12 @@
+{
+    "ip": {
+        "type": "entry",
+        "default": "127.0.1.1",
+        "description": "IP address"
+    },
+    "hosts": {
+        "type": "entry",
+        "default": "localhost.local",
+        "description": "hosts"
+    }
+}

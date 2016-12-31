@@ -1,0 +1,61 @@
+{
+    "heading1": {
+        "type": "header",
+        "description": "Feed URLs"
+    },
+    "manage_feeds_button": {
+        "type": "button",
+        "description": "Manage Feeds...",
+        "callback": "manage_feeds",
+        "tooltip": "Launch the feed management app to add/remove/edit feeds"
+    },
+    "url": {
+        "type" : "generic",
+        "default" : "http://fxfeeds.mozilla.com/en-US/firefox/headlines.xml\nhttp://www.linuxmint.com/planet/rss20.xml\nhttp://segfault.linuxmint.com/feed/\n",
+        "description" : "Feed URL(s)",
+        "tooltip" : "Enter the URLs of a valid RSS/Atom feed, one feed per line"
+    },
+    "max_items": {
+            "type" : "scale",
+            "default" : 10,
+            "min" : 1,
+            "max" : 50,
+            "step" : 1,
+            "description" : "Maximum number of items",
+            "tooltip" : "Maximum number of items to display for this feed"
+    },
+    "refresh_interval": {
+        "type" : "spinbutton",
+        "default" : 15,
+        "min" : 1,
+        "max" : 60,
+        "step" : 1,
+        "units" : "minutes",
+        "description" : "Update interval",
+        "tooltip" : "Interval between checking for new items"
+    },
+    "show_read_items": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Show read items",
+        "tooltip" : "Controls whether previously read items are displayed in the feed menu"
+    },
+    "show_feed_image": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Show feed image(s)",
+        "tooltip" : "Controls whether a display the feed image (where available) in the feed menu"
+    },
+    "notifications_enabled": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Show notifications for new items",
+        "tooltip" : "If checked a popup notification will be displayed for new items"
+    },
+    "enable-verbose-logging" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Check this to enable debug logging in Looking Glass",
+        "tooltip" : "Checking this will enable debug level logging"
+    }
+}

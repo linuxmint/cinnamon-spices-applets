@@ -1,0 +1,81 @@
+{
+    "storedNotes": {
+        "type": "generic",
+        "default": []
+    },
+    
+    "raisedState": {
+        "type": "generic",
+        "default": false
+    },
+    
+    "hideState": {
+        "type": "generic",
+        "default": false
+    },
+    
+    "appearanceHeader": {
+        "type": "header",
+        "description": "Appearance"
+    },
+    
+    "height": {
+        "type": "scale",
+        "description": "Height",
+        "min": 100,
+        "max": 500,
+        "step": 10,
+        "default": 200
+    },
+    
+    "width": {
+        "type": "scale",
+        "description": "Width",
+        "min": 100,
+        "max": 500,
+        "step": 10,
+        "default": 200
+    },
+    
+    "theme": {
+        "type": "combobox",
+        "description": "Default theme",
+        "default": "green",
+        "options": {
+            "Mint-X-Green": "green",
+            "Mint-X-Aqua": "aqua",
+            "Mint-X-Blue": "blue",
+            "Mint-X-Brown": "brown",
+            "Mint-X-Orange": "orange",
+            "Mint-X-Pink": "pink",
+            "Mint-X-Purple": "purple",
+            "Mint-X-Red": "red",
+            "Mint-X-Sand": "sand",
+            "Mint-X-Teal": "teal",
+            "Random": "random"
+        }
+    },
+    
+    "behaviorHeader": {
+        "type": "header",
+        "description": "Behavior"
+    },
+    
+    "startState": {
+        "type": "combobox",
+        "description": "When Cinnamon starts",
+        "default": 0,
+        "options": {
+            "Show notes on Desktop": 0,
+            "Show notes above windows": 1,
+            "Hide notes": 2,
+            "Restore previous state": 3
+        }
+    },
+    
+    "lowerOnClick": {
+        "type": "checkbox",
+        "description": "Lower notes on mouse click",
+        "default": true
+    }
+}

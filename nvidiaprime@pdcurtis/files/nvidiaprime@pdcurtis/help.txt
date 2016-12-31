@@ -1,0 +1,16 @@
+This is a simple applet written originally for my own purposes to enable me to monitor the temperature of the nVidia Discrete Graphics Processor Unit on my laptop. 
+
+The Nvivia Prime Display Applet is a cut down version of the Bumblebee applet I wrote a couple of years ago for my Chillblast Defiant laptop which has an Core i7 Haswell architecture and Optimus technology to switch between the Integrated Intel 4600 graphics and Discrete nVidia GTX 765M graphics. 
+
+The prefered method of switching with the latest kernels and nVidia drivers no longer uses Bumblebee but utilises Nvidia Prime which is simpler to install and use. This Applet allows one to monitor whether the power consuming discrete graphics is on and display the nVidia GPU temperature, but only when it is enabled as monitoring the temperature requires the graphics processor to be turned on. The Bumblebee applet is still available for those who wish to use Bumblebee, which still has some advantages over nVidia Prime, although it is more difficult to install.
+
+Clicking the applet opens nvidia-settings which allows one to change GPU in the same way as the built in NVIDIA Prime applet which it can replace if panel space is at a premium.
+
+The right click context menu also gives the ability to run the nVidia Settings program as well as the System Monitor and Power Statistics, all useful for monitoring and controlling power consumption which is paramount when using a laptop on batteries.
+
+There is error checking to ensure the switching program bbswith is loaded and does not fill the error logs with messages when that is not the the case. It displays a message of ERROR if it is not found.
+
+The applet requires at least Cinnamon 1.8 to access the configuration from within the applet and has been tested up to Cinnamon 3.0 where it adapts to use xed to display the help and changelog files. The nVidia graphics packages obviously need to be installed but no other packages are essential. Installation is standard and the folder nvidiaprime@pdcurtis is extracted from the zip file to ~/.local/share/cinnamon/applets and then added to the panel. 
+
+The latest version has a tick box option on the configuration screen to access enhanced functionality through the Right Click Context Menu. This needs a Cinnamon Restart or log out/in before the change is visible. Currently this adds the glxspheres64 Graphics Processor Test to the menu. glxspheres64 is not installed by default and the VirtualGL package needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi (should be the default for a right click on the downloaded file). It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU when it is active.
+

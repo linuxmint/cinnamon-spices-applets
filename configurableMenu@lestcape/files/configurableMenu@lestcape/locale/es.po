@@ -1,0 +1,1046 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Configurable Menu 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-10 14:06-0600\n"
+"PO-Revision-Date: 2014-12-07 01:09-0600\n"
+"Last-Translator: Lester Carballo Pérez <lestcape@gmail.com>\n"
+"Language-Team: lestcape <lestcape@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: applet.js:83 applet.js:3678 cinnamonMenu.js:536
+msgid "Execution of '%s' failed:"
+msgstr "Ha fallado ejecución de '%s':"
+
+#: applet.js:103 applet.js:3678 cinnamonMenu.js:536
+msgid "Command not found."
+msgstr "Comando no encontrado"
+
+#: applet.js:133 applet.js:3678 cinnamonMenu.js:536
+msgid "Package %s"
+msgstr "Paquete %s"
+
+#: applet.js:150 applet.js:3678 cinnamonMenu.js:536
+msgid "Package to install %s"
+msgstr "Paquete para instalar %s"
+
+#: applet.js:383 applet.js:3678 cinnamonMenu.js:536 applet.js:1452
+msgid "List View"
+msgstr "Vista de lista"
+
+#: applet.js:1455
+msgid "Grid View"
+msgstr "Vista de cuadrícula"
+
+#: applet.js:1455
+msgid "Show application entries in list view"
+msgstr "Mostrar las entradas de applicación en vista de lista"
+
+#: applet.js:1459
+msgid "Prevent resizing"
+msgstr "Prevenir el cambio de tamaño"
+
+#: applet.js:1459
+msgid "Prevent resizing the menu"
+msgstr "Prevenir el cambio de tamaño del menú"
+
+#: applet.js:1461
+msgid "Allow resizing"
+msgstr "Permitir el cambio de tamaño"
+
+#: applet.js:1461
+msgid "Allow resizing the menu"
+msgstr "Permitir el cambio de tamaño del menú"
+
+#: applet.js:1465
+msgid "Recover size"
+msgstr "Recobar el tamaño"
+
+#: applet.js:1465
+msgid "Recover the normal menu size"
+msgstr "Recobrar el tamaño"
+
+#: applet.js:1467
+msgid "Full Screen"
+msgstr "Pantalla Completa"
+
+#: applet.js:1467
+msgid "Put the menu in full screen mode"
+msgstr "Poner el menú en modo de pantalla completa"
+
+#: applet.js:1470
+msgid "Configure the menu options"
+msgstr "Configurar las opciones del menú"
+
+#: applet.js:1671 applet.js:1683
+msgid "Remove from accessible panel"
+msgstr "Quitar del panel accesible"
+
+#: applet.js:1674 applet.js:1686
+msgid "Add to accessible panel"
+msgstr "Añadir al panel accesible"
+
+#: applet.js:1674 applet.js:1686
+msgid "Save name"
+msgstr "Salvar nombre"
+
+#: applet.js:1674 applet.js:1686
+msgid "Edit name"
+msgstr "Editar nombre"
+
+#: applet.js:1674 applet.js:1686
+msgid "Default name"
+msgstr "Nombre por defecto"
+
+#: applet.js:5815
+msgid "Filter:"
+msgstr "Filtro:"
+
+#: applet.js:5817 applet.js:6100 applet.js:6131 applet.js:6165
+msgid "Favorites"
+msgstr "Favoritos"
+
+#: applet.js:6213
+msgid "Search %s for %s"
+msgstr "Buscar en %s por %s"
+
+#. configurableMenu@lestcape->settings-schema.json->header-layouts->description
+msgid "Layouts:"
+msgstr "Diseños:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-menu->description
+msgid "Menu:"
+msgstr "Menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-size->description
+msgid "Menu Size:"
+msgstr "Tamaño del Menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-reaction->description
+msgid "Menu Reaction:"
+msgstr "Reacción del Menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-categories->description
+msgid "Categories:"
+msgstr "Categorias:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-apps->description
+msgid "Applications:"
+msgstr "Aplicaciones:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-favorites->description
+msgid "Favorites:"
+msgstr "Favoritos:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-hover->description
+msgid "Hover Icon:"
+msgstr "Ícono de Visualización:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-system->description
+msgid "System Buttons:"
+msgstr "Botones del Sistema:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-control->description
+msgid "Control Buttons:"
+msgstr "Botones de Control:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-separators->description
+msgid "Separators:"
+msgstr "Separadores:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-information->description
+msgid "Information Panel:"
+msgstr "Panel de información"
+
+#. configurableMenu@lestcape->settings-schema.json->header-accessible->description
+msgid "Accessible Panel:"
+msgstr "Panel Accessible:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-gnomenu->description
+msgid "GnoMenu Panel:"
+msgstr "Panel GnoMenu:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-submenu->description
+msgid "Submenu:"
+msgstr "Submenú:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-search->description
+msgid "General search options:"
+msgstr "Opciones generales de búsqueda:"
+
+#. configurableMenu@lestcape->settings-schema.json->header-install->description
+msgid "Installer and uninstaller tools:"
+msgstr "Herramienta para instalar y desintalar:"
+
+#. configurableMenu@lestcape->settings-schema.json->effect->description
+msgid "Effect on opening and closing:"
+msgstr "Efecto sobre la apertura y cierre:"
+
+#. configurableMenu@lestcape->settings-schema.json->effect->tooltip
+msgid "Select the effect on the menu opening and closing."
+msgstr "Seleccionar el efecto sobre la apertura y el cierre del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->effect->options
+msgid "None"
+msgstr "Ninguno"
+
+#. configurableMenu@lestcape->settings-schema.json->effect->options
+msgid "Dispel"
+msgstr "Desvanecer"
+
+#. configurableMenu@lestcape->settings-schema.json->effect->options
+msgid "Hide Horizontal"
+msgstr "Ocultar Horizontal"
+
+#. configurableMenu@lestcape->settings-schema.json->effect->options
+msgid "Hide Vertical"
+msgstr "Ocultar Vertical"
+
+#. configurableMenu@lestcape->settings-schema.json->effect-time->description
+msgid "Duration of effect:"
+msgstr "Duración del efecto:"
+
+#. configurableMenu@lestcape->settings-schema.json->effect-time->tooltip
+msgid "The time on seconds to perform the effect(More time is slower)."
+msgstr ""
+"El tiempo en segundos para realizar el efecto (Más tiempo es más lento)."
+
+#. configurableMenu@lestcape->settings-schema.json->swap-panels->description
+msgid "Swap the top and bottom panel"
+msgstr "Intercambiar el panel superior e inferior"
+
+#. configurableMenu@lestcape->settings-schema.json->swap-panels->tooltip
+msgid "Choose whether or not to swap the top and bottom panel on the menu."
+msgstr ""
+"Seleccione si desea o no intercambiar el panel superior e inferior en el "
+"menú."
+
+#. configurableMenu@lestcape->settings-schema.json->allow-search->description
+msgid "Show search entry"
+msgstr "Mostrar la entrada de búsqueda"
+
+#. configurableMenu@lestcape->settings-schema.json->allow-search->tooltip
+msgid "Choose whether or not to show search entry on the menu."
+msgstr "Elija si mostrar o no la entrada de búsqueda en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->app-title-
+#. size->description
+msgid "Font size of the selected application name:"
+msgstr "Tamaño de la fuente del nombre de la aplicación seleccionada:"
+
+#. configurableMenu@lestcape->settings-schema.json->app-title-size->tooltip
+msgid "Set the font size of the selected application name."
+msgstr ""
+"Establecer el tamaño de la fuente del nombre de la aplicación seleccionada:"
+
+#. configurableMenu@lestcape->settings-schema.json->menu-theme-
+#. save-button->description
+msgid "Save the layout configuration"
+msgstr "Salvar la configuración del diseño actual"
+
+#. configurableMenu@lestcape->settings-schema.json->menu-theme-
+#. save-button->tooltip
+msgid "Press this button to save the layout configuration."
+msgstr "Pulse este botón para salvar la configuración del diseño actual."
+
+#. configurableMenu@lestcape->settings-schema.json->app-title-size->units
+msgid "points"
+msgstr "puntos"
+
+#. configurableMenu@lestcape->settings-schema.json->favorites-
+#. lines->description
+msgid "Number of favorites lines:"
+msgstr "Número de favoritos:"
+
+#. configurableMenu@lestcape->settings-schema.json->favorites-lines->tooltip
+msgid "Choose the number of favorites lines."
+msgstr "Seleccione el número de lineas que tendrá sus favoritos."
+
+#. configurableMenu@lestcape->settings-schema.json->favorites-lines->units
+msgid "lines"
+msgstr "lineas"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->description
+msgid "GnoMenu buttons layout:"
+msgstr "Diseño de los botones de GnoMenu:"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->tooltip
+msgid "Select a layout of GnoMenu buttons."
+msgstr "Seleccione un diseño de los botones de GnoMenu."
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->options
+msgid "Only Icons"
+msgstr "Solo Íconos"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->options
+msgid "Only Text"
+msgstr "Solo Texto"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->options
+msgid "Grid"
+msgstr "Cuadrícula"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-buttons-theme->options
+msgid "List"
+msgstr "Lista"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->description
+msgid "System buttons layout:"
+msgstr "Diseño de los botones del sistema:"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->tooltip
+msgid "Select a layout of system buttons."
+msgstr "Seleccione un diseño de los botones del sistema."
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Retractable Text"
+msgstr "Retractable Solo Texto"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Vertical Text"
+msgstr "Vertical Solo Texto"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Horizontal Grid"
+msgstr "Horizontal Modo Cuadrícula"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Vertical Icon"
+msgstr "Vertical"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Horizontal Text"
+msgstr "Horizontal Solo Texto"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Vertical List"
+msgstr "Vertical Modo Lista"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Vertical Grid"
+msgstr "Vertical Modo Cuadrícula"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Horizontal List"
+msgstr "Horizontal Modo Lista"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Retractable"
+msgstr "Retractable"
+
+#. configurableMenu@lestcape->settings-schema.json->power-theme->options
+msgid "Horizontal Icon"
+msgstr "Horizontal"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. favorites->description
+msgid "Show scrolling area of favorites"
+msgstr "Mostrar el área de desplazamiento de favoritos"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-favorites->tooltip
+msgid "Choose whether or not to show the scrolling area of favorites."
+msgstr ""
+"Seleccione si desea o no mostrar el área de desplazamiento de favoritos."
+
+#. configurableMenu@lestcape->settings-schema.json->activate-on-
+#. press->description
+msgid "Open the menu when I press my mouse over it"
+msgstr "Abrir el menu cuando se presione el ratón sobre el."
+
+#. configurableMenu@lestcape->settings-schema.json->activate-on-press->tooltip
+msgid "Enable opening the menu when the mouse press over the applet."
+msgstr "Habilitar abrir el menu cuando se presione el ratón sobre el."
+
+#. configurableMenu@lestcape->settings-schema.json->height->description
+msgid "Menu height:"
+msgstr "Altura del menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->height->tooltip
+msgid "Height of the menu."
+msgstr "Altura del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->app-
+#. description->description
+msgid "Application entries have description"
+msgstr "Las entradas de applicaciones tendrán descripciones"
+
+#. configurableMenu@lestcape->settings-schema.json->app-description->tooltip
+msgid "Choose whether or not to have description on application entries."
+msgstr ""
+"Seleccione si desea o no tener la descripción en las entradas del la "
+"applicación."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-control-
+#. size->description
+msgid "Control icon size:"
+msgstr "Tamaño de íconos de control:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-control-size->tooltip
+msgid "Set the control icon size."
+msgstr "Establecer el tamaño de los íconos de control."
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. applications->description
+msgid "Show scrolling area of applications"
+msgstr "Mostrar el área de desplazamiento de las applicaciones"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. applications->tooltip
+msgid "Choose whether or not to show the scrolling area of applications."
+msgstr ""
+"Seleccione si desea mostrar o no el área de desplazamiento de las "
+"aplicaciones."
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. accessible->description
+msgid "Show scrolling area of accessible panel"
+msgstr "Mostrar el área de desplazamiento del panel accesible"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-accessible->tooltip
+msgid "Choose whether or not to show the scrolling area of accessible panel."
+msgstr ""
+"Seleccione si desea mostrar o no el área de desplazamiento del panel "
+"accesible."
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. gnomenu->description
+msgid "Show scrolling area of GnoMenu panel"
+msgstr "Mostrar el área de desplazamiento del panel GnoMenu"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-gnomenu->tooltip
+msgid "Choose whether or not to show the scrolling area of GnoMenu panel."
+msgstr ""
+"Seleccione si desea mostrar o no el área de desplazamiento del panel GnoMenu."
+
+#. configurableMenu@lestcape->settings-schema.json->show-app-
+#. title->description
+msgid "Show name of the selected application"
+msgstr "Mostrar el nombre de la applicación seleccionada"
+
+#. configurableMenu@lestcape->settings-schema.json->show-app-title->tooltip
+msgid ""
+"Choose whether or not to show the selected application name on the menu."
+msgstr ""
+"Seleccione si desea mostrar o no el nombre de la applicación seleccionada en "
+"el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->full-screen->description
+msgid "Full screen"
+msgstr "Pantalla completa"
+
+#. configurableMenu@lestcape->settings-schema.json->full-screen->tooltip
+msgid "Choose whether or not to put the menu in full screen mode."
+msgstr "Seleccione si desea o no poner el menú en modo pantalla completa."
+
+#. configurableMenu@lestcape->settings-schema.json->control-symbolic->description
+msgid "Show symbolic icons on the control buttons"
+msgstr "Mostrar íconos simbólicos en los botones de control"
+
+#. configurableMenu@lestcape->settings-schema.json->control-symbolic->tooltip
+msgid ""
+"Enable this option to show symbolic icons, on the control buttons and "
+"disable to show full color."
+msgstr ""
+"Active esta opción para mostrar los íconos simbólicos en los botones de "
+"control y desactivela para mostrarlos a todo color."
+
+#. configurableMenu@lestcape->settings-schema.json->show-view-
+#. item->description
+msgid "Show control buttons"
+msgstr "Mostrar los botones de control"
+
+#. configurableMenu@lestcape->settings-schema.json->show-view-item->tooltip
+msgid "Choose whether or not to show control buttons."
+msgstr "Seleccione si desea o no mostrar los botones de control"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-app-size->description
+msgid "Application icon size:"
+msgstr "Tamaño de los íconos de las applicaciones:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-app-size->tooltip
+msgid "Set the application icon size."
+msgstr "Establesca el tamaño de los íconos de las applicaciones:"
+
+#. configurableMenu@lestcape->settings-schema.json->hover-box->description
+msgid "Hover icon have a box"
+msgstr "El ícono de visualización tiene caja"
+
+#. configurableMenu@lestcape->settings-schema.json->hover-box->tooltip
+msgid "Choose whether or not to have a box on the hover icon."
+msgstr "Seleccione si desea o no tener una caja en el ícono de visualización."
+
+#. configurableMenu@lestcape->settings-schema.json->accessible-
+#. box->description
+msgid "Accessible panel has a box"
+msgstr "El panel accessible tiene caja"
+
+#. configurableMenu@lestcape->settings-schema.json->accessible-box->tooltip
+msgid "Choose whether or not to have a box on the accessible panel."
+msgstr "Seleccione si desea o no tener una caja en el panel accessible."
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-box->description
+msgid "GnoMenu buttons have a box"
+msgstr "El panel GnoMenu tiene caja"
+
+#. configurableMenu@lestcape->settings-schema.json->gnomenu-box->tooltip
+msgid "Choose whether or not to have a box on the GnoMenu buttons."
+msgstr "Seleccione si desea o no tener una caja en el panel GnoMenu."
+
+#. configurableMenu@lestcape->settings-schema.json->spacer-size->description
+msgid "Separator size:"
+msgstr "Tamaño de separación:"
+
+#. configurableMenu@lestcape->settings-schema.json->spacer-size->tooltip
+msgid "Choose the size of separator."
+msgstr "Establesca el tamaño de separación."
+
+#. configurableMenu@lestcape->settings-schema.json->time-format->description
+msgid "Time format:"
+msgstr "Formato del tiempo:"
+
+#. configurableMenu@lestcape->settings-schema.json->time-format->tooltip
+msgid "Choose the time format to show time on the menu."
+msgstr "Establesca el formato del tiempo para ser mostrado en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->width->description
+msgid "Menu width:"
+msgstr "Ancho del menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->width->tooltip
+msgid "Width of the menu."
+msgstr "Ancho del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->theme->description
+msgid "Menu layout:"
+msgstr "Diseño del menú:"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->tooltip
+msgid "Select a layout of menu."
+msgstr "Seleccione el diseño del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Accessible"
+msgstr "Accessible"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Classic"
+msgstr "Clásico"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Classic Gnome"
+msgstr "Gnome Clásico"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Whisker"
+msgstr "Whisker"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Kicker"
+msgstr "Kicker"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Dragon"
+msgstr "Dragón"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Stylized"
+msgstr "Estilizado"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Accessible Inverted"
+msgstr "Accessible Invertido"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Dragon Inverted"
+msgstr "Dragón Invertido"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Luz Helena"
+msgstr "Luz Helena"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Windows 7"
+msgstr "Windows 7"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Mint"
+msgstr "Menta"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Vampire"
+msgstr "Vampiro"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "Garibaldo"
+msgstr "Garibaldo"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "GnoMenu Left"
+msgstr "GnoMenu Izquierda"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "GnoMenu Right"
+msgstr "GnoMenu Derecha"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "GnoMenu Top"
+msgstr "GnoMenu Arriba"
+
+#. configurableMenu@lestcape->settings-schema.json->theme->options
+msgid "GnoMenu Bottom"
+msgstr "GnoMenu Abajo"
+
+#. configurableMenu@lestcape->settings-schema.json->show-hover-
+#. icon->description
+msgid "Show hover icon"
+msgstr "Mostrar el ícono de visualización"
+
+#. configurableMenu@lestcape->settings-schema.json->show-hover-icon->tooltip
+msgid "Choose whether or not to show hover icon on the menu."
+msgstr "Seleccione si desea o no mostrar el ícono de visualización en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-hover-
+#. size->description
+msgid "Hover icon size:"
+msgstr "Tamaño del ícono de visualización"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-hover-size->tooltip
+msgid "Set the hover icon size."
+msgstr "Establesca el tamaño del ícono de visualización."
+
+#. configurableMenu@lestcape->settings-schema.json->view-item->description
+msgid "Show application entries in grid view"
+msgstr "Mostrar las applicaciones en vista de cuadrícula"
+
+#. configurableMenu@lestcape->settings-schema.json->view-item->tooltip
+msgid ""
+"Enable show application entries in grid(icon) view and disable show "
+"application entries in list view."
+msgstr ""
+"Habilitado mostrará las applicaciones en vista de cuadrícula(ícono) y "
+"desavilitado las mostrará en vista de lista."
+
+#. configurableMenu@lestcape->settings-schema.json->app-button-
+#. width->description
+msgid "Maximum width of the application entry text:"
+msgstr "Ancho máximo del texto de las aplicaciones:"
+
+#. configurableMenu@lestcape->settings-schema.json->app-button-width->tooltip
+msgid "Set the maximum width of the application entry text."
+msgstr "Establesca el máximo ancho del texto de las applicaciones."
+
+#. configurableMenu@lestcape->settings-schema.json->accessible-
+#. icons->description
+msgid "Show icons on the accessible panel"
+msgstr "Mostrar íconos en panel accessible"
+
+#. configurableMenu@lestcape->settings-schema.json->accessible-icons->tooltip
+msgid "Choose whether or not to have icons on the accessible panel."
+msgstr "Seleccione si desea o no que el panel accesible se muestre con íconos."
+
+#. configurableMenu@lestcape->settings-schema.json->fix-menu-
+#. corner->description
+msgid "Menu bordering screen edge"
+msgstr "El menú se alinea con su esquina correspondiente"
+
+#. configurableMenu@lestcape->settings-schema.json->fix-menu-corner->tooltip
+msgid "Choose whether or not the menu bordering the screen edge."
+msgstr ""
+"Seleccione si desea o no que el menú se alinee con su esquina "
+"correspondiente."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-accesible-
+#. size->description
+msgid "Accessible icons size:"
+msgstr "Tamaño de los íconos del panel accessible:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-accesible-
+#. size->tooltip
+msgid "Set the accessible icons size."
+msgstr "Establesca el tamaño de los íconos del panel accessible."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-gnomenu-
+#. size->description
+msgid "GnoMenu icons size:"
+msgstr "Tamaño de los íconos del panel GnoMenu:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-gnomenu-
+#. size->tooltip
+msgid "Set the GnoMenu icons size."
+msgstr "Establesca el tamaño de los íconos del panel GnoMenu."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-max-fav-
+#. size->description
+msgid "Maximum favorites icon size:"
+msgstr "Máximo tamaño de los íconos de favoritos:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-max-fav-size->tooltip
+msgid "Set the maximum size of the favorites icon."
+msgstr "Establesca el tamaño máximo de los íconos de favoritos."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-cat-size->description
+msgid "Category icon size:"
+msgstr "Tamaño de los íconos de las categorías:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-cat-size->tooltip
+msgid "Set the category icon size."
+msgstr "Establesca el tamaño de los íconos de las categorías."
+
+#. configurableMenu@lestcape->settings-schema.json->show-time-
+#. date->description
+msgid "Show time and date"
+msgstr "Mostrar fecha y hora"
+
+#. configurableMenu@lestcape->settings-schema.json->show-time-date->tooltip
+msgid "Choose whether or not to show time and date on the menu."
+msgstr "Seleccione si desea o no mostrar la fecha y hora en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->automatic-
+#. size->description
+msgid "Automatic size"
+msgstr "Tamaño automático"
+
+#. configurableMenu@lestcape->settings-schema.json->allow-resizing->tooltip
+msgid "Choose whether or not to allow resizing the menu."
+msgstr "Elija si desea o no permitir el cambio de tamaño del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->automatic-size->tooltip
+msgid "Choose whether or not to automatic adjust of the menu size."
+msgstr ""
+"Seleccione si desea o no que el tamaño del menú sea ajustado automáticamente."
+
+#. configurableMenu@lestcape->settings-schema.json->icon-power-
+#. size->description
+msgid "System icons size:"
+msgstr "Tamaño de los íconos del sistema:"
+
+#. configurableMenu@lestcape->settings-schema.json->icon-power-size->tooltip
+msgid "Set the system icons size."
+msgstr "Establesca el tamaño de los íconos del sistema."
+
+#. configurableMenu@lestcape->settings-schema.json->enable-
+#. autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Habilitar desplazamiento automático"
+
+#. configurableMenu@lestcape->settings-schema.json->enable-autoscroll->tooltip
+msgid "Choose whether or not to enable smooth autoscrolling on the menu."
+msgstr ""
+"Seleccione si desea o no habilitar el desplazamiento automático en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->show-
+#. favorites->description
+msgid "Show favorites"
+msgstr "Mostrar favoritos"
+
+#. configurableMenu@lestcape->settings-schema.json->show-favorites->tooltip
+msgid "Choose whether or not to show favorites on the menu."
+msgstr "Seleccione si desea o no mostrar los favoritos en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->control-box->description
+msgid "Control buttons have a box"
+msgstr "Los botones de control tienen caja"
+
+#. configurableMenu@lestcape->settings-schema.json->control-box->tooltip
+msgid "Choose whether or not to have a box on the control buttons."
+msgstr "Seleccione si desea o no que los botones de control tengan caja."
+
+#. configurableMenu@lestcape->settings-schema.json->categories-hover->description
+msgid "Open the category when I move my mouse over it"
+msgstr "Abrir la categoría cuando muevo el ratón sobre ella"
+
+#. configurableMenu@lestcape->settings-schema.json->categories-hover->tooltip
+msgid ""
+"Choose whether or not to open the category when the mouse move over it, "
+"otherwise need the mouse click."
+msgstr ""
+"Seleccione si abrir o no la categoría cuando se mueva el ratón sobre ella, "
+"de lo contrario es necesario el clic del ratón."
+
+#. configurableMenu@lestcape->settings-schema.json->categories-
+#. icons->description
+msgid "Show icons on the categories"
+msgstr "Mostrar íconos en las categorías"
+
+#. configurableMenu@lestcape->settings-schema.json->categories-icons->tooltip
+msgid "Choose whether or not to have icons on the categories."
+msgstr "Seleccione si desea o no que las categorías se muentren con íconos."
+
+#. configurableMenu@lestcape->settings-schema.json->show-recent->description
+msgid "Show recent files"
+msgstr "Mostrar archivos recientes"
+
+#. configurableMenu@lestcape->settings-schema.json->show-recent->tooltip
+msgid "Choose whether or not to show a recent file list in the menu."
+msgstr "Elija si desea o no mostrar la lista de archivos recientes en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-
+#. categories->description
+msgid "Show scrolling area of categories"
+msgstr "Mostrar el área de desplazamiento de las categorías"
+
+#. configurableMenu@lestcape->settings-schema.json->scroll-categories->tooltip
+msgid "Choose whether or not to show the scrolling area of categories."
+msgstr ""
+"Seleccione si desea o no mostrar mostrar el área de desplazamiento de las "
+"categorías."
+
+#. configurableMenu@lestcape->settings-schema.json->arrow-categories->description
+msgid "Show arrow on the categories"
+msgstr "Mostrar una flecha en las categorias"
+
+#. configurableMenu@lestcape->settings-schema.json->arrow-categories->tooltip
+msgid "Choose whether or not to show the arrow on the categories."
+msgstr ""
+"Seleccione si desea o no mostrar una flecha de indicación en las categorías."
+
+#. configurableMenu@lestcape->settings-schema.json->arrow-categories-selected->description
+msgid "Only show arrow when selected category"
+msgstr "Mostrar la flecha sólo cuando se selecciona la categoría"
+
+#. configurableMenu@lestcape->settings-schema.json->arrow-categories-selected->tooltip
+msgid ""
+"Choose whether or not to only show the arrow when selected the category."
+msgstr ""
+"Seleccione si desea o no mostrar la flecha sólo cuando se selecciona la "
+"categoría."
+
+#. configurableMenu@lestcape->settings-schema.json->show-app-
+#. description->description
+msgid "Show description of the selected application"
+msgstr "Mostrar la descripción de la aplicación seleccionada"
+
+#. configurableMenu@lestcape->settings-schema.json->show-app-
+#. description->tooltip
+msgid ""
+"Choose whether or not to show the selected application description on the "
+"menu."
+msgstr ""
+"Seleccione si desea o no mostrar la descripción de la aplicación "
+"seleccionada en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->show-box-
+#. pointer->description
+msgid "Show menu box pointer"
+msgstr "Mostrar el apuntador del menú"
+
+#. configurableMenu@lestcape->settings-schema.json->show-box-pointer->tooltip
+msgid "Choose whether or not to show the menu box pointer."
+msgstr ""
+"Seleccione si desea o no mostrar el apuntador de la caja principal del menú."
+
+#. configurableMenu@lestcape->settings-schema.json->date-format->description
+msgid "Date format:"
+msgstr "Formato de fecha:"
+
+#. configurableMenu@lestcape->settings-schema.json->date-format->tooltip
+msgid "Choose the date format to show time on the menu."
+msgstr "Seleccione el formato de fecha para ser mostrado en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->spacer-line->description
+msgid "Show separator line"
+msgstr "Mostrar linea en el separador"
+
+#. configurableMenu@lestcape->settings-schema.json->spacer-line->tooltip
+msgid "Choose whether or not to show a line on separator."
+msgstr "Seleccione si desea o no mostrar una linea en el separador."
+
+#. configurableMenu@lestcape->settings-schema.json->app-description-
+#. size->description
+msgid "Font size of the selected application description:"
+msgstr "Tamaño de fuente en la descripción de la aplicación seleccionada:"
+
+#. configurableMenu@lestcape->settings-schema.json->app-description-
+#. size->tooltip
+msgid "Set the font size of the selected application description."
+msgstr ""
+"Seleccione el tamaño de fuente en la descripción de la aplicación "
+"seleccionada."
+
+#. configurableMenu@lestcape->settings-schema.json->show-power-
+#. buttons->description
+msgid "Show system buttons"
+msgstr "Mostrar los botones del sistema"
+
+#. configurableMenu@lestcape->settings-schema.json->show-power-
+#. buttons->tooltip
+msgid "Choose whether or not to show system buttons on the menu."
+msgstr "Seleccione si desea o no mostrar los botones del sistema en el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->show-removable-
+#. drives->description
+msgid "Show removable drives on the accessible panel"
+msgstr "Mostrar las unidades extraíbles en el panel accessible"
+
+#. configurableMenu@lestcape->settings-schema.json->show-removable-
+#. drives->tooltip
+msgid "Choose whether or not to show removable drives on the accessible panel."
+msgstr ""
+"Seleccione si desea o no mostrar las unidades extraíbles en el panel "
+"accessible."
+
+#. configurableMenu@lestcape->settings-schema.json->power-box->description
+msgid "System buttons have a box"
+msgstr "Los botones del sistema tienen caja"
+
+#. configurableMenu@lestcape->settings-schema.json->power-box->tooltip
+msgid "Choose whether or not to have a box on the system buttons."
+msgstr "Seleccione si desea o no que los botones del sistema tengan caja."
+
+#. configurableMenu@lestcape->settings-schema.json->power-symbolic->description
+msgid "Show symbolic icons on the system buttons"
+msgstr "Mostrar íconos simbólicos en los botones del sistema"
+
+#. configurableMenu@lestcape->settings-schema.json->power-symbolic->tooltip
+msgid ""
+"Enable this option to show symbolic icons, on the system buttons and disable "
+"to show full color."
+msgstr ""
+"Active esta opción para mostrar los íconos simbólicos en los botones del "
+"sistema y desactivela para mostrarlos a todo color."
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-align->description
+msgid "Align the submenu with the parent"
+msgstr "Alinear el submenú con el padre"
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-align->tooltip
+msgid "Choose whether or not to align the submenu with the parent."
+msgstr "Elija si desea o no alinear el submenú con el padre."
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-width->description
+msgid "Submenu width:"
+msgstr "Ancho del submenú"
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-width->tooltip
+msgid "Set the submenu width."
+msgstr "Ajuste el ancho de submenú."
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-height->description
+msgid "Submenu height:"
+msgstr "Alto del submenú"
+
+#. configurableMenu@lestcape->settings-schema.json->submenu-height->tooltip
+msgid "Set the submenu height."
+msgstr "Ajuste el alto del submenú."
+
+#. configurableMenu@lestcape->settings-schema.json->search-sorted->description
+msgid "Search results sorted by:"
+msgstr "Resultados de la búsqueda ordenados por:"
+
+#. configurableMenu@lestcape->settings-schema.json->search-sorted->tooltip
+msgid "Select a method to sort search results."
+msgstr "Seleccione un método para ordenar los resultados de búsqueda."
+
+#. configurableMenu@lestcape->settings-schema.json->search-web->description
+msgid "Enable web search"
+msgstr "Habilitar búsqueda en la web"
+
+#. configurableMenu@lestcape->settings-schema.json->search-web->tooltip
+msgid "Allows the web search with the selected search engines."
+msgstr ""
+"Permitir la búsqueda en la web con los motores de búsqueda seleccionados."
+
+#. configurableMenu@lestcape->settings-schema.json->search-wikipedia->description
+msgid "Enable web search with wikipedia"
+msgstr "Habilitar la búsqueda web con wikipedia"
+
+#. configurableMenu@lestcape->settings-schema.json->search-wikipedia->tooltip
+msgid "Allows web search to the wikipedia search engine."
+msgstr "Permitir la búsqueda en la web al motor de búsqueda wikipedia."
+
+#. configurableMenu@lestcape->settings-schema.json->search-google->description
+msgid "Enable web search with google"
+msgstr "Habilitar búsqueda en la web con google"
+
+#. configurableMenu@lestcape->settings-schema.json->search-google->tooltip
+msgid "Allows web search to the google search engine."
+msgstr "Permitir la búsqueda en la web al motor de búsqueda google."
+
+#. configurableMenu@lestcape->settings-schema.json->search-duckduckgo->description
+msgid "Enable web search with duckduckgo"
+msgstr "Habilitar búsqueda en la web con duckduckgo"
+
+#. configurableMenu@lestcape->settings-schema.json->search-duckduckgo->tooltip
+msgid "Allows web search to the duckduckgo search engine."
+msgstr "Permitir la búsqueda en la web al motor de búsqueda duckduckgo."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-tools->description
+msgid "Enable the Cinnamon Installer tool"
+msgstr "Activar la herramienta Cinnamon Installer"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-tools->tooltip
+msgid ""
+"Allows install, uninstall and search for programs and packages(need internet "
+"connection to be download)."
+msgstr ""
+"Permite instalar, desinstalar, buscar programas y paquetes (necesita "
+"conexión a Internet para ser descargado)."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-search->description
+msgid "Enable to search for packages"
+msgstr "Habilitar la búsqueda de paquetes"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-search->tooltip
+msgid "Allows search for new packages on the repository."
+msgstr "Permite la búsqueda de nuevos paquetes en el repositorio."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-max-search->description
+msgid "Maximum number of packages:"
+msgstr "Número máximo de paquetes:"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-max-search->tooltip
+msgid "Set the maximum number of packages to show."
+msgstr "Establezca el número máximo de paquetes para mostrar."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-update-button->description
+msgid "Update the Cinnamon Installer tool"
+msgstr "Actualización de la herramienta Cinnamon Installer"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-update-button->tooltip
+msgid "Press this button to update the Cinnamon Installer tool."
+msgstr "Presione este botón para actualizar la herramienta Cinnamon Installer."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-update-check->description
+msgid ""
+"Enable to check for a new version of Cinnamon Installer when the menu started"
+msgstr ""
+"Habilitar para comprobar si hay una nueva versión de la Cinnamon Installer "
+"cuando se inicie el menú"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-update-check->tooltip
+msgid ""
+"Allows to check for a new version of Cinnamon Installer when the menu "
+"started."
+msgstr ""
+"Permite comprobar si hay una nueva versión de la Cinnamon Installer cuando "
+"se inicie el menú."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-uninstall-button->description
+msgid "Uninstall the Cinnamon Installer tool"
+msgstr "Desinstalar la herramienta Cinnamon Installer"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-uninstall-button->tooltip
+msgid "Press this button to uninstall the Cinnamon Installer tool."
+msgstr ""
+"Presione este botón para desinstalar la herramienta Cinnamon Installer."
+
+#. configurableMenu@lestcape->settings-schema.json->installer-default->description
+msgid "Enable the default Cinnamon packages manager tools"
+msgstr ""
+"Habilitar las herramientas del administrador de paquetes por defecto de "
+"canela"
+
+#. configurableMenu@lestcape->settings-schema.json->installer-default->tooltip
+msgid "Allows the use of the default packages manager(only if it's available)."
+msgstr ""
+"Permite el uso del gestor de paquetes por defecto (sólo si está disponible)."

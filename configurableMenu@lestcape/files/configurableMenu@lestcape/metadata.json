@@ -1,0 +1,10 @@
+{
+    "website": "https://github.com/lestcape/Configurable-Menu", 
+    "uuid": "configurableMenu@lestcape", 
+    "contributors": "Authors: Lester Carballo P\u00e9rez and Garibaldo", 
+    "description": "Configurable Menu it's an extremely configurable fork of Cinnamon Menu.", 
+    "comments": "Configurable Menu have a lot of cool stuff like, handle web search options, install, uninstall and search for packages.", 
+    "version": "1.7-Beta", 
+    "last-edited": 1418016687, 
+    "name": "Configurable Menu"
+}

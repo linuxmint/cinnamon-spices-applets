@@ -1,0 +1,6 @@
+{
+"uuid": "restart-cinnamon@kolle",
+"name": "Restart Cinnamon",
+"description": "Click on the applet to restart Cinnamon",
+"icon": "system-restart-panel"
+}

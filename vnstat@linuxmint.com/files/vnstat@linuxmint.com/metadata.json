@@ -1,0 +1,5 @@
+{
+ "uuid": "vnstat@linuxmint.com",
+ "name": "Network usage monitor",
+ "description": "Network usage monitor using vnstat"
+}

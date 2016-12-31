@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Gnome TurboNote
+GenericName=Turbo Note
+X-GNOME-FullName=Gnome TuboNote EXtension
+Comment=TurboNote for linux
+Keywords=turbonote;extension;
+Exec=~/.local/share/gnome-shell/extensions/turbonote@iksws.com.br/turbonote-adds/historic.py
+Icon=~/.local/share/gnome-shell/extensions/turbonote@iksws.com.br/icons/turbo.png
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Office;Turbo;ContactManagement;X-Red-Hat-Base;
+StartupNotify=true
+X-GNOME-Bugzilla-Bugzilla=GNOME
+X-GNOME-Bugzilla-Product=TurboNote
+X-GNOME-Bugzilla-Component=BugBuddyBugs
+X-GNOME-Bugzilla-Version=3.10.x
+X-GNOME-UsesNotifications=true
+MimeType=text/calendar;text/x-vcard;text/directory;application/mbox;message/rfc822;x-scheme-handler/mailto;

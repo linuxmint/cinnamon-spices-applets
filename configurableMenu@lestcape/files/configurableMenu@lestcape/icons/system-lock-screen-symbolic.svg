@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="16"
+   height="16"
+   id="svg7384">
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs12" />
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="M 2.188,0 C 0.9864,0 5e-4,0.98751 5e-4,2.1874 v 8.6244 c 0,1.1998 0.98591,2.1874 2.1875,2.1874 h 11.625 c 1.2016,0 2.1875,-0.98751 2.1875,-2.1874 V 2.1874 C 16.0005,0.9876 15.01459,0 13.813,0 H 2.188 z m 0,1.9999 h 11.625 c 0.1238,0 0.1875,0.0566 0.1875,0.18749 v 8.6244 c 0,0.13088 -0.0637,0.18749 -0.1875,0.18749 H 2.188 c -0.1238,0 -0.1875,-0.0566 -0.1875,-0.18749 V 2.18739 C 2.0005,2.05651 2.0642,1.9999 2.188,1.9999 z"
+     id="rect11749-9"
+     style="text-indent:0;text-transform:none;block-progression:tb;color:#bebebe;fill:#bebebe" />
+  <path
+     d="m 4.907,14 a 1.0011479,1.0010479 0 1 0 0.09375,1.9999 h 6 a 1.0001,1 0 1 0 0,-1.9999 h -6 a 1.0001,1 0 0 0 -0.0937,0 z"
+     id="path11751-0"
+     style="text-indent:0;text-transform:none;block-progression:tb;color:#bebebe;fill:#bebebe" />
+  <g
+     transform="matrix(0.54388053,0,0,0.47760669,4.0999301,3.2881538)"
+     id="g3002">
+    <rect
+       width="12.444446"
+       height="9.333334"
+       rx="1.5555557"
+       ry="0.77777785"
+       x="1.0912832"
+       y="4.1700234"
+       id="rect2982"
+       style="fill:#bebebe;fill-opacity:1;stroke:none" />
+    <path
+       d="m 5.7822558,-0.49664191 c -0.5352478,0 -1.053248,0.116468 -1.4765626,0.328125 -0.4233148,0.2116574 -0.875,0.5702452 -0.875,1.20312521 l 0,6.2343754 c 0,0.632882 0.4516852,1.046156 0.875,1.257814 0.4233146,0.211656 0.9413148,0.328124 1.4765626,0.328124 l 3.0625002,0 c 0.5352478,0 1.0532478,-0.11646 1.476563,-0.328124 0.423314,-0.211658 0.874999,-0.624932 0.874999,-1.257814 l 0,-6.2343754 c 0,-0.63288001 -0.451685,-0.99146781 -0.874999,-1.20312521 -0.4233152,-0.2116572 -0.9413152,-0.328125 -1.476563,-0.328125 l -3.0625002,0 z M 4.9619432,1.0346083 c 0,0.201991 -0.08433,0.2335718 0.054688,0.164062 0.139018,-0.06951 0.439095,-0.164062 0.765625,-0.164062 l 3.0625002,0 c 0.32653,0 0.6266064,0.094552 0.765625,0.164062 0.139018,0.06951 0.054688,0.03793 0.054688,-0.164062 l 0,6.2343754 c 0,-0.20199 0.08433,-0.17888 -0.054688,-0.10938 -0.139018,0.06952 -0.439095,0.10938 -0.765625,0.10938 l -3.0625002,0 c -0.32653,0 -0.6266064,-0.03986 -0.765625,-0.10938 -0.139018,-0.06952 -0.054688,-0.09262 -0.054688,0.10938 l 0,-6.2343754 z"
+       id="rect3754"
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#bebebe;fill-opacity:1;stroke:none;stroke-width:0.8888889;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans" />
+  </g>
+</svg>

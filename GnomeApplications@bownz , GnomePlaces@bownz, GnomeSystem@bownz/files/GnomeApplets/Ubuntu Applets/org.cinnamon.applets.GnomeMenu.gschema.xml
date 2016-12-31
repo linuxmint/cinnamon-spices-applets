@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/org/cinnamon/applets/GnomeSystem@bownz/" id="org.cinnamon.applets.GnomeMenu" gettext-domain="@GETTEXT_PACKAGE@">
+<key type="b" name="collapse-bookmarks">
+	<default>true</default>
+	<summary>Whether the bookmarks are in a popupsubmenumenu.</summary>
+      </key>   
+ <key type="i" name="icon-size">
+      <default>18</default>
+      <summary>The icon size of the application icons</summary>
+    </key>
+    <key type="i" name="sub-icon-size">
+      <default>16</default>
+      <summary>The icon size of the sub-icons</summary>
+    </key>
+  </schema>
+</schemalist>

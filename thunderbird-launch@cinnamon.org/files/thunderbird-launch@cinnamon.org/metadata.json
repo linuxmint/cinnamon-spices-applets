@@ -1,0 +1,6 @@
+{
+"uuid": "thunderbird-launch@cinnamon.org",
+"name": "Thunderbird",
+"description": "Click on the applet to launch Thunderbird mailclient immediately",
+"icon": "thunderbird"
+}

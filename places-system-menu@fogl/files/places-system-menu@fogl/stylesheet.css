@@ -1,0 +1,16 @@
+.largeBold {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center
+}
+
+.small {
+    font-size: 12px;
+    text-align: center
+}
+
+.smallItalics {
+    font-weight: italic;
+    font-size: 10px;
+    text-align: center
+}

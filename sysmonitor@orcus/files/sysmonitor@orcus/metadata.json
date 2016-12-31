@@ -1,0 +1,7 @@
+{
+	"uuid": "sysmonitor@orcus",
+	"name": "System Monitor",
+	"description": "Displays CPU, memory, swap and network usage and load in graphs",
+	"icon": "utilities-system-monitor",
+	"version": "1.4"
+}

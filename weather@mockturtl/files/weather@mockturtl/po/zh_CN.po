@@ -1,0 +1,456 @@
+# Chinese translation for gnome-shell-extension-weather
+# simon 软件包的简体中文翻译.
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# bill <bill_zt@sina.com>, 2011.
+# giwhub, 2015-2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: simon 04-gnome-shell-extension-weather-452bcfe\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2016-03-13 13:57+0800\n"
+"Last-Translator: Kiat <>\n"
+"Language-Team: Chinese (simplified)\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Virtaal 0.7.1\n"
+"X-Project-Style: gnome\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "点击打开"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "设置"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "日出"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "日落"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "正在加载当前天气 ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "正在加载未来天气 ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "正在加载 ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr "刷新"
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "温度："
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "湿度："
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "气压："
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "风力："
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "风寒指数："
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "龙卷风"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "热带风暴"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "飓风"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "强雷暴"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "雷雨"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "雨夹雪"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "雨和雨夹雪"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "雪和雨夹雪"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "冻毛毛雨"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "冻雨"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "阵雨"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "阵雪"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "小雪"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "暴雪"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "雪"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "冰雹"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "雨夹雪"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "尘"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "雾"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "霾"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "烟雾"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "大风"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "多风"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "寒冷"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "多云"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "大部多云"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "局部多云 "
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "晴"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "晴"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "晴"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "雨夹冰雹"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "炎热"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "局地雷雨"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "零星雷雨"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "零星阵雨"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "大雪"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "零星阵雪"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "雷阵雨"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "阵雪"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "局地雷阵雨"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "不可用"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "星期一"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "星期二"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "星期三"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "星期四"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "星期五"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "星期六"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "星期日"
+
+#: applet.js:1056
+msgid "N"
+msgstr "北"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "东北"
+
+#: applet.js:1056
+msgid "E"
+msgstr "东"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "东南"
+
+#: applet.js:1056
+msgid "S"
+msgstr "南"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "西南"
+
+#: applet.js:1056
+msgid "W"
+msgstr "西"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "西北"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "获取 WOEID"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "纵向排列"
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "在系统面板显示当前气温"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr "WOEID"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr "位置识别码"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "温度单位"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "华氏"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "摄氏"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "翻译天气状况"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "重写位置标签为"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "使用24小时制显示时间"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "预报时长"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "天"
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "显示日出/日落时间"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "风速单位"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "公里每小时"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "米/秒"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "节"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "英里每小时"
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "在系统面板显示天气情况（例如, \"多风\", \"晴朗\"）"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "气压单位"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "磅每平方英寸"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "标准大气压"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr "千帕"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "帕斯卡"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "毫米汞柱"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "工程大气压"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr "毫巴"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "英寸汞柱"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "更新间隔"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "分钟"
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "使用气象符号"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr "查看您当地的天气预报"
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr "天气"
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "显示未来五天的天气"
+
+#~ msgid "Please wait"
+#~ msgstr "请等待"
+
+#~ msgid "Today"
+#~ msgstr "今天"
+
+#~ msgid "Tomorrow"
+#~ msgstr "明天"
+
+#~ msgid "Schema \"%s\" not found."
+#~ msgstr "未找到方案“%s”。"

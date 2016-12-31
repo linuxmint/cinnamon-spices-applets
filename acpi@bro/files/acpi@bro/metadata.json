@@ -1,0 +1,5 @@
+{
+    "uuid": "acpi@bro", 
+    "name": "ACPI", 
+    "description": "Show ACPI state"
+}

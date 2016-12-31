@@ -1,0 +1,7 @@
+{
+    "last-edited": "1334576529", 
+    "description": "Ein Applet zum Herunterfahren, Neustarten und Abmelden.", 
+    "icon": "emblem-personal", 
+    "uuid": "BeendenApplet@DeathMD", 
+    "name": "Beenden Applet"
+}

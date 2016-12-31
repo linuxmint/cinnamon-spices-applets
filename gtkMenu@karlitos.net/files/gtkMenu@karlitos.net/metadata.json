@@ -1,0 +1,7 @@
+{
+"uuid": "gtkMenu@karlitos.net",
+"name": "Custom gtk menu",
+"description": "Click on the applet to show a custom personally defined gtk menu",
+"icon": "gnome-gmenu"
+}
+

@@ -1,0 +1,190 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2016-11-09 01:58+1000\n"
+"PO-Revision-Date: 2016-11-09 02:05+1000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: applet.js\n"
+
+#: applet.js:158
+msgid "Settings"
+msgstr "Ajustes"
+
+#: applet.js:176
+msgid "Editing Homestead configuration..."
+msgstr "Edición de la configuración de Homestead ..."
+
+#: applet.js:182
+msgid "Rancher: Bringing Homestead up, please wait..."
+msgstr "Rancher: Traer Homestead, por favor espere ..."
+
+#: applet.js:184
+msgid "Bringing Homestead up..."
+msgstr "Traer a Homestead ..."
+
+#: applet.js:187
+msgid "Rancher: Taking Homestead down, please wait..."
+msgstr "Rancher: Tomando Homestead abajo, por favor espere ..."
+
+#: applet.js:189
+msgid "Taking Homestead down..."
+msgstr "Tomando Homestead abajo ..."
+
+#: applet.js:196
+msgid "Rancher: Provisioning Homestead, please wait..."
+msgstr "Rancher: Provisioning Homestead, por favor espere ..."
+
+#: applet.js:198
+msgid "Provisioning Homestead..."
+msgstr "Aprovisionamiento Homestead ..."
+
+#: applet.js:202
+msgid "Rancher: Destroying Homestead, please wait..."
+msgstr "Rancher: Destruyendo Homestead, por favor espere ..."
+
+#: applet.js:204
+msgid "Destroying Homestead..."
+msgstr "Destruyendo Homestead ..."
+
+#: applet.js:208
+msgid "Rancher: Suspending Homestead, please wait..."
+msgstr "Rancher: Suspendiendo Homestead, por favor espere ..."
+
+#: applet.js:210
+msgid "Suspending Homestead..."
+msgstr "Suspendiendo Homestead ..."
+
+#: applet.js:215
+msgid "Homestead SSH Terminal opened"
+msgstr "Terminal Homestead SSH abierta"
+
+#: applet.js:251
+msgid "Rancher: Homestead missing or not configured."
+msgstr "Rancher: Homestead falta o no está configurado"
+
+#: applet.js:252
+msgid "Homestead missing or not configured."
+msgstr "Homestead faltante o no configurado."
+
+#: applet.js:259
+msgid "Rancher: Homestead up."
+msgstr "Rancher: Homestead"
+
+#: applet.js:260
+msgid "Homestead up."
+msgstr "Homestead para arriba."
+
+#: applet.js:261
+msgid " (Running)"
+msgstr " (Corriendo)"
+
+#: applet.js:265
+msgid "Rancher: Homestead suspended."
+msgstr "Rancher: Homestead suspendido."
+
+#: applet.js:266
+msgid "Homestead suspended."
+msgstr "Homestead suspendido."
+
+#: applet.js:267
+msgid " (Suspended)"
+msgstr " (Suspendido)"
+
+#: applet.js:270
+msgid "Rancher: Homestead down."
+msgstr "Rancher: Homestead abajo"
+
+#: applet.js:271
+msgid "Homestead down."
+msgstr "Homestead abajo."
+
+#: applet.js:272
+msgid " (Down)"
+msgstr " (Abajo)"
+
+#: applet.js:275
+msgid "Rancher: Homestead not created."
+msgstr "Rancher: Homestead no creado."
+
+#: applet.js:276
+msgid "Homestead not created"
+msgstr "Homestead no creado"
+
+#: applet.js:277
+msgid " (Not created/Destroyed)"
+msgstr " (No creado / destruido)"
+
+#: applet.js:282
+msgid "Homestead missing or not configured"
+msgstr "Homestead desaparecido o no configurado"
+
+#: applet.js:285
+msgid "Status"
+msgstr "Estado"
+
+#: applet.js:288
+msgid "Run provisioning"
+msgstr "Ejecutar aprovisionamiento"
+
+#: applet.js:289
+msgid "Suspend Homestead"
+msgstr "Suspender Homestead"
+
+#: applet.js:290
+msgid "SSH Terminal"
+msgstr "Terminal SSH"
+
+#: applet.js:294
+msgid "Destroy Homestead"
+msgstr "Destroy Homestead"
+
+#: applet.js:297
+msgid "Edit Homestead configuration"
+msgstr "Editar configuración de Homestead"
+
+#: applet.js:299
+msgid "Refresh this menu"
+msgstr "Actualizar este menú"
+
+#: applet.js:305
+msgid "Configuration"
+msgstr "Configuración"
+
+#: applet.js:306
+msgid "IP: "
+msgstr "IP: "
+
+#: applet.js:307
+msgid "Memory: "
+msgstr "Memoria: "
+
+#: applet.js:308
+msgid "CPU: "
+msgstr "UPC: "
+
+#: applet.js:309
+msgid "Provider: "
+msgstr "Proveedor: "
+
+#: applet.js:312
+msgid "Hosted Sites"
+msgstr "Sitios alojados"
+
+#: applet.js:313
+msgid "Edit hosts file"
+msgstr "Editar archivo de hosts"
+
+#: applet.js:323
+msgid "Hosted Databases"
+msgstr "Bases de datos alojadas"
+
+#~ msgid "Update Homestead box"
+#~ msgstr "Actualizar casilla Homestead"

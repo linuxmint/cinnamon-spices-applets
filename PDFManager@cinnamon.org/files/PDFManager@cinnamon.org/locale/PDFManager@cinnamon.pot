@@ -1,0 +1,51 @@
+msgid "Click here to manage your PDF"
+msgstr ""
+
+msgid "Merge PDF"
+msgstr ""
+
+msgid "Extract PDF"
+msgstr ""
+
+msgid "Reduce size of PDF"
+msgstr ""
+
+msgid "Rotate left PDF"
+msgstr ""
+
+msgid "Rotate right PDF"
+msgstr ""
+
+msgid "Flip vertically PDF"
+msgstr ""
+
+msgid "Install PDFManager's tools"
+msgstr ""
+
+msgid "Manager of PDF"
+msgstr ""
+
+msgid "Open Document Viewer"
+msgstr ""
+
+msgid "Open PDF Mod"
+msgstr ""
+
+msgid "Open PDF Editor"
+msgstr ""
+
+msgid "Select your PDF..."
+msgstr ""
+
+msgid "Save as..."
+msgstr ""
+
+msgid "Pages to extract"
+msgstr ""
+
+msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+msgstr ""
+
+msgid "PDF Files"
+msgstr ""
+

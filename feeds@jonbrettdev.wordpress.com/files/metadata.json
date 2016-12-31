@@ -1,0 +1,16 @@
+{
+    "uuid": "feeds@jonbrettdev.wordpress.com",
+    "name": "Feeds Reader",
+    "description": "Displays RSS news feeds",
+    "original-authors": [
+        "Jonathan Brett <jonbrett.dev@gmail.com>",
+        "Niklas Meinzer <lamouletrescool@gmail.com>",
+        "Stephen Collins <scrivera64@gmail.com>",
+        "Kausheel Kumar <kausheelkumar@gmail.com>",
+        "mockturtl <mockturtl@users.noreply.github.com>",
+        "Jason Jackson <jake1164@hotmail.com>"
+    ],
+    "version": 0.23,
+    "url": "jonbrettdev.wordpress.com",
+    "max-instanceso": "10"
+}

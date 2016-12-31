@@ -1,0 +1,612 @@
+# German translations for system-monitor@pixunil package
+# German translation for system-monitor@pixunil.
+# This file is put in the public domain.
+# pixunil <pixunil@gmx.de>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: system-monitor@pixunil 3.10\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-17 19:29+0200\n"
+"PO-Revision-Date: 2016-07-17 19:31+0200\n"
+"Last-Translator: Jakob Stigloher <pixunil@gmx.de>\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: applet.js:108 applet.js:202
+msgid "System Monitor"
+msgstr "Systemüberwachung"
+
+#. settings->graph-type->options
+#: applet.js:148
+msgid "Overview"
+msgstr "Übersicht"
+
+#. settings->graph-type->options
+#: modules/cpu.js:204
+msgid "CPU History"
+msgstr "CPU-Chronik"
+
+#. settings->graph-type->options
+#: modules/mem.js:149
+msgid "Memory and Swap History"
+msgstr "Arbeitsspeicher- und Auslagerungschronik"
+
+#. settings->graph-type->options
+#: modules/disk.js:177
+msgid "Disk History"
+msgstr "Festplattenchronik"
+
+#. settings->graph-type->options
+#: modules/network.js:151
+msgid "Network History"
+msgstr "Netzwerkchronik"
+
+#. settings->graph-type->options
+#: modules/thermal.js:119
+msgid "Thermal History"
+msgstr "Temperaturchronik"
+
+#: applet.js:31
+msgid "Dependence missing"
+msgstr "Abhängigkeit nicht erfüllt"
+
+#: applet.js:31
+#, javascript-format
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use the applet %s"
+msgstr ""
+"Bitte installieren Sie das GTop Paket\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"um das Applet %s nutzen zu können"
+
+#. settings->cpu-enabled->description
+#: modules/cpu.js:6
+msgid "CPU"
+msgstr "CPU"
+
+#: modules/cpu.js:135
+msgid "User"
+msgstr "Benutzer"
+
+#: modules/cpu.js:136
+msgid "System"
+msgstr "System"
+
+#. settings->mem-color-mem->description
+#: modules/mem.js:6
+msgid "Memory"
+msgstr "Arbeitsspeicher"
+
+#: modules/mem.js:63
+msgid "cached"
+msgstr "gecached"
+
+#: modules/mem.js:64
+msgid "buffered"
+msgstr "gepuffert"
+
+#. settings->mem-color-swap->description
+#: modules/swap.js:6
+msgid "Swap"
+msgstr "Swap"
+
+#. settings->disk-enabled->description
+#: modules/disk.js:11
+msgid "Disk"
+msgstr "Festplatte"
+
+#. settings->network-enabled->description
+#: modules/network.js:8
+msgid "Network"
+msgstr "Netzwerk"
+
+#: modules/network.js:92
+msgid "Total"
+msgstr "Gesamt"
+
+#. settings->thermal-color-thermal->description
+#. settings->thermal-enabled->description
+#: modules/thermal.js:6
+msgid "Thermal"
+msgstr "Temperatur"
+
+#. settings->mem-panel-mode->description
+msgid "Mode of graph"
+msgstr "Diagrammtyp"
+
+#. settings->mem-panel-mode->options
+msgid "only Memory"
+msgstr "nur Arbeitsspeicher"
+
+#. settings->mem-panel-mode->options
+#. settings->mem-enabled->description
+msgid "Memory and Swap"
+msgstr "Arbeitsspeicher und Auslagerung"
+
+#. settings->graph-steps->description
+msgid "Number of history steps"
+msgstr "Anzahl der Rückschritte für Chroniken"
+
+#. settings->graph-steps->tooltip
+msgid "How many steps will be saved for history graphs"
+msgstr "Wie viele Schritte für die Chroniken gespeichert werden"
+
+#. settings->graph-header->description
+msgid "Graphs"
+msgstr "Diagramme"
+
+#. settings->network-appearance->options
+#. settings->thermal-appearance->options
+#. settings->graph-connection->options
+#. settings->cpu-appearance->options
+#. settings->fan-appearance->options
+#. settings->disk-appearance->options
+#. settings->mem-appearance->options
+msgid "Line"
+msgstr "Linie"
+
+#. settings->network-appearance->options
+#. settings->thermal-panel-graph->options
+#. settings->cpu-appearance->options
+#. settings->cpu-panel-graph->options
+#. settings->mem-panel-graph->options
+#. settings->network-panel-graph->options
+#. settings->fan-panel-graph->options
+#. settings->disk-appearance->options
+#. settings->disk-panel-graph->options
+msgid "Bar"
+msgstr "Säulen"
+
+#. settings->network-appearance->options
+#. settings->thermal-appearance->options
+#. settings->cpu-appearance->options
+#. settings->fan-appearance->options
+#. settings->disk-appearance->options
+#. settings->mem-appearance->options
+msgid "Area"
+msgstr "Fläche"
+
+#. settings->network-appearance->description
+#. settings->thermal-appearance->description
+#. settings->cpu-appearance->description
+#. settings->fan-appearance->description
+#. settings->disk-appearance->description
+#. settings->mem-appearance->description
+msgid "Appearance of history graphs"
+msgstr "Aussehen der Chroniken"
+
+#. settings->help->description
+msgid "Read Readme"
+msgstr "»Readme« lesen"
+
+#. settings->help->tooltip
+msgid "Get useful information about the settings and the applet"
+msgstr ""
+"Nützliche Informationen über das Applet und die Einstellungen lesen (auf "
+"Englisch)"
+
+#. settings->disk-color-write->description
+msgid "Write"
+msgstr "Schreiben"
+
+#. settings->general-header->description
+msgid "General"
+msgstr "Allgemein"
+
+#. settings->thermal-panel-width->description
+#. settings->disk-panel-width->description
+#. settings->mem-panel-width->description
+#. settings->cpu-panel-width->description
+#. settings->network-panel-width->description
+#. settings->fan-panel-width->description
+msgid "Width of graph"
+msgstr "Diagrammbreite"
+
+#. settings->thermal-panel-width->units
+#. settings->disk-panel-width->units
+#. settings->mem-panel-width->units
+#. settings->cpu-panel-width->units
+#. settings->graph-size->units
+#. settings->network-panel-width->units
+#. settings->fan-panel-width->units
+msgid "px"
+msgstr "px"
+
+#. settings->cpu-warning-value->description
+msgid "Trigger value"
+msgstr "kritische Auslastung"
+
+#. settings->cpu-warning-value->units
+msgid "%"
+msgstr "%"
+
+#. settings->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings->graph-connection->options
+msgid "Curve"
+msgstr "Kurve"
+
+#. settings->graph-connection->options
+msgid "Straight"
+msgstr "Gerade"
+
+#. settings->graph-connection->description
+msgid "Connection type for History graphs"
+msgstr "Verbundtyp für Chroniken"
+
+#. settings->thermal-panel-graph->options
+#. settings->cpu-panel-graph->options
+#. settings->mem-panel-graph->options
+#. settings->graph-type->options
+#. settings->network-panel-graph->options
+#. settings->fan-panel-graph->options
+#. settings->disk-panel-graph->options
+msgid "None"
+msgstr "Nichts"
+
+#. settings->thermal-panel-graph->options
+#. settings->cpu-panel-graph->options
+#. settings->mem-panel-graph->options
+#. settings->network-panel-graph->options
+#. settings->fan-panel-graph->options
+#. settings->disk-panel-graph->options
+msgid "History"
+msgstr "Chronik"
+
+#. settings->thermal-panel-graph->description
+#. settings->cpu-panel-graph->description
+#. settings->mem-panel-graph->description
+#. settings->network-panel-graph->description
+#. settings->fan-panel-graph->description
+#. settings->disk-panel-graph->description
+msgid "Graph in the panel"
+msgstr "Graph in der Leiste"
+
+#. settings->show-icon->description
+msgid "Show icon"
+msgstr "zeige Symbol"
+
+#. settings->thermal-warning->description
+#. settings->fan-warning->description
+#. settings->cpu-warning->description
+#: modules/__init__.js:425
+msgid "Warning"
+msgstr "Warnung"
+
+#. settings->thermal-warning-value->description
+msgid "Trigger temperature"
+msgstr "kritische Temperatur"
+
+#. settings->thermal-mode->options
+#. settings->fan-mode->options
+#. settings->cpu-warning-mode->options
+msgid "Average"
+msgstr "Durchschnitt"
+
+#. settings->thermal-mode->options
+#. settings->fan-mode->options
+msgid "Minimum"
+msgstr "Minimum"
+
+#. settings->thermal-mode->options
+#. settings->fan-mode->options
+msgid "Maximum"
+msgstr "Maximum"
+
+#. settings->network-color-down->description
+msgid "Down"
+msgstr "Empfangen"
+
+#. settings->order->options
+msgid "Write - Read / Up - Down"
+msgstr "Schreiben - Lesen / Senden - Empfangen"
+
+#. settings->order->options
+msgid "Read - Write / Down - Up"
+msgstr "Lesen - Schreiben / Empfangen - Senden"
+
+#. settings->order->description
+msgid "Order of Disk and Network items"
+msgstr "Reihenfolge der Festplatten- / Netzwerkinformation"
+
+#. settings->thermal-warning-time->description
+#. settings->cpu-warning-time->description
+#. settings->fan-warning-time->description
+msgid "Time"
+msgstr "Zeit"
+
+#. settings->thermal-warning-time->units
+#. settings->cpu-warning-time->units
+#. settings->fan-warning-time->units
+msgid "intervals"
+msgstr "Intervalle"
+
+#. settings->cpu-split->options
+msgid "Total usage"
+msgstr "Gesamte Auslastung"
+
+#. settings->cpu-split->options
+msgid "User and System usage"
+msgstr "Benutzer- und Systemauslastung"
+
+#. settings->cpu-split->description
+msgid "Show which information in history graphs"
+msgstr "Informationen in Chroniken"
+
+#. settings->graph-type->tooltip
+msgid "The graph shown in the menu"
+msgstr "Welches Diagramm im Menü angezeigt wird"
+
+#. settings->graph-type->description
+msgid "Type of graph"
+msgstr "Diagrammtyp"
+
+#. settings->rate-unit->options
+msgid "bit/s Kbit/s, Mbit/s"
+msgstr "bit/s Kbit/s, Mbit/s"
+
+#. settings->rate-unit->options
+msgid "B/s, KB/s, MB/s"
+msgstr "B/s, KB/s, MB/s"
+
+#. settings->rate-unit->options
+msgid "bit/s Kibit/s, Mibit/s"
+msgstr "bit/s Kibit/s, Mibit/s"
+
+#. settings->rate-unit->options
+msgid "B/s, KiB/s, MiB/s"
+msgstr "B/s, KiB/s, MiB/s"
+
+#. settings->rate-unit->tooltip
+msgid "Unit for disk and network usage"
+msgstr "Einheit für Festplatten- und Netzwerkauslastung"
+
+#. settings->rate-unit->description
+msgid "Rates unit"
+msgstr "Einheit für Raten"
+
+#. settings->network-panel-label->description
+#. settings->loadAvg-panel-label->description
+#. settings->thermal-panel-label->description
+#. settings->fan-panel-label->description
+#. settings->cpu-panel-label->description
+#. settings->disk-panel-label->description
+#. settings->mem-panel-label->description
+msgid "Label in the panel"
+msgstr "Text in der Leiste"
+
+#. settings->graph-size->description
+msgid "Height of graph"
+msgstr "Diagrammhöhe"
+
+#. settings->network-color-up->description
+msgid "Up"
+msgstr "Senden"
+
+#. settings->cpu-color-core2->description
+msgid "CPU2"
+msgstr "CPU2"
+
+#. settings->cpu-color-core3->description
+msgid "CPU3"
+msgstr "CPU3"
+
+#. settings->cpu-color-core1->description
+msgid "CPU1"
+msgstr "CPU1"
+
+#. settings->cpu-color-core4->description
+msgid "CPU4"
+msgstr "CPU4"
+
+#. settings->cpu-appearance->options
+msgid "Stack"
+msgstr "Stapel"
+
+#. settings->byte-unit->options
+msgid "B, KiB, MiB"
+msgstr "B, KiB, MiB"
+
+#. settings->byte-unit->options
+msgid "B, KB, MB"
+msgstr "B, KB, MB"
+
+#. settings->byte-unit->tooltip
+msgid "Unit for memory, swap, disk space and total network usage"
+msgstr ""
+"Einheit für Arbeitsspeicher- und Swap-Auslastung, Festplattenbelegung und "
+"gesamter Netzwerkverkehr"
+
+#. settings->byte-unit->description
+msgid "Bytes unit"
+msgstr "Einheit für Bytes"
+
+#. settings->interval->description
+msgid "Interval"
+msgstr "Intervall"
+
+#. settings->interval->tooltip
+msgid "Interval in which the applet refreshes data"
+msgstr "Intervall, in dem die Daten aktualisiert werden"
+
+#. settings->thermal-unit->description
+msgid "Thermal unit"
+msgstr "Temperatureinheit"
+
+#. settings->graph-overview->options
+msgid "Arc"
+msgstr "Kreisbogen"
+
+#. settings->graph-overview->options
+msgid "Pie"
+msgstr "Kreis"
+
+#. settings->graph-overview->description
+msgid "Appearance of Overview graph"
+msgstr "Aussehen der Übersicht"
+
+#. settings->disk-color-read->description
+msgid "Read"
+msgstr "Lesen"
+
+#. settings->cpu-warning-mode->description
+msgid "Mode"
+msgstr "Modus"
+
+#. settings->cpu-warning-mode->options
+msgid "Cores"
+msgstr "Kerne"
+
+#. settings->loadAvg-enabled->description
+#: modules/loadAvg.js:5
+msgid "Load averages"
+msgstr "Durchschnittslast"
+
+#. metadata->name
+msgid "System monitor with graphs"
+msgstr "Systemüberwachung mit Diagrammen"
+
+#. metadata->description
+msgid ""
+"Display CPU, Memory and Swap usage, Disk and Network rates as text and "
+"graphs"
+msgstr ""
+"Zeigt CPU, Arbeitsspeicher- und Auslagerungsauslastung, Festplatten- und "
+"Netzwerkraten als Text und in Diagrammen"
+
+#: modules/thermal.js:45
+#, javascript-format
+msgid "Temperature was over %s for %fsec"
+msgstr "Temperatur war über %s für %fsec"
+
+#: modules/cpu.js:102
+#, javascript-format
+msgid "CPU usage was over %s for %fsec"
+msgstr "CPU Auslastung war über %s für %fsec"
+
+#: modules/cpu.js:97
+#, javascript-format
+msgid "CPU core %d usage was over %s for %fsec"
+msgstr "Auslastung von CPU Kern %d war über %s für %fsec"
+
+#. settings->disk-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %write \t write usage \n"
+" %read \t read usage"
+msgstr ""
+"Platzhalter: \n"
+" %write \t Schreiben \n"
+" %read \t Lesen"
+
+#. settings->cpu-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %core(digit) \t usage of a core \n"
+" %avg \t average usage"
+msgstr ""
+"Platzhalter: \n"
+" %core(Zahl) \t Auslastung eines CPU-Kerns\n"
+" %avg \t durchschnittliche Auslastung"
+
+#. settings->network-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %up \t up usage \n"
+" %down \t down usage"
+msgstr ""
+"Platzhalter: \n"
+" %up \t Senden \n"
+" %down \t Empfangen"
+
+#. settings->loadAvg-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %load0 \t load average for the last minute \n"
+" %load1 \t load average for the last 5 minutes \n"
+" %load2 \t load average for the last 15 minutes"
+msgstr ""
+"Platzhalter: \n"
+" %load0 \t Durchschnittslast der letzten Minute \n"
+" %load1 \t Durchschnittslast der letzten 5 Minuten \n"
+" %load2 \t Durchschnittslast der letzten 15 Minuten"
+
+#. settings->fan-enabled->description
+#. settings->fan-color-fan->description
+#: modules/fan.js:6
+msgid "Fan"
+msgstr "Lüfter"
+
+#: modules/fan.js:34
+#, javascript-format
+msgid "Fan rotation was over %s for %fsec"
+msgstr "Lüfter drehten sich über %s für %fsec"
+
+#. settings->graph-type->options
+#: modules/fan.js:105
+msgid "Fan History"
+msgstr "Lüfterchronik"
+
+#. settings->fan-warning-value->description
+msgid "Trigger rotations"
+msgstr "kritische Lüfterleistung"
+
+#. settings->fan-warning-value->units
+msgid "RPM"
+msgstr "RPM"
+
+#. settings->thermal-mode->description
+msgid "General temperature"
+msgstr "allgemeine Temperatur"
+
+#. settings->thermal-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %value \t general temperature \n"
+" %sensor(digit) \t specific temperature of one sensor"
+msgstr ""
+"Platzhalter: \n"
+" %value \t allgemeine Temperatur \n"
+" %sensor(digit) \t Temperatur eines Sensors"
+
+#. settings->fan-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %value \t general fan value \n"
+" %sensor(digit) \t specific rotations of one fan"
+msgstr ""
+"Platzhalter: \n"
+" %value \t allgemeine Lüfterleistung \n"
+" %sensor(digit) \t Lüfterleistung eines Lüfters"
+
+#. settings->fan-mode->description
+msgid "General fan value"
+msgstr "allgemeine Lüfterleistung"
+
+#. settings->mem-panel-label->tooltip
+msgid ""
+"Common placeholders: \n"
+" %mem#size \t memory usage in bytes \n"
+" %mem \t memory usage in percent \n"
+" %swap#size \t swap usage in bytes \n"
+" %swap \t swap usage in percent"
+msgstr ""
+"Platzhalter: \n"
+" %mem#size \t genutzer Arbeitsspeicher in Bytes \n"
+" %mem \t genutzter Arbeitsspeicher in Prozent \n"
+" %swap#size \t genutze Auslagerung in Bytes \n"
+" %swap \t genutze Auslagerung in Prozent"

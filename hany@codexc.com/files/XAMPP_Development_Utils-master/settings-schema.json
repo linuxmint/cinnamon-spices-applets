@@ -1,0 +1,105 @@
+{
+  "head_services" : {
+    "type" : "header",
+    "description" : "Services"
+  },
+  "services":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Services\" in Menu"
+  },
+  "services_type":
+  { "type" : "radiogroup",
+    "default" : "buttons",
+    "dependency" : "services",
+    "options": {
+		"Switch Buttons" : "buttons",
+		"Submenu for each Service" : "submenu"
+    },
+    "description" : "Select Services Type"
+  },
+  "services_section_end": {"type": "separator"},
+  "head_menu" : {
+    "type" : "header",
+    "description" : "Menu Entries"
+  },
+  "geany":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Geany\" Launcher in Menu"
+  },
+  "eclipse":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Eclipse\" Launcher in Menu"
+  },
+  "terminal":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Terminal\" Launcher in Menu"
+  },
+  "select_terminal":
+  { "type" : "combobox",
+    "default" : "gnome-terminal",
+    "dependency" : "terminal",
+    "options": {
+		"Gnome Terminal" : "gnome-terminal",
+		"xterm" : "xterm"
+    },
+    "description" : "Select Terminal"
+  },
+  "gedit":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Gedit\" Launcher in Menu"
+  },
+  "filezilla":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Filezilla\" Launcher in Menu"
+  },
+  "mysql_section_begin": {"type": "separator"},
+  "head_mysql_browser" : {
+    "type" : "header",
+    "description" : "MySQL Browser Settings"
+  },
+  "mysql_browser":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"MySQL Browser\" Launcher in Menu"
+  },
+  "select_mysql_browser":
+  { "type" : "radiogroup",
+    "default" : "",
+    "dependency" : "mysql_browser",
+    "options": {
+		"MySQL Workbench" : "mysql-workbench",
+		"HeidiSQL (requires installation of Wine)" : "path_heidi"
+    },
+    "description" : "Select MySQL Browser"
+  },
+  "path_heidi":
+  { "type" : "entry",
+    "default" : "",
+    "dependency" : "mysql_browser",
+    "description" : "Specify path to HeidiSQL",
+    "tooltip" : "For example \"wine C:\\\\windows\\\\command\\\\start.exe /Unix /home/YOUR USERNAME/.wine/dosdevices/c:/users/Public/Start\\ Menu/Programs/HeidiSQL/HeidiSQL.lnk\""
+  },
+  "config_start": {"type": "separator"},
+  "head_config" : {
+    "type" : "header",
+    "description" : "Configurations"
+  },
+  "config":
+  { "type": "checkbox", 
+    "default": true,
+    "description": "Show \"Configurations\" in Menu"
+  },
+  "open_project_dir":
+  { "type" : "entry",
+    "default" : "",
+    "dependency" : "config",
+    "description" : "Specify file browser and path to your project directory",
+    "tooltip" : "For example: nemo /home/username/Projects"
+  }
+}

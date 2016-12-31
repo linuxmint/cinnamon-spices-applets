@@ -1,0 +1,88 @@
+{
+    "head": {
+        "type": "header",
+        "description": "General Settings for the nVidia Monitoring Applet"
+    },
+    "refreshInterval-spinner": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval for Display:",
+        "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
+     },
+   "head2": {
+        "type": "header",
+        "description": "Programs settings for Optimus"
+    },
+
+    "description1": {
+        "type": "entry",
+        "default": "null",
+        "description": "Display Name of Program 1 to be run using Optimus technology",
+        "tooltip": "Put the name of the program here or null if you do not want it displayed"
+    },
+    "commandString1": {
+        "type": "entry",
+        "default": "null",
+        "description": "Command String for Program 1",
+        "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
+    },
+
+    "description2": {
+        "type": "entry",
+        "default": "null",
+        "description": "Display Name of Program 2 to be run using Optimus technology",
+        "tooltip": "Put the name of the program here or none if you do not want it displayed"
+    },
+    "commandString2": {
+        "type": "entry",
+        "default": "",
+        "description": "Command String for Program 2",
+        "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
+    },
+
+
+    "description3": {
+        "type": "entry",
+        "default": "null",
+        "description": "Display Name of Program 3 to be run using Optimus technology",
+        "tooltip": "Put the name of the program here or none if you do not want it displayed"
+    },
+    "commandString3": {
+        "type": "entry",
+        "default": "",
+        "description": "Command String for Program 3",
+        "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
+    },
+
+    "description4": {
+        "type": "entry",
+        "default": "null",
+        "description": "Display Name of Program 4 to be run using Optimus technology",
+        "tooltip": "Put the name of the program here or none if you do not want it displayed"
+    },
+    "commandString4": {
+        "type": "entry",
+        "default": "",
+        "description": "Command String for Program 4",
+        "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
+    },
+
+    "description5": {
+        "type": "entry",
+        "default": "null",
+        "description": "Display Name of Program 5 to be run using Optimus technology",
+        "tooltip": "Put the name of the program here or none if you do not want it displayed"
+    },
+    "commandString5": {
+        "type": "entry",
+        "default": "",
+        "description": "Command String for Program 5",
+        "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
+    }
+
+}
+ 

@@ -1,0 +1,6 @@
+{
+ "uuid": "hwmonitor@sylfurd",
+ "name": "Graphical hardware monitor",
+ "description": "Displaying realtime CPU and memory load",
+ "icon": "utilities-system-monitor"
+}

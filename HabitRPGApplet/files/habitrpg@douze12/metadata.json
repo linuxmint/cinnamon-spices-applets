@@ -1,0 +1,6 @@
+{
+"uuid": "habitrpg@douze12",
+"name": "HabitRPGApplet",
+"description": "Applet use to manage HabitRPG tasks",
+"icon": "indicator-applet"
+}

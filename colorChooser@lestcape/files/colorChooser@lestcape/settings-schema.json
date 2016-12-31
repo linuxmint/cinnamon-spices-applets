@@ -1,0 +1,34 @@
+{
+    "apple-icon-symbolic": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show symbolic applet icon",
+        "tooltip": "Enable this option to show a symbolic applet icon and disable to show full color."
+    },
+    "save-to-clipboard": {
+        "type": "checkbox",
+        "default": false,
+        "description": "When save a color, copy it to the clipboard",
+        "tooltip": "Enable this option to copy the current color using the selected format in the clipboard when the color is saved."
+    },
+    "format": {
+        "type": "combobox",
+        "description": "Color Format:",
+        "default": "HEXA",
+        "tooltip": "Select a color Format.",
+        "options": {
+            "Hexadecimal": "HEXA",
+            "RGB": "RGBA",
+            "HSL": "HSLA",
+            "Pixel": "PIXL"
+        }
+    },
+    "last-color": {
+        "type": "generic",
+        "default": "#FF0000FF"
+    },
+    "saved-colors": {
+        "type": "generic",
+        "default": ""
+    }
+}

@@ -1,0 +1,53 @@
+msgid "Click here to manage your PDF"
+msgstr "Cliquer ici pour gérer vos PDF"
+
+msgid "Merge PDF"
+msgstr "Fusionner des PDF"
+
+msgid "Extract PDF"
+msgstr "Extraire un PDF"
+
+msgid "Reduce size of PDF"
+msgstr "Réduire la taille de vos PDF"
+
+msgid "Rotate left PDF"
+msgstr "Pivoter vos PDF sur la gauche"
+
+msgid "Rotate right PDF"
+msgstr "Pivoter vos PDF sur la droite"
+
+msgid "Flip vertically PDF"
+msgstr "Retourner vos PDF"
+
+msgid "Install PDFManager's tools"
+msgstr "Installer les outils de PDFManager"
+
+msgid "Manager of PDF"
+msgstr "Gestionnaire de PDF"
+
+msgid "Open Document Viewer"
+msgstr "Ouvrir le visionneur de document"
+
+msgid "Open PDF Mod"
+msgstr "Ouvrir PDF Mod"
+
+msgid "Open PDF Editor"
+msgstr "Ouvrir PDF Editor"
+
+msgid "Installation of PDFManager's tools"
+msgstr "Installation des outils de PDFManager"
+
+msgid "Select your PDF..."
+msgstr "Sélectionnez vos PDF..."
+
+msgid "Save as..."
+msgstr "Enregistrer sous..."
+
+msgid "Pages to extract"
+msgstr "Pages à extraire"
+
+msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+msgstr "Entrez les pages à extraire (e.g. : 1-5 7-9 ou 3-end ou even ou odd) :"
+
+msgid "PDF Files"
+msgstr "Fichiers PDF"

@@ -1,0 +1,41 @@
+.stopwatch-ready {
+background-color: rgba(63,63,63,0.2);
+padding: 3px;
+ border-radius: 10px;
+}
+
+.stopwatch-running {
+background-color: rgba(0,255,0,0.3);
+padding: 3px;
+ border-radius: 10px;
+}
+
+.stopwatch-paused {
+background-color: rgba(255,165,0,0.3);
+padding: 3px;
+ border-radius: 10px;
+}
+
+.stopwatch-day-exceeded {
+background-color: rgba(255,0,0,0.3);
+border: 2px;
+border-color:red;
+padding: 2px;
+ border-radius: 10px;
+}
+
+.stopwatch-running-day-exceeded {
+background-color: rgba(0,255,0,0.3);
+padding: 2px;
+border: 2px;
+border-color:red;
+ border-radius: 10px;
+}
+
+.stopwatch-paused-day-exceeded {
+background-color: rgba(255,165,0,0.3);
+padding: 2px;
+border: 2px;
+border-color:red;
+ border-radius: 10px;
+}

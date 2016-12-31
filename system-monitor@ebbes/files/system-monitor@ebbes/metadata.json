@@ -1,0 +1,6 @@
+{
+  "description": "Display system informations in Cinnamon panel, such as memory usage, cpu usage, network rates\u2026", 
+  "uuid": "system-monitor@ebbes", 
+  "name": "System monitor",
+  "icon": "utilities-system-monitor"
+}

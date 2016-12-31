@@ -1,0 +1,6 @@
+{
+ "uuid": "MessagingMenu@bownz",
+ "name": "Messaging Menu",
+ "description": "Messaging Menu applet",
+ "icon": "indicator-messages"
+}

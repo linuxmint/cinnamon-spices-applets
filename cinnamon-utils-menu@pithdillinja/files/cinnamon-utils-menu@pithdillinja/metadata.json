@@ -1,0 +1,6 @@
+{
+"uuid": "cinnamon-utils-menu@pithdillinja",
+"name": "Cinnamon Utilities Menu",
+"description": "Provides a drop-down menu with a few utilities to manage Cinnamon. Based on the original 'Restart Cinnamon' applet by kolle",
+"icon": "gnome-run"
+}

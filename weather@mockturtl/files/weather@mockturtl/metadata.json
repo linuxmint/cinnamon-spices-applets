@@ -1,0 +1,7 @@
+{
+"uuid": "weather@mockturtl",
+"name": "Weather",
+"description": "View your local weather forecast",
+"max-instances": 3,
+"version": "1.13.7"
+}

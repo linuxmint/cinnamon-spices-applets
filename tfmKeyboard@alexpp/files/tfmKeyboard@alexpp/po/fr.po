@@ -1,0 +1,1367 @@
+# French translations for PACKAGE package
+# Traductions françaises du paquet PACKAGE.
+# Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# alexpp <app216@free.fr>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tfmkeyboard 1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-16 02:14+0100\n"
+"PO-Revision-Date: 2014-12-16 02:14+0100\n"
+"Last-Translator: Æx <app216@free.fr>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: applet.js:116
+msgid "Loading...."
+msgstr "Chargement..."
+
+#: applet.js:117
+msgid "Transformice keyboard configuration switch"
+msgstr "Basculer la configuration clavier pour Transformice"
+
+#: applet.js:213 applet.js:371
+msgid "Normal"
+msgstr ""
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:215 applet.js:372
+msgid "Hard"
+msgstr "Difficile"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:217 applet.js:373
+msgid "Divine"
+msgstr "Divin"
+
+#: applet.js:244
+#, c-format
+msgid "Screencast recorder '%s' not found"
+msgstr "Programme d'enregistrement '%s' non trouvé."
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_SWITCH->description
+#: applet.js:369
+msgid "Switch normal / prefered mode"
+msgstr "Basculement au mode normal / préféré"
+
+#: applet.js:377
+msgid "Stop recording"
+msgstr "Arrêter la capture vidéo"
+
+#: applet.js:379
+msgid "Start recording"
+msgstr "Démarrer la capture vidéo"
+
+#: applet.js:486
+msgid "Transformice"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_RECORD->description
+msgid "Use screencast"
+msgstr "Activer l'enregistrement"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->description
+msgid "Crop W: "
+msgstr "Rognage (longueur):"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->units
+msgid "pixels (Y right)"
+msgstr "pixels (Y droit)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->description
+msgid "Crop X: "
+msgstr "Rognage X:"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->units
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->units
+msgid "pixels"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->description
+msgid "Crop Y: "
+msgstr "Rognage Y:"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Divin->description
+msgid "Divine mode shorcut configuration"
+msgstr "Configuration des raccourcis clavier mode Divin"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->description
+msgid "Crop H: "
+msgstr "Rognage (Hauteur):"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->units
+msgid "pixels (X bottom)"
+msgstr "Pixels (X bas)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->description
+msgid "Video file name: "
+msgstr "Nom du fichier vidéo: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->tooltip
+msgid ""
+"Default: screencast_%Y-%M-%D_%H:%I:%S\n"
+"%Y = Year\n"
+"%M = Month\n"
+"%D = Day\n"
+"%H = Hour\n"
+"%I = Minutes\n"
+"%S = Seconds\n"
+"%m = Milliseconds"
+msgstr ""
+"Défaut: screencast_%Y-%M-%D_%H:%I:%S%Y = Année%M = Mois%D = Date%H = Heure%I "
+"= Minutes%S = Secondes%m = Millisecondes"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->description
+msgid "Key F5"
+msgstr "Touche F5"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Red nail (b)"
+msgstr "Clou rouge (b)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Confetti (e)"
+msgstr ""
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Ball"
+msgstr "Balle"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little box"
+msgstr "Petite caisse"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Anvil"
+msgstr "Enclume"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor left (j)"
+msgstr "Clou vert sens anti-horaire ↺ (j)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Balloon"
+msgstr "Ballon"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big board"
+msgstr "Grande planche"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Do no modify"
+msgstr "Ne pas modifier"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate left (w)"
+msgstr "Rotation anti-horaire ↺ (w)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rune"
+msgstr ""
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Arrow"
+msgstr "Flèche"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "(un)hidden (spacebar)"
+msgstr "(in)visible (espace)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little board"
+msgstr "Petite planche"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green nail (v)"
+msgstr "Clou Vert (v)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate right (x)"
+msgstr "Rotation horaire ↻ (x)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Yellow nail (c)"
+msgstr "Clou Jaune (c)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big box"
+msgstr "Grande caisse"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Empty"
+msgstr "Rien"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor right (n)"
+msgstr "Clou vert sens horaire ↻ (n)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_TEXT->description
+msgid "Show text"
+msgstr "Afficher le texte"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD->description
+msgid "Start screencast"
+msgstr "Démarrer la capture vidéo"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_options->description
+msgid "Options"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_ICON->description
+msgid "Show icon"
+msgstr "Afficher l'icône"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->description
+msgid "Key F1"
+msgstr "Touche F1"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_hotkey_config->description
+msgid "Modes shorcuts switch"
+msgstr "Configuration des raccourcis clavier"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->description
+msgid "Screencast folder"
+msgstr "Destination des captures vidéos"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->tooltip
+msgid "{VIDEO_DIR} = ~/Videos"
+msgstr "{VIDEO_DIR} = ~/Vidéos"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_MENUPOPUP->description
+msgid "Use icon menu"
+msgstr "Activer le menu d'icône"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->description
+msgid "Default switch mode"
+msgstr "Mode par défaut sur basculement"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->description
+msgid "Fixed : "
+msgstr "Fixe"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->units
+msgid "pixels (width)"
+msgstr "pixels (longueur)"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->description
+msgid "Key F3"
+msgstr "Touche F3"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->description
+msgid "Key F9"
+msgstr "Touche F9"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->description
+msgid "Key F8"
+msgstr "Touche F8"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->description
+msgid "Key F2"
+msgstr "Touche F2"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_advanced_config->description
+msgid "Advanced configuration !"
+msgstr "Configuration avancé !"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->description
+msgid "Key F4"
+msgstr "Touche F4"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->description
+msgid "Key F7"
+msgstr "Touche F7"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->description
+msgid "Key F6"
+msgstr "Touche F6"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->description
+msgid "Key F11"
+msgstr "Touche F11"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->description
+msgid "Key F10"
+msgstr "Touche F10"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->description
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->description
+msgid "Key F12"
+msgstr "Touche F12"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->description
+msgid "Screencast recorder program: "
+msgstr "Programme d'enregistrement"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "avconv (recommanded)"
+msgstr "avconv (recommandé)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "VLC"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "ffmpeg"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Hard->description
+msgid "Hard mode shortcut configuration"
+msgstr "Configuration des raccourcis clavier mode Difficile"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_FIXED_ZONE->description
+msgid "Use fixed recording area"
+msgstr "Utiliser une zone d'enregistrement fixe"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_HOTKEYS->description
+msgid "Use keyboard shorcuts"
+msgstr "utiliser les raccourcis clavier"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_NORMAL->description
+msgid "Switch to mode: Normal"
+msgstr "Passage au mode: Normal"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_config->description
+msgid "Configuration"
+msgstr ""
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->description
+msgid "Timeout back to normal:"
+msgstr "Temps avant retour au mode normal: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->tooltip
+msgid ""
+"Zero desactivate countdown\n"
+"Times in seconds"
+msgstr "Zéro désactive le compte à reboursTemps en secondes"
+
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->units
+#. #-#-#-#-#  tfmKeyboard@alexpp.orig.pot (PACKAGE VERSION)  #-#-#-#-#
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->units
+msgid "seconds"
+msgstr "secondes"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIFF->description
+msgid "Switch to mode: Hard"
+msgstr "Passage au mode: Difficile"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIVIN->description
+msgid "Switch to mode: Divine"
+msgstr "Passage au mode: Divin"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD_S->description
+msgid "Stop screencast"
+msgstr "Arrêter la capture vidéo"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->description
+msgid "Screencast countdown time: "
+msgstr "Temps d'enregistrement: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->tooltip
+msgid "Times in seconds"
+msgstr "Temps en secondes"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->units
+msgid "pixels (height)"
+msgstr "pixels (hauteur)"
+
+#, fuzzy
+#~ msgid "Mode switch"
+#~ msgstr "Configuration des raccourcis clavier"
+
+#, fuzzy
+#~ msgid "Divin"
+#~ msgstr "Divin"

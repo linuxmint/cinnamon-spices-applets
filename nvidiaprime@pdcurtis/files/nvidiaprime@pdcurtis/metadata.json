@@ -1,0 +1,8 @@
+{
+    "max-instances": "1", 
+    "dangerous": false, 
+    "description": "Displays nVidia GPU Temperature when using Prime", 
+    "name": "nVidia Prime GPU Display", 
+    "uuid": "nvidiaprime@pdcurtis"
+}
+

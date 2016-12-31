@@ -1,0 +1,105 @@
+{
+ "head" : {
+    "type" : "header",
+    "description" : "Appearance"
+ },
+ "icon-name": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "The icon to use in the panel:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box, for example: desktop"
+ },
+ "width": {
+    "type": "spinbutton",
+    "default" : 15,
+    "min" : 1,
+    "max" : 44,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Applet width in the panel:",
+    "tooltip" : "Increase or decrease this spinner value to make the applet wider or narrower in the panel"
+ },
+ "color" : {
+    "type": "colorchooser",
+    "default" : "rgba(0,0,0,0)",
+    "description" : "The background color for the applet hover:",
+    "tooltip" : "Click the button to select a new background color for applet"
+ },
+ "highlight" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Highlight applet next time it is added to the panel",
+    "tooltip": ""
+ },
+ "div1" : {
+    "type" : "separator"
+ },
+ "head1" : {
+    "type" : "header",
+    "description" : "\nMenu options"
+ },
+ "closebuttons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show close buttons",
+    "tooltip": ""
+ },
+ "closeallbuttons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "dependency" : "closebuttons",
+    "description": "Show close all windows buttons for workspaces",
+    "tooltip": ""
+ },
+ "SHOW-MENU-ON-CLOSE" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Keep menu open while closing windows",
+    "tooltip": ""
+ },
+ "div2" : {
+    "type" : "separator"
+ },
+ "head2" : {
+    "type" : "header",
+    "description" : "\nPeek at desktop"
+ },
+ "peekatdesktop" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Opacify windows on hover",
+    "tooltip": "Take a glance at your desktop and desklets."
+ },
+ "alsoopacifyskiptaskbar" : {
+    "type" : "checkbox",
+    "default" : false,
+    "dependency" : "peekatdesktop",
+    "description": "Opacify the icons on the desktop",
+    "tooltip": ""
+ },
+ "alsoopacifydesklets" : {
+    "type" : "checkbox",
+    "default" : false,
+    "dependency" : "peekatdesktop",
+    "description": "Opacify desklets",
+    "tooltip": ""
+ },
+ "peekopacity": {
+    "type": "scale",
+    "default" : 27,
+    "min" : 0,
+    "max" : 255,
+    "step" : 10,
+    "dependency" : "peekatdesktop",
+    "description" : "Opacity on hover:",
+    "tooltip" : ""
+ },
+    
+ "blur" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Blur windows on hover",
+    "tooltip" : ""
+ }
+}
+

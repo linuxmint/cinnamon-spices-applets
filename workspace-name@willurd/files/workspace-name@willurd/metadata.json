@@ -1,0 +1,7 @@
+{
+  "uuid": "workspace-name@willurd",
+  "name": "Workspace Name",
+  "version": "v0.0.1",
+  "description": "Show the current workspace name in the panel",
+  "icon": "gnome-panel-workspace-switcher"
+}

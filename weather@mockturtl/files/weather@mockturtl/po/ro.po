@@ -1,0 +1,460 @@
+# Romanian translation for gnome-shell-extension-weather
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Marian Vasile <marianvasile@upcmail.ro>, 2011.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: simon04-gnome-shell-extension-weather\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2011-06-25 19:05+0200\n"
+"Last-Translator: Marian Vasile <marianvasile@upcmail.ro> și Dorian Baciu\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1 ? 0: (((n % 100 > 19) || ((n % 100 "
+"== 0) && (n != 0))) ? 2: 1));\\n\"\n"
+"X-Poedit-Language: Romanian\n"
+"X-Poedit-Country: ROMANIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "Clic pentru a deschide"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "Setări"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "Răsărit"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "Apus de soare"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Se încarcă vremea curentă..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Se încarcă prognoza..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Se încarcă"
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "Temperatură:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Umiditate:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Presiune:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Vânt:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Vânt:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Tornadă"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Furtună tropicală"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Uragan"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Furtuni severe"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Furtuni"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Lapoviță"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Măzăriche"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Măzăriche"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Burniță rece"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Burniță"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Ploaie rece"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Averse"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Ninsoare ușoară"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Ninsoare ușoară în averse"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Ninsoare viscolită"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Ninsoare"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Grindină"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Lapoviță"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Praf"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Ceață"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Ceață ușoară"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Întunecat"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Zgomotos"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Rafale de vânt"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "Rece"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Înnorat"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Majoritar înnorat"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Parțial înnorat"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Senin"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Însorit"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Vreme bună"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Ploaie cu grindină"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Foarte cald"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Furtuni izolate"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Furtuni răzlețe"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Averse răzlețe"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Ninsoare abundentă"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Ninsori răzlețe"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Ploi abundente în averse"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "Ninsori în averse"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Ploi izolate"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Indisponibil"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Luni"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Marți"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Miercuri"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Joi"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Vineri"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Sâmbătă"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Duminică"
+
+#: applet.js:1056
+msgid "N"
+msgstr "N"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "NE"
+
+#: applet.js:1056
+msgid "E"
+msgstr "E"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "SE"
+
+#: applet.js:1056
+msgid "S"
+msgstr "S"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "SV"
+
+#: applet.js:1056
+msgid "W"
+msgstr "V"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "NV"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+#, fuzzy
+msgid "Get WOEID"
+msgstr "WOEID"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Afișarea temperaturii curente în panou"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr "WOEID"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr "Locația pe Pământ"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#, fuzzy
+msgid "Temperature unit"
+msgstr "Temperatură:"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "fahrenheit"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "celsius"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Suprapunere locație"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Arată timpul pentru răsărit/apus de soare"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Initatea de măsură pt. viteza vântului"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "km/oră"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mile/oră"
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Arată condițiile vremii (de ex. \"Vânt\", \"Clar\") în panou"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+#, fuzzy
+msgid "Update interval"
+msgstr "Actualizare interval de timp (minute)"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Pictograme (iconițe)"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "Arată vremea pentru 5 zile"
+
+#~ msgid "Please wait"
+#~ msgstr "Așteptați"
+
+#~ msgid "Today"
+#~ msgstr "Azi"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Mâine"
+
+#~ msgid "http://edg3.co.uk/snippets/weather-location-codes/"
+#~ msgstr "http://edg3.co.uk/snippets/weather-location-codes/"

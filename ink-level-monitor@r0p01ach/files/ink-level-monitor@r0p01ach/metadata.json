@@ -1,0 +1,6 @@
+{
+ "uuid": "ink-level-monitor@r0p01ach",
+ "name": "Printer Ink Level Monitor Applet",
+ "description": "USB Printer Ink Level Monitor Applet",
+ "version": "0.1.0"
+}

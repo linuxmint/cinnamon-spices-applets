@@ -1,0 +1,11 @@
+.hide-arrow {
+	-arrow-background-color: rgba(80,80,80,0.0);
+	-arrow-border-color: rgba(150,150,150,0.0);
+}
+.window-close{
+	background-size: 32px 32px;
+	background-position:-5px -10px;
+}
+.label-width{
+	width: 1px;
+}

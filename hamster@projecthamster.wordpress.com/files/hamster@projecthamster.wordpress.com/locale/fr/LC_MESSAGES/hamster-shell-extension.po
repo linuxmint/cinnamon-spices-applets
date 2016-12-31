@@ -1,0 +1,53 @@
+#
+# Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hamster-shell-extension\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-17 16:42+0100\n"
+"PO-Revision-Date: 2012-11-13 12:27+0100\n"
+"Last-Translator: Raphaël Doursenaud <rdoursenaud@free.fr>\n"
+"Language-Team: français <>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Gtranslator 2.91.5\n"
+
+#: extension.js:85
+msgid "What are you doing?"
+msgstr "Que faîtes vous ?"
+
+#: extension.js:91
+msgid "Enter activity..."
+msgstr "Entrez l'activité…"
+
+#: extension.js:105
+msgid "Todays activities"
+msgstr "Activités du jour"
+
+#: extension.js:215
+msgid "Loading..."
+msgstr "Chargement…"
+
+#: extension.js:238
+msgid "Show Overview"
+msgstr "Montrer le résumé"
+
+#: extension.js:243
+msgid "Stop Tracking"
+msgstr "Arrêter le suivi"
+
+#: extension.js:249
+msgid "Tracking Settings"
+msgstr "Préférences"
+
+#: extension.js:398
+msgid "No activity"
+msgstr "Pas d'activité"
+
+#: extension.js:254
+msgid "Add Earlier Activity"
+msgstr "Ajouter une activité antérieure"

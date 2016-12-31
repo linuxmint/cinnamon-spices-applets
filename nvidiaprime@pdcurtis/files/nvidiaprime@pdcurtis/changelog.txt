@@ -1,0 +1,22 @@
+Version v30_3.1.6
+
+v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
+          Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
+          Corrected missing call to display help file
+          Tested with Cinnamon 2.8.8 in Mint 17.3 and Cinnamon 3.0 in Mint 18 (nVidia drivers 352.63 and 361 respectively)
+          Changed various calls to nvidia-settings to be direct (not using optirun).
+v30_3.0.1 Code tidy up
+          Reduce 'settling' time from 20 to 2 seconds
+v30_3.0.2 Minor cosmetic changes
+v30_3.1.0 Removed left click menu and replaced with call to nvidia-settings
+v30_3.1.1 Removed all the bindings to settings for program configuration
+v30_3.1.2 Matching changes in settings-schema.json
+v30_3.1.3 Help file updated
+v30_3.1.4 Help File updated further
+          Uploaded as Release Candidate on 29th July 2016
+v30_3.1.5 New tick box on configuration screen to access enhanced functionality through the Context Menu. 
+          This needs a Cinnamon Restart or log out/in before the change is visible.
+          Currently this adds the glxspheres64 Graphics Processor Test to the Context menu.
+          glxsheres needs the VirtualGL package needs to be installed from
+          http://sourceforge.net/projects/virtualgl/files/VirtualGL/
+v30_3.1.6 Corrected icon.png in applet folder which is used by Add Applets

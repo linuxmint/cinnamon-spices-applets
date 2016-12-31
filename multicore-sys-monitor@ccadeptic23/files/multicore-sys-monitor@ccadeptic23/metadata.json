@@ -1,0 +1,7 @@
+{
+    "uuid": "multicore-sys-monitor@ccadeptic23", 
+    "name": "Multi-Core System Monitor", 
+    "version": "1.5", 
+    "icon": "utilities-system-monitor", 
+    "description": "Displays in realtime the cpu usage for each core/cpu and overall memory usage."
+}

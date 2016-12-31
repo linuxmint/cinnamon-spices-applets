@@ -1,0 +1,34 @@
+Version v30_1.1.9
+v30_1.0.0 Developed using code from NUMA, Bumblebee and Timer Applets
+          Includes changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
+          Tested with Cinnamon 3.0 in Mint 18 
+          TEST CODE IN PLACE namely batteryPercentage divided by 4 to allow testing
+          Test Version without call to suspendScript
+          Beautified
+v30_1.0.1 Code added to ensure valid readings of batteryPercentage
+          Code added to 'flash' messages  and extend width with messages but only when discharging.
+          Code added to call Suspend script but only when percentage has fallen 
+             ie it will be called every 1% fall so it is re-enabled after returning from suspend
+          Suspendscript active
+          TEST CODE STILL IN PLACE so levels incorrect
+v30_1.1.2 Some changes in how test appplied to make it easier to take them out
+          Extra flag added for flashing
+          Range changed to 10 - 40 for Alert Percentage. 
+          Tests look good and suspendscript works.
+          TEST CODE STILL IN PLACE
+          Should I add a forced shutdown if level drops to say 5% because taken out of suspend with 
+          level dropped too far or suspend cancelled too many times?
+v30_1.1.3 Added Modal Dialog triped once at Alert Level and reset by going back above alert level
+          Shutdown (Suspend) now at 2/3 of Alert Level.
+          Suspend level added to tooltip and left click menu
+          TEST CODE REMOVED
+v30_1.1.4 Old call removed from batterytempscript.sh which was filling error log
+          Error checks on status to ensure valid
+          Spelling corrections
+          Help File extended
+v30_1.1.5 Minor text changes to improve consistency
+v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 1.1.5 to the cinnamon-spices web site
+v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
+v30_1.1.9 Added ability to edit stylesheet.css to context menu.
+          Added warnings about editing to stylesheet.css
+

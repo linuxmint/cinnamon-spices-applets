@@ -1,0 +1,145 @@
+{
+    "general": {
+        "type": "header",
+        "description": "General Settings"
+    },
+    
+    "panelIcon": {
+        "type": "iconfilechooser",
+        "description": "Panel icon",
+        "default": "folder",
+        "tooltip": "Accepts icon name or direct path (supports symbolic icons)"
+    },
+    
+    "panelText": {
+        "type": "entry",
+        "description": "Panel text",
+        "default": ""
+    },
+    
+    "keyOpen": {
+        "type": "keybinding",
+        "description": "Menu shorcut key",
+        "default": "<Super>p"
+    },
+    
+    "iconSize": {
+        "type": "spinbutton",
+        "default": 20,
+        "min": 10,
+        "max": 50,
+        "units": "px",
+        "step": 2,
+        "description": "Icon size"
+    },
+    
+    "sep1": {
+        "type": "separator"
+    },
+    
+    "userSection": {
+        "type": "header",
+        "description": "User Section"
+    },
+    
+    "showDesktop": {
+        "type": "checkbox",
+        "description": "Show desktop",
+        "default": true
+    },
+    
+    "userCustomPlaces": {
+        "type": "textview",
+        "description": "Custom places",
+        "default": "",
+        "height": 50,
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+    },
+    
+    "showTrash": {
+        "type": "combobox",
+        "description": "Show trash",
+        "default": 2,
+        "options": {
+            "Never": 0,
+            "Always": 1,
+            "When not empty": 2
+        }
+    },
+    
+    "sep2": {
+        "type": "separator"
+    },
+    
+    "places": {
+        "type": "header",
+        "description": "System Section"
+    },
+    
+    "showComputer": {
+        "type": "checkbox",
+        "description": "Show computer",
+        "default": true
+    },
+    
+    "showRoot": {
+        "type": "checkbox",
+        "description": "Show file system",
+        "default": true
+    },
+    
+    "showVolumes": {
+        "type": "checkbox",
+        "description": "Show volumes",
+        "default": true
+    },
+    
+    "onlyShowMounted": {
+        "type": "checkbox",
+        "description": "Only show mounted drives",
+        "default": false,
+        "indent": true,
+        "dependency": "showVolumes"
+    },
+    
+    "showNetwork": {
+        "type": "checkbox",
+        "description": "Show network",
+        "default": true
+    },
+    
+    "systemCustomPlaces": {
+        "type": "textview",
+        "description": "Custom places",
+        "default": "",
+        "height": 50,
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+    },
+    
+    "sep3": {
+        "type": "separator"
+    },
+    
+    "recent": {
+        "type": "header",
+        "description": "Recent Documents"
+    },
+    
+    "showRecentDocuments": {
+        "type": "checkbox",
+        "description": "Show recent documents",
+        "default": false
+    },
+    
+    "recentSizeLimit": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 0,
+        "max": 30,
+        "units": "",
+        "step": 1,
+        "description": "Number to show",
+        "indent": true,
+        "dependency": "showRecentDocuments"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "uuid": "0dyseus@QuickMenu",
+    "max-instances": "-1",
+    "dangerous": true,
+    "name": "Quick Menu",
+    "version": "1.05",
+    "multiversion": true,
+    "last-edited": "1473934114",
+    "description": "Easily and quickly create a menu based on the files/folders found inside an specific folder.",
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2"
+    ]
+}

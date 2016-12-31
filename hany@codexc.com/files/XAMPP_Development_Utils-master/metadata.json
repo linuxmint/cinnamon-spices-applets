@@ -1,0 +1,11 @@
+{
+    "description": "Development Utils Applet for Cinnamon", 
+    "uuid": "devutils@fogl", 
+    "name": "Development Utils", 
+    "original-authors": [
+        "wfogl.linux@gmail.com"
+    ], 
+    "version": "0.1.5", 
+    "last-edited": "1374681654", 
+    "icon": "system-run"
+}

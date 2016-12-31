@@ -1,0 +1,10 @@
+{
+    "description": "All-in-one quick navigation to places and devices with a few extra configuration options to change the look and feel of the applet.", 
+    "url": "http://dewman12.deviantart.com/gallery/", 
+    "schema-file": "schemas/org.cinnamon.applets.AllInOnePlaces.gschema.xml", 
+    "uuid": "all-in-one-places@dewman12", 
+    "name": "All-in-one Places", 
+    "version": "3.0", 
+    "last-edited": "1343238734", 
+    "icon": "user-home"
+}

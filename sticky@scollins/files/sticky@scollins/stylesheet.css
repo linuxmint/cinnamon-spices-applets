@@ -1,0 +1,451 @@
+/*Panel default*/
+.sticky-buttonBox {
+    spacing: 4px;
+}
+
+
+/*Camoflage fallback*/
+.sticky-noteBox {
+    background-color: #ffffff;
+    padding: 5px;
+}
+
+
+/*Mint-X theme*/
+.green-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #99c16f;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.green-noteBox:focus StScrollView {
+    background-color: #BDE09D;
+}
+
+.green-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.green-noteBox StBin#trough {
+    border-image: none;
+    background-color: #99c16f;
+    border-color: transparent;
+}
+
+.green-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #699933;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.green-noteBox StButton#vhandle:hover {
+    background-color: #BDE09D;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Aqua*/
+.aqua-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #6cabcd;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.aqua-noteBox:focus StScrollView {
+    background-color: #a7c6df;
+}
+
+.aqua-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.aqua-noteBox StBin#trough {
+    border-image: none;
+    background-color: #6cabcd;
+    border-color: transparent;
+}
+
+.aqua-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #308fba;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.aqua-noteBox StButton#vhandle:hover {
+    background-color: #a7c6df;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Blue*/
+.blue-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #546dc1;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.blue-noteBox:focus StScrollView {
+    background-color: #8FAAD8;
+}
+
+.blue-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.blue-noteBox StBin#trough {
+    border-image: none;
+    background-color: #546dc1;
+    border-color: transparent;
+}
+
+.blue-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #3650b8;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.blue-noteBox StButton#vhandle:hover {
+    background-color: #8FAAD8;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Brown*/
+.brown-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #a68263;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.brown-noteBox:focus StScrollView {
+    background-color: #CCAF90;
+}
+
+.brown-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.brown-noteBox StBin#trough {
+    border-image: none;
+    background-color: #a68263;
+    border-color: transparent;
+}
+
+.brown-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #7b4927;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.brown-noteBox StButton#vhandle:hover {
+    background-color: #CCAF90;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Orange*/
+.orange-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #d99859;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #415BEA;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.orange-noteBox:focus StScrollView {
+    background-color: #eab982;
+}
+
+.orange-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.orange-noteBox StBin#trough {
+    border-image: none;
+    background-color: #d99859;
+    border-color: transparent;
+}
+
+.orange-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #b05001;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.orange-noteBox StButton#vhandle:hover {
+    background-color: #eab982;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Pink*/
+.pink-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #c35591;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.pink-noteBox:focus StScrollView {
+    background-color: #e799c5;
+}
+
+.pink-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.pink-noteBox StBin#trough {
+    border-image: none;
+    background-color: #c35591;
+    border-color: transparent;
+}
+
+.pink-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #a7276b;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.pink-noteBox StButton#vhandle:hover {
+    background-color: #e799c5;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Purple*/
+.purple-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #8464c5;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #E7ED40;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.purple-noteBox:focus StScrollView {
+    background-color: #aea3d9;
+}
+
+.purple-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.purple-noteBox StBin#trough {
+    border-image: none;
+    background-color: #8464c5;
+    border-color: transparent;
+}
+
+.purple-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #6938b8;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.purple-noteBox StButton#vhandle:hover {
+    background-color: #aea3d9;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Red*/
+.red-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #bc4e4b;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #7CC663;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.red-noteBox:focus StScrollView {
+    background-color: #e99690;
+}
+
+.red-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.red-noteBox StBin#trough {
+    border-image: none;
+    background-color: #bc4e4b;
+    border-color: transparent;
+}
+
+.red-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #9d2525;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.red-noteBox StButton#vhandle:hover {
+    background-color: #e99690;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Sand*/
+.sand-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #c4a65e;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.sand-noteBox:focus StScrollView {
+    background-color: #e0cea4;
+}
+
+.sand-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.sand-noteBox StBin#trough {
+    border-image: none;
+    background-color: #c4a65e;
+    border-color: transparent;
+}
+
+.sand-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #b38e37;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.sand-noteBox StButton#vhandle:hover {
+    background-color: #e0cea4;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+
+/*Mint-X-Teal*/
+.teal-noteBox {
+    font: 12px arial, sans-serif;
+    background-color: #5aaa9a;
+    padding: 7px;
+    padding-top: 25px;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #C99F64;
+    caret-size: 1px;
+    caret-color: #000000;
+    box-shadow: 2px 2px 7px;
+}
+
+.teal-noteBox:focus StScrollView {
+    background-color: #9ed8c7;
+}
+
+.teal-noteBox StScrollBar {
+    min-width: 10px;
+}
+
+.teal-noteBox StBin#trough {
+    border-image: none;
+    background-color: #5aaa9a;
+    border-color: transparent;
+}
+
+.teal-noteBox StButton#vhandle {
+    background-gradient-direction: none;
+    background-color: #238576;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}
+
+.teal-noteBox StButton#vhandle:hover {
+    background-color: #9ed8c7;
+    border-image: none;
+    border-radius: 0px;
+    border-color: transparent;
+}

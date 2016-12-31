@@ -1,0 +1,6 @@
+{
+ "uuid": "MessagingMenuV3@blub", 
+ "name": "Messaging Menu V3",
+ "description": "Messaging Menu applet now compatible with Cinnamon 2.4",
+ "icon": "indicator-messages"
+}

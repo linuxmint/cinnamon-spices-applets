@@ -1,0 +1,6 @@
+{
+ "uuid": "betterlock@entelechy",
+ "name": "Num Lock/Caps Lock indicator with MessageTray notifications",
+ "description": "Shows whether caps lock/num lock is on, and displays a notification when these change.",
+ "icon": "numlock-enabled"
+}

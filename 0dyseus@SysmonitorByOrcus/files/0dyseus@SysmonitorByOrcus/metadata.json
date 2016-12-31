@@ -1,0 +1,16 @@
+{
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "last-edited": "1471716762",
+    "dangerous": true,
+    "multiversion": true,
+    "uuid": "0dyseus@SysmonitorByOrcus",
+    "name": "System Monitor (Fork By Odyseus)",
+    "version": "1.8",
+    "icon": "utilities-system-monitor",
+    "description": "Displays CPU, memory, swap, network usage and load in graphs.",
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2"
+    ]
+}

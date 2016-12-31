@@ -1,0 +1,6 @@
+{
+    "description": "Indicator and Control for Num Lock", 
+    "icon": "num-on-symbolic", 
+    "uuid": "soft-numlock@d5xtgr", 
+    "name": "Num Lock indicator"
+}

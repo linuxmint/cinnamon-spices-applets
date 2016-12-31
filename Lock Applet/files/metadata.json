@@ -1,0 +1,6 @@
+{
+"uuid": "Lock Applet",
+"name": "Lock Screen",
+"description": "Click on the applet to launch gnome-screensaver and lock computer",
+"icon": "lock-screen"
+}

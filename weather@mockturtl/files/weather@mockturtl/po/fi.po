@@ -1,0 +1,457 @@
+# Finnish translation for gnome-shell-extension-weather
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Simon Claessens <gagalago@gmail.com>, 2011.
+# ecyrbe <ecyrbe@gmail.com>, 2011.
+# Jesse Jaara <jesse.jaara@gmail.com>, 2011.
+# Marko Häiväläinen marko@scemosystems.fi, 2013
+# Sampsa Pirinen sampsa.pirinen@gmail.com, 2015
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2011-07-25 18:39+0300\n"
+"Last-Translator: Sampsa Pirinen <sampsa.pirinen@gmail.com>\n"
+"Language-Team: suomi <>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bits\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "Klikkaa avataksesi"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "Asetukset"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "Auringonnousu"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "Auringonlasku"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Ladataan säätietoja ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Ladataan tulevia säätietoja ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Ladataan ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "Lämpötila:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Kosteusprosentti:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Ilmanpaine:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Tuulen nopeus:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Tuntuu:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Tornado"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Trooppinen myrsky"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Hurrikaani"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Voimakkaita ukkosmyrskyjä"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Ukkosmyrskyjä"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Räntäsadetta"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Räntäsadetta ja loskaa"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Lumisadetta ja loskaa"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Kylmää tihkusadetta"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Tihkusadetta"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Jäätävää sadetta"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Sadekuuroja"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Lumikuuroja"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Kevyttä lumisadetta"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Lumipyry"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Lumisadetta"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Rakeita"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Loskaa"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Pölyä"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Sumua"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Usvaa"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Savua"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Myrskyisä"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Tuulinen"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "Kylmä"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Pilvinen"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Pilvipeite rakoilee"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Puolipilvistä"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Selkeää"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Aurinkoista"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Selkeää"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Vesisadetta ja rakeita"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Kuuma"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Yksittäisiä ukkosmyrskyjä"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Hajanaisia ukkosmyrskyjä"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Hajanaisia sateita"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Märkää lunta"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Hajanaisia lumisateita"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Ukkoskuuroja"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "Lumikuuroja"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Yksittäisiä ukkoskuuroja"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Ei saatavilla"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Maanantai"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Tiistai"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Keskiviikko"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Torstai"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Perjantai"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Launtai"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Sunnuntai"
+
+#: applet.js:1056
+msgid "N"
+msgstr "Pohjoinen"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "Koillinen"
+
+#: applet.js:1056
+msgid "E"
+msgstr "Itä"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "Kaakko"
+
+#: applet.js:1056
+msgid "S"
+msgstr "Etelä"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "Lounas"
+
+#: applet.js:1056
+msgid "W"
+msgstr "Länsi"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "Luode"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "Hae sijaintikoodi (WOEID)"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Näytä lämpötila paneelissa"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+#, fuzzy
+msgid "WOEID"
+msgstr "Hae sijaintikoodi (WOEID)"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#, fuzzy
+msgid "Temperature unit"
+msgstr "Lämpötilan yksikkö"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Suomenna sään kuvaus"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Korvaa sijaintiotsikko"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Näytä aika 24 tunnin muodossa"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Näytä auringonousu ja -laskuaika"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Tuulen nopeuden yksikkö"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "solmua"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr ""
+"Näytä paneelissa sään sanallinen kuvaus (esim., \"Tuulista\", \"Selkeää\")"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Ilmanpaineen yksikkö"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Päivitysväli"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "minuuttia"
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Symbolikuvakkeet"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "Näytä 5 päivän ennuste"
+
+#~ msgid "Please wait"
+#~ msgstr "Odota"
+
+#~ msgid "Today"
+#~ msgstr "Tänään"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Huomenna"

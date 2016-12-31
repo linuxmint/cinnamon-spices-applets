@@ -1,0 +1,29 @@
+.battery-label{
+	font-weight: bold;
+	color: white;
+}
+
+.battery-label:hover{
+	color: white;
+	text-shadow: white 0px 0px 5px;
+}
+
+.battery-label_50{
+	font-weight: bold;
+	color: orange;
+}
+
+.battery-label_50:hover{
+	color: orange;
+	text-shadow: orange 0px 0px 5px;
+}
+
+.battery-label_20{
+	font-weight: bold;
+	color: red;
+}
+
+.battery-label_20:hover{
+	color: red;
+	text-shadow: red 0px 0px 5px;
+}

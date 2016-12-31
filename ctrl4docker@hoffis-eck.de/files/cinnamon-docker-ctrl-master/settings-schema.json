@@ -1,0 +1,17 @@
+{
+    "image": {
+        "type": "entry",
+        "default": "",
+        "description": "docker image"
+    },
+    "container": {
+        "type": "entry",
+        "default": "",
+        "description": "container name"
+    },
+    "parameter": {
+        "type": "entry",
+        "default": "",
+        "description": "parameter for the container"
+    }
+}

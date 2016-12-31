@@ -1,0 +1,7 @@
+{
+ "uuid": "montrer-le-bureau@cannelle.org",
+ "name": "Show or record desktop",
+ "description": "Minimize all windows or record the desktop",
+ "icon": "desktop",
+ "version": "0.0.5a"
+}

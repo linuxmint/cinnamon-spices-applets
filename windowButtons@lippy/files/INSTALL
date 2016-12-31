@@ -1,0 +1,23 @@
+Requirements:
+
+You need to be able to run glib-compile-schemas.
+On Ubuntu / Debian / Linux Mint: sudo apt-get install libglib2.0-dev
+
+---
+
+Installation:
+
+1. Copy the windowButtons@lippy directory to ~/.local/cinnamon/applets or /usr/share/cinnamon/applets.
+2. As root, copy the org.cinnamon.applets.windowButtons@lippy.gschema.xml file to /usr/share/glib-2.0/schemas.
+3. As root, run glib-compile-schemas /usr/share/glib-2.0/schemas.
+4. Open Cinnamon Settings, navigate to Applets and enable the Window Buttons applet.
+5. Enjoy!
+
+---
+
+Uninstallation:
+
+1. Open Cinnamon Settings, navigate to Applets and disable the Window Buttons applet.
+2. Delete the windowButtons@lippy directory within ~/.local/cinnamon/applets or /usr/share/cinnamon/applets.
+3. As root, delete the org.cinnamon.applets.windowButtons@lippy.gschema.xml file within /usr/share/glib-2.0/schemas.
+4. As root, run glib-compile-schemas /usr/share/glib-2.0/schemas.

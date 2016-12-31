@@ -1,0 +1,188 @@
+{
+  "output-settings-header": { 
+    "type": "header",
+    "description": "OUTPUT SETTINGS"
+},
+  "output-settings-separator": { 
+    "type": "separator"
+},
+  "dir-name": { 
+    "type": "filechooser",
+    "default": "/tmp",
+    "select-dir": true,
+    "description": "Output directory:",
+    "tooltip": "Select a directory"
+},
+  "file-name": { 
+    "type": "entry",
+    "default": "VLC_Capture",
+    "description": "Output file name:",
+    "tooltip": "Just a name. The time and extension will be add automatically."
+},
+  "audio-settings-header": { 
+    "type": "header",
+    "description": "AUDIO SETTINGS"
+},
+  "audio-settings-separator": { 
+    "type": "separator"
+},
+  "audio-codec": {
+    "type": "combobox",
+    "description": "Audio codec:",
+    "default": "mpga",
+    "tooltip": "Select a audio codec.",
+    "options" : {
+    "MPG": "mpga",
+    "MP3": "mp3",
+    "AAC": "mp4",
+    "AC3": "a52"
+    }
+},
+  "audio-samplerate": {
+    "type": "combobox",
+    "description": "Audio samplerate:",
+    "default": "44100",
+    "tooltip": "Select audio samplerate.",
+    "options" : {
+    "8000 Hz": "8000",
+    "11025 Hz": "11025",
+    "22050 Hz": "22050",
+    "44100 Hz": "44100",
+    "48000 Hz": "48000"
+    }
+},
+  "audio-bitrate": { 
+    "type": "spinbutton",
+    "tooltip": "Select audio bitrate.",
+    "default": 128,
+    "min": 32,
+    "max": 320,
+    "units": "kb/s",
+    "step": 32,
+    "description": "Audio bitrate:"
+},
+  "audio-channels": { 
+    "type": "spinbutton",
+    "default": 2,
+    "min": 1,
+    "max": 8,
+    "units": "channels",
+    "step": 1,
+    "description": "Audio channels:"
+},
+  "video-settings": { 
+    "type": "header",
+    "description": "VIDEO SETTINGS"
+},
+  "video-settings-separator": { 
+    "type": "separator"
+},
+  "video-codec": {
+    "type": "combobox",
+    "description": "Video codec:",
+    "default": "h264",
+    "tooltip": "Select a video codec.",
+    "options" : {
+    "H264": "h264",
+    "MPEG-4": "mp4v",
+    "HEVC": "h265",
+    "MPEG-2": "mp2v"
+     }
+},
+  "video-framerate": { 
+    "type": "spinbutton",
+    "default": 15,
+    "min": 1,
+    "max": 60,
+    "units": "fps",
+    "step": 1,
+    "description": "Video FPS:"
+},
+  "video-bitrate": { 
+    "type": "spinbutton",
+    "default": 640,
+    "min": 32,
+    "max": 3840,
+    "units": "kb/s",
+    "step": 32,
+    "description": "Video bitrate:"
+},
+  "encapsulation": {
+    "type": "combobox",
+    "description": "Encapsulation:",
+    "default": "mp4",
+    "tooltip": "Select a muxer.",
+    "options" : {
+    "MP4": "mp4",
+    "MKV": "mkv",
+    "MPEG-TS": "ts"
+        }
+},
+  "increase-caching" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Check this to increase caching:",
+    "tooltip": "Checking this box allows you to increase caching"
+},
+  "screen-caching": { 
+    "type": "spinbutton",
+    "default": 300,
+    "min": 300,
+    "max": 100000,
+    "units": "ms",
+    "step": 100,
+    "dependency" : "increase-caching",
+    "description": "Caching:"
+},
+  "video-filter-crop" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Check this to select a cropping areas:",
+    "tooltip": "Checking this box allows you to set a custom areas from the screen, that will be cropped. The cropped pixels will not be visible."
+},
+  "crop-left" : {
+    "type": "spinbutton",
+    "default" : 25,
+    "min" : 0,
+    "max" : 1600,
+    "step" : 1,
+    "units" : "pixels",
+    "dependency" : "video-filter-crop",
+    "description" : "Crop from the left:",
+    "tooltip" : "The value must be lower then your screen width"
+},
+  "crop-top" : {
+    "type": "spinbutton",
+    "default" : 25,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 1,
+    "units" : "pixels",
+    "dependency" : "video-filter-crop",
+    "description" : "Crop from the top:",
+    "tooltip" : "The value must be lower then your screen height"
+},
+  "crop-right" : {
+    "type": "spinbutton",
+    "default" : 25,
+    "min" : 0,
+    "max" : 1600,
+    "step" : 1,
+    "units" : "pixels",
+    "dependency" : "video-filter-crop",
+    "description" : "Crop from the right:",
+    "tooltip" : "The value must be lower then your screen width"
+},
+  "crop-bottom" : {
+    "type": "spinbutton",
+    "default" : 25,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 1,
+    "units" : "pixels",
+    "dependency" : "video-filter-crop",
+    "description" : "Crop from the bottom:",
+    "tooltip" : "The value must be lower then your screen height"
+ }
+}
+

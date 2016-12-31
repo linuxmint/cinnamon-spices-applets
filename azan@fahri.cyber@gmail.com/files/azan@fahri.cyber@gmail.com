@@ -1,0 +1,1 @@
+/home/phai/Desktop/azan-applet/azan@fahri.cyber@gmail.com

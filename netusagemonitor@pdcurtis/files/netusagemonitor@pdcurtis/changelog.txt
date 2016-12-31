@@ -1,0 +1,134 @@
+Version v30_3.0.6
+1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
+    Built in function used for left click menu. 
+1.1 Right click menu item added to open Settings Screen. 
+1.2 Default connection added. Warning on data limit exceeded added. 
+1.3 Slider and information lines added to left click menu to set Alarm level. 
+1.4 Three cumulative data monitors added. 
+1.5 Check for changed devices added to Right Click menu. 
+1.6  Alert display slider etc inhibited when inactive. 
+1.7 Add const UUID, Rebuild left on various settings changes.
+1.7.1 Errors corrected
+1.7.2 Beautified at http://jsbeautifier.org/ 
+1.8.0 Added green background when data has flowed on selected interface.
+1.8.1 Added more comments
+1.9.0 Cumulative Usage now independent of interface being monitored
+1.9.1 Indentation corrections
+1.9.2 Reordering to make more clear
+1.9.3 Beautify to spaces not tabs
+1.10.0 Corrected error in handling tooltip at start-up  - V18_1 - as uploaded
+2.0.0 New version with addition of vnstat statistics
+2.0.1 Minor label and layout changes 03-07-2013
+2.0.2 mainBox added so I can use remove_actor to avoid the need for restart when vnstati is not used. 
+2.0.3 Error checking for installation of vnstat and vnstati and change of location of temp file to applet folder in applet
+2.0.4 U: and D: replaced by unicode up and down arrows to save space.
+2.0.5 New option of Compact Display of total only rather than Up and Down loads
+2.0.6 Test version - needs cinnamon restart
+2.0.7 Compact Display and Width set in settings and implemented fully without restart required.
+2.0.8 Added access to stylesheet.css and changelog.txt 09-07-2013
+2.0.9 Compact Display can be changed in Context menu 10-07-2013 
+2.1.0 Uses tick \u2714 for selected interface - UPLOADED as development version on 11-07-2013
+2.1.1 Picks up UUID from metadata.uuid
+2.1.2 Puts Housekeeping and System items in a sub-menu 13-07-2013
+2.1.3 Minor correction in initialisation of cumulative data and layout/comments improved 14-07-2013
+2.2.0 Start of implementing some form of response to exceeding data limits - termed crisis management
+2.2.1 Crisis Management flag and 'terminal command' to be run now in Settings Panel.
+2.2.2 Facility for two preset scripts in addition to string added. Right click menu has additional housekeeping functions to edit and test these scripts added.  
+2.2.3 Addition documentation
+2.2.4 Changed 'crisis' to 'suspend' for preset script and tested. Reorder advanced functions and added separators.
+2.2.5 Three special cases now in use - suspendscript, alertscript and modalalert. Function added to implement the modal dialog used by modal alert. Testing functions still 'exposed' to users on right click function submenu. 
+To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asyncronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used? 
+Conclusion - change to a drop down selection of options, initially the three currently in use but consider adding sound and notification options. remove terminal string option as it can be in a script file.
+2.2.6 Implemented drop down alert handling plus change back to KB from kB and replace round with floor
+2.2.7 Scripts commented and checked. Extra options of notify and do nothing added. Use now made of Sox to play audio warnings and notify-send to add notifications. sox needs to be installed
+2.2.8 Beautified at http://jsbeautifier.org/
+2.2.9 Help changed to open http:www.pcurtis.com/spices.htm#numa until I get time to write a help file - UPLOADED TO WEB SITE on 08-08-2013
+2.3.0 Modified call to modalDialog to have parameter with the text string to display
+      Added option to Disable Networking using NMClient (Does not disable ppp0 connections not initiated by network manager)
+2.3.1 Adjustable Delay time when disabling added to Settings
+      Various bits of code tidied up
+2.3.2 Added extra Settings - displayExtraHousekeeping, useAlertSound and alertSound (sound file to play)
+      and code to implement
+2.3.3 Quick fix to background colours to use transparency so they work with light and dark themes 02-09-2013
+2.3.4 Addition of radiused borders to background to improve appearance
+2.3.5 Major change in use of css styles for the background colours which show connection and alert status.
+      This allows the user to match colours etc to a particular theme.
+2.3.6 Minor bug fix - Context Menu not always rebuilt after adding or removing advanced functions submenu.
+2.3.7 Bug fix - Cummulative counters 1 and 3 not being saved correctly
+2.3.8  Anomoly fix - Avoid calling  GTop.glibtop_get_netload() without valid interface -
+       possible latest versions can segfault if interface not valid.
+2.3.9  Add fix for Applet not being fully halted when removed from panel (from dansie)
+2.3.10 Fudge to make NUMA behave the same for Cinnamon 1.8 and 2.0 by removing the
+       automatically added items from the context menu by calling rebuilding menu a second 
+       time during startup sequence after a one cycle delay. Long term solution is to use 
+       dansie's method of building everything as a submenu. 
+2.3.11 Default settings changed to start with cummulative monitoring off for all interfaces
+       (null) in settings file.
+2.3.12 Revert to the old method of handling cumulative data and only update cumulative totals
+       for the monitored interface. Slightly less flexible but intended to reduce the chances
+       of segfaults until the problem is understood and resolved.
+2.3.13 Changes to Settings File to explicitely use real numbers for Cumulative Data
+2.3.14 Test of reset function including setting reset date and time 
+       and avoid use of updating a Cinnamon Settings within a single expression
+       NB Interface 1 only 
+       TEST at 10x speed - remember to reset!!!
+2.3.15 Now reset function on all 3 interfaces which also avoids use of updating a Cinnamon Settings
+       within a single expression on all interfaces.
+       Display simplified in left click menu to format of: interface - reset date and time - Cumulative data
+       ie now a single line for each interface.
+       Settings file changed to use generic bidirectional where interfaces are set from applet and defaults changed
+       Reset to run at correct speed 
+       UPLOADED VERSION 10 March 2014.
+2.3.16 Try delaying cumulative updates into cinnamon-settings by using two mainloop timers.
+       Bug fix for when no default interface specified and default unchecked in settings.
+       Some default settings changed in settings-schema
+2.3.17 Some changes so cinnamon-settings values of cumulative total are only updated when changed in second part of loop
+       Added interface name to reset menu item and rebuildFlag to on_interface_settings_changed()
+       Changed 'Settings' to 'Configure' in Context Menu for consistency with Cinnamon 2.0
+2.4.0  Changes to automatically select first active interface at start-up But Only If a default interface was not specified 
+       and the last interface was not PPP0.
+       Added explanatory text to settings-schema.json comment for the useDefaultInterface flag
+2.4.1  Moved Configure to bottom of context menu
+       Tried multiple instances - useful but automatic update fails and hand crafting of .cinnamon/configs/netusagemonitor@pdcurtis required
+       Checked with Cinnamon 2.2 via LiveUSB
+2.4.2  Display of Header inhibited when no Cummulative Data being displayed.
+2.4.3.0   Multiple instances in metadata.json
+          Changes to minimise width of applet when not connected to go with multiple instances.     
+          Change to width in stylesheet.css to match
+          New function to pad and center output to remove jitter rather use styles.
+2.4.3.1   General tidy up of commented out code 
+2.4.3.2   Add an offset which is set in settings but is also cleared by reset of usage
+          Display includes offset when in use.
+          Currently only available on Cumulative Data Usage 1
+          Continue tidy up
+2.4.3.3   Width padding corrected for display resolution
+          Offsets on all available Cumulative Data Usage channels
+2.4.3.4   Changed space character to \u2007 which has an equivalent width to a number
+2.4.3.5   Added a call to buildContextMenu on left click to set up after a connection has changed.
+2.4.3  Above all compressed into a single commit from above branch created in development branch
+2.4.4  Removal of some commented out text and change log updated
+2.4.4.1   Changes in padding and in width calculation for compact display
+2.4.4.2   Modified functions for formatSpeed and formatSentReceived to extend to [B,] GB and TB and make consistent
+2.5.0  Version with single instance but all other enhancements in preparation for upload
+          max-instance changed in metadata.json to 1 to hopefully avoid need for hand crafting of
+          .cinnamon/configs/netusagemonitor@pdcurtis  
+          Changes to totalLimit and alertPercentage in settings-schema.json. 
+          Tested with Cinnamon 2.4.0
+          Updates to changelog.
+2.6.0  Added support for Android Bluetooth tethered connections which use device bnep1 under Mint 17
+          Duplicated code for ppp0 using bnep0 in three places
+          Required because selecting the active bluetooth connection which looks like 12:34:56:78:90:12
+          in the network manager does not work
+          It ought to be possible to use bnep0 whenever the active interface contains semicolons
+          but if it aint broke dont fix it!
+          Corrected formatSentReceiver to handle negative numbers resulting from offsets 
+3.0.0     Modifications for Mint 18 and higher with Cinnamon 3.0 and higher
+          Changes to Suspend Script to work with SystemD as well as Dbus for suspend and changes to allow immediate suspend option in box.
+          Addition of version test to chose between xed for Mint 18 with Cinnamon 3.0 and gedit for earlier versions. 
+3.0.2     NOTE 3.0.1 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 3.0.0 to the cinnamon-spices web site
+3.0.3     Corrected icon.png in applet folder which is used by Add Applets and removed incorrect icon from metadata.json
+3.0.4     Increased maximum from 5000 mbytes to 100000 mbytes for totalLimit and cummulative offsets
+3.0.5     Made much more use of formatSentReceived() because of increase in limits
+          Removed a number of commented out blocks to do with cumulative totals and formatting.
+3.0.6     Choice of units for limits and offsets to be Mbytes or Gbytes by drop down widget in settings (configuration) window
+          Maximum Limits and Offsets set to 200000 Mbytes/Gbytes as appropriate

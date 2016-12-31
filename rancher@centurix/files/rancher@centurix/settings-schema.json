@@ -1,0 +1,24 @@
+{
+	"homesteadProjectFolder": {
+		"type": "filechooser",
+		"default": "~/Homestead",
+		"description": "Homestead project folder",
+		"select-dir": true
+	},
+	"homesteadConfigFolder": {
+		"type": "filechooser",
+		"default": "~/.homestead",
+		"description": "Homestead config folder",
+		"select-dir": true
+	},
+	"vagrantCmd": {
+		"type": "filechooser",
+		"default": "/usr/bin/vagrant",
+		"description": "Vagrant command"
+	},
+	"editor": {
+		"type": "filechooser",
+		"default": "/usr/bin/xed",
+		"description": "Default text editor"
+	}
+}

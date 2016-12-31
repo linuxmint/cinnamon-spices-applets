@@ -1,0 +1,6 @@
+{
+"uuid": "titleBar@errt",
+"name": "Title bar",
+"description": "Displays the title of the active window in the panel",
+"version": "1.3"
+}

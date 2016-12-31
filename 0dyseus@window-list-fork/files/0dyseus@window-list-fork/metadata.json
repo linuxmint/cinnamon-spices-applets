@@ -1,0 +1,16 @@
+{
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "uuid": "0dyseus@window-list-fork",
+    "max-instances": -1,
+    "dangerous": false,
+    "description": "Fork of the main Cinnamon Window list applet.",
+    "multiversion": true,
+    "version": "1.06",
+    "last-edited": "1472973983",
+    "icon": "gnome-panel-window-list",
+    "name": "Window list (Fork By Odyseus)",
+    "cinnamon-version": [
+        "3.0",
+        "3.2"
+    ]
+}

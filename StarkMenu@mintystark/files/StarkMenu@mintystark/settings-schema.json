@@ -1,0 +1,231 @@
+{
+ "menu-icon" : {
+    "type" : "iconfilechooser",
+    "default" : "/usr/share/cinnamon/theme/menu.svg",
+    "description": "Icon",
+    "tooltip": "Select an icon to show in the panel."
+ },
+ "menu-label" : {
+    "type" : "entry",
+    "default" : "Menu",
+    "description" : "Menu Text",
+    "tooltip" : "Enter custom text to show in the panel."
+ },
+ "all-programs-label" : {
+    "type" : "entry",
+    "default" : "All Programs",
+    "description" : "All Programs Text",
+    "tooltip" : "Enter custom text for button."
+ },
+ "favorites-label" : {
+    "type" : "entry",
+    "default" : "Favorites",
+    "description" : "Favorites Text",
+    "tooltip" : "Enter custom text for button."
+ },
+ "shutdown-label" : {
+    "type" : "entry",
+    "default" : "Shutdown",
+    "description" : "Shutdown Text",
+    "tooltip" : "Enter custom text for button."
+ },
+ "show-recent" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show recent files",
+    "tooltip": "Choose whether or not to show a recent file list in the menu."
+ },
+ "show-places" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu."
+ },
+ "enable-autoscroll" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Enable autoscrolling in application list",
+    "tooltip": "Choose whether or not to enable smooth autoscrolling in the application list."
+ },
+ "search-filesystem" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box."
+ },
+ "activate-on-hover" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet"
+ },
+ "hover-delay" : {
+    "type": "spinbutton",
+    "default" : 50,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "description" : "Menu hover delay:",
+    "tooltip" : "Delay between switching categories"
+ },
+ "favorite-icon-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 12,
+    "max" : 64,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Size of the Fovorite Button Icons:",
+    "tooltip" : "Change the Size of the Favorite Buttons Icons"
+ },
+ "show-quicklinks" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show Quicklinks Sidebar",
+    "tooltip": "Choose whether or not to show the Quicklinks Sidebar."
+ },
+ "quicklink-options" : {
+    "type": "combobox",
+    "default": "both",
+    "options": {
+         "Both Icons and Labels": "both",
+         "Icons Only": "icons",
+         "Labels Only": "labels"
+     },
+    "description": "Quicklinks Options",
+    "tooltip": "Allows the icons or Labels to be shown in the Quicklinks sidebar."
+ },
+ "show-quicklinks-shutdown-menu" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show Quicklinks Shutdown Menu",
+    "tooltip": "Choose whether or not to show the Quicklinks Shutdown Menu."
+ },
+ "quicklink-0" : {
+    "type": "entry",
+    "default": "separator",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-1" : {
+    "type": "entry",
+    "default": "Home,folder-home,nemo",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-2" : {
+    "type": "entry",
+    "default": "Documents,folder-documents,nemo Documents",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-3" : {
+    "type": "entry",
+    "default": "Pictures,folder-pictures,nemo Pictures",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-4" : {
+    "type": "entry",
+    "default": "Music,folder-music,nemo Music",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-5" : {
+    "type": "entry",
+    "default": "Videos,folder-videos,nemo Videos",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-6" : {
+    "type": "entry",
+    "default": "separator",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-7" : {
+    "type": "entry",
+    "default": "Computer,computer,nemo computer:///",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-8" : {
+    "type": "entry",
+    "default": "System Info,/usr/share/icons/hicolor/scalable/categories/cs-details.svg,cinnamon-settings info",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-9" : {
+    "type": "entry",
+    "default": "System Settings,control-center2,cinnamon-settings",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-10" : {
+    "type": "entry",
+    "default": "Software Manager,package-manager,gksu mintinstall",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-11" : {
+    "type": "entry",
+    "default": "Terminal,terminal,gnome-terminal",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-12" : {
+    "type": "entry",
+    "default": "Help,help,yelp",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-13" : {
+    "type": "entry",
+    "default": "separator",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-14" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-15" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-16" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-17" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-18" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+ "quicklink-19" : {
+    "type": "entry",
+    "default": "",
+    "description": "Quicklink",
+    "tooltip": "Entry for your Quicklink. Title,icon,command. If the icon does not contain an extension then it will look for the closest icon by name in the current theme. Otherwise it will find the icon by path."
+ },
+  "menu-editor-button" : {
+    "type" : "button",
+    "description" : "Open the menu editor",
+    "callback" : "_launch_editor",
+    "tooltip" : "Press this button to customize your menu entries."
+ }
+}
