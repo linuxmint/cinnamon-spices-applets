@@ -547,15 +547,13 @@ AppThumbnailHoverMenu.prototype = {
     this.actor.hide();
     this.parentActor = parent.actor;
 
-    this.openTime = Date.now();
-
     Main.layoutManager.addChrome(this.actor, this.orientation);
 
     this.appSwitcherItem = new PopupMenuAppSwitcherItem(this);
     this.addMenuItem(this.appSwitcherItem);
 
-    this.signals.parentActor.push(this.parentActor.connect('enter-event', Lang.bind(this, this._onAppButtonEnter)));
-    this.signals.parentActor.push(this.parentActor.connect('leave-event', Lang.bind(this, this._onAppButtonLeave)));
+    this.signals.parentActor.push(this.parentActor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
+    this.signals.parentActor.push(this.parentActor.connect('leave-event', Lang.bind(this, this._onMenuLeave)));
     this.signals.parentActor.push(this.parentActor.connect('button-release-event', Lang.bind(this, this._onButtonPress)));
 
     this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
@@ -571,15 +569,16 @@ AppThumbnailHoverMenu.prototype = {
     if (this._applet.onClickThumbs && this.appSwitcherItem.appContainer.get_children().length > 1) {
       return;
     }
+    this.shouldClose = true;
     setTimeout(function () {
-      return _this4.close();
+      return _this4.hoverClose();
     }, this._applet.thumbTimeout);
   },
 
   _onMenuEnter: function _onMenuEnter() {
     var _this5 = this;
 
-    this.openTime = Date.now();
+    this.shouldClose = false;
     setTimeout(function () {
       return _this5.hoverOpen();
     }, this._applet.thumbTimeout);
@@ -588,29 +587,10 @@ AppThumbnailHoverMenu.prototype = {
   _onMenuLeave: function _onMenuLeave() {
     var _this6 = this;
 
-    if (!this._applet.onClickThumbs || this.openTime + 900 < Date.now()) {
-      setTimeout(function () {
-        return _this6.close();
-      }, this._applet.thumbTimeout);
-    }
-  },
-
-  _onAppButtonEnter: function _onAppButtonEnter() {
-    var _this7 = this;
-
+    this.shouldClose = true;
     setTimeout(function () {
-      return _this7.hoverOpen();
+      return _this6.hoverClose();
     }, this._applet.thumbTimeout);
-  },
-
-  _onAppButtonLeave: function _onAppButtonLeave() {
-    var _this8 = this;
-
-    if (this._applet.onClickThumbs && this.openTime + 1000 > Date.now() || !this._applet.onClickThumbs) {
-      setTimeout(function () {
-        return _this8.close();
-      }, this._applet.thumbTimeout);
-    }
   },
 
   _onKeyRelease: function _onKeyRelease(actor, event) {
@@ -629,26 +609,30 @@ AppThumbnailHoverMenu.prototype = {
     }
   },
 
+  hoverClose: function hoverClose() {
+    if (this.shouldClose) {
+      this.close();
+    }
+  },
+
   open: function open() {
-    var _this9 = this;
+    var _this7 = this;
 
     // Refresh all the thumbnails, etc when the menu opens.  These cannot
     // be created when the menu is initalized because a lot of the clutter window surfaces
     // have not been created yet...
     setTimeout(function () {
-      return _this9.appSwitcherItem._refresh();
+      return _this7.appSwitcherItem._refresh();
     }, 0);
-    this.appSwitcherItem.actor.show();
     PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
   },
 
   close: function close() {
     PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
-    this.appSwitcherItem.actor.hide();
   },
 
   destroy: function destroy() {
-    var _this10 = this;
+    var _this8 = this;
 
     var children = this._getMenuItems();
     for (var i = 0; i < children.length; i++) {
@@ -658,8 +642,8 @@ AppThumbnailHoverMenu.prototype = {
     }
     _.each(this.signals, function (signal, key) {
       _.each(signal, function (id) {
-        if (_this10[key] && id) {
-          _this10[key].disconnect(id);
+        if (_this8[key] && id) {
+          _this8[key].disconnect(id);
         }
       });
     });
@@ -688,7 +672,7 @@ PopupMenuAppSwitcherItem.prototype = {
   __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
   _init: function _init(parent, params) {
-    var _this11 = this;
+    var _this9 = this;
 
     params = Params.parse(params, {
       hover: false,
@@ -723,7 +707,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.addActor(this.box);
 
     this.actor.connect('key-press-event', function (actor, e) {
-      return _this11._onKeyPress(actor, e);
+      return _this9._onKeyPress(actor, e);
     });
   },
 
@@ -814,7 +798,7 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   handleUnopenedPinnedApp: function handleUnopenedPinnedApp(metaWindow, windows) {
-    var _this12 = this;
+    var _this10 = this;
 
     var appClosed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
@@ -826,7 +810,7 @@ PopupMenuAppSwitcherItem.prototype = {
       this.metaWindowThumbnail = new WindowThumbnail(this, metaWindow, windows);
       this.appContainer.insert_actor(this.metaWindowThumbnail.actor, 0);
       setTimeout(function () {
-        return _this12.setStyleOptions(null);
+        return _this10.setStyleOptions(null);
       }, 0);
       // Update appThumbnails to remove old programs
       this.removeStaleWindowThumbnails(windows);
@@ -836,7 +820,7 @@ PopupMenuAppSwitcherItem.prototype = {
 
 
   _refresh: function _refresh() {
-    var _this13 = this;
+    var _this11 = this;
 
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
@@ -859,7 +843,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.reAdd = false;
     // used to make sure everything is on the stage
     setTimeout(function () {
-      return _this13.setStyleOptions(windows);
+      return _this11.setStyleOptions(windows);
     }, 0);
   },
 
@@ -941,11 +925,11 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   destroy: function destroy() {
-    var _this14 = this;
+    var _this12 = this;
 
     _.each(this.signals, function (signal, key) {
       _.each(signal, function (id) {
-        _this14[key].disconnect(id);
+        _this12[key].disconnect(id);
       });
     });
     for (var w = 0, len = this.appThumbnails.length; w < len; w++) {
@@ -975,7 +959,7 @@ function WindowThumbnail() {
 
 WindowThumbnail.prototype = {
   _init: function _init(parent, metaWindow, metaWindows) {
-    var _this15 = this;
+    var _this13 = this;
 
     this._applet = parent._applet;
     this.settings = parent._applet.settings;
@@ -1038,7 +1022,7 @@ WindowThumbnail.prototype = {
 
     if (this.metaWindow) {
       this.windowTitleId = this.metaWindow.connect('notify::title', function () {
-        _this15._label.text = _this15.metaWindow.get_title();
+        _this13._label.text = _this13.metaWindow.get_title();
       });
       this.windowFocusId = this.metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange));
       this._updateAttentionGrabber(null, null, this._applet.showAlerts);
@@ -1047,10 +1031,10 @@ WindowThumbnail.prototype = {
       this._trackerSignal = this.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
     }
     this.signals.actor.push(this.actor.connect('enter-event', function () {
-      return _this15.handleEnterEvent();
+      return _this13.handleEnterEvent();
     }));
     this.signals.actor.push(this.actor.connect('leave-event', function () {
-      return _this15.handleLeaveEvent();
+      return _this13.handleLeaveEvent();
     }));
     this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)));
     this.signals.actor.push(this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow)));
@@ -1163,7 +1147,7 @@ WindowThumbnail.prototype = {
   },
 
   _isFavorite: function _isFavorite(isFav) {
-    var _this16 = this;
+    var _this14 = this;
 
     var metaWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.metaWindow;
     var windows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.metaWindows;
@@ -1183,7 +1167,7 @@ WindowThumbnail.prototype = {
       this.actor.style = null;
       // HACK used to make sure everything is on the stage
       setTimeout(function () {
-        return _this16.thumbnailPaddingSize();
+        return _this14.thumbnailPaddingSize();
       }, 0);
       this._refresh(metaWindow, windows);
     }
@@ -1264,7 +1248,7 @@ WindowThumbnail.prototype = {
   },
 
   _refresh: function _refresh() {
-    var _this17 = this;
+    var _this15 = this;
 
     var metaWindow = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.metaWindow;
     var metaWindows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.metaWindows;
@@ -1276,42 +1260,42 @@ WindowThumbnail.prototype = {
       var divider = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 70;
       var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 16;
 
-      _this17.thumbnailWidth = Math.floor(monitor.width / divider * _this17._applet.thumbSize) + offset;
-      _this17.thumbnailHeight = Math.floor(monitor.height / divider * _this17._applet.thumbSize) + offset;
+      _this15.thumbnailWidth = Math.floor(monitor.width / divider * _this15._applet.thumbSize) + offset;
+      _this15.thumbnailHeight = Math.floor(monitor.height / divider * _this15._applet.thumbSize) + offset;
 
       var monitorSize, thumbnailSize;
-      if (_this17._applet.verticalThumbs) {
+      if (_this15._applet.verticalThumbs) {
         monitorSize = monitor.height;
-        thumbnailSize = _this17.thumbnailHeight;
+        thumbnailSize = _this15.thumbnailHeight;
       } else {
         monitorSize = monitor.width;
-        thumbnailSize = _this17.thumbnailWidth;
+        thumbnailSize = _this15.thumbnailWidth;
       }
 
-      if (_this17.metaWindows.length === 0) {
-        metaWindows = _this17.app.get_windows();
+      if (_this15.metaWindows.length === 0) {
+        metaWindows = _this15.app.get_windows();
       }
 
       if (thumbnailSize * metaWindows.length + thumbnailSize > monitorSize) {
-        var divideMultiplier = _this17._applet.verticalThumbs ? 3 : 1.1;
+        var divideMultiplier = _this15._applet.verticalThumbs ? 3 : 1.1;
         setThumbSize(divider * divideMultiplier, 16);
         return;
       } else {
-        if (_this17._applet.verticalThumbs) {
-          _this17.thumbnailActor.height = _this17.thumbnailHeight;
+        if (_this15._applet.verticalThumbs) {
+          _this15.thumbnailActor.height = _this15.thumbnailHeight;
         }
-        _this17.thumbnailActor.width = _this17.thumbnailWidth;
-        _this17._container.style = 'width: ' + Math.floor(_this17.thumbnailWidth - 16) + 'px';
+        _this15.thumbnailActor.width = _this15.thumbnailWidth;
+        _this15._container.style = 'width: ' + Math.floor(_this15.thumbnailWidth - 16) + 'px';
 
-        _this17.isFavapp = false;
+        _this15.isFavapp = false;
 
         // Replace the old thumbnail
-        _this17._label.text = _this17.metaWindow.get_title();
-        if (_this17._applet.showThumbs) {
-          _this17.thumbnail = _this17._getThumbnail();
-          _this17.thumbnailActor.child = _this17.thumbnail;
+        _this15._label.text = _this15.metaWindow.get_title();
+        if (_this15._applet.showThumbs) {
+          _this15.thumbnail = _this15._getThumbnail();
+          _this15.thumbnailActor.child = _this15.thumbnail;
         } else {
-          _this17.thumbnailActor.child = null;
+          _this15.thumbnailActor.child = null;
         }
       }
     };
@@ -1347,7 +1331,7 @@ WindowThumbnail.prototype = {
   },
 
   destroy: function destroy() {
-    var _this18 = this;
+    var _this16 = this;
 
     var skipSignalDisconnect = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -1373,14 +1357,14 @@ WindowThumbnail.prototype = {
     if (!skipSignalDisconnect) {
       _.each(this.signals, function (signal, key) {
         _.each(signal, function (id) {
-          if (_this18[key] && id) {
-            _this18[key].disconnect(id);
+          if (_this16[key] && id) {
+            _this16[key].disconnect(id);
           }
         });
       });
     }
     var refThumb = _.findIndex(this._parent.appThumbnails, function (thumb) {
-      return _.isEqual(thumb.metaWindow, _this18.metaWindow);
+      return _.isEqual(thumb.metaWindow, _this16.metaWindow);
     });
     if (refThumb !== -1) {
       _.pullAt(this._parent.appThumbnails, refThumb);
