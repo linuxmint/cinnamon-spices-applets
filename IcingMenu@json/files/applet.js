@@ -136,6 +136,7 @@ MyApplet.prototype = {
     } catch (e) {
       this.c32 = null;
     }
+    this.initializing = true;
 
     this.initial_load_done = false;
 
@@ -245,7 +246,7 @@ MyApplet.prototype = {
     // We shouldn't need to call refreshAll() here... since we get a 'icon-theme-changed' signal when CSD starts.
     // The reason we do is in case the Cinnamon icon theme is the same as the one specificed in GTK itself (in .config)
     // In that particular case we get no signal at all.
-    this._refreshAll();
+    this._refreshAll(this.initializing);
 
     St.TextureCache.get_default().connect('icon-theme-changed', Lang.bind(this, this.onIconThemeChanged));
     this._recalc_height();
@@ -303,25 +304,25 @@ MyApplet.prototype = {
   },
 
   onIconThemeChanged: function onIconThemeChanged() {
-    if (this.refreshing === false) {
+    if (!this.refreshing && !this.initializing) {
       this.refreshing = true;
       Mainloop.timeout_add_seconds(1, Lang.bind(this, this._refreshAll));
     }
   },
 
   onAppSysChanged: function onAppSysChanged() {
-    if (this.refreshing === false) {
+    if (!this.refreshing) {
       this.refreshing = true;
       Mainloop.timeout_add_seconds(1, Lang.bind(this, this._refreshAll));
     }
   },
 
-  _refreshAll: function _refreshAll() {
+  _refreshAll: function _refreshAll(init) {
     try {
       this._refreshApps();
       this._refreshFavs();
       this._refreshPlaces();
-      this._refreshRecent();
+      this._refreshRecent(init);
     } catch (exception) {
       global.log(exception);
     }
@@ -1328,8 +1329,10 @@ MyApplet.prototype = {
   _refreshRecent: function _refreshRecent() {
     var _this4 = this;
 
+    var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     if (this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)) {
-      if (this.recentButton == null) {
+      if (!this.recentButton) {
         this.recentButton = new RecentCategoryButton(null, this.showCategoryIcons);
         this._addEnterEvent(this.recentButton, Lang.bind(this, function () {
           if (!this.searchActive) {
@@ -1558,6 +1561,11 @@ MyApplet.prototype = {
 
     this._recalc_height();
     this._resizeApplicationsBox();
+    if (init) {
+      setTimeout(function () {
+        return _this4.initializing = false;
+      }, 4000);
+    }
   },
 
   _refreshApps: function _refreshApps() {
