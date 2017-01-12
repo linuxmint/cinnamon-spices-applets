@@ -440,3 +440,55 @@ msgstr "הקטן חלון"
 
 msgid "Restore"
 msgstr "שחזר"
+
+msgid "Use theme padding to center button icons"
+msgstr "השתמש ריפוד נושא למרכז סמלים כפתור"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr "אם סמלים כפתורים נראים מחוץ מרוכזים, החלפה זה עשויה לעזור."
+
+msgid "App button hover pseudo class"
+msgstr "בכיתה פסאודו לרחף אפליקציה '"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה על לרחף."
+
+msgid "App button focus pseudo class"
+msgstr "בכיתה פסאודו מוקד אפליקציה '"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "עוקף את הכיתה פסאודו עבור כפתור האפליקציה על המוקד."
+
+msgid "App button active pseudo class"
+msgstr "App כפתור בכיתה פסאודו פעילה"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה כאשר הם פעילים."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "השתמש בכיתה משגר לוח עבור יישומים המוצמדים"
+
+msgid "Enabling this helps with certain themes."
+msgstr "הפעלת המדיניות הזו מסייעת עם נושאים מסוימים."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "מקשי קיצור דרך עולמיים לרכיבה על אופניים דרך תפריטים ממוזערים"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "זה מאפשר לך לעבור בין התפריטים ללא הפעלת חלון."
+
+msgid "Update this applet automatically"
+msgstr "עדכון יישומון זה באופן אוטומטי"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+"כאשר אפשרות זו מופעלת, ITM יבדוק את Github משחרר על init, ויתחיל "
+"לשדרג אם זה מוצא גרסה חדשה יותר."
+
+msgid "Theme Settings"
+msgstr "הגדרות נושא"
+
+msgid "ITM Settings"
+msgstr "הגדרות ITM"

@@ -32,6 +32,12 @@ MyApplet._init, signal (switch-workspace) -> _onSwitchWorkspace -> AppList
 AppList.prototype = {
   _init: function _init(applet, metaWorkspace) {
     this._applet = applet;
+    this.settings = applet.settings;
+    this.signals = {
+      actor: [],
+      settings: [],
+      metaWorkspace: []
+    };
     this.metaWorkspace = metaWorkspace;
     this.actor = new St.BoxLayout();
 
@@ -53,12 +59,13 @@ AppList.prototype = {
 
     this.appList = [];
     this.lastFocusedApp = null;
+    this.lastCycled = null;
 
     // Connect all the signals
     this._setSignals();
     this._refreshList(true);
 
-    this.actor.connect('style-changed', Lang.bind(this, this._updateSpacing));
+    this.signals.actor.push(this.actor.connect('style-changed', Lang.bind(this, this._updateSpacing)));
 
     this.on_orientation_changed(this._applet.orientation, true);
   },
@@ -110,7 +117,7 @@ AppList.prototype = {
     }
 
     if (!init) {
-      this._applet.settings.setValue('vertical-thumbnails', isVertical);
+      this.settings.setValue('vertical-thumbnails', isVertical);
     }
 
     _.each(containerChildren, function (child, key) {
@@ -125,6 +132,13 @@ AppList.prototype = {
       this._updateSpacing();
     }
   },
+
+  _closeAllHoverMenus: function _closeAllHoverMenus() {
+    for (var i = 0, len = this.appList.length; i < len; i++) {
+      this.appList[i].appGroup.hoverMenu.close();
+    }
+  },
+
 
   _onAppKeyPress: function _onAppKeyPress(number) {
     if (number > this.appList.length) {
@@ -153,19 +167,47 @@ AppList.prototype = {
     }, this._applet.showAppsOrderTimeout);
   },
 
+  _cycleMenus: function _cycleMenus() {
+    var _this2 = this;
+
+    var refApp = 0;
+    if (!this.lastCycled && this.lastFocusedApp) {
+      refApp = _.findIndex(this.appList, { id: this.lastFocusedApp });
+    }
+    if (this.lastCycled) {
+      this.appList[this.lastCycled].appGroup.hoverMenu.close();
+      refApp = this.lastCycled + 1;
+    }
+    if (refApp === this.lastCycled) {
+      refApp = this.lastCycled + 1;
+    }
+    this.lastCycled = refApp;
+    if (refApp > this.appList.length - 1) {
+      refApp = 0;
+      this.lastCycled = 0;
+    }
+    if (this.appList[refApp].appGroup.metaWindows.length > 0) {
+      this.appList[refApp].appGroup.hoverMenu.open();
+    } else {
+      setTimeout(function () {
+        return _this2._cycleMenus();
+      }, 0);
+    }
+  },
+
+
   _updateSpacing: function _updateSpacing() {
     this.manager.set_spacing(this._applet.iconSpacing * global.ui_scale);
   },
 
   _setSignals: function _setSignals() {
-    this.signals = [];
     // We use connect_after so that the window-tracker time to identify the app
-    this.signals.push(this.metaWorkspace.connect_after('window-added', Lang.bind(this, this._windowAdded)));
-    this.signals.push(this.metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved)));
+    this.signals.metaWorkspace.push(this.metaWorkspace.connect_after('window-added', Lang.bind(this, this._windowAdded)));
+    this.signals.metaWorkspace.push(this.metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved)));
 
-    this._applet.settings.connect('changed::show-pinned', Lang.bind(this, this._refreshList));
-    this._applet.settings.connect('changed::icon-spacing', Lang.bind(this, this._updateSpacing));
-    global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.signals.settings.push(this.settings.connect('changed::show-pinned', Lang.bind(this, this._refreshList)));
+    this.signals.settings.push(this.settings.connect('changed::icon-spacing', Lang.bind(this, this._updateSpacing)));
+    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
   },
 
   _setLastFocusedApp: function _setLastFocusedApp(id) {
@@ -239,7 +281,12 @@ AppList.prototype = {
       this.appList[refApp].time = time;
 
       var refPos = opts.favPos ? opts.favPos : refApp;
-      this.manager_container.set_child_at_index(appGroup.actor, refPos);
+
+      this.appList.splice(refPos, 0, this.appList.splice(refApp, 1)[0]);
+
+      for (var i = 0, len = this.appList.length; i < len; i++) {
+        this.manager_container.set_child_at_index(this.appList[i].appGroup.actor, i);
+      }
     } else if (opts.favChange) {
       this._applet.refreshCurrentAppList();
     }
@@ -247,7 +294,7 @@ AppList.prototype = {
 
 
   _loadFavorites: function _loadFavorites(init) {
-    if (!this._applet.settings.getValue('show-pinned')) {
+    if (!this.settings.getValue('show-pinned')) {
       return;
     }
     var launchers = this._applet.pinned_app_contr()._getIds();
@@ -273,7 +320,7 @@ AppList.prototype = {
   },
 
   _windowAdded: function _windowAdded(metaWorkspace, metaWindow, favapp, isFavapp) {
-    var _this2 = this;
+    var _this3 = this;
 
     var forceUngroupedWindow = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
 
@@ -306,20 +353,20 @@ AppList.prototype = {
       var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
       var time = Date.now();
-      var appGroup = new AppGroup.AppGroup(_this2._applet, _this2, app, isFavapp, window, time, index, appId);
+      var appGroup = new AppGroup.AppGroup(_this3._applet, _this3, app, isFavapp, window, time, index, appId);
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
       appGroup.watchWorkspace(metaWorkspace); // disable for windows to stay persistent across ws'
 
-      app.connect_after('windows-changed', Lang.bind(_this2, _this2._onAppWindowsChanged, app));
+      app.connect_after('windows-changed', Lang.bind(_this3, _this3._onAppWindowsChanged, app));
 
-      _this2.appList.push({
+      _this3.appList.push({
         id: appId,
         appGroup: appGroup,
         timeStamp: time,
         ungroupedIndex: index
       });
 
-      if (_this2._applet.settings.getValue('title-display') === App.TitleDisplay.Focused) {
+      if (_this3.settings.getValue('title-display') === App.TitleDisplay.Focused) {
         appGroup.hideAppButtonLabel(false);
       }
     };
@@ -454,11 +501,16 @@ AppList.prototype = {
   },
 
   destroy: function destroy() {
-    for (var i = 0, len = this.signals.length; i < len; i++) {
-      this.metaWorkspace.disconnect(this.signals[i]);
-    }
-    for (var _i2 = 0, _len2 = this.appList.length; _i2 < _len2; _i2++) {
-      this.appList[_i2].appGroup.destroy();
+    var _this4 = this;
+
+    _.each(this.signals, function (signal, key) {
+      _.each(signal, function (id) {
+        _this4[key].disconnect(id);
+      });
+    });
+    global.settings.disconnect(this.panelEditId);
+    for (var i = 0, len = this.appList.length; i < len; i++) {
+      this.appList[i].appGroup.destroy();
     }
     this.appList.destroy();
     this.appList = null;

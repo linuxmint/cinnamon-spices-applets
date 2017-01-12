@@ -476,3 +476,65 @@ msgstr "Restaurer"
 
 msgid "Restore"
 msgstr "Recharger"
+
+msgid "Use theme padding to center button icons"
+msgstr "Utiliser le rembourrage de thème pour les icônes de bouton central"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr "" 
+"Si les icônes des boutons sont désaxées, la modification de "
+"cette option peut vous aider."
+
+msgid "App button hover pseudo class"
+msgstr "App bouton hover pseudo classe"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr ""
+"Remplace la pseudo-classe pour les boutons d'application en "
+"vol stationnaire."
+
+msgid "App button focus pseudo class"
+msgstr "Pseudo-classe"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr ""
+"Remplace la pseudo-classe pour le bouton de l'application sur "
+"la mise au point."
+
+msgid "App button active pseudo class"
+msgstr "Pseudo-classe active de l'application"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+"Remplace la pseudo-classe des boutons d'application lorsqu'ils "
+"sont actifs."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr ""
+"Utiliser la classe de lanceur de panneau pour les applications "
+"épinglées"
+
+msgid "Enabling this helps with certain themes."
+msgstr "L'activation de cette fonction aide certains thèmes."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Touche de raccourci globale pour parcourir les menus de vignettes"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "Cela vous permet de faire défiler les menus sans activer de fenêtre."
+
+msgid "Update this applet automatically"
+msgstr "Mettre à jour cette applet automatiquement"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+"Lorsque cette option est activée, ITM vérifie les versions de "
+"Github sur init et commence la mise à niveau si elle trouve une version plus récente."
+
+msgid "Theme Settings"
+msgstr "Réglage des thèmes"
+
+msgid "ITM Settings"
+msgstr "Paramètres ITM"

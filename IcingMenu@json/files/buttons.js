@@ -8,13 +8,14 @@ var AppFavorites = imports.ui.appFavorites;
 var Gtk = imports.gi.Gtk;
 var Atk = imports.gi.Atk;
 var Gio = imports.gi.Gio;
+var Lang = imports.lang;
 var FileUtils = imports.misc.fileUtils;
 var Util = imports.misc.util;
 var DND = imports.ui.dnd;
 var Meta = imports.gi.Meta;
 var GLib = imports.gi.GLib;
 var Pango = imports.gi.Pango;
-var l = imports.applet._;
+var clog = imports.applet.clog;
 
 var MAX_FAV_ICON_SIZE = 32;
 var CATEGORY_ICON_SIZE = 22;
@@ -24,14 +25,14 @@ var MAX_BUTTON_WIDTH = 'max-width: 20em;';
 
 var USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 
-function ApplicationContextMenuItem(appButton, label, action) {
-  this._init(appButton, label, action);
+function ApplicationContextMenuItem(appButton, label, action, iconName) {
+  this._init(appButton, label, action, iconName);
 }
 
 ApplicationContextMenuItem.prototype = {
   __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
-  _init: function _init(appButton, label, action) {
+  _init: function _init(appButton, label, action, iconName) {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
       focusOnHover: false
     });
@@ -41,6 +42,18 @@ ApplicationContextMenuItem.prototype = {
     this.label = new St.Label({
       text: label
     });
+    if (iconName !== null) {
+      this.icon = new St.Icon({
+        icon_name: iconName,
+        icon_size: 12,
+        icon_type: St.IconType.SYMBOLIC
+      });
+      if (this.icon) {
+        this.addActor(this.icon);
+        this.icon.realize();
+      }
+    }
+
     this.addActor(this.label);
   },
 
@@ -65,8 +78,11 @@ ApplicationContextMenuItem.prototype = {
         var destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this._appButton.app.get_id());
         try {
           file.copy(destFile, 0, null, function () {});
-          // Need to find a way to do that using the Gio library, but modifying the access::can-execute attribute on the file object seems unsupported
-          Util.spawnCommandLine('chmod +x \'' + USER_DESKTOP_PATH + '/' + this._appButton.app.get_id() + '\'');
+          try {
+            FileUtils.changeModeGFile(destFile, 755);
+          } catch (e) {
+            Util.spawnCommandLine('chmod +x \'' + USER_DESKTOP_PATH + '/' + this._appButton.app.get_id() + '\'');
+          }
         } catch (e) {
           global.log(e);
         }
@@ -172,36 +188,36 @@ GenericApplicationButton.prototype = {
       for (var i = 0, len = children.length; i < len; i++) {
         this.menu.box.remove_actor(children[i]);
       }
-      var menuItem = void 0;
-      menuItem = new ApplicationContextMenuItem(this, _('Add to panel'), 'add_to_panel');
+      var menuItem;
+      menuItem = new ApplicationContextMenuItem(this, _('Add to panel'), 'add_to_panel', 'list-add');
       this.menu.addMenuItem(menuItem);
       if (USER_DESKTOP_PATH) {
-        menuItem = new ApplicationContextMenuItem(this, _('Add to desktop'), 'add_to_desktop');
+        menuItem = new ApplicationContextMenuItem(this, _('Add to desktop'), 'add_to_desktop', 'computer');
         this.menu.addMenuItem(menuItem);
       }
       if (AppFavorites.getAppFavorites().isFavorite(this.app.get_id())) {
-        menuItem = new ApplicationContextMenuItem(this, _('Remove from favorites'), 'remove_from_favorites');
+        menuItem = new ApplicationContextMenuItem(this, _('Remove from favorites'), 'remove_from_favorites', 'starred');
         this.menu.addMenuItem(menuItem);
       } else {
-        menuItem = new ApplicationContextMenuItem(this, _('Add to favorites'), 'add_to_favorites');
+        menuItem = new ApplicationContextMenuItem(this, _('Add to favorites'), 'add_to_favorites', 'non-starred');
         this.menu.addMenuItem(menuItem);
       }
       if (this.appsMenuButton._canUninstallApps) {
-        menuItem = new ApplicationContextMenuItem(this, _('Uninstall'), 'uninstall');
+        menuItem = new ApplicationContextMenuItem(this, _('Uninstall'), 'uninstall', 'edit-delete');
         this.menu.addMenuItem(menuItem);
       }
       if (this.appsMenuButton._isBumblebeeInstalled) {
-        menuItem = new ApplicationContextMenuItem(this, _('Run with nVidia GPU'), 'run_with_nvidia_gpu');
+        menuItem = new ApplicationContextMenuItem(this, _('Run with nVidia GPU'), 'run_with_nvidia_gpu', 'cpu');
         this.menu.addMenuItem(menuItem);
       }
     }
     this.menu.toggle();
   },
 
-  _subMenuOpenStateChanged: function _subMenuOpenStateChanged() {
-    if (this.menu.isOpen) {
+  _subMenuOpenStateChanged: function _subMenuOpenStateChanged(recentContextMenu) {
+    if (recentContextMenu.isOpen) {
       this.appsMenuButton._activeContextMenuParent = this;
-      this.appsMenuButton._scrollToButton(this.menu);
+      this.appsMenuButton._scrollToButton(recentContextMenu);
     } else {
       this.appsMenuButton._activeContextMenuItem = null;
       this.appsMenuButton._activeContextMenuParent = null;
@@ -209,7 +225,18 @@ GenericApplicationButton.prototype = {
   },
 
   get _contextIsOpen() {
-    return this.menu.isOpen;
+    return this.appsMenuButton.recentContextMenu !== null && this.appsMenuButton.recentContextMenu.isOpen;
+  },
+
+  destroy: function destroy() {
+    this.file = null;
+    this.appsMenuButton = null;
+    this.label.destroy();
+    if (this.icon) {
+      this.icon.destroy();
+    }
+
+    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
 
@@ -559,7 +586,7 @@ function RecentButton(appsMenuButton, file, showIcon) {
 }
 
 RecentButton.prototype = {
-  __proto__: PopupMenu.PopupSubMenuMenuItem.prototype,
+  __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
   _init: function _init(appsMenuButton, file, showIcon) {
     var _this3 = this;
@@ -567,9 +594,11 @@ RecentButton.prototype = {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
       hover: false
     });
-    this.file = file;
+    this.mimeType = file.mimeType;
+    this.uri = file.uri;
+    this.uriDecoded = file.uriDecoded;
     this.appsMenuButton = appsMenuButton;
-    this.button_name = this.file.name;
+    this.button_name = file.name;
     this.actor.set_style_class_name('menu-application-button');
     this.actor._delegate = this;
     this.label = new St.Label({
@@ -606,12 +635,13 @@ RecentButton.prototype = {
   },
 
   activate: function activate(event) {
-    this.file.launch();
+    Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
     this.appsMenuButton.menu.close();
   },
 
   activateContextMenus: function activateContextMenus(event) {
-    if (!this.menu.isOpen) {
+    var menu = this.appsMenuButton.recentContextMenu;
+    if (menu !== null && menu.isOpen) {
       this.appsMenuButton.closeContextMenus(this, true);
     }
     this.toggleMenu();
@@ -628,73 +658,93 @@ RecentButton.prototype = {
   toggleMenu: function toggleMenu() {
     var _this4 = this;
 
-    if (!this.menu.isOpen) {
-      var handleAddRecentContextMenuItem;
+    if (this.appsMenuButton.recentContextMenu === null) {
+      var _menu = new PopupMenu.PopupSubMenu(this.actor);
+      _menu.actor.set_style_class_name('menu-context-menu');
+      _menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+      this.appsMenuButton.recentContextMenu = _menu;
+    }
+
+    var menu = this.appsMenuButton.recentContextMenu;
+
+    if (!menu.isOpen) {
+      var i;
 
       (function () {
-        var children = _this4.menu.box.get_children();
-        for (var i = 0, len = children.length; i < len; i++) {
-          _this4.menu.box.remove_actor(children[i]);
+        var parent = menu.actor.get_parent();
+        if (parent !== null) {
+          parent.remove_child(menu.actor);
         }
+
+        menu.sourceActor = _this4.actor;
+        _this4.actor.get_parent().insert_child_above(menu.actor, _this4.actor);
+
+        var children = menu.box.get_children();
+        for (i in children) {
+          menu.box.remove_actor(children[i]);
+        }
+
         var menuItem = void 0;
 
-        menuItem = new PopupMenu.PopupMenuItem(_('Open with'), {
+        menuItem = new PopupMenu.PopupMenuItem(_("Open with"), {
           reactive: false
         });
-        menuItem.actor.style = 'font-weight: bold';
-        _this4.menu.addMenuItem(menuItem);
+        menuItem.actor.style = "font-weight: bold";
+        menu.addMenuItem(menuItem);
 
-        var file = Gio.File.new_for_uri(_this4.file.uri);
+        var file = Gio.File.new_for_uri(_this4.uri);
 
-        var default_info = Gio.AppInfo.get_default_for_type(_this4.file.mimeType, !_this4.hasLocalPath(file));
+        var default_info = Gio.AppInfo.get_default_for_type(_this4.mimeType, !_this4.hasLocalPath(file));
 
         if (default_info) {
-          menuItem = new RecentContextMenuItem(_this4, default_info.get_display_name(), false, function () {
+          menuItem = new RecentContextMenuItem(_this4, default_info.get_display_name(), false, Lang.bind(_this4, function () {
             default_info.launch([file], null, null);
-            _this4.toggleMenu();
-            _this4.appsMenuButton.menu.close();
-          });
-          _this4.menu.addMenuItem(menuItem);
+            this.toggleMenu();
+            this.appsMenuButton.menu.close();
+          }));
+          menu.addMenuItem(menuItem);
         }
 
-        var infos = Gio.AppInfo.get_all_for_type(_this4.file.mimeType);
+        var infos = Gio.AppInfo.get_all_for_type(_this4.mimeType);
 
-        handleAddRecentContextMenuItem = function handleAddRecentContextMenuItem(info) {
-          menuItem = new RecentContextMenuItem(_this4, info.get_display_name(), false, function () {
-            info.launch([file], null, null);
-            _this4.toggleMenu();
-            _this4.appsMenuButton.menu.close();
-          });
-          _this4.menu.addMenuItem(menuItem);
-        };
-
-        for (var _i = 0, _len = infos.length; _i < _len; _i++) {
+        var _loop = function _loop(_i) {
           var info = infos[_i];
 
-          file = Gio.File.new_for_uri(_this4.file.uri);
+          file = Gio.File.new_for_uri(_this4.uri);
 
           if (!_this4.hasLocalPath(file) && !info.supports_uris()) {
-            continue;
+            return 'continue';
           }
 
           if (info.equal(default_info)) {
-            continue;
+            return 'continue';
           }
 
-          handleAddRecentContextMenuItem(info);
+          menuItem = new RecentContextMenuItem(_this4, info.get_display_name(), false, Lang.bind(_this4, function () {
+            info.launch([file], null, null);
+            this.toggleMenu();
+            this.appsMenuButton.menu.close();
+          }));
+          menu.addMenuItem(menuItem);
+        };
+
+        for (var _i = 0; _i < infos.length; _i++) {
+          var _ret2 = _loop(_i);
+
+          if (_ret2 === 'continue') continue;
         }
 
-        if (GLib.find_program_in_path('nemo-open-with') !== null) {
-          menuItem = new RecentContextMenuItem(_this4, _('Other application...'), false, function () {
-            Util.spawnCommandLine('nemo-open-with ' + _this4.file.uri);
-            _this4.toggleMenu();
-            _this4.appsMenuButton.menu.close();
-          });
-          _this4.menu.addMenuItem(menuItem);
+        if (GLib.find_program_in_path("nemo-open-with") != null) {
+          menuItem = new RecentContextMenuItem(_this4, _("Other application..."), false, Lang.bind(_this4, function () {
+            Util.spawnCommandLine("nemo-open-with " + this.uri);
+            this.toggleMenu();
+            this.appsMenuButton.menu.close();
+          }));
+          menu.addMenuItem(menuItem);
         }
       })();
     }
-    this.menu.toggle();
+    this.appsMenuButton.recentContextMenu.toggle();
   },
 
   _subMenuOpenStateChanged: function _subMenuOpenStateChanged() {
@@ -799,6 +849,18 @@ RecentClearButton.prototype = {
     this.appsMenuButton.menu.close();
     var GtkRecent = new Gtk.RecentManager();
     GtkRecent.purge_items();
+  }
+};
+
+function NoRecentDocsButton() {
+  this._init();
+}
+
+NoRecentDocsButton.prototype = {
+  __proto__: GenericButton.prototype,
+
+  _init: function _init() {
+    GenericButton.prototype._init.call(this, _('No recent documents'), null, false, null);
   }
 };
 

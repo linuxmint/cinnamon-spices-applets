@@ -1,4 +1,27 @@
 {
+  "IcingMenu": {
+    "type": "header",
+    "description": "Icing Menu Settings"
+  },
+  "seperator0": {
+    "type": "separator"
+  },
+  "autoUpdate": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Update this applet automatically",
+    "tooltip": "When enabled, ITM will check the Github releases on init, and will start to upgrade if it finds a newer version."
+  },
+  "header0": {
+    "type": "header",
+    "description": "Menu Entries"
+  },
+  "menu-editor-button": {
+    "type": "button",
+    "description": "Open the menu editor",
+    "callback": "_launch_editor",
+    "tooltip": "Press this button to customize your menu entries."
+  },
   "header1": {
     "type": "header",
     "description": "Panel Appearance"
@@ -141,11 +164,5 @@
     "default": true,
     "description": "Show bookmarks and places",
     "tooltip": "Choose whether or not to show bookmarks and places in the menu."
-  },
-  "menu-editor-button": {
-    "type": "button",
-    "description": "Open the menu editor",
-    "callback": "_launch_editor",
-    "tooltip": "Press this button to customize your menu entries."
   }
 }

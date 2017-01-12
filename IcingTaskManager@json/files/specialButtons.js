@@ -24,6 +24,8 @@ var TitleDisplay = {
   Focused: 4
 };
 
+var pseudoOptions = [{ id: 1, label: 'hover' }, { id: 2, label: 'focus' }, { id: 3, label: 'active' }, { id: 4, label: 'outlined' }, { id: 5, label: 'selected' }];
+
 // Creates a button with an icon and a label.
 // The label text must be set with setText
 // @icon: the icon to be displayed
@@ -41,6 +43,7 @@ IconLabelButton.prototype = {
     }
     this._parent = parent;
     this._applet = parent._applet;
+    this.settings = this._applet.settings;
     this._icon = parent.icon;
     this.actor = new St.Bin({
       style_class: 'window-list-item-box app-list-item-box',
@@ -52,6 +55,11 @@ IconLabelButton.prototype = {
     });
     this.actor.height = parent._applet._panelHeight;
     this.actor._delegate = this;
+    this.signals = {
+      _container: [],
+      settings: [],
+      actor: []
+    };
     this.metaWorkspaces = [];
 
     // We do a fancy layout with icons and labels, so we'd like to do our own allocation
@@ -70,9 +78,9 @@ IconLabelButton.prototype = {
       this.actor.add_style_class_name('right');
     }
     this.actor.set_child(this._container);
-    this._container.connect('get-preferred-width', Lang.bind(this, this._getPreferredWidth));
-    this._container.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight));
-    this._container.connect('allocate', Lang.bind(this, this._allocate));
+    this.signals._container.push(this._container.connect('get-preferred-width', Lang.bind(this, this._getPreferredWidth)));
+    this.signals._container.push(this._container.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight)));
+    this.signals._container.push(this._container.connect('allocate', Lang.bind(this, this._allocate)));
 
     this._label = new St.Label({
       style_class: 'app-button-label'
@@ -90,10 +98,10 @@ IconLabelButton.prototype = {
     }, 0);
     this.setIconSize();
 
-    global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-    this._applet.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding));
-    this._applet.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize));
-    this._applet.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize));
+    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
+    this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)));
+    this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)));
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
@@ -101,13 +109,18 @@ IconLabelButton.prototype = {
   },
 
   setIconPadding: function setIconPadding(init) {
-    if (init) {
+    if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node();
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
       this.offsetPadding = themePadding > 10 ? _.round(themePadding / 4) : themePadding > 7 ? _.round(themePadding / 2) : 5;
     }
     if (this._applet.orientation === St.Side.TOP || this._applet.orientation == St.Side.BOTTOM) {
-      var padding = this._applet.iconPadding <= 5 ? [(this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1) + 'px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4) + 'px'];
+      var padding;
+      if (this._applet.themePadding) {
+        padding = padding = this._applet.iconPadding <= 5 ? [(this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1) + 'px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4) + 'px'];
+      } else {
+        padding = this._applet.iconPadding <= 5 ? ['6px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - 5 + 'px'];
+      }
       this.actor.set_style('padding-bottom: 0px;padding-top:0px; padding-left: ' + padding[0] + ';padding-right: ' + padding[1] + ';');
     }
   },
@@ -149,7 +162,7 @@ IconLabelButton.prototype = {
       return;
     }
     if (this._applet.showActive) {
-      this.actor.remove_style_pseudo_class('active');
+      this.actor.remove_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.activePseudoClass }).label);
     }
     this.actor.add_style_class_name('window-list-item-demands-attention');
     if (counter < 4) {
@@ -157,7 +170,7 @@ IconLabelButton.prototype = {
         if (_this2.actor.has_style_class_name('window-list-item-demands-attention')) {
           _this2.actor.remove_style_class_name('window-list-item-demands-attention');
           if (_this2._applet.showActive) {
-            _this2.actor.add_style_pseudo_class('active');
+            _this2.actor.add_style_pseudo_class(_.find(pseudoOptions, { id: _this2._applet.activePseudoClass }).label);
           }
         }
         setTimeout(function () {
@@ -353,14 +366,35 @@ AppButton.prototype = {
 
     this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
     this._updateAttentionGrabber(null, null, this._applet.showAlerts);
-    this._applet.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber));
+    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)));
   },
 
+  _onEnter: function _onEnter() {
+    this.actor.add_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.hoverPseudoClass }).label);
+  },
+  _onLeave: function _onLeave() {
+    var _this3 = this;
+
+    if (this.metaWindows.length > 0 && (this._applet.activePseudoClass === 1 || this._applet.focusPseudoClass === 1 && this._hasFocus())) {
+      setTimeout(function () {
+        return _this3.actor.add_style_pseudo_class('hover');
+      }, 0);
+    } else if (this._applet.hoverPseudoClass > 1) {
+      if (this._applet.hoverPseudoClass === this._applet.activePseudoClass && this.metaWindows.length > 0) {
+        return;
+      }
+      setTimeout(function () {
+        return _this3.actor.remove_style_pseudo_class(_.find(pseudoOptions, { id: _this3._applet.hoverPseudoClass }).label);
+      }, 0);
+    }
+  },
   setActiveStatus: function setActiveStatus(windows) {
     if (windows.length > 0) {
-      this.actor.add_style_pseudo_class('active');
+      this.actor.add_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.activePseudoClass }).label);
     } else {
-      this.actor.remove_style_pseudo_class('active');
+      this.actor.remove_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.activePseudoClass }).label);
     }
   },
 
@@ -374,15 +408,15 @@ AppButton.prototype = {
     // If any of the windows associated with our app have focus,
     // we should set ourselves to active
     if (this._hasFocus()) {
-      this.actor.add_style_pseudo_class('focus');
+      this.actor.add_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.focusPseudoClass }).label);
       this.actor.remove_style_class_name('window-list-item-demands-attention');
       this.actor.remove_style_class_name('window-list-item-demands-attention-top');
       this._needsAttention = false;
     } else {
-      this.actor.remove_style_pseudo_class('focus');
-      if (this._applet.showActive && this.metaWindows.length > 0) {
-        this.actor.add_style_pseudo_class('active');
-      }
+      this.actor.remove_style_pseudo_class(_.find(pseudoOptions, { id: this._applet.focusPseudoClass }).label);
+      /*if (this._applet.showActive && this.metaWindows.length > 0) {
+        this.actor.add_style_pseudo_class('active')
+      }*/
     }
   },
 
@@ -391,6 +425,8 @@ AppButton.prototype = {
   },
 
   _hasFocus: function _hasFocus() {
+    var _this4 = this;
+
     var workspaceIds = [];
 
     for (var i = 0, len = this.metaWorkspaces.length; i < len; i++) {
@@ -398,7 +434,7 @@ AppButton.prototype = {
     }
 
     var windows = _.filter(this.metaWindows, function (win) {
-      return workspaceIds.indexOf(win.get_workspace().index()) >= 0;
+      return workspaceIds.indexOf(_this4._applet.currentWs) >= 0;
     });
 
     var hasTransient = false;
@@ -449,19 +485,39 @@ AppButton.prototype = {
 
   _isFavorite: function _isFavorite(isFav) {
     this.isFavapp = isFav;
-    if (this._applet.orientation == St.Side.TOP) {
-      this.actor.add_style_class_name('window-list-item-box-top');
-    } else if (this._applet.orientation == St.Side.BOTTOM) {
-      this.actor.add_style_class_name('window-list-item-box-bottom');
-    } else if (this._applet.orientation == St.Side.LEFT) {
-      this.actor.add_style_class_name('window-list-item-box-left');
-    } else if (this._applet.orientation == St.Side.RIGHT) {
-      this.actor.add_style_class_name('window-list-item-box-right');
+    if (isFav && this._applet.panelLauncherClass) {
+      if (this._applet.orientation === St.Side.LEFT || this._applet.orientation === St.Side.RIGHT) {
+        this.setStyle('panel-launcher-vertical');
+      } else {
+        this.setStyle('panel-launcher');
+      }
+      this._label.text = '';
+    } else {
+      if (this._applet.panelLauncherClass) {
+        this.setStyle('window-list-item-box');
+      }
+      if (this._applet.orientation == St.Side.TOP) {
+        this.actor.add_style_class_name('window-list-item-box-top');
+      } else if (this._applet.orientation == St.Side.BOTTOM) {
+        this.actor.add_style_class_name('window-list-item-box-bottom');
+      } else if (this._applet.orientation == St.Side.LEFT) {
+        this.actor.add_style_class_name('window-list-item-box-left');
+      } else if (this._applet.orientation == St.Side.RIGHT) {
+        this.actor.add_style_class_name('window-list-item-box-right');
+      }
     }
   },
 
   destroy: function destroy() {
+    var _this5 = this;
+
     this._applet.tracker.disconnect(this._trackerSignal);
+    _.each(this.signals, function (signal, key) {
+      _.each(signal, function (id) {
+        _this5[key].disconnect(id);
+      });
+    });
+    global.settings.disconnect(this.panelEditId);
     this._container.destroy_children();
     this._container.destroy();
     this.actor.destroy();

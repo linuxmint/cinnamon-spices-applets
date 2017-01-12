@@ -434,3 +434,53 @@ msgstr "取消最大化"
 
 msgid "Restore"
 msgstr "恢复"
+
+msgid "Use theme padding to center button icons"
+msgstr "使用主题填充中心按钮图标"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr "如果按钮图标看起来偏心，切换这可能有所帮助。"
+
+msgid "App button hover pseudo class"
+msgstr "App按钮悬停伪类"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "覆盖悬停时应用按钮的伪类。"
+
+msgid "App button focus pseudo class"
+msgstr "App按钮焦点伪类"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "覆盖焦点上的app按钮的伪类。"
+
+msgid "App button active pseudo class"
+msgstr "App按钮激活伪类"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "当应用按钮处于活动状态时覆盖应用按钮的伪类。"
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "对固定应用使用面板启动器类"
+
+msgid "Enabling this helps with certain themes."
+msgstr "启用此功能有助于确定某些主题。"
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "循环通过缩略图菜单的全局热键"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "这允许您在不激活窗口的情况下循环浏览菜单。"
+
+msgid "Update this applet automatically"
+msgstr "自动更新此applet"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr "当启用时，ITM将在init上检查Github版本，如果找到较新的版本，它将开始升级。"
+
+msgid "Theme Settings"
+msgstr "主题设置"
+
+msgid "ITM Settings"
+msgstr "ITM设置"

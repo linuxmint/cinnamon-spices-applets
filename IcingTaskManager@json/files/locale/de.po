@@ -464,3 +464,61 @@ msgstr "Zurücksetzen"
 
 msgid "Restore"
 msgstr "Wiederherstellen"
+
+msgid "Use theme padding to center button icons"
+msgstr "Verwenden Sie das Motiv-Padding, um Schaltflächen-Icons zu zentrieren"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+"Wenn die Schaltflächensymbole nicht zentriert aussehen, kann "
+"das Umschalten hilfreich sein."
+
+msgid "App button hover pseudo class"
+msgstr "App-Taste schweben Pseudoklasse"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Überschreibt die Pseudoklasse für App-Schaltflächen auf hover."
+
+msgid "App button focus pseudo class"
+msgstr "App-Schaltfläche Fokus Pseudo-Klasse"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Überschreibt die Pseudoklasse für App-Schaltfläche auf Fokus."
+
+msgid "App button active pseudo class"
+msgstr "App-Taste aktive Pseudoklasse"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+"Überschreibt die Pseudoklasse für App-Schaltflächen, wenn sie aktiv "
+"sind."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Verwenden Sie die Panel-Launcher-Klasse für gepinnte Apps"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Dies hilft bei bestimmten Themen."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Globaler Hotkey zum Durchlaufen von Thumbnailmenüs"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr ""
+"Dadurch können Sie durch die Menüs navigieren, ohne ein Fenster zu "
+"aktivieren."
+
+msgid "Update this applet automatically"
+msgstr "Dieses Applet automatisch aktualisieren"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr "" 
+"Wenn diese Option aktiviert ist, prüft ITM die Github-Versionen "
+"auf init und beginnt zu aktualisieren, wenn sie eine neuere Version findet."
+
+msgid "Theme Settings"
+msgstr "Themen Einstellungen"
+
+msgid "ITM Settings"
+msgstr "ITM-Einstellungen"

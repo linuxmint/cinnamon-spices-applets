@@ -447,3 +447,59 @@ msgstr "Разуголемяване"
 
 msgid "Restore"
 msgstr "Възстановяване"
+
+msgid "Use theme padding to center button icons"
+msgstr "Използвайте тема подложка, за да центрирате икони на бутони"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+"Ако иконите на бутоните изглеждат извън центъра, позволява да "
+"се превключва това може да помогне."
+
+msgid "App button hover pseudo class"
+msgstr "App бутон навъртам псевдо клас"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Overrides псевдо класа за приложението бутони на висене."
+
+msgid "App button focus pseudo class"
+msgstr "App бутон фокус псевдо клас"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Overrides псевдо класа за бутон приложение на фокус."
+
+msgid "App button active pseudo class"
+msgstr "Бутон App активна псевдо клас"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "Overrides псевдо класа за бутони за приложения, когато те са активни."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Използвайте класа панел стартер за фиксирани приложения"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Разрешаването на това помага с определени теми."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Global клавишна комбинация за колоездене през миниатюрни менюта"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr ""
+"Това ви позволява да преминете през менютата без активиране на "
+"прозореца."
+
+msgid "Update this applet automatically"
+msgstr "Актуализиране на този аплет автоматично"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+"Когато е активиран, ITM ще провери GitHub пуска на първоначален, "
+"и ще започне да ъпгрейд, ако установи по-нова версия."
+
+msgid "Theme Settings"
+msgstr "Настройки тема"
+
+msgid "ITM Settings"
+msgstr "Настройки Двамата ръководители"

@@ -414,3 +414,53 @@ msgstr ""
 
 msgid "Restore"
 msgstr ""
+
+msgid "Use theme padding to center button icons"
+msgstr ""
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+
+msgid "App button hover pseudo class"
+msgstr ""
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr ""
+
+msgid "App button focus pseudo class"
+msgstr ""
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr ""
+
+msgid "App button active pseudo class"
+msgstr ""
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr ""
+
+msgid "Enabling this helps with certain themes."
+msgstr ""
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr ""
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr ""
+
+msgid "Update this applet automatically"
+msgstr ""
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+
+msgid "Theme Settings"
+msgstr ""
+
+msgid "ITM Settings"
+msgstr ""

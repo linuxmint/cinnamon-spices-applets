@@ -466,3 +466,57 @@ msgstr "Вернуть размер"
 
 msgid "Restore"
 msgstr "Восстановить"
+
+msgid "Use theme padding to center button icons"
+msgstr "Используйте тему отступы до центра значки кнопок"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+"Если значки кнопок выглядят со смещенным центром, переключая "
+"это может помочь."
+
+msgid "App button hover pseudo class"
+msgstr "App Кнопка класса Hover псевдо"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Перезаписывает псевдо класс для кнопок приложений на парении."
+
+msgid "App button focus pseudo class"
+msgstr "App Кнопка класса фокус псевдо"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Перезаписывает псевдо класс для кнопки приложения на фокусе."
+
+msgid "App button active pseudo class"
+msgstr "Кнопка App активный класс псевдо"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "Перезаписывает псевдо класс для кнопок приложений, когда они активны."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Используйте класс панели модуля запуска приложений для приколотых"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Включение этого помогает с определенными темами."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Глобальная горячая клавиша для езды на велосипеде через меню миниатюр"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "Это позволяет циклически через меню без активации окна."
+
+msgid "Update this applet automatically"
+msgstr "Обновление этот апплет автоматически"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+"Если эта функция включена, ITM будет проверять Github релизы "
+"по инициализации и начнет обновление, если он находит более новую версию."
+
+msgid "Theme Settings"
+msgstr "Настройки темы"
+
+msgid "ITM Settings"
+msgstr "Настройки ITM"
