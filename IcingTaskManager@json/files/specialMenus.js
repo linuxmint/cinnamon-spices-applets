@@ -338,7 +338,7 @@ AppMenuButtonRightClickMenu.prototype = {
           item = createMenuItem({ label: 'Unpin from Panel', icon: 'list-remove' });
           item.connect('activate', Lang.bind(this, this._toggleFav));
         } else {
-          item = createMenuItem({ label: 'Pin from Panel', icon: 'bookmark-new' });
+          item = createMenuItem({ label: 'Pin to Panel', icon: 'bookmark-new' });
           item.connect('activate', Lang.bind(this, this._toggleFav));
         }
         this.addMenuItem(item);
