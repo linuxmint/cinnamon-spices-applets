@@ -457,3 +457,79 @@ msgstr "No maximizada"
 
 msgid "Restore"
 msgstr "Restaurar"
+
+msgid "Use theme padding to center button icons"
+msgstr "Utilizar el relleno de temas en los iconos de botones centrales"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+"Si los iconos de los botones parecen descentrados, cambiarlo puede "
+"ayudar."
+
+msgid "App button hover pseudo class"
+msgstr "Botón de la aplicación pseudo clase"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr ""
+"Anula la pseudo clase de los botones de la aplicación en el sentido "
+"hover."
+
+msgid "App button focus pseudo class"
+msgstr "Pseudo clase de enfoque del botón de aplicación"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Anula la pseudo clase para el botón de aplicación en el enfoque."
+
+msgid "App button active pseudo class"
+msgstr "Pseudo clase activa del botón de aplicación"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+"Anula la pseudo clase de los botones de aplicación cuando están "
+"activos."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Utilice la clase de lanzador de paneles para aplicaciones fijadas"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Habilitar esto ayuda con ciertos temas."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Tecla de acceso rápido global para recorrer los menús en miniatura"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "Esto le permite recorrer los menús sin activar una ventana."
+
+msgid "Update this applet automatically"
+msgstr "Actualizar este applet automáticamente"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will "
+"start to upgrade if it finds a newer version."
+msgstr ""
+"Cuando está activado, ITM comprobará las versiones de Github en "
+"init y comenzará a actualizarse si encuentra una versión más reciente."
+
+msgid "Theme Settings"
+msgstr "Ajustes de tema"
+
+msgid "ITM Settings"
+msgstr "Configuración de ITM"
+
+msgid "Menu item type"
+msgstr "Tipo de elemento de menú"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Determina si los iconos de elementos de menú son simbólicos, no "
+"simbólicos o no se muestran."
+
+msgid "Symbolic icons"
+msgstr "Iconos simbólicos"
+
+msgid "Non-symbolic icons"
+msgstr "Iconos no simbólicos"
+
+msgid "No icons"
+msgstr "Sin iconos"

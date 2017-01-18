@@ -72,6 +72,10 @@ AppGroup.prototype = {
       y_fill: false,
       track_hover: true
     });
+    this.signals = {
+      _appButton: [],
+      _draggable: []
+    };
 
     this.appList.manager_container.add_actor(this.actor);
 
@@ -81,8 +85,8 @@ AppGroup.prototype = {
 
     this.actor.add_actor(this._appButton.actor);
 
-    this._appButton.actor.connect('button-release-event', Lang.bind(this, this._onAppButtonRelease));
-    this._appButton.actor.connect('button-press-event', Lang.bind(this, this._onAppButtonPress));
+    this.signals._appButton.push(this._appButton.actor.connect('button-release-event', Lang.bind(this, this._onAppButtonRelease)));
+    this.signals._appButton.push(this._appButton.actor.connect('button-press-event', Lang.bind(this, this._onAppButtonPress)));
 
     // Initialized in _windowAdded first for open apps, then deferred here for init speed up.
     setTimeout(function () {
@@ -100,15 +104,16 @@ AppGroup.prototype = {
     this._hoverMenuManager.addMenu(this.hoverMenu);
 
     this._draggable = SpecialButtons.makeDraggable(this.actor);
-    this._draggable.connect('drag-begin', Lang.bind(this, this._onDragBegin));
-    this._draggable.connect('drag-cancelled', Lang.bind(this, this._onDragCancelled));
-    this._draggable.connect('drag-end', Lang.bind(this, this._onDragEnd));
+
+    this.signals._draggable.push(this._draggable.connect('drag-begin', Lang.bind(this, this._onDragBegin)));
+    this.signals._draggable.push(this._draggable.connect('drag-cancelled', Lang.bind(this, this._onDragCancelled)));
+    this.signals._draggable.push(this._draggable.connect('drag-end', Lang.bind(this, this._onDragEnd)));
     this.isDraggableApp = true;
 
     this.on_panel_edit_mode_changed();
     this.on_arrange_pinned();
-    global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-    this._applet.settings.connect('changed::arrange-pinnedApps', Lang.bind(this, this.on_arrange_pinned));
+    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.arrangePinnedId = this._applet.settings.connect('changed::arrange-pinnedApps', Lang.bind(this, this.on_arrange_pinned));
   },
 
   getId: function getId() {
@@ -216,7 +221,7 @@ AppGroup.prototype = {
       });
     }
     this._calcWindowNumber(metaWorkspace);
-    this._applet.settings.connect('changed::number-display', function () {
+    this.numDisplaySignal = this._applet.settings.connect('changed::number-display', function () {
       _this2._calcWindowNumber(metaWorkspace);
     });
     this._setWatchedWorkspaces();
@@ -273,6 +278,8 @@ AppGroup.prototype = {
   },
 
   _onAppButtonRelease: function _onAppButtonRelease(actor, event) {
+    var _this3 = this;
+
     this._applet._clearDragPlaceholder();
     var button = event.get_button();
     if (button === 1 && this.isFavapp || button === 2) {
@@ -281,15 +288,24 @@ AppGroup.prototype = {
       return;
     }
 
+    var appWindows = this._applet.groupApps ? this.app.get_windows() : [this.metaWindows[0].win];
+    var appWindowsLen = appWindows.length;
+
     var handleMinimizeToggle = function handleMinimizeToggle(win) {
+      if (_this3._applet.onClickThumbs && appWindowsLen > 1) {
+        if (_this3.hoverMenu.isOpen) {
+          _this3.hoverMenu.close();
+        } else {
+          _this3.hoverMenu.open();
+        }
+        return;
+      }
       if (win.appears_focused) {
         win.minimize();
       } else {
         Main.activateWindow(win, global.get_current_time());
       }
     };
-
-    var appWindows = this._applet.groupApps ? this.app.get_windows() : [this.metaWindows[0].win];
 
     if (button === 1) {
 
@@ -336,6 +352,11 @@ AppGroup.prototype = {
       this.app.open_new_window(-1);
       this._animate();
     } else {
+      if (this.metaWindows.length > 1) {
+        this.hoverMenu.open(true);
+      } else {
+        this.appList._closeAllHoverMenus();
+      }
       this._windowHandle(false);
     }
   },
@@ -397,7 +418,7 @@ AppGroup.prototype = {
   _updateMetaWindows: function _updateMetaWindows(metaWorkspace) {
     var app = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-    var _this3 = this;
+    var _this4 = this;
 
     var window = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
@@ -410,15 +431,15 @@ AppGroup.prototype = {
     var filterArgs = _.isEqual(app, this.app);
     var windowList = _.filter(windowsSource, function (win) {
       if (!app) {
-        app = App.appFromWMClass(_this3.appList._appsys, _this3.appList.specialApps, win);
+        app = App.appFromWMClass(_this4.appList._appsys, _this4.appList.specialApps, win);
         if (!app) {
-          app = _this3._applet.tracker.get_window_app(win);
+          app = _this4._applet.tracker.get_window_app(win);
         }
       }
-      if (!_this3._applet.includeAllWindows) {
-        filterArgs = filterArgs && _this3._applet.tracker.is_window_interesting(win);
+      if (!_this4._applet.includeAllWindows) {
+        filterArgs = filterArgs && _this4._applet.tracker.is_window_interesting(win);
       }
-      return _.isEqual(app, _this3.app);
+      return _.isEqual(app, _this4.app);
     });
 
     this.metaWindows = [];
@@ -443,7 +464,10 @@ AppGroup.prototype = {
   },
 
   _windowAdded: function _windowAdded(metaWorkspace, metaWindow, metaWindows) {
-    var _this4 = this;
+    var _this5 = this;
+
+    var recursion = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+
 
     var app = App.appFromWMClass(this.appList._appsys, this.appList.specialApps, metaWindow);
     if (!app) {
@@ -463,6 +487,13 @@ AppGroup.prototype = {
     }
     if (windowAddArgs) {
       // TBD
+      if (app.get_id().indexOf('spotify') !== -1 && recursion === 0) {
+        ++recursion;
+        setTimeout(function () {
+          return _this5._windowAdded(metaWorkspace, metaWindow, metaWindows, recursion);
+        }, 3000);
+        return;
+      }
       if (metaWindow) {
         if (!this._applet.groupApps && this.metaWindows.length >= 1) {
           if (this.ungroupedIndex === 0) {
@@ -478,8 +509,14 @@ AppGroup.prototype = {
         signals.push(metaWindow.connect('notify::title', Lang.bind(this, this._windowTitleChanged)));
         signals.push(metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange)));
 
+        var appletSettingSignal = this._applet.settings.connect('changed::title-display', function () {
+          _this5.on_title_display_changed(metaWindow);
+          _this5._windowTitleChanged(metaWindow);
+        });
+
         var data = {
-          signals: signals
+          signals: signals,
+          appletSettingSignal: appletSettingSignal
         };
 
         this.metaWindows.push({
@@ -505,11 +542,6 @@ AppGroup.prototype = {
         this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
       }
 
-      this._applet.settings.connect('changed::title-display', function () {
-        _this4.on_title_display_changed(metaWindow);
-        _this4._windowTitleChanged(metaWindow);
-      });
-
       if (this.isFavapp) {
         this._isFavorite(false);
       }
@@ -519,21 +551,11 @@ AppGroup.prototype = {
     if (app.wmClass && !this.isFavapp) {
       this._calcWindowNumber(metaWorkspace);
     }
-
-    // Workaround for Spotify not loading correctly due to its window information being unavailable at the normal timing. Better solution TBD.
-    if (!this._applet.forceRefreshList && app.get_id().indexOf('spotify') !== -1) {
-      this._applet.forceRefreshList = true;
-      setTimeout(function () {
-        _this4.appList._refreshList();
-        _this4._applet.forceRefreshList = false;
-      }, 3000);
-    }
   },
 
   _windowRemoved: function _windowRemoved(metaWorkspace, metaWindow) {
-    var _this5 = this;
 
-    var deleted = void 0;
+    var deleted = null;
 
     var refWindow = _.findIndex(this.metaWindows, function (win) {
       return _.isEqual(win.win, metaWindow);
@@ -543,10 +565,10 @@ AppGroup.prototype = {
       deleted = this.metaWindows[refWindow].data;
     }
     if (deleted) {
-      var signals = deleted.signals;
+      this._applet.settings.disconnect(deleted.appletSettingSignal);
       // Clean up all the signals we've connected
-      for (var i = 0, len = signals.length; i < len; i++) {
-        metaWindow.disconnect(signals[i]);
+      for (var i = 0, len = deleted.signals.length; i < len; i++) {
+        metaWindow.disconnect(deleted.signals[i]);
       }
 
       if (!this._applet.groupApps) {
@@ -566,9 +588,7 @@ AppGroup.prototype = {
         }
         this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
       } else if (this.isFavapp) {
-        setTimeout(function () {
-          return _this5._applet.refreshAppFromCurrentListById(_this5.appId, { favChange: true, isFavapp: _this5.isFavapp });
-        }, 0);
+        this._applet.refreshAppFromCurrentListById(this.appId, { favChange: true, isFavapp: this.isFavapp });
       }
 
       this._calcWindowNumber(metaWorkspace);
@@ -718,7 +738,17 @@ AppGroup.prototype = {
 
     for (var i = 0, len = this.metaWindows.length; i < len; i++) {
       destroyWindowSignal(this.metaWindows[i]);
+      this._applet.settings.disconnect(this.metaWindows[i].data.appletSettingSignal);
     }
+    for (var _i = 0, _len = this.signals._appButton.length; _i < _len; _i++) {
+      this._appButton.actor.disconnect(this.signals._appButton[_i]);
+    }
+    for (var _i2 = 0, _len2 = this.signals._draggable.length; _i2 < _len2; _i2++) {
+      this._draggable.disconnect(this.signals._draggable[_i2]);
+    }
+    this._applet.settings.disconnect(this.numDisplaySignal);
+    global.settings.disconnect(this.panelEditId);
+    this._applet.settings.disconnect(this.arrangePinnedId);
 
     this.unwatchWorkspace(null, true);
 

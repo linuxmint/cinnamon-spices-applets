@@ -35,6 +35,8 @@ var FavType = {
 
 var ffOptions = [{ id: 1, label: 'Most Visited' }, { id: 2, label: 'Recent History' }, { id: 3, label: 'Bookmarks' }];
 
+var menuItemTypeOptions = [{ id: 1, label: 'SYMBOLIC' }, { id: 2, label: 'FULLCOLOR' }, { id: 3, label: null }];
+
 function t(str) {
   var resultConf = Gettext.dgettext('IcingTaskManager@json', str);
   if (resultConf != str) {
@@ -90,6 +92,17 @@ AppMenuButtonRightClickMenu.prototype = {
     var length;
     var hasWindows = this.metaWindows.length > 0;
 
+    var createMenuItem = function createMenuItem() {
+      var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { label: '', icon: null };
+
+      if (_this._applet.menuItemType < 3 && opts.icon) {
+        var refMenuType = _.find(menuItemTypeOptions, { id: _this._applet.menuItemType });
+        return new PopupMenu.PopupIconMenuItem(t(opts.label), opts.icon, St.IconType[refMenuType.label]);
+      } else {
+        return new PopupMenu.PopupMenuItem(t(opts.label));
+      }
+    };
+
     if (hasWindows) {
 
       /*
@@ -120,7 +133,7 @@ AppMenuButtonRightClickMenu.prototype = {
           if (i === mw.get_monitor()) {
             continue;
           }
-          item = new PopupMenu.PopupMenuItem(t(Main.layoutManager.monitors.length === 2 ? 'Move to the other monitor' : 'Move to monitor ' + (i + 1)));
+          item = createMenuItem({ label: Main.layoutManager.monitors.length === 2 ? 'Move to the other monitor' : 'Move to monitor ' + (i + 1) });
           connectMonitorEvent(item, mw, i);
           this.addMenuItem(item);
         }
@@ -132,13 +145,13 @@ AppMenuButtonRightClickMenu.prototype = {
 
       if ((length = global.screen.n_workspaces) > 1) {
         if (mw.is_on_all_workspaces()) {
-          item = new PopupMenu.PopupMenuItem(t('Only on this workspace'));
+          item = createMenuItem({ label: 'Only on this workspace' });
           item.connect('activate', function () {
             mw.unstick();
           });
           this.addMenuItem(item);
         } else {
-          item = new PopupMenu.PopupMenuItem(t('Visible on all workspaces'));
+          item = createMenuItem({ label: 'Visible on all workspaces' });
           item.connect('activate', function () {
             mw.stick();
           });
@@ -156,7 +169,7 @@ AppMenuButtonRightClickMenu.prototype = {
             // Make the index a local variable to pass to function
             var j = _i;
             var name = Main.workspace_names[_i] ? Main.workspace_names[_i] : Main._makeDefaultWorkspaceName(_i);
-            var ws = new PopupMenu.PopupMenuItem(name);
+            var ws = createMenuItem({ label: name });
 
             if (_i === this._launcher._applet.currentWs) {
               ws.setSensitive(false);
@@ -192,7 +205,7 @@ AppMenuButtonRightClickMenu.prototype = {
           });
         };
         for (var _i2 = 0, _len = places.length; _i2 < _len; _i2++) {
-          item = new PopupMenu.PopupIconMenuItem(t(places[_i2].name), 'folder', St.IconType.SYMBOLIC);
+          item = createMenuItem({ label: places[_i2].name, icon: 'folder' });
           handlePlaceLaunch(item, _i2);
           this.recentMenuItems.push(item);
           _subMenu.menu.addMenuItem(item);
@@ -217,7 +230,7 @@ AppMenuButtonRightClickMenu.prototype = {
               });
             };
             for (var _i3 = 0, _len2 = histories.length; _i3 < _len2; _i3++) {
-              item = new PopupMenu.PopupIconMenuItem(t(histories[_i3].title), 'go-next', St.IconType.SYMBOLIC);
+              item = createMenuItem({ label: histories[_i3].title, icon: 'go-next' });
               handleHistoryLaunch(item, _i3);
               this.recentMenuItems.push(item);
               _subMenu2.menu.addMenuItem(item);
@@ -256,7 +269,7 @@ AppMenuButtonRightClickMenu.prototype = {
           });
         };
         for (var _i5 = 0; _i5 < itemsLength; _i5++) {
-          item = new PopupMenu.PopupIconMenuItem(t(items[_i5].get_short_name()), 'list-add', St.IconType.SYMBOLIC);
+          item = createMenuItem({ label: items[_i5].get_short_name(), icon: 'list-add' });
           handleRecentLaunch(item, _i5);
           this.recentMenuItems.push(item);
           _subMenu3.menu.addMenuItem(item);
@@ -272,42 +285,15 @@ AppMenuButtonRightClickMenu.prototype = {
     var subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Preferences'));
     this.addMenuItem(subMenu);
 
-    if (!this.app.is_window_backed()) {
-      if (this._applet.autoStart) {
-        if (this.autostartIndex !== -1) {
-          item = new PopupMenu.PopupIconMenuItem(t('Remove from Autostart'), 'process-stop', St.IconType.SYMBOLIC);
-          item.connect('activate', Lang.bind(this, this._toggleAutostart));
-        } else {
-          item = new PopupMenu.PopupIconMenuItem(t('Add to Autostart'), 'insert-object', St.IconType.SYMBOLIC);
-          item.connect('activate', Lang.bind(this, this._toggleAutostart));
-        }
-        subMenu.menu.addMenuItem(item);
-      }
-      if (this._applet.showPinned !== FavType.none) {
-        if (this.isFavapp) {
-          item = new PopupMenu.PopupIconMenuItem(t('Unpin from Panel'), 'list-remove', St.IconType.SYMBOLIC);
-          item.connect('activate', Lang.bind(this, this._toggleFav));
-        } else {
-          item = new PopupMenu.PopupIconMenuItem(t('Pin to Panel'), 'bookmark-new', St.IconType.SYMBOLIC);
-          item.connect('activate', Lang.bind(this, this._toggleFav));
-        }
-        subMenu.menu.addMenuItem(item);
-      }
-    } else {
-      item = new PopupMenu.PopupIconMenuItem(t('Create Shortcut'), 'list-add', St.IconType.SYMBOLIC);
-      item.connect('activate', Lang.bind(this, this._createShortcut));
-      subMenu.menu.addMenuItem(item);
-    }
-
-    item = new PopupMenu.PopupIconMenuItem(t('About...'), 'dialog-question', St.IconType.SYMBOLIC);
+    item = createMenuItem({ label: 'About...', icon: 'dialog-question' });
     item.connect('activate', Lang.bind(this._applet, this._applet.openAbout));
     subMenu.menu.addMenuItem(item);
 
-    item = new PopupMenu.PopupIconMenuItem(t('Configure...'), 'system-run', St.IconType.SYMBOLIC);
+    item = createMenuItem({ label: 'Configure...', icon: 'system-run' });
     item.connect('activate', Lang.bind(this._applet, this._applet.configureApplet));
     subMenu.menu.addMenuItem(item);
 
-    item = new PopupMenu.PopupIconMenuItem(t('Remove \'Icing Task Manager\''), 'edit-delete', St.IconType.SYMBOLIC);
+    item = createMenuItem({ label: 'Remove \'Icing Task Manager\'', icon: 'edit-delete' });
     item.connect('activate', Lang.bind(this, function () {
       AppletManager._removeAppletFromPanel(this._applet._uuid, this._applet.instance_id);
     }));
@@ -323,7 +309,7 @@ AppMenuButtonRightClickMenu.prototype = {
       if (this.appInfo && actions) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         var handleAction = function handleAction(action) {
-          item = new PopupMenu.PopupIconMenuItem(t(_this.appInfo.get_action_name(action)), 'document-new', St.IconType.SYMBOLIC);
+          item = createMenuItem({ label: _this.appInfo.get_action_name(action), icon: 'document-new' });
           item.connect('activate', function () {
             return _this.appInfo.launch_action(action, global.create_app_launch_context());
           });
@@ -343,21 +329,85 @@ AppMenuButtonRightClickMenu.prototype = {
     }
 
     /*
-      Close all/others
+      Pin/unpin, shortcut handling
+    */
+
+    if (!this.app.is_window_backed()) {
+      if (this._applet.showPinned !== FavType.none && !this.app.is_window_backed()) {
+        if (this.isFavapp) {
+          item = createMenuItem({ label: 'Unpin from Panel', icon: 'list-remove' });
+          item.connect('activate', Lang.bind(this, this._toggleFav));
+        } else {
+          item = createMenuItem({ label: 'Pin to Panel', icon: 'bookmark-new' });
+          item.connect('activate', Lang.bind(this, this._toggleFav));
+        }
+        this.addMenuItem(item);
+      }
+      if (this._applet.autoStart) {
+        if (this.autostartIndex !== -1) {
+          item = createMenuItem({ label: 'Remove from Autostart', icon: 'process-stop' });
+          item.connect('activate', Lang.bind(this, this._toggleAutostart));
+        } else {
+          item = createMenuItem({ label: 'Add to Autostart', icon: 'insert-object' });
+          item.connect('activate', Lang.bind(this, this._toggleAutostart));
+        }
+        this.addMenuItem(item);
+      }
+    } else {
+      item = createMenuItem({ label: 'Create Shortcut', icon: 'list-add' });
+      item.connect('activate', Lang.bind(this, this._createShortcut));
+      this.addMenuItem(item);
+    }
+    this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    /*
+      Window controls
     */
 
     if (hasWindows) {
-      if (this.metaWindows.length > 1) {
-        item = new PopupMenu.PopupIconMenuItem(t('Close all'), 'application-exit', St.IconType.SYMBOLIC);
-        item.connect('activate', Lang.bind(this, function () {
-          _.each(this.metaWindows, function (metaWindow) {
-            if (!metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time);
-            }
-          });
-        }));
+      /*
+        Miscellaneous
+      */
+
+      if (mw.get_compositor_private().opacity != 255) {
+        item = createMenuItem({ label: 'Restore to full opacity' });
+        item.connect('activate', function () {
+          mw.get_compositor_private().set_opacity(255);
+        });
         this.addMenuItem(item);
-        item = new PopupMenu.PopupIconMenuItem(t('Close others'), 'window-close', St.IconType.SYMBOLIC);
+      }
+
+      if (mw.minimized) {
+        item = createMenuItem({ label: 'Restore', icon: 'view-sort-descending' });
+        item.connect('activate', function () {
+          Main.activateWindow(mw, global.get_current_time());
+        });
+      } else {
+        item = createMenuItem({ label: 'Minimize', icon: 'view-sort-ascending' });
+        item.connect('activate', function () {
+          mw.minimize(global.get_current_time());
+        });
+      }
+      this.addMenuItem(item);
+
+      if (mw.get_maximized()) {
+        item = createMenuItem({ label: 'Unmaximize', icon: 'view-restore' });
+        item.connect('activate', function () {
+          mw.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+        });
+      } else {
+        item = createMenuItem({ label: 'Maximize', icon: 'view-fullscreen' });
+        item.connect('activate', function () {
+          mw.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+        });
+      }
+      this.addMenuItem(item);
+
+      if (this.metaWindows.length > 1) {
+        /*
+          Close others
+        */
+        item = createMenuItem({ label: 'Close others', icon: 'window-close' });
         item.connect('activate', Lang.bind(this, function () {
           _.each(this.metaWindows, function (metaWindow) {
             if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
@@ -366,54 +416,27 @@ AppMenuButtonRightClickMenu.prototype = {
           });
         }));
         this.addMenuItem(item);
+        /*
+          Close all
+        */
+        item = createMenuItem({ label: 'Close all', icon: 'application-exit' });
+        item.connect('activate', Lang.bind(this, function () {
+          _.each(this.metaWindows, function (metaWindow) {
+            if (!metaWindow.win._needsAttention) {
+              metaWindow.win.delete(global.get_current_time);
+            }
+          });
+        }));
+        this.addMenuItem(item);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-      }
-
-      /*
-        Miscellaneous
-      */
-
-      if (mw.get_compositor_private().opacity != 255) {
-        item = new PopupMenu.PopupMenuItem(t('Restore to full opacity'));
+      } else {
+        item = createMenuItem({ label: 'Close', icon: 'edit-delete' });
         item.connect('activate', function () {
-          mw.get_compositor_private().set_opacity(255);
+          mw.delete(global.get_current_time());
         });
         this.addMenuItem(item);
+        this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
-
-      if (mw.minimized) {
-        item = new PopupMenu.PopupIconMenuItem(t('Restore'), 'view-sort-descending', St.IconType.SYMBOLIC);
-        item.connect('activate', function () {
-          Main.activateWindow(mw, global.get_current_time());
-        });
-      } else {
-        item = new PopupMenu.PopupIconMenuItem(t('Minimize'), 'view-sort-ascending', St.IconType.SYMBOLIC);
-        item.connect('activate', function () {
-          mw.minimize(global.get_current_time());
-        });
-      }
-      this.addMenuItem(item);
-
-      if (mw.get_maximized()) {
-        item = new PopupMenu.PopupIconMenuItem(t('Unmaximize'), 'view-restore', St.IconType.SYMBOLIC);
-        item.connect('activate', function () {
-          mw.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
-        });
-      } else {
-        item = new PopupMenu.PopupIconMenuItem(t('Maximize'), 'view-fullscreen', St.IconType.SYMBOLIC);
-        item.connect('activate', function () {
-          mw.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
-        });
-      }
-      this.addMenuItem(item);
-
-      item = new PopupMenu.PopupIconMenuItem(t('Close'), 'edit-delete', St.IconType.SYMBOLIC);
-      item.connect('activate', function () {
-        mw.delete(global.get_current_time());
-      });
-      this.addMenuItem(item);
-
-      this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
   },
 
@@ -519,18 +542,25 @@ AppThumbnailHoverMenu.prototype = {
   __proto__: PopupMenu.PopupMenu.prototype,
 
   _init: function _init(parent) {
+    var _this3 = this;
+
     this._applet = parent._applet;
     if (parent._applet.c32) {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
     } else {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, 0.5, parent.orientation);
     }
+    this.signals = {
+      parentActor: [],
+      actor: []
+    };
 
     this.metaWindow = parent.metaWindow;
     this.metaWindows = [];
 
     this.app = parent.app;
     this.isFavapp = parent.isFavapp;
+    this.appList = parent.appList;
 
     // need to implement this class or cinnamon outputs a bunch of errors // TBD
     this.actor.style_class = 'hide-arrow';
@@ -545,109 +575,105 @@ AppThumbnailHoverMenu.prototype = {
     this.appSwitcherItem = new PopupMenuAppSwitcherItem(this);
     this.addMenuItem(this.appSwitcherItem);
 
-    this.parentActor.connect('enter-event', Lang.bind(this, this._onEnter));
-    this.parentActor.connect('leave-event', Lang.bind(this, this._onLeave));
-    this.parentActor.connect('button-release-event', Lang.bind(this, this._onButtonPress));
+    this.signals.parentActor.push(this.parentActor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
+    this.signals.parentActor.push(this.parentActor.connect('leave-event', Lang.bind(this, this._onMenuLeave)));
+    this.signals.parentActor.push(this.parentActor.connect('button-release-event', Lang.bind(this, this._onButtonPress)));
 
-    this.actor.connect('enter-event', Lang.bind(this, this._onMenuEnter));
-    this.actor.connect('leave-event', Lang.bind(this, this._onMenuLeave));
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onMenuLeave)));
+    this.signals.actor.push(this.actor.connect('key-release-event', function (actor, e) {
+      return _this3._onKeyRelease(actor, e);
+    }));
   },
 
   _onButtonPress: function _onButtonPress(actor, event) {
-    var _this3 = this;
+    var _this4 = this;
 
-    if (this._applet.onclickThumbs && this.appSwitcherItem.appContainer.get_children().length > 1) {
+    if (this._applet.onClickThumbs && this.appSwitcherItem.appContainer.get_children().length > 1) {
       return;
     }
-    this.shouldOpen = false;
     this.shouldClose = true;
     setTimeout(function () {
-      return _this3.hoverClose();
+      return _this4.hoverClose();
     }, this._applet.thumbTimeout);
   },
 
   _onMenuEnter: function _onMenuEnter() {
-    var _this4 = this;
+    var _this5 = this;
 
-    this.shouldOpen = true;
     this.shouldClose = false;
-
     setTimeout(function () {
-      return _this4.hoverOpen();
+      return _this5.hoverOpen();
     }, this._applet.thumbTimeout);
   },
 
   _onMenuLeave: function _onMenuLeave() {
-    var _this5 = this;
-
-    this.shouldOpen = false;
-    this.shouldClose = true;
-    setTimeout(function () {
-      return _this5.hoverClose();
-    }, this._applet.thumbTimeout);
-  },
-
-  _onEnter: function _onEnter() {
     var _this6 = this;
 
-    this.shouldOpen = true;
-    this.shouldClose = false;
-
+    this.shouldClose = true;
     setTimeout(function () {
-      return _this6.hoverOpen();
+      return _this6.hoverClose();
     }, this._applet.thumbTimeout);
   },
 
-  _onLeave: function _onLeave() {
-    var _this7 = this;
-
-    this.shouldClose = true;
-    this.shouldOpen = false;
-
-    setTimeout(function () {
-      return _this7.hoverClose();
-    }, this._applet.thumbTimeout);
+  _onKeyRelease: function _onKeyRelease(actor, event) {
+    var symbol = event.get_key_symbol();
+    if (this.isOpen && (symbol === Clutter.KEY_Super_L || symbol === Clutter.KEY_Super_R)) {
+      // close this menu, if opened by super+#
+      this.close();
+      this.appList.lastCycled = null;
+      return true;
+    }
   },
 
   hoverOpen: function hoverOpen() {
-    if (this.shouldOpen && !this.isOpen) {
-      this.open(true);
+    if (!this.isOpen && !this._applet.onClickThumbs) {
+      this.open();
     }
   },
 
   hoverClose: function hoverClose() {
     if (this.shouldClose) {
-      this.close(true);
+      this.close();
     }
   },
 
-  open: function open(animate) {
-    var _this8 = this;
+  open: function open() {
+    var _this7 = this;
 
     // Refresh all the thumbnails, etc when the menu opens.  These cannot
     // be created when the menu is initalized because a lot of the clutter window surfaces
     // have not been created yet...
     setTimeout(function () {
-      return _this8.appSwitcherItem._refresh();
+      return _this7.appSwitcherItem._refresh();
     }, 0);
-    this.appSwitcherItem.actor.show();
     PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
   },
 
-  close: function close(animate) {
+  close: function close() {
     PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
-    this.appSwitcherItem.actor.hide();
   },
 
   destroy: function destroy() {
+    var _this8 = this;
+
     var children = this._getMenuItems();
     for (var i = 0; i < children.length; i++) {
       var item = children[i];
       this.box.remove_actor(item.actor);
       item.actor.destroy();
     }
+    _.each(this.signals, function (signal, key) {
+      _.each(signal, function (id) {
+        if (_this8[key] && id) {
+          _this8[key].disconnect(id);
+        }
+      });
+    });
+    this.appSwitcherItem.destroy();
     this.box.destroy();
     this.actor.destroy();
+    PopupMenu.PopupMenu.prototype.destroy.call(this);
   },
 
   setMetaWindow: function setMetaWindow(metaWindow, metaWindows) {
@@ -669,6 +695,8 @@ PopupMenuAppSwitcherItem.prototype = {
   __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
   _init: function _init(parent, params) {
+    var _this9 = this;
+
     params = Params.parse(params, {
       hover: false,
       activate: false
@@ -676,12 +704,16 @@ PopupMenuAppSwitcherItem.prototype = {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
 
     this._applet = parent._applet;
+    this.settings = parent._applet.settings;
+    this.signals = {
+      settings: []
+    };
     this.metaWindow = parent.metaWindow;
     this.metaWindows = [];
     this.app = parent.app;
     this.isFavapp = parent.isFavapp;
-    this._parentContainer = parent;
     this.actor.style_class = '';
+    this._parent = parent;
 
     this.box = new St.BoxLayout();
 
@@ -693,10 +725,71 @@ PopupMenuAppSwitcherItem.prototype = {
 
     this.appThumbnails = [];
 
-    this._applet.settings.connect('changed::vertical-thumbnails', Lang.bind(this, this._setVerticalSetting));
+    this.signals.settings.push(this.settings.connect('changed::vertical-thumbnails', Lang.bind(this, this._setVerticalSetting)));
     this._setVerticalSetting();
     this.addActor(this.box);
+
+    this.actor.connect('key-press-event', function (actor, e) {
+      return _this9._onKeyPress(actor, e);
+    });
   },
+
+  _onKeyPress: function _onKeyPress(actor, e) {
+    var symbol = e.get_key_symbol();
+    var i = _.findIndex(this.appThumbnails, function (thumb) {
+      return thumb.thumbnail.entered;
+    });
+
+    var entered = i > -1;
+    if (entered) {
+      this.appThumbnails[i].thumbnail.handleLeaveEvent();
+    } else {
+      i = _.findIndex(this.appThumbnails, function (thumb) {
+        return thumb.thumbnail._hasFocus();
+      });
+      if (i === -1) {
+        i = 0;
+      }
+    }
+    var args = this._applet.verticalThumbs ? [Clutter.KEY_Up, Clutter.KEY_Down] : [Clutter.KEY_Left, Clutter.KEY_Right];
+    var closeArg = void 0;
+    if (this._applet.orientation == St.Side.TOP) {
+      closeArg = Clutter.KEY_Up;
+    } else if (this._applet.orientation == St.Side.BOTTOM) {
+      closeArg = Clutter.KEY_Down;
+    } else if (this._applet.orientation == St.Side.LEFT) {
+      closeArg = Clutter.KEY_Left;
+    } else if (this._applet.orientation == St.Side.RIGHT) {
+      closeArg = Clutter.KEY_Right;
+    }
+    var index;
+    if (symbol === args[0]) {
+      if (!entered) {
+        index = i;
+      } else if (this.appThumbnails[i + 1] !== undefined) {
+        index = i + 1;
+      } else {
+        index = 0;
+      }
+    } else if (symbol === args[1]) {
+      if (!entered) {
+        index = i;
+      } else if (this.appThumbnails[i - 1] !== undefined) {
+        index = i - 1;
+      } else {
+        index = this.appThumbnails.length - 1;
+      }
+    } else if (symbol === Clutter.KEY_Return && entered) {
+      Main.activateWindow(this.appThumbnails[i].metaWindow, global.get_current_time());
+      this._parent.close();
+    } else if (symbol === closeArg) {
+      this._parent.close();
+    } else {
+      return;
+    }
+    this.appThumbnails[index].thumbnail.handleEnterEvent();
+  },
+
 
   _setVerticalSetting: function _setVerticalSetting() {
     var children = this.box.get_children();
@@ -718,26 +811,17 @@ PopupMenuAppSwitcherItem.prototype = {
     if (this.metaWindowThumbnail !== undefined && this.metaWindowThumbnail) {
       this.metaWindowThumbnail.setMetaWindow(metaWindow, metaWindows);
     }
+    for (var w = 0, len = this.appThumbnails.length; w < len; w++) {
+      this.appThumbnails[w].thumbnail.setMetaWindow(null, metaWindows);
+    }
   },
 
   _isFavorite: function _isFavorite(isFav) {
     this.isFavapp = isFav;
   },
 
-  getMetaWindows: function getMetaWindows() {
-    if (this.metaWindow) {
-      if (!this._applet.groupApps) {
-        return [this.metaWindow];
-      }
-      this.metaWorkspace = this.metaWindow.get_workspace();
-    } else if (!this.metaWorkspace) {
-      return {};
-    }
-    return _.map(this.metaWindows, 'win');
-  },
-
   handleUnopenedPinnedApp: function handleUnopenedPinnedApp(metaWindow, windows) {
-    var _this9 = this;
+    var _this10 = this;
 
     var appClosed = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
@@ -749,7 +833,7 @@ PopupMenuAppSwitcherItem.prototype = {
       this.metaWindowThumbnail = new WindowThumbnail(this, metaWindow, windows);
       this.appContainer.insert_actor(this.metaWindowThumbnail.actor, 0);
       setTimeout(function () {
-        return _this9.setStyleOptions(null);
+        return _this10.setStyleOptions(null);
       }, 0);
       // Update appThumbnails to remove old programs
       this.removeStaleWindowThumbnails(windows);
@@ -759,7 +843,7 @@ PopupMenuAppSwitcherItem.prototype = {
 
 
   _refresh: function _refresh() {
-    var _this10 = this;
+    var _this11 = this;
 
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
@@ -782,7 +866,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.reAdd = false;
     // used to make sure everything is on the stage
     setTimeout(function () {
-      return _this10.setStyleOptions(windows);
+      return _this11.setStyleOptions(windows);
     }, 0);
   },
 
@@ -798,7 +882,8 @@ PopupMenuAppSwitcherItem.prototype = {
 
     for (var i = 0, _len5 = windows.length; i < _len5; i++) {
       var metaWindow = windows[i];
-      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i]) {
+      var refThumb = _.findIndex(this.appThumbnails, { metaWindow: metaWindow });
+      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
         if (this.reAdd) {
           if (this._applet.sortThumbs) {
             this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
@@ -808,7 +893,7 @@ PopupMenuAppSwitcherItem.prototype = {
         }
       } else {
         if (this.metaWindowThumbnail) {
-          this.metaWindowThumbnail.destroy();
+          this.metaWindowThumbnail.destroy(true);
         }
         var thumbnail = new WindowThumbnail(this, metaWindow, windows);
         thumbnail.setMetaWindow(metaWindow, windows);
@@ -860,6 +945,34 @@ PopupMenuAppSwitcherItem.prototype = {
         _.pullAt(this.appThumbnails, i);
       }
     }
+  },
+
+  destroy: function destroy() {
+    var _this12 = this;
+
+    _.each(this.signals, function (signal, key) {
+      _.each(signal, function (id) {
+        _this12[key].disconnect(id);
+      });
+    });
+    for (var w = 0, len = this.appThumbnails.length; w < len; w++) {
+      if (this.appThumbnails[w] !== undefined) {
+        this.appThumbnails[w].thumbnail.destroy(true);
+      }
+    }
+    var children = this.appContainer.get_children();
+    for (var _w = 0, _len6 = children.length; _w < _len6; _w++) {
+      this.appContainer.remove_actor(children[_w]);
+    }
+    this.appContainer.destroy_children();
+    this.appContainer.destroy();
+    children = this.box.get_children();
+    for (var _w2 = 0, _len7 = children.length; _w2 < _len7; _w2++) {
+      this.box.remove_actor(children[_w2]);
+    }
+    this.box.destroy_children();
+    this.box.destroy();
+    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
 
@@ -869,17 +982,22 @@ function WindowThumbnail() {
 
 WindowThumbnail.prototype = {
   _init: function _init(parent, metaWindow, metaWindows) {
-    var _this11 = this;
+    var _this13 = this;
 
     this._applet = parent._applet;
+    this.settings = parent._applet.settings;
     this.metaWindow = metaWindow || null;
     this.metaWindows = metaWindows;
     this.app = parent.app;
     this.isFavapp = parent.isFavapp || false;
     this.wasMinimized = false;
     this._parent = parent;
-    this._parentContainer = parent._parentContainer;
     this.thumbnailPadding = 16;
+    this.signals = {
+      actor: [],
+      button: [],
+      settings: []
+    };
 
     // Inherit the theme from the alt-tab menu
     this.actor = new St.BoxLayout({
@@ -926,52 +1044,64 @@ WindowThumbnail.prototype = {
     this._isFavorite(this.isFavapp, this.metaWindow, this.metaWindows);
 
     if (this.metaWindow) {
-      this.metaWindow.connect('notify::title', function () {
-        _this11._label.text = _this11.metaWindow.get_title();
+      this.windowTitleId = this.metaWindow.connect('notify::title', function () {
+        _this13._label.text = _this13.metaWindow.get_title();
       });
+      this.windowFocusId = this.metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange));
       this._updateAttentionGrabber(null, null, this._applet.showAlerts);
-      this._applet.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber));
+      this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
       this.tracker = this._applet.tracker;
       this._trackerSignal = this.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
     }
-    this.actor.connect('enter-event', function () {
-      if (!_this11.isFavapp) {
-        var parent = _this11._parent._parentContainer;
-        parent.shouldOpen = true;
-        parent.shouldClose = false;
-        _this11._hoverPeek(_this11._applet.peekOpacity, _this11.metaWindow, true);
-        _this11.actor.add_style_pseudo_class('outlined');
-        _this11.actor.add_style_pseudo_class('selected');
-        _this11.button.show();
-        if (_this11.metaWindow.minimized && _this11._applet.enablePeek && _this11.app.get_name() !== 'Steam') {
-          _this11.metaWindow.unminimize();
-          if (_this11.metaWindow.is_fullscreen()) {
-            _this11.metaWindow.unmaximize(global.get_current_time());
-          }
-          _this11.wasMinimized = true;
-        } else {
-          _this11.wasMinimized = false;
-        }
-      }
-    });
-    this.actor.connect('leave-event', function () {
-      if (!_this11.isFavapp) {
-        _this11._hoverPeek(OPACITY_OPAQUE, _this11.metaWindow, false);
-        _this11.actor.remove_style_pseudo_class('outlined');
-        _this11.actor.remove_style_pseudo_class('selected');
-        _this11.button.hide();
-        if (_this11.wasMinimized) {
-          _this11.metaWindow.minimize(global.get_current_time());
-        }
-      }
-    });
-    this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease));
-
-    this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow));
+    this.signals.actor.push(this.actor.connect('enter-event', function () {
+      return _this13.handleEnterEvent();
+    }));
+    this.signals.actor.push(this.actor.connect('leave-event', function () {
+      return _this13.handleLeaveEvent();
+    }));
+    this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)));
+    this.signals.actor.push(this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow)));
+    //update focused style
+    this._focusWindowChange();
+    this.entered = false;
   },
 
+  handleEnterEvent: function handleEnterEvent() {
+    this.entered = true;
+    if (!this.isFavapp) {
+      this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true);
+      this.actor.add_style_pseudo_class('outlined');
+      this.actor.add_style_pseudo_class('selected');
+      this.button.show();
+      if (this.metaWindow.minimized && this._applet.enablePeek && this.app.get_name() !== 'Steam') {
+        this.metaWindow.unminimize();
+        if (this.metaWindow.is_fullscreen()) {
+          this.metaWindow.unmaximize(global.get_current_time());
+        }
+        this.wasMinimized = true;
+      } else {
+        this.wasMinimized = false;
+      }
+    }
+  },
+  handleLeaveEvent: function handleLeaveEvent() {
+    this.entered = false;
+    if (!this.isFavapp) {
+      this._hoverPeek(OPACITY_OPAQUE, this.metaWindow, false);
+      this.actor.remove_style_pseudo_class('outlined');
+      this._focusWindowChange();
+      this.button.hide();
+      if (this.wasMinimized) {
+        this.metaWindow.minimize(global.get_current_time());
+      }
+    }
+  },
+
+
   setMetaWindow: function setMetaWindow(metaWindow, metaWindows) {
-    this.metaWindow = metaWindow;
+    if (metaWindow) {
+      this.metaWindow = metaWindow;
+    }
     this.metaWindows = metaWindows;
   },
 
@@ -1007,7 +1137,19 @@ WindowThumbnail.prototype = {
     }
   },
 
+  _focusWindowChange: function _focusWindowChange() {
+    if (this._hasFocus()) {
+      this.actor.add_style_pseudo_class('selected');
+    } else {
+      this.actor.remove_style_pseudo_class('selected');
+    }
+  },
+
   _hasFocus: function _hasFocus() {
+    if (!this.metaWindow) {
+      return false;
+    }
+
     if (this.metaWindow.minimized) {
       return false;
     }
@@ -1028,7 +1170,7 @@ WindowThumbnail.prototype = {
   },
 
   _isFavorite: function _isFavorite(isFav) {
-    var _this12 = this;
+    var _this14 = this;
 
     var metaWindow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.metaWindow;
     var windows = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.metaWindows;
@@ -1048,7 +1190,7 @@ WindowThumbnail.prototype = {
       this.actor.style = null;
       // HACK used to make sure everything is on the stage
       setTimeout(function () {
-        return _this12.thumbnailPaddingSize();
+        return _this14.thumbnailPaddingSize();
       }, 0);
       this._refresh(metaWindow, windows);
     }
@@ -1098,20 +1240,21 @@ WindowThumbnail.prototype = {
     return thumbnail;
   },
 
-  handleAfterClick: function handleAfterClick(delay) {
+  handleAfterClick: function handleAfterClick() {
     this.stopClick = true;
     this.destroy();
     this._hoverPeek(OPACITY_OPAQUE, this.metaWindow, false);
-    this._parentContainer.shouldOpen = false;
-    this._parentContainer.shouldClose = true;
-    Mainloop.timeout_add(delay, Lang.bind(this._parentContainer, this._parentContainer.hoverClose));
+
     this.metaWindow.delete(global.get_current_time());
+    if (this.metaWindows.length === 1) {
+      this._parent._parent.close();
+    }
   },
 
 
   _onButtonRelease: function _onButtonRelease(actor, event) {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && actor == this.button) {
-      this.handleAfterClick(2000);
+      this.handleAfterClick();
     }
   },
 
@@ -1119,18 +1262,16 @@ WindowThumbnail.prototype = {
     this.wasMinimized = false;
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && !this.stopClick && !this.isFavapp) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
-      var parent = this._parent._parentContainer;
-      parent.shouldOpen = false;
-      parent.shouldClose = true;
-      Mainloop.timeout_add(parent.hoverTime, Lang.bind(parent, parent.hoverClose));
+
+      this._parent._parent.close();
     } else if (event.get_state() & Clutter.ModifierType.BUTTON2_MASK && !this.stopClick) {
-      this.handleAfterClick(3000);
+      this.handleAfterClick();
     }
     this.stopClick = false;
   },
 
   _refresh: function _refresh() {
-    var _this13 = this;
+    var _this15 = this;
 
     var metaWindow = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.metaWindow;
     var metaWindows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.metaWindows;
@@ -1142,39 +1283,42 @@ WindowThumbnail.prototype = {
       var divider = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 70;
       var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 16;
 
-      _this13.thumbnailWidth = Math.floor(monitor.width / divider * _this13._applet.thumbSize) + offset;
-      _this13.thumbnailHeight = Math.floor(monitor.height / divider * _this13._applet.thumbSize) + offset;
+      _this15.thumbnailWidth = Math.floor(monitor.width / divider * _this15._applet.thumbSize) + offset;
+      _this15.thumbnailHeight = Math.floor(monitor.height / divider * _this15._applet.thumbSize) + offset;
 
       var monitorSize, thumbnailSize;
-      if (_this13._applet.verticalThumbs) {
+      if (_this15._applet.verticalThumbs) {
         monitorSize = monitor.height;
-        thumbnailSize = _this13.thumbnailHeight;
+        thumbnailSize = _this15.thumbnailHeight;
       } else {
         monitorSize = monitor.width;
-        thumbnailSize = _this13.thumbnailWidth;
+        thumbnailSize = _this15.thumbnailWidth;
       }
 
-      if (_this13.metaWindows.length === 0) {
-        metaWindows = _this13.app.get_windows();
+      if (_this15.metaWindows.length === 0) {
+        metaWindows = _this15.app.get_windows();
       }
 
       if (thumbnailSize * metaWindows.length + thumbnailSize > monitorSize) {
-        setThumbSize(divider * 1.1, 16);
+        var divideMultiplier = _this15._applet.verticalThumbs ? 3 : 1.1;
+        setThumbSize(divider * divideMultiplier, 16);
         return;
       } else {
-        _this13.thumbnailActor.width = _this13.thumbnailWidth;
-        _this13._container.style = 'width: ' + Math.floor(_this13.thumbnailWidth - 16) + 'px';
+        if (_this15._applet.verticalThumbs) {
+          _this15.thumbnailActor.height = _this15.thumbnailHeight;
+        }
+        _this15.thumbnailActor.width = _this15.thumbnailWidth;
+        _this15._container.style = 'width: ' + Math.floor(_this15.thumbnailWidth - 16) + 'px';
 
-        _this13.isFavapp = false;
+        _this15.isFavapp = false;
 
         // Replace the old thumbnail
-        var title = _this13.metaWindow.get_title();
-        _this13._label.text = title;
-        if (_this13._applet.showThumbs) {
-          _this13.thumbnail = _this13._getThumbnail();
-          _this13.thumbnailActor.child = _this13.thumbnail;
+        _this15._label.text = _this15.metaWindow.get_title();
+        if (_this15._applet.showThumbs) {
+          _this15.thumbnail = _this15._getThumbnail();
+          _this15.thumbnailActor.child = _this15.thumbnail;
         } else {
-          _this13.thumbnailActor.child = null;
+          _this15.thumbnailActor.child = null;
         }
       }
     };
@@ -1210,7 +1354,9 @@ WindowThumbnail.prototype = {
   },
 
   destroy: function destroy() {
-    var _this14 = this;
+    var _this16 = this;
+
+    var skipSignalDisconnect = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
     try {
       if (this._trackerSignal) {
@@ -1222,11 +1368,26 @@ WindowThumbnail.prototype = {
       if (this._attention_signal) {
         global.display.disconnect(this._attention_signal);
       }
+      if (this.windowTitleId) {
+        this.metaWindow.disconnect(this.windowTitleId);
+      }
+      if (this.windowFocusId) {
+        this.metaWindow.disconnect(this.windowFocusId);
+      }
     } catch (e) {
       /* Signal is invalid */
     }
+    if (!skipSignalDisconnect) {
+      _.each(this.signals, function (signal, key) {
+        _.each(signal, function (id) {
+          if (_this16[key] && id) {
+            _this16[key].disconnect(id);
+          }
+        });
+      });
+    }
     var refThumb = _.findIndex(this._parent.appThumbnails, function (thumb) {
-      return _.isEqual(thumb.metaWindow, _this14.metaWindow);
+      return _.isEqual(thumb.metaWindow, _this16.metaWindow);
     });
     if (refThumb !== -1) {
       _.pullAt(this._parent.appThumbnails, refThumb);
