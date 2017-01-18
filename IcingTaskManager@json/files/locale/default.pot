@@ -464,3 +464,19 @@ msgstr ""
 
 msgid "ITM Settings"
 msgstr ""
+
+msgid "Menu item type"
+msgstr ""
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+
+msgid "Symbolic icons"
+msgstr ""
+
+msgid "Non-symbolic icons"
+msgstr ""
+
+msgid "No icons"
+msgstr ""

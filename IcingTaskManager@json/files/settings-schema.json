@@ -169,6 +169,17 @@
     "description": "Show recent items",
     "tooltip": "Controls whether recent items will appear in the context menu."
   },
+  "menuItemType": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Menu item type",
+    "options": {
+      "Symbolic icons": 1,
+      "Non-symbolic icons": 2,
+      "No icons": 3
+    },
+    "tooltip": "Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+  },
   "firefox-menu": {
     "type": "combobox",
     "default": 1,

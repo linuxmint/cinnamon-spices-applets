@@ -484,3 +484,19 @@ msgstr "主题设置"
 
 msgid "ITM Settings"
 msgstr "ITM设置"
+
+msgid "Menu item type"
+msgstr "菜单项类型"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr "确定菜单项图标是符号，非符号还是未显示。"
+
+msgid "Symbolic icons"
+msgstr "符号图标"
+
+msgid "Non-symbolic icons"
+msgstr "非符号图标"
+
+msgid "No icons"
+msgstr "没有图标"

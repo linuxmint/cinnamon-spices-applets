@@ -520,3 +520,21 @@ msgstr "Настройки темы"
 
 msgid "ITM Settings"
 msgstr "Настройки ITM"
+
+msgid "Menu item type"
+msgstr "Тип пункта меню"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Определяет, будут ли символическим, несимволический, или не отображается "
+"пункт меню иконки."
+
+msgid "Symbolic icons"
+msgstr "Символические иконки"
+
+msgid "Non-symbolic icons"
+msgstr "Несимволический иконки"
+
+msgid "No icons"
+msgstr "Нет иконки"

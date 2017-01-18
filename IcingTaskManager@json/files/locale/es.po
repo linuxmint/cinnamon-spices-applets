@@ -515,3 +515,21 @@ msgstr "Ajustes de tema"
 
 msgid "ITM Settings"
 msgstr "Configuración de ITM"
+
+msgid "Menu item type"
+msgstr "Tipo de elemento de menú"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Determina si los iconos de elementos de menú son simbólicos, no "
+"simbólicos o no se muestran."
+
+msgid "Symbolic icons"
+msgstr "Iconos simbólicos"
+
+msgid "Non-symbolic icons"
+msgstr "Iconos no simbólicos"
+
+msgid "No icons"
+msgstr "Sin iconos"

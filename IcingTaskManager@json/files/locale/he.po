@@ -492,3 +492,19 @@ msgstr "הגדרות נושא"
 
 msgid "ITM Settings"
 msgstr "הגדרות ITM"
+
+msgid "Menu item type"
+msgstr "סוג פריט בתפריט"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr "קובע אם סמלי פריט בתפריט הם סמליים, הלא סמליים, או לא לראות."
+
+msgid "Symbolic icons"
+msgstr "סמלים סמליים"
+
+msgid "Non-symbolic icons"
+msgstr "סמלים ללא סמלי"
+
+msgid "No icons"
+msgstr "לא נמצאו סמלים"

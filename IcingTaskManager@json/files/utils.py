@@ -103,6 +103,7 @@ def handleCli():
                             ('AppMenu', config['AppMenu']),
                             ('seperator5', config['seperator4']),
                             ('show-recent', config['show-recent']),
+                            ('menuItemType', config['menuItemType']),
                             ('firefox-menu', config['firefox-menu']),
                             ('autostart-menu-item', config['autostart-menu-item']),
                             ('monitor-move-all-windows', config['monitor-move-all-windows']),
@@ -197,8 +198,8 @@ def handleCli():
                 print('OSError')
                 return
 
-        except KeyError:
-            ':('
+        except KeyError as e:
+            print('KeyError', e)
             return
 
     else:

@@ -503,3 +503,22 @@ msgstr "Настройки тема"
 
 msgid "ITM Settings"
 msgstr "Настройки Двамата ръководители"
+
+msgid "Menu item type"
+msgstr "тип Елемент от меню"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Определя дали елемент от менюто икони са символични, които не са символични, "
+"или които не са показани."
+
+msgid "Symbolic icons"
+msgstr "Символичните икони"
+
+msgid "Non-symbolic icons"
+msgstr "Non-символични икони"
+
+msgid "No icons"
+msgstr "Не икони"
+
