@@ -1,6 +1,0 @@
-{
-"uuid": "File Manager as Root Applet",
-"name": "File Manager as Root",
-"description": "Click on the applet to open your file manager as root",
-"icon": "gksu-terminal"
-}
