@@ -1,5 +1,5 @@
 {
- "uuid": "cinnamon-multi-line-taskbar-applet-master",
+ "uuid": "cinnamon-multi-line-taskbar-applet",
  "name": "Cinnamon Multi-Line Taskbar",
  "description": "https://github.com/posto/cinnamon-multi-line-taskbar-applet",
  "icon": "gnome-panel-window-list"
