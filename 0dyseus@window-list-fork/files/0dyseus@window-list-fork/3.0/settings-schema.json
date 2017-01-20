@@ -1,31 +1,31 @@
 {
     "pref_enable_alerts": {
-        "type": "switch",
+        "type": "checkbox",
         "default": true,
         "description": "Show an alert in the window list when a window from another workspace requires attention"
     },
     "pref_enable_scrolling": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Enable mouse-wheel scrolling in the window list"
     },
     "pref_reverse_scrolling": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Reverse the direction of mouse-wheel scrolling in the window list"
     },
     "pref_middle_click_close": {
-        "type": "switch",
+        "type": "checkbox",
         "default": true,
         "description": "Middle click to close window"
     },
     "pref_buttons_use_entire_space": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Window buttons can have different sizes and use the entire space available"
     },
     "pref_window_preview": {
-        "type": "switch",
+        "type": "checkbox",
         "default": true,
         "description": "Show window thumbnails on hover"
     },
@@ -52,17 +52,17 @@
         "description": "Custom height for window thumbnails"
     },
     "pref_hide_tooltips": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Do not display tooltips"
     },
     "pref_hide_labels": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Hide labels in the window list buttons"
     },
     "pref_invert_menu_items_order": {
-        "type": "switch",
+        "type": "checkbox",
         "default": false,
         "description": "Invert context menu items order"
     },
