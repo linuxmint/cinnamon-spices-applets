@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 08:29-0300\n"
-"PO-Revision-Date: 2016-11-14 08:29-0300\n"
+"POT-Creation-Date: 2017-01-02 07:12-0300\n"
+"PO-Revision-Date: 2017-01-02 07:12-0300\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -42,28 +42,36 @@ msgstr "Editar el archivo principal"
 msgid "Open extension folder"
 msgstr "Abrir carpeta de la extensión"
 
-#: applet.js:474 3.2/applet.js:474
+#: applet.js:283 applet.js:290
+msgid "Name"
+msgstr "Nombre"
+
+#: applet.js:285 applet.js:292
+msgid "Description"
+msgstr "Descripción"
+
+#: applet.js:495 3.2/applet.js:496
 msgid "Open extensions manager"
 msgstr "Abrir el administrador de extensiones"
 
-#: applet.js:487 3.2/applet.js:487
+#: applet.js:508 3.2/applet.js:509
 msgid "Disable all extensions"
 msgstr "Deshabilitar todas las extensiones"
 
-#: applet.js:497 3.2/applet.js:497
+#: applet.js:518 3.2/applet.js:519
 msgid "This will disable all active extensions. Are you sure you want to do this?"
 msgstr ""
 "Esto va a deshabilitar todas las extensiones. ¿Está seguro/a de que quiere realizar esta tarea?"
 
-#: applet.js:505 3.2/applet.js:505
+#: applet.js:526 3.2/applet.js:527
 msgid "Refresh extension list"
 msgstr "Actualizar lista de extensiones"
 
-#: applet.js:512 3.2/applet.js:512
+#: applet.js:533 3.2/applet.js:534
 msgid "Restart Cinnamon"
 msgstr "Reiniciar Cinnamon"
 
-#: applet.js:716 3.2/applet.js:716
+#: applet.js:737 3.2/applet.js:738
 msgid ""
 "There aren't any extensions installed on your system. Or you may need to refresh the list of "
 "extensions from this applet context menu."
@@ -71,23 +79,23 @@ msgstr ""
 "No hay ninguna extensión instalada en su sistema. O usted debería actualizar la lista de "
 "extensiones instaladas desde el menú contextual de este applet."
 
-#: applet.js:783 3.2/applet.js:783
+#: applet.js:804 3.2/applet.js:805
 msgid "Enabled extensions"
 msgstr "Extensiones habilitadas"
 
-#: applet.js:786 3.2/applet.js:786
+#: applet.js:807 3.2/applet.js:808
 msgid "No enabled extensions"
 msgstr "No hay extensiones habilitadas"
 
-#: applet.js:790 3.2/applet.js:790
+#: applet.js:811 3.2/applet.js:812
 msgid "Disabled extensions"
 msgstr "Extensiones deshabilitadas"
 
-#: applet.js:792 3.2/applet.js:792
+#: applet.js:813 3.2/applet.js:814
 msgid "No disabled extensions"
 msgstr "No hay extensiones deshabilitadas"
 
-#: applet.js:829 3.2/applet.js:829
+#: applet.js:850 3.2/applet.js:851
 #, javascript-format
 msgid ""
 "Extension %s is not compatible with current version of cinnamon. Using it may break your system. "

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 1.06\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-25 21:43-0300\n"
-"PO-Revision-Date: 2016-12-10 05:44-0300\n"
+"PO-Revision-Date: 2017-01-16 08:38-0300\n"
 "Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,182 +17,182 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:886 3.2/applet.js:880
+#: 3.0/applet.js:883 2.8/applet.js:703 3.2/applet.js:883
 msgid "Preferences"
 msgstr ""
 
-#: applet.js:897 3.2/applet.js:891
+#: 3.0/applet.js:894 2.8/applet.js:718 3.2/applet.js:894
 msgid "Move to the other monitor"
 msgstr ""
 
-#: applet.js:906 3.2/applet.js:900
+#: 3.0/applet.js:903 2.8/applet.js:727 3.2/applet.js:903
 #, javascript-format
 msgid "Move to monitor %d"
 msgstr ""
 
-#: applet.js:917 3.2/applet.js:911
+#: 3.0/applet.js:914 2.8/applet.js:738 3.2/applet.js:914
 msgid "Only on this workspace"
 msgstr ""
 
-#: applet.js:923 3.2/applet.js:917
+#: 3.0/applet.js:920 2.8/applet.js:744 3.2/applet.js:920
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: applet.js:929 3.2/applet.js:923
+#: 3.0/applet.js:926 2.8/applet.js:750 3.2/applet.js:926
 msgid "Move to another workspace"
 msgstr ""
 
 #. Close all/others
-#: applet.js:954 3.2/applet.js:948
+#: 3.0/applet.js:951 2.8/applet.js:772 3.2/applet.js:951
 msgid "Close all"
 msgstr ""
 
-#: applet.js:963 3.2/applet.js:957
+#: 3.0/applet.js:960 2.8/applet.js:781 3.2/applet.js:960
 msgid "Close others"
 msgstr ""
 
-#: applet.js:977 3.2/applet.js:971
+#: 3.0/applet.js:974 2.8/applet.js:795 3.2/applet.js:974
 msgid "Restore to full opacity"
 msgstr ""
 
-#: applet.js:985 3.2/applet.js:979
+#: 3.0/applet.js:982 2.8/applet.js:803 3.2/applet.js:982
 msgid "Restore"
 msgstr ""
 
-#: applet.js:990 3.2/applet.js:984
+#: 3.0/applet.js:987 2.8/applet.js:808 3.2/applet.js:987
 msgid "Minimize"
 msgstr ""
 
-#: applet.js:998 3.2/applet.js:992
+#: 3.0/applet.js:995 2.8/applet.js:816 3.2/applet.js:995
 msgid "Unmaximize"
 msgstr ""
 
-#: applet.js:1003 3.2/applet.js:997
+#: 3.0/applet.js:1000 2.8/applet.js:821 3.2/applet.js:1000
 msgid "Maximize"
 msgstr ""
 
-#: applet.js:1010 3.2/applet.js:1004
+#: 3.0/applet.js:1007 2.8/applet.js:828 3.2/applet.js:1007
 msgid "Close"
 msgstr ""
 
-#: applet.js:1022 3.2/applet.js:1016
+#: 3.0/applet.js:1019 2.8/applet.js:840 3.2/applet.js:1019
 msgid "About..."
 msgstr ""
 
-#: applet.js:1028 3.2/applet.js:1022
+#: 3.0/applet.js:1025 2.8/applet.js:846 3.2/applet.js:1025
 msgid "Configure..."
 msgstr ""
 
-#: applet.js:1042 3.2/applet.js:1036
+#: 3.0/applet.js:1039 2.8/applet.js:860 3.2/applet.js:1039
 #, javascript-format
 msgid "Remove '%s'"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_hide_labels->description
+#. 2.8->settings-schema.json->pref_hide_labels->description
 #. 3.2->settings-schema.json->pref_hide_labels->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_hide_labels->description
 msgid "Hide labels in the window list buttons"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_invert_menu_items_order->description
+#. 2.8->settings-schema.json->pref_invert_menu_items_order->description
 #. 3.2->settings-schema.json->pref_invert_menu_items_order->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_invert_menu_items_order->description
 msgid "Invert context menu items order"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_reverse_scrolling->description
+#. 2.8->settings-schema.json->pref_reverse_scrolling->description
 #. 3.2->settings-schema.json->pref_reverse_scrolling->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_reverse_scrolling->description
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_enable_scrolling->description
+#. 2.8->settings-schema.json->pref_enable_scrolling->description
 #. 3.2->settings-schema.json->pref_enable_scrolling->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_enable_scrolling->description
 msgid "Enable mouse-wheel scrolling in the window list"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_window_preview_custom_height->description
+#. 2.8->settings-schema.json->pref_window_preview_custom_height->description
 #. 3.2->settings-schema.json->pref_window_preview_custom_height->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_window_preview_custom_height->description
 msgid "Custom height for window thumbnails"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_window_preview_custom_height->units
+#. 3.0->settings-schema.json->pref_window_preview_custom_width->units
+#. 2.8->settings-schema.json->pref_window_preview_custom_height->units
+#. 2.8->settings-schema.json->pref_window_preview_custom_width->units
 #. 3.2->settings-schema.json->pref_window_preview_custom_height->units
 #. 3.2->settings-schema.json->pref_window_preview_custom_width->units
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_window_preview_custom_height->units
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_window_preview_custom_width->units
 msgid "pixels"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_window_preview->description
+#. 2.8->settings-schema.json->pref_window_preview->description
 #. 3.2->settings-schema.json->pref_window_preview->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_window_preview->description
 msgid "Show window thumbnails on hover"
 msgstr ""
 
-#. 3.2->settings-schema.json->pref_pref_sub_menu_placement->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_pref_sub_menu_placement->description
+#. 3.0->settings-schema.json->pref_sub_menu_placement->description
+#. 2.8->settings-schema.json->pref_sub_menu_placement->description
+#. 3.2->settings-schema.json->pref_sub_menu_placement->description
 msgid "Where to display the \"Preferences\" sub-menu?"
 msgstr ""
 
-#. 3.2->settings-schema.json->pref_pref_sub_menu_placement->tooltip
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_pref_sub_menu_placement->tooltip
+#. 3.0->settings-schema.json->pref_sub_menu_placement->tooltip
+#. 2.8->settings-schema.json->pref_sub_menu_placement->tooltip
+#. 3.2->settings-schema.json->pref_sub_menu_placement->tooltip
 msgid ""
 "If the option \"Invert context menu items order\" is enabled, the \"Top of "
 "menu\" will actually be the \"Bottom of menu\" and vice versa."
 msgstr ""
 
-#. 3.2->settings-schema.json->pref_pref_sub_menu_placement->options
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_pref_sub_menu_placement->options
+#. 3.0->settings-schema.json->pref_sub_menu_placement->options
+#. 2.8->settings-schema.json->pref_sub_menu_placement->options
+#. 3.2->settings-schema.json->pref_sub_menu_placement->options
 msgid "Do not display"
 msgstr ""
 
-#. 3.2->settings-schema.json->pref_pref_sub_menu_placement->options
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_pref_sub_menu_placement->options
+#. 3.0->settings-schema.json->pref_sub_menu_placement->options
+#. 2.8->settings-schema.json->pref_sub_menu_placement->options
+#. 3.2->settings-schema.json->pref_sub_menu_placement->options
 msgid "Top of menu"
 msgstr ""
 
-#. 3.2->settings-schema.json->pref_pref_sub_menu_placement->options
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_pref_sub_menu_placement->options
+#. 3.0->settings-schema.json->pref_sub_menu_placement->options
+#. 2.8->settings-schema.json->pref_sub_menu_placement->options
+#. 3.2->settings-schema.json->pref_sub_menu_placement->options
 msgid "Bottom of menu"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_window_preview_custom_width->description
+#. 2.8->settings-schema.json->pref_window_preview_custom_width->description
 #. 3.2->settings-schema.json->pref_window_preview_custom_width->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_window_preview_custom_width->description
 msgid "Custom width for window thumbnails"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_buttons_use_entire_space->description
+#. 2.8->settings-schema.json->pref_buttons_use_entire_space->description
 #. 3.2->settings-schema.json->pref_buttons_use_entire_space->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_buttons_use_entire_space->description
 msgid ""
 "Window buttons can have different sizes and use the entire space available"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_middle_click_close->description
+#. 2.8->settings-schema.json->pref_middle_click_close->description
 #. 3.2->settings-schema.json->pref_middle_click_close->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_middle_click_close->description
 msgid "Middle click to close window"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_hide_tooltips->description
+#. 2.8->settings-schema.json->pref_hide_tooltips->description
 #. 3.2->settings-schema.json->pref_hide_tooltips->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_hide_tooltips->description
 msgid "Do not display tooltips"
 msgstr ""
 
+#. 3.0->settings-schema.json->pref_enable_alerts->description
+#. 2.8->settings-schema.json->pref_enable_alerts->description
 #. 3.2->settings-schema.json->pref_enable_alerts->description
-#. 0dyseus@window-list-fork->settings-
-#. schema.json->pref_enable_alerts->description
 msgid ""
 "Show an alert in the window list when a window from another workspace "
 "requires attention"

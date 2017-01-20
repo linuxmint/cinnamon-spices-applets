@@ -448,6 +448,11 @@ MyApplet.prototype = {
         if (!aDir || !aMenu)
             return;
 
+        // Workaround for Cinnamon 3.2.x settings window path selectors.
+        // They return an URI instead of a path like they used to. ¬¬
+        if (/^file:\/\//.test(aDir))
+            aDir = aDir.substr(7);
+
         let currentDir = Gio.file_new_for_path(aDir);
 
         if (currentDir.query_exists(null)) {
@@ -599,15 +604,6 @@ MyApplet.prototype = {
                     }
                 }
             }
-        }
-    },
-
-    _tryToGetValidIcon: function(aArr) {
-        let i = 0,
-            iLen = aArr.length;
-        for (; i < iLen; i++) {
-            if (Gtk.IconTheme.get_default().has_icon(aArr[i]))
-                return aArr[i].toString();
         }
     },
 

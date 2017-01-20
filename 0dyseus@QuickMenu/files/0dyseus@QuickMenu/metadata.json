@@ -4,7 +4,7 @@
     "max-instances": "-1",
     "dangerous": true,
     "name": "Quick Menu",
-    "version": "1.05",
+    "version": "1.06",
     "multiversion": true,
     "last-edited": "1473934114",
     "description": "Easily and quickly create a menu based on the files/folders found inside an specific folder.",

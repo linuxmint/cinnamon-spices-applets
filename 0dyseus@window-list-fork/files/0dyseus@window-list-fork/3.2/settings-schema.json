@@ -66,7 +66,7 @@
         "default": false,
         "description": "Invert context menu items order"
     },
-    "pref_pref_sub_menu_placement": {
+    "pref_sub_menu_placement": {
         "type": "combobox",
         "indent": true,
         "default": 1,

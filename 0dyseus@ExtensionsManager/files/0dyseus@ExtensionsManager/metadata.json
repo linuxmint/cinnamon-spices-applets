@@ -4,7 +4,7 @@
     "uuid": "0dyseus@ExtensionsManager",
     "max-instances": -1,
     "multiversion": true,
-    "version": "1.03",
+    "version": "1.04",
     "name": "Extensions Manager",
     "description": "Allows enabling/disabling extensions (and other tasks) from a menu.",
     "cinnamon-version": [
