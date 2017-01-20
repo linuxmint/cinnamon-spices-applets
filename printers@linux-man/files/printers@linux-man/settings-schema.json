@@ -1,10 +1,11 @@
 {
- "always-show-icon" : {
-    "type" : "checkbox",
-    "default" : true,
-    "description": "Always show icon",
-    "tooltip": "Icon is always visible or only when printing"
- },
+"show-icon": {
+    "type": "radiogroup",
+    "default": "always",
+    "description": "Show icon",
+    "options": { "Always": "always", "When printers exist": "printers", "When printing": "jobs"},
+    "tooltip": "When to show the icon"
+  },
  "show-error" : {
     "type" : "checkbox",
     "default" : true,
