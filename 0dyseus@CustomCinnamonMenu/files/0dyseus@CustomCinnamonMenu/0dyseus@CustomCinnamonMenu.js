@@ -41,7 +41,6 @@ function _(aStr) {
 
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 
-
 /**
  * Use this function instead of decodeURIComponent
  */
@@ -1085,9 +1084,10 @@ RecentButton.prototype = {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
             hover: false
         });
-        this.file = file;
+        this.mimeType = file.mimeType;
+        this.uri = file.uri;
+        this.button_name = file.name;
         this.appsMenuButton = appsMenuButton;
-        this.button_name = this.file.name;
         this.actor.set_style_class_name('menu-application-button');
         this.actor._delegate = this;
         this.label = new St.Label({
@@ -1098,13 +1098,10 @@ RecentButton.prototype = {
         this.label.set_style(this.appsMenuButton.max_width_for_buttons);
 
         if (showIcon) {
-            /**
-             * START mark Odyseus
-             * Just changed the name of the icon size variable.
-             */
             this.icon = file.createIcon(this.appsMenuButton.pref_application_icon_size);
             this.addActor(this.icon);
         }
+
         this.addActor(this.label);
 
         if (showIcon)
@@ -1115,12 +1112,6 @@ RecentButton.prototype = {
         this.menu = new PopupMenu.PopupSubMenu(this.actor);
         this.menu.actor.set_style_class_name('menu-context-menu');
         this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
-
-        let fileURI = decodeURIComponent(this.file.uri);
-        let fileIndex = fileURI.indexOf("file:///");
-
-        if (fileIndex !== -1)
-            fileURI = fileURI.substr(fileIndex + 7);
 
         this.tooltip = new Tooltips.Tooltip(this.actor, "");
         this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
@@ -1153,7 +1144,7 @@ RecentButton.prototype = {
     },
 
     activate: function(event) {
-        this.file.launch();
+        Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
     },
 
@@ -1181,9 +1172,8 @@ RecentButton.prototype = {
             menuItem.actor.style = "font-weight: bold";
             this.menu.addMenuItem(menuItem);
 
-            let file = Gio.File.new_for_uri(this.file.uri);
-
-            let default_info = Gio.AppInfo.get_default_for_type(this.file.mimeType, !this.hasLocalPath(file));
+            let file = Gio.File.new_for_uri(this.uri);
+            let default_info = Gio.AppInfo.get_default_for_type(this.mimeType, !this.hasLocalPath(file));
 
             if (default_info) {
                 menuItem = new RecentContextMenuItem(this,
@@ -1197,14 +1187,14 @@ RecentButton.prototype = {
                 this.menu.addMenuItem(menuItem);
             }
 
-            let infos = Gio.AppInfo.get_all_for_type(this.file.mimeType);
+            let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
 
             let i = 0,
                 iLen = infos.length;
             for (; i < iLen; i++) {
                 let info = infos[i];
 
-                file = Gio.File.new_for_uri(this.file.uri);
+                file = Gio.File.new_for_uri(this.uri);
 
                 if (!this.hasLocalPath(file) && !info.supports_uris())
                     continue;
@@ -1230,7 +1220,7 @@ RecentButton.prototype = {
                     _("Other application..."),
                     false,
                     Lang.bind(this, function() {
-                        Util.spawnCommandLine("nemo-open-with " + this.file.uri);
+                        Util.spawnCommandLine("nemo-open-with " + this.uri);
                         this.toggleMenu();
                         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
                     }));
@@ -2172,13 +2162,31 @@ UserPicture.prototype = {
         }
     },
 
+    _tryToGetValidIcon: function(aArr) {
+        let i = 0,
+            iLen = aArr.length;
+        for (; i < iLen; i++) {
+            if (Gtk.IconTheme.get_default().has_icon(aArr[i]))
+                return aArr[i].toString();
+        }
+        return "bookmark-missing";
+    },
+
     refreshFile: function(file) {
         if (this.actor.visible) {
             this._removeIcon();
-            this.lastApp = file.createIcon(this.iconSize);
+            // The following annoyance caused by the recent files object removal. Holly $%&¬½
+            try {
+                let contentType = Gio.content_type_guess(file.get_path(), null);
+                let icon = Gio.content_type_get_icon(contentType[0]);
+                let iconName = this._tryToGetValidIcon(icon.get_names());
 
-            if (this.lastApp) {
-                this.addActor(this.lastApp, 0);
+                if (iconName)
+                    this.refresh(iconName);
+                else
+                    this.refresh("bookmark-missing");
+            } catch (aErr) {
+                global.logError(aErr);
             }
         }
     },

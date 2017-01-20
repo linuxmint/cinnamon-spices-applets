@@ -2,6 +2,10 @@
 
 **Note:** Upstream fixes/features are changes made to the original Cinnamon Menu applet that I ported to this applet.
 
+##### 1.20
+- Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
+- Several upstream fixes.
+
 ##### 1.19
 - Added German localization. Thanks to [NikoKrause](https://github.com/NikoKrause).
 - [Upstream fix] Fixed a crash produced by certain recent files URIs.

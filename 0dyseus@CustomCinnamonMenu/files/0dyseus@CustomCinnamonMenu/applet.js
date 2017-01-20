@@ -219,6 +219,12 @@ MyApplet.prototype = {
             this._recalc_height();
 
             this.update_label_visible();
+
+            // Temporary fix.
+            Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
+                if (this.context_menu_item_remove)
+                    this.context_menu_item_remove.label.set_text(_("Remove '%s'").format(_(this._meta.name)));
+            }));
         } catch (aErr) {
             global.logError(aErr);
         }
@@ -585,6 +591,12 @@ MyApplet.prototype = {
         }
 
         this._updateIconAndLabel();
+
+        // Temporary fix.
+        Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
+            if (this.context_menu_item_remove)
+                this.context_menu_item_remove.label.set_text(_("Remove '%s'").format(_(this._meta.name)));
+        }));
     },
 
     on_applet_added_to_panel: function() {
@@ -1821,21 +1833,26 @@ MyApplet.prototype = {
                     this._addEnterEvent(button, Lang.bind(this, function() {
                         this._clearPrevSelection(button.actor);
                         button.actor.style_class = "menu-application-button-selected";
-                        let selectedAppUri = $.escapeUnescapeReplacer.unescape(button.file.uri);
+                        let selectedAppUri = $.escapeUnescapeReplacer.unescape(button.uri);
                         let file = Gio.file_new_for_uri(selectedAppUri);
+                        let fileExists = file.query_exists(null);
                         let fileIndex = selectedAppUri.indexOf("file:///");
 
                         if (fileIndex !== -1)
                             selectedAppUri = selectedAppUri.substr(fileIndex + 7);
 
                         this.setSelectedItemTitleAndDescription(button,
-                            (file.query_exists(null) ?
+                            (fileExists ?
                                 "" :
                                 _("This file is no longer available")),
                             selectedAppUri);
 
-                        if (this._useHoverFeedback)
-                            this.userPicture.refreshFile(button.file);
+                        if (this._useHoverFeedback) {
+                            if (fileExists)
+                                this.userPicture.refreshFile(file);
+                            else
+                                this.userPicture.refresh("bookmark-missing");
+                        }
                     }));
                     button.actor.connect('leave-event', Lang.bind(this, function() {
                         button.actor.style_class = "menu-application-button";
@@ -1845,7 +1862,7 @@ MyApplet.prototype = {
                         if (this._useHoverFeedback)
                             this.userPicture.refreshFace();
                     }));
-                    let file = Gio.file_new_for_uri($.escapeUnescapeReplacer.unescape(button.file.uri));
+                    let file = Gio.file_new_for_uri($.escapeUnescapeReplacer.unescape(button.uri));
 
                     if (file.query_exists(null)) {
                         this._recentButtons.push(button);
