@@ -8,8 +8,14 @@ German translation by NikoKrause(<https://github.com/NikoKrause>)
 
 ###Changelog
 
+###0.7
+    Applet only updates when receives a Cups signal - faster Menu toggle
+    3s timeout between updates
+    More error conditions
+    Code cleanup
+
 ###0.6
-    Get rid of the loop - applet refreshes when clicked or receive a Cups signal
+    Get rid of the loop - applet updates when clicked or receive a Cups signal
 
 ###0.5
     Compatibility with Cinnamon 3.2
