@@ -280,16 +280,16 @@ CustomSwitchMenuItem.prototype = {
     _setTooltip: function(aButton, aText, aCallback) {
         try {
             this.tooltip._tooltip.get_clutter_text().set_markup(
-                '<span weight="bold">Name: </span>' + this.extension.name + "\n" +
+                '<span weight="bold">' + _("Name") + ': </span>' + this.extension.name + "\n" +
                 '<span weight="bold">UUID: </span>' + this.extension.uuid + "\n" +
-                '<span weight="bold">Description: </span>' + this.extension.description
+                '<span weight="bold">' + _("Description") + ': </span>' + this.extension.description
             );
         } catch (aErr) {
             // global.logError(aErr);
             this.tooltip._tooltip.set_text(
-                "Name: " + this.extension.name + "\n" +
+                _("Name") + ": " + this.extension.name + "\n" +
                 "UUID: " + this.extension.uuid + "\n" +
-                "Description: " + this.extension.description
+                _("Description") + ": " + this.extension.description
             );
         }
     },
