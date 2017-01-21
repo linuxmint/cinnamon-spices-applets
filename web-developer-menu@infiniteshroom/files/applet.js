@@ -81,9 +81,12 @@ MyApplet.prototype = {
 
 	on_applet_clicked: function(){
 		this.menu.toggle();
+		this.apacheEnabledSwitch.setToggleState(checkService("apache")); //reload state
+		this.mysqlEnabledSwitch.setToggleState(checkService("mysql"));   //reload state
     },
 
     onapacheSwitchPressed: function(item){
+	    	this.menu.toggle();	//Close before calling gksu	
 		if(item.state){
 			Util.spawnCommandLine(CommandConstants.COMMAND_START_APACHE);
 		}
@@ -94,6 +97,7 @@ MyApplet.prototype = {
     },
     
      onmysqlSwitchPressed: function(item){
+	     	this.menu.toggle();	//Close before calling gksu	
 		if(item.state){
 			
 			Util.spawnCommandLine(CommandConstants.COMMAND_START_MYSQL);
