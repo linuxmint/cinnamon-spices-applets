@@ -2,7 +2,7 @@
 # Copyright (C) 2011
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
-# Kghbln <kgh@kgh.info>, 2015.
+# Kghbln <kgh@kgh.info>, 2015, 2017.
 #
 msgid ""
 msgstr ""
@@ -51,7 +51,7 @@ msgstr "Wird geladen ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Neu laden"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -307,7 +307,7 @@ msgstr "WOEID ermitteln"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Vertikal ausrichten"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
@@ -347,11 +347,11 @@ msgstr "Zeit im 24-Stunden-Format anzeigen"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Vorhersagezeitraum:"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "Tage"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
@@ -375,12 +375,11 @@ msgstr "Knoten"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "mph"
-msgstr "mile/h"
+msgstr "mi/h"
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
-"Wetterbedingungen wie bspw. »Windig« oder »Heiter« in der Leiste anzeigen"
+msgstr "Wetterbedingungen wie bspw. „Windig“ oder „Heiter“ in der Leiste anzeigen"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
@@ -395,9 +394,8 @@ msgid "atm"
 msgstr "atm"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
-#, fuzzy
 msgid "kPa"
-msgstr "Pa"
+msgstr "kPa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "Pa"
@@ -433,11 +431,11 @@ msgstr "Wettersymbole anzeigen"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Ermöglicht die Anzeige des örtlichen Wetters mitsamt Vorhersage"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Wetter"
 
 #~ msgid "Show 5-day forecast"
 #~ msgstr "Vorhersage für 5 Tage anzeigen"
@@ -452,4 +450,4 @@ msgstr ""
 #~ msgstr "Morgen"
 
 #~ msgid "Schema \"%s\" not found."
-#~ msgstr "Schema »%s« wurde nicht gefunden."
+#~ msgstr "Schema „%s“ wurde nicht gefunden."
