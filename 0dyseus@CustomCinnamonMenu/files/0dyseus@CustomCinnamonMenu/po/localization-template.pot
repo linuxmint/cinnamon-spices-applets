@@ -6,16 +6,17 @@
 msgid ""
 msgstr ""
 
-"Project-Id-Version: 1.19\n"
+"Project-Id-Version: 1.20\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-08 03:31-0300\n"
-"PO-Revision-Date: 2016-12-12 15:13-0300\n"
+"PO-Revision-Date: 2017-01-22 19:47-0300\n"
 "Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
+
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
@@ -24,221 +25,226 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: applet.js:1833 3.2/applet.js:1833
+#: applet.js:226 applet.js:598 3.2/applet.js:226 3.2/applet.js:598
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#: applet.js:1847 3.2/applet.js:1847
 msgid "This file is no longer available"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:1876 3.2/applet.js:1876
+#: applet.js:1895 3.2/applet.js:1895
 msgid "No recent documents"
 msgstr ""
 
-#: applet.js:2006 3.2/applet.js:2006
+#: applet.js:2025 3.2/applet.js:2025
 msgid "No recent applications"
 msgstr ""
 
-#: applet.js:2097 3.2/applet.js:2097
+#: applet.js:2116 3.2/applet.js:2116
 msgid "Favorites"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2506 applet.js:3198 3.2/applet.js:2506 3.2/applet.js:3198
+#: applet.js:2525 applet.js:3217 3.2/applet.js:2525 3.2/applet.js:3217
 msgid "Lock screen"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2509 applet.js:3197 3.2/applet.js:2509 3.2/applet.js:3197
+#: applet.js:2528 applet.js:3216 3.2/applet.js:2528 3.2/applet.js:3216
 msgid "Lock the screen"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2543 applet.js:3229 3.2/applet.js:2543 3.2/applet.js:3229
+#: applet.js:2562 applet.js:3248 3.2/applet.js:2562 3.2/applet.js:3248
 msgid "Logout"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2546 applet.js:3228 3.2/applet.js:2546 3.2/applet.js:3228
+#: applet.js:2565 applet.js:3247 3.2/applet.js:2565 3.2/applet.js:3247
 msgid "Leave the session"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2567 applet.js:3247 3.2/applet.js:2567 3.2/applet.js:3247
+#: applet.js:2586 applet.js:3266 3.2/applet.js:2586 3.2/applet.js:3266
 msgid "Quit"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2570 applet.js:3246 3.2/applet.js:2570 3.2/applet.js:3246
+#: applet.js:2589 applet.js:3265 3.2/applet.js:2589 3.2/applet.js:3265
 msgid "Shutdown the computer"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2875 3.2/applet.js:2875
+#: applet.js:2894 3.2/applet.js:2894
 msgid "Type to search..."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:3265 3.2/applet.js:3265
+#: applet.js:3284 3.2/applet.js:3284
 msgid "Open the menu editor"
 msgstr ""
 
-#: applet.js:3270 3.2/applet.js:3270
+#: applet.js:3289 3.2/applet.js:3289
 msgid "Help"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:232
+#: 0dyseus@CustomCinnamonMenu.js:266
 msgid "Please provide your password to uninstall this application"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:505
+#: 0dyseus@CustomCinnamonMenu.js:539
 msgid "Add to panel"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:508
+#: 0dyseus@CustomCinnamonMenu.js:542
 msgid "Add this application to the Panel launchers applet."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:516
+#: 0dyseus@CustomCinnamonMenu.js:550
 msgid "Add to desktop"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:519
+#: 0dyseus@CustomCinnamonMenu.js:553
 msgid "Add this application to the Desktop."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:528
+#: 0dyseus@CustomCinnamonMenu.js:562
 msgid "Remove from favorites"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:531
+#: 0dyseus@CustomCinnamonMenu.js:565
 msgid "Remove application from your favorites."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:537
+#: 0dyseus@CustomCinnamonMenu.js:571
 msgid "Add to favorites"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:540
+#: 0dyseus@CustomCinnamonMenu.js:574
 msgid "Add application to your favorites."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:550
+#: 0dyseus@CustomCinnamonMenu.js:584
 msgid "Uninstall"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:553
+#: 0dyseus@CustomCinnamonMenu.js:587
 msgid "Uninstall application from your system."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:562
+#: 0dyseus@CustomCinnamonMenu.js:596
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:565
+#: 0dyseus@CustomCinnamonMenu.js:599
 msgid "Run application through optirun command (Bumblebee)."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:571
+#: 0dyseus@CustomCinnamonMenu.js:605
 msgid "Run as root"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:574
+#: 0dyseus@CustomCinnamonMenu.js:608
 msgid "Run application as root."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:580
+#: 0dyseus@CustomCinnamonMenu.js:614
 msgid "Edit .desktop file"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:583
+#: 0dyseus@CustomCinnamonMenu.js:617
 msgid "Edit this application .desktop file with a text editor."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:589
+#: 0dyseus@CustomCinnamonMenu.js:623
 msgid "Open .desktop file folder"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:592
+#: 0dyseus@CustomCinnamonMenu.js:626
 msgid "Open the folder containg this application .desktop file."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:599
+#: 0dyseus@CustomCinnamonMenu.js:633
 msgid "Run from terminal"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:602
+#: 0dyseus@CustomCinnamonMenu.js:636
 msgid "Run application from a terminal."
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:609
+#: 0dyseus@CustomCinnamonMenu.js:643
 msgid "Run from terminal as root"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:612
+#: 0dyseus@CustomCinnamonMenu.js:646
 msgid "Run application from a terminal as root."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1143
+#: 0dyseus@CustomCinnamonMenu.js:1169
 msgid "Open with"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1195
+#: 0dyseus@CustomCinnamonMenu.js:1220
 msgid "Other application..."
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1290 0dyseus@CustomCinnamonMenu.js:1341
+#: 0dyseus@CustomCinnamonMenu.js:1315 0dyseus@CustomCinnamonMenu.js:1366
 msgid "Clear list"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1422
+#: 0dyseus@CustomCinnamonMenu.js:1447
 msgid "All Applications"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1470
+#: 0dyseus@CustomCinnamonMenu.js:1495
 msgid "Places"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1512
+#: 0dyseus@CustomCinnamonMenu.js:1537
 msgid "Recent Files"
 msgstr ""
 
-#: 0dyseus@CustomCinnamonMenu.js:1903
+#: 0dyseus@CustomCinnamonMenu.js:1928
 msgid "Recent Applications"
 msgstr ""
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:2045
+#: 0dyseus@CustomCinnamonMenu.js:2070
 msgid "Account details"
 msgstr ""
 
@@ -1655,7 +1661,9 @@ msgid "Right of applications info box"
 msgstr ""
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->description
-msgid "Customizable Main Cinnamon menu."
+msgid ""
+"Custom version of the default Cinnamon Menu applet, but infinitely more "
+"customizable."
 msgstr ""
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->name
