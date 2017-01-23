@@ -7,7 +7,6 @@ var Clutter = imports.gi.Clutter;
 var AppletManager = imports.ui.appletManager;
 var Lang = imports.lang;
 var Main = imports.ui.main;
-var Mainloop = imports.mainloop;
 var Params = imports.misc.params;
 var PopupMenu = imports.ui.popupMenu;
 var Meta = imports.gi.Meta;
@@ -17,6 +16,7 @@ var Gio = imports.gi.Gio;
 var Gettext = imports.gettext;
 var Tweener = imports.ui.tweener;
 var Applet = imports.ui.applet;
+var Tooltips = imports.ui.tooltips;
 var clog = imports.applet.clog;
 var setTimeout = imports.applet.setTimeout;
 
@@ -544,6 +544,7 @@ AppThumbnailHoverMenu.prototype = {
   _init: function _init(parent) {
     var _this3 = this;
 
+    this.appGroup = parent;
     this._applet = parent._applet;
     if (parent._applet.c32) {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
@@ -566,6 +567,8 @@ AppThumbnailHoverMenu.prototype = {
     this.actor.style_class = 'hide-arrow';
 
     this.box.style_class = 'thumbnail-popup-content';
+
+    this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
     this.actor.hide();
     this.parentActor = parent.actor;
@@ -622,8 +625,8 @@ AppThumbnailHoverMenu.prototype = {
       // close this menu, if opened by super+#
       this.close();
       this.appList.lastCycled = null;
-      return true;
     }
+    return true;
   },
 
   hoverOpen: function hoverOpen() {
@@ -644,14 +647,25 @@ AppThumbnailHoverMenu.prototype = {
     // Refresh all the thumbnails, etc when the menu opens.  These cannot
     // be created when the menu is initalized because a lot of the clutter window surfaces
     // have not been created yet...
-    setTimeout(function () {
-      return _this7.appSwitcherItem._refresh();
-    }, 0);
-    PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
+    if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+      this._tooltip.set_text(this.appGroup.appName);
+      this._tooltip.show();
+      this._tooltip.preventShow = false;
+    } else {
+      setTimeout(function () {
+        return _this7.appSwitcherItem._refresh();
+      }, 0);
+      PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
+    }
   },
 
   close: function close() {
-    PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
+    if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+      this._tooltip.hide();
+      this._tooltip.preventShow = true;
+    } else {
+      PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
+    }
   },
 
   destroy: function destroy() {
@@ -713,7 +727,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.app = parent.app;
     this.isFavapp = parent.isFavapp;
     this.actor.style_class = '';
-    this._parent = parent;
+    this.hoverMenu = parent;
 
     this.box = new St.BoxLayout();
 
@@ -781,13 +795,15 @@ PopupMenuAppSwitcherItem.prototype = {
       }
     } else if (symbol === Clutter.KEY_Return && entered) {
       Main.activateWindow(this.appThumbnails[i].metaWindow, global.get_current_time());
-      this._parent.close();
+      this.hoverMenu.close();
     } else if (symbol === closeArg) {
-      this._parent.close();
+      this.hoverMenu.close();
     } else {
       return;
     }
-    this.appThumbnails[index].thumbnail.handleEnterEvent();
+    if (this.appThumbnails[index] !== undefined) {
+      this.appThumbnails[index].thumbnail.handleEnterEvent();
+    }
   },
 
 
@@ -871,12 +887,14 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   addWindowThumbnails: function addWindowThumbnails(windows) {
-    if (this._applet.sortThumbs && windows.length > 0) {
+    if (windows.length > 0) {
       var children = this.appContainer.get_children();
       for (var w = 0, len = children.length; w < len; w++) {
         this.appContainer.remove_actor(children[w]);
       }
-      this.appThumbnails = _.orderBy(this.appThumbnails, ['metaWindow.user_time'], ['asc']);
+      if (this._applet.sortThumbs) {
+        this.appThumbnails = _.orderBy(this.appThumbnails, ['metaWindow.user_time'], ['asc']);
+      }
       this.reAdd = true;
     }
 
@@ -885,11 +903,7 @@ PopupMenuAppSwitcherItem.prototype = {
       var refThumb = _.findIndex(this.appThumbnails, { metaWindow: metaWindow });
       if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
         if (this.reAdd) {
-          if (this._applet.sortThumbs) {
-            this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
-          } else {
-            this.appContainer.add_actor(this.appThumbnails[i].thumbnail.actor);
-          }
+          this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
         }
       } else {
         if (this.metaWindowThumbnail) {
@@ -901,11 +915,7 @@ PopupMenuAppSwitcherItem.prototype = {
           metaWindow: metaWindow,
           thumbnail: thumbnail
         });
-        if (this._applet.sortThumbs) {
-          this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
-        } else {
-          this.appContainer.add_actor(this.appThumbnails[i].thumbnail.actor);
-        }
+        this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
       }
     }
     this.appContainer.show();
@@ -991,7 +1001,7 @@ WindowThumbnail.prototype = {
     this.app = parent.app;
     this.isFavapp = parent.isFavapp || false;
     this.wasMinimized = false;
-    this._parent = parent;
+    this.appSwitcherItem = parent;
     this.thumbnailPadding = 16;
     this.signals = {
       actor: [],
@@ -1073,7 +1083,7 @@ WindowThumbnail.prototype = {
       this.actor.add_style_pseudo_class('outlined');
       this.actor.add_style_pseudo_class('selected');
       this.button.show();
-      if (this.metaWindow.minimized && this._applet.enablePeek && this.app.get_name() !== 'Steam') {
+      if (this.metaWindow.minimized && this._applet.enablePeek && this.appSwitcherItem.hoverMenu.appGroup.appName !== 'Steam') {
         this.metaWindow.unminimize();
         if (this.metaWindow.is_fullscreen()) {
           this.metaWindow.unmaximize(global.get_current_time());
@@ -1180,7 +1190,7 @@ WindowThumbnail.prototype = {
       // this.thumbnailActor.height = 0
       // this.thumbnailActor.width = 0
       this.thumbnailActor.child = null;
-      var apptext = this.app.get_name();
+      var apptext = this.appSwitcherItem.hoverMenu.appGroup.appName;
       // not sure why it's 7
       this.thumbnailWidth = THUMBNAIL_ICON_SIZE + Math.floor(apptext.length * 7.0);
       this._label.text = apptext;
@@ -1247,7 +1257,7 @@ WindowThumbnail.prototype = {
 
     this.metaWindow.delete(global.get_current_time());
     if (this.metaWindows.length === 1) {
-      this._parent._parent.close();
+      this.appSwitcherItem.hoverMenu.close();
     }
   },
 
@@ -1263,7 +1273,7 @@ WindowThumbnail.prototype = {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && !this.stopClick && !this.isFavapp) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
 
-      this._parent._parent.close();
+      this.appSwitcherItem.hoverMenu.close();
     } else if (event.get_state() & Clutter.ModifierType.BUTTON2_MASK && !this.stopClick) {
       this.handleAfterClick();
     }
@@ -1386,11 +1396,11 @@ WindowThumbnail.prototype = {
         });
       });
     }
-    var refThumb = _.findIndex(this._parent.appThumbnails, function (thumb) {
+    var refThumb = _.findIndex(this.appSwitcherItem.appThumbnails, function (thumb) {
       return _.isEqual(thumb.metaWindow, _this16.metaWindow);
     });
     if (refThumb !== -1) {
-      _.pullAt(this._parent.appThumbnails, refThumb);
+      _.pullAt(this.appSwitcherItem.appThumbnails, refThumb);
     }
 
     this._container.destroy_children();

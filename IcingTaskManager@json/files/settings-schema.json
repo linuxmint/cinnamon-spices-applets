@@ -245,7 +245,7 @@
   },
   "show-active": {
     "type": "checkbox",
-    "default": true,
+    "default": false,
     "description": "Show active app indicators",
     "tooltip": "Active app styling will indicate if an app is active."
   },
@@ -341,5 +341,11 @@
     "default": false,
     "description": "Allow themes to control the thumbnail close button",
     "tooltip": "Controls whether or not the theme controls the window thumbnail's close button."
+  },
+  "useSystemTooltips": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use system tooltips for closed apps",
+    "tooltip": "Controls whether or not system tooltips are in use when hovering over closed pinned apps."
   }
 }

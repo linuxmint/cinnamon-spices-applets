@@ -522,3 +522,12 @@ msgstr "Non-символични икони"
 msgid "No icons"
 msgstr "Не икони"
 
+msgid "Use system tooltips for closed apps"
+msgstr "Използвайте системата пояснения за затворените приложения"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""
+"Контролира дали или не системни пояснения са в употреба, когато кръжи над "
+"затворените фиксирани приложения."

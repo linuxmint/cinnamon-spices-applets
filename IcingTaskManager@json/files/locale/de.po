@@ -540,3 +540,13 @@ msgstr "Nicht-symbolische Symbole"
 
 msgid "No icons"
 msgstr "Keine Symbole"
+
+msgid "Use system tooltips for closed apps"
+msgstr "Verwenden Sie Tooltips für geschlossene Anwendungen"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""
+"Steuert, ob System-Tooltips verwendet werden, wenn sie über geschlossene, "
+"fixierte Apps schweben."

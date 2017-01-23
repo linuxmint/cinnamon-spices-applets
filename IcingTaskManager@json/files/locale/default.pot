@@ -480,3 +480,11 @@ msgstr ""
 
 msgid "No icons"
 msgstr ""
+
+msgid "Use system tooltips for closed apps"
+msgstr ""
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""

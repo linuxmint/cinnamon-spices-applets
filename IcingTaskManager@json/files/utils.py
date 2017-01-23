@@ -88,6 +88,7 @@ def handleCli():
                             ('show-alerts', config['show-alerts']),
                             ('show-pinned', config['show-pinned']),
                             ('arrange-pinnedApps', config['arrange-pinnedApps']),
+                            ('cycleMenusHotkey', config['cycleMenusHotkey']),
                             ('show-apps-order-hotkey', config['show-apps-order-hotkey']),
                             ('show-apps-order-timeout', config['show-apps-order-timeout']),
                             ('Thumbnails', config['Thumbnails']),
