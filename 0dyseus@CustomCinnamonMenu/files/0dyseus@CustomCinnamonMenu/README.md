@@ -46,7 +46,7 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 
 ### Menu *emulating* the Whisker menu (XFCE)
 
-![Whisker menu](https://raw.githubusercontent.com/Odyseus/CinnamonTools/master/Applets/0dyseus%40CustomCinnamonMenu/screenshot2.png "Whisker menu")
+![Whisker menu](https://raw.githubusercontent.com/Odyseus/CinnamonTools/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/screenshot2.png "Whisker menu")
 
 ## Known issues
 - No known issues.
@@ -55,9 +55,9 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 - [NikoKrause](https://github.com/NikoKrause): Bug fixes and German localization.
 - [Radek71](https://github.com/Radek71): Czech localization.
 - Some advanced features on this applet are based on [lestcape](https://github.com/lestcape)'s [Configurable Menu applet](https://github.com/lestcape/Configurable-Menu).
-- Fuzzy search feature based on [Sane Menu](https://cinnamon-spices.linuxmint.com/applets/view/258s) applet by [nooulaif](https://github.com/nooulaif).
+- Fuzzy search feature based on [Sane Menu](https://cinnamon-spices.linuxmint.com/applets/view/258) applet by [nooulaif](https://github.com/nooulaif).
 - Some icons used by this menu are from [Entypo pictograms](www.entypo.com) by Daniel Bruce.
 
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/CHANGELOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/CHANGELOG.md)
 
-[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/TODO.md)
+[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/TODO)
