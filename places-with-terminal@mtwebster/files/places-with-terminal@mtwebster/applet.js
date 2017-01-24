@@ -91,15 +91,15 @@ MyMenu.prototype = {
 		}
 };
 
-function MyApplet(orientation) {
-	this._init(orientation);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+	this._init(orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
 		__proto__: Applet.IconApplet.prototype,
 
-		_init: function(orientation) {
-			Applet.IconApplet.prototype._init.call(this, orientation);
+		_init: function(orientation, panelHeight, instanceId) {
+			Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
 			try {
 				this.set_applet_icon_symbolic_name('folder');
@@ -190,7 +190,7 @@ MyApplet.prototype = {
 		}
 };
 
-function main(metadata, orientation) {  
-	let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {  
+	let myApplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
 	return myApplet;      
 };
