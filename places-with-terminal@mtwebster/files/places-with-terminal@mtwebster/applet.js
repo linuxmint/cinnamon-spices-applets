@@ -94,11 +94,11 @@ MyApplet.prototype = {
 				this.menuManager.addMenu(this.menu);
 
 				this._display();
-                this.refresh_menu_item = new Applet.MenuItem(_("Refresh bookmarks..."), 'view-refresh-symbolic',
-                        Lang.bind(this, this._refresh));
+				this.refresh_menu_item = new PopupMenu.PopupIconMenuItem(_("Refresh bookmarks..."), 'view-refresh-symbolic', St.IconType.SYMBOLIC);
+                this.refresh_menu_item.connect('activate', Lang.bind(this, this._refresh));
                 this._applet_context_menu.addMenuItem(this.refresh_menu_item);
-                this.defaults_menu_item = new Applet.MenuItem(_("Change default programs..."), 'system-run-symbolic',
-                        Lang.bind(this, this._defaults));
+                this.defaults_menu_item = new PopupMenu.PopupIconMenuItem(_("Change default programs..."), 'system-run-symbolic', St.IconType.SYMBOLIC);
+                this.refresh_menu_item.connect('activate', Lang.bind(this, this._defaults));
                 this._applet_context_menu.addMenuItem(this.defaults_menu_item);
 			}
 			catch (e) {
@@ -113,7 +113,7 @@ MyApplet.prototype = {
         },
 
         _defaults: function() {
-            Util.spawn(['gnome-control-center', 'info']);
+            Util.spawn(['cinnamon-settings', 'default']);
         },
 
 		on_applet_clicked: function(event) {    
