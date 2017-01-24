@@ -145,7 +145,7 @@ MyApplet.prototype = {
 			
 			this.menu.addMenuItem(this.computerItem);
 			this.computerItem.connect('activate', function(actor, event) {
-                            Main.Util.spawnCommandLine("nautilus computer://");
+                            Main.Util.spawnCommandLine("xdg-open computer://");
 			});
 			
 			let icon = new St.Icon({icon_name: "harddrive", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon'});
@@ -153,7 +153,7 @@ MyApplet.prototype = {
 			
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
-                            Main.Util.spawnCommandLine("gksudo nautilus /");
+                            Main.Util.spawnCommandLine("gksudo xdg-open /");
 			});
 			
 			// Separator
