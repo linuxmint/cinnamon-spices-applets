@@ -1,6 +1,6 @@
 {
   "name": "icingtaskmanager",
-  "version": "4.1.2",
+  "version": "4.3.1",
   "description": "Icing Task Manager",
   "main": "gulpfile.js",
   "scripts": {
