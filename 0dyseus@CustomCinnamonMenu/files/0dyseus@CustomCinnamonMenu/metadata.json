@@ -4,8 +4,8 @@
     "max-instances": -1,
     "dangerous": false,
     "multiversion": true,
-    "description": "Customizable Main Cinnamon menu.",
-    "version": "1.19",
+    "description": "Custom version of the default Cinnamon Menu applet, but infinitely more customizable.",
+    "version": "1.20",
     "last-edited": "1473874250",
     "name": "Custom Cinnamon Menu",
     "cinnamon-version": [
