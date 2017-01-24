@@ -24,4 +24,4 @@ system.
 
 - [buzz](https://github.com/buzz): Bug fixes.
 
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40SysmonitorByOrcus/CHANGELOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40SysmonitorByOrcus/files/0dyseus%40SysmonitorByOrcus/CHANGELOG.md)
