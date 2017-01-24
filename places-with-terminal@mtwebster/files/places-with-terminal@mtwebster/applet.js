@@ -35,12 +35,13 @@ function MyPopupMenuItem()
 MyPopupMenuItem.prototype =
 {
 		__proto__: PopupMenu.PopupBaseMenuItem.prototype,
-		_init: function(icon, text, loc, params)
+		_init: function(icon, text, loc, menu_actor, params)
 		{
 		    let term_icon = new St.Icon({icon_name: "terminal", icon_size: 16, icon_type: St.IconType.FULLCOLOR});
 			PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
 			this.icon = icon;
             this.loc = loc;
+			this.menu_actor = menu_actor;
 			this.addActor(this.icon);
             this.labeltext = text;
 			this.label = new St.Label({ text: text });
@@ -72,6 +73,7 @@ MyPopupMenuItem.prototype =
                 this.loc = "/";
             } 
             Main.Util.spawnCommandLine("gnome-terminal --working-directory="+this.loc);
+			this.menu_actor.hide();
         }
 };
 
@@ -130,7 +132,7 @@ MyApplet.prototype = {
 			for ( placeid; placeid < this.defaultPlaces.length; placeid++) {
 				let icon = this.defaultPlaces[placeid].iconFactory(ICON_SIZE);
 				this.placeItems[placeid] = new MyPopupMenuItem(icon, _(this.defaultPlaces[placeid].name),
-                                    this.defaultPlaces[placeid].id.replace('bookmark:file://',''));
+                                    this.defaultPlaces[placeid].id.replace('bookmark:file://',''), this.menu.actor);
 				this.placeItems[placeid].place = this.defaultPlaces[placeid];
 
 				this.menu.addMenuItem(this.placeItems[placeid]);
@@ -149,7 +151,7 @@ MyApplet.prototype = {
 			});
 			
 			let icon = new St.Icon({icon_name: "harddrive", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon'});
-			this.filesystemItem = new MyPopupMenuItem(icon, _("File System"), "root");
+			this.filesystemItem = new MyPopupMenuItem(icon, _("File System"), "root", this.menu.actor);
 			
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
@@ -164,7 +166,7 @@ MyApplet.prototype = {
 			for ( bookmarkid; bookmarkid < this.bookmarks.length; bookmarkid++, placeid++) {
 				let icon = this.bookmarks[bookmarkid].iconFactory(ICON_SIZE);
 				this.placeItems[placeid] = new MyPopupMenuItem(icon, _(this.bookmarks[bookmarkid].name),
-                        this.bookmarks[bookmarkid].id.replace('bookmark:file://',''));
+                        this.bookmarks[bookmarkid].id.replace('bookmark:file://',''), this.menu.actor);
 				this.placeItems[placeid].place = this.bookmarks[bookmarkid];
 				this.menu.addMenuItem(this.placeItems[placeid]);
 				this.placeItems[placeid].connect('activate', function(actor, event) {
