@@ -55,12 +55,12 @@ IconLabelButton.prototype = {
     });
     this.actor.height = parent._applet._panelHeight;
     this.actor._delegate = this;
+
     this.signals = {
       _container: [],
       settings: [],
       actor: []
     };
-    this.metaWorkspaces = [];
 
     // We do a fancy layout with icons and labels, so we'd like to do our own allocation
     // in a Cinnamon.GenericContainer
@@ -85,6 +85,7 @@ IconLabelButton.prototype = {
     this._label = new St.Label({
       style_class: 'app-button-label'
     });
+    this._label.text = '';
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel'
     });
@@ -108,7 +109,9 @@ IconLabelButton.prototype = {
     this.actor.reactive = !global.settings.get_boolean('panel-edit-mode');
   },
 
-  setIconPadding: function setIconPadding(init) {
+  setIconPadding: function setIconPadding() {
+    var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node();
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
@@ -132,9 +135,14 @@ IconLabelButton.prototype = {
     }
   },
 
-  setText: function setText(text) {
+  setText: function setText() {
+    var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (text) {
       this._label.text = text;
+      if (text.length > 0) {
+        this._label.set_style('padding-right: 4px;');
+      }
     }
   },
 
@@ -293,17 +301,18 @@ IconLabelButton.prototype = {
     }
     this._numLabel.allocate(childBox, flags);
   },
-  showLabel: function showLabel(animate, targetWidth) {
+  showLabel: function showLabel(animate) {
+    var targetWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MAX_BUTTON_WIDTH;
+
     // need to turn width back to preferred.
     var setToZero;
     if (this._label.width < 2) {
       this._label.set_width(-1);
       setToZero = true;
-    } else if (this._label.width < this._label.text.length * 7 - 5 || this._label.width > this._label.text.length * 7 + 5) {
+    } else if (this._label.text && this._label.width < this._label.text.length * 7 - 5 || this._label.width > this._label.text.length * 7 + 5) {
       this._label.set_width(-1);
     }
-    var naturalWidth = this._label.get_preferred_width(-1);
-    var width = Math.min(targetWidth || naturalWidth, 150);
+    var width = Math.min(targetWidth);
     if (setToZero) {
       this._label.width = 1;
     }
@@ -420,17 +429,15 @@ AppButton.prototype = {
     }
   },
 
-  _setWatchedWorkspaces: function _setWatchedWorkspaces(workspaces) {
-    this.metaWorkspaces = workspaces;
-  },
-
   _hasFocus: function _hasFocus() {
     var _this4 = this;
 
     var workspaceIds = [];
 
-    for (var i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      workspaceIds.push(this.metaWorkspaces[i].workspace.index());
+    var workspaces = _.map(this._applet.metaWorkspaces, 'ws');
+
+    for (var i = 0, len = workspaces.length; i < len; i++) {
+      workspaceIds.push(workspaces[i].index());
     }
 
     var windows = _.filter(this.metaWindows, function (win) {

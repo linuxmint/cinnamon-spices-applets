@@ -508,3 +508,13 @@ msgstr "סמלים ללא סמלי"
 
 msgid "No icons"
 msgstr "לא נמצאו סמלים"
+
+msgid "Use system tooltips for closed apps"
+msgstr "השתמש ובטיפי מערכת עבור יישומים סגורים"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""
+"הגדרה זו קובע אם ובטיפי מערכת או לא נמצאים בשימוש כאשר מרחפים מעל יישומים "
+"מוצמדים סגורים."

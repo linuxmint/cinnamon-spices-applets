@@ -556,3 +556,13 @@ msgstr "Icônes non symboliques"
 
 msgid "No icons"
 msgstr "Aucune icône"
+
+msgid "Use system tooltips for closed apps"
+msgstr "Utiliser les info-bulles système pour les applications fermées"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""
+"Contrôle si les info-bulles du système sont utilisées lorsque survolent "
+"des applications fermées fermées."

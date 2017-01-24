@@ -538,3 +538,13 @@ msgstr "Несимволический иконки"
 
 msgid "No icons"
 msgstr "Нет иконки"
+
+msgid "Use system tooltips for closed apps"
+msgstr "Использование системных подсказок для закрытых приложений"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr ""
+"Определяет, будет ли или нет система всплывающих подсказок используются "
+"при наведении курсора на закрытых возлагали приложений."

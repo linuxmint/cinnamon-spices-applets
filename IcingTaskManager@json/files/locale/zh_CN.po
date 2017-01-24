@@ -500,3 +500,11 @@ msgstr "非符号图标"
 
 msgid "No icons"
 msgstr "没有图标"
+
+msgid "Use system tooltips for closed apps"
+msgstr "对已关闭的应用使用系统工具提示"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over "
+"closed pinned apps."
+msgstr "控制悬停在已锁定的固定应用程序上时系统工具提示是否正在使用。"
