@@ -2,7 +2,7 @@
  * Cinnamon RSS feed reader applet
  *
  * Author: jonbrett.dev@gmail.com
- * Date: 2013 - 2016
+ * Date: 2013 - 2017
  *
  * Cinnamon RSS feed reader applet is free software: you can redistribute it
  * and/or modify it under the terms of the GNU General Public License as published
@@ -299,12 +299,21 @@ FeedApplet.prototype = {
         this.logger.debug("FeedApplet.update_title");
         let unread_count = 0;
         let tooltip = "";
+        let first = true;
 
+        // Application tooltip will only list unread feeds.
         for (var i = 0; i < this.feeds.length; i++) {
-            unread_count += this.feeds[i].get_unread_count();
-            if (i != 0)
-                tooltip += "\n";
-            tooltip += this.feeds[i].get_title();
+            count = this.feeds[i].get_unread_count();
+
+            if(count > 0){
+                unread_count += count;
+                // ensure the last feed added does not get a newline character.
+                if(!first){
+                    tooltip += "\n";
+                }
+                tooltip += this.feeds[i].get_title();
+                first = false;
+            }
         }
 
         if (unread_count > 0)
