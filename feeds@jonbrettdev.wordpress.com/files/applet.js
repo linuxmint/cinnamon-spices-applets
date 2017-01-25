@@ -316,12 +316,13 @@ FeedApplet.prototype = {
             }
         }
 
-        if (unread_count > 0)
+        if (unread_count > 0) {
             this.set_applet_icon_symbolic_name("feed-new");
-        else
+            this.set_applet_tooltip(tooltip);
+        } else {
             this.set_applet_icon_symbolic_name("feed");
-
-        this.set_applet_tooltip(tooltip);
+            this.set_applet_tooltip("No unread feeds");
+        }
     },
 
     /* Private method used to handle updating feeds when a change has been made in the settings menu */
