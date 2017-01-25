@@ -10,7 +10,7 @@ const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
-const Meta = imports.ui.appletManager.appletMeta["betterlock@entelechy"];
+const Meta = imports.ui.appletManager.appletMeta["betterlock"];
 
 function MyApplet(orientation){
     this._init(orientation);
