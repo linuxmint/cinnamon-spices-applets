@@ -111,7 +111,7 @@ MyApplet.prototype = {
                 this.refresh_menu_item.connect('activate', Lang.bind(this, this._refresh));
                 this._applet_context_menu.addMenuItem(this.refresh_menu_item);
                 this.defaults_menu_item = new PopupMenu.PopupIconMenuItem(_("Change default programs..."), 'system-run-symbolic', St.IconType.SYMBOLIC);
-                this.refresh_menu_item.connect('activate', Lang.bind(this, this._defaults));
+                this.defaults_menu_item.connect('activate', Lang.bind(this, this._defaults));
                 this._applet_context_menu.addMenuItem(this.defaults_menu_item);
 			}
 			catch (e) {
