@@ -30,7 +30,7 @@ A spice can contain many files, but it should have the following file structure:
 - UUID/files/
 - UUID/files/UUID
 - UUID/files/UUID/metadata.json
-- UUID/files/UUID/extension.js
+- UUID/files/UUID/applet.js
 
 There are two important directories:
 
