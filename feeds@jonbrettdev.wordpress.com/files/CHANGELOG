@@ -1,6 +1,11 @@
+0.24
+ ====
+ - Removed clutter from applet tooltip by only showing unread feeds.
+
 0.23
  ====
  - opml file import will fail with non-ascii characters in title. #94
+
 0.22
  ====
  - Fixed processor 100% utilization issue. #91
@@ -9,6 +14,7 @@
  - Resolved title being overridden sometimes and blank other times. #78
  - Changed default update interval to 15 min. #89
  - Changed default option to not show read posts. #88
+
 0.21
 ====
 - Fixed issue with notifications remaining after app is removed. #68
@@ -17,16 +23,19 @@
 - * Added hover shading to better identify what feed / item is being hovered over.
 - Changed right click to open the raw feed in browser. #84
 - Made the sub menus automatic and smarter. #83
+
 0.20
 ====
 - Added color to unread feeds #81
 - Fixed issue with feeds [Issues #80, #77]
+
 0.19
 ====
 - Made notifications smarter, when feed is read the notification goes away. #73
 - Modified python to work in both python 2 and 3. #55 
 - Fixed manage feeds not working on Mint. #72
 - Fixed Mark All not working (Thanks @pehiv). #75
+
 0.18
 ====
 - Fixed width of FeedItem to match width and not cut the title shorter than needed. #69
