@@ -7,8 +7,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
-const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 const Gtk = imports.gi.Gtk;
 const Util = imports.misc.util;
 
@@ -26,6 +24,19 @@ function ok_Terminal(id)
         return true;
     }
 }
+
+// l10n
+const Gettext = imports.gettext;
+const UUID = "places-with-terminal@mtwebster";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+   let translation = Gettext.gettext(str);
+   if(translation != str) {
+      return translation;
+   }
+   return Gettext.dgettext(UUID, str);
+};
 
 function MyPopupMenuItem()
 {
