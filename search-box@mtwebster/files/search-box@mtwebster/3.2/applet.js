@@ -31,7 +31,9 @@ MyApplet.prototype = {
     _init: function(orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         
-        try {        
+        try {
+            this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             this._searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
                                                icon_name: 'edit-find',
@@ -64,7 +66,7 @@ MyApplet.prototype = {
             this._searchArea.add(this.searchBox);
 
             this.buttonbox = new St.BoxLayout();
-            button = new St.Button({ child: this.searchIcon });
+            let button = new St.Button({ child: this.searchIcon });
             button.connect('clicked', Lang.bind(this, this._search));
             this.buttonbox.add_actor(button);
             this._searchArea.add(this.buttonbox);
@@ -79,6 +81,8 @@ MyApplet.prototype = {
             this.searchEntryText.connect('text-changed', Lang.bind(this, this._onSearchTextChanged));
             this.searchEntryText.connect('key-press-event', Lang.bind(this, this._onMenuKeyPress));
             this._previousSearchPattern = "";
+
+            this.update_label_visible();
         }
         catch (e) {
             global.logError(e);
@@ -124,12 +128,13 @@ MyApplet.prototype = {
         let symbol = event.get_key_symbol();
         if (symbol==Clutter.KEY_Return && this.menu.isOpen) {
             this._search();
-            return true;
         }
     },
 
     _search: function() {
         Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.searchEntry.get_text() + "'");
+        this.searchEntry.set_text("");
+        this.searchActive = false;
         this.menu.close();
     },
 
@@ -139,7 +144,7 @@ MyApplet.prototype = {
         global.stage.set_key_focus(this.searchEntry);
     },
 
-    _onSearchTextChanged: function (se, prop) {
+    _onSearchTextChanged: function () {
         this.searchActive = this.searchEntry.get_text() != '';
         if (this.searchActive) {
             this.searchEntry.set_secondary_icon(this._searchActiveIcon);
@@ -167,7 +172,6 @@ MyApplet.prototype = {
         }
         if (this._searchTimeoutId > 0)
             return;
-        this._searchTimeoutId = Mainloop.timeout_add(150, Lang.bind(this, this._doSearch));
     },
 
     on_applet_clicked: function(event) {
@@ -177,6 +181,15 @@ MyApplet.prototype = {
 
     on_orientation_changed: function (orientation) {
         this._orientation = orientation;
+
+        this.update_label_visible();
+    },
+
+    update_label_visible: function () {
+        if (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT)
+            this.hide_applet_label(true);
+        else
+            this.hide_applet_label(false);
     }
 
 };
