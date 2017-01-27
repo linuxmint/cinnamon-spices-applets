@@ -1,5 +1,8 @@
 ## Change Log
 
+##### 1.06
+- Fixed a Cjs warning when switching workspaces.
+
 ##### 1.05
 - Improved support for Cinnamon 3.2.x.
 - Improved icon display on window list menu.

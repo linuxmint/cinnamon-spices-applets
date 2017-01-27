@@ -25,7 +25,7 @@ This applet has to read every single file/folder inside a main folder to create 
 
 ## Options
 
-![Settings window](https://raw.githubusercontent.com/Odyseus/CinnamonTools/master/Applets/0dyseus%40QuickMenu/files/0dyseus%40QuickMenu/screenshot2.png "Settings window")
+![Settings window](https://odyseus.github.io/CinnamonTools/lib/img/QuickMenu-001.png "Settings window")
 
 #### Applet settings
 
@@ -55,6 +55,6 @@ This applet has to read every single file/folder inside a main folder to create 
 
 #### Image featuring different icons for each sub-menu and different icon sizes
 
-![Image featuring different icons for each sub-menu and different icon sizes](https://raw.githubusercontent.com/Odyseus/CinnamonTools/master/Applets/0dyseus%40QuickMenu/files/0dyseus%40QuickMenu/screenshot3.png "Image featuring different icons for each sub-menu and different icon sizes")
+![Image featuring different icons for each sub-menu and different icon sizes](https://odyseus.github.io/CinnamonTools/lib/img/QuickMenu-002.png "Image featuring different icons for each sub-menu and different icon sizes")
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40QuickMenu/files/0dyseus%40QuickMenu/CHANGELOG.md)
