@@ -69,6 +69,10 @@ MyApplet.prototype = {
         this._updateState();
     },
 
+    on_applet_removed_from_panel: function() {
+        Keymap.disconnect(this._keyboardStateChangedId);
+    },
+
     _ensureSource: function() {
         if (!this._source) {
             this._source = new MessageTray.Source();
