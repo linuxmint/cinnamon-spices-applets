@@ -46,7 +46,7 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 
 ### Menu *emulating* the Whisker menu (XFCE)
 
-![Whisker menu](https://raw.githubusercontent.com/Odyseus/CinnamonTools/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/screenshot2.png "Whisker menu")
+![Whisker menu](https://odyseus.github.io/CinnamonTools/lib/img/CustomCinnamonMenu-001.png "Whisker menu")
 
 ## Known issues
 - No known issues.
