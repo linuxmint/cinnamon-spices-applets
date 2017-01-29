@@ -1161,7 +1161,7 @@ MyApplet.prototype = {
             let current_workspace_index = global.screen.get_active_workspace_index();
             let monitor = Main.layoutManager.primaryMonitor;
 
-            if (this._workspace_osd === null) {
+            if (!this._workspace_osd) {
                 this._workspace_osd = new St.Label({
                     style_class: "workspace-osd"
                 });
@@ -1206,7 +1206,7 @@ MyApplet.prototype = {
     },
 
     _fadeWorkspaceOSD: function() {
-        if (this._workspace_osd !== null) {
+        if (this._workspace_osd) {
             let duration = global.settings.get_int("workspace-osd-duration") / 2000;
             Tweener.addTween(this._workspace_osd, {
                 opacity: 0,
@@ -1219,7 +1219,7 @@ MyApplet.prototype = {
     },
 
     _hideWorkspaceOSD: function() {
-        if (this._workspace_osd !== null) {
+        if (this._workspace_osd) {
             this._workspace_osd.hide();
             Main.layoutManager.removeChrome(this._workspace_osd);
             this._workspace_osd.destroy();

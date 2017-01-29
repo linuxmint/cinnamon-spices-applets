@@ -20,7 +20,7 @@ MyApplet.prototype = {
             this.set_applet_tooltip(_("Computer"));
             this.computer_path = 'computer:///';
             this.computer_directory =  Gio.file_new_for_uri(this.computer_path);
-            this.set_applet_icon_symbolic_name("computer");;
+            this.set_applet_icon_symbolic_name("computer");
         }
         catch (e) {
             global.logError(e);

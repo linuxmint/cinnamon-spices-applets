@@ -1,6 +1,6 @@
 {
     "appearanceHeader": {
-        "type": "header",
+        "type": "section",
         "description": "Appearance"
     },
     
@@ -42,14 +42,14 @@
     },
     
     "boxShadow": {
-        "type": "checkbox",
+        "type": "switch",
         "description": "Show shadow behind notes",
         "default": false,
         "tooltip": "Warning: this has been known to slow down some computers - not recommended on older hardware"
     },
     
     "behaviorHeader": {
-        "type": "header",
+        "type": "section",
         "description": "Behavior"
     },
     

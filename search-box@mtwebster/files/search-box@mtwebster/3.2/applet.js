@@ -1,42 +1,40 @@
 const Applet = imports.ui.applet;
-const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
-const UPowerGlib = imports.gi.UPowerGlib;
-const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
-const Gtk = imports.gi.Gtk;
+const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
-const Cinnamon = imports.gi.Cinnamon;
-const AppletDir = imports.ui.appletManager.applets['search-box@mtwebster'];
-const AppletSettings = AppletDir.appletSettings;
-const AppletSettingsUI = AppletDir.appletSettingsUI;
 
+let prov_label = '';
+let prov_url = '';
 
-const APPLET_DIR = imports.ui.appletManager._find_applet('search-box@mtwebster');
+// l10n
+const Gettext = imports.gettext;
+const UUID = "search-box@mtwebster";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
-prov_label = '';
-prov_url = '';
-const DEFAULT_SHOW = true;
-const DEFAULT_ARRAY = ['Provider', 'Google', 'http://google.com/search?q='];
-const TEXT_EDITOR = 'xdg-open';
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(orientation, panel_height, instance_id) {
+    this._init(orientation, panel_height, instance_id);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.TextIconApplet.prototype._init.call(this, orientation);
+    _init: function(orientation, panel_height, instance_id) {
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+        
         try {
-            this.settings = new AppletSettings.AppletSettings('search-box@mtwebster', 'providers.conf', 'providers.conf');
-            this.menuManager = new PopupMenu.PopupMenuManager(this);
+            this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
+            this.settings = new Settings.AppletSettings(this, UUID, instance_id);
             this._searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
                                                icon_name: 'edit-find',
                                                icon_type: St.IconType.SYMBOLIC });
@@ -45,16 +43,18 @@ MyApplet.prototype = {
                                              icon_type: St.IconType.SYMBOLIC });
             this.searchIcon = new St.Icon({icon_name: "edit-find", icon_size: 24, icon_type: St.IconType.FULLCOLOR});
             this._searchIconClickedId = 0;
-            let ar = this.settings.getComboArray('Provider', DEFAULT_ARRAY);
-            show_provider = this.settings.getBoolean('Show Provider', DEFAULT_SHOW);
-            if (show_provider) {
-                this.set_applet_label(ar[1]);
-            } else {
-                this.set_applet_label('');
-            }
-            prov_url = ar[2];
+            
+            this.settings.bind("show-provider", "show_provider", this._reload);
+            this.settings.bind("selected-provider", "selected_provider", this._reload);
+            this.settings.bind("use-custom-provider", "use_custom_provider", this._reload);
+            this.settings.bind("custom-provider-label", "custom_provider_label", this._reload);
+            this.settings.bind("custom-provider-url", "custom_provider_url", this._reload);
+            this._reload();
+
             this.set_applet_icon_symbolic_name("edit-find-symbolic");
             this._orientation = orientation;
+
+            this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, this._orientation);
             this.menuManager.addMenu(this.menu);
 
@@ -66,7 +66,7 @@ MyApplet.prototype = {
             this._searchArea.add(this.searchBox);
 
             this.buttonbox = new St.BoxLayout();
-            button = new St.Button({ child: this.searchIcon });
+            let button = new St.Button({ child: this.searchIcon });
             button.connect('clicked', Lang.bind(this, this._search));
             this.buttonbox.add_actor(button);
             this._searchArea.add(this.buttonbox);
@@ -82,63 +82,59 @@ MyApplet.prototype = {
             this.searchEntryText.connect('key-press-event', Lang.bind(this, this._onMenuKeyPress));
             this._previousSearchPattern = "";
 
-            this.defaults_menu_item = new Applet.MenuItem(_("Change default programs..."), 'system-run-symbolic',
-                    Lang.bind(this, this._defaults));
-            this.edit_menu_item = new Applet.MenuItem(_("Edit providers"), 'accessories-text-editor-symbolic',
-                    Lang.bind(this, this._edit_providers));
-
-
-            this.provider_switch = new AppletSettingsUI.SwitchSetting(this.settings, 'Show Provider');
-            this.provider_selection = new AppletSettingsUI.ComboSetting(this.settings, 'Provider');
-
-            this.settings_menu = new AppletSettingsUI.SettingsMenu('Settings');
-
-
-            this.settings_menu.addSetting(this.provider_switch.getSwitch());
-            this.settings_menu.addSetting(this.provider_selection.getComboBox());
-            this.settings_menu.addBreak();
-            this.settings_menu.addSetting(this.edit_menu_item);
-            this.settings_menu.addSetting(this.defaults_menu_item);
-
-            this._applet_context_menu.addMenuItem(this.settings_menu);
-
-            this.settings.connect('settings-file-changed', Lang.bind(this, this._reload));
+            this.update_label_visible();
         }
         catch (e) {
             global.logError(e);
         }
     },
 
-    _edit_providers: function() {
-        this.settings.editSettingsFile(TEXT_EDITOR);
-    },
-
     _reload: function() {
-        this.settings.readSettings();
-        show_provider = this.settings.getBoolean('Show Provider', DEFAULT_SHOW);
-        let ar = this.settings.getComboArray('Provider', DEFAULT_ARRAY);
-        if (show_provider) {
-            this.set_applet_label(ar[1]);
+        if (this.use_custom_provider) {
+            prov_label = this.custom_provider_label;
+            prov_url = this.custom_provider_url;
         } else {
-            this.set_applet_label('');
+            switch(this.selected_provider) {
+                case 'google':
+                    prov_label = 'Google'
+                    prov_url = 'http://google.com/search?q='
+                    break;
+                case 'bing':
+                    prov_label = 'Bing'
+                    prov_url = 'http://www.bing.com/search?q='
+                    break;
+                case 'yahoo':
+                    prov_label = 'Yahoo'
+                    prov_url = 'http://search.yahoo.com/search?p='
+                    break;
+                case 'ask':
+                    prov_label = 'Ask'
+                    prov_url = 'http://www.ask.com/web?q='
+                    break;
+                case 'duckduckgo':
+                    prov_label = 'DuckDuckGo'
+                    prov_url = 'https://duckduckgo.com/?q='
+                    break;
+            } 
         }
-        prov_url = ar[2];
-    },
 
-    _defaults: function() {
-        Util.spawn(['cinnamon-settings', 'default']);
+        if (this.show_provider)
+            this.set_applet_label(prov_label);
+        else
+            this.set_applet_label('');
     },
 
     _onMenuKeyPress: function(actor, event) {
         let symbol = event.get_key_symbol();
         if (symbol==Clutter.KEY_Return && this.menu.isOpen) {
             this._search();
-            return true;
         }
     },
 
     _search: function() {
         Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.searchEntry.get_text() + "'");
+        this.searchEntry.set_text("");
+        this.searchActive = false;
         this.menu.close();
     },
 
@@ -148,7 +144,7 @@ MyApplet.prototype = {
         global.stage.set_key_focus(this.searchEntry);
     },
 
-    _onSearchTextChanged: function (se, prop) {
+    _onSearchTextChanged: function () {
         this.searchActive = this.searchEntry.get_text() != '';
         if (this.searchActive) {
             this.searchEntry.set_secondary_icon(this._searchActiveIcon);
@@ -176,7 +172,6 @@ MyApplet.prototype = {
         }
         if (this._searchTimeoutId > 0)
             return;
-        this._searchTimeoutId = Mainloop.timeout_add(150, Lang.bind(this, this._doSearch));
     },
 
     on_applet_clicked: function(event) {
@@ -186,12 +181,20 @@ MyApplet.prototype = {
 
     on_orientation_changed: function (orientation) {
         this._orientation = orientation;
-        this._initContextMenu();
+
+        this.update_label_visible();
+    },
+
+    update_label_visible: function () {
+        if (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT)
+            this.hide_applet_label(true);
+        else
+            this.hide_applet_label(false);
     }
 
 };
 
-function main(metadata, orientation) {  
-    let myApplet = new MyApplet(orientation);
-    return myApplet;
+function main(metadata, orientation, panel_height, instance_id) {
+    let myApplet = new MyApplet(orientation, panel_height, instance_id);
+    return myApplet;      
 }
