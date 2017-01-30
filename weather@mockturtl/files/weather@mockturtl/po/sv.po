@@ -2,7 +2,7 @@
 # Copyright (C) 2011
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Mauricio Barraza <mauricio@barraza.se>, 2011.
-# Minor updates by jorgenqv https://github.com/jorgenqv - 2014, 2016
+# Minor updates by jorgenqv https://github.com/jorgenqv - 2014, 2016, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
@@ -70,7 +70,7 @@ msgstr "Vind:"
 
 #: applet.js:748
 msgid "Wind Chill:"
-msgstr "Vindavkylning:"
+msgstr "Känns som:"
 
 #: applet.js:953
 msgid "Tornado"
@@ -174,15 +174,15 @@ msgstr "Kallt"
 
 #: applet.js:1005
 msgid "Cloudy"
-msgstr "Molnigt"
+msgstr "Mulet"
 
 #: applet.js:1008
 msgid "Mostly cloudy"
-msgstr "Mest molnigt"
+msgstr "Mest mulet"
 
 #: applet.js:1011 applet.js:1037
 msgid "Partly cloudy"
-msgstr "Delvis molnigt"
+msgstr "Halvklart"
 
 #: applet.js:1013
 msgid "Clear"
@@ -210,7 +210,7 @@ msgstr "Lokala åskbyar"
 
 #: applet.js:1027
 msgid "Scattered thunderstorms"
-msgstr "Enstaka åskabyar"
+msgstr "Enstaka skurar"
 
 #: applet.js:1029
 msgid "Scattered showers"
