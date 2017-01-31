@@ -390,7 +390,13 @@ MyApplet.prototype = {
             menu_item_icon_size = this.iconSize;
             
             this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-            this.menu.actor.add_style_class_name("xCenter-menu");
+
+            // cinna 3.2 and above uses a different func
+            if (typeof this.menu.setCustomStyleClass === "function") {
+                this.menu.setCustomStyleClass("xCenter-menu");
+            } else {
+                this.menu.actor.add_style_class_name("xCenter-menu");
+            }
             this.menuManager.addMenu(this.menu);
             let section = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(section);
