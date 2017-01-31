@@ -6,7 +6,7 @@
     "version": "1.04",
     "name": "Extensions Manager",
     "description": "Allows enabling/disabling extensions (and other tasks) from a menu.",
-    "comments": "Bug reports and feature requests should be reported on this applet repository linked below.",
+    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
     "website": "https://github.com/Odyseus/CinnamonTools",
     "contributors": "Radek71: Czech localization.",
     "cinnamon-version": [
