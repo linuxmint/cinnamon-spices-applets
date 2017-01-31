@@ -7,7 +7,7 @@
     "version": "1.20",
     "last-edited": "1473874250",
     "name": "Custom Cinnamon Menu",
-    "comments": "Bug reports and feature requests should be reported on this applet repository linked below.",
+    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
     "website": "https://github.com/Odyseus/CinnamonTools",
     "contributors": "NikoKrause: Bug fixes and German localization.,Radek71: Czech localization.,lestcape: Author of some advanced features used by this applet.,nooulaif: Fuzzy search feature based on his Sane Menu applet.,Daniel Bruce: Some icons used by this menu are from www.entypo.com.",
     "cinnamon-version": [

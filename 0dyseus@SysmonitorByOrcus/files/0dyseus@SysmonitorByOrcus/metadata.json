@@ -6,7 +6,7 @@
     "name": "System Monitor (Fork By Odyseus)",
     "version": "1.8",
     "description": "Displays CPU, memory, swap, network usage and load in graphs.",
-    "comments": "Bug reports and feature requests should be reported on this applet repository linked below.",
+    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
     "website": "https://github.com/Odyseus/CinnamonTools",
     "contributors": "buzz: Bug fixes.",
     "cinnamon-version": [
