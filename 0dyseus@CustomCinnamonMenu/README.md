@@ -58,6 +58,6 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 - Fuzzy search feature based on [Sane Menu](https://cinnamon-spices.linuxmint.com/applets/view/258) applet by [nooulaif](https://github.com/nooulaif).
 - Some icons used by this menu are from [Entypo pictograms](www.entypo.com) by Daniel Bruce.
 
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/CHANGELOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40CustomCinnamonMenu/CHANGELOG.md)
 
-[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/Applets/0dyseus%40CustomCinnamonMenu/files/0dyseus%40CustomCinnamonMenu/TODO)
+[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40CustomCinnamonMenu/TODO)
