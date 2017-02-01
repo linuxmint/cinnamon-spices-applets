@@ -78,7 +78,7 @@ MyApplet.prototype = {
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/help.txt";
+            this.helpfile = metadata.path + "/README.md";
             this.appletPath = metadata.path;
             this.UUID = metadata.uuid;
             this.applet_running = true; //** New
@@ -354,7 +354,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.0.0
+Version v30_2.0.2
 0.9.0 Release Candidate 30-07-2013
 0.9.1 Help file facility added and link to gnome-system-monitor
 0.9.2 Change Hold to Pause in Tooltip
@@ -386,5 +386,7 @@ Version v30_3.0.0
       to allow Cinnamon Version to be specified and thus inhibit extra settings menu entry
 1.2.2 Change 'Settings' to 'Configure..' and place after housekeping for consistency
 1.2.3 Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window 
-3.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc 
+2.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc
+2.0.2 01-02-2017 Change helpfile to use README.md instead of help.txt in applet folder
+      Remove icon.png and help.txt from applet folder  
 */
