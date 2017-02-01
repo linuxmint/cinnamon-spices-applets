@@ -56,7 +56,7 @@ BookmarkMenuItem.prototype = {
     
     _init: function(menu, place) {
         try {
-            this.menu = menu;
+            this.parentMenu = menu;
             this.place = place;
             
             let icon = place.iconFactory(menu_item_icon_size);
@@ -70,7 +70,7 @@ BookmarkMenuItem.prototype = {
     activate: function(event) {
         try {
             
-            this.menu.close();
+            this.parentMenu.close();
             this.place.launch();
             
         } catch(e) {
@@ -137,7 +137,7 @@ PlaceMenuItem.prototype = {
     _init: function(menu, title, uri, iName) {
         try {
             
-            this.menu = menu;
+            this.parentMenu = menu;
             this.uri = uri;
             
             let icon = new St.Icon({icon_name: iName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
@@ -151,7 +151,7 @@ PlaceMenuItem.prototype = {
     activate: function(event) {
         try {
             
-            this.menu.close();
+            this.parentMenu.close();
             Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
             
         } catch(e) {
@@ -171,7 +171,7 @@ CustomMenuItem.prototype = {
     _init: function(menu, uri, name) {
         try {
             
-            this.menu = menu;
+            this.parentMenu = menu;
             this.uri = uri;
             
             let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
@@ -189,7 +189,7 @@ CustomMenuItem.prototype = {
     activate: function(event) {
         try {
             
-            this.menu.close();
+            this.parentMenu.close();
             Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
             
         } catch(e) {
@@ -209,7 +209,7 @@ RecentMenuItem.prototype = {
     _init: function(menu, title, iName, file) {
         try {
             
-            this.menu = menu;
+            this.parentMenu = menu;
             this.file = file;
             
             let icon = new St.Icon({icon_name: iName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
@@ -223,7 +223,7 @@ RecentMenuItem.prototype = {
     activate: function(event) {
         try {
             
-            this.menu.close();
+            this.parentMenu.close();
             Gio.app_info_launch_default_for_uri(this.file, global.create_app_launch_context());
             
         } catch(e) {
@@ -243,7 +243,7 @@ ClearRecentMenuItem.prototype = {
     _init: function(menu, recentManager) {
         try {
             
-            this.menu = menu;
+            this.parentMenu = menu;
             this.recentManager = recentManager;
             
             let icon = new St.Icon({icon_name: "edit-clear", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
@@ -257,7 +257,7 @@ ClearRecentMenuItem.prototype = {
     activate: function(event) {
         try {
             
-            this.menu.close();
+            this.parentMenu.close();
             this.recentManager.purge_items();
             
         } catch(e) {
@@ -266,6 +266,17 @@ ClearRecentMenuItem.prototype = {
     }
 }
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
@@ -280,7 +291,11 @@ MyApplet.prototype = {
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
-            Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
+            Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height, instanceId);
+
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
             
             //initiate settings
             this.bindSettings();
@@ -300,12 +315,20 @@ MyApplet.prototype = {
             this.volumeMonitor.connect("volume-removed", Lang.bind(this, this.updateVolumes));
             this.volumeMonitor.connect("mount-added", Lang.bind(this, this.updateVolumes));
             this.volumeMonitor.connect("mount-removed", Lang.bind(this, this.updateVolumes));
-            
+
             this.buildMenu();
             
         } catch(e) {
             global.logError(e);
         }
+    },
+
+    _onButtonPressEvent: function(actor, event) {
+        if ( event.get_button() == 2 ) {
+            let uri = this.getMiddleClickUri();
+            if ( uri ) Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
+        }
+        return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
     },
     
     on_applet_clicked: function(event) {
@@ -324,7 +347,8 @@ MyApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu)
+        this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "middleClickPath", "middleClickPath");
         this.settings.bindProperty(Settings.BindingDirection.IN, "showDesktop", "showDesktop", this.buildUserSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "userCustomPlaces", "userCustomPlaces", this.buildUserSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showTrash", "showTrash", this.buildTrashItem);
@@ -398,7 +422,7 @@ MyApplet.prototype = {
             let systemSearchImage = new St.Icon({ icon_name: "edit-find", icon_size: 10, icon_type: St.IconType.SYMBOLIC });
             systemSearchButton.add_actor(systemSearchImage);
             systemSearchButton.connect("clicked", Lang.bind(this, this.search));
-            new Tooltips.Tooltip(systemSearchImage, _("Search File System"));
+            new Tooltips.Tooltip(systemSearchButton, _("Search File System"));
             
             this.systemSection = new PopupMenu.PopupMenuSection();
             systemPane.addMenuItem(this.systemSection);
@@ -601,6 +625,20 @@ MyApplet.prototype = {
     setPanelText: function() {
         if ( this.panelText ) this.set_applet_label(this.panelText);
         else this.set_applet_label("");
+    },
+    
+    getMiddleClickUri: function() {
+        if ( this.middleClickPath == "") return false;
+        
+        let path = this.middleClickPath.replace("~", GLib.get_home_dir());
+        if ( path.search("://") != -1 ) return path;
+
+        if ( GLib.path_is_absolute(path) &&
+             GLib.file_test(path, GLib.FileTest.EXISTS) ) {
+            return Gio.file_new_for_path(path).get_uri();
+        }
+
+        return Gio.file_new_for_path(GLib.get_home_dir()).get_uri();
     },
     
     search: function(a, b, directory) {
