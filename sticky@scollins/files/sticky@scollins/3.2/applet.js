@@ -196,22 +196,22 @@ NoteBase.prototype = {
 
         let options = settings.settings.getOptions("theme");
         for ( let name in options ) {
-            let themeItem = new PopupMenu.PopupMenuItem(name);
+            let themeItem = new PopupMenu.PopupMenuItem(_(name));
             themeSection.menu.addMenuItem(themeItem);
             themeItem.connect("activate", Lang.bind(this, this.setTheme, options[name]));
         }
 
-        this.titleMenuItem = new PopupMenu.PopupMenuItem(this.title ? "Edit title" : "Add title");
+        this.titleMenuItem = new PopupMenu.PopupMenuItem(this.title ? _("Edit title") : _("Add title"));
         this.contentMenuSection.addMenuItem(this.titleMenuItem);
         this.titleMenuItem.connect("activate", Lang.bind(this, this.editTitle));
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let copy = new PopupMenu.PopupMenuItem("Copy");
+        let copy = new PopupMenu.PopupMenuItem(_("Copy"));
         this.menu.addMenuItem(copy);
         copy.connect("activate", Lang.bind(this, this.copy));
 
-        let paste = new PopupMenu.PopupMenuItem("Paste");
+        let paste = new PopupMenu.PopupMenuItem(_("Paste"));
         this.menu.addMenuItem(paste);
         paste.connect("activate", Lang.bind(this, this.paste));
 
@@ -221,13 +221,13 @@ NoteBase.prototype = {
         about.connect("activate", Lang.bind(applet, applet.openAbout));
         this.menu.addMenuItem(about);
 
-        let configure = new PopupMenu.PopupIconMenuItem("Configure...", "system-run", St.IconType.SYMBOLIC);
+        let configure = new PopupMenu.PopupIconMenuItem(_("Configure..."), "system-run", St.IconType.SYMBOLIC);
         configure.connect("activate", Lang.bind(this, function() {
             Util.spawnCommandLine("cinnamon-settings applets " + applet.metadata.uuid + " " + applet.instanceId);
         }));
         this.menu.addMenuItem(configure);
 
-        let remove = new PopupMenu.PopupIconMenuItem("Remove this note", "edit-delete", St.IconType.SYMBOLIC);
+        let remove = new PopupMenu.PopupIconMenuItem(_("Remove this note"), "edit-delete", St.IconType.SYMBOLIC);
         remove.connect("activate", Lang.bind(this, function() {
             this.emit("destroy", this);
         }));
@@ -393,7 +393,7 @@ NoteBase.prototype = {
 
         let text;
         if ( this.title ) text = this.title;
-        else text = "Title";
+        else text = _("Title");
         this.titleEntry = new St.Entry({ text: text, style_class: "sticky-title" });
         this.titleBin.add_actor(this.titleEntry);
         if ( !this.previousMode ) this.previousMode = global.stage_input_mode;
@@ -489,7 +489,7 @@ Note.prototype = {
         let padding = new St.Bin({ reactive: true });
         this.actor.add(padding, { y_expand: true, y_fill: true, x_expand: true, x_fill: true });
 
-        let switchTypeMenuItem = new PopupMenu.PopupMenuItem("Switch to check list");
+        let switchTypeMenuItem = new PopupMenu.PopupMenuItem(_("Switch to check list"));
         this.contentMenuSection.addMenuItem(switchTypeMenuItem);
         switchTypeMenuItem.connect("activate", Lang.bind(this, this.switchType));
     },
@@ -697,11 +697,11 @@ CheckList.prototype = {
             this.newItem();
         }
 
-        let switchTypeMenuItem = new PopupMenu.PopupMenuItem("Switch to regular note");
+        let switchTypeMenuItem = new PopupMenu.PopupMenuItem(_("Switch to regular note"));
         this.contentMenuSection.addMenuItem(switchTypeMenuItem);
         switchTypeMenuItem.connect("activate", Lang.bind(this, this.switchType));
 
-        let removeCompleteMenuItem = new PopupMenu.PopupMenuItem("Remove completed items");
+        let removeCompleteMenuItem = new PopupMenu.PopupMenuItem(_("Remove completed items"));
         this.contentMenuSection.addMenuItem(removeCompleteMenuItem);
         removeCompleteMenuItem.connect("activate", Lang.bind(this, this.removeComplete));
     },
@@ -1535,6 +1535,19 @@ NoteBox.prototype = {
 Signals.addSignalMethods(NoteBox.prototype);
 
 
+// l10n/translation
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
+
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
 }
@@ -1549,6 +1562,10 @@ MyApplet.prototype = {
         this.orientation = orientation;
 
         Applet.IconApplet.prototype._init.call(this, this.orientation, panelHeight, instanceId);
+
+        // l10n/translation
+        UUID = metadata.uuid;
+        Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
 
@@ -1573,33 +1590,33 @@ MyApplet.prototype = {
 
     buildMenus: function() {
         // main menu
-        let newNoteMenuItem = new PopupMenu.PopupIconMenuItem("New note", "add-note-symbolic", St.IconType.SYMBOLIC);
+        let newNoteMenuItem = new PopupMenu.PopupIconMenuItem(_("New note"), "add-note-symbolic", St.IconType.SYMBOLIC);
         this.menu.addMenuItem(newNoteMenuItem);
         newNoteMenuItem.connect("activate", Lang.bind(noteBox, noteBox.newNote));
 
-        let newCheckListMenuItem = new PopupMenu.PopupIconMenuItem("New check-list", "add-checklist-symbolic", St.IconType.SYMBOLIC);
+        let newCheckListMenuItem = new PopupMenu.PopupIconMenuItem(_("New check-list"), "add-checklist-symbolic", St.IconType.SYMBOLIC);
         this.menu.addMenuItem(newCheckListMenuItem);
         newCheckListMenuItem.connect("activate", Lang.bind(noteBox, noteBox.newCheckList));
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        this.pinMenuItem = new PopupMenu.PopupIconMenuItem("Pin notes (keep on top)", "pin-symbolic", St.IconType.SYMBOLIC);
+        this.pinMenuItem = new PopupMenu.PopupIconMenuItem(_("Pin notes (keep on top)"), "pin-symbolic", St.IconType.SYMBOLIC);
         this.menu.addMenuItem(this.pinMenuItem);
         this.pinMenuItem.connect("activate", Lang.bind(this, function() {
             if ( noteBox.pinned ) noteBox.raiseNotes();
             else noteBox.pinNotes();
         }));
 
-        let hideMenuItem = new PopupMenu.PopupIconMenuItem("Hide notes", "hide-symbolic", St.IconType.SYMBOLIC);
+        let hideMenuItem = new PopupMenu.PopupIconMenuItem(_("Hide notes"), "hide-symbolic", St.IconType.SYMBOLIC);
         this.menu.addMenuItem(hideMenuItem);
         hideMenuItem.connect("activate", Lang.bind(noteBox, noteBox.hideNotes));
 
         // context menu
-        let backupItem = new PopupMenu.PopupMenuItem("Back up notes");
+        let backupItem = new PopupMenu.PopupMenuItem(_("Back up notes"));
         this._applet_context_menu.addMenuItem(backupItem);
         backupItem.connect("activate", Lang.bind(this, this.backupNotes));
 
-        let restoreBackupItem = new PopupMenu.PopupMenuItem("Restore from backup");
+        let restoreBackupItem = new PopupMenu.PopupMenuItem(_("Restore from backup"));
         this._applet_context_menu.addMenuItem(restoreBackupItem);
         restoreBackupItem.connect("activate", Lang.bind(this, this.loadBackup));
     },
@@ -1620,7 +1637,7 @@ MyApplet.prototype = {
 
     loadBackup: function() {
         params = { directory: "~/" };
-        new ModalDialog.ConfirmDialog("This will permenantly remove all existing notes. Are you sure you want to continue?", Lang.bind(this, function() {
+        new ModalDialog.ConfirmDialog(_("This will permanently remove all existing notes. Are you sure you want to continue?"), Lang.bind(this, function() {
             FileDialog.open(Lang.bind(this, function(path) {
                 let file = Gio.file_new_for_path(path.slice(0,-1));
                 if ( !file.query_exists(null) ) return;
