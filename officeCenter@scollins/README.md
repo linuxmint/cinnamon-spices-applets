@@ -1,4 +1,4 @@
-Places Center
+Office Center
 -------------
 
 Office Center is a feature-rich, cross-platform Cinnamon applet that provides easy access to all of your office programs and documents.
