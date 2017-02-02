@@ -12,29 +12,30 @@
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
 /* jshint moz:true */
-var Applet = imports.ui.applet;
+global.__settings = typeof global.cinnamon_settings !== 'undefined' ? global.cinnamon_settings : global.settings;
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
+var Applet = importObj.ui.applet;
 var Lang = imports.lang;
-var Cinnamon = imports.gi.Cinnamon;
+var Cinnamon = typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
 var St = imports.gi.St;
-var Main = imports.ui.main;
-var Util = imports.misc.util;
+var Main = importObj.ui.main;
+var Util = importObj.misc.util;
 var Signals = imports.signals;
-var DND = imports.ui.dnd;
-var Settings = imports.ui.settings;
+var DND = importObj.ui.dnd;
+var Settings = importObj.ui.settings;
 var Gettext = imports.gettext;
 var Gio = imports.gi.Gio;
 var Gtk = imports.gi.Gtk;
 var GLib = imports.gi.GLib;
 var Meta = imports.gi.Meta;
-var SignalManager = imports.misc.signalManager;
+var SignalManager = importObj.misc.signalManager;
 
-var ajax = imports.applet.ajax;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
-
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var AppList = AppletDir.appList;
+var ajax = AppletDir.__init__.ajax;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
 var TitleDisplay = {
   None: 1,
@@ -291,7 +292,7 @@ MyApplet.prototype = {
     this._onSwitchWorkspace();
     this._bindAppKey();
 
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
 
     // Wait 3s, as Cinnamon doesn't populate Applet._meta until after the applet loads.
     setTimeout(function () {
@@ -318,6 +319,7 @@ MyApplet.prototype = {
       this.version = 'v' + this._meta.version;
       // Parse out the HTML response instead of using the API endpoint to work around Github's API limit.
       ajax({ method: 'GET', url: 'https://github.com/jaszhix/icingtaskmanager/releases/latest', json: false }).then(function (res) {
+        clog('resolve!');
         var split = '/jaszhix/icingtaskmanager/releases/download/';
         var end = res.split(split)[1].split('.zip')[0];
         var version = end.split('/')[0];
@@ -337,6 +339,7 @@ MyApplet.prototype = {
           })();
         }
       }).catch(function (e) {
+        clog('reject!');
         return null;
       });
     }
@@ -664,7 +667,7 @@ MyApplet.prototype = {
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this.actor.reactive = global.settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = global.__settings.get_boolean('panel-edit-mode');
   },
 
   pinned_app_contr: function pinned_app_contr() {
@@ -746,7 +749,7 @@ MyApplet.prototype = {
   destroy: function destroy() {
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
-    global.settings.disconnect(this.panelEditId);
+    global.__settings.disconnect(this.panelEditId);
     for (var i = 0, len = this.metaWorkspaces.length; i < len; i++) {
       var children = this.metaWorkspaces[i].appList.manager_container.get_children();
       for (var z = 0, _len2 = children.length; z < _len2; z++) {

@@ -5,8 +5,6 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 /* jshint moz:true */
 var Gda = void 0;
 var GLib = imports.gi.GLib;
-var Gettext = imports.gettext;
-var clog = imports.applet.clog;
 
 try {
   Gda = imports.gi.Gda;

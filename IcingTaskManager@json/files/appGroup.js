@@ -1,24 +1,26 @@
 'use strict';
 
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Clutter = imports.gi.Clutter;
 var Lang = imports.lang;
 var St = imports.gi.St;
-var Main = imports.ui.main;
-var Tweener = imports.ui.tweener;
-var PopupMenu = imports.ui.popupMenu;
+var Main = importObj.ui.main;
+var Tweener = importObj.ui.tweener;
+var PopupMenu = importObj.ui.popupMenu;
 var Signals = imports.signals;
-var DND = imports.ui.dnd;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
+var DND = importObj.ui.dnd;
+//const setTimeout = importObj.applet.setTimeout
 
 // Load our applet so we can access other files in our extensions dir as libraries
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var App = AppletDir.applet;
 var SpecialMenus = AppletDir.specialMenus;
 var SpecialButtons = AppletDir.specialButtons;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
-var DEFERRED_APPS = ['spotify'];
+var DEFERRED_APPS = ['spotify', 'libreoffice'];
 
 function AppGroup() {
   this._init.apply(this, arguments);
@@ -115,7 +117,7 @@ AppGroup.prototype = {
 
     this.on_panel_edit_mode_changed();
     this.on_arrange_pinned();
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.arrangePinnedId = this._applet.settings.connect('changed::arrange-pinnedApps', Lang.bind(this, this.on_arrange_pinned));
   },
 
@@ -128,8 +130,8 @@ AppGroup.prototype = {
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this._draggable.inhibit = global.settings.get_boolean('panel-edit-mode');
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode');
+    this._draggable.inhibit = global.__settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = !global.__settings.get_boolean('panel-edit-mode');
   },
 
   on_title_display_changed: function on_title_display_changed(metaWindow) {
@@ -733,7 +735,7 @@ AppGroup.prototype = {
       this._draggable.disconnect(this.signals._draggable[_i2]);
     }
     this._applet.settings.disconnect(this.numDisplaySignal);
-    global.settings.disconnect(this.panelEditId);
+    global.__settings.disconnect(this.panelEditId);
     this._applet.settings.disconnect(this.arrangePinnedId);
 
     this.unwatchWorkspace(null, true);

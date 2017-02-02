@@ -1,18 +1,17 @@
 'use strict';
 
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Lang = imports.lang;
-var Cinnamon = imports.gi.Cinnamon;
 var Clutter = imports.gi.Clutter;
 var St = imports.gi.St;
 var Gio = imports.gi.Gio;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
-var Main = imports.ui.main;
 
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var App = AppletDir.applet;
 var AppGroup = AppletDir.appGroup;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 // List of running apps
 
 function AppList() {
@@ -70,7 +69,7 @@ AppList.prototype = {
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this.actor.reactive = global.settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = global.__settings.get_boolean('panel-edit-mode');
   },
 
   on_applet_added_to_panel: function on_applet_added_to_panel(userEnabled) {
@@ -206,7 +205,7 @@ AppList.prototype = {
 
     this.signals.settings.push(this.settings.connect('changed::show-pinned', Lang.bind(this, this._refreshList)));
     this.signals.settings.push(this.settings.connect('changed::icon-spacing', Lang.bind(this, this._updateSpacing)));
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
   },
 
   _setLastFocusedApp: function _setLastFocusedApp(id) {
@@ -340,6 +339,7 @@ AppList.prototype = {
     }
 
     var appId = app.get_id();
+
     var refApp = _.findIndex(this.appList, { id: appId });
 
     // If forceUngroupedWindow is set, then this method is being called from the first appGroup instance for this app, to override app grouping.
@@ -507,7 +507,7 @@ AppList.prototype = {
         _this4[key].disconnect(id);
       });
     });
-    global.settings.disconnect(this.panelEditId);
+    global.__settings.disconnect(this.panelEditId);
     for (var i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].appGroup.destroy();
     }
