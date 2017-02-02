@@ -196,6 +196,7 @@ NoteBase.prototype = {
 
         let options = settings.settings.getOptions("theme");
         for ( let name in options ) {
+            if (options[name] == "random") continue;
             let themeItem = new PopupMenu.PopupMenuItem(_(name));
             themeSection.menu.addMenuItem(themeItem);
             themeItem.connect("activate", Lang.bind(this, this.setTheme, options[name]));
