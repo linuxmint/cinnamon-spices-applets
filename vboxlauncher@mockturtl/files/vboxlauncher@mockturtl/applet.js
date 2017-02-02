@@ -213,18 +213,7 @@ MyApplet.prototype = {
 ,  startVmplayer: function() {
     Util.spawnCommandLine(CMD_VMPLAYER)
   }
-    // Modified by MuhmdRaouf E-mail: mohammed.raouf.m AT gmail DOT com
-    /* this line modified by @MuhmdRaouf
-     * added single quote before and after the path in order to capture
-     * the full path and pass it to the VMplayer
-     * in this case even if the VM has spaces in its name it will work
-     * as example before the modification the command will run like that
-     * ( vmplayer /home/username/vmware/vm machine/vm machine.vmx )
-     * but unfortunately it wont run like that
-     * now it will be like this
-     * ( vmplayer '/home/username/vmware/vm machine/vm machine.vmx' )
-     * its okey to has spaces as long its inside of 2 quotes
-     */
+
 ,  startVmplayerImage: function(path) {
     Util.spawnCommandLine(CMD_VMPLAYER + " '" + path + "' ")
   }
