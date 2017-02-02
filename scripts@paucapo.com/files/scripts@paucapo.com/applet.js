@@ -23,7 +23,7 @@ MyApplet.prototype = {
       this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "directory", "directory", this._onSettingsDirectory, null)
 
       this.settings.bindProperty(Settings.BindingDirection.IN, "showtitle", "showtitle", this._onSettingsTitle, null)
-      this.settings.bindProperty(Settings.BindingDirection.IN, "title", "title", this._onSettingsTitle, null)
+      this.settings.bindProperty(Settings.BindingDirection.IN, "paneltitle", "paneltitle", this._onSettingsTitle, null)
 
       this.settings.bindProperty(Settings.BindingDirection.IN, "customicon", "customicon", this._onSettingsIcon, null)
       this.settings.bindProperty(Settings.BindingDirection.IN, "icon", "icon", this._onSettingsIcon, null)
@@ -73,8 +73,8 @@ MyApplet.prototype = {
 
    _onSettingsTitle: function() {
       if (this.showtitle) {
-         this.set_applet_label(this.title);
-         this.set_applet_tooltip(this.title);
+         this.set_applet_label(this.paneltitle);
+         this.set_applet_tooltip(this.paneltitle);
       } else {
          this.set_applet_label("");
          this.set_applet_tooltip(_("Scripts"));
