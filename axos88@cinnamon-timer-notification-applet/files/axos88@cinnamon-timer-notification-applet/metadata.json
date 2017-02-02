@@ -1,7 +1,7 @@
 {
-    "dangerous": false, 
-    "uuid": "countdown-timer@vandra.hu", 
-    "last-edited": "1336936695", 
-    "name": "Countdown timer with Notifications", 
+    "dangerous": false,
+    "uuid": "countdown-timer@vandra.hu",
+    "last-edited": "1336936695",
+    "name": "Countdown timer with Notifications",
     "description": "A countdown timer app with visual and auditory notifications based on markbokil's timer-notifications applet"
 }

@@ -20,20 +20,23 @@ To set the sound, message, or confirm dialog edit the ~/.local/share/cinnamon/ap
 
 ## Changelog
 
+* 2.1.0
+  - Started using stock icons instead of customs - thanks zagortenay333!
+
 * 2.0.0
   - Forked code from original author
   - Now displaying hours, minutes, seconds
   - Slider has multiple with different (increasing) steps, to be able to easily pick any interval between 10 seconds and 24 hours.
   - Streamlined UI: moved preset into main menu in order to be able to start the timer with two clicks
   - refactored and cleaned out the code a bit
-  - presets and intervals for the slider can now be dynamically configured. 
+  - presets and intervals for the slider can now be dynamically configured.
 * 1.0.2
   - centered confirm dialog text
   - added restart to right-click menu
   - fixed 3 min preset error
   - added panel label countdown
 * 1.0.1
-  - added run, stop, alarm states to icon, 
+  - added run, stop, alarm states to icon,
   - added 3 min. tea time
   - centered dialog button with CSS
   - tweaked slider code to reset icons timer/on off if dragged to zero
