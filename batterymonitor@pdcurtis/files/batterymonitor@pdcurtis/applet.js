@@ -78,7 +78,7 @@ MyApplet.prototype = {
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; 
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/help.txt";
+            this.helpfile = metadata.path + "/README.md";
 
             this.batterytempscript = metadata.path + "/batterytempscript.sh";
             this.appletPath = metadata.path;
@@ -371,7 +371,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_1.1.9
+Version v30_1.2.0
 v30_1.0.0 Developed using code from NUMA, Bumblebee and Timer Applets
           Includes changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
           Tested with Cinnamon 3.0 in Mint 18 
@@ -404,4 +404,5 @@ v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrit
 v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
 v30_1.1.9 Added ability to edit stylesheet.css to context menu.
           Added warnings about editing to stylesheet.css
+v30_1.2.0 Changed help file from help.txt to README.md
 */
