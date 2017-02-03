@@ -1,6 +1,6 @@
 {
   "name": "icingmenu",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Icing Menu",
   "main": "gulpfile.js",
   "scripts": {
