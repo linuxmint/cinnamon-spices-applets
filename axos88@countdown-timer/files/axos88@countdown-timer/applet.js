@@ -47,7 +47,7 @@ ConfirmDialog.prototype = {
                 })
             }
         ]);
-    },	
+    },
 }
 
 function PopupMenuItem(label, icon, callback) {
@@ -61,48 +61,48 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.TextIconApplet.prototype._init.call(this, orientation);
-        
-        try {        
+
+        try {
             //set properties from external config file
             this.ConfirmPromptOn = AppOptions.ConfirmPromptOn;
             this.SoundPromptOn = AppOptions.SoundPrompOn;
             this.MessagePromptOn = AppOptions.MessagePromptOn;
             this.ShowMenuOn = AppOptions.ShowMenuOn;
             this.MessageStr = AppOptions.MessageStr;
-            this.SoundPath = AppOptions.SoundPath; 
-            this.LabelOn = AppOptions.LabelOn; 
+            this.SoundPath = AppOptions.SoundPath;
+            this.LabelOn = AppOptions.LabelOn;
 
             this.timerDuration = 0;
             this.timerStopped = true;
             this.alarmOn = false;
             this.state = false;
-            
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this._orientation = orientation;
             this.menu = new Applet.AppletPopupMenu(this, orientation);
-            this.menuManager.addMenu(this.menu);     
+            this.menuManager.addMenu(this.menu);
             this.set_applet_icon_symbolic_name("alarm");
             this.actor.add_style_class_name("timer");
-                                                                
-            
+
+
             this.timerSwitch = new PopupMenu.PopupSwitchMenuItem(_("Timer"));
             this.timerSwitch.connect('toggled', Lang.bind(this, this.doTimerSwitch));
             this.menu.addMenuItem(this.timerSwitch);
-            
+
             this.buildTimePresetMenu();
 
             this.timerMenuItem = new PopupMenu.PopupMenuItem("Minutes: 0", { reactive: false });
             this.menu.addMenuItem(this.timerMenuItem);
-                                  
+
             this._timerSlider = new PopupMenu.PopupSliderMenuItem(0);
             this._timerSlider.connect('value-changed', Lang.bind(this, this.sliderChanged));
             this._timerSlider.connect('drag-end', Lang.bind(this, this.sliderReleased));
-      
+
             this._contentSection = new PopupMenu.PopupMenuSection();
-            this.menu.addMenuItem(this._contentSection); 
-            
+            this.menu.addMenuItem(this._contentSection);
+
             this.menu.addMenuItem(this._timerSlider);
             this.createContextMenu();
 
@@ -112,16 +112,16 @@ MyApplet.prototype = {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         if (this.timerStopped && this.alarmOn) {
-            this.alarmOn = false;        
+            this.alarmOn = false;
             this.doUpdateUI();
         }
- 
+
         this.menu.toggle();
     },
-    
+
     on_orientation_changed: function (orientation) {
         this._orientation = orientation;
         this._initContextMenu();
@@ -144,7 +144,7 @@ MyApplet.prototype = {
                 item.connect('activate', Lang.bind(this, this.doTimePreset, preset));
             }));
     },
-    
+
     doTimePreset: function(a, b, c, duration) {
                 this.timerDuration = duration;
                 if (duration > 0) {
@@ -153,23 +153,23 @@ MyApplet.prototype = {
                     this.doStopTimer();
                 }
     },
-    
+
     doTimerSwitch: function(item) {
         if (item.state) {
             if (this.timerDuration <= 0) {
-                this.timerSwitch.setToggleState(false);                
+                this.timerSwitch.setToggleState(false);
                 return;
             }
             this.doStartTimer();
         } else {
             this.doStopTimer();
-           
+
         }
     },
-    
+
     doStartTimer: function() {
         if (this.timerDuration == 0) return;
-        
+
         this.timerStopped = false;
         this.startTime = this.getCurrentTime();
         this.endTime = this.startTime + this.timerDuration * 1000;
@@ -177,21 +177,21 @@ MyApplet.prototype = {
         this.doTick();
         this.doUpdateUI();
     },
-    
+
     getCurrentTime: function() {
         let d = new Date();
 	    let x = Math.floor(d.getTime());
 	    return x;
     },
 
-    doStopTimer: function() { 
+    doStopTimer: function() {
         this.timerStopped = true;
         this.doUpdateUI();
     },
 
     doTick: function() {
         if (this.timerStopped) return;
-        
+
         if (this.getCurrentTime() >= this.endTime) {
             this.doTimerExpired();
             return;
@@ -202,8 +202,8 @@ MyApplet.prototype = {
 
         Mainloop.timeout_add_seconds(1, Lang.bind(this, this.doTick));
     },
-    
-    doUpdateUI: function() { 
+
+    doUpdateUI: function() {
         this.timerSwitch.setToggleState(!this.timerStopped);
 
         if (this.state) this.actor.remove_style_class_name("timer-" + this.state);
@@ -214,18 +214,18 @@ MyApplet.prototype = {
         let min = Math.floor((this.timerDuration % 3600) / 60)
         let sec = this.timerDuration % 60
 
-        this.timerMenuItem.label.text = hr + " Hours, " + min.pad(2) + " Minutes and " + sec.pad(2) + " Seconds"  
+        this.timerMenuItem.label.text = hr + " Hours, " + min.pad(2) + " Minutes and " + sec.pad(2) + " Seconds"
         let timeStr = hr + ":" + min.pad(2) + ":" + sec.pad(2)
         this.set_applet_tooltip(_("Timer: " + timeStr));
 
         if (AppOptions.LabelOn) {
-            if (this.timerStopped && this.timerDuration == 0) 
+            if (this.timerStopped && this.timerDuration == 0)
                 this.set_applet_label("");
             else
                 this.set_applet_label(timeStr);
-        }  
+        }
     },
-    
+
     doTimerExpired: function() {
         this.timerDuration = 0
         this.alarmOn = true
@@ -233,8 +233,8 @@ MyApplet.prototype = {
 
         if (AppOptions.LabelOn) {
             this.set_applet_label(""); // remove label on panel
-        }  
-       
+        }
+
         if (this.ShowMenuOn) {
             this.menu.open();
         }
@@ -247,20 +247,20 @@ MyApplet.prototype = {
              }
         }
         if (this.MessagePromptOn) {
-            Util.spawnCommandLine("notify-send '" + this.MessageStr + "'");   
-        }   
+            Util.spawnCommandLine("notify-send '" + this.MessageStr + "'");
+        }
         if (this.ConfirmPromptOn) {
             this.confirm = new ConfirmDialog();
             this.confirm.open();
-        }        
+        }
     },
-    
+
     sliderChanged: function(slider, value) {
         this.timerStopped = true;
 
         let position = Math.max(0, Math.min(1,parseFloat(value)));
 
-        if (position < 1) {        
+        if (position < 1) {
             let intervalCount = AppOptions.SliderIntervals.length
             let intervalID = Math.floor(position * intervalCount)
             let intervalDef = AppOptions.SliderIntervals[intervalID]
@@ -273,47 +273,45 @@ MyApplet.prototype = {
 
         this.doUpdateUI()
     },
-    
-    sliderReleased: function(slider, value) {   
-        this.timerStopped = true; 
+
+    sliderReleased: function(slider, value) {
+        this.timerStopped = true;
         if (this.timerDuration == 0) {
             this.doStopTimer();
             if (AppOptions.LabelOn) {
                 this.set_applet_label(""); // remove label on panel
-            }  
-            return; 
+            }
+            return;
         }
-      
+
         this.doStartTimer();
     },
-    
+
     loadOptions: function() {
         AppOptions = AppletMeta.config.Options;
-        AppOptions = null;
-        AppOptions = AppletMeta.config.Options;
     },
-    
+
     createContextMenu: function () {
-        this.edit_menu_item = new Applet.MenuItem(_('Edit Options'), Gtk.STOCK_EDIT, 
-            Lang.bind(this, this.editProperties)); 
-        this.reload_menu_item = new Applet.MenuItem(_('Restart Cinnamon'), Gtk.STOCK_REFRESH, 
-            Lang.bind(this, this.doRestart));        
+        this.edit_menu_item = new Applet.MenuItem(_('Edit Options'), Gtk.STOCK_EDIT,
+            Lang.bind(this, this.editProperties));
+        this.reload_menu_item = new Applet.MenuItem(_('Restart Cinnamon'), Gtk.STOCK_REFRESH,
+            Lang.bind(this, this.doRestart));
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
         this._applet_context_menu.addMenuItem(this.reload_menu_item);
-       
+
     },
-    
+
     editProperties: function () {
         Main.Util.spawnCommandLine(OpenFileCmd + " " + ConfigFile);
     },
-    
+
     doRestart: function() {
         Util.spawnCommandLine(global.reexec_self());
     }
 
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    return myApplet;      
+    return myApplet;
 }
