@@ -4,7 +4,7 @@
     "max-instances": "-1",
     "description": "Simple translator applet that will allow to display any selected text from any application on a system in a popup.",
     "multiversion": true,
-    "version": "1.00",
+    "version": "1.01",
     "name": "Popup Translator",
     "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
     "website": "https://github.com/Odyseus/CinnamonTools",

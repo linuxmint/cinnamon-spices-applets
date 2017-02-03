@@ -88,45 +88,71 @@ MyApplet.prototype = {
 
             this.forceTranslation = false;
             this.detectedLang = "";
+            this.key_1_id = null;
+            this.key_2_id = null;
 
             this._updateIconAndLabel();
-            // this.set_applet_tooltip(_(aMetadata.name));
             this._setAppletTooltip();
             this._expandAppletContextMenu();
             this.ensureHistoryFileExists();
 
             if (!this.pref_all_dependencies_met)
                 this.checkDependencies();
+
+            // I use a custom cinnamon-json-makepot command to extract strings.
+            // One of the features that I added to that command is the ability to
+            // ignore specified settings on the settings-schema.json file at the
+            // moment of extracting strings.
+            // As a side effect, some strings that would need to be extracted are ignored.
+            // That's the purpose of this "dummy object", store strings that were ignored.
+            // This strings belong to the two settings that lists languages (pref_target_lang and pref_source_lang).
+            // I purposely ignore them because if they were translated, it will break their
+            // alphabetical order on the comboboxes. I have chosen the least of the evils.
+            // And I have chosen this approach to avoid at all cost the manual edition
+            // of the .pot file.
+            this.dummyTransObject = {
+                1: _("Source language"),
+                2: _("Target language"),
+                3: _("(G) = Language supported only by Google Translate.\n(Y) = Language supported only by Yandex Translate.")
+            };
         } catch (aErr) {
             global.logError(aErr);
         }
 
     },
 
-    escHTML: function(aStr) {
-        aStr = String(aStr)
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&apos;");
-        return aStr;
-    },
-
     getLegibleKeybinding: function(aHKStr) {
-        aHKStr = aHKStr.toLowerCase();
+        if (aHKStr.search("<Alt>") !== -1)
+            aHKStr = aHKStr.replace("<Alt>", "Alt + ");
 
-        if (aHKStr.search("<alt>") !== -1)
-            aHKStr = aHKStr.replace("<alt>", "Alt + ");
+        if (aHKStr.search("<Primary>") !== -1)
+            aHKStr = aHKStr.replace("<Primary>", "Ctrl + ");
 
-        if (aHKStr.search("<primary>") !== -1)
-            aHKStr = aHKStr.replace("<primary>", "Ctrl + ");
+        if (aHKStr.search("<Shift>") !== -1)
+            aHKStr = aHKStr.replace("<Shift>", "Shift + ");
 
-        if (aHKStr.search("<shift>") !== -1)
-            aHKStr = aHKStr.replace("<shift>", "Shift + ");
+        if (aHKStr.search("<Super>") !== -1)
+            aHKStr = aHKStr.replace("<Super>", "Super + ");
 
-        if (aHKStr.search("<super>") !== -1)
-            aHKStr = aHKStr.replace("<super>", "Super + ");
+        // I realized that modifier keys are named differently when "used alone".
+        // Lets put this here just in case.
+        if (aHKStr.search("Alt_L") !== -1)
+            aHKStr = aHKStr.replace("Alt_L", "Alt L + ");
+
+        if (aHKStr.search("Alt_R") !== -1)
+            aHKStr = aHKStr.replace("Alt_R", "Alt R + ");
+
+        if (aHKStr.search("Control_L") !== -1)
+            aHKStr = aHKStr.replace("Control_L", "Ctrl L + ");
+
+        if (aHKStr.search("Control_R") !== -1)
+            aHKStr = aHKStr.replace("Control_R", "Ctrl R + ");
+
+        if (aHKStr.search("Super_L") !== -1)
+            aHKStr = aHKStr.replace("Super_L", "Super L + ");
+
+        if (aHKStr.search("Super_R") !== -1)
+            aHKStr = aHKStr.replace("Super_R", "Super R + ");
 
         return aHKStr;
     },
@@ -147,15 +173,15 @@ MyApplet.prototype = {
         if (this.pref_translate_key !== "") {
             let [leftKB, rightKB] = this.pref_translate_key.split("::");
             tt += boldSpan(_("Key combination to translate") + ": ") + "\n" +
-                (leftKB === "" ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
-                (rightKB === "" ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
+                (leftKB ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
+                (rightKB ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
         }
 
         if (this.pref_force_translate_key !== "") {
             let [leftKB, rightKB] = this.pref_force_translate_key.split("::");
             tt += boldSpan(_("Key combination to force translation") + ": ") + "\n" +
-                (leftKB === "" ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
-                (rightKB === "" ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
+                (leftKB ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
+                (rightKB ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
         }
 
         if (!this.pref_all_dependencies_met) {
@@ -642,15 +668,24 @@ MyApplet.prototype = {
     },
 
     _updateKeybindings: function() {
+        if (this.key_1_id)
+            Main.keybindingManager.removeHotKey(this.key_1_id);
+
+        if (this.key_2_id)
+            Main.keybindingManager.removeHotKey(this.key_2_id);
+
+        this.key_1_id = "popup_translator_translate_key-" + this._instance_id;
+        this.key_2_id = "popup_translator_force_translate_key-" + this._instance_id;
+
         Main.keybindingManager.addHotKey(
-            "popup_translator_translate_key-" + this._instance_id,
+            this.key_1_id,
             this.pref_translate_key,
             Lang.bind(this, function() {
                 this.translate(false);
             })
         );
         Main.keybindingManager.addHotKey(
-            "popup_translator_force_translate_key-" + this._instance_id,
+            this.key_2_id,
             this.pref_force_translate_key,
             Lang.bind(this, function() {
                 this.translate(true);
@@ -796,6 +831,7 @@ MyApplet.prototype = {
                         _("All dependencies seem to be met."));
                     this.pref_all_dependencies_met = true;
                 }
+                this._setAppletTooltip();
             }));
     },
 
@@ -841,6 +877,19 @@ MyApplet.prototype = {
 
     get service_provider() {
         return this.pref_service_provider;
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (this.key_1_id)
+            Main.keybindingManager.removeHotKey(this.key_1_id);
+
+        if (this.key_2_id)
+            Main.keybindingManager.removeHotKey(this.key_2_id);
+
+        if (this.menu) {
+            this.menuManager.removeMenu(this.menu);
+            this.menu.destroy();
+        }
     }
 };
 
