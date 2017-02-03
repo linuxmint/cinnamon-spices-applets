@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 15:01-0300\n"
-"PO-Revision-Date: 2017-02-01 15:01-0300\n"
+"POT-Creation-Date: 2017-02-02 13:39-0300\n"
+"PO-Revision-Date: 2017-02-02 13:40-0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,136 +18,152 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: applet.js:114
+msgid "Source language"
+msgstr "Idioma de origen"
+
+#: applet.js:115
+msgid "Target language"
+msgstr "Idioma de destino"
+
+#: applet.js:116
+msgid ""
+"(G) = Language supported only by Google Translate.\n"
+"(Y) = Language supported only by Yandex Translate."
+msgstr ""
+"(G) = Idioma soportado únicamente por Google Translate.\n"
+"(Y) = Idioma soportado únicamente por Yandex Translate."
+
 #. 3.2->settings-schema.json->pref_service_provider->description
 #. 0dyseus@PopupTranslator->settings-
 #. schema.json->pref_service_provider->description
-#: applet.js:143 3.2/applet.js:143
+#: applet.js:169 3.2/applet.js:143
 msgid "Service provider"
 msgstr "Proveedor de servicio"
 
-#: applet.js:144 3.2/applet.js:144 appletHelper.py:329
+#: applet.js:170 3.2/applet.js:144 appletHelper.py:329
 msgid "Language pair"
 msgstr "Par de idiomas"
 
-#: applet.js:149 3.2/applet.js:149
+#: applet.js:175 3.2/applet.js:149
 msgid "Key combination to translate"
 msgstr "Combinación de teclas para traducir"
 
-#: applet.js:156 3.2/applet.js:156
+#: applet.js:182 3.2/applet.js:156
 msgid "Key combination to force translation"
 msgstr "Combinación de teclas para forzar la traducción"
 
-#: applet.js:162 applet.js:766 applet.js:787 3.2/applet.js:162
+#: applet.js:188 applet.js:801 applet.js:822 3.2/applet.js:162
 #: 3.2/applet.js:766 3.2/applet.js:787
 msgid "Unmet dependencies found!!!"
 msgstr "¡Dependencias no satisfechas encontradas!"
 
-#: applet.js:163 applet.js:666 applet.js:767 3.2/applet.js:163
+#: applet.js:189 applet.js:701 applet.js:802 3.2/applet.js:163
 #: 3.2/applet.js:666 3.2/applet.js:767
 msgid "A detailed error has been logged into ~/.cinnamon/glass.log file."
 msgstr ""
 "Se ha registrado un error detallado en el archivo ~/.cinnamon/glass.log."
 
-#: applet.js:182 applet.js:193 3.2/applet.js:182 3.2/applet.js:193
+#: applet.js:208 applet.js:219 3.2/applet.js:182 3.2/applet.js:193
 #, javascript-format
 msgid "Set %s as default translation engine."
 msgstr "Establecer %s como motor de traducción predeterminado."
 
-#: applet.js:208 3.2/applet.js:208
+#: applet.js:234 3.2/applet.js:208
 msgid "Translation history"
 msgstr "Historial de traducción"
 
-#: applet.js:214 3.2/applet.js:214
+#: applet.js:240 3.2/applet.js:214
 msgid "Open translation history window."
 msgstr "Abrir ventana del historial de traducción."
 
-#: applet.js:226 3.2/applet.js:226
+#: applet.js:252 3.2/applet.js:226
 msgid "History storage"
 msgstr "Almacenamiento del historial"
 
-#: applet.js:232 3.2/applet.js:232
+#: applet.js:258 3.2/applet.js:232
 msgid "Open the location where the translation history file is stored."
 msgstr ""
 "Abrir la ubicación donde se almacena el archivo de historial de traducción."
 
-#: applet.js:240 3.2/applet.js:240
+#: applet.js:266 3.2/applet.js:240
 msgid "Check dependencies"
 msgstr "Comprobar dependencias"
 
-#: applet.js:246 3.2/applet.js:246
+#: applet.js:272 3.2/applet.js:246
 msgid "Check whether the dependencies for this applet are met."
 msgstr "Comprobar si se cumplen las dependencias para este applet."
 
-#: applet.js:254 3.2/applet.js:254
+#: applet.js:280 3.2/applet.js:254
 msgid "Help"
 msgstr "Ayuda"
 
-#: applet.js:260 3.2/applet.js:260
+#: applet.js:286 3.2/applet.js:260
 msgid "Open this applet help file."
 msgstr "Abra el archivo de ayuda de este applet."
 
-#: applet.js:382 3.2/applet.js:382
+#: applet.js:408 3.2/applet.js:382
 msgid "History"
 msgstr "Historial"
 
-#: applet.js:396 3.2/applet.js:396
+#: applet.js:422 3.2/applet.js:396
 #, javascript-format
 msgid "Go to %s's website"
 msgstr "Ir al sitio web de %s"
 
-#: applet.js:398 3.2/applet.js:398
+#: applet.js:424 3.2/applet.js:398
 #, javascript-format
 msgid "Powered By %s"
 msgstr "Powered by %s"
 
-#: applet.js:481 3.2/applet.js:481
+#: applet.js:507 3.2/applet.js:481
 msgid "No Yandex API keys were found!!!"
 msgstr "¡No se encontraron claves de API de Yandex!"
 
-#: applet.js:482 applet.js:789 3.2/applet.js:482 3.2/applet.js:789
+#: applet.js:508 applet.js:824 3.2/applet.js:482 3.2/applet.js:789
 msgid "Check this applet HELP.md file for instructions."
 msgstr ""
 "Comprobar el archivo HELP.md de este applet para obtener instrucciones."
 
-#: applet.js:483 applet.js:790 3.2/applet.js:483 3.2/applet.js:790
+#: applet.js:509 applet.js:825 3.2/applet.js:483 3.2/applet.js:790
 msgid "It can be accessed from this applet context menu."
 msgstr "Se puede acceder a él desde el menú contextual de este applet."
 
-#: applet.js:540 3.2/applet.js:540
+#: applet.js:566 3.2/applet.js:540
 msgid "API key is invalid"
 msgstr "La clave de la API no es válida"
 
-#: applet.js:543 3.2/applet.js:543
+#: applet.js:569 3.2/applet.js:543
 msgid "Blocked API key"
 msgstr "Clave de API bloqueada"
 
-#: applet.js:546 3.2/applet.js:546
+#: applet.js:572 3.2/applet.js:546
 msgid "Exceeded the daily limit on the amount of translated text"
 msgstr "Excedió el límite diario de la cantidad de texto traducido"
 
-#: applet.js:549 3.2/applet.js:549
+#: applet.js:575 3.2/applet.js:549
 msgid "Exceeded the maximum text size"
 msgstr "Ha superado el tamaño máximo de texto"
 
-#: applet.js:552 3.2/applet.js:552
+#: applet.js:578 3.2/applet.js:552
 msgid "The text cannot be translated"
 msgstr "El texto no puede ser traducido"
 
-#: applet.js:555 3.2/applet.js:555
+#: applet.js:581 3.2/applet.js:555
 msgid "The specified translation direction is not supported"
 msgstr "No se admite la dirección de traducción especificada"
 
-#: applet.js:665 3.2/applet.js:665
+#: applet.js:700 3.2/applet.js:665
 #, javascript-format
 msgid "Error parsing %s's request."
 msgstr "Error al analizar la solicitud a %s."
 
 #. 0dyseus@PopupTranslator->metadata.json->name
-#: applet.js:786 3.2/applet.js:786
+#: applet.js:821 3.2/applet.js:786
 msgid "Popup Translator"
 msgstr "Traductor emergente"
 
-#: applet.js:796 3.2/applet.js:796
+#: applet.js:831 3.2/applet.js:796
 msgid "All dependencies seem to be met."
 msgstr "Todas las dependencias parecen ser cumplidas."
 
