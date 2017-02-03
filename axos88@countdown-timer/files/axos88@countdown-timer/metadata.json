@@ -2,5 +2,6 @@
     "dangerous": false,
     "uuid": "axos88@countdown-timer",
     "name": "Countdown timer with notifications",
-    "description": "A countdown timer app with visual and auditory notifications based on markbokil's timer-notifications applet"
+    "description": "A countdown timer app with visual and auditory notifications based on markbokil's timer-notifications applet",
+    "website": "github.com/axos88/cinnamon-countdown-timer"
 }
