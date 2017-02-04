@@ -32,4 +32,3 @@ Installation:
 	Open the Cinnamon applets control panel.
 
 	Enable the applet.
-
