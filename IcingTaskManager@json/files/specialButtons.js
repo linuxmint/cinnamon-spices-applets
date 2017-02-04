@@ -2,16 +2,17 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Clutter = imports.gi.Clutter;
 var Lang = imports.lang;
-var Cinnamon = imports.gi.Cinnamon;
+var Cinnamon = typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
 var St = imports.gi.St;
-var Tweener = imports.ui.tweener;
-var DND = imports.ui.dnd;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var Tweener = importObj.ui.tweener;
+var DND = importObj.ui.dnd;
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
 var BUTTON_BOX_ANIMATION_TIME = 0.5;
 var MAX_BUTTON_WIDTH = 150; // Pixels
@@ -99,14 +100,14 @@ IconLabelButton.prototype = {
     }, 0);
     this.setIconSize();
 
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)));
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)));
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = !global.__settings.get_boolean('panel-edit-mode');
   },
 
   setIconPadding: function setIconPadding() {
@@ -524,8 +525,10 @@ AppButton.prototype = {
         _this5[key].disconnect(id);
       });
     });
-    global.settings.disconnect(this.panelEditId);
-    this._container.destroy_children();
+    global.__settings.disconnect(this.panelEditId);
+    try {
+      this._container.destroy_children();
+    } catch (e) {}
     this._container.destroy();
     this.actor.destroy();
     if (this._urgent_signal) {

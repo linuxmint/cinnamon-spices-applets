@@ -1,22 +1,24 @@
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 const Clutter = imports.gi.Clutter
 const Lang = imports.lang
 const St = imports.gi.St
-const Main = imports.ui.main
-const Tweener = imports.ui.tweener
-const PopupMenu = imports.ui.popupMenu
+const Main = importObj.ui.main
+const Tweener = importObj.ui.tweener
+const PopupMenu = importObj.ui.popupMenu
 const Signals = imports.signals
-const DND = imports.ui.dnd
-const clog = imports.applet.clog
-const setTimeout = imports.applet.setTimeout
+const DND = importObj.ui.dnd
+//const setTimeout = importObj.applet.setTimeout
 
 // Load our applet so we can access other files in our extensions dir as libraries
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json']
+const AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json']
 const _ = AppletDir.lodash._
 const App = AppletDir.applet
 const SpecialMenus = AppletDir.specialMenus
 const SpecialButtons = AppletDir.specialButtons
+const clog = AppletDir.__init__.clog
+const setTimeout = AppletDir.__init__.setTimeout;
 
-const DEFERRED_APPS = ['spotify']
+const DEFERRED_APPS = ['spotify', 'libreoffice']
 
 function AppGroup () {
   this._init.apply(this, arguments)
@@ -105,7 +107,7 @@ AppGroup.prototype = {
 
     this.on_panel_edit_mode_changed()
     this.on_arrange_pinned()
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
     this.arrangePinnedId = this._applet.settings.connect('changed::arrange-pinnedApps', Lang.bind(this, this.on_arrange_pinned))
   },
 
@@ -118,8 +120,8 @@ AppGroup.prototype = {
   },
 
   on_panel_edit_mode_changed: function () {
-    this._draggable.inhibit = global.settings.get_boolean('panel-edit-mode')
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode')
+    this._draggable.inhibit = global.__settings.get_boolean('panel-edit-mode')
+    this.actor.reactive = !global.__settings.get_boolean('panel-edit-mode')
   },
 
   on_title_display_changed: function (metaWindow) {
@@ -699,7 +701,7 @@ AppGroup.prototype = {
       this._draggable.disconnect(this.signals._draggable[i])
     }
     this._applet.settings.disconnect(this.numDisplaySignal)
-    global.settings.disconnect(this.panelEditId)
+    global.__settings.disconnect(this.panelEditId)
     this._applet.settings.disconnect(this.arrangePinnedId)
 
     this.unwatchWorkspace(null, true)

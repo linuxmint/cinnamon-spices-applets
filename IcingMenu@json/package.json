@@ -1,16 +1,16 @@
 {
-  "name": "icingtaskmanager",
-  "version": "4.3.2",
-  "description": "Icing Task Manager",
+  "name": "icingmenu",
+  "version": "1.0.4",
+  "description": "Icing Menu",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp copy && gulp transpile && npm run installApp",
-    "installApp": "cp -avrf  IcingTaskManager@json ~/.local/share/cinnamon/applets/ && ./locale.sh"
+    "installApp": "cp -avrf  IcingMenu@json ~/.local/share/cinnamon/applets/"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaszhix/icingtaskmanager.git"
+    "url": "git+https://github.com/jaszhix/icingmenu.git"
   },
   "author": "",
   "license": "GPL-2.0",
@@ -28,7 +28,6 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-es2016": "^6.11.3",
     "babel-preset-es2017": "^1.6.1",
-    "babel-preset-mozjs24": "0.0.0",
     "clear": "0.0.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",

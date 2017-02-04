@@ -1,8 +1,6 @@
 /* jshint moz:true */
 let Gda;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
-const clog = imports.applet.clog
 
 try {
   Gda = imports.gi.Gda;

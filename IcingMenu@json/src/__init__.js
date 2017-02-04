@@ -1,40 +1,28 @@
-'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var importObj = typeof cimports !== 'undefined' ? cimports : imports;
-var Lang = imports.lang;
-var Soup = imports.gi.Soup;
-var Mainloop = imports.mainloop;
-var setTimeout = function setTimeout(cb, duration) {
-  var _this = this,
-      _arguments = arguments;
-
-  Mainloop.timeout_add(duration, Lang.bind(this, function () {
-    cb.call(_this, _arguments);
-  }));
-};
-
-var Main = importObj.ui.main;
-var clog = function clog() {
-  var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'LOG';
-  var input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '...';
-
+const Main = imports.ui.main
+const Soup = imports.gi.Soup;
+const Mainloop = imports.mainloop
+const Lang = imports.lang
+var setTimeout = function(cb, duration){
+  Mainloop.timeout_add(duration, Lang.bind(this, ()=>{
+    cb.call(this, arguments)
+  }))
+}
+const clog = (label='LOG', input='...')=>{
   try {
     if (label === undefined || label === null) {
-      Main._logInfo('NULL: ');
-      Main._logTrace(label);
+      Main._logInfo('NULL: ')
+      Main._logTrace(label)
     } else if (input === undefined || input === null) {
-      Main._logInfo((label ? label : 'NULL') + ': ');
-      Main._logTrace(input);
+      Main._logInfo(`${label ? label : 'NULL'}: `)
+      Main._logTrace(input)
     } else {
-      Main._logInfo(label + ': ' + JSON.stringify(input));
+      Main._logInfo(`${label}: ${JSON.stringify(input)}`)
     }
   } catch (e) {
     try {
-      Main._logInfo(label + ': ' + e);
+      Main._logInfo(`${label}: ${e}`)
     } catch (e) {
-      Main._logInfo('Could not parse logging input: ' + e);
+      Main._logInfo(`Could not parse logging input: ${e}`)
     }
   }
 };
@@ -76,7 +64,7 @@ function bind(fn, thisArg) {
 }
 
 function Promise(fn) {
-  if (_typeof(this) !== 'object') throw new TypeError('Promises must be constructed via new');
+  if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
   if (typeof fn !== 'function') throw new TypeError('not a function');
   this._state = 0;
   this._handled = false;
@@ -116,7 +104,7 @@ function resolve(self, newValue) {
   try {
     // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
     if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
-    if (newValue && ((typeof newValue === 'undefined' ? 'undefined' : _typeof(newValue)) === 'object' || typeof newValue === 'function')) {
+    if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
       var then = newValue.then;
       if (newValue instanceof Promise) {
         self._state = 3;
@@ -144,7 +132,7 @@ function reject(self, newValue) {
 
 function finale(self) {
   if (self._state === 2 && self._deferreds.length === 0) {
-    Promise._immediateFn(function () {
+    Promise._immediateFn(function() {
       if (!self._handled) {
         Promise._unhandledRejectionFn(self._value);
       }
@@ -193,7 +181,7 @@ Promise.prototype['catch'] = function (onRejected) {
 };
 
 Promise.prototype.then = function (onFulfilled, onRejected) {
-  var prom = new this.constructor(noop);
+  var prom = new (this.constructor)(noop);
 
   handle(this, new Handler(onFulfilled, onRejected, prom));
   return prom;
@@ -208,7 +196,7 @@ Promise.all = function (arr) {
 
     function res(i, val) {
       try {
-        if (val && ((typeof val === 'undefined' ? 'undefined' : _typeof(val)) === 'object' || typeof val === 'function')) {
+        if (val && (typeof val === 'object' || typeof val === 'function')) {
           var then = val.then;
           if (typeof then === 'function') {
             then.call(val, function (val) {
@@ -233,7 +221,7 @@ Promise.all = function (arr) {
 };
 
 Promise.resolve = function (value) {
-  if (value && (typeof value === 'undefined' ? 'undefined' : _typeof(value)) === 'object' && value.constructor === Promise) {
+  if (value && typeof value === 'object' && value.constructor === Promise) {
     return value;
   }
 
@@ -257,11 +245,10 @@ Promise.race = function (values) {
 };
 
 // Use polyfill for setImmediate for performance gains
-Promise._immediateFn = typeof setImmediate === 'function' && function (fn) {
-  setImmediate(fn);
-} || function (fn) {
-  setTimeoutFunc(fn, 0);
-};
+Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
+  function (fn) {
+    setTimeoutFunc(fn, 0);
+  };
 
 Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
   if (typeof console !== 'undefined' && console) {
@@ -289,23 +276,21 @@ Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
 
 // AJAX convenience method
 
-var ajax = function ajax() {
-  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { method: 'GET', json: true, url: 'https://api.github.com/repos/jaszhix/icingtaskmanager/releases/latest' };
-
-  return new Promise(function (resolve, reject) {
-    var request = Soup.Message.new(opts.method, opts.url);
-    var httpSession = new Soup.SessionAsync();
-    httpSession.user_agent = 'IcingTaskManager@json/API';
-    httpSession.queue_message(request, function (session, message) {
+const ajax = (opts={method: 'GET', json: true, url: 'https://api.github.com/repos/jaszhix/icingmenu/releases/latest'})=>{
+  return new Promise((resolve, reject)=>{
+    let request = Soup.Message.new(opts.method, opts.url);
+    let httpSession = new Soup.SessionAsync();
+    httpSession.user_agent = 'IcingMenu@json/API';
+    httpSession.queue_message(request, (session, message)=>{
       try {
-        var data = opts.json ? JSON.parse(message.response_body.data) : message.response_body.data;
+        var data = opts.json ? JSON.parse(message.response_body.data) : message.response_body.data
         if (message.status_code < 300) {
-          resolve(data);
+          resolve(data)
         } else {
-          reject(message);
+          reject(message)
         }
       } catch (e) {
-        reject(message);
+        reject(message)
       }
     });
   });

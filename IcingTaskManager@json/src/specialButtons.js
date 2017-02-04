@@ -1,13 +1,14 @@
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 const Clutter = imports.gi.Clutter
 const Lang = imports.lang
-const Cinnamon = imports.gi.Cinnamon
+const Cinnamon =  typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
 const St = imports.gi.St
-const Tweener = imports.ui.tweener
-const DND = imports.ui.dnd
-const clog = imports.applet.clog
-const setTimeout = imports.applet.setTimeout
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json']
+const Tweener = importObj.ui.tweener
+const DND = importObj.ui.dnd
+const AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json']
 const _ = AppletDir.lodash._
+const clog = AppletDir.__init__.clog
+const setTimeout = AppletDir.__init__.setTimeout
 
 const BUTTON_BOX_ANIMATION_TIME = 0.5
 const MAX_BUTTON_WIDTH = 150 // Pixels
@@ -101,14 +102,14 @@ IconLabelButton.prototype = {
     setTimeout(()=>this.setIconPadding(true), 0)
     this.setIconSize()
 
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)))
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)))
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)))
   },
 
   on_panel_edit_mode_changed: function () {
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode')
+    this.actor.reactive = !global.__settings.get_boolean('panel-edit-mode')
   },
 
   setIconPadding: function (init=null) {
@@ -467,8 +468,10 @@ AppButton.prototype = {
         this[key].disconnect(id)
       })
     })
-    global.settings.disconnect(this.panelEditId)
-    this._container.destroy_children()
+    global.__settings.disconnect(this.panelEditId)
+    try {
+      this._container.destroy_children()  
+    } catch (e) {}
     this._container.destroy()
     this.actor.destroy()
     if (this._urgent_signal) {
