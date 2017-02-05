@@ -467,6 +467,7 @@ MyApplet.prototype = {
 	_init_hover_popup: function () {
 		this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation);
 		this.on_hover_popup_css_changed();
+		this.on_show_hover_changed();
 	},
 
 	_init_gui: function () {
