@@ -15,9 +15,10 @@ const Mainloop = imports.mainloop;
 const ModalDialog = imports.ui.modalDialog;
 const PanelMenu = imports.ui.panelMenu;
 
-const AppletMeta = imports.ui.appletManager.applets['countdown-timer@vandra.hu'];
-const AssetDir = imports.ui.appletManager.appletMeta['countdown-timer@vandra.hu'].path + "/assets";
-const ConfigFile = GLib.build_filenamev([global.userdatadir, 'applets/countdown-timer@vandra.hu/config.js']);
+const UUID = "axos88@countdown-timer";
+const AppletMeta = imports.ui.appletManager.applets[UUID];
+const AssetDir = imports.ui.appletManager.appletMeta[UUID].path + "/assets";
+const ConfigFile = GLib.build_filenamev([global.userdatadir, 'applets/' + UUID + '/config.js']);
 const AppOptions = AppletMeta.config.Options;
 const OpenFileCmd = "xdg-open";
 
