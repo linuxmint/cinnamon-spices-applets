@@ -1,0 +1,5 @@
+[Which applet?]: <IssuesTitleFormat> (applets name: simple description of the problem)
+[Notify the author]: <> (To be found in the "info.json" file)
+@AppletAuthor
+
+[Issue]: <> (Describe issue below)
