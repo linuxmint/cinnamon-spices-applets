@@ -173,15 +173,15 @@ MyApplet.prototype = {
         if (this.pref_translate_key !== "") {
             let [leftKB, rightKB] = this.pref_translate_key.split("::");
             tt += boldSpan(_("Key combination to translate") + ": ") + "\n" +
-                (leftKB ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
-                (rightKB ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
+                (leftKB ? "\t" + this.getLegibleKeybinding(leftKB) + "\n" : "") +
+                (rightKB ? "\t" + this.getLegibleKeybinding(rightKB) + "\n" : "");
         }
 
         if (this.pref_force_translate_key !== "") {
             let [leftKB, rightKB] = this.pref_force_translate_key.split("::");
             tt += boldSpan(_("Key combination to force translation") + ": ") + "\n" +
-                (leftKB ? "" : "\t" + this.getLegibleKeybinding(leftKB) + "\n") +
-                (rightKB ? "" : "\t" + this.getLegibleKeybinding(rightKB) + "\n");
+                (leftKB ? "\t" + this.getLegibleKeybinding(leftKB) + "\n" : "") +
+                (rightKB ? "\t" + this.getLegibleKeybinding(rightKB) + "\n" : "");
         }
 
         if (!this.pref_all_dependencies_met) {

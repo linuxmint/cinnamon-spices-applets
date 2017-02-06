@@ -1,5 +1,8 @@
 ## Change Log
 
+##### 1.03
+- Fixed keybinding display on applet tooltip.
+
 ##### 1.02
 - Added German localization. Thanks to [NikoKrause](https://github.com/NikoKrause).
 
