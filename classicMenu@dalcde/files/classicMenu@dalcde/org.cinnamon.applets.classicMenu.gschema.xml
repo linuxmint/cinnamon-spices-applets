@@ -30,7 +30,7 @@
       <summary>Desktop file of package manager</summary>
     </key>
     <key type="s" name="favorites-list">
-      <default>"firefox.desktop:mintInstall.desktop:cinnamon-settings.desktop:xchat.desktop:gnome-terminal.desktop:nautilus.desktop"<default>
+      <default>"firefox.desktop:mintInstall.desktop:cinnamon-settings.desktop:xchat.desktop:gnome-terminal.desktop:nautilus.desktop"</default>
     </key>
   </schema>
 </schemalist>
