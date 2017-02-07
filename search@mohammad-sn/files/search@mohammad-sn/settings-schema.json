@@ -1,0 +1,68 @@
+{
+   "head0" : {
+        "type" : "header",
+        "description" : "General Settings:"
+    },
+    "keybinding" : {
+        "indent": true,
+        "type" : "keybinding",
+        "description" : "Keybinding to start search",
+        "default" : ""
+    },
+    "include-hidden-dirs" : {
+        "type" : "switch",
+        "description" : "Index and search hidden files and folders",
+        "default" : false
+    },
+    "icon-size" : {
+        "type": "spinbutton",
+        "default" : 22,
+        "min" : 16,
+        "max" : 64,
+        "step" : 2,
+        "description" : "Icon size",
+        "units" : "pixels"
+    },
+    "head" : {
+        "type" : "header",
+        "description" : "Index these locations:"
+    },
+    "include-long-text" : {
+        "type" : "textview",
+        "description" : "Included Locations",
+        "default" : "",
+        "tooltip" : "",
+        "height" : 150
+    },
+    "add-include-button" : {
+        "type" : "button",
+        "description" : "Add folder",
+        "callback" : "on_include_button_pressed",
+        "tooltip" : ""
+    },
+
+    "div1" : {
+        "type" : "separator"
+    },
+    "head1" : {
+        "type" : "header",
+        "description" : "Excluded these folders:"
+    },
+    "exclude-long-text" : {
+        "type" : "textview",
+        "description" : "Excluded Locations",
+        "default" : "",
+        "tooltip" : "",
+        "height" : 150
+    },
+    "add-exclude-button" : {
+        "type" : "button",
+        "description" : "Add folder",
+        "callback" : "on_exclude_button_pressed",
+        "tooltip" : ""
+    },
+    "history" : {
+        "type" : "generic",
+        "default" : []
+    }
+}

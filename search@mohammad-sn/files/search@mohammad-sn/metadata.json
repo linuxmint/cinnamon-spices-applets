@@ -1,0 +1,8 @@
+{
+    "uuid": "search@mohammad-sn", 
+    "max-instances": 1, 
+    "dangerous": false, 
+    "description": "Click on the applet to search files using linux locate tool", 
+    "tooltip": "Search files", 
+    "name": "Search"
+}
