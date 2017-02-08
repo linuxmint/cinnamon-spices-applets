@@ -22,12 +22,12 @@
             <description/>
         </key>
         <key name="file-manager" type="s">
-            <default>'nautilus'</default>
+            <default>'nemo'</default>
             <summary>The used file system manager</summary>
             <description/>
         </key>
         <key name="connect-command" type="s">
-            <default>'nautilus-connect-server'</default>
+            <default>'nemo-connect-server'</default>
             <summary>Application for the "Connect to..." item</summary>
             <description/>
         </key>

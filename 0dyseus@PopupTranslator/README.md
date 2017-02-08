@@ -29,4 +29,10 @@ Simple translator applet that will allow to display the translation of any selec
 
 ![Translation history window](https://odyseus.github.io/CinnamonTools/lib/img/PopupTranslator-001.png "Translation history window")
 
+## Contributors
+- [NikoKrause](https://github.com/NikoKrause): German localization and bug reports.
+- [Radek71](https://github.com/Radek71): Czech localization and bug reports.
+
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/CHANGELOG.md)
+
+[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/TODO)

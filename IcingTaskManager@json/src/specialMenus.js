@@ -1,24 +1,25 @@
 /* jshint moz:true */
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 const Clutter = imports.gi.Clutter
-const AppletManager = imports.ui.appletManager;
+const AppletManager = importObj.ui.appletManager;
 const Lang = imports.lang
-const Main = imports.ui.main
-const Params = imports.misc.params
-const PopupMenu = imports.ui.popupMenu
+const Main = importObj.ui.main
+const Params = importObj.misc.params
+const PopupMenu = importObj.ui.popupMenu
 const Meta = imports.gi.Meta
-const Util = imports.misc.util
+const Util = importObj.misc.util
 const St = imports.gi.St
 const Gio = imports.gi.Gio
 const Gettext = imports.gettext
-const Tweener = imports.ui.tweener
-const Applet = imports.ui.applet;
-const Tooltips = imports.ui.tooltips;
-const clog = imports.applet.clog
-const setTimeout = imports.applet.setTimeout
+const Tweener = importObj.ui.tweener
+const Applet = importObj.ui.applet;
+const Tooltips = importObj.ui.tooltips;
 
-const AppletDir = AppletManager.applets['IcingTaskManager@json']
+const AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json']
 const _ = AppletDir.lodash._
 const FireFox = AppletDir.firefox
+const clog = AppletDir.__init__.clog
+const setTimeout = AppletDir.__init__.setTimeout
 
 const THUMBNAIL_ICON_SIZE = 16
 const OPACITY_OPAQUE = 255
@@ -959,7 +960,8 @@ WindowThumbnail.prototype = {
       style_class: 'item-box',
       reactive: true,
       track_hover: true,
-      vertical: true
+      vertical: true,
+      can_focus: true
     })
     this.actor._delegate = this
     // Override with own theme.
@@ -1008,8 +1010,8 @@ WindowThumbnail.prototype = {
       this.tracker = this._applet.tracker
       this._trackerSignal = this.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange))
     }
-    this.signals.actor.push(this.actor.connect('enter-event', ()=>this.handleEnterEvent()))
-    this.signals.actor.push(this.actor.connect('leave-event', ()=>this.handleLeaveEvent()))
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this.handleEnterEvent)))
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this.handleLeaveEvent)))
     this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)))
     this.signals.actor.push(this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow)))
     //update focused style
@@ -1191,24 +1193,30 @@ WindowThumbnail.prototype = {
   },
 
   _onButtonRelease: function (actor, event) {
-    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && actor == this.button) {
+    var button = event.get_button();
+    if (button === 1 && actor == this.button) {
       this.handleAfterClick()
     }
   },
 
   _connectToWindow: function (actor, event) {
     this.wasMinimized = false
-    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && !this.stopClick && !this.isFavapp) {
+    var button = event.get_button();
+    if (button === 1 && !this.stopClick && !this.isFavapp) {
       Main.activateWindow(this.metaWindow, global.get_current_time())
 
       this.appSwitcherItem.hoverMenu.close()
-    } else if (event.get_state() & Clutter.ModifierType.BUTTON2_MASK && !this.stopClick) {
+    } else if (button === 2 && !this.stopClick) {
       this.handleAfterClick()
     }
     this.stopClick = false
   },
 
   _refresh: function (metaWindow=this.metaWindow, metaWindows=this.metaWindows) {
+    if (!this.metaWindow) {
+      return false;
+    }
+
     // Turn favorite tooltip into a normal thumbnail
     var monitor = Main.layoutManager.primaryMonitor
 
@@ -1318,12 +1326,17 @@ WindowThumbnail.prototype = {
     if (refThumb !== -1) {
       _.pullAt(this.appSwitcherItem.appThumbnails, refThumb)
     }
-
-    this._container.destroy_children()
+    try {
+      this._container.destroy_children()
+    } catch (e) {}
     this._container.destroy()
-    this.bin.destroy_children()
+    try {
+      this.bin.destroy_children()
+    } catch (e) {}
     this.bin.destroy()
-    this.actor.destroy_children()
+    try {
+      this.actor.destroy_children()
+    } catch (e) {}
     this.actor.destroy()
 
   }

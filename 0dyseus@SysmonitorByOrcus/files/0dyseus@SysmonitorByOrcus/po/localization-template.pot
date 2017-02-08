@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 
-"Project-Id-Version: 1.08\n"
+"Project-Id-Version: 1.09\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 21:43-0300\n"
-"PO-Revision-Date: 2016-12-15 20:05-0300\n"
+"PO-Revision-Date: 2017-02-05 15:17-0300\n"
 "Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:253 3.2/applet.js:253
+#: applet.js:277 3.2/applet.js:277
 msgid "Help"
 msgstr ""
 
-#: applet.js:415 3.2/applet.js:415
+#: applet.js:448 3.2/applet.js:448
 msgid "CPU: "
 msgstr ""
 
-#: applet.js:441 3.2/applet.js:441
+#: applet.js:474 3.2/applet.js:474
 msgid "Memory: "
 msgstr ""
 
-#: applet.js:441 applet.js:466 3.2/applet.js:441 3.2/applet.js:466
+#: applet.js:474 applet.js:499 3.2/applet.js:474 3.2/applet.js:499
 msgid " MB"
 msgstr ""
 
-#: applet.js:466 3.2/applet.js:466
+#: applet.js:499 3.2/applet.js:499
 msgid "Swap: "
 msgstr ""
 
-#: applet.js:505 3.2/applet.js:505
+#: applet.js:538 3.2/applet.js:538
 msgid "Network D/U: "
 msgstr ""
 
-#: applet.js:505 3.2/applet.js:505
+#: applet.js:538 3.2/applet.js:538
 msgid " KB/s"
 msgstr ""
 
-#: applet.js:543 3.2/applet.js:543
+#: applet.js:576 3.2/applet.js:576
 msgid "Load average: "
 msgstr ""
 
@@ -308,6 +308,16 @@ msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->description
 msgid "Displays CPU, memory, swap, network usage and load in graphs."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "buzz: Bug fixes."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->comments
+msgid ""
+"Bug reports and feature requests should be reported on this applet's "
+"repository linked below."
 msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name

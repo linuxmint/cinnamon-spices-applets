@@ -1,3 +1,4 @@
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 const Lang = imports.lang
 const Soup = imports.gi.Soup;
 const Mainloop = imports.mainloop
@@ -7,7 +8,7 @@ var setTimeout = function(cb, duration){
   }))
 }
 
-const Main = imports.ui.main
+const Main = importObj.ui.main
 const clog = (label='LOG', input='...')=>{
   try {
     if (label === undefined || label === null) {

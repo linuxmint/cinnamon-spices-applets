@@ -184,6 +184,18 @@ ClearRecentMenuItem.prototype = {
     }
 }
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
+
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
@@ -199,6 +211,10 @@ MyApplet.prototype = {
             this.instanceId = instanceId;
             this.orientation = orientation;
             Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
+
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
             
             this._bindSettings(instanceId);
             
@@ -300,8 +316,8 @@ MyApplet.prototype = {
                 
                 //if directory exists, build pictures section
                 if ( this.picturesPath && GLib.file_test(this.picturesPath, GLib.FileTest.IS_DIR) ) {
-                    let dirMonitor = Gio.file_new_for_path(this.picturesPath).monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
-                    this.monitorId = dirMonitor.connect("changed", Lang.bind(this, this.updatePicturesSection));
+                    this.dirMonitor = Gio.file_new_for_path(this.picturesPath).monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
+                    this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updatePicturesSection));
                     
                     let picturesPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
                     mainBox.add_actor(picturesPaneBox);
@@ -392,7 +408,7 @@ MyApplet.prototype = {
         while ( (nextType = iter.next()) != CMenu.TreeItemType.INVALID ) {
             if ( nextType == CMenu.TreeItemType.DIRECTORY ) {
                 let dir = iter.get_directory();
-                if ( dir.get_menu_id() == _("Graphics") ) {
+                if ( dir.get_menu_id() == "Graphics" ) {
                     let dirIter = dir.iter();
                     while (( nextType = dirIter.next()) != CMenu.TreeItemType.INVALID ) {
                         if ( nextType == CMenu.TreeItemType.ENTRY ) {

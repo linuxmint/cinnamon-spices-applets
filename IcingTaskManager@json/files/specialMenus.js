@@ -3,26 +3,27 @@
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 /* jshint moz:true */
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Clutter = imports.gi.Clutter;
-var AppletManager = imports.ui.appletManager;
+var AppletManager = importObj.ui.appletManager;
 var Lang = imports.lang;
-var Main = imports.ui.main;
-var Params = imports.misc.params;
-var PopupMenu = imports.ui.popupMenu;
+var Main = importObj.ui.main;
+var Params = importObj.misc.params;
+var PopupMenu = importObj.ui.popupMenu;
 var Meta = imports.gi.Meta;
-var Util = imports.misc.util;
+var Util = importObj.misc.util;
 var St = imports.gi.St;
 var Gio = imports.gi.Gio;
 var Gettext = imports.gettext;
-var Tweener = imports.ui.tweener;
-var Applet = imports.ui.applet;
-var Tooltips = imports.ui.tooltips;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
+var Tweener = importObj.ui.tweener;
+var Applet = importObj.ui.applet;
+var Tooltips = importObj.ui.tooltips;
 
-var AppletDir = AppletManager.applets['IcingTaskManager@json'];
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var FireFox = AppletDir.firefox;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
 var THUMBNAIL_ICON_SIZE = 16;
 var OPACITY_OPAQUE = 255;
@@ -1014,7 +1015,8 @@ WindowThumbnail.prototype = {
       style_class: 'item-box',
       reactive: true,
       track_hover: true,
-      vertical: true
+      vertical: true,
+      can_focus: true
     });
     this.actor._delegate = this;
     // Override with own theme.
@@ -1063,12 +1065,8 @@ WindowThumbnail.prototype = {
       this.tracker = this._applet.tracker;
       this._trackerSignal = this.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
     }
-    this.signals.actor.push(this.actor.connect('enter-event', function () {
-      return _this13.handleEnterEvent();
-    }));
-    this.signals.actor.push(this.actor.connect('leave-event', function () {
-      return _this13.handleLeaveEvent();
-    }));
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this.handleEnterEvent)));
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this.handleLeaveEvent)));
     this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)));
     this.signals.actor.push(this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow)));
     //update focused style
@@ -1263,18 +1261,20 @@ WindowThumbnail.prototype = {
 
 
   _onButtonRelease: function _onButtonRelease(actor, event) {
-    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && actor == this.button) {
+    var button = event.get_button();
+    if (button === 1 && actor == this.button) {
       this.handleAfterClick();
     }
   },
 
   _connectToWindow: function _connectToWindow(actor, event) {
     this.wasMinimized = false;
-    if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK && !this.stopClick && !this.isFavapp) {
+    var button = event.get_button();
+    if (button === 1 && !this.stopClick && !this.isFavapp) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
 
       this.appSwitcherItem.hoverMenu.close();
-    } else if (event.get_state() & Clutter.ModifierType.BUTTON2_MASK && !this.stopClick) {
+    } else if (button === 2 && !this.stopClick) {
       this.handleAfterClick();
     }
     this.stopClick = false;
@@ -1285,6 +1285,10 @@ WindowThumbnail.prototype = {
 
     var metaWindow = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.metaWindow;
     var metaWindows = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.metaWindows;
+
+    if (!this.metaWindow) {
+      return false;
+    }
 
     // Turn favorite tooltip into a normal thumbnail
     var monitor = Main.layoutManager.primaryMonitor;
@@ -1402,12 +1406,17 @@ WindowThumbnail.prototype = {
     if (refThumb !== -1) {
       _.pullAt(this.appSwitcherItem.appThumbnails, refThumb);
     }
-
-    this._container.destroy_children();
+    try {
+      this._container.destroy_children();
+    } catch (e) {}
     this._container.destroy();
-    this.bin.destroy_children();
+    try {
+      this.bin.destroy_children();
+    } catch (e) {}
     this.bin.destroy();
-    this.actor.destroy_children();
+    try {
+      this.actor.destroy_children();
+    } catch (e) {}
     this.actor.destroy();
   }
 };

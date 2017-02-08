@@ -317,7 +317,9 @@ MyApplet.prototype = {
     }
   },
 
-  _refreshAll: function _refreshAll(init) {
+  _refreshAll: function _refreshAll() {
+    var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     try {
       this._refreshApps();
       this._refreshFavs();

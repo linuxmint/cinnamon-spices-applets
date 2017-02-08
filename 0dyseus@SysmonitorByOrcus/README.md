@@ -3,6 +3,8 @@
 This applet is a fork of [System Monitor](https://cinnamon-spices.linuxmint.com/applets/view/88) applet by Josef Michálek (a.k.a. Orcus).
 
 ## Differences with the original applet
+**This applet is not compatible with vertical panels!**
+
 - This applet uses Cinnamon's native settings system instead of an external library (gjs).
 - I added an option to use a custom command on applet click.
 - I added an option to set a custom width for each graph individually.

@@ -1,0 +1,438 @@
+# This is a template file for translating the Cinnamon applet called Popup Translator.
+# Copyright (C) 2016
+# This file is distributed under the same license as the Popup Translator applet.
+# Odyseus <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.00\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-03 03:45-0300\n"
+"PO-Revision-Date: 2017-02-03 03:45-0300\n"
+"Last-Translator: Radek Otáhal <radek.otahal@email.cz>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: applet.js:114
+msgid "Source language"
+msgstr "Zdrojový jazyk"
+
+#: applet.js:115
+msgid "Target language"
+msgstr "Cílový jazyk"
+
+#: applet.js:116
+msgid ""
+"(G) = Language supported only by Google Translate.\n"
+"(Y) = Language supported only by Yandex Translate."
+msgstr ""
+"(G) = Jazyk podporovaný pouze překladačem Google.\n"
+"(Y) = Jazyk podporovaný pouze překladačem Yandex."
+
+#. 3.2->settings-schema.json->pref_service_provider->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->description
+#: applet.js:169 3.2/applet.js:143
+msgid "Service provider"
+msgstr "Poskytovatel služby"
+
+#: applet.js:170 3.2/applet.js:144 appletHelper.py:329
+msgid "Language pair"
+msgstr "Vybrané jazyky"
+
+#: applet.js:175 3.2/applet.js:149
+msgid "Key combination to translate"
+msgstr "Kombinace kláves pro vyvolání překladu"
+
+#: applet.js:182 3.2/applet.js:156
+msgid "Key combination to force translation"
+msgstr "Kombinace kláves pro vyvolání vynuceného překladu"
+
+#: applet.js:188 applet.js:801 applet.js:822 3.2/applet.js:162
+#: 3.2/applet.js:766 3.2/applet.js:787
+msgid "Unmet dependencies found!!!"
+msgstr "Nalezeny nesplněné závislosti!!!"
+
+#: applet.js:189 applet.js:701 applet.js:802 3.2/applet.js:163
+#: 3.2/applet.js:666 3.2/applet.js:767
+msgid "A detailed error has been logged into ~/.cinnamon/glass.log file."
+msgstr "Podrobnosti chyby byly zaznamenány do ~/.cinnamon/glass.log souboru."
+
+#: applet.js:208 applet.js:219 3.2/applet.js:182 3.2/applet.js:193
+#, javascript-format
+msgid "Set %s as default translation engine."
+msgstr "Nastavit %s jako výchozí překladač."
+
+#: applet.js:234 3.2/applet.js:208
+msgid "Translation history"
+msgstr "Historie překladu"
+
+#: applet.js:240 3.2/applet.js:214
+msgid "Open translation history window."
+msgstr "Otevřít okno historie překladu"
+
+#: applet.js:252 3.2/applet.js:226
+msgid "History storage"
+msgstr "Úložiště historie"
+
+#: applet.js:258 3.2/applet.js:232
+msgid "Open the location where the translation history file is stored."
+msgstr "Otevřít umístění kde je uložena historie překladu."
+
+#: applet.js:266 3.2/applet.js:240
+msgid "Check dependencies"
+msgstr "Zkontrolovat závislosti"
+
+#: applet.js:272 3.2/applet.js:246
+msgid "Check whether the dependencies for this applet are met."
+msgstr "Zkontrolovat jestli jsou splněny závislosti pro tento aplet."
+
+#: applet.js:280 3.2/applet.js:254
+msgid "Help"
+msgstr "Nápověda"
+
+#: applet.js:286 3.2/applet.js:260
+msgid "Open this applet help file."
+msgstr "Otevřít soubor s nápovědou tohoto apletu."
+
+#: applet.js:408 3.2/applet.js:382
+msgid "History"
+msgstr "Historie"
+
+#: applet.js:422 3.2/applet.js:396
+#, javascript-format
+msgid "Go to %s's website"
+msgstr "Přejít na %s web"
+
+#: applet.js:424 3.2/applet.js:398
+#, javascript-format
+msgid "Powered By %s"
+msgstr "S využitím %s"
+
+#: applet.js:507 3.2/applet.js:481
+msgid "No Yandex API keys were found!!!"
+msgstr "Žádné Yandex API klíče nebyly nalezeny!!!"
+
+#: applet.js:508 applet.js:824 3.2/applet.js:482 3.2/applet.js:789
+msgid "Check this applet HELP.md file for instructions."
+msgstr "Zkontrolujte HELP.md soubor tohoto apletu pro získání instrukcí."
+
+#: applet.js:509 applet.js:825 3.2/applet.js:483 3.2/applet.js:790
+msgid "It can be accessed from this applet context menu."
+msgstr "Může být zpřístupněn z kontextového menu tohoto apletu."
+
+#: applet.js:566 3.2/applet.js:540
+msgid "API key is invalid"
+msgstr "API klíč je neplatný"
+
+#: applet.js:569 3.2/applet.js:543
+msgid "Blocked API key"
+msgstr "Blokovaný API klíč"
+
+#: applet.js:572 3.2/applet.js:546
+msgid "Exceeded the daily limit on the amount of translated text"
+msgstr "Překročen denní limit množství přeloženého textu"
+
+#: applet.js:575 3.2/applet.js:549
+msgid "Exceeded the maximum text size"
+msgstr "Překročena maximální délka textu"
+
+#: applet.js:578 3.2/applet.js:552
+msgid "The text cannot be translated"
+msgstr "Text nemůže být přeložen"
+
+#: applet.js:581 3.2/applet.js:555
+msgid "The specified translation direction is not supported"
+msgstr "Vybraný směr překladu není podporován"
+
+#: applet.js:700 3.2/applet.js:665
+#, javascript-format
+msgid "Error parsing %s's request."
+msgstr "Chyba parsování %s požadavku."
+
+#. 0dyseus@PopupTranslator->metadata.json->name
+#: applet.js:821 3.2/applet.js:786
+msgid "Popup Translator"
+msgstr "Popup překladač"
+
+#: applet.js:831 3.2/applet.js:796
+msgid "All dependencies seem to be met."
+msgstr "Všechny závislosti jsou splněny."
+
+#: 0dyseus@PopupTranslator.js:230
+msgid "Copy translated text to clipboard"
+msgstr "Kopírovat přeložený text do schránky"
+
+#: 0dyseus@PopupTranslator.js:236
+msgid "Translate text on provider's website"
+msgstr "Přeložit text na webu poskytovatele překladu"
+
+#: 0dyseus@PopupTranslator.js:242
+msgid "Open translation history"
+msgstr "Otevřít historii překladu"
+
+#: appletHelper.py:311
+msgid "Popup Translator history"
+msgstr "Historie překladů"
+
+#: appletHelper.py:316
+msgid "Date"
+msgstr "Datum"
+
+#: appletHelper.py:324
+msgid "Source text"
+msgstr "Zdrojový text"
+
+#: appletHelper.py:337
+msgid "Target text"
+msgstr "Cílový text"
+
+#: appletHelper.py:359
+msgid "Reload"
+msgstr "Znovu načíst"
+
+#: appletHelper.py:360
+msgid "Reload translation history"
+msgstr "Znovu načíst historii překladu"
+
+#. 3.2->settings-schema.json->pref_custom_label_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "Uživatelský název"
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->description
+msgid "Custom timestamp"
+msgstr "Uživatelské časové razítko"
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->tooltip
+msgid ""
+"Choose a custom timestamp for the translation history entries.\n"
+"YYYY: year\n"
+"MM: month\n"
+"DD: day\n"
+"hh: hours\n"
+"mm: minutes\n"
+"ss: seconds"
+msgstr ""
+"Zvolte vlastní časové razítko pro záznamy v historii překladů.\n"
+"YYYY: rok\n"
+"MM: měsíc\n"
+"DD: den\n"
+"hh: hodiny\n"
+"mm: minuty\n"
+"ss: sekundy"
+
+#. 3.2->settings-schema.json->pref_style_for_footer->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_footer->description
+msgid "Footer style"
+msgstr "Styl zápatí"
+
+#. 3.2->settings-schema.json->pref_style_for_translated_text->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_translated_text->description
+msgid "Translated text style"
+msgstr "Styl přeloženého textu"
+
+#. 3.2->settings-schema.json->pref_force_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->description
+msgid "Keyboard shortcut to perform a FORCED translation"
+msgstr "Klávesová zkratka pro vyvolání vynuceného překladu"
+
+#. 3.2->settings-schema.json->pref_force_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->tooltip
+msgid ""
+"Choose a keybinding to perform a FORCED translation. A \"forced translation"
+"\" forces the translation of any string stored on the translation history "
+"and overwrites the existing one."
+msgstr ""
+"Zvolit klávesovou zkratku pro vyvolání vynuceného překladu. \"Vynucený "
+"překlad\" vynutí překlad jakéhokoliv řetězce uloženého v historii překladů a "
+"přepíše existující."
+
+#. 3.2->settings-schema.json->pref_service_provider->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->tooltip
+msgid "Choose the default translation service provider."
+msgstr "Zvolit výchozího poskytovatele služby překladu."
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Yandex Translator"
+msgstr "Překladač Yandex"
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Google Translator"
+msgstr "Překladač Google"
+
+#. 3.2->settings-schema.json->pref_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_translate_key->description
+msgid "Keyboard shortcut to perform a translation"
+msgstr "Klávesová zkratka pro vyvolání překladu"
+
+#. 3.2->settings-schema.json->pref_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key->tooltip
+msgid "Choose a keybinding to perform a translation."
+msgstr "Zvolit klávesovou zkratku pro vyvolání překladu."
+
+#. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_icon_for_applet->description
+msgid "Custom icon"
+msgstr "Vlastní ikona"
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->description
+msgid "History window initial height"
+msgstr "Výchozí výška okna historie"
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->units
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 3.2->settings-schema.json->pref_history_initial_window_width->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->units
+msgid "pixels"
+msgstr "pixelů"
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->description
+msgid "API keys"
+msgstr "API klíče"
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->tooltip
+msgid ""
+"Enter one API key per line.\n"
+"Read the HELP.md file (Help item on this applet context menu) found inside "
+"this applet folder to know how to get free Yandex API keys."
+msgstr ""
+"Zadejte jeden API klíč na řádek.\n"
+"Přečtěte HELP.md soubor (položka Nápověda v kontextovém menu tohoto apletu), "
+"který je umístěn ve složce tohoto apletu s popisem jak získat  Yandex API "
+"klíče."
+
+#. 3.2->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+msgid "Width to trigger word wrap"
+msgstr "Šířka pro zalomení řádků"
+
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+msgid ""
+"The \"Source text\" and \"Target text\" columns on the history window will "
+"wrap its text at the width defined by this setting."
+msgstr ""
+"Text ve sloupcích \"Zdrojový text\" a \"Cílový text\" v okně historie bude "
+"zalomen na šířku definovanou tímto nastavením."
+
+#. 3.2->settings-schema.json->pref_history_initial_window_width->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->description
+msgid "History window initial width"
+msgstr "Výchozí šířka okna historie"
+
+#. 3.2->settings-schema.json->head4->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head4->description
+msgid "Yandex translator settings"
+msgstr "Nastavení překladače Yandex"
+
+#. 3.2->settings-schema.json->head3->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head3->description
+msgid "Translation history settings"
+msgstr "Nastavení historie překladu"
+
+#. 3.2->settings-schema.json->head2->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head2->description
+msgid "Popup elements appearance"
+msgstr "Vzhled prvků okna"
+
+#. 3.2->settings-schema.json->head1->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head1->description
+msgid "Translation settings"
+msgstr "Nastavení překladu"
+
+#. 3.2->settings-schema.json->head0->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "Nastavení apletu"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->description
+msgid "Timestamp for translation history entries"
+msgstr "Časové razítko pro záznamy v historii překladů"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY MM-DD hh:mm:ss (ISO8601)"
+msgstr "YYYY MM-DD hh:mm:ss (ISO8601)"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY DD-MM hh:mm:ss (European)"
+msgstr "YYYY DD-MM hh:mm:ss (Evropské)"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "Custom"
+msgstr "Vlastní"
+
+#. 3.2->settings-schema.json->pref_style_for_language_pair->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_language_pair->description
+msgid "Language pair style"
+msgstr "Styl hlavičky s vybranými jazyky"
+
+#. 0dyseus@PopupTranslator->metadata.json->comments
+msgid ""
+"Bug reports and feature requests should be reported on this applet's "
+"repository linked below."
+msgstr ""
+"Pro hlášení chyb a požadavků na nové funkce použijte link na repozitáž "
+"tohoto apletu níže."
+
+#. 0dyseus@PopupTranslator->metadata.json->description
+msgid ""
+"Simple translator applet that will allow to display any selected text from "
+"any application on a system in a popup."
+msgstr ""
+"Aplet umožňující zobrazit překlad vybraného textu z jakékoliv aplikace v "
+"popup okně."
+
+#~ msgid "Language Pair"
+#~ msgstr "Vybrané jazyky"
+
+#~ msgid "Keyboard shortcut to perform a forced translation"
+#~ msgstr "Klávesová zkratka pro vyvolání vynuceného překladu"
+
+#~ msgid "Auto"
+#~ msgstr "Automaticky"
