@@ -2,11 +2,11 @@
    "camera": {
       "cinnamon": {
          "enabled": true,
-         "title": "Cinnamon Screenshot"
+         "title": "Built-in"
       },
       "gnome-screenshot": {
          "enabled": true,
-         "title": "Default",
+         "title": "GNOME Screenshot",
          "-append": "-f {DIRECTORY}/{FILENAME}.png",
          "toggles": [
             { "Copy to clipboard": "-c" },
@@ -18,9 +18,7 @@
             "current-window": "-d {DELAY} --window",
             "screen": "-d {DELAY}"
          },
-         "custom": {
-            "Interactive": "gnome-screenshot -i"
-         }
+         "gui": "gnome-screenshot -i"
       },
       "shutter": {
          "enabled": true,
@@ -68,15 +66,15 @@
             "window": "--select",
             "current-window": "--window"
          },
+         "gui": "kazam",
          "custom": {
-            "Open Kazam": "kazam",
             "Preferences": "kazam --preferences"
          }
       }
    },
    "recorder": {
       "cinnamon": {
-        "title": "Cinnamon Recorder",
+        "title": "Built-in",
         "enabled": true
       },
       "ffmpeg": {
@@ -92,14 +90,14 @@
         }
       },
       "gtk-recordmydesktop": {
-        "title": "Record My Desktop",
+        "title": "RecordMyDesktop",
         "enabled": true,
         "-sound-on": "",
         "-sound-off": "--no-sound",
         "stop-command": "killall recordmydesktop",
+        "gui": "gtk-recordmydesktop",
         "custom": {
-          "Open GUI": "gtk-recordmydesktop",
-          "Area (Window)": "#DC_WINDOW_HELPER# recordmydesktop {SOUND} -x {X} -y {Y} --width {WIDTH} --height {HEIGHT} -o {DIRECTORY}/{FILENAME}.ogv",
+          "Area (Window)": "#DC_WINDOW_HELPER# recordmydesktop {SOUND} --windowid {X_WINDOW_ID} -o {DIRECTORY}/{FILENAME}.ogv",
           "Area (Select)": "#DC_AREA_HELPER# recordmydesktop {SOUND} -x {X} -y {Y} --width {WIDTH} --height {HEIGHT} -o {DIRECTORY}/{FILENAME}.ogv"
         }
       },
@@ -122,9 +120,7 @@
          "enabled": true,
          "-sound-on": "",
          "-sound-off": "--nosound",
-         "custom": {
-            "Open recorder": "kazam"
-         }
+         "gui": "kazam"
       }
    }
 }

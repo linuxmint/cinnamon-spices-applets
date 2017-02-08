@@ -2,7 +2,7 @@
  * Cinnamon Screenshot class to support capture selection and 
  * communication with back-end screencapture program.
  *
- * @author  Robert Adams <radams@artlogic.com>
+ * @author  Rob Adams <pillage@gmail.com>
  * @link    http://github.com/rjanja/desktop-capture/
  */
 
@@ -21,6 +21,15 @@ const Tweener = imports.ui.tweener;
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+
+// l10n/translation support
+const Gettext = imports.gettext;
+const UUID = "capture@rjanja";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const SelectionType = {
    ALL_WORKSPACES: 0,  /* @todo */
@@ -64,6 +73,7 @@ ScreenshotHelper.prototype = {
          windowAsArea: false,
          playShutterSound: true,
          useTimer: true,
+         showTimer: true,
          playTimerSound: true,
          timerDuration: 3,
          soundTimerInterval: 'dialog-warning',
@@ -136,48 +146,57 @@ ScreenshotHelper.prototype = {
 
    captureTimer: function(options, onFinished, onInterval) {
       if (options.useTimer && options.timerDuration > 0) {
-         this._setTimer(options.timerDuration);
-         this._fadeOutTimer();
-
-         if (options.playTimerSound)
-            this.playSound(options.soundTimerInterval);
-
-         let timeoutId = Mainloop.timeout_add(1000, Lang.bind(this, function() {
-            this._timeout--;
-
-            if (onInterval && typeof onInterval == 'function')
-               onInterval();
-
-            if (this._timeout > 0) {
-               let timeoutText = '';
-               if (this._timeout == 1 && Math.floor(Math.random()*101) == 100) {
-                  timeoutText = '\u2764';
-               }
-               else {
-                  timeoutText = this._timeout;
-               }
-
-               this._timer.set_text('' + timeoutText);
-
-               if (options.playTimerSound)
-                  this.playSound(options.soundTimerInterval)
-
-               this._fadeOutTimer();
-            } else {
-               //if (options.playShutterSound)
-               //   this.playSound(options.soundShutter);
-
+         if (options.showTimer == false) {
+            let timeoutId = Mainloop.timeout_add(options.timerDuration * 1000, Lang.bind(this, function() {
                Mainloop.source_remove(timeoutId);
                onFinished();
                return false;
-            }
+            }));
+         }
+         else {
+            this._setTimer(options.timerDuration);
+            this._fadeOutTimer();
 
-            return true;
-         }));
+            if (options.playTimerSound)
+               this.playSound(options.soundTimerInterval);
+
+            let timeoutId = Mainloop.timeout_add(1000, Lang.bind(this, function() {
+               this._timeout--;
+
+               if (onInterval && typeof onInterval == 'function')
+                  onInterval();
+
+               if (this._timeout > 0) {
+                  let timeoutText = '';
+                  if (this._timeout == 1 && Math.floor(Math.random()*101) == 100) {
+                     timeoutText = '\u2764';
+                  }
+                  else {
+                     timeoutText = this._timeout;
+                  }
+
+                  this._timer.set_text('' + timeoutText);
+
+                  if (options.playTimerSound)
+                     this.playSound(options.soundTimerInterval)
+
+                  this._fadeOutTimer();
+               } else {
+                  //if (options.playShutterSound)
+                  //   this.playSound(options.soundShutter);
+
+                  Mainloop.source_remove(timeoutId);
+                  onFinished();
+                  return false;
+               }
+
+               return true;
+            }));
+         }
       }
       else {
          onFinished();
-      }
+      }   
    },
 
    _setTimer: function(timeout) {
@@ -292,17 +311,8 @@ ScreenshotHelper.prototype = {
 
       this.initializeShadow();
 
-      let eventHandler = new St.BoxLayout({
-         name: 'LookingGlassDialog',
-         vertical: false,
-         reactive: true
-      });
-
-      this.captureTimer(this._params, Lang.bind(this, Lang.bind(this, function() {
-         global.set_cursor(Cinnamon.Cursor.POINTING_HAND);
-         this.showInstructions();
-         this._capturedEventId = global.stage.connect('captured-event', Lang.bind(this, this._onCapturedEvent));
-      })));
+      this.showInstructions('ui');
+      this._capturedEventId = global.stage.connect('captured-event', Lang.bind(this, this._onCapturedEvent));
    },
 
    _updateCinnamon: function(event) {
@@ -412,7 +422,7 @@ ScreenshotHelper.prototype = {
       this.initializeShadow();
       this.drawShadows(0, 0, 0, 0);
 
-      this.showInstructions();
+      this.showInstructions('area');
 
       global.set_cursor(Cinnamon.Cursor.POINTING_HAND);
 
@@ -420,8 +430,12 @@ ScreenshotHelper.prototype = {
 
    },
 
+   instructionsShowing: function() {
+      return this.instructionsContainer && this.instructionsContainer !== null;
+   },
+
    hideInstructions: function() {
-      if (this.instructionsContainer && this.instructionsContainer !== null) {
+      if (this.instructionsShowing()) {
          Main.uiGroup.remove_actor(this.instructionsContainer);
          this.instructionsContainer.destroy();
          this.instructionsContainer = null;
@@ -432,22 +446,22 @@ ScreenshotHelper.prototype = {
       }
    }, 
 
-   showInstructions: function() {
+   showInstructions: function(cssExtra) {
       this.instructionsContainer = new St.Group({
          reactive: false,
-         style_class: 'instructions-container'
+         style_class: 'instructions-container' + ' ' + cssExtra
       });
 
       Main.uiGroup.add_actor(this.instructionsContainer);
 
       let monitor = Main.layoutManager.primaryMonitor;
-      let [startX, startY] = [monitor.x, monitor.height / 4 + monitor.y + 50];
+      let [startX, startY] = [monitor.x + 50, monitor.height / 2 + monitor.y + 50];
 
-      let labelWidth = monitor.width / 2,
-          labelHeight = monitor.height / 2;
+      let labelWidth = monitor.width - 100,
+          labelHeight = monitor.height / 1.5;
 
-      this.instructionsContainer.set_size(labelWidth, labelHeight);
-      this.instructionsContainer.set_position(monitor.x + monitor.width / 4, monitor.y + monitor.height / 4);
+      this.instructionsContainer.set_size(monitor.width, monitor.height);
+      this.instructionsContainer.set_position(monitor.x, monitor.y);
 
       function instructionHeader(container, labelText) {
          let label = new St.Label({
@@ -455,8 +469,8 @@ ScreenshotHelper.prototype = {
             style_class: 'instructions-label-header'
          });
          container.add_actor(label);
-         label.set_position(0, startY);
-         label.set_size(labelWidth, 50);
+         label.set_position(startX, startY);
+         label.set_size(labelWidth, 40);
          return true;
       }
 
@@ -468,23 +482,23 @@ ScreenshotHelper.prototype = {
             style_class: 'instructions-label-text'
          });
          container.add_actor(label);
-         label.set_position(0, startY + (subCount * 50));
+         label.set_position(startX, startY + (subCount * 40));
          label.set_size(labelWidth, 30);
          return true;
       }
 
       if (this._selectionType == SelectionType.AREA) {
          startY -= 140; // 30*3 + 50
-         instructionHeader(this.instructionsContainer, _("Click and drag to select an area for capture"));
-         instructionSub(this.instructionsContainer, _("Arrow keys move the selection"));
-         instructionSub(this.instructionsContainer, _("Holding SHIFT, arrow keys resize the selection"));
-         instructionSub(this.instructionsContainer, _("Press ENTER or KP_RETURN to complete the capture, or ESC to cancel"));
+         instructionHeader(this.instructionsContainer, _("Select an area by clicking and dragging"));
+         instructionSub(this.instructionsContainer, _("Use arrow keys to move the selection"));
+         instructionSub(this.instructionsContainer, _("Use SHIFT and arrow keys to resize the selection"));
+         instructionSub(this.instructionsContainer, _("Press ENTER to confirm or ESC to cancel")); //or KP_RETURN to complete the capture, or ESC to cancel"));
       }
       else if (this._selectionType == SelectionType.CINNAMON) {
          startY -= 140;
-         instructionHeader(this.instructionsContainer, _("Move mouse over a UI element to select it"));
-         instructionSub(this.instructionsContainer, _("Mousewheel traverses through parent elements"));
-         instructionSub(this.instructionsContainer, _("Holding SHIFT, clicks pass through to UI"));
+         instructionHeader(this.instructionsContainer, _("Select a UI element by moving the mouse"));
+         instructionSub(this.instructionsContainer, _("Use mousewheel to traverse hierarchy"));
+         instructionSub(this.instructionsContainer, _("Hold SHIFT to allow clicking UI element"));
          instructionSub(this.instructionsContainer, _("Click to complete the capture, or ESC to cancel"));
       }
    },
@@ -1075,7 +1089,10 @@ ScreenshotHelper.prototype = {
          }
       }
       else if (type == Clutter.EventType.BUTTON_PRESS) {
-         this.hideInstructions();
+         if (this.instructionsShowing()) {
+            this.hideInstructions();
+            return true;
+         }
 
          if (event.get_button() != 1) {
              return true;

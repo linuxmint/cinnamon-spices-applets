@@ -85,7 +85,7 @@
 }
 /* Shadow for non-selected parts of screen (Area capture mode) */
 .cover {
-   background-color: rgba(0, 0, 0, 0.5);
+   background-color: rgba(0, 0, 0, 0.75);
 }
 /* St.Group holding the covers above */
 .shadow-container {}
@@ -93,18 +93,25 @@
 .handle {
    border: 1px solid #000;
    background-color: rgba(250, 250, 250, 0.5);
+   border-radius: 10px;
 }
 /* St.Group container for instructions */
 .instructions-container {
-   border: 2px solid #0F0;
-   background-color: rgba(0, 220, 0, 0.5);
 }
+.instructions-container.ui {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+.instructions-container.area {
+  background-color: rgba(0, 0, 0, 0);
+}
+
 /* St.Label for instructions header text */
 .instructions-label-header {
    text-align: center;
    font-size: 28px;
    color: #fff;
    text-shadow: 2px 1px 1px #333;
+   margin: 0 50px;
 }
 /* St.Label for instructions subhead/detail text */
 .instructions-label-text {
