@@ -1,21 +1,111 @@
 {
-   "general stetings": {
+   "layout" : {
+      "type" : "layout",
+      "pages" : ["general", "screenshot-builtin", "recorder-builtin"],
+
+      "general" : {
+         "type" : "page",
+         "title" : "General",
+         "sections" : ["screenshot-general", "recorder-general", "appearance"]
+      },
+
+      "tool-selection" : {
+         "type" : "section",
+         "title" : "Capture Tool Selection",
+         "keys" : ["camera-program", "recorder-program"]
+      },
+
+      "screenshot-general": {
+         "type": "section",
+         "title": "Screenshots",
+         "keys": ["camera-program", "camera-save-dir", "camera-save-prefix", "include-cursor", "use-timer", "delay-seconds", "show-capture-timer"]
+      },
+
+      "recorder-general": {
+         "type": "section",
+         "title": "Recorder",
+         "keys": ["recorder-program", "recorder-save-dir","recorder-save-prefix"]
+      },
+
+      "appearance": {
+         "type": "section",
+         "title" : "Appearance",
+         "keys": ["use-symbolic-icon"]
+      },
+
+      "screenshot-builtin": {
+         "type": "page",
+         "title": "Cinnamon Screenshot",
+         "sections": ["screenshot-builtin-fx","screenshot-builtin-notif","screenshot-builtin-imgur","screenshot-builtin-kb","screenshot-builtin-copying","screenshot-builtin-misc"]
+      },
+
+      "screenshot-builtin-notif": {
+         "type": "section",
+         "title": "Notifications",
+         "keys": ["send-notification","notif-image-left-click","notif-image-right-click","show-copy-path-action","show-copy-data-action","show-delete-action","demo-notification-button"]
+      },
+
+      "screenshot-builtin-imgur": {
+         "type": "section",
+         "title": "Integration: Imgur",
+         "keys": ["use-imgur","use-imgur-account","imgur-wizard-button"]
+      },
+
+      "screenshot-builtin-kb": {
+         "type": "section",
+         "title": "Keybindings",
+         "keys": ["kb-cs-window","kb-cs-area","kb-cs-ui","kb-cs-screen","kb-cs-repeat","kb-cs-monitor-0"]
+      },
+
+      "screenshot-builtin-fx": {
+         "type": "section",
+         "title": "Effects",
+         "keys": ["use-camera-flash","play-shutter-sound","play-timer-interval-sound"]
+      },
+
+      "screenshot-builtin-copying": {
+         "type": "section",
+         "title": "Copying",
+         "keys": ["copy-to-clipboard","show-copy-toggle","copy-data-auto-off","copy-data"]
+      },
+
+      "screenshot-builtin-misc": {
+         "type": "section",
+         "title": "Misc",
+         "keys": ["capture-window-as-area","include-window-frame","include-styles"]
+      },
+
+      "recorder-builtin": {
+         "type": "page",
+         "title": "Cinnamon Recorder",
+         "sections": ["recorder-builtin-kb"]
+      },
+
+      "recorder-builtin-kb": {
+         "type": "section",
+         "title": "Keybindings",
+         "keys": ["kb-recorder-stop"]
+      }
+
+   },
+
+   "general settings": {
       "type": "header",
-      "description": "General Settings"
+      "description": "Capture Tool Selection"
    },
    "camera-program": {
       "indent": true,
       "default": "cinnamon",
       "type": "combobox",
       "options": {
-         "Cinnamon Screenshot": "cinnamon",
+         "Cinnamon Screenshot (built-in)": "cinnamon",
          "GNOME Screenshot": "gnome-screenshot",
          "Shutter": "shutter",
          "XWD": "xwd",
          "ImageMagick": "import",
          "Kazam": "kazam"
       },
-      "description": "Screen capture program",
+      "description": "Screenshot program",
       "tooltip": "Preferred screen capture program"
    },
    "recorder-program": {
@@ -23,21 +113,29 @@
       "default": "cinnamon",
       "type": "combobox",
       "options": {
-         "Cinnamon Recorder": "cinnamon",
+         "Cinnamon Recorder (built-in)": "cinnamon",
          "RecordMyDesktop": "gtk-recordmydesktop",
          "Byzanz": "byzanz",
          "FFmpeg": "ffmpeg",
          "Kazam": "kazam"
       },
-      "description": "Screen recorder program",
+      "description": "Recorder program",
       "tooltip": "Preferred screen recorder program"
    },
+   "use-symbolic-icon": {
+      "default": false,
+      "type": "checkbox",
+      "description": "Use symbolic (black and white) icon for applet",
+      "tooltip": "Whether to use symbolic (black and white) icon for applet"
+   },
+
    "div1" : {
     "type" : "separator"
    },
-   "cinn screenshot settings": {
+
+   "gen screenshot settings": {
       "type": "header",
-      "description": "Screenshot Settings"
+      "description": "Screenshots: General Settings"
    },
    "camera-save-dir": {
       "indent": true,
@@ -92,7 +190,11 @@
    },
    "cinn screenshot settings-window": {
       "type": "header",
-      "description": "Cinnamon Screenshot (note: changing keybindings may require restarting)"
+      "description": "Screenshots: Built-in Capture Settings"
+   },
+   "cinn screenshot note": {
+      "type": "label",
+      "description": "Note: changing keybindings may require restarting Cinnamon."
    },
    "kb-cs-window" : {
       "indent": true,
@@ -133,8 +235,8 @@
    "capture-window-as-area": {
       "default": true,
       "type": "checkbox",
-      "description": "Capture window as area (suggested, or shots may be black or distorted)",
-      "tooltip": "Whether to use area selection for window captures"
+      "description": "Ignore transparency in window captures (suggested, or shots may be black or distorted)",
+      "tooltip": "Asking the desktop manager for a screenshot of a window would usually result in a nice image retaining any transparent regions. But depending on the graphics drivers and Cinnamon version it may turn out black or distorted."
    },
    "include-window-frame": {
       "default": true,
@@ -146,22 +248,15 @@
    "use-camera-flash": {
       "default": true,
       "type": "checkbox",
-      "description": "Use camera flash",
+      "description": "Show camera flash",
       "tooltip": "Whether to show a bright flash over the capture area"
-   },
-   
+   },   
    
    "include-styles": {
       "default": false,
       "type": "checkbox",
-      "description": "Include applied styles in UI capture",
-      "tooltip": "Whether to include CSS selection styles in Cinnamon UI screenshots"
-   },
-   "use-symbolic-icon": {
-      "default": false,
-      "type": "checkbox",
-      "description": "Use symbolic (black and white) icon for applet",
-      "tooltip": "Whether to use symbolic (black and white) icon for applet"
+      "description": "Use highlighted style in UI capture",
+      "tooltip": "Turn on for a 'highlighted' effect, using CSS styles applied by .capture-outline-frame"
    },
 
    "play-shutter-sound": {
@@ -207,38 +302,13 @@
       "description": "Copy image data to clipboard (toggle)",
       "tooltip": "This overrides the 'Copy to clipboard' setting"
    },
-   "show-upload-toggle": {
-      "default": false,
-      "type": "checkbox",
-      "description": "Show toggle button for uploading image to imgur.com",
-      "tooltip": "Whether to show another toggle button in the menu for automatically uploading. If you have notifications enabled you probably don't need this set."
-   },
-   "upload-auto-off": {
-      "default": true,
-      "type": "checkbox",
-      "description": "Turn off image upload toggle after capture",
-      "tooltip": "When set, the upload to imgur toggle button will be turned off after a successful capture"
-   },
-   "upload-imgur": {
-      "default": false,
-      "type": "generic",
-      "description": "Upload image to imgur.com (toggle)",
-      "tooltip": "This is an override setting"
-   },
-
-   "upload-to-imgur": {
-      "default": false,
-      "type": "generic",
-      "description": "Upload all captures to imgur.com",
-      "tooltip": "If enabled, all captures will be uploaded to imgur. The view and delete URLs for each capture are stored in a file imgur.log in the capture save directory."
-   },
 
    "div3" : {
       "type" : "separator"
    },
    "notification settings": {
       "type": "header",
-      "description": "Notifications"
+      "description": "Screenshots: Post-Capture Settings"
    },
    "send-notification": {
       "default": true,
@@ -246,16 +316,28 @@
       "description": "Use desktop notifications",
       "tooltip": "Whether to send a notification to desktop after capture"
    },
-   "notification-behavior": {
-      "default": "dismiss",
+   "notif-image-left-click": {
+      "default": "open-file",
       "type": "combobox",
       "options": {
-         "Do nothing (dismiss)": "dismiss",
+         "Do nothing": "dismiss",
          "Open the file": "open-file",
-         "Open the directory": "open-dir"
+         "Open the directory": "open-dir"         
       },
-      "description": "When clicking notification",
-      "tooltip": "The behavior to use when clicking on the notification bubble after a screenshot is taken.",
+      "description": "When left-clicking preview image",
+      "tooltip": "",
+      "dependency": "send-notification"
+   },
+   "notif-image-right-click": {
+      "default": "open-file",
+      "type": "combobox",
+      "options": {
+         "Do nothing": "dismiss",
+         "Open the file": "open-file",
+         "Open the directory": "open-dir"         
+      },
+      "description": "When right-clicking preview image",
+      "tooltip": "",
       "dependency": "send-notification"
    },
    "show-copy-path-action": {
@@ -273,21 +355,13 @@
       "description": "Enable copying image data from notification",
       "tooltip": "If checked, a button will be shown in the notification that allows you to copy the screenshot data to clipboard",
       "dependency": "send-notification"
-   },
+   },   
    "show-delete-action": {
       "indent": true,
       "default": false,
       "type": "checkbox",
       "description": "Enable delete from notification",
       "tooltip": "If checked, a delete button will be shown in the notification that allows you to remove the screenshot from disk.",
-      "dependency": "send-notification"
-   },
-   "show-upload-action": {
-      "indent": true,
-      "default": true,
-      "type": "checkbox",
-      "description": "Enable upload from notification",
-      "tooltip": "If checked, a upload button will be shown in the notification that allows you to quickly upload the image.",
       "dependency": "send-notification"
    },
    "demo-notification-button" : {
@@ -308,15 +382,62 @@
    "div4" : {
       "type" : "separator"
    },
-   "cinn recorder settings": {
+   "integration with imgur": {
       "type": "header",
-      "description": "Recorder Settings"
+      "description": "Integrations: Imgur (Screenshots)"
+   },
+   "use-imgur": {
+      "indent": true,
+      "type": "switch",
+      "default": false,
+      "description": "Enable uploading from notifications",
+      "tooltip": "Whether to use imgur image hosting services",
+      "depenency": "send-notification"
+   },
+   "use-imgur-account": {
+      "indent": true,
+      "type": "switch",
+      "default": false,
+      "description": "Upload to your own account (instead of anonymously)",
+      "tooltip": "If unchecked, uploads will be anonymous and not tied to your account.",
+      "dependency": "use-imgur"
+   },
+   "imgur-wizard-button": {
+      "indent": true,
+      "type" : "button",
+      "description" : "Wizard: Connect to your account..",
+      "callback" : "on_config_integrate_imgur",
+      "tooltip" : "Pressing this button will open a configuration utility",
+      "dependency": "use-imgur-account"
+   },
+   "imgur-access-token": {
+      "type" : "generic",
+      "description" : "imgur oauth access token",
+      "default" : ""
+   },
+   "imgur-refresh-token": {
+      "type" : "generic",
+      "description" : "imgur oauth refresh token",
+      "default" : ""
+   },
+   "imgur-album-id": {
+      "type" : "generic",
+      "description" : "imgur oauth album id",
+      "default" : ""
+   },
+
+   "div5b" : {
+      "type" : "separator"
+   },
+   "gen recorder settings": {
+      "type": "header",
+      "description": "Recorder: General Settings"
    },
    
    "label-recorder-settings": {
-      "type": "generic",
-      "default": "0",
-      "description": "Please <b>note</b> not all recorders may respect these settings."
+      "indent": true,
+      "type": "label",
+      "description": "Please note not all recorder tools may respect these settings."
    },
 
    "recorder-save-dir": {
@@ -337,13 +458,24 @@
       "tooltip": "Format for built-in recorder. E.g. %Y-%M-%D-%H%I = 2014-05-25-1848.webm. Use %S for seconds, %m for milliseconds"
    },
 
+   "cinn recorder settings": {
+      "type": "header",
+      "description": "Recorder: Built-in Settings"
+   },
+
+   "label-internal-recorder-settings": {
+      "type": "label",
+      "description": "These settings only apply when using the Built-in Recorder tool."
+   },
+
    "kb-recorder-stop" : {
       "indent": true,
       "type" : "keybinding",
-      "description" : "Keybinding to start/stop* recording: ",
+      "description" : "Keybinding to start/stop recording: ",
       "tooltip": "Will start only Cinnamon Recorder. Will stop any recorder using its stop-command.",
       "default" : "<Control>F10"
    },
+
 
    
    "last-selected-page": {
