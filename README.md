@@ -39,6 +39,10 @@ There are two important directories:
 
 As you can see, the content of the spice isn't placed inside UUID/files/ directly, but inside UUID/files/UUID/ instead. This guarantees files aren't extracted directly onto the file system, but placed in the proper UUID directory. The presence of this UUID directory, inside of files/ isn't actually needed by Cinnamon (as Cinnamon creates it if it's missing), but it is needed to guarantee a proper manual installation (i.e. when users download the ZIP from the Cinnamon Spices website).
 
+Important note:
+
+- The UUID/files/ directory has to be "empty", which means that it should contain ONLY the UUID directory. Else the spice won't be installable through System Settings.
+
 At the root level:
 
 - info.json contains information about the spice. For instance, this is the file which contains the github username of the spice's author.
@@ -93,9 +97,7 @@ New spices can be added by Pull Request.
 
 The Cinnamon team can accept or reject the addition and should give justification in the PR comments section.
 
-# Reporting Bugs
+# Reporting Bugs and Creating Pull Requests
 
-It's important to use a proper title when opening new issues. The title must be in the format `spice name: simple description of the problem`.
-
-Issues that don't follow this format will be closed.
+See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
 
