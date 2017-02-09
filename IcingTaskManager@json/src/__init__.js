@@ -204,7 +204,7 @@ Promise.all = function (arr) {
             then.call(val, function (val) {
               res(i, val);
             }, reject);
-            return;
+            return false;
           }
         }
         args[i] = val;
@@ -214,11 +214,13 @@ Promise.all = function (arr) {
       } catch (ex) {
         reject(ex);
       }
+      return false;
     }
 
     for (var i = 0; i < args.length; i++) {
       res(i, args[i]);
     }
+    return false;
   });
 };
 

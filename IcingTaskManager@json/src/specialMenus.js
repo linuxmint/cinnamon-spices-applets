@@ -1262,6 +1262,7 @@ WindowThumbnail.prototype = {
     };
 
     setThumbSize()
+    return false;
   },
 
   _hoverPeek: function (opacity, metaWin, enterEvent) {
