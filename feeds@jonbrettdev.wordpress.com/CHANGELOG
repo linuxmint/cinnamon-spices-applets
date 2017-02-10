@@ -1,3 +1,8 @@
+0.25
+ ===
+ - Updated interface to show when a feed has been redirected.
+ - Added a button to allow users to permanetly redirect a feed.
+
 0.24
  ====
  - Removed clutter from applet tooltip by only showing unread feeds.

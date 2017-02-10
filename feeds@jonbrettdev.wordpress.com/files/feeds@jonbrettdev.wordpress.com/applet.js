@@ -193,6 +193,7 @@ FeedApplet.prototype = {
     /* Private method to create the sub menu items for a feed. */
     _build_context_menu: function() {
         this.logger.debug("FeedApplet._build_context_menu");
+
         var s = new Applet.MenuItem(
                 _("Mark all read"),
                 "object-select-symbolic",
@@ -453,6 +454,7 @@ FeedApplet.prototype = {
                 } catch(e) {
                     this.logger.error(e);
                     global.log(e.toString());
+                    this._read_manage_stderr();
                 }
                 this._manage_stdout.close(null)
             } else {
@@ -464,8 +466,29 @@ FeedApplet.prototype = {
         }));
     },
 
+    _read_manage_stderr: function() {
+        this.logger.debug("FeedApplet._read_manage_stderr");
+        this._manage_data_stderr.fill_async(-1, GLib.PRIORITY_DEFAULT, null, Lang.bind(this, function(stream, result) {
+            if (stream.fill_finish(result) == 0) {
+                try {
+                    let read = stream.peek_buffer().toString();
+                    if (read.length > 0) {
+                        this.logger.error(read);
+                    }
+                } catch(e) {                    
+                    this.logger.error(e);
+                    global.log(e.toString());
+                }
+                this._manage_stderr.close(null)
+            } else {
+                stream.set_buffer_size(2 * stream.get_buffer_size());
+                this._read_manage_stderr();
+            }
+        }));        
+    },
+
     /* Feed manager functions */
-    manage_feeds: function() {
+    manage_feeds: function(current_url = null, redirected_url = null) {
         this.logger.debug("FeedApplet.manage_feeds");
         try {
             try {
@@ -479,7 +502,12 @@ FeedApplet.prototype = {
                 global.logError(e);
             }
 
+            // if redirected_url != null pass parameters
+
             let argv = [this.path + "/manage_feeds.py"];
+            if(redirected_url != null){
+                argv.push(current_url, redirected_url);
+            }
             let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
                     null,
                     argv,
@@ -492,11 +520,16 @@ FeedApplet.prototype = {
             this._manage_data_stdout = new Gio.DataInputStream({
                 base_stream: this._manage_stdout
             });
+
             this._manage_stdin = new Gio.UnixOutputStream({fd: stdin, close_fd: true});
             this._manage_data_stdin = new Gio.DataOutputStream({
                 base_stream: this._manage_stdin
             });
-            new Gio.UnixInputStream({fd: stderr, close_fd: true}).close(null);
+
+            this._manage_stderr = new Gio.UnixInputStream({fd: stderr, close_fd: true});//.close(null);
+            this._manage_data_stderr = new Gio.DataInputStream({
+                base_stream: this._manage_stderr
+            });
 
             /* Write current feeds list to management app stdin */
             this._manage_data_stdin.put_string(this.url_list_str, null);
@@ -508,9 +541,9 @@ FeedApplet.prototype = {
             }
             global.logError(e);
         }
-        /* Get output from management app */
+        /* Get output from management app */        
         this._read_manage_app_stdout();
-
+        this._read_manage_stderr();
     },
 
     on_applet_removed_from_panel: function() {
@@ -672,7 +705,10 @@ FeedDisplayMenuItem.prototype = {
     },
 
     get_title: function() {
+        
         let title =  this.custom_title || this.reader.title;
+        if (this.reader.is_redirected)
+            title += " (Redirected to: " + this.reader.redirected_url + ")";
         title += " [" + this.reader.get_unread_count() + " / " + this.reader.items.length + "]";
         return title;
     },
@@ -791,6 +827,12 @@ FeedDisplayMenuItem.prototype = {
             this.menu.addMenuItem(menu_item, 0);
             this.menuItemCount++;
         }
+
+        if(this.reader.is_redirected) {
+            menu_item = new ApplicationContextMenuItem(this, _("Update feed URL"), "update_feed_url");
+            this.menu.addMenuItem(menu_item, 0);
+            this.menuItemCount++;            
+        }        
     },
 
     _buttonEnterEvent: function(){
@@ -1026,10 +1068,23 @@ ApplicationContextMenuItem.prototype = {
 
                 break;
 
+            case "update_feed_url":
+                let redirected_url = this._fdmi.reader.redirected_url;
+                let current_url = this._fdmi.reader.url;
+
+                global.log("Updating feed to point to: " + redirected_url);
+
+                // Update the feed, no GUI is shown
+                this._fdmi.owner.manage_feeds(current_url, redirected_url);
+
+                // Reload the regular title and remove the is_redirected flag                
+                this._fdmi.owner.toggle_feeds(this._fdmi, true);
+                break;
+
             case "delete_all_items":
                 global.log("Marking all items 'deleted'");
-
                 break;
+
             case "mark_post_read":
                 global.log("Marking item 'read'");
                 this._fdmi.mark_read();

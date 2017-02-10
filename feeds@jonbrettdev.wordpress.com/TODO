@@ -1,6 +1,4 @@
 Items on the roadmap for the Feeds applet.
-☐ Update interface to notify users when a feed has been forwarded to new URL 
-    ** Allow user to accept change or maybe just update behind the scene and notify user..
 ☐ Move feeds into separate json file to allow easier parsing / flexability
 ☐ *Wish* Allow per feed settings.  
     ** Show read / hide read
@@ -9,3 +7,4 @@ Items on the roadmap for the Feeds applet.
 
 Archive:
  ✔ Add roadmap to keep track of tasks.
+ ✔ Update interface to notify users when a feed has been forwarded to new URL
