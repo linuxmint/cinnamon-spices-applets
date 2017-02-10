@@ -28,7 +28,7 @@ PANEL_WIDGETS = [
     {'type': 'switch', 'args': { 'key': 'full-color-panel-icon', 'label': _("Show the panel icon in full color") }},
     {'type': 'switch', 'args': { 'key': 'show-panel-text', 'label': _("Show text in panel") }},
     {'type': 'entry', 'args': { 'key': 'panel-text', 'label': _("Panel text") }},
-    {'type': 'combo', 'args': { 'key': 'file-manager', 'label': _("File manager"), 'values': {'nautilus': 'Nautilus', 'thunar': 'Thunar', 'pcmanfm': 'PCManFM'} }},
+    {'type': 'combo', 'args': { 'key': 'file-manager', 'label': _("File manager"), 'values': {'nautilus': 'Nautilus', 'thunar': 'Thunar', 'pcmanfm': 'PCManFM', 'nemo': 'Nemo'} }},
     {'type': 'entry', 'args': { 'key': 'connect-command', 'label': _("Application for the  \"Connect to...\" item") }},
     {'type': 'entry', 'args': { 'key': 'search-command', 'label': _("Application for the \"Search\" item") }}
 ]

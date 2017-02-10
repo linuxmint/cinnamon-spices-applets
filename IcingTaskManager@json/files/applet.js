@@ -12,29 +12,30 @@
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
 /* jshint moz:true */
-var Applet = imports.ui.applet;
+global.__settings = typeof global.cinnamon_settings !== 'undefined' ? global.cinnamon_settings : global.settings;
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
+var Applet = importObj.ui.applet;
 var Lang = imports.lang;
-var Cinnamon = imports.gi.Cinnamon;
+var Cinnamon = typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
 var St = imports.gi.St;
-var Main = imports.ui.main;
-var Util = imports.misc.util;
+var Main = importObj.ui.main;
+var Util = importObj.misc.util;
 var Signals = imports.signals;
-var DND = imports.ui.dnd;
-var Settings = imports.ui.settings;
+var DND = importObj.ui.dnd;
+var Settings = importObj.ui.settings;
 var Gettext = imports.gettext;
 var Gio = imports.gi.Gio;
 var Gtk = imports.gi.Gtk;
 var GLib = imports.gi.GLib;
 var Meta = imports.gi.Meta;
-var SignalManager = imports.misc.signalManager;
+var SignalManager = importObj.misc.signalManager;
 
-var ajax = imports.applet.ajax;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
-
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var AppList = AppletDir.appList;
+var ajax = AppletDir.__init__.ajax;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
 var TitleDisplay = {
   None: 1,
@@ -83,7 +84,6 @@ MyApplet._init -> PinnedFavs
 PinnedFavs.prototype = {
   _init: function _init(applet) {
     this._applet = applet;
-    this.appSys = Cinnamon.AppSystem.get_default();
     this._favorites = [];
     this._reload();
   },
@@ -94,7 +94,7 @@ PinnedFavs.prototype = {
     for (var i = 0, len = ids.length; i < len; i++) {
       var refFav = _.findIndex(this._favorites, { id: ids[i] });
       if (refFav === -1) {
-        var app = this.appSys.lookup_app(ids[i]);
+        var app = this._applet._appSystem.lookup_app(ids[i]);
         this._favorites.push({
           id: ids[i],
           app: app
@@ -139,11 +139,11 @@ PinnedFavs.prototype = {
     }
 
     if (!opts.app) {
-      opts.app = this.appSys.lookup_app(opts.appId);
+      opts.app = this._applet._appSystem.lookup_app(opts.appId);
     }
 
     if (!opts.app) {
-      opts.app = this.appSys.lookup_settings_app(opts.appId);
+      opts.app = this._applet._appSystem.lookup_settings_app(opts.appId);
     }
 
     if (!opts.app) {
@@ -207,25 +207,6 @@ PinnedFavs.prototype = {
 };
 Signals.addSignalMethods(PinnedFavs.prototype);
 
-function appFromWMClass(appsys, specialApps, metaWindow) {
-  function startup_class(wmclass) {
-    var app_final = null;
-    for (var i = 0, len = specialApps.length; i < len; i++) {
-      if (specialApps[i].wmClass == wmclass) {
-        app_final = appsys.lookup_app(specialApps[i].id);
-        if (!app_final) {
-          app_final = appsys.lookup_settings_app(specialApps[i].id);
-        }
-        app_final.wmClass = wmclass;
-      }
-    }
-    return app_final;
-  }
-  var wmClassInstance = metaWindow.get_wm_class_instance();
-  var app = startup_class(wmClassInstance);
-  return app;
-}
-
 function MyApplet(metadata, orientation, panel_height, instance_id) {
   this._init(metadata, orientation, panel_height, instance_id);
 }
@@ -258,7 +239,7 @@ MyApplet.prototype = {
     this.execInstallLanguage();
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
 
-    var settingsProps = [{ key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate }, { key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: null }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: null }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }];
+    var settingsProps = [{ key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate }, { key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: null }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }, { key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null }];
 
     if (this.c32) {
       for (var i = 0, len = settingsProps.length; i < len; i++) {
@@ -276,6 +257,7 @@ MyApplet.prototype = {
     this.actor.add(this._box);
 
     this.tracker = Cinnamon.WindowTracker.get_default();
+    this._appSystem = Cinnamon.AppSystem.get_default();
 
     this.pinnedAppsContr = new PinnedFavs(this);
 
@@ -310,7 +292,7 @@ MyApplet.prototype = {
     this._onSwitchWorkspace();
     this._bindAppKey();
 
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
 
     // Wait 3s, as Cinnamon doesn't populate Applet._meta until after the applet loads.
     setTimeout(function () {
@@ -337,6 +319,7 @@ MyApplet.prototype = {
       this.version = 'v' + this._meta.version;
       // Parse out the HTML response instead of using the API endpoint to work around Github's API limit.
       ajax({ method: 'GET', url: 'https://github.com/jaszhix/icingtaskmanager/releases/latest', json: false }).then(function (res) {
+        clog('resolve!');
         var split = '/jaszhix/icingtaskmanager/releases/download/';
         var end = res.split(split)[1].split('.zip')[0];
         var version = end.split('/')[0];
@@ -356,6 +339,7 @@ MyApplet.prototype = {
           })();
         }
       }).catch(function (e) {
+        clog('reject!');
         return null;
       });
     }
@@ -423,6 +407,26 @@ MyApplet.prototype = {
 
     this.metaWorkspaces[this.currentWs].appList._refreshAppById(appId, opts);
   },
+  getAppFromWMClass: function getAppFromWMClass(specialApps, metaWindow) {
+    var _this7 = this;
+
+    var startupClass = function startupClass(wmclass) {
+      var app_final = null;
+      for (var i = 0, len = specialApps.length; i < len; i++) {
+        if (specialApps[i].wmClass == wmclass) {
+          app_final = _this7._appSystem.lookup_app(specialApps[i].id);
+          if (!app_final) {
+            app_final = _this7._appSystem.lookup_settings_app(specialApps[i].id);
+          }
+          app_final.wmClass = wmclass;
+        }
+      }
+      return app_final;
+    };
+    var wmClassInstance = metaWindow.get_wm_class_instance();
+    var app = startupClass(wmClassInstance);
+    return app;
+  },
   getCurrentAppList: function getCurrentAppList() {
     return this.metaWorkspaces[this.currentWs].appList;
   },
@@ -430,7 +434,7 @@ MyApplet.prototype = {
     this.refreshCurrentAppList();
   },
   getAutostartApps: function getAutostartApps() {
-    var _this7 = this;
+    var _this8 = this;
 
     var info;
 
@@ -439,8 +443,8 @@ MyApplet.prototype = {
       while ((info = children.next_file(null)) !== null) {
         if (info.get_file_type() === Gio.FileType.REGULAR) {
           var name = info.get_name();
-          var file = Gio.file_new_for_path(_this7.autostartStrDir + '/' + name);
-          _this7.autostartApps.push({ id: name, file: file });
+          var file = Gio.file_new_for_path(_this8.autostartStrDir + '/' + name);
+          _this8.autostartApps.push({ id: name, file: file });
         }
       }
     };
@@ -663,7 +667,7 @@ MyApplet.prototype = {
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this.actor.reactive = global.settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = global.__settings.get_boolean('panel-edit-mode');
   },
 
   pinned_app_contr: function pinned_app_contr() {
@@ -745,7 +749,7 @@ MyApplet.prototype = {
   destroy: function destroy() {
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
-    global.settings.disconnect(this.panelEditId);
+    global.__settings.disconnect(this.panelEditId);
     for (var i = 0, len = this.metaWorkspaces.length; i < len; i++) {
       var children = this.metaWorkspaces[i].appList.manager_container.get_children();
       for (var z = 0, _len2 = children.length; z < _len2; z++) {

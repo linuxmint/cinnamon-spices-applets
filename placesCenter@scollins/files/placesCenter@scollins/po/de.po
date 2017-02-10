@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 16:20+0100\n"
+"PO-Revision-Date: 2017-01-12 16:20+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:250
+msgid "Clear"
+msgstr "Leeren"
+
+#: applet.js:306
+msgid "Places"
+msgstr "Orte"
+
+#: applet.js:403
+msgid "Search Home Folder"
+msgstr "Persönlichen Ordner durchsuchen"
+
+#: applet.js:417
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#: applet.js:425
+msgid "Search File System"
+msgstr "Dateisystem durchsuchen"
+
+#: applet.js:440
+msgid "RECENT DOCUMENTS"
+msgstr "ZULETZT VERWENDETE DATEIEN"
+
+#: applet.js:489
+msgid "Computer"
+msgstr "Rechner"
+
+#: applet.js:495
+msgid "File System"
+msgstr "Dateisystem"
+
+#: applet.js:511
+msgid "Network"
+msgstr "Netzwerk"
+
+#: applet.js:607
+msgid "Trash"
+msgstr "Papierkorb"
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Leistensymbol"
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+"Akzeptiert Symbolnamen oder direkten Pfad (unterstützt symbolische Icons)"
+
+#. cinnamon-places-center->settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Dateisystem anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Mit Mittelklick öffnen"
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Leer lassen, um zu deaktivieren"
+
+#. cinnamon-places-center->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Anzuzeigende Anzahl"
+
+#. cinnamon-places-center->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allgemeine Einstellungen"
+
+#. cinnamon-places-center->settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Rechner anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Nur eingehängte Laufwerke anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Menü-Tastenkürzel"
+
+#. cinnamon-places-center->settings-schema.json->userSection->description
+msgid "User Section"
+msgstr "Benutzer-Bereich"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Papierkorb anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Immer"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Nie"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Wenn nicht leer"
+
+#. cinnamon-places-center->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Netzwerk anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Symbolgröße"
+
+#. cinnamon-places-center->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. cinnamon-places-center->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Datenträger anzeigen"
+
+#. cinnamon-places-center->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Leistentext"
+
+#. cinnamon-places-center->settings-
+#. schema.json->systemCustomPlaces->description
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->description
+msgid "Custom places"
+msgstr "Benutzerdefinierte Orte"
+
+#. cinnamon-places-center->settings-schema.json->systemCustomPlaces->tooltip
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location."
+msgstr ""
+"Liste von URIs/Dateipfaden, welche eingefügt werden sollen. Einträge können "
+"entweder durch ein Komma (,) oder durch eine neue Zeile getrennt werden. Sie "
+"können den Namen, der angezeigt werden soll, durch Hinzufügen von :"
+"ANZEIGENAME an das Pfadende festlegen."
+
+#. cinnamon-places-center->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Kürzlich verwendete Dateien"
+
+#. cinnamon-places-center->settings-schema.json->places->description
+msgid "System Section"
+msgstr "System-Bereich"
+
+#. cinnamon-places-center->settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Schreibtisch anzeigen"
+
+#. cinnamon-places-center->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Kürzlich verwendete Dateien anzeigen"
+
+#. cinnamon-places-center->metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Bietet eine leicht lesbare Anordnung für den Zugriff auf Ihre Orte"
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autor"
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Konfigurierbarkeit für Mittelklick hinzugefügt"
+
+#. cinnamon-places-center->metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Orte-Zentrum ist ein funktionsreiches, plattformübergreifendes Cinnamon-"
+"Applet, das einfachen Zugriff auf alle Ihre am häufigsten genutzten Orte "
+"bietet. Sie können gerne dazu beitragen, indem Sie Pull-Requests, "
+"Fehlerberichte und Feature-Anfragen in meinem Github-Repository erstellen."
+
+#. cinnamon-places-center->metadata.json->name
+msgid "Places Center"
+msgstr "Orte-Zentrum"

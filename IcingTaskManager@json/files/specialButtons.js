@@ -2,16 +2,17 @@
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Clutter = imports.gi.Clutter;
 var Lang = imports.lang;
-var Cinnamon = imports.gi.Cinnamon;
+var Cinnamon = typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
 var St = imports.gi.St;
-var Tweener = imports.ui.tweener;
-var DND = imports.ui.dnd;
-var clog = imports.applet.clog;
-var setTimeout = imports.applet.setTimeout;
-var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+var Tweener = importObj.ui.tweener;
+var DND = importObj.ui.dnd;
+var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
+var clog = AppletDir.__init__.clog;
+var setTimeout = AppletDir.__init__.setTimeout;
 
 var BUTTON_BOX_ANIMATION_TIME = 0.5;
 var MAX_BUTTON_WIDTH = 150; // Pixels
@@ -55,12 +56,12 @@ IconLabelButton.prototype = {
     });
     this.actor.height = parent._applet._panelHeight;
     this.actor._delegate = this;
+
     this.signals = {
       _container: [],
       settings: [],
       actor: []
     };
-    this.metaWorkspaces = [];
 
     // We do a fancy layout with icons and labels, so we'd like to do our own allocation
     // in a Cinnamon.GenericContainer
@@ -85,6 +86,7 @@ IconLabelButton.prototype = {
     this._label = new St.Label({
       style_class: 'app-button-label'
     });
+    this._label.text = '';
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel'
     });
@@ -98,17 +100,19 @@ IconLabelButton.prototype = {
     }, 0);
     this.setIconSize();
 
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
+    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)));
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)));
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode');
+    this.actor.reactive = !global.__settings.get_boolean('panel-edit-mode');
   },
 
-  setIconPadding: function setIconPadding(init) {
+  setIconPadding: function setIconPadding() {
+    var init = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node();
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
@@ -132,9 +136,14 @@ IconLabelButton.prototype = {
     }
   },
 
-  setText: function setText(text) {
+  setText: function setText() {
+    var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
     if (text) {
       this._label.text = text;
+      if (text.length > 0) {
+        this._label.set_style('padding-right: 4px;');
+      }
     }
   },
 
@@ -293,17 +302,18 @@ IconLabelButton.prototype = {
     }
     this._numLabel.allocate(childBox, flags);
   },
-  showLabel: function showLabel(animate, targetWidth) {
+  showLabel: function showLabel(animate) {
+    var targetWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MAX_BUTTON_WIDTH;
+
     // need to turn width back to preferred.
     var setToZero;
     if (this._label.width < 2) {
       this._label.set_width(-1);
       setToZero = true;
-    } else if (this._label.width < this._label.text.length * 7 - 5 || this._label.width > this._label.text.length * 7 + 5) {
+    } else if (this._label.text && this._label.width < this._label.text.length * 7 - 5 || this._label.width > this._label.text.length * 7 + 5) {
       this._label.set_width(-1);
     }
-    var naturalWidth = this._label.get_preferred_width(-1);
-    var width = Math.min(targetWidth || naturalWidth, 150);
+    var width = Math.min(targetWidth);
     if (setToZero) {
       this._label.width = 1;
     }
@@ -420,17 +430,15 @@ AppButton.prototype = {
     }
   },
 
-  _setWatchedWorkspaces: function _setWatchedWorkspaces(workspaces) {
-    this.metaWorkspaces = workspaces;
-  },
-
   _hasFocus: function _hasFocus() {
     var _this4 = this;
 
     var workspaceIds = [];
 
-    for (var i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      workspaceIds.push(this.metaWorkspaces[i].workspace.index());
+    var workspaces = _.map(this._applet.metaWorkspaces, 'ws');
+
+    for (var i = 0, len = workspaces.length; i < len; i++) {
+      workspaceIds.push(workspaces[i].index());
     }
 
     var windows = _.filter(this.metaWindows, function (win) {
@@ -517,8 +525,10 @@ AppButton.prototype = {
         _this5[key].disconnect(id);
       });
     });
-    global.settings.disconnect(this.panelEditId);
-    this._container.destroy_children();
+    global.__settings.disconnect(this.panelEditId);
+    try {
+      this._container.destroy_children();
+    } catch (e) {}
     this._container.destroy();
     this.actor.destroy();
     if (this._urgent_signal) {

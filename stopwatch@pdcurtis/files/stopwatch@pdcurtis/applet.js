@@ -17,6 +17,16 @@ const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs
 const Mainloop = imports.mainloop; // Needed for timer update loop
 
+// l10n/translation support
+const Gettext = imports.gettext
+const UUID = "stopwatch@pdcurtis"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
+
 // ++ Always needed
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
     this._init(metadata, orientation, panelHeight, instance_id);
@@ -78,7 +88,7 @@ MyApplet.prototype = {
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/help.txt";
+            this.helpfile = metadata.path + "/README.md";
             this.appletPath = metadata.path;
             this.UUID = metadata.uuid;
             this.applet_running = true; //** New
@@ -120,7 +130,7 @@ MyApplet.prototype = {
     buildContextMenu: function () {
         this._applet_context_menu.removeAll();
 
-        let menuitem = new PopupMenu.PopupMenuItem("Start");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Start"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "running";
             this.startTime = this.getCurrentTime();
@@ -128,7 +138,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("Pause");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "paused";
             this.pausedAt = this,currentCount; // Changed to reduce load on Settings
@@ -136,14 +146,14 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("Reset counter");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "ready";
             this.updateUI();
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("If paused, continue counting from now");
+        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.updateUI();
@@ -154,7 +164,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("If paused, continue counting from original start time");
+        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from original start time"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.counterStatus = "running";
@@ -166,29 +176,29 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // ++ Set up sub menu for Housekeeping and System Items
-        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem("Housekeeping and System Sub Menu");
+        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping and System Sub Menu"));
         this._applet_context_menu.addMenuItem(this.subMenu1);
 
-        this.subMenuItem1 = new PopupMenu.PopupMenuItem("View the Changelog");
+        this.subMenuItem1 = new PopupMenu.PopupMenuItem(_("View the Changelog"));
         this.subMenuItem1.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem1); // Note this has subMenu1.menu not subMenu1._applet_context_menu as one might expect
 
-        this.subMenuItem2 = new PopupMenu.PopupMenuItem("Open the Help file");
+        this.subMenuItem2 = new PopupMenu.PopupMenuItem(_("Open the Help file"));
         this.subMenuItem2.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem2);
 
 
-        this.subMenuItem4 = new PopupMenu.PopupMenuItem("Open stylesheet.css  (Advanced Function)");
+        this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css  (Advanced Function)"));
         this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async(this.textEd + ' ' + this.cssfile);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem4);
 
-        this.subMenuItem3 = new PopupMenu.PopupMenuItem("Open the gnome system monitor (Advanced testing function)");
+        this.subMenuItem3 = new PopupMenu.PopupMenuItem(_("Open the gnome system monitor (Advanced testing function)"));
         this.subMenuItem3.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('gnome-system-monitor');
         }));
@@ -197,7 +207,7 @@ MyApplet.prototype = {
         if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"2.0" ) <= 0 ){
             this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-            let menuitem = new PopupMenu.PopupMenuItem("Configure..");
+            let menuitem = new PopupMenu.PopupMenuItem(_("Configure..."));
             menuitem.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
             }));
@@ -242,10 +252,10 @@ MyApplet.prototype = {
         let string = "";
         this.verboseCount = "";
         if (this.days > 0) {
-            this.verboseCount = this.verboseCount + this.days + " days "
+            this.verboseCount = this.verboseCount + this.days + " " + _("days") + " "
         };
         if (this.hours > 0) {
-            this.verboseCount = this.verboseCount + this.hours + " hours "
+            this.verboseCount = this.verboseCount + this.hours + " " + _("hours") + " "
         };
         if (this.minutes < 10) {
             this.verboseCount = this.verboseCount + "0"
@@ -300,7 +310,7 @@ MyApplet.prototype = {
         if (this.counterStatus == "running") {
             this.currentCount = this.getCurrentTime() - this.startTime;
             this.set_applet_label(this.formatTime(this.currentCount));
-            this.set_applet_tooltip(this.counterTitle + ": Running for  " + this.verboseCount + " - Click to Pause");
+            this.set_applet_tooltip(this.counterTitle + ": " + _("Running for") + " " + this.verboseCount + " - " + _("Click to Pause"));
               if (this.days > 0) {              
                    this.actor.style_class = 'stopwatch-running-day-exceeded';
               } else {
@@ -310,9 +320,9 @@ MyApplet.prototype = {
         if (this.counterStatus == "paused") {
             this.set_applet_label(this.formatTime(this.pausedAt));
             if (this.modeContinueCounting) {
-                this.set_applet_tooltip(this.counterTitle + ": Paused at " + this.verboseCount + " - Click to Continue Counting");
+                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Continue Counting"));
             } else {
-                this.set_applet_tooltip(this.counterTitle + ": Paused at " + this.verboseCount + " - Click to Reset");
+                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Reset"));
             }
               if (this.days > 0) {              
                    this.actor.style_class = 'stopwatch-paused-day-exceeded';
@@ -322,7 +332,7 @@ MyApplet.prototype = {
         }
 
         if (this.counterStatus == "ready") {
-            this.set_applet_tooltip(this.counterTitle + ": Ready - Click to Start");
+            this.set_applet_tooltip(this.counterTitle + ": " + _("Ready - Click to Start"));
             this.set_applet_label("00:00");
             this.actor.style_class = 'stopwatch-ready';
         }
@@ -354,7 +364,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.0.0
+Version v30_2.0.2
 0.9.0 Release Candidate 30-07-2013
 0.9.1 Help file facility added and link to gnome-system-monitor
 0.9.2 Change Hold to Pause in Tooltip
@@ -386,5 +396,7 @@ Version v30_3.0.0
       to allow Cinnamon Version to be specified and thus inhibit extra settings menu entry
 1.2.2 Change 'Settings' to 'Configure..' and place after housekeping for consistency
 1.2.3 Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window 
-3.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc 
+2.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc
+2.0.2 01-02-2017 Change helpfile to use README.md instead of help.txt in applet folder
+      Remove icon.png and help.txt from applet folder  
 */

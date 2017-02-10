@@ -28,40 +28,28 @@
 
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
-const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
 const GTop = imports.gi.GTop;
 const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
-const Gio = imports.gi.Gio;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const NMClient = imports.gi.NMClient;
+const Gio = imports.gi.Gio;
+const Settings = imports.ui.settings;
+const Tooltips = imports.ui.tooltips;
 
-// Needed for confirmation dialogs.
-const ModalDialog = imports.ui.modalDialog;
-const Clutter = imports.gi.Clutter;
-
-// For translation mechanism.
-// Incredible that this worked right!! LOL
-// Comments that start with // NOTE: are to be extracted by xgettext
-// and are directed to translators only.
 var UUID;
 
 function _(aStr) {
-    // Thanks to https://github.com/lestcape for this!!!
     let customTrans = Gettext.dgettext(UUID, aStr);
-    if (customTrans != aStr) {
+
+    if (customTrans != aStr)
         return customTrans;
-    }
+
     return Gettext.gettext(aStr);
 }
-
-const Settings = imports.ui.settings;
-const Tooltips = imports.ui.tooltips;
 
 function MyApplet(aMetadata, aOrientation, aPanel_height, aInstance_id) {
     this._init(aMetadata, aOrientation, aPanel_height, aInstance_id);
@@ -73,18 +61,32 @@ MyApplet.prototype = {
     _init: function(aMetadata, aOrientation, aPanel_height, aInstance_id) {
         Applet.Applet.prototype._init.call(this, aOrientation);
 
+        // Condition needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        if (Applet.hasOwnProperty("AllowedLayout"))
+            this.setAllowedLayout(Applet.AllowedLayout.HORIZONTAL);
+
         this.settings = new Settings.AppletSettings(this, aMetadata.uuid, aInstance_id);
 
-        this._metadata = aMetadata;
-        this._instance_id = aInstance_id;
-        this._applet_dir = imports.ui.appletManager.appletMeta[aMetadata.uuid].path;
+        this.update_id = 0;
+        this.applet_dir = aMetadata.path;
+        this.main_applet_dir = this.applet_dir;
 
         // Prepare translation mechanism.
         UUID = aMetadata.uuid;
         Gettext.bindtextdomain(aMetadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
 
         try {
-            this._bind_settings();
+            // Use the this.main_applet_dir directory for imports shared by all supported Cinnamon versions.
+            // If I use just this.applet_dir, I would be forced to put the files to be imported
+            // repeatedly inside each version folder. ¬¬
+            let regExp = new RegExp("(" + aMetadata.uuid + ")$", "g");
+            if (!regExp.test(this.main_applet_dir)) {
+                let tempFile = Gio.file_new_for_path(this.main_applet_dir);
+                this.main_applet_dir = tempFile.get_parent().get_path();
+            }
+
+            this._bindSettings();
 
             this._expand_applet_context_menu();
 
@@ -96,6 +98,7 @@ MyApplet.prototype = {
 
                 this.tooltip._tooltip.get_clutter_text().set_line_alignment(0);
                 this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
+
                 if (this.pref_align_tooltip_text_to_the_left)
                     this.tooltip._tooltip.set_style("text-align:left;");
             } catch (aErr) {
@@ -103,6 +106,7 @@ MyApplet.prototype = {
             }
 
             let ncpu = GTop.glibtop_get_sysinfo().ncpu;
+
             if (this.pref_show_cpu_graph) {
                 this.addGraph(new CpuDataProvider(), [
                     this._parseColor(this.pref_cpu_graph_color_user),
@@ -111,23 +115,27 @@ MyApplet.prototype = {
                     this._parseColor(this.pref_cpu_graph_color_iowait),
                 ], this.pref_cpu_graph_width);
             }
+
             if (this.pref_show_memmory_graph) {
                 this.addGraph(new MemDataProvider(), [
                     this._parseColor(this.pref_memory_graph_color_used),
                     this._parseColor(this.pref_memory_graph_color_cached),
                 ], this.pref_memory_graph_width);
             }
+
             if (this.pref_show_swap_graph) {
                 this.addGraph(new SwapDataProvider(),
                     this._parseColor(this.pref_swap_graph_color_used),
                     this.pref_swap_graph_width);
             }
+
             if (this.pref_show_network_graph) {
                 this.addGraph(new NetDataProvider(), [
                     this._parseColor(this.pref_network_graph_color_download),
                     this._parseColor(this.pref_network_graph_color_upload),
                 ], this.pref_network_graph_width).setAutoScale(1024);
             }
+
             if (this.pref_show_load_graph) {
                 this.addGraph(new LoadAvgDataProvider(),
                     this._parseColor(this.pref_load_graph_color_load),
@@ -135,7 +143,6 @@ MyApplet.prototype = {
             }
 
             this.update();
-
         } catch (e) {
             global.logError(e);
         }
@@ -145,39 +152,46 @@ MyApplet.prototype = {
         global.reexec_self();
     },
 
-    _bind_settings: function() {
+    _bindSettings: function() {
+        let bD = Settings.BindingDirection || null;
         let settingsArray = [
-            [Settings.BindingDirection.IN, "pref_align_tooltip_text_to_the_left", null],
-            [Settings.BindingDirection.IN, "pref_custom_command", null],
-            [Settings.BindingDirection.IN, "pref_use_smooth_graphs", null],
-            [Settings.BindingDirection.IN, "pref_refresh_rate", null],
-            [Settings.BindingDirection.IN, "pref_background_color", null],
-            [Settings.BindingDirection.IN, "pref_draw_background", null],
-            [Settings.BindingDirection.IN, "pref_draw_border", null],
-            [Settings.BindingDirection.IN, "pref_border_color", null],
-            [Settings.BindingDirection.IN, "pref_show_cpu_graph", null],
-            [Settings.BindingDirection.IN, "pref_cpu_graph_width", null],
-            [Settings.BindingDirection.IN, "pref_cpu_graph_color_user", null],
-            [Settings.BindingDirection.IN, "pref_cpu_graph_color_nice", null],
-            [Settings.BindingDirection.IN, "pref_cpu_graph_color_kernel", null],
-            [Settings.BindingDirection.IN, "pref_cpu_graph_color_iowait", null],
-            [Settings.BindingDirection.IN, "pref_show_memmory_graph", null],
-            [Settings.BindingDirection.IN, "pref_memory_graph_width", null],
-            [Settings.BindingDirection.IN, "pref_memory_graph_color_used", null],
-            [Settings.BindingDirection.IN, "pref_memory_graph_color_cached", null],
-            [Settings.BindingDirection.IN, "pref_show_swap_graph", null],
-            [Settings.BindingDirection.IN, "pref_swap_graph_width", null],
-            [Settings.BindingDirection.IN, "pref_swap_graph_color_used", null],
-            [Settings.BindingDirection.IN, "pref_show_network_graph", null],
-            [Settings.BindingDirection.IN, "pref_network_graph_width", null],
-            [Settings.BindingDirection.IN, "pref_network_graph_color_download", null],
-            [Settings.BindingDirection.IN, "pref_network_graph_color_upload", null],
-            [Settings.BindingDirection.IN, "pref_show_load_graph", null],
-            [Settings.BindingDirection.IN, "pref_load_graph_width", null],
-            [Settings.BindingDirection.IN, "pref_load_graph_color_load", null],
+            [bD.IN, "pref_align_tooltip_text_to_the_left", null],
+            [bD.IN, "pref_custom_command", null],
+            [bD.IN, "pref_use_smooth_graphs", null],
+            [bD.IN, "pref_refresh_rate", null],
+            [bD.IN, "pref_background_color", null],
+            [bD.IN, "pref_draw_background", null],
+            [bD.IN, "pref_draw_border", null],
+            [bD.IN, "pref_border_color", null],
+            [bD.IN, "pref_show_cpu_graph", null],
+            [bD.IN, "pref_cpu_graph_width", null],
+            [bD.IN, "pref_cpu_graph_color_user", null],
+            [bD.IN, "pref_cpu_graph_color_nice", null],
+            [bD.IN, "pref_cpu_graph_color_kernel", null],
+            [bD.IN, "pref_cpu_graph_color_iowait", null],
+            [bD.IN, "pref_show_memmory_graph", null],
+            [bD.IN, "pref_memory_graph_width", null],
+            [bD.IN, "pref_memory_graph_color_used", null],
+            [bD.IN, "pref_memory_graph_color_cached", null],
+            [bD.IN, "pref_show_swap_graph", null],
+            [bD.IN, "pref_swap_graph_width", null],
+            [bD.IN, "pref_swap_graph_color_used", null],
+            [bD.IN, "pref_show_network_graph", null],
+            [bD.IN, "pref_network_graph_width", null],
+            [bD.IN, "pref_network_graph_color_download", null],
+            [bD.IN, "pref_network_graph_color_upload", null],
+            [bD.IN, "pref_show_load_graph", null],
+            [bD.IN, "pref_load_graph_width", null],
+            [bD.IN, "pref_load_graph_color_load", null],
         ];
+        let newBinding = typeof this.settings.bind === "function";
         for (let [binding, property_name, callback] of settingsArray) {
-            this.settings.bindProperty(binding, property_name, property_name, callback, null);
+            // Condition needed for retro-compatibility.
+            // Mark for deletion on EOL.
+            if (newBinding)
+                this.settings.bind(property_name, property_name, callback);
+            else
+                this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
 
@@ -209,19 +223,27 @@ MyApplet.prototype = {
     },
 
     update: function() {
+        if (this.update_id > 0) {
+            Mainloop.source_remove(this.update_id);
+            this.update_id = 0;
+        }
+
         let tt = "";
 
         let i = 0,
             iLen = this.graphs.length;
-        for (; i < iLen; ++i) {
-            this.graphs[i].refresh();
-            let txt = this.graphs[i].provider.getText(false);
-            if (i > 0)
-                tt = tt + "\n";
-            if (this.tooltip)
-                tt = tt + "<b>" + txt[0] + "</b>" + txt[1];
-            else
-                tt = tt + txt[0] + txt[1];
+
+        if (iLen > 0) {
+            for (; i < iLen; ++i) {
+                this.graphs[i].refresh();
+                let txt = this.graphs[i].provider.getText(false);
+                if (i > 0)
+                    tt = tt + "\n";
+                if (this.tooltip)
+                    tt = tt + "<b>" + txt[0] + "</b>" + txt[1];
+                else
+                    tt = tt + txt[0] + txt[1];
+            }
         }
 
         if (this.tooltip) {
@@ -230,10 +252,11 @@ MyApplet.prototype = {
             } catch (aErr) {
                 global.logError("System Monitor (Fork By Odyseus): " + aErr.message);
             }
-        } else
+        } else {
             this.set_applet_tooltip(tt);
+        }
 
-        Mainloop.timeout_add(this.pref_refresh_rate, Lang.bind(this, this.update));
+        this.update_id = Mainloop.timeout_add(this.pref_refresh_rate, Lang.bind(this, this.update));
     },
 
     _parseColor: function(aColor) {
@@ -250,15 +273,22 @@ MyApplet.prototype = {
     },
 
     _expand_applet_context_menu: function() {
-        let menuItem = new PopupMenu.PopupIconMenuItem(_("Help"),
-            "dialog-information", St.IconType.SYMBOLIC);
+        let menuItem = new PopupMenu.PopupIconMenuItem(
+            _("Help"),
+            "dialog-information",
+            St.IconType.SYMBOLIC);
         menuItem.connect("activate", Lang.bind(this, function() {
-            Util.spawnCommandLine("xdg-open " + this._applet_dir + "/HELP.md");
+            Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.md");
         }));
         this._applet_context_menu.addMenuItem(menuItem);
     },
 
     on_applet_removed_from_panel: function() {
+        if (this.update_id > 0) {
+            Mainloop.source_remove(this.update_id);
+            this.update_id = 0;
+        }
+
         this.settings.finalize();
     }
 };
@@ -370,8 +400,9 @@ Graph.prototype = {
         if (aMinScale > 0) {
             this.autoScale = true;
             this.minScale = aMinScale;
-        } else
+        } else {
             this.autoScale = false;
+        }
     }
 };
 
@@ -400,12 +431,14 @@ CpuDataProvider.prototype = {
         let nice = 0;
         let sys = 0;
         let iowait = 0;
+
         if (delta > 0) {
             idle = (this.gtop.idle - this.idle_last) / delta;
             nice = (this.gtop.nice - this.nice_last) / delta;
             sys = (this.gtop.sys - this.sys_last) / delta;
             iowait = (this.gtop.iowait - this.iowait_last) / delta;
         }
+
         this.idle_last = this.gtop.idle;
         this.nice_last = this.gtop.nice;
         this.sys_last = this.gtop.sys;
@@ -546,71 +579,6 @@ LoadAvgDataProvider.prototype = {
 
     getText: function() {
         return this.text;
-    }
-};
-
-function ConfirmationDialog() {
-    this._init.apply(this, arguments);
-}
-
-ConfirmationDialog.prototype = {
-    __proto__: ModalDialog.ModalDialog.prototype,
-
-    _init: function(aCallback, aDialogLabel, aDialogMessage, aCancelButtonLabel, aDoButtonLabel) {
-        ModalDialog.ModalDialog.prototype._init.call(this, {
-            styleClass: null
-        });
-
-        let mainContentBox = new St.BoxLayout({
-            style_class: 'polkit-dialog-main-layout',
-            vertical: false
-        });
-        this.contentLayout.add(mainContentBox, {
-            x_fill: true,
-            y_fill: true
-        });
-
-        let messageBox = new St.BoxLayout({
-            style_class: 'polkit-dialog-message-layout',
-            vertical: true
-        });
-        mainContentBox.add(messageBox, {
-            y_align: St.Align.START
-        });
-
-        this._subjectLabel = new St.Label({
-            style_class: 'polkit-dialog-headline',
-            text: aDialogLabel
-        });
-
-        messageBox.add(this._subjectLabel, {
-            y_fill: false,
-            y_align: St.Align.START
-        });
-
-        this._descriptionLabel = new St.Label({
-            style_class: 'polkit-dialog-description',
-            text: aDialogMessage
-        });
-
-        messageBox.add(this._descriptionLabel, {
-            y_fill: true,
-            y_align: St.Align.START
-        });
-
-        this.setButtons([{
-            label: aCancelButtonLabel,
-            action: Lang.bind(this, function() {
-                this.close();
-            }),
-            key: Clutter.Escape
-        }, {
-            label: aDoButtonLabel,
-            action: Lang.bind(this, function() {
-                this.close();
-                aCallback();
-            })
-        }]);
     }
 };
 

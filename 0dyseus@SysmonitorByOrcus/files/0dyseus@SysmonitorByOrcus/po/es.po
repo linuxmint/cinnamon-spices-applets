@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.06\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-15 20:27-0300\n"
-"PO-Revision-Date: 2016-12-15 20:27-0300\n"
+"POT-Creation-Date: 2017-02-05 15:18-0300\n"
+"PO-Revision-Date: 2017-02-05 15:19-0300\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,35 +18,35 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:253 3.2/applet.js:253
+#: applet.js:277 3.2/applet.js:277
 msgid "Help"
 msgstr "Ayuda"
 
-#: applet.js:415 3.2/applet.js:415
+#: applet.js:448 3.2/applet.js:448
 msgid "CPU: "
 msgstr "CPU: "
 
-#: applet.js:441 3.2/applet.js:441
+#: applet.js:474 3.2/applet.js:474
 msgid "Memory: "
 msgstr "Memoria: "
 
-#: applet.js:441 applet.js:466 3.2/applet.js:441 3.2/applet.js:466
+#: applet.js:474 applet.js:499 3.2/applet.js:474 3.2/applet.js:499
 msgid " MB"
 msgstr "MB"
 
-#: applet.js:466 3.2/applet.js:466
+#: applet.js:499 3.2/applet.js:499
 msgid "Swap: "
 msgstr "Swap: "
 
-#: applet.js:505 3.2/applet.js:505
+#: applet.js:538 3.2/applet.js:538
 msgid "Network D/U: "
 msgstr "Red D/S: "
 
-#: applet.js:505 3.2/applet.js:505
+#: applet.js:538 3.2/applet.js:538
 msgid " KB/s"
 msgstr "KB/s"
 
-#: applet.js:543 3.2/applet.js:543
+#: applet.js:576 3.2/applet.js:576
 msgid "Load average: "
 msgstr "Promedio de carga: "
 
@@ -203,7 +203,9 @@ msgstr "Mostrar gráfico de memoria:"
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
 msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
-msgstr "Para aplicar estas preferencias, Cinnamon necesita ser reiniciado. Presióname!!!"
+msgstr ""
+"Para aplicar estas preferencias, Cinnamon necesita ser reiniciado. "
+"Presióname!!!"
 
 #. 3.2->settings-schema.json->demo-button2->tooltip
 #. 3.2->settings-schema.json->demo-button1->tooltip
@@ -310,6 +312,18 @@ msgstr "Colores del gráfico de memoria"
 #. 0dyseus@SysmonitorByOrcus->metadata.json->description
 msgid "Displays CPU, memory, swap, network usage and load in graphs."
 msgstr "Muestra gráficos de uso de CPU. memoria, swap, red y carga."
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "buzz: Bug fixes."
+msgstr "buzz: Corrección de errores."
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->comments
+msgid ""
+"Bug reports and feature requests should be reported on this applet's "
+"repository linked below."
+msgstr ""
+"Los reportes de errores y las solicitudes de características deben ser "
+"reportadas en el repositorio de este applet, que se enlaza a continuación."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"

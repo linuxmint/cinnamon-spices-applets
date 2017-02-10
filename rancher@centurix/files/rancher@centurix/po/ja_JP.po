@@ -1,8 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-09 02:06+1000\n"
-"PO-Revision-Date: 2016-11-09 02:06+1000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-10 11:09+0100\n"
+"PO-Revision-Date: 2017-02-10 11:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -14,177 +15,177 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: applet.js\n"
 
-#: applet.js:158
+#: applet.js:156
 msgid "Settings"
 msgstr ""
 
-#: applet.js:176
+#: applet.js:174
 msgid "Editing Homestead configuration..."
 msgstr ""
 
-#: applet.js:182
+#: applet.js:180
 msgid "Rancher: Bringing Homestead up, please wait..."
 msgstr ""
 
-#: applet.js:184
+#: applet.js:182
 msgid "Bringing Homestead up..."
 msgstr ""
 
-#: applet.js:187
+#: applet.js:185
 msgid "Rancher: Taking Homestead down, please wait..."
 msgstr ""
 
-#: applet.js:189
+#: applet.js:187
 msgid "Taking Homestead down..."
 msgstr ""
 
-#: applet.js:196
+#: applet.js:194
 msgid "Rancher: Provisioning Homestead, please wait..."
 msgstr ""
 
-#: applet.js:198
+#: applet.js:196
 msgid "Provisioning Homestead..."
 msgstr ""
 
-#: applet.js:202
+#: applet.js:200
 msgid "Rancher: Destroying Homestead, please wait..."
 msgstr ""
 
-#: applet.js:204
+#: applet.js:202
 msgid "Destroying Homestead..."
 msgstr ""
 
-#: applet.js:208
+#: applet.js:206
 msgid "Rancher: Suspending Homestead, please wait..."
 msgstr ""
 
-#: applet.js:210
+#: applet.js:208
 msgid "Suspending Homestead..."
 msgstr ""
 
-#: applet.js:215
+#: applet.js:213
 msgid "Homestead SSH Terminal opened"
 msgstr ""
 
-#: applet.js:251
+#: applet.js:217
+msgid "Rancher: Recompiling Kernel, please wait..."
+msgstr ""
+
+#: applet.js:219
+msgid "Recompiling Kernel..."
+msgstr ""
+
+#: applet.js:258
 msgid "Rancher: Homestead missing or not configured."
 msgstr "ランチャー：ホームステッド欠落しているかどうか設定されています。"
 
-#: applet.js:252
+#: applet.js:259
 msgid "Homestead missing or not configured."
 msgstr ""
 
-#: applet.js:259
-msgid "Rancher: Homestead up."
-msgstr "牧場主：ホームステッドアップ。"
-
-#: applet.js:260
-msgid "Homestead up."
-msgstr ""
-
-#: applet.js:261
-msgid " (Running)"
-msgstr ""
-
-#: applet.js:265
-msgid "Rancher: Homestead suspended."
-msgstr ""
-
-#: applet.js:266
-msgid "Homestead suspended."
-msgstr ""
-
-#: applet.js:267
-msgid " (Suspended)"
-msgstr ""
-
-#: applet.js:270
-msgid "Rancher: Homestead down."
-msgstr "ランチャー：ダウンホームステッド。"
-
-#: applet.js:271
-msgid "Homestead down."
+#: applet.js:266 applet.js:267
+msgid "Kernel Module not loaded. Needs recompilation."
 msgstr ""
 
 #: applet.js:272
+msgid "Rancher: Homestead up."
+msgstr "牧場主：ホームステッドアップ。"
+
+#: applet.js:273
+msgid "Homestead up."
+msgstr ""
+
+#: applet.js:274
+msgid " (Running)"
+msgstr ""
+
+#: applet.js:278
+msgid "Rancher: Homestead suspended."
+msgstr ""
+
+#: applet.js:279
+msgid "Homestead suspended."
+msgstr ""
+
+#: applet.js:280
+msgid " (Suspended)"
+msgstr ""
+
+#: applet.js:283
+msgid "Rancher: Homestead down."
+msgstr "ランチャー：ダウンホームステッド。"
+
+#: applet.js:284
+msgid "Homestead down."
+msgstr ""
+
+#: applet.js:285
 msgid " (Down)"
 msgstr ""
 
-#: applet.js:275
+#: applet.js:288
 msgid "Rancher: Homestead not created."
 msgstr ""
 
-#: applet.js:276
+#: applet.js:289
 msgid "Homestead not created"
 msgstr ""
 
-#: applet.js:277
+#: applet.js:290
 msgid " (Not created/Destroyed)"
 msgstr ""
 
-#: applet.js:282
-msgid "Homestead missing or not configured"
-msgstr "ホームステッド見つからないか設定されていません"
-
-#: applet.js:285
-msgid "Status"
-msgstr "状態"
-
-#: applet.js:288
-msgid "Run provisioning"
-msgstr "実行プロビジョニング"
-
-#: applet.js:289
-msgid "Suspend Homestead"
-msgstr "ホームステッドサスペンド"
-
-#: applet.js:290
-msgid "SSH Terminal"
-msgstr "SSHターミナル"
-
-#: applet.js:294
-msgid "Destroy Homestead"
-msgstr "ホームステッド破壊"
-
-#: applet.js:297
-msgid "Edit Homestead configuration"
-msgstr "編集ホームステッド構成"
-
-#: applet.js:299
-msgid "Refresh this menu"
-msgstr "このメニューをリフレッシュ"
-
-#: applet.js:305
-msgid "Configuration"
+#: terminal_reader.js:58
+msgid "Command not found."
 msgstr ""
 
-#: applet.js:306
-msgid "IP: "
+#. rancher@centurix->settings-schema.json->editor->description
+msgid "Default text editor"
 msgstr ""
 
-#: applet.js:307
-msgid "Memory: "
+#. rancher@centurix->settings-schema.json->homesteadProjectFolder->description
+msgid "Homestead project folder"
 msgstr ""
 
-#: applet.js:308
-msgid "CPU: "
+#. rancher@centurix->settings-schema.json->homesteadConfigFolder->description
+msgid "Homestead config folder"
 msgstr ""
 
-#: applet.js:309
-msgid "Provider: "
+#. rancher@centurix->settings-schema.json->vagrantCmd->description
+msgid "Vagrant command"
 msgstr ""
 
-#: applet.js:312
-msgid "Hosted Sites"
+#. rancher@centurix->metadata.json->name
+msgid "Homestead manager"
 msgstr ""
 
-#: applet.js:313
-msgid "Edit hosts file"
+#. rancher@centurix->metadata.json->description
+msgid "An applet to manage Homestead."
 msgstr ""
 
-#: applet.js:323
-msgid "Hosted Databases"
-msgstr ""
+#~ msgid "Homestead missing or not configured"
+#~ msgstr "ホームステッド見つからないか設定されていません"
+
+#~ msgid "Status"
+#~ msgstr "状態"
+
+#~ msgid "Run provisioning"
+#~ msgstr "実行プロビジョニング"
+
+#~ msgid "Suspend Homestead"
+#~ msgstr "ホームステッドサスペンド"
+
+#~ msgid "SSH Terminal"
+#~ msgstr "SSHターミナル"
+
+#~ msgid "Destroy Homestead"
+#~ msgstr "ホームステッド破壊"
+
+#~ msgid "Edit Homestead configuration"
+#~ msgstr "編集ホームステッド構成"
+
+#~ msgid "Refresh this menu"
+#~ msgstr "このメニューをリフレッシュ"
 
 #~ msgid "Update Homestead box"
 #~ msgstr "更新ホームステッドボックス"

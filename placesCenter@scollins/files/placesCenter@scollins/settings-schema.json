@@ -19,7 +19,7 @@
     
     "keyOpen": {
         "type": "keybinding",
-        "description": "Menu shorcut key",
+        "description": "Menu shortcut key",
         "default": "<Super>p"
     },
     
@@ -31,6 +31,14 @@
         "units": "px",
         "step": 2,
         "description": "Icon size"
+    },
+    
+    "middleClickPath": {
+        "type": "filechooser",
+        "description": "Open on middle click",
+        "default": "~/",
+        "select-dir": true,
+        "tooltip": "Leave blank to disable"
     },
     
     "sep1": {

@@ -1,0 +1,405 @@
+# This is a template file for translating the Cinnamon applet called Popup Translator.
+# Copyright (C) 2016
+# This file is distributed under the same license as the Popup Translator applet.
+# Odyseus <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+
+"Project-Id-Version: 1.01\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-23 05:25-0300\n"
+"PO-Revision-Date: 2017-01-29 08:35-0300\n"
+"Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:114
+msgid "Source language"
+msgstr ""
+
+#: applet.js:115
+msgid "Target language"
+msgstr ""
+
+#: applet.js:116
+msgid ""
+"(G) = Language supported only by Google Translate.\n"
+"(Y) = Language supported only by Yandex Translate."
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_service_provider->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->description
+#: applet.js:169 3.2/applet.js:143
+msgid "Service provider"
+msgstr ""
+
+#: applet.js:170 3.2/applet.js:144 appletHelper.py:329
+msgid "Language pair"
+msgstr ""
+
+#: applet.js:175 3.2/applet.js:149
+msgid "Key combination to translate"
+msgstr ""
+
+#: applet.js:182 3.2/applet.js:156
+msgid "Key combination to force translation"
+msgstr ""
+
+#: applet.js:188 applet.js:801 applet.js:822 3.2/applet.js:162
+#: 3.2/applet.js:766 3.2/applet.js:787
+msgid "Unmet dependencies found!!!"
+msgstr ""
+
+#: applet.js:189 applet.js:701 applet.js:802 3.2/applet.js:163
+#: 3.2/applet.js:666 3.2/applet.js:767
+msgid "A detailed error has been logged into ~/.cinnamon/glass.log file."
+msgstr ""
+
+#: applet.js:208 applet.js:219 3.2/applet.js:182 3.2/applet.js:193
+#, javascript-format
+msgid "Set %s as default translation engine."
+msgstr ""
+
+#: applet.js:234 3.2/applet.js:208
+msgid "Translation history"
+msgstr ""
+
+#: applet.js:240 3.2/applet.js:214
+msgid "Open translation history window."
+msgstr ""
+
+#: applet.js:252 3.2/applet.js:226
+msgid "History storage"
+msgstr ""
+
+#: applet.js:258 3.2/applet.js:232
+msgid "Open the location where the translation history file is stored."
+msgstr ""
+
+#: applet.js:266 3.2/applet.js:240
+msgid "Check dependencies"
+msgstr ""
+
+#: applet.js:272 3.2/applet.js:246
+msgid "Check whether the dependencies for this applet are met."
+msgstr ""
+
+#: applet.js:280 3.2/applet.js:254
+msgid "Help"
+msgstr ""
+
+#: applet.js:286 3.2/applet.js:260
+msgid "Open this applet help file."
+msgstr ""
+
+#: applet.js:408 3.2/applet.js:382
+msgid "History"
+msgstr ""
+
+#: applet.js:422 3.2/applet.js:396
+#, javascript-format
+msgid "Go to %s's website"
+msgstr ""
+
+#: applet.js:424 3.2/applet.js:398
+#, javascript-format
+msgid "Powered By %s"
+msgstr ""
+
+#: applet.js:507 3.2/applet.js:481
+msgid "No Yandex API keys were found!!!"
+msgstr ""
+
+#: applet.js:508 applet.js:824 3.2/applet.js:482 3.2/applet.js:789
+msgid "Check this applet HELP.md file for instructions."
+msgstr ""
+
+#: applet.js:509 applet.js:825 3.2/applet.js:483 3.2/applet.js:790
+msgid "It can be accessed from this applet context menu."
+msgstr ""
+
+#: applet.js:566 3.2/applet.js:540
+msgid "API key is invalid"
+msgstr ""
+
+#: applet.js:569 3.2/applet.js:543
+msgid "Blocked API key"
+msgstr ""
+
+#: applet.js:572 3.2/applet.js:546
+msgid "Exceeded the daily limit on the amount of translated text"
+msgstr ""
+
+#: applet.js:575 3.2/applet.js:549
+msgid "Exceeded the maximum text size"
+msgstr ""
+
+#: applet.js:578 3.2/applet.js:552
+msgid "The text cannot be translated"
+msgstr ""
+
+#: applet.js:581 3.2/applet.js:555
+msgid "The specified translation direction is not supported"
+msgstr ""
+
+#: applet.js:700 3.2/applet.js:665
+#, javascript-format
+msgid "Error parsing %s's request."
+msgstr ""
+
+#. 0dyseus@PopupTranslator->metadata.json->name
+#: applet.js:821 3.2/applet.js:786
+msgid "Popup Translator"
+msgstr ""
+
+#: applet.js:831 3.2/applet.js:796
+msgid "All dependencies seem to be met."
+msgstr ""
+
+#: 0dyseus@PopupTranslator.js:230
+msgid "Copy translated text to clipboard"
+msgstr ""
+
+#: 0dyseus@PopupTranslator.js:236
+msgid "Translate text on provider's website"
+msgstr ""
+
+#: 0dyseus@PopupTranslator.js:242
+msgid "Open translation history"
+msgstr ""
+
+#: appletHelper.py:311
+msgid "Popup Translator history"
+msgstr ""
+
+#: appletHelper.py:316
+msgid "Date"
+msgstr ""
+
+#: appletHelper.py:324
+msgid "Source text"
+msgstr ""
+
+#: appletHelper.py:337
+msgid "Target text"
+msgstr ""
+
+#: appletHelper.py:359
+msgid "Reload"
+msgstr ""
+
+#: appletHelper.py:360
+msgid "Reload translation history"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_custom_label_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->description
+msgid "Custom timestamp"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->tooltip
+msgid ""
+"Choose a custom timestamp for the translation history entries.\n"
+"YYYY: year\n"
+"MM: month\n"
+"DD: day\n"
+"hh: hours\n"
+"mm: minutes\n"
+"ss: seconds"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_style_for_footer->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_footer->description
+msgid "Footer style"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_style_for_translated_text->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_translated_text->description
+msgid "Translated text style"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_force_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->description
+msgid "Keyboard shortcut to perform a FORCED translation"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_force_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->tooltip
+msgid ""
+"Choose a keybinding to perform a FORCED translation. A \"forced "
+"translation\" forces the translation of any string stored on the translation"
+" history and overwrites the existing one."
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_service_provider->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->tooltip
+msgid "Choose the default translation service provider."
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Yandex Translator"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Google Translator"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_translate_key->description
+msgid "Keyboard shortcut to perform a translation"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key->tooltip
+msgid "Choose a keybinding to perform a translation."
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_icon_for_applet->description
+msgid "Custom icon"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->description
+msgid "History window initial height"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->units
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 3.2->settings-schema.json->pref_history_initial_window_width->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->units
+msgid "pixels"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->description
+msgid "API keys"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->tooltip
+msgid ""
+"Enter one API key per line.\n"
+"Read the HELP.md file (Help item on this applet context menu) found inside this applet folder to know how to get free Yandex API keys."
+msgstr ""
+
+#. 3.2->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+msgid "Width to trigger word wrap"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+msgid ""
+"The \"Source text\" and \"Target text\" columns on the history window will "
+"wrap its text at the width defined by this setting."
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_initial_window_width->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->description
+msgid "History window initial width"
+msgstr ""
+
+#. 3.2->settings-schema.json->head4->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head4->description
+msgid "Yandex translator settings"
+msgstr ""
+
+#. 3.2->settings-schema.json->head3->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head3->description
+msgid "Translation history settings"
+msgstr ""
+
+#. 3.2->settings-schema.json->head2->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head2->description
+msgid "Popup elements appearance"
+msgstr ""
+
+#. 3.2->settings-schema.json->head1->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head1->description
+msgid "Translation settings"
+msgstr ""
+
+#. 3.2->settings-schema.json->head0->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->description
+msgid "Timestamp for translation history entries"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY MM-DD hh:mm:ss (ISO8601)"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY DD-MM hh:mm:ss (European)"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "Custom"
+msgstr ""
+
+#. 3.2->settings-schema.json->pref_style_for_language_pair->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_language_pair->description
+msgid "Language pair style"
+msgstr ""
+
+#. 0dyseus@PopupTranslator->metadata.json->comments
+msgid ""
+"Bug reports and feature requests should be reported on this applet's "
+"repository linked below."
+msgstr ""
+
+#. 0dyseus@PopupTranslator->metadata.json->description
+msgid ""
+"Simple translator applet that will allow to display any selected text from "
+"any application on a system in a popup."
+msgstr ""

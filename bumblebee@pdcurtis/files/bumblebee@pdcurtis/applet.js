@@ -96,7 +96,7 @@ MyApplet.prototype = {
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/help.txt";
+            this.helpfile = metadata.path + "/README.md";
             this.tempfile = metadata.path + "/gputemp.out";
             this.gputempScript= metadata.path + "/gputempscript.sh";
             this.appletPath = metadata.path;
@@ -339,7 +339,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.0.4
+Version v30_3.1.0
 v20_0.9.0 Beta 12-12-2013
 v20_0.9.1 Added System Monitor and Power Statistics to right click menu
 v20_0.9.2 Added Left Click Menu with 5 Program Launch Items with configuration in Settings - Release Candidate 14-12-2013 
@@ -359,4 +359,5 @@ v30_3.0.0 Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
 v30_3.0.2  NOTE 3.0.1 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 3.0.0 to the cinnamon-spices web site
 v30_3.0.3  Corrected icon.png in applet folder which is used by Add Applets
 v30_3.0.4  Corrected gputempscript to have correct option commented out
+v30_3.1.0  Changed help file from help.txt to README.md
 */
