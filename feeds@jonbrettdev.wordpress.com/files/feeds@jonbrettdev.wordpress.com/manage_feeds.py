@@ -135,7 +135,7 @@ class MainWindow(Gtk.Window):
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CANCEL,
+                                        Gtk.ButtonsType.CLOSE,
                                         "Failed to Import feeds")
             dialog.format_secondary_text(str(e))
             dialog.run()
@@ -218,14 +218,14 @@ class MainWindow(Gtk.Window):
                                         "_Import OPML",
                                         "Import feeds from OPML file",
                                         Gtk.STOCK_FILE)
-        action_import_opml.connect("activate", self.on_menu_import_opml)
+        action_import_opml.connect("activate", self.on_menu_import, "OPML")
         action_group.add_action(action_import_opml)
 
         action_import_file = Gtk.Action("ImportFeedFile",
                                         "_Import Feeds File",
                                         "Import feeds from file",
                                         Gtk.STOCK_FILE)
-        action_import_file.connect("activate", self.on_menu_import_feeds)
+        action_import_file.connect("activate", self.on_menu_import, "FEEDS")
         action_group.add_action(action_import_file)
 
         # Create Export menu
@@ -273,15 +273,27 @@ class MainWindow(Gtk.Window):
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CANCEL,
+                                        Gtk.ButtonsType.CLOSE,
                                         "Failed to import OPML")
             dialog.format_secondary_text(str(e))
             dialog.run()
             dialog.destroy()            
 
 
-    def on_menu_import_opml(self, widget):
-        dialog = Gtk.FileChooserDialog("Choose a OPML feed file", self,
+    def on_menu_import(self, widget, type):
+
+        filter_type = Gtk.FileFilter()
+        if type == "OPML":
+            title = "Choose a OPML feed file"
+            filter_type.set_name("OPML files")
+            filter_type.add_pattern("*.opml")
+        else:
+            title = "Choose a feed file"
+            filter_type.set_name("Text files")
+            filter_type.add_mime_type("text/plain")            
+
+
+        dialog = Gtk.FileChooserDialog(title, self,
                                        Gtk.FileChooserAction.OPEN,
                                        (
                                            Gtk.STOCK_CANCEL,
@@ -291,10 +303,7 @@ class MainWindow(Gtk.Window):
                                        ))
 
         # Add filters to dialog box
-        filter_xml = Gtk.FileFilter()
-        filter_xml.set_name("OPML files")
-        filter_xml.add_pattern("*.opml")
-        dialog.add_filter(filter_xml)
+        dialog.add_filter(filter_type)
 
         filter_any = Gtk.FileFilter()
         filter_any.set_name("All files")
@@ -306,11 +315,18 @@ class MainWindow(Gtk.Window):
         dialog.destroy()
         if response == Gtk.ResponseType.OK:
             try:
-                new_feeds = ConfigManager.import_opml_file(filename)
+                if type == "OPML":
+                    new_feeds = ConfigManager.import_opml_file(filename)
+                else:
+                    new_feeds = ConfigManager.read(filename)
+
+                for feed in new_feeds:
+                    self.feeds.append(feed)
+
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.INFO,
                                         Gtk.ButtonsType.OK,
-                                        "OPML file imported")
+                                        "file imported")
                 dialog.format_secondary_text("Imported %d feeds" % len(new_feeds))
                 dialog.run()
                 dialog.destroy()
@@ -318,47 +334,12 @@ class MainWindow(Gtk.Window):
             except Exception as e:
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CANCEL,
-                                        "Failed to import OPML")
+                                        Gtk.ButtonsType.CLOSE,
+                                        "Failed to import file")
                 dialog.format_secondary_text(str(e))
                 dialog.run()
-                dialog.destroy()
+                dialog.destroy()        
 
-    def on_menu_import_feeds(self, widget):
-        dialog = Gtk.FileChooserDialog("Load a feed file", self,
-                                       Gtk.FileChooserAction.OPEN,
-                                       (
-                                           Gtk.STOCK_CANCEL,
-                                           Gtk.ResponseType.CANCEL,
-                                           Gtk.STOCK_OPEN,
-                                           Gtk.ResponseType.OK
-                                       ))
-
-        # Add filters to dialog box
-        filter_text = Gtk.FileFilter()
-        filter_text.set_name("Text files")
-        filter_text.add_mime_type("text/plain")
-        dialog.add_filter(filter_text)
-
-        filter_any = Gtk.FileFilter()
-        filter_any.set_name("All files")
-        filter_any.add_pattern("*")
-        dialog.add_filter(filter_any)
-
-        response = dialog.run()
-        filename = dialog.get_filename()
-        dialog.destroy()
-        if response == Gtk.ResponseType.OK:
-            try:
-                new_feeds = ConfigManager.read(filename)
-            except Exception as e:
-                dialog = Gtk.MessageDialog(self, 0,
-                                        Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CANCEL,
-                                        "Failed to Import feeds")
-                dialog.format_secondary_text(str(e))
-                dialog.run()
-                dialog.destroy()                
 
     def on_menu_export_feeds(self, widget):
         dialog = Gtk.FileChooserDialog("Save a feed file", self,
@@ -384,18 +365,20 @@ class MainWindow(Gtk.Window):
         response = dialog.run()
         filename = dialog.get_filename()
         dialog.destroy()
+        sys.stderr.write(str(response))
         if response == Gtk.ResponseType.OK:
             try:
-                ConfigManager.write(this.feeds, filename=filename)
+                ConfigManager.write(self.feeds, filename=filename)
             except Exception as ex:
-                error_dialog = Gtk.MessageDialog(this,
-                                            Gtk.DIALOG_DESTORY_WITH_PARENT,  
-                                            Gtk.MESSAGE_ERROR,
-                                            Gtk.BUTTONS_CLOSE,
-                                            "Unable to export file", 
-                                            ex,
-                                            0)
-                error_dialog.destroy()              
+                sys.stderr.write("Unable to export file, exception: %s" % str(ex))
+                error_dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.ERROR,
+                                        Gtk.ButtonsType.CLOSE,
+                                        "Unable to export file")
+                error_dialog.format_secondary_text(str(ex))
+                
+                error_dialog.run()
+                error_dialog.destroy()                         
 
 
 if __name__ == '__main__':
