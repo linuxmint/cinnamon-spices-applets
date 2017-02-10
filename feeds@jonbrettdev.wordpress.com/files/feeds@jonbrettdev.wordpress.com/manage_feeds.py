@@ -24,18 +24,122 @@ UI_INFO = """
 </ui>
 """
 
+class ConfigManager:    
+    @staticmethod
+    def write(feeds, filename=None):
+        """
+            Writes the feeds list to the file/stdout
+        """
+        #if filename is None:
+        #    filename = self.filename
+
+        if filename is None:
+            f = sys.stdout
+        else:
+            f = open(filename, mode="w", encoding="utf-8")
+
+        # Need to check if all feeds have been removed
+        if len(feeds) == 0:
+            f.write(u'#')
+            f.write('')
+            f.write(u'\n')
+
+        for feed in feeds:
+            if not feed[2]:
+                f.write(u'#')
+            f.write(feed[0].decode('utf8'))
+            if feed[1] is not None:
+                f.write(u' ')
+                f.write(feed[1].decode('utf8'))
+            f.write(u'\n')
+
+    @staticmethod
+    def read(filename = None):
+        """
+            Reads content of the feed file/stdin and returns a list of lists
+        """
+        content = []
+        
+        if filename is None:
+            f = sys.stdin
+        else:
+            f = open(filename, "r")
+
+        for line in f:
+            try:
+                # If input is coming from the command line, convert to utf8
+                if filename is None:
+                    line = line.decode('utf8')
+
+                if line[0] == "#":
+                    # cut out the comment and define this item as disabled
+                    line = line[1:]
+                    enable = False
+                else:
+                    enable = True
+                temp = line.split()
+                url = temp[0]
+                custom_title = None
+                if len(temp) > 1:
+                    custom_title = " ".join(temp[1:])
+                content.append([url, custom_title, enable])
+            except IndexError:
+                # empty lines are ignored
+                pass
+        
+        return content
+
+    @staticmethod
+    def update_redirected_feed(current_url, redirected_url):
+        feeds = ConfigManager.read()
+        for feed in feeds:
+            if feed[0] == current_url:
+                feed[0] = redirected_url                
+        ConfigManager.write(feeds)
+
+
+    @staticmethod
+    def import_opml_file(filename):
+        """
+            Reads feeds list from an OPML file
+        """
+        new_feeds = []
+
+        tree = et.parse(filename)
+        root = tree.getroot()
+        for outline in root.findall(".//outline[@type='rss']"):
+            url = outline.attrib.get('xmlUrl', '').decode('utf-8')
+            # for now just ignore feed title decoding issues.
+            try:
+                title = outline.attrib.get('text', '').decode('utf-8').encode('ascii', 'ignore')
+            except:
+                title = ""
+            new_feeds.append([
+                    url,
+                    title,
+                    False])
+        return new_feeds        
 
 class MainWindow(Gtk.Window):
 
-    def __init__(self, filename):
+    def __init__(self):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
 
-        self.filename = filename
+        #self.filename = filename
         self.feeds = Gtk.ListStore(str, str, bool)
-        for f in self.load_feed_file(filename):
-            self.feeds.append(f)
+        try:
+            for feed in ConfigManager.read():
+                self.feeds.append(feed)
+        except Exception as e:
+            dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.ERROR,
+                                        Gtk.ButtonsType.CANCEL,
+                                        "Failed to Import feeds")
+            dialog.format_secondary_text(str(e))
+            dialog.run()
+            dialog.destroy()                                        
 
         # Set window properties
         self.set_default_size(600, 200)
@@ -91,7 +195,7 @@ class MainWindow(Gtk.Window):
         cancel_button.connect("clicked", Gtk.main_quit)
 
         save_button = Gtk.Button(stock=Gtk.STOCK_APPLY)
-        save_button.connect("clicked", self.write_feed_file)
+        save_button.connect("clicked", self.save_clicked)
         save_button.connect("clicked", Gtk.main_quit)
 
         button_box.pack_start(add_button, False, False, 0)
@@ -163,6 +267,19 @@ class MainWindow(Gtk.Window):
         self.feeds.append(["http://", "", True])
         self.treeview.set_cursor(len(self.feeds) - 1, self.treeview.get_column(0), True)
 
+    def save_clicked(self, button):
+        try:
+            ConfigManager.write(self.feeds)
+        except Exception as e:
+            dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.ERROR,
+                                        Gtk.ButtonsType.CANCEL,
+                                        "Failed to import OPML")
+            dialog.format_secondary_text(str(e))
+            dialog.run()
+            dialog.destroy()            
+
+
     def on_menu_import_opml(self, widget):
         dialog = Gtk.FileChooserDialog("Choose a OPML feed file", self,
                                        Gtk.FileChooserAction.OPEN,
@@ -188,9 +305,24 @@ class MainWindow(Gtk.Window):
         filename = dialog.get_filename()
         dialog.destroy()
         if response == Gtk.ResponseType.OK:
-            new_feeds = self.import_opml_file(filename)
-            for f in new_feeds:
-                self.feeds.append(f)
+            try:
+                new_feeds = ConfigManager.import_opml_file(filename)
+                dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.INFO,
+                                        Gtk.ButtonsType.OK,
+                                        "OPML file imported")
+                dialog.format_secondary_text("Imported %d feeds" % len(new_feeds))
+                dialog.run()
+                dialog.destroy()
+                
+            except Exception as e:
+                dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.ERROR,
+                                        Gtk.ButtonsType.CANCEL,
+                                        "Failed to import OPML")
+                dialog.format_secondary_text(str(e))
+                dialog.run()
+                dialog.destroy()
 
     def on_menu_import_feeds(self, widget):
         dialog = Gtk.FileChooserDialog("Load a feed file", self,
@@ -217,9 +349,16 @@ class MainWindow(Gtk.Window):
         filename = dialog.get_filename()
         dialog.destroy()
         if response == Gtk.ResponseType.OK:
-            new_feeds = self.load_feed_file(filename)
-            for f in new_feeds:
-                self.feeds.append(f)
+            try:
+                new_feeds = ConfigManager.read(filename)
+            except Exception as e:
+                dialog = Gtk.MessageDialog(self, 0,
+                                        Gtk.MessageType.ERROR,
+                                        Gtk.ButtonsType.CANCEL,
+                                        "Failed to Import feeds")
+                dialog.format_secondary_text(str(e))
+                dialog.run()
+                dialog.destroy()                
 
     def on_menu_export_feeds(self, widget):
         dialog = Gtk.FileChooserDialog("Save a feed file", self,
@@ -246,119 +385,35 @@ class MainWindow(Gtk.Window):
         filename = dialog.get_filename()
         dialog.destroy()
         if response == Gtk.ResponseType.OK:
-            self.write_feed_file(filename=filename)
-
-    def write_feed_file(self, button=None, filename=None):
-        """
-            Writes the feeds list to the file/stdout
-        """
-        if filename is None:
-            filename = self.filename
-
-        if filename is None:
-            f = sys.stdout
-        else:
-            f = open(filename, mode="w", encoding="utf-8")
-
-        # Need to check if all feeds have been removed
-        if len(self.feeds) == 0:
-            f.write(u'#')
-            f.write('')
-            f.write(u'\n')
-
-        for feed in self.feeds:
-            if not feed[2]:
-                f.write(u'#')
-            f.write(feed[0].decode('utf8'))
-            if feed[1] is not None:
-                f.write(u' ')
-                f.write(feed[1].decode('utf8'))
-            f.write(u'\n')
-
-    def load_feed_file(self, filename):
-        """
-            Reads content of the feed file/stdin and returns a list of lists
-        """
-        content = []
-
-        if filename is None:
-            f = sys.stdin
-        else:
-            f = open(filename, "r")
-
-        for line in f:
             try:
-                # If input is coming from the command line, convert to utf8
-                if filename is None:
-                    line = line.decode('utf8')
+                ConfigManager.write(this.feeds, filename=filename)
+            except Exception as ex:
+                error_dialog = Gtk.MessageDialog(this,
+                                            Gtk.DIALOG_DESTORY_WITH_PARENT,  
+                                            Gtk.MESSAGE_ERROR,
+                                            Gtk.BUTTONS_CLOSE,
+                                            "Unable to export file", 
+                                            ex,
+                                            0)
+                error_dialog.destroy()              
 
-                if line[0] == "#":
-                    # cut out the comment and define this item as disabled
-                    line = line[1:]
-                    enable = False
-                else:
-                    enable = True
-                temp = line.split()
-                url = temp[0]
-                custom_title = None
-                if len(temp) > 1:
-                    custom_title = " ".join(temp[1:])
-                content.append([url, custom_title, enable])
-            except IndexError:
-                # empty lines are ignored
-                pass
-
-        return content
-
-    def import_opml_file(self, filename):
-        """
-            Reads feeds list from an OPML file
-        """
-        new_feeds = []
-
-        try:
-            tree = et.parse(filename)
-            root = tree.getroot()
-            for outline in root.findall(".//outline[@type='rss']"):
-                url = outline.attrib.get('xmlUrl', '').decode('utf-8')
-                # for now just ignore feed title decoding issues.
-                try:
-                    title = outline.attrib.get('text', '').decode('utf-8').encode('ascii', 'ignore')
-                except:
-                    title = ""
-                new_feeds.append([
-                    url,
-                    title,
-                    False])
-        except Exception as e:
-            dialog = Gtk.MessagseDialog(self, 0,
-                                       Gtk.MessageType.ERROR,
-                                       Gtk.ButtonsType.CANCEL,
-                                       "Failed to import OPML")
-            dialog.format_secondary_text(str(e))
-            dialog.run()
-            dialog.destroy()
-            return new_feeds
-
-        dialog = Gtk.MessageDialog(self, 0,
-                                   Gtk.MessageType.INFO,
-                                   Gtk.ButtonsType.OK,
-                                   "OPML file imported")
-        dialog.format_secondary_text("Imported %d feeds" % len(new_feeds))
-        dialog.run()
-        dialog.destroy()
-
-        return new_feeds
 
 if __name__ == '__main__':
-
-    # get feed file name
-    if len(sys.argv) > 1:
-        feed_file_name = sys.argv[1]
-    else:
-        feed_file_name = None
-
-    window = MainWindow(filename=feed_file_name)
+    # If three parameters are passed in then we need to bypass the GUI and update the feed.
+    if len(sys.argv) == 3:
+        current_url = sys.argv[1]
+        redirect_url = sys.argv[2]
+        try:            
+            ConfigManager.update_redirected_feed(current_url, redirect_url)
+        except Exception as e:
+            sys.stderr.write("Error updating feed\n" + e + "\n")
+        finally:
+            # No need to show the GUI, all the work has been done here.
+            exit()
+    
+    # Display the window to allow the user to manage the feeds.
+    window = MainWindow()
     window.connect("delete-event", Gtk.main_quit)
+    
     window.show_all()
     Gtk.main()
