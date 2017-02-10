@@ -207,7 +207,7 @@ MyApplet.prototype = {
 
             this.cssfile = metadata.path + "/stylesheet.css";
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/helpfile.txt";
+            this.helpfile = metadata.path + "/README.md";
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
             this.UUID = metadata.uuid;
@@ -638,9 +638,9 @@ MyApplet.prototype = {
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem2);
  
-      this.subMenuItem3 = new PopupMenu.PopupMenuItem("Open Website for support using firefox");
+      this.subMenuItem3 = new PopupMenu.PopupMenuItem("View the Help File");
         this.subMenuItem3.connect('activate', Lang.bind(this, function (event) {
-            GLib.spawn_command_line_async('firefox "http://www.pcurtis.com/spices.htm#numa"');
+                GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem3);
 
@@ -949,7 +949,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version v30_3.0.6
+Version v30_3.0.7
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1082,5 +1082,7 @@ Conclusion - change to a drop down selection of options, initially the three cur
 3.0.5     Made much more use of formatSentReceived() because of increase in limits
           Removed a number of commented out blocks to do with cumulative totals and formatting.
 3.0.6     Choice of units for limits and offsets to be Mbytes or Gbytes by drop down widget in settings (configuration) window
-          Maximum Limits and Offsets set to 200000 Mbytes/Gbytes as appropriate 
+          Maximum Limits and Offsets set to 200000 Mbytes/Gbytes as appropriate
+3.0.7     Change from call to firefox to opening README.md to on Context submenu.
+          Delete helpfile.txt from applet folder and Update changelog
 */

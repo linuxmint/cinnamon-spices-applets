@@ -6,7 +6,6 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
-const Calendar = imports.ui.calendar;
 const UPowerGlib = imports.gi.UPowerGlib;
 const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
@@ -127,7 +126,7 @@ MyApplet.prototype = {
     },
 
     _defaults: function() {
-        Util.spawn(['gnome-control-center', 'info']);
+        Util.spawn(['cinnamon-settings', 'default']);
     },
 
     _onMenuKeyPress: function(actor, event) {

@@ -1,0 +1,758 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-03 13:54-0300\n"
+"PO-Revision-Date: 2017-02-03 13:54-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:114
+msgid "Source language"
+msgstr "Quellsprache"
+
+#: applet.js:115
+msgid "Target language"
+msgstr "Zielsprache"
+
+#: applet.js:116
+msgid ""
+"(G) = Language supported only by Google Translate.\n"
+"(Y) = Language supported only by Yandex Translate."
+msgstr ""
+"(G) = Sprache wird nur von Google Übersetzer unterstützt.\n"
+"(Y) = Sprache wird nur von Yandex Übersetzer unterstützt."
+
+#. 3.2->settings-schema.json->pref_service_provider->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->description
+#: applet.js:169 3.2/applet.js:143
+msgid "Service provider"
+msgstr "Dienstanbieter"
+
+#: applet.js:170 3.2/applet.js:144 appletHelper.py:329
+msgid "Language pair"
+msgstr "Sprachenpaar"
+
+#: applet.js:175 3.2/applet.js:149
+msgid "Key combination to translate"
+msgstr "Tastenkombination, um zu übersetzen"
+
+#: applet.js:182 3.2/applet.js:156
+msgid "Key combination to force translation"
+msgstr "Tastenkombination, um Übersetzung zu erzwingen"
+
+#: applet.js:188 applet.js:801 applet.js:822 3.2/applet.js:162
+#: 3.2/applet.js:766 3.2/applet.js:787
+msgid "Unmet dependencies found!!!"
+msgstr "Unerfüllte Abhängigkeiten gefunden!!!"
+
+#: applet.js:189 applet.js:701 applet.js:802 3.2/applet.js:163
+#: 3.2/applet.js:666 3.2/applet.js:767
+msgid "A detailed error has been logged into ~/.cinnamon/glass.log file."
+msgstr ""
+"Ein detaillierter Fehler wurde in der Datei ~/.cinnamonglass.log "
+"protokolliert."
+
+#: applet.js:208 applet.js:219 3.2/applet.js:182 3.2/applet.js:193
+#, javascript-format
+msgid "Set %s as default translation engine."
+msgstr "%s als Standard-Übersetzungsmaschine festlegen"
+
+#: applet.js:234 3.2/applet.js:208
+msgid "Translation history"
+msgstr "Übersetzungschronik"
+
+#: applet.js:240 3.2/applet.js:214
+msgid "Open translation history window."
+msgstr "Fenster der Übersetzungschronik öffnen."
+
+#: applet.js:252 3.2/applet.js:226
+msgid "History storage"
+msgstr "Chronik-Speicherort"
+
+#: applet.js:258 3.2/applet.js:232
+msgid "Open the location where the translation history file is stored."
+msgstr ""
+"Den Speicherort öffnen, an dem die Übersetzungschronik-Datei gespeichert ist."
+
+#: applet.js:266 3.2/applet.js:240
+msgid "Check dependencies"
+msgstr "Abhängigkeiten überprüfen"
+
+#: applet.js:272 3.2/applet.js:246
+msgid "Check whether the dependencies for this applet are met."
+msgstr "Überprüfen, ob die Abhängigkeiten für dieses Applet erfüllt sind."
+
+#: applet.js:280 3.2/applet.js:254
+msgid "Help"
+msgstr "Hilfe"
+
+#: applet.js:286 3.2/applet.js:260
+msgid "Open this applet help file."
+msgstr "Die Hilfedatei dieses Applets öffnen."
+
+#: applet.js:408 3.2/applet.js:382
+msgid "History"
+msgstr "Chronik"
+
+#: applet.js:422 3.2/applet.js:396
+#, javascript-format
+msgid "Go to %s's website"
+msgstr "Auf die Website von %s gehen"
+
+#: applet.js:424 3.2/applet.js:398
+#, javascript-format
+msgid "Powered By %s"
+msgstr "Powered By %s"
+
+#: applet.js:507 3.2/applet.js:481
+msgid "No Yandex API keys were found!!!"
+msgstr "Yandex-API-Schlüssel wurde nicht gefunden!!!"
+
+#: applet.js:508 applet.js:824 3.2/applet.js:482 3.2/applet.js:789
+msgid "Check this applet HELP.md file for instructions."
+msgstr ""
+"Die Hilfedatei »HELP.md« des Applets lesen, um Bedienungsanweisungen zu "
+"erhalten."
+
+#: applet.js:509 applet.js:825 3.2/applet.js:483 3.2/applet.js:790
+msgid "It can be accessed from this applet context menu."
+msgstr "Es kann aus dem Kontextmenü dieses Applets aufgerufen werden."
+
+#: applet.js:566 3.2/applet.js:540
+msgid "API key is invalid"
+msgstr "API-Schlüssel ist ungültig"
+
+#: applet.js:569 3.2/applet.js:543
+msgid "Blocked API key"
+msgstr "Gesperrter API-Schlüssel"
+
+#: applet.js:572 3.2/applet.js:546
+msgid "Exceeded the daily limit on the amount of translated text"
+msgstr ""
+"Das Tageslimit für die Menge an zu übersetzendem Text wurde überschritten"
+
+#: applet.js:575 3.2/applet.js:549
+msgid "Exceeded the maximum text size"
+msgstr "Die maximale Textgröße wurde überschritten"
+
+#: applet.js:578 3.2/applet.js:552
+msgid "The text cannot be translated"
+msgstr "Der Text kann nicht übersetzt werden"
+
+#: applet.js:581 3.2/applet.js:555
+msgid "The specified translation direction is not supported"
+msgstr "Die angegebene Übersetzungsrichtung wird nicht unterstützt"
+
+#: applet.js:700 3.2/applet.js:665
+#, javascript-format
+msgid "Error parsing %s's request."
+msgstr "Fehler beim Analysieren der Anfrage von %s."
+
+#. 0dyseus@PopupTranslator->metadata.json->name
+#: applet.js:821 3.2/applet.js:786
+msgid "Popup Translator"
+msgstr "Popup-Übersetzer"
+
+#: applet.js:831 3.2/applet.js:796
+msgid "All dependencies seem to be met."
+msgstr "Alle Abhängigkeiten scheinen erfüllt zu sein."
+
+#: 0dyseus@PopupTranslator.js:230
+msgid "Copy translated text to clipboard"
+msgstr "Übersetzten Text in die Zwischenablage kopieren"
+
+#: 0dyseus@PopupTranslator.js:236
+msgid "Translate text on provider's website"
+msgstr "Text auf der Website des Anbieters übersetzen"
+
+#: 0dyseus@PopupTranslator.js:242
+msgid "Open translation history"
+msgstr "Übersetzungschronik öffnen"
+
+#: appletHelper.py:311
+msgid "Popup Translator history"
+msgstr "Popup-Übersetzer-Chronik"
+
+#: appletHelper.py:316
+msgid "Date"
+msgstr "Datum"
+
+#: appletHelper.py:324
+msgid "Source text"
+msgstr "Quelltext"
+
+#: appletHelper.py:337
+msgid "Target text"
+msgstr "Zieltext"
+
+#: appletHelper.py:359
+msgid "Reload"
+msgstr "Neu laden"
+
+#: appletHelper.py:360
+msgid "Reload translation history"
+msgstr "Übersetzungschronik neu laden"
+
+#. 3.2->settings-schema.json->pref_custom_label_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "Benutzerdefinierte Beschriftung"
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->description
+msgid "Custom timestamp"
+msgstr "Benutzerdefinierter Zeitstempel"
+
+#. 3.2->settings-schema.json->pref_history_timestamp_custom->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp_custom->tooltip
+msgid ""
+"Choose a custom timestamp for the translation history entries.\n"
+"YYYY: year\n"
+"MM: month\n"
+"DD: day\n"
+"hh: hours\n"
+"mm: minutes\n"
+"ss: seconds"
+msgstr ""
+"Einen benutzerdefinierten Zeitstempel für die Übersetzungschronik "
+"verwenden.\n"
+"YYYY: Jahr\n"
+"MM: Monat\n"
+"DD: Tag\n"
+"hh: Stunde\n"
+"mm: Minute\n"
+"ss: Sekunde"
+
+#. 3.2->settings-schema.json->pref_style_for_footer->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_footer->description
+msgid "Footer style"
+msgstr "Stil der Fußzeile"
+
+#. 3.2->settings-schema.json->pref_style_for_translated_text->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_translated_text->description
+msgid "Translated text style"
+msgstr "Stil des übersetzten Textes"
+
+#. 3.2->settings-schema.json->pref_force_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->description
+msgid "Keyboard shortcut to perform a FORCED translation"
+msgstr "Tastaturkürzel, um eine ERZWUNGENE Übersetzung durchzuführen"
+
+#. 3.2->settings-schema.json->pref_force_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_force_translate_key->tooltip
+msgid ""
+"Choose a keybinding to perform a FORCED translation. A \"forced translation"
+"\" forces the translation of any string stored on the translation history "
+"and overwrites the existing one."
+msgstr ""
+"Wählen Sie eine Tastenbelegung, um eine ERZWUNGENE Übersetzung "
+"durchzuführen. Eine »erzwungene Übersetzung« erzwingt die Übersetzung einer "
+"beliebigen in der Übersetzungschronik gespeicherten Zeichenkette und "
+"überschreibt die vorhandene Übersetzung."
+
+#. 3.2->settings-schema.json->pref_service_provider->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->tooltip
+msgid "Choose the default translation service provider."
+msgstr "Den Standard-Übersetzungsdienstanbieter auswählen."
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Yandex Translator"
+msgstr "Yandex Übersetzer"
+
+#. 3.2->settings-schema.json->pref_service_provider->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_service_provider->options
+msgid "Google Translator"
+msgstr "Goggle Übersetzer"
+
+#. 3.2->settings-schema.json->pref_translate_key->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_translate_key->description
+msgid "Keyboard shortcut to perform a translation"
+msgstr "Tastenkombination zum Ausführen einer Übersetzung"
+
+#. 3.2->settings-schema.json->pref_translate_key->tooltip
+#. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key->tooltip
+msgid "Choose a keybinding to perform a translation."
+msgstr "Wählen Sie eine Tastenbelegung, um eine Übersetzung durchzuführen."
+
+#. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_custom_icon_for_applet->description
+msgid "Custom icon"
+msgstr "Benutzerdefiniertes Symbol"
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->description
+msgid "History window initial height"
+msgstr "Anfängliche Höhe des Chronikfensters"
+
+#. 3.2->settings-schema.json->pref_history_initial_window_height->units
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 3.2->settings-schema.json->pref_history_initial_window_width->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_height->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->units
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->description
+msgid "API keys"
+msgstr "API-Schlüssel"
+
+#. 3.2->settings-schema.json->pref_yandex_api_keys->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_yandex_api_keys->tooltip
+msgid ""
+"Enter one API key per line.\n"
+"Read the HELP.md file (Help item on this applet context menu) found inside "
+"this applet folder to know how to get free Yandex API keys."
+msgstr ""
+"Einen API-Schlüssel pro Zeile eingeben.\n"
+"Lesen Sie die Hilfedatei »HELP.md« (Hilfe-Knopf im Kontextmenü dieses "
+"Applets), welche im Ordner dieses Applets gefunden werden kann, um zu "
+"erfahren, wie Sie einen kostenlosen Yandex-API-Schlüssel erhalten."
+
+#. 3.2->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->description
+msgid "Width to trigger word wrap"
+msgstr "Breite um Auslösen von Zeilenumbruch"
+
+#. 3.2->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_width_to_trigger_word_wrap->tooltip
+msgid ""
+"The \"Source text\" and \"Target text\" columns on the history window will "
+"wrap its text at the width defined by this setting."
+msgstr ""
+"Die Spalten für »Quelltext« und »Zieltext« im Chronikfenster werden den Text "
+"mit der durch diese Einstellung definierten Breite umschließen."
+
+#. 3.2->settings-schema.json->pref_history_initial_window_width->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_initial_window_width->description
+msgid "History window initial width"
+msgstr "Anfängliche Breite des Chronikfensters"
+
+#. 3.2->settings-schema.json->head4->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head4->description
+msgid "Yandex translator settings"
+msgstr "Einstellungen für Yandex Übersetzer"
+
+#. 3.2->settings-schema.json->head3->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head3->description
+msgid "Translation history settings"
+msgstr "Einstellungen für Übersetzungschronik"
+
+#. 3.2->settings-schema.json->head2->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head2->description
+msgid "Popup elements appearance"
+msgstr "Erscheinungsbild der Popup-Elemente"
+
+#. 3.2->settings-schema.json->head1->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head1->description
+msgid "Translation settings"
+msgstr "Übersetzungseinstellungen"
+
+#. 3.2->settings-schema.json->head0->description
+#. 0dyseus@PopupTranslator->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "Applet-Einstellungen"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->description
+msgid "Timestamp for translation history entries"
+msgstr "Zeitstempel für Einträge in Übersetzungschronik"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY MM-DD hh:mm:ss (ISO8601)"
+msgstr "YYYY MM-DD hh:mm:ss (ISO8601)"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "YYYY DD-MM hh:mm:ss (European)"
+msgstr "YYYY DD-MM hh:mm:ss (Europäisch)"
+
+#. 3.2->settings-schema.json->pref_history_timestamp->options
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_history_timestamp->options
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+#. 3.2->settings-schema.json->pref_style_for_language_pair->description
+#. 0dyseus@PopupTranslator->settings-
+#. schema.json->pref_style_for_language_pair->description
+msgid "Language pair style"
+msgstr "Stil von Sprachenpaar"
+
+#. 0dyseus@PopupTranslator->metadata.json->comments
+msgid ""
+"Bug reports and feature requests should be reported on this applet's "
+"repository linked below."
+msgstr ""
+"Fehlerberichte und Feature-Anfragen sollten in dem unten verlinkte Applet-"
+"Repository gemeldet werden."
+
+#. 0dyseus@PopupTranslator->metadata.json->description
+msgid ""
+"Simple translator applet that will allow to display any selected text from "
+"any application on a system in a popup."
+msgstr ""
+"Einfaches Übersetzer-Applet, das es ermöglicht jeden ausgewählten Text aus "
+"jeder Anwendung auf einem System in einem Popup anzuzeigen."
+
+#~ msgid "Estonian"
+#~ msgstr "Estnisch"
+
+#~ msgid "Filipino (G)"
+#~ msgstr "Filipino (G)"
+
+#~ msgid "Gujarati (G)"
+#~ msgstr "Gujarati (G)"
+
+#~ msgid "Kurdish (Kurmanji) (G)"
+#~ msgstr "Kurdisch (Kurmanisch) (G)"
+
+#~ msgid "Lao (G)"
+#~ msgstr "Laotisch (G)"
+
+#~ msgid "Kazakh (G)"
+#~ msgstr "Kasachisch (G)"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgarisch"
+
+#~ msgid "Khmer (G)"
+#~ msgstr "Khmer (G)"
+
+#~ msgid "French"
+#~ msgstr "Französisch"
+
+#~ msgid "Kyrgyz (G)"
+#~ msgstr "Kirgisisch (G)"
+
+#~ msgid "Armenian"
+#~ msgstr "Armenisch"
+
+#~ msgid "Finnish"
+#~ msgstr "Finnisch"
+
+#~ msgid "Frisian (G)"
+#~ msgstr "Friesisch (G)"
+
+#~ msgid "Albanian"
+#~ msgstr "Albanisch"
+
+#~ msgid "Chinese (Y)"
+#~ msgstr "Chinesisch (Y)"
+
+#~ msgid "Haitian Creole"
+#~ msgstr "Haiti-Kreolisch"
+
+#~ msgid "Mongolian (G)"
+#~ msgstr "Mongolisch (G)"
+
+#~ msgid "Serbian"
+#~ msgstr "Serbisch"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malayalam"
+
+#~ msgid "Italian"
+#~ msgstr "Italienisch"
+
+#~ msgid "Xhosa (G)"
+#~ msgstr "Xhosa (G)"
+
+#~ msgid "Afrikaans (G)"
+#~ msgstr "Afrikaans (G)"
+
+#~ msgid "Amharic"
+#~ msgstr "Amharisch"
+
+#~ msgid "German"
+#~ msgstr "Deutsch"
+
+#~ msgid "Slovak"
+#~ msgstr "Slowakisch"
+
+#~ msgid "Maori (G)"
+#~ msgstr "Maori (G)"
+
+#~ msgid "Urdu"
+#~ msgstr "Urdu"
+
+#~ msgid "Polish"
+#~ msgstr "Polnisch"
+
+#~ msgid "Swedish"
+#~ msgstr "Schwedisch"
+
+#~ msgid "Scots Gaelic (G)"
+#~ msgstr "Schottisch-Gälisch (G)"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slowenisch"
+
+#~ msgid "Chinese (G)"
+#~ msgstr "Chinesisch (G)"
+
+#~ msgid "Azerbaijani"
+#~ msgstr "Aserbaidschanisch"
+
+#~ msgid "Nepali (G)"
+#~ msgstr "Nepalesisch (G)"
+
+#~ msgid "Zulu (G)"
+#~ msgstr "Zulu (G)"
+
+#~ msgid "Galician (G)"
+#~ msgstr "Galizisch (G)"
+
+#~ msgid "Danish"
+#~ msgstr "Dänisch"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonesisch"
+
+#~ msgid "Yiddish (G)"
+#~ msgstr "Jiddisch (G)"
+
+#~ msgid "Georgian"
+#~ msgstr "Georgisch"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norwegisch"
+
+#~ msgid "Chichewa"
+#~ msgstr "Chichewa"
+
+#~ msgid "Tamil (G)"
+#~ msgstr "Tamil (G)"
+
+#~ msgid "Thai"
+#~ msgstr "Thailändisch"
+
+#~ msgid "Yoruba (G)"
+#~ msgstr "Yoruba (G)"
+
+#~ msgid "Swahili (G)"
+#~ msgstr "Suaheli (G)"
+
+#~ msgid "Esperanto (G)"
+#~ msgstr "Esperanto (G)"
+
+#~ msgid "Greek"
+#~ msgstr "Griechisch"
+
+#~ msgid "Latvian"
+#~ msgstr "Lettisch"
+
+#~ msgid "English"
+#~ msgstr "Englisch"
+
+#~ msgid "Basque (G)"
+#~ msgstr "Baskisch (G)"
+
+#~ msgid "Sinhala (G)"
+#~ msgstr "Singhalesisch (G)"
+
+#~ msgid "Sindhi (G)"
+#~ msgstr "Sindhi (G)"
+
+#~ msgid "Uzbek (G)"
+#~ msgstr "Usbekisch (G)"
+
+#~ msgid "Punjabi (G)"
+#~ msgstr "Punjabi (G)"
+
+#~ msgid "Bosnian (Y)"
+#~ msgstr "Bosnisch (Y)"
+
+#~ msgid "Arabic"
+#~ msgstr "Arabisch"
+
+#~ msgid "Hebrew (Y)"
+#~ msgstr "Hebräisch (Y)"
+
+#~ msgid "Icelandic"
+#~ msgstr "Isländisch"
+
+#~ msgid "Turkish"
+#~ msgstr "Türkisch"
+
+#~ msgid "Pashto"
+#~ msgstr "Paschtu"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+
+#~ msgid "Hmong"
+#~ msgstr "Hmong"
+
+#~ msgid "Korean"
+#~ msgstr "Koreanisch"
+
+#~ msgid "Malagasy"
+#~ msgstr "Malagasy"
+
+#~ msgid "Hungarian"
+#~ msgstr "Ungarisch"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalanisch"
+
+#~ msgid "Igbo"
+#~ msgstr "Igbo"
+
+#~ msgid "Lithuanian"
+#~ msgstr "Litauisch"
+
+#~ msgid "Malay"
+#~ msgstr "Malaysisch"
+
+#~ msgid "Luxembourgish"
+#~ msgstr "Luxemburgisch"
+
+#~ msgid "Russian"
+#~ msgstr "Russisch"
+
+#~ msgid "Croatian"
+#~ msgstr "Kroatisch"
+
+#~ msgid "Cebuano"
+#~ msgstr "Cebuano"
+
+#~ msgid "Javanese"
+#~ msgstr "Javanisch"
+
+#~ msgid "Shona (G)"
+#~ msgstr "Shona (G)"
+
+#~ msgid "Hebrew (G)"
+#~ msgstr "Hebräisch (G)"
+
+#~ msgid "Sesotho (G)"
+#~ msgstr "Sesotho (G)"
+
+#~ msgid "Czech"
+#~ msgstr "Tschechisch"
+
+#~ msgid "Belarusian"
+#~ msgstr "Weißrussisch"
+
+#~ msgid "Macedonian"
+#~ msgstr "Mazedonisch"
+
+#~ msgid "Persian"
+#~ msgstr "Persisch"
+
+#~ msgid "Sundanese (G)"
+#~ msgstr "Sundanesisch (G)"
+
+#~ msgid "Hausa (G)"
+#~ msgstr "Hausa (G)"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamesisch"
+
+#~ msgid "Romanian"
+#~ msgstr "Rumänisch"
+
+#~ msgid "Somali"
+#~ msgstr "Somali"
+
+#~ msgid "Corsican"
+#~ msgstr "Korsisch"
+
+#~ msgid "Dutch"
+#~ msgstr "Niederländisch"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrainisch"
+
+#~ msgid "Welsh"
+#~ msgstr "Walisisch"
+
+#~ msgid "Samoan (G)"
+#~ msgstr "Samoanisch (G)"
+
+#~ msgid "Maltese"
+#~ msgstr "Maltesisch"
+
+#~ msgid "Telugu (G)"
+#~ msgstr "Telugu (G)"
+
+#~ msgid "Myanmar (Burmese) (G)"
+#~ msgstr "Birmanisch (G)"
+
+#~ msgid "Spanish"
+#~ msgstr "Spanisch"
+
+#~ msgid "Marathi (G)"
+#~ msgstr "Marathi (G)"
+
+#~ msgid "Kannada (G)"
+#~ msgstr "Kannada (G)"
+
+#~ msgid "Tajik (G)"
+#~ msgstr "Tadschikisch (G)"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugiesisch"
+
+#~ msgid "Irish (G)"
+#~ msgstr "Irisch (G)"
+
+#~ msgid "Bengali (G)"
+#~ msgstr "Bengalisch (G)"
+
+#~ msgid "Japanese"
+#~ msgstr "Japanisch"
+
+#~ msgid "Latin (G)"
+#~ msgstr "Lateinisch (G)"
+
+#~ msgid "Hawaiian (G)"
+#~ msgstr "Hawaiisch (G)"
+
+#~ msgid "Keyboard shortcut to perform a forced translation"
+#~ msgstr "Tastenkombination zum Erzwingen einer Übersetzung"
+
+#~ msgid "Auto"
+#~ msgstr "Automatisch"

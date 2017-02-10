@@ -47,7 +47,7 @@ MyApplet.prototype = {
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
             this.changelog = metadata.path + "/changelog.txt";
-            this.helpfile = metadata.path + "/help.txt";
+            this.helpfile = metadata.path + "/README.md";
             this.gputempScript= metadata.path + "/gputempscript.sh";
             this.appletPath = metadata.path;
             this.UUID = metadata.uuid;
@@ -241,7 +241,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.1.6
+Version v30_3.2.0
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -264,4 +264,5 @@ v30_3.1.5 New tick box on configuration screen to access enhanced functionality 
           http://sourceforge.net/projects/virtualgl/files/VirtualGL/
 
 v30_3.1.6 Corrected icon.png in applet folder which is used by Add Applets
+v30_3.2.0 Changed help file from help.txt to README.md
 */

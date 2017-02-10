@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-12 05:39-0300\n"
+"POT-Creation-Date: 2017-01-22 19:51-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
@@ -21,221 +21,226 @@ msgstr ""
 msgid "Menu"
 msgstr "Menú"
 
-#: applet.js:1833 3.2/applet.js:1833
+#: applet.js:226 applet.js:598 3.2/applet.js:226 3.2/applet.js:598
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Remover '%s'"
+
+#: applet.js:1847 3.2/applet.js:1847
 msgid "This file is no longer available"
 msgstr "Este archivo ya no está disponible"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:1876 3.2/applet.js:1876
+#: applet.js:1895 3.2/applet.js:1895
 msgid "No recent documents"
 msgstr "Sin documentos recientes"
 
-#: applet.js:2006 3.2/applet.js:2006
+#: applet.js:2025 3.2/applet.js:2025
 msgid "No recent applications"
 msgstr "Sin aplicaciones recientes"
 
-#: applet.js:2097 3.2/applet.js:2097
+#: applet.js:2116 3.2/applet.js:2116
 msgid "Favorites"
 msgstr "Favoritos"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2506 applet.js:3198 3.2/applet.js:2506 3.2/applet.js:3198
+#: applet.js:2525 applet.js:3217 3.2/applet.js:2525 3.2/applet.js:3217
 msgid "Lock screen"
 msgstr "Bloquear pantalla"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2509 applet.js:3197 3.2/applet.js:2509 3.2/applet.js:3197
+#: applet.js:2528 applet.js:3216 3.2/applet.js:2528 3.2/applet.js:3216
 msgid "Lock the screen"
 msgstr "Bloquear la pantalla"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2543 applet.js:3229 3.2/applet.js:2543 3.2/applet.js:3229
+#: applet.js:2562 applet.js:3248 3.2/applet.js:2562 3.2/applet.js:3248
 msgid "Logout"
 msgstr "Cerrar sesión"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2546 applet.js:3228 3.2/applet.js:2546 3.2/applet.js:3228
+#: applet.js:2565 applet.js:3247 3.2/applet.js:2565 3.2/applet.js:3247
 msgid "Leave the session"
 msgstr "Cerrar la sesión"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2567 applet.js:3247 3.2/applet.js:2567 3.2/applet.js:3247
+#: applet.js:2586 applet.js:3266 3.2/applet.js:2586 3.2/applet.js:3266
 msgid "Quit"
 msgstr "Salir"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2570 applet.js:3246 3.2/applet.js:2570 3.2/applet.js:3246
+#: applet.js:2589 applet.js:3265 3.2/applet.js:2589 3.2/applet.js:3265
 msgid "Shutdown the computer"
 msgstr "Apagar el equipo"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:2875 3.2/applet.js:2875
+#: applet.js:2894 3.2/applet.js:2894
 msgid "Type to search..."
 msgstr "Escriba para buscar..."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: applet.js:3265 3.2/applet.js:3265
+#: applet.js:3284 3.2/applet.js:3284
 msgid "Open the menu editor"
 msgstr "Abrir el editor de menús"
 
-#: applet.js:3270 3.2/applet.js:3270
+#: applet.js:3289 3.2/applet.js:3289
 msgid "Help"
 msgstr "Ayuda"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:232
+#: 0dyseus@CustomCinnamonMenu.js:266
 msgid "Please provide your password to uninstall this application"
 msgstr "Por favor, proporcione su contraseña para desinstalar esta aplicación."
 
-#: 0dyseus@CustomCinnamonMenu.js:505
+#: 0dyseus@CustomCinnamonMenu.js:539
 msgid "Add to panel"
 msgstr "Añadir al panel"
 
-#: 0dyseus@CustomCinnamonMenu.js:508
+#: 0dyseus@CustomCinnamonMenu.js:542
 msgid "Add this application to the Panel launchers applet."
 msgstr "Agregar esta aplicación a los Lanzadores del panel."
 
-#: 0dyseus@CustomCinnamonMenu.js:516
+#: 0dyseus@CustomCinnamonMenu.js:550
 msgid "Add to desktop"
 msgstr "Añadir al escritorio"
 
-#: 0dyseus@CustomCinnamonMenu.js:519
+#: 0dyseus@CustomCinnamonMenu.js:553
 msgid "Add this application to the Desktop."
 msgstr "Agregar un acceso directo a esta aplicación en el Escritorio."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:528
+#: 0dyseus@CustomCinnamonMenu.js:562
 msgid "Remove from favorites"
 msgstr "Quitar de favoritos"
 
-#: 0dyseus@CustomCinnamonMenu.js:531
+#: 0dyseus@CustomCinnamonMenu.js:565
 msgid "Remove application from your favorites."
 msgstr "Quitar aplicación de favoritos."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:537
+#: 0dyseus@CustomCinnamonMenu.js:571
 msgid "Add to favorites"
 msgstr "Añadir a favoritos"
 
-#: 0dyseus@CustomCinnamonMenu.js:540
+#: 0dyseus@CustomCinnamonMenu.js:574
 msgid "Add application to your favorites."
 msgstr "Añadir esta aplicación a los favoritos."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:550
+#: 0dyseus@CustomCinnamonMenu.js:584
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: 0dyseus@CustomCinnamonMenu.js:553
+#: 0dyseus@CustomCinnamonMenu.js:587
 msgid "Uninstall application from your system."
 msgstr "Desinstalar aplicación de su sistema."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:562
+#: 0dyseus@CustomCinnamonMenu.js:596
 msgid "Run with NVIDIA GPU"
 msgstr "Ejecutar con GPU NVIDIA"
 
-#: 0dyseus@CustomCinnamonMenu.js:565
+#: 0dyseus@CustomCinnamonMenu.js:599
 msgid "Run application through optirun command (Bumblebee)."
 msgstr "Ejecutar aplicación a través del comando optirun (Bumblebee)."
 
-#: 0dyseus@CustomCinnamonMenu.js:571
+#: 0dyseus@CustomCinnamonMenu.js:605
 msgid "Run as root"
 msgstr "Ejecutar como root"
 
-#: 0dyseus@CustomCinnamonMenu.js:574
+#: 0dyseus@CustomCinnamonMenu.js:608
 msgid "Run application as root."
 msgstr "Ejecutar esta aplicación como root."
 
-#: 0dyseus@CustomCinnamonMenu.js:580
+#: 0dyseus@CustomCinnamonMenu.js:614
 msgid "Edit .desktop file"
 msgstr "Editar archivo .desktop"
 
-#: 0dyseus@CustomCinnamonMenu.js:583
+#: 0dyseus@CustomCinnamonMenu.js:617
 msgid "Edit this application .desktop file with a text editor."
 msgstr "Editar el archivo .desktop de esta aplicación con un editor de textos."
 
-#: 0dyseus@CustomCinnamonMenu.js:589
+#: 0dyseus@CustomCinnamonMenu.js:623
 msgid "Open .desktop file folder"
 msgstr "Abrir carpeta del archivo .desktop"
 
-#: 0dyseus@CustomCinnamonMenu.js:592
+#: 0dyseus@CustomCinnamonMenu.js:626
 msgid "Open the folder containg this application .desktop file."
 msgstr "Abrir la carpeta que contiene el archivo .desktop de esta aplicación."
 
-#: 0dyseus@CustomCinnamonMenu.js:599
+#: 0dyseus@CustomCinnamonMenu.js:633
 msgid "Run from terminal"
 msgstr "Ejecutar desde terminal"
 
-#: 0dyseus@CustomCinnamonMenu.js:602
+#: 0dyseus@CustomCinnamonMenu.js:636
 msgid "Run application from a terminal."
 msgstr "Ejecutar aplicación desde una terminal."
 
-#: 0dyseus@CustomCinnamonMenu.js:609
+#: 0dyseus@CustomCinnamonMenu.js:643
 msgid "Run from terminal as root"
 msgstr "Ejecutar desde terminal como root"
 
-#: 0dyseus@CustomCinnamonMenu.js:612
+#: 0dyseus@CustomCinnamonMenu.js:646
 msgid "Run application from a terminal as root."
 msgstr "Ejecutar aplicación desde una terminal como root."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1143
+#: 0dyseus@CustomCinnamonMenu.js:1169
 msgid "Open with"
 msgstr "Abrir con"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1195
+#: 0dyseus@CustomCinnamonMenu.js:1220
 msgid "Other application..."
 msgstr "Otra aplicación..."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1290 0dyseus@CustomCinnamonMenu.js:1341
+#: 0dyseus@CustomCinnamonMenu.js:1315 0dyseus@CustomCinnamonMenu.js:1366
 msgid "Clear list"
 msgstr "Borrar lista"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1422
+#: 0dyseus@CustomCinnamonMenu.js:1447
 msgid "All Applications"
 msgstr "Todas las aplicaciones"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1470
+#: 0dyseus@CustomCinnamonMenu.js:1495
 msgid "Places"
 msgstr "Lugares"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:1512
+#: 0dyseus@CustomCinnamonMenu.js:1537
 msgid "Recent Files"
 msgstr "Archivos recientes"
 
-#: 0dyseus@CustomCinnamonMenu.js:1903
+#: 0dyseus@CustomCinnamonMenu.js:1928
 msgid "Recent Applications"
 msgstr "Aplicaciones recientes"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
-#: 0dyseus@CustomCinnamonMenu.js:2045
+#: 0dyseus@CustomCinnamonMenu.js:2070
 msgid "Account details"
 msgstr "Detalles de cuenta"
 
@@ -249,11 +254,11 @@ msgstr "Ignorar Favoritos"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_recent_apps_ignore_favorites->tooltip
 msgid ""
-"If enabled, applications set as Favorite will not be stored in the \"Recent Applications\" "
-"category."
+"If enabled, applications set as Favorite will not be stored in the \"Recent "
+"Applications\" category."
 msgstr ""
-"Con esta opción habilitada, las aplicaciones guardadas en Favoritos no serán almacenadas en la "
-"categoría \"Aplicaciones Recientes\"."
+"Con esta opción habilitada, las aplicaciones guardadas en Favoritos no serán "
+"almacenadas en la categoría \"Aplicaciones Recientes\"."
 
 #. 3.2->settings-schema.json->pref_command_8_description->description
 #. 3.2->settings-schema.json->pref_command_7_description->description
@@ -516,20 +521,24 @@ msgstr "Espacio a la izquierda:"
 
 #. 3.2->settings-schema.json->custom_launchers_label->description
 msgid ""
-"Fields marked with asterisks (*) are mandatory. Otherwise, the button will not appear on the "
-"menu.\n"
-"Icons can be any icon name or path to an icon file (symbolic or full color).\n"
+"Fields marked with asterisks (*) are mandatory. Otherwise, the button will "
+"not appear on the menu.\n"
+"Icons can be any icon name or path to an icon file (symbolic or full "
+"color).\n"
 "Commands can be any command (as entered in a terminal) or a path to a file.\n"
 "If the file is an executable script, an attempt to execute it will be made.\n"
-"Otherwise, the file will be opened with the systems handler for that file type."
+"Otherwise, the file will be opened with the systems handler for that file "
+"type."
 msgstr ""
-"Los campos marcados con asteriscos (*) son obligatorios. De lo contrario, el botón no aparecerá "
-"en el menú.\n"
-"Íconos pueden ser cualquier nombre de ícono o una ruta de acceso a un archivo de icono (color o "
-"simbólico).\n"
+"Los campos marcados con asteriscos (*) son obligatorios. De lo contrario, el "
+"botón no aparecerá en el menú.\n"
+"Íconos pueden ser cualquier nombre de ícono o una ruta de acceso a un "
+"archivo de icono (color o simbólico).\n"
 "Comandos pueden ser cualquier comando o una ruta de acceso a un archivo.\n"
-"Si el archivo es un script ejecutable, un intento de ejecución se llevará a cabo.\n"
-"Si el archivo no es un ejecutable, el sistema decidirá con qué programa abrirlo."
+"Si el archivo es un script ejecutable, un intento de ejecución se llevará a "
+"cabo.\n"
+"Si el archivo no es un ejecutable, el sistema decidirá con qué programa "
+"abrirlo."
 
 #. 3.2->settings-schema.json->pref_show_places->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -554,12 +563,12 @@ msgstr "Editor de texto personalizado:"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_custom_editor_for_edit_desktop_file_on_context->tooltip
 msgid ""
-"Set a custom text editor to open .desktop files (just the name of the text editor executable or "
-"the path to it).\n"
+"Set a custom text editor to open .desktop files (just the name of the text "
+"editor executable or the path to it).\n"
 "Leave it blank to let the system decide."
 msgstr ""
-"Establecer un editor de textos para abrir archivos .desktop (sólo el nombre del ejecutable o la "
-"ruta de acceso al mismo).\n"
+"Establecer un editor de textos para abrir archivos .desktop (sólo el nombre "
+"del ejecutable o la ruta de acceso al mismo).\n"
 "Dejar en blanco para que el sistema decida."
 
 #. 3.2->settings-schema.json->pref_user_picture_size->description
@@ -572,18 +581,21 @@ msgstr "Tamaño de la imagen del usuario:"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_recently_used_apps_separator->description
 msgid "Display separator after \"Recent Applications\" category (WARNING)"
-msgstr "Mostrar separador debajo de la categoría \"Aplicaciones recientes\" (ADVERTENCIA)"
+msgstr ""
+"Mostrar separador debajo de la categoría \"Aplicaciones recientes"
+"\" (ADVERTENCIA)"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_separator->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_recently_used_apps_separator->tooltip
 msgid ""
-"This option, when enabled, will break the menu keyboard navigation. Only enable this option if "
-"you will never use the keyboard to navigate the menu.\n"
+"This option, when enabled, will break the menu keyboard navigation. Only "
+"enable this option if you will never use the keyboard to navigate the menu.\n"
 "This message is only temporary until I figure out how to fix this."
 msgstr ""
-"Esta opción, cuando está habilitada, romperá la navegación del teclado del menú. Sólo active esta "
-"opción si nunca utilizará el teclado para navegar por el menú."
+"Esta opción, cuando está habilitada, romperá la navegación del teclado del "
+"menú. Sólo active esta opción si nunca utilizará el teclado para navegar por "
+"el menú."
 
 #. 3.2->settings-schema.json->pref_menu_layout_first_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -835,7 +847,8 @@ msgid ""
 "Press any of the \"Save settings\" buttons for the settings to take effect."
 msgstr ""
 "La mayoría de las preferencias no son guardadas automáticamente.\n"
-"Presionar cualquiera de los botones \"Click aquí para guardar preferencias\" para guardarlas."
+"Presionar cualquiera de los botones \"Click aquí para guardar preferencias\" "
+"para guardarlas."
 
 #. 3.2->settings-schema.json->section_appearance_applicatons_box->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance6->description
@@ -856,10 +869,12 @@ msgstr "Seleccionar categorías al pasar el ratón (EXPERIMENTAL)"
 #. 3.2->settings-schema.json->pref_cat_select_on_hover->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_cat_select_on_hover->tooltip
-msgid "If disabled, categories can be selected by clicking on them instead of just hovering."
+msgid ""
+"If disabled, categories can be selected by clicking on them instead of just "
+"hovering."
 msgstr ""
-"Con esta opción deshabilitada, las categorías se pueden seleccionar haciendo clic en ellas en "
-"lugar de simplemente al pasar el ratón."
+"Con esta opción deshabilitada, las categorías se pueden seleccionar haciendo "
+"clic en ellas en lugar de simplemente al pasar el ratón."
 
 #. 3.2->settings-schema.json->pref_show_add_to_panel_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -958,7 +973,9 @@ msgstr "Espacio inferior:"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_apps_info_box_alignment_to_the_left->description
 msgid "Align application info box text to the left"
-msgstr "Alinear el texto del cuadro de información sobre las aplicaciones a la izquierda"
+msgstr ""
+"Alinear el texto del cuadro de información sobre las aplicaciones a la "
+"izquierda"
 
 #. 3.2->settings-schema.json->pref_menu_layout_second_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1003,11 +1020,12 @@ msgstr "Ícono personalizado para el botón \"Bloquear pantalla\":"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_shutdown_button_custom_icon->tooltip
 msgid ""
-"Only valid if the System buttons box is placed next to the Custom launchers box.\n"
+"Only valid if the System buttons box is placed next to the Custom launchers "
+"box.\n"
 "Leave blank to use default."
 msgstr ""
-"Válido únicamente si los botones de sistema están ubicados al lado de los lanzadores "
-"personalizados.\n"
+"Válido únicamente si los botones de sistema están ubicados al lado de los "
+"lanzadores personalizados.\n"
 "Dejar en blanco para usar ícono predeterminado."
 
 #. 3.2->settings-schema.json->pref_display_application_icons->description
@@ -1032,21 +1050,24 @@ msgstr "Auto-ajustar el ancho del cuadro de búsqueda con el ancho del menú"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_autofit_searchbox_width->tooltip
 msgid ""
-"If enabled, Custom width for search box will be ignored. Also, this option is ignored if the "
-"custom launchers box is placed at either side of the searchbox."
+"If enabled, Custom width for search box will be ignored. Also, this option "
+"is ignored if the custom launchers box is placed at either side of the "
+"searchbox."
 msgstr ""
-"Con esta opción habilitada, la opción \"Anchura personalizada para la caja de búsqueda\" será "
-"ignorada. Además, esta opción será ignora si la sección de lanzadores personalizados se coloca a "
-"cualquier lado de la caja de búsqueda."
+"Con esta opción habilitada, la opción \"Anchura personalizada para la caja "
+"de búsqueda\" será ignorada. Además, esta opción será ignora si la sección "
+"de lanzadores personalizados se coloca a cualquier lado de la caja de "
+"búsqueda."
 
 #. 3.2->settings-schema.json->custom_padding_label->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance7->description
 msgid ""
-"Note: Most themes stylesheets come with hardcoded sizes for certain elemets.\n"
+"Note: Most themes stylesheets come with hardcoded sizes for certain "
+"elemets.\n"
 "This section is for overriding those stylesheets."
 msgstr ""
-"Nota: La mayoría de los temas del sistema vienen con las medidas predefinidas para ciertos "
-"elementos del menú.\n"
+"Nota: La mayoría de los temas del sistema vienen con las medidas "
+"predefinidas para ciertos elementos del menú.\n"
 "Esta sección es sobrescribir esos valores predefinidos."
 
 #. 3.2->settings-schema.json->pref_use_a_custom_icon_for_applet->description
@@ -1059,7 +1080,9 @@ msgstr "Usar un ícono personalizado"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_use_a_custom_icon_for_applet->tooltip
 msgid "Unchecking this allows the theme to set the icon"
-msgstr "Si se deselecciona esta opción, se le permite al tema del sistema establecer el icono"
+msgstr ""
+"Si se deselecciona esta opción, se le permite al tema del sistema establecer "
+"el icono"
 
 #. 3.2->settings-schema.json->pref_custom_command_icon_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1080,7 +1103,8 @@ msgid ""
 "Enter custom icon for the \"Recent Applications\" category.\n"
 "Only icon names are allowed."
 msgstr ""
-"Ingresar un ícono personalizado para la categoría \"Aplicaciones recientes\".\n"
+"Ingresar un ícono personalizado para la categoría \"Aplicaciones recientes"
+"\".\n"
 "Sólo nombres de íconos están permitidos."
 
 #. 3.2->settings-schema.json->pref_fuzzy_search_enabled->description
@@ -1093,11 +1117,13 @@ msgstr "Habilitar búsqueda difusa (EXPERIMENTAL)"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_fuzzy_search_enabled->tooltip
 msgid ""
-"This option enables an infinitelly better sorting of search results. It's marked as experimental "
-"because it has a huge impact on performance every time the search box is cleared."
+"This option enables an infinitelly better sorting of search results. It's "
+"marked as experimental because it has a huge impact on performance every "
+"time the search box is cleared."
 msgstr ""
-"Esta opción permite una clasificación infinitamente mejor de los resultados de búsqueda. Está "
-"marcada como experimental porque tiene un enorme impacto en el rendimiento."
+"Esta opción permite una clasificación infinitamente mejor de los resultados "
+"de búsqueda. Está marcada como experimental porque tiene un enorme impacto "
+"en el rendimiento."
 
 #. 3.2->settings-schema.json->pref_privilege_elevator->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1110,12 +1136,13 @@ msgstr "Elevador de privilegios"
 #. schema.json->pref_privilege_elevator->tooltip
 msgid ""
 "The graphical front-end to use to run applications as root.\n"
-"This is used by the \"Open as Root\" context menu and the option \"Gain privileges of not owned "
-"files\"."
+"This is used by the \"Open as Root\" context menu and the option \"Gain "
+"privileges of not owned files\"."
 msgstr ""
 "La interfaz gráfica que se utilizará para ejecutar aplicaciones como root.\n"
-"Esto es utilizado por las opciones \"ejecutar como root\" del menú contextual y cuando la opción "
-"\"Ganar privilegios de archivos que no son propiedad del usuario\" está activada. "
+"Esto es utilizado por las opciones \"ejecutar como root\" del menú "
+"contextual y cuando la opción \"Ganar privilegios de archivos que no son "
+"propiedad del usuario\" está activada. "
 
 #. 3.2->settings-schema.json->pref_privilege_elevator->options
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1273,12 +1300,13 @@ msgstr "Invertir el orden de las aplicaciones recientemente usadas"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_recently_used_apps_invert_order->tooltip
 msgid ""
-"By default, the most recently used application is at the top of the list. With this option "
-"enabled, the most recently used application will be at the bottom of the list."
+"By default, the most recently used application is at the top of the list. "
+"With this option enabled, the most recently used application will be at the "
+"bottom of the list."
 msgstr ""
-"De forma predeterminada, la aplicación más recientemente utilizada se encuentra el inicio de la "
-"lista. Con esta opción habilitada, la aplicación más recientemente usada va a estar en la parte "
-"inferior de la lista."
+"De forma predeterminada, la aplicación más recientemente utilizada se "
+"encuentra el inicio de la lista. Con esta opción habilitada, la aplicación "
+"más recientemente usada va a estar en la parte inferior de la lista."
 
 #. 3.2->settings-schema.json->pref_show_recents_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1290,11 +1318,11 @@ msgstr "Mostrar categoría \"Documentos recientes\""
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_show_recents_button->tooltip
 msgid ""
-"For people who want the \"Recent documents\" category hidden without disabling recent documents "
-"globally."
+"For people who want the \"Recent documents\" category hidden without "
+"disabling recent documents globally."
 msgstr ""
-"Para la gente que quiere ocultar la categoría \"Documentos recientes\" si deshabilitar los "
-"documentos recientes globalmente."
+"Para la gente que quiere ocultar la categoría \"Documentos recientes\" si "
+"deshabilitar los documentos recientes globalmente."
 
 #. 3.2->settings-schema.json->pref_max_recent_files->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1321,7 +1349,8 @@ msgid ""
 "Choose the terminal emulator used by all launch from terminal options.\n"
 "IMPORTANT!!! The terminal emulator has to support the -e argument."
 msgstr ""
-"Elegir el emulador de terminal utilizado por todas las opciones \"Ejecutar desde terminal...\".\n"
+"Elegir el emulador de terminal utilizado por todas las opciones \"Ejecutar "
+"desde terminal...\".\n"
 "¡¡¡IMPORTANTE!!! El emulador de terminal tiene que soportar el argumento -e."
 
 #. 3.2->settings-schema.json->pref_show_bumblebee_on_context->description
@@ -1334,7 +1363,8 @@ msgstr "Mostrar \"Ejecutar con GPU NVIDIA\" en el menú contextual"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_appinfo_display_method->description
 msgid "Display method for information about applications:"
-msgstr "Método de visualización para mostrar información sobre las aplicaciones:"
+msgstr ""
+"Método de visualización para mostrar información sobre las aplicaciones:"
 
 #. 3.2->settings-schema.json->pref_appinfo_display_method->options
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1352,7 +1382,9 @@ msgstr "Cuadro de información"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_set_info_box_padding->description
 msgid "Set a custom padding for the Applications info box"
-msgstr "Establecer un espacio personalizado para la caja de información sobre aplicaciones"
+msgstr ""
+"Establecer un espacio personalizado para la caja de información sobre "
+"aplicaciones"
 
 #. 3.2->settings-schema.json->pref_logout_button_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1383,13 +1415,13 @@ msgstr "Usar método alternativo para seleccionar categorías (EXPERIMENTAL)"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_use_alternate_vector_box->tooltip
 msgid ""
-"With this option enabled, an alternate method to select categories will be used. This method can "
-"improve the performance of the menu and is extracted from the applet called Configurable Menu by "
-"lestcape."
+"With this option enabled, an alternate method to select categories will be "
+"used. This method can improve the performance of the menu and is extracted "
+"from the applet called Configurable Menu by lestcape."
 msgstr ""
-"Con esta opción activada, se utilizará un método alternativo para seleccionar categorías. Este "
-"método puede mejorar el rendimiento del menú y ha sido extraído del applet llamado Configurable "
-"Menu, creado por lestcape."
+"Con esta opción activada, se utilizará un método alternativo para "
+"seleccionar categorías. Este método puede mejorar el rendimiento del menú y "
+"ha sido extraído del applet llamado Configurable Menu, creado por lestcape."
 
 #. 3.2->settings-schema.json->pref_remember_recently_used_apps->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1401,13 +1433,16 @@ msgstr "Mostrar la categoría \"Aplicaciones recientes\""
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_remember_recently_used_apps->tooltip
 msgid ""
-"From the moment this option is enabled, every application launched from the menu will be stored "
-"and displayed in the \"Recent Applications\" category.\n"
-"Every time this option is disabled, the list of recently used applications will be cleared."
+"From the moment this option is enabled, every application launched from the "
+"menu will be stored and displayed in the \"Recent Applications\" category.\n"
+"Every time this option is disabled, the list of recently used applications "
+"will be cleared."
 msgstr ""
-"Desde el momento en que esta opción está activada, todas las aplicaciones lanzadas desde el menú "
-"serán almacenadas y estarán listadas en la categoría llamada \"Aplicaciones recientes\".\n"
-"Cada vez que esta opción se desactiva, se borrará la lista de aplicaciones usadas recientemente."
+"Desde el momento en que esta opción está activada, todas las aplicaciones "
+"lanzadas desde el menú serán almacenadas y estarán listadas en la categoría "
+"llamada \"Aplicaciones recientes\".\n"
+"Cada vez que esta opción se desactiva, se borrará la lista de aplicaciones "
+"usadas recientemente."
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1444,11 +1479,12 @@ msgstr "Mostrar \"Editar archivo .desktop\" en el menú contextual"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_show_edit_desktop_file_on_context->tooltip
 msgid ""
-"It adds to the applications context menu an entry that will allow you to open the current "
-"selected application's .desktop file in a text editor."
+"It adds to the applications context menu an entry that will allow you to "
+"open the current selected application's .desktop file in a text editor."
 msgstr ""
-"Esta opción activada agrega al menú contextual para aplicaciones una nueva entrada que permitirá "
-"abrir el archivo .desktop de la aplicación seleccionada en un editor de texto."
+"Esta opción activada agrega al menú contextual para aplicaciones una nueva "
+"entrada que permitirá abrir el archivo .desktop de la aplicación "
+"seleccionada en un editor de texto."
 
 #. 3.2->settings-schema.json->pref_shutdown_button_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1472,12 +1508,13 @@ msgstr "Intercambiar la lista de categorías"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_swap_categories_box->tooltip
 msgid ""
-"By default, the categories box is to the left of the applications list. With this option enabled, "
-"the categories box will be placed to the right of the applications list."
+"By default, the categories box is to the left of the applications list. With "
+"this option enabled, the categories box will be placed to the right of the "
+"applications list."
 msgstr ""
-"De forma predeterminada, la lista de categorías está ubicada a la izquierda de la lista de "
-"aplicaciones. Con esta opción activada, el cuadro de categorías será colocado a la derecha de la "
-"lista de aplicaciones."
+"De forma predeterminada, la lista de categorías está ubicada a la izquierda "
+"de la lista de aplicaciones. Con esta opción activada, el cuadro de "
+"categorías será colocado a la derecha de la lista de aplicaciones."
 
 #. 3.2->settings-schema.json->pref_show_add_to_desktop_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1531,17 +1568,19 @@ msgstr "Ganar privilegios de archivos que no son propiedad del usuario"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_gain_privileges_on_context->tooltip
 msgid ""
-"If enabled, this options will open as root .desktop files that aren't owned by the current user.\n"
+"If enabled, this options will open as root .desktop files that aren't owned "
+"by the current user.\n"
 "\n"
-"This isn't needed for all text editors. Some text editors will allow you to open and edit not "
-"owned files and will ask for the root password at the moment of saving the changes."
+"This isn't needed for all text editors. Some text editors will allow you to "
+"open and edit not owned files and will ask for the root password at the "
+"moment of saving the changes."
 msgstr ""
-"Con esta optión habilitada, los archivos .desktop que no son propiedad del usuario actual serán "
-"abiertos como root.\n"
+"Con esta optión habilitada, los archivos .desktop que no son propiedad del "
+"usuario actual serán abiertos como root.\n"
 "\n"
-"Esto no es necesario para todos los editores de texto. Algunos editores de texto permiten abrir y "
-"editar archivos que no son propiedad del usuario actual y pedirán la contraseña de root en el "
-"momento de guardar los cambios."
+"Esto no es necesario para todos los editores de texto. Algunos editores de "
+"texto permiten abrir y editar archivos que no son propiedad del usuario "
+"actual y pedirán la contraseña de root en el momento de guardar los cambios."
 
 #. 3.2->settings-schema.json->pref_enable_autoscroll->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1552,8 +1591,12 @@ msgstr "Habilitar desplazamiento automático en la lista de aplicaciones"
 #. 3.2->settings-schema.json->pref_enable_autoscroll->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_enable_autoscroll->tooltip
-msgid "Choose whether or not to enable smooth auto-scrolling in the application list."
-msgstr "Elegir si desea o no habilitar desplazamiento automático en la lista de aplicaciones."
+msgid ""
+"Choose whether or not to enable smooth auto-scrolling in the application "
+"list."
+msgstr ""
+"Elegir si desea o no habilitar desplazamiento automático en la lista de "
+"aplicaciones."
 
 #. 3.2->settings-schema.json->pref_show_lock_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1571,7 +1614,8 @@ msgstr "Habilitar buscar en sistema de archivos en el cuadro de búsqueda"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_search_filesystem->tooltip
 msgid "Allows path entry in the menu search box."
-msgstr "Permitir la entrada de rutas de acceso en el cuadro de búsqueda del menú."
+msgstr ""
+"Permitir la entrada de rutas de acceso en el cuadro de búsqueda del menú."
 
 #. 3.2->settings-schema.json->pref_hide_allapps_category->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1583,7 +1627,8 @@ msgstr "Esconder la categoría \"Todas las aplicaciones\""
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_info_box_title_font_size->description
 msgid "Applications info box title font size:"
-msgstr "Tamaño de fuente para el título de la caja de información sobre aplicaciones:"
+msgstr ""
+"Tamaño de fuente para el título de la caja de información sobre aplicaciones:"
 
 #. 3.2->settings-schema.json->pref_info_box_title_font_size->units
 #. 3.2->settings-schema.json->pref_max_width_for_buttons->units
@@ -1607,13 +1652,17 @@ msgstr "Ancho máximo de botones:"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_max_width_for_buttons->tooltip
 msgid "Define the maximum width of menu items inside the applications box."
-msgstr "Definir el ancho máximo de elementos de menú dentro del cuadro de aplicaciones."
+msgstr ""
+"Definir el ancho máximo de elementos de menú dentro del cuadro de "
+"aplicaciones."
 
 #. 3.2->settings-schema.json->pref_info_box_description_font_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_info_box_description_font_size->description
 msgid "Applications info box description font size:"
-msgstr "Tamaño de fuente para la descripción de la caja de información sobre aplicaciones:"
+msgstr ""
+"Tamaño de fuente para la descripción de la caja de información sobre "
+"aplicaciones:"
 
 #. 3.2->settings-schema.json->pref_user_picture_stylized->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1625,11 +1674,11 @@ msgstr "Estilizar la imagen del usuario"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_user_picture_stylized->tooltip
 msgid ""
-"With this option enabled, the box containing the user picture will have the same style as the "
-"Favorites box."
+"With this option enabled, the box containing the user picture will have the "
+"same style as the Favorites box."
 msgstr ""
-"Con esta opción habilitada, el cuadro que contiene la imagen del usuario tendrá el mismo estilo "
-"que la caja de Favoritos."
+"Con esta opción habilitada, el cuadro que contiene la imagen del usuario "
+"tendrá el mismo estilo que la caja de Favoritos."
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_placement->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1665,14 +1714,15 @@ msgstr "Mostrar feedback al pasar el ratón por encima"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_use_hover_feedback->tooltip
 msgid ""
-"If enabled, and the user picture is shown, every time an application/favorite/place/recent file "
-"is hovered or selected with keyboard navigation, its icon will be displayed where the user "
-"picture is located."
+"If enabled, and the user picture is shown, every time an application/"
+"favorite/place/recent file is hovered or selected with keyboard navigation, "
+"its icon will be displayed where the user picture is located."
 msgstr ""
-"Si esta opción está activada, y la opción de mostrar la imagen del usuario también activada, cada "
-"vez que se coloque el ratón sobre ítem de aplicación/favorito/lugar/archivo reciente o se "
-"seleccione uno de estos ítems con la navegación por teclado, aparecerá el icono de tal ítem donde "
-"se encuentra la imagen de usuario."
+"Si esta opción está activada, y la opción de mostrar la imagen del usuario "
+"también activada, cada vez que se coloque el ratón sobre ítem de aplicación/"
+"favorito/lugar/archivo reciente o se seleccione uno de estos ítems con la "
+"navegación por teclado, aparecerá el icono de tal ítem donde se encuentra la "
+"imagen de usuario."
 
 #. 3.2->settings-schema.json->pref_show_icons_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1690,13 +1740,13 @@ msgstr "Ubicación de la imagen del usuario"
 #. 0dyseus@CustomCinnamonMenu->settings-
 #. schema.json->pref_user_picture_placement->tooltip
 msgid ""
-"This option allows to display the user picture on the menu. Clicking on the picture will open "
-"\"Account details\". For the image to be shown, the applications info box also has to be "
-"displayed."
+"This option allows to display the user picture on the menu. Clicking on the "
+"picture will open \"Account details\". For the image to be shown, the "
+"applications info box also has to be displayed."
 msgstr ""
-"Esta opción permite visualizar la imagen del usuario en el menú. Al hacer clic en la imagen se "
-"abrirá \"Detalles de la cuenta\". Para que se muestre la imagen, también se debe mostrar el "
-"cuadro de información de aplicaciones."
+"Esta opción permite visualizar la imagen del usuario en el menú. Al hacer "
+"clic en la imagen se abrirá \"Detalles de la cuenta\". Para que se muestre "
+"la imagen, también se debe mostrar el cuadro de información de aplicaciones."
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1717,8 +1767,12 @@ msgid "Right of applications info box"
 msgstr "A la derecha de la caja de información sobre aplicaciones"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->description
-msgid "Customizable Main Cinnamon menu."
-msgstr "Personalizable menú principal para Cinnamon."
+msgid ""
+"Custom version of the default Cinnamon Menu applet, but infinitely more "
+"customizable."
+msgstr ""
+"Versión personalizada del del menú predeterminado de Cinnamon, pero "
+"infinitamente más personalizable."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->name
 msgid "Custom Cinnamon Menu"
@@ -1740,10 +1794,12 @@ msgstr "Clic aquí para guardar preferencias"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head->description
 msgid ""
 "Most settings are not automatically saved when modified.\n"
-"Press any of the \"Click here to save settings\" buttons for the settings to take effect."
+"Press any of the \"Click here to save settings\" buttons for the settings to "
+"take effect."
 msgstr ""
 "La mayoría de las preferencias no son guardadas automáticamente.\n"
-"Presionar cualquiera de los botones \"Click aquí para guardar preferencias\" para guardarlas."
+"Presionar cualquiera de los botones \"Click aquí para guardar preferencias\" "
+"para guardarlas."
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head7->description
 msgid "Custom launchers"
@@ -1764,21 +1820,28 @@ msgstr "Botones de sistema"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head8->description
 msgid ""
 "Custom launchers notes\n"
-"Fields marked with asterisks (*) are mandatory. Otherwise, the button will not appear on the "
-"menu.\n"
-"Icons can be any icon name or path to an icon file (symbolic or full color).\n"
+"Fields marked with asterisks (*) are mandatory. Otherwise, the button will "
+"not appear on the menu.\n"
+"Icons can be any icon name or path to an icon file (symbolic or full "
+"color).\n"
 "Commands can be any command (as entered in a terminal) or a path to a file.\n"
 "If the file is an executable script, an attempt to execute it will be made.\n"
-"Otherwise, the file will be opened with the systems handler for that file type."
+"Otherwise, the file will be opened with the systems handler for that file "
+"type."
 msgstr ""
 "Notas sobre lanzadores personalizados\n"
-"Los campos marcados con asteriscos (*) son obligatorios. De lo contrario, el botón no aparecerá "
-"en el menú.\n"
-"Íconos pueden ser cualquier nombre de ícono o una ruta de acceso a un archivo de icono (color o "
-"simbólico).\n"
+"Los campos marcados con asteriscos (*) son obligatorios. De lo contrario, el "
+"botón no aparecerá en el menú.\n"
+"Íconos pueden ser cualquier nombre de ícono o una ruta de acceso a un "
+"archivo de icono (color o simbólico).\n"
 "Comandos pueden ser cualquier comando o una ruta de acceso a un archivo.\n"
-"Si el archivo es un script ejecutable, un intento de ejecución se llevará a cabo.\n"
-"Si el archivo no es un ejecutable, el sistema decidirá con qué programa abrirlo."
+"Si el archivo es un script ejecutable, un intento de ejecución se llevará a "
+"cabo.\n"
+"Si el archivo no es un ejecutable, el sistema decidirá con qué programa "
+"abrirlo."
+
+#~ msgid "Customizable Main Cinnamon menu."
+#~ msgstr "Personalizable menú principal para Cinnamon."
 
 #~ msgid "Next to Custom launchers box"
 #~ msgstr "Al lado de los lanzadores personalizados"
@@ -1833,9 +1896,6 @@ msgstr ""
 
 #~ msgid "Display application info box"
 #~ msgstr "Mostrar cuadro de información sobre las aplicaciones"
-
-#~ msgid "Remove '%s'"
-#~ msgstr "Remover '%s'"
 
 #~ msgid "Are you sure that you want to remove '%s' from your panel?"
 #~ msgstr "¿Está seguro de que desea remover '%s' del panel?"

@@ -2,6 +2,7 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
+var importObj = typeof cimports !== 'undefined' ? cimports : imports;
 var Lang = imports.lang;
 var Soup = imports.gi.Soup;
 var Mainloop = imports.mainloop;
@@ -14,7 +15,7 @@ var setTimeout = function setTimeout(cb, duration) {
   }));
 };
 
-var Main = imports.ui.main;
+var Main = importObj.ui.main;
 var clog = function clog() {
   var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'LOG';
   var input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '...';
@@ -213,7 +214,7 @@ Promise.all = function (arr) {
             then.call(val, function (val) {
               res(i, val);
             }, reject);
-            return;
+            return false;
           }
         }
         args[i] = val;
@@ -223,11 +224,13 @@ Promise.all = function (arr) {
       } catch (ex) {
         reject(ex);
       }
+      return false;
     }
 
     for (var i = 0; i < args.length; i++) {
       res(i, args[i]);
     }
+    return false;
   });
 };
 

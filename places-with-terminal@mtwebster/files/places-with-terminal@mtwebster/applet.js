@@ -7,8 +7,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
-const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 const Gtk = imports.gi.Gtk;
 const Util = imports.misc.util;
 
@@ -27,6 +25,19 @@ function ok_Terminal(id)
     }
 }
 
+// l10n
+const Gettext = imports.gettext;
+const UUID = "places-with-terminal@mtwebster";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+   let translation = Gettext.gettext(str);
+   if(translation != str) {
+      return translation;
+   }
+   return Gettext.dgettext(UUID, str);
+};
+
 function MyPopupMenuItem()
 {
 	this._init.apply(this, arguments);
@@ -35,12 +46,13 @@ function MyPopupMenuItem()
 MyPopupMenuItem.prototype =
 {
 		__proto__: PopupMenu.PopupBaseMenuItem.prototype,
-		_init: function(icon, text, loc, params)
+		_init: function(icon, text, loc, menu_actor, params)
 		{
 		    let term_icon = new St.Icon({icon_name: "terminal", icon_size: 16, icon_type: St.IconType.FULLCOLOR});
 			PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
 			this.icon = icon;
             this.loc = loc;
+			this.menu_actor = menu_actor;
 			this.addActor(this.icon);
             this.labeltext = text;
 			this.label = new St.Label({ text: text });
@@ -72,49 +84,34 @@ MyPopupMenuItem.prototype =
                 this.loc = "/";
             } 
             Main.Util.spawnCommandLine("gnome-terminal --working-directory="+this.loc);
+			this.menu_actor.hide();
         }
 };
 
-function MyMenu(launcher, orientation) {
-	this._init(launcher, orientation);
-}
-
-MyMenu.prototype = {
-		__proto__: PopupMenu.PopupMenu.prototype,
-
-		_init: function(launcher, orientation) {
-			this._launcher = launcher;
-
-			PopupMenu.PopupMenu.prototype._init.call(this, launcher.actor, 0.0, orientation, 0);
-			Main.uiGroup.add_actor(this.actor);
-			this.actor.hide();            
-		}
-};
-
-function MyApplet(orientation) {
-	this._init(orientation);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+	this._init(orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
 		__proto__: Applet.IconApplet.prototype,
 
-		_init: function(orientation) {
-			Applet.IconApplet.prototype._init.call(this, orientation);
+		_init: function(orientation, panelHeight, instanceId) {
+			Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
 			try {
 				this.set_applet_icon_symbolic_name('folder');
 				this.set_applet_tooltip(_("Places and bookmarks"));
 
 				this.menuManager = new PopupMenu.PopupMenuManager(this);
-				this.menu = new MyMenu(this, orientation);
+				this.menu = new Applet.AppletPopupMenu(this, orientation);
 				this.menuManager.addMenu(this.menu);
 
 				this._display();
-                this.refresh_menu_item = new Applet.MenuItem(_("Refresh bookmarks..."), 'view-refresh-symbolic',
-                        Lang.bind(this, this._refresh));
+				this.refresh_menu_item = new PopupMenu.PopupIconMenuItem(_("Refresh bookmarks..."), 'view-refresh-symbolic', St.IconType.SYMBOLIC);
+                this.refresh_menu_item.connect('activate', Lang.bind(this, this._refresh));
                 this._applet_context_menu.addMenuItem(this.refresh_menu_item);
-                this.defaults_menu_item = new Applet.MenuItem(_("Change default programs..."), 'system-run-symbolic',
-                        Lang.bind(this, this._defaults));
+                this.defaults_menu_item = new PopupMenu.PopupIconMenuItem(_("Change default programs..."), 'system-run-symbolic', St.IconType.SYMBOLIC);
+                this.defaults_menu_item.connect('activate', Lang.bind(this, this._defaults));
                 this._applet_context_menu.addMenuItem(this.defaults_menu_item);
 			}
 			catch (e) {
@@ -129,7 +126,7 @@ MyApplet.prototype = {
         },
 
         _defaults: function() {
-            Util.spawn(['gnome-control-center', 'info']);
+            Util.spawn(['cinnamon-settings', 'default']);
         },
 
 		on_applet_clicked: function(event) {    
@@ -146,7 +143,7 @@ MyApplet.prototype = {
 			for ( placeid; placeid < this.defaultPlaces.length; placeid++) {
 				let icon = this.defaultPlaces[placeid].iconFactory(ICON_SIZE);
 				this.placeItems[placeid] = new MyPopupMenuItem(icon, _(this.defaultPlaces[placeid].name),
-                                    this.defaultPlaces[placeid].id.replace('bookmark:file://',''));
+                                    this.defaultPlaces[placeid].id.replace('bookmark:file://',''), this.menu.actor);
 				this.placeItems[placeid].place = this.defaultPlaces[placeid];
 
 				this.menu.addMenuItem(this.placeItems[placeid]);
@@ -161,15 +158,15 @@ MyApplet.prototype = {
 			
 			this.menu.addMenuItem(this.computerItem);
 			this.computerItem.connect('activate', function(actor, event) {
-                            Main.Util.spawnCommandLine("nautilus computer://");
+                            Main.Util.spawnCommandLine("xdg-open computer://");
 			});
 			
 			let icon = new St.Icon({icon_name: "harddrive", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon'});
-			this.filesystemItem = new MyPopupMenuItem(icon, _("File System"), "root");
+			this.filesystemItem = new MyPopupMenuItem(icon, _("File System"), "root", this.menu.actor);
 			
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
-                            Main.Util.spawnCommandLine("gksudo nautilus /");
+                            Main.Util.spawnCommandLine("gksudo xdg-open /");
 			});
 			
 			// Separator
@@ -180,7 +177,7 @@ MyApplet.prototype = {
 			for ( bookmarkid; bookmarkid < this.bookmarks.length; bookmarkid++, placeid++) {
 				let icon = this.bookmarks[bookmarkid].iconFactory(ICON_SIZE);
 				this.placeItems[placeid] = new MyPopupMenuItem(icon, _(this.bookmarks[bookmarkid].name),
-                        this.bookmarks[bookmarkid].id.replace('bookmark:file://',''));
+                        this.bookmarks[bookmarkid].id.replace('bookmark:file://',''), this.menu.actor);
 				this.placeItems[placeid].place = this.bookmarks[bookmarkid];
 				this.menu.addMenuItem(this.placeItems[placeid]);
 				this.placeItems[placeid].connect('activate', function(actor, event) {
@@ -190,7 +187,7 @@ MyApplet.prototype = {
 		}
 };
 
-function main(metadata, orientation) {  
-	let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {  
+	let myApplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
 	return myApplet;      
 };

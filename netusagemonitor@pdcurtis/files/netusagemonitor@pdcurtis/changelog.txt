@@ -1,4 +1,4 @@
-Version v30_3.0.6
+Version v30_3.0.7
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -132,3 +132,5 @@ Conclusion - change to a drop down selection of options, initially the three cur
           Removed a number of commented out blocks to do with cumulative totals and formatting.
 3.0.6     Choice of units for limits and offsets to be Mbytes or Gbytes by drop down widget in settings (configuration) window
           Maximum Limits and Offsets set to 200000 Mbytes/Gbytes as appropriate
+3.0.7     Change from call to firefox to opening README.md to on Context submenu.
+          Delete helpfile.txt from applet folder and Update changelog

@@ -23,13 +23,13 @@ MyApplet.prototype = {
       this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "directory", "directory", this._onSettingsDirectory, null)
 
       this.settings.bindProperty(Settings.BindingDirection.IN, "showtitle", "showtitle", this._onSettingsTitle, null)
-      this.settings.bindProperty(Settings.BindingDirection.IN, "title", "title", this._onSettingsTitle, null)
+      this.settings.bindProperty(Settings.BindingDirection.IN, "paneltitle", "paneltitle", this._onSettingsTitle, null)
 
       this.settings.bindProperty(Settings.BindingDirection.IN, "customicon", "customicon", this._onSettingsIcon, null)
       this.settings.bindProperty(Settings.BindingDirection.IN, "icon", "icon", this._onSettingsIcon, null)
 
       if (this.directory == "" || typeof this.directory == "undefined") {
-         this.directory = GLib.get_home_dir()+"/.scripts-applet";
+         this.directory = GLib.get_home_dir()+"/.local/share/nemo/scripts";
       }
       this.autoupdate_last = this.autoupdate;
       this.directory_last = this.directory;
@@ -73,8 +73,8 @@ MyApplet.prototype = {
 
    _onSettingsTitle: function() {
       if (this.showtitle) {
-         this.set_applet_label(this.title);
-         this.set_applet_tooltip(this.title);
+         this.set_applet_label(this.paneltitle);
+         this.set_applet_tooltip(this.paneltitle);
       } else {
          this.set_applet_label("");
          this.set_applet_tooltip(_("Scripts"));
@@ -150,6 +150,11 @@ MyApplet.prototype = {
 
    _loadDir: function(dir, m) {
 
+      // Workaround for Cinnamon 3.2.x settings window path selectors.
+      // They return an URI instead of a path like they used to. ¬¬
+      if (/^file:\/\//.test(dir))
+          dir = dir.substr(7);
+      
       let currentDir =  Gio.file_new_for_path(dir);
       if (currentDir.query_exists(null)){
 

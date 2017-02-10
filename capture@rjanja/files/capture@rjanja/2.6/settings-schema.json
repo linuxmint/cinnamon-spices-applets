@@ -1,0 +1,377 @@
+{
+   "general stetings": {
+      "type": "header",
+      "description": "Capture Tool Selection"
+   },
+   "camera-program": {
+      "indent": true,
+      "default": "cinnamon",
+      "type": "combobox",
+      "options": {
+         "Built-in": "cinnamon",
+         "GNOME Screenshot": "gnome-screenshot",
+         "Shutter": "shutter",
+         "XWD": "xwd",
+         "ImageMagick": "import",
+         "Kazam": "kazam"
+      },
+      "description": "Screenshot program",
+      "tooltip": "Preferred screen capture program"
+   },
+   "recorder-program": {
+      "indent": true,
+      "default": "cinnamon",
+      "type": "combobox",
+      "options": {
+         "Built-in": "cinnamon",
+         "RecordMyDesktop": "gtk-recordmydesktop",
+         "Byzanz": "byzanz",
+         "FFmpeg": "ffmpeg",
+         "Kazam": "kazam"
+      },
+      "description": "Recorder program",
+      "tooltip": "Preferred screen recorder program"
+   },
+   "use-symbolic-icon": {
+      "default": false,
+      "type": "checkbox",
+      "description": "Use symbolic (black and white) icon for applet",
+      "tooltip": "Whether to use symbolic (black and white) icon for applet"
+   },
+
+   "div1" : {
+    "type" : "separator"
+   },
+
+   "gen screenshot settings": {
+      "type": "header",
+      "description": "Screenshots: General Settings"
+   },
+   "camera-save-dir": {
+      "indent": true,
+      "default": "~/Pictures/screenshots",
+      "type": "filechooser",
+      "select-dir": true,
+      "description": "Save location",
+      "tooltip": "Folder to save new screenshots",
+      "allow-none": true
+   },
+   "camera-save-prefix": {
+      "indent": true,
+      "default": "screenshot-%TYPE-%Y-%M-%D-%H%I%S",
+      "type": "entry",
+      "description": "Filename format",
+      "tooltip": "Don't include file extension. %TYPE is area, window, etc. E.g. %Y-%M-%D-%H%I = 2014-05-25-1848.png. Use %S for seconds, %m for milliseconds"
+   },
+   "include-cursor": {
+      "default": false,
+      "type": "checkbox",
+      "description": "Include mouse cursor",
+      "tooltip": "Whether to include mouse cursor in screenshot"
+   },
+   "use-timer": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Use timer",
+      "tooltip": "Whether to use a timer before capturing"
+   },
+   "delay-seconds": {
+      "indent": true,
+      "default": 2,
+      "type": "spinbutton",
+      "min": 0,
+      "max": 600,
+      "units": "seconds",
+      "step": 1,
+      "description": "Capture delay",
+      "tooltip": "How many seconds to wait before taking a screenshot",
+      "dependency": "use-timer"
+   },
+   "show-capture-timer": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Show capture timer",
+      "tooltip": "Whether to show the timer on the screen",
+      "dependency": "use-timer"
+   },
+
+   "div2" : {
+      "type" : "separator"
+   },
+   "cinn screenshot settings-window": {
+      "type": "header",
+      "description": "Screenshots: Built-in Capture Settings"
+   },
+   "cinn screenshot note": {
+      "type": "label",
+      "description": "Note: changing keybindings may require restarting Cinnamon."
+   },
+   "kb-cs-window" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to capture a window: ",
+      "default" : "<Control>F5"
+   },
+   "kb-cs-area" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to capture an area: ",
+      "default" : "<Control>F6"
+   },
+   "kb-cs-ui" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to capture a UI element: ",
+      "default" : "<Control>F7"
+   },
+   "kb-cs-screen" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to capture the screen: ",
+      "default" : "<Control>F8"
+   },
+   "kb-cs-repeat" : {
+      "indent": true,
+      "type": "keybinding",
+      "description": "Keybinding to repeat last capture: ",
+      "default": "<Control>F9"
+   },
+   "kb-cs-monitor-0" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to capture monitor 1: ",
+      "default" : "<Control>F9"
+   },
+   "capture-window-as-area": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Ignore transparency in window captures (suggested, or shots may be black or distorted)",
+      "tooltip": "Asking the desktop manager for a screenshot of a window would usually result in a nice image retaining any transparent regions. But depending on the graphics drivers and Cinnamon version it may turn out black or distorted."
+   },
+   "include-window-frame": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Include window frame",
+      "tooltip": "Whether to include the window frame and titlebar in window captures"
+   },
+
+   "use-camera-flash": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Use camera flash",
+      "tooltip": "Whether to show a bright flash over the capture area"
+   },
+   
+   
+   "include-styles": {
+      "default": false,
+      "type": "checkbox",
+      "description": "Use highlighted style in UI capture",
+      "tooltip": "Turn on for a 'highlighted' effect, using CSS styles applied by .capture-outline-frame"
+   },
+
+   "play-shutter-sound": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Play shutter sound",
+      "tooltip": "Whether to play the shutter sound as the capture is made"
+   },
+   "play-timer-interval-sound": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Play timer interval sound",
+      "tooltip": "Whether to play the timer interval sound as the timer counts down"
+   },
+   "copy-to-clipboard": {
+      "default": true,
+      "type": "combobox",
+      "options": {
+         "Off": 0,
+         "Path and filename": 1,
+         "Only Directory": 2,
+         "Only Filename": 3,
+         "Image Data": 4
+      },
+      "description": "Copy to clipboard",
+      "tooltip": "Whether to copy path/filename of screenshots to clipboard after capture"
+   },
+   "show-copy-toggle": {
+      "default": false,
+      "type": "checkbox",
+      "description": "Show toggle button for copying image to clipboard",
+      "tooltip": "Whether to show another toggle button in the menu for copying image to clipboard. If you have notifications enabled you probably don't need this set."
+   },
+   "copy-data-auto-off": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Turn off copy image toggle after capture",
+      "tooltip": "When set, the copy image to clipboard toggle button override will be turned off after a successful capture"
+   },
+   "copy-data": {
+      "default": false,
+      "type": "generic",
+      "description": "Copy image data to clipboard (toggle)",
+      "tooltip": "This overrides the 'Copy to clipboard' setting"
+   },
+
+   "div3" : {
+      "type" : "separator"
+   },
+   "notification settings": {
+      "type": "header",
+      "description": "Screenshots: Post-Capture Settings"
+   },
+   "send-notification": {
+      "default": true,
+      "type": "checkbox",
+      "description": "Use desktop notifications",
+      "tooltip": "Whether to send a notification to desktop after capture"
+   },
+   "notif-image-left-click": {
+      "default": "open-file",
+      "type": "combobox",
+      "options": {
+         "Do nothing": "dismiss",
+         "Open the file": "open-file",
+         "Open the directory": "open-dir"         
+      },
+      "description": "When left-clicking preview image",
+      "tooltip": "",
+      "dependency": "send-notification"
+   },
+   "notif-image-right-click": {
+      "default": "open-file",
+      "type": "combobox",
+      "options": {
+         "Do nothing": "dismiss",
+         "Open the file": "open-file",
+         "Open the directory": "open-dir"         
+      },
+      "description": "When right-clicking preview image",
+      "tooltip": "",
+      "dependency": "send-notification"
+   },
+   "show-copy-path-action": {
+      "indent": true,
+      "default": false,
+      "type": "checkbox",
+      "description": "Enable copying path from notification",
+      "tooltip": "If checked, a button will be shown in the notification that allows you to copy the screenshot path to clipboard",
+      "dependency": "send-notification"
+   },
+   "show-copy-data-action": {
+      "indent": true,
+      "default": true,
+      "type": "checkbox",
+      "description": "Enable copying image data from notification",
+      "tooltip": "If checked, a button will be shown in the notification that allows you to copy the screenshot data to clipboard",
+      "dependency": "send-notification"
+   },
+   "show-delete-action": {
+      "indent": true,
+      "default": false,
+      "type": "checkbox",
+      "description": "Enable delete from notification",
+      "tooltip": "If checked, a delete button will be shown in the notification that allows you to remove the screenshot from disk.",
+      "dependency": "send-notification"
+   },
+
+   "demo-notification-button" : {
+      "indent": true,
+      "type" : "button",
+      "description" : "Click here to send an example notification",
+      "callback" : "on_config_demo_notification",
+      "tooltip" : "Pressing this button will send an example notification with all actions disabled.",
+      "dependency": "send-notification"
+   },
+   "open-after": {
+      "default": false,
+      "type": "generic",
+      "description": "Open file manager after capture",
+      "tooltip": "Whether to open the screenshot in file manager"
+   },
+   
+   "div4" : {
+      "type" : "separator"
+   },
+   "integration with imgur": {
+      "type": "header",
+      "description": "Integrations: Imgur (Screenshots)"
+   },
+   "use-imgur": {
+      "indent": true,
+      "type": "checkbox",
+      "default": false,
+      "description": "Enable uploading from notifications",
+      "tooltip": "Whether to use imgur image hosting services",
+      "depenency": "send-notification"
+   },
+   "div5b" : {
+      "type" : "separator"
+   },
+   "gen recorder settings": {
+      "type": "header",
+      "description": "Recorder: General Settings"
+   },
+   
+   "label-recorder-settings": {
+      "indent": true,
+      "type": "label",
+      "description": "Please note not all recorder tools may respect these settings."
+   },
+
+   "recorder-save-dir": {
+      "indent": true,
+      "default": "~/Videos/screencasts",
+      "type": "filechooser",
+      "select-dir": true,
+      "description": "Save location",
+	   "tooltip": "Folder for new screen recordings",
+      "allow-none": true
+   },
+   
+   "recorder-save-prefix": {
+      "indent": true,
+      "default": "screencast-%Y-%M-%D-%H%I%S",
+      "type": "entry",
+      "description": "Filename format",
+      "tooltip": "Format for built-in recorder. E.g. %Y-%M-%D-%H%I = 2014-05-25-1848.webm. Use %S for seconds, %m for milliseconds"
+   },
+
+   "cinn recorder settings": {
+      "type": "header",
+      "description": "Recorder: Built-in Settings"
+   },
+
+   "label-internal-recorder-settings": {
+      "type": "label",
+      "description": "These settings only apply when using the Built-in Recorder tool."
+   },
+
+   "kb-recorder-stop" : {
+      "indent": true,
+      "type" : "keybinding",
+      "description" : "Keybinding to start/stop recording: ",
+      "tooltip": "Will start only Cinnamon Recorder. Will stop any recorder using its stop-command.",
+      "default" : "<Control>F10"
+   },
+
+
+   
+   "last-selected-page": {
+      "default": 0,
+      "type": "generic",
+      "description": "Last selected page (tab index) of settings application"
+   },
+   "last-selected-subpage": {
+      "default": 0,
+      "type": "generic",
+      "description": "Last selected sub-page (tab index) of settings application"
+   },
+   "record-sound": {
+      "default": 0,
+      "type": "generic",
+      "description": "Record sound"
+   }
+   
+}

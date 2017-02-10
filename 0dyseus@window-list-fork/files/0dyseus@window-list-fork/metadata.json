@@ -1,5 +1,4 @@
 {
-    "website": "https://github.com/Odyseus/CinnamonTools",
     "uuid": "0dyseus@window-list-fork",
     "max-instances": -1,
     "dangerous": false,
@@ -7,8 +6,10 @@
     "multiversion": true,
     "version": "1.07",
     "last-edited": "1472973983",
-    "icon": "gnome-panel-window-list",
     "name": "Window list (Fork By Odyseus)",
+    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "contributors": "NikoKrause: Bug fixes and German localization.",
     "cinnamon-version": [
         "2.8",
         "3.0",

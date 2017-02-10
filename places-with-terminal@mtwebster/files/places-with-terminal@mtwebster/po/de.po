@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-25 11:03+0100\n"
+"PO-Revision-Date: 2017-01-25 11:10+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: applet.js:92
+msgid "Places and bookmarks"
+msgstr "Orte und Lesezeichen"
+
+#: applet.js:99
+msgid "Refresh bookmarks..."
+msgstr "Lesezeichen aktualisieren …"
+
+#: applet.js:102
+msgid "Change default programs..."
+msgstr "Bevorzugte Anwendungen ändern …"
+
+#: applet.js:146
+msgid "Computer"
+msgstr "Rechner"
+
+#: applet.js:154
+msgid "File System"
+msgstr "Dateisystem"
+
+#. places-with-terminal@mtwebster->metadata.json->description
+msgid "Access your places and bookmarks, or launch a terminal at that location"
+msgstr "Auf Orte und Lesezeichen zugreifen oder ein Terminal an dieser Stelle starten"
+
+#. places-with-terminal@mtwebster->metadata.json->name
+msgid "Places with Terminal Launcher"
+msgstr "Orte-mit-Terminal-Starter"

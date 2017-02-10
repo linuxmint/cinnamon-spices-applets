@@ -215,7 +215,7 @@ MyApplet.prototype = {
   }
 
 ,  startVmplayerImage: function(path) {
-    Util.spawnCommandLine(CMD_VMPLAYER + " " + path)
+    Util.spawnCommandLine(CMD_VMPLAYER + " '" + path + "' ")
   }
 
 ,  on_applet_clicked: function(event) {

@@ -1,0 +1,103 @@
+/*Thumbnails*/
+.switcher-list {
+}
+
+/* Use to add extra border around thumbnail or adjust the distance from the panel.  can be used for aero effect */
+.thumbnail-popup-content {
+}
+/* Padding can only be set between 1px and 10px other wise it will default to 5px */
+.thumbnail-row {
+	/* example styles 
+	background: rgba(80,80,80,0.8);
+	border-radius: 6px;
+	padding: 2px;
+	font-size: 9pt;
+	color: white;
+	text-shadow: black 0px 0px 2px;
+	/*border 
+	box-shadow: inset 0px 0px 0px 1px rgba(200,200,200,0.3);
+	/*spacing
+	border: 2px solid rgba(200,200,200,0.0);
+	*/
+}
+/* the padding can only be set between 2px and 10px other wise it will default to 6; border-width is fixed :( */
+.thumbnail-row .thumbnail-box {
+	/* example styles
+	padding: 6px;
+	spacing: 1px;
+	border-radius: 4px;
+	border-width:0px; */
+}
+.thumbnail-row .thumbnail-box:outlined {
+	/*  example styles
+	padding: 4px;
+	border: 2px solid rgba(85,85,85,1.0); */
+}
+.thumbnail-row .thumbnail-box:selected {
+	/* background: rgba(255,255,255,0.33); */
+}
+/* the pseudo are not being overidden so I can't do a hover. that will need to be added to themes */
+.thumbnail-row .thumbnail-alerts {
+	background: rgba(255,52,52,0.3);
+}
+.hide-arrow {
+	-arrow-background-color: rgba(80,80,80,0.0);
+	-arrow-border-color: rgba(150,150,150,0.0);
+}
+.thumbnail-icon {
+	/* thumbnail icon size */
+	width: 16px;
+	height: 16px;
+}
+.thumbnail-label {
+	padding-left: 4px;
+}
+/*  Careful with the calculation of background position or you will have to much dead space.*/
+.thumbnail-close {
+  background-image: url("close-window.png");
+	background-size: 16px 16px;
+	background-position: 0px -2px;
+	width: 16px;
+ 	height: 16px;
+}
+/*AppMenu*/
+.pin-item {
+	background-image: url("pin-item.png");
+	background-size: 16px 16px;
+	width: 16px;
+ 	height: 16px;
+}
+.unpin-item {
+	background-image: url("unpin-item.png");
+	background-size: 16px 16px;
+	width: 16px;
+ 	height: 16px;
+}
+/*App List Padding is set in the the applet settings
+use to override window-list-item-box */
+.app-list-item-box{
+	z-index: -9;
+}
+/* use to override panel-launcher */
+.app-is-favorite {
+}
+/* NumLabel */
+.window-icon-list-numlabel {
+	z-index: 99;
+  text-shadow: black 1px 0px 2px
+}
+/* Non grouped container */
+.window-icon-list-buttonbox {
+  spacing: 2px;
+}
+.window-list-item-demands-attention {
+}
+.app-button-label {
+  padding-left: 4px;
+}
+.panel-launcher-vertical {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+}

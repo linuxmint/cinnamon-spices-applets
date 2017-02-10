@@ -27,6 +27,8 @@ const Gio = imports.gi.Gio;
 const GConf = imports.gi.GConf;
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
+const Gettext = imports.gettext;
+const _ = Gettext.gettext;
 
 // Settings
 const WA_SETTINGS_SCHEMA = 'org.cinnamon.applets.windowButtons@lippy';
@@ -169,7 +171,7 @@ MyApplet.prototype = {
                 this.button[i] = new St.Button({ name: 'windowButton',
                                                  style_class: orderRight[i] + ' window-button',
                                                  reactive: true } );
-                this.button[i].set_tooltip_text( buttonlist[orderRight[i]][0] );
+                //this.button[i].set_tooltip_text( buttonlist[orderRight[i]][0] );
                 this.button[i].connect('button-release-event', Lang.bind(this, buttonlist[orderRight[i]][1]));
                 this.rightBox.add_actor(this.button[i]);
                 // If the button is maximize, grab its position in the array so we can reference it later.
@@ -316,7 +318,7 @@ MyApplet.prototype = {
         let onlymax = this._settings.get_boolean(WA_ONLYMAX);
 
         // Run for the hills if no windows are active.
-        if (!activeWindow || activeWindow.get_title() == "Desktop") {
+        if (!activeWindow || activeWindow.get_title() == _("Desktop")) {
             return;
         }
 

@@ -8,12 +8,10 @@ const St = imports.gi.St;
 
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const ModalDialog = imports.ui.modalDialog;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
 
-const Util = imports.misc.util;
 const Lang = imports.lang;
 
 const MENU_ITEM_TEXT_LENGTH = 25;
@@ -21,139 +19,17 @@ const MENU_ITEM_TEXT_LENGTH = 25;
 let menu_item_icon_size;
 
 
-function AboutDialog(metadata) {
-    this._init(metadata);
-}
-
-AboutDialog.prototype = {
-    __proto__: ModalDialog.ModalDialog.prototype,
-    
-    _init: function(metadata) {
-        try {
-            ModalDialog.ModalDialog.prototype._init.call(this, {  });
-            
-            let contentBox = new St.BoxLayout({ vertical: true, style_class: "about-content" });
-            this.contentLayout.add_actor(contentBox);
-            
-            let topBox = new St.BoxLayout();
-            contentBox.add_actor(topBox);
-            
-            //icon
-            let icon;
-            if ( metadata.icon ) icon = new St.Icon({ icon_name: metadata.icon, icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-            else {
-                let file = Gio.file_new_for_path(metadata.path + "/icon.png");
-                if ( file.query_exists(null) ) {
-                    let gicon = new Gio.FileIcon({ file: file });
-                    icon = new St.Icon({ gicon: gicon, icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-                }
-                else {
-                    icon = new St.Icon({ icon_name: "applets", icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-                }
-            }
-            topBox.add_actor(icon);
-            
-            let topTextBox = new St.BoxLayout({ vertical: true });
-            topBox.add_actor(topTextBox);
-            
-            /*title*/
-            let titleBox = new St.BoxLayout();
-            topTextBox.add_actor(titleBox);
-            
-            let title = new St.Label({ text: metadata.name, style_class: "about-title" });
-            titleBox.add_actor(title);
-            
-            if ( metadata.version ) {
-                let versionBin = new St.Bin({ x_align: St.Align.START, y_align: St.Align.END});
-                titleBox.add_actor(versionBin);
-                let version = new St.Label({ text: "v " + metadata.version, style_class: "about-version" });
-                versionBin.add_actor(version);
-            }
-            
-            //uuid
-            let uuid = new St.Label({ text: metadata.uuid, style_class: "about-uuid" });
-            topTextBox.add_actor(uuid);
-            
-            //description
-            let desc = new St.Label({ text: metadata.description, style_class: "about-description" });
-            let dText = desc.clutter_text;
-            topTextBox.add_actor(desc);
-            
-            /*optional content*/
-            let scrollBox = new St.ScrollView({ style_class: "about-scrollBox" });
-            contentBox.add_actor(scrollBox);
-            let infoBox = new St.BoxLayout({ vertical: true, style_class: "about-scrollBox-innerBox" });
-            scrollBox.add_actor(infoBox);
-            
-            //comments
-            if ( metadata.comments ) {
-                let comments = new St.Label({ text: "Comments:\n\t" + metadata.comments });
-                let cText = comments.clutter_text;
-                cText.ellipsize = Pango.EllipsizeMode.NONE;
-                cText.line_wrap = true;
-                cText.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-                infoBox.add_actor(comments);
-            }
-            
-            //website
-            if ( metadata.website ) {
-                let wsBox = new St.BoxLayout({ vertical: true });
-                infoBox.add_actor(wsBox);
-                
-                let wLabel = new St.Label({ text: "Website:" });
-                wsBox.add_actor(wLabel);
-                
-                let wsButton = new St.Button({ x_align: St.Align.START, style_class: "cinnamon-link", name: "about-website" });
-                wsBox.add_actor(wsButton);
-                let website = new St.Label({ text: metadata.website });
-                let wtext = website.clutter_text;
-                wtext.ellipsize = Pango.EllipsizeMode.NONE;
-                wtext.line_wrap = true;
-                wtext.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-                wsButton.add_actor(website);
-                wsButton.connect("clicked", Lang.bind(this, this.launchSite, metadata.website));
-            }
-            
-            //contributors
-            if ( metadata.contributors ) {
-                let list = metadata.contributors.split(",").join("\n\t");
-                let contributors = new St.Label({ text: "Contributors:\n\t" + list });
-                infoBox.add_actor(contributors);
-            }
-            
-            //dialog close button
-            this.setButtons([
-                { label: "Close", key: "", focus: true, action: Lang.bind(this, this._onOk) }
-            ]);
-            
-            this.open(global.get_current_time());
-        } catch(e) {
-            global.log(e);
-        }
-    },
-    
-    _onOk: function() {
-        this.close(global.get_current_time());
-    },
-    
-    launchSite: function(a, b, site) {
-        Util.spawnCommandLine("xdg-open " + site);
-        this.close(global.get_current_time());
-    }
-}
-
-
-function MenuItem(title, icon){
-    this._init(title, icon);
+function MenuItem(title, icon, tooltip){
+    this._init(title, icon, tooltip);
 }
 
 MenuItem.prototype = {
     __proto__: PopupMenu.PopupBaseMenuItem.prototype,
     
-    _init: function(title, icon, params){
+    _init: function(title, icon, tooltipText){
         try {
             
-            PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
+            PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
             this.actor.add_style_class_name("xCenter-menuItem");
             if ( icon != null ) this.addActor(icon);
             
@@ -163,7 +39,8 @@ MenuItem.prototype = {
             
             this.actor._delegate = this;
             
-            let tooltip = new Tooltips.Tooltip(this.actor, title);
+            if ( !tooltipText ) tooltipText = title;
+            let tooltip = new Tooltips.Tooltip(this.actor, tooltipText);
             
             this.connect("activate", Lang.bind(this, this.launch));
             
@@ -221,7 +98,7 @@ DocumentMenuItem.prototype = {
             this.uri = file.get_uri();
             
             let icon = fileInfo.get_icon();
-            MenuItem.prototype._init.call(this, fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
+            MenuItem.prototype._init.call(this, fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size), file.get_path());
             
         } catch(e) {
             global.logError(e);
@@ -303,6 +180,18 @@ ClearRecentMenuItem.prototype = {
     }
 }
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
+
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
@@ -318,6 +207,10 @@ MyApplet.prototype = {
             this.instanceId = instanceId;
             this.orientation = orientation;
             Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
+
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
             
             //initiate settings
             this.bindSettings();
@@ -326,8 +219,6 @@ MyApplet.prototype = {
             this.setPanelIcon();
             this.setPanelText();
             this.set_applet_tooltip(_("Office"));
-            
-            this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("About..."), "dialog-question", Lang.bind(this, this.openAbout)));
             
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.appSys = Cinnamon.AppSystem.get_default();
@@ -353,10 +244,6 @@ MyApplet.prototype = {
         this.appSys.disconnect(this.appSysId);
     },
     
-    openAbout: function() {
-        new AboutDialog(this.metadata);
-    },
-    
     openMenu: function(){
         this.menu.toggle();
     },
@@ -367,8 +254,9 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
         this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showDocuments", "showDocuments", this.buildMenu);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "altDir", "altDir", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recurseDocuments", "recurseDocuments", this.updateDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "altDir", "altDir", this.updateDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "docMax", "docMax", this.updateDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.updateRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
@@ -390,7 +278,13 @@ MyApplet.prototype = {
             menu_item_icon_size = this.iconSize;
             
             this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-            this.menu.actor.add_style_class_name("xCenter-menu");
+
+            // cinna 3.2 and above uses a different func
+            if (typeof this.menu.setCustomStyleClass === "function") {
+                this.menu.setCustomStyleClass("xCenter-menu");
+            } else {
+                this.menu.actor.add_style_class_name("xCenter-menu");
+            }
             this.menuManager.addMenu(this.menu);
             let section = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(section);
@@ -413,48 +307,38 @@ MyApplet.prototype = {
             
             //documents section
             if ( this.showDocuments ) {
-                //determine directory
-                if ( this.altDir == "" ) this.documentPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
-                else this.documentPath = this.altDir;
+                let documentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                mainBox.add_actor(documentPaneBox);
+                let documentPane = new PopupMenu.PopupMenuSection();
+                documentPaneBox.add_actor(documentPane.actor);
+                this.menu._connectSubMenuSignals(documentPane, documentPane);
                 
-                //if directory exists, build documents section
-                if ( this.documentPath && GLib.file_test(this.documentPath, GLib.FileTest.IS_DIR) ) {
-                    this.dirMonitor = Gio.file_new_for_path(this.documentPath).monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
-                    this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updateDocumentsSection));
-                    
-                    let documentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-                    mainBox.add_actor(documentPaneBox);
-                    let documentPane = new PopupMenu.PopupMenuSection();
-                    documentPaneBox.add_actor(documentPane.actor);
-                    this.menu._connectSubMenuSignals(documentPane, documentPane);
-                    
-                    let documentTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
-                    documentTitle.addActor(new St.Label({ text: _("DOCUMENTS") }));
-                    documentPane.addMenuItem(documentTitle);
-                    
-                    //add link to documents folder
-                    let linkButton = new St.Button();
-                    documentTitle.addActor(linkButton);
-                    let file = Gio.file_new_for_path(this.metadata.path + "/link-symbolic.svg");
-                    let gicon = new Gio.FileIcon({ file: file });
-                    let image = new St.Icon({ gicon: gicon, icon_size: 10, icon_type: St.IconType.SYMBOLIC });
-                    linkButton.add_actor(image);
-                    linkButton.connect("clicked", Lang.bind(this, this.openDocumentsFolder));
-                    new Tooltips.Tooltip(linkButton, _("Open folder"));
-                    
-                    let documentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
-                    documentPane.actor.add_actor(documentScrollBox);
-                    documentScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-                    let vscroll = documentScrollBox.get_vscroll_bar();
-                    vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                    vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
-                    
-                    this.documentSection = new PopupMenu.PopupMenuSection();
-                    documentScrollBox.add_actor(this.documentSection.actor);
-                    documentPane._connectSubMenuSignals(this.documentSection, this.documentSection);
-                    
-                    this.updateDocumentsSection();
-                }
+                let documentTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
+                documentTitle.addActor(new St.Label({ text: _("DOCUMENTS") }));
+                documentPane.addMenuItem(documentTitle);
+                
+                //add link to documents folder
+                let linkButton = new St.Button();
+                documentTitle.addActor(linkButton);
+                let file = Gio.file_new_for_path(this.metadata.path + "/link-symbolic.svg");
+                let gicon = new Gio.FileIcon({ file: file });
+                let image = new St.Icon({ gicon: gicon, icon_size: 10, icon_type: St.IconType.SYMBOLIC });
+                linkButton.add_actor(image);
+                linkButton.connect("clicked", Lang.bind(this, this.openDocumentsFolder));
+                new Tooltips.Tooltip(linkButton, _("Open folder"));
+                
+                let documentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                documentPane.actor.add_actor(documentScrollBox);
+                documentScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let vscroll = documentScrollBox.get_vscroll_bar();
+                vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+                
+                this.documentSection = new PopupMenu.PopupMenuSection();
+                documentScrollBox.add_actor(this.documentSection.actor);
+                documentPane._connectSubMenuSignals(this.documentSection, this.documentSection);
+                
+                this.updateDocumentsSection();
             }
             
             //recent documents section
@@ -511,7 +395,7 @@ MyApplet.prototype = {
         while ( (nextType = iter.next()) != CMenu.TreeItemType.INVALID ) {
             if ( nextType == CMenu.TreeItemType.DIRECTORY ) {
                 let dir = iter.get_directory();
-                if ( dir.get_menu_id() == _("Office") ) {
+                if ( dir.get_menu_id() == "Office" ) {
                     let dirIter = dir.iter();
                     while (( nextType = dirIter.next()) != CMenu.TreeItemType.INVALID ) {
                         if ( nextType == CMenu.TreeItemType.ENTRY ) {
@@ -530,35 +414,55 @@ MyApplet.prototype = {
     },
     
     updateDocumentsSection: function() {
+        if ( this.dirMonitor && this.monitorId ) {
+            this.dirMonitor.disconnect(this.monitorId);
+            this.dirMonitor = undefined;
+            this.monitorId = undefined;
+        }
         if ( !this.documentSection ) return;
         this.documentSection.removeAll();
         
+        //determine directory
+        if ( this.altDir && GLib.file_test(this.altDir, GLib.FileTest.IS_DIR) ) this.documentPath = this.altDir;
+        else this.documentPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
+        
+        this.documentCount = 0;
+        
         let dir = Gio.file_new_for_path(this.documentPath);
+        
         this.getDocuments(dir);
+        
+        this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
+        this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updateDocumentsSection));
     },
     
     getDocuments: function(dir) {
-        dir.enumerate_children_async("*", Gio.FileQueryInfoFlags.NONE, 0, null, Lang.bind(this, function(dir, res) {
-            let gEnum = dir.enumerate_children_finish(res);
-            
-            let info;
-            let directories = [];
-            while ( (info = gEnum.next_file(null)) != null ) {
-                if ( info.get_is_hidden() ) continue;
-                if ( info.get_file_type() == Gio.FileType.DIRECTORY && this.recurseDocuments ) {
-                    directories.push(dir.get_child(info.get_name()));
-                }
-                else {
-                    let documentItem = new DocumentMenuItem(dir.get_child(info.get_name()));
-                    this.documentSection.addMenuItem(documentItem);
-                }
+        if ( this.documentCount >= this.docMax ) return;
+        dir.enumerate_children_async("*", Gio.FileQueryInfoFlags.NONE, 0, null, Lang.bind(this, this.processDocuments));
+    },
+    
+    processDocuments: function(dir, res) {
+        let gEnum = dir.enumerate_children_finish(res);
+        
+        let info;
+        let directories = [];
+        while ( (info = gEnum.next_file(null)) != null ) {
+        if ( this.documentCount >= this.docMax ) break;
+            if ( info.get_is_hidden() ) continue;
+            if ( info.get_file_type() == Gio.FileType.DIRECTORY && this.recurseDocuments ) {
+                directories.push(dir.get_child(info.get_name()));
             }
-            gEnum.close(null);
-            
-            for ( let i = 0; i < directories.length; i++ ) {
-                this.getDocuments(directories[i]);
+            else {
+                let documentItem = new DocumentMenuItem(dir.get_child(info.get_name()));
+                this.documentSection.addMenuItem(documentItem);
+                this.documentCount++;
             }
-        }));
+        }
+        gEnum.close(null);
+        
+        for ( let i = 0; i < directories.length; i++ ) {
+            this.getDocuments(directories[i]);
+        }
     },
     
     updateRecentDocumentsSection: function() {

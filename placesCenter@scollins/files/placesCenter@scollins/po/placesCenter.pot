@@ -1,0 +1,193 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-12 16:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:250
+msgid "Clear"
+msgstr ""
+
+#: applet.js:306
+msgid "Places"
+msgstr ""
+
+#: applet.js:403
+msgid "Search Home Folder"
+msgstr ""
+
+#: applet.js:417
+msgid "SYSTEM"
+msgstr ""
+
+#: applet.js:425
+msgid "Search File System"
+msgstr ""
+
+#: applet.js:440
+msgid "RECENT DOCUMENTS"
+msgstr ""
+
+#: applet.js:489
+msgid "Computer"
+msgstr ""
+
+#: applet.js:495
+msgid "File System"
+msgstr ""
+
+#: applet.js:511
+msgid "Network"
+msgstr ""
+
+#: applet.js:607
+msgid "Trash"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->general->description
+msgid "General Settings"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->userSection->description
+msgid "User Section"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->iconSize->units
+msgid "px"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr ""
+
+#. cinnamon-places-center->settings-
+#. schema.json->systemCustomPlaces->description
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->description
+msgid "Custom places"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->systemCustomPlaces->tooltip
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a"
+" comma(,) or by a new-line. You can set the name to be displayed by adding "
+":customName after the location."
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->places->description
+msgid "System Section"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr ""
+
+#. cinnamon-places-center->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr ""
+
+#. cinnamon-places-center->metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr ""
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr ""
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr ""
+
+#. cinnamon-places-center->metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+
+#. cinnamon-places-center->metadata.json->name
+msgid "Places Center"
+msgstr ""
