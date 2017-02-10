@@ -10,7 +10,7 @@
         "mockturtl <mockturtl@users.noreply.github.com>",
         "Jason Jackson <jake1164@hotmail.com>"
     ],
-    "version": 0.24,
+    "version": 0.25,
     "url": "jonbrettdev.wordpress.com",
-    "max-instanceso": "10"
+    "max-instances": "1"
 }

@@ -1,3 +1,8 @@
+0.25
+ ====
+ - Updated interface to notify users of a redirected feed.
+ - Added a context sensitive button to update the url with the redirected url.
+ 
 0.24
  ====
  - Removed clutter from applet tooltip by only showing unread feeds.

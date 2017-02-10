@@ -50,6 +50,7 @@ FeedItem.prototype = {
         this.published = published;
         this.read = false;
         this.deleted = false;
+        this.is_redirected = false;
     },
 
     open: function() {
@@ -136,6 +137,7 @@ FeedReader.prototype = {
 
             if (info.exception != undefined){
                 // Invalid feed detected, throw and log error.
+                this.title = "Invalid feed url";
                 throw info.exception;
             }
 
@@ -143,8 +145,11 @@ FeedReader.prototype = {
             this.logger.debug("Processing feed: " + info.title);
 
             // Check if feed has a permanent redirect
-            if (info.redirect_url != undefined) {
-                this.logger.info("Feed has been redirected to (Please update feed): " + info.redirect_url);
+            if (info.redirected_url != undefined) {
+                this.is_redirected = true;
+                this.redirected_url = info.redirected_url;
+                this.title += " (Redirected to: " + info.redirected_url + ")";
+                this.logger.info("Feed has been redirected to: " + info.redirected_url + "(Please update feed)");
                 // eventually need to address this more forcefully
             }
 
