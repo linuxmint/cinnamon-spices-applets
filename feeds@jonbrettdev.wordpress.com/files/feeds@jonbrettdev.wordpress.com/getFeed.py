@@ -34,7 +34,7 @@ if __name__ == "__main__":
         parser = feedparser.parse(rss)
         # check for permanent redirect
         if parser.status == 301:
-            info['redirect_url'] = parser.href
+            info['redirected_url'] = parser.href
         elif parser.status == 401:
             raise Exception('Feed is password protected and not supported at this time.')
         elif parser.status == 410:
