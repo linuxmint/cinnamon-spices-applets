@@ -3,16 +3,13 @@
 // Version 1.0.2
 
 const Lang = imports.lang;
-const St = imports.gi.St;
-const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop; //timer stuff
-const AppletMeta = imports.ui.appletManager.applets['brightness@markbokil.com'];
-const AppletDir = imports.ui.appletManager.appletMeta['brightness@markbokil.com'].path;
+const Gettext = imports.gettext.domain('cinnamon');
+const _ = Gettext.gettext;
 
 //const SetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ';
 //const GetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.GetPercentage';
@@ -97,14 +94,14 @@ MyApplet.prototype = {
         
     do_UI_update_probe: function() {
         let currentBrightness = this.getSystemBrightness();
-        let brightnessStr = "Brightness: " + Math.round(currentBrightness * 100) + "%";
+        let brightnessStr = _("Brightness") + ": " + Math.round(currentBrightness * 100) + "%";
         this._brightnessSlider.setValue(currentBrightness); // slider position
         this.set_applet_tooltip(_(brightnessStr)); // applet tooltip
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness: 
     },
     
     do_UI_update_slider: function(currentBrightness) { 
-        let brightnessStr = "Brightness: " + currentBrightness + "%";
+        let brightnessStr = _("Brightness") + ": " + currentBrightness + "%";
         this.set_applet_tooltip(_(brightnessStr)); // applet tooltip
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness: 
     },
