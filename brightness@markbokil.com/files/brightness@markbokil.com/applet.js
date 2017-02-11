@@ -71,7 +71,7 @@ MyApplet.prototype = {
 
     getSystemBrightness: function() {     
 	    try {  
-            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
+            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
             currentBright = currentBright.toString();
                 
             // (uint32 53,) std output of getbrightnesscmd, just want 53 value on end
@@ -83,7 +83,7 @@ MyApplet.prototype = {
             
             if (isNaN(currentBright)) {
                 currentBright = 100; // 100% bright as fallback
-                global.log("Error getting Gnome backlight power settings");
+                global.log("Error getting Cinnamon backlight power settings");
             }
  
             return currentBright / 100;
@@ -118,7 +118,7 @@ MyApplet.prototype = {
         this.do_UI_update_slider(brightness); //update UI from slider value
         
         try {  
-            Util.spawnCommandLine('gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ' + brightness); //crashes if not hard coded
+            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + brightness); //crashes if not hard coded
         }  
         catch (e) {
             global.logError(e);
