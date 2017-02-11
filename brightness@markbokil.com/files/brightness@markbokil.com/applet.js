@@ -3,16 +3,13 @@
 // Version 1.0.2
 
 const Lang = imports.lang;
-const St = imports.gi.St;
-const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
-const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop; //timer stuff
-const AppletMeta = imports.ui.appletManager.applets['brightness@markbokil.com'];
-const AppletDir = imports.ui.appletManager.appletMeta['brightness@markbokil.com'].path;
+const Gettext = imports.gettext.domain('cinnamon');
+const _ = Gettext.gettext;
 
 //const SetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ';
 //const GetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.GetPercentage';
@@ -71,7 +68,7 @@ MyApplet.prototype = {
 
     getSystemBrightness: function() {     
 	    try {  
-            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
+            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
             currentBright = currentBright.toString();
                 
             // (uint32 53,) std output of getbrightnesscmd, just want 53 value on end
@@ -83,7 +80,7 @@ MyApplet.prototype = {
             
             if (isNaN(currentBright)) {
                 currentBright = 100; // 100% bright as fallback
-                global.log("Error getting Gnome backlight power settings");
+                global.log("Error getting Cinnamon backlight power settings");
             }
  
             return currentBright / 100;
@@ -97,14 +94,14 @@ MyApplet.prototype = {
         
     do_UI_update_probe: function() {
         let currentBrightness = this.getSystemBrightness();
-        let brightnessStr = "Brightness: " + Math.round(currentBrightness * 100) + "%";
+        let brightnessStr = _("Brightness") + ": " + Math.round(currentBrightness * 100) + "%";
         this._brightnessSlider.setValue(currentBrightness); // slider position
         this.set_applet_tooltip(_(brightnessStr)); // applet tooltip
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness: 
     },
     
     do_UI_update_slider: function(currentBrightness) { 
-        let brightnessStr = "Brightness: " + currentBrightness + "%";
+        let brightnessStr = _("Brightness") + ": " + currentBrightness + "%";
         this.set_applet_tooltip(_(brightnessStr)); // applet tooltip
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness: 
     },
@@ -118,7 +115,7 @@ MyApplet.prototype = {
         this.do_UI_update_slider(brightness); //update UI from slider value
         
         try {  
-            Util.spawnCommandLine('gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ' + brightness); //crashes if not hard coded
+            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + brightness); //crashes if not hard coded
         }  
         catch (e) {
             global.logError(e);
