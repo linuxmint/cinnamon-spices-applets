@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-13 21:39+0100\n"
+"POT-Creation-Date: 2017-02-13 23:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,35 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:58
+#: applet.js:70
 msgid "Num Lock"
 msgstr ""
 
-#: applet.js:62
+#: applet.js:74
 msgid "Caps Lock"
 msgstr ""
 
-#: applet.js:97
+#: applet.js:79
+msgid "Notifications"
+msgstr ""
+
+#: applet.js:114
 msgid "Lock Keys"
 msgstr ""
 
-#: applet.js:131
+#: applet.js:148
 msgid "Num lock on"
 msgstr ""
 
-#: applet.js:136
+#: applet.js:153
 msgid "Num lock off"
 msgstr ""
 
-#: applet.js:145
+#: applet.js:163
 msgid "Caps lock on"
 msgstr ""
 
-#: applet.js:150
+#: applet.js:168
 msgid "Caps lock off"
 msgstr ""
 
