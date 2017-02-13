@@ -161,6 +161,8 @@ NoteBase.prototype = {
             if ( settings.boxShadow ) this.actor.add_style_pseudo_class("boxshadow");
             else this.actor.remove_style_pseudo_class("boxshadow");
         }));
+        settings.settings.bindWithObject(this, "font", "font", this.setFont);
+        this.setFont();
 
         this.titleBox = new St.BoxLayout({ style_class: "sticky-titleBox" });
         this.actor.add_actor(this.titleBox);
@@ -239,6 +241,33 @@ NoteBase.prototype = {
         this.theme = codeName;
         this.actor.style_class = codeName;
         this.emit("changed");
+    },
+
+    setFont: function() {
+        let pangoFont = Pango.FontDescription.from_string(this.font);
+        let fontString = "";
+
+        switch ( pangoFont.get_style() ) {
+            case Pango.Style.OBLIQUE:
+                fontString += "oblique ";
+                break;
+            case Pango.Style.ITALIC:
+                fontString += "italic ";
+                break;
+        }
+        if ( pangoFont.get_variant() == Pango.Variant.SMALL_CAPS ) {
+            fontString += "small-caps ";
+        }
+        fontString += pangoFont.get_weight() + " ";
+        if ( pangoFont.get_size_is_absolute() ) {
+            fontString += pangoFont.get_size() + "px ";
+        }
+        else {
+            fontString += (pangoFont.get_size() / 1024) + "px ";
+        }
+        fontString += pangoFont.get_family();
+
+        this.actor.set_style("font: "+fontString);
     },
 
     checkResize: function(actor, event) {

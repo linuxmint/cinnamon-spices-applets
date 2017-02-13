@@ -1,9 +1,9 @@
 {
-    "appearanceHeader": {
+    "appearance": {
         "type": "section",
         "description": "Appearance"
     },
-    
+
     "height": {
         "type": "scale",
         "description": "Default height",
@@ -12,7 +12,7 @@
         "step": 25,
         "default": 200
     },
-    
+
     "width": {
         "type": "scale",
         "description": "Default width",
@@ -21,7 +21,7 @@
         "step": 25,
         "default": 200
     },
-    
+
     "theme": {
         "type": "combobox",
         "description": "Default theme",
@@ -40,19 +40,25 @@
             "Random": "random"
         }
     },
-    
+
     "boxShadow": {
         "type": "switch",
         "description": "Show shadow behind notes",
         "default": false,
         "tooltip": "Warning: this has been known to slow down some computers - not recommended on older hardware"
     },
-    
-    "behaviorHeader": {
+
+    "font": {
+        "type": "fontchooser",
+        "description": "Font",
+        "default": "Arial 12"
+    },
+
+    "behavior": {
         "type": "section",
         "description": "Behavior"
     },
-    
+
     "startState": {
         "type": "combobox",
         "description": "When Cinnamon starts",
@@ -64,17 +70,17 @@
             "Restore previous state": 3
         }
     },
-    
+
     "storedNotes": {
         "type": "generic",
         "default": []
     },
-    
+
     "raisedState": {
         "type": "generic",
         "default": false
     },
-    
+
     "hideState": {
         "type": "generic",
         "default": false
