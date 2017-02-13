@@ -26,7 +26,7 @@
     "showNotifications": {
         "type": "checkbox",
         "description": "Show notifications on completion",
-        "default": true
+        "default": false
     },
     
     "sep1": {

@@ -87,7 +87,7 @@ MyApplet.prototype = {
             try {
                 let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
                 let [result, pid] = GLib.spawn_async(basePath, argv, null, flags, null);
-                if ( this.showNotifications ) Main.notify("Process started", "Command: "+this.command+"\nProcess Id: "+pid);
+                if ( this.showNotifications ) Main.notify("Command Launcher: Process started", "Command: "+this.command+"\nProcess Id: "+pid);
                 GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.onClosed), null);
             } catch(e) {
                 Main.notify("Error while trying to run \"" + this.command + "\"", e.message);
@@ -138,7 +138,7 @@ MyApplet.prototype = {
     },
     
     onClosed: function(pid, status) {
-        if ( this.showNotifications ) Main.notify("Process ended", "Command: "+this.command+"\nProcess Id: "+pid);
+        if ( this.showNotifications ) Main.notify("Command Launcher: Process ended", "Command: "+this.command+"\nProcess Id: "+pid);
     }
 }
 
