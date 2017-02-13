@@ -10,6 +10,14 @@ const UPowerGlib = imports.gi.UPowerGlib;
 const GLib = imports.gi.GLib;
 const NMClient = imports.gi.NMClient;
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+};
+
 function MyApplet(metadata, orientation) {
     this._init(metadata, orientation);
 }
@@ -20,7 +28,11 @@ MyApplet.prototype = {
     _init: function(metadata, orientation) {        
         Applet.IconApplet.prototype._init.call(this, orientation);
         
-        try {               
+        try {
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
             this.set_applet_icon_path(metadata.path + "/icon.png");   
             
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -90,7 +102,7 @@ MyApplet.prototype = {
             this.imageWidget.set_child(b);
         }
         catch (e) {
-            this.textWidget.set_text(" Please make sure vnstat and vnstati are installed and that the vnstat daemon is running! " + e + " ");
+            this.textWidget.set_text(" " + _("Please make sure vnstat and vnstati are installed and that the vnstat daemon is running!") + " " + e + " ");
             global.logError(e);
         }
                 
