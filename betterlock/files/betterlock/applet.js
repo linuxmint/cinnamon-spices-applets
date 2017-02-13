@@ -6,7 +6,6 @@ const Keymap = Gdk.Keymap.get_default();
 const Caribou = imports.gi.Caribou;
 const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
-const Gio = imports.gi.Gio;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
@@ -24,8 +23,8 @@ MyApplet.prototype = {
 
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
-	this.binEmpty= new St.Bin();
-	this.binEmpty.set_size(3,1);
+        this.binEmpty= new St.Bin();
+        this.binEmpty.set_size(3,1);
 
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
@@ -46,10 +45,10 @@ MyApplet.prototype = {
                                     icon_size: 18,
                                     style_class: "applet-icon"});
 
-	this.binNum.child = this.num_on;
-	this.binCaps.child = this.caps_off;
+        this.binNum.child = this.num_off;
+        this.binCaps.child = this.caps_off;
         this.actor.add(this.binCaps, {y_align: St.Align.MIDDLE, y_fill: false});
-	this.actor.add(this.binEmpty);
+        this.actor.add(this.binEmpty);
         this.actor.add(this.binNum, {y_align: St.Align.MIDDLE, y_fill: false});
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -112,9 +111,9 @@ MyApplet.prototype = {
         let numlock_prev = this.binNum.child;
         let capslock_prev = this.binCaps.child;
         if (this.numlock_state)
-	    this.binNum.child = this.num_on;
+            this.binNum.child = this.num_on;
         else
-	    this.binNum.child = this.num_off;
+            this.binNum.child = this.num_off;
 
         if (this.capslock_state)
             this.binCaps.child = this.caps_on;
@@ -170,15 +169,29 @@ MyApplet.prototype = {
 
     _onNumChanged: function(actor, event) {
         let keyval = Gdk.keyval_from_name("Num_Lock");
-        Caribou.XAdapter.get_default().keyval_press(keyval);
-        Caribou.XAdapter.get_default().keyval_release(keyval);
+        if (Caribou.XAdapter.get_default !== undefined) {
+            //caribou <= 0.4.11
+            Caribou.XAdapter.get_default().keyval_press(keyval);
+            Caribou.XAdapter.get_default().keyval_release(keyval);
+        } else {
+            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
+            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
+        }
+        this._updateState();
     },
 
     _onCapsChanged: function(actor, event) {
         let keyval = Gdk.keyval_from_name("Caps_Lock");
-        Caribou.XAdapter.get_default().keyval_press(keyval);
-        Caribou.XAdapter.get_default().keyval_release(keyval);
-    } 
+        if (Caribou.XAdapter.get_default !== undefined) {
+            //caribou <= 0.4.11
+            Caribou.XAdapter.get_default().keyval_press(keyval);
+            Caribou.XAdapter.get_default().keyval_release(keyval);
+        } else {
+            Caribou.DisplayAdapter.get_default().keyval_press(keyval);
+            Caribou.DisplayAdapter.get_default().keyval_release(keyval);
+        }
+        this._updateState();
+    }
 };
 
 function main(metadata, orientation){
