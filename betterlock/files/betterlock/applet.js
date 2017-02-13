@@ -9,7 +9,17 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 
-const Meta = imports.ui.appletManager.appletMeta["betterlock"];
+let UUID = "betterlock";
+const Meta = imports.ui.appletManager.appletMeta[UUID];
+
+// l10n/translation
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+   return Gettext.dgettext(UUID, str);
+};
 
 function MyApplet(orientation){
     this._init(orientation);
@@ -21,10 +31,12 @@ MyApplet.prototype = {
     _init: function(orientation){
         Applet.Applet.prototype._init.call(this, orientation);
 
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
         this.binEmpty= new St.Bin();
-        this.binEmpty.set_size(3,1);
+        this.binEmpty.set_size(3,3);
 
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
@@ -55,11 +67,11 @@ MyApplet.prototype = {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Num Lock'), false, { reactive: true });
+        this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, { reactive: true });
         this.numMenuItem.connect('activate', Lang.bind(this, this._onNumChanged));
         this.menu.addMenuItem(this.numMenuItem);
 
-        this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_('Caps Lock'), false, { reactive: true });
+        this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, { reactive: true });
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
         this.menu.addMenuItem(this.capsMenuItem);
 
