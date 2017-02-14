@@ -133,6 +133,17 @@ CommandItem.prototype = {
     }
 }
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
@@ -150,6 +161,10 @@ MyApplet.prototype = {
             button_path = metadata.path + "/buttons/";
 
             Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
+
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
             this.bindSettings();
 
