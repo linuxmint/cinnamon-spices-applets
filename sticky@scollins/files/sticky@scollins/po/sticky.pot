@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 12:15+0100\n"
+"POT-Creation-Date: 2017-02-12 21:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,86 +17,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:206 3.2/applet.js:194
+#: applet.js:206
 msgid "Change theme"
 msgstr ""
 
-#: applet.js:215 3.2/applet.js:204
+#: applet.js:215
 msgid "Edit title"
 msgstr ""
 
-#: applet.js:215 3.2/applet.js:204
+#: applet.js:215
 msgid "Add title"
 msgstr ""
 
-#: applet.js:221 3.2/applet.js:210
+#: applet.js:221
 msgid "Copy"
 msgstr ""
 
-#: applet.js:225 3.2/applet.js:214
+#: applet.js:225
 msgid "Paste"
 msgstr ""
 
-#: applet.js:231 3.2/applet.js:220
+#: applet.js:231
 msgid "About..."
 msgstr ""
 
-#: applet.js:235 3.2/applet.js:224
+#: applet.js:235
 msgid "Configure..."
 msgstr ""
 
-#: applet.js:241 3.2/applet.js:230
+#: applet.js:241
 msgid "Remove this note"
 msgstr ""
 
-#: applet.js:407 3.2/applet.js:396
+#: applet.js:407
 msgid "Title"
 msgstr ""
 
-#: applet.js:503 3.2/applet.js:492
+#: applet.js:503
 msgid "Switch to check list"
 msgstr ""
 
-#: applet.js:711 3.2/applet.js:700
+#: applet.js:711
 msgid "Switch to regular note"
 msgstr ""
 
-#: applet.js:715 3.2/applet.js:704
+#: applet.js:715
 msgid "Remove completed items"
 msgstr ""
 
-#. main menu
-#: applet.js:1604 3.2/applet.js:1593
+#: applet.js:1604
 msgid "New note"
 msgstr ""
 
-#: applet.js:1608 3.2/applet.js:1597
+#: applet.js:1608
 msgid "New check-list"
 msgstr ""
 
-#: applet.js:1614 3.2/applet.js:1603
+#: applet.js:1614
 msgid "Pin notes (keep on top)"
 msgstr ""
 
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
-#: applet.js:1621 3.2/applet.js:1610
+#: applet.js:1621
 msgid "Hide notes"
 msgstr ""
 
-#. context menu
-#: applet.js:1626 3.2/applet.js:1615
+#: applet.js:1626
 msgid "Back up notes"
 msgstr ""
 
-#: applet.js:1630 3.2/applet.js:1619
+#: applet.js:1630
 msgid "Restore from backup"
 msgstr ""
 
-#: applet.js:1651 3.2/applet.js:1640
+#: applet.js:1651
 msgid ""
 "This will permanently remove all existing notes. Are you sure you want to "
 "continue?"
+msgstr ""
+
+#. 3.2->settings-schema.json->behavior->description
+#. sticky@scollins->settings-schema.json->behaviorHeader->description
+msgid "Behavior"
 msgstr ""
 
 #. 3.2->settings-schema.json->startState->description
@@ -117,6 +120,11 @@ msgstr ""
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
 msgid "Show notes on Desktop"
+msgstr ""
+
+#. 3.2->settings-schema.json->appearance->description
+#. sticky@scollins->settings-schema.json->appearanceHeader->description
+msgid "Appearance"
 msgstr ""
 
 #. 3.2->settings-schema.json->height->description
@@ -201,14 +209,8 @@ msgid ""
 "on older hardware"
 msgstr ""
 
-#. 3.2->settings-schema.json->appearanceHeader->description
-#. sticky@scollins->settings-schema.json->appearanceHeader->description
-msgid "Appearance"
-msgstr ""
-
-#. 3.2->settings-schema.json->behaviorHeader->description
-#. sticky@scollins->settings-schema.json->behaviorHeader->description
-msgid "Behavior"
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
 msgstr ""
 
 #. sticky@scollins->metadata.json->description
@@ -223,9 +225,7 @@ msgstr ""
 msgid ""
 "This applet is designed to be a simple, quick, and easy-to-use note utility."
 " While there is some customization available, the emphasis is on making it "
-"feel as smooth and easy to use as possible. Feel free to contribute by "
-"submitting pull requests, bug reports and feature requests to my github "
-"repo."
+"feel as smooth and easy to use as possible."
 msgstr ""
 
 #. sticky@scollins->metadata.json->name

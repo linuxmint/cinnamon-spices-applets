@@ -6,5 +6,5 @@
     "website": "https://github.com/collinss/Cinnamon-Command-Launcher",
     "version": "1.4",
     "contributors": "Stephen Collins - Author",
-    "max-instances": 20
+    "max-instances": -1
 }
