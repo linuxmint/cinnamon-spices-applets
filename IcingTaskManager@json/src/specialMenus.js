@@ -550,7 +550,7 @@ AppThumbnailHoverMenu.prototype = {
     // need to implement this class or cinnamon outputs a bunch of errors // TBD
     this.actor.style_class = 'hide-arrow'
 
-    this.box.style_class = 'thumbnail-popup-content'
+    this.box.set_style_class_name('thumbnail-popup-content')
 
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -811,7 +811,7 @@ PopupMenuAppSwitcherItem.prototype = {
     
   },
 
-  _refresh: function () {
+  _refresh: function (refreshThumbnails=null) {
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
     // Get a list of all windows of our app that are running in the current workspace
@@ -834,6 +834,11 @@ PopupMenuAppSwitcherItem.prototype = {
     this.reAdd = false
     // used to make sure everything is on the stage
     setTimeout(()=>this.setStyleOptions(windows), 0)
+    if (refreshThumbnails) {
+      for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
+        this.appThumbnails[i].thumbnail._refresh(windows[0], windows)
+      }
+    }
   },
 
   addWindowThumbnails: function (windows) {
@@ -881,7 +886,7 @@ PopupMenuAppSwitcherItem.prototype = {
     padding = boxTheme ? boxTheme.get_vertical_padding() : null
     var boxPadding = (padding && (padding > 0) ? padding : 3)
     this.box.style = 'padding:' + boxPadding + 'px;'
-    if (this.isFavapp) {
+    if (this.isFavapp && this.metaWindowThumbnail) {
       this.metaWindowThumbnail.thumbnailIconSize()
       return
     }
@@ -1002,7 +1007,7 @@ WindowThumbnail.prototype = {
 
     if (this.metaWindow) {
       this.windowTitleId = this.metaWindow.connect('notify::title', ()=> {
-        this._label.text = this.metaWindow.get_title()
+        this._label.set_text(this.metaWindow.get_title())
       })
       this.windowFocusId = this.metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange))
       this._updateAttentionGrabber(null, null, this._applet.showAlerts)
@@ -1242,8 +1247,10 @@ WindowThumbnail.prototype = {
         setThumbSize(divider * divideMultiplier, 16)
         return
       } else {
-        if (this._applet.verticalThumbs) {
+        if (this._applet.verticalThumbs && this._applet.showThumbs) {
           this.thumbnailActor.height = this.thumbnailHeight
+        } else if (this._applet.verticalThumbs) {
+          this.thumbnailActor.height = 0
         }
         this.thumbnailActor.width = this.thumbnailWidth
         this._container.style = 'width: ' + Math.floor(this.thumbnailWidth - 16) + 'px'

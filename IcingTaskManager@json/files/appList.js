@@ -12,8 +12,8 @@ var App = AppletDir.applet;
 var AppGroup = AppletDir.appGroup;
 var clog = AppletDir.__init__.clog;
 var setTimeout = AppletDir.__init__.setTimeout;
-// List of running apps
 
+// List of running apps
 function AppList() {
   this._init.apply(this, arguments);
 }
@@ -130,10 +130,29 @@ AppList.prototype = {
       this._updateSpacing();
     }
   },
-
-  _closeAllHoverMenus: function _closeAllHoverMenus() {
+  _closeAllHoverMenus: function _closeAllHoverMenus(cb) {
     for (var i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.hoverMenu.close();
+      if (this.appList[i].appGroup.hoverMenu.isOpen) {
+        this.appList[i].appGroup.hoverMenu.close();
+      }
+    }
+    if (typeof cb === 'function') {
+      cb();
+    }
+  },
+  _closeAllRightClickMenus: function _closeAllRightClickMenus(cb) {
+    for (var i = 0, len = this.appList.length; i < len; i++) {
+      if (typeof this.appList[i].appGroup.rightClickMenu !== 'undefined' && this.appList[i].appGroup.rightClickMenu.isOpen) {
+        this.appList[i].appGroup.rightClickMenu.close();
+      }
+    }
+    if (typeof cb === 'function') {
+      cb();
+    }
+  },
+  _refreshAllThumbnails: function _refreshAllThumbnails() {
+    for (var i = 0, len = this.appList.length; i < len; i++) {
+      this.appList[i].appGroup.hoverMenu.appSwitcherItem._refresh(true);
     }
   },
 
@@ -354,9 +373,7 @@ AppList.prototype = {
       var time = Date.now();
       var appGroup = new AppGroup.AppGroup(_this3._applet, _this3, app, isFavapp, window, time, index, appId);
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
-      appGroup.watchWorkspace(metaWorkspace); // disable for windows to stay persistent across ws'
-
-      app.connect_after('windows-changed', Lang.bind(_this3, _this3._onAppWindowsChanged, app));
+      appGroup.watchWorkspace(metaWorkspace);
 
       _this3.appList.push({
         id: appId,
@@ -398,11 +415,14 @@ AppList.prototype = {
     return result;
   },
 
-  _onAppWindowsChanged: function _onAppWindowsChanged(app) {
+  _onAppWindowsChanged: function _onAppWindowsChanged(app, cb) {
     var numberOfwindows = this._getNumberOfAppWindowsInWorkspace(app, this.metaWorkspace);
     if (!numberOfwindows || numberOfwindows === 0) {
       this._removeApp(app);
       this._calcAllWindowNumbers();
+    }
+    if (typeof cb === 'function') {
+      cb();
     }
   },
 

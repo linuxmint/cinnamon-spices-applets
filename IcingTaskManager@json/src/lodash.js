@@ -17072,3 +17072,4 @@ var runInContext = (function runInContext(context) {
 
 // Export lodash.
 var _ = typeof global.lo !== 'undefined' ? global.lo : runInContext();
+global.lo = _;
