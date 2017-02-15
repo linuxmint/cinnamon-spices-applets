@@ -32,20 +32,26 @@ const pseudoOptions = [
 // Creates a button with an icon and a label.
 // The label text must be set with setText
 // @icon: the icon to be displayed
+// Button with icon and label.  Click events
+// need to be attached manually, but automatically
+// highlight when a window of app has focus.
 
-function IconLabelButton () {
+function AppButton () {
   this._init.apply(this, arguments)
 }
 
-IconLabelButton.prototype = {
+AppButton.prototype = {
+
   _init: function (parent) {
-    if (parent.icon === null) {
-      throw 'IconLabelButton icon argument must be non-null'
-    }
-    this._parent = parent
+    this.icon_size = Math.floor(parent._applet._panelHeight - 4)
+    this.app = parent.app
+    this.icon = this.app.create_icon_texture(this.icon_size)
     this._applet = parent._applet
+    this._parent = parent
+    this.isFavapp = parent.isFavapp
+    this.metaWindow = []
+    this.metaWindows = []
     this.settings = this._applet.settings
-    this._icon = parent.icon
     this.actor = new St.Bin({
       style_class: 'window-list-item-box app-list-item-box',
       reactive: true,
@@ -87,15 +93,15 @@ IconLabelButton.prototype = {
     this.signals._container.push(this._container.connect('allocate', Lang.bind(this, this._allocate)))
 
     this._label = new St.Label({
-      style_class: 'app-button-label'
+      style_class: 'app-button-label',
+      text: ''
     })
-    this._label.text = ''
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel'
     })
 
 
-    this._container.add_actor(this._icon)
+    this._container.add_actor(this.icon)
     this._container.add_actor(this._label)
     this._container.add_actor(this._numLabel)
 
@@ -106,6 +112,16 @@ IconLabelButton.prototype = {
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)))
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)))
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)))
+
+    if (this.isFavapp) {
+      this._isFavorite(true)
+    }
+
+    this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange))
+    this._updateAttentionGrabber(null, null, this._applet.showAlerts)
+    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)))
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)))
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)))
   },
 
   on_panel_edit_mode_changed: function () {
@@ -132,13 +148,13 @@ IconLabelButton.prototype = {
   setIconSize: function () {
     var size = this._applet.iconSize
     if (this._applet.enableIconSize) {
-      this._icon.set_size(size, size)
+      this.icon.set_size(size, size)
     }
   },
 
   setText: function (text='') {
-    if (text) {
-      this._label.text = text
+    if (text && text.length > 0 && text.indexOf('null') === -1) {
+      this._label.set_text(text);
       if (text.length > 0) {
         this._label.set_style('padding-right: 4px;')
       }
@@ -186,7 +202,7 @@ IconLabelButton.prototype = {
   },
 
   _getPreferredWidth: function (actor, forHeight, alloc) {
-    let [iconMinSize, iconNaturalSize] = this._icon.get_preferred_width(forHeight)
+    let [iconMinSize, iconNaturalSize] = this.icon.get_preferred_width(forHeight)
     let [labelMinSize, labelNaturalSize] = this._label.get_preferred_width(forHeight)
     // The label text is starts in the center of the icon, so we should allocate the space
     // needed for the icon plus the space needed for(label - icon/2)
@@ -200,7 +216,7 @@ IconLabelButton.prototype = {
   },
 
   _getPreferredHeight: function (actor, forWidth, alloc) {
-    let [iconMinSize, iconNaturalSize] = this._icon.get_preferred_height(forWidth)
+    let [iconMinSize, iconNaturalSize] = this.icon.get_preferred_height(forWidth)
     let [labelMinSize, labelNaturalSize] = this._label.get_preferred_height(forWidth)
     alloc.min_size = Math.min(iconMinSize, labelMinSize)
     alloc.natural_size = Math.max(iconNaturalSize, labelNaturalSize)
@@ -222,14 +238,14 @@ IconLabelButton.prototype = {
     var direction = this.actor.get_text_direction()
 
     // Set the icon to be left-justified (or right-justified) and centered vertically
-    let [iconNaturalWidth, iconNaturalHeight] = this._icon.get_preferred_size();
+    let [iconNaturalWidth, iconNaturalHeight] = this.icon.get_preferred_size();
     [childBox.y1, childBox.y2] = center(allocHeight, iconNaturalHeight)
     if (direction == Clutter.TextDirection.LTR) {
       [childBox.x1, childBox.x2] = [0, Math.min(iconNaturalWidth, allocWidth)]
     } else {
       [childBox.x1, childBox.x2] = [Math.max(0, allocWidth - iconNaturalWidth), allocWidth]
     }
-    this._icon.allocate(childBox, flags)
+    this.icon.allocate(childBox, flags)
 
     // Set the label to start its text in the left of the icon
     var iconWidth = childBox.x2 - childBox.x1;
@@ -257,8 +273,14 @@ IconLabelButton.prototype = {
     this._numLabel.allocate(childBox, flags)
   },
   showLabel: function (animate, targetWidth=MAX_BUTTON_WIDTH) {
-    // need to turn width back to preferred.
-    var setToZero
+    if (!this._label) {
+      return false
+    }
+    if (!this._label.text) {
+      this._label.set_text('');
+    }
+    // TBD
+    /*var setToZero
     if (this._label.width < 2) {
       this._label.set_width(-1)
       setToZero = true
@@ -272,20 +294,27 @@ IconLabelButton.prototype = {
     if (!animate) {
       this._label.width = width
       return
-    }
+    }*/
     this._label.show()
     Tweener.addTween(this._label, {
-      width: width,
+      width: targetWidth,
       time: BUTTON_BOX_ANIMATION_TIME,
       transition: 'easeOutQuad'
     })
+    return false
   },
 
   hideLabel: function (animate) {
+    if (!this._label) {
+      return false
+    }
+    if (!this._label.text) {
+      this._label.set_text('');
+    }
     if (!animate) {
       this._label.width = 1
       this._label.hide()
-      return
+      return false
     }
 
     Tweener.addTween(this._label, {
@@ -297,40 +326,7 @@ IconLabelButton.prototype = {
         this._label.hide()
       }
     })
-  }
-}
-
-// Button with icon and label.  Click events
-// need to be attached manually, but automatically
-// highlight when a window of app has focus.
-
-function AppButton () {
-  this._init.apply(this, arguments)
-}
-
-AppButton.prototype = {
-  __proto__: IconLabelButton.prototype,
-
-  _init: function (parent) {
-    this.icon_size = Math.floor(parent._applet._panelHeight - 4)
-    this.app = parent.app
-    this.icon = this.app.create_icon_texture(this.icon_size)
-    this._applet = parent._applet
-    this._parent = parent
-    this.isFavapp = parent.isFavapp
-    this.metaWindow = []
-    this.metaWindows = []
-    IconLabelButton.prototype._init.call(this, this)
-
-    if (this.isFavapp) {
-      this._isFavorite(true)
-    }
-
-    this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange))
-    this._updateAttentionGrabber(null, null, this._applet.showAlerts)
-    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)))
-    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)))
-    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)))
+    return false
   },
 
   _onEnter(){
@@ -444,7 +440,9 @@ AppButton.prototype = {
       } else {
        this.setStyle('panel-launcher')
       }
-      this._label.text = ''
+      if (this._label) {
+        this._label.set_text('');
+      }
     } else {
       if (this._applet.panelLauncherClass) {
         this.setStyle('window-list-item-box')

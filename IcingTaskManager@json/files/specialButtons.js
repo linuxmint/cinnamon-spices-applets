@@ -30,22 +30,28 @@ var pseudoOptions = [{ id: 1, label: 'hover' }, { id: 2, label: 'focus' }, { id:
 // Creates a button with an icon and a label.
 // The label text must be set with setText
 // @icon: the icon to be displayed
+// Button with icon and label.  Click events
+// need to be attached manually, but automatically
+// highlight when a window of app has focus.
 
-function IconLabelButton() {
+function AppButton() {
   this._init.apply(this, arguments);
 }
 
-IconLabelButton.prototype = {
+AppButton.prototype = {
+
   _init: function _init(parent) {
     var _this = this;
 
-    if (parent.icon === null) {
-      throw 'IconLabelButton icon argument must be non-null';
-    }
-    this._parent = parent;
+    this.icon_size = Math.floor(parent._applet._panelHeight - 4);
+    this.app = parent.app;
+    this.icon = this.app.create_icon_texture(this.icon_size);
     this._applet = parent._applet;
+    this._parent = parent;
+    this.isFavapp = parent.isFavapp;
+    this.metaWindow = [];
+    this.metaWindows = [];
     this.settings = this._applet.settings;
-    this._icon = parent.icon;
     this.actor = new St.Bin({
       style_class: 'window-list-item-box app-list-item-box',
       reactive: true,
@@ -84,14 +90,14 @@ IconLabelButton.prototype = {
     this.signals._container.push(this._container.connect('allocate', Lang.bind(this, this._allocate)));
 
     this._label = new St.Label({
-      style_class: 'app-button-label'
+      style_class: 'app-button-label',
+      text: ''
     });
-    this._label.text = '';
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel'
     });
 
-    this._container.add_actor(this._icon);
+    this._container.add_actor(this.icon);
     this._container.add_actor(this._label);
     this._container.add_actor(this._numLabel);
 
@@ -104,6 +110,16 @@ IconLabelButton.prototype = {
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)));
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)));
+
+    if (this.isFavapp) {
+      this._isFavorite(true);
+    }
+
+    this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
+    this._updateAttentionGrabber(null, null, this._applet.showAlerts);
+    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)));
   },
 
   on_panel_edit_mode_changed: function on_panel_edit_mode_changed() {
@@ -132,15 +148,15 @@ IconLabelButton.prototype = {
   setIconSize: function setIconSize() {
     var size = this._applet.iconSize;
     if (this._applet.enableIconSize) {
-      this._icon.set_size(size, size);
+      this.icon.set_size(size, size);
     }
   },
 
   setText: function setText() {
     var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 
-    if (text) {
-      this._label.text = text;
+    if (text && text.length > 0 && text.indexOf('null') === -1) {
+      this._label.set_text(text);
       if (text.length > 0) {
         this._label.set_style('padding-right: 4px;');
       }
@@ -190,7 +206,7 @@ IconLabelButton.prototype = {
   },
 
   _getPreferredWidth: function _getPreferredWidth(actor, forHeight, alloc) {
-    var _icon$get_preferred_w = this._icon.get_preferred_width(forHeight),
+    var _icon$get_preferred_w = this.icon.get_preferred_width(forHeight),
         _icon$get_preferred_w2 = _slicedToArray(_icon$get_preferred_w, 2),
         iconMinSize = _icon$get_preferred_w2[0],
         iconNaturalSize = _icon$get_preferred_w2[1];
@@ -212,7 +228,7 @@ IconLabelButton.prototype = {
   },
 
   _getPreferredHeight: function _getPreferredHeight(actor, forWidth, alloc) {
-    var _icon$get_preferred_h = this._icon.get_preferred_height(forWidth),
+    var _icon$get_preferred_h = this.icon.get_preferred_height(forWidth),
         _icon$get_preferred_h2 = _slicedToArray(_icon$get_preferred_h, 2),
         iconMinSize = _icon$get_preferred_h2[0],
         iconNaturalSize = _icon$get_preferred_h2[1];
@@ -243,7 +259,7 @@ IconLabelButton.prototype = {
 
     // Set the icon to be left-justified (or right-justified) and centered vertically
 
-    var _icon$get_preferred_s = this._icon.get_preferred_size(),
+    var _icon$get_preferred_s = this.icon.get_preferred_size(),
         _icon$get_preferred_s2 = _slicedToArray(_icon$get_preferred_s, 2),
         iconNaturalWidth = _icon$get_preferred_s2[0],
         iconNaturalHeight = _icon$get_preferred_s2[1];
@@ -264,7 +280,7 @@ IconLabelButton.prototype = {
       childBox.x1 = _ref2[0];
       childBox.x2 = _ref2[1];
     }
-    this._icon.allocate(childBox, flags);
+    this.icon.allocate(childBox, flags);
 
     // Set the label to start its text in the left of the icon
     var iconWidth = childBox.x2 - childBox.x1;
@@ -305,35 +321,48 @@ IconLabelButton.prototype = {
   showLabel: function showLabel(animate) {
     var targetWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : MAX_BUTTON_WIDTH;
 
-    // need to turn width back to preferred.
-    var setToZero;
-    if (this._label.width < 2) {
-      this._label.set_width(-1);
-      setToZero = true;
-    } else if (this._label.text && this._label.width < this._label.text.length * 7 - 5 || this._label.width > this._label.text.length * 7 + 5) {
-      this._label.set_width(-1);
+    if (!this._label) {
+      return false;
     }
-    var width = Math.min(targetWidth);
+    if (!this._label.text) {
+      this._label.set_text('');
+    }
+    // TBD
+    /*var setToZero
+    if (this._label.width < 2) {
+      this._label.set_width(-1)
+      setToZero = true
+    } else if (this._label.text && this._label.width < (this._label.text.length * 7) - 5 || this._label.width > (this._label.text.length * 7) + 5) {
+      this._label.set_width(-1)
+    }
+    var width = Math.min(targetWidth)
     if (setToZero) {
-      this._label.width = 1;
+      this._label.width = 1
     }
     if (!animate) {
-      this._label.width = width;
-      return;
-    }
+      this._label.width = width
+      return
+    }*/
     this._label.show();
     Tweener.addTween(this._label, {
-      width: width,
+      width: targetWidth,
       time: BUTTON_BOX_ANIMATION_TIME,
       transition: 'easeOutQuad'
     });
+    return false;
   },
 
   hideLabel: function hideLabel(animate) {
+    if (!this._label) {
+      return false;
+    }
+    if (!this._label.text) {
+      this._label.set_text('');
+    }
     if (!animate) {
       this._label.width = 1;
       this._label.hide();
-      return;
+      return false;
     }
 
     Tweener.addTween(this._label, {
@@ -345,40 +374,7 @@ IconLabelButton.prototype = {
         this._label.hide();
       }
     });
-  }
-};
-
-// Button with icon and label.  Click events
-// need to be attached manually, but automatically
-// highlight when a window of app has focus.
-
-function AppButton() {
-  this._init.apply(this, arguments);
-}
-
-AppButton.prototype = {
-  __proto__: IconLabelButton.prototype,
-
-  _init: function _init(parent) {
-    this.icon_size = Math.floor(parent._applet._panelHeight - 4);
-    this.app = parent.app;
-    this.icon = this.app.create_icon_texture(this.icon_size);
-    this._applet = parent._applet;
-    this._parent = parent;
-    this.isFavapp = parent.isFavapp;
-    this.metaWindow = [];
-    this.metaWindows = [];
-    IconLabelButton.prototype._init.call(this, this);
-
-    if (this.isFavapp) {
-      this._isFavorite(true);
-    }
-
-    this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
-    this._updateAttentionGrabber(null, null, this._applet.showAlerts);
-    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
-    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
-    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)));
+    return false;
   },
 
   _onEnter: function _onEnter() {
@@ -499,7 +495,9 @@ AppButton.prototype = {
       } else {
         this.setStyle('panel-launcher');
       }
-      this._label.text = '';
+      if (this._label) {
+        this._label.set_text('');
+      }
     } else {
       if (this._applet.panelLauncherClass) {
         this.setStyle('window-list-item-box');
