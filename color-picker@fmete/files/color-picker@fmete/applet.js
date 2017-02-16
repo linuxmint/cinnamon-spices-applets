@@ -23,30 +23,27 @@
 
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
-const Util = imports.misc.util;
-const Meta = imports.gi.Meta;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext.domain('cinnamon-applets');
 const _ = Gettext.gettext;
 const Settings = imports.ui.settings;  // Needed for settings API
-const Gio = imports.gi.Gio
 const Main = imports.ui.main;
- 
+
 function MyApplet(orientation,metadata, panelHeight, instance_id) {
     this._init(orientation,metadata, panelHeight, instance_id);
 }
- 
+
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
- 
+
     _init: function(orientation,metadata, panelHeight, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight,  instance_id);
 
-	this.instance_id=instance_id;
-	this.appletPath=metadata.path; 
+        this.instance_id=instance_id;
+        this.appletPath=metadata.path;
         try {
-            
-            this.settings = new Settings.AppletSettings(this, "color-picker@fmete", this.instance_id)
+
+            this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id)
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
                                  "combo-selection",
@@ -57,40 +54,40 @@ MyApplet.prototype = {
                                  "keybinding-test",
                                  "keybinding",
                                  this.on_keybinding_changed,
-                                 null); 
+                                 null);
             this.settings.bindProperty(Settings.BindingDirection.IN,
-            			 "icon-name",
-                                 "icon_name", 
+                                 "icon-name",
+                                 "icon_name",
                                  this.on_settings_changed,
                                  null);
-           
-            	//this.set_applet_icon_name(this.icon_name);
-           
-	    this.set_applet_tooltip(_("click here to pick a color"));
+
+            //this.set_applet_icon_name(this.icon_name);
+
+            this.set_applet_tooltip(_("click here to pick a color"));
             this.on_keybinding_changed();
-            this.on_settings_changed();                      
+            this.on_settings_changed();
         }
         catch (e) {
             global.logError(e);
         }
-        
+
 
      },
-     
+
      on_settings_changed: function() {
 
-       
+
         if (this.icon_name=="") {
             this.set_applet_icon_path(this.appletPath + "/icon.png")
         } else {
             this.set_applet_icon_path(this.icon_name)
         }
      },
-        
+
      on_keybinding_changed: function() {
         Main.keybindingManager.addHotKey("must-be-unique-id", this.keybinding, Lang.bind(this, this.on_hotkey_triggered));
      },
-     
+
      on_hotkey_triggered: function() {
         this.on_applet_clicked();
 
@@ -98,14 +95,14 @@ MyApplet.prototype = {
             this.on_settings_changed();
         }));
     },
-    
+
     on_applet_clicked: function(event) {
-	homeDir=GLib.get_home_dir();
+        homeDir=GLib.get_home_dir();
         GLib.spawn_command_line_async("python2 " + this.appletPath + "/cp.py "+this.combo_choice);
     }
-    
+
 };
- 
+
 function main(metadata,orientation, panelHeight,  instance_id) {
     let myApplet = new MyApplet(orientation,metadata, panelHeight, instance_id);
     return myApplet;
