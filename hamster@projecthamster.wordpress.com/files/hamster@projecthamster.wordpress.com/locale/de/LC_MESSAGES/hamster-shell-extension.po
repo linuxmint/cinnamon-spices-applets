@@ -1,53 +1,54 @@
 #
-# Raphaël Doursenaud <rdoursenaud@gpcsolutions.fr>, 2012.
+# Martin Brylski <martin.brylski@gmail.com>, 2013.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: hamster-shell-extension\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-08-17 16:42+0100\n"
-"PO-Revision-Date: 2012-11-13 12:27+0100\n"
-"Last-Translator: Raphaël Doursenaud <rdoursenaud@free.fr>\n"
-"Language-Team: français <>\n"
-"Language: fr_FR\n"
+"PO-Revision-Date: 2013-07-08 16:18+0100\n"
+"Last-Translator: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 
 #: applet.js:86
 msgid "What are you doing?"
-msgstr "Que faîtes vous ?"
+msgstr "Was machst du gerade?"
 
 #: applet.js:92
 msgid "Enter activity..."
-msgstr "Entrez l'activité…"
+msgstr "Tätigkeit eingeben..."
 
 #: applet.js:105
 msgid "Todays activities"
-msgstr "Activités du jour"
+msgstr "Heutige Tätigkeiten"
 
 #: applet.js:221
 msgid "Loading..."
-msgstr "Chargement…"
+msgstr "Lade..."
 
 #: applet.js:245
 msgid "Show Overview"
-msgstr "Montrer le résumé"
+msgstr "Zeige Übersicht"
 
 #: applet.js:250
 msgid "Stop Tracking"
-msgstr "Arrêter le suivi"
+msgstr "Aufzeichnung anhalten"
 
 #: applet.js:255
 msgid "Add Earlier Activity"
-msgstr "Ajouter une activité antérieure"
+msgstr "Frühere Tätigkeit hinzufügen"
 
 #: applet.js:261
 msgid "Tracking Settings"
-msgstr "Préférences"
+msgstr "Einstellungen"
 
 #: applet.js:434
 msgid "No Activity"
-msgstr "Pas d'activité"
+msgstr "Keine Aktivität"

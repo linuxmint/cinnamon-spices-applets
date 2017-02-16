@@ -14,38 +14,38 @@ msgstr ""
 "Language-Team: \n"
 "X-Generator: Poedit 1.5.4\n"
 
-#: extension.js:85
+#: applet.js:86
 msgid "What are you doing?"
 msgstr "Co děláš?"
 
-#: extension.js:91
+#: applet.js:92
 msgid "Enter activity..."
 msgstr "Zadej aktivitu..."
 
-#: extension.js:105
+#: applet.js:105
 msgid "Todays activities"
 msgstr "Dnešní aktivity"
 
-#: extension.js:215
+#: applet.js:221
 msgid "Loading..."
 msgstr "Načítám..."
 
-#: extension.js:238
+#: applet.js:245
 msgid "Show Overview"
 msgstr "Zobrazit přehled"
 
-#: extension.js:243
+#: applet.js:250
 msgid "Stop Tracking"
 msgstr "Zastavit sledování"
 
-#: extension.js:249
+#: applet.js:255
+msgid "Add Earlier Activity"
+msgstr "Zadat dřívější aktivity"
+
+#: applet.js:261
 msgid "Tracking Settings"
 msgstr "Nastevení sledování"
 
-#: extension.js:398
+#: applet.js:434
 msgid "No activity"
 msgstr "Žádná aktivita"
-
-#: extension.js:254
-msgid "Add Earlier Activity"
-msgstr "Zadat dřívější aktivity"

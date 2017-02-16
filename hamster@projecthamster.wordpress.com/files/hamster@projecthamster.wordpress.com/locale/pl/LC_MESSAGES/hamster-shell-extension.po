@@ -14,39 +14,39 @@ msgstr ""
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 
-#: extension.js:85
+#: applet.js:86
 msgid "What are you doing?"
 msgstr "Co robisz?"
 
-#: extension.js:91
+#: applet.js:92
 msgid "Enter activity..."
 msgstr "Wpisz aktywność..."
 
-#: extension.js:105
+#: applet.js:105
 msgid "Todays activities"
 msgstr "Dzisiejsze aktywności"
 
-#: extension.js:215
+#: applet.js:221
 msgid "Loading..."
 msgstr "Ładowanie..."
 
-#: extension.js:238
+#: applet.js:245
 msgid "Show Overview"
 msgstr "Przegląd sprawozdania"
 
-#: extension.js:243
+#: applet.js:250
 msgid "Stop Tracking"
 msgstr "Zatrzymaj śledzenie"
 
-#: extension.js:249
+#: applet.js:255
+msgid "Add Earlier Activity"
+msgstr "Dodaj wcześniejszą czynność"
+
+#: applet.js:261
 msgid "Tracking Settings"
 msgstr "Preferencje programu"
 
-#: extension.js:398
-msgid "No activity"
+#: applet.js:434
+msgid "No Activity"
 msgstr "Brak aktywności"
-
-#: extension.js:254
-msgid "Add Earlier Activity"
-msgstr "Dodaj wcześniejszą czynność"
 

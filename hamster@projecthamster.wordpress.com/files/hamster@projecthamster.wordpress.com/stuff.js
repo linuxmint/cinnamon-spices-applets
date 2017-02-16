@@ -1,20 +1,27 @@
+/*
+ * Portions originate from the gnome-shell source code, Copyright (c)
+ * its respectives authors.
+ * This project is released under the GNU GPL License.
+ * See COPYING for details.
+*/
+
 function formatDuration(minutes) {
-    return "%02d:%02d".format((minutes - minutes % 60) / 60, minutes % 60)
+    return "%02d:%02d".format((minutes - minutes % 60) / 60, minutes % 60);
 }
 
 function formatDurationHuman(minutes) {
     let hours = (minutes - minutes % 60) / 60;
     let mins = minutes % 60;
-    let res = ""
+    let res = "";
 
     if (hours > 0 || mins > 0) {
         if (hours > 0)
-            res += "%dh ".format(hours)
+            res += "%dh ".format(hours);
 
         if (mins > 0)
-            res += "%dmin".format(mins)
+            res += "%dmin".format(mins);
     } else {
-        res = "Just started"
+        res = "Just started";
     }
 
     return res;
@@ -28,7 +35,7 @@ function fromDbusFact(fact) {
     // converts a fact coming from dbus into a usable object
     function UTCToLocal(timestamp) {
         // TODO - is this really the way?!
-        let res = new Date(timestamp)
+        let res = new Date(timestamp);
         return new Date(res.setUTCMinutes(res.getUTCMinutes() + res.getTimezoneOffset()));
     }
 
@@ -43,12 +50,12 @@ function fromDbusFact(fact) {
         date: UTCToLocal(fact[8] * 1000),
         delta: Math.floor(fact[9] / 60), // minutes
         id: fact[0]
-    }
+    };
 };
 
 function fromDbusFacts(facts) {
     let res = [];
-    for each(var fact in facts) {
+    for each (var fact in facts) {
         res.push(fromDbusFact(fact));
     }
 
@@ -63,5 +70,5 @@ function parseFactString(input) {
         "category": null,
         "description": null,
         "tags": null,
-    }
+    };
 }
