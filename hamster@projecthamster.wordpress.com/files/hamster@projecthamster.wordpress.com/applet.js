@@ -78,7 +78,13 @@ const WindowsProxyIface = '<node> \
 
 let WindowsProxy = Gio.DBusProxy.makeProxyWrapper(WindowsProxyIface);
 
-
+function _(str) {
+   let translation = Gettext.gettext(str);
+   if(translation != str) {
+      return translation;
+   }
+   return Gettext.dgettext("hamster", str);
+};
 
 /* a little box or something */
 function HamsterBox() {
@@ -568,9 +574,6 @@ HamsterApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height) {
-    /* Use local translations
-     * TODO: Update translations to make them specific to this applet */
-    Gettext.bindtextdomain("hamster-shell-extension", metadata.path + "/locale");
-    Gettext.textdomain("hamster-shell-extension");
+    Gettext.bindtextdomain("hamster", GLib.get_home_dir() + "/.local/share/locale");
     return new HamsterApplet(metadata, orientation, panel_height);
 }
