@@ -22,13 +22,3 @@ Usage
 * Show hosted sites
 * Show hosted databases
 * Edit hosts file
-
-TODO
-----
-
-* Add confirmation for destroy
-* Refresh the menu when Homestead.yaml is changed
-* Check for box updates
-* Register applet in the Spices repository
-* Select the correct size icon for the size of the taskbar
-* Add more exception handling
