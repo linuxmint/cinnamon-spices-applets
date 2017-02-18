@@ -1,0 +1,202 @@
+{
+  "cinnamenu": {
+    "type": "header",
+    "description": "Cinnamenu Settings"
+  },
+  "header0": {
+    "type": "header",
+    "description": "Menu Entries"
+  },
+  "menu-editor-button": {
+    "type": "button",
+    "description": "Open the menu editor",
+    "callback": "_launch_editor",
+    "tooltip": "Press this button to customize your menu entries."
+  },
+  "header1": {
+    "type": "header",
+    "description": "Panel Appearance"
+  },
+  "menu-icon-custom": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use a custom icon",
+    "tooltip": "Unchecking this allows the theme to set the icon"
+  },
+  "menu-icon": {
+    "type": "iconfilechooser",
+    "default": "/usr/share/cinnamon/theme/menu-symbolic.svg",
+    "description": "Icon",
+    "tooltip": "Select an icon to show in the panel.",
+    "dependency": "menu-icon-custom",
+    "indent": "true"
+  },
+  "menu-label": {
+    "type": "entry",
+    "default": "Menu",
+    "description": "Set the custom menu button icon name",
+    "tooltip": "Set the custom menu button icon name"
+  },
+  "shortcuts-icon-size": {
+    "type": "spinbutton",
+    "default": 18,
+    "min": 16,
+    "max": 256,
+    "step": 1,
+    "units": "pixels",
+    "description": "Shortcuts Panel icon size",
+    "tooltip": "Shortcuts Panel icon size"
+  },
+  "apps-list-icon-size": {
+    "type": "spinbutton",
+    "default": 24,
+    "min": 16,
+    "max": 256,
+    "step": 1,
+    "units": "pixels",
+    "description": "Applications list icon size",
+    "tooltip": "Applications list icon size"
+  },
+  "apps-grid-icon-size": {
+    "type": "spinbutton",
+    "default": 48,
+    "min": 16,
+    "max": 256,
+    "step": 1,
+    "units": "pixels",
+    "description": "Applications grid icon size",
+    "tooltip": "Applications grid icon size"
+  },
+  "apps-grid-label-width": {
+    "type": "spinbutton",
+    "default": 96,
+    "min": 16,
+    "max": 256,
+    "step": 1,
+    "units": "pixels",
+    "description": "Applications grid label width",
+    "tooltip": "Applications grid label width"
+  },
+  "header2": {
+    "type": "header",
+    "description": "Behavior"
+  },
+  "overlay-key": {
+    "type": "keybinding",
+    "description": "Keyboard shortcut to open and close the menu",
+    "default": "Super_L::Super_R"
+  },
+  "activate-on-hover": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet"
+  },
+  "hover-delay": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 1000,
+    "step": 50,
+    "units": "milliseconds",
+    "description": "Menu hover delay:",
+    "tooltip": "Delay between switching categories"
+  },
+  "enable-animation": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use menu animations",
+    "tooltip": "Allow the menu to animate on open and close"
+  },
+  "hide-panel-menu": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Remove the menu button from the panel",
+    "tooltip": "Remove the menu button from the panel"
+  },
+  "hide-useroptions": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Hide the User Options Panel of the menu",
+    "tooltip": "Hide the User Options Panel of the menu"
+  },
+  "hide-shortcuts": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Hide the Shortcuts Panel of the menu",
+    "tooltip": "Hide the Shortcuts Panel of the menu"
+  },
+  "shortcuts-display": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Icons to display on Shortcuts Panel",
+    "options": {
+      "Favorites": 0,
+      "Places": 1
+    },
+    "tooltip": "Icons to display on Shortcuts Panel"
+  },
+  "shortcuts-label": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show labels on the Shortcuts Panel",
+    "tooltip": "Show labels on the Shortcuts Panel"
+  },
+  "startup-view-mode": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Startup applications view mode",
+    "options": {
+      "List": 0,
+      "Grid": 1
+    },
+    "tooltip": "Startup applications view mode"
+  },
+  "apps-grid-column-count": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 0,
+    "max": 5,
+    "step": 1,
+    "units": "columns",
+    "description": "Number of columns in apps grid",
+    "tooltip": "Number of columns in apps grid"
+  },
+  "startup-apps-display": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Startup applications to display",
+    "options": {
+      "All": 0,
+      "Favorites": 1,
+      "None": 2
+    },
+    "tooltip": "Startup applications to display"
+  },
+  "hide-categories": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Hide the Categories Panel of the menu",
+    "tooltip": "Hide the Categories Panel of the menu"
+  },
+  "category-selection-method": {
+    "type": "combobox",
+    "default": 0,
+    "description": "Method of selecting categories",
+    "options": {
+      "Hover": 0,
+      "Click": 1
+    },
+    "tooltip": "Method of selecting categories"
+  },
+  "category-hover-delay": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 500,
+    "step": 1,
+    "units": "milliseconds",
+    "description": "Delay (ms) before selecting category",
+    "tooltip": "Delay in milliseconds before the category is selected when hovering"
+  }
+}

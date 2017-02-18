@@ -1,0 +1,232 @@
+# Translator list
+# Ivan Komaritsyn <vantu5z@mail.ru>, 2015, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Gno-Menu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-03-20 15:55+0900\n"
+"Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: convenience.js extension.js
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu: поиск по закладкам Firefox отключен"
+
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Для включения поиска по закладкам Firefox необходимо установить "
+"дополнительные пакеты: libgir1.2-gda-5.0 [Ubuntu] или libgda-sqlite [Fedora]"
+
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu: поиск по закладкам Midori отключен"
+
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Для включения поиска по закладкам Midori необходимо установить "
+"дополнительные пакеты: libgir1.2-gda-5.0 [Ubuntu] или libgda-sqlite [Fedora]"
+
+msgid "Recent"
+msgstr "Недавние"
+
+msgid "Webmarks"
+msgstr "Веб-закладки"
+
+msgid "Favorites"
+msgstr "Избранное"
+
+msgid "Places"
+msgstr "Места"
+
+msgid "Toggle Startup Apps View"
+msgstr "Переключить категорию отображаемую при запуске"
+
+msgid "List View"
+msgstr "В виде списка"
+
+msgid "Type to search..."
+msgstr "Введите запрос для поиска..."
+
+msgid "All Applications"
+msgstr "Все приложения"
+
+msgid "Frequent Apps"
+msgstr "Часто используемые"
+
+msgid "Favorite Apps"
+msgstr "Избранные приложения"
+
+msgid "Restart Shell"
+msgstr "Перезапустить Shell"
+
+msgid "Suspend"
+msgstr "Перейти в режим ожидания"
+
+msgid "Shutdown"
+msgstr "Выключить компьютер"
+
+msgid "Logout User"
+msgstr "Завершить сеанс"
+
+msgid "Lock Screen"
+msgstr "Заблокировать экран"
+
+msgid "Preferences"
+msgstr "Настройки"
+
+msgid "No cinnamenu stylesheet found"
+msgstr "Не найден стиль для cinnamenu"
+
+#: metadata.json placeDisplay.js
+msgid "Failed to launch \"%s\""
+msgstr "Не удалось запустить «%s»"
+
+msgid "Home"
+msgstr "Домашняя папка"
+
+msgid "Computer"
+msgstr "Компьютер"
+
+msgid "Browse network"
+msgstr "Обзор сети"
+
+#: prefs.js
+msgid "<b>Panel Settings</b>"
+msgstr "<b>Настройки панели</b>"
+
+msgid "Disable activities hot corner"
+msgstr "Отключить «Горячий угол»"
+
+msgid "Remove View button from panel"
+msgstr "Удалить кнопку «Обзор» с панели"
+
+msgid "Label for View button"
+msgstr "Текст для кнопки «Обзор»"
+
+msgid "Use icon with View button"
+msgstr "Показывать иконку для кнопки «Обзор»"
+
+msgid "Remove Apps button from panel"
+msgstr "Удалить кнопку «Приложения» с панели"
+
+msgid "Label for Apps button"
+msgstr "Текст для кнопки «Приложения»"
+
+msgid "Use icon with Apps button"
+msgstr "Показывать иконку для кнопки «Приложения»"
+
+msgid "Remove Menu button from panel"
+msgstr "Удалить кнопку «Меню» с панели"
+
+msgid "Label for Menu button"
+msgstr "Текст для кнопки «Меню»"
+
+msgid "Use icon with Menu button"
+msgstr "Показывать иконку для кнопки «Меню»"
+
+msgid "Disable Menu button hot spot"
+msgstr "Отключить горячую область у кнопки «Меню»"
+
+msgid "Disable Menu button shortcut key"
+msgstr "Отключить вызов «Меню» по горячей клавише"
+
+msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+msgstr ""
+"Неверно указана горячая клавиша. Попробуйте F12, <Super>space, "
+"<Ctrl><Alt><Shift>a, и др."
+
+msgid "Set Menu button position"
+msgstr "Положение кнопки «Меню»"
+
+msgid "Left"
+msgstr "Слева"
+
+msgid "Center"
+msgstr "По центру"
+
+msgid "Right"
+msgstr "Справа"
+
+msgid "<b>Menu Settings</b>"
+msgstr "<b>Настройки меню</b>"
+
+msgid "Hide User Options Panel"
+msgstr "Скрыть дополнительную панель"
+
+msgid "Hide Shortcuts Panel"
+msgstr "Скрыть панель быстрого доступа"
+
+msgid "Menu layout size"
+msgstr "Размер меню"
+
+msgid "Normal"
+msgstr "Нормальный"
+
+msgid "Compact"
+msgstr "Компактный"
+
+msgid "Icons to display on Shortcuts Panel"
+msgstr "Элементы на панели быстрого доступа"
+
+msgid "Applications to display at startup"
+msgstr "Приложения показываемые при запуске"
+
+msgid "All"
+msgstr "Все"
+
+msgid "Frequent"
+msgstr "Частые"
+
+msgid "None"
+msgstr "Нет"
+
+msgid "Number of columns in Application Grid"
+msgstr "Количество колонок приложений в сетке"
+
+msgid "Default view mode for applications"
+msgstr "Вид для обзора приложений по умолчанию"
+
+msgid "List"
+msgstr "Список"
+
+msgid "Grid"
+msgstr "Сетка"
+
+msgid "Hide Categories Panel"
+msgstr "Скрыть панель категорий"
+
+msgid "Category selection method"
+msgstr "Метод выбора категории"
+
+msgid "Hover"
+msgstr "Наведение"
+
+msgid "Click"
+msgstr "Нажатие"
+
+msgid "Menu hover delay"
+msgstr "Задержка выбора категории при наведении"
+
+msgid "Size of Shortcuts Panel icons"
+msgstr "Размер иконок для панели быстрого доступа"
+
+msgid "Size of Application List icons"
+msgstr "Размер иконок для приложений в виде списка"
+
+msgid "Size of Application Grid icons"
+msgstr "Размер иконок для приложений в виде сетки"
+
+msgid "Width of Application Grid labels"
+msgstr "Ширина сетки приложений"
