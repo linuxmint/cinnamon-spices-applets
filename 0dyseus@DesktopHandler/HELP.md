@@ -1,3 +1,4 @@
+
 # Help for Desktop Handler applet
 
 ### IMPORTANT!!!
