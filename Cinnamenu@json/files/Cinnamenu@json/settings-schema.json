@@ -108,12 +108,6 @@
     "description": "Use menu animations",
     "tooltip": "Allow the menu to animate on open and close"
   },
-  "hide-panel-menu": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Remove the menu button from the panel",
-    "tooltip": "Remove the menu button from the panel"
-  },
   "hide-useroptions": {
     "type": "checkbox",
     "default": false,
@@ -128,7 +122,7 @@
   },
   "shortcuts-display": {
     "type": "combobox",
-    "default": 0,
+    "default": 1,
     "description": "Icons to display on Shortcuts Panel",
     "options": {
       "Favorites": 0,
@@ -138,7 +132,7 @@
   },
   "shortcuts-label": {
     "type": "checkbox",
-    "default": true,
+    "default": false,
     "description": "Show labels on the Shortcuts Panel",
     "tooltip": "Show labels on the Shortcuts Panel"
   },

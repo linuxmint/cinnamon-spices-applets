@@ -81,11 +81,6 @@ const ApplicationType = {
   RECENT: 2
 };
 
-const CategoryWorkspaceMode = {
-  CATEGORY: 0,
-  WORKSPACE: 1
-};
-
 const ApplicationsViewMode = {
   LIST: 0,
   GRID: 1
@@ -1069,7 +1064,6 @@ PanelMenuButton.prototype = {
     this._selectedItemIndex = null;
     this._previousSelectedItemIndex = null;
     this._activeContainer = null;
-    this._categoryWorkspaceMode = CategoryWorkspaceMode.CATEGORY;
 
     this._searchWebBookmarks = new SearchWebBookmarks();
     this._searchWebErrorsShown = false;
@@ -1131,20 +1125,18 @@ PanelMenuButton.prototype = {
       this.viewModeBox.height = this.searchBox.height;
       this._setButtonHeight(this.recentCategory.actor, this.searchBox.height);
       this._setButtonHeight(this.webBookmarksCategory.actor, this.searchBox.height);
-      this._setButtonHeight(this.placesCategory.actor, this.searchBox.height);
+      //this._setButtonHeight(this.placesCategory.actor, this.searchBox.height);
       this._setButtonHeight(this.toggleStartupAppsView.actor, this.searchBox.height);
       this._setButtonHeight(this.toggleListGridView.actor, this.searchBox.height);
 
-      // Set Category or Workspace Mode
-      // Currently we force category mode when menu is toggled
-      this._categoryWorkspaceMode = CategoryWorkspaceMode.CATEGORY;
+      // Set Category
       this.categoriesBox.show();
       this._widthCategoriesBox = 0;
       this._widthShortcutsBox = 0;
       this._widthUserGroupBox = 0;
       this.recentCategory._opened = false;
       this.webBookmarksCategory._opened = false;
-      this.placesCategory._opened = false;
+      //this.placesCategory._opened = false;
 
       // Adjust width of categories box and thumbnails box depending on if shortcuts are shown
       // Determine width based on user-power group button widths
@@ -1258,31 +1250,6 @@ PanelMenuButton.prototype = {
     button.height = adjustedHeight;
   },
 
-  toggleCategoryWorkspaceMode: function(mode) {
-    let toMode = null;
-    if (mode !== undefined) {
-      toMode = mode;
-    } else {
-      if (this._categoryWorkspaceMode == CategoryWorkspaceMode.CATEGORY) {
-        toMode = CategoryWorkspaceMode.WORKSPACE;
-      } else {
-        toMode = CategoryWorkspaceMode.CATEGORY;
-      }
-    }
-    if (toMode == CategoryWorkspaceMode.CATEGORY) {
-      this._categoryWorkspaceMode = CategoryWorkspaceMode.CATEGORY;
-      this.categoriesBox.width = this._widthCategoriesBox;
-      this.categoriesBox.show();
-    } else if (toMode == CategoryWorkspaceMode.WORKSPACE) {
-      this._categoryWorkspaceMode = CategoryWorkspaceMode.WORKSPACE;
-      if (this._widthCategoriesBox === 0) {
-        this._widthCategoriesBox = this.categoriesBox.width;
-      }
-      this.categoriesBox.hide();
-      this.categoriesBox.width = 0;
-    }
-  },
-
   _loadCategories: function(dir, root) {
     var rootDir = root;
     var iter = dir.iter();
@@ -1320,9 +1287,12 @@ PanelMenuButton.prototype = {
     if (typeof category == 'string') {
       this._displayApplications(this._listApplications(category));
     } else {
-
       this._displayApplications(this._listApplications(category.get_menu_id()));
     }
+
+    // Cache the current category button so we can invoke this function to get around the list/grid toggle
+    // not showing the app list.
+    this._currentCategoryButton = button;
   },
 
   _selectFavorites: function(button) {
@@ -1331,8 +1301,6 @@ PanelMenuButton.prototype = {
 
     let favorites = this.favorites;
     this._displayApplications(favorites);
-
-    this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.WORKSPACE);
   },
 
   _selectAllPlaces: function(button) {
@@ -1345,8 +1313,6 @@ PanelMenuButton.prototype = {
 
     let allPlaces = places.concat(bookmarks.concat(devices));
     this._displayApplications(null, allPlaces);
-
-    this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.WORKSPACE);
   },
 
   _selectBookmarks: function(button) {
@@ -1371,8 +1337,6 @@ PanelMenuButton.prototype = {
 
     let recent = this._listRecent();
     this._displayApplications(null, null, recent);
-
-    this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.WORKSPACE);
   },
 
   _selectWebBookmarks: function(button) {
@@ -1381,8 +1345,6 @@ PanelMenuButton.prototype = {
 
     let webBookmarks = this._listWebBookmarks();
     this._displayApplications(null, webBookmarks);
-
-    this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.WORKSPACE);
   },
 
   _switchApplicationsView: function(mode) {
@@ -1435,10 +1397,10 @@ PanelMenuButton.prototype = {
   _clearUserGroupButtons: function() {
     this.recentCategory.actor.remove_style_class_name('popup-sub-menu');
     this.webBookmarksCategory.actor.remove_style_class_name('popup-sub-menu');
-    this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
+    //this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
     this.recentCategory._opened = false;
     this.webBookmarksCategory._opened = false;
-    this.placesCategory._opened = false;
+    //this.placesCategory._opened = false;
   },
 
   _clearTabFocusSelections: function(selectedBox, resetSearch) {
@@ -2430,7 +2392,6 @@ PanelMenuButton.prototype = {
     let modifiers = event.get_state();
     let shift = modifiers & Clutter.ModifierType.SHIFT_MASK;
     let viewMode = this._applicationsViewMode;
-    //let categoryMode = this._categoryWorkspaceMode;
 
     let reverse;
     if (code == 23 && shift) {
@@ -2755,7 +2716,6 @@ PanelMenuButton.prototype = {
       if (this.searchEntry.get_text() === '') {
         this._resetDisplayApplicationsToStartup();
       } else {
-        this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.CATEGORY);
         this._clearCategorySelections(this.categoriesBox);
         this._clearUserGroupButtons();
       }
@@ -2890,7 +2850,7 @@ PanelMenuButton.prototype = {
 
     // Bottom pane holds power group and selected app description (packed horizontally)
     this.bottomPane = new St.BoxLayout({
-      style_class: 'menu-favorites-box'
+      style_class: ''
     });
 
     // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
@@ -2915,12 +2875,12 @@ PanelMenuButton.prototype = {
     }));
     this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
     this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
-    this.groupCategoriesWorkspacesScrollBox.connect('button-release-event', Lang.bind(this, function(actor, event) {
+    /*this.groupCategoriesWorkspacesScrollBox.connect('button-release-event', Lang.bind(this, function(actor, event) {
       let button = event.get_button();
       if (button == 3) { //right click
-        this.toggleCategoryWorkspaceMode();
+        // This was for showing workspace thumbnails, but serves no function on Cinnamon. Whether to use this signal or not TBD.
       }
-    }));
+    }));*/
 
     // selectedAppBox
     this.selectedAppBox = new St.BoxLayout({
@@ -2976,19 +2936,18 @@ PanelMenuButton.prototype = {
         if (this.recentCategory._opened) {
           this.recentCategory._opened = false;
           this.webBookmarksCategory._opened = false;
-          this.placesCategory._opened = false;
+          //this.placesCategory._opened = false;
           if (this._style1) {
             this.recentCategory.actor.set_style(this._style1);
           }
           this.recentCategory.actor.remove_style_class_name('popup-sub-menu');
           this.webBookmarksCategory.actor.remove_style_class_name('popup-sub-menu');
-          this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
-          this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.CATEGORY);
+          //this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
           this._resetDisplayApplicationsToStartup();
         } else {
           this.recentCategory._opened = true;
           this.webBookmarksCategory._opened = false;
-          this.placesCategory._opened = false;
+          //this.placesCategory._opened = false;
           this.recentCategory.actor.add_style_class_name('popup-sub-menu');
           if (this._style2) {
             this.recentCategory.actor.set_style(this._style2);
@@ -2997,10 +2956,10 @@ PanelMenuButton.prototype = {
           if (this._style1) {
             this.webBookmarksCategory.actor.set_style(this._style1);
           }
-          this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
-          if (this._style1) {
+          //this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
+          /*if (this._style1) {
             this.placesCategory.actor.set_style(this._style1);
-          }
+          }*/
           this._selectRecent(this.recentCategory);
           this.selectedAppTitle.set_text(this.recentCategory.label.get_text());
           this.selectedAppDescription.set_text('');
@@ -3040,19 +2999,18 @@ PanelMenuButton.prototype = {
       if (this.webBookmarksCategory._opened) {
         this.webBookmarksCategory._opened = false;
         this.recentCategory._opened = false;
-        this.placesCategory._opened = false;
+        //this.placesCategory._opened = false;
         if (this._style1) {
           this.webBookmarksCategory.actor.set_style(this._style1);
         }
         this.webBookmarksCategory.actor.remove_style_class_name('popup-sub-menu');
         this.recentCategory.actor.remove_style_class_name('popup-sub-menu');
-        this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
-        this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.CATEGORY);
+        //this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
         this._resetDisplayApplicationsToStartup();
       } else {
         this.webBookmarksCategory._opened = true;
         this.recentCategory._opened = false;
-        this.placesCategory._opened = false;
+        //this.placesCategory._opened = false;
         this.webBookmarksCategory.actor.add_style_class_name('popup-sub-menu');
         if (this._style2) {
           this.webBookmarksCategory.actor.set_style(this._style2);
@@ -3061,9 +3019,9 @@ PanelMenuButton.prototype = {
         if (this._style1) {
           this.recentCategory.actor.set_style(this._style1);
         }
-        this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
+        //this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
         if (this._style1) {
-          this.placesCategory.actor.set_style(this._style1);
+          //this.placesCategory.actor.set_style(this._style1);
         }
         this._selectWebBookmarks(this.webBookmarksCategory);
         this.selectedAppTitle.set_text(this.webBookmarksCategory.label.get_text());
@@ -3072,7 +3030,7 @@ PanelMenuButton.prototype = {
     }));
 
     // Create 'places-favorites' category button
-    if (this._applet.shortcutsDisplay == ShortcutsDisplay.PLACES) {
+    /*if (this._applet.shortcutsDisplay == ShortcutsDisplay.PLACES) {
       this.placesCategory = new GroupButton(this, null, null, _('Favorites'), {
         style_class: 'menu-category-button'
       });
@@ -3116,7 +3074,6 @@ PanelMenuButton.prototype = {
         this.placesCategory.actor.remove_style_class_name('popup-sub-menu');
         this.webBookmarksCategory.actor.remove_style_class_name('popup-sub-menu');
         this.recentCategory.actor.remove_style_class_name('popup-sub-menu');
-        this.toggleCategoryWorkspaceMode(CategoryWorkspaceMode.CATEGORY);
         this._resetDisplayApplicationsToStartup();
       } else {
         this.placesCategory._opened = true;
@@ -3142,7 +3099,7 @@ PanelMenuButton.prototype = {
         this.selectedAppTitle.set_text(this.placesCategory.label.get_text());
         this.selectedAppDescription.set_text('');
       }
-    }));
+    }));*/
 
 
     if (recentEnabled) {
@@ -3170,12 +3127,12 @@ PanelMenuButton.prototype = {
       x_align: St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
     });
-    this.userGroupBox.add(this.placesCategory.actor, {
+    /*this.userGroupBox.add(this.placesCategory.actor, {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
-    });
+    });*/
 
     if (this._applet.hideUserOptions) {
       this._widthUserGroupBox = 0;
@@ -3261,6 +3218,8 @@ PanelMenuButton.prototype = {
         this._switchApplicationsView(ApplicationsViewMode.LIST);
         this._applet.settings.setValue('startup-view-mode', 0);
       }
+      // Retrigger an app list render until we figure out why its not rendering anything on toggle.
+      this._selectCategory(this._currentCategoryButton);
     }));
 
     this.viewModeBox.add(this.toggleStartupAppsView.actor, {
@@ -4208,15 +4167,11 @@ CinnamenuButton.prototype = {
 
   _display: function() {
     // Initialize apps menu button
-    if (!this.hidePanelMenu) {
-      this.menuManager = new PopupMenu.PopupMenuManager(this);
-      this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-      this.menuManager.addMenu(this.menu);
-      this.menu.setCustomStyleClass('menu-background');
-      this.appsMenuButton = new PanelMenuButton(this);
-    }
-
-    this.actor.add(this.appsMenuButton.actor);
+    this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+    this.menuManager.addMenu(this.menu);
+    this.menu.setCustomStyleClass('menu-background');
+    this.appsMenuButton = new PanelMenuButton(this);
   },
 
   openMenu: function() {
@@ -4338,11 +4293,6 @@ CinnamenuButton.prototype = {
         key: 'enable-animation',
         value: 'enableAnimation',
         cb: null
-      },
-      {
-        key: 'hide-panel-menu',
-        value: 'hidePanelMenu',
-        cb: this.refresh
       },
       {
         key: 'menu-label',
