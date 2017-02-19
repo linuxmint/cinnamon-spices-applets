@@ -31,9 +31,10 @@ MyApplet.prototype = {
       this.sshHeadless = false;
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
+	  this.sshConfig = this.homeDir + "/.ssh/config";
       this.msgSource = new MessageTray.SystemNotificationSource("SSH Launcher");
       Main.messageTray.add(this.msgSource);
-      let file = Gio.file_new_for_path(this.homeDir + "/.ssh/config");
+      let file = Gio.file_new_for_path(this.sshConfig);
       this.monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, new Gio.Cancellable());
       this.monitor.connect("changed", Lang.bind(this, this.updateMenu));
       this.updateMenu();
@@ -90,14 +91,14 @@ MyApplet.prototype = {
       flags = " -X " + flags;
     }
     let terminal = this.gsettings.get_string("exec");
-    Main.Util.spawnCommandLine(terminal + " -e \"ssh " + flags + hostname + "\"");
+    Main.Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
     let notification = new MessageTray.Notification(this.msgSource, "SSH Launcher", "Connection opened to " + hostname);
     notification.setTransient(true);
     this.msgSource.notify(notification);
   },
 
   editConfig: function() {
-    GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
+	GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
   },
 
   on_applet_clicked: function(event) {
