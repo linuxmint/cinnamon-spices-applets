@@ -1,3 +1,4 @@
+
 # Help for Quick Menu applet
 
 ### IMPORTANT!!!
@@ -8,7 +9,7 @@ Never delete any of the files found inside this applet folder. It might break th
 ### Applet usage
 
 - Menu items to .desktop files will be displayed with the icon and name declared inside the .desktop files themselves.
-- The menu can be kept open while activating menu items by pressing **Ctrl** + left click or with middle click.
+- The menu can be kept open while activating menu items by pressing <kbd>Ctrl</kbd> + **Left click** or with **Middle click**.
 
 ***
 
