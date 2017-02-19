@@ -128,11 +128,13 @@ MyApplet.prototype = {
         let symbol = event.get_key_symbol();
         if (symbol==Clutter.KEY_Return && this.menu.isOpen) {
             this._search();
+            return true;
         }
+        return false;
     },
 
     _search: function() {
-        Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.searchEntry.get_text() + "'");
+        Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.searchEntry.get_text().replace(/'/g,"%27") + "'");
         this.searchEntry.set_text("");
         this.searchActive = false;
         this.menu.close();
