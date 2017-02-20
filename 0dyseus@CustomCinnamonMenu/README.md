@@ -4,8 +4,8 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 
 ## Compatibility
 
-- ![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Cinnamon-3.0.svg) ![Linux Mint 18](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Linux_Mint-18.svg)
-- ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Cinnamon-3.2.svg) ![Linux Mint 18.1](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Linux_Mint-18.1.svg)
+- ![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg) ![Linux Mint 18](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.svg)
+- ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg) ![Linux Mint 18.1](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.1.svg)
 
 <span style="color:red;">
 **Do not install on older versions of Cinnamon.**
@@ -43,6 +43,12 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
     - **Open .desktop file folder:** Open the folder where the application's .desktop file is stored.
     - **Run from terminal:** Open a terminal and run application from there.
     - **Run from terminal as root:** Same as above but the application is executed as root.
+
+<span style="color:red;">
+## Bug report and feature request
+
+**If anyone has bugs to report or a feature request, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).**
+</span>
 
 ### Menu *emulating* the Whisker menu (XFCE)
 
