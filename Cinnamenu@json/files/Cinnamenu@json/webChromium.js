@@ -29,9 +29,6 @@ const Cinnamon = imports.gi.Cinnamon;
 // Gjs imports
 const Lang = imports.lang;
 
-// Internal imports
-const Main = imports.ui.main;
-
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['chromium']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('chromium');
@@ -53,7 +50,7 @@ function _readBookmarks() {
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -64,7 +61,7 @@ function _readBookmarks() {
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -97,7 +94,7 @@ function _reset() {
 }
 
 function init() {
-  if (_foundApps == null || _foundApps.length == 0) {
+  if (!_foundApps || _foundApps.length === 0) {
     return;
   }
 

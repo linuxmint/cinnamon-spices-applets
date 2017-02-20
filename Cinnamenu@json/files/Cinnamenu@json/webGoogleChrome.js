@@ -53,7 +53,7 @@ function _readBookmarks() {
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -64,7 +64,7 @@ function _readBookmarks() {
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -97,7 +97,7 @@ function _reset() {
 }
 
 function init() {
-  if (_foundApps == null || _foundApps.length == 0) {
+  if (!_foundApps || _foundApps.length === 0) {
     return;
   }
 

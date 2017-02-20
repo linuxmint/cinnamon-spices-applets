@@ -9,21 +9,10 @@ const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
-const St = imports.gi.St;
-
-const DND = imports.ui.dnd;
 const Main = imports.ui.main;
-const Params = imports.misc.params;
-const Search = imports.ui.search;
-const Util = imports.misc.util;
 
 const Gettext = imports.gettext.domain('cinnamenu');
 const _ = Gettext.gettext;
-const N_ = function(x) {
-  return x;
-}
-
-let UseSymbolicIcons = false;
 
 function PlaceInfo() {
   this._init.apply(this, arguments);
@@ -33,7 +22,6 @@ PlaceInfo.prototype = {
   _init: function(kind, file, name, icon) {
     this.kind = kind;
     this.file = file;
-    //this.name = name || this._getFileName();
     this.name = name ? name : this._getFileName();
     this.icon = icon ? new Gio.ThemedIcon({
       name: icon
@@ -57,42 +45,38 @@ PlaceInfo.prototype = {
         file.mount_enclosing_volume_finish(result);
         Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
       });
-      Main.notifyError(_("Failed to launch \"%s\"").format(this.name), e.message);
+      Main.notifyError(_('Failed to launch "%s"').format(this.name), e.message);
     }
   },
 
   getIcon: function() {
     try {
       let info;
-      if (UseSymbolicIcons) {
-        info = this.file.query_info('standard::symbolic-icon', 0, null);
-        return info.get_symbolic_icon();
-      } else {
-        info = this.file.query_info("standard::icon", 0, null);
-        return info.get_icon();
-      }
+      info = this.file.query_info('standard::icon', 0, null);
+      return info.get_icon();
     } catch (e) {
       // return a generic icon for this kind
       switch (this.kind) {
         case 'network':
           return new Gio.ThemedIcon({
-            name: 'folder-remote-symbolic'
+            name: 'folder-remote'
           });
         case 'devices':
           return new Gio.ThemedIcon({
-            name: 'drive-harddisk-symbolic'
+            name: 'drive-harddisk'
           });
         case 'special':
         case 'bookmarks':
         default:
-          if (!this.file.is_native())
+          if (!this.file.is_native()) {
             return new Gio.ThemedIcon({
-              name: 'folder-remote-symbolic'
+              name: 'folder-remote'
             });
-          else
+          } else {
             return new Gio.ThemedIcon({
-              name: 'folder-symbolic'
+              name: 'folder'
             });
+          }
       }
     }
   },
@@ -120,11 +104,7 @@ PlaceDeviceInfo.prototype = {
   },
 
   getIcon: function() {
-    if (UseSymbolicIcons)
-      return this._mount.get_symbolic_icon();
-    else
-      return this._mount.get_icon();
-
+    return this._mount.get_icon();
   }
 };
 
@@ -142,7 +122,6 @@ function PlacesManager() {
 
 PlacesManager.prototype = {
   _init: function(useSymbolic) {
-    UseSymbolicIcons = useSymbolic;
 
     this._places = {
       special: [],
@@ -155,9 +134,9 @@ PlacesManager.prototype = {
 
     this._places.special.push(new PlaceInfo('special',
       Gio.File.new_for_path(homePath),
-      _("Home")));
+      _('Home')));
 
-    for (let i = 0; i < DEFAULT_DIRECTORIES.length; i++) {
+    for (let i = 0, len = DEFAULT_DIRECTORIES.length; i < len; i++) {
       let specialPath = GLib.get_user_special_dir(DEFAULT_DIRECTORIES[i]);
       if (specialPath) {
         if (specialPath == homePath) {
@@ -204,14 +183,14 @@ PlacesManager.prototype = {
 
     this._volumeMonitorSignals = [];
     let func = Lang.bind(this, this._updateMounts);
-    for (let i = 0; i < signals.length; i++) {
+    for (let i = 0, len = signals.length; i < len; i++) {
       let id = this._volumeMonitor.connect(signals[i], func);
       this._volumeMonitorSignals.push(id);
     }
   },
 
   destroy: function() {
-    for (let i = 0; i < this._volumeMonitorSignals.length; i++) {
+    for (let i = 0, len = this._volumeMonitorSignals.length; i < len; i++) {
       this._volumeMonitor.disconnect(this._volumeMonitorSignals[i]);
     }
 
@@ -227,26 +206,21 @@ PlacesManager.prototype = {
     this._places.devices = [];
     this._places.network = [];
 
-    /* Add standard places */
-    let symbolic = "";
-    if (UseSymbolicIcons) {
-      symbolic = "-symbolic";
-    }
     this._places.devices.push(new PlaceInfo('devices',
       Gio.File.new_for_path('/'),
-      _("Computer"),
-      'drive-harddisk' + symbolic));
+      _('Computer'),
+      'drive-harddisk'));
     this._places.network.push(new PlaceInfo('network',
       Gio.File.new_for_uri('network:///'),
-      _("Browse network"),
-      'network-workgroup' + symbolic));
+      _('Browse network'),
+      'network-workgroup'));
 
     /* first go through all connected drives */
     let drives = this._volumeMonitor.get_connected_drives();
-    for (let i = 0; i < drives.length; i++) {
+    for (let i = 0, len = drives.length; i < len; i++) {
       let volumes = drives[i].get_volumes();
 
-      for (let j = 0; j < volumes.length; j++) {
+      for (let j = 0, len = volumes.length; j < len; j++) {
         let mount = volumes[j].get_mount();
         let kind = 'devices';
         let identifier = volumes[j].get_identifier('class');
@@ -262,36 +236,32 @@ PlacesManager.prototype = {
 
     /* add all volumes that is not associated with a drive */
     let volumes = this._volumeMonitor.get_volumes();
-    for (let i = 0; i < volumes.length; i++) {
+    for (let i = 0, len = volumes.length; i < len; i++) {
       if (volumes[i].get_drive() !== null) {
         continue;
       }
 
       let kind = 'devices';
       let identifier = volumes[i].get_identifier('class');
-      if (identifier && identifier.indexOf('network') >= 0)
+      if (identifier && identifier.indexOf('network') >= 0) {
         kind = 'network';
+      }
 
       let mount = volumes[i].get_mount();
-      if (mount != null)
+      if (mount) {
         this._addMount(kind, mount);
+      }
     }
 
     /* add mounts that have no volume (/etc/mtab mounts, ftp, sftp,...) */
     let mounts = this._volumeMonitor.get_mounts();
-    for (let i = 0; i < mounts.length; i++) {
-      if (mounts[i].is_shadowed())
+    for (let i = 0, len = mounts.length; i < len; i++) {
+      if (mounts[i].is_shadowed() || mounts[i].get_volume()) {
         continue;
-
-      if (mounts[i].get_volume())
-        continue;
+      }
 
       let root = mounts[i].get_default_location();
-      let kind;
-      if (root.is_native())
-        kind = 'devices';
-      else
-        kind = 'network';
+      let kind = root.is_native() ? 'devices' : 'network';
 
       this._addMount(kind, mounts[i]);
     }
@@ -306,7 +276,7 @@ PlacesManager.prototype = {
       GLib.build_filenamev([GLib.get_home_dir(), '.gtk-bookmarks']),
     ];
 
-    for (let i = 0; i < paths.length; i++) {
+    for (let i = 0, len = paths.length; i < len; i++) {
       if (GLib.file_test(paths[i], GLib.FileTest.EXISTS)) {
         return Gio.File.new_for_path(paths[i]);
       }
@@ -322,39 +292,44 @@ PlacesManager.prototype = {
     let lines = content.split('\n');
 
     let bookmarks = [];
-    for (let i = 0; i < lines.length; i++) {
+    for (let i = 0, len = lines.length; i < len; i++) {
       let line = lines[i];
       let components = line.split(' ');
       let bookmark = components[0];
 
-      if (!bookmark)
+      if (!bookmark) {
         continue;
+      }
 
       let file = Gio.File.new_for_uri(bookmark);
-      if (file.is_native() && !file.query_exists(null))
+      if (file.is_native() && !file.query_exists(null)) {
         continue;
+      }
 
       let duplicate = false;
-      for (let i = 0; i < this._places.special.length; i++) {
+      for (let i = 0, len = this._places.special.length; i < len; i++) {
         if (file.equal(this._places.special[i].file)) {
           duplicate = true;
           break;
         }
       }
-      if (duplicate)
+      if (duplicate) {
         continue;
-      for (let i = 0; i < bookmarks.length; i++) {
+      }
+      for (let i = 0, len = bookmarks.length; i < len; i++) {
         if (file.equal(bookmarks[i].file)) {
           duplicate = true;
           break;
         }
       }
-      if (duplicate)
+      if (duplicate) {
         continue;
+      }
 
       let label = null;
-      if (components.length > 1)
+      if (components.length > 1) {
         label = components.slice(1).join(' ');
+      }
 
       bookmarks.push(new PlaceInfo('bookmarks', file, label));
     }
@@ -374,19 +349,19 @@ PlacesManager.prototype = {
   },
 
   getAllPlaces: function() {
-    return this._places['special'].concat(this._places['bookmarks'], this._places['devices']);
+    return this._places.special.concat(this._places.bookmarks, this._places.devices);
   },
 
   getDefaultPlaces: function() {
-    return this._places['special'];
+    return this._places.special;
   },
 
   getBookmarks: function() {
-    return this._places['bookmarks'];
+    return this._places.bookmarks;
   },
 
   getMounts: function() {
-    return this._places['devices'];
+    return this._places.devices;
   }
 };
 Signals.addSignalMethods(PlacesManager.prototype);

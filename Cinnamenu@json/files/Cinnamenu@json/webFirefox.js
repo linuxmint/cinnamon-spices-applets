@@ -35,9 +35,6 @@ const Cinnamon = imports.gi.Cinnamon;
 // Gjs imports
 const Lang = imports.lang;
 
-// Internal imports
-const Main = imports.ui.main;
-
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['firefox']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('firefox');
@@ -67,7 +64,7 @@ function _readBookmarks() {
         'SQLite', 'DB_DIR=' + _profileDir + ';DB_NAME=places.sqlite',
         null, Gda.ConnectionOptions.READ_ONLY);
     } catch (e) {
-      log("ERROR: " + e.message);
+      global.logError('ERROR: ' + e.message);
       return;
     }
   }
@@ -79,7 +76,7 @@ function _readBookmarks() {
       'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
       'NULL AND moz_bookmarks.type = 1');
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -93,7 +90,7 @@ function _readBookmarks() {
       name = result.get_value_at(0, row);
       uri = result.get_value_at(1, row);
     } catch (e) {
-      log("ERROR: " + e.message);
+      global.logError('ERROR: ' + e.message);
       continue;
     }
 
@@ -186,7 +183,7 @@ function init() {
     return;
   }
 
-  if (_foundApps == null || _foundApps.length == 0) {
+  if (!_foundApps || _foundApps.length === 0) {
     return;
   }
 

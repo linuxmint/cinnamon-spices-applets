@@ -29,9 +29,6 @@ const Cinnamon = imports.gi.Cinnamon;
 // Gjs imports
 const Lang = imports.lang;
 
-// Internal imports
-const Main = imports.ui.main;
-
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['opera']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('opera');
@@ -52,7 +49,7 @@ function _readBookmarks() {
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    log("ERROR: " + e.message);
+    global.logError('ERROR: ' + e.message);
     return;
   }
 
@@ -60,7 +57,7 @@ function _readBookmarks() {
     return;
   }
 
-  let lines = String(content).split("\n");
+  let lines = String(content).split('\n');
 
   let isURL = false;
   let name = null;
@@ -69,15 +66,15 @@ function _readBookmarks() {
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i].trim();
 
-    if (line == "#URL") {
+    if (line == '#URL') {
       isURL = true;
     } else {
       if (isURL) {
-        if (line.indexOf("NAME=") == 0) {
-          name = line.split("NAME=")[1];
-        } else if (line.indexOf("URL=") == 0) {
-          url = line.split("URL=")[1];
-        } else if (line == "") {
+        if (line.indexOf('NAME=') === 0) {
+          name = line.split('NAME=')[1];
+        } else if (line.indexOf('URL=') === 0) {
+          url = line.split('URL=')[1];
+        } else if (line.length === 0) {
           bookmarks.push({
             appInfo: _appInfo,
             name: name,
@@ -103,7 +100,7 @@ function _reset() {
 }
 
 function init() {
-  if (_foundApps == null || _foundApps.length == 0) {
+  if (!_foundApps || _foundApps.length === 0) {
     return;
   }
 

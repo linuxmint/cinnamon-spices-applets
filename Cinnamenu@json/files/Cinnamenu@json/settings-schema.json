@@ -108,34 +108,6 @@
     "description": "Use menu animations",
     "tooltip": "Allow the menu to animate on open and close"
   },
-  "hide-useroptions": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Hide the User Options Panel of the menu",
-    "tooltip": "Hide the User Options Panel of the menu"
-  },
-  "hide-shortcuts": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Hide the Shortcuts Panel of the menu",
-    "tooltip": "Hide the Shortcuts Panel of the menu"
-  },
-  "shortcuts-display": {
-    "type": "combobox",
-    "default": 1,
-    "description": "Icons to display on Shortcuts Panel",
-    "options": {
-      "Favorites": 0,
-      "Places": 1
-    },
-    "tooltip": "Icons to display on Shortcuts Panel"
-  },
-  "shortcuts-label": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Show labels on the Shortcuts Panel",
-    "tooltip": "Show labels on the Shortcuts Panel"
-  },
   "startup-view-mode": {
     "type": "combobox",
     "default": 1,
@@ -149,37 +121,11 @@
   "apps-grid-column-count": {
     "type": "spinbutton",
     "default": 5,
-    "min": 0,
-    "max": 5,
+    "min": 3,
+    "max": 7,
     "step": 1,
     "units": "columns",
     "description": "Number of columns in apps grid",
     "tooltip": "Number of columns in apps grid"
-  },
-  "hide-categories": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Hide the Categories Panel of the menu",
-    "tooltip": "Hide the Categories Panel of the menu"
-  },
-  "category-selection-method": {
-    "type": "combobox",
-    "default": 0,
-    "description": "Method of selecting categories",
-    "options": {
-      "Hover": 0,
-      "Click": 1
-    },
-    "tooltip": "Method of selecting categories"
-  },
-  "category-hover-delay": {
-    "type": "spinbutton",
-    "default": 0,
-    "min": 0,
-    "max": 500,
-    "step": 1,
-    "units": "milliseconds",
-    "description": "Delay (ms) before selecting category",
-    "tooltip": "Delay in milliseconds before the category is selected when hovering"
   }
 }

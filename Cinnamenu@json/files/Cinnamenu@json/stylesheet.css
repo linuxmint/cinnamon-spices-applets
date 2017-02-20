@@ -1,13 +1,12 @@
-/* Needed to prevent bookmarks from being invisible. */
-
 .cinnamenu-menu-top-pane {
     spacing: 15px; }
+
+/* Needed to prevent bookmarks from being invisible. */
 
 .cinnamenu-categories-workspaces-scrollbox {
     border-radius: 0 4px 0 0;
     border-width: 1px;
     border-left: 0;
-    height: 412px;
     padding: 0 }
 
 /* List box */
