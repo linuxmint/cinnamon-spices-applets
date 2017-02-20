@@ -6,6 +6,15 @@ const Gio = imports.gi.Gio;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+
+// l10n/translation support
+const UUID = "scripts@paucapo.com"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
    this._init(metadata, orientation, panelHeight, instance_id);
@@ -112,12 +121,12 @@ MyApplet.prototype = {
 
       this._addSeparator();
 
-      let open = new PopupMenu.PopupMenuItem("Open scripts folder");
+      let open = new PopupMenu.PopupMenuItem(_("Open scripts folder"));
       open.connect('activate', Lang.bind(this, this._openFolder));
       this.menu.addMenuItem(open);
 
       if (!this.autoupdate) {
-         let update = new PopupMenu.PopupMenuItem("Update menu");
+         let update = new PopupMenu.PopupMenuItem(_("Update menu"));
          update.connect('activate', Lang.bind(this, this._updateMenu));
          this.menu.addMenuItem(update);
       }
