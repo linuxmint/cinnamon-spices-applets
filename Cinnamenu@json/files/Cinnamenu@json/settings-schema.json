@@ -156,17 +156,6 @@
     "description": "Number of columns in apps grid",
     "tooltip": "Number of columns in apps grid"
   },
-  "startup-apps-display": {
-    "type": "combobox",
-    "default": 1,
-    "description": "Startup applications to display",
-    "options": {
-      "All": 0,
-      "Favorites": 1,
-      "None": 2
-    },
-    "tooltip": "Startup applications to display"
-  },
   "hide-categories": {
     "type": "checkbox",
     "default": false,
