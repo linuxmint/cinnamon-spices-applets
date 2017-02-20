@@ -71,9 +71,28 @@ try:
 except NameError:
     FileNotFoundError = IOError
 
-class JsonConfigManager:
-    @staticmethod
-    def read(filename):
+class JsonConfig:
+    def __init__(self, filename, instance_name):
+        self.__json = self.__read(filename)
+        self.__instance_selected = instance_name
+        
+        
+
+
+    def __iter__(self):
+        """ JsonConfig is an iterable array of the selected feeds """        
+        return iter(self.__json["instances"] == self.__instance_selected)
+
+    def __load_feeds(self):
+        self.__feeds = []
+
+        #for instance in self.__json[instances]:
+            #if instance == self.__instance_selected:
+                #for feed in instance['feeds']:
+                    #self.__feeds.append()
+
+    def __read(self, filename):
+        """ Returns the config.json file or creates a new one with default values if it does not exist """
         try:
             with open(filename, mode="r") as json_data:
                 feeds = json.load(json_data)
@@ -90,8 +109,6 @@ class JsonConfigManager:
             with open(filename, mode='w', encoding='utf-8') as f:
                 f.write(unicode(json.dumps(feeds, ensure_ascii=False)))
 
-
-        print(feeds)
         return feeds
 
 
@@ -201,20 +218,23 @@ class ConfigManager:
 
 class MainWindow(Gtk.Window):
 
-    def __init__(self, data_path):        
+    def __init__(self, config):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
-        
-        self.data_path = data_path
+        self.config = config
+        #self.data_path = data_path
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
 
-        self.feedjson = JsonConfigManager.read(self.data_path + "/feeds.json")
+        #self.feedjson = JsonConfigManager.read(self.data_path + "/feeds.json")
 
         #self.filename = filename
         self.feeds = Gtk.ListStore(str, str, bool)
         try:
-            for feed in ConfigManager.read():
+            #for feed in ConfigManager.read():
+            #    self.feeds.append(feed)
+            for feed in self.config:                
                 self.feeds.append(feed)
+
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
@@ -467,12 +487,13 @@ class MainWindow(Gtk.Window):
 if __name__ == '__main__':
     # If three parameters are passed in then we need to bypass the GUI and update the feed.
     ## TODO: Switch this use parameter passing instead of guessing by number of parameters.
-    if len(sys.argv) == 2:
-        data_path = sys.argv[1]
-    elif len(sys.argv) == 4:
-        data_path = sys.argv[1]
-        current_url = sys.argv[2]
-        redirect_url = sys.argv[3]
+    #if len(sys.argv) >= 3:
+    instance_name = sys.argv[1]
+    data_path = sys.argv[2]
+
+    if len(sys.argv) == 5:
+        current_url = sys.argv[3]
+        redirect_url = sys.argv[4]
         try:            
             ConfigManager.update_redirected_feed(current_url, redirect_url)
         except Exception as e:
@@ -480,11 +501,10 @@ if __name__ == '__main__':
         finally:
             # No need to show the GUI, all the work has been done here.
             exit()
-    else:
-        raise Exception("Invaild number of parameters included")
 
     # Display the window to allow the user to manage the feeds.
-    window = MainWindow(data_path)
+    config = JsonConfig(data_path + "/feeds.json", instance_name)
+    window = MainWindow(config)
     window.connect("delete-event", Gtk.main_quit)
     
     window.show_all()

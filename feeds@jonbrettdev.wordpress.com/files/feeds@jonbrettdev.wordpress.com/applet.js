@@ -24,15 +24,20 @@ const FEED_IMAGE_HEIGHT_MAX = 100;
 const FEED_IMAGE_WIDTH_MAX = 200;
 const TOOLTIP_WIDTH = 500.0;
 const MIN_MENU_WIDTH = 400;
+const GLib = imports.gi.GLib;
+// Set the path constants
+const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
+const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/" + UUID;
+const ICON_PATH = APPLET_PATH + '/icons/';
 
-imports.searchPath.push( imports.ui.appletManager.appletMeta[UUID].path );
+imports.searchPath.push(APPLET_PATH);
 
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const CinnamonVersion=imports.misc.config.PACKAGE_VERSION;
 const FeedReader = imports.feedreader;
 const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
+
 const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext.domain('cinnamon-applets');
 const Lang = imports.lang;
@@ -83,11 +88,8 @@ FeedApplet.prototype = {
             this.logger.info("Logging set at " + ((debug_logging) ? "debug" : "info"));
 
             this.feeds = new Array();
-            this.applet_path = metadata.path;
-            //this.data_path = "~/.cinnamon/" + UUID;
-            this.data_path = GLib.get_home_dir() + "/.cinnamon/" + UUID;
-            this.icon_path = metadata.path + '/icons/';
-            Gtk.IconTheme.get_default().append_search_path(this.icon_path);
+
+            Gtk.IconTheme.get_default().append_search_path(ICON_PATH);
             this.set_applet_icon_symbolic_name("rss");
             this.set_applet_tooltip(_("Feed reader"));
 
@@ -163,6 +165,13 @@ FeedApplet.prototype = {
                 "url",
                 "url_list_str",
                 this._load_feeds,
+                null);
+        // This setting is use to select the feed list being used by this instance of the applet.
+        // I would love to hide this or not allow editing..         
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "instance_name",
+                "instance_name",
+                this._on_settings_changed,
                 null);
     },
 
@@ -494,8 +503,8 @@ FeedApplet.prototype = {
         this.logger.debug("FeedApplet.manage_feeds");
         try {
             try {
-                Util.spawnCommandLine('chmod +x "' + this.applet_path + '/manage_feeds.py"');
-                Util.spawnCommandLine('chown $USER "' + this.applet_path + '/manage_feeds.py"');
+                Util.spawnCommandLine('chmod +x "' + APPLET_PATH + '/manage_feeds.py"');
+                Util.spawnCommandLine('chown $USER "' + APPLET_PATH + '/manage_feeds.py"');                
             } catch (e)
             {
                 if(this.logger != undefined){
@@ -505,7 +514,7 @@ FeedApplet.prototype = {
             }
 
             // if redirected_url != null pass parameters            
-            let argv = [this.applet_path + "/manage_feeds.py", data_path];
+            let argv = [APPLET_PATH + "/manage_feeds.py", this.instance_name, DATA_PATH];
             if(redirected_url != null){
                 argv.push(current_url, redirected_url);
             }
@@ -565,7 +574,7 @@ FeedApplet.prototype = {
     _ensureSource: function() {
         this.logger.debug("FeedApplet._ensureSource");
         if(!this._source) {
-            let gicon = Gio.icon_new_for_string(this.applet_path + "/icon.png");
+            let gicon = Gio.icon_new_for_string(APPLET_PATH + "/icon.png");
             let icon = new St.Icon({ gicon: gicon});
 
             this._source = new FeedMessageTraySource("RSS Feed Notification", icon);
@@ -583,7 +592,7 @@ FeedApplet.prototype = {
 
         this._ensureSource();
 
-        let gicon = Gio.icon_new_for_string(this.applet_path + "/icon.png");
+        let gicon = Gio.icon_new_for_string(APPLET_PATH + "/icon.png");
         let icon = new St.Icon({ gicon: gicon});
         reader._notification = new MessageTray.Notification(this._source, title, text, {icon: icon});
         reader._notification.setTransient(false);
@@ -612,7 +621,7 @@ FeedMessageTraySource.prototype = {
     _init: function() {
         MessageTray.Source.prototype._init.call(this, _("Feeds"));
 
-        let gicon = Gio.icon_new_for_string(this.applet_path + "/icon.png");
+        let gicon = Gio.icon_new_for_string(APPLET_PATH + "/icon.png");
         let icon = new St.Icon({ gicon: gicon});
 
         this._setSummaryIcon(icon);
@@ -673,8 +682,7 @@ FeedDisplayMenuItem.prototype = {
         /* Create reader */
         this.reader = new FeedReader.FeedReader(
                 this.logger,
-                url,
-                this.data_path,
+                url,                
                 {
                     'onUpdate' : Lang.bind(this, this.update),
                     'onError' : Lang.bind(this, this.error),
@@ -776,8 +784,7 @@ FeedDisplayMenuItem.prototype = {
     on_settings_changed: function(params) {
         this.max_items = params.max_items;
         this.show_feed_image = params.show_feed_image;
-        this.show_read_items = params.show_read_items;
-
+        this.show_read_items = params.show_read_items;        
         this.update();
     },
 

@@ -57,5 +57,11 @@
         "default" : false,
         "description" : "Check this to enable debug logging in Looking Glass",
         "tooltip" : "Checking this will enable debug level logging"
-    }
+    },
+    "instance_name": {
+        "type" : "generic",
+        "default" : "default",
+        "description" : "Feed Instance Name",
+        "tooltip" : "Do not change, this is modified by the Manage Feeds window."        
+    }    
 }
