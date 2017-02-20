@@ -4,10 +4,52 @@ from __future__ import unicode_literals
 import gi
 import sys
 import os
+import uuid
+import json
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import xml.etree.ElementTree as et
 from io import open
+
+DEFAULT_FEEDS="""
+{
+    "instances" : [ 
+        {
+            "name": "default",        
+            "interval": 5,    
+            "feeds": [
+                {
+                    "id": "",
+                    "title": "default",
+                    "url": "http://fxfeeds.mozilla.com/en-US/firefox/headlines.xml",
+                    "enabled": true,
+                    "notify": true,
+                    "interval": 5,
+                    "showimage": false
+                },                {
+                    "id": "",
+                    "title": "default",
+                    "url": "http://www.linuxmint.com/planet/rss20.xml",
+                    "enabled": true,
+                    "notify": true,
+                    "interval": 5,
+                    "showimage": false
+                },                {
+                    "id": "",
+                    "title": "default",
+                    "url": "http://segfault.linuxmint.com/feed/",
+                    "enabled": true,
+                    "notify": true,
+                    "interval": 5,
+                    "showimage": false
+                }
+            ]
+        }
+
+
+    ]
+}
+"""
 
 
 UI_INFO = """
@@ -24,9 +66,46 @@ UI_INFO = """
 </ui>
 """
 
+try:
+    FileNotFoundError
+except NameError:
+    FileNotFoundError = IOError
+
+class JsonConfigManager:
+    @staticmethod
+    def read(filename):
+        try:
+            with open(filename, mode="r") as json_data:
+                feeds = json.load(json_data)
+
+        except FileNotFoundError:
+            # No file found, return default values # everything else throws.
+            feeds = json.loads(DEFAULT_FEEDS)
+            # Populate the UUIDs
+            for instance in feeds['instances']:
+                if instance['name'] == 'default':
+                    for feed in instance['feeds']:
+                        # This unique ID is the identifier for this feed for life
+                        feed['id'] = JsonConfigManager.get_new_id()
+            with open(filename, mode='w', encoding='utf-8') as f:
+                f.write(unicode(json.dumps(feeds, ensure_ascii=False)))
+
+
+        print(feeds)
+        return feeds
+
+
+    @staticmethod
+    def get_new_id():
+        """ Common method used to return a unique id in a string format. """
+        return str(uuid.uuid4())
+
+
+
+
 class ConfigManager:    
     @staticmethod
-    def write(feeds, filename=None):
+    def write(filename=None):
         """
             Writes the feeds list to the file/stdout
         """
@@ -122,10 +201,14 @@ class ConfigManager:
 
 class MainWindow(Gtk.Window):
 
-    def __init__(self):        
+    def __init__(self, data_path):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
+        
+        self.data_path = data_path
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
+
+        self.feedjson = JsonConfigManager.read(self.data_path + "/feeds.json")
 
         #self.filename = filename
         self.feeds = Gtk.ListStore(str, str, bool)
@@ -383,9 +466,13 @@ class MainWindow(Gtk.Window):
 
 if __name__ == '__main__':
     # If three parameters are passed in then we need to bypass the GUI and update the feed.
-    if len(sys.argv) == 3:
-        current_url = sys.argv[1]
-        redirect_url = sys.argv[2]
+    ## TODO: Switch this use parameter passing instead of guessing by number of parameters.
+    if len(sys.argv) == 2:
+        data_path = sys.argv[1]
+    elif len(sys.argv) == 4:
+        data_path = sys.argv[1]
+        current_url = sys.argv[2]
+        redirect_url = sys.argv[3]
         try:            
             ConfigManager.update_redirected_feed(current_url, redirect_url)
         except Exception as e:
@@ -393,9 +480,11 @@ if __name__ == '__main__':
         finally:
             # No need to show the GUI, all the work has been done here.
             exit()
-    
+    else:
+        raise Exception("Invaild number of parameters included")
+
     # Display the window to allow the user to manage the feeds.
-    window = MainWindow()
+    window = MainWindow(data_path)
     window.connect("delete-event", Gtk.main_quit)
     
     window.show_all()
