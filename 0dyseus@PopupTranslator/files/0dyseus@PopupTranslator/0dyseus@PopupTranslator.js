@@ -21,6 +21,22 @@ function _(aStr) {
     return Gettext.gettext(aStr);
 }
 
+function convertHistoryZeroToOne(aData) {
+    let newData = {};
+    try {
+        for (let srcTxt in aData) {
+            if (aData.hasOwnProperty(srcTxt)) {
+                newData[aData[srcTxt]["tL"]] = newData[aData[srcTxt]["tL"]] || {};
+                newData[aData[srcTxt]["tL"]][srcTxt] = aData[srcTxt];
+            }
+        }
+    } catch (aErr) {
+        global.logError(aErr);
+    } finally {
+        return newData;
+    }
+}
+
 const langs = {
     "?": "Unknown",
     "": "Auto",

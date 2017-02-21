@@ -1,3 +1,4 @@
+﻿
 # Help for Popup Translator applet
 
 ### IMPORTANT!!!
@@ -6,6 +7,7 @@ Never delete any of the files found inside this applet folder. It might break th
 ***
 
 ### Dependencies
+
 **If one or more of these dependencies are missing in your system, you will not be able to use this applet.**
 
 - **xsel** command: XSel is a command-line program for getting and setting the contents of the X selection.
@@ -24,14 +26,22 @@ Never delete any of the files found inside this applet folder. It might break th
 ***
 
 ### Usage
-- **Left click**: Translates any selected text from any application on your system. A hotkey can be assigned to perform this task.
-- **Ctrl + Left click**: Same as **Left click**, but it will bypass the translation history. A hotkey can be assigned to perform this task.
+
+There are 4 *translations mechanisms* (**Left click**, **Middle click**, **Hotkey #1** and **Hotkey #2**). Each translation mechanism can be configured with their own service providers, language pairs and hotkeys.
+
+- **First translation mechanism (Left click):** Translates any selected text from any application on your system. A hotkey can be assigned to perform this task.
+- **First translation mechanism (<kbd>Ctrl</kbd> + Left click):** Same as **Left click**, but it will bypass the translation history. A hotkey can be assigned to perform this task.
+- **Second translation mechanism (Middle click):** Same as **Left click**.
+- **Second translation mechanism (<kbd>Ctrl</kbd> + Middle click):** Same as **<kbd>Ctrl</kbd> + Left click**.
+- **Third translation mechanism (Hotkey #1):** Two hotkeys can be configured to perform a translation and a forced translation.
+- **Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured to perform a translation and a forced translation.
 
 All translations are stored into the translation history. If a string of text was already translated in the past, the popup will display that stored translated text without making use of the provider's translation service.
 
 ***
 
 ### About translation history
+
 I created the translation history mechanism mainly to avoid the abuse of the translation services.
 
 - If the Google Translate service is *abused*, Google may block temporarily your IP. Or what is worse, they could change the translation mechanism making this applet useless and forcing me to update its code.
@@ -39,9 +49,14 @@ I created the translation history mechanism mainly to avoid the abuse of the tra
 
 In the context menu of this applet is an item that can open the folder were the translation history file is stored. From there, the translation history file can be backed up or deleted.
 
+**NEVER edit the translation history file manually!!!**
+
+**If the translation history file is deleted/renamed/moved, Cinnamon needs to be restarted.**
+
 ***
 
 ### How to get Yandex translator API keys
+
 - Visit one of the following links and register a Yandex account (or use one of the available social services).
     - **English:** https://tech.yandex.com/keys/get/?service=trnsl
     - **Russian:** https://tech.yandex.ru/keys/get/?service=trnsl
@@ -49,6 +64,7 @@ In the context menu of this applet is an item that can open the folder were the 
 - Once you have several API keys, you can add them to Popup Translator's settings window (one API key per line).
 
 #### Important notes about Yandex API keys
+
 - The API keys will be stored into a preference. Keep your API keys backed up in case you reset Popup Translator's preferences.
 - **NEVER make your API keys public!!!** The whole purpose of going to the trouble of getting your own API keys is that the only one *consuming their limits* is you and nobody else.
 - With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) per month.
@@ -59,11 +75,10 @@ In the context menu of this applet is an item that can open the folder were the 
 
 - If this applet was installed from Cinnamon Settings, all of this applet's localizations were automatically installed.
 - If this applet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the applet's folder.
-- If this applet has no locale available for your language, you could create it by following [these instructions](https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localizations) and send the .po file to me.
+- If this applet has no locale available for your language, you could create it by following [these instructions](https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization) and send the .po file to me.
     - If you have a GitHub account:
         - You could send a pull request with the new locale file.
         - If you don't want to clone the repository, just create a Gist and send me the link.
     - If you don't have/want a GitHub account:
         - You can send me a [Pastebin](http://pastebin.com/) (or similar service) to my [Mint Forums account](https://forums.linuxmint.com/memberlist.php?mode=viewprofile&u=164858).
 - If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.
-
