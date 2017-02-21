@@ -74,22 +74,24 @@ except NameError:
 class JsonConfig:
     def __init__(self, filename, instance_name):
         self.__json = self.__read(filename)
+        self.set_instance(instance_name)
+        
+    def set_instance(self, instance_name):
         self.__instance_selected = instance_name
-        
-        
+        self.__load_feeds()
 
 
     def __iter__(self):
         """ JsonConfig is an iterable array of the selected feeds """        
-        return iter(self.__json["instances"] == self.__instance_selected)
+        return iter(self.__feeds)
 
     def __load_feeds(self):
         self.__feeds = []
 
-        #for instance in self.__json[instances]:
-            #if instance == self.__instance_selected:
-                #for feed in instance['feeds']:
-                    #self.__feeds.append()
+        for instance in self.__json['instances']:
+            if instance['name'] == self.__instance_selected:
+                for feed in instance['feeds']:
+                    self.__feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showimage']])
 
     def __read(self, filename):
         """ Returns the config.json file or creates a new one with default values if it does not exist """
@@ -221,17 +223,11 @@ class MainWindow(Gtk.Window):
     def __init__(self, config):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
         self.config = config
-        #self.data_path = data_path
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
 
-        #self.feedjson = JsonConfigManager.read(self.data_path + "/feeds.json")
-
-        #self.filename = filename
-        self.feeds = Gtk.ListStore(str, str, bool)
+        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool)
         try:
-            #for feed in ConfigManager.read():
-            #    self.feeds.append(feed)
             for feed in self.config:                
                 self.feeds.append(feed)
 
@@ -260,6 +256,12 @@ class MainWindow(Gtk.Window):
         # Build feed table
         self.treeview = Gtk.TreeView(model=self.feeds)
         self.treeview.set_reorderable(True)
+
+        renderer_id = Gtk.CellRendererText()
+        renderer_id.set_property("editable", False)
+        column_id = Gtk.TreeViewColumn("Id", renderer_id, text=1)
+        column_id.set_expand(False)
+        self.treeview.append_column(column_id)
 
         renderer_enable = Gtk.CellRendererToggle()
         renderer_enable.connect("toggled", self.enable_toggled)
