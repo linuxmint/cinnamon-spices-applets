@@ -1,0 +1,858 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Transformice helper 1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-25 23:30+0100\n"
+"PO-Revision-Date: 2017-02-26 21:46+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:116
+msgid "Loading...."
+msgstr "Učitavanje..."
+
+#: applet.js:117
+msgid "Transformice keyboard configuration switch"
+msgstr "Transformice prebacivač podešavanja tipkovnice"
+
+#: applet.js:213 applet.js:371
+msgid "Normal"
+msgstr "Normalno"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:215 applet.js:372
+msgid "Hard"
+msgstr "Tvrdo"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:217 applet.js:373
+msgid "Divine"
+msgstr "Uzvišeno"
+
+#: applet.js:244
+#, c-format
+msgid "Screencast recorder '%s' not found"
+msgstr "Snimatelj zaslona '%s' nije pronađen"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_SWITCH->description
+#: applet.js:369
+msgid "Switch normal / prefered mode"
+msgstr "Prebaci normalan/preferiran način"
+
+#: applet.js:377
+msgid "Stop recording"
+msgstr "Zaustavi snimanje"
+
+#: applet.js:379
+msgid "Start recording"
+msgstr "Pokreni snimanje"
+
+#: applet.js:486
+msgid "Transformice"
+msgstr "Transformice"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_RECORD->description
+msgid "Use screencast"
+msgstr "Koristi snimatelja zalona"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->description
+msgid "Crop W: "
+msgstr "Obreži W: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->units
+msgid "pixels (Y right)"
+msgstr "piksela (Y desno)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->description
+msgid "Crop X: "
+msgstr "Obreži X: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->units
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->units
+msgid "pixels"
+msgstr "piksela"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->description
+msgid "Crop Y: "
+msgstr "Obreži Y: "
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Divin->description
+msgid "Divine mode shorcut configuration"
+msgstr "Podešavanje prečaca uzvišenog načina"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->description
+msgid "Crop H: "
+msgstr "Obreži H: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->units
+msgid "pixels (X bottom)"
+msgstr "piksela (X dno)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->description
+msgid "Video file name: "
+msgstr "Naziv video datoteke: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->tooltip
+msgid ""
+"Default: screencast_%Y-%M-%D_%H:%I:%S\n"
+"%Y = Year\n"
+"%M = Month\n"
+"%D = Day\n"
+"%H = Hour\n"
+"%I = Minutes\n"
+"%S = Seconds\n"
+"%m = Milliseconds"
+msgstr ""
+"Zadano: snimka_zaslona_%Y-%M-%D_%H:%I:%S\n"
+"%Y = Godina\n"
+"%M = Mjesec\n"
+"%D = Dan\n"
+"%H = Sat\n"
+"%I = Minute\n"
+"%S = Sekunde\n"
+"%m = Millisekunde"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->description
+msgid "Key F5"
+msgstr "Tipka F5"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Red nail (b)"
+msgstr "Crveni lak (b)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Confetti (e)"
+msgstr "Konfete (e)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Ball"
+msgstr "Lopta"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little box"
+msgstr "Mala kutija"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Anvil"
+msgstr "Nakovanj"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor left (j)"
+msgstr "Zeleni motor lijevi (j)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Balloon"
+msgstr "Balon"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big board"
+msgstr "Velika daska"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Do no modify"
+msgstr "Ne mijenjaj"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate left (w)"
+msgstr "Zakreni lijevo (w)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rune"
+msgstr "Runa"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Arrow"
+msgstr "Strelica"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "(un)hidden (spacebar)"
+msgstr "(od)skriveni (spacebar)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little board"
+msgstr "Mala daska"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green nail (v)"
+msgstr "Zeleni lak (v)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate right (x)"
+msgstr "Zakreni desno (x)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Yellow nail (c)"
+msgstr "Žuti lak (c)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big box"
+msgstr "Velika kutija"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Empty"
+msgstr "Prazno"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor right (n)"
+msgstr "Zeleni motor desni (n)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_TEXT->description
+msgid "Show text"
+msgstr "Prikaži tekst"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD->description
+msgid "Start screencast"
+msgstr "Pokreni snimanje"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_options->description
+msgid "Options"
+msgstr "Mogućnosti"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_ICON->description
+msgid "Show icon"
+msgstr "Prikaži ikonu"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->description
+msgid "Key F1"
+msgstr "Tipka F1"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_hotkey_config->description
+msgid "Modes shorcuts switch"
+msgstr "Način prečaca prebacivanja"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->description
+msgid "Screencast folder"
+msgstr "Mapa snimanja"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->tooltip
+msgid "{VIDEO_DIR} = ~/Videos"
+msgstr "{VIDEO_DIR} = ~/Snimke"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_MENUPOPUP->description
+msgid "Use icon menu"
+msgstr "Koristi ikonu izbornika"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->description
+msgid "Default switch mode"
+msgstr "Zadani način prebacivanja"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->description
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->description
+msgid "Fixed : "
+msgstr "Nepromjenjivo: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->units
+msgid "pixels (width)"
+msgstr "pikseli (širina)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->description
+msgid "Key F3"
+msgstr "Tipka F3"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->description
+msgid "Key F9"
+msgstr "Tipka F9"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->description
+msgid "Key F8"
+msgstr "Tipka F8"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->description
+msgid "Key F2"
+msgstr "Tipka F2"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_advanced_config->description
+msgid "Advanced configuration !"
+msgstr "Napredne mogućnosti!"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->description
+msgid "Key F4"
+msgstr "Tipka F4"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->description
+msgid "Key F7"
+msgstr "Tipka F7"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->description
+msgid "Key F6"
+msgstr "Tipka F6"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->description
+msgid "Key F11"
+msgstr "Tipka F11"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->description
+msgid "Key F10"
+msgstr "Tipka F10"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->description
+msgid "Key F12"
+msgstr "Tipka F12"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->description
+msgid "Screencast recorder program: "
+msgstr "Program snimanja: "
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "avconv (recommanded)"
+msgstr "avconv (preproučljivo)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "VLC"
+msgstr "VLC"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "ffmpeg"
+msgstr "ffmpeg"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Hard->description
+msgid "Hard mode shortcut configuration"
+msgstr "Podešavanje prečaca tvrdog načina"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_FIXED_ZONE->description
+msgid "Use fixed recording area"
+msgstr "Koristi nepromjenjivo područje snimanja"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_HOTKEYS->description
+msgid "Use keyboard shorcuts"
+msgstr "Koristi prečace tipkovnice"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_NORMAL->description
+msgid "Switch to mode: Normal"
+msgstr "Prebaci u način: Normalan"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_config->description
+msgid "Configuration"
+msgstr "Podešavanje"
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->description
+msgid "Timeout back to normal:"
+msgstr "Vrijeme povratka natrag na normalno"
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->tooltip
+msgid ""
+"Zero desactivate countdown\n"
+"Times in seconds"
+msgstr ""
+"Nula deaktivira odbrojavanje\n"
+"Vrijeme je u sekundama"
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->units
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->units
+msgid "seconds"
+msgstr "sekunde"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIFF->description
+msgid "Switch to mode: Hard"
+msgstr "Prebaci u način: Tvrd"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIVIN->description
+msgid "Switch to mode: Divine"
+msgstr "Prebaci u način: Uzvišen"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD_S->description
+msgid "Stop screencast"
+msgstr "Zaustavi snimanje"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->description
+msgid "Screencast countdown time: "
+msgstr "Vrijeme odbrojavanja do početka snimanja:"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->tooltip
+msgid "Times in seconds"
+msgstr "Vrijeme u sekundama"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->units
+msgid "pixels (height)"
+msgstr "pikseli (visina)"
+
+#. tfmKeyboard@alexpp->metadata.json->name
+msgid "Transformice helper"
+msgstr "Transformice pomoćnik"

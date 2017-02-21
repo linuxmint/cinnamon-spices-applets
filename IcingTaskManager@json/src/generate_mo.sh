@@ -1,6 +1,6 @@
 #!/bin/bash
 
-langs=( bg de es fr he ru zh_CN pl )
+langs=( bg de es fr he hr ru zh_CN pl )
 
 for l in "${langs[@]}"
 do
