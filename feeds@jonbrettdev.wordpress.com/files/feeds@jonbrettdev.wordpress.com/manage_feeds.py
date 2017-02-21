@@ -20,33 +20,34 @@ DEFAULT_FEEDS="""
             "feeds": [
                 {
                     "id": "",
-                    "title": "default",
+                    "title": "",
                     "url": "http://fxfeeds.mozilla.com/en-US/firefox/headlines.xml",
                     "enabled": true,
                     "notify": true,
-                    "interval": 5,
+                    "interval": 5,                    
+                    "showreaditems": false,
                     "showimage": false
                 },                {
                     "id": "",
-                    "title": "default",
+                    "title": "",
                     "url": "http://www.linuxmint.com/planet/rss20.xml",
                     "enabled": true,
                     "notify": true,
                     "interval": 5,
+                    "showreaditems": false,
                     "showimage": false
                 },                {
                     "id": "",
-                    "title": "default",
+                    "title": "",
                     "url": "http://segfault.linuxmint.com/feed/",
                     "enabled": true,
                     "notify": true,
                     "interval": 5,
+                    "showreaditems": false,
                     "showimage": false
                 }
             ]
         }
-
-
     ]
 }
 """
@@ -62,6 +63,9 @@ UI_INFO = """
     <menu action='ExportMenu'>
       <menuitem action='ExportFeedFile' />
     </menu>
+    <menu action='OptionMenu'>
+      <menuitem action='ShowHideFields' />
+    </menu>    
   </menubar>
 </ui>
 """
@@ -73,7 +77,9 @@ except NameError:
 
 class JsonConfig:
     def __init__(self, filename, instance_name):
-        self.__json = self.__read(filename)
+        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
+        self.__filename = filename
+        self.__json = self.__read()
         self.set_instance(instance_name)
         
     def set_instance(self, instance_name):
@@ -81,22 +87,53 @@ class JsonConfig:
         self.__load_feeds()
 
 
-    def __iter__(self):
-        """ JsonConfig is an iterable array of the selected feeds """        
-        return iter(self.__feeds)
+    def remove(self, id):
+        pass
+                
+
+    def save(self):
+        """ Convert the array back into a json file and then save / export it """
+        for instance in self.__json['instances']:
+            if instance['name'] == self.__instance_selected:                
+                # Remove the feed
+                instance.pop('feeds')
+                # add a new empty section
+                instance['feeds'] = []
+
+                # Add all the feeds back in
+                for feed in self.__feeds:
+                    instance['feeds'].append({'id': feed[0], 'enabled': feed[1], 'url': feed[2], 'title': feed[3], 'notify': feed[4], 'interval': feed[5], 'showreaditems': feed[6], 'showimage': feed[7]})
+
+        
+        print(self.__json)
+
+        # Save the file back out
+        with open(self.__filename, mode='w', encoding='utf-8') as f:
+            f.write(unicode(json.dumps(self.__json, ensure_ascii=False)))
+
+
+    #def __iter__(self):
+    #    """ JsonConfig is an iterable array of the selected feeds """        
+    #    return iter(self.__feeds)
+
 
     def __load_feeds(self):
-        self.__feeds = []
+        #self.__feeds = []
+        #self.__feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
+        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
+        #deleted will hold the deleted records
+        #self.__deleted = []
 
         for instance in self.__json['instances']:
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
-                    self.__feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showimage']])
+                    self.feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
+                    #self.__feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
 
-    def __read(self, filename):
+    def __read(self):
         """ Returns the config.json file or creates a new one with default values if it does not exist """
         try:
-            with open(filename, mode="r") as json_data:
+            with open(self.__filename, mode="r") as json_data:
                 feeds = json.load(json_data)
 
         except FileNotFoundError:
@@ -107,8 +144,8 @@ class JsonConfig:
                 if instance['name'] == 'default':
                     for feed in instance['feeds']:
                         # This unique ID is the identifier for this feed for life
-                        feed['id'] = JsonConfigManager.get_new_id()
-            with open(filename, mode='w', encoding='utf-8') as f:
+                        feed['id'] = JsonConfig.get_new_id()
+            with open(self.__filename, mode='w', encoding='utf-8') as f:
                 f.write(unicode(json.dumps(feeds, ensure_ascii=False)))
 
         return feeds
@@ -116,7 +153,9 @@ class JsonConfig:
 
     @staticmethod
     def get_new_id():
-        """ Common method used to return a unique id in a string format. """
+        """ 
+            Common method used to return a unique id in a string format. 
+        """
         return str(uuid.uuid4())
 
 
@@ -223,22 +262,26 @@ class MainWindow(Gtk.Window):
     def __init__(self, config):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
         self.config = config
+        self.show_hidden_fields = False
+        self.hidden_fields = []        
+        
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
+        self.feeds = config.feeds
+        # id, enabled, url, title, notify, interval, showread, showimage
+        #self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
+        #try:
+        #    for feed in self.config:                
+        #        self.feeds.append(feed)#
 
-        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool)
-        try:
-            for feed in self.config:                
-                self.feeds.append(feed)
-
-        except Exception as e:
-            dialog = Gtk.MessageDialog(self, 0,
-                                        Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CLOSE,
-                                        "Failed to Import feeds")
-            dialog.format_secondary_text(str(e))
-            dialog.run()
-            dialog.destroy()                                        
+        #except Exception as e:
+        #    dialog = Gtk.MessageDialog(self, 0,
+        ##                                Gtk.MessageType.ERROR,
+         #                               Gtk.ButtonsType.CLOSE,
+         #                               "Failed to Import feeds")
+         #   dialog.format_secondary_text(str(e))
+         #   dialog.run()
+         #   dialog.destroy()                                        
 
         # Set window properties
         self.set_default_size(600, 200)
@@ -259,33 +302,67 @@ class MainWindow(Gtk.Window):
 
         renderer_id = Gtk.CellRendererText()
         renderer_id.set_property("editable", False)
-        column_id = Gtk.TreeViewColumn("Id", renderer_id, text=1)
+        column_id = Gtk.TreeViewColumn("Id", renderer_id, text=0)
         column_id.set_expand(False)
+        column_id.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_id)
         self.treeview.append_column(column_id)
 
         renderer_enable = Gtk.CellRendererToggle()
-        renderer_enable.connect("toggled", self.enable_toggled)
-        column_enable = Gtk.TreeViewColumn("Enable", renderer_enable, active=2)
+        renderer_enable.connect("toggled", self.field_toggled, 1)
+        column_enable = Gtk.TreeViewColumn("Enable", renderer_enable, active=1)
         column_enable.set_expand(False)
         self.treeview.append_column(column_enable)
 
         renderer_url = Gtk.CellRendererText()
         renderer_url.set_property("editable", True)
-        renderer_url.connect("edited", self.url_edited)
-        column_url = Gtk.TreeViewColumn("Url", renderer_url, text=0)
+        renderer_url.connect("edited", self.text_edited, 2)
+        column_url = Gtk.TreeViewColumn("Url", renderer_url, text=2)
         column_url.set_expand(True)
         self.treeview.append_column(column_url)
 
         renderer_title = Gtk.CellRendererText()
         renderer_title.set_property("editable", True)
-        renderer_title.connect("edited", self.title_edited)
-        column_title = Gtk.TreeViewColumn("Custom title", renderer_title, text=1)
+        renderer_title.connect("edited", self.text_edited, 3)
+        column_title = Gtk.TreeViewColumn("Custom title", renderer_title, text=3)
         column_title.set_expand(True)
         self.treeview.append_column(column_title)
+
+        renderer_notify = Gtk.CellRendererToggle()
+        renderer_notify.connect("toggled", self.field_toggled, 4)
+        column_notify = Gtk.TreeViewColumn("Notify", renderer_notify, active=4)
+        column_notify.set_expand(False)
+        self.treeview.append_column(column_notify)
+
+        renderer_showread = Gtk.CellRendererToggle()
+        renderer_showread.connect("toggled", self.field_toggled, 6)
+        column_showread = Gtk.TreeViewColumn("Show Read", renderer_showread, active=6)
+        column_showread.set_expand(False)
+        column_showread.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_showread)        
+        self.treeview.append_column(column_showread)        
+
+        renderer_interval = Gtk.CellRendererText()
+        renderer_interval.set_property("editable", True)
+        renderer_interval.connect("edited", self.interval_edited)
+        column_interval = Gtk.TreeViewColumn("Interval", renderer_interval, text=5)
+        column_interval.set_expand(False)
+        column_interval.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_interval)
+        self.treeview.append_column(column_interval)
+
+        renderer_showimage = Gtk.CellRendererToggle()
+        renderer_showimage.connect("toggled", self.field_toggled, 7)
+        column_showimage = Gtk.TreeViewColumn("Show Image", renderer_showimage, active=7)
+        column_showimage.set_expand(False)
+        column_showimage.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_showimage)        
+        self.treeview.append_column(column_showimage)
 
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC,
                                    Gtk.PolicyType.AUTOMATIC)
+        
         scrolled_window.add(self.treeview)
         box.pack_start(scrolled_window, True, True, 0)
 
@@ -344,37 +421,62 @@ class MainWindow(Gtk.Window):
         action_export_file.connect("activate", self.on_menu_export_feeds)
         action_group.add_action(action_export_file)
 
+        # Create Option menu
+        action_option_menu = Gtk.Action("OptionMenu", "Options", None, None)
+        action_group.add_action(action_option_menu)
+
+        action_toggle_hidden = Gtk.Action("ShowHideFields",
+                                        "_Toggle Hidden Fields",
+                                        "Show or Hide hidden fields",
+                                        Gtk.STOCK_FILE)
+        action_toggle_hidden.connect("activate", self.on_menu_toggle_hidden)
+        action_group.add_action(action_toggle_hidden)
+
+
         # Setup UI manager
         self.ui_manager.add_ui_from_string(UI_INFO)
         self.add_accel_group(self.ui_manager.get_accel_group())
         self.ui_manager.insert_action_group(action_group)
 
-    def url_edited(self, widget, path, text):
-        self.feeds[path][0] = text
-
-    def title_edited(self, widget, path, text):
+    def text_edited(self, widget, row, text, col):
         if len(text) > 0:
-            self.feeds[path][1] = text
+            self.feeds[row][col] = text 
         else:
-            self.feeds[path][1] = None
+            self.feeds[row][col] = None
 
-    def enable_toggled(self, widget, path):
-        self.feeds[path][2] = not self.feeds[path][2]
+
+    def field_toggled(self, widget, row, col):
+        """ Toggle the value of the passed row / col in the array """
+        self.feeds[row][col] = not self.feeds[row][col]
+
+
+    def interval_edited(self, widget, row, text):
+        """ When the interval is changed convert it to a number or refuse to update the field """
+        try:
+            self.feeds[row][5] = int(text)        
+        except:
+            pass# Nothing to do, ignore this.
+
 
     def remove_feed(self, button):
         selection = self.treeview.get_selection()
         result = selection.get_selected()
         if result:
             model, itr = result
+        id = model[itr][1]    
+        config.remove(id) # Save the ID so we know to remove the record from the JSON file.
         model.remove(itr)
+        
 
     def new_feed(self, button):
-        self.feeds.append(["http://", "", True])
+        """ Adds a new row to the bottom of the array / Grid """        
+        self.feeds.append([JsonConfig.get_new_id(), True, "http://", "", True, 5, False, False])        
         self.treeview.set_cursor(len(self.feeds) - 1, self.treeview.get_column(0), True)
 
     def save_clicked(self, button):
         try:
-            ConfigManager.write(self.feeds)
+            #ConfigManager.write(self.feeds)
+            config.save()
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
@@ -484,6 +586,12 @@ class MainWindow(Gtk.Window):
                 
                 error_dialog.run()
                 error_dialog.destroy()                         
+
+
+    def on_menu_toggle_hidden(self, widget):
+        self.show_hidden_fields = not self.show_hidden_fields
+        for column in self.hidden_fields:
+            column.set_visible(self.show_hidden_fields)
 
 
 if __name__ == '__main__':
