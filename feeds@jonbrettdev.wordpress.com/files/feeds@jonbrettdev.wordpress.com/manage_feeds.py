@@ -1,4 +1,3 @@
-#!/usr/bin/env python2
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 import gi
@@ -77,22 +76,21 @@ except NameError:
 
 class JsonConfig:
     def __init__(self, filename, instance_name):
+        """ This requires the filename that is being read along with the instance name to bind to the feed array """
         self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
         self.__filename = filename
         self.__json = self.__read()
         self.set_instance(instance_name)
         
+
     def set_instance(self, instance_name):
+        """ Method used to change which instance list is being bound to the feeds array """
         self.__instance_selected = instance_name
         self.__load_feeds()
-
-
-    def remove(self, id):
-        pass
                 
 
     def save(self):
-        """ Convert the array back into a json file and then save / export it """
+        """ Convert the array back into feeds instance in the config file and then save / export it """
         for instance in self.__json['instances']:
             if instance['name'] == self.__instance_selected:                
                 # Remove the feed
@@ -101,34 +99,22 @@ class JsonConfig:
                 instance['feeds'] = []
 
                 # Add all the feeds back in
-                for feed in self.__feeds:
+                for feed in self.feeds:
                     instance['feeds'].append({'id': feed[0], 'enabled': feed[1], 'url': feed[2], 'title': feed[3], 'notify': feed[4], 'interval': feed[5], 'showreaditems': feed[6], 'showimage': feed[7]})
-
-        
-        print(self.__json)
 
         # Save the file back out
         with open(self.__filename, mode='w', encoding='utf-8') as f:
-            f.write(unicode(json.dumps(self.__json, ensure_ascii=False)))
-
-
-    #def __iter__(self):
-    #    """ JsonConfig is an iterable array of the selected feeds """        
-    #    return iter(self.__feeds)
-
+            #f.write(self.__ensure_unicode(json.dumps(self.__json, ensure_ascii=False)))
+            f.write(json.dumps(self.__json, ensure_ascii=False))
 
     def __load_feeds(self):
-        #self.__feeds = []
-        #self.__feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
         self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
-        #deleted will hold the deleted records
-        #self.__deleted = []
 
         for instance in self.__json['instances']:
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
                     self.feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
-                    #self.__feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
+
 
     def __read(self):
         """ Returns the config.json file or creates a new one with default values if it does not exist """
@@ -146,7 +132,7 @@ class JsonConfig:
                         # This unique ID is the identifier for this feed for life
                         feed['id'] = JsonConfig.get_new_id()
             with open(self.__filename, mode='w', encoding='utf-8') as f:
-                f.write(unicode(json.dumps(feeds, ensure_ascii=False)))
+                f.write(json.dumps(feeds, ensure_ascii=False))
 
         return feeds
 
@@ -267,21 +253,6 @@ class MainWindow(Gtk.Window):
         
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
-        self.feeds = config.feeds
-        # id, enabled, url, title, notify, interval, showread, showimage
-        #self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
-        #try:
-        #    for feed in self.config:                
-        #        self.feeds.append(feed)#
-
-        #except Exception as e:
-        #    dialog = Gtk.MessageDialog(self, 0,
-        ##                                Gtk.MessageType.ERROR,
-         #                               Gtk.ButtonsType.CLOSE,
-         #                               "Failed to Import feeds")
-         #   dialog.format_secondary_text(str(e))
-         #   dialog.run()
-         #   dialog.destroy()                                        
 
         # Set window properties
         self.set_default_size(600, 200)
@@ -297,7 +268,7 @@ class MainWindow(Gtk.Window):
         box.pack_start(menubar, False, False, 0)
 
         # Build feed table
-        self.treeview = Gtk.TreeView(model=self.feeds)
+        self.treeview = Gtk.TreeView(model=self.config.feeds)
         self.treeview.set_reorderable(True)
 
         renderer_id = Gtk.CellRendererText()
@@ -438,44 +409,46 @@ class MainWindow(Gtk.Window):
         self.add_accel_group(self.ui_manager.get_accel_group())
         self.ui_manager.insert_action_group(action_group)
 
+
     def text_edited(self, widget, row, text, col):
+        """ When a text box is edited we need to update the feed array. """
         if len(text) > 0:
-            self.feeds[row][col] = text 
+            self.config.feeds[row][col] = text 
+            
         else:
-            self.feeds[row][col] = None
+            self.config.feeds[row][col] = None
 
 
     def field_toggled(self, widget, row, col):
-        """ Toggle the value of the passed row / col in the array """
-        self.feeds[row][col] = not self.feeds[row][col]
+        """ Toggle the value of the passed row / col in the feed array """
+        self.config.feeds[row][col] = not self.config.feeds[row][col]
 
 
     def interval_edited(self, widget, row, text):
-        """ When the interval is changed convert it to a number or refuse to update the field """
+        """ When the interval is changed convert it to a number or refuse to update the field in the feed array """
         try:
-            self.feeds[row][5] = int(text)        
+            self.config.feeds[row][5] = int(text)        
         except:
             pass# Nothing to do, ignore this.
 
 
     def remove_feed(self, button):
+        """ When delete button is clicked we find the selected record and remove it from the feed array """
         selection = self.treeview.get_selection()
         result = selection.get_selected()
         if result:
             model, itr = result
-        id = model[itr][1]    
-        config.remove(id) # Save the ID so we know to remove the record from the JSON file.
         model.remove(itr)
         
 
     def new_feed(self, button):
         """ Adds a new row to the bottom of the array / Grid """        
-        self.feeds.append([JsonConfig.get_new_id(), True, "http://", "", True, 5, False, False])        
-        self.treeview.set_cursor(len(self.feeds) - 1, self.treeview.get_column(0), True)
+        self.config.feeds.append([JsonConfig.get_new_id(), True, "http://", "", True, 5, False, False])        
+        self.treeview.set_cursor(len(self.config.feeds) - 1, self.treeview.get_column(0), True)
+
 
     def save_clicked(self, button):
         try:
-            #ConfigManager.write(self.feeds)
             config.save()
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
@@ -528,7 +501,7 @@ class MainWindow(Gtk.Window):
                     new_feeds = ConfigManager.read(filename)
 
                 for feed in new_feeds:
-                    self.feeds.append(feed)
+                    self.config.feeds.append(feed)
 
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.INFO,
@@ -575,7 +548,7 @@ class MainWindow(Gtk.Window):
         sys.stderr.write(str(response))
         if response == Gtk.ResponseType.OK:
             try:
-                ConfigManager.write(self.feeds, filename=filename)
+                ConfigManager.write(self.config.feeds, filename=filename)
             except Exception as ex:
                 sys.stderr.write("Unable to export file, exception: %s" % str(ex))
                 error_dialog = Gtk.MessageDialog(self, 0,
@@ -598,6 +571,7 @@ if __name__ == '__main__':
     # If three parameters are passed in then we need to bypass the GUI and update the feed.
     ## TODO: Switch this use parameter passing instead of guessing by number of parameters.
     #if len(sys.argv) >= 3:
+    print(sys.version)
     instance_name = sys.argv[1]
     data_path = sys.argv[2]
 
