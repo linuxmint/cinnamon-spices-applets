@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 import gi
@@ -570,8 +571,7 @@ class MainWindow(Gtk.Window):
 if __name__ == '__main__':
     # If three parameters are passed in then we need to bypass the GUI and update the feed.
     ## TODO: Switch this use parameter passing instead of guessing by number of parameters.
-    #if len(sys.argv) >= 3:
-    print(sys.version)
+    #if len(sys.argv) >= 3:    
     instance_name = sys.argv[1]
     data_path = sys.argv[2]
 
