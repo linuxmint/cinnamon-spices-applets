@@ -106,7 +106,7 @@ FeedReader.prototype = {
             throw "Failed to create HTTP session: " + e;
         }
 
-        let path = Gio.file_parse_name(this.path + '/' + sanitize_url(this.url)).get_path();
+        path = Gio.file_parse_name(this.path + '/' + sanitize_url(this.url)).get_path();
         // Let the python script grab the items and load them using an async method
         Util.spawn_async(['python', APPLET_PATH+'/loadItems.py', path], Lang.bind(this, this.load_items));
         /* Load items */
@@ -122,7 +122,7 @@ FeedReader.prototype = {
         Util.spawn_async(['python', APPLET_PATH+'/getFeed.py', this.url], Lang.bind(this, this.process_feed));
 
     },
-    
+
     process_feed: function(response) {
         this.logger.debug("FeedReader.process_feed");
 
@@ -147,7 +147,7 @@ FeedReader.prototype = {
             // Check if feed has a permanent redirect
             if (info.redirected_url != undefined) {
                 this.is_redirected = true;
-                this.redirected_url = info.redirected_url;                
+                this.redirected_url = info.redirected_url;
                 this.logger.info("Feed has been redirected to: " + info.redirected_url + "(Please update feed)");
                 // eventually need to address this more forcefully
             }
