@@ -1,57 +1,12 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-import gi
-import sys
 import os
-import uuid
-import json
+import sys
+import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 import xml.etree.ElementTree as et
-from io import open
-
-DEFAULT_FEEDS="""
-{
-    "instances" : [ 
-        {
-            "name": "default",        
-            "interval": 5,    
-            "feeds": [
-                {
-                    "id": "",
-                    "title": "",
-                    "url": "http://fxfeeds.mozilla.com/en-US/firefox/headlines.xml",
-                    "enabled": true,
-                    "notify": true,
-                    "interval": 5,                    
-                    "showreaditems": false,
-                    "showimage": false
-                },                {
-                    "id": "",
-                    "title": "",
-                    "url": "http://www.linuxmint.com/planet/rss20.xml",
-                    "enabled": true,
-                    "notify": true,
-                    "interval": 5,
-                    "showreaditems": false,
-                    "showimage": false
-                },                {
-                    "id": "",
-                    "title": "",
-                    "url": "http://segfault.linuxmint.com/feed/",
-                    "enabled": true,
-                    "notify": true,
-                    "interval": 5,
-                    "showreaditems": false,
-                    "showimage": false
-                }
-            ]
-        }
-    ]
-}
-"""
-
+from ConfigFileManager import ConfigFileManager
 
 UI_INFO = """
 <ui>
@@ -70,179 +25,6 @@ UI_INFO = """
 </ui>
 """
 
-try:
-    FileNotFoundError
-except NameError:
-    FileNotFoundError = IOError
-
-class JsonConfig:
-    def __init__(self, filename, instance_name):
-        """ This requires the filename that is being read along with the instance name to bind to the feed array """
-        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
-        self.__filename = filename
-        self.__json = self.__read()
-        self.set_instance(instance_name)
-        
-
-    def set_instance(self, instance_name):
-        """ Method used to change which instance list is being bound to the feeds array """
-        self.__instance_selected = instance_name
-        self.__load_feeds()
-                
-
-    def save(self):
-        """ Convert the array back into feeds instance in the config file and then save / export it """
-        for instance in self.__json['instances']:
-            if instance['name'] == self.__instance_selected:                
-                # Remove the feed
-                instance.pop('feeds')
-                # add a new empty section
-                instance['feeds'] = []
-
-                # Add all the feeds back in
-                for feed in self.feeds:
-                    instance['feeds'].append({'id': feed[0], 'enabled': feed[1], 'url': feed[2], 'title': feed[3], 'notify': feed[4], 'interval': feed[5], 'showreaditems': feed[6], 'showimage': feed[7]})
-
-        # Save the file back out
-        with open(self.__filename, mode='w', encoding='utf-8') as f:
-            #f.write(self.__ensure_unicode(json.dumps(self.__json, ensure_ascii=False)))
-            f.write(json.dumps(self.__json, ensure_ascii=False))
-
-    def __load_feeds(self):
-        self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
-
-        for instance in self.__json['instances']:
-            if instance['name'] == self.__instance_selected:
-                for feed in instance['feeds']:
-                    self.feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
-
-
-    def __read(self):
-        """ Returns the config.json file or creates a new one with default values if it does not exist """
-        try:
-            with open(self.__filename, mode="r") as json_data:
-                feeds = json.load(json_data)
-
-        except FileNotFoundError:
-            # No file found, return default values # everything else throws.
-            feeds = json.loads(DEFAULT_FEEDS)
-            # Populate the UUIDs
-            for instance in feeds['instances']:
-                if instance['name'] == 'default':
-                    for feed in instance['feeds']:
-                        # This unique ID is the identifier for this feed for life
-                        feed['id'] = JsonConfig.get_new_id()
-            with open(self.__filename, mode='w', encoding='utf-8') as f:
-                f.write(json.dumps(feeds, ensure_ascii=False))
-
-        return feeds
-
-
-    @staticmethod
-    def get_new_id():
-        """ 
-            Common method used to return a unique id in a string format. 
-        """
-        return str(uuid.uuid4())
-
-
-
-
-class ConfigManager:    
-    @staticmethod
-    def write(filename=None):
-        """
-            Writes the feeds list to the file/stdout
-        """
-        #if filename is None:
-        #    filename = self.filename
-
-        if filename is None:
-            f = sys.stdout
-        else:
-            f = open(filename, mode="w", encoding="utf-8")
-
-        # Need to check if all feeds have been removed
-        if len(feeds) == 0:
-            f.write(u'#')
-            f.write('')
-            f.write(u'\n')
-
-        for feed in feeds:
-            if not feed[2]:
-                f.write(u'#')
-            f.write(feed[0].decode('utf8'))
-            if feed[1] is not None:
-                f.write(u' ')
-                f.write(feed[1].decode('utf8'))
-            f.write(u'\n')
-
-    @staticmethod
-    def read(filename = None):
-        """
-            Reads content of the feed file/stdin and returns a list of lists
-        """
-        content = []
-        
-        if filename is None:
-            f = sys.stdin
-        else:
-            f = open(filename, "r")
-
-        for line in f:
-            try:
-                # If input is coming from the command line, convert to utf8
-                if filename is None:
-                    line = line.decode('utf8')
-
-                if line[0] == "#":
-                    # cut out the comment and define this item as disabled
-                    line = line[1:]
-                    enable = False
-                else:
-                    enable = True
-                temp = line.split()
-                url = temp[0]
-                custom_title = None
-                if len(temp) > 1:
-                    custom_title = " ".join(temp[1:])
-                content.append([url, custom_title, enable])
-            except IndexError:
-                # empty lines are ignored
-                pass
-        
-        return content
-
-    @staticmethod
-    def update_redirected_feed(current_url, redirected_url):
-        feeds = ConfigManager.read()
-        for feed in feeds:
-            if feed[0] == current_url:
-                feed[0] = redirected_url                
-        ConfigManager.write(feeds)
-
-
-    @staticmethod
-    def import_opml_file(filename):
-        """
-            Reads feeds list from an OPML file
-        """
-        new_feeds = []
-
-        tree = et.parse(filename)
-        root = tree.getroot()
-        for outline in root.findall(".//outline[@type='rss']"):
-            url = outline.attrib.get('xmlUrl', '').decode('utf-8')
-            # for now just ignore feed title decoding issues.
-            try:
-                title = outline.attrib.get('text', '').decode('utf-8').encode('ascii', 'ignore')
-            except:
-                title = ""
-            new_feeds.append([
-                    url,
-                    title,
-                    False])
-        return new_feeds        
 
 class MainWindow(Gtk.Window):
 
@@ -256,17 +38,38 @@ class MainWindow(Gtk.Window):
         self.ui_manager = Gtk.UIManager()
 
         # Set window properties
-        self.set_default_size(600, 200)
+        self.set_default_size(800, 150 + len(self.config.feeds) * 20)
         icon_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "icon.png"))
         self.set_icon_from_file(icon_path)
 
         box = Gtk.Box(False, 10, orientation=Gtk.Orientation.VERTICAL)
+        instance_box = Gtk.Box(False, 150)        
         button_box = Gtk.Box(False, 10)
 
         # Build menus
         self.build_menus()
         menubar = self.ui_manager.get_widget("/MenuBar")
-        box.pack_start(menubar, False, False, 0)
+        
+        self.instance_combo = Gtk.ComboBox()
+        render = Gtk.CellRendererText()
+        self.instance_combo.pack_start(render, True)
+        self.instance_combo.set_model(self.config.instances)
+        self.instance_combo.set_active(0)
+        self.instance_combo.set_id_column(0)
+        self.instance_combo.add_attribute(render, "text", 1)
+        self.instance_combo.connect('changed', self.change_instance)
+
+        instance_label = Gtk.Label()
+        instance_label.set_text("Instance Name:")
+        instance_label.show()
+
+        new_instance_button = Gtk.LinkButton()
+        new_instance_button.set_label("Add/remove feed list")
+        new_instance_button.connect("activate-link", self.new_instance_button_activate)
+
+        instance_box.pack_start(instance_label, False, False, 4)
+        instance_box.pack_start(self.instance_combo, False, False, 0)
+        instance_box.pack_end(new_instance_button, False, False, 0)
 
         # Build feed table
         self.treeview = Gtk.TreeView(model=self.config.feeds)
@@ -334,9 +137,9 @@ class MainWindow(Gtk.Window):
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC,
                                    Gtk.PolicyType.AUTOMATIC)
-        
+                
         scrolled_window.add(self.treeview)
-        box.pack_start(scrolled_window, True, True, 0)
+
 
         # Add buttons
         add_button = Gtk.Button(stock=Gtk.STOCK_ADD)
@@ -356,6 +159,12 @@ class MainWindow(Gtk.Window):
         button_box.pack_start(del_button, False, False, 0)
         button_box.pack_end(save_button, False, False, 0)
         button_box.pack_end(cancel_button, False, False, 0)
+
+
+        box.pack_start(menubar, False, False, 0)
+        box.pack_start(instance_box, False, True, 0)
+
+        box.pack_start(scrolled_window, True, True, 0)
 
         box.add(button_box)
 
@@ -411,6 +220,39 @@ class MainWindow(Gtk.Window):
         self.ui_manager.insert_action_group(action_group)
 
 
+    def new_instance_button_activate(self, widget):
+        dialog = Gtk.MessageDialog(self, 
+                                         Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                         Gtk.MessageType.QUESTION,
+                                         Gtk.ButtonsType.OK_CANCEL,
+                                         "New Instance (List) Name")
+        dialog_box = dialog.get_content_area()
+        dialog.set_title('Add New Instance (List)')
+        entry = Gtk.Entry()
+        entry.set_size_request(100, 0)
+        dialog_box.pack_end(entry, False, False, 5)
+        dialog.show_all()
+        response = dialog.run()
+        name = entry.get_text()
+        dialog.destroy()
+        if response == Gtk.ResponseType.OK and name != '':
+            self.add_instance(name)
+
+
+    def add_instance(self, name):
+        """ Add a new instance by name """
+        index = self.config.add_instance(name)
+        self.instance_combo.set_model(self.config.instances)
+        self.instance_combo.set_active(index)
+
+
+    def change_instance(self, combo):
+        """ When a new instance is selected we need to switch the feeds and the instance gets updated also """
+        selected = combo.get_active()
+        self.config.set_instance(self.config.get_instance_name(selected))
+        self.treeview.set_model(self.config.feeds)        
+        
+
     def text_edited(self, widget, row, text, col):
         """ When a text box is edited we need to update the feed array. """
         if len(text) > 0:
@@ -444,11 +286,13 @@ class MainWindow(Gtk.Window):
 
     def new_feed(self, button):
         """ Adds a new row to the bottom of the array / Grid """        
-        self.config.feeds.append([JsonConfig.get_new_id(), True, "http://", "", True, 5, False, False])        
+        self.config.feeds.append([ConfigFileManager.get_new_id(), True, "http://", "", True, 5, False, False])        
         self.treeview.set_cursor(len(self.config.feeds) - 1, self.treeview.get_column(0), True)
-
+        self.set_size_request(-1, 150 + len(self.config.feeds) * 20 )
+        
 
     def save_clicked(self, button):
+        """ When the user clicks apply we update and save the json file to disk """
         try:
             config.save()
         except Exception as e:
@@ -569,25 +413,11 @@ class MainWindow(Gtk.Window):
 
 
 if __name__ == '__main__':
-    # If three parameters are passed in then we need to bypass the GUI and update the feed.
-    ## TODO: Switch this use parameter passing instead of guessing by number of parameters.
-    #if len(sys.argv) >= 3:    
     instance_name = sys.argv[1]
     data_path = sys.argv[2]
 
-    if len(sys.argv) == 5:
-        current_url = sys.argv[3]
-        redirect_url = sys.argv[4]
-        try:            
-            ConfigManager.update_redirected_feed(current_url, redirect_url)
-        except Exception as e:
-            sys.stderr.write("Error updating feed\n" + e + "\n")
-        finally:
-            # No need to show the GUI, all the work has been done here.
-            exit()
-
     # Display the window to allow the user to manage the feeds.
-    config = JsonConfig(data_path + "/feeds.json", instance_name)
+    config = ConfigFileManager(data_path + "/feeds.json", instance_name)
     window = MainWindow(config)
     window.connect("delete-event", Gtk.main_quit)
     
