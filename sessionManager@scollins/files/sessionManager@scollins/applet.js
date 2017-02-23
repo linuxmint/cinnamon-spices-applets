@@ -17,23 +17,23 @@ let has_console_kit, has_upower, has_systemd, session_manager, display_manager;
 
 let CommandDispatcher = {
     shutDown: function() {
-        if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl poweroff");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl poweroff");
+        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
     },
 
     restart: function() {
-        if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl reboot");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl reboot");
+        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
     },
 
     hibernate: function() {
-        if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Hibernate");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl hibernate");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl hibernate");
+        else if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Hibernate");
     },
 
     suspend: function() {
-        if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl suspend");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl suspend");
+        else if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
     },
 
     sleep: function() {
