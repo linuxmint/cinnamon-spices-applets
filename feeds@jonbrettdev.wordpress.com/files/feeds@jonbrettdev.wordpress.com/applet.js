@@ -72,7 +72,7 @@ FeedApplet.prototype = {
         this.feed_queue = [];
 
         try {
-            debug_logging = this.settings.getValue("enable-verbose-logging");
+            let debug_logging = this.settings.getValue("enable-verbose-logging");
 
             // Initialize a debug logger
             this.logger = new Logger.Logger({
@@ -304,7 +304,7 @@ FeedApplet.prototype = {
 
         // Application tooltip will only list unread feeds.
         for (var i = 0; i < this.feeds.length; i++) {
-            count = this.feeds[i].get_unread_count();
+            let count = this.feeds[i].get_unread_count();
 
             if(count > 0){
                 unread_count += count;
@@ -475,7 +475,7 @@ FeedApplet.prototype = {
                     if (read.length > 0) {
                         this.logger.error(read);
                     }
-                } catch(e) {                    
+                } catch(e) {
                     this.logger.error(e);
                     global.log(e.toString());
                 }
@@ -484,7 +484,7 @@ FeedApplet.prototype = {
                 stream.set_buffer_size(2 * stream.get_buffer_size());
                 this._read_manage_stderr();
             }
-        }));        
+        }));
     },
 
     /* Feed manager functions */
@@ -541,7 +541,7 @@ FeedApplet.prototype = {
             }
             global.logError(e);
         }
-        /* Get output from management app */        
+        /* Get output from management app */
         this._read_manage_app_stdout();
         this._read_manage_stderr();
     },
@@ -705,7 +705,7 @@ FeedDisplayMenuItem.prototype = {
     },
 
     get_title: function() {
-        
+
         let title =  this.custom_title || this.reader.title;
         if (this.reader.is_redirected)
             title += " (Redirected to: " + this.reader.redirected_url + ")";
@@ -831,8 +831,8 @@ FeedDisplayMenuItem.prototype = {
         if(this.reader.is_redirected) {
             menu_item = new ApplicationContextMenuItem(this, _("Update feed URL"), "update_feed_url");
             this.menu.addMenuItem(menu_item, 0);
-            this.menuItemCount++;            
-        }        
+            this.menuItemCount++;
+        }
     },
 
     _buttonEnterEvent: function(){
@@ -1077,7 +1077,7 @@ ApplicationContextMenuItem.prototype = {
                 // Update the feed, no GUI is shown
                 this._fdmi.owner.manage_feeds(current_url, redirected_url);
 
-                // Reload the regular title and remove the is_redirected flag                
+                // Reload the regular title and remove the is_redirected flag
                 this._fdmi.owner.toggle_feeds(this._fdmi, true);
                 break;
 
