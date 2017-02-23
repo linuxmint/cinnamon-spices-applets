@@ -29,9 +29,6 @@ const Cinnamon = imports.gi.Cinnamon;
 // Gjs imports
 const Lang = imports.lang;
 
-// Internal imports
-const Main = imports.ui.main;
-
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['google-chrome']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('google-chrome');
@@ -53,7 +50,7 @@ function _readBookmarks() {
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    global.logError('ERROR: ' + e.message);
+    log("ERROR: " + e.message);
     return;
   }
 
@@ -64,7 +61,7 @@ function _readBookmarks() {
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
-    global.logError('ERROR: ' + e.message);
+    log("ERROR: " + e.message);
     return;
   }
 
@@ -72,19 +69,27 @@ function _readBookmarks() {
     return;
   }
 
-  for (let bookmarkLocation in jsonResult.roots) {
-    let children = jsonResult.roots[bookmarkLocation].children;
-
-    for (let idx in children) {
-      if (children[idx].type == 'url') {
+  let recurseBookmarks = (children, cont)=>{
+    for (let i = 0, len = children.length; i < len; i++) {
+      if (children[i].type == 'url') {
         bookmarks.push({
           appInfo: _appInfo,
-          name: children[idx].name,
+          name: children[i].name,
           score: 0,
-          uri: children[idx].url
+          uri: children[i].url
         });
+      } else if (children[i].hasOwnProperty('children')) {
+        recurseBookmarks(children[i].children);
       }
     }
+  };
+
+  for (let bookmarkLocation in jsonResult.roots) {
+    let children = jsonResult.roots[bookmarkLocation].children;
+    if (children === undefined) {
+      continue;
+    }
+    recurseBookmarks(children);
   }
 }
 

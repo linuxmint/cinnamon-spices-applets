@@ -31,7 +31,7 @@ const Lang = imports.lang;
 
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['chromium']);
-const _foundApps = _appSystem.lookup_desktop_wmclass('chromium');
+let _foundApps = _appSystem.lookup_desktop_wmclass('chromium');
 
 var _appInfo = null;
 var _bookmarksFile = null;
@@ -46,7 +46,6 @@ function _readBookmarks() {
   let jsonResult;
   let size;
   let success;
-
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
@@ -69,19 +68,27 @@ function _readBookmarks() {
     return;
   }
 
-  for (let bookmarkLocation in jsonResult.roots) {
-    let children = jsonResult.roots[bookmarkLocation].children;
-
-    for (let idx in children) {
-      if (children[idx].type == 'url') {
+  let recurseBookmarks = (children, cont)=>{
+    for (let i = 0, len = children.length; i < len; i++) {
+      if (children[i].type == 'url') {
         bookmarks.push({
           appInfo: _appInfo,
-          name: children[idx].name,
+          name: children[i].name,
           score: 0,
-          uri: children[idx].url
+          uri: children[i].url
         });
+      } else if (children[i].hasOwnProperty('children')) {
+        recurseBookmarks(children[i].children);
       }
     }
+  };
+
+  for (let bookmarkLocation in jsonResult.roots) {
+    let children = jsonResult.roots[bookmarkLocation].children;
+    if (children === undefined) {
+      continue;
+    }
+    recurseBookmarks(children);
   }
 }
 
@@ -94,8 +101,12 @@ function _reset() {
 }
 
 function init() {
+
   if (!_foundApps || _foundApps.length === 0) {
-    return;
+    _foundApps = _appSystem.lookup_desktop_wmclass('chromium-browser');
+    if (!_foundApps || _foundApps.length === 0) {
+      return false;
+    }
   }
 
   // _appInfo = _foundApps[0].get_app_info();
@@ -106,7 +117,7 @@ function init() {
 
   if (!_bookmarksFile.query_exists(null)) {
     _reset();
-    return;
+    return false;
   }
 
   _bookmarksMonitor = _bookmarksFile.monitor_file(
@@ -115,6 +126,7 @@ function init() {
     'changed', Lang.bind(this, _readBookmarks));
 
   _readBookmarks();
+  return true;
 }
 
 function deinit() {

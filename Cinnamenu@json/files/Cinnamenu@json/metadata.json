@@ -1,7 +1,7 @@
 {
  "uuid": "Cinnamenu@json",
  "name": "Cinnamenu",
- "description": "Configurable Menu",
+ "description": "A flexible menu providing formatting options and bookmarks.",
  "max-instances": -1,
  "dangerous": false,
  "version": "1.0.0",
