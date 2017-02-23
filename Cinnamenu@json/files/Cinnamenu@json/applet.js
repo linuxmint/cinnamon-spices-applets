@@ -311,7 +311,7 @@ CinnamenuButton.prototype = {
       },
       {
         key: 'enable-autoscroll',
-        value: 'enableAutoscroll',
+        value: 'enableAutoScroll',
         cb: null
       },
       {
