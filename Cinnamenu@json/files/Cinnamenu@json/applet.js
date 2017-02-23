@@ -26,6 +26,7 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const AppFavorites = imports.ui.appFavorites;
 const PopupMenu = imports.ui.popupMenu;
+const Util = imports.misc.util;
 //const DND = imports.ui.dnd;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
@@ -118,6 +119,10 @@ CinnamenuButton.prototype = {
 
   on_applet_clicked: function(event) {
     this.menu.toggle_with_options(this.enableAnimation);
+  },
+
+  _launch_editor: function () {
+    Util.spawnCommandLine('cinnamon-menu-editor');
   },
 
   _updateKeybinding: function() {
