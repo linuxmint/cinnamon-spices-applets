@@ -1,11 +1,28 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
+'''
+ * Cinnamon RSS feed reader (python backend)
+ *
+ * Author: jake1164@hotmail.com
+ * Date: 2013-2017
+ *
+ * Cinnamon RSS feed reader is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Cinnamon RSS feed reader is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.  You should have received a copy of the GNU
+ * General Public License along with Cinnamon RSS feed reader.  If not, see
+ * <http://www.gnu.org/licenses/>.
+'''
 import os
 import sys
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-import xml.etree.ElementTree as et
 from ConfigFileManager import ConfigFileManager
 
 UI_INFO = """
@@ -221,22 +238,31 @@ class MainWindow(Gtk.Window):
 
 
     def new_instance_button_activate(self, widget):
-        dialog = Gtk.MessageDialog(self, 
+        checking = Gtk.MessageDialog(self, 
                                          Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                          Gtk.MessageType.QUESTION,
                                          Gtk.ButtonsType.OK_CANCEL,
-                                         "New Instance (List) Name")
-        dialog_box = dialog.get_content_area()
-        dialog.set_title('Add New Instance (List)')
-        entry = Gtk.Entry()
-        entry.set_size_request(100, 0)
-        dialog_box.pack_end(entry, False, False, 5)
-        dialog.show_all()
-        response = dialog.run()
-        name = entry.get_text()
-        dialog.destroy()
-        if response == Gtk.ResponseType.OK and name != '':
-            self.add_instance(name)
+                                         "Changes will be discarded, continue?")        
+        checking.set_title('Are you sure?')
+        response = checking.run()
+        checking.destroy()
+        if response == Gtk.ResponseType.OK:
+            dialog = Gtk.MessageDialog(self, 
+                                            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                            Gtk.MessageType.QUESTION,
+                                            Gtk.ButtonsType.OK_CANCEL,
+                                            "New Instance (List) Name")
+            dialog_box = dialog.get_content_area()
+            dialog.set_title('Add New Instance (List)')
+            entry = Gtk.Entry()
+            entry.set_size_request(100, 0)
+            dialog_box.pack_end(entry, False, False, 5)
+            dialog.show_all()
+            response = dialog.run()
+            name = entry.get_text()
+            dialog.destroy()
+            if response == Gtk.ResponseType.OK and name != '':
+                self.add_instance(name)
 
 
     def add_instance(self, name):
@@ -341,18 +367,15 @@ class MainWindow(Gtk.Window):
         if response == Gtk.ResponseType.OK:
             try:
                 if type == "OPML":
-                    new_feeds = ConfigManager.import_opml_file(filename)
+                    new_feeds = self.config.import_opml_file(filename)
                 else:
-                    new_feeds = ConfigManager.read(filename)
-
-                for feed in new_feeds:
-                    self.config.feeds.append(feed)
+                    new_feeds = self.config.import_feeds(filename)
 
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.INFO,
                                         Gtk.ButtonsType.OK,
                                         "file imported")
-                dialog.format_secondary_text("Imported %d feeds" % len(new_feeds))
+                dialog.format_secondary_text("Imported %d feeds" % new_feeds)
                 dialog.run()
                 dialog.destroy()
                 
@@ -393,7 +416,8 @@ class MainWindow(Gtk.Window):
         sys.stderr.write(str(response))
         if response == Gtk.ResponseType.OK:
             try:
-                ConfigManager.write(self.config.feeds, filename=filename)
+                self.config.export_feeds(filename)
+                #ConfigManager.write(self.config.feeds, filename=filename)
             except Exception as ex:
                 sys.stderr.write("Unable to export file, exception: %s" % str(ex))
                 error_dialog = Gtk.MessageDialog(self, 0,

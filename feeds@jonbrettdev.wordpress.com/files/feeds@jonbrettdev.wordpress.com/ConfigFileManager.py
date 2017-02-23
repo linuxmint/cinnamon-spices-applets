@@ -1,12 +1,32 @@
 #!/usr/bin/python
 # -*- encoding: utf-8 -*-
+'''
+ * Cinnamon RSS feed reader (python backend)
+ *
+ * Author: jake1164@hotmail.com
+ * Date: 2017
+ *
+ * Cinnamon RSS feed reader is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Cinnamon RSS feed reader is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.  You should have received a copy of the GNU
+ * General Public License along with Cinnamon RSS feed reader.  If not, see
+ * <http://www.gnu.org/licenses/>.
+'''
 from __future__ import unicode_literals
 import gi
 import sys
 import os
 import uuid
 import json
+import csv
 from io import open
+import xml.etree.ElementTree as et
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
@@ -144,8 +164,73 @@ class ConfigFileManager:
             self.instances.append([instance['name'], instance['name']])            
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
-                    self.feeds.append([feed['id'], feed['enabled'], feed['url'], feed['title'], feed['notify'], feed['interval'], feed['showreaditems'], feed['showimage']])
+                    self.feeds.append([feed['id'], 
+                                      feed['enabled'], 
+                                      feed['url'], 
+                                      feed['title'], 
+                                      feed['notify'], 
+                                      feed['interval'], 
+                                      feed['showreaditems'], 
+                                      feed['showimage']])
 
+
+    def import_opml_file(self, filename):
+        """
+            Reads feeds list from an OPML file
+        """        
+        tree = et.parse(filename)
+        root = tree.getroot()
+        for outline in root.findall(".//outline[@type='rss']"):
+            url = outline.attrib.get('xmlUrl', '')#.decode("utf-8")
+            # for now just ignore feed title decoding issues.
+            try:
+                title = outline.attrib.get('text', '')#.encode('ascii', 'ignore')
+            except:
+                title = ""
+            self.feeds.append([ConfigFileManager.get_new_id(), 
+                    False,
+                    url,
+                    title,
+                    True,
+                    5,
+                    False,
+                    False])
+
+
+    def export_feeds(self, filename):
+        """
+            Writes the selected feeds array to a file.
+            Note that the ID is not exported, it is created on import.
+        """
+        if len(self.feeds) > 0:
+            with open(filename, mode="w") as file:
+                file.write("### feeds export v=1.0\n")
+                filewriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
+                for feed in self.feeds:    
+                    filewriter.writerow(feed[1:])
+
+
+    def import_feeds(self, filename):
+        cnt = 0
+        with open(filename, mode="r") as file:
+            header = file.readline()
+            if header != '### feeds export v=1.0\n':
+                raise Exception("Invalid file, must have a first line matching: ### feeds export v=1.0")                
+            filereader = csv.reader(file)
+            for line in filereader:
+                self.feeds.append([ConfigFileManager.get_new_id()] + 
+                                  [self.__to_bool(line[0]), 
+                                  line[1], 
+                                  line[2], 
+                                  self.__to_bool(line[3]), 
+                                  int(line[4]), 
+                                  self.__to_bool(line[5]), 
+                                  self.__to_bool(line[6])])
+                cnt += 1
+        return cnt
+
+    def __to_bool(self, val):
+        return val.lower() == "true"
 
     @staticmethod
     def read(filename):
@@ -254,29 +339,6 @@ class ConfigManager:
             if feed[0] == current_url:
                 feed[0] = redirected_url                
         ConfigManager.write(feeds)
-
-
-    @staticmethod
-    def import_opml_file(filename):
-        """
-            Reads feeds list from an OPML file
-        """
-        new_feeds = []
-
-        tree = et.parse(filename)
-        root = tree.getroot()
-        for outline in root.findall(".//outline[@type='rss']"):
-            url = outline.attrib.get('xmlUrl', '').decode('utf-8')
-            # for now just ignore feed title decoding issues.
-            try:
-                title = outline.attrib.get('text', '').decode('utf-8').encode('ascii', 'ignore')
-            except:
-                title = ""
-            new_feeds.append([
-                    url,
-                    title,
-                    False])
-        return new_feeds        
 
 
 
