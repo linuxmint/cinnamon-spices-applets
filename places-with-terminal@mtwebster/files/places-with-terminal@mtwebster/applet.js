@@ -60,7 +60,7 @@ MyPopupMenuItem.prototype =
 			this.addActor(this.label);
 			if (show_terminal && ok_Terminal(this.loc)) {
 			    this.buttonbox = new St.BoxLayout();
-                button = new St.Button({ child: term_icon });
+                let button = new St.Button({ child: term_icon });
                 button.connect('clicked', Lang.bind(this, this._terminal));
                 this.buttonbox.add_actor(button);
                 this.addActor(this.buttonbox);
