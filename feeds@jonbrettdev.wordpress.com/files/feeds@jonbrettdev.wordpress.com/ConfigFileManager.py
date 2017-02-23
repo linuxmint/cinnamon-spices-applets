@@ -82,6 +82,10 @@ class ConfigFileManager:
         """ 
             This requires the filename that is being read along with the instance name to bind to the feed array 
         """
+        self.mode = 'w'
+        if sys.version_info.major < 3:
+            self.mode += 'b'
+        
         self.feeds = Gtk.ListStore(str, bool, str, str, bool, int, bool, bool)
         self.instances = Gtk.ListStore(str, str)
         self.__filename = filename
@@ -178,6 +182,7 @@ class ConfigFileManager:
         """
             Reads feeds list from an OPML file
         """        
+        cnt = 1
         tree = et.parse(filename)
         root = tree.getroot()
         for outline in root.findall(".//outline[@type='rss']"):
@@ -187,6 +192,7 @@ class ConfigFileManager:
                 title = outline.attrib.get('text', '')#.encode('ascii', 'ignore')
             except:
                 title = ""
+
             self.feeds.append([ConfigFileManager.get_new_id(), 
                     False,
                     url,
@@ -195,6 +201,8 @@ class ConfigFileManager:
                     5,
                     False,
                     False])
+            cnt += 1
+        return cnt
 
 
     def export_feeds(self, filename):
@@ -203,7 +211,9 @@ class ConfigFileManager:
             Note that the ID is not exported, it is created on import.
         """
         if len(self.feeds) > 0:
-            with open(filename, mode="w") as file:
+            #, encoding='utf8'
+            
+            with open(filename, mode=self.mode) as file:
                 file.write("### feeds export v=1.0\n")
                 filewriter = csv.writer(file, quoting=csv.QUOTE_NONNUMERIC)
                 for feed in self.feeds:    
