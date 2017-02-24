@@ -948,7 +948,6 @@ CinnamenuPanel.prototype = {
   },
 
   _displayApplications: function(appList, refresh, isSearch) {
-    let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
     let viewMode = this._applicationsViewMode;
 
     // variables for icon grid layout
@@ -970,25 +969,23 @@ CinnamenuPanel.prototype = {
     let appIndex = 0;
 
     let createAppButton = (app, appType, len)=>{
-      Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
-        let isListView = viewMode === ApplicationsViewMode.LIST;
-        let appButton = new AppListGridButton(this, app, appType, !isListView, appIndex, len);
-        this.appButtons.push(appButton);
-        if (isListView) { // ListView
-          this.applicationsListBox.add_actor(appButton.actor);
-          appButton.icon.realize();
-        } else { // GridView
-          let gridLayout = this.applicationsGridBox.layout_manager;
-          gridLayout.pack(appButton.actor, column, rownum);
-          appButton.icon.realize();
-          column++;
-          if (column > this._appGridColumns - 1) {
-            column = 0;
-            rownum++;
-          }
-          appButton.setColumn(column);
+      let isListView = viewMode === ApplicationsViewMode.LIST;
+      let appButton = new AppListGridButton(this, app, appType, !isListView, appIndex, len);
+      this.appButtons.push(appButton);
+      if (isListView) { // ListView
+        this.applicationsListBox.add_actor(appButton.actor);
+        appButton.icon.realize();
+      } else { // GridView
+        let gridLayout = this.applicationsGridBox.layout_manager;
+        gridLayout.pack(appButton.actor, column, rownum);
+        appButton.icon.realize();
+        column++;
+        if (column > this._appGridColumns - 1) {
+          column = 0;
+          rownum++;
         }
-      }));
+        appButton.setColumn(column);
+      }
     };
 
     for (let z = 0, len = appList.length; z < len; z++) {
