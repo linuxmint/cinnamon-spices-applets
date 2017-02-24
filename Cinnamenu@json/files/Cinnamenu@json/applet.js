@@ -66,6 +66,7 @@ CinnamenuButton.prototype = {
     this._appletHoverDelayId = 0;
 
     this.appSystem = Cinnamon.AppSystem.get_default();
+    this.appFavorites = AppFavorites.getAppFavorites();
 
     this.privacy_settings = new Gio.Settings({
       schema_id: PRIVACY_SCHEMA
@@ -89,7 +90,7 @@ CinnamenuButton.prototype = {
     this._installedChangedId = this.appSystem.connect('installed-changed', Lang.bind(this, this._onAppInstalledChanged));
 
     // Connect to AppFavorites for when favorites change
-    this._favoritesChangedId = AppFavorites.getAppFavorites().connect('changed', Lang.bind(this, this._onFavoritesChanged));
+    this._favoritesChangedId = this.appFavorites.connect('changed', Lang.bind(this, this._onFavoritesChanged));
 
     this._setHotSpotTimeoutId = 0;
     this._display();
@@ -108,7 +109,7 @@ CinnamenuButton.prototype = {
 
     this.update_label_visible();
 
-    this.appsMenuButton.menu.destroy();
+    this.cinnamenuPanel.menu.destroy();
     this.refresh();
     this._updateIconAndLabel();
   },
@@ -199,14 +200,14 @@ CinnamenuButton.prototype = {
   },
 
   _clearAll: function() {
-    if (this.appsMenuButton) {
-      this.actor.remove_actor(this.appsMenuButton.actor);
+    if (this.cinnamenuPanel) {
+      this.actor.remove_actor(this.cinnamenuPanel.actor);
     }
 
-    if (this.appsMenuButton) {
-      this.appsMenuButton.destroy();
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.destroy();
     }
-    this.appsMenuButton = null;
+    this.cinnamenuPanel = null;
   },
 
   _display: function() {
@@ -215,7 +216,7 @@ CinnamenuButton.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, this.orientation);
     this.menuManager.addMenu(this.menu);
     this.menu.setCustomStyleClass('menu-background');
-    this.appsMenuButton = new CinnamenuPanel(this);
+    this.cinnamenuPanel = new CinnamenuPanel(this);
   },
 
   openMenu: function() {
@@ -263,22 +264,22 @@ CinnamenuButton.prototype = {
 
   // handler for when new application installed
   _onAppInstalledChanged: function() {
-    if (this.appsMenuButton) {
-      this.appsMenuButton.refresh();
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.refresh();
     }
   },
 
   // handler for when favorites change
   _onFavoritesChanged: function() {
-    if (this.appsMenuButton) {
-      this.appsMenuButton.refresh();
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel._selectFavorites(this.cinnamenuPanel._currentCategoryButton, true);
     }
   },
 
   // handler for when icons change
   _onIconsChanged: function() {
-    if (this.appsMenuButton) {
-      this.appsMenuButton.refresh();
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.refresh();
     }
   },
 
@@ -333,8 +334,8 @@ CinnamenuButton.prototype = {
         key: 'apps-grid-column-count',
         value: 'appsGridColumnCount',
         cb: Lang.bind(this, function() {
-          if (this.appsMenuButton) {
-            this.appsMenuButton.refresh();
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
           }
         })
       },
@@ -342,8 +343,8 @@ CinnamenuButton.prototype = {
         key: 'category-icon-size',
         value: 'categoryIconSize',
         cb: Lang.bind(this, function() {
-          if (this.appsMenuButton) {
-            this.appsMenuButton.refresh();
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
           }
         })
       },
