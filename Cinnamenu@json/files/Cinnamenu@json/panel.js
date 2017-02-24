@@ -644,21 +644,15 @@ CinnamenuPanel.prototype = {
       }
     }
 
-    if (appList === undefined) {
-      this._resetDisplayApplicationsToStartup();
-      return [];
-    }
-
     let res = [];
-    for (let i = 0, len = appList.length; i < len; i++) {
-      let app = appList[i];
-      let appName = app.get_name();
-      let appKeywords = app.get_keywords();
-      let appDescription = app.get_description();
-      let appId = app.get_id();
+    if (pattern) {
+      for (let i = 0, len = appList.length; i < len; i++) {
+        let app = appList[i];
+        let appName = app.get_name();
+        let appKeywords = app.get_keywords();
+        let appDescription = app.get_description();
+        let appId = app.get_id();
 
-      //let info = Gio.DesktopAppInfo.new(app.get_id());
-      if (pattern) {
         if (kmp(Util.latinise(appName), pattern) !== -1) {
           res.push(app);
         }
@@ -672,12 +666,7 @@ CinnamenuPanel.prototype = {
           res.push(app);
         }
       }
-      if (appId) {
-        appList[i].name = appName;
-      }
-    }
-
-    if (res.length === 0) {
+    } else {
       res = appList;
     }
 
@@ -690,7 +679,7 @@ CinnamenuPanel.prototype = {
 
     for (let i = 0, len = res.length; i < len; i++) {
       if (!res[i].hasOwnProperty('name')) {
-        res[i].name = res[i].get_id();
+        res[i].name = res[i].get_name();
       }
     }
 
