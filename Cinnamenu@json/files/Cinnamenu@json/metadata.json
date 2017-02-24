@@ -1,0 +1,12 @@
+{
+ "uuid": "Cinnamenu@json",
+ "name": "Cinnamenu",
+ "description": "A flexible menu providing formatting options and bookmarks.",
+ "max-instances": -1,
+ "dangerous": false,
+ "version": "1.0.0",
+ "website": "https://github.com/jaszhix/Cinnamenu",
+ "cinnamon-version": [
+    "3.2"
+  ]
+}

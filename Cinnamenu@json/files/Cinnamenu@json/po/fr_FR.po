@@ -1,0 +1,257 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gno-Menu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-12-24 11:48+0100\n"
+"Last-Translator: DAEM Q.\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+
+
+#: convenience.js
+
+
+#: extension.js
+
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu: Recherche dans les marque-pages Firefox désactivée"
+
+msgid "If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr "Si vous voulez rechercher dans les marque-pages Firefox, vous devez installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
+
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu: Recherche dans les marque-pages Midori désactivée"
+
+msgid "If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr "Si vous voulez rechercher dans les marque-pages Midori, vous devez installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
+
+msgid "Recent"
+msgstr "Récent"
+
+msgid "Webmarks"
+msgstr "Signets"
+
+msgid "Favorites"
+msgstr "Favoris"
+
+msgid "Places"
+msgstr "Emplacements"
+
+msgid "Toggle Startup Apps View"
+msgstr "Alterner vue des Apps au démarrage"
+
+msgid "List View"
+msgstr "Vue Liste"
+
+msgid "Grid View"
+msgstr "Vue Grille"
+
+msgid "Type to search..."
+msgstr "Taper pour rechercher..."
+
+msgid "All Applications"
+msgstr "Toutes les Applications"
+
+msgid "Frequent Apps"
+msgstr "Applications Fréquentes"
+
+msgid "Favorite Apps"
+msgstr "Applications Favorites"
+
+msgid "Restart Shell"
+msgstr "Redémarrer Shell"
+
+msgid "Suspend"
+msgstr "Mise en Veille"
+
+msgid "Shutdown"
+msgstr "Éteindre"
+
+msgid "Logout User"
+msgstr "Fermer Session"
+
+msgid "Lock Screen"
+msgstr "Vérouiller Écran"
+
+msgid "Preferences"
+msgstr "Préférences"
+
+msgid "No cinnamenu stylesheet found"
+msgstr "Aucun style cinnamenu trouvé"
+
+#: placeDisplay.js
+msgid "Failed to launch \"%s\""
+msgstr "Échec de lancement"
+
+msgid "Home"
+msgstr "Dossier Personnel"
+
+msgid "Computer"
+msgstr "Ordinateur"
+
+msgid "Browse Network"
+msgstr "Parcouris Réseau"
+
+#: prefs.js
+
+msgid "<b>Panel Settings</b>"
+msgstr "Paramètres du Panneau"
+
+msgid "Disable activities hot corner"
+msgstr "Désactive "
+
+msgid "Remove View button from panel"
+msgstr "Supprimer le bouton View du panel"
+
+msgid "Label for View button"
+msgstr "Nom affiché du bouton View"
+
+msgid "Use icon with View button"
+msgstr "Utiliser l'icone avec le bouton View"
+
+msgid "Remove Apps button from panel"
+msgstr "Supprimer le bouton Apps du panel"
+
+msgid "Label for Apps button"
+msgstr "Nom affiché du bouton Apps"
+
+msgid "Use icon with Apps button"
+msgstr "Utiliser l'icone avec le bouton Apps"
+
+msgid "Remove Menu button from panel"
+msgstr "Supprimer le bouton Menu du panel"
+
+msgid "Label for Menu button"
+msgstr "Nom affiché du bouton Menu"
+
+msgid "Use icon with Menu button"
+msgstr "Nom affiché du bouton Menu"
+
+msgid "Disable Menu button hot spot"
+msgstr "Désactive hot spot du bouton Menu"
+
+msgid "Disable Menu button shortcut key"
+msgstr "Désactiver raccourci clavier du bouton Menu"
+
+msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+msgstr "Accelerateur invalide. Essayez F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+
+msgid "Set Menu button position"
+msgstr "Définir position bouton Menu"
+
+msgid "Left"
+msgstr "Gauche"
+
+msgid "Center"
+msgstr "Centre"
+
+msgid "Right"
+msgstr "Droite"
+
+msgid "<b>Menu Settings</b>"
+msgstr "<b>Paramètres Menu</b>"
+
+msgid "Hide User Options Panel"
+msgstr "Masquer le panneau de paramètres utilisateur"
+
+msgid "Hide Shortcuts Panel"
+msgstr "Masquer panneau de raccourcis"
+
+msgid "Menu layout size"
+msgstr "Taille agencement du panneau"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Compact"
+msgstr "Compact"
+
+msgid "Icons to display on Shortcuts Panel"
+msgstr "Icones à afficher sur le Panneau des raccourcis"
+
+msgid "Applications to display at startup"
+msgstr "Applications à afficher au démarrage"
+
+msgid "All"
+msgstr "Tout"
+
+msgid "Frequent"
+msgstr "Fréquent"
+
+msgid "None"
+msgstr "Rien"
+
+msgid "Number of columns in Application Grid"
+msgstr "Nombre de colonnes dans la Grille Application"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "Default view mode for applications"
+msgstr "Mode de vue par défaut pour les applications"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "Grid"
+msgstr "Grille"
+
+msgid "Hide Categories Panel"
+msgstr "Masquer panneau Catégories"
+
+msgid "Category selection method"
+msgstr "Méthode de sélection d'une Catégorie"
+
+msgid "Hover"
+msgstr "Survol"
+
+msgid "Click"
+msgstr "Clique"
+
+msgid "Size of Shortcuts Panel icons"
+msgstr "Taille des icones du panneau Raccourcis"
+
+msgid "Size of Application List icons"
+msgstr "Taille des icones des Applications en vue Liste"
+
+msgid "Size of Application Grid icons"
+msgstr "Taille des icones des Application en vue Grille"
+
+
+#: webChromium.js
+
+
+#: webEpiphany.js
+
+
+#: webFirefox.js
+
+
+#: webGoogleChrome.js
+
+
+#: webMidori.js
+
+
+#: webOpera.js
+
+
+#: workspaceThumbnail.js
+
