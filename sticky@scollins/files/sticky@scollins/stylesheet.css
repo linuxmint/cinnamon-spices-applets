@@ -1,5 +1,5 @@
 .sticky-title {
-    font-size: 16px;
+    font-size: 1.3em;
 }
 
 .sticky-titleBox {
@@ -26,7 +26,6 @@
 }
 
 #NoteBox {
-    font: 12px arial, sans-serif;
     padding: 10px;
     caret-size: 1px;
 }

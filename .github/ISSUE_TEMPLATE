@@ -1,5 +1,5 @@
-[Which applet?]: <IssuesTitleFormat> (applets name: simple description of the problem)
-[Notify the author]: <> (To be found in the "info.json" file)
+[Have you read the guidelines for contributing?]: <> (Before opening an issue, please read the guidelines for contributing linked above. Else the issue will be closed. Also don't forget to notify the author.)
 @AppletAuthor
 
-[Issue]: <> (Describe issue below)
+[Issue]: <> (Describe your issue below.)
+

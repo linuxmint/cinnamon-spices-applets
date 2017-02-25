@@ -1,7 +1,8 @@
 {
    "uuid": "scripts@paucapo.com",
    "name": "Scripts Menu",
-   "description": "Scripts Menu",
+   "description": "Menu applet for starting scripts",
+   "version": "1.02",
    "icon": "system-run",
    "last-edited": "1408701315",
    "max-instances": "100"

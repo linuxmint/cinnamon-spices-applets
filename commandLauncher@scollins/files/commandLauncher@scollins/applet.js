@@ -15,6 +15,17 @@ const SCALE_FACTOR = 0.8;
 const TRANSITION_TIME = 0.2;
 const NUMBER_OF_BOUNCES = 3;
 
+// l10n/translation
+const Gettext = imports.gettext;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+};
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
@@ -31,6 +42,10 @@ MyApplet.prototype = {
             this.orientation = orientation;
             
             Applet.IconApplet.prototype._init.call(this, this.orientation, panelHeight);
+
+            // l10n/translation
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
             
             this._bindSettings();
             
@@ -50,7 +65,7 @@ MyApplet.prototype = {
     _bindSettings: function () {
         this.settings = new Settings.AppletSettings(this, this.metadata["uuid"], this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "description", "description", this.setTooltip);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "tooltipText", "tooltipText", this.setTooltip);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyLaunch", "keyLaunch", this.setKeybinding);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showNotifications", "showNotifications");
         this.settings.bindProperty(Settings.BindingDirection.IN, "command", "command");
@@ -87,10 +102,12 @@ MyApplet.prototype = {
             try {
                 let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
                 let [result, pid] = GLib.spawn_async(basePath, argv, null, flags, null);
-                if ( this.showNotifications ) Main.notify("Process started", "Command: "+this.command+"\nProcess Id: "+pid);
+                if ( this.showNotifications )
+                    Main.notify(_("Command Launcher") + ": " + _("Process started"), _("Command") + ": "
+                                + this.command + "\n" + _("Process Id") + ": "+ pid);
                 GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.onClosed), null);
             } catch(e) {
-                Main.notify("Error while trying to run \"" + this.command + "\"", e.message);
+                Main.notify(_("Error while trying to run \"%s\"").format(this.command), e.message);
                 return;
             }
         }
@@ -134,11 +151,13 @@ MyApplet.prototype = {
     },
     
     setTooltip: function() {
-        this.set_applet_tooltip(this.description);
+        this.set_applet_tooltip(this.tooltipText);
     },
     
     onClosed: function(pid, status) {
-        if ( this.showNotifications ) Main.notify("Process ended", "Command: "+this.command+"\nProcess Id: "+pid);
+        if ( this.showNotifications )
+            Main.notify(_("Command Launcher") + ": " + _("Process ended"), _("Command") + ": "
+                        + this.command + "\n" + _("Process Id") + ": " + pid);
     }
 }
 

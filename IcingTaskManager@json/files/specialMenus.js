@@ -567,7 +567,7 @@ AppThumbnailHoverMenu.prototype = {
     // need to implement this class or cinnamon outputs a bunch of errors // TBD
     this.actor.style_class = 'hide-arrow';
 
-    this.box.style_class = 'thumbnail-popup-content';
+    this.box.set_style_class_name('thumbnail-popup-content');
 
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -862,6 +862,8 @@ PopupMenuAppSwitcherItem.prototype = {
   _refresh: function _refresh() {
     var _this11 = this;
 
+    var refreshThumbnails = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
     // Get a list of all windows of our app that are running in the current workspace
@@ -885,6 +887,11 @@ PopupMenuAppSwitcherItem.prototype = {
     setTimeout(function () {
       return _this11.setStyleOptions(windows);
     }, 0);
+    if (refreshThumbnails) {
+      for (var i = 0, len = this.appThumbnails.length; i < len; i++) {
+        this.appThumbnails[i].thumbnail._refresh(windows[0], windows);
+      }
+    }
   },
 
   addWindowThumbnails: function addWindowThumbnails(windows) {
@@ -932,7 +939,7 @@ PopupMenuAppSwitcherItem.prototype = {
     padding = boxTheme ? boxTheme.get_vertical_padding() : null;
     var boxPadding = padding && padding > 0 ? padding : 3;
     this.box.style = 'padding:' + boxPadding + 'px;';
-    if (this.isFavapp) {
+    if (this.isFavapp && this.metaWindowThumbnail) {
       this.metaWindowThumbnail.thumbnailIconSize();
       return;
     }
@@ -1057,7 +1064,7 @@ WindowThumbnail.prototype = {
 
     if (this.metaWindow) {
       this.windowTitleId = this.metaWindow.connect('notify::title', function () {
-        _this13._label.text = _this13.metaWindow.get_title();
+        _this13._label.set_text(_this13.metaWindow.get_title());
       });
       this.windowFocusId = this.metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange));
       this._updateAttentionGrabber(null, null, this._applet.showAlerts);
@@ -1318,8 +1325,10 @@ WindowThumbnail.prototype = {
         setThumbSize(divider * divideMultiplier, 16);
         return;
       } else {
-        if (_this15._applet.verticalThumbs) {
+        if (_this15._applet.verticalThumbs && _this15._applet.showThumbs) {
           _this15.thumbnailActor.height = _this15.thumbnailHeight;
+        } else if (_this15._applet.verticalThumbs) {
+          _this15.thumbnailActor.height = 0;
         }
         _this15.thumbnailActor.width = _this15.thumbnailWidth;
         _this15._container.style = 'width: ' + Math.floor(_this15.thumbnailWidth - 16) + 'px';
@@ -1338,6 +1347,7 @@ WindowThumbnail.prototype = {
     };
 
     setThumbSize();
+    return false;
   },
 
   _hoverPeek: function _hoverPeek(opacity, metaWin, enterEvent) {

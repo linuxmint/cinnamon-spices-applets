@@ -11,7 +11,7 @@
         "tooltip": "Supports both icon name and icon path.\nTo use a symbolic icon, include '-symbolic' (or '-symbolic.svg') at the end."
     },
     
-    "description": {
+    "tooltipText": {
         "type": "entry",
         "description": "Tooltip",
         "default": ""
@@ -26,7 +26,7 @@
     "showNotifications": {
         "type": "checkbox",
         "description": "Show notifications on completion",
-        "default": true
+        "default": false
     },
     
     "sep1": {

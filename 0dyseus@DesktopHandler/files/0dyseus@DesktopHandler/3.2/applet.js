@@ -600,7 +600,7 @@ MyApplet.prototype = {
             let menuItem = new PopupMenu.PopupIconMenuItem(_("Help"),
                 "dialog-information", St.IconType.SYMBOLIC);
             menuItem.connect("activate", Lang.bind(this, function() {
-                Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.md");
+                Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.html");
             }));
             this._applet_context_menu.addMenuItem(menuItem);
         }

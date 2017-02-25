@@ -104,7 +104,10 @@ MyApplet.prototype = {
                 this._worldclocks = [];
                 this._worldclock_labels = [];
                 var i;
-                for (i in this.worldclocks) { this._worldclocks[i] = this.worldclocks[i].split("|"); }
+                for (i in this.worldclocks) {
+                    if (typeof(this.worldclocks[i]) == 'string')
+                        this._worldclocks[i] = this.worldclocks[i].split("|");
+                }
                 for (i in this._worldclocks) {
                     this._worldclocks[i][1] = GLib.TimeZone.new(this._worldclocks[i][1]);
 

@@ -1,0 +1,241 @@
+# Mosaab Alzoubi <moceap@hotmail.com>, 2016.
+msgid ""
+msgstr ""
+"Project-Id-Version: Gno-Menu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2016-12-17 20:35+0300\n"
+"Last-Translator: Mosaab Alzoubi <moceap@hotmail.com>\n"
+"Language-Team: Arabic <>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: convenience.js
+#: extension.js
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "غنو-مينيو: تم تعطيل البحث في علامات فيرفكس"
+
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required"
+" pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"لتفعيل البحث بعلامات فيرفكس، يجب أن تثبت "
+"الحزمة: libgir1.2-gda-5.0 لأوبنتو أو libgda-sqlite لفيدورا"
+
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "غنو-مينيو: تم تعطيل البحث في علامات ميدوري"
+
+msgid ""
+"If you want to search Midori bookmarks, you must install the required"
+" pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"لتفعيل البحث بعلامات ميدوري، يجب أن تثبت "
+"الحزمة: libgir1.2-gda-5.0 لأوبنتو أو libgda-sqlite لفيدورا"
+
+msgid "Recent"
+msgstr "الحديثة"
+
+msgid "Webmarks"
+msgstr "علامات الويب"
+
+msgid "Favorites"
+msgstr "المفضلة"
+
+msgid "Places"
+msgstr "الأماكن"
+
+msgid "Toggle Startup Apps View"
+msgstr "التبديل بين عرض التطبيقات المبدئي"
+
+msgid "List View"
+msgstr "طريقة القائمة"
+
+msgid "Grid View"
+msgstr "طريقة الشبكة"
+
+msgid "Type to search..."
+msgstr "اكتب لتبحث..."
+
+msgid "All Applications"
+msgstr "كل التطبيقات"
+
+msgid "Frequent Apps"
+msgstr "التطبيقات الشائعة"
+
+msgid "Favorite Apps"
+msgstr "التطبيقات المفضلة"
+
+msgid "Restart Shell"
+msgstr "إعادة تشغيل غنوم"
+
+msgid "Suspend"
+msgstr "علّق"
+
+msgid "Shutdown"
+msgstr "أطفئ"
+
+msgid "Logout User"
+msgstr "اخرج"
+
+msgid "Lock Screen"
+msgstr "اقفل"
+
+msgid "Preferences"
+msgstr "تفضيلات القائمة"
+
+msgid "No cinnamenu stylesheet found"
+msgstr "لم يعثر على نمط عرض غنو-مينيو"
+
+#: placeDisplay.js
+msgid "Failed to launch \"%s\""
+msgstr "تعذر بدء \"%s\""
+
+msgid "Home"
+msgstr "المنزل"
+
+msgid "Computer"
+msgstr "الحاسوب"
+
+msgid "Browse network"
+msgstr "استعرض الشبكة"
+
+#: prefs.js
+msgid "<b>Panel Settings</b>"
+msgstr "<b>إعدادات الشريط</b>"
+
+msgid "Disable activities hot corner"
+msgstr "عطّل الزاوية النشطة"
+
+msgid "Remove View button from panel"
+msgstr "احذف زر العرض من الشريط"
+
+msgid "Label for View button"
+msgstr "عبارة زر العرض"
+
+msgid "Use icon with View button"
+msgstr "استعمل رمز لزر العرض"
+
+msgid "Remove Apps button from panel"
+msgstr "احذف زر التطبيقات من الشريط"
+
+msgid "Label for Apps button"
+msgstr "عبارة زر التطبيقات"
+
+msgid "Use icon with Apps button"
+msgstr "استعمل رمز لزر التطبيقات"
+
+msgid "Remove Menu button from panel"
+msgstr "احذف زر القائمة من الشريط"
+
+msgid "Label for Menu button"
+msgstr "عبارة زر القائمة"
+
+msgid "Use icon with Menu button"
+msgstr "استعمل رمز لزر القائمة"
+
+msgid "Disable Menu button hot spot"
+msgstr "عطل بقعة زر القائمة النشطة"
+
+msgid "Disable Menu button shortcut key"
+msgstr "عطل اختصار زر القائمة"
+
+msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+msgstr "اختصار خاطئ. جرب F12، <Super>space، <Ctrl><Alt><Shift>a، إلخ."
+
+msgid "Set Menu button position"
+msgstr "اضبط موضع زر القائمة"
+
+msgid "Left"
+msgstr "يسار"
+
+msgid "Center"
+msgstr "وسط"
+
+msgid "Right"
+msgstr "يمين"
+
+msgid "<b>Menu Settings</b>"
+msgstr "<b>إعدادات القائمة</b>"
+
+msgid "Hide User Options Panel"
+msgstr "أخفِ شريط خيارات المستخدم"
+
+msgid "Hide Shortcuts Panel"
+msgstr "أخف شريط الاختصارات"
+
+msgid "Menu layout size"
+msgstr "حجم نمط القائمة"
+
+msgid "Normal"
+msgstr "عادي"
+
+msgid "Compact"
+msgstr "متراص"
+
+msgid "Icons to display on Shortcuts Panel"
+msgstr "الرموز المعروضة بشريط الاختصارات"
+
+msgid "Applications to display at startup"
+msgstr "التطبيقات المعروضة بالبداية"
+
+msgid "All"
+msgstr "الكل"
+
+msgid "Frequent"
+msgstr "المتكررة"
+
+msgid "None"
+msgstr "لا شيء"
+
+msgid "Number of columns in Application Grid"
+msgstr "عدد الأعمدة في الشبكة"
+
+msgid "3"
+msgstr "3"
+
+msgid "4"
+msgstr "4"
+
+msgid "5"
+msgstr "5"
+
+msgid "6"
+msgstr "6"
+
+msgid "7"
+msgstr "7"
+
+msgid "Default view mode for applications"
+msgstr "النمط الافتراضي لعرض التطبيقات"
+
+msgid "List"
+msgstr "القائمة"
+
+msgid "Grid"
+msgstr "الشبكة"
+
+msgid "Hide Categories Panel"
+msgstr "أخفِ شريط التصنيفات"
+
+msgid "Category selection method"
+msgstr "طريقة اختيار التصنيفات"
+
+msgid "Hover"
+msgstr "التمرير"
+
+msgid "Click"
+msgstr "النقر"
+
+msgid "Size of Shortcuts Panel icons"
+msgstr "حجم رموز شريط الاختصارات"
+
+msgid "Size of Application List icons"
+msgstr "حجم رموز قائمة التطبيقات"
+
+msgid "Size of Application Grid icons"
+msgstr "حجم رموز شبكة التطبيقات"
+

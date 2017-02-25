@@ -1,0 +1,257 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2015, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-06 14:42-0300\n"
+"PO-Revision-Date: 2016-02-04 16:39-0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Last-Translator: Fábio Nogueira <fnogueira@gnome.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt_BR\n"
+
+#: extension.js:1070
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu: Pesquisa nos favoritos Firefox desabilitada"
+
+#: extension.js:1071
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+msgstr ""
+"Se você quer pesquisar nos favoritos do Firefox, deve instalar os pacotes "
+"requeridos: libgir1.2-gda-5.0 (Ubuntu) ou libgda-sqlite (Fedora)"
+
+#: extension.js:1076
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu: Pesquisa nos favoritos Midori desabilitada"
+
+#: extension.js:1077
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+msgstr ""
+"Se você quer pesquisar nos favoritos Midori, deve instalar os pacotes "
+"requeridos: libgir1.2-gda-5.0 (Ubuntu) ou libgda-sqlite (Fedora)"
+
+#: extension.js:1776
+msgid "Recent"
+msgstr "Recente"
+
+#: extension.js:1818
+msgid "Web"
+msgstr "Web"
+
+#: extension.js:1861 prefs.js:540
+msgid "Favorites"
+msgstr "Favoritos"
+
+#: extension.js:1863 prefs.js:541
+msgid "Places"
+msgstr "Locais"
+
+#: extension.js:1933
+msgid "List View"
+msgstr "Visão em lista"
+
+#: extension.js:1955
+msgid "Grid View"
+msgstr "Visão em ícones"
+
+#: extension.js:1990
+msgid "Type to search..."
+msgstr "Digite para pesquisar..."
+
+#: extension.js:2111
+msgid "Frequent Apps"
+msgstr "Aplicativos frequentes"
+
+#: extension.js:2147
+msgid "All Applications"
+msgstr "Todos os aplicativos"
+
+#: extension.js:2245
+msgid "Restart Shell"
+msgstr "Reiniciar o Shell"
+
+#: extension.js:2268
+msgid "Suspend"
+msgstr "Suspender"
+
+#: extension.js:2300
+msgid "Shutdown"
+msgstr "Desligar"
+
+#: extension.js:2325
+msgid "Logout User"
+msgstr "Encerrar sessão"
+
+#: extension.js:2348
+msgid "Lock Screen"
+msgstr "Travar a tela"
+
+#: extension.js:2415
+msgid "Preferences"
+msgstr "Preferências"
+
+#: extension.js:2755 extension.js:2907
+msgid "No cinnamenu stylesheet found"
+msgstr "Nenhuma folha de estilos do cinnamenu encontrada"
+
+#: placeDisplay.js:64
+#, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "Falha ao carregar \"%s\""
+
+#: placeDisplay.js:154
+msgid "Home"
+msgstr "Início"
+
+#: placeDisplay.js:236
+msgid "Computer"
+msgstr "Computador"
+
+#: placeDisplay.js:240
+msgid "Browse network"
+msgstr "Nevagar na rede"
+
+#: prefs.js:41
+msgid "<b>Panel Settings</b>"
+msgstr "<b>Configurações do painel</b>"
+
+#: prefs.js:59
+msgid "Disable activities hot corner"
+msgstr "Desabilitar as atividades do canto superior"
+
+#: prefs.js:86
+msgid "Remove View button from panel"
+msgstr "Remover botão View do painel"
+
+#: prefs.js:117
+msgid "Label for View button"
+msgstr "Rótulo para o botão View"
+
+#: prefs.js:146
+msgid "Use icon with View button"
+msgstr "Usar ícone com o botão View"
+
+#: prefs.js:185
+msgid "Remove Apps button from panel"
+msgstr "Remover o botão Apps do painel"
+
+#: prefs.js:216
+msgid "Label for Apps button"
+msgstr "Rótulo para o botão Apps"
+
+#: prefs.js:246
+msgid "Use icon with Apps button"
+msgstr "Usar ícone com o botão Apps"
+
+#: prefs.js:286
+msgid "Remove Menu button from panel"
+msgstr "Remover o botão Menu do painel"
+
+#: prefs.js:313
+msgid "Label for Menu button"
+msgstr "Rótulo para o botão Menu"
+
+#: prefs.js:342
+msgid "Use icon with Menu button"
+msgstr "Usar ícone com o botão Menu"
+
+#: prefs.js:380
+msgid "Disable Menu button hot spot"
+msgstr "Desabilitar ponto de acesso do botão Menu"
+
+#: prefs.js:400
+msgid "Disable Menu button shortcut key"
+msgstr "Desabilitar tecla de atalho do botão Menu"
+
+#: prefs.js:423
+msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+msgstr ""
+"Acelerador inválido. Tente F12, <Super>espaço, <Ctrl><Alt><Shift>a, etc."
+
+#: prefs.js:457
+msgid "<b>Menu Settings</b>"
+msgstr "<b>Configurações do menu</b>"
+
+#: prefs.js:474
+msgid "Hide Shortcuts Panel"
+msgstr "Ocultar painel de atalhos"
+
+#: prefs.js:499
+msgid "Menu layout size"
+msgstr "Tamanho do layout do menu"
+
+#: prefs.js:502
+msgid "Large"
+msgstr "Grande"
+
+#: prefs.js:503
+msgid "Medium"
+msgstr "Médio"
+
+#: prefs.js:504
+msgid "Small"
+msgstr "Pequeno"
+
+#: prefs.js:536
+msgid "Icons to display on Shortcuts Panel"
+msgstr "Ícones exibidos no painel de atalhos"
+
+#: prefs.js:559
+msgid "Applications to display at startup"
+msgstr "Aplicativos exibidos na inicialização"
+
+#: prefs.js:563
+msgid "All"
+msgstr "Tudo"
+
+#: prefs.js:564
+msgid "Frequent"
+msgstr "Frequente"
+
+#: prefs.js:582
+msgid "Default view mode for applications"
+msgstr "Modo de visualização para os aplicativos"
+
+#: prefs.js:586
+msgid "List"
+msgstr "Lista"
+
+#: prefs.js:587
+msgid "Grid"
+msgstr "Ícones"
+
+#: prefs.js:605
+msgid "Category selection method"
+msgstr "Método de seleção da categoria"
+
+#: prefs.js:608
+msgid "Hover"
+msgstr "Foco"
+
+#: prefs.js:609
+msgid "Click"
+msgstr "Clique"
+
+#: prefs.js:630
+msgid "Size of Shortcuts Panel icons"
+msgstr "Tamanho dos ícones do painel de atalhos"
+
+#: prefs.js:656
+msgid "Size of Application List icons"
+msgstr "Tamanho dos ícones da lista de aplicativos"
+
+#: prefs.js:682
+msgid "Size of Application Grid icons"
+msgstr "Tamanho dos ícones da grade de aplicativos"

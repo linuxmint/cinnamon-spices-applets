@@ -12,3 +12,7 @@ It looks something like this:
 
 pre. cd ~/.local/share/cinnamon/applets/
 ln -s /path/to/the/checkout hamster@projecthamster.wordpress.com
+
+You can also clone git project exactly to applets folder
+
+pre. git clone https://github.com/projecthamster/cinnamon-applet.git ~/.local/share/cinnamon/applets/hamster@projecthamster.wordpress.com

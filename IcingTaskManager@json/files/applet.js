@@ -218,7 +218,8 @@ MyApplet.prototype = {
     var _this3 = this;
 
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
-    this.settings = new Settings.AppletSettings(this, 'IcingTaskManager@json', instance_id);
+    this._uuid = metadata.uuid;
+    this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
     this.homeDir = GLib.get_home_dir();
 
     this.actor.set_track_hover(false);
@@ -235,11 +236,10 @@ MyApplet.prototype = {
       // We are on Cinnamon < 3.2
     }
 
-    this._uuid = metadata.uuid;
     this.execInstallLanguage();
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
 
-    var settingsProps = [{ key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate }, { key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: null }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }, { key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null }];
+    var settingsProps = [{ key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate }, { key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }, { key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null }];
 
     if (this.c32) {
       for (var i = 0, len = settingsProps.length; i < len; i++) {
@@ -312,6 +312,10 @@ MyApplet.prototype = {
     this.signals.disconnectAllSignals();
   },
 
+  // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
+  _onButtonPressEvent: function _onButtonPressEvent() {
+    return false;
+  },
   handleUpdate: function handleUpdate() {
     var _this4 = this;
 
@@ -407,6 +411,9 @@ MyApplet.prototype = {
 
     this.metaWorkspaces[this.currentWs].appList._refreshAppById(appId, opts);
   },
+  refreshThumbnailsFromCurrentAppList: function refreshThumbnailsFromCurrentAppList() {
+    this.metaWorkspaces[this.currentWs].appList._refreshAllThumbnails();
+  },
   getAppFromWMClass: function getAppFromWMClass(specialApps, metaWindow) {
     var _this7 = this;
 
@@ -464,51 +471,14 @@ MyApplet.prototype = {
   removeAutostartApp: function removeAutostartApp(autostartIndex) {
     _.pullAt(this.autostartApps, autostartIndex);
   },
-
-
   execInstallLanguage: function execInstallLanguage() {
-    // TBD
-    try {
-      var _shareFolder = this.homeDir + '/.local/share/';
-      var _localeFolder = Gio.file_new_for_path(_shareFolder + 'locale/');
-      var _moFolder = Gio.file_new_for_path(_shareFolder + 'cinnamon/applets/' + this._uuid + '/locale/mo/');
-      var children = _moFolder.enumerate_children('standard::name,standard::type,time::modified', Gio.FileQueryInfoFlags.NONE, null);
-      var info = void 0,
-          _moFile = void 0,
-          _moLocale = void 0,
-          _moPath = void 0,
-          _src = void 0,
-          _dest = void 0,
-          _modified = void 0,
-          _destModified = void 0;
-      while ((info = children.next_file(null)) !== null) {
-        _modified = info.get_modification_time().tv_sec;
-        if (info.get_file_type() == Gio.FileType.REGULAR) {
-          _moFile = info.get_name();
-          if (_moFile.substring(_moFile.lastIndexOf('.')) == '.mo') {
-            _moLocale = _moFile.substring(0, _moFile.lastIndexOf('.'));
-            _moPath = _localeFolder.get_path() + '/' + _moLocale + '/LC_MESSAGES/';
-            _src = Gio.file_new_for_path(String(_moFolder.get_path() + '/' + _moFile));
-            _dest = Gio.file_new_for_path(String(_moPath + this._uuid + '.mo'));
-            try {
-              if (_dest.query_exists(null)) {
-                _destModified = _dest.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-                if (_modified > _destModified) {
-                  _src.copy(_dest, Gio.FileCopyFlags.OVERWRITE, null, null);
-                }
-              } else {
-                this._makeDirectoy(_dest.get_parent());
-                _src.copy(_dest, Gio.FileCopyFlags.OVERWRITE, null, null);
-              }
-            } catch (e) {
-              Main.notify('Error', e.message);
-              global.logError(e);
-            }
-          }
-        }
-      }
-    } catch (e) {}
+    var moPath = this.homeDir + '/.local/share/cinnamon/applets/' + this._uuid + '/generate_mo.sh';
+    var moFile = Gio.file_new_for_path(this.homeDir + '/.local/share/locale/de/LC_MESSAGES/IcingTaskManager@json.mo');
+    if (!moFile.query_exists(null)) {
+      Util.trySpawnCommandLine('bash -c \'' + moPath + '\'');
+    }
   },
+
 
   handleDragOver: function handleDragOver(source, actor, x, y, time) {
     if (!(source.isDraggableApp || source instanceof DND.LauncherDraggable)) {

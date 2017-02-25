@@ -20,8 +20,6 @@ var SpecialButtons = AppletDir.specialButtons;
 var clog = AppletDir.__init__.clog;
 var setTimeout = AppletDir.__init__.setTimeout;
 
-var DEFERRED_APPS = ['spotify', 'libreoffice'];
-
 function AppGroup() {
   this._init.apply(this, arguments);
 }
@@ -63,6 +61,7 @@ AppGroup.prototype = {
     this.appName = this.app.get_name();
     this.autostartIndex = _.findIndex(this._applet.autostartApps, { id: appId });
     this.isFavapp = isFavapp;
+    this.wasFavapp = false;
     this.orientation = applet.orientation;
 
     this.metaWindows = this._applet.groupApps ? [] : [window];
@@ -279,6 +278,7 @@ AppGroup.prototype = {
 
     this._applet._clearDragPlaceholder();
     var button = event.get_button();
+
     if (button === 1 && this.isFavapp || button === 2) {
       this.app.open_new_window(-1);
       this._animate();
@@ -305,11 +305,10 @@ AppGroup.prototype = {
     };
 
     if (button === 1) {
-
+      this.hoverMenu.shouldOpen = false;
       if (this.rightClickMenu.isOpen) {
         this.rightClickMenu.toggle();
       }
-      this.hoverMenu.shouldOpen = false;
       if (appWindows.length === 1) {
         handleMinimizeToggle(appWindows[0]);
       } else {
@@ -326,13 +325,11 @@ AppGroup.prototype = {
         }
       }
     } else if (button === 3) {
-      if (this.rightClickMenu.isOpen) {
-        this.rightClickMenu.mouseEvent = event;
-        this.rightClickMenu.toggle();
-      } else {
-        this.hoverMenu.close();
-        this.rightClickMenu.open();
-      }
+      this.appList._closeAllRightClickMenus(function () {
+        _this3.appList._closeAllHoverMenus(function () {
+          _this3.rightClickMenu.open();
+        });
+      });
     }
   },
   _onAppButtonPress: function _onAppButtonPress(actor, event) {
@@ -453,8 +450,6 @@ AppGroup.prototype = {
   },
 
   _windowAdded: function _windowAdded(metaWorkspace, metaWindow, metaWindows) {
-    var _this5 = this;
-
     var recursion = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
 
@@ -475,27 +470,6 @@ AppGroup.prototype = {
       windowAddArgs = windowAddArgs && this._applet.tracker.is_window_interesting(metaWindow);
     }
     if (windowAddArgs) {
-      // Defer apps that behave improperly when being launched.
-      var handleDeferredApp = false;
-      for (var i = 0, len = DEFERRED_APPS.length; i < len; i++) {
-        if (app.get_id().indexOf(DEFERRED_APPS[i]) !== -1 && recursion === 0) {
-          handleDeferredApp = true;
-          break;
-        }
-      }
-      if (handleDeferredApp) {
-        if (this.isFavapp) {
-          ++recursion;
-          setTimeout(function () {
-            return _this5._windowAdded(metaWorkspace, metaWindow, metaWindows, recursion);
-          }, 3000);
-          return;
-        } else {
-          setTimeout(function () {
-            return _this5._applet.refreshCurrentAppList(_this5.appId);
-          }, 3000);
-        }
-      }
       if (metaWindow) {
         if (!this._applet.groupApps && this.metaWindows.length >= 1) {
           if (this.ungroupedIndex === 0) {
@@ -540,7 +514,7 @@ AppGroup.prototype = {
       }
 
       if (this.isFavapp) {
-        this._isFavorite(false);
+        this._isFavorite(!this.isFavapp);
       }
 
       this._calcWindowNumber(metaWorkspace);
@@ -548,19 +522,25 @@ AppGroup.prototype = {
   },
 
   _windowRemoved: function _windowRemoved(metaWorkspace, metaWindow) {
+    var _this5 = this;
+
     var refWindow = _.findIndex(this.metaWindows, function (win) {
       return _.isEqual(win.win, metaWindow);
     });
 
     if (refWindow !== -1) {
-      // Clean up all the signals we've connected
-      for (var i = 0, len = this.metaWindows[refWindow].data.signals.length; i < len; i++) {
-        this.metaWindows[refWindow].win.disconnect(this.metaWindows[refWindow].data.signals[i]);
-      }
-
       if (!this._applet.groupApps) {
-        this.appList._removeApp(this.app, this.timeStamp);
+        if (!this.wasFavapp) {
+          this.appList._removeApp(this.app, this.timeStamp);
+        } else {
+          this._applet.refreshAppFromCurrentListById(this.appId, { favChange: true, isFavapp: this.wasFavapp });
+        }
         return;
+      } else {
+        // Clean up all the signals we've connected
+        for (var i = 0, len = this.metaWindows[refWindow].data.signals.length; i < len; i++) {
+          this.metaWindows[refWindow].win.disconnect(this.metaWindows[refWindow].data.signals[i]);
+        }
       }
 
       _.pullAt(this.metaWindows, refWindow);
@@ -580,8 +560,12 @@ AppGroup.prototype = {
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
         }
         this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
-      } else if (this.isFavapp) {
-        this._applet.refreshAppFromCurrentListById(this.appId, { favChange: true, isFavapp: this.isFavapp });
+      } else {
+        this.appList._onAppWindowsChanged(this.app, function () {
+          if (_this5.isFavapp) {
+            _this5._applet.refreshAppFromCurrentListById(_this5.appId, { favChange: true, isFavapp: _this5.isFavapp });
+          }
+        });
       }
 
       this._calcWindowNumber(metaWorkspace);

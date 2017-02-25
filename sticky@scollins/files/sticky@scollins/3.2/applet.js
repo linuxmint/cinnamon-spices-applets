@@ -1,6 +1,7 @@
 const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Meta = imports.gi.Meta;
 const Pango = imports.gi.Pango;
@@ -17,6 +18,7 @@ const Tooltips = imports.ui.tooltips;
 const Tweener = imports.ui.tweener;
 
 const FileDialog = imports.misc.fileDialog;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
@@ -30,7 +32,17 @@ const MIN_HEIGHT = 75;
 const MIN_WIDTH = 125;
 
 
-let applet, noteBox;
+let applet, noteBox, settings, uuid;
+
+
+// l10n/translation
+function _(str) {
+   let customTranslation = Gettext.dgettext(uuid, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+}
 
 
 function focusText(actor) {
@@ -41,35 +53,10 @@ function focusText(actor) {
     }
 
     actor.grab_key_focus();
-    if ( settings.raisedState ) {
+    if ( settings.getValue("raisedState") ) {
         global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
     }
 }
-
-
-let settings;
-function SettingsManager(uuid, instanceId) {
-    this._init(uuid, instanceId);
-}
-
-SettingsManager.prototype = {
-    _init: function(uuid, instanceId) {
-        this.settings = new Settings.AppletSettings(this, uuid, instanceId);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "storedNotes", "storedNotes");
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "raisedState", "raisedState");
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "hideState", "hideState");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "theme", "theme");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "height", "height");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "width", "width");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "startState", "startState");
-        this.settings.bindProperty(Settings.BindingDirection.IN, "boxShadow", "boxShadow", function() { this.emit("box-shadow-changed"); });
-    },
-
-    saveNotes:function(notes) {
-        this.storedNotes = notes;
-    }
-}
-Signals.addSignalMethods(SettingsManager.prototype);
 
 
 function Menu(applet, orientation) {
@@ -140,27 +127,30 @@ NoteBase.prototype = {
         this.hasBottom = false;
         this.hasSide = false;
 
+        settings.bindWithObject(this, "theme", "defaultTheme");
+        settings.bindWithObject(this, "height", "height");
+        settings.bindWithObject(this, "width", "width");
+        settings.bindWithObject(this, "boxShadow", "boxShadow", this.setBoxShadow);
+        settings.bindWithObject(this, "font", "font", this.setFont);
+
         if ( info && info.theme ) this.theme = info.theme;
         else {
-            if ( settings.theme == "random" ) {
-                let options = settings.settings.getOptions("theme")
+            if ( this.defaultTheme == "random" ) {
+                let options = settings.getOptions("theme")
                 let keys = Object.keys(options);
                 key = keys[Math.floor(Math.random()*(keys.length-1))];
                 this.theme = options[key];
             }
-            else this.theme = settings.theme;
+            else this.theme = this.defaultTheme;
         }
 
-        let height = ( info && info.height ) ? info.height : settings.height;
-        let width = ( info && info.width ) ? info.width : settings.width;
+        let height = ( info && info.height ) ? info.height : this.height;
+        let width = ( info && info.width ) ? info.width : this.width;
 
         this.actor = new St.BoxLayout({ vertical: true, reactive: true, track_hover: true, name: "NoteBox", style_class: this.theme, height: height, width: width });
         this.actor._delegate = this;
-        if ( settings.boxShadow ) this.actor.add_style_pseudo_class("boxshadow");
-        settings.connect("box-shadow-changed", Lang.bind(this, function() {
-            if ( settings.boxShadow ) this.actor.add_style_pseudo_class("boxshadow");
-            else this.actor.remove_style_pseudo_class("boxshadow");
-        }));
+        if ( this.boxShadow ) this.actor.add_style_pseudo_class("boxshadow");
+        this.setFont();
 
         this.titleBox = new St.BoxLayout({ style_class: "sticky-titleBox" });
         this.actor.add_actor(this.titleBox);
@@ -194,7 +184,7 @@ NoteBase.prototype = {
         let themeSection = new PopupMenu.PopupSubMenuMenuItem(_("Change theme"));
         this.contentMenuSection.addMenuItem(themeSection);
 
-        let options = settings.settings.getOptions("theme");
+        let options = settings.getOptions("theme");
         for ( let name in options ) {
             if (options[name] == "random") continue;
             let themeItem = new PopupMenu.PopupMenuItem(_(name));
@@ -239,6 +229,38 @@ NoteBase.prototype = {
         this.theme = codeName;
         this.actor.style_class = codeName;
         this.emit("changed");
+    },
+
+    setBoxShadow: function() {
+        if ( this.boxShadow ) this.actor.add_style_pseudo_class("boxshadow");
+        else this.actor.remove_style_pseudo_class("boxshadow");
+    },
+
+    setFont: function() {
+        let pangoFont = Pango.FontDescription.from_string(this.font);
+        let fontString = "";
+
+        switch ( pangoFont.get_style() ) {
+            case Pango.Style.OBLIQUE:
+                fontString += "oblique ";
+                break;
+            case Pango.Style.ITALIC:
+                fontString += "italic ";
+                break;
+        }
+        if ( pangoFont.get_variant() == Pango.Variant.SMALL_CAPS ) {
+            fontString += "small-caps ";
+        }
+        fontString += pangoFont.get_weight() + " ";
+        if ( pangoFont.get_size_is_absolute() ) {
+            fontString += pangoFont.get_size() + "px ";
+        }
+        else {
+            fontString += (pangoFont.get_size() / 1024) + "px ";
+        }
+        fontString += pangoFont.get_family();
+
+        this.actor.set_style("font: "+fontString);
     },
 
     checkResize: function(actor, event) {
@@ -1137,6 +1159,11 @@ NoteBox.prototype = {
         this.isModal = false;
         this.stageEventIds = [];
 
+        settings.bindWithObject(this, "storedNotes", "storedNotes");
+        settings.bindWithObject(this, "raisedState", "raisedState");
+        settings.bindWithObject(this, "hideState", "hideState");
+        settings.bindWithObject(this, "startState", "startState");
+
         this.actor = new Clutter.Group();
         Main.uiGroup.add_actor(this.actor);
         this.actor._delegate = this;
@@ -1144,14 +1171,14 @@ NoteBox.prototype = {
         this.actor.add_actor(menu.actor);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
 
-        if ( settings.startState == 2 || ( settings.startState == 3 && settings.hideState ) ) {
+        if ( this.startState == 2 || ( this.startState == 3 && this.hideState ) ) {
             this.hideNotes();
             this.actor.hide();
-            settings.hideState = true;
+            this.hideState = true;
         }
         else {
-            if ( settings.startState == 0 ) settings.hideState = false;
-            if ( settings.startState == 1 || ( settings.startState == 3 && settings.raisedState ) ) this.raiseNotes();
+            if ( this.startState == 0 ) this.hideState = false;
+            if ( this.startState == 1 || ( this.startState == 3 && this.raisedState ) ) this.raiseNotes();
             else this.lowerNotes();
         }
 
@@ -1226,7 +1253,7 @@ NoteBox.prototype = {
                 break;
             }
         }
-        if ( this.notes.length == 0 && settings.raisedState ) {
+        if ( this.notes.length == 0 && this.raisedState ) {
             this.lowerNotes();
         }
         this.update();
@@ -1241,13 +1268,13 @@ NoteBox.prototype = {
         let notesData = [];
         for ( let i = 0; i < this.notes.length; i++ )
             notesData.push(this.notes[i].getInfo());
-        settings.saveNotes(notesData);
+        this.storedNotes = notesData;
         if ( refresh ) this.initializeNotes();
     },
 
     initializeNotes: function() {
         this.removeAll();
-        for ( let noteInfo of settings.storedNotes ) {
+        for ( let noteInfo of this.storedNotes ) {
             let type;
             //make sure it doesn't break anything on upgrade from older version
             if ( !noteInfo.type ) type = "note";
@@ -1263,7 +1290,7 @@ NoteBox.prototype = {
         // we want to listen to the applet events still for raising and lowering purposes
         if ( applet.actor == actor || applet.actor.contains(actor) ) return true;
 
-        // the notes have thier own menus and we need to treat them the same
+        // the notes have their own menus and we need to treat them the same
         for ( let note of this.notes ) {
             if ( actor == note.menu.actor || note.menu.actor.contains(actor) ) return true;
         }
@@ -1275,12 +1302,12 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.open();
         this.actor.raise_top();
-        if ( settings.hideState ) {
+        if ( this.hideState ) {
             this.actor.show();
-            settings.hideState = false;
+            this.hideState = false;
         }
 
-        settings.raisedState = true;
+        this.raisedState = true;
         this.enableMouseTracking(false);
         this.setModal();
     },
@@ -1289,12 +1316,12 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.close();
         this.actor.lower(global.window_group);
-        if ( settings.hideState ) {
+        if ( this.hideState ) {
             this.actor.show();
-            settings.hideState = false;
+            this.hideState = false;
         }
 
-        settings.raisedState = false;
+        this.raisedState = false;
         this.unsetModal();
         this.enableMouseTracking(true);
     },
@@ -1303,8 +1330,8 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.close();
         this.actor.hide();
-        settings.raisedState = false;
-        settings.hideState = true;
+        this.raisedState = false;
+        this.hideState = true;
         this.unsetModal();
         this.enableMouseTracking(false);
     },
@@ -1501,8 +1528,8 @@ NoteBox.prototype = {
         if ( Main.desktop_layout == Main.LAYOUT_CLASSIC ) height -= Main.panel2.actor.height;
 
         //calculate number of squares
-        let rowHeight = settings.height + PADDING;
-        let columnWidth = settings.width + PADDING;
+        let rowHeight = settings.getValue("height") + PADDING;
+        let columnWidth = settings.getValue("width") + PADDING;
         let rows = Math.floor(height/rowHeight);
         let columns = Math.floor(width/columnWidth);
 
@@ -1536,19 +1563,6 @@ NoteBox.prototype = {
 Signals.addSignalMethods(NoteBox.prototype);
 
 
-// l10n/translation
-const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
-let UUID;
-
-function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
-   if(customTranslation != str) {
-      return customTranslation;
-   }
-   return Gettext.gettext(str);
-};
-
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
     this._init(metadata, orientation, panelHeight, instanceId);
 }
@@ -1561,12 +1575,16 @@ MyApplet.prototype = {
         this.metadata = metadata;
         this.instanceId = instanceId;
         this.orientation = orientation;
+        uuid = metadata.uuid
 
         Applet.IconApplet.prototype._init.call(this, this.orientation, panelHeight, instanceId);
 
         // l10n/translation
-        UUID = metadata.uuid;
-        Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+        Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
+
+        settings = new Settings.AppletSettings(this, uuid, instanceId);
+        settings.bind("storedNotes", "storedNotes");
+        settings.bind("raisedState", "raisedState");
 
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
 
@@ -1580,12 +1598,12 @@ MyApplet.prototype = {
 
     on_applet_clicked: function() {
         if ( noteBox.pinned ) this.menu.toggle();
-        else if ( settings.raisedState ) noteBox.lowerNotes();
+        else if ( this.raisedState ) noteBox.lowerNotes();
         else noteBox.raiseNotes();
     },
 
     on_applet_removed_from_panel: function() {
-        if ( settings.raisedState ) noteBox.lowerNotes();
+        if ( this.raisedState ) noteBox.lowerNotes();
         noteBox.destroy();
     },
 
@@ -1632,7 +1650,7 @@ MyApplet.prototype = {
         FileDialog.save(Lang.bind(this, function(path) {
             let file = Gio.file_new_for_path(path.slice(0,-1));
             if ( !file.query_exists(null) ) file.create(Gio.FileCreateFlags.NONE, null);
-            file.replace_contents(JSON.stringify(settings.storedNotes), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+            file.replace_contents(JSON.stringify(this.storedNotes), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
         }), params);
     },
 
@@ -1643,7 +1661,7 @@ MyApplet.prototype = {
                 let file = Gio.file_new_for_path(path.slice(0,-1));
                 if ( !file.query_exists(null) ) return;
                 let [a, contents, b] = file.load_contents(null);
-                settings.saveNotes(JSON.parse(contents));
+                this.storedNotes = JSON.parse(contents);
                 noteBox.initializeNotes();
             }), params);
         })).open();
@@ -1652,7 +1670,6 @@ MyApplet.prototype = {
 
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    settings = new SettingsManager(metadata.uuid, instanceId);
     let myApplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
     return myApplet;
 }

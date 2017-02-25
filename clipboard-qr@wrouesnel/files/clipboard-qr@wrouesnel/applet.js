@@ -140,7 +140,11 @@ MyApplet.prototype = {
             clipboard.get_text(Lang.bind(this,
                 function(clipboard, text) {
                     this._qr.set_text(text);
-                    this._errorString.label.text = this._qr.error;
+                    try {
+                        this._errorString.label.text = this._qr.error;
+                    } catch (e) {
+                        this._errorString.label.text = _("No QR code scanned.");
+                    }
                     this.menu.toggle();
                 }));
     }

@@ -10,10 +10,14 @@ const Util = imports.misc.util;
 const AppletDirectory = imports.ui.appletManager.appletMeta["PDFManager@cinnamon.org"].path;
 
 const Gettext = imports.gettext
-Gettext.bindtextdomain("PDFManager", AppletDirectory+"/locale")
+Gettext.bindtextdomain("PDFManager", GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext("PDFManager", str)
+   let customTranslation = Gettext.dgettext("PDFManager", str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
 }
 
 function MyPopupMenuItem()
@@ -43,13 +47,13 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
+
         try {
             this.set_applet_tooltip(_("Click here to manage your PDF"));
-            this.set_applet_icon_name("gnome-mime-application-pdf");		
-            
+            this.set_applet_icon_name("gnome-mime-application-pdf");
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
@@ -58,7 +62,7 @@ MyApplet.prototype = {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         this.menu.toggle();
         this._redisplay();
@@ -70,31 +74,31 @@ MyApplet.prototype = {
  			let menuItem = new MyPopupMenuItem(icon, _("Merge PDF"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._merge, {}));
-					
+
 	        icon = new St.Icon({ icon_name: 'list-remove', icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
  			menuItem = new MyPopupMenuItem(icon, _("Extract PDF"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._extract, {}));
-		
+
 	        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-		
+
 	        icon = new St.Icon({ icon_name: 'view-refresh', icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
  			menuItem = new MyPopupMenuItem(icon, _("Reduce size of PDF"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._reduce, {}));
-					
+
 	        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-					
+
 	        icon = new St.Icon({ icon_name: 'object-rotate-left', icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
  			menuItem = new MyPopupMenuItem(icon, _("Rotate left PDF"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._rotate_left, {}));
-					
+
 	        icon = new St.Icon({ icon_name: 'object-rotate-right', icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
  			menuItem = new MyPopupMenuItem(icon, _("Rotate right PDF"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._rotate_right, {}));
-					
+
 	        icon = new St.Icon({ icon_name: 'object-flip-vertical', icon_type: St.IconType.SYMBOLIC, icon_size: 16 });
  			menuItem = new MyPopupMenuItem(icon, _("Flip vertically PDF"), {});
 			this.menu.addMenuItem(menuItem);
@@ -105,37 +109,37 @@ MyApplet.prototype = {
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._run, "apturl apt://pdftk"));
 		}
-		
-		
+
+
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         if (Gio.file_new_for_path("/usr/bin/evince").query_exists(null)) {
-        
+
 			icon = new St.Icon({ gicon: Gio.icon_new_for_string("/usr/share/icons/Mint-X/apps/16/evince.png"), icon_size: 16});
  			menuItem = new MyPopupMenuItem(icon, _("Open Document Viewer"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._run, "evince"));
         }
         if (Gio.file_new_for_path("/usr/bin/pdfmod").query_exists(null)) {
-        
+
 			icon = new St.Icon({ gicon: Gio.icon_new_for_string("/usr/share/icons/hicolor/16x16/apps/pdfmod.png"), icon_size: 16});
  			menuItem = new MyPopupMenuItem(icon, _("Open PDF Mod"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._run, "pdfmod"));
         }
         if (Gio.file_new_for_path("/usr/bin/pdfedit").query_exists(null)) {
-        
+
 			icon = new St.Icon({ gicon: Gio.icon_new_for_string("/usr/share/pdfedit/icon/pdfedit_icon_16.png"), icon_size: 16});
  			menuItem = new MyPopupMenuItem(icon, _("Open PDF Editor"), {});
 			this.menu.addMenuItem(menuItem);
 			menuItem.connect('activate', Lang.bind(this, this._run, "pdfedit"));
         }
-    
+
     },
     _redisplay: function() {
         this.menu.removeAll();
         this._display();
     },
-    
+
     _run: function(a, b, c, d) {
         Util.spawnCommandLine(d);
     },
@@ -155,17 +159,17 @@ MyApplet.prototype = {
         Util.spawnCommandLine(AppletDirectory + "/flip-v.py");
     },
     _reduce: function(a, b, c, d) {
-    	Util.spawnCommandLine(AppletDirectory + "/reduce.py");	
+    	Util.spawnCommandLine(AppletDirectory + "/reduce.py");
     },
-    
+
     destroy: function() {
         this.menu.destroy();
         this.emit('destroy');
     }
-   	
+
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    return myApplet;      
+    return myApplet;
 }
