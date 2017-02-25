@@ -26,7 +26,6 @@ const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 
 /* Local imports */
 const AppletDir = imports.ui.appletManager.appletMeta[AppletUUID].path;
