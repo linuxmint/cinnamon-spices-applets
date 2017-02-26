@@ -82,7 +82,7 @@ function _(str) {
    if(translation != str) {
       return translation;
    }
-   return Gettext.dgettext("hamster", str);
+   return Gettext.dgettext(AppletUUID, str);
 };
 
 /* a little box or something */
@@ -573,6 +573,6 @@ HamsterApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height) {
-    Gettext.bindtextdomain("hamster", GLib.get_home_dir() + "/.local/share/locale");
+    Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale");
     return new HamsterApplet(metadata, orientation, panel_height);
 }
