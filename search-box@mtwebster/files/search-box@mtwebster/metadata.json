@@ -1,5 +1,6 @@
 {
     "multiversion": true,
+    "max-instances": -1,
     "uuid": "search-box@mtwebster",
     "name": "Internet Search Box",
     "icon": "web-browser",
