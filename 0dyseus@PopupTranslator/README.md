@@ -1,3 +1,9 @@
+<span style="color:red;">
+<h2>Bug reports, feature requests and contributions</h2>
+
+<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+</span>
+
 ## Popup Translator applet description
 
 Simple translator applet that will allow to display the translation of any selected text from any application on a system in a popup.
@@ -24,12 +30,6 @@ Simple translator applet that will allow to display the translation of any selec
     - Arch Linux based distributions: The package is called **python-requests**.
 
 **Note:** I don't use any other type of Linux distribution (Gentoo based, Slackware based, etc.). If any of the previous packages/modules are named differently, please, let me know.
-
-<span style="color:red;">
-## Bug report and feature request
-
-**If anyone has bugs to report or a feature request, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).**
-</span>
 
 ## Translation history window
 

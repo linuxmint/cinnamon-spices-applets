@@ -1,3 +1,9 @@
+<span style="color:red;">
+<h2>Bug reports, feature requests and contributions</h2>
+
+<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+</span>
+
 ## Custom Cinnamon Menu applet description
 
 This applet is a custom version of the default Cinnamon Menu applet, but infinitely more customizable.
@@ -43,12 +49,6 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
     - **Open .desktop file folder:** Open the folder where the application's .desktop file is stored.
     - **Run from terminal:** Open a terminal and run application from there.
     - **Run from terminal as root:** Same as above but the application is executed as root.
-
-<span style="color:red;">
-## Bug report and feature request
-
-**If anyone has bugs to report or a feature request, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).**
-</span>
 
 ### Menu *emulating* the Whisker menu (XFCE)
 
