@@ -1,3 +1,9 @@
+<span style="color:red;">
+<h2>Bug reports, feature requests and contributions</h2>
+
+<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+</span>
+
 ## Window list fork applet description
 
 This applet is a fork of the default Window-list applet shipped with Cinnamon.
@@ -14,12 +20,6 @@ This applet is a fork of the default Window-list applet shipped with Cinnamon.
 - Added icons to the window list button's context menu.
 - Added option to invert the contex menu items.
 - Added option to hide/move the **Preferences** sub menu.
-
-<span style="color:red;">
-## Bug report and feature request
-
-**If anyone has bugs to report or a feature request, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).**
-</span>
 
 ## Inverted menu on top panel
 
