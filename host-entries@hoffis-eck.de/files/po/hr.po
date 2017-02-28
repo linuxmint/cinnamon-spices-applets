@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Host Entries\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-24 13:22+0100\n"
+"PO-Revision-Date: 2017-02-24 13:29+0100\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: hr\n"
+
+#: applet.js:53
+msgid "Checking status"
+msgstr "Provjera stanja"
+
+#: applet.js:65
+msgid "Error, could not extract status!"
+msgstr "Greška, nemoguće izdvajanje stanja!"
+
+#: applet.js:73
+msgid "Entry is active"
+msgstr "Unos je aktivan"
+
+#: applet.js:76
+msgid "Entry is inactive"
+msgstr "Unos je neaktivan"
+
+#: applet.js:79
+msgid "Entry does not exist"
+msgstr "Unos ne postoji"
+
+#: applet.js:82
+msgid "Entry status is unknown"
+msgstr "Stanje unosa nepoznato"
+
+#: applet.js:85
+msgid "Error, trying to set unknown status!"
+msgstr "Greška, pokušaj postavljanja nepoznatog stanja!"
+
+#: applet.js:113
+msgid "Error, unknown status!"
+msgstr "Greška, nepoznato stanje!"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->ip->description
+msgid "IP address"
+msgstr "IP adresa"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->hosts->description
+msgid "hosts"
+msgstr "Računala"
+
+#. host-entries@hoffis-eck.de->metadata.json->description
+msgid "Enables/Disables Entries in /etc/hosts"
+msgstr "Omogućite/Onemogućite unose u datoteci /etc/hosts"
+
+#. host-entries@hoffis-eck.de->metadata.json->name
+msgid "Host Entries"
+msgstr "Unosi računala"

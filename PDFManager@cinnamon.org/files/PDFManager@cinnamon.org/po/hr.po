@@ -1,0 +1,72 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PDFManager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Click here to manage your PDF"
+msgstr "Kliknite ovdje za upravljanje svojim PDF datotekama"
+
+msgid "Merge PDF"
+msgstr "Spoji PDF"
+
+msgid "Extract PDF"
+msgstr "Izdvoji PDF"
+
+msgid "Reduce size of PDF"
+msgstr "Smanji PDF veličinu"
+
+msgid "Rotate left PDF"
+msgstr "Zakreni PDF na lijevo"
+
+msgid "Rotate right PDF"
+msgstr "Zakreni PDF na desno"
+
+msgid "Flip vertically PDF"
+msgstr "Razvuci PDF okomito"
+
+msgid "Install PDFManager's tools"
+msgstr "Instaliraj alate PDF upravitelja"
+
+msgid "Manager of PDF"
+msgstr "PDF upravitelj"
+
+msgid "Open Document Viewer"
+msgstr "Otvori preglednika dokumenata"
+
+msgid "Open PDF Mod"
+msgstr "Otvori PDF promjenu"
+
+msgid "Open PDF Editor"
+msgstr "Otvori PDF uređivač"
+
+msgid "Select your PDF..."
+msgstr "Odaberi svoj PDF..."
+
+msgid "Save as..."
+msgstr "Spremi kao..."
+
+msgid "Pages to extract"
+msgstr "Stranica za izdvojiti"
+
+msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+msgstr ""
+"Ulazne stranice za izdvojiti (npr. : 1-5 7-9 ili 3-kraj ili parne ili "
+"neparne) :"
+
+msgid "PDF Files"
+msgstr "PDF datoteke"
+
+#. PDFManager@cinnamon.org->metadata.json->name
+msgid "PDFManager"
+msgstr "PDF upravitelj"
