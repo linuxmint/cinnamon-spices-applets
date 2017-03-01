@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- encoding: utf-8 -*-
 '''
  * Cinnamon RSS feed reader (python backend)
@@ -77,60 +77,23 @@ DEFAULT_FEEDS="""
 }
 """
 
-class UnicodeCSVReader(object):
-    def __init__(self, f, encoding='utf-8', **kwargs):
-        if encoding == 'utf-8-sig':
-            csv_file = codecs.EncodedFile(f, 'utf-8', 'utf-8-sig')
-            encoding = 'utf-8'
-        else:
-            csv_file = f
-        self.csv_reader = csv.reader(csv_file, **kwargs)
-        self.encoding = encoding
-
-    def __iter__(self):
-        return self
-
-    def next(self):
-        row = self.csv_reader.next()
-        #return [unicode(cell, self.encoding) for cell in row]
-        for cell in row:
-            print(type(cell))
-            print(cell)
-            print(cell.decode(self.encoding, "ignore"))
-            print(type(cell.decode(self.encoding, "ignore")))
-
-        return [cell.decode(self.encoding, "ignore") for cell in row]
-
-    @property
-    def line_num(self):
-        return self.csv_reader.line_num
-
-
 class UnicodeCSVWriter(object):
     def __init__(self, f, encoding='utf-8', **kwargs):
         self.csv_writer = csv.writer(f, **kwargs)
         self.encoding = encoding
 
-    def writerow(self, line):
-        
+
+    def writerow(self, line): 
+        #TODO: Clean me up please.       
         dec = []
-        for col in line:
-            print(col)
-            print(type(col))
-            
+        for col in line:           
             foo = col
             if (isinstance(foo, str)):
                 bar = foo.decode('utf-8')
-                print(bar)
                 dec.append(bar)
             else:
                 dec.append(col)
-        #    print(col.decode('utf-8') if isinstance(col, basestring) else col)
-        #row =    [unicode(col) if isinstance(col, basestring) else col for col in line]
-        #print(row)
-        #self.csv_writer.writerow([col.decode(self.encoding, "ignore") if isinstance(col, basestring) else col for col in line])
-        #self.csv_writer.writerow([[unicode(col).decode(self.encoding).encode(self.encoding) for col in line]])
-        #self.csv_writer.writerow(dec)
+
         self.csv_writer.writerow([col.encode(self.encoding, "ignore") if isinstance(col, basestring) else col for col in dec])
 
 
@@ -178,17 +141,12 @@ class ConfigFileManager:
                     
                     instance['feeds'].append({'id': feed[0], 
                                               'enabled': feed[1], 
-                                              'url': url,# feed[2], 
-                                              'title': title,#feed[3],
+                                              'url': url,
+                                              'title': title,
                                               'notify': feed[4], 
                                               'interval': feed[5], 
                                               'showreaditems': feed[6], 
                                               'showimage': feed[7]})
-
-        #if sys.version_info.major < 3:
-        #    output = self.__json.encode('utf-8')
-        ##else:
-        #    output = self.__json
 
         ConfigFileManager.write(self.__filename, self.__json)
     
@@ -235,10 +193,13 @@ class ConfigFileManager:
             self.instances.append([instance['name'], instance['name']])            
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
+                    url = feed['url'].decode('utf-8') if sys.version_info.major < 3 else feed['url']
+                    title = feed['title'].decode('utf-8') if sys.version_info.major < 3 else feed['title']
+
                     self.feeds.append([feed['id'], 
                                       feed['enabled'], 
-                                      feed['url'].decode('utf-8'), 
-                                      feed['title'].decode('utf-8'), 
+                                      url, 
+                                      title,
                                       feed['notify'], 
                                       feed['interval'], 
                                       feed['showreaditems'], 
@@ -253,19 +214,11 @@ class ConfigFileManager:
         tree = et.parse(filename)
         root = tree.getroot()
         for outline in root.findall(".//outline[@type='rss']"):
-            url = outline.attrib.get('xmlUrl', '')#.decode("utf-8")
-            #url = outline.attrib.get('xmlUrl', '').decode("utf-8")
-            # for now just ignore feed title decoding issues.
+            url = outline.attrib.get('xmlUrl', '')
             try:
-                title = outline.attrib.get('text', '')#.encode('ascii', 'ignore')
-                #print(title)
-                #title = outline.attrib.get('text', '').decode('utf-8', 'ignore')
+                title = outline.attrib.get('text', '')
             except Exception as ex:
-                print(ex)
                 title = ""
-
-            print(url)
-            print(title)
 
             self.feeds.append([ConfigFileManager.get_new_id(), 
                     False,
@@ -285,7 +238,6 @@ class ConfigFileManager:
             Note that the ID is not exported, it is created on import.
         """
         if len(self.feeds) > 0:
-            #, encoding='utf8'
             mode = 'w'
             if sys.version_info.major < 3:
                 mode += 'b'
@@ -309,14 +261,8 @@ class ConfigFileManager:
             header = file.readline()
             if header != '### feeds export v=1.0\n':
                 raise Exception("Invalid file, must have a first line matching: ### feeds export v=1.0")                
-            #if sys.version_info.major < 3:
-            #    filereader = UnicodeCSVReader(file)
-            #else:
-            #    filereader = csv.reader(file)
-            filereader = csv.reader(file)
 
-            
-                
+            filereader = csv.reader(file)                        
 
             for line in filereader:                
                 url = line[1].decode('utf-8') if sys.version_info.major < 3 else line[1]
@@ -324,8 +270,8 @@ class ConfigFileManager:
 
                 self.feeds.append([ConfigFileManager.get_new_id()] + 
                                   [self.__to_bool(line[0]), 
-                                  url, #line[1], 
-                                  title, #line[2], 
+                                  url,
+                                  title,
                                   self.__to_bool(line[3]), 
                                   int(line[4]), 
                                   self.__to_bool(line[5]), 
@@ -344,7 +290,10 @@ class ConfigFileManager:
         """
         try:
             with open(filename, mode="r") as json_file:
-                json_obj = json.load(json_file, object_pairs_hook=ConfigFileManager.deunicodify_hook)
+                if sys.version_info.major < 3:
+                    json_obj = json.load(json_file, object_pairs_hook=ConfigFileManager.deunicodify_hook)
+                else:
+                    json_obj = json.load(json_file)
 
         except FileNotFoundError:
             # No file found, return default values # everything else throws.
@@ -376,21 +325,12 @@ class ConfigFileManager:
             Takes a passed in json object and writes the file to disk
         """
         mode = 'w'
-        #if sys.version_info.major < 3:
-            #mode += 'b'
 
-        # Save the file back out
-        #with open(filename, mode='wb', encoding='utf-8') as f:
-        #with open(filename, mode=mode) as f:            
         with open(filename, mode=mode, encoding='utf-8') as f:            
             if sys.version_info.major < 3:
-                #content = json.dumps(json_obj).encode('utf-8')
                 content = json.dumps(json_obj, ensure_ascii=False)
-                #content = json.dumps(json_obj).decode('utf-8')
             else:
                 content = json.dumps(json_obj, ensure_ascii=False)
-            print(content)
-            print(type(content))
             f.write(content)
 
 
@@ -431,4 +371,3 @@ if __name__ == '__main__':
             sys.stderr.write("Error updating feed\n" + e + "\n")
     else:
         jsonfile = ConfigFileManager.read(filename)
-        print(json.dumps(jsonfile))

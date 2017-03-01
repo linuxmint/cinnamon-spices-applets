@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # -*- encoding: utf-8 -*-
 '''
  * Cinnamon RSS feed reader (python backend)
@@ -437,7 +437,7 @@ class MainWindow(Gtk.Window):
 
 
 if __name__ == '__main__':
-    print(sys.version)
+    #print(sys.version)
     instance_name = sys.argv[1]
     data_path = sys.argv[2]
 
