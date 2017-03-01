@@ -93,6 +93,12 @@ class UnicodeCSVReader(object):
     def next(self):
         row = self.csv_reader.next()
         #return [unicode(cell, self.encoding) for cell in row]
+        for cell in row:
+            print(type(cell))
+            print(cell)
+            print(cell.decode(self.encoding, "ignore"))
+            print(type(cell.decode(self.encoding, "ignore")))
+
         return [cell.decode(self.encoding, "ignore") for cell in row]
 
     @property
@@ -297,20 +303,29 @@ class ConfigFileManager:
 
     def import_feeds(self, filename):
         cnt = 0
-        with open(filename, mode="r") as file:
+        mode = 'rb' if sys.version_info.major < 3 else 'r'
+
+        with open(filename, mode=mode) as file:
             header = file.readline()
             if header != '### feeds export v=1.0\n':
                 raise Exception("Invalid file, must have a first line matching: ### feeds export v=1.0")                
-            if sys.version_info.major < 3:
-                filereader = UnicodeCSVReader(file)
-            else:
-                filereader = csv.reader(file)
+            #if sys.version_info.major < 3:
+            #    filereader = UnicodeCSVReader(file)
+            #else:
+            #    filereader = csv.reader(file)
+            filereader = csv.reader(file)
+
+            
+                
 
             for line in filereader:                
+                url = line[1].decode('utf-8') if sys.version_info.major < 3 else line[1]
+                title = line[2].decode('utf-8') if sys.version_info.major < 3 else line[2]
+
                 self.feeds.append([ConfigFileManager.get_new_id()] + 
                                   [self.__to_bool(line[0]), 
-                                  line[1], 
-                                  line[2], 
+                                  url, #line[1], 
+                                  title, #line[2], 
                                   self.__to_bool(line[3]), 
                                   int(line[4]), 
                                   self.__to_bool(line[5]), 
