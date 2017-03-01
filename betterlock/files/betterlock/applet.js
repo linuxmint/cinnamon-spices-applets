@@ -75,6 +75,11 @@ MyApplet.prototype = {
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
         this.menu.addMenuItem(this.capsMenuItem);
 
+        this.showNotifications = true;
+        this.notificationsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Notifications"), this.showNotifications, { reactive: true });
+        this.notificationsMenuItem.connect('activate', Lang.bind(this, this._onNotificationsChanged));
+        this.menu.addMenuItem(this.notificationsMenuItem);
+
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
         this._updateState();
@@ -148,7 +153,8 @@ MyApplet.prototype = {
                 msg = _("Num lock off");
                 icon_name = 'num-off';
             }
-            this._notifyMessage(icon_name, msg);
+            if (this.showNotifications)
+                this._notifyMessage(icon_name, msg);
         }
         if(capslock_prev != this.binCaps.child && !this._firstRun)
         {
@@ -162,7 +168,8 @@ MyApplet.prototype = {
                 msg = _("Caps lock off");
                 icon_name = 'caps-off';
             }
-            this._notifyMessage(icon_name, msg);
+            if (this.showNotifications)
+                this._notifyMessage(icon_name, msg);
         }
         this._firstRun = false;
     },
@@ -203,7 +210,11 @@ MyApplet.prototype = {
             Caribou.DisplayAdapter.get_default().keyval_release(keyval);
         }
         this._updateState();
-    }
+    },
+
+    _onNotificationsChanged: function(actor, event) {
+        this.showNotifications = !this.showNotifications;
+    },
 };
 
 function main(metadata, orientation){
