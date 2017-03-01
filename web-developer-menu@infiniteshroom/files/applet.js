@@ -17,7 +17,7 @@ var CommandConstants = new function() {
 	this.COMMAND_PHP_CONFIG_EDIT = "gksu gedit /etc/php5/apache2/php.ini";
 	this.COMMAND_LAUNCH_PHPMYADMIN = "xdg-open http://localhost/phpmyadmin/";
 	this.COMMAND_LAUNCH_WEBDIR = "xdg-open http://localhost/";
-	this.COMMAND_OPEN_WEBDIR = "gksu nemo /var/www/";
+	this.COMMAND_OPEN_WEBDIR = "nemo /var/www/";
 }
 
 
