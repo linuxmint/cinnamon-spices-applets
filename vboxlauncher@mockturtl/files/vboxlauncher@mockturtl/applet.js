@@ -1,6 +1,7 @@
 const Applet = imports.ui.applet
 const GLib = imports.gi.GLib
 const Gtk = imports.gi.Gtk
+const Gettext = imports.gettext;
 const Lang = imports.lang
 const PopupMenu = imports.ui.popupMenu
 const Settings = imports.ui.settings
@@ -24,6 +25,13 @@ const SIGNAL_ACTIVATE = "activate"
 
 const KEY_UPDATE = "autoUpdate"
 const AUTOUPDATE = "_" + KEY_UPDATE
+
+// l10n/translation support
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
   this.settings = new Settings.AppletSettings(this, UUID, instanceId)
@@ -116,7 +124,7 @@ MyApplet.prototype = {
     this.addSeparator()
 
     if (launchers == 0)
-      this.addErrorMessage("ERROR. No compatible virtual machine programs found.")
+      this.addErrorMessage(_("ERROR. No compatible virtual machine programs found."))
   }
 
 , launcherFor: function(title, cmd, callback) {
@@ -186,7 +194,7 @@ MyApplet.prototype = {
 , addUpdater: function() {
     if (!this[AUTOUPDATE]) {
       this.addSeparator()
-      this.addLauncher("Update list", Lang.bind(this, this.updateMenu))
+      this.addLauncher(_("Update list"), Lang.bind(this, this.updateMenu))
     }
   }
 

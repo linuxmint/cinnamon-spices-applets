@@ -14,6 +14,7 @@ Feel free to contribute to the translations of CinnVIIStarkMenu on [Launchpad](h
 
 Language | Status | Untranslated | By
 --------------|:--------:|:----------------:|:---:
+[Croatian (hr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr/+translate?show=untranslated) | [gogo](https://launchpad.net/~trebelnik-stefina)
 [French (fr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr)  | ![62%](http://progressed.io/bar/62) | [48](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr/+translate?show=untranslated) | &mdash;
 [German (de)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause)
 [Russian (ru)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru) | ![70%](http://progressed.io/bar/70) | [37](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause)
