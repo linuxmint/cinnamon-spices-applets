@@ -193,14 +193,10 @@ class ConfigFileManager:
             self.instances.append([instance['name'], instance['name']])            
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
-                    #url = feed['url'].decode('utf-8') if sys.version_info.major < 3 else feed['url']
-                    #title = feed['title'].decode('utf-8') if sys.version_info.major < 3 else feed['title']
-                    url = feed['url']#.decode('utf-8') if sys.version_info.major < 3 else feed['url']
-                    title = feed['title']#.decode('utf-8') if sys.version_info.major < 3 else feed['title']
                     self.feeds.append([feed['id'], 
                                       feed['enabled'], 
-                                      url, 
-                                      title,
+                                      feed['url'], 
+                                      feed['title'],
                                       feed['notify'], 
                                       feed['interval'], 
                                       feed['showreaditems'], 
@@ -308,7 +304,6 @@ class ConfigFileManager:
                         feed['id'] = ConfigFileManager.get_new_id()
             ConfigFileManager.write(filename, json_obj)
 
-        print(json.dumps(json_obj, ensure_ascii=False))
         return json_obj        
 
 
@@ -338,7 +333,6 @@ class ConfigFileManager:
                 content = json.dumps(json_obj, ensure_ascii=False)
             else:
                 content = json.dumps(json_obj, ensure_ascii=False)
-            print(content)
             f.write(content)
 
 
