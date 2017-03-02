@@ -193,9 +193,10 @@ class ConfigFileManager:
             self.instances.append([instance['name'], instance['name']])            
             if instance['name'] == self.__instance_selected:
                 for feed in instance['feeds']:
-                    url = feed['url'].decode('utf-8') if sys.version_info.major < 3 else feed['url']
-                    title = feed['title'].decode('utf-8') if sys.version_info.major < 3 else feed['title']
-
+                    #url = feed['url'].decode('utf-8') if sys.version_info.major < 3 else feed['url']
+                    #title = feed['title'].decode('utf-8') if sys.version_info.major < 3 else feed['title']
+                    url = feed['url']#.decode('utf-8') if sys.version_info.major < 3 else feed['url']
+                    title = feed['title']#.decode('utf-8') if sys.version_info.major < 3 else feed['title']
                     self.feeds.append([feed['id'], 
                                       feed['enabled'], 
                                       url, 
@@ -291,7 +292,8 @@ class ConfigFileManager:
         try:
             with open(filename, mode="r") as json_file:
                 if sys.version_info.major < 3:
-                    json_obj = json.load(json_file, object_pairs_hook=ConfigFileManager.deunicodify_hook)
+                    #json_obj = json.load(json_file, object_pairs_hook=ConfigFileManager.deunicodify_hook)
+                    json_obj = json.load(json_file)
                 else:
                     json_obj = json.load(json_file)
 
@@ -306,16 +308,21 @@ class ConfigFileManager:
                         feed['id'] = ConfigFileManager.get_new_id()
             ConfigFileManager.write(filename, json_obj)
 
+        print(json.dumps(json_obj, ensure_ascii=False))
         return json_obj        
+
+
     @staticmethod
     def deunicodify_hook(pairs):
         new_pairs = []
         for key, value in pairs:
             if isinstance(value, unicode):
-                value = value.encode('utf-8')
+                #value = value.encode('utf-8')
+                value = value.decode('utf-8')
 
             if isinstance(key, unicode):
-                key = key.encode('utf-8')
+                #key = key.encode('utf-8')
+                key = key.decode('utf-8')
             new_pairs.append((key,value))
         return dict(new_pairs)
 
@@ -331,6 +338,7 @@ class ConfigFileManager:
                 content = json.dumps(json_obj, ensure_ascii=False)
             else:
                 content = json.dumps(json_obj, ensure_ascii=False)
+            print(content)
             f.write(content)
 
 
