@@ -1,5 +1,10 @@
 {
-  "woeidLookup":
+  "keybinding":
+  { "type": "keybinding"
+  , "description": "Set the keybinding to call the menu"
+  , "default": "<Super><Shift>w"
+  }
+, "woeidLookup":
   { "type": "button"
   , "description": "Get WOEID"
   , "callback": "woeidLookup"
