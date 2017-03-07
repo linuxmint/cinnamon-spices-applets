@@ -210,7 +210,7 @@ MyApplet.prototype = {
         else if ( GLib.getenv("XDG_SEAT_PATH") ) display_manager = "lightdm";
         else {
             if ( GLib.file_test("/etc/X11/default-display-manager", GLib.FileTest.EXISTS) ) {
-                GLib.spawn_async(["grep", "-oE", "\"[^/]+$\"", "/etc/X11/default-display-manager"], Lang.bind(this, function (output) {
+                Util.spawn_async(["grep", "-oE", "\"[^/]+$\"", "/etc/X11/default-display-manager"], Lang.bind(this, function (output) {
                     display_manager = String(output).split("\n")[0];
                 }));
             }
@@ -219,7 +219,7 @@ MyApplet.prototype = {
                 for ( let file of ["/etc/systemd/system/display-manager.service", "/etc/systemd/system-display-manager.service"] ) {
                     if ( GLib.file_test(file, GLib.FileTest.EXISTS) ) {
                         found = true
-                        GLib.spawn_command_line_sync(["grep", "-e", "\"Exec\"", file], Lang.bind(this, function (output) {
+                        Util.spawn_async(["grep", "-e", "\"Exec\"", file], Lang.bind(this, function (output) {
                             display_manager = String(output).split("/").pop().split("\n")[0];
                         }));
                     }

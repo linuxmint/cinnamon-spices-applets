@@ -1,3 +1,9 @@
+<span style="color:red;">
+<h2>Bug reports, feature requests and contributions</h2>
+
+<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+</span>
+
 ## Quick Menu applet description
 
 The function of this applet is very simple, create a menu based on the files/folders found inside a main folder (specified on this applet settings window). The files will be used to create menu items and the sub folders will be used to create sub-menus.
@@ -22,12 +28,6 @@ This applet has to read every single file/folder inside a main folder to create 
 - Menu items to .desktop files will be displayed with the icon and name declared inside the .desktop files themselves.
 - The menu can be kept open while activating menu items by pressing **Ctrl** + left click or with middle click.
 - This applet can create menu and sub-menu items even from symbolic links found inside the main folder.
-
-<span style="color:red;">
-## Bug report and feature request
-
-**If anyone has bugs to report or a feature request, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).**
-</span>
 
 ## Options
 

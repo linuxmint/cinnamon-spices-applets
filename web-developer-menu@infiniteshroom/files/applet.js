@@ -17,7 +17,7 @@ var CommandConstants = new function() {
 	this.COMMAND_PHP_CONFIG_EDIT = "gksu gedit /etc/php5/apache2/php.ini";
 	this.COMMAND_LAUNCH_PHPMYADMIN = "xdg-open http://localhost/phpmyadmin/";
 	this.COMMAND_LAUNCH_WEBDIR = "xdg-open http://localhost/";
-	this.COMMAND_OPEN_WEBDIR = "gksu nemo /var/www/";
+	this.COMMAND_OPEN_WEBDIR = "nemo /var/www/";
 }
 
 
@@ -81,9 +81,12 @@ MyApplet.prototype = {
 
 	on_applet_clicked: function(){
 		this.menu.toggle();
+		this.apacheEnabledSwitch.setToggleState(checkService("apache")); //reload state
+		this.mysqlEnabledSwitch.setToggleState(checkService("mysql"));   //reload state
     },
 
     onapacheSwitchPressed: function(item){
+	    	this.menu.toggle();	//Close before calling gksu	
 		if(item.state){
 			Util.spawnCommandLine(CommandConstants.COMMAND_START_APACHE);
 		}
@@ -94,6 +97,7 @@ MyApplet.prototype = {
     },
     
      onmysqlSwitchPressed: function(item){
+	     	this.menu.toggle();	//Close before calling gksu	
 		if(item.state){
 			
 			Util.spawnCommandLine(CommandConstants.COMMAND_START_MYSQL);
