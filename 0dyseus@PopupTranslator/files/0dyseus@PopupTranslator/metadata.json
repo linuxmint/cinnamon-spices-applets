@@ -2,11 +2,11 @@
     "website": "https://github.com/Odyseus/CinnamonTools",
     "multiversion": true,
     "last-edited": 1486432804,
-    "contributors": "NikoKrause: German localization and bug reports.,Radek71: Czech localization and bug reports.",
+    "contributors": "NikoKrause: German localization and bug reports.,Radek71: Czech localization and bug reports.,muzena: Croatian localization.,muzena: Croatian localization.,giwhub: Chinese localization.",
     "max-instances": "-1",
     "dangerous": false,
     "description": "Simple translator applet that will allow to display any selected text from any application on a system in a popup.",
-    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
     "name": "Popup Translator",
     "version": "1.04",
     "cinnamon-version": [

@@ -2,7 +2,7 @@
 
 ##### 1.04
 - Fixed keybindings not registered on applet initialization.
-- Implemented 4 different translation mechanisms that will allow to have various translation options at hand without the need to constantly change the applet settings. Read the help file for more details (It can be accessed from this applet context menu).
+- Implemented 4 different translation mechanisms that will allow to have various translation options at hand without the need to constantly change the applet settings. Read the HELP.md file for more details (It can be accessed from this applet context menu).
 - Re-designed the translation history mechanism to be *smarter*. Now, for example, if a string is translated into four different languages, all the strings will be stored into four different entries in the translation history.
 - Re-designed the translation history window. Now, only one instance of the history window can be opened at the same time. Removed **Reload** button in favor of auto-update of the history window content every time the translation history changes and the translation window is open.
 - Moved some of the context menu entries into a sub-menu.
