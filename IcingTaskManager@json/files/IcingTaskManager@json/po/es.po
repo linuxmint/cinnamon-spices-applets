@@ -5,16 +5,17 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
-"Language: fr\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. src->metadata.json->description
 msgid "Window list with app grouping and window thumbnails"
-msgstr "Liste des fenêtres avec regroupement et miniatures des applications"
+msgstr ""
+"Lista de ventanas con agrupación de aplicaciones y miniaturas de ventanas"
 
 #. src->metadata.json->name
 msgid "Icing Task Manager"
@@ -22,11 +23,11 @@ msgstr "Icing Task Manager"
 
 #. src->settings-schema.json->thumbnail-size->description
 msgid "Thumbnail size"
-msgstr "Taille des miniatures"
+msgstr "Tamaño de las Miniaturas"
 
 #. src->settings-schema.json->thumbnail-size->tooltip
 msgid "Controls the size of the thumbnails."
-msgstr "Contrôle la taille des vignettes."
+msgstr "Controla el tamaño de las miniaturas."
 
 # should not be set, just leave it blank and insert one white-space character
 #. src->settings-schema.json->thumbnail-size->units
@@ -35,73 +36,69 @@ msgstr " "
 
 #. src->settings-schema.json->icon-spacing->description
 msgid "Icon spacing"
-msgstr "Espacement des icônes"
+msgstr "Espaciado de iconos"
 
 #. src->settings-schema.json->icon-spacing->tooltip
 msgid "Controls how much space is between the icons."
-msgstr "Contrôle l'espace entre les icônes."
+msgstr "Cuanto relleno poner entre los iconos"
 
 #. src->settings-schema.json->icon-spacing->units
 #. src->settings-schema.json->icon-size->units
 #. src->settings-schema.json->icon-padding->units
 #. src->settings-schema.json->appmenu-width->units
 msgid "px"
-msgstr "px"
+msgstr ""
 
 #. src->settings-schema.json->show-thumbnails->description
 msgid "Show thumbnails"
-msgstr "Afficher les miniatures"
+msgstr "Mostrar Miniaturas"
 
 #. src->settings-schema.json->show-thumbnails->tooltip
 msgid "Show window thumbnails when hovering over an app button."
-msgstr ""
-"Afficher les vignettes de la fenêtre en survolant un bouton de l'application."
+msgstr "Mostrar Miniaturas de Ventanas"
 
 #. src->settings-schema.json->icon-size->description
 msgid "Icon size"
-msgstr "Taille des icônes"
+msgstr "Tamaño de ícono"
 
 #. src->settings-schema.json->icon-size->tooltip
 msgid "Set icon size"
-msgstr ""
-"Ajustez la taille de l'icône indépendamment de la mise à l'échelle du \"\n"
-"\"panneau Cinnamon."
+msgstr "Configurar el tamaño del icono"
 
 msgid "Global hotkey to show the order of apps"
-msgstr "Touche de raccourci globale pour afficher l'ordre des applications"
+msgstr "Tecla de acceso directo global para mostrar el orden de las aplicaciones"
 
 msgid "Duration of the apps order display on hotkey press"
 msgstr ""
-"Durée de l'affichage des commandes d'applications en appuyant sur la touche"
-" de raccourci"
+"Duración de la visualización del pedido de aplicaciones en la tecla"
+" rápida"
 
-msgid "" 
+msgid ""
 "When triggered, the window count label will be replaced with its order in "
 "the app list temporarily."
 msgstr ""
-"Lorsqu'il est déclenché, l'étiquette du compteur de fenêtres sera "
-"remplacée temporairement par son ordre dans la liste des applications."
+"Cuando se activa, la etiqueta de recuento de ventanas se reemplazará "
+"temporalmente con su orden en la lista de aplicaciones."
 
 msgid ""
 "Determines the duration the window count labels are replaced with the "
 "app's order number."
 msgstr ""
-"Détermine la durée pendant laquelle les étiquettes de comptage de fenêtre "
-"sont remplacées par le numéro de commande de l'application."
+"Determina la duración en que las etiquetas de recuento de ventanas se "
+"reemplazan con el número de pedido de la aplicación."
 
 #. src->settings-schema.json->hover-peek-time->description
 msgid "Window fade time"
-msgstr "Durée de l'animation"
+msgstr "Tiempo de desvanecimiento de las ventanas"
 
 #. src->settings-schema.json->hover-peek-time->tooltip
 msgid "Controls how quickly a window will fade on hover."
-msgstr ""
-"Contrôle la vitesse à laquelle une fenêtre se fanera en vol stationnaire."
+msgstr "Tiempo de animación de las ventanas, al realizar un vistazo"
 
 #. src->settings-schema.json->hover-peek-time->units
 #. src->settings-schema.json->thumbnail-timeout->units
 msgid "milliseconds"
-msgstr "millisecondes"
+msgstr "milisegundos"
 
 # Should not be set, just leave it blank by setting one white-space character
 #. src->settings-schema.json->appmenu-number->units
@@ -110,202 +107,194 @@ msgstr " "
 
 #. src->settings-schema.json->title-display->description
 msgid "Title display"
-msgstr "Affichage du libellé de l'application"
+msgstr "Título de pantalla"
 
 #. src->settings-schema.json->title-display->tooltip
 msgid ""
 "focused: show focused window title, title: display the window title, app: "
 "diplay app name, none: don't display anything"
 msgstr ""
-"Désactivé : N'affiche aucun libellé. Application: Affiche le nom de "
-"l'application. Active: Affiche le titre de l'application active. Titre: "
-"Affiche le titre de l'application."
+"enfocado: muestra el título de la ventana con el foco, título: muestra el "
+"título de la ventana, aplicación: muestra el nombre de la aplicación, nada: "
+"no muestra nada"
 
 #. src->settings-schema.json->title-display->options
 #. src->settings-schema.json->number-display->options
 msgid "None"
-msgstr "Désactivé"
+msgstr "nada"
 
 #. src->settings-schema.json->title-display->options
 msgid "Focused"
-msgstr "Active"
+msgstr "enfocado"
 
 #. src->settings-schema.json->title-display->options
 msgid "App"
-msgstr "Application"
+msgstr "aplicación"
 
 #. src->settings-schema.json->title-display->options
 msgid "Title"
-msgstr "Titre"
+msgstr "título"
 
 #. src->settings-schema.json->show-alerts->description
 msgid "Show app alerts and notifications"
-msgstr ""
+msgstr "Mostrar alertas y notificaciones de aplicaciones"
 
 #. src->settings-schema.json->show-alerts->tooltip
 msgid "If enabled, notifications and alerts will appear."
-msgstr ""
-"Si cette option est activée, des notifications et des alertes s'affichent."
+msgstr "Si está activada, aparecerán notificaciones y alertas."
 
 #. src->settings-schema.json->AppMenu->description
 msgid "Context Menu Settings"
-msgstr "Paramètres du menu contextuel"
+msgstr "Configuración del menú contextual"
 
 #. src->settings-schema.json->sort-thumbnails->description
 msgid "Sort windows for each app by last focused"
-msgstr "Trier les fenêtres pour chaque application en mettant au point"
+msgstr "Ordenar las ventanas de cada aplicación por última vez"
 
 #. src->settings-schema.json->sort-thumbnails->tooltip
 msgid ""
 "Controls whether the order windows appear for an app is by last focused, or "
 "the order they were opened."
 msgstr ""
-"Détermine si les fenêtres de commande apparaissent pour une application en "
-"dernier, ou dans l'ordre dans lequel elles ont été ouvertes."
 
 #. src->settings-schema.json->hover-peek-opacity->description
 msgid "Window opacity"
-msgstr "Opacité des autres fenêtres"
+msgstr "Opacidad de la ventana"
 
 #. src->settings-schema.json->hover-peek-opacity->tooltip
 msgid "Opacity of the windows on hover."
-msgstr "Opacité des fenêtres en vol stationnaire."
+msgstr "Opacidad de las ventanas de vistazo."
 
 #. src->settings-schema.json->hover-peek-opacity->units
 msgid "percent"
-msgstr "%"
+msgstr "porcentaje"
 
 #. src->settings-schema.json->enable-hover-peek->description
 msgid "Show windows when hovered over"
-msgstr "Afficher les fenêtres en vol stationnaire"
+msgstr "Habilitar vistazo cuando el ratón se encuentra sobre el área."
 
 #. src->settings-schema.json->enable-hover-peek->tooltip
 msgid "Controls whether or not windows display when hovered over."
-msgstr "Contrôle si les fenêtres s'affichent ou non lorsque survolé."
+msgstr "Activar vistazo flotante cuando el ratón está sobre la miniatura"
 
 #. src->settings-schema.json->icon-padding->description
 msgid "Icon padding"
-msgstr "Espace supplémentaire entre les icônes"
+msgstr "Relleno del Icono"
 
 #. src->settings-schema.json->icon-padding->tooltip
 msgid ""
 "Controls how much horizontal padding is inside the app buttons. Padding is "
 "only applied to instances of this applet on horizontal panels."
 msgstr ""
-"Contrôle la quantité de rembourrage horizontal à l'intérieur des boutons de "
-"l'application. Le rembourrage est uniquement appliqué aux instances de cette "
-"applet sur des panneaux horizontaux."
+"Controla la cantidad de relleno horizontal dentro de los botones de la "
+"aplicación. El relleno sólo se aplica a instancias de este applet en paneles "
+"horizontales."
 
 msgid "Show autostart option"
-msgstr "Afficher l'option de démarrage automatique"
+msgstr "Mostrar la opción de inicio automático"
 
 msgid "Apply the monitor move option to all windows"
-msgstr "Appliquer l'option de déplacement du moniteur à toutes les fenêtres"
+msgstr "Aplicar la opción de mover el monitor a todas las ventanas"
 
 msgid ""
 "When clicking \"Move to monitor\" in the context menu, this option "
 "will move all of an app's windows instead of just the last focused "
 "window from the app."
 msgstr ""
-"Lorsque vous cliquez sur \"Déplacer vers le moniteur\" dans le menu contextuel, cette option "
-"Va déplacer toutes les fenêtres d'une application au lieu de la dernière focalisée "
-"De l'application."
+"Al hacer clic en \"Mover a monitor\" en el menú contextual, esta opción "
+"Se moverá todas las ventanas de una aplicación en lugar de sólo el último enfoque "
+"De la aplicación."
 
 msgid "Shows the autostart toggle option in an app's context menu."
-msgstr "Affiche l'option de basculement automatique dans le menu contextuel d'une application."
+msgstr "Muestra la opción de alternar inicio automático en el menú contextual de una aplicación."
 
 #. src->settings-schema.json->show-pinned->description
 msgid "Show pinned apps"
-msgstr "Afficher les applications épinglées"
+msgstr "Mostrar aplicaciones fijas"
 
 #. src->settings-schema.json->show-pinned->tooltip
 msgid ""
 "Controls whether or not the pinned apps appear in the panel if they are not "
 "open."
 msgstr ""
-"Contrôle si les applications épinglées apparaissent dans le panneau si elles "
-"ne sont pas ouvertes."
+"Mostrar las aplicaciones fijas o simplemente mostrar las ventanas abiertas"
 
 #. src->settings-schema.json->WindowList->description
 msgid "Window List Settings"
-msgstr "Paramètres de la liste des applications"
+msgstr "Configuración de la Lista de Ventanas"
 
 #. src->settings-schema.json->thumbnail-timeout->description
 msgid "Thumbnail timeout"
-msgstr "Délai d'affichage et de disparition des miniatures"
+msgstr "Tiempo de espera de las miniaturas"
 
 #. src->settings-schema.json->thumbnail-timeout->tooltip
 msgid ""
 "Controls how quickly an app's set of window thumbnails will fade out when "
 "the mouse leaves the app button."
-msgstr ""
-"Contrôle la vitesse à laquelle l'ensemble des vignettes de fenêtre d'une "
-"application disparaîtra lorsque la souris quittera le bouton de "
-"l'application."
+msgstr "Tiempo de espera de las miniaturas"
 
 #. src->settings-schema.json->Thumbnails->description
 msgid "Thumbnail Settings"
-msgstr "Paramètres des miniatures"
+msgstr "Configuración de Miniaturas"
 
 #. src->settings-schema.json->show-recent->description
 msgid "Show recent items"
-msgstr "Afficher les locations récentes dans le menu"
+msgstr "Mostrar artículos recientes"
 
 #. src->settings-schema.json->show-recent->tooltip
 msgid "Controls whether recent items will appear in the context menu."
-msgstr "Contrôle si les éléments récents apparaissent dans le menu contextuel."
+msgstr "Controla si los elementos recientes aparecerán en el menú contextual."
 
 msgid "Animate thumbnails"
-msgstr "Animer les vignettes"
+msgstr "Animar miniaturas"
 
 msgid "If enabled, thumbnails will animate when appearing and disappearing."
-msgstr "" 
-"Si cette option est activée, les vignettes s'animeront lors de "
-"l'apparition et de la disparition."
+msgstr "Si está activada, las miniaturas se animarán al aparecer y desaparecer."
 
 #. src->settings-schema.json->vertical-thumbnails->description
 msgid "Enable vertical thumbnails"
-msgstr "Activer les vignettes verticales"
+msgstr "Miniaturas Verticales"
 
 #. src->settings-schema.json->vertical-thumbnails->tooltip
 msgid "If enabled, thumbnails will stack vertically."
-msgstr "Si cette option est activée, les vignettes s'empilent verticalement."
+msgstr "Organizar miniaturas vertical u horizontalmente"
 
 #. src->settings-schema.json->close-button-style->description
 msgid "Allow themes to control the thumbnail close button"
-msgstr "Autoriser les thèmes à contrôler le bouton de fermeture des vignettes"
+msgstr "Permitir que los temas controlen el botón de cierre de miniaturas"
 
 #. src->settings-schema.json->close-button-style->tooltip
 msgid ""
 "Controls whether or not the theme controls the window thumbnail's close "
 "button."
 msgstr ""
-"Contrôle si le thème contrôle le bouton Fermer de la vignette de la fenêtre."
+"Controla si el tema controla o no el botón de cierre de la miniatura de la "
+"ventana."
 
 msgid "Include all app windows"
-msgstr "Inclure toutes les fenêtres de l'application"
+msgstr "Incluir todas las ventanas de la aplicación"
 
 msgid ""
 "Controls whether or not thumbnails for smalller child windows, such as exit "
 "confirmations and file dialogues will be included in the thumbnail list."
 msgstr ""
-"Contrôle si les vignettes pour les petites fenêtres enfant, telles que les "
-"confirmations de sortie et les dialogues de fichiers, seront incluses dans "
-"la liste des vignettes."
+"Controla si las miniaturas de las ventanas para niños pequeños, como las "
+"confirmaciones de salida y los diálogos de archivos, se incluirán en la "
+"lista de miniaturas."
 
 #. src->settings-schema.json->enable-iconSize->description
+
 msgid "Adjust icon size"
-msgstr "Ajuster la taille de l'icône"
+msgstr "Ajustar el tamaño del icono"
 
 #. src->settings-schema.json->enable-iconSize->tooltip
 msgid "Adjust icon size independent of Cinnamon's panel scaling."
 msgstr ""
-"Ajustez la taille de l'icône indépendamment de la mise à l'échelle du \"\n"
-"\"panneau Cinnamon."
+"Ajuste el tamaño del icono independiente de la escala del panel de Cinnamon."
 
 #. src->settings-schema.json->number-display->description
 msgid "Number display"
-msgstr "Affichage du nombre d'instances"
+msgstr "Mostrar Número"
 
 #. src->settings-schema.json->number-display->tooltip
 msgid ""
@@ -313,256 +302,258 @@ msgid ""
 "window, none: don't display number, all: display window number for favorites "
 "too"
 msgstr ""
-"Intelligent : Afficher le nombre d'instances d'une application si au moins "
-"deux instances existent. Normal : Afficher le nombre d'instances d'une "
-"application si au moins une instance existe. Désactivé : Ne pas afficher le "
-"nombre d'instances d'une application. Toujours : Toujours afficher le nombre "
-"d'instances d'une application."
+"normal: muestra el número de la ventana, inteligente: muestra el número de "
+"la ventana, solo si hay más de una, nada: no muestra el número, todos: "
+"muestra el número también para favoritos"
 
 #. src->settings-schema.json->number-display->options
 msgid "All"
-msgstr "Toujours"
+msgstr "todos"
 
 #. src->settings-schema.json->number-display->options
 msgid "Smart"
-msgstr "Intelligent"
+msgstr "inteligente"
 
 #. src->settings-schema.json->number-display->options
 msgid "Normal"
-msgstr "Normal"
+msgstr "normal"
 
 #. src->settings-schema.json->onclick-thumbnails->description
 msgid "Open thumbnails on click"
-msgstr "Ouvrir les miniatures via un clic de la souris"
+msgstr "Abrir Miniaturas al hacer clic"
 
 #. src->settings-schema.json->onclick-thumbnails->tooltip
 msgid "Open the thumbnails on click if there is more than one window open."
 msgstr ""
-"Ouvrir les miniatures via un clic de la souris, si il y a plus d'une fenêtre "
-"ouverte"
+"Abrir las imágenes en miniatura al hacer clic, solo si hay más de 1 ventana "
+"abierta."
 
 #. src->settings-schema.json->HoverPeek->description
 msgid "Hover Peek Settings"
-msgstr "Paramètres de la mise en évidence des applications"
+msgstr "Configuración del Vistazo"
 
 #. src->settings-schema.json->firefox-menu->description
 msgid "Firefox context menu"
-msgstr "Affichage des sites dans le menu de l'application Firefox"
+msgstr "Menú contextual de Firefox"
 
 #. src->settings-schema.json->firefox-menu->tooltip
 msgid ""
 "Most Visited: show the sites you visit most, Recent History: display the the "
 "last pages you visited, Bookmarks: show your favorite bookmarks."
 msgstr ""
-"Les plus visités : affiche les sites que vous visitez le plus. Les derniers "
-"visités : affiche les derniers sites que vous avez visité. Marque-pages : "
-"affiche vos marque-pages."
 
 #. src->settings-schema.json->firefox-menu->options
 msgid "Bookmarks"
-msgstr "Marque-pages"
+msgstr "Marcadores"
 
 #. src->settings-schema.json->firefox-menu->options
 msgid "Most Visited"
-msgstr "Most Visited"
+msgstr "Más visitado"
 
 #. src->settings-schema.json->firefox-menu->options
 msgid "Recent History"
-msgstr "Recent History"
+msgstr "Historia reciente"
 
 #. src->settings-schema.json->group-apps->description
 msgid "Group apps"
-msgstr "Applications de groupe"
+msgstr "Aplicaciones de grupo"
 
 #. src->settings-schema.json->group-apps->tooltip
 msgid "Group each app's set of windows."
-msgstr "Regroupez l'ensemble des fenêtres de chaque application."
+msgstr "Agrupe el conjunto de ventanas de cada aplicación."
 
 msgid "Show active app indicators"
-msgstr "Afficher les indicateurs d'application actifs"
+msgstr "Mostrar indicadores de aplicaciones activas"
 
 msgid "Active app styling will indicate if an app is active."
-msgstr "Le style de l'application active indique si une application est active."
+msgstr "El estilo de la aplicación activa indicará si una aplicación está activa."
 
 #. src->settings-schema.json->arrange-pinnedApps->description
 msgid "Arrange pinned apps"
-msgstr "Pouvoir modifier l'ordre des applications"
+msgstr "Ordenar aplicaciones fijas"
 
 #. src->settings-schema.json->arrange-pinnedApps->tooltip
 msgid "Arrange pinned apps into a different order."
-msgstr "Pouvoir modifier l'ordre des applications"
-
-msgid "Install Gda"
-msgstr "Installer Gda"
+msgstr "Ordenar aplicaciones fijas en un orden diferente"
 
 msgid "Visible on all workspaces"
-msgstr "Visible dans tous les espaces de travail"
+msgstr "Mostrar en todas las áreas de trabajo"
 
 msgid "Only on this workspace"
-msgstr "Uniquement sur cet espace de travail"
+msgstr "Solo en esta área de trabajo"
 
 msgid "Move to left workspace"
-msgstr "Déplacer vers l'espace de travail à gauche"
+msgstr "Mover al área de trabajo de la izquierda"
 
 msgid "Move to right workspace"
-msgstr "Déplacer vers l'espace de travail à droite"
+msgstr "Mover al área de trabajo de la derecha"
 
 msgid "Move to monitor %d"
-msgstr "Déplacer vers le moniteur %d"
+msgstr "Mover al monitor %d"
 
 msgid "Remove from Autostart"
-msgstr "Supprimer de l'auto-démarrage"
+msgstr "Eliminar del inicio automático"
 
 msgid "Add to Autostart"
-msgstr "Ajouter à Autostart"
+msgstr "Añadir a Autostart"
 
 msgid "Unpin from Panel"
-msgstr "Retirer du panneau"
+msgstr "No fijar la aplicación"
 
 msgid "Pin to Panel"
-msgstr "Epingler au panneau"
+msgstr "Fijar la aplicación"
 
 msgid "Create Shortcut"
-msgstr "Créer un raccourci"
+msgstr "Crear acceso directo"
 
 msgid "Close"
-msgstr "Fermer"
+msgstr "Cerrar"
 
 msgid "Close All"
-msgstr "Tout fermer"
+msgstr "Cerrar Todo"
 
 msgid "Settings"
-msgstr "Options"
+msgstr "Ajustes"
 
 msgid "Rearrange"
-msgstr "Modifier l'ordre des applications"
+msgstr "Reordenar"
 
 msgid "Show Pinned"
-msgstr "Afficher les applications épinglées"
+msgstr "Mostrar Fijadas"
 
 msgid "Show Thumbs"
-msgstr "Afficher les miniatures"
+msgstr "Mostrar Miniaturas"
 
 msgid "Stack Thumbs"
-msgstr "Empiler les miniatures"
+msgstr "Aplicar Miniaturas"
 
 msgid "Peek on Hover"
-msgstr "Mise en évidence des applications"
+msgstr "Realizar Vistazo cuando el ratón está encima"
 
 msgid "Show Recent"
-msgstr "Afficher le dernier"
+msgstr "Mostrar recientes"
 
 msgid "Vertical Thumbs"
-msgstr "Miniatures verticales"
+msgstr "Miniaturas verticales"
 
 # 5 spaces in front of it
 msgid "     Go to Settings"
-msgstr "     Configurer..."
+msgstr "     Ir a configuraciones"
 
 msgid "Group apps into single icon"
-msgstr "Grouper les multiples instances d'une application"
+msgstr "Agrupar las aplicaciones en un solo icono."
 
 msgid "Group the open app instances into single icon"
-msgstr "Grouper les multiples instances d'une application"
+msgstr "Agrupar las instancias de aplicaciones abiertas en un solo icono"
 
 msgid "Minimize"
-msgstr "Minimiser"
+msgstr "Minimizar"
 
 msgid "Maximize"
-msgstr "Maximiser"
+msgstr "Maximizar"
 
 msgid "Unmaximize"
-msgstr "Restaurer"
+msgstr "No maximizada"
 
 msgid "Restore"
-msgstr "Recharger"
+msgstr "Restaurar"
 
 msgid "Use theme padding to center button icons"
-msgstr "Utiliser le rembourrage de thème pour les icônes de bouton central"
+msgstr "Utilizar el relleno de temas en los iconos de botones centrales"
 
 msgid "If button icons look off-centered, toggling this may help."
-msgstr "" 
-"Si les icônes des boutons sont désaxées, la modification de "
-"cette option peut vous aider."
+msgstr ""
+"Si los iconos de los botones parecen descentrados, cambiarlo puede "
+"ayudar."
 
 msgid "App button hover pseudo class"
-msgstr "App bouton hover pseudo classe"
+msgstr "Botón de la aplicación pseudo clase"
 
 msgid "Overrides the pseudo class for app buttons on hover."
 msgstr ""
-"Remplace la pseudo-classe pour les boutons d'application en "
-"vol stationnaire."
+"Anula la pseudo clase de los botones de la aplicación en el sentido "
+"hover."
 
 msgid "App button focus pseudo class"
-msgstr "Pseudo-classe"
+msgstr "Pseudo clase de enfoque del botón de aplicación"
 
 msgid "Overrides the pseudo class for app button on focus."
-msgstr ""
-"Remplace la pseudo-classe pour le bouton de l'application sur "
-"la mise au point."
+msgstr "Anula la pseudo clase para el botón de aplicación en el enfoque."
 
 msgid "App button active pseudo class"
-msgstr "Pseudo-classe active de l'application"
+msgstr "Pseudo clase activa del botón de aplicación"
 
 msgid "Overrides the pseudo class for app buttons when they are active."
 msgstr ""
-"Remplace la pseudo-classe des boutons d'application lorsqu'ils "
-"sont actifs."
+"Anula la pseudo clase de los botones de aplicación cuando están "
+"activos."
 
 msgid "Use the panel launcher class for pinned apps"
-msgstr ""
-"Utiliser la classe de lanceur de panneau pour les applications "
-"épinglées"
+msgstr "Utilice la clase de lanzador de paneles para aplicaciones fijadas"
 
 msgid "Enabling this helps with certain themes."
-msgstr "L'activation de cette fonction aide certains thèmes."
+msgstr "Habilitar esto ayuda con ciertos temas."
 
 msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "Touche de raccourci globale pour parcourir les menus de vignettes"
+msgstr "Tecla de acceso rápido global para recorrer los menús en miniatura"
 
 msgid "This allows you to cycle through the menus without activating a window."
-msgstr "Cela vous permet de faire défiler les menus sans activer de fenêtre."
+msgstr "Esto le permite recorrer los menús sin activar una ventana."
 
 msgid "Update this applet automatically"
-msgstr "Mettre à jour cette applet automatiquement"
+msgstr "Actualizar este applet automáticamente"
 
 msgid ""
 "When enabled, ITM will check the Github releases on init, and will "
 "start to upgrade if it finds a newer version."
 msgstr ""
-"Lorsque cette option est activée, ITM vérifie les versions de "
-"Github sur init et commence la mise à niveau si elle trouve une version plus récente."
+"Cuando está activado, ITM comprobará las versiones de Github en "
+"init y comenzará a actualizarse si encuentra una versión más reciente."
 
 msgid "Theme Settings"
-msgstr "Réglage des thèmes"
+msgstr "Ajustes de tema"
 
 msgid "ITM Settings"
-msgstr "Paramètres ITM"
+msgstr "Configuración de ITM"
 
 msgid "Menu item type"
-msgstr "Type d'élément de menu"
+msgstr "Tipo de elemento de menú"
 
 msgid ""
 "Determines whether menu item icons are symbolic, non-symbolic, or not shown."
 msgstr ""
-"Détermine si les icônes des éléments de menu sont symboliques, non "
-"symboliques ou non."
+"Determina si los iconos de elementos de menú son simbólicos, no "
+"simbólicos o no se muestran."
 
 msgid "Symbolic icons"
-msgstr "Icônes symboliques"
+msgstr "Iconos simbólicos"
 
 msgid "Non-symbolic icons"
-msgstr "Icônes non symboliques"
+msgstr "Iconos no simbólicos"
 
 msgid "No icons"
-msgstr "Aucune icône"
+msgstr "Sin iconos"
 
 msgid "Use system tooltips for closed apps"
-msgstr "Utiliser les info-bulles système pour les applications fermées"
+msgstr "Usar sugerencias de sistema para aplicaciones cerradas"
 
 msgid ""
 "Controls whether or not system tooltips are in use when hovering over "
 "closed pinned apps."
 msgstr ""
-"Contrôle si les info-bulles du système sont utilisées lorsque survolent "
-"des applications fermées fermées."
+"Controla si las sugerencias del sistema están o no en uso cuando se "
+"ciernen sobre aplicaciones cerradas."
+
+msgid "Middle clicking app buttons creates new app instances"
+msgstr ""
+"El clic medio de los botones de aplicación crea nuevas instancias de"
+" aplicación"
+
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. Setting"
+" this to false will close the last focused window from the app group on"
+" middle click."
+msgstr ""
+"Determina el comportamiento de los clics del botón central del ratón en los "
+"botones de la aplicación. Si establece este valor en false, se cerrará la "
+"última ventana del grupo de aplicaciones en el botón central."

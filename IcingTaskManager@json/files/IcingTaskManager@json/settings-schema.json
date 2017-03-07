@@ -71,6 +71,12 @@
     "description": "Arrange pinned apps",
     "tooltip": "Arrange pinned apps into a different order."
   },
+  "middle-click-action": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Middle clicking app buttons creates new app instances",
+    "tooltip": "Determines the behavior of middle mouse button clicks on app buttons. Setting this to false will close the last focused window from the app group on middle click."
+  },
   "cycleMenusHotkey": {
     "type": "keybinding",
     "default": "<Super>space",

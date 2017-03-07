@@ -62,7 +62,7 @@ AppList.prototype = {
     this._refreshList(true)
 
     this.signals.actor.push(this.actor.connect('style-changed', Lang.bind(this, this._updateSpacing)))
-    
+
     this.on_orientation_changed(this._applet.orientation, true);
   },
 
@@ -161,7 +161,7 @@ AppList.prototype = {
     }
     this.appList[number-1].appGroup._onAppKeyPress(number);
   },
-  
+
   _onNewAppKeyPress: function(number){
     if (number > this.appList.length) {
       return;
@@ -184,7 +184,7 @@ AppList.prototype = {
     var refApp = 0
     if (!this.lastCycled && this.lastFocusedApp) {
       refApp = _.findIndex(this.appList, {id: this.lastFocusedApp});
-    } 
+    }
     if (this.lastCycled) {
       this.appList[this.lastCycled].appGroup.hoverMenu.close()
       refApp = this.lastCycled+1
@@ -274,7 +274,7 @@ AppList.prototype = {
       if (!this._applet.groupApps) {
         window = app.get_windows()[0]
       }
-      
+
       var time = Date.now()
 
       let appGroup = new AppGroup.AppGroup(this._applet, this, app, isFavapp, window, time, index, appId)
@@ -425,7 +425,7 @@ AppList.prototype = {
     }
     return result
   },
-  
+
   _fixAppGroupIndexAfterDrag: function (appId) {
     let originPos = _.findIndex(this.appList, {id: appId}); // app object
     var pos = _.findIndex(this.manager_container.get_children(), this.appList[originPos].appGroup.actor);
@@ -443,9 +443,9 @@ AppList.prototype = {
     _.pullAt(this.appList, originPos);
     this.appList.splice(pos, 0, data);
   },
-  
+
   _windowRemoved: function (metaWorkspace, metaWindow, app=null) {
-    
+
     // When a window is closed, we need to check if the app it belongs
     // to has no windows left.  If so, we need to remove the corresponding AppGroup
     if (!app) {
@@ -468,7 +468,7 @@ AppList.prototype = {
         return win.get_workspace() == metaWorkspace
       })
     }
-    
+
     if (app && !hasWindowsOnWorkspace) {
       this._removeApp(app)
     }
