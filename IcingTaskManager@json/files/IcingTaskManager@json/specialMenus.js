@@ -412,7 +412,7 @@ AppMenuButtonRightClickMenu.prototype = {
         item.connect('activate', Lang.bind(this, function () {
           _.each(this.metaWindows, function (metaWindow) {
             if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time);
+              metaWindow.win.delete(global.get_current_time());
             }
           });
         }));
@@ -424,7 +424,7 @@ AppMenuButtonRightClickMenu.prototype = {
         item.connect('activate', Lang.bind(this, function () {
           _.each(this.metaWindows, function (metaWindow) {
             if (!metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time);
+              metaWindow.win.delete(global.get_current_time());
             }
           });
         }));
@@ -881,7 +881,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.addWindowThumbnails(windows);
     // Update appThumbnails to remove old programs
     this.removeStaleWindowThumbnails(windows);
-    // Set to true to readd the thumbnails; used for the sorting by last focused 
+    // Set to true to readd the thumbnails; used for the sorting by last focused
     this.reAdd = false;
     // used to make sure everything is on the stage
     setTimeout(function () {

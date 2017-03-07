@@ -280,6 +280,10 @@ AppGroup.prototype = {
     var button = event.get_button();
 
     if (button === 1 && this.isFavapp || button === 2) {
+      if (button === 2 && !this._applet.middleClickAction && this.lastFocused) {
+        this.lastFocused.delete(global.get_current_time());
+        return;
+      }
       this.app.open_new_window(-1);
       this._animate();
       return;
@@ -551,7 +555,7 @@ AppGroup.prototype = {
         this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
         /*
           Workaround for #86 - https://github.com/jaszhix/icingtaskmanager/issues/86
-          this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls 
+          this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls
           this.hoverMenu.appSwitcherItem._refresh with an outdated metaWindows cache. Better fix TBD.
         */
         this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(_.map(this.metaWindows, 'win'));

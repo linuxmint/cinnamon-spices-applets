@@ -71,7 +71,7 @@ msgstr "מקשי קיצור דרך עולמיים להראות את סדר הא�
 msgid "Duration of the apps order display on hotkey press"
 msgstr "משך אפליקציות סדר תצוגה על עיתונות hotkey"
 
-msgid "" 
+msgid ""
 "When triggered, the window count label will be replaced with its order in "
 "the app list temporarily."
 msgstr "כאשר מופעל, התווית חלון הספירה תוחלף מהזמנתו ברשימת היישומים באופן זמני."
@@ -518,3 +518,14 @@ msgid ""
 msgstr ""
 "הגדרה זו קובע אם ובטיפי מערכת או לא נמצאים בשימוש כאשר מרחפים מעל יישומים "
 "מוצמדים סגורים."
+
+msgid "Middle clicking app buttons creates new app instances"
+msgstr "כפתורי אפליקצית לחיצה תיכונים יוצרים מקרי אפליקציה חדשים"
+
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. Setting"
+" this to false will close the last focused window from the app group on"
+" middle click."
+msgstr ""
+"קובע את ההתנהגות של לחיצות כפתור עכבר אמצעי על כפתורי אפליקציה. ההגדרה הזו "
+"השווא תסגור את החלון האחרון ממוקד מקבוצת האפליקציה בלחיצה באמצע."
