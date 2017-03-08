@@ -27,5 +27,6 @@ This applet is a fork of the default Window-list applet shipped with Cinnamon.
 
 ## Contributors
 - [NikoKrause](https://github.com/NikoKrause): German localization and bug fixes.
+- [muzena](https://github.com/muzena): Croatian localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40window-list-fork/CHANGELOG.md)

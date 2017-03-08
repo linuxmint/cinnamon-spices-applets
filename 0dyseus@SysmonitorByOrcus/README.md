@@ -31,5 +31,6 @@ system.
 ## Contributors
 
 - [buzz](https://github.com/buzz): Bug fixes.
+- [muzena](https://github.com/muzena): Croatian localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SysmonitorByOrcus/CHANGELOG.md)
