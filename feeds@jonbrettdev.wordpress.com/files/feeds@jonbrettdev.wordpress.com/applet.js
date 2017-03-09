@@ -29,7 +29,7 @@ const GLib = imports.gi.GLib;
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
 const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/" + UUID;
 const ICON_PATH = APPLET_PATH + '/icons/';
-
+const FEED_CONFIG_FILE = DATA_PATH + "/feeds.json";
 imports.searchPath.push(APPLET_PATH);
 
 const Applet = imports.ui.applet;
@@ -99,7 +99,11 @@ FeedApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this.feed_file_error = false;
-            this._load_feeds();
+
+            this.logger.debug("Selected Instance Name: " + this.instance_name);
+
+            //this._load_feeds();
+            this._read_json_config();
         } catch (e) {
             // Just in-case the logger is the issue.
             if(this.logger != undefined){
@@ -164,14 +168,16 @@ FeedApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "url",
                 "url_list_str",
-                this._load_feeds,
+                //this._load_feeds,
+                this._read_json_config,
                 null);
-        // This setting is use to select the feed list being used by this instance of the applet.
-        // I would love to hide this or not allow editing..         
+                   
+        // This setting is use to select the feed list being used by this instance of the applet.        
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "instance_name",
                 "instance_name",
-                this._on_settings_changed,
+                //this._load_feeds,
+                this._read_json_config,
                 null);
     },
 
@@ -280,28 +286,51 @@ FeedApplet.prototype = {
 
         return url_list;
     },
-
+    _read_json_config: function() {
+        // Read the json config file.
+        let argv = ["python", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
+        Util.spawn_async(argv, Lang.bind(this, this._load_feeds));            
+    },
     /* Private method used to load / reload all the feeds. */
-    _load_feeds: function() {
+    _load_feeds: function(url_json) {
         this.logger.debug("FeedApplet._load_feeds");
         this.feeds = new Array();
-        let url_list = this._parse_feed_urls(this.url_list_str);
         this.menu.removeAll();
+        var data = JSON.parse(url_json);
+        let i = 0;
 
-        // Feed Level Menu Items Added Here (each Feed includes posts).
-        for(var i = 0; i < url_list.length; i++) {
-            this.feeds[i] = new FeedDisplayMenuItem(url_list[i].url, this,
-                    {
-                        feed_id: i,
-                        logger: this.logger,
-                        max_items: this.max_items,
-                        show_read_items: this.show_read_items,
-                        show_feed_image: this.show_feed_image,
-                        custom_title: url_list[i].title
-                    });
+        // Find the feeds for the selected instance_name and populate those feeds.
+        for (key in data['instances']) {
+            if (data['instances'][key]['name'] == this.instance_name) {
+                let iinterval = data['instances'][key]['interval']; // Not currently used
 
-            this.menu.addMenuItem(this.feeds[i]);
+                for (fkey in data['instances'][key]['feeds']) {
+                    try {
+                        this.logger.debug(data['instances'][key]['feeds'][fkey]['enabled']);
+                        if (data['instances'][key]['feeds'][fkey]['enabled']) {
+                            this.feeds[i] = new FeedDisplayMenuItem(
+                                data['instances'][key]['feeds'][fkey]['url'],
+                                this,
+                                {
+                                    feed_id: data['instances'][key]['feeds'][fkey]['id'],
+                                    logger: this.logger,
+                                    max_items: this.max_items,
+                                    show_read_items: data['instances'][key]['feeds'][fkey]['showreaditems'],
+                                    show_feed_image: data['instances'][key]['feeds'][fkey]['showimage'],
+                                    custom_title: data['instances'][key]['feeds'][fkey]['title'],
+                                    notify: data['instances'][key]['feeds'][fkey]['notify'],
+                                    interval: data['instances'][key]['feeds'][fkey]['interval'] // Not currently used
+                                });
+                            this.menu.addMenuItem(this.feeds[i]);
+                            i++;
+                        }
+                    } catch (e) {
+                        global.logError("Error Parsing feeds.json file: " + e);
+                    }
+                }
+            }
         }
+        this.logger.debug("We made it this far?");
     },
 
     /* public method to notify of changes to
@@ -460,7 +489,8 @@ FeedApplet.prototype = {
                     let read = stream.peek_buffer().toString();
                     if (read.length > 0) {
                         this.url_list_str = read;
-                        this._load_feeds();
+                        //this._load_feeds();
+                        this._read_json_config();
                     }
                 } catch(e) {
                     this.logger.error(e);
@@ -513,8 +543,9 @@ FeedApplet.prototype = {
                 global.logError(e);
             }
 
+            this.logger.debug("Feed_Config_File: " + FEED_CONFIG_FILE);
             // if redirected_url != null pass parameters            
-            let argv = [APPLET_PATH + "/manage_feeds.py", this.instance_name, DATA_PATH];
+            let argv = [APPLET_PATH + "/manage_feeds.py", this.instance_name, FEED_CONFIG_FILE];
             if(redirected_url != null){
                 argv.push(current_url, redirected_url);
             }

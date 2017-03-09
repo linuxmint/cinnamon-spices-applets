@@ -439,10 +439,12 @@ class MainWindow(Gtk.Window):
 if __name__ == '__main__':
     #print(sys.version)
     instance_name = sys.argv[1]
-    data_path = sys.argv[2]
+    filename = sys.argv[2]
+    #data_path = sys.argv[2]
 
     # Display the window to allow the user to manage the feeds.
-    config = ConfigFileManager(data_path + "/feeds.json", instance_name)
+    #config = ConfigFileManager(data_path + "/feeds.json", instance_name)
+    config = ConfigFileManager(filename, instance_name)
     window = MainWindow(config)
     window.connect("delete-event", Gtk.main_quit)
     

@@ -357,12 +357,10 @@ class ConfigFileManager:
 
 
 
-if __name__ == '__main__':
-    instance_name = sys.argv[1]
-    data_path = sys.argv[2]
+if __name__ == '__main__':    
+    filename = sys.argv[1]
 
-    filename = data_path + "/feeds.json"
-
+    #TODO: Need to address updating redirected feeds.
     if len(sys.argv) == 5:
         current_url = sys.argv[3]
         redirect_url = sys.argv[4]
@@ -373,3 +371,4 @@ if __name__ == '__main__':
             sys.stderr.write("Error updating feed\n" + e + "\n")
     else:
         jsonfile = ConfigFileManager.read(filename)
+        print(json.dumps(jsonfile))
