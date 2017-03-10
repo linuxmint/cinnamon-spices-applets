@@ -168,30 +168,27 @@ FeedApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "url",
                 "url_list_str",
-                //this._load_feeds,
-                this._read_json_config,
+                null,
                 null);
                    
         // This setting is use to select the feed list being used by this instance of the applet.        
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "instance_name",
                 "instance_name",
-                //this._load_feeds,
                 this._read_json_config,
                 null);
     },
-
     /* Public method for adding a feed to be processed (downloaded) */
     enqueue_feed: function(item){
-        this.logger.debug("checking to add feed_id " + item.feed_id + " to the process queue.")
+        this.logger.debug("checking to add feed_id " + item.feed_id + " to the process queue.");
         // Only add items once to the queue.
 
-        let found = this.feed_queue.find(feed => (feed.feed_id == item.feed_id))
+        let found = this.feed_queue.find(feed => (feed.feed_id == item.feed_id));
 
         if(!found){
             // push the item on the queue
             this.feed_queue.push(item);
-            this.logger.debug("Added feed to the process queue.")
+            this.logger.debug("Added feed to the process queue.");
         }
     },
 
@@ -251,42 +248,10 @@ FeedApplet.prototype = {
             this._applet_context_menu.addMenuItem(s);
         }
     },
+    _read_json_config: function(instance_name = null) {        
+        if(instance_name != null)
+            this.instance_name = instance_name.trim();
 
-    /* Private method to Convert the settings string into an array of objects, each containing a
-     * url and title property */
-    _parse_feed_urls: function(str) {
-        this.logger.debug("FeedApplet._parse_feed_urls");
-        let lines = str.split("\n");
-        let url_list = new Array();
-
-        for (var i in lines) {
-
-            try{
-                /* Strip redundant (leading,trailing,multiple) whitespace */
-                lines[i] = lines[i].trim().replace(/\s+/g, " ");
-
-                /* Skip empty lines and lines starting with '#' */
-                if (lines[i].length == 0 || lines[i].substring(0, 1) == "#")
-                    continue;
-
-                this.logger.debug("Adding feed: " + lines[i]);
-                /* URL is the first word on the line, the rest of the line is an
-                 * optional title */
-                url_list.push({
-                    url: lines[i].split(" ")[0],
-                    title: lines[i].split(" ").slice(1).join(" ")
-                });
-            }
-            catch(e){
-                if(this.logger != undefined)
-                    this.logger.error(e);
-                global.log(e.toString());
-            }
-        }
-
-        return url_list;
-    },
-    _read_json_config: function() {
         // Read the json config file.
         let argv = ["python", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
         Util.spawn_async(argv, Lang.bind(this, this._load_feeds));            
@@ -301,9 +266,18 @@ FeedApplet.prototype = {
 
         // Find the feeds for the selected instance_name and populate those feeds.
         for (key in data['instances']) {
-            if (data['instances'][key]['name'] == this.instance_name) {
-                let iinterval = data['instances'][key]['interval']; // Not currently used
+            this.logger.debug("looking for: " + this.instance_name);
+            this.logger.debug("found: " + data['instances'][key]['name']);
 
+            this.logger.debug(this.instance_name.length);
+            this.logger.debug("found: " + data['instances'][key]['name'].length);
+            
+            
+            this.logger.debug("match?: " + data['instances'][key]['name'].trim() === this.instance_name);
+            if (data['instances'][key]['name'].trim() === this.instance_name) {
+                this.logger.debug("make it here? ");
+                let iinterval = data['instances'][key]['interval']; // Not currently used
+                
                 for (fkey in data['instances'][key]['feeds']) {
                     try {
                         this.logger.debug(data['instances'][key]['feeds'][fkey]['enabled']);
@@ -330,7 +304,6 @@ FeedApplet.prototype = {
                 }
             }
         }
-        this.logger.debug("We made it this far?");
     },
 
     /* public method to notify of changes to
@@ -396,7 +369,7 @@ FeedApplet.prototype = {
             Mainloop.source_remove(this.timer_id);
             this.timer_id = 0;
         }
-
+        this.logger.debug("Number of feeds to queue: " + this.feeds.length);
         for (var i = 0; i < this.feeds.length; i++) {
             this.enqueue_feed(this.feeds[i]);
         }
@@ -479,55 +452,6 @@ FeedApplet.prototype = {
                 this.menu.close(true);
         }
     },
-
-    _read_manage_app_stdout: function() {
-        this.logger.debug("FeedApplet._read_manage_app_stdout");
-        /* Asynchronously wait for stdout of management app */
-        this._manage_data_stdout.fill_async(-1, GLib.PRIORITY_DEFAULT, null, Lang.bind(this, function(stream, result) {
-            if (stream.fill_finish(result) == 0) {
-                try {
-                    let read = stream.peek_buffer().toString();
-                    if (read.length > 0) {
-                        this.url_list_str = read;
-                        //this._load_feeds();
-                        this._read_json_config();
-                    }
-                } catch(e) {
-                    this.logger.error(e);
-                    global.log(e.toString());
-                    this._read_manage_stderr();
-                }
-                this._manage_stdout.close(null)
-            } else {
-                /* Not enough space in stream buffer for all the output#
-                 * Double it and retry */
-                stream.set_buffer_size(2 * stream.get_buffer_size());
-                this._read_manage_app_stdout();
-            }
-        }));
-    },
-
-    _read_manage_stderr: function() {
-        this.logger.debug("FeedApplet._read_manage_stderr");
-        this._manage_data_stderr.fill_async(-1, GLib.PRIORITY_DEFAULT, null, Lang.bind(this, function(stream, result) {
-            if (stream.fill_finish(result) == 0) {
-                try {
-                    let read = stream.peek_buffer().toString();
-                    if (read.length > 0) {
-                        this.logger.error(read);
-                    }
-                } catch(e) {                    
-                    this.logger.error(e);
-                    global.log(e.toString());
-                }
-                this._manage_stderr.close(null)
-            } else {
-                stream.set_buffer_size(2 * stream.get_buffer_size());
-                this._read_manage_stderr();
-            }
-        }));        
-    },
-
     /* Feed manager functions */
     manage_feeds: function(current_url = null, redirected_url = null) {
         this.logger.debug("FeedApplet.manage_feeds");
@@ -549,32 +473,7 @@ FeedApplet.prototype = {
             if(redirected_url != null){
                 argv.push(current_url, redirected_url);
             }
-            let [exit, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
-                    null,
-                    argv,
-                    null,
-                    GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-                    null);
-
-            /* Store stdin, stdout but close stderr */
-            this._manage_stdout = new Gio.UnixInputStream({fd: stdout, close_fd: true});
-            this._manage_data_stdout = new Gio.DataInputStream({
-                base_stream: this._manage_stdout
-            });
-
-            this._manage_stdin = new Gio.UnixOutputStream({fd: stdin, close_fd: true});
-            this._manage_data_stdin = new Gio.DataOutputStream({
-                base_stream: this._manage_stdin
-            });
-
-            this._manage_stderr = new Gio.UnixInputStream({fd: stderr, close_fd: true});//.close(null);
-            this._manage_data_stderr = new Gio.DataInputStream({
-                base_stream: this._manage_stderr
-            });
-
-            /* Write current feeds list to management app stdin */
-            this._manage_data_stdin.put_string(this.url_list_str, null);
-            this._manage_stdin.close(null);
+            Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
         }
         catch (e) {
             if(this.logger != undefined){
@@ -582,9 +481,6 @@ FeedApplet.prototype = {
             }
             global.logError(e);
         }
-        /* Get output from management app */        
-        this._read_manage_app_stdout();
-        this._read_manage_stderr();
     },
 
     on_applet_removed_from_panel: function() {

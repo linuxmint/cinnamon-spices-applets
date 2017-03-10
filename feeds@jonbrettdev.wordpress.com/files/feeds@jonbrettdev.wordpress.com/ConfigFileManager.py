@@ -121,6 +121,12 @@ class ConfigFileManager:
         # Not found (might indicate bigger issues?)
         return -1
 
+    def get_instance(self):
+        """
+            Returns the current selected instance name
+        """
+        return self.__instance_selected
+
 
     def save(self):        
         """ 

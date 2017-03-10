@@ -3,7 +3,7 @@
     "url": "jonbrettdev.wordpress.com", 
     "dangerous": false, 
     "name": "Feeds Reader", 
-    "max-instances": "1", 
+    "max-instances": "5", 
     "original-authors": [
         "Jonathan Brett <jonbrett.dev@gmail.com>", 
         "Niklas Meinzer <lamouletrescool@gmail.com>", 

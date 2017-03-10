@@ -320,7 +320,8 @@ class MainWindow(Gtk.Window):
     def save_clicked(self, button):
         """ When the user clicks apply we update and save the json file to disk """
         try:
-            config.save()
+            config.save()            
+            print(self.config.get_instance())
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
