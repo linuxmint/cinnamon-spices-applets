@@ -71,7 +71,11 @@ class MainWindow(Gtk.Window):
         render = Gtk.CellRendererText()
         self.instance_combo.pack_start(render, True)
         self.instance_combo.set_model(self.config.instances)
-        self.instance_combo.set_active(0)
+        
+        
+        self.instance_combo.set_active(self.config.get_instance_id())
+        
+        
         self.instance_combo.set_id_column(0)
         self.instance_combo.add_attribute(render, "text", 1)
         self.instance_combo.connect('changed', self.change_instance)

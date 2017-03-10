@@ -127,6 +127,12 @@ class ConfigFileManager:
         """
         return self.__instance_selected
 
+    def get_instance_id(self):
+        for id, row in enumerate(self.instances):
+            if row[0] == self.__instance_selected:
+                return id        
+        # Not found (might indicate bigger issues?)
+        return -1
 
     def save(self):        
         """ 
