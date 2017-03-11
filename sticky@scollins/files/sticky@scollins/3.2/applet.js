@@ -318,7 +318,9 @@ NoteBase.prototype = {
     },
 
     _onDragEnd: function() {
-        Main.popModal(this.actor, global.get_current_time());
+        if ( Main._findModal(this.actor) != -1 ) {
+            Main.popModal(this.actor, global.get_current_time());
+        }
         if ( this.previousMode ) {
             global.set_stage_input_mode(this.previousMode);
             this.previousMode = null;
