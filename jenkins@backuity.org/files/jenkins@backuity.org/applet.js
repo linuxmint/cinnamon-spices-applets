@@ -371,7 +371,7 @@ Helpers.prototype = {
         } else if (this.isColorDisabled(color)) {
             return 'jenkins-grey'
         } else if (this.isColorAborted(color)) {
-            return 'jenkins-grey'
+            return 'jenkins-abort'
         } else { // unknown status
             return 'jenkins-grey'
         }
