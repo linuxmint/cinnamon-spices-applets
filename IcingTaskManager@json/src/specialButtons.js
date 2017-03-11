@@ -468,7 +468,7 @@ AppButton.prototype = {
     })
     global.__settings.disconnect(this.panelEditId)
     try {
-      this._container.destroy_children()  
+      this._container.destroy_children()
     } catch (e) {}
     this._container.destroy()
     this.actor.destroy()

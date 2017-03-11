@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.20\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 18:54+0100\n"
-"PO-Revision-Date: 2017-02-26 19:12+0100\n"
+"POT-Creation-Date: 2017-03-07 16:31-0300\n"
+"PO-Revision-Date: 2017-03-07 16:31-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -20,6 +20,90 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#. 3.2->settings-schema.json->page_menu->title
+#: applet.js:138 3.2/applet.js:138
+msgid "Menu"
+msgstr "Izbornik"
+
+#: applet.js:226 applet.js:598 3.2/applet.js:226 3.2/applet.js:598
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Ukloni '%s'"
+
+#: applet.js:1847 3.2/applet.js:1847
+msgid "This file is no longer available"
+msgstr "Ova datoteka više nije dostupna"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:1895 3.2/applet.js:1895
+msgid "No recent documents"
+msgstr "Nema nedavnih dokumenata"
+
+#: applet.js:2025 3.2/applet.js:2025
+msgid "No recent applications"
+msgstr "Nema nedavnih aplikacija"
+
+#: applet.js:2116 3.2/applet.js:2116
+msgid "Favorites"
+msgstr "Omiljeni"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2525 applet.js:3217 3.2/applet.js:2525 3.2/applet.js:3217
+msgid "Lock screen"
+msgstr "Zaključaj zaslon"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2528 applet.js:3216 3.2/applet.js:2528 3.2/applet.js:3216
+msgid "Lock the screen"
+msgstr "Zaključaj zaslon"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2562 applet.js:3248 3.2/applet.js:2562 3.2/applet.js:3248
+msgid "Logout"
+msgstr "Odjava"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2565 applet.js:3247 3.2/applet.js:2565 3.2/applet.js:3247
+msgid "Leave the session"
+msgstr "Odjavite sesiju"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2586 applet.js:3266 3.2/applet.js:2586 3.2/applet.js:3266
+msgid "Quit"
+msgstr "Isključi"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2589 applet.js:3265 3.2/applet.js:2589 3.2/applet.js:3265
+msgid "Shutdown the computer"
+msgstr "Isključite računalo"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:2894 3.2/applet.js:2894
+msgid "Type to search..."
+msgstr "Upišite za pretragu..."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:3284 3.2/applet.js:3284
+msgid "Open the menu editor"
+msgstr "Otvori uređivač izbornika"
+
+#: applet.js:3289 3.2/applet.js:3289
+msgid "Help"
+msgstr "Pomoć"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:266
 msgid "Please provide your password to uninstall this application"
 msgstr "Upišite vašu lozinku za deinstalaciju ove aplikacije"
@@ -40,6 +124,8 @@ msgstr "Dodaj na radnu površinu"
 msgid "Add this application to the Desktop."
 msgstr "Dodajte ovu aplikaciju na radnu površinu."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:562
 msgid "Remove from favorites"
 msgstr "Ukloni iz omiljenih"
@@ -48,6 +134,8 @@ msgstr "Ukloni iz omiljenih"
 msgid "Remove application from your favorites."
 msgstr "Uklonite ovu aplikaciju iz omiljenih."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:571
 msgid "Add to favorites"
 msgstr "Dodaj u omiljeno"
@@ -56,6 +144,8 @@ msgstr "Dodaj u omiljeno"
 msgid "Add application to your favorites."
 msgstr "Dodajte ovu aplikaciju u omiljeno."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:584
 msgid "Uninstall"
 msgstr "Deinstaliraj"
@@ -64,6 +154,8 @@ msgstr "Deinstaliraj"
 msgid "Uninstall application from your system."
 msgstr "Deinstalirajte aplikaciju s vašeg susatva."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:596
 msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
@@ -112,26 +204,38 @@ msgstr "Pokreni aplikaciju u terminalu kao korijenski korisnik"
 msgid "Run application from a terminal as root."
 msgstr "Pokrenite aplikaciju u terminalu kao korijenski korisnik."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1169
 msgid "Open with"
 msgstr "Otvori s"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1220
 msgid "Other application..."
 msgstr "Ostale aplikacije..."
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1315 0dyseus@CustomCinnamonMenu.js:1366
 msgid "Clear list"
 msgstr "Obriši popis"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1447
 msgid "All Applications"
 msgstr "Sve aplikacije"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1495
 msgid "Places"
 msgstr "Lokacije"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:1537
 msgid "Recent Files"
 msgstr "Nedavne datoteke"
@@ -140,71 +244,11 @@ msgstr "Nedavne datoteke"
 msgid "Recent Applications"
 msgstr "Nedavne aplikacije"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: 0dyseus@CustomCinnamonMenu.js:2070
 msgid "Account details"
 msgstr "Pojedinosti računa"
-
-#. 3.2->settings-schema.json->page_menu->title
-#: applet.js:138
-msgid "Menu"
-msgstr "Izbornik"
-
-#: applet.js:226 applet.js:598
-#, c-format
-msgid "Remove '%s'"
-msgstr "Ukloni '%s'"
-
-#: applet.js:1847
-msgid "This file is no longer available"
-msgstr "Ova datoteka više nije dostupna"
-
-#: applet.js:1895
-msgid "No recent documents"
-msgstr "Nema nedavnih dokumenata"
-
-#: applet.js:2025
-msgid "No recent applications"
-msgstr "Nema nedavnih aplikacija"
-
-#: applet.js:2116
-msgid "Favorites"
-msgstr "Omiljeni"
-
-#: applet.js:2525 applet.js:3217
-msgid "Lock screen"
-msgstr "Zaključaj zaslon"
-
-#: applet.js:2528 applet.js:3216
-msgid "Lock the screen"
-msgstr "Zaključaj zaslon"
-
-#: applet.js:2562 applet.js:3248
-msgid "Logout"
-msgstr "Odjava"
-
-#: applet.js:2565 applet.js:3247
-msgid "Leave the session"
-msgstr "Odjavite sesiju"
-
-#: applet.js:2586 applet.js:3266
-msgid "Quit"
-msgstr "Isključi"
-
-#: applet.js:2589 applet.js:3265
-msgid "Shutdown the computer"
-msgstr "Isključite računalo"
-
-#: applet.js:2894
-msgid "Type to search..."
-msgstr "Upišite za pretragu..."
-
-#: applet.js:3284
-msgid "Open the menu editor"
-msgstr "Otvori uređivač izbornika"
-
-#: applet.js:3289
-msgid "Help"
-msgstr "Pomoć"
 
 #. 3.2->settings-schema.json->pref_recent_apps_ignore_favorites->description
 #. 0dyseus@CustomCinnamonMenu->settings-
@@ -1709,6 +1753,18 @@ msgstr "Ne prikazuj"
 msgid "Right of applications info box"
 msgstr "Desno od okvira informacije aplikacija"
 
+#. 0dyseus@CustomCinnamonMenu->metadata.json->description
+msgid ""
+"Custom version of the default Cinnamon Menu applet, but infinitely more "
+"customizable."
+msgstr ""
+"Prilagođena inačica zadanog apleta Cinnamon izbornika, ali neizmjerno više "
+"prilagodljiva."
+
+#. 0dyseus@CustomCinnamonMenu->metadata.json->name
+msgid "Custom Cinnamon Menu"
+msgstr "Prilagođeni Cinnamon izbornik"
+
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head22->description
 msgid "Placement of main elements on menu"
 msgstr "Smještaj glavnih elemenata izbornika"
@@ -1771,44 +1827,27 @@ msgstr ""
 "U suprotnome, datoteka će se otvoriti aplikacijom zadanom sustavom za tu "
 "vrstu datoteke."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->description
-msgid ""
-"Custom version of the default Cinnamon Menu applet, but infinitely more "
-"customizable."
-msgstr ""
-"Prilagođena inačica zadanog apleta Cinnamon izbornika, ali neizmjerno više "
-"prilagodljiva."
+#~ msgid "NikoKrause: Bug fixes and German localization."
+#~ msgstr "NikoKrause: popravci grešaka i njemačka lokalizacija."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
-msgid "NikoKrause: Bug fixes and German localization."
-msgstr "NikoKrause: popravci grešaka i njemačka lokalizacija."
+#~ msgid "Radek71: Czech localization."
+#~ msgstr "Radek71: Češka lokalizacija."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
-msgid "Radek71: Czech localization."
-msgstr "Radek71: Češka lokalizacija."
+#~ msgid "lestcape: Author of some advanced features used by this applet."
+#~ msgstr "lestcape: Autor nekih naprednih značajki ovog apleta."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
-msgid "lestcape: Author of some advanced features used by this applet."
-msgstr "lestcape: Autor nekih naprednih značajki ovog apleta."
+#~ msgid "nooulaif: Fuzzy search feature based on his Sane Menu applet."
+#~ msgstr ""
+#~ "nooulaif: Značajka nejasne pretrage temeljena na njegovom Sane Menu "
+#~ "apletu."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
-msgid "nooulaif: Fuzzy search feature based on his Sane Menu applet."
-msgstr ""
-"nooulaif: Značajka nejasne pretrage temeljena na njegovom Sane Menu apletu."
+#~ msgid "Daniel Bruce: Some icons used by this menu are from www.entypo.com."
+#~ msgstr ""
+#~ "Daniel Bruce: Neke ikone koje koristi ovaj izbornik su sa www.entypo.com."
 
-#. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
-msgid "Daniel Bruce: Some icons used by this menu are from www.entypo.com."
-msgstr ""
-"Daniel Bruce: Neke ikone koje koristi ovaj izbornik su sa www.entypo.com."
-
-#. 0dyseus@CustomCinnamonMenu->metadata.json->comments
-msgid ""
-"Bug reports and feature requests should be reported on this applet's "
-"repository linked below."
-msgstr ""
-"Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na "
-"poveznici repozitorija ovog apleta."
-
-#. 0dyseus@CustomCinnamonMenu->metadata.json->name
-msgid "Custom Cinnamon Menu"
-msgstr "Prilagođeni Cinnamon izbornik"
+#~ msgid ""
+#~ "Bug reports and feature requests should be reported on this applet's "
+#~ "repository linked below."
+#~ msgstr ""
+#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
+#~ "na poveznici repozitorija ovog apleta."

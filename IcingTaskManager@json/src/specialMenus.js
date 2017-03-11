@@ -231,7 +231,7 @@ AppMenuButtonRightClickMenu.prototype = {
             }
           } catch (e) {}
         }
-        this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); 
+        this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
 
       /*
@@ -399,7 +399,7 @@ AppMenuButtonRightClickMenu.prototype = {
         item.connect('activate', Lang.bind(this, function() {
           _.each(this.metaWindows, (metaWindow)=>{
             if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time);
+              metaWindow.win.delete(global.get_current_time());
             }
           })
         }));
@@ -411,7 +411,7 @@ AppMenuButtonRightClickMenu.prototype = {
         item.connect('activate', Lang.bind(this, function() {
           _.each(this.metaWindows, (metaWindow)=>{
             if (!metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time);
+              metaWindow.win.delete(global.get_current_time());
             }
           })
         }));
@@ -808,7 +808,7 @@ PopupMenuAppSwitcherItem.prototype = {
       this.removeStaleWindowThumbnails(windows)
     }
     return isPinned
-    
+
   },
 
   _refresh: function (refreshThumbnails=null) {
@@ -830,7 +830,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.addWindowThumbnails(windows)
     // Update appThumbnails to remove old programs
     this.removeStaleWindowThumbnails(windows)
-    // Set to true to readd the thumbnails; used for the sorting by last focused 
+    // Set to true to readd the thumbnails; used for the sorting by last focused
     this.reAdd = false
     // used to make sure everything is on the stage
     setTimeout(()=>this.setStyleOptions(windows), 0)
@@ -901,7 +901,7 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   removeStaleWindowThumbnails: function (windows) {
-    for (let i = 0, len = this.appThumbnails.length; i < len; i++) {  
+    for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
       if (this.appThumbnails[i] !== undefined && windows.indexOf(this.appThumbnails[i].metaWindow) === -1) {
         if (this.appThumbnails[i].thumbnail) {
           this.appContainer.remove_actor(this.appThumbnails[i].thumbnail.actor)
@@ -1190,7 +1190,7 @@ WindowThumbnail.prototype = {
     this.stopClick = true
     this.destroy()
     this._hoverPeek(OPACITY_OPAQUE, this.metaWindow, false)
-    
+
     this.metaWindow.delete(global.get_current_time())
     if (this.metaWindows.length === 1) {
       this.appSwitcherItem.hoverMenu.close()
@@ -1243,7 +1243,7 @@ WindowThumbnail.prototype = {
       }
 
       if ((thumbnailSize * metaWindows.length) + thumbnailSize > monitorSize) {
-        let divideMultiplier = this._applet.verticalThumbs ? 3 : 1.1   
+        let divideMultiplier = this._applet.verticalThumbs ? 3 : 1.1
         setThumbSize(divider * divideMultiplier, 16)
         return
       } else {
@@ -1254,7 +1254,7 @@ WindowThumbnail.prototype = {
         }
         this.thumbnailActor.width = this.thumbnailWidth
         this._container.style = 'width: ' + Math.floor(this.thumbnailWidth - 16) + 'px'
-        
+
         this.isFavapp = false
 
         // Replace the old thumbnail

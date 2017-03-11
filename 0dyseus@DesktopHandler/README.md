@@ -37,4 +37,8 @@ This applet is based on [Smart Panel](https://cinnamon-spices.linuxmint.com/exte
 - Left/Middle/Right click on applet can be configured to open the windows list menu.
 - Desktop peek functionality with configurable levels of opacity.
 
+## Contributors
+
+- [muzena](https://github.com/muzena): Croatian localization.
+
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40DesktopHandler/CHANGELOG.md)

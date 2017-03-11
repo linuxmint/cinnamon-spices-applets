@@ -410,7 +410,10 @@ CinnamenuButton.prototype = {
     // From clutter documentation:
     // If the actor is inside a container, the actor will be removed.
     // When you destroy a container, its children will be destroyed as well.
+    this.cinnamenuPanel.destroy();
+    this.menu.destroy();
     this.actor.destroy();
+    this.emit('destroy');
   }
 
 };

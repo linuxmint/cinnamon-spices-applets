@@ -60,6 +60,7 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 ## Contributors/Mentions
 - [NikoKrause](https://github.com/NikoKrause): Bug fixes and German localization.
 - [Radek71](https://github.com/Radek71): Czech localization.
+- [muzena](https://github.com/muzena): Croatian localization.
 - Some advanced features on this applet are based on [lestcape](https://github.com/lestcape)'s [Configurable Menu applet](https://github.com/lestcape/Configurable-Menu).
 - Fuzzy search feature based on [Sane Menu](https://cinnamon-spices.linuxmint.com/applets/view/258) applet by [nooulaif](https://github.com/nooulaif).
 - Some icons used by this menu are from [Entypo pictograms](www.entypo.com) by Daniel Bruce.

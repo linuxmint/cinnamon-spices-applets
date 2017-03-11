@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@PopupTranslator 1.04\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 19:29+0100\n"
-"PO-Revision-Date: 2017-02-26 20:06+0100\n"
+"POT-Creation-Date: 2017-03-07 16:27-0300\n"
+"PO-Revision-Date: 2017-03-07 16:27-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -19,67 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: 0dyseus@PopupTranslator.js:246
-msgid "Copy translated text to clipboard"
-msgstr "Kopiraj prevedeni tekst u međuspremnik"
-
-#: 0dyseus@PopupTranslator.js:252
-msgid "Translate text on provider's website"
-msgstr "Prevedi tekst na web stranici pružatelja usluge"
-
-#: 0dyseus@PopupTranslator.js:258
-msgid "Open translation history"
-msgstr "Otvori povijest prevođenja"
-
-#. 3.2->settings-schema.json->pref_source_lang_4->description
-#. 3.2->settings-schema.json->pref_source_lang_3->description
-#. 3.2->settings-schema.json->pref_source_lang_2->description
-#. 3.2->settings-schema.json->pref_source_lang_1->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_source_lang_3->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_source_lang_2->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_source_lang_1->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_source_lang_4->description
-#: applet.js:120
+#: applet.js:120 3.2/applet.js:120
 msgid "Source language"
 msgstr "Jezik izvora"
 
-#. 3.2->settings-schema.json->pref_target_lang_3->description
-#. 3.2->settings-schema.json->pref_target_lang_2->description
-#. 3.2->settings-schema.json->pref_target_lang_1->description
-#. 3.2->settings-schema.json->pref_target_lang_4->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_target_lang_3->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_target_lang_2->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_target_lang_1->description
-#. 0dyseus@PopupTranslator->settings-
-#. schema.json->pref_target_lang_4->description
-#: applet.js:121
+#: applet.js:121 3.2/applet.js:121
 msgid "Target language"
 msgstr "Jezik prevođenja"
 
-#. 3.2->settings-schema.json->pref_target_lang_3->tooltip
-#. 3.2->settings-schema.json->pref_target_lang_2->tooltip
-#. 3.2->settings-schema.json->pref_target_lang_1->tooltip
-#. 3.2->settings-schema.json->pref_target_lang_4->tooltip
-#. 3.2->settings-schema.json->pref_source_lang_4->tooltip
-#. 3.2->settings-schema.json->pref_source_lang_3->tooltip
-#. 3.2->settings-schema.json->pref_source_lang_2->tooltip
-#. 3.2->settings-schema.json->pref_source_lang_1->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->tooltip
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->tooltip
-#: applet.js:122
+#: applet.js:122 3.2/applet.js:122
 msgid ""
 "(G) = Language supported only by Google Translate.\n"
 "(Y) = Language supported only by Yandex Translate."
@@ -89,25 +37,25 @@ msgstr ""
 
 #. 3.2->settings-schema.json->section_first_mechanism->title
 #. 0dyseus@PopupTranslator->settings-schema.json->head_1->description
-#: applet.js:188
+#: applet.js:188 3.2/applet.js:188
 msgid "First translation mechanism (Left click on applet)"
 msgstr "Prvi prevoditeljski mehanizam (Lijevi klik na aplet)"
 
 #. 3.2->settings-schema.json->section_second_mechanism->title
 #. 0dyseus@PopupTranslator->settings-schema.json->head_2->description
-#: applet.js:192
+#: applet.js:192 3.2/applet.js:192
 msgid "Second translation mechanism (Middle click on applet)"
 msgstr "Drugi prevoditeljski mehanizam (Srednji klik na aplet)"
 
 #. 3.2->settings-schema.json->section_third_mechanism->title
 #. 0dyseus@PopupTranslator->settings-schema.json->head_3->description
-#: applet.js:198
+#: applet.js:198 3.2/applet.js:198
 msgid "Third translation mechanism (Hotkey #1)"
 msgstr "Treći prevoditeljski mehanizam (Tipka prečaca 1)"
 
 #. 3.2->settings-schema.json->section_fourth_mechanism->title
 #. 0dyseus@PopupTranslator->settings-schema.json->head_4->description
-#: applet.js:204
+#: applet.js:204 3.2/applet.js:204
 msgid "Fourth translation mechanism (Hotkey #2)"
 msgstr "Četvrti prevoditeljski mehanizam (Tipka prečaca 2)"
 
@@ -123,145 +71,175 @@ msgstr "Četvrti prevoditeljski mehanizam (Tipka prečaca 2)"
 #. schema.json->pref_service_provider_1->description
 #. 0dyseus@PopupTranslator->settings-
 #. schema.json->pref_service_provider_4->description
-#: applet.js:209
+#: applet.js:209 3.2/applet.js:209
 msgid "Service provider"
 msgstr "Pružatelj usluge"
 
-#: applet.js:211
+#: applet.js:211 3.2/applet.js:211 appletHelper.py:347
 msgid "Language pair"
 msgstr "Jezični par"
 
-#: applet.js:218
+#: applet.js:218 3.2/applet.js:218
 msgid "Translation hotkey"
 msgstr "Prečac tipkovnice prevođenja"
 
-#: applet.js:226
+#: applet.js:226 3.2/applet.js:226
 msgid "Force translation hotkey"
 msgstr "Prisilni prečac tipkovnice prevođenja"
 
-#: applet.js:234 applet.js:995 applet.js:1019
+#: applet.js:234 applet.js:995 applet.js:1019 3.2/applet.js:234
+#: 3.2/applet.js:995 3.2/applet.js:1019
 msgid "Unmet dependencies found!!!"
 msgstr "Nerazrješive zavisnosti pronađene!!!"
 
-#: applet.js:235 applet.js:877 applet.js:996
+#: applet.js:235 applet.js:877 applet.js:996 3.2/applet.js:235
+#: 3.2/applet.js:877 3.2/applet.js:996
 msgid "A detailed error has been logged into ~/.cinnamon/glass.log file."
 msgstr "Opširniji zapis greške je zapisan u ~/.cinnamon/glass.log datoteku."
 
-#: applet.js:277
+#: applet.js:277 3.2/applet.js:277
 msgid "Left click on applet"
 msgstr "Lijevi klik na aplet"
 
-#: applet.js:280
+#: applet.js:280 3.2/applet.js:280
 msgid "Middle click on applet"
 msgstr "Srednji klik na aplet"
 
-#: applet.js:283
+#: applet.js:283 3.2/applet.js:283
 msgid "Hotkey #1"
 msgstr "Tipka prečaca 1"
 
-#: applet.js:286
+#: applet.js:286 3.2/applet.js:286
 msgid "Hotkey #2"
 msgstr "Tipka prečaca 2"
 
-#: applet.js:299 applet.js:310
-#, c-format
+#: applet.js:299 applet.js:310 3.2/applet.js:299 3.2/applet.js:310
+#, javascript-format
 msgid "Set %s as default translation engine."
 msgstr "Postavi %s kao zadani prevoditeljski pogon."
 
-#: applet.js:329
+#: applet.js:329 3.2/applet.js:329
 msgid "Applet extras"
 msgstr "Dodatne mogućnosti"
 
-#: applet.js:333
+#: applet.js:333 3.2/applet.js:333
 msgid "Translation history"
 msgstr "Povijest prevođenja"
 
-#: applet.js:339
+#: applet.js:339 3.2/applet.js:339
 msgid "Open translation history window."
 msgstr "Otvori prozor povijesti prevođenja."
 
-#: applet.js:351
+#: applet.js:351 3.2/applet.js:351
 msgid "History storage"
 msgstr "Lokacija pohrane povijesti"
 
-#: applet.js:357
+#: applet.js:357 3.2/applet.js:357
 msgid "Open the location where the translation history file is stored."
 msgstr "Otvori lokaciju gdje je povijest prevođenja pohranjena."
 
-#: applet.js:365
+#: applet.js:365 3.2/applet.js:365
 msgid "Check dependencies"
 msgstr "Provjeri zavisnosti"
 
-#: applet.js:371
+#: applet.js:371 3.2/applet.js:371
 msgid "Check whether the dependencies for this applet are met."
 msgstr "Provjerite jesu li zadovljene zavisnosti za ovaj aplet."
 
-#: applet.js:379
+#: applet.js:379 3.2/applet.js:379
 msgid "Help"
 msgstr "Pomoć"
 
-#: applet.js:385
+#: applet.js:385 3.2/applet.js:385
 msgid "Open this applet help file."
 msgstr "Otvori datoteku pomoći ovog apleta."
 
-#: applet.js:512
+#: applet.js:512 3.2/applet.js:512
 msgid "History"
 msgstr "Povijest"
 
-#: applet.js:528
-#, c-format
+#: applet.js:528 3.2/applet.js:528
+#, javascript-format
 msgid "Go to %s's website"
 msgstr "Idi na %s web stranicu"
 
-#: applet.js:530
-#, c-format
+#: applet.js:530 3.2/applet.js:530
+#, javascript-format
 msgid "Powered By %s"
 msgstr "Pogoni %s"
 
-#: applet.js:636
+#: applet.js:636 3.2/applet.js:636
 msgid "No Yandex API keys were found!!!"
 msgstr "Nisu pronađeni Yandex API ključevi!!!"
 
-#: applet.js:637 applet.js:1021
+#: applet.js:637 applet.js:1021 3.2/applet.js:637 3.2/applet.js:1021
 msgid "Check this applet help file for instructions."
 msgstr "Provjerite datoteku pomoći ovog apleta za daljnje upute."
 
-#: applet.js:638 applet.js:1022
+#: applet.js:638 applet.js:1022 3.2/applet.js:638 3.2/applet.js:1022
 msgid "It can be accessed from this applet context menu."
 msgstr "Može se pristupiti iz izbornika ovog apleta."
 
-#: applet.js:704
+#: applet.js:704 3.2/applet.js:704
 msgid "API key is invalid"
 msgstr "API ključ je pogrešan"
 
-#: applet.js:707
+#: applet.js:707 3.2/applet.js:707
 msgid "Blocked API key"
 msgstr "Blokiran API ključ"
 
-#: applet.js:710
+#: applet.js:710 3.2/applet.js:710
 msgid "Exceeded the daily limit on the amount of translated text"
 msgstr "Premašeno dnevno ograničenje količine prevedenog teksta"
 
-#: applet.js:713
+#: applet.js:713 3.2/applet.js:713
 msgid "Exceeded the maximum text size"
 msgstr "Premašena najveća veličina teksta"
 
-#: applet.js:716
+#: applet.js:716 3.2/applet.js:716
 msgid "The text cannot be translated"
 msgstr "Tekst ne može biti preveden"
 
-#: applet.js:719
+#: applet.js:719 3.2/applet.js:719
 msgid "The specified translation direction is not supported"
 msgstr "Navedeni smjer prevođenja nije podržan"
 
-#: applet.js:876
-#, c-format
+#: applet.js:876 3.2/applet.js:876
+#, javascript-format
 msgid "Error parsing %s's request."
 msgstr "Greška obrade %s's zahtjeva."
 
-#: applet.js:1028
+#: applet.js:1028 3.2/applet.js:1028
 msgid "All dependencies seem to be met."
 msgstr "Sve zavisnosti su zadovljene."
+
+#: 0dyseus@PopupTranslator.js:246
+msgid "Copy translated text to clipboard"
+msgstr "Kopiraj prevedeni tekst u međuspremnik"
+
+#: 0dyseus@PopupTranslator.js:252
+msgid "Translate text on provider's website"
+msgstr "Prevedi tekst na web stranici pružatelja usluge"
+
+#: 0dyseus@PopupTranslator.js:258
+msgid "Open translation history"
+msgstr "Otvori povijest prevođenja"
+
+#: appletHelper.py:310
+msgid "Popup Translator history"
+msgstr "Prozor povijesti prevođenja"
+
+#: appletHelper.py:334
+msgid "Date"
+msgstr "Datum"
+
+#: appletHelper.py:342
+msgid "Source text"
+msgstr "Tekst izvora"
+
+#: appletHelper.py:355
+msgid "Target text"
+msgstr "Tekst prijevoda"
 
 #. 3.2->settings-schema.json->pref_custom_label_for_applet->description
 #. 0dyseus@PopupTranslator->settings-
@@ -325,2001 +303,6 @@ msgstr "Prečac tipkovnice za izvođenje prijevoda"
 msgid "Choose a keybinding to perform a translation."
 msgstr "Odaberite kombinaciju tipki za izvođenje prevođenja."
 
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Estonian"
-msgstr "Estonski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Filipino (G)"
-msgstr "Filipinski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Gujarati (G)"
-msgstr "Gudžaratski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Kurdish (Kurmanji) (G)"
-msgstr "Kurdski (Kurmanji) (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Lao (G)"
-msgstr "Laoski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Kazakh (G)"
-msgstr "Kazaški (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Bulgarian"
-msgstr "Bugarski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Khmer (G)"
-msgstr "Kmerski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "French"
-msgstr "Francuski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Kyrgyz (G)"
-msgstr "Kirgiški (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Armenian"
-msgstr "Armenski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Finnish"
-msgstr "Finski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Frisian (G)"
-msgstr "Frizijski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Albanian"
-msgstr "Albanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Chinese (Y)"
-msgstr "Kineski (Y)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Haitian Creole"
-msgstr "Haićanski kreolski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Mongolian (G)"
-msgstr "Mongolski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Serbian"
-msgstr "Srpski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Malayalam"
-msgstr "Malajalamski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Italian"
-msgstr "Talijanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Xhosa (G)"
-msgstr "Xhosa (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Afrikaans (G)"
-msgstr "Afrički (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Amharic"
-msgstr "Amharski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "German"
-msgstr "Njemački"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Slovak"
-msgstr "Slovački"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Maori (G)"
-msgstr "Maorski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Urdu"
-msgstr "Urdski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Polish"
-msgstr "Poljski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Swedish"
-msgstr "Švedski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Scots Gaelic (G)"
-msgstr "Škotski galski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Slovenian"
-msgstr "Slovenski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Chinese (G)"
-msgstr "Kineski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Azerbaijani"
-msgstr "Azerbejdžanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Nepali (G)"
-msgstr "Nepalski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Zulu (G)"
-msgstr "Zulu (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Galician (G)"
-msgstr "Galicijski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Danish"
-msgstr "Danski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Indonesian"
-msgstr "Indonezijski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Yiddish (G)"
-msgstr "Jidiš"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Georgian"
-msgstr "Gruzijski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Norwegian"
-msgstr "Norveški"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Chichewa"
-msgstr "Chichewa"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Tamil (G)"
-msgstr "Tamilski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Thai"
-msgstr "Tajlandski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Yoruba (G)"
-msgstr "Jorubški (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Swahili (G)"
-msgstr "Svahiliski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Esperanto (G)"
-msgstr "Esperanto (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Greek"
-msgstr "Grčki"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Latvian"
-msgstr "Letonski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "English"
-msgstr "Engleski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Basque (G)"
-msgstr "Baskijski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Sinhala (G)"
-msgstr "Sinhalski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Sindhi (G)"
-msgstr "Sindski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Uzbek (G)"
-msgstr "Uzbečki (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Punjabi (G)"
-msgstr "Pandžapski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Bosnian (Y)"
-msgstr "Bosanski (Y)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Arabic"
-msgstr "Arapski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hebrew (Y)"
-msgstr "Hebrejski (Y)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Icelandic"
-msgstr "Islandski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Turkish"
-msgstr "Turski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Pashto"
-msgstr "Paštunski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hindi"
-msgstr "Hindski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hmong"
-msgstr "Hmongski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Korean"
-msgstr "Korejski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Malagasy"
-msgstr "Madagaskarski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hungarian"
-msgstr "Mađarski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Catalan"
-msgstr "Katalonski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Igbo"
-msgstr "Igboški"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Lithuanian"
-msgstr "Litavski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Malay"
-msgstr "Malajski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Luxembourgish"
-msgstr "Luksemburški"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Russian"
-msgstr "Ruski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Croatian"
-msgstr "Hrvatski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Cebuano"
-msgstr "Cebuanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Javanese"
-msgstr "Javanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Shona (G)"
-msgstr "Shonaski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hebrew (G)"
-msgstr "Hebrejski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Sesotho (G)"
-msgstr "Sesothoski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Czech"
-msgstr "Češki"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Belarusian"
-msgstr "Bjeloruski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Macedonian"
-msgstr "Makedonski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Persian"
-msgstr "Perzijski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Sundanese (G)"
-msgstr "Sundanski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hausa (G)"
-msgstr "Hauski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Vietnamese"
-msgstr "Vijetnamski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Romanian"
-msgstr "Rumunjski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Somali"
-msgstr "Somalijski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Corsican"
-msgstr "Korzikanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Dutch"
-msgstr "Nizozemski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Ukrainian"
-msgstr "Ukrajinski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Welsh"
-msgstr "Velški"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Samoan (G)"
-msgstr "Samoanski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Maltese"
-msgstr "Malteški"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Telugu (G)"
-msgstr "Teluški (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Myanmar (Burmese) (G)"
-msgstr "Mianmar (Burmanski) (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Spanish"
-msgstr "Španjolski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Marathi (G)"
-msgstr "Marathski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Kannada (G)"
-msgstr "Kanareški (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Tajik (G)"
-msgstr "Tadžički (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Portuguese"
-msgstr "Portugalski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Irish (G)"
-msgstr "Irski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Bengali (G)"
-msgstr "Bengalski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Japanese"
-msgstr "Japanski"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Latin (G)"
-msgstr "Latinski (G)"
-
-#. 3.2->settings-schema.json->pref_target_lang_3->options
-#. 3.2->settings-schema.json->pref_target_lang_2->options
-#. 3.2->settings-schema.json->pref_target_lang_1->options
-#. 3.2->settings-schema.json->pref_target_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_target_lang_4->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Hawaiian (G)"
-msgstr "Havajski (G)"
-
 #. 3.2->settings-schema.json->page_general->title
 msgid "General"
 msgstr "Općenito"
@@ -2370,17 +353,6 @@ msgstr "Indent podaci povijesti prijevoda"
 #. schema.json->pref_loggin_save_history_indented->tooltip
 msgid "It allows to save the translation history data with indentation."
 msgstr "Omogućuje spremanje podataka povijesti prijevoda s indentacijom."
-
-#. 3.2->settings-schema.json->pref_source_lang_4->options
-#. 3.2->settings-schema.json->pref_source_lang_3->options
-#. 3.2->settings-schema.json->pref_source_lang_2->options
-#. 3.2->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_3->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_2->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_1->options
-#. 0dyseus@PopupTranslator->settings-schema.json->pref_source_lang_4->options
-msgid "Auto"
-msgstr "Automatski"
 
 #. 3.2->settings-schema.json->pref_yandex_api_keys->description
 #. 0dyseus@PopupTranslator->settings-
@@ -2593,14 +565,6 @@ msgstr "NikoKrause: Njemačka lokalizacija i prijave grešaka."
 msgid "Radek71: Czech localization and bug reports."
 msgstr "Radek71: Češka lokalizacija i prijave grešaka."
 
-#. 0dyseus@PopupTranslator->metadata.json->description
-msgid ""
-"Simple translator applet that will allow to display any selected text from "
-"any application on a system in a popup."
-msgstr ""
-"Jednostavan aplet za prijevod koji omogućuje prikaz bilo kojeg odabranog "
-"teksta iz bilo koje aplikacije na računalu u skočnom prozoru."
-
 #. 0dyseus@PopupTranslator->metadata.json->comments
 msgid ""
 "Bug reports and feature requests should be reported on this applet's "
@@ -2613,14 +577,328 @@ msgstr ""
 msgid "Popup Translator"
 msgstr "Skočni prozor prevoditelja"
 
-#~ msgid "Popup Translator history"
-#~ msgstr "Prozor povijesti prevođenja"
+#. 0dyseus@PopupTranslator->metadata.json->description
+msgid ""
+"Simple translator applet that will allow to display any selected text from "
+"any application on a system in a popup."
+msgstr ""
+"Jednostavan aplet za prijevod koji omogućuje prikaz bilo kojeg odabranog "
+"teksta iz bilo koje aplikacije na računalu u skočnom prozoru."
 
-#~ msgid "Date"
-#~ msgstr "Datum"
+#~ msgid "Estonian"
+#~ msgstr "Estonski"
 
-#~ msgid "Source text"
-#~ msgstr "Tekst izvora"
+#~ msgid "Filipino (G)"
+#~ msgstr "Filipinski (G)"
 
-#~ msgid "Target text"
-#~ msgstr "Tekst prijevoda"
+#~ msgid "Gujarati (G)"
+#~ msgstr "Gudžaratski (G)"
+
+#~ msgid "Kurdish (Kurmanji) (G)"
+#~ msgstr "Kurdski (Kurmanji) (G)"
+
+#~ msgid "Lao (G)"
+#~ msgstr "Laoski (G)"
+
+#~ msgid "Kazakh (G)"
+#~ msgstr "Kazaški (G)"
+
+#~ msgid "Bulgarian"
+#~ msgstr "Bugarski"
+
+#~ msgid "Khmer (G)"
+#~ msgstr "Kmerski (G)"
+
+#~ msgid "French"
+#~ msgstr "Francuski"
+
+#~ msgid "Kyrgyz (G)"
+#~ msgstr "Kirgiški (G)"
+
+#~ msgid "Armenian"
+#~ msgstr "Armenski"
+
+#~ msgid "Finnish"
+#~ msgstr "Finski"
+
+#~ msgid "Frisian (G)"
+#~ msgstr "Frizijski (G)"
+
+#~ msgid "Albanian"
+#~ msgstr "Albanski"
+
+#~ msgid "Chinese (Y)"
+#~ msgstr "Kineski (Y)"
+
+#~ msgid "Haitian Creole"
+#~ msgstr "Haićanski kreolski"
+
+#~ msgid "Mongolian (G)"
+#~ msgstr "Mongolski (G)"
+
+#~ msgid "Serbian"
+#~ msgstr "Srpski"
+
+#~ msgid "Malayalam"
+#~ msgstr "Malajalamski"
+
+#~ msgid "Italian"
+#~ msgstr "Talijanski"
+
+#~ msgid "Xhosa (G)"
+#~ msgstr "Xhosa (G)"
+
+#~ msgid "Afrikaans (G)"
+#~ msgstr "Afrički (G)"
+
+#~ msgid "Amharic"
+#~ msgstr "Amharski"
+
+#~ msgid "German"
+#~ msgstr "Njemački"
+
+#~ msgid "Slovak"
+#~ msgstr "Slovački"
+
+#~ msgid "Maori (G)"
+#~ msgstr "Maorski (G)"
+
+#~ msgid "Urdu"
+#~ msgstr "Urdski"
+
+#~ msgid "Polish"
+#~ msgstr "Poljski"
+
+#~ msgid "Swedish"
+#~ msgstr "Švedski"
+
+#~ msgid "Scots Gaelic (G)"
+#~ msgstr "Škotski galski (G)"
+
+#~ msgid "Slovenian"
+#~ msgstr "Slovenski"
+
+#~ msgid "Chinese (G)"
+#~ msgstr "Kineski (G)"
+
+#~ msgid "Azerbaijani"
+#~ msgstr "Azerbejdžanski"
+
+#~ msgid "Nepali (G)"
+#~ msgstr "Nepalski (G)"
+
+#~ msgid "Zulu (G)"
+#~ msgstr "Zulu (G)"
+
+#~ msgid "Galician (G)"
+#~ msgstr "Galicijski (G)"
+
+#~ msgid "Danish"
+#~ msgstr "Danski"
+
+#~ msgid "Indonesian"
+#~ msgstr "Indonezijski"
+
+#~ msgid "Yiddish (G)"
+#~ msgstr "Jidiš"
+
+#~ msgid "Georgian"
+#~ msgstr "Gruzijski"
+
+#~ msgid "Norwegian"
+#~ msgstr "Norveški"
+
+#~ msgid "Chichewa"
+#~ msgstr "Chichewa"
+
+#~ msgid "Tamil (G)"
+#~ msgstr "Tamilski (G)"
+
+#~ msgid "Thai"
+#~ msgstr "Tajlandski"
+
+#~ msgid "Yoruba (G)"
+#~ msgstr "Jorubški (G)"
+
+#~ msgid "Swahili (G)"
+#~ msgstr "Svahiliski (G)"
+
+#~ msgid "Esperanto (G)"
+#~ msgstr "Esperanto (G)"
+
+#~ msgid "Greek"
+#~ msgstr "Grčki"
+
+#~ msgid "Latvian"
+#~ msgstr "Letonski"
+
+#~ msgid "English"
+#~ msgstr "Engleski"
+
+#~ msgid "Basque (G)"
+#~ msgstr "Baskijski (G)"
+
+#~ msgid "Sinhala (G)"
+#~ msgstr "Sinhalski (G)"
+
+#~ msgid "Sindhi (G)"
+#~ msgstr "Sindski (G)"
+
+#~ msgid "Uzbek (G)"
+#~ msgstr "Uzbečki (G)"
+
+#~ msgid "Punjabi (G)"
+#~ msgstr "Pandžapski (G)"
+
+#~ msgid "Bosnian (Y)"
+#~ msgstr "Bosanski (Y)"
+
+#~ msgid "Arabic"
+#~ msgstr "Arapski"
+
+#~ msgid "Hebrew (Y)"
+#~ msgstr "Hebrejski (Y)"
+
+#~ msgid "Icelandic"
+#~ msgstr "Islandski"
+
+#~ msgid "Turkish"
+#~ msgstr "Turski"
+
+#~ msgid "Pashto"
+#~ msgstr "Paštunski"
+
+#~ msgid "Hindi"
+#~ msgstr "Hindski"
+
+#~ msgid "Hmong"
+#~ msgstr "Hmongski"
+
+#~ msgid "Korean"
+#~ msgstr "Korejski"
+
+#~ msgid "Malagasy"
+#~ msgstr "Madagaskarski"
+
+#~ msgid "Hungarian"
+#~ msgstr "Mađarski"
+
+#~ msgid "Catalan"
+#~ msgstr "Katalonski"
+
+#~ msgid "Igbo"
+#~ msgstr "Igboški"
+
+#~ msgid "Lithuanian"
+#~ msgstr "Litavski"
+
+#~ msgid "Malay"
+#~ msgstr "Malajski"
+
+#~ msgid "Luxembourgish"
+#~ msgstr "Luksemburški"
+
+#~ msgid "Russian"
+#~ msgstr "Ruski"
+
+#~ msgid "Croatian"
+#~ msgstr "Hrvatski"
+
+#~ msgid "Cebuano"
+#~ msgstr "Cebuanski"
+
+#~ msgid "Javanese"
+#~ msgstr "Javanski"
+
+#~ msgid "Shona (G)"
+#~ msgstr "Shonaski (G)"
+
+#~ msgid "Hebrew (G)"
+#~ msgstr "Hebrejski (G)"
+
+#~ msgid "Sesotho (G)"
+#~ msgstr "Sesothoski (G)"
+
+#~ msgid "Czech"
+#~ msgstr "Češki"
+
+#~ msgid "Belarusian"
+#~ msgstr "Bjeloruski"
+
+#~ msgid "Macedonian"
+#~ msgstr "Makedonski"
+
+#~ msgid "Persian"
+#~ msgstr "Perzijski"
+
+#~ msgid "Sundanese (G)"
+#~ msgstr "Sundanski (G)"
+
+#~ msgid "Hausa (G)"
+#~ msgstr "Hauski (G)"
+
+#~ msgid "Vietnamese"
+#~ msgstr "Vijetnamski"
+
+#~ msgid "Romanian"
+#~ msgstr "Rumunjski"
+
+#~ msgid "Somali"
+#~ msgstr "Somalijski"
+
+#~ msgid "Corsican"
+#~ msgstr "Korzikanski"
+
+#~ msgid "Dutch"
+#~ msgstr "Nizozemski"
+
+#~ msgid "Ukrainian"
+#~ msgstr "Ukrajinski"
+
+#~ msgid "Welsh"
+#~ msgstr "Velški"
+
+#~ msgid "Samoan (G)"
+#~ msgstr "Samoanski (G)"
+
+#~ msgid "Maltese"
+#~ msgstr "Malteški"
+
+#~ msgid "Telugu (G)"
+#~ msgstr "Teluški (G)"
+
+#~ msgid "Myanmar (Burmese) (G)"
+#~ msgstr "Mianmar (Burmanski) (G)"
+
+#~ msgid "Spanish"
+#~ msgstr "Španjolski"
+
+#~ msgid "Marathi (G)"
+#~ msgstr "Marathski (G)"
+
+#~ msgid "Kannada (G)"
+#~ msgstr "Kanareški (G)"
+
+#~ msgid "Tajik (G)"
+#~ msgstr "Tadžički (G)"
+
+#~ msgid "Portuguese"
+#~ msgstr "Portugalski"
+
+#~ msgid "Irish (G)"
+#~ msgstr "Irski (G)"
+
+#~ msgid "Bengali (G)"
+#~ msgstr "Bengalski (G)"
+
+#~ msgid "Japanese"
+#~ msgstr "Japanski"
+
+#~ msgid "Latin (G)"
+#~ msgstr "Latinski (G)"
+
+#~ msgid "Hawaiian (G)"
+#~ msgstr "Havajski (G)"
+
+#~ msgid "Auto"
+#~ msgstr "Automatski"

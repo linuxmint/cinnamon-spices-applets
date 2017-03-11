@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@QuickMenu1.05\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 20:08+0100\n"
-"PO-Revision-Date: 2017-02-26 20:09+0100\n"
+"POT-Creation-Date: 2017-03-07 16:36-0300\n"
+"PO-Revision-Date: 2017-03-07 16:36-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -19,36 +19,40 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:293
 msgid "Desktop"
 msgstr "Radna površina"
 
-#: applet.js:428
-#, c-format
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:428 3.2/applet.js:425
+#, javascript-format
 msgid "Remove '%s'"
 msgstr "Ukloni '%s'"
 
-#: applet.js:675
+#: applet.js:679 3.2/applet.js:676
 msgid "Update menu"
 msgstr "Nadopuni izbornik"
 
-#: applet.js:680
+#: applet.js:684 3.2/applet.js:681
 msgid "Scan the main folder to re-create the menu."
 msgstr "Pretraži glavnu mapu za ponovno stvaranje izbornika."
 
-#: applet.js:683
+#: applet.js:687 3.2/applet.js:684
 msgid "Open folder"
 msgstr "Otvori mapu"
 
-#: applet.js:689
+#: applet.js:693 3.2/applet.js:690
 msgid "Open the main folder."
 msgstr "Otvori glavnu mapu."
 
-#: applet.js:693
+#: applet.js:697 3.2/applet.js:694
 msgid "Help"
 msgstr "Pomoć"
 
-#: applet.js:699
+#: applet.js:703 3.2/applet.js:700
 msgid "Open the help file."
 msgstr "Otvori datoteku pomoći."
 
@@ -324,18 +328,6 @@ msgstr ""
 "Samo će raditi s podizbornicima stvorenim na prvoj razini. Podizbornici "
 "unutar ostalih podizbornika nisu obuhvaćeni."
 
-#. 0dyseus@QuickMenu->metadata.json->comments
-msgid ""
-"Bug reports and feature requests should be reported on this applet's "
-"repository linked below."
-msgstr ""
-"Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na "
-"poveznici repozitorija ovog apleta."
-
-#. 0dyseus@QuickMenu->metadata.json->name
-msgid "Quick Menu"
-msgstr "Brzi izbornik"
-
 #. 0dyseus@QuickMenu->metadata.json->description
 msgid ""
 "Easily and quickly create a menu based on the files/folders found inside an "
@@ -343,3 +335,14 @@ msgid ""
 msgstr ""
 "Lako i brzo stvorite izbornike temeljene na datotekama/mapama pronađenim "
 "unutar zadane mape."
+
+#. 0dyseus@QuickMenu->metadata.json->name
+msgid "Quick Menu"
+msgstr "Brzi izbornik"
+
+#~ msgid ""
+#~ "Bug reports and feature requests should be reported on this applet's "
+#~ "repository linked below."
+#~ msgstr ""
+#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
+#~ "na poveznici repozitorija ovog apleta."

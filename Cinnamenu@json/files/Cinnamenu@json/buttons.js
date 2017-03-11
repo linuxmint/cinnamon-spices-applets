@@ -431,9 +431,9 @@ AppListGridButton.prototype = {
     }
     this.actor.add_style_class_name('menu-application-button-selected');
     if (this.appType === ApplicationType._applications) {
-      this._parent.selectedAppTitle.set_text(this.app.get_name());
-      if (this.app.get_description()) {
-        this._parent.selectedAppDescription.set_text(this.app.get_description());
+      this._parent.selectedAppTitle.set_text(this.app.name);
+      if (this.app.description) {
+        this._parent.selectedAppDescription.set_text(this.app.description);
       } else {
         this._parent.selectedAppDescription.set_text('');
       }
@@ -542,6 +542,9 @@ AppListGridButton.prototype = {
   },
 
   _onStateChanged: function() {
+    if (!this.app) {
+      return false;
+    }
     if (this.appType == ApplicationType._applications) {
       if (this.app.state != Cinnamon.AppState.STOPPED) {
         this.dot.opacity = 255;
@@ -549,6 +552,7 @@ AppListGridButton.prototype = {
         this.dot.opacity = 0;
       }
     }
+    return true;
   },
 
   getDragActor: function() {
@@ -581,7 +585,8 @@ AppListGridButton.prototype = {
 
     if (!this.menu.isOpen) {
       let children = this.menu.box.get_children();
-      for (var i in children) {
+      for (var i = 0; i < children.length; i++) {
+        children[i].destroy();
         this.menu.box.remove_actor(children[i]);
       }
       this._parent.menuIsOpen = this.appIndex;
@@ -622,12 +627,28 @@ AppListGridButton.prototype = {
       // Allow other buttons hover functions to take effect.
       this._parent.menuIsOpen = null;
     }
-    this.menu.toggle_with_options(this._parent.enableAnimations);
+    this.menu.toggle_with_options(this._parent._applet.enableAnimations);
     return true
   },
 
   destroy: function() {
-    this.buttonBox.destroy_all_children();
+    this._parent = null;
+    this.app = null;
+    let children = this.menu.box.get_children();
+    for (var i = 0; i < children.length; i++) {
+      this.menu.box.remove_actor(children[i]);
+      children[i].destroy();
+    }
+    this.menu.destroy();
+    this.dot.destroy();
+    this.label.unrealize();
+    this.icon.unrealize();
+    this.label.destroy();
+    this.icon.destroy();
+    if (this._iconContainer) {
+      this._iconContainer.destroy();
+    }
+    this.buttonBox.destroy();
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
@@ -685,7 +706,7 @@ GroupButton.prototype = {
     }
 
     // Connect signals
-    this.actor.connect('touch-event', Lang.bind(this, this._onTouchEvent));
+    //this.actor.connect('touch-event', Lang.bind(this, this._onTouchEvent));
   },
 
   setIcon: function(iconName) {
@@ -733,16 +754,16 @@ GroupButton.prototype = {
     this.buttonReleaseCallback.call();
   },
 
-  _onTouchEvent: function(actor, event) {
+  /*_onTouchEvent: function(actor, event) {
     return Clutter.EVENT_PROPAGATE;
-  },
+  },*/
 
   _onButtonReleaseEvent: function(actor) {
     return false;
   },
 
   destroy: function(actor) {
-    this._parent = null;
+    this._applet = null;
     this.label.destroy();
     if (this.icon) {
       this.icon.destroy();

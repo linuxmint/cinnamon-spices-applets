@@ -1,5 +1,11 @@
 Changelog
 
+### 1.1.0
+
+  * Improved the applet's memory consumption.
+  * Search results now appear in their order of relevance, not by their type.
+  * Search functionality now uses fuzzy search via [Fusion-JS](https://github.com/bulicmatko/fusion-js).
+
 ### 1.0.0
 
   * Reimplemented the context menu.

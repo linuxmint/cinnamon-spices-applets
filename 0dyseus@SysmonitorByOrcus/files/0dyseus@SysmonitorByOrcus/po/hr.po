@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.09\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 20:10+0100\n"
-"PO-Revision-Date: 2017-02-26 20:12+0100\n"
+"POT-Creation-Date: 2017-03-07 16:36-0300\n"
+"PO-Revision-Date: 2017-03-07 16:36-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -19,35 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:277
+#: applet.js:277 3.2/applet.js:277
 msgid "Help"
 msgstr "Pomoć"
 
-#: applet.js:448
+#: applet.js:448 3.2/applet.js:448
 msgid "CPU: "
 msgstr "CPU: "
 
-#: applet.js:474
+#: applet.js:474 3.2/applet.js:474
 msgid "Memory: "
 msgstr "Memorija: "
 
-#: applet.js:474 applet.js:499
+#: applet.js:474 applet.js:499 3.2/applet.js:474 3.2/applet.js:499
 msgid " MB"
 msgstr " MB"
 
-#: applet.js:499
+#: applet.js:499 3.2/applet.js:499
 msgid "Swap: "
 msgstr "Swap: "
 
-#: applet.js:538
+#: applet.js:538 3.2/applet.js:538
 msgid "Network D/U: "
 msgstr "Mreža P/S: "
 
-#: applet.js:538
+#: applet.js:538 3.2/applet.js:538
 msgid " KB/s"
 msgstr " KB/s"
 
-#: applet.js:576
+#: applet.js:576 3.2/applet.js:576
 msgid "Load average: "
 msgstr "Prosječno opterećenje: "
 
@@ -311,6 +311,10 @@ msgstr "Širina CPU grafa"
 msgid "Memory graph colors"
 msgstr "Boje mrežnog grafa"
 
+#. 0dyseus@SysmonitorByOrcus->metadata.json->description
+msgid "Displays CPU, memory, swap, network usage and load in graphs."
+msgstr "Prikazuje upotrebu CPU-a, memorije, swapa, mreže u grafovima."
+
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "buzz: Bug fixes."
 msgstr "buzz: Ispravci grešaka."
@@ -326,7 +330,3 @@ msgstr ""
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"
 msgstr "Nadgledatelj sustava (Fork By Odyseus)"
-
-#. 0dyseus@SysmonitorByOrcus->metadata.json->description
-msgid "Displays CPU, memory, swap, network usage and load in graphs."
-msgstr "Prikazuje upotrebu CPU-a, memorije, swapa, mreže u grafovima."

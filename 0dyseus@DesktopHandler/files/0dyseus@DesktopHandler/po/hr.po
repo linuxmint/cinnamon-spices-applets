@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@DesktopHandler 1.05\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 19:20+0100\n"
-"PO-Revision-Date: 2017-02-26 19:20+0100\n"
+"POT-Creation-Date: 2017-03-07 16:35-0300\n"
+"PO-Revision-Date: 2017-03-07 16:35-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:518
+#: applet.js:518 3.2/applet.js:518
 msgid "No open windows"
 msgstr "Nema otvorenih prozora"
 
@@ -35,37 +35,43 @@ msgstr "Nema otvorenih prozora"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:531 applet.js:817
+#: applet.js:531 applet.js:827 3.2/applet.js:531 3.2/applet.js:827
 msgid "Expo"
 msgstr "Prikaz radnih prostora"
 
-#: applet.js:600
+#: applet.js:610 3.2/applet.js:610
 msgid "Help"
 msgstr "Pomoć"
 
-#: applet.js:611
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:621 3.2/applet.js:621
 msgid "About..."
 msgstr "O programu..."
 
-#: applet.js:621
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:631 3.2/applet.js:631
 msgid "Configure..."
 msgstr "Prilagodi…"
 
-#: applet.js:634
-#, c-format
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:644 3.2/applet.js:644
+#, javascript-format
 msgid "Remove '%s'"
 msgstr "Ukloni '%s'"
 
-#: applet.js:643
-#, c-format
+#: applet.js:653 3.2/applet.js:653
+#, javascript-format
 msgid "Are you sure that you want to remove '%s' from your panel?"
 msgstr "Sigurno želite ukloniti '%s' s panela?"
 
-#: applet.js:645
+#: applet.js:655 3.2/applet.js:655
 msgid "Cancel"
 msgstr "Odustani"
 
-#: applet.js:645
+#: applet.js:655 3.2/applet.js:655
 msgid "OK"
 msgstr "U redu"
 
@@ -81,7 +87,7 @@ msgstr "U redu"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:818
+#: applet.js:828 3.2/applet.js:828
 msgid "Overview"
 msgstr "Pregled prozora"
 
@@ -97,7 +103,7 @@ msgstr "Pregled prozora"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:819
+#: applet.js:829 3.2/applet.js:829
 msgid "Launch App Switcher"
 msgstr "Pokreni izmjenjivača aplikacija"
 
@@ -113,7 +119,7 @@ msgstr "Pokreni izmjenjivača aplikacija"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:820
+#: applet.js:830 3.2/applet.js:830
 msgid "Run 1st Custom Command"
 msgstr "Pokreni 1. prilagođenu naredbu"
 
@@ -129,7 +135,7 @@ msgstr "Pokreni 1. prilagođenu naredbu"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:821
+#: applet.js:831 3.2/applet.js:831
 msgid "Run 2nd Custom Command"
 msgstr "Pokreni 2. prilagođenu naredbu"
 
@@ -145,7 +151,7 @@ msgstr "Pokreni 2. prilagođenu naredbu"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:822
+#: applet.js:832 3.2/applet.js:832
 msgid "Run 3rd Custom Command"
 msgstr "Pokreni 3. prilagođenu naredbu"
 
@@ -161,7 +167,7 @@ msgstr "Pokreni 3. prilagođenu naredbu"
 #. schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
-#: applet.js:823
+#: applet.js:833 3.2/applet.js:833
 msgid "Run 4rd Custom Command"
 msgstr "Pokreni 4. prilagođenu naredbu"
 
@@ -179,119 +185,119 @@ msgstr "Pokreni 4. prilagođenu naredbu"
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_middle_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: applet.js:824
+#: applet.js:834 3.2/applet.js:834
 msgid "None"
 msgstr "Nikakva"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:825
+#: applet.js:835 3.2/applet.js:835
 msgid "Icons only"
 msgstr "Samo ikone"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:826
+#: applet.js:836 3.2/applet.js:836
 msgid "Thumbnails only"
 msgstr "Samo minijature"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:827
+#: applet.js:837 3.2/applet.js:837
 msgid "Icons and thumbnails"
 msgstr "Ikone i pregled minijatura"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:828
+#: applet.js:838 3.2/applet.js:838
 msgid "Icons and window preview"
 msgstr "Ikone i pregled prozora"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:829
+#: applet.js:839 3.2/applet.js:839
 msgid "Window preview (no icons)"
 msgstr "Pregled prozora (bez ikona)"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:830
+#: applet.js:840 3.2/applet.js:840
 msgid "Coverflow (3D)"
 msgstr "Protok aplikacija (3D)"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:831
+#: applet.js:841 3.2/applet.js:841
 msgid "Timeline (3D)"
 msgstr "Vremenska linija (3D)"
 
 #. 3.2->settings-schema.json->pref_switcher_style->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
-#: applet.js:832
+#: applet.js:842 3.2/applet.js:842
 msgid "System default"
 msgstr "Zadano sustavom"
 
 #. 3.2->settings-schema.json->pref_scroll_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: applet.js:833
+#: applet.js:843 3.2/applet.js:843
 msgid "Switch between workspaces"
 msgstr "Prebaci između radnih prostora"
 
 #. 3.2->settings-schema.json->pref_scroll_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: applet.js:834
+#: applet.js:844 3.2/applet.js:844
 msgid "Adjust opacity of windows"
 msgstr "Prilagodi prozirnost prozora"
 
-#: applet.js:835
+#: applet.js:845 3.2/applet.js:845
 msgid "Toggle show desktop"
 msgstr "Prikaži radnu površinu"
 
 #. 3.2->settings-schema.json->pref_scroll_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: applet.js:836
+#: applet.js:846 3.2/applet.js:846
 msgid "Switch between windows"
 msgstr "Prebaci između prozora"
 
-#: applet.js:837
+#: applet.js:847 3.2/applet.js:847
 msgid "Open windows list menu"
 msgstr "Otvori izbornik popisa prozora"
 
 #. 0dyseus@DesktopHandler->metadata.json->name
-#: applet.js:851
+#: applet.js:861 3.2/applet.js:861
 msgid "Desktop Handler"
 msgstr "Rukovatelj radnom površinom"
 
-#: applet.js:854
+#: applet.js:864 3.2/applet.js:864
 msgid "Scroll Up"
 msgstr "Klizi prema gore"
 
-#: applet.js:855
+#: applet.js:865 3.2/applet.js:865
 msgid "Scroll Down"
 msgstr "Klizi prema dolje"
 
-#: applet.js:857
+#: applet.js:867 3.2/applet.js:867
 msgid "Scroll"
 msgstr "Kotačić"
 
 #. 3.2->settings-schema.json->pref_button_to_open_menu->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_button_to_open_menu->options
-#: applet.js:864
+#: applet.js:874 3.2/applet.js:874
 msgid "Left click"
 msgstr "Lijevi klik"
 
 #. 3.2->settings-schema.json->pref_button_to_open_menu->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_button_to_open_menu->options
-#: applet.js:870
+#: applet.js:880 3.2/applet.js:880
 msgid "Middle click"
 msgstr "Srednji klik"
 
 #. 3.2->settings-schema.json->pref_button_to_open_menu->options
 #. 0dyseus@DesktopHandler->settings-
 #. schema.json->pref_button_to_open_menu->options
-#: applet.js:874
+#: applet.js:884 3.2/applet.js:884
 msgid "Right click"
 msgstr "Desni klik"
 
@@ -633,10 +639,9 @@ msgstr "Mogućnosti izmjenjivača radnih prostora"
 msgid "Various shortcuts to handle desktop actions."
 msgstr "Razne mogućnosti rukovanja radnom površinom."
 
-#. 0dyseus@DesktopHandler->metadata.json->comments
-msgid ""
-"Bug reports and feature requests should be reported on this applet's "
-"repository linked below."
-msgstr ""
-"Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na "
-"poveznici repozitorija ovog apleta."
+#~ msgid ""
+#~ "Bug reports and feature requests should be reported on this applet's "
+#~ "repository linked below."
+#~ msgstr ""
+#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
+#~ "na poveznici repozitorija ovog apleta."

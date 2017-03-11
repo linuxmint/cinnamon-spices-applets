@@ -7,7 +7,8 @@
     "version": "1.06",
     "last-edited": "1473874426",
     "name": "Desktop Handler",
-    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "contributors": "muzena: Croatian localization.",
     "website": "https://github.com/Odyseus/CinnamonTools",
     "cinnamon-version": [
         "2.8",

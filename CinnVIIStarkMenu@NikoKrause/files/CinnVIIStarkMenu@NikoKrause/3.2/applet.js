@@ -1132,7 +1132,7 @@ TextBoxItem.prototype = {
         this.func = func;
         this.active = false;
         AppPopupSubMenuMenuItem.prototype._init.call(this, label);
-        
+
         this.addStyleClassName = addStyleClassName;
 
         this.actor.set_style_class_name('menu-category-button');
@@ -1293,7 +1293,7 @@ AllProgramsItem.prototype = {
         this.label = new St.Label({ text: label, style: "padding-left: 20px" });
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_name: icon,
             icon_size: ICON_SIZE
         });
@@ -2397,7 +2397,7 @@ MyApplet.prototype = {
             this.searchEntry.style = "width:" + favsWidth + "px; padding-left: 6px; padding-right: 6px;";
             this.appsButton.box.style = "width:" + favsWidth + "px";
             this.resultsFoundButton.box.style = "width:" + favsWidth + "px";
-            
+
         } else {
             if (this._appletEnterEventId > 0) {
                 this.actor.handler_unblock(this._appletEnterEventId);
@@ -3685,7 +3685,7 @@ MyApplet.prototype = {
         this.separator = new PopupMenu.PopupSeparatorMenuItem();
         this.separator.actor.set_style("padding: 0em 1em;");
 
-        this.appsButton = new AllProgramsItem("", "forward", this, false);
+        this.appsButton = new AllProgramsItem("", "go-next", this);
         this.resultsFoundButton = new ResultsFoundItem("5 results found", "edit-find", this, false);
         this.resultsFoundButton.actor.hide();
 
@@ -3764,7 +3764,7 @@ MyApplet.prototype = {
                 this.appsButton.label.set_text(_(this.favoritesLabel));
             else
                 this.appsButton.label.set_text("");
-            this.appsButton.icon.set_icon_name("back");
+            this.appsButton.icon.set_icon_name("go-previous");
             if(this.menuLayout == "stark-menu")
                 this.rightButtonsBox.actor.hide();
             this._appletStyles();
@@ -3778,7 +3778,7 @@ MyApplet.prototype = {
                 this.appsButton.label.set_text(_(this.allProgramsLabel));
             else
                 this.appsButton.label.set_text("");
-            this.appsButton.icon.set_icon_name("forward");
+            this.appsButton.icon.set_icon_name("go-next");
             if (this.menu.showSidebar) {
                 this.rightButtonsBox.actor.show();
             }
