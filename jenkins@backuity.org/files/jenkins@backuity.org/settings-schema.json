@@ -25,6 +25,12 @@
   , "description": "Hide successful jobs in the popup menu"
   }
 
+, "hideDisabledJobs":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Hide disabled jobs in the popup menu"
+  }
+
 , "showNotificationForFailedJobs":
   { "type": "checkbox"
   , "default": false
