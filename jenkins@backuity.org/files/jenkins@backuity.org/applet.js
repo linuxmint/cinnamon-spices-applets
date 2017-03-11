@@ -34,12 +34,14 @@ const JENKINS_USERNAME = 'jenkinsUsername'
 const JENKINS_PASSWORD = 'jenkinsPassword'
 const JENKINS_MAX_NUMBER_OF_JOBS = 'maxNumberOfJobs'
 const JENKINS_HIDE_SUCCESSFUL_JOBS = 'hideSuccessfulJobs'
+const JENKINS_HIDE_DISABLED_JOBS = 'hideDisabledJobs'
 const JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS = 'showNotificationForFailedJobs'
 
 const KEYS = [
   JENKINS_REFRESH_INTERVAL,
   JENKINS_MAX_NUMBER_OF_JOBS,
   JENKINS_HIDE_SUCCESSFUL_JOBS,
+  JENKINS_HIDE_DISABLED_JOBS,
   JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS,
   JENKINS_SSL_STRICT,
   JENKINS_URL,
@@ -152,7 +154,6 @@ MyApplet.prototype = {
             applet.destroyMenu();          
             try {
                 let maxJobs = applet._maxNumberOfJobs;
-                let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                 let jobs = json.get_array_member('jobs').get_elements();
                 let displayedJobs = 0;
                 
@@ -161,8 +162,16 @@ MyApplet.prototype = {
                     let job = jobs[i].get_object();
 
                     let color = job.get_string_member('color');
+
                     let success = this.helpers().isColorSuccess(color);
+                    let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                     if (success && hideSuccessfulJobs) {
+                        continue;
+                    }
+
+                    let disabled = this.helpers().isColorDisabled(color);
+                    let hideDisabledJobs = applet._hideDisabledJobs;
+                    if (disabled && hideDisabledJobs) {
                         continue;
                     }
 
