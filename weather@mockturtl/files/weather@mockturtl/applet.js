@@ -344,8 +344,6 @@ MyApplet.prototype = {
                                        this.keybinding,
                                        Lang.bind(this,
                                                  this.on_applet_clicked))
-
-    this.on_applet_clicked
   }
 
 , on_applet_clicked: function on_applet_clicked(event) {
