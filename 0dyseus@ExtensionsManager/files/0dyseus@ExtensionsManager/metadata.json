@@ -3,7 +3,7 @@
     "uuid": "0dyseus@ExtensionsManager",
     "max-instances": -1,
     "multiversion": true,
-    "version": "1.04",
+    "version": "1.05",
     "name": "Extensions Manager",
     "description": "Allows enabling/disabling extensions (and other tasks) from a menu.",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
