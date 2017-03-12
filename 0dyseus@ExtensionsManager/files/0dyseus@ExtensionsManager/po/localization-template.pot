@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 
-"Project-Id-Version: 1.04\n"
+"Project-Id-Version: 1.05\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-11 11:15-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-03-11 19:56-0300\n"
 "Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -301,8 +301,22 @@ msgstr ""
 msgid "Show icons on menu items"
 msgstr ""
 
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "Radek71: Czech localization."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "muzena: Croatian localization."
+msgstr ""
+
 #. 0dyseus@ExtensionsManager->metadata.json->description
 msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
 msgstr ""
 
 #. 0dyseus@ExtensionsManager->metadata.json->name

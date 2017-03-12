@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@ExtensionsManager 1.04\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 16:35-0300\n"
-"PO-Revision-Date: 2017-03-07 16:36-0300\n"
+"POT-Creation-Date: 2017-03-11 19:58-0300\n"
+"PO-Revision-Date: 2017-03-11 19:58-0300\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -324,18 +324,29 @@ msgstr "Postavke apleta"
 msgid "Show icons on menu items"
 msgstr "Prikaži ikone u stavkama izborniku"
 
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "Radek71: Czech localization."
+msgstr "Radek71: Češka lokalizacija."
+
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "muzena: Croatian localization."
+msgstr ""
+
 #. 0dyseus@ExtensionsManager->metadata.json->description
 msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
 msgstr ""
 "Omogućuje omogućavanje/onemogućavanje proširenja (i drugih zadataka) iz "
 "izbornika."
 
+#. 0dyseus@ExtensionsManager->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+
 #. 0dyseus@ExtensionsManager->metadata.json->name
 msgid "Extensions Manager"
 msgstr "Upravitelj proširenja"
-
-#~ msgid "Radek71: Czech localization."
-#~ msgstr "Radek71: Češka lokalizacija."
 
 #~ msgid ""
 #~ "Bug reports and feature requests should be reported on this applet's "

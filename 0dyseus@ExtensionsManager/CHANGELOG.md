@@ -1,5 +1,8 @@
 ## Change Log
 
+##### 1.05
+- Fixed incorrect setting name that prevented the correct update of the enabled/disabled extensions on this applet menu.
+
 ##### 1.04
 - Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
 - Added some missing strings that needed to be translated.
