@@ -10,9 +10,10 @@
 
 Language | Status | Untranslated | By
 --------------|:--------:|:----------------:|:---:
+[Chinese (Simplified) (zh_CN)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/zh_CN)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/zh_CN/+translate?show=untranslated) | [giwhub](https://github.com/giwhub)
 [Croatian (hr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr/+translate?show=untranslated) | [gogo](https://launchpad.net/~trebelnik-stefina)
 [Czech (cs)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/cs)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/cs/+translate?show=untranslated) | [Radek Otáhal](https://launchpad.net/~radek-otahal)
-[French (fr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr)  | ![62%](http://progressed.io/bar/62) | [48](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr/+translate?show=untranslated) | &mdash;
+[French (fr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr/+translate?show=untranslated) | [bluedxca93](https://launchpad.net/~bluedxca93), [Christian Medel](https://launchpad.net/~cmedelahumada)
 [German (de)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause)
 [Russian (ru)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru) | ![70%](http://progressed.io/bar/70) | [37](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause)
 [Spanish (es)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/es) | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/es/+translate?show=untranslated) | [Bob](https://launchpad.net/~basura1-p), [Germán](https://launchpad.net/~germanfr)
@@ -50,9 +51,9 @@ Click on the image below to see a review video of CinnVIIStarkMenu (previous: Ci
 * [@germanfr](https://github.com/germanfr) for contributing to this applet
 
 -----------
-####License
+#### License
 CinnVIIStarkMenu is distributed under the terms of the GNU General Public License, version 2 or later.
 See the [COPYING](https://github.com/NikoKrause/CinnVIIStarkMenu/blob/master/COPYING) file for details.
 
-####Logo credits
+#### Logo credits
 The CinnVIIStarkMenu logo is a mix of the [MATE Desktop logo](https://github.com/mate-desktop/mate-desktop/blob/f543545ceb97db7cdefc186889898e3ebdef8f65/icons/hicolor_apps_scalable_mate.svg) and the [Cinnamon logo](http://segfault.linuxmint.com/wp-content/uploads/2016/09/CinnamonIcon5-1.png).

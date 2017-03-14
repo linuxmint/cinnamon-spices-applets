@@ -3,6 +3,7 @@
     "uuid": "CinnVIIStarkMenu@NikoKrause",
     "name": "CinnVIIStarkMenu",
     "description": "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu",
+    "version": 1.2,
     "max-instances": -1,
     "multiversion": true,
     "cinnamon-version": ["2.6","2.8","3.0","3.2"]

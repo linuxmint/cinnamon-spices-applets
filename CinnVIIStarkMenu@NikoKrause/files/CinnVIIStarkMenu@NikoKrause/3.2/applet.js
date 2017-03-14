@@ -1385,6 +1385,8 @@ HoverIcon.prototype = {
         });
         this.userBox.add_style_class_name("starkhover-box");
 
+        this.userBox.set_x_align(Clutter.ActorAlign.CENTER);
+
         this._userIcon = new St.Icon({
             style_class: 'hover-user-icon'
         });
@@ -1665,8 +1667,6 @@ RightButtonsBox.prototype = {
                 this.hoverIcon.userLabel.show();
             } else {
                 this.hoverIcon.userLabel.hide();
-                let centerWidth = (this.actor.get_width() - (HOVER_ICON_SIZE + 4)) / 2;
-                this.hoverIcon.userBox.style = "padding-left:"+ centerWidth +"px; padding-right:"+ centerWidth +"px;";
             }
 
             this.hoverIcon._userIcon.set_icon_size(HOVER_ICON_SIZE);
@@ -2027,7 +2027,6 @@ MyApplet.prototype = {
         this._previousTreeSelectedActor = null;
         this._activeContainer = null;
         this._activeActor = null;
-        this._applicationsBoxWidth = 0;
         this.menuIsOpening = false;
         this._knownApps = new Array(); // Used to keep track of apps that are already installed, so we can highlight newly installed ones
         this._appsWereRefreshed = false;
@@ -2166,10 +2165,29 @@ MyApplet.prototype = {
         }
     },
 
-    _appletStyles: function() {
-        let scrollBoxHeight = (this.favsBox.get_allocation_box().y2 - this.favsBox.get_allocation_box().y1) + this.separator.actor.get_height() - (this.applicationsScrollBox.get_theme_node().get_border_width(St.Side.TOP) + this.applicationsScrollBox.get_theme_node().get_border_width(St.Side.BOTTOM));
-        this.applicationsScrollBox.style = "width: 26.5em;height: " + scrollBoxHeight + "px;";
-        this.categoriesScrollBox.style = "height: " + scrollBoxHeight + "px;";
+    _resizeMenuSections: function() {
+        let scrollBoxHeight = this.favsBox.get_height() + this.separator.actor.get_height() + this.favExpandBin.get_height();
+
+        this._resizeApplicationsBox();
+        this.applicationsScrollBox.set_height(scrollBoxHeight);
+        this.categoriesScrollBox.set_height(scrollBoxHeight);
+    },
+
+    _resizeApplicationsBox: function() {
+        let min_width = 0;
+        let child = this.applicationsScrollBox.get_first_child();
+        this.applicationsScrollBox.set_width(-1);
+
+        while (child) {
+            let [min, nat] = child.get_preferred_width(-1.0);
+            min_width = Math.max(nat, min_width);
+            child = child.get_next_sibling();
+        }
+
+        let theme_node = this.applicationsScrollBox.get_theme_node();
+        let scrollWidth = this.applicationsScrollBox.get_vscroll_bar().get_width();
+        let borders = theme_node.get_border_width(St.Side.LEFT) + theme_node.get_border_width(St.Side.RIGHT);
+        this.applicationsScrollBox.set_width(min_width + scrollWidth + borders);
     },
 
     update_label_visible: function () {
@@ -2232,11 +2250,6 @@ MyApplet.prototype = {
         }
 
         this._updateCustomLabels();
-
-        if (this.rightButtonsBox.actor.get_height() > 415) {
-            this.favsBox.style = "min-height: " + (this.rightButtonsBox.actor.get_height() - (this.leftPaneBox.get_theme_node().get_padding(St.Side.TOP) + this.leftPaneBox.get_theme_node().get_padding(St.Side.BOTTOM) + this.searchBox.get_height() + this.appsButton.box.get_height() + this.separator.actor.get_height())+3) + "px;min-width: 235px;";
-        }
-
     },
 
     _updateQuickLinks: function() {
@@ -2297,11 +2310,6 @@ MyApplet.prototype = {
         this.rightButtonsBox._update_quicklinks(this.quicklauncherLayout, this.showUserIconLabel, this.shutdownMenuLayout);
 
         this._updateQuickLinksShutdownView();
-
-        if (this.rightButtonsBox.actor.get_height() > 415) {
-            this.favsBox.style = "min-height: " + (this.rightButtonsBox.actor.get_height() - (this.leftPaneBox.get_theme_node().get_padding(St.Side.TOP) + this.leftPaneBox.get_theme_node().get_padding(St.Side.BOTTOM) + this.searchBox.get_height() + this.appsButton.box.get_height() + this.separator.actor.get_height())+3) + "px;min-width: 235px;";
-        }
-
     },
 
     on_orientation_changed: function (orientation) {
@@ -2393,10 +2401,9 @@ MyApplet.prototype = {
             //this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
             Mainloop.idle_add(Lang.bind(this, this._initial_cat_selection, n));
 
-            let favsWidth = 0.95 * (this.favsBox.get_allocation_box().x2 - this.favsBox.get_allocation_box().x1);
-            this.searchEntry.style = "width:" + favsWidth + "px; padding-left: 6px; padding-right: 6px;";
-            this.appsButton.box.style = "width:" + favsWidth + "px";
-            this.resultsFoundButton.box.style = "width:" + favsWidth + "px";
+            this.fit_favsbox(this.searchEntry);
+            this.fit_favsbox(this.appsButton.box);
+            this.fit_favsbox(this.resultsFoundButton.box);
 
         } else {
             if (this._appletEnterEventId > 0) {
@@ -2423,6 +2430,14 @@ MyApplet.prototype = {
         for (let i = start_index; i < n; i++) {
             this._applicationsButtons[i].actor.show();
         }
+    },
+
+    fit_favsbox: function(elem) {
+        let parent = elem.get_parent().get_theme_node();
+        let p_hpadding = parent.get_padding(St.Side.LEFT) + parent.get_padding(St.Side.RIGHT);
+        let favsbox_width = this.favsBox.get_allocation_box().x2 - this.favsBox.get_allocation_box().x1;
+
+        elem.set_width(favsbox_width - p_hpadding);
     },
 
     destroy: function() {
@@ -3329,7 +3344,6 @@ MyApplet.prototype = {
         this._applicationsButtons = new Array();
         this._transientButtons = new Array();
         this._applicationsButtonFromApp = new Object();
-        this._applicationsBoxWidth = 0;
         //Remove all categories
         this.categoriesBox.destroy_all_children();
 
@@ -3609,9 +3623,7 @@ MyApplet.prototype = {
 
         this.appsBox = new St.BoxLayout({ vertical: true });
 
-        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box' });
-        this.searchBox.add_style_class_name("starkmenu-search-box");
-        this.searchBox.set_style("padding-right: 0px;padding-left: 0px;height:26px;");
+        this.searchBox = new St.BoxLayout({ style_class: 'starkmenu-search-box' });
 
         this.searchEntry = new St.Entry({ name: 'menu-search-entry',
                                      hint_text: _("Type to search..."),
@@ -3631,10 +3643,8 @@ MyApplet.prototype = {
                                                 vertical: true,
                                                 accessible_role: Atk.Role.LIST });
         this.applicationsScrollBox = new St.ScrollView({ x_fill: true, y_fill: false, y_align: St.Align.START, style_class: 'vfade menu-applications-scrollbox' });
-        //this.applicationsScrollBox.set_width(264);
 
         this.categoriesScrollBox = new St.ScrollView({ x_fill: true, y_fill: false, y_align: St.Align.START, style_class: 'vfade menu-applications-scrollbox' });
-        //this.categoriesScrollBox.set_width(210);
 
         this.a11y_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.a11y.applications" });
         this.a11y_settings.connect("changed::screen-magnifier-enabled", Lang.bind(this, this._updateVFade));
@@ -3712,6 +3722,8 @@ MyApplet.prototype = {
         //    this.selectedAppBox.get_theme_node().get_length('height') == 0)
         //    this.selectedAppBox.set_height(30 * global.ui_scale);
 
+        this.favExpandBin = new St.Bin();
+
         this.selectedAppTitle = new St.Label({ style_class: 'menu-selected-app-title', text: "" });
         this.selectedAppBox.add_actor(this.selectedAppTitle);
         this.selectedAppDescription = new St.Label({ style_class: 'menu-selected-app-description', text: "" });
@@ -3720,7 +3732,7 @@ MyApplet.prototype = {
         this.appsBox.add_actor(this.categoriesApplicationsBox.actor);
         this.searchBox.add_actor(this.searchEntry);
         this.leftPaneBox.add_actor(this.leftPane);
-        this.leftPaneBox.add(new St.Bin(), { expand: true });
+        this.leftPaneBox.add(this.favExpandBin, { expand: true });
         this.leftPaneBox.add_actor(this.separator.actor);
         this.leftPaneBox.add_actor(this.appsButton.actor);
         this.leftPaneBox.add_actor(this.resultsFoundButton.actor);
@@ -3767,7 +3779,8 @@ MyApplet.prototype = {
             this.appsButton.icon.set_icon_name("go-previous");
             if(this.menuLayout == "stark-menu")
                 this.rightButtonsBox.actor.hide();
-            this._appletStyles();
+            if (this._activeContainer == null)
+                this._resizeMenuSections();
             visiblePane = "apps";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -3782,7 +3795,7 @@ MyApplet.prototype = {
             if (this.menu.showSidebar) {
                 this.rightButtonsBox.actor.show();
             }
-            this._appletStyles();
+            //this._resizeMenuSections();
             visiblePane = "favs";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -3865,25 +3878,6 @@ MyApplet.prototype = {
                 else
                     this._favoritesButtons[app].closeMenu();
             }
-        }
-    },
-
-    _resize_actor_iter: function(actor) {
-        let [min, nat] = actor.get_preferred_width(-1.0);
-        if (nat > this._applicationsBoxWidth){
-            this._applicationsBoxWidth = nat;
-            this.applicationsBox.set_width(this._applicationsBoxWidth + 42); // The answer to life...
-        }
-    },
-
-    _resizeApplicationsBox: function() {
-        this._applicationsBoxWidth = 0;
-        this.applicationsBox.set_width(-1);
-        let child = this.applicationsBox.get_first_child();
-        this._resize_actor_iter(child);
-
-        while ((child = child.get_next_sibling()) != null) {
-            this._resize_actor_iter(child);
         }
     },
 
