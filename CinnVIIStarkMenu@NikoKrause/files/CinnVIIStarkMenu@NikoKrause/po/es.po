@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: cinnviistarkmenu\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-01-16 14:20+0100\n"
-"PO-Revision-Date: 2017-01-16 14:21+0000\n"
+"PO-Revision-Date: 2017-03-05 23:03+0000\n"
 "Last-Translator: Niko Krause <nikokrause@gmx.de>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-01-16 14:28+0000\n"
-"X-Generator: Launchpad (build 18302)\n"
+"X-Launchpad-Export-Date: 2017-03-11 10:44+0000\n"
+"X-Generator: Launchpad (build 18331)\n"
 "Language: es\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
@@ -912,18 +912,3 @@ msgstr "Descargas"
 #. 2.6->settings-schema.json->quicklauncher-6-command->default
 msgid "nemo Downloads"
 msgstr "nemo Descargas"
-
-#~ msgid "Home"
-#~ msgstr "Carpeta personal"
-
-#~ msgid "Terminal"
-#~ msgstr "Terminal"
-
-#~ msgid "System Settings"
-#~ msgstr "Configuración del sistema"
-
-#~ msgid "Computer"
-#~ msgstr "Equipo"
-
-#~ msgid "Software Manager"
-#~ msgstr "Gestor de software"
