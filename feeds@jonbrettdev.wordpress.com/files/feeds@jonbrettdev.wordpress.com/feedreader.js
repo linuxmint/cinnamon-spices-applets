@@ -85,11 +85,11 @@ function FeedReader() {
 
 FeedReader.prototype = {
 
-    _init: function(logger, url, callbacks) {
+    _init: function(logger, id, url, callbacks) {
         this.logger = logger;
+        this.id = id;
         this.item_status = new Array();
         this.url = url;
-        //this.data_path = data_path;
         this.callbacks = callbacks;
         this.error = false;
         
@@ -105,15 +105,16 @@ FeedReader.prototype = {
             Soup.Session.prototype.add_feature.call(this.session,
                     new Soup.ProxyResolverDefault());
         } catch (e) {
+            if(this.logger != undefined){
+                this.logger.error(e);
+            }
+            global.logError(e);            
             throw "Failed to create HTTP session: " + e;
         }
 
-        let path = Gio.file_parse_name(DataPath + '/' + sanitize_url(this.url)).get_path();
+        let path = DataPath + '/' + this.id;
         // Let the python script grab the items and load them using an async method
-
         Util.spawn_async(['python', AppletPath + '/loadItems.py', path], Lang.bind(this, this.load_items));
-        /* Load items */
-        //this.load_items();
     },
 
     get_url: function() {
@@ -296,7 +297,9 @@ FeedReader.prototype = {
              * I found escaping the string helps to deal with special
              * characters, which could cause problems when parsing the file
              * later */
-            var filename = DataPath + '/' + sanitize_url(this.url);
+            // Filename is now the uuid created when a feed is added tot he list.
+            //var filename = DataPath + '/' + sanitize_url(this.url);
+            var filename = DataPath + '/' + this.id;
             this.logger.debug("saving feed data to: " + filename);
 
             var file = Gio.file_parse_name(filename);
@@ -472,6 +475,7 @@ FeedReader.prototype = {
 };
 Signals.addSignalMethods(FeedReader.prototype);
 
+/*
 function sanitize_url(url) {
     return url.replace(/.*:\/\//, '').replace(/\//g,'--');
-}
+}*/
