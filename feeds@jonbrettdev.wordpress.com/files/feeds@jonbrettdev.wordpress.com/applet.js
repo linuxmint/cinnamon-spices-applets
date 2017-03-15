@@ -99,8 +99,9 @@ FeedApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this.feed_file_error = false;
-
-            this.logger.debug("Selected Instance Name: " + this.instance_name);
+//TODO: info -> debug
+            this.logger.info("Instance ID (config file): " + instance_id);
+            this.logger.info("Selected Instance Name: " + this.instance_name);
 
             //this._load_feeds();
             this._read_json_config();
@@ -136,26 +137,8 @@ FeedApplet.prototype = {
                 null);
 
         this.settings.bindProperty(Settings.BindingDirection.IN,
-                "show_read_items",
-                "show_read_items",
-                this._on_settings_changed,
-                null);
-
-        this.settings.bindProperty(Settings.BindingDirection.IN,
                 "max_items",
                 "max_items",
-                this._on_settings_changed,
-                null);
-
-        this.settings.bindProperty(Settings.BindingDirection.IN,
-                "show_feed_image",
-                "show_feed_image",
-                this._on_settings_changed,
-                null);
-
-        this.settings.bindProperty(Settings.BindingDirection.IN,
-                "notifications_enabled",
-                "notifications_enabled",
                 this._on_settings_changed,
                 null);
 
@@ -166,17 +149,38 @@ FeedApplet.prototype = {
                 null);
 
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-                "url",
-                "url_list_str",
-                null,
-                null);
-                   
-        // This setting is use to select the feed list being used by this instance of the applet.        
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "instance_name",
                 "instance_name",
                 this._read_json_config,
                 null);
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+                "notifications_enabled",
+                "notifications_enabled",
+                this._on_settings_changed,
+                null);
+
+/*
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+                "show_read_items",
+                "show_read_items",
+                this._on_settings_changed,
+                null);
+
+        this.settings.bindProperty(Settings.BindingDirection.IN,
+                "show_feed_image",
+                "show_feed_image",
+                this._on_settings_changed,
+                null);
+
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "url",
+                "url_list_str",
+                null,
+                null);
+  */                 
+
+
     },
     /* Public method for adding a feed to be processed (downloaded) */
     enqueue_feed: function(item){
@@ -237,7 +241,7 @@ FeedApplet.prototype = {
         this._applet_context_menu.addMenuItem(s);
 
         /* Include setting menu item in Cinnamon < 2.0.0 */
-        this.logger.info("Cinnamon Version: " + CinnamonVersion);
+        this.logger.debug("Cinnamon Version: " + CinnamonVersion);
         if (parseInt(CinnamonVersion) == 1) {
             s = new Applet.MenuItem(
                     _("Settings"),
@@ -266,21 +270,11 @@ FeedApplet.prototype = {
 
         // Find the feeds for the selected instance_name and populate those feeds.
         for (key in data['instances']) {
-            this.logger.debug("looking for: " + this.instance_name);
-            this.logger.debug("found: " + data['instances'][key]['name']);
-
-            this.logger.debug(this.instance_name.length);
-            this.logger.debug("found: " + data['instances'][key]['name'].length);
-            
-            
-            this.logger.debug("match?: " + data['instances'][key]['name'].trim() === this.instance_name);
             if (data['instances'][key]['name'].trim() === this.instance_name) {
-                this.logger.debug("make it here? ");
                 let iinterval = data['instances'][key]['interval']; // Not currently used
                 
                 for (fkey in data['instances'][key]['feeds']) {
                     try {
-                        this.logger.debug(data['instances'][key]['feeds'][fkey]['enabled']);
                         if (data['instances'][key]['feeds'][fkey]['enabled']) {
                             this.feeds[i] = new FeedDisplayMenuItem(
                                 data['instances'][key]['feeds'][fkey]['url'],
@@ -344,9 +338,7 @@ FeedApplet.prototype = {
         this.logger.debug("FeedApplet._on_settings_changed");
         for (var i = 0; i < this.feeds.length; i++) {
             this.feeds[i].on_settings_changed({
-                    max_items: this.max_items,
-                    show_read_items: this.show_read_items,
-                    show_feed_image: this.show_feed_image
+                    max_items: this.max_items
             });
         }
 
@@ -609,6 +601,7 @@ FeedDisplayMenuItem.prototype = {
         /* Create reader */
         this.reader = new FeedReader.FeedReader(
                 this.logger,
+                this.feed_id,
                 url,                
                 {
                     'onUpdate' : Lang.bind(this, this.update),
