@@ -1,0 +1,6 @@
+{
+    "pref_show_notifications": {
+        "type": "generic",
+        "default": true
+    }
+}
