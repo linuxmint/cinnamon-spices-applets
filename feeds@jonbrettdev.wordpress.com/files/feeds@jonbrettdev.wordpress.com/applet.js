@@ -86,6 +86,8 @@ FeedApplet.prototype = {
             });
 
             this.logger.info("Logging set at " + ((debug_logging) ? "debug" : "info"));
+            this.logger.debug("Instance ID (config file): " + instance_id);
+            this.logger.debug("Selected Instance Name: " + this.instance_name);
 
             this.feeds = new Array();
 
@@ -99,11 +101,6 @@ FeedApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this.feed_file_error = false;
-//TODO: info -> debug
-            this.logger.info("Instance ID (config file): " + instance_id);
-            this.logger.info("Selected Instance Name: " + this.instance_name);
-
-            //this._load_feeds();
             this._read_json_config();
         } catch (e) {
             // Just in-case the logger is the issue.
@@ -114,8 +111,6 @@ FeedApplet.prototype = {
         }
 
         this._build_context_menu();
-        // update is too soon
-        //this.update();
 
         this.timeout = this.refresh_interval_mins * 60 * 1000;
         this.logger.debug("Initial timeout set in: " + this.timeout + " ms");
@@ -159,28 +154,6 @@ FeedApplet.prototype = {
                 "notifications_enabled",
                 this._on_settings_changed,
                 null);
-
-/*
-        this.settings.bindProperty(Settings.BindingDirection.IN,
-                "show_read_items",
-                "show_read_items",
-                this._on_settings_changed,
-                null);
-
-        this.settings.bindProperty(Settings.BindingDirection.IN,
-                "show_feed_image",
-                "show_feed_image",
-                this._on_settings_changed,
-                null);
-
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-                "url",
-                "url_list_str",
-                null,
-                null);
-  */                 
-
-
     },
     /* Public method for adding a feed to be processed (downloaded) */
     enqueue_feed: function(item){
@@ -560,6 +533,8 @@ FeedDisplayMenuItem.prototype = {
 
         //Used to keep track of unique feeds.
         this.feed_id = params.feed_id;
+        this.notify = params.notify;
+        this.interval = params.interval; // Not currently used, possible future feature.
 
         //TODO: Add Box layout type to facilitate adding an icon?
         this.menuItemCount = 0;
@@ -602,7 +577,8 @@ FeedDisplayMenuItem.prototype = {
         this.reader = new FeedReader.FeedReader(
                 this.logger,
                 this.feed_id,
-                url,                
+                url,         
+                this.notify,       
                 {
                     'onUpdate' : Lang.bind(this, this.update),
                     'onError' : Lang.bind(this, this.error),

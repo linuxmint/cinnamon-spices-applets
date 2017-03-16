@@ -134,8 +134,6 @@ class MainWindow(Gtk.Window):
         renderer_showread.connect("toggled", self.field_toggled, 6)
         column_showread = Gtk.TreeViewColumn("Show Read", renderer_showread, active=6)
         column_showread.set_expand(False)
-        column_showread.set_visible(self.show_hidden_fields)
-        self.hidden_fields.append(column_showread)        
         self.treeview.append_column(column_showread)        
 
         renderer_interval = Gtk.CellRendererText()

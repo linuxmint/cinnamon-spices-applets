@@ -2,7 +2,7 @@
  * Cinnamon RSS feed reader (backend)
  *
  * Author: jonbrett.dev@gmail.com
- * Date: 2013 - 2016
+ * Date: 2013 - 2017
  *
  * Cinnamon RSS feed reader is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
@@ -85,11 +85,12 @@ function FeedReader() {
 
 FeedReader.prototype = {
 
-    _init: function(logger, id, url, callbacks) {
+    _init: function(logger, id, url, notify, callbacks) {
         this.logger = logger;
         this.id = id;
         this.item_status = new Array();
         this.url = url;
+        this.notify = notify;
         this.callbacks = callbacks;
         this.error = false;
         
@@ -210,7 +211,10 @@ FeedReader.prototype = {
                 this.save_items();
                 this.callbacks.onUpdate();
 
-                if(unread_items.length == 1) {
+                if(!this.notify){
+                    this.logger.debug("Item level notifications disabled");                    
+                }
+                else if(unread_items.length == 1) {
                     this.callbacks.onNewItem(this, this.title, unread_items[0].title);
                 } else if(unread_items.length > 1) {
                     this.callbacks.onNewItem(this, this.title, unread_items.length + " unread items!");
@@ -235,6 +239,7 @@ FeedReader.prototype = {
         try {
             //TODO: Switch to be an event
             this.callbacks.onDownloaded();
+            //this.emit('')
         } catch(e){
             this.logger.debug(e)
         }
@@ -251,6 +256,7 @@ FeedReader.prototype = {
 
         //TODO: Switch to be an event
         this.callbacks.onItemRead(this);
+        //this.emit('')
         this.save_items();
     },
 
@@ -297,8 +303,7 @@ FeedReader.prototype = {
              * I found escaping the string helps to deal with special
              * characters, which could cause problems when parsing the file
              * later */
-            // Filename is now the uuid created when a feed is added tot he list.
-            //var filename = DataPath + '/' + sanitize_url(this.url);
+            // Filename is now the uuid created when a feed is added to the list.            
             var filename = DataPath + '/' + this.id;
             this.logger.debug("saving feed data to: " + filename);
 
@@ -474,8 +479,3 @@ FeedReader.prototype = {
     },
 };
 Signals.addSignalMethods(FeedReader.prototype);
-
-/*
-function sanitize_url(url) {
-    return url.replace(/.*:\/\//, '').replace(/\//g,'--');
-}*/
