@@ -252,13 +252,13 @@ FeedApplet.prototype = {
             this._applet_context_menu.addMenuItem(s);
         }
     },
-    _read_json_config: function(instance_name = null) {        
-        if(instance_name != null)
+    _read_json_config: function(instance_name = null) {            
+        if(instance_name != null && instance_name.trim() != ""){
             this.instance_name = instance_name.trim();
-
+        }
         // Read the json config file.
         let argv = ["python", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
-        Util.spawn_async(argv, Lang.bind(this, this._load_feeds));            
+        Util.spawn_async(argv, Lang.bind(this, this._load_feeds));                    
     },
     /* Private method used to load / reload all the feeds. */
     _load_feeds: function(url_json) {
