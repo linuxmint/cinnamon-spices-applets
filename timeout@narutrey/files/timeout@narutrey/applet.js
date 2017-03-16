@@ -172,7 +172,13 @@ AppletTimeout.prototype = {
             this.refleshUi();
         } else {
             if (this.state == StateCountdown.BREAK) {
-                if (this.isResumeAuto) this.beginWork(); else this.beginWait();
+                this.refleshAutoStop();
+                if (this.isResumeAuto) {
+                    this._dialog.close();
+                    this.beginWork();
+                } else {
+                    this.beginWait();
+                }
                 return;
             } else {
                 this.beginBreak();
