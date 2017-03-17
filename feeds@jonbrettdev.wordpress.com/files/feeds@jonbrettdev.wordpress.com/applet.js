@@ -418,26 +418,13 @@ FeedApplet.prototype = {
         }
     },
     /* Feed manager functions */
-    manage_feeds: function(current_url = null, redirected_url = null) {
+    manage_feeds: function() {
         this.logger.debug("FeedApplet.manage_feeds");
+        let pythonfile = 'manage_feeds.py';
         try {
-            try {
-                Util.spawnCommandLine('chmod +x "' + APPLET_PATH + '/manage_feeds.py"');
-                Util.spawnCommandLine('chown $USER "' + APPLET_PATH + '/manage_feeds.py"');                
-            } catch (e)
-            {
-                if(this.logger != undefined){
-                    this.logger.error(e);
-                }
-                global.logError(e);
-            }
+            this._set_permissions(pythonfile);
 
-            this.logger.debug("Feed_Config_File: " + FEED_CONFIG_FILE);
-            // if redirected_url != null pass parameters            
-            let argv = [APPLET_PATH + "/manage_feeds.py", this.instance_name, FEED_CONFIG_FILE];
-            if(redirected_url != null){
-                argv.push(current_url, redirected_url);
-            }
+            let argv = [APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
             Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
         }
         catch (e) {
@@ -448,6 +435,36 @@ FeedApplet.prototype = {
         }
     },
 
+    redirect_feed: function(current_url, redirected_url) {
+        this.logger.debug("FeedApplet.redirect_feed");
+        let pythonfile = 'ConfigFileManager.py';
+        try {
+            this._set_permissions(pythonfile);          
+            let argv = [APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
+            argv.push('--instance', this.instance_name);
+            argv.push('--oldurl', current_url);
+            argv.push('--newurl', redirected_url);
+            Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
+        }
+        catch (e) {
+            if(this.logger != undefined){
+                this.logger.error(e);
+            }
+            global.logError(e);
+        }
+    },
+
+    _set_permissions: function (python_file) {
+        try {
+            Util.spawnCommandLine('chmod +x "' + APPLET_PATH + '/' + python_file + '"');
+            Util.spawnCommandLine('chown $USER "' + APPLET_PATH + '/' + python_file + '"');
+        } catch (e) {
+            if (this.logger != undefined) {
+                this.logger.error(e);
+            }
+            global.logError(e);
+        }
+    },
     on_applet_removed_from_panel: function() {
         /* Clean up the timer so if the feed applet is removed it stops firing requests.  */
         this.logger.debug("FeedApplet.on_applet_removed_from_panel");
@@ -979,7 +996,8 @@ ApplicationContextMenuItem.prototype = {
                 global.log("Updating feed to point to: " + redirected_url);
 
                 // Update the feed, no GUI is shown
-                this._fdmi.owner.manage_feeds(current_url, redirected_url);
+                
+                this._fdmi.owner.redirect_feed(current_url, redirected_url);
 
                 // Reload the regular title and remove the is_redirected flag                
                 this._fdmi.owner.toggle_feeds(this._fdmi, true);

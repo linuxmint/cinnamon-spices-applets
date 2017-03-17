@@ -25,6 +25,7 @@ import os
 import uuid
 import json
 import csv
+import argparse
 from io import open
 import xml.etree.ElementTree as et
 gi.require_version('Gtk', '3.0')
@@ -357,30 +358,44 @@ class ConfigFileManager:
 
 
     @staticmethod
-    def update_redirected_feed(filename, instance, current_url, redirected_url):
+    def update_redirected_feed(filename, instance_name, current_url, redirected_url):
         """
             This static method will change a feed to an new updated current_url
         """        
-        feeds = ConfigManager.read()
-        for feed in feeds:
-            if feed[0] == current_url:
-                feed[0] = redirected_url                
-        ConfigManager.write(feeds)
-
+        feeds = ConfigFileManager.read(filename)
+        # Find the url to update        
+        for instance in feeds['instances']:
+            if instance['name'] == instance_name:
+                for feed in instance['feeds']:
+                    if feed['url'] == current_url:
+                        feed['url'] = redirected_url
+        # Save the changes back out.
+        ConfigFileManager.write(filename, feeds)
 
 
 if __name__ == '__main__':    
-    filename = sys.argv[1]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', help='settings filename including path')
+    parser.add_argument('--instance', help='instance name to update the redirected url')
+    parser.add_argument('--oldurl', help='url to be updated')
+    parser.add_argument('--newurl', help='new url to be used')
 
-    #TODO: Need to address updating redirected feeds.
-    if len(sys.argv) == 5:
-        current_url = sys.argv[3]
-        redirect_url = sys.argv[4]
+    args = parser.parse_args()
+
+    filename = args.filename
+
+    if args.instance and args.oldurl and args.newurl:
+        current_url = args.oldurl
+        redirect_url = args.newurl
+        instance = args.instance
         try:            
-            ConfigManager.update_redirected_feed(current_url, redirect_url)
-            #Need to add a new method to provide this functionality.
+            ConfigFileManager.update_redirected_feed(filename, instance, current_url, redirect_url)
         except Exception as e:
             sys.stderr.write("Error updating feed\n" + e + "\n")
+
+    elif args.instance or args.oldurl or args.newurl:
+        raise "--instance, --oldurl AND --newurl are required to redirect to a new url."
+
     else:
         jsonfile = ConfigFileManager.read(filename)
         print(json.dumps(jsonfile))

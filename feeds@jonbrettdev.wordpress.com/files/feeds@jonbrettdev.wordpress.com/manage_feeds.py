@@ -440,13 +440,18 @@ class MainWindow(Gtk.Window):
 
 
 if __name__ == '__main__':
-    #print(sys.version)
-    instance_name = sys.argv[1]
-    filename = sys.argv[2]
-    #data_path = sys.argv[2]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', help='settings filename including path')
+    parser.add_argument('instance', help='instance name to update the redirected url')
+
+    args = parser.parse_args()
+
+    filename = 
+
+    instance_name = args.instance
+    filename = args.filename
 
     # Display the window to allow the user to manage the feeds.
-    #config = ConfigFileManager(data_path + "/feeds.json", instance_name)
     config = ConfigFileManager(filename, instance_name)
     window = MainWindow(config)
     window.connect("delete-event", Gtk.main_quit)
