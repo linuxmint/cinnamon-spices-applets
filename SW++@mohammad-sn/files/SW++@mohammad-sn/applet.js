@@ -13,6 +13,22 @@ const Clutter = imports.gi.Clutter;
 const SignalManager = imports.misc.signalManager;
 
 /**
+ * localization/translation support
+ */
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+let UUID = "SW++@mohammad-sn";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+    let customTranslation = Gettext.dgettext(UUID, str);
+    if(customTranslation != str) {
+        return customTranslation;
+    }
+    return Gettext.gettext(str);
+}
+
+/**
  * #MenuItem
  * @_text (string): Text to be displayed in the menu item
  * @_icon (string): Name of icon to be displayed in the menu item
@@ -85,7 +101,7 @@ MyApplet.prototype = {
 
         this.set_applet_tooltip(_("desktop"));
 
-        this.settings = new Settings.AppletSettings(this, "SW++@mohammad-sn", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
         this.settings.bindProperty(Settings.BindingDirection.IN,   // The binding direction - IN means we only listen for changes from this applet
                                  "icon-name",                               // The setting key, from the setting schema file
                                  "icon_name",                               // The property to bind the setting to - in this case it will initialize
@@ -311,7 +327,7 @@ MyApplet.prototype = {
                          let icon=   new St.Icon({ icon_name: 'cinnamon-expo-symbolic',
                                          icon_type: St.IconType.SYMBOLIC,
                                          icon_size: 14 });
-        let item = new MenuItem(_("Expo                  "), icon, Lang.bind(this, function() {
+        let item = new MenuItem(_("Expo"), icon, Lang.bind(this, function() {
            if (!Main.expo.animationInProgress)
               Main.expo.toggle();
         } ));
