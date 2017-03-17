@@ -21,6 +21,7 @@
 import os
 import sys
 import gi
+import argparse
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from ConfigFileManager import ConfigFileManager
@@ -444,9 +445,7 @@ if __name__ == '__main__':
     parser.add_argument('filename', help='settings filename including path')
     parser.add_argument('instance', help='instance name to update the redirected url')
 
-    args = parser.parse_args()
-
-    filename = 
+    args = parser.parse_args()    
 
     instance_name = args.instance
     filename = args.filename

@@ -421,10 +421,10 @@ FeedApplet.prototype = {
     manage_feeds: function() {
         this.logger.debug("FeedApplet.manage_feeds");
         let pythonfile = 'manage_feeds.py';
-        try {
+        try {            
             this._set_permissions(pythonfile);
 
-            let argv = [APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
+            let argv = ['python', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
             Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
         }
         catch (e) {
@@ -439,8 +439,8 @@ FeedApplet.prototype = {
         this.logger.debug("FeedApplet.redirect_feed");
         let pythonfile = 'ConfigFileManager.py';
         try {
-            this._set_permissions(pythonfile);          
-            let argv = [APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
+            this._set_permissions(pythonfile);        
+            let argv = ['python', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
             argv.push('--instance', this.instance_name);
             argv.push('--oldurl', current_url);
             argv.push('--newurl', redirected_url);
@@ -455,15 +455,18 @@ FeedApplet.prototype = {
     },
 
     _set_permissions: function (python_file) {
+        this.logger.debug("FeedApplet._set_permissions");
         try {
             Util.spawnCommandLine('chmod +x "' + APPLET_PATH + '/' + python_file + '"');
             Util.spawnCommandLine('chown $USER "' + APPLET_PATH + '/' + python_file + '"');
+            
         } catch (e) {
             if (this.logger != undefined) {
                 this.logger.error(e);
             }
             global.logError(e);
         }
+        this.logger.debug("FeedApplet._set_permissions Done");
     },
     on_applet_removed_from_panel: function() {
         /* Clean up the timer so if the feed applet is removed it stops firing requests.  */
