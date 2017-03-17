@@ -15,6 +15,7 @@
             "min" : 1,
             "max" : 20,
             "step" : 1,
+            "units" : "feeds",
             "description" : "Maximum number of items",
             "tooltip" : "Maximum number of items to display for this feed"
     },
