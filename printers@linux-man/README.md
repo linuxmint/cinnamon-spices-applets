@@ -6,6 +6,8 @@ Czech translation by Radek71(<https://github.com/Radek71>)
 
 German translation by NikoKrause(<https://github.com/NikoKrause>)
 
+Russian translation by Andreevlex(<https://github.com/Andreevlex>)
+
 ###Changelog
 
 ###0.7
