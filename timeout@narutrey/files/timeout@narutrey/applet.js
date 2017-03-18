@@ -199,7 +199,11 @@ AppletTimeout.prototype = {
 
     refleshLabel: function() {
         if (this.stateAppletDisplay.label) {
-            this.set_applet_label(formatTime(this.countdownInSeconds, this.isDisplaySeconds));
+            this.set_applet_label(formatTime(
+                this.countdownInSeconds,
+                this.isDisplaySeconds,
+                this.timeWorkInMinutes > 60
+            ));
         } else {
             this.set_applet_label('');
         }
@@ -213,7 +217,7 @@ AppletTimeout.prototype = {
         if (this.state.appletLabelUpdate) {
             this.refleshLabel();
             if (!this.isDisplaySeconds || !this.stateAppletDisplay.label) {
-                this.set_applet_tooltip(_("Time left:") + ' ' + formatTime(this.countdownInSeconds, true));
+                this.set_applet_tooltip(_("Time left:") + ' ' + formatTime(this.countdownInSeconds, true, true));
             } else {
                 this.set_applet_tooltip('');
             }
@@ -275,7 +279,7 @@ Dialog.prototype = {
     },
 
     refleshBreakCountdown: function(seconds) {
-        this.label.set_text(_("Break!") + '\n\n' + formatTime(seconds, true));
+        this.label.set_text(_("Break!") + '\n\n' + formatTime(seconds, true, false));
     },
 
     open: function(isShowButtonPostpone, timestamp) {
@@ -358,23 +362,23 @@ function formatSexagesimal(value) {
     return value;
 }
 
-function formatTime(seconds, isReturnSeconds) {
+function formatTime(seconds, isReturnSeconds, isShowHours) {
     let s = formatSexagesimal(seconds);
     let m = formatSexagesimal(seconds / 60);
     let h = formatSexagesimal(seconds / (60 * 60));
     let label;
     if (isReturnSeconds) {
-        if (h > 0) {
+        if (isShowHours) {
             label = h + ':' + m + ':' + s;
         } else {
             label = m + ':' + s;
         }
     } else {
-        m = parseInt(m, 10); // Drop leading zero
-        if (seconds % 60 > 0) ++m;
-        if (h > 0) {
+        if (isShowHours) {
             label = h + ':' + m;
         } else {
+            m = parseInt(m, 10); // Drop leading zero
+            if (seconds % 60 > 0) ++m;
             label = '' + m;
         }
     }
