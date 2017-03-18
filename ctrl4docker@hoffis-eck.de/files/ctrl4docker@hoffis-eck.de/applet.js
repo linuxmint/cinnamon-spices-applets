@@ -3,7 +3,7 @@ const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 
-const UUID = "docker-ctrl@hoffis-eck.de";
+const UUID = "ctrl4docker@hoffis-eck.de";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
   return Gettext.dgettext(UUID, str)
@@ -54,7 +54,7 @@ MyApplet.prototype = {
     _bind_settings: function(instance_id) {
         let settings = new Settings.AppletSettings(
             this,
-            "docker-ctrl@hoffis-eck.de",
+            "ctrl4docker@hoffis-eck.de",
             instance_id
         );
         settings.bindProperty(Settings.BindingDirection.IN,
