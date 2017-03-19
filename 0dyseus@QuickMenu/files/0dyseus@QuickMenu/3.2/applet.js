@@ -694,7 +694,7 @@ MyApplet.prototype = {
             "dialog-information",
             St.IconType.SYMBOLIC);
         this.help_menu_item.connect("activate", Lang.bind(this, function() {
-            Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.md");
+            Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.html");
         }));
         new Tooltips.Tooltip(this.help_menu_item.actor, _("Open the help file."), this.orientation);
         this._applet_context_menu.addMenuItem(this.help_menu_item);

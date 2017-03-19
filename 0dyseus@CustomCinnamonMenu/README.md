@@ -1,11 +1,17 @@
+<span style="color:red;">
+<h2>Bug reports, feature requests and contributions</h2>
+
+<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+</span>
+
 ## Custom Cinnamon Menu applet description
 
 This applet is a custom version of the default Cinnamon Menu applet, but infinitely more customizable.
 
 ## Compatibility
 
-- ![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Cinnamon-3.0.svg) ![Linux Mint 18](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Linux_Mint-18.svg)
-- ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Cinnamon-3.2.svg) ![Linux Mint 18.1](https://odyseus.github.io/CinnamonTools/lib/MyBadges/Linux_Mint-18.1.svg)
+- ![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg) ![Linux Mint 18](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.svg)
+- ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg) ![Linux Mint 18.1](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.1.svg)
 
 <span style="color:red;">
 **Do not install on older versions of Cinnamon.**
@@ -54,6 +60,7 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 ## Contributors/Mentions
 - [NikoKrause](https://github.com/NikoKrause): Bug fixes and German localization.
 - [Radek71](https://github.com/Radek71): Czech localization.
+- [muzena](https://github.com/muzena): Croatian localization.
 - Some advanced features on this applet are based on [lestcape](https://github.com/lestcape)'s [Configurable Menu applet](https://github.com/lestcape/Configurable-Menu).
 - Fuzzy search feature based on [Sane Menu](https://cinnamon-spices.linuxmint.com/applets/view/258) applet by [nooulaif](https://github.com/nooulaif).
 - Some icons used by this menu are from [Entypo pictograms](www.entypo.com) by Daniel Bruce.

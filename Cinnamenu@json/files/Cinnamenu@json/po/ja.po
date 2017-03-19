@@ -1,0 +1,229 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Gno-Menu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2014-11-15 16:09+0900\n"
+"Last-Translator: BALLOON a.k.a. Fu-sen. <fu-sen@shigakeiichi.com>\n"
+"Language-Team: \n"
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+
+#: convenience.js
+
+
+#: extension.js
+
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu: Firefox ブックマークの検索は使用できません"
+
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+msgstr ""
+"もし Firefox ブックマークの検索を使用したい場合は、次のパッケージをインストー"
+"ルする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
+"(Fedora)"
+
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu: Midori ブックマークの検索は使用できません"
+
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+msgstr ""
+"もし Midori ブックマークの検索を使用したい場合は、次のパッケージをインストー"
+"ルする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
+"(Fedora)"
+
+msgid "Recent"
+msgstr "最近"
+
+msgid "Web"
+msgstr "Web"
+
+msgid "Favorites"
+msgstr "Favorites"
+
+msgid "Places"
+msgstr "場所"
+
+msgid "List View"
+msgstr "リスト一覧"
+
+msgid "Grid View"
+msgstr "グリット一覧"
+
+msgid "Type to search..."
+msgstr "入力して検索..."
+
+msgid "Frequent Apps"
+msgstr "Frequent Apps"
+
+msgid "All Applications"
+msgstr "すべてのアプリケーション"
+
+msgid "Restart Shell"
+msgstr "シェルの再起動"
+
+msgid "Suspend"
+msgstr "サスペンド"
+
+msgid "Shutdown"
+msgstr "シャットダウン"
+
+msgid "Logout User"
+msgstr "ユーザーのログアウト"
+
+msgid "Lock Screen"
+msgstr "画面ロック"
+
+msgid "Preferences"
+msgstr "設定"
+
+msgid "No cinnamenu stylesheet found"
+msgstr "cinnamenu スタイルシートが見つかりません"
+
+
+
+#: placeDisplay.js
+
+msgid "Failed to launch \"%s\""
+msgstr "ランチャー \"%s\" に問題があります"
+
+msgid "Home"
+msgstr "ホーム"
+
+msgid "Computer"
+msgstr "コンピューター"
+
+msgid "Browse Network"
+msgstr "ネットワークの閲覧"
+
+
+#: prefs.js
+
+msgid "<b>Panel Settings</b>"
+msgstr "<b>パネルの設定</b>"
+
+msgid "Disable activities hot corner"
+msgstr "ホットコーナーの動作を無効にする"
+
+msgid "Remove View button from panel"
+msgstr "パネルの表示ボタンを削除"
+
+msgid "Label for View button"
+msgstr "Label for View button"
+
+msgid "Use icon with View button"
+msgstr "Use icon with View button"
+
+msgid "Remove Apps button from panel"
+msgstr "パネルからアプリボタンを削除"
+
+msgid "Label for Apps button"
+msgstr "Label for Apps button"
+
+msgid "Use icon with Apps button"
+msgstr "Use icon with Apps button"
+
+msgid "Remove Menu button from panel"
+msgstr "パネルのメニューボタンを削除"
+
+msgid "Label for Menu button"
+msgstr "Label for Menu button"
+
+msgid "Use icon with Menu button"
+msgstr "Use icon with Menu button"
+
+msgid "Disable Menu button hot spot"
+msgstr "ホットスポットのメニューボタンを無効"
+
+msgid "Disable Menu button shortcut key"
+msgstr "ショートカットのメニューボタンを無効"
+
+msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+msgstr "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+
+msgid "<b>Menu Settings</b>"
+msgstr "<b>メニュー設定</b>"
+
+msgid "Hide Shortcuts Panel"
+msgstr "Hide Shortcuts Panel"
+
+msgid "Menu layout size"
+msgstr "メニューレイアウトスタイル"
+
+msgid "Large"
+msgstr "Large"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Small"
+msgstr "Small"
+
+msgid "Icons to display on Shortcuts Panel"
+msgstr "Icons to display on Shortcuts Panel"
+
+msgid "Applications to display at startup"
+msgstr "開始時に表示するアプリケーション"
+
+msgid "All"
+msgstr ""
+
+msgid "Frequent"
+msgstr ""
+
+msgid "Default view mode for applications"
+msgstr "アプリケーションの標準表示モード"
+
+msgid "List"
+msgstr "List"
+
+msgid "Grid"
+msgstr "Grid"
+
+msgid "Category selection method"
+msgstr "カテゴリの選択方法"
+
+msgid "Hover"
+msgstr "Hover"
+
+msgid "Click"
+msgstr "Click"
+
+msgid "Size of Shortcuts Panel icons"
+msgstr "お気に入りパネルアイコンのサイズ"
+
+msgid "Size of Application List icons"
+msgstr "アプリケーションリストアイコンのサイズ"
+
+msgid "Size of Application Grid icons"
+msgstr "アプリケーショングリットアイコンのサイズ"
+
+
+#: webChromium.js
+
+
+#: webEpiphany.js
+
+
+#: webFirefox.js
+
+
+#: webGoogleChrome.js
+
+
+#: webMidori.js
+
+
+#: webOpera.js
+
+
+#: workspaceThumbnail.js
+

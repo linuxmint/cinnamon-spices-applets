@@ -87,13 +87,19 @@ MyApplet.prototype = {
             this._buildMenu();
 
             this.forceTranslation = false;
-            this.detectedLang = "";
             this.key_1_id = null;
+            this.key_forced_1_id = null;
             this.key_2_id = null;
+            this.key_forced_2_id = null;
+            this.key_3_id = null;
+            this.key_forced_3_id = null;
+            this.key_4_id = null;
+            this.key_forced_4_id = null;
 
             this._updateIconAndLabel();
             this._setAppletTooltip();
             this._expandAppletContextMenu();
+            this._updateKeybindings();
             this.ensureHistoryFileExists();
 
             if (!this.pref_all_dependencies_met)
@@ -105,7 +111,7 @@ MyApplet.prototype = {
             // moment of extracting strings.
             // As a side effect, some strings that would need to be extracted are ignored.
             // That's the purpose of this "dummy object", store strings that were ignored.
-            // This strings belong to the two settings that lists languages (pref_target_lang and pref_source_lang).
+            // This strings belong to the two settings that lists languages (pref_target_lang_# and pref_source_lang_#).
             // I purposely ignore them because if they were translated, it will break their
             // alphabetical order on the comboboxes. I have chosen the least of the evils.
             // And I have chosen this approach to avoid at all cost the manual edition
@@ -122,6 +128,9 @@ MyApplet.prototype = {
     },
 
     getLegibleKeybinding: function(aHKStr) {
+        if (this.pref_loggin_enabled)
+            global.logError("\ngetLegibleKeybinding()>aHKStr:\n" + aHKStr);
+
         if (aHKStr.search("<Alt>") !== -1)
             aHKStr = aHKStr.replace("<Alt>", "Alt + ");
 
@@ -161,31 +170,68 @@ MyApplet.prototype = {
         if (this.tooltip)
             this.tooltip.destroy();
 
-        let boldSpan = function(aStr) {
+        let bD = function(aStr) {
             return '<span weight="bold">' + aStr + '</span>';
         };
 
-        let tt = boldSpan(_(this.metadata.name)) + "\n\n";
-        tt += boldSpan(_("Service provider") + ": ") + this.providerData[this.pref_service_provider].name + "\n";
-        tt += boldSpan(_("Language pair") + ": ") + $.langs[this.pref_source_lang] + " > " +
-            $.langs[this.pref_target_lang] + "\n";
+        let tt = bD(_(this.metadata.name));
 
-        if (this.pref_translate_key !== "") {
-            let [leftKB, rightKB] = this.pref_translate_key.split("::");
-            tt += boldSpan(_("Key combination to translate") + ": ") + "\n" +
-                (leftKB ? "\t" + this.getLegibleKeybinding(leftKB) + "\n" : "") +
-                (rightKB ? "\t" + this.getLegibleKeybinding(rightKB) + "\n" : "");
-        }
+        [1, 2, 3, 4].forEach(Lang.bind(this, function(aID) {
+            let forceHeaderCreation;
 
-        if (this.pref_force_translate_key !== "") {
-            let [leftKB, rightKB] = this.pref_force_translate_key.split("::");
-            tt += boldSpan(_("Key combination to force translation") + ": ") + "\n" +
-                (leftKB ? "\t" + this.getLegibleKeybinding(leftKB) + "\n" : "") +
-                (rightKB ? "\t" + this.getLegibleKeybinding(rightKB) + "\n" : "");
-        }
+            let hK = this["pref_translate_key_" + aID],
+                fHK = this["pref_translate_key_forced_" + aID];
+
+            switch (aID) {
+                case 1:
+                    forceHeaderCreation = true;
+                    tt += "\n\n" + bD(_("First translation mechanism (Left click on applet)")) + "\n";
+                    break;
+                case 2:
+                    forceHeaderCreation = true;
+                    tt += "\n\n" + bD(_("Second translation mechanism (Middle click on applet)")) + "\n";
+                    break;
+                case 3:
+                    forceHeaderCreation = hK !== "" || fHK !== "";
+
+                    if (forceHeaderCreation)
+                        tt += "\n\n" + bD(_("Third translation mechanism (Hotkey #1)")) + "\n";
+                    break;
+                case 4:
+                    forceHeaderCreation = hK !== "" || fHK !== "";
+
+                    if (forceHeaderCreation)
+                        tt += "\n\n" + bD(_("Fourth translation mechanism (Hotkey #2)")) + "\n";
+                    break;
+            }
+
+            if (forceHeaderCreation) {
+                tt += "\t" + bD(_("Service provider") + ": ") +
+                    this.providerData[this["pref_service_provider_" + aID]].name + "\n";
+                tt += "\t" + bD(_("Language pair") + ": ") + $.langs[this["pref_source_lang_" + aID]] +
+                    " > " +
+                    $.langs[this["pref_target_lang_" + aID]];
+            }
+
+            if (hK !== "") {
+                let [leftKB, rightKB] = hK.split("::");
+                tt += "\n\t" + bD(_("Translation hotkey") + ": ") +
+                    (leftKB ? this.getLegibleKeybinding(leftKB) : "") +
+                    ((leftKB && rightKB) ? " :: " : "") +
+                    (rightKB ? this.getLegibleKeybinding(rightKB) : "");
+            }
+
+            if (fHK !== "") {
+                let [leftKB, rightKB] = fHK.split("::");
+                tt += "\n\t" + bD(_("Force translation hotkey") + ": ") +
+                    (leftKB ? this.getLegibleKeybinding(leftKB) : "") +
+                    ((leftKB && rightKB) ? " :: " : "") +
+                    (rightKB ? this.getLegibleKeybinding(rightKB) : "");
+            }
+        }));
 
         if (!this.pref_all_dependencies_met) {
-            tt += "\n<span color=\"red\">" + boldSpan(_("Unmet dependencies found!!!") + "\n" +
+            tt += "\n<span color=\"red\">" + bD(_("Unmet dependencies found!!!") + "\n" +
                 _("A detailed error has been logged into ~/.cinnamon/glass.log file.")) + "</span>";
         }
 
@@ -200,37 +246,90 @@ MyApplet.prototype = {
         }));
     },
 
+    _setProviderVisibility: function(aID) {
+        let hide = this["pref_translate_key_" + aID] === "" &&
+            this["pref_translate_key_forced_" + aID] === "";
+
+        this["ctx_header_" + aID].actor[hide ? "hide" : "show"]();
+        this["g_ctx_chk_" + aID].actor[hide ? "hide" : "show"]();
+        this["y_ctx_chk_" + aID].actor[hide ? "hide" : "show"]();
+        this["ctx_separator_" + aID].actor[hide ? "hide" : "show"]();
+    },
+
     _expandAppletContextMenu: function() {
         try {
-            this.google_context_check = new PopupMenu.PopupIndicatorMenuItem(this.providerData.google.name);
-            this.google_context_check.tooltip = new Tooltips.Tooltip(
-                this.google_context_check.actor,
-                _("Set %s as default translation engine.").format(this.providerData.google.name)
-            );
-            this.google_context_check.setOrnament(OrnamentType.DOT, this.service_provider === "google");
-            this.google_context_check.connect("activate", Lang.bind(this, function() {
-                this._setContextCheckboxes("google");
-            }));
-            this._applet_context_menu.addMenuItem(this.google_context_check);
+            [1, 2, 3, 4].forEach(Lang.bind(this, function(aID) {
+                let header = "ctx_header_" + aID,
+                    separator = "ctx_separator_" + aID;
 
-            this.yandex_context_check = new PopupMenu.PopupIndicatorMenuItem(this.providerData.yandex.name);
-            this.yandex_context_check.tooltip = new Tooltips.Tooltip(
-                this.yandex_context_check.actor,
-                _("Set %s as default translation engine.").format(this.providerData.yandex.name)
-            );
-            this.yandex_context_check.setOrnament(OrnamentType.DOT, this.service_provider === "yandex");
-            this.yandex_context_check.connect("activate", Lang.bind(this, function() {
-                this._setContextCheckboxes("yandex");
+                this[header] = new PopupMenu.PopupBaseMenuItem({
+                    hover: false,
+                    focusOnHover: false
+                });
+
+                let headerLabel = new St.Label({
+                    style: "font-weight: bold;"
+                });
+                this[header].addActor(headerLabel);
+
+                switch (aID) {
+                    case 1:
+                        headerLabel.set_text(_("Left click on applet"));
+                        break;
+                    case 2:
+                        headerLabel.set_text(_("Middle click on applet"));
+                        break;
+                    case 3:
+                        headerLabel.set_text(_("Hotkey #1"));
+                        break;
+                    case 4:
+                        headerLabel.set_text(_("Hotkey #2"));
+                        break;
+                }
+
+                this._applet_context_menu.addMenuItem(this[header]);
+
+                let gCheck = "g_ctx_chk_" + aID,
+                    yCheck = "y_ctx_chk_" + aID,
+                    provider = this["pref_service_provider_" + aID];
+
+                this[gCheck] = new PopupMenu.PopupIndicatorMenuItem(this.providerData.google.name);
+                this[gCheck].tooltip = new Tooltips.Tooltip(
+                    this[gCheck].actor,
+                    _("Set %s as default translation engine.").format(this.providerData.google.name)
+                );
+                this[gCheck].setOrnament(OrnamentType.DOT, provider === "google");
+                this[gCheck].connect("activate", Lang.bind(this, function() {
+                    this._setContextCheckboxes("google", aID);
+                }));
+                this._applet_context_menu.addMenuItem(this[gCheck]);
+
+                this[yCheck] = new PopupMenu.PopupIndicatorMenuItem(this.providerData.yandex.name);
+                this[yCheck].tooltip = new Tooltips.Tooltip(
+                    this[yCheck].actor,
+                    _("Set %s as default translation engine.").format(this.providerData.yandex.name)
+                );
+                this[yCheck].setOrnament(OrnamentType.DOT, provider === "yandex");
+                this[yCheck].connect("activate", Lang.bind(this, function() {
+                    this._setContextCheckboxes("yandex", aID);
+                }));
+                this._applet_context_menu.addMenuItem(this[yCheck]);
+
+                this[separator] = new PopupMenu.PopupSeparatorMenuItem();
+
+                this._applet_context_menu.addMenuItem(this[separator]);
+
+                if (aID > 2)
+                    this._setProviderVisibility(aID);
             }));
-            this._applet_context_menu.addMenuItem(this.yandex_context_check);
         } catch (aErr) {
             global.logError(aErr);
         }
 
-        let menuItem = new PopupMenu.PopupSeparatorMenuItem();
-        this._applet_context_menu.addMenuItem(menuItem);
+        let subMenu = new PopupMenu.PopupSubMenuMenuItem(_("Applet extras"));
+        this._applet_context_menu.addMenuItem(subMenu);
 
-        menuItem = new PopupMenu.PopupIconMenuItem(
+        let menuItem = new PopupMenu.PopupIconMenuItem(
             _("Translation history"),
             "popup-translator-document-open-recent",
             St.IconType.SYMBOLIC
@@ -246,7 +345,7 @@ MyApplet.prototype = {
                 global.logError(aErr);
             }
         }));
-        this._applet_context_menu.addMenuItem(menuItem);
+        subMenu.menu.addMenuItem(menuItem);
 
         menuItem = new PopupMenu.PopupIconMenuItem(
             _("History storage"),
@@ -260,7 +359,7 @@ MyApplet.prototype = {
         menuItem.connect("activate", Lang.bind(this, function() {
             Util.spawn(["xdg-open", [GLib.get_home_dir(), ".cinnamon", "configs", this.metadata.uuid + "History"].join("/")]);
         }));
-        this._applet_context_menu.addMenuItem(menuItem);
+        subMenu.menu.addMenuItem(menuItem);
 
         menuItem = new PopupMenu.PopupIconMenuItem(
             _("Check dependencies"),
@@ -274,7 +373,7 @@ MyApplet.prototype = {
         menuItem.connect("activate", Lang.bind(this, function() {
             this.checkDependencies();
         }));
-        this._applet_context_menu.addMenuItem(menuItem);
+        subMenu.menu.addMenuItem(menuItem);
 
         menuItem = new PopupMenu.PopupIconMenuItem(
             _("Help"),
@@ -286,16 +385,17 @@ MyApplet.prototype = {
             _("Open this applet help file.")
         );
         menuItem.connect("activate", Lang.bind(this, function() {
-            Util.spawn(["xdg-open", this.main_applet_dir + "/HELP.md"]);
+            Util.spawn(["xdg-open", this.main_applet_dir + "/HELP.html"]);
         }));
-        this._applet_context_menu.addMenuItem(menuItem);
+        subMenu.menu.addMenuItem(menuItem);
     },
 
-    _setContextCheckboxes: function(aProvider) {
+    _setContextCheckboxes: function(aProvider, aID) {
         try {
-            this.pref_service_provider = aProvider;
-            this.google_context_check._ornament.child._delegate.setToggleState(aProvider === "google");
-            this.yandex_context_check._ornament.child._delegate.setToggleState(aProvider === "yandex");
+            this["pref_service_provider_" + aID] = aProvider;
+
+            this["g_ctx_chk_" + aID]._ornament.child._delegate.setToggleState(aProvider === "google");
+            this["y_ctx_chk_" + aID]._ornament.child._delegate.setToggleState(aProvider === "yandex");
         } catch (aErr) {
             global.logError(aErr);
         }
@@ -338,7 +438,7 @@ MyApplet.prototype = {
             global.logWarning("Could not load icon file \"" + this.pref_custom_icon_for_applet + "\" for menu button");
         }
 
-        if (this.pref_use_a_custom_icon_for_applet && this.pref_custom_icon_for_applet === "") {
+        if (this.pref_custom_icon_for_applet === "") {
             this._applet_icon_box.hide();
         } else {
             this._applet_icon_box.show();
@@ -399,30 +499,36 @@ MyApplet.prototype = {
         }
     },
 
-    _displayHistory: function(aSourceText) {
-        let historyEntry = this.transHistory[aSourceText];
+    _displayHistory: function(aSourceText, aMechId) {
+        let historyEntry = this.transHistory[this["pref_target_lang_" + aMechId]][aSourceText];
+
+        if (this.pref_loggin_enabled)
+            global.logError("\n_displayHistory()>historyEntry:\n" + JSON.stringify(historyEntry));
+
         this._displayPopup(
             historyEntry["sL"],
             historyEntry["tL"],
             aSourceText,
-            "[" + _("History") + "] " + historyEntry["tT"]
+            "[" + _("History") + "] " + historyEntry["tT"],
+            aMechId
         );
     },
 
-    _displayPopup: function(aDetectedLang, aTargetLang, aSourceText, aTranslatedText) {
+    _displayPopup: function(aDetectedLang, aTargetLang, aSourceText, aTranslatedText, aMechId) {
         try {
-            let m = this.menu._transTable;
+            let m = this.menu._transTable,
+                provider = this["pref_service_provider_" + aMechId];
             if (m) {
                 m.sourceText = aSourceText;
-                m.providerURL = this.providerData[this.service_provider].websiteURL;
-                m.providerURI = (this.providerData[this.service_provider].websiteURI)
+                m.providerURL = this.providerData[provider].websiteURL;
+                m.providerURI = (this.providerData[provider].websiteURI)
                     .format(aTargetLang, encodeURIComponent(aSourceText));
                 m.languagePair.set_text($.langs[aDetectedLang] + " > " + $.langs[aTargetLang]);
                 m.translatedText.set_text(aTranslatedText);
                 m.footerButton.tooltip._tooltip.set_text(_("Go to %s's website")
-                    .format(this.providerData[this.service_provider].name));
+                    .format(this.providerData[provider].name));
                 m.footerLabel.set_text(_("Powered By %s")
-                    .format(this.providerData[this.service_provider].name));
+                    .format(this.providerData[provider].name));
             }
         } finally {
             if (!this.menu.isOpen)
@@ -435,11 +541,26 @@ MyApplet.prototype = {
         let settingsArray = [
             [bD.IN, "pref_custom_icon_for_applet", this._updateIconAndLabel],
             [bD.IN, "pref_custom_label_for_applet", this._updateIconAndLabel],
-            [bD.IN, "pref_translate_key", this._updateKeybindings],
-            [bD.IN, "pref_force_translate_key", this._updateKeybindings],
-            [bD.BIDIRECTIONAL, "pref_service_provider", this._setAppletTooltip],
-            [bD.IN, "pref_source_lang", this._setAppletTooltip],
-            [bD.IN, "pref_target_lang", this._setAppletTooltip],
+            [bD.BIDIRECTIONAL, "pref_service_provider_1", this._setAppletTooltip],
+            [bD.IN, "pref_source_lang_1", this._setAppletTooltip],
+            [bD.IN, "pref_target_lang_1", this._setAppletTooltip],
+            [bD.IN, "pref_translate_key_1", this._updateKeybindings],
+            [bD.IN, "pref_translate_key_forced_1", this._updateKeybindings],
+            [bD.BIDIRECTIONAL, "pref_service_provider_2", this._setAppletTooltip],
+            [bD.IN, "pref_source_lang_2", this._setAppletTooltip],
+            [bD.IN, "pref_target_lang_2", this._setAppletTooltip],
+            [bD.IN, "pref_translate_key_2", this._updateKeybindings],
+            [bD.IN, "pref_translate_key_forced_2", this._updateKeybindings],
+            [bD.BIDIRECTIONAL, "pref_service_provider_3", this._setAppletTooltip],
+            [bD.IN, "pref_source_lang_3", this._setAppletTooltip],
+            [bD.IN, "pref_target_lang_3", this._setAppletTooltip],
+            [bD.IN, "pref_translate_key_3", this._updateKeybindings],
+            [bD.IN, "pref_translate_key_forced_3", this._updateKeybindings],
+            [bD.BIDIRECTIONAL, "pref_service_provider_4", this._setAppletTooltip],
+            [bD.IN, "pref_source_lang_4", this._setAppletTooltip],
+            [bD.IN, "pref_target_lang_4", this._setAppletTooltip],
+            [bD.IN, "pref_translate_key_4", this._updateKeybindings],
+            [bD.IN, "pref_translate_key_forced_4", this._updateKeybindings],
             [bD.IN, "pref_style_for_language_pair", this._buildMenu],
             [bD.IN, "pref_style_for_translated_text", this._buildMenu],
             [bD.IN, "pref_style_for_footer", this._buildMenu],
@@ -450,6 +571,8 @@ MyApplet.prototype = {
             [bD.IN, "pref_history_width_to_trigger_word_wrap", null],
             [bD.IN, "pref_yandex_api_keys", null],
             [bD.BIDIRECTIONAL, "pref_all_dependencies_met", null],
+            [bD.IN, "pref_loggin_enabled", null],
+            [bD.IN, "pref_loggin_save_history_indented", null],
         ];
         let newBinding = typeof this.settings.bind === "function";
         for (let [binding, property_name, callback] of settingsArray) {
@@ -462,39 +585,42 @@ MyApplet.prototype = {
         }
     },
 
-    translate: function(aForce) {
+    translate: function(aForce, aMechId) {
         this.forceTranslation = aForce;
 
-        let selection = this.selection;
+        let selection = this.selection,
+            targetLang = this["pref_target_lang_" + aMechId];
 
-        if (selection === "" || selection === " ")
-            return;
+        try {
+            if (selection === "" || selection === " ")
+                return;
 
-        let historyEntry = this.transHistory[selection];
+            let historyEntry = this.transHistory[targetLang] ?
+                this.transHistory[targetLang][selection] :
+                false;
 
-        if (this.forceTranslation)
-            historyEntry = false;
+            if (this.forceTranslation)
+                historyEntry = false;
 
-        if (historyEntry) {
-            this._displayHistory(selection);
-            return;
+            if (historyEntry && targetLang === historyEntry["tL"]) {
+                this._displayHistory(selection, aMechId);
+                return;
+            }
+        } catch (aErr) {
+            global.logError(aErr);
         }
 
-        switch (this.service_provider) {
+        switch (this["pref_service_provider_" + aMechId]) {
             case "google":
-                let GoogleURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&q=".format(
-                    this.pref_source_lang === "" ? "auto" : this.pref_source_lang,
-                    this.pref_target_lang);
-                this.Google_provider(GoogleURL, selection);
+                this.Google_provider(selection, aMechId);
                 break;
             case "yandex":
-                let YandexURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&lang=%s&text=%s&format=plain&options=1";
-                this.Yandex_provider(YandexURL, selection);
+                this.Yandex_provider(selection, aMechId);
                 break;
         }
     },
 
-    Yandex_provider: function(aURL, aSourceText) {
+    Yandex_provider: function(aSourceText, aMechId) {
         try {
             let APIKeys = this.pref_yandex_api_keys.split("\n").filter(function(aKey) { // Filter possible empty elements.
                 if (aKey !== "")
@@ -502,35 +628,45 @@ MyApplet.prototype = {
                 return false;
             });
 
+            if (this.pref_loggin_enabled)
+                global.logError("\nYandex_provider()>APIKeys:\n" + APIKeys);
+
             if (APIKeys.length === 0) {
                 Main.criticalNotify(_(this.metadata.name), [
                     _("No Yandex API keys were found!!!"),
-                    _("Check this applet HELP.md file for instructions."),
+                    _("Check this applet help file for instructions."),
                     _("It can be accessed from this applet context menu.")
                 ].join("\n"));
                 return;
             }
 
-            let langPair = (this.pref_source_lang === "") ?
-                this.pref_target_lang :
-                this.pref_source_lang + "-" + this.pref_target_lang;
+            let sourceLang = this["pref_source_lang_" + aMechId];
+            let targetLang = this["pref_target_lang_" + aMechId];
+            let langPair = (sourceLang === "") ?
+                targetLang :
+                sourceLang + "-" + targetLang;
             let randomKey = APIKeys[Math.floor(Math.random() * APIKeys.length - 1) + 1];
+            // There are 3 string substitutions in the following URL.
+            // Those substitutions are done on the Python script (appletHelper.py).
+            let YandexURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&lang=%s&text=%s&format=plain&options=1";
 
             Util.spawn_async([
                     "python3",
                     this.main_applet_dir + "/appletHelper.py",
                     "yandex",
-                    aURL,
+                    YandexURL,
                     randomKey,
                     langPair,
                     aSourceText
                 ],
                 Lang.bind(this, function(aResponse) {
+                    if (this.pref_loggin_enabled)
+                        global.logError("\nYandex_provider()>aResponse:\n" + aResponse);
+
                     try {
                         let result = JSON.parse(aResponse);
                         let transText = "",
                             errorMessage = "",
-                            targetLang = this.pref_target_lang,
                             detectedLang = "",
                             informError = true;
                         switch (result.code) {
@@ -538,12 +674,13 @@ MyApplet.prototype = {
                                 informError = false;
                                 transText = result.text[0];
 
-                                if (this.pref_source_lang === "")
+                                if (sourceLang === "")
                                     detectedLang = result.detected.lang || "?";
                                 else
-                                    detectedLang = this.pref_source_lang;
+                                    detectedLang = sourceLang;
 
-                                // Do not save history if the source text is equal to the translated text.
+                                // Do not save history if the source text is equal to the
+                                // translated text.
                                 if (aSourceText !== transText) {
                                     this.setTransHistory(
                                         aSourceText, {
@@ -559,7 +696,8 @@ MyApplet.prototype = {
                                     detectedLang,
                                     targetLang,
                                     aSourceText,
-                                    transText
+                                    transText,
+                                    aMechId
                                 );
                                 break;
                             case 401:
@@ -599,21 +737,31 @@ MyApplet.prototype = {
         }
     },
 
-    Google_provider: function(aURL, aSourceText) {
+    Google_provider: function(aSourceText, aMechId) {
         try {
+            let sourceLang = this["pref_source_lang_" + aMechId];
+            let targetLang = this["pref_target_lang_" + aMechId];
+            let GoogleURL = "https://translate.googleapis.com/translate_a/single?client=gtx&sl=%s&tl=%s&dt=t&q=".format(
+                sourceLang === "" ?
+                "auto" :
+                sourceLang,
+                targetLang);
+
             Util.spawn_async([
                     "python3",
                     this.main_applet_dir + "/appletHelper.py",
                     "google",
-                    aURL,
+                    GoogleURL,
                     encodeURIComponent(aSourceText)
                 ],
                 Lang.bind(this, function(aResponse) {
+                    if (this.pref_loggin_enabled)
+                        global.logError("\nGoogle_provider()>aResponse:\n" + aResponse);
+
                     let transText = "",
                         detectedLang;
                     try {
-                        let result = JSON.parse(aResponse.replace(/,+/g, ",")),
-                            targetLang = this.pref_target_lang;
+                        let result = JSON.parse(aResponse.replace(/,+/g, ","));
 
                         if (result[0].length > 1) {
                             let i = 0,
@@ -625,10 +773,10 @@ MyApplet.prototype = {
                             transText = result[0][0][0];
                         }
 
-                        if (this.pref_source_lang === "")
+                        if (sourceLang === "")
                             detectedLang = result[1] ? result[1] : "?";
                         else
-                            detectedLang = this.pref_source_lang;
+                            detectedLang = sourceLang;
 
                         // Do not save history if the source text is equal to the translated text.
                         if (aSourceText !== transText) {
@@ -646,7 +794,8 @@ MyApplet.prototype = {
                             detectedLang,
                             targetLang,
                             aSourceText,
-                            transText
+                            transText,
+                            aMechId
                         );
                     } catch (aErr) {
                         this._notifyParseError("Google Translator");
@@ -658,39 +807,66 @@ MyApplet.prototype = {
         }
     },
 
-    on_applet_clicked: function() {
-        if (this.pref_all_dependencies_met) {
-            let ctrlKey = (Clutter.ModifierType.CONTROL_MASK & global.get_pointer()[2]) !== 0;
-            this.translate(ctrlKey);
-        } else {
-            this.informAboutMissingDependencies();
+    _onButtonPressEvent: function(aActor, aE) {
+        let btn = aE.get_button();
+
+        if (btn === 1 || btn === 2) {
+            if (this.pref_all_dependencies_met) {
+                let ctrlKey = (Clutter.ModifierType.CONTROL_MASK & global.get_pointer()[2]) !== 0;
+                this.translate(ctrlKey, btn);
+            } else {
+                this.informAboutMissingDependencies();
+            }
         }
+
+        return Applet.Applet.prototype._onButtonPressEvent.call(this, aActor, aE);
     },
 
     _updateKeybindings: function() {
-        if (this.key_1_id)
-            Main.keybindingManager.removeHotKey(this.key_1_id);
+        [1, 2, 3, 4].forEach(Lang.bind(this, function(aID) {
+            let id = "key_" + aID + "_id",
+                forcedId = "key_forced_" + aID + "_id";
 
-        if (this.key_2_id)
-            Main.keybindingManager.removeHotKey(this.key_2_id);
+            if (this[id]) {
+                Main.keybindingManager.removeHotKey(this[id]);
+                this[id] = null;
+            }
 
-        this.key_1_id = "popup_translator_translate_key-" + this._instance_id;
-        this.key_2_id = "popup_translator_force_translate_key-" + this._instance_id;
+            if (this[forcedId]) {
+                Main.keybindingManager.removeHotKey(this[forcedId]);
+                this[forcedId] = null;
+            }
 
-        Main.keybindingManager.addHotKey(
-            this.key_1_id,
-            this.pref_translate_key,
-            Lang.bind(this, function() {
-                this.translate(false);
-            })
-        );
-        Main.keybindingManager.addHotKey(
-            this.key_2_id,
-            this.pref_force_translate_key,
-            Lang.bind(this, function() {
-                this.translate(true);
-            })
-        );
+            let prefId = "pref_translate_key_" + aID,
+                prefForcedId = "pref_translate_key_forced_" + aID;
+
+            if (this[prefId]) {
+                this[id] = "popup_translator_key_" + aID + "-" + this._instance_id;
+
+                Main.keybindingManager.addHotKey(
+                    this[id],
+                    this[prefId],
+                    Lang.bind(this, function() {
+                        this.translate(false, aID);
+                    })
+                );
+            }
+
+            if (this[prefForcedId]) {
+                this[forcedId] = "popup_translator_key_forced_" + aID + "-" + this._instance_id;
+
+                Main.keybindingManager.addHotKey(
+                    this[forcedId],
+                    this[prefForcedId],
+                    Lang.bind(this, function() {
+                        this.translate(true, aID);
+                    })
+                );
+            }
+
+            if (aID > 2)
+                this._setProviderVisibility(aID);
+        }));
 
         this._setAppletTooltip();
     },
@@ -777,19 +953,37 @@ MyApplet.prototype = {
                 data = JSON.parse(Cinnamon.get_file_contents_utf8_sync(this.historyFile.get_path()));
             } else {
                 forceSaving = true;
-                data = {};
+                data = {
+                    __version__: 1
+                };
             }
         } finally {
-            this._translation_history = data;
-
-            if (forceSaving)
-                this.saveHistoryToFile();
+            try {
+                // Implemented __version__ in case that in the future I decide
+                // to change again the history mechanism. Not likely (LOL).
+                if (!data.__version__) {
+                    forceSaving = true;
+                    let newData = JSON.stringify($.convertHistoryZeroToOne(data));
+                    this._translation_history = JSON.parse(newData);
+                    this._translation_history.__version__ = 1;
+                } else if (data.__version__ === 1) {
+                    this._translation_history = data;
+                }
+            } finally {
+                if (forceSaving)
+                    this.saveHistoryToFile();
+            }
         }
     },
 
     saveHistoryToFile: function() {
-        // Do not save the history with indentations. It's not needed.
-        let rawData = JSON.stringify(this._translation_history);
+        let rawData;
+
+        if (this.pref_loggin_save_history_indented)
+            rawData = JSON.stringify(this._translation_history, null, "    ");
+        else
+            rawData = JSON.stringify(this._translation_history);
+
         let raw = this.historyFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
         let out_file = Gio.BufferedOutputStream.new_sized(raw, 4096);
         Cinnamon.write_string_to_stream(out_file, rawData);
@@ -809,6 +1003,9 @@ MyApplet.prototype = {
                 "check-dependencies"
             ],
             Lang.bind(this, function(aResponse) {
+                if (this.pref_loggin_enabled)
+                    global.logError("\ncheckDependencies()>aResponse:\n" + aResponse);
+
                 let res = (aResponse.split("<!--SEPARATOR-->")[1])
                     // Preserve line breaks.
                     .replace(/\n+/g, "<br>")
@@ -818,10 +1015,10 @@ MyApplet.prototype = {
 
                 if (res.length > 1) {
                     global.logError(
-                        "\n# [" + _("Popup Translator") + "]" + "\n" +
+                        "\n# [" + _(this.metadata.name) + "]" + "\n" +
                         "# " + _("Unmet dependencies found!!!") + "\n" +
                         res + "\n" +
-                        "# " + _("Check this applet HELP.md file for instructions.") + "\n" +
+                        "# " + _("Check this applet help file for instructions.") + "\n" +
                         "# " + _("It can be accessed from this applet context menu.")
                     );
                     this.informAboutMissingDependencies();
@@ -856,7 +1053,8 @@ MyApplet.prototype = {
     },
 
     setTransHistory: function(aSourceText, aTransObj) {
-        this._translation_history[aSourceText] = aTransObj;
+        this._translation_history[aTransObj.tL] = this._translation_history[aTransObj.tL] || {};
+        this._translation_history[aTransObj.tL][aSourceText] = aTransObj;
         this.saveHistoryToFile();
     },
 
@@ -864,10 +1062,13 @@ MyApplet.prototype = {
         let str = "";
         try {
             let process = new $.ShellOutputProcess(["xsel", "-o"]);
-            // Remove possible "ilegal" characters.
+            // Remove possible "illegal" characters.
             str = process.spawn_sync_and_get_output().replace(/[\"'<>]/g, "");
             // Replace line breaks and duplicated white spaces with a single space.
             str = (str.replace(/\s+/g, " ")).trim();
+
+            if (this.pref_loggin_enabled)
+                global.logError("\nselection()>str:\n" + str);
         } catch (aErr) {
             global.logError(aErr);
         } finally {
@@ -875,16 +1076,21 @@ MyApplet.prototype = {
         }
     },
 
-    get service_provider() {
-        return this.pref_service_provider;
-    },
-
     on_applet_removed_from_panel: function() {
-        if (this.key_1_id)
-            Main.keybindingManager.removeHotKey(this.key_1_id);
+        [1, 2, 3, 4].forEach(Lang.bind(this, function(aID) {
+            let id = "key_" + aID + "_id",
+                forcedId = "key_forced_" + aID + "_id";
 
-        if (this.key_2_id)
-            Main.keybindingManager.removeHotKey(this.key_2_id);
+            if (this[id]) {
+                Main.keybindingManager.removeHotKey(this[id]);
+                this[id] = null;
+            }
+
+            if (this[forcedId]) {
+                Main.keybindingManager.removeHotKey(this[forcedId]);
+                this[forcedId] = null;
+            }
+        }));
 
         if (this.menu) {
             this.menuManager.removeMenu(this.menu);

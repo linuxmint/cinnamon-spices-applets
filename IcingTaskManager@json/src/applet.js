@@ -94,7 +94,7 @@ PinnedFavs.prototype = {
           id: ids[i],
           app: app
         })
-      }  
+      }
     }
   },
 
@@ -148,7 +148,7 @@ PinnedFavs.prototype = {
     if (opts.pos !== -1) {
       this.moveFavoriteToPos(opts.appId, opts.pos)
       return true
-    } 
+    }
     this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'))
     this.triggerUpdate(opts.appId, -1, true)
     return true
@@ -202,7 +202,8 @@ MyApplet.prototype = {
 
   _init: function (metadata, orientation, panel_height, instance_id) {
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id)
-    this.settings = new Settings.AppletSettings(this, 'IcingTaskManager@json', instance_id)
+    this._uuid = metadata.uuid
+    this.settings = new Settings.AppletSettings(this, this._uuid, instance_id)
     this.homeDir = GLib.get_home_dir()
 
     this.actor.set_track_hover(false)
@@ -219,7 +220,6 @@ MyApplet.prototype = {
       // We are on Cinnamon < 3.2
     }
 
-    this._uuid = metadata.uuid
     this.execInstallLanguage()
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale')
 
@@ -231,6 +231,7 @@ MyApplet.prototype = {
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
       {key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
+      {key: 'middle-click-action', value: 'middleClickAction', cb: null},
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey},
@@ -246,7 +247,7 @@ MyApplet.prototype = {
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
       {key: 'sort-thumbnails', value: 'sortThumbs', cb: null},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null},
-      {key: 'show-thumbnails', value: 'showThumbs', cb: null},
+      {key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
       {key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList},
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
@@ -315,7 +316,7 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index()
     this._onSwitchWorkspace()
     this._bindAppKey();
-    
+
     this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
 
     // Wait 3s, as Cinnamon doesn't populate Applet._meta until after the applet loads.
@@ -334,7 +335,12 @@ MyApplet.prototype = {
     this.signals.disconnectAllSignals();
   },
 
-  handleUpdate(){
+  // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
+  _onButtonPressEvent() {
+    return false
+  },
+
+  handleUpdate() {
     if (this.autoUpdate) {
       this.version = `v${this._meta.version}`
       // Parse out the HTML response instead of using the API endpoint to work around Github's API limit.
@@ -383,11 +389,11 @@ MyApplet.prototype = {
     Main.keybindingManager.removeHotKey('launch-show-apps-order');
     Main.keybindingManager.removeHotKey('launch-cycle-menus');
   },
-  
+
   _onAppKeyPress: function(number){
     this.getCurrentAppList()._onAppKeyPress(number);
   },
-  
+
   _onNewAppKeyPress: function(number){
     this.getCurrentAppList()._onNewAppKeyPress(number);
   },
@@ -408,6 +414,10 @@ MyApplet.prototype = {
 
   refreshAppFromCurrentListById(appId, opts={favChange: false, favPos: null, isFavapp: false}){
     this.metaWorkspaces[this.currentWs].appList._refreshAppById(appId, opts)
+  },
+
+  refreshThumbnailsFromCurrentAppList(){
+    this.metaWorkspaces[this.currentWs].appList._refreshAllThumbnails()
   },
 
   getAppFromWMClass (specialApps, metaWindow) {
@@ -468,41 +478,12 @@ MyApplet.prototype = {
     _.pullAt(this.autostartApps, autostartIndex)
   },
 
-  execInstallLanguage: function () { // TBD
-    try {
-      let _shareFolder = this.homeDir + '/.local/share/'
-      let _localeFolder = Gio.file_new_for_path(_shareFolder + 'locale/')
-      let _moFolder = Gio.file_new_for_path(_shareFolder + 'cinnamon/applets/' + this._uuid + '/locale/mo/')
-      let children = _moFolder.enumerate_children('standard::name,standard::type,time::modified',
-        Gio.FileQueryInfoFlags.NONE, null)
-      let info, _moFile, _moLocale, _moPath, _src, _dest, _modified, _destModified
-      while ((info = children.next_file(null)) !== null) {
-        _modified = info.get_modification_time().tv_sec
-        if (info.get_file_type() == Gio.FileType.REGULAR) {
-          _moFile = info.get_name()
-          if (_moFile.substring(_moFile.lastIndexOf('.')) == '.mo') {
-            _moLocale = _moFile.substring(0, _moFile.lastIndexOf('.'))
-            _moPath = _localeFolder.get_path() + '/' + _moLocale + '/LC_MESSAGES/'
-            _src = Gio.file_new_for_path(String(_moFolder.get_path() + '/' + _moFile))
-            _dest = Gio.file_new_for_path(String(_moPath + this._uuid + '.mo'))
-            try {
-              if (_dest.query_exists(null)) {
-                _destModified = _dest.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec
-                if( (_modified > _destModified)) {
-                  _src.copy(_dest, Gio.FileCopyFlags.OVERWRITE, null, null)
-                }
-              } else {
-                this._makeDirectoy(_dest.get_parent())
-                _src.copy(_dest, Gio.FileCopyFlags.OVERWRITE, null, null)
-              }
-            } catch(e) {
-              Main.notify('Error', e.message)
-              global.logError(e)
-            }
-          }
-        }
-      }
-    } catch (e) {}
+  execInstallLanguage() {
+    let moPath = `${this.homeDir}/.local/share/cinnamon/applets/${this._uuid}/generate_mo.sh`;
+    let moFile = Gio.file_new_for_path(`${this.homeDir}/.local/share/locale/de/LC_MESSAGES/IcingTaskManager@json.mo`)
+    if (!moFile.query_exists(null)) {
+      Util.trySpawnCommandLine(`bash -c '${moPath}'`)
+    }
   },
 
   handleDragOver: function (source, actor, x, y, time) {
@@ -623,7 +604,7 @@ MyApplet.prototype = {
         this.pinnedAppsContr.moveFavoriteToPos(id, favPos)
       } else {
         this.pinnedAppsContr._addFavorite({appId: id, app: app, pos: favPos})
-      } 
+      }
       return false
     }))
     this._clearDragPlaceholder()
@@ -710,7 +691,7 @@ MyApplet.prototype = {
   _onSwitchWorkspace: function () {
     this.currentWs = global.screen.get_active_workspace_index()
     let metaWorkspace = global.screen.get_workspace_by_index(this.currentWs)
-    
+
     // If the workspace we switched to isn't in our list,
     // we need to create an AppList for it
     var refWorkspace = _.findIndex(this.metaWorkspaces, {index: this.currentWs})

@@ -34,12 +34,14 @@ const JENKINS_USERNAME = 'jenkinsUsername'
 const JENKINS_PASSWORD = 'jenkinsPassword'
 const JENKINS_MAX_NUMBER_OF_JOBS = 'maxNumberOfJobs'
 const JENKINS_HIDE_SUCCESSFUL_JOBS = 'hideSuccessfulJobs'
+const JENKINS_HIDE_DISABLED_JOBS = 'hideDisabledJobs'
 const JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS = 'showNotificationForFailedJobs'
 
 const KEYS = [
   JENKINS_REFRESH_INTERVAL,
   JENKINS_MAX_NUMBER_OF_JOBS,
   JENKINS_HIDE_SUCCESSFUL_JOBS,
+  JENKINS_HIDE_DISABLED_JOBS,
   JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS,
   JENKINS_SSL_STRICT,
   JENKINS_URL,
@@ -152,7 +154,6 @@ MyApplet.prototype = {
             applet.destroyMenu();          
             try {
                 let maxJobs = applet._maxNumberOfJobs;
-                let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                 let jobs = json.get_array_member('jobs').get_elements();
                 let displayedJobs = 0;
                 
@@ -161,9 +162,16 @@ MyApplet.prototype = {
                     let job = jobs[i].get_object();
 
                     let color = job.get_string_member('color');
-                    let success = applet.isColorSuccess(color);
 
+                    let success = this.helpers().isColorSuccess(color);
+                    let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                     if (success && hideSuccessfulJobs) {
+                        continue;
+                    }
+
+                    let disabled = this.helpers().isColorDisabled(color);
+                    let hideDisabledJobs = applet._hideDisabledJobs;
+                    if (disabled && hideDisabledJobs) {
                         continue;
                     }
 
@@ -173,7 +181,7 @@ MyApplet.prototype = {
                     var regex = RegExp(this._jenkinsFilter);
                     if(regex.exec(jobName)) {
                         filteredJobs.push(jobs[i]);
-                        applet.menu.addMenuItem(new JobMenuItem(jobName, success, url));
+                        applet.menu.addMenuItem(new JobMenuItem(jobName, color, url));
                         displayedJobs++;
                     }
                 }
@@ -215,7 +223,7 @@ MyApplet.prototype = {
             let job = jobs[i].get_object();
 
             let color = job.get_string_member('color');
-            let success = this.isColorSuccess(color);
+            let success = this.helpers().isColorSuccess(color);
             let jobName = job.get_string_member('name');
 
             if (success) {
@@ -234,16 +242,15 @@ MyApplet.prototype = {
         let success = 0;
         for (let i = 0; i < jobs.length; i ++) {
             let color = jobs[i].get_object().get_string_member('color');
-            if (this.isColorSuccess(color)) {
+            if (this.helpers().isColorSuccess(color)) {
                 success += 1;
             }
         }
         return success;
     }
 
-    , isColorSuccess: function(color) {
-        return color == 'blue' || 
-               color == 'blue_anime';
+    , helpers: function() {
+        return new Helpers()
     }
 
     , updateAppletLabel: function(failure, success) {
@@ -309,24 +316,24 @@ MyApplet.prototype = {
 };
 
 
-function JobMenuItem(name, success, url) {
-    this._init(name, success, url);
+function JobMenuItem(name, color, url) {
+    this._init(name, color, url);
 }
 
 JobMenuItem.prototype = {
     __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
-    _init: function(name, success, url) {
+    helpers: function () {
+        return new Helpers();
+    },
+
+    _init: function(name, color, url) {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
 
         this.label = new St.Label({ text: name });
         this.addActor(this.label);
 
-        let iconName = 'jenkins-green';
-        if( !success ) {
-            iconName = 'jenkins-red';
-        }        
-
+        let iconName = this.helpers().getIconName(color)
         let statusIcon = new St.Icon({ icon_name: iconName, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon' });
         this.addActor(statusIcon);
 
@@ -335,6 +342,42 @@ JobMenuItem.prototype = {
         }));
     }    
 };
+
+
+function Helpers() {}
+Helpers.prototype = {
+
+    isColorSuccess: function (color) {
+        return color == 'blue' || color == 'blue_anime';
+    },
+
+    isColorFailure: function (color) {
+        return color == 'red' || color == 'red_anime';
+    },
+
+    isColorDisabled: function (color) {
+        return color == 'disabled' || color == 'disabled_anime';
+    },
+
+    isColorAborted: function (color) {
+        return color == 'aborted' || color == 'aborted_anime';
+    },
+
+    getIconName: function(color) {
+        if (this.isColorSuccess(color)) {
+            return 'jenkins-green'
+        } else if (this.isColorFailure(color)) {
+            return 'jenkins-red'
+        } else if (this.isColorDisabled(color)) {
+            return 'jenkins-grey'
+        } else if (this.isColorAborted(color)) {
+            return 'jenkins-abort'
+        } else { // unknown status
+            return 'jenkins-grey'
+        }
+    }
+
+}
 
 
 // Logging

@@ -10,8 +10,8 @@ const App = AppletDir.applet
 const AppGroup = AppletDir.appGroup
 const clog = AppletDir.__init__.clog
 const setTimeout = AppletDir.__init__.setTimeout
-// List of running apps
 
+// List of running apps
 function AppList () {
   this._init.apply(this, arguments)
 }
@@ -62,7 +62,7 @@ AppList.prototype = {
     this._refreshList(true)
 
     this.signals.actor.push(this.actor.connect('style-changed', Lang.bind(this, this._updateSpacing)))
-    
+
     this.on_orientation_changed(this._applet.orientation, true);
   },
 
@@ -126,10 +126,32 @@ AppList.prototype = {
       this._updateSpacing()
     }
   },
-
-  _closeAllHoverMenus(){
+  _closeAllHoverMenus(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.hoverMenu.close()
+      if (this.appList[i].appGroup.hoverMenu.isOpen) {
+        this.appList[i].appGroup.hoverMenu.close()
+      }
+    }
+    if (typeof cb === 'function') {
+      cb()
+    }
+  },
+
+  _closeAllRightClickMenus(cb) {
+    for (let i = 0, len = this.appList.length; i < len; i++) {
+      if (typeof this.appList[i].appGroup.rightClickMenu !== 'undefined'
+        && this.appList[i].appGroup.rightClickMenu.isOpen) {
+        this.appList[i].appGroup.rightClickMenu.close()
+      }
+    }
+    if (typeof cb === 'function') {
+      cb()
+    }
+  },
+
+  _refreshAllThumbnails() {
+    for (let i = 0, len = this.appList.length; i < len; i++) {
+      this.appList[i].appGroup.hoverMenu.appSwitcherItem._refresh(true)
     }
   },
 
@@ -139,7 +161,7 @@ AppList.prototype = {
     }
     this.appList[number-1].appGroup._onAppKeyPress(number);
   },
-  
+
   _onNewAppKeyPress: function(number){
     if (number > this.appList.length) {
       return;
@@ -162,7 +184,7 @@ AppList.prototype = {
     var refApp = 0
     if (!this.lastCycled && this.lastFocusedApp) {
       refApp = _.findIndex(this.appList, {id: this.lastFocusedApp});
-    } 
+    }
     if (this.lastCycled) {
       this.appList[this.lastCycled].appGroup.hoverMenu.close()
       refApp = this.lastCycled+1
@@ -252,7 +274,7 @@ AppList.prototype = {
       if (!this._applet.groupApps) {
         window = app.get_windows()[0]
       }
-      
+
       var time = Date.now()
 
       let appGroup = new AppGroup.AppGroup(this._applet, this, app, isFavapp, window, time, index, appId)
@@ -331,9 +353,7 @@ AppList.prototype = {
       var time = Date.now()
       let appGroup = new AppGroup.AppGroup(this._applet, this, app, isFavapp, window, time, index, appId)
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows)
-      appGroup.watchWorkspace(metaWorkspace) // disable for windows to stay persistent across ws'
-
-      app.connect_after('windows-changed', Lang.bind(this, this._onAppWindowsChanged, app))
+      appGroup.watchWorkspace(metaWorkspace)
 
       this.appList.push({
         id: appId,
@@ -375,11 +395,14 @@ AppList.prototype = {
     return result
   },
 
-  _onAppWindowsChanged: function (app) {
+  _onAppWindowsChanged: function (app, cb) {
     let numberOfwindows = this._getNumberOfAppWindowsInWorkspace(app, this.metaWorkspace)
     if (!numberOfwindows || numberOfwindows === 0) {
       this._removeApp(app)
       this._calcAllWindowNumbers()
+    }
+    if (typeof cb === 'function') {
+      cb()
     }
   },
 
@@ -402,7 +425,7 @@ AppList.prototype = {
     }
     return result
   },
-  
+
   _fixAppGroupIndexAfterDrag: function (appId) {
     let originPos = _.findIndex(this.appList, {id: appId}); // app object
     var pos = _.findIndex(this.manager_container.get_children(), this.appList[originPos].appGroup.actor);
@@ -420,9 +443,9 @@ AppList.prototype = {
     _.pullAt(this.appList, originPos);
     this.appList.splice(pos, 0, data);
   },
-  
+
   _windowRemoved: function (metaWorkspace, metaWindow, app=null) {
-    
+
     // When a window is closed, we need to check if the app it belongs
     // to has no windows left.  If so, we need to remove the corresponding AppGroup
     if (!app) {
@@ -445,7 +468,7 @@ AppList.prototype = {
         return win.get_workspace() == metaWorkspace
       })
     }
-    
+
     if (app && !hasWindowsOnWorkspace) {
       this._removeApp(app)
     }

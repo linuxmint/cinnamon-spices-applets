@@ -11,12 +11,11 @@ import gettext
 import json
 from inspect import getsourcefile
 from os.path import abspath
-from pathlib import Path
 from pkgutil import iter_modules
 
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gio, Gtk, Pango, Gdk
+from gi.repository import Gio, Gtk, Pango, GObject
 
 # i18n
 gettext.install("cinnamon", "/usr/share/locale")
@@ -136,20 +135,12 @@ langList = {
     "zu": "Zulu (G)"
 }
 
+# button_reload is commented out in case I have to come back to it.
 HISTORY_UI = '''
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.16.1 -->
 <interface>
   <requires lib="gtk+" version="3.10"/>
-  <object class="GtkWindow" id="main_window">
-    <property name="height_request">200</property>
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center</property>
-    <property name="default_width">{default_width}</property>
-    <property name="default_height">{default_height}</property>
-    <child>
       <object class="GtkVBox" id="vbox3">
         <property name="width_request">475</property>
         <property name="visible">True</property>
@@ -186,7 +177,7 @@ HISTORY_UI = '''
             <property name="can_focus">False</property>
             <property name="spacing">15</property>
             <property name="layout_style">end</property>
-            <child>
+<!--            <child>
               <object class="GtkButton" id="button_reload">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -199,7 +190,7 @@ HISTORY_UI = '''
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
+-->            <child>
               <object class="GtkButton" id="button_close">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
@@ -221,8 +212,6 @@ HISTORY_UI = '''
           </packing>
         </child>
       </object>
-    </child>
-  </object>
 </interface>
 '''
 
@@ -293,23 +282,52 @@ class GoogleTranslator:
             print("self.req.status_code: %s") % self.req.status_code
 
 
-class HistoryWindow():
+class HistoryWindow(Gtk.ApplicationWindow):
 
-    def __init__(self):
-        [initial_window_width, initial_window_height,
-            width_to_trigger_word_wrap] = sys.argv[2].split(",")
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        history_ui = HISTORY_UI.format(
-            default_width=initial_window_width,
-            default_height=initial_window_height
-        )
 
+class HistoryApplication(Gtk.Application):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, application_id="org.cinnamon.applets.popup-translator-history",
+                         flags=Gio.ApplicationFlags.HANDLES_COMMAND_LINE,
+                         **kwargs)
+
+        self.window = None
+        self.resume_timeout = None
+
+    # Create and activate a HistoryWindow, with self (the HistoryApplication) as
+    # application the window belongs to.
+    def do_activate(self):
+        # Allow a single window and raise any existing ones
+        if not self.window:
+            self.window = HistoryWindow(application=self, title="")
+            self.window.set_position(Gtk.WindowPosition.CENTER)
+            self.window.set_size_request(width=-1, height=300)
+            self.window.set_icon_from_file(os.path.join(appletDir, "icon.png"))
+            self.window.set_title(_("Popup Translator history"))
+            self.window.set_default_size(int(self.sizes[0]), int(self.sizes[1]))
+            self.window.connect("destroy", self.on_quit)
+            self.window.add(self.box)
+
+        self.window.present()
+
+    # Start up the application
+    def do_startup(self):
+        Gtk.Application.do_startup(self)
+
+        self.filepath = os.path.join(
+            home, ".cinnamon", "configs", appletUUID + "History", "translation_history.json")
+        self.file_obj = Gio.File.new_for_path(self.filepath)
+        self.file_monitor = self.file_obj.monitor_file(Gio.FileMonitorFlags.SEND_MOVED, None)
+        self.file_monitor.connect("changed", self.monitor_triggered)
+
+        self.sizes = sys.argv[2].split(",")
         builder = Gtk.Builder()
-        builder.add_from_string(history_ui)
-        self.window = builder.get_object("main_window")
-        self.window.set_icon_from_file(os.path.join(appletDir, "icon.png"))
-        self.window.set_title(_("Popup Translator history"))
-        self.window.connect("destroy", self.quit_window)
+        builder.add_from_string(HISTORY_UI)
+        self.box = builder.get_object("vbox3")
 
         self.treeview = builder.get_object("treeview_history")
 
@@ -319,7 +337,7 @@ class HistoryWindow():
 
         cr2 = Gtk.CellRendererText()
         cr2.set_property('wrap-mode', Pango.WrapMode.WORD_CHAR)
-        cr2.set_property('wrap-width', int(width_to_trigger_word_wrap))
+        cr2.set_property('wrap-width', int(self.sizes[2]))
         cr2.set_property('editable', True)
         column2 = Gtk.TreeViewColumn(_("Source text"), cr2, text=0)
         column2.set_sort_column_id(0)
@@ -332,7 +350,7 @@ class HistoryWindow():
 
         cr4 = Gtk.CellRendererText()
         cr4.set_property('wrap-mode', Pango.WrapMode.WORD_CHAR)
-        cr4.set_property('wrap-width', int(width_to_trigger_word_wrap))
+        cr4.set_property('wrap-width', int(self.sizes[2]))
         cr4.set_property('editable', True)
         column4 = Gtk.TreeViewColumn(_("Target text"), cr4, text=3)
         column4.set_sort_column_id(3)
@@ -353,52 +371,84 @@ class HistoryWindow():
         self.populate(self)
 
         close_button = builder.get_object("button_close")
-        close_button.connect("clicked", self.quit_window)
+        close_button.connect("clicked", self.on_quit)
 
-        reload_button = builder.get_object("button_reload")
-        reload_button.set_label(_("Reload"))
-        reload_button.set_tooltip_text(_("Reload translation history"))
-        reload_button.connect("clicked", self.populate)
-        img_path = os.path.join(
-            appletDir, "icons", "popup-translator-document-open-recent-symbolic.svg")
-        img_file = Gio.File.new_for_path(img_path)
-        img_file_icon = Gio.FileIcon.new(img_file)
-        img = Gtk.Image.new_from_gicon(img_file_icon, Gtk.IconSize.BUTTON)
-        reload_button.set_image(img)
+        # Just commented out in case I have to come back to it.
+        # reload_button = builder.get_object("button_reload")
+        # reload_button.set_label(_("Reload"))
+        # reload_button.set_tooltip_text(_("Reload translation history"))
+        # reload_button.connect("clicked", self.populate)
+        # img_path = os.path.join(
+        #     appletDir, "icons", "popup-translator-document-open-recent-symbolic.svg")
+        # img_file = Gio.File.new_for_path(img_path)
+        # img_file_icon = Gio.FileIcon.new(img_file)
+        # img = Gtk.Image.new_from_gicon(img_file_icon, Gtk.IconSize.BUTTON)
+        # reload_button.set_image(img)
 
-    def quit_window(self, widget):
-        self.window.destroy()
-        Gtk.main_quit()
+    # Forced to add this and the Gio.ApplicationFlags.HANDLES_COMMAND_LINE flag.
+    # Otherwise, I can't pass arguments.
+    def do_command_line(self, command_line):
+        self.activate()
+        return 0
 
     def populate(self, widget):
+        self.pause_monitor()
+
         model = Gtk.TreeStore(str, str, str, str)
         path = os.path.join(
             home, ".cinnamon", "configs", appletUUID + "History", "translation_history.json")
+
         if (os.path.exists(path)):
             data = metadata = open(path, 'r').read()
             transList = json.loads(data)
 
-            for entry in transList:
-                try:
-                    sourceLang = langList[transList[entry]["sL"]]
-                except:
-                    sourceLang = langList["?"]
+            for lang in transList:
+                if str(lang) != "__version__":
+                    for entry in transList[lang]:
+                        try:
+                            sourceLang = langList[transList[lang][entry]["sL"]]
+                        except:
+                            sourceLang = langList["?"]
 
-                try:
-                    targetLang = langList[transList[entry]["tL"]]
-                except:
-                    targetLang = langList["?"]
+                        try:
+                            targetLang = langList[transList[lang][entry]["tL"]]
+                        except:
+                            targetLang = langList["?"]
 
-                iter = model.insert_before(None, None)
-                model.set_value(iter, 0, entry)
-                model.row_changed(model.get_path(iter), iter)
-                model.set_value(iter, 1, "%s" % (transList[entry]["d"]))
-                model.set_value(iter, 2, "<b>%s > %s</b>" % (sourceLang, targetLang))
-                model.set_value(iter, 3, transList[entry]["tT"])
+                        iter = model.insert_before(None, None)
+                        model.set_value(iter, 0, entry)
+                        model.row_changed(model.get_path(iter), iter)
+                        model.set_value(iter, 1, "%s" % (transList[lang][entry]["d"]))
+                        model.set_value(iter, 2, "<b>%s > %s</b>" % (sourceLang, targetLang))
+                        model.set_value(iter, 3, transList[lang][entry]["tT"])
 
         model.set_sort_column_id(1, Gtk.SortType.DESCENDING)
         self.treeview.set_model(model)
         del model
+
+        self.resume_monitor()
+
+    def pause_monitor(self):
+        self.file_monitor.cancel()
+        self.handler = None
+
+    def resume_monitor(self):
+        if self.resume_timeout:
+            GObject.source_remove(self.resume_timeout)
+        self.resume_timeout = GObject.timeout_add(2000, self.do_resume)
+
+    def do_resume(self):
+        self.file_monitor = self.file_obj.monitor_file(Gio.FileMonitorFlags.SEND_MOVED, None)
+        self.handler = self.file_monitor.connect("changed", self.monitor_triggered)
+        self.resume_timeout = None
+        return False
+
+    def monitor_triggered(self, *args):
+        self.populate(self)
+
+    def on_quit(self, action):
+        self.pause_monitor()
+        self.quit()
 
 
 def module_exists(module_name):
@@ -413,12 +463,12 @@ def main():
     elif arg == "yandex":
         YandexTranslator().translate()
     elif arg == "history":
-        import signal
-
-        win = HistoryWindow()
-        signal.signal(signal.SIGINT, win.quit_window)
-        Gtk.main()
+        app = HistoryApplication()
+        app.run(sys.argv)
     elif arg == "check-dependencies":
+        # Some of these "dependencies" could easily be checked on JavaScript side.
+        # But since I also have to check the existence of a Python module,
+        # I thought convenient to make all checks from here.
         import subprocess
 
         msg = "<!--SEPARATOR-->"

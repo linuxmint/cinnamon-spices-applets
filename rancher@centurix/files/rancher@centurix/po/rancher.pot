@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 11:06+0100\n"
+"POT-Creation-Date: 2017-02-25 00:24+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -77,64 +77,72 @@ msgstr ""
 msgid "Recompiling Kernel..."
 msgstr ""
 
-#: applet.js:258
+#: applet.js:262
 msgid "Rancher: Homestead missing or not configured."
 msgstr ""
 
-#: applet.js:259
+#: applet.js:263
 msgid "Homestead missing or not configured."
 msgstr ""
 
-#: applet.js:266 applet.js:267
+#: applet.js:270 applet.js:271
 msgid "Kernel Module not loaded. Needs recompilation."
 msgstr ""
 
-#: applet.js:272
+#: applet.js:276
 msgid "Rancher: Homestead up."
 msgstr ""
 
-#: applet.js:273
+#: applet.js:277
 msgid "Homestead up."
 msgstr ""
 
-#: applet.js:274
+#: applet.js:278
 msgid " (Running)"
 msgstr ""
 
-#: applet.js:278
+#: applet.js:282
 msgid "Rancher: Homestead suspended."
 msgstr ""
 
-#: applet.js:279
+#: applet.js:283
 msgid "Homestead suspended."
 msgstr ""
 
-#: applet.js:280
+#: applet.js:284
 msgid " (Suspended)"
 msgstr ""
 
-#: applet.js:283
+#: applet.js:287
 msgid "Rancher: Homestead down."
 msgstr ""
 
-#: applet.js:284
+#: applet.js:288
 msgid "Homestead down."
 msgstr ""
 
-#: applet.js:285
+#: applet.js:289
 msgid " (Down)"
 msgstr ""
 
-#: applet.js:288
+#: applet.js:292
 msgid "Rancher: Homestead not created."
 msgstr ""
 
-#: applet.js:289
+#: applet.js:293
 msgid "Homestead not created"
 msgstr ""
 
-#: applet.js:290
+#: applet.js:294 applet.js:299
 msgid " (Not created/Destroyed)"
+msgstr ""
+
+#: applet.js:297
+msgid "Rancher: Homestead not installed."
+msgstr ""
+
+#: applet.js:298
+msgid "Homestead not installed"
 msgstr ""
 
 #: terminal_reader.js:58
@@ -157,10 +165,10 @@ msgstr ""
 msgid "Vagrant command"
 msgstr ""
 
-#. rancher@centurix->metadata.json->name
-msgid "Homestead manager"
-msgstr ""
-
 #. rancher@centurix->metadata.json->description
 msgid "An applet to manage Homestead."
+msgstr ""
+
+#. rancher@centurix->metadata.json->name
+msgid "Homestead manager"
 msgstr ""

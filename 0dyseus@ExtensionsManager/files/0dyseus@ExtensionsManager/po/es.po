@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-02 07:12-0300\n"
-"PO-Revision-Date: 2017-01-02 07:12-0300\n"
+"POT-Creation-Date: 2017-03-11 19:58-0300\n"
+"PO-Revision-Date: 2017-03-11 19:58-0300\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -59,9 +59,11 @@ msgid "Disable all extensions"
 msgstr "Deshabilitar todas las extensiones"
 
 #: applet.js:518 3.2/applet.js:519
-msgid "This will disable all active extensions. Are you sure you want to do this?"
+msgid ""
+"This will disable all active extensions. Are you sure you want to do this?"
 msgstr ""
-"Esto va a deshabilitar todas las extensiones. ¿Está seguro/a de que quiere realizar esta tarea?"
+"Esto va a deshabilitar todas las extensiones. ¿Está seguro/a de que quiere "
+"realizar esta tarea?"
 
 #: applet.js:526 3.2/applet.js:527
 msgid "Refresh extension list"
@@ -73,11 +75,11 @@ msgstr "Reiniciar Cinnamon"
 
 #: applet.js:737 3.2/applet.js:738
 msgid ""
-"There aren't any extensions installed on your system. Or you may need to refresh the list of "
-"extensions from this applet context menu."
+"There aren't any extensions installed on your system. Or you may need to "
+"refresh the list of extensions from this applet context menu."
 msgstr ""
-"No hay ninguna extensión instalada en su sistema. O usted debería actualizar la lista de "
-"extensiones instaladas desde el menú contextual de este applet."
+"No hay ninguna extensión instalada en su sistema. O usted debería actualizar "
+"la lista de extensiones instaladas desde el menú contextual de este applet."
 
 #: applet.js:804 3.2/applet.js:805
 msgid "Enabled extensions"
@@ -98,11 +100,11 @@ msgstr "No hay extensiones deshabilitadas"
 #: applet.js:850 3.2/applet.js:851
 #, javascript-format
 msgid ""
-"Extension %s is not compatible with current version of cinnamon. Using it may break your system. "
-"Load anyway?"
+"Extension %s is not compatible with current version of cinnamon. Using it "
+"may break your system. Load anyway?"
 msgstr ""
-"La extensión %s no es compatible con la versión actual de Cinnamon. Su uso podría estropear el "
-"sistema. ¿Quiere cargarla igualmente?\""
+"La extensión %s no es compatible con la versión actual de Cinnamon. Su uso "
+"podría estropear el sistema. ¿Quiere cargarla igualmente?\""
 
 #. 3.2->settings-schema.json->pref_custom_label_for_applet->description
 #. 0dyseus@ExtensionsManager->settings-
@@ -126,11 +128,12 @@ msgstr "Mostrar el botón \"Página de Spices\" en el menú"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_show_spices_button->tooltip
 msgid ""
-"If enabled, it will display a button in each extension menu item that will open the extension's "
-"Spices page (if the extension is published on Spices)."
+"If enabled, it will display a button in each extension menu item that will "
+"open the extension's Spices page (if the extension is published on Spices)."
 msgstr ""
-"Con esta opción habilitada, se mostrará un botón en cada elemento del menú que permitirá abrir el "
-"sitio Spices de la extensión (si es que la extensión está publicada en Spices)."
+"Con esta opción habilitada, se mostrará un botón en cada elemento del menú "
+"que permitirá abrir el sitio Spices de la extensión (si es que la extensión "
+"está publicada en Spices)."
 
 #. 3.2->settings-schema.json->pref_set_max_menu_height->description
 #. 0dyseus@ExtensionsManager->settings-
@@ -149,11 +152,11 @@ msgstr "Mantener el menú \"Extensiones deshabilitadas\" abierto"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_keep_disabled_extension_menu_open->tooltip
 msgid ""
-"If enabled, every time that the menu is open, the \"Disabled extensions\" sub menu will be open "
-"too."
+"If enabled, every time that the menu is open, the \"Disabled extensions\" "
+"sub menu will be open too."
 msgstr ""
-"Con esta opción habilitada, cada vez que el menú es abierto, el sub menú \"Extensiones "
-"deshabilitadas\" también será abierto."
+"Con esta opción habilitada, cada vez que el menú es abierto, el sub menú "
+"\"Extensiones deshabilitadas\" también será abierto."
 
 #. 3.2->settings-
 #. schema.json->pref_show_open_extension_folder_button->description
@@ -166,11 +169,11 @@ msgstr "Mostrar el botón \"Abrir carpeta de la extensión\" en el menú"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_show_open_extension_folder_button->tooltip
 msgid ""
-"If enabled, it will display a button in each extension menu item that will open the location "
-"where the extension is installed."
+"If enabled, it will display a button in each extension menu item that will "
+"open the location where the extension is installed."
 msgstr ""
-"Con esta opción habilitada, se mostrará un botón en cada elemento del menú que permitirá abrir la "
-"ubicación donde la extensión está instalada."
+"Con esta opción habilitada, se mostrará un botón en cada elemento del menú "
+"que permitirá abrir la ubicación donde la extensión está instalada."
 
 #. 3.2->settings-schema.json->pref_disabled_extensions_style->description
 #. 0dyseus@ExtensionsManager->settings-
@@ -187,10 +190,11 @@ msgstr "Usar el nombre de la extensión como etiqueta"
 #. 3.2->settings-schema.json->pref_use_extension_names_as_label->tooltip
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_use_extension_names_as_label->tooltip
-msgid "If disabled, the extension UUID will be used as label for the menu items."
+msgid ""
+"If disabled, the extension UUID will be used as label for the menu items."
 msgstr ""
-"Con esta opción deshabilitada, la UUID de la extensión será utilizada como etiqueta para los "
-"elementos del menú."
+"Con esta opción deshabilitada, la UUID de la extensión será utilizada como "
+"etiqueta para los elementos del menú."
 
 #. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
 #. 0dyseus@ExtensionsManager->settings-
@@ -221,11 +225,12 @@ msgstr "Mostrar el botón \"Editar archivo principal\" en el menú"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_show_edit_extension_file_button->tooltip
 msgid ""
-"If enabled, it will display a button in each extension menu item that will open main extension "
-"file (extension.js) with a text editor."
+"If enabled, it will display a button in each extension menu item that will "
+"open main extension file (extension.js) with a text editor."
 msgstr ""
-"Con esta opción habilitada, se mostrará un botón en cada elemento del menú que permitirá abrir el "
-"archivo extension.js perteneciente a la extensión con un editor de textos."
+"Con esta opción habilitada, se mostrará un botón en cada elemento del menú "
+"que permitirá abrir el archivo extension.js perteneciente a la extensión con "
+"un editor de textos."
 
 #. 3.2->settings-schema.json->pref_icons_size->description
 #. 0dyseus@ExtensionsManager->settings-
@@ -279,12 +284,13 @@ msgstr "Mostrar el botón \"Abrir ventana de preferencias\" en el menú"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_show_config_button->tooltip
 msgid ""
-"If enabled, it will display a button in each extension menu item that will open the extension's "
-"settings page (if the extension has a configuration mechanism)."
+"If enabled, it will display a button in each extension menu item that will "
+"open the extension's settings page (if the extension has a configuration "
+"mechanism)."
 msgstr ""
-"Con esta opción habilitada, se mostrará un botón en cada elemento del menú que permitirá abrir la "
-"ventana de configuración de la extensión (si es que la extensión tiene un mecanismo de "
-"configuración)."
+"Con esta opción habilitada, se mostrará un botón en cada elemento del menú "
+"que permitirá abrir la ventana de configuración de la extensión (si es que "
+"la extensión tiene un mecanismo de configuración)."
 
 #. 3.2->settings-
 #. schema.json->pref_keep_enabled_extension_menu_open->description
@@ -297,11 +303,11 @@ msgstr "Mantener el menú \"Extensiones habilitadas\" abierto"
 #. 0dyseus@ExtensionsManager->settings-
 #. schema.json->pref_keep_enabled_extension_menu_open->tooltip
 msgid ""
-"If enabled, every time that the menu is open, the \"Enabled extensions\" sub menu will be open "
-"too."
+"If enabled, every time that the menu is open, the \"Enabled extensions\" sub "
+"menu will be open too."
 msgstr ""
-"Con esta opción habilitada, cada vez que el menú es abierto, el sub menú \"Extensiones habilitadas"
-"\" también será abierto."
+"Con esta opción habilitada, cada vez que el menú es abierto, el sub menú "
+"\"Extensiones habilitadas\" también será abierto."
 
 #. 3.2->settings-schema.json->head1->description
 #. 0dyseus@ExtensionsManager->settings-schema.json->head1->description
@@ -321,9 +327,24 @@ msgstr "Preferencias del applet"
 msgid "Show icons on menu items"
 msgstr "Mostrar íconos en los elementos del menú"
 
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "Radek71: Czech localization."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "muzena: Croatian localization."
+msgstr ""
+
 #. 0dyseus@ExtensionsManager->metadata.json->description
 msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
-msgstr "Permite habilitar/deshabilitar extensiones (y otras tareas) desde un menú."
+msgstr ""
+"Permite habilitar/deshabilitar extensiones (y otras tareas) desde un menú."
+
+#. 0dyseus@ExtensionsManager->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
 
 #. 0dyseus@ExtensionsManager->metadata.json->name
 msgid "Extensions Manager"

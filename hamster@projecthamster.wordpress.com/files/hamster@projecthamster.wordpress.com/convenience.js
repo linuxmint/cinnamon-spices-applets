@@ -4,21 +4,19 @@
  *
  * This project is released under the GNU GPL License.
  * See COPYING for details.
- */
+ * Portions originate from the gnome-shell source code, Copyright (c)
+ * its respectives authors.
+*/
 
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 
-function getAppletSettings(schema, schemaPath) {
+const HAMSTER_APPLET_SCHEMA = "org.cinnamon.hamster-applet";
 
+function getSettings(schema) {
     /* Try getting a schema from the schemas path, fallback to default
      * schema */
-    let schemaSrc = Gio.SettingsSchemaSource.new_from_directory(
-            schemaPath, Gio.SettingsSchemaSource.get_default(), false);
-
-    let appSchema = schemaSrc.lookup(schema, true);
-    if (!appSchema)
-        throw new Error('Schema ' + schema + ' could not be found in path' + schemaPath);
-
-    return new Gio.Settings({ settings_schema: appSchema });
+    schema = schema || HAMSTER_APPLET_SCHEMA;
+    if (Gio.Settings.list_schemas().indexOf(schema) == -1)
+        throw _("Schema \"%s\" not found.").format(schema);
+    return new Gio.Settings({ schema: schema });
 }

@@ -27,6 +27,8 @@ See the [changelog](https://github.com/jaszhix/icingtaskmanager/blob/master/CHAN
 
 There are many options in the applet's Preferences that cater to many users' different needs. If you find a problem with your theme, try toggling the options under Theme Settings.
 
+In order to use Firefox bookmarks, you need to install the ```gir1.2-gda-5.0``` package.
+
 ### Contributing
 
 It is recommended to submit issues and PRs on ITM's [dedicated repository](https://github.com/jaszhix/icingtaskmanager), but if you want to contribute to ITM through Cinnamon Spices, you must use some NodeJS tools to work with the ES2015 source. All work files are in ```IcingTaskManager@json/src```. Avoid editing the files in ```files```, as they will be replaced by generated code from Babel.

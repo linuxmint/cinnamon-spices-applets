@@ -442,7 +442,7 @@ MyApplet.prototype = {
                 this._forceMenuRebuild = false;
                 this._forceMenuRebuildDelay = 200;
 
-                global.settings.connect("changed::extensions-enabled",
+                global.settings.connect("changed::enabled-extensions",
                     Lang.bind(this, function() {
                         this._forceMenuRebuild = !this.menu.isOpen;
                         this._forceMenuRebuildDelay = 1000;

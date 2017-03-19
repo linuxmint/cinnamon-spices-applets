@@ -61,6 +61,10 @@ Authors can modify their spice under the following conditions:
 
 Authors are able to accept or refuse changes from other people which modify the features or the look of their spice.
 
+Authors may choose to pass on development of their applet to someone else. In that case, the "author" field in UUID/info.json will be changed to the new developer and the "original_author" field will be added to give credit to the original developer.
+
+If an author abandons their applet, the Linux Mint team will take over maintenance of the applet or pass it on to someone else. Several factors are used to determine if an applet is abandoned, including prolonged activity, failure to respond to requests, and serious breakages that have occurred due to changes in API, etc. If you plan to abandon an applet, please notify us, so we don't have to guess as to whether it is abandoned or not.
+
 # Pull requests from authors and workflow
 
 To modify a spice, developers create a Pull Request.

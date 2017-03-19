@@ -1,4 +1,11 @@
-#!/usr/bin/gjs
+#!/usr/bin/cjs
+/*
+ * Portions originate from the gnome-shell source code, Copyright (c)
+ * its respectives authors.
+ * This project is released under the GNU GPL License.
+ * See COPYING for details.
+*/
+
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
@@ -10,8 +17,6 @@ const LIB_PATH = file_info[1];
 imports.searchPath.unshift(LIB_PATH);
 const Convenience = imports.convenience;
 
-const HAMSTER_APPLET_SCHEMA = "org.cinnamon.hamster-applet";
-
 const HamsterSettingsWidget = new GObject.Class({
     Name: 'ProjectHamster.Prefs.HamsterSettingsWidget',
     GTypeName: 'HamsterSettingsWidget',
@@ -21,19 +26,13 @@ const HamsterSettingsWidget = new GObject.Class({
         this.parent(params);
         this.margin = 10;
 
-        this._settings = Convenience.getAppletSettings(HAMSTER_APPLET_SCHEMA,
-                file_info[1] + "/schemas/");
+        this._settings = Convenience.getSettings();
 
         let vbox, label;
 
-        label = new Gtk.Label();
-        label.set_markup("<b>Positioning</b>")
-        label.set_alignment(0, 0.5)
-        this.add(label);
-
         label = new Gtk.Label({margin_top: 20});
-        label.set_markup("<b>Appearance in panel</b>")
-        label.set_alignment(0, 0.5)
+        label.set_markup("<b>Appearance in panel</b>");
+        label.set_alignment(0, 0.5);
         this.add(label);
 
         vbox = new Gtk.VBox({margin: 10});
@@ -52,23 +51,22 @@ const HamsterSettingsWidget = new GObject.Class({
         appearanceCombo.pack_start(renderer, true);
         appearanceCombo.add_attribute(renderer, 'text', 0);
         appearanceCombo.connect('changed', Lang.bind(this, this._onAppearanceChange));
-        appearanceCombo.set_active(this._settings.get_int("panel-appearance"))
+        appearanceCombo.set_active(this._settings.get_int("panel-appearance"));
 
         vbox.add(appearanceCombo);
 
 
-
         label = new Gtk.Label({margin_top: 20});
-        label.set_markup("<b>Global hotkey</b>")
-        label.set_alignment(0, 0.5)
+        label.set_markup("<b>Global hotkey</b>");
+        label.set_alignment(0, 0.5);
         this.add(label);
 
         vbox = new Gtk.VBox({margin: 10});
         this.add(vbox);
         let entry = new Gtk.Entry({margin_bottom: 10,
                                    margin_top: 5,
-                                   text: this._settings.get_strv("show-hamster-dropdown")[0]})
-        vbox.add(entry)
+                                   text: this._settings.get_strv("show-hamster-dropdown")[0]});
+        vbox.add(entry);
         entry.connect('changed', Lang.bind(this, this._onHotkeyChange));
 
         vbox.add(new Gtk.Label({label: "Reload cinnamon after updating prefs (alt+f2 > r)",
@@ -85,12 +83,12 @@ const HamsterSettingsWidget = new GObject.Class({
         if (this._settings.get_int("panel-appearance") == newAppearance)
             return;
 
-        this._settings.set_int("panel-appearance", newAppearance)
+        this._settings.set_int("panel-appearance", newAppearance);
     },
 
     _onHotkeyChange: function(widget, bananas) {
-        //global.log(widget, bananas)
-        let hotkey = widget.get_text()
+        //global.log(widget, bananas);
+        let hotkey = widget.get_text();
         let [key, mods] = Gtk.accelerator_parse(hotkey);
 
         if (key != 0) {
@@ -173,4 +171,3 @@ function getCurrentFile() {
 // Run the application
 let app = new AppletPrefsWindow();
 app.application.run (ARGV);
-

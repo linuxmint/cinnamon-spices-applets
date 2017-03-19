@@ -13,27 +13,27 @@ const Lang = imports.lang;
 
 
 let button_path, menu_item_icon_size, use_symbolic_icons;
-let has_console_kit, has_upower, has_systemd, session_manager, display_manager;
+let has_console_kit, has_upower, has_systemd, display_manager;
 
 let CommandDispatcher = {
     shutDown: function() {
-        if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl poweroff");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl poweroff");
+        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
     },
 
     restart: function() {
-        if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl reboot");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl reboot");
+        else if ( has_console_kit ) Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
     },
 
     hibernate: function() {
-        if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Hibernate");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl hibernate");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl hibernate");
+        else if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Hibernate");
     },
 
     suspend: function() {
-        if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
-        else if ( has_systemd ) Util.spawnCommandLine("systemctl suspend");
+        if ( has_systemd ) Util.spawnCommandLine("systemctl suspend");
+        else if ( has_upower ) Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
     },
 
     sleep: function() {
@@ -57,15 +57,14 @@ let CommandDispatcher = {
                 Util.spawnCommandLine("lxdm -c USER_SWITCH");
                 break;
             case "lightdm":
-
+                Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                Util.spawnCommandLine("dm-tool switch-to-greeter");
         }
     },
 
     guest: function() {
-        if ( session_manager == 0 ) {
-            Util.spawnCommandLine("cinnamon-screensaver-command --lock");
-            Util.spawnCommandLine("dm-tool switch-to-guest");
-        }
+        Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+        Util.spawnCommandLine("dm-tool switch-to-guest");
     },
 
     lock: function() {
@@ -191,34 +190,43 @@ MyApplet.prototype = {
     },
 
     checkSession: function() {
+        //check if systemd is being used
+        let sessionSettings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.session" });
+        has_systemd = sessionSettings.get_boolean("session-manager-uses-logind");
+
         //check if ConsoleKit is running
-        let [a, output] = GLib.spawn_command_line_sync("ps -C console-kit-dae");
-        if ( String(output).split("\n").length > 2 ) has_console_kit = true;
+        Util.spawn_async(["ps", "-C", "console-kit-dae"], Lang.bind(this, function (output) {
+            if ( String(output).split("\n").length > 2 ) has_console_kit = true;
+        }));
 
         //check if UPower is running
-        let [a, output] = GLib.spawn_command_line_sync("ps -C upowerd");
-        if ( String(output).split("\n").length > 2 ) has_upower = true;
-
-        //check if systemd is being used
-        let [a, output] = GLib.spawn_command_line_sync("ps -C systemd");
-        if ( String(output).split("\n").length > 2 ) has_systemd = true;
+        Util.spawn_async(["ps", "-C", "upowerd"], Lang.bind(this, function (output) {
+            if ( String(output).split("\n").length > 2 ) has_upower = true;
+        }));
 
         //check display manager
-        if ( GLib.file_test("/etc/X11/default-display-manager", GLib.FileTest.EXISTS) ) {
-            let [a, output] = GLib.spawn_command_line_sync("grep -oE \"[^/]+$\" /etc/X11/default-display-manager");
-            display_manager = String(output).split("\n")[0];
-        }
+        if ( GLib.getenv("MDMSESSION") ) display_manager = "mdm";
+        else if ( GLib.getenv("GDMSESSION") ) display_manager = "gdm";
+        else if ( GLib.getenv("XDG_SEAT_PATH") ) display_manager = "lightdm";
         else {
-            let dFiles = ["/etc/systemd/system/display-manager.service", "/etc/systemd/system-display-manager.service"];
-            for ( let i = 0; i < dFiles.length; i++ ) {
-                if ( GLib.file_test(dFiles[i], GLib.FileTest.EXISTS) ) {
-                    let [a, output] = GLib.spawn_command_line_sync("grep -e \"Exec\" " + dFiles[i]);
-                    display_manager = String(output).split("/").pop().split("\n")[0];
-                    break;
+            if ( GLib.file_test("/etc/X11/default-display-manager", GLib.FileTest.EXISTS) ) {
+                Util.spawn_async(["grep", "-oE", "\"[^/]+$\"", "/etc/X11/default-display-manager"], Lang.bind(this, function (output) {
+                    display_manager = String(output).split("\n")[0];
+                }));
+            }
+            else {
+                let found = false;
+                for ( let file of ["/etc/systemd/system/display-manager.service", "/etc/systemd/system-display-manager.service"] ) {
+                    if ( GLib.file_test(file, GLib.FileTest.EXISTS) ) {
+                        found = true
+                        Util.spawn_async(["grep", "-e", "\"Exec\"", file], Lang.bind(this, function (output) {
+                            display_manager = String(output).split("/").pop().split("\n")[0];
+                        }));
+                    }
                 }
+                if ( found ) global.log("Unable to determine display manager");
             }
         }
-        if ( !display_manager ) global.log("Unable to determine display manager");
     },
 
     bindSettings: function() {
@@ -246,7 +254,7 @@ MyApplet.prototype = {
             this.menu.addMenuItem(uSwitch);
 
             //guest
-            if ( session_manager == 0 ) {
+            if ( display_manager == "lightdm" ) {
                 let guest = new CommandItem("guest", _("Guest Session"));
                 this.menu.addMenuItem(guest);
             }

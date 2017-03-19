@@ -15,11 +15,9 @@
  */
 
 const AppletUUID = "hamster@projecthamster.wordpress.com";
-const HAMSTER_APPLET_SCHEMA = "org.cinnamon.hamster-applet";
 
 const Applet = imports.ui.applet;
 const Clutter = imports.gi.Clutter;
-const DBus = imports.dbus;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
@@ -28,7 +26,6 @@ const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 
 /* Local imports */
 const AppletDir = imports.ui.appletManager.appletMeta[AppletUUID].path;
@@ -36,37 +33,57 @@ imports.searchPath.unshift(AppletDir);
 const Stuff = imports.stuff;
 const Convenience = imports.convenience;
 
-// TODO - why are we not using dbus introspection here or something?
-let ApiProxy = DBus.makeProxyClass({
-    name: 'org.gnome.Hamster',
-    methods: [
-        {name: 'GetTodaysFacts', inSignature: '', outSignature: 'a(iiissisasii)'},
-        {name: 'StopTracking', inSignature: 'i'},
-        {name: 'Toggle', inSignature: ''},
-        {name: 'AddFact', inSignature: 'siib', outSignature: 'i'},
-        {name: 'GetActivities', inSignature: '', outSignature: 'a(ss)'},
-    ],
-    signals: [
-        {name: 'TagsChanged', inSignature: ''},
-        {name: 'FactsChanged', inSignature: ''},
-        {name: 'ActivitiesChanged', inSignature: ''},
-        {name: 'ToggleCalled', inSignature: ''},
-    ]
-});
+// dbus-send --session --type=method_call --print-reply --dest=org.gnome.Hamster /org/gnome/Hamster org.freedesktop.DBus.Introspectable.Introspect
+const ApiProxyIface = '<node> \
+<interface name="org.gnome.Hamster"> \
+<method name="GetTodaysFacts"> \
+  <arg direction="out" type="a(iiissisasii)" /> \
+</method> \
+<method name="StopTracking"> \
+  <arg direction="in"  type="v" name="end_time" /> \
+</method> \
+<method name="AddFact"> \
+  <arg direction="in"  type="s" name="fact" /> \
+  <arg direction="in"  type="i" name="start_time" /> \
+  <arg direction="in"  type="i" name="end_time" /> \
+  <arg direction="in"  type="b" name="temporary" /> \
+  <arg direction="out" type="i" /> \
+</method> \
+<method name="GetActivities"> \
+  <arg direction="in"  type="s" name="search" /> \
+  <arg direction="out" type="a(ss)" /> \
+</method> \
+<method name="GetCategories"> \
+  <arg direction="out" type="a(is)" /> \
+</method> \
+<signal name="FactsChanged"></signal> \
+<signal name="ActivitiesChanged"></signal> \
+<signal name="TagsChanged"></signal> \
+</interface> \
+</node>';
 
+let ApiProxy = Gio.DBusProxy.makeProxyWrapper(ApiProxyIface);
 
-let WindowsProxy = DBus.makeProxyClass({
-    name: 'org.gnome.Hamster.WindowServer',
-    methods: [
-        {name: 'edit', inSignature: 'i'},
-        {name: 'overview', inSignature: ''},
-        {name: 'about', inSignature: ''},
-        {name: 'statistics', inSignature: ''},
-        {name: 'preferences', inSignature: ''},
-    ]
-});
+// dbus-send --session --type=method_call --print-reply --dest=org.gnome.Hamster.WindowServer /org/gnome/Hamster/WindowServer org.freedesktop.DBus.Introspectable.Introspect
+const WindowsProxyIface = '<node> \
+<interface name="org.gnome.Hamster.WindowServer"> \
+<method name="edit"> \
+  <arg direction="in"  type="v" name="id" /> \
+</method> \
+<method name="overview"></method> \
+<method name="preferences"></method> \
+</interface> \
+</node>';
 
+let WindowsProxy = Gio.DBusProxy.makeProxyWrapper(WindowsProxyIface);
 
+function _(str) {
+   let translation = Gettext.gettext(str);
+   if(translation != str) {
+      return translation;
+   }
+   return Gettext.dgettext(AppletUUID, str);
+};
 
 /* a little box or something */
 function HamsterBox() {
@@ -93,16 +110,19 @@ HamsterBox.prototype = {
                                         style_class: 'popup-menu-item',
                                         style: 'selected-color: black;'});
         this._textEntry.clutter_text.connect('activate', Lang.bind(this, this._onEntryActivated));
+        //cursorPos = this._textEntry.clutter_text.cursor_position(this)
         this._textEntry.clutter_text.connect('key-release-event', Lang.bind(this, this._onKeyReleaseEvent));
+        //get_int
+        //clutter_text_get_cursor_position (ClutterText *self);
 
 
         box.add(this._textEntry);
 
         // autocomplete popup - couldn't spark it up just yet
-        //this._popup = new PopupMenu.PopupComboMenu(this._textEntry)
+        //this._popup = new PopupMenu.PopupComboMenu(this._textEntry);
 
         label = new St.Label({style_class: 'popup-menu-content popup-subtitle-menu-item'});
-        label.set_text(_("Todays activities"))
+        label.set_text(_("Todays activities"));
         box.add(label);
 
         let scrollbox = new St.ScrollView();
@@ -114,8 +134,8 @@ HamsterBox.prototype = {
         container.set_vertical(true);
         scrollbox.add_actor(container);
 
-        this.activities = new St.Table()
-        container.add(this.activities)
+        this.activities = new St.Table();
+        container.add(this.activities);
 
         this.summaryLabel = new St.Label({style_class: 'popup-menu-content popup-subtitle-menu-item'});
         box.add(this.summaryLabel);
@@ -145,10 +165,10 @@ HamsterBox.prototype = {
 
     _getActivities: function() {
         if (this.runningActivitiesQuery)
-            return this.autocompleteActivities
+            return this.autocompleteActivities;
 
         this.runningActivitiesQuery = true;
-        this.proxy.GetActivitiesRemote(DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
+        this.proxy.GetActivitiesRemote("", Lang.bind(this, function([response], err) {
             this.runningActivitiesQuery = false;
             this.autocompleteActivities = response;
         }));
@@ -156,13 +176,36 @@ HamsterBox.prototype = {
         return this.autocompleteActivities;
     },
 
+    _getCategories: function() {
+        if (this.runningCategoriesQuery)
+            return this.autocompleteCategories;
+
+        this.runningCategoriesQuery = true;
+        this.proxy.GetCategoriesRemote(Lang.bind(this, function([response], err) {
+            this.runningCategoriesQuery = false;
+            this.autocompleteCategories = response;
+        }));
+
+        return this.autocompleteCategories;
+    },
+
     _onKeyReleaseEvent: function(textItem, evt) {
         let symbol = evt.get_key_symbol();
         let text = this._textEntry.get_text().toLowerCase();
+        let starttime = "";
+        let activitytext = text;
+        // Don't include leading times in the activity autocomplete
+        let match = [];
+        if ((match = text.match(/^\d\d:\d\d /)) ||
+            (match = text.match(/^-\d+ /))) {
+            starttime = text.substring(0, match[0].length);
+            activitytext = text.substring(match[0].length);
+        }
 
         // if nothing has changed or we still have selection then that means
         // that special keys are at play and we don't attempt to autocomplete
-        if (this._prevText == text ||
+        if (activitytext == "" ||
+            this._prevText == text ||
             this._textEntry.clutter_text.get_selection()) {
             return;
         }
@@ -175,17 +218,46 @@ HamsterBox.prototype = {
                 return;
         }
 
+        // prevent auto-complete if the cursor is not at the end of the text
+        if(this._textEntry.clutter_text.get_cursor_position() != -1  ){
+            return;
+        }
 
+        // category completion
+        let atIndex = text.indexOf("@");
+        if (atIndex != -1) {
+            activitytext = this._textEntry.get_text().substring(0, atIndex);
+            let categorytext = text.substring(atIndex+1);
+            let allCategories = this._getCategories();
+            for each (var cat in allCategories) {
+                let completion = cat[1];
+                if (completion.toLowerCase().substring(0, categorytext.length) == categorytext) {
+                    this.prevText = text;
+                    completion = starttime + activitytext + "@" + completion;
+
+                    this._textEntry.set_text(completion);
+                    this._textEntry.clutter_text.set_selection(text.length, completion.length);
+
+                    this._prevText = completion.toLowerCase();
+
+                    return;
+                }
+            }
+        }
+
+        // activity completion
         let allActivities = this._getActivities();
         for each (var rec in allActivities) {
-            if (rec[0].toLowerCase().substring(0, text.length) == text) {
+            let completion = rec[0];
+            if (rec[1].length > 0)
+                completion += "@" + rec[1];
+            if (completion.toLowerCase().substring(0, activitytext.length) == activitytext) {
                 this.prevText = text;
+                completion = starttime + completion;
 
-                this._textEntry.set_text(rec[0]);
-                this._textEntry.clutter_text.set_selection(text.length, rec[0].length)
-
-                this._prevText = rec[0].toLowerCase();
-
+                this._textEntry.set_text(completion);
+                this._textEntry.clutter_text.set_selection(text.length, completion.length);
+                this._prevText = completion.toLowerCase();
                 return;
             }
         }
@@ -203,18 +275,17 @@ HamsterApplet.prototype = {
     _init: function(metadata, orientation, panel_height) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height);
 
-        this._proxy = new ApiProxy(DBus.session, 'org.gnome.Hamster', '/org/gnome/Hamster');
-        this._proxy.connect('FactsChanged',      Lang.bind(this, this.refresh));
-        this._proxy.connect('ActivitiesChanged', Lang.bind(this, this.refreshActivities));
-        this._proxy.connect('TagsChanged',       Lang.bind(this, this.refresh));
+        this._proxy = new ApiProxy(Gio.DBus.session, 'org.gnome.Hamster', '/org/gnome/Hamster');
+        this._proxy.connectSignal('FactsChanged',      Lang.bind(this, this.refresh));
+        this._proxy.connectSignal('ActivitiesChanged', Lang.bind(this, this.refreshActivities));
+        this._proxy.connectSignal('TagsChanged',       Lang.bind(this, this.refresh));
 
 
-        this._windowsProxy = new WindowsProxy(DBus.session,
+        this._windowsProxy = new WindowsProxy(Gio.DBus.session,
                                               "org.gnome.Hamster.WindowServer",
-                                              "/org/gnome/Hamster/WindowServer")
+                                              "/org/gnome/Hamster/WindowServer");
 
-        this._settings = Convenience.getAppletSettings(HAMSTER_APPLET_SCHEMA,
-                metadata.path + "/schemas/");
+        this._settings = Convenience.getSettings();
         this.path = metadata.path;
 
         // Set initial label, icon, activity
@@ -267,7 +338,7 @@ HamsterApplet.prototype = {
         item.connect('activate', Lang.bind(this, this._onAppletSettingsActivate));
         this.menu.addMenuItem(item);
 
-        // Focus HamsterBox when menu is opened
+        // focus menu upon display
         this.menu.connect('open-state-changed', Lang.bind(this,
             function(menu, open) {
                 if (open) {
@@ -291,7 +362,7 @@ HamsterApplet.prototype = {
         // load data
         this.facts = null;
         // refresh the label every 60 secs
-        this.timeout = GLib.timeout_add_seconds(0, 60, Lang.bind(this, this.refresh))
+        this.timeout = GLib.timeout_add_seconds(0, 60, Lang.bind(this, this.refresh));
         this.refresh();
     },
 
@@ -305,119 +376,133 @@ HamsterApplet.prototype = {
         let text = this.activityEntry._textEntry.set_text('');
     },
 
-    refreshActivities: function() {
+    refreshActivities: function(proxy, sender) {
         this.activityEntry.autocompleteActivities = [];
         this.refresh();
     },
 
-    refresh: function() {
-        this._proxy.GetTodaysFactsRemote(DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
-            let facts = Stuff.fromDbusFacts(response);
+    refresh: function(proxy, sender) {
+        this._proxy.GetTodaysFactsRemote(Lang.bind(this, this._refresh));
+        return true;
+    },
 
-            this.currentActivity = null;
-            let fact = null;
-            if (facts.length) {
-                fact = facts[facts.length - 1];
-                if (!fact.endTime)
-                    this.currentActivity = fact;
+    _refresh: function([response], err) {
+        let facts = [];
+
+        if (err) {
+            log(err);
+        } else if (response.length > 0) {
+            facts = Stuff.fromDbusFacts(response);
+        }
+
+        this.currentActivity = null;
+        let fact = null;
+        if (facts.length) {
+            fact = facts[facts.length - 1];
+            if (!fact.endTime)
+                this.currentActivity = fact;
+        }
+        this.updatePanelDisplay(fact);
+
+        let activities = this.activityEntry.activities;
+        activities.destroy_all_children(); // remove previous entries
+
+        var i = 0;
+        for each (var fact in facts.reverse()) {
+            let label;
+
+            label = new St.Label({style_class: 'popup-menu-item'});
+            let text = "%02d:%02d - ".format(fact.startTime.getHours(), fact.startTime.getMinutes());
+            if (fact.endTime) {
+                text += "%02d:%02d".format(fact.endTime.getHours(), fact.endTime.getMinutes());
+            }else{
+                text += '   ....'
             }
-            this.updatePanelDisplay(fact);
+            label.set_text(text)
+            activities.add(label, {row: i, col: 1, x_expand: false});
 
-            let activities = this.activityEntry.activities
-            activities.destroy_all_children() // remove previous entries
+            label = new St.Label({style_class: 'popup-menu-item'});
+            label.set_text(fact.name + (0 < fact.tags.length ? (" #" + fact.tags.join(", #")) : ""));
+            activities.add(label, {row: i, col: 2});
 
-            var i = 0;
-            for each (var fact in facts) {
-                let label;
-
-                label = new St.Label({style_class: 'popup-menu-item'});
-                let text = "%02d:%02d - ".format(fact.startTime.getHours(), fact.startTime.getMinutes());
-                if (fact.endTime) {
-                    text += "%02d:%02d".format(fact.endTime.getHours(), fact.endTime.getMinutes());
-                }
-                label.set_text(text)
-                activities.add(label, {row: i, col: 0, x_expand: false});
-
-                label = new St.Label({style_class: 'popup-menu-item'});
-                label.set_text(fact.name + (0 < fact.tags.length ? (" #" + fact.tags.join(", #")) : ""));
-                activities.add(label, {row: i, col: 1});
-
-                label = new St.Label({style_class: 'popup-menu-item'});
-                label.set_text(Stuff.formatDurationHuman(fact.delta))
-                activities.add(label, {row: i, col: 2, x_expand: false});
+            label = new St.Label({style_class: 'popup-menu-item'});
+            label.set_text(Stuff.formatDurationHuman(fact.delta));
+            activities.add(label, {row: i, col: 3, x_expand: false});
 
 
-                let icon;
-                let button;
+            let icon;
+            let button;
 
+            button = new St.Button();
+
+            //icon = new St.Icon({icon_name: "accessories-text-editor-symbolic",
+            icon = new St.Icon({icon_name: "emblem-system-symbolic",
+                                style_class: 'popup-menu-icon'});
+
+            button.set_child(icon);
+            button.fact = fact;
+            button.connect('clicked', Lang.bind(this, function(button, event) {
+                this._windowsProxy.editSync(GLib.Variant.new('i', [button.fact.id]));
+                this.menu.close();
+            }));
+            activities.add(button, {row: i, col: 4});
+
+
+            if (!this.currentActivity ||
+                this.currentActivity.name != fact.name ||
+                this.currentActivity.category != fact.category ||
+                this.currentActivity.tags.join(",") != fact.tags.join(",")) {
                 button = new St.Button();
 
-                icon = new St.Icon({icon_name: "document-open-symbolic",
+                icon = new St.Icon({icon_name: "media-playback-start-symbolic",
                                     style_class: 'popup-menu-icon'});
 
                 button.set_child(icon);
                 button.fact = fact;
+
                 button.connect('clicked', Lang.bind(this, function(button, event) {
-                    this._windowsProxy.editRemote(button.fact.id, DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
-                        // TODO - handle exceptions perhaps
+                    let factStr = button.fact.name
+                                  + "@" + button.fact.category
+                                  + ", " + (button.fact.description);
+                    if (button.fact.tags.length) {
+                        factStr += " #" + button.fact.tags.join(", #");
+                    }
+
+                    this._proxy.AddFactRemote(factStr, 0, 0, false, Lang.bind(this, function(response, err) {
+                        // not interested in the new id - this shuts up the warning
                     }));
                     this.menu.close();
                 }));
-                activities.add(button, {row: i, col: 3});
 
+                activities.add(button, {row: i, col: 0});
+            }else{
+                button = new St.Button();
+                icon = new St.Icon({icon_name: "media-playback-stop-symbolic",
+                    style_class: 'popup-menu-icon'});
 
-                if (!this.currentActivity ||
-                    this.currentActivity.name != fact.name ||
-                    this.currentActivity.category != fact.category ||
-                    this.currentActivity.tags.join(",") != fact.tags.join(",")) {
-                    button = new St.Button();
-
-                    icon = new St.Icon({icon_name: "media-playback-start-symbolic",
-                                    style_class: 'popup-menu-icon'});
-
-                    button.set_child(icon);
-                    button.fact = fact;
-
-                    button.connect('clicked', Lang.bind(this, function(button, event) {
-                        let factStr = button.fact.name
-                                      + "@" + button.fact.category
-                                      + ", " + (button.fact.description);
-                        if (button.fact.tags) {
-                            factStr += " #" + button.fact.tags.join(", #");
-                        }
-
-                        this._proxy.AddFactRemote(factStr,
-                                                  0, 0, false, DBus.CALL_FLAG_START,
-                                                  Lang.bind(this, function(response, err) {
-                            // not interested in the new id - this shuts up the warning
-                        }));
-                        this.menu.close();
-                    }));
-
-                    activities.add(button, {row: i, col: 4});
-                }
-
-                i += 1;
+                button.set_child(icon);
+                button.connect('clicked',  Lang.bind(this, this._onStopTracking));
+                button.fact = fact;
+                activities.add(button, {row: i, col: 0});
             }
 
-            let byCategory = {};
-            let categories = [];
-            for each (var fact in facts) {
-                byCategory[fact.category] = (byCategory[fact.category] || 0) + fact.delta;
-                if (categories.indexOf(fact.category) == -1)
-                    categories.push(fact.category)
-            };
+            i += 1;
+        }
 
-            let label = "";
-            for each (var category in categories) {
-                label += category + ": " + Stuff.formatDurationHours(byCategory[category]) +  ", ";
-            }
-            label = label.slice(0, label.length - 2); // strip trailing comma
-            this.activityEntry.summaryLabel.set_text(label);
+        let byCategory = {};
+        let categories = [];
+        for each (var fact in facts) {
+            byCategory[fact.category] = (byCategory[fact.category] || 0) + fact.delta;
+            if (categories.indexOf(fact.category) == -1)
+                categories.push(fact.category);
+        }
 
-        }));
-
-        return true;
+        let label = "";
+        for each (var category in categories) {
+            label += category + ": " + Stuff.formatDurationHours(byCategory[category]) +  ", ";
+        }
+        label = label.slice(0, label.length - 2); // strip trailing comma
+        this.activityEntry.summaryLabel.set_text(label);
     },
 
 
@@ -460,25 +545,19 @@ HamsterApplet.prototype = {
                                     now.getMinutes(),
                                     now.getSeconds());
         epochSeconds = Math.floor(epochSeconds / 1000);
-        this._proxy.StopTrackingRemote(epochSeconds, DBus.CALL_FLAG_START);
+        this._proxy.StopTrackingRemote(GLib.Variant.new('i', [epochSeconds]));
     },
 
     _onShowHamsterActivate: function() {
-        this._windowsProxy.overviewRemote(DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
-            // TODO - handle exceptions perhaps
-        }));
+        this._windowsProxy.overviewSync();
     },
 
     _onNewFact: function() {
-        this._windowsProxy.editRemote(0, DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
-            // TODO - handle exceptions perhaps
-        }));
+        this._windowsProxy.editSync(GLib.Variant.new('i', [0]));
     },
 
     _onShowSettingsActivate: function() {
-        this._windowsProxy.preferencesRemote(DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
-            // TODO - handle exceptions perhaps
-        }));
+        this._windowsProxy.preferencesSync();
     },
 
     _onAppletSettingsActivate: function() {
@@ -487,16 +566,13 @@ HamsterApplet.prototype = {
 
     _onActivityEntry: function() {
         let text = this.activityEntry._textEntry.get_text();
-        this._proxy.AddFactRemote(text, 0, 0, false, DBus.CALL_FLAG_START, Lang.bind(this, function(response, err) {
+        this._proxy.AddFactRemote(text, 0, 0, false, Lang.bind(this, function(response, err) {
             // not interested in the new id - this shuts up the warning
         }));
     }
 };
 
 function main(metadata, orientation, panel_height) {
-    /* Use local translations
-     * TODO: Update translations to make them specific to this applet */
-    Gettext.bindtextdomain("hamster-shell-extension", metadata.path + "/locale");
-    Gettext.textdomain("hamster-shell-extension");
+    Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale");
     return new HamsterApplet(metadata, orientation, panel_height);
 }
