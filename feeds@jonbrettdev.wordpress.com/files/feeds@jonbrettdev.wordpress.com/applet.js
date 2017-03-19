@@ -77,7 +77,7 @@ FeedApplet.prototype = {
         this.feed_queue = [];
 
         try {
-            debug_logging = this.settings.getValue("enable-verbose-logging");
+            let debug_logging = this.settings.getValue("enable-verbose-logging");
 
             // Initialize a debug logger
             this.logger = new Logger.Logger({
@@ -284,7 +284,7 @@ FeedApplet.prototype = {
 
         // Application tooltip will only list unread feeds.
         for (var i = 0; i < this.feeds.length; i++) {
-            count = this.feeds[i].get_unread_count();
+            let count = this.feeds[i].get_unread_count();
 
             if(count > 0){
                 unread_count += count;
@@ -630,7 +630,7 @@ FeedDisplayMenuItem.prototype = {
     },
 
     get_title: function() {
-        
+
         let title =  this.custom_title || this.reader.title;
         if (this.reader.is_redirected)
             title += " (Redirected to: " + this.reader.redirected_url + ")";
@@ -755,8 +755,8 @@ FeedDisplayMenuItem.prototype = {
         if(this.reader.is_redirected) {
             menu_item = new ApplicationContextMenuItem(this, _("Update feed URL"), "update_feed_url");
             this.menu.addMenuItem(menu_item, 0);
-            this.menuItemCount++;            
-        }        
+            this.menuItemCount++;
+        }
     },
 
     _buttonEnterEvent: function(){
@@ -1002,7 +1002,7 @@ ApplicationContextMenuItem.prototype = {
                 
                 this._fdmi.owner.redirect_feed(current_url, redirected_url);
 
-                // Reload the regular title and remove the is_redirected flag                
+                // Reload the regular title and remove the is_redirected flag
                 this._fdmi.owner.toggle_feeds(this._fdmi, true);
                 break;
 
