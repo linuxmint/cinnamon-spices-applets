@@ -126,7 +126,7 @@ FeedReader.prototype = {
         this.logger.debug("FeedReader.get");
         Util.spawn_async(['python', AppletPath + '/getFeed.py', this.url], Lang.bind(this, this.process_feed));
     },
-    
+
     process_feed: function(response) {
         this.logger.debug("FeedReader.process_feed");
 
@@ -151,7 +151,7 @@ FeedReader.prototype = {
             // Check if feed has a permanent redirect
             if (info.redirected_url != undefined) {
                 this.is_redirected = true;
-                this.redirected_url = info.redirected_url;                
+                this.redirected_url = info.redirected_url;
                 this.logger.info("Feed has been redirected to: " + info.redirected_url + "(Please update feed)");
                 // eventually need to address this more forcefully
             }
