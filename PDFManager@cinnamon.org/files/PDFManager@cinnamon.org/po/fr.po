@@ -1,41 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-19 16:49+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: applet.js:51
 msgid "Click here to manage your PDF"
 msgstr "Cliquer ici pour gérer vos PDF"
 
+#: applet.js:71
 msgid "Merge PDF"
 msgstr "Fusionner des PDF"
 
+#: applet.js:76
 msgid "Extract PDF"
 msgstr "Extraire un PDF"
 
+#: applet.js:83
 msgid "Reduce size of PDF"
 msgstr "Réduire la taille de vos PDF"
 
+#: applet.js:90
 msgid "Rotate left PDF"
 msgstr "Pivoter vos PDF sur la gauche"
 
+#: applet.js:95
 msgid "Rotate right PDF"
 msgstr "Pivoter vos PDF sur la droite"
 
+#: applet.js:100
 msgid "Flip vertically PDF"
 msgstr "Retourner vos PDF"
 
+#: applet.js:105
 msgid "Install PDFManager's tools"
 msgstr "Installer les outils de PDFManager"
 
-msgid "Manager of PDF"
-msgstr "Gestionnaire de PDF"
-
+#: applet.js:115
 msgid "Open Document Viewer"
 msgstr "Ouvrir le visionneur de document"
 
+#: applet.js:122
 msgid "Open PDF Mod"
 msgstr "Ouvrir PDF Mod"
 
+#: applet.js:129
 msgid "Open PDF Editor"
 msgstr "Ouvrir PDF Editor"
 
-msgid "Installation of PDFManager's tools"
-msgstr "Installation des outils de PDFManager"
+#. PDFManager@cinnamon.org->metadata.json->description
+msgid "Manager of PDF"
+msgstr "Gestionnaire de PDF"
+
+#. PDFManager@cinnamon.org->metadata.json->name
+msgid "PDFManager"
+msgstr ""
 
 msgid "Select your PDF..."
 msgstr "Sélectionnez vos PDF..."
@@ -51,3 +78,6 @@ msgstr "Entrez les pages à extraire (e.g. : 1-5 7-9 ou 3-end ou even ou odd) :"
 
 msgid "PDF Files"
 msgstr "Fichiers PDF"
+
+#~ msgid "Installation of PDFManager's tools"
+#~ msgstr "Installation des outils de PDFManager"

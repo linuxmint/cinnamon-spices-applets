@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDFManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
+"POT-Creation-Date: 2017-03-19 16:48+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -14,41 +14,57 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: applet.js:51
 msgid "Click here to manage your PDF"
 msgstr "Kliknite ovdje za upravljanje svojim PDF datotekama"
 
+#: applet.js:71
 msgid "Merge PDF"
 msgstr "Spoji PDF"
 
+#: applet.js:76
 msgid "Extract PDF"
 msgstr "Izdvoji PDF"
 
+#: applet.js:83
 msgid "Reduce size of PDF"
 msgstr "Smanji PDF veličinu"
 
+#: applet.js:90
 msgid "Rotate left PDF"
 msgstr "Zakreni PDF na lijevo"
 
+#: applet.js:95
 msgid "Rotate right PDF"
 msgstr "Zakreni PDF na desno"
 
+#: applet.js:100
 msgid "Flip vertically PDF"
 msgstr "Razvuci PDF okomito"
 
+#: applet.js:105
 msgid "Install PDFManager's tools"
 msgstr "Instaliraj alate PDF upravitelja"
 
-msgid "Manager of PDF"
-msgstr "PDF upravitelj"
-
+#: applet.js:115
 msgid "Open Document Viewer"
 msgstr "Otvori preglednika dokumenata"
 
+#: applet.js:122
 msgid "Open PDF Mod"
 msgstr "Otvori PDF promjenu"
 
+#: applet.js:129
 msgid "Open PDF Editor"
 msgstr "Otvori PDF uređivač"
+
+#. PDFManager@cinnamon.org->metadata.json->description
+msgid "Manager of PDF"
+msgstr "PDF upravitelj"
+
+#. PDFManager@cinnamon.org->metadata.json->name
+msgid "PDFManager"
+msgstr "PDF upravitelj"
 
 msgid "Select your PDF..."
 msgstr "Odaberi svoj PDF..."
@@ -66,7 +82,3 @@ msgstr ""
 
 msgid "PDF Files"
 msgstr "PDF datoteke"
-
-#. PDFManager@cinnamon.org->metadata.json->name
-msgid "PDFManager"
-msgstr "PDF upravitelj"
