@@ -339,11 +339,12 @@ MyApplet.prototype = {
 
   // Override Methods: Applet
 , _onKeySettingsUpdated: function _onKeySettingsUpdated() {
-    if (this.keybinding != null)
+    if (this.keybinding != null) {
       Main.keybindingManager.addHotKey(UUID,
                                        this.keybinding,
                                        Lang.bind(this,
                                                  this.on_applet_clicked))
+    }
   }
 
 , on_applet_clicked: function on_applet_clicked(event) {
