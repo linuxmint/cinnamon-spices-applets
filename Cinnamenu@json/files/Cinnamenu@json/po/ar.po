@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gno-Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-12-17 20:35+0300\n"
+"POT-Creation-Date: 2017-03-22 11:08+0100\n"
+"PO-Revision-Date: 2017-03-22 11:08+0100\n"
 "Last-Translator: Mosaab Alzoubi <moceap@hotmail.com>\n"
 "Language-Team: Arabic <>\n"
 "Language: en_US\n"
@@ -12,230 +12,453 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: convenience.js
-#: extension.js
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr ""
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr ""
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr ""
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr ""
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr ""
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr ""
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+#: panel.js:533
 msgid "Gno-Menu: Search Firefox bookmarks disabled"
 msgstr "غنو-مينيو: تم تعطيل البحث في علامات فيرفكس"
 
+#: panel.js:535
 msgid ""
-"If you want to search Firefox bookmarks, you must install the required"
-" pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"لتفعيل البحث بعلامات فيرفكس، يجب أن تثبت "
-"الحزمة: libgir1.2-gda-5.0 لأوبنتو أو libgda-sqlite لفيدورا"
+"لتفعيل البحث بعلامات فيرفكس، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
+"أو libgda-sqlite لفيدورا"
 
+#: panel.js:541
 msgid "Gno-Menu: Search Midori bookmarks disabled"
 msgstr "غنو-مينيو: تم تعطيل البحث في علامات ميدوري"
 
+#: panel.js:543
 msgid ""
-"If you want to search Midori bookmarks, you must install the required"
-" pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"لتفعيل البحث بعلامات ميدوري، يجب أن تثبت "
-"الحزمة: libgir1.2-gda-5.0 لأوبنتو أو libgda-sqlite لفيدورا"
+"لتفعيل البحث بعلامات ميدوري، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
+"أو libgda-sqlite لفيدورا"
 
-msgid "Recent"
-msgstr "الحديثة"
-
-msgid "Webmarks"
-msgstr "علامات الويب"
-
-msgid "Favorites"
-msgstr "المفضلة"
-
-msgid "Places"
-msgstr "الأماكن"
-
-msgid "Toggle Startup Apps View"
-msgstr "التبديل بين عرض التطبيقات المبدئي"
-
-msgid "List View"
-msgstr "طريقة القائمة"
-
+#: panel.js:1578
 msgid "Grid View"
 msgstr "طريقة الشبكة"
 
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr ""
+
+#: panel.js:1581
+msgid "List View"
+msgstr "طريقة القائمة"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr ""
+
+#: panel.js:1638
 msgid "Type to search..."
 msgstr "اكتب لتبحث..."
 
+#: panel.js:1675
 msgid "All Applications"
 msgstr "كل التطبيقات"
 
-msgid "Frequent Apps"
-msgstr "التطبيقات الشائعة"
-
+#: panel.js:1680
 msgid "Favorite Apps"
 msgstr "التطبيقات المفضلة"
 
-msgid "Restart Shell"
-msgstr "إعادة تشغيل غنوم"
+#: panel.js:1747
+msgid "Places"
+msgstr "الأماكن"
 
-msgid "Suspend"
-msgstr "علّق"
+#: panel.js:1752
+msgid "Recent"
+msgstr "الحديثة"
 
-msgid "Shutdown"
-msgstr "أطفئ"
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr ""
 
-msgid "Logout User"
-msgstr "اخرج"
-
+#: panel.js:1768
 msgid "Lock Screen"
 msgstr "اقفل"
 
-msgid "Preferences"
-msgstr "تفضيلات القائمة"
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr ""
 
-msgid "No cinnamenu stylesheet found"
-msgstr "لم يعثر على نمط عرض غنو-مينيو"
+#: panel.js:1799
+msgid "Logout"
+msgstr ""
 
-#: placeDisplay.js
-msgid "Failed to launch \"%s\""
-msgstr "تعذر بدء \"%s\""
+#: panel.js:1800
+msgid "Leave the session"
+msgstr ""
 
+#: panel.js:1822
+msgid "Quit"
+msgstr ""
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr ""
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr ""
+
+#: placeDisplay.js:147
 msgid "Home"
 msgstr "المنزل"
 
+#: placeDisplay.js:221
 msgid "Computer"
 msgstr "الحاسوب"
 
+#: placeDisplay.js:225
 msgid "Browse network"
 msgstr "استعرض الشبكة"
 
-#: prefs.js
-msgid "<b>Panel Settings</b>"
-msgstr "<b>إعدادات الشريط</b>"
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr ""
 
-msgid "Disable activities hot corner"
-msgstr "عطّل الزاوية النشطة"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
 
-msgid "Remove View button from panel"
-msgstr "احذف زر العرض من الشريط"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
 
-msgid "Label for View button"
-msgstr "عبارة زر العرض"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr ""
 
-msgid "Use icon with View button"
-msgstr "استعمل رمز لزر العرض"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr ""
 
-msgid "Remove Apps button from panel"
-msgstr "احذف زر التطبيقات من الشريط"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr ""
 
-msgid "Label for Apps button"
-msgstr "عبارة زر التطبيقات"
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr ""
 
-msgid "Use icon with Apps button"
-msgstr "استعمل رمز لزر التطبيقات"
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr ""
 
-msgid "Remove Menu button from panel"
-msgstr "احذف زر القائمة من الشريط"
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
 
-msgid "Label for Menu button"
-msgstr "عبارة زر القائمة"
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
-msgid "Use icon with Menu button"
-msgstr "استعمل رمز لزر القائمة"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
 
-msgid "Disable Menu button hot spot"
-msgstr "عطل بقعة زر القائمة النشطة"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
 
-msgid "Disable Menu button shortcut key"
-msgstr "عطل اختصار زر القائمة"
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
 
-msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-msgstr "اختصار خاطئ. جرب F12، <Super>space، <Ctrl><Alt><Shift>a، إلخ."
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr ""
 
-msgid "Set Menu button position"
-msgstr "اضبط موضع زر القائمة"
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr ""
 
-msgid "Left"
-msgstr "يسار"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr ""
 
-msgid "Center"
-msgstr "وسط"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr ""
 
-msgid "Right"
-msgstr "يمين"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr ""
 
-msgid "<b>Menu Settings</b>"
-msgstr "<b>إعدادات القائمة</b>"
-
-msgid "Hide User Options Panel"
-msgstr "أخفِ شريط خيارات المستخدم"
-
-msgid "Hide Shortcuts Panel"
-msgstr "أخف شريط الاختصارات"
-
-msgid "Menu layout size"
-msgstr "حجم نمط القائمة"
-
-msgid "Normal"
-msgstr "عادي"
-
-msgid "Compact"
-msgstr "متراص"
-
-msgid "Icons to display on Shortcuts Panel"
-msgstr "الرموز المعروضة بشريط الاختصارات"
-
-msgid "Applications to display at startup"
-msgstr "التطبيقات المعروضة بالبداية"
-
-msgid "All"
-msgstr "الكل"
-
-msgid "Frequent"
-msgstr "المتكررة"
-
-msgid "None"
-msgstr "لا شيء"
-
-msgid "Number of columns in Application Grid"
-msgstr "عدد الأعمدة في الشبكة"
-
-msgid "3"
-msgstr "3"
-
-msgid "4"
-msgstr "4"
-
-msgid "5"
-msgstr "5"
-
-msgid "6"
-msgstr "6"
-
-msgid "7"
-msgstr "7"
-
-msgid "Default view mode for applications"
-msgstr "النمط الافتراضي لعرض التطبيقات"
-
-msgid "List"
-msgstr "القائمة"
-
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "الشبكة"
 
-msgid "Hide Categories Panel"
-msgstr "أخفِ شريط التصنيفات"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "القائمة"
 
-msgid "Category selection method"
-msgstr "طريقة اختيار التصنيفات"
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr ""
 
-msgid "Hover"
-msgstr "التمرير"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
 
-msgid "Click"
-msgstr "النقر"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
 
-msgid "Size of Shortcuts Panel icons"
-msgstr "حجم رموز شريط الاختصارات"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr ""
 
-msgid "Size of Application List icons"
-msgstr "حجم رموز قائمة التطبيقات"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
 
-msgid "Size of Application Grid icons"
-msgstr "حجم رموز شبكة التطبيقات"
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr ""
+
+#~ msgid "Webmarks"
+#~ msgstr "علامات الويب"
+
+#~ msgid "Favorites"
+#~ msgstr "المفضلة"
+
+#~ msgid "Toggle Startup Apps View"
+#~ msgstr "التبديل بين عرض التطبيقات المبدئي"
+
+#~ msgid "Frequent Apps"
+#~ msgstr "التطبيقات الشائعة"
+
+#~ msgid "Restart Shell"
+#~ msgstr "إعادة تشغيل غنوم"
+
+#~ msgid "Suspend"
+#~ msgstr "علّق"
+
+#~ msgid "Shutdown"
+#~ msgstr "أطفئ"
+
+#~ msgid "Logout User"
+#~ msgstr "اخرج"
+
+#~ msgid "Preferences"
+#~ msgstr "تفضيلات القائمة"
+
+#~ msgid "No cinnamenu stylesheet found"
+#~ msgstr "لم يعثر على نمط عرض غنو-مينيو"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "تعذر بدء \"%s\""
+
+#~ msgid "<b>Panel Settings</b>"
+#~ msgstr "<b>إعدادات الشريط</b>"
+
+#~ msgid "Disable activities hot corner"
+#~ msgstr "عطّل الزاوية النشطة"
+
+#~ msgid "Remove View button from panel"
+#~ msgstr "احذف زر العرض من الشريط"
+
+#~ msgid "Label for View button"
+#~ msgstr "عبارة زر العرض"
+
+#~ msgid "Use icon with View button"
+#~ msgstr "استعمل رمز لزر العرض"
+
+#~ msgid "Remove Apps button from panel"
+#~ msgstr "احذف زر التطبيقات من الشريط"
+
+#~ msgid "Label for Apps button"
+#~ msgstr "عبارة زر التطبيقات"
+
+#~ msgid "Use icon with Apps button"
+#~ msgstr "استعمل رمز لزر التطبيقات"
+
+#~ msgid "Remove Menu button from panel"
+#~ msgstr "احذف زر القائمة من الشريط"
+
+#~ msgid "Label for Menu button"
+#~ msgstr "عبارة زر القائمة"
+
+#~ msgid "Use icon with Menu button"
+#~ msgstr "استعمل رمز لزر القائمة"
+
+#~ msgid "Disable Menu button hot spot"
+#~ msgstr "عطل بقعة زر القائمة النشطة"
+
+#~ msgid "Disable Menu button shortcut key"
+#~ msgstr "عطل اختصار زر القائمة"
+
+#~ msgid ""
+#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#~ msgstr "اختصار خاطئ. جرب F12، <Super>space، <Ctrl><Alt><Shift>a، إلخ."
+
+#~ msgid "Set Menu button position"
+#~ msgstr "اضبط موضع زر القائمة"
+
+#~ msgid "Left"
+#~ msgstr "يسار"
+
+#~ msgid "Center"
+#~ msgstr "وسط"
+
+#~ msgid "Right"
+#~ msgstr "يمين"
+
+#~ msgid "<b>Menu Settings</b>"
+#~ msgstr "<b>إعدادات القائمة</b>"
+
+#~ msgid "Hide User Options Panel"
+#~ msgstr "أخفِ شريط خيارات المستخدم"
+
+#~ msgid "Hide Shortcuts Panel"
+#~ msgstr "أخف شريط الاختصارات"
+
+#~ msgid "Menu layout size"
+#~ msgstr "حجم نمط القائمة"
+
+#~ msgid "Normal"
+#~ msgstr "عادي"
+
+#~ msgid "Compact"
+#~ msgstr "متراص"
+
+#~ msgid "Icons to display on Shortcuts Panel"
+#~ msgstr "الرموز المعروضة بشريط الاختصارات"
+
+#~ msgid "Applications to display at startup"
+#~ msgstr "التطبيقات المعروضة بالبداية"
+
+#~ msgid "All"
+#~ msgstr "الكل"
+
+#~ msgid "Frequent"
+#~ msgstr "المتكررة"
+
+#~ msgid "None"
+#~ msgstr "لا شيء"
+
+#~ msgid "Number of columns in Application Grid"
+#~ msgstr "عدد الأعمدة في الشبكة"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "7"
+#~ msgstr "7"
+
+#~ msgid "Default view mode for applications"
+#~ msgstr "النمط الافتراضي لعرض التطبيقات"
+
+#~ msgid "Hide Categories Panel"
+#~ msgstr "أخفِ شريط التصنيفات"
+
+#~ msgid "Category selection method"
+#~ msgstr "طريقة اختيار التصنيفات"
+
+#~ msgid "Hover"
+#~ msgstr "التمرير"
+
+#~ msgid "Click"
+#~ msgstr "النقر"
+
+#~ msgid "Size of Shortcuts Panel icons"
+#~ msgstr "حجم رموز شريط الاختصارات"
+
+#~ msgid "Size of Application List icons"
+#~ msgstr "حجم رموز قائمة التطبيقات"
+
+#~ msgid "Size of Application Grid icons"
+#~ msgstr "حجم رموز شبكة التطبيقات"

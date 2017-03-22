@@ -33,8 +33,19 @@ const Settings = imports.ui.settings;
 
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
-const Gettext = imports.gettext.domain('Cinnamenu@json');
-const _ = Gettext.gettext;
+// l10n
+const Gettext = imports.gettext;
+const UUID = "Cinnamenu@json";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+    let cinnamonTranslation = Gettext.gettext(str);
+    if(cinnamonTranslation != str) {
+        return cinnamonTranslation;
+    }
+    return Gettext.dgettext(UUID, str);
+}
+
 
 const CinnamenuPanel = AppletDir.panel.CinnamenuPanel;
 

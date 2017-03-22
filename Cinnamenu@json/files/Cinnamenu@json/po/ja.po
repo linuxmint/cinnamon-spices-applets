@@ -2,228 +2,432 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gno-Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-11-15 16:09+0900\n"
+"POT-Creation-Date: 2017-03-22 11:10+0100\n"
+"PO-Revision-Date: 2017-03-22 11:10+0100\n"
 "Last-Translator: BALLOON a.k.a. Fu-sen. <fu-sen@shigakeiichi.com>\n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr ""
 
-#: convenience.js
+#: buttons.js:609
+msgid "Add to panel"
+msgstr ""
 
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr ""
 
-#: extension.js
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr ""
 
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr ""
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr ""
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+#: panel.js:533
 msgid "Gno-Menu: Search Firefox bookmarks disabled"
 msgstr "Gno-Menu: Firefox ブックマークの検索は使用できません"
 
+#: panel.js:535
 msgid ""
 "If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"もし Firefox ブックマークの検索を使用したい場合は、次のパッケージをインストー"
-"ルする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
-"(Fedora)"
 
+#: panel.js:541
 msgid "Gno-Menu: Search Midori bookmarks disabled"
 msgstr "Gno-Menu: Midori ブックマークの検索は使用できません"
 
+#: panel.js:543
 msgid ""
 "If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"もし Midori ブックマークの検索を使用したい場合は、次のパッケージをインストー"
-"ルする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
-"(Fedora)"
 
-msgid "Recent"
-msgstr "最近"
-
-msgid "Web"
-msgstr "Web"
-
-msgid "Favorites"
-msgstr "Favorites"
-
-msgid "Places"
-msgstr "場所"
-
-msgid "List View"
-msgstr "リスト一覧"
-
+#: panel.js:1578
 msgid "Grid View"
 msgstr "グリット一覧"
 
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr ""
+
+#: panel.js:1581
+msgid "List View"
+msgstr "リスト一覧"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr ""
+
+#: panel.js:1638
 msgid "Type to search..."
 msgstr "入力して検索..."
 
-msgid "Frequent Apps"
-msgstr "Frequent Apps"
-
+#: panel.js:1675
 msgid "All Applications"
 msgstr "すべてのアプリケーション"
 
-msgid "Restart Shell"
-msgstr "シェルの再起動"
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr ""
 
-msgid "Suspend"
-msgstr "サスペンド"
+#: panel.js:1747
+msgid "Places"
+msgstr "場所"
 
-msgid "Shutdown"
-msgstr "シャットダウン"
+#: panel.js:1752
+msgid "Recent"
+msgstr "最近"
 
-msgid "Logout User"
-msgstr "ユーザーのログアウト"
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr ""
 
+#: panel.js:1768
 msgid "Lock Screen"
 msgstr "画面ロック"
 
-msgid "Preferences"
-msgstr "設定"
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr ""
 
-msgid "No cinnamenu stylesheet found"
-msgstr "cinnamenu スタイルシートが見つかりません"
+#: panel.js:1799
+msgid "Logout"
+msgstr ""
 
+#: panel.js:1800
+msgid "Leave the session"
+msgstr ""
 
+#: panel.js:1822
+msgid "Quit"
+msgstr ""
 
-#: placeDisplay.js
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr ""
 
-msgid "Failed to launch \"%s\""
-msgstr "ランチャー \"%s\" に問題があります"
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr ""
 
+#: placeDisplay.js:147
 msgid "Home"
 msgstr "ホーム"
 
+#: placeDisplay.js:221
 msgid "Computer"
 msgstr "コンピューター"
 
-msgid "Browse Network"
-msgstr "ネットワークの閲覧"
-
-
-#: prefs.js
-
-msgid "<b>Panel Settings</b>"
-msgstr "<b>パネルの設定</b>"
-
-msgid "Disable activities hot corner"
-msgstr "ホットコーナーの動作を無効にする"
-
-msgid "Remove View button from panel"
-msgstr "パネルの表示ボタンを削除"
-
-msgid "Label for View button"
-msgstr "Label for View button"
-
-msgid "Use icon with View button"
-msgstr "Use icon with View button"
-
-msgid "Remove Apps button from panel"
-msgstr "パネルからアプリボタンを削除"
-
-msgid "Label for Apps button"
-msgstr "Label for Apps button"
-
-msgid "Use icon with Apps button"
-msgstr "Use icon with Apps button"
-
-msgid "Remove Menu button from panel"
-msgstr "パネルのメニューボタンを削除"
-
-msgid "Label for Menu button"
-msgstr "Label for Menu button"
-
-msgid "Use icon with Menu button"
-msgstr "Use icon with Menu button"
-
-msgid "Disable Menu button hot spot"
-msgstr "ホットスポットのメニューボタンを無効"
-
-msgid "Disable Menu button shortcut key"
-msgstr "ショートカットのメニューボタンを無効"
-
-msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-msgstr "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-
-msgid "<b>Menu Settings</b>"
-msgstr "<b>メニュー設定</b>"
-
-msgid "Hide Shortcuts Panel"
-msgstr "Hide Shortcuts Panel"
-
-msgid "Menu layout size"
-msgstr "メニューレイアウトスタイル"
-
-msgid "Large"
-msgstr "Large"
-
-msgid "Medium"
-msgstr "Medium"
-
-msgid "Small"
-msgstr "Small"
-
-msgid "Icons to display on Shortcuts Panel"
-msgstr "Icons to display on Shortcuts Panel"
-
-msgid "Applications to display at startup"
-msgstr "開始時に表示するアプリケーション"
-
-msgid "All"
+#: placeDisplay.js:225
+msgid "Browse network"
 msgstr ""
 
-msgid "Frequent"
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
 msgstr ""
 
-msgid "Default view mode for applications"
-msgstr "アプリケーションの標準表示モード"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
 
-msgid "List"
-msgstr "List"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "Grid"
 
-msgid "Category selection method"
-msgstr "カテゴリの選択方法"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "List"
 
-msgid "Hover"
-msgstr "Hover"
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr ""
 
-msgid "Click"
-msgstr "Click"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
 
-msgid "Size of Shortcuts Panel icons"
-msgstr "お気に入りパネルアイコンのサイズ"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
 
-msgid "Size of Application List icons"
-msgstr "アプリケーションリストアイコンのサイズ"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr ""
 
-msgid "Size of Application Grid icons"
-msgstr "アプリケーショングリットアイコンのサイズ"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
 
-#: webChromium.js
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
 
-#: webEpiphany.js
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
 
-#: webFirefox.js
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr ""
 
-#: webGoogleChrome.js
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr ""
 
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr ""
 
-#: webMidori.js
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr ""
 
+#~ msgid ""
+#~ "If you want to search Firefox bookmarks, you must install the required "
+#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+#~ msgstr ""
+#~ "もし Firefox ブックマークの検索を使用したい場合は、次のパッケージをインス"
+#~ "トールする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
+#~ "(Fedora)"
 
-#: webOpera.js
+#~ msgid ""
+#~ "If you want to search Midori bookmarks, you must install the required "
+#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
+#~ msgstr ""
+#~ "もし Midori ブックマークの検索を使用したい場合は、次のパッケージをインス"
+#~ "トールする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
+#~ "(Fedora)"
 
+#~ msgid "Web"
+#~ msgstr "Web"
 
-#: workspaceThumbnail.js
+#~ msgid "Favorites"
+#~ msgstr "Favorites"
 
+#~ msgid "Frequent Apps"
+#~ msgstr "Frequent Apps"
+
+#~ msgid "Restart Shell"
+#~ msgstr "シェルの再起動"
+
+#~ msgid "Suspend"
+#~ msgstr "サスペンド"
+
+#~ msgid "Shutdown"
+#~ msgstr "シャットダウン"
+
+#~ msgid "Logout User"
+#~ msgstr "ユーザーのログアウト"
+
+#~ msgid "Preferences"
+#~ msgstr "設定"
+
+#~ msgid "No cinnamenu stylesheet found"
+#~ msgstr "cinnamenu スタイルシートが見つかりません"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "ランチャー \"%s\" に問題があります"
+
+#~ msgid "Browse Network"
+#~ msgstr "ネットワークの閲覧"
+
+#~ msgid "<b>Panel Settings</b>"
+#~ msgstr "<b>パネルの設定</b>"
+
+#~ msgid "Disable activities hot corner"
+#~ msgstr "ホットコーナーの動作を無効にする"
+
+#~ msgid "Remove View button from panel"
+#~ msgstr "パネルの表示ボタンを削除"
+
+#~ msgid "Label for View button"
+#~ msgstr "Label for View button"
+
+#~ msgid "Use icon with View button"
+#~ msgstr "Use icon with View button"
+
+#~ msgid "Remove Apps button from panel"
+#~ msgstr "パネルからアプリボタンを削除"
+
+#~ msgid "Label for Apps button"
+#~ msgstr "Label for Apps button"
+
+#~ msgid "Use icon with Apps button"
+#~ msgstr "Use icon with Apps button"
+
+#~ msgid "Remove Menu button from panel"
+#~ msgstr "パネルのメニューボタンを削除"
+
+#~ msgid "Label for Menu button"
+#~ msgstr "Label for Menu button"
+
+#~ msgid "Use icon with Menu button"
+#~ msgstr "Use icon with Menu button"
+
+#~ msgid "Disable Menu button hot spot"
+#~ msgstr "ホットスポットのメニューボタンを無効"
+
+#~ msgid "Disable Menu button shortcut key"
+#~ msgstr "ショートカットのメニューボタンを無効"
+
+#~ msgid ""
+#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#~ msgstr ""
+#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+
+#~ msgid "<b>Menu Settings</b>"
+#~ msgstr "<b>メニュー設定</b>"
+
+#~ msgid "Hide Shortcuts Panel"
+#~ msgstr "Hide Shortcuts Panel"
+
+#~ msgid "Menu layout size"
+#~ msgstr "メニューレイアウトスタイル"
+
+#~ msgid "Large"
+#~ msgstr "Large"
+
+#~ msgid "Medium"
+#~ msgstr "Medium"
+
+#~ msgid "Small"
+#~ msgstr "Small"
+
+#~ msgid "Icons to display on Shortcuts Panel"
+#~ msgstr "Icons to display on Shortcuts Panel"
+
+#~ msgid "Applications to display at startup"
+#~ msgstr "開始時に表示するアプリケーション"
+
+#~ msgid "Default view mode for applications"
+#~ msgstr "アプリケーションの標準表示モード"
+
+#~ msgid "Category selection method"
+#~ msgstr "カテゴリの選択方法"
+
+#~ msgid "Hover"
+#~ msgstr "Hover"
+
+#~ msgid "Click"
+#~ msgstr "Click"
+
+#~ msgid "Size of Shortcuts Panel icons"
+#~ msgstr "お気に入りパネルアイコンのサイズ"
+
+#~ msgid "Size of Application List icons"
+#~ msgstr "アプリケーションリストアイコンのサイズ"
+
+#~ msgid "Size of Application Grid icons"
+#~ msgstr "アプリケーショングリットアイコンのサイズ"

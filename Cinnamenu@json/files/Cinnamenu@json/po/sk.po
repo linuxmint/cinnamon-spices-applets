@@ -2,239 +2,464 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gno-Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-08-12 15:15+0200\n"
+"POT-Creation-Date: 2017-03-22 11:11+0100\n"
+"PO-Revision-Date: 2017-03-22 11:11+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: \n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.8\n"
-"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"Language: sk\n"
 
-#: convenience.js extension.js
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr ""
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr ""
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr ""
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr ""
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr ""
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr ""
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+#: panel.js:533
 msgid "Gno-Menu: Search Firefox bookmarks disabled"
 msgstr "Gno-Menu: Vyhľadávanie záložiek aplikácie Firefox je zakázané"
 
+#: panel.js:535
 msgid ""
 "If you want to search Firefox bookmarks, you must install the required "
 "pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"Ak chcete vyhľadávať záložky aplikácie Firefox, musíte nainštalovať "
-"potrebné balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
+"Ak chcete vyhľadávať záložky aplikácie Firefox, musíte nainštalovať potrebné "
+"balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
 
+#: panel.js:541
 msgid "Gno-Menu: Search Midori bookmarks disabled"
 msgstr "Gno-Menu: Vyhľadávanie záložiek aplikácie Midori je zakázané"
 
+#: panel.js:543
 msgid ""
 "If you want to search Midori bookmarks, you must install the required "
 "pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
 msgstr ""
-"Ak chcete vyhľadávať záložky aplikácie Midori, musíte nainštalovať "
-"potrebné balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
+"Ak chcete vyhľadávať záložky aplikácie Midori, musíte nainštalovať potrebné "
+"balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
 
-msgid "Recent"
-msgstr "Nedávne"
-
-msgid "Webmarks"
-msgstr "Záložky"
-
-msgid "Favorites"
-msgstr "Obľúbené"
-
-msgid "Places"
-msgstr "Miesta"
-
-msgid "Toggle Startup Apps View"
-msgstr "Prepnúť zobrazenie spustenia aplikácií"
-
-msgid "List View"
-msgstr "Zobrazenie zoznamu"
-
+#: panel.js:1578
 msgid "Grid View"
 msgstr "Zobrazenie mriežky"
 
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr ""
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Zobrazenie zoznamu"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr ""
+
+#: panel.js:1638
 msgid "Type to search..."
 msgstr "Hľadanie začnete písaním…"
 
+#: panel.js:1675
 msgid "All Applications"
 msgstr "Všetky aplikácie"
 
-msgid "Frequent Apps"
-msgstr "Často používané aplikácie"
-
+#: panel.js:1680
 msgid "Favorite Apps"
 msgstr "Obľúbené aplikácie"
 
-msgid "Restart Shell"
-msgstr "Reštartovať Shell"
+#: panel.js:1747
+msgid "Places"
+msgstr "Miesta"
 
-msgid "Suspend"
-msgstr "Uspať"
+#: panel.js:1752
+msgid "Recent"
+msgstr "Nedávne"
 
-msgid "Shutdown"
-msgstr "Vypnúť"
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr ""
 
-msgid "Logout User"
-msgstr "Odhlásiť používateľa"
-
+#: panel.js:1768
 msgid "Lock Screen"
 msgstr "Uzamknúť obrazovku"
 
-msgid "Preferences"
-msgstr "Nastavenia"
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr ""
 
-msgid "No cinnamenu stylesheet found"
-msgstr "Štýl rozšírenia cinnamenu sa nenašiel"
+#: panel.js:1799
+msgid "Logout"
+msgstr ""
 
-#: placeDisplay.js
-msgid "Failed to launch \"%s\""
-msgstr "Zlyhalo spustenie aplikácie „%s“"
+#: panel.js:1800
+msgid "Leave the session"
+msgstr ""
 
+#: panel.js:1822
+msgid "Quit"
+msgstr ""
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr ""
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr ""
+
+#: placeDisplay.js:147
 msgid "Home"
 msgstr "Domov"
 
+#: placeDisplay.js:221
 msgid "Computer"
 msgstr "Počítač"
 
+#: placeDisplay.js:225
 msgid "Browse network"
 msgstr "Prehliadať sieť"
 
-#: prefs.js
-msgid "<b>Panel Settings</b>"
-msgstr "<b>Nastavenia panela</b>"
-
-msgid "Disable activities hot corner"
-msgstr "Zakázať aktívny roh aktivít"
-
-msgid "Remove View button from panel"
-msgstr "Odstrániť tlačidlo zobrazenia z panelu"
-
-msgid "Label for View button"
-msgstr "Menovka tlačidla zobrazenia"
-
-msgid "Use icon with View button"
-msgstr "Použiť ikonu s tlačidlom zobrazenia"
-
-msgid "Remove Apps button from panel"
-msgstr "Odstrániť tlačidlo aplikácií z panelu"
-
-msgid "Label for Apps button"
-msgstr "Menovka tlačidla aplikácií"
-
-msgid "Use icon with Apps button"
-msgstr "Použiť ikonu s tlačidlom aplikácií"
-
-msgid "Remove Menu button from panel"
-msgstr "Odstrániť tlačidlo ponuky z panelu"
-
-msgid "Label for Menu button"
-msgstr "Menovka tlačidla ponuky"
-
-msgid "Use icon with Menu button"
-msgstr "Použiť ikonu s tlačidlom ponuky"
-
-msgid "Disable Menu button hot spot"
-msgstr "Zakázať aktívny bod tlačidla ponuky"
-
-msgid "Disable Menu button shortcut key"
-msgstr "Zakázať klávesovú skratku tlačidla ponuky"
-
-msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
 msgstr ""
-"Neplatný akcelerátor. Skúste F12, <Super>medzerník, <Ctrl><Alt><Shift>a, "
-"atď."
 
-msgid "Set Menu button position"
-msgstr "Nastavenie pozície tlačidla ponuky"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
 
-msgid "Left"
-msgstr "Vľavo"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
 
-msgid "Center"
-msgstr "V strede"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr ""
 
-msgid "Right"
-msgstr "Vpravo"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr ""
 
-msgid "<b>Menu Settings</b>"
-msgstr "<b>Nastavenia ponuky</b>"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr ""
 
-msgid "Hide User Options Panel"
-msgstr "Skryť panel volieb používateľa"
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr ""
 
-msgid "Hide Shortcuts Panel"
-msgstr "Skryť panel skratiek"
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr ""
 
-msgid "Menu layout size"
-msgstr "Veľkosť rozloženia ponuky"
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
 
-msgid "Normal"
-msgstr "Normálna"
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
-msgid "Compact"
-msgstr "Kompaktná"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
 
-msgid "Icons to display on Shortcuts Panel"
-msgstr "Ikony, ktoré sa majú zobraziť v paneli skratiek"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
 
-msgid "Applications to display at startup"
-msgstr "Aplikácia, ktorá sa má zobraziť po spustení"
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
 
-msgid "All"
-msgstr "Všetky"
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr ""
 
-msgid "Frequent"
-msgstr "Často používané"
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr ""
 
-msgid "None"
-msgstr "Žiadne"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr ""
 
-msgid "Number of columns in Application Grid"
-msgstr "Počet stĺpcov v mriežke aplikácií"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr ""
 
-msgid "3"
-msgstr "3"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr ""
 
-msgid "4"
-msgstr "4"
-
-msgid "5"
-msgstr "5"
-
-msgid "6"
-msgstr "6"
-
-msgid "7"
-msgstr "7"
-
-msgid "Default view mode for applications"
-msgstr "Predvolený režim zobrazenia aplikácií"
-
-msgid "List"
-msgstr "Zoznam"
-
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "Mriežka"
 
-msgid "Hide Categories Panel"
-msgstr "Skryť panel kategórií"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Zoznam"
 
-msgid "Category selection method"
-msgstr "Spôsob výberu kategórie"
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr ""
 
-msgid "Hover"
-msgstr "Prejdením ponad"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
 
-msgid "Click"
-msgstr "Kliknutie"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
 
-msgid "Size of Shortcuts Panel icons"
-msgstr "Veľkosť ikon panela skratiek"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr ""
 
-msgid "Size of Application List icons"
-msgstr "Veľkosť ikon zoznamu aplikácií"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
 
-msgid "Size of Application Grid icons"
-msgstr "Veľkosť ikon mriežky aplikácií"
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr ""
+
+#~ msgid "Webmarks"
+#~ msgstr "Záložky"
+
+#~ msgid "Favorites"
+#~ msgstr "Obľúbené"
+
+#~ msgid "Toggle Startup Apps View"
+#~ msgstr "Prepnúť zobrazenie spustenia aplikácií"
+
+#~ msgid "Frequent Apps"
+#~ msgstr "Často používané aplikácie"
+
+#~ msgid "Restart Shell"
+#~ msgstr "Reštartovať Shell"
+
+#~ msgid "Suspend"
+#~ msgstr "Uspať"
+
+#~ msgid "Shutdown"
+#~ msgstr "Vypnúť"
+
+#~ msgid "Logout User"
+#~ msgstr "Odhlásiť používateľa"
+
+#~ msgid "Preferences"
+#~ msgstr "Nastavenia"
+
+#~ msgid "No cinnamenu stylesheet found"
+#~ msgstr "Štýl rozšírenia cinnamenu sa nenašiel"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Zlyhalo spustenie aplikácie „%s“"
+
+#~ msgid "<b>Panel Settings</b>"
+#~ msgstr "<b>Nastavenia panela</b>"
+
+#~ msgid "Disable activities hot corner"
+#~ msgstr "Zakázať aktívny roh aktivít"
+
+#~ msgid "Remove View button from panel"
+#~ msgstr "Odstrániť tlačidlo zobrazenia z panelu"
+
+#~ msgid "Label for View button"
+#~ msgstr "Menovka tlačidla zobrazenia"
+
+#~ msgid "Use icon with View button"
+#~ msgstr "Použiť ikonu s tlačidlom zobrazenia"
+
+#~ msgid "Remove Apps button from panel"
+#~ msgstr "Odstrániť tlačidlo aplikácií z panelu"
+
+#~ msgid "Label for Apps button"
+#~ msgstr "Menovka tlačidla aplikácií"
+
+#~ msgid "Use icon with Apps button"
+#~ msgstr "Použiť ikonu s tlačidlom aplikácií"
+
+#~ msgid "Remove Menu button from panel"
+#~ msgstr "Odstrániť tlačidlo ponuky z panelu"
+
+#~ msgid "Label for Menu button"
+#~ msgstr "Menovka tlačidla ponuky"
+
+#~ msgid "Use icon with Menu button"
+#~ msgstr "Použiť ikonu s tlačidlom ponuky"
+
+#~ msgid "Disable Menu button hot spot"
+#~ msgstr "Zakázať aktívny bod tlačidla ponuky"
+
+#~ msgid "Disable Menu button shortcut key"
+#~ msgstr "Zakázať klávesovú skratku tlačidla ponuky"
+
+#~ msgid ""
+#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#~ msgstr ""
+#~ "Neplatný akcelerátor. Skúste F12, <Super>medzerník, <Ctrl><Alt><Shift>a, "
+#~ "atď."
+
+#~ msgid "Set Menu button position"
+#~ msgstr "Nastavenie pozície tlačidla ponuky"
+
+#~ msgid "Left"
+#~ msgstr "Vľavo"
+
+#~ msgid "Center"
+#~ msgstr "V strede"
+
+#~ msgid "Right"
+#~ msgstr "Vpravo"
+
+#~ msgid "<b>Menu Settings</b>"
+#~ msgstr "<b>Nastavenia ponuky</b>"
+
+#~ msgid "Hide User Options Panel"
+#~ msgstr "Skryť panel volieb používateľa"
+
+#~ msgid "Hide Shortcuts Panel"
+#~ msgstr "Skryť panel skratiek"
+
+#~ msgid "Menu layout size"
+#~ msgstr "Veľkosť rozloženia ponuky"
+
+#~ msgid "Normal"
+#~ msgstr "Normálna"
+
+#~ msgid "Compact"
+#~ msgstr "Kompaktná"
+
+#~ msgid "Icons to display on Shortcuts Panel"
+#~ msgstr "Ikony, ktoré sa majú zobraziť v paneli skratiek"
+
+#~ msgid "Applications to display at startup"
+#~ msgstr "Aplikácia, ktorá sa má zobraziť po spustení"
+
+#~ msgid "All"
+#~ msgstr "Všetky"
+
+#~ msgid "Frequent"
+#~ msgstr "Často používané"
+
+#~ msgid "None"
+#~ msgstr "Žiadne"
+
+#~ msgid "Number of columns in Application Grid"
+#~ msgstr "Počet stĺpcov v mriežke aplikácií"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "7"
+#~ msgstr "7"
+
+#~ msgid "Default view mode for applications"
+#~ msgstr "Predvolený režim zobrazenia aplikácií"
+
+#~ msgid "Hide Categories Panel"
+#~ msgstr "Skryť panel kategórií"
+
+#~ msgid "Category selection method"
+#~ msgstr "Spôsob výberu kategórie"
+
+#~ msgid "Hover"
+#~ msgstr "Prejdením ponad"
+
+#~ msgid "Click"
+#~ msgstr "Kliknutie"
+
+#~ msgid "Size of Shortcuts Panel icons"
+#~ msgstr "Veľkosť ikon panela skratiek"
+
+#~ msgid "Size of Application List icons"
+#~ msgstr "Veľkosť ikon zoznamu aplikácií"
+
+#~ msgid "Size of Application Grid icons"
+#~ msgstr "Veľkosť ikon mriežky aplikácií"
