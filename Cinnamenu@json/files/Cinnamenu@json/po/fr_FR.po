@@ -2,256 +2,467 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gno-Menu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-12-24 11:48+0100\n"
+"POT-Creation-Date: 2017-03-22 11:09+0100\n"
+"PO-Revision-Date: 2017-03-22 11:09+0100\n"
 "Last-Translator: DAEM Q.\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr ""
 
-#: convenience.js
+#: buttons.js:609
+msgid "Add to panel"
+msgstr ""
 
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr ""
 
-#: extension.js
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr ""
 
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr ""
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr ""
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+#: panel.js:533
 msgid "Gno-Menu: Search Firefox bookmarks disabled"
 msgstr "Gno-Menu: Recherche dans les marque-pages Firefox désactivée"
 
-msgid "If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "Si vous voulez rechercher dans les marque-pages Firefox, vous devez installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
+#: panel.js:535
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Si vous voulez rechercher dans les marque-pages Firefox, vous devez "
+"installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite "
+"[Fedora]"
 
+#: panel.js:541
 msgid "Gno-Menu: Search Midori bookmarks disabled"
 msgstr "Gno-Menu: Recherche dans les marque-pages Midori désactivée"
 
-msgid "If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "Si vous voulez rechercher dans les marque-pages Midori, vous devez installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
+#: panel.js:543
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Si vous voulez rechercher dans les marque-pages Midori, vous devez installer "
+"les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
 
-msgid "Recent"
-msgstr "Récent"
-
-msgid "Webmarks"
-msgstr "Signets"
-
-msgid "Favorites"
-msgstr "Favoris"
-
-msgid "Places"
-msgstr "Emplacements"
-
-msgid "Toggle Startup Apps View"
-msgstr "Alterner vue des Apps au démarrage"
-
-msgid "List View"
-msgstr "Vue Liste"
-
+#: panel.js:1578
 msgid "Grid View"
 msgstr "Vue Grille"
 
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr ""
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Vue Liste"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr ""
+
+#: panel.js:1638
 msgid "Type to search..."
 msgstr "Taper pour rechercher..."
 
+#: panel.js:1675
 msgid "All Applications"
 msgstr "Toutes les Applications"
 
-msgid "Frequent Apps"
-msgstr "Applications Fréquentes"
-
+#: panel.js:1680
 msgid "Favorite Apps"
 msgstr "Applications Favorites"
 
-msgid "Restart Shell"
-msgstr "Redémarrer Shell"
+#: panel.js:1747
+msgid "Places"
+msgstr "Emplacements"
 
-msgid "Suspend"
-msgstr "Mise en Veille"
+#: panel.js:1752
+msgid "Recent"
+msgstr "Récent"
 
-msgid "Shutdown"
-msgstr "Éteindre"
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr ""
 
-msgid "Logout User"
-msgstr "Fermer Session"
-
+#: panel.js:1768
 msgid "Lock Screen"
 msgstr "Vérouiller Écran"
 
-msgid "Preferences"
-msgstr "Préférences"
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr ""
 
-msgid "No cinnamenu stylesheet found"
-msgstr "Aucun style cinnamenu trouvé"
+#: panel.js:1799
+msgid "Logout"
+msgstr ""
 
-#: placeDisplay.js
-msgid "Failed to launch \"%s\""
-msgstr "Échec de lancement"
+#: panel.js:1800
+msgid "Leave the session"
+msgstr ""
 
+#: panel.js:1822
+msgid "Quit"
+msgstr ""
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr ""
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr ""
+
+#: placeDisplay.js:147
 msgid "Home"
 msgstr "Dossier Personnel"
 
+#: placeDisplay.js:221
 msgid "Computer"
 msgstr "Ordinateur"
 
-msgid "Browse Network"
-msgstr "Parcouris Réseau"
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr ""
 
-#: prefs.js
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr ""
 
-msgid "<b>Panel Settings</b>"
-msgstr "Paramètres du Panneau"
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
 
-msgid "Disable activities hot corner"
-msgstr "Désactive "
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
 
-msgid "Remove View button from panel"
-msgstr "Supprimer le bouton View du panel"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr ""
 
-msgid "Label for View button"
-msgstr "Nom affiché du bouton View"
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr ""
 
-msgid "Use icon with View button"
-msgstr "Utiliser l'icone avec le bouton View"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr ""
 
-msgid "Remove Apps button from panel"
-msgstr "Supprimer le bouton Apps du panel"
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr ""
 
-msgid "Label for Apps button"
-msgstr "Nom affiché du bouton Apps"
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr ""
 
-msgid "Use icon with Apps button"
-msgstr "Utiliser l'icone avec le bouton Apps"
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
 
-msgid "Remove Menu button from panel"
-msgstr "Supprimer le bouton Menu du panel"
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
 
-msgid "Label for Menu button"
-msgstr "Nom affiché du bouton Menu"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
 
-msgid "Use icon with Menu button"
-msgstr "Nom affiché du bouton Menu"
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
 
-msgid "Disable Menu button hot spot"
-msgstr "Désactive hot spot du bouton Menu"
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
 
-msgid "Disable Menu button shortcut key"
-msgstr "Désactiver raccourci clavier du bouton Menu"
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr ""
 
-msgid "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-msgstr "Accelerateur invalide. Essayez F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr ""
 
-msgid "Set Menu button position"
-msgstr "Définir position bouton Menu"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr ""
 
-msgid "Left"
-msgstr "Gauche"
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr ""
 
-msgid "Center"
-msgstr "Centre"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr ""
 
-msgid "Right"
-msgstr "Droite"
-
-msgid "<b>Menu Settings</b>"
-msgstr "<b>Paramètres Menu</b>"
-
-msgid "Hide User Options Panel"
-msgstr "Masquer le panneau de paramètres utilisateur"
-
-msgid "Hide Shortcuts Panel"
-msgstr "Masquer panneau de raccourcis"
-
-msgid "Menu layout size"
-msgstr "Taille agencement du panneau"
-
-msgid "Normal"
-msgstr "Normal"
-
-msgid "Compact"
-msgstr "Compact"
-
-msgid "Icons to display on Shortcuts Panel"
-msgstr "Icones à afficher sur le Panneau des raccourcis"
-
-msgid "Applications to display at startup"
-msgstr "Applications à afficher au démarrage"
-
-msgid "All"
-msgstr "Tout"
-
-msgid "Frequent"
-msgstr "Fréquent"
-
-msgid "None"
-msgstr "Rien"
-
-msgid "Number of columns in Application Grid"
-msgstr "Nombre de colonnes dans la Grille Application"
-
-msgid "3"
-msgstr "3"
-
-msgid "4"
-msgstr "4"
-
-msgid "5"
-msgstr "5"
-
-msgid "6"
-msgstr "6"
-
-msgid "7"
-msgstr "7"
-
-msgid "Default view mode for applications"
-msgstr "Mode de vue par défaut pour les applications"
-
-msgid "List"
-msgstr "Liste"
-
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
 msgid "Grid"
 msgstr "Grille"
 
-msgid "Hide Categories Panel"
-msgstr "Masquer panneau Catégories"
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Liste"
 
-msgid "Category selection method"
-msgstr "Méthode de sélection d'une Catégorie"
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr ""
 
-msgid "Hover"
-msgstr "Survol"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
 
-msgid "Click"
-msgstr "Clique"
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
 
-msgid "Size of Shortcuts Panel icons"
-msgstr "Taille des icones du panneau Raccourcis"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr ""
 
-msgid "Size of Application List icons"
-msgstr "Taille des icones des Applications en vue Liste"
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
 
-msgid "Size of Application Grid icons"
-msgstr "Taille des icones des Application en vue Grille"
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
 
-#: webChromium.js
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
 
-#: webEpiphany.js
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
 
-#: webFirefox.js
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr ""
 
-#: webGoogleChrome.js
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr ""
 
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr ""
 
-#: webMidori.js
+#~ msgid "Webmarks"
+#~ msgstr "Signets"
 
+#~ msgid "Favorites"
+#~ msgstr "Favoris"
 
-#: webOpera.js
+#~ msgid "Toggle Startup Apps View"
+#~ msgstr "Alterner vue des Apps au démarrage"
 
+#~ msgid "Frequent Apps"
+#~ msgstr "Applications Fréquentes"
 
-#: workspaceThumbnail.js
+#~ msgid "Restart Shell"
+#~ msgstr "Redémarrer Shell"
 
+#~ msgid "Suspend"
+#~ msgstr "Mise en Veille"
+
+#~ msgid "Shutdown"
+#~ msgstr "Éteindre"
+
+#~ msgid "Logout User"
+#~ msgstr "Fermer Session"
+
+#~ msgid "Preferences"
+#~ msgstr "Préférences"
+
+#~ msgid "No cinnamenu stylesheet found"
+#~ msgstr "Aucun style cinnamenu trouvé"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Échec de lancement"
+
+#~ msgid "Browse Network"
+#~ msgstr "Parcouris Réseau"
+
+#~ msgid "<b>Panel Settings</b>"
+#~ msgstr "Paramètres du Panneau"
+
+#~ msgid "Disable activities hot corner"
+#~ msgstr "Désactive "
+
+#~ msgid "Remove View button from panel"
+#~ msgstr "Supprimer le bouton View du panel"
+
+#~ msgid "Label for View button"
+#~ msgstr "Nom affiché du bouton View"
+
+#~ msgid "Use icon with View button"
+#~ msgstr "Utiliser l'icone avec le bouton View"
+
+#~ msgid "Remove Apps button from panel"
+#~ msgstr "Supprimer le bouton Apps du panel"
+
+#~ msgid "Label for Apps button"
+#~ msgstr "Nom affiché du bouton Apps"
+
+#~ msgid "Use icon with Apps button"
+#~ msgstr "Utiliser l'icone avec le bouton Apps"
+
+#~ msgid "Remove Menu button from panel"
+#~ msgstr "Supprimer le bouton Menu du panel"
+
+#~ msgid "Label for Menu button"
+#~ msgstr "Nom affiché du bouton Menu"
+
+#~ msgid "Use icon with Menu button"
+#~ msgstr "Nom affiché du bouton Menu"
+
+#~ msgid "Disable Menu button hot spot"
+#~ msgstr "Désactive hot spot du bouton Menu"
+
+#~ msgid "Disable Menu button shortcut key"
+#~ msgstr "Désactiver raccourci clavier du bouton Menu"
+
+#~ msgid ""
+#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
+#~ msgstr ""
+#~ "Accelerateur invalide. Essayez F12, <Super>space, <Ctrl><Alt><Shift>a, "
+#~ "etc."
+
+#~ msgid "Set Menu button position"
+#~ msgstr "Définir position bouton Menu"
+
+#~ msgid "Left"
+#~ msgstr "Gauche"
+
+#~ msgid "Center"
+#~ msgstr "Centre"
+
+#~ msgid "Right"
+#~ msgstr "Droite"
+
+#~ msgid "<b>Menu Settings</b>"
+#~ msgstr "<b>Paramètres Menu</b>"
+
+#~ msgid "Hide User Options Panel"
+#~ msgstr "Masquer le panneau de paramètres utilisateur"
+
+#~ msgid "Hide Shortcuts Panel"
+#~ msgstr "Masquer panneau de raccourcis"
+
+#~ msgid "Menu layout size"
+#~ msgstr "Taille agencement du panneau"
+
+#~ msgid "Normal"
+#~ msgstr "Normal"
+
+#~ msgid "Compact"
+#~ msgstr "Compact"
+
+#~ msgid "Icons to display on Shortcuts Panel"
+#~ msgstr "Icones à afficher sur le Panneau des raccourcis"
+
+#~ msgid "Applications to display at startup"
+#~ msgstr "Applications à afficher au démarrage"
+
+#~ msgid "All"
+#~ msgstr "Tout"
+
+#~ msgid "Frequent"
+#~ msgstr "Fréquent"
+
+#~ msgid "None"
+#~ msgstr "Rien"
+
+#~ msgid "Number of columns in Application Grid"
+#~ msgstr "Nombre de colonnes dans la Grille Application"
+
+#~ msgid "3"
+#~ msgstr "3"
+
+#~ msgid "4"
+#~ msgstr "4"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "6"
+#~ msgstr "6"
+
+#~ msgid "7"
+#~ msgstr "7"
+
+#~ msgid "Default view mode for applications"
+#~ msgstr "Mode de vue par défaut pour les applications"
+
+#~ msgid "Hide Categories Panel"
+#~ msgstr "Masquer panneau Catégories"
+
+#~ msgid "Category selection method"
+#~ msgstr "Méthode de sélection d'une Catégorie"
+
+#~ msgid "Hover"
+#~ msgstr "Survol"
+
+#~ msgid "Click"
+#~ msgstr "Clique"
+
+#~ msgid "Size of Shortcuts Panel icons"
+#~ msgstr "Taille des icones du panneau Raccourcis"
+
+#~ msgid "Size of Application List icons"
+#~ msgstr "Taille des icones des Applications en vue Liste"
+
+#~ msgid "Size of Application Grid icons"
+#~ msgstr "Taille des icones des Application en vue Grille"
