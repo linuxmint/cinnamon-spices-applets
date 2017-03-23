@@ -1,7 +1,6 @@
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
-<h2>Bug reports, feature requests and contributions</h2>
-
-<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
 </span>
 
 ## Window list fork applet description
@@ -28,5 +27,6 @@ This applet is a fork of the default Window-list applet shipped with Cinnamon.
 ## Contributors
 - [NikoKrause](https://github.com/NikoKrause): German localization and bug fixes.
 - [muzena](https://github.com/muzena): Croatian localization.
+- [giwhub](https://github.com/giwhub): Chinese localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40window-list-fork/CHANGELOG.md)

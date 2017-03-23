@@ -8,7 +8,7 @@
     "description": "Allows enabling/disabling extensions (and other tasks) from a menu.",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
     "website": "https://github.com/Odyseus/CinnamonTools",
-    "contributors": "Radek71: Czech localization.,muzena: Croatian localization.",
+    "contributors": "Radek71: Czech localization.,muzena: Croatian localization.,giwhub: Chinese localization.",
     "cinnamon-version": [
         "2.8",
         "3.0",

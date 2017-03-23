@@ -1,0 +1,327 @@
+# This is a template file for translating the Cinnamon applet called Quick Menu.
+# Copyright (C) 2016
+# This file is distributed under the same license as the Quick Menu applet.
+# Odyseus <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.05\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-13 18:36+0800\n"
+"PO-Revision-Date: 2017-03-17 19:42+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:293
+msgid "Desktop"
+msgstr "桌面"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:428 3.2/applet.js:425
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "移除'%s'"
+
+#: applet.js:679 3.2/applet.js:676
+msgid "Update menu"
+msgstr "更新菜单"
+
+#: applet.js:684 3.2/applet.js:681
+msgid "Scan the main folder to re-create the menu."
+msgstr "扫描主文件夹重新创建菜单。"
+
+#: applet.js:687 3.2/applet.js:684
+msgid "Open folder"
+msgstr "打开文件夹"
+
+#: applet.js:693 3.2/applet.js:690
+msgid "Open the main folder."
+msgstr "打开主文件夹。"
+
+#: applet.js:697 3.2/applet.js:694
+msgid "Help"
+msgstr "帮助"
+
+#: applet.js:703 3.2/applet.js:700
+msgid "Open the help file."
+msgstr "打开帮助文件。"
+
+#. 3.2->settings-schema.json->pref_icon_for_menus->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_icon_for_menus->description
+msgid "Icon for sub-menus"
+msgstr "子菜单的图标"
+
+#. 3.2->settings-schema.json->pref_icon_for_menus->tooltip
+#. 3.2->settings-schema.json->pref_customicon->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_icon_for_menus->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customicon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr "设置小程序的自定义图标。"
+
+#. 3.2->settings-schema.json->pref_customicon->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customicon->description
+msgid "Icon for Applet"
+msgstr "小程序的图标"
+
+#. 3.2->settings-schema.json->pref_hotkey->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_hotkey->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
+
+#. 3.2->settings-schema.json->pref_autoupdate->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_autoupdate->description
+msgid "Auto-update menu"
+msgstr "自动更新菜单"
+
+#. 3.2->settings-schema.json->pref_autoupdate->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_autoupdate->tooltip
+msgid ""
+"If enabled, the applet will monitor the main folder for added/deleted/"
+"renamed files/folders and rebuild the menu.\n"
+"If disabled, the menu will have to be updated manually from its context menu."
+msgstr ""
+"如果启用，小程序将监视主文件夹添加/删除/重命名的文件/文件夹并重建菜单。\n"
+"如果禁用，必须从其右键菜单手动更新菜单。"
+
+#. 3.2->settings-schema.json->pref_show_hidden_files->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_hidden_files->description
+msgid "Show hidden files"
+msgstr "显示隐藏文件"
+
+#. 3.2->settings-schema.json->pref_show_hidden_files->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_files->tooltip
+msgid "If enabled, hidden files will be used to create menu items."
+msgstr "如果启用，隐藏文件将会用来创建菜单条目。"
+
+#. 3.2->settings-schema.json->pref_menu_item_icon_size->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_menu_item_icon_size->description
+msgid "Menu items icon size"
+msgstr "菜单条目图标大小"
+
+#. 3.2->settings-schema.json->pref_menu_item_icon_size->units
+#. 3.2->settings-schema.json->pref_sub_menu_icon_size->units
+#. 0dyseus@QuickMenu->settings-schema.json->pref_menu_item_icon_size->units
+#. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icon_size->units
+msgid "pixels"
+msgstr "像素"
+
+#. 3.2->settings-schema.json->pref_show_only_desktop_files->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_only_desktop_files->description
+msgid "Show only .desktop files"
+msgstr "仅显示.desktop文件"
+
+#. 3.2->settings-schema.json->pref_show_only_desktop_files->tooltip
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_only_desktop_files->tooltip
+msgid ""
+"If enabled, only .desktop files will be used to create the menu.\n"
+"If disabled, all file types will be used to create the menu."
+msgstr ""
+"如果启用，仅.desktop文件将会用来创建菜单条目。\n"
+"如果禁用，所有文件类型将会用来创建菜单。"
+
+#. 3.2->settings-schema.json->pref_applet_title->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_applet_title->description
+msgid "Title for Applet"
+msgstr "小程序的标题"
+
+#. 3.2->settings-schema.json->pref_applet_title->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_applet_title->tooltip
+msgid "Set a custom title for the applet."
+msgstr "设置小程序的自定义标题。"
+
+#. 3.2->settings-schema.json->pref_show_customicon->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_customicon->description
+msgid "Show Applet icon"
+msgstr "显示小程序图标"
+
+#. 3.2->settings-schema.json->pref_show_customicon->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_customicon->tooltip
+msgid "Display this applet icon."
+msgstr "显示此小程序的图标。"
+
+#. 3.2->settings-schema.json->pref_style_for_menu_items->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_style_for_menu_items->description
+msgid "Style for menu items"
+msgstr "菜单条目的风格"
+
+#. 3.2->settings-schema.json->pref_style_for_menu_items->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_menu_items->tooltip
+msgid "Set a custom style for the menu items."
+msgstr "设置菜单条目的自定义风格。"
+
+#. 3.2->settings-schema.json->pref_show_applet_title->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_applet_title->description
+msgid "Show Applet title"
+msgstr "显示小程序标题"
+
+#. 3.2->settings-schema.json->pref_show_applet_title->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_applet_title->tooltip
+msgid "Display this applet title."
+msgstr "显示此小程序的标题。"
+
+#. 3.2->settings-
+#. schema.json->pref_use_different_icons_for_sub_menus->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_use_different_icons_for_sub_menus->description
+msgid "Allow sub-menus to each have their own icon"
+msgstr "允许子菜单各自拥有自己的图标"
+
+#. 3.2->settings-schema.json->pref_use_different_icons_for_sub_menus->tooltip
+#. 3.2->settings-schema.json->pref_sub_menu_icons_file_name->tooltip
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_use_different_icons_for_sub_menus->tooltip
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_sub_menu_icons_file_name->tooltip
+msgid ""
+"Read this applet help for details about this option usage (Applet context "
+"menu > Help item)."
+msgstr ""
+"请阅读此小程序的帮助获取有关此选项用法的详情（小程序右键菜单 > 帮助条目）。"
+
+#. 3.2->settings-schema.json->pref_sub_menu_icon_size->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_sub_menu_icon_size->description
+msgid "Sub-menus icon size"
+msgstr "子菜单图标大小"
+
+#. 3.2->settings-schema.json->pref_customtooltip->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customtooltip->description
+msgid "Custom Tooltip"
+msgstr "自定义提示"
+
+#. 3.2->settings-schema.json->pref_customtooltip->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customtooltip->tooltip
+msgid "Set a custom tooltip for the applet."
+msgstr "设置小程序的自定义提示。"
+
+#. 3.2->settings-schema.json->pref_show_hidden_folders->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_hidden_folders->description
+msgid "Show hidden folders"
+msgstr "显示隐藏文件夹"
+
+#. 3.2->settings-schema.json->pref_show_hidden_folders->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_folders->tooltip
+msgid "If enabled, hidden sub folders will also be used to create sub-menus."
+msgstr "如果启用，隐藏的子文件夹将也会用来创建子菜单条目。"
+
+#. 3.2->settings-schema.json->pref_show_submenu_icons->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_submenu_icons->description
+msgid "Display sub-menu icons"
+msgstr "显示子菜单图标"
+
+#. 3.2->settings-schema.json->pref_show_submenu_icons->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_submenu_icons->tooltip
+msgid "If disabled, all sub-menu items will be created without icons."
+msgstr "如果禁用，将会创建全部没有图标的子菜单条目。"
+
+#. 3.2->settings-schema.json->pref_head_2->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_head_2->description
+msgid "Menu settings"
+msgstr "菜单设置"
+
+#. 3.2->settings-schema.json->pref_head_1->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_head_1->description
+msgid "Applet settings"
+msgstr "小程序设置"
+
+#. 3.2->settings-schema.json->pref_show_applications_icons->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_applications_icons->description
+msgid "Display menu items icon"
+msgstr "显示菜单条目图标"
+
+#. 3.2->settings-schema.json->pref_show_applications_icons->tooltip
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_show_applications_icons->tooltip
+msgid "If disabled, all menu items will be created without icons."
+msgstr "如果禁用，将会创建全部没有图标的子菜单条目。"
+
+#. 3.2->settings-schema.json->pref_directory->description
+#. 0dyseus@QuickMenu->settings-schema.json->pref_directory->description
+msgid "Choose main directory"
+msgstr "选择主目录"
+
+#. 3.2->settings-schema.json->pref_directory->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_directory->tooltip
+msgid ""
+"Choose a directory with files and/or folders in it.\n"
+"The files will be used to create the menu items.\n"
+"The folders will be used to create sub-menus."
+msgstr ""
+"选择其中包含文件/文件夹的目录。\n"
+"文件将会用于创建菜单条目。\n"
+"文件夹将会用于创建子菜单。"
+
+#. 3.2->settings-schema.json->pref_style_for_sub_menus->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_style_for_sub_menus->description
+msgid "Style for sub-menus"
+msgstr "子菜单的风格"
+
+#. 3.2->settings-schema.json->pref_style_for_sub_menus->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_sub_menus->tooltip
+msgid "Set a custom style for the sub-menus."
+msgstr "设置子菜单的自定义风格。"
+
+#. 3.2->settings-schema.json->pref_sub_menu_icons_file_name->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_sub_menu_icons_file_name->description
+msgid "Name for the file containing the icons for sub-menus"
+msgstr "包含子菜单图标的文件的名称"
+
+#. 3.2->settings-schema.json->pref_ignore_sub_folders->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_ignore_sub_folders->description
+msgid "Ignore sub folders"
+msgstr "忽略子文件夹"
+
+#. 3.2->settings-schema.json->pref_ignore_sub_folders->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_ignore_sub_folders->tooltip
+msgid ""
+"If enabled, the sub folders found inside the main folder will be ignored and "
+"sub-menus will not be created."
+msgstr "如果启用，将会忽略主文件夹内的子文件夹并且不会创建子菜单。"
+
+#. 3.2->settings-schema.json->pref_auto_close_opened_sub_menus->description
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_auto_close_opened_sub_menus->description
+msgid "Auto-hide opened sub-menus (EXPERIMENTAL/BUGGY)"
+msgstr "自动隐藏打开的子菜单 (实验性/容易出错)"
+
+#. 3.2->settings-schema.json->pref_auto_close_opened_sub_menus->tooltip
+#. 0dyseus@QuickMenu->settings-
+#. schema.json->pref_auto_close_opened_sub_menus->tooltip
+msgid ""
+"If enabled, the previously opened sub-menu will be automatically closed.\n"
+"It will only work with sub-menus created at the first level. Sub-menus "
+"inside other sub-menus are not affected."
+msgstr ""
+"如果启用，以前打开的子菜单将会自动关闭。\n"
+"只适用于在第一级创建的子菜单。其他子菜单内的子菜单不受影响。"
+
+#. 0dyseus@QuickMenu->metadata.json->description
+msgid ""
+"Easily and quickly create a menu based on the files/folders found inside an "
+"specific folder."
+msgstr "根据特定文件夹中的文件/文件夹轻松快速地创建菜单。"
+
+#. 0dyseus@QuickMenu->metadata.json->name
+msgid "Quick Menu"
+msgstr "快捷菜单"
