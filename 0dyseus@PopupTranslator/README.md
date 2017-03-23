@@ -1,7 +1,6 @@
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
-<h2>Bug reports, feature requests and contributions</h2>
-
-<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
 </span>
 
 ## Popup Translator applet description
