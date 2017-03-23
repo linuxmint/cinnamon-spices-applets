@@ -8,7 +8,7 @@
     "last-edited": "1473934114",
     "description": "Easily and quickly create a menu based on the files/folders found inside an specific folder.",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "contributors": "muzena: Croatian localization.",
+    "contributors": "muzena: Croatian localization.,giwhub: Chinese localization.",
     "website": "https://github.com/Odyseus/CinnamonTools",
     "cinnamon-version": [
         "2.8",
