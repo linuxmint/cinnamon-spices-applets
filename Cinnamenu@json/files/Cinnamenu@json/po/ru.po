@@ -19,31 +19,31 @@ msgstr ""
 
 #: buttons.js:269
 msgid "Please provide your password to uninstall this application"
-msgstr ""
+msgstr "Пожалуйста, укажите ваш пароль для удаления этого приложения"
 
 #: buttons.js:609
 msgid "Add to panel"
-msgstr ""
+msgstr "Добавить на панель"
 
 #: buttons.js:612
 msgid "Add to desktop"
-msgstr ""
+msgstr "Добавить на Рабочий стол"
 
 #: buttons.js:616
 msgid "Remove from favorites"
-msgstr ""
+msgstr "Удалить из Избранного"
 
 #: buttons.js:620
 msgid "Add to favorites"
-msgstr ""
+msgstr "Добавить в Избранное"
 
 #: buttons.js:623
 msgid "Uninstall"
-msgstr ""
+msgstr "Удалить"
 
 #: buttons.js:626
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "Запустить с NVIDIA GPU"
 
 #: panel.js:533
 msgid "Gno-Menu: Search Firefox bookmarks disabled"
@@ -71,11 +71,11 @@ msgstr ""
 
 #: panel.js:1578
 msgid "Grid View"
-msgstr ""
+msgstr "В виде сетки"
 
 #: panel.js:1579
 msgid "Switch to grid view"
-msgstr ""
+msgstr "Переключить на вид сетки"
 
 #: panel.js:1581
 msgid "List View"
@@ -83,7 +83,7 @@ msgstr "В виде списка"
 
 #: panel.js:1582
 msgid "Switch to list view"
-msgstr ""
+msgstr "Переключить на вид списка"
 
 #: panel.js:1638
 msgid "Type to search..."
@@ -107,7 +107,7 @@ msgstr "Недавние"
 
 #: panel.js:1757
 msgid "Bookmarks"
-msgstr ""
+msgstr "Закладки"
 
 #: panel.js:1768
 msgid "Lock Screen"
@@ -127,16 +127,16 @@ msgstr ""
 
 #: panel.js:1822
 msgid "Quit"
-msgstr ""
+msgstr "Выход"
 
 #: panel.js:1823
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "Выключить компьютер"
 
 #: placeDisplay.js:58
 #, c-format
 msgid "Failed to launch '%s'"
-msgstr ""
+msgstr "Не удалось запустить '%s'"
 
 #: placeDisplay.js:147
 msgid "Home"
@@ -152,11 +152,11 @@ msgstr "Обзор сети"
 
 #. Cinnamenu@json->settings-schema.json->cinnamenu->description
 msgid "Cinnamenu Settings"
-msgstr ""
+msgstr "Настройки Cinnamenu"
 
 #. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
-msgstr ""
+msgstr "Использовать свой значок"
 
 #. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
@@ -172,17 +172,17 @@ msgstr ""
 #. Cinnamenu@json->settings-schema.json->category-icon-size->units
 #. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
 msgid "pixels"
-msgstr ""
+msgstr "пиксели"
 
 #. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
 #. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
-msgstr ""
+msgstr "Размер значков в сетке приложений"
 
 #. Cinnamenu@json->settings-schema.json->category-icon-size->description
 #. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size"
-msgstr ""
+msgstr "Размер значка категорий"
 
 #. Cinnamenu@json->settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
@@ -194,11 +194,11 @@ msgstr ""
 
 #. Cinnamenu@json->settings-schema.json->hover-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "миллисекунды"
 
 #. Cinnamenu@json->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr ""
+msgstr "Открыть редактор меню"
 
 #. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
@@ -214,16 +214,16 @@ msgstr ""
 
 #. Cinnamenu@json->settings-schema.json->header1->description
 msgid "Appearance"
-msgstr ""
+msgstr "Оформление"
 
 #. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
 #. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "Номер колонки в сетке приложений"
 
 #. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
 msgid "columns"
-msgstr ""
+msgstr "колонки"
 
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->description
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
@@ -245,7 +245,7 @@ msgstr ""
 
 #. Cinnamenu@json->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
-msgstr ""
+msgstr "Открывать меню при наведении на него указателя"
 
 #. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
@@ -263,7 +263,7 @@ msgstr ""
 
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "Включить автопрокрутку в списке приложений"
 
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
@@ -272,28 +272,28 @@ msgstr ""
 
 #. Cinnamenu@json->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr ""
+msgstr "Использовать анимацию меню"
 
 #. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
-msgstr ""
+msgstr "Использовать анимацию меню при открытии и закрытии"
 
 #. Cinnamenu@json->settings-schema.json->menu-icon->description
 msgid "Icon"
-msgstr ""
+msgstr "Значок"
 
 #. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
-msgstr ""
+msgstr "Выберите отображаемый на панели значок"
 
 #. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
 #. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
-msgstr ""
+msgstr "Размер значков в списке приложений"
 
 #. Cinnamenu@json->settings-schema.json->header2->description
 msgid "Behavior"
-msgstr ""
+msgstr "Поведение"
 
 #. Cinnamenu@json->metadata.json->description
 msgid "A flexible menu providing formatting options and bookmarks."
@@ -301,7 +301,7 @@ msgstr ""
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #~ msgid "Webmarks"
 #~ msgstr "Веб-закладки"
