@@ -32,7 +32,7 @@ msgstr "Управляет размером миниатюры."
 # should not be set, just leave it blank and insert one white-space character
 #. src->settings-schema.json->thumbnail-size->units
 msgid "size"
-msgstr " "
+msgstr "размер"
 
 #. src->settings-schema.json->icon-spacing->description
 msgid "Icon spacing"
@@ -47,7 +47,7 @@ msgstr "Устанавливает расстояние между иконка�
 #. src->settings-schema.json->icon-padding->units
 #. src->settings-schema.json->appmenu-width->units
 msgid "px"
-msgstr ""
+msgstr "пиксели"
 
 #. src->settings-schema.json->show-thumbnails->description
 msgid "Show thumbnails"
@@ -98,7 +98,7 @@ msgstr "Скорость исчезновения окна, миллисекун
 #. src->settings-schema.json->hover-peek-time->units
 #. src->settings-schema.json->thumbnail-timeout->units
 msgid "milliseconds"
-msgstr "миллисекунд"
+msgstr "миллисекунды"
 
 # Should not be set, just leave it blank by setting one white-space character
 #. src->settings-schema.json->appmenu-number->units
@@ -167,7 +167,7 @@ msgstr "Устанавливает прозрачность окна при на
 
 #. src->settings-schema.json->hover-peek-opacity->units
 msgid "percent"
-msgstr "процентов"
+msgstr "проценты"
 
 #. src->settings-schema.json->enable-hover-peek->description
 msgid "Show windows when hovered over"
@@ -441,7 +441,7 @@ msgid "Show Recent"
 msgstr "Недавние"
 
 msgid "Vertical Thumbs"
-msgstr "Верт. миниатюры"
+msgstr "Вертикальные миниатюры"
 
 # 5 spaces in front of it
 msgid "     Go to Settings"
@@ -529,10 +529,10 @@ msgstr ""
 "или вовсе не будут отображаться."
 
 msgid "Symbolic icons"
-msgstr "Символические иконки"
+msgstr "Символьные иконки"
 
 msgid "Non-symbolic icons"
-msgstr "Несимволические иконки"
+msgstr "Несимвольные иконки"
 
 msgid "No icons"
 msgstr "Нет иконок"
