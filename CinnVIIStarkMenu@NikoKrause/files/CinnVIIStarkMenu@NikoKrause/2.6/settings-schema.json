@@ -163,11 +163,16 @@
     "description": "Show sidebar on menu",
     "tooltip": "Choose whether or not to show the sidebar."
  },
- "show-user-icon-label" : {
-    "type" : "checkbox",
-    "default" : true,
-    "description" : "Show username",
-    "tooltip" : "Choose whether or not to show the username.",
+ "user-box-layout" : {
+    "type" : "combobox",
+    "default" : "userNameAndIcon",
+    "options" : {
+        "User picture and user name": "userNameAndIcon",
+        "User picture only": "userIcon",
+        "Hide": "userHide"
+    },
+    "description" : "User account info box style",
+    "tooltip" : "Choose whether to show the user name and/or user picture.",
     "dependency" : "show-sidebar",
     "indent" : true
  },

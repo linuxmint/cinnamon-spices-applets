@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-16 14:20+0100\n"
-"PO-Revision-Date: 2017-03-13 09:54+0000\n"
+"POT-Creation-Date: 2017-03-18 14:21+0100\n"
+"PO-Revision-Date: 2017-03-20 10:03+0000\n"
 "Last-Translator: Niko Krause <nikokrause@gmx.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2017-03-14 08:29+0000\n"
-"X-Generator: Launchpad (build 18331)\n"
+"X-Launchpad-Export-Date: 2017-03-22 07:22+0000\n"
+"X-Generator: Launchpad (build 18334)\n"
 "Language: zh_CN\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
@@ -75,56 +75,56 @@ msgstr "位置"
 msgid "Recent Files"
 msgstr "最近的文件"
 
-#: 3.2/applet.js:1566 3.2/applet.js:1736 2.6/applet.js:1581 2.6/applet.js:1751
+#: 3.2/applet.js:1568 3.2/applet.js:1744 2.6/applet.js:1583 2.6/applet.js:1759
 msgid "Logout"
 msgstr "登出"
 
-#: 3.2/applet.js:1568 2.6/applet.js:1583
+#: 3.2/applet.js:1570 2.6/applet.js:1585
 msgid "Lock Screen"
 msgstr "锁定屏幕"
 
-#: 3.2/applet.js:1729 2.6/applet.js:1744
+#: 3.2/applet.js:1737 2.6/applet.js:1752
 msgid "Shutdown the computer"
 msgstr "关闭计算机"
 
-#: 3.2/applet.js:1730 2.6/applet.js:1745
+#: 3.2/applet.js:1738 2.6/applet.js:1753
 msgid "Leave the session"
 msgstr "离开会话"
 
-#: 3.2/applet.js:1731 2.6/applet.js:1746
+#: 3.2/applet.js:1739 2.6/applet.js:1754
 msgid "Lock the screen"
 msgstr "锁定屏幕"
 
-#: 3.2/applet.js:1733 3.2/applet.js:1734 2.6/applet.js:1748 2.6/applet.js:1749
+#: 3.2/applet.js:1741 3.2/applet.js:1742 2.6/applet.js:1756 2.6/applet.js:1757
 msgid "Quit"
 msgstr "退出"
 
-#: 3.2/applet.js:1745 3.2/applet.js:1749 2.6/applet.js:1760 2.6/applet.js:1764
+#: 3.2/applet.js:1753 3.2/applet.js:1757 2.6/applet.js:1768 2.6/applet.js:1772
 msgid "Lock screen"
 msgstr "锁定屏幕"
 
 #. 3.2->settings-schema.json->menu->title
-#: 3.2/applet.js:1963 2.6/applet.js:1975
+#: 3.2/applet.js:1971 2.6/applet.js:1983
 msgid "Menu"
 msgstr "菜单"
 
-#: 3.2/applet.js:3282 2.6/applet.js:3262
+#: 3.2/applet.js:3308 2.6/applet.js:3289
 msgid "This file is no longer available"
 msgstr "此文件不可用"
 
-#: 3.2/applet.js:3314 2.6/applet.js:3294
+#: 3.2/applet.js:3340 2.6/applet.js:3321
 msgid "No recent documents"
 msgstr "没有最近的文档"
 
-#: 3.2/applet.js:3617 2.6/applet.js:3612
+#: 3.2/applet.js:3638 2.6/applet.js:3634
 msgid "Type to search..."
 msgstr "键入以搜索"
 
-#: 3.2/applet.js:4137 2.6/applet.js:4131
+#: 3.2/applet.js:4141 2.6/applet.js:4136
 msgid "No results found"
 msgstr "没有找到结果"
 
-#: 3.2/applet.js:4139 2.6/applet.js:4133
+#: 3.2/applet.js:4143 2.6/applet.js:4138
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
@@ -221,12 +221,12 @@ msgstr "选择是否在侧边栏中显示此快速启动器。"
 #. 3.2->settings-schema.json->quicklauncher-5-label->description
 #. 3.2->settings-schema.json->quicklauncher-10-label->description
 #. 3.2->settings-schema.json->quicklauncher-18-label->description
+#. 3.2->settings-schema.json->quicklauncher-1-label->description
 #. 3.2->settings-schema.json->quicklauncher-0-label->description
 #. 3.2->settings-schema.json->quicklauncher-11-label->description
 #. 3.2->settings-schema.json->quicklauncher-8-label->description
 #. 3.2->settings-schema.json->quicklauncher-13-label->description
 #. 3.2->settings-schema.json->quicklauncher-17-label->description
-#. 3.2->settings-schema.json->quicklauncher-1-label->description
 #. 3.2->settings-schema.json->quicklauncher-15-label->description
 #. 3.2->settings-schema.json->quicklauncher-4-label->description
 #. 3.2->settings-schema.json->quicklauncher-12-label->description
@@ -241,12 +241,12 @@ msgstr "选择是否在侧边栏中显示此快速启动器。"
 #. 2.6->settings-schema.json->quicklauncher-5-label->description
 #. 2.6->settings-schema.json->quicklauncher-10-label->description
 #. 2.6->settings-schema.json->quicklauncher-18-label->description
+#. 2.6->settings-schema.json->quicklauncher-1-label->description
 #. 2.6->settings-schema.json->quicklauncher-0-label->description
 #. 2.6->settings-schema.json->quicklauncher-11-label->description
 #. 2.6->settings-schema.json->quicklauncher-8-label->description
 #. 2.6->settings-schema.json->quicklauncher-13-label->description
 #. 2.6->settings-schema.json->quicklauncher-14-label->description
-#. 2.6->settings-schema.json->quicklauncher-1-label->description
 #. 2.6->settings-schema.json->quicklauncher-15-label->description
 #. 2.6->settings-schema.json->quicklauncher-4-label->description
 #. 2.6->settings-schema.json->quicklauncher-12-label->description
@@ -264,12 +264,12 @@ msgstr "快速启动器标签"
 #. 3.2->settings-schema.json->quicklauncher-5-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-10-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-18-label->tooltip
+#. 3.2->settings-schema.json->quicklauncher-1-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-0-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-11-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-8-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-13-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-17-label->tooltip
-#. 3.2->settings-schema.json->quicklauncher-1-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-15-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-4-label->tooltip
 #. 3.2->settings-schema.json->quicklauncher-12-label->tooltip
@@ -284,12 +284,12 @@ msgstr "快速启动器标签"
 #. 2.6->settings-schema.json->quicklauncher-5-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-10-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-18-label->tooltip
+#. 2.6->settings-schema.json->quicklauncher-1-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-0-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-11-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-8-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-13-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-14-label->tooltip
-#. 2.6->settings-schema.json->quicklauncher-1-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-15-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-4-label->tooltip
 #. 2.6->settings-schema.json->quicklauncher-12-label->tooltip
@@ -672,6 +672,31 @@ msgstr "仅标签"
 msgid "Icons only"
 msgstr "仅图标"
 
+#. 3.2->settings-schema.json->user-box-layout->description
+#. 2.6->settings-schema.json->user-box-layout->description
+msgid "User account info box style"
+msgstr "用户帐号信息框风格"
+
+#. 3.2->settings-schema.json->user-box-layout->tooltip
+#. 2.6->settings-schema.json->user-box-layout->tooltip
+msgid "Choose whether to show the user name and/or user picture."
+msgstr "选择是否显示用户名称和/或用户图片。"
+
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+msgid "Hide"
+msgstr "隐藏"
+
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+msgid "User picture only"
+msgstr "仅用户图片"
+
+#. 3.2->settings-schema.json->user-box-layout->options
+#. 2.6->settings-schema.json->user-box-layout->options
+msgid "User picture and user name"
+msgstr "用户图片和用户名称"
+
 #. 3.2->settings-schema.json->shutdown-menu-layout->description
 #. 2.6->settings-schema.json->shutdown-menu-layout->description
 msgid "Quit buttons layout"
@@ -711,16 +736,6 @@ msgstr "选择是否显示应用程序的图标。"
 #. 2.6->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "打开和关闭菜单的键盘快捷键"
-
-#. 3.2->settings-schema.json->show-user-icon-label->description
-#. 2.6->settings-schema.json->show-user-icon-label->description
-msgid "Show username"
-msgstr "显示用户名"
-
-#. 3.2->settings-schema.json->show-user-icon-label->tooltip
-#. 2.6->settings-schema.json->show-user-icon-label->tooltip
-msgid "Choose whether or not to show the username."
-msgstr "选择是否显示用户名。"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 2.6->settings-schema.json->enable-autoscroll->description
@@ -846,14 +861,14 @@ msgstr "类别悬停延迟"
 msgid "Delay between switching categories"
 msgstr "切换类别间的延迟"
 
-#. CinnVIIStarkMenu@NikoKrause->metadata.json->name
-msgid "CinnVIIStarkMenu"
-msgstr "CinnVIIStarkMenu"
-
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
 msgstr "带有Windows7开始菜单或MATE菜单外观的Cinnamon Menu"
+
+#. CinnVIIStarkMenu@NikoKrause->metadata.json->name
+msgid "CinnVIIStarkMenu"
+msgstr "CinnVIIStarkMenu"
 
 # ########################################################################
 #. 2.6->settings-schema.json->all-programs-label->default
