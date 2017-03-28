@@ -1,0 +1,110 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-29 06:54+1300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:132
+msgid "  Wait  "
+msgstr ""
+
+#: applet.js:144
+msgid "Waiting"
+msgstr ""
+
+#: applet.js:195
+msgid "Open Power Statistics"
+msgstr ""
+
+#: applet.js:201
+msgid "Open System Monitor"
+msgstr ""
+
+#: applet.js:210
+msgid "Housekeeping and System Sub Menu"
+msgstr ""
+
+#: applet.js:213
+msgid "View the Changelog"
+msgstr ""
+
+#: applet.js:219
+msgid "Open the Help file"
+msgstr ""
+
+#: applet.js:225
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr ""
+
+#. batterymonitor@pdcurtis->metadata.json->name
+#: applet.js:241
+msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+msgstr ""
+
+#: applet.js:246
+msgid "     Note: Alerts not enabled in Settings"
+msgstr ""
+
+#: applet.js:310
+msgid "Battery Low - turn off or connect to mains "
+msgstr ""
+
+#: applet.js:315
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source\n"
+"or close down your work and suspend or shutdown the machine"
+msgstr ""
+
+#: applet.js:333
+msgid "Battery Critical will Suspend unless connected to mains "
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use"
+" a slow refresh if you have a slow machine"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->units
+msgid "seconds"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed"
+" - It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+
+#. batterymonitor@pdcurtis->metadata.json->description
+msgid "Displays Charge as Percentage and allows Alerts and Actions"
+msgstr ""

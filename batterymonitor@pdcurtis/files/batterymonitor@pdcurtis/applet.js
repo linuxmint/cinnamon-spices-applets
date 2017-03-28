@@ -15,9 +15,19 @@ const Settings = imports.ui.settings; // ++ Needed if you use Settings Screen
 const St = imports.gi.St; // ++
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  ++ Needed for menus
-const GLib = imports.gi.GLib; // ++ Needed for starting programs
+const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
+
+// l10n/translation support as per NikoKrause tutorial modified as UUID already used!
+const Gettext = imports.gettext
+const UUIDl10n = "batterymonitor@pdcurtis"
+Gettext.bindtextdomain(UUIDl10n, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUIDl10n, str);
+}
+
 
 /* 
 Function to provide a Modal Dialog. This approach is thanks to Mark Bolin
@@ -119,7 +129,7 @@ MyApplet.prototype = {
             });
 
             // ++ Set initial value of text
-            this.appletLabel.set_text("  Wait  ");
+            this.appletLabel.set_text(_("  Wait  "));
 
             // ++ Build Context (Right Click) Menu
             this.buildContextMenu();
@@ -127,13 +137,11 @@ MyApplet.prototype = {
 
             // Make sure the temp files are created
 
-            GLib.spawn_command_line_async('touch /tmp/.gpuTemperature');
             GLib.spawn_command_line_async('touch /tmp/.batteryPercentage');
             GLib.spawn_command_line_async('touch /tmp/.batteryState');
 
             // Finally setup to start the update loop for the applet display running
-            //           this.set_applet_label(" " ); // show nothing until system stable
-            this.set_applet_tooltip("Waiting");
+            this.set_applet_tooltip(_("Waiting"));
             this.on_settings_changed()   // This starts the MainLoop timer loop
 
         } catch (e) {
@@ -184,13 +192,13 @@ MyApplet.prototype = {
 
             this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-            let menuitem2 = new PopupMenu.PopupMenuItem("Open Power Statistics");
+            let menuitem2 = new PopupMenu.PopupMenuItem(_("Open Power Statistics"));
             menuitem2.connect('activate', Lang.bind(this, function(event) {
                 GLib.spawn_command_line_async('gnome-power-statistics');
             }));
             this._applet_context_menu.addMenuItem(menuitem2);
 
-            this.menuitem3 = new PopupMenu.PopupMenuItem("Open System Monitor");
+            this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
             this.menuitem3.connect('activate', Lang.bind(this, function(event) {
                 GLib.spawn_command_line_async('gnome-system-monitor');
             }));
@@ -199,22 +207,22 @@ MyApplet.prototype = {
             this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             // ++ Set up sub menu for Housekeeping and System Items
-            this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem("Housekeeping and System Sub Menu");
+            this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping and System Sub Menu"));
             this._applet_context_menu.addMenuItem(this.subMenu1);
 
-            this.subMenuItem1 = new PopupMenu.PopupMenuItem("View the Changelog");
+            this.subMenuItem1 = new PopupMenu.PopupMenuItem(_("View the Changelog"));
             this.subMenuItem1.connect('activate', Lang.bind(this, function(event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem1); // Note this has subMenu1.menu not subMenu1._applet_context_menu as one might expect
 
-            this.subMenuItem2 = new PopupMenu.PopupMenuItem("Open the Help file");
+            this.subMenuItem2 = new PopupMenu.PopupMenuItem(_("Open the Help file"));
             this.subMenuItem2.connect('activate', Lang.bind(this, function(event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem2);
 
-            this.subMenuItem4 = new PopupMenu.PopupMenuItem("Open stylesheet.css  (Advanced Function)");
+            this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css  (Advanced Function)"));
             this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.cssfile);
             }));
@@ -230,12 +238,12 @@ MyApplet.prototype = {
         try {
             this.menu.removeAll();
 
-            this.menuitemHead1 = new PopupMenu.PopupMenuItem("Battery  Applet with Monitoring and Shutdown (BAMS)", {
+            this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Battery  Applet with Monitoring and Shutdown (BAMS)"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     Note: Alerts not enabled in Settings", {
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem(_("     Note: Alerts not enabled in Settings"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo2);
@@ -266,8 +274,8 @@ MyApplet.prototype = {
             if ( ! ( this.batteryPercentage > 0 && this.batteryPercentage <= 100 )) {             
                 this.batteryPercentage = this.lastBatteryPercentage;
             }
-// Comment out following line when tests are complete
-//   this.batteryPercentage = this.batteryPercentage / 5 ;   
+//          Comment out following line when tests are complete
+//          this.batteryPercentage = this.batteryPercentage / 5 ;   
             this.batteryState = GLib.file_get_contents("/tmp/.batteryState").toString();
             if ( this.batteryState.trim().length > 6 ) { 
                  this.batteryState = this.batteryState.trim().substr(5);
@@ -279,6 +287,9 @@ MyApplet.prototype = {
             this.batteryMessage = " "
             if (Math.floor(this.batteryPercentage)  >= Math.floor(this.alertPercentage)) {
                 this.actor.style_class = 'bam-normal';
+                 if (this.batteryState.indexOf("discharg") > -1) {
+                     this.actor.style_class = 'bam-discharging';
+                    }
                 this.alertFlag = false;
             }
        
@@ -288,17 +299,20 @@ MyApplet.prototype = {
                     this.flashFlag = false;
                 } else {
                  if (this.batteryState.indexOf("discharg") > -1) {
-                     this.actor.style_class = 'bam-alert2';
+                     this.actor.style_class = 'bam-alert-discharging';
+                    this.flashFlag = true; // Corrected placement
                     }
-                    this.flashFlag = true;
+//                    this.flashFlag = true;
                 }
 
                   
                 if (this.batteryState.indexOf("discharg") > -1) {
-                    this.batteryMessage = "Battery Low - turn off or connect to mains ";
+                    this.batteryMessage = _("Battery Low - turn off or connect to mains ");
                     if ( !this.alertFlag) {
                        this.alertFlag = true;  // Reset above when out of warning range
-                       alertModalDataWarning = new AlertDialog("The Battery Level has fallen to your alert level\n\n either reconnect to a power source\n\or close down your work and suspend or shutdown the machine");
+                       // Audible alert (added in v32_1.0.0)
+                       GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"'); 
+                       alertModalDataWarning = new AlertDialog(_("The Battery Level has fallen to your alert level\n\n either reconnect to a power source\n\or close down your work and suspend or shutdown the machine"));
                        alertModalDataWarning.open();
                     } 
                 }           
@@ -316,11 +330,12 @@ MyApplet.prototype = {
                 }
                  
                 if (this.batteryState.indexOf("discharg") > -1) {
-                    this.batteryMessage = "Battery Critical will Suspend unless connected to mains "
+                    this.batteryMessage = _("Battery Critical will Suspend unless connected to mains ")
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
-                GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');// Add call to suspend script here
+                       // Audible alert moved from suspendScript in v32_1.0.0
+                       GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"');
+                       GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
 
- //                       alertModalDataWarning.open();
                     }
                 }    
             }
@@ -332,7 +347,8 @@ MyApplet.prototype = {
                 this.lastBatteryPercentage = this.batteryPercentage
 /*  
  
-if less than 4% then shutdown completely immediately
+If less than 4% then shutdown completely immediately. 
+May be implemented in future version
 
 */
             this.appletLabel.set_text(this.batteryMessage + this.batteryPercentage + "%");
@@ -371,7 +387,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_1.2.0
+Version v32_1.0.0
 v30_1.0.0 Developed using code from NUMA, Bumblebee and Timer Applets
           Includes changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
           Tested with Cinnamon 3.0 in Mint 18 
@@ -404,5 +420,21 @@ v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrit
 v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
 v30_1.1.9 Added ability to edit stylesheet.css to context menu.
           Added warnings about editing to stylesheet.css
-v30_1.2.0 Changed help file from help.txt to README.md
+
+Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
+
+v30_1.2.0 Changed help file from help.txt to README.md with update to README.md
+v32_1.0.0 First major update following transition to cinnamon-spices-applets repository
+            Add fixed audible warning at alert stage
+            Update documentation
+               In Applet
+               In README.md (2x)
+               In changelog.txt
+            Minor tidy-up of comments in applet
+            Add extra Discharging indication via border colour
+            Move audible alert from suspendScript to applet
+            Add translation support to applet.js and identify strings
+            Add po folder to applet
+            Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
 */
+
