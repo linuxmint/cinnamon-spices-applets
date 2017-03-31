@@ -54,9 +54,9 @@ MyApplet.prototype = {
     this.printersCount = 0;
     this.printError = false;
     this.printWarning = false;
-    this.updating = false;
     this.outdated = false;
     this.printers = [];
+    this.setIcon('printer-printing');
     this.onSettingsChanged();
   },
 
@@ -86,7 +86,7 @@ MyApplet.prototype = {
   },
 
   onMenuToggled: function() {
-    if(!this.menu.isOpen && this.outdated) this.update();
+    if(!this.menu.isOpen && this.outdated && !this.printWarning) this.update();
   },
 
   onSettingsChanged: function() {
@@ -118,12 +118,10 @@ MyApplet.prototype = {
   },
 
   update: function() {
-    if(this.updating) return;
     if(this.menu.isOpen) {
       this.outdated = true;
       return;
     }
-    this.updating = true;
     this.outdated = false;
     this.jobsCount = 0;
     this.printersCount = 0;
@@ -202,7 +200,6 @@ MyApplet.prototype = {
               if(this.printWarning) this.setIcon('printer-warning');
               else if(this.show_error && this.printError) this.setIcon('printer-error');
               else this.setIcon('printer-printing');
-              this.updating = false;
             }));
           }))
         }))
