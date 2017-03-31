@@ -501,7 +501,7 @@ GPUTemp.prototype =
 					bGpu=false;
 					bDisplay=false;
 				}
-				else if (gpuTest(line))
+				else if (gpuTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -513,7 +513,7 @@ GPUTemp.prototype =
 					SettingsSettings.gpus[SettingsSettings.totalGpus-1] = new Object();
 					SettingsSettings.gpus[SettingsSettings.totalGpus-1].gpuId=gpu;
 				}
-				else if (fanTest(line))
+				else if (fanTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -525,7 +525,7 @@ GPUTemp.prototype =
 					SettingsSettings.fans[SettingsSettings.totalFans-1] = new Object();
 					SettingsSettings.fans[SettingsSettings.totalFans-1].fanId=fan;
 				}
-				else if (displayTest(line))
+				else if (displayTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -538,7 +538,7 @@ GPUTemp.prototype =
 					SettingsSettings.dpys[SettingsSettings.totalDisplays-1].displayId=display.toString();
 					//global.logError("Display:" + SettingsSettings.dpys[SettingsSettings.totalDisplays-1].displayId);
 				}
-				else if (otherSectionTest(line))
+				else if (otherSectionTest.test(line))
 				{
 					bMain=false;
 					bGpu=false;
