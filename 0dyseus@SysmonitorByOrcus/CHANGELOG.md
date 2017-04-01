@@ -1,5 +1,8 @@
 ## Change Log
 
+##### 1.10
+- Better handling of dependencies.
+
 ##### 1.09
 - Fixed system freeze on applet removal on Cinnamon 3.2.x.
 - Cleaned code of unused constants and functions.

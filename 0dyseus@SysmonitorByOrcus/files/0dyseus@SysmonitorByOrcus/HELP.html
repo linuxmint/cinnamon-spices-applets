@@ -218,9 +218,35 @@ pre {
 	padding-right: 15px !important;
 }
 /* pre tag tweaks */
-</style></head><body><div id="mainarea"><div class="container boxed"><h1>Help for System Monitor applet</h1>
+</style></head><body><div id="mainarea"><div class="container boxed"><h1>Help for System Monitor (Fork By Odyseus) applet</h1>
 <h3>IMPORTANT!!!</h3>
 <p>Never delete any of the files found inside this applet folder. It might break this applet functionality.</p>
+<hr>
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
+<span style="color:red;">
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
+</span>
+<hr>
+<h3>Dependencies</h3>
+<ul>
+<li><strong>gir1.2-gtop-2.0</strong>: The gtop library reads information about processes and the state of the
+system.
+<ul>
+<li>Debian based distributions: The package is called <strong>gir1.2-gtop-2.0</strong>.</li>
+<li>Archlinux based distributions: The package is called <strong>libgtop</strong>.</li>
+<li>Fedora based distributions: The package is called <strong>libgtop2-devel</strong>.</li>
+</ul>
+</li>
+<li><strong>NetworkManager</strong>: NetworkManager is a system network service that manages your network devices and connections, attempting to keep active network connectivity when available.
+<ul>
+<li>Debian based distributions: The package is called <strong>gir1.2-networkmanager-1.0</strong>.</li>
+<li>Archlinux based distributions: The package is called <strong>networkmanager</strong>.</li>
+<li>Fedora based distributions: The package is called <strong>NetworkManager</strong>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Important note:</strong> NetworkManager is only used if the <strong>GTop</strong> library version installed on a system is &lt; <strong>2.32</strong> and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it.</p>
+<p><strong>Restart Cinnamon after installing the packages for the applet to recognize them.</strong></p>
 <hr>
 <h3>Applet localization</h3>
 <ul>
@@ -243,6 +269,4 @@ pre {
 </li>
 <li>If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.</li>
 </ul>
-<h3>Bug reports, feature requests and contributions</h3>
-<p>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</p>
 </div></div></body></html>
