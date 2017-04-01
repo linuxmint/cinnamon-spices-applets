@@ -6,6 +6,13 @@ Never delete any of the files found inside this applet folder. It might break th
 
 ***
 
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
+<span style="color:red;">
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
+</span>
+
+***
+
 ### Keyboard navigation
 **Note:** Almost all keyboard shortcuts on this menu are the same as the original menu. There are just a couple of differences that I was forced to add to my menu to make some of its features to work.
 
@@ -80,7 +87,3 @@ By default, these options will use the system's default terminal emulator (**x-t
     - If you don't have/want a GitHub account:
         - You can send me a [Pastebin](http://pastebin.com/) (or similar service) to my [Mint Forums account](https://forums.linuxmint.com/memberlist.php?mode=viewprofile&u=164858).
 - If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.
-
-### Bug reports, feature requests and contributions
-
-If anyone has bugs to report, a feature request or a contribution, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).
