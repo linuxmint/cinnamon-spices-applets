@@ -29,18 +29,32 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const Mainloop = imports.mainloop;
-const GTop = imports.gi.GTop;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
-const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
+const Main = imports.ui.main;
 
-var UUID;
+let GTop,
+    NMClient;
+
+try {
+    GTop = imports.gi.GTop;
+} catch (aErr) {
+    GTop = null;
+}
+
+try {
+    NMClient = imports.gi.NMClient;
+} catch (aErr) {
+    NMClient = null;
+}
+
+let UUID;
 
 function _(aStr) {
     let customTrans = Gettext.dgettext(UUID, aStr);
@@ -56,10 +70,10 @@ function MyApplet(aMetadata, aOrientation, aPanel_height, aInstance_id) {
 }
 
 MyApplet.prototype = {
-    __proto__: Applet.Applet.prototype,
+    __proto__: Applet.IconApplet.prototype,
 
     _init: function(aMetadata, aOrientation, aPanel_height, aInstance_id) {
-        Applet.Applet.prototype._init.call(this, aOrientation);
+        Applet.IconApplet.prototype._init.call(this, aOrientation, aPanel_height, aInstance_id);
 
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
@@ -69,6 +83,7 @@ MyApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, aMetadata.uuid, aInstance_id);
 
         this.update_id = 0;
+        this.metadata = aMetadata;
         this.applet_dir = aMetadata.path;
         this.main_applet_dir = this.applet_dir;
 
@@ -104,6 +119,14 @@ MyApplet.prototype = {
             } catch (aErr) {
                 this.tooltip = false;
             }
+
+            if (!GTop) {
+                this._informDependency();
+                this._applet_icon_box.show();
+                return;
+            }
+
+            this._applet_icon_box.hide();
 
             let ncpu = GTop.glibtop_get_sysinfo().ncpu;
 
@@ -146,6 +169,35 @@ MyApplet.prototype = {
         } catch (e) {
             global.logError(e);
         }
+    },
+
+    _informDependency: function() {
+        this.set_applet_icon_symbolic_name("dialog-error");
+        let msg = [_("Missing dependency!!!"),
+            _("This applet needs the GTop library installed on your system for it  to work."),
+            _("Read this applet help for more details (Applet context menu > Help item).")
+        ];
+
+        let tt = _(this.metadata.name) + "\n\n" + msg.join("\n");
+
+        if (this.tooltip) {
+            try {
+                this.tooltip._tooltip.get_clutter_text().set_markup(
+                    "<span color=\"red\"><b>" + tt + "</b></span>");
+            } catch (aErr) {
+                global.logError("System Monitor (Fork By Odyseus): " + aErr.message);
+            }
+        } else {
+            this.set_applet_tooltip(tt);
+        }
+
+        let icon = new St.Icon({
+            icon_name: "dialog-error",
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 24
+        });
+
+        Main.criticalNotify(_(this.metadata.name), msg.join("\n"), icon);
     },
 
     _restart_cinnamon: function() {
@@ -516,6 +568,9 @@ NetDataProvider.prototype = {
         if (typeof GTop.glibtop.get_netlist === "function") {
             this.devices = GTop.glibtop.get_netlist(new GTop.glibtop_netlist());
         } else {
+            if (!NMClient)
+                return;
+
             let dev = NMClient.Client.new().get_devices();
             this.devices = [];
             for (let i = 0; i < dev.length; ++i)
