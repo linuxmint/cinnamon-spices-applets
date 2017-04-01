@@ -33,7 +33,6 @@ var SignalManager = importObj.misc.signalManager;
 var AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json'];
 var _ = AppletDir.lodash._;
 var AppList = AppletDir.appList;
-var ajax = AppletDir.__init__.ajax;
 var clog = AppletDir.__init__.clog;
 var setTimeout = AppletDir.__init__.setTimeout;
 
@@ -215,8 +214,6 @@ MyApplet.prototype = {
   __proto__: Applet.Applet.prototype,
 
   _init: function _init(metadata, orientation, panel_height, instance_id) {
-    var _this3 = this;
-
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
     this._uuid = metadata.uuid;
     this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
@@ -239,7 +236,7 @@ MyApplet.prototype = {
     this.execInstallLanguage();
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
 
-    var settingsProps = [{ key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate }, { key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'middle-click-action', value: 'middleClickAction', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }, { key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null }];
+    var settingsProps = [{ key: 'show-pinned', value: 'showPinned', cb: null }, { key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList }, { key: 'show-alerts', value: 'showAlerts', cb: null }, { key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList }, { key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null }, { key: 'pinned-apps', value: 'pinnedApps', cb: null }, { key: 'middle-click-action', value: 'middleClickAction', cb: null }, { key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey }, { key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null }, { key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey }, { key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList }, { key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList }, { key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList }, { key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList }, { key: 'enable-hover-peek', value: 'enablePeek', cb: null }, { key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null }, { key: 'hover-peek-opacity', value: 'peekOpacity', cb: null }, { key: 'hover-peek-time', value: 'peekTime', cb: null }, { key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null }, { key: 'thumbnail-size', value: 'thumbSize', cb: null }, { key: 'sort-thumbnails', value: 'sortThumbs', cb: null }, { key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null }, { key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList }, { key: 'animate-thumbnails', value: 'animateThumbs', cb: null }, { key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList }, { key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList }, { key: 'number-display', value: 'numDisplay', cb: null }, { key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList }, { key: 'icon-spacing', value: 'iconSpacing', cb: null }, { key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList }, { key: 'icon-padding', value: 'iconPadding', cb: null }, { key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList }, { key: 'icon-size', value: 'iconSize', cb: null }, { key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList }, { key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList }, { key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList }, { key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList }, { key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList }, { key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null }];
 
     if (this.c32) {
       for (var i = 0, len = settingsProps.length; i < len; i++) {
@@ -293,11 +290,6 @@ MyApplet.prototype = {
     this._bindAppKey();
 
     this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-
-    // Wait 3s, as Cinnamon doesn't populate Applet._meta until after the applet loads.
-    setTimeout(function () {
-      return _this3.handleUpdate();
-    }, 3000);
   },
 
   on_panel_height_changed: function on_panel_height_changed() {
@@ -316,50 +308,18 @@ MyApplet.prototype = {
   _onButtonPressEvent: function _onButtonPressEvent() {
     return false;
   },
-  handleUpdate: function handleUpdate() {
-    var _this4 = this;
-
-    if (this.autoUpdate) {
-      this.version = 'v' + this._meta.version;
-      // Parse out the HTML response instead of using the API endpoint to work around Github's API limit.
-      ajax({ method: 'GET', url: 'https://github.com/jaszhix/icingtaskmanager/releases/latest', json: false }).then(function (res) {
-        clog('resolve!');
-        var split = '/jaszhix/icingtaskmanager/releases/download/';
-        var end = res.split(split)[1].split('.zip')[0];
-        var version = end.split('/')[0];
-        var file = 'https://github.com' + split + end + '.zip';
-        if (version !== _this4.version) {
-          (function () {
-            var now = Date.now();
-            Main.notify('Icing Task Manager is updating...', 'Go to settings if you wish to disable automatic updates.');
-            Util.trySpawnCommandLine('bash -c \'wget -O /tmp/ITM-' + now + '.zip ' + file + '\'');
-            // Defer for conservative durations due to lack of callback from Utils CLI methods
-            setTimeout(function () {
-              Util.trySpawnCommandLine('bash -c \'unzip -o /tmp/ITM-' + now + '.zip -d ~/.local/share/cinnamon/applets/IcingTaskManager@json/\'');
-              setTimeout(function () {
-                return _this4._reloadApp();
-              }, 10000);
-            }, 10000);
-          })();
-        }
-      }).catch(function (e) {
-        clog('reject!');
-        return null;
-      });
-    }
-  },
 
 
   _bindAppKey: function _bindAppKey() {
-    var _this5 = this;
+    var _this3 = this;
 
     this._unbindAppKey();
     var addLaunchHotkeys = function addLaunchHotkeys(i) {
       Main.keybindingManager.addHotKey('launch-app-key-' + i, '<Super>' + i, function () {
-        return _this5._onAppKeyPress(i);
+        return _this3._onAppKeyPress(i);
       });
       Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, function () {
-        return _this5._onNewAppKeyPress(i);
+        return _this3._onNewAppKeyPress(i);
       });
     };
 
@@ -367,10 +327,10 @@ MyApplet.prototype = {
       addLaunchHotkeys(i);
     }
     Main.keybindingManager.addHotKey('launch-show-apps-order', this.showAppsOrderHotkey, function () {
-      return _this5._showAppsOrder();
+      return _this3._showAppsOrder();
     });
     Main.keybindingManager.addHotKey('launch-cycle-menus', this.cycleMenusHotkey, function () {
-      return _this5._cycleMenus();
+      return _this3._cycleMenus();
     });
   },
 
@@ -400,10 +360,10 @@ MyApplet.prototype = {
   },
 
   refreshCurrentAppList: function refreshCurrentAppList() {
-    var _this6 = this;
+    var _this4 = this;
 
     setTimeout(function () {
-      _this6.metaWorkspaces[_this6.currentWs].appList._refreshList();
+      _this4.metaWorkspaces[_this4.currentWs].appList._refreshList();
     }, 15);
   },
   refreshAppFromCurrentListById: function refreshAppFromCurrentListById(appId) {
@@ -415,15 +375,15 @@ MyApplet.prototype = {
     this.metaWorkspaces[this.currentWs].appList._refreshAllThumbnails();
   },
   getAppFromWMClass: function getAppFromWMClass(specialApps, metaWindow) {
-    var _this7 = this;
+    var _this5 = this;
 
     var startupClass = function startupClass(wmclass) {
       var app_final = null;
       for (var i = 0, len = specialApps.length; i < len; i++) {
         if (specialApps[i].wmClass == wmclass) {
-          app_final = _this7._appSystem.lookup_app(specialApps[i].id);
+          app_final = _this5._appSystem.lookup_app(specialApps[i].id);
           if (!app_final) {
-            app_final = _this7._appSystem.lookup_settings_app(specialApps[i].id);
+            app_final = _this5._appSystem.lookup_settings_app(specialApps[i].id);
           }
           app_final.wmClass = wmclass;
         }
@@ -441,7 +401,7 @@ MyApplet.prototype = {
     this.refreshCurrentAppList();
   },
   getAutostartApps: function getAutostartApps() {
-    var _this8 = this;
+    var _this6 = this;
 
     var info;
 
@@ -450,8 +410,8 @@ MyApplet.prototype = {
       while ((info = children.next_file(null)) !== null) {
         if (info.get_file_type() === Gio.FileType.REGULAR) {
           var name = info.get_name();
-          var file = Gio.file_new_for_path(_this8.autostartStrDir + '/' + name);
-          _this8.autostartApps.push({ id: name, file: file });
+          var file = Gio.file_new_for_path(_this6.autostartStrDir + '/' + name);
+          _this6.autostartApps.push({ id: name, file: file });
         }
       }
     };

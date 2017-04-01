@@ -31,7 +31,6 @@ const SignalManager = importObj.misc.signalManager;
 const AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json']
 const _ = AppletDir.lodash._
 const AppList = AppletDir.appList
-const ajax = AppletDir.__init__.ajax
 const clog = AppletDir.__init__.clog
 const setTimeout = AppletDir.__init__.setTimeout
 
@@ -224,7 +223,6 @@ MyApplet.prototype = {
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale')
 
     var settingsProps = [
-      {key: 'autoUpdate', value: 'autoUpdate', cb: this.handleUpdate},
       {key: 'show-pinned', value: 'showPinned', cb: null},
       {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
       {key: 'show-alerts', value: 'showAlerts', cb: null},
@@ -318,9 +316,6 @@ MyApplet.prototype = {
     this._bindAppKey();
 
     this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
-
-    // Wait 3s, as Cinnamon doesn't populate Applet._meta until after the applet loads.
-    setTimeout(()=>this.handleUpdate(), 3000)
   },
 
   on_panel_height_changed: function() {
@@ -338,33 +333,6 @@ MyApplet.prototype = {
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
   _onButtonPressEvent() {
     return false
-  },
-
-  handleUpdate() {
-    if (this.autoUpdate) {
-      this.version = `v${this._meta.version}`
-      // Parse out the HTML response instead of using the API endpoint to work around Github's API limit.
-      ajax({method: 'GET', url: 'https://github.com/jaszhix/icingtaskmanager/releases/latest', json: false}).then((res)=>{
-        clog('resolve!')
-        let split = '/jaszhix/icingtaskmanager/releases/download/'
-        let end = res.split(split)[1].split('.zip')[0]
-        let version = end.split('/')[0]
-        let file = `https://github.com${split}${end}.zip`
-        if (version !== this.version) {
-          let now = Date.now()
-          Main.notify('Icing Task Manager is updating...', 'Go to settings if you wish to disable automatic updates.')
-          Util.trySpawnCommandLine(`bash -c 'wget -O /tmp/ITM-${now}.zip ${file}'`)
-          // Defer for conservative durations due to lack of callback from Utils CLI methods
-          setTimeout(()=>{
-            Util.trySpawnCommandLine(`bash -c 'unzip -o /tmp/ITM-${now}.zip -d ~/.local/share/cinnamon/applets/IcingTaskManager@json/'`)
-            setTimeout(()=>this._reloadApp(), 10000)
-          }, 10000)
-        }
-      }).catch((e)=>{
-        clog('reject!')
-        return null
-      })
-    }
   },
 
   _bindAppKey: function(){
