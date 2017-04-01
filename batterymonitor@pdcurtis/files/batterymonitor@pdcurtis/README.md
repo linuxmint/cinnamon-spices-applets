@@ -12,20 +12,20 @@ The current Settings and Power Applet only allow limited choices of handling low
 
 ## Status
 
-Fully supported by Author, under continuing development and in continuous use on several machines. Released in cinnamon-spices-applets repository as v32_1.0.0
+Fully supported by Author, under continuing development and in continuous use on several machines. 
 
 ## Features
 
 The applet normally shows the percentage charge on a coloured background which is: 
 
   * Green when above the alert level (set currently to 1.5 times the 'shutdown' level.)
-  * Green has Red Border when discharging (Added in version v32_1.0.0)
+  * Green has Red Border when discharging (Added in version 1.2.2)
   * Orange between the warning and shutdown level
   * Red and flashing at and below the Shutdown level (even when charging).
 
    When the battery is Discharging the warning and shutdown regions have a much larger flashing message in the applet which is difficult to miss. 
 
-  * When the Alert level is reached a modal alert is put up which can not be missed as no input can be made until it is cleared and short fixed audible alert is also given (Added in v32_1.0.0)
+  * When the Alert level is reached a modal alert is put up which can not be missed as no input can be made until it is cleared and short fixed audible alert is also given (Added in 1.2.2)
   * When the shutdown level is reached a normal alert box is put up with options of an immediate suspend or cancel - if nothing is done it suspends 30 seconds latter. If cancelled (or the machine is turned back on without the battery being on charge) the alert and shutdown sequence is restarted after the battery has dropped another 1%. The alert box is accompagnied by a short audible alert.
 
 The alert level can be set to between 10% and 40% of full by a slider on the left click menu or in the configuration screen. The refresh rate can also be set in the configuration screen.

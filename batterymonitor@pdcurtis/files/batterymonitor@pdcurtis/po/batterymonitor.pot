@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-29 06:54+1300\n"
+"POT-Creation-Date: 2017-04-01 21:08+1300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
+#: applet.js:52
+msgid "Ok"
+msgstr ""
+
 #: applet.js:132
-msgid "  Wait  "
+msgid "Wait"
 msgstr ""
 
 #: applet.js:144
@@ -55,11 +59,11 @@ msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
 msgstr ""
 
 #: applet.js:246
-msgid "     Note: Alerts not enabled in Settings"
+msgid "Note: Alerts not enabled in Settings"
 msgstr ""
 
 #: applet.js:310
-msgid "Battery Low - turn off or connect to mains "
+msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 
 #: applet.js:315
@@ -71,7 +75,31 @@ msgid ""
 msgstr ""
 
 #: applet.js:333
-msgid "Battery Critical will Suspend unless connected to mains "
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr ""
+
+#: applet.js:356
+msgid "Charge:"
+msgstr ""
+
+#: applet.js:356
+msgid "Alert:"
+msgstr ""
+
+#: applet.js:356
+msgid "Suspend:"
+msgstr ""
+
+#: applet.js:358
+msgid "Percentage Charge:"
+msgstr ""
+
+#: applet.js:358
+msgid "Alert at:"
+msgstr ""
+
+#: applet.js:358
+msgid "Suspend at:"
 msgstr ""
 
 #. batterymonitor@pdcurtis->settings-schema.json->head->description

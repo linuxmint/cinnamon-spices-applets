@@ -49,7 +49,7 @@ AlertDialog.prototype = {
         this.contentLayout.add(label);
         this.setButtons([{
             style_class: "centered",
-            label: "Ok",
+            label: _("Ok"),
             action: Lang.bind(this, function () {
                 this.close();
             })
@@ -129,7 +129,7 @@ MyApplet.prototype = {
             });
 
             // ++ Set initial value of text
-            this.appletLabel.set_text(_("  Wait  "));
+            this.appletLabel.set_text(_("Wait"));
 
             // ++ Build Context (Right Click) Menu
             this.buildContextMenu();
@@ -243,7 +243,7 @@ MyApplet.prototype = {
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem(_("     Note: Alerts not enabled in Settings"), {
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Note: Alerts not enabled in Settings"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo2);
@@ -307,7 +307,7 @@ MyApplet.prototype = {
 
                   
                 if (this.batteryState.indexOf("discharg") > -1) {
-                    this.batteryMessage = _("Battery Low - turn off or connect to mains ");
+                    this.batteryMessage = _("Battery Low - turn off or connect to mains") + " ";
                     if ( !this.alertFlag) {
                        this.alertFlag = true;  // Reset above when out of warning range
                        // Audible alert (added in v32_1.0.0)
@@ -330,7 +330,7 @@ MyApplet.prototype = {
                 }
                  
                 if (this.batteryState.indexOf("discharg") > -1) {
-                    this.batteryMessage = _("Battery Critical will Suspend unless connected to mains ")
+                    this.batteryMessage = _("Battery Critical will Suspend unless connected to mains") + " "
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
                        // Audible alert moved from suspendScript in v32_1.0.0
                        GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"');
@@ -353,8 +353,9 @@ May be implemented in future version
 */
             this.appletLabel.set_text(this.batteryMessage + this.batteryPercentage + "%");
 
-            this.set_applet_tooltip("Charge: " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " Alert: " + Math.floor(this.alertPercentage) + "% "  + "Suspend: " + Math.floor(this.alertPercentage / 1.5)+ "%"                    );
-            this.menuitemInfo2.label.text = "Percentage Charge: " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " Alert at: "    + Math.floor(this.alertPercentage)+ "% " + "Suspend at: " + Math.floor(this.alertPercentage / 1.5)+ "%";
+             this.set_applet_tooltip(_("Charge:") + " " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " " + _("Alert:") + " " + Math.floor(this.alertPercentage) + "% "  + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%" ) ;
+
+           this.menuitemInfo2.label.text = _("Percentage Charge:") + " " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " " + _("Alert at:") + " "   + Math.floor(this.alertPercentage)+ "% " + _("Suspend at:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%";
 
             // Get temperatures via asyncronous script ready for next cycle
             GLib.spawn_command_line_async('sh ' + this.batterytempscript);
@@ -387,7 +388,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v32_1.0.0
+Version   1.2.2
 v30_1.0.0 Developed using code from NUMA, Bumblebee and Timer Applets
           Includes changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
           Tested with Cinnamon 3.0 in Mint 18 
@@ -402,10 +403,10 @@ v30_1.0.1 Code added to ensure valid readings of batteryPercentage
           TEST CODE STILL IN PLACE so levels incorrect
 v30_1.1.2 Some changes in how test appplied to make it easier to take them out
           Extra flag added for flashing
-          Range changed to 10 - 40 for Alert Percentage. 
+          Range changed to 10 - 40 for Alert Percentage.
           Tests look good and suspendscript works.
           TEST CODE STILL IN PLACE
-          Should I add a forced shutdown if level drops to say 5% because taken out of suspend with 
+          Should I add a forced shutdown if level drops to say 5% because taken out of suspend with
           level dropped too far or suspend cancelled too many times?
 v30_1.1.3 Added Modal Dialog triped once at Alert Level and reset by going back above alert level
           Shutdown (Suspend) now at 2/3 of Alert Level.
@@ -424,17 +425,23 @@ v30_1.1.9 Added ability to edit stylesheet.css to context menu.
 Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
 
 v30_1.2.0 Changed help file from help.txt to README.md with update to README.md
-v32_1.0.0 First major update following transition to cinnamon-spices-applets repository
-            Add fixed audible warning at alert stage
-            Update documentation
+v32_1.2.1 First major update following transition to cinnamon-spices-applets repository under Cinnamon 3.2
+          Add fixed audible warning at alert stage
+          Update documentation
                In Applet
                In README.md (2x)
                In changelog.txt
-            Minor tidy-up of comments in applet
-            Add extra Discharging indication via border colour
-            Move audible alert from suspendScript to applet
-            Add translation support to applet.js and identify strings
-            Add po folder to applet
-            Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Minor tidy-up of comments in applet
+          Add extra Discharging indication via border colour
+          Move audible alert from suspendScript to applet
+          Add translation support to applet.js and identify strings
+          Add po folder to applet
+          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+1.2.2     Changes to text strings to remove spaces from start and end of strings for translation
+          Some extra strings marked for translation
+          Replaced batterymonitor.pot
+          Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
+          icon.png copied back into applet folder so it shows in 'About...'
+          Version information updated in applet.js, changelog.txt and README.md
 */
 
