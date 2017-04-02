@@ -26,6 +26,12 @@ The latest version has a tick box option on the configuration screen to access e
 
 glxsheres64 only needs to be installed if you want to use the applet to test the relative performances of the Intel and nVidia graphics processors. glxsheres64 is part of the VirtualGL package which needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi (should be the default for a right click on the downloaded file). It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU when it is active.
 
+## Translations and other Contributions
+
+The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I rarely be able to take responsibility for the accuracy of translations!
+
+Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+
 ## Manual Installation:
   
    * Make sure the nVidia drivers and nVidia Prime are installed and working
