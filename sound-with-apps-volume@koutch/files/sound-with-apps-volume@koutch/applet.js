@@ -13,6 +13,7 @@ const Pango = imports.gi.Pango;
 const Tooltips = imports.ui.tooltips;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
 
 ///@koutch Settings
 const Gtk = imports.gi.Gtk;
@@ -385,10 +386,6 @@ let support_seek = [
     'clementine', 'banshee', 'rhythmbox', 'rhythmbox3', 'pragha', 'quodlibet',
     'amarok', 'xnoise', 'gmusicbrowser', 'spotify', 'vlc', 'gnome-mplayer',
     'qmmp', 'deadbeef', 'audacious'];
-/* dummy vars for translation */
-let x = _("Playing");
-x = _("Paused");
-x = _("Stopped");
 
 const VOLUME_NOTIFY_ID = 1;
 const VOLUME_ADJUSTMENT_STEP = 0.05; /* Volume adjustment step in % */
@@ -1074,6 +1071,14 @@ MediaPlayerLauncher.prototype = {
     }
 
 };
+
+// l10n/translation support
+const UUID = "sound-with-apps-volume@koutch"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
