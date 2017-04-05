@@ -1,14 +1,30 @@
-#!/usr/bin/env python2
+#!/usr/bin/python
 # -*- encoding: utf-8 -*-
-from __future__ import unicode_literals
-import gi
-import sys
+'''
+ * Cinnamon RSS feed reader (python backend)
+ *
+ * Author: jake1164@hotmail.com
+ * Date: 2013-2017
+ *
+ * Cinnamon RSS feed reader is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Cinnamon RSS feed reader is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General
+ * Public License for more details.  You should have received a copy of the GNU
+ * General Public License along with Cinnamon RSS feed reader.  If not, see
+ * <http://www.gnu.org/licenses/>.
+'''
 import os
+import sys
+import gi
+import argparse
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
-import xml.etree.ElementTree as et
-from io import open
-
+from ConfigFileManager import ConfigFileManager
 
 UI_INFO = """
 <ui>
@@ -20,169 +36,130 @@ UI_INFO = """
     <menu action='ExportMenu'>
       <menuitem action='ExportFeedFile' />
     </menu>
+    <menu action='OptionMenu'>
+      <menuitem action='ShowHideFields' />
+    </menu>    
   </menubar>
 </ui>
 """
 
-class ConfigManager:    
-    @staticmethod
-    def write(feeds, filename=None):
-        """
-            Writes the feeds list to the file/stdout
-        """
-        #if filename is None:
-        #    filename = self.filename
-
-        if filename is None:
-            f = sys.stdout
-        else:
-            f = open(filename, mode="w", encoding="utf-8")
-
-        # Need to check if all feeds have been removed
-        if len(feeds) == 0:
-            f.write(u'#')
-            f.write('')
-            f.write(u'\n')
-
-        for feed in feeds:
-            if not feed[2]:
-                f.write(u'#')
-            f.write(feed[0].decode('utf8'))
-            if feed[1] is not None:
-                f.write(u' ')
-                f.write(feed[1].decode('utf8'))
-            f.write(u'\n')
-
-    @staticmethod
-    def read(filename = None):
-        """
-            Reads content of the feed file/stdin and returns a list of lists
-        """
-        content = []
-        
-        if filename is None:
-            f = sys.stdin
-        else:
-            f = open(filename, "r")
-
-        for line in f:
-            try:
-                # If input is coming from the command line, convert to utf8
-                if filename is None:
-                    line = line.decode('utf8')
-
-                if line[0] == "#":
-                    # cut out the comment and define this item as disabled
-                    line = line[1:]
-                    enable = False
-                else:
-                    enable = True
-                temp = line.split()
-                url = temp[0]
-                custom_title = None
-                if len(temp) > 1:
-                    custom_title = " ".join(temp[1:])
-                content.append([url, custom_title, enable])
-            except IndexError:
-                # empty lines are ignored
-                pass
-        
-        return content
-
-    @staticmethod
-    def update_redirected_feed(current_url, redirected_url):
-        feeds = ConfigManager.read()
-        for feed in feeds:
-            if feed[0] == current_url:
-                feed[0] = redirected_url                
-        ConfigManager.write(feeds)
-
-
-    @staticmethod
-    def import_opml_file(filename):
-        """
-            Reads feeds list from an OPML file
-        """
-        new_feeds = []
-
-        tree = et.parse(filename)
-        root = tree.getroot()
-        for outline in root.findall(".//outline[@type='rss']"):
-            url = outline.attrib.get('xmlUrl', '').decode('utf-8')
-            # for now just ignore feed title decoding issues.
-            try:
-                title = outline.attrib.get('text', '').decode('utf-8').encode('ascii', 'ignore')
-            except:
-                title = ""
-            new_feeds.append([
-                    url,
-                    title,
-                    False])
-        return new_feeds        
 
 class MainWindow(Gtk.Window):
 
-    def __init__(self):        
+    def __init__(self, config):        
         super(Gtk.Window, self).__init__(title="Manage your feeds")
+        self.config = config
+        self.show_hidden_fields = False
+        self.hidden_fields = []        
+        
         # Create UI manager
         self.ui_manager = Gtk.UIManager()
 
-        #self.filename = filename
-        self.feeds = Gtk.ListStore(str, str, bool)
-        try:
-            for feed in ConfigManager.read():
-                self.feeds.append(feed)
-        except Exception as e:
-            dialog = Gtk.MessageDialog(self, 0,
-                                        Gtk.MessageType.ERROR,
-                                        Gtk.ButtonsType.CLOSE,
-                                        "Failed to Import feeds")
-            dialog.format_secondary_text(str(e))
-            dialog.run()
-            dialog.destroy()                                        
-
         # Set window properties
-        self.set_default_size(600, 200)
+        self.set_default_size(800, 150 + len(self.config.feeds) * 20)
         icon_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "icon.png"))
         self.set_icon_from_file(icon_path)
 
         box = Gtk.Box(False, 10, orientation=Gtk.Orientation.VERTICAL)
+        instance_box = Gtk.Box(False, 150)        
         button_box = Gtk.Box(False, 10)
 
         # Build menus
         self.build_menus()
         menubar = self.ui_manager.get_widget("/MenuBar")
-        box.pack_start(menubar, False, False, 0)
+        
+        self.instance_combo = Gtk.ComboBox()
+        render = Gtk.CellRendererText()
+        self.instance_combo.pack_start(render, True)
+        self.instance_combo.set_model(self.config.instances)
+        
+        
+        self.instance_combo.set_active(self.config.get_instance_id())
+        
+        
+        self.instance_combo.set_id_column(0)
+        self.instance_combo.add_attribute(render, "text", 1)
+        self.instance_combo.connect('changed', self.change_instance)
+
+        instance_label = Gtk.Label()
+        instance_label.set_text("Instance Name:")
+        instance_label.show()
+
+        new_instance_button = Gtk.LinkButton()
+        new_instance_button.set_label("Add/remove feed list")
+        new_instance_button.connect("activate-link", self.new_instance_button_activate)
+
+        instance_box.pack_start(instance_label, False, False, 4)
+        instance_box.pack_start(self.instance_combo, False, False, 0)
+        instance_box.pack_end(new_instance_button, False, False, 0)
 
         # Build feed table
-        self.treeview = Gtk.TreeView(model=self.feeds)
+        self.treeview = Gtk.TreeView(model=self.config.feeds)
         self.treeview.set_reorderable(True)
 
+        renderer_id = Gtk.CellRendererText()
+        renderer_id.set_property("editable", False)
+        column_id = Gtk.TreeViewColumn("Id", renderer_id, text=0)
+        column_id.set_expand(False)
+        column_id.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_id)
+        self.treeview.append_column(column_id)
+
         renderer_enable = Gtk.CellRendererToggle()
-        renderer_enable.connect("toggled", self.enable_toggled)
-        column_enable = Gtk.TreeViewColumn("Enable", renderer_enable, active=2)
+        renderer_enable.connect("toggled", self.field_toggled, 1)
+        column_enable = Gtk.TreeViewColumn("Enable", renderer_enable, active=1)
         column_enable.set_expand(False)
         self.treeview.append_column(column_enable)
 
         renderer_url = Gtk.CellRendererText()
         renderer_url.set_property("editable", True)
-        renderer_url.connect("edited", self.url_edited)
-        column_url = Gtk.TreeViewColumn("Url", renderer_url, text=0)
+        renderer_url.connect("edited", self.text_edited, 2)
+        column_url = Gtk.TreeViewColumn("Url", renderer_url, text=2)
         column_url.set_expand(True)
         self.treeview.append_column(column_url)
 
         renderer_title = Gtk.CellRendererText()
         renderer_title.set_property("editable", True)
-        renderer_title.connect("edited", self.title_edited)
-        column_title = Gtk.TreeViewColumn("Custom title", renderer_title, text=1)
+        renderer_title.connect("edited", self.text_edited, 3)
+        column_title = Gtk.TreeViewColumn("Custom title", renderer_title, text=3)
         column_title.set_expand(True)
         self.treeview.append_column(column_title)
+
+        renderer_notify = Gtk.CellRendererToggle()
+        renderer_notify.connect("toggled", self.field_toggled, 4)
+        column_notify = Gtk.TreeViewColumn("Notify", renderer_notify, active=4)
+        column_notify.set_expand(False)
+        self.treeview.append_column(column_notify)
+
+        renderer_showread = Gtk.CellRendererToggle()
+        renderer_showread.connect("toggled", self.field_toggled, 6)
+        column_showread = Gtk.TreeViewColumn("Show Read", renderer_showread, active=6)
+        column_showread.set_expand(False)
+        self.treeview.append_column(column_showread)        
+
+        renderer_interval = Gtk.CellRendererText()
+        renderer_interval.set_property("editable", True)
+        renderer_interval.connect("edited", self.interval_edited)
+        column_interval = Gtk.TreeViewColumn("Interval", renderer_interval, text=5)
+        column_interval.set_expand(False)
+        column_interval.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_interval)
+        self.treeview.append_column(column_interval)
+
+        renderer_showimage = Gtk.CellRendererToggle()
+        renderer_showimage.connect("toggled", self.field_toggled, 7)
+        column_showimage = Gtk.TreeViewColumn("Show Image", renderer_showimage, active=7)
+        column_showimage.set_expand(False)
+        column_showimage.set_visible(self.show_hidden_fields)
+        self.hidden_fields.append(column_showimage)        
+        self.treeview.append_column(column_showimage)
 
         scrolled_window = Gtk.ScrolledWindow()
         scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC,
                                    Gtk.PolicyType.AUTOMATIC)
+                
         scrolled_window.add(self.treeview)
-        box.pack_start(scrolled_window, True, True, 0)
+
 
         # Add buttons
         add_button = Gtk.Button(stock=Gtk.STOCK_ADD)
@@ -202,6 +179,12 @@ class MainWindow(Gtk.Window):
         button_box.pack_start(del_button, False, False, 0)
         button_box.pack_end(save_button, False, False, 0)
         button_box.pack_end(cancel_button, False, False, 0)
+
+
+        box.pack_start(menubar, False, False, 0)
+        box.pack_start(instance_box, False, True, 0)
+
+        box.pack_start(scrolled_window, True, True, 0)
 
         box.add(button_box)
 
@@ -239,42 +222,114 @@ class MainWindow(Gtk.Window):
         action_export_file.connect("activate", self.on_menu_export_feeds)
         action_group.add_action(action_export_file)
 
+        # Create Option menu
+        action_option_menu = Gtk.Action("OptionMenu", "Options", None, None)
+        action_group.add_action(action_option_menu)
+
+        action_toggle_hidden = Gtk.Action("ShowHideFields",
+                                        "_Toggle Hidden Fields",
+                                        "Show or Hide hidden fields",
+                                        Gtk.STOCK_FILE)
+        action_toggle_hidden.connect("activate", self.on_menu_toggle_hidden)
+        action_group.add_action(action_toggle_hidden)
+
+
         # Setup UI manager
         self.ui_manager.add_ui_from_string(UI_INFO)
         self.add_accel_group(self.ui_manager.get_accel_group())
         self.ui_manager.insert_action_group(action_group)
 
-    def url_edited(self, widget, path, text):
-        self.feeds[path][0] = text
 
-    def title_edited(self, widget, path, text):
+    def new_instance_button_activate(self, widget):
+        checking = Gtk.MessageDialog(self, 
+                                         Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                         Gtk.MessageType.QUESTION,
+                                         Gtk.ButtonsType.OK_CANCEL,
+                                         "Changes will be discarded, continue?")        
+        checking.set_title('Are you sure?')
+        response = checking.run()
+        checking.destroy()
+        if response == Gtk.ResponseType.OK:
+            dialog = Gtk.MessageDialog(self, 
+                                            Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
+                                            Gtk.MessageType.QUESTION,
+                                            Gtk.ButtonsType.OK_CANCEL,
+                                            "New Instance (List) Name")
+            dialog_box = dialog.get_content_area()
+            dialog.set_title('Add New Instance (List)')
+            entry = Gtk.Entry()
+            entry.set_size_request(100, 0)
+            dialog_box.pack_end(entry, False, False, 5)
+            dialog.show_all()
+            response = dialog.run()
+            name = entry.get_text()
+            dialog.destroy()
+            if response == Gtk.ResponseType.OK and name != '':
+                self.add_instance(name)
+
+
+    def add_instance(self, name):
+        """ Add a new instance by name """
+        index = self.config.add_instance(name)
+        self.instance_combo.set_model(self.config.instances)
+        self.instance_combo.set_active(index)
+
+
+    def change_instance(self, combo):
+        """ When a new instance is selected we need to switch the feeds and the instance gets updated also """
+        selected = combo.get_active()
+        self.config.set_instance(self.config.get_instance_name(selected))
+        self.treeview.set_model(self.config.feeds)        
+        
+
+    def text_edited(self, widget, row, text, col):
+        """ When a text box is edited we need to update the feed array. """
         if len(text) > 0:
-            self.feeds[path][1] = text
+            self.config.feeds[row][col] = text 
+            
         else:
-            self.feeds[path][1] = None
+            self.config.feeds[row][col] = None
 
-    def enable_toggled(self, widget, path):
-        self.feeds[path][2] = not self.feeds[path][2]
+
+    def field_toggled(self, widget, row, col):
+        """ Toggle the value of the passed row / col in the feed array """
+        self.config.feeds[row][col] = not self.config.feeds[row][col]
+
+
+    def interval_edited(self, widget, row, text):
+        """ When the interval is changed convert it to a number or refuse to update the field in the feed array """
+        try:
+            self.config.feeds[row][5] = int(text)        
+        except:
+            pass# Nothing to do, ignore this.
+
 
     def remove_feed(self, button):
+        """ When delete button is clicked we find the selected record and remove it from the feed array """
         selection = self.treeview.get_selection()
         result = selection.get_selected()
         if result:
             model, itr = result
         model.remove(itr)
+        
 
     def new_feed(self, button):
-        self.feeds.append(["http://", "", True])
-        self.treeview.set_cursor(len(self.feeds) - 1, self.treeview.get_column(0), True)
+        """ Adds a new row to the bottom of the array / Grid """        
+        self.config.feeds.append([ConfigFileManager.get_new_id(), True, "http://", "", True, 5, False, False])        
+        self.treeview.set_cursor(len(self.config.feeds) - 1, self.treeview.get_column(0), True)
+        self.set_size_request(-1, 150 + len(self.config.feeds) * 20 )
+        
 
     def save_clicked(self, button):
+        """ When the user clicks apply we update and save the json file to disk """
         try:
-            ConfigManager.write(self.feeds)
+            self.config.save()
+            print(self.config.get_instance())
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
                                         Gtk.ButtonsType.CLOSE,
-                                        "Failed to import OPML")
+                                        "Failed to save config file")
             dialog.format_secondary_text(str(e))
             dialog.run()
             dialog.destroy()            
@@ -316,18 +371,15 @@ class MainWindow(Gtk.Window):
         if response == Gtk.ResponseType.OK:
             try:
                 if type == "OPML":
-                    new_feeds = ConfigManager.import_opml_file(filename)
+                    new_feeds = self.config.import_opml_file(filename)
                 else:
-                    new_feeds = ConfigManager.read(filename)
-
-                for feed in new_feeds:
-                    self.feeds.append(feed)
+                    new_feeds = self.config.import_feeds(filename)
 
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.INFO,
                                         Gtk.ButtonsType.OK,
                                         "file imported")
-                dialog.format_secondary_text("Imported %d feeds" % len(new_feeds))
+                dialog.format_secondary_text("Imported %d feeds" % new_feeds)
                 dialog.run()
                 dialog.destroy()
                 
@@ -368,7 +420,8 @@ class MainWindow(Gtk.Window):
         sys.stderr.write(str(response))
         if response == Gtk.ResponseType.OK:
             try:
-                ConfigManager.write(self.feeds, filename=filename)
+                self.config.export_feeds(filename)
+                #ConfigManager.write(self.config.feeds, filename=filename)
             except Exception as ex:
                 sys.stderr.write("Unable to export file, exception: %s" % str(ex))
                 error_dialog = Gtk.MessageDialog(self, 0,
@@ -381,21 +434,25 @@ class MainWindow(Gtk.Window):
                 error_dialog.destroy()                         
 
 
+    def on_menu_toggle_hidden(self, widget):
+        self.show_hidden_fields = not self.show_hidden_fields
+        for column in self.hidden_fields:
+            column.set_visible(self.show_hidden_fields)
+
+
 if __name__ == '__main__':
-    # If three parameters are passed in then we need to bypass the GUI and update the feed.
-    if len(sys.argv) == 3:
-        current_url = sys.argv[1]
-        redirect_url = sys.argv[2]
-        try:            
-            ConfigManager.update_redirected_feed(current_url, redirect_url)
-        except Exception as e:
-            sys.stderr.write("Error updating feed\n" + e + "\n")
-        finally:
-            # No need to show the GUI, all the work has been done here.
-            exit()
-    
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', help='settings filename including path')
+    parser.add_argument('instance', help='instance name to update the redirected url')
+
+    args = parser.parse_args()    
+
+    instance_name = args.instance
+    filename = args.filename
+
     # Display the window to allow the user to manage the feeds.
-    window = MainWindow()
+    config = ConfigFileManager(filename, instance_name)
+    window = MainWindow(config)
     window.connect("delete-event", Gtk.main_quit)
     
     window.show_all()
