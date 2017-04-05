@@ -107,3 +107,11 @@ msgstr ""
 #: applet.js:395
 msgid "Restart Cinnamon"
 msgstr ""
+
+#. timer-notifications@markbokil.com->metadata.json->name
+msgid "Timer with Notifications"
+msgstr ""
+
+#. timer-notifications@markbokil.com->metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr ""
