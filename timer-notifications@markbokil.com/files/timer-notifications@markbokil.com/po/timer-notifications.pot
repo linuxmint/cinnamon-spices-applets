@@ -100,14 +100,6 @@ msgstr ""
 msgid " min. OFF"
 msgstr ""
 
-#: applet.js:346
-msgid "play "
-msgstr ""
-
-#: applet.js:353
-msgid "notify-send '"
-msgstr ""
-
 #: applet.js:393
 msgid "Edit Options"
 msgstr ""
