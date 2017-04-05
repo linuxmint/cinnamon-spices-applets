@@ -1,10 +1,8 @@
 Items on the roadmap for the Feeds applet.
-☐ Move feeds into separate json file to allow easier parsing / flexability
-☐ *Wish* Allow per feed settings.  
-    ** Show read / hide read
-    ** Turn notifications off per feed
-☐ **Big Wish** Custom per feed title.. Allow users to define what additional fields are displayed in title. 
+☐ *Wish* Custom per feed title.. Allow users to define what additional fields are displayed in title. 
 
 Archive:
  ✔ Add roadmap to keep track of tasks.
- ✔ Update interface to notify users when a feed has been forwarded to new URL
+ ✔ Update interface to notify users when a feed has been forwarded to new URL.
+ ✔ Move feeds into separate json file to allow easier parsing / flexability.
+ ✔ Allow per feed settings.

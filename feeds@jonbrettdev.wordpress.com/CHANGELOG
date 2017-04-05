@@ -1,3 +1,11 @@
+0.26
+ ===
+ - Updated to allow multiple instances without loosing feeds.
+ - Updated adding / editing feed lists to support multiple instances.
+ - *NEW FEATURE* Allow notification on a per feed basis.
+ - *NEW FEATURE* Allow show read on a per feed basis
+ - updated feed storage to use unique names to resolve some issues with renaming feeds.
+
 0.25
  ===
  - Updated interface to show when a feed has been redirected.

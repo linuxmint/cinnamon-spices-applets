@@ -323,13 +323,13 @@ class MainWindow(Gtk.Window):
     def save_clicked(self, button):
         """ When the user clicks apply we update and save the json file to disk """
         try:
-            config.save()            
+            self.config.save()
             print(self.config.get_instance())
         except Exception as e:
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
                                         Gtk.ButtonsType.CLOSE,
-                                        "Failed to import OPML")
+                                        "Failed to save config file")
             dialog.format_secondary_text(str(e))
             dialog.run()
             dialog.destroy()            
