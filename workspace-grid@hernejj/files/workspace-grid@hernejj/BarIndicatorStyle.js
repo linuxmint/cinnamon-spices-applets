@@ -99,9 +99,8 @@ BarIndicatorStyle.prototype = {
     },
     
     setReactivity: function(reactive) {
-        this.row_indicator.reactive = reactive;
         for (let i=0; i < this.button.length; ++i)
-            this.button[i].reactive = reactive;            
+            this.button[i].set_reactive(reactive);
     }, 
     
     rebuild: function() {
