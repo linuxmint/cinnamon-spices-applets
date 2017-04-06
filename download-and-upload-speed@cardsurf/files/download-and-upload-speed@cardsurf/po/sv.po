@@ -1,0 +1,362 @@
+# Swedish localisation for download-and-upload-speed@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: download-and-upload-speed@cardsurf\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-06 10:33+0200\n"
+"PO-Revision-Date: 2017-04-06 12:07+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:328
+msgid "Network interface"
+msgstr "Nätverksgränssnitt"
+
+#: applet.js:349
+msgid "Total data start"
+msgstr "Total datamängd börjar"
+
+#: applet.js:356
+msgid "Launch of applet"
+msgstr "Programstart"
+
+#: applet.js:357
+msgid "Today"
+msgstr "I dag"
+
+#: applet.js:358
+msgid "Yesterday"
+msgstr "I går"
+
+#: applet.js:359
+msgid "3 days ago"
+msgstr "3 dagar sedan"
+
+#: applet.js:360
+msgid "5 days ago"
+msgstr "5 dagar sedan"
+
+#: applet.js:361
+msgid "7 days ago"
+msgstr "7 dagar sedan"
+
+#: applet.js:362
+msgid "10 days ago"
+msgstr "10 dagar sedan"
+
+#: applet.js:363
+msgid "14 days ago"
+msgstr "14 dagar sedan"
+
+#: applet.js:364
+msgid "30 days ago"
+msgstr "30 dagar sedan"
+
+#: applet.js:365
+msgid "Custom date"
+msgstr "Anpassat datum"
+
+#: applet.js:448
+msgid "Gui"
+msgstr "GUI"
+
+#: applet.js:448
+msgid "Compact"
+msgstr "Kompakt"
+
+#: applet.js:448
+msgid "Large"
+msgstr "Stor"
+
+#: applet.js:592
+msgid "TB"
+msgstr "TB"
+
+#: applet.js:595
+msgid "GB"
+msgstr "GB"
+
+#: applet.js:598
+msgid "MB"
+msgstr "MB"
+
+#: applet.js:601
+msgid "kB"
+msgstr "kB"
+
+#: applet.js:603 applet.js:627
+msgid "B"
+msgstr "B"
+
+#: applet.js:612
+msgid "Tb"
+msgstr "Tb"
+
+#: applet.js:615
+msgid "Gb"
+msgstr "Gb"
+
+#: applet.js:618
+msgid "Mb"
+msgstr "Mb"
+
+#: applet.js:621
+msgid "kb"
+msgstr "kb"
+
+#: applet.js:623 applet.js:627
+msgid "b"
+msgstr "b"
+
+#: applet.js:757
+msgid "Failed to parse custom start date to integer"
+msgstr "Kunde inte tolka anpassat startdatum som heltal"
+
+#: appletGui.js:359
+msgid "Total download:"
+msgstr "Totalt nerladdat:"
+
+#: appletGui.js:360
+msgid "Total upload:"
+msgstr "Totalt uppladdat:"
+
+#: files.js:45
+msgid "Unable to read file content. Path to the file: "
+msgstr "Kunde inte läsa filinnehållet. Sökväg till filen: "
+
+#. download-and-upload-speed@cardsurf->metadata.json->name
+msgid "Download and upload speed"
+msgstr "Ner- och uppladdningshastighet"
+
+#. download-and-upload-speed@cardsurf->metadata.json->description
+msgid "Shows usage of a network interface"
+msgstr "Visar användningen av ett nätverksgränssnitt"
+
+#: settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr "Medelhastighet per sekund"
+
+#: settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr "Mängden överförd data"
+
+#: settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr "Värden visas i panelen"
+
+#: settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr "Enhet"
+
+#: settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr "Byte"
+
+#: settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr "Bit"
+
+#: settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr "Basdataenhet visad i panelen"
+
+#: settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr "Beräkna varje"
+
+#: settings-schema.json->update_every->tooltip
+msgid "How often to calculate download and upload speed"
+msgstr "Hur ofta ner- och uppladdningshastigheten skall beräknas"
+
+#: settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr "Typ"
+
+#: settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr "Panelikonens utseende"
+
+#: settings-schema.json->decimal_places->description
+msgid "Decimal places"
+msgstr "Decimaler"
+
+#: settings-schema.json->decimal_places->options
+msgid "Auto"
+msgstr "Auto"
+
+#: settings-schema.json->decimal_places->tooltip
+msgid "Decimal places of download and upload speed shown in the panel"
+msgstr "Antal decimaler i ner- och uppladdningshastigheten, i panelen"
+
+#: settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr "CSS-stil för paneltext"
+
+#: settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr "CSS-stil som tillämpas på text i panelen"
+
+#: settings-schema.json->gui_received_icon_filename->description
+msgid "Download icon"
+msgstr "Nerladdningsikon"
+
+#: settings-schema.json->gui_received_icon_filename->tooltip
+msgid "An icon displayed next to download speed in the panel"
+msgstr "Ikon som visas intill nerladdningshastigheten i panelen"
+
+#: settings-schema.json->gui_sent_icon_filename->description
+msgid "Upload icon"
+msgstr "Uppladdningsikon"
+
+#: settings-schema.json->gui_sent_icon_filename->tooltip
+msgid "An icon displayed next to upload speed in the panel"
+msgstr "Ikon som visas intill uppladdningshastigheten i panelen"
+
+#: settings-schema.json->hover_popup_text_css->description
+msgid "Popup text CSS"
+msgstr "CSS-stil för popup-text"
+
+#: settings-schema.json->hover_popup_text_css->tooltip
+msgid "A CSS style applied to the description text in the hover popup"
+msgstr "CSS-stil som tillämpas på texten i panelikonens hovrings-popup"
+
+#: settings-schema.json->hover_popup_numbers_css->description
+msgid "Popup numbers CSS"
+msgstr "CSS-stil för popup-siffror"
+
+#: settings-schema.json->hover_popup_numbers_css->tooltip
+msgid "A CSS style applied to numbers in the hover popup"
+msgstr "CSS-stil som tillämpas på siffror i panelikonens hovrings-popup"
+
+#: settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr "Total datamängd"
+
+#: settings-schema.json->show_hover->description
+msgid "Show total download and upload on hover"
+msgstr "Visa total mängd ner- och uppladdad data vid hovring"
+
+#: settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data downloaded and uploaded"
+msgstr "Visa hovrings-popup med total mängd ner- och uppladdad data"
+
+#: settings-schema.json->bytes_start_time->description
+msgid "Start"
+msgstr "Start"
+
+#: settings-schema.json->bytes_start_time->tooltip
+msgid "Start time to count total amount of data downloaded and uploaded"
+msgstr "Starttid för beräkning av total mängd ner- och uppladdad data"
+
+#: settings-schema.json->custom_start_date->description
+msgid "Custom date "
+msgstr "Anpassat datum"
+
+#: settings-schema.json->custom_start_date->tooltip
+msgid ""
+"A custom date in YYYY-MM-DD format used as start time. The option is used if "
+"\"Custom date\" is selected in \"Start\" combobox."
+msgstr ""
+"Anpassat datum i formatet YYYY-MM-DD, används som startid. Detta alternativ "
+"tillämpas om \"Anpassat datum\" valts i kombinationslistan under \"Start\"."
+
+#: settings-schema.json->write_every->description
+msgid "Save every"
+msgstr "Spara varje"
+
+#: settings-schema.json->write_every->tooltip
+msgid ""
+"How often to save total amount of data downloaded and uploaded to the file. "
+"0 means no saving to the file."
+msgstr ""
+"Hur ofta totala mängden ner- och uppladdad data skall sparas i filen. 0 "
+"innebär att ingen data sparas i filen."
+
+#: settings-schema.json->data_limit_start->description
+msgid "Data limits"
+msgstr "Datagränser"
+
+#: settings-schema.json->data_limit->description
+msgid "Data limit"
+msgstr "Databegränsning"
+
+#: settings-schema.json->data_limit->tooltip
+msgid "The maximum amount of data to download and upload. 0 means no limits."
+msgstr "Maxgräns för ner- och uppladdad data. 0 betyder obegränsad datamängd."
+
+#: settings-schema.json->gui_data_limit_type->description
+msgid "Show data limit usage"
+msgstr "Visa använd andel av datagräns"
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "None"
+msgstr "Ingen"
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "Circle"
+msgstr "Cirkel"
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "Text"
+msgstr "Text"
+
+#: settings-schema.json->gui_data_limit_type->tooltip
+msgid "Show the percentage of data limit used in the panel"
+msgstr "Visa använd procentandel av angiven datagräns i panelen"
+
+#: settings-schema.json->data_limit_command_enabled->description
+msgid "Invoke command when data limit exceeded"
+msgstr "Anropa kommandot när angiven datagräns uppnåtts"
+
+#: settings-schema.json->data_limit_command_enabled->tooltip
+msgid ""
+"Invoke a command when amount of data downloaded and uploaded exceeded the "
+"limit"
+msgstr ""
+"Anropa ett kommando när mängden ner- och uppladdad data uppnår angiven gräns"
+
+#: settings-schema.json->data_limit_command->description
+msgid "Command"
+msgstr "Kommando"
+
+#: settings-schema.json->data_limit_command->tooltip
+msgid "A command to invoke"
+msgstr "Kommando att anropa"
+
+#: settings-schema.json->connections_start->description
+msgid "Connections"
+msgstr "Anslutningar"
+
+#: settings-schema.json->launch_terminal->description
+msgid "List current Internet connections on left mouse click"
+msgstr "Lista aktuella internetanslutningar vid vänsterklick"
+
+#: settings-schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of current connections on a left mouse click. "
+"The next click closes the terminal."
+msgstr ""
+"Öppna ett terminalfönster med en lista över aktuella anslutningar, vid "
+"vänsterklick på panelikonen. Nästa klick stänger terminal igen."
+
+#: settings-schema.json->list_connections_command->description
+msgid "Command "
+msgstr "Kommando"
+
+#: settings-schema.json->list_connections_command->tooltip
+msgid "A command used to list current Internet connections"
+msgstr "Kommando som används för att lista nuvarande internetanslutningar"
