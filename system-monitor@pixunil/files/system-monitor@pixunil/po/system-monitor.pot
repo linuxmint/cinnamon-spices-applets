@@ -1,26 +1,25 @@
-# German translations for system-monitor@pixunil package
-# German translation for system-monitor@pixunil.
-# This file is put in the public domain.
-# pixunil <pixunil@gmx.de>, 2015.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: system-monitor@pixunil 3.10\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-28 23:24+0200\n"
-"PO-Revision-Date: 2017-03-28 23:24+0200\n"
-"Last-Translator: Jakob Stigloher <pixunil@gmx.de>\n"
-"Language-Team: German\n"
-"Language: de\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"Language: \n"
 
 #: applet.js:31
 msgid "Dependence missing"
-msgstr "Abhängigkeit nicht erfüllt"
+msgstr ""
 
 #: applet.js:31
 #, javascript-format
@@ -31,183 +30,176 @@ msgid ""
 "\tArch: libgtop\n"
 "to use the applet %s"
 msgstr ""
-"Bitte installieren Sie das GTop Paket\n"
-"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
-"\tFedora: libgtop2-devel\n"
-"\tArch: libgtop\n"
-"um das Applet %s nutzen zu können"
 
 #: applet.js:108 applet.js:202
 msgid "System Monitor"
-msgstr "Systemüberwachung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: applet.js:148
 msgid "Overview"
-msgstr "Übersicht"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->fan-enabled->description
 #. system-monitor@pixunil->settings-schema.json->fan-color-fan->description
 #: modules/fan.js:6
 msgid "Fan"
-msgstr "Lüfter"
+msgstr ""
 
 #: modules/fan.js:34
 #, javascript-format
 msgid "Fan rotation was over %s for %fsec"
-msgstr "Lüfter drehten sich über %s für %fsec"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/fan.js:105
 msgid "Fan History"
-msgstr "Lüfterchronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->disk-enabled->description
 #: modules/disk.js:11
 msgid "Disk"
-msgstr "Festplatte"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/disk.js:177
 msgid "Disk History"
-msgstr "Festplattenchronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-enabled->description
 #: modules/network.js:8
 msgid "Network"
-msgstr "Netzwerk"
+msgstr ""
 
 #: modules/network.js:92
 msgid "Total"
-msgstr "Gesamt"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/network.js:151
 msgid "Network History"
-msgstr "Netzwerkchronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->loadAvg-enabled->description
 #: modules/loadAvg.js:5
 msgid "Load averages"
-msgstr "Durchschnittslast"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-warning->description
 #. system-monitor@pixunil->settings-schema.json->fan-warning->description
 #. system-monitor@pixunil->settings-schema.json->cpu-warning->description
 #: modules/__init__.js:425
 msgid "Warning"
-msgstr "Warnung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-color-
 #. thermal->description
 #. system-monitor@pixunil->settings-schema.json->thermal-enabled->description
 #: modules/thermal.js:6
 msgid "Thermal"
-msgstr "Temperatur"
+msgstr ""
 
 #: modules/thermal.js:45
 #, javascript-format
 msgid "Temperature was over %s for %fsec"
-msgstr "Temperatur war über %s für %fsec"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/thermal.js:119
 msgid "Thermal History"
-msgstr "Temperaturchronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-enabled->description
 #: modules/cpu.js:6
 msgid "CPU"
-msgstr "CPU"
+msgstr ""
 
 #: modules/cpu.js:97
 #, javascript-format
 msgid "CPU core %d usage was over %s for %fsec"
-msgstr "Auslastung von CPU Kern %d war über %s für %fsec"
+msgstr ""
 
 #: modules/cpu.js:102
 #, javascript-format
 msgid "CPU usage was over %s for %fsec"
-msgstr "CPU Auslastung war über %s für %fsec"
+msgstr ""
 
 #: modules/cpu.js:135
 msgid "User"
-msgstr "Benutzer"
+msgstr ""
 
 #: modules/cpu.js:136
 msgid "System"
-msgstr "System"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/cpu.js:204
 msgid "CPU History"
-msgstr "CPU-Chronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-color-swap->description
 #: modules/swap.js:6
 msgid "Swap"
-msgstr "Swap"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-color-mem->description
 #: modules/mem.js:6
 msgid "Memory"
-msgstr "Arbeitsspeicher"
+msgstr ""
 
 #: modules/mem.js:63
 msgid "cached"
-msgstr "gecached"
+msgstr ""
 
 #: modules/mem.js:64
 msgid "buffered"
-msgstr "gepuffert"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/mem.js:149
 msgid "Memory and Swap History"
-msgstr "Arbeitsspeicher- und Auslagerungschronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-panel-mode->description
 msgid "Mode of graph"
-msgstr "Diagrammtyp"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-panel-mode->options
 msgid "only Memory"
-msgstr "nur Arbeitsspeicher"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-panel-mode->options
 #. system-monitor@pixunil->settings-schema.json->mem-enabled->description
 msgid "Memory and Swap"
-msgstr "Arbeitsspeicher und Auslagerung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-steps->description
 msgid "Number of history steps"
-msgstr "Anzahl der Rückschritte für Chroniken"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-steps->tooltip
 msgid "How many steps will be saved for history graphs"
-msgstr "Wie viele Schritte für die Chroniken gespeichert werden"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-header->description
 msgid "Graphs"
-msgstr "Diagramme"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->disk-color-write->description
 msgid "Write"
-msgstr "Schreiben"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->help->description
 msgid "Read Readme"
-msgstr "»Readme« lesen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->help->tooltip
 msgid "Get useful information about the settings and the applet"
 msgstr ""
-"Nützliche Informationen über das Applet und die Einstellungen lesen (auf "
-"Englisch)"
 
 #. system-monitor@pixunil->settings-schema.json->general-header->description
 msgid "General"
-msgstr "Allgemein"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-
 #. width->description
@@ -218,7 +210,7 @@ msgstr "Allgemein"
 #. width->description
 #. system-monitor@pixunil->settings-schema.json->fan-panel-width->description
 msgid "Width of graph"
-msgstr "Diagrammbreite"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-width->units
 #. system-monitor@pixunil->settings-schema.json->disk-panel-width->units
@@ -228,16 +220,16 @@ msgstr "Diagrammbreite"
 #. system-monitor@pixunil->settings-schema.json->network-panel-width->units
 #. system-monitor@pixunil->settings-schema.json->fan-panel-width->units
 msgid "px"
-msgstr "px"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-
 #. value->description
 msgid "Trigger value"
-msgstr "kritische Auslastung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-value->units
 msgid "%"
-msgstr "%"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-appearance->options
 #. system-monitor@pixunil->settings-schema.json->thermal-appearance->options
@@ -247,7 +239,7 @@ msgstr "%"
 #. system-monitor@pixunil->settings-schema.json->disk-appearance->options
 #. system-monitor@pixunil->settings-schema.json->mem-appearance->options
 msgid "Line"
-msgstr "Linie"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-appearance->options
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
@@ -259,7 +251,7 @@ msgstr "Linie"
 #. system-monitor@pixunil->settings-schema.json->disk-appearance->options
 #. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "Bar"
-msgstr "Säulen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-appearance->options
 #. system-monitor@pixunil->settings-schema.json->thermal-appearance->options
@@ -268,7 +260,7 @@ msgstr "Säulen"
 #. system-monitor@pixunil->settings-schema.json->disk-appearance->options
 #. system-monitor@pixunil->settings-schema.json->mem-appearance->options
 msgid "Area"
-msgstr "Fläche"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-
 #. appearance->description
@@ -279,28 +271,28 @@ msgstr "Fläche"
 #. system-monitor@pixunil->settings-schema.json->disk-appearance->description
 #. system-monitor@pixunil->settings-schema.json->mem-appearance->description
 msgid "Appearance of history graphs"
-msgstr "Aussehen der Chroniken"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-connection->options
 msgid "Curve"
-msgstr "Kurve"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-connection->options
 msgid "Straight"
-msgstr "Gerade"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-connection->description
 msgid "Connection type for History graphs"
-msgstr "Verbundtyp für Chroniken"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-warning-
 #. value->description
 msgid "Trigger temperature"
-msgstr "kritische Temperatur"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->disk-color-read->description
 msgid "Read"
-msgstr "Lesen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-panel-
 #. label->description
@@ -313,7 +305,7 @@ msgstr "Lesen"
 #. system-monitor@pixunil->settings-schema.json->disk-panel-label->description
 #. system-monitor@pixunil->settings-schema.json->mem-panel-label->description
 msgid "Label in the panel"
-msgstr "Text in der Leiste"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-panel-label->tooltip
 msgid ""
@@ -321,13 +313,10 @@ msgid ""
 " %up \t up usage \n"
 " %down \t down usage"
 msgstr ""
-"Platzhalter: \n"
-" %up \t Senden \n"
-" %down \t Empfangen"
 
 #. system-monitor@pixunil->settings-schema.json->show-icon->description
 msgid "Show icon"
-msgstr "zeige Symbol"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->loadAvg-panel-label->tooltip
 msgid ""
@@ -336,43 +325,39 @@ msgid ""
 " %load1 \t load average for the last 5 minutes \n"
 " %load2 \t load average for the last 15 minutes"
 msgstr ""
-"Platzhalter: \n"
-" %load0 \t Durchschnittslast der letzten Minute \n"
-" %load1 \t Durchschnittslast der letzten 5 Minuten \n"
-" %load2 \t Durchschnittslast der letzten 15 Minuten"
 
 #. system-monitor@pixunil->settings-schema.json->thermal-warning-
 #. time->description
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-time->description
 #. system-monitor@pixunil->settings-schema.json->fan-warning-time->description
 msgid "Time"
-msgstr "Zeit"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-warning-time->units
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-time->units
 #. system-monitor@pixunil->settings-schema.json->fan-warning-time->units
 msgid "intervals"
-msgstr "Intervalle"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-mode->options
 #. system-monitor@pixunil->settings-schema.json->fan-mode->options
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->options
 msgid "Average"
-msgstr "Durchschnitt"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-mode->options
 #. system-monitor@pixunil->settings-schema.json->fan-mode->options
 msgid "Minimum"
-msgstr "Minimum"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-mode->options
 #. system-monitor@pixunil->settings-schema.json->fan-mode->options
 msgid "Maximum"
-msgstr "Maximum"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-mode->description
 msgid "General temperature"
-msgstr "allgemeine Temperatur"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
 #. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->options
@@ -382,7 +367,7 @@ msgstr "allgemeine Temperatur"
 #. system-monitor@pixunil->settings-schema.json->fan-panel-graph->options
 #. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "None"
-msgstr "Nichts"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
 #. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->options
@@ -391,7 +376,7 @@ msgstr "Nichts"
 #. system-monitor@pixunil->settings-schema.json->fan-panel-graph->options
 #. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "History"
-msgstr "Chronik"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-
 #. graph->description
@@ -402,71 +387,71 @@ msgstr "Chronik"
 #. system-monitor@pixunil->settings-schema.json->fan-panel-graph->description
 #. system-monitor@pixunil->settings-schema.json->disk-panel-graph->description
 msgid "Graph in the panel"
-msgstr "Graph in der Leiste"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-color-core3->description
 msgid "CPU3"
-msgstr "CPU3"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-color-core2->description
 msgid "CPU2"
-msgstr "CPU2"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-color-core1->description
 msgid "CPU1"
-msgstr "CPU1"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-appearance->options
 msgid "Stack"
-msgstr "Stapel"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-color-core4->description
 msgid "CPU4"
-msgstr "CPU4"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-split->options
 msgid "Total usage"
-msgstr "Gesamte Auslastung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-split->options
 msgid "User and System usage"
-msgstr "Benutzer- und Systemauslastung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-split->description
 msgid "Show which information in history graphs"
-msgstr "Informationen in Chroniken"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->tooltip
 msgid "The graph shown in the menu"
-msgstr "Welches Diagramm im Menü angezeigt wird"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-type->description
 msgid "Type of graph"
-msgstr "Diagrammtyp"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "bit/s Kbit/s, Mbit/s"
-msgstr "bit/s Kbit/s, Mbit/s"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "B/s, KB/s, MB/s"
-msgstr "B/s, KB/s, MB/s"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "bit/s Kibit/s, Mibit/s"
-msgstr "bit/s Kibit/s, Mibit/s"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "B/s, KiB/s, MiB/s"
-msgstr "B/s, KiB/s, MiB/s"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->tooltip
 msgid "Unit for disk and network usage"
-msgstr "Einheit für Festplatten- und Netzwerkauslastung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->rate-unit->description
 msgid "Rates unit"
-msgstr "Einheit für Raten"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-panel-label->tooltip
 msgid ""
@@ -474,13 +459,10 @@ msgid ""
 " %value \t general temperature \n"
 " %sensor(digit) \t specific temperature of one sensor"
 msgstr ""
-"Platzhalter: \n"
-" %value \t allgemeine Temperatur \n"
-" %sensor(digit) \t Temperatur eines Sensors"
 
 #. system-monitor@pixunil->settings-schema.json->graph-size->description
 msgid "Height of graph"
-msgstr "Diagrammhöhe"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->fan-panel-label->tooltip
 msgid ""
@@ -488,9 +470,6 @@ msgid ""
 " %value \t general fan value \n"
 " %sensor(digit) \t specific rotations of one fan"
 msgstr ""
-"Platzhalter: \n"
-" %value \t allgemeine Lüfterleistung \n"
-" %sensor(digit) \t Lüfterleistung eines Lüfters"
 
 #. system-monitor@pixunil->settings-schema.json->cpu-panel-label->tooltip
 msgid ""
@@ -498,9 +477,6 @@ msgid ""
 " %core(digit) \t usage of a core \n"
 " %avg \t average usage"
 msgstr ""
-"Platzhalter: \n"
-" %core(Zahl) \t Auslastung eines CPU-Kerns\n"
-" %avg \t durchschnittliche Auslastung"
 
 #. system-monitor@pixunil->settings-schema.json->disk-panel-label->tooltip
 msgid ""
@@ -508,31 +484,26 @@ msgid ""
 " %write \t write usage \n"
 " %read \t read usage"
 msgstr ""
-"Platzhalter: \n"
-" %write \t Schreiben \n"
-" %read \t Lesen"
 
 #. system-monitor@pixunil->settings-schema.json->byte-unit->options
 msgid "B, KiB, MiB"
-msgstr "B, KiB, MiB"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->byte-unit->options
 msgid "B, KB, MB"
-msgstr "B, KB, MB"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->byte-unit->tooltip
 msgid "Unit for memory, swap, disk space and total network usage"
 msgstr ""
-"Einheit für Arbeitsspeicher- und Swap-Auslastung, Festplattenbelegung und "
-"gesamter Netzwerkverkehr"
 
 #. system-monitor@pixunil->settings-schema.json->byte-unit->description
 msgid "Bytes unit"
-msgstr "Einheit für Bytes"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->fan-mode->description
 msgid "General fan value"
-msgstr "allgemeine Lüfterleistung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->mem-panel-label->tooltip
 msgid ""
@@ -542,85 +513,79 @@ msgid ""
 " %swap#size \t swap usage in bytes \n"
 " %swap \t swap usage in percent"
 msgstr ""
-"Platzhalter: \n"
-" %mem#size \t genutzer Arbeitsspeicher in Bytes \n"
-" %mem \t genutzter Arbeitsspeicher in Prozent \n"
-" %swap#size \t genutze Auslagerung in Bytes \n"
-" %swap \t genutze Auslagerung in Prozent"
 
 #. system-monitor@pixunil->settings-schema.json->fan-warning-
 #. value->description
 msgid "Trigger rotations"
-msgstr "kritische Lüfterleistung"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->fan-warning-value->units
 msgid "RPM"
-msgstr "RPM"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-color-up->description
 msgid "Up"
-msgstr "Senden"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->interval->description
 msgid "Interval"
-msgstr "Intervall"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->interval->tooltip
 msgid "Interval in which the applet refreshes data"
-msgstr "Intervall, in dem die Daten aktualisiert werden"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->interval->units
 msgid "ms"
-msgstr "ms"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->thermal-unit->description
 msgid "Thermal unit"
-msgstr "Temperatureinheit"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-overview->options
 msgid "Arc"
-msgstr "Kreisbogen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-overview->options
 msgid "Pie"
-msgstr "Kreis"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->graph-overview->description
 msgid "Appearance of Overview graph"
-msgstr "Aussehen der Übersicht"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->network-color-
 #. down->description
 msgid "Down"
-msgstr "Empfangen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->order->options
 msgid "Write - Read / Up - Down"
-msgstr "Schreiben - Lesen / Senden - Empfangen"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->order->options
 msgid "Read - Write / Down - Up"
-msgstr "Lesen - Schreiben / Empfangen - Senden"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->order->description
 msgid "Order of Disk and Network items"
-msgstr "Reihenfolge der Festplatten- / Netzwerkinformation"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->description
 msgid "Mode"
-msgstr "Modus"
+msgstr ""
 
 #. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->options
 msgid "Cores"
-msgstr "Kerne"
+msgstr ""
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
-"Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
+"Display CPU, Memory and Swap usage, Disk and Network rates as text and "
+"graphs"
 msgstr ""
-"Zeigt CPU, Arbeitsspeicher- und Auslagerungsauslastung, Festplatten- und "
-"Netzwerkraten als Text und in Diagrammen"
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr "Systemüberwachung mit Diagrammen"
+msgstr ""
