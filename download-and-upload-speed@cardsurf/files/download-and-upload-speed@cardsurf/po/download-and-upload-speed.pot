@@ -1,0 +1,341 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: download-and-upload-speed@cardsurf\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-18 20:53+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:328
+msgid "Network interface"
+msgstr ""
+
+#: applet.js:349
+msgid "Total data start"
+msgstr ""
+
+#: applet.js:356
+msgid "Launch of applet"
+msgstr ""
+
+#: applet.js:357
+msgid "Today"
+msgstr ""
+
+#: applet.js:358
+msgid "Yesterday"
+msgstr ""
+
+#: applet.js:359
+msgid "3 days ago"
+msgstr ""
+
+#: applet.js:360
+msgid "5 days ago"
+msgstr ""
+
+#: applet.js:361
+msgid "7 days ago"
+msgstr ""
+
+#: applet.js:362
+msgid "10 days ago"
+msgstr ""
+
+#: applet.js:363
+msgid "14 days ago"
+msgstr ""
+
+#: applet.js:364
+msgid "30 days ago"
+msgstr ""
+
+#: applet.js:365
+msgid "Custom date"
+msgstr ""
+
+#: applet.js:448
+msgid "Gui"
+msgstr ""
+
+#: applet.js:448
+msgid "Compact"
+msgstr ""
+
+#: applet.js:448
+msgid "Large"
+msgstr ""
+
+#: applet.js:592
+msgid "TB"
+msgstr ""
+
+#: applet.js:595
+msgid "GB"
+msgstr ""
+
+#: applet.js:598
+msgid "MB"
+msgstr ""
+
+#: applet.js:601
+msgid "kB"
+msgstr ""
+
+#: applet.js:603 applet.js:627
+msgid "B"
+msgstr ""
+
+#: applet.js:612
+msgid "Tb"
+msgstr ""
+
+#: applet.js:615
+msgid "Gb"
+msgstr ""
+
+#: applet.js:618
+msgid "Mb"
+msgstr ""
+
+#: applet.js:621
+msgid "kb"
+msgstr ""
+
+#: applet.js:623 applet.js:627
+msgid "b"
+msgstr ""
+
+#: applet.js:757
+msgid "Failed to parse custom start date to integer"
+msgstr ""
+
+#: appletGui.js:359
+msgid "Total download:"
+msgstr ""
+
+#: appletGui.js:360
+msgid "Total upload:"
+msgstr ""
+
+#: files.js:45
+msgid "Unable to read file content. Path to the file: "
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->metadata.json->name
+msgid "Download and upload speed"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->metadata.json->description
+msgid "Shows usage of a network interface"
+msgstr ""
+
+#: settings-schema.json->configuration->description
+msgid "Configuration"
+msgstr ""
+
+#: settings-schema.json->display_mode->options
+msgid "Average speed per second"
+msgstr ""
+
+#: settings-schema.json->display_mode->options
+msgid "Amount of data transferred"
+msgstr ""
+
+#: settings-schema.json->display_mode->tooltip
+msgid "Values shown in the panel"
+msgstr ""
+
+#: settings-schema.json->unit_type->description
+msgid "Unit"
+msgstr ""
+
+#: settings-schema.json->unit_type->options
+msgid "Bytes"
+msgstr ""
+
+#: settings-schema.json->unit_type->options
+msgid "Bits"
+msgstr ""
+
+#: settings-schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
+msgstr ""
+
+#: settings-schema.json->update_every->description
+msgid "Calculate every"
+msgstr ""
+
+#: settings-schema.json->update_every->tooltip
+msgid "How often to calculate download and upload speed"
+msgstr ""
+
+#: settings-schema.json->gui_speed_type->description
+msgid "Type"
+msgstr ""
+
+#: settings-schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
+msgstr ""
+
+#: settings-schema.json->decimal_places->description
+msgid "Decimal places"
+msgstr ""
+
+#: settings-schema.json->decimal_places->tooltip
+msgid "Decimal places of download and upload speed shown in the panel"
+msgstr ""
+
+#: settings-schema.json->gui_text_css->description
+msgid "Text CSS"
+msgstr ""
+
+#: settings-schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
+msgstr ""
+
+#: settings-schema.json->gui_received_icon_filename->description
+msgid "Download icon"
+msgstr ""
+
+#: settings-schema.json->gui_received_icon_filename->tooltip
+msgid "An icon displayed next to download speed in the panel"
+msgstr ""
+
+#: settings-schema.json->gui_sent_icon_filename->description
+msgid "Upload icon"
+msgstr ""
+
+#: settings-schema.json->gui_sent_icon_filename->tooltip
+msgid "An icon displayed next to upload speed in the panel"
+msgstr ""
+
+#: settings-schema.json->hover_popup_text_css->description
+msgid "Popup text CSS"
+msgstr ""
+
+#: settings-schema.json->hover_popup_text_css->tooltip
+msgid "A CSS style applied to the description text in the hover popup"
+msgstr ""
+
+#: settings-schema.json->hover_popup_numbers_css->description
+msgid "Popup numbers CSS"
+msgstr ""
+
+#: settings-schema.json->hover_popup_numbers_css->tooltip
+msgid "A CSS style applied to numbers in the hover popup"
+msgstr ""
+
+#: settings-schema.json->total_data_start->description
+msgid "Total data"
+msgstr ""
+
+#: settings-schema.json->show_hover->description
+msgid "Show total download and upload on hover"
+msgstr ""
+
+#: settings-schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data downloaded and uploaded"
+msgstr ""
+
+#: settings-schema.json->bytes_start_time->description
+msgid "Start"
+msgstr ""
+
+#: settings-schema.json->bytes_start_time->tooltip
+msgid "Start time to count total amount of data downloaded and uploaded"
+msgstr ""
+
+#: settings-schema.json->custom_start_date->description
+msgid "Custom date "
+msgstr ""
+
+#: settings-schema.json->custom_start_date->tooltip
+msgid "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox."
+msgstr ""
+
+#: settings-schema.json->write_every->description
+msgid "Save every"
+msgstr ""
+
+#: settings-schema.json->write_every->tooltip
+msgid "How often to save total amount of data downloaded and uploaded to the file. 0 means no saving to the file."
+msgstr ""
+
+#: settings-schema.json->data_limit_start->description
+msgid "Data limits"
+msgstr ""
+
+#: settings-schema.json->data_limit->description
+msgid "Data limit"
+msgstr ""
+
+#: settings-schema.json->data_limit->tooltip
+msgid "The maximum amount of data to download and upload. 0 means no limits."
+msgstr ""
+
+#: settings-schema.json->gui_data_limit_type->description
+msgid "Show data limit usage"
+msgstr ""
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "None"
+msgstr ""
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "Circle"
+msgstr ""
+
+#: settings-schema.json->gui_data_limit_type->options
+msgid "Text"
+msgstr ""
+
+#: settings-schema.json->gui_data_limit_type->tooltip
+msgid "Show the percentage of data limit used in the panel"
+msgstr ""
+
+#: settings-schema.json->data_limit_command_enabled->description
+msgid "Invoke command when data limit exceeded"
+msgstr ""
+
+#: settings-schema.json->data_limit_command_enabled->tooltip
+msgid "Invoke a command when amount of data downloaded and uploaded exceeded the limit"
+msgstr ""
+
+#: settings-schema.json->data_limit_command->description
+msgid "Command"
+msgstr ""
+
+#: settings-schema.json->data_limit_command->tooltip
+msgid "A command to invoke"
+msgstr ""
+
+#: settings-schema.json->connections_start->description
+msgid "Connections"
+msgstr ""
+
+#: settings-schema.json->launch_terminal->description
+msgid "List current Internet connections on left mouse click"
+msgstr ""
+
+#: settings-schema.json->launch_terminal->tooltip
+msgid "Open a terminal with a list of current connections on a left mouse click. The next click closes the terminal."
+msgstr ""
+
+#: settings-schema.json->list_connections_command->description
+msgid "Command "
+msgstr ""
+
+#: settings-schema.json->list_connections_command->tooltip
+msgid "A command used to list current Internet connections"
+msgstr ""
