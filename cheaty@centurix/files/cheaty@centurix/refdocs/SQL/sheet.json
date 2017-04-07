@@ -1,0 +1,42 @@
+{
+	"name": "SQL Cheatsheet",
+	"description": "SQL Cheatsheet",
+	"author": "Chris Read",
+	"email": "centurix@gmail.com",
+	"repository": "http://fipo.co",
+	"version": "1.0",
+	"sections": {
+		"SELECT": {
+			"Basic SELECT": {
+				"description": "A simple select with a single table and predicate",
+				"code": "SELECT *\nFROM\n\t<table>\nWHERE\n\t<table>.<column> = <value>"
+			},
+			"Select with INNER JOIN": {
+				"description": "A select with a single INNER JOIN",
+				"code": "SELECT *\nFROM\n\t<table1>\n\tINNER JOIN <table2> ON\n\t\t<table1>.<column> = <table2>.<column>\nWHERE\n\t<table2>.<column> = <value>"
+			},
+			"Select with LEFT JOIN": {
+				"description": "A select with a single LEFT JOIN",
+				"code": "SELECT *\nFROM\n\t<table1>\n\tLEFT JOIN <table2> ON\n\t\t<table1>.<column> = <table2>.<column>\nWHERE\n\t<table2>.<column> = <value>"
+			}
+		},
+		"UPDATE": {
+			"Basic UPDATE": {
+				"description": "A simple UPDATE for a single row in a table",
+				"code": "UPDATE <table>\nSET <column> = <value>\nWHERE <column> = <value>"
+			}
+		},
+		"DELETE": {
+			"Basic DELETE": {
+				"description": "A simple DELETE for a single row in a table",
+				"code": "DELETE FROM <table> WHERE <column> = <value>"
+			}
+		},
+		"INSERT": {
+			"Basic INSERT": {
+				"description": "A simple INSERT for a single row into a table",
+				"code": "INSERT INTO <table> (<column>) VALUES (<value>)"
+			}
+		}
+	}
+}
