@@ -1,6 +1,6 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
-const GLib = imports.gi.GLib;
+const GLib = imports.gi.GLib;// ++ Needed for starting programs and translations
 const GTop = imports.gi.GTop;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
@@ -12,7 +12,16 @@ const Main = imports.ui.main;
 const Settings = imports.ui.settings; // Needed for settings API
 const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
-const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls
+const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls 
+
+// l10n/translation support as per NikoKrause tutorial modified as UUID already used!
+const Gettext = imports.gettext
+const UUIDl10n = "netusagemonitor@pdcurtis"
+Gettext.bindtextdomain(UUIDl10n, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUIDl10n, str);
+}
 
 // Alert response using a Modal Dialog - approach thanks to Mark Bolin 
 
@@ -31,16 +40,13 @@ AlertDialog.prototype = {
         this.contentLayout.add(label);
         this.setButtons([{
             style_class: "centered",
-            label: "Ok",
+            label: _("Ok"),
             action: Lang.bind(this, function () {
                 this.close();
             })
         }]);
     }
 }
-
-
-
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -285,7 +291,7 @@ MyApplet.prototype = {
             this.monitoredInterfaceName = null;
             let lastUsedInterface = this.monitoredIinterfaceBi;
 
-            this.set_applet_tooltip("No Interface being Monitored - right click to select");
+            this.set_applet_tooltip(_("No Interface being Monitored - right click to select"));
             if (this.useDefaultInterfaceIn) {
                 this.setMonitoredInterface(this.defaultInterfaceIn);
             }
@@ -409,10 +415,10 @@ MyApplet.prototype = {
                 b.add_actor(c);
                 this.imageWidget.set_child(b);
             } catch (e) {
-                this.textWidget.set_text(" ERROR: Please make sure vnstat and vnstati are installed and that the vnstat daemon is running! ");
+                this.textWidget.set_text(_("ERROR: Please make sure vnstat and vnstati are installed and that the vnstat daemon is running!"));
                 global.logError(e);
             }
-            this.menuitemHead0 = new PopupMenu.PopupMenuItem("NOTE: The last time the network traffic statistics were updated by vnStat is at the top right", {
+            this.menuitemHead0 = new PopupMenu.PopupMenuItem(_("NOTE: The last time the network traffic statistics were updated by vnStat is at the top right"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemHead0);
@@ -423,7 +429,7 @@ MyApplet.prototype = {
 
         // Inhibit header if no interface monitored. NOTE Separators inhibited automatically by cinnamon 2.0
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "" || this.cumulativeInterface2 != "null" && this.cumulativeInterface2 != ""  || this.cumulativeInterface3 != "null" && this.cumulativeInterface3 != "") {
-            this.menuitemHead1 = new PopupMenu.PopupMenuItem("Cumulative Data Usage Information:", {
+            this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Cumulative Data Usage Information:"), {
             reactive: false
         });
             this.menu.addMenuItem(this.menuitemHead1);
@@ -450,7 +456,7 @@ MyApplet.prototype = {
         }
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
-        this.menuitemHead2 = new PopupMenu.PopupMenuItem("Current Connection and Interface Information", {
+        this.menuitemHead2 = new PopupMenu.PopupMenuItem(_("Current Connection and Interface Information"), {
             reactive: false
         });
         this.menu.addMenuItem(this.menuitemHead2);
@@ -460,16 +466,16 @@ MyApplet.prototype = {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo);
-            this.menuitemInfo.label.text = "    " + this.monitoredInterfaceName + " - Downloaded: " + this.formatSentReceived(this.downOld) + " - Uploaded: " + this.formatSentReceived(this.upOld);
+            this.menuitemInfo.label.text = "    " + this.monitoredInterfaceName + " " + "- Downloaded:" + " " + this.formatSentReceived(this.downOld) + " " + "- Uploaded:" + " " + this.formatSentReceived(this.upOld);
         } else {
-            this.menuitemInfo = new PopupMenu.PopupMenuItem("No network monitored. Please select one right-clicking the applet.", {
+            this.menuitemInfo = new PopupMenu.PopupMenuItem(_("No network monitored. Please select one right-clicking the applet."), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo);
         }
         //	Slider only if Alerts enabled
         if (this.useTotalLimit) {
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     Note: Alerts not enabled in Settings", {
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Note: Alerts not enabled in Settings"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo2);
@@ -485,30 +491,30 @@ MyApplet.prototype = {
     updateLeftMenu: function () {
 
         if (this.useTotalLimit) {
-            this.menuitemInfo2.label.text = "    " + "Alert level (Orange): " + Math.round(this.alertPercentage) + " % of Data Limit of " + this.formatSentReceived((this.totalLimit* 1024 * 1024 )) ;
+            this.menuitemInfo2.label.text = "    " + _("Alert level (Orange):") + " " + Math.round(this.alertPercentage) + _("% of Data Limit of") + " " + this.formatSentReceived((this.totalLimit* 1024 * 1024 )) ;
         }
 
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "") {
             if (this.cumulativeOffset1 != 0) {
-                this.menuitemInfo1.label.text = "   " + this.cumulativeInterface1 + " - Cumulative Data Use " + this.cumulativeComment1 + " with offset of " + this.formatSentReceived((this.cumulativeOffset1) * 1024 * 1024) + " = " + this.formatSentReceived((this.cumulativeTotal1  - this.cumulativeOffset1) * 1024 * 1024);
+                this.menuitemInfo1.label.text = "   " + this.cumulativeInterface1 + " - " + _("Cumulative Data Use")  + " " + this.cumulativeComment1 + " " + _("with offset of") + " " + this.formatSentReceived((this.cumulativeOffset1) * 1024 * 1024) + " = " + this.formatSentReceived((this.cumulativeTotal1  - this.cumulativeOffset1) * 1024 * 1024);
             } else {
-                this.menuitemInfo1.label.text = "   " + this.cumulativeInterface1 + " - Cumulative Data Use " + this.cumulativeComment1 + " = " + this.formatSentReceived(this.cumulativeTotal1 * 1024 * 1024);
+                this.menuitemInfo1.label.text = "   " + this.cumulativeInterface1 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment1 + " = " + this.formatSentReceived(this.cumulativeTotal1 * 1024 * 1024);
             }
         } 
 
         if (this.cumulativeInterface2 != "null" && this.cumulativeInterface2 != "") {
             if (this.cumulativeOffset2 != 0) {
-                this.menuitemInfo4.label.text = "   " + this.cumulativeInterface2 + " - Cumulative Data Use " + this.cumulativeComment2+ " with offset of " + this.formatSentReceived((this.cumulativeOffset2) * 1024 * 1024 ) + " = " + this.formatSentReceived((this.cumulativeTotal2  - this.cumulativeOffset2) * 1024 * 1024);
+                this.menuitemInfo4.label.text = "   " + this.cumulativeInterface2 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment2 + " " + _("with offset of") + " " + this.formatSentReceived((this.cumulativeOffset2) * 1024 * 1024 ) + " = " + this.formatSentReceived((this.cumulativeTotal2  - this.cumulativeOffset2) * 1024 * 1024);
             } else {
-                this.menuitemInfo4.label.text = "   " + this.cumulativeInterface2 + " - Cumulative Data Use " + this.cumulativeComment2 + " = " + this.formatSentReceived(this.cumulativeTotal2 * 1024 * 1024);
+                this.menuitemInfo4.label.text = "   " + this.cumulativeInterface2 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment2 + " = " + this.formatSentReceived(this.cumulativeTotal2 * 1024 * 1024);
             }
         } 
 
         if (this.cumulativeInterface3 != "null" && this.cumulativeInterface3 != "") {
             if (this.cumulativeOffset3 != 0) {
-               this.menuitemInfo6.label.text = "   " + this.cumulativeInterface3 + " - Cumulative Data Use " + this.cumulativeComment3 + " with offset of " + this.formatSentReceived((this.cumulativeOffset3) * 1024 * 1024 ) + " = " + this.formatSentReceived((this.cumulativeTotal3  - this.cumulativeOffset3) * 1024 * 1024);
+               this.menuitemInfo6.label.text = "   " + this.cumulativeInterface3 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment3 + " " + _("with offset of") + " " + this.formatSentReceived((this.cumulativeOffset3) * 1024 * 1024 ) + " = " + this.formatSentReceived((this.cumulativeTotal3  - this.cumulativeOffset3) * 1024 * 1024);
             } else {
-                this.menuitemInfo6.label.text = "   " + this.cumulativeInterface3 + " - Cumulative Data Use " + this.cumulativeComment3 + " = " + this.formatSentReceived(this.cumulativeTotal3 * 1024 * 1024 );
+               this.menuitemInfo6.label.text = "   " + this.cumulativeInterface3 + " - " + "Cumulative Data Use " + this.cumulativeComment3 + " = " + this.formatSentReceived(this.cumulativeTotal3 * 1024 * 1024 );
             }
         } 
     },
@@ -516,7 +522,7 @@ MyApplet.prototype = {
     // Build right click context menu
     buildContextMenu: function () {
         this._applet_context_menu.removeAll();
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem("Select a network manager interface to be monitored:", {
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Select a network manager interface to be monitored:"), {
             reactive: false
         }));
 
@@ -529,7 +535,7 @@ MyApplet.prototype = {
                     if (this.monitoredInterfaceName != name && this.monitoredInterfaceName != "ppp0"  && this.monitoredInterfaceName != "bnep0" && !this.useDefaultInterfaceIn) {
                           this.setMonitoredInterface(name);
                     }
-                    displayname = displayname + " (Active)";
+                    displayname = displayname + " " + _("(Active)");
                 }
                 if (this.monitoredInterfaceName == name) {
                     displayname = "\u2714" + displayname;
@@ -542,11 +548,11 @@ MyApplet.prototype = {
             }
         }
 
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem("or Select an independent interface to be monitored:", {
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("or Select an independent interface to be monitored:"), {
             reactive: false
         }));
 
-        let displayname2 = "\t" + "ppp0   (for most USB Mobile Internet Modems)";
+        let displayname2 = "\t" + "ppp0   (" + _("for most USB Mobile Internet Modems)");
         if (this.monitoredInterfaceName == "ppp0") {
             displayname2 = "\u2714" + displayname2;
         }
@@ -558,7 +564,7 @@ MyApplet.prototype = {
 
         // New Code to handle Android Bluetooth conections which use bnep0
 
-        let displayname3 = "\t" + "bnep0  (Android Bluetooth PAN Connections)";
+        let displayname3 = "\t" + "bnep0  (" + _("for Android Bluetooth PAN Connections)");
         if (this.monitoredInterfaceName == "bnep0") {
             displayname3 = "\u2714" + displayname3;
         }
@@ -568,7 +574,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem)
 
-        let menuitem = new PopupMenu.PopupMenuItem("Check for Changes in Devices and Display Options");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.rebuildFlag = true;
         }));
@@ -576,7 +582,7 @@ MyApplet.prototype = {
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let menuitem = new PopupMenu.PopupMenuItem("Toggle Display from \u2193 and \u2191 to \u21f5");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.compactDisplay) {
                 this.compactDisplay = false;
@@ -590,7 +596,7 @@ MyApplet.prototype = {
 
         // Code to reset Cumulative Data Usage and set their comments to the current date and time
 
-        let menuitem = new PopupMenu.PopupMenuItem("Reset Cumulative Data Usage 1 (" + this.cumulativeInterface1 + ")");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT1 = 0;
@@ -600,7 +606,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("Reset Cumulative Data Usage 2 (" + this.cumulativeInterface2 + ")");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT2 = 0;
@@ -610,7 +616,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem("Reset Cumulative Data Usage 3 (" + this.cumulativeInterface3 + ")");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT3 = 0;
@@ -623,7 +629,7 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // Set up sub menu for Housekeeping and System Items
-        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem("Housekeeping and System Sub Menu");
+        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping and System Sub Menu"));
         this._applet_context_menu.addMenuItem(this.subMenu1);
 
         this.subMenuItem1 = new PopupMenu.PopupMenuItem("Open System Monitor");
@@ -632,13 +638,13 @@ MyApplet.prototype = {
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem1); // Note this has subMenu1.menu not subMenu1._applet_context_menu
 
-        this.subMenuItem2 = new PopupMenu.PopupMenuItem("View the Changelog");
+        this.subMenuItem2 = new PopupMenu.PopupMenuItem(_("View the Changelog"));
         this.subMenuItem2.connect('activate', Lang.bind(this, function (event) {
            GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem2);
  
-      this.subMenuItem3 = new PopupMenu.PopupMenuItem("View the Help File");
+      this.subMenuItem3 = new PopupMenu.PopupMenuItem(_("View the Help File"));
         this.subMenuItem3.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
         }));
@@ -647,19 +653,19 @@ MyApplet.prototype = {
         this.subMenu1.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         if (this.displayExtraHousekeeping) {
-            this.subMenuItem4 = new PopupMenu.PopupMenuItem("Open stylesheet.css  (Advanced Function)");
+            this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css  (Advanced Function)"));
             this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.cssfile);
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem4);
 
-            this.subMenuItem8 = new PopupMenu.PopupMenuItem("Open alertScript  (Advanced Function)");
+            this.subMenuItem8 = new PopupMenu.PopupMenuItem(_("Open alertScript  (Advanced Function)"));
             this.subMenuItem8.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.appletPath + '/alertScript');
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem8);
 
-            this.subMenuItem5 = new PopupMenu.PopupMenuItem("Open suspendScript  (Advanced Function)");
+            this.subMenuItem5 = new PopupMenu.PopupMenuItem(_("Open suspendScript  (Advanced Function)"));
             this.subMenuItem5.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.appletPath + '/suspendScript');
             }));
@@ -667,27 +673,29 @@ MyApplet.prototype = {
 
             this.subMenu1.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-            this.subMenuItem9 = new PopupMenu.PopupMenuItem("Test alertScript  (Advanced Test Function)");
+            this.subMenuItem9 = new PopupMenu.PopupMenuItem(_("Test alertScript  (Advanced Test Function)"));
             this.subMenuItem9.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async('sh ' + this.appletPath + '/alertScript');
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem9);
 
-            this.subMenuItem6 = new PopupMenu.PopupMenuItem("Test suspendScript  (Advanced Test Function)");
+            this.subMenuItem6 = new PopupMenu.PopupMenuItem(_("Test suspendScript  (Advanced Test Function)"));
             this.subMenuItem6.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem6);
 
-            this.subMenuItem7 = new PopupMenu.PopupMenuItem("Test Crisis Management Function (Advanced Test Function)");
+            this.subMenuItem7 = new PopupMenu.PopupMenuItem(_("Test Crisis Management Function (Advanced Test Function)"));
             this.subMenuItem7.connect('activate', Lang.bind(this, function (event) {
                 this.crisis();
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem7);
          }
 
+//      Need to add menu items for About... and Remove to complete harmonisation
+
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        let menuitem = new PopupMenu.PopupMenuItem("Configure");
+        let menuitem = new PopupMenu.PopupMenuItem(_("Configure"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
         }));
@@ -729,7 +737,7 @@ MyApplet.prototype = {
     },
 
      delayedNetworkingDisable: function (delay) {
-            GLib.spawn_command_line_async('zenity --warning --text="THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll network connections Managed by the Network Manager will be Disabled\nin '+delay+' seconds\n\nYou can click The Applet (NOT this OK button) to abort disabling the network" --timeout='+delay);
+            GLib.spawn_command_line_async('zenity --warning --text="THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll network connections Managed by the Network Manager will be Disabled shortly\n\nYou can click The Applet (NOT this OK button) to abort disabling the network" --timeout='+ delay);
             this.playAlert();
             this.abortFlag = false;
             Mainloop.timeout_add_seconds(delay, Lang.bind(this, this.networkingDisable));
@@ -739,10 +747,10 @@ MyApplet.prototype = {
      networkingDisable: function () {
           if(!this.abortFlag) {
                this._client.networking_enabled = false; // Call to NMClient
-               alertModalNetworkingDisabled = new AlertDialog("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll Network connections managed by the Network Manager have been Disabled \n\nYou will need to use the Network Manager Applet to Re-enable them\nwhen the data usage problem has been resolved \n\n Some connections using ppp0 may not have been disabled\nor may need to be restarted manually");
+               alertModalNetworkingDisabled = new AlertDialog_(("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll Network connections managed by the Network Manager have been Disabled\n\nYou will need to use the Network Manager Applet to Re-enable them\nwhen the data usage problem has been resolved\n\n Some connections using ppp0 may not have been disabled or may need to be restarted manually"));
               alertModalNetworkingDisabled.open();
           } else {
-                GLib.spawn_command_line_async('zenity --info --text="You have aborted network disconnection despite the data usage limit being exceeded" --timeout=30');    
+                GLib.spawn_command_line_async('zenity --info --text=_("You have aborted network disconnection despite the data usage limit being exceeded") --timeout=30');    
           }
       },
 
@@ -753,10 +761,10 @@ MyApplet.prototype = {
         if (this.crisisManagement == "notify") {
             // built in notify does not seem to work so use command line call
             // this.notify("The Limit has been exceeded", "Reset or turn off networking");
-            GLib.spawn_command_line_async('notify-send "Current Network Usage Limit Exceeded" "You need to change the Data Limit for the current connection\n    Right Click -> Settings and adjust the Spin Wheel \n\n or disconnect using the Network Manager Applet" --urgency=critical');
+            GLib.spawn_command_line_async('notify-send _("Current Network Usage Limit Exceeded" "You need to change the Data Limit for the current connection\n    Right Click -> Settings and adjust the Spin Wheel \n\n or disconnect using the Network Manager Applet") --urgency=critical');
 
         } else if (this.crisisManagement == "alertmodal") {
-            alertModalDataWarning = new AlertDialog("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\n Either set a new limit using right click -> Settings \n\nor disconnect using the Network Manager Applet");
+            alertModalDataWarning = new AlertDialog(_("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\n Either set a new limit using right click -> Settings \n\nor disconnect using the Network Manager Applet"));
             alertModalDataWarning.open();
 
         } else if (this.crisisManagement == "alertscript") {
@@ -769,7 +777,7 @@ MyApplet.prototype = {
               this.delayedNetworkingDisable(this.disconnectDelay);
 
         } else {
-            GLib.spawn_command_line_async('notify-send "Current Network Usage Limit exceeded"  "You need to change the Data Limit for the current connection\n    Right Click -> Settings and adjust the Spin Wheel \n\n or disconnect using the Network Manager Applet" ');
+            GLib.spawn_command_line_async('notify-send _("Current Network Usage Limit exceeded"  "You need to change the Data Limit for the current connection\n    Right Click -> Settings and adjust the Spin Wheel \n\n or disconnect using the Network Manager Applet") ');
         }
     },
 
@@ -828,10 +836,10 @@ MyApplet.prototype = {
 
         // Now set up tooltip every cycle
         if (this.monitoredInterfaceName != null) {
-            this.set_applet_tooltip("Interface: " + this.monitoredInterfaceName + " - Downloaded: " + this.formatSentReceived(this.downOld) + " - Uploaded: " + this.formatSentReceived(this.upOld));
+            this.set_applet_tooltip(_("Interface:") + " " + this.monitoredInterfaceName + " - " + _("Downloaded:") + " " + this.formatSentReceived(this.downOld) + " - " + _("Uploaded:")  + " " + this.formatSentReceived(this.upOld));
         }
         // Update selected items in left click menu every cycle
-        this.menuitemInfo.label.text = "    " + this.monitoredInterfaceName + " - Downloaded: " + this.formatSentReceived(this.downOld) + " - Uploaded: " + this.formatSentReceived(this.upOld);
+        this.menuitemInfo.label.text = "    " + this.monitoredInterfaceName + " - " + _("Downloaded:") + " " + this.formatSentReceived(this.downOld) + " - " + _("Uploaded:") + " " + this.formatSentReceived(this.upOld);
 
         //  rebuild Right Click menu but only when required and after changes flagged as it is a slow activity
         if (this.rebuildFlag) {
@@ -949,7 +957,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version v30_3.0.7
+Version 3.1.0
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1083,6 +1091,17 @@ Conclusion - change to a drop down selection of options, initially the three cur
           Removed a number of commented out blocks to do with cumulative totals and formatting.
 3.0.6     Choice of units for limits and offsets to be Mbytes or Gbytes by drop down widget in settings (configuration) window
           Maximum Limits and Offsets set to 200000 Mbytes/Gbytes as appropriate
-3.0.7     Change from call to firefox to opening README.md to on Context submenu.
-          Delete helpfile.txt from applet folder and Update changelog
+
+Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
+
+3.0.7     Change from call to firefox to opening README.md on Context submenu.
+          Delete helpfile.txt from applet folder and update changelog.txt
+3.1.0     Version numbering harmonised with other Cinnamon applets and added to metadata.json so it can show in 'About...'
+          icon.png copied back into applet folder so it can show in 'About...'
+          Add translation support to applet.js
+          Identify strings for translation and remove leading and trailing spaces and replace with separate spaces where required.
+          Add po folder to applet
+          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Version and changes information update in applet.js and changelog.txt
+          Update README.md (2x) for contributions
 */

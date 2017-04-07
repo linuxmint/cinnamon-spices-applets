@@ -1,9 +1,9 @@
-{
-    "last-edited": "1395244573", 
+{ 
     "max-instances": "1", 
-    "dangerous": true, 
+    "dangerous": false, 
     "uuid": "netusagemonitor@pdcurtis", 
     "name": "Network Data Usage Monitor", 
-    "description": "A Comprehensive Data Usage Monitor with alerts and cumulative data functions for Cinnamon"
+    "description": "A Comprehensive Data Usage Monitor with alerts and cumulative data functions for Cinnamon",
+    "version": "3.1.0"
 }
 
