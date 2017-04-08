@@ -2,7 +2,6 @@
     "website":       "https://github.com/Feuerfuchs/Collapsible-Systray-Cinnamon-Applet",
     "description":   "A replacement for the abandoned System Tray Collapsible Cinnamon applet",
     "max-instances": 1,
-    "dangerous":     false,
     "uuid":          "collapsible-systray@feuerfuchs.eu",
     "version":       "1.6",
     "last-edited":   "1475854288",
