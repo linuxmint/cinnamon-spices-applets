@@ -2,7 +2,6 @@
     "description": "Various shortcuts to handle desktop actions.",
     "max-instances": "-1",
     "multiversion": true,
-    "dangerous": false,
     "uuid": "0dyseus@DesktopHandler",
     "version": "1.06",
     "last-edited": "1473874426",
