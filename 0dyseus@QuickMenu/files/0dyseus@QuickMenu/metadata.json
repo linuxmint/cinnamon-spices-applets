@@ -1,7 +1,6 @@
 {
     "uuid": "0dyseus@QuickMenu",
     "max-instances": "-1",
-    "dangerous": true,
     "name": "Quick Menu",
     "version": "1.06",
     "multiversion": true,
