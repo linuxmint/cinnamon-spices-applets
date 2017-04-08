@@ -1,6 +1,5 @@
 {
     "uuid": "windowTitle2@hanspr",
-    "dangerous": false,
     "description": "Shows the title of the current window in a applet.",
     "name": "Window Title Applet 2",
     "last-edited": "1340546649",
