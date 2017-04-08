@@ -1,7 +1,6 @@
 {
     "uuid": "0dyseus@window-list-fork",
     "max-instances": -1,
-    "dangerous": false,
     "description": "Fork of the main Cinnamon Window list applet.",
     "multiversion": true,
     "version": "1.07",
