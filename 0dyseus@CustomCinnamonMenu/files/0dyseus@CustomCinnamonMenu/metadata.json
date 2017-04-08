@@ -1,7 +1,6 @@
 {
     "uuid": "0dyseus@CustomCinnamonMenu",
     "max-instances": -1,
-    "dangerous": false,
     "multiversion": true,
     "description": "Custom version of the default Cinnamon Menu applet, but infinitely more customizable.",
     "version": "1.20",
