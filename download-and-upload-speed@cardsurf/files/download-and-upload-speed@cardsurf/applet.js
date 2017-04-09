@@ -5,6 +5,7 @@ const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
@@ -18,6 +19,13 @@ const Dates = AppletDirectory.dates;
 
 
 
+// l10n/translation support
+const UUID = "download-and-upload-speed@cardsurf";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {

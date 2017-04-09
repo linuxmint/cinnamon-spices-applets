@@ -14,6 +14,16 @@ const CssStylization = AppletDirectory.cssStylization;
 
 
 const Cairo = imports.cairo;
+const Gettext = imports.gettext;
+
+
+// l10n/translation support
+const UUID = "download-and-upload-speed@cardsurf";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+};
 
 function IconLabel() {
 	this._init();
