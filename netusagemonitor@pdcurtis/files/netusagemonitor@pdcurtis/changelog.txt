@@ -1,4 +1,4 @@
-Version 3.1.0
+Version 3.1.1
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -142,7 +142,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Add translation support to applet.js
           Identify strings for translation and remove leading and trailing spaces and replace with separate spaces where required.
           Add po folder to applet
-          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Create netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
           Version and changes information update in applet.js and changelog.txt
-          Update README.md (2x) for contributions
-
+          Update README.md (2x) for contributions.
+3.1.1     Additional PopupMenu.PopupMenuSection added as per an easy and elegant suggestion from @collinss and @Odeseus so 'standard' context menu items are retained when the menu is refreshed.
+          Update netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
+          Version and changes information update in applet.js and changelog.txt
+          Update README.md (2x) for contributions from @collinss and @Odeseus.

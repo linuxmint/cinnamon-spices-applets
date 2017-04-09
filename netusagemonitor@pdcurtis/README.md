@@ -80,7 +80,9 @@ The applet is based on a well tried core from the netspeed applet and has been t
 
 The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I am unable to take responsibility for the accuracy of translations!
 
-Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+
+Thanks are given for the very useful contributions from @collinss and @Odeseus to helping harmonise the menus with other applets.
 
 ## Manual Installation:
 

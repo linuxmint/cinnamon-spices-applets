@@ -300,6 +300,8 @@ MyApplet.prototype = {
             }
             this.rebuildFlag = true;
             this.firstTimeFlag  = true;
+//            this.firstTimeFlag  = false;
+
             this.on_settings_changed();
             this.update();
         } catch (e) {
@@ -521,8 +523,45 @@ MyApplet.prototype = {
 
     // Build right click context menu
     buildContextMenu: function () {
-        this._applet_context_menu.removeAll();
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Select a network manager interface to be monitored:"), {
+      // No longer needed
+      // this._applet_context_menu.removeAll();
+
+/*
+The code following allows me to retain the 'standard' additions of 'About...' 'Configure...' and 'Remove' when rebuilding the Context menu.
+
+The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odeseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. The following code adds all the menu items to the applet context menu without touching the default items.
+
+    // Build right click context menu
+    buildContextMenu: function() {
+        // Not needed.
+        // this._applet_context_menu.removeAll();
+
+        if (this.myMenuSection)
+            this.myMenuSection.destroy();
+
+        this.myMenuSection = new PopupMenu.PopupMenuSection();
+        this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
+
+        // Rest of buildContextMenu function.
+        // Items added to this.myMenuSection insted of this._applet_context_menu.
+    },
+
+Note Odesius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items. Maybe @collinss could shed some light on why this happened?
+*/
+
+        if (this.myMenuSection)
+            this.myMenuSection.destroy();
+
+        this.myMenuSection = new PopupMenu.PopupMenuSection();
+        this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
+
+
+
+
+
+// Old code continues
+
+        this.myMenuSection.addMenuItem(new PopupMenu.PopupMenuItem(_("Select a network manager interface to be monitored:"), {
             reactive: false
         }));
 
@@ -544,15 +583,15 @@ MyApplet.prototype = {
                 menuitem.connect('activate', Lang.bind(this, function () {
                     this.setMonitoredInterface(name);
                 }));
-                this._applet_context_menu.addMenuItem(menuitem);
+                this.myMenuSection.addMenuItem(menuitem);
+//                this._applet_context_menu.addMenuItem(menuitem);
             }
-        }
-
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupMenuItem(_("or Select an independent interface to be monitored:"), {
+        } 
+        this.myMenuSection.addMenuItem(new PopupMenu.PopupMenuItem(_("or Select an independent interface to be monitored:"), {
             reactive: false
         }));
 
-        let displayname2 = "\t" + "ppp0   (" + _("for most USB Mobile Internet Modems)");
+       let displayname2 = "\t" + "ppp0   (" + _("for most USB Mobile Internet Modems)");
         if (this.monitoredInterfaceName == "ppp0") {
             displayname2 = "\u2714" + displayname2;
         }
@@ -560,7 +599,7 @@ MyApplet.prototype = {
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("ppp0");
         }));
-        this._applet_context_menu.addMenuItem(menuitem)
+        this.myMenuSection.addMenuItem(menuitem)
 
         // New Code to handle Android Bluetooth conections which use bnep0
 
@@ -572,15 +611,15 @@ MyApplet.prototype = {
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("bnep0");
         }));
-        this._applet_context_menu.addMenuItem(menuitem)
+        this.myMenuSection.addMenuItem(menuitem)
 
         let menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.rebuildFlag = true;
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        this.myMenuSection.addMenuItem(menuitem);
 
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.myMenuSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         let menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -592,7 +631,7 @@ MyApplet.prototype = {
                 this.appletWidth = (this.appletWidthSetting / 2) + 11;
             }
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        this.myMenuSection.addMenuItem(menuitem);
 
         // Code to reset Cumulative Data Usage and set their comments to the current date and time
 
@@ -604,7 +643,7 @@ MyApplet.prototype = {
         this.cumulativeComment1 = "from " + d.toLocaleString();
         this.cumulativeOffset1 = 0;
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        this.myMenuSection.addMenuItem(menuitem);
 
         let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -614,7 +653,7 @@ MyApplet.prototype = {
         this.cumulativeComment2 = "from " + d.toLocaleString();
         this.cumulativeOffset2 = 0;
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        this.myMenuSection.addMenuItem(menuitem);
 
         let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -624,13 +663,13 @@ MyApplet.prototype = {
         this.cumulativeComment3 = "from " + d.toLocaleString();
         this.cumulativeOffset3 = 0;
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        this.myMenuSection.addMenuItem(menuitem);
 
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        this.myMenuSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // Set up sub menu for Housekeeping and System Items
         this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping and System Sub Menu"));
-        this._applet_context_menu.addMenuItem(this.subMenu1);
+        this.myMenuSection.addMenuItem(this.subMenu1);
 
         this.subMenuItem1 = new PopupMenu.PopupMenuItem("Open System Monitor");
         this.subMenuItem1.connect('activate', Lang.bind(this, function (event) {
@@ -643,7 +682,7 @@ MyApplet.prototype = {
            GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem2);
- 
+
       this.subMenuItem3 = new PopupMenu.PopupMenuItem(_("View the Help File"));
         this.subMenuItem3.connect('activate', Lang.bind(this, function (event) {
                 GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
@@ -651,7 +690,7 @@ MyApplet.prototype = {
         this.subMenu1.menu.addMenuItem(this.subMenuItem3);
 
         this.subMenu1.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
+ 
         if (this.displayExtraHousekeeping) {
             this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css  (Advanced Function)"));
             this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
@@ -691,16 +730,17 @@ MyApplet.prototype = {
             }));
             this.subMenu1.menu.addMenuItem(this.subMenuItem7);
          }
+    },
+/*
+//      Following no longer needed as it is provided in default context menu items 
 
-//      Need to add menu items for About... and Remove to complete harmonisation
-
-        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+//        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         let menuitem = new PopupMenu.PopupMenuItem(_("Configure"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
-    },
+        this.myMenuSection.addMenuItem(menuitem);
+*/
 
     setMonitoredInterface: function (name) {
         this.monitoredInterfaceName = name;
@@ -846,9 +886,10 @@ MyApplet.prototype = {
             this.rebuildFlag = false;
             this.buildContextMenu();
         }
-        // Fix for Cinnamon 2.0 to remove Context Menu Items by running build context menu again next loop - note delay needed
+        // Fix for Cinnamon 2.0 to remove Context Menu Items by running build context menu again next loop - note delay needed 
+        // No longer required thanks to alternative solution thanks to @Odeseus
         if (this.firstTimeFlag) {
-            this.rebuildFlag = true;
+           this.rebuildFlag = true;
             this.firstTimeFlag = false;
         }
 
@@ -957,7 +998,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version 3.1.0
+Version 3.1.1
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1101,7 +1142,11 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Add translation support to applet.js
           Identify strings for translation and remove leading and trailing spaces and replace with separate spaces where required.
           Add po folder to applet
-          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Create netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
           Version and changes information update in applet.js and changelog.txt
-          Update README.md (2x) for contributions
+          Update README.md (2x) for contributions.
+3.1.1     Additional PopupMenu.PopupMenuSection added as per an easy and elegant suggestion from @collinss and @Odeseus so 'standard' context menu items are retained when the menu is refreshed.
+          Update netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
+          Version and changes information update in applet.js and changelog.txt
+          Update README.md (2x) for contributions from @collinss and @Odeseus.
 */
