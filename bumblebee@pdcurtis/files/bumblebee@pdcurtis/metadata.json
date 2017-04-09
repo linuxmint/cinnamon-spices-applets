@@ -1,6 +1,5 @@
 {
-    "max-instances": "1", 
-    "dangerous": false, 
+    "max-instances": "1",  
     "description": "Displays Status of Bumblebee and nVidia GPU Temperature", 
     "name": "Bumblebee and nVidia Display", 
     "uuid": "bumblebee@pdcurtis"
