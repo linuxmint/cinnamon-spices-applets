@@ -27,8 +27,18 @@ const AppListGridButton = AppletDir.buttons.AppListGridButton;
 const GroupButton = AppletDir.buttons.GroupButton;
 const Fuse = AppletDir.fuse.Fuse;
 
-const Gettext = imports.gettext.domain('Cinnamenu@json');
-const _ = Gettext.gettext;
+// l10n
+const Gettext = imports.gettext;
+const UUID = 'Cinnamenu@json';
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+
+function _(str) {
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
+  }
+  return Gettext.dgettext(UUID, str);
+}
 
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 

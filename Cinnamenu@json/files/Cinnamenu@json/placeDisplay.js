@@ -11,8 +11,18 @@ const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Main = imports.ui.main;
 
-const Gettext = imports.gettext.domain('cinnamenu');
-const _ = Gettext.gettext;
+// l10n
+const Gettext = imports.gettext;
+const UUID = 'Cinnamenu@json';
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+
+function _(str) {
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
+  }
+  return Gettext.dgettext(UUID, str);
+}
 
 function PlaceInfo() {
   this._init.apply(this, arguments);

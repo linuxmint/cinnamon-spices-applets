@@ -13,6 +13,19 @@ const Mainloop = imports.mainloop;
 //const DND = imports.ui.dnd;
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
+// l10n
+const Gettext = imports.gettext;
+const UUID = 'Cinnamenu@json';
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+
+function _(str) {
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
+  }
+  return Gettext.dgettext(UUID, str);
+}
+
 const Chromium = AppletDir.webChromium;
 const Firefox = AppletDir.webFirefox;
 const GoogleChrome = AppletDir.webGoogleChrome;
