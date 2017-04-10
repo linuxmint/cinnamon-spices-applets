@@ -13,6 +13,18 @@ const Mainloop = imports.mainloop;
 //const DND = imports.ui.dnd;
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
+// l10n
+const Gettext = imports.gettext;
+const UUID = "Cinnamenu@json";
+
+function _(str) {
+    let cinnamonTranslation = Gettext.gettext(str);
+    if(cinnamonTranslation != str) {
+        return cinnamonTranslation;
+    }
+    return Gettext.dgettext(UUID, str);
+}
+
 const Chromium = AppletDir.webChromium;
 const Firefox = AppletDir.webFirefox;
 const GoogleChrome = AppletDir.webGoogleChrome;
@@ -252,7 +264,7 @@ ApplicationContextMenuItem.prototype = {
         this._appButton._parent.menuIsOpen = false;
         break;
       case 'uninstall':
-        Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application') 
+        Util.spawnCommandLine('gksu -m \'' + _("Please provide your password to uninstall this application") 
           + '\' /usr/bin/cinnamon-remove-application \'' + this._appButton.app.get_app_info().get_filename() + '\'');
         this._appButton._parent.menu.close();
         break;
@@ -592,24 +604,24 @@ AppListGridButton.prototype = {
       this._parent.menuIsOpen = this.appIndex;
 
       let menuItem;
-      menuItem = new ApplicationContextMenuItem(this, _('Add to panel'), 'add_to_panel', 'list-add');
+      menuItem = new ApplicationContextMenuItem(this, _("Add to panel"), 'add_to_panel', 'list-add');
       this.menu.addMenuItem(menuItem);
       if (USER_DESKTOP_PATH) {
-        menuItem = new ApplicationContextMenuItem(this, _('Add to desktop'), 'add_to_desktop', 'computer');
+        menuItem = new ApplicationContextMenuItem(this, _("Add to desktop"), 'add_to_desktop', 'computer');
         this.menu.addMenuItem(menuItem);
       }
       if (this._parent._applet.appFavorites.isFavorite(this.app.get_id())) {
-        menuItem = new ApplicationContextMenuItem(this, _('Remove from favorites'), 'remove_from_favorites',
+        menuItem = new ApplicationContextMenuItem(this, _("Remove from favorites"), 'remove_from_favorites',
           'starred');
         this.menu.addMenuItem(menuItem);
       } else {
-        menuItem = new ApplicationContextMenuItem(this, _('Add to favorites'), 'add_to_favorites', 'non-starred');
+        menuItem = new ApplicationContextMenuItem(this, _("Add to favorites"), 'add_to_favorites', 'non-starred');
         this.menu.addMenuItem(menuItem);
       }
-      menuItem = new ApplicationContextMenuItem(this, _('Uninstall'), 'uninstall', 'edit-delete');
+      menuItem = new ApplicationContextMenuItem(this, _("Uninstall"), 'uninstall', 'edit-delete');
       this.menu.addMenuItem(menuItem);
       if (this._parent._isBumblebeeInstalled) {
-        menuItem = new ApplicationContextMenuItem(this, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu');
+        menuItem = new ApplicationContextMenuItem(this, _("Run with NVIDIA GPU"), 'run_with_nvidia_gpu', 'cpu');
         this.menu.addMenuItem(menuItem);
       }
       this.actor.add_style_class_name('menu-application-button-selected');

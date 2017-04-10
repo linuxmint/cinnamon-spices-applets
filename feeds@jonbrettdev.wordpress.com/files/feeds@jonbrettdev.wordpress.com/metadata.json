@@ -1,9 +1,8 @@
 {
     "description": "Displays RSS news feeds", 
     "url": "jonbrettdev.wordpress.com", 
-    "dangerous": false, 
     "name": "Feeds Reader", 
-    "max-instances": "1", 
+    "max-instances": "10", 
     "original-authors": [
         "Jonathan Brett <jonbrett.dev@gmail.com>", 
         "Niklas Meinzer <lamouletrescool@gmail.com>", 
@@ -12,6 +11,6 @@
         "mockturtl <mockturtl@users.noreply.github.com>", 
         "Jason Jackson <jake1164@hotmail.com>"
     ], 
-    "version": 0.25, 
+    "version": 0.26, 
     "uuid": "feeds@jonbrettdev.wordpress.com"
 }

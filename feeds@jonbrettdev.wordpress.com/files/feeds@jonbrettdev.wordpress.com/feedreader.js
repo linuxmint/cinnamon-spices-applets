@@ -2,7 +2,7 @@
  * Cinnamon RSS feed reader (backend)
  *
  * Author: jonbrett.dev@gmail.com
- * Date: 2013 - 2016
+ * Date: 2013 - 2017
  *
  * Cinnamon RSS feed reader is free software: you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * General Public License along with Cinnamon RSS feed reader.  If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
+const UUID = "feeds@jonbrettdev.wordpress.com";
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext.domain('cinnamon-applets');
@@ -28,7 +28,9 @@ const Util = imports.misc.util;
 const _ = Gettext.gettext;
 const Signals = imports.signals;
 
-const APPLET_PATH = imports.ui.appletManager.appletMeta["feeds@jonbrettdev.wordpress.com"].path;
+//const APPLET_PATH = imports.ui.appletManager.appletMeta["feeds@jonbrettdev.wordpress.com"].path;
+const AppletPath = imports.ui.appletManager.appletMeta[UUID].path;
+const DataPath = GLib.get_home_dir() + "/.cinnamon/" + UUID;
 
 /* Maximum number of "cached" feed items to keep for this feed.
  * Older items will be trimmed first */
@@ -83,14 +85,15 @@ function FeedReader() {
 
 FeedReader.prototype = {
 
-    _init: function(logger, url, path, callbacks) {
+    _init: function(logger, id, url, notify, callbacks) {
+        this.logger = logger;
+        this.id = id;
         this.item_status = new Array();
         this.url = url;
-        this.path = path;
+        this.notify = notify;
         this.callbacks = callbacks;
         this.error = false;
-        this.logger = logger;
-
+        
         /* Feed data */
         this.title = "";
         this.items = new Array();
@@ -103,14 +106,16 @@ FeedReader.prototype = {
             Soup.Session.prototype.add_feature.call(this.session,
                     new Soup.ProxyResolverDefault());
         } catch (e) {
+            if(this.logger != undefined){
+                this.logger.error(e);
+            }
+            global.logError(e);            
             throw "Failed to create HTTP session: " + e;
         }
 
-        path = Gio.file_parse_name(this.path + '/' + sanitize_url(this.url)).get_path();
+        let path = DataPath + '/' + this.id;
         // Let the python script grab the items and load them using an async method
-        Util.spawn_async(['python', APPLET_PATH+'/loadItems.py', path], Lang.bind(this, this.load_items));
-        /* Load items */
-        //this.load_items();
+        Util.spawn_async(['python', AppletPath + '/loadItems.py', path], Lang.bind(this, this.load_items));
     },
 
     get_url: function() {
@@ -119,8 +124,7 @@ FeedReader.prototype = {
 
     download_feed: function() {
         this.logger.debug("FeedReader.get");
-        Util.spawn_async(['python', APPLET_PATH+'/getFeed.py', this.url], Lang.bind(this, this.process_feed));
-
+        Util.spawn_async(['python', AppletPath + '/getFeed.py', this.url], Lang.bind(this, this.process_feed));
     },
 
     process_feed: function(response) {
@@ -207,7 +211,10 @@ FeedReader.prototype = {
                 this.save_items();
                 this.callbacks.onUpdate();
 
-                if(unread_items.length == 1) {
+                if(!this.notify){
+                    this.logger.debug("Item level notifications disabled");                    
+                }
+                else if(unread_items.length == 1) {
                     this.callbacks.onNewItem(this, this.title, unread_items[0].title);
                 } else if(unread_items.length > 1) {
                     this.callbacks.onNewItem(this, this.title, unread_items.length + " unread items!");
@@ -232,6 +239,7 @@ FeedReader.prototype = {
         try {
             //TODO: Switch to be an event
             this.callbacks.onDownloaded();
+            //this.emit('')
         } catch(e){
             this.logger.debug(e)
         }
@@ -248,6 +256,7 @@ FeedReader.prototype = {
 
         //TODO: Switch to be an event
         this.callbacks.onItemRead(this);
+        //this.emit('')
         this.save_items();
     },
 
@@ -285,7 +294,7 @@ FeedReader.prototype = {
     save_items: function(){
         this.logger.debug("FeedReader.save_items");
         try {
-            var dir = Gio.file_parse_name(this.path);
+            var dir = Gio.file_parse_name(DataPath);
             if (!dir.query_exists(null)) {
                 dir.make_directory_with_parents(null);
             }
@@ -294,7 +303,8 @@ FeedReader.prototype = {
              * I found escaping the string helps to deal with special
              * characters, which could cause problems when parsing the file
              * later */
-            var filename = this.path + '/' + sanitize_url(this.url);
+            // Filename is now the uuid created when a feed is added to the list.            
+            var filename = DataPath + '/' + this.id;
             this.logger.debug("saving feed data to: " + filename);
 
             var file = Gio.file_parse_name(filename);
@@ -469,7 +479,3 @@ FeedReader.prototype = {
     },
 };
 Signals.addSignalMethods(FeedReader.prototype);
-
-function sanitize_url(url) {
-    return url.replace(/.*:\/\//, '').replace(/\//g,'--');
-}

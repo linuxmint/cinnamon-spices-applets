@@ -16,7 +16,7 @@ If possible tell us
 # Creating Pull Requests
 
 * It's important to use a proper title in the **commit messages and pull requests**. The title must be in the format `spice name: simple description, what the commit/pull request does`.
-* One Pull Request - One Applet
+* One Pull Request - One Applet.  This avoids the risk of having to revert changes to multiple applets if any problem is subsequently found with the PR.  It also means that reviewing your changes is more straightforward.
 
 Pull Requests that don't follow this format will be closed.
 

@@ -15,8 +15,17 @@ const Settings = imports.ui.settings; // ++ Needed if you use Settings Screen
 const St = imports.gi.St; // ++
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  ++ Needed for menus
-const GLib = imports.gi.GLib; // ++ Needed for starting programs
+const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Mainloop = imports.mainloop; // Needed for timer update loop
+
+// l10n/translation support as per NikoKrause tutorial modified as UUID already used!
+const Gettext = imports.gettext
+const UUIDl10n = "nvidiaprime@pdcurtis"
+Gettext.bindtextdomain(UUIDl10n, GLib.get_home_dir() + "/.local/share/locale")
+function _(str) {
+  return Gettext.dgettext(UUIDl10n, str);
+}
+
 
 // ++ Always needed
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
@@ -56,6 +65,7 @@ MyApplet.prototype = {
             this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
 
             // Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
+            // Could this be replaced by use of system editor? but "If it ain't broke don't fix it" 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else { 
@@ -76,7 +86,7 @@ MyApplet.prototype = {
 
             // Finally setup to start the update loop for the applet display running
             this.set_applet_label(" " ); // show nothing until system stable
-            this.set_applet_tooltip("Waiting for nvidia");
+            this.set_applet_tooltip(_("Waiting for nvidia"));
             Mainloop.timeout_add_seconds(2, Lang.bind(this, this.updateLoop)); // Timer to allow prime to initiate
 
         } catch (e) {
@@ -127,13 +137,13 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(menuitem1);
 */
 
-        let menuitem2 = new PopupMenu.PopupMenuItem("Open Power Statistics");
+        let menuitem2 = new PopupMenu.PopupMenuItem(_("Open Power Statistics"));
         menuitem2.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('gnome-power-statistics');
         }));
         this._applet_context_menu.addMenuItem(menuitem2);
 
-        this.menuitem3 = new PopupMenu.PopupMenuItem("Open System Monitor");
+        this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
         this.menuitem3.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('gnome-system-monitor');
         }));
@@ -152,16 +162,16 @@ MyApplet.prototype = {
 
 
         // ++ Set up sub menu for Housekeeping Items
-        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem("Housekeeping Menu");
+        this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping Menu"));
         this._applet_context_menu.addMenuItem(this.subMenu1);
 
-        this.subMenuItem1 = new PopupMenu.PopupMenuItem("View the Changelog");
+        this.subMenuItem1 = new PopupMenu.PopupMenuItem(_("View the Changelog"));
         this.subMenuItem1.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async(this.textEd + ' ' + this.changelog);
         }));
         this.subMenu1.menu.addMenuItem(this.subMenuItem1); // Note this has subMenu1.menu not subMenu1._applet_context_menu as one might expect
 
-        this.subMenuItem2 = new PopupMenu.PopupMenuItem("Open the Help file");
+        this.subMenuItem2 = new PopupMenu.PopupMenuItem(_("Open the Help file"));
         this.subMenuItem2.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile);
         }));
@@ -184,7 +194,8 @@ MyApplet.prototype = {
    try {
 	this.bbswitchStatus = GLib.file_get_contents("/proc/acpi/bbswitch").toString();	
 	this.bbswitchStatus2 = this.bbswitchStatus.substr(  (this.bbswitchStatus.length - 2 ),1 );
-        //  Checking for N as last character in string ensures bbswitch is present and ON before nvidia-settings run 
+        //  Checking for N as last character in string ensures bbswitch is present and ON before nvidia-settings run
+        //  The setting up of strings which are used as flags is probably redundant due to changes made for translations but "if it aint broke dont fix it"
         if (this.bbswitchStatus2 == "N") {
              this.bbst = "ON";
          }
@@ -195,13 +206,14 @@ MyApplet.prototype = {
       } catch (e) {
 //          global.logError(e);  // Comment out to avoid filling error log
           this.bbst = "ERROR"
-	  this.set_applet_label("ERROR" ); 
-          this.set_applet_tooltip("Nvidia Prime is not installed so applet willl not work");          
+	  this.set_applet_label(_("ERROR")); 
+          this.set_applet_tooltip(_("Nvidia Prime is not installed so applet willl not work"));          
       } 
    try {
          if(this.bbst == "OFF") {
-	       this.set_applet_label("GPU OFF" ); 
-               this.set_applet_tooltip("NVidia based GPU is " + this.bbst);
+	       this.set_applet_label(_("GPU OFF") ); 
+//             this.set_applet_tooltip(_("NVidia based GPU is") + " " + this.bbst);
+               this.set_applet_tooltip(_("NVidia based GPU is Off"));
          }
          if(this.bbst == "ON") {
 
@@ -209,8 +221,8 @@ MyApplet.prototype = {
                 // Check we have a valid temperature returned before updating 
                 // in case of slow response from nvidia-settings which gives null string
                 if(this.nvidiagputemp1.substr(5,2) > 0){ this.nvidiagputemp = this.nvidiagputemp1.substr(5,2)}; 
-	        this.set_applet_label("GPU " + this.nvidiagputemp + "\u1d3cC" );
-                this.set_applet_tooltip("NVidia based GPU is " + this.bbst + " and Core Temperature is " + this.nvidiagputemp + "\u1d3cC" );
+	        this.set_applet_label(_("GPU") + " " + this.nvidiagputemp + "\u1d3cC" );//               this.set_applet_tooltip(_("NVidia based GPU is") + " " + this.bbst + " " + _("and Core Temperature is") + " " + this.nvidiagputemp + "\u1d3cC" );
+                this.set_applet_tooltip(_("NVidia based GPU is On and Core Temperature is") + " " + this.nvidiagputemp + "\u1d3cC" );
                 // Get temperatures via asyncronous script ready for next cycle
                 GLib.spawn_command_line_async('sh ' + this.gputempScript );
          } 
@@ -241,7 +253,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.2.0
+Version 3.2.1
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -264,5 +276,17 @@ v30_3.1.5 New tick box on configuration screen to access enhanced functionality 
           http://sourceforge.net/projects/virtualgl/files/VirtualGL/
 
 v30_3.1.6 Corrected icon.png in applet folder which is used by Add Applets
-v30_3.2.0 Changed help file from help.txt to README.md
+
+Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
+
+v30_3.2.0 Changed help file from help.txt to README.md -can keep copies of README.md identical.
+3.2.1     Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
+          icon.png copied back into applet folder so it shows in 'About...'
+          Add translation support to applet.js and identify strings
+          Changes to remove leading and trailing spaces and replace with fixed spaces
+          Changes to strings to avoid mixed use of flags as strings to ease translations.
+          Add po folder to applet
+          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Version and changes information update in applet.js and changelog.txt
+          Update README.md (2x)
 */

@@ -18,10 +18,10 @@
 # updates so back it up 
 
 
-# Play a sound file as a separate process
-play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga" &
+# Play a sound file as a separate process (Moved to applet from v32_1.0.0)
+# play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga" &
 # Put up a warning with timer using Zenity
-zenity --question --text="The Battery Level is dangerously low - the machine will be suspended shortly" --timeout=20 --ok-label="Suspend Immediately" --cancel-label="Abort Suspension" --title=WARNING_SUSPENDING_SHORTLY --window-icon=error --height=400 --width=750
+zenity --question --text="The Battery Level is dangerously low - the machine will be suspended shortly" --timeout=40 --ok-label="Suspend Immediately" --cancel-label="Abort Suspension" --title=WARNING_SUSPENDING_SHORTLY --window-icon=error --height=400 --width=750
 rc=$?
 
 if [ $rc = "0" ] || [ $rc = "5"    ]; then
@@ -40,3 +40,5 @@ fi
 exit 0
 # Modified 07-07-2016 for Mint 18 using systemclt calls for suspend and added option of Suspend Immediately
 # Modified 15-07-2016 to correct messages and spelling.
+# Modified 27-07-2017 to remove sound file which is transfered to applet
+

@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: system-monitor@pixunil 3.10\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-17 19:29+0200\n"
-"PO-Revision-Date: 2016-10-28 13:21+0800\n"
+"POT-Creation-Date: 2017-03-28 23:25+0200\n"
+"PO-Revision-Date: 2017-03-28 23:25+0200\n"
 "Last-Translator: Kiat <giwhub@github.com>\n"
 "Language-Team: Chinese\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: zh_CN_ZH_CN\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: applet.js:31
 msgid "Dependence missing"
@@ -38,34 +39,13 @@ msgstr ""
 msgid "System Monitor"
 msgstr "系统监视器"
 
-#. settings->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: applet.js:148
 msgid "Overview"
 msgstr "概览"
 
-#. settings->thermal-color-thermal->description
-#. settings->thermal-enabled->description
-#: modules/thermal.js:6
-msgid "Thermal"
-msgstr "温度"
-
-#: modules/thermal.js:45
-#, javascript-format
-msgid "Temperature was over %s for %fsec"
-msgstr "温度超过了%s并持续了%f秒"
-
-#. settings->graph-type->options
-#: modules/thermal.js:119
-msgid "Thermal History"
-msgstr "温度历史"
-
-#. settings->loadAvg-enabled->description
-#: modules/loadAvg.js:5
-msgid "Load averages"
-msgstr "负载平均"
-
-#. settings->fan-enabled->description
-#. settings->fan-color-fan->description
+#. system-monitor@pixunil->settings-schema.json->fan-enabled->description
+#. system-monitor@pixunil->settings-schema.json->fan-color-fan->description
 #: modules/fan.js:6
 msgid "Fan"
 msgstr "风扇"
@@ -75,22 +55,22 @@ msgstr "风扇"
 msgid "Fan rotation was over %s for %fsec"
 msgstr "风扇转速超过了%s并持续了%f秒"
 
-#. settings->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/fan.js:105
 msgid "Fan History"
 msgstr "风扇历史"
 
-#. settings->disk-enabled->description
+#. system-monitor@pixunil->settings-schema.json->disk-enabled->description
 #: modules/disk.js:11
 msgid "Disk"
 msgstr "磁盘"
 
-#. settings->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/disk.js:177
 msgid "Disk History"
 msgstr "磁盘历史"
 
-#. settings->network-enabled->description
+#. system-monitor@pixunil->settings-schema.json->network-enabled->description
 #: modules/network.js:8
 msgid "Network"
 msgstr "网络"
@@ -99,30 +79,41 @@ msgstr "网络"
 msgid "Total"
 msgstr "总计"
 
-#. settings->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/network.js:151
 msgid "Network History"
 msgstr "网络历史"
 
-#. settings->mem-color-mem->description
-#: modules/mem.js:6
-msgid "Memory"
-msgstr "内存"
+#. system-monitor@pixunil->settings-schema.json->loadAvg-enabled->description
+#: modules/loadAvg.js:5
+msgid "Load averages"
+msgstr "负载平均"
 
-#: modules/mem.js:63
-msgid "cached"
-msgstr "已缓存"
+#. system-monitor@pixunil->settings-schema.json->thermal-warning->description
+#. system-monitor@pixunil->settings-schema.json->fan-warning->description
+#. system-monitor@pixunil->settings-schema.json->cpu-warning->description
+#: modules/__init__.js:425
+msgid "Warning"
+msgstr "警告"
 
-#: modules/mem.js:64
-msgid "buffered"
-msgstr "已缓冲"
+#. system-monitor@pixunil->settings-schema.json->thermal-color-
+#. thermal->description
+#. system-monitor@pixunil->settings-schema.json->thermal-enabled->description
+#: modules/thermal.js:6
+msgid "Thermal"
+msgstr "温度"
 
-#. settings->graph-type->options
-#: modules/mem.js:149
-msgid "Memory and Swap History"
-msgstr "内存和交换分区历史"
+#: modules/thermal.js:45
+#, javascript-format
+msgid "Temperature was over %s for %fsec"
+msgstr "温度超过了%s并持续了%f秒"
 
-#. settings->cpu-enabled->description
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
+#: modules/thermal.js:119
+msgid "Thermal History"
+msgstr "温度历史"
+
+#. system-monitor@pixunil->settings-schema.json->cpu-enabled->description
 #: modules/cpu.js:6
 msgid "CPU"
 msgstr "CPU"
@@ -145,171 +136,182 @@ msgstr "用户"
 msgid "System"
 msgstr "系统"
 
-#. settings->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
 #: modules/cpu.js:204
 msgid "CPU History"
 msgstr "CPU历史"
 
-#. settings->thermal-warning->description
-#. settings->fan-warning->description
-#. settings->cpu-warning->description
-#: modules/__init__.js:425
-msgid "Warning"
-msgstr "警告"
-
-#. settings->mem-color-swap->description
+#. system-monitor@pixunil->settings-schema.json->mem-color-swap->description
 #: modules/swap.js:6
 msgid "Swap"
 msgstr "交换分区"
 
-#. metadata->name
-msgid "System monitor with graphs"
-msgstr "图表型系统监视器"
+#. system-monitor@pixunil->settings-schema.json->mem-color-mem->description
+#: modules/mem.js:6
+msgid "Memory"
+msgstr "内存"
 
-#. metadata->description
-msgid ""
-"Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
-msgstr "以文本和图表的形式显示CPU，内存和交换分区的使用率，以及磁盘和网络的速率"
+#: modules/mem.js:63
+msgid "cached"
+msgstr "已缓存"
 
-#. settings->mem-panel-mode->description
+#: modules/mem.js:64
+msgid "buffered"
+msgstr "已缓冲"
+
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
+#: modules/mem.js:149
+msgid "Memory and Swap History"
+msgstr "内存和交换分区历史"
+
+#. system-monitor@pixunil->settings-schema.json->mem-panel-mode->description
 msgid "Mode of graph"
 msgstr "图表模式"
 
-#. settings->mem-panel-mode->options
+#. system-monitor@pixunil->settings-schema.json->mem-panel-mode->options
 msgid "only Memory"
 msgstr "仅内存"
 
-#. settings->mem-panel-mode->options
-#. settings->mem-enabled->description
+#. system-monitor@pixunil->settings-schema.json->mem-panel-mode->options
+#. system-monitor@pixunil->settings-schema.json->mem-enabled->description
 msgid "Memory and Swap"
 msgstr "内存和交换分区"
 
-#. settings->graph-steps->description
+#. system-monitor@pixunil->settings-schema.json->graph-steps->description
 msgid "Number of history steps"
 msgstr "历史记录的数量"
 
-#. settings->graph-steps->tooltip
+#. system-monitor@pixunil->settings-schema.json->graph-steps->tooltip
 msgid "How many steps will be saved for history graphs"
 msgstr "将被保存到历史图表的记录次数"
 
-#. settings->graph-header->description
+#. system-monitor@pixunil->settings-schema.json->graph-header->description
 msgid "Graphs"
 msgstr "图表"
 
-#. settings->disk-color-write->description
+#. system-monitor@pixunil->settings-schema.json->disk-color-write->description
 msgid "Write"
 msgstr "写入"
 
-#. settings->help->description
+#. system-monitor@pixunil->settings-schema.json->help->description
 msgid "Read Readme"
 msgstr "阅读说明"
 
-#. settings->help->tooltip
+#. system-monitor@pixunil->settings-schema.json->help->tooltip
 msgid "Get useful information about the settings and the applet"
 msgstr "获取设置和小程序的相关帮助信息"
 
-#. settings->general-header->description
+#. system-monitor@pixunil->settings-schema.json->general-header->description
 msgid "General"
 msgstr "常规"
 
-#. settings->thermal-panel-width->description
-#. settings->disk-panel-width->description
-#. settings->mem-panel-width->description
-#. settings->cpu-panel-width->description
-#. settings->network-panel-width->description
-#. settings->fan-panel-width->description
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-
+#. width->description
+#. system-monitor@pixunil->settings-schema.json->disk-panel-width->description
+#. system-monitor@pixunil->settings-schema.json->mem-panel-width->description
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-width->description
+#. system-monitor@pixunil->settings-schema.json->network-panel-
+#. width->description
+#. system-monitor@pixunil->settings-schema.json->fan-panel-width->description
 msgid "Width of graph"
 msgstr "图表宽度"
 
-#. settings->thermal-panel-width->units
-#. settings->disk-panel-width->units
-#. settings->mem-panel-width->units
-#. settings->cpu-panel-width->units
-#. settings->graph-size->units
-#. settings->network-panel-width->units
-#. settings->fan-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->disk-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->mem-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->graph-size->units
+#. system-monitor@pixunil->settings-schema.json->network-panel-width->units
+#. system-monitor@pixunil->settings-schema.json->fan-panel-width->units
 msgid "px"
 msgstr "像素"
 
-#. settings->cpu-warning-value->description
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-
+#. value->description
 msgid "Trigger value"
 msgstr "触发值"
 
-#. settings->cpu-warning-value->units
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-value->units
 msgid "%"
 msgstr "%"
 
-#. settings->network-appearance->options
-#. settings->thermal-appearance->options
-#. settings->graph-connection->options
-#. settings->cpu-appearance->options
-#. settings->fan-appearance->options
-#. settings->disk-appearance->options
-#. settings->mem-appearance->options
+#. system-monitor@pixunil->settings-schema.json->network-appearance->options
+#. system-monitor@pixunil->settings-schema.json->thermal-appearance->options
+#. system-monitor@pixunil->settings-schema.json->graph-connection->options
+#. system-monitor@pixunil->settings-schema.json->cpu-appearance->options
+#. system-monitor@pixunil->settings-schema.json->fan-appearance->options
+#. system-monitor@pixunil->settings-schema.json->disk-appearance->options
+#. system-monitor@pixunil->settings-schema.json->mem-appearance->options
 msgid "Line"
 msgstr "折线"
 
-#. settings->network-appearance->options
-#. settings->thermal-panel-graph->options
-#. settings->cpu-appearance->options
-#. settings->cpu-panel-graph->options
-#. settings->mem-panel-graph->options
-#. settings->network-panel-graph->options
-#. settings->fan-panel-graph->options
-#. settings->disk-appearance->options
-#. settings->disk-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->network-appearance->options
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->cpu-appearance->options
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->mem-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->network-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->fan-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->disk-appearance->options
+#. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "Bar"
 msgstr "条形"
 
-#. settings->network-appearance->options
-#. settings->thermal-appearance->options
-#. settings->cpu-appearance->options
-#. settings->fan-appearance->options
-#. settings->disk-appearance->options
-#. settings->mem-appearance->options
+#. system-monitor@pixunil->settings-schema.json->network-appearance->options
+#. system-monitor@pixunil->settings-schema.json->thermal-appearance->options
+#. system-monitor@pixunil->settings-schema.json->cpu-appearance->options
+#. system-monitor@pixunil->settings-schema.json->fan-appearance->options
+#. system-monitor@pixunil->settings-schema.json->disk-appearance->options
+#. system-monitor@pixunil->settings-schema.json->mem-appearance->options
 msgid "Area"
 msgstr "面积"
 
-#. settings->network-appearance->description
-#. settings->thermal-appearance->description
-#. settings->cpu-appearance->description
-#. settings->fan-appearance->description
-#. settings->disk-appearance->description
-#. settings->mem-appearance->description
+#. system-monitor@pixunil->settings-schema.json->network-
+#. appearance->description
+#. system-monitor@pixunil->settings-schema.json->thermal-
+#. appearance->description
+#. system-monitor@pixunil->settings-schema.json->cpu-appearance->description
+#. system-monitor@pixunil->settings-schema.json->fan-appearance->description
+#. system-monitor@pixunil->settings-schema.json->disk-appearance->description
+#. system-monitor@pixunil->settings-schema.json->mem-appearance->description
 msgid "Appearance of history graphs"
 msgstr "历史图表的外观"
 
-#. settings->graph-connection->options
+#. system-monitor@pixunil->settings-schema.json->graph-connection->options
 msgid "Curve"
 msgstr "曲线"
 
-#. settings->graph-connection->options
+#. system-monitor@pixunil->settings-schema.json->graph-connection->options
 msgid "Straight"
 msgstr "直线"
 
-#. settings->graph-connection->description
+#. system-monitor@pixunil->settings-schema.json->graph-connection->description
 msgid "Connection type for History graphs"
 msgstr "历史图表的连接类型"
 
-#. settings->thermal-warning-value->description
+#. system-monitor@pixunil->settings-schema.json->thermal-warning-
+#. value->description
 msgid "Trigger temperature"
 msgstr "触发温度"
 
-#. settings->disk-color-read->description
+#. system-monitor@pixunil->settings-schema.json->disk-color-read->description
 msgid "Read"
 msgstr "读取"
 
-#. settings->network-panel-label->description
-#. settings->loadAvg-panel-label->description
-#. settings->thermal-panel-label->description
-#. settings->fan-panel-label->description
-#. settings->cpu-panel-label->description
-#. settings->disk-panel-label->description
-#. settings->mem-panel-label->description
+#. system-monitor@pixunil->settings-schema.json->network-panel-
+#. label->description
+#. system-monitor@pixunil->settings-schema.json->loadAvg-panel-
+#. label->description
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-
+#. label->description
+#. system-monitor@pixunil->settings-schema.json->fan-panel-label->description
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-label->description
+#. system-monitor@pixunil->settings-schema.json->disk-panel-label->description
+#. system-monitor@pixunil->settings-schema.json->mem-panel-label->description
 msgid "Label in the panel"
 msgstr "面板中的标签"
 
-#. settings->network-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->network-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %up \t up usage \n"
@@ -319,11 +321,11 @@ msgstr ""
 " %up \t 上行使用率 \n"
 " %down \t 下行使用率"
 
-#. settings->show-icon->description
+#. system-monitor@pixunil->settings-schema.json->show-icon->description
 msgid "Show icon"
 msgstr "显示图标"
 
-#. settings->loadAvg-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->loadAvg-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %load0 \t load average for the last minute \n"
@@ -335,131 +337,134 @@ msgstr ""
 " %load1 \t 最近5分钟的负载平均 \n"
 " %load2 \t 最近15分钟的负载平均"
 
-#. settings->thermal-warning-time->description
-#. settings->cpu-warning-time->description
-#. settings->fan-warning-time->description
+#. system-monitor@pixunil->settings-schema.json->thermal-warning-
+#. time->description
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-time->description
+#. system-monitor@pixunil->settings-schema.json->fan-warning-time->description
 msgid "Time"
 msgstr "时间"
 
-#. settings->thermal-warning-time->units
-#. settings->cpu-warning-time->units
-#. settings->fan-warning-time->units
+#. system-monitor@pixunil->settings-schema.json->thermal-warning-time->units
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-time->units
+#. system-monitor@pixunil->settings-schema.json->fan-warning-time->units
 msgid "intervals"
 msgstr "间隔"
 
-#. settings->thermal-mode->options
-#. settings->fan-mode->options
-#. settings->cpu-warning-mode->options
+#. system-monitor@pixunil->settings-schema.json->thermal-mode->options
+#. system-monitor@pixunil->settings-schema.json->fan-mode->options
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->options
 msgid "Average"
 msgstr "平均值"
 
-#. settings->thermal-mode->options
-#. settings->fan-mode->options
+#. system-monitor@pixunil->settings-schema.json->thermal-mode->options
+#. system-monitor@pixunil->settings-schema.json->fan-mode->options
 msgid "Minimum"
 msgstr "最小值"
 
-#. settings->thermal-mode->options
-#. settings->fan-mode->options
+#. system-monitor@pixunil->settings-schema.json->thermal-mode->options
+#. system-monitor@pixunil->settings-schema.json->fan-mode->options
 msgid "Maximum"
 msgstr "最大值"
 
-#. settings->thermal-mode->description
+#. system-monitor@pixunil->settings-schema.json->thermal-mode->description
 msgid "General temperature"
 msgstr "常规温度"
 
-#. settings->thermal-panel-graph->options
-#. settings->cpu-panel-graph->options
-#. settings->mem-panel-graph->options
-#. settings->graph-type->options
-#. settings->network-panel-graph->options
-#. settings->fan-panel-graph->options
-#. settings->disk-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->mem-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->graph-type->options
+#. system-monitor@pixunil->settings-schema.json->network-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->fan-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "None"
 msgstr "无"
 
-#. settings->thermal-panel-graph->options
-#. settings->cpu-panel-graph->options
-#. settings->mem-panel-graph->options
-#. settings->network-panel-graph->options
-#. settings->fan-panel-graph->options
-#. settings->disk-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->mem-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->network-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->fan-panel-graph->options
+#. system-monitor@pixunil->settings-schema.json->disk-panel-graph->options
 msgid "History"
 msgstr "历史"
 
-#. settings->thermal-panel-graph->description
-#. settings->cpu-panel-graph->description
-#. settings->mem-panel-graph->description
-#. settings->network-panel-graph->description
-#. settings->fan-panel-graph->description
-#. settings->disk-panel-graph->description
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-
+#. graph->description
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-graph->description
+#. system-monitor@pixunil->settings-schema.json->mem-panel-graph->description
+#. system-monitor@pixunil->settings-schema.json->network-panel-
+#. graph->description
+#. system-monitor@pixunil->settings-schema.json->fan-panel-graph->description
+#. system-monitor@pixunil->settings-schema.json->disk-panel-graph->description
 msgid "Graph in the panel"
 msgstr "面板中的图表"
 
-#. settings->cpu-color-core3->description
+#. system-monitor@pixunil->settings-schema.json->cpu-color-core3->description
 msgid "CPU3"
 msgstr "CPU3"
 
-#. settings->cpu-color-core2->description
+#. system-monitor@pixunil->settings-schema.json->cpu-color-core2->description
 msgid "CPU2"
 msgstr "CPU2"
 
-#. settings->cpu-color-core1->description
+#. system-monitor@pixunil->settings-schema.json->cpu-color-core1->description
 msgid "CPU1"
 msgstr "CPU1"
 
-#. settings->cpu-appearance->options
+#. system-monitor@pixunil->settings-schema.json->cpu-appearance->options
 msgid "Stack"
 msgstr "堆叠"
 
-#. settings->cpu-color-core4->description
+#. system-monitor@pixunil->settings-schema.json->cpu-color-core4->description
 msgid "CPU4"
 msgstr "CPU4"
 
-#. settings->cpu-split->options
+#. system-monitor@pixunil->settings-schema.json->cpu-split->options
 msgid "Total usage"
 msgstr "总体使用率"
 
-#. settings->cpu-split->options
+#. system-monitor@pixunil->settings-schema.json->cpu-split->options
 msgid "User and System usage"
 msgstr "用户和系统使用率"
 
-#. settings->cpu-split->description
+#. system-monitor@pixunil->settings-schema.json->cpu-split->description
 msgid "Show which information in history graphs"
 msgstr "在历史图表中所要显示的信息"
 
-#. settings->graph-type->tooltip
+#. system-monitor@pixunil->settings-schema.json->graph-type->tooltip
 msgid "The graph shown in the menu"
 msgstr "在菜单中显示的图表"
 
-#. settings->graph-type->description
+#. system-monitor@pixunil->settings-schema.json->graph-type->description
 msgid "Type of graph"
 msgstr "图表类型"
 
-#. settings->rate-unit->options
+#. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "bit/s Kbit/s, Mbit/s"
 msgstr "bit/s Kbit/s, Mbit/s"
 
-#. settings->rate-unit->options
+#. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "B/s, KB/s, MB/s"
 msgstr "B/s, KB/s, MB/s"
 
-#. settings->rate-unit->options
+#. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "bit/s Kibit/s, Mibit/s"
 msgstr "bit/s Kibit/s, Mibit/s"
 
-#. settings->rate-unit->options
+#. system-monitor@pixunil->settings-schema.json->rate-unit->options
 msgid "B/s, KiB/s, MiB/s"
 msgstr "B/s, KiB/s, MiB/s"
 
-#. settings->rate-unit->tooltip
+#. system-monitor@pixunil->settings-schema.json->rate-unit->tooltip
 msgid "Unit for disk and network usage"
 msgstr "磁盘和网络使用率的单位"
 
-#. settings->rate-unit->description
+#. system-monitor@pixunil->settings-schema.json->rate-unit->description
 msgid "Rates unit"
 msgstr "速率单位"
 
-#. settings->thermal-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->thermal-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %value \t general temperature \n"
@@ -469,11 +474,11 @@ msgstr ""
 " %value \t 常规温度 \n"
 " %sensor(digit) \t 所指定传感器的温度"
 
-#. settings->graph-size->description
+#. system-monitor@pixunil->settings-schema.json->graph-size->description
 msgid "Height of graph"
 msgstr "图表高度"
 
-#. settings->fan-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->fan-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %value \t general fan value \n"
@@ -483,7 +488,7 @@ msgstr ""
 " %value \t 常规风扇转速值 \n"
 " %sensor(digit) \t 所指定风扇的转速"
 
-#. settings->cpu-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->cpu-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %core(digit) \t usage of a core \n"
@@ -493,7 +498,7 @@ msgstr ""
 " %core(digit) \t 所指定核心的使用率 \n"
 " %avg \t 平均使用率"
 
-#. settings->disk-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->disk-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %write \t write usage \n"
@@ -503,27 +508,27 @@ msgstr ""
 " %write \t 写入使用率 \n"
 " %read \t 读取使用率"
 
-#. settings->byte-unit->options
+#. system-monitor@pixunil->settings-schema.json->byte-unit->options
 msgid "B, KiB, MiB"
 msgstr "B, KiB, MiB"
 
-#. settings->byte-unit->options
+#. system-monitor@pixunil->settings-schema.json->byte-unit->options
 msgid "B, KB, MB"
 msgstr "B, KB, MB"
 
-#. settings->byte-unit->tooltip
+#. system-monitor@pixunil->settings-schema.json->byte-unit->tooltip
 msgid "Unit for memory, swap, disk space and total network usage"
 msgstr "内存，交换分区，磁盘空间和网络总体使用率的单位"
 
-#. settings->byte-unit->description
+#. system-monitor@pixunil->settings-schema.json->byte-unit->description
 msgid "Bytes unit"
 msgstr "字节单位"
 
-#. settings->fan-mode->description
+#. system-monitor@pixunil->settings-schema.json->fan-mode->description
 msgid "General fan value"
 msgstr "常规风扇转速值"
 
-#. settings->mem-panel-label->tooltip
+#. system-monitor@pixunil->settings-schema.json->mem-panel-label->tooltip
 msgid ""
 "Common placeholders: \n"
 " %mem#size \t memory usage in bytes \n"
@@ -537,66 +542,76 @@ msgstr ""
 " %swap#size \t 以字节为单位来显示交换分区的使用情况 \n"
 " %swap \t 用百分比来显示交换分区的使用情况"
 
-#. settings->fan-warning-value->description
+#. system-monitor@pixunil->settings-schema.json->fan-warning-
+#. value->description
 msgid "Trigger rotations"
 msgstr "触发转速"
 
-#. settings->fan-warning-value->units
+#. system-monitor@pixunil->settings-schema.json->fan-warning-value->units
 msgid "RPM"
 msgstr "RPM"
 
-#. settings->network-color-up->description
+#. system-monitor@pixunil->settings-schema.json->network-color-up->description
 msgid "Up"
 msgstr "上行"
 
-#. settings->interval->description
+#. system-monitor@pixunil->settings-schema.json->interval->description
 msgid "Interval"
 msgstr "间隔"
 
-#. settings->interval->tooltip
+#. system-monitor@pixunil->settings-schema.json->interval->tooltip
 msgid "Interval in which the applet refreshes data"
 msgstr "小程序刷新数据的间隔"
 
-#. settings->interval->units
+#. system-monitor@pixunil->settings-schema.json->interval->units
 msgid "ms"
 msgstr "毫秒"
 
-#. settings->thermal-unit->description
+#. system-monitor@pixunil->settings-schema.json->thermal-unit->description
 msgid "Thermal unit"
 msgstr "温度单位"
 
-#. settings->graph-overview->options
+#. system-monitor@pixunil->settings-schema.json->graph-overview->options
 msgid "Arc"
 msgstr "弧形"
 
-#. settings->graph-overview->options
+#. system-monitor@pixunil->settings-schema.json->graph-overview->options
 msgid "Pie"
 msgstr "饼状"
 
-#. settings->graph-overview->description
+#. system-monitor@pixunil->settings-schema.json->graph-overview->description
 msgid "Appearance of Overview graph"
 msgstr "概览图表的外观"
 
-#. settings->network-color-down->description
+#. system-monitor@pixunil->settings-schema.json->network-color-
+#. down->description
 msgid "Down"
 msgstr "下行"
 
-#. settings->order->options
+#. system-monitor@pixunil->settings-schema.json->order->options
 msgid "Write - Read / Up - Down"
 msgstr "写入 - 读取 / 上行 - 下行"
 
-#. settings->order->options
+#. system-monitor@pixunil->settings-schema.json->order->options
 msgid "Read - Write / Down - Up"
 msgstr "读取 - 写入 / 下行 - 上行"
 
-#. settings->order->description
+#. system-monitor@pixunil->settings-schema.json->order->description
 msgid "Order of Disk and Network items"
 msgstr "磁盘和网络条目的顺序"
 
-#. settings->cpu-warning-mode->description
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->description
 msgid "Mode"
 msgstr "模式"
 
-#. settings->cpu-warning-mode->options
+#. system-monitor@pixunil->settings-schema.json->cpu-warning-mode->options
 msgid "Cores"
 msgstr "核心"
+
+#. system-monitor@pixunil->metadata.json->description
+msgid "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
+msgstr "以文本和图表的形式显示CPU，内存和交换分区的使用率，以及磁盘和网络的速率"
+
+#. system-monitor@pixunil->metadata.json->name
+msgid "System monitor with graphs"
+msgstr "图表型系统监视器"

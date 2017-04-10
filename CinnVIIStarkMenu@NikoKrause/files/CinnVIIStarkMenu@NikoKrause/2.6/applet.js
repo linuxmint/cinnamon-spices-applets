@@ -1655,7 +1655,7 @@ RightButtonsBox.prototype = {
         return false;
     },
 
-    _update_quicklinks: function(quicklauncherLayout, showUserIconLabel, shutdownMenuLayout) {
+    _update_quicklinks: function(quicklauncherLayout, userBoxLayout, shutdownMenuLayout) {
 
         for (let i in this.quicklinks) {
             this.quicklinks[i]._update(quicklauncherLayout);
@@ -1669,6 +1669,20 @@ RightButtonsBox.prototype = {
         this.lock._update(quicklauncherLayout, shutdownMenuLayout);
         this.lock2._update(quicklauncherLayout, shutdownMenuLayout);
 
+        switch (userBoxLayout) {
+            case "userHide":
+                this.hoverIcon.userBox.hide();
+                break;
+            case "userNameAndIcon":
+                this.hoverIcon.userBox.show();
+                this.hoverIcon.userLabel.show();
+                break;
+            case "userIcon":
+                this.hoverIcon.userBox.show();
+                this.hoverIcon.userLabel.hide();
+                break;
+        }
+
         if (quicklauncherLayout == 'icons') {
             this.hoverIcon.userLabel.hide();
             this.hoverIcon._userIcon.set_icon_size(22);
@@ -1678,12 +1692,6 @@ RightButtonsBox.prototype = {
 
         }
         else {
-            if(showUserIconLabel) {
-                this.hoverIcon.userLabel.show();
-            } else {
-                this.hoverIcon.userLabel.hide();
-            }
-
             this.hoverIcon._userIcon.set_icon_size(HOVER_ICON_SIZE);
             this.hoverIcon.icon.set_icon_size(HOVER_ICON_SIZE);
             this.shutDownIconBox.hide();
@@ -2080,8 +2088,9 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.IN, "quicklauncher-" + i + "-command", "quicklauncher_" + i + "_command", this._updateQuickLinks, null);
         }
 
+        this.quicklinksupdated = false;
         this.settings.bindProperty(Settings.BindingDirection.IN, "quicklauncher-layout", "quicklauncherLayout", this._updateQuickLinks, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "show-user-icon-label", "showUserIconLabel", this._updateQuickLinks, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "user-box-layout", "userBoxLayout", this._updateQuickLinks, null);
         this._updateQuickLinks();
 
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
@@ -2151,15 +2160,13 @@ MyApplet.prototype = {
         this.hover_delay = this.hover_delay_ms / 1000
     },
 
-    _resizeMenuSections: function() {
+    _resizeAppsBoxHeight: function() {
         let scrollBoxHeight = this.favsBox.get_height() + this.separator.actor.get_height() + this.favExpandBin.get_height();
-
-        this._resizeApplicationsBox();
         this.applicationsScrollBox.set_height(scrollBoxHeight);
         this.categoriesScrollBox.set_height(scrollBoxHeight);
     },
 
-    _resizeApplicationsBox: function() {
+    _resizeAppsBoxWidth: function() {
         let min_width = 0;
         let child = this.applicationsScrollBox.get_first_child();
         this.applicationsScrollBox.set_width(-1);
@@ -2184,6 +2191,8 @@ MyApplet.prototype = {
         else {
             this.rightButtonsBox.actor.hide();
         }
+
+        this.quicklinksupdated = true;
     },
 
     _updateQuickLinksShutdownView: function() {
@@ -2229,10 +2238,11 @@ MyApplet.prototype = {
         }
 
         this._updateCustomLabels();
+
+        this.quicklinksupdated = true;
     },
 
     _updateQuickLinks: function() {
-
         this.menu.quicklinksCheckboxes = [];
         this.menu.quicklinksCheckboxes[0] = this.quicklauncher_0_checkbox;
         this.menu.quicklinksCheckboxes[1] = this.quicklauncher_1_checkbox;
@@ -2286,9 +2296,11 @@ MyApplet.prototype = {
 
         this.menu.quicklauncherLayout = this.quicklauncherLayout;
         this.rightButtonsBox.addItems();
-        this.rightButtonsBox._update_quicklinks(this.quicklauncherLayout, this.showUserIconLabel, this.shutdownMenuLayout);
+        this.rightButtonsBox._update_quicklinks(this.quicklauncherLayout, this.userBoxLayout, this.shutdownMenuLayout);
 
         this._updateQuickLinksShutdownView();
+
+        this.quicklinksupdated = true;
     },
 
     on_orientation_changed: function (orientation) {
@@ -2356,9 +2368,10 @@ MyApplet.prototype = {
                 this._select_category(null, this._allAppsCategoryButton);
             }
 
-            if(this.menuLayout == "stark-menu") {
+            if(this.menuLayout == "stark-menu" || this.quicklinksupdated) {
                 if (visiblePane == "apps")
                     this.switchPanes("favs");
+                this.quicklinksupdated = false;
             }
 
 
@@ -3201,8 +3214,6 @@ MyApplet.prototype = {
         }
 
         this._setCategoriesButtonActive(!this.searchActive);
-
-        //this._resizeApplicationsBox();
     },
 
     _refreshRecent : function() {
@@ -3316,8 +3327,6 @@ MyApplet.prototype = {
         }
 
         this._setCategoriesButtonActive(!this.searchActive);
-
-        //this._resizeApplicationsBox();
     },
 
     _refreshApps : function() {
@@ -3776,7 +3785,8 @@ MyApplet.prototype = {
             if(this.menuLayout == "stark-menu")
                 this.rightButtonsBox.actor.hide();
             if (this._activeContainer == null)
-                this._resizeMenuSections();
+                this._resizeAppsBoxWidth();
+            this._resizeAppsBoxHeight();
             visiblePane = "apps";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -3791,7 +3801,7 @@ MyApplet.prototype = {
             if (this.menu.showSidebar) {
                 this.rightButtonsBox.actor.show();
             }
-            //this._resizeMenuSections();
+            this._resizeAppsBoxHeight();
             visiblePane = "favs";
             if (this._previousTreeSelectedActor == null)
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";

@@ -1,10 +1,9 @@
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
-<h2>Bug reports, feature requests and contributions</h2>
-
-<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
 </span>
 
-## System Monitor fork applet description
+## System Monitor (Fork By Odyseus) applet description
 
 This applet is a fork of [System Monitor](https://cinnamon-spices.linuxmint.com/applets/view/88) applet by Josef Michálek (a.k.a. Orcus).
 
@@ -21,16 +20,21 @@ This applet is a fork of [System Monitor](https://cinnamon-spices.linuxmint.com/
 - I added an option to use a custom command on applet click.
 - I added an option to set a custom width for each graph individually.
 - I added an option to align this applet tooltip text to the left.
-- Removed NetworkManager dependency (only for distros that don't support certain **gtop** library calls).
+- Removed NetworkManager dependency.
 
 ## Dependencies
 
 - **gir1.2-gtop-2.0**: The gtop library reads information about processes and the state of the
 system.
+- **NetworkManager**: NetworkManager is a system network service that manages your network devices and connections, attempting to keep active network connectivity when available.
+    - **Note:** NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls.
+
+**Important note:** NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it.
 
 ## Contributors
 
 - [buzz](https://github.com/buzz): Bug fixes.
 - [muzena](https://github.com/muzena): Croatian localization.
+- [giwhub](https://github.com/giwhub): Chinese localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SysmonitorByOrcus/CHANGELOG.md)

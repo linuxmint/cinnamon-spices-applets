@@ -6,10 +6,10 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
 ## Special Requirements:
 
-   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load. On both Mint and Ubuntu it can be installed by the synaptic package manager or with the terminal command:  
+   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load. On both Mint and Ubuntu it can be installed by the synaptic package manager or with the terminal command: 
                       ```sudo apt-get install gir1.2-gtop-2.0```     
      
-   * For full facilities including notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. On both Mint and Ubuntu they can be installed  by the synaptic package manager or with the terminal command:  
+   * For full facilities including notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. On both Mint and Ubuntu they can be installed  by the synaptic package manager or with the terminal command: 
             ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3```   
    * Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets.
 
@@ -75,6 +75,14 @@ The settings in this css file govern the width of the Applet and the font. Chang
 ## Status
 
 The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running Ubuntu 12.04 and Mint 15 with a variety of themes. It has been tested using Cinnamon 1.8, - 3.2 and had minor modifications for the changes introduced in Mint 18. The current Version has been tested with Cinnamon 2.2 - 3.2 and Mint 16 - 18.1
+
+## Translations and other Contributions
+
+The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I am unable to take responsibility for the accuracy of translations!
+
+Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+
+Thanks are given for the very useful contributions from @collinss and @Odeseus to helping harmonise the menus with other applets.
 
 ## Manual Installation:
 

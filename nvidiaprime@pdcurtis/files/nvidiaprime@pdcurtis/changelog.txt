@@ -1,4 +1,4 @@
-Version v30_3.2.0
+Version 3.2.1
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -21,4 +21,16 @@ v30_3.1.5 New tick box on configuration screen to access enhanced functionality 
           http://sourceforge.net/projects/virtualgl/files/VirtualGL/
 
 v30_3.1.6 Corrected icon.png in applet folder which is used by Add Applets
-v30_3.2.0 Changed help file from help.txt to README.md
+
+Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
+
+v30_3.2.0 Changed help file from help.txt to README.md - can keep copies of README.md identical.
+3.2.1     Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
+          icon.png copied back into applet folder so it shows in 'About...'
+          Add translation support to applet.js and identify strings
+          Changes to remove leading and trailing spaces and replace with fixed spaces
+          Changes to strings to avoid mixed use of flags as strings to ease translations.
+          Add po folder to applet
+          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Version and changes information update in applet.js and changelog.txt
+          Update README.md (2x)

@@ -1,0 +1,6 @@
+{
+    "description": "An applet to provide quick access to a variety of cheat sheets.", 
+    "version": "0.0.1", 
+    "uuid": "cheaty@centurix", 
+    "name": "Cheaty - Cheatsheet keeper"
+}

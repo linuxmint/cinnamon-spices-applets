@@ -5,16 +5,8 @@ import os
 import gettext
 import locale
 
-locale.setlocale(locale.LC_ALL, '')
-loc = locale.getlocale()
-filename = os.path.abspath(os.path.split(__file__)[0]) + "/locale/%s/LC_MESSAGES/PDFManager.mo" % locale.getlocale()[0][0:2]
-
-try:
-	trans = gettext.GNUTranslations(open( filename, "rb" ) )
-except IOError:
-	trans = gettext.NullTranslations()
-
-trans.install()
+home = os.path.expanduser("~")
+gettext.install("PDFManager@cinnamon.org", home + "/.local/share/locale")
 
 dialogO = gtk.FileChooserDialog(_("Select your PDF..."),
                                None,

@@ -19,24 +19,56 @@ with Foobar. If not, see http://www.gnu.org/licenses/.
 
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
-const GTop = imports.gi.GTop;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Cairo = imports.cairo;
+const Main = imports.ui.main;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 
-function MyApplet(orientation) {
-	this._init(orientation);
+const UUID = "hwmonitor@sylfurd";
+let NoInstdeps = false;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+  return Gettext.dgettext(UUID, str)
+}
+
+try {
+  const GTop = imports.gi.GTop;
+} catch(e){
+  let icon = new St.Icon({ icon_name: 'utilities-system-monitor',
+                           icon_type: St.IconType.FULLCOLOR,
+                           icon_size: 24 });
+  Main.criticalNotify(_("Dependence missing"), _("Please install the GTop package\n" +
+      "\tUbuntu / Mint: gir1.2-gtop-2.0\n" +
+      "\tFedora: libgtop2-devel\n" +
+      "\tArch: libgtop\n" +
+			"to use the applet %s").format(UUID), icon);
+  NoInstdeps = true;
+}
+
+function MyApplet(metadata, orientation) {
+	this._init(metadata, orientation);
 }
 
 MyApplet.prototype = {
-	__proto__: Applet.Applet.prototype,
+	__proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.Applet.prototype._init.call(this, orientation);
+    _init: function(metadata, orientation) {
+        Applet.IconApplet.prototype._init.call(this, orientation);
 
 		try {
+
+			if (NoInstdeps)
+			{
+			  this.set_applet_icon_path(metadata.path + "/icon.png");
+			  this.set_applet_tooltip(metadata.description);
+			  return;
+			}
+
 			this.itemOpenSysMon = new PopupMenu.PopupMenuItem("Open System Monitor");
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
@@ -78,7 +110,7 @@ MyApplet.prototype = {
 		{
 			this.graphs[i].refreshData();
 		}
-			
+
 		this.graphArea.queue_repaint();
 
 		Mainloop.timeout_add(500, Lang.bind(this, this._update));
@@ -109,7 +141,7 @@ function Graph(area, provider) {
 }
 
 Graph.prototype = {
-	
+
 	_init: function(_area, _provider) {
 		this.width = 41;
 		let [w, h] = _area.get_surface_size();
@@ -133,7 +165,7 @@ Graph.prototype = {
         cr.setSourceRGBA(1, 1, 1, 0.9);
         cr.setLineWidth(1);
         cr.rectangle(0.5, 0.5, this.width+0.5, this.height+0.5);
-        cr.stroke(); 
+        cr.stroke();
 
 		// Background
         let gradientHeight = this.height-1;
@@ -189,7 +221,7 @@ Graph.prototype = {
         pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
         pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
         pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
-        
+
         cr.fill();
 
         // Label
@@ -212,7 +244,7 @@ Graph.prototype = {
 			this.datas.shift();
 		}
 	}
-	
+
 };
 
 function CpuDataProvider() {
@@ -220,13 +252,13 @@ function CpuDataProvider() {
 }
 
 CpuDataProvider.prototype = {
-	
+
 	_init: function(){
 		this.gtop = new GTop.glibtop_cpu();
 		this.current = 0;
 		this.last = 0;
 		this.usage = 0;
-		this.last_total = 0;		
+		this.last_total = 0;
 	},
 
 	getData: function()
@@ -257,7 +289,7 @@ function MemDataProvider() {
 }
 
 MemDataProvider.prototype = {
-	
+
 	_init: function(){
 			this.gtopMem = new GTop.glibtop_mem();
 	},
@@ -277,6 +309,6 @@ MemDataProvider.prototype = {
 
 
 function main(metadata, orientation) {
-	let myApplet = new MyApplet(orientation);
+	let myApplet = new MyApplet(metadata, orientation);
 	return myApplet;
 }

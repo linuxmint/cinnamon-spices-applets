@@ -12,5 +12,4 @@ Installation
 Applet Style
 ================
 
-It is possible to change the applet appearance. You can choose between the default icon, symbolic icons or a text label.
-All you have to do is to modify the highlighted line in the "applet.js" file and select one of the options provided.
+The icon, label and menu items icon size can be modified from this applet settings found on its context menu.

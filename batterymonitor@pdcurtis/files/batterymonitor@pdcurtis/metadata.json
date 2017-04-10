@@ -1,8 +1,8 @@
 {
-    "max-instances": "1", 
-    "dangerous": false, 
+    "max-instances": "1",  
     "description": "Displays Charge as Percentage and allows Alerts and Actions", 
-    "name": "Battery  Applet with Monitoring and Shutdown (BAMS)", 
+    "name": "Battery  Applet with Monitoring and Shutdown (BAMS)",
+    "version": "1.2.2", 
     "uuid": "batterymonitor@pdcurtis"
 }
 

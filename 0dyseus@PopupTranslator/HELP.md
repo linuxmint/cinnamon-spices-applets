@@ -6,6 +6,13 @@ Never delete any of the files found inside this applet folder. It might break th
 
 ***
 
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
+<span style="color:red;">
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
+</span>
+
+***
+
 ### Dependencies
 
 **If one or more of these dependencies are missing in your system, you will not be able to use this applet.**
@@ -82,7 +89,3 @@ In the context menu of this applet is an item that can open the folder were the 
     - If you don't have/want a GitHub account:
         - You can send me a [Pastebin](http://pastebin.com/) (or similar service) to my [Mint Forums account](https://forums.linuxmint.com/memberlist.php?mode=viewprofile&u=164858).
 - If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.
-
-### Bug reports, feature requests and contributions
-
-If anyone has bugs to report, a feature request or a contribution, do so on [this xlet GitHub page](https://github.com/Odyseus/CinnamonTools).

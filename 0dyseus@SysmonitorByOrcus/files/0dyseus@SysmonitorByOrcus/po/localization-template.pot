@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 
-"Project-Id-Version: 1.09\n"
+"Project-Id-Version: 1.10\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-24 21:43-0300\n"
-"PO-Revision-Date: 2017-02-05 15:17-0300\n"
+"PO-Revision-Date: 2017-03-26 11:24-0300\n"
 "Last-Translator: Odyseus <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,35 +17,49 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:277 3.2/applet.js:277
+#: applet.js:176 3.2/applet.js:176
+msgid "Missing dependency!!!"
+msgstr ""
+
+#: applet.js:177 3.2/applet.js:177
+msgid ""
+"This applet needs the GTop library installed on your system for it  to work."
+msgstr ""
+
+#: applet.js:178 3.2/applet.js:178
+msgid ""
+"Read this applet help for more details (Applet context menu > Help item)."
+msgstr ""
+
+#: applet.js:329 3.2/applet.js:329
 msgid "Help"
 msgstr ""
 
-#: applet.js:448 3.2/applet.js:448
+#: applet.js:500 3.2/applet.js:500
 msgid "CPU: "
 msgstr ""
 
-#: applet.js:474 3.2/applet.js:474
+#: applet.js:526 3.2/applet.js:526
 msgid "Memory: "
 msgstr ""
 
-#: applet.js:474 applet.js:499 3.2/applet.js:474 3.2/applet.js:499
+#: applet.js:526 applet.js:551 3.2/applet.js:526 3.2/applet.js:551
 msgid " MB"
 msgstr ""
 
-#: applet.js:499 3.2/applet.js:499
+#: applet.js:551 3.2/applet.js:551
 msgid "Swap: "
 msgstr ""
 
-#: applet.js:538 3.2/applet.js:538
+#: applet.js:593 3.2/applet.js:593
 msgid "Network D/U: "
 msgstr ""
 
-#: applet.js:538 3.2/applet.js:538
+#: applet.js:593 3.2/applet.js:593
 msgid " KB/s"
 msgstr ""
 
-#: applet.js:576 3.2/applet.js:576
+#: applet.js:631 3.2/applet.js:631
 msgid "Load average: "
 msgstr ""
 
@@ -312,6 +326,14 @@ msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "buzz: Bug fixes."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "muzena: Croatian localization."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "giwhub: Chinese localization."
 msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->comments

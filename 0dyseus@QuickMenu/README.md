@@ -1,7 +1,6 @@
+<h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
-<h2>Bug reports, feature requests and contributions</h2>
-
-<strong>If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.</strong>
+If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
 </span>
 
 ## Quick Menu applet description
@@ -66,6 +65,7 @@ This applet has to read every single file/folder inside a main folder to create 
 ## Contributors
 
 - [muzena](https://github.com/muzena): Croatian localization.
+- [giwhub](https://github.com/giwhub): Chinese localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40QuickMenu/CHANGELOG.md)
 

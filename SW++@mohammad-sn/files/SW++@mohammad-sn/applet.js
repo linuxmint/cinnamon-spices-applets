@@ -10,6 +10,23 @@ const Mainloop = imports.mainloop;
 const Tweener = imports.ui.tweener;
 const Gtk = imports.gi.Gtk;
 const Clutter = imports.gi.Clutter;
+const SignalManager = imports.misc.signalManager;
+
+/**
+ * localization/translation support
+ */
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+let UUID = "SW++@mohammad-sn";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+    let customTranslation = Gettext.dgettext(UUID, str);
+    if(customTranslation != str) {
+        return customTranslation;
+    }
+    return Gettext.gettext(str);
+}
 
 /**
  * #MenuItem
@@ -17,9 +34,9 @@ const Clutter = imports.gi.Clutter;
  * @_icon (string): Name of icon to be displayed in the menu item
  * @_callback (Function): Callback function when the menu item is clicked
  * @icon (St.Icon): Icon of the menu item
- * 
+ *
  * A menu item that contains an icon, a text and responds to clicks
- * 
+ *
  * Inherits: PopupMenu.PopupBaseMenuItem
  */
 function MenuItem(label, icon, callback) {
@@ -34,12 +51,12 @@ MenuItem.prototype = {
      * @text (string): text to be displayed in the menu item
      * @icon (string): name of icon to be displayed in the menu item
      * @callback (Function): callback function to be called when the menu item is clicked
-     * 
+     *
      * Constructor function
      */
     _init: function(text, icon, callback) {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
-        
+
         this._text = text;
         this._icon = icon;
         this._callback = callback;
@@ -57,12 +74,12 @@ MenuItem.prototype = {
         this.addActor(table, { expand: true, span: 1, align: St.Align.START});
         this.connect('activate', callback);
     },
-    
+
     /**
      * clone:
-     * 
+     *
      * Clones the menu item
-     * 
+     *
      * Returns (MenuItem): a clone of this menu item
      */
     clone: function(){
@@ -84,7 +101,7 @@ MyApplet.prototype = {
 
         this.set_applet_tooltip(_("desktop"));
 
-        this.settings = new Settings.AppletSettings(this, "SW++@mohammad-sn", this.instance_id);
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
         this.settings.bindProperty(Settings.BindingDirection.IN,   // The binding direction - IN means we only listen for changes from this applet
                                  "icon-name",                               // The setting key, from the setting schema file
                                  "icon_name",                               // The property to bind the setting to - in this case it will initialize
@@ -112,21 +129,27 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "alsoopacifydesklets", "opacify_desklets", function(){}, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "blur", "blur", null, null);
 
+        this.signals = new SignalManager.SignalManager(this);
         this.actor.connect('enter-event', Lang.bind(this, this._onEntered));
         this.actor.connect('leave-event', Lang.bind(this, this._onLEntered));
+        this.signals.connect(global.stage, 'notify::key-focus', this._onLEntered);
         this.scroll_connector = this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
         this._applet_context_menu.connect('open-state-changed', Lang.bind(this, this._onToggled));
-            
+
         if(this.highlight){
             this.actor.style = "background-color: rgba(255,155,0,0.7)"; //highlight for first time
             this.highlight=false
         }
-        
+
         this.didpeek=false;
         this.uptgg=true;
 
         this.on_settings_changed();
         this.width_changed();
+    },
+
+    on_applet_removed_from_panel: function() {
+        this.signals.disconnectAllSignals();
     },
 
     updateMenu: function() {
@@ -139,7 +162,7 @@ MyApplet.prototype = {
                 // construct a list with all windows
                 let workspace_name = Main.getWorkspaceName(wks);
                 let metaWorkspace = global.screen.get_workspace_by_index(wks);
-                let windows = metaWorkspace.list_windows();           
+                let windows = metaWorkspace.list_windows();
                 let sticky_windows = windows.filter(
                         function(w) {
                             return !w.is_skip_taskbar() && w.is_on_all_workspaces();
@@ -147,13 +170,13 @@ MyApplet.prototype = {
                 windows = windows.filter(
                         function(w) {
                             return !w.is_skip_taskbar() && !w.is_on_all_workspaces();
-                            });  
+                            });
 
                 if(sticky_windows.length && (wks==0)) {
                     for ( let i = 0; i < sticky_windows.length; ++i ) {
                         let metaWindow = sticky_windows[i];
                         TL_Dot='...';
-                        if( metaWindow.get_title().length < 69 ) {        
+                        if( metaWindow.get_title().length < 69 ) {
                                 TL_Dot = "";
                         }
                         let app = tracker.get_window_app(metaWindow);
@@ -180,9 +203,9 @@ MyApplet.prototype = {
                             close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function(){
                                     let _children = item.actor.get_children();
                                     _children[_children.length-1].set_style_class_name('popup-menu-icon');
-                            })));  
+                            })));
                             item.addActor(close_button, { align: St.Align.END });
-                            allwins.push(sticky_windows[i]); 
+                            allwins.push(sticky_windows[i]);
                         }
                         this._applet_context_menu.addMenuItem(item);
                     }
@@ -231,14 +254,14 @@ MyApplet.prototype = {
                             close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function(){
                                     let _children = item.actor.get_children();
                                     _children[_children.length-1].get_children()[0].style="icon-size: 1em;";
-                            }))); 
+                            })));
                             close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function(){
                                     let _children = item.actor.get_children();
                                     _children[_children.length-1].get_children()[0].style="icon-size: 0.85em;";
-                            })));  
+                            })));
                             item.addActor(close_button, { align: St.Align.MIDDLE });
                         }
-                        
+
                         this._applet_context_menu.addMenuItem(item);
                         empty_menu = false;
                     }
@@ -246,7 +269,7 @@ MyApplet.prototype = {
                     for ( let i = 0; i < windows.length; ++i ) {
                         let metaWindow = windows[i];
                         TL_Dot='...';
-                        if( metaWindow.get_title().length < 69 ) {        
+                        if( metaWindow.get_title().length < 69 ) {
                                 TL_Dot = "";
                         }
                         let app = tracker.get_window_app(metaWindow);
@@ -260,7 +283,7 @@ MyApplet.prototype = {
                             close_button.connect('clicked', Lang.bind(this, function(){
                                 let items = this._applet_context_menu._getMenuItems();
                                 let ii = items.indexOf(item);
-                                if (items[ii + 1] instanceof PopupMenu.PopupSeparatorMenuItem 
+                                if (items[ii + 1] instanceof PopupMenu.PopupSeparatorMenuItem
                                         && (ii < 2 || items[ii - 2] instanceof  PopupMenu.PopupSeparatorMenuItem))
                                     items[ii - 1].destroy();
                                 item.destroy();
@@ -271,7 +294,7 @@ MyApplet.prototype = {
                                     this.uptgg=false;
                                     this._applet_context_menu.toggle();
                                 }
-                            })); 
+                            }));
                             close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function(){
                                     let _children = item.actor.get_children();
                                     _children[_children.length-1].set_style_class_name('popup-menu-icon');
@@ -280,11 +303,11 @@ MyApplet.prototype = {
                             close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function(){
                                     let _children = item.actor.get_children();
                                     _children[_children.length-1].set_style_class_name('popup-menu-icon');
-                            })));     
+                            })));
                             item.addActor(close_button, { align: St.Align.END });
                             allwins.push(windows[i]);
                         }
-    
+
                         this._applet_context_menu.addMenuItem(item);
                         empty_menu = false;
                     }
@@ -304,8 +327,8 @@ MyApplet.prototype = {
                          let icon=   new St.Icon({ icon_name: 'cinnamon-expo-symbolic',
                                          icon_type: St.IconType.SYMBOLIC,
                                          icon_size: 14 });
-        let item = new MenuItem(_("Expo                  "), icon, Lang.bind(this, function() {
-           if (!Main.expo.animationInProgress) 
+        let item = new MenuItem(_("Expo"), icon, Lang.bind(this, function() {
+           if (!Main.expo.animationInProgress)
               Main.expo.toggle();
         } ));
         if (allwins.length>0 && this.close_buttons && this.closeall_buttons){
@@ -324,7 +347,7 @@ MyApplet.prototype = {
             close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function(){
                 let _children = item.actor.get_children();
                 _children[_children.length-1].get_children()[0].style="icon-size: 0.8em;";
-            })));  
+            })));
             item.addActor(close_button, { align: St.Align.MIDDLE });
         }
 
@@ -340,13 +363,13 @@ MyApplet.prototype = {
 
     _onToggled: function(actor, isOpening){
         if (isOpening){
-            if(this.uptgg) 
+            if(this.uptgg)
                 this.updateMenu();
             else if (this._applet_context_menu._getMenuItems()[0] instanceof PopupMenu.PopupSeparatorMenuItem &&
               (this._applet_context_menu._getMenuItems().length < 3 ||
                 (this._applet_context_menu._getMenuItems().length < 4 && this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem) 
                 || (this._applet_context_menu._getMenuItems().length < 5 &&
-                    this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem && 
+                    this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem &&
                     this._applet_context_menu._getMenuItems()[2] instanceof PopupMenu.PopupSeparatorMenuItem)
               )
              )
@@ -354,7 +377,7 @@ MyApplet.prototype = {
         }
         this.uptgg=true;
     },
-    
+
     show_all: function(time) {
         let windows = global.get_window_actors();
         for(let i=0; i<windows.length; i++){
@@ -362,7 +385,7 @@ MyApplet.prototype = {
             let compositor = windows[i];
             if(window.get_title()=="Desktop"){
                 Tweener.addTween(compositor, { opacity: 255, time: time, transition: "easeOutSine" });
-            }       
+            }
             if (this.blur && compositor.eff){
                 compositor.remove_effect(compositor.eff);
             }
@@ -380,9 +403,9 @@ MyApplet.prototype = {
         if (this.peek_at_desktop){
             if (this._peektimeoutid)
                 Mainloop.source_remove(this._peektimeoutid);
-            this._peektimeoutid = Mainloop.timeout_add(400, Lang.bind(this,function () { 
+            this._peektimeoutid = Mainloop.timeout_add(400, Lang.bind(this,function () {
                 if(this.actor.hover && !this._applet_context_menu.isOpen && ! global.settings.get_boolean("panel-edit-mode")){
-                                    
+
                     Tweener.addTween(global.window_group, {opacity: this.peek_opacity, time: 0.275, transition: "easeInSine" });
 
                         let windows = global.get_window_actors();
@@ -396,19 +419,19 @@ MyApplet.prototype = {
                                     continue;
                                 //break;
                             }
-                            
+
                             if (this.blur){
                                 if (!compositor.eff) compositor.eff = new Clutter.BlurEffect();
                                 compositor.add_effect_with_name('blur',compositor.eff);
                             }
                         }
-                    
+
                     if (this.opacify_desklets){
                         Tweener.addTween(Main.deskletContainer.actor, { opacity: this.peek_opacity, time: 0.275, transition: "easeInSine" });
                     }
                     this.didpeek=true;
                 }
-    
+
             }));
         }
     },
@@ -422,7 +445,7 @@ MyApplet.prototype = {
         if (this._peektimeoutid)
             Mainloop.source_remove(this._peektimeoutid);
     },
-    
+
     on_applet_clicked: function(event) {
         global.screen.toggle_desktop(global.get_current_time());
         this.show_all(0);
@@ -437,9 +460,9 @@ MyApplet.prototype = {
 
     on_settings_changed: function() {
         let icon_file = Gio.File.new_for_path(this.icon_name);
-        if (icon_file.query_exists(null)) 
+        if (icon_file.query_exists(null))
            this.set_applet_icon_path(this.icon_name);
-        else 
+        else
            this.set_applet_icon_name(this.icon_name);
     },
 
@@ -449,7 +472,7 @@ MyApplet.prototype = {
             let window = windows[i].meta_window;
             if(window.get_title()=="Desktop"){
                 let compositor = window.get_compositor_private();
-                Tweener.addTween(compositor, { 
+                Tweener.addTween(compositor, {
                     opacity: 255,
                     time: 0,
                     transition: "easeOutSine"
@@ -457,12 +480,12 @@ MyApplet.prototype = {
                 break;
             }
         }
-        Tweener.addTween(global.window_group, { 
+        Tweener.addTween(global.window_group, {
             opacity: 255,
             time: 0,
             transition: "easeOutSine"
         });
-        Tweener.addTween(Main.deskletContainer.actor, { 
+        Tweener.addTween(Main.deskletContainer.actor, {
             opacity: 255,
             time: 0,
             transition: "easeOutSine"
@@ -470,7 +493,7 @@ MyApplet.prototype = {
         this.settings.finalize();    // This is called when a user removes the applet from the panel.. we want to
                                      // Remove any connections and file listeners here, which our settings object
     },                               // has a few of
-    
+
     handleDragOver: function(source, actor, x, y, time) {
         global.screen.show_desktop(global.get_current_time());
     },
