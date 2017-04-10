@@ -30,7 +30,6 @@ const Fuse = AppletDir.fuse.Fuse;
 // l10n
 const Gettext = imports.gettext;
 const UUID = 'Cinnamenu@json';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
   let cinnamonTranslation = Gettext.gettext(str);
