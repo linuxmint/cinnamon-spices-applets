@@ -529,17 +529,17 @@ CinnamenuPanel.prototype = {
   _listWebBookmarks: function(pattern) {
     if (!this._searchWebErrorsShown) {
       if (!Firefox.Gda) {
-        let notifyTitle = _('Gno-Menu: Search Firefox bookmarks disabled');
+        let notifyTitle = _("Gno-Menu: Search Firefox bookmarks disabled");
         let notifyMessage = _(
-          'If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]'
+          "If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
         );
         this.selectedAppTitle.set_text(notifyTitle);
         this.selectedAppDescription.set_text(notifyMessage);
       }
       if (!Midori.Gda) {
-        let notifyTitle = _('Gno-Menu: Search Midori bookmarks disabled');
+        let notifyTitle = _("Gno-Menu: Search Midori bookmarks disabled");
         let notifyMessage = _(
-          'If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]'
+          "If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
         );
         this.selectedAppTitle.set_text(notifyTitle);
         this.selectedAppDescription.set_text(notifyMessage);
@@ -1580,10 +1580,10 @@ CinnamenuPanel.prototype = {
     this.toggleListGridView.setButtonEnterCallback(Lang.bind(this, function() {
       this.toggleListGridView.actor.add_style_pseudo_class('hover');
       if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
-        this.selectedAppTitle.set_text(_('Grid View'));
+        this.selectedAppTitle.set_text(_("Grid View"));
         this.selectedAppDescription.set_text('Switch to grid view');
       } else {
-        this.selectedAppTitle.set_text(_('List View'));
+        this.selectedAppTitle.set_text(_("List View"));
         this.selectedAppDescription.set_text('Switch to list view');
       }
     }));
@@ -1640,7 +1640,7 @@ CinnamenuPanel.prototype = {
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
       style_class: 'menu-search-entry',
-      hint_text: _('Type to search...'),
+      hint_text: _("Type to search..."),
       track_hover: true,
       can_focus: true
     });
@@ -1677,12 +1677,12 @@ CinnamenuPanel.prototype = {
     this.applicationsByCategory = {};
 
     // Load 'all applications' category
-    let allAppCategory = new CategoryListButton(this, 'all', _('All Applications'), 'computer');
+    let allAppCategory = new CategoryListButton(this, 'all', _("All Applications"), 'computer');
     this.allAppCategory = allAppCategory;
     this.categoriesBox.add_actor(allAppCategory.actor);
 
     // Load 'favorite applications' category
-    let favAppCategory = new CategoryListButton(this, 'favorites', _('Favorite Apps'), 'address-book-new');
+    let favAppCategory = new CategoryListButton(this, 'favorites', _("Favorite Apps"), 'address-book-new');
     this.favAppCategory = favAppCategory;
     this.categoriesBox.add_actor(favAppCategory.actor);
 
@@ -1749,18 +1749,18 @@ CinnamenuPanel.prototype = {
     }
 
     // Load 'places' category
-    this.placesCategory = new CategoryListButton(this, 'places', _('Places'), 'folder', '_selectAllPlaces');
+    this.placesCategory = new CategoryListButton(this, 'places', _("Places"), 'folder', '_selectAllPlaces');
     this.categoriesBox.add_actor(this.placesCategory.actor);
 
     // Load 'recent' category
     if (recentEnabled) {
-      this.recentCategory = new CategoryListButton(this, 'recent', _('Recent'), 'folder-recent', '_selectRecent');
+      this.recentCategory = new CategoryListButton(this, 'recent', _("Recent"), 'folder-recent', '_selectRecent');
       this.categoriesBox.add_actor(this.recentCategory.actor);
     }
 
     // Load 'bookmarks' category
     if (this._applet.enableBookmarks) {
-      this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks');
+      this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', _("Bookmarks"), 'emblem-favorite', '_selectWebBookmarks');
       this.categoriesBox.add_actor(this.webBookmarksCategory.actor);
     }
 
@@ -1772,8 +1772,8 @@ CinnamenuPanel.prototype = {
     let lockScreen = new GroupButton(this, 'system-lock-screen', 16, null, null);
     lockScreen.setButtonEnterCallback(Lang.bind(this, function() {
       lockScreen.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_('Lock Screen'));
-      this.selectedAppDescription.set_text(_('Lock the screen'));
+      this.selectedAppTitle.set_text(_("Lock Screen"));
+      this.selectedAppDescription.set_text(_("Lock the screen"));
     }));
     lockScreen.setButtonLeaveCallback(Lang.bind(this, function() {
       lockScreen.actor.remove_style_class_name('selected');
@@ -1803,7 +1803,7 @@ CinnamenuPanel.prototype = {
     let logoutUser = new GroupButton(this, 'application-exit', 16, null, null);
     logoutUser.setButtonEnterCallback(Lang.bind(this, function() {
       logoutUser.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_('Logout'));
+      this.selectedAppTitle.set_text(_("Logout"));
       this.selectedAppDescription.set_text('Leave the session');
     }));
     logoutUser.setButtonLeaveCallback(Lang.bind(this, function() {
@@ -1826,7 +1826,7 @@ CinnamenuPanel.prototype = {
     let systemShutdown = new GroupButton(this, 'system-shutdown', 16, null, null);
     systemShutdown.setButtonEnterCallback(Lang.bind(this, function() {
       systemShutdown.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_('Quit'));
+      this.selectedAppTitle.set_text(_("Quit"));
       this.selectedAppDescription.set_text('Shutdown the computer');
     }));
     systemShutdown.setButtonLeaveCallback(Lang.bind(this, function() {
