@@ -27,17 +27,8 @@ const AppListGridButton = AppletDir.buttons.AppListGridButton;
 const GroupButton = AppletDir.buttons.GroupButton;
 const Fuse = AppletDir.fuse.Fuse;
 
-// l10n
-const Gettext = imports.gettext;
-const UUID = "Cinnamenu@json";
-
-function _(str) {
-    let cinnamonTranslation = Gettext.gettext(str);
-    if(cinnamonTranslation != str) {
-        return cinnamonTranslation;
-    }
-    return Gettext.dgettext(UUID, str);
-}
+const Gettext = imports.gettext.domain('Cinnamenu@json');
+const _ = Gettext.gettext;
 
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 
@@ -132,6 +123,7 @@ CinnamenuPanel.prototype = {
     this.recentManager = Gtk.RecentManager.get_default();
     this.placesManager = null;
     this._displayed = false;
+    this.menuHeight = 530;
   },
 
   on_panel_edit_mode_changed: function() {
@@ -150,7 +142,7 @@ CinnamenuPanel.prototype = {
       padding: mainBoxThemeNode.get_padding(St.Side.TOP),
     };
     if (typeof cb === 'function') {
-      Mainloop.idle_add(cb);
+      Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, cb);
     }
   },
 
@@ -167,9 +159,7 @@ CinnamenuPanel.prototype = {
       }
       this.introspectTheme(()=>{
         // Set focus to search entry
-        global.stage.set_key_focus(this.searchEntry);
-
-        this._menuToggleTimeoutId = Mainloop.timeout_add(100, Lang.bind(this, this.resetSearchWithFocus));
+        this.resetSearchWithFocus();
 
         // Load Startup Applications category
         this._selectedItemIndex = null;
@@ -214,6 +204,7 @@ CinnamenuPanel.prototype = {
         // ISSUE: If height isn't set, then popup menu height will expand when application buttons are added
         let height = this.groupCategoriesWorkspacesScrollBox.height;
         this.applicationsScrollBox.height = height;
+        this.mainBox.show();
       });
     } else {
       this.resetSearch();
@@ -529,17 +520,17 @@ CinnamenuPanel.prototype = {
   _listWebBookmarks: function(pattern) {
     if (!this._searchWebErrorsShown) {
       if (!Firefox.Gda) {
-        let notifyTitle = _("Gno-Menu: Search Firefox bookmarks disabled");
+        let notifyTitle = _('Gno-Menu: Search Firefox bookmarks disabled');
         let notifyMessage = _(
-          "If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+          'If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]'
         );
         this.selectedAppTitle.set_text(notifyTitle);
         this.selectedAppDescription.set_text(notifyMessage);
       }
       if (!Midori.Gda) {
-        let notifyTitle = _("Gno-Menu: Search Midori bookmarks disabled");
+        let notifyTitle = _('Gno-Menu: Search Midori bookmarks disabled');
         let notifyMessage = _(
-          "If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+          'If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]'
         );
         this.selectedAppTitle.set_text(notifyTitle);
         this.selectedAppDescription.set_text(notifyMessage);
@@ -1353,6 +1344,17 @@ CinnamenuPanel.prototype = {
 
   _onSearchTextChanged: function(se, prop) {
     let searchText = this.searchEntry.get_text();
+
+    let categoryChildren = this.categoriesBox.get_children();
+
+    for (let i = 0, len = categoryChildren.length; i < len; i++) {
+      if (searchText.length > 0) {
+        categoryChildren[i]._delegate.disable();
+      } else {
+        categoryChildren[i]._delegate.enable();
+      }
+    }
+
     if (this.searchActive) {
       if (searchText.length === 0) {
         this._resetDisplayApplicationsToStartup();
@@ -1485,7 +1487,8 @@ CinnamenuPanel.prototype = {
     // mainbox holds the topPane and bottomPane
     this.mainBox = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
-      vertical: true
+      vertical: true,
+      show_on_set_parent: false
     }); // menu
 
     // Top pane holds user group, view mode, and search (packed horizonally)
@@ -1510,14 +1513,14 @@ CinnamenuPanel.prototype = {
     });
 
     // Allow the menu to be taller for high resolution displays.
-    let menuHeight = Math.round(Main.layoutManager.primaryMonitor.height / 2.055)
-    menuHeight = menuHeight < 530 ? 530 : menuHeight;
+    this.menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height / 2.055))
+    this.menuHeight = this.menuHeight < 530 ? 530 : this.menuHeight;
 
     // groupCategoriesWorkspacesScrollBox allows categories or workspaces to scroll vertically
     this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({
       x_fill: true,
       y_fill: false,
-      height: menuHeight,
+      height: this.menuHeight,
       y_align: St.Align.START,
       style_class: 'vfade cinnamenu-categories-workspaces-scrollbox'
     });
@@ -1530,12 +1533,6 @@ CinnamenuPanel.prototype = {
     }));
     this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
     this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
-    /*this.groupCategoriesWorkspacesScrollBox.connect('button-release-event', Lang.bind(this, function(actor, event) {
-      let button = event.get_button();
-      if (button == 3) { //right click
-        // This was for showing workspace thumbnails, but serves no function on Cinnamon. Whether to use this signal or not TBD.
-      }
-    }));*/
 
     // selectedAppBox
     this.selectedAppBox = new St.BoxLayout({
@@ -1574,11 +1571,11 @@ CinnamenuPanel.prototype = {
     this.toggleListGridView.setButtonEnterCallback(Lang.bind(this, function() {
       this.toggleListGridView.actor.add_style_pseudo_class('hover');
       if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
-        this.selectedAppTitle.set_text(_("Grid View"));
-        this.selectedAppDescription.set_text(_("Switch to grid view"));
+        this.selectedAppTitle.set_text(_('Grid View'));
+        this.selectedAppDescription.set_text('Switch to grid view');
       } else {
-        this.selectedAppTitle.set_text(_("List View"));
-        this.selectedAppDescription.set_text(_("Switch to list view"));
+        this.selectedAppTitle.set_text(_('List View'));
+        this.selectedAppDescription.set_text('Switch to list view');
       }
     }));
     this.toggleListGridView.setButtonLeaveCallback(Lang.bind(this, function() {
@@ -1634,7 +1631,7 @@ CinnamenuPanel.prototype = {
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
       style_class: 'menu-search-entry',
-      hint_text: _("Type to search..."),
+      hint_text: _('Type to search...'),
       track_hover: true,
       can_focus: true
     });
@@ -1671,12 +1668,12 @@ CinnamenuPanel.prototype = {
     this.applicationsByCategory = {};
 
     // Load 'all applications' category
-    let allAppCategory = new CategoryListButton(this, 'all', _("All Applications"), 'computer');
+    let allAppCategory = new CategoryListButton(this, 'all', _('All Applications'), 'computer');
     this.allAppCategory = allAppCategory;
     this.categoriesBox.add_actor(allAppCategory.actor);
 
     // Load 'favorite applications' category
-    let favAppCategory = new CategoryListButton(this, 'favorites', _("Favorite Apps"), 'address-book-new');
+    let favAppCategory = new CategoryListButton(this, 'favorites', _('Favorite Apps'), 'address-book-new');
     this.favAppCategory = favAppCategory;
     this.categoriesBox.add_actor(favAppCategory.actor);
 
@@ -1743,18 +1740,20 @@ CinnamenuPanel.prototype = {
     }
 
     // Load 'places' category
-    this.placesCategory = new CategoryListButton(this, 'places', _("Places"), 'folder', '_selectAllPlaces');
+    this.placesCategory = new CategoryListButton(this, 'places', _('Places'), 'folder', '_selectAllPlaces');
     this.categoriesBox.add_actor(this.placesCategory.actor);
 
     // Load 'recent' category
     if (recentEnabled) {
-      this.recentCategory = new CategoryListButton(this, 'recent', _("Recent"), 'folder-recent', '_selectRecent');
+      this.recentCategory = new CategoryListButton(this, 'recent', _('Recent'), 'folder-recent', '_selectRecent');
       this.categoriesBox.add_actor(this.recentCategory.actor);
     }
 
     // Load 'bookmarks' category
-    this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', _("Bookmarks"), 'emblem-favorite', '_selectWebBookmarks');
-    this.categoriesBox.add_actor(this.webBookmarksCategory.actor);
+    if (this._applet.enableBookmarks) {
+      this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks');
+      this.categoriesBox.add_actor(this.webBookmarksCategory.actor);
+    }
 
     // PowerGroupBox
     this.powerGroupBox = new St.BoxLayout({
@@ -1764,8 +1763,8 @@ CinnamenuPanel.prototype = {
     let lockScreen = new GroupButton(this, 'system-lock-screen', 16, null, null);
     lockScreen.setButtonEnterCallback(Lang.bind(this, function() {
       lockScreen.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_("Lock Screen"));
-      this.selectedAppDescription.set_text(_("Lock the screen"));
+      this.selectedAppTitle.set_text(_('Lock Screen'));
+      this.selectedAppDescription.set_text(_('Lock the screen'));
     }));
     lockScreen.setButtonLeaveCallback(Lang.bind(this, function() {
       lockScreen.actor.remove_style_class_name('selected');
@@ -1795,8 +1794,8 @@ CinnamenuPanel.prototype = {
     let logoutUser = new GroupButton(this, 'application-exit', 16, null, null);
     logoutUser.setButtonEnterCallback(Lang.bind(this, function() {
       logoutUser.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_("Logout"));
-      this.selectedAppDescription.set_text(_("Leave the session"));
+      this.selectedAppTitle.set_text(_('Logout'));
+      this.selectedAppDescription.set_text('Leave the session');
     }));
     logoutUser.setButtonLeaveCallback(Lang.bind(this, function() {
       logoutUser.actor.remove_style_class_name('selected');
@@ -1818,8 +1817,8 @@ CinnamenuPanel.prototype = {
     let systemShutdown = new GroupButton(this, 'system-shutdown', 16, null, null);
     systemShutdown.setButtonEnterCallback(Lang.bind(this, function() {
       systemShutdown.actor.add_style_class_name('selected');
-      this.selectedAppTitle.set_text(_("Quit"));
-      this.selectedAppDescription.set_text(_("Shutdown the computer"));
+      this.selectedAppTitle.set_text(_('Quit'));
+      this.selectedAppDescription.set_text('Shutdown the computer');
     }));
     systemShutdown.setButtonLeaveCallback(Lang.bind(this, function() {
       systemShutdown.actor.remove_style_class_name('selected');
@@ -1864,6 +1863,7 @@ CinnamenuPanel.prototype = {
       x_fill: true,
       y_fill: false,
       y_align: St.Align.START,
+      height: this.menuHeight,
       style_class: 'vfade menu-applications-scrollbox'
     });
     let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
@@ -1931,7 +1931,9 @@ CinnamenuPanel.prototype = {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
-      y_align: St.Align.START
+      y_align: St.Align.START,
+      y_expand: false,
+      expand: false
     });
     this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
 
@@ -1985,12 +1987,12 @@ CinnamenuPanel.prototype = {
     this.menu.addMenuItem(this._dummySeparator);
 
     // Set height constraints on scrollboxes (we also set height when menu toggle)
-    /*this.applicationsScrollBox.add_constraint(new Clutter.BindConstraint({
+    this.applicationsScrollBox.add_constraint(new Clutter.BindConstraint({
       name: 'appScrollBoxConstraint',
       source: this.groupCategoriesWorkspacesScrollBox,
       coordinate: Clutter.BindCoordinate.HEIGHT,
       offset: 0
-    }));*/
+    }));
 
     this._widthCategoriesBox = this.categoriesBox.width;
   },

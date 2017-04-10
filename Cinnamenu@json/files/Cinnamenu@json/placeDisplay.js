@@ -11,17 +11,8 @@ const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Main = imports.ui.main;
 
-// l10n
-const Gettext = imports.gettext;
-const UUID = "Cinnamenu@json";
-
-function _(str) {
-    let cinnamonTranslation = Gettext.gettext(str);
-    if(cinnamonTranslation != str) {
-        return cinnamonTranslation;
-    }
-    return Gettext.dgettext(UUID, str);
-}
+const Gettext = imports.gettext.domain('cinnamenu');
+const _ = Gettext.gettext;
 
 function PlaceInfo() {
   this._init.apply(this, arguments);
@@ -54,7 +45,7 @@ PlaceInfo.prototype = {
         file.mount_enclosing_volume_finish(result);
         Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
       });
-      Main.notifyError(_("Failed to launch '%s'").format(this.name), e.message);
+      Main.notifyError(_('Failed to launch "%s"').format(this.name), e.message);
     }
   },
 
@@ -143,7 +134,7 @@ PlacesManager.prototype = {
 
     this._places.special.push(new PlaceInfo('special',
       Gio.File.new_for_path(homePath),
-      _("Home")));
+      _('Home')));
 
     for (let i = 0, len = DEFAULT_DIRECTORIES.length; i < len; i++) {
       let specialPath = GLib.get_user_special_dir(DEFAULT_DIRECTORIES[i]);
@@ -217,11 +208,11 @@ PlacesManager.prototype = {
 
     this._places.devices.push(new PlaceInfo('devices',
       Gio.File.new_for_path('/'),
-      _("Computer"),
+      _('Computer'),
       'drive-harddisk'));
     this._places.network.push(new PlaceInfo('network',
       Gio.File.new_for_uri('network:///'),
-      _("Browse network"),
+      _('Browse network'),
       'network-workgroup'));
 
     /* first go through all connected drives */
