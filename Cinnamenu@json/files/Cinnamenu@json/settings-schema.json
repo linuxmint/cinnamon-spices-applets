@@ -120,6 +120,12 @@
     "description": "Enable autoscrolling in application list",
     "tooltip": "Choose whether or not to enable smooth autoscrolling in the application list."
   },
+  "enable-bookmarks": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable web bookmarks",
+    "tooltip": "Choose whether or not bookmarks are indexed in the menu."
+  },
   "startup-view-mode": {
     "type": "combobox",
     "default": 1,

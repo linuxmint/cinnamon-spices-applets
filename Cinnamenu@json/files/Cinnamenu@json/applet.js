@@ -35,17 +35,16 @@ const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
 // l10n
 const Gettext = imports.gettext;
-const UUID = "Cinnamenu@json";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+const UUID = 'Cinnamenu@json';
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
-    let cinnamonTranslation = Gettext.gettext(str);
-    if(cinnamonTranslation != str) {
-        return cinnamonTranslation;
-    }
-    return Gettext.dgettext(UUID, str);
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
+  }
+  return Gettext.dgettext(UUID, str);
 }
-
 
 const CinnamenuPanel = AppletDir.panel.CinnamenuPanel;
 
@@ -330,6 +329,15 @@ CinnamenuButton.prototype = {
         key: 'enable-autoscroll',
         value: 'enableAutoScroll',
         cb: null
+      },
+      {
+        key: 'enable-bookmarks',
+        value: 'enableBookmarks',
+        cb: Lang.bind(this, function() {
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
+          }
+        })
       },
       {
         key: 'menu-label',

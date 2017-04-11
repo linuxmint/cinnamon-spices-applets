@@ -1,5 +1,14 @@
 Changelog
 
+### 1.2.0
+
+  * Added ability to toggle bookmarks
+  * Increased the resolution of the applet icon
+  * Category buttons are now deactivated while searching
+  * Translation file restructuring thanks to [NikoKrause](https://github.com/linuxmint/cinnamon-spices-applets/pull/247)
+  * Test bug fix for users encountering the menu not displaying when clicked
+  * Fixed the menu expanding in height and width when toggled open, and expanding beyond its allocated dimensions
+
 ### 1.1.0
 
   * Improved the applet's memory consumption.

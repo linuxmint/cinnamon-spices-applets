@@ -13,14 +13,14 @@ const Main = imports.ui.main;
 
 // l10n
 const Gettext = imports.gettext;
-const UUID = "Cinnamenu@json";
+const UUID = 'Cinnamenu@json';
 
 function _(str) {
-    let cinnamonTranslation = Gettext.gettext(str);
-    if(cinnamonTranslation != str) {
-        return cinnamonTranslation;
-    }
-    return Gettext.dgettext(UUID, str);
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
+  }
+  return Gettext.dgettext(UUID, str);
 }
 
 function PlaceInfo() {
@@ -54,7 +54,7 @@ PlaceInfo.prototype = {
         file.mount_enclosing_volume_finish(result);
         Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
       });
-      Main.notifyError(_("Failed to launch '%s'").format(this.name), e.message);
+      Main.notifyError(_("Failed to launch \"%s\"").format(this.name), e.message);
     }
   },
 
