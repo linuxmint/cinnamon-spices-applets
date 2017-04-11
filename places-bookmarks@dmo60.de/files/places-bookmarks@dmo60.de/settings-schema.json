@@ -1,4 +1,8 @@
 {
+   "head": {
+        "type": "header",
+        "description": "Settings for places-bookmarks@dmo60.de"
+    },
     "pref_applet_label": {
         "type": "entry",
         "default": "Places",
