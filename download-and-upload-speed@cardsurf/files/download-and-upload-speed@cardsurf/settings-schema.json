@@ -1,4 +1,7 @@
-{	
+{	"head": {
+		"type": "header",
+		"description" : "Settings for download-and-upload-speed@cardsurf"
+	},
 	"settings_start" : {
 		"type" : "separator"
 	},
