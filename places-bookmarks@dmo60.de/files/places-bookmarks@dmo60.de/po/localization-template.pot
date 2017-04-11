@@ -42,6 +42,10 @@ msgstr ""
 msgid "pixels"
 msgstr ""
 
+#. places-bookmarks@dmo60.de->settings-schema.json->head->description
+msgid "Settings for places-bookmarks@dmo60.de"
+msgstr ""
+
 #. places-bookmarks@dmo60.de->settings-
 #. schema.json->pref_applet_icon->description
 msgid "Applet icon"
