@@ -364,7 +364,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_2.0.2
+Version 2.0.3
 0.9.0 Release Candidate 30-07-2013
 0.9.1 Help file facility added and link to gnome-system-monitor
 0.9.2 Change Hold to Pause in Tooltip
@@ -398,5 +398,7 @@ Version v30_2.0.2
 1.2.3 Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window 
 2.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc
 2.0.2 01-02-2017 Change helpfile to use README.md instead of help.txt in applet folder
-      Remove icon.png and help.txt from applet folder  
+      Remove icon.png and help.txt from applet folder
+2.0.3 Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
+      icon.png copied back into applet folder so it shows in 'About...'
 */
