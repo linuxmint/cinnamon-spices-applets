@@ -22,9 +22,13 @@ import os
 import sys
 import gi
 import argparse
+import gettext
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 from ConfigFileManager import ConfigFileManager
+
+home = os.path.expanduser("~")
+gettext.install("feeds@jonbrettdev.wordpress.com", home + "/.local/share/locale")
 
 UI_INFO = """
 <ui>
@@ -47,7 +51,7 @@ UI_INFO = """
 class MainWindow(Gtk.Window):
 
     def __init__(self, config):        
-        super(Gtk.Window, self).__init__(title="Manage your feeds")
+        super(Gtk.Window, self).__init__(title=_("Manage your feeds"))
         self.config = config
         self.show_hidden_fields = False
         self.hidden_fields = []        
@@ -82,11 +86,11 @@ class MainWindow(Gtk.Window):
         self.instance_combo.connect('changed', self.change_instance)
 
         instance_label = Gtk.Label()
-        instance_label.set_text("Instance Name:")
+        instance_label.set_text(_("Instance Name:"))
         instance_label.show()
 
         new_instance_button = Gtk.LinkButton()
-        new_instance_button.set_label("Add/remove feed list")
+        new_instance_button.set_label(_("Add/remove feed list"))
         new_instance_button.connect("activate-link", self.new_instance_button_activate)
 
         instance_box.pack_start(instance_label, False, False, 4)
@@ -107,40 +111,40 @@ class MainWindow(Gtk.Window):
 
         renderer_enable = Gtk.CellRendererToggle()
         renderer_enable.connect("toggled", self.field_toggled, 1)
-        column_enable = Gtk.TreeViewColumn("Enable", renderer_enable, active=1)
+        column_enable = Gtk.TreeViewColumn(_("Enable"), renderer_enable, active=1)
         column_enable.set_expand(False)
         self.treeview.append_column(column_enable)
 
         renderer_url = Gtk.CellRendererText()
         renderer_url.set_property("editable", True)
         renderer_url.connect("edited", self.text_edited, 2)
-        column_url = Gtk.TreeViewColumn("Url", renderer_url, text=2)
+        column_url = Gtk.TreeViewColumn(_("Url"), renderer_url, text=2)
         column_url.set_expand(True)
         self.treeview.append_column(column_url)
 
         renderer_title = Gtk.CellRendererText()
         renderer_title.set_property("editable", True)
         renderer_title.connect("edited", self.text_edited, 3)
-        column_title = Gtk.TreeViewColumn("Custom title", renderer_title, text=3)
+        column_title = Gtk.TreeViewColumn(_("Custom title"), renderer_title, text=3)
         column_title.set_expand(True)
         self.treeview.append_column(column_title)
 
         renderer_notify = Gtk.CellRendererToggle()
         renderer_notify.connect("toggled", self.field_toggled, 4)
-        column_notify = Gtk.TreeViewColumn("Notify", renderer_notify, active=4)
+        column_notify = Gtk.TreeViewColumn(_("Notify"), renderer_notify, active=4)
         column_notify.set_expand(False)
         self.treeview.append_column(column_notify)
 
         renderer_showread = Gtk.CellRendererToggle()
         renderer_showread.connect("toggled", self.field_toggled, 6)
-        column_showread = Gtk.TreeViewColumn("Show Read", renderer_showread, active=6)
+        column_showread = Gtk.TreeViewColumn(_("Show Read"), renderer_showread, active=6)
         column_showread.set_expand(False)
         self.treeview.append_column(column_showread)        
 
         renderer_interval = Gtk.CellRendererText()
         renderer_interval.set_property("editable", True)
         renderer_interval.connect("edited", self.interval_edited)
-        column_interval = Gtk.TreeViewColumn("Interval", renderer_interval, text=5)
+        column_interval = Gtk.TreeViewColumn(_("Interval"), renderer_interval, text=5)
         column_interval.set_expand(False)
         column_interval.set_visible(self.show_hidden_fields)
         self.hidden_fields.append(column_interval)
@@ -148,7 +152,7 @@ class MainWindow(Gtk.Window):
 
         renderer_showimage = Gtk.CellRendererToggle()
         renderer_showimage.connect("toggled", self.field_toggled, 7)
-        column_showimage = Gtk.TreeViewColumn("Show Image", renderer_showimage, active=7)
+        column_showimage = Gtk.TreeViewColumn(_("Show Image"), renderer_showimage, active=7)
         column_showimage.set_expand(False)
         column_showimage.set_visible(self.show_hidden_fields)
         self.hidden_fields.append(column_showimage)        
@@ -194,41 +198,41 @@ class MainWindow(Gtk.Window):
         action_group = Gtk.ActionGroup("global_actions")
 
         # Create Import menu
-        action_import_menu = Gtk.Action("ImportMenu", "Import", None, None)
+        action_import_menu = Gtk.Action("ImportMenu", _("Import"), None, None)
         action_group.add_action(action_import_menu)
 
         action_import_opml = Gtk.Action("ImportOPML",
-                                        "_Import OPML",
-                                        "Import feeds from OPML file",
+                                        _("_Import OPML"),
+                                        _("Import feeds from OPML file"),
                                         Gtk.STOCK_FILE)
         action_import_opml.connect("activate", self.on_menu_import, "OPML")
         action_group.add_action(action_import_opml)
 
         action_import_file = Gtk.Action("ImportFeedFile",
-                                        "_Import Feeds File",
-                                        "Import feeds from file",
+                                        _("_Import Feeds File"),
+                                        _("Import feeds from file"),
                                         Gtk.STOCK_FILE)
         action_import_file.connect("activate", self.on_menu_import, "FEEDS")
         action_group.add_action(action_import_file)
 
         # Create Export menu
-        action_export_menu = Gtk.Action("ExportMenu", "Export", None, None)
+        action_export_menu = Gtk.Action("ExportMenu", _("Export"), None, None)
         action_group.add_action(action_export_menu)
 
         action_export_file = Gtk.Action("ExportFeedFile",
-                                        "_Export Feeds File",
-                                        "Export feeds to file",
+                                        _("_Export Feeds File"),
+                                        _("Export feeds to file"),
                                         Gtk.STOCK_FILE)
         action_export_file.connect("activate", self.on_menu_export_feeds)
         action_group.add_action(action_export_file)
 
         # Create Option menu
-        action_option_menu = Gtk.Action("OptionMenu", "Options", None, None)
+        action_option_menu = Gtk.Action("OptionMenu", _("Options"), None, None)
         action_group.add_action(action_option_menu)
 
         action_toggle_hidden = Gtk.Action("ShowHideFields",
-                                        "_Toggle Hidden Fields",
-                                        "Show or Hide hidden fields",
+                                        _("_Toggle Hidden Fields"),
+                                        _("Show or Hide hidden fields"),
                                         Gtk.STOCK_FILE)
         action_toggle_hidden.connect("activate", self.on_menu_toggle_hidden)
         action_group.add_action(action_toggle_hidden)
@@ -245,8 +249,8 @@ class MainWindow(Gtk.Window):
                                          Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                          Gtk.MessageType.QUESTION,
                                          Gtk.ButtonsType.OK_CANCEL,
-                                         "Changes will be discarded, continue?")        
-        checking.set_title('Are you sure?')
+                                         _("Changes will be discarded, continue?"))        
+        checking.set_title(_('Are you sure?'))
         response = checking.run()
         checking.destroy()
         if response == Gtk.ResponseType.OK:
@@ -254,9 +258,9 @@ class MainWindow(Gtk.Window):
                                             Gtk.DialogFlags.MODAL | Gtk.DialogFlags.DESTROY_WITH_PARENT,
                                             Gtk.MessageType.QUESTION,
                                             Gtk.ButtonsType.OK_CANCEL,
-                                            "New Instance (List) Name")
+                                            _("New Instance (List) Name"))
             dialog_box = dialog.get_content_area()
-            dialog.set_title('Add New Instance (List)')
+            dialog.set_title(_('Add New Instance (List)'))
             entry = Gtk.Entry()
             entry.set_size_request(100, 0)
             dialog_box.pack_end(entry, False, False, 5)
@@ -329,7 +333,7 @@ class MainWindow(Gtk.Window):
             dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
                                         Gtk.ButtonsType.CLOSE,
-                                        "Failed to save config file")
+                                        _("Failed to save config file"))
             dialog.format_secondary_text(str(e))
             dialog.run()
             dialog.destroy()            
@@ -339,12 +343,12 @@ class MainWindow(Gtk.Window):
 
         filter_type = Gtk.FileFilter()
         if type == "OPML":
-            title = "Choose a OPML feed file"
-            filter_type.set_name("OPML files")
+            title = _("Choose a OPML feed file")
+            filter_type.set_name(_("OPML files"))
             filter_type.add_pattern("*.opml")
         else:
-            title = "Choose a feed file"
-            filter_type.set_name("Text files")
+            title = _("Choose a feed file")
+            filter_type.set_name(_("Text files"))
             filter_type.add_mime_type("text/plain")            
 
 
@@ -361,7 +365,7 @@ class MainWindow(Gtk.Window):
         dialog.add_filter(filter_type)
 
         filter_any = Gtk.FileFilter()
-        filter_any.set_name("All files")
+        filter_any.set_name(_("All files"))
         filter_any.add_pattern("*")
         dialog.add_filter(filter_any)
 
@@ -378,8 +382,8 @@ class MainWindow(Gtk.Window):
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.INFO,
                                         Gtk.ButtonsType.OK,
-                                        "file imported")
-                dialog.format_secondary_text("Imported %d feeds" % new_feeds)
+                                        _("file imported"))
+                dialog.format_secondary_text(_("Imported %d feeds") % new_feeds)
                 dialog.run()
                 dialog.destroy()
                 
@@ -387,14 +391,14 @@ class MainWindow(Gtk.Window):
                 dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
                                         Gtk.ButtonsType.CLOSE,
-                                        "Failed to import file")
+                                        _("Failed to import file"))
                 dialog.format_secondary_text(str(e))
                 dialog.run()
                 dialog.destroy()        
 
 
     def on_menu_export_feeds(self, widget):
-        dialog = Gtk.FileChooserDialog("Save a feed file", self,
+        dialog = Gtk.FileChooserDialog(_("Save a feed file"), self,
                                        Gtk.FileChooserAction.SAVE,
                                        (
                                            Gtk.STOCK_CANCEL,
@@ -405,12 +409,12 @@ class MainWindow(Gtk.Window):
 
         # Add filters to dialog box
         filter_text = Gtk.FileFilter()
-        filter_text.set_name("Text files")
+        filter_text.set_name(_("Text files"))
         filter_text.add_mime_type("text/plain")
         dialog.add_filter(filter_text)
 
         filter_any = Gtk.FileFilter()
-        filter_any.set_name("All files")
+        filter_any.set_name(_("All files"))
         filter_any.add_pattern("*")
         dialog.add_filter(filter_any)
 
@@ -423,11 +427,11 @@ class MainWindow(Gtk.Window):
                 self.config.export_feeds(filename)
                 #ConfigManager.write(self.config.feeds, filename=filename)
             except Exception as ex:
-                sys.stderr.write("Unable to export file, exception: %s" % str(ex))
+                sys.stderr.write(_("Unable to export file, exception: %s") % str(ex))
                 error_dialog = Gtk.MessageDialog(self, 0,
                                         Gtk.MessageType.ERROR,
                                         Gtk.ButtonsType.CLOSE,
-                                        "Unable to export file")
+                                        _("Unable to export file"))
                 error_dialog.format_secondary_text(str(ex))
                 
                 error_dialog.run()
