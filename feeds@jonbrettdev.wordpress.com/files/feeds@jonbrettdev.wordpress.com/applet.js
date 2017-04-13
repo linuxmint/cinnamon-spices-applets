@@ -39,7 +39,7 @@ const FeedReader = imports.feedreader;
 const Gio = imports.gi.Gio;
 
 const Gtk = imports.gi.Gtk;
-const Gettext = imports.gettext.domain('cinnamon-applets');
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
@@ -47,12 +47,19 @@ const Settings = imports.ui.settings;
 const St = imports.gi.St;
 const Tooltips = imports.ui.tooltips;
 const Util = imports.misc.util;
-const _ = Gettext.gettext;
+
 const Clutter = imports.gi.Clutter;
 const Logger = imports.log_util;
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const Signals = imports.signals;
+
+// Translation support
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /*  Application hook */
 function main(metadata, orientation, panel_height, instance_id) {
@@ -683,7 +690,7 @@ FeedDisplayMenuItem.prototype = {
         this.logger.debug("Items Loaded: " + menu_items);
         this.logger.debug("Link: " + this.reader.url);
 
-        let tooltipText = "Right Click to open feed: \n" + this.reader.url;
+        let tooltipText = _("Right Click to open feed: \n") + this.reader.url;
         let tooltip = new Tooltips.Tooltip(this.actor, tooltipText);
 
         /* Append unread_count to title */
@@ -747,7 +754,7 @@ FeedDisplayMenuItem.prototype = {
 
         let cnt = (this.max_Items > this.unread_count) ? this.max_items : this.unread_count;
         if(cnt > 0){
-            menu_item = new ApplicationContextMenuItem(this, _("Mark Next " + cnt + " Posts Read"), "mark_next_read");
+            menu_item = new ApplicationContextMenuItem(this, _("Mark Next ") + cnt + _(" Posts Read"), "mark_next_read");
             this.menu.addMenuItem(menu_item, 0);
             this.menuItemCount++;
         }
@@ -812,7 +819,7 @@ FeedMenuItem.prototype = {
         this.addActor(box, { expand: true } );
 
         let description = item.title  +  '\n' +
-                'Published: ' + item.published  +  '\n\n' +
+                _('Published: ') + item.published  +  '\n\n' +
                 item.description_text;
 
         this.tooltip = new Tooltips.Tooltip(this.actor, description);
@@ -828,7 +835,7 @@ FeedMenuItem.prototype = {
                     '<span weight="bold">' +
                     item.title +
                     '</span>\n' +
-                    'Published: ' + item.published  +  '\n\n' +
+                    _('Published: ') + item.published  +  '\n\n' +
                     item.description);
         } catch (e) {
             this.logger.debug("Error Tweaking Tooltip: " + e);
@@ -923,11 +930,11 @@ FeedMenuItem.prototype = {
             let d = Math.floor(age / (24 * 60 * 60 * 1000))
 
             if(d > 0){
-                return "(" + d + "d) ";
+                return "(" + d + _("d) ");
             } else if (h > 0) {
-                return "(" + h + "h) "
+                return "(" + h + _("h) ")
             } else {
-                return "(<1h) ";
+                return _("(<1h) ");
             }
         } catch (e){
             this.logger.error(e);
