@@ -19,14 +19,21 @@
 const UUID = "feeds@jonbrettdev.wordpress.com";
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
-const Gettext = imports.gettext.domain('cinnamon-applets');
+const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Soup = imports.gi.Soup;
 const Util = imports.misc.util;
-const _ = Gettext.gettext;
+
 const Signals = imports.signals;
+
+// Translation support
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 //const APPLET_PATH = imports.ui.appletManager.appletMeta["feeds@jonbrettdev.wordpress.com"].path;
 const AppletPath = imports.ui.appletManager.appletMeta[UUID].path;
@@ -141,7 +148,7 @@ FeedReader.prototype = {
 
             if (info.exception != undefined){
                 // Invalid feed detected, throw and log error.
-                this.title = "Invalid feed url";
+                this.title = _("Invalid feed url");
                 throw info.exception;
             }
 
@@ -217,7 +224,7 @@ FeedReader.prototype = {
                 else if(unread_items.length == 1) {
                     this.callbacks.onNewItem(this, this.title, unread_items[0].title);
                 } else if(unread_items.length > 1) {
-                    this.callbacks.onNewItem(this, this.title, unread_items.length + " unread items!");
+                    this.callbacks.onNewItem(this, this.title, unread_items.length + _(" unread items!"));
                 }
 
             } catch (e){
