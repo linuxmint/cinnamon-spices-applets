@@ -405,7 +405,7 @@ MyApplet.prototype = {
                 this.mainBox.add_actor(this.imageWidget); // and add actor for to it which can be removed
                 this.mainBox.add_actor(this.textWidget); // and text actor to handle case where vnstat not installed
 
-                GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+                GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
                 let l = new Clutter.BinLayout();
                 let b = new Clutter.Box();
                 let c = new Clutter.Texture({
@@ -529,7 +529,7 @@ MyApplet.prototype = {
 /*
 The code following allows me to retain the 'standard' additions of 'About...' 'Configure...' and 'Remove' when rebuilding the Context menu.
 
-The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odeseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. The following code adds all the menu items to the applet context menu without touching the default items.
+The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. The following code adds all the menu items to the applet context menu without touching the default items.
 
     // Build right click context menu
     buildContextMenu: function() {
@@ -546,7 +546,7 @@ The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementat
         // Items added to this.myMenuSection insted of this._applet_context_menu.
     },
 
-Note Odesius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items. Maybe @collinss could shed some light on why this happened?
+Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items. Maybe @collinss could shed some light on why this happened?
 */
 
         if (this.myMenuSection)
@@ -749,7 +749,7 @@ Note Odesius has used the index 0 (zero) to insert the menu section to position 
         GTop.glibtop_get_netload(this.gtop, this.monitoredInterfaceName);
         this.upOld = this.gtop.bytes_out;
         this.downOld = this.gtop.bytes_in;
-        // Also set up the working values of the Cummulative totals.
+        // Also set up the working values of the Cumulative totals.
 	this.cT1 = this.cumulativeTotal1;
 	this.cT2 = this.cumulativeTotal2;
 	this.cT3 = this.cumulativeTotal3;
@@ -887,7 +887,7 @@ Note Odesius has used the index 0 (zero) to insert the menu section to position 
             this.buildContextMenu();
         }
         // Fix for Cinnamon 2.0 to remove Context Menu Items by running build context menu again next loop - note delay needed 
-        // No longer required thanks to alternative solution thanks to @Odeseus
+        // No longer required thanks to alternative solution thanks to @Odyseus
         if (this.firstTimeFlag) {
            this.rebuildFlag = true;
             this.firstTimeFlag = false;
@@ -998,7 +998,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version 3.1.1
+Version 3.1.2
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1037,7 +1037,7 @@ Version 3.1.1
 2.2.3 Addition documentation
 2.2.4 Changed 'crisis' to 'suspend' for preset script and tested. Reorder advanced functions and added separators.
 2.2.5 Three special cases now in use - suspendscript, alertscript and modalalert. Function added to implement the modal dialog used by modal alert. Testing functions still 'exposed' to users on right click function submenu. 
-To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asyncronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used? 
+To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asynchronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used? 
 Conclusion - change to a drop down selection of options, initially the three currently in use but consider adding sound and notification options. remove terminal string option as it can be in a script file.
 2.2.6 Implemented drop down alert handling plus change back to KB from kB and replace round with floor
 2.2.7 Scripts commented and checked. Extra options of notify and do nothing added. Use now made of Sox to play audio warnings and notify-send to add notifications. sox needs to be installed
@@ -1054,7 +1054,7 @@ Conclusion - change to a drop down selection of options, initially the three cur
 2.3.5 Major change in use of css styles for the background colours which show connection and alert status.
       This allows the user to match colours etc to a particular theme.
 2.3.6 Minor bug fix - Context Menu not always rebuilt after adding or removing advanced functions submenu.
-2.3.7 Bug fix - Cummulative counters 1 and 3 not being saved correctly
+2.3.7 Bug fix - Cumulative counters 1 and 3 not being saved correctly
 2.3.8  Anomoly fix - Avoid calling  GTop.glibtop_get_netload() without valid interface -
        possible latest versions can segfault if interface not valid.
 2.3.9  Add fix for Applet not being fully halted when removed from panel (from dansie)
@@ -1062,12 +1062,12 @@ Conclusion - change to a drop down selection of options, initially the three cur
        automatically added items from the context menu by calling rebuilding menu a second 
        time during startup sequence after a one cycle delay. Long term solution is to use 
        dansie's method of building everything as a submenu. 
-2.3.11 Default settings changed to start with cummulative monitoring off for all interfaces
+2.3.11 Default settings changed to start with cumulative monitoring off for all interfaces
        (null) in settings file.
 2.3.12 Revert to the old method of handling cumulative data and only update cumulative totals
        for the monitored interface. Slightly less flexible but intended to reduce the chances
        of segfaults until the problem is understood and resolved.
-2.3.13 Changes to Settings File to explicitely use real numbers for Cumulative Data
+2.3.13 Changes to Settings File to explicitly use real numbers for Cumulative Data
 2.3.14 Test of reset function including setting reset date and time 
        and avoid use of updating a Cinnamon Settings within a single expression
        NB Interface 1 only 
@@ -1091,7 +1091,7 @@ Conclusion - change to a drop down selection of options, initially the three cur
 2.4.1  Moved Configure to bottom of context menu
        Tried multiple instances - useful but automatic update fails and hand crafting of .cinnamon/configs/netusagemonitor@pdcurtis required
        Checked with Cinnamon 2.2 via LiveUSB
-2.4.2  Display of Header inhibited when no Cummulative Data being displayed.
+2.4.2  Display of Header inhibited when no Cumulative Data being displayed.
 2.4.3.0   Multiple instances in metadata.json
           Changes to minimise width of applet when not connected to go with multiple instances.     
           Change to width in stylesheet.css to match
@@ -1120,14 +1120,14 @@ Conclusion - change to a drop down selection of options, initially the three cur
           Required because selecting the active bluetooth connection which looks like 12:34:56:78:90:12
           in the network manager does not work
           It ought to be possible to use bnep0 whenever the active interface contains semicolons
-          but if it aint broke dont fix it!
+          but if it aint broke don't fix it!
           Corrected formatSentReceiver to handle negative numbers resulting from offsets 
 3.0.0     Modifications for Mint 18 and higher with Cinnamon 3.0 and higher
           Changes to Suspend Script to work with SystemD as well as Dbus for suspend and changes to allow immediate suspend option in box.
           Addition of version test to chose between xed for Mint 18 with Cinnamon 3.0 and gedit for earlier versions. 
 3.0.2     NOTE 3.0.1 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 3.0.0 to the cinnamon-spices web site
 3.0.3     Corrected icon.png in applet folder which is used by Add Applets and removed incorrect icon from metadata.json
-3.0.4     Increased maximum from 5000 mbytes to 100000 mbytes for totalLimit and cummulative offsets
+3.0.4     Increased maximum from 5000 mbytes to 100000 mbytes for totalLimit and cumulative offsets
 3.0.5     Made much more use of formatSentReceived() because of increase in limits
           Removed a number of commented out blocks to do with cumulative totals and formatting.
 3.0.6     Choice of units for limits and offsets to be Mbytes or Gbytes by drop down widget in settings (configuration) window
@@ -1145,8 +1145,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Create netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
           Version and changes information update in applet.js and changelog.txt
           Update README.md (2x) for contributions.
-3.1.1     Additional PopupMenu.PopupMenuSection added as per an easy and elegant suggestion from @collinss and @Odeseus so 'standard' context menu items are retained when the menu is refreshed.
+3.1.1     Additional PopupMenu.PopupMenuSection added as per an easy and elegant suggestion from @collinss and @Odyseus so 'standard' context menu items are retained when the menu is refreshed.
           Update netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot
           Version and changes information update in applet.js and changelog.txt
-          Update README.md (2x) for contributions from @collinss and @Odeseus.
+          Update README.md (2x) for contributions from @collinss and @Odyseus.
+3.1.2     Change spawn_command_line_sync to spawn_command_line_async to remove one reason for 'dangerous' classification.
+          Correct several spelling errors in comments and .md files.
 */

@@ -46,7 +46,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * **The Settings Screen allows:**
       + Setting the Update Frequency (1 to 5 seconds)
       + The Resolution of displayed upload and downloads (0 to 2 decimal places)
-      + Change the units for Data Limits and Cummulative Offsets between Mbytes or Gbytes 
+      + Change the units for Data Limits and Cumulative Offsets between Mbytes or Gbytes 
       + Setting an interface to use as Default if no other interface is active at start-up - for Wifi hotspots and Mobile Broadband where the connection is manual.
       + Enabling Alerts on the current monitored interface and
         setting the Data Limit for the current connection on that interface and
@@ -82,7 +82,7 @@ The internal changes required in the applet to allow translations are being impl
 
 Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
 
-Thanks are given for the very useful contributions from @collinss and @Odeseus to helping harmonise the menus with other applets.
+Thanks are given for the very useful contributions from @collinss and @Odyseus to helping harmonise the menus with other applets.
 
 ## Manual Installation:
 
