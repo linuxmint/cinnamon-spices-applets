@@ -17,47 +17,79 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:90
+#: applet.js:103
 msgid "Feed reader"
 msgstr ""
 
-#: applet.js:198
+#: applet.js:196
 msgid "Mark all read"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:207
 msgid "Reload"
 msgstr ""
 
-#: applet.js:218
+#: applet.js:216
 msgid "Manage feeds"
 msgstr ""
 
-#: applet.js:229
+#: applet.js:227
 msgid "Settings"
 msgstr ""
 
-#: applet.js:612
+#: applet.js:541
 msgid "Feeds"
 msgstr ""
 
-#: applet.js:819
+#: applet.js:693
+msgid "Right Click to open feed: \n"
+msgstr ""
+
+#: applet.js:750
 msgid "Mark All Posts Read"
 msgstr ""
 
-#: applet.js:826
+#: applet.js:757
 msgid "Mark Next "
 msgstr ""
 
-#: applet.js:832
+#: applet.js:757
+msgid " Posts Read"
+msgstr ""
+
+#: applet.js:763
 msgid "Update feed URL"
 msgstr ""
 
-#: applet.js:970
+#: applet.js:822 applet.js:838
+msgid "Published: "
+msgstr ""
+
+#: applet.js:901
 msgid "Mark Post Read"
 msgstr ""
 
-#: feedreader.js:345 feedreader.js:358
+#: applet.js:933
+msgid "d) "
+msgstr ""
+
+#: applet.js:935
+msgid "h) "
+msgstr ""
+
+#: applet.js:937
+msgid "(<1h) "
+msgstr ""
+
+#: feedreader.js:151
+msgid "Invalid feed url"
+msgstr ""
+
+#: feedreader.js:220
+msgid " unread items!"
+msgstr ""
+
+#: feedreader.js:362 feedreader.js:375
 msgid "Loading feed"
 msgstr ""
 
@@ -67,24 +99,6 @@ msgstr ""
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->name
 msgid "Feeds Reader"
-msgstr ""
-
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->show_read_items->description
-msgid "Show read items"
-msgstr ""
-
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->show_read_items->tooltip
-msgid "Controls whether previously read items are displayed in the feed menu"
-msgstr ""
-
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->url->description
-msgid "Feed URL(s)"
-msgstr ""
-
-#. feeds@jonbrettdev.wordpress.com->settings-schema.json->url->tooltip
-msgid "Enter the URLs of a valid RSS/Atom feed, one feed per line"
 msgstr ""
 
 #. feeds@jonbrettdev.wordpress.com->settings-
@@ -116,15 +130,18 @@ msgstr ""
 msgid "Maximum number of items to display for this feed"
 msgstr ""
 
-#. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->show_feed_image->description
-msgid "Show feed image(s)"
+#. feeds@jonbrettdev.wordpress.com->settings-schema.json->max_items->units
+msgid "feeds"
 msgstr ""
 
 #. feeds@jonbrettdev.wordpress.com->settings-
-#. schema.json->show_feed_image->tooltip
-msgid ""
-"Controls whether a display the feed image (where available) in the feed menu"
+#. schema.json->instance_name->description
+msgid "Feed Instance Name"
+msgstr ""
+
+#. feeds@jonbrettdev.wordpress.com->settings-
+#. schema.json->instance_name->tooltip
+msgid "Do not change, this is modified by the Manage Feeds window."
 msgstr ""
 
 #. feeds@jonbrettdev.wordpress.com->settings-
@@ -155,4 +172,152 @@ msgstr ""
 #. feeds@jonbrettdev.wordpress.com->settings-
 #. schema.json->refresh_interval->units
 msgid "minutes"
+msgstr ""
+
+#. manage_feeds.py:54
+msgid "Manage your feeds"
+msgstr ""
+
+#. manage_feeds.py:89
+msgid "Instance Name:"
+msgstr ""
+
+#. manage_feeds.py:93
+msgid "Add/remove feed list"
+msgstr ""
+
+#. manage_feeds.py:114
+msgid "Enable"
+msgstr ""
+
+#. manage_feeds.py:121
+msgid "Url"
+msgstr ""
+
+#. manage_feeds.py:128
+msgid "Custom title"
+msgstr ""
+
+#. manage_feeds.py:134
+msgid "Notify"
+msgstr ""
+
+#. manage_feeds.py:140
+msgid "Show Read"
+msgstr ""
+
+#. manage_feeds.py:147
+msgid "Interval"
+msgstr ""
+
+#. manage_feeds.py:155
+msgid "Show Image"
+msgstr ""
+
+#. manage_feeds.py:201
+msgid "Import"
+msgstr ""
+
+#. manage_feeds.py:205
+msgid "_Import OPML"
+msgstr ""
+
+#. manage_feeds.py:206
+msgid "Import feeds from OPML file"
+msgstr ""
+
+#. manage_feeds.py:212
+msgid "_Import Feeds File"
+msgstr ""
+
+#. manage_feeds.py:213
+msgid "Import feeds from file"
+msgstr ""
+
+#. manage_feeds.py:219
+msgid "Export"
+msgstr ""
+
+#. manage_feeds.py:223
+msgid "_Export Feeds File"
+msgstr ""
+
+#. manage_feeds.py:224
+msgid "Export feeds to file"
+msgstr ""
+
+#. manage_feeds.py:230
+msgid "Options"
+msgstr ""
+
+#. manage_feeds.py:234
+msgid "_Toggle Hidden Fields"
+msgstr ""
+
+#. manage_feeds.py:235
+msgid "Show or Hide hidden fields"
+msgstr ""
+
+#. manage_feeds.py:252
+msgid "Changes will be discarded, continue?"
+msgstr ""
+
+#. manage_feeds.py:253
+msgid "Are you sure?"
+msgstr ""
+
+#. manage_feeds.py:261
+msgid "New Instance (List) Name"
+msgstr ""
+
+#. manage_feeds.py:263
+msgid "Add New Instance (List)"
+msgstr ""
+
+#. manage_feeds.py:336
+msgid "Failed to save config file"
+msgstr ""
+
+#. manage_feeds.py:346
+msgid "Choose a OPML feed file"
+msgstr ""
+
+#. manage_feeds.py:347
+msgid "OPML files"
+msgstr ""
+
+#. manage_feeds.py:350
+msgid "Choose a feed file"
+msgstr ""
+
+#. manage_feeds.py:351 manage_feeds.py:412
+msgid "Text files"
+msgstr ""
+
+#. manage_feeds.py:368 manage_feeds.py:417
+msgid "All files"
+msgstr ""
+
+#. manage_feeds.py:385
+msgid "file imported"
+msgstr ""
+
+#. manage_feeds.py:386
+msgid "Imported %d feeds"
+msgstr ""
+
+#. manage_feeds.py:394
+msgid "Failed to import file"
+msgstr ""
+
+#. manage_feeds.py:401
+msgid "Save a feed file"
+msgstr ""
+
+#. manage_feeds.py:430
+msgid "Unable to export file, exception: %s"
+msgstr ""
+
+#. manage_feeds.py:434
+msgid "Unable to export file"
 msgstr ""
