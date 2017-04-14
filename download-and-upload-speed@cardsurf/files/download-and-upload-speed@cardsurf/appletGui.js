@@ -6,7 +6,7 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
-
+const Gettext = imports.gettext;
 const uuid = 'download-and-upload-speed@cardsurf';
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
 const AppletConstants = AppletDirectory.appletConstants;
@@ -14,6 +14,12 @@ const CssStylization = AppletDirectory.cssStylization;
 
 
 const Cairo = imports.cairo;
+
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 function IconLabel() {
 	this._init();
@@ -346,8 +352,8 @@ HoverMenuTotalBytes.prototype={
     },
 
 	_init_labels: function(){
-		this.label_text_received.set_text("Total download:");
-		this.label_text_sent.set_text("Total upload:");
+		this.label_text_received.set_text(_("Total download:"));
+		this.label_text_sent.set_text(_("Total upload:"));
 	},
 
 	set_text_style: function(css_style) {

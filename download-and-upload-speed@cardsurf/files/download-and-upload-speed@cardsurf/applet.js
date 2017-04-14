@@ -5,7 +5,7 @@ const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const uuid = 'download-and-upload-speed@cardsurf';
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
 const AppletGui = AppletDirectory.appletGui;
@@ -15,7 +15,11 @@ const Files = AppletDirectory.files;
 const FilesCsv = AppletDirectory.filesCsv;
 const Dates = AppletDirectory.dates;
 
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
 
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 
 
@@ -317,7 +321,7 @@ MyApplet.prototype = {
 	},
 
 	_init_menu_item_network: function () {
-		this.menu_item_network = new AppletGui.RadioMenuItem("Network interface", this.network_interfaces);
+		this.menu_item_network = new AppletGui.RadioMenuItem(_("Network interface"), this.network_interfaces);
 		index = this.network_interfaces.indexOf(this.network_interface);
 		this.menu_item_network.set_active_option(index);
 		this.menu_item_network.set_callback_option_clicked(this, this.on_menu_item_network_clicked);
@@ -338,23 +342,23 @@ MyApplet.prototype = {
 
 	_init_menu_item_byte_start_times: function () {
 		let start_times = this._get_byte_start_time_options();
-		this.menu_item_byte_start_times = new AppletGui.RadioMenuItem("Total data start", start_times);
+		this.menu_item_byte_start_times = new AppletGui.RadioMenuItem(_("Total data start"), start_times);
 		this._update_menu_item_byte_start_times_option();
 		this.menu_item_byte_start_times.set_callback_option_clicked(this, this.on_menu_item_byte_start_times_clicked);
 		this._applet_context_menu.addMenuItem(this.menu_item_byte_start_times);
 	},
 
 	_get_byte_start_time_options: function () {
-		 return [ "Launch of applet",
-		          "Today",
-		          "Yesterday",
-		          "3 days ago",
-		          "5 days ago",
-		          "7 days ago",
-		          "10 days ago",
-		          "14 days ago",
-		          "30 days ago",
-		          "Custom date" ];
+		 return [ _("Launch of applet"),
+		          _("Today"),
+		          _("Yesterday"),
+		          _("3 days ago"),
+		          _("5 days ago"),
+		          _("7 days ago"),
+		          _("10 days ago"),
+		          _("14 days ago"),
+		          _("30 days ago"),
+		          _("Custom date") ];
 	},
 
     _update_menu_item_byte_start_times_option: function () {
@@ -437,7 +441,7 @@ MyApplet.prototype = {
 	},
 
 	_init_menu_item_gui: function () {
-		this.menu_item_gui = new AppletGui.RadioMenuItem("Gui", ["Compact", "Large"]);
+		this.menu_item_gui = new AppletGui.RadioMenuItem(_("Gui"), [_("Compact"), _("Large")]);
 		this.menu_item_gui.set_active_option(this.gui_speed_type);
 		this.menu_item_gui.set_callback_option_clicked(this, this.on_menu_item_gui_clicked);
 		this._applet_context_menu.addMenuItem(this.menu_item_gui);
