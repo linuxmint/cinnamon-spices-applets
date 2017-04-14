@@ -363,13 +363,13 @@ MyApplet.prototype = {
     },
 
     _getContent: function(c){
-        return c.toString()+"\u1d3cC / "+this._toFahrenheit(c).toString()+"\u1d3cF";
+        return c.toString()+" °C / "+this._toFahrenheit(c).toString()+" °F";
     },
 
     _formatTemp: function(t) {
         //uncomment the next line to display temperature in Fahrenheit
-        //return this._toFahrenheit(t).toString()+"\u1d3cF";
-        return (Math.round(t*10)/10).toFixed(1).toString()+"\u1d3cC";
+        //return this._toFahrenheit(t).toString()+" °F";
+        return (Math.round(t*10)/10).toFixed(1).toString()+" °C";
     }
     
     
