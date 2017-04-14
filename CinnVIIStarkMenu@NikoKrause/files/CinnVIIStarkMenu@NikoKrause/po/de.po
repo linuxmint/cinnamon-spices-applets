@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: cinnviistarkmenu\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2017-03-18 14:21+0100\n"
-"PO-Revision-Date: 2017-03-22 23:07+0000\n"
-"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
+"PO-Revision-Date: 2017-04-08 14:29+0000\n"
+"Last-Translator: Niko Krause <nikokrause@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2017-03-24 06:35+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
+"X-Launchpad-Export-Date: 2017-04-14 06:03+0000\n"
+"X-Generator: Launchpad (build 18352)\n"
 "Language: de\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
@@ -413,7 +413,7 @@ msgstr "Anordnung und Inhalt"
 #. 3.2->settings-schema.json->sidebar-layout->title
 #. 2.6->settings-schema.json->head-sidebar-layout->description
 msgid "Sidebar Layout"
-msgstr "Seitenleistengestaltung"
+msgstr "Seitenleistenlayout"
 
 #. 3.2->settings-schema.json->quicklauncher->title
 msgid "Quicklauncher"
@@ -431,7 +431,7 @@ msgstr "Benutzerdefinierte Schnellstarter"
 
 #. 3.2->settings-schema.json->quitmenu-layout->title
 msgid "Quit Menu Layout"
-msgstr "Beendenmenügestaltung"
+msgstr "Beendenmenü-Layout"
 
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
@@ -574,12 +574,12 @@ msgstr "MATE-Menü"
 #. 3.2->settings-schema.json->menu-layout->tooltip
 #. 2.6->settings-schema.json->menu-layout->tooltip
 msgid "Choose between Stark-Menu and MATE-Menu layout"
-msgstr "Zwischen Stark-Menü- und MATE-Menü-Gestaltung wählen"
+msgstr "Zwischen Stark-Menü- und MATE-Menü-Layout wählen"
 
 #. 3.2->settings-schema.json->menu-layout->description
 #. 2.6->settings-schema.json->menu-layout->description
 msgid "Menu layout"
-msgstr "Menügestaltung"
+msgstr "Menü-Layout"
 
 #. 3.2->settings-schema.json->quicklauncher-7-command->tooltip
 #. 3.2->settings-schema.json->quicklauncher-16-command->tooltip
@@ -711,12 +711,12 @@ msgstr "Benutzerbild und -name"
 #. 3.2->settings-schema.json->shutdown-menu-layout->description
 #. 2.6->settings-schema.json->shutdown-menu-layout->description
 msgid "Quit buttons layout"
-msgstr "Gestaltung der Beendenknöpfe"
+msgstr "Layout der Beendenknöpfe"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
 #. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
 msgid "Choose the layout of the quit options."
-msgstr "Die Gestaltung der Beendenknöpfe wählen."
+msgstr "Das Layout der Beendenknöpfe wählen."
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
@@ -726,12 +726,12 @@ msgstr "Horizontal"
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
 msgid "Vertical"
-msgstr "Senkrecht"
+msgstr "Vertikal"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
 msgid "DropDown"
-msgstr "Aufklappliste"
+msgstr "Dropdown"
 
 #. 3.2->settings-schema.json->show-application-icons->description
 #. 2.6->settings-schema.json->show-application-icons->description
