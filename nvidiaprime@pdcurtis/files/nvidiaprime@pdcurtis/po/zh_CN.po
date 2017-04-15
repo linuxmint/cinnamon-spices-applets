@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-15 20:09+0800\n"
+"PO-Revision-Date: 2017-04-15 20:14+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:89
+msgid "Waiting for nvidia"
+msgstr "等待nvidia"
+
+#: applet.js:140
+msgid "Open Power Statistics"
+msgstr "打开电源统计"
+
+#: applet.js:146
+msgid "Open System Monitor"
+msgstr "打开系统监视器"
+
+#: applet.js:165
+msgid "Housekeeping Menu"
+msgstr "内务处理和系统子菜单"
+
+#: applet.js:168
+msgid "View the Changelog"
+msgstr "查看变更日志"
+
+#: applet.js:174
+msgid "Open the Help file"
+msgstr "打开帮助文件"
+
+#: applet.js:209
+msgid "ERROR"
+msgstr "错误"
+
+#: applet.js:210
+msgid "Nvidia Prime is not installed so applet willl not work"
+msgstr "未安装Nvidia Prime，因此小程序不会工作"
+
+#: applet.js:214
+msgid "GPU OFF"
+msgstr "GPU关"
+
+#: applet.js:216
+msgid "NVidia based GPU is Off"
+msgstr "基于NVidia的GPU已关闭"
+
+#: applet.js:224
+msgid "GPU"
+msgstr "GPU"
+
+#: applet.js:225
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "基于NVidia的GPU已打开和核心温度是"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->displayExtra->description
+msgid ""
+"Access enhanced functionality through Context Menu - needs Cinnamon Restart"
+msgstr "通过右键菜单访问增强的功能 - 需要重新启动Cinnamon"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->displayExtra->tooltip
+msgid ""
+"Currently  adds glxspheres64 Graphics Processor Test - VirtualGL needs to be "
+"installed"
+msgstr "目前添加了glxspheres64图形管理器测试 - 需要安装VirtualGL"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the nVidia Prime Monitoring Applet"
+msgstr "nVidia Prime监视小程序的常规设置"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "刷新显示的间隔："
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"增大或减小此微调器的值来更改刷新间隔 - 如果您有一台较慢的机器请使用慢速刷新"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->refreshInterval-spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. nvidiaprime@pdcurtis->settings-schema.json->head1->description
+msgid "Additional Functionality"
+msgstr "附加功能"
+
+#. nvidiaprime@pdcurtis->metadata.json->name
+msgid "nVidia Prime GPU Display"
+msgstr "nVidia Prime GPU显示"
+
+#. nvidiaprime@pdcurtis->metadata.json->description
+msgid "Displays nVidia GPU Temperature when using Prime"
+msgstr "使用Prime时显示nVidia GPU温度"
