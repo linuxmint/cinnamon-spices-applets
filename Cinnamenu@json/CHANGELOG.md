@@ -1,5 +1,12 @@
 Changelog
 
+### 1.2.1
+
+  * Fixed the application list view having excessive width.
+  * Refined the width for the grid at all column counts.
+  * Fixed the search box height for some themes.
+  * Made the applet compatible for Cinnamon Git.
+
 ### 1.2.0
 
   * Added ability to toggle bookmarks

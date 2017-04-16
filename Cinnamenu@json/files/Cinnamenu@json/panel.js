@@ -3,6 +3,7 @@ const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
+const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Util = imports.misc.util;
 const Main = imports.ui.main;
@@ -10,7 +11,7 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const GnomeSession = imports.misc.gnomeSession;
 const ScreenSaver = imports.misc.screenSaver;
-const PanelMenu = imports.ui.panelMenu;
+const Signals = imports.signals;
 const PopupMenu = imports.ui.popupMenu;
 
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
@@ -63,12 +64,13 @@ function CinnamenuPanel() {
 }
 
 CinnamenuPanel.prototype = {
-  __proto__: PanelMenu.Button.prototype,
 
   _init: function(applet) {
     this.launcher = {};
-    PanelMenu.Button.prototype._init.call(this, applet.orientation)
 
+    this.actor = new Cinnamon.GenericContainer({
+      style_class: 'panel-button'
+    });
     this._applet = applet;
     this.orientation = applet.orientation;
     this.menu = applet.menu
@@ -193,8 +195,8 @@ CinnamenuPanel.prototype = {
         this.categoriesBox.width = this.groupCategoriesWorkspacesScrollBox.width;
         this._widthCategoriesBox = this.groupCategoriesWorkspacesScrollBox.width;
 
-        // calculate applications list/grid box width
-        this._calculateApplicationsBoxWidth(this._applicationsViewMode === ApplicationsViewMode.LIST);
+        // calculate applications list/grid box width // TBD
+        //this._calculateApplicationsBoxWidth(this._applicationsViewMode === ApplicationsViewMode.LIST);
 
         // Hide applications list/grid box depending on view mode
         if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
@@ -459,21 +461,23 @@ CinnamenuPanel.prototype = {
   },
 
   _clearApplicationSelections: function(selectedApplication) {
-    this.applicationsListBox.get_children().forEach(function(actor) {
-      if (selectedApplication && (actor == selectedApplication)) {
-        actor.add_style_class_name('selected');
+    let children = this.applicationsListBox.get_children();
+    for (let i = 0, len = children.length; i < len; i++) {
+      if (selectedApplication && children[i] === selectedApplication) { // TBD object equality
+        children[i].add_style_class_name('selected');
       } else {
-        actor.remove_style_class_name('selected');
+        children[i].remove_style_class_name('selected');
       }
-    });
+    }
+    children = this.applicationsGridBox.get_children();
 
-    this.applicationsGridBox.get_children().forEach(function(actor) {
-      if (selectedApplication && (actor == selectedApplication)) {
-        actor.add_style_class_name('selected');
+    for (let i = 0, len = children.length; i < len; i++) {
+      if (selectedApplication && children[i] === selectedApplication) { // TBD object equality
+        children[i].add_style_class_name('selected');
       } else {
-        actor.remove_style_class_name('selected');
+        children[i].remove_style_class_name('selected');
       }
-    });
+    }
   },
 
   _clearApplicationsBox: function(selectedCategory, refresh) {
@@ -707,7 +711,7 @@ CinnamenuPanel.prototype = {
     }
 
     // Ignore favorites when sorting
-    if (category_menu_id != 'favorites') {
+    if (category_menu_id !== 'favorites') {
       if (res === undefined) {
         res = [];
       }
@@ -726,7 +730,7 @@ CinnamenuPanel.prototype = {
     return res;
   },
 
-  _calculateApplicationsBoxWidth: function(isListView) {
+  _calculateApplicationsBoxWidth: function(isListView) { // TBD
     // Calculate visible menu boxes and adjust width accordingly
     let searchBoxWidth = this.searchBox.width;
     let searchBoxMargin = {
@@ -1577,7 +1581,7 @@ CinnamenuPanel.prototype = {
     });
 
     this.toggleListGridView = new GroupButton(this, viewModeButtonIcon, viewModeButtonIconSize, null, null);
-    this.toggleListGridView.setButtonEnterCallback(Lang.bind(this, function() {
+    this.toggleListGridView.setButtonEnterCallback(()=>{
       this.toggleListGridView.actor.add_style_pseudo_class('hover');
       if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
         this.selectedAppTitle.set_text(_("Grid View"));
@@ -1586,16 +1590,16 @@ CinnamenuPanel.prototype = {
         this.selectedAppTitle.set_text(_("List View"));
         this.selectedAppDescription.set_text('Switch to list view');
       }
-    }));
-    this.toggleListGridView.setButtonLeaveCallback(Lang.bind(this, function() {
+    });
+    this.toggleListGridView.setButtonLeaveCallback(()=>{
       this.toggleListGridView.actor.remove_style_pseudo_class('hover');
       this.selectedAppTitle.set_text('');
       this.selectedAppDescription.set_text('');
-    }));
-    this.toggleListGridView.setButtonPressCallback(Lang.bind(this, function() {
+    });
+    this.toggleListGridView.setButtonPressCallback(()=>{
       this.toggleListGridView.actor.add_style_pseudo_class('pressed');
-    }));
-    this.toggleListGridView.setButtonReleaseCallback(Lang.bind(this, function() {
+    });
+    this.toggleListGridView.setButtonReleaseCallback(()=>{
       this.toggleListGridView.actor.remove_style_pseudo_class('pressed');
       this.selectedAppTitle.set_text('');
       this.selectedAppDescription.set_text('');
@@ -1608,10 +1612,10 @@ CinnamenuPanel.prototype = {
         this._switchApplicationsView(ApplicationsViewMode.LIST);
         this._applet.settings.setValue('startup-view-mode', 0);
       }
-      // Retrigger an app list render until we figure out why its not rendering anything on toggle.
-      this._calculateApplicationsBoxWidth(this._applicationsViewMode === ApplicationsViewMode.LIST);
+      // Retrigger an app list render until we figure out why its not rendering anything on toggle. // TBD - causes extra width on lists
+      //this._calculateApplicationsBoxWidth(this._applicationsViewMode === ApplicationsViewMode.LIST);
       this[this._currentSelectKey](this._currentCategoryButton);
-    }));
+    });
 
     this.viewModeBox.add(this.toggleListGridView.actor, {
       x_fill: false,
@@ -1635,7 +1639,8 @@ CinnamenuPanel.prototype = {
       icon_name: 'edit-clear'
     });
     this.searchBox = new St.BoxLayout({
-      style_class: 'menu-search-box'
+      style_class: 'menu-search-box',
+      height: 30
     });
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
@@ -1726,7 +1731,7 @@ CinnamenuPanel.prototype = {
       let iter = root.iter();
       let nextType;
 
-      while ((nextType = iter.next()) != CMenu.TreeItemType.INVALID) {
+      while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
         if (nextType == CMenu.TreeItemType.DIRECTORY) {
           dirs.push(iter.get_directory());
         }
@@ -1888,10 +1893,13 @@ CinnamenuPanel.prototype = {
       vertical: true,
       x_expand: true
     });
+
+    let widths = [0, 0, 0, 625, 700, 725, 900, 1025];
     this.applicationsGridBox = new St.Widget({
       layout_manager: new Clutter.TableLayout(),
       reactive: true,
-      style_class: ''
+      style_class: '',
+      width: widths[this._applet.appsGridColumnCount]
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
@@ -1973,7 +1981,7 @@ CinnamenuPanel.prototype = {
       y_align: St.Align.START
     });
     this.bottomPane.add(bottomPaneSpacer1, {
-      expand: true,
+      expand: false,
       x_align: St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
     });
@@ -2055,3 +2063,4 @@ CinnamenuPanel.prototype = {
     this.appButtons = [];
   },
 };
+Signals.addSignalMethods(CinnamenuPanel.prototype)
