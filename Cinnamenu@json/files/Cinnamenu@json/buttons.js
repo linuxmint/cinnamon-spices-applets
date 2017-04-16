@@ -288,7 +288,7 @@ ApplicationContextMenuItem.prototype = {
         this._appButton._parent.menuIsOpen = false;
         break;
       case 'uninstall':
-        Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application') 
+        Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application')
           + '\' /usr/bin/cinnamon-remove-application \'' + this._appButton.app.get_app_info().get_filename() + '\'');
         this._appButton._parent.menu.close();
         break;
@@ -332,7 +332,7 @@ AppListGridButton.prototype = {
     this.appListLength = appListLength;
     this._stateChangedId = 0;
     this.column = null;
-    let style;
+    let style = '';
 
     this.appIndex = appIndex;
 
