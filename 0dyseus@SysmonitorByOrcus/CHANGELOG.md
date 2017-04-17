@@ -1,5 +1,11 @@
 ## Change Log
 
+##### 1.11
+- Fixed the display of **Load average** and **Swap** graphics.
+- Added localized help.
+- Changed contributors key on metadata.json file from a string to an array for better readability.
+- Some minor code clean up.
+
 ##### 1.10
 - Better handling of dependencies.
 
@@ -17,7 +23,7 @@
 - Added support for localizations. If someone wants to contribute with translations, inside the Help section of this applet (found in the applet context menu or the Help.md file inside this applet folder) you will find some pointers on how to do it.
 
 ##### 1.05
-- Re-writed to use Cinnamon's native settings system instead of an external library. This allowed me to remove **gjs** as a dependency for this applet.
+- Rewritten to use Cinnamon's native settings system instead of an external library. This allowed me to remove **gjs** as a dependency for this applet.
 - Added an option to use a custom command on applet click.
 - Added an option to set a custom width for each graph individually.
 - Added an option to align this applet tooltip text to the left. ¬¬
