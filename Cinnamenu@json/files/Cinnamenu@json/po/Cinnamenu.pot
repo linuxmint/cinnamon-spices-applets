@@ -221,6 +221,14 @@ msgstr ""
 msgid "columns"
 msgstr ""
 
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr ""
+
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->description
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
 msgid "Startup applications view mode"
