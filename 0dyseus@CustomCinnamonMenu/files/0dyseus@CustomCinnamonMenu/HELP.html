@@ -1,4 +1,112 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><title>Custom Cinnamon Menu applet help</title><link rel="shortcut icon" type="image/x-icon" href="./icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><style type="text/css">/*!
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><title>Custom Cinnamon Menu applet help</title><link rel="shortcut icon" type="image/x-icon" href="./icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><script type="text/javascript">/*
+exported toggleLocalizationVisibility,
+         docCookies
+ */
+
+/**
+ * :: cookies.js ::
+ * A complete cookies reader/writer framework with full unicode support.
+ * Revision #1 - September 4, 2014
+ * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+ * https://developer.mozilla.org/User:fusionchess
+ * This framework is released under the GNU Public License, version 3 or later.
+ * http://www.gnu.org/licenses/gpl-3.0-standalone.html
+ * Syntaxes:
+ * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+ * docCookies.getItem(name)
+ * docCookies.removeItem(name[, path[, domain]])
+ * docCookies.hasItem(name)
+ * docCookies.keys()
+ */
+
+var docCookies = {
+    getItem: function(aKey) {
+        if (!aKey)
+            return null;
+
+        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
+                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
+            "$1")) || null;
+    },
+    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
+        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
+            return false;
+
+        var sExpires = "";
+        if (aEnd) {
+            switch (aEnd.constructor) {
+                case Number:
+                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
+                    break;
+                case String:
+                    sExpires = "; expires=" + aEnd;
+                    break;
+                case Date:
+                    sExpires = "; expires=" + aEnd.toUTCString();
+                    break;
+            }
+        }
+        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
+            (aDomain ? "; domain=" + aDomain : "") +
+            (aPath ? "; path=" + aPath : "") +
+            (aSecure ? "; secure" : "");
+        return true;
+    },
+    removeItem: function(aKey, aPath, aDomain) {
+        if (!this.hasItem(aKey))
+            return false;
+
+        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
+            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
+        return true;
+    },
+    hasItem: function(aKey) {
+        if (!aKey)
+            return false;
+
+        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
+            "\\s*\\=")).test(document.cookie);
+    },
+    keys: function() {
+        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
+            .split(/\s*(?:\=[^;]*)?;\s*/);
+        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
+            keys[nIdx] = decodeURIComponent(keys[nIdx]);
+
+        return keys;
+    }
+};
+
+function toggleLocalizationVisibility(aButton) {
+    var language = aButton ? aButton.getAttribute("data-id") : docCookies.getItem("language");
+
+    if (!Boolean(language))
+        return;
+
+    try {
+        Array.prototype.slice.call(document.getElementsByClassName("localization-content"))
+            .forEach(function(aEl) {
+                aEl && aEl.classList.add("hidden");
+            });
+
+        Array.prototype.slice.call(document.getElementsByClassName("localization-switch"))
+            .forEach(function(aEl) {
+                if (aEl) {
+                    aEl.classList.remove("btn-success");
+                    aEl.classList.add("btn-default");
+
+                    if (aEl.getAttribute("data-id") === language) {
+                        document.title = aEl.getAttribute("data-title");
+                        aEl.classList.add("btn-success");
+                    }
+                }
+            });
+    } finally {
+        document.getElementById(language).classList.remove("hidden");
+        docCookies.setItem("language", language);
+    }
+}
+</script><style type="text/css">/*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
  * Copyright 2012-2016 Thomas Park
@@ -218,9 +326,48 @@ pre {
 	padding-right: 15px !important;
 }
 /* pre tag tweaks */
-</style></head><body><div id="mainarea"><div class="container boxed"><h1>Help for Custom Cinnamon Menu applet</h1>
+</style><style type="text/css">.localization-chooser {
+    padding: 1em !important;
+    width: 100% !important;
+}
+
+.localization-chooser input.btn {
+    font-weight: bold !important;
+    margin: 5px !important;
+    height: 100% !important;
+    display: inline-block !important;
+}
+</style></head><body><noscript><style type="text/css">#autohide_navbar {
+    display: none !important;
+}
+#noscript-navbar {
+    display: inline-block !important;
+}
+#noscript-navbar > li {
+    float: left !important;
+    margin: 2px !important;
+    padding: 2px !important;
+    top: 0 !important;
+    display: inline-block !important;
+}
+#noscript-navbar li > ul {
+    margin: 1px !important;
+    padding: 1px !important;
+}
+#noscript-navbar li {
+    list-style: none !important;
+    list-style-type: none !important;
+}
+</style><div class="alert alert-warning"><p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p><p><strong>This page uses JavaScript only to switch between the available languages.</strong></p><p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p></div></noscript><div id="mainarea"><div class="localization-chooser" align="middle"><input class="btn btn-success btn-sm localization-switch" type="button" value="English" data-id="english" data-title="Custom Cinnamon Menu applet help" onclick="self.toggleLocalizationVisibility(this);"><input class="btn btn-default btn-sm localization-switch" type="button" value="Español" data-id="spanish" data-title="Ayuda para el applet Configurable Menú para Cinnamon" onclick="self.toggleLocalizationVisibility(this);"></div><div class="container boxed"><div class="localization-content" id="english"><!--
+Notes to translators:
+- Do not modify this file directly. Create a copy of it with a different name that contains the language code and always use the .md extension for the file. Example: HELP-es.md file will contain the content of the HELP.md file translated into Spanish.
+- This file is written in [markdown](https://guides.github.com/features/mastering-markdown/) and some "touches" of HTML.
+- Familiarize yourself with markdown and HTML languages before attempting to translate the content of this file.
+- These notes doesn't need to be translated and can be deleted from the translated file.
+-->
+<h1>Help for Custom Cinnamon Menu applet</h1>
 <h3>IMPORTANT!!!</h3>
-<p>Never delete any of the files found inside this applet folder. It might break this applet functionality.</p>
+<p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
 <hr>
 <h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
@@ -240,7 +387,7 @@ If anyone has bugs to report, a feature request or a contribution, do so on <a h
 <ul>
 <li>If the favorites box, applications box or categories box are currently focused, the <kbd>Tab</kbd> key will switch the focus to the custom launchers box.</li>
 <li>If the focus is on the custom launchers box, the focus will go back to the categories box.</li>
-<li>If the custom launchers box isn't part of the menu, the <kbd>Tab</kbd> key alone or <kbd>Ctrl</kbd>/<kbd>Shit</kbd> + <kbd>Tab</kbd> key are pressed, it will cycle through the favorites box, applications box and categories box.</li>
+<li>If the custom launchers box isn't part of the menu, the <kbd>Tab</kbd> key alone or <kbd>Ctrl</kbd>/<kbd>Shift</kbd> + <kbd>Tab</kbd> key are pressed, it will cycle through the favorites box, applications box and categories box.</li>
 </ul>
 </li>
 <li><kbd>Up Arrow</kbd> and <kbd>Down Arrow</kbd> keys:
@@ -253,7 +400,7 @@ If anyone has bugs to report, a feature request or a contribution, do so on <a h
 <li><kbd>Menu</kbd> or <kbd>Alt</kbd> + <kbd>Enter</kbd> keys: Opens and closes the context menu (if any) of the currently highlighted item.</li>
 <li><kbd>Enter</kbd>key: Executes the currently highlighted item.</li>
 <li><kbd>Escape</kbd> key: It closes the main menu. If a context menu is open, it will close the context menu instead and a second tap of this key will close the main menu.</li>
-<li><kbd>Shift</kbd> + <kbd>Enter</kbd>: Executes application as root. This doesn't affect the custom launchers.</li>
+<li><kbd>Shift</kbd> + <kbd>Enter</kbd>: Executes the application as root. This doesn't affect the custom launchers.</li>
 <li><kbd>Ctrl</kbd> + <kbd>Enter</kbd>: Open a terminal and run application from there. This doesn't affect the custom launchers.</li>
 <li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>: Open a terminal and run application from there, but the application is executed as root. This doesn't affect the custom launchers.</li>
 </ul>
@@ -301,16 +448,16 @@ If anyone has bugs to report, a feature request or a contribution, do so on <a h
 </li>
 </ol>
 <hr>
-<h3>Applet localization</h3>
+<h3>Applets/Desklets/Extensions (a.k.a. xlets) localization</h3>
 <ul>
-<li>If this applet was installed from Cinnamon Settings, all of this applet's localizations were automatically installed.</li>
-<li>If this applet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called <strong>localizations.sh</strong> from a terminal opened inside the applet's folder.</li>
-<li>If this applet has no locale available for your language, you could create it by following <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">these instructions</a> and send the .po file to me.
+<li>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</li>
+<li>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called <strong>localizations.sh</strong> from a terminal opened inside the xlet's folder.</li>
+<li>If this xlet has no locale available for your language, you could create it by following <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">these instructions</a> and send the .po file to me.
 <ul>
 <li>If you have a GitHub account:
 <ul>
 <li>You could send a pull request with the new locale file.</li>
-<li>If you don't want to clone the repository, just create a Gist and send me the link.</li>
+<li>If you don't want to clone the repository, just create a <a href="https://gist.github.com/">Gist</a> and send me the link.</li>
 </ul>
 </li>
 <li>If you don't have/want a GitHub account:
@@ -322,4 +469,103 @@ If anyone has bugs to report, a feature request or a contribution, do so on <a h
 </li>
 <li>If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.</li>
 </ul>
-</div></div></body></html>
+</div><div class="localization-content hidden" id="spanish"><h1>Ayuda para el applet Configurable Menú para Cinnamon</h1>
+<h3>¡IMPORTANTE!</h3>
+<p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<hr>
+<h2 style="color:red;">Reportes de fallos, peticiones de características y contribuciones</h2>
+<span style="color:red;">
+Si cualquiera tiene fallos que reportar, peticiones de características y contribuciones, deben realizarlas <a href="https://github.com/Odyseus/CinnamonTools">en la página de GitHub de este xlet</a>.
+</span>
+<hr>
+<h3>Navegación por teclado</h3>
+<p><strong>Nota:</strong> Casi todos los atajos de teclado de este menú son los mismos utilizados por el menú original. Hay sólo un par de diferencias que me vi fozado a agregar a mi menú para que hacer funcionar algunas de sus características.</p>
+<ul>
+<li>Teclas <kbd>Flecha Izquierda</kbd> y <kbd>Flecha Derecha</kbd>:
+<ul>
+<li>Ciclan a través de la caja de favoritos, la caja de aplicaciones y la caja de categorías si alguna de estas cajas están enfocadas.</li>
+<li>Si el foco se encuentra dentro de la caja de lanzadores personalizados, estas teclas van a ciclar a través de los botones dentro de esta caja.</li>
+</ul>
+</li>
+<li>Tecla <kbd>Tabuladora</kbd>:
+<ul>
+<li>Si la caja de favoritos, la caja de aplicaciones o la caja de categorías están actualmente enfocadas, la tecla <kbd>Tabuladora</kbd> va a cambiar el foco hacia la caja de lanzadores personalizados.</li>
+<li>Si el foco está en la caja de lanzadores personalizados, el foco será devuelto a la caja de categorías.</li>
+<li>Si la caja de lanzadores personalizados no es parte del menú y la tecla <kbd>Tabuladora</kbd> o la combinación <kbd>Ctrl</kbd>/<kbd>Shit</kbd> + <kbd>Tabuladora</kbd> son presionadas, se ciclará a través de la caja de favoritos, la caja de aplicaciones y la caja de categorías.</li>
+</ul>
+</li>
+<li>Teclas <kbd>Flecha Arriba</kbd> y <kbd>Flecha Abajo</kbd>:
+<ul>
+<li>Si la caja de favoritos, la caja de aplicaciones o la caja de categorías tienen actualmente el foco, estas teclas van a ciclar a través de los ítems de la caja actualmente enfocada.</li>
+<li>Si el foco se encuentra dentro de la caja de lanzadores personalizados, el foco se devolverá a la caja de categorías.</li>
+</ul>
+</li>
+<li>Teclas <kbd>Página Arriba</kbd> y <kbd>Página Abajo</kbd>: Salta al primer y último ítem de la caja actualmente enfocada. Estas teclas no afectan a los lanzadores personalizados.</li>
+<li>Teclas <kbd>Menú</kbd> o <kbd>Alt</kbd> + <kbd>Enter</kbd>: Abren y cierran el menú contextual (si lo hubiere) del ítem actualmente seleccionado.</li>
+<li>Tecla <kbd>Enter</kbd>: Ejecuta el ítem actualmente seleccionado.</li>
+<li>Tecla <kbd>Escape</kbd>: Cierra el menú principal. Si un menú contextual está actualmente abierto, va a cerrar el menú contextual en su lugar y un segundo accionamiento de esta tecla sí va a cerrar el menú principal del applet.</li>
+<li><kbd>Shift</kbd> + <kbd>Enter</kbd>: Ejecuta la aplicación como root. Esta combinación de teclas no afectan a los lanzadores personalizados.</li>
+<li><kbd>Ctrl</kbd> + <kbd>Enter</kbd>: Abre una terminal y se ejecuta la aplicación desde allí. Esta combinación de teclas no afectan a los lanzadores personalizados.</li>
+<li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Enter</kbd>: Abre una terminal y se ejecuta la aplicación desde allí, pero la aplicación es ejecutada como root. Esta combinación de teclas no afectan a los lanzadores personalizados.</li>
+</ul>
+<hr>
+<h3>Acciones extras al hacer clic en las aplicaciones</h3>
+<p>Al hacer clic izquierdo en una aplicación del menú, ciertas teclas modificadoras pueden presionarse para ejecutar una aplicación de una manera especial.</p>
+<ul>
+<li><kbd>Shift</kbd> + <strong>Clic Derecho</strong>: Ejecuta la aplicación como root.</li>
+<li><kbd>Ctrl</kbd> + <strong>Left click</strong>: Abre una terminal y se ejecuta la aplicación desde allí.</li>
+<li><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <strong>Left click</strong>: Abre una terminal y se ejecuta la aplicación desde allí, pero la aplicación es ejecutada como root.</li>
+</ul>
+<hr>
+<h3>Sobre las opciones &quot;Ejecutar desde terminal&quot;</h3>
+<p>Estas opciones están diseñadas para fines de depuración (para ver la salida de la consola después de abrir/cerrar un programa para detectar posibles errores, por ejemplo). En vez de abrir una terminal para ejecutar un programa del cual uno puede que no sepa su comando, uno puede hacerlo directamente desde el menú y en un sólo paso. Opciones para ejecutar un programa del menú desde una terminal pueden ser encontradas en el menú contextual de dichas aplicaciones y dichas opciones pueden ser mostradas o escondidas desde la ventana de opciones de este applet.</p>
+<p>Por defecto, estas opciones van a usar el emulador de terminal por defecto del sistema (<strong>x-terminal-emulator</strong> en distribuciones basadas en Debian). Cualquier otro emulador de terminal puede ser especificado en la ventana de opciones de este applet, siempre y cuando dicho emulador tenga soporte para el argumento <strong>-e</strong>. Yo he realizado mis pruebas con <strong>gnome-terminal</strong>, <strong>xterm</strong> and <strong>terminator</strong>. Argumentos adicionales podrían ser pasados al emulador de terminal, pero no es soportado por mí.</p>
+<hr>
+<h3>Manejo de favoritos</h3>
+<ul>
+<li>Si la caja de favoritos esta <strong>a la vista</strong>, favoritos pueden ser agregados/removidos desde el menú contextual de las aplicaciones y arrastrando y soltando desde/hacia la caja de favoritos.
+<strong>Nota:</strong> Para remover un favorito, arrastrar un favorito fuera de la caja de favoritos hacia cualquier parte del menú.</li>
+<li>Si la caja de favoritos <strong>está oculta</strong> y la categoría de favoritos está habilitada, favoritos pueden ser agregados/removidos desde el menú contextual de las aplicaciones y arrastrando y soltando desde/hacia la categoría de favoritos. Es sencillo, si un favorito es arrastrado y soltado en la categoría de favoritos, el favorito será eliminado. Si lo que es arrastrado hacia la categoría de favoritos es una aplicación que no está en favoritos, entonces dicha aplicación será agregada a favoritos.
+<strong>Nota:</strong> La categoría favoritos actualizará su contenido luego de cambiar a otra categoría y regresar a la categoría favoritos.</li>
+</ul>
+<hr>
+<h3>Solución de problemas/información adicional</h3>
+<ol>
+<li>Ejecutar desde terminal.
+<ol>
+<li><strong>Para distribuciones basadas en Debian:</strong> Si el comando <strong>x-terminal-emulator</strong> no ejecuta el emulador de terminal que uno quiere que sea ejecutado, ejecutar el siguiente comando para establecer por defecto un emulador de terminal diferente.</li>
+</ol>
+<ul>
+<li><code>sudo update-alternatives --config x-terminal-emulator</code></li>
+<li>Tipear el número que se desea y presionar <kbd>Enter</kbd></li>
+</ul>
+<ol start="2">
+<li><strong>Para otras distribuciones:</strong> Simplemente establezca el ejecutable del emulador de terminal de su elección desde la ventana de configuración de este applet.</li>
+</ol>
+</li>
+<li>Existe un archivo dentro del directorio de este applet llamado <strong>run_from_terminal.sh</strong>. <strong>No borrar, renombrar o editar este archivo</strong>. De otra manera, todas las opciones <em>Ejecutar desde terminal</em> se romperán.</li>
+<li>Existe una carpeta llamada <strong>icons</strong> dentro dentro del directorio de este applet. Dicha carpeta contiene varios íconos simbólicos (la mayoría proviene del tema Faenza) y cada ícono puede ser usado directamente por nombre (en un lanzador personalizado, por ejemplo).</li>
+</ol>
+<hr>
+<h3>Localización de applets/desklets/extensiones (también conocidos como xlets)</h3>
+<ul>
+<li>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</li>
+<li>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado <strong>localizations.sh</strong> desde una terminal abierta dentro de la carpeta del xlet.</li>
+<li>Si este xlet no está disponible en su idioma, la localización puede ser creada siguiendo <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">estas instrucciones</a> y luego enviarme el archivo .po.
+<ul>
+<li>Si se posee una cuenta de GitHub:
+<ul>
+<li>Puede enviar una &quot;pull request&quot; con el nuevo archivo de localización.</li>
+<li>Si no se desea clonar el repositorio, simplemente crear un <a href="https://gist.github.com/">Gist</a> y enviarme el enlace.</li>
+</ul>
+</li>
+<li>Si no se posee o no se quiere una cuenta de GitHub:
+<ul>
+<li>Se puede enviar un <a href="http://pastebin.com/">Pastebin</a> (o servicio similar) a mi <a href="https://forums.linuxmint.com/memberlist.php?mode=viewprofile&amp;u=164858">cuenta en el for de Linux Mint</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Si el texto fuente (en Inglés) y/o mi traducción al Español contiene errores o inconsistencias, no dude en informarlos.</li>
+</ul>
+</div></div></div><script type="text/javascript">toggleLocalizationVisibility(null);</script></body></html>
