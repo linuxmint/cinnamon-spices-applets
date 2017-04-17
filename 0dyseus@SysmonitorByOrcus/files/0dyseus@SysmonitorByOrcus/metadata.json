@@ -2,10 +2,14 @@
     "website": "https://github.com/Odyseus/CinnamonTools",
     "multiversion": true,
     "description": "Displays CPU, memory, swap, network usage and load in graphs.",
-    "contributors": "buzz: Bug fixes.,muzena: Croatian localization.,giwhub: Chinese localization.",
+    "contributors": [
+        "buzz: Bug fixes.",
+        "muzena: Croatian localization.",
+        "giwhub: Chinese localization."
+    ],
     "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
     "name": "System Monitor (Fork By Odyseus)",
-    "version": "1.10",
+    "version": "1.11",
     "cinnamon-version": [
         "2.8",
         "3.0",

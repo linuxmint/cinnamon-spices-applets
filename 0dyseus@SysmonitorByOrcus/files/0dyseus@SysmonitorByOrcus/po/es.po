@@ -353,4 +353,4 @@ msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"
-msgstr "Monitor de Sistema"
+msgstr "Monitor de Sistema (Modificado por Odyseus)"

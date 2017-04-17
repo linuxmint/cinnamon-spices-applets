@@ -147,8 +147,9 @@ MyApplet.prototype = {
             }
 
             if (this.pref_show_swap_graph) {
-                this.addGraph(new SwapDataProvider(),
-                    this._parseColor(this.pref_swap_graph_color_used),
+                this.addGraph(new SwapDataProvider(), [
+                        this._parseColor(this.pref_swap_graph_color_used)
+                    ],
                     this.pref_swap_graph_width);
             }
 
@@ -160,8 +161,9 @@ MyApplet.prototype = {
             }
 
             if (this.pref_show_load_graph) {
-                this.addGraph(new LoadAvgDataProvider(),
-                    this._parseColor(this.pref_load_graph_color_load),
+                this.addGraph(new LoadAvgDataProvider(), [
+                        this._parseColor(this.pref_load_graph_color_load)
+                    ],
                     this.pref_load_graph_width).setAutoScale(2 * ncpu);
             }
 
@@ -403,7 +405,8 @@ Graph.prototype = {
         let [width, height] = this.area.get_size();
         //background
         if (this.background !== null) {
-            cr.setSourceRGBA(this.background[0], this.background[1], this.background[2], this.background[3]);
+            cr.setSourceRGBA(this.background[0], this.background[1], this.background[2],
+                this.background[3]);
             cr.setLineWidth(1);
             cr.rectangle(0.5, 0.5, width - 1, height - 1);
             cr.fill();
@@ -417,7 +420,8 @@ Graph.prototype = {
                 let i = 0,
                     iLen = this.data.length;
                 for (; i < iLen; ++i)
-                    cr.lineTo(i + 1.5, height - Math.round((height - 1) * this.scale * this.dataSum(i, j)));
+                    cr.lineTo(i + 1.5, height - Math.round((height - 1) *
+                        this.scale * this.dataSum(i, j)));
                 cr.lineTo(width - 1.5, height);
                 cr.lineTo(1.5, height);
                 cr.fillPreserve();
@@ -523,7 +527,8 @@ MemDataProvider.prototype = {
         GTop.glibtop_get_mem(this.gtop);
         let used = this.gtop.used / this.gtop.total;
         let cached = (this.gtop.buffer + this.gtop.cached) / this.gtop.total;
-        this.text = [_("Memory: "), Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) / (1024 * 1024)) + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")];
+        this.text = [_("Memory: "), Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) /
+            (1024 * 1024)) + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")];
         return [used - cached, cached];
     },
 
@@ -548,7 +553,9 @@ SwapDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_swap(this.gtop);
         let used = this.gtop.used / this.gtop.total;
-        this.text = [_("Swap: "), Math.round(this.gtop.used / (1024 * 1024)) + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")];
+        this.text = [_("Swap: "), Math.round(this.gtop.used / (1024 * 1024)) + " / " +
+            Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")
+        ];
         return [used];
     },
 
@@ -590,7 +597,9 @@ NetDataProvider.prototype = {
         let up_delta = (up - this.up_last) * 1000 / this.refreshRate;
         this.down_last = down;
         this.up_last = up;
-        this.text = [_("Network D/U: "), Math.round(down_delta / 1024) + " / " + Math.round(up_delta / 1024) + _(" KB/s")];
+        this.text = [_("Network D/U: "), Math.round(down_delta / 1024) + " / " +
+            Math.round(up_delta / 1024) + _(" KB/s")
+        ];
         return [down_delta, up_delta];
     },
 
@@ -628,7 +637,9 @@ LoadAvgDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_loadavg(this.gtop);
         let load = this.gtop.loadavg[0];
-        this.text = [_("Load average: "), this.gtop.loadavg[0] + ", " + this.gtop.loadavg[1] + ", " + this.gtop.loadavg[2]];
+        this.text = [_("Load average: "), this.gtop.loadavg[0] + ", " + this.gtop.loadavg[1] +
+            ", " + this.gtop.loadavg[2]
+        ];
         return [load];
     },
 
