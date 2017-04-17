@@ -1,0 +1,309 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-17 23:46+0800\n"
+"PO-Revision-Date: 2017-04-17 23:50+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr "请提供您的密码以卸载此应用程序"
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr "添加到面板"
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr "添加到桌面"
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr "从收藏夹移除"
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr "添加到收藏夹"
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr "卸载"
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr "使用NVIDIA GPU运行"
+
+#: panel.js:533
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu：搜索Firefox书签已禁用"
+
+#: panel.js:535
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr "如果您想要搜索Firefox书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
+
+#: panel.js:541
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu：搜索Midori书签已禁用"
+
+#: panel.js:543
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr "如果您想要搜索Midori书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
+
+#: panel.js:1578
+msgid "Grid View"
+msgstr "网格视图"
+
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr "切换到网格视图"
+
+#: panel.js:1581
+msgid "List View"
+msgstr "列表视图"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr "切换到列表视图"
+
+#: panel.js:1638
+msgid "Type to search..."
+msgstr "键入以搜索..."
+
+#: panel.js:1675
+msgid "All Applications"
+msgstr "所有应用程序"
+
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr "收藏夹应用程序"
+
+#: panel.js:1747
+msgid "Places"
+msgstr "位置"
+
+#: panel.js:1752
+msgid "Recent"
+msgstr "最近"
+
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr "书签"
+
+#: panel.js:1768
+msgid "Lock Screen"
+msgstr "锁定屏幕"
+
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr "锁定屏幕"
+
+#: panel.js:1799
+msgid "Logout"
+msgstr "注销"
+
+#: panel.js:1800
+msgid "Leave the session"
+msgstr "离开会话"
+
+#: panel.js:1822
+msgid "Quit"
+msgstr "退出"
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr "关闭计算机"
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr "启动'%s'失败"
+
+#: placeDisplay.js:147
+msgid "Home"
+msgstr "主目录"
+
+#: placeDisplay.js:221
+msgid "Computer"
+msgstr "计算机"
+
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr "浏览网络"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr "Cinnamenu设置"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "使用自定义图标"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "不选中此项允许主题设置图标"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr "应用程序网格图标宽度"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr "像素"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "应用程序网格图标大小"
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "类别图标大小："
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "菜单悬停延迟："
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "切换类别间的延迟"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "打开菜单编辑器"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "按此按钮自定义您的菜单条目。"
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr "菜单条目"
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr "外观"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "应用程序网格中列的数量"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "列"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr "启用网络书签"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "选择是否在菜单中索引书签。"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "启动应用程序视图模式"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "网格"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "列表"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "设置自定义菜单按钮图标名称"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "当我移动鼠标到菜单上时打开菜单"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "启用当鼠标进入小程序时打开菜单"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr "按可用空间缩放网格图标"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr "这将会使网格图标大小随应用程序显示的数量而变化。这将会覆盖网格图标大小选项。"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "在应用程序列表中启用自动滚动"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "选择是否在应用程序列表中启用平滑滚动。"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "使用菜单动画"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "允许打开和关闭菜单的动画"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "图标"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择要显示在面板中的图标。"
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "应用程序列表图标大小"
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr "行为"
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr "一个提供格式选项和书签的灵活菜单。"
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
