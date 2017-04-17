@@ -7,6 +7,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const St = imports.gi.St;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+
+const UUID = "show-hide-applets@mohammad-sn"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -54,7 +63,7 @@ MyApplet.prototype = {
             });
             this._applet_context_menu.addMenuItem(this.panelEditMode);
             
-            let addapplets = new PopupMenu.PopupMenuItem("Add applets to the panel");
+            let addapplets = new PopupMenu.PopupMenuItem(_("Add applets to the panel"));
             let addappletsicon = new St.Icon({icon_name: "applets", icon_size: 22, icon_type: St.IconType.FULLCOLOR });
             addapplets.connect('activate', function() {
                 Util.spawnCommandLine("cinnamon-settings applets");
