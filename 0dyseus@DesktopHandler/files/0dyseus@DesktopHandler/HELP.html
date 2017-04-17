@@ -1,4 +1,112 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><title>Desktop Handler applet help</title><link rel="shortcut icon" type="image/x-icon" href="./icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><style type="text/css">/*!
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"><title>Desktop Handler applet help</title><link rel="shortcut icon" type="image/x-icon" href="./icon.png"><meta name="viewport" content="width=device-width, initial-scale=1"><script type="text/javascript">/*
+exported toggleLocalizationVisibility,
+         docCookies
+ */
+
+/**
+ * :: cookies.js ::
+ * A complete cookies reader/writer framework with full unicode support.
+ * Revision #1 - September 4, 2014
+ * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
+ * https://developer.mozilla.org/User:fusionchess
+ * This framework is released under the GNU Public License, version 3 or later.
+ * http://www.gnu.org/licenses/gpl-3.0-standalone.html
+ * Syntaxes:
+ * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
+ * docCookies.getItem(name)
+ * docCookies.removeItem(name[, path[, domain]])
+ * docCookies.hasItem(name)
+ * docCookies.keys()
+ */
+
+var docCookies = {
+    getItem: function(aKey) {
+        if (!aKey)
+            return null;
+
+        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
+                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
+            "$1")) || null;
+    },
+    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
+        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
+            return false;
+
+        var sExpires = "";
+        if (aEnd) {
+            switch (aEnd.constructor) {
+                case Number:
+                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
+                    break;
+                case String:
+                    sExpires = "; expires=" + aEnd;
+                    break;
+                case Date:
+                    sExpires = "; expires=" + aEnd.toUTCString();
+                    break;
+            }
+        }
+        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
+            (aDomain ? "; domain=" + aDomain : "") +
+            (aPath ? "; path=" + aPath : "") +
+            (aSecure ? "; secure" : "");
+        return true;
+    },
+    removeItem: function(aKey, aPath, aDomain) {
+        if (!this.hasItem(aKey))
+            return false;
+
+        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
+            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
+        return true;
+    },
+    hasItem: function(aKey) {
+        if (!aKey)
+            return false;
+
+        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
+            "\\s*\\=")).test(document.cookie);
+    },
+    keys: function() {
+        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
+            .split(/\s*(?:\=[^;]*)?;\s*/);
+        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
+            keys[nIdx] = decodeURIComponent(keys[nIdx]);
+
+        return keys;
+    }
+};
+
+function toggleLocalizationVisibility(aButton) {
+    var language = aButton ? aButton.getAttribute("data-id") : docCookies.getItem("language");
+
+    if (!Boolean(language))
+        return;
+
+    try {
+        Array.prototype.slice.call(document.getElementsByClassName("localization-content"))
+            .forEach(function(aEl) {
+                aEl && aEl.classList.add("hidden");
+            });
+
+        Array.prototype.slice.call(document.getElementsByClassName("localization-switch"))
+            .forEach(function(aEl) {
+                if (aEl) {
+                    aEl.classList.remove("btn-success");
+                    aEl.classList.add("btn-default");
+
+                    if (aEl.getAttribute("data-id") === language) {
+                        document.title = aEl.getAttribute("data-title");
+                        aEl.classList.add("btn-success");
+                    }
+                }
+            });
+    } finally {
+        document.getElementById(language).classList.remove("hidden");
+        docCookies.setItem("language", language);
+    }
+}
+</script><style type="text/css">/*!
  * bootswatch v3.3.7
  * Homepage: http://bootswatch.com
  * Copyright 2012-2016 Thomas Park
@@ -218,25 +326,64 @@ pre {
 	padding-right: 15px !important;
 }
 /* pre tag tweaks */
-</style></head><body><div id="mainarea"><div class="container boxed"><h1>Help for Desktop Handler applet</h1>
+</style><style type="text/css">.localization-chooser {
+    padding: 1em !important;
+    width: 100% !important;
+}
+
+.localization-chooser input.btn {
+    font-weight: bold !important;
+    margin: 5px !important;
+    height: 100% !important;
+    display: inline-block !important;
+}
+</style></head><body><noscript><style type="text/css">#autohide_navbar {
+    display: none !important;
+}
+#noscript-navbar {
+    display: inline-block !important;
+}
+#noscript-navbar > li {
+    float: left !important;
+    margin: 2px !important;
+    padding: 2px !important;
+    top: 0 !important;
+    display: inline-block !important;
+}
+#noscript-navbar li > ul {
+    margin: 1px !important;
+    padding: 1px !important;
+}
+#noscript-navbar li {
+    list-style: none !important;
+    list-style-type: none !important;
+}
+</style><div class="alert alert-warning"><p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p><p><strong>This page uses JavaScript only to switch between the available languages.</strong></p><p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p></div></noscript><div id="mainarea"><div class="localization-chooser" align="middle"><input class="btn btn-success btn-sm localization-switch" type="button" value="English" data-id="english" data-title="Desktop Handler applet help" onclick="self.toggleLocalizationVisibility(this);"><input class="btn btn-default btn-sm localization-switch" type="button" value="Español" data-id="spanish" data-title="Ayuda para el applet Manejador de escritorio" onclick="self.toggleLocalizationVisibility(this);"></div><div class="container boxed"><div class="localization-content" id="english"><!--
+Notes to translators:
+- Do not modify this file directly. Create a copy of it with a different name that contains the language code and always use the .md extension for the file. Example: HELP-es.md file will contain the content of the HELP.md file translated into Spanish.
+- This file is written in [markdown](https://guides.github.com/features/mastering-markdown/) and some "touches" of HTML.
+- Familiarize yourself with markdown and HTML languages before attempting to translate the content of this file.
+- These notes doesn't need to be translated and can be deleted from the translated file.
+-->
+<h1>Help for Window demands attention behavior extension</h1>
 <h3>IMPORTANT!!!</h3>
-<p>Never delete any of the files found inside this applet folder. It might break this applet functionality.</p>
+<p>Never delete any of the files found inside this xlet folder. It might break this xlet functionality.</p>
 <hr>
 <h2 style="color:red;">Bug reports, feature requests and contributions</h2>
 <span style="color:red;">
 If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
 </span>
 <hr>
-<h3>Applet localization</h3>
+<h3>Applets/Desklets/Extensions (a.k.a. xlets) localization</h3>
 <ul>
-<li>If this applet was installed from Cinnamon Settings, all of this applet's localizations were automatically installed.</li>
-<li>If this applet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called <strong>localizations.sh</strong> from a terminal opened inside the applet's folder.</li>
-<li>If this applet has no locale available for your language, you could create it by following <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">these instructions</a> and send the .po file to me.
+<li>If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed.</li>
+<li>If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called <strong>localizations.sh</strong> from a terminal opened inside the xlet's folder.</li>
+<li>If this xlet has no locale available for your language, you could create it by following <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">these instructions</a> and send the .po file to me.
 <ul>
 <li>If you have a GitHub account:
 <ul>
 <li>You could send a pull request with the new locale file.</li>
-<li>If you don't want to clone the repository, just create a Gist and send me the link.</li>
+<li>If you don't want to clone the repository, just create a <a href="https://gist.github.com/">Gist</a> and send me the link.</li>
 </ul>
 </li>
 <li>If you don't have/want a GitHub account:
@@ -248,4 +395,34 @@ If anyone has bugs to report, a feature request or a contribution, do so on <a h
 </li>
 <li>If the source text (in English) and/or my translation to Spanish has errors/inconsistencies, feel free to report them.</li>
 </ul>
-</div></div></body></html>
+</div><div class="localization-content hidden" id="spanish"><h1>Ayuda para el applet Manejador de escritorio</h1>
+<h3>¡IMPORTANTE!</h3>
+<p>Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet.</p>
+<hr>
+<h2 style="color:red;">Reportes de fallos, peticiones de características y contribuciones</h2>
+<span style="color:red;">
+Si cualquiera tiene fallos que reportar, peticiones de características y contribuciones, deben realizarlas <a href="https://github.com/Odyseus/CinnamonTools">en la página de GitHub de este xlet</a>.
+</span>
+<hr>
+<h3>Localización de applets/desklets/extensiones (también conocidos como xlets)</h3>
+<ul>
+<li>Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente.</li>
+<li>Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado <strong>localizations.sh</strong> desde una terminal abierta dentro de la carpeta del xlet.</li>
+<li>Si este xlet no está disponible en su idioma, la localización puede ser creada siguiendo <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">estas instrucciones</a> y luego enviarme el archivo .po.
+<ul>
+<li>Si se posee una cuenta de GitHub:
+<ul>
+<li>Puede enviar una &quot;pull request&quot; con el nuevo archivo de localización.</li>
+<li>Si no se desea clonar el repositorio, simplemente crear un <a href="https://gist.github.com/">Gist</a> y enviarme el enlace.</li>
+</ul>
+</li>
+<li>Si no se posee o no se quiere una cuenta de GitHub:
+<ul>
+<li>Se puede enviar un <a href="http://pastebin.com/">Pastebin</a> (o servicio similar) a mi <a href="https://forums.linuxmint.com/memberlist.php?mode=viewprofile&amp;u=164858">cuenta en el for de Linux Mint</a>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Si el texto fuente (en Inglés) y/o mi traducción al Español contiene errores o inconsistencias, no dude en informarlos.</li>
+</ul>
+</div></div></div><script type="text/javascript">toggleLocalizationVisibility(null);</script></body></html>
