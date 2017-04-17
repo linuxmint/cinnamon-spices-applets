@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: betterlock\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-26 20:21+0100\n"
-"PO-Revision-Date: 2017-02-26 20:21+0100\n"
+"POT-Creation-Date: 2017-04-17 20:39+0200\n"
+"PO-Revision-Date: 2017-04-17 20:40+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -27,23 +27,27 @@ msgstr "Brojčana tipkovnica"
 msgid "Caps Lock"
 msgstr "Velika slova"
 
-#: applet.js:109
+#: applet.js:79
+msgid "Notifications"
+msgstr "Obavijesti"
+
+#: applet.js:114
 msgid "Lock Keys"
 msgstr "Tipke zaključavanja"
 
-#: applet.js:143
+#: applet.js:148
 msgid "Num lock on"
 msgstr "Brojčana tipkovnica uključena"
 
-#: applet.js:148
+#: applet.js:153
 msgid "Num lock off"
 msgstr "Brojčana tipkovnica isključena"
 
-#: applet.js:157
+#: applet.js:163
 msgid "Caps lock on"
 msgstr "Velika slova uključena"
 
-#: applet.js:162
+#: applet.js:168
 msgid "Caps lock off"
 msgstr "Velika slova isključena"
 
@@ -57,5 +61,4 @@ msgstr ""
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
-"Indikator velikih slova ili brojčane tipkovnice s obavijestima sustava"
+msgstr "Indikator velikih slova ili brojčane tipkovnice s obavijestima sustava"
