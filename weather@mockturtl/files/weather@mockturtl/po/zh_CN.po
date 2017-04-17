@@ -304,9 +304,21 @@ msgstr "西"
 msgid "NW"
 msgstr "西北"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "weather@mockturtl的设置"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "设置呼出菜单的键绑定"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "获取 WOEID"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
