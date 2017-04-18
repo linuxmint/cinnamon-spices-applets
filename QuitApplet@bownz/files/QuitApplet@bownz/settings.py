@@ -21,10 +21,11 @@ from gi.repository import Gtk
 import os
 import json
 import collections
+import gettext
 
-from gettext import gettext as _
 
-
+home = os.path.expanduser("~")
+gettext.install("QuitApplet@bownz", home + "/.local/share/locale")
 
 default_config = {
     'SHOW_POPUPS': True, 
@@ -62,7 +63,7 @@ class MyWindow(Gtk.Window):
 
     def __init__(self):
         
-        Gtk.Window.__init__(self, title="Favorites Applet Settings")
+        Gtk.Window.__init__(self, title=_("Favorites Applet Settings"))
 
         window_icon = self.render_icon(Gtk.STOCK_PREFERENCES, 6)
         self.set_icon(window_icon)
@@ -101,7 +102,7 @@ class MyWindow(Gtk.Window):
         # Build options for right column
         if (config.has_key('SHOW_POPUPS')):
             switch_SHOW_POPUPS = switch_option()
-            switch_SHOW_POPUPS.create(vbox_right, 'SHOW_POPUPS', config['SHOW_POPUPS'], "Display pop-up confirmation windows for \"Quit...\" and \"Log Out...\"?")
+            switch_SHOW_POPUPS.create(vbox_right, 'SHOW_POPUPS', config['SHOW_POPUPS'], _("Display pop-up confirmation windows for \"Quit...\" and \"Log Out...\"?"))
 
         vbox_right.pack_start(Gtk.HSeparator(), False, False, 0)
         
