@@ -10,12 +10,13 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 
+const UUID = "multicore-sys-monitor@ccadeptic23";
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const DEFAULT_CONFIG = {
 							"labelsOn": true,
 							"refreshRate": 500,
@@ -53,6 +54,12 @@ const DEFAULT_CONFIG = {
 							}
 						};
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 function Preferences() {
     this._init();
 }
@@ -69,8 +76,8 @@ Preferences.prototype = {
 		}
 
         this.builder = new Gtk.Builder();
+        this.builder.set_translation_domain(UUID);
         this.builder.add_from_file("prefsui.glade");
-
         this.win = this.builder.get_object("windowMain");
         
         this.win.connect("destroy", Gtk.main_quit); //quit program when titlebar's x is clicked
@@ -139,7 +146,7 @@ Preferences.prototype = {
 			var currentcpuvbox = new Gtk.VBox();
 			
 			var cpuButton = new Gtk.ColorButton();
-			var cpuLabel = new Gtk.Label({label: "CPU"+(i+1)})
+			var cpuLabel = new Gtk.Label({label: _("CPU")+(i+1)})
 			//currentcpuvbox.set_hexpand(false);
 			cpuButton.set_halign(3);
 			cpuButton.set_use_alpha(true);
@@ -212,7 +219,7 @@ Preferences.prototype = {
 			var currentdev_hbox = new Gtk.HBox();
 			var devLabel = new Gtk.Label({label: devname})
 			devLabel.set_halign(Gtk.Align.START); //start
-			var devEnableLabel = new Gtk.Label({label: "Enable"})
+			var devEnableLabel = new Gtk.Label({label: _("Enable")})
 			devEnableLabel.set_halign(Gtk.Align.END); //end
 			var devEnableSwitch = new Gtk.Switch();
 			devEnableSwitch.set_halign(Gtk.Align.START); //start
@@ -221,13 +228,13 @@ Preferences.prototype = {
 			var devDownColorButton = new Gtk.ColorButton();
 			devDownColorButton.set_halign(Gtk.Align.START);
 			devDownColorButton.set_use_alpha(true);
-			var devDownLabel = new Gtk.Label({label: "Down"});
+			var devDownLabel = new Gtk.Label({label: _("Down")});
 			devDownLabel.set_halign(2);
 			
 			var devUpColorButton = new Gtk.ColorButton();
 			devUpColorButton.set_halign(1);
 			devUpColorButton.set_use_alpha(true);
-			var devUpLabel = new Gtk.Label({label: "Up"});
+			var devUpLabel = new Gtk.Label({label: _("Up")});
 			devUpLabel.set_halign(2);
 			
 			//add them to the appropriate containers.
@@ -311,7 +318,7 @@ Preferences.prototype = {
 			var currentdev_hbox = new Gtk.HBox();
 			var devLabel = new Gtk.Label({label: devname})
 			devLabel.set_halign(1); //start
-			var devEnableLabel = new Gtk.Label({label: "Enable"})
+			var devEnableLabel = new Gtk.Label({label: _("Enable")})
 			devEnableLabel.set_halign(Gtk.Align.END); //end
 			var devEnableSwitch = new Gtk.Switch();
 			devEnableSwitch.set_halign(Gtk.Align.START); //start
@@ -322,13 +329,13 @@ Preferences.prototype = {
 			var devDownColorButton = new Gtk.ColorButton();
 			devDownColorButton.set_halign(1);
 			devDownColorButton.set_use_alpha(true);
-			var devDownLabel = new Gtk.Label({label: "Read"});
+			var devDownLabel = new Gtk.Label({label: _("Read")});
 			devDownLabel.set_halign(2);
 			
 			var devUpColorButton = new Gtk.ColorButton();
 			devUpColorButton.set_halign(1);
 			devUpColorButton.set_use_alpha(true);
-			var devUpLabel = new Gtk.Label({label: "Write"});
+			var devUpLabel = new Gtk.Label({label: _("Write")});
 			devUpLabel.set_halign(2);
 			
 			//add them to the appropriate containers.
@@ -447,7 +454,7 @@ Preferences.prototype = {
         }
         catch (e)
         {
-            print("Error while saving file: " + e);
+            print(_("Error while saving file: ") + e);
         }
     },
     
