@@ -34,9 +34,9 @@ try {
 	const NMClient = imports.gi.NMClient;
 	const NetworkManager = imports.gi.NetworkManager;
 	const Cinnamon = imports.gi.Cinnamon;
-	
+	const Gettext = imports.gettext;	
 	const GTop = imports.gi.GTop; //psst this is really only to see if we can
-	
+	const UUID = "multicore-sys-monitor@ccadeptic23";	
 	var SpawnProcess = null; //defined in main (my library)
 	var ErrorApplet = null; //defined in main (my library)
 	var ConfigSettings = null; //defined in main (my library)
@@ -50,6 +50,13 @@ catch(err)
 	ImportError=true;
 	global.logError(err);
 	ImportErrorMsg=err.toString();
+}
+
+// Translation support
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
 }
 
 function MyApplet(metadata, orientation) {
@@ -328,7 +335,7 @@ function main(metadata, orientation) {
 		ErrorApplet = imports.ErrorApplet;
 		var errmsg = ImportErrorMsg;	
 		if (typeof GTop === 'undefined') //we dont have the gtop package
-			errmsg = "Please install \"gir1.2-gtop-2.0\" package.";
+			errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
 		let myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
 		return myErrorApplet;
 	}
