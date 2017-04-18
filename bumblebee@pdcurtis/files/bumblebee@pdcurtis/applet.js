@@ -139,7 +139,7 @@ MyApplet.prototype = {
             // Finally setup to start the update loop for the applet display running
             this.set_applet_label(" " ); // show nothing until system stable
             this.set_applet_tooltip(_("Waiting for Bumblebee"));
-            Mainloop.timeout_add_seconds(20, Lang.bind(this, this.updateLoop)); // Timer to allow bumbleebee to initiate
+            Mainloop.timeout_add_seconds(10, Lang.bind(this, this.updateLoop)); // Timer to allow bumbleebee to initiate
 
         } catch (e) {
             global.logError(e);
@@ -350,7 +350,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version v30_3.1.1
+Version 3.1.2
 v20_0.9.0 Beta 12-12-2013
 v20_0.9.1 Added System Monitor and Power Statistics to right click menu
 v20_0.9.2 Added Left Click Menu with 5 Program Launch Items with configuration in Settings - Release Candidate 14-12-2013 
@@ -378,5 +378,9 @@ v30_3.1.0  Changed help file from help.txt to README.md
            Add po folder to applet
            Create bumblebee.pot using cinnamon-json-makepot --js po/bumblebee.pot
            Version and changes information update in applet.js and changelog.txt
-           NOTE: Only partially tested as I no longer run Bumblebee
+    3.1.2  Changes to README.md to: 
+             - Strengthen Rationale for Applet
+             - Add Status section noting testing under Mint 17.3 and 18.1 with Cinnamon 3.2
+             - Acknowledge first translations.
+           Set up default programs on left click menu
 */

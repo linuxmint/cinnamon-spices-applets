@@ -1,7 +1,7 @@
 {
     "uuid": "bumblebee@pdcurtis", 
     "max-instances": "1", 
-    "name": "Bumblebee and nVidia Display", 
-    "version": "3.1.1", 
+    "name": "Bumblebee And NVidia Display (BAND)", 
+    "version": "3.1.2", 
     "description": "Displays Status of Bumblebee and nVidia GPU Temperature"
 }
