@@ -46,7 +46,7 @@ msgstr "注销"
 msgid ""
 "An applet to help you shutdown, restart and suspend your system with single "
 "click"
-msgstr "一个使用单击帮助您关机、重启、和挂起您的系统的小程序"
+msgstr "一个使用单击帮助您关机，重启和挂起您的系统的小程序"
 
 #. ShutdownApplet@shelley->metadata.json->name
 msgid "Shutdown Applet"
