@@ -4,6 +4,15 @@ const GTop = imports.gi.GTop; //psst this is really the one used
 const NMClient = imports.gi.NMClient;
 const NetworkManager = imports.gi.NetworkManager;
 const Gio = imports.gi.Gio;
+const UUID = "multicore-sys-monitor@ccadeptic23";
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MultiCpuDataProvider() {
 	this._init();
@@ -93,14 +102,14 @@ MultiCpuDataProvider.prototype = {
 	//Name to be displayed for this data provider
 	getName: function()
 	{
-		return "CPU";
+		return _("CPU");
 	},
 	
 	getTooltipString: function()
 	{
 		if(!this.isEnabled)
 			return "";
-		var tooltipstr = "cpu: ";
+		var tooltipstr = _("cpu: ");
 		for(var i = 0; i < this.cpucount; i++)
 			tooltipstr += Math.round(100*this.cpulist_usage[i],2).toString() + "% ";
 		return tooltipstr+"\n";
@@ -142,18 +151,18 @@ MemDataProvider.prototype = {
 	//Name to be displayed for this data provider
 	getName: function()
 	{
-		return "MEM";
+		return _("MEM");
 	},
 	
 	getTooltipString: function()
 	{
 		if(!this.isEnabled)
 			return "";
-		var tooltipstr = "------mem------- \n";
-		tooltipstr +="usedup:\t" + Math.round(100*this.memInfo[0]).toString() + "%\n";
-		tooltipstr +="cached:\t" + Math.round(100*this.memInfo[1]).toString() + "%\n";
-		tooltipstr +="buffer:\t" + Math.round(100*this.memInfo[2]).toString() + "%\n";
-		tooltipstr +="free:\t\t" + Math.round(100*this.memInfo[3]).toString() + "%\n";
+		var tooltipstr = _("------mem------- \n");
+		tooltipstr +=_("usedup:\t") + Math.round(100*this.memInfo[0]).toString() + "%\n";
+		tooltipstr +=_("cached:\t") + Math.round(100*this.memInfo[1]).toString() + "%\n";
+		tooltipstr +=_("buffer:\t") + Math.round(100*this.memInfo[2]).toString() + "%\n";
+		tooltipstr +=_("free:\t\t") + Math.round(100*this.memInfo[3]).toString() + "%\n";
 		return tooltipstr;
 	}
 };
@@ -180,13 +189,13 @@ SwapDataProvider.prototype = {
 		return this.swapInfo;
 	},
 	
-	getName: function() { return "SWAP"; }, //Name to be displayed for this data provider
+	getName: function() { return _("SWAP"); }, //Name to be displayed for this data provider
 	getTooltipString: function()
 	{
 		if(!this.isEnabled)
 			return "";
-		var tooltipstr = "------swap------- \n";
-		tooltipstr +="swap:\t" + (Math.round(10000*this.swapInfo[0])/100).toString() + "%\n";
+		var tooltipstr = _("------swap------- \n");
+		tooltipstr +=_("swap:\t") + (Math.round(10000*this.swapInfo[0])/100).toString() + "%\n";
 		return tooltipstr;
 	}
 };
@@ -247,7 +256,7 @@ NetDataProvider.prototype = {
 
     },
     getName: function() {
-        return "NET";
+        return _("NET");
     },
     getNetLoad: function() {
         let down = 0;
@@ -290,10 +299,10 @@ NetDataProvider.prototype = {
 		if(!this.isEnabled)
 			return "";
 		
-		var tooltipstr = "-------net-------\n";
+		var tooltipstr = _("-------net-------\n");
 		for (var dname in this.currentReadingRates)
 		{
-			tooltipstr += dname+": D: "+this.currentReadingRates[dname]["down"]+" U: "+this.currentReadingRates[dname]["up"]+ " (KiB/s)\n";
+			tooltipstr += dname+_(": D: ")+this.currentReadingRates[dname]["down"]+_(" U: ")+this.currentReadingRates[dname]["up"]+ _(" (KiB/s)\n");
 		}
 		return tooltipstr;
 	}
@@ -362,7 +371,7 @@ DiskDataProvider.prototype = {
 		return readingRatesList;
     },
     
-    getName: function() { return "DISK"; },
+    getName: function() { return _("DISK"); },
     
     getDiskRW: function() {
 		var mountedDisks = this.getDiskDevices();
@@ -387,10 +396,10 @@ DiskDataProvider.prototype = {
 		if(!this.isEnabled)
 			return "";
 			
-		var tooltipstr = "------disk------- \n";		
+		var tooltipstr = _("------disk------- \n");		
 		for (var dname in this.currentReadingRates)
         {
-			tooltipstr +=dname+": R: "+this.currentReadingRates[dname]["read"]+" "+": W: "+this.currentReadingRates[dname]["write"]+" (MiB/s)\n";
+			tooltipstr +=dname+_(": R: ")+this.currentReadingRates[dname]["read"]+" "+_(": W: ")+this.currentReadingRates[dname]["write"]+_(" (MiB/s)\n");
 		}
 		return tooltipstr;
 	},
@@ -426,5 +435,4 @@ DiskDataProvider.prototype = {
 	}
 
 };
-
 
