@@ -36,6 +36,15 @@ const SessionManagerIface = '\
     </interface> \
 </node>';
 
+const UUID = 'screen-inhibit@mtwebster';
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 var SessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(SessionManagerIface);
 function SessionManager(initCallback, cancellable) {
     return new SessionManagerProxy(Gio.DBus.session, 'org.gnome.SessionManager', '/org/gnome/SessionManager', initCallback, cancellable);
@@ -103,7 +112,7 @@ MyApplet.prototype = {
             this.on_settings_changed();
         }
 
-        this.screen_menu_item = new Applet.MenuItem("Screensaver settings", 'system-run-symbolic',
+        this.screen_menu_item = new Applet.MenuItem(_("Screensaver settings"), 'system-run-symbolic',
                                                     Lang.bind(this, this._screen_menu));
         this._applet_context_menu.addMenuItem(this.screen_menu_item);
     },
