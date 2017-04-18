@@ -53,4 +53,4 @@ msgstr "选定区域"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
-msgstr "对您的桌面或者独立窗口进行截图"
+msgstr "对您的桌面或者个别窗口进行截图"
