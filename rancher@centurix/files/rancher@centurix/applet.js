@@ -9,7 +9,7 @@ const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const UUID = "rancher@centurix";
 
 const HOMESTEAD_PROJECT_FOLDER = "~/Homestead";
@@ -24,6 +24,15 @@ const APPLET_FOLDER = global.userdatadir + "/applets/rancher@centurix/";
 const ICON_UP = APPLET_FOLDER + "icons/laravel_up_128x128.png";
 const ICON_DOWN = APPLET_FOLDER + "icons/laravel_down_128x128.png";
 const ICON_MISSING = APPLET_FOLDER + "icons/laravel_missing_128x128.png";
+
+/**
+ * L10n support
+ **/
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /**
  * Applet manager
