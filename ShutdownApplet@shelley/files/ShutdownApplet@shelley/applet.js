@@ -8,6 +8,14 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
+const Gettext = imports.gettext;
+const UUID = "ShutdownApplet@shelley"
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function ConfirmDialog(){
     this._init();
