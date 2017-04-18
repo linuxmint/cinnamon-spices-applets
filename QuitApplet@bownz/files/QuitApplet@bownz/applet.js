@@ -19,6 +19,16 @@ const DEFAULT_CONFIG = {
 
 const CONFIG_FILE    = AppletDir + '/config.json';
 
+const UUID = 'QuitApplet@bownz';
+
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 function MyPopupMenuItem()
 {
 	this._init.apply(this, arguments);
@@ -67,9 +77,9 @@ ShutdownDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Are you sure you want to shut down this system?\n"});
+	let label = new St.Label({text: _("Are you sure you want to shut down this system?\n")});
 	this.contentLayout.add(label);
-	let label = new St.Label({text: "You are currently signed in as: " + GLib.get_user_name() + ".\n"});
+	let label = new St.Label({text: _("You are currently signed in as: ") + GLib.get_user_name() + ".\n"});
 	this.contentLayout.add(label);
 
 	this.setButtons([
@@ -120,9 +130,9 @@ LogoutDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Log out of this system now?\n"});
+	let label = new St.Label({text: _("Log out of this system now?\n")});
 	this.contentLayout.add(label);
-	let label = new St.Label({text: "You are currently signed in as: " + GLib.get_real_name() + ".\n"});
+	let label = new St.Label({text: _("You are currently signed in as: ") + GLib.get_real_name() + ".\n"});
 	this.contentLayout.add(label);
 
 	this.setButtons([
