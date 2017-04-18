@@ -81,11 +81,11 @@ msgstr ""
 msgid "Rancher: Homestead missing or not configured."
 msgstr ""
 
-#: applet.js:263
+#: applet.js:263 applet.js:309
 msgid "Homestead missing or not configured."
 msgstr ""
 
-#: applet.js:270 applet.js:271
+#: applet.js:270 applet.js:271 applet.js:315
 msgid "Kernel Module not loaded. Needs recompilation."
 msgstr ""
 
@@ -141,8 +141,76 @@ msgstr ""
 msgid "Rancher: Homestead not installed."
 msgstr ""
 
-#: applet.js:298
+#: applet.js:298 applet.js 305
 msgid "Homestead not installed"
+msgstr ""
+
+#: applet.js 306
+msgid "Click here for installation instructions"
+msgstr ""
+
+#: applet.js 307 applet.js:310 applet.js:370
+msgid "Refresh this menu"
+msgstr ""
+
+#: applet.js 316
+msgid "Recompile Kernel Module."
+msgstr ""
+
+#: applet.js 320
+msgid "Status"
+msgstr ""
+
+#: applet.js 323
+msgid "Run provisioning"
+msgstr ""
+
+#: applet.js 324
+msgid "Suspend Homestead"
+msgstr ""
+
+#: applet.js 325
+msgid "SSH Terminal..."
+msgstr ""
+
+#: applet.js 329
+msgid "Destroy Homestead"
+msgstr ""
+
+#: applet.js 336
+msgid "Configuration"
+msgstr ""
+
+#: applet.js 337
+msgid "IP: "
+msgstr ""
+
+#: applet.js 338
+msgid "Memory: "
+msgstr ""
+
+#: applet.js 339
+msgid "CPU: "
+msgstr ""
+
+#: applet.js 340
+msgid "Provider: "
+msgstr ""
+
+#: applet.js 342
+msgid "Edit Homestead configuration..."
+msgstr ""
+
+#: applet.js 345
+msgid "Hosted Sites"
+msgstr ""
+
+#: applet.js 355
+msgid "Edit hosts file..."
+msgstr ""
+
+#: applet.js 358
+msgid "Hosted Databases"
 msgstr ""
 
 #: terminal_reader.js:58
