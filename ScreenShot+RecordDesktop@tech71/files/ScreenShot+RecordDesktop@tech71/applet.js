@@ -4,7 +4,14 @@ const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
+const UUID = 'ScreenShot+RecordDesktop@tech71';
+const Gettext = imports.gettext;
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 function ConfirmDialog(){
     this._init();
 }
