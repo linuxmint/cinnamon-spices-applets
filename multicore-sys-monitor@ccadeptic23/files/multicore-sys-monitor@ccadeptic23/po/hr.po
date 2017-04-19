@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Multi-Core System Monitor 1.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-19 00:31+0200\n"
-"PO-Revision-Date: 2017-04-19 01:27+0200\n"
+"PO-Revision-Date: 2017-04-19 17:22+0200\n"
 "Language-Team: Croatian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +25,7 @@ msgstr "CPU"
 
 #: DataProviders.js:112
 msgid "cpu: "
-msgstr "cpu: "
+msgstr "Cpu: "
 
 #: DataProviders.js:154
 msgid "MEM"
@@ -33,23 +33,23 @@ msgstr "MEM"
 
 #: DataProviders.js:161
 msgid "------mem------- \n"
-msgstr "--------memorija--------- \n"
+msgstr "----------------------MEMORIJA------------------------ \n"
 
 #: DataProviders.js:162
 msgid "usedup:\t"
-msgstr "iskorišteno:\t\t"
+msgstr "Iskorišteno:\t\t"
 
 #: DataProviders.js:163
 msgid "cached:\t"
-msgstr "predmemorija:\t"
+msgstr "Predmemorija:\t"
 
 #: DataProviders.js:164
 msgid "buffer:\t"
-msgstr "međuspremnik:\t"
+msgstr "Međuspremnik:\t"
 
 #: DataProviders.js:165
 msgid "free:\t\t"
-msgstr "slobodno:\t\t"
+msgstr "Slobodno:\t\t"
 
 #: DataProviders.js:192
 msgid "SWAP"
@@ -57,11 +57,11 @@ msgstr "SWAP"
 
 #: DataProviders.js:197
 msgid "------swap------- \n"
-msgstr "-----------swap------------ \n"
+msgstr "-------------------------SWAP---------------------------- \n"
 
 #: DataProviders.js:198
 msgid "swap:\t"
-msgstr "swap:\t"
+msgstr "Swap:\t"
 
 #: DataProviders.js:259
 msgid "NET"
@@ -69,19 +69,19 @@ msgstr "MREŽA"
 
 #: DataProviders.js:302
 msgid "-------net-------\n"
-msgstr "----------mreža-----------\n"
+msgstr "------------------------MREŽA----------------------------\n"
 
 #: DataProviders.js:305
 msgid ": D: "
-msgstr ": P: "
+msgstr ":\tPreuzimanje: "
 
 #: DataProviders.js:305
 msgid " U: "
-msgstr " S: "
+msgstr "\tSlanje: "
 
 #: DataProviders.js:305
 msgid " (KiB/s)\n"
-msgstr " (KiB/s)\n"
+msgstr "\t(KiB/s)\n"
 
 #: DataProviders.js:374
 msgid "DISK"
@@ -89,19 +89,19 @@ msgstr "DISK"
 
 #: DataProviders.js:399
 msgid "------disk------- \n"
-msgstr "-----------disk------------- \n"
+msgstr "-------------------------DISK------------------------------ \n"
 
 #: DataProviders.js:402
 msgid ": R: "
-msgstr ": Č: "
+msgstr ": \tČitanje: "
 
 #: DataProviders.js:402
 msgid ": W: "
-msgstr ": P: "
+msgstr "\tZapisivanje: "
 
 #: DataProviders.js:402
 msgid " (MiB/s)\n"
-msgstr " (MiB/s)\n"
+msgstr "\t(MiB/s)\n"
 
 #: ErrorApplet.js:29 ErrorApplet.js:35
 msgid "Multi-core System Monitor Error."
@@ -175,7 +175,7 @@ msgstr ""
 "očitanje \n"
 "\tmože postati istovjetno od 0. I ako postoje samo mala očitanja tada "
 "se\n"
-"\tneznatno veća očitanja mogu pojaviti veća nego što bit trebala biti.\n"
+"\tneznatno veća očitanja mogu pojaviti veća nego što bi trebala biti.\n"
 "\tAko nije omogućeno najveća korištena vrijednost biti će najveće\n"
 "\točitanje od kada je Cinnamon pokrenut.\n"
 "\n"
