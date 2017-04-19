@@ -109,7 +109,8 @@ MultiCpuDataProvider.prototype = {
 	{
 		if(!this.isEnabled)
 			return "";
-		var tooltipstr = _("cpu: ");
+		var tooltipstr = _("------CPU------- \n");
+		tooltipstr += _("cpu: ");
 		for(var i = 0; i < this.cpucount; i++)
 			tooltipstr += Math.round(100*this.cpulist_usage[i],2).toString() + "% ";
 		return tooltipstr+"\n";
