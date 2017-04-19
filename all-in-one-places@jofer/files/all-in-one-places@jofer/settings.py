@@ -17,8 +17,10 @@ Requires Python 2.7
 from optparse import OptionParser
 from gi.repository import Gio, Gtk
 import os
+import gettext
 
-from gettext import gettext as _
+home = os.path.expanduser("~")
+gettext.install("all-in-one-places@jofer", home + "/.local/share/locale")
 
 APPLET_DIR = os.path.dirname(os.path.abspath(__file__)) 
 SCHEMA_NAME = "org.cinnamon.applets.AllInOnePlaces"
