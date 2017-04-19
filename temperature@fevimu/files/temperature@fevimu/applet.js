@@ -7,8 +7,14 @@ const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "temperature@fevimu";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation) {
     this._init(orientation);
@@ -42,12 +48,12 @@ MyApplet.prototype = {
 			
 
 			if(this.sensorsPath){
-				this.title='Error';
-				this.content='Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!';
+				this.title=_("Error");
+				this.content=_("Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!");
 			}
 			else{
-				this.title='Warning';
-				this.content='Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!';
+				this.title=_("Warning");
+				this.content=_("Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!");
 			}
 			
 						
@@ -120,9 +126,9 @@ MyApplet.prototype = {
 		    tempInfo = this._findTemperatureFromFiles();
 		    if(tempInfo.temp){
 		        this.title=this._formatTemp(tempInfo.temp);
-		        items.push('Current Temperature : '+this._formatTemp(tempInfo.temp));
+		        items.push(_("Current Temperature : ")+this._formatTemp(tempInfo.temp));
 		        if (tempInfo.crit)
-		            items.push('Critical Temperature : '+this._formatTemp(tempInfo.crit));
+		            items.push(_("Critical Temperature : ")+this._formatTemp(tempInfo.crit));
 		    }
 		}
 
@@ -131,7 +137,7 @@ MyApplet.prototype = {
             c.destroy()
         });
 
-		let section = new PopupMenu.PopupMenuSection("Temperature");
+		let section = new PopupMenu.PopupMenuSection(_("Temperature"));
         if (items.length>0){
             let item;
             for each (let itemText in items){
@@ -162,7 +168,7 @@ MyApplet.prototype = {
 	},
 	
 	_createSectionForText: function(txt){
-		    let section = new PopupMenu.PopupMenuSection("Temperature");
+		    let section = new PopupMenu.PopupMenuSection(_("Temperature"));
 		    let item = new PopupMenu.PopupMenuItem("");
 		    item.addActor(new St.Label({
 		        text:txt,
