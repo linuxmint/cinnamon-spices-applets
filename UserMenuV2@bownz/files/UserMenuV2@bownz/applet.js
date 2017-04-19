@@ -15,7 +15,8 @@ const Util = imports.misc.util;
 const Meta = imports.gi.Meta;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
-
+const UUID = "UserMenuV2@bownz";
+const Gettext = imports.gettext;
 const ICON_SIZE = 48;	//<-----Size Of the FACE Icon.
 const MyFaceIcon = "avatar-default"	//<-----FACE Icon Name. What I do is go to my home Directory, press CTRL+H and copy the file ".face" and move it to the folder "~/.icons/" and rename the file to "face.png" and put "face" in the quotations here.
 
@@ -25,6 +26,12 @@ const AppletDir = imports.ui.appletManager.appletMeta["UserMenuV2@bownz"].path;
 let appsys = Cinnamon.AppSystem.get_default();
 let session = new GnomeSession.SessionManager();
 let screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 //===================================Shutdown==========================================================
 function ShutdownDialog(){
@@ -36,9 +43,9 @@ ShutdownDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Are you sure you want to shut down this system?\n"});
+	let label = new St.Label({text: _("Are you sure you want to shut down this system?\n")});
 	this.contentLayout.add(label);
-	let label = new St.Label({text: "You are currently signed in as: " + GLib.get_user_name() + ".\n"});
+	let label = new St.Label({text: _("You are currently signed in as: ") + GLib.get_user_name() + ".\n"});
 	this.contentLayout.add(label);
 	
 
