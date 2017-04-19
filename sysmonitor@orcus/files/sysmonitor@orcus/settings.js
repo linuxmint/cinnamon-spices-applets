@@ -23,8 +23,8 @@ const Gtk = imports.gi.Gtk;
 const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 
+const UUID = "sysmonitor@orcus";
 const CONFIG_FILE = "settings.json";
 const DEFAULT_CONFIG = {
     "graphWidth": 40,
@@ -68,6 +68,12 @@ const DEFAULT_CONFIG = {
         ]
     }
 };
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 Gtk.init(null);
 

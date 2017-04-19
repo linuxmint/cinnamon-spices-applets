@@ -27,7 +27,7 @@ const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const NMClient = imports.gi.NMClient;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+const UUID = "sysmonitor@orcus";
 
 const CONFIG_FILE = "settings.json";
 const DEFAULT_CONFIG = {
@@ -72,6 +72,12 @@ const DEFAULT_CONFIG = {
         ]
     }
 };
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation) {
     this._init(metadata, orientation);
@@ -313,7 +319,7 @@ CpuDataProvider.prototype = {
         this.iowait_last = this.gtop.iowait;
         this.total_last = this.gtop.total;
         let used = 1-idle-nice-sys-iowait;
-        this.text = "CPU: " + Math.round(100 * used) + " %";
+        this.text = _("CPU: ") + Math.round(100 * used) + " %";
         return [used, nice, sys, iowait];
     },
     
@@ -339,8 +345,8 @@ MemDataProvider.prototype = {
         GTop.glibtop_get_mem(this.gtop);
         let used = this.gtop.used / this.gtop.total;
         let cached = (this.gtop.buffer + this.gtop.cached) / this.gtop.total;
-        this.text = "Memory: " + Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) / (1024 * 1024))
-            + " / " + Math.round(this.gtop.total / (1024 * 1024)) + " MB";
+        this.text = _("Memory: ") + Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) / (1024 * 1024))
+            + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB");
         return [used-cached, cached];
     },
     
@@ -365,8 +371,8 @@ SwapDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_swap(this.gtop);
         let used = this.gtop.used / this.gtop.total;
-        this.text = "Swap: " + Math.round(this.gtop.used / (1024 * 1024))
-            + " / " + Math.round(this.gtop.total / (1024 * 1024)) + " MB";
+        this.text = _("Swap: ") + Math.round(this.gtop.used / (1024 * 1024))
+            + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB");
         return [used];
     },
     
@@ -400,7 +406,7 @@ NetDataProvider.prototype = {
         let up_delta = (up - this.up_last) * 1000 / this.refreshRate;
         this.down_last = down;
         this.up_last = up;
-        this.text = "Network D/U: " + Math.round(down_delta/1024) + " / " + Math.round(up_delta/1024) + " KB/s";
+        this.text = _("Network D/U: ") + Math.round(down_delta/1024) + " / " + Math.round(up_delta/1024) + _(" KB/s");
         return [down_delta, up_delta];
     },
     
@@ -437,7 +443,7 @@ LoadAvgDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_loadavg(this.gtop);
         let load = this.gtop.loadavg[0];
-        this.text = "Load average: " + this.gtop.loadavg[0]
+        this.text = _("Load average: ") + this.gtop.loadavg[0]
             + ", " + this.gtop.loadavg[1]
             + ", " + this.gtop.loadavg[2];
         return [load];
