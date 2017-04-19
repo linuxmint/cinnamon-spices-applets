@@ -45,8 +45,8 @@ try {
   Main.criticalNotify(_("Dependence missing"), _("Please install the GTop package\n" +
       "\tUbuntu / Mint: gir1.2-gtop-2.0\n" +
       "\tFedora: libgtop2-devel\n" +
-      "\tArch: libgtop\n" +
-			"to use the applet %s").format(UUID), icon);
+      "\tArch: libgtop\n" +_(
+			"to use the applet %s")).format(UUID), icon);
   NoInstdeps = true;
 }
 
@@ -69,7 +69,7 @@ MyApplet.prototype = {
 			  return;
 			}
 
-			this.itemOpenSysMon = new PopupMenu.PopupMenuItem("Open System Monitor");
+			this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
@@ -280,7 +280,7 @@ CpuDataProvider.prototype = {
 
 	getName: function()
 	{
-		return "CPU";
+		return _("CPU");
 	}
 };
 
@@ -303,7 +303,7 @@ MemDataProvider.prototype = {
 
 	getName: function()
 	{
-		return "MEM";
+		return _("MEM");
 	}
 };
 
