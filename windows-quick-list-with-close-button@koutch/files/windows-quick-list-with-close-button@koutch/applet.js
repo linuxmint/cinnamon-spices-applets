@@ -7,6 +7,14 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const Gtk = imports.gi.Gtk;
+const UUID = "windows-quick-list-with-close-button@koutch";
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 ///Settings
 const Settings = imports.ui.settings;  // Needed for settings API
@@ -25,7 +33,6 @@ CloseDialog.prototype = {
 
     _init: function(wks, app_name, nb_windows, menu, msg1, msg2, showmenu ){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-
 		
     ///Settings
 		this.DIALOG_MSG_1 = msg1; 
@@ -363,7 +370,7 @@ MyApplet.prototype = {
 	///ContextMenu
     /**base on timer-notifications@markbokil.com 'Edit Options'**/
 	createContextMenu: function () {
-		this.edit_menu_item = new PopupMenu.PopupImageMenuItem(_('Settings'), "system-run-symbolic");
+		this.edit_menu_item = new PopupMenu.PopupImageMenuItem(_("Settings"), "system-run-symbolic");
 		this.edit_menu_item.connect('activate', Lang.bind(this, function () {
 			Util.spawnCommandLine('cinnamon-settings applets windows-quick-list-with-close-button@koutch');
 		}));

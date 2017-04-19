@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 13:34+0800\n"
+"PO-Revision-Date: 2017-04-19 13:40+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:57
+msgid "Yes"
+msgstr "是"
+
+#: applet.js:68
+msgid "No"
+msgstr "否"
+
+#: applet.js:167
+msgid "All windows"
+msgstr "所有窗口"
+
+#: applet.js:373
+msgid "Settings"
+msgstr "设置"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->description
+msgid "Quickly access windows from all workspaces with close buttons and settings"
+msgstr "从所有工作区快速访问带有关闭按钮和设置的窗口"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->name
+msgid "Windows Quick List with close button"
+msgstr "带有关闭按钮的窗口快速列表"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->description
+msgid "Menu icon size:"
+msgstr "菜单图标大小："
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->tooltip
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->tooltip
+msgid "From 12 to 48"
+msgstr "从12到48"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->units
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->units
+msgid "Pixels"
+msgstr "像素"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->description
+msgid "Workspace's name clickable"
+msgstr "可点击的工作区的名称"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->tooltip
+msgid "Switch between workspaces"
+msgstr "在工作区之间切换"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-1->description
+msgid "msg1 : "
+msgstr "消息1："
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->description
+msgid "Windows group"
+msgstr "窗口分组"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->tooltip
+msgid "Group windows by applications"
+msgstr "按应用程序分组窗口"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. WKS-CLOSE-BUTTON->description
+msgid "Display workspaces close button"
+msgstr "显示工作区关闭按钮"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->description
+msgid "Keep open"
+msgstr "保持打开"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->tooltip
+msgid "Stay open while closing windows "
+msgstr "关闭窗口时保持打开"
+
+#. windows-quick-list-with-close-button@koutch->settings-
+#. schema.json->head1->description
+msgid "Set confirm message (msg1 'number of windows' msg2)"
+msgstr "设置确认消息（消息1 '窗口数量' 消息2）"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP-CLOSE-BUTTON->description
+msgid "Display window groups close button"
+msgstr "显示窗口分组关闭按钮"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-2->description
+msgid "msg2 : "
+msgstr "消息2："
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->description
+msgid "Submenu icon size:"
+msgstr "子菜单图标大小："
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. CLOSE-BUTTON->description
+msgid "Display close buttons"
+msgstr "显示关闭按钮"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->description
+msgid "Window title length:"
+msgstr "窗口标题长度："
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->tooltip
+msgid "From 10 to 100"
+msgstr "从0到100"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->units
+msgid "Characters"
+msgstr "个字符"
