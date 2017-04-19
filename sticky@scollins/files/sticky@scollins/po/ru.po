@@ -21,7 +21,7 @@ msgstr ""
 
 #: applet.js:206
 msgid "Change theme"
-msgstr "Выберите тему"
+msgstr "Выбать тему"
 
 #: applet.js:215
 msgid "Edit title"
@@ -77,7 +77,7 @@ msgstr "Новый список заданий"
 
 #: applet.js:1614
 msgid "Pin notes (keep on top)"
-msgstr "Закрепить (вверху)"
+msgstr "Закрепить (поверх всех окон)"
 
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
@@ -112,7 +112,7 @@ msgstr "При запуске Cinnamon"
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
 msgid "Show notes above windows"
-msgstr "Показать заметки над окнами"
+msgstr "Показать заметки поверх окон"
 
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
