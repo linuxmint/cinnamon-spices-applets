@@ -1,6 +1,6 @@
 //SIMPLE ADAPTATION OF THE DEFAULT SYSTEM SETTINGS- By Bownz
 
-
+const UUID = "bettersettings@bownz";
 const Lang = imports.lang;
 const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
@@ -10,9 +10,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
-
+const Gettext = imports.gettext;
 const AppletMeta = imports.ui.appletManager.applets["bettersettings@bownz"];
 const AppletDir = imports.ui.appletManager.appletMeta["bettersettings@bownz"].path;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function ConfirmDialog(){
     this._init();
@@ -23,7 +29,7 @@ ConfirmDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Are you sure you want to restore all settings to default?\n\n"});
+	let label = new St.Label({text: _("Are you sure you want to restore all settings to default?\n\n")});
 	this.contentLayout.add(label);
 
 	this.setButtons([
