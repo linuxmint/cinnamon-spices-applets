@@ -8,14 +8,11 @@
  * 
  */
 
-
-
 /**
  * Import stuff ...
  */
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
-
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -24,17 +21,24 @@ const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
+const UUID = "all-in-one-places@jofer";
 
-const EXTENSION_UUID = "all-in-one-places@jofer";
 const SCHEMA_NAME = "org.cinnamon.applets.AllInOnePlaces";
 const APPLET_DIR = imports.ui.appletManager.appletMeta["all-in-one-places@jofer"].path;
 
 let settings;
 
+/**
+ * Translation support
+ */
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /**
  * Messages for the confirmation dialog boxes.
@@ -45,10 +49,6 @@ const EJECT_DEVICE_LABEL    = _("Eject");
 const EJECT_DEVICE_MESSAGE  = _("Are you sure you want to eject this device ?") + "\n";
 const CLEAR_RECENT_LABEL    = _("Recent documents");
 const CLEAR_RECENT_MESSAGE  = _("Clear the Recent Documents list?") + "\n";
-
-
-
-
 
 /**
  * Device menu item base class
