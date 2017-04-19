@@ -41,7 +41,14 @@ const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Gdk = imports.gi.Gdk;
 const GnomeSession = imports.misc.gnomeSession;
+const UUID = "window-buttons-with-title@fmete";
+const Gettext = imports.gettext;
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function WindowButtonApplet(orientation,metadata, panelHeight, instance_id) {
 
@@ -180,7 +187,7 @@ WindowButtonApplet.prototype = {
    				     reactive: true });
                                      
            
-            let label = new St.Label({ text : 'No Active Window', style_class: 'window-list-item'});
+            let label = new St.Label({ text : _("No Active Window"), style_class: 'window-list-item'});
 	       
             
             this.button['title'].set_child(label);
@@ -364,7 +371,7 @@ WindowButtonApplet.prototype = {
 						style_class: 'window-list-item-box',
 						style: this.fontStyle(),
 		                             reactive: true });
-		    let label = new St.Label({ text : _('Minimize'), style_class: 'window-list-item'});
+		    let label = new St.Label({ text : _("Minimize"), style_class: 'window-list-item'});
 		       
 		    this.button['minimize'].set_child(label);
             }
@@ -423,7 +430,7 @@ WindowButtonApplet.prototype = {
 						style: this.fontStyle(),
 					
 		                             reactive: true });
-		    let label = new St.Label({ text : _('Maximize'), style_class: 'window-list-item'});
+		    let label = new St.Label({ text : _("Maximize"), style_class: 'window-list-item'});
 		       
 		    this.button['maximize'].set_child(label);
 		} 
@@ -485,7 +492,7 @@ WindowButtonApplet.prototype = {
 						style: this.fontStyle(),
 					
 		                             reactive: true });
-		    let label = new St.Label({ text : _('Close'), style_class: 'window-list-item'});
+		    let label = new St.Label({ text : _("Close"), style_class: 'window-list-item'});
 		       
 		    this.button['close'].set_child(label);
 		} 
@@ -551,10 +558,10 @@ WindowButtonApplet.prototype = {
        	
        	if(activeWindow.get_maximized()){
        	
-       		this.button['maximize'].get_child().set_text(_('Restore'));
+       		this.button['maximize'].get_child().set_text(_("Restore"));
        	}else{
        	
-       		this.button['maximize'].get_child().set_text(_('Maximize'));
+       		this.button['maximize'].get_child().set_text(_("Maximize"));
        	}
        	
        	}
