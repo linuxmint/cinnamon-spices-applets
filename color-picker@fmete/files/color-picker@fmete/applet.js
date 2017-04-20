@@ -24,10 +24,16 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "color-picker@fmete";
 const Settings = imports.ui.settings;  // Needed for settings API
 const Main = imports.ui.main;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation,metadata, panelHeight, instance_id) {
     this._init(orientation,metadata, panelHeight, instance_id);
