@@ -7,6 +7,14 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const UUID = "cpu-monitor-text@gnemonix";
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instane_id) {
 	this._init(orientation, panel_height, instane_id);
@@ -26,7 +34,7 @@ MyApplet.prototype = {
 			this.settings.bindProperty(Settings.BindingDirection.IN, "max-percentage", "max_percentage", this._update, null);
 			this.settings.bindProperty(Settings.BindingDirection.IN, "update-interval", "update_interval", this._update, null);
 			
-			this.itemOpenSysMon = new PopupMenu.PopupMenuItem("Open System Monitor");
+			this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 	
