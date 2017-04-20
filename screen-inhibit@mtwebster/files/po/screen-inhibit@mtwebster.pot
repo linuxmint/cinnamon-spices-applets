@@ -17,6 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: applet.js:21
+msgid "Currently preventing screensaver"
+msgstr ""
+
+#: applet.js:22
+msgid "Currently allowing screensaver"
+msgstr ""
+
 #: applet.js:115
 msgid "Screensaver settings"
 msgstr ""
