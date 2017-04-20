@@ -10,7 +10,7 @@
 
 const EXTENSION_UUID = "calendar@simonwiles.net";
 const APPLET_DIR = imports.ui.appletManager.appletMeta[EXTENSION_UUID].path;
-
+const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -25,6 +25,12 @@ const Calendar = AppletDir.calendar;
 const GLib = imports.gi.GLib;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
+
+Gettext.bindtextdomain(EXTENSION_UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(EXTENSION_UUID, str);
+}
 
 function _onVertSepRepaint (area)
 {
