@@ -31,9 +31,10 @@ except ImportError:
 APPLET_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # i18n
-from gettext import gettext as _
-#import gettext
-#gettext.install('cinnamon', '/usr/share/cinnamon/locale')
+#from gettext import gettext as _
+import gettext
+home = os.path.expanduser("~")
+gettext.install("calendar@simonwiles.net", home + "/.local/share/locale")
 
 
 class SettingsWindow(Gtk.Window):
@@ -72,7 +73,7 @@ class SettingsWindow(Gtk.Window):
         cellrenderertext = Gtk.CellRendererText()
         cellrenderertext.set_property('editable', True)
         cellrenderertext.connect('edited', self._on_label_edited)
-        col = Gtk.TreeViewColumn('Display Name', cellrenderertext, text=0)
+        col = Gtk.TreeViewColumn(_('Display Name'), cellrenderertext, text=0)
         col.set_property('resizable', True)
         col.set_expand(True)
         self.treeview.append_column(col)
@@ -84,7 +85,7 @@ class SettingsWindow(Gtk.Window):
             timezones, match_anywhere=True, force_match=True)
         cellrendererautocomplete.set_property('editable', True)
         cellrendererautocomplete.connect('edited', self._on_tz_edited)
-        col = Gtk.TreeViewColumn('Timezone', cellrendererautocomplete, text=1)
+        col = Gtk.TreeViewColumn(_('Timezone'), cellrendererautocomplete, text=1)
         col.set_expand(True)
         self.treeview.append_column(col)
 
@@ -210,7 +211,7 @@ class SettingsWindow(Gtk.Window):
     def _add_entry(self, widget):
         self.liststore_worldclocks.insert(
             len(self.liststore_worldclocks),
-            ('Coordinated Universal Time', 'UTC')
+            (_('Coordinated Universal Time'), 'UTC')
         )
 
     def _remove_entry(self, widget):
