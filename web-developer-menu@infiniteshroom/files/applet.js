@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-const Gettext = imports.gettext.domain('cinnamon-extensions');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "web-developer-menu@infiniteshroom";
 const Util = imports.misc.util;
 const Lang = imports.lang; 
 const GLib = imports.gi.GLib;
@@ -20,6 +20,12 @@ var CommandConstants = new function() {
 	this.COMMAND_OPEN_WEBDIR = "nemo /var/www/";
 }
 
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation){
     this._init(orientation);
