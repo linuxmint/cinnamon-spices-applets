@@ -92,6 +92,19 @@
 			"List All Remote Repositories": {
 				"description": "List all remote repositories for a local repository",
 				"code": "git remote"
+			},
+			"Add an Upstream Repository to a Fork": {
+				"description": "Add an Upstream Repository to a Fork",
+				"code": "git remote add upstream <repository url>"
+			},
+			"Merge Upstream Repository Changes": {
+				"description": "Merge all upstream repository changes into a fork after adding the upstream remote",
+				"code": "git fetch upstream\ngit checkout <master or branch>\ngit rebase upstream/<master or branch>",
+				"alternatives": {
+					"Merge": {
+						"code": "git fetch upstream\ngit checkout <master or branch>\ngit merge upstream/<master or branch>"
+					}
+				}
 			}
 		},
 		"History": {
