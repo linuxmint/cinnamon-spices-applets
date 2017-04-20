@@ -1,7 +1,7 @@
 // Mark Bokil 5/12/12
 // mybookmarks Cinnamon Applet
 
-
+const UUID = 'mybookmarks@markbokil.com';
 const Version = "1.0.4";
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -13,6 +13,7 @@ const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio; // file monitor
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 const AppletMeta = imports.ui.appletManager.applets['mybookmarks@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mybookmarks@markbokil.com'].path;
 const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mybookmarks@markbokil.com/mybookmarks.properties']);
@@ -31,6 +32,11 @@ function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
 }
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation) {
     this._init(orientation);
@@ -51,7 +57,7 @@ MyApplet.prototype = {
                 this.set_applet_icon_symbolic_name(AppOptions.AppIconType);
             }
             
-            this.set_applet_tooltip(_('My Bookmarks'));
+            this.set_applet_tooltip(_("My Bookmarks"));
             
              // watch props file for changes
             let file = Gio.file_new_for_path(PropertiesFile);
@@ -133,18 +139,18 @@ MyApplet.prototype = {
            // Lang.bind(this, this.doRefresh));     
        // this._applet_context_menu.addMenuItem(this.refresh_menu_item); 
         //edit 
-        this.edit_menu_item = new Applet.MenuItem(_('Edit bookmarks menu'), Gtk.STOCK_EDIT, 
+        this.edit_menu_item = new Applet.MenuItem(_("Edit bookmarks menu"), Gtk.STOCK_EDIT, 
             Lang.bind(this, this.editProperties));     
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
         
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
           
         //help
-        this.help_menu_item = new Applet.MenuItem(_('Help'), Gtk.STOCK_HELP, 
+        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, 
             Lang.bind(this, this.doHelp));     
         this._applet_context_menu.addMenuItem(this.help_menu_item);
         //about
-        this.about_menu_item = new Applet.MenuItem(_('About'), Gtk.STOCK_ABOUT, 
+        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT, 
             Lang.bind(this, this.doAbout));     
         this._applet_context_menu.addMenuItem(this.about_menu_item);  
     },
@@ -185,4 +191,3 @@ function main(metadata, orientation) {
     
     return myApplet;      
 }
-
