@@ -23,13 +23,13 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
-
+const UUID = "cpufreq@mtwebster";
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
 const FileUtils = imports.misc.fileUtils;
-
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
@@ -67,6 +67,13 @@ const cpu_path = '/sys/devices/system/cpu/';
 const cpu_dir = Gio.file_new_for_path(cpu_path);
 let height = 22;
 const DEC_WHITE = 16777215;
+
+// Translation support
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 //basic functions
 
@@ -270,8 +277,8 @@ CpufreqSelectorBase.prototype = {
             let icon = new St.Icon({ icon_name: 'error',
                              icon_type: St.IconType.FULLCOLOR,
                              icon_size: 36 });
-            Main.criticalNotify("CPU frequency scaling unavailable",
-                                "Your system does not appear to support CPU frequency scaling.  Unfortunately this applet is of no use to you.",
+            Main.criticalNotify(_("CPU frequency scaling unavailable"),
+                                _("Your system does not appear to support CPU frequency scaling.  Unfortunately this applet is of no use to you."),
                                 icon);
         }
     },
@@ -411,7 +418,7 @@ MyApplet.prototype = {
                     this.orientation = orientation;
                     this.instance_id = instance_id;
                     this._initialize_settings();
-                    this.config_menu_item = new Applet.MenuItem("Configure Applet", 'system-run-symbolic',
+                    this.config_menu_item = new Applet.MenuItem(_("Configure Applet"), 'system-run-symbolic',
                                                     Lang.bind(this, this._on_open_settings));
                     this._applet_context_menu.addMenuItem(this.config_menu_item);
                     this.rebuild();
@@ -423,11 +430,11 @@ MyApplet.prototype = {
                         let icon = new St.Icon({ icon_name: 'error',
                                                  icon_type: St.IconType.FULLCOLOR,
                                                  icon_size: 36 });
-                        Main.criticalNotify("CPU frequency switcher program not installed",
-                                "You appear to be missing the required program, 'cpufreq-selector.'  This program is needed to perform scaling or governor switching.\n\n" +
-                                "This program is ordinarily provided by the package: gnome-applets\n\n" +
-                                "If you're on Linux Mint or Ubuntu, you can install this using the following command:\n\n" +
-                                "apt install --no-install-recommends gnome-applets",
+                        Main.criticalNotify(_("CPU frequency switcher program not installed"),
+                                _("You appear to be missing the required program, 'cpufreq-selector.'  This program is needed to perform scaling or governor switching.\n\n") +
+                                _("This program is ordinarily provided by the package: gnome-applets\n\n") +
+                                _("If you're on Linux Mint or Ubuntu, you can install this using the following command:\n\n") +
+                                _("apt install --no-install-recommends gnome-applets"),
                                 icon);
                     }
             } catch (e) {
