@@ -18,6 +18,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
+#: applet.js:21
+msgid "Currently preventing screensaver"
+msgstr "当前阻止屏保程序"
+
+#: applet.js:22
+msgid "Currently allowing screensaver"
+msgstr "当前允许屏保程序"
+
 #: applet.js:115
 msgid "Screensaver settings"
 msgstr "屏保程序设置"

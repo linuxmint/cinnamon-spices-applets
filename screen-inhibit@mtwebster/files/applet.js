@@ -10,8 +10,17 @@ try {
     // No settings available, use fallbacks
 }
 
-const INHIBIT_TT = "Currently preventing screensaver";
-const ALLOW_TT = "Currently allowing screensaver";
+const UUID = 'screen-inhibit@mtwebster';
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
+const INHIBIT_TT = _("Currently preventing screensaver");
+const ALLOW_TT = _("Currently allowing screensaver");
 
 const SessionManagerIface = '\
 <node> \
@@ -35,15 +44,6 @@ const SessionManagerIface = '\
         </method> \
     </interface> \
 </node>';
-
-const UUID = 'screen-inhibit@mtwebster';
-const Gettext = imports.gettext;
-
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-
-function _(str) {
-  return Gettext.dgettext(UUID, str);
-}
 
 var SessionManagerProxy = Gio.DBusProxy.makeProxyWrapper(SessionManagerIface);
 function SessionManager(initCallback, cancellable) {
