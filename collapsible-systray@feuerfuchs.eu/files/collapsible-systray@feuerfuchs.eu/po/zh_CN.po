@@ -32,7 +32,7 @@ msgstr "可折叠的系统托盘"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
-msgstr "替代弃用的系统托盘可折叠的Cinnamon小程序"
+msgstr "一个作为被遗弃的System Tray Collapsible（可折叠的的系统托盘）Cinnamon小程序的替代品"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-
 #. hover->description
