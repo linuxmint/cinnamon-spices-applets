@@ -27,8 +27,14 @@ const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const PopupMenu = imports.ui.popupMenu;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "acerhk-ctl@mcnielcho.org";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
