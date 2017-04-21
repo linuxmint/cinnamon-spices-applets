@@ -13,13 +13,13 @@ It is useful to have a very simple timer quickly and permanently available in th
  
 **The Settings Screen** can be reached from the right click menu as well as System Settings -> Applets. It enables you to:
 
-   * Set the refresh interval - use a slow refresh if you have multiple active counters and/or a slow machine - the default is every two seconds, one second is more pleasing as t gives a continuos count.  
+   * Set the refresh interval - use a slow refresh if you have multiple active counters and/or a slow machine - the default is every two seconds, one second is more pleasing as t gives a continuos count.
    * Provide a meaningful title for the counter which is displayed in the first part of the tooltip - useful for identification if you have multiple instances of counters - default is Stopwatch.
    * Change the mode from the default sequence on clicking of 'start -> pause -> reset' to 'start -> pause -> continue -> pause -> continue etc'. In this continuous mode mode one needs the Right Click (Context) Menu to reset the counter.
 
 **The Right Click (Context)** menu has options to:
 
-  * Start the counter - only for completeness  
+  * Start the counter - only for completeness
   * Pause the counter - only for completeness 
   * Reset the counter - required in 'continuous mode' 
   * Continue counting from the count before pausing - as per the continuous mode. 
