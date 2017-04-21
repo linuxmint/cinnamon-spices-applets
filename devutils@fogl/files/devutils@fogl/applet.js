@@ -14,8 +14,15 @@ const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
 const Gettext = imports.gettext
+
+
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-const _ = Gettext.gettext;
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Settings = imports.ui.settings;
@@ -28,24 +35,24 @@ var SettingsKeys = [
 	["terminal", "select_terminal", "Terminal"],
 	["gedit", "gedit", "Gedit"],
 	["filezilla", "filezilla", "Filezilla"],
-	["mysql_browser", "select_mysql_browser", "MySQL Browser"],
+	["mysql_browser", "select_mysql_browser", _("MySQL Browser")],
 	["select_terminal", "select_terminal", ""],
 	["select_mysql_browser", "select_mysql_browser", ""],
 	["path_heidi", "path_heidi", ""],
 	["services", "services", ""],
 	["services_type", "services_type", ""],
 	["config", "menu_block", ""],
-	["open_project_dir", "open_project_dir", "Open Project Directory"]
+	["open_project_dir", "open_project_dir", _("Open Project Directory")]
 ];
 
 //TODO: Make things dynamically...
 
 var ServiceKeys = [
-	["nginx", "Nginx Web Server", "nginx"],
-	["mysql", "MySQL Server", "mysql"],
-	["postgresql", "PostgreSQL Server", "postgres"],
+	["nginx", _("Nginx Web Server"), "nginx"],
+	["mysql", _("MySQL Server"), "mysql"],
+	["postgresql", _("PostgreSQL Server"), "postgres"],
 	//["network-manager", "Network-Manager", "NetworkManager"],
-	["apache2", "Apache Web Server", "apache2"]
+	["apache2", _("Apache Web Server"), "apache2"]
 ];
 
 var CommandConstants = new function() {
@@ -70,7 +77,7 @@ ErrorCommandDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "ERROR: Could not execute command...\nPlease check your configurations!\n\nOpen applet configuration?\n\n"});
+	let label = new St.Label({text: _("ERROR: Could not execute command...\nPlease check your configurations!\n\nOpen applet configuration?\n\n")});
 	this.contentLayout.add(label);
 
 	this.setButtons([
@@ -164,8 +171,8 @@ devUtils.prototype = {
 				
 				for (var i in ServiceKeys) {
 					this[ServiceKeys[i][0] + "Item"] = new PopupMenu.PopupSubMenuMenuItem(_("Control " + ServiceKeys[i][1]));
-					this[ServiceKeys[i][0] + "Item"].menu.addAction(_(checkService(ServiceKeys[i][0]) == true ? "  Service is up" : "  Start service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " start') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
-					this[ServiceKeys[i][0] + "Item"].menu.addAction(_(checkService(ServiceKeys[i][0]) == false ? "  Service is down" : "  Stop service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " stop') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
+					this[ServiceKeys[i][0] + "Item"].menu.addAction(checkService(ServiceKeys[i][0]) == true ? _("  Service is up") : _("  Start service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " start') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
+					this[ServiceKeys[i][0] + "Item"].menu.addAction(checkService(ServiceKeys[i][0]) == false ? _("  Service is down") : _("  Stop service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " stop') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
 					this.menu.addMenuItem(this[ServiceKeys[i][0] + "Item"]); 
 				}
 				
