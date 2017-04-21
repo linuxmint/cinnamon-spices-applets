@@ -1,0 +1,23 @@
+#
+msgid ""
+msgstr ""
+
+#. serviceLauncher@hulygun->metadata.json->description
+msgid "Description"
+msgstr ""
+
+#. serviceLauncher@hulygun->metadata.json->name
+msgid "Service Launcher"
+msgstr ""
+
+#. serviceLauncher@hulygun->settings-schema.json->services->description
+msgid "Set services"
+msgstr ""
+
+#. serviceLauncher@hulygun->settings-schema.json->services->tooltip
+msgid "use pattern Human Name:service.name;HumanName 2:service2.name"
+msgstr ""
+
+#. serviceLauncher@hulygun->settings-schema.json->header->description
+msgid "Set avaible services"
+msgstr ""
