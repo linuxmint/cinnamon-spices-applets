@@ -1,3 +1,5 @@
+//Based of original Cinnamon applet "show-desktop@cinnamon.org"
+
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
@@ -7,11 +9,23 @@ const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 const ModalDialog = imports.ui.modalDialog;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 
 const LOCKFILE = '/var/tmp/vlcrec.run';
 const LOCKMESSAGE = _("Sorry, only one instance allowed!") + "\n";
 const BADCROPMESSAGE = _("Sorry, the record can't starting,") + "\n"+_("because you have incorrect crop settings!")+ "\n";
 const NORECMESSAGE = _("Ther is no active recording.") + "\n";
+const DefIcon = "user-desktop";
+const RecIcon = "media-record";
+
+// l10n/translation support
+//const UUID = "montrer-le-bureau@cannelle.org"
+//Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+//function _(str) {
+//  return Gettext.dgettext(UUID, str);
+//}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -23,8 +37,8 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         
-        this.set_applet_icon_name("user-desktop");
-        this.set_applet_tooltip(_("Show desktop"));
+        this.set_applet_icon_name(DefIcon);
+        this.set_applet_tooltip(_("Show or capture desktop"));
 
     this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
 
@@ -94,18 +108,6 @@ MyApplet.prototype = {
     null,
     null);
 
-//    this.settings.bindProperty(Settings.BindingDirection.IN, 
-//    "screen-width", 
-//    "S_WIDTH", 
-//    null,
-//    null);
-
-//    this.settings.bindProperty(Settings.BindingDirection.IN, 
-//    "screen-height", 
-//    "S_HEIGHT", 
-//    null,
-//    null);
-
     this.settings.bindProperty(Settings.BindingDirection.IN, 
     "video-filter-crop", 
     "VF_CROP", 
@@ -136,13 +138,61 @@ MyApplet.prototype = {
     null,
     null);
 
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "video-filter-logo", 
+    "WMRK_YES", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "logo-file", 
+    "WMRK_FILE", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "logo-position", 
+    "WMRK_POS", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "logo-y", 
+    "WMRK_POSY", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "logo-x", 
+    "WMRK_POSX", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "logo-opacity", 
+    "WMRK_OPCT", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "use-screen-shot", 
+    "SS_YES", 
+    null,
+    null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN, 
+    "ss-tool", 
+    "SS_CMD", 
+    null,
+    null);
+
         this._initContextMenu();
 
     },
 
     _initContextMenu: function () {
         this.empty_item = new PopupMenu.PopupIconMenuItem(_("Record Screen"),
-                "media-record",
+                RecIcon,
                 St.IconType.SYMBOLIC);
         this.empty_item.connect('activate', Lang.bind(this, this.do_VlcTranscode));
         this._applet_context_menu.addMenuItem(this.empty_item);
@@ -170,6 +220,13 @@ let SCRW = global.screen_width;
 let SCRH = global.screen_height;
 let SCASH = this.S_CACHE;
 
+let LOGOFLTR = "";
+let USELOGO = ""
+if (this.WMRK_YES)
+USELOGO = "--logo-file=" + this.WMRK_FILE + " --logo-position=" + this.WMRK_POS + " --logo-y=" + this.WMRK_POSY + " --logo-x=" + this.WMRK_POSX + " --logo-opacity=" + this.WMRK_OPCT + " ";
+if (USELOGO !== "")
+LOGOFLTR = ",sfilter=logo";
+
 let VFCROP = ""
 if (this.VF_CROP)
 VFCROP = ",vfilter=croppadd{cropleft=" + this.CROP_L + ",cropbottom=" + this.CROP_B + ",croptop=" + this.CROP_T + ",cropright=" + this.CROP_R + "}";
@@ -177,10 +234,9 @@ VFCROP = ",vfilter=croppadd{cropleft=" + this.CROP_L + ",cropbottom=" + this.CRO
 let now = new Date();        
 let N_O_W = now.toLocaleFormat("-%F_%T.");
 
-let CMDLINE = "vlc screen://  --qt-start-minimized --input-slave alsa:// --no-video --screen-width=" + SCRW + " --screen-height=" + SCRH + " :screen-fps=" + VFPS + " :screen-caching=" + SCASH + " ";
+let CMDLINE = "vlc screen://  --qt-start-minimized --input-slave alsa:// --no-video " + USELOGO + "--screen-width=" + SCRW + " --screen-height=" + SCRH + " :screen-fps=" + VFPS + " :screen-caching=" + SCASH + " ";
 
-let TRANSCODING = "--sout " + "\"#transcode{vcodec=" + VCOD + VFCROP + ",vb=" + VBR + ",fps=" + VFPS + ",scale=" + "1" + ",acodec=" + ACOD + ",ab=" + ABR + ",channels=" + ACHAN + ",samplerate=" + SMPLRT + "}:duplicate{dst=std{access=file,mux=" + MUXR + ",dst=" + DIRNAME + "/" + ONAME + N_O_W + MUXR + "}}\"";
-
+let TRANSCODING = "--sout " + "\"#transcode{vcodec=" + VCOD + VFCROP + ",vb=" + VBR + ",fps=" + VFPS + ",scale=" + "1" + ",acodec=" + ACOD + ",ab=" + ABR + ",channels=" + ACHAN + ",samplerate=" + SMPLRT + LOGOFLTR + "}:duplicate{dst=std{access=file,mux=" + MUXR + ",dst=" + DIRNAME + "/" + ONAME + N_O_W + MUXR + "}}\"";
 
                 let lock_file = Gio.file_new_for_path(LOCKFILE);
                 if (lock_file.query_exists(null)) {
@@ -190,6 +246,7 @@ let TRANSCODING = "--sout " + "\"#transcode{vcodec=" + VCOD + VFCROP + ",vb=" + 
                 }else{
                 Util.spawnCommandLine("touch "+LOCKFILE);
                 Util.spawnCommandLine(CMDLINE+TRANSCODING);
+                this.set_applet_icon_name(RecIcon);
                 }
             },
 
@@ -199,17 +256,45 @@ let TRANSCODING = "--sout " + "\"#transcode{vcodec=" + VCOD + VFCROP + ",vb=" + 
         Util.spawnCommandLine("killall -SIGTERM vlc");
         Util.spawnCommandLine("rm -f "+LOCKFILE);
         Util.spawnCommandLine("notify-send --icon=process-stop \"Recording has finished\"");
+                this.set_applet_icon_name(DefIcon);
                 }else{
                 new ModalDialog.NotifyDialog(NORECMESSAGE).open();
                 }
     },
     
+    _onButtonPressEvent: function(actor, event) {
+        if (this._applet_enabled) {
+            if (event.get_button() == 1) {
+                if (!this._draggable.inhibit) {
+                    return false;
+                } else {
+                    if (this._applet_context_menu.isOpen) {
+                        this._applet_context_menu.toggle();
+                    }
+                    this.on_applet_clicked(event);
+                }
+            }
+            if ((this.SS_YES == true) && GLib.file_test(this.SS_CMD, GLib.FileTest.IS_EXECUTABLE)) {
+                if (event.get_button() == 2) {
+                    Util.spawnCommandLine(this.SS_CMD);
+                }
+            }
+            if (event.get_button() == 3) {
+                if (this._applet_context_menu._getMenuItems().length > 0) {
+                    this._applet_context_menu.toggle();
+                }
+            }
+        }
+        return true;
+    },
+
+
     on_applet_clicked: function(event) {
         global.screen.toggle_desktop(global.get_current_time());
     },
 
     on_applet_removed_from_panel: function() {
-        Util.spawnCommandLine("killall -SIGTERM vlc");
+        Util.killall("vlc");
         Util.spawnCommandLine("rm -f "+LOCKFILE);
         this.settings.finalize();
     }
