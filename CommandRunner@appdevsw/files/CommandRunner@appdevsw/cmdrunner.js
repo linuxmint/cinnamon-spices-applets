@@ -4,6 +4,14 @@
 const Lang = imports.lang;
 const AProc = imports.asyncprocess;
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "CommandRunner@appdevsw";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function CmdRunner(applet, debug)
 {
