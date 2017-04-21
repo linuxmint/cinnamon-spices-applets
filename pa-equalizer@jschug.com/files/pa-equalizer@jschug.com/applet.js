@@ -6,14 +6,20 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Cinnamon = imports.gi.Cinnamon;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "pa-equalizer@jschug.com";
 
 const CONFIG_DIR = GLib.get_home_dir() + "/.pulse";
 const EQCONFIG = CONFIG_DIR + "/equalizerrc";
 const EQPRESETS = EQCONFIG + ".availablepresets";
 const PRESETDIR1 = CONFIG_DIR + "/presets/";
 const PRESETDIR2 = "/usr/share/pulseaudio-equalizer/presets/";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function Config() {
     this._init();
