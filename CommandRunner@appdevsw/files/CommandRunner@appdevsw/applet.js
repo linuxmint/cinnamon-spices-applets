@@ -10,6 +10,15 @@ const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
+const Gettext = imports.gettext;
+const UUID = "CommandRunner@appdevsw";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 //
 //
 //--------- MyApplet class -------------
@@ -199,4 +208,3 @@ function main(metadata, orientation, panelHeight, instanceId)
 {
     return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }
-
