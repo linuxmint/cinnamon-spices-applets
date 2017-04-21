@@ -6,17 +6,19 @@ const Clutter = imports.gi.Clutter;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
+const Gettext = imports.gettext;
+const UUID = "text-to-speech-applet@cardsurf";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
-const uuid = 'text-to-speech-applet@cardsurf';
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
 const AppletGui = AppletDirectory.appletGui;
 const Clipboard = AppletDirectory.clipboard;
 const ShellUtils = AppletDirectory.shellUtils;
-
-
-
-
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
 	this._init(metadata, orientation, panel_height, instance_id);
@@ -331,8 +333,8 @@ MyApplet.prototype = {
 	},
 
 	notify_parse_error: function () {
-		let title = "Error parsing command parameters";
-		let msg = "Try to use less parameters to determine which one is causing the error";
+		let title = _("Error parsing command parameters");
+		let msg = _("Try to use less parameters to determine which one is causing the error");
     	Main.notifyError(title, msg);
 	},
 
@@ -352,7 +354,6 @@ function main(metadata, orientation, panel_height, instance_id) {
 	let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
 	return myApplet;
 }
-
 
 
 
