@@ -8,6 +8,14 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Gio = imports.gi.Gio;
+const Gettext = imports.gettext;
+const UUID = "sshlauncher@sumo";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation) {
   this._init(metadata, orientation);
@@ -32,7 +40,7 @@ MyApplet.prototype = {
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
 	  this.sshConfig = this.homeDir + "/.ssh/config";
-      this.msgSource = new MessageTray.SystemNotificationSource("SSH Launcher");
+      this.msgSource = new MessageTray.SystemNotificationSource(_("SSH Launcher"));
       Main.messageTray.add(this.msgSource);
       let file = Gio.file_new_for_path(this.sshConfig);
       this.monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, new Gio.Cancellable());
@@ -46,10 +54,10 @@ MyApplet.prototype = {
 
   updateMenu: function() {
     this.menu.removeAll();
-    let menuitemHeadless = new PopupMenu.PopupSwitchMenuItem("Background (-fN)");
+    let menuitemHeadless = new PopupMenu.PopupSwitchMenuItem(_("Background (-fN)"));
     menuitemHeadless.connect('activate', Lang.bind(this, this.toggleHeadless));
     this.menu.addMenuItem(menuitemHeadless);
-    let menuitemForwardX = new PopupMenu.PopupSwitchMenuItem("Forward X11 (-X)");
+    let menuitemForwardX = new PopupMenu.PopupSwitchMenuItem(_("Forward X11 (-X)"));
     menuitemForwardX.connect('activate', Lang.bind(this, this.toggleForwardX));
     this.menu.addMenuItem(menuitemForwardX);
 
@@ -70,14 +78,14 @@ MyApplet.prototype = {
         }
       }
     } catch(e) {
-      this.menu.addMenuItem(new PopupMenu.PopupMenuItem("ERROR. " + e, { reactive: false }));
+      this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("ERROR. ") + e, { reactive: false }));
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-    let menuitemEdit = new PopupMenu.PopupMenuItem("Edit SSH config");
+    let menuitemEdit = new PopupMenu.PopupMenuItem(_("Edit SSH config"));
     menuitemEdit.connect('activate', Lang.bind(this, this.editConfig));
     this.menu.addMenuItem(menuitemEdit);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-    let menuitemUpdate = new PopupMenu.PopupMenuItem("Force Update from SSH config");
+    let menuitemUpdate = new PopupMenu.PopupMenuItem(_("Force Update from SSH config"));
     menuitemUpdate.connect('activate', Lang.bind(this, this.updateMenu));
     this.menu.addMenuItem(menuitemUpdate);
   },
@@ -92,7 +100,7 @@ MyApplet.prototype = {
     }
     let terminal = this.gsettings.get_string("exec");
     Main.Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
-    let notification = new MessageTray.Notification(this.msgSource, "SSH Launcher", "Connection opened to " + hostname);
+    let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname);
     notification.setTransient(true);
     this.msgSource.notify(notification);
   },
