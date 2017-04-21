@@ -8,9 +8,16 @@ const St = imports.gi.St;
 const Cairo = imports.cairo;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
-
+const Gettext = imports.gettext;
 const tfpf = "/tmp/cnmna_inklvlmnt_o9_i";
 const vertdelta = 2;
+const UUID = "ink-level-monitor@r0p01ach";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -100,7 +107,7 @@ MyApplet.prototype = {
             }
         }
         else {
-            this.set_applet_tooltip("Unable to connect printer at port " + this.lpPort.toString());
+            this.set_applet_tooltip(_("Unable to connect printer at port ") + this.lpPort.toString());
             this.ddac = 0;
             this.dda1 = Array();
             this.dda2 = Array();
@@ -111,7 +118,7 @@ MyApplet.prototype = {
     ontfclosed: function(pid, status) {
         let f = Gio.file_new_for_path(tfpf + this.instance_id);
         if(!f.query_exists(null)) {
-            this.set_applet_tooltip("Error reading data...");
+            this.set_applet_tooltip(_("Error reading data..."));
             return;
         }
         [success, out, tag] = f.load_contents(null);
@@ -203,5 +210,4 @@ function main(metadata, orientation, panel_height, instance_id) {
     let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
     return myApplet;
 }
-
 

@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 22:17+0800\n"
+"PO-Revision-Date: 2017-04-20 22:20+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:110
+msgid "Unable to connect printer at port "
+msgstr "无法连接到打印机于端口"
+
+#: applet.js:121
+msgid "Error reading data..."
+msgstr "读取数据出错..."
+
+#. ink-level-monitor@r0p01ach->metadata.json->description
+msgid "USB Printer Ink Level Monitor Applet"
+msgstr "USB打印机墨水量监视器小程序"
+
+#. ink-level-monitor@r0p01ach->metadata.json->name
+msgid "Printer Ink Level Monitor Applet"
+msgstr "打印机墨水量监视器小程序"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->description
+msgid "Printer Port Number"
+msgstr "打印机端口号"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->units
+msgid "(lp# device)"
+msgstr "(lp# device)"
+
+#. ink-level-monitor@r0p01ach->settings-
+#. schema.json->updateInterval->description
+msgid "Update Interval"
+msgstr "更新间隔"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "秒"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->description
+msgid "Applet Width"
+msgstr "小程序的宽度"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->units
+msgid "px"
+msgstr "px"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "常规设置"
