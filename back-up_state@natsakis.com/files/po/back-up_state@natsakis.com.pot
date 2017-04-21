@@ -1,0 +1,39 @@
+#
+msgid ""
+msgstr ""
+
+#. back-up_state@natsakis.com->metadata.json->description
+msgid ""
+"Probes for the state of a certain rsync back-up by checking the exit status "
+"of the log file"
+msgstr ""
+
+#. back-up_state@natsakis.com->metadata.json->name
+msgid "Back-up State"
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->description
+msgid "String to be searched for "
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->tooltip
+msgid ""
+"Set the string that will be searched for in your log file, to determine the "
+"last good back-up"
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->log_file->description
+msgid "Log file "
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->refresh_int->description
+msgid "Refresh interval (min):  "
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->error_days->description
+msgid "Error after days:  "
+msgstr ""
+
+#. back-up_state@natsakis.com->settings-schema.json->warning_days->description
+msgid "Warning after days:  "
+msgstr ""
