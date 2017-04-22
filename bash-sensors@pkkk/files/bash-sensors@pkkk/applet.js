@@ -6,7 +6,14 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+const UUID = "bash-sensors@pkkk";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation) {
 	this._init(metadata, orientation);
@@ -26,7 +33,7 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panelHeight, instance_id) {
         Applet.TextApplet.prototype._init.call(this, orientation);
         this.path = metadata.path;
-        this.set_applet_tooltip("Bash Sensors!");
+        this.set_applet_tooltip(_("Bash Sensors!"));
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -57,7 +64,7 @@ MyApplet.prototype = {
 		if(!this.menu.isOpen) {
 			let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
 			let cmd_output = this.spawn_sync(cmd);
-			let cmd_stdout = cmd_output[0] ? cmd_output[1].toString() : "script error";
+			let cmd_stdout = cmd_output[0] ? cmd_output[1].toString() : _("script error");
 			this.menuLabel.set_text(cmd_stdout);
 		}
 
@@ -70,7 +77,7 @@ MyApplet.prototype = {
 			[this.script1, this.script2] : [this.script1];
 		for (i in scripts) {
 			let cmd = scripts[i];
-			let cmd_stdout = "script error";
+			let cmd_stdout = _("script error");
 			let cmd_output = this.spawn_sync(cmd);
 			if(cmd_output[0]) {
 				cmd_stdout = cmd_output[1].toString();
