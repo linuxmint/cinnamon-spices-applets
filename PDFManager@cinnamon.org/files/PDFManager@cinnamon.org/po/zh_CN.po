@@ -43,7 +43,7 @@ msgstr "垂直翻转PDF"
 
 #: applet.js:105
 msgid "Install PDFManager's tools"
-msgstr "安装PDFManager的工具"
+msgstr "安装PDF管理器的工具"
 
 #: applet.js:115
 msgid "Open Document Viewer"
@@ -63,7 +63,7 @@ msgstr "PDF管理器"
 
 #. PDFManager@cinnamon.org->metadata.json->name
 msgid "PDFManager"
-msgstr ""
+msgstr "PDF管理器"
 
 msgid "Select your PDF..."
 msgstr "选择您的PDF..."
