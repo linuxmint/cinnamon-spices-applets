@@ -38,7 +38,7 @@
 
 const NAME = 'path-monitor';
 const UUID = NAME + '@kamikaze';
-
+const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const Clutter = imports.gi.Clutter;
@@ -47,8 +47,13 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const HOME = imports.gi.GLib.getenv("HOME");
 
@@ -237,7 +242,7 @@ MyApplet.prototype = {
       if (this.isMasterCopy())
       {
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._applet_context_menu.addAction("Monitor an extra path...",
+        this._applet_context_menu.addAction(_("Monitor an extra path..."),
         Lang.bind(this, function () {
           this._cloneApplet();
         }));
@@ -245,7 +250,7 @@ MyApplet.prototype = {
       else
       {
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._applet_context_menu.addAction("Exit and stop monitoring...",
+        this._applet_context_menu.addAction(_("Exit and stop monitoring..."),
         Lang.bind(this, function () {
           debugLog("Exiting instance. pathMonID=" + this._pathMonID);
           this._panelLocation.remove_actor(this.actor);
