@@ -24,6 +24,14 @@ const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
 const Pango = imports.gi.Pango;
 const SearchProviderManager = imports.ui.searchProviderManager;
+const Gettext = imports.gettext;
+const UUID = "sane-menu@nooulaif";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const ICON_SIZE = 16;
 const MAX_FAV_ICON_SIZE = 32;
