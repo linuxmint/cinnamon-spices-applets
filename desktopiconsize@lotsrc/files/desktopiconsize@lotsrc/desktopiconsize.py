@@ -56,14 +56,18 @@
 
 import os, subprocess, sys, configparser, math, copy
 import gi
+import gettext
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GdkPixbuf
 
-WINDOW_TITLE = "Desktop Icon Size"
+home = os.path.expanduser("~")
+gettext.install("desktopiconsize@lotsrc", home + "/.local/share/locale")
+
+WINDOW_TITLE = _("Desktop Icon Size")
 CONFIGURATION_FILE = ".desktopiconsize.conf"
 PROGRAM_VERSION = "1.1"
 PROGRAM_WEBSITE = "https://github.com/lotsrc/DesktopIconSize"
-PROGRAM_COPYRIGHT = "Copyright (C) 2016  Gaston Brito"
+PROGRAM_COPYRIGHT = _("Copyright (C) 2016  Gaston Brito")
 
 # If changed these values must end with /
 
@@ -113,8 +117,8 @@ PACK_SPIN = 2
 LOG_BORDER = 2
 RESIZE_VERTICAL_DELTA = 100
 
-LAYOUTS = ["Horizontal", "Vertical", "Double Horizontal", "Double Vertical", "Round"]
-BAR_TYPES = ["None", "Horizontal", "Vertical"]
+LAYOUTS = [_("Horizontal"), _("Vertical"), _("Double Horizontal"), _("Double Vertical"), _("Round")]
+BAR_TYPES = [_("None"), _("Horizontal"), _("Vertical")]
 
 log_data = ""
 
@@ -287,7 +291,7 @@ class Organization:
         else:
             config = None
 
-        log("Organization (" + str(self.layout) + "," + str(self.scale) + "," + str(self.grid_width) + "," + str(self.grid_height) + "," + str(self.margin_top) + "," + str(self.margin_bottom) + "," + str(self.margin_left) + "," + str(self.margin_right)+ ")")
+        log(_("Organization (") + str(self.layout) + "," + str(self.scale) + "," + str(self.grid_width) + "," + str(self.grid_height) + "," + str(self.margin_top) + "," + str(self.margin_bottom) + "," + str(self.margin_left) + "," + str(self.margin_right)+ ")")
 
         if self.layout == 0:
             gen = LinearPositionGenerator(True, self.margin_left, self.margin_top, self.grid_width, self.grid_height, self.margin_left, self.screen_resolution[0] - self.margin_right, False, 0)
@@ -346,7 +350,7 @@ class ListBoxRowWithData(Gtk.ListBoxRow):
 class AboutInfoDialog(Gtk.AboutDialog):
 
     def __init__(self, parent):
-        Gtk.Dialog.__init__(self, "About", parent, 0)
+        Gtk.Dialog.__init__(self, _("About"), parent, 0)
         self.set_program_name(WINDOW_TITLE)
         self.set_version(PROGRAM_VERSION)
         self.set_website(PROGRAM_WEBSITE)
@@ -357,7 +361,7 @@ class AboutInfoDialog(Gtk.AboutDialog):
             logo = GdkPixbuf.Pixbuf.new_from_file_at_size(get_program_directory() + "icon.svg", 64, -1)
             self.set_logo(logo)
         except Exception as e:
-            parent.log("Error AboutDialog : " + str(e))
+            parent.log(_("Error AboutDialog : ") + str(e))
         self.show()
 
 
@@ -366,7 +370,7 @@ class DISWindow(Gtk.Window):
 
     def __init__(self):
         Gtk.Window.__init__(self, title=WINDOW_TITLE)
-        self.log("Init", False)
+        self.log(_("Init"), False)
 
         self.apply_on_change = False
         self.update_organization = False
@@ -374,13 +378,13 @@ class DISWindow(Gtk.Window):
         self.manage_system_elements = False
 
         self.screen_resolution = get_monitor_dimensions()
-        self.log("Detected screen resolution " + str(self.screen_resolution), False)
+        self.log(_("Detected screen resolution ") + str(self.screen_resolution), False)
 
         self.desktop_path = get_desktop_path()
-        self.log("Using desktop path " + self.desktop_path, False)
+        self.log(_("Using desktop path ") + self.desktop_path, False)
 
         self.system_metadata_path = get_system_metadata_path()
-        self.log("Using system metadata path " + self.system_metadata_path, False)
+        self.log(_("Using system metadata path ") + self.system_metadata_path, False)
 
         self.load_icon()
         self.create_ui(self.screen_resolution[0], self.screen_resolution[1])
@@ -405,14 +409,14 @@ class DISWindow(Gtk.Window):
         self.set_organization(self.organizations[self.active_profile])
         self.apply_on_change = not self.manage_system_elements
         self.update_organization = True
-        self.log("Init complete")
+        self.log(_("Init complete"))
 
     def load_icon(self):
         full_icon_path = get_program_directory() + "icon.png"
         try:
             self.set_icon_from_file(full_icon_path)
         except Exception as e:
-            log("Error: Could not load window icon " + full_icon_path)
+            log(_("Error: Could not load window icon ") + full_icon_path)
 
     def display_mode(self, adjust_size):
         self.show_all()
@@ -478,11 +482,11 @@ class DISWindow(Gtk.Window):
     def create_combo_active_profile(self):
         self.box_active_profile = create_vbox(BOX_BORDER)
 
-        self.label_active_profile = Gtk.Label("Active profile", xalign=0)
+        self.label_active_profile = Gtk.Label(_("Active profile"), xalign=0)
 
         self.combo_active_profile = Gtk.ComboBoxText()
         for i in range(NUM_PROFILES):
-            self.combo_active_profile.append_text("Profile " + str(i + 1))
+            self.combo_active_profile.append_text(_("Profile ") + str(i + 1))
         self.combo_active_profile.set_active(self.active_profile)
         self.combo_active_profile.connect("changed", self.on_combo_active_profile_changed)
 
@@ -497,8 +501,8 @@ class DISWindow(Gtk.Window):
         self.box_page_icons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         self.box_page_settings = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
 
-        self.notebook.append_page(self.box_page_icons, Gtk.Label('Icons'))
-        self.notebook.append_page(self.box_page_settings, Gtk.Label('Settings'))
+        self.notebook.append_page(self.box_page_icons, Gtk.Label(_('Icons')))
+        self.notebook.append_page(self.box_page_settings, Gtk.Label(_('Settings')))
 
         self.box_main.pack_start(self.notebook, True, True, 0)
         self.add(self.box_main)
@@ -506,7 +510,7 @@ class DISWindow(Gtk.Window):
     def create_settings(self):
         self.box_system_icons = create_hbox(BOX_BORDER)
 
-        self.label_system_icons = Gtk.Label("Manage system icons. Requires nemo restart to apply changes", xalign=0)
+        self.label_system_icons = Gtk.Label(_("Manage system icons. Requires nemo restart to apply changes"), xalign=0)
         self.switch_system_icons = Gtk.Switch()
         self.switch_system_icons.set_active(False)
         self.switch_system_icons.connect("notify::active", self.on_switch_system_icons_activated)
@@ -519,7 +523,7 @@ class DISWindow(Gtk.Window):
     def create_ui_info(self):
         self.box_info = create_hbox(BOX_BORDER)
 
-        self.label_desktop_path = Gtk.Label("Desktop path")
+        self.label_desktop_path = Gtk.Label(_("Desktop path"))
         self.entry_desktop_path = create_entry(False, self.desktop_path)
 
         self.box_info.pack_start(self.label_desktop_path, False, False, 0)
@@ -527,7 +531,7 @@ class DISWindow(Gtk.Window):
 
         self.box_screen_width = create_hbox(BOX_BORDER)
 
-        self.label_screen_width = Gtk.Label("Screen width")
+        self.label_screen_width = Gtk.Label(_("Screen width"))
         self.entry_screen_width = create_entry(False, str(self.screen_resolution[0]))
 
         self.box_screen_width.pack_start(self.label_screen_width, False, False, 0)
@@ -535,7 +539,7 @@ class DISWindow(Gtk.Window):
 
         self.box_screen_height = create_hbox(BOX_BORDER)
 
-        self.label_screen_height = Gtk.Label("Screen height")
+        self.label_screen_height = Gtk.Label(_("Screen height"))
         self.entry_screen_height = create_entry(False, str(self.screen_resolution[1]))
 
         self.box_screen_height.pack_start(self.label_screen_height, False, False, 0)
@@ -548,7 +552,7 @@ class DISWindow(Gtk.Window):
     def create_ui_log(self):
         self.box_log = create_vbox(BOX_BORDER)
 
-        self.label_log = Gtk.Label("Log", xalign=0)
+        self.label_log = Gtk.Label(_("Log"), xalign=0)
 
         self.textview_log = Gtk.TextView()
         self.textview_log.set_editable(False)
@@ -573,7 +577,7 @@ class DISWindow(Gtk.Window):
     def create_combo_layouts(self):
         self.box_layouts = create_vbox(BOX_BORDER)
 
-        self.label_layouts = Gtk.Label("Layout", xalign=0)
+        self.label_layouts = Gtk.Label(_("Layout"), xalign=0)
         self.box_layouts .pack_start(self.label_layouts, False, False, 0)
 
         self.combo_layout = Gtk.ComboBoxText()
@@ -591,7 +595,7 @@ class DISWindow(Gtk.Window):
 
         self.box_icon_left.add(self.box_scale)
 
-        self.label_scale = Gtk.Label("Scale", xalign=0)
+        self.label_scale = Gtk.Label(_("Scale"), xalign=0)
         self.box_scale.pack_start(self.label_scale, False, False, 0)
 
         self.scale = create_spin_button(1, SCALE_MIN, SCALE_MAX, SCALE_STEP, 2, self.on_scale_changed)
@@ -602,7 +606,7 @@ class DISWindow(Gtk.Window):
 
         self.box = create_hbox(BOX_BORDER)
 
-        self.box_margin_header = create_header_box("Margin (pixels)")
+        self.box_margin_header = create_header_box(_("Margin (pixels)"))
         self.box_margin_all.pack_start(self.box_margin_header, False, False, 0)
         self.box_margin_all.pack_start(self.box, False, False, 0)
         self.box_icon_left.add(self.box_margin_all)
@@ -610,10 +614,10 @@ class DISWindow(Gtk.Window):
         self.box_margin_left = create_vbox(0)
         self.box_margin_right = create_vbox(0)
 
-        self.label_margin_top = Gtk.Label("Top", xalign=0)
-        self.label_margin_bottom = Gtk.Label("Bottom", xalign=0)
-        self.label_margin_left = Gtk.Label("Left", xalign=0)
-        self.label_margin_right = Gtk.Label("Right", xalign=0)
+        self.label_margin_top = Gtk.Label(_("Top"), xalign=0)
+        self.label_margin_bottom = Gtk.Label(_("Bottom"), xalign=0)
+        self.label_margin_left = Gtk.Label(_("Left"), xalign=0)
+        self.label_margin_right = Gtk.Label(_("Right"), xalign=0)
 
         self.margin_top = create_spin_button(MARGIN_TOP_DEFAULT, 0, screen_height, MARGIN_STEP, 0, self.on_margin_changed)
         self.margin_bottom = create_spin_button(MARGIN_BOTTOM_DEFAULT, 0, screen_height, MARGIN_STEP, 0, self.on_margin_changed)
@@ -640,13 +644,13 @@ class DISWindow(Gtk.Window):
         self.box_grid_left = create_vbox(0)
         self.box_grid_right = create_vbox(0)
 
-        self.box_grid_header = create_header_box("Grid (pixels)")
+        self.box_grid_header = create_header_box(_("Grid (pixels)"))
         self.box_grid_all.pack_start(self.box_grid_header, False, False, 0)
         self.box_grid_all.add(self.box_grid)
         self.box_icon_left.add(self.box_grid_all)
 
-        self.label_grid_width = Gtk.Label("Width", xalign=0)
-        self.label_grid_height = Gtk.Label("Height", xalign=0)
+        self.label_grid_width = Gtk.Label(_("Width"), xalign=0)
+        self.label_grid_height = Gtk.Label(_("Height"), xalign=0)
 
         self.spin_grid_width = create_spin_button(GRID_WIDTH_DEFAULT, 0, screen_width, GRID_STEP, 0, self.on_grid_changed)
         self.spin_grid_height = create_spin_button(GRID_HEIGHT_DEFAULT, 0, screen_height, GRID_STEP, 0, self.on_grid_changed)
@@ -668,7 +672,7 @@ class DISWindow(Gtk.Window):
 
         # Combo types
 
-        self.label_bar_type = Gtk.Label("Type", xalign=0)
+        self.label_bar_type = Gtk.Label(_("Type"), xalign=0)
 
         self.combo_bar = Gtk.ComboBoxText()
         for bar in BAR_TYPES:
@@ -678,9 +682,9 @@ class DISWindow(Gtk.Window):
 
         # Spin items
 
-        self.label_bar_items = Gtk.Label("# First items", xalign=0)
+        self.label_bar_items = Gtk.Label(_("# First items"), xalign=0)
         self.spin_bar_items = create_spin_button(BAR_ITEMS_DEFAULT, 1, 1000, 1, 0, self.on_bar_changed)
-        self.spin_bar_items.set_tooltip_text("Number of elements used to make the bar")
+        self.spin_bar_items.set_tooltip_text(_("Number of elements used to make the bar"))
 
         self.box_bar_left.pack_start(self.label_bar_type, False, False, 0)
         self.box_bar_left.pack_start(self.combo_bar, False, False, PACK_SPIN)
@@ -690,13 +694,13 @@ class DISWindow(Gtk.Window):
 
         # Position
 
-        self.label_bar_posx = Gtk.Label("Left (pixels)", xalign=0)
-        self.label_bar_posy = Gtk.Label("Top (pixels)", xalign=0)
+        self.label_bar_posx = Gtk.Label(_("Left (pixels)"), xalign=0)
+        self.label_bar_posy = Gtk.Label(_("Top (pixels)"), xalign=0)
 
         self.spin_bar_posx = create_spin_button(BAR_POSX_DEFAULT, 0, screen_width, BAR_STEP, 0, self.on_bar_changed)
         self.spin_bar_posy = create_spin_button(BAR_POSY_DEFAULT, 0, screen_height, BAR_STEP, 0, self.on_bar_changed)
-        self.spin_bar_posx.set_tooltip_text("Starting position of bar")
-        self.spin_bar_posy.set_tooltip_text("Starting position of bar")
+        self.spin_bar_posx.set_tooltip_text(_("Starting position of bar"))
+        self.spin_bar_posy.set_tooltip_text(_("Starting position of bar"))
 
         self.box_bar_left.pack_start(self.label_bar_posy, False, False, 0)
         self.box_bar_left.pack_start(self.spin_bar_posy, False, False, PACK_SPIN)
@@ -707,7 +711,7 @@ class DISWindow(Gtk.Window):
         self.box_bar.pack_start(self.box_bar_left, False, False, 0)
         self.box_bar.pack_end(self.box_bar_right, False, False, 0)
 
-        self.box_bar_header = create_header_box("Bar")
+        self.box_bar_header = create_header_box(_("Bar"))
         self.box_bar_all.add(self.box_bar_header)
 
         self.box_bar_all.add(self.box_bar)
@@ -723,8 +727,8 @@ class DISWindow(Gtk.Window):
         self.box_round_center.pack_start(self.box_round_center_left, False, False, 0)
         self.box_round_center.pack_end(self.box_round_center_right, False, False, 0)
 
-        self.label_round_posx = Gtk.Label("Left", xalign=0)
-        self.label_round_posy = Gtk.Label("Top", xalign=0)
+        self.label_round_posx = Gtk.Label(_("Left"), xalign=0)
+        self.label_round_posy = Gtk.Label(_("Top"), xalign=0)
 
         self.spin_round_posx = create_spin_button(screen_width / 2, 0, screen_width, ROUND_POS_STEP, 0, self.on_spin_round_changed)
         self.spin_round_posy = create_spin_button(screen_height / 2, 0, screen_height, ROUND_POS_STEP, 0, self.on_spin_round_changed)
@@ -736,8 +740,8 @@ class DISWindow(Gtk.Window):
         self.box_round_size.pack_start(self.box_round_size_left, False, False, 0)
         self.box_round_size.pack_end(self.box_round_size_right, False, False, 0)
 
-        self.label_round_radiusx = Gtk.Label("Width", xalign=0)
-        self.label_round_radiusy = Gtk.Label("Height", xalign=0)
+        self.label_round_radiusx = Gtk.Label(_("Width"), xalign=0)
+        self.label_round_radiusy = Gtk.Label(_("Height"), xalign=0)
 
         min_dim = int(min(screen_width, screen_height) / 3)
 
@@ -751,8 +755,8 @@ class DISWindow(Gtk.Window):
         self.box_round_distance.pack_start(self.box_round_distance_left, False, False, 0)
         self.box_round_distance.pack_end(self.box_round_distance_right, False, False, 0)
 
-        self.label_round_angle_start = Gtk.Label("Angle start", xalign=0)
-        self.label_round_angle_step = Gtk.Label("Angle step", xalign=0)
+        self.label_round_angle_start = Gtk.Label(_("Angle start"), xalign=0)
+        self.label_round_angle_step = Gtk.Label(_("Angle step"), xalign=0)
 
         self.spin_round_angle_start = create_spin_button(ROUND_START_DEFAULT, 0, 360, ROUND_START_STEP, 2, self.on_spin_round_changed)
         self.spin_round_angle_step  = create_spin_button(ROUND_STEP_DEFAULT, 1, 360, ROUND_STEP_STEP, 2, self.on_spin_round_changed)
@@ -775,15 +779,15 @@ class DISWindow(Gtk.Window):
         self.box_round_distance_right.pack_start(self.label_round_angle_step, False, False, 0)
         self.box_round_distance_right.pack_start(self.spin_round_angle_step, False, False, PACK_SPIN)
 
-        self.box_round_center_header = create_header_box("Center (pixels)")
+        self.box_round_center_header = create_header_box(_("Center (pixels)"))
         self.box_round_all.pack_start(self.box_round_center_header, False, False, 0)
         self.box_round_all.pack_start(self.box_round_center, False, False, 0)
 
-        self.box_round_size_header = create_header_box("Size (pixels)")
+        self.box_round_size_header = create_header_box(_("Size (pixels)"))
         self.box_round_all.pack_start(self.box_round_size_header, False, False, 0)
         self.box_round_all.pack_start(self.box_round_size, False, False, 0)
 
-        self.box_round_distance_header = create_header_box("Distance (degrees)")
+        self.box_round_distance_header = create_header_box(_("Distance (degrees)"))
         self.box_round_all.pack_start(self.box_round_distance_header, False, False, 0)
         self.box_round_all.pack_start(self.box_round_distance, False, False, 0)
 
@@ -791,17 +795,17 @@ class DISWindow(Gtk.Window):
 
     def create_list_elements(self):
         self.box_list_elements = create_vbox(BOX_BORDER)
-        self.label_list_elements = Gtk.Label("Order", xalign=0)
+        self.label_list_elements = Gtk.Label(_("Order"), xalign=0)
 
         # Buttons
 
         self.box_order_buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=2)
 
-        self.button_up = create_button_image(get_program_directory() + "images/up.svg", BUTTON_ELEMENTS_SIZE, "Move element up", self.on_button_up_clicked)
-        self.button_down = create_button_image(get_program_directory() + "images/down.svg", BUTTON_ELEMENTS_SIZE, "Move element down", self.on_button_down_clicked)
-        self.button_top = create_button_image(get_program_directory() + "images/top.svg", BUTTON_ELEMENTS_SIZE, "Move element top", self.on_button_top_clicked)
-        self.button_bottom = create_button_image(get_program_directory() + "images/bottom.svg", BUTTON_ELEMENTS_SIZE, "Move element bottom", self.on_button_bottom_clicked)
-        self.button_refresh = create_button_image(get_program_directory() + "images/reload.svg", BUTTON_ELEMENTS_SIZE, "Reload elements", self.on_button_refresh_clicked)
+        self.button_up = create_button_image(get_program_directory() + "images/up.svg", BUTTON_ELEMENTS_SIZE, _("Move element up"), self.on_button_up_clicked)
+        self.button_down = create_button_image(get_program_directory() + "images/down.svg", BUTTON_ELEMENTS_SIZE, _("Move element down"), self.on_button_down_clicked)
+        self.button_top = create_button_image(get_program_directory() + "images/top.svg", BUTTON_ELEMENTS_SIZE, _("Move element top"), self.on_button_top_clicked)
+        self.button_bottom = create_button_image(get_program_directory() + "images/bottom.svg", BUTTON_ELEMENTS_SIZE, _("Move element bottom"), self.on_button_bottom_clicked)
+        self.button_refresh = create_button_image(get_program_directory() + "images/reload.svg", BUTTON_ELEMENTS_SIZE, _("Reload elements"), self.on_button_refresh_clicked)
         #self.button_sort_menu = create_button_image(get_program_directory() + "images/menu.svg", BUTTON_ELEMENTS_SIZE, "Sort options", self.on_button_refresh_clicked)
 
         self.box_order_buttons.pack_start(self.button_up, False, False, 0)
@@ -820,7 +824,7 @@ class DISWindow(Gtk.Window):
         self.treeview_elements_selection = self.treeview_elements.get_selection()
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn("Order", renderer, text=0)
+        column = Gtk.TreeViewColumn(_("Order"), renderer, text=0)
         self.treeview_elements.append_column(column)
 
         self.treeview_elements_scroll = Gtk.ScrolledWindow()
@@ -834,9 +838,9 @@ class DISWindow(Gtk.Window):
     def create_buttons_bottom(self):
         self.box_buttons_bottom = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
 
-        self.button_about = create_button("About", self.on_button_about_clicked)
-        self.button_apply = create_button("Apply", self.on_button_apply_clicked)
-        self.button_close = create_button("Close", self.on_button_close_clicked)
+        self.button_about = create_button(_("About"), self.on_button_about_clicked)
+        self.button_apply = create_button(_("Apply"), self.on_button_apply_clicked)
+        self.button_close = create_button(_("Close"), self.on_button_close_clicked)
 
         self.box_buttons_bottom.pack_start(self.button_about, False, False, 0)
         self.box_buttons_bottom.pack_end(self.button_close, False, False, 0)
@@ -847,7 +851,7 @@ class DISWindow(Gtk.Window):
     def apply_organization(self, check_bar=False):
         if self.apply_on_change and ((not check_bar) or (self.combo_bar.get_active() != 0)):
             self.organizations[self.active_profile].apply()
-            self.log("Organization done")
+            self.log(_("Organization done"))
 
     def on_combo_active_profile_changed(self, combo):
         if self.update_organization:
@@ -984,7 +988,7 @@ class DISWindow(Gtk.Window):
         self.organizations[self.active_profile].apply()
         if self.manage_system_elements:
             restart_nemo()
-            self.log("Nemo restarted")
+            self.log(_("Nemo restarted"))
 
     def on_button_about_clicked(self, event):
         dialog = AboutInfoDialog(self)
@@ -1054,7 +1058,7 @@ def get_desktop_user_elements():
 
 def get_desktop_list(system_elements_path):
     todos = get_desktop_user_elements()
-    log("Found " + str(len(todos)) + " user elements :")
+    log(_("Found ") + str(len(todos)) + _(" user elements :"))
     for e in todos:
         log(e)
     res = []
@@ -1064,7 +1068,7 @@ def get_desktop_list(system_elements_path):
         try:
             c = read_text_file(system_elements_path)
             system_elements = get_desktop_system_elements(c)
-            log("Found " + str(len(system_elements)) + " system elements :")
+            log(_("Found ") + str(len(system_elements)) + _(" system elements :"))
             for s in system_elements:
                 log(s.name)
             return system_elements + res
@@ -1107,7 +1111,7 @@ def set_file_metadata(base_path, file_name, scale, x, y, just_scale):
         if not just_scale:
             subprocess.check_output("gvfs-set-attribute '" + base_path + file_name + "' metadata::" + STRING_POSITION_SYSTEM + " " + str(x) + ',' + str(y), shell=True, stderr=subprocess.DEVNULL)
     except Exception as e:
-        log("Error setting metadata in " + file_name + " : " + str(e))
+        log(_("Error setting metadata in ") + file_name + " : " + str(e))
 
 
 def open_file_metadata_system(system_metadata_path):
@@ -1123,7 +1127,7 @@ def close_file_metadata_system(cfg, system_metadata_path):
 
 def set_file_metadata_system(cfg, name, scale, x, y, just_scale):
     if not name in cfg:
-        log(name + " section not found")
+        log(name + _(" section not found"))
         return
     cfg[name][STRING_SCALE_SYSTEM] = str(scale)
     if not just_scale:
@@ -1138,7 +1142,7 @@ def refresh_items(basepath, elements):
                 subprocess.check_output("mv '" + basepath + filename + "' '" + basepath + REFRESH_PREFIX + filename + "'", shell=True, stderr=subprocess.DEVNULL)
                 subprocess.check_output("mv '" + basepath + REFRESH_PREFIX + filename + "' '" + basepath + filename + "'", shell=True, stderr=subprocess.DEVNULL)
             except Exception as e:
-                log("Error refreshing " + filename + " : " + str(e))
+                log(_("Error refreshing ") + filename + " : " + str(e))
 
 
 def write_config_file(config):
@@ -1175,7 +1179,7 @@ def save_config(window):
         dis["round_start"] = str(window.organizations[i].round_start)
         dis["round_step"] = str(window.organizations[i].round_step)
 
-        config["Order" + str(i + 1)] = {}
+        config[_("Order") + str(i + 1)] = {}
         conf_order = config["Order" + str(i + 1)]
         for index in range(len(window.organizations[i].order)):
             elem = window.organizations[i].elements[window.organizations[i].order[index]]
@@ -1187,17 +1191,17 @@ def save_config(window):
 def load_config(window):
     config = configparser.ConfigParser()
     config_file = get_config_file_path()
-    log("Reading config file " + config_file)
+    log(_("Reading config file ") + config_file)
     config.read(config_file)
     if not "DesktopIconSize" in config:
-        log("Main section not in file")
+        log(_("Main section not in file"))
         return
-    log("Main section found")
+    log(_("Main section found"))
     window.active_profile = int(config["DesktopIconSize"].get("profile", "0"))
     str_system = config["DesktopIconSize"].get("system", "False")
     window.manage_system_elements = str_system.lower() == "true"
     for i in range(NUM_PROFILES):
-        cprofile = "Profile" + str(i+1)
+        cprofile = _("Profile") + str(i+1)
         if cprofile in config:
             window.organizations[i].layout = int(config[cprofile].get("layout", 0))
             window.organizations[i].scale = float(config[cprofile].get("scale", 1))
@@ -1220,7 +1224,7 @@ def load_config(window):
             window.organizations[i].round_start = float(config[cprofile].get("round_start", ROUND_START_DEFAULT))
             window.organizations[i].round_step = float(config[cprofile].get("round_step", ROUND_STEP_DEFAULT))
 
-        conf_order = "Order" + str(i+1)
+        conf_order = _("Order") + str(i+1)
         if conf_order in config:
 
             # For every element in window, read the position in the config file
@@ -1298,7 +1302,7 @@ def create_header_box(text):
 
 def restart_nemo():
     # A better way of making nemo reload the metadata is needed
-    log("Restarting nemo")
+    log(_("Restarting nemo"))
     subprocess.Popen('sh -c "nemo --quit && sleep 1 && nemo"', shell=True, stderr=subprocess.DEVNULL)
 
 
@@ -1367,24 +1371,24 @@ class ProfileHolder:
 
 def load_profile(profile_number):
     profile_holder = ProfileHolder()
-    print("Applying profile", profile_number)
+    print(_("Applying profile"), profile_number)
     profile_holder.active_profile = profile_number
     profile_holder.organizations[profile_number].apply()
     if profile_holder.manage_system_elements:
         restart_nemo()
     save_config(profile_holder)
-    print("Applying profile", profile_number, "done")
+    print(_("Applying profile"), profile_number, "done")
 
 
 def set_icon_scale(value):
     profile_holder = ProfileHolder()
-    print("Applying scale", value)
+    print(_("Applying scale"), value)
     profile_holder.organizations[profile_holder.active_profile].scale = value
     profile_holder.organizations[profile_holder.active_profile].apply()
     if profile_holder.manage_system_elements:
         restart_nemo()
     save_config(profile_holder)
-    print("Applying scale", value, "done")
+    print(_("Applying scale"), value, "done")
 
 
 def clamp(n, smallest, largest):
@@ -1394,7 +1398,7 @@ def clamp(n, smallest, largest):
 class UnusedWindow(Gtk.Window):
     """Window used to get the monitor dimensions"""
     def __init__(self):
-        Gtk.Window.__init__(self, title="Unused")
+        Gtk.Window.__init__(self, title=_("Unused"))
 
 
 def get_monitor_dimensions():
@@ -1417,10 +1421,10 @@ if __name__ == "__main__":
         try:
             icon_scale = float(sys.argv[2])
         except Exception as e:
-            print("Scale must be a float number")
+            print(_("Scale must be a float number"))
             terminate()
         if icon_scale < 0.5 or icon_scale > 8:
-            print("Scale must be in [ 0.5 , 8 ]")
+            print(_("Scale must be in [ 0.5 , 8 ]"))
             terminate()
         set_icon_scale(icon_scale)
         terminate()
@@ -1431,10 +1435,10 @@ if __name__ == "__main__":
         try:
             profile = int(sys.argv[2])
         except Exception as e:
-            print("Profile must be a number")
+            print(_("Profile must be a number"))
             terminate()
         if profile < 0 or profile >= NUM_PROFILES:
-            print("Profile must be in [ 0 ,", NUM_PROFILES - 1, "]")
+            print(_("Profile must be in [ 0 ,"), NUM_PROFILES - 1, "]")
             terminate()
         load_profile(profile)
         terminate()
