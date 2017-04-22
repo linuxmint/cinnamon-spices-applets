@@ -8,7 +8,7 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -23,6 +23,11 @@ const SettingsFile = AppletDirectory + "/places.json";
 imports.searchPath.push(AppletDirectory);
 const PopupMenuExtension = imports.popupImageLeftMenuItem;
 
+Gettext.bindtextdomain(appletUUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(appletUUID, str);
+}
 
 /* startsWith method for String */
 if (typeof String.prototype.startsWith != "function") {
@@ -43,7 +48,7 @@ MyApplet.prototype = {
 
         try {
             this.set_applet_icon_name("user-home");
-            this.set_applet_tooltip("Custom Places");
+            this.set_applet_tooltip(_("Custom Places"));
             
             // watch settings file for changes
             let file = Gio.file_new_for_path(SettingsFile);
