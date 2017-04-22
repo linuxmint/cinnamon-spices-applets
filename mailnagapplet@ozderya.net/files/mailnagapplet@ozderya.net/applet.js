@@ -25,6 +25,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const UUID = "mailnagapplet@ozderya.net";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const dbus_name = "mailnag.MailnagService";
 const dbus_path = "/mailnag/MailnagService";
@@ -153,7 +162,7 @@ MailItem.prototype = {
 		{
 			if (time_diff < 60) // <1 minute
 			{
-				return "just now";
+				return _("just now");
 			}
 			else if (time_diff < 120) // <2 minute
 			{
@@ -161,7 +170,7 @@ MailItem.prototype = {
 			}
 			else if (time_diff < 60 * 60) // <1 hour
 			{
-				return Math.floor(time_diff / 60) + " minutes ago";
+				return Math.floor(time_diff / 60) + _(" minutes ago");
 			}
 			else if (time_diff < 2 * 60 * 60) // <2 hours
 			{
@@ -169,22 +178,22 @@ MailItem.prototype = {
 			}
 			else
 			{
-				return Math.floor(time_diff / 60*60) + " hours ago";
+				return Math.floor(time_diff / 60*60) + _(" hours ago");
 			}
 		}
 		else // before today
 		{
 			if (days_diff == 1)
 			{
-				return "yesterday";
+				return _("yesterday");
 			}
 			else if (days_diff < 7)
 			{
-				return days_diff + " days ago";
+				return days_diff + _(" days ago");
 			}
 			else if (days_diff < 30)
 			{
-				return Math.ceil(days_diff / 7) + " weeks ago";
+				return Math.ceil(days_diff / 7) + _(" weeks ago");
 			}
 			else
 			{
@@ -269,7 +278,7 @@ MyApplet.prototype = {
 		this.menuManager.addMenu(this.menu);
 
 		this._applet_context_menu.addCommandlineAction(
-			"Configure Mailnag", "mailnag-config");
+			_("Configure Mailnag"), "mailnag-config");
 
 		this.mailnagWasRunning = false;
 
@@ -348,11 +357,11 @@ MyApplet.prototype = {
 
 		if (this.mailnagWasRunning)
 		{
-			this.showError("Mailnag daemon stopped working!");
+			this.showError(_("Mailnag daemon stopped working!"));
 		}
 		else
 		{
-			this.showError("Mailnag daemon isn't running! Do you have it installed?");
+			this.showError(_("Mailnag daemon isn't running! Do you have it installed?"));
 		}
 	},
 
