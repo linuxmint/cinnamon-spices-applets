@@ -1,146 +1,141 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: Printer Ink Level Monitor Applet 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 00:34+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2017-04-23 00:37+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applet.js:110
 msgid "Unable to connect printer at port "
-msgstr ""
+msgstr "Nemoguće povezivanje s pisačem na ulazu "
 
 #: applet.js:121
 msgid "Error reading data..."
-msgstr ""
+msgstr "Greška čitanja podataka..."
 
 #: applet.js:153
 msgid "Photoblack"
-msgstr ""
+msgstr "Foto crna"
 
 #: applet.js:155
 msgid "Photocyan"
-msgstr ""
+msgstr "Foto modra"
 
 #: applet.js:157
 msgid "Photomagenta"
-msgstr ""
+msgstr "Foto ljubičasta"
 
 #: applet.js:159
 msgid "Photoyellow"
-msgstr ""
+msgstr "Foto žuta"
 
 #: applet.js:161
 msgid "Black"
-msgstr ""
+msgstr "Crna"
 
 #: applet.js:163
 msgid "Cyan"
-msgstr ""
+msgstr "Modra"
 
 #: applet.js:165
 msgid "Magenta"
-msgstr ""
+msgstr "Ljubičasta"
 
 #: applet.js:167
 msgid "Yellow"
-msgstr ""
+msgstr "Žuta"
 
 #: applet.js:169
 msgid "Light Black"
-msgstr ""
+msgstr "Svjetlo crna"
 
 #: applet.js:171
 msgid "Light Cyan"
-msgstr ""
+msgstr "Svjetlo modra"
 
 #: applet.js:173
 msgid "Light Magenta"
-msgstr ""
+msgstr "Svjetlo ljubičasta"
 
 #: applet.js:175
 msgid "Light Yellow"
-msgstr ""
+msgstr "Svjetlo žuta"
 
 #: applet.js:177
 msgid "Light Light Black"
-msgstr ""
+msgstr "Svjetlo svjetlo crna"
 
 #: applet.js:179
 msgid "Medium Grey"
-msgstr ""
+msgstr "Srednje siva"
 
 #: applet.js:181
 msgid "Photogrey"
-msgstr ""
+msgstr "Foto siva"
 
 #: applet.js:183
 msgid "Light Grey"
-msgstr ""
+msgstr "Svjetlo siva"
 
 #: applet.js:185
 msgid "White"
-msgstr ""
+msgstr "Bijela"
 
 #: applet.js:187
 msgid "Red"
-msgstr ""
+msgstr "Crvena"
 
 #: applet.js:189
 msgid "Green"
-msgstr ""
+msgstr "Zelena"
 
 #: applet.js:191
 msgid "Blue"
-msgstr ""
+msgstr "Plava"
 
 #. ink-level-monitor@r0p01ach->metadata.json->description
 msgid "USB Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Aplet za nadgledanje razine tinte u USB pisaču"
 
 #. ink-level-monitor@r0p01ach->metadata.json->name
 msgid "Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Nadgledatelj razine tinte u pisaču"
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->description
 msgid "Printer Port Number"
-msgstr ""
+msgstr "Broj ulaza pisača "
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->units
 msgid "(lp# device)"
-msgstr ""
+msgstr "(lp# uređaj)"
 
 #. ink-level-monitor@r0p01ach->settings-
 #. schema.json->updateInterval->description
 msgid "Update Interval"
-msgstr ""
+msgstr "Razdoblje nadopunjivanja"
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->updateInterval->units
 msgid "seconds"
-msgstr ""
+msgstr "sekunde"
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->description
 msgid "Applet Width"
-msgstr ""
+msgstr "Širina apleta u panelu"
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->units
 msgid "px"
-msgstr ""
+msgstr "pikseli"
 
 #. ink-level-monitor@r0p01ach->settings-schema.json->general->description
 msgid "General Settings"
-msgstr ""
-
+msgstr "Opće postavke"
