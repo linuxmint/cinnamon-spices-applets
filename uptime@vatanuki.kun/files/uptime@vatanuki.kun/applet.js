@@ -3,6 +3,15 @@ const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
+const Gettext = imports.gettext;
+const UUID = "uptime@vatanuki.kun";
+const GLib = imports.gi.GLib;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instane_id) {
 	this._init(orientation, panel_height, instane_id);
@@ -34,13 +43,13 @@ MyApplet.prototype = {
 		let years=Math.floor(timestamps_s/31536000);
 		let label_text="?";
 		if(years>0)
-			label_text=years+"Y"+days+"D";
+			label_text=years+_("Y")+days+"D";
 		else if(days>99)
-			label_text=days+"D";
+			label_text=days+_("D");
 		else if(days>0){
 			if(hours < 10)
 				hours="0" + hours;
-			label_text=days+"D"+hours+"h";
+			label_text=days+_("D")+hours+_("h");
 		}
 		else{
 			if(minutes < 10)
