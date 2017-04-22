@@ -12,7 +12,13 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const Gtk = imports.gi.Gtk;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const Settings = imports.ui.settings;
 const ModalDialog = imports.ui.modalDialog;
 
@@ -22,36 +28,36 @@ const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 //Add/remove Entries
 // ["command", "icon", "Display Name"]
 var PreferencesEntries = [
-	["cinnamon-settings", "gtk-execute", "Cinnamon Settings"],
-	["cinnamon-settings themes", "gnome-settings-themes", "Appearance"],
-	["cinnamon-settings applets", "gnome-settings-themes", "Applets"],
-	["cinnamon-settings desklets", "gnome-settings-themes", "Desklets"],
-	["cinnamon-settings extensions", "gnome-settings-themes", "Extensions"],
-	["cinnamon-settings display", "display", "Displays"],
-	["cinnamon-settings keyboard", "keyboard", "Keyboard"],
-	["cinnamon-settings region", "gnome-character-map", "Keyboard Layout"],
-	["/usr/bin/gnome-language-selector", "config-language", "Language Support"],
-	["cinnamon-settings mouse", "mouse", "Mouse"],
-	["nm-connection-editor", "network-wireless", "Network Connections"]
+	["cinnamon-settings", "gtk-execute", _("Cinnamon Settings")],
+	["cinnamon-settings themes", "gnome-settings-themes", _("Appearance")],
+	["cinnamon-settings applets", "gnome-settings-themes", _("Applets")],
+	["cinnamon-settings desklets", "gnome-settings-themes", _("Desklets")],
+	["cinnamon-settings extensions", "gnome-settings-themes", _("Extensions")],
+	["cinnamon-settings display", "display", _("Displays")],
+	["cinnamon-settings keyboard", "keyboard", _("Keyboard")],
+	["cinnamon-settings region", "gnome-character-map", _("Keyboard Layout")],
+	["/usr/bin/gnome-language-selector", "config-language", _("Language Support")],
+	["cinnamon-settings mouse", "mouse", _("Mouse")],
+	["nm-connection-editor", "network-wireless", _("Network Connections")]
 ];
 
 // To add/remove Entries
 // ["command", "icon", "Display Name"]
 var AdministrationEntries = [
-	["gnome-system-monitor", "gnome-system-monitor", "Systemmonitor"],
-	["deja-dup-preferences", "deja-dup", "Backup"],
-	["mintbackup", "system-software-install", "Mint Backup"],
-	["mintnanny", "network-workgroup", "Domain Blocker"],
-	["gufw", "gufw", "Firewall"],
-	["gnome-system-log", "gnome-system-log", "Log File Viewer"],
+	["gnome-system-monitor", "gnome-system-monitor", _("Systemmonitor")],
+	["deja-dup-preferences", "deja-dup", _("Backup")],
+	["mintbackup", "system-software-install", _("Mint Backup")],
+	["mintnanny", "network-workgroup", _("Domain Blocker")],
+	["gufw", "gufw", _("Firewall")],
+	["gnome-system-log", "gnome-system-log", _("Log File Viewer")],
 	//["gnome-nettool", "gnome-nettool", "Network Tools"],
-	["/usr/bin/aptoncd", "aptoncd", "APTonCD"],
-	["gnome-control-center printers", "printer", "Printing"],
-	["gksu mintinstall", "emblem-package", "Software Manager"],
-	["usb-creator-gtk", "usb-creator-gtk", "Startup Disk Creator"],
-	["gksudo synaptic", "synaptic", "Synaptic Manager"],
-	["mintupdate", "system-software-update", "Update Manager"],
-	["gksu /usr/sbin/ndisgtk", "network-wireless", "Wireless Drivers"]
+	["/usr/bin/aptoncd", "aptoncd", _("APTonCD")],
+	["gnome-control-center printers", "printer", _("Printing")],
+	["gksu mintinstall", "emblem-package", _("Software Manager")],
+	["usb-creator-gtk", "usb-creator-gtk", _("Startup Disk Creator")],
+	["gksudo synaptic", "synaptic", _("Synaptic Manager")],
+	["mintupdate", "system-software-update", _("Update Manager")],
+	["gksu /usr/sbin/ndisgtk", "network-wireless", _("Wireless Drivers")]
 ];
 
 function ShutdownDialog(){
@@ -63,9 +69,9 @@ ShutdownDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Are you sure you want to shut down this system?\n"});
+	let label = new St.Label({text: _("Are you sure you want to shut down this system?\n")});
 	this.contentLayout.add(label);
-	let label = new St.Label({text: "You are currently signed in as: " + GLib.get_real_name() + " (" + GLib.get_user_name() + ").\n"});
+	let label = new St.Label({text: _("You are currently signed in as: ") + GLib.get_real_name() + " (" + GLib.get_user_name() + ").\n"});
 	this.contentLayout.add(label);
 
 	this.setButtons([
@@ -115,9 +121,9 @@ AboutDialog.prototype = {
 
     _init: function(){
 	ModalDialog.ModalDialog.prototype._init.call(this);
-	let label = new St.Label({text: "Cinnamon Desktop Environment\n", style_class: 'largeBold'});
+	let label = new St.Label({text: _("Cinnamon Desktop Environment\n"), style_class: 'largeBold'});
 	this.contentLayout.add(label);
-	let label = new St.Label({text: "Cinnamon is a desktop environment for those who\n\ndislike Gnome 3, and Unity desktop environments.\n", style_class: 'small'});
+	let label = new St.Label({text: _("Cinnamon is a desktop environment for those who\n\ndislike Gnome 3, and Unity desktop environments.\n"), style_class: 'small'});
 	this.contentLayout.add(label);
 	let label = new St.Label({text: " \xA9 " + new Date().getFullYear() + " Cinnamon, http://www.cinnamon.linuxmint.com/\n", style_class: 'smallItalics'});
 	this.contentLayout.add(label);
@@ -143,9 +149,9 @@ LogOutDialog.prototype = {
 
     _init: function(){
 		ModalDialog.ModalDialog.prototype._init.call(this);
-		let label = new St.Label({text: "Are you sure you want to logout from this session?\n"});
+		let label = new St.Label({text: _("Are you sure you want to logout from this session?\n")});
 		this.contentLayout.add(label);
-		let label = new St.Label({text: "You are currently signed in as: " + GLib.get_real_name() + " (" + GLib.get_user_name() + ").\n"});
+		let label = new St.Label({text: _("You are currently signed in as: ") + GLib.get_real_name() + " (" + GLib.get_user_name() + ").\n"});
 		this.contentLayout.add(label);
 
 		this.setButtons([
