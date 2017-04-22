@@ -150,45 +150,45 @@ MyApplet.prototype = {
             let hh = this.height;
             let aa = 0.9;
             for (i = 0; i < this.ddac; i++) {
-                if (this.dda1[i] == "Photoblack") {
+                if (this.dda1[i] == _("Photoblack")) {
                     cr.setSourceRGBA(0.1, 0.1, 0.1, aa);
-                } else if (this.dda1[i] == "Photocyan") {
+                } else if (this.dda1[i] == _("Photocyan")) {
                     cr.setSourceRGBA(0.2, 0.8, 0.8, aa);
-                } else if (this.dda1[i] == "Photomagenta") {
+                } else if (this.dda1[i] == _("Photomagenta")) {
                     cr.setSourceRGBA(0.8, 0.2, 0.8, aa);
-                } else if (this.dda1[i] == "Photoyellow") {
+                } else if (this.dda1[i] == _("Photoyellow")) {
                     cr.setSourceRGBA(0.8, 0.8, 0.2, aa);
-                } else if (this.dda1[i] == "Black") {
+                } else if (this.dda1[i] == _("Black")) {
                     cr.setSourceRGBA(0.0, 0.0, 0.0, aa);
-                } else if (this.dda1[i] == "Cyan") {
+                } else if (this.dda1[i] == _("Cyan")) {
                     cr.setSourceRGBA(0.1, 0.7, 0.7, aa);
-                } else if (this.dda1[i] == "Magenta") {
+                } else if (this.dda1[i] == _("Magenta")) {
                     cr.setSourceRGBA(0.7, 0.1, 0.7, aa);
-                } else if (this.dda1[i] == "Yellow") {
+                } else if (this.dda1[i] == _("Yellow")) {
                     cr.setSourceRGBA(0.7, 0.7, 0.1, aa);
-                } else if (this.dda1[i] == "Light Black") {
+                } else if (this.dda1[i] == _("Light Black")) {
                     cr.setSourceRGBA(0.2, 0.2, 0.2, aa);
-                } else if (this.dda1[i] == "Light Cyan") {
+                } else if (this.dda1[i] == _("Light Cyan")) {
                     cr.setSourceRGBA(0.3, 0.9, 0.9, aa);
-                } else if (this.dda1[i] == "Light Magenta") {
+                } else if (this.dda1[i] == _("Light Magenta")) {
                     cr.setSourceRGBA(0.9, 0.3, 0.9, aa);
-                } else if (this.dda1[i] == "Light Yellow") {
+                } else if (this.dda1[i] == _("Light Yellow")) {
                     cr.setSourceRGBA(0.9, 0.9, 0.3, aa);
-                } else if (this.dda1[i] == "Light Light Black") {
+                } else if (this.dda1[i] == _("Light Light Black")) {
                     cr.setSourceRGBA(0.3, 0.3, 0.3, aa);
-                } else if (this.dda1[i] == "Medium Grey") {
+                } else if (this.dda1[i] == _("Medium Grey")) {
                     cr.setSourceRGBA(0.4, 0.4, 0.4, aa);
-                } else if (this.dda1[i] == "Photogrey") {
+                } else if (this.dda1[i] == _("Photogrey")) {
                     cr.setSourceRGBA(0.5, 0.5, 0.5, aa);
-                } else if (this.dda1[i] == "Light Grey") {
+                } else if (this.dda1[i] == _("Light Grey")) {
                     cr.setSourceRGBA(0.6, 0.6, 0.6, aa);
-                } else if (this.dda1[i] == "White") {
+                } else if (this.dda1[i] == _("White")) {
                     cr.setSourceRGBA(0.8, 0.8, 0.8, aa);
-                } else if (this.dda1[i] == "Red") {
+                } else if (this.dda1[i] == _("Red")) {
                     cr.setSourceRGBA(0.7, 0.1, 0.1, aa);
-                } else if (this.dda1[i] == "Green") {
+                } else if (this.dda1[i] == _("Green")) {
                     cr.setSourceRGBA(0.1, 0.7, 0.1, aa);
-                } else if (this.dda1[i] == "Blue") {
+                } else if (this.dda1[i] == _("Blue")) {
                     cr.setSourceRGBA(0.1, 0.1, 0.7, aa);
                 } else
                 /*"Color", "Photo", "Matte Black", "Gloss Optimizer", "Unknown", "Light Cyan, Light Magenta, Photoblack",
