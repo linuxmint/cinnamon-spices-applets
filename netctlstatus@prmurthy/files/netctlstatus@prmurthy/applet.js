@@ -25,12 +25,19 @@ const Main = imports.ui.main;
 const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-
+const Gettext = imports.gettext;
 const GObject = imports.gi.GObject;
 const Signals = imports.signals;
 const Mainloop = imports.mainloop;
 const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
+const UUID = "netctlstatus@prmurthy";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // const NETWORK_CONNECTED = "network-wireless-symbolic";
 // const NETWORK_OFFLINE = "network-offline-symbolic";
@@ -70,12 +77,12 @@ Netctl.prototype = {
 	let check_interface_exists = GLib.spawn_command_line_sync("ip route list")[1].toString();
 
 	// if this returns a null, then there are no active interfaces 
-	if(check_interface_exists == ""){ return ["N", "None", 0];}
+	if(check_interface_exists == ""){ return ["N", _("None"), 0];}
 
 	let iface = check_interface_exists.split(" ",5)[4].toString();
 
 	// interface name begins with e, so it must be Ethernet
-	if(iface.charAt(0) == "e"){return ["E", "Ethernet", 0];} else
+	if(iface.charAt(0) == "e"){return ["E", _("Ethernet"), 0];} else
 
 	// interface name begins with w so it must be wireless
 	if(iface.charAt(0) == "w") {
@@ -93,24 +100,24 @@ Netctl.prototype = {
 			let connected = GLib.spawn_command_line_sync(shellcmd)[1].toString().match(/(?:.*?(id_str.*)){1}/)[1].toString().slice(7);
 			return ["A", connected, strength]; //we are connected automatically
 		}else { return ["M", connected.toString().slice(2), strength];} // we are connected manually
-	}else { return ["N", "None", 0];} // Something's wrong if we are here
+	}else { return ["N", _("None"), 0];} // Something's wrong if we are here
     },
 
     _set_icon: function(){
         let icon_name = "";
 	let networkname = this._get_connected_networks();
-	if(networkname[1] == "Ethernet"){
+	if(networkname[1] == _("Ethernet")){
 	    icon_name = NETWORK_ETHERNET;
-	    tooltiptext = "Connected via Ethernet";
+	    tooltiptext = _("Connected via Ethernet");
 	}else if (networkname[1] == null || networkname[1] == "None"){
             icon_name = NETWORK_OFFLINE;
-	    tooltiptext = "Not Connected";
+	    tooltiptext = _("Not Connected");
         } else {
 		let contype;            	
 		let quality = (networkname[2]*100).valueOf();
-		if (networkname[0] == "A") { contype = "Auto: ";} else
-		if (networkname[0] == "M") { contype = "Manual: ";}
-	        tooltiptext = contype + "Connected to " + networkname[1].toString() + " : " + quality.toString() + "%";
+		if (networkname[0] == "A") { contype = _("Auto: ");} else
+		if (networkname[0] == "M") { contype = _("Manual: ");}
+	        tooltiptext = contype + _("Connected to ") + networkname[1].toString() + " : " + quality.toString() + "%";
 		if (quality < 25) { icon_name = NETWORK_WL_CONNECTED_1;} else
 		if (quality < 50) { icon_name = NETWORK_WL_CONNECTED_2;} else
 		if (quality < 75) { icon_name = NETWORK_WL_CONNECTED_3;} else
