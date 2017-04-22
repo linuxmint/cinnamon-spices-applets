@@ -14,6 +14,14 @@ const St = imports.gi.St;
 const Lang = imports.lang;
 const Signals = imports.signals;
 const Util = imports.misc.util;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 const AppletManager = imports.ui.appletManager;
 
@@ -34,7 +42,7 @@ function main(metadata, orientation, panel_height, applet_id) {
 function makeApplet(orientation, panel_height, applet_id) {
    var applet = new Applet.IconApplet(orientation,panel_height, applet_id);
    applet.set_applet_icon_name("calc");
-   applet.set_applet_tooltip("Show calculator");
+   applet.set_applet_tooltip(_("Show calculator"));
    var layoutBox;
    let history = ['top of history',""];
    history.index=1;
@@ -227,8 +235,8 @@ function makeApplet(orientation, panel_height, applet_id) {
      const buttonSub = {  label : "  -  ",   handler : makeInsertHandler("-") };
      const buttonMul = {  label : "  ×  ",   handler : makeInsertHandler("*")  };
      const buttonDiv = {  label : "  ÷  ",   handler : makeInsertHandler("/")  };
-     const buttonC = {  label : "  C  ",   handler : function(){textBox.clutter_text.text=" "; } };
-     const buttonAC = {  label : " AC ",   handler : function(){textBox.clutter_text.text=" "; resetParser();} };
+     const buttonC = {  label : _("  C  "),   handler : function(){textBox.clutter_text.text=" "; } };
+     const buttonAC = {  label : _(" AC "),   handler : function(){textBox.clutter_text.text=" "; resetParser();} };
 
      const buttonPi = {  label : "  π  ",   handler : makeInsertHandler(" Pi ") };
      const buttonEquals = {  label : "  =  ",   handler : evaluateDisplay };
