@@ -5,13 +5,19 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "a4techTool@mous";
 const Main = imports.ui.main;
 const Panel = imports.ui.panel;
 const Pango = imports.gi.Pango;
 const Clutter = imports.gi.Clutter;
  
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 function MyApplet(orientation) {
     this._init(orientation);
 }
@@ -116,7 +122,7 @@ MyApplet.prototype = {
             this.menu.addMenuItem(this._brightnessSlider); 
 			//Other menu actions
 			
-			this._batteryItem = new PopupMenu.PopupMenuItem('Signal:', { reactive: false });
+			this._batteryItem = new PopupMenu.PopupMenuItem(_("Signal:"), { reactive: false });
             this._primaryPercentage = new St.Label();
             this._batteryItem.addActor(this._primaryPercentage, { align: St.Align.END });
             this.menu.addMenuItem(this._batteryItem);
@@ -187,7 +193,7 @@ MyApplet.prototype = {
 				this._applet_label.set_style_class_name("battery-label_20");
 			}
         	//this.set_applet_label(" " + percent.slice(11,14) + "%");
-        	this.set_applet_tooltip(_("Remaining mouse battery: " + check + "%, Profile: " + prof.charAt(17)));
+        	this.set_applet_tooltip(_("Remaining mouse battery: " + check + _("%, Profile: ") + prof.charAt(17)));
 		}
 		else{
 			this._applet_label.set_text(" N/A% ");
@@ -210,7 +216,7 @@ MyApplet.prototype = {
 		if(text[0] == true){
 			this._applet_label.set_text(" " + percent.slice(11,14) + "%");
         	//this.set_applet_label(" " + percent.slice(11,14) + "%");
-        	this.set_applet_tooltip(_("Remaining mouse battery: " + percent.slice(11,14) + "%, Profile: " + prof.charAt(17)));
+        	this.set_applet_tooltip(_("Remaining mouse battery: ") + percent.slice(11,14) + _("%, Profile: ") + prof.charAt(17));
 		}
 		else{
 			this._applet_label.set_text(" N/A% ");
@@ -244,7 +250,7 @@ MyApplet.prototype = {
 		}
 			else editMode = "click";
 
-        this._brightnessTitle.setText(_("Sleep time") + ": " + Math.round(value*10) + "min");
+        this._brightnessTitle.setText(_("Sleep time") + ": " + Math.round(value*10) + _("min"));
         let result = GLib.spawn_command_line_sync("a4_tool sleep set "+ editMode + " " + Math.round(value*10));
 		
 		//DEBUG and ERRORs
