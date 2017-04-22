@@ -14,7 +14,14 @@ const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const AppletMeta = imports.ui.appletManager.applets['lookingglass-restart@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta["lookingglass-restart@markbokil.com"].path;
+const Gettext = imports.gettext;
+const UUID = "lookingglass-restart@markbokil.com";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -55,17 +62,17 @@ MyApplet.prototype = {
    
     
     createContextMenu: function () {
-        this.restart_menu_item = new Applet.MenuItem(_('Restart Cinnamon'), Gtk.STOCK_REFRESH, 
+        this.restart_menu_item = new Applet.MenuItem(_("Restart Cinnamon"), Gtk.STOCK_REFRESH, 
             Lang.bind(this, this.doRestart));     
         this._applet_context_menu.addMenuItem(this.restart_menu_item);
         
-        this.reload_menu_item = new Applet.MenuItem(_('Reload Theme'), Gtk.STOCK_REFRESH, 
+        this.reload_menu_item = new Applet.MenuItem(_("Reload Theme"), Gtk.STOCK_REFRESH, 
             Lang.bind(this, this.doReloadTheme));     
         this._applet_context_menu.addMenuItem(this.reload_menu_item); 
         
 
         
-        this.log_menu_item = new Applet.MenuItem(_('View Log'), Gtk.STOCK_EDIT, 
+        this.log_menu_item = new Applet.MenuItem(_("View Log"), Gtk.STOCK_EDIT, 
             Lang.bind(this, this.doLog));     
         this._applet_context_menu.addMenuItem(this.log_menu_item);
        
