@@ -21,6 +21,15 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Lang = imports.lang;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "desktopiconsize@lotsrc";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function launchPython(path, params) {
     Util.spawnCommandLine("/usr/bin/python3 " + path + "/desktopiconsize.py" + params);
@@ -41,7 +50,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         this._metadata = metadata;
         this.set_applet_icon_path(this._metadata.path + "/iconpanel.svg");
-        this.set_applet_tooltip("Desktop Icon Size");
+        this.set_applet_tooltip(_("Desktop Icon Size"));
 
         // Create menu
 
@@ -51,11 +60,11 @@ MyApplet.prototype = {
 
         // Create menu items
 
-        this.diswindow = new PopupMenu.PopupMenuItem("Adjust icons");
-        this.profile1  = new PopupMenu.PopupMenuItem("Load profile 1");
-        this.profile2  = new PopupMenu.PopupMenuItem("Load profile 2");
-        this.profile3  = new PopupMenu.PopupMenuItem("Load profile 3");
-        this.profile4  = new PopupMenu.PopupMenuItem("Load profile 4");
+        this.diswindow = new PopupMenu.PopupMenuItem(_("Adjust icons"));
+        this.profile1  = new PopupMenu.PopupMenuItem(_("Load profile 1"));
+        this.profile2  = new PopupMenu.PopupMenuItem(_("Load profile 2"));
+        this.profile3  = new PopupMenu.PopupMenuItem(_("Load profile 3"));
+        this.profile4  = new PopupMenu.PopupMenuItem(_("Load profile 4"));
 
         // Handle events
 
