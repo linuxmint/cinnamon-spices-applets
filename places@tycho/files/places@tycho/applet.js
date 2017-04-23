@@ -6,6 +6,15 @@ const Main = imports.ui.main;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const UUID = "places@tycho";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // this should end up in settings?
 const FILE_MANAGER = "nemo";
