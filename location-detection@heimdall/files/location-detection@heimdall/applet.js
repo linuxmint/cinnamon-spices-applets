@@ -3,23 +3,26 @@ const Soup = imports.gi.Soup;
 const Lang = imports.lang;
 const Json = imports.gi.Json;
 const Mainloop = imports.mainloop;
-const Gettext = imports.gettext.domain("cinnamon-applets");
-const _ = Gettext.gettext;
-
-
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 const UUID = "location-detection@heimdall";
 
 //Get your api key from IPinfoDB and place it after key= and before &format=json
 
 const GEO_IP_URL = 'http://api.ipinfodb.com/v3/ip-city/?key=d115c954db28487f38c5d25d5dcf62a5786479b87cc852cabe8fd6f1971d7f89&format=json';
 
-
-
 const REFRESH_INTERVAL = 30
 
 const _httpSession = new Soup.SessionAsync();
 Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
 
+// Translation support
+// ----------
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // Logging
 // ----------
