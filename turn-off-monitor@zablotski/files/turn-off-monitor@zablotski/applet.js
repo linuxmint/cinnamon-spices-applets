@@ -1,6 +1,14 @@
 const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "turn-off-monitor@zablotski";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const APPLET_PATH = GLib.get_home_dir() + "/.local/share/cinnamon/applets/turn-off-monitor@zablotski";
 const ICON_PATH = APPLET_PATH + "/icon.png";
