@@ -1,0 +1,11 @@
+#
+msgid ""
+msgstr ""
+
+#. workspace-name@willurd->metadata.json->name
+msgid "Workspace Name"
+msgstr ""
+
+#. workspace-name@willurd->metadata.json->description
+msgid "Show the current workspace name in the panel"
+msgstr ""
