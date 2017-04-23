@@ -1,4 +1,13 @@
 'use strict';
+const Gettext = imports.gettext;
+const UUID = "IcingWindowSaver@json";
+const GLib = imports.gi.GLib;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 var Applet = imports.ui.applet;
 var St = imports.gi.St;
@@ -31,7 +40,7 @@ MyApplet.prototype = {
     }
 
     this.set_applet_icon_symbolic_name('video-display');
-    this.set_applet_tooltip('Window Saver');
+    this.set_applet_tooltip(_("Window Saver"));
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -39,7 +48,7 @@ MyApplet.prototype = {
     this._contentSection = new PopupMenu.PopupMenuSection();
     this.menu.addMenuItem(this._contentSection);
 
-    var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
+    var item = new PopupMenu.PopupIconMenuItem(_("Save"), 'media-floppy', St.IconType.SYMBOLIC);
     item.connect('activate', function () {
       _this._saveWindows();
     });
@@ -47,7 +56,7 @@ MyApplet.prototype = {
 
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    item = new PopupMenu.PopupIconMenuItem(_('Restore'), 'view-restore', St.IconType.SYMBOLIC);
+    item = new PopupMenu.PopupIconMenuItem(_("Restore"), 'view-restore', St.IconType.SYMBOLIC);
     item.connect('activate', function () {
       _this._restoreWindows();
     });
