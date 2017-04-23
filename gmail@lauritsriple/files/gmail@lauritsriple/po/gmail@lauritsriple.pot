@@ -1,0 +1,119 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-23 09:41+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:90 applet.js:165
+msgid "No new mail"
+msgstr ""
+
+#: applet.js:143
+msgid "Something went wrong"
+msgstr ""
+
+#: applet.js:146
+msgid "Install python libaries from terminal"
+msgstr ""
+
+#: applet.js:146
+msgid "How To"
+msgstr ""
+
+#: applet.js:146
+msgid "guide"
+msgstr ""
+
+#: applet.js:146
+msgid ""
+"You need pip3, 'sudo apt-get install pip3'\n"
+"You need python-feedparser, 'sudo pip3 install feedparser'\n"
+"You need python keyring and python keyring-alt, 'sudo pip3 install keyrings' and 'sudo pip3 install keyrings-alt'"
+msgstr ""
+
+#: applet.js:148
+msgid "Could not get json from python"
+msgstr ""
+
+#: applet.js:148
+msgid "ERROR"
+msgstr ""
+
+#: applet.js:148
+msgid ""
+"Check internet conneciton\n"
+"Install the needed python libaries\n"
+"Configure password correctly"
+msgstr ""
+
+#: applet.js:156
+msgid "New mail"
+msgstr ""
+
+#: applet.js:158
+msgid "New mails"
+msgstr ""
+
+#: applet.js:167
+msgid "No new mails"
+msgstr ""
+
+#: applet.js:167
+msgid "Have a nice day"
+msgstr ""
+
+#. gmail@lauritsriple->metadata.json->description
+msgid "Shows most recent mails, and how many unread messages you have."
+msgstr ""
+
+#. gmail@lauritsriple->metadata.json->name
+msgid "GmailNotifier"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->settings-username->description
+msgid "Username:"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->settings-username->tooltip
+msgid "Set your username"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->head->description
+msgid ""
+"Store your username and password.\n"
+"Uses the keyring so password is not stored in cleartext.\n"
+"It might take a while (2-10seconds) before the password\n"
+"gets visible removed after you press the button.\n"
+"If your gmail adress is usernam@gmail.com, only put in the username part here.\n"
+"There are still some issues so you might have to press the button a couple of time.\n"
+"If the password changes to something else, dont press it again."
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->settings-password->description
+msgid "Password:"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->settings-password->tooltip
+msgid "Set your password"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->demo-button->description
+msgid "Save username and password"
+msgstr ""
+
+#. gmail@lauritsriple->settings-schema.json->demo-button->tooltip
+msgid "Click to save username and password"
+msgstr ""
