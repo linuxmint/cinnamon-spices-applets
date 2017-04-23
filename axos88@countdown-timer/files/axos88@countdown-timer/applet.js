@@ -14,13 +14,19 @@ const Gtk = imports.gi.Gtk;
 const Mainloop = imports.mainloop;
 const ModalDialog = imports.ui.modalDialog;
 const PanelMenu = imports.ui.panelMenu;
-
+const Gettext = imports.gettext;
 const UUID = "axos88@countdown-timer";
 const AppletMeta = imports.ui.appletManager.applets[UUID];
 const AssetDir = imports.ui.appletManager.appletMeta[UUID].path + "/assets";
 const ConfigFile = GLib.build_filenamev([global.userdatadir, 'applets/' + UUID + '/config.js']);
 const AppOptions = AppletMeta.config.Options;
 const OpenFileCmd = "xdg-open";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 Number.prototype.pad = function(size) {
   var s = String(this);
@@ -94,7 +100,7 @@ MyApplet.prototype = {
 
             this.buildTimePresetMenu();
 
-            this.timerMenuItem = new PopupMenu.PopupMenuItem("Minutes: 0", { reactive: false });
+            this.timerMenuItem = new PopupMenu.PopupMenuItem(_("Minutes: 0"), { reactive: false });
             this.menu.addMenuItem(this.timerMenuItem);
 
             this._timerSlider = new PopupMenu.PopupSliderMenuItem(0);
@@ -134,11 +140,11 @@ MyApplet.prototype = {
                 let min = Math.floor((preset % 3600) / 60)
                 let sec = preset % 60
 
-                let hrText = (hr > 0 ? hr + " Hours " : "")
-                let minText = (min > 0 ? min + " Minutes " : "")
-                let secText = (sec > 0 ? sec + " Seconds" : "")
+                let hrText = (hr > 0 ? hr + _(" Hours ") : "")
+                let minText = (min > 0 ? min + _(" Minutes ") : "")
+                let secText = (sec > 0 ? sec + _(" Seconds") : "")
 
-                let label = preset > 0 ? hrText + minText + secText : "Reset"
+                let label = preset > 0 ? hrText + minText + secText : _("Reset")
 
                 let item = new PopupMenu.PopupMenuItem(label);
                 this.menu.addMenuItem(item)
@@ -215,9 +221,9 @@ MyApplet.prototype = {
         let min = Math.floor((this.timerDuration % 3600) / 60)
         let sec = this.timerDuration % 60
 
-        this.timerMenuItem.label.text = hr + " Hours, " + min.pad(2) + " Minutes and " + sec.pad(2) + " Seconds"
+        this.timerMenuItem.label.text = hr + _(" Hours, ") + min.pad(2) + _(" Minutes and ") + sec.pad(2) + _(" Seconds")
         let timeStr = hr + ":" + min.pad(2) + ":" + sec.pad(2)
-        this.set_applet_tooltip(_("Timer: " + timeStr));
+        this.set_applet_tooltip(_("Timer: ") + timeStr);
 
         if (AppOptions.LabelOn) {
             if (this.timerStopped && this.timerDuration == 0)
@@ -293,9 +299,9 @@ MyApplet.prototype = {
     },
 
     createContextMenu: function () {
-        this.edit_menu_item = new Applet.MenuItem(_('Edit Options'), Gtk.STOCK_EDIT,
+        this.edit_menu_item = new Applet.MenuItem(_("Edit Options"), Gtk.STOCK_EDIT,
             Lang.bind(this, this.editProperties));
-        this.reload_menu_item = new Applet.MenuItem(_('Restart Cinnamon'), Gtk.STOCK_REFRESH,
+        this.reload_menu_item = new Applet.MenuItem(_("Restart Cinnamon"), Gtk.STOCK_REFRESH,
             Lang.bind(this, this.doRestart));
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
         this._applet_context_menu.addMenuItem(this.reload_menu_item);
