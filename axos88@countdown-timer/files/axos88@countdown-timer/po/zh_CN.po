@@ -7,39 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 08:38+0800\n"
-"PO-Revision-Date: 2017-04-23 08:38+0800\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2017-04-24 08:34+0800\n"
+"PO-Revision-Date: 2017-04-24 08:34+0800\n"
 "Language-Team: \n"
-"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
 
 #: applet.js:51
 msgid "Okay"
 msgstr "好的"
 
-#: applet.js:97
+#: applet.js:97 applet.js:226
 msgid "Timer"
 msgstr "定时器"
 
-#: applet.js:103
-msgid "Minutes: 0"
-msgstr "分钟：0"
-
-#: applet.js:143
-msgid " Hours "
-msgstr "小时"
-
-#: applet.js:144
-msgid " Minutes "
+#: applet.js:103 applet.js:144 applet.js:224
+msgid "Minutes"
 msgstr "分钟"
 
+#: applet.js:143 applet.js:224
+msgid "Hours"
+msgstr "小时"
+
 #: applet.js:145 applet.js:224
-msgid " Seconds"
+msgid "Seconds"
 msgstr "秒"
 
 #: applet.js:147
@@ -47,16 +43,8 @@ msgid "Reset"
 msgstr "重置"
 
 #: applet.js:224
-msgid " Hours, "
-msgstr "小时，"
-
-#: applet.js:224
-msgid " Minutes and "
-msgstr "分钟和"
-
-#: applet.js:226
-msgid "Timer: "
-msgstr "定时器："
+msgid "and"
+msgstr "和"
 
 #: applet.js:302
 msgid "Edit Options"
