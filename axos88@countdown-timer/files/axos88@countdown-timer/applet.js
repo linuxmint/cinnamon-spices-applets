@@ -100,7 +100,7 @@ MyApplet.prototype = {
 
             this.buildTimePresetMenu();
 
-            this.timerMenuItem = new PopupMenu.PopupMenuItem(_("Minutes: 0"), { reactive: false });
+            this.timerMenuItem = new PopupMenu.PopupMenuItem(_("Minutes") + ": 0", { reactive: false });
             this.menu.addMenuItem(this.timerMenuItem);
 
             this._timerSlider = new PopupMenu.PopupSliderMenuItem(0);
@@ -140,9 +140,9 @@ MyApplet.prototype = {
                 let min = Math.floor((preset % 3600) / 60)
                 let sec = preset % 60
 
-                let hrText = (hr > 0 ? hr + _(" Hours ") : "")
-                let minText = (min > 0 ? min + _(" Minutes ") : "")
-                let secText = (sec > 0 ? sec + _(" Seconds") : "")
+                let hrText = (hr > 0 ? hr + " " + _("Hours") + " " : "")
+                let minText = (min > 0 ? min + " " + _("Minutes") + " " : "")
+                let secText = (sec > 0 ? sec + " " + _("Seconds") : "")
 
                 let label = preset > 0 ? hrText + minText + secText : _("Reset")
 
@@ -221,9 +221,9 @@ MyApplet.prototype = {
         let min = Math.floor((this.timerDuration % 3600) / 60)
         let sec = this.timerDuration % 60
 
-        this.timerMenuItem.label.text = hr + _(" Hours, ") + min.pad(2) + _(" Minutes and ") + sec.pad(2) + _(" Seconds")
+        this.timerMenuItem.label.text = hr + " " + _("Hours") + "," + " " + min.pad(2) + " " + _("Minutes") + " " + _("and") + " " + sec.pad(2) + " " + _("Seconds")
         let timeStr = hr + ":" + min.pad(2) + ":" + sec.pad(2)
-        this.set_applet_tooltip(_("Timer: ") + timeStr);
+        this.set_applet_tooltip(_("Timer") + ":" + " " + timeStr);
 
         if (AppOptions.LabelOn) {
             if (this.timerStopped && this.timerDuration == 0)
