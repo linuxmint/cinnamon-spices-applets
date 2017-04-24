@@ -7,7 +7,6 @@ const St = imports.gi.St;
 const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
-const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
