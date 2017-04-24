@@ -35,6 +35,16 @@ const DEFAULT_ICON_SIZE = 16; // too bad this can't be defined in theme (cinnamo
 const SPINNER_ANIMATION_TIME = 1;
 const ICON_HEIGHT_FACTOR = .64;
 
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "Window-List-Hotkey@HenryNugraha";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 /* TODO: dragHelper will need to be reworked once more flexible panel configuration is merged */
 
 function dragHelper() {
