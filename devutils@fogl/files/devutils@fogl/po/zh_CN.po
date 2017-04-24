@@ -40,7 +40,7 @@ msgstr "PostgreSQL服务器"
 
 #: applet.js:55
 msgid "Apache Web Server"
-msgstr "Apache Web网络服务器"
+msgstr "Apache Web服务器"
 
 #: applet.js:80
 msgid ""
@@ -71,7 +71,7 @@ msgstr "取消"
 #. devutils@fogl->metadata.json->name
 #: applet.js:126
 msgid "Development Utils"
-msgstr "开发者工具"
+msgstr "开发工具"
 
 #: applet.js:133
 msgid "Settings"
