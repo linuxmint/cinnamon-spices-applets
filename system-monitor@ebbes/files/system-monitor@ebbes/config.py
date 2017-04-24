@@ -34,9 +34,10 @@ from gi.repository import Gtk, Gio, Gdk
 
 import os.path
 import gettext
-from gettext import gettext as _
-gettext.textdomain('system-monitor-applet')
-
+#from gettext import gettext as _
+#gettext.textdomain('system-monitor-applet')
+home = os.path.expanduser("~")
+gettext.install("system-monitor@ebbes", home + "/.local/share/locale")
 
 def color_to_hex(color):
     return "#%02x%02x%02x%02x" % (
