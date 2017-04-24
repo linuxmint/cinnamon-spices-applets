@@ -12,6 +12,15 @@ const AppletDir = imports.ui.appletManager.appletMeta['todo@threefi'].path;
 const Settings = imports.ui.settings;
 // for repeated updating:
 const Mainloop = imports.mainloop;
+// Translation support
+const Gettext = imports.gettext;
+const UUID = "todo@threefi";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // debug flag
 var debug=false;
@@ -157,4 +166,3 @@ function main(metadata, orientation, panel_height, instanceId) {
     let myApplet = new MyApplet(orientation,instanceId);
     return myApplet;      
 }
-
