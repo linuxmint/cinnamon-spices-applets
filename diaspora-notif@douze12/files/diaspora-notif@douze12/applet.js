@@ -5,8 +5,8 @@ const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+
 const AppletDir = imports.ui.appletManager.appletMeta['diaspora-notif@douze12'].path;
 const AppletMeta = imports.ui.appletManager.applets['diaspora-notif@douze12'];
 const AppSettings = AppletMeta.settings.Values;
@@ -14,6 +14,11 @@ const Settings = imports.ui.settings;
 
 const UUID = 'diaspora-notif@douze12';
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /**
  * Settings keys 
