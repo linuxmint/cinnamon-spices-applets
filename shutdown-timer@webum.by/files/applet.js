@@ -8,7 +8,6 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const ModalDialog = imports.ui.modalDialog;
 const Mainloop = imports.mainloop;
-const PanelMenu = imports.ui.panelMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 
