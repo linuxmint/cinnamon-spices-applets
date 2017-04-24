@@ -65,6 +65,14 @@ const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 
+const UUID = "system-monitor@ebbes";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const MESSAGE = _("Dependencies missing. Please install \n\
 libgtop, Network Manager and gir bindings \n\
 \t    on Ubuntu: gir1.2-gtop-2.0, gir1.2-networkmanager-1.0 \n\
@@ -271,7 +279,7 @@ ElementBase.prototype = {
         Schema.connect('changed::' + this.elt + '-graph-width',
                        Lang.bind(this.chart, this.chart.resize));
 
-        this.label = new St.Label({ text: this.elt == "memory" ? "mem" : _(this.elt),
+        this.label = new St.Label({ text: this.elt == _("memory") ? _("mem") : _(this.elt),
                                     style_class: "sma-status-label"});
         change_text.call(this);
         Schema.connect('changed::' + this.elt + '-show-text', Lang.bind(this, change_text));
@@ -338,7 +346,7 @@ Cpu.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'cpu',
     color_name: ['user', 'system', 'nice', 'iowait', 'other'],
-    tip_names: [_('User'), _('System'), _('Nice'), _('Wait'), _('Other')],
+    tip_names: [_("User"), _("System"), _("Nice"), _("Wait"), _("Other")],
     max: 100,
     _init: function(orientation) {
         this.gtop = new GTop.glibtop_cpu();
@@ -415,7 +423,7 @@ Mem.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'memory',
     color_name: ['program', 'buffer', 'cache'],
-    tip_names: [_('Program'), _('Buffer'), _('Cache')],
+    tip_names: [_("Program"), _("Buffer"), _("Cache")],
     max: 1,
     _init: function(orientation) {
         this.menu_item = new PopupMenu.PopupMenuItem(_("Memory"), {reactive: false});
@@ -468,7 +476,7 @@ Swap.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'swap',
     color_name: ['used'],
-    tip_names: [_('Used')],
+    tip_names: [_("Used")],
     max: 1,
     _init: function(orientation) {
         this.menu_item = new PopupMenu.PopupMenuItem(_("Swap"), {reactive: false});
@@ -517,7 +525,7 @@ Net.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'net',
     color_name: ['down', 'downerrors', 'up', 'uperrors', 'collisions'],
-    tip_names: [_('Down'), _('Down errors'), _('Up'), _('Up errors'), _('Collisions')],
+    tip_names: [_("Down"), _("Down errors"), _("Up"), _("Up errors"), _("Collisions")],
     speed_in_bits: false,
     _init: function(orientation) {
         this.ifs = [];
@@ -660,7 +668,7 @@ Disk.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'disk',
     color_name: ['read', 'write'],
-    tip_names: [_('Read'), _('Write')],
+    tip_names: [_("Read"), _("Write")],
     _init: function(orientation) {
         // Can't get mountlist:
         // GTop.glibtop_get_mountlist
@@ -717,20 +725,20 @@ Disk.prototype = {
         this.menu_items[3].text = this.text_items[4].text = this.tip_vals[1].toString();
     },
     create_text_items: function() {
-        return [new St.Label({ text: 'R', style_class: "sma-status-label"}),
+        return [new St.Label({ text: _("R"), style_class: "sma-status-label"}),
                 new St.Label({ style_class: "sma-status-value"}),
                 new St.Label({ text: 'MiB/s', style_class: "sma-perc-label"}),
-                new St.Label({ text: 'W', style_class: "sma-status-label"}),
+                new St.Label({ text: _("W"), style_class: "sma-status-label"}),
                 new St.Label({ style_class: "sma-status-value"}),
                 new St.Label({ text: 'MiB/s', style_class: "sma-perc-label"})];
     },
     create_menu_items: function() {
         return [new St.Label({ style_class: "sma-value"}),
                 new St.Label({ text:'MiB/s', style_class: "sma-label"}),
-                new St.Label({ text:'R', style_class: "sma-label"}),
+                new St.Label({ text:_("R"), style_class: "sma-label"}),
                 new St.Label({ style_class: "sma-value"}),
                 new St.Label({ text:'MiB/s', style_class: "sma-label"}),
-                new St.Label({ text:'W', style_class: "sma-label"})];
+                new St.Label({ text:_("W"), style_class: "sma-label"})];
     }
 };
 
@@ -742,7 +750,7 @@ Thermal.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'thermal',
     color_name: ['tz0'],
-    tip_names: [_('Temperature')],
+    tip_names: [_("Temperature")],
     _init: function(orientation) {
         this.temperature = -273.15;
         this.menu_item = new PopupMenu.PopupMenuItem(_("Thermal"), {reactive: false});
@@ -788,7 +796,7 @@ Freq.prototype = {
     __proto__: ElementBase.prototype,
     elt: 'freq',
     color_name: ['freq'],
-    tip_names: [_('Frequency')],
+    tip_names: [_("Frequency")],
     _init: function(orientation) {
         this.freq = 0;
         this.menu_item = new PopupMenu.PopupMenuItem(_("Frequency"), {reactive: false});
