@@ -2,10 +2,16 @@ const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "acpi@bro";
 const Mainloop = imports.mainloop;
 const Cinnamon = imports.gi.Cinnamon;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation) {
   this._init(orientation);
@@ -55,18 +61,18 @@ MyApplet.prototype = {
   },
 
   get_icon: function(state, percentage){
-    if (state=="Unknown"){
-      return "ac-adapter";
-    } else if (state=="Charging"){
-      if (percentage<20) return "battery-caution-charging";
-      else if (percentage<50) return "battery-low-charging";
-      else if (percentage<90) return "battery-good-charging";
-      else return "battery-full-charging";
-    } else if (state=="Discharging"){
-      if (percentage<20) return "battery-caution";
-      else if (percentage<50) return "battery-low";
-      else if (percentage<90) return "battery-good";
-      else return "battery-full";
+    if (state==_("Unknown")){
+      return _("ac-adapter");
+    } else if (state==_("Charging")){
+      if (percentage<20) return _("battery-caution-charging");
+      else if (percentage<50) return _("battery-low-charging");
+      else if (percentage<90) return _("battery-good-charging");
+      else return _("battery-full-charging");
+    } else if (state==_("Discharging")){
+      if (percentage<20) return _("battery-caution");
+      else if (percentage<50) return _("battery-low");
+      else if (percentage<90) return _("battery-good");
+      else return _("battery-full");
     }
   }
 
