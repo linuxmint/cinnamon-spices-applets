@@ -21,48 +21,12 @@ msgstr ""
 msgid "Unknown"
 msgstr ""
 
-#: applet.js:65
-msgid "ac-adapter"
-msgstr ""
-
 #: applet.js:66
 msgid "Charging"
 msgstr ""
 
-#: applet.js:67
-msgid "battery-caution-charging"
-msgstr ""
-
-#: applet.js:68
-msgid "battery-low-charging"
-msgstr ""
-
-#: applet.js:69
-msgid "battery-good-charging"
-msgstr ""
-
-#: applet.js:70
-msgid "battery-full-charging"
-msgstr ""
-
 #: applet.js:71
 msgid "Discharging"
-msgstr ""
-
-#: applet.js:72
-msgid "battery-caution"
-msgstr ""
-
-#: applet.js:73
-msgid "battery-low"
-msgstr ""
-
-#: applet.js:74
-msgid "battery-good"
-msgstr ""
-
-#: applet.js:75
-msgid "battery-full"
 msgstr ""
 
 #. acpi@bro->metadata.json->description
