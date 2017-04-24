@@ -1,6 +1,5 @@
 const St = imports.gi.St;
 const Lang = imports.lang;
-const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const GLib = imports.gi.GLib;

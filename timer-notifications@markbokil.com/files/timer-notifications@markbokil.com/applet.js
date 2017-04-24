@@ -13,7 +13,6 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Mainloop = imports.mainloop;
 const ModalDialog = imports.ui.modalDialog;
-const PanelMenu = imports.ui.panelMenu;
 const Gettext = imports.gettext;
 
 const AppletMeta = imports.ui.appletManager.applets['timer-notifications@markbokil.com'];
