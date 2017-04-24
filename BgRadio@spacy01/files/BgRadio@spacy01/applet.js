@@ -4,7 +4,6 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Lang = imports.lang;
 const St = imports.gi.St;
-const PanelMenu = imports.ui.panelMenu;
 const GLib = imports.gi.GLib;
 
 const Gettext = imports.gettext.domain('bgradio');
