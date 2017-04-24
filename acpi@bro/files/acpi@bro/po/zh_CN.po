@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 09:38+0800\n"
+"PO-Revision-Date: 2017-04-24 09:46+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:64
+msgid "Unknown"
+msgstr "未知"
+
+#: applet.js:65
+msgid "ac-adapter"
+msgstr "电源适配器"
+
+#: applet.js:66
+msgid "Charging"
+msgstr "正在充电"
+
+#: applet.js:67
+msgid "battery-caution-charging"
+msgstr "电量警告，充电中"
+
+#: applet.js:68
+msgid "battery-low-charging"
+msgstr "电量低，充电中"
+
+#: applet.js:69
+msgid "battery-good-charging"
+msgstr "电量良好，充电中"
+
+#: applet.js:70
+msgid "battery-full-charging"
+msgstr "电量满，充电中"
+
+#: applet.js:71
+msgid "Discharging"
+msgstr "未在充电"
+
+#: applet.js:72
+msgid "battery-caution"
+msgstr "电量警告"
+
+#: applet.js:73
+msgid "battery-low"
+msgstr "电量低"
+
+#: applet.js:74
+msgid "battery-good"
+msgstr "电量良好"
+
+#: applet.js:75
+msgid "battery-full"
+msgstr "电量满"
+
+#. acpi@bro->metadata.json->description
+msgid "Show ACPI state"
+msgstr "显示ACPI状态"
+
+#. acpi@bro->metadata.json->name
+msgid "ACPI"
+msgstr "高级配置与电源接口(ACPI)"
