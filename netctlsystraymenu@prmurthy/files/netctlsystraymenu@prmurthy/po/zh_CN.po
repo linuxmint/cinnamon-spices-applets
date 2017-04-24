@@ -1,0 +1,115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 20:48+0800\n"
+"PO-Revision-Date: 2017-04-24 20:54+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:141 applet.js:171 applet.js:183
+msgid "None"
+msgstr "无"
+
+#: applet.js:147 applet.js:180
+msgid "Ethernet"
+msgstr "以太网"
+
+#: applet.js:182
+msgid "Connected via Ethernet"
+msgstr "已通过以太网连接"
+
+#: applet.js:185
+msgid "Not Connected"
+msgstr "未连接"
+
+#: applet.js:190
+msgid "Auto: "
+msgstr "自动："
+
+#: applet.js:193
+msgid "Manual: "
+msgstr "手动："
+
+#: applet.js:195
+msgid "Connected to "
+msgstr "已连接到"
+
+#: applet.js:236
+msgid "Switching to"
+msgstr "正在切换到"
+
+#: applet.js:236
+msgid ". Please enter your password"
+msgstr "。请输入您的密码"
+
+#: applet.js:266 applet.js:271
+msgid "The wireless network"
+msgstr "无线网络"
+
+#: applet.js:266
+msgid ""
+" is not available. Re-enabling the auto profile. Please enter your password "
+"again"
+msgstr "不可用，重新启用自动配置文件，请重新输入您的密码"
+
+#: applet.js:271
+msgid " is not available. Switching back to"
+msgstr "不可用。切换回"
+
+#: applet.js:271
+msgid ". Please enter your password again"
+msgstr "。请重新输入您的密码"
+
+#: applet.js:275
+msgid "Netctl: Sorry, the wireless network"
+msgstr "Netctl：抱歉，无线网络"
+
+#: applet.js:275
+msgid " is not available"
+msgstr "不可用"
+
+#: applet.js:278
+msgid "Netctl: Connected to"
+msgstr "Netctl：已连接到"
+
+#: applet.js:287
+msgid "  Switch to auto"
+msgstr "切换到自动"
+
+#: applet.js:300
+msgid "Switching to auto. Please enter your password"
+msgstr "正在切换到自动。请输入您的密码"
+
+#: applet.js:308
+msgid "Netctl: Switched to wireless auto profile"
+msgstr "Netctl：切换到无线自动配置文件"
+
+#: applet.js:316
+msgid "  Add new networks (run wifi-menu)"
+msgstr "添加新网络（运行wifi-menu）"
+
+#: applet.js:319
+msgid "Wifi-menu needs admin privileges. Please enter your password"
+msgstr "Wifi-menu需要管理员权限，请输入您的密码"
+
+#. netctlsystraymenu@prmurthy->metadata.json->description
+msgid ""
+"Netctl Systray Menu displays netctl status in the system tray and enables "
+"profile switching"
+msgstr "Netctl托盘菜单在系统托盘中显示netctl状态并启用配置文件切换"
+
+#. netctlsystraymenu@prmurthy->metadata.json->name
+msgid "Netctl Systray Menu"
+msgstr "Netctl托盘菜单"
