@@ -148,8 +148,9 @@ msgstr "Довиждане"
 msgid ""
 "The most famous Bulgarian radio stations. Some of the streams are available "
 "only from bulgaria. This applet requires moc player."
-msgstr ""
+msgstr "Най-известните български радиостанции. Някои от стриймовете са налични "
+"само от България. Този аплет изисква moc плеър."
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "BgRadio"
-msgstr ""
+msgstr "Бг радиа"
