@@ -22,49 +22,13 @@ msgstr ""
 msgid "Unknown"
 msgstr "未知"
 
-#: applet.js:65
-msgid "ac-adapter"
-msgstr "电源适配器"
-
 #: applet.js:66
 msgid "Charging"
 msgstr "正在充电"
 
-#: applet.js:67
-msgid "battery-caution-charging"
-msgstr "电量警告，充电中"
-
-#: applet.js:68
-msgid "battery-low-charging"
-msgstr "电量低，充电中"
-
-#: applet.js:69
-msgid "battery-good-charging"
-msgstr "电量良好，充电中"
-
-#: applet.js:70
-msgid "battery-full-charging"
-msgstr "电量满，充电中"
-
 #: applet.js:71
 msgid "Discharging"
 msgstr "未在充电"
-
-#: applet.js:72
-msgid "battery-caution"
-msgstr "电量警告"
-
-#: applet.js:73
-msgid "battery-low"
-msgstr "电量低"
-
-#: applet.js:74
-msgid "battery-good"
-msgstr "电量良好"
-
-#: applet.js:75
-msgid "battery-full"
-msgstr "电量满"
 
 #. acpi@bro->metadata.json->description
 msgid "Show ACPI state"
