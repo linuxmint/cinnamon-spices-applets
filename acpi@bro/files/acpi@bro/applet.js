@@ -62,17 +62,17 @@ MyApplet.prototype = {
 
   get_icon: function(state, percentage){
     if (state==_("Unknown")){
-      return _("ac-adapter");
+      return ac-adapter;
     } else if (state==_("Charging")){
-      if (percentage<20) return _("battery-caution-charging");
-      else if (percentage<50) return _("battery-low-charging");
-      else if (percentage<90) return _("battery-good-charging");
-      else return _("battery-full-charging");
+      if (percentage<20) return battery-caution-charging;
+      else if (percentage<50) return battery-low-charging;
+      else if (percentage<90) return battery-good-charging;
+      else return battery-full-charging;
     } else if (state==_("Discharging")){
-      if (percentage<20) return _("battery-caution");
-      else if (percentage<50) return _("battery-low");
-      else if (percentage<90) return _("battery-good");
-      else return _("battery-full");
+      if (percentage<20) return battery-caution;
+      else if (percentage<50) return battery-low;
+      else if (percentage<90) return battery-good;
+      else return battery-full;
     }
   }
 
