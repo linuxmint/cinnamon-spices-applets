@@ -10,8 +10,15 @@ const Clutter = imports.gi.Clutter;
 const Tooltips = imports.ui.tooltips;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const UUID = "cheaty@centurix";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 const ICON = APPLET_PATH + "/icon.png";
 const REFDOCS = APPLET_PATH + "/refdocs";
@@ -43,7 +50,7 @@ SheetMenuItem.prototype =
 		this.addActor(this.icon);
 		this.icon.realize();
 
-		this._tooltip = new Tooltips.Tooltip(this.actor, sheet.name + ' (version ' + sheet.version + ')\n' + sheet.description + '\nAuthor: ' + sheet.author + '\nEmail: ' + sheet.email + '\nRepository: ' + sheet.repository);
+		this._tooltip = new Tooltips.Tooltip(this.actor, sheet.name + " " + _("version") + " " + sheet.version + "\n" + sheet.description + _("\nAuthor:") + " " + sheet.author + _("\nEmail:") + " " + sheet.email + _("\nRepository:") + " " + sheet.repository);
 
 		this.actor.style = "padding-right: 45px;";
 	}
@@ -114,7 +121,7 @@ Cheaty.prototype = {
 	_init: function(orientation, panelHeight, instanceId) {
 		Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 		this.set_applet_icon_path(ICON);
-		this.set_applet_tooltip('Cheaty: Easy access cheatsheets');
+		this.set_applet_tooltip(_("Cheaty: Easy access cheatsheets"));
 
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
 		this._menuManager.addMenu(this.menu);
@@ -199,7 +206,7 @@ Cheaty.prototype = {
 			return;
 		}
 
-		let mi = new Applet.MenuItem("Configure...", Gtk.STOCK_EDIT, Lang.bind(this, function() {
+		let mi = new Applet.MenuItem(_("Configure..."), Gtk.STOCK_EDIT, Lang.bind(this, function() {
 			Util.spawnCommandLine(CMD_SETTINGS)
 		}));
 		this._applet_context_menu.addMenuItem(mi);
@@ -213,7 +220,7 @@ Cheaty.prototype = {
 
 	copyToClipboard: function(text) {
 		St.Clipboard.get_default().set_text(text.code);
-		this.notification('Code copied to the clipboard');
+		this.notification(_("Code copied to the clipboard"));
 	},
 
 	on_applet_clicked: function(event) {
