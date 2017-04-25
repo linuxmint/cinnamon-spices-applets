@@ -2,17 +2,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 11:08+0100\n"
-"PO-Revision-Date: 2017-02-10 11:08+0100\n"
+"POT-Creation-Date: 2017-02-10 11:09+0100\n"
+"PO-Revision-Date: 2017-02-10 11:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: applet.js\n"
 
 #: applet.js:156
@@ -77,7 +77,7 @@ msgstr ""
 
 #: applet.js:258
 msgid "Rancher: Homestead missing or not configured."
-msgstr ""
+msgstr "ランチャー：ホームステッド欠落しているかどうか設定されています。"
 
 #: applet.js:259
 msgid "Homestead missing or not configured."
@@ -89,7 +89,7 @@ msgstr ""
 
 #: applet.js:272
 msgid "Rancher: Homestead up."
-msgstr ""
+msgstr "牧場主：ホームステッドアップ。"
 
 #: applet.js:273
 msgid "Homestead up."
@@ -113,7 +113,7 @@ msgstr ""
 
 #: applet.js:283
 msgid "Rancher: Homestead down."
-msgstr ""
+msgstr "ランチャー：ダウンホームステッド。"
 
 #: applet.js:284
 msgid "Homestead down."
@@ -162,3 +162,30 @@ msgstr ""
 #. rancher@centurix->metadata.json->description
 msgid "An applet to manage Homestead."
 msgstr ""
+
+#~ msgid "Homestead missing or not configured"
+#~ msgstr "ホームステッド見つからないか設定されていません"
+
+#~ msgid "Status"
+#~ msgstr "状態"
+
+#~ msgid "Run provisioning"
+#~ msgstr "実行プロビジョニング"
+
+#~ msgid "Suspend Homestead"
+#~ msgstr "ホームステッドサスペンド"
+
+#~ msgid "SSH Terminal"
+#~ msgstr "SSHターミナル"
+
+#~ msgid "Destroy Homestead"
+#~ msgstr "ホームステッド破壊"
+
+#~ msgid "Edit Homestead configuration"
+#~ msgstr "編集ホームステッド構成"
+
+#~ msgid "Refresh this menu"
+#~ msgstr "このメニューをリフレッシュ"
+
+#~ msgid "Update Homestead box"
+#~ msgstr "更新ホームステッドボックス"
