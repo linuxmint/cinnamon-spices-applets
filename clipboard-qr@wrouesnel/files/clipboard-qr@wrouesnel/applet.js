@@ -34,6 +34,15 @@ const QRReaderHelper = 'clipboard-qr.py';
 
 const MAX_BYTES = 1048576;
 
+const Gettext = imports.gettext;
+const UUID = "clipboard-qr@wrouesnel";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 function MyApplet(orientation) {
     this._init(orientation);
 }
@@ -123,7 +132,7 @@ MyApplet.prototype = {
 			let devfile = camera_devices[n].get_device_file ();
 			let description = camera_devices[n].get_property('ID_V4L_PRODUCT');
 			
-            let menuItem = new PopupMenu.PopupMenuItem(_('Scan QR Code') + ' (' + description +')');
+            let menuItem = new PopupMenu.PopupMenuItem(_("Scan QR Code") + ' (' + description +')');
             
             menuItem.connect('activate', Lang.bind(this, function (menuItem, event) {
             	this._launch_qr_reader(devfile);
@@ -154,4 +163,3 @@ function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
     return myApplet;      
 }
-
