@@ -50,7 +50,7 @@ SheetMenuItem.prototype =
 		this.addActor(this.icon);
 		this.icon.realize();
 
-		this._tooltip = new Tooltips.Tooltip(this.actor, sheet.name + " " + _("version") + " " + sheet.version + "\n" + sheet.description + _("\nAuthor:") + " " + sheet.author + _("\nEmail:") + " " + sheet.email + _("\nRepository:") + " " + sheet.repository);
+		this._tooltip = new Tooltips.Tooltip(this.actor, sheet.name + " (" + _("version") + " " + sheet.version + ")\n" + sheet.description + "\n" + _("Author:") + " " + sheet.author + "\n" + _("Email:") + " " + sheet.email + "\n" + _("Repository:") + " " + sheet.repository);
 
 		this.actor.style = "padding-right: 45px;";
 	}
