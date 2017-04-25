@@ -284,7 +284,7 @@ Netctl.prototype = {
     _add_auto_wl_menu_item: function () {
         // adds the menu item for switching to wireless auto profile
 
-        let menuItem = new PopupMenu.PopupMenuItem(_("  Switch to auto"));
+        let menuItem = new PopupMenu.PopupMenuItem("  " + _("Switch to auto"));
         this.menu.addMenuItem(menuItem);
         menuItem.connect('activate', Lang.bind(this, function () {
             this._auto_wl_connect();
@@ -313,7 +313,7 @@ Netctl.prototype = {
     _add_wifi_menu_menu_item: function () {
     // adds menu item for wifi-menu
 
-        let menuItem = new PopupMenu.PopupMenuItem(_("  Add new networks (run wifi-menu)"));
+        let menuItem = new PopupMenu.PopupMenuItem("  " + _("Add new networks (run wifi-menu)"));
         this.menu.addMenuItem(menuItem);
         menuItem.connect('activate', Lang.bind(this, function () {
 	    var msg = _("Wifi-menu needs admin privileges. Please enter your password")
