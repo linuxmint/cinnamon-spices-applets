@@ -24,4 +24,4 @@ msgstr "Натиснете тук, за да управлявате програ
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "Автоматично стартиращи програми"
