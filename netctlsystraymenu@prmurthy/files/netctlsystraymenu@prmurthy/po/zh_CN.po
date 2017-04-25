@@ -85,7 +85,7 @@ msgid "Netctl: Connected to"
 msgstr "Netctl：已连接到"
 
 #: applet.js:287
-msgid "  Switch to auto"
+msgid "Switch to auto"
 msgstr "切换到自动"
 
 #: applet.js:300
@@ -97,7 +97,7 @@ msgid "Netctl: Switched to wireless auto profile"
 msgstr "Netctl：切换到无线自动配置文件"
 
 #: applet.js:316
-msgid "  Add new networks (run wifi-menu)"
+msgid "Add new networks (run wifi-menu)"
 msgstr "添加新网络（运行wifi-menu）"
 
 #: applet.js:319
