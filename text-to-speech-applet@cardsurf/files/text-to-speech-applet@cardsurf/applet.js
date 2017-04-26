@@ -7,12 +7,12 @@ const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 const Gettext = imports.gettext;
-const UUID = "text-to-speech-applet@cardsurf";
+const uuid = "text-to-speech-applet@cardsurf";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+  return Gettext.dgettext(uuid, str);
 }
 
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
