@@ -8,20 +8,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 10:45+0800\n"
+"POT-Creation-Date: 2017-04-26 17:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
-#: applet.js:51
+#: applet.js:56
 msgid "Your percieved location."
 msgstr ""
 
-#: applet.js:98
+#: applet.js:104
+msgid "Your IPInfoDB account has been suspended."
+msgstr ""
+
+#: applet.js:104 applet.js:107
+msgid "Please set a valid API key in the applets settings."
+msgstr ""
+
+#: applet.js:107
+msgid "Invalid API key."
+msgstr ""
+
+#: applet.js:119
 msgid "Something went Wrong!"
 msgstr ""
 
@@ -31,4 +43,17 @@ msgstr ""
 
 #. location-detection@heimdall->metadata.json->name
 msgid "Location Detection + Flags"
+msgstr ""
+
+#. location-detection@heimdall->settings-schema.json->register-
+#. ipinfodb->description
+msgid "Register on IPInfoDB to get an API key"
+msgstr ""
+
+#. location-detection@heimdall->settings-schema.json->api-key->description
+msgid "API key from IPInfoDB"
+msgstr ""
+
+#. location-detection@heimdall->settings-schema.json->api-key->tooltip
+msgid "Get your API key from IPInfoDB and place it here."
 msgstr ""
