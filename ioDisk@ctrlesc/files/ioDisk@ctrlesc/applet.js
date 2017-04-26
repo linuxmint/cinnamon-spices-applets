@@ -8,6 +8,16 @@ const St = imports.gi.St;
 const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
+const Gettext = imports.gettext;
+const UUID = "ioDisk@ctrlesc";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 var hasDataSource=false;
 
@@ -82,11 +92,11 @@ ioDisk.prototype =
                 hasDataSource = this._hasCommand("which iostat", ".*/iostat");
                 if(hasDataSource == true)
                 {
-                    this.set_applet_tooltip("Disk Utilization");
+                    this.set_applet_tooltip(_("Disk Utilization"));
                 }
                 else
                 {
-                    this.set_applet_tooltip("Command [iostat] not found.");
+                    this.set_applet_tooltip(_("Command [iostat] not found."));
                     this._noDataSource();
                 }
             }           
@@ -136,7 +146,7 @@ ioDisk.prototype =
         }
         else
         {
-            this.menu.addMenuItem(new PopupMenu.PopupMenuItem("No drives detected.", {reactive:false}));
+            this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No drives detected."), {reactive:false}));
         }
         this._getioDiskEntry();
     },
@@ -222,7 +232,7 @@ ioDisk.prototype =
     {
         this._setLabel(-1);
         this.menu.removeAll();
-        this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Error executing iostat."), {reactive:false});
+        this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Error executing iostat.")), {reactive:false});
     },
     _hasCommand: function(test, match)
     {
