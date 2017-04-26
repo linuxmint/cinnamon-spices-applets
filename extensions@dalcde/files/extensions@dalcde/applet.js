@@ -2,9 +2,17 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const ExtensionSystem = imports.ui.extensionSystem;
 const Lang = imports.lang;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const uuid = "extensions@dalcde";
 
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+// l10n/translation support
+
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 const ExtensionState = ExtensionSystem.ExtensionState;
 
