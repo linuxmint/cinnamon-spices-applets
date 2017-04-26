@@ -238,7 +238,31 @@ msgstr "条状"
 msgid "none"
 msgstr "无"
 
-#: applet.js:282
+#: config.py:245
+msgid "cpu"
+msgstr "cpu"
+
+#: config.py:245
+msgid "swap"
+msgstr "交换分区"
+
+#: config.py:245
+msgid "net"
+msgstr "网络"
+
+#: config.py:245
+msgid "disk"
+msgstr "磁盘"
+
+#: config.py:245
+msgid "thermal"
+msgstr "温度"
+
+#: config.py:245
+msgid "freq"
+msgstr "频率"
+
+#: config.py:245 applet.js:282 
 msgid "memory"
 msgstr "内存"
 
