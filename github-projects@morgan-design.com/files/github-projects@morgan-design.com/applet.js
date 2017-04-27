@@ -4,8 +4,8 @@ imports.searchPath.push( imports.ui.appletManager.appletMeta["github-projects@mo
 /** Imports START **/
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+//const _ = Gettext.gettext;
 const Cinnamon = imports.gi.Cinnamon;
 
 const Applet = imports.ui.applet;
@@ -21,6 +21,16 @@ const Settings = imports.ui.settings;
 const Notify = imports.gi.Notify;
 
 const CinnamonVersion=imports.misc.config.PACKAGE_VERSION;
+
+const UUID = "github-projects@morgan-design.com";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /** Imports END **/
 
@@ -153,7 +163,7 @@ MyApplet.prototype = {
 
 	    // Add Settings menu item if not running cinnamon 2.0+
 	    if(parseInt(CinnamonVersion) == 1) {
-			let settingsMenu = new PopupMenu.PopupImageMenuItem("Settings", "preferences-system-symbolic");
+			let settingsMenu = new PopupMenu.PopupImageMenuItem(_("Settings"), "preferences-system-symbolic");
 			settingsMenu.connect('activate', Lang.bind(this, function(){
 				this._openSettingsConfiguration();
 			}));
@@ -268,7 +278,7 @@ MyApplet.prototype = {
 			this._displayNotification(NotificationMessages['SuccessfullyLoaded']);
 			this._shouldDisplayLookupNotification = false;
 		}
-		this.set_applet_tooltip(_("Click here to open GitHub\l\n"+this.gh.lastAttemptDateTime));
+		this.set_applet_tooltip(_("Click here to open GitHub") + "\l\n"+this.gh.lastAttemptDateTime);
 		this._createApplicationMenu(jsonData);
     },
 
@@ -318,7 +328,7 @@ MyApplet.prototype = {
 
 			// Open Repo Item
 			let html_url = repos[i].html_url;
-			let openRepoItem = this._createPopupImageMenuItem(L1Indent + "Open Repo In Browser", "web-browser-symbolic", function() {
+			let openRepoItem = this._createPopupImageMenuItem(L1Indent + _("Open Repo In Browser"), "web-browser-symbolic", function() {
 					this._openUrl(html_url);
 			});
 			gitHubRepoMenuItem.menu.addMenuItem(openRepoItem);
@@ -326,31 +336,31 @@ MyApplet.prototype = {
 			// Project Home Item
 			let homepage = repos[i].homepage;
 			if(homepage != undefined && homepage != ""){
-				let projectHomePageItem = this._createPopupImageMenuItem(L1Indent + "Project Home", "user-home-symbolic", function() {
+				let projectHomePageItem = this._createPopupImageMenuItem(L1Indent + _("Project Home"), "user-home-symbolic", function() {
 						this._openUrl(homepage);
 				});
 				gitHubRepoMenuItem.menu.addMenuItem(projectHomePageItem);
 			}
 
 			// Details
-			let gitHubRepoDetailsItem = new PopupMenu.PopupSubMenuMenuItem(_(L1Indent + "Details"), "dialog-information-symbolic");
+			let gitHubRepoDetailsItem = new PopupMenu.PopupSubMenuMenuItem(_(L1Indent + _("Details")), "dialog-information-symbolic");
 
 			// Details : Watchers
-			let openWatchers = this._createPopupImageMenuItem(_(L2Indent + "Watchers: " + repos[i].watchers_count), "avatar-default-symbolic", function() {
+			let openWatchers = this._createPopupImageMenuItem(L2Indent + _("Watchers") + ": " + repos[i].watchers_count, "avatar-default-symbolic", function() {
 					this._openUrl("https://github.com/"+this.gh.username+"/"+name+"/watchers");
 			}, { reactive: true });
 			gitHubRepoDetailsItem.menu.addMenuItem(openWatchers);
 
 			// Details : Open Issues
 			let issuesIcon = open_issues_count == '0' ? "dialog-information" : "dialog-warning-symbolic";
-			let openIssuesCountItem = this._createPopupImageMenuItem(_(L2Indent + 'Open Issues: ' + open_issues_count), issuesIcon, function() {
+			let openIssuesCountItem = this._createPopupImageMenuItem(L2Indent + _("Open Issues") + ": " + open_issues_count, issuesIcon, function() {
 					this._openUrl("https://github.com/"+this.gh.username+"/"+name+"/issues");
 			}, { reactive: true });
 			gitHubRepoDetailsItem.menu.addMenuItem(openIssuesCountItem);
 
 			// Details : Forks
 			let forks = repos[i].forks;
-			let forksItem = this._createPopupImageMenuItem(_(L2Indent + 'Forks: ' + forks), "preferences-system-network-proxy-symbolic", function() {
+			let forksItem = this._createPopupImageMenuItem(L2Indent + _("Forks") + ": " + forks, "preferences-system-network-proxy-symbolic", function() {
 					this._openUrl("https://github.com/"+this.gh.username+"/"+name+"/network");
 			}, { reactive: true });
 			gitHubRepoDetailsItem.menu.addMenuItem(forksItem);
@@ -380,7 +390,7 @@ MyApplet.prototype = {
     },
 
     _addOpenGitHubMenuItem: function(){
-		var githubHomeMenu = this._createPopupImageMenuItem(_('Open GitHub Home'), "", function() {
+		var githubHomeMenu = this._createPopupImageMenuItem(_("Open GitHub Home"), "", function() {
 				this._openUrl("https://github.com/"+this.gh.username);
 		}, { reactive: true });
 
@@ -388,7 +398,7 @@ MyApplet.prototype = {
     },
 
     _addOpenGistMenuItem: function(){
-		var gistMenu = this._createPopupImageMenuItem(_('Create A Gist'), "", function() {
+		var gistMenu = this._createPopupImageMenuItem(_("Create A Gist"), "", function() {
 				this._openUrl("https://gist.github.com/");
 		}, { reactive: true });
 
