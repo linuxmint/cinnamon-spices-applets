@@ -45,3 +45,12 @@ msgstr ""
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
 msgstr ""
+
+#. places-with-terminal@mtwebster->settings-schema.json->show-
+#. terminal->description
+msgid "Add terminal button to menu items"
+msgstr ""
+
+#. places-with-terminal@mtwebster->settings-schema.json->icon->description
+msgid "icon"
+msgstr ""
