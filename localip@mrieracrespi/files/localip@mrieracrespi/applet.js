@@ -2,11 +2,17 @@ const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const UUID = "localip@mrieracrespi";
-
 const REFRESH_INTERVAL = 60
 
+// l10n/translation support
+// ----------
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // Logging
 // ----------
