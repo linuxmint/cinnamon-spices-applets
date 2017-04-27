@@ -1,7 +1,16 @@
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const UUID = "ThemeRefresh@JosephM";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
