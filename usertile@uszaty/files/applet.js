@@ -13,7 +13,16 @@ const ScreenSaver = imports.misc.screenSaver;
 const Main = imports.ui.main;
 const Panel = imports.ui.panel;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+const UUID = "usertile@uszaty";
 
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
@@ -111,7 +120,7 @@ MyApplet.prototype = {
             this._powerMenu = new PopupMenu.PopupSubMenuMenuItem(_("Power..."), true);
             this.menu.addMenuItem(this._powerMenu);
 
-            let menuItem1 = new PopupMenu.PopupMenuItem("Lock Screen");
+            let menuItem1 = new PopupMenu.PopupMenuItem(_("Lock Screen"));
             menuItem1.connect('activate', Lang.bind(this, function() {
                 let screensaver_settings = new Gio.Settings({ schema: "org.cinnamon.desktop.screensaver" });
                 let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");    
@@ -131,7 +140,7 @@ MyApplet.prototype = {
 
                 if (GLib.getenv("XDG_SEAT_PATH")) {
                 // LightDM
-            let menuItem2 = new PopupMenu.PopupMenuItem("Switch User");
+            let menuItem2 = new PopupMenu.PopupMenuItem(_("Switch User"));
             menuItem2.connect('activate', Lang.bind(this, function() {
                     Util.spawnCommandLine("cinnamon-screensaver-command --lock");
                     Util.spawnCommandLine("dm-tool switch-to-greeter");
@@ -140,7 +149,7 @@ MyApplet.prototype = {
             }
             else if (GLib.file_test("/usr/bin/mdmflexiserver", GLib.FileTest.EXISTS)) {
                 // MDM
-            let menuItem2 = new PopupMenu.PopupMenuItem("Switch User");
+            let menuItem2 = new PopupMenu.PopupMenuItem(_("Switch User"));
             menuItem2.connect('activate', Lang.bind(this, function() {
                   Util.spawnCommandLine("mdmflexiserver");
             }));
@@ -148,20 +157,20 @@ MyApplet.prototype = {
             }
             else if (GLib.file_test("/usr/bin/gdmflexiserver", GLib.FileTest.EXISTS)) {
                 // GDM
-            let menuItem2 = new PopupMenu.PopupMenuItem("Switch User");
+            let menuItem2 = new PopupMenu.PopupMenuItem(_("Switch User"));
             menuItem2.connect('activate', Lang.bind(this, function() {
                     Util.spawnCommandLine("cinnamon-screensaver-command --lock");
                     Util.spawnCommandLine("gdmflexiserver");
             }));
             }
 
-            let menuItem3 = new PopupMenu.PopupMenuItem("Log Out...");
+            let menuItem3 = new PopupMenu.PopupMenuItem(_("Log Out..."));
             menuItem3.connect('activate', Lang.bind(this, function() {
                 this._session.LogoutRemote(0);
             }));
             this._powerMenu.menu.addMenuItem(menuItem3);
 
-            let menuItem4 = new PopupMenu.PopupMenuItem("Power off...");
+            let menuItem4 = new PopupMenu.PopupMenuItem(_("Power off..."));
             menuItem4.connect('activate', Lang.bind(this, function() {
                 this._session.ShutdownRemote();
             }));
