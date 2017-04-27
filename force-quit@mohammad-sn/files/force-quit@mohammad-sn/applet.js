@@ -4,6 +4,16 @@ const Cinnamon = imports.gi.Cinnamon;
 const Main = imports.ui.main;
 const AppletManager = imports.ui.appletManager;
 
+const Gettext = imports.gettext;
+const UUID = "force-quit@mohammad-sn";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height) {
     this._init(metadata, orientation, panel_height);
