@@ -8,7 +8,7 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+//const _ = Gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -26,6 +26,13 @@ const PopupMenuExtension = imports.popupMenuExtension;
 const SettingsFile = AppletDirectory + "/applications.json";
 const AppSys = Cinnamon.AppSystem.get_default();
 
+// l10n/translation support
+
+Gettext.bindtextdomain(appletUUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(appletUUID, str);
+}
 
 function MyApplet(orientation) {
     this._init(orientation);
@@ -38,7 +45,7 @@ MyApplet.prototype = {
 
         try {
             this.set_applet_icon_name("help-about");
-            this.set_applet_tooltip("Custom Applications Menu");
+            this.set_applet_tooltip(_("Custom Applications Menu"));
             
             // watch settings file for changes
             let file = Gio.file_new_for_path(SettingsFile);
