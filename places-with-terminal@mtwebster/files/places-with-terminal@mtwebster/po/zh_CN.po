@@ -45,3 +45,12 @@ msgstr "访问您的位置和书签，或者在该位置启动终端"
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
 msgstr "位置和终端启动器"
+
+#. places-with-terminal@mtwebster->settings-schema.json->show-
+#. terminal->description
+msgid "Add terminal button to menu items"
+msgstr "添加终端按钮到菜单项目"
+
+#. places-with-terminal@mtwebster->settings-schema.json->icon->description
+msgid "icon"
+msgstr "图标"
