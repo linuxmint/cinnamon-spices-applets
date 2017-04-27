@@ -231,7 +231,31 @@ msgstr ""
 msgid "none"
 msgstr ""
 
-#: applet.js:282
+#: config.py:245
+msgid "cpu"
+msgstr ""
+
+#: config.py:245
+msgid "swap"
+msgstr ""
+
+#: config.py:245
+msgid "net"
+msgstr ""
+
+#: config.py:245
+msgid "disk"
+msgstr ""
+
+#: config.py:245
+msgid "thermal"
+msgstr ""
+
+#: config.py:245
+msgid "freq"
+msgstr ""
+
+#: config.py:245 applet.js:282 
 msgid "memory"
 msgstr ""
 
