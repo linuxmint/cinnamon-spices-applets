@@ -9,7 +9,15 @@ const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const Settings = imports.ui.settings;
 const Logger=imports.log_util;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const UUID = "gmail@lauritsriple";
 
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MailItem() {
     this._init.apply(this, arguments);
@@ -79,7 +87,7 @@ MyApplet.prototype = {
 	});
 
 	//Tooltip and icon on panel
-        this.set_applet_tooltip("No new mail");
+        this.set_applet_tooltip(_("No new mail"));
         this.set_applet_icon_symbolic_name('mail-read-symbolic');
 	this.set_applet_label("?");
 
@@ -132,12 +140,12 @@ MyApplet.prototype = {
 	this.logger.debug("Response:"+response);
 	if (data==null){
 		this.menu.removeAll();
-		this.set_applet_tooltip("Something went wrong");
+		this.set_applet_tooltip(_("Something went wrong"));
 		this.set_applet_label("?");
 		this.set_applet_icon_symbolic_name('mail-read-symbolic');
-		let item = new MailItem("Install python libaries from terminal","How To","guide","You need pip3, 'sudo apt-get install pip3'\nYou need python-feedparser, 'sudo pip3 install feedparser'\nYou need python keyring and python keyring-alt, 'sudo pip3 install keyrings' and 'sudo pip3 install keyrings-alt'");
+		let item = new MailItem(_("Install python libaries from terminal"),_("How To"),_("guide"),_("You need pip3, 'sudo apt-get install pip3'\nYou need python-feedparser, 'sudo pip3 install feedparser'\nYou need python keyring and python keyring-alt, 'sudo pip3 install keyrings' and 'sudo pip3 install keyrings-alt'"));
 		this.menu.addMenuItem(item,0);
-		item = new MailItem("Could not get json from python","ERROR","ERROR","Check internet conneciton\nInstall the needed python libaries\nConfigure password correctly");
+		item = new MailItem(_("Could not get json from python"),_("ERROR"),_("ERROR"),_("Check internet conneciton\nInstall the needed python libaries\nConfigure password correctly"));
 		this.menu.addMenuItem(item,0);
 		return;
 	}
@@ -145,18 +153,18 @@ MyApplet.prototype = {
 	var num=parseInt(data.unreadCount,10);
 	if (num>0){
 		if (num<2){
-        		this.set_applet_tooltip("New mail");
+        		this.set_applet_tooltip(_("New mail"));
 		} else{
-			this.set_applet_tooltip("New mails");
+			this.set_applet_tooltip(_("New mails"));
 		}
 		this.set_applet_label(data.unreadCount);
 		this.set_applet_icon_symbolic_name('mail-unread-symbolic');
 	} else{
 		this.menu.removeAll();
 		this.set_applet_label("0");
-        	this.set_applet_tooltip("No new mail");
+        	this.set_applet_tooltip(_("No new mail"));
 		this.set_applet_icon_symbolic_name('mail-read-symbolic');
-		let item = new MailItem("No new mails","Have a nice day"," ͡° ͜ʖ ͡°","","");
+		let item = new MailItem(_("No new mails"),_("Have a nice day")," ͡° ͜ʖ ͡°","","");
 		this.menu.addMenuItem(item,0);
 		return;
 	}
