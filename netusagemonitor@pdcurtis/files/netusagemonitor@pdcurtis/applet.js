@@ -671,7 +671,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.subMenu1 = new PopupMenu.PopupSubMenuMenuItem(_("Housekeeping and System Sub Menu"));
         this.myMenuSection.addMenuItem(this.subMenu1);
 
-        this.subMenuItem1 = new PopupMenu.PopupMenuItem("Open System Monitor");
+        this.subMenuItem1 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
         this.subMenuItem1.connect('activate', Lang.bind(this, function (event) {
             GLib.spawn_command_line_async('gnome-system-monitor');
         }));
