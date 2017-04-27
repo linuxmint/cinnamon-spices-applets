@@ -106,6 +106,10 @@ msgstr ""
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
+#: applet.js:674
+msgid "Open System Monitor"
+msgstr ""
+
 #: applet.js:680
 msgid "View the Changelog"
 msgstr ""
