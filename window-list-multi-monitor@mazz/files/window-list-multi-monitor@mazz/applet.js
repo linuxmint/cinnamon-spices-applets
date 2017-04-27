@@ -12,6 +12,17 @@ const Tooltips = imports.ui.tooltips;
 const DND = imports.ui.dnd;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "window-list-multi-monitor@mazz";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const PANEL_ICON_SIZE = 24; // this is for the spinner when loading
 const DEFAULT_ICON_SIZE = 16; // too bad this can't be defined in theme (cinnamon-app.create_icon_texture returns a clutter actor, not a themable object -
