@@ -6,6 +6,17 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "MessagingMenuV3@blub";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /* global values */
 let icon_path = "/usr/share/cinnamon/theme/";
@@ -167,9 +178,9 @@ MyApplet.prototype = {
                 let emailItem = new MessengerLauncher(emailApp, this.menu);
                 this.menu.addMenuItem(emailItem);
                 if (availableComposeCommands[p])
-                    this._addCustomCommand(_("	Compose New Message..."), availableComposeCommands[p]);
+                    this._addCustomCommand("	" + _("Compose New Message..."), availableComposeCommands[p]);
                 if (availableContactCommands[p])
-                    this._addCustomCommand(_("	Contacts"), availableContactCommands[p]);
+                    this._addCustomCommand("	" + _("Contacts"), availableContactCommands[p]);
             }
         }
     },
