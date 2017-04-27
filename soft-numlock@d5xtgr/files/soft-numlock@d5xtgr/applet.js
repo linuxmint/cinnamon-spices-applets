@@ -5,6 +5,17 @@ const Keymap = Gdk.Keymap.get_default();
 const Caribou = imports.gi.Caribou;
 const Lang = imports.lang;
 const Meta = imports.ui.appletManager.appletMeta["soft-numlock@d5xtgr"];
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "soft-numlock@d5xtgr";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // This is a simple applet that displays an icon of a lock with the number "1".
 // It is bright and locked when Num Lock is on, but dim and unlocked when it is off.
@@ -28,7 +39,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         //Default to on.  No particular reason, but we'll check shortly.
-        this.set_applet_tooltip("Number Lock on");
+        this.set_applet_tooltip(_("Number Lock on"));
 
         //Search for the icon representing the 'on' state
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
@@ -47,11 +58,11 @@ MyApplet.prototype = {
 
         if (this.numlock_state) {
             this.set_applet_icon_symbolic_name("num-on");
-            this.set_applet_tooltip("Number Lock on");
+            this.set_applet_tooltip(_("Number Lock on"));
         }
         else {
             this.set_applet_icon_symbolic_name("num-off");
-            this.set_applet_tooltip("Number Lock off");
+            this.set_applet_tooltip(_("Number Lock off"));
         }
     },
 
