@@ -107,6 +107,10 @@ msgstr "重置累计数据使用量"
 msgid "Housekeeping and System Sub Menu"
 msgstr "内务处理和系统子菜单"
 
+#: applet.js:674
+msgid "Open System Monitor"
+msgstr "打开系统监视器"
+
 #: applet.js:680
 msgid "View the Changelog"
 msgstr "查看变更日志"
