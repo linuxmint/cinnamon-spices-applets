@@ -13,6 +13,18 @@ const QRLibrary = imports.ui.QRLib;
 
 const QR_Blocksize = 5;
 
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "clipboard-qr@wrouesnel";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 function QR(width, height, parent) {
     this._init(width, height, parent);
 }
@@ -63,7 +75,7 @@ QR.prototype = {
     set_text: function(text) {
         try {
             this._qrdata = QRLibrary.qr_generate(text, {});
-            this.error = 'QR generated.';
+            this.error = _("QR generated.");
             this._resize((this._qrdata.length + 2) * QR_Blocksize);
         }
         catch (e) {
@@ -73,4 +85,3 @@ QR.prototype = {
         }
     }
 };
-
