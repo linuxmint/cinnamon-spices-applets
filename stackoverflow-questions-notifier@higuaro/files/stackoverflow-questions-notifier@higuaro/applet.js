@@ -7,12 +7,18 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 
 // gettext support (although is not used)
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "stackoverflow-questions-notifier@higuaro";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const Applet = imports.ui.applet;
 const Util = imports.misc.util;
-const GLib = imports.gi.GLib;
 
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
@@ -157,12 +163,12 @@ MyApplet.prototype = {
 
     disableApplet: function() {
         this.set_applet_icon_path(DISABLED_APPLET_ICON);
-        this.set_applet_tooltip(_('Click here to turn \nquestion notifications on'));
+        this.set_applet_tooltip(_("Click here to turn \nquestion notifications on"));
     },
 
     enableApplet: function() {
         this.set_applet_icon_path(APPLET_ICON);
-        this.set_applet_tooltip(_('Click here to turn\nquestion notifications off'));
+        this.set_applet_tooltip(_("Click here to turn\nquestion notifications off"));
     },
 
     on_applet_clicked: function(event) {
@@ -193,7 +199,7 @@ MyApplet.prototype = {
             this._checkForQuestions = false;
             this.set_applet_icon_path(ERROR_APPLET_ICON);
             global.logError(e);
-            this.set_applet_tooltip(_('An error ocurred, click to start checking questions again'));
+            this.set_applet_tooltip(_("An error ocurred, click to start checking questions again"));
             Util.spawnCommandLine('notify-send -t 5 --icon=error "Stackoverflow Notifier Applet - Unexpected Error" "Error details:\n' + e + '"');
         }
     },
@@ -210,8 +216,8 @@ MyApplet.prototype = {
     startCooldownTimer: function(timeout) {
         this._throttleTimeout = timeout;
         
-        this.set_applet_tooltip(_('Max # of API calls reached, service will be back after ' + 
-                                   this._getTimeoutString(this._throttleTimeout)));
+        this.set_applet_tooltip(_("Max # of API calls reached, service will be back after") + " " + 
+                                   this._getTimeoutString(this._throttleTimeout));
 
         let timerCallback = Lang.bind(this, function() {
             this.onCooldownTimer();
