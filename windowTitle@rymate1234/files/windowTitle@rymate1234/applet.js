@@ -1,10 +1,16 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext.domain('cinnamon-applets');
+const Gettext = imports.gettext;
 const Cinnamon = imports.gi.Cinnamon;
 const Meta = imports.gi.Meta;
-const _ = Gettext.gettext;
+const UUID = "windowTitle@rymate1234";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation) {
     this._init(orientation);
