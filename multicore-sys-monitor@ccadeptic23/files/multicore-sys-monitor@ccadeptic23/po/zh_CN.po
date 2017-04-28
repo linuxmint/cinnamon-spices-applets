@@ -154,7 +154,7 @@ msgstr ""
 
 #: DataProviders.js:112
 msgid "------CPU------- \n"
-msgstr ""
+msgstr "------CPU------- \n"
 
 #: DataProviders.js:113
 msgid "cpu: "
