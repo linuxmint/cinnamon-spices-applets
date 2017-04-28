@@ -21,10 +21,16 @@ const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
+const UUID = "betterplaces@dewman12";
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const FileUtils = imports.misc.fileUtils;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const EJECT_DEVICE_LABEL    = _("Eject");
 const EJECT_DEVICE_MESSAGE  = _("Are you sure you want to eject this device ?") + "\n";
@@ -166,7 +172,7 @@ MyApplet.prototype =
 
         try {
 		this.set_applet_icon_symbolic_name('folder');
-                this.set_applet_tooltip("Better Places");
+                this.set_applet_tooltip(_("Better Places"));
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
