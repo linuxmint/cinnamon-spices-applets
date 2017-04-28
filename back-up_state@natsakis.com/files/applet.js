@@ -6,10 +6,14 @@ const Cinnamon = imports.gi.Cinnamon;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
-const Gettext = imports.gettext.domain("cinnamon-applets");
-const _ = Gettext.gettext;
-
+const Gettext = imports.gettext;
 const UUID = "back-up_state@natsakis.com";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function logError(error) {
     global.logError(UUID + '#' + logError.caller.name + ': ' + error);
@@ -54,7 +58,7 @@ MyApplet.prototype = {
     refreshState: function refreshLocation() {
           if (this._findDate() == 'Has never run successfully!') {
             this.set_applet_icon_name("dialog-error-symbolic");
-            this.set_applet_tooltip('Has never run succesfully!');
+            this.set_applet_tooltip(_("Has never run succesfully!"));
           }
           else {
             shortDate = new Date(this._findDate());
@@ -70,7 +74,7 @@ MyApplet.prototype = {
             else {
               this.set_applet_icon_name("object-select-symbolic");
             }
-            this.set_applet_tooltip("Last successful back-up completed on " + this._findDate());
+            this.set_applet_tooltip(_("Last successful back-up completed on") + " " + this._findDate());
           }
 
             Mainloop.timeout_add_seconds(this._opt_refreshInt*60, Lang.bind(this, function refreshTimeout() {
@@ -93,7 +97,7 @@ MyApplet.prototype = {
           index = this._searchStringInArray(this._opt_idString,lines);
           
           if (index == null) {
-            return 'Has never run successfully!';
+            return _("Has never run successfully!");
           }
           else {
             return String(lines[index]).substring(0,19);
