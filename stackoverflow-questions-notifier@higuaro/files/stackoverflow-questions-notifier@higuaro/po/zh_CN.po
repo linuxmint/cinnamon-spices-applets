@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 21:07+0800\n"
+"PO-Revision-Date: 2017-04-28 21:11+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:166
+msgid ""
+"Click here to turn \n"
+"question notifications on"
+msgstr ""
+"点击这里打开\n"
+"问题通知"
+
+#: applet.js:171
+msgid ""
+"Click here to turn\n"
+"question notifications off"
+msgstr ""
+"点击这里关闭\n"
+"问题通知"
+
+#: applet.js:202
+msgid "An error ocurred, click to start checking questions again"
+msgstr "发生错误，点击重新开始检查问题"
+
+#: applet.js:219
+msgid "Max # of API calls reached, service will be back after"
+msgstr "达到API的最大 # 调用次数，服务将会再返回在之后"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->description
+msgid ""
+"Checks stackoverflow site to see if new questions have been posted under a "
+"particular tag and generates a notification"
+msgstr ""
+"检查stackoverflow网站查看在特定的标签下是否有发布的新问题并生成通知"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->name
+msgid "Stackoverflow Questions Notifier"
+msgstr "Stackoverflow问题通知"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "访问Cinnamon小程序主页"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->tooltip
+msgid "Open cinnamon.com - rate the applet"
+msgstr "打开cinnamon.com - 为应用程序打分"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->description
+msgid "Tags of interest for new questions (max 10 tags): "
+msgstr "新问题的兴趣标签（最多10个标签）："
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->tooltip
+msgid ""
+"Comma-separated list of tags for new questions that you are interested in "
+"(tags beyond the 10th are ignored)"
+msgstr "以逗号分隔您感兴趣的新问题的标签列表（第10个之后的标签将会被忽略）"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->general->description
+msgid "General Settings"
+msgstr "常规设置"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->description
+msgid "Query interval (minutes): "
+msgstr "查询间隔（分钟）："
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->tooltip
+msgid "Change the amount of time between every check for new questions"
+msgstr "更改每次检查新问题之间的时间数"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->description
+msgid "Visit Developer Page"
+msgstr "访问开发者页面"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->tooltip
+msgid "Open geekofficedog.blogspot.com"
+msgstr "打开geekofficedog.blogspot.com"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->description
+msgid "Visit Stackoverflow"
+msgstr "访问Stackoverflow"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->tooltip
+msgid "Open stackoverflow.com"
+msgstr "打开stackoverflow.com"
