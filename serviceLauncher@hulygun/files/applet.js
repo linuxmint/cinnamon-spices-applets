@@ -5,6 +5,16 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const AppletDir = imports.ui.appletManager.appletMeta['serviceLauncher@hulygun'].path;
 const Settings = imports.ui.settings;
+const Gettext = imports.gettext;
+const UUID = "serviceLauncher@hulygun";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function ServiceCommand(service, command) {
     var com = 'sudo systemctl ' + command + ' ' + service + '.service';
@@ -23,7 +33,7 @@ MyApplet.prototype = {
         this.orientation = orientation;
         Applet.IconApplet.prototype._init.call(this, orientation);
         this.set_applet_icon_path(AppletDir + "/" + "web-programming.png");
-        this.set_applet_tooltip("Service launcher");
+        this.set_applet_tooltip(_("Service launcher"));
         this.refresh();
 
     },
