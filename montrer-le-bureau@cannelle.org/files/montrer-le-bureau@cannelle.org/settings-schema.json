@@ -271,15 +271,15 @@
     "use-screen-shot": {
         "type": "checkbox",
         "default": false,
-        "description": "Allow taking screenshots",
-        "tooltip": "Adding ability to take desktop screenshots with mouse middle button"
+        "description": "Allow middle click action",
+        "tooltip": "Adding ability to take some action with mouse middle button"
 },
     "ss-tool": {
         "type": "filechooser",
         "dependency": "use-screen-shot",
-        "description": "Screenshot tool:",
+        "description": "Middle button tool:",
         "default": "/usr/bin/gnome-screenshot",
-        "tooltip": "Select the full path to screenshot tool. If you want to pass some arguments, you might create simple shell script, then select it here."
+        "tooltip": "Select the full path to middle button tool. If you want to pass some arguments, you might create simple shell script, then select it here."
     }
 }
 
