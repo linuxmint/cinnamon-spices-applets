@@ -91,7 +91,8 @@ MyApplet.prototype = {
     },
 
     doupdate: function() {
-        let dev_ok = Gio.file_new_for_path("/dev/usb/lp" + this.lpPort.toString()).query_exists(null) || 
+        let dev_ok =  Gio.file_new_for_path("/dev/lp" + this.lpPort.toString()).query_exists(null) ||
+            Gio.file_new_for_path("/dev/usb/lp" + this.lpPort.toString()).query_exists(null) || 
             Gio.file_new_for_path("/dev/usblp" + this.lpPort.toString()).query_exists(null);
         if (dev_ok) {
             try {
