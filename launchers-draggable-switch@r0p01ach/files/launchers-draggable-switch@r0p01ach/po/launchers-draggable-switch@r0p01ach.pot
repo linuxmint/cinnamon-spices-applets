@@ -23,7 +23,7 @@ msgid "Schema \"%s\" not found."
 msgstr ""
 
 #: applet.js:54
-msgid "Moving launchers by dragging is now "
+msgid "Moving launchers by dragging is now"
 msgstr ""
 
 #: applet.js:54
