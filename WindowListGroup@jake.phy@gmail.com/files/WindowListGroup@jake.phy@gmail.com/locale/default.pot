@@ -97,6 +97,14 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->description
+msgid "Window List with App Grouping an Window Thumbnails"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->name
+msgid "Window List With App Grouping"
+msgstr ""
+
 #. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
 #. size->description
 msgid "Thumbnail Size:"

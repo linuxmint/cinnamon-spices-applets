@@ -98,6 +98,14 @@ msgstr "取消最大化"
 msgid "Restore"
 msgstr "还原"
 
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->description
+msgid "Window List with App Grouping an Window Thumbnails"
+msgstr "带应用程序分组窗口缩略图的窗口列表"
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->name
+msgid "Window List With App Grouping"
+msgstr "带应用程序分组的窗口列表"
+
 #. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
 #. size->description
 msgid "Thumbnail Size:"
