@@ -4,8 +4,15 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "launchers-draggable-switch@r0p01ach";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const Meta = imports.ui.appletManager.appletMeta["launchers-draggable-switch@r0p01ach"];
 
 function get_schema(schema) {
@@ -44,7 +51,7 @@ MyApplet.prototype = {
     },
 
     _reflect_state: function(lnchrsdrgbl) {
-        this.set_applet_tooltip(_("Moving launchers by dragging is now " + (lnchrsdrgbl ? "ON" : "OFF")));
+        this.set_applet_tooltip(_("Moving launchers by dragging is now") + " " + (lnchrsdrgbl ? _("ON") : _("OFF")));
         this.binIco.child = lnchrsdrgbl ? this.ico_on : this.ico_off;
     },
 
