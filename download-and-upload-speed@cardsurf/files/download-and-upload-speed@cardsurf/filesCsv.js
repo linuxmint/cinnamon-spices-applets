@@ -8,7 +8,7 @@ const Files = AppletDirectory.files;
 
 
 function BytesRowCsv(date, bytes_received, bytes_sent) {
-	this._init(date, bytes_received, bytes_sent);
+    this._init(date, bytes_received, bytes_sent);
 };
 
 BytesRowCsv.prototype = {
@@ -34,24 +34,24 @@ BytesFileCsv.BytesReceivedColumnIndex = 1;
 BytesFileCsv.BytesSentColumnIndex = 2;
 
 function BytesFileCsv(path) {
-	this._init(path);
+    this._init(path);
 };
 
 BytesFileCsv.prototype = {
 
     _init: function(path) {
-		this.path = path;
+        this.path = path;
         this.csv_separator = ",";
         this.file = new Files.File(this.path);
     },
-    
+
     to_byte_rows: function(array_strings) {
         let rows = [];
         let row;
-		for (let i = 0; i < array_strings.length; ++i) {
-			row = this.to_byte_row(array_strings[i]);
+        for (let i = 0; i < array_strings.length; ++i) {
+            row = this.to_byte_row(array_strings[i]);
             rows.push(row);
-		}
+        }
         return rows;
     },
 
@@ -67,10 +67,10 @@ BytesFileCsv.prototype = {
     to_csv_strings: function(array_byte_rows) {
         let strings = [];
         let string;
-		for (let i = 0; i < array_byte_rows.length; ++i) {
-			string = this.to_csv_string(array_byte_rows[i]);
+        for (let i = 0; i < array_byte_rows.length; ++i) {
+            string = this.to_csv_string(array_byte_rows[i]);
             strings.push(string);
-		}
+        }
         return strings;
     },
 
@@ -112,11 +112,11 @@ BytesFileCsv.prototype = {
     },
 
     exists: function() {
-		return this.file.exists();
+        return this.file.exists();
     },
 
     create: function() {
-		return this.file.create();
+        return this.file.create();
     }
 
 };
