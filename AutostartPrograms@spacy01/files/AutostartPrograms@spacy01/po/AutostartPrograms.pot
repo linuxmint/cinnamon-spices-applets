@@ -18,7 +18,7 @@ msgstr ""
 "Language: \n"
 
 #. AutostartPrograms@spacy01->metadata.json->description
-#: applet.js:19
+#: applet.js:25
 msgid "Click here to add or remove programs to start with the session."
 msgstr ""
 
