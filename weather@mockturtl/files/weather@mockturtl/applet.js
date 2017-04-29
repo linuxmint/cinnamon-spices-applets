@@ -409,9 +409,15 @@ MyApplet.prototype = {
         // Polling for likely API throttling
         Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
           this.refreshWeather(false)
-        }))  
+        }))
       }
+
       let weather = json.query.results.channel
+
+      if (!weather.item) {
+        return false
+      }
+
       let weather_c = weather.item.condition
       let forecast = weather.item.forecast
 
