@@ -529,6 +529,7 @@ AppThumbnailHoverMenu.prototype = {
   _init: function (parent) {
     this.appGroup = parent
     this._applet = parent._applet
+    //this.orientation = parent._applet.orientation
     if (parent._applet.c32) {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5)
     } else {
@@ -557,7 +558,7 @@ AppThumbnailHoverMenu.prototype = {
     this.actor.hide()
     this.parentActor = parent.actor
 
-    Main.layoutManager.addChrome(this.actor, this.orientation)
+    Main.layoutManager.addChrome(this.actor, {})
 
     this.appSwitcherItem = new PopupMenuAppSwitcherItem(this)
     this.addMenuItem(this.appSwitcherItem)
@@ -978,16 +979,19 @@ WindowThumbnail.prototype = {
     })
 
     this.bin = new St.BoxLayout({
+      y_expand: false,
       style_class: 'thumbnail-label-bin'
     })
 
-    this.icon = this.app.create_icon_texture(32)
+    this.icon = this.app.create_icon_texture(16)
     this.themeIcon = new St.BoxLayout({
+      //y_align: St.Align.START,
       style_class: 'thumbnail-icon'
     })
     this.themeIcon.add_actor(this.icon)
     this._container.add_actor(this.themeIcon)
     this._label = new St.Label({
+      //y_align: St.Align.START,
       style_class: 'thumbnail-label'
     })
     this._container.add_actor(this._label)
@@ -1051,7 +1055,7 @@ WindowThumbnail.prototype = {
       this._focusWindowChange();
       this.button.hide()
       if (this.wasMinimized) {
-        this.metaWindow.minimize(global.get_current_time())
+        this.metaWindow.minimize()
       }
     }
   },

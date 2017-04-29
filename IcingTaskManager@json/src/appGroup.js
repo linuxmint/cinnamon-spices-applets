@@ -57,6 +57,7 @@ AppGroup.prototype = {
     this.metaWindows = this._applet.groupApps ? [] : [window]
     this.timeStamp = timeStamp
     this.ungroupedIndex = ungroupedIndex
+    this.lastFocused = null;
 
     this.actor = new St.Bin({
       reactive: true,
