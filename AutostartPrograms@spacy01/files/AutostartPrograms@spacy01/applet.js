@@ -1,8 +1,14 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "AutostartPrograms@spacy01";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation) {
     this._init(orientation);
