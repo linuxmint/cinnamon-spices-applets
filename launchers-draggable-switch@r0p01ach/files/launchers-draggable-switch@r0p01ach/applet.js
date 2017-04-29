@@ -51,7 +51,7 @@ MyApplet.prototype = {
     },
 
     _reflect_state: function(lnchrsdrgbl) {
-        this.set_applet_tooltip(_("Moving launchers by dragging is now ") + (lnchrsdrgbl ? _("ON") : _("OFF")));
+        this.set_applet_tooltip(_("Moving launchers by dragging is now") + " " + (lnchrsdrgbl ? _("ON") : _("OFF")));
         this.binIco.child = lnchrsdrgbl ? this.ico_on : this.ico_off;
     },
 
