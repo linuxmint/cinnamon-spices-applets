@@ -279,7 +279,7 @@
         "dependency": "use-screen-shot",
         "description": "Middle button tool:",
         "default": "/usr/bin/gnome-screenshot",
-        "tooltip": "Select the full path to middle button tool. If you want to pass some arguments, you might create simple shell script, then select it here."
+        "tooltip": "Select the full path to middle button tool. If you want to pass some arguments, you might create a simple shell script, then select it here."
     }
 }
 
