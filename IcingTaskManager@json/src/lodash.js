@@ -1495,9 +1495,9 @@ var runInContext = (function runInContext(context) {
       objectCreate = Object.create,
       propertyIsEnumerable = objectProto.propertyIsEnumerable,
       splice = arrayProto.splice,
-      spreadableSymbol = Symbol ? Symbol.isConcatSpreadable : undefined,
+      spreadableSymbol = Symbol && Symbol.isConcatSpreadable ? Symbol.isConcatSpreadable : undefined,
       symIterator = Symbol ? Symbol.iterator : undefined,
-      symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+      symToStringTag = Symbol && Symbol.toStringTag ? Symbol.toStringTag : undefined;
 
   var defineProperty = (function() {
     try {
@@ -1509,9 +1509,9 @@ var runInContext = (function runInContext(context) {
   }());
 
   /** Mocked built-ins. */
-  var ctxClearTimeout = context.clearTimeout !== root.clearTimeout && context.clearTimeout,
+  var ctxClearTimeout = context.clearTimeout && context.clearTimeout !== root.clearTimeout,
       ctxNow = Date && Date.now !== root.Date.now && Date.now,
-      ctxSetTimeout = context.setTimeout !== root.setTimeout && context.setTimeout;
+      ctxSetTimeout = context.setTimeout && context.setTimeout !== root.setTimeout;
 
   /* Built-in method references for those with the same name as other `lodash` methods. */
   var nativeCeil = Math.ceil,
