@@ -6,23 +6,22 @@ var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('package', ()=> {
-  return gulp.src('./files/**/**/*')
+  return gulp.src('./files/IcingTaskManager@json/3.4/**/**/*')
     .pipe(zip('ITM-dist-' + Date.now() + '.zip'))
     .pipe(gulp.dest('./builds'));
 });
 
 gulp.task('copy', ()=> {
-  del.sync(['./files/**/**/*']);
+  del.sync(['./files/IcingTaskManager@json/3.4/**/**/*']);
   return gulp.src('./src/**/**/*')
-    .pipe(gulp.dest('./files/'));
+    .pipe(gulp.dest('./files/IcingTaskManager@json/3.4/'));
 });
 
 gulp.task('transpile', ['copy'], () =>
   gulp.src('./src/*.js')
     .pipe(babel({
       presets: [
-        'es2015',
-        'mozjs24'
+        'es2015'
       ],
       plugins: [
         [
@@ -45,11 +44,11 @@ gulp.task('transpile', ['copy'], () =>
         './src/lodash.js'
       ]
     }))
-    .pipe(gulp.dest('files'))
+    .pipe(gulp.dest('./files/IcingTaskManager@json/3.4'))
 );
 
 gulp.task('install', ['transpile'], (cb)=>{
-  exec('cp -avrf ./files/ ~/.local/share/cinnamon/applets/IcingTaskManager@json && ./locale.sh', function (err, stdout, stderr) {
+  exec('cp -vrf ./files/IcingTaskManager@json/3.4/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && ./locale.sh', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
