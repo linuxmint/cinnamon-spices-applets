@@ -17,7 +17,7 @@
     "type": "entry",
     "default": "VLC_Capture",
     "description": "Output file name:",
-    "tooltip": "Just a name. The time and extension will be add automatically."
+    "tooltip": "Just a name. The time and extension will be added automatically."
 },
   "audio-settings-header": { 
     "type": "header",
@@ -150,8 +150,8 @@
   "video-filter-crop" : {
     "type" : "checkbox",
     "default" : false,
-    "description": "Check this to select a cropping areas:",
-    "tooltip": "Checking this box allows you to set a custom areas from the screen, that will be cropped. The cropped pixels will not be visible."
+    "description": "Check this to select a cropping area:",
+    "tooltip": "Checking this box allows you to set a custom area from the screen, that will be cropped. The cropped pixels will not be visible."
 },
   "crop-left" : {
     "type": "spinbutton",
@@ -162,7 +162,7 @@
     "units" : "pixels",
     "dependency" : "video-filter-crop",
     "description" : "Crop from the left:",
-    "tooltip" : "The value must be lower then your screen width"
+    "tooltip" : "The value must be lower than your screen width"
 },
   "crop-top" : {
     "type": "spinbutton",
@@ -173,7 +173,7 @@
     "units" : "pixels",
     "dependency" : "video-filter-crop",
     "description" : "Crop from the top:",
-    "tooltip" : "The value must be lower then your screen height"
+    "tooltip" : "The value must be lower than your screen height"
 },
   "crop-right" : {
     "type": "spinbutton",
@@ -184,7 +184,7 @@
     "units" : "pixels",
     "dependency" : "video-filter-crop",
     "description" : "Crop from the right:",
-    "tooltip" : "The value must be lower then your screen width"
+    "tooltip" : "The value must be lower than your screen width"
 },
   "crop-bottom" : {
     "type": "spinbutton",
@@ -195,7 +195,7 @@
     "units" : "pixels",
     "dependency" : "video-filter-crop",
     "description" : "Crop from the bottom:",
-    "tooltip" : "The value must be lower then your screen height"
+    "tooltip" : "The value must be lower than your screen height"
  },
     "video-filter-logo": {
         "type": "checkbox",

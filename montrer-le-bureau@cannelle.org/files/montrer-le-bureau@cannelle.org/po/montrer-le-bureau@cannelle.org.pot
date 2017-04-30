@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-30 13:41+0300\n"
+"POT-Creation-Date: 2017-04-30 14:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->crop-top->tooltip
 #. montrer-le-bureau@cannelle.org->settings-schema.json->crop-bottom->tooltip
-msgid "The value must be lower then your screen height"
+msgid "The value must be lower than your screen height"
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->crop-top->units
@@ -150,7 +150,7 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->crop-left->tooltip
 #. montrer-le-bureau@cannelle.org->settings-schema.json->crop-right->tooltip
-msgid "The value must be lower then your screen width"
+msgid "The value must be lower than your screen width"
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->increase-
@@ -204,14 +204,14 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
 #. crop->description
-msgid "Check this to select a cropping areas:"
+msgid "Check this to select a cropping area:"
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
 #. crop->tooltip
 msgid ""
-"Checking this box allows you to set a custom areas from the screen, that "
-"will be cropped. The cropped pixels will not be visible."
+"Checking this box allows you to set a custom area from the screen, that will"
+" be cropped. The cropped pixels will not be visible."
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
@@ -229,7 +229,7 @@ msgid "Output file name:"
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->file-name->tooltip
-msgid "Just a name. The time and extension will be add automatically."
+msgid "Just a name. The time and extension will be added automatically."
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
