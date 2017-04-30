@@ -97,8 +97,8 @@ msgstr ""
 msgid "Menu shortcut key"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->userSection->description
-msgid "User Section"
+#. cinnamon-places-center->settings-schema.json->userSection->title
+msgid "User section"
 msgstr ""
 
 #. cinnamon-places-center->settings-schema.json->showTrash->description
@@ -155,8 +155,8 @@ msgstr ""
 msgid "Recent Documents"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->places->description
-msgid "System Section"
+#. cinnamon-places-center->settings-schema.json->systemSection->title
+msgid "System section"
 msgstr ""
 
 #. cinnamon-places-center->settings-schema.json->showDesktop->description
@@ -166,6 +166,14 @@ msgstr ""
 #. cinnamon-places-center->settings-
 #. schema.json->showRecentDocuments->description
 msgid "Show recent documents"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->userPage->title
+msgid "User"
+msgstr ""
+
+#. cinnamon-places-center->settings-schema.json->iconSize->description
+msgid "Menu icon size"
 msgstr ""
 
 #. cinnamon-places-center->metadata.json->description
@@ -191,3 +199,4 @@ msgstr ""
 #. cinnamon-places-center->metadata.json->name
 msgid "Places Center"
 msgstr ""
+
