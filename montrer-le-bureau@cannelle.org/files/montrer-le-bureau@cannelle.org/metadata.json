@@ -3,5 +3,5 @@
  "name": "Show or record desktop",
  "description": "Minimize all windows or record the desktop",
  "icon": "desktop",
- "version": "1.0"
+ "version": "1.1.1"
 }
