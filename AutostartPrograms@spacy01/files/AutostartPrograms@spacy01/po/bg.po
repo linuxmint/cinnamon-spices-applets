@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #. AutostartPrograms@spacy01->metadata.json->description
-#: applet.js:19
+#: applet.js:25
 msgid "Click here to add or remove programs to start with the session."
 msgstr "Натиснете тук, за да управлявате програмите, стартиращи със сесията."
 

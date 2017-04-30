@@ -1,0 +1,857 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-29 13:17+0800\n"
+"PO-Revision-Date: 2017-04-29 13:20+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:116
+msgid "Loading...."
+msgstr "正在加载 ..."
+
+#: applet.js:117
+msgid "Transformice keyboard configuration switch"
+msgstr "变形金鼠键盘配置切换"
+
+#: applet.js:213 applet.js:371
+msgid "Normal"
+msgstr "正常"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:215 applet.js:372
+msgid "Hard"
+msgstr "困难"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->options
+#: applet.js:217 applet.js:373
+msgid "Divine"
+msgstr "神圣"
+
+#: applet.js:244
+#, c-format
+msgid "Screencast recorder '%s' not found"
+msgstr "屏幕录制工具'%s'未找到"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_SWITCH->description
+#: applet.js:369
+msgid "Switch normal / prefered mode"
+msgstr "切换正常/首选的模式"
+
+#: applet.js:377
+msgid "Stop recording"
+msgstr "停止录制"
+
+#: applet.js:379
+msgid "Start recording"
+msgstr "开始录制"
+
+#: applet.js:486
+msgid "Transformice"
+msgstr "变形金鼠"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_RECORD->description
+msgid "Use screencast"
+msgstr "使用屏幕录制"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->description
+msgid "Crop W: "
+msgstr "裁剪W："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_W->units
+msgid "pixels (Y right)"
+msgstr "像素（Y右侧）"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->description
+msgid "Crop X: "
+msgstr "裁剪X："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_X->units
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->units
+msgid "pixels"
+msgstr "像素"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_Y->description
+msgid "Crop Y: "
+msgstr "裁剪Y："
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Divin->description
+msgid "Divine mode shorcut configuration"
+msgstr "神圣模式快捷键配置"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->description
+msgid "Crop H: "
+msgstr "裁剪H："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_CROP_H->units
+msgid "pixels (X bottom)"
+msgstr "像素（X底部）"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->description
+msgid "Video file name: "
+msgstr "视频文件名称："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FILENAME->tooltip
+msgid ""
+"Default: screencast_%Y-%M-%D_%H:%I:%S\n"
+"%Y = Year\n"
+"%M = Month\n"
+"%D = Day\n"
+"%H = Hour\n"
+"%I = Minutes\n"
+"%S = Seconds\n"
+"%m = Milliseconds"
+msgstr ""
+"默认：screencast_%Y-%M-%D_%H:%I:%S\n"
+"%Y = 年\n"
+"%M = 月\n"
+"%D = 日\n"
+"%H = 小时\n"
+"%I = 分钟\n"
+"%S = 秒\n"
+"%m = 毫秒"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->description
+msgid "Key F5"
+msgstr "F5键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Red nail (b)"
+msgstr "红色钉子(b)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Confetti (e)"
+msgstr "五彩纸屑"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Ball"
+msgstr "炮弹"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little box"
+msgstr "小木箱"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Anvil"
+msgstr "铁砧"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor left (j)"
+msgstr "向左旋转绿色马达(j)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Balloon"
+msgstr "气球"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big board"
+msgstr "长木板"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Do no modify"
+msgstr "不修改"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate left (w)"
+msgstr "向左旋转(w)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rune"
+msgstr "符文"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Arrow"
+msgstr "箭头"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "(un)hidden (spacebar)"
+msgstr "(取消)隐藏(空格键)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Little board"
+msgstr "短木板"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green nail (v)"
+msgstr "绿色钉子(v)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Rotate right (x)"
+msgstr "向右旋转(x)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Yellow nail (c)"
+msgstr "黄色钉子(c)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Big box"
+msgstr "大木箱"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Empty"
+msgstr "空"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F5->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->options
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->options
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->options
+msgid "Green motor right (n)"
+msgstr "向右旋转绿色马达(n)"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_TEXT->description
+msgid "Show text"
+msgstr "显示文本"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD->description
+msgid "Start screencast"
+msgstr "开始屏幕录制"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_options->description
+msgid "Options"
+msgstr "选项"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_ICON->description
+msgid "Show icon"
+msgstr "显示图标"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F1->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F1->description
+msgid "Key F1"
+msgstr "F1键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_hotkey_config->description
+msgid "Modes shorcuts switch"
+msgstr "模式快捷键切换"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->description
+msgid "Screencast folder"
+msgstr "屏幕录制文件夹"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_DIRECTORY->tooltip
+msgid "{VIDEO_DIR} = ~/Videos"
+msgstr "{VIDEO_DIR} = ~/视频"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_MENUPOPUP->description
+msgid "Use icon menu"
+msgstr "使用图标菜单"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_SWITCH->description
+msgid "Default switch mode"
+msgstr "默认切换模式"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->description
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->description
+msgid "Fixed : "
+msgstr "固定："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_WIDTH->units
+msgid "pixels (width)"
+msgstr "像素（宽度）"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F3->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F3->description
+msgid "Key F3"
+msgstr "F3键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F9->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F9->description
+msgid "Key F9"
+msgstr "F9键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F8->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F8->description
+msgid "Key F8"
+msgstr "F8键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F2->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F2->description
+msgid "Key F2"
+msgstr "F2键"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_advanced_config->description
+msgid "Advanced configuration !"
+msgstr "高级配置！"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F4->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F4->description
+msgid "Key F4"
+msgstr "F4键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F7->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F7->description
+msgid "Key F7"
+msgstr "F7键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->H_F6->description
+#. tfmKeyboard@alexpp->settings-schema.json->D_F6->description
+msgid "Key F6"
+msgstr "F6键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F11->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F11->description
+msgid "Key F11"
+msgstr "F11键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F10->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F10->description
+msgid "Key F10"
+msgstr "F10键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->D_F12->description
+#. tfmKeyboard@alexpp->settings-schema.json->H_F12->description
+msgid "Key F12"
+msgstr "F12键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->description
+msgid "Screencast recorder program: "
+msgstr "屏幕录制程序："
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "avconv (recommanded)"
+msgstr "avconv（推荐）"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "VLC"
+msgstr "VLC"
+
+#. tfmKeyboard@alexpp->settings-schema.json->CMD_RECORD_PROGRAM->options
+msgid "ffmpeg"
+msgstr "ffmpeg"
+
+#. tfmKeyboard@alexpp->settings-
+#. schema.json->header_hotkey_game_config_Hard->description
+msgid "Hard mode shortcut configuration"
+msgstr "困难模式快捷键配置"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_FIXED_ZONE->description
+msgid "Use fixed recording area"
+msgstr "使用固定的录制区域"
+
+#. tfmKeyboard@alexpp->settings-schema.json->USE_HOTKEYS->description
+msgid "Use keyboard shorcuts"
+msgstr "使用键盘快捷键"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_NORMAL->description
+msgid "Switch to mode: Normal"
+msgstr "切换到模式：正常"
+
+#. tfmKeyboard@alexpp->settings-schema.json->header_config->description
+msgid "Configuration"
+msgstr "配置"
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->description
+msgid "Timeout back to normal:"
+msgstr "返回正常模式超时时间："
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->tooltip
+msgid ""
+"Zero desactivate countdown\n"
+"Times in seconds"
+msgstr ""
+"0取消倒计时\n"
+"以秒为时间单位"
+
+#. tfmKeyboard@alexpp->settings-schema.json->SWITCH_TIMEOUT->units
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->units
+msgid "seconds"
+msgstr "秒"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIFF->description
+msgid "Switch to mode: Hard"
+msgstr "切换到模式：困难"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_DIVIN->description
+msgid "Switch to mode: Divine"
+msgstr "切换到模式：神圣"
+
+#. tfmKeyboard@alexpp->settings-schema.json->HOTKEY_RECORD_S->description
+msgid "Stop screencast"
+msgstr "停止屏幕录制"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->description
+msgid "Screencast countdown time: "
+msgstr "屏幕录制倒计时："
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_TIMEOUT->tooltip
+msgid "Times in seconds"
+msgstr "以秒为时间单位"
+
+#. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->units
+msgid "pixels (height)"
+msgstr "像素（高度）"
+
+#. tfmKeyboard@alexpp->metadata.json->name
+msgid "Transformice helper"
+msgstr "变形金鼠助手"

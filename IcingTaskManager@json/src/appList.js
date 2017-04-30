@@ -35,6 +35,7 @@ AppList.prototype = {
       settings: [],
       metaWorkspace: []
     }
+    this.orientation = applet.orientation
     this.metaWorkspace = metaWorkspace
     this.actor = new St.BoxLayout()
 

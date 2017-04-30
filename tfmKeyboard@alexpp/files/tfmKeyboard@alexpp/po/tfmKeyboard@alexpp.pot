@@ -1353,3 +1353,7 @@ msgstr ""
 #. tfmKeyboard@alexpp->settings-schema.json->RECORD_FIXED_HEIGHT->units
 msgid "pixels (height)"
 msgstr ""
+
+#. tfmKeyboard@alexpp->metadata.json->name
+msgid "Transformice helper"
+msgstr ""

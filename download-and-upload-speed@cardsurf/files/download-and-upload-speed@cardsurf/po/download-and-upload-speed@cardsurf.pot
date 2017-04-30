@@ -1,4 +1,4 @@
-# SOME DESCRIPTIVE TITLE.
+# Main translation file for download-and-upload-speed@cardsurf.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-11 17:07+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2017-04-29 14:01+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -17,83 +17,83 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:324
+#: applet.js:345
 msgid "Network interface"
 msgstr ""
 
-#: applet.js:345
+#: applet.js:366
 msgid "Total data start"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:352
+#: applet.js:373
 msgid "Launch of applet"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:353
+#: applet.js:374
 msgid "Today"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:354
+#: applet.js:375
 msgid "Yesterday"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:355
+#: applet.js:376
 msgid "3 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:356
+#: applet.js:377
 msgid "5 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:357
+#: applet.js:378
 msgid "7 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:358
+#: applet.js:379
 msgid "10 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:359
+#: applet.js:380
 msgid "14 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:360
+#: applet.js:381
 msgid "30 days ago"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->bytes_start_time->options
-#: applet.js:361
+#: applet.js:382
 msgid "Custom date"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_start->description
-#: applet.js:444
+#: applet.js:465
 msgid "Gui"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_speed_type->options
-#: applet.js:444
+#: applet.js:465
 msgid "Compact"
 msgstr ""
 
@@ -103,138 +103,29 @@ msgstr ""
 msgid "Large"
 msgstr ""
 
-#: appletGui.js:349
+#: appletGui.js:362
 msgid "Total download:"
 msgstr ""
 
-#: appletGui.js:350
+#: appletGui.js:363
 msgid "Total upload:"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->metadata.json->description
-msgid "Shows usage of a network interface"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
 msgid "Download and upload speed"
 msgstr ""
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_text_css->description
-msgid "Text CSS"
+#. download-and-upload-speed@cardsurf->metadata.json->description
+msgid "Shows usage of a network interface"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-schema.json->head->description
+msgid "Settings for download-and-upload-speed@cardsurf"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_text_css->tooltip
-msgid "A CSS style applied to the text in the panel"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->show_hover->description
-msgid "Show total download and upload on hover"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->show_hover->tooltip
-msgid "Show the hover popup with total amount of data downloaded and uploaded"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_numbers_css->description
-msgid "Popup numbers CSS"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_numbers_css->tooltip
-msgid "A CSS style applied to numbers in the hover popup"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->launch_terminal->description
-msgid "List current Internet connections on left mouse click"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->launch_terminal->tooltip
-msgid ""
-"Open a terminal with a list of current connections on a left mouse click. "
-"The next click closes the terminal."
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit->description
-msgid "Data limit"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit->tooltip
-msgid "The maximum amount of data to download and upload. 0 means no limits."
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-schema.json->data_limit->units
-msgid "MB"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->description
-msgid "Start"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->bytes_start_time->tooltip
-msgid "Start time to count total amount of data downloaded and uploaded"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->list_connections_command->description
-msgid "Command "
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->list_connections_command->tooltip
-msgid "A command used to list current Internet connections"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->description
-msgid "Unit"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->tooltip
-msgid "Base data unit shown in the panel"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->options
-msgid "Bits"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->unit_type->options
-msgid "Bytes"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command_enabled->description
-msgid "Invoke command when data limit exceeded"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command_enabled->tooltip
-msgid ""
-"Invoke a command when amount of data downloaded and uploaded exceeded the "
-"limit"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_text_css->description
-msgid "Popup text CSS"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->hover_popup_text_css->tooltip
-msgid "A CSS style applied to the description text in the hover popup"
+#. schema.json->configuration->description
+msgid "Configuration"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
@@ -249,77 +140,59 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->display_mode->options
-msgid "Amount of data transferred"
+msgid "Average speed per second"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->display_mode->options
-msgid "Average speed per second"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-schema.json->head->description
-msgid "Settings for download-and-upload-speed@cardsurf"
+msgid "Amount of data transferred"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_sent_icon_filename->description
-msgid "Upload icon"
+#. schema.json->unit_type->description
+msgid "Unit"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_sent_icon_filename->tooltip
-msgid "An icon displayed next to upload speed in the panel"
+#. schema.json->unit_type->tooltip
+msgid "Base data unit shown in the panel"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command->description
-msgid "Command"
+#. schema.json->unit_type->options
+msgid "Bytes"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->data_limit_command->tooltip
-msgid "A command to invoke"
+#. schema.json->unit_type->options
+msgid "Bits"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->custom_start_date->description
-msgid "Custom date "
+#. schema.json->update_every->description
+msgid "Calculate every"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->custom_start_date->tooltip
-msgid ""
-"A custom date in YYYY-MM-DD format used as start time. The option is used if"
-" \"Custom date\" is selected in \"Start\" combobox."
+#. schema.json->update_every->tooltip
+msgid "How often to calculate download and upload speed"
 msgstr ""
 
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->connections_start->description
-msgid "Connections"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->description
-msgid "Save every"
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->tooltip
-msgid ""
-"How often to save total amount of data downloaded and uploaded to the file. "
-"0 means no saving to the file."
-msgstr ""
-
-#. download-and-upload-speed@cardsurf->settings-
-#. schema.json->write_every->units
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->update_every->units
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->write_every->units
 msgid "seconds"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->configuration->description
-msgid "Configuration"
+#. schema.json->gui_speed_type->description
+msgid "Type"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->gui_speed_type->tooltip
+msgid "Applet Gui"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
@@ -344,7 +217,7 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->decimal_places->options
-msgid "3 "
+msgid "1 "
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
@@ -354,32 +227,125 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->decimal_places->options
-msgid "1 "
+msgid "3 "
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->description
-msgid "Type"
+#. schema.json->gui_text_css->description
+msgid "Text CSS"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_speed_type->tooltip
-msgid "Applet Gui"
+#. schema.json->gui_text_css->tooltip
+msgid "A CSS style applied to the text in the panel"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->update_every->description
-msgid "Calculate every"
+#. schema.json->gui_received_icon_filename->description
+msgid "Download icon"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->update_every->tooltip
-msgid "How often to calculate download and upload speed"
+#. schema.json->gui_received_icon_filename->tooltip
+msgid "An icon displayed next to download speed in the panel"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->gui_sent_icon_filename->description
+msgid "Upload icon"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->gui_sent_icon_filename->tooltip
+msgid "An icon displayed next to upload speed in the panel"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->hover_popup_text_css->description
+msgid "Popup text CSS"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->hover_popup_text_css->tooltip
+msgid "A CSS style applied to the description text in the hover popup"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->hover_popup_numbers_css->description
+msgid "Popup numbers CSS"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->hover_popup_numbers_css->tooltip
+msgid "A CSS style applied to numbers in the hover popup"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->total_data_start->description
+msgid "Total data"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->show_hover->description
+msgid "Show total download and upload on hover"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->show_hover->tooltip
+msgid "Show the hover popup with total amount of data downloaded and uploaded"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->bytes_start_time->description
+msgid "Start"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->bytes_start_time->tooltip
+msgid "Start time to count total amount of data downloaded and uploaded"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->custom_start_date->description
+msgid "Custom date "
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->custom_start_date->tooltip
+msgid ""
+"A custom date in YYYY-MM-DD format used as start time. The option is used if"
+" \"Custom date\" is selected in \"Start\" combobox."
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->write_every->description
+msgid "Save every"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->write_every->tooltip
+msgid ""
+"How often to save total amount of data downloaded and uploaded to the file. "
+"0 means no saving to the file."
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->data_limit_start->description
 msgid "Data limits"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->data_limit->description
+msgid "Data limit"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->data_limit->tooltip
+msgid "The maximum amount of data to download and upload. 0 means no limits."
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-schema.json->data_limit->units
+msgid "MB"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
@@ -394,12 +360,12 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_data_limit_type->options
-msgid "Text"
+msgid "None"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
 #. schema.json->gui_data_limit_type->options
-msgid "None"
+msgid "Text"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
@@ -408,16 +374,50 @@ msgid "Circle"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_received_icon_filename->description
-msgid "Download icon"
+#. schema.json->data_limit_command_enabled->description
+msgid "Invoke command when data limit exceeded"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->gui_received_icon_filename->tooltip
-msgid "An icon displayed next to download speed in the panel"
+#. schema.json->data_limit_command_enabled->tooltip
+msgid ""
+"Invoke a command when amount of data downloaded and uploaded exceeded the "
+"limit"
 msgstr ""
 
 #. download-and-upload-speed@cardsurf->settings-
-#. schema.json->total_data_start->description
-msgid "Total data"
+#. schema.json->data_limit_command->description
+msgid "Command"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->data_limit_command->tooltip
+msgid "A command to invoke"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->connections_start->description
+msgid "Connections"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->launch_terminal->description
+msgid "List current Internet connections on left mouse click"
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->launch_terminal->tooltip
+msgid ""
+"Open a terminal with a list of current connections on a left mouse click. "
+"The next click closes the terminal."
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->list_connections_command->description
+msgid "Command "
+msgstr ""
+
+#. download-and-upload-speed@cardsurf->settings-
+#. schema.json->list_connections_command->tooltip
+msgid "A command used to list current Internet connections"
 msgstr ""

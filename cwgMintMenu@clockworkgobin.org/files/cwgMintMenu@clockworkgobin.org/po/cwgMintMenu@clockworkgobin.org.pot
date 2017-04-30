@@ -1,0 +1,233 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 19:47+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:194
+msgid "Please provide your password to uninstall this application"
+msgstr ""
+
+#: applet.js:267
+msgid "Add to panel"
+msgstr ""
+
+#: applet.js:270
+msgid "Add to desktop"
+msgstr ""
+
+#: applet.js:274
+msgid "Remove from favorites"
+msgstr ""
+
+#: applet.js:277
+msgid "Add to favorites"
+msgstr ""
+
+#: applet.js:281
+msgid "Uninstall"
+msgstr ""
+
+#: applet.js:644
+msgid "Open with"
+msgstr ""
+
+#: applet.js:690
+msgid "Other application..."
+msgstr ""
+
+#: applet.js:757
+msgid "Clear list"
+msgstr ""
+
+#: applet.js:797
+msgid "All Applications"
+msgstr ""
+
+#: applet.js:825
+msgid "Places"
+msgstr ""
+
+#: applet.js:845
+msgid "Recent Files"
+msgstr ""
+
+#: applet.js:1113
+msgid "Menu"
+msgstr ""
+
+#: applet.js:1850
+msgid "No recent documents"
+msgstr ""
+
+#: applet.js:2164
+msgid "Type to search..."
+msgstr ""
+
+#: applet.js:2180
+msgid "System Settings"
+msgstr ""
+
+#: applet.js:2180
+msgid "Control Center"
+msgstr ""
+
+#: applet.js:2190
+msgid "Lock screen"
+msgstr ""
+
+#: applet.js:2190
+msgid "Lock the screen"
+msgstr ""
+
+#: applet.js:2213
+msgid "Logout"
+msgstr ""
+
+#: applet.js:2213
+msgid "Leave the session"
+msgstr ""
+
+#: applet.js:2223
+msgid "Suspend"
+msgstr ""
+
+#: applet.js:2223
+msgid "Put the computer to sleep"
+msgstr ""
+
+#: applet.js:2233
+msgid "Quit"
+msgstr ""
+
+#: applet.js:2233
+msgid "Shutdown the computer"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->metadata.json->name
+msgid "cwgMintMenu"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->metadata.json->description
+msgid "Main Cinnamon Menu (Revised)"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->system-bar-
+#. show->description
+msgid "Show system buttons"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->system-bar-
+#. show->tooltip
+msgid "Show or hide the system and power buttons."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-editor-
+#. button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-editor-
+#. button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-icon-
+#. custom->description
+msgid "Use a custom icon"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-icon-
+#. custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->hover-
+#. delay->description
+msgid "Menu hover delay:"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->search-
+#. filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->search-
+#. filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-
+#. icon->description
+msgid "Icon"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->overlay-
+#. key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-
+#. label->description
+msgid "Text"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->activate-on-
+#. hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->activate-on-
+#. hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->enable-
+#. autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->enable-
+#. autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application "
+"list."
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->show-
+#. places->description
+msgid "Show bookmarks and places"
+msgstr ""
+
+#. cwgMintMenu@clockworkgobin.org->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""

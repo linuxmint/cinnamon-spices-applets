@@ -5,7 +5,7 @@
 
 
 function ConvertableDate() {
-	this._init();
+    this._init();
 };
 
 ConvertableDate.prototype = {
@@ -52,13 +52,13 @@ ConvertableDate.prototype = {
 
     set_date: function(date) {
         let year = date.getFullYear();
-		let month = date.getMonth();
-		let day = date.getDate();
-		let hours = date.getHours();
-		let minutes = date.getMinutes();
-		let seconds = date.getSeconds();
-		let milliseconds = date.getMilliseconds();
-		this.date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
+        let month = date.getMonth();
+        let day = date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let seconds = date.getSeconds();
+        let milliseconds = date.getMilliseconds();
+        this.date = new Date(year, month, day, hours, minutes, seconds, milliseconds);
     },
 
     set_year: function(year) {
@@ -90,57 +90,57 @@ ConvertableDate.prototype = {
     },
 
     add_days: function(days) {
-        this.date.setDate(this.date.getDate() + days); 
+        this.date.setDate(this.date.getDate() + days);
     },
 
     to_year_month_day_int: function() {
         return parseInt(this.to_year_month_day_string(""));
     },
-    
+
     to_year_month_day_string: function(separator) {
-		let year = this.date.getFullYear().toString();
-		let month = this._prepend_zero_if_single_digit((this.date.getMonth() + 1).toString());
-		let day = this._prepend_zero_if_single_digit(this.date.getDate().toString());
+        let year = this.date.getFullYear().toString();
+        let month = this._prepend_zero_if_single_digit((this.date.getMonth() + 1).toString());
+        let day = this._prepend_zero_if_single_digit(this.date.getDate().toString());
         return year + separator + month + separator + day;
     },
 
     to_year_month_day_hour_second_string: function(separator) {
-		let year = this.date.getFullYear().toString();
-		let month = this._prepend_zero_if_single_digit((this.date.getMonth() + 1).toString());
-		let day = this._prepend_zero_if_single_digit(this.date.getDate().toString());
-		let hour = this._prepend_zero_if_single_digit(this.date.getHours().toString());
-		let second = this._prepend_zero_if_single_digit(this.date.getSeconds().toString());
+        let year = this.date.getFullYear().toString();
+        let month = this._prepend_zero_if_single_digit((this.date.getMonth() + 1).toString());
+        let day = this._prepend_zero_if_single_digit(this.date.getDate().toString());
+        let hour = this._prepend_zero_if_single_digit(this.date.getHours().toString());
+        let second = this._prepend_zero_if_single_digit(this.date.getSeconds().toString());
         return year + separator + month + separator + day + separator + hour + separator + second;
     },
 
     _prepend_zero_if_single_digit: function(number_string) {
-		return number_string.length == 1 ? "0" + number_string : number_string;
+        return number_string.length == 1 ? "0" + number_string : number_string;
     },
 
     is_earlier: function(convertable_date) {
-		return this.date < convertable_date.get_date();
+        return this.date < convertable_date.get_date();
     },
 
     is_earlier_or_equal: function(convertable_date) {
-		return this.date <= convertable_date.get_date();
+        return this.date <= convertable_date.get_date();
     },
 
     is_later: function(convertable_date) {
-		return this.date > convertable_date.get_date();
+        return this.date > convertable_date.get_date();
     },
 
     is_later_or_equal: function(convertable_date) {
-		return this.date >= convertable_date.get_date();
+        return this.date >= convertable_date.get_date();
     },
 
     get_deep_copy: function() {
-		let date = new ConvertableDate();
-		date.set_date(this.date);
- 		return date;
+        let date = new ConvertableDate();
+        date.set_date(this.date);
+         return date;
     },
 
     toString: function() {
- 		return date.toString();
+         return date.toString();
     },
 
 };

@@ -4,8 +4,6 @@
  "description": "A flexible menu providing formatting options and bookmarks.",
  "max-instances": -1,
  "version": "1.2.1",
- "website": "https://github.com/jaszhix/Cinnamenu",
- "cinnamon-version": [
-    "3.2"
-  ]
+ "multiversion": true,
+  "cinnamon-version": ["3.2", "3.4"]
 }
