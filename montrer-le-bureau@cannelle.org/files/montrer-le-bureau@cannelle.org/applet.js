@@ -239,7 +239,7 @@ MyApplet.prototype = {
         if (lock_file.query_exists(null)) {
             new ModalDialog.NotifyDialog(_("Sorry, only one instance allowed!") + "\n").open();
         } else if ((this.CROP_L >= SCRW) || (this.CROP_R >= SCRW) || (this.CROP_B >= SCRH) || (this.CROP_T >= SCRH)) {
-            new ModalDialog.NotifyDialog(_("Sorry, the record can't start,") + "\n" + _("because you have incorrect crop settings!") + "\n").open();
+            new ModalDialog.NotifyDialog(_("Sorry, the record can't start,\n because you have incorrect crop settings!")).open();
         } else {
             Util.spawnCommandLine("touch " + LOCKFILE);
             Util.spawnCommandLine(CMDLINE + TRANSCODING);
