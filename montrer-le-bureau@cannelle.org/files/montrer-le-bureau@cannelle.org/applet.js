@@ -237,9 +237,9 @@ MyApplet.prototype = {
 
         let lock_file = Gio.file_new_for_path(LOCKFILE);
         if (lock_file.query_exists(null)) {
-            new ModalDialog.NotifyDialog(_("Sorry, only one instance allowed!") + "\n").open();
+            new ModalDialog.NotifyDialog(_("Sorry, only one instance allowed!\n")).open();
         } else if ((this.CROP_L >= SCRW) || (this.CROP_R >= SCRW) || (this.CROP_B >= SCRH) || (this.CROP_T >= SCRH)) {
-            new ModalDialog.NotifyDialog(_("Sorry, the record can't start,\n because you have incorrect crop settings!")).open();
+            new ModalDialog.NotifyDialog(_("Sorry, the record can't start,\n because you have incorrect crop settings!\n")).open();
         } else {
             Util.spawnCommandLine("touch " + LOCKFILE);
             Util.spawnCommandLine(CMDLINE + TRANSCODING);
@@ -255,7 +255,7 @@ MyApplet.prototype = {
             Main.notify(_("Recording has finished"));
             this.set_applet_icon_name(DefIcon);
         } else {
-            new ModalDialog.NotifyDialog(_("There is no active recording.") + "\n").open();
+            new ModalDialog.NotifyDialog(_("There is no active recording.\n")).open();
         }
     },
 
