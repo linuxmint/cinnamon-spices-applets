@@ -1,0 +1,316 @@
+# Swedish translation for sound-with-apps-volume@koutch.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound-with-apps-volume@koutch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-30 07:31+0200\n"
+"PO-Revision-Date: 2017-04-30 08:57+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:583 applet.js:810
+msgid "Unknown Artist"
+msgstr "Okänd artist"
+
+#: applet.js:584 applet.js:814
+msgid "Unknown Album"
+msgstr "Okänt album"
+
+#: applet.js:585 applet.js:818
+msgid "Unknown Title"
+msgstr "Okänd titel"
+
+#: applet.js:596
+msgid "Previous"
+msgstr "Föregående"
+
+#: applet.js:599
+msgid "Play"
+msgstr "Spela"
+
+#: applet.js:602
+msgid "Stop"
+msgstr "Stoppa"
+
+#: applet.js:605
+msgid "Next"
+msgstr "Nästa"
+
+#: applet.js:653
+msgid "Open Player"
+msgstr "Öppna spelaren"
+
+#: applet.js:661
+msgid "Quit Player"
+msgstr "Avsluta spelaren"
+
+#: applet.js:1235
+msgid "Mute output"
+msgstr "Ljud  < på/av >"
+
+#: applet.js:1236
+msgid "Mute input"
+msgstr "Mikrofon  < på/av >"
+
+#: applet.js:1619
+msgid "Launch player..."
+msgstr "Starta spelare..."
+
+#: applet.js:1632 applet.js:1779 applet.js:1781 applet.js:1786 applet.js:1787
+#: applet.js:1806 applet.js:1807
+msgid "Volume"
+msgstr "Volym"
+
+#: applet.js:1648
+msgid "  Applications..."
+msgstr "Program..."
+
+#: applet.js:1653
+msgid "Microphone"
+msgstr "Mikrofon"
+
+#: applet.js:1711
+msgid "Sound Settings"
+msgstr "Ljudinställningar"
+
+#: applet.js:1713
+msgid "Output device..."
+msgstr "Utdataenhet..."
+
+#: applet.js:1779 applet.js:1781 applet.js:1938 applet.js:1964 applet.js:1995
+#: applet.js:2022
+msgid "mute"
+msgstr "Tyst"
+
+#. sound-with-apps-volume@koutch->metadata.json->name
+msgid "Sound with apps volume"
+msgstr "Ljud med programvolym"
+
+#. sound-with-apps-volume@koutch->metadata.json->description
+msgid ""
+"Applications' volume, volume 150%, mute button, scrolling track time, custom "
+"launcher ..."
+msgstr ""
+"Programvolym, volym 150%, ljudavstängningsknapp, skrollbar "
+"spårtidsindikator, anpassad programstartare ..."
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->description
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->description
+msgid "Volume arrow key step : "
+msgstr "Volymsteg för piltangenter:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->tooltip
+msgid "from 0 to 3600 (0 to disable)"
+msgstr "från 0 till 3600 (0 för inaktivering)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->units
+msgid "sec"
+msgstr "sek"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. icon->description
+msgid "Icon :"
+msgstr "Ikon:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showtrack->description
+msgid "Show song information on the panel"
+msgstr "Visa låtinformation i panelen"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->description
+msgid "Time up/down scroll step : "
+msgstr "Skrollsteg för tid upp/ner: "
+
+#. sound-with-apps-volume@koutch->settings-schema.json->mute-middle-
+#. click->description
+msgid "Mute with middle click on applet and slider"
+msgstr "Ljud av/på, vid mushjulsklick på programikon och skjutreglage"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-custom-
+#. launcher->description
+msgid "Show Custom Launcher"
+msgstr "Visa anpassad startare"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->hideSystray->description
+msgid "Hide system tray icons for compatible players"
+msgstr "Dölj panelikoner för kompatibla spelare"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-player-
+#. list->description
+msgid "Launch player list always shown"
+msgstr "Spelarlista alltid synlig"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->description
+msgid "Time left/right scroll step : "
+msgstr "Skrollsteg för tid vänster/höger: "
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-
+#. player->description
+msgid "Show Player"
+msgstr "Visa spelare"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-player->tooltip
+msgid "Show/hide Player "
+msgstr "Visa/Dölj spelare"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-
+#. max->description
+msgid "Volume : 150%"
+msgstr "Volym: 150%"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->truncatetext->description
+msgid "- Limit song information to"
+msgstr "- Begränsa låtinformationen till"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->truncatetext->units
+msgid "characters"
+msgstr "tecken"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->description
+msgid "Show Applications' volume"
+msgstr "Visa programvolym"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->tooltip
+msgid ""
+"show/hide Applications' volume (automatically hide if no program is playing "
+"sound)"
+msgstr ""
+"Visa/Dölj programmens volymnivå (dölj automatiskt om inget ljud spelas upp)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->description
+msgid "Mute button"
+msgstr "Ljudavstängningsknapp"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->tooltip
+msgid "enable/disable mute button"
+msgstr "Aktivera/Avaktivera ljudavstängningsknappen"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->description
+msgid "Show Launch player"
+msgstr "Visa startikon för spelare"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->tooltip
+msgid ""
+"show/hide Launch Player (automatically hide if applet's player is displayed)"
+msgstr "Visa/Dölj spelarikoner (dölj automatiskt om spelare är öppen)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-
+#. option->description
+msgid "Override the slider's theme"
+msgstr "Åsidosätt volymreglagets tema"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-option->tooltip
+msgid "Keep mark on the 150% slider & may fix right margin too short"
+msgstr "Bevara markering på 150%-reglaget & kanske fixa för kort högermarginal"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. list->description
+msgid "Applications list always shown"
+msgstr "Visa alltid programlista"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->description
+msgid "Volume up/down scroll step : "
+msgstr "Skrollsteg för volym upp/ner:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->tooltip
+msgid "from 0 to 100 (0 to disable)"
+msgstr "från 0 till 100 (0 för inaktivering)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->units
+msgid "%"
+msgstr "%"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-in-
+#. terminal->description
+msgid "Launch in Terminal"
+msgstr "Starta i terminal"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. name->description
+msgid "Name :"
+msgstr "Namn:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. command->description
+msgid "Command :"
+msgstr "Kommando:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head2->description
+msgid "Sliders settings"
+msgstr "Reglageinställningar"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head1->description
+msgid "You'll need to restart players supported by applet's player"
+msgstr "Du måste starta om spelare som stöds av panelprogrammet"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showalbum->description
+msgid "Show album art as icon"
+msgstr "Visa albumomslag som ikon"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->description
+msgid "Show Output device"
+msgstr "Visa utdataenhet"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->tooltip
+msgid "show/hide Output device"
+msgstr "Visa/Dölj utdataenhet"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->description
+msgid "Volume left/right scroll step : "
+msgstr "Skrollsteg för volym vänster/höger: "
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->description
+msgid "Album art size"
+msgstr "Storlek på albumomslag"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->tooltip
+msgid "from 0 to 210 (0 to disable)"
+msgstr "från 0 till 210 (0 för inaktivering)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-size->units
+msgid "px"
+msgstr "px"
