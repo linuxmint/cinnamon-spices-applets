@@ -252,7 +252,7 @@ MyApplet.prototype = {
         if (lock_file.query_exists(null)) {
             Util.spawnCommandLine("killall -SIGTERM vlc");
             Util.spawnCommandLine("rm -f " + LOCKFILE);
-            Util.spawnCommandLine("notify-send --icon=process-stop \"Recording has finished\"");
+            Main.notify(_("Recording has finished"));
             this.set_applet_icon_name(DefIcon);
         } else {
             new ModalDialog.NotifyDialog(_("There is no active recording.") + "\n").open();
