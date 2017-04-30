@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-30 13:10+0300\n"
+"POT-Creation-Date: 2017-04-30 13:41+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,13 +30,13 @@ msgid "Stop Recording"
 msgstr ""
 
 #: applet.js:240
-msgid "Sorry, only one instance allowed!"
+msgid "Sorry, only one instance allowed!\n"
 msgstr ""
 
 #: applet.js:242
 msgid ""
 "Sorry, the record can't start,\n"
-" because you have incorrect crop settings!"
+" because you have incorrect crop settings!\n"
 msgstr ""
 
 #: applet.js:255
@@ -44,7 +44,7 @@ msgid "Recording has finished"
 msgstr ""
 
 #: applet.js:258
-msgid "There is no active recording."
+msgid "There is no active recording.\n"
 msgstr ""
 
 #. montrer-le-bureau@cannelle.org->metadata.json->description
