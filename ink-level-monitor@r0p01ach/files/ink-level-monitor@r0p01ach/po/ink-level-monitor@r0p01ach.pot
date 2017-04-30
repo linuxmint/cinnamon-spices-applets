@@ -6,18 +6,16 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 00:34+0200\n"
+"POT-Creation-Date: 2017-04-20 22:17+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: .\n"
 
 #: applet.js:110
 msgid "Unable to connect printer at port "
@@ -25,86 +23,6 @@ msgstr ""
 
 #: applet.js:121
 msgid "Error reading data..."
-msgstr ""
-
-#: applet.js:153
-msgid "Photoblack"
-msgstr ""
-
-#: applet.js:155
-msgid "Photocyan"
-msgstr ""
-
-#: applet.js:157
-msgid "Photomagenta"
-msgstr ""
-
-#: applet.js:159
-msgid "Photoyellow"
-msgstr ""
-
-#: applet.js:161
-msgid "Black"
-msgstr ""
-
-#: applet.js:163
-msgid "Cyan"
-msgstr ""
-
-#: applet.js:165
-msgid "Magenta"
-msgstr ""
-
-#: applet.js:167
-msgid "Yellow"
-msgstr ""
-
-#: applet.js:169
-msgid "Light Black"
-msgstr ""
-
-#: applet.js:171
-msgid "Light Cyan"
-msgstr ""
-
-#: applet.js:173
-msgid "Light Magenta"
-msgstr ""
-
-#: applet.js:175
-msgid "Light Yellow"
-msgstr ""
-
-#: applet.js:177
-msgid "Light Light Black"
-msgstr ""
-
-#: applet.js:179
-msgid "Medium Grey"
-msgstr ""
-
-#: applet.js:181
-msgid "Photogrey"
-msgstr ""
-
-#: applet.js:183
-msgid "Light Grey"
-msgstr ""
-
-#: applet.js:185
-msgid "White"
-msgstr ""
-
-#: applet.js:187
-msgid "Red"
-msgstr ""
-
-#: applet.js:189
-msgid "Green"
-msgstr ""
-
-#: applet.js:191
-msgid "Blue"
 msgstr ""
 
 #. ink-level-monitor@r0p01ach->metadata.json->description
@@ -143,4 +61,3 @@ msgstr ""
 #. ink-level-monitor@r0p01ach->settings-schema.json->general->description
 msgid "General Settings"
 msgstr ""
-
