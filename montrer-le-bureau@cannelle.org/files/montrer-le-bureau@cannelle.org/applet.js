@@ -12,20 +12,21 @@ const ModalDialog = imports.ui.modalDialog;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
+// l10n/translation support
+
+const UUID = "montrer-le-bureau@cannelle.org"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 const LOCKFILE = '/var/tmp/vlcrec.run';
 const LOCKMESSAGE = _("Sorry, only one instance allowed!") + "\n";
 const BADCROPMESSAGE = _("Sorry, the record can't starting,") + "\n"+_("because you have incorrect crop settings!")+ "\n";
 const NORECMESSAGE = _("Ther is no active recording.") + "\n";
 const DefIcon = "user-desktop";
 const RecIcon = "media-record";
-
-// l10n/translation support
-//const UUID = "montrer-le-bureau@cannelle.org"
-//Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-
-//function _(str) {
-//  return Gettext.dgettext(UUID, str);
-//}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
