@@ -1,0 +1,215 @@
+# Swedish translation for placesCenter@scollins.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: placesCenter@scollins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-30 18:31+0200\n"
+"PO-Revision-Date: 2017-04-30 18:31+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:250
+msgid "Clear"
+msgstr "Rensa"
+
+#: applet.js:306
+msgid "Places"
+msgstr "Platser"
+
+#: applet.js:403
+msgid "Search Home Folder"
+msgstr "Sök i hemkatalogen"
+
+#: applet.js:417
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#: applet.js:425
+msgid "Search File System"
+msgstr "Sök i filsystemet"
+
+#: applet.js:440
+msgid "RECENT DOCUMENTS"
+msgstr "TIDIGARE DOKUMENT"
+
+#: applet.js:489
+msgid "Computer"
+msgstr "Dator"
+
+#: applet.js:495
+msgid "File System"
+msgstr "Filsystem"
+
+#: applet.js:511
+msgid "Network"
+msgstr "Nätverk"
+
+#: applet.js:607
+msgid "Trash"
+msgstr "Papperskorg"
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panelikon"
+
+#. cinnamon-places-center->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Accepterar ikonnamn eller direkt sökväg (stöder symboliska ikoner)"
+
+#. cinnamon-places-center->settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Visa filsystem"
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Öppna på mushjulsklick"
+
+#. cinnamon-places-center->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Lämnas tom för inaktivering"
+
+#. cinnamon-places-center->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Antal att visa"
+
+#. cinnamon-places-center->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. cinnamon-places-center->settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Visa Dator"
+
+#. cinnamon-places-center->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Visa endast monterade diskar"
+
+#. cinnamon-places-center->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Menysnabbtangent"
+
+#. cinnamon-places-center->settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Användarsektion"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Visa Papperskorgen"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Alltid"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Aldrig"
+
+#. cinnamon-places-center->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Om inte tom"
+
+#. cinnamon-places-center->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Visa nätverk"
+
+#. cinnamon-places-center->settings-schema.json->iconSize->description
+msgid "Icon size"
+msgstr "Ikonstorlek"
+
+#. cinnamon-places-center->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. cinnamon-places-center->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Visa volymer"
+
+#. cinnamon-places-center->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneltext"
+
+#. cinnamon-places-center->settings-
+#. schema.json->systemCustomPlaces->description
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->description
+msgid "Custom places"
+msgstr "Anpassade platser"
+
+#. cinnamon-places-center->settings-schema.json->systemCustomPlaces->tooltip
+#. cinnamon-places-center->settings-schema.json->userCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location."
+msgstr ""
+"Lista över uri-/filsökvägar att inkludera. Posterna kan separeras med "
+"antingen kommatecken eller med ny rad. Du kan ange namnet som skall visas, "
+"genom att lägga till :AnpassatNamn efter platsen."
+
+#. cinnamon-places-center->settings-schema.json->recent->description
+msgid "Recent Documents"
+msgstr "Tidigare dokument"
+
+#. cinnamon-places-center->settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Systemsektion"
+
+#. cinnamon-places-center->settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Visa Skrivbord"
+
+#. cinnamon-places-center->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Visa tidigare dokument"
+
+#. cinnamon-places-center->settings-schema.json->userPage->title
+msgid "User"
+msgstr "Användare"
+
+#. cinnamon-places-center->settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Menyikonstorlek"
+
+#. cinnamon-places-center->metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Erbjuder en lättläst layout för att nå dina lagringsplatser"
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Author"
+
+#. cinnamon-places-center->metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Lade till konfigurerbart mushjulsklick"
+
+#. cinnamon-places-center->metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Platscentralen är ett funktionsrikt, plattformsöverskridande panelprogram "
+"för Cinnamon som erbjuder enkel åtkomst till alla dina mest använda "
+"lagringsmappar. Bidra gärna till utvecklingen genom \"pull requests\", "
+"felrapporter och funktionsönskemål, i mitt GitHub-förråd."
+
+#. cinnamon-places-center->metadata.json->name
+msgid "Places Center"
+msgstr "Platscentral"
+
+#~ msgid "User Section"
+#~ msgstr "Användarsektion"
+
+#~ msgid "System Section"
+#~ msgstr "Systemsektion"
