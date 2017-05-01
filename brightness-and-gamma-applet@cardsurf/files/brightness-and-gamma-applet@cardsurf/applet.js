@@ -6,7 +6,7 @@ const Mainloop = imports.mainloop;
 const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const uuid = "brightness-and-gamma-applet@cardsurf";
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
 const AppletGui = AppletDirectory.appletGui;
@@ -17,12 +17,12 @@ const FilesCsv = AppletDirectory.filesCsv;
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
 
+// Translation support
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
 
-
-
-
-
-
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 function Output(output_name, is_connected) {
     this._init(output_name, is_connected);
@@ -165,8 +165,8 @@ MyApplet.prototype = {
     },
 
     _show_dialog_dependencies: function(dependencies) {
-        let dialog_message = uuid + "\n\nThe following packages were not found:\n\n" +
-                             dependencies + "\n\nPlease install the above packages to use the applet";
+        let dialog_message = uuid + "\n\n" + _("The following packages were not found:") + "\n\n" +
+                             dependencies + "\n\n" + _("Please install the above packages to use the applet");
         let dialog = new ModalDialog.NotifyDialog(dialog_message);
         dialog.open();
     },
@@ -521,7 +521,7 @@ MyApplet.prototype = {
 
     _init_menu_item_screen: function () {
         let screen_names = this.get_screen_names();
-        this.menu_item_screen = new AppletGui.RadioMenuItem("Screen", screen_names);
+        this.menu_item_screen = new AppletGui.RadioMenuItem(_("Screen"), screen_names);
         this.menu_item_screen.set_callback_option_clicked(this, this.on_menu_item_screen_clicked);
         this.set_menu_item_screen_option();
         this._applet_context_menu.addMenuItem(this.menu_item_screen, this.menu_item_screen_position);
@@ -565,7 +565,7 @@ MyApplet.prototype = {
 
     _init_menu_item_output: function () {
         let output_names = this.get_output_names();
-        this.menu_item_output = new AppletGui.RadioMenuItem("Output", output_names);
+        this.menu_item_output = new AppletGui.RadioMenuItem(_("Output"), output_names);
         this.menu_item_output.set_callback_option_clicked(this, this.on_menu_item_output_clicked);
         this.set_menu_item_output_option();
         this._applet_context_menu.addMenuItem(this.menu_item_output, this.menu_item_output_position);
