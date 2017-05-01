@@ -413,7 +413,7 @@ MyApplet.prototype = {
         let matches = line.match(this.screen_regex);
         let screen_name = matches[0];
         let last_character_index = screen_name.length - 1;
-        let screen_name = screen_name.substring(0, last_character_index);
+        screen_name = screen_name.substring(0, last_character_index);
         return screen_name;
     },
 
