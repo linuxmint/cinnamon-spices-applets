@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 13:49+0200\n"
+"POT-Creation-Date: 2017-05-01 14:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,41 +17,45 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:39
+#: applet.js:55
+msgid "[GPaste is not installed]"
+msgstr ""
+
+#: applet.js:91
 msgid "GPaste clipboard"
 msgstr ""
 
 #. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->gpaste-
 #. settings->description
-#: applet.js:44 applet.js:82
+#: applet.js:97 applet.js:135
 msgid "GPaste Main Program"
 msgstr ""
 
-#: applet.js:49
+#: applet.js:102
 msgid "Select History"
 msgstr ""
 
-#: applet.js:58
+#: applet.js:111
 msgid "Track clipboard changes"
 msgstr ""
 
-#: applet.js:66
+#: applet.js:119
 msgid "(Empty)"
 msgstr ""
 
-#: applet.js:69
+#: applet.js:122
 msgid "(No results)"
 msgstr ""
 
-#: applet.js:74
+#: applet.js:127
 msgid "New item"
 msgstr ""
 
-#: applet.js:77
+#: applet.js:130
 msgid "Empty history"
 msgstr ""
 
-#: applet.js:369
+#: applet.js:436
 msgid "Do you really want to empty the current history?"
 msgstr ""
 
@@ -59,12 +63,18 @@ msgstr ""
 msgid "Please enter the text you want to add to the current history:"
 msgstr ""
 
-#: GPasteNewItemDialog.js:53
+#: GPasteNewItemDialog.js:53 GPasteNotInstalledDialog.js:26
 msgid "OK"
 msgstr ""
 
 #: GPasteNewItemDialog.js:57
 msgid "Cancel"
+msgstr ""
+
+#: GPasteNotInstalledDialog.js:21
+msgid ""
+"GPaste is not installed. Please install the necessary packages and then "
+"restart Cinnamon for this applet to start working."
 msgstr ""
 
 #: GPasteSearchItem.js:28
