@@ -48,7 +48,7 @@ gulp.task('transpile', ['copy'], () =>
 );
 
 gulp.task('install', ['transpile'], (cb)=>{
-  exec('cp -vrf ./files/IcingTaskManager@json/3.4/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && ./locale.sh', function (err, stdout, stderr) {
+  exec('cp -vrf ./files/IcingTaskManager@json/3.4/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -vf ./files/IcingTaskManager@json/metadata.json ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -vf ./files/IcingTaskManager@json/icon.png ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
