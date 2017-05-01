@@ -48,7 +48,7 @@ msgid ""
 msgstr ""
 "Potreban vam je pip3, 'sudo apt-get install pip3'\n"
 "Potreban vam je python-feedparser, 'sudo pip3 install feedparser'\n"
-"Potreban vam je python keyring and python keyring-alt, 'sudo pip3 install "
+"Potreban vam je python keyring i python keyring-alt, 'sudo pip3 install "
 "keyrings' i 'sudo pip3 install keyrings-alt'"
 
 #: applet.js:148
