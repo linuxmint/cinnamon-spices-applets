@@ -350,7 +350,7 @@ msgstr "Показывать время в 24-часовом формате"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Длина прогноза"
+msgstr "Горизонт прогноза"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
@@ -358,7 +358,7 @@ msgstr "дни"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Показывать время восхода/заката"
+msgstr "Показывать время восхода и заката"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
@@ -382,7 +382,7 @@ msgstr "мили/ч"
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Показывать метеорологические условия (\"Ветрено\", \"Ясно\") на панели"
+msgstr "Показывать метеорологические условия («Ветрено», «Ясно») на панели"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
