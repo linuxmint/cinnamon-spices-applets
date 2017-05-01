@@ -5,17 +5,17 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-
+const Gettext = imports.gettext;
 const uuid = 'brightness-and-gamma-applet@cardsurf';
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
 const AppletConstants = AppletDirectory.appletConstants;
 
+// Translation support
+Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")
 
-
-
-
-
-
+function _(str) {
+  return Gettext.dgettext(uuid, str);
+}
 
 function RadioMenuItem(title, option_names) {
     this._init(title, option_names);
@@ -159,10 +159,10 @@ MenuSliders.prototype={
         this.section = new PopupMenu.PopupMenuSection();
         this.labels = {};
         this.sliders = {};
-        this.brightness_key = "Brightness";
-        this.gamma_red_key = "Red";
-        this.gamma_green_key = "Green";
-        this.gamma_blue_key = "Blue";
+        this.brightness_key = _("Brightness");
+        this.gamma_red_key = _("Red");
+        this.gamma_green_key = _("Green");
+        this.gamma_blue_key = _("Blue");
 
         this._init_menu();
         this._init_items();
@@ -379,6 +379,5 @@ MenuSliders.prototype={
     },
 
 }
-
 
 
