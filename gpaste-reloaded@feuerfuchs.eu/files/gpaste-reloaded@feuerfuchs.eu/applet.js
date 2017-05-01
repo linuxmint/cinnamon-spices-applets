@@ -1,25 +1,76 @@
-const uuid                  = imports.applet.uuid;
+const uuid = imports.applet.uuid;
+const _    = imports.applet._;
 
-const Util                  = imports.misc.util;
-const Lang                  = imports.lang;
-const St                    = imports.gi.St;
-const Main                  = imports.ui.main;
-const PopupMenu             = imports.ui.popupMenu;
-const Applet                = imports.ui.applet;
-const Settings              = imports.ui.settings;
-const ModalDialog           = imports.ui.modalDialog;
-const SignalManager         = imports.misc.signalManager;
+const Util          = imports.misc.util;
+const Lang          = imports.lang;
+const St            = imports.gi.St;
+const Main          = imports.ui.main;
+const PopupMenu     = imports.ui.popupMenu;
+const Applet        = imports.ui.applet;
+const Settings      = imports.ui.settings;
+const ModalDialog   = imports.ui.modalDialog;
+const SignalManager = imports.misc.signalManager;
 
-const GPaste                = imports.gi.GPaste;
+let GPaste; // Will be assigned in entry point
 
-const AppletDir             = imports.ui.appletManager.applets[uuid];
-const GPasteSearchItem      = AppletDir.GPasteSearchItem;
-const GPasteHistoryItem     = AppletDir.GPasteHistoryItem;
-const GPasteHistoryListItem = AppletDir.GPasteHistoryListItem;
-const GPasteNewItemDialog   = AppletDir.GPasteNewItemDialog;
+const AppletDir                = imports.ui.appletManager.applets[uuid];
+const GPasteSearchItem         = AppletDir.GPasteSearchItem;
+const GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
+const GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
+const GPasteNewItemDialog      = AppletDir.GPasteNewItemDialog;
+const GPasteNotInstalledDialog = AppletDir.GPasteNotInstalledDialog;
 
-const _                     = imports.applet._;
+//
+// Entry point
+// ------------------------------------------------------------------------------------------------------
 
+function main(metadata, orientation, panel_height, instance_id) {
+    try {
+        GPaste = imports.gi.GPaste;
+
+        return new GPasteApplet(orientation, panel_height, instance_id);
+    } catch(e) {
+        return new GPasteFallbackApplet(orientation, panel_height, instance_id);
+    }
+};
+
+//
+// Fallback-Applet
+// ------------------------------------------------------------------------------------------------------
+
+function GPasteFallbackApplet(orientation, panel_height, instance_id) {
+    this._init(orientation, panel_height, instance_id);
+}
+
+GPasteFallbackApplet.prototype = {
+    __proto__: Applet.TextApplet.prototype,
+
+    _init: function(orientation, panel_height, instance_id) {
+        Applet.TextApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+
+        try {
+            //
+            // Applet icon
+
+            this._applet_label.set_text(_("[GPaste is not installed]"));
+
+            //
+            // Dialogs
+
+            this.dExplanation = new GPasteNotInstalledDialog.GPasteNotInstalledDialog();
+        }
+        catch (e) {
+            global.logError(e);
+        }
+    },
+
+    on_applet_clicked: function(event) {
+        this.dExplanation.open(global.get_current_time());
+    }
+}
+
+//
+// Applet
 // ------------------------------------------------------------------------------------------------------
 
 function GPasteApplet(orientation, panel_height, instance_id) {
@@ -30,7 +81,7 @@ GPasteApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
     _init: function(orientation, panel_height, instance_id) {
-        Applet.IconApplet.prototype._init.call(this, orientation);
+        Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         try {
             //
@@ -532,13 +583,4 @@ GPasteApplet.prototype = {
     on_applet_clicked: function(event) {
         this.menu.toggle();
     }
-};
-
-// ------------------------------------------------------------------------------------------------------
-
-/*
- * Entry point
- */
-function main(metadata, orientation, panel_height, instance_id) {
-    return new GPasteApplet(orientation, panel_height, instance_id);
 };
