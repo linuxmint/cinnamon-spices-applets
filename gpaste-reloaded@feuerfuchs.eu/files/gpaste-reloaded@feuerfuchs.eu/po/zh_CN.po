@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-01 14:38+0200\n"
-"PO-Revision-Date: 2017-05-01 14:40+0200\n"
+"PO-Revision-Date: 2017-05-01 20:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: applet.js:55
 msgid "[GPaste is not installed]"
-msgstr "[GPaste is not installed]"
+msgstr "[未安装GPaste]"
 
 #: applet.js:91
 msgid "GPaste clipboard"
@@ -77,8 +77,7 @@ msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
 msgstr ""
-"GPaste is not installed. Please install the necessary packages and then "
-"restart Cinnamon for this applet to start working."
+"未安装GPaste。请安装必要的软件包，然后重启Cinnamon以使这个小程序开始工作。"
 
 #: GPasteSearchItem.js:28
 msgid "Type to search..."
