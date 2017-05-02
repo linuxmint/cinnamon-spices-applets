@@ -659,11 +659,11 @@ CinnamenuPanel.prototype = {
   _listApplications: function(category_menu_id, pattern) {
     let appList = [];
 
-    if (category_menu_id == 'all') {
+    if (category_menu_id === 'all') {
       for (let directory in this.applicationsByCategory) {
         appList = appList.concat(this.applicationsByCategory[directory]);
       }
-    } else if (category_menu_id == 'favorites') {
+    } else if (category_menu_id === 'favorites') {
       appList = this.favorites;
     } else {
       if (category_menu_id) {
@@ -788,12 +788,6 @@ CinnamenuPanel.prototype = {
       bottom: 0,
       right: 0
     };
-    let viewModeBoxWrapperPadding = {
-      left: 0,
-      top: 0,
-      bottom: 0,
-      right: 0
-    };
     if (this.viewModeBoxWrapper.get_stage()) {
       let themeNode = this.viewModeBoxWrapper.get_theme_node();
       viewModeBoxWrapperMargin = {
@@ -807,12 +801,6 @@ CinnamenuPanel.prototype = {
         top: themeNode.get_border_width(St.Side.TOP),
         bottom: themeNode.get_border_width(St.Side.BOTTOM),
         right: themeNode.get_border_width(St.Side.RIGHT),
-      };
-      viewModeBoxWrapperPadding = {
-        left: themeNode.get_padding(St.Side.LEFT),
-        top: themeNode.get_padding(St.Side.TOP),
-        bottom: themeNode.get_padding(St.Side.BOTTOM),
-        right: themeNode.get_padding(St.Side.RIGHT),
       };
       viewModeBoxWrapperWidth = this.viewModeBoxWrapper.width + viewModeBoxWrapperMargin.left +
         viewModeBoxWrapperMargin.right + viewModeBoxWrapperBorder.left + viewModeBoxWrapperBorder.right;
@@ -2015,7 +2003,7 @@ CinnamenuPanel.prototype = {
   },
 
   destroyContainer: function(container) {
-    if (!container && container === undefined) {
+    if (!container) {
       return false;
     }
     let children = container.get_children();
@@ -2031,26 +2019,31 @@ CinnamenuPanel.prototype = {
     global.settings.disconnect(this.panelEditId);
     this.destroyAppButtons();
     this.destroyDisplayed();
-    PanelMenu.Button.prototype.destroy.call(this)
     this._searchWebBookmarks.destroy();
   },
 
   destroyDisplayed: function() {
-    this.destroyContainer(this.searchBox);
-    this.destroyContainer(this.viewModeBox);
-    this.destroyContainer(this.viewModeWrapper);
-    this.destroyContainer(this.categoriesBox);
-    this.destroyContainer(this.powerGroupBox);
-    this.destroyContainer(this.viewModeBox);
-    this.destroyContainer(this.applicationsGridBox);
-    this.destroyContainer(this.applicationsListBox);
-    this.destroyContainer(this.applicationsBoxWrapper);
-    this.destroyContainer(this.applicationsScrollBox);
-    this.destroyContainer(this.topPane);
-    this.destroyContainer(this.groupCategoriesWorkspacesScrollBox);
-    this.destroyContainer(this.middlePane);
-    this.destroyContainer(this.bottomPane);
-    this.destroyContainer(this.mainBox);
+    let containers = [
+      'searchBox',
+      'viewModeBox',
+      'categoriesBox',
+      'powerGroupBox',
+      'applicationsGridBox',
+      'applicationsListBox',
+      'applicationsBoxWrapper',
+      'applicationsScrollBox',
+      'topPane',
+      'groupCategoriesWorkspacesScrollBox',
+      'middlePane',
+      'bottomPane',
+      'mainbox'
+    ];
+
+    for (let i = 0, len = containers.length; i < len; i++) {
+      if (typeof this[containers[i]] !== 'undefined') {
+        this.destroyContainer(this[containers[i]]);
+      }
+    }
   },
 
   destroyAppButtons: function() {
@@ -2063,4 +2056,5 @@ CinnamenuPanel.prototype = {
     this.appButtons = [];
   },
 };
+
 Signals.addSignalMethods(CinnamenuPanel.prototype)
