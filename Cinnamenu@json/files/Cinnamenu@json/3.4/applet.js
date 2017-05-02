@@ -1,7 +1,7 @@
 /* ========================================================================================================
  * applet.js - Cinnamenu extension
  * --------------------------------------------------------------------------------------------------------
- *  CREDITS: 
+ *  CREDITS:
  *  Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
  *  Ported to Cinnamon by Jason Hicks.
  *  A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks
@@ -150,13 +150,13 @@ CinnamenuButton.prototype = {
         if (this.menuIcon === '') {
           this.set_applet_icon_name('');
         } else if (GLib.path_is_absolute(this.menuIcon) && GLib.file_test(this.menuIcon, GLib.FileTest.EXISTS)) {
-          if (this.menuIcon.search('-symbolic') != -1) {
+          if (this.menuIcon.search('-symbolic') !== -1) {
             this.set_applet_icon_symbolic_path(this.menuIcon);
           } else {
             this.set_applet_icon_path(this.menuIcon);
           }
         } else if (Gtk.IconTheme.get_default().has_icon(this.menuIcon)) {
-          if (this.menuIcon.search('-symbolic') != -1) {
+          if (this.menuIcon.search('-symbolic') !== -1) {
             this.set_applet_icon_symbolic_name(this.menuIcon);
           } else {
             this.set_applet_icon_name(this.menuIcon);
@@ -175,13 +175,12 @@ CinnamenuButton.prototype = {
       this._applet_icon_box.show();
     }
 
-    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) // no menu label if in a vertical panel
-    {
+    if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
       this.set_applet_label('');
     } else {
-      if (this.panelMenuLabelText && this.panelMenuLabelText !== '') {
-        this.set_applet_label(_(this.menuLabel)); // TBD
-        this.set_applet_tooltip(_(this.menuLabel));
+      if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
+        this.set_applet_label(this.menuLabel); // TBD
+        this.set_applet_tooltip(this.menuLabel);
       } else {
         this.set_applet_label('');
       }

@@ -563,7 +563,7 @@ AppListGridButton.prototype = {
         }
       }
     }
-    this.toggleMenu(this._parent._applet.startupViewMod === ApplicationsViewMode.LIST);
+    this.toggleMenu(this._parent._applet.startupViewMode === ApplicationsViewMode.LIST);
   },
 
   setColumn: function(column) {
