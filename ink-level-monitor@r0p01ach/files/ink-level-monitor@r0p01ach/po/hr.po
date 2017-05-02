@@ -1,0 +1,61 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Printer Ink Level Monitor Applet 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-30 14:35+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:110
+msgid "Unable to connect printer at port "
+msgstr "Nemoguće povezivanje s pisačem na ulazu "
+
+#: applet.js:121
+msgid "Error reading data..."
+msgstr "Greška čitanja podataka..."
+
+#. ink-level-monitor@r0p01ach->metadata.json->description
+msgid "USB Printer Ink Level Monitor Applet"
+msgstr "Aplet za nadgledanje razine tinte u USB pisaču"
+
+#. ink-level-monitor@r0p01ach->metadata.json->name
+msgid "Printer Ink Level Monitor Applet"
+msgstr "Nadgledatelj razine tinte u pisaču"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->description
+msgid "Printer Port Number"
+msgstr "Broj ulaza pisača "
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->units
+msgid "(lp# device)"
+msgstr "(lp# uređaj)"
+
+#. ink-level-monitor@r0p01ach->settings-
+#. schema.json->updateInterval->description
+msgid "Update Interval"
+msgstr "Razdoblje nadopunjivanja"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "sekunde"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->description
+msgid "Applet Width"
+msgstr "Širina apleta u panelu"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->units
+msgid "px"
+msgstr "pikseli"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Opće postavke"
