@@ -1,7 +1,9 @@
+You must install the **gir1.2-gtop-2.0** package to use this applet.
+
 // Multi-core System Monitor Readme
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 
-How to Configure Colors(in prefs.json)
+How to Configure Colors (in prefs.json)
 ======================================
 Edit config file its called prefs.json. Also backup the file, and only do it if you feel comfortable.
 There are 3 values that control the color of the applet all use arrays of the format:
@@ -25,7 +27,7 @@ The fourth is the free memory.
 
 For Example,
 If i wanted the used up memory to be red, the buffered memory to be green, the cached to be blue, and the free to be white my entry ColorsMem would be:
-"ColorsMem":[[1,0,0,1],[0,1,0,1],[0,0,1,1],[1,1,1,1]]
+"ColorsMem": [[1,0,0,1],[0,1,0,1],[0,0,1,1],[1,1,1,1]]
 
 In general, i prefer the free memory to be see thru but others maynot. if you want a see thru free make the fourth entry all 0.
 
