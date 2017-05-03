@@ -37,7 +37,7 @@ function _(str) {
 }
 
 try {
-  const GTop = imports.gi.GTop;
+  var GTop = imports.gi.GTop;
 } catch(e){
   let icon = new St.Icon({ icon_name: 'utilities-system-monitor',
                            icon_type: St.IconType.FULLCOLOR,
@@ -109,7 +109,7 @@ MyApplet.prototype = {
 
 	_update: function() {
 
-		for (i = 0; i < this.graphs.length; i++)
+		for (let i = 0; i < this.graphs.length; i++)
 		{
 			this.graphs[i].refreshData();
 		}
@@ -209,7 +209,7 @@ Graph.prototype = {
         cr.setLineWidth(0);
         cr.moveTo(1, this.height - this.datas[0]);
 
-        for (i = 1; i <this.datas.length; i++)
+        for (let i = 1; i <this.datas.length; i++)
         {
         	cr.lineTo(1+i, this.height - this.datas[i]);
         }
