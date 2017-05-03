@@ -59,6 +59,22 @@
         "description": "Save every",
         "tooltip" : "How often to save last used values"
     },
+    "update_scroll" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Adjust brightness scroll",
+        "tooltip": "Allows to adjust a brightness value on a mouse scroll"
+    },
+    "scroll_step": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Scroll step",
+        "tooltip" : "A percentage of a brightness value to adjust on a mouse scroll"
+    },
     "values_end": {
         "type" : "separator"
     },

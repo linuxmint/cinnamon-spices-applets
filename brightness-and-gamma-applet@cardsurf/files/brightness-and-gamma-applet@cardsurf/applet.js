@@ -4,6 +4,7 @@ const ModalDialog = imports.ui.modalDialog;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
+const Clutter = imports.gi.Clutter;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -90,6 +91,8 @@ MyApplet.prototype = {
         this.gamma_green = this.maximum_gamma;
         this.gamma_blue = this.maximum_gamma;
         this.save_every = this.default_save_every;
+        this.update_scroll = true;
+        this.scroll_step = 5;
         this.options_type = AppletConstants.OptionsType.ALL;
         this.gui_icon_filepath = "";
         this.apply_startup = true;
@@ -196,6 +199,7 @@ MyApplet.prototype = {
     _run_dependencies_satisfied: function () {
         this._init_layout();
         this._bind_settings();
+        this._connect_signals();
         this._init_xrandr_process();
         this._init_filepaths();
         this._init_files();
@@ -246,6 +250,8 @@ MyApplet.prototype = {
         for(let [binding, property_name, callback] of [
                         [Settings.BindingDirection.IN, "apply_startup", null],
                         [Settings.BindingDirection.IN, "save_every", null],
+                        [Settings.BindingDirection.IN, "update_scroll", null],
+                        [Settings.BindingDirection.IN, "scroll_step", null],
                         [Settings.BindingDirection.IN, "minimum_brightness", this.on_brightness_range_changed],
                         [Settings.BindingDirection.IN, "maximum_brightness", this.on_brightness_range_changed],
                         [Settings.BindingDirection.IN, "minimum_gamma", this.on_gamma_range_changed],
@@ -366,6 +372,45 @@ MyApplet.prototype = {
 
     file_exists: function (path) {
         return GLib.file_test(path, GLib.FileTest.EXISTS);
+    },
+
+    _connect_signals: function() {
+        try {
+            this.actor.connect('scroll-event', Lang.bind(this, this.on_mouse_scroll));
+        }
+        catch(e) {
+            global.log("Error while connecting signals: " + e);
+        }
+    },
+
+    on_mouse_scroll: function(actor, event) {
+        if(this.update_scroll) {
+            let direction = event.get_scroll_direction();
+            if (direction == Clutter.ScrollDirection.UP) {
+                this.increase_brightness_scroll();
+            }
+            else {
+                this.decrease_brightness_scroll();
+            }
+        }
+    },
+
+    increase_brightness_scroll: function() {
+        let value = this.brightness + this.scroll_step;
+        this.update_brightness_scroll(value);
+    },
+
+    update_brightness_scroll: function(value) {
+        let value = this.get_range_value(this.minimum_brightness, this.maximum_brightness, value);
+        if(value != this.brightness) {
+            this.update_brightness(value);
+            this.menu_sliders.update_items_brightness();
+        }
+    },
+
+    decrease_brightness_scroll: function() {
+        let value = this.brightness - this.scroll_step;
+        this.update_brightness_scroll(value);
     },
 
     // Override
