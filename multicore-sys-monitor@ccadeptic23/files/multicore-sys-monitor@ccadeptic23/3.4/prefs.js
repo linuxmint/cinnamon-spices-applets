@@ -14,7 +14,6 @@ const UUID = "multicore-sys-monitor@ccadeptic23";
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Gdk = imports.gi.Gdk;
-const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const DEFAULT_CONFIG = {
@@ -379,38 +378,43 @@ Preferences.prototype = {
     this.diskDownButtonList = [];
     this.diskUpButtonList = [];
     this.diskEnableSwitchList = [];
-    var counter = 0;
+    counter = 0;
 
-    for (var devname in this.config.disk.devices) {
+    for (devname in this.config.disk.devices) {
       //build the device sections
-      var currentdev_vbox = new Gtk.VBox();
-      var currentdev_hbox = new Gtk.HBox();
-      var devLabel = new Gtk.Label({
+      currentdev_vbox = new Gtk.VBox();
+      currentdev_hbox = new Gtk.HBox();
+      devLabel = new Gtk.Label({
         label: devname
       })
       devLabel.set_halign(1); //start
-      var devEnableLabel = new Gtk.Label({
+
+      devEnableLabel = new Gtk.Label({
         label: _("Enable")
       })
       devEnableLabel.set_halign(Gtk.Align.END); //end
-      var devEnableSwitch = new Gtk.Switch();
+
+      devEnableSwitch = new Gtk.Switch();
       devEnableSwitch.set_halign(Gtk.Align.START); //start
       devEnableSwitch.set_valign(Gtk.Align.CENTER);
       devEnableSwitch.set_margin_left(10);
       devEnableSwitch.set_vexpand(false);
       devEnableSwitch.set_hexpand(false);
-      var devDownColorButton = new Gtk.ColorButton();
+
+      devDownColorButton = new Gtk.ColorButton();
       devDownColorButton.set_halign(1);
       devDownColorButton.set_use_alpha(true);
-      var devDownLabel = new Gtk.Label({
+
+      devDownLabel = new Gtk.Label({
         label: _("Read")
       });
       devDownLabel.set_halign(2);
 
-      var devUpColorButton = new Gtk.ColorButton();
+      devUpColorButton = new Gtk.ColorButton();
       devUpColorButton.set_halign(1);
       devUpColorButton.set_use_alpha(true);
-      var devUpLabel = new Gtk.Label({
+
+      devUpLabel = new Gtk.Label({
         label: _("Write")
       });
       devUpLabel.set_halign(2);
@@ -428,8 +432,9 @@ Preferences.prototype = {
         marginTop: 5
       }));
       //show the device only if the config oks it
-      if (this.config.disk.devices[devname].show)
+      if (this.config.disk.devices[devname].show) {
         this.diskDevicesChoicesBox.add(currentdev_vbox);
+      }
 
       //Configure the Widgets initial values
       this.setColorByObject(devDownColorButton, this.config.disk.devices[devname].colors[0]);
@@ -481,7 +486,6 @@ Preferences.prototype = {
       //CPU Settings
       this.config.cpu.enabled = this.builder.get_object("cpuEnableSwitch").get_active();
       this.config.cpu.width = this.builder.get_object("cpuWidthScale").get_value();
-      var c = new Gdk.RGBA();
       for (var i = 0; i < this.config.cpu.colors.length; i++) {
         this.config.cpu.colors[i] = this.getColorByObject(this.cpuButtonList[i]);
       }
@@ -516,8 +520,8 @@ Preferences.prototype = {
       this.config.disk.autoscale = this.builder.get_object("diskAutoScaleSwitch").get_active();
       this.config.disk.logscale = this.builder.get_object("diskLogScaleSwitch").get_active();
       this.config.disk.width = this.builder.get_object("diskWidthScale").get_value();
-      var devnum = 0;
-      for (var devname in this.config.disk.devices) {
+      devnum = 0;
+      for (devname in this.config.disk.devices) {
         this.config.disk.devices[devname].enabled = this.diskEnableSwitchList[devnum].get_active();
         this.config.disk.devices[devname].colors[0] = this.getColorByObject(this.diskDownButtonList[devnum]);
         this.config.disk.devices[devname].colors[1] = this.getColorByObject(this.diskUpButtonList[devnum]);
@@ -537,10 +541,11 @@ Preferences.prototype = {
     //check the parameters since ubuntu wants a reference instead of a returned value
     var params = getParamNames(this.builder.get_object(widgetname).get_rgba);
 
-    if (params === null) //mint
+    if (params === null) {
       c = this.builder.get_object(widgetname).get_rgba();
-    else if (params[0] == "color") //ubunut 12.10
+    } else if (params[0] === "color") {
       this.builder.get_object(widgetname).get_rgba(c);
+    }
 
     return [c.red, c.green, c.blue, c.alpha];
   },
@@ -550,10 +555,11 @@ Preferences.prototype = {
     //check the parameters since ubuntu wants a reference instead of a returned value
     var params = getParamNames(widget.get_rgba);
 
-    if (params === null) //mint
+    if (params === null) {
       c = widget.get_rgba();
-    else if (params[0] == "color") //ubunut 12.10
+    } else if (params[0] === "color") {
       widget.get_rgba(c);
+    }
 
     return [c.red, c.green, c.blue, c.alpha];
   },

@@ -1,7 +1,6 @@
 //#!/usr/bin/gjs
 const GTop = imports.gi.GTop; //psst this is really the one used
 const NMClient = imports.gi.NMClient;
-const NetworkManager = imports.gi.NetworkManager;
 const Gio = imports.gi.Gio;
 const UUID = "multicore-sys-monitor@ccadeptic23";
 const GLib = imports.gi.GLib;
@@ -47,7 +46,7 @@ MultiCpuDataProvider.prototype = {
     //I know its kind of a hack but it seems to work and i couldnt find a better way at this time
     //loop also initializes my lists
     if (this.cpucount <= 0) {
-      for (var i = 0; i < this.gtop.xcpu_total.length; i++) {
+      for (let i = 0; i < this.gtop.xcpu_total.length; i++) {
         //there should be some activity for a cpu in use on a system. If so count it.
         if (this.gtop.xcpu_total[i] > 0) {
           this.cpulist_total[this.cpucount] = 0;
@@ -65,11 +64,11 @@ MultiCpuDataProvider.prototype = {
     }
 
     // calculate ticks since last call
-    for (var i = 0; i < this.cpucount; i++) {
+    for (let i = 0; i < this.cpucount; i++) {
       var dtotal = this.gtop.xcpu_total[i] - this.cpulist_total[i];
       var dnice = this.gtop.xcpu_nice[i] - this.cpulist_nice[i];
-      var didle = this.gtop.xcpu_idle[i] - this.cpulist_idle[i];
-      var diowait = this.gtop.xcpu_iowait[i] - this.cpulist_iowait[i];
+      /*var didle = this.gtop.xcpu_idle[i] - this.cpulist_idle[i];
+      var diowait = this.gtop.xcpu_iowait[i] - this.cpulist_iowait[i];*/
 
       var dsys = this.gtop.xcpu_sys[i] - this.cpulist_sys[i];
       var duser = this.gtop.xcpu_user[i] - this.cpulist_user[i];
@@ -98,12 +97,14 @@ MultiCpuDataProvider.prototype = {
   },
 
   getTooltipString: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return "";
+    }
     var tooltipstr = _("------CPU------- \n");
     tooltipstr += _("cpu: ");
-    for (var i = 0; i < this.cpucount; i++)
+    for (var i = 0; i < this.cpucount; i++) {
       tooltipstr += Math.round(100 * this.cpulist_usage[i], 2).toString() + "% ";
+    }
     return tooltipstr + "\n";
   }
 };
@@ -145,8 +146,9 @@ MemDataProvider.prototype = {
   },
 
   getTooltipString: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return "";
+    }
     var tooltipstr = _("------mem------- \n");
     tooltipstr += _("usedup:\t") + Math.round(100 * this.memInfo[0]).toString() + "%\n";
     tooltipstr += _("cached:\t") + Math.round(100 * this.memInfo[1]).toString() + "%\n";
@@ -170,7 +172,7 @@ SwapDataProvider.prototype = {
   getData: function() {
     GTop.glibtop_get_swap(this.gtopSwap);
     var used = this.gtopSwap.used / this.gtopSwap.total;
-    var free = this.gtopSwap.free / this.gtopSwap.total;
+    //var free = this.gtopSwap.free / this.gtopSwap.total;
 
     this.swapInfo = [used];
 
@@ -181,8 +183,9 @@ SwapDataProvider.prototype = {
     return _("SWAP");
   }, //Name to be displayed for this data provider
   getTooltipString: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return "";
+    }
     var tooltipstr = _("------swap------- \n");
     tooltipstr += _("swap:\t") + (Math.round(10000 * this.swapInfo[0]) / 100).toString() + "%\n";
     return tooltipstr;
@@ -224,9 +227,9 @@ NetDataProvider.prototype = {
 
     for (var dname in newReadings) {
       if (dname in this.currentReadings) {
-        var currdevKBDownPerSec = Math.round(((newReadings[dname]["down"] - this.currentReadings[dname]["down"]) /
+        var currdevKBDownPerSec = Math.round(((newReadings[dname].down - this.currentReadings[dname].down) /
           secSinceLastUpdate) / 1024);
-        var currdevKBUpPerSec = Math.round(((newReadings[dname]["up"] - this.currentReadings[dname]["up"]) /
+        var currdevKBUpPerSec = Math.round(((newReadings[dname].up - this.currentReadings[dname].up) /
           secSinceLastUpdate) / 1024);
 
         this.currentReadingRates[dname] = {
@@ -251,8 +254,8 @@ NetDataProvider.prototype = {
     return _("NET");
   },
   getNetLoad: function() {
-    let down = 0;
-    let up = 0;
+    /*let down = 0;
+    let up = 0;*/
     var readings = [];
     var devices = this.getNetDevices();
     for (var dname in devices) {
@@ -278,21 +281,23 @@ NetDataProvider.prototype = {
     {
       for (var i = 0; i < devs.length; i++) {
         var dname = devs[i].get_iface();
-        if (this.disabledDevices.indexOf(dname) == -1)
+        if (this.disabledDevices.indexOf(dname) === -1) {
           devices[dname] = dname; //.push(dname);
+        }
       }
     }
     devices.sort(); //sort these really quick for displaying
     return devices;
   },
   getTooltipString: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return "";
+    }
 
     var tooltipstr = _("-------net-------\n");
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + _(": D: ") + this.currentReadingRates[dname]["down"] + _(" U: ") + this.currentReadingRates[
-        dname]["up"] + _(" (KiB/s)\n");
+      tooltipstr += dname + _(": D: ") + this.currentReadingRates[dname].down + _(" U: ") + this.currentReadingRates[
+        dname].up + _(" (KiB/s)\n");
     }
     return tooltipstr;
   }
@@ -314,16 +319,18 @@ DiskDataProvider.prototype = {
 
     this.currentReadingRates = [];
     var mountedDisks = this.getDiskDevices();
-    for (var dname in mountedDisks)
+    for (var dname in mountedDisks) {
       this.currentReadingRates[dname] = {
         read: 0,
         write: 0
       };
+    }
   },
 
   getData: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return [];
+    }
 
     var d = new Date();
     var newUpdateTime = d.getTime();
@@ -338,11 +345,11 @@ DiskDataProvider.prototype = {
       var currdevWrite = 0;
       if (dname in this.currentReadings) //if we have old values (not just plugged in)
       {
-        currdevRead = this.currentReadings[dname]["read"];
-        currdevWrite = this.currentReadings[dname]["write"];
-        var currdevMBReadPerSec = Math.round(((newReadings[dname]["read"] - currdevRead) / 1048576 /
+        currdevRead = this.currentReadings[dname].read;
+        currdevWrite = this.currentReadings[dname].write;
+        var currdevMBReadPerSec = Math.round(((newReadings[dname].read - currdevRead) / 1048576 /
           secSinceLastUpdate));
-        var currdevMBWritePerSec = Math.round(((newReadings[dname]["write"] - currdevWrite) / 1048576 /
+        var currdevMBWritePerSec = Math.round(((newReadings[dname].write - currdevWrite) / 1048576 /
           secSinceLastUpdate));
 
         readingRatesList.push(currdevMBReadPerSec);
@@ -388,13 +395,14 @@ DiskDataProvider.prototype = {
     this.disabledDevices = disableddeviceslist;
   },
   getTooltipString: function() {
-    if (!this.isEnabled)
+    if (!this.isEnabled) {
       return "";
+    }
 
     var tooltipstr = _("------disk------- \n");
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + _(": R: ") + this.currentReadingRates[dname]["read"] + " " + _(": W: ") + this.currentReadingRates[
-        dname]["write"] + _(" (MiB/s)\n");
+      tooltipstr += dname + _(": R: ") + this.currentReadingRates[dname].read + " " + _(": W: ") + this.currentReadingRates[
+        dname].write + _(" (MiB/s)\n");
     }
     return tooltipstr;
   },
@@ -414,11 +422,14 @@ DiskDataProvider.prototype = {
 
       if (mnt != null) {
         var drv = mnt.get_drive();
-        if (drv != null)
+        if (drv != null) {
           isDisk = !drv.is_media_removable();
+        }
         var mntroot = mnt.get_root();
-        if (isDisk && this.disabledDevices.indexOf(dname) == -1) //device is enabled, and is a disk
+        //device is enabled, and is a disk
+        if (isDisk && this.disabledDevices.indexOf(dname) === -1) {
           volDirs[dname] = mntroot.get_path();
+        }
       }
 
     }

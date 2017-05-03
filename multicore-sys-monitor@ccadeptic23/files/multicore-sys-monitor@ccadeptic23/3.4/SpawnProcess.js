@@ -11,49 +11,44 @@ ProcessSpawnHandler.prototype = {
 
   _init: function(workingdir, childargs) {
 
-    try {
-      this.workingdir = workingdir;
-      this.childargs = childargs;
-      this.currentMessage = "";
-      let [success, pid, stdin, stdout, stderr] =
-      GLib.spawn_async_with_pipes(this.workingdir, this.childargs,
-        null, /* envp */
-        GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-        null /* child_setup */ );
+    this.workingdir = workingdir;
+    this.childargs = childargs;
+    this.currentMessage = "";
+    let [success, pid, stdin, stdout, stderr] =
+    GLib.spawn_async_with_pipes(this.workingdir, this.childargs,
+      null, /* envp */
+      GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+      null /* child_setup */ );
 
-      this._childPid = pid;
-      this._stdin = new Gio.UnixOutputStream({
-        fd: stdin,
-        close_fd: true
-      });
-      this._stdout = new Gio.UnixInputStream({
-        fd: stdout,
-        close_fd: true
-      });
+    this._childPid = pid;
+    this._stdin = new Gio.UnixOutputStream({
+      fd: stdin,
+      close_fd: true
+    });
+    this._stdout = new Gio.UnixInputStream({
+      fd: stdout,
+      close_fd: true
+    });
 
-      // We need this one too, even if don't actually care of what the process
-      // has to say on stderr, because otherwise the fd opened by g_spawn_async_with_pipes
-      // is kept open indefinitely
-      let stderrStream = new Gio.UnixInputStream({
-        fd: stderr,
-        close_fd: true
-      });
-      stderrStream.close(null);
-      this._dataStdout = new Gio.DataInputStream({
-        base_stream: this._stdout
-      });
+    // We need this one too, even if don't actually care of what the process
+    // has to say on stderr, because otherwise the fd opened by g_spawn_async_with_pipes
+    // is kept open indefinitely
+    let stderrStream = new Gio.UnixInputStream({
+      fd: stderr,
+      close_fd: true
+    });
+    stderrStream.close(null);
+    this._dataStdout = new Gio.DataInputStream({
+      base_stream: this._stdout
+    });
 
-      this._readChildStdout();
+    this._readChildStdout();
 
-      this._childWatch = GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid,
-        Lang.bind(this, this._childFinished));
+    this._childWatch = GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid,
+      Lang.bind(this, this._childFinished));
 
-      this.isFinished = false;
-      this.debugmode = false;
-
-    } catch (e) {
-      print("error while spawning child " + e);
-    }
+    this.isFinished = false;
+    this.debugmode = false;
   },
   setDebugMode: function(dbgmode) {
     this.debugmode = dbgmode;
@@ -64,8 +59,9 @@ ProcessSpawnHandler.prototype = {
   //},
 
   destroy: function() {
-    if (this._destroyed)
+    if (this._destroyed) {
       return;
+    }
 
     GLib.source_remove(this._childWatch);
 
@@ -84,7 +80,7 @@ ProcessSpawnHandler.prototype = {
       // Two consecutive newlines mean that the child should be closed
       // (the actual newlines are eaten by Gio.DataInputStream)
       // Send a termination message
-      if (line == '' && this._previousLine == '') {
+      if (line === '' && this._previousLine === '') {
         try {
           this._stdin.write('QUIT\n\n', null);
         } catch (e) {} /* ignore broken pipe errors */
@@ -109,8 +105,9 @@ ProcessSpawnHandler.prototype = {
         return;
       }
       this._childProcessLine(line.toString());
-      if (this.debugmode)
+      if (this.debugmode) {
         print(this.currentMessage);
+      }
       // try to read more!
       this._readChildStdout();
     }));

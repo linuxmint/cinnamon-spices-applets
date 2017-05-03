@@ -70,8 +70,9 @@ ConfigSettings.prototype = {
   getNETDisabledDevices: function() {
     var disabledDeviceList = [];
     for (var ifacename in this._prefs.net.devices) {
-      if (!this._prefs.net.devices[ifacename].enabled)
+      if (!this._prefs.net.devices[ifacename].enabled) {
         disabledDeviceList.push(ifacename);
+      }
     }
     return disabledDeviceList;
   },
@@ -112,8 +113,9 @@ ConfigSettings.prototype = {
   getDiskDisabledDevices: function() {
     var disabledDeviceList = [];
     for (var dname in this._prefs.disk.devices) {
-      if (!this._prefs.disk.devices[dname].enabled)
+      if (!this._prefs.disk.devices[dname].enabled) {
         disabledDeviceList.push(dname);
+      }
     }
     return disabledDeviceList;
   },
@@ -121,13 +123,14 @@ ConfigSettings.prototype = {
     return this.getDeviceColorList("disk");
   },
   adjustCPUcount: function(newcpucount) {
-    if (this._prefs.cpu.colors.length != newcpucount) //only resize colors if necessary
+    if (this._prefs.cpu.colors.length !== newcpucount) //only resize colors if necessary
     {
       //incase the config is screwed up fix it
-      if (this._prefs.cpu.colors.length <= 0)
+      if (this._prefs.cpu.colors.length <= 0) {
         this._prefs.cpu.colors = [
           [1, 0, 0, 1]
         ];
+      }
 
       var oldcpucount = this._prefs.cpu.colors.length;
       var newcolors = [];
@@ -141,12 +144,12 @@ ConfigSettings.prototype = {
     }
   },
   adjustDevices: function(devtype, newdevlist) {
-    var oldifacecount = Object.keys(this._prefs[devtype].devices).length;
+    //var oldifacecount = Object.keys(this._prefs[devtype].devices).length;
     var ifacekeys = Object.keys(this._prefs[devtype].devices);
     var newdevicesobj = {};
     var ischanged = false;
     for (var i = 0; i < newdevlist.length; i++) {
-      if (ifacekeys.indexOf(newdevlist[i]) == -1) {
+      if (ifacekeys.indexOf(newdevlist[i]) === -1) {
         //add it with new made up values
         newdevicesobj[newdevlist[i]] = {
           enabled: true,
@@ -173,8 +176,9 @@ ConfigSettings.prototype = {
 
     this._prefs[devtype].devices = newdevicesobj;
     //to save or not to save... only if the devices have changed
-    if (ischanged)
+    if (ischanged) {
       this.saveSettings(); //to save
+    }
   },
   adjustNetInterfaces: function(newdevlist) {
     this.adjustDevices("net", newdevlist);
@@ -263,17 +267,19 @@ ConfigSettings.prototype = {
         },
       }
     };
-    try {
-      var dir = Gio.file_new_for_path(this.path);
-      var prefsFile = dir.get_child(this.conffile);
 
-      var prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
+    let dir = Gio.file_new_for_path(this.path);
+    let prefsFile = dir.get_child(this.conffile);
+    //let prefsFilePath = prefsFile.get_path();
+    if (prefsFile.query_exists(null)) {
+
+      let prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
       this._prefs = JSON.parse(prefsContent);
       return true;
-    } catch (e) {
-      global.logError('Failed to load prefs.json: ' + e + " Attempting to create it.");
+    } else {
       this.saveSettings(); //We dont have a config file so we attempt to make one for next time
       return false;
     }
+
   },
 };
