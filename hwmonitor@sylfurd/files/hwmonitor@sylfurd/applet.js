@@ -50,15 +50,15 @@ try {
   NoInstdeps = true;
 }
 
-function MyApplet(metadata, orientation) {
-	this._init(metadata, orientation);
+function MyApplet(metadata, orientation, panel_height) {
+    this._init(metadata, orientation, panel_height);
 }
 
 MyApplet.prototype = {
 	__proto__: Applet.IconApplet.prototype,
 
-    _init: function(metadata, orientation) {
-        Applet.IconApplet.prototype._init.call(this, orientation);
+    _init: function (metadata, orientation, panel_height) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panel_height);
 
 		try {
 
@@ -73,17 +73,19 @@ MyApplet.prototype = {
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
-			this.graphArea = new St.DrawingArea();
-			this.graphArea.width = 88;
-			this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+            this.graphArea = new St.DrawingArea();
+            this.graphArea.height = this._panelHeight;
+            // Request space for two graphs where w=h*3 each
+            this.graphArea.width = (this._panelHeight * 6);
+            this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
 
 			this.actor.add_actor(this.graphArea);
 
 			let cpuProvider =  new CpuDataProvider();
 			let memProvider =  new MemDataProvider();
 
-			let cpuGraph = new Graph(this.graphArea, cpuProvider);
-			let memGraph = new Graph(this.graphArea, memProvider);
+            let cpuGraph = new Graph(this.graphArea, cpuProvider, this._panelHeight);
+            let memGraph = new Graph(this.graphArea, memProvider, this._panelHeight);
 
 			this.graphs = new Array();
 			this.graphs[0] = cpuGraph;
@@ -122,44 +124,45 @@ MyApplet.prototype = {
 		_gsmApp.activate();
 	},
 
-	onGraphRepaint: function(area) {
-		try {
-			for (index = 0; index < 2; index++)
-			{
-				area.get_context().translate(index*45, 0);
-				this.graphs[index].paint(area);
-			}
-		}catch(e)
-		{
-			global.logError(e);
-		}
-	}
+    onGraphRepaint: function (area) {
+        try {
+            this.graphArea.height = this._panelHeight;
+            // Request space for two graphs where w=h*3 each
+            this.graphArea.width = (this._panelHeight * 6);
+            for (let index = 0; index < 2; index++) {
+                area.get_context().translate((index * (this._panelHeight * 3)), 0);
+                this.graphs[index].paint(area, this._panelHeight);
+            }
+        } catch (e) {
+            global.logError(e);
+        }
+    }
 };
 
-function Graph(area, provider) {
-	this._init(area, provider);
+function Graph(area, provider, panel_height) {
+    this._init(area, provider, panel_height);
 }
 
 Graph.prototype = {
 
-	_init: function(_area, _provider) {
-		this.width = 41;
-		let [w, h] = _area.get_surface_size();
-		this.datas = new Array(this.width);
+    _init: function (_area, _provider, panel_height) {
+        this.width = (panel_height * 3) - 3;
 
-		for (i = 0; i <this.datas.length; i++)
-        {
-        	this.datas[i] = 0;
+        this.datas = new Array(this.width);
+
+        for (let i = 0; i < this.datas.length; i++) {
+            this.datas[i] = 0;
         }
 
-		this.height = 20;
-		this.provider = _provider;
+        this.height = panel_height - 2;
+        this.provider = _provider;
 
-	},
+    },
 
-	paint: function(area)
-	{
-		let cr = area.get_context();
+    paint: function (area, panel_height) {
+        this.width = (panel_height * 3) - 3;
+        this.height = panel_height - 2;
+        let cr = area.get_context();
 
 		// Border
         cr.setSourceRGBA(1, 1, 1, 0.9);
@@ -308,7 +311,6 @@ MemDataProvider.prototype = {
 };
 
 
-function main(metadata, orientation) {
-	let myApplet = new MyApplet(metadata, orientation);
-	return myApplet;
+function main(metadata, orientation, panel_height) {
+    return new MyApplet(metadata, orientation, panel_height);
 }
