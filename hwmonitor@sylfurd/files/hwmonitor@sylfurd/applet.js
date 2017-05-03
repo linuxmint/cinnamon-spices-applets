@@ -60,6 +60,8 @@ MyApplet.prototype = {
     _init: function (metadata, orientation, panel_height) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height);
 
+        this.graphs = [];
+
 		try {
 
 			if (NoInstdeps)
@@ -87,7 +89,6 @@ MyApplet.prototype = {
             let cpuGraph = new Graph(this.graphArea, cpuProvider, this._panelHeight);
             let memGraph = new Graph(this.graphArea, memProvider, this._panelHeight);
 
-			this.graphs = new Array();
 			this.graphs[0] = cpuGraph;
 			this.graphs[1] = memGraph;
 
