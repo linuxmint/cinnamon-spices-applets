@@ -25,9 +25,9 @@ const FEED_IMAGE_WIDTH_MAX = 200;
 const TOOLTIP_WIDTH = 500.0;
 const MIN_MENU_WIDTH = 400;
 const GLib = imports.gi.GLib;
-// Set the path constants
+// Set the path constants 
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
-const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/" + UUID;
+const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/configs/" + UUID;
 const ICON_PATH = APPLET_PATH + '/icons/';
 const FEED_CONFIG_FILE = DATA_PATH + "/feeds.json";
 imports.searchPath.push(APPLET_PATH);
@@ -39,7 +39,7 @@ const FeedReader = imports.feedreader;
 const Gio = imports.gi.Gio;
 
 const Gtk = imports.gi.Gtk;
-const Gettext = imports.gettext;
+
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
@@ -55,6 +55,7 @@ const Main = imports.ui.main;
 const Signals = imports.signals;
 
 // Translation support
+const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
@@ -237,15 +238,15 @@ FeedApplet.prototype = {
             this.instance_name = instance_name.trim();
         }
         // Read the json config file.
-        let argv = ["python", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
+        let argv = ["python3", APPLET_PATH + "/ConfigFileManager.py", FEED_CONFIG_FILE];
         Util.spawn_async(argv, Lang.bind(this, this._load_feeds));                    
     },
     /* Private method used to load / reload all the feeds. */
     _load_feeds: function(url_json) {
-        this.logger.debug("FeedApplet._load_feeds");
+        this.logger.debug("FeedApplet._load_feeds");        
         this.feeds = new Array();
         this.menu.removeAll();
-        var data = JSON.parse(url_json);
+        let data = JSON.parse(url_json);
         let i = 0;
 
         // Find the feeds for the selected instance_name and populate those feeds.
@@ -431,7 +432,7 @@ FeedApplet.prototype = {
         try {            
             this._set_permissions(pythonfile);
 
-            let argv = ['python', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
+            let argv = ['python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE, this.instance_name];
             Util.spawn_async(argv, Lang.bind(this, this._read_json_config));     
         }
         catch (e) {
@@ -447,7 +448,7 @@ FeedApplet.prototype = {
         let pythonfile = 'ConfigFileManager.py';
         try {
             this._set_permissions(pythonfile);        
-            let argv = ['python', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
+            let argv = ['python3', APPLET_PATH + '/' + pythonfile, FEED_CONFIG_FILE];
             argv.push('--instance', this.instance_name);
             argv.push('--oldurl', current_url);
             argv.push('--newurl', redirected_url);
