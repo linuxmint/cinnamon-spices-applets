@@ -27,6 +27,8 @@ const Cairo = imports.cairo;
 const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+// Width of the applet will be ScaleRatio-times the height of it.
+const ScaleRatio = 3;
 
 const UUID = "hwmonitor@sylfurd";
 let NoInstdeps = false;
@@ -77,8 +79,8 @@ MyApplet.prototype = {
 
             this.graphArea = new St.DrawingArea();
             this.graphArea.height = this._panelHeight;
-            // Request space for two graphs where w=h*3 each
-            this.graphArea.width = (this._panelHeight * 6);
+            // Request space for two graphs where w=h*ScaleRatio each
+            this.graphArea.width = (this._panelHeight * ScaleRatio * 2);
             this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
 
 			this.actor.add_actor(this.graphArea);
@@ -128,10 +130,10 @@ MyApplet.prototype = {
     onGraphRepaint: function (area) {
         try {
             this.graphArea.height = this._panelHeight;
-            // Request space for two graphs where w=h*3 each
-            this.graphArea.width = (this._panelHeight * 6);
+            // Request space for two graphs where w=h*ScaleRatio each
+            this.graphArea.width = (this._panelHeight * ScaleRatio * 2);
             for (let index = 0; index < 2; index++) {
-                area.get_context().translate((index * (this._panelHeight * 3)), 0);
+                area.get_context().translate((index * (this._panelHeight * ScaleRatio)), 0);
                 this.graphs[index].paint(area, this._panelHeight);
             }
         } catch (e) {
@@ -147,7 +149,7 @@ function Graph(area, provider, panel_height) {
 Graph.prototype = {
 
     _init: function (_area, _provider, panel_height) {
-        this.width = (panel_height * 3) - 3;
+        this.width = (panel_height * ScaleRatio) - 3;
 
         this.datas = new Array(this.width);
 
@@ -161,7 +163,7 @@ Graph.prototype = {
     },
 
     paint: function (area, panel_height) {
-        this.width = (panel_height * 3) - 3;
+        this.width = (panel_height * ScaleRatio) - 3;
         this.height = panel_height - 2;
         let cr = area.get_context();
 
