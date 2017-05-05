@@ -155,7 +155,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "paused";
             this.pausedAt = this.currentCount; // Changed to reduce load on Settings
@@ -163,14 +163,14 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "ready";
             this.updateUI();
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
+        menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.updateUI();
@@ -181,7 +181,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from original start time"));
+        menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from original start time"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.counterStatus = "running";
