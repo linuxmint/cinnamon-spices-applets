@@ -428,7 +428,7 @@ if (SHOW_RECENT_DOCUMENTS){
         });
         sectionMenu.addMenuItem(this.networkItem);
         
-        let icon = new St.Icon({icon_name: "gnome-globe", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+        icon = new St.Icon({icon_name: "gnome-globe", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
         this.connectItem = new MenuItem(icon, _("Connect to..."));
         this.connectItem.connect('activate', function(actor, event) {
             new launch().command("nemo-connect-server");
