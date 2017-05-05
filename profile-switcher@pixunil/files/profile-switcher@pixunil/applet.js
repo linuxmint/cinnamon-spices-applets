@@ -95,7 +95,7 @@ ProfileMenuItem.prototype = {
         removeItem.activate = bind(manager.removeProfile, manager, this);
         this.menu.addMenuItem(removeItem);
 
-        let removeItem = new IconMenuItem(_("Rename Profile"), "text-editor");
+        removeItem = new IconMenuItem(_("Rename Profile"), "text-editor");
         removeItem.connect("activate", bind(manager.renameProfile, manager, this));
         this.menu.addMenuItem(removeItem);
     },
