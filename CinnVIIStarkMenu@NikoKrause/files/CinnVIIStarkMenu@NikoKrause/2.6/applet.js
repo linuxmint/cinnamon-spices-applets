@@ -3834,13 +3834,13 @@ MyApplet.prototype = {
                 actor.hide();
             }
         }
-        let actors = this.categoriesBox.get_children();
+        actors = this.categoriesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.style_class = "menu-category-button";
             actor.show();
         }
-        let actors = this.favoritesBox.get_children();
+        actors = this.favoritesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.remove_style_pseudo_class("hover");
