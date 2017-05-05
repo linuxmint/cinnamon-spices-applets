@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-09 15:25+1200\n"
+"POT-Creation-Date: 2017-05-08 04:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,112 +37,117 @@ msgid ""
 " at the top right"
 msgstr ""
 
-#: applet.js:434
+#: applet.js:427
+msgid ""
+"If no Interface is Active, the last available information has been displayed"
+msgstr ""
+
+#: applet.js:439
 msgid "Cumulative Data Usage Information:"
 msgstr ""
 
-#: applet.js:461
+#: applet.js:466
 msgid "Current Connection and Interface Information"
 msgstr ""
 
-#: applet.js:473
+#: applet.js:478
 msgid "No network monitored. Please select one right-clicking the applet."
 msgstr ""
 
-#: applet.js:480
+#: applet.js:485
 msgid "Note: Alerts not enabled in Settings"
 msgstr ""
 
-#: applet.js:496
+#: applet.js:501
 msgid "Alert level (Orange):"
 msgstr ""
 
-#: applet.js:496
+#: applet.js:501
 #, c-format
 msgid "% of Data Limit of"
 msgstr ""
 
-#: applet.js:501 applet.js:503 applet.js:509 applet.js:511 applet.js:517
+#: applet.js:506 applet.js:508 applet.js:514 applet.js:516 applet.js:522
 msgid "Cumulative Data Use"
 msgstr ""
 
-#: applet.js:501 applet.js:509 applet.js:517
+#: applet.js:506 applet.js:514 applet.js:522
 msgid "with offset of"
 msgstr ""
 
-#: applet.js:564
+#: applet.js:545
 msgid "Select a network manager interface to be monitored:"
 msgstr ""
 
-#: applet.js:577
+#: applet.js:558
 msgid "(Active)"
 msgstr ""
 
-#: applet.js:590
+#: applet.js:571
 msgid "or Select an independent interface to be monitored:"
 msgstr ""
 
-#: applet.js:594
+#: applet.js:575
 msgid "for most USB Mobile Internet Modems)"
 msgstr ""
 
-#: applet.js:606
+#: applet.js:587
 msgid "for Android Bluetooth PAN Connections)"
 msgstr ""
 
-#: applet.js:616
+#: applet.js:597
 msgid "Check for Changes in Devices and Display Options"
 msgstr ""
 
-#: applet.js:624
+#: applet.js:605
 msgid "Toggle Display from ↓ and ↑ to ⇵"
 msgstr ""
 
-#: applet.js:638 applet.js:648 applet.js:658
+#: applet.js:619 applet.js:629 applet.js:639
 msgid "Reset Cumulative Data Usage"
 msgstr ""
 
-#: applet.js:671
+#: applet.js:652
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:674
+#: applet.js:655
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:680
+#: applet.js:661
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:686
+#: applet.js:667
 msgid "View the Help File"
 msgstr ""
 
-#: applet.js:695
+#: applet.js:676
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr ""
 
-#: applet.js:701
+#: applet.js:682
 msgid "Open alertScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:707
+#: applet.js:688
 msgid "Open suspendScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:715
+#: applet.js:696
 msgid "Test alertScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:721
+#: applet.js:702
 msgid "Test suspendScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:727
+#: applet.js:708
 msgid "Test Crisis Management Function (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:807
+#: applet.js:777
 msgid ""
 "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
 "\n"
@@ -151,15 +156,15 @@ msgid ""
 "or disconnect using the Network Manager Applet"
 msgstr ""
 
-#: applet.js:879
+#: applet.js:849
 msgid "Interface:"
 msgstr ""
 
-#: applet.js:879 applet.js:882
+#: applet.js:849 applet.js:852
 msgid "Downloaded:"
 msgstr ""
 
-#: applet.js:879 applet.js:882
+#: applet.js:849 applet.js:852
 msgid "Uploaded:"
 msgstr ""
 
@@ -498,7 +503,6 @@ msgstr ""
 #. netusagemonitor@pdcurtis->metadata.json->description
 msgid ""
 "A Comprehensive Data Usage Monitor with alerts and cumulative data functions"
-" for Cinnamon"
 msgstr ""
 
 #. netusagemonitor@pdcurtis->metadata.json->name

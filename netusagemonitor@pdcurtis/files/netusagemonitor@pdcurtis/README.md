@@ -6,11 +6,11 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
 ## Special Requirements:
 
-   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load. On both Mint and Ubuntu it can be installed by the synaptic package manager or with the terminal command: 
-                      ```sudo apt-get install gir1.2-gtop-2.0```     
-     
-   * For full facilities including notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. On both Mint and Ubuntu they can be installed  by the synaptic package manager or with the terminal command: 
-            ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3```   
+   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load. It can be installed by the synaptic package manager or with the terminal command:
+                      ```sudo apt-get install gir1.2-gtop-2.0```
+
+   * For full facilities including notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
+            ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
    * Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets.
 
 ## Features:
@@ -48,8 +48,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
       + The Resolution of displayed upload and downloads (0 to 2 decimal places)
       + Change the units for Data Limits and Cumulative Offsets between Mbytes or Gbytes 
       + Setting an interface to use as Default if no other interface is active at start-up - for Wifi hotspots and Mobile Broadband where the connection is manual.
-      + Enabling Alerts on the current monitored interface and
-        setting the Data Limit for the current connection on that interface and
+      + Enabling Alerts on the current monitored interface and setting the Data Limit for the current connection on that interface and
            - setting the Alert Level as a percentage of the Data Limit by a slider (duplicated in the left click menu as it is frequently used.
            - Enabling each of three Cumulative Usage Monitors
     Setting an offset for each Cumulative Usage Monitors (v20_2.6.0 or higher)
@@ -68,13 +67,21 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
 ## Additional Configuration
 
-The display width, justification and font details are set using an external Cascading Style Sheet (.css) file which is in the main folder (usualy ```~/.local/share/cinnamon/netusage@pdcurtis/stylesheet.css```).
+### Styling
+
+The display width, justification and font details are set using an external Cascading Style Sheet (.css) file which is in the main folder (usualy ```~/.local/share/cinnamon/netusagemonitor@pdcurtis/stylesheet.css```).
 
 The settings in this css file govern the width of the Applet and the font. Changes may be required with some themes to avoid the display width being exceeded which leads to jitter with high network speeds and resolutions or to allow a reduced size width to save panel space. The latest version also allow the backgrounds to be configured using this css file to optimise to a particular theme although the defaults work well on most popular themes.
 
+Note: These settings will be overwritten if the applet is reloaded.
+
+### Interfaces monitored by the optional ```vnstat``` display.
+
+The system program vnstat which provides the option of a graphic history of data used is automatically set up when it is installed to monitor the network devices/interfaces installed in the machine at the time. It is possible to add additional USB network devices and possibly bluetooth devices to the list of monitored interface ```man vnstat``` in a terminal will give details.
+
 ## Status
 
-The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running Ubuntu 12.04 and Mint 15 with a variety of themes. It has been tested using Cinnamon 1.8, - 3.2 and had minor modifications for the changes introduced in Mint 18. The current Version has been tested with Cinnamon 2.2 - 3.2 and Mint 16 - 18.1
+The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running Mint 15 with a variety of themes. It is designed to work with Cinammon 1.8 and higher. The current Version has been tested with Cinnamon 2.2 - 3.2 and Mint 16 - 18.1. 
 
 ## Translations and other Contributions
 
@@ -82,7 +89,7 @@ The internal changes required in the applet to allow translations are being impl
 
 Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
 
-Thanks are given for the very useful contributions from @collinss and @Odyseus to helping harmonise the menus with other applets.
+Thanks are given for the very useful contributions from @collinss and @Odyseus to help harmonise the menus with other applets.
 
 ## Manual Installation:
 
@@ -95,7 +102,9 @@ Thanks are given for the very useful contributions from @collinss and @Odyseus t
 
 ### Version information prior to the changes introduced by the new Cinnamon Spices Web site in January 2017
 
-There is a full change log in the applet folder called changelog.txt which can also be accessed  through the Context (Right Click) menu in the Housekeeping sub-menu. The earlier  development was carried out on Github along with my other applets at [github.com/pdcurtis/cinnamon-applets](https://github.com/pdcurtis/cinnamon-applets)
+There is a full change log in the applet folder called changelog.txt which can also be accessed  through the Context (Right Click) menu in the Housekeeping sub-menu. The initial  development was carried out on Github along with my other applets at [github.com/pdcurtis/cinnamon-applets](https://github.com/pdcurtis/cinnamon-applets)
 
+### Contact
 
+The author can be contacted via the comments on the [Cinnamon Spices Web Site](http://cinnamon-spices.linuxmint.com/applets/view/141), however that does not automatically notify me so if you want a rapid response please also alert me via the [Form at www.pcurtis.com](http://www.pcurtis.com/contact_form.htm?applets). On github, mentioning @pdcurtis in any conversation will cause it to be emailed to me.
 
