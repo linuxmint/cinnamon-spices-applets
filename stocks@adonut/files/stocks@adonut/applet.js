@@ -9,8 +9,15 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "stocks@adonut";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
+
+function _(str) {
+    return Gettext.dgettext(UUID, str)
+}
+
 const AppletDir = imports.ui.appletManager.appletMeta['stocks@adonut'].path;
 // for repeated updating:
 const Mainloop = imports.mainloop;
@@ -80,7 +87,7 @@ function get_stocks(company) {
 	} 
 	catch (err) {
 		ChIcon = "";
-		return "Invalid Stock?: "+company; 
+		return _("Invalid Stock?:") + " "+company; 
 	}		
 	
 	if (loaded ===true) {
@@ -256,7 +263,6 @@ function get_curl_stocks(company){
 
 
 */ 
-
 
 
 
