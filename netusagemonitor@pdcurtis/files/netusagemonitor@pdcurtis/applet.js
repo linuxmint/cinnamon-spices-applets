@@ -607,13 +607,13 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         if (this.monitoredInterfaceName == "bnep0") {
             displayname3 = "\u2714" + displayname3;
         }
-        let menuitem = new PopupMenu.PopupMenuItem(displayname3);
+        menuitem = new PopupMenu.PopupMenuItem(displayname3);
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("bnep0");
         }));
         this.myMenuSection.addMenuItem(menuitem)
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.rebuildFlag = true;
         }));
@@ -621,7 +621,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         this.myMenuSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.compactDisplay) {
                 this.compactDisplay = false;
@@ -635,7 +635,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         // Code to reset Cumulative Data Usage and set their comments to the current date and time
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT1 = 0;
@@ -645,7 +645,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT2 = 0;
@@ -655,7 +655,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT3 = 0;
