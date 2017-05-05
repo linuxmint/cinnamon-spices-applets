@@ -2097,7 +2097,7 @@ MyApplet.prototype = {
         this.favoritesBox.add_actor(button.actor, { y_align: St.Align.END, y_fill: false });
 
         //Logout button
-        let button = new SystemButton(this, "system-log-out", launchers.length + 3,
+        button = new SystemButton(this, "system-log-out", launchers.length + 3,
                                       _("Logout"),
                                       _("Leave the session"));
 
@@ -2112,7 +2112,7 @@ MyApplet.prototype = {
         this.favoritesBox.add_actor(button.actor, { y_align: St.Align.END, y_fill: false });
 
         //Shutdown button
-        let button = new SystemButton(this, "system-shutdown", launchers.length + 3,
+        button = new SystemButton(this, "system-shutdown", launchers.length + 3,
                                       _("Quit"),
                                       _("Shutdown the computer"));
 
@@ -2340,13 +2340,13 @@ MyApplet.prototype = {
                 actor.hide();
             }
         }
-        let actors = this.categoriesBox.get_children();
+        actors = this.categoriesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.style_class = "menu-category-button";
             actor.show();
         }
-        let actors = this.favoritesBox.get_children();
+        actors = this.favoritesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.remove_style_pseudo_class("hover");
