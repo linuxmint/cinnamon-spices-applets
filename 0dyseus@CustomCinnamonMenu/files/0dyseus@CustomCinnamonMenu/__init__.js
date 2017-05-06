@@ -14,11 +14,11 @@ const DND = imports.ui.dnd;
 const Meta = imports.gi.Meta;
 const GLib = imports.gi.GLib;
 const Pango = imports.gi.Pango;
-const SearchProviderManager = imports.ui.searchProviderManager;
 const Tooltips = imports.ui.tooltips;
 const Gettext = imports.gettext;
-const ModalDialog = imports.ui.modalDialog;
 const AccountsService = imports.gi.AccountsService;
+
+Gettext.bindtextdomain(appletUUID, GLib.get_home_dir() + "/.local/share/locale");
 
 /**
  * Used by portOverrides.
@@ -27,9 +27,6 @@ const AccountsService = imports.gi.AccountsService;
 // const Mainloop = imports.mainloop;
 // const GObject = imports.gi.GObject;
 
-// For translation mechanism.
-// Comments that start with // NOTE: are to be extracted by xgettext
-// and are directed to translators only.
 function _(aStr) {
     let customTrans = Gettext.dgettext(appletUUID, aStr);
 
@@ -39,6 +36,7 @@ function _(aStr) {
     return Gettext.gettext(aStr);
 }
 
+const CINNAMON_VERSION = GLib.getenv("CINNAMON_VERSION");
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 
 /**
@@ -47,12 +45,12 @@ const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 const escapeUnescapeReplacer = {
     escapeHash: {
         _: function(input) {
-            var ret = escapeUnescapeReplacer.escapeHash[input];
+            let ret = escapeUnescapeReplacer.escapeHash[input];
             if (!ret) {
                 if (input.length - 1) {
                     ret = String.fromCharCode(parseInt(input.substring(input.length - 3 ? 2 : 1), 16));
                 } else {
-                    var code = input.charCodeAt(0);
+                    let code = input.charCodeAt(0);
                     ret = code < 256 ? "%" + (0 + code.toString(16)).slice(-2).toUpperCase() : "%u" + ("000" + code.toString(16)).slice(-4).toUpperCase();
                 }
                 escapeUnescapeReplacer.escapeHash[ret] = input;
@@ -75,8 +73,7 @@ const escapeUnescapeReplacer = {
     }
 };
 
-/**
- * Overrides needed for retro-compatibility.
+/* Overrides needed for retro-compatibility.
  * Mark for deletion on EOL.
  */
 // function portOverrides() {
@@ -119,8 +116,7 @@ const escapeUnescapeReplacer = {
  * want to use it.
  */
 
-/**
- * Note to myself:
+/* Note to myself:
  *     I had problems when inserting anything other than
  *     a PopupSeparatorMenuItem into the menu (keyboard nav. broken).
  *     It took me a sweet load of time figuring out why the malfunction!!! /&·$/&%$&%
@@ -212,12 +208,11 @@ ApplicationContextMenuItem.prototype = {
 
         this.addActor(this.label);
 
-        this._tooltip = new Tooltips.Tooltip(this.actor, "");
+        this._tooltip = new CustomTooltip(this.actor, "");
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         let pathToDesktopFile = this._appButton.app.get_app_info().get_filename();
-        let process;
         let likelyHasSucceeded = false;
         let cmd = "";
 
@@ -308,7 +303,7 @@ ApplicationContextMenuItem.prototype = {
                     elevated + "gtk-launch " + this._appButton.app.get_id().replace(/.desktop$/g, "") + "\"";
 
                 try {
-                    let [success, argv] = GLib.shell_parse_argv(cmd);
+                    let [success, argv] = GLib.shell_parse_argv(cmd); // jshint ignore:line
 
                     let flags = GLib.SpawnFlags.SEARCH_PATH;
                     GLib.spawn_async(null, argv, null, flags, null);
@@ -326,23 +321,17 @@ ApplicationContextMenuItem.prototype = {
                 }
                 break;
             case "open_desktop_file_folder":
-                let dirPath;
                 try {
-                    process = new ShellOutputProcess(['dirname', pathToDesktopFile]);
-                    dirPath = process.spawn_sync_and_get_output();
+                    Util.spawn_async(["dirname", pathToDesktopFile],
+                        Lang.bind(this, function(aOutput) {
+                            let dirPath = aOutput.trim();
+                            this._openDesktopFileFolder(dirPath);
+                        })
+                    );
                 } catch (aErr) {
-                    dirPath = false;
-                    Main.notify("[Custom Cinnamon Menu]", aErr.message);
+                    Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr.message);
                     global.logError(aErr.message);
-                }
-
-                try {
-                    Util.spawnCommandLine("xdg-open " + dirPath);
-                } catch (aErr) {
-                    Main.notify("[Custom Cinnamon Menu]", aErr.message);
-                    global.logError(aErr.message);
-                } finally {
-                    this._appButton.appsMenuButton.menu.close(this._appButton.appsMenuButton.pref_animate_menu);
+                    this._openDesktopFileFolder("");
                 }
                 break;
             case "run_as_root":
@@ -351,7 +340,7 @@ ApplicationContextMenuItem.prototype = {
                         " gtk-launch " + this._appButton.app.get_id());
                     likelyHasSucceeded = true;
                 } catch (aErr) {
-                    Main.notify("[Custom Cinnamon Menu]", aErr.message);
+                    Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr.message);
                     global.logError(aErr.message);
                     likelyHasSucceeded = false;
                 } finally {
@@ -364,42 +353,24 @@ ApplicationContextMenuItem.prototype = {
                 }
                 break;
             case "open_with_text_editor":
-                let currentUser;
-                let fileOwner;
-
-                try {
-                    currentUser = GLib.get_user_name().toString();
-                    // Get .desktop file owner.
-                    process = new ShellOutputProcess(['stat', '-c', '"%U"', pathToDesktopFile]);
-                    fileOwner = process.spawn_sync_and_get_output()
-                        .replace(/\s+/g, "")
-                        // If I use the literal double quotes inside the RegEx,
-                        // cinnamon-json-makepot with the --js argument breaks.
-                        // SyntaxError: unterminated string literal
-                        .replace(/\u0022/g, "");
-                } catch (aErr) {
-                    fileOwner = false;
-                    global.logError(aErr.message);
-                }
-
-                if (this._appButton.appsMenuButton.pref_gain_privileges_on_context &&
-                    currentUser !== fileOwner) {
-                    cmd += this._appButton.appsMenuButton.pref_privilege_elevator;
-                }
-
-                let customEditor = this._appButton.appsMenuButton.pref_custom_editor_for_edit_desktop_file_on_context;
-                if (customEditor !== "")
-                    cmd += " " + customEditor + " " + pathToDesktopFile;
-                else
-                    cmd += " xdg-open " + pathToDesktopFile;
-
-                try {
-                    Util.spawnCommandLine(cmd);
-                } catch (aErr) {
-                    Main.notify("[Custom Cinnamon Menu]", aErr.message);
-                    global.logError(aErr.message);
-                } finally {
-                    this._appButton.appsMenuButton.menu.close(this._appButton.appsMenuButton.pref_animate_menu);
+                if (this._appButton.appsMenuButton.pref_gain_privileges_on_context) {
+                    try {
+                        Util.spawn_async(['stat', '-c', '"%U"', pathToDesktopFile],
+                            Lang.bind(this, function(aOutput) {
+                                let fileOwner = aOutput.replace(/\s+/g, "")
+                                    // If I use the literal double quotes inside the RegEx,
+                                    // cinnamon-json-makepot with the --js argument breaks.
+                                    // SyntaxError: unterminated string literal
+                                    .replace(/\u0022/g, "");
+                                this._launchDesktopFile(fileOwner);
+                            })
+                        );
+                    } catch (aErr) {
+                        this._launchDesktopFile("");
+                        global.logError(aErr.message);
+                    }
+                } else {
+                    this._launchDesktopFile("");
                 }
                 break;
                 /**
@@ -407,8 +378,42 @@ ApplicationContextMenuItem.prototype = {
                  */
         }
         return false;
-    }
+    },
 
+    _openDesktopFileFolder: function(aDirPath) {
+        try {
+            if (aDirPath !== "")
+                GLib.spawn_command_line_async("xdg-open " + "\"" + aDirPath + "\"");
+        } catch (aErr) {
+            Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr.message);
+            global.logError(aErr.message);
+        } finally {
+            this._appButton.appsMenuButton.menu.close(this._appButton.appsMenuButton.pref_animate_menu);
+        }
+    },
+
+    _launchDesktopFile: function(aCurrentUser, aFileOwner) {
+        let cmd = "";
+        if (this._appButton.appsMenuButton.pref_gain_privileges_on_context &&
+            GLib.get_user_name().toString() !== aFileOwner) {
+            cmd += this._appButton.appsMenuButton.pref_privilege_elevator;
+        }
+
+        let editor = this._appButton.appsMenuButton.pref_custom_editor_for_edit_desktop_file_on_context;
+        if (editor !== "")
+            cmd += " " + editor + " " + "\"" + this._appButton.app.get_app_info().get_filename() + "\"";
+        else
+            cmd += " xdg-open " + "\"" + this._appButton.app.get_app_info().get_filename() + "\"";
+
+        try {
+            GLib.spawn_command_line_async(cmd);
+        } catch (aErr) {
+            Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr.message);
+            global.logError(aErr.message);
+        } finally {
+            this._appButton.appsMenuButton.menu.close(this._appButton.appsMenuButton.pref_animate_menu);
+        }
+    }
 };
 
 function GenericApplicationButton(appsMenuButton, app, withMenu) {
@@ -439,10 +444,12 @@ GenericApplicationButton.prototype = {
     },
 
     unhighlight: function() {
-        var app_key = this.app.get_id();
+        let app_key = this.app.get_id();
+
         if (app_key === null) {
             app_key = this.app.get_name() + ":" + this.app.get_description();
         }
+
         this.appsMenuButton._knownApps.push(app_key);
         this.actor.remove_style_pseudo_class('highlighted');
     },
@@ -457,13 +464,13 @@ GenericApplicationButton.prototype = {
         return true;
     },
 
-    activateContextMenus: function(event) {
+    activateContextMenus: function(event) { // jshint ignore:line
         if (this.withMenu && !this.menu.isOpen)
             this.appsMenuButton.closeContextMenus(this.app, true);
         this.toggleMenu();
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this.unhighlight();
         let likelyHasSucceeded = false;
 
@@ -484,7 +491,7 @@ GenericApplicationButton.prototype = {
                     " -e \"" + this.appsMenuButton._runFromTerminalScript + " " +
                     elevated + "gtk-launch " + this.app.get_id().replace(/.desktop$/g, "") + "\"";
 
-                let [success, argv] = GLib.shell_parse_argv(cmd);
+                let [success, argv] = GLib.shell_parse_argv(cmd); // jshint ignore:line
 
                 let flags = GLib.SpawnFlags.SEARCH_PATH;
                 GLib.spawn_async(null, argv, null, flags, null);
@@ -499,7 +506,7 @@ GenericApplicationButton.prototype = {
                     " gtk-launch " + this.app.get_id());
                 likelyHasSucceeded = true;
             } catch (aErr) {
-                Main.notify("[Custom Cinnamon Menu]", aErr.message);
+                Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr.message);
                 global.logError(aErr.message);
                 likelyHasSucceeded = false;
             }
@@ -715,13 +722,10 @@ TransientButton.prototype = {
             }
         };
 
-        let iconBox = new St.Bin();
         this.file = Gio.file_new_for_path(this.pathOrCommand);
 
         try {
             this.handler = this.file.query_default_handler(null);
-            let icon_uri = this.file.get_uri();
-            let fileInfo = this.file.query_info(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, null);
             let contentType = Gio.content_type_guess(this.pathOrCommand, null);
             let themedIcon = Gio.content_type_get_icon(contentType[0]);
             /**
@@ -769,7 +773,7 @@ TransientButton.prototype = {
         return true;
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         if (this.handler !== null) {
             this.handler.launch([this.file], null);
         } else {
@@ -827,15 +831,7 @@ ApplicationButton.prototype = {
 
         this.label.realize();
 
-        this.tooltip = new Tooltips.Tooltip(this.actor, "");
-        this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        this.tooltip._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-        // Ensure tooltip is destroyed when this button is destroyed
-        this.connect("destroy", Lang.bind(this, function() {
-            this.tooltip.destroy();
-        }));
+        this.tooltip = new CustomTooltip(this.actor, "");
     },
 
     get_app_id: function() {
@@ -953,7 +949,7 @@ SearchProviderResultButton.prototype = {
         return true;
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         try {
             this.provider.on_result_selected(this.result);
             this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
@@ -1020,15 +1016,7 @@ PlaceButton.prototype = {
         if (fileIndex !== -1)
             placeURI = placeURI.substr(fileIndex + 7);
 
-        this.tooltip = new Tooltips.Tooltip(this.actor, "");
-        this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        this.tooltip._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-        // Ensure tooltip is destroyed when this button is destroyed
-        this.connect("destroy", Lang.bind(this, function() {
-            this.tooltip.destroy();
-        }));
+        this.tooltip = new CustomTooltip(this.actor, "");
     },
 
     _onButtonReleaseEvent: function(actor, event) {
@@ -1038,7 +1026,7 @@ PlaceButton.prototype = {
         }
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this.place.launch();
         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
     }
@@ -1067,7 +1055,7 @@ RecentContextMenuItem.prototype = {
             this.label.style = "font-weight: bold;";
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this._callback();
         return false;
     }
@@ -1113,15 +1101,7 @@ RecentButton.prototype = {
         this.menu.actor.set_style_class_name('menu-context-menu');
         this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
 
-        this.tooltip = new Tooltips.Tooltip(this.actor, "");
-        this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        this.tooltip._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-        // Ensure tooltip is destroyed when this button is destroyed
-        this.connect("destroy", Lang.bind(this, function() {
-            this.tooltip.destroy();
-        }));
+        this.tooltip = new CustomTooltip(this.actor, "");
     },
 
     _onButtonReleaseEvent: function(actor, event) {
@@ -1136,14 +1116,14 @@ RecentButton.prototype = {
         return true;
     },
 
-    activateContextMenus: function(event) {
+    activateContextMenus: function(event) { // jshint ignore:line
         if (!this.menu.isOpen)
             this.appsMenuButton.closeContextMenus(this, true);
 
         this.toggleMenu();
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
     },
@@ -1189,6 +1169,17 @@ RecentButton.prototype = {
 
             let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
 
+            let createRecentContextItem = Lang.bind(this, function(info) {
+                return new RecentContextMenuItem(this,
+                    info.get_display_name(),
+                    false,
+                    Lang.bind(this, function() {
+                        info.launch([file], null, null);
+                        this.toggleMenu();
+                        this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
+                    }));
+            });
+
             let i = 0,
                 iLen = infos.length;
             for (; i < iLen; i++) {
@@ -1202,14 +1193,7 @@ RecentButton.prototype = {
                 if (info.equal(default_info))
                     continue;
 
-                menuItem = new RecentContextMenuItem(this,
-                    info.get_display_name(),
-                    false,
-                    Lang.bind(this, function() {
-                        info.launch([file], null, null);
-                        this.toggleMenu();
-                        this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
-                    }));
+                let menuItem = createRecentContextItem(info);
                 this.menu.addMenuItem(menuItem);
             }
 
@@ -1338,7 +1322,7 @@ RecentClearButton.prototype = {
             this.activate(event);
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
         let GtkRecent = new Gtk.RecentManager();
         GtkRecent.purge_items();
@@ -1389,7 +1373,7 @@ RecentAppsClearButton.prototype = {
             this.activate(event);
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this.appsMenuButton.menu.close(this.appsMenuButton.pref_animate_menu);
         this.appsMenuButton.pref_recently_used_apps = [];
         this.appsMenuButton._refreshRecentApps();
@@ -1410,7 +1394,7 @@ CategoryButton.prototype = {
 
         this.appsMenuButton = appsMenuButton;
         this.actor.set_style_class_name('menu-category-button');
-        var label;
+        let label;
         let icon = null;
 
         if (category) {
@@ -1456,11 +1440,12 @@ CategoryButton.prototype = {
              * START mark Odyseus
              */
             if (category.get_menu_id() === "favorites" ||
-                category.get_menu_id() === "recentApps")
+                category.get_menu_id() === "recentApps") {
                 this.icon = icon;
-            else
+            } else {
                 this.icon = St.TextureCache.get_default()
-                .load_gicon(null, icon, (this.appsMenuButton.pref_category_icon_size));
+                    .load_gicon(null, icon, (this.appsMenuButton.pref_category_icon_size));
+            }
             /**
              * END
              */
@@ -1580,7 +1565,7 @@ FavoritesButton.prototype = {
             icon_size = this.appsMenuButton.pref_max_fav_icon_size;
 
         this.actor.style = "padding-top: " + (icon_size / 3) + "px;padding-bottom: " +
-            (icon_size / 3) + "px; margin:auto;";
+            (icon_size / 3) + "px";
 
         this.actor.add_style_class_name('menu-favorites-button');
         let icon = app.create_icon_texture(icon_size);
@@ -1592,15 +1577,7 @@ FavoritesButton.prototype = {
         this._draggable.connect('drag-end', Lang.bind(this, this._onDragEnd));
         this.isDraggableApp = true;
 
-        this.tooltip = new Tooltips.Tooltip(this.actor, "");
-        this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        this.tooltip._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-        // Ensure tooltip is destroyed when this button is destroyed
-        this.connect("destroy", Lang.bind(this, function() {
-            this.tooltip.destroy();
-        }));
+        this.tooltip = new CustomTooltip(this.actor, "");
     },
 
     _onDragEnd: function() {
@@ -1649,7 +1626,7 @@ SystemButton.prototype = {
         if (icon_size > this.appsMenuButton.pref_max_fav_icon_size)
             icon_size = this.appsMenuButton.pref_max_fav_icon_size;
 
-        this.actor.style = "padding-top: " + (icon_size / 3) + "px;padding-bottom: " + (icon_size / 3) + "px; margin:auto;";
+        this.actor.style = "padding-top: " + (icon_size / 3) + "px;padding-bottom: " + (icon_size / 3) + "px;";
         this.actor.add_style_class_name('menu-favorites-button');
 
         let iconObj = new St.Icon({
@@ -1678,7 +1655,7 @@ CategoriesApplicationsBox.prototype = {
         this.actor._delegate = this;
     },
 
-    acceptDrop: function(source, actor, x, y, time) {
+    acceptDrop: function(source, actor, x, y, time) { // jshint ignore:line
         if (source instanceof FavoritesButton) {
             source.actor.destroy();
             actor.destroy();
@@ -1713,7 +1690,7 @@ FavoritesBox.prototype = {
         }
     },
 
-    handleDragOver: function(source, actor, x, y, time) {
+    handleDragOver: function(source, actor, x, y, time) { // jshint ignore:line
         let app = source.app;
 
         let favorites = AppFavorites.getAppFavorites().getFavorites();
@@ -1784,7 +1761,7 @@ FavoritesBox.prototype = {
     },
 
     // Draggable target interface
-    acceptDrop: function(source, actor, x, y, time) {
+    acceptDrop: function(source, actor, x, y, time) { // jshint ignore:line
         let app = source.app;
 
         let id = app.get_id();
@@ -1871,15 +1848,7 @@ MyCustomCommandButton.prototype = {
         this.name = this.app.label;
         this.isDraggableApp = false;
 
-        this.tooltip = new Tooltips.Tooltip(this.actor, "");
-        this.tooltip._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap(true);
-        this.tooltip._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-        this.tooltip._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-        // Ensure tooltip is destroyed when this button is destroyed
-        this.connect("destroy", Lang.bind(this, function() {
-            this.tooltip.destroy();
-        }));
+        this.tooltip = new CustomTooltip(this.actor, "");
     },
 
     _onButtonReleaseEvent: function(actor, event) {
@@ -1889,7 +1858,7 @@ MyCustomCommandButton.prototype = {
         return true;
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         if (this.callback) {
             this.callback();
         } else {
@@ -1899,9 +1868,9 @@ MyCustomCommandButton.prototype = {
             } catch (aErr1) {
                 try {
                     if (cmd.indexOf("/") !== -1) // Try to open file if cmd is a path
-                        Main.Util.spawnCommandLine("xdg-open " + cmd);
+                        Main.Util.spawnCommandLine("xdg-open " + "\"" + cmd + "\"");
                 } catch (aErr2) {
-                    Main.notify("[Custom Cinnamon Menu]", aErr2.message);
+                    Main.notify(_(this._appButton.appsMenuButton.metadata.name), aErr2.message);
                 }
             }
         }
@@ -1944,80 +1913,6 @@ RecentAppsCategoryButton.prototype = {
         this.addActor(this.label);
         this.label.realize();
     }
-};
-
-function ShellOutputProcess(command_argv) {
-    this._init(command_argv);
-}
-
-ShellOutputProcess.prototype = {
-
-    _init: function(command_argv) {
-        this.command_argv = command_argv;
-        this.flags = GLib.SpawnFlags.SEARCH_PATH;
-        this.success = false;
-        this.standard_output_content = "";
-        this.standard_error_content = "";
-        this.pid = -1;
-        this.standard_input_file_descriptor = -1;
-        this.standard_output_file_descriptor = -1;
-        this.standard_error_file_descriptor = -1;
-    },
-
-    spawn_sync_and_get_output: function() {
-        this.spawn_sync();
-        let output = this.get_standard_output_content();
-        return output;
-    },
-
-    spawn_sync: function() {
-        let [success, standard_output_content, standard_error_content] = GLib.spawn_sync(
-            null,
-            this.command_argv,
-            null,
-            this.flags,
-            null);
-        this.success = success;
-        this.standard_output_content = standard_output_content;
-        this.standard_error_content = standard_error_content;
-    },
-
-    get_standard_output_content: function() {
-        return this.standard_output_content.toString();
-    },
-
-    spawn_sync_and_get_error: function() {
-        this.spawn_sync();
-        let output = this.get_standard_error_content();
-        return output;
-    },
-
-    get_standard_error_content: function() {
-        return this.standard_error_content.toString();
-    },
-
-    spawn_async: function() {
-        let [
-            success,
-            pid,
-            standard_input_file_descriptor,
-            standard_output_file_descriptor,
-            standard_error_file_descriptor
-        ] = GLib.spawn_async_with_pipes(
-            null,
-            this.command_argv,
-            null,
-            this.flags,
-            null,
-            null);
-
-        this.success = success;
-        this.pid = pid;
-        this.standard_input_file_descriptor = standard_input_file_descriptor;
-        this.standard_output_file_descriptor = standard_output_file_descriptor;
-        this.standard_error_file_descriptor = standard_error_file_descriptor;
-    },
-
 };
 
 function UserPicture(appsMenuButton, iconSize) {
@@ -2063,14 +1958,11 @@ UserPicture.prototype = {
 
             this._onUserChanged();
             this.refreshFace();
-            this.actor.style = "padding:0;margin:auto;";
+            this.actor.style = "padding:0;";
 
             // NOTE: This string could be left blank because it's a default string,
             // so it's already translated by Cinnamon. It's up to the translators.
-            this.tooltip = new Tooltips.Tooltip(this.actor, _("Account details"));
-            this.connect("destroy", Lang.bind(this, function() {
-                this.tooltip.destroy();
-            }));
+            this.tooltip = new CustomTooltip(this.actor, _("Account details"));
         } catch (aErr) {
             global.logError(aErr.message);
         }
@@ -2102,7 +1994,7 @@ UserPicture.prototype = {
         return true;
     },
 
-    activate: function(event) {
+    activate: function(event) { // jshint ignore:line
         this.appsMenuButton.menu.close(false);
         Util.spawnCommandLine("cinnamon-settings user");
     },
@@ -2215,3 +2107,108 @@ UserPicture.prototype = {
             this.removeActor(this._userIcon);
     }
 };
+
+function CustomTooltip() {
+    this._init.apply(this, arguments);
+}
+
+CustomTooltip.prototype = {
+    __proto__: Tooltips.Tooltip.prototype,
+
+    _init: function(aActor, aText) {
+        Tooltips.Tooltip.prototype._init.call(this, aActor, aText);
+
+        this._tooltip.set_style("text-align: left;width:auto;max-width: 450px;");
+        this._tooltip.get_clutter_text().set_line_wrap(true);
+        this._tooltip.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+        this._tooltip.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
+
+        aActor.connect("destroy", Lang.bind(this, function() {
+            this.destroy();
+        }));
+    },
+
+    destroy: function() {
+        Tooltips.Tooltip.prototype.destroy.call(this);
+    }
+};
+
+/**
+ * Compares two software version numbers (e.g. "1.7.1" or "1.2b").
+ *
+ * This function was born in http://stackoverflow.com/a/6832721.
+ *
+ * @param {string} v1 The first version to be compared.
+ * @param {string} v2 The second version to be compared.
+ * @param {object} [options] Optional flags that affect comparison behavior:
+ * <ul>
+ *     <li>
+ *         <tt>lexicographical: true</tt> compares each part of the version strings lexicographically instead of
+ *         naturally; this allows suffixes such as "b" or "dev" but will cause "1.10" to be considered smaller than
+ *         "1.2".
+ *     </li>
+ *     <li>
+ *         <tt>zeroExtend: true</tt> changes the result if one version string has less parts than the other. In
+ *         this case the shorter string will be padded with "zero" parts instead of being considered smaller.
+ *     </li>
+ * </ul>
+ * @returns {number|NaN}
+ * <ul>
+ *    <li>0 if the versions are equal</li>
+ *    <li>a negative integer iff v1 < v2</li>
+ *    <li>a positive integer iff v1 > v2</li>
+ *    <li>NaN if either version string is in the wrong format</li>
+ * </ul>
+ *
+ * @copyright by Jon Papaioannou (["john", "papaioannou"].join(".") + "@gmail.com")
+ * @license This function is in the public domain. Do what you want with it, no strings attached.
+ */
+function versionCompare(v1, v2, options) {
+    let lexicographical = options && options.lexicographical,
+        zeroExtend = options && options.zeroExtend,
+        v1parts = v1.split('.'),
+        v2parts = v2.split('.');
+
+    function isValidPart(x) {
+        return (lexicographical ? /^\d+[A-Za-z]*$/ : /^\d+$/).test(x);
+    }
+
+    if (!v1parts.every(isValidPart) || !v2parts.every(isValidPart)) {
+        return NaN;
+    }
+
+    if (zeroExtend) {
+        while (v1parts.length < v2parts.length) v1parts.push("0");
+        while (v2parts.length < v1parts.length) v2parts.push("0");
+    }
+
+    if (!lexicographical) {
+        v1parts = v1parts.map(Number);
+        v2parts = v2parts.map(Number);
+    }
+
+    for (let i = 0; i < v1parts.length; ++i) {
+        if (v2parts.length == i) {
+            return 1;
+        }
+
+        if (v1parts[i] == v2parts[i]) {
+            continue;
+        } else if (v1parts[i] > v2parts[i]) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
+
+    if (v1parts.length != v2parts.length) {
+        return -1;
+    }
+
+    return 0;
+}
+
+/*
+exported CINNAMON_VERSION,
+         versionCompare
+ */

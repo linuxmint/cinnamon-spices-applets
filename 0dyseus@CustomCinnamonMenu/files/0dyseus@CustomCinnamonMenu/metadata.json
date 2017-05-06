@@ -1,16 +1,24 @@
 {
-    "uuid": "0dyseus@CustomCinnamonMenu",
-    "max-instances": -1,
+    "website": "https://github.com/Odyseus/CinnamonTools",
     "multiversion": true,
     "description": "Custom version of the default Cinnamon Menu applet, but infinitely more customizable.",
-    "version": "1.20",
-    "last-edited": "1473874250",
-    "name": "Custom Cinnamon Menu",
+    "contributors": [
+        "NikoKrause: Bug fixes and German localization.",
+        "Radek71: Czech localization.",
+        "muzena: Croatian localization.",
+        "giwhub: Chinese localization.",
+        "lestcape: Author of some advanced features used by this applet.",
+        "nooulaif: Fuzzy search feature based on his Sane Menu applet.",
+        "Daniel Bruce: Some icons used by this menu are from www.entypo.com."
+    ],
+    "max-instances": -1,
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "website": "https://github.com/Odyseus/CinnamonTools",
-    "contributors": "NikoKrause: Bug fixes and German localization.,Radek71: Czech localization.,lestcape: Author of some advanced features used by this applet.,nooulaif: Fuzzy search feature based on his Sane Menu applet.,Daniel Bruce: Some icons used by this menu are from www.entypo.com.,muzena: Croatian localization.,giwhub: Chinese localization.",
+    "name": "Custom Cinnamon Menu",
+    "version": "1.21",
     "cinnamon-version": [
         "3.0",
-        "3.2"
-    ]
+        "3.2",
+        "3.4"
+    ],
+    "uuid": "0dyseus@CustomCinnamonMenu"
 }

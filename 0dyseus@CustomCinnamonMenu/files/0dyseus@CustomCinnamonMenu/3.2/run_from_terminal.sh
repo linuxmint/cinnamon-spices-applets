@@ -1,0 +1,1 @@
+../run_from_terminal.sh
