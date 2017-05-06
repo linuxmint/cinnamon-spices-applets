@@ -12,34 +12,34 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ru"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: applet.js:37 applet.js:63
 msgid "Shutdown"
-msgstr ""
+msgstr "Выключить"
 
 #: applet.js:44
 msgid "Screen Lock"
-msgstr ""
+msgstr "Заблокировать экран"
 
 #: applet.js:50
 msgid "Suspend"
-msgstr ""
+msgstr "Спящий режим"
 
 #: applet.js:55
 msgid "Restart"
-msgstr ""
+msgstr "Перезагрузить"
 
 #: applet.js:59
 msgid "Log Out"
-msgstr ""
+msgstr "Выйти"
 
 #. ShutdownApplet@DeathMD->metadata.json->description
 msgid "An applet to shutdown, restart and suspend your system."
-msgstr ""
+msgstr "Апплет для выключения, перезагрузки и перевода системы в спящий режим."
 
 #. ShutdownApplet@DeathMD->metadata.json->name
 msgid "Shutdown Applet"
