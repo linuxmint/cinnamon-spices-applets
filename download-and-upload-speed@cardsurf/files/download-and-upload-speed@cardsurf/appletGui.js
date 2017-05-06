@@ -126,7 +126,7 @@ GuiSpeed.prototype = {
         icon_path = this._remove_file_schema(icon_path);
         icon_path = this._replace_tilde_with_home_directory(icon_path)
         let icon_file = Gio.file_new_for_path(icon_path);
-        let icon_file = new Gio.FileIcon({ file: icon_file });
+        icon_file = new Gio.FileIcon({ file: icon_file });
         return icon_file;
     },
 
