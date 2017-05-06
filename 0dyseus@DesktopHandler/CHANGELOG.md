@@ -1,5 +1,10 @@
 ## Change Log
 
+##### 1.07
+- Removed *multiversion* because it is not worth the trouble.
+- Moved some prototypes into a separate "modules file".
+- Improved the behaviour of the option "Keep menu open while closing windows". Now the menu is kept open when closing windows and will use the method of reopening the menu only as a *fallback*.
+
 ##### 1.06
 - Fixed a Cjs warning when switching workspaces.
 
