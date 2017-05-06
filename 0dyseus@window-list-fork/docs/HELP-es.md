@@ -22,5 +22,5 @@ Si cualquiera tiene fallos que reportar, peticiones de características y contri
         - Puede enviar una "pull request" con el nuevo archivo de localización.
         - Si no se desea clonar el repositorio, simplemente crear un [Gist](https://gist.github.com/) y enviarme el enlace.
     - Si no se posee o no se quiere una cuenta de GitHub:
-        - Se puede enviar un [Pastebin](http://pastebin.com/) (o servicio similar) a mi [cuenta en el for de Linux Mint](https://forums.linuxmint.com/memberlist.php?mode=viewprofile&u=164858).
+        - Se puede enviar un [Pastebin](http://pastebin.com/) (o servicio similar) a mi [cuenta en el foro de Linux Mint](https://forums.linuxmint.com/memberlist.php?mode=viewprofile&u=164858).
 - Si el texto fuente (en Inglés) y/o mi traducción al Español contiene errores o inconsistencias, no dude en informarlos.

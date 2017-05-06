@@ -1,142 +1,137 @@
-# This is a template file for translating the Cinnamon applet called Window List (Fork By Odyseus) Menu.
-# Copyright (C) 2016
-# This file is distributed under the same license as the Window List (Fork By Odyseus) applet.
-# Odyseus <EMAIL@ADDRESS>, 2016.
+# This is a template file for translating the 0dyseus@window-list-fork package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@window-list-fork package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.03\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@window-list-fork 1.08\n"
 "POT-Creation-Date: 2017-05-06 08:22-0300\n"
-"PO-Revision-Date: 2017-05-06 08:22-0300\n"
-"Last-Translator: Odyseus\n"
-"Language-Team: \n"
-"Language: es\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
 
 #: applet.js:792 2.8/applet.js:699
 msgid "Preferences"
-msgstr "Preferencias"
+msgstr ""
 
 #: applet.js:803 2.8/applet.js:714
 msgid "Move to the other monitor"
-msgstr "Mover hacia el otro monitor"
+msgstr ""
 
 #: applet.js:812 2.8/applet.js:723
 #, javascript-format
 msgid "Move to monitor %d"
-msgstr "Mover hacia el monitor %d"
+msgstr ""
 
 #: applet.js:823 2.8/applet.js:734
 msgid "Only on this workspace"
-msgstr "Sólo en este entorno de trabajo"
+msgstr ""
 
 #: applet.js:829 2.8/applet.js:740
 msgid "Visible on all workspaces"
-msgstr "Visible en todos los entornos de trabajo"
+msgstr ""
 
 #: applet.js:835 2.8/applet.js:746
 msgid "Move to another workspace"
-msgstr "Mover a otro entorno de trabajo"
+msgstr ""
 
 #. Close all/others
 #: applet.js:861 2.8/applet.js:768
 msgid "Close all"
-msgstr "Cerrar todas"
+msgstr ""
 
 #: applet.js:870 2.8/applet.js:777
 msgid "Close others"
-msgstr "Cerrar otras"
+msgstr ""
 
 #: applet.js:884 2.8/applet.js:791
 msgid "Restore to full opacity"
-msgstr "Dummy"
+msgstr ""
 
 #: applet.js:892 2.8/applet.js:799
 msgid "Restore"
-msgstr "Restaurar"
+msgstr ""
 
 #: applet.js:897 2.8/applet.js:804
 msgid "Minimize"
-msgstr "Minimizar"
+msgstr ""
 
 #: applet.js:905 2.8/applet.js:812
 msgid "Unmaximize"
-msgstr "Desmaximizar"
+msgstr ""
 
 #: applet.js:910 2.8/applet.js:817
 msgid "Maximize"
-msgstr "Maximizar"
+msgstr ""
 
 #: applet.js:917 2.8/applet.js:824
 msgid "Close"
-msgstr "Cerrar"
+msgstr ""
 
 #: applet.js:929 2.8/applet.js:836
 msgid "Help"
-msgstr "Ayuda"
+msgstr ""
 
 #: applet.js:936 2.8/applet.js:843
 msgid "About..."
-msgstr "Acerca de..."
+msgstr ""
 
 #: applet.js:942 2.8/applet.js:849
 msgid "Configure..."
-msgstr "Configurar..."
+msgstr ""
 
 #: applet.js:957 2.8/applet.js:864
 #, javascript-format
 msgid "Remove '%s'"
-msgstr "Remover '%s'"
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->name
 msgid "Window list (Fork By Odyseus)"
-msgstr "Lista de ventanas (Fork By Odyseus)"
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->description
 msgid "Fork of the main Cinnamon Window list applet."
-msgstr "Adaptación del applet de Cinnamon llamado Window list"
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->contributors
 msgid "NikoKrause: Bug fixes and German localization."
-msgstr "NikoKrause: Localización alemana y reporte de errores."
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->contributors
 msgid "muzena: Croatian localization."
-msgstr "muzena: Localización Croata."
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->contributors
 msgid "giwhub: Chinese localization."
-msgstr "giwhub: Localización China."
+msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->comments
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked below."
 msgstr ""
-"Los reportes de fallos, peticiones de características y contribuciones deben "
-"hacerse en el repositorio de este xlet vinculado a continuación."
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_hide_labels->description
 msgid "Hide labels in the window list buttons"
-msgstr "Ocultar etiquetas de los botones de la lista de ventanas"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_window_preview_custom_width->units
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_window_preview_custom_height->units
 msgid "pixels"
-msgstr "pixeles"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_window_preview_custom_width->description
 msgid "Custom width for window thumbnails"
-msgstr "Ancho personalizado para imágenes en miniatura de la ventana"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_enable_alerts->description
@@ -144,41 +139,37 @@ msgid ""
 "Show an alert in the window list when a window from another workspace "
 "requires attention"
 msgstr ""
-"Mostrar una alerta en la lista de ventanas cuando una ventana de otra área "
-"de trabajo requiere atención"
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_window_preview->description
 msgid "Show window thumbnails on hover"
-msgstr "Mostrar imágenes en miniatura de la ventana al pasar el ratón"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_buttons_use_entire_space->description
 msgid ""
 "Window buttons can have different sizes and use the entire space available"
 msgstr ""
-"Los botones de las ventanas pueden tener diferentes tamaños y pueden usar "
-"todo el espacio disponible"
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_enable_scrolling->description
 msgid "Enable mouse-wheel scrolling in the window list"
-msgstr "Activar el desplazamiento del ratón en la lista de ventanas"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_invert_menu_items_order->description
 msgid "Invert context menu items order"
-msgstr "Invertir el orden de los ítems en el menú contextual"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_hide_tooltips->description
 msgid "Do not display tooltips"
-msgstr "No mostrar caja de herramientas"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_sub_menu_placement->description
 msgid "Where to display the \"Preferences\" sub-menu?"
-msgstr "¿Dónde mostrar el submenú \"Preferencias\"?"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_sub_menu_placement->tooltip
@@ -186,58 +177,33 @@ msgid ""
 "If the option \"Invert context menu items order\" is enabled, the \"Top of "
 "menu\" will actually be the \"Bottom of menu\" and vice versa."
 msgstr ""
-"Si la opción \"Invertir el orden de los ítems en el menú contextual\" está "
-"activada, la parte superior del menú será realmente la parte inferior y vice "
-"versa."
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_sub_menu_placement->options
 msgid "Top of menu"
-msgstr "En la parte superior del menú"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_sub_menu_placement->options
 msgid "Do not display"
-msgstr "No mostrar"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_sub_menu_placement->options
 msgid "Bottom of menu"
-msgstr "En la parte inferior del menú"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_window_preview_custom_height->description
 msgid "Custom height for window thumbnails"
-msgstr "Ancho personalizado para imágenes en miniatura de la ventana"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_middle_click_close->description
 msgid "Middle click to close window"
-msgstr "Cerrar ventana con botón central del ratón"
+msgstr ""
 
 #. 0dyseus@window-list-fork->settings-
 #. schema.json->pref_reverse_scrolling->description
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr ""
-"Invertir la dirección de desplazamiento del ratón en la lista de ventanas"
-
-#~ msgid "Hide labels in the window list buttons. (Cinnamon will be restarted)"
-#~ msgstr ""
-#~ "Ocultar etiquetas de los botones de la lista de ventanas. (Canela se "
-#~ "reiniciará)"
-
-#~ msgid "Do not display tooltips. (Cinnamon will be restarted)"
-#~ msgstr "No mostrar caja de herramientas. (Cinnamon se reiniciará)"
-
-#~ msgid "Restart Cinnamon"
-#~ msgstr "Reiniciar Cinnamon"
-
-#~ msgid "Cinnamon needs to be restarted for some options to take effect."
-#~ msgstr ""
-#~ "Cinnamon necesita ser reiniciado para que algunas opciones tomen efecto."
-
-#~ msgid "Do not display tooltips (Needs Cinnamon restart)"
-#~ msgstr "No mostrar caja de herramientas. (Cinnamon necesita ser reiniciado)"
-
-#~ msgid "Configure the window list"
-#~ msgstr "Configurar la lista de ventanas"
