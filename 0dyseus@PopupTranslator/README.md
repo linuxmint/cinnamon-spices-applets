@@ -39,6 +39,7 @@ Simple translator applet that will allow to display the translation of any selec
 - [Radek71](https://github.com/Radek71): Czech localization and bug reports.
 - [muzena](https://github.com/muzena): Croatian localization.
 - [giwhub](https://github.com/giwhub): Chinese localization.
+- [eson57](https://github.com/eson57): Swedish localization.
 
 [Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/CHANGELOG.md)
 

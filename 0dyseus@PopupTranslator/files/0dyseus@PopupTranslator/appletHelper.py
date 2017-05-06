@@ -399,7 +399,7 @@ class HistoryApplication(Gtk.Application):
             home, ".cinnamon", "configs", appletUUID + "History", "translation_history.json")
 
         if (os.path.exists(path)):
-            data = metadata = open(path, 'r').read()
+            data = open(path, 'r').read()
             transList = json.loads(data)
 
             for lang in transList:
@@ -487,6 +487,7 @@ def main():
             msg += "# requests Python module not found!!!\n"
 
         print(msg)
+
 
 if __name__ == "__main__":
     main()

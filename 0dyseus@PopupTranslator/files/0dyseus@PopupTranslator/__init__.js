@@ -9,9 +9,8 @@ const Tooltips = imports.ui.tooltips;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
 
-// For translation mechanism.
-// Comments that start with // NOTE: are to be extracted by xgettext
-// and are directed to translators only.
+Gettext.bindtextdomain(appletUUID, GLib.get_home_dir() + "/.local/share/locale");
+
 function _(aStr) {
     let customTrans = Gettext.dgettext(appletUUID, aStr);
 
@@ -36,6 +35,13 @@ function convertHistoryZeroToOne(aData) {
         return newData;
     }
 }
+
+const OrnamentType = {
+    NONE: 0,
+    CHECK: 1,
+    DOT: 2,
+    ICON: 3
+};
 
 const langs = {
     "?": "Unknown",
@@ -337,16 +343,16 @@ TranslationMenuItem.prototype = {
         }));
     },
 
-    _onButtonEnterEvent: function(aE, aButton) {
+    _onButtonEnterEvent: function(aE, aButton) { // jshint ignore:line
         global.set_cursor(Cinnamon.Cursor.POINTING_HAND);
         return false;
     },
 
-    _onButtonLeaveEvent: function(aE, aButton) {
+    _onButtonLeaveEvent: function(aE, aButton) { // jshint ignore:line
         global.unset_cursor();
     },
 
-    closeMenu: function(aE, aButton) {
+    closeMenu: function(aE, aButton) { // jshint ignore:line
         this.appsMenuButton.menu.close(true);
     },
 
@@ -375,76 +381,8 @@ TranslationMenuItem.prototype = {
     }
 };
 
-function ShellOutputProcess(command_argv) {
-    this._init(command_argv);
-}
-
-ShellOutputProcess.prototype = {
-
-    _init: function(command_argv) {
-        this.command_argv = command_argv;
-        this.flags = GLib.SpawnFlags.SEARCH_PATH;
-        this.success = false;
-        this.standard_output_content = "";
-        this.standard_error_content = "";
-        this.pid = -1;
-        this.standard_input_file_descriptor = -1;
-        this.standard_output_file_descriptor = -1;
-        this.standard_error_file_descriptor = -1;
-    },
-
-    spawn_sync_and_get_output: function() {
-        this.spawn_sync();
-        let output = this.get_standard_output_content();
-        return output;
-    },
-
-    spawn_sync: function() {
-        let [success, standard_output_content, standard_error_content] = GLib.spawn_sync(
-            null,
-            this.command_argv,
-            null,
-            this.flags,
-            null);
-        this.success = success;
-        this.standard_output_content = standard_output_content;
-        this.standard_error_content = standard_error_content;
-    },
-
-    get_standard_output_content: function() {
-        return this.standard_output_content.toString();
-    },
-
-    spawn_sync_and_get_error: function() {
-        this.spawn_sync();
-        let output = this.get_standard_error_content();
-        return output;
-    },
-
-    get_standard_error_content: function() {
-        return this.standard_error_content.toString();
-    },
-
-    spawn_async: function() {
-        let [
-            success,
-            pid,
-            standard_input_file_descriptor,
-            standard_output_file_descriptor,
-            standard_error_file_descriptor
-        ] = GLib.spawn_async_with_pipes(
-            null,
-            this.command_argv,
-            null,
-            this.flags,
-            null,
-            null);
-
-        this.success = success;
-        this.pid = pid;
-        this.standard_input_file_descriptor = standard_input_file_descriptor;
-        this.standard_output_file_descriptor = standard_output_file_descriptor;
-        this.standard_error_file_descriptor = standard_error_file_descriptor;
-    },
-
-};
+/*
+exported convertHistoryZeroToOne,
+         langs,
+         OrnamentType
+ */
