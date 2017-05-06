@@ -2,6 +2,12 @@
 
 **Note:** Upstream fixes/features are changes made to the original Cinnamon Menu applet that I ported to this applet.
 
+##### 1.21
+- Changed *multiversion* implementation. Created symlinks inside the version folder so I don't keep forgetting to copy the files from the root folder. The only *unique* file, and the only reason that I use *multiversion*, is the settings-schema.json file.
+- Changed the way the imports are done.
+- Removed *dangerous* flag. Achieved by changing all synchronous functions to their asynchronous counterparts.
+- Implemented some of the upstream features and fixes.
+
 ##### 1.20
 - Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
 - Several upstream fixes.
