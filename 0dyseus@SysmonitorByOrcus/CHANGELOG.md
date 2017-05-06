@@ -1,5 +1,9 @@
 ## Change Log
 
+##### 1.12
+- Improved some trasnlatable strings. Just removed some white spaces and added some informational comments.
+- Removed *multiversion* because it is not worth the trouble.
+
 ##### 1.11
 - Fixed the display of **Load average** and **Swap** graphics.
 - Added localized help.
