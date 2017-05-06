@@ -1,5 +1,13 @@
 ## Change Log
 
+##### 1.06
+- Removed *multiversion* because it is not worth the trouble.
+- Moved some prototypes into a separate "modules file".
+- Removed the use of *get_file_contents_utf8_sync* in favor of an asynchronous function to avoid the *dangerous* flag.
+- Added option to set a custom icon size for the extension option buttons. This serves to avoid the enabling/disabling of extensions when one clicks accidentally (because of too small icons) an option button.
+- Changed the name of all custom icons to avoid possible conflicts with icons imported by other xlets.
+- Fixed a warnings logged into the *.xsession-errors*.
+
 ##### 1.05
 - Fixed incorrect setting name that prevented the correct update of the enabled/disabled extensions on this applet menu.
 

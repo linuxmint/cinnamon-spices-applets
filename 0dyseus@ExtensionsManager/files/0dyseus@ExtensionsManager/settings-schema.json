@@ -5,7 +5,7 @@
     },
     "pref_custom_icon_for_applet": {
         "type": "iconfilechooser",
-        "default": "custom-cs-extensions-symbolic",
+        "default": "extensions-manager-cs-extensions-symbolic",
         "description": "Icon",
         "tooltip": "Select an icon to show in the panel."
     },
@@ -105,14 +105,23 @@
         "units": "ems",
         "default": 15
     },
-    "pref_icons_size": {
+    "pref_extension_icon_size": {
         "type": "spinbutton",
-        "description": "Icon size for menu items",
+        "description": "Icon size for the extension logo",
         "min": 16,
         "max": 96,
         "step": 2,
         "units": "pixels",
         "default": 24
+    },
+    "pref_extension_options_icon_size": {
+        "type": "spinbutton",
+        "description": "Icon size for the extension option buttons",
+        "min": 16,
+        "max": 96,
+        "step": 2,
+        "units": "pixels",
+        "default": 20
     },
     "pref_initial_load_done": {
         "type": "generic",
