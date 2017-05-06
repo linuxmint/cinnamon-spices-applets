@@ -1,5 +1,12 @@
 ## Change Log
 
+##### 1.07
+- Removed *multiversion* because it is not worth the trouble.
+- Removed default main folder set to Desktop. This was done because if the Desktop contains a lot of files (by the thousands), Cinnamon will simply freeze and/or crash. This happens because Clutter menus can barely handle large amounts of menu items.
+- Moved some prototypes into a separate "modules file".
+- Removed *dangerous* flag. Achieved by changing all synchronous functions to their asynchronous counterparts.
+- Some minor code clean up.
+
 ##### 1.06
 - Fixed menu breakage after changing main folder under Cinnamon 3.2.x.
 
