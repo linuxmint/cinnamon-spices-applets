@@ -1,4 +1,6 @@
-const appletUUID = "0dyseus@PopupTranslator";
+const $ = imports.applet.__init__;
+const _ = $._;
+
 const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk;
@@ -8,33 +10,11 @@ const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
-const Gettext = imports.gettext;
 const Main = imports.ui.main;
 const Tooltips = imports.ui.tooltips;
 const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const Mainloop = imports.mainloop;
-
-const OrnamentType = {
-    NONE: 0,
-    CHECK: 1,
-    DOT: 2,
-    ICON: 3
-};
-
-var $;
-
-// For translation mechanism.
-// Comments that start with // NOTE: are to be extracted by xgettext
-// and are directed to translators only.
-function _(aStr) {
-    let customTrans = Gettext.dgettext(appletUUID, aStr);
-
-    if (customTrans !== aStr)
-        return customTrans;
-
-    return Gettext.gettext(aStr);
-}
 
 function MyApplet(aMetadata, aOrientation, aPanel_height, aInstance_id) {
     this._init(aMetadata, aOrientation, aPanel_height, aInstance_id);
@@ -57,36 +37,19 @@ MyApplet.prototype = {
         this.applet_dir = aMetadata.path;
         this.metadata = aMetadata;
         this.orientation = aOrientation;
-        this.main_applet_dir = this.applet_dir;
 
         try {
-            // Use the this.main_applet_dir directory for imports shared by all supported Cinnamon versions.
-            // If I use just this.applet_dir, I would be forced to put the files to be imported
-            // repeatedly inside each version folder. ¬¬
-            let regExp = new RegExp("(" + aMetadata.uuid + ")$", "g");
-            if (!regExp.test(this.main_applet_dir)) {
-                let tempFile = Gio.file_new_for_path(this.main_applet_dir);
-                this.main_applet_dir = tempFile.get_parent().get_path();
-            }
-
-            // Import from main applet directory, not from "Cinnamon version" sub folders.
-            imports.searchPath.push(this.main_applet_dir);
-            // ALWAYS use the xlet UUID for the name of the "modules file".
-            // Otherwise, it will import the wrong file and generate conflicts with other xlets
-            // using a "modules file" with the exact same name. I learned this the hard way!!! ¬¬
-            $ = imports[aMetadata.uuid];
-
             // This shouldn't be needed because it's executed by the Cinnamon's "applets module".
             // But it seems that when using multiversion option, the icons folder is looked at the
             // version sub-directory, not in the main applet folder.
             // And the multiversion annoyances keep piling up!!!
-            Gtk.IconTheme.get_default().append_search_path(this.main_applet_dir + "/icons/");
-            Gettext.bindtextdomain(this.metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+            Gtk.IconTheme.get_default().append_search_path(this.applet_dir + "/icons/");
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this._buildMenu();
 
             this.forceTranslation = false;
+            this._isDestroyed = false;
             this.key_1_id = null;
             this.key_forced_1_id = null;
             this.key_2_id = null;
@@ -298,7 +261,7 @@ MyApplet.prototype = {
                     this[gCheck].actor,
                     _("Set %s as default translation engine.").format(this.providerData.google.name)
                 );
-                this[gCheck].setOrnament(OrnamentType.DOT, provider === "google");
+                this[gCheck].setOrnament($.OrnamentType.DOT, provider === "google");
                 this[gCheck].connect("activate", Lang.bind(this, function() {
                     this._setContextCheckboxes("google", aID);
                 }));
@@ -309,7 +272,7 @@ MyApplet.prototype = {
                     this[yCheck].actor,
                     _("Set %s as default translation engine.").format(this.providerData.yandex.name)
                 );
-                this[yCheck].setOrnament(OrnamentType.DOT, provider === "yandex");
+                this[yCheck].setOrnament($.OrnamentType.DOT, provider === "yandex");
                 this[yCheck].connect("activate", Lang.bind(this, function() {
                     this._setContextCheckboxes("yandex", aID);
                 }));
@@ -357,7 +320,12 @@ MyApplet.prototype = {
             _("Open the location where the translation history file is stored.")
         );
         menuItem.connect("activate", Lang.bind(this, function() {
-            Util.spawn(["xdg-open", [GLib.get_home_dir(), ".cinnamon", "configs", this.metadata.uuid + "History"].join("/")]);
+            Util.spawn_async(["xdg-open", [
+                GLib.get_home_dir(),
+                ".cinnamon",
+                "configs",
+                this.metadata.uuid + "History"
+            ].join("/")], null);
         }));
         subMenu.menu.addMenuItem(menuItem);
 
@@ -385,7 +353,7 @@ MyApplet.prototype = {
             _("Open this applet help file.")
         );
         menuItem.connect("activate", Lang.bind(this, function() {
-            Util.spawn(["xdg-open", this.main_applet_dir + "/HELP.html"]);
+            Util.spawn_async(["xdg-open", this.applet_dir + "/HELP.html"], null);
         }));
         subMenu.menu.addMenuItem(menuItem);
     },
@@ -588,36 +556,38 @@ MyApplet.prototype = {
     translate: function(aForce, aMechId) {
         this.forceTranslation = aForce;
 
-        let selection = this.selection,
-            targetLang = this["pref_target_lang_" + aMechId];
+        this.getSelection(Lang.bind(this, function function_name(aStr) {
+            let selection = aStr,
+                targetLang = this["pref_target_lang_" + aMechId];
 
-        try {
-            if (selection === "" || selection === " ")
-                return;
+            try {
+                if (selection === "" || selection === " ")
+                    return;
 
-            let historyEntry = this.transHistory[targetLang] ?
-                this.transHistory[targetLang][selection] :
-                false;
+                let historyEntry = this.transHistory[targetLang] ?
+                    this.transHistory[targetLang][selection] :
+                    false;
 
-            if (this.forceTranslation)
-                historyEntry = false;
+                if (this.forceTranslation)
+                    historyEntry = false;
 
-            if (historyEntry && targetLang === historyEntry["tL"]) {
-                this._displayHistory(selection, aMechId);
-                return;
+                if (historyEntry && targetLang === historyEntry["tL"]) {
+                    this._displayHistory(selection, aMechId);
+                    return;
+                }
+            } catch (aErr) {
+                global.logError(aErr);
             }
-        } catch (aErr) {
-            global.logError(aErr);
-        }
 
-        switch (this["pref_service_provider_" + aMechId]) {
-            case "google":
-                this.Google_provider(selection, aMechId);
-                break;
-            case "yandex":
-                this.Yandex_provider(selection, aMechId);
-                break;
-        }
+            switch (this["pref_service_provider_" + aMechId]) {
+                case "google":
+                    this.Google_provider(selection, aMechId);
+                    break;
+                case "yandex":
+                    this.Yandex_provider(selection, aMechId);
+                    break;
+            }
+        }));
     },
 
     Yandex_provider: function(aSourceText, aMechId) {
@@ -651,8 +621,7 @@ MyApplet.prototype = {
             let YandexURL = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=%s&lang=%s&text=%s&format=plain&options=1";
 
             Util.spawn_async([
-                    "python3",
-                    this.main_applet_dir + "/appletHelper.py",
+                    this.applet_dir + "/appletHelper.py",
                     "yandex",
                     YandexURL,
                     randomKey,
@@ -748,8 +717,7 @@ MyApplet.prototype = {
                 targetLang);
 
             Util.spawn_async([
-                    "python3",
-                    this.main_applet_dir + "/appletHelper.py",
+                    this.applet_dir + "/appletHelper.py",
                     "google",
                     GoogleURL,
                     encodeURIComponent(aSourceText)
@@ -763,18 +731,20 @@ MyApplet.prototype = {
                     try {
                         let result = JSON.parse(aResponse.replace(/,+/g, ","));
 
-                        if (result[0].length > 1) {
-                            let i = 0,
-                                iLen = result[0].length;
+                        let i = 0,
+                            iLen = result[0].length;
+
+                        if (iLen && iLen > 1) {
                             for (; i < iLen; i++) {
-                                transText += (result[0][i][0]).trim() + " ";
+                                if (result[0][i][0])
+                                    transText += (result[0][i][0]).trim() + " ";
                             }
                         } else {
-                            transText = result[0][0][0];
+                            transText = result[0][0][0] || "";
                         }
 
                         if (sourceLang === "")
-                            detectedLang = result[1] ? result[1] : "?";
+                            detectedLang = result[1] ? result[1] : result[2] ? result[2] : "?";
                         else
                             detectedLang = sourceLang;
 
@@ -944,35 +914,49 @@ MyApplet.prototype = {
 
         this.historyFile = configDir.get_child("translation_history.json");
 
-        let data,
-            forceSaving;
+        let data;
 
+        if (this.historyFile.query_exists(null)) {
+            // Trying the following asynchronous function in replacement of
+            // Cinnamon.get_file_contents*utf8_sync.
+            this.historyFile.load_contents_async(null, Lang.bind(this, function(aFile, aResponce) {
+                let rawData;
+                try {
+                    rawData = aFile.load_contents_finish(aResponce)[1];
+                } catch (aErr) {
+                    global.logError("ERROR: " + aErr.message);
+                    return;
+                }
+
+                try {
+                    data = JSON.parse(rawData);
+                } finally {
+                    this.dealWithHistoryData(data, false);
+                }
+            }));
+        } else {
+            data = {
+                __version__: 1
+            };
+            this.dealWithHistoryData(data, true);
+        }
+    },
+
+    dealWithHistoryData: function(aData, aForceSaving) {
         try {
-            if (this.historyFile.query_exists(null)) {
-                forceSaving = false;
-                data = JSON.parse(Cinnamon.get_file_contents_utf8_sync(this.historyFile.get_path()));
-            } else {
-                forceSaving = true;
-                data = {
-                    __version__: 1
-                };
+            // Implemented __version__ in case that in the future I decide
+            // to change again the history mechanism. Not likely (LOL).
+            if (!aData.__version__) {
+                aForceSaving = true;
+                let newData = JSON.stringify($.convertHistoryZeroToOne(aData));
+                this._translation_history = JSON.parse(newData);
+                this._translation_history.__version__ = 1;
+            } else if (aData.__version__ === 1) {
+                this._translation_history = aData;
             }
         } finally {
-            try {
-                // Implemented __version__ in case that in the future I decide
-                // to change again the history mechanism. Not likely (LOL).
-                if (!data.__version__) {
-                    forceSaving = true;
-                    let newData = JSON.stringify($.convertHistoryZeroToOne(data));
-                    this._translation_history = JSON.parse(newData);
-                    this._translation_history.__version__ = 1;
-                } else if (data.__version__ === 1) {
-                    this._translation_history = data;
-                }
-            } finally {
-                if (forceSaving)
-                    this.saveHistoryToFile();
-            }
+            if (aForceSaving)
+                this.saveHistoryToFile();
         }
     },
 
@@ -998,8 +982,7 @@ MyApplet.prototype = {
 
     checkDependencies: function() {
         Util.spawn_async([
-                "python3",
-                this.main_applet_dir + "/appletHelper.py",
+                this.applet_dir + "/appletHelper.py",
                 "check-dependencies"
             ],
             Lang.bind(this, function(aResponse) {
@@ -1034,14 +1017,13 @@ MyApplet.prototype = {
 
     openTranslationHistory: function() {
         try {
-            Util.spawn([
-                "python3",
-                this.main_applet_dir + "/appletHelper.py",
+            Util.spawn_async([
+                this.applet_dir + "/appletHelper.py",
                 "history",
                 this.pref_history_initial_window_width + "," +
                 this.pref_history_initial_window_height + "," +
                 this.pref_history_width_to_trigger_word_wrap
-            ]);
+            ], null);
             this.menu.close(true);
         } catch (aErr) {
             global.logError(aErr);
@@ -1058,25 +1040,35 @@ MyApplet.prototype = {
         this.saveHistoryToFile();
     },
 
-    get selection() {
-        let str = "";
-        try {
-            let process = new $.ShellOutputProcess(["xsel", "-o"]);
-            // Remove possible "illegal" characters.
-            str = process.spawn_sync_and_get_output().replace(/[\"'<>]/g, "");
-            // Replace line breaks and duplicated white spaces with a single space.
-            str = (str.replace(/\s+/g, " ")).trim();
+    getSelection: function(aCallback) {
+        let cmd = ["xsel", "-o"];
 
-            if (this.pref_loggin_enabled)
-                global.logError("\nselection()>str:\n" + str);
+        try {
+            Util.spawn_async(cmd, Lang.bind(this, function(aStandardOutput) {
+                if (this._isDestroyed)
+                    return;
+
+                let str = aStandardOutput.replace(/[\"'<>]/g, "");
+                // Replace line breaks and duplicated white spaces with a single space.
+                str = (str.replace(/\s+/g, " ")).trim();
+
+                aCallback(str);
+
+                if (this.pref_loggin_enabled)
+                    global.logError("\nselection()>str:\n" + str);
+            }));
         } catch (aErr) {
-            global.logError(aErr);
-        } finally {
-            return str;
+            // TO TRANSLATORS: Full sentence:
+            // "Unable to execute file/command 'FileName or Command':"
+            let msg = _("Unable to execute file/command '%s':").format(cmd.join(" "));
+            global.logError(msg + " " + aErr);
+            Main.notify(_(this.metadata.name), msg);
         }
     },
 
     on_applet_removed_from_panel: function() {
+        this._isDestroyed = true;
+
         [1, 2, 3, 4].forEach(Lang.bind(this, function(aID) {
             let id = "key_" + aID + "_id",
                 forcedId = "key_forced_" + aID + "_id";
