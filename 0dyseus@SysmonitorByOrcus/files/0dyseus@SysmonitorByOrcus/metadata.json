@@ -1,19 +1,19 @@
 {
     "website": "https://github.com/Odyseus/CinnamonTools",
-    "multiversion": true,
-    "description": "Displays CPU, memory, swap, network usage and load in graphs.",
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.4"
+    ],
+    "name": "System Monitor (Fork By Odyseus)",
     "contributors": [
         "buzz: Bug fixes.",
         "muzena: Croatian localization.",
         "giwhub: Chinese localization."
     ],
-    "comments": "Bug reports and feature requests should be reported on this applet's repository linked below.",
-    "name": "System Monitor (Fork By Odyseus)",
-    "version": "1.11",
-    "cinnamon-version": [
-        "2.8",
-        "3.0",
-        "3.2"
-    ],
-    "uuid": "0dyseus@SysmonitorByOrcus"
+    "uuid": "0dyseus@SysmonitorByOrcus",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "version": "1.12",
+    "description": "Displays CPU, memory, swap, network usage and load in graphs."
 }

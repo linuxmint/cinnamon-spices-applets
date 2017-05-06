@@ -1,150 +1,141 @@
-# This is a template file for translating the Cinnamon applet called System Monitor.
-# Copyright (C) 2016
-# This file is distributed under the same license as the System Monitor applet.
-# Odyseus <EMAIL@ADDRESS>, 2016.
+# This is a template file for translating the 0dyseus@SysmonitorByOrcus package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@SysmonitorByOrcus package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.06\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-02 08:13-0300\n"
-"PO-Revision-Date: 2017-05-02 08:15-0300\n"
-"Last-Translator: Odyseus\n"
-"Language-Team: \n"
-"Language: es\n"
+"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.11\n"
+"POT-Creation-Date: 2017-05-02 08:12-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
 
 #: applet.js:178
 msgid "Missing dependency!!!"
-msgstr "¡¡¡Falta de dependencia!!!"
+msgstr ""
 
 #: applet.js:179
 msgid ""
 "This applet needs the GTop library installed on your system for it  to work."
 msgstr ""
-"Este applet necesita la biblioteca GTop instalada en su sistema para que "
-"funcione."
 
 #: applet.js:180
 msgid ""
 "Read this applet help for more details (Applet context menu > Help item)."
 msgstr ""
-"Leer el archivo de ayuda de este applet para más detalles sobre esta opción "
-"(menú contextual del applet > elemento Ayuda)."
 
 #: applet.js:331
 msgid "Help"
-msgstr "Ayuda"
+msgstr ""
 
 #: applet.js:504
 msgid "CPU:"
-msgstr "CPU:"
+msgstr ""
 
 #: applet.js:530
 msgid "Memory:"
-msgstr "Memoria:"
+msgstr ""
 
 #. TO TRANSLATORS: Don't know if this would need translation.
 #. MB = Megabytes.
 #: applet.js:533 applet.js:561
 msgid "MB"
-msgstr "MB"
+msgstr ""
 
 #: applet.js:558
 msgid "Swap:"
-msgstr "Swap:"
+msgstr ""
 
 #. TO TRANSLATORS:
 #. D = Download
 #. U = Upload
 #: applet.js:607
 msgid "Network D/U:"
-msgstr "Red D/S:"
+msgstr ""
 
 #. TO TRANSLATORS: Don't know if this would need translation.
 #. KB/s = Kilobytes per second.
 #: applet.js:610
 msgid "KB/s"
-msgstr "KB/s"
+msgstr ""
 
 #: applet.js:649
 msgid "Load average:"
-msgstr "Promedio de carga:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "buzz: Bug fixes."
-msgstr "buzz: Corrección de errores."
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "muzena: Croatian localization."
-msgstr "muzena: Localización Croata."
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "giwhub: Chinese localization."
-msgstr "giwhub: Localización China."
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->comments
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked below."
 msgstr ""
-"Los reportes de fallos, peticiones de características y contribuciones deben "
-"hacerse en el repositorio de este xlet vinculado a continuación."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"
-msgstr "Monitor de Sistema (Modificado por Odyseus)"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->description
 msgid "Displays CPU, memory, swap, network usage and load in graphs."
-msgstr "Muestra gráficos de uso de CPU. memoria, swap, red y carga."
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_cpu_graph_color_kernel->description
 msgid "Kernel:"
-msgstr "Kernel:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_border_color->description
 msgid "Border color:"
-msgstr "Color del borde:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_show_memmory_graph->description
 msgid "Show Memory graph:"
-msgstr "Mostrar gráfico de memoria:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_background_color->description
 msgid "Background color:"
-msgstr "Color de fondo:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_use_smooth_graphs->description
 msgid "Use smooth graphs"
-msgstr "Usar suavizado de gráficos"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_cpu_graph_color_iowait->description
 msgid "IOWait:"
-msgstr "IOWait:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head44->description
 msgid "Network graph colors"
-msgstr "Colores del gráfico de red"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head1->description
 msgid "CPU graph"
-msgstr "Gráfico de CPU"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_load_graph_width->description
 msgid "Load graph width"
-msgstr "Anchura del gráfico de carga"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_load_graph_width->units
@@ -157,195 +148,163 @@ msgstr "Anchura del gráfico de carga"
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_memory_graph_width->units
 msgid "pixels"
-msgstr "pixeles"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head0->description
 msgid "General settings"
-msgstr "Preferencias generales"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_show_swap_graph->description
 msgid "Show Swap graph:"
-msgstr "Mostrar gráfico de swap:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_draw_border->description
 msgid "Draw graph border"
-msgstr "Dibujar borde de gráfico"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_draw_background->description
 msgid "Draw graph background"
-msgstr "Dibujar fondo de gráfico"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_network_graph_color_download->description
 msgid "Download:"
-msgstr "Descarga:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_swap_graph_width->description
 msgid "Swap graph width"
-msgstr "Anchura de gráfico swap"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_custom_command->description
 msgid "Custom command on applet click:"
-msgstr "Comando personalizado al cliquear en el applet:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_cpu_graph_width->description
 msgid "CPU graph width"
-msgstr "Anchura del gráfico de CPU"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head33->description
 msgid "Swap graph colors"
-msgstr "Colores de gráfico swap"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_network_graph_width->description
 msgid "Network graph width"
-msgstr "Anchura del gráfico de red"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_refresh_rate->description
 msgid "Refresh rate:"
-msgstr "Frecuencia de refresco:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->units
 msgid "milliseconds"
-msgstr "milisegundos"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_swap_graph_color_used->description
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_memory_graph_color_used->description
 msgid "Used:"
-msgstr "Usado:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_show_network_graph->description
 msgid "Show Network graph:"
-msgstr "Mostrar gráfico de red:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_align_tooltip_text_to_the_left->description
 msgid "Align tooltip text to the left"
-msgstr "Alinear el texto de las herramientas emergentes a la izquierda"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_align_tooltip_text_to_the_left->tooltip
 msgid ""
-"For those of us who suffer from the stupidity of using a theme with tooltips "
-"aligned to the center. ¬¬"
+"For those of us who suffer from the stupidity of using a theme with tooltips"
+" aligned to the center. ¬¬"
 msgstr ""
-"Para aquellos de nosotros que sufren de la estupidez de usar un tema con "
-"cajas de herramientas alineadas al centro.  ¬¬"
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_network_graph_color_upload->description
 msgid "Upload:"
-msgstr "Subida:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
 msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
 msgstr ""
-"Para aplicar estas preferencias, Cinnamon necesita ser reiniciado. "
-"Presióname!!!"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->tooltip
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->tooltip
 msgid "Restart Cinnamon"
-msgstr "Reiniciar Cinnamon"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head55->description
 msgid "Load graph colors"
-msgstr "Colores del gráfico de carga"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_show_cpu_graph->description
 msgid "Show CPU graph:"
-msgstr "Mostrar gráfico de CPU:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head3->description
 msgid "Swap graph"
-msgstr "Gráfico de swap"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_show_load_graph->description
 msgid "Show Load graph:"
-msgstr "Mostrar gráfico de carga:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head2->description
 msgid "Memory graph"
-msgstr "Gráfico de memoria"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head4->description
 msgid "Network graph"
-msgstr "Gráfico de red"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_cpu_graph_color_user->description
 msgid "User:"
-msgstr "Usuario:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_memory_graph_width->description
 msgid "Memory graph width"
-msgstr "Anchura del gráfico de memoria"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_cpu_graph_color_nice->description
 msgid "Nice:"
-msgstr "Nice:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_memory_graph_color_cached->description
 msgid "Cached:"
-msgstr "Almacenado en caché:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head5->description
 msgid "Load graph"
-msgstr "Gráfico de carga"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-
 #. schema.json->pref_load_graph_color_load->description
 msgid "Load:"
-msgstr "Carga:"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head11->description
 msgid "CPU graph colors"
-msgstr "Colores del gráfico de CPU"
+msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head22->description
 msgid "Memory graph colors"
-msgstr "Colores del gráfico de memoria"
-
-#~ msgid "CPU: "
-#~ msgstr "CPU: "
-
-#~ msgid "Memory: "
-#~ msgstr "Memoria: "
-
-#~ msgid " MB"
-#~ msgstr "MB"
-
-#~ msgid "Swap: "
-#~ msgstr "Swap: "
-
-#~ msgid "Network D/U: "
-#~ msgstr "Red D/S: "
-
-#~ msgid " KB/s"
-#~ msgstr "KB/s"
-
-#~ msgid "Load average: "
-#~ msgstr "Promedio de carga: "
-
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Los reportes de errores y las solicitudes de características deben ser "
-#~ "reportadas en el repositorio de este applet, que se enlaza a continuación."
+msgstr ""

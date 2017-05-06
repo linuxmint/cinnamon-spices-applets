@@ -332,7 +332,7 @@ MyApplet.prototype = {
             "dialog-information",
             St.IconType.SYMBOLIC);
         menuItem.connect("activate", Lang.bind(this, function() {
-            Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.html");
+            Util.spawn_async(["xdg-open ", this.main_applet_dir + "/HELP.html"], null);
         }));
         this._applet_context_menu.addMenuItem(menuItem);
     },
@@ -501,7 +501,7 @@ CpuDataProvider.prototype = {
         this.iowait_last = this.gtop.iowait;
         this.total_last = this.gtop.total;
         let used = 1 - idle - nice - sys - iowait;
-        this.text = [_("CPU: "), Math.round(100 * used) + " %"];
+        this.text = [_("CPU:") + " ", Math.round(100 * used) + " %"];
         return [used, nice, sys, iowait];
     },
 
@@ -527,8 +527,10 @@ MemDataProvider.prototype = {
         GTop.glibtop_get_mem(this.gtop);
         let used = this.gtop.used / this.gtop.total;
         let cached = (this.gtop.buffer + this.gtop.cached) / this.gtop.total;
-        this.text = [_("Memory: "), Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) /
-            (1024 * 1024)) + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")];
+        this.text = [_("Memory:") + " ", Math.round((this.gtop.used - this.gtop.cached - this.gtop.buffer) /
+            // TO TRANSLATORS: Don't know if this would need translation.
+            // MB = Megabytes.
+            (1024 * 1024)) + " / " + Math.round(this.gtop.total / (1024 * 1024)) + " " + _("MB")];
         return [used - cached, cached];
     },
 
@@ -553,8 +555,10 @@ SwapDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_swap(this.gtop);
         let used = this.gtop.used / this.gtop.total;
-        this.text = [_("Swap: "), Math.round(this.gtop.used / (1024 * 1024)) + " / " +
-            Math.round(this.gtop.total / (1024 * 1024)) + _(" MB")
+        this.text = [_("Swap:") + " ", Math.round(this.gtop.used / (1024 * 1024)) + " / " +
+            // TO TRANSLATORS: Don't know if this would need translation.
+            // MB = Megabytes.
+            Math.round(this.gtop.total / (1024 * 1024)) + " " + _("MB")
         ];
         return [used];
     },
@@ -597,8 +601,13 @@ NetDataProvider.prototype = {
         let up_delta = (up - this.up_last) * 1000 / this.refreshRate;
         this.down_last = down;
         this.up_last = up;
-        this.text = [_("Network D/U: "), Math.round(down_delta / 1024) + " / " +
-            Math.round(up_delta / 1024) + _(" KB/s")
+        // TO TRANSLATORS:
+        // D = Download
+        // U = Upload
+        this.text = [_("Network D/U:") + " ", Math.round(down_delta / 1024) + " / " +
+            // TO TRANSLATORS: Don't know if this would need translation.
+            // KB/s = Kilobytes per second.
+            Math.round(up_delta / 1024) + " " + _("KB/s")
         ];
         return [down_delta, up_delta];
     },
@@ -637,7 +646,7 @@ LoadAvgDataProvider.prototype = {
     getData: function() {
         GTop.glibtop_get_loadavg(this.gtop);
         let load = this.gtop.loadavg[0];
-        this.text = [_("Load average: "), this.gtop.loadavg[0] + ", " + this.gtop.loadavg[1] +
+        this.text = [_("Load average:") + " ", this.gtop.loadavg[0] + ", " + this.gtop.loadavg[1] +
             ", " + this.gtop.loadavg[2]
         ];
         return [load];
