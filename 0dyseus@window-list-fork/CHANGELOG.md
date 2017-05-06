@@ -1,5 +1,12 @@
 ## Change Log
 
+##### 1.08
+- Added missing context menu to open the help file.
+- Updated metadata.json file.
+- Changed *multiversion* implementation. Created symlinks inside the version folders so I don't keep forgetting to copy the files from the root folder.
+- Moved some functions into a separate "modules file". Only the ones that can be shared between all versions.
+- Some minor code clean up.
+
 ##### 1.07
 - Added compatibility for Cinnamon 2.8.x.
 - Some minor fixes.
