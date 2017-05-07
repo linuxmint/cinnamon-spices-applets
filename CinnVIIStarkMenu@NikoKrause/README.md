@@ -5,6 +5,7 @@
 &#10004; Cinnamon-Version 2.8 (Linux Mint 17.3) <br />
 &#10004; Cinnamon-Version 3.0 (Linux Mint 18)   <br />
 &#10004; Cinnamon-Version 3.2 (Linux Mint 18.1) <br />
+&#10004; Cinnamon-Version 3.4 (Linux Mint 18.2) <br />
 
 #### [Translation status](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/):
 
