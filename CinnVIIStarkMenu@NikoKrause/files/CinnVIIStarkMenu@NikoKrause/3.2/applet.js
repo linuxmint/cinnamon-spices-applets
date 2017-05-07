@@ -2098,6 +2098,7 @@ MyApplet.prototype = {
         this._display();
         this._updateMenuLayout();
         this._updateCustomLabels();
+        this._appsBoxWidthResized = false;
 
         appsys.connect('installed-changed', Lang.bind(this, this.onAppSysChanged));
         AppFavorites.getAppFavorites().connect('changed', Lang.bind(this, this._refreshFavs));
@@ -2437,6 +2438,7 @@ MyApplet.prototype = {
             this._selectedItemIndex = null;
             this._activeContainer = null;
             this._activeActor = null;
+            this._appsBoxWidthResized = false;
 
             if(visiblePane == "apps") {
                 this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -3825,6 +3827,7 @@ MyApplet.prototype = {
         this.current_motion_actor = null;
         let section = new PopupMenu.PopupMenuSection();
         this.menu.addMenuItem(section);
+        this._appsBoxWidthResized = false;
 
         this.leftPane = new St.Bin();
 
@@ -3990,8 +3993,10 @@ MyApplet.prototype = {
             this.appsButton.icon.set_icon_name("go-previous");
             if(this.menuLayout == "stark-menu")
                 this.rightButtonsBox.actor.hide();
-            if (this._activeContainer == null)
+            if (!this._appsBoxWidthResized) {
                 this._resizeAppsBoxWidth();
+                this._appsBoxWidthResized = true;
+            }
             this._resizeAppsBoxHeight();
             visiblePane = "apps";
             if (this._previousTreeSelectedActor == null)
