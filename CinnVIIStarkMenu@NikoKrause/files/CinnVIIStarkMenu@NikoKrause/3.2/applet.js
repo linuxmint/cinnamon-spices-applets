@@ -954,7 +954,7 @@ CategoryButton.prototype = {
         this.actor._delegate = this;
         this.label = new St.Label({ text: label, style_class: 'menu-category-button-label' });
         if (category && this.icon_name) {
-            this.icon = St.TextureCache.get_default().load_gicon(null, icon, CATEGORY_ICON_SIZE);
+            this.icon = new St.Icon({gicon: icon, icon_size: CATEGORY_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
             if (this.icon) {
                 this.addActor(this.icon);
                 this.icon.realize();
