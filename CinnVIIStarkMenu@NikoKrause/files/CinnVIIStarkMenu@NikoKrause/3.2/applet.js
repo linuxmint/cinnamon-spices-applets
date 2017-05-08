@@ -6,6 +6,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const Main = imports.ui.main;
+const MessageTray = imports.ui.messageTray;
 const PopupMenu = imports.ui.popupMenu;
 const AppFavorites = imports.ui.appFavorites;
 const Gtk = imports.gi.Gtk;
@@ -686,7 +687,9 @@ RecentButton.prototype = {
 
         this.appsMenuButton = appsMenuButton;
         this.button_name = file.name;
+
         this.menu = null;
+
         this.actor.set_style_class_name('menu-application-button');
         this.actor._delegate = this;
         this.label = new St.Label({ text: this.button_name, style_class: 'menu-application-button-label' });
@@ -727,19 +730,32 @@ RecentButton.prototype = {
     },
 
     activate: function(event) {
-        Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
-        this.appsMenuButton.menu.close();
+        try {
+            Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
+            this.appsMenuButton.menu.close();
+        } catch (e) {
+            let source = new MessageTray.SystemNotificationSource();
+            Main.messageTray.add(source);
+            let notification = new MessageTray.Notification(source,
+                                                            _("This file is no longer available"),
+                                                            e.message);
+            notification.setTransient(true);
+            notification.setUrgency(MessageTray.Urgency.NORMAL);
+            source.notify(notification);
+        }
     },
 
     activateContextMenus: function(event) {
         let menu = this.appsMenuButton.recentContextMenu;
 
-        if (menu != null && menu.isOpen)
+        if (menu != null && menu.sourceActor._delegate != this)
             this.appsMenuButton.closeContextMenus(this, true);
+
         this.toggleMenu();
     },
 
     closeMenu: function() {
+        this.menu = null;
         this.menu.close();
     },
 
@@ -748,15 +764,14 @@ RecentButton.prototype = {
     },
 
     toggleMenu: function() {
-        if (this.menu == null) {
-            this.menu = new PopupMenu.PopupSubMenu(this.actor);
-            this.menu.actor.set_style_class_name('menu-context-menu');
-            this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
+        if (this.appsMenuButton.recentContextMenu == null) {
+            this.appsMenuButton.createRecentContextMenu(this.actor);
         }
-        let menu = this.menu;
+
+        let menu = this.appsMenuButton.recentContextMenu;
+        this.menu = menu;
 
         if (!menu.isOpen) {
-            this.appsMenuButton.recentContextMenu = menu;
             let parent = menu.actor.get_parent();
             if (parent != null) {
                 parent.remove_child(menu.actor);
@@ -831,18 +846,8 @@ RecentButton.prototype = {
         this.appsMenuButton.recentContextMenu.toggle();
     },
 
-    _subMenuOpenStateChanged: function() {
-        if (this.menu.isOpen) {
-            this.appsMenuButton._activeContextMenuParent = this;
-            this.appsMenuButton._scrollToButton(this.menu);
-        } else {
-            this.appsMenuButton._activeContextMenuItem = null;
-            this.appsMenuButton._activeContextMenuParent = null;
-        }
-    },
-
     get _contextIsOpen() {
-        return this.appsMenuButton.recentContextMenu != null && this.appsMenuButton.recentContextMenu.isOpen;
+        return this.menu != null && this.menu.isOpen;
     },
 
     destroy: function() {
@@ -955,6 +960,7 @@ CategoryButton.prototype = {
         this.label = new St.Label({ text: label, style_class: 'menu-category-button-label' });
         if (category && this.icon_name) {
             this.icon = new St.Icon({gicon: icon, icon_size: CATEGORY_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+
             if (this.icon) {
                 this.addActor(this.icon);
                 this.icon.realize();
@@ -2003,6 +2009,13 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
+const L10NDUMMY = _("All Programs") + _("Favorites")
+                + _("Documents") + _("nemo Documents")
+                + _("Pictures") + _("nemo Pictures")
+                + _("Music") + _("nemo Music")
+                + _("Videos") + _("nemo Videos")
+                + _("Downloads") + _("nemo Downloads");
+
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
 }
@@ -2123,6 +2136,8 @@ MyApplet.prototype = {
 
         this.recentContextMenu = null;
         this.appsContextMenu = null;
+
+        this.lastSelectedCategory = null;
 
         for (let i = 0; i < 20; i++) {
             this.settings.bind("quicklauncher-" + i + "-checkbox", "quicklauncher_" + i + "_checkbox", this._updateQuickLinks);
@@ -2585,27 +2600,51 @@ MyApplet.prototype = {
         }
     },
 
-    _navigateContextMenu: function(actor, symbol, ctrlKey) {
+    _recentMenuOpenStateChanged: function(recentContextMenu) {
+        if (recentContextMenu.isOpen) {
+            this._activeContextMenuParent = recentContextMenu.sourceActor._delegate;
+            this._scrollToButton(recentContextMenu);
+        } else {
+            this._activeContextMenuItem = null;
+            this._activeContextMenuParent = null;
+            for (let item in this._recentButtons) {
+                if (this._recentButtons[item].menu) {
+                    this._recentButtons[item].menu = null;
+                }
+            }
+        }
+    },
+
+    createRecentContextMenu: function(actor) {
+        let menu = new PopupMenu.PopupSubMenu(actor);
+        menu.actor.set_style_class_name('menu-context-menu');
+        menu.connect('open-state-changed', Lang.bind(this, this._recentMenuOpenStateChanged));
+        this.recentContextMenu = menu;
+    },
+
+    _navigateContextMenu: function(button, symbol, ctrlKey) {
         if (symbol === Clutter.KEY_Menu || symbol === Clutter.Escape ||
             (ctrlKey && (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter))) {
-            actor.activateContextMenus();
+            button.activateContextMenus();
             return;
         }
 
+        let minIndex = 0;
         let goUp = symbol === Clutter.KEY_Up;
         let nextActive = null;
-        let menuItems = actor.menu._getMenuItems(); // The context menu items
+        let menuItems = button.menu._getMenuItems(); // The context menu items
 
         // The first context menu item of a RecentButton is used just as a label.
         // So remove it from the iteration.
-        if (actor instanceof RecentButton)
-            menuItems.shift();
+        if (button && button instanceof RecentButton) {
+            minIndex = 1;
+        }
 
         let menuItemsLength = menuItems.length;
 
         switch (symbol) {
             case Clutter.KEY_Page_Up:
-                this._activeContextMenuItem = menuItems[0];
+                this._activeContextMenuItem = menuItems[minIndex];
                 this._activeContextMenuItem.setActive(true);
                 return;
             case Clutter.KEY_Page_Down:
@@ -2616,9 +2655,9 @@ MyApplet.prototype = {
 
         if (!this._activeContextMenuItem) {
             if (symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter) {
-                actor.activate();
+                button.activate();
             } else {
-                this._activeContextMenuItem = menuItems[goUp ? menuItemsLength - 1 : 0];
+                this._activeContextMenuItem = menuItems[goUp ? menuItemsLength - 1 : minIndex];
                 this._activeContextMenuItem.setActive(true);
             }
             return;
@@ -2629,19 +2668,23 @@ MyApplet.prototype = {
             return;
         }
 
-        let i = 0;
-        for (; i < menuItemsLength; i++) {
+        for (let i = minIndex; i < menuItemsLength; i++) {
             if (menuItems[i] === this._activeContextMenuItem) {
-                nextActive = goUp ? (menuItems[i - 1] || null) : (menuItems[i + 1] || null);
+                let nextActiveIndex = (goUp ? i - 1 : i + 1);
+
+                if (nextActiveIndex < minIndex) {
+                    nextActiveIndex = menuItemsLength - 1;
+                } else if (nextActiveIndex > menuItemsLength - 1) {
+                    nextActiveIndex = minIndex;
+                }
+
+                nextActive = menuItems[nextActiveIndex];
+                nextActive.setActive(true);
+                this._activeContextMenuItem = nextActive;
+
                 break;
             }
         }
-
-        if (!nextActive)
-            nextActive = goUp ? menuItems[menuItemsLength - 1] : menuItems[0];
-
-        nextActive.setActive(true);
-        this._activeContextMenuItem = nextActive;
     },
 
     _onMenuKeyPress: function(actor, event) {
@@ -3177,7 +3220,7 @@ MyApplet.prototype = {
             Mainloop.source_remove(this.vector_update_loop);
             this.vector_update_loop = 0;
         }
-        this.vector_update_loop = Mainloop.timeout_add(35, Lang.bind(this, this.updateVectorBox));
+        this.vector_update_loop = Mainloop.timeout_add(50, Lang.bind(this, this.updateVectorBox));
     },
 
     updateVectorBox: function(actor) {
@@ -3236,16 +3279,10 @@ MyApplet.prototype = {
                 if (!this.searchActive) {
                     this.placesButton.isHovered = true;
 
-                    Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
-                        if (this.placesButton.isHovered) {
-                            this._clearPrevCatSelection(this.placesButton);
-                            this.placesButton.actor.style_class = "menu-category-button-selected";
-                            this.closeContextMenus(null, false);
-                            this._displayButtons(null, -1);
-                        } else {
-                            this.placesButton.actor.style_class = "menu-category-button";
-                        }
-                    }))
+                    this._clearPrevCatSelection(this.placesButton);
+                    this.placesButton.actor.style_class = "menu-category-button-selected";
+                    this.closeContextMenus(null, false);
+                    this._displayButtons(null, -1);
 
                     this.makeVectorBox(this.placesButton.actor);
                 }
@@ -3310,16 +3347,10 @@ MyApplet.prototype = {
                     if (!this.searchActive) {
                         this.recentButton.isHovered = true;
 
-                        Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
-                            if (this.recentButton.isHovered) {
-                                this._clearPrevCatSelection(this.recentButton.actor);
-                                this.recentButton.actor.style_class = "menu-category-button-selected";
-                                this.closeContextMenus(null, false);
-                                this._displayButtons(null, null, -1);
-                            } else {
-                                this.recentButton.actor.style_class = "menu-category-button";
-                            }
-                        }))
+                        this._clearPrevCatSelection(this.recentButton.actor);
+                        this.recentButton.actor.style_class = "menu-category-button-selected";
+                        this.closeContextMenus(null, false);
+                        this._displayButtons(null, null, -1);
 
                         this.makeVectorBox(this.recentButton.actor);
                     }
@@ -3550,15 +3581,9 @@ MyApplet.prototype = {
             if (!this.searchActive) {
                 this._allAppsCategoryButton.isHovered = true;
 
-                Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
-                    if (this._allAppsCategoryButton.isHovered) {
-                        this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
-                        this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
-                        this._select_category(null, this._allAppsCategoryButton);
-                    } else {
-                        this._allAppsCategoryButton.actor.style_class = "menu-category-button";
-                    }
-                }));
+                this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
+                this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
+                this._select_category(null, this._allAppsCategoryButton);
 
                 this.makeVectorBox(this._allAppsCategoryButton.actor);
             }
@@ -3621,15 +3646,9 @@ MyApplet.prototype = {
                     if (!this.searchActive) {
                         categoryButton.isHovered = true;
 
-                        Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
-                            if (categoryButton.isHovered) {
-                                this._clearPrevCatSelection(categoryButton.actor);
-                                categoryButton.actor.style_class = "menu-category-button-selected";
-                                this._select_category(dir, categoryButton);
-                            } else {
-                                categoryButton.actor.style_class = "menu-category-button";
-                            }
-                        }))
+                        this._clearPrevCatSelection(categoryButton.actor);
+                        categoryButton.actor.style_class = "menu-category-button-selected";
+                        this._select_category(dir, categoryButton);
 
                         this.makeVectorBox(categoryButton.actor);
                     }
@@ -4062,6 +4081,12 @@ MyApplet.prototype = {
     },
 
     _select_category : function(dir, categoryButton) {
+        if (dir == this.lastSelectedCategory) {
+            return;
+        }
+
+        this.lastSelectedCategory = dir;
+
         if (dir)
             this._displayButtons(this._listApplications(dir.get_menu_id()));
         else
@@ -4070,8 +4095,8 @@ MyApplet.prototype = {
     },
 
     closeContextMenus: function(excluded, animate) {
-        for (var app in this._applicationsButtons){
-            if (app != excluded && this._applicationsButtons[app].menu.isOpen){
+        for (let app in this._applicationsButtons){
+            if (this._applicationsButtons[app] != excluded && this._applicationsButtons[app].menu.isOpen){
                 if (animate)
                     this._applicationsButtons[app].toggleMenu();
                 else
@@ -4079,23 +4104,30 @@ MyApplet.prototype = {
             }
         }
 
-        if (excluded != this._activeContextMenuParent) {
-            if (this.recentContextMenu && this.recentContextMenu.isOpen) {
-                if (animate)
-                    this.recentContextMenu.sourceActor._delegate.toggleMenu();
-                else
-                    this.recentContextMenu.sourceActor._delegate.closeMenu();
-            }
-        }
-
-        for (var app in this._favoritesButtons){
-            if (app != excluded && this._favoritesButtons[app].menu.isOpen){
+        for (let app in this._favoritesButtons){
+            if (this._favoritesButtons[app] != excluded && this._favoritesButtons[app].menu.isOpen){
                 if (animate)
                     this._favoritesButtons[app].toggleMenu();
                 else
                     this._favoritesButtons[app].closeMenu();
             }
         }
+
+        if (!this.recentContextMenu) {
+            return;
+        }
+
+        let item = this.recentContextMenu.sourceActor._delegate;
+
+        if ((item != excluded || excluded == null) && item.menu && item.menu.isOpen) {
+            if (animate)
+                this.recentContextMenu.toggle();
+            else
+                this.recentContextMenu.close();
+            this._activeContextMenuParent = null;
+            this._activeContextMenuItem = null;
+        }
+
     },
 
     _displayButtons: function(appCategory, places, recent, apps, autocompletes){
