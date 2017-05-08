@@ -7,22 +7,11 @@
 &#10004; Cinnamon-Version 3.2 (Linux Mint 18.1) <br />
 &#10004; Cinnamon-Version 3.4 (Linux Mint 18.2) <br />
 
-#### [Translation status](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/):
+#### Translation status:
 
-Language | Status | Untranslated | By
---------------|:--------:|:----------------:|:---:
-[Chinese (Simplified) (zh_CN)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/zh_CN)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/zh_CN/+translate?show=untranslated) | [giwhub](https://github.com/giwhub)
-[Croatian (hr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/hr/+translate?show=untranslated) | [gogo](https://launchpad.net/~trebelnik-stefina)
-[Czech (cs)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/cs)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/cs/+translate?show=untranslated) | [Radek Otáhal](https://launchpad.net/~radek-otahal)
-[French (fr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr)  | ![96%](http://progressed.io/bar/96) | [5](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/fr/+translate?show=untranslated) | [bluedxca93](https://launchpad.net/~bluedxca93), [Christian Medel](https://launchpad.net/~cmedelahumada)
-[German (de)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de)  | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/de/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause)
-[Kurdish (ku)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ku) | ![17%](http://progressed.io/bar/17) | [106](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ku/+translate?show=untranslated) | [Rokar ✌](https://launchpad.net/~rokarali)
-[Portuguese (pt)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/pt) | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/pt/+translate?show=untranslated) | [Hugo Gonçalves](https://launchpad.net/~hugo-goncalves-q)
-[Russian (ru)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru) | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/ru/+translate?show=untranslated) | [Niko Krause](https://launchpad.net/~nikokrause), [Pavel Ivanov](https://launchpad.net/~ipasoft)
-[Serbian (sr)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/sr) | ![2%](http://progressed.io/bar/2) | [125](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/sr/+translate?show=untranslated) | [Мирослав Николић](https://launchpad.net/~lipek)
-[Spanish (es)](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/es) | ![100%](http://progressed.io/bar/100) | [&mdash;](https://translations.launchpad.net/cinnviistarkmenu/trunk/+pots/cinnviistarkmenu/es/+translate?show=untranslated) | [Bob](https://launchpad.net/~basura1-p), [Germán](https://launchpad.net/~germanfr)
+View the [translation status tables](https://github.com/NikoKrause/cinnamon-spices-applets/blob/applets-translation-status/.translation-status/applets-status/CinnVIIStarkMenu@NikoKrause/README.md) of CinnVIIStarkMenu.
 
-Feel free to contribute to the translations of CinnVIIStarkMenu on [Launchpad](https://translations.launchpad.net/cinnviistarkmenu).
+Feel free to contribute to the translations of CinnVIIStarkMenu on [Launchpad](https://translations.launchpad.net/cinnviistarkmenu) or on [GitHub](https://github.com/linuxmint/cinnamon-spices-applets).
 
 #### Preview:
 Click on the image below to see a review video of CinnVIIStarkMenu (previous: CinnXPStarkMenu) by [Big Daddy](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg):
@@ -53,6 +42,21 @@ Click on the image below to see a review video of CinnVIIStarkMenu (previous: Ci
 * [@petrucci4prez](https://github.com/petrucci4prez) for his great [CinnXP theme](https://github.com/petrucci4prez/CinnXP), which was the main reason for me to start with coding this menu
 * [@feren](https://github.com/feren) and [@cinnamoner](https://github.com/cinnamoner) for testing this applet and their kind feedback
 * [@germanfr](https://github.com/germanfr) for contributing to this applet
+
+##### ... and also thanks to the translators:
+Language                     | By
+---------------------------- |:---:
+Chinese (Simplified) (zh_CN) | [giwhub](https://github.com/giwhub)
+Croatian (hr)                | [gogo](https://launchpad.net/~trebelnik-stefina)
+Czech (cs)                   | [Radek Otáhal](https://launchpad.net/~radek-otahal)
+French (fr)                  | [bluedxca93](https://launchpad.net/~bluedxca93), [Christian Medel](https://launchpad.net/~cmedelahumada)
+German (de)                  | [Niko Krause](https://launchpad.net/~nikokrause)
+Kurdish (ku)                 | [Rokar ✌](https://launchpad.net/~rokarali)
+Portuguese (pt)              | [Hugo Gonçalves](https://launchpad.net/~hugo-goncalves-q)
+Russian (ru)                 | [Niko Krause](https://launchpad.net/~nikokrause), [Pavel Ivanov](https://launchpad.net/~ipasoft)
+Serbian (sr)                 | [Мирослав Николић](https://launchpad.net/~lipek)
+Spanish (es)                 | [Bob](https://launchpad.net/~basura1-p), [Germán](https://launchpad.net/~germanfr)
+Swedish (sv)                 | [Åke Engelbrektson](https://github.com/eson57)
 
 -----------
 #### License
