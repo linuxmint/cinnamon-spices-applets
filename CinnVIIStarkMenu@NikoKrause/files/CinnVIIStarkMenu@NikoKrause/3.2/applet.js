@@ -2009,6 +2009,13 @@ function _(str) {
     return Gettext.gettext(str);
 }
 
+const L10NDUMMY = _("All Programs") + _("Favorites")
+                + _("Documents") + _("nemo Documents")
+                + _("Pictures") + _("nemo Pictures")
+                + _("Music") + _("nemo Music")
+                + _("Videos") + _("nemo Videos")
+                + _("Downloads") + _("nemo Downloads");
+
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
 }
