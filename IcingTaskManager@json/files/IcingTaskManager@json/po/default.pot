@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 
-#. src->metadata.json->description
-msgid "Window list with app grouping and window thumbnails"
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
 msgstr ""
 
-#. src->metadata.json->name
+#. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
 msgstr ""
 
@@ -496,4 +496,13 @@ msgid ""
 "Determines the behavior of middle mouse button clicks on app buttons. Setting"
 " this to false will close the last focused window from the app group on"
 " middle click."
+msgstr ""
+
+msgid "About..."
+msgstr ""
+
+msgid "Configure..."
+msgstr ""
+
+msgid "Remove \'Icing Task Manager\'"
 msgstr ""
