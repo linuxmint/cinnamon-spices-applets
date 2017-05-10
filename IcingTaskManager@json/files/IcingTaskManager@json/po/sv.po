@@ -18,11 +18,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. src->metadata.json->description
-msgid "Window list with app grouping and window thumbnails"
-msgstr "Fönsterlista med programgruppering och fönsterminiatyrer"
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
+msgstr "Fönsterlista med programgruppering och miniatyrer"
 
-#. src->metadata.json->name
+#. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
 msgstr "Icing Task Manager"
 
@@ -543,3 +543,12 @@ msgid ""
 msgstr ""
 "Avgör beteendet för mushjulsklick på programknappar. Inaktivering stänger "
 "det sist fokuserade fönstret i programgruppen vid mushjulsklick."
+
+msgid "About..."
+msgstr "Om..."
+
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+msgid "Remove 'Icing Task Manager'"
+msgstr "Ta bort 'Icing Task Manager'"
