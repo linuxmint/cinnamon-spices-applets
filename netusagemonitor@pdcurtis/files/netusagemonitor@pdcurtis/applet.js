@@ -402,7 +402,7 @@ MyApplet.prototype = {
             //			this.menu.addActor(this.imageWidget);      // Old way with actor added directly to menu
             try {
                 this.menu.addActor(this.mainBox); // Now add mainbox
-                this.mainBox.add_actor(this.imageWidget); // and add actor for to it which can be removed
+                this.mainBox.add_actor(this.imageWidget); // and add actor in way that it can be removed
                 this.mainBox.add_actor(this.textWidget); // and text actor to handle case where vnstat not installed
 
                 GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
@@ -424,6 +424,11 @@ MyApplet.prototype = {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemHead0);
+            this.menuitemHead1 = new PopupMenu.PopupMenuItem("          " + _("If no Interface is Active, the last available information has been displayed"), {
+                reactive: false
+            });
+            this.menu.addMenuItem(this.menuitemHead1);
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
         }
 
@@ -523,41 +528,17 @@ MyApplet.prototype = {
 
     // Build right click context menu
     buildContextMenu: function () {
-      // No longer needed
-      // this._applet_context_menu.removeAll();
 
 /*
 The code following allows me to retain the 'standard' additions of 'About...' 'Configure...' and 'Remove' when rebuilding the Context menu.
-
-The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. The following code adds all the menu items to the applet context menu without touching the default items.
-
-    // Build right click context menu
-    buildContextMenu: function() {
-        // Not needed.
-        // this._applet_context_menu.removeAll();
-
-        if (this.myMenuSection)
-            this.myMenuSection.destroy();
-
-        this.myMenuSection = new PopupMenu.PopupMenuSection();
-        this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
-
-        // Rest of buildContextMenu function.
-        // Items added to this.myMenuSection insted of this._applet_context_menu.
-    },
-
-Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items. Maybe @collinss could shed some light on why this happened?
+The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. 
+Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items.
 */
 
         if (this.myMenuSection)
             this.myMenuSection.destroy();
-
         this.myMenuSection = new PopupMenu.PopupMenuSection();
         this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
-
-
-
-
 
 // Old code continues
 
@@ -731,16 +712,6 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             this.subMenu1.menu.addMenuItem(this.subMenuItem7);
          }
     },
-/*
-//      Following no longer needed as it is provided in default context menu items 
-
-//        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        let menuitem = new PopupMenu.PopupMenuItem(_("Configure"));
-        menuitem.connect('activate', Lang.bind(this, function (event) {
-            GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
-        }));
-        this.myMenuSection.addMenuItem(menuitem);
-*/
 
     setMonitoredInterface: function (name) {
         this.monitoredInterfaceName = name;
@@ -772,7 +743,6 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
     playAlert: function(){
         if(this.useAlertSound) {
             GLib.spawn_command_line_async('play ' + this.alertSound);
-//            GLib.spawn_command_line_async('play /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga');
         }
     },
 
@@ -998,7 +968,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version 3.1.2
+Version 3.2.1
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1151,4 +1121,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Update README.md (2x) for contributions from @collinss and @Odyseus.
 3.1.2     Change spawn_command_line_sync to spawn_command_line_async to remove one reason for 'dangerous' classification.
           Correct several spelling errors in comments and .md files.
+3.2.0     Remove duplicate let declarations occurances in common coding for Cinnamon 3.4 thanks to @NikoKraus  [#604]
+3.2.1     Harmonise with code writen by author for vnstat@cinnamon.org and revert 3.1.2 until further testing.
+          Updated netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot as string added. 
+          Tidy up comments in applet.js
+          Update README.md to remove a couple of references to Ubuntu from early days.
+          Usual updates to new version in applet.js, changelog and metadata.json
 */
