@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-16 20:18+0800\n"
-"PO-Revision-Date: 2017-04-23 15:07+0800\n"
+"POT-Creation-Date: 2017-05-11 10:00+0800\n"
+"PO-Revision-Date: 2017-05-11 10:03+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #: applet.js:43
 msgid "Ok"
@@ -38,112 +38,117 @@ msgid ""
 "at the top right"
 msgstr "注意：上次的网络流量统计已经由顶部右侧的vnStat更新"
 
-#: applet.js:434
+#: applet.js:427
+msgid ""
+"If no Interface is Active, the last available information has been displayed"
+msgstr "如果没有活动的接口，显示上次可用的信息"
+
+#: applet.js:439
 msgid "Cumulative Data Usage Information:"
 msgstr "累计数据使用情况信息："
 
-#: applet.js:461
+#: applet.js:466
 msgid "Current Connection and Interface Information"
 msgstr "当前连接和接口信息"
 
-#: applet.js:473
+#: applet.js:478
 msgid "No network monitored. Please select one right-clicking the applet."
 msgstr "没有监视的网络。请右键点击小程序选择一个。"
 
-#: applet.js:480
+#: applet.js:485
 msgid "Note: Alerts not enabled in Settings"
 msgstr "注意：未在设置中启用警报"
 
-#: applet.js:496
+#: applet.js:501
 msgid "Alert level (Orange):"
 msgstr "警报级别（橙色）："
 
-#: applet.js:496
+#: applet.js:501
 #, c-format
 msgid "% of Data Limit of"
 msgstr "% 的数据限制的"
 
-#: applet.js:501 applet.js:503 applet.js:509 applet.js:511 applet.js:517
+#: applet.js:506 applet.js:508 applet.js:514 applet.js:516 applet.js:522
 msgid "Cumulative Data Use"
 msgstr "累计数据使用量"
 
-#: applet.js:501 applet.js:509 applet.js:517
+#: applet.js:506 applet.js:514 applet.js:522
 msgid "with offset of"
 msgstr "和偏移的"
 
-#: applet.js:564
+#: applet.js:545
 msgid "Select a network manager interface to be monitored:"
 msgstr "选择要监视的网络管理器接口："
 
-#: applet.js:577
+#: applet.js:558
 msgid "(Active)"
 msgstr "(活动)"
 
-#: applet.js:590
+#: applet.js:571
 msgid "or Select an independent interface to be monitored:"
 msgstr "或选择一个要监视的独立接口："
 
-#: applet.js:594
+#: applet.js:575
 msgid "for most USB Mobile Internet Modems)"
 msgstr "用于大多数USB移动互联网调制解调器)"
 
-#: applet.js:606
+#: applet.js:587
 msgid "for Android Bluetooth PAN Connections)"
 msgstr "用于安卓蓝牙PAN连接)"
 
-#: applet.js:616
+#: applet.js:597
 msgid "Check for Changes in Devices and Display Options"
 msgstr "检查设备和显示选项中的更改"
 
-#: applet.js:624
+#: applet.js:605
 msgid "Toggle Display from ↓ and ↑ to ⇵"
 msgstr "从↓和↑到⇵间切换显示"
 
-#: applet.js:638 applet.js:648 applet.js:658
+#: applet.js:619 applet.js:629 applet.js:639
 msgid "Reset Cumulative Data Usage"
 msgstr "重置累计数据使用量"
 
-#: applet.js:671
+#: applet.js:652
 msgid "Housekeeping and System Sub Menu"
 msgstr "内务处理和系统子菜单"
 
-#: applet.js:674
+#: applet.js:655
 msgid "Open System Monitor"
 msgstr "打开系统监视器"
 
-#: applet.js:680
+#: applet.js:661
 msgid "View the Changelog"
 msgstr "查看变更日志"
 
-#: applet.js:686
+#: applet.js:667
 msgid "View the Help File"
 msgstr "打开帮助文件"
 
-#: applet.js:695
+#: applet.js:676
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr "打开stylesheet.css（高级功能）"
 
-#: applet.js:701
+#: applet.js:682
 msgid "Open alertScript  (Advanced Function)"
 msgstr "打开alertScript（高级功能）"
 
-#: applet.js:707
+#: applet.js:688
 msgid "Open suspendScript  (Advanced Function)"
 msgstr "打开suspendScript（高级功能）"
 
-#: applet.js:715
+#: applet.js:696
 msgid "Test alertScript  (Advanced Test Function)"
 msgstr "测试alertScript（高级测试功能）"
 
-#: applet.js:721
+#: applet.js:702
 msgid "Test suspendScript  (Advanced Test Function)"
 msgstr "测试suspendScript（高级测试功能）"
 
-#: applet.js:727
+#: applet.js:708
 msgid "Test Crisis Management Function (Advanced Test Function)"
 msgstr "测试危机管理功能（高级测试功能）"
 
-#: applet.js:807
+#: applet.js:777
 msgid ""
 "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
 "\n"
@@ -157,15 +162,15 @@ msgstr ""
 "\n"
 "或使用网络管理器小程序断开连接"
 
-#: applet.js:879
+#: applet.js:849
 msgid "Interface:"
 msgstr "接口："
 
-#: applet.js:879 applet.js:882
+#: applet.js:849 applet.js:852
 msgid "Downloaded:"
 msgstr "已下载："
 
-#: applet.js:879 applet.js:882
+#: applet.js:849 applet.js:852
 msgid "Uploaded:"
 msgstr "已上传："
 
@@ -311,8 +316,8 @@ msgid ""
 "the user (Note: changes in scripts may not survive an update and should be "
 "backed up)"
 msgstr ""
-"这些是用户可以更改的预设选项和脚本的混合（注意：脚本中的更改可能在更新后"
-"失效，应做好备份）"
+"这些是用户可以更改的预设选项和脚本的混合（注意：脚本中的更改可能在更新后失"
+"效，应做好备份）"
 
 #. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
 msgid "Put up a full screen 'modal dialog' warning"
@@ -362,8 +367,8 @@ msgid ""
 "Network Monitor will be used or PPP0 if that was the last connection."
 msgstr ""
 "选中此项允许您为启动时不总是活动的连接例如Wifi或移动互联网设置使用一个接口 - "
-"通常是wlan0或ppp0。如果没有选中，网络监视器将会使用已知第一个活动的接口，如果是上"
-"次的连接，则使用PPP0。"
+"通常是wlan0或ppp0。如果没有选中，网络监视器将会使用已知第一个活动的接口，如果"
+"是上次的连接，则使用PPP0。"
 
 #. netusagemonitor@pdcurtis->settings-
 #. schema.json->displayExtraHousekeeping->description
@@ -389,8 +394,8 @@ msgid ""
 "displayed - needs to be used in conjuction with changes in stylesheet.css. "
 "Value is halved when Compact Display selected"
 msgstr ""
-"小程序宽度的微调用于主题和小数位中显示的更改 - 需要与stylesheet.css的更改结合使"
-"用。选择紧凑显示时值减半"
+"小程序宽度的微调用于主题和小数位中显示的更改 - 需要与stylesheet.css的更改结合"
+"使用。选择紧凑显示时值减半"
 
 #. netusagemonitor@pdcurtis->settings-schema.json->appletWidthSetting->units
 msgid "pixels"
@@ -518,10 +523,14 @@ msgstr "仅用于内建的警报 - 硬编码到脚本。必须安装Sox。支持
 
 #. netusagemonitor@pdcurtis->metadata.json->description
 msgid ""
-"A Comprehensive Data Usage Monitor with alerts and cumulative data functions "
-"for Cinnamon"
-msgstr "一个具有警告和累计数据功能的Cinnamon综合数据使用情况监视器"
+"A Comprehensive Data Usage Monitor with alerts and cumulative data functions"
+msgstr "一个具有警报和累计数据功能的综合数据使用情况监视器"
 
 #. netusagemonitor@pdcurtis->metadata.json->name
 msgid "Network Data Usage Monitor"
 msgstr "网络数据使用量监视器"
+
+#~ msgid ""
+#~ "A Comprehensive Data Usage Monitor with alerts and cumulative data "
+#~ "functions for Cinnamon"
+#~ msgstr "一个具有警告和累计数据功能的Cinnamon综合数据使用情况监视器"
