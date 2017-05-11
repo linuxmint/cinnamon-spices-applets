@@ -24,7 +24,7 @@ msgstr "Uslikajte ili snimite svoju radnu površinu"
 
 #: applet.js:43
 msgid "ScreenShot"
-msgstr "Slika zaslona"
+msgstr "Slikanje zaslona"
 
 #: applet.js:48
 msgid "Whole Screen"

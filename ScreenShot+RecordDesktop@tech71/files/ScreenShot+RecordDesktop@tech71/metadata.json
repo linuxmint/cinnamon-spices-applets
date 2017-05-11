@@ -2,5 +2,6 @@
 "uuid": "ScreenShot+RecordDesktop@tech71",
 "name": "ScreenShot+Record Desktop",
 "description": "Take A Snapshot Or Record Your Desktop",
+"version": "1.01",
 "icon": "applets-screenshooter"
 }

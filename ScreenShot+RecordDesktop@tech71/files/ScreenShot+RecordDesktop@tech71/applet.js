@@ -99,14 +99,16 @@ MyApplet.prototype = {
 	this.menu.addMenuItem(this.recordItem);
 
 
-	//Open Recorded Video Folder
+	//Open Screenshot Pictures Folder
 	this.menu.addAction(_("Pictures Folder"), function(actor, event) {
-	Main.Util.spawnCommandLine("xdg-open Pictures");
+	// For the Pictures user folder
+	Main.Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)], null);
 	});  
 
 	//Open Recorded Video Folder
 	this.menu.addAction(_("Videos Folder"), function(actor, event) {
-	Main.Util.spawnCommandLine("xdg-open Videos");
+	// For the Videos user folder
+	Main.Util.spawn_async(["xdg-open", GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)], null);
 	});   
                         
         }
