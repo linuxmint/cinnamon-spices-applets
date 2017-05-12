@@ -181,7 +181,7 @@ msgstr ""
 
 #. src->settings-schema.json->show-pinned->description
 msgid "Show pinned apps"
-msgstr "Zeige angedockte Anwendungen"
+msgstr ""
 
 #. src->settings-schema.json->show-pinned->tooltip
 msgid ""

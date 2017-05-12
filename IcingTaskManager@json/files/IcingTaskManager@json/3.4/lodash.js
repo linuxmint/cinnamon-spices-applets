@@ -432,7 +432,7 @@ var freeModule = freeExports && typeof module == 'object' && module && !module.n
 var moduleExports = freeModule && freeModule.exports === freeExports;
 
 /** Detect free variable `process` from Node.js. */
-var freeProcess = moduleExports && freeGlobal.process;
+var freeProcess = moduleExports && freeGlobal && freeGlobal.process;
 
 /** Used to access faster Node.js helpers. */
 var nodeUtil = (function() {
@@ -17073,3 +17073,5 @@ var runInContext = (function runInContext(context) {
 // Export lodash.
 var _ = typeof global.lo !== 'undefined' ? global.lo : runInContext();
 global.lo = _;
+
+module.exports = _;

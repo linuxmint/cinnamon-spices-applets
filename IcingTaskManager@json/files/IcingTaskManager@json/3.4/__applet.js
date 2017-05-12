@@ -9,46 +9,27 @@
 // Copyright (C) 2011 R M Yorston
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
-/* jshint moz:true */
-global.__settings = typeof global.cinnamon_settings !== 'undefined' ? global.cinnamon_settings : global.settings;
-var importObj = typeof cimports !== 'undefined' ? cimports : imports;
-const Applet = importObj.ui.applet
+
+const Applet = imports.ui.applet
 const Lang = imports.lang
-const Cinnamon = typeof global.loadCinnamon !== 'undefined' ? global.loadCinnamon() : imports.gi.Cinnamon;
+const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St
-const Main = importObj.ui.main
-const Util = importObj.misc.util
+const Main = imports.ui.main
+const Util = imports.misc.util
 const Signals = imports.signals
-const DND = importObj.ui.dnd
-const Settings = importObj.ui.settings
+const DND = imports.ui.dnd
+const Settings = imports.ui.settings
 const Gettext = imports.gettext
 const Gio = imports.gi.Gio
 const Gtk = imports.gi.Gtk
 const GLib = imports.gi.GLib
 const Meta = imports.gi.Meta
-const SignalManager = importObj.misc.signalManager;
+const SignalManager = imports.misc.signalManager;
 
-const AppletDir = typeof cimports !== 'undefined' ? cimports.applets['IcingTaskManager@json'] : importObj.ui.appletManager.applets['IcingTaskManager@json']
-const _ = AppletDir.lodash._
-const AppList = AppletDir.appList
-const clog = AppletDir.__init__.clog
-const setTimeout = AppletDir.__init__.setTimeout
-
-const TitleDisplay = {
-  None: 1,
-  App: 2,
-  Title: 3,
-  Focused: 4
-}
-const NumberDisplay = {
-  Smart: 1,
-  Normal: 2,
-  None: 3,
-  All: 4
-}
+const _ = require('./lodash');
+const AppList = require('./appList');
 
 // Some functional programming tools
-
 const range = function (a, b) {
   let ret = []
   // if b is unset, we want a to be the upper bound on the range
@@ -64,16 +45,6 @@ const range = function (a, b) {
 function PinnedFavs () {
   this._init.apply(this, arguments)
 }
-
-/*
-
-
-
-MyApplet._init -> PinnedFavs
-
-
-
-*/
 
 PinnedFavs.prototype = {
   _init: function (applet) {
@@ -315,7 +286,7 @@ MyApplet.prototype = {
     this._onSwitchWorkspace()
     this._bindAppKey();
 
-    this.panelEditId = global.__settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
+    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
   },
 
   on_panel_height_changed: function() {
@@ -611,7 +582,7 @@ MyApplet.prototype = {
   },
 
   on_panel_edit_mode_changed: function () {
-    this.actor.reactive = global.__settings.get_boolean('panel-edit-mode')
+    this.actor.reactive = global.settings.get_boolean('panel-edit-mode')
   },
 
   pinned_app_contr: function () {
@@ -664,7 +635,7 @@ MyApplet.prototype = {
     // we need to create an AppList for it
     var refWorkspace = _.findIndex(this.metaWorkspaces, {index: this.currentWs})
     if (refWorkspace === -1) {
-      var appList = new AppList.AppList(this, metaWorkspace)
+      var appList = new AppList(this, metaWorkspace)
       this.metaWorkspaces.push({
         ws: metaWorkspace,
         appList: appList,
@@ -691,7 +662,7 @@ MyApplet.prototype = {
   destroy: function () {
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
-    global.__settings.disconnect(this.panelEditId)
+    global.settings.disconnect(this.panelEditId)
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
       let children = this.metaWorkspaces[i].appList.manager_container.get_children()
       for (let z = 0, len = children.length; z < len; z++) {
@@ -710,7 +681,8 @@ MyApplet.prototype = {
   }
 }
 
-function main (metadata, orientation, panel_height, instance_id) {
-  let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id)
-  return myApplet
-}
+let [metadata, orientation, panel_height, instance_id] = global['IcingTaskManager@json'];
+
+module.exports = (function main(metadata, orientation, panel_height, instance_id) {
+  return new MyApplet(metadata, orientation, panel_height, instance_id);
+})(metadata, orientation, panel_height, instance_id)
