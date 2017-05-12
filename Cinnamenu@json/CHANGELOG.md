@@ -1,5 +1,12 @@
 Changelog
 
+### 1.3.0
+
+  * Integrated the applet with the [Cinnode](https://github.com/jaszhix/cinnode) project for easier development.
+  * Moved the Favorite Apps category to the bottom of the category list.
+  * Added a feature allowing you to evaluate math expressions from the search field.
+  * Fixed various CJS warnings.
+
 ### 1.2.1
 
   * Fixed the application list view having excessive width.
