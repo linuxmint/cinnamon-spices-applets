@@ -117,26 +117,6 @@ CinnamenuButton.prototype = {
         icon: icon
       });
     }
-
-    /*let worker = new Worker(null, this.path);
-    this.worker = worker;
-
-    this.worker.connect('worker-ready', ()=>{
-      let _import = {
-        path: metadata.path,
-        name: 'helper',
-        args: [],
-        isConstructor: true
-      };
-      this.worker.send('import', JSON.stringify(_import)).then((res)=>{
-        return worker.send('code', 'typeof this.helper.getBookmarks');
-      }).then((res)=>{
-        this.worker.print(res);
-      }).catch((e, message)=>{
-        print('ERR!')
-        print(e, message)
-      });
-    });*/
   },
 
   update_label_visible: function() {
