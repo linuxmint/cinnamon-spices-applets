@@ -1,0 +1,34 @@
+{
+  "name": "cinnode",
+  "version": "1.0.0",
+  "description": "A NodeJS abstraction layer for the Cinnamon desktop.",
+  "scripts": {
+    "test": "cjs applet.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaszhix/cinnode.git"
+  },
+  "keywords": [
+    "gobject",
+    "introspection",
+    "JS",
+    "Gtk",
+    "gjs",
+    "jsgtk",
+    "node",
+    "native",
+    "desktop",
+    "UI"
+  ],
+  "author": "Jason Hicks",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaszhix/cinnode/issues"
+  },
+  "homepage": "https://github.com/jaszhix/cinnode#readme",
+  "devDependencies": {
+    "dblite": "^0.7.7",
+    "es6-promise": "3.1.2"
+  }
+}
