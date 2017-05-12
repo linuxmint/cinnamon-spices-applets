@@ -1506,17 +1506,21 @@ HoverIcon.prototype = {
     }
 };
 
-function ShutdownContextMenuItem(parentMenu, menu, label, action) {
-    this._init(parentMenu, menu, label, action);
+function ShutdownContextMenuItem(parentMenu, menu, label, action, hoverIcon) {
+    this._init(parentMenu, menu, label, action, hoverIcon);
 }
 
 ShutdownContextMenuItem.prototype = {
     __proto__: ApplicationContextMenuItem.prototype,
 
-    _init: function(parentMenu, menu, label, action) {
+    _init: function(parentMenu, menu, label, action, hoverIcon) {
         this.parentMenu = parentMenu;
         ApplicationContextMenuItem.prototype._init.call(this, menu, label, action, null, false);
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
+        this.hoverIcon = hoverIcon;
+
+        this.actor.connect('enter-event', Lang.bind(this, this._onEnterEvent));
+        this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
     },
 
     activate: function(event) {
@@ -1545,6 +1549,28 @@ ShutdownContextMenuItem.prototype = {
         this._appButton.toggle();
         this.parentMenu.toggle();
         return false;
+    },
+
+    _onEnterEvent: function() {
+        let icon;
+        if (this._action == "logout")
+            icon = "system-log-out";
+        else
+            icon = "system-lock-screen";
+        this.hoverIcon.showUser = false;
+        this.hoverIcon._refresh(icon);
+    },
+
+    _onLeaveEvent: function() {
+        this.hoverIcon.showUser = true;
+        Tweener.addTween(this, {
+            time: 1,
+            onComplete: function() {
+                if (!this.active) {
+                    this.hoverIcon._onUserChanged();
+                }
+            }
+        });
     }
 
 };
@@ -1576,22 +1602,37 @@ ShutdownMenu.prototype = {
         });
         this.addActor(this.icon);
 
+        this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
+
         this.menu = new PopupMenu.PopupSubMenu(this.actor);
         this.menu.actor.remove_style_class_name("popup-sub-menu");
 
         let menuItem;
-        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Logout"), "logout");
+        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Logout"), "logout", this.hoverIcon);
         this.menu.addMenuItem(menuItem);
-        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Lock Screen"), "lock");
+        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Lock Screen"), "lock", this.hoverIcon);
         this.menu.addMenuItem(menuItem);
 
     },
 
+    _onLeaveEvent: function() {
+        this.hoverIcon.showUser = true;
+        Tweener.addTween(this, {
+            time: 1,
+            onComplete: function() {
+                if (!this.active) {
+                    this.hoverIcon._onUserChanged();
+                }
+            }
+        });
+    },
+
     setActive: function(active) {
         if (active) {
+            this.hoverIcon.showUser = false;
             this.actor.set_style_class_name('menu-category-button-selected');
             this.actor.add_style_class_name('starkmenu-arrow-dropdown-button-selected');
-            this.hoverIcon._refresh('system-log-out');
+            this.hoverIcon._refresh('forward');
         } else {
             this.actor.set_style_class_name('menu-category-button');
             this.actor.add_style_class_name('starkmenu-arrow-dropdown-button');
@@ -1641,6 +1682,8 @@ RightButtonsBox.prototype = {
         this.menu = menu;
         this.addItems();
 
+        this.hoverIcon = new HoverIcon(this.menu);
+        this.actor.add_actor(this.hoverIcon.userBox);
         this.actor.add_actor(this.itemsBox);
         this.addShutdownBoxes();
     },
@@ -1702,9 +1745,6 @@ RightButtonsBox.prototype = {
 
     addItems: function() {
         this.itemsBox.destroy_all_children();
-
-        this.hoverIcon = new HoverIcon(this.menu);
-        this.itemsBox.add_actor(this.hoverIcon.userBox);
 
         this.quicklinks = [];
         for (let i in this.menu.quicklinks) {
