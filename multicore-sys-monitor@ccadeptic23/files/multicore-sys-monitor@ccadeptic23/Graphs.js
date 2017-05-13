@@ -1,5 +1,3 @@
-//#!/usr/bin/gjs
-const St = imports.gi.St;
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
 
@@ -16,7 +14,10 @@ GraphVBars.prototype = {
 
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     // Background
@@ -56,7 +57,7 @@ GraphVBars.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -66,7 +67,7 @@ GraphVBars.prototype = {
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      var degrees = 3.14159 / 180.0;
+      //var degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A
@@ -99,7 +100,10 @@ GraphPieChart.prototype = {
     this.datalist = [];
     this.provider = provider;
   },
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     //Draw Background
@@ -111,8 +115,9 @@ GraphPieChart.prototype = {
     var xcenter = width / 2;
     var ycenter = height / 2;
     var radius = width / 2 - 1;
-    if (height < width)
+    if (height < width) {
       radius = height / 2 - 1;
+    }
 
     var runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 
@@ -152,7 +157,7 @@ GraphPieChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -162,7 +167,7 @@ GraphPieChart.prototype = {
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      var degrees = 3.14159 / 180.0;
+      //var degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A
@@ -209,8 +214,9 @@ GraphLineChart.prototype = {
 
   refreshData: function() {
     var datapoints = this.provider.getData();
-    if (datapoints.length == 0)
+    if (datapoints.length === 0) {
       return true;
+    }
 
     if (this.maxvalueloc == null) //initialize
     {
@@ -222,7 +228,7 @@ GraphLineChart.prototype = {
     this.maxvalueloc--;
 
     //double check what we just added isnt greater than our max (for all lines)
-    for (var i = 0; i < datapoints.length; i++) {
+    for (let i = 0; i < datapoints.length; i++) {
       if (datapoints[i] > this.maxvalue && datapoints[i] > this.minMaxValue) {
         this.maxvalue = datapoints[i];
         this.maxvalueloc = this.dataPointsListSize - 1;
@@ -233,7 +239,7 @@ GraphLineChart.prototype = {
     if (this.autoScale && (this.maxvalueloc < 0)) //find a new max we lost the old one
     {
       this.maxvalue = 1.0;
-      for (var i = 0; i < this.dataPointsList.length; i++) {
+      for (let i = 0; i < this.dataPointsList.length; i++) {
         for (var j = 0; j < datapoints.length; j++) {
           if (this.dataPointsList[i][j] >= this.maxvalue && this.dataPointsList[i][j] > this.minMaxValue) {
             this.maxvalue = this.dataPointsList[i][j];
@@ -262,15 +268,19 @@ GraphLineChart.prototype = {
         newdatapointslist.push(this.dataPointsList[i]);
       } else {
         var emptypoints = [];
-        for (var j = 0; j < numdatapoints; j++)
+        for (var j = 0; j < numdatapoints; j++) {
           emptypoints[j] = undefined;
+        }
         newdatapointslist.unshift(emptypoints);
       }
     }
     this.dataPointsList = newdatapointslist;
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
     if (this.dataPointsListSize != this.getDataPointsListSize(width)) {
       this.resizeDataPointsList(this.getDataPointsListSize(width), colorslist.length);
@@ -283,11 +293,12 @@ GraphLineChart.prototype = {
 
     //data
     var numLinesOnChart = 0;
-    if (this.dataPointsList.length > 0)
+    if (this.dataPointsList.length > 0) {
       numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
+    }
     for (var i = 0; i < numLinesOnChart; i++) {
-      var lastval = 0;
-      var beforelastval = 0;
+      /*var lastval = 0;
+      var beforelastval = 0;*/
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
       //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
       var datapointnum = i % colorslist.length;
@@ -300,25 +311,28 @@ GraphLineChart.prototype = {
       //cr.setAntialias(1) //none
       cr.setLineJoin(1); //rounded
       for (var j = 1; j < this.dataPointsList.length; j++) {
-        var maxvalue = this.minMaxValue;
-        if (this.maxvalue > this.minMaxValue)
+        //var maxvalue = this.minMaxValue;
+        if (this.maxvalue > this.minMaxValue) {
           maxvalue = this.maxvalue;
+        }
 
         //var val = Math.floor((height-1) * (this.dataPointsList[j][i]/(maxvalue)));
 
         var x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
         var x2 = this.pixelsPerDataPoint * (j) + this.pixelsPerDataPoint / 4;
 
-        if (this.dataPointsList[j][i] == undefined || this.dataPointsList[j - 1][i] == undefined) //skip the beginning ones
+        if (this.dataPointsList[j][i] === undefined || this.dataPointsList[j - 1][i] === undefined) {
           continue;
+        }
         var rawy1 = this.dataPointsList[j - 1][i];
         var rawy2 = this.dataPointsList[j][i];
         if (this.logScale) {
-          //global.logError("Log scale2.");
-          if (rawy1 >= 1)
+          if (rawy1 >= 1) {
             rawy1 = Math.log(rawy1);
-          if (rawy2 >= 1)
+          }
+          if (rawy2 >= 1) {
             rawy2 = Math.log(rawy2);
+          }
         }
         //var y1 = height-Math.floor((height-1) * (rawy1/(maxvalue)));
         //var y2 = height-Math.floor((height-1) * (rawy2/(maxvalue)));
@@ -342,7 +356,7 @@ GraphLineChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -367,7 +381,7 @@ GraphLineChart.prototype = {
   },
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      var degrees = 3.14159 / 180.0;
+      //var degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A

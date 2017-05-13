@@ -22,6 +22,9 @@ ConfigSettings.prototype = {
   getHeight: function() {
     return this._prefs.height;
   },
+  getLabelColor: function() {
+    return this._prefs.labelColor;
+  },
   getBackgroundColor: function() {
     return this._prefs.backgroundColor;
   },
@@ -185,6 +188,7 @@ ConfigSettings.prototype = {
   updateSettings: function(newprefsContent) {
     try {
       this._prefs = JSON.parse(newprefsContent);
+      this.saveSettings();
     } catch (e) {
       global.logError("Error updating settings: " + e + " : " + newprefsContent);
     }
@@ -206,6 +210,7 @@ ConfigSettings.prototype = {
       "labelsOn": true,
       "refreshRate": 500,
       "height": 21,
+      "labelColor": [0.9333333333333333,0.9333333333333333,0.9254901960784314,1],
       "backgroundColor": [1, 1, 1, 0.1],
       "cpu": {
         "enabled": true,
@@ -269,6 +274,9 @@ ConfigSettings.prototype = {
 
       var prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
       this._prefs = JSON.parse(prefsContent);
+      if (typeof this._prefs.labelColor === 'undefined') {
+        this._prefs.labelColor = [0.9333333333333333,0.9333333333333333,0.9254901960784314,1];
+      }
       return true;
     } catch (e) {
       global.logError('Failed to load prefs.json: ' + e + " Attempting to create it.");

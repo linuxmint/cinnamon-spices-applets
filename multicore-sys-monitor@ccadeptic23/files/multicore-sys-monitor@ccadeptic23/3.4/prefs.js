@@ -20,6 +20,7 @@ const DEFAULT_CONFIG = {
   "labelsOn": true,
   "refreshRate": 500,
   "height": 21,
+  "labelColor": [0.9333333333333333,0.9333333333333333,0.9254901960784314,1],
   "backgroundColor": [1, 1, 1, 0.1],
   "cpu": {
     "enabled": true,
@@ -142,6 +143,10 @@ Preferences.prototype = {
     	this.config = DEFAULT_CONFIG;
     }*/
 
+    this.setColor("labelColorButton", this.config.labelColor);
+    this.builder.get_object("labelColorButton").connect("color-set", Lang.bind(this, function() {
+      this.save();
+    }));
     this.setColor("backgroundColorButton", this.config.backgroundColor);
     this.builder.get_object("backgroundColorButton").connect("color-set", Lang.bind(this, function() {
       this.save();
@@ -479,6 +484,7 @@ Preferences.prototype = {
 
     try {
       this.config.refreshRate = this.builder.get_object("refreshRateScale").get_value();
+      this.config.labelColor = this.getColorByName("labelColorButton");
       this.config.backgroundColor = this.getColorByName("backgroundColorButton");
       this.config.labelsOn = this.builder.get_object("labelsSwitch").get_active();
       this.config.height = this.builder.get_object("heightScale").get_value();

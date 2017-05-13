@@ -132,7 +132,7 @@ MyApplet.prototype = {
   },
   launchPreferences: function() {
     var currprefs = this.configSettings.getCurrentPreferencesString();
-
+    print(this.configfilepath, ["prefs.js", currprefs])
     if (this.childProcessHandler == null) {
       this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.configfilepath, ["prefs.js", currprefs]);
     }
@@ -240,6 +240,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getCPUWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getCPUColorList());
 
@@ -254,7 +255,9 @@ MyApplet.prototype = {
         this.swapGraph.paint(area,
           false, //never use labels for the backdrop
           this.configSettings.getMEMWidth(),
-          this.configSettings.getHeight(), [0, 0, 0, 0], //want a clear background so that it doesnt mess up the other one
+          this.configSettings.getHeight(),
+          [0, 0, 0, 0],
+          [0, 0, 0, 0], //want a clear background so that it doesnt mess up the other one
           this.configSettings.getSwapColorList());
 
         //paint the memory piechart over it
@@ -262,6 +265,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getMEMWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getMEMColorList());
 
@@ -278,6 +282,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getNETWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getNETColorList());
 
@@ -293,6 +298,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getDiskWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getDiskColorList());
 
@@ -302,7 +308,7 @@ MyApplet.prototype = {
       area.set_width(this.getAppletWidth());
 
     } catch (e) {
-      global.logError("in onGraphRepaint: " + e);
+      global.logError("in onGraphRepaint: " + e.stack);
     }
   }
 };
