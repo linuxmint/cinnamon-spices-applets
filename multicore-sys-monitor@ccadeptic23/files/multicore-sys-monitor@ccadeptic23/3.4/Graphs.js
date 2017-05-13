@@ -14,7 +14,10 @@ GraphVBars.prototype = {
 
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     // Background
@@ -54,7 +57,7 @@ GraphVBars.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -97,7 +100,10 @@ GraphPieChart.prototype = {
     this.datalist = [];
     this.provider = provider;
   },
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     //Draw Background
@@ -151,7 +157,7 @@ GraphPieChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -271,7 +277,10 @@ GraphLineChart.prototype = {
     this.dataPointsList = newdatapointslist;
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
     if (this.dataPointsListSize != this.getDataPointsListSize(width)) {
       this.resizeDataPointsList(this.getDataPointsListSize(width), colorslist.length);
@@ -347,7 +356,7 @@ GraphLineChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
