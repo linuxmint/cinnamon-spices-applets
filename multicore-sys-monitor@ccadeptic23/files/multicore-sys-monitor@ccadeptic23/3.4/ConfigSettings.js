@@ -192,6 +192,7 @@ ConfigSettings.prototype = {
   updateSettings: function(newprefsContent) {
     try {
       this._prefs = JSON.parse(newprefsContent);
+      this.saveSettings();
     } catch (e) {
       global.logError("Error updating settings: " + e + " : " + newprefsContent);
     }
