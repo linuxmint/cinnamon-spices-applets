@@ -274,7 +274,7 @@ ConfigSettings.prototype = {
       var prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
       this._prefs = JSON.parse(prefsContent);
       if (typeof this._prefs.labelColor === 'undefined') {
-        this._prefs.labelColor = [1, 1, 1, 0.1];
+        this._prefs.labelColor = [0.9333333333333333,0.9333333333333333,0.9254901960784314,1];
       }
       return true;
     } catch (e) {
