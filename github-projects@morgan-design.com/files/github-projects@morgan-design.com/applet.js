@@ -373,7 +373,7 @@ MyApplet.prototype = {
     },
 
     _createPopupImageMenuItem: function(title, icon, bindFunction, options){
-		let options = options || {};
+		options = options || {};
 		let openRepoItem = new PopupMenu.PopupImageMenuItem(title, icon, options);
 		openRepoItem.connect("activate", Lang.bind(this, bindFunction));
 		return openRepoItem;
