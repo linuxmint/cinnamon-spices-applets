@@ -401,7 +401,7 @@ MyApplet.prototype = {
     },
 
     update_brightness_scroll: function(value) {
-        let value = this.get_range_value(this.minimum_brightness, this.maximum_brightness, value);
+        value = this.get_range_value(this.minimum_brightness, this.maximum_brightness, value);
         if(value != this.brightness) {
             this.update_brightness(value);
             this.menu_sliders.update_items_brightness();
@@ -722,7 +722,7 @@ MyApplet.prototype = {
     },
 
     _get_scaled_parameter: function(number) {
-        let number = number / 100;
+        number = number / 100;
         let parameter = number.toString();
         return parameter;
     },
