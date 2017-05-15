@@ -1,0 +1,315 @@
+# Swedish translation for Cinnamenu@json.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu@json\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-15 07:00+0200\n"
+"PO-Revision-Date: 2017-05-15 09:06+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr "Ange ditt lösenord för att avinstallera det här programmet"
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr "Lägg till i panelen"
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr "Lägg till på skrivbordet"
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr "Ta bort från Favoriter"
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr "Lägg till i Favoriter"
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr "Avinstallera"
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr "Kör med NVIDIA GPU"
+
+#: panel.js:533
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Meny: Sök i Firefox bokmärken inaktiverat"
+
+#: panel.js:535
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Om du vill söka i Firefox bokmärken, måste du installera nödvändiga paket: "
+"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+
+#: panel.js:541
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Meny: Sök i Midori bokmärken inaktiverat"
+
+#: panel.js:543
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Om du vill söka i Midoris bokmärken, måste du installera nödvändiga paket: "
+"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+
+#: panel.js:1578
+msgid "Grid View"
+msgstr "Ikonvy"
+
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr "Växla till ikonvy"
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Listvy"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr "Växla till listvy"
+
+#: panel.js:1638
+msgid "Type to search..."
+msgstr "Skriv för att söka..."
+
+#: panel.js:1675
+msgid "All Applications"
+msgstr "Alla program"
+
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr "Favoritprogram"
+
+#: panel.js:1747
+msgid "Places"
+msgstr "Platser"
+
+#: panel.js:1752
+msgid "Recent"
+msgstr "Tidigare"
+
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr "Bokmärken"
+
+#: panel.js:1768
+msgid "Lock Screen"
+msgstr "Lås skärmen"
+
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr "Lås skärmen"
+
+#: panel.js:1799
+msgid "Logout"
+msgstr "Logga ut"
+
+#: panel.js:1800
+msgid "Leave the session"
+msgstr "Avsluta sessionen"
+
+#: panel.js:1822
+msgid "Quit"
+msgstr "Stäng av"
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr "Stäng av datorn"
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr "Kunde inte starta \"%s\""
+
+#: placeDisplay.js:147
+msgid "Home"
+msgstr "Hem"
+
+#: placeDisplay.js:221
+msgid "Computer"
+msgstr "Dator"
+
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr "Navigera nätverket"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr "Cinnamenu inställningar"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Använd en anpassad ikon"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Inaktivering innebär att temat anger ikon"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr "Bredd på programikonernas namnetikett"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Ikonvyns ikonstorlek"
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Storlek på kategoriikoner"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Menyfördröjning:"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Fördröjning vid växling mellan kategorier"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Öppna menyredigeraren"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Tryck på denna knapp för att anpassa dina menyposter."
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr "Menyposter"
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr "Utseende"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Antal kolumner i programfältet"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "kolumner"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr "Aktivera webbokmärken"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Avgör om bokmärken skall indexeras i menyn."
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Programikonernas visningsläge"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Ikonvy"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Listvy"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Ange anpassat namn på menyikonen"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Öppna menyn när jag för muspekaren över den"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Aktivera menyn när muspekaren förs över panelikonen"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr "Skala ikonvyn efter tillgängligt utrymme"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
+"Detta gör ikonvyns ikonstorlek variabel, beroende på hur många program som "
+"visas. Det åsidosätter alternativet för ikonstorlek."
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Aktivera automatisk skrollning i programlistan"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Använd menyanimering"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Tillåt animering när menyn öppnas och stängs"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Välj en ikon att visas i panelen."
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Listvyns ikonstorlek"
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr "Beteende"
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr "En flexibel meny med formateringsalternativ och bokmärken."
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
