@@ -1,0 +1,114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-24 20:48+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:141 applet.js:171 applet.js:183
+msgid "None"
+msgstr ""
+
+#: applet.js:147 applet.js:180
+msgid "Ethernet"
+msgstr ""
+
+#: applet.js:182
+msgid "Connected via Ethernet"
+msgstr ""
+
+#: applet.js:185
+msgid "Not Connected"
+msgstr ""
+
+#: applet.js:190
+msgid "Auto: "
+msgstr ""
+
+#: applet.js:193
+msgid "Manual: "
+msgstr ""
+
+#: applet.js:195
+msgid "Connected to "
+msgstr ""
+
+#: applet.js:236
+msgid "Switching to"
+msgstr ""
+
+#: applet.js:236
+msgid ". Please enter your password"
+msgstr ""
+
+#: applet.js:266 applet.js:271
+msgid "The wireless network"
+msgstr ""
+
+#: applet.js:266
+msgid ""
+" is not available. Re-enabling the auto profile. Please enter your password "
+"again"
+msgstr ""
+
+#: applet.js:271
+msgid " is not available. Switching back to"
+msgstr ""
+
+#: applet.js:271
+msgid ". Please enter your password again"
+msgstr ""
+
+#: applet.js:275
+msgid "Netctl: Sorry, the wireless network"
+msgstr ""
+
+#: applet.js:275
+msgid " is not available"
+msgstr ""
+
+#: applet.js:278
+msgid "Netctl: Connected to"
+msgstr ""
+
+#: applet.js:287
+msgid "Switch to auto"
+msgstr ""
+
+#: applet.js:300
+msgid "Switching to auto. Please enter your password"
+msgstr ""
+
+#: applet.js:308
+msgid "Netctl: Switched to wireless auto profile"
+msgstr ""
+
+#: applet.js:316
+msgid "Add new networks (run wifi-menu)"
+msgstr ""
+
+#: applet.js:319
+msgid "Wifi-menu needs admin privileges. Please enter your password"
+msgstr ""
+
+#. netctlsystraymenu@prmurthy->metadata.json->description
+msgid ""
+"Netctl Systray Menu displays netctl status in the system tray and enables "
+"profile switching"
+msgstr ""
+
+#. netctlsystraymenu@prmurthy->metadata.json->name
+msgid "Netctl Systray Menu"
+msgstr ""

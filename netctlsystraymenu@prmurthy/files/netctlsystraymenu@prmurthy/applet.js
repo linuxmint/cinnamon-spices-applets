@@ -25,13 +25,13 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-
+const Gettext = imports.gettext;
 const GObject = imports.gi.GObject;
 const Signals = imports.signals;
 const Mainloop = imports.mainloop;
 const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
-
+const UUID = "netctlsystraymenu@prmurthy";
 // Icons
 const NETWORK_OFFLINE = "network-error-symbolic";
 const NETWORK_ETHERNET = "network-wired-symbolic";
@@ -47,6 +47,12 @@ let iface;
 let wl_contype;
 let enet_static_iface;
 let wl_static_iface;
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function Netctl(orientation) {
     this._init(orientation);
@@ -131,13 +137,13 @@ Netctl.prototype = {
         // returns the connection type (Ethernet, Auto, Manual), Name of the connected wireless network if any, and signal quality as a 2digit decimal
 
         if (iface == "") {
-            return [wl_contype, "None", 0];
+            return [wl_contype, _("None"), 0];
         }
 
         // interface name begins with e, so it must be Ethernet
         if (iface.charAt(0) == "e") {
             wl_contype = "E";
-            return [wl_contype, "Ethernet", 0];
+            return [wl_contype, _("Ethernet"), 0];
         } else
 
         // interface name begins with w so it must be wireless
@@ -161,7 +167,7 @@ Netctl.prototype = {
                 return [wl_contype, connected.toString().slice(2), strength];
             } // we are connected manually
         } else {
-            return ["N", "None", 0];
+            return ["N", _("None"), 0];
         } // Something's wrong if we are here
     },
 
@@ -170,22 +176,22 @@ Netctl.prototype = {
 
         let icon_name = "";
         let networkname = this._get_connected_networks();
-        if (networkname[1] == "Ethernet") {
+        if (networkname[1] == _("Ethernet")) {
             icon_name = NETWORK_ETHERNET;
-            tooltiptext = "Connected via Ethernet";
-        } else if (networkname[1] == null || networkname[1] == "None") {
+            tooltiptext = _("Connected via Ethernet");
+        } else if (networkname[1] == null || networkname[1] == _("None")) {
             icon_name = NETWORK_OFFLINE;
-            tooltiptext = "Not Connected";
+            tooltiptext = _("Not Connected");
         } else {
             let contype;
             let quality = (networkname[2] * 100).valueOf();
             if (networkname[0] == "A") {
-                contype = "Auto: ";
+                contype = _("Auto: ");
             } else
             if (networkname[0] == "M") {
-                contype = "Manual: ";
+                contype = _("Manual: ");
             }
-            tooltiptext = contype + "Connected to " + networkname[1].toString() + " : " + quality.toString() + "%";
+            tooltiptext = contype + _("Connected to ") + networkname[1].toString() + " : " + quality.toString() + "%";
             if (quality < 25) {
                 icon_name = NETWORK_WL_CONNECTED_1;
             } else
@@ -226,7 +232,7 @@ Netctl.prototype = {
 
         let _wl_contype = wl_contype;
         let oldprofile = this._get_connected_networks();
-        let msg = "Switching to" + newprofileName + ". Please enter your password";
+        let msg = _("Switching to") + newprofileName + _(". Please enter your password");
         if (_wl_contype == "A") {
             shellcmd = "gksudo --message \"" + msg + "\" \"sh -c " + "\'systemctl stop netctl-auto@" + iface + "; netctl switch-to " + newprofileName + "\'" + "\"";
             let pid = execute_async(shellcmd);
@@ -256,19 +262,19 @@ Netctl.prototype = {
 
         if (iface == "") {
             if (contype == "A") {
-                msg = "The wireless network" + newprofileName + " is not available. Re-enabling the auto profile. Please enter your password again";
+                msg = _("The wireless network") + newprofileName + _(" is not available. Re-enabling the auto profile. Please enter your password again");
                 shellcmd = "gksudo --message \"" + msg + "\" \"sh -c " + "\'systemctl restart netctl-auto@" + wl_static_iface + "\'" + "\"";
                 execute_async(shellcmd);
             } else
             if (contype == "M") {
-                msg = "The wireless network" + newprofileName + " is not available. Switching back to" + oldprofileName + ". Please enter your password again";
+                msg = _("The wireless network") + newprofileName + _(" is not available. Switching back to") + oldprofileName + _(". Please enter your password again");
                 shellcmd = "gksudo --message \"" + msg + "\" \"sh -c " + "\'netctl start " + oldprofileName + "\'" + "\"";
                 execute_async(shellcmd);
             } else {
-                Main.notify("Netctl: Sorry, the wireless network" + newprofileName + " is not available");
+                Main.notify(_("Netctl: Sorry, the wireless network") + newprofileName + _(" is not available"));
             }
         } else {
-            Main.notify("Netctl: Connected to" + newprofileName);
+            Main.notify(_("Netctl: Connected to") + newprofileName);
         }
         this._update_menu();
 
@@ -277,7 +283,7 @@ Netctl.prototype = {
     _add_auto_wl_menu_item: function () {
         // adds the menu item for switching to wireless auto profile
 
-        let menuItem = new PopupMenu.PopupMenuItem("  Switch to auto");
+        let menuItem = new PopupMenu.PopupMenuItem("  " + _("Switch to auto"));
         this.menu.addMenuItem(menuItem);
         menuItem.connect('activate', Lang.bind(this, function () {
             this._auto_wl_connect();
@@ -290,7 +296,7 @@ Netctl.prototype = {
         // we are assuming that this always works
 
         let profileName = this._get_connected_networks();
-        let msg = "Switching to auto. Please enter your password";
+        let msg = _("Switching to auto. Please enter your password");
         if (iface == "") {
             shellcmd = "gksudo --message \"" + msg + "\" \"sh -c " + "\'netctl stop-all; systemctl restart netctl-auto@" + wl_static_iface + "\'" + "\"";
         } else {
@@ -298,7 +304,7 @@ Netctl.prototype = {
         }
         var pid = execute_async(shellcmd);
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, function () {
-            Main.notify("Netctl: Switched to wireless auto profile");
+            Main.notify(_("Netctl: Switched to wireless auto profile"));
         });
 
     },
@@ -306,10 +312,10 @@ Netctl.prototype = {
     _add_wifi_menu_menu_item: function () {
     // adds menu item for wifi-menu
 
-        let menuItem = new PopupMenu.PopupMenuItem("  Add new networks (run wifi-menu)");
+        let menuItem = new PopupMenu.PopupMenuItem("  " + _("Add new networks (run wifi-menu)"));
         this.menu.addMenuItem(menuItem);
         menuItem.connect('activate', Lang.bind(this, function () {
-	    var msg = "Wifi-menu needs admin privileges. Please enter your password"
+	    var msg = _("Wifi-menu needs admin privileges. Please enter your password")
             shellcmd = "gksudo  --message \"" + msg + "\" \"/usr/bin/xterm -e " + "\"" + "/usr/bin/wifi-menu" + "\"" + "\""
 	    var pid = execute_async(shellcmd);
         }));
