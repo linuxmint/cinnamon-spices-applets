@@ -19,8 +19,6 @@ CSCollapseBtn.prototype = {
         this.icon    = new St.Icon({ reactive: true, track_hover: true, style_class: 'applet-icon' });
 
         this.actor.set_child(this.icon);
-
-        this.setIsExpanded(true);
     },
 
     /*
