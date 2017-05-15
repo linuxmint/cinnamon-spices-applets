@@ -1,0 +1,48 @@
+dir=~/Documents/docs/komandos
+
+_w() 
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="$(ls $dir)"
+
+
+
+    if [ -f $dir/${prev} ]; then
+        printf "\nPress <ENTER> to show file contents"    
+
+        return 0
+    elif [[ ${cur} == * ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+         
+}
+       
+#from history
+
+_r() 
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="$(ls $dir)"
+
+    
+    if [ -f $dir/${prev} ]; then
+      opts2="$(cat $dir/$prev | cut -d'|' -f2)"
+
+        COMPREPLY=( $(compgen -W "${opts2}" -- ${cur}) )
+        return 0
+    elif [[ ${cur} == * ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+    
+}
+complete -F _r r 
+complete -F _w w 
+complete -F _r zodynas

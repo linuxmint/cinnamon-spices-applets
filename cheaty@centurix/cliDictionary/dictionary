@@ -1,0 +1,184 @@
+#!/bin/bash
+#config
+dir=~/Documents/docs/komandos
+
+red='\033[0;31m'
+brown='\033[0;33m' 
+nc='\033[0m'
+
+kopi() {
+  local _scs_col="\e[0;32m"; local _wrn_col='\e[1;31m'; local _trn_col='\e[0;33m'
+  # Check that xclip is installed.
+  if ! type xclip > /dev/null 2>&1; then
+    echo -e "$_wrn_col""You must have the 'xclip' program installed.\e[0m"
+  # Check user is not root (root doesn't have access to user xorg server)
+  elif [[ "$USER" == "root" ]]; then
+    echo -e "$_wrn_col""Must be regular user (not root) to copy a file to the clipboard.\e[0m"
+  else
+    # If no tty, data should be available on stdin
+    if ! [[ "$( tty )" == /dev/* ]]; then
+      input="$(< /dev/stdin)"
+    # Else, fetch input from params
+    else
+      input="$*"
+    fi
+    if [ -z "$input" ]; then  # If no input, print usage message.
+      echo "Copies a string to the clipboard."
+      echo "Usage: kopi <string>"
+      echo "       echo <string> | kopi"
+    else
+      # Copy input to clipboard
+      echo -n "$input" | xclip -selection c
+      # Truncate text for status
+      if [ ${#input} -gt 80 ]; then input="$(echo $input | cut -c1-80)$_trn_col...\e[0m"; fi
+      # Print status.
+      echo -e "$_scs_col""Copied to clipboard:\e[0m $input"
+    fi
+  fi
+}
+
+
+w() { 
+	if [ $# -eq 0 ];
+	then
+    _printMessage
+		return 0
+		exit
+	fi
+
+	if [ $# != 3 ];
+	then
+	    stopExecution=true
+      _printMessage
+
+	    if [ $# -eq 1 ];
+	    then
+	      printf "${brown}FILE CONTENTS\n${nc}"
+	      
+	      
+	      cat $dir/$1 
+	     
+	      
+	      printf "${brown}ENTER COMMAND\n${nc}"
+	      read komanda 
+	      printf "${brown}ENTER TAGS\n${nc}"
+	      read tagai 
+	      set -- "$1" $komanda $tagai 
+
+	    fi
+  	fi	
+  	
+	if [ ! -f $dir/$1 ] ; then
+		echo "Failas dar nesukurtas, kuriama. Failu sarasas:"
+		ls $dir
+	    	printf "%-50s | %-50s \n" "$2" "$3" > $dir/$1
+		echo "---Term saved:---"
+		tail -n 1 $dir/$1
+	else
+		printf "%-50s | %-50s \n" "$2" "$3" >> $dir/$1
+		echo "---Term saved:---"
+		tail -n 1 $dir/$1
+	fi
+} 
+
+run() {
+	if [ -f $dir/$1 ] ; then
+		value=$(grep -i -m 1 $2 $dir/$1 | grep -Po '.*?(?= \|)' | tr -s [:space:])
+		gnome-terminal -x "$value"
+	else
+		echo "Nėra tokio failo"
+	fi
+}
+
+
+runweb(){
+	if [ -f $dir/$1 ] ; then
+		value=$(grep -i -m 1 $2 $dir/$1 | grep -Po '.*?(?= \|)' | tr -s [:space:])
+		xdg-open "$value"
+	else
+		echo "Nėra tokio failo"
+	fi
+}
+
+
+r(){
+	local file=$1
+	local desc=$2
+	if [ $# = 1 ];
+	then
+		printf "$1 komandos: \n"
+		cat $dir/$1	
+		return
+	fi	
+	if [ $# != 2 ];
+	then
+    _printMessage2
+		return
+	fi	
+
+	if _fileExists $1; then 
+		ats=$(_getFirstColumn $file $desc)
+
+		if [[ $ats ]] ; then
+			kopi $ats
+		    ats=$(grep -i "$2" $dir/$1) 
+		    printf "\n"
+     	    echo "${ats}"	
+		else
+			printf "${red}Nieko neradau. Visos komandos $1 faile:\n${nc}"
+			cat $dir/$1	
+			return
+		fi			
+	fi  
+}
+
+
+u() {
+	xdg-open $dir/$1
+}
+
+show() {
+	tail -n +1 $dir/*
+}
+
+_getFirstColumn(){
+	echo $(grep "$2" $dir/"$1" | cut -d'|' -f1)	
+}
+
+_fileExists() {
+	if [ ! -f $dir/$1 ] ; then
+    	printf "${red}Nėra tokio failo. Failu sarasas:\n${nc} " 
+		ls $dir
+		return 1
+	fi
+	return 0 
+}
+
+_printMessage() {
+  	printf "${brown}w (WRITE)\n"
+		printf "${red}Usage: w file [command] [tags]>\n${nc} " 
+		printf "${brown}To provide multiple arguments add quotes like this: [\"tags\"] \n${nc} " 
+		printf "${brown}To autocomplete press <TAB> \n${nc} " 
+}
+
+_printMessage2() {
+  	printf "${brown}r (READ)\n"
+		printf "${red}Usage: r file [command]>\n${nc} " 
+		printf "${brown}To provide multiple arguments add quotes like this: [\"commands\"] \n${nc} " 
+		printf "${brown}To autocomplete press <TAB> \n${nc} " 
+}
+
+changeDir() {
+  dir=$1
+}
+
+while getopts "rw" flag; do
+case "$flag" in
+    r) r ${@:$OPTIND:1} ${@:$OPTIND+1:1};; 
+    w) w ${@:$OPTIND:1} ${@:$OPTIND+1:1} ${@:$OPTIND+2:1};;
+    d) changeDir ${@:$OPTIND:1};; 
+    *) r ${@:$OPTIND:1} ${@:$OPTIND+1:1};;
+esac
+done
+
+
