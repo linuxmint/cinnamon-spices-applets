@@ -24,6 +24,17 @@ CSCollapseBtn.prototype = {
     },
 
     /*
+     * Set the display mode to vertical
+     */
+    setVertical: function(vertical) {
+        if (vertical) {
+            this.actor.add_style_class_name('vertical');
+        } else {
+            this.actor.remove_style_class_name('vertical');
+        }
+    },
+
+    /*
      * Set the icon using it's qualified name
      */
     setIcon: function(name) {
