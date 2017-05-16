@@ -23,8 +23,8 @@ msgid "Attempting to Load your GitHub Repos"
 msgstr "Försöker läsa in dina GitHub-förråd"
 
 #: applet.js:46
-msgid "Successfully Loaded GitHub Repos for user "
-msgstr "Läste in GitHub-förråd för användare "
+msgid "Successfully Loaded GitHub Repos for user"
+msgstr "Läste in GitHub-förråd för användare"
 
 #: applet.js:47
 msgid "Failed to load GitHub Repositories! Check applet Configuration"
