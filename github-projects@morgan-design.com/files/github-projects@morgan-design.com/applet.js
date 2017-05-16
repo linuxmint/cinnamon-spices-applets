@@ -42,9 +42,9 @@ const Logger=imports.logger;
 const APPLET_ICON = global.userdatadir + "/applets/github-projects@morgan-design.com/icon.png";
 
 const NotificationMessages = {
-    AttemptingToLoad:   { title: "GitHub Explorer",					content: "Attempting to Load your GitHub Repos" },
-    SuccessfullyLoaded: { title: "GitHub Explorer",					content: "Successfully Loaded GitHub Repos for user ", append: "USER_NAME" },
-    ErrorOnLoad:		{ title: "ERROR:: GitHub Explorer ::ERROR", content: "Failed to load GitHub Repositories! Check applet Configuration" }
+    AttemptingToLoad:   { title: "GitHub Explorer",					content: _("Attempting to Load your GitHub Repos") },
+    SuccessfullyLoaded: { title: "GitHub Explorer",					content: _("Successfully Loaded GitHub Repos for user") + " ", append: "USER_NAME" },
+    ErrorOnLoad:		{ title: "ERROR:: GitHub Explorer ::ERROR", content: _("Failed to load GitHub Repositories! Check applet Configuration") }
 };
 
 // Simple space indents
