@@ -22,7 +22,7 @@ msgid "Attempting to Load your GitHub Repos"
 msgstr ""
 
 #: applet.js:46
-msgid "Successfully Loaded GitHub Repos for user "
+msgid "Successfully Loaded GitHub Repos for user"
 msgstr ""
 
 #: applet.js:47
