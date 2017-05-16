@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-03 09:05+1200\n"
+"POT-Creation-Date: 2017-05-19 02:25+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,52 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:89
+#: applet.js:111
 msgid "Waiting for nvidia"
 msgstr ""
 
-#: applet.js:140
+#: applet.js:171
 msgid "Open Power Statistics"
 msgstr ""
 
-#: applet.js:146
+#: applet.js:177
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:165
-msgid "Housekeeping Menu"
+#: applet.js:195
+msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:168
+#: applet.js:198
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:174
+#: applet.js:204
 msgid "Open the Help file"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:239
 msgid "ERROR"
 msgstr ""
 
-#: applet.js:210
+#: applet.js:240
 msgid "Nvidia Prime is not installed so applet willl not work"
 msgstr ""
 
-#: applet.js:214
-msgid "GPU OFF"
-msgstr ""
-
-#: applet.js:216
+#: applet.js:246
 msgid "NVidia based GPU is Off"
 msgstr ""
 
-#: applet.js:224
-msgid "GPU"
+#: applet.js:263
+msgid "NVidia based GPU is On and Core Temperature is"
 msgstr ""
 
-#: applet.js:225
-msgid "NVidia based GPU is On and Core Temperature is"
+#. nvidiaprime@pdcurtis->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature in Horizontal Panels"
+msgstr ""
+
+#. nvidiaprime@pdcurtis->settings-schema.json->showGpuTemp->tooltip
+msgid "Not available in Vertical Panels"
 msgstr ""
 
 #. nvidiaprime@pdcurtis->settings-schema.json->displayExtra->description
@@ -96,14 +96,14 @@ msgstr ""
 msgid "seconds"
 msgstr ""
 
-#. nvidiaprime@pdcurtis->settings-schema.json->head1->description
+#. nvidiaprime@pdcurtis->settings-schema.json->head2->description
 msgid "Additional Functionality"
-msgstr ""
-
-#. nvidiaprime@pdcurtis->metadata.json->name
-msgid "nVidia Prime GPU Display"
 msgstr ""
 
 #. nvidiaprime@pdcurtis->metadata.json->description
 msgid "Displays nVidia GPU Temperature when using Prime"
+msgstr ""
+
+#. nvidiaprime@pdcurtis->metadata.json->name
+msgid "nVidia Prime GPU Display"
 msgstr ""
