@@ -80,20 +80,20 @@ MyApplet.prototype = {
 	//Start Recording With Audio
 	this.recordItem.menu.addAction(_("Start With Audio"), function(actor, event) {
         Main.Util.spawnCommandLine(GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapturesound.sh");
-	Main.Util.spawnCommandLine("notify-send --icon=gtk-add Recording With-Audio");
+	Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("With-Audio") + "'");
 	});
 	//Start Recording No Audio
 	this.recordItem.menu.addAction(_("Start No Audio"), function(actor, event) {
 	Main.Util.spawnCommandLine(GLib.get_home_dir() + "/.local/share/cinnamon/applets/ScreenShot+RecordDesktop@tech71/screencapture.sh");
-	Main.Util.spawnCommandLine("notify-send --icon=gtk-add Recording No-Audio");
+	Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording") + "' '" + _("No-Audio") + "'");
 	});
 	//Stop Recording
 	this.recordItem.menu.addAction(_("Stop"), function(actor, event) {
 	Main.Util.spawnCommandLine("killall -SIGTERM screencapture.sh");
 	Main.Util.spawnCommandLine("killall -SIGTERM screencapturesound.sh");
 	Main.Util.spawnCommandLine("killall -SIGTERM ffmpeg");
-	Main.Util.spawnCommandLine("notify-send --icon=gtk-add Recording-Stopped");
-	Main.Util.spawnCommandLine("notify-send --icon=gtk-add Recording-Finished");
+	Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Stopped") + "'");
+	Main.Util.spawnCommandLine("notify-send --icon=gtk-add '" + _("Recording-Finished") + "'");
 	});
                        
 	this.menu.addMenuItem(this.recordItem);
