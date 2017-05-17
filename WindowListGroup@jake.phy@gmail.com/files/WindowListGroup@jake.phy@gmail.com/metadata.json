@@ -1,7 +1,8 @@
 {
-"max-instances": 2, 
-"uuid": "WindowListGroup@jake.phy@gmail.com",
-"name": "Window List With App Grouping",
-"version": "2.8.5", 
-"description": "Window List with App Grouping an Window Thumbnails"
+  "max-instances": 2,
+  "uuid": "WindowListGroup@jake.phy@gmail.com",
+  "name": "Window List With App Grouping",
+  "version": "2.8.5",
+  "description": "Window List with App Grouping an Window Thumbnails",
+  "cinnamon-version": ["2.6", "2.8", "3.0"]
 }
