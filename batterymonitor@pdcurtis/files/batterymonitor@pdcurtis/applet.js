@@ -97,7 +97,7 @@ MyApplet.prototype = {
             this.flashFlag = true; // flag for flashing background 
             this.flashFlag2 = true; // flag for second flashing background 
             this.lastBatteryPercentage = 50; // Initialise lastBatteryPercentage
-            this.batteryStateOld = "invalid"
+            this.batteryStateOld = _("invalid")
             this.alertFlag = false; // Flag says alert has been tripped to avoid repeat notifications
 
             this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
