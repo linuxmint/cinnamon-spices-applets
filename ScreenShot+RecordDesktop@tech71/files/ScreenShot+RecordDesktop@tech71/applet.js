@@ -48,7 +48,7 @@ MyApplet.prototype = {
 		this.screenshotItem = new PopupMenu.PopupSubMenuMenuItem(_("Whole Screen")); 
 		//1 Sec Delay
 		this.screenshotItem.menu.addAction(_("1 Second Delay"), function(actor, event) {
-		Main.Util.spawnCommandLine("gnome-screenshot --delay=1 ");
+		Main.Util.spawnCommandLine("gnome-screenshot --delay=1");
 		});
 		//3 Sec Delay
 		this.screenshotItem.menu.addAction(_("3 Second Delay"), function(actor, event) {
@@ -66,7 +66,7 @@ MyApplet.prototype = {
 
 		//Current Window
 		this.menu.addAction(_("Current Window"), function(event) {
-                Main.Util.spawnCommandLine("gnome-screenshot -w");
+                Main.Util.spawnCommandLine("gnome-screenshot -w --delay=1");
 		}); 
 
 		//Selected Area
