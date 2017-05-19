@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-15 22:14+0200\n"
-"PO-Revision-Date: 2017-05-15 22:14+0200\n"
+"POT-Creation-Date: 2017-05-19 12:19+0200\n"
+"PO-Revision-Date: 2017-05-19 12:20+0200\n"
 "Last-Translator: Feuerfuchs <git@feuerfuchs.eu>\n"
 "Language-Team: Feuerfuchs\n"
 "Language: de\n"
@@ -18,22 +18,30 @@ msgstr ""
 "X-Generator: Poedit 2.0.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:128
+#: applet.js:138
 msgid "Active applications"
 msgstr "Aktive Anwendungen"
 
-#: applet.js:129
+#: applet.js:139
 msgid "Inactive applications"
 msgstr "Inaktive Anwendungen"
 
-#. collapsible-systray@feuerfuchs.eu->metadata.json->name
-msgid "Collapsible Systray"
-msgstr "Collapsible Systray"
+#: CSCollapseBtn.js:97
+msgid "Collapse"
+msgstr "Verkleinern"
+
+#: CSCollapseBtn.js:103
+msgid "Expand"
+msgstr "Erweitern"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
 msgstr ""
 "Ein Nachfolger für das populäre System Tray Collapsible Cinnamon-Applet"
+
+#. collapsible-systray@feuerfuchs.eu->metadata.json->name
+msgid "Collapsible Systray"
+msgstr "Collapsible Systray"
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-
 #. hover->description
@@ -163,12 +171,6 @@ msgstr "Beim Verlassen verkleinern"
 #. header->description
 msgid "Behavior"
 msgstr "Verhalten"
-
-#~ msgid "Expand icon: "
-#~ msgstr "Erweitern-Icon: "
-
-#~ msgid "Collapse icon: "
-#~ msgstr "Verkleinern-Icon: "
 
 #~ msgid "Horizontal padding of tray icons: "
 #~ msgstr "Horizontaler Innenabstand von Symbolen: "

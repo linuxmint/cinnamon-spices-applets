@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-15 22:12+0200\n"
+"POT-Creation-Date: 2017-05-19 12:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:128
+#: applet.js:138
 msgid "Active applications"
 msgstr ""
 
-#: applet.js:129
+#: applet.js:139
 msgid "Inactive applications"
 msgstr ""
 
-#. collapsible-systray@feuerfuchs.eu->metadata.json->name
-msgid "Collapsible Systray"
+#: CSCollapseBtn.js:97
+msgid "Collapse"
+msgstr ""
+
+#: CSCollapseBtn.js:103
+msgid "Expand"
 msgstr ""
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
+msgstr ""
+
+#. collapsible-systray@feuerfuchs.eu->metadata.json->name
+msgid "Collapsible Systray"
 msgstr ""
 
 #. collapsible-systray@feuerfuchs.eu->settings-schema.json->expand-on-
