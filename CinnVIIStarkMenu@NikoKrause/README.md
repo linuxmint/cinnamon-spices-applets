@@ -11,14 +11,14 @@
 Click on the image below to see a review video of CinnVIIStarkMenu (previous: CinnXPStarkMenu) by [Big Daddy](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg):
 
 [![Review of CinnXPStarkMenu by Big Daddy](https://cloud.githubusercontent.com/assets/8415124/20908908/6d108a24-bb58-11e6-8d88-112f7250d630.png)](https://www.youtube.com/watch?v=OmUpLNsWgC4)
-_Published on Nov 11, 2016_
+<br /> _Published on Nov 11, 2016_
 
 #### Mentions:
 
 [Rocco (aka. Big Daddy)](https://www.youtube.com/channel/UCtZRKfyvx7GUEi-Lr7f4Nxg) gave some air time (22:22--24:01) to CinnVIIStarkMenu on the [Destination Linux Podcast](https://www.youtube.com/channel/UCWJUSpXVHTaHErtGWC5qPlQ). Click on the image below to see the podcast: 
 
 [![Airtime of CinnVIIStarkMenu on Destination Linux Podcast](https://cloud.githubusercontent.com/assets/8415124/26260338/1a73280c-3ccd-11e7-8e1b-5d09ca0cc124.png)](https://www.youtube.com/watch?v=iEfbYj9Cl8o#t=22m22s)
-_Published on May 15, 2017_
+<br /> _Published on May 15, 2017_
 
 #### Translation status:
 
