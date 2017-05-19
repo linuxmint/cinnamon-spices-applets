@@ -42,9 +42,9 @@ const Logger=imports.logger;
 const APPLET_ICON = global.userdatadir + "/applets/github-projects@morgan-design.com/icon.png";
 
 const NotificationMessages = {
-    AttemptingToLoad:   { title: "GitHub Explorer",					content: _("Attempting to Load your GitHub Repos") },
-    SuccessfullyLoaded: { title: "GitHub Explorer",					content: _("Successfully Loaded GitHub Repos for user") + " ", append: "USER_NAME" },
-    ErrorOnLoad:		{ title: "ERROR:: GitHub Explorer ::ERROR", content: _("Failed to load GitHub Repositories! Check applet Configuration") }
+    AttemptingToLoad:   { title: _("GitHub Explorer"),					content: _("Attempting to Load your GitHub Repos") },
+    SuccessfullyLoaded: { title: _("GitHub Explorer"),					content: _("Successfully Loaded GitHub Repos for user %s") + " ", replace: "USER_NAME" },
+    ErrorOnLoad:		{ title: _("ERROR:: GitHub Explorer ::ERROR"), content: _("Failed to load GitHub Repositories! Check applet Configuration") }
 };
 
 // Simple space indents
@@ -267,7 +267,7 @@ MyApplet.prototype = {
 		}
 		else {
 			notificationMessage = NotificationMessages['ErrorOnLoad'];
-			this.set_applet_tooltip(_("Check applet Configuration"))
+			this.set_applet_tooltip(_("Check Applet Configuration"))
 		}
 		this._displayErrorNotification(notificationMessage);
 		this._shouldDisplayLookupNotification = true;
@@ -294,9 +294,9 @@ MyApplet.prototype = {
 
      _displayNotification: function(notifyContent){
 		let msg = notifyContent.content;
-		switch(notifyContent.append){
+		switch(notifyContent.replace){
 			case "USER_NAME":
-				msg += this.gh.username;
+				msg = msg.format(this.gh.username);
 		}
 		let notification = "notify-send \""+notifyContent.title+"\" \""+msg+"\" -i " + APPLET_ICON + " -a GIT_HUB_EXPLORER -t 10 -u low";
 		this.logger.debug("notification call = [" + notification + "]")
@@ -321,8 +321,8 @@ MyApplet.prototype = {
 
 			// Show open issues if they have any
 			let repoNameHeader = Config.show_issues_icon_on_repo_name && (open_issues_count != '0') 
-										? _(name + " ("+open_issues_count+")")
-										: _(name);
+										? name + " ("+open_issues_count+")"
+										: name;
 			// Main Menu Item
 			let gitHubRepoMenuItem = new PopupMenu.PopupSubMenuMenuItem(repoNameHeader);
 

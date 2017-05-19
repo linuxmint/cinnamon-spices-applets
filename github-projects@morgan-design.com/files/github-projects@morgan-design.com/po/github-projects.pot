@@ -8,21 +8,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 12:02+0800\n"
+"POT-Creation-Date: 2017-05-19 17:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr ""
 
 #: applet.js:45
 msgid "Attempting to Load your GitHub Repos"
 msgstr ""
 
 #: applet.js:46
-msgid "Successfully Loaded GitHub Repos for user"
+#, c-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr ""
+
+#: applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
 msgstr ""
 
 #: applet.js:47
@@ -33,16 +42,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: applet.js:177
+#: applet.js:177 applet.js:270
 msgid "Check Applet Configuration"
 msgstr ""
 
 #: applet.js:266
 msgid "API Rate Exceeded will try again once we are allowed"
-msgstr ""
-
-#: applet.js:270
-msgid "Check applet Configuration"
 msgstr ""
 
 #: applet.js:281
@@ -81,14 +86,6 @@ msgstr ""
 
 #: applet.js:401
 msgid "Create A Gist"
-msgstr ""
-
-#. github-projects@morgan-design.com->metadata.json->description
-msgid "Click on the applet to explore your Public Github repositories"
-msgstr ""
-
-#. github-projects@morgan-design.com->metadata.json->name
-msgid "Github Explorer"
 msgstr ""
 
 #. github-projects@morgan-design.com->settings-
@@ -201,4 +198,12 @@ msgstr ""
 #. github-projects@morgan-design.com->settings-schema.json->open-github-
 #. homepage-button->tooltip
 msgid "Open github.com - fork the code or add features"
+msgstr ""
+
+#. github-projects@morgan-design.com->metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr ""
+
+#. github-projects@morgan-design.com->metadata.json->name
+msgid "Github Explorer"
 msgstr ""
