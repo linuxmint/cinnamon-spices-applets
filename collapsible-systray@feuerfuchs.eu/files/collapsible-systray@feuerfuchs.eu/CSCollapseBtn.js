@@ -106,7 +106,7 @@ CSCollapseBtn.prototype = {
             case this.State.UNAVAILABLE:
                 iconName = "edit";
                 this.icon.set_opacity(96);
-                this.tooltip.set_text("No icons to hide/reveal");
+                this.tooltip.set_text(_("No icons to hide/reveal"));
                 break;
         }
         if (!iconName) {

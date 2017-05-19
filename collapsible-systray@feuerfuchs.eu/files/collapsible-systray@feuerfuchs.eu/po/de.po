@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: collapsible-systray@feuerfuchs.eu 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-19 12:19+0200\n"
-"PO-Revision-Date: 2017-05-19 12:20+0200\n"
+"POT-Creation-Date: 2017-05-19 12:39+0200\n"
+"PO-Revision-Date: 2017-05-19 12:40+0200\n"
 "Last-Translator: Feuerfuchs <git@feuerfuchs.eu>\n"
 "Language-Team: Feuerfuchs\n"
 "Language: de\n"
@@ -33,6 +33,10 @@ msgstr "Verkleinern"
 #: CSCollapseBtn.js:103
 msgid "Expand"
 msgstr "Erweitern"
+
+#: CSCollapseBtn.js:109
+msgid "No icons to hide/reveal"
+msgstr "Kein Symbole zu verstecken/anzeigen"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
