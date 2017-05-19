@@ -24,15 +24,15 @@ msgstr "您的感知位置。"
 
 #: applet.js:104
 msgid "Your IPInfoDB account has been suspended."
-msgstr ""
+msgstr "您的IPInfoDB帐户已经被挂起。"
 
 #: applet.js:104 applet.js:107
 msgid "Please set a valid API key in the applets settings."
-msgstr ""
+msgstr "请在小程序设置中设置一个有效的API密钥。"
 
 #: applet.js:107
 msgid "Invalid API key."
-msgstr ""
+msgstr "API密钥无效。"
 
 #: applet.js:119
 msgid "Something went Wrong!"
@@ -49,12 +49,12 @@ msgstr "位置检测 + 国旗"
 #. location-detection@heimdall->settings-schema.json->register-
 #. ipinfodb->description
 msgid "Register on IPInfoDB to get an API key"
-msgstr ""
+msgstr "注册IPInfoDB获取API密钥"
 
 #. location-detection@heimdall->settings-schema.json->api-key->description
 msgid "API key from IPInfoDB"
-msgstr ""
+msgstr "IPInfoDB的API密钥"
 
 #. location-detection@heimdall->settings-schema.json->api-key->tooltip
 msgid "Get your API key from IPInfoDB and place it here."
-msgstr ""
+msgstr "从IPInfoDB获取您的API密钥并将其放置在这里。"
