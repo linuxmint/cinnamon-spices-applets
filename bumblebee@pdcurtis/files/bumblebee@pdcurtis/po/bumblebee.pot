@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 15:26+1200\n"
+"POT-Creation-Date: 2017-05-14 03:44+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,64 +17,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:141
+#: applet.js:154
 msgid "Waiting for Bumblebee"
 msgstr ""
 
-#: applet.js:186
+#: applet.js:210
 msgid "Open nVidia Settings Program"
 msgstr ""
 
-#: applet.js:192
+#: applet.js:216
 msgid "Open Power Statistics"
 msgstr ""
 
-#: applet.js:200
+#: applet.js:224
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:233
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:212
+#: applet.js:236
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:218
+#: applet.js:242
 msgid "Open the Help file"
 msgstr ""
 
-#: applet.js:234
+#: applet.js:258
 msgid "Launch programs using the nVidia Graphics Processor"
 msgstr ""
 
-#: applet.js:307
+#: applet.js:331
 msgid "ERROR"
 msgstr ""
 
-#: applet.js:308
+#: applet.js:332
 msgid "Bumblebee is not installed so applet willl not work"
 msgstr ""
 
-#: applet.js:312
-msgid "GPU OFF"
+#: applet.js:337
+msgid "NVidia based GPU is Off"
 msgstr ""
 
-#: applet.js:313 applet.js:322
-msgid "NVidia based GPU is"
+#: applet.js:352
+msgid "NVidia based GPU is On and Core Temperature is"
 msgstr ""
 
-#: applet.js:321
-msgid "GPU"
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature in Horizontal Panels"
 msgstr ""
 
-#: applet.js:322
-msgid "and Core Temperature is"
-msgstr ""
-
-#. bumblebee@pdcurtis->settings-schema.json->head->description
-msgid "General Settings for the nVidia Monitoring Applet"
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->tooltip
+msgid "Not available in Vertical Panels"
 msgstr ""
 
 #. bumblebee@pdcurtis->settings-schema.json->head2->description
@@ -101,6 +97,10 @@ msgstr ""
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString1->description
 msgid "Command String for Program 1"
+msgstr ""
+
+#. bumblebee@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
 msgstr ""
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString4->description
@@ -160,9 +160,12 @@ msgid "seconds"
 msgstr ""
 
 #. bumblebee@pdcurtis->metadata.json->description
-msgid "Displays Status of Bumblebee and nVidia GPU Temperature"
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
 msgstr ""
 
 #. bumblebee@pdcurtis->metadata.json->name
-msgid "Bumblebee and nVidia Display"
+msgid "Bumblebee Status with NVidia Temperature Display"
 msgstr ""
