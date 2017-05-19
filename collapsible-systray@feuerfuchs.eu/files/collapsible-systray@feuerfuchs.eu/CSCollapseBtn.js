@@ -1,3 +1,5 @@
+const _ = imports.applet._;
+
 const Gio                                = imports.gi.Gio;
 const St                                 = imports.gi.St;
 const Tooltips                           = imports.ui.tooltips;
@@ -13,10 +15,17 @@ function CSCollapseBtn(applet) {
 }
 
 CSCollapseBtn.prototype = {
+    State: {
+        EXPANDED:    0,
+        COLLAPSED:   1,
+        UNAVAILABLE: 2
+    },
+
     _init: function(applet) {
         this._applet = applet;
-        this.actor   = new St.Button({ style_class: 'applet-box' });
+        this.actor   = new St.Button({ reactive: true, track_hover: true, style_class: 'applet-box' });
         this.icon    = new St.Icon({ reactive: true, track_hover: true, style_class: 'applet-icon' });
+        this.tooltip = new Tooltips.PanelItemTooltip(this, "", applet._orientation);
 
         this.actor.set_child(this.icon);
     },
@@ -65,10 +74,41 @@ CSCollapseBtn.prototype = {
     },
 
     /*
+     *
+     */
+    refreshReactive: function() {
+        //this.actor.set_reactive(this.state !== this.State.UNAVAILABLE && this._applet._draggable.inhibit);
+        this.actor.set_reactive(this._applet._draggable.inhibit);
+    },
+
+    /*
      * Set expanded state and refresh the icon
      */
-    setIsExpanded: function(state) {
-        let iconName = state ? this._applet.collapseIcon : this._applet.expandIcon;
+    setState: function(state) {
+        this.state = state;
+
+        this.refreshReactive();
+
+        let iconName;
+        switch (state) {
+            case this.State.EXPANDED:
+                iconName = this._applet.collapseIcon;
+                this.icon.set_opacity(255);
+                this.tooltip.set_text(_("Collapse"));
+                break;
+
+            case this.State.COLLAPSED:
+                iconName = this._applet.expandIcon;
+                this.icon.set_opacity(255);
+                this.tooltip.set_text(_("Expand"));
+                break;
+
+            case this.State.UNAVAILABLE:
+                iconName = "edit";
+                this.icon.set_opacity(96);
+                this.tooltip.set_text("No icons to hide/reveal");
+                break;
+        }
         if (!iconName) {
             return;
         }
