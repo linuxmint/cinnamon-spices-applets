@@ -8,10 +8,8 @@
         "3.4"
     ], 
     "max-instances": 1, 
-    "dangerous": false, 
     "description": "A replacement for the abandoned System Tray Collapsible Cinnamon applet", 
     "uuid": "collapsible-systray@feuerfuchs.eu", 
     "version": "1.8", 
-    "icon": "indicator-applet", 
-    "last-edited": "1495189293"
+    "icon": "indicator-applet"
 }
