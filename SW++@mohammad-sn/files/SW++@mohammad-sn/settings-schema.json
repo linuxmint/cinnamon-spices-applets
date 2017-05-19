@@ -5,7 +5,7 @@
  },
  "icon-name": {
     "type": "iconfilechooser",
-    "default" : "",
+    "default" : "user-desktop",
     "description" : "The icon to use in the panel:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box, for example: desktop"
  },
@@ -102,4 +102,3 @@
     "tooltip" : ""
  }
 }
-
