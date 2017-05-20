@@ -1,8 +1,0 @@
-{
-    "uuid": "all-in-one-places@jofer",
-    "name": "All-in-one Places",
-    "description": "All-in-one quick navigation to places and devices with a few extra configuration options to change the look and feel of the applet.",
-    "icon": "user-home",
-    "url": "http://jferrao.github.com/gtk",
-    "version": "2.1"
-}
