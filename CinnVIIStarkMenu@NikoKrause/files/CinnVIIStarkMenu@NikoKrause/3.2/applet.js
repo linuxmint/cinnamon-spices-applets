@@ -1713,7 +1713,6 @@ RightButtonsBox.prototype = {
 
         this.actor._delegate = this;
         this.menu = menu;
-        this.addItems();
 
         this.hoverIcon = new HoverIcon(this.menu);
         this.actor.add_actor(this.hoverIcon.userBox);
@@ -2163,9 +2162,7 @@ MyApplet.prototype = {
         this._updateQuickLinksView();
 
         this.settings.bind("show-shutdown-menu", "showShutdownMenu", this._updateQuickLinksShutdownView);
-
         this.settings.bind("shutdown-menu-layout", "shutdownMenuLayout", this._updateQuickLinks);
-        this._updateQuickLinksShutdownView();
 
         this._fileFolderAccessActive = false;
         this._pathCompleter = new Gio.FilenameCompleter();
@@ -2189,6 +2186,7 @@ MyApplet.prototype = {
         this.quicklinksupdated = false;
         this.settings.bind("quicklauncher-layout", "quicklauncherLayout", this._updateQuickLinks);
         this.settings.bind("user-box-layout", "userBoxLayout", this._updateQuickLinks);
+        this._updateQuickLinksShutdownView();
         this._updateQuickLinks();
 
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
@@ -3985,7 +3983,7 @@ MyApplet.prototype = {
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
         this.mainBox.add_style_class_name("starkmenu-applications-box");
 
-        this.leftPane.set_child(this.favsBox, { y_align: St.Align.END, y_fill: false });
+        this.leftPane.set_child(this.favsBox);
 
         this.selectedAppBox = new St.BoxLayout({ style_class: 'menu-selected-app-box', vertical: true });
         //this.selectedAppBox.add_style_class_name("starkmenu-selected-app-box");
