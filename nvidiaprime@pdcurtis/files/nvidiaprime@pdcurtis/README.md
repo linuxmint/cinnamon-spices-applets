@@ -12,6 +12,8 @@ It is useful to have continuous indication of whether the Discrete Graphics Proc
 
 ## Features
 
+The latest versions 3.3.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon making it consistent with then nvidia-prime system applet. The GPU temperature display is beside the icon on horizontal panels and inhibited on vertical panels. The temperature display in the panel can now be inhibited in horizontal panels to save space if required.  One can also configure the update rate of the applet in settings.
+
 Clicking the applet opens nvidia-settings which allows one to change GPU in the same way as the built in NVIDIA Prime applet which it can replace if panel space is at a premium.
 
 The right click context menu also gives the ability to run the nVidia Settings program as well as the System Monitor and Power Statistics, all useful for monitoring and controlling power consumption which is paramount when using a laptop on batteries.
@@ -20,7 +22,9 @@ There is error checking to ensure the switching program bbswith is loaded and do
 
 ## Requirements
 
-The applet requires at least Cinnamon 1.8 to access the configuration from within the applet and has been tested up to Cinnamon 3.2 and Mint 18.1 . The nVidia graphics packages obviously need to be installed but no other packages are essential. 
+The applet requires at least Cinnamon 2.0 to access the configuration from within the applet. Mint versions with less than Cinnamon 2.0 have now passed their end of life so all current version are supported.
+
+the nVidia graphics packages obviously need to be installed but no other packages are essential. Cinnamon 3.2 or higher is required to support a vertical panel but not to support other features of the applet.
 
 The latest version has a tick box option on the configuration screen to access enhanced functionality through the Right Click Context Menu. This needs a Cinnamon Restart or log out/in before the change is visible. Currently this adds the glxspheres64 Graphics Processor Test to the menu.
 

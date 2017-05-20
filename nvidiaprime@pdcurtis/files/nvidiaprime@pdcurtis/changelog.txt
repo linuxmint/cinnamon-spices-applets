@@ -1,4 +1,4 @@
-Version 3.2.1
+Version 3.3.0
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -24,13 +24,22 @@ v30_3.1.6 Corrected icon.png in applet folder which is used by Add Applets
 
 Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
 
-v30_3.2.0 Changed help file from help.txt to README.md - can keep copies of README.md identical.
+v30_3.2.0 Changed help file from help.txt to README.md -can keep copies of README.md identical.
 3.2.1     Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
           icon.png copied back into applet folder so it shows in 'About...'
           Add translation support to applet.js and identify strings
           Changes to remove leading and trailing spaces and replace with fixed spaces
           Changes to strings to avoid mixed use of flags as strings to ease translations.
           Add po folder to applet
-          Create batterymonitor.pot using cinnamon-json-makepot --js po/batterymonitor.pot
+          Create nvidiaprime.pot using cinnamon-json-makepot --js po/nvidiaprime.pot
           Version and changes information update in applet.js and changelog.txt
           Update README.md (2x)
+3.3.0     Major new version to support vertical panels and to use icons instead of text to harmonise with other cinnamon applets such as nvidia-prime
+              - Allow use of vertical as well as horizontal panels after version number check to see if they are supported.
+              - Change to TextIcon applet
+              - Addition of setting to hide temperatures on Horizontal panel.
+              - Changed temporary output file to /tmp/.gpuTemperaturePrime to avoid overlap with nvidiaprime applet during testing. 
+              - New Translation function
+              - Changes to improve translation strings
+              - Recreate bumblebee.pot
+              Changes to README.md changelog.txt etc 
