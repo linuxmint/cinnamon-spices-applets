@@ -18,7 +18,7 @@ const PRESETDIR2 = "/usr/share/pulseaudio-equalizer/presets/";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 function Config() {
@@ -43,7 +43,7 @@ Config.prototype = {
             this.presets = Cinnamon.get_file_contents_utf8_sync(EQPRESETS).split('\n')
                         .filter(function(item) { return item.length > 0; });
         } catch (e) {
-                global.logError(e);
+            global.logError(e);
         }
     },
     save: function() {
