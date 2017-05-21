@@ -73,13 +73,11 @@ MyApplet.prototype = {
             if (cmd_output[0]) {
                 cmd_stdout = cmd_output[1].toString();
                 cmd_stdout+= cmd_output[2].toString();
-                cmd_stdout = cmd_stdout.substring(0,50);
-                full += cmd_stdout.replace(/\n/g, "");
-                if (i < scripts.length - 1)
-                    full += '\n';
+                cmd_stdout = cmd_stdout.replace(/\n/g, "").substring(0, 50);
             }
+            full += cmd_stdout + '\n';
         }
-        this.set_applet_label(full);
+        this.set_applet_label(full.trimRight());
         Mainloop.timeout_add(this.refreshInterval * 1000, Lang.bind(this, this.update));
     },
 
