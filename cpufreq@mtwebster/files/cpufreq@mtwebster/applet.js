@@ -234,7 +234,7 @@ Panel_Indicator.prototype = {
     },
     _onButtonPress: function(actor, event) {
         global.logError("test "+ actor.orientation);
-        if ( (this.menu._orientation ==0))
+        if ((this.menu._orientation == 0))
             this.menu.setOrientation(St.Side.BOTTOM);
         else if ((this.menu._orientation == 2))
             this.menu.setOrientation(St.Side.TOP);
@@ -279,7 +279,7 @@ CpufreqSelectorBase.prototype = {
             this.max = rd_nums_frm_file(this.cpufreq_path + '/scaling_max_freq')[0];
             this.min = rd_nums_frm_file(this.cpufreq_path + '/scaling_min_freq')[0];
             this.avail_governors = rd_frm_file(this.cpufreq_path + '/scaling_available_governors');
-            try{
+            try {
                 this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
             } catch (e) {
                  this.avail_freqs = [];
@@ -538,8 +538,6 @@ MyApplet.prototype = {
                 this.myactor = new St.BoxLayout({ pack_start: true });
                 box = this.myactor;
                 this.actor.add(this.myactor);
-                if(this.orientation)
-                    this.myactor.orientation = this.orientation;
                 FileUtils.listDirAsync(cpu_dir, Lang.bind(this, add_cpus_frm_files));
                 let finish = GLib.get_monotonic_time();
                 log('cpufreq: use ' + (finish - start));
