@@ -67,8 +67,7 @@ MyApplet.prototype = {
         let full = '';
         let scripts = this.script2 && this.script2.trim() && this.enableScript2 ?
             [this.script1, this.script2] : [this.script1];
-        for (i in scripts) {
-            let cmd = scripts[i];
+        for (let cmd of scripts) {
             let cmd_stdout = _("script error");
             let cmd_output = this.spawn_sync(cmd);
             if (cmd_output[0]) {
@@ -89,7 +88,7 @@ MyApplet.prototype = {
         this.bind_settings();
     },
     bind_settings: function () {
-        for (str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]){
+        for (let str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]){
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,
