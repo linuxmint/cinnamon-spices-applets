@@ -125,7 +125,7 @@ EqualizerApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this._enabledSwitch = new PopupMenu.PopupSwitchMenuItem(_("Equalizer"),
-                                    this.config.enabled);
+                                    this.config.enabled());
             this.menu.addMenuItem(this._enabledSwitch);
             this._enabledSwitch.connect("toggled", Lang.bind(this.config, this.config.toggle));
 
