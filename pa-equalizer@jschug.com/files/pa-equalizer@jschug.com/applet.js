@@ -32,7 +32,7 @@ Config.prototype = {
     load: function() {
         try {
             GLib.spawn_command_line_sync("pulseaudio-equalizer interface.getsettings");
-            this._monitor = Gio.file_new_for_path(EQCONFIG).monitor(null, null);
+            this._monitor = Gio.file_new_for_path(EQCONFIG).monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect("changed", Lang.bind(this, function(self, file, otherFile, eventType) {
                 if (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
                     this._configChanged();
@@ -48,7 +48,7 @@ Config.prototype = {
     },
     save: function() {
         try {
-            let out = Gio.file_new_for_path(EQCONFIG).replace(null, false, null, null);
+            let out = Gio.file_new_for_path(EQCONFIG).replace(null, false, Gio.FileCreateFlags.NONE, null);
             out.write_all(this._rawdata.join('\n'), null);
             out.close(null);
 
