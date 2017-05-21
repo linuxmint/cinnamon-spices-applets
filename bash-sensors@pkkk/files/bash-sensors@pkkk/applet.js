@@ -81,16 +81,12 @@ MyApplet.prototype = {
         Mainloop.timeout_add(this.refreshInterval * 1000, Lang.bind(this, this.update));
     },
 
-
-    on_settings_changed: function () {
-        this.bind_settings();
-    },
     bind_settings: function () {
         for (let str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,
-                this.on_settings_changed,
+                null,
                 null);
         }
     }
