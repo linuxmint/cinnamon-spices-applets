@@ -9,7 +9,10 @@ const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
 const UUID = "pa-equalizer@jschug.com";
 
-const CONFIG_DIR = GLib.get_home_dir() + "/.pulse";
+const CONFIG_DIR_OLD = GLib.get_home_dir() + "/.pulse";
+const CONFIG_DIR_NEW = GLib.get_user_config_dir() + "/pulse";
+const CONFIG_DIR = GLib.file_test(CONFIG_DIR_NEW, GLib.FileTest.IS_DIR)? CONFIG_DIR_NEW: CONFIG_DIR_OLD;
+
 const EQCONFIG = CONFIG_DIR + "/equalizerrc";
 const EQPRESETS = EQCONFIG + ".availablepresets";
 const PRESETDIR1 = CONFIG_DIR + "/presets/";
