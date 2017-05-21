@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 12:34+0800\n"
-"PO-Revision-Date: 2017-04-18 12:36+0800\n"
+"POT-Creation-Date: 2017-05-21 09:37+0800\n"
+"PO-Revision-Date: 2017-05-21 09:38+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #: applet.js:32
 msgid "Take A Snapshot or Record Your Desktop"
@@ -58,19 +58,39 @@ msgstr "桌面录像"
 msgid "Start With Audio"
 msgstr "有声开始"
 
+#: applet.js:83 applet.js:88
+msgid "Recording"
+msgstr "录制"
+
+#: applet.js:83
+msgid "With-Audio"
+msgstr "包含音频"
+
 #: applet.js:86
 msgid "Start No Audio"
 msgstr "无声开始"
+
+#: applet.js:88
+msgid "No-Audio"
+msgstr "不含音频"
 
 #: applet.js:91
 msgid "Stop"
 msgstr "停止"
 
+#: applet.js:95
+msgid "Recording-Stopped"
+msgstr "录制已停止"
+
+#: applet.js:96
+msgid "Recording-Finished"
+msgstr "录制已完成"
+
 #: applet.js:103
 msgid "Pictures Folder"
 msgstr "图片文件夹"
 
-#: applet.js:108
+#: applet.js:109
 msgid "Videos Folder"
 msgstr "视频文件夹"
 
