@@ -26,10 +26,10 @@ v30_1.1.4 Old call removed from batterytempscript.sh which was filling error log
           Error checks on status to ensure valid
           Spelling corrections
           Help File extended
-v30_1.1.5 Minor text changes to improve consistency
+v30_1.1.5 Minor text changes to improve consistency. First Release 16-07-2016
 v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 1.1.5 to the cinnamon-spices web site
-v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
-v30_1.1.9 Added ability to edit stylesheet.css to context menu.
+v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets - Released 01-08-2016
+v30_1.1.9 Added ability to edit stylesheet.css to context menu. Released 17-09-2016
           Added warnings about editing to stylesheet.css
 
 Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
