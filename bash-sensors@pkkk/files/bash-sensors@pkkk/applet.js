@@ -22,14 +22,6 @@ function MyApplet(metadata, orientation) {
 MyApplet.prototype = {
     __proto__: Applet.TextApplet.prototype,
 
-    _printKeys: function (obj) {
-        var keys = [];
-        for (var key in obj){
-            keys.push(key);
-        }
-        global.logError(keys);
-    },
-
     _init: function (metadata, orientation, panelHeight, instance_id) {
         Applet.TextApplet.prototype._init.call(this, orientation);
         this.path = metadata.path;
