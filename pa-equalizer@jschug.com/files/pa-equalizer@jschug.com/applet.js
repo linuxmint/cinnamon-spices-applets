@@ -51,11 +51,13 @@ Config.prototype = {
     },
     save: function() {
         try {
+            this._monitor.cancel()
             let out = Gio.file_new_for_path(EQCONFIG).replace(null, false, Gio.FileCreateFlags.NONE, null);
             out.write_all(this._rawdata.join('\n'), null);
             out.close(null);
 
-            GLib.spawn_command_line_async("pulseaudio-equalizer interface.applysettings");
+            GLib.spawn_command_line_sync("pulseaudio-equalizer interface.applysettings");
+            this.load();
         } catch (e) {
             global.logError(e);
         }
