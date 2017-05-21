@@ -86,7 +86,7 @@ MyApplet.prototype = {
         this.bind_settings();
     },
     bind_settings: function () {
-        for (let str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]){
+        for (let str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,
