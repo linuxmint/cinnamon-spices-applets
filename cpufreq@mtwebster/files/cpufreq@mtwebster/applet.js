@@ -129,8 +129,10 @@ function Panel_Indicator() {
 Panel_Indicator.prototype = {
     __proto__: PanelMenu.Button.prototype,
 
-    _init: function(name, parent) {
-        PanelMenu.Button.prototype._init.call(this, 0.0);
+    _init: function(name, parent, orientation) {
+        PanelMenu.Button.prototype._init.call(this);
+        if(orientation)
+            this.menu._orientation = orientation;
         this.name = name
         this._parent = parent;
         this.buildit();
@@ -230,8 +232,12 @@ Panel_Indicator.prototype = {
             }));
         }
     },
-
     _onButtonPress: function(actor, event) {
+        global.logError("test "+ actor.orientation);
+        if ( (this.menu._orientation ==0))
+            this.menu.setOrientation(St.Side.BOTTOM);
+        else if ((this.menu._orientation == 2))
+            this.menu.setOrientation(St.Side.TOP);
         if (global.settings.get_boolean("panel-edit-mode"))
             return false;
         if (event.get_button()==3){
@@ -248,7 +254,7 @@ Panel_Indicator.prototype = {
         }
         this.menu.toggle();
         return true;
-    },
+    }
 };
 
 function CpufreqSelectorBase() {
@@ -256,12 +262,13 @@ function CpufreqSelectorBase() {
 }
 CpufreqSelectorBase.prototype = {
     arg: { governor: '-g', freq: '-f'},
-    _init: function(cpu) {
+    _init: function(cpu, orientation) {
+        this.orientation = orientation;
         this.cpunum = cpu.replace(/cpu/, '');
         this.cpufreq_path = cpu_path + '/' + cpu + '/cpufreq/';
         this.get_avail();
         this.get_cur();
-        this.indicator = new Panel_Indicator(cpu, this);
+        this.indicator = new Panel_Indicator(cpu, this, orientation);
         if ('timeout' in this)
             Mainloop.source_remove(this.timeout);
         this.timeout = Mainloop.timeout_add(refresh_time, Lang.bind(this, this.update));
@@ -271,8 +278,12 @@ CpufreqSelectorBase.prototype = {
         try {
             this.max = rd_nums_frm_file(this.cpufreq_path + '/scaling_max_freq')[0];
             this.min = rd_nums_frm_file(this.cpufreq_path + '/scaling_min_freq')[0];
-            this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
             this.avail_governors = rd_frm_file(this.cpufreq_path + '/scaling_available_governors');
+            try{
+                this.avail_freqs = rd_nums_frm_file(this.cpufreq_path + '/scaling_available_frequencies');
+            } catch (e) {
+                 this.avail_freqs = [];
+            }
         } catch (e) {
             let icon = new St.Icon({ icon_name: 'error',
                              icon_type: St.IconType.FULLCOLOR,
@@ -367,7 +378,7 @@ function add_cpus_frm_files(cpu_child) {
             if (pattern.test(cpu_child[i].get_name()))
                 cpus.push(cpu_child[i].get_name());
         for (let i in cpus) {
-            selectors[i] = new CpufreqSelectorBase(cpus[i]);
+            selectors[i] = new CpufreqSelectorBase(cpus[i],this.orientation);
             box.add_actor(selectors[i].indicator.actor);
             Main.panel._menus.addMenu(selectors[i].indicator.menu);
         }
@@ -527,7 +538,8 @@ MyApplet.prototype = {
                 this.myactor = new St.BoxLayout({ pack_start: true });
                 box = this.myactor;
                 this.actor.add(this.myactor);
-
+                if(this.orientation)
+                    this.myactor.orientation = this.orientation;
                 FileUtils.listDirAsync(cpu_dir, Lang.bind(this, add_cpus_frm_files));
                 let finish = GLib.get_monotonic_time();
                 log('cpufreq: use ' + (finish - start));
