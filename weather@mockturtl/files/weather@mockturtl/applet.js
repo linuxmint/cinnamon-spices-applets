@@ -1050,8 +1050,8 @@ MyApplet.prototype = {
       case 37:/* isolated thunderstorms */
         return _('Isolated thunderstorms')
       case 38:/* scattered thunderstorms */
-      case 39:/* scattered thunderstorms */
         return _('Scattered thunderstorms')
+      case 39:/* scattered thunderstorms */
       case 40:/* scattered showers */
         return _('Scattered showers')
       case 41:/* heavy snow */
