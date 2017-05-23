@@ -146,6 +146,26 @@ msgid "seconds"
 msgstr ""
 
 #. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->update_scroll->description
+msgid "Adjust brightness scroll"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->update_scroll->tooltip
+msgid "Allows to adjust a brightness value on a mouse scroll"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->scroll_step->description
+msgid "Scroll step"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->scroll_step->tooltip
+msgid "A percentage of a brightness value to adjust on a mouse scroll"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->options_type->description
 msgid "Show"
 msgstr ""
