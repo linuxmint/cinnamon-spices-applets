@@ -18,7 +18,26 @@
     
     AppIcon: "Alarm_clock_symbolized16.svg", // stopped
     AppIconRunning: "Alarm_clock_symbolized_concentric16.svg", //timer running
-    AppIconReversed: "Alarm_clock_symbolized_reversed16.svg" //time expired (alarm)
+    AppIconReversed: "Alarm_clock_symbolized_reversed16.svg", //time expired (alarm)
+  
+    // Time presets - an array of objects with 'minutes' and 'label' properties. If it is just a number, 
+    // that number wil be the number of minutes and the label will be "<number> Minutes"
+    Timers: [
+        { minutes: 240, label: '240 Minutes - 4 hours'},
+        { minutes: 180, label: '180 Minutes - 3 hours'},
+        { minutes: 120, label: '120 Minutes - 2 hours'},
+        90,
+        { minutes: 60, label: '60 Minutes - 1 hour'},
+        45,
+        30,
+        { minutes: 25, label: '25 Minutes - 1 Pomodoro'},
+        20,
+        15,
+        10,
+        5,
+        3,
+        1
+    ]
 }
 
 
