@@ -314,10 +314,6 @@ msgstr "Ange snabbtangent för att öppna menyn"
 msgid "Get WOEID"
 msgstr "Hämta WOEID"
 
-#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
-msgid "http://woeid.rosselliot.co.nz/"
-msgstr "http://woeid.rosselliot.co.nz/"
-
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr "Vertikal orientering"
