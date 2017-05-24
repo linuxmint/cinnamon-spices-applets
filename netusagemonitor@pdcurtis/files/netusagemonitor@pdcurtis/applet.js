@@ -13,14 +13,18 @@ const Settings = imports.ui.settings; // Needed for settings API
 const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls 
+const Gettext = imports.gettext; // ++ Needed for translations
 
-// l10n/translation support as per NikoKrause tutorial modified as UUID already used!
-const Gettext = imports.gettext
-const UUIDl10n = "netusagemonitor@pdcurtis"
-Gettext.bindtextdomain(UUIDl10n, GLib.get_home_dir() + "/.local/share/locale")
+// ++ Always needed for localisation/translation support
+// l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
+// UUID is set in MyApplet _init: below and before function called
 
+var UUID;
 function _(str) {
-  return Gettext.dgettext(UUIDl10n, str);
+    let customTrans = Gettext.dgettext(UUID, str);
+    if (customTrans !== str && customTrans !== "")
+        return customTrans;
+    return Gettext.gettext(str);
 }
 
 // Alert response using a Modal Dialog - approach thanks to Mark Bolin 
@@ -58,7 +62,6 @@ MyApplet.prototype = {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
         try {
 
-            this.UUID = metadata.uuid // Pick up UUID from metadata to make everything location independent
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "refreshInterval-spinner",
@@ -212,11 +215,15 @@ MyApplet.prototype = {
                 null);
 
             this.cssfile = metadata.path + "/stylesheet.css";
-            this.changelog = metadata.path + "/changelog.txt";
+            this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
-            this.UUID = metadata.uuid;
+//            this.UUID = metadata.uuid;
+            // ++ Part of l10n support;
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+
             this.applet_running = true; //** New
  
             this._client = NMClient.Client.new(); //++
@@ -1127,4 +1134,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Tidy up comments in applet.js
           Update README.md to remove a couple of references to Ubuntu from early days.
           Usual updates to new version in applet.js, changelog and metadata.json
+3.2.2     Removed unused this.UUID = metadata.uuid 
+          Improved l10n translation support.
+          Added CHANGELOG.md to applet folder and use it instead of changelog.txt in right click menu
+          CHANGELOG.md based on recent entries to changelog.txt with last changes at the top. changelog.txt currently remains in applet folder but is not used.
+          Use symbolic links for README.md and CHANGELOG.md instead of copies from the applet folder to UUID folder for the Cinnamon Web Site to pick up
+          
 */
