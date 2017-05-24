@@ -87,7 +87,7 @@ MyApplet.prototype = {
 
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; 
-            this.changelog = metadata.path + "/changelog.txt";
+            this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
 
             this.batterytempscript = metadata.path + "/batterytempscript.sh";
@@ -416,10 +416,10 @@ v30_1.1.4 Old call removed from batterytempscript.sh which was filling error log
           Error checks on status to ensure valid
           Spelling corrections
           Help File extended
-v30_1.1.5 Minor text changes to improve consistency
+v30_1.1.5 Minor text changes to improve consistency. First Release 16-07-2016
 v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 1.1.5 to the cinnamon-spices web site
-v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
-v30_1.1.9 Added ability to edit stylesheet.css to context menu.
+v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets - Released 01-08-2016
+v30_1.1.9 Added ability to edit stylesheet.css to context menu. Released 17-09-2016
           Added warnings about editing to stylesheet.css
 
 Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
@@ -443,5 +443,9 @@ v32_1.2.1 First major update following transition to cinnamon-spices-applets rep
           Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
           icon.png copied back into applet folder so it shows in 'About...'
           Version information updated in applet.js, changelog.txt and README.md
+### 1.2.3
+ * Added CHANGELOG.md to applet folder with symbolic link to it in UUID so it shows on latest cinnamon spices web site.
+ * CHANGELOG.md is a simplified and reformatted version of changelog.txt.
+ * Changed 'view changelog' in context menu to use CHANGELOG.md 
 */
 
