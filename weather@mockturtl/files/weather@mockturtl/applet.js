@@ -1051,7 +1051,7 @@ MyApplet.prototype = {
         return _('Isolated thunderstorms')
       case 38:/* scattered thunderstorms */
         return _('Scattered thunderstorms')
-      case 39:/* scattered thunderstorms */
+      case 39:/* http://developer.yahoo.com/forum/YDN-Documentation/Yahoo-Weather-API-Wrong-Condition-Code/1290534174000-1122fc3d-da6d-34a2-9fb9-d0863e6c5bc6 */
       case 40:/* scattered showers */
         return _('Scattered showers')
       case 41:/* heavy snow */
