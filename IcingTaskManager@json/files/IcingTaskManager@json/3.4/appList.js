@@ -4,6 +4,7 @@ const St = imports.gi.St
 const Gio = imports.gi.Gio
 
 const _ = require('./lodash');
+const each = require('./each');
 const AppGroup = require('./appGroup');
 const constants = require('./constants');
 
@@ -74,7 +75,7 @@ AppList.prototype = {
     var containerChildren = this.manager_container.get_children()
 
     var orientationKey = null
-    _.each(St.Side, (side, key)=>{
+    each(St.Side, (side, key)=>{
       if (orientation === St.Side[key]) {
         orientationKey = key.toLowerCase()
         return
@@ -101,7 +102,7 @@ AppList.prototype = {
       this.settings.setValue('vertical-thumbnails', isVertical)
     }
 
-    _.each(containerChildren, (child, key)=>{
+    each(containerChildren, (child, key)=>{
       child.set_style(style)
       if (isVertical) {
         child.set_x_align(Clutter.ActorAlign.CENTER)
@@ -485,8 +486,8 @@ AppList.prototype = {
   },
 
   destroy: function () {
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         this[key].disconnect(id)
       })
     })

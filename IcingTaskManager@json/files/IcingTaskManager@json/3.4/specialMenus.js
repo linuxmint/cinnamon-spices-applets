@@ -14,6 +14,7 @@ const Applet = imports.ui.applet;
 const Tooltips = imports.ui.tooltips;
 
 const _ = require('./lodash');
+const each = require('./each');
 const getFirefoxHistory = require('./firefox');
 const constants = require('./constants');
 const t = require('./gettext');
@@ -365,7 +366,7 @@ AppMenuButtonRightClickMenu.prototype = {
         */
         item = createMenuItem({label: 'Close others', icon: 'window-close'})
         item.connect('activate', Lang.bind(this, function() {
-          _.each(this.metaWindows, (metaWindow)=>{
+          each(this.metaWindows, (metaWindow)=>{
             if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
               metaWindow.win.delete(global.get_current_time());
             }
@@ -377,7 +378,7 @@ AppMenuButtonRightClickMenu.prototype = {
         */
         item = createMenuItem({label: 'Close all', icon: 'application-exit'})
         item.connect('activate', Lang.bind(this, function() {
-          _.each(this.metaWindows, (metaWindow)=>{
+          each(this.metaWindows, (metaWindow)=>{
             if (!metaWindow.win._needsAttention) {
               metaWindow.win.delete(global.get_current_time());
             }
@@ -610,8 +611,8 @@ AppThumbnailHoverMenu.prototype = {
       this.box.remove_actor(item.actor)
       item.actor.destroy()
     }
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         if (this[key] && id) {
           this[key].disconnect(id)
         }
@@ -882,8 +883,8 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   destroy(){
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         this[key].disconnect(id)
       })
     })
@@ -1292,8 +1293,8 @@ WindowThumbnail.prototype = {
       /* Signal is invalid */
     }
     if (!skipSignalDisconnect) {
-      _.each(this.signals, (signal, key)=>{
-        _.each(signal, (id)=>{
+      each(this.signals, (signal, key)=>{
+        each(signal, (id)=>{
           if (this[key] && id) {
             this[key].disconnect(id)
           }
