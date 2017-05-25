@@ -24,7 +24,6 @@ const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const UUID = "cpufreq@mtwebster";
-const PanelMenu = imports.ui.panelMenu;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
@@ -36,6 +35,8 @@ const Signals = imports.signals;
 const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
+const AppletDir = imports.ui.appletManager.applets['cpufreq@mtwebster'];
+const PanelMenu = AppletDir.panelMenu;
 
 let start = GLib.get_monotonic_time();
 
