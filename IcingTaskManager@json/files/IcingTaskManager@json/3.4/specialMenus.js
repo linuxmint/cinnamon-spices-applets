@@ -516,11 +516,7 @@ AppThumbnailHoverMenu.prototype = {
     this.isFavapp = parent.isFavapp
     this.appList = parent.appList
 
-
-    // need to implement this class or cinnamon outputs a bunch of errors // TBD
-    this.actor.style_class = 'hide-arrow'
-
-    this.box.set_style_class_name('thumbnail-popup-content')
+    this.box.set_style_class_name('thumbnail-popup-content');
 
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -807,6 +803,14 @@ PopupMenuAppSwitcherItem.prototype = {
     if (refreshThumbnails) {
       for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
         this.appThumbnails[i].thumbnail._refresh(windows[0], windows)
+      }
+    }
+  },
+
+  _refreshThumbnails(){
+    for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
+      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i].thumbnail) {
+        this.appThumbnails[i].thumbnail._refresh();
       }
     }
   },
@@ -1172,7 +1176,7 @@ WindowThumbnail.prototype = {
 
   _onButtonRelease: function (actor, event) {
     var button = event.get_button();
-    if (button === 1 && actor == this.button) {
+    if (button === 1 && _.isEqual(actor, this.button)) {
       this.handleAfterClick()
     }
   },

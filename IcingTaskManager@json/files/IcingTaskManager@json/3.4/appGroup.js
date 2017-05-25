@@ -474,6 +474,7 @@ AppGroup.prototype = {
         }
 
         this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows)
+        this.hoverMenu.appSwitcherItem._refreshThumbnails();
         this._appButton.setMetaWindow(this.lastFocused, this.metaWindows)
       }
 
@@ -521,6 +522,7 @@ AppGroup.prototype = {
         if (this.rightClickMenu !== undefined) {
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows)
         }
+        this.hoverMenu.appSwitcherItem._refreshThumbnails();
         this._appButton.setMetaWindow(this.lastFocused, this.metaWindows)
       } else {
         this.appList._onAppWindowsChanged(this.app, ()=>{
