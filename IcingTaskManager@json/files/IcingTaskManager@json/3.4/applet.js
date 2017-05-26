@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 
 // If this is true, it will force all modules to reload when an xlet is restarted.
-window.__DEBUG = true;
+window.__DEBUG = false;
 
 function main(metadata, orientation, panel_height, instance_id) {
   global[metadata.uuid] = [metadata, orientation, panel_height, instance_id];

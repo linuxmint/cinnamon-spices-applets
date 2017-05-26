@@ -449,11 +449,11 @@ AppList.prototype = {
     let hasWindowsOnWorkspace
     if (app.wmClass) {
       hasWindowsOnWorkspace = metaWorkspace.list_windows().some(function (win) {
-        return app.wmClass == win.get_wm_class_instance()
+        return _.isEqual(app.wmClass, win.get_wm_class_instance())
       })
     } else {
       hasWindowsOnWorkspace = app.get_windows().some(function (win) {
-        return win.get_workspace() == metaWorkspace
+        return _.isEqual(win.get_workspace(), metaWorkspace)
       })
     }
 

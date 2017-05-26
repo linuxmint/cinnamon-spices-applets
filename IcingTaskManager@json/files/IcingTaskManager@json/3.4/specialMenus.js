@@ -1297,9 +1297,6 @@ WindowThumbnail.prototype = {
       if (this.windowFocusId) {
         this.metaWindow.disconnect(this.windowFocusId)
       }
-      if (this.sizeChangeId) {
-        this.muffinWindow.disconnect(this.sizeChangeId);
-      }
     } catch (e) {
       /* Signal is invalid */
     }
