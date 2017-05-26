@@ -14,6 +14,7 @@ const Applet = imports.ui.applet;
 const Tooltips = imports.ui.tooltips;
 
 const _ = require('./lodash');
+const each = require('./each');
 const getFirefoxHistory = require('./firefox');
 const constants = require('./constants');
 const t = require('./gettext');
@@ -365,7 +366,7 @@ AppMenuButtonRightClickMenu.prototype = {
         */
         item = createMenuItem({label: 'Close others', icon: 'window-close'})
         item.connect('activate', Lang.bind(this, function() {
-          _.each(this.metaWindows, (metaWindow)=>{
+          each(this.metaWindows, (metaWindow)=>{
             if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
               metaWindow.win.delete(global.get_current_time());
             }
@@ -377,7 +378,7 @@ AppMenuButtonRightClickMenu.prototype = {
         */
         item = createMenuItem({label: 'Close all', icon: 'application-exit'})
         item.connect('activate', Lang.bind(this, function() {
-          _.each(this.metaWindows, (metaWindow)=>{
+          each(this.metaWindows, (metaWindow)=>{
             if (!metaWindow.win._needsAttention) {
               metaWindow.win.delete(global.get_current_time());
             }
@@ -515,11 +516,7 @@ AppThumbnailHoverMenu.prototype = {
     this.isFavapp = parent.isFavapp
     this.appList = parent.appList
 
-
-    // need to implement this class or cinnamon outputs a bunch of errors // TBD
-    this.actor.style_class = 'hide-arrow'
-
-    this.box.set_style_class_name('thumbnail-popup-content')
+    this.box.set_style_class_name('thumbnail-popup-content');
 
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -610,8 +607,8 @@ AppThumbnailHoverMenu.prototype = {
       this.box.remove_actor(item.actor)
       item.actor.destroy()
     }
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         if (this[key] && id) {
           this[key].disconnect(id)
         }
@@ -810,6 +807,14 @@ PopupMenuAppSwitcherItem.prototype = {
     }
   },
 
+  _refreshThumbnails(){
+    for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
+      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i].thumbnail) {
+        this.appThumbnails[i].thumbnail._refresh();
+      }
+    }
+  },
+
   addWindowThumbnails: function (windows) {
     if (windows.length > 0) {
       var children = this.appContainer.get_children()
@@ -882,8 +887,8 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   destroy(){
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         this[key].disconnect(id)
       })
     })
@@ -1049,12 +1054,12 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _onWindowDemandsAttention: function (display, window) {
+  _onWindowDemandsAttention: function (display, _window) {
     if (this._needsAttention) {
       return false
     }
     this._needsAttention = true
-    if (_.isEqual(this.metaWindow, window)) {
+    if (_.isEqual(this.metaWindow, _window)) {
       this.actor.add_style_class_name('thumbnail-alerts')
       return true
     }
@@ -1142,10 +1147,14 @@ WindowThumbnail.prototype = {
   _getThumbnail: function () {
     // Create our own thumbnail if it doesn't exist
     var thumbnail = null
-    var muffinWindow = this.metaWindow.get_compositor_private()
-    if (muffinWindow) {
-      var windowTexture = muffinWindow.get_texture()
+    if (this.sizeChangeId && this.muffinWindow) {
+      this.muffinWindow.disconnect(this.sizeChangeId);
+    }
+    this.muffinWindow = this.metaWindow.get_compositor_private()
+    if (this.muffinWindow) {
+      var windowTexture = this.muffinWindow.get_texture()
       let [width, height] = windowTexture.get_size()
+      this.sizeChangeId = this.muffinWindow.connect('size-changed', ()=>this._refresh());
       var scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height)
       thumbnail = new Clutter.Clone({
         source: windowTexture,
@@ -1171,7 +1180,7 @@ WindowThumbnail.prototype = {
 
   _onButtonRelease: function (actor, event) {
     var button = event.get_button();
-    if (button === 1 && actor == this.button) {
+    if (button === 1 && _.isEqual(actor, this.button)) {
       this.handleAfterClick()
     }
   },
@@ -1292,8 +1301,8 @@ WindowThumbnail.prototype = {
       /* Signal is invalid */
     }
     if (!skipSignalDisconnect) {
-      _.each(this.signals, (signal, key)=>{
-        _.each(signal, (id)=>{
+      each(this.signals, (signal, key)=>{
+        each(signal, (id)=>{
           if (this[key] && id) {
             this[key].disconnect(id)
           }

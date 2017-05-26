@@ -498,6 +498,9 @@ msgid ""
 " middle click."
 msgstr ""
 
+msgid "Pin apps when dragged to a new position"
+msgstr ""
+
 msgid "About..."
 msgstr ""
 

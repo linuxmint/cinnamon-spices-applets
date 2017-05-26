@@ -517,3 +517,6 @@ msgid ""
 " this to false will close the last focused window from the app group on"
 " middle click."
 msgstr "确定应用按钮上鼠标中键点击的行为。 将此设置为false将关闭中间点击应用程序组的最后一个焦点窗口。"
+
+msgid "Pin apps when dragged to a new position"
+msgstr "引脚应用时拖动到新位置"

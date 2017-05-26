@@ -580,3 +580,6 @@ msgstr ""
 "Détermine le comportement des clics de bouton du milieu de la souris sur les "
 "boutons de l'application. Si vous définissez cette option sur false, la "
 "dernière fenêtre ciblée du groupe d'applications sera clôturée."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin applications lorsqu'il est déplacé vers une nouvelle position"

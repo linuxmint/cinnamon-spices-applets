@@ -6,6 +6,7 @@ const Tweener = imports.ui.tweener
 const DND = imports.ui.dnd
 
 const _ = require('./lodash');
+const each = require('./each');
 const constants = require('./constants');
 
 // Creates a button with an icon and a label.
@@ -440,8 +441,8 @@ AppButton.prototype = {
 
   destroy: function () {
     this._applet.tracker.disconnect(this._trackerSignal)
-    _.each(this.signals, (signal, key)=>{
-      _.each(signal, (id)=>{
+    each(this.signals, (signal, key)=>{
+      each(signal, (id)=>{
         this[key].disconnect(id)
       })
     })

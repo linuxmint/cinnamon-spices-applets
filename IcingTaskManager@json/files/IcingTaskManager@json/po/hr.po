@@ -544,3 +544,6 @@ msgstr ""
 "Određuje ponašanje srednje klikova mišem gumb na gumbe aplikacije."
 " Postavljanje na false će se zatvoriti posljednje fokusirane prozor iz"
 " skupine aplikacija na srednji klik."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin aplikacije Kada odvukao na novu poziciju"
