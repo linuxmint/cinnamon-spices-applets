@@ -555,3 +555,6 @@ msgstr ""
 "Określa zachowanie środkowy przycisk myszy kliknięć przycisków aplikacji."
 " Ustawienie na false spowoduje zamknięcie ostatniego okna skupiony z grupy "
 "aplikacji na środkowym kliknięcia."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin aplikacje Kiedy przeciągnięty do nowej pozycji"

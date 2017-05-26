@@ -557,3 +557,6 @@ msgstr ""
 "Determina el comportamiento de los clics del botón central del ratón en los "
 "botones de la aplicación. Si establece este valor en false, se cerrará la "
 "última ventana del grupo de aplicaciones en el botón central."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin aplicaciones cuando se arrastran a una nueva posición"

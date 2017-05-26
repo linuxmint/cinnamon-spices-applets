@@ -65,6 +65,12 @@
     "description": "Arrange pinned apps",
     "tooltip": "Arrange pinned apps into a different order."
   },
+  "pinOnDrag": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Pin apps when dragged to a new position",
+    "tooltip": "Pin apps when dragged to a new position"
+  },
   "middle-click-action": {
     "type": "checkbox",
     "default": true,

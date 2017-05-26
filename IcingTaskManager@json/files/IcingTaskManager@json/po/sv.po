@@ -552,3 +552,6 @@ msgstr "Konfigurera..."
 
 msgid "Remove 'Icing Task Manager'"
 msgstr "Ta bort 'Icing Task Manager'"
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin program när dras till en ny position"

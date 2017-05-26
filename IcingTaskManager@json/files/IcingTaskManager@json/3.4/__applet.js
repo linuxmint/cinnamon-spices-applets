@@ -27,6 +27,7 @@ const Meta = imports.gi.Meta
 const SignalManager = imports.misc.signalManager;
 
 const _ = require('./lodash');
+const each = require('./each');
 const AppList = require('./appList');
 
 // Some functional programming tools
@@ -199,6 +200,7 @@ MyApplet.prototype = {
       {key: 'show-alerts', value: 'showAlerts', cb: null},
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
       {key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null},
+      {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
       {key: 'middle-click-action', value: 'middleClickAction', cb: null},
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey},
@@ -437,17 +439,17 @@ MyApplet.prototype = {
 
     var isVertical = this.metaWorkspaces[this.currentWs].appList.manager_container.height > this.metaWorkspaces[this.currentWs].appList.manager_container.width
     var axis = isVertical ? [y, 'y1'] : [x, 'x1']
-    for (var i in children) {
+    each(children, (child, i)=>{
       if (axis[0] > children[i].get_allocation_box()[axis[1]] + children[i].width / 2) {
         pos = i
       }
-    }
+    });
 
-    if (pos != this._dragPlaceholderPos) {
+    if (pos !== this._dragPlaceholderPos) {
       this._dragPlaceholderPos = pos
 
       // Don't allow positioning before or after self
-      if (windowPos != -1 && pos == windowPos) {
+      if (windowPos !== -1 && pos === windowPos) {
         if (this._dragPlaceholder) {
           this._dragPlaceholder.animateOutAndDestroy()
           this._animatingPlaceholdersCount++
@@ -532,7 +534,7 @@ MyApplet.prototype = {
           pos = i
         }
       }
-      if (pos != this._dragPlaceholderPos) {
+      if (pos !== this._dragPlaceholderPos) {
         favPos = pos
       }
     }
@@ -541,7 +543,7 @@ MyApplet.prototype = {
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function () {
       if (refFav !== -1) {
         this.pinnedAppsContr.moveFavoriteToPos(id, favPos)
-      } else {
+      } else if (this.pinOnDrag) {
         this.pinnedAppsContr._addFavorite({appId: id, app: app, pos: favPos})
       }
       return false
