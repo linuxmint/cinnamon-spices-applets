@@ -1054,12 +1054,12 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _onWindowDemandsAttention: function (display, window) {
+  _onWindowDemandsAttention: function (display, _window) {
     if (this._needsAttention) {
       return false
     }
     this._needsAttention = true
-    if (_.isEqual(this.metaWindow, window)) {
+    if (_.isEqual(this.metaWindow, _window)) {
       this.actor.add_style_class_name('thumbnail-alerts')
       return true
     }
@@ -1147,10 +1147,14 @@ WindowThumbnail.prototype = {
   _getThumbnail: function () {
     // Create our own thumbnail if it doesn't exist
     var thumbnail = null
-    var muffinWindow = this.metaWindow.get_compositor_private()
-    if (muffinWindow) {
-      var windowTexture = muffinWindow.get_texture()
+    if (this.sizeChangeId && this.muffinWindow) {
+      this.muffinWindow.disconnect(this.sizeChangeId);
+    }
+    this.muffinWindow = this.metaWindow.get_compositor_private()
+    if (this.muffinWindow) {
+      var windowTexture = this.muffinWindow.get_texture()
       let [width, height] = windowTexture.get_size()
+      this.sizeChangeId = this.muffinWindow.connect('size-changed', ()=>this._refresh());
       var scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height)
       thumbnail = new Clutter.Clone({
         source: windowTexture,
@@ -1292,6 +1296,9 @@ WindowThumbnail.prototype = {
       }
       if (this.windowFocusId) {
         this.metaWindow.disconnect(this.windowFocusId)
+      }
+      if (this.sizeChangeId) {
+        this.muffinWindow.disconnect(this.sizeChangeId);
       }
     } catch (e) {
       /* Signal is invalid */
