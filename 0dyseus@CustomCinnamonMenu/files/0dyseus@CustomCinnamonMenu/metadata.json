@@ -9,12 +9,13 @@
         "giwhub: Chinese localization.",
         "lestcape: Author of some advanced features used by this applet.",
         "nooulaif: Fuzzy search feature based on his Sane Menu applet.",
-        "Daniel Bruce: Some icons used by this menu are from www.entypo.com."
+        "Daniel Bruce: Some icons used by this menu are from www.entypo.com.",
+        "eson57: Swedish localization."
     ],
     "max-instances": -1,
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
     "name": "Custom Cinnamon Menu",
-    "version": "1.21",
+    "version": "1.22",
     "cinnamon-version": [
         "3.0",
         "3.2",
