@@ -10,11 +10,12 @@
     "contributors": [
         "Radek71: Czech localization.",
         "muzena: Croatian localization.",
-        "giwhub: Chinese localization."
+        "giwhub: Chinese localization.",
+        "eson57: Swedish localization."
     ],
     "max-instances": -1,
-    "description": "Allows enabling/disabling extensions (and other tasks) from a menu.",
+    "uuid": "0dyseus@ExtensionsManager",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "version": "1.06",
-    "uuid": "0dyseus@ExtensionsManager"
+    "version": "1.07",
+    "description": "Allows enabling/disabling extensions (and other tasks) from a menu."
 }
