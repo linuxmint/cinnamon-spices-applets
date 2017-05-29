@@ -6,17 +6,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
-"POT-Creation-Date: 2017-05-25 19:19+0800\n"
-"PO-Revision-Date: 2017-05-26 17:36+0800\n"
+"POT-Creation-Date: 2017-05-29 16:59+0800\n"
+"PO-Revision-Date: 2017-05-29 16:59+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
@@ -542,16 +542,6 @@ msgstr "配置文件已更改为%s"
 msgid "Configure..."
 msgstr "配置..."
 
-#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->description
-msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
-msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
-
 #. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
 msgid ""
 "Eric Gach: Author of Desk Changer gnome-shell extension. https://github.com/"
@@ -559,3 +549,21 @@ msgid ""
 msgstr ""
 "Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/desk-"
 "changer"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "eson57: Swedish localization."
+msgstr "eson57：瑞典语本地化。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "giwhub: Chinese localization."
+msgstr "giwhub：中文本地化。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
