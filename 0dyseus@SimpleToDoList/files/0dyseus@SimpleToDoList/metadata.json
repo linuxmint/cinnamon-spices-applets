@@ -1,0 +1,21 @@
+{
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.4"
+    ],
+    "name": "Simple ToDo List",
+    "contributors": [
+        "bsaleil: Author of the gnome-shell extension called Todo list.",
+        "Thomas Moreau: Author of the gnome-shell extension called Section Todo List.",
+        "eson57: Swedish localization",
+        "giwhub: Chinese localization"
+    ],
+    "max-instances": -1,
+    "description": "Simple applet to create ToDo lists.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "version": "1.00",
+    "uuid": "0dyseus@SimpleToDoList"
+}
