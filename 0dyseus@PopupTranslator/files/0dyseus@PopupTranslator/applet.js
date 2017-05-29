@@ -46,10 +46,10 @@ MyApplet.prototype = {
             Gtk.IconTheme.get_default().append_search_path(this.applet_dir + "/icons/");
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this._buildMenu();
 
             this.forceTranslation = false;
             this._isDestroyed = false;
+            this._buildMenuId = 0;
             this.key_1_id = null;
             this.key_forced_1_id = null;
             this.key_2_id = null;
@@ -59,6 +59,7 @@ MyApplet.prototype = {
             this.key_4_id = null;
             this.key_forced_4_id = null;
 
+            this._buildMenu();
             this._updateIconAndLabel();
             this._setAppletTooltip();
             this._expandAppletContextMenu();
