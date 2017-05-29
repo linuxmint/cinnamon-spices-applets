@@ -10,10 +10,11 @@
     "contributors": [
         "buzz: Bug fixes.",
         "muzena: Croatian localization.",
-        "giwhub: Chinese localization."
+        "giwhub: Chinese localization.",
+        "eson57: Swedish localization."
     ],
     "uuid": "0dyseus@SysmonitorByOrcus",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "version": "1.12",
+    "version": "1.13",
     "description": "Displays CPU, memory, swap, network usage and load in graphs."
 }
