@@ -14,7 +14,7 @@ Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale")
 function _(aStr) {
     let customTrans = Gettext.dgettext(AppletUUID, aStr);
 
-    if (customTrans !== aStr && customTrans !== "")
+    if (customTrans !== aStr && aStr !== "")
         return customTrans;
 
     return Gettext.gettext(aStr);
