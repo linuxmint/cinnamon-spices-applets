@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-27 22:27-0300\n"
-"PO-Revision-Date: 2017-05-27 22:27-0300\n"
+"POT-Creation-Date: 2017-05-29 16:48+0800\n"
+"PO-Revision-Date: 2017-05-29 16:48+0800\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../create_localized_help.py:63 ../../create_localized_help.py:162
@@ -934,26 +934,26 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "天"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #: __init__.js:80
 msgid "Seconds"
 msgstr "秒"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #: __init__.js:83
 msgid "Minutes"
 msgstr "分钟"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #: __init__.js:86
 msgid "Hours"
 msgstr "小时"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
 #: __init__.js:89
 msgid "Days"
 msgstr "天"
@@ -965,16 +965,16 @@ msgstr "天"
 msgid "Unable to load image from Base64 representation: %s"
 msgstr "无法从Base64表示中加载图像：%s"
 
-#: __init__.js:2456
+#: __init__.js:2457
 msgid "Check this applet help file for instructions."
 msgstr "检查此小程序帮助文件的说明。"
 
-#: __init__.js:2459 applet.js:721
+#: __init__.js:2460 applet.js:721
 msgid "Help"
 msgstr "帮助"
 
 #. Just in case.
-#: __init__.js:2460 applet.js:725
+#: __init__.js:2461 applet.js:725
 msgid "Open this applet help file."
 msgstr "打开此小程序的帮助文件。"
 
@@ -1138,14 +1138,9 @@ msgstr "使脚本文件可执行以便此小程序可以使用。"
 msgid "Script file is already executable."
 msgstr "脚本文件已经是可执行文件。"
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->description
-msgid "Create Cinnamon applets in seconds."
-msgstr "数秒内创建Cinnamon小程序。"
-
-#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
-msgid ""
-"Philipp Emanuel Weidmann: Author of the gnome-shell extension called Argos"
-msgstr "Philipp Emanuel Weidmann：名为Argos的gnome-shell扩展的作者"
+#. 0dyseus@ArgosForCinnamon->metadata.json->name
+msgid "Argos for Cinnamon"
+msgstr "Argos for Cinnamon"
 
 #. 0dyseus@ArgosForCinnamon->metadata.json->comments
 msgid ""
@@ -1153,115 +1148,38 @@ msgid ""
 "xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->name
-msgid "Argos for Cinnamon"
-msgstr "Argos for Cinnamon"
+#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
+msgid ""
+"Philipp Emanuel Weidmann: Author of the gnome-shell extension called Argos"
+msgstr "Philipp Emanuel Weidmann：名为Argos的gnome-shell扩展的作者"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
-msgid "Rotation interval time unit"
-msgstr "轮流间隔时间单位"
+#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
+msgid "giwhub: Chinese localization."
+msgstr "giwhub：中文本地化。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
-msgid "Animate menu"
-msgstr "动画按钮"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->tooltip
-msgid "Enables/Disables menu open/close animations."
-msgstr "启用/禁用菜单打开/关闭动画。"
+#. 0dyseus@ArgosForCinnamon->metadata.json->description
+msgid "Create Cinnamon applets in seconds."
+msgstr "数秒内创建Cinnamon小程序。"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_file_path->description
 msgid "Path to script"
 msgstr "脚本的路径"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
-msgid "Execution interval"
-msgstr "执行间隔"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
-msgid ""
-"Set the script execution interval. If set to 0 (zero), the timer will be "
-"disabled."
-msgstr "设置脚本执行间隔，如果设置为0（零），定时器将会被禁用。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
-msgid "custom"
-msgstr "自定义"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
-msgid "Keep just one sub menu open"
-msgstr "始终保持仅打开一个子菜单"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
-msgid ""
-"When enabled, the previously opened sub menu will be automatically closed."
-msgstr "启用后，之前打开的子菜单将会自动关闭。"
-
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->description
 msgid "Execution interval time unit"
 msgstr "执行间隔时间单位"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
-msgid "Applet settings"
-msgstr "小程序设置"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
-msgid "Icon"
-msgstr "图标"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "选择要在面板中显示的图标。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
-msgid "Default icon size"
-msgstr "桌面图标大小"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
-msgid ""
-"Set a default size in pixels for the icons inside this applet main menu. The "
-"size of the icon of a menu item can be overridden by setting the \"iconSize"
-"\" attribute on the menu item's respective line on the script."
-msgstr ""
-"以像素为单位设置此小程序主菜单中的图标的默认大小。 可以通过在脚本中的菜单条目"
-"的相应行设置“iconSize”属性来覆盖菜单条目的图标大小。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
-msgid "pixels"
-msgstr "像素"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->head1->description
 msgid "Script settings"
 msgstr "脚本设置"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->description
-msgid "Custom label"
-msgstr "自定义标签"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->tooltip
+msgid "Enables/Disables menu open/close animations."
+msgstr "启用/禁用菜单打开/关闭动画。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr "输入要在面板中显示的自定义文本。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
-msgid "Extra settings"
-msgstr "附加设置"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
-msgid "Keyboard shortcut to open and close the menu"
-msgstr "打开和关闭菜单的键盘快捷键"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
-msgid "Spacing for items inside the menu"
-msgstr "菜单内条目的空间"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
-msgid "ems"
-msgstr "ems"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
-msgid "Terminal emulator"
-msgstr "终端模拟器"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
+msgid "Animate menu"
+msgstr "动画按钮"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->tooltip
 msgid ""
@@ -1271,13 +1189,49 @@ msgstr ""
 "选择此小程序使用的终端模拟器。\n"
 "重要！！！终端模拟器必须支持 -e 参数。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
-msgid "Spacing for items inside the applet"
-msgstr "小程序内条目的空间"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
+msgid "Terminal emulator"
+msgstr "终端模拟器"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
-msgid "Rotation interval"
-msgstr "轮流间隔"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择要在面板中显示的图标。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr "图标"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
+msgid "custom"
+msgstr "自定义"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
+msgid ""
+"Set the script execution interval. If set to 0 (zero), the timer will be "
+"disabled."
+msgstr "设置脚本执行间隔，如果设置为0（零），定时器将会被禁用。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
+msgid "Execution interval"
+msgstr "执行间隔"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
+msgid ""
+"When enabled, the previously opened sub menu will be automatically closed."
+msgstr "启用后，之前打开的子菜单将会自动关闭。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
+msgid "Keep just one sub menu open"
+msgstr "始终保持仅打开一个子菜单"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
+msgid "Rotation interval time unit"
+msgstr "轮流间隔时间单位"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "小程序设置"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->tooltip
 msgid ""
@@ -1291,9 +1245,43 @@ msgstr ""
 "配给显示为小程序文本时，才使用该定时器。如果只有一行分配给小程序文本，则该计"
 "时器将被完全忽略。因此，无需设置为0（零）才能将此定时器禁用。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
-msgid "Show script name on applet"
-msgstr "在小程序上显示脚本名称"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
+msgid "Rotation interval"
+msgstr "轮流间隔"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
+msgid "pixels"
+msgstr "像素"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
+msgid ""
+"Set a default size in pixels for the icons inside this applet main menu. The "
+"size of the icon of a menu item can be overridden by setting the \"iconSize"
+"\" attribute on the menu item's respective line on the script."
+msgstr ""
+"以像素为单位设置此小程序主菜单中的图标的默认大小。 可以通过在脚本中的菜单条目"
+"的相应行设置“iconSize”属性来覆盖菜单条目的图标大小。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
+msgid "Default icon size"
+msgstr "桌面图标大小"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "输入要在面板中显示的自定义文本。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "自定义标签"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
+msgid "Extra settings"
+msgstr "附加设置"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->tooltip
 msgid ""
@@ -1304,6 +1292,22 @@ msgid ""
 msgstr ""
 "当脚本内部没有分配给小程序显示的行时，将显示脚本名称。 禁用此选项后，脚本名称"
 "将不会显示在此小程序中，从而使我们有可能为该小程序使用自定义文本。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
+msgid "Show script name on applet"
+msgstr "在小程序上显示脚本名称"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
+msgid "Spacing for items inside the applet"
+msgstr "小程序内条目的空间"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
+msgid "ems"
+msgstr "ems"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
+msgid "Spacing for items inside the menu"
+msgstr "菜单内条目的空间"
 
 #~ msgid ""
 #~ "**Optimized for minimum resource consumption:** Even with multiple "

@@ -4,6 +4,29 @@
 
 ***
 
+- **Date:** Mon, 29 May 2017 07:18:07 -0300
+- **Commit:** [3ebb668](https://github.com/Odyseus/CinnamonTools/commit/3ebb668)
+- **Author:** Odyseus
+
+```
+Argos for Cinnamon applet
+- Added missing icon.png and screenshot.png files used by the Spices website.
+
+```
+
+***
+
+- **Date:** Mon, 29 May 2017 17:06:41 +0800
+- **Commit:** [8e9e2fb](https://github.com/Odyseus/CinnamonTools/commit/8e9e2fb)
+- **Author:** giwhub
+
+```
+Update zh_CN.po
+
+```
+
+***
+
 - **Date:** Mon, 29 May 2017 02:45:50 -0300
 - **Commit:** [cdbd7c7](https://github.com/Odyseus/CinnamonTools/commit/cdbd7c7)
 - **Author:** Odyseus
