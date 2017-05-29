@@ -129,7 +129,12 @@ WindowPreview.prototype = {
         if (this._applet._tooltipShowing)
             this.show();
         else if (!this._showTimer)
-            this._showTimer = Mainloop.timeout_add(300, Lang.bind(this, this._onTimerComplete));
+            this._showTimer = Mainloop.timeout_add(300,
+                // Condition needed for retro-compatibility.
+                // Mark for deletion on EOL.
+                Lang.bind(this, (typeof this._onShowTimerComplete === "function" ?
+                    this._onShowTimerComplete :
+                    this._onTimerComplete)));
 
         this.mousePosition = event.get_coords();
     },
@@ -561,7 +566,7 @@ AppMenuButton.prototype = {
             Main.activateWindow(this.metaWindow, global.get_current_time());
             this.actor.add_style_pseudo_class('focus');
         } else if (!fromDrag) {
-            this.metaWindow.minimize(global.get_current_time());
+            this.metaWindow.minimize();
             this.actor.remove_style_pseudo_class('focus');
         }
     },
@@ -836,9 +841,6 @@ AppMenuButtonRightClickMenu.prototype = {
                 this.addMenuItem(item);
 
                 let curr_index = mw.get_workspace().index();
-                let handleActivateEvent = function(aIndex) {
-                    mw.change_workspace(global.screen.get_workspace_by_index(aIndex));
-                };
                 for (let i = 0; i < length; i++) {
                     // Make the index a local variable to pass to function
                     let j = i;
@@ -848,7 +850,9 @@ AppMenuButtonRightClickMenu.prototype = {
                     if (i == curr_index)
                         ws.setSensitive(false);
 
-                    ws.connect('activate', handleActivateEvent, j);
+                    ws.connect('activate', function() { // jshint ignore:line
+                        mw.change_workspace(global.screen.get_workspace_by_index(j));
+                    });
                     item.menu.addMenuItem(ws);
                 }
 
