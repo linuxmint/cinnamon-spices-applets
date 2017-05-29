@@ -1,261 +1,261 @@
-# This is a template file for translating the Cinnamon applet called Custom Cinnamon Menu.
+# Swedish translation for 0dyseus@CustomCinnamonMenu.
 # Copyright (C) 2016
 # This file is distributed under the same license as the Custom Cinnamon Menu applet.
-# Odyseus <EMAIL@ADDRESS>, 2016.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.20\n"
+"Project-Id-Version: 0dyseus@CustomCinnamonMenu 1.20\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-13 20:35-0300\n"
-"PO-Revision-Date: 2017-05-15 10:23+0800\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2017-05-14 21:47+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #. 3.2->settings-schema.json->page_menu->title
 #: applet.js:106
 msgid "Menu"
-msgstr "菜单"
+msgstr "Meny"
 
 #: applet.js:196 applet.js:571
 #, javascript-format
 msgid "Remove '%s'"
-msgstr "移除'%s'"
+msgstr "Ta bort \"%s\""
 
 #: applet.js:1841
 msgid "This file is no longer available"
-msgstr "此文件不再可用"
+msgstr "Filen är inte längre tillgänglig"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:1901
 msgid "No recent documents"
-msgstr "没有最近的文档"
+msgstr "Inga tidigare dokument"
 
 #: applet.js:2031
 msgid "No recent applications"
-msgstr "没有最近的应用程序"
+msgstr "Inga tidigare program"
 
 #: applet.js:2122
 msgid "Favorites"
-msgstr "收藏夹"
+msgstr "Favoriter"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2544 applet.js:3241
 msgid "Lock screen"
-msgstr "锁定屏幕"
+msgstr "Lås skärmen"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2547 applet.js:3240
 msgid "Lock the screen"
-msgstr "锁定屏幕"
+msgstr "Lås skärmen"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2581 applet.js:3272
 msgid "Logout"
-msgstr "注销"
+msgstr "Logga ut"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2584 applet.js:3271
 msgid "Leave the session"
-msgstr "离开会话"
+msgstr "Avsluta sessionen"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2605 applet.js:3290
 msgid "Quit"
-msgstr "退出"
+msgstr "Stäng av"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2608 applet.js:3289
 msgid "Shutdown the computer"
-msgstr "关闭计算机"
+msgstr "Stäng av datorn"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:2918
 msgid "Type to search..."
-msgstr "键入以搜索..."
+msgstr "Skriv för att söka..."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: applet.js:3308
 msgid "Open the menu editor"
-msgstr "打开菜单编辑器"
+msgstr "Öppna menyredigeraren"
 
 #: applet.js:3313
 msgid "Help"
-msgstr "帮助"
+msgstr "Hjälp"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:261
 msgid "Please provide your password to uninstall this application"
-msgstr "请提供您的密码以卸载此应用程序"
+msgstr "Ange ditt lösenord för att avinstallera det här programmet"
 
 #: __init__.js:546
 msgid "Add to panel"
-msgstr "添加到面板"
+msgstr "Lägg till i panelen"
 
 #: __init__.js:549
 msgid "Add this application to the Panel launchers applet."
-msgstr "添加此应用程序到面板启动器小程序。"
+msgstr "Lägg till det här programmet i panelen."
 
 #: __init__.js:557
 msgid "Add to desktop"
-msgstr "添加到桌面"
+msgstr "Lägg till på skrivbordet"
 
 #: __init__.js:560
 msgid "Add this application to the Desktop."
-msgstr "添加此应用程序到桌面。"
+msgstr "Lägg till det här programmet på skrivbordet."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:569
 msgid "Remove from favorites"
-msgstr "从收藏夹移除"
+msgstr "Ta bort från Favoriter"
 
 #: __init__.js:572
 msgid "Remove application from your favorites."
-msgstr "从您的收藏夹移除应用程序。"
+msgstr "Ta bort programmet från Favoriter."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:578
 msgid "Add to favorites"
-msgstr "添加到收藏夹"
+msgstr "Lägg till i Favoriter"
 
 #: __init__.js:581
 msgid "Add application to your favorites."
-msgstr "添加应用程序到您的收藏夹。"
+msgstr "Lägg till programmet i Favoriter."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:591
 msgid "Uninstall"
-msgstr "卸载"
+msgstr "Avinstallera"
 
 #: __init__.js:594
 msgid "Uninstall application from your system."
-msgstr "从您的系统卸载应用程序。"
+msgstr "Avinstallera programmet från systemet."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:603
 msgid "Run with NVIDIA GPU"
-msgstr "使用NVIDIA GPU运行"
+msgstr "Kör med NVIDIA GPU"
 
 #: __init__.js:606
 msgid "Run application through optirun command (Bumblebee)."
-msgstr "通过optirun命令运行应用程序(Bumblebee)。"
+msgstr "Kör programmet genom optirun-kommando (Bumblebee)."
 
 #: __init__.js:612
 msgid "Run as root"
-msgstr "以root身份运行"
+msgstr "Kör som root"
 
 #: __init__.js:615
 msgid "Run application as root."
-msgstr "以root身份运行应用程序。"
+msgstr "Kör programmet som root"
 
 #: __init__.js:621
 msgid "Edit .desktop file"
-msgstr "编辑.desktop文件"
+msgstr "Redigera .desktop-filen"
 
 #: __init__.js:624
 msgid "Edit this application .desktop file with a text editor."
-msgstr "使用文本编辑器编辑此应用程序.desktop文件。"
+msgstr "Redigera det här programmets .desktop-fil med en textredigerare"
 
 #: __init__.js:630
 msgid "Open .desktop file folder"
-msgstr "打开.desktop文件文件夹"
+msgstr "Öppna .desktop-filens mapp"
 
 #: __init__.js:633
 msgid "Open the folder containg this application .desktop file."
-msgstr "打开包含此应用程序.desktop文件的文件夹。"
+msgstr "Öppna mappen som innehåller det här programmets .desktop-fil."
 
 #: __init__.js:640
 msgid "Run from terminal"
-msgstr "从终端运行"
+msgstr "Kör från terminal"
 
 #: __init__.js:643
 msgid "Run application from a terminal."
-msgstr "从终端运行应用程序。"
+msgstr "Kör programmet från en terminal."
 
 #: __init__.js:650
 msgid "Run from terminal as root"
-msgstr "以root身份从终端运行"
+msgstr "Kör från terminal som root"
 
 #: __init__.js:653
 msgid "Run application from a terminal as root."
-msgstr "以root身份从终端运行应用程序。"
+msgstr "Kör programmet från en terminal som root."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1149
 msgid "Open with"
-msgstr "打开方式"
+msgstr "Öppna med"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1204
 msgid "Other application..."
-msgstr "其他应用程序..."
+msgstr "Annat program..."
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1299 __init__.js:1350
 msgid "Clear list"
-msgstr "清除列表"
+msgstr "Rensa listan"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1431
 msgid "All Applications"
-msgstr "所有应用程序"
+msgstr "Alla program"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1480
 msgid "Places"
-msgstr "位置"
+msgstr "Platser"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1522
 msgid "Recent Files"
-msgstr "最近的文件"
+msgstr "Tidigare filer"
 
 #: __init__.js:1897
 msgid "Recent Applications"
-msgstr "最近的应用程序"
+msgstr "Tidigare program"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
 #: __init__.js:1965
 msgid "Account details"
-msgstr "帐户详情"
+msgstr "Kontodetaljer"
 
 #: ../../create_localized_help.py:63
 msgid "Keyboard navigation"
-msgstr "键盘导航"
+msgstr "Tangentbordsnavigering"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:65
 msgid "Note:"
-msgstr "注意："
+msgstr "Notis:"
 
 #: ../../create_localized_help.py:65
 msgid ""
@@ -263,45 +263,51 @@ msgid ""
 "menu. There are just a couple of differences that I was forced to add to my "
 "menu to make some of its features to work."
 msgstr ""
-"此菜单上的所有键盘快捷键几乎与原来的菜单相同。只是有些不同，我只好将其添加到我"
-"的菜单以使其中一些功能能够工作。"
+"Nästan alla tangentbordsgenvägar i den här menyn är samma som i "
+"originalmenyn. Det är dock några skillnader som jag var tvungen att lägga "
+"till i min meny, för att vissa funktioner skall fungera."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:68
 msgid "[[Left Arrow]] and [[Right Arrow]] keys:"
-msgstr "[[Left Arrow]]和[[Right Arrow]]键："
+msgstr "[[Vänsterpil]] och [[Högerpil]]:"
 
 #: ../../create_localized_help.py:70
 msgid ""
 "Cycles through the favorites box, applications box and categories box if the "
 "focus is in one of these boxes."
 msgstr ""
-"如果焦点位于收藏夹框、应用程序框和类别框其中一个，在它们之间循环切换。"
+"Bläddra genom Favoriter, Program och Kategorier, om ett av dessa fält har "
+"fokus."
 
 #: ../../create_localized_help.py:72
 msgid ""
 "If the focus is on the custom launchers box, these keys will cycle through "
 "this box buttons."
-msgstr "如果焦点位于自定义启动器框上，这些键将在此框按钮循环切换。"
+msgstr ""
+"Om fokus är på fältet för anpassade startare, bläddrar dessa tangenter bland "
+"de knapparna."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:74
 msgid "[[Tab]] key:"
-msgstr "[[Tab]]键："
+msgstr "[[Tab]]:"
 
 #: ../../create_localized_help.py:77
 msgid ""
 "If the favorites box, applications box or categories box are currently "
 "focused, the [[Tab]] key will switch the focus to the custom launchers box."
 msgstr ""
-"如果收藏夹框、应用程序框或类别框当前被聚焦，[[Tab]]键将会把焦点切换到自定义启"
-"动器框。"
+"Om favoritfältet eller kategorifältet är fokuserat, växlar du till fältet "
+"för anpassade startare med tabulatortangenten [[Tab]]."
 
 #: ../../create_localized_help.py:79 ../../create_localized_help.py:87
 msgid ""
 "If the focus is on the custom launchers box, the focus will go back to the "
 "categories box."
-msgstr "如果焦点位于自定义启动器框上，焦点将返回到类别框。"
+msgstr ""
+"Om fokus är på fältet för anpassade startare, kommer fokus att flyttas "
+"tillbaka till kategorifältet"
 
 #: ../../create_localized_help.py:82
 msgid ""
@@ -309,13 +315,14 @@ msgid ""
 "[[Ctrl]]/[[Shift]] + [[Tab]] key are pressed, it will cycle through the "
 "favorites box, applications box and categories box."
 msgstr ""
-"如果自定义启动器框不是菜单的一部分，单击[[Tab]]键或按[[Ctrl]]/[[Shift]] + "
-"[[Tab]]键将会在收藏夹框、应用程序框和类别框循环切换。"
+"Om fältet för anpassade startare inte finns med på menyn och [[Tab]] ensamt "
+"eller [[Ctrl]]/[[Shift]] + [[Tab]] trycks ner, kan du bläddra genom "
+"favoritfältet, programfältet och kategorifältet."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:84
 msgid "[[Up Arrow]] and [[Down Arrow]] keys:"
-msgstr "[[Up Arrow]]和[[Down Arrow]]键："
+msgstr "[[Uppåtpil]] och [[Neråtpil]]:"
 
 #: ../../create_localized_help.py:85
 msgid ""
@@ -323,8 +330,8 @@ msgid ""
 "focused, these keys will cycle through the items in the currently "
 "highlighted box."
 msgstr ""
-"如果收藏夹框、应用程序框或类别框当前被聚焦，这些键将循环切换到当前高亮的框中的"
-"条目。"
+"Om favoritfältet, programfältet eller kategorifältet är fokuserat, bläddrar "
+"dessa tangenter genom objekten i respektive fält"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:89
@@ -332,8 +339,8 @@ msgid ""
 "[[Page Up]] and [[Page Down]] keys: Jumps to the first and last item of the "
 "currently selected box. This doesn't affect the custom launchers."
 msgstr ""
-"[[Page Up]]和[[Page Down]]键：跳转到当前选中框的第一个和最后一个条目。这不"
-"会影响自定义启动器。"
+"[[Page Up]] och [[Page Down]]: Hoppar till första respektive sista objektet "
+"i aktuellt menyfält. Detta gäller inte anpassade startare."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:91
@@ -341,12 +348,13 @@ msgid ""
 "[[Menu]] or [[Alt]] + [[Enter]] keys: Opens and closes the context menu (if "
 "any) of the currently highlighted item."
 msgstr ""
-"[[Menu]]或[[Alt]] + [[Enter]]键：打开并关闭当前高亮条目的右键菜单（如果有）。"
+"[[Meny]] eller [[Alt]] + [[Enter]]: Öppnar och stänger kontextmenyn (om den "
+"finns) för markerat objekt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:93
 msgid "[[Enter]] key: Executes the currently highlighted item."
-msgstr "[[Enter]]键：执行当前高亮的条目。"
+msgstr "[[Enter]]: Startar det markerade objektet."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:95
@@ -355,15 +363,16 @@ msgid ""
 "close the context menu instead and a second tap of this key will close the "
 "main menu."
 msgstr ""
-"[[Escape]]键：关闭主菜单。如果打开了一个右键菜单，它将会关闭右键菜单，再次"
-"点击此键将会关闭主菜单。"
+"[[Escape]]: Stänger huvudmenyn. Om en kontextmeny (högerklick) är öppen, "
+"stängs kontextmenyn istället och ett andra knapptryck stänger huvudmenyn."
 
 #: ../../create_localized_help.py:98
 msgid ""
 "[[Shift]] + [[Enter]]: Executes the application as root. This doesn't affect "
 "the custom launchers."
 msgstr ""
-"[[Shift]] + [[Enter]]：以root身份执行应用程序。这不会影响自定义启动器。"
+"[[Shift]] + [[Enter]]: Startar programmet som root. Detta gäller inte "
+"anpassade startare."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:100
@@ -371,7 +380,8 @@ msgid ""
 "[[Ctrl]] + [[Enter]]: Open a terminal and run application from there. This "
 "doesn't affect the custom launchers."
 msgstr ""
-"[[Ctrl]] + [[Enter]]：打开终端并从中运行应用程序。这不会影响自定义启动器。"
+"[[Ctrl]] + [[Enter]]: Öppnar ett terminalfönster och kör programmet "
+"därifrån. Detta gäller inte anpassade startare."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:102
@@ -380,29 +390,34 @@ msgid ""
 "there, but the application is executed as root. This doesn't affect the "
 "custom launchers."
 msgstr ""
-"[[Ctrl]] + [[Shift]] + [[Enter]]：打开终端并从中运行应用程序，但应用程序会以"
-"root用户身份执行。这不会影响自定义启动器。"
+"[[Ctrl]] + [[Shift]] + [[Enter]]: Öppnar ett terminalfönster och kör "
+"programmet därifrån, men programmet körs som root. Detta gäller inte "
+"anpassade startare."
 
 #: ../../create_localized_help.py:105
 msgid "Applications left click extra actions"
-msgstr "左键点击应用程序附加动作"
+msgstr "Extra åtgärder vid klick på program"
 
 #: ../../create_localized_help.py:106
 msgid ""
 "When left clicking an application on the menu, certain key modifiers can be "
 "pressed to execute an application in a special way."
-msgstr "当左键点击菜单上的应用程序时，可以用特定方式按某些修饰键执行应用程序。"
+msgstr ""
+"Vid vänsterklick på ett program i menyn, kan vissa modifieringstangenter "
+"hållas ner för att starta programmet på ett speciellt sätt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:108
 msgid "[[Shift]] + **Left click**: Executes application as root."
-msgstr "[[Shift]] + **左键单击**：以root身份执行应用程序。"
+msgstr "[[Shift]] + **Vänsterklick**: Startar programmet som root."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:110
 msgid ""
 "[[Ctrl]] + **Left click**: Open a terminal and run application from there."
-msgstr "[[Ctrl]] + **左键单击**：打开终端并从中运行应用程序。"
+msgstr ""
+"[[Ctrl]] + **Vänsterklick**: Öppnar ett terminalfönster och kör programmet "
+"därifrån."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:112
@@ -410,12 +425,12 @@ msgid ""
 "[[Ctrl]] + [[Shift]] + **Left click**: Open a terminal and run application "
 "from there, but the application is executed as root."
 msgstr ""
-"[[Ctrl]] + [[Shift]] + **左键单击**：打开终端并从中运行应用程序，但应用程序会"
-"以root用户身份执行。"
+"[[Ctrl]] + [[Shift]] + **Vänsterklick**: Öppnar ett terminalfönster och kör "
+"programmet därifrån, men programmet körs som root."
 
 #: ../../create_localized_help.py:114
 msgid "About \"Run from terminal\" options"
-msgstr "关于“从终端运行”选项"
+msgstr "Om alternativet \"Kör från terminal\""
 
 #: ../../create_localized_help.py:115
 msgid ""
@@ -427,10 +442,13 @@ msgid ""
 "found on the applications context menu and can be hidden/shown from this "
 "applet settings window."
 msgstr ""
-"这些选项用于调试目的（例如，打开/关闭程序以检测可能出现的错误后查看控制台输"
-"出）。不用打开一个终端来启动一个可能不知道其命令的程序，可以直接从菜单中进"
-"行，只需一个步骤。可以从应用程序右键菜单上找到菜单上列出的从终端运行应用程序"
-"的选项，并可以从此小程序设置窗口中隐藏/显示。"
+"Dessa alternativ är avsedda för felsökning (t.ex för att identifiera möjliga "
+"fel via konsollutdata efter att ett program öppnas/stängs). Istället för att "
+"öppna ett terminalfönster och starta ett program med ett kommando som man "
+"kanske inte ens känner till, kan man göra det direkt från menyn i ett enda "
+"steg. Alternativ för att starta ett program från terminal kan hittas i "
+"programmets kontextmeny (högerklick), vilket kan döljas/visas från "
+"panelprogrammets inställningar."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:118
@@ -442,14 +460,16 @@ msgid ""
 "**gnome-terminal**, **xterm** and **terminator**. Additional arguments could "
 "be passed to the terminal emulator, but it's not supported by me."
 msgstr ""
-"默认情况下，这些选项将使用系统的默认终端仿真器（Debian系发行版上是**x-"
-"terminal-emulator**）。只要所说的终端仿真器支持**-e**参数，就可以在该小程序的"
-"设置窗口中指定任何其他终端仿真器。我用**gnome-terminal**、**xterm**和"
-"**terminator**进行了测试。额外的参数可以传递给终端仿真器，但我不会支持。"
+"Som standard kommer dessa alternativ att använda systemets standardterminal "
+"(** x-terminal-emulator ** i Debian-baserade distributioner). Annan "
+"terminalemulator kan anges i inställningarna för detta panelprogram, så "
+"länge som nämnda emulator har stöd för argumentet **-e**. Jag gjorde mina "
+"tester med ** gnome-terminal **, ** xterm ** och ** terminator **. "
+"Ytterligare argument kan användas i terminalen, men det stöds inte av mig."
 
 #: ../../create_localized_help.py:120
 msgid "Favorites handling"
-msgstr "收藏夹处理"
+msgstr "Favorithantering"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:122
@@ -458,15 +478,18 @@ msgid ""
 "the context menu for applications and by dragging and dropping applications "
 "to/from the favorites box."
 msgstr ""
-"如果“收藏夹”框**已显示**，则可以从应用程序的右键菜单添加/删除收藏，也可"
-"以将应用程序拖进/出收藏夹框。"
+"Om favoritfältet ** visas **, kan favoriter läggas till/tas bort från "
+"kontextmenyn för program och genom att dra och släppa applikationer till/"
+"från favoritfältet."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:125
 msgid ""
 "**Note:** To remove a favorite, drag a favorite outside the favorites box "
 "into any part of the menu."
-msgstr "**注意:**要删除收藏夹，请将收藏拖动到收藏夹外部的菜单的任意部分。"
+msgstr ""
+"**Notis:** För att ta bort en favorit kan du dra den ut från favoritfältet "
+"och släppa den var som helst i menyn."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:127
@@ -478,38 +501,42 @@ msgid ""
 "removed. If what you drag into the favorites category is a non bookmarked "
 "application, then that application will be added to the favorites."
 msgstr ""
-"如果收藏夹框**隐藏**并已启用了收藏夹类别，则可以从应用程序的右键菜单中添"
-"加/删除收藏，并将应用程序拖放到收藏夹类别。很简单，如果将收藏拖到收藏夹类"
-"别，收藏将会被删除。如果您拖到收藏夹类别不是已加为书签的应用程序，那么该应用"
-"程序将会被添加到收藏夹。"
+"Om favoritfältet är ** doldt ** och kategorin Favoriter är aktiverad, kan "
+"favoriter läggas till/tas bort via kontextmenyn för program och genom att "
+"dra och släppa program till/från favoritfältet. Det är enkelt, om en favorit "
+"dras in i kategorin Favoriter, tas den bort från favoritfältet. Om det du "
+"drar till kategorin Favoriter är ett icke bokmärkt program, kommer "
+"programmet att läggas till i Favoriter."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:129
 msgid ""
 "**Note:** The favorites category will update its content after changing to "
 "another category and going back to the favorites category."
-msgstr "**注意:**收藏夹类别将在更改为其他类别和返回到收藏夹类别后更新其内容。"
+msgstr ""
+"**Notis:** Innehållet i favoritkategorin uppdateras genom att växla till en "
+"annan kategori och tillbaka favoritkategorin igen."
 
 #: ../../create_localized_help.py:131
 msgid "Troubleshooting/extra information"
-msgstr "故障排除/附加信息"
+msgstr "Felsöknings-/Extra information"
 
 #: ../../create_localized_help.py:132
 msgid "Run from terminal."
-msgstr "从终端运行。"
+msgstr "Kör från terminal."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:134
 msgid "Debian based distributions:"
-msgstr "Debian系发行版："
+msgstr "Debian-baserade distributioner:"
 
 #: ../../create_localized_help.py:138
 msgid "Type in the number of the selection and hit enter."
-msgstr "输入选择的编号，然后按Enter键。"
+msgstr "Skriv det valda numret och tryck Enter."
 
 #: ../../create_localized_help.py:140
 msgid "For other distributions:"
-msgstr "其他发行版："
+msgstr "För andra distributioner:"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:143
@@ -518,8 +545,9 @@ msgid ""
 "sh**. ***Do not remove, rename or edit this file***. Otherwise, all of the "
 "*Run from terminal* options will break."
 msgstr ""
-"该小程序目录中有一个名为**run_from_terminal.sh**的文件。***请勿删除，重命名或"
-"编辑此文件***。否则，所有*从终端运行*的选项都会损坏。"
+"Det finns en fil i det här programmets installationsmapp, kallad "
+"**run_from_terminal.sh**. ***Ta inte bort, döp om eller redigera den här "
+"filen***. Då kan alla *Kör från terminal*, sluta fungera."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:145
@@ -528,51 +556,59 @@ msgid ""
 "several symbolic icons (most of them are from the Faenza icon theme) and "
 "each icon can be used directly by name (on a custom launcher, for example)."
 msgstr ""
-"该小程序目录中有一个名为**icons**的文件夹。它包含一些符号图标（大多数来自"
-"Faenza图标主题），每个图标可以直接使用名称（例如在自定义启动器上）。"
+"Det finns en mapp som heter ** icons ** i detta programs installationsmapp. "
+"Den innehåller flera symboliska ikoner (de flesta av dem är från ikontemat "
+"Faenza) och varje ikon kan användas direkt med enbart namn (på en anpassad "
+"startare t.ex.)."
 
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
 #: ../../create_localized_help.py:172 ../../create_localized_help.py:241
 msgid "language-name"
-msgstr "简体中文"
+msgstr "Svenska"
 
 #: ../../create_localized_help.py:244
 msgid "Choose language"
-msgstr "选择语言"
+msgstr "Välj språk"
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
 #: ../../create_localized_help.py:245 ../../create_localized_help.py:252
 #, python-format
 msgid "Help for %s"
-msgstr "%s的帮助"
+msgstr "Hjälp för %s"
 
 #: ../../create_localized_help.py:253
 msgid "IMPORTANT!!!"
-msgstr "重要！！！"
+msgstr "VIKTIGT!!!"
 
 #: ../../create_localized_help.py:254
 msgid ""
 "Never delete any of the files found inside this xlet folder. It might break "
 "this xlet functionality."
-msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+msgstr ""
+"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
+"programmets funktioner."
 
 #: ../../create_localized_help.py:255
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked next."
-msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan göras i denna xlets "
+"kodförråd, länkat nedan."
 
 #: ../../create_localized_help.py:261
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
-msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+msgstr "Applets/Desklets/Extensions (xlets) översättning"
 
 #: ../../create_localized_help.py:262
 msgid ""
 "If this xlet was installed from Cinnamon Settings, all of this xlet's "
 "localizations were automatically installed."
-msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+msgstr ""
+"Om denna xlet installerades från Cinnamons inställningar, installerades "
+"också alla översättningar automatiskt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:264
@@ -581,14 +617,17 @@ msgid ""
 "localizations can be installed by executing the script called "
 "**localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
+"kan översättningar installeras genom att köra skriptet **localizations.sh** "
+"från en terminal öppnad i programmappen."
 
 #: ../../create_localized_help.py:265
 msgid ""
 "If this xlet has no locale available for your language, you could create it "
 "by following the following instructions."
-msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+msgstr ""
+"Om ditt språk saknas i denna xlet, kan du översätta den genom följande "
+"instruktioner."
 
 #. 3.2->settings-schema.json->pref_command_7_description->description
 #. 3.2->settings-schema.json->pref_command_4_description->description
@@ -611,7 +650,7 @@ msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说�
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_5_description->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_1_description->description
 msgid "Description:"
-msgstr "描述："
+msgstr "Beskrivning:"
 
 #. 3.2->settings-schema.json->pref_command_9_label->description
 #. 3.2->settings-schema.json->pref_command_1_label->description
@@ -634,22 +673,22 @@ msgstr "描述："
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_8_label->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_7_label->description
 msgid "Label:"
-msgstr "标签："
+msgstr "Text:"
 
 #. 3.2->settings-schema.json->pref_custom_label_for_applet->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_label_for_applet->tooltip
 msgid "Enter custom text to show in the panel."
-msgstr "输入要显示在面板中的自定义文本。"
+msgstr "Ange anpassad text att visas i panelen"
 
 #. 3.2->settings-schema.json->pref_custom_label_for_applet->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_label_for_applet->description
 msgid "Custom label"
-msgstr "自定义标签"
+msgstr "Anpassad text"
 
 #. 3.2->settings-schema.json->pref_info_box_description_font_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_info_box_description_font_size->description
 msgid "Applications info box description font size:"
-msgstr "应用程序信息框说明字体大小："
+msgstr "Teckenstorlek i programinfofältet:"
 
 #. 3.2->settings-schema.json->pref_info_box_description_font_size->units
 #. 3.2->settings-schema.json->pref_max_width_for_buttons->units
@@ -663,12 +702,12 @@ msgstr "ems"
 #. 3.2->settings-schema.json->pref_show_icons_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_icons_on_context->description
 msgid "Show icons on context menu"
-msgstr "在右键菜单显示图标"
+msgstr "Visa ikoner i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_max_fav_icon_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_fav_icon_size->description
 msgid "Favorites icon size:"
-msgstr "收藏夹图标大小："
+msgstr "Ikonstorlek för favoriter:"
 
 #. 3.2->settings-schema.json->pref_max_fav_icon_size->units
 #. 3.2->settings-schema.json->pref_categories_box_padding_top->units
@@ -721,12 +760,12 @@ msgstr "收藏夹图标大小："
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_command_box_padding_right->units
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_box_padding_left->units
 msgid "pixels"
-msgstr "像素"
+msgstr "pixlar"
 
 #. 3.2->settings-schema.json->pref_overlay_key->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_overlay_key->description
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "打开和关闭菜单的键盘快捷键"
+msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 
 #. 3.2->settings-schema.json->pref_categories_box_padding_top->description
 #. 3.2->settings-schema.json->pref_search_box_padding_top->description
@@ -737,7 +776,7 @@ msgstr "打开和关闭菜单的键盘快捷键"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_categories_box_padding_top->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_box_padding_top->description
 msgid "Box top padding:"
-msgstr "框顶部边距："
+msgstr "Fältets överkantsavstånd:"
 
 #. 3.2->settings-schema.json->pref_info_box_padding_left->description
 #. 3.2->settings-schema.json->pref_search_box_padding_left->description
@@ -750,7 +789,7 @@ msgstr "框顶部边距："
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_entry_padding_left->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_box_padding_left->description
 msgid "Box left padding:"
-msgstr "框左侧边距："
+msgstr "Fältets vänsterkantsavstånd:"
 
 #. 3.2->settings-schema.json->pref_command_1_command->description
 #. 3.2->settings-schema.json->pref_command_4_command->description
@@ -773,12 +812,12 @@ msgstr "框左侧边距："
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_3_command->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_5_command->description
 msgid "*Command or path to file:"
-msgstr "*命令或文件路径："
+msgstr "*Kommando eller sökväg till fil:"
 
 #. 3.2->settings-schema.json->pref_hide_applications_list_scrollbar->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_hide_applications_list_scrollbar->description
 msgid "Hide applications list scrollbar"
-msgstr "隐藏应用程序列表滚动条"
+msgstr "Dölj programlistans skrollfält"
 
 #. 3.2->settings-schema.json->pref_categories_box_padding_bottom->description
 #. 3.2->settings-schema.json->pref_custom_command_box_padding_bottom->description
@@ -789,17 +828,17 @@ msgstr "隐藏应用程序列表滚动条"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_box_padding_bottom->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_categories_box_padding_bottom->description
 msgid "Box bottom padding:"
-msgstr "框底部边距："
+msgstr "Fältets underkantsavstånd:"
 
 #. 3.2->settings-schema.json->pref_display_category_icons->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_category_icons->tooltip
 msgid "Choose whether or not to show icons on categories."
-msgstr "选择是否显示类别图标。"
+msgstr "Välj om kategoriikoner skall visas."
 
 #. 3.2->settings-schema.json->pref_display_category_icons->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_category_icons->description
 msgid "Show category icons"
-msgstr "显示类别图标"
+msgstr "Visa kategoriikoner"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_custom_icon->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_custom_icon->tooltip
@@ -807,18 +846,18 @@ msgid ""
 "Enter custom icon for the \"Recent Applications\" category.\n"
 "Only icon names are allowed."
 msgstr ""
-"输入“最近的应用程序”类别的自定义图标。\n"
-"仅允许图标名称。"
+"Ange anpassad ikon för kategorin \"Tidigare program\".\n"
+"Endast ikonnamn är tillåtet."
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_custom_icon->description
 msgid "Custom icon for category"
-msgstr "自定义类别的图标"
+msgstr "Anpassad ikon för kategorin"
 
 #. 3.2->settings-schema.json->save_settings_button->description
 #. 3.2->settings-schema.json->section_save_button_minimal->title
 msgid "Save settings"
-msgstr "保存设置"
+msgstr "Spara inställningarna"
 
 #. 3.2->settings-schema.json->pref_fuzzy_search_enabled->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_fuzzy_search_enabled->tooltip
@@ -827,13 +866,14 @@ msgid ""
 "marked as experimental because it has a huge impact on performance every "
 "time the search box is cleared."
 msgstr ""
-"此项能够更好地对搜索结果进行排序。标为实验性是因为每次清除搜索框时它对性能有"
-"很大的影响。"
+"Det här alternativet möjliggör en betydligt bättre sortering av sökresultat. "
+"Den är markerad som experimentell eftersom det har stor inverkan på "
+"prestanda varje gång sökrutan rensas."
 
 #. 3.2->settings-schema.json->pref_fuzzy_search_enabled->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_fuzzy_search_enabled->description
 msgid "Enable fuzzy search (EXPERIMENTAL)"
-msgstr "启用模糊搜索（实验性）"
+msgstr "Aktivera inexakt sökning (EXPERIMENTELL)"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_invert_order->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_invert_order->tooltip
@@ -842,13 +882,13 @@ msgid ""
 "With this option enabled, the most recently used application will be at the "
 "bottom of the list."
 msgstr ""
-"默认情况下，最近使用的应用程序位于列表的顶部。启用此项后，最近使用的应用程序"
-"将会位于列表的底部。"
+"Som standard ligger tidigare använda program överst i listan. Med detta "
+"alternativ aktiverat, placeras tidigare program i botten av listan."
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_invert_order->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_invert_order->description
 msgid "Invert recently used applications order"
-msgstr "反转最近使用的应用程序顺序"
+msgstr "Invertera ordningen för tidigare program"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->options
 #. 3.2->settings-schema.json->pref_menu_layout_first_place->options
@@ -859,7 +899,7 @@ msgstr "反转最近使用的应用程序顺序"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_third_place->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_first_place->options
 msgid "Custom Launchers box"
-msgstr "自定义启动器框"
+msgstr "Fält för anpassade programstartare"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->options
 #. 3.2->settings-schema.json->pref_menu_layout_first_place->options
@@ -871,7 +911,7 @@ msgstr "自定义启动器框"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_first_place->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance3->description
 msgid "Applications info box"
-msgstr "应用程序信息框"
+msgstr "Programinfofält"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->options
 #. 3.2->settings-schema.json->section_appearance_search_box->title
@@ -885,7 +925,7 @@ msgstr "应用程序信息框"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_first_place->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head4->description
 msgid "Search box"
-msgstr "搜索框"
+msgstr "Sökfält"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->options
 #. 3.2->settings-schema.json->pref_menu_layout_first_place->options
@@ -896,7 +936,7 @@ msgstr "搜索框"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_third_place->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_first_place->options
 msgid "Applications/Categories boxes"
-msgstr "应用程序/类别框"
+msgstr "Program-/Kategorifält"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->options
 #. 3.2->settings-schema.json->pref_menu_layout_second_place->options
@@ -907,17 +947,17 @@ msgstr "应用程序/类别框"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_third_place->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_appinfo_display_method->options
 msgid "None"
-msgstr "无"
+msgstr "Ingen"
 
 #. 3.2->settings-schema.json->pref_menu_layout_fourth_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_fourth_place->description
 msgid "Fourth place element"
-msgstr "第四个位置元素"
+msgstr "Fjärde platsens objekt"
 
 #. 3.2->settings-schema.json->pref_display_favorites_as_category_menu->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_favorites_as_category_menu->description
 msgid "Display \"Favorites\" as a category menu"
-msgstr "显示“收藏夹”为类别菜单"
+msgstr "Visa \"Favoriter\" som en kategorimeny"
 
 #. 3.2->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->tooltip
@@ -926,184 +966,184 @@ msgid ""
 "editor executable or the path to it).\n"
 "Leave it blank to let the system decide."
 msgstr ""
-"设置打开.desktop文件的自定义文本编辑器（文本编辑器可执行文件的名称或其路径即"
-"可）。\n"
-"留空则由系统决定。"
+"Ange en anpassad textredigerare för att öppna .desktop-filer (bara namnet på "
+"textredigerarens startfil, eller sökväg till den.)\n"
+"Lämna fältet tomt för att låta systemet bestämma."
 
 #. 3.2->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->description
 msgid "Custom text editor:"
-msgstr "自定义文本编辑器："
+msgstr "Anpassad textredigerare:"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_alignment->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_alignment->options
 msgid "Left"
-msgstr "向左"
+msgstr "Vänster"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_alignment->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_alignment->options
 msgid "Right"
-msgstr "向右"
+msgstr "Höger"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_alignment->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_alignment->options
 msgid "Middle"
-msgstr "中间"
+msgstr "Mitten"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_alignment->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_alignment->description
 msgid "Custom launchers buttons alignment"
-msgstr "自定义启动器按钮对齐"
+msgstr "Underkantsjustering för anpassade startare"
 
 #. 3.2->settings-schema.json->section_recently_used_applications_settings->title
 msgid "Recently used applications settings"
-msgstr "最近使用的应用程序设置"
+msgstr "Inställningar för tidigare program"
 
 #. 3.2->settings-schema.json->section_custom_launchers_002->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_2->description
 msgid "Custom launcher 2"
-msgstr "自定义启动器2"
+msgstr "Anpassad startare 2"
 
 #. 3.2->settings-schema.json->section_context_menus_settings->title
 msgid "Context menus settings"
-msgstr "右键菜单设置"
+msgstr "Inställningar för högerklicksmenyn"
 
 #. 3.2->settings-schema.json->section_save_button_full->title
 msgid ""
 "Most settings are not automatically saved when modified.\n"
 "Press any of the \"Save settings\" buttons for the settings to take effect."
 msgstr ""
-"大多数设置在修改时不会自动保存。\n"
-"按任何“保存设置”按钮以使设置生效。"
+"De flesta inställningar sparas inte automatiskt, när de ändras.\n"
+"Tryck på valfri \"Spara inställningarna\" för att verkställa ändringar."
 
 #. 3.2->settings-schema.json->section_layout_001->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head2->description
 msgid "Menu layout"
-msgstr "菜单布局"
+msgstr "Menylayout"
 
 #. 3.2->settings-schema.json->section_custom_launchers_008->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_8->description
 msgid "Custom launcher 8"
-msgstr "自定义启动器8"
+msgstr "Anpassad startare 8"
 
 #. 3.2->settings-schema.json->section_appearance_icons_display->title
 msgid "Icons display"
-msgstr "图标显示"
+msgstr "Ikonvisning"
 
 #. 3.2->settings-schema.json->section_custom_launchers_007->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_7->description
 msgid "Custom launcher 7"
-msgstr "自定义启动器7"
+msgstr "Anpassad startare 7"
 
 #. 3.2->settings-schema.json->section_quit_buttons_settings->title
 msgid "Quit buttons settings"
-msgstr "退出按钮设置"
+msgstr "Inställningar för avstängningsknappar"
 
 #. 3.2->settings-schema.json->page_layout->title
 msgid "Layout"
-msgstr "布局"
+msgstr "Layout"
 
 #. 3.2->settings-schema.json->section_appearance_boxes_padding->title
 msgid "Theme overrides"
-msgstr "主题覆盖"
+msgstr "Temaundantag"
 
 #. 3.2->settings-schema.json->section_custom_launchers_006->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_6->description
 msgid "Custom launcher 6"
-msgstr "自定义启动器6"
+msgstr "Anpassad startare 6"
 
 #. 3.2->settings-schema.json->section_appearance_info_box->title
 msgid "Application info box"
-msgstr "应用程序信息框"
+msgstr "Programinfofält"
 
 #. 3.2->settings-schema.json->page_custom_launchers->title
 msgid "Custom Launchers"
-msgstr "自定义启动器"
+msgstr "Anpassade startare"
 
 #. 3.2->settings-schema.json->section_custom_launchers_003->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_3->description
 msgid "Custom launcher 3"
-msgstr "自定义启动器3"
+msgstr "Anpassad startare 3"
 
 #. 3.2->settings-schema.json->section_custom_launchers_001->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_1->description
 msgid "Custom launcher 1"
-msgstr "自定义启动器1"
+msgstr "Anpassad startare 1"
 
 #. 3.2->settings-schema.json->section_custom_launchers_005->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_5->description
 msgid "Custom launcher 5"
-msgstr "自定义启动器5"
+msgstr "Anpassad startare 5"
 
 #. 3.2->settings-schema.json->section_applet_settings->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head0->description
 msgid "Applet settings"
-msgstr "小程序设置"
+msgstr "Programinställningar"
 
 #. 3.2->settings-schema.json->section_custom_launchers_004->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_4->description
 msgid "Custom launcher 4"
-msgstr "自定义启动器4"
+msgstr "Anpassad startare 4"
 
 #. 3.2->settings-schema.json->page_extras->title
 msgid "Extras"
-msgstr "附加选项"
+msgstr "Extra"
 
 #. 3.2->settings-schema.json->page_appearance->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance1->description
 msgid "Appearance"
-msgstr "外观"
+msgstr "Utseende"
 
 #. 3.2->settings-schema.json->section_menu_settings->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head1->description
 msgid "Menu settings"
-msgstr "菜单设置"
+msgstr "Menyinställningar"
 
 #. 3.2->settings-schema.json->section_custom_launchers_000_bis->title
 msgid "Custom launchers notes"
-msgstr "自定义启动器说明"
+msgstr "Notiser för anpassade startare"
 
 #. 3.2->settings-schema.json->section_appearance_favorites_box->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance5->description
 msgid "Favorites box"
-msgstr "收藏夹框"
+msgstr "Favoritfält"
 
 #. 3.2->settings-schema.json->section_layout_002->title
 msgid "Placement on main elements on menu"
-msgstr "菜单上主要元素的位置"
+msgstr "Placering av huvudobjekt på menyn"
 
 #. 3.2->settings-schema.json->section_custom_launchers_010->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_10->description
 msgid "Custom launcher 10"
-msgstr "自定义启动器10"
+msgstr "Anpassad startare 10"
 
 #. 3.2->settings-schema.json->section_custom_launchers_009->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_9->description
 msgid "Custom launcher 9"
-msgstr "自定义启动器9"
+msgstr "Anpassad startare 9"
 
 #. 3.2->settings-schema.json->section_appearance_applicatons_box->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance6->description
 msgid "Applications box"
-msgstr "应用程序框"
+msgstr "Programfält"
 
 #. 3.2->settings-schema.json->section_appearance_icon_sizes->title
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance2->description
 msgid "Icon sizes"
-msgstr "图标大小"
+msgstr "Ikonstorlekar"
 
 #. 3.2->settings-schema.json->section_search_box_settings->title
 msgid "Search box settings"
-msgstr "搜索框设置"
+msgstr "Sökfältsinställningar"
 
 #. 3.2->settings-schema.json->page_applet->title
 msgid "Applet"
-msgstr "小程序"
+msgstr "Panelprogram"
 
 #. 3.2->settings-schema.json->pref_show_uninstall_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_uninstall_on_context->description
 msgid "Show \"Uninstall\" on context"
-msgstr "在右键显示“卸载”"
+msgstr "Visa \"Avinstallera\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->custom_launchers_label->description
 msgid ""
@@ -1116,26 +1156,30 @@ msgid ""
 "Otherwise, the file will be opened with the systems handler for that file "
 "type."
 msgstr ""
-"标有星号(*)的字段是必填项。否则，按钮将不会在菜单上出现。\n"
-"图标可以是任何图标文件或图标文件的路径(符号或全彩)。\n"
-"命令可以是任何命令(如在终端中输入的)或文件路径。\n"
-"如果文件是可执行的脚本，将会尝试执行该脚本。\n"
-"否则，将使用该文件类型的系统处理程序打开该文件。"
+"Fält markerade med asterisk (*) är obligatoriska. Annars kommer inte knappen "
+"att synas på menyn.\n"
+"Ikoner kan vara valfritt ikonnamn eller sökväg till en ikonfil (symbolisk "
+"eller fullfärg).\n"
+"Kommandon kan vara valfritt kommando (som det anges i terminal), eller "
+"sökväg till en fil.\n"
+"Om filen är ett körbart skript, kommer exekveringsförsök att genomföras.\n"
+"Annars kommer filen att öppnas med systemets hanterare för den aktuella "
+"filtypen."
 
 #. 3.2->settings-schema.json->pref_menu_layout_first_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_first_place->description
 msgid "First place element"
-msgstr "第一个位置元素"
+msgstr "Första platsens objekt"
 
 #. 3.2->settings-schema.json->pref_show_run_from_terminal_as_root_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_run_from_terminal_as_root_on_context->description
 msgid "Show \"Run from terminal as root\" on context"
-msgstr "在右键显示“以root身份从终端运行”"
+msgstr "Visa \"Kör från terminal som root\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_custom_command_icon_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_command_icon_size->description
 msgid "Custom launchers icon size:"
-msgstr "自定义启动器图标大小："
+msgstr "Ikonstorlek för anpassade startare:"
 
 #. 3.2->settings-schema.json->pref_command_6_icon->description
 #. 3.2->settings-schema.json->pref_command_3_icon->description
@@ -1158,7 +1202,7 @@ msgstr "自定义启动器图标大小："
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_5_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_command_7_icon->description
 msgid "*Icon:"
-msgstr "*图标："
+msgstr "*Ikon:"
 
 #. 3.2->settings-schema.json->pref_use_hover_feedback->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_hover_feedback->tooltip
@@ -1167,23 +1211,24 @@ msgid ""
 "favorite/place/recent file is hovered or selected with keyboard navigation, "
 "its icon will be displayed where the user picture is located."
 msgstr ""
-"如果启用并已显示用户图片，每次悬停或使用键盘导航选择应用程序/收藏/位置/最近的"
-"文件时，其图标将会显示在用户图片的位置。"
+"Vid aktivering, om användarbild visas, kommer objektets ikon att visas på "
+"användarikonens plats, varje gång ett program, en favorit/plats/tidigare "
+"program hovras eller markeras via tangentbordsnavigering."
 
 #. 3.2->settings-schema.json->pref_use_hover_feedback->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_hover_feedback->description
 msgid "Use hover feedback"
-msgstr "使用悬停反馈"
+msgstr "Återkoppla vid hovring"
 
 #. 3.2->settings-schema.json->pref_set_custom_box_padding->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_set_custom_box_padding->description
 msgid "Set a custom padding for the Custom launchers box"
-msgstr "设置自定义启动器框的自定义边距"
+msgstr "Ange anpassat kantavstånd för programstartfältet"
 
 #. 3.2->settings-schema.json->pref_show_logout_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_logout_button->description
 msgid "Show \"Logout\" button"
-msgstr "显示“注销”按钮"
+msgstr "Visa knappen \"Logga ut\""
 
 #. 3.2->settings-schema.json->pref_categories_box_padding_right->description
 #. 3.2->settings-schema.json->pref_custom_command_box_padding_right->description
@@ -1196,17 +1241,17 @@ msgstr "显示“注销”按钮"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_entry_padding_right->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_command_box_padding_right->description
 msgid "Box right padding:"
-msgstr "框右侧边距："
+msgstr "Fältets högerkantsavstånd:"
 
 #. 3.2->settings-schema.json->pref_show_add_to_panel_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_add_to_panel_on_context->description
 msgid "Show \"Add to panel\" on context"
-msgstr "在右键显示“添加到面板”"
+msgstr "Visa \"Lägg till i panelen\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_application_icon_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_application_icon_size->description
 msgid "Applications icon size:"
-msgstr "应用程序图标大小："
+msgstr "Ikonstorlek för program:"
 
 #. 3.2->settings-schema.json->pref_gain_privileges_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_gain_privileges_on_context->tooltip
@@ -1218,96 +1263,99 @@ msgid ""
 "open and edit not owned files and will ask for the root password at the "
 "moment of saving the changes."
 msgstr ""
-"如果启用，此项将会以root身份打开不属于当前用户所拥有的.desktop文件。\n"
-"并非所有的文本编辑器都需要这样。某些文本编辑器会允许您打开和编辑非所属的文件"
-"并会在保存更改时请求root密码。"
+"Vid aktivering, öppnas .desktop-filer som inte ägs av aktuell användare, som "
+"root.\n"
+"\n"
+"Detta är inte nödvändigt för alla textredigerare. Vissa redigerare tillåter "
+"att du öppnar och redigerar filer som du inte äger och frågar då istället "
+"efter root-lösenord, när du försöker spara ändringarna."
 
 #. 3.2->settings-schema.json->pref_gain_privileges_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_gain_privileges_on_context->description
 msgid "Gain privileges of not owned files"
-msgstr "获取非所属文件的权限"
+msgstr "Inhämta behörighet för ej ägda filer"
 
 #. 3.2->settings-schema.json->pref_enable_autoscroll->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_enable_autoscroll->tooltip
 msgid ""
 "Choose whether or not to enable smooth auto-scrolling in the application "
 "list."
-msgstr "选择是否在应用程序列表中启用平滑滚动。"
+msgstr "Välj om automatisk skrollning skall användas i programlistan."
 
 #. 3.2->settings-schema.json->pref_enable_autoscroll->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_enable_autoscroll->description
 msgid "Enable auto-scrolling in application list"
-msgstr "启用应用程序列表中的自动滚动"
+msgstr "Aktivera automatisk skrollning i programlistan"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_placement->options
 msgid "Left of search box"
-msgstr "搜索框左侧"
+msgstr "Till vänster om sökfältet"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_placement->options
 msgid "Right of search box"
-msgstr "搜索框右侧"
+msgstr "Till höger om sökfältet"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_placement->options
 msgid "On its own"
-msgstr "自身"
+msgstr "För sig själv"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_placement->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_commands_box_placement->description
 msgid "Custom launchers box placement"
-msgstr "自定义启动器框位置"
+msgstr "Fältplacering för anpassade startare"
 
 #. 3.2->settings-schema.json->pref_max_recent_files->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_recent_files->description
 msgid "Max recent documents:"
-msgstr "最近的文档最大数量："
+msgstr "Max antal tidigare dokument:"
 
 #. 3.2->settings-schema.json->pref_max_recent_files->units
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_recent_files->units
 msgid "documents"
-msgstr "文档"
+msgstr "dokument"
 
 #. 3.2->settings-schema.json->pref_show_shutdown_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_shutdown_button->description
 msgid "Show \"Shutdown\" button"
-msgstr "显示“关机”按钮"
+msgstr "Visa avstängningsknapp"
 
 #. 3.2->settings-schema.json->pref_show_run_from_terminal_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_run_from_terminal_on_context->description
 msgid "Show \"Run from terminal\" on context"
-msgstr "在右键显示“从终端运行”"
+msgstr "Visa \"Kör från terminal\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_max_width_for_buttons->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_width_for_buttons->tooltip
 msgid "Define the maximum width of menu items inside the applications box."
-msgstr "定义应用程序框内菜单条目的最大宽度。"
+msgstr "Ange maximal bredd på menyposter i programstartfältet."
 
 #. 3.2->settings-schema.json->pref_max_width_for_buttons->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_width_for_buttons->description
 msgid "Maximum button width:"
-msgstr "最大按钮宽度："
+msgstr "Maximal knappbredd:"
 
 #. 3.2->settings-schema.json->pref_show_places->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "选择是否在菜单中显示书签和位置。"
+msgstr "Välj om bokmärken och platser skall visas i menyn."
 
 #. 3.2->settings-schema.json->pref_show_places->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_places->description
 msgid "Show bookmarks and places"
-msgstr "显示书签和位置"
+msgstr "Visa bokmärken och platser"
 
 #. 3.2->settings-schema.json->pref_display_application_icons->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_application_icons->tooltip
 msgid "Choose whether or not to show icons on applications."
-msgstr "选择是否显示应用程序的图标。"
+msgstr "Välj om programikoner skall visas."
 
 #. 3.2->settings-schema.json->pref_display_application_icons->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_application_icons->description
 msgid "Show application icons"
-msgstr "显示应用程序图标"
+msgstr "Visa programikoner"
 
 #. 3.2->settings-schema.json->pref_logout_button_custom_icon->tooltip
 #. 3.2->settings-schema.json->pref_lock_button_custom_icon->tooltip
@@ -1320,13 +1368,14 @@ msgid ""
 "box.\n"
 "Leave blank to use default."
 msgstr ""
-"仅当系统按钮框位于自定义启动器框旁有效。\n"
-"留空使用默认。"
+"Endast tillämplig om fältet för systemknappar placeras bredvid fältet för "
+"anpassade startare.\n"
+"Lämnas tom för standardinställning."
 
 #. 3.2->settings-schema.json->pref_logout_button_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_logout_button_custom_icon->description
 msgid "Custom icon for \"Logout\" button:"
-msgstr "自定义“注销”按钮的图标："
+msgstr "Anpassad ikon för knappen \"Logga ut\":"
 
 #. 3.2->settings-schema.json->pref_show_edit_desktop_file_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_edit_desktop_file_on_context->tooltip
@@ -1334,115 +1383,115 @@ msgid ""
 "It adds to the applications context menu an entry that will allow you to "
 "open the current selected application's .desktop file in a text editor."
 msgstr ""
-"向应用程序右键菜单添加一个允许您使用文本编辑器打开当前选定的应用程序的."
-"desktop文件的条目。"
+"Lägger till en post i programikonernas högerklicksmeny, som låter dig öppna "
+"det aktuella programmets .desktop-fil i en textredigerare."
 
 #. 3.2->settings-schema.json->pref_show_edit_desktop_file_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_edit_desktop_file_on_context->description
 msgid "Show \"Edit .desktop file\" on context"
-msgstr "在右键显示“编辑.desktop文件”"
+msgstr "Visa \"Redigera .desktop-fil\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_show_lock_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_lock_button->description
 msgid "Show \"Lock screen\" button"
-msgstr "显示“锁定屏幕”按钮"
+msgstr "Visa knappen \"Lås skärmen\""
 
 #. 3.2->settings-schema.json->pref_set_info_box_padding->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_set_info_box_padding->description
 msgid "Set a custom padding for the Applications info box"
-msgstr "设置应用程序信息框的自定义边距"
+msgstr "Ange anpassat kantavstånd för programinfofältet"
 
 #. 3.2->settings-schema.json->pref_menu_layout_second_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_second_place->description
 msgid "Second place element"
-msgstr "第二个位置元素"
+msgstr "Andra platsens objekt"
 
 #. 3.2->settings-schema.json->pref_animate_menu->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_animate_menu->description
 msgid "Animate open/close menu"
-msgstr "打开/关闭菜单动画"
+msgstr "Animera menyöppning/-stängning"
 
 #. 3.2->settings-schema.json->pref_cat_hover_delay->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_hover_delay->tooltip
 msgid "Delay between switching categories."
-msgstr "类别之间切换的延迟。"
+msgstr "Fördröjning mellan växling av kategorier."
 
 #. 3.2->settings-schema.json->pref_cat_hover_delay->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_hover_delay->description
 msgid "Category selection delay:"
-msgstr "类别选择延迟："
+msgstr "Kategorifördröjning"
 
 #. 3.2->settings-schema.json->pref_cat_hover_delay->units
 #. 3.2->settings-schema.json->pref_menu_hover_delay->units
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_hover_delay->units
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_hover_delay->units
 msgid "milliseconds"
-msgstr "毫秒"
+msgstr "millisekunder"
 
 #. 3.2->settings-schema.json->pref_show_bumblebee_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_bumblebee_on_context->description
 msgid "Show \"Run with NVIDIA GPU\" on context"
-msgstr "在右键显示“使用NVIDIA GPU运行”"
+msgstr "Visa \"Kör med NVIDIA-GPU\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_user_picture_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_size->description
 msgid "User picture size:"
-msgstr "用户图片大小："
+msgstr "Storlek på användarbilden:"
 
 #. 3.2->settings-schema.json->pref_search_filesystem->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_filesystem->tooltip
 msgid "Allows path entry in the menu search box."
-msgstr "允许在菜单搜索框中的路径条目。"
+msgstr "Tillåt filsystemsökvägar i menyns sökfält."
 
 #. 3.2->settings-schema.json->pref_search_filesystem->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_search_filesystem->description
 msgid "Enable file system path entry in search box"
-msgstr "在搜索框中启用文件系统路径条目"
+msgstr "Aktivera filsystemsökvägar i sökfältet"
 
 #. 3.2->settings-schema.json->pref_lock_button_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_lock_button_custom_icon->description
 msgid "Custom icon for \"Lock screen\" button:"
-msgstr "“锁定屏幕”按钮的自定义图标："
+msgstr "Anpassad ikon för knappen \"Lås skärmen\":"
 
 #. 3.2->settings-schema.json->pref_set_search_box_padding->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_set_search_box_padding->description
 msgid "Set a custom padding for the search box"
-msgstr "设置搜索框的自定义边距"
+msgstr "Ange anpassat yttre kantavstånd för sökfältet"
 
 #. 3.2->settings-schema.json->pref_custom_icon_for_applet->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_icon_for_applet->tooltip
 msgid "Select an icon to show in the panel."
-msgstr "选择要显示在面板中的图标。"
+msgstr "Välj en ikon att visas i panelen."
 
 #. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_icon_for_applet->description
 msgid "Icon"
-msgstr "图标"
+msgstr "Ikon"
 
 #. 3.2->settings-schema.json->pref_system_buttons_display->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_system_buttons_display->options
 msgid "Hide all"
-msgstr "隐藏全部"
+msgstr "Dölj alla"
 
 #. 3.2->settings-schema.json->pref_system_buttons_display->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_system_buttons_display->options
 msgid "Inside \"Favorites\" box"
-msgstr "在“收藏夹”框内"
+msgstr "Inne i fältet \"Favoriter\""
 
 #. 3.2->settings-schema.json->pref_system_buttons_display->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_system_buttons_display->options
 msgid "Next to \"Custom launchers\" box"
-msgstr "“自定义启动器”框旁"
+msgstr "Bredvid fältet \"Anpassade startare\""
 
 #. 3.2->settings-schema.json->pref_system_buttons_display->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_system_buttons_display->description
 msgid "Quit buttons placement"
-msgstr "退出按钮位置"
+msgstr "Avstängningsknapparnas placering"
 
 #. 3.2->settings-schema.json->pref_show_add_to_desktop_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_add_to_desktop_on_context->description
 msgid "Show \"Add to desktop\" on context"
-msgstr "在右键显示“添加到桌面”"
+msgstr "Visa \"Lägg till på skrivbordet\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_swap_categories_box->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_swap_categories_box->tooltip
@@ -1451,25 +1500,28 @@ msgid ""
 "this option enabled, the categories box will be placed to the right of the "
 "applications list."
 msgstr ""
-"默认请将下，类别框位于应用程序列表的左侧。启用此项后，类别框将会放置到应用程"
-"序列表的右侧。"
+"Som standard ligger kategorifältet placerat till vänster om programlistan. "
+"Med detta alternativ aktiverat, placeras kategorifältet till höger om "
+"programlistan."
 
 #. 3.2->settings-schema.json->pref_swap_categories_box->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_swap_categories_box->description
 msgid "Swap categories box"
-msgstr "交换类别框"
+msgstr "Byt kategorifält"
 
 #. 3.2->settings-schema.json->pref_user_picture_stylized->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_stylized->tooltip
 msgid ""
 "With this option enabled, the box containing the user picture will have the "
 "same style as the Favorites box."
-msgstr "启用此项后，包含用户图片的框将会拥有和收藏夹相同的风格。"
+msgstr ""
+"Med detta alternativ aktiverat, kommer fältet för användarbilden att få "
+"samma stil som fältet för favoriter."
 
 #. 3.2->settings-schema.json->pref_user_picture_stylized->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_stylized->description
 msgid "Stylize the user image"
-msgstr "风格化用户图片"
+msgstr "Stilisera användarbilden"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_separator->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_separator->tooltip
@@ -1478,46 +1530,48 @@ msgid ""
 "enable this option if you will never use the keyboard to navigate the menu.\n"
 "This message is only temporary until I figure out how to fix this."
 msgstr ""
-"此选项启用时，将会破坏菜单键盘导航。仅在您不使用键盘来导航菜单时才启用此选"
-"项。\n"
-"此消息只是暂时的，直到我想出如何解决这个问题。"
+"När detta alternativ aktiveras, upphör tangentbordsnavigering att fungera i "
+"menyn. Aktivera detta alternativ endast om du aldrig kommer att använda "
+"tangentbordet för att navigera i menyn.\n"
+"Detta är ett temporärt meddelande, endast tills jag kommer på hur problemet "
+"kan åtgärdas."
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_separator->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_separator->description
 msgid "Display separator after \"Recent Applications\" category (WARNING)"
-msgstr "显示\"最近的应用程序\"类别后的分隔符（警告）"
+msgstr "Visa avskiljare efter kategorin \"Tidigare program\" (VARNING!)"
 
 #. 3.2->settings-schema.json->pref_shutdown_button_custom_icon->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_shutdown_button_custom_icon->description
 msgid "Custom icon for \"Shutdown\" button:"
-msgstr "自定义“关机”按钮的图标："
+msgstr "Anpassad ikon för knappen \"Stäng av\":"
 
 #. 3.2->settings-schema.json->pref_show_add_remove_favorite_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_add_remove_favorite_on_context->description
 msgid "Show \"Add/Remove to/from favorites\" on context"
-msgstr "在右键显示“添加/移除到/自收藏夹”"
+msgstr "Visa \"Lägg till/Ta bort i/från Favoriter\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_show_recents_button->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_recents_button->tooltip
 msgid ""
 "For people who want the \"Recent documents\" category hidden without "
 "disabling recent documents globally."
-msgstr "提供给希望隐藏“最近的文档”类别而不用全局禁用最近的文档的用户。"
+msgstr "För dig som vill dölja kategorin \"Tidigare dokument\""
 
 #. 3.2->settings-schema.json->pref_show_recents_button->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_recents_button->description
 msgid "Show \"Recent documents\" category"
-msgstr "显示“最近的文档”类别"
+msgstr "Visa kategorin \"Tidigare dokument\""
 
 #. 3.2->settings-schema.json->pref_separator_heigth->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_separator_heigth->tooltip
 msgid "Size of separator between \"Favorites\" box and \"Quit\" box."
-msgstr "“收藏夹”框和“退出”框之间分隔符的大小。"
+msgstr "Storlek på avdelaren mellan Favoriter och avstängningsknappar."
 
 #. 3.2->settings-schema.json->pref_separator_heigth->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_separator_heigth->description
 msgid "Favorites box separator height:"
-msgstr "收藏夹框分隔符高度："
+msgstr "Höjd på favoritfältsavdelare:"
 
 #. 3.2->settings-schema.json->custom_padding_label->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance7->description
@@ -1526,13 +1580,14 @@ msgid ""
 "elemets.\n"
 "This section is for overriding those stylesheets."
 msgstr ""
-"注意：大多数主题样式表都带有某些元素的硬编码大小。\n"
-"此部分是用于覆盖那些样式表。"
+"Notera att de flesta tema-stilmallar innehåller hårdkodade storlekar för "
+"vissa element.\n"
+"Denna sektion är till för att åsidosätta dessa stilmallar."
 
 #. 3.2->settings-schema.json->pref_show_run_as_root_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_run_as_root_on_context->description
 msgid "Show \"Run as root\" on context"
-msgstr "在右键显示“以root身份运行”"
+msgstr "Visa \"Kör som root\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_privilege_elevator->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_privilege_elevator->tooltip
@@ -1541,8 +1596,9 @@ msgid ""
 "This is used by the \"Open as Root\" context menu and the option \"Gain "
 "privileges of not owned files\"."
 msgstr ""
-"用来以root身份运行应用程序的图形前端。\n"
-"此项用于右键菜单“以Root身份打开”和“获取非所属文件的权限”选项。"
+"Grafiskt användargränssnitt för att köra program som root.\n"
+"Detta används av högerklickmenyns \"Kör som root\" och av \"Inhämta "
+"behörighet för ej ägda filer\"."
 
 #. 3.2->settings-schema.json->pref_privilege_elevator->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_privilege_elevator->options
@@ -1557,17 +1613,17 @@ msgstr "gksudo"
 #. 3.2->settings-schema.json->pref_privilege_elevator->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_privilege_elevator->description
 msgid "Privileges elevator:"
-msgstr "权限提升："
+msgstr "Rättighetsutökare:"
 
 #. 3.2->settings-schema.json->pref_display_fav_box->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_fav_box->tooltip
 msgid "Choose whether or not to show the left pane of the menu."
-msgstr "选择是否显示菜单的左侧窗格。"
+msgstr "Välj om det vänstra fältet skall visas i menyn."
 
 #. 3.2->settings-schema.json->pref_display_fav_box->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_display_fav_box->description
 msgid "Show favorites and quit options"
-msgstr "显示收藏夹和退出选项"
+msgstr "Visa Favoriter och avstängningsalternativ"
 
 #. 3.2->settings-schema.json->pref_autofit_searchbox_width->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_autofit_searchbox_width->tooltip
@@ -1576,100 +1632,103 @@ msgid ""
 "is ignored if the custom launchers box is placed at either side of the "
 "searchbox."
 msgstr ""
-"如果禁用，将会忽略搜索框的自定义宽度。此外，如果自定义启动器框位于搜索框的任"
-"意一侧，此选项将会被忽略。"
+"Vid aktivering, kommer anpassad bredd för sökfältet att ignoreras. Detta "
+"alternativ kommer att undantas om fältet för anpassade startare är placerat "
+"på någon sida av sökfältet."
 
 #. 3.2->settings-schema.json->pref_autofit_searchbox_width->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_autofit_searchbox_width->description
 msgid "Auto-fit the width of the search box with the menu width"
-msgstr "自动调整搜索框和菜单的宽度"
+msgstr "Anpassa bredden på sökfältet till menyns bredd"
 
 #. 3.2->settings-schema.json->pref_appinfo_display_method->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_appinfo_display_method->options
 msgid "Tooltips"
-msgstr "提示"
+msgstr "Verktygsbeskrivningar"
 
 #. 3.2->settings-schema.json->pref_appinfo_display_method->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_appinfo_display_method->options
 msgid "Info box"
-msgstr "信息框"
+msgstr "Informationsfält"
 
 #. 3.2->settings-schema.json->pref_appinfo_display_method->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_appinfo_display_method->description
 msgid "Display method for information about applications:"
-msgstr "显示有关应用程序信息的方式："
+msgstr "Visningsmetod för programinformation:"
 
 #. 3.2->settings-schema.json->pref_hide_allapps_category->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_hide_allapps_category->description
 msgid "Hide \"All Applications\" category"
-msgstr "隐藏“所有应用程序”类别"
+msgstr "Dölj kategorin \"Alla program\""
 
 #. 3.2->settings-schema.json->pref_max_recently_used_apps->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_recently_used_apps->description
 msgid "Max recently used apps:"
-msgstr "最近使用的应用程序最大数量："
+msgstr "Max antal tidigare program:"
 
 #. 3.2->settings-schema.json->pref_max_recently_used_apps->units
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_max_recently_used_apps->units
 msgid "applications"
-msgstr "应用程序"
+msgstr "program"
 
 #. 3.2->settings-schema.json->pref_set_search_entry_padding->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_set_search_entry_padding->description
 msgid "Set a custom padding for the search entry box"
-msgstr "设置搜索入口框的自定义边距"
+msgstr "Ange anpassat inre kantavstånd för sökfältet"
 
 #. 3.2->settings-schema.json->pref_category_icon_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_category_icon_size->description
 msgid "Categories icon size:"
-msgstr "类别图标大小："
+msgstr "Ikonstorlek för kategorier:"
 
 #. 3.2->settings-schema.json->pref_show_desktop_file_folder_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_desktop_file_folder_on_context->description
 msgid "Show \"Open .desktop file folder\" on context"
-msgstr "在右键显示“打开.desktop文件文件夹”"
+msgstr "Visa \"Öppna .desktop-filens mapp\" i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->pref_use_a_custom_icon_for_applet->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_a_custom_icon_for_applet->tooltip
 msgid "Unchecking this allows the theme to set the icon"
-msgstr "不选中此项允许主题设置图标"
+msgstr "Inaktivering innebär att temat anger ikon"
 
 #. 3.2->settings-schema.json->pref_use_a_custom_icon_for_applet->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_a_custom_icon_for_applet->description
 msgid "Use a custom icon"
-msgstr "使用自定义图标"
+msgstr "Använd en anpassad ikon"
 
 #. 3.2->settings-schema.json->pref_info_box_title_font_size->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_info_box_title_font_size->description
 msgid "Applications info box title font size:"
-msgstr "应用程序信息框标题字体大小："
+msgstr "Teckenstorlek för rubrik i programinfofältet:"
 
 #. 3.2->settings-schema.json->pref_custom_width_for_searchbox->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_width_for_searchbox->tooltip
 msgid "Set to 0 (zero) for not setting a width."
-msgstr "设为0（零）不设置宽度。"
+msgstr "Ange 0 (noll) för att inte ange någon bredd."
 
 #. 3.2->settings-schema.json->pref_custom_width_for_searchbox->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_width_for_searchbox->description
 msgid "Custom width for search box:"
-msgstr "自定义搜索框的宽度："
+msgstr "Anpassad bredd på sökfältet:"
 
 #. 3.2->settings-schema.json->pref_cat_select_on_hover->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_select_on_hover->tooltip
 msgid ""
 "If disabled, categories can be selected by clicking on them instead of just "
 "hovering."
-msgstr "如果禁用，可以通过点击类别而不是悬停来选择类别。"
+msgstr ""
+"Vid inaktivering kan kategorier väljas genom att klicka på dem, istället för "
+"bara hovring."
 
 #. 3.2->settings-schema.json->pref_cat_select_on_hover->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_select_on_hover->description
 msgid "Select categories on hover (EXPERIMENTAL)"
-msgstr "悬停时选择类别（实验性）"
+msgstr "Välj kategori vid hovring (EXPERIMENTELL)"
 
 #. 3.2->settings-schema.json->pref_set_categories_padding->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_set_categories_padding->description
 msgid "Set a custom padding for the Categories box"
-msgstr "设置类别框的自定义边距"
+msgstr "Ange anpassat kantavstånd för kategorifältet"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->tooltip
@@ -1678,38 +1737,39 @@ msgid ""
 "picture will open \"Account details\". For the image to be shown, the "
 "applications info box also has to be displayed."
 msgstr ""
-"此选项允许在菜单上显示用户图片。点击图片时将打开“帐户详情”。为了显示图片，还"
-"必须显示应用程序信息框。"
+"Detta alternativ låter dig visa en användarbild på menyn. Ett klick på "
+"bilden, öppnar \"Kontodetaljer\". För att bilden skall synas, måste även "
+"programinfofältet visas."
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->options
 msgid "Right of applications info box"
-msgstr "应用程序信息框右侧"
+msgstr "Till höger om programinfofältet"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->options
 msgid "Do not show"
-msgstr "不显示"
+msgstr "Visa inte"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->options
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->options
 msgid "Left of applications info box"
-msgstr "应用程序信息框左侧"
+msgstr "Till vänster om programinfofältet"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->description
 msgid "User picture placement"
-msgstr "用户图片位置"
+msgstr "Användarbildens placering"
 
 #. 3.2->settings-schema.json->pref_open_menu_on_hover->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_open_menu_on_hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet."
-msgstr "启用当鼠标进入小程序时打开菜单。"
+msgstr "Aktiverar menyöppning när muspekaren förs över ikonen"
 
 #. 3.2->settings-schema.json->pref_open_menu_on_hover->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_open_menu_on_hover->description
 msgid "Open the menu on mouse over"
-msgstr "鼠标在菜单上方时打开菜单"
+msgstr "Öppna menyn när muspekaren förs över ikonen"
 
 #. 3.2->settings-schema.json->pref_use_alternate_vector_box->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_alternate_vector_box->tooltip
@@ -1718,13 +1778,14 @@ msgid ""
 "used. This method can improve the performance of the menu and is extracted "
 "from the applet called Configurable Menu by lestcape."
 msgstr ""
-"启用此项后，将会使用选择类别的备用方式。这种方式可以提高菜单的性能，并从名为"
-"Configurable Menu by lestcape的小程序提取。"
+"Med detta alternativ aktiverat, används en alternativ metod att välja "
+"kategorier. Denna metod kan förbättra menyns prestanda och har extraherats "
+"ur panelprogrammet \"Configurable Menu\" av lestcape."
 
 #. 3.2->settings-schema.json->pref_use_alternate_vector_box->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_alternate_vector_box->description
 msgid "Use alternate category selection method (EXPERIMENTAL)"
-msgstr "使用备用的类别选择方式（实验性）"
+msgstr "Använd alternativ kategorimarkeringsmetod (EXPERIMENTELL)"
 
 #. 3.2->settings-schema.json->pref_terminal_emulator->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_terminal_emulator->tooltip
@@ -1732,45 +1793,48 @@ msgid ""
 "Choose the terminal emulator used by all launch from terminal options.\n"
 "IMPORTANT!!! The terminal emulator has to support the -e argument."
 msgstr ""
-"选择用于从终端全部启动选项的终端模拟器。\n"
-"重要！！终端模拟器必须支持 -e 参数。"
+"Välj vilken terminalemulator som skall användas för alla \"Starta från "
+"terminal\".\n"
+"VIKTIGT!!! Terminalemulatorn måste stödja argumentet -e."
 
 #. 3.2->settings-schema.json->pref_terminal_emulator->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_terminal_emulator->description
 msgid "Terminal emulator:"
-msgstr "终端模拟器："
+msgstr "Terminalemulator:"
 
 #. 3.2->settings-schema.json->pref_recent_apps_ignore_favorites->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recent_apps_ignore_favorites->tooltip
 msgid ""
 "If enabled, applications set as Favorite will not be stored in the \"Recent "
 "Applications\" category."
-msgstr "如果启用，设置为收藏的应用程序将不会储存在“最近的应用程序”类别中。"
+msgstr ""
+"Vid aktivering, undantas program angivna som favoriter från lagring i "
+"kategorin \"Tidigare program\"."
 
 #. 3.2->settings-schema.json->pref_recent_apps_ignore_favorites->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recent_apps_ignore_favorites->description
 msgid "Ignore Favorites"
-msgstr "忽略收藏夹"
+msgstr "Undanta favoriter"
 
 #. 3.2->settings-schema.json->pref_menu_layout_third_place->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_layout_third_place->description
 msgid "Third place element"
-msgstr "第三个位置元素"
+msgstr "Tredje platsens objekt"
 
 #. 3.2->settings-schema.json->pref_disable_new_apps_highlighting->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_disable_new_apps_highlighting->description
 msgid "Disable newly installed applications highlighting"
-msgstr "禁用高亮新安装的应用程序"
+msgstr "Inaktivera markering av nyinstallerade program"
 
 #. 3.2->settings-schema.json->pref_menu_hover_delay->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_hover_delay->tooltip
 msgid "Delay before the menu is opened on entering the applet."
-msgstr "进入小程序时打开菜单前的延迟。"
+msgstr "Fördröjning innan menyn öppnas vid muspekare över menyikonen."
 
 #. 3.2->settings-schema.json->pref_menu_hover_delay->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_menu_hover_delay->description
 msgid "Menu hover delay:"
-msgstr "菜单悬停延迟："
+msgstr "Menyfördröjning:"
 
 #. 3.2->settings-schema.json->pref_remember_recently_used_apps->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_remember_recently_used_apps->tooltip
@@ -1780,63 +1844,72 @@ msgid ""
 "Every time this option is disabled, the list of recently used applications "
 "will be cleared."
 msgstr ""
-"从启用此项开始，将会储存从菜单启动的每个应用程序并显示在“最近的应用程序”类别"
-"中。\n"
-"每当此项禁用时，将会清除最近使用的应用程序列表。"
+"När detta alternativ aktiverats, kommer alla program som startas från menyn "
+"att lagras och visas i kategorin \"Tidigare program\".\n"
+"När detta alternativ inaktiveras, kommer listan över tidigare program att "
+"rensas."
 
 #. 3.2->settings-schema.json->pref_remember_recently_used_apps->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_remember_recently_used_apps->description
 msgid "Show \"Recent Applications\" category"
-msgstr "显示“最近的应用程序”类别"
+msgstr "Visa kategorin \"Tidigare program\""
 
 #. 3.2->settings-schema.json->pref_apps_info_box_alignment_to_the_left->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_apps_info_box_alignment_to_the_left->description
 msgid "Align application info box text to the left"
-msgstr "向左对齐应用程序信息框文本"
+msgstr "Justera programinfofältets text åt vänster"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "NikoKrause: Bug fixes and German localization."
-msgstr "NikoKrause：错误修正和德语本地化。"
+msgstr "NikoKrause: Felfixar och Tysk översättning."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "Radek71: Czech localization."
-msgstr "Radek71：捷克语本地化。"
+msgstr "Radek71: Tjeckisk översättning."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "muzena: Croatian localization."
-msgstr "muzena：克罗地亚语本地化。"
+msgstr "muzena: Kroatisk översättning."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "giwhub: Chinese localization."
-msgstr "giwhub：中文本地化。"
+msgstr "giwhub: Kinesisk översättning."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "lestcape: Author of some advanced features used by this applet."
-msgstr "lestcape：此小程序所使用的一些高级功能的作者。"
+msgstr ""
+"lestcape: Utvecklare av några avancerade funktioner som används i detta "
+"panelprogram."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "nooulaif: Fuzzy search feature based on his Sane Menu applet."
-msgstr "nooulaif：模糊搜索功能基于他的Sane Menu小程序。"
+msgstr "nooulaif: Sökfunktionen Fuzzy, baserad på hans panelprogram Sane Menu."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
 msgid "Daniel Bruce: Some icons used by this menu are from www.entypo.com."
-msgstr "Daniel Bruce：此菜单所使用的一些图标来自www.entypo.com。"
+msgstr ""
+"Daniel Bruce: Några ikoner som används i den här menyn är från www.entypo."
+"com."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->comments
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked below."
-msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan göras i denna xlets "
+"kodförråd, länkat nedan."
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->name
 msgid "Custom Cinnamon Menu"
-msgstr "自定义Cinnamon菜单"
+msgstr "Anpassad Cinnamon-meny"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->description
 msgid ""
 "Custom version of the default Cinnamon Menu applet, but infinitely more "
 "customizable."
-msgstr "默认Cinnamon菜单小程序的自定义版本，但是定制性更大。"
+msgstr ""
+"Anpassad version av Cinnamons standardmeny, men oändligt mycket mer "
+"anpassningsbar."
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->button5->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->button2->description
@@ -1845,11 +1918,11 @@ msgstr "默认Cinnamon菜单小程序的自定义版本，但是定制性更大�
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->button4->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->button3->description
 msgid "Click here to save settings"
-msgstr "点击这里保存设置"
+msgstr "Klicka här för att spara inställningarna"
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head22->description
 msgid "Placement of main elements on menu"
-msgstr "菜单上主要元素的位置"
+msgstr "Placering av huvudobjekt på menyn"
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head->description
 msgid ""
@@ -1857,8 +1930,8 @@ msgid ""
 "Press any of the \"Click here to save settings\" buttons for the settings to "
 "take effect."
 msgstr ""
-"大多数设置在修改时不会自动保存。\n"
-"按任何 \"点击这里保存设置\" 按钮以使设置生效。"
+"De flesta inställningar sparas inte automatiskt, när de ändras.\n"
+"Tryck på valfri \"Spara inställningarna\" för att verkställa ändringar."
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head8->description
 msgid ""
@@ -1872,25 +1945,29 @@ msgid ""
 "Otherwise, the file will be opened with the systems handler for that file "
 "type."
 msgstr ""
-"自定义启动器说明\n"
-"标有星号 (*)的字段是必填项。否则，按钮将不会在菜单上出现。\n"
-"图标可以是任何图标文件或图标文件的路径(符号或全彩)。\n"
-"命令可以是任何命令(如在终端里输入的)或文件路径。\n"
-"如果文件是可执行的脚本，将会尝试执行该脚本。\n"
-"否则，将使用该文件类型的系统处理程序打开该文件。"
+"Notiser för anpassade startare\n"
+"Fält markerade med asterisk (*) är obligatoriska. Annars kommer inte knappen "
+"att synas på menyn.\n"
+"Ikoner kan vara valfritt ikonnamn eller sökväg till en ikonfil (symbolisk "
+"eller fullfärg).\n"
+"Kommandon kan vara valfritt kommando (som det anges i terminal), eller "
+"sökväg till en fil.\n"
+"Om filen är ett körbart skript, kommer exekveringsförsök att genomföras.\n"
+"Annars kommer filen att öppnas med systemets hanterare för den aktuella "
+"filtypen."
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head6->description
 msgid "Recently used applications"
-msgstr "最近使用的应用程序"
+msgstr "Tidigare använda program"
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head7->description
 msgid "Custom launchers"
-msgstr "自定义启动器"
+msgstr "Anpassade startare"
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head5->description
 msgid "Applications context menu extras"
-msgstr "应用程序右键菜单附加选项"
+msgstr "Extraposter i programmens högerklicksmeny"
 
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head3->description
 msgid "Quit buttons"
-msgstr "退出按钮"
+msgstr "Avstängningsknappar"

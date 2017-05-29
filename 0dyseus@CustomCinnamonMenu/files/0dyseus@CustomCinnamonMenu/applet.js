@@ -24,15 +24,6 @@ const Settings = imports.ui.settings;
 const SearchProviderManager = imports.ui.searchProviderManager;
 const DND = imports.ui.dnd;
 
-/**
- * Notes to myself:
- * - Mainloop.idle_add_full on categories selection is more annoying than useful.
- *   It seems that its purpose is to avoid undesired categories selection,
- *   but it's failing miserably. So, for now, avoid it at all cost.
- *   Keeping the removed option "Category selection delay" is more effective and
- *   it's up to the user to use it or not.
- */
-
 const INITIAL_BUTTON_LOAD = 30;
 const PRIVACY_SCHEMA = "org.cinnamon.desktop.privacy";
 const REMEMBER_RECENT_KEY = "remember-recent-files";
@@ -168,6 +159,7 @@ MyApplet.prototype = {
             // used as a flag to know if we're currently refreshing
             // (so we don't do it more than once concurrently)
             this.refreshing = false;
+            this.lastSelectedCategory = null;
 
             /**
              * Mark Odyseus. Moved these calls here because they were called too earlier.
@@ -258,6 +250,8 @@ MyApplet.prototype = {
             [bD.IN, "pref_use_hover_feedback", this._updateGlobalPreferences],
             [bD.IN, "pref_user_picture_size", null],
             [bD.IN, "pref_user_picture_stylized", null],
+            [bD.IN, "pref_info_box_title_font_size", null],
+            [bD.IN, "pref_info_box_description_font_size", null],
             [bD.IN, "pref_swap_categories_box", null],
             [bD.IN, "pref_disable_new_apps_highlighting", null],
             [bD.IN, "pref_fuzzy_search_enabled", null],
@@ -616,6 +610,7 @@ MyApplet.prototype = {
             this._selectedItemIndex = null;
             this._activeContainer = null;
             this._activeActor = null;
+            this.lastSelectedCategory = null;
 
             let n = Math.min(this._applicationsButtons.length,
                 INITIAL_BUTTON_LOAD);
@@ -634,7 +629,7 @@ MyApplet.prototype = {
             if (this.pref_hide_allapps_category) {
                 this._select_category(this.pref_hide_allapps_category ?
                     this._initialSelectedCategory :
-                    null, this._allAppsCategoryButton);
+                    null);
             } else {
                 Mainloop.idle_add(Lang.bind(this, this._initial_cat_selection, n));
             }
@@ -704,10 +699,7 @@ MyApplet.prototype = {
             this.leftPane.remove_actor(this.leftBox);
         } else {
             this.leftPane.show();
-            this.leftPane.add_actor(this.leftBox, {
-                y_align: St.Align.END,
-                y_fill: false
-            });
+            this.leftPane.add_actor(this.leftBox);
         }
     },
 
@@ -1421,7 +1413,7 @@ MyApplet.prototype = {
             let [appbox_x, appbox_y] = this.applicationsBox.get_transformed_position();
             let [appbox_w, appbox_h] = this.applicationsBox.get_transformed_size();
 
-            if (catbox_y + catbox_h > appbox_y) {
+            if ((catbox_y + catbox_h) > appbox_y) {
                 this.topPosition = appbox_y;
                 this.bottomPosition = appbox_y + appbox_h;
 
@@ -1521,7 +1513,7 @@ MyApplet.prototype = {
                         this.lastedCategoryShow = null;
                     }
                     this._clearPrevCatSelection(this.current_motion_actor);
-                    this._select_category(this.current_motion_actor._delegate.category, this.current_motion_actor._delegate);
+                    this._select_category(this.current_motion_actor._delegate.category || null);
                     this.catShow = true;
                 }
                 let [mouse_x, mouse_y, mask] = global.get_pointer(); // jshint ignore:line
@@ -1532,25 +1524,17 @@ MyApplet.prototype = {
             }
         } else {
             if (this.vectorBox) {
-                let swapped = this.pref_swap_categories_box;
                 let [mouse_x, mouse_y, mask] = global.get_pointer(); // jshint ignore:line
                 let [catbox_x, catbox_y] = this.categoriesApplicationsBox.actor.get_transformed_position(); // jshint ignore:line
-                let xformed_mouse_x = mouse_x - (swapped ? -catbox_x : catbox_x);
+                let xformed_mouse_x = mouse_x - catbox_x;
                 let [appbox_x, appbox_y] = this.applicationsBox.get_transformed_position(); // jshint ignore:line
-                let right_x = appbox_x - (swapped ? -catbox_x : catbox_x);
+                let right_x = appbox_x - catbox_x;
 
                 if ((right_x - xformed_mouse_x) > 0) {
                     this.vectorBox.width = Math.max(right_x - xformed_mouse_x, 0);
                     this.vectorBox.set_position(xformed_mouse_x, 0);
-
-                    if (swapped) {
-                        this.vectorBox.ulc_x = this.vectorBox.width;
-                        this.vectorBox.llc_x = this.vectorBox.width;
-                    } else {
-                        this.vectorBox.urc_x = this.vectorBox.width;
-                        this.vectorBox.lrc_x = this.vectorBox.width;
-                    }
-
+                    this.vectorBox.urc_x = this.vectorBox.width;
+                    this.vectorBox.lrc_x = this.vectorBox.width;
                     this.vectorBox.queue_repaint();
                 } else {
                     this.destroyVectorBox(actor);
@@ -1629,7 +1613,7 @@ MyApplet.prototype = {
             this.placesButton = new $.PlaceCategoryButton(this, null, this.pref_display_category_icons);
             let selectCat = Lang.bind(this, function() {
                 this.closeContextMenus(null, false);
-                this._displayButtons(null, -1);
+                this._select_category("places");
             });
             this._addEnterEvent(this.placesButton, Lang.bind(this, function() {
                 if (!this.searchActive) {
@@ -1638,7 +1622,6 @@ MyApplet.prototype = {
                         Tweener.addTween(this, {
                             time: this.cat_hover_delay,
                             onComplete: function() {
-                                // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                                 if (this.placesButton.isHovered) {
                                     this._clearPrevCatSelection(this.placesButton);
                                     this.placesButton.actor.style_class = "menu-category-button-selected";
@@ -1646,19 +1629,15 @@ MyApplet.prototype = {
                                 } else {
                                     this.placesButton.actor.style_class = "menu-category-button";
                                 }
-                                // }));
                             }
                         });
                     } else {
-                        // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                         this._clearPrevCatSelection(this.placesButton);
                         this.placesButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
                             selectCat();
                         }
-                        // }));
-
                     }
                     this.makeVectorBox(this.placesButton.actor);
                 }
@@ -1764,7 +1743,7 @@ MyApplet.prototype = {
             this.recentButton = new $.RecentCategoryButton(this, null, this.pref_display_category_icons);
             let selectCat = Lang.bind(this, function() {
                 this.closeContextMenus(null, false);
-                this._displayButtons(null, null, -1);
+                this._select_category("recent");
             });
             this._addEnterEvent(this.recentButton, Lang.bind(this, function() {
                 if (!this.searchActive) {
@@ -1773,7 +1752,6 @@ MyApplet.prototype = {
                         Tweener.addTween(this, {
                             time: this.cat_hover_delay,
                             onComplete: function() {
-                                // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                                 if (this.recentButton.isHovered) {
                                     this._clearPrevCatSelection(this.recentButton.actor);
                                     this.recentButton.actor.style_class = "menu-category-button-selected";
@@ -1781,18 +1759,15 @@ MyApplet.prototype = {
                                 } else {
                                     this.recentButton.actor.style_class = "menu-category-button";
                                 }
-                                // }));
                             }
                         });
                     } else {
-                        // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                         this._clearPrevCatSelection(this.recentButton.actor);
                         this.recentButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
                             selectCat();
                         }
-                        // }));
                     }
                     this.makeVectorBox(this.recentButton.actor);
                 }
@@ -2054,7 +2029,7 @@ MyApplet.prototype = {
         if (!this.pref_hide_allapps_category && !this.pref_display_favorites_as_category_menu) {
             this._allAppsCategoryButton = new $.CategoryButton(this, null);
             let selectCat = Lang.bind(this, function() {
-                this._select_category(null, this._allAppsCategoryButton);
+                this._select_category(null);
             });
             this._addEnterEvent(this._allAppsCategoryButton, Lang.bind(this, function() {
                 if (!this.searchActive) {
@@ -2063,7 +2038,6 @@ MyApplet.prototype = {
                         Tweener.addTween(this, {
                             time: this.cat_hover_delay,
                             onComplete: function() {
-                                // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                                 if (this._allAppsCategoryButton.isHovered) {
                                     this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
                                     this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -2071,18 +2045,15 @@ MyApplet.prototype = {
                                 } else {
                                     this._allAppsCategoryButton.actor.style_class = "menu-category-button";
                                 }
-                                // }));
                             }
                         });
                     } else {
-                        // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                         this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
                         this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
                             selectCat();
                         }
-                        // }));
                     }
                     this.makeVectorBox(this._allAppsCategoryButton.actor);
                 }
@@ -2157,7 +2128,7 @@ MyApplet.prototype = {
             }
 
             let selectCat = Lang.bind(this, function() {
-                this._select_category(this._initialSelectedCategory, this._allAppsCategoryButton);
+                this._select_category(this._initialSelectedCategory);
             });
             this._addEnterEvent(this._allAppsCategoryButton, Lang.bind(this, function() {
                 if (!this.searchActive) {
@@ -2166,7 +2137,6 @@ MyApplet.prototype = {
                         Tweener.addTween(this, {
                             time: this.cat_hover_delay,
                             onComplete: function() {
-                                // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                                 if (this._allAppsCategoryButton.isHovered) {
                                     this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
                                     this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
@@ -2174,18 +2144,15 @@ MyApplet.prototype = {
                                 } else {
                                     this._allAppsCategoryButton.actor.style_class = "menu-category-button";
                                 }
-                                // }));
                             }
                         });
                     } else {
-                        // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                         this._clearPrevCatSelection(this._allAppsCategoryButton.actor);
                         this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
                             selectCat();
                         }
-                        // }));
                     }
                     this.makeVectorBox(this._allAppsCategoryButton.actor);
                 }
@@ -2219,7 +2186,7 @@ MyApplet.prototype = {
             this.recentAppsCatButton = new $.RecentAppsCategoryButton(this, null, this.pref_display_category_icons);
             let selectCat = Lang.bind(this, function() {
                 this.closeContextMenus(null, false);
-                this._select_category("recentApps", null, null, null, null, true);
+                this._select_category("recentApps");
             });
             this._addEnterEvent(this.recentAppsCatButton, Lang.bind(this, function() {
                 if (!this.searchActive) {
@@ -2228,7 +2195,6 @@ MyApplet.prototype = {
                         Tweener.addTween(this, {
                             time: this.cat_hover_delay,
                             onComplete: function() {
-                                // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                                 if (this.recentAppsCatButton.isHovered) {
                                     this._clearPrevCatSelection(this.recentAppsCatButton.actor);
                                     this.recentAppsCatButton.actor.style_class = "menu-category-button-selected";
@@ -2236,18 +2202,15 @@ MyApplet.prototype = {
                                 } else {
                                     this.recentAppsCatButton.actor.style_class = "menu-category-button";
                                 }
-                                // }));
                             }
                         });
                     } else {
-                        // Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
                         this._clearPrevCatSelection(this.recentAppsCatButton.actor);
                         this.recentAppsCatButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
                             selectCat();
                         }
-                        // }));
                     }
                     this.makeVectorBox(this.recentAppsCatButton.actor);
                 }
@@ -2309,8 +2272,8 @@ MyApplet.prototype = {
             return 0;
         };
 
-        let selectCat = Lang.bind(this, function(dir, categoryButton) {
-            this._select_category(dir, categoryButton);
+        let selectCat = Lang.bind(this, function(dir) {
+            this._select_category(dir.get_menu_id());
         });
 
         let handleCatEnterEvent = Lang.bind(this, function(categoryButton, dir) {
@@ -2324,7 +2287,7 @@ MyApplet.prototype = {
                                 if (categoryButton.isHovered) {
                                     this._clearPrevCatSelection(categoryButton.actor);
                                     categoryButton.actor.style_class = "menu-category-button-selected";
-                                    selectCat(dir, categoryButton);
+                                    selectCat(dir);
                                 } else {
                                     categoryButton.actor.style_class = "menu-category-button";
                                 }
@@ -2335,7 +2298,7 @@ MyApplet.prototype = {
                         categoryButton.actor.style_class = "menu-category-button-selected";
 
                         if (this.pref_cat_select_on_hover || this._fromKeyboard) {
-                            selectCat(dir, categoryButton);
+                            selectCat(dir);
                         }
                     }
                     this.makeVectorBox(categoryButton.actor);
@@ -2388,13 +2351,13 @@ MyApplet.prototype = {
 
                     if (!this.pref_cat_select_on_hover) {
                         categoryButton.actor.connect("button-press-event",
-                            Lang.bind(this, selectCat, dir, categoryButton));
+                            Lang.bind(this, selectCat, dir));
                         categoryButton.actor.connect("button-release-event",
-                            Lang.bind(this, selectCat, dir, categoryButton));
+                            Lang.bind(this, selectCat, dir));
                         categoryButton.connect("button-press-event",
-                            Lang.bind(this, selectCat, dir, categoryButton));
+                            Lang.bind(this, selectCat, dir));
                         categoryButton.connect("button-release-event",
-                            Lang.bind(this, selectCat, dir, categoryButton));
+                            Lang.bind(this, selectCat, dir));
                     }
 
                     handleCatLeaveEvent(categoryButton, dir);
@@ -2508,10 +2471,7 @@ MyApplet.prototype = {
             if (app) {
                 let button = new $.FavoritesButton(this, app, launchers.length + extraButtons);
                 this._favoritesButtons[app] = button;
-                this.favoritesBox.add_actor(button.actor, {
-                    y_align: St.Align.END,
-                    y_fill: false
-                });
+                this.favoritesBox.add_actor(button.actor);
 
                 this._addEnterEvent(button, Lang.bind(this, this._favEnterEvent, button));
                 button.actor.connect('leave-event', Lang.bind(this, this._favLeaveEvent, button));
@@ -2568,10 +2528,7 @@ MyApplet.prototype = {
                     }
                 });
 
-                this.favoritesBox.add_actor(button1.actor, {
-                    y_align: St.Align.END,
-                    y_fill: false
-                });
+                this.favoritesBox.add_actor(button1.actor);
             }
 
             if (this.pref_show_logout_button) { // Logout button
@@ -2592,10 +2549,7 @@ MyApplet.prototype = {
                     this._session.LogoutRemote(0);
                 });
 
-                this.favoritesBox.add_actor(button2.actor, {
-                    y_align: St.Align.END,
-                    y_fill: false
-                });
+                this.favoritesBox.add_actor(button2.actor);
             }
 
             if (this.pref_show_shutdown_button) { // Shutdown button
@@ -2616,10 +2570,7 @@ MyApplet.prototype = {
                     this._session.ShutdownRemote();
                 });
 
-                this.favoritesBox.add_actor(button3.actor, {
-                    y_align: St.Align.END,
-                    y_fill: false
-                });
+                this.favoritesBox.add_actor(button3.actor);
             }
         }
 
@@ -2777,10 +2728,7 @@ MyApplet.prototype = {
         });
 
         if (this.pref_display_fav_box) {
-            this.leftPane.add_actor(this.leftBox, {
-                y_align: St.Align.END,
-                y_fill: false
-            });
+            this.leftPane.add_actor(this.leftBox);
         }
 
         this.rightPane = new St.BoxLayout({
@@ -3048,10 +2996,7 @@ MyApplet.prototype = {
 
         let fav_obj = new $.FavoritesBox();
         this.favoritesBox = fav_obj.actor;
-        this.leftBox.add_actor(this.favoritesBox, {
-            y_align: St.Align.END,
-            y_fill: false
-        });
+        this.leftBox.add_actor(this.favoritesBox);
 
         this.mainBox = new St.BoxLayout({
             style_class: 'menu-applications-outer-box',
@@ -3059,12 +3004,8 @@ MyApplet.prototype = {
         });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
 
-        this.mainBox.add_actor(this.leftPane, {
-            span: 1
-        });
-        this.mainBox.add_actor(this.rightPane, {
-            span: 1
-        });
+        this.mainBox.add_actor(this.leftPane);
+        this.mainBox.add_actor(this.rightPane);
 
         section.actor.add_actor(this.mainBox);
 
@@ -3378,22 +3319,29 @@ MyApplet.prototype = {
         }
     },
 
-    _select_category: function(dir, categoryButton) { // jshint ignore:line
-        if (dir) {
-            /**
-             * START mark Odyseus
-             */
-            if (dir === "favorites")
-                this._displayButtons(dir);
-            else if (dir === "recentApps")
-                this._displayButtons(dir, null, null, null, null, true);
-            else
-                this._displayButtons(this._listApplications(dir.get_menu_id()));
-            /**
-             * END
-             */
-        } else
+    _select_category: function(name) {
+        if (name === this.lastSelectedCategory) {
+            return;
+        }
+
+        this.lastSelectedCategory = name;
+
+        if (name) {
+            if (name === "favorites") {
+                this._displayButtons(name);
+            } else if (name === "recentApps") {
+                this._displayButtons(name, null, null, null, null, true);
+            } else if (name === "places") {
+                this._displayButtons(null, -1);
+            } else if (name === "recent") {
+                this._displayButtons(null, null, -1);
+            } else {
+                this._displayButtons(this._listApplications(name));
+            }
+        } else {
             this._displayButtons(this._listApplications(null));
+        }
+
         this.closeContextMenus(null, false);
     },
 
@@ -3634,7 +3582,7 @@ MyApplet.prototype = {
                              */
                             this._select_category(this.pref_hide_allapps_category ?
                                 this._initialSelectedCategory :
-                                null, this._allAppsCategoryButton);
+                                null);
                             /**
                              * END
                              */
@@ -3675,7 +3623,7 @@ MyApplet.prototype = {
                  */
                 this._select_category(this.pref_hide_allapps_category ?
                     this._initialSelectedCategory :
-                    null, this._allAppsCategoryButton);
+                    null);
                 /**
                  * END
                  */
@@ -3967,7 +3915,7 @@ MyApplet.prototype = {
     setSelectedItemTitleAndDescription: function(aEl, aTitle, aDescription) {
         switch (this.pref_appinfo_display_method) {
             case "tooltip":
-                if (aEl) {
+                if (aEl && aEl.tooltip) {
                     try {
                         aEl.tooltip._tooltip.get_clutter_text().set_markup(
                             (aTitle ?
