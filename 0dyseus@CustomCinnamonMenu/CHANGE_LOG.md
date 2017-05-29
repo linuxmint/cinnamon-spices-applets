@@ -4,6 +4,29 @@
 
 ***
 
+- **Date:** Mon, 29 May 2017 07:19:03 -0300
+- **Commit:** [ddb3599](https://github.com/Odyseus/CinnamonTools/commit/ddb3599)
+- **Author:** Odyseus
+
+```
+Custom Cinnamon Menu applet
+- Updated help file due to updated localization.
+
+```
+
+***
+
+- **Date:** Mon, 29 May 2017 17:08:27 +0800
+- **Commit:** [ca58c46](https://github.com/Odyseus/CinnamonTools/commit/ca58c46)
+- **Author:** giwhub
+
+```
+Update zh_CN.po
+
+```
+
+***
+
 - **Date:** Mon, 29 May 2017 02:46:05 -0300
 - **Commit:** [27d1972](https://github.com/Odyseus/CinnamonTools/commit/27d1972)
 - **Author:** Odyseus
