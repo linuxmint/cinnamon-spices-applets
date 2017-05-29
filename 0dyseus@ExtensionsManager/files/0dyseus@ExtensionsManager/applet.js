@@ -33,6 +33,7 @@ MyApplet.prototype = {
             this._bind_settings();
 
             this.metadata = aMetadata;
+            this.applet_dir = aMetadata.path;
             this.orientation = aOrientation;
 
             Gtk.IconTheme.get_default().append_search_path(this.metadata.path + "/icons/");
@@ -140,6 +141,25 @@ MyApplet.prototype = {
             global.reexec_self();
         }));
         this._applet_context_menu.addMenuItem(menuItem);
+
+        menuItem = new PopupMenu.PopupIconMenuItem(
+            _("Debug"),
+            "extensions-manager-debugging",
+            St.IconType.SYMBOLIC);
+        menuItem.connect("activate", Lang.bind(this, function() {
+            Util.spawn_async([this.metadata.path + "/appletHelper.py", "--debug-window"], null);
+        }));
+        this._applet_context_menu.addMenuItem(menuItem);
+
+        menuItem = new PopupMenu.PopupIconMenuItem(
+            _("Help"),
+            "dialog-information",
+            St.IconType.SYMBOLIC
+        );
+        menuItem.connect("activate", Lang.bind(this, function() {
+            Util.spawn_async(["xdg-open", this.applet_dir + "/HELP.html"], null);
+        }));
+        this._applet_context_menu.addMenuItem(menuItem);
     },
 
     getEnabledExtensionsUUIDs: function() {
@@ -208,12 +228,15 @@ MyApplet.prototype = {
      */
     store_extension_data: function() {
         try {
-            Util.spawn_async(["python2", this.metadata.path + "/appletHelper.py", "--list"],
+            Util.spawn_async([this.metadata.path + "/appletHelper.py", "--list"],
                 Lang.bind(this, function(aResponse) {
                     let extensionData;
                     try {
                         extensionData = JSON.parse(aResponse);
                     } catch (aErr) {
+                        let msg = _("Source of error: %s").format("appletHelper.py --list");
+                        $.informJSONError(msg);
+                        global.logError(this.metadata.name + ":\n" + msg + "\n" + aErr);
                         extensionData = {};
                     }
 
@@ -257,6 +280,9 @@ MyApplet.prototype = {
         try {
             spicesData = JSON.parse(aResponse);
         } catch (aErr) {
+            let msg = _("Source of error: %s").format("Spices cache file");
+            $.informJSONError(msg);
+            global.logError(this.metadata.name + ":\n" + msg + "\n" + aErr);
             spicesData = null;
         }
 
@@ -340,99 +366,100 @@ MyApplet.prototype = {
             this._populateSubMenusId = 0;
         }
 
-        this._populateSubMenusId = Mainloop.timeout_add(this._forceMenuRebuildDelay, Lang.bind(this, function() {
-            if (this.pref_all_extensions_list.length === 0) {
-                this.menu.removeAll();
-                let label = new $.GenericButton(_("There aren't any extensions installed on your system. Or you may need to refresh the list of extensions from this applet context menu."));
-                label.label.set_style("text-align: left;max-width: 20em;");
-                label.label.get_clutter_text().set_line_wrap(true);
-                label.label.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-                label.label.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
-                this.menu.addMenuItem(label);
-            }
-
-            if (!this._forceMenuRebuild || this.menu.isOpen) {
-                this._populateSubMenusId = 0;
-                return;
-            }
-
-            if (this.enabledExtSubmenu)
-                this.enabledExtSubmenu.destroy();
-
-            if (this.disabledExtSubmenu)
-                this.disabledExtSubmenu.destroy();
-
-            this.enabledExtSubmenu = new PopupMenu.PopupSubMenuMenuItem("");
-            this.enabledExtSubmenu.menu.connect("open-state-changed",
-                Lang.bind(this, this._subMenuOpenStateChanged));
-            this.menu.addMenuItem(this.enabledExtSubmenu);
-
-            this.disabledExtSubmenu = new PopupMenu.PopupSubMenuMenuItem("");
-            this.disabledExtSubmenu.menu.connect("open-state-changed",
-                Lang.bind(this, this._subMenuOpenStateChanged));
-            this.menu.addMenuItem(this.disabledExtSubmenu);
-
-            this.enabledExtSubmenu.menu.removeAll();
-            this.disabledExtSubmenu.menu.removeAll();
-            this._update_menu_items_style();
-
-            let e = 0,
-                eCount = 0,
-                dCount = 0,
-                eLen = this.pref_all_extensions_list.length;
-
-            try {
-                for (; e < eLen; e++) {
-                    let extObj = this.pref_all_extensions_list[e];
-                    let prefix = extObj.version_supported ? "" : "!";
-                    extObj.is_enabled = enabledExtensionsGSetting.indexOf(prefix + extObj.uuid) !== -1;
-
-                    let item = null;
-                    try {
-                        item = new $.CustomSwitchMenuItem(this, extObj);
-                    } catch (aErr) {
-                        global.logError(aErr);
-                    }
-
-                    if (!item)
-                        continue;
-
-                    item.connect("toggled", Lang.bind(this, this._toggleExtensionState));
-
-                    if (extObj.is_enabled) {
-                        eCount++;
-                        this.enabledExtSubmenu.menu.addMenuItem(item);
-                    } else {
-                        dCount++;
-                        this.disabledExtSubmenu.menu.addMenuItem(item);
-                    }
+        this._populateSubMenusId = Mainloop.timeout_add(this._forceMenuRebuildDelay,
+            Lang.bind(this, function() {
+                if (this.pref_all_extensions_list.length === 0) {
+                    this.menu.removeAll();
+                    let label = new $.GenericButton(_("There aren't any extensions installed on your system. Or you may need to refresh the list of extensions from this applet context menu."));
+                    label.label.set_style("text-align: left;max-width: 20em;");
+                    label.label.get_clutter_text().set_line_wrap(true);
+                    label.label.get_clutter_text().set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+                    label.label.get_clutter_text().ellipsize = Pango.EllipsizeMode.NONE; // Just in case
+                    this.menu.addMenuItem(label);
                 }
-            } catch (aErr) {
-                global.logError(aErr);
-            } finally {
+
+                if (!this._forceMenuRebuild || this.menu.isOpen) {
+                    this._populateSubMenusId = 0;
+                    return;
+                }
+
+                if (this.enabledExtSubmenu)
+                    this.enabledExtSubmenu.destroy();
+
+                if (this.disabledExtSubmenu)
+                    this.disabledExtSubmenu.destroy();
+
+                this.enabledExtSubmenu = new PopupMenu.PopupSubMenuMenuItem("");
+                this.enabledExtSubmenu.menu.connect("open-state-changed",
+                    Lang.bind(this, this._subMenuOpenStateChanged));
+                this.menu.addMenuItem(this.enabledExtSubmenu);
+
+                this.disabledExtSubmenu = new PopupMenu.PopupSubMenuMenuItem("");
+                this.disabledExtSubmenu.menu.connect("open-state-changed",
+                    Lang.bind(this, this._subMenuOpenStateChanged));
+                this.menu.addMenuItem(this.disabledExtSubmenu);
+
+                this.enabledExtSubmenu.menu.removeAll();
+                this.disabledExtSubmenu.menu.removeAll();
+                this._update_menu_items_style();
+
+                let e = 0,
+                    eCount = 0,
+                    dCount = 0,
+                    eLen = this.pref_all_extensions_list.length;
+
                 try {
+                    for (; e < eLen; e++) {
+                        let extObj = this.pref_all_extensions_list[e];
+                        let prefix = extObj.version_supported ? "" : "!";
+                        extObj.is_enabled = enabledExtensionsGSetting.indexOf(prefix + extObj.uuid) !== -1;
 
-                    this.enabledExtSubmenu.label.set_text(_("Enabled extensions") + " (" + eCount + ")");
-                    let label;
-                    if (eCount === 0) {
-                        label = new $.GenericButton(_("No enabled extensions"));
-                        this.enabledExtSubmenu.menu.addMenuItem(label);
-                    }
+                        let item = null;
+                        try {
+                            item = new $.CustomSwitchMenuItem(this, extObj);
+                        } catch (aErr) {
+                            global.logError(aErr);
+                        }
 
-                    this.disabledExtSubmenu.label.set_text(_("Disabled extensions") + " (" + dCount + ")");
-                    if (dCount === 0) {
-                        label = new $.GenericButton(_("No disabled extensions"));
-                        this.disabledExtSubmenu.menu.addMenuItem(label);
+                        if (!item)
+                            continue;
+
+                        item.connect("toggled", Lang.bind(this, this._toggleExtensionState));
+
+                        if (extObj.is_enabled) {
+                            eCount++;
+                            this.enabledExtSubmenu.menu.addMenuItem(item);
+                        } else {
+                            dCount++;
+                            this.disabledExtSubmenu.menu.addMenuItem(item);
+                        }
                     }
                 } catch (aErr) {
                     global.logError(aErr);
-                }
-            }
+                } finally {
+                    try {
 
-            this._forceMenuRebuild = false;
-            this._forceMenuRebuildDelay = 200;
-            this._populateSubMenusId = 0;
-        }));
+                        this.enabledExtSubmenu.label.set_text(_("Enabled extensions") + " (" + eCount + ")");
+                        let label;
+                        if (eCount === 0) {
+                            label = new $.GenericButton(_("No enabled extensions"));
+                            this.enabledExtSubmenu.menu.addMenuItem(label);
+                        }
+
+                        this.disabledExtSubmenu.label.set_text(_("Disabled extensions") + " (" + dCount + ")");
+                        if (dCount === 0) {
+                            label = new $.GenericButton(_("No disabled extensions"));
+                            this.disabledExtSubmenu.menu.addMenuItem(label);
+                        }
+                    } catch (aErr) {
+                        global.logError(aErr);
+                    }
+                }
+
+                this._forceMenuRebuild = false;
+                this._forceMenuRebuildDelay = 200;
+                this._populateSubMenusId = 0;
+            }));
     },
 
     _toggleExtensionState: function(aSwitch) {

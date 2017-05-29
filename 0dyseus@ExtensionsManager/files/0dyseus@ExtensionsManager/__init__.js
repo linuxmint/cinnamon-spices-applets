@@ -1,4 +1,5 @@
 const AppletUUID = "0dyseus@ExtensionsManager";
+const AppletMeta = imports.ui.appletManager.appletMeta[AppletUUID];
 const Gettext = imports.gettext;
 const Clutter = imports.gi.Clutter;
 const ModalDialog = imports.ui.modalDialog;
@@ -10,6 +11,15 @@ const Lang = imports.lang;
 const Util = imports.misc.util;
 const Gio = imports.gi.Gio;
 const Pango = imports.gi.Pango;
+const Main = imports.ui.main;
+const MessageTray = imports.ui.messageTray;
+
+const NotificationUrgency = {
+    LOW: 0,
+    NORMAL: 1,
+    HIGH: 2,
+    CRITICAL: 3
+};
 
 const SPICES_URL = "http://cinnamon-spices.linuxmint.com";
 
@@ -17,9 +27,10 @@ Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(aStr) {
     let customTrans = Gettext.dgettext(AppletUUID, aStr);
-    if (customTrans != aStr) {
+
+    if (customTrans !== aStr && aStr !== "")
         return customTrans;
-    }
+
     return Gettext.gettext(aStr);
 }
 
@@ -394,3 +405,117 @@ CustomSwitchMenuItem.prototype = {
         }
     }
 };
+
+function informJSONError(aMsg) {
+    customNotify(
+        _(AppletMeta.name),
+        _("Error parsing JSON string.") + "\n" +
+        aMsg + "\n" +
+        _("A detailed error has been logged into ~/.cinnamon/glass.log."),
+        "dialog-warning",
+        NotificationUrgency.CRITICAL, [{
+            label: "~/.cinnamon/glass.log", // Just in case.
+            tooltip: "~/.cinnamon/glass.log",
+            iconName: "extensions-manager-edit-find",
+            callback: function() {
+                Gio.AppInfo.launch_default_for_uri(
+                    "file://" + GLib.get_home_dir() + "/.cinnamon/glass.log",
+                    null
+                );
+            }
+        }]);
+}
+
+function customNotify(aTitle, aBody, aIconName, aUrgency, aButtons) {
+    let icon = new St.Icon({
+        icon_name: aIconName,
+        icon_type: St.IconType.SYMBOLIC,
+        icon_size: 24
+    });
+    let source = new MessageTray.SystemNotificationSource();
+    Main.messageTray.add(source);
+    let notification = new MessageTray.Notification(source, aTitle, aBody, {
+        icon: icon,
+        bodyMarkup: true,
+        titleMarkup: true,
+        bannerMarkup: true
+    });
+    notification.setTransient(aUrgency === NotificationUrgency.LOW);
+
+    if (aUrgency !== NotificationUrgency.LOW && typeof aUrgency === "number") {
+        notification.setUrgency(aUrgency);
+    }
+
+    try {
+        if (aButtons && typeof aButtons === "object") {
+            let i = 0,
+                iLen = aButtons.length;
+            for (; i < iLen; i++) {
+                let btnObj = aButtons[i];
+                try {
+                    if (!notification._buttonBox) {
+
+                        let box = new St.BoxLayout({
+                            name: "notification-actions"
+                        });
+                        notification.setActionArea(box, {
+                            x_expand: true,
+                            y_expand: false,
+                            x_fill: true,
+                            y_fill: false,
+                            x_align: St.Align.START
+                        });
+                        notification._buttonBox = box;
+                    }
+
+                    let button = new St.Button({
+                        can_focus: true
+                    });
+
+                    if (btnObj.iconName) {
+                        notification.setUseActionIcons(true);
+                        button.add_style_class_name("notification-icon-button");
+                        button.child = new St.Icon({
+                            icon_name: btnObj.iconName,
+                            icon_type: St.IconType.SYMBOLIC,
+                            icon_size: 16
+                        });
+                    } else {
+                        button.add_style_class_name("notification-button");
+                        button.label = btnObj.label;
+                    }
+
+                    button.connect("clicked", btnObj.callback);
+
+                    if (btnObj.tooltip) {
+                        button.tooltip = new Tooltips.Tooltip(
+                            button,
+                            btnObj.tooltip
+                        );
+                        button.connect("destroy", function() { // jshint ignore:line
+                            button.tooltip.destroy();
+                        });
+                    }
+
+                    if (notification._buttonBox.get_n_children() > 0)
+                        notification._buttonFocusManager.remove_group(notification._buttonBox);
+
+                    notification._buttonBox.add(button);
+                    notification._buttonFocusManager.add_group(notification._buttonBox);
+                    notification._inhibitTransparency = true;
+                    notification.updateFadeOnMouseover();
+                    notification._updated();
+                } catch (aErr) {
+                    global.logError(aErr);
+                    continue;
+                }
+            }
+        }
+    } finally {
+        source.notify(notification);
+    }
+}
+
+/*
+exported informJSONError
+ */
