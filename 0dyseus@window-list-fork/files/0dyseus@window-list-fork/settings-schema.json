@@ -11,6 +11,7 @@
     },
     "pref_reverse_scrolling": {
         "type": "checkbox",
+        "dependency" : "pref_enable_scrolling",
         "default": false,
         "description": "Reverse the direction of mouse-wheel scrolling in the window list"
     },
