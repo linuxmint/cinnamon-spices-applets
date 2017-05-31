@@ -23,7 +23,7 @@ msgstr "Ustawienia"
 
 #: applet.js:127
 msgid "ERROR. No compatible virtual machine programs found."
-msgstr "BŁĄD. Nie znaleziono kompatybilnych maszyn wirtualnych."
+msgstr "BŁĄD. Nie znaleziono zgodnych maszyn wirtualnych."
 
 #: applet.js:197
 msgid "Update list"
