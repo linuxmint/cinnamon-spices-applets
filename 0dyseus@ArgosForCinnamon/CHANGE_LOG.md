@@ -4,6 +4,19 @@
 
 ***
 
+- **Date:** Wed, 31 May 2017 09:09:42 -0300
+- **Commit:** [a09fd63](https://github.com/Odyseus/CinnamonTools/commit/a09fd63)
+- **Author:** Odyseus
+
+```
+Argos for Cinnamon applet
+- Updated screenshot.png file. Trying an animated PNG that represents a little better what Argos for
+Cinnamon can do.
+
+```
+
+***
+
 - **Date:** Mon, 29 May 2017 07:18:07 -0300
 - **Commit:** [3ebb668](https://github.com/Odyseus/CinnamonTools/commit/3ebb668)
 - **Author:** Odyseus
