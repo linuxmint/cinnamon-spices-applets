@@ -23,14 +23,24 @@ MyApplet.prototype = {
         try {        
             this.set_applet_icon_name("window-close");
             this.set_applet_tooltip(_("Click here to kill a window"));                                                
+            this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
         }
         catch (e) {
             global.logError(e);
         }
     },
     
-    on_applet_clicked: function(event) {
-        GLib.spawn_command_line_async('xkill');
+    _onButtonReleaseEvent: function(actor, event) {
+        if (this._applet_enabled) {
+            if (event.get_button() == 1) {
+                if (!this._draggable.inhibit) {
+                    return false;
+                } else {
+                    GLib.spawn_command_line_async('xkill');
+                }
+            }
+        }
+        return true;
     }
    
 };
