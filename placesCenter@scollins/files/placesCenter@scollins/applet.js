@@ -12,10 +12,21 @@ const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
 
 const Util = imports.misc.util;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 
 const MENU_ITEM_TEXT_LENGTH = 25;
 let menu_item_icon_size;
+let uuid;
+
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(uuid, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+}
 
 
 function MenuItem(title, icon){
@@ -266,17 +277,6 @@ ClearRecentMenuItem.prototype = {
     }
 }
 
-// l10n/translation
-const Gettext = imports.gettext;
-let UUID;
-
-function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
-   if(customTranslation != str) {
-      return customTranslation;
-   }
-   return Gettext.gettext(str);
-};
 
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
@@ -294,9 +294,8 @@ MyApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
-            // l10n/translation
-            UUID = metadata.uuid;
-            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+            uuid = metadata.uuid;
+            Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
 
             //initiate settings
             this.bindSettings();
