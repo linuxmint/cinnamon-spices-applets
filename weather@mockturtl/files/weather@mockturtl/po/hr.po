@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2017-02-26 00:06+0100\n"
+"POT-Creation-Date: 2017-04-30 15:41+0200\n"
+"PO-Revision-Date: 2017-05-04 17:25+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -301,9 +301,21 @@ msgstr "Z"
 msgid "NW"
 msgstr "SZ"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Postavke za weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Postavi prečac tipkovnice za otvaranje pregleda vremena"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Nabavite WOEID kôd"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -419,7 +431,7 @@ msgstr "in Hg"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
 msgid "Update interval"
-msgstr "Razdoblje ažuriranja"
+msgstr "Razdoblje nadopunjavanja"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->units
 msgid "minutes"

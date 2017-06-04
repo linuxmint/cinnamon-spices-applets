@@ -186,6 +186,7 @@ MyApplet.prototype = {
 
          // populate dirs first
          if (dirs.length > 0) {
+            dirs.sort();
             for (let i = 0; i < dirs.length; i++) {
                let directory =  currentDir.get_path() + "/" + dirs[i];
                let submenu = new PopupMenu.PopupSubMenuMenuItem(dirs[i]);
@@ -197,6 +198,7 @@ MyApplet.prototype = {
 
          // populate files
          if (files.length > 0) {
+            files.sort();
             for (let i = 0; i < files.length; i++) {
                let script = currentDir.get_path() + "/" + files[i];
                let item = new PopupMenu.PopupMenuItem(files[i]);

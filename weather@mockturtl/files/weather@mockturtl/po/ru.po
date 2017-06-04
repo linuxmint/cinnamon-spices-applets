@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cinnamon-weather 1.12.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2016-05-29 21:57+0500\n"
+"POT-Creation-Date: 2017-05-06 22:55+0500\n"
+"PO-Revision-Date: 2017-05-06 23:07+0500\n"
 "Last-Translator: Matvey Vyalkov <cybertailor@gmail.com>\n"
 "Language-Team: русский <>\n"
 "Language: ru\n"
@@ -304,9 +304,21 @@ msgstr "З"
 msgid "NW"
 msgstr "СЗ"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Параметры weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Комбинация клавиш для вызова меню"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Получить WOEID"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -350,7 +362,7 @@ msgstr "Показывать время в 24-часовом формате"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Длина прогноза"
+msgstr "Дальность прогноза"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
@@ -358,7 +370,7 @@ msgstr "дни"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Показывать время восхода/заката"
+msgstr "Показывать время восхода и заката"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
@@ -382,7 +394,7 @@ msgstr "мили/ч"
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Показывать метеорологические условия (\"Ветрено\", \"Ясно\") на панели"
+msgstr "Показывать метеорологические условия («Ветрено», «Ясно») на панели"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"

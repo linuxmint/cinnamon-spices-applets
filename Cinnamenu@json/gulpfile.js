@@ -6,7 +6,7 @@ var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('install', (cb)=>{
-  exec('cp -arf ./files/Cinnamenu@json/3.4/* ~/.local/share/cinnamon/applets/Cinnamenu@json && cp -af ./files/Cinnamenu@json/metadata.json ~/.local/share/cinnamon/applets/Cinnamenu@json && cp -af ./files/Cinnamenu@json/icon.png ~/.local/share/cinnamon/applets/Cinnamenu@json', function (err, stdout, stderr) {
+  exec('cp -arf ./files/Cinnamenu@json/* ~/.local/share/cinnamon/applets/Cinnamenu@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
@@ -22,7 +22,7 @@ gulp.task('reload', ['install'], (cb)=>{
 })
 
 gulp.task('watch', ()=> {
-  gulp.watch('./files/Cinnamenu@json/3.4/*.{js,json,py,css,md,po}', ['reload']);
+  gulp.watch('./files/Cinnamenu@json/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
 });
 
 gulp.task('clear-terminal', ()=> {

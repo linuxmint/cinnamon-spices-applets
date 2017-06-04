@@ -409,9 +409,15 @@ MyApplet.prototype = {
         // Polling for likely API throttling
         Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
           this.refreshWeather(false)
-        }))  
+        }))
       }
+
       let weather = json.query.results.channel
+
+      if (!weather.item) {
+        return false
+      }
+
       let weather_c = weather.item.condition
       let forecast = weather.item.forecast
 
@@ -1044,8 +1050,8 @@ MyApplet.prototype = {
       case 37:/* isolated thunderstorms */
         return _('Isolated thunderstorms')
       case 38:/* scattered thunderstorms */
-      case 39:/* scattered thunderstorms */
         return _('Scattered thunderstorms')
+      case 39:/* http://developer.yahoo.com/forum/YDN-Documentation/Yahoo-Weather-API-Wrong-Condition-Code/1290534174000-1122fc3d-da6d-34a2-9fb9-d0863e6c5bc6 */
       case 40:/* scattered showers */
         return _('Scattered showers')
       case 41:/* heavy snow */

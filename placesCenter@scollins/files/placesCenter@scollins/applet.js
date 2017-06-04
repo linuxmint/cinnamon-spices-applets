@@ -483,7 +483,7 @@ MyApplet.prototype = {
         let defaultPlaces = Main.placesManager.getDefaultPlaces();
         let bookmarks = [defaultPlaces[0]]
         if ( this.showDesktop ) bookmarks.push(defaultPlaces[1]);
-        let bookmarks = bookmarks.concat(Main.placesManager.getBookmarks());
+        bookmarks = bookmarks.concat(Main.placesManager.getBookmarks());
 
         for ( let i = 0; i < bookmarks.length; i++) {
             let bookmark = new BookmarkMenuItem(this.menu, bookmarks[i]);

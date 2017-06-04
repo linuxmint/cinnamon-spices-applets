@@ -37,6 +37,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
+#: applet.js:313
+msgid "No unread feeds"
+msgstr ""
+
 #: applet.js:541
 msgid "Feeds"
 msgstr ""

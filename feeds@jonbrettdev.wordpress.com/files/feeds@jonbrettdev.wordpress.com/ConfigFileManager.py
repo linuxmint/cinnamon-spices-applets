@@ -1,5 +1,4 @@
-#!/usr/bin/python
-# -*- encoding: utf-8 -*-
+#!/usr/bin/env python3
 '''
  * Cinnamon RSS feed reader (python backend)
  *
@@ -25,17 +24,9 @@ import json
 import csv
 import argparse
 import xml.etree.ElementTree as et
-from gi.repository import Gtk
 import gi
-
 gi.require_version('Gtk', '3.0')
-
-
-# If python2 then FileNotFoundError is not defined, so define it.
-try:
-    FileNotFoundError
-except NameError:
-    FileNotFoundError = IOError
+from gi.repository import Gtk
 
 DEFAULT_FEEDS = '''
 {
@@ -77,34 +68,6 @@ DEFAULT_FEEDS = '''
     ]
 }
 '''
-
-class UnicodeCSVWriter(object):
-    '''
-        This class will handle writing csv for python 2 because
-        the handling of reading / wring utf-8 is different
-    '''
-    def __init__(self, f, encoding='utf-8', **kwargs):
-        self.csv_writer = csv.writer(f, **kwargs)
-        self.encoding = encoding
-
-
-    def writerow(self, line):
-        '''
-            Write a line to the csv file decoding if required.
-        '''
-        dec = []
-        for col in line:
-            foo = col
-            if isinstance(foo, str):
-                bar = foo.decode('utf-8')
-                dec.append(bar)
-            else:
-                dec.append(col)
-
-        # This is only called by Python2 so we can disable the warning.
-        # pragma pylint: disable=E0602
-        self.csv_writer.writerow([col.encode(self.encoding, "ignore") if isinstance(col, basestring) else col for col in dec])
-
 
 class ConfigFileManager:
     '''
@@ -164,8 +127,8 @@ class ConfigFileManager:
 
                 # Add all the feeds back in
                 for feed in self.feeds:
-                    url = feed[2].decode('utf-8') if sys.version_info.major < 3 else feed[2]
-                    title = feed[3].decode('utf-8') if sys.version_info.major < 3 else feed[3]
+                    url = feed[2]
+                    title = feed[3]
 
                     instance['feeds'].append({
                         'id': feed[0],
@@ -300,8 +263,8 @@ class ConfigFileManager:
             filereader = csv.reader(file)
 
             for line in filereader:
-                url = line[1].decode('utf-8') if sys.version_info.major < 3 else line[1]
-                title = line[2].decode('utf-8') if sys.version_info.major < 3 else line[2]
+                url = line[1]
+                title = line[2]
 
                 self.feeds.append(
                     [ConfigFileManager.get_new_id()] + [self.__to_bool(line[0]),
@@ -328,10 +291,7 @@ class ConfigFileManager:
         '''
         try:
             with open(file_name, mode="r") as json_file:
-                if sys.version_info.major < 3:
-                    json_obj = json.load(json_file)
-                else:
-                    json_obj = json.load(json_file)
+                json_obj = json.load(json_file)
 
         except FileNotFoundError:
             # No file found, return default values # everything else throws.
@@ -348,38 +308,15 @@ class ConfigFileManager:
 
 
     @staticmethod
-    def deunicodify_hook(pairs):
-        '''
-            Used for decoding utf-8 in jsonfile when reading in python 2locally-disabled
-        '''
-        new_pairs = []
-        for key, value in pairs:
-            # This is only called by Python2 so we can disable the unicode not defined error.
-            # pragma pylint: disable=E0602
-            if isinstance(value, unicode):
-                value = value.decode('utf-8')
-
-            if isinstance(key, unicode):
-                key = key.decode('utf-8')
-            new_pairs.append((key, value))
-        return dict(new_pairs)
-
-    @staticmethod
     def write(jsonfile, json_obj):
         '''
             Takes a passed in json object and writes the file to disk
         '''
         mode = 'w'
 
-        if sys.version_info.major < 3:
-            import io
-            with io.open(jsonfile, mode=mode, encoding='utf-8') as file:
-                content = json.dumps(json_obj, ensure_ascii=False)
-                file.write(content)
-        else:
-            with open(jsonfile, mode=mode, encoding='utf-8') as file:
-                content = json.dumps(json_obj, ensure_ascii=False)
-                file.write(content)
+        with open(jsonfile, mode=mode, encoding='utf-8') as file:
+            content = json.dumps(json_obj, ensure_ascii=False)
+            file.write(content)
 
 
     @staticmethod

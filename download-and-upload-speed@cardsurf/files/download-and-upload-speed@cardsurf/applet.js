@@ -547,9 +547,9 @@ MyApplet.prototype = {
         this.update_bytes_total();
 
         let received = this.scale(this.bytes_received_iteration);
-        let received = this.convert_to_readable_string(received);
+        received = this.convert_to_readable_string(received);
         let sent = this.scale(this.bytes_sent_iteration);
-        let sent = this.convert_to_readable_string(sent);
+        sent = this.convert_to_readable_string(sent);
         let received_total = this.convert_to_two_decimals_string(this.bytes_received_total);
         let sent_total = this.convert_to_two_decimals_string(this.bytes_sent_total);
 
@@ -709,7 +709,7 @@ MyApplet.prototype = {
         let precision = decimals - 1;
         let rounded = number.toFixed(precision);
         let zero = 0.0;
-        let zero = zero.toFixed(precision);
+        zero = zero.toFixed(precision);
         return rounded == zero;
     },
 

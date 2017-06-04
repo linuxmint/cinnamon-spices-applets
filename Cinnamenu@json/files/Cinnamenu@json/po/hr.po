@@ -1,0 +1,319 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu@json 1.2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-13 14:38+0200\n"
+"PO-Revision-Date: 2017-05-13 14:39+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr "Upišite vašu lozinku za deinstalaciju ove aplikacije"
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr "Dodaj na panel"
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr "Dodaj na radnu površinu"
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr "Ukloni sa omiljenih"
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr "Dodaj u omiljeno"
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr "Deinstaliraj"
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr "Pokreni s NVIDIA GPU"
+
+#: panel.js:533
+msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgstr "Gno-Menu: Pretraga Firefox zabilješki je onemogućena"
+
+#: panel.js:535
+msgid ""
+"If you want to search Firefox bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Ako želite pretraživati Firefox zabilješke, morate instalirati potrebne "
+"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
+
+#: panel.js:541
+msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgstr "Gno-Menu: Pretraga Midori zabilješki je onemogućena"
+
+#: panel.js:543
+msgid ""
+"If you want to search Midori bookmarks, you must install the required "
+"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgstr ""
+"Ako želite pretraživati Midori zabilješke, morate instalirati potrebne "
+"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
+
+#: panel.js:1578
+msgid "Grid View"
+msgstr "Pogled mreže"
+
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr "Prebaci na pogled mreže"
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Pogled popisa"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr "Prebaci na pogled popisa"
+
+#: panel.js:1638
+msgid "Type to search..."
+msgstr "Upišite za pretragu..."
+
+#: panel.js:1675
+msgid "All Applications"
+msgstr "Sve aplikacije"
+
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr "Omiljene aplikacije"
+
+#: panel.js:1747
+msgid "Places"
+msgstr "Lokacije"
+
+#: panel.js:1752
+msgid "Recent"
+msgstr "Nedavno"
+
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr "Zabilješke"
+
+#: panel.js:1768
+msgid "Lock Screen"
+msgstr "Zaključaj zaslon"
+
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr "Zaključajte zaslon"
+
+#: panel.js:1799
+msgid "Logout"
+msgstr "Odjava"
+
+#: panel.js:1800
+msgid "Leave the session"
+msgstr "Odjavite sesiju"
+
+#: panel.js:1822
+msgid "Quit"
+msgstr "Isključi"
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr "Isključite računalo"
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr "Neuspjelo pokretanje '%s'"
+
+#: placeDisplay.js:147
+msgid "Home"
+msgstr "Osobna mapa"
+
+#: placeDisplay.js:221
+msgid "Computer"
+msgstr "Računalo"
+
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr "Pregledaj mrežu"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr "Cinnamenu postavke"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Koristi prilagođenu ikonu"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Uklanjanjem ovog odabira omogućuje temi prilagodbu ikona"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr "Širina naslova mreže aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr "pikseli"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Veličina ikone mreže aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Veličina kategorija ikone"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Odgoda prijelaza izbornikom:"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Odgoda između promjena kategorija"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "milisekunde"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Otvori uređivač izbornika"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Prečaci tipkovnice za otvaranje i zatvaranje izbornika"
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr "Stavke izbornika"
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr "Izgled"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Broj stupaca u mreži aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "stupci"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr "Omogući web zabilješke"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr ""
+"Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Način pogleda pokretanja aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Mreža"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Popis"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Postavi prilagođeni naziv ikone tipke izbornika"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
+msgid "Scale grid icons by available space"
+msgstr "Prilagodi veličinu mreže ikona prema dostupnom prostoru"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
+msgid ""
+"This makes the grid icon size variable depending on how many apps are being "
+"shown. This overrides the grid icon size option."
+msgstr ""
+"Ovo čini veličinu mreže ikona prilagodljivu ovisno o tome koliko je "
+"prikazanih aplikacija. Ovo zaobilazi mogućnost veličine mreže ikona."
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Omogući automatsko pomicanje u popisu aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Odaberite omogućavanje ili onemogućavanje glatkog automatskog pomicanja u "
+"popisu aplikacija."
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Koristi animacije izbornika"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Dopusti izborniku animirano otvaranje i zatvaranje"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ikona"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Odaberite ikonu za prikaz u panelu."
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Veličina ikona popisa aplikacija"
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr "Ponašanje"
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr "Prilagodljiv izbornik koji pruža mogućnosti oblikovanja i zabilješke."
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinna izbornik"

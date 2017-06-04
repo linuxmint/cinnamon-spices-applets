@@ -1,17 +1,20 @@
 {
-    "description": "Various shortcuts to handle desktop actions.",
-    "max-instances": "-1",
-    "multiversion": true,
-    "uuid": "0dyseus@DesktopHandler",
-    "version": "1.06",
-    "last-edited": "1473874426",
-    "name": "Desktop Handler",
-    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "contributors": "muzena: Croatian localization.,giwhub: Chinese localization.",
     "website": "https://github.com/Odyseus/CinnamonTools",
+    "name": "Desktop Handler",
     "cinnamon-version": [
         "2.8",
         "3.0",
-        "3.2"
-    ]
+        "3.2",
+        "3.4"
+    ],
+    "max-instances": "-1",
+    "uuid": "0dyseus@DesktopHandler",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "contributors": [
+        "muzena: Croatian localization.",
+        "giwhub: Chinese localization.",
+        "eson57: Swedish localization."
+    ],
+    "version": "1.07",
+    "description": "Various shortcuts to handle desktop actions."
 }

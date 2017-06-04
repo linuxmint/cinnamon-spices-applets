@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Homestead manager 0.1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-25 00:26+0100\n"
-"PO-Revision-Date: 2017-02-25 00:26+0100\n"
+"POT-Creation-Date: 2017-04-30 15:25+0200\n"
+"PO-Revision-Date: 2017-04-30 15:37+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -83,11 +83,11 @@ msgstr "Ponovna kompilacija kernela..."
 msgid "Rancher: Homestead missing or not configured."
 msgstr "Rančer: Homestead nedostaje ili nije podešen."
 
-#: applet.js:263
+#: applet.js:263 applet.js:309
 msgid "Homestead missing or not configured."
 msgstr "Homestead nedostaje ili nije podešen."
 
-#: applet.js:270 applet.js:271
+#: applet.js:270 applet.js:271 applet.js:315
 msgid "Kernel Module not loaded. Needs recompilation."
 msgstr "Kernel module nije učitan. Potrebna je ponovna kompilacija."
 
@@ -143,9 +143,77 @@ msgstr " (Nije stvoren/Uništen)"
 msgid "Rancher: Homestead not installed."
 msgstr "Rančer: Homestead nije instaliran."
 
-#: applet.js:298
+#: applet.js:298 applet.js 305
 msgid "Homestead not installed"
 msgstr "Homestead nije instaliran."
+
+#: applet.js 306
+msgid "Click here for installation instructions"
+msgstr "Kliknite ovdje za upute instalacije"
+
+#: applet.js 307 applet.js:310 applet.js:370
+msgid "Refresh this menu"
+msgstr "Osvježi ovaj izbornik"
+
+#: applet.js 316
+msgid "Recompile Kernel Module."
+msgstr "Ponovno kompiliraj modul kernela."
+
+#: applet.js 320
+msgid "Status"
+msgstr "Stanje"
+
+#: applet.js 323
+msgid "Run provisioning"
+msgstr "Pokreni dodjeljivanje"
+
+#: applet.js 324
+msgid "Suspend Homestead"
+msgstr "Suspendiraj Homesteada"
+
+#: applet.js 325
+msgid "SSH Terminal..."
+msgstr "SSH Terminal..."
+
+#: applet.js 329
+msgid "Destroy Homestead"
+msgstr "Uništi Homesteada"
+
+#: applet.js 336
+msgid "Configuration"
+msgstr "Podešavanje"
+
+#: applet.js 337
+msgid "IP: "
+msgstr "IP: "
+
+#: applet.js 338
+msgid "Memory: "
+msgstr "Memorija: "
+
+#: applet.js 339
+msgid "CPU: "
+msgstr "CPU: "
+
+#: applet.js 340
+msgid "Provider: "
+msgstr "Pružatelj usluge: "
+
+#: applet.js 342
+msgid "Edit Homestead configuration..."
+msgstr "Uredi Homestead podešavanje..."
+
+#: applet.js 345
+msgid "Hosted Sites"
+msgstr "Hostirane web stranice"
+
+#: applet.js 355
+msgid "Edit hosts file..."
+msgstr "Uredi host datoteke..."
+
+#: applet.js 358
+msgid "Hosted Databases"
+msgstr "Hostirane baze podataka"
 
 #: terminal_reader.js:58
 msgid "Command not found."

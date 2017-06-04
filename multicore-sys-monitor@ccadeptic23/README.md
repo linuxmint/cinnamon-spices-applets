@@ -1,7 +1,9 @@
+You must install the **gir1.2-gtop-2.0** package to use this applet.
+
 // Multi-core System Monitor Readme
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 
-How to Configure Colors(in prefs.json)
+How to Configure Colors (in prefs.json)
 ======================================
 Edit config file its called prefs.json. Also backup the file, and only do it if you feel comfortable.
 There are 3 values that control the color of the applet all use arrays of the format:
@@ -14,7 +16,7 @@ a-alpha from 0 to 1.0
 These 3 are: BackgroundColor, ColorsMem, and ColorsCPUs
 
 ColorsCPUs requires a little more explaination. It is an array of arrays the first level is the cpu number that will use that color. For example,
-if i had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
+if I had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
 "ColorsCPUs":[[1,0,0,1],[0,1,0,1]]
 
 The ColorsMem is also a matrix like this but instead of the cpunumber each of the sub arrays are for different parts of the memory utilization.
@@ -24,22 +26,19 @@ The third is the cached memory.
 The fourth is the free memory.
 
 For Example,
-If i wanted the used up memory to be red, the buffered memory to be green, the cached to be blue, and the free to be white my entry ColorsMem would be:
-"ColorsMem":[[1,0,0,1],[0,1,0,1],[0,0,1,1],[1,1,1,1]]
+If I wanted the used up memory to be red, the buffered memory to be green, the cached to be blue, and the free to be white my entry ColorsMem would be:
+"ColorsMem": [[1,0,0,1],[0,1,0,1],[0,0,1,1],[1,1,1,1]]
 
-In general, i prefer the free memory to be see thru but others maynot. if you want a see thru free make the fourth entry all 0.
+In general, I prefer the free memory to be see thru but others maynot. if you want a see thru free make the fourth entry all 0.
 
 Note1: that if you have more cpu's than colors defined in the config file. 
 Then the colors will repeat until you run out of cpus. This behavour happens with the memory colors also.
 Add more arrays if you want to specify them.
 
-
-Known issues
-============
-
-
 Changelog
 =========
+
+New changelog info is available in the commit history.
 
 Version 1.5
 -----------
@@ -80,16 +79,16 @@ Added Network Usage Monitoring
     
 Version 1.2
 ------------
-*Memory Visualization expanded and is now a Pie Chart.
-*Vertical Bars Graph minor visuals improvement. When the height of vertical bars was 0, it would display annoying little line fragments. Now nice and clean.
-*Moved the configuration menu to open on Right click. Left click now opens the system monitor.
-*Changed the default color scheme to be monochromatic. I have been using it and think it looks much better. Especially on default Cinnamon.
+* Memory Visualization expanded and is now a Pie Chart.
+* Vertical Bars Graph minor visuals improvement. When the height of vertical bars was 0, it would display annoying little line fragments. Now nice and clean.
+* Moved the configuration menu to open on Right click. Left click now opens the system monitor.
+* Changed the default color scheme to be monochromatic. I have been using it and think it looks much better. Especially on default Cinnamon.
 
 Version 1.1
 -----------
 Added the use of a config file, and a menu system to change a few of the parameters. It is called prefs.json.
 At the moment the only way to change the colors is to modify this file. I am hoping to add a color selector soon, but documentation is very thin.
-If you have seen a cinnamon or gnome-shell extension/applet that uses one i would be very grateful to hear about it.
+If you have seen a cinnamon or gnome-shell extension/applet that uses one I would be very grateful to hear about it.
 Also backup the file, and only do it if you feel comfortable.
 There are 3 values that control the color of the applet all use arrays of the format:
 [r,b,g,a]
@@ -101,15 +100,15 @@ a-alpha from 0 to 1.0
 These 3 are: BackgroundColor, ColorsMem, and ColorsCPUs
 
 ColorsCPUs requires a little more explaination. It is an array of arrays the first level is the cpu number that will use that color. For example,
-if i had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
+if I had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
 "ColorsCPUs":[[1,0,0,1],[0,1,0,1]]
 
 The ColorsMem is also a matrix but it will always have one row.(For now)
 
-Note1: that if you have more cpu's than colors defined in the config file. 
+Note 1: that if you have more cpu's than colors defined in the config file. 
 Then the colors will repeat until you run out of cpus. Add more arrays if you want to specify them.
 
-Note2: A couple people wanted a monochromatic theme so i will put an extra config file called monoprefs.json. 
+Note 2: A couple people wanted a monochromatic theme so I will put an extra config file called monoprefs.json. 
 backup the original prefs.json and rename this one to prefs.json to use it. Then restart cinnamon, before changing the settings again.
 
 Version 1

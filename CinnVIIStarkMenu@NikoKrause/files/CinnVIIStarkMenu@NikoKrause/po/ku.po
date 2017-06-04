@@ -6,17 +6,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: cinnviistarkmenu\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-03-18 14:21+0100\n"
-"PO-Revision-Date: 2017-02-01 20:00+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-08 14:36+0200\n"
+"PO-Revision-Date: 2017-05-08 14:37+0200\n"
 "Last-Translator: Rokar ✌ <Unknown>\n"
 "Language-Team: Kurdish <ku@li.org>\n"
+"Language: ku\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Launchpad-Export-Date: 2017-03-19 06:53+0000\n"
-"X-Generator: Launchpad (build 18332)\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
@@ -46,84 +47,132 @@ msgstr "Rake"
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: 3.2/applet.js:425 3.2/applet.js:459 2.6/applet.js:426 2.6/applet.js:460
+#: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
 msgid "No description available"
 msgstr "Tu rave tune ye"
 
-#: 3.2/applet.js:746 2.6/applet.js:761
-msgid "Open with"
-msgstr "Pê re veke"
-
-#: 3.2/applet.js:792 2.6/applet.js:807
-msgid "Other application..."
-msgstr "Sepaneke din..."
-
-#: 3.2/applet.js:869 2.6/applet.js:884
-msgid "Clear list"
-msgstr ""
-
-#: 3.2/applet.js:917 2.6/applet.js:932
-msgid "All Applications"
-msgstr "Hemû sepan"
-
-#: 3.2/applet.js:945 2.6/applet.js:960
-msgid "Places"
-msgstr "Cih"
-
-#: 3.2/applet.js:969 2.6/applet.js:984
-msgid "Recent Files"
-msgstr "Pelên borî"
-
-#: 3.2/applet.js:1568 3.2/applet.js:1744 2.6/applet.js:1583 2.6/applet.js:1759
-msgid "Logout"
-msgstr "Derkeve"
-
-#: 3.2/applet.js:1570 2.6/applet.js:1585
-msgid "Lock Screen"
-msgstr "Dîmenê Qifl Bike"
-
-#: 3.2/applet.js:1737 2.6/applet.js:1752
-msgid "Shutdown the computer"
-msgstr "Komputerê bigire"
-
-#: 3.2/applet.js:1738 2.6/applet.js:1753
-msgid "Leave the session"
-msgstr ""
-
-#: 3.2/applet.js:1739 2.6/applet.js:1754
-msgid "Lock the screen"
-msgstr "Ekranê qifl bike"
-
-#: 3.2/applet.js:1741 3.2/applet.js:1742 2.6/applet.js:1756 2.6/applet.js:1757
-msgid "Quit"
-msgstr "Derkeve"
-
-#: 3.2/applet.js:1753 3.2/applet.js:1757 2.6/applet.js:1768 2.6/applet.js:1772
-msgid "Lock screen"
-msgstr "Dîmenderê kilît bike"
-
-#. 3.2->settings-schema.json->menu->title
-#: 3.2/applet.js:1971 2.6/applet.js:1983
-msgid "Menu"
-msgstr "Menû"
-
-#: 3.2/applet.js:3308 2.6/applet.js:3289
+#: 3.2/applet.js:740 2.6/applet.js:3289
 msgid "This file is no longer available"
 msgstr ""
 
-#: 3.2/applet.js:3340 2.6/applet.js:3321
+#: 3.2/applet.js:790 2.6/applet.js:761
+msgid "Open with"
+msgstr "Pê re veke"
+
+#: 3.2/applet.js:836 2.6/applet.js:807
+msgid "Other application..."
+msgstr "Sepaneke din..."
+
+#: 3.2/applet.js:911 2.6/applet.js:884
+msgid "Clear list"
+msgstr ""
+
+#: 3.2/applet.js:957 2.6/applet.js:932
+msgid "All Applications"
+msgstr "Hemû sepan"
+
+#: 3.2/applet.js:986 2.6/applet.js:960
+msgid "Places"
+msgstr "Cih"
+
+#: 3.2/applet.js:1010 2.6/applet.js:984
+msgid "Recent Files"
+msgstr "Pelên borî"
+
+#: 3.2/applet.js:1609 3.2/applet.js:1792 2.6/applet.js:1583 2.6/applet.js:1759
+msgid "Logout"
+msgstr "Derkeve"
+
+#: 3.2/applet.js:1611 2.6/applet.js:1585
+msgid "Lock Screen"
+msgstr "Dîmenê Qifl Bike"
+
+#: 3.2/applet.js:1785 2.6/applet.js:1752
+msgid "Shutdown the computer"
+msgstr "Komputerê bigire"
+
+#: 3.2/applet.js:1786 2.6/applet.js:1753
+msgid "Leave the session"
+msgstr ""
+
+#: 3.2/applet.js:1787 2.6/applet.js:1754
+msgid "Lock the screen"
+msgstr "Ekranê qifl bike"
+
+#: 3.2/applet.js:1789 3.2/applet.js:1790 2.6/applet.js:1756 2.6/applet.js:1757
+msgid "Quit"
+msgstr "Derkeve"
+
+#: 3.2/applet.js:1801 3.2/applet.js:1805 2.6/applet.js:1768 2.6/applet.js:1772
+msgid "Lock screen"
+msgstr "Dîmenderê kilît bike"
+
+#: 3.2/applet.js:2012
+msgid "All Programs"
+msgstr ""
+
+#: 3.2/applet.js:2012
+msgid "Favorites"
+msgstr ""
+
+#: 3.2/applet.js:2013
+msgid "Documents"
+msgstr ""
+
+#: 3.2/applet.js:2013
+msgid "nemo Documents"
+msgstr ""
+
+#: 3.2/applet.js:2014
+msgid "Pictures"
+msgstr ""
+
+#: 3.2/applet.js:2014
+msgid "nemo Pictures"
+msgstr ""
+
+#: 3.2/applet.js:2015
+msgid "Music"
+msgstr ""
+
+#: 3.2/applet.js:2015
+msgid "nemo Music"
+msgstr ""
+
+#: 3.2/applet.js:2016
+msgid "Videos"
+msgstr ""
+
+#: 3.2/applet.js:2016
+msgid "nemo Videos"
+msgstr ""
+
+#: 3.2/applet.js:2017
+msgid "Downloads"
+msgstr ""
+
+#: 3.2/applet.js:2017
+msgid "nemo Downloads"
+msgstr ""
+
+#. 3.2->settings-schema.json->menu->title
+#: 3.2/applet.js:2033 2.6/applet.js:1983
+msgid "Menu"
+msgstr "Menû"
+
+#: 3.2/applet.js:3473 2.6/applet.js:3321
 msgid "No recent documents"
 msgstr ""
 
-#: 3.2/applet.js:3638 2.6/applet.js:3634
+#: 3.2/applet.js:3861 2.6/applet.js:3634
 msgid "Type to search..."
 msgstr ""
 
-#: 3.2/applet.js:4141 2.6/applet.js:4136
+#: 3.2/applet.js:4380 2.6/applet.js:4136
 msgid "No results found"
 msgstr ""
 
-#: 3.2/applet.js:4143 2.6/applet.js:4138
+#: 3.2/applet.js:4382 2.6/applet.js:4138
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
@@ -868,52 +917,4 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
-
-#. 2.6->settings-schema.json->all-programs-label->default
-msgid "All Programs"
-msgstr ""
-
-#. 2.6->settings-schema.json->favorites-label->default
-msgid "Favorites"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-2-label->default
-msgid "Documents"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-2-command->default
-msgid "nemo Documents"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-3-label->default
-msgid "Pictures"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-3-command->default
-msgid "nemo Pictures"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-4-label->default
-msgid "Music"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-4-command->default
-msgid "nemo Music"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-5-label->default
-msgid "Videos"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-5-command->default
-msgid "nemo Videos"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-6-label->default
-msgid "Downloads"
-msgstr ""
-
-#. 2.6->settings-schema.json->quicklauncher-6-command->default
-msgid "nemo Downloads"
 msgstr ""

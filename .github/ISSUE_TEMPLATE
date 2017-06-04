@@ -1,5 +1,7 @@
 [Have you read the guidelines for contributing?]: <> (Before opening an issue, please read the guidelines for contributing linked above. Else the issue will be closed. Also don't forget to notify the author.)
-@AppletAuthor
+
+[Notify author of applet]: <> (You should mention the author on GitHub by typing @ plus his/her username to trigger a notification and bring his/her attention to an issue or pull request. You find the username of the author on the cinnamon spices website: https://cinnamon-spices.linuxmint.com/)
+@AuthorName
 
 [Issue]: <> (Describe your issue below.)
 

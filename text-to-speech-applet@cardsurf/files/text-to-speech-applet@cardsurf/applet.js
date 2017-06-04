@@ -344,7 +344,7 @@ MyApplet.prototype = {
 
     split_lines: function () {
         let array_lines = this.current_text.split(this.line_separator_regex);
-        let array_lines = this.remove_last_line_if_whitespace(array_lines);
+        array_lines = this.remove_last_line_if_whitespace(array_lines);
         return array_lines;
     },
 

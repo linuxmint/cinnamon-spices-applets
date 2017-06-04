@@ -1,0 +1,104 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ScreenShot+RecordDesktop@tech71\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-16 16:14+0200\n"
+"PO-Revision-Date: 2017-05-16 16:22+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:32
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Uslikajte ili snimite svoju radnu površinu"
+
+#: applet.js:43
+msgid "ScreenShot"
+msgstr "Slikanje zaslona"
+
+#: applet.js:48
+msgid "Whole Screen"
+msgstr "Uslikaj cijeli zaslon"
+
+#: applet.js:50
+msgid "1 Second Delay"
+msgstr "1 sekunda odgode"
+
+#: applet.js:54
+msgid "3 Second Delay"
+msgstr "2 sekunde odgode"
+
+#: applet.js:58
+msgid "5 Second Delay"
+msgstr "5 sekundi odgode"
+
+#: applet.js:68
+msgid "Current Window"
+msgstr "Uslikaj trenutni prozor"
+
+#: applet.js:73
+msgid "Selected Area"
+msgstr "Uslikaj odabrano područje"
+
+#: applet.js:79
+msgid "Record Desktop"
+msgstr "Snimi radnu površinu"
+
+#: applet.js:81
+msgid "Start With Audio"
+msgstr "Snimi sa zvukom"
+
+#: applet.js:83 applet.js:88
+msgid "Recording"
+msgstr "Snimanje"
+
+#: applet.js:83
+msgid "With-Audio"
+msgstr "sa zvukom pokrenuto"
+
+#: applet.js:86
+msgid "Start No Audio"
+msgstr "Snimi bez zvuka"
+
+#: applet.js:88
+msgid "No-Audio"
+msgstr "bez zvuka pokrenuto"
+
+#: applet.js:91
+msgid "Stop"
+msgstr "Zaustavi"
+
+#: applet.js:95
+msgid "Recording-Stopped"
+msgstr "Snimanje zaustavljeno"
+
+#: applet.js:96
+msgid "Recording-Finished"
+msgstr "Snimanje završeno"
+
+#: applet.js:103
+msgid "Pictures Folder"
+msgstr "Slike"
+
+#: applet.js:109
+msgid "Videos Folder"
+msgstr "Snimke"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->description
+msgid "Take A Snapshot Or Record Your Desktop"
+msgstr "Uslikajte ili snimite svoju radnu površinu"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "Slikanje+Snimanje radne površine"

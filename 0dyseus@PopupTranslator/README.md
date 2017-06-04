@@ -9,9 +9,10 @@ Simple translator applet that will allow to display the translation of any selec
 
 ## Compatibility
 
-- ![Cinnamon 2.8](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-2.8.svg) ![Linux Mint 17.3](https://odyseus.github.io/CinnamonTools/lib/badges/lm-17.3.svg)
-- ![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg) ![Linux Mint 18](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.svg)
-- ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg) ![Linux Mint 18.1](https://odyseus.github.io/CinnamonTools/lib/badges/lm-18.1.svg)
+![Cinnamon 2.8](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-2.8.svg)
+![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg)
+![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg)
+![Cinnamon 3.4](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.4.svg)
 
 <span style="color:red;">
 **Do not install on older versions of Cinnamon.**
@@ -35,11 +36,13 @@ Simple translator applet that will allow to display the translation of any selec
 ![Translation history window](https://odyseus.github.io/CinnamonTools/lib/img/PopupTranslator-001.png "Translation history window")
 
 ## Contributors
-- [NikoKrause](https://github.com/NikoKrause): German localization and bug reports.
-- [Radek71](https://github.com/Radek71): Czech localization and bug reports.
-- [muzena](https://github.com/muzena): Croatian localization.
-- [giwhub](https://github.com/giwhub): Chinese localization.
+- **[NikoKrause](https://github.com/NikoKrause):** German localization and bug reports.
+- **[Radek71](https://github.com/Radek71):** Czech localization and bug reports.
+- **[muzena](https://github.com/muzena):** Croatian localization.
+- **[giwhub](https://github.com/giwhub):** Chinese localization.
+- **[eson57](https://github.com/eson57):** Swedish localization.
+- **[Ilis](https://github.com/Ilis):** Russian localization.
 
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/CHANGELOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/CHANGE_LOG.md)
 
 [ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40PopupTranslator/TODO)

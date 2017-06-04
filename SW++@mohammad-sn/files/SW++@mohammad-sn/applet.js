@@ -136,7 +136,7 @@ MyApplet.prototype = {
         this.scroll_connector = this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
         this._applet_context_menu.connect('open-state-changed', Lang.bind(this, this._onToggled));
 
-        if(this.highlight){
+        if (this.highlight && this.h_color !== 'rgba(0,0,0,0)'){
             this.actor.style = "background-color: rgba(255,155,0,0.7)"; //highlight for first time
             this.highlight=false
         }
@@ -146,10 +146,6 @@ MyApplet.prototype = {
 
         this.on_settings_changed();
         this.width_changed();
-    },
-
-    on_applet_removed_from_panel: function() {
-        this.signals.disconnectAllSignals();
     },
 
     updateMenu: function() {
@@ -343,7 +339,7 @@ MyApplet.prototype = {
             close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function(){
                 let _children = item.actor.get_children();
                 _children[_children.length-1].get_children()[0].style="icon-size: 1em;";
-            }))); 
+            })));
             close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function(){
                 let _children = item.actor.get_children();
                 _children[_children.length-1].get_children()[0].style="icon-size: 0.8em;";
@@ -367,7 +363,7 @@ MyApplet.prototype = {
                 this.updateMenu();
             else if (this._applet_context_menu._getMenuItems()[0] instanceof PopupMenu.PopupSeparatorMenuItem &&
               (this._applet_context_menu._getMenuItems().length < 3 ||
-                (this._applet_context_menu._getMenuItems().length < 4 && this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem) 
+                (this._applet_context_menu._getMenuItems().length < 4 && this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem)
                 || (this._applet_context_menu._getMenuItems().length < 5 &&
                     this._applet_context_menu._getMenuItems()[1] instanceof PopupMenu.PopupSeparatorMenuItem &&
                     this._applet_context_menu._getMenuItems()[2] instanceof PopupMenu.PopupSeparatorMenuItem)
@@ -395,7 +391,9 @@ MyApplet.prototype = {
     },
 
     _onEntered: function(event) {
-        this.actor.style="background-color:" + this.h_color;
+        if (this.h_color !== 'rgba(0,0,0,0)') {
+            this.actor.style="background-color:" + this.h_color;
+        }
         if (global.screen.get_workspace_by_index(1) != null){
             this.set_applet_tooltip(Main.getWorkspaceName(global.screen.get_active_workspace_index()));
             this._applet_tooltip.show();
@@ -437,7 +435,10 @@ MyApplet.prototype = {
     },
 
     _onLEntered: function(event) {
-        this.actor.style="background-color: rgba(255,255,255,0)";
+        // Only set the hover color if explicitly set, otherwise it will be invisible.
+        if (this.h_color !== 'rgba(0,0,0,0)') {
+            this.actor.style="background-color: rgba(255,255,255,0)";
+        }
         if(this.didpeek){
             this.show_all(0.2);
             this.didpeek=false;
@@ -455,7 +456,10 @@ MyApplet.prototype = {
     },
 
     width_changed: function() {
-        this.actor.width = this.width;
+        // Only use a custom width if one is explicitly set, otherwise it will overlap icons in default themes.
+        if (this.width !== 15) {
+            this.actor.width = this.width;
+        }
     },
 
     on_settings_changed: function() {
@@ -492,7 +496,9 @@ MyApplet.prototype = {
         });
         this.settings.finalize();    // This is called when a user removes the applet from the panel.. we want to
                                      // Remove any connections and file listeners here, which our settings object
-    },                               // has a few of
+                                     // has a few of
+        this.signals.disconnectAllSignals();
+    },
 
     handleDragOver: function(source, actor, x, y, time) {
         global.screen.show_desktop(global.get_current_time());

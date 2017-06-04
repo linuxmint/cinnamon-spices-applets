@@ -1,0 +1,64 @@
+# Swedish translation for ink-level-monitor@r0p01ach.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>\, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ink-level-monitor@r0p01ach\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-23 07:23+0200\n"
+"PO-Revision-Date: 2017-05-23 07:32+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:110
+msgid "Unable to connect printer at port "
+msgstr "Kan inte ansluta skrivare på port "
+
+#: applet.js:121
+msgid "Error reading data..."
+msgstr "Kan inte läsa data..."
+
+#. ink-level-monitor@r0p01ach->metadata.json->description
+msgid "USB Printer Ink Level Monitor Applet"
+msgstr "Bläcknivåövervakare för USB-skrivare"
+
+#. ink-level-monitor@r0p01ach->metadata.json->name
+msgid "Printer Ink Level Monitor Applet"
+msgstr "Bläcknivåövervakare"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->description
+msgid "Printer Port Number"
+msgstr "Skrivarport nummer"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->units
+msgid "(lp# device)"
+msgstr "(lp# enhet)"
+
+#. ink-level-monitor@r0p01ach->settings-
+#. schema.json->updateInterval->description
+msgid "Update Interval"
+msgstr "Uppdateringsintervall"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "sekunder"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->description
+msgid "Applet Width"
+msgstr "Panelikonbredd"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->units
+msgid "px"
+msgstr "px"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Allmänna inställningar"

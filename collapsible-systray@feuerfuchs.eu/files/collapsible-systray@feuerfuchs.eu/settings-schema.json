@@ -96,6 +96,20 @@
         "tooltip" :     "Enter either the icon's qualified name or it's full path"
     },
 
+    "vertical-expand-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-up",
+        "description" : "Vertical expand icon: ",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
+    "vertical-collapse-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-down",
+        "description" : "Vertical collapse icon: ",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
     "tray-icon-padding": {
         "type":        "spinbutton",
         "default":     5,

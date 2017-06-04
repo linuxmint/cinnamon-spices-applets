@@ -569,3 +569,6 @@ msgstr ""
 "Bestimmt das Verhalten der mittleren Maustaste Klicks auf App-Schaltflächen."
 " Wenn Sie dies auf false setzen, wird das letzte fokussierte Fenster aus der"
 " App-Gruppe beim mittleren Klick geschlossen."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin apps, wenn auf eine neue Position gezogen"

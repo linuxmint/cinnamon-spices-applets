@@ -45,7 +45,7 @@ class SettingsWindow(Gtk.Window):
             os.path.join(APPLET_DIR, 'metadata.json'), 'r', encoding='utf8'))
 
         self.settings = AppletSettings(metadata['uuid'], args.instance_id)
-        Gtk.Window.__init__(self, title=metadata['name'])
+        Gtk.Window.__init__(self, title=_(metadata['name']))
 
         self.set_size_request(400, 300)
         self.set_position(Gtk.WindowPosition.CENTER)

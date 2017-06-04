@@ -1,6 +1,0 @@
-{
-"uuid": "SlingshotLunaLink@adams",
-"name": "Slingshot Luna Link",
-"description": "For those elementery os testers who dearly love the new os but find it to be unstable (cmon its a beta isnt it), installing cinnamon and use the luna theme found here, center your clock, launch plank on startup, remove minimise (who needs it) and add close to the left. Now that looks good its almoust like elementery os with wingpanel but its more usefull and tweakable with cinnamons apps. so whats next? well I love slingshot I mean its the best! So what i have done here is write an applet that calls to a .desktop icon to launch slingshot in its default position. I will write instructions for non elementery users and elementery users bellow.",
-"icon": "force-exit"
-}

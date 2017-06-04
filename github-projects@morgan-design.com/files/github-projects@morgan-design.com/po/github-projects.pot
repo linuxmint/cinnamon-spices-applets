@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr ""
+
+#: applet.js:46
+msgid "Successfully Loaded GitHub Repos for user"
+msgstr ""
+
+#: applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr ""
+
 #: applet.js:166
 msgid "Settings"
 msgstr ""

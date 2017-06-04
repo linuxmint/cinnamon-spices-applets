@@ -1,0 +1,557 @@
+# Swedish translation for IcingTaskManager@json.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: IcingTaskManager@json\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
+msgstr "Fönsterlista med programgruppering och miniatyrer"
+
+#. IcingTaskManager@json->metadata.json->name
+msgid "Icing Task Manager"
+msgstr "Icing Task Manager"
+
+#. src->settings-schema.json->thumbnail-size->description
+msgid "Thumbnail size"
+msgstr "Miniatyrstorlek"
+
+#. src->settings-schema.json->thumbnail-size->tooltip
+msgid "Controls the size of the thumbnails."
+msgstr "Avgör storleken på miniatyrerna."
+
+#. src->settings-schema.json->thumbnail-size->units
+msgid "size"
+msgstr "storlek"
+
+#. src->settings-schema.json->icon-spacing->description
+msgid "Icon spacing"
+msgstr "Ikonavstånd"
+
+#. src->settings-schema.json->icon-spacing->tooltip
+msgid "Controls how much space is between the icons."
+msgstr "Avgör avståndet mellan ikonerna."
+
+#. src->settings-schema.json->icon-spacing->units
+#. src->settings-schema.json->icon-size->units
+#. src->settings-schema.json->icon-padding->units
+#. src->settings-schema.json->appmenu-width->units
+msgid "px"
+msgstr "px"
+
+#. src->settings-schema.json->show-thumbnails->description
+msgid "Show thumbnails"
+msgstr "Visa miniatyrer"
+
+#. src->settings-schema.json->show-thumbnails->tooltip
+msgid "Show window thumbnails when hovering over an app button."
+msgstr "Visa fönsterminiatyr vid hovring över en programknapp."
+
+#. src->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Ikonstorlek"
+
+#. src->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Ange ikonstorlek"
+
+msgid "Global hotkey to show the order of apps"
+msgstr "Systemövergripande snabbtangent för att visa programordning"
+
+msgid "Duration of the apps order display on hotkey press"
+msgstr "Varaktighet för visning av programordning vid snabbtangenttryck"
+
+msgid ""
+"When triggered, the window count label will be replaced with its order in "
+"the app list temporarily."
+msgstr ""
+"Vid användning kommer fönsterantalet att tillfälligt ersättas med "
+"programmets ordningsnummer."
+
+msgid ""
+"Determines the duration the window count labels are replaced with the app's "
+"order number."
+msgstr ""
+"Avgör hur länge fönsterantalet skall ersättas med programmets ordningsnummer."
+
+#. src->settings-schema.json->hover-peek-time->description
+msgid "Window fade time"
+msgstr "Fönstertoningstid"
+
+#. src->settings-schema.json->hover-peek-time->tooltip
+msgid "Controls how quickly a window will fade on hover."
+msgstr ""
+"Avgör hur fort ett fönster skall tonas in/ut vid hovring över miniatyren."
+
+#. src->settings-schema.json->hover-peek-time->units
+#. src->settings-schema.json->thumbnail-timeout->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. src->settings-schema.json->appmenu-number->units
+msgid "number"
+msgstr "antal"
+
+#. src->settings-schema.json->title-display->description
+msgid "Title display"
+msgstr "Titelvisning"
+
+#. src->settings-schema.json->title-display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+"Fokuserad: Visa titel för fokuserat fönster, Titel: Visa fönstertitel, "
+"Program: Visa programnamn, Ingen: Visa inget"
+
+#. src->settings-schema.json->title-display->options
+#. src->settings-schema.json->number-display->options
+msgid "None"
+msgstr "Ingen"
+
+#. src->settings-schema.json->title-display->options
+msgid "Focused"
+msgstr "Fokuserad"
+
+#. src->settings-schema.json->title-display->options
+msgid "App"
+msgstr "Program"
+
+#. src->settings-schema.json->title-display->options
+msgid "Title"
+msgstr "Titel"
+
+#. src->settings-schema.json->show-alerts->description
+msgid "Show app alerts and notifications"
+msgstr "Visa programmeddelanden och aviseringar"
+
+#. src->settings-schema.json->show-alerts->tooltip
+msgid "If enabled, notifications and alerts will appear."
+msgstr "Vid aktivering visas aviseringar och meddelanden."
+
+#. src->settings-schema.json->AppMenu->description
+msgid "Context Menu Settings"
+msgstr "Inställningar för kontextmenyn"
+
+#. src->settings-schema.json->sort-thumbnails->description
+msgid "Sort windows for each app by last focused"
+msgstr "Sortera fönster för varje program, efter senast fokuserat"
+
+#. src->settings-schema.json->sort-thumbnails->tooltip
+msgid ""
+"Controls whether the order windows appear for an app is by last focused, or "
+"the order they were opened."
+msgstr ""
+"Avgör om ordningen i vilken programfönster visas, är efter senast fokuserad "
+"eller efter den ordning de öppnades."
+
+#. src->settings-schema.json->hover-peek-opacity->description
+msgid "Window opacity"
+msgstr "Fönsteropacitet"
+
+#. src->settings-schema.json->hover-peek-opacity->tooltip
+msgid "Opacity of the windows on hover."
+msgstr "Fönsteropacitet vid hovring"
+
+#. src->settings-schema.json->hover-peek-opacity->units
+msgid "percent"
+msgstr "procent"
+
+#. src->settings-schema.json->enable-hover-peek->description
+msgid "Show windows when hovered over"
+msgstr "Visa fönster vid hovring"
+
+#. src->settings-schema.json->enable-hover-peek->tooltip
+msgid "Controls whether or not windows display when hovered over."
+msgstr "Avgör om fönster skall visas vid hovring över miniatyren."
+
+#. src->settings-schema.json->icon-padding->description
+msgid "Icon padding"
+msgstr "Ikoninramning"
+
+#. src->settings-schema.json->icon-padding->tooltip
+msgid ""
+"Controls how much horizontal padding is inside the app buttons. Padding is "
+"only applied to instances of this applet on horizontal panels."
+msgstr ""
+"Avgör hur mycket horisontell inramning som skall visas i programknappar. "
+"Inramning tillämpas bara på detta panelprogram i horisontella paneler."
+
+msgid "Show autostart option"
+msgstr "Visa autostartalternativ"
+
+msgid "Apply the monitor move option to all windows"
+msgstr "Tillämpa alternativet \"Flytta till skärm\" på alla fönster"
+
+msgid ""
+"When clicking \"Move to monitor\" in the context menu, this option will move "
+"all of an app's windows instead of just the last focused window from the app."
+msgstr ""
+"Vid klick på \"Flytta till skärm\" i kontextmenyn, flyttas alla öppna "
+"fönster från ett program, istället för enbart det senast fokuserade fönstret "
+"från det programmet."
+
+msgid "Shows the autostart toggle option in an app's context menu."
+msgstr "Visar autostartalternativ i ett programs kontextmeny"
+
+#. src->settings-schema.json->show-pinned->description
+msgid "Show pinned apps"
+msgstr "Visa fastnålade program"
+
+#. src->settings-schema.json->show-pinned->tooltip
+msgid ""
+"Controls whether or not the pinned apps appear in the panel if they are not "
+"open."
+msgstr "Avgör om fastnålade program visas i panelen när de inte är igång."
+
+#. src->settings-schema.json->WindowList->description
+msgid "Window List Settings"
+msgstr "Inställningar för fönsterlista"
+
+#. src->settings-schema.json->thumbnail-timeout->description
+msgid "Thumbnail timeout"
+msgstr "Tidsgräns för miniatyrer"
+
+#. src->settings-schema.json->thumbnail-timeout->tooltip
+msgid ""
+"Controls how quickly an app's set of window thumbnails will fade out when "
+"the mouse leaves the app button."
+msgstr ""
+"Avgör hur snabbt ett programs fönsterminiatyrer, tonas ut när muspekaren "
+"lämnar programknappen."
+
+#. src->settings-schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr "Miniatyrinställningar"
+
+#. src->settings-schema.json->show-recent->description
+msgid "Show recent items"
+msgstr "Visa tidigare objekt"
+
+#. src->settings-schema.json->show-recent->tooltip
+msgid "Controls whether recent items will appear in the context menu."
+msgstr "Avgör om tidigare objekt skall visas i kontextmenyn."
+
+msgid "Animate thumbnails"
+msgstr "Animera miniatyrer"
+
+msgid "If enabled, thumbnails will animate when appearing and disappearing."
+msgstr "Vid aktivering animeras miniatyrer vid in- och uttoning."
+
+#. src->settings-schema.json->vertical-thumbnails->description
+msgid "Enable vertical thumbnails"
+msgstr "Aktivera vertikala miniatyrer"
+
+#. src->settings-schema.json->vertical-thumbnails->tooltip
+msgid "If enabled, thumbnails will stack vertically."
+msgstr "Vid aktivering staplas miniatyrer vertikalt."
+
+#. src->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "Låt teman kontrollera miniatyrens stängknapp"
+
+#. src->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "avgör om temat kontrollerar fönsterminiatyrers stängningsknapp."
+
+msgid "Include all app windows"
+msgstr "Inkludera alla programfönster"
+
+msgid ""
+"Controls whether or not thumbnails for smalller child windows, such as exit "
+"confirmations and file dialogues will be included in the thumbnail list."
+msgstr ""
+"Avgör om miniatyrer för mindre underfönster, såsom avslutningsbekräftelser "
+"och fildialoger, skall inkluderas i miniatyrlistan."
+
+#. src->settings-schema.json->enable-iconSize->description
+msgid "Adjust icon size"
+msgstr "Justera ikonstorlek"
+
+#. src->settings-schema.json->enable-iconSize->tooltip
+msgid "Adjust icon size independent of Cinnamon's panel scaling."
+msgstr "Justera ikonstorlek oberoende av Cinnamons panelskalning."
+
+#. src->settings-schema.json->number-display->description
+msgid "Number display"
+msgstr "Nummervisning"
+
+#. src->settings-schema.json->number-display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+"Normal: Visa fönsternummer, Smart: Visa fönsternummer vid fler än ett "
+"fönster, Ingen: Visa inga nummer, Alla: Visa fönsternummer för favoriter "
+"också"
+
+#. src->settings-schema.json->number-display->options
+msgid "All"
+msgstr "Alla"
+
+#. src->settings-schema.json->number-display->options
+msgid "Smart"
+msgstr "Smart"
+
+#. src->settings-schema.json->number-display->options
+msgid "Normal"
+msgstr "Normal"
+
+#. src->settings-schema.json->onclick-thumbnails->description
+msgid "Open thumbnails on click"
+msgstr "Öppna miniatyrer vid klick"
+
+#. src->settings-schema.json->onclick-thumbnails->tooltip
+msgid "Open the thumbnails on click if there is more than one window open."
+msgstr "Öppna miniatyrerna vid klick, om det finns fler än ett öppet fönster."
+
+#. src->settings-schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr "Hovringsinställningar"
+
+#. src->settings-schema.json->firefox-menu->description
+msgid "Firefox context menu"
+msgstr "Firefox kontextmeny"
+
+#. src->settings-schema.json->firefox-menu->tooltip
+msgid ""
+"Most Visited: show the sites you visit most, Recent History: display the the "
+"last pages you visited, Bookmarks: show your favorite bookmarks."
+msgstr ""
+"Mest besökta: Visa dina mest besökta sidor, Tidigarehistorik: Visa dina "
+"senast besökta sidor, Bokmärken: Visa dina favoritbokmärken."
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Bookmarks"
+msgstr "Bokmärken"
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Most Visited"
+msgstr "Mest besökta"
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Recent History"
+msgstr "Tidigarehistorik"
+
+#. src->settings-schema.json->group-apps->description
+msgid "Group apps"
+msgstr "Gruppera program"
+
+#. src->settings-schema.json->group-apps->tooltip
+msgid "Group each app's set of windows."
+msgstr "Gruppera varje programs fönsteruppsättning."
+
+msgid "Show active app indicators"
+msgstr "Visa indikator för aktivt program"
+
+msgid "Active app styling will indicate if an app is active."
+msgstr "Indikator visar om ett program är aktivt."
+
+#. src->settings-schema.json->arrange-pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr "Arrangera fastnålade program"
+
+#. src->settings-schema.json->arrange-pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order."
+msgstr "Arrangera fastnålade program i en annan ordning."
+
+msgid "Visible on all workspaces"
+msgstr "Synlig på alla arbetsytor"
+
+msgid "Only on this workspace"
+msgstr "Endast på denna arbetsyta"
+
+msgid "Move to left workspace"
+msgstr "Flytta till vänster arbetsyta"
+
+msgid "Move to right workspace"
+msgstr "Flytta till höger arbetsyta"
+
+msgid "Move to monitor"
+msgstr "Flytta till skärm"
+
+msgid "Remove from Autostart"
+msgstr "Ta bort från autostart"
+
+msgid "Add to Autostart"
+msgstr "Lägg till i autostart"
+
+msgid "Unpin from Panel"
+msgstr "Ta bort från panelen"
+
+msgid "Pin to Panel"
+msgstr "Fäst på panelen"
+
+msgid "Create Shortcut"
+msgstr "Skapa genväg"
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Close All"
+msgstr "Stäng alla"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "ReArrange"
+msgstr "Arrangera om"
+
+msgid "Show Pinned"
+msgstr "Visa fastnålade"
+
+msgid "Show Thumbs"
+msgstr "Visa miniatyrer"
+
+msgid "Stack Thumbs"
+msgstr "Stapla miniatyrer"
+
+msgid "Hover to Peek"
+msgstr "Hovra för att kika"
+
+msgid "Show Recent"
+msgstr "Visa tidigare"
+
+msgid "Vertical Thumbs"
+msgstr "Vertikala miniatyrer"
+
+msgid "     Go to Settings"
+msgstr "     Gå till inställningarna"
+
+msgid "Group apps into single icon"
+msgstr "Gruppera program i en enda ikon"
+
+msgid "Group the open app instances into single icon"
+msgstr "Gruppera öppna programinstanser i samma ikon"
+
+msgid "Minimize"
+msgstr "Minimera"
+
+msgid "Maximize"
+msgstr "Maximera"
+
+msgid "Unmaximize"
+msgstr "Avmaximera"
+
+msgid "Restore"
+msgstr "Återställ"
+
+msgid "Use theme padding to center button icons"
+msgstr "Använd temats inramning för att centrera knappikoner"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr "Om knappikoner inte är centrerade, kan det här möjligen hjälpa."
+
+msgid "App button hover pseudo class"
+msgstr "Pseudoklass för programknapp vid hovring"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Åsidosätter pseudoklassen för programknappar vid hovring."
+
+msgid "App button focus pseudo class"
+msgstr "Pseudoklass för programknapp vid fokus"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Åsidosätter pseudoklassen för programknappar vid fokus."
+
+msgid "App button active pseudo class"
+msgstr "Pseudoklass för programknapp vid aktiv"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "Åsidosätter pseudoklassen för programknappar när de är aktiva."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Använd panelstartklassen för fastnålade program"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Aktivering hjälper i vissa teman"
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Systemövergripande snabbtangent för bläddring genom miniatyrmenyer"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "Låter dig bläddra igenom menyerna utan att aktivera ett fönster."
+
+msgid "Update this applet automatically"
+msgstr "Uppdatera detta panelprogram automatiskt"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will start to "
+"upgrade if it finds a newer version."
+msgstr ""
+"Vid aktivering kommer ITM att söka efter GitHub-publiceringar vid start, och "
+"uppgradera om det finns en ny version."
+
+msgid "Theme Settings"
+msgstr "Temainställningar"
+
+msgid "ITM Settings"
+msgstr "ITM-inställningar"
+
+msgid "Menu item type"
+msgstr "Menyobjekttyp"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Avgör om menyobjektikoner skall vara symboliska, icke-symboliska eller inte "
+"visas."
+
+msgid "Symbolic icons"
+msgstr "Symboliska ikoner"
+
+msgid "Non-symbolic icons"
+msgstr "Icke-symboliska ikoner"
+
+msgid "No icons"
+msgstr "Inga ikoner"
+
+msgid "Use system tooltips for closed apps"
+msgstr "Använd systemets verktygsbeskrivningar för stängda program"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over closed "
+"pinned apps."
+msgstr ""
+"Avgör om systemets verktygsbeskrivningar används vid hovring över stängda "
+"fastnålade program."
+
+msgid "Middle clicking app buttons creates new app instances"
+msgstr "Mushjulsklick på program, öppnar ny programinstans"
+
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. "
+"Setting this to false will close the last focused window from the app group "
+"on middle click."
+msgstr ""
+"Avgör beteendet för mushjulsklick på programknappar. Inaktivering stänger "
+"det sist fokuserade fönstret i programgruppen vid mushjulsklick."
+
+msgid "About..."
+msgstr "Om..."
+
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+msgid "Remove 'Icing Task Manager'"
+msgstr "Ta bort 'Icing Task Manager'"
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin program när dras till en ny position"
