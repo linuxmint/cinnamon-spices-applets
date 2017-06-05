@@ -25,10 +25,6 @@ This applet is a fork of the default Window-list applet shipped with Cinnamon.
 
 ![Inverted menu on top panel](https://odyseus.github.io/CinnamonTools/lib/img/window-list-fork-001.png "Inverted menu on top panel")
 
-## Contributors
-- **[NikoKrause](https://github.com/NikoKrause):** German localization and bug fixes.
-- **[muzena](https://github.com/muzena):** Croatian localization.
-- **[giwhub](https://github.com/giwhub):** Chinese localization.
-- **[eson57](https://github.com/eson57):** Swedish localization.
+[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40window-list-fork/CONTRIBUTORS.md)
 
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40window-list-fork/CHANGE_LOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40window-list-fork/CHANGELOG.md)
