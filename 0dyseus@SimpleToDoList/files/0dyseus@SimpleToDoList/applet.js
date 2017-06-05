@@ -479,7 +479,7 @@ MyApplet.prototype = {
                 }
             }
 
-            this.update_label_visible();
+            this.updateLabelVisibility();
         }));
     },
 
@@ -724,16 +724,21 @@ MyApplet.prototype = {
         this._applet_context_menu.addMenuItem(menuItem);
     },
 
-    update_label_visible: function() {
+    updateLabelVisibility: function() {
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
         if (typeof this.hide_applet_label !== "function")
             return;
 
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
+        } else {
+            if (this.pref_custom_label_for_applet === "" && !this.pref_show_tasks_counter_on_applet) {
+                this.hide_applet_label(true);
+            } else {
+                this.hide_applet_label(false);
+            }
+        }
     },
 
     on_applet_clicked: function() {
