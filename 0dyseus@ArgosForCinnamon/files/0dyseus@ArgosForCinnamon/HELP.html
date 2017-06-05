@@ -7,90 +7,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
     /*
-exported toggleLocalizationVisibility,
-         docCookies
+exported toggleLocalizationVisibility
  */
 
 /* jshint varstmt: false */
 
-/**
- * :: cookies.js ::
- * A complete cookies reader/writer framework with full unicode support.
- * Revision #1 - September 4, 2014
- * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
- * https://developer.mozilla.org/User:fusionchess
- * This framework is released under the GNU Public License, version 3 or later.
- * http://www.gnu.org/licenses/gpl-3.0-standalone.html
- * Syntaxes:
- * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
- * docCookies.getItem(name)
- * docCookies.removeItem(name[, path[, domain]])
- * docCookies.hasItem(name)
- * docCookies.keys()
- */
+if (!window.localStorage) {
+    /*
+    Storage objects are a recent addition to the standard. As such they may not be present
+    in all browsers. You can work around this by inserting one of the following two codes at
+    the beginning of your scripts, allowing use of localStorage object in implementations which
+    do not natively support it.
 
-var docCookies = {
-    getItem: function(aKey) {
-        if (!aKey)
-            return null;
+    This algorithm is an exact imitation of the localStorage object, but makes use of cookies.
 
-        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
-                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
-            "$1")) || null;
-    },
-    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
-        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
-            return false;
-
-        var sExpires = "";
-        if (aEnd) {
-            switch (aEnd.constructor) {
-                case Number:
-                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + aEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + aEnd.toUTCString();
-                    break;
+    Source: https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
+     */
+    Object.defineProperty(window, "localStorage", new(function() { // jshint ignore:line
+        var aKeys = [],
+            oStorage = {};
+        Object.defineProperty(oStorage, "getItem", {
+            value: function(sKey) {
+                return sKey ? this[sKey] : null;
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "key", {
+            value: function(nKeyId) {
+                return aKeys[nKeyId];
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "setItem", {
+            value: function(sKey, sValue) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=" + escape(sValue) +
+                    "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "length", {
+            get: function() {
+                return aKeys.length;
+            },
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "removeItem", {
+            value: function(sKey) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        this.get = function() {
+            var iThisIndx;
+            for (var sKey in oStorage) {
+                iThisIndx = aKeys.indexOf(sKey);
+                if (iThisIndx === -1) {
+                    oStorage.setItem(sKey, oStorage[sKey]);
+                } else {
+                    aKeys.splice(iThisIndx, 1);
+                }
+                delete oStorage[sKey];
             }
+            for (aKeys; aKeys.length > 0; aKeys.splice(0, 1)) {
+                oStorage.removeItem(aKeys[0]);
+            }
+            for (var aCouple, iKey, nIdx = 0, aCouples = document.cookie.split(/\s*;\s*/); nIdx < aCouples.length; nIdx++) {
+                aCouple = aCouples[nIdx].split(/\s*=\s*/);
+                if (aCouple.length > 1) {
+                    oStorage[iKey = unescape(aCouple[0])] = unescape(aCouple[1]);
+                    aKeys.push(iKey);
+                }
+            }
+            return oStorage;
+        };
+        this.configurable = false;
+        this.enumerable = true;
+    })());
+}
+
+/**
+ * Return if a particular option exists in a <select> object
+ * @param {String} aValue A string representing the option you are looking for
+ * @param {Object} aSelect A Select object
+ *
+ * Usage:
+ *
+ * optionExists('searchedOption', document.getElementById('myselect'));
+ *
+ * Source: https://stackoverflow.com/a/17166899
+ */
+function optionExists(aValue, aSelect) {
+    var optionExists = false,
+        optionsLength = aSelect.length;
+
+    while (optionsLength--) {
+        if (aSelect.options[optionsLength].value === aValue) {
+            optionExists = true;
+            break;
         }
-        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
-            (aDomain ? "; domain=" + aDomain : "") +
-            (aPath ? "; path=" + aPath : "") +
-            (aSecure ? "; secure" : "");
-        return true;
-    },
-    removeItem: function(aKey, aPath, aDomain) {
-        if (!this.hasItem(aKey))
-            return false;
-
-        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
-            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
-        return true;
-    },
-    hasItem: function(aKey) {
-        if (!aKey)
-            return false;
-
-        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
-            "\\s*\\=")).test(document.cookie);
-    },
-    keys: function() {
-        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
-            .split(/\s*(?:\=[^;]*)?;\s*/);
-        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
-            keys[nIdx] = decodeURIComponent(keys[nIdx]);
-
-        return keys;
     }
-};
+    return optionExists;
+}
 
 function toggleLocalizationVisibility(aValue) {
-    // Store the language passed to the function or retrieve it from a cookie.
-    var language = aValue ? aValue : docCookies.getItem("cinnamon_tools_help_language");
+    // Store the language passed to the function or retrieve it from localStorage (or cookie).
+    var language = aValue ? aValue : localStorage.getItem("cinnamon_tools_help_language");
     var selector = document.getElementById("localization-switch");
+    var validLanguage = optionExists(language, selector);
 
     // If there is no selector, the page build must have gone very wrong.
     if (!selector)
@@ -98,11 +136,15 @@ function toggleLocalizationVisibility(aValue) {
 
     // aValue is null on page load.
     if (aValue === null) {
-        // If there is no language is because cookies are not allowed.
-        // If a user reloads a help page when another language other than English is shown:
-        // - With cookies allowed: The currently selected language will stay selected.
-        // - With cookies NOT allowed: The help page will be switched to English.
-        if (language) { // Set the chosen (or retrieved from a cookie) language...
+        /*
+         If there is no language is because localStorage (or cookies) is disabled.
+         If a user reloads a help page when another language other than English is shown:
+         - With localStorage (or cookies) allowed: The currently selected language will stay selected.
+         - With localStorage (or cookies) NOT allowed: The help page will be switched to English.
+         */
+        // Set the chosen (or retrieved from localStorage (or a cookie)) language,
+        // but only if the language is also an element of the language selector...
+        if (language && validLanguage) {
             selector.value = language;
         } else { // ...or default to English.
             selector.value = "en";
@@ -118,17 +160,24 @@ function toggleLocalizationVisibility(aValue) {
 
         var option = selector.options[selector.selectedIndex];
         var chooseLanguageLabel = document.getElementById("localization-chooser-label");
+        var navXletHelp = document.getElementById("nav-xlet-help");
+        var navXletContributors = document.getElementById("nav-xlet-contributors");
+        var navXletChangelog = document.getElementById("nav-xlet-changelog");
 
-        // Set localized "Choose language" label.
+        // Set localized navigation bar labels.
         chooseLanguageLabel.innerText = option.getAttribute("data-language-chooser-label");
+        navXletHelp.innerText = option.getAttribute("data-xlet-help");
+        navXletContributors.innerText = option.getAttribute("data-xlet-contributors");
+        navXletChangelog.innerText = option.getAttribute("data-xlet-changelog");
         // Set localized page title.
         document.title = option.getAttribute("data-title");
     } finally {
-        if (language) {
-            // If there is language, use it to unhide the respective section...
+        if (language && validLanguage) {
+            // If there is language and it's also an element of the language selector,
+            // use it to unhide the respective section...
             document.getElementById(language).classList.remove("hidden");
-            // ...and save it into a cookie.
-            docCookies.setItem("cinnamon_tools_help_language", language);
+            // ...and save it into localStorage (or a cookie).
+            localStorage.setItem("cinnamon_tools_help_language", language);
         } else {
             // If there is no language, unhide the English section and move on.
             document.getElementById("en").classList.remove("hidden");
@@ -368,6 +417,12 @@ pre {
 /* pre tag tweaks */
 
     
+/* For fixed header */
+body {
+    padding-top: 70px;
+}
+/* For fixed header */
+
 .localization-chooser {
     padding: 1em !important;
     width: %100 !important;
@@ -377,6 +432,14 @@ pre {
 #localization-switch {
     font-weight: bold !important;
     width: auto !important;
+}
+
+#localization-chooser-label {
+    color: #FFFFFF !important;
+}
+
+.navbar-form {
+    margin-top: 8px !important;
 }
 
     /* Specific CSS code for specific HELP files */
@@ -461,14 +524,28 @@ table>tfoot>tr.active>th {
 </div> <!-- .alert.alert-warning -->
 </noscript>
 <div id="mainarea">
-<div class="localization-chooser" align="middle">
-<h4 id="localization-chooser-label">Choose language</h4>
-<select class="form-control" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-<!-- English --><option selected data-title="Help for Argos for Cinnamon" data-language-chooser-label="Choose language" value="en">English</option>
-<!-- Español --><option data-title="Ayuda para Argos for Cinnamon" data-language-chooser-label="Elegir idioma" value="es">Español</option>
-<!-- 简体中文 --><option data-title="Argos for Cinnamon的帮助" data-language-chooser-label="选择语言" value="zh_CN">简体中文</option>
-</select>
-</div> <!-- .localization-chooser -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav">
+            <li><a id="nav-xlet-help" class="navbar-brand" href="#xlet-help"></a></li>
+            <li><a id="nav-xlet-contributors" class="navbar-brand" href="#xlet-contributors"></a></li>
+            <li><a id="nav-xlet-changelog" class="navbar-brand" href="#xlet-changelog"></a></li>
+        </ul>
+    </div>
+    <form class="navbar-form navbar-collapse collapse navbar-right">
+        <div class="form-group">
+            <label id="localization-chooser-label" class="control-label" for="localization-switch"></label>
+            <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
+                <!-- English --><option selected data-title="Help for Argos for Cinnamon" data-language-chooser-label="Choose language" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English</option>
+<!-- Español --><option data-title="Ayuda para Argos for Cinnamon" data-language-chooser-label="Elegir idioma" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español</option>
+<!-- 简体中文 --><option data-title="Argos for Cinnamon的帮助" data-language-chooser-label="选择语言" data-xlet-help="帮助" data-xlet-contributors="贡献者" data-xlet-changelog="变更日志" value="zh_CN">简体中文</option>
+            </select>
+        </div>
+    </form>
+    </div>
+</nav>
+<span id="xlet-help">
 <div class="container boxed">
 
 <div id="zh_CN" class="localization-content hidden">
@@ -493,12 +570,12 @@ table>tfoot>tr.active>th {
 </div><hr>
 <h2>主要功能</h2>
 <ul>
-<li><strong>100% API<a href="＃argos-bitbar兼容性">与BitBar 1.9.2兼容</a>：</strong>在Linux上运行的所有BitBar插件（即不包含macOS特定的代码）将与Argos一起工作（否则是一个错误）</li>
+<li><strong>100% API compatible with BitBar 1.9.2:</strong> All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug). See <strong>BitBar plugins with Argos for Cinnamon</strong>.</li>
 <li><strong>超越BitBar：</strong>Argos可以做BitBar可以做的一切，但也有一些BitBar无法做到的事情。有关详细信息请参阅文档。</li>
 <li><strong>复杂的异步执行引擎：</strong>无论您的脚本运行多长时间，Argos都会智能安排并防止阻止。</li>
 <li><strong> Unicode支持：</strong>只需将文本输出为标准输出。它将以您期望的方式渲染。</li>
 <li><strong>优化最小资源消耗：</strong>即使多个插件每秒刷新一次，Argos通常使用的CPU不到1%。</li>
-<li><strong>完全<a href="＃argos-usage">记录</a>。</strong></li>
+<li><strong>Fully documented:</strong> See <strong>Usage</strong>.</li>
 </ul>
 <hr>
 <h2>依赖关系</h2>
@@ -509,7 +586,6 @@ table>tfoot>tr.active>th {
 </li>
 </ul>
 <hr>
-<p><span id="argos-usage"></span></p>
 <h2>用法</h2>
 <p>将<strong>Argos for Cinnamon</strong>的新实例放入面板后，该小程序提供的示例脚本之一将自动附加到它，并且将基于执行的插件的输出创建一个菜单。这些示例脚本包含了各种<strong>Argos for Cinnamon</strong>可以做的例子。</p>
 <p>刚刚放置的小程序将具有0秒（零秒）的初始执行间隔和3秒（3秒）的初始小程序文本轮流间隔。执行间隔设置为0秒，因为初始示例脚本没有任何需要更新的动态数据。小程序文本轮流间隔设置为3秒，因此可以在操作中看到示例脚本的文本轮流。</p>
@@ -693,7 +769,6 @@ table>tfoot>tr.active>th {
 </tbody>
 </table>
 <hr>
-<p><span id="argos-bitbar-compatibility"></span></p>
 <h2>用于Argos for Cinnamon的BitBar插件</h2>
 <div class="alert alert-warning">
 <strong>
@@ -775,12 +850,12 @@ table>tfoot>tr.active>th {
 </div><hr>
 <h2>Características principales</h2>
 <ul>
-<li><strong>100% API <a href="#argos-bitbar-compatibility">compatible con BitBar 1.9.2</a>:</strong> Todos los complementos para BitBar que corren en Linux (por ejemplo, que no contienen código específico de macOS) van a funcionar con Argos (si no funcionan, es un error en Argos).</li>
+<li><strong>100% API compatible con BitBar 1.9.2:</strong> Todos los complementos para BitBar que corren en Linux (por ejemplo, que no contienen código específico de macOS) van a funcionar con Argos (si no funcionan, es un error en Argos). Ver <strong>Complementos de BitBar con Argos para Cinnamon</strong>.</li>
 <li><strong>Más allá de BitBar:</strong> Argos puede hacer todo lo que BitBar puede hacer, pero también algunas cosas que BitBar no puede hacer (todavía). Continuar leyendo esta documentación para más detalles.</li>
 <li><strong>Motor de ejecución asincrónica sofisticado:</strong> No importa cuánto tiempo tomen sus archivos de comandos en ejecutarse, Argos las programará inteligentemente y evitará el bloqueo.</li>
 <li><strong>Soporte Unicode:</strong> Sólo imprima su texto en stdout.  Se traducirá de la manera que usted espera.</li>
 <li><strong>Optimizado para el consumo mínimo de recursos:</strong> Incluso con varios complementos actualizando cada segundo, Argos normalmente usa menos del 1 por ciento de la CPU.</li>
-<li><strong>Totalmente <a href="#argos-usage">documentado</a>.</strong></li>
+<li><strong>Totalmente documentado:</strong> Ver <strong>Uso del applet</strong>.</li>
 </ul>
 <hr>
 <h2>Dependencias</h2>
@@ -791,7 +866,6 @@ table>tfoot>tr.active>th {
 </li>
 </ul>
 <hr>
-<p><span id="argos-usage"></span></p>
 <h2>Uso del applet</h2>
 <p>Después de colocar una nueva instancia de <strong>Argos para Cinnamon</strong> en un panel, uno de los archivos de comandos de ejemplo proporcionados por este applet se adjuntará automáticamente a él y se creará un menú basado en la salida del complemento ejecutado.  Estos archivos de comandos de ejemplo contienen varios ejemplos de lo que <strong>Argos para Cinnamon</strong> es capaz de hacer.</p>
 <p>Un applet recién colocado tendrá un intervalo de ejecución inicial de 0 segundos (cero segundos) y un intervalo inicial de rotación de texto de applet de 3 segundos (tres segundos).  El intervalo de ejecución se establece en 0 segundos porque la secuencia de comandos de ejemplo inicial no tiene ningún dato dinámico que requiera actualización.  Y el intervalo de rotación de texto de applet se establece en 3 segundos para que la rotación de texto del archivo de comandos de ejemplo se pueda ver en acción.</p>
@@ -975,7 +1049,6 @@ table>tfoot>tr.active>th {
 </tbody>
 </table>
 <hr>
-<p><span id="argos-bitbar-compatibility"></span></p>
 <h2>Complementos de BitBar con Argos para Cinnamon</h2>
 <div class="alert alert-warning">
 <strong>
@@ -1057,12 +1130,12 @@ table>tfoot>tr.active>th {
 </div><hr>
 <h2>Key features</h2>
 <ul>
-<li><strong>100% API <a href="#argos-bitbar-compatibility">compatible with BitBar 1.9.2</a>:</strong> All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug).</li>
+<li><strong>100% API compatible with BitBar 1.9.2:</strong> All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug). See <strong>BitBar plugins with Argos for Cinnamon</strong>.</li>
 <li><strong>Beyond BitBar:</strong> Argos can do everything that BitBar can do, but also some things that BitBar can't do (yet). See the documentation for details.</li>
 <li><strong>Sophisticated asynchronous execution engine:</strong> No matter how long your scripts take to run, Argos will schedule them intelligently and prevent blocking.</li>
 <li><strong>Unicode support:</strong> Just print your text to stdout. It will be rendered the way you expect.</li>
 <li><strong>Optimized for minimum resource consumption:</strong> Even with multiple plugins refreshing every second, Argos typically uses less than 1 percent of the CPU.</li>
-<li><strong>Fully <a href="#argos-usage">documented</a>.</strong></li>
+<li><strong>Fully documented:</strong> See <strong>Usage</strong>.</li>
 </ul>
 <hr>
 <h2>Dependencies</h2>
@@ -1073,7 +1146,6 @@ table>tfoot>tr.active>th {
 </li>
 </ul>
 <hr>
-<p><span id="argos-usage"></span></p>
 <h2>Usage</h2>
 <p>After placing a new instance of <strong>Argos for Cinnamon</strong> into a panel, one of the example scripts provided by this applet will be automatically attached to it and a menu will be created based on the output of the executed plugin. These example scripts contain various examples of what <strong>Argos for Cinnamon</strong> can do.</p>
 <p>A just placed applet will have an initial execution interval of 0 seconds (zero seconds) and an initial applet text rotation interval of 3 seconds (three seconds). The execution interval is set to 0 seconds because the initial example script doesn't have any dynamic data that requires update. And the applet text rotation interval is set to 3 seconds so the text rotation of the example script can be seen in action.</p>
@@ -1257,7 +1329,6 @@ table>tfoot>tr.active>th {
 </tbody>
 </table>
 <hr>
-<p><span id="argos-bitbar-compatibility"></span></p>
 <h2>BitBar plugins with Argos for Cinnamon</h2>
 <div class="alert alert-warning">
 <strong>
@@ -1317,6 +1388,287 @@ WARNING!!! DO NOT RANDOMLY TEST SCRIPTS!!!
 </div> <!-- .localization-content -->
 
 </div> <!-- .container.boxed -->
+<div style="font-weight:bold;" class="container alert alert-info">The following two sections are available only in English.</div>
+<span id="xlet-contributors">
+<div class="container boxed">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/p-e-w">Philipp Emanuel Weidmann</a>:</strong>: Author of the gnome-shell extension called <a href="https://github.com/p-e-w/argos">Argos</a>.</li>
+<li><strong><a href="https://github.com/giwhub">giwhub</a>:</strong> Chinese localization.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+<span id="xlet-changelog">
+<div class="container boxed">
+<h2>Argos for Cinnamon changelog</h2>
+<h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 16:12:18 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a3d1d29">a3d1d29</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Removed the two broken *internal links* inside the help file. Since I couldn't fix their behavior,
+I simply removed them and added some *literal references*.
+- Updated localization template, Spanish localization and help file due to changes to the
+create_localized_help.py script.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:29:42 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/07e8226">07e8226</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 19:32:35 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c483ead">c483ead</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fixed an issue that kept an empty label visible on Cinnamon 3.4.x, adding extra spacing to the
+elements of the applet when it shouldn't.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 31 May 2017 09:09:42 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a09fd63">a09fd63</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated screenshot.png file. Trying an animated PNG that represents a little better what Argos for
+Cinnamon can do.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 07:18:07 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3ebb668">3ebb668</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Added missing icon.png and screenshot.png files used by the Spices website.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 17:06:41 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8e9e2fb">8e9e2fb</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:45:50 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/cdbd7c7">cdbd7c7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 02:07:10 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/fe194b5">fe194b5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated README and metadata.json file due to new localization.
+- Updated localization template and Spanish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 00:07:10 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/918d300">918d300</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Execute the attached script exposing the script's current working directory. This allows us to use
+the current working directory in our scripts.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:31:49 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ce62597">ce62597</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Corrected a validation error on some .po files generated by the use of the % sign in a Python
+string.
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:01:35 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/55ff685">55ff685</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:47:39 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8940add">8940add</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 26 May 2017 04:50:19 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/6eb7a9e">6eb7a9e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon
+- More tweaks/fixes to comply with Cinnamon 3.4.x with CJS 3.4.x installed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 26 May 2017 01:24:01 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a3ebb00">a3ebb00</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Reverted back the use of the **TryExec** function because it is causing freezes under Cinnamon
+3.4.x with CJS 3.4.x installed (¬¬). Comming back to it when and if CJS finally decides to throw an
+actually useful error message (¬¬).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 25 May 2017 08:36:02 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/48d3b6c">48d3b6c</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fixed a bug that prevented to correctly run commands when the *terminal* attribute was set to
+true.
+- Changed a variable name on the python_examples.py file to correctly reflect that this is an applet
+and not an extension.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 23 May 2017 06:05:21 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f38bac0">f38bac0</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Last prototype.
+- Added a mechanism to remember the last used directory when choosing scripts.
+- Cleaned up code. Mainly removed all `try{}catch{}` blocks used for debugging in preparation for
+stable release.
+- Completed Spanish localization of the help file.
+- Cleaned up the example scripts.
+
+LANGUAGE  UNTRANSLATED
+es.po     0
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 17 May 2017 16:07:58 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3292235">3292235</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Removed CJS 3.4 warnings and fixed errors exposed by the use of CJS 3.4.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 22:47:54 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/bc8b65e">bc8b65e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Some minor code clean up.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:52:00 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/37601a5">37601a5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+es.po     84
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:36:34 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/4b1af68">4b1af68</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Fourth prototype.
+- Changed an internal function that it's used to execute custom commands to use a callback. This
+allows for me to display a notification in case a command failed to execute.
+- Changed the unit used to display the **Script execution time** and **Output process** time on this
+applet tooltip from seconds to milliseconds.
+- Cleaned up the metadata.json file.
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 15:10:03 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f0fb42b">f0fb42b</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Updated help file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 12:19:33 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/bde7e9f">bde7e9f</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Third prototype.
+- Added tooltip to applet. It will display the script name, the execution interval, the rotation
+interval, the amount of time that the script took to launch and the amount of time that the applet
+took to process the script's output.
+- Tested applet on all versions of Cinnamon.
+- Implemented plural forms on some translatable strings. **@translators:** Keep an eye on those in
+case there are errors.
+- *Strictified* all comparisons. Shortcut for *I changed all == to ===*, etc.
+- Implemented a better/more informative way of informing about missing dependencies.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 3 May 2017 05:06:34 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3d82ee9">3d82ee9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon
+- Second prototype.
+- Added localization support for the python_examples.py script and switched to it as the default
+script when the applet is first placed in a panel. This allows to create an example menu localized
+if there is a localization language available.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 30 Apr 2017 11:37:42 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/5668bb9">5668bb9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Argos for Cinnamon applet
+- Initial prototype.
+</code></pre>
+<hr>
+
+</div> <!-- .container.boxed -->
+
 </div> <!-- #mainarea -->
 <script type="text/javascript">toggleLocalizationVisibility(null);</script>
 </body>
