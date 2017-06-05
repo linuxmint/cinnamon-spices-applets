@@ -79,10 +79,15 @@ MyApplet.prototype = {
         if (typeof this.hide_applet_label !== "function")
             return;
 
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
+        } else {
+            if (this.pref_custom_label_for_applet === "") {
+                this.hide_applet_label(true);
+            } else {
+                this.hide_applet_label(false);
+            }
+        }
     },
 
     on_orientation_changed: function(orientation) {
