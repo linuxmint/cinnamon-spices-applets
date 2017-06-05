@@ -7,90 +7,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
     /*
-exported toggleLocalizationVisibility,
-         docCookies
+exported toggleLocalizationVisibility
  */
 
 /* jshint varstmt: false */
 
-/**
- * :: cookies.js ::
- * A complete cookies reader/writer framework with full unicode support.
- * Revision #1 - September 4, 2014
- * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
- * https://developer.mozilla.org/User:fusionchess
- * This framework is released under the GNU Public License, version 3 or later.
- * http://www.gnu.org/licenses/gpl-3.0-standalone.html
- * Syntaxes:
- * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
- * docCookies.getItem(name)
- * docCookies.removeItem(name[, path[, domain]])
- * docCookies.hasItem(name)
- * docCookies.keys()
- */
+if (!window.localStorage) {
+    /*
+    Storage objects are a recent addition to the standard. As such they may not be present
+    in all browsers. You can work around this by inserting one of the following two codes at
+    the beginning of your scripts, allowing use of localStorage object in implementations which
+    do not natively support it.
 
-var docCookies = {
-    getItem: function(aKey) {
-        if (!aKey)
-            return null;
+    This algorithm is an exact imitation of the localStorage object, but makes use of cookies.
 
-        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
-                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
-            "$1")) || null;
-    },
-    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
-        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
-            return false;
-
-        var sExpires = "";
-        if (aEnd) {
-            switch (aEnd.constructor) {
-                case Number:
-                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + aEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + aEnd.toUTCString();
-                    break;
+    Source: https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
+     */
+    Object.defineProperty(window, "localStorage", new(function() { // jshint ignore:line
+        var aKeys = [],
+            oStorage = {};
+        Object.defineProperty(oStorage, "getItem", {
+            value: function(sKey) {
+                return sKey ? this[sKey] : null;
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "key", {
+            value: function(nKeyId) {
+                return aKeys[nKeyId];
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "setItem", {
+            value: function(sKey, sValue) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=" + escape(sValue) +
+                    "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "length", {
+            get: function() {
+                return aKeys.length;
+            },
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "removeItem", {
+            value: function(sKey) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        this.get = function() {
+            var iThisIndx;
+            for (var sKey in oStorage) {
+                iThisIndx = aKeys.indexOf(sKey);
+                if (iThisIndx === -1) {
+                    oStorage.setItem(sKey, oStorage[sKey]);
+                } else {
+                    aKeys.splice(iThisIndx, 1);
+                }
+                delete oStorage[sKey];
             }
+            for (aKeys; aKeys.length > 0; aKeys.splice(0, 1)) {
+                oStorage.removeItem(aKeys[0]);
+            }
+            for (var aCouple, iKey, nIdx = 0, aCouples = document.cookie.split(/\s*;\s*/); nIdx < aCouples.length; nIdx++) {
+                aCouple = aCouples[nIdx].split(/\s*=\s*/);
+                if (aCouple.length > 1) {
+                    oStorage[iKey = unescape(aCouple[0])] = unescape(aCouple[1]);
+                    aKeys.push(iKey);
+                }
+            }
+            return oStorage;
+        };
+        this.configurable = false;
+        this.enumerable = true;
+    })());
+}
+
+/**
+ * Return if a particular option exists in a <select> object
+ * @param {String} aValue A string representing the option you are looking for
+ * @param {Object} aSelect A Select object
+ *
+ * Usage:
+ *
+ * optionExists('searchedOption', document.getElementById('myselect'));
+ *
+ * Source: https://stackoverflow.com/a/17166899
+ */
+function optionExists(aValue, aSelect) {
+    var optionExists = false,
+        optionsLength = aSelect.length;
+
+    while (optionsLength--) {
+        if (aSelect.options[optionsLength].value === aValue) {
+            optionExists = true;
+            break;
         }
-        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
-            (aDomain ? "; domain=" + aDomain : "") +
-            (aPath ? "; path=" + aPath : "") +
-            (aSecure ? "; secure" : "");
-        return true;
-    },
-    removeItem: function(aKey, aPath, aDomain) {
-        if (!this.hasItem(aKey))
-            return false;
-
-        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
-            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
-        return true;
-    },
-    hasItem: function(aKey) {
-        if (!aKey)
-            return false;
-
-        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
-            "\\s*\\=")).test(document.cookie);
-    },
-    keys: function() {
-        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
-            .split(/\s*(?:\=[^;]*)?;\s*/);
-        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
-            keys[nIdx] = decodeURIComponent(keys[nIdx]);
-
-        return keys;
     }
-};
+    return optionExists;
+}
 
 function toggleLocalizationVisibility(aValue) {
-    // Store the language passed to the function or retrieve it from a cookie.
-    var language = aValue ? aValue : docCookies.getItem("cinnamon_tools_help_language");
+    // Store the language passed to the function or retrieve it from localStorage (or cookie).
+    var language = aValue ? aValue : localStorage.getItem("cinnamon_tools_help_language");
     var selector = document.getElementById("localization-switch");
+    var validLanguage = optionExists(language, selector);
 
     // If there is no selector, the page build must have gone very wrong.
     if (!selector)
@@ -98,11 +136,15 @@ function toggleLocalizationVisibility(aValue) {
 
     // aValue is null on page load.
     if (aValue === null) {
-        // If there is no language is because cookies are not allowed.
-        // If a user reloads a help page when another language other than English is shown:
-        // - With cookies allowed: The currently selected language will stay selected.
-        // - With cookies NOT allowed: The help page will be switched to English.
-        if (language) { // Set the chosen (or retrieved from a cookie) language...
+        /*
+         If there is no language is because localStorage (or cookies) is disabled.
+         If a user reloads a help page when another language other than English is shown:
+         - With localStorage (or cookies) allowed: The currently selected language will stay selected.
+         - With localStorage (or cookies) NOT allowed: The help page will be switched to English.
+         */
+        // Set the chosen (or retrieved from localStorage (or a cookie)) language,
+        // but only if the language is also an element of the language selector...
+        if (language && validLanguage) {
             selector.value = language;
         } else { // ...or default to English.
             selector.value = "en";
@@ -118,17 +160,24 @@ function toggleLocalizationVisibility(aValue) {
 
         var option = selector.options[selector.selectedIndex];
         var chooseLanguageLabel = document.getElementById("localization-chooser-label");
+        var navXletHelp = document.getElementById("nav-xlet-help");
+        var navXletContributors = document.getElementById("nav-xlet-contributors");
+        var navXletChangelog = document.getElementById("nav-xlet-changelog");
 
-        // Set localized "Choose language" label.
+        // Set localized navigation bar labels.
         chooseLanguageLabel.innerText = option.getAttribute("data-language-chooser-label");
+        navXletHelp.innerText = option.getAttribute("data-xlet-help");
+        navXletContributors.innerText = option.getAttribute("data-xlet-contributors");
+        navXletChangelog.innerText = option.getAttribute("data-xlet-changelog");
         // Set localized page title.
         document.title = option.getAttribute("data-title");
     } finally {
-        if (language) {
-            // If there is language, use it to unhide the respective section...
+        if (language && validLanguage) {
+            // If there is language and it's also an element of the language selector,
+            // use it to unhide the respective section...
             document.getElementById(language).classList.remove("hidden");
-            // ...and save it into a cookie.
-            docCookies.setItem("cinnamon_tools_help_language", language);
+            // ...and save it into localStorage (or a cookie).
+            localStorage.setItem("cinnamon_tools_help_language", language);
         } else {
             // If there is no language, unhide the English section and move on.
             document.getElementById("en").classList.remove("hidden");
@@ -368,6 +417,12 @@ pre {
 /* pre tag tweaks */
 
     
+/* For fixed header */
+body {
+    padding-top: 70px;
+}
+/* For fixed header */
+
 .localization-chooser {
     padding: 1em !important;
     width: %100 !important;
@@ -377,6 +432,14 @@ pre {
 #localization-switch {
     font-weight: bold !important;
     width: auto !important;
+}
+
+#localization-chooser-label {
+    color: #FFFFFF !important;
+}
+
+.navbar-form {
+    margin-top: 8px !important;
 }
 
     /* Specific CSS code for specific HELP files */
@@ -391,16 +454,30 @@ pre {
 </div> <!-- .alert.alert-warning -->
 </noscript>
 <div id="mainarea">
-<div class="localization-chooser" align="middle">
-<h4 id="localization-chooser-label">Choose language</h4>
-<select class="form-control" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-<!-- Česky --><option data-title="Nápověda pro Popup Translator" data-language-chooser-label="Zvolte jazyk" value="cs">Česky</option>
-<!-- English --><option selected data-title="Help for Popup Translator" data-language-chooser-label="Choose language" value="en">English</option>
-<!-- Español --><option data-title="Ayuda para Popup Translator" data-language-chooser-label="Elegir idioma" value="es">Español</option>
-<!-- Svenska --><option data-title="Hjälp för Popup Translator" data-language-chooser-label="Välj språk" value="sv">Svenska</option>
-<!-- 简体中文 --><option data-title="Popup Translator的帮助" data-language-chooser-label="选择语言" value="zh_CN">简体中文</option>
-</select>
-</div> <!-- .localization-chooser -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav">
+            <li><a id="nav-xlet-help" class="navbar-brand" href="#xlet-help"></a></li>
+            <li><a id="nav-xlet-contributors" class="navbar-brand" href="#xlet-contributors"></a></li>
+            <li><a id="nav-xlet-changelog" class="navbar-brand" href="#xlet-changelog"></a></li>
+        </ul>
+    </div>
+    <form class="navbar-form navbar-collapse collapse navbar-right">
+        <div class="form-group">
+            <label id="localization-chooser-label" class="control-label" for="localization-switch"></label>
+            <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
+                <!-- Česky --><option data-title="Nápověda pro Popup Translator" data-language-chooser-label="Zvolte jazyk" data-xlet-help="Nápověda" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="cs">Česky</option>
+<!-- English --><option selected data-title="Help for Popup Translator" data-language-chooser-label="Choose language" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English</option>
+<!-- Español --><option data-title="Ayuda para Popup Translator" data-language-chooser-label="Elegir idioma" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español</option>
+<!-- Svenska --><option data-title="Hjälp för Popup Translator" data-language-chooser-label="Välj språk" data-xlet-help="Hjälp" data-xlet-contributors="Medhjälpare" data-xlet-changelog="Ändringslogg" value="sv">Svenska</option>
+<!-- 简体中文 --><option data-title="Popup Translator的帮助" data-language-chooser-label="选择语言" data-xlet-help="帮助" data-xlet-contributors="贡献者" data-xlet-changelog="变更日志" value="zh_CN">简体中文</option>
+            </select>
+        </div>
+    </form>
+    </div>
+</nav>
+<span id="xlet-help">
 <div class="container boxed">
 
 <div id="zh_CN" class="localization-content hidden">
@@ -676,7 +753,7 @@ V kontextovém menu tohoto apletu je položka, která může otevřít složku s
 
 <p>Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner.</p>
 
-<p>Felrapporter, funktionsönskemål och kodbidrag kan göras i denna xlets kodförråd, länkat nedan. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
+<p>Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
 
 </div>
 <hr>
@@ -749,7 +826,7 @@ I panelprogrammets kontextmeny (högerklick på ikonen) kan du öppna den mapp d
 <ul>
 <li>Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt.</li>
 <li>Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet <strong>localizations.sh</strong> från en terminal öppnad i programmappen.</li>
-<li>Om ditt språk saknas i denna xlet, kan du översätta den genom följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
+<li>Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
 </div> <!-- .localization-content -->
@@ -843,6 +920,405 @@ In the context menu of this applet is an item that can open the folder were the 
 </div> <!-- .localization-content -->
 
 </div> <!-- .container.boxed -->
+<div style="font-weight:bold;" class="container alert alert-info">The following two sections are available only in English.</div>
+<span id="xlet-contributors">
+<div class="container boxed">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/NikoKrause">NikoKrause</a>:</strong> German localization and bug reports.</li>
+<li><strong><a href="https://github.com/Radek71">Radek71</a>:</strong> Czech localization and bug reports.</li>
+<li><strong><a href="https://github.com/muzena">muzena</a>:</strong> Croatian localization.</li>
+<li><strong><a href="https://github.com/giwhub">giwhub</a>:</strong> Chinese localization.</li>
+<li><strong><a href="https://github.com/eson57">eson57</a>:</strong> Swedish localization.</li>
+<li><strong><a href="https://github.com/Ilis">Ilis</a>:</strong> Russian localization.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+<span id="xlet-changelog">
+<div class="container boxed">
+<h2>Popup Translator changelog</h2>
+<h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:35:05 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1ba87e6">1ba87e6</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 19:33:30 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f6a134a">f6a134a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Fixed an issue that kept an empty label visible on Cinnamon 3.4.x, adding extra spacing to the
+elements of the applet when it shouldn't.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 09:06:34 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ce37cb4">ce37cb4</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>PopupTranslator: Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:51:15 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1471f4e">1471f4e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Fixed a styling inconsistency on the create_localized_help.py script.
+- Updated all localization files due to changes in the create_localizaed_help.py script.
+- Updated help file due to updated localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:34:28 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c4d10cc">c4d10cc</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:02:30 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/6aea173">6aea173</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:52:03 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d5b1c66">d5b1c66</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 17 May 2017 16:08:42 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c9635bb">c9635bb</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Removed CJS 3.4 warnings and fixed errors exposed by the use of CJS 3.4.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+de.po     64
+es.po     0
+cs.po     64
+sv.po     0
+ru.po     63
+hr.po     63
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:40:29 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/0482416">0482416</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+de.po     64
+es.po     0
+cs.po     64
+sv.po     0
+ru.po     63
+hr.po     63
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:19:05 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/bf4b875">bf4b875</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #81 from giwhub/giwhub-patch-2
+Update Chinese translations for xlets
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:05:12 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/20d3547">20d3547</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 14 May 2017 10:45:55 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ede71a6">ede71a6</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:54:56 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/67fe7a7">67fe7a7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  64
+de.po     64
+es.po     0
+cs.po     64
+sv.po     64
+ru.po     63
+hr.po     63
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 May 2017 13:17:41 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/2ff4770">2ff4770</a></li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0dyseus@PopupTranslator.hr: update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 7 May 2017 12:50:34 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/43e4be1">43e4be1</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Added Russian localization. Thanks to [Ilis](https://github.com/Ilis).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 7 May 2017 08:40:15 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/119fbb4">119fbb4</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Removed *multiversion* because it is not worth the trouble. Fixes #60
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 7 May 2017 06:00:10 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d2feeab">d2feeab</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Corrected execution permission for appletHelper.py file. Fixes #58
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:26:11 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/03905d6">03905d6</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Cleaned up metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 13:27:16 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/7ac5e79">7ac5e79</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Minor code tweaks.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 4 May 2017 03:21:24 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1df6d6d">1df6d6d</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Fixed Google Translate language detection due to changes on Google's side.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 30 Apr 2017 01:07:28 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/22018e1">22018e1</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet
+- Updated README and metadata.json file to reflect new localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 29 Apr 2017 12:25:39 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ae74239">ae74239</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>Create sv.po
+Swedish translation
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 13 Apr 2017 15:52:02 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/cdc12c5">cdc12c5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Added localized help.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 7 Mar 2017 22:50:20 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/fb8eb5b">fb8eb5b</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 19 Feb 2017 12:41:46 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ecb040e">ecb040e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Updated German and Czech localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 12 Feb 2017 00:51:31 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/41ca677">41ca677</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Fixed keybindings not registered on applet initialization
+- Implemented 4 different translation mechanisms that will allow to have various translation options
+at hand without the need to constantly change the applet settings. Read the HELP.md file for more
+details (It can be accessed from this applet context menu)
+- Re-designed the translation history mechanism to be *smarter*. Now, if, for example, a string is
+translated into four different languages, the strings will be stored into four different entries in
+the translation history
+- Re-designed the translation history window. Now, only one instance of the history window can be
+opened at the same time. Removed **Reload** button in favor of auto-update of the history window
+content every time the translation history changes and the translation window is open
+- Moved some of the context menu entries into a sub-menu
+- Removed unused import from appletHelper.py file
+- Added new icons to the icons folder that represent the translation services used by this applet
+- Added debugging options to facilitate development
+- Added LICENSE.md file to applet.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 6 Feb 2017 18:14:08 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/2ecca71">2ecca71</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Fixed keybinding display on applet tooltip.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 3 Feb 2017 14:05:11 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/4ae3b18">4ae3b18</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Added German localization. Thanks to
+[NikoKrause](https://github.com/NikoKrause).
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 2 Feb 2017 17:33:00 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/69b6e72">69b6e72</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
+Closes #21 - Added missing translatable strings
+- Improved clean up when removing applet.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 1 Feb 2017 15:23:43 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b2416fe">b2416fe</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - First stable version
+- Initial Spices publication.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 31 Jan 2017 15:32:16 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/dc7a8b7">dc7a8b7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Sixth prototype
+- Removed the history.ui file and placed its content inside the appletHelper.py file
+- Translatable strings untouched.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 29 Jan 2017 14:55:52 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/744a2c4">744a2c4</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Fifth prototype
+- Tested on Cinnamon 2.8.8, 3.0.7 and 3.2.8
+- Translatable strings might need corrections.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 29 Jan 2017 08:52:57 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b9a2a5e">b9a2a5e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator applet - Fourth prototype.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 27 Jan 2017 11:40:53 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/554371e">554371e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applet - Cleaned some irrelevant files
+- Updated READMEs
+- Updated metadata.json
+- Updated some applet icons.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 24 Jan 2017 09:27:42 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/54bb97a">54bb97a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator - Third prototype.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 23 Jan 2017 04:51:14 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/13a5214">13a5214</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Popup Translator - Second prototype.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 20:29:22 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c2a6759">c2a6759</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Formatted repository to conform Spices repository.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 15 Jan 2017 05:42:06 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/5d111a7">5d111a7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Popup Translator applet] - Initial prototype.
+</code></pre>
+<hr>
+
+</div> <!-- .container.boxed -->
+
 </div> <!-- #mainarea -->
 <script type="text/javascript">toggleLocalizationVisibility(null);</script>
 </body>

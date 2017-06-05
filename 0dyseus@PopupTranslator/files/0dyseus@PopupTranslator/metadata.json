@@ -1,14 +1,7 @@
 {
     "website": "https://github.com/Odyseus/CinnamonTools",
     "description": "Simple translator applet that will allow to display any selected text from any application on a system in a popup.",
-    "contributors": [
-        "NikoKrause: German localization and bug reports.",
-        "Radek71: Czech localization and bug reports.",
-        "muzena: Croatian localization.",
-        "giwhub: Chinese localization.",
-        "eson57: Swedish localization.",
-        "Ilis: Russian localization."
-    ],
+    "contributors": "See this xlet help file.",
     "max-instances": "-1",
     "uuid": "0dyseus@PopupTranslator",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
