@@ -130,7 +130,7 @@ PlaceMenuItem.prototype = {
         let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
 
         let icon;
-        if ( iconName ) {
+        if ( iconName && Gtk.IconTheme.get_default().has_icon(iconName) ) {
             icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
         }
         else {
@@ -434,8 +434,10 @@ MyApplet.prototype = {
                 let file = Gio.File.new_for_uri(place);
                 if ( file.query_exists(null) ) {
                     let text = null;
+                    let iconName = null;
                     if ( entry.length > 1 ) text = entry[1];
-                    customPlace = new PlaceMenuItem(place, text);
+                    if ( entry.length > 2 ) iconName = entry[2];
+                    customPlace = new PlaceMenuItem(place, text, iconName);
                     container.addMenuItem(customPlace);
                 }
 
