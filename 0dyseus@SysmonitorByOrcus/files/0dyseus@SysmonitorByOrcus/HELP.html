@@ -7,90 +7,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
     /*
-exported toggleLocalizationVisibility,
-         docCookies
+exported toggleLocalizationVisibility
  */
 
 /* jshint varstmt: false */
 
-/**
- * :: cookies.js ::
- * A complete cookies reader/writer framework with full unicode support.
- * Revision #1 - September 4, 2014
- * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
- * https://developer.mozilla.org/User:fusionchess
- * This framework is released under the GNU Public License, version 3 or later.
- * http://www.gnu.org/licenses/gpl-3.0-standalone.html
- * Syntaxes:
- * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
- * docCookies.getItem(name)
- * docCookies.removeItem(name[, path[, domain]])
- * docCookies.hasItem(name)
- * docCookies.keys()
- */
+if (!window.localStorage) {
+    /*
+    Storage objects are a recent addition to the standard. As such they may not be present
+    in all browsers. You can work around this by inserting one of the following two codes at
+    the beginning of your scripts, allowing use of localStorage object in implementations which
+    do not natively support it.
 
-var docCookies = {
-    getItem: function(aKey) {
-        if (!aKey)
-            return null;
+    This algorithm is an exact imitation of the localStorage object, but makes use of cookies.
 
-        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
-                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
-            "$1")) || null;
-    },
-    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
-        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
-            return false;
-
-        var sExpires = "";
-        if (aEnd) {
-            switch (aEnd.constructor) {
-                case Number:
-                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + aEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + aEnd.toUTCString();
-                    break;
+    Source: https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
+     */
+    Object.defineProperty(window, "localStorage", new(function() { // jshint ignore:line
+        var aKeys = [],
+            oStorage = {};
+        Object.defineProperty(oStorage, "getItem", {
+            value: function(sKey) {
+                return sKey ? this[sKey] : null;
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "key", {
+            value: function(nKeyId) {
+                return aKeys[nKeyId];
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "setItem", {
+            value: function(sKey, sValue) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=" + escape(sValue) +
+                    "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "length", {
+            get: function() {
+                return aKeys.length;
+            },
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "removeItem", {
+            value: function(sKey) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        this.get = function() {
+            var iThisIndx;
+            for (var sKey in oStorage) {
+                iThisIndx = aKeys.indexOf(sKey);
+                if (iThisIndx === -1) {
+                    oStorage.setItem(sKey, oStorage[sKey]);
+                } else {
+                    aKeys.splice(iThisIndx, 1);
+                }
+                delete oStorage[sKey];
             }
+            for (aKeys; aKeys.length > 0; aKeys.splice(0, 1)) {
+                oStorage.removeItem(aKeys[0]);
+            }
+            for (var aCouple, iKey, nIdx = 0, aCouples = document.cookie.split(/\s*;\s*/); nIdx < aCouples.length; nIdx++) {
+                aCouple = aCouples[nIdx].split(/\s*=\s*/);
+                if (aCouple.length > 1) {
+                    oStorage[iKey = unescape(aCouple[0])] = unescape(aCouple[1]);
+                    aKeys.push(iKey);
+                }
+            }
+            return oStorage;
+        };
+        this.configurable = false;
+        this.enumerable = true;
+    })());
+}
+
+/**
+ * Return if a particular option exists in a <select> object
+ * @param {String} aValue A string representing the option you are looking for
+ * @param {Object} aSelect A Select object
+ *
+ * Usage:
+ *
+ * optionExists('searchedOption', document.getElementById('myselect'));
+ *
+ * Source: https://stackoverflow.com/a/17166899
+ */
+function optionExists(aValue, aSelect) {
+    var optionExists = false,
+        optionsLength = aSelect.length;
+
+    while (optionsLength--) {
+        if (aSelect.options[optionsLength].value === aValue) {
+            optionExists = true;
+            break;
         }
-        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
-            (aDomain ? "; domain=" + aDomain : "") +
-            (aPath ? "; path=" + aPath : "") +
-            (aSecure ? "; secure" : "");
-        return true;
-    },
-    removeItem: function(aKey, aPath, aDomain) {
-        if (!this.hasItem(aKey))
-            return false;
-
-        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
-            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
-        return true;
-    },
-    hasItem: function(aKey) {
-        if (!aKey)
-            return false;
-
-        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
-            "\\s*\\=")).test(document.cookie);
-    },
-    keys: function() {
-        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
-            .split(/\s*(?:\=[^;]*)?;\s*/);
-        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
-            keys[nIdx] = decodeURIComponent(keys[nIdx]);
-
-        return keys;
     }
-};
+    return optionExists;
+}
 
 function toggleLocalizationVisibility(aValue) {
-    // Store the language passed to the function or retrieve it from a cookie.
-    var language = aValue ? aValue : docCookies.getItem("cinnamon_tools_help_language");
+    // Store the language passed to the function or retrieve it from localStorage (or cookie).
+    var language = aValue ? aValue : localStorage.getItem("cinnamon_tools_help_language");
     var selector = document.getElementById("localization-switch");
+    var validLanguage = optionExists(language, selector);
 
     // If there is no selector, the page build must have gone very wrong.
     if (!selector)
@@ -98,11 +136,15 @@ function toggleLocalizationVisibility(aValue) {
 
     // aValue is null on page load.
     if (aValue === null) {
-        // If there is no language is because cookies are not allowed.
-        // If a user reloads a help page when another language other than English is shown:
-        // - With cookies allowed: The currently selected language will stay selected.
-        // - With cookies NOT allowed: The help page will be switched to English.
-        if (language) { // Set the chosen (or retrieved from a cookie) language...
+        /*
+         If there is no language is because localStorage (or cookies) is disabled.
+         If a user reloads a help page when another language other than English is shown:
+         - With localStorage (or cookies) allowed: The currently selected language will stay selected.
+         - With localStorage (or cookies) NOT allowed: The help page will be switched to English.
+         */
+        // Set the chosen (or retrieved from localStorage (or a cookie)) language,
+        // but only if the language is also an element of the language selector...
+        if (language && validLanguage) {
             selector.value = language;
         } else { // ...or default to English.
             selector.value = "en";
@@ -118,17 +160,24 @@ function toggleLocalizationVisibility(aValue) {
 
         var option = selector.options[selector.selectedIndex];
         var chooseLanguageLabel = document.getElementById("localization-chooser-label");
+        var navXletHelp = document.getElementById("nav-xlet-help");
+        var navXletContributors = document.getElementById("nav-xlet-contributors");
+        var navXletChangelog = document.getElementById("nav-xlet-changelog");
 
-        // Set localized "Choose language" label.
+        // Set localized navigation bar labels.
         chooseLanguageLabel.innerText = option.getAttribute("data-language-chooser-label");
+        navXletHelp.innerText = option.getAttribute("data-xlet-help");
+        navXletContributors.innerText = option.getAttribute("data-xlet-contributors");
+        navXletChangelog.innerText = option.getAttribute("data-xlet-changelog");
         // Set localized page title.
         document.title = option.getAttribute("data-title");
     } finally {
-        if (language) {
-            // If there is language, use it to unhide the respective section...
+        if (language && validLanguage) {
+            // If there is language and it's also an element of the language selector,
+            // use it to unhide the respective section...
             document.getElementById(language).classList.remove("hidden");
-            // ...and save it into a cookie.
-            docCookies.setItem("cinnamon_tools_help_language", language);
+            // ...and save it into localStorage (or a cookie).
+            localStorage.setItem("cinnamon_tools_help_language", language);
         } else {
             // If there is no language, unhide the English section and move on.
             document.getElementById("en").classList.remove("hidden");
@@ -368,6 +417,12 @@ pre {
 /* pre tag tweaks */
 
     
+/* For fixed header */
+body {
+    padding-top: 70px;
+}
+/* For fixed header */
+
 .localization-chooser {
     padding: 1em !important;
     width: %100 !important;
@@ -377,6 +432,14 @@ pre {
 #localization-switch {
     font-weight: bold !important;
     width: auto !important;
+}
+
+#localization-chooser-label {
+    color: #FFFFFF !important;
+}
+
+.navbar-form {
+    margin-top: 8px !important;
 }
 
     /* Specific CSS code for specific HELP files */
@@ -391,15 +454,29 @@ pre {
 </div> <!-- .alert.alert-warning -->
 </noscript>
 <div id="mainarea">
-<div class="localization-chooser" align="middle">
-<h4 id="localization-chooser-label">Choose language</h4>
-<select class="form-control" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-<!-- English --><option selected data-title="Help for System Monitor (Fork By Odyseus)" data-language-chooser-label="Choose language" value="en">English</option>
-<!-- Español --><option data-title="Ayuda para System Monitor (Fork By Odyseus)" data-language-chooser-label="Elegir idioma" value="es">Español</option>
-<!-- Svenska --><option data-title="Hjälp för System Monitor (Fork By Odyseus)" data-language-chooser-label="Välj språk" value="sv">Svenska</option>
-<!-- 简体中文 --><option data-title="System Monitor (Fork By Odyseus)的帮助" data-language-chooser-label="选择语言" value="zh_CN">简体中文</option>
-</select>
-</div> <!-- .localization-chooser -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav">
+            <li><a id="nav-xlet-help" class="navbar-brand" href="#xlet-help"></a></li>
+            <li><a id="nav-xlet-contributors" class="navbar-brand" href="#xlet-contributors"></a></li>
+            <li><a id="nav-xlet-changelog" class="navbar-brand" href="#xlet-changelog"></a></li>
+        </ul>
+    </div>
+    <form class="navbar-form navbar-collapse collapse navbar-right">
+        <div class="form-group">
+            <label id="localization-chooser-label" class="control-label" for="localization-switch"></label>
+            <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
+                <!-- English --><option selected data-title="Help for System Monitor (Fork By Odyseus)" data-language-chooser-label="Choose language" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English</option>
+<!-- Español --><option data-title="Ayuda para System Monitor (Fork By Odyseus)" data-language-chooser-label="Elegir idioma" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español</option>
+<!-- Svenska --><option data-title="Hjälp för System Monitor (Fork By Odyseus)" data-language-chooser-label="Välj språk" data-xlet-help="Hjälp" data-xlet-contributors="Medhjälpare" data-xlet-changelog="Ändringslogg" value="sv">Svenska</option>
+<!-- 简体中文 --><option data-title="System Monitor (Fork By Odyseus)的帮助" data-language-chooser-label="选择语言" data-xlet-help="帮助" data-xlet-contributors="贡献者" data-xlet-changelog="变更日志" value="zh_CN">简体中文</option>
+            </select>
+        </div>
+    </form>
+    </div>
+</nav>
+<span id="xlet-help">
 <div class="container boxed">
 
 <div id="zh_CN" class="localization-content hidden">
@@ -525,7 +602,7 @@ pre {
 <ul>
 <li>Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt.</li>
 <li>Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet <strong>localizations.sh</strong> från en terminal öppnad i programmappen.</li>
-<li>Om ditt språk saknas i denna xlet, kan du översätta den genom följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
+<li>Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
 </div> <!-- .localization-content -->
@@ -574,6 +651,381 @@ pre {
 </div> <!-- .localization-content -->
 
 </div> <!-- .container.boxed -->
+<div style="font-weight:bold;" class="container alert alert-info">The following two sections are available only in English.</div>
+<span id="xlet-contributors">
+<div class="container boxed">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/buzz">buzz</a>:</strong> Bug fixes.</li>
+<li><strong><a href="https://github.com/muzena">muzena</a>:</strong> Croatian localization.</li>
+<li><strong><a href="https://github.com/giwhub">giwhub</a>:</strong> Chinese localization.</li>
+<li><strong><a href="https://github.com/eson57">eson57</a>:</strong> Swedish localization.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+<span id="xlet-changelog">
+<div class="container boxed">
+<h2>System Monitor (Fork By Odyseus) changelog</h2>
+<h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:40:15 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/9b1d6a6">9b1d6a6</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 09:03:06 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1e5e258">1e5e258</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>SysmonitorByOrcus: Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 30 May 2017 19:53:26 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/925d49b">925d49b</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:55:30 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a0cabc5">a0cabc5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Updated README, metadata.json file and help file due to new localization.
+- Updated localization template and Spanish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 07:22:08 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/dc16c17">dc16c17</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>SysmonitorByOrcus: add sv.po
+Add Swedish translation
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:34:55 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/caf8b1a">caf8b1a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:02:13 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/6012ffb">6012ffb</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 19:53:43 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/320d100">320d100</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 17 May 2017 16:13:29 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/9509507">9509507</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Removed CJS 3.4 warnings and fixed errors exposed by the use of CJS 3.4.
+- Moved some prototypes into a separate "modules file".
+- Added some untranslated strings.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:41:45 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/58e4d09">58e4d09</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 14 May 2017 18:57:18 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/df1d965">df1d965</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:56:07 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a8ef8e9">a8ef8e9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  35
+es.po     0
+hr.po     26
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:25:03 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/9ae3a8f">9ae3a8f</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Cleaned up metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 13:28:17 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8c67329">8c67329</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Minor code tweaks.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 4 May 2017 18:21:08 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/7654d27">7654d27</a></li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0dyseus@SysmonitorByOrcus-hr: Update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 2 May 2017 08:27:11 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3ccbbf8">3ccbbf8</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet
+- Improved some trasnlatable strings. Just removed some white spaces and added some informational
+comments.
+- Removed *multiversion* because it is not worth the trouble.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 22 Apr 2017 23:07:42 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/827cdd1">827cdd1</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 13 Apr 2017 04:06:04 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/858b615">858b615</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Fixed the display of **Load average** and **Swap**
+graphics
+- Added localized help
+- Changed contributors key on metadata.json file from a string to an array for better readability
+- Some minor code clean up.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Apr 2017 00:23:28 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a230d43">a230d43</a></li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0dyseus@SysmonitorByOrcus: update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 28 Mar 2017 00:09:40 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/52239c5">52239c5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Better handling of dependencies.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 12 Mar 2017 20:42:38 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a024729">a024729</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #30 from giwhub/giwhub-patch-1
+Add Chinese translation for System Monitor (Fork By Odyseus)
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 12 Mar 2017 18:08:27 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1a057f9">1a057f9</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 5 Feb 2017 15:16:44 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e861a41">e861a41</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>System Monitor (Fork By Odyseus) applet - Fixed system freeze on applet removal on Cinnamon 3.2.x
+- Cleaned code of unused constants and functions.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 27 Jan 2017 11:40:53 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/554371e">554371e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applet - Cleaned some irrelevant files
+- Updated READMEs
+- Updated metadata.json
+- Updated some applet icons.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 23:50:00 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/26e2e87">26e2e87</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Fixed some broken links.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 20:29:22 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c2a6759">c2a6759</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Formatted repository to conform Spices repository.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 15 Dec 2016 20:29:12 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/0de5f65">0de5f65</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[System Monitor (Fork By Odyseus) applet] - Re-added compatibility for Cinnamon 2.8.8 (Linux Mint
+17.3). Compatibility for this version of Cinnamon was accidentally lost when the dependency on
+NetworkManager was removed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 17:03:24 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/50a9719">50a9719</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Removed dependency on NetworkManager.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 16:17:16 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b501c79">b501c79</a></li>
+<li><strong>Author:</strong> Mirko Dietrich</li>
+</ul>
+<pre><code>Remove dependency to NetworkManager (fixes #5)
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 03:35:15 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/72668c7">72668c7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Corrected some terms and removed BASICS.md in favor of Wiki.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 3 Oct 2016 00:12:50 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d01a0ab">d01a0ab</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>White space cleaning.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 25 Sep 2016 01:37:02 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e0afc90">e0afc90</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Added support for localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 14 Sep 2016 14:23:03 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ebdb879">ebdb879</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 15:17:56 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c7381ce">c7381ce</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit...
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 14:55:18 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8a98d97">8a98d97</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 12 Aug 2016 05:34:24 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/08bae8e">08bae8e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 02:02:19 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c8a95f5">c8a95f5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 02:00:40 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/5ef75eb">5ef75eb</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.......
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 Aug 2016 00:40:39 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/538f95a">538f95a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+
+</div> <!-- .container.boxed -->
+
 </div> <!-- #mainarea -->
 <script type="text/javascript">toggleLocalizationVisibility(null);</script>
 </body>

@@ -7,12 +7,7 @@
         "3.4"
     ],
     "name": "System Monitor (Fork By Odyseus)",
-    "contributors": [
-        "buzz: Bug fixes.",
-        "muzena: Croatian localization.",
-        "giwhub: Chinese localization.",
-        "eson57: Swedish localization."
-    ],
+    "contributors": "See this xlet help file.",
     "uuid": "0dyseus@SysmonitorByOrcus",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
     "version": "1.13",
