@@ -18,19 +18,13 @@ More precisely, Argos for Cinnamon is an applet that turns executables' standard
 
 ## Key features
 
-- **100% API [compatible with BitBar 1.9.2](#argos-bitbar-compatibility):** All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug).
+- **100% API compatible with BitBar 1.9.2:** All BitBar plugins that run on Linux (i.e. do not contain macOS-specific code) will work with Argos (else it's a bug).
 - **Beyond BitBar:** Argos can do everything that BitBar can do, but also some things that BitBar can't do (yet). See the documentation for details.
 - **Sophisticated asynchronous execution engine:** No matter how long your scripts take to run, Argos will schedule them intelligently and prevent blocking.
 - **Unicode support:** Just print your text to stdout. It will be rendered the way you expect.
 - **Optimized for minimum resource consumption:** Even with multiple plugins refreshing every second, Argos typically uses less than 1% of the CPU.
 - **Fully documented**.
 
-## Known issues
+[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40ArgosForCinnamon/CONTRIBUTORS.md)
 
-No known issues for the moment.
-
-## Contributors/Mentions
-- **[Philipp Emanuel Weidmann](https://github.com/p-e-w):**: Author of the gnome-shell extension called [Argos](https://github.com/p-e-w/argos).
-- **[giwhub](https://github.com/giwhub):** Chinese localization.
-
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40ArgosForCinnamon/CHANGE_LOG.md)
+[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40ArgosForCinnamon/CHANGELOG.md)

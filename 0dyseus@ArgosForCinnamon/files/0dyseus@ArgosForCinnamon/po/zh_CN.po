@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.00\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-29 16:48+0800\n"
-"PO-Revision-Date: 2017-05-29 16:48+0800\n"
+"POT-Creation-Date: 2017-06-04 19:28+0800\n"
+"PO-Revision-Date: 2017-06-04 19:28+0800\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../../create_localized_help.py:63 ../../create_localized_help.py:162
-#: ../../create_localized_help.py:228 ../../create_localized_help.py:247
+#: ../../create_localized_help.py:64 ../../create_localized_help.py:163
+#: ../../create_localized_help.py:229 ../../create_localized_help.py:248
 msgid "Description"
 msgstr "描述"
 
-#: ../../create_localized_help.py:64
+#: ../../create_localized_help.py:65
 msgid ""
 "Argos for Cinnamon is an applet that turns executables' standard output into "
 "panel dropdown menus. It is inspired by, and fully compatible with, the "
@@ -43,7 +43,7 @@ msgstr ""
 "bitbar-plugins)，您可以访问经过良好测试的脚本的大型库，以及能够编写自己的脚"
 "本。"
 
-#: ../../create_localized_help.py:66
+#: ../../create_localized_help.py:67
 msgid ""
 "I will use the words *plugin* or *script* when referring to a script file "
 "associated with an instance on **Argos for Cinnamon** applet."
@@ -51,12 +51,12 @@ msgstr ""
 "当引用与**Argos for Cinnamon**小程序上的实例相关联的脚本文件时，我将使用"
 "*plugin*或*script*。"
 
-#: ../../create_localized_help.py:71
+#: ../../create_localized_help.py:72
 msgid "Key features"
 msgstr "主要功能"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:74
+#: ../../create_localized_help.py:75
 msgid ""
 "**100% API [compatible with BitBar 1.9.2](#argos-bitbar-compatibility):** "
 "All BitBar plugins that run on Linux (i.e. do not contain macOS-specific "
@@ -66,7 +66,7 @@ msgstr ""
 "BitBar插件（即不包含macOS特定的代码）将与Argos一起工作（否则是一个错误）"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:76
+#: ../../create_localized_help.py:77
 msgid ""
 "**Beyond BitBar:** Argos can do everything that BitBar can do, but also some "
 "things that BitBar can't do (yet). See the documentation for details."
@@ -75,7 +75,7 @@ msgstr ""
 "情。有关详细信息请参阅文档。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:78
+#: ../../create_localized_help.py:79
 msgid ""
 "**Sophisticated asynchronous execution engine:** No matter how long your "
 "scripts take to run, Argos will schedule them intelligently and prevent "
@@ -85,14 +85,14 @@ msgstr ""
 "止。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:82
+#: ../../create_localized_help.py:83
 msgid ""
 "**Unicode support:** Just print your text to stdout. It will be rendered the "
 "way you expect."
 msgstr "** Unicode支持：**只需将文本输出为标准输出。它将以您期望的方式渲染。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:84
+#: ../../create_localized_help.py:85
 msgid ""
 "**Optimized for minimum resource consumption:** Even with multiple plugins "
 "refreshing every second, Argos typically uses less than 1 percent of the CPU."
@@ -100,36 +100,36 @@ msgstr ""
 "**优化最小资源消耗：**即使多个插件每秒刷新一次，Argos通常使用的CPU不到1%。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:86
+#: ../../create_localized_help.py:87
 msgid "**Fully [documented](#argos-usage).**"
 msgstr "**完全[记录](＃argos-usage)。**"
 
-#: ../../create_localized_help.py:89
+#: ../../create_localized_help.py:90
 msgid "Dependencies"
 msgstr "依赖关系"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:91
+#: ../../create_localized_help.py:92
 msgid "xdg-open command"
 msgstr "xdg-open命令"
 
-#: ../../create_localized_help.py:93
+#: ../../create_localized_help.py:94
 msgid "Debian and Archlinux based distributions:"
 msgstr "Debian和Archlinux系发行版："
 
-#: ../../create_localized_help.py:94
+#: ../../create_localized_help.py:95
 msgid "This command is installed with the package called **xdg-utils**."
 msgstr "该命令安装使用名为**xdg-utils**的软件包。"
 
-#: ../../create_localized_help.py:95
+#: ../../create_localized_help.py:96
 msgid "Installed by default in modern versions of Linux Mint."
 msgstr "在现在的Linux Mint版本中已经默认安装。"
 
-#: ../../create_localized_help.py:100
+#: ../../create_localized_help.py:101
 msgid "Usage"
 msgstr "用法"
 
-#: ../../create_localized_help.py:102
+#: ../../create_localized_help.py:103
 msgid ""
 "After placing a new instance of **Argos for Cinnamon** into a panel, one of "
 "the example scripts provided by this applet will be automatically attached "
@@ -141,7 +141,7 @@ msgstr ""
 "附加到它，并且将基于执行的插件的输出创建一个菜单。这些示例脚本包含了各种"
 "**Argos for Cinnamon**可以做的例子。"
 
-#: ../../create_localized_help.py:104
+#: ../../create_localized_help.py:105
 msgid ""
 "A just placed applet will have an initial execution interval of 0 seconds "
 "(zero seconds) and an initial applet text rotation interval of 3 seconds "
@@ -154,7 +154,7 @@ msgstr ""
 "流间隔。执行间隔设置为0秒，因为初始示例脚本没有任何需要更新的动态数据。小程序"
 "文本轮流间隔设置为3秒，因此可以在操作中看到示例脚本的文本轮流。"
 
-#: ../../create_localized_help.py:106
+#: ../../create_localized_help.py:107
 msgid ""
 "For scripts that display non dynamic data, it isn't needed an execution "
 "interval. But if your script displays dynamic data (a clock for example), "
@@ -165,7 +165,7 @@ msgstr ""
 "如时钟），则需要指定执行和/或小程序文本轮流间隔。这两个值都可以从小程序右键菜"
 "单中设置。"
 
-#: ../../create_localized_help.py:109
+#: ../../create_localized_help.py:110
 msgid ""
 "The three example scripts provided by this applet will produce the exact "
 "same output, but they are created using three different languages "
@@ -174,7 +174,7 @@ msgstr ""
 "这个小程序提供的三个示例脚本将产生完全相同的输出，但是它们使用三种不同的语言"
 "创建（**bash_examples.sh**、**python_examples.py**和**ruby_examples.rb**）。"
 
-#: ../../create_localized_help.py:114
+#: ../../create_localized_help.py:115
 msgid ""
 "Never save your custom plugins/scripts inside this applet folder. Otherwise, "
 "you will loose them all when there is an update for the applet."
@@ -182,12 +182,12 @@ msgstr ""
 "不要将自定义插件/脚本保存在此小程序文件夹中。否则，当有小程序的更新时，您将丢"
 "失它们。"
 
-#: ../../create_localized_help.py:117
+#: ../../create_localized_help.py:118
 msgid "File name format"
 msgstr "文件名格式"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:119
+#: ../../create_localized_help.py:120
 msgid ""
 "**Argos for Gnome Shell** parses the script's file name to extract certain "
 "set of preferences. **Argos for Cinnamon** doesn't parse the script's file "
@@ -198,12 +198,12 @@ msgstr ""
 "Cinnamon**不会以这种方式解析脚本的文件名（也不以任何其他方式）。所有的小程序"
 "设置都可以从小程序设置窗口和/或从小程序右键菜单中进行设置。"
 
-#: ../../create_localized_help.py:120
+#: ../../create_localized_help.py:121
 msgid "Output format"
 msgstr "输出格式"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:122
+#: ../../create_localized_help.py:123
 msgid ""
 "Argos plugins are executables (such as shell scripts **(*)**) that print to "
 "standard output lines of the following form:"
@@ -211,7 +211,7 @@ msgstr ""
 "Argos插件是可执行文件（例如shell脚本**(*)**），可以输出到以下格式的标准输出"
 "行："
 
-#: ../../create_localized_help.py:127
+#: ../../create_localized_help.py:128
 msgid ""
 "All attributes are optional, so the most basic plugins simply print lines "
 "consisting of text to be displayed. To include whitespace, attribute values "
@@ -220,7 +220,7 @@ msgstr ""
 "所有属性都是可选的，所以最基本的插件只需输出包含要显示的文本的行。要包括空"
 "格，属性值可以使用大多数命令行shell使用的相同约定引用。"
 
-#: ../../create_localized_help.py:131
+#: ../../create_localized_help.py:132
 msgid ""
 "(*) Not just shell scripts, but also python scripts, ruby scripts or any "
 "other script in any other language that can print to standard output."
@@ -228,17 +228,17 @@ msgstr ""
 "(*)不仅仅是shell脚本，而且还有python脚本，ruby脚本或任何其他可以输出到标准输"
 "出的其他语言的脚本。"
 
-#: ../../create_localized_help.py:134
+#: ../../create_localized_help.py:135
 msgid "Rendering"
 msgstr "渲染"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:137
+#: ../../create_localized_help.py:138
 msgid "Lines containing only dashes (`---`) are *separators*."
 msgstr "只包含破折号（`---`）的行是*分隔符*。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:140
+#: ../../create_localized_help.py:141
 msgid ""
 "Lines above the first separator belong to the applet button itself. If there "
 "are multiple such lines, they are displayed in succession, each of them for "
@@ -250,7 +250,7 @@ msgstr ""
 "行之前，它们被连续地显示，每个行可配置的时间量（轮流间隔）。另外，所有的按钮"
 "行都会有一个下拉菜单项，除非它们的`dropdown`属性设置为`false`。"
 
-#: ../../create_localized_help.py:142
+#: ../../create_localized_help.py:143
 msgid ""
 "Lines below the first separator are rendered as dropdown menu items. Further "
 "separators create graphical separator menu items."
@@ -258,7 +258,7 @@ msgstr ""
 "第一个分隔符下方的行将呈现为下拉菜单项。其他分隔符创建图形分隔符菜单条目。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:145
+#: ../../create_localized_help.py:146
 msgid ""
 "Lines beginning with `--` are rendered in a submenu associated with the "
 "preceding unindented line. **Argos for Cinnamon** supports unlimited number "
@@ -268,7 +268,7 @@ msgstr ""
 "支持无限数量的嵌套子菜单。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:148
+#: ../../create_localized_help.py:149
 msgid ""
 "[Emoji codes](http://www.emoji-cheat-sheet.com) like `:horse:` and `:smile:` "
 "in the line text are replaced with their corresponding Unicode characters "
@@ -280,7 +280,7 @@ msgstr ""
 "丁的Cinnamon尚不支持多色emoji。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:151
+#: ../../create_localized_help.py:152
 msgid ""
 "[ANSI SGR escape sequences](https://en.wikipedia.org/wiki/"
 "ANSI_escape_code#graphics) and [Pango markup](https://developer.gnome.org/"
@@ -294,7 +294,7 @@ msgstr ""
 "用。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:154
+#: ../../create_localized_help.py:155
 msgid ""
 "Backslash escapes such as `\\n` and `\\t` in the line text are converted to "
 "their corresponding characters (newline and tab in this case), which can be "
@@ -305,58 +305,58 @@ msgstr ""
 "和标签），可以通过将`unescape`属性设置为`false`来避免。换行符可用于创建多行菜"
 "单条目。"
 
-#: ../../create_localized_help.py:157
+#: ../../create_localized_help.py:158
 msgid "Line attributes"
 msgstr "行属性"
 
-#: ../../create_localized_help.py:159
+#: ../../create_localized_help.py:160
 msgid "Display"
 msgstr "显示"
 
-#: ../../create_localized_help.py:160
+#: ../../create_localized_help.py:161
 msgid "Control how the line is rendered."
 msgstr "控制行的呈现方式。"
 
-#: ../../create_localized_help.py:162 ../../create_localized_help.py:228
-#: ../../create_localized_help.py:247
+#: ../../create_localized_help.py:163 ../../create_localized_help.py:229
+#: ../../create_localized_help.py:248
 msgid "Attribute"
 msgstr "属性"
 
-#: ../../create_localized_help.py:162 ../../create_localized_help.py:228
-#: ../../create_localized_help.py:247
+#: ../../create_localized_help.py:163 ../../create_localized_help.py:229
+#: ../../create_localized_help.py:248
 msgid "Value"
 msgstr "值"
 
-#: ../../create_localized_help.py:164
+#: ../../create_localized_help.py:165
 msgid "Hex RGB/RGBA or color name"
 msgstr "Hex RGB/RGBA或颜色名称"
 
-#: ../../create_localized_help.py:165
+#: ../../create_localized_help.py:166
 msgid "Sets the text color for the item."
 msgstr "设置条目的文本颜色。"
 
-#: ../../create_localized_help.py:166
+#: ../../create_localized_help.py:167
 msgid "Font name"
 msgstr "字体名称"
 
-#: ../../create_localized_help.py:166
+#: ../../create_localized_help.py:167
 msgid "Sets the font for the item."
 msgstr "设置条目的字体。"
 
-#: ../../create_localized_help.py:167
+#: ../../create_localized_help.py:168
 msgid "Font size in points"
 msgstr "字体大小（以点为单位）"
 
-#: ../../create_localized_help.py:168
+#: ../../create_localized_help.py:169
 msgid "Sets the font size for the item."
 msgstr "设置条目的字体大小。"
 
-#: ../../create_localized_help.py:169
+#: ../../create_localized_help.py:170
 msgid "Icon name"
 msgstr "图标名称"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:171
+#: ../../create_localized_help.py:172
 msgid ""
 "Sets a menu icon for the item. See the [freedesktop.org icon naming "
 "specification](https://specifications.freedesktop.org/icon-naming-spec/icon-"
@@ -369,13 +369,13 @@ msgstr ""
 "latest.html)。**仅限于Argos。** **Argos for Cinnamon**还支持图标文件的路径"
 "（以`〜/`开头的路径将扩展到用户的主文件夹）。"
 
-#: ../../create_localized_help.py:172
+#: ../../create_localized_help.py:173
 msgid "Base64-encoded image file"
 msgstr "Base64编码的图像文件"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect
 #. formatting.
-#: ../../create_localized_help.py:175
+#: ../../create_localized_help.py:176
 msgid ""
 "Renders an image inside the item. The image is positioned to the left of the "
 "text and to the right of the icon. Cinnamon does not have a concept of "
@@ -385,13 +385,13 @@ msgstr ""
 "渲染条目中的图像。图像位于文本的左侧和图标的右侧。Cinnamon没有*模板图像的概念"
 "*，所以`image`和`templateImage`可以在Argos中互换。"
 
-#: ../../create_localized_help.py:176
+#: ../../create_localized_help.py:177
 msgid "Width/height in pixels"
 msgstr "宽度/高度（以像素为单位）"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect
 #. formatting.
-#: ../../create_localized_help.py:179
+#: ../../create_localized_help.py:180
 msgid ""
 "Sets the dimensions of the image. If only one dimension is specified, the "
 "image's original aspect ratio is maintained. **Argos only.**"
@@ -399,11 +399,11 @@ msgstr ""
 "设置图像的尺寸。如果仅指定了一个尺寸，则保持图像的原始宽高比。**仅适用于"
 "Argos**"
 
-#: ../../create_localized_help.py:180
+#: ../../create_localized_help.py:181
 msgid "Length in characters"
 msgstr "字符长度"
 
-#: ../../create_localized_help.py:181
+#: ../../create_localized_help.py:182
 msgid ""
 "Truncate the line text to the specified number of characters, ellipsizing "
 "the truncated part."
@@ -411,55 +411,55 @@ msgstr "将行文本截断为指定数量的字符，省略截断的部分。"
 
 #. TO TRANSLATORS: Conjunction used as follows:
 #. "true or false"
-#: ../../create_localized_help.py:185 ../../create_localized_help.py:191
-#: ../../create_localized_help.py:197 ../../create_localized_help.py:203
-#: ../../create_localized_help.py:209 ../../create_localized_help.py:215
-#: ../../create_localized_help.py:221 ../../create_localized_help.py:238
-#: ../../create_localized_help.py:254 ../../create_localized_help.py:269
+#: ../../create_localized_help.py:186 ../../create_localized_help.py:192
+#: ../../create_localized_help.py:198 ../../create_localized_help.py:204
+#: ../../create_localized_help.py:210 ../../create_localized_help.py:216
+#: ../../create_localized_help.py:222 ../../create_localized_help.py:239
+#: ../../create_localized_help.py:255 ../../create_localized_help.py:270
 msgid "or"
 msgstr "或"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:187
+#: ../../create_localized_help.py:188
 msgid "If `false`, preserve leading and trailing whitespace of the line text."
 msgstr "如果为`false`，则保留行文本的前导和尾随空格。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:193
+#: ../../create_localized_help.py:194
 msgid ""
 "If `false` and the line is a button line (see above), exclude it from being "
 "displayed in the dropdown menu."
 msgstr "如果为`false`，该行是一个按钮行（见上文），请将其从下拉菜单中排除。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:199
+#: ../../create_localized_help.py:200
 msgid ""
 "If `true`, the item is hidden by default, and shown in place of the "
 "preceding item when the [[Alt]] key is pressed."
 msgstr "如果为`true`，默认情况下隐藏该条目，并按[[Alt]]键时显示为上一项。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:205
+#: ../../create_localized_help.py:206
 msgid ""
 "If `false`, disable substitution of `:emoji_name:` with emoji characters in "
 "the line text."
 msgstr "如果为`false`，则禁止在行文本中使用emoji字符替换`:emoji_name:`。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:211
+#: ../../create_localized_help.py:212
 msgid ""
 "If `false`, disable interpretation of ANSI escape sequences in the line text."
 msgstr "如果为`false`，则禁用在行文本中ANSI转义序列的解释。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:217
+#: ../../create_localized_help.py:218
 msgid ""
 "If `false`, disable interpretation of Pango markup in the line text. **Argos "
 "only.**"
 msgstr "如果为`false`，则禁止在行文本中Pango标记的解释。**仅适用于Argos。**"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:223
+#: ../../create_localized_help.py:224
 msgid ""
 "If `false`, disable interpretation of backslash escapes such as `\\n` in the "
 "line text. **Argos only.**"
@@ -467,45 +467,45 @@ msgstr ""
 "如果为`false`，则禁止对行文本中如“\\n”等反斜杠转义的解释。**仅适用于Argos**"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:226
+#: ../../create_localized_help.py:227
 msgid "Attributes available on **Argos for Cinnamon** only."
 msgstr "属性仅适用于**Argos for Cinnamon**。"
 
-#: ../../create_localized_help.py:230
+#: ../../create_localized_help.py:231
 msgid "Text to display as toolip"
 msgstr "要显示为提示的文本"
 
-#: ../../create_localized_help.py:231
+#: ../../create_localized_help.py:232
 msgid "Sets the tooltip for the item."
 msgstr "设置条目的提示。"
 
-#: ../../create_localized_help.py:232
+#: ../../create_localized_help.py:233
 msgid "An integer from 12 to 512"
 msgstr "从12到512间的整数"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:234
+#: ../../create_localized_help.py:235
 msgid "Sets the size for the item's `iconName`."
 msgstr "设置条目的`iconName`的字体大小。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:240
+#: ../../create_localized_help.py:241
 msgid ""
 "If `true`, the symbolic version of `iconName` will be used on the item (if "
 "exists)."
 msgstr "如果为`true`，则将在条目（如果存在）上使用“iconName”的符号版本。"
 
-#: ../../create_localized_help.py:241
+#: ../../create_localized_help.py:242
 msgid "Actions"
 msgstr "动作"
 
-#: ../../create_localized_help.py:242
+#: ../../create_localized_help.py:243
 msgid ""
 "Define actions to be performed when the user clicks on the line's menu item."
 msgstr "定义用户点击行的菜单条目时要执行的操作。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:245
+#: ../../create_localized_help.py:246
 msgid ""
 "Action attributes are *not* mutually exclusive. Any combination of them may "
 "be associated with the same item, and all actions are executed when the item "
@@ -514,28 +514,28 @@ msgstr ""
 "动作属性*不*互斥。它们的任何组合可以与相同条目相关联，并且当点击条目时执行所"
 "有动作。"
 
-#: ../../create_localized_help.py:249
+#: ../../create_localized_help.py:250
 msgid "Bash command"
 msgstr "Bash命令"
 
-#: ../../create_localized_help.py:250
+#: ../../create_localized_help.py:251
 msgid "Runs a command using `bash` inside any terminal emulator window."
 msgstr "在任何终端仿真器窗口中使用`bash'运行命令。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:256
+#: ../../create_localized_help.py:257
 msgid ""
 "If `false`, runs the Bash command in the background (i.e. without opening a "
 "terminal window)."
 msgstr "如果为`false`，则在后台运行Bash命令（即不打开终端窗口）。"
 
-#: ../../create_localized_help.py:257
+#: ../../create_localized_help.py:258
 msgid "Command line arguments"
 msgstr "命令行参数"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect
 #. formatting.
-#: ../../create_localized_help.py:260
+#: ../../create_localized_help.py:261
 msgid ""
 "Arguments to be passed to the Bash command. *Note: Provided for "
 "compatibility with BitBar only. Argos allows placing arguments directly in "
@@ -545,7 +545,7 @@ msgstr ""
 "符串中。*"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:262
+#: ../../create_localized_help.py:263
 msgid ""
 "Opens a URI in the application registered to handle it. URIs starting with "
 "`http://` launch the web browser, while `file://` URIs open the file in its "
@@ -557,42 +557,42 @@ msgstr ""
 "`file://`URI在关联的默认应用程序中打开文件。**Argos for Cinnamon**还支持以"
 "`〜/`开头的路径，将自动扩展到用户的主文件夹。"
 
-#: ../../create_localized_help.py:263
+#: ../../create_localized_help.py:264
 msgid "JavaScript code"
 msgstr "JavaScript代码"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:265
+#: ../../create_localized_help.py:266
 msgid "Passes the code to JavaScript's `eval` function. **Argos only.**"
 msgstr "将代码传递给JavaScript的`eval`函数。**仅适用于Argos**"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:271
+#: ../../create_localized_help.py:272
 msgid "If `true`, re-runs the plugin, updating its output."
 msgstr "如果为`true`，重新运行插件，更新其输出。"
 
-#: ../../create_localized_help.py:274
+#: ../../create_localized_help.py:275
 msgid "BitBar plugins with Argos for Cinnamon"
 msgstr "用于Argos for Cinnamon的BitBar插件"
 
-#: ../../create_localized_help.py:277
+#: ../../create_localized_help.py:278
 msgid "WARNING!!! DO NOT RANDOMLY TEST SCRIPTS!!!"
 msgstr "警告！！！不要随便测试脚本！"
 
-#: ../../create_localized_help.py:279
+#: ../../create_localized_help.py:280
 msgid ""
 "1. Apply common sense. Read and understand what a script does and how "
 "demanding it could be."
 msgstr "1.应用常识。请阅读并了解脚本的作用以及要求。"
 
-#: ../../create_localized_help.py:281
+#: ../../create_localized_help.py:282
 msgid ""
 "2. Test unknown scripts on an environment from which you can recover easily "
 "(for example, a virtual machine)."
 msgstr "2.在易于恢复的环境中测试未知脚本（例如虚拟机）。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:284
+#: ../../create_localized_help.py:285
 msgid ""
 "3. I found one specific case in which a script can freeze and ultimately "
 "crash Cinnamon. It's a script that downloads a GIF image from the internet, "
@@ -606,7 +606,7 @@ msgstr ""
 "单条目中。我不会提供该脚本的链接，但是如果您按照我在此列出的第一个建议，当您"
 "看到该脚本时，您就会知道。"
 
-#: ../../create_localized_help.py:289
+#: ../../create_localized_help.py:290
 msgid ""
 "These screenshots show how some scripts from the BitBar plugin repository "
 "look when rendered by Argos compared to the \"canonical\" BitBar rendering "
@@ -615,63 +615,79 @@ msgstr ""
 "这些屏幕截图显示了由Argos渲染的BitBar插件存储库中的一些脚本与“典型的”BitBar渲"
 "染（从https://getbitbar.com获取的macOS屏幕截图）相比较。"
 
-#: ../../create_localized_help.py:291
+#: ../../create_localized_help.py:292
 msgid "Argos on Cinnamon"
 msgstr "Argos on Cinnamon"
 
-#: ../../create_localized_help.py:291
+#: ../../create_localized_help.py:292
 msgid "BitBar on macOS"
 msgstr "macOS上的BitBar"
 
-#: ../../create_localized_help.py:291
+#: ../../create_localized_help.py:292
 msgid "Plugin"
 msgstr "插件"
 
+#: ../../create_localized_help.py:389
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:393 ../../create_localized_help.py:462
+#: ../../create_localized_help.py:414 ../../create_localized_help.py:486
 msgid "language-name"
 msgstr "简体中文"
 
-#: ../../create_localized_help.py:465
+#: ../../create_localized_help.py:489 __init__.js:2460 applet.js:721
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:490
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:491
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:492
 msgid "Choose language"
 msgstr "选择语言"
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:466 ../../create_localized_help.py:473
+#: ../../create_localized_help.py:493 ../../create_localized_help.py:500
 #, python-format
 msgid "Help for %s"
 msgstr "%s的帮助"
 
-#: ../../create_localized_help.py:474
+#: ../../create_localized_help.py:501
 msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
-#: ../../create_localized_help.py:475
+#: ../../create_localized_help.py:502
 msgid ""
 "Never delete any of the files found inside this xlet folder. It might break "
 "this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
-#: ../../create_localized_help.py:476
+#: ../../create_localized_help.py:503
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
-#: ../../create_localized_help.py:482
+#: ../../create_localized_help.py:509
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
-#: ../../create_localized_help.py:483
+#: ../../create_localized_help.py:510
 msgid ""
 "If this xlet was installed from Cinnamon Settings, all of this xlet's "
 "localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:485
+#: ../../create_localized_help.py:512
 msgid ""
 "If this xlet was installed manually and not trough Cinnamon Settings, "
 "localizations can be installed by executing the script called "
@@ -680,7 +696,7 @@ msgstr ""
 "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
 "名为**localizations.sh**的脚本安装本地化。"
 
-#: ../../create_localized_help.py:486
+#: ../../create_localized_help.py:513
 msgid ""
 "If this xlet has no locale available for your language, you could create it "
 "by following the following instructions."
@@ -934,26 +950,26 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] "天"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:80
 msgid "Seconds"
 msgstr "秒"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:83
 msgid "Minutes"
 msgstr "分钟"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:86
 msgid "Hours"
 msgstr "小时"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:89
 msgid "Days"
 msgstr "天"
@@ -968,10 +984,6 @@ msgstr "无法从Base64表示中加载图像：%s"
 #: __init__.js:2457
 msgid "Check this applet help file for instructions."
 msgstr "检查此小程序帮助文件的说明。"
-
-#: __init__.js:2460 applet.js:721
-msgid "Help"
-msgstr "帮助"
 
 #. Just in case.
 #: __init__.js:2461 applet.js:725
@@ -1138,9 +1150,13 @@ msgstr "使脚本文件可执行以便此小程序可以使用。"
 msgid "Script file is already executable."
 msgstr "脚本文件已经是可执行文件。"
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->name
-msgid "Argos for Cinnamon"
-msgstr "Argos for Cinnamon"
+#. 0dyseus@ArgosForCinnamon->metadata.json->description
+msgid "Create Cinnamon applets in seconds."
+msgstr "数秒内创建Cinnamon小程序。"
+
+#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
 
 #. 0dyseus@ArgosForCinnamon->metadata.json->comments
 msgid ""
@@ -1148,90 +1164,21 @@ msgid ""
 "xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
-msgid ""
-"Philipp Emanuel Weidmann: Author of the gnome-shell extension called Argos"
-msgstr "Philipp Emanuel Weidmann：名为Argos的gnome-shell扩展的作者"
+#. 0dyseus@ArgosForCinnamon->metadata.json->name
+msgid "Argos for Cinnamon"
+msgstr "Argos for Cinnamon"
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
-msgid "giwhub: Chinese localization."
-msgstr "giwhub：中文本地化。"
-
-#. 0dyseus@ArgosForCinnamon->metadata.json->description
-msgid "Create Cinnamon applets in seconds."
-msgstr "数秒内创建Cinnamon小程序。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_file_path->description
-msgid "Path to script"
-msgstr "脚本的路径"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->description
-msgid "Execution interval time unit"
-msgstr "执行间隔时间单位"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "小程序设置"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->head1->description
 msgid "Script settings"
 msgstr "脚本设置"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->tooltip
-msgid "Enables/Disables menu open/close animations."
-msgstr "启用/禁用菜单打开/关闭动画。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
-msgid "Animate menu"
-msgstr "动画按钮"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->tooltip
-msgid ""
-"Choose the terminal emulator used by this applet.\n"
-"IMPORTANT!!! The terminal emulator has to support the -e argument."
-msgstr ""
-"选择此小程序使用的终端模拟器。\n"
-"重要！！！终端模拟器必须支持 -e 参数。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
-msgid "Terminal emulator"
-msgstr "终端模拟器"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "选择要在面板中显示的图标。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
-msgid "Icon"
-msgstr "图标"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
-msgid "custom"
-msgstr "自定义"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
-msgid ""
-"Set the script execution interval. If set to 0 (zero), the timer will be "
-"disabled."
-msgstr "设置脚本执行间隔，如果设置为0（零），定时器将会被禁用。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
-msgid "Execution interval"
-msgstr "执行间隔"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
-msgid ""
-"When enabled, the previously opened sub menu will be automatically closed."
-msgstr "启用后，之前打开的子菜单将会自动关闭。"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
-msgid "Keep just one sub menu open"
-msgstr "始终保持仅打开一个子菜单"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
-msgid "Rotation interval time unit"
-msgstr "轮流间隔时间单位"
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
-msgid "Applet settings"
-msgstr "小程序设置"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
+msgid "Rotation interval"
+msgstr "轮流间隔"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->tooltip
 msgid ""
@@ -1245,14 +1192,55 @@ msgstr ""
 "配给显示为小程序文本时，才使用该定时器。如果只有一行分配给小程序文本，则该计"
 "时器将被完全忽略。因此，无需设置为0（零）才能将此定时器禁用。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
-msgid "Rotation interval"
-msgstr "轮流间隔"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
+msgid "custom"
+msgstr "自定义"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
-msgid "pixels"
-msgstr "像素"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
+msgid "Animate menu"
+msgstr "动画按钮"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->tooltip
+msgid "Enables/Disables menu open/close animations."
+msgstr "启用/禁用菜单打开/关闭动画。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
+msgid "Terminal emulator"
+msgstr "终端模拟器"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->tooltip
+msgid ""
+"Choose the terminal emulator used by this applet.\n"
+"IMPORTANT!!! The terminal emulator has to support the -e argument."
+msgstr ""
+"选择此小程序使用的终端模拟器。\n"
+"重要！！！终端模拟器必须支持 -e 参数。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
+msgid "Rotation interval time unit"
+msgstr "轮流间隔时间单位"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
+msgid "Extra settings"
+msgstr "附加设置"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->description
+msgid "Execution interval time unit"
+msgstr "执行间隔时间单位"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
+msgid "Keep just one sub menu open"
+msgstr "始终保持仅打开一个子菜单"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
+msgid ""
+"When enabled, the previously opened sub menu will be automatically closed."
+msgstr "启用后，之前打开的子菜单将会自动关闭。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
+msgid "Default icon size"
+msgstr "桌面图标大小"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
 msgid ""
@@ -1263,25 +1251,52 @@ msgstr ""
 "以像素为单位设置此小程序主菜单中的图标的默认大小。 可以通过在脚本中的菜单条目"
 "的相应行设置“iconSize”属性来覆盖菜单条目的图标大小。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
-msgid "Default icon size"
-msgstr "桌面图标大小"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
+msgid "pixels"
+msgstr "像素"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr "输入要在面板中显示的自定义文本。"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
+msgid "Execution interval"
+msgstr "执行间隔"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
+msgid ""
+"Set the script execution interval. If set to 0 (zero), the timer will be "
+"disabled."
+msgstr "设置脚本执行间隔，如果设置为0（零），定时器将会被禁用。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->description
 msgid "Custom label"
 msgstr "自定义标签"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
-msgid "Extra settings"
-msgstr "附加设置"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "输入要在面板中显示的自定义文本。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
-msgid "Keyboard shortcut to open and close the menu"
-msgstr "打开和关闭菜单的键盘快捷键"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
+msgid "Spacing for items inside the menu"
+msgstr "菜单内条目的空间"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
+msgid "ems"
+msgstr "ems"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr "图标"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择要在面板中显示的图标。"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
+msgid "Show script name on applet"
+msgstr "在小程序上显示脚本名称"
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->tooltip
 msgid ""
@@ -1293,21 +1308,20 @@ msgstr ""
 "当脚本内部没有分配给小程序显示的行时，将显示脚本名称。 禁用此选项后，脚本名称"
 "将不会显示在此小程序中，从而使我们有可能为该小程序使用自定义文本。"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
-msgid "Show script name on applet"
-msgstr "在小程序上显示脚本名称"
-
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
 msgid "Spacing for items inside the applet"
 msgstr "小程序内条目的空间"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
-msgid "ems"
-msgstr "ems"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_file_path->description
+msgid "Path to script"
+msgstr "脚本的路径"
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
-msgid "Spacing for items inside the menu"
-msgstr "菜单内条目的空间"
+#~ msgid ""
+#~ "Philipp Emanuel Weidmann: Author of the gnome-shell extension called Argos"
+#~ msgstr "Philipp Emanuel Weidmann：名为Argos的gnome-shell扩展的作者"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"
 
 #~ msgid ""
 #~ "**Optimized for minimum resource consumption:** Even with multiple "
