@@ -7,90 +7,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
     /*
-exported toggleLocalizationVisibility,
-         docCookies
+exported toggleLocalizationVisibility
  */
 
 /* jshint varstmt: false */
 
-/**
- * :: cookies.js ::
- * A complete cookies reader/writer framework with full unicode support.
- * Revision #1 - September 4, 2014
- * https://developer.mozilla.org/en-US/docs/Web/API/document.cookie
- * https://developer.mozilla.org/User:fusionchess
- * This framework is released under the GNU Public License, version 3 or later.
- * http://www.gnu.org/licenses/gpl-3.0-standalone.html
- * Syntaxes:
- * docCookies.setItem(name, value[, end[, path[, domain[, secure]]]])
- * docCookies.getItem(name)
- * docCookies.removeItem(name[, path[, domain]])
- * docCookies.hasItem(name)
- * docCookies.keys()
- */
+if (!window.localStorage) {
+    /*
+    Storage objects are a recent addition to the standard. As such they may not be present
+    in all browsers. You can work around this by inserting one of the following two codes at
+    the beginning of your scripts, allowing use of localStorage object in implementations which
+    do not natively support it.
 
-var docCookies = {
-    getItem: function(aKey) {
-        if (!aKey)
-            return null;
+    This algorithm is an exact imitation of the localStorage object, but makes use of cookies.
 
-        return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" +
-                encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"),
-            "$1")) || null;
-    },
-    setItem: function(aKey, aValue, aEnd, aPath, aDomain, aSecure) {
-        if (!aKey || /^(?:expires|max\-age|path|domain|secure)$/i.test(aKey))
-            return false;
-
-        var sExpires = "";
-        if (aEnd) {
-            switch (aEnd.constructor) {
-                case Number:
-                    sExpires = aEnd === Infinity ? "; expires=Fri, 31 Dec 9999 23:59:59 GMT" : "; max-age=" + aEnd;
-                    break;
-                case String:
-                    sExpires = "; expires=" + aEnd;
-                    break;
-                case Date:
-                    sExpires = "; expires=" + aEnd.toUTCString();
-                    break;
+    Source: https://developer.mozilla.org/en-US/docs/Web/API/Storage/LocalStorage
+     */
+    Object.defineProperty(window, "localStorage", new(function() { // jshint ignore:line
+        var aKeys = [],
+            oStorage = {};
+        Object.defineProperty(oStorage, "getItem", {
+            value: function(sKey) {
+                return sKey ? this[sKey] : null;
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "key", {
+            value: function(nKeyId) {
+                return aKeys[nKeyId];
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "setItem", {
+            value: function(sKey, sValue) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=" + escape(sValue) +
+                    "; expires=Tue, 19 Jan 2038 03:14:07 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "length", {
+            get: function() {
+                return aKeys.length;
+            },
+            configurable: false,
+            enumerable: false
+        });
+        Object.defineProperty(oStorage, "removeItem", {
+            value: function(sKey) {
+                if (!sKey) {
+                    return;
+                }
+                document.cookie = escape(sKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+            },
+            writable: false,
+            configurable: false,
+            enumerable: false
+        });
+        this.get = function() {
+            var iThisIndx;
+            for (var sKey in oStorage) {
+                iThisIndx = aKeys.indexOf(sKey);
+                if (iThisIndx === -1) {
+                    oStorage.setItem(sKey, oStorage[sKey]);
+                } else {
+                    aKeys.splice(iThisIndx, 1);
+                }
+                delete oStorage[sKey];
             }
+            for (aKeys; aKeys.length > 0; aKeys.splice(0, 1)) {
+                oStorage.removeItem(aKeys[0]);
+            }
+            for (var aCouple, iKey, nIdx = 0, aCouples = document.cookie.split(/\s*;\s*/); nIdx < aCouples.length; nIdx++) {
+                aCouple = aCouples[nIdx].split(/\s*=\s*/);
+                if (aCouple.length > 1) {
+                    oStorage[iKey = unescape(aCouple[0])] = unescape(aCouple[1]);
+                    aKeys.push(iKey);
+                }
+            }
+            return oStorage;
+        };
+        this.configurable = false;
+        this.enumerable = true;
+    })());
+}
+
+/**
+ * Return if a particular option exists in a <select> object
+ * @param {String} aValue A string representing the option you are looking for
+ * @param {Object} aSelect A Select object
+ *
+ * Usage:
+ *
+ * optionExists('searchedOption', document.getElementById('myselect'));
+ *
+ * Source: https://stackoverflow.com/a/17166899
+ */
+function optionExists(aValue, aSelect) {
+    var optionExists = false,
+        optionsLength = aSelect.length;
+
+    while (optionsLength--) {
+        if (aSelect.options[optionsLength].value === aValue) {
+            optionExists = true;
+            break;
         }
-        document.cookie = encodeURIComponent(aKey) + "=" + encodeURIComponent(aValue) + sExpires +
-            (aDomain ? "; domain=" + aDomain : "") +
-            (aPath ? "; path=" + aPath : "") +
-            (aSecure ? "; secure" : "");
-        return true;
-    },
-    removeItem: function(aKey, aPath, aDomain) {
-        if (!this.hasItem(aKey))
-            return false;
-
-        document.cookie = encodeURIComponent(aKey) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" +
-            (aDomain ? "; domain=" + aDomain : "") + (aPath ? "; path=" + aPath : "");
-        return true;
-    },
-    hasItem: function(aKey) {
-        if (!aKey)
-            return false;
-
-        return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(aKey).replace(/[\-\.\+\*]/g, "\\$&") +
-            "\\s*\\=")).test(document.cookie);
-    },
-    keys: function() {
-        var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "")
-            .split(/\s*(?:\=[^;]*)?;\s*/);
-        for (var nLen = keys.length, nIdx = 0; nIdx < nLen; nIdx++)
-            keys[nIdx] = decodeURIComponent(keys[nIdx]);
-
-        return keys;
     }
-};
+    return optionExists;
+}
 
 function toggleLocalizationVisibility(aValue) {
-    // Store the language passed to the function or retrieve it from a cookie.
-    var language = aValue ? aValue : docCookies.getItem("cinnamon_tools_help_language");
+    // Store the language passed to the function or retrieve it from localStorage (or cookie).
+    var language = aValue ? aValue : localStorage.getItem("cinnamon_tools_help_language");
     var selector = document.getElementById("localization-switch");
+    var validLanguage = optionExists(language, selector);
 
     // If there is no selector, the page build must have gone very wrong.
     if (!selector)
@@ -98,11 +136,15 @@ function toggleLocalizationVisibility(aValue) {
 
     // aValue is null on page load.
     if (aValue === null) {
-        // If there is no language is because cookies are not allowed.
-        // If a user reloads a help page when another language other than English is shown:
-        // - With cookies allowed: The currently selected language will stay selected.
-        // - With cookies NOT allowed: The help page will be switched to English.
-        if (language) { // Set the chosen (or retrieved from a cookie) language...
+        /*
+         If there is no language is because localStorage (or cookies) is disabled.
+         If a user reloads a help page when another language other than English is shown:
+         - With localStorage (or cookies) allowed: The currently selected language will stay selected.
+         - With localStorage (or cookies) NOT allowed: The help page will be switched to English.
+         */
+        // Set the chosen (or retrieved from localStorage (or a cookie)) language,
+        // but only if the language is also an element of the language selector...
+        if (language && validLanguage) {
             selector.value = language;
         } else { // ...or default to English.
             selector.value = "en";
@@ -118,17 +160,24 @@ function toggleLocalizationVisibility(aValue) {
 
         var option = selector.options[selector.selectedIndex];
         var chooseLanguageLabel = document.getElementById("localization-chooser-label");
+        var navXletHelp = document.getElementById("nav-xlet-help");
+        var navXletContributors = document.getElementById("nav-xlet-contributors");
+        var navXletChangelog = document.getElementById("nav-xlet-changelog");
 
-        // Set localized "Choose language" label.
+        // Set localized navigation bar labels.
         chooseLanguageLabel.innerText = option.getAttribute("data-language-chooser-label");
+        navXletHelp.innerText = option.getAttribute("data-xlet-help");
+        navXletContributors.innerText = option.getAttribute("data-xlet-contributors");
+        navXletChangelog.innerText = option.getAttribute("data-xlet-changelog");
         // Set localized page title.
         document.title = option.getAttribute("data-title");
     } finally {
-        if (language) {
-            // If there is language, use it to unhide the respective section...
+        if (language && validLanguage) {
+            // If there is language and it's also an element of the language selector,
+            // use it to unhide the respective section...
             document.getElementById(language).classList.remove("hidden");
-            // ...and save it into a cookie.
-            docCookies.setItem("cinnamon_tools_help_language", language);
+            // ...and save it into localStorage (or a cookie).
+            localStorage.setItem("cinnamon_tools_help_language", language);
         } else {
             // If there is no language, unhide the English section and move on.
             document.getElementById("en").classList.remove("hidden");
@@ -368,6 +417,12 @@ pre {
 /* pre tag tweaks */
 
     
+/* For fixed header */
+body {
+    padding-top: 70px;
+}
+/* For fixed header */
+
 .localization-chooser {
     padding: 1em !important;
     width: %100 !important;
@@ -377,6 +432,14 @@ pre {
 #localization-switch {
     font-weight: bold !important;
     width: auto !important;
+}
+
+#localization-chooser-label {
+    color: #FFFFFF !important;
+}
+
+.navbar-form {
+    margin-top: 8px !important;
 }
 
     /* Specific CSS code for specific HELP files */
@@ -391,16 +454,30 @@ pre {
 </div> <!-- .alert.alert-warning -->
 </noscript>
 <div id="mainarea">
-<div class="localization-chooser" align="middle">
-<h4 id="localization-chooser-label">Choose language</h4>
-<select class="form-control" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-<!-- Česky --><option data-title="Nápověda pro Custom Cinnamon Menu" data-language-chooser-label="Zvolte jazyk" value="cs">Česky</option>
-<!-- English --><option selected data-title="Help for Custom Cinnamon Menu" data-language-chooser-label="Choose language" value="en">English</option>
-<!-- Español --><option data-title="Ayuda para Custom Cinnamon Menu" data-language-chooser-label="Elegir idioma" value="es">Español</option>
-<!-- Svenska --><option data-title="Hjälp för Custom Cinnamon Menu" data-language-chooser-label="Välj språk" value="sv">Svenska</option>
-<!-- 简体中文 --><option data-title="Custom Cinnamon Menu的帮助" data-language-chooser-label="选择语言" value="zh_CN">简体中文</option>
-</select>
-</div> <!-- .localization-chooser -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav">
+            <li><a id="nav-xlet-help" class="navbar-brand" href="#xlet-help"></a></li>
+            <li><a id="nav-xlet-contributors" class="navbar-brand" href="#xlet-contributors"></a></li>
+            <li><a id="nav-xlet-changelog" class="navbar-brand" href="#xlet-changelog"></a></li>
+        </ul>
+    </div>
+    <form class="navbar-form navbar-collapse collapse navbar-right">
+        <div class="form-group">
+            <label id="localization-chooser-label" class="control-label" for="localization-switch"></label>
+            <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
+                <!-- Česky --><option data-title="Nápověda pro Custom Cinnamon Menu" data-language-chooser-label="Zvolte jazyk" data-xlet-help="Nápověda" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="cs">Česky</option>
+<!-- English --><option selected data-title="Help for Custom Cinnamon Menu" data-language-chooser-label="Choose language" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English</option>
+<!-- Español --><option data-title="Ayuda para Custom Cinnamon Menu" data-language-chooser-label="Elegir idioma" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español</option>
+<!-- Svenska --><option data-title="Hjälp för Custom Cinnamon Menu" data-language-chooser-label="Välj språk" data-xlet-help="Hjälp" data-xlet-contributors="Medhjälpare" data-xlet-changelog="Ändringslogg" value="sv">Svenska</option>
+<!-- 简体中文 --><option data-title="Custom Cinnamon Menu的帮助" data-language-chooser-label="选择语言" data-xlet-help="帮助" data-xlet-contributors="贡献者" data-xlet-changelog="变更日志" value="zh_CN">简体中文</option>
+            </select>
+        </div>
+    </form>
+    </div>
+</nav>
+<span id="xlet-help">
 <div class="container boxed">
 
 <div id="zh_CN" class="localization-content hidden">
@@ -676,7 +753,7 @@ pre {
 
 <p>Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner.</p>
 
-<p>Felrapporter, funktionsönskemål och kodbidrag kan göras i denna xlets kodförråd, länkat nedan. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
+<p>Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
 
 </div>
 <hr>
@@ -732,12 +809,12 @@ pre {
 <h2>Felsöknings-/Extra information</h2>
 <ol>
 <li>Kör från terminal.<ol>
-<li><strong>Debian-baserade distributioner:</strong> If the command <strong>x-terminal-emulator</strong> doesn't run the terminal emulator that one wants to be the default, run the following command to set a different default terminal emulator.<ul>
+<li><strong>Debian-baserade distributioner:</strong> Om kommandot <strong>x-terminal-emulator</strong> inte startar den terminal du vill ha som standardterminal, kan du köra följande kommando för att ange en rätt standardterminal.<ul>
 <li><code>sudo update-alternatives --config x-terminal-emulator</code></li>
 <li>Skriv det valda numret och tryck Enter.</li>
 </ul>
 </li>
-<li><strong>För andra distributioner:</strong> Just set the terminal executable of your choice on this applet settings window.</li>
+<li><strong>För andra distributioner:</strong> Ange önskad standardterminal i det här panelprogrammets inställningar.</li>
 </ol>
 </li>
 <li>Det finns en fil i det här programmets installationsmapp, kallad <strong>run_from_terminal.sh</strong>. <strong><em>Ta inte bort, döp om eller redigera den här filen</em></strong>. Då kan alla <em>Kör från terminal</em>, sluta fungera.</li>
@@ -749,7 +826,7 @@ pre {
 <ul>
 <li>Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt.</li>
 <li>Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet <strong>localizations.sh</strong> från en terminal öppnad i programmappen.</li>
-<li>Om ditt språk saknas i denna xlet, kan du översätta den genom följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
+<li>Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
 </div> <!-- .localization-content -->
@@ -843,6 +920,668 @@ pre {
 </div> <!-- .localization-content -->
 
 </div> <!-- .container.boxed -->
+<div style="font-weight:bold;" class="container alert alert-info">The following two sections are available only in English.</div>
+<span id="xlet-contributors">
+<div class="container boxed">
+<h2>Contributors/Mentions</h2>
+<ul>
+<li><strong><a href="https://github.com/NikoKrause">NikoKrause</a>:</strong> Bug fixes and German localization.</li>
+<li><strong><a href="https://github.com/Radek71">Radek71</a>:</strong> Czech localization.</li>
+<li><strong><a href="https://github.com/muzena">muzena</a>:</strong> Croatian localization.</li>
+<li><strong><a href="https://github.com/giwhub">giwhub</a>:</strong> Chinese localization.</li>
+<li><strong><a href="https://github.com/lestcape">lestcape</a>:</strong> Some advanced features on this applet are based on his <a href="https://github.com/lestcape/Configurable-Menu">Configurable Menu applet</a> applet.</li>
+<li><strong><a href="https://github.com/nooulaif">nooulaif</a>:</strong> Fuzzy search feature based on his <a href="https://cinnamon-spices.linuxmint.com/applets/view/258">Sane Menu</a> applet.</li>
+<li><strong>Daniel Bruce:</strong> Some icons used by this menu are from <a href="www.entypo.com">Entypo pictograms</a>.</li>
+<li><strong><a href="https://github.com/eson57">eson57</a>:</strong> Swedish localization.</li>
+</ul>
+
+</div> <!-- .container.boxed -->
+
+<span id="xlet-changelog">
+<div class="container boxed">
+<h2>Custom Cinnamon Menu changelog</h2>
+<h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 4 Jun 2017 19:24:26 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/98981fe">98981fe</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 19:32:58 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e501d73">e501d73</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Fixed an issue that kept an empty label visible on Cinnamon 3.4.x, adding extra spacing to the
+elements of the applet when it shouldn't.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 3 Jun 2017 09:10:02 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e7737b2">e7737b2</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>CustomCinnamonMenu: Update sv.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 07:19:03 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ddb3599">ddb3599</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 17:08:27 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ca58c46">ca58c46</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 29 May 2017 02:46:05 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/27d1972">27d1972</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 03:22:52 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/10d16c5">10d16c5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated Czech localization.
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 28 May 2017 01:57:01 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1aa77b1">1aa77b1</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Fixed another warning thrown by the use of Cinnamon 3.4.x with CJS 3.4.x installed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:33:37 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/45b9eb8">45b9eb8</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 22:01:45 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3179904">3179904</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 07:03:12 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b559aa9">b559aa9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Fixed a typo that prevented a couple of strings on the create_localized_help.py script from being
+extracted to be translated.
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 05:17:29 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b9679bf">b9679bf</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Corrected Czech localization.
+- Updated help file due to localization update.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 27 May 2017 03:23:22 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/795021c">795021c</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated Czech localization.
+- Updated help file due to updated localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 23 May 2017 06:07:06 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3db869c">3db869c</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Cleaned up code.
+- Applied some fixes/tweaks from upstream.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+de.po     60
+es.po     0
+cs.po     60
+sv.po     0
+hr.po     50
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 22:49:37 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/04e8b0a">04e8b0a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Removed CJS 3.4 warnings.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+de.po     60
+es.po     0
+cs.po     60
+sv.po     0
+hr.po     50
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:39:19 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f9110ee">f9110ee</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Re-generated help file based on new localizations.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  0
+de.po     60
+es.po     0
+cs.po     60
+sv.po     0
+hr.po     50
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:19:05 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/bf4b875">bf4b875</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #81 from giwhub/giwhub-patch-2
+Update Chinese translations for xlets
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 00:17:27 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/9bff968">9bff968</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated Swedish localization.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 May 2017 10:47:39 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1d80a9b">1d80a9b</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Update zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 14 May 2017 22:03:11 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1854bc7">1854bc7</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>Update sv.po
+Update Swedish translation for Custom Cinnamon Menu.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 13 May 2017 20:53:21 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/450376a">450376a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Redesigned help file generation. Now the help file is created from a python script
+(create_localized_help.py) from which strings can be extracted by xgettext to be added to the xlet
+localization template to be able to localize the content of the help file.
+
+LANGUAGE  UNTRANSLATED
+zh_CN.po  58
+de.po     60
+es.po     0
+cs.po     60
+sv.po     58
+hr.po     50
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 8 May 2017 13:10:09 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8a1591f">8a1591f</a></li>
+<li><strong>Author:</strong> muzena</li>
+</ul>
+<pre><code>0dyseus@CustomCinnamonMenu.hr: update hr.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 7 May 2017 12:40:13 +0200</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/6fc0502">6fc0502</a></li>
+<li><strong>Author:</strong> Åke Engelbrektson</li>
+</ul>
+<pre><code>Create sv.po
+Swedish translation
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 6 May 2017 08:28:41 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/a29f014">a29f014</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Cleaned up metadata.json file.
+- Updated localization template.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 13:26:00 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/9020350">9020350</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Minor code tweaks.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 5 May 2017 01:14:18 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/20a1b99">20a1b99</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Reverted back a change in the method to clear an array. I switched to the method of setting an
+array length to zero instead of re-declaring an empty array. But this had pernicious side effects,
+like breaking fuzzy search. Lets stick to what it works.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 4 May 2017 08:36:07 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/0aac916">0aac916</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Removed *dangerous* flag. Achieved by changing all synchronous functions to their asynchronous
+counterparts.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 4 May 2017 00:12:10 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/214a6e8">214a6e8</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Updated changelog.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 3 May 2017 06:38:35 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b0a0fb5">b0a0fb5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Changed *multiversion* implementation. Created symlinks inside the version folder so I don't keep
+forgetting to copy the files from the root folder. The only *unique* file, and the only reason that
+I use *multiversion*, is the settings-schema.json file.
+- Changed the way the imports are done.
+- Implemented some of the upstream features and fixes.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 30 Apr 2017 02:06:29 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/af5a68f">af5a68f</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet
+- Cleaned metadata.json file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 13 Apr 2017 13:41:11 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/3e76136">3e76136</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet - Added localized help.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 21 Mar 2017 19:14:51 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f50ff3a">f50ff3a</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Custom Cinnamon Menu applet - Updated README and metadata.json files due to new localization added.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 21 Mar 2017 06:24:36 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b8acfe0">b8acfe0</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Merge pull request #35 from giwhub/giwhub-patch-6
+Add Chinese translation for Custom Cinnamon Menu
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 19 Mar 2017 23:55:15 +0800</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e949d80">e949d80</a></li>
+<li><strong>Author:</strong> giwhub</li>
+</ul>
+<pre><code>Create zh_CN.po
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 27 Jan 2017 11:40:53 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/554371e">554371e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applet - Cleaned some irrelevant files
+- Updated READMEs
+- Updated metadata.json
+- Updated some applet icons.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 23:50:00 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/26e2e87">26e2e87</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Fixed some broken links.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 22 Jan 2017 20:29:22 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c2a6759">c2a6759</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Applets - Formatted repository to conform Spices repository.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 15 Jan 2017 05:36:53 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/63af5ba">63af5ba</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Added Czech localization. Thanks to
+[Radek71](https://github.com/Radek71). Closes #18 - Several upstream fixes.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 14 Dec 2016 13:56:36 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d50c594">d50c594</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Added German localization. Thanks to
+[NikoKrause](https://github.com/NikoKrause)
+- [Upstream fix] Fixed a crash produced by certain recent files URIs.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 9 Dec 2016 15:36:44 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/0c79cf9">0c79cf9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Some fixes/improvements for Cinnamon 3.2.x
+- Fixed keyboard navigation in the Favorites box caused by a custom separator element
+- Added option to change the font size for the text on the applications info box
+- Added option to display the user's picture on the menu
+- Added option to display hover feedback. If the user picture is displayed and the option "hover
+feedback" is enabled, every time an element on the menu is hovered or selected with keyboard
+navigation, the image/icon of said element will be displayed in the place where the user picture is
+placed.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 2 Dec 2016 20:18:16 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/668fd35">668fd35</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Updated test version.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 2 Dec 2016 09:10:37 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/0fbfebb">0fbfebb</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Fixed the know issue with the option **Display separator after
+"Recent Applications" category** breaking keyboard navigation
+- Added keyboard navigation to the **Custom Launchers** box
+- Added the possibility to customize the placement of each mayor elements of the menu (**Search
+box**, **Applications/Categories boxes**, **Info box** and **Custom Launchers box**). There is a new
+section on the settings window called **Menu layout** that groups all options that modify the menu
+layout
+- Some minor performance improvements
+- [Upstream fix] Fixed removal of key bindings
+- Closes #12
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 26 Nov 2016 05:34:56 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/dfc91d2">dfc91d2</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Updated README.md and HELP.md files
+- Added TODO file.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 23 Nov 2016 19:51:32 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b7ba3d4">b7ba3d4</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Added option to choose an alternate method for selecting categories.
+This method is based on **lestcape**'s [Configurable Menu
+applet](https://github.com/lestcape/Configurable-Menu) and it might improve the menu performance
+while selecting categories
+- Updated some context menu icons to be less generic. Thanks to
+[NikoKrause](https://github.com/NikoKrause)
+- [Upstream fix] Various keyboard navigation fixes.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 19 Nov 2016 10:33:51 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/5719ee9">5719ee9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Added option to toggle category selection on hover
+- Fixed error when trying to set the **run_from_terminal.sh** file as executable. Fixes #10
+- Removed unnecessary folder.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 20 Oct 2016 17:48:10 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/fa9bae5">fa9bae5</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Fixed the non localization of the applet label (Fixes #7)
+- [Upstream fix] Fixed impossibility to clear the list of **Recent Files** by pressing the **Enter**
+key
+- [Upstream fix] Fixed various visual glitches on the applications info box.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 12 Oct 2016 11:33:09 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1996883">1996883</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] - Updated localization files.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 8 Oct 2016 19:55:16 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/744bea3">744bea3</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] Fixed search results highlighting.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 8 Oct 2016 04:12:43 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/f4ac54f">f4ac54f</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>[Custom Cinnamon Menu applet] Added option to not store into the Recent Applications category the
+applications set as Favorite.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 6 Oct 2016 03:35:15 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/72668c7">72668c7</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Corrected some terms and removed BASICS.md in favor of Wiki.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 5 Oct 2016 19:13:43 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/601a1a6">601a1a6</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Minor fixes/improvements.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 3 Oct 2016 00:12:50 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d01a0ab">d01a0ab</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>White space cleaning.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 25 Sep 2016 01:37:02 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e0afc90">e0afc90</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Added support for localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 22 Sep 2016 21:42:19 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/95dcbea">95dcbea</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Added support for localizations.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 18 Sep 2016 19:16:41 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8775ca9">8775ca9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit..
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sun, 18 Sep 2016 14:12:05 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/6ea06fa">6ea06fa</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit....
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 16 Sep 2016 15:06:51 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/1d36bc6">1d36bc6</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit...
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 14 Sep 2016 14:23:03 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/ebdb879">ebdb879</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Wed, 31 Aug 2016 12:03:17 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/51d0a27">51d0a27</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 22 Aug 2016 21:52:43 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/920eb7f">920eb7f</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 15:17:56 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/c7381ce">c7381ce</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit...
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 15:01:25 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/d3dfb62">d3dfb62</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit..
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Sat, 20 Aug 2016 14:55:18 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/8a98d97">8a98d97</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 15 Aug 2016 06:48:34 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/5b75846">5b75846</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Fri, 12 Aug 2016 05:34:24 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/08bae8e">08bae8e</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit.....
+</code></pre>
+<hr>
+<ul>
+<li><strong>Date:</strong> Thu, 11 Aug 2016 23:02:16 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/eafffcb">eafffcb</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Initial commit..
+</code></pre>
+<hr>
+
+</div> <!-- .container.boxed -->
+
 </div> <!-- #mainarea -->
 <script type="text/javascript">toggleLocalizationVisibility(null);</script>
 </body>

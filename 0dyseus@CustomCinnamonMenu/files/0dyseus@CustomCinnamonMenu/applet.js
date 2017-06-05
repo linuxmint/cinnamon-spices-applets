@@ -180,7 +180,7 @@ MyApplet.prototype = {
                 Lang.bind(this, this.onIconThemeChanged));
             this._recalc_height();
 
-            this.update_label_visible();
+            this.updateLabelVisibility();
 
             // Temporary fix.
             Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
@@ -500,16 +500,21 @@ MyApplet.prototype = {
         this.applicationsScrollBox.style = "height: " + scrollBoxHeight / global.ui_scale + "px;";
     },
 
-    update_label_visible: function() {
+    updateLabelVisibility: function() {
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
         if (typeof this.hide_applet_label !== "function")
             return;
 
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
+        } else {
+            if (this.pref_custom_label_for_applet === "") {
+                this.hide_applet_label(true);
+            } else {
+                this.hide_applet_label(false);
+            }
+        }
     },
 
     /**
@@ -537,7 +542,7 @@ MyApplet.prototype = {
 
     on_orientation_changed: function(orientation) {
         this.orientation = orientation;
-        this.update_label_visible();
+        this.updateLabelVisibility();
         this.menu.destroy();
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
@@ -758,6 +763,8 @@ MyApplet.prototype = {
             else
                 this.set_applet_label("");
         }
+
+        this.updateLabelVisibility();
     },
 
     _navigateContextMenu: function(actor, symbol, altKey) {
