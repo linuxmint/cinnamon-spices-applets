@@ -5,9 +5,12 @@ const St = imports.gi.St
 const Tweener = imports.ui.tweener
 const DND = imports.ui.dnd
 
-const _ = require('./lodash');
-const each = require('./each');
-const constants = require('./constants');
+const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+
+const _ = AppletDir.lodash._;
+const each = AppletDir.each.each;
+const constants = AppletDir.constants.constants;
+const setTimeout = AppletDir.__init__.setTimeout;
 
 // Creates a button with an icon and a label.
 // The label text must be set with setText
@@ -108,7 +111,7 @@ AppButton.prototype = {
     this.actor.reactive = !global.settings.get_boolean('panel-edit-mode')
   },
 
-  setIconPadding: function (init=null) {
+  setIconPadding: function (init) {
     if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node()
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4
@@ -117,11 +120,11 @@ AppButton.prototype = {
     if (this._applet.orientation === St.Side.TOP || this._applet.orientation == St.Side.BOTTOM) {
       var padding;
       if (this._applet.themePadding) {
-        padding = padding = this._applet.iconPadding <= 5 ? [`${this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1}px`, '0px'] : [`${this._applet.iconPadding}px`, `${this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4)}px`];
+        padding = padding = this._applet.iconPadding <= 5 ? [this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1 + 'px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4) + 'px'];
       } else {
-        padding = this._applet.iconPadding <= 5 ? ['6px', '0px'] : [`${this._applet.iconPadding}px`, `${this._applet.iconPadding - 5}px`]
+        padding = this._applet.iconPadding <= 5 ? ['6px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - 5 + 'px']
       }
-      this.actor.set_style(`padding-bottom: 0px;padding-top:0px; padding-left: ${padding[0]};padding-right: ${padding[1]};`)
+      this.actor.set_style('padding-bottom: 0px;padding-top:0px; padding-left: ' + padding[0] + ';padding-right: ' + padding[1] + ';')
     }
   },
 
@@ -132,7 +135,8 @@ AppButton.prototype = {
     }
   },
 
-  setText: function (text='') {
+  setText: function (text) {
+    text = text ? text : '';
     if (text && text.length > 0 && text.indexOf('null') === -1) {
       this._label.set_text(text);
       if (text.length > 0) {
@@ -309,11 +313,11 @@ AppButton.prototype = {
     return false
   },
 
-  _onEnter(){
+  _onEnter: function(){
     this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label)
   },
 
-  _onLeave(){
+  _onLeave: function(){
     if (this.metaWindows.length > 0 && (this._applet.activePseudoClass === 1 || (this._applet.focusPseudoClass === 1 && this._hasFocus()))) {
       setTimeout(()=>this.actor.add_style_pseudo_class('hover'), 0)
     } else if (this._applet.hoverPseudoClass > 1) {
@@ -324,7 +328,7 @@ AppButton.prototype = {
     }
   },
 
-  setActiveStatus(windows){
+  setActiveStatus: function(windows){
     if (windows.length > 0) {
       this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label)
     } else {
@@ -499,9 +503,3 @@ _Draggable.prototype = {
 function makeDraggable (actor, params) {
   return new _Draggable(actor, params)
 }
-
-module.exports = {
-  AppButton: AppButton,
-  _Draggable: _Draggable,
-  makeDraggable: makeDraggable
-};

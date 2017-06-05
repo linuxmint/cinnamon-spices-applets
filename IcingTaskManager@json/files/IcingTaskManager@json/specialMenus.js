@@ -13,11 +13,14 @@ const Tweener = imports.ui.tweener
 const Applet = imports.ui.applet;
 const Tooltips = imports.ui.tooltips;
 
-const _ = require('./lodash');
-const each = require('./each');
-const getFirefoxHistory = require('./firefox');
-const constants = require('./constants');
-const t = require('./gettext');
+const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+
+const _ = AppletDir.lodash._;
+const each = AppletDir.each.each;
+const getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
+const constants = AppletDir.constants.constants;
+const t = AppletDir.gettext.t;
+const setTimeout = AppletDir.__init__.setTimeout;
 
 function AppMenuButtonRightClickMenu () {
   this._init.apply(this, arguments)
@@ -103,7 +106,7 @@ AppMenuButtonRightClickMenu.prototype = {
           if (i === mw.get_monitor()) {
             continue;
           }
-          item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? 'Move to the other monitor' : `Move to monitor ${i+1}`})
+          item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? 'Move to the other monitor' : 'Move to monitor ' + (i + 1).toString()})
           connectMonitorEvent(item, mw, i)
           this.addMenuItem(item);
         }
@@ -248,11 +251,13 @@ AppMenuButtonRightClickMenu.prototype = {
     item.connect('activate', Lang.bind(this._applet, this._applet.openAbout));
     subMenu.menu.addMenuItem(item);
 
-    item = createMenuItem({label: 'Configure...', icon: 'system-run'})
-    item.connect('activate', Lang.bind(this._applet, this._applet.configureApplet));
-    subMenu.menu.addMenuItem(item);
+    if (this._applet.configureApplet) { // Cinnamon 3.0.7 check
+      item = createMenuItem({label: 'Configure...', icon: 'system-run'})
+      item.connect('activate', Lang.bind(this._applet, this._applet.configureApplet));
+      subMenu.menu.addMenuItem(item);
+    }
 
-    item = createMenuItem({label: `Remove 'Icing Task Manager'`, icon: 'edit-delete'})
+    item = createMenuItem({label: 'Remove \'Icing Task Manager\'', icon: 'edit-delete'})
     item.connect('activate', Lang.bind(this, function() {
       AppletManager._removeAppletFromPanel(this._applet._uuid, this._applet.instance_id);
     }));
@@ -411,14 +416,14 @@ AppMenuButtonRightClickMenu.prototype = {
     this._populateMenu();
   },
 
-  _toggleAutostart(){
+  _toggleAutostart: function(){
     if (this.autostartIndex !== -1) {
       this._applet.autostartApps[this.autostartIndex].file.delete(null)
       this._applet.removeAutostartApp(this.autostartIndex)
       this.autostartIndex = -1
     } else {
       var filePath = this.appInfo.get_filename()
-      Util.trySpawnCommandLine(`bash -c 'cp ${filePath} ${this._applet.autostartStrDir}'`)
+      Util.trySpawnCommandLine('bash -c "cp ' + filePath + ' ' + this._applet.autostartStrDir + '"')
       setTimeout(()=>{
         this._applet.getAutostartApps()
         this.autostartIndex = this._applet.autostartApps.length - 1
@@ -438,7 +443,7 @@ AppMenuButtonRightClickMenu.prototype = {
 
   _createShortcut: function (actor, event) {
     var proc = this.app.get_windows()[0].get_pid()
-    var cmd = `bash -c 'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ${proc.toString()}'`
+    var cmd = 'bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ' + proc.toString() + '"'
     Util.trySpawnCommandLine(cmd)
   },
 
@@ -674,7 +679,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.actor.connect('key-press-event', (actor, e)=>this._onKeyPress(actor, e))
   },
 
-  _onKeyPress(actor, e){
+  _onKeyPress: function(actor, e){
     let symbol = e.get_key_symbol();
     let i = _.findIndex(this.appThumbnails, (thumb)=>{
       return thumb.thumbnail.entered
@@ -761,7 +766,8 @@ PopupMenuAppSwitcherItem.prototype = {
     this.isFavapp = isFav
   },
 
-  handleUnopenedPinnedApp(metaWindow, windows, appClosed=false){
+  handleUnopenedPinnedApp: function(metaWindow, windows, appClosed){
+    appClosed = appClosed ? appClosed : false;
     if (this.metaWindowThumbnail) {
       this.metaWindowThumbnail.destroy()
     }
@@ -777,7 +783,7 @@ PopupMenuAppSwitcherItem.prototype = {
 
   },
 
-  _refresh: function (refreshThumbnails=null) {
+  _refresh: function (refreshThumbnails) {
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
     // Get a list of all windows of our app that are running in the current workspace
@@ -807,7 +813,7 @@ PopupMenuAppSwitcherItem.prototype = {
     }
   },
 
-  _refreshThumbnails(){
+  _refreshThumbnails: function(){
     for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
       if (this.appThumbnails[i] !== undefined && this.appThumbnails[i].thumbnail) {
         this.appThumbnails[i].thumbnail._refresh();
@@ -886,7 +892,7 @@ PopupMenuAppSwitcherItem.prototype = {
     }
   },
 
-  destroy(){
+  destroy: function(){
     each(this.signals, (signal, key)=>{
       each(signal, (id)=>{
         this[key].disconnect(id)
@@ -1001,7 +1007,7 @@ WindowThumbnail.prototype = {
     this.entered = false
   },
 
-  handleEnterEvent(){
+  handleEnterEvent: function(){
     this.entered = true
     if (!this.isFavapp) {
       this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true)
@@ -1020,7 +1026,7 @@ WindowThumbnail.prototype = {
     }
   },
 
-  handleLeaveEvent(){
+  handleLeaveEvent: function(){
     this.entered = false
     if (!this.isFavapp) {
       this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false)
@@ -1104,7 +1110,9 @@ WindowThumbnail.prototype = {
     return transientHasFocus
   },
 
-  _isFavorite: function (isFav, metaWindow=this.metaWindow, windows=this.metaWindows) {
+  _isFavorite: function (isFav, metaWindow, metaWindows) {
+    metaWindow = metaWindow ? metaWindow : this.metaWindow;
+    metaWindows = metaWindows ? metaWindows : this.metaWindows;
     // Whether we create a favorite tooltip or a window thumbnail
     if (isFav) {
       // this.thumbnailActor.height = 0
@@ -1120,12 +1128,12 @@ WindowThumbnail.prototype = {
       this.actor.style = null
       // HACK used to make sure everything is on the stage
       setTimeout(()=>this.thumbnailPaddingSize(), 0)
-      this._refresh(metaWindow, windows)
+      this._refresh(metaWindow, metaWindows)
     }
   },
 
   needs_refresh: function () {
-    return Boolean(this.thumbnail)
+    return this.thumbnail;
   },
 
   thumbnailIconSize: function () {
@@ -1167,7 +1175,7 @@ WindowThumbnail.prototype = {
     return thumbnail
   },
 
-  handleAfterClick(){
+  handleAfterClick: function(){
     this.stopClick = true
     this.destroy()
     this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false)
@@ -1198,7 +1206,9 @@ WindowThumbnail.prototype = {
     this.stopClick = false
   },
 
-  _refresh: function (metaWindow=this.metaWindow, metaWindows=this.metaWindows) {
+  _refresh: function (metaWindow, metaWindows) {
+    metaWindow = metaWindow ? metaWindow : this.metaWindow;
+    metaWindows = metaWindows ? metaWindows : this.metaWindows;
     if (!this.metaWindow) {
       return false;
     }
@@ -1280,7 +1290,7 @@ WindowThumbnail.prototype = {
     }
   },
 
-  destroy(skipSignalDisconnect=null){
+  destroy: function(skipSignalDisconnect){
     try {
       if (this._trackerSignal) {
         this.tracker.disconnect(this._trackerSignal)
@@ -1330,10 +1340,3 @@ WindowThumbnail.prototype = {
 
   }
 }
-
-module.exports = {
-  AppMenuButtonRightClickMenu: AppMenuButtonRightClickMenu,
-  HoverMenuController: HoverMenuController,
-  AppThumbnailHoverMenu: AppThumbnailHoverMenu,
-  PopupMenuAppSwitcherItem: PopupMenuAppSwitcherItem
-};

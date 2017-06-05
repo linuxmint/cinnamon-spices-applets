@@ -7,12 +7,14 @@ const PopupMenu = imports.ui.popupMenu
 const Signals = imports.signals
 const DND = imports.ui.dnd
 
-// Load our applet so we can access other files in our extensions dir as libraries
+const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
-const _ = require('./lodash');
-const SpecialMenus = require('./specialMenus');
-const SpecialButtons = require('./specialButtons')
-const constants = require('./constants');
+const _ = AppletDir.lodash._;
+const App = AppletDir.applet;
+const SpecialMenus = AppletDir.specialMenus;
+const SpecialButtons = AppletDir.specialButtons;
+const constants = AppletDir.constants.constants;
+const setTimeout = AppletDir.__init__.setTimeout;
 
 function AppGroup () {
   this._init.apply(this, arguments)
@@ -20,7 +22,8 @@ function AppGroup () {
 
 AppGroup.prototype = {
   __proto__: Object.prototype,
-  _init: function (applet, appList, app, isFavapp, window=null, timeStamp=null, ungroupedIndex=null, appId='') {
+  _init: function (applet, appList, app, isFavapp, window, timeStamp, ungroupedIndex, appId) {
+    appId = appId ? appId : '';
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this)
     }
@@ -202,7 +205,8 @@ AppGroup.prototype = {
 
   // Stop monitoring a workspace for added and removed windows.
   // @metaWorkspace: if null, will remove all signals
-  unwatchWorkspace: function (metaWorkspace, unmount=false) {
+  unwatchWorkspace: function (metaWorkspace, unmount) {
+    unmount = unmount ? unmount : false;
     if (!metaWorkspace) {
       let removeSignals = (obj)=> {
         let signals = obj.signals
@@ -236,7 +240,7 @@ AppGroup.prototype = {
   // TBD: share the _appButton._numLabel with "window number display"
   showOrderLabel: function (number){
     var label = this._appButton._numLabel;
-    label.text = `${number + 1}`;
+    label.text = number + 1;
     label.show();
   },
 
@@ -244,7 +248,7 @@ AppGroup.prototype = {
     this._calcWindowNumber(this.appList.metaWorkspace);
   },
 
-  _onAppButtonRelease(actor, event) {
+  _onAppButtonRelease: function(actor, event) {
     this._applet._clearDragPlaceholder()
     var button = event.get_button();
 
@@ -307,7 +311,7 @@ AppGroup.prototype = {
     }
   },
 
-  _onAppButtonPress(actor, event){
+  _onAppButtonPress: function(actor, event){
     var button = event.get_button()
     if (button === 3) {
       return true
@@ -383,7 +387,7 @@ AppGroup.prototype = {
   // updates the internal list of metaWindows
   // to include all windows corresponding to this.app on the workspace
   // metaWorkspace
-  _updateMetaWindows: function (metaWorkspace, app=null, window=null, _wsWindows=null) {
+  _updateMetaWindows: function (metaWorkspace, app, window, _wsWindows) {
     // Get a list of all interesting windows that are part of this app on the current workspace
     var wsWindows = _wsWindows ? _wsWindows : metaWorkspace.list_windows();
     var windowsSource = window ? [window] : wsWindows;
@@ -415,7 +419,8 @@ AppGroup.prototype = {
     }
   },
 
-  _windowAdded: function (metaWorkspace, metaWindow, metaWindows, recursion=0) {
+  _windowAdded: function (metaWorkspace, metaWindow, metaWindows, recursion) {
+    recursion = recursion ? recursion : 0;
 
     let app = this._applet.getAppFromWMClass(this.appList.specialApps, metaWindow)
     if (!app) {
@@ -698,5 +703,3 @@ AppGroup.prototype = {
   }
 }
 Signals.addSignalMethods(AppGroup.prototype)
-
-module.exports = AppGroup;

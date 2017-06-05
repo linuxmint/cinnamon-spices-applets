@@ -5,7 +5,7 @@ var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('install', (cb)=>{
-  exec('cp -arf ./files/IcingTaskManager@json/3.4/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/metadata.json ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/icon.png ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
+  exec('cp -arf ./files/IcingTaskManager@json/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/metadata.json ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/icon.png ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
@@ -21,7 +21,7 @@ gulp.task('reload', ['install'], (cb)=>{
 })
 
 gulp.task('watch', ()=> {
-  gulp.watch('./files/IcingTaskManager@json/3.4/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
+  gulp.watch('./files/IcingTaskManager@json/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
 });
 
 gulp.task('clear-terminal', ()=> {

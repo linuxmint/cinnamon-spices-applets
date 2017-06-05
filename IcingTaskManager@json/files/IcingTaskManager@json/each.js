@@ -1,4 +1,4 @@
-module.exports = (obj, cb)=>{
+const each = (obj, cb)=>{
   if (Array.isArray(obj)) {
     for (let i = 0, len = obj.length; i < len; i++) {
       cb(obj[i], i);

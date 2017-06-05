@@ -1,20 +1,13 @@
-'use strict';
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const setTimeout = function(cb, duration){
+  Mainloop.timeout_add(duration, Lang.bind(this, ()=>{
+    cb.call(this, arguments)
+  }))
+}
 
-var importObj = typeof cimports !== 'undefined' ? cimports : imports;
-var Lang = imports.lang;
-var Soup = imports.gi.Soup;
-var Mainloop = imports.mainloop;
-var setTimeout = function setTimeout(cb, duration) {
-  var _this = this,
-      _arguments = arguments;
-
-  Mainloop.timeout_add(duration, Lang.bind(this, function () {
-    cb.call(_this, _arguments);
-  }));
-};
-
-var Main = importObj.ui.main;
-var clog = function clog() {
+const Main = imports.ui.main;
+function clog() {
   var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'LOG';
   var input = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '...';
 

@@ -3,10 +3,14 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St
 const Gio = imports.gi.Gio
 
-const _ = require('./lodash');
-const each = require('./each');
-const AppGroup = require('./appGroup');
-const constants = require('./constants');
+const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+
+const _ = AppletDir.lodash._;
+const App = AppletDir.applet;
+const AppGroup = AppletDir.appGroup.AppGroup;
+const each = AppletDir.each.each;
+const constants = AppletDir.constants.constants;
+const setTimeout = AppletDir.__init__.setTimeout;
 
 // List of running apps
 function AppList () {
@@ -63,7 +67,7 @@ AppList.prototype = {
     this._applet.appletEnabled = true;
   },
 
-  on_orientation_changed: function(orientation, init=null) {
+  on_orientation_changed: function(orientation, init) {
     if (this.manager === undefined) {
       return
     }
@@ -81,8 +85,7 @@ AppList.prototype = {
         return
       }
     })
-
-    var style = `margin-${orientationKey}: 0px; padding-${orientationKey}: 0px;`
+    var style = 'margin-' + orientationKey + ': 0px; padding-' + orientationKey + ': 0px;';
     var isVertical = orientationKey === 'left' || orientationKey === 'right'
 
     if (isVertical) {
@@ -90,8 +93,8 @@ AppList.prototype = {
       this.actor.add_style_class_name('vertical');
       this.actor.set_x_align(Clutter.ActorAlign.CENTER);
       this.actor.set_important(true);
-      var opposite = orientationKey === 'left' ? 'right' : 'left'
-      style += `padding-${opposite}: 0px; margin-${opposite}: 0px;`
+      var opposite = orientationKey === 'left' ? 'right' : 'left';
+      style += 'padding-' + opposite + ': 0px; margin-' + opposite + ': 0px;';
     } else {
       this.manager.set_vertical(false);
       this.actor.remove_style_class_name('vertical');
@@ -114,7 +117,7 @@ AppList.prototype = {
       this._updateSpacing()
     }
   },
-  _closeAllHoverMenus(cb) {
+  _closeAllHoverMenus: function(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       if (this.appList[i].appGroup.hoverMenu.isOpen) {
         this.appList[i].appGroup.hoverMenu.close()
@@ -125,7 +128,7 @@ AppList.prototype = {
     }
   },
 
-  _closeAllRightClickMenus(cb) {
+  _closeAllRightClickMenus: function(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       if (typeof this.appList[i].appGroup.rightClickMenu !== 'undefined'
         && this.appList[i].appGroup.rightClickMenu.isOpen) {
@@ -137,7 +140,7 @@ AppList.prototype = {
     }
   },
 
-  _refreshAllThumbnails() {
+  _refreshAllThumbnails: function() {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].appGroup.hoverMenu.appSwitcherItem._refresh(true)
     }
@@ -159,7 +162,7 @@ AppList.prototype = {
 
   _showAppsOrder: function(){
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.showOrderLabel(i);
+      this.appList[i].appGroup.showOrderLabel(i.toString());
     }
     setTimeout(() => {
       for (let i = 0, len = this.appList.length; i < len; i++) {
@@ -168,7 +171,7 @@ AppList.prototype = {
     }, this._applet.showAppsOrderTimeout);
   },
 
-  _cycleMenus(){
+  _cycleMenus: function(){
     var refApp = 0
     if (!this.lastCycled && this.lastFocusedApp) {
       refApp = _.findIndex(this.appList, {id: this.lastFocusedApp});
@@ -206,7 +209,7 @@ AppList.prototype = {
     this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed))
   },
 
-  _setLastFocusedApp(id){
+  _setLastFocusedApp: function(id){
     this.lastFocusedApp = id
   },
 
@@ -240,7 +243,7 @@ AppList.prototype = {
     Refresh specific apps by finding their index, destroying, and recreating them.
   */
 
-  _refreshAppById(appId, opts){
+  _refreshAppById: function(appId, opts){
     var refApp = _.findIndex(this.appList, {id: appId})
     if (refApp !== -1) {
       var app = this.appList[refApp].appGroup.app
@@ -337,7 +340,7 @@ AppList.prototype = {
       refApp = -1
     }
 
-    var initApp = (wsWindows, window=null, index=null)=>{
+    var initApp = (wsWindows, window, index)=>{
       var time = Date.now()
       let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId)
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows)
@@ -432,7 +435,7 @@ AppList.prototype = {
     this.appList.splice(pos, 0, data);
   },
 
-  _windowRemoved: function (metaWorkspace, metaWindow, app=null) {
+  _windowRemoved: function (metaWorkspace, metaWindow, app) {
 
     // When a window is closed, we need to check if the app it belongs
     // to has no windows left.  If so, we need to remove the corresponding AppGroup
@@ -462,7 +465,7 @@ AppList.prototype = {
     }
   },
 
-  _removeApp: function (app, timeStamp=null) {
+  _removeApp: function (app, timeStamp) {
     // This function may get called multiple times on the same app and so the app may have already been removed
     var refApp = -1
     if (this._applet.groupApps || !timeStamp) {
@@ -499,5 +502,3 @@ AppList.prototype = {
     this.appList = null
   }
 }
-
-module.exports = AppList;
