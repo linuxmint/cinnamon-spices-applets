@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
-"POT-Creation-Date: 2017-05-29 16:59+0800\n"
-"PO-Revision-Date: 2017-05-29 16:59+0800\n"
+"POT-Creation-Date: 2017-06-04 19:41+0800\n"
+"PO-Revision-Date: 2017-06-04 19:41+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -18,51 +18,67 @@ msgstr ""
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:94 ../../create_localized_help.py:163
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
 msgid "language-name"
 msgstr "简体中文"
 
-#: ../../create_localized_help.py:166
+#: ../../create_localized_help.py:190 settings.py:1022
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:193
 msgid "Choose language"
 msgstr "选择语言"
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:167 ../../create_localized_help.py:174
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
 #, python-format
 msgid "Help for %s"
 msgstr "%s的帮助"
 
-#: ../../create_localized_help.py:175
+#: ../../create_localized_help.py:202
 msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
-#: ../../create_localized_help.py:176
+#: ../../create_localized_help.py:203
 msgid ""
 "Never delete any of the files found inside this xlet folder. It might break "
 "this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
-#: ../../create_localized_help.py:177
+#: ../../create_localized_help.py:204
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
-#: ../../create_localized_help.py:183
+#: ../../create_localized_help.py:210
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
-#: ../../create_localized_help.py:184
+#: ../../create_localized_help.py:211
 msgid ""
 "If this xlet was installed from Cinnamon Settings, all of this xlet's "
 "localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:186
+#: ../../create_localized_help.py:213
 msgid ""
 "If this xlet was installed manually and not trough Cinnamon Settings, "
 "localizations can be installed by executing the script called "
@@ -71,7 +87,7 @@ msgstr ""
 "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
 "名为**localizations.sh**的脚本安装本地化。"
 
-#: ../../create_localized_help.py:187
+#: ../../create_localized_help.py:214
 msgid ""
 "If this xlet has no locale available for your language, you could create it "
 "by following the following instructions."
@@ -341,10 +357,6 @@ msgstr "记住窗口大小"
 msgid "Restart Cinnamon"
 msgstr "重新启动Cinnamon"
 
-#: settings.py:1022
-msgid "Help"
-msgstr "帮助"
-
 #: settings.py:1024
 msgid "About"
 msgstr "关于"
@@ -542,28 +554,29 @@ msgstr "配置文件已更改为%s"
 msgid "Configure..."
 msgstr "配置..."
 
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid ""
-"Eric Gach: Author of Desk Changer gnome-shell extension. https://github.com/"
-"BigE/desk-changer"
-msgstr ""
-"Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/desk-"
-"changer"
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid "eson57: Swedish localization."
-msgstr "eson57：瑞典语本地化。"
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid "giwhub: Chinese localization."
-msgstr "giwhub：中文本地化。"
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->description
-msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
-msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
-
 #. 0dyseus@WallpaperChangerApplet->metadata.json->comments
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
+
+#~ msgid ""
+#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
+#~ "com/BigE/desk-changer"
+#~ msgstr ""
+#~ "Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/"
+#~ "desk-changer"
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57：瑞典语本地化。"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"
