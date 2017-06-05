@@ -2,16 +2,7 @@
     "website": "https://github.com/Odyseus/CinnamonTools",
     "multiversion": true,
     "description": "Custom version of the default Cinnamon Menu applet, but infinitely more customizable.",
-    "contributors": [
-        "NikoKrause: Bug fixes and German localization.",
-        "Radek71: Czech localization.",
-        "muzena: Croatian localization.",
-        "giwhub: Chinese localization.",
-        "lestcape: Author of some advanced features used by this applet.",
-        "nooulaif: Fuzzy search feature based on his Sane Menu applet.",
-        "Daniel Bruce: Some icons used by this menu are from www.entypo.com.",
-        "eson57: Swedish localization."
-    ],
+    "contributors": "See this xlet help file.",
     "max-instances": -1,
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
     "name": "Custom Cinnamon Menu",
