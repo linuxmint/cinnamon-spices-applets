@@ -7,12 +7,7 @@
         "3.4"
     ],
     "name": "Extensions Manager",
-    "contributors": [
-        "Radek71: Czech localization.",
-        "muzena: Croatian localization.",
-        "giwhub: Chinese localization.",
-        "eson57: Swedish localization."
-    ],
+    "contributors": "See this xlet help file.",
     "max-instances": -1,
     "uuid": "0dyseus@ExtensionsManager",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
