@@ -57,7 +57,7 @@ function main(metadata, orientation, panel_height, instance_id) {
       },
       TRANSFORM: {
         enumerable: true,
-        value: !ARGV.some(arg => arg === '--no-transform')
+        value: typeof Symbol === 'undefined'
       }
     }
   );
