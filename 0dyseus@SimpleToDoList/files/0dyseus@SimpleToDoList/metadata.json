@@ -7,12 +7,7 @@
         "3.4"
     ],
     "name": "Simple ToDo List",
-    "contributors": [
-        "bsaleil: Author of the gnome-shell extension called Todo list.",
-        "Thomas Moreau: Author of the gnome-shell extension called Section Todo List.",
-        "eson57: Swedish localization",
-        "giwhub: Chinese localization"
-    ],
+    "contributors": "See this xlet help file.",
     "max-instances": -1,
     "description": "Simple applet to create ToDo lists.",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
