@@ -26,9 +26,11 @@ const GLib = imports.gi.GLib
 const Meta = imports.gi.Meta
 const SignalManager = imports.misc.signalManager;
 
-const _ = require('./lodash');
-const each = require('./each');
-const AppList = require('./appList');
+const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+
+const _ = AppletDir.lodash._;
+const each = AppletDir.each.each;
+const AppList = AppletDir.appList.AppList;
 
 // Some functional programming tools
 const range = function (a, b) {
@@ -86,7 +88,8 @@ PinnedFavs.prototype = {
     return refFav !== -1
   },
 
-  triggerUpdate: function (appId, pos=null, isFavapp=false) {
+  triggerUpdate: function (appId, pos, isFavapp) {
+    isFavapp = isFavapp ? isFavapp : false;
     setTimeout(()=>{
       this._applet.refreshAppFromCurrentListById(appId, {favChange: true, favPos: pos, isFavapp: isFavapp})
     }, 15)
@@ -304,19 +307,19 @@ MyApplet.prototype = {
   },
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
-  _onButtonPressEvent() {
+  _onButtonPressEvent: function() {
     return false
   },
 
   _bindAppKey: function(){
     this._unbindAppKey();
     var addLaunchHotkeys = (i)=>{
-      Main.keybindingManager.addHotKey(`launch-app-key-${i}`, `<Super>${i}`, () => this._onAppKeyPress(i));
-      Main.keybindingManager.addHotKey(`launch-new-app-key-${i}`, `<Super><Shift>${i}`, () => this._onNewAppKeyPress(i));
+      Main.keybindingManager.addHotKey('launch-app-key-' + i, '<Super>' + i, () => this._onAppKeyPress(i));
+      Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, () => this._onNewAppKeyPress(i));
     };
 
     for (let i = 1; i < 10; i++) {
-      addLaunchHotkeys(i);
+      addLaunchHotkeys(i.toString());
     }
     Main.keybindingManager.addHotKey('launch-show-apps-order', this.showAppsOrderHotkey, ()=>this._showAppsOrder());
     Main.keybindingManager.addHotKey('launch-cycle-menus', this.cycleMenusHotkey, ()=>this._cycleMenus());
@@ -324,8 +327,9 @@ MyApplet.prototype = {
 
   _unbindAppKey: function(){
     for (var i = 1; i < 10; i++) {
-      Main.keybindingManager.removeHotKey(`launch-app-key-${i}`);
-      Main.keybindingManager.removeHotKey(`launch-new-app-key-${i}`);
+      let _i = i.toString();
+      Main.keybindingManager.removeHotKey('launch-app-key-' + _i);
+      Main.keybindingManager.removeHotKey('launch-new-app-key-' + _i);
     }
     Main.keybindingManager.removeHotKey('launch-show-apps-order');
     Main.keybindingManager.removeHotKey('launch-cycle-menus');
@@ -347,21 +351,24 @@ MyApplet.prototype = {
     this.getCurrentAppList()._cycleMenus();
   },
 
-  refreshCurrentAppList(){
+  refreshCurrentAppList: function(){
     setTimeout(()=>{
       this.metaWorkspaces[this.currentWs].appList._refreshList()
     }, 15)
   },
 
-  refreshAppFromCurrentListById(appId, opts={favChange: false, favPos: null, isFavapp: false}){
+  refreshAppFromCurrentListById: function(appId, opts){
+    if (!opts) {
+      opts = {favChange: false, favPos: null, isFavapp: false};
+    }
     this.metaWorkspaces[this.currentWs].appList._refreshAppById(appId, opts)
   },
 
-  refreshThumbnailsFromCurrentAppList(){
+  refreshThumbnailsFromCurrentAppList: function(){
     this.metaWorkspaces[this.currentWs].appList._refreshAllThumbnails()
   },
 
-  getAppFromWMClass (specialApps, metaWindow) {
+  getAppFromWMClass: function(specialApps, metaWindow) {
     let startupClass = (wmclass)=> {
       let app_final = null
       for (let i = 0, len = specialApps.length; i < len; i++) {
@@ -380,15 +387,15 @@ MyApplet.prototype = {
     return app
   },
 
-  getCurrentAppList(){
+  getCurrentAppList: function(){
     return this.metaWorkspaces[this.currentWs].appList
   },
 
-  onThemeChange(e){
+  onThemeChange: function(e){
     this.refreshCurrentAppList();
   },
 
-  getAutostartApps(){
+  getAutostartApps: function(){
     var info
 
     var getChildren = ()=>{
@@ -396,34 +403,34 @@ MyApplet.prototype = {
       while ((info = children.next_file(null)) !== null) {
         if (info.get_file_type() === Gio.FileType.REGULAR) {
           var name = info.get_name()
-          var file = Gio.file_new_for_path(`${this.autostartStrDir}/${name}`)
+          var file = Gio.file_new_for_path(this.autostartStrDir + '/' + name)
           this.autostartApps.push({id: name, file: file})
         }
       }
     };
 
-    this.autostartStrDir = `${this.homeDir}/.config/autostart`
+    this.autostartStrDir = this.homeDir + '/.config/autostart'
     var autostartDir = Gio.file_new_for_path(this.autostartStrDir)
 
     if (autostartDir.query_exists(null)) {
       getChildren()
     } else {
-      Util.trySpawnCommandLine(`bash -c "mkdir ${this.autostartStrDir}"`)
+      Util.trySpawnCommandLine('bash -c "mkdir ' + this.autostartStrDir + '"')
       setTimeout(()=>{
         getChildren()
       }, 50)
     }
   },
 
-  removeAutostartApp(autostartIndex){
+  removeAutostartApp: function(autostartIndex){
     _.pullAt(this.autostartApps, autostartIndex)
   },
 
-  execInstallLanguage() {
-    let moPath = `${this.homeDir}/.local/share/cinnamon/applets/${this._uuid}/generate_mo.sh`;
-    let moFile = Gio.file_new_for_path(`${this.homeDir}/.local/share/locale/de/LC_MESSAGES/IcingTaskManager@json.mo`)
+  execInstallLanguage: function() {
+    let moPath = this.homeDir + '/.local/share/cinnamon/applets/' + this._uuid + '/generate_mo.sh';
+    let moFile = Gio.file_new_for_path(this.homeDir + '/.local/share/locale/de/LC_MESSAGES/IcingTaskManager@json.mo')
     if (!moFile.query_exists(null)) {
-      Util.trySpawnCommandLine(`bash -c '${moPath}'`)
+      Util.trySpawnCommandLine('bash -c "' + moPath + '"')
     }
   },
 
@@ -553,7 +560,7 @@ MyApplet.prototype = {
   },
 
   _reloadApp: function () {
-    Util.trySpawnCommandLine(`bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py reload"`)
+    Util.trySpawnCommandLine('bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py reload"')
   },
 
   _clearDragPlaceholder: function () {
@@ -683,8 +690,6 @@ MyApplet.prototype = {
   }
 }
 
-let [metadata, orientation, panel_height, instance_id] = global['IcingTaskManager@json'];
-
-module.exports = (function main(metadata, orientation, panel_height, instance_id) {
+function main(metadata, orientation, panel_height, instance_id) {
   return new MyApplet(metadata, orientation, panel_height, instance_id);
-})(metadata, orientation, panel_height, instance_id)
+}

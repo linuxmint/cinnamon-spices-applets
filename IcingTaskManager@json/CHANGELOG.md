@@ -1,5 +1,10 @@
 Changelog
 
+### 4.5.1
+
+  * Removed extra tooling causing performance issues.
+  * Unified the code so one version of the applet runs on Cinnamon 2.8-3.4.
+
 ### 4.5.0
 
   * Fixed thumbnail sizes becoming incorrect when windows are resized.
