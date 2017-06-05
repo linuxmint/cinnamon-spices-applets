@@ -148,16 +148,21 @@ MyApplet.prototype = {
         }
     },
 
-    update_label_visible: function() {
+    updateLabelVisibility: function() {
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
         if (typeof this.hide_applet_label !== "function")
             return;
 
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
+        } else {
+            if (this.pref_applet_title === "") {
+                this.hide_applet_label(true);
+            } else {
+                this.hide_applet_label(false);
+            }
+        }
     },
 
     on_orientation_changed: function(orientation) {
@@ -428,7 +433,7 @@ MyApplet.prototype = {
             this.set_applet_label("");
         }
 
-        this.update_label_visible();
+        this.updateLabelVisibility();
     },
 
     _expand_applet_context_menu: function() {
