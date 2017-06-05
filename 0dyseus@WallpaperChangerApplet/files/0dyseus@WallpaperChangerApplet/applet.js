@@ -321,19 +321,24 @@ MyApplet.prototype = {
                 this.set_applet_label("");
         }
 
-        this.update_label_visible();
+        this.updateLabelVisibility();
     },
 
-    update_label_visible: function() {
+    updateLabelVisibility: function() {
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
         if (typeof this.hide_applet_label !== "function")
             return;
 
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
+        } else {
+            if (Settings.custom_applet_label === "") {
+                this.hide_applet_label(true);
+            } else {
+                this.hide_applet_label(false);
+            }
+        }
     },
 
     on_applet_removed_from_panel: function() {
