@@ -21,13 +21,10 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
-
-var Gda;
-
 try {
-  Gda = imports.gi.Gda;
+  var Gda = imports.gi.Gda;
 } catch (e) {
-  Gda = null;
+  var Gda = null;
 }
 
 // External imports
@@ -35,12 +32,13 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
 
+// Gjs imports
+const Lang = imports.lang;
+
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['midori']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('midori');
 const _midoriDir = GLib.build_filenamev([GLib.get_user_config_dir(), 'midori']);
-
-var initialized = false;
 
 var _appInfo = null;
 var _bookmarksFile = null;
@@ -94,7 +92,6 @@ function _readBookmarks() {
       uri: uri
     });
   }
-  return bookmarks;
 }
 
 function _reset() {
@@ -110,7 +107,7 @@ function _reset() {
   bookmarks = [];
 }
 
-function init(cb) {
+function init() {
   if (!Gda) {
     return;
   }
@@ -130,16 +127,12 @@ function init(cb) {
     return;
   }
 
-  if (!initialized) {
-    _bookmarksMonitor = _bookmarksFile.monitor_file(
-      Gio.FileMonitorFlags.NONE, null);
-    _callbackId = _bookmarksMonitor.connect('changed', ()=>{
-      cb();
-    });
-  }
+  _bookmarksMonitor = _bookmarksFile.monitor_file(
+    Gio.FileMonitorFlags.NONE, null);
+  _callbackId = _bookmarksMonitor.connect(
+    'changed', Lang.bind(this, _readBookmarks));
 
-  initialized = true;
-  return _readBookmarks();
+  _readBookmarks();
 }
 
 function deinit() {
@@ -153,8 +146,3 @@ function deinit() {
 
   _reset();
 }
-
-module.exports = {
-  init: init,
-  deinit: deinit
-};

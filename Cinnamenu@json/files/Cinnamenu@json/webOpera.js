@@ -26,11 +26,12 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
 
+// Gjs imports
+const Lang = imports.lang;
+
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['opera']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('opera');
-
-var initialized = false;
 
 var _appInfo = null;
 var _bookmarksFile = null;
@@ -88,7 +89,6 @@ function _readBookmarks() {
       }
     }
   }
-  return bookmarks;
 }
 
 function _reset() {
@@ -99,7 +99,7 @@ function _reset() {
   bookmarks = [];
 }
 
-function init(cb) {
+function init() {
   if (!_foundApps || _foundApps.length === 0) {
     return;
   }
@@ -115,16 +115,12 @@ function init(cb) {
     return;
   }
 
-  if (!initialized) {
-    _bookmarksMonitor = _bookmarksFile.monitor_file(
-      Gio.FileMonitorFlags.NONE, null);
-    _callbackId = _bookmarksMonitor.connect('changed', ()=>{
-      cb();
-    });
-  }
+  _bookmarksMonitor = _bookmarksFile.monitor_file(
+    Gio.FileMonitorFlags.NONE, null);
+  _callbackId = _bookmarksMonitor.connect(
+    'changed', Lang.bind(this, _readBookmarks));
 
-  initialized = true;
-  return _readBookmarks();
+  _readBookmarks();
 }
 
 function deinit() {
@@ -138,8 +134,3 @@ function deinit() {
 
   _reset();
 }
-
-module.exports = {
-  init: init,
-  deinit: deinit
-};

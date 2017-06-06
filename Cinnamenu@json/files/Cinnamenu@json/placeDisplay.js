@@ -374,5 +374,3 @@ PlacesManager.prototype = {
   }
 };
 Signals.addSignalMethods(PlacesManager.prototype);
-
-module.exports = PlacesManager;
