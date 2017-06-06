@@ -3,7 +3,7 @@ Changelog
 ### 1.3.1
 
   * Removed extra tooling causing performance issues.
-  * Fixed some Clutter errors occuring when adding/removing favorites.
+  * Fixed some Clutter errors occurring when adding/removing favorites.
 
 ### 1.3.0
 
