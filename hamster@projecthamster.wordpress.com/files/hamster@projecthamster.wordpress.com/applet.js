@@ -408,7 +408,7 @@ HamsterApplet.prototype = {
         activities.destroy_all_children(); // remove previous entries
 
         var i = 0;
-        for each (var fact in facts.reverse()) {
+        for each (fact in facts.reverse()) {
             let label;
 
             label = new St.Label({style_class: 'popup-menu-item'});
@@ -491,7 +491,7 @@ HamsterApplet.prototype = {
 
         let byCategory = {};
         let categories = [];
-        for each (var fact in facts) {
+        for each (fact in facts) {
             byCategory[fact.category] = (byCategory[fact.category] || 0) + fact.delta;
             if (categories.indexOf(fact.category) == -1)
                 categories.push(fact.category);
