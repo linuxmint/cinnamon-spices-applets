@@ -1,0 +1,67 @@
+# Swedish translation for host-entries@hoffis-eck.de.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: host-entries@hoffis-eck.de\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 21:29+0200\n"
+"PO-Revision-Date: 2017-06-06 05:17+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:53
+msgid "Checking status"
+msgstr "Kontrollerar status"
+
+#: applet.js:65
+msgid "Error, could not extract status!"
+msgstr "Fel, kunde inte extrahera status!"
+
+#: applet.js:73
+msgid "Entry is active"
+msgstr "Posten är aktiv"
+
+#: applet.js:76
+msgid "Entry is inactive"
+msgstr "Posten är inaktiv"
+
+#: applet.js:79
+msgid "Entry does not exist"
+msgstr "Posten finns inte"
+
+#: applet.js:82
+msgid "Entry status is unknown"
+msgstr "Postens status är okänd"
+
+#: applet.js:85
+msgid "Error, trying to set unknown status!"
+msgstr "Fel, försöker ange okänd status!"
+
+#: applet.js:113
+msgid "Error, unknown status!"
+msgstr "Fel, okänd status!"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->ip->description
+msgid "IP address"
+msgstr "IP-adress"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->hosts->description
+msgid "hosts"
+msgstr "värdar"
+
+#. host-entries@hoffis-eck.de->metadata.json->description
+msgid "Enables/Disables Entries in /etc/hosts"
+msgstr "Aktiverar/Avaktiverar poster i /etc/hosts"
+
+#. host-entries@hoffis-eck.de->metadata.json->name
+msgid "Host Entries"
+msgstr "Värdposter"
