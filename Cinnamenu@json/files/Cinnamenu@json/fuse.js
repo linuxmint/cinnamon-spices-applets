@@ -804,5 +804,3 @@ BitapSearcher.prototype._getMatchedIndices = function (matchMask) {
   }
   return matchedIndices
 }
-
-module.exports = Fuse;

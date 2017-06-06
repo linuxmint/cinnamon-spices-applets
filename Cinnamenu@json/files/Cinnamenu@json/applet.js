@@ -1,201 +1,440 @@
+/* ========================================================================================================
+ * applet.js - Cinnamenu extension
+ * --------------------------------------------------------------------------------------------------------
+ *  CREDITS:
+ *  Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
+ *  Ported to Cinnamon by Jason Hicks.
+ *  A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks
+ *  to those developers for their great extensions and laying the foundation for Cinnamenu.
+ *
+ *  Some parts of this code also come from:
+ *  gnome-shell-extensions -  http://git.gnome.org/browse/gnome-shell-extensions/
+ *  places status indicator extension - http://git.gnome.org/gnome-shell-extensions
+ *  recent items extension - http://www.bananenfisch.net/gnome
+ *  applications menu extension - https://extensions.gnome.org/extension/6/applications-menu/
+ *  search bookmarks extension - https://extensions.gnome.org/extension/557/search-bookmarks/
+ * ========================================================================================================
+ */
+const Main = imports.ui.main;
+const IconTheme = imports.gi.Gtk.IconTheme;
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
+const St = imports.gi.St;
+const Cinnamon = imports.gi.Cinnamon;
+const Mainloop = imports.mainloop;
+const Lang = imports.lang;
+const AppFavorites = imports.ui.appFavorites;
+const PopupMenu = imports.ui.popupMenu;
+const Util = imports.misc.util;
 const Applet = imports.ui.applet;
+const Settings = imports.ui.settings;
 
-// If this is true, it will force all modules to reload when an xlet is restarted.
-window.__DEBUG = false;
+const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
-function main(metadata, orientation, panel_height, instance_id) {
-  global[metadata.uuid] = [metadata, orientation, panel_height, instance_id];
+// l10n
+const Gettext = imports.gettext;
+const UUID = 'Cinnamenu@json';
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
-  const runtime = Function;
-  const replace = String.prototype.replace;
-
-  // folders bootstrap
-  const ENTRY_FILE = './__applet.js';
-  const CURRENT_DIR = metadata.path;
-  const DIR_SEPARATOR = /\//.test(CURRENT_DIR) ? '/' : '\\';
-  const PROGRAM_NAME = 'applet.js';
-  const PROGRAM_DIR = CURRENT_DIR;
-
-  window.ARGV = [metadata.path];
-
-  // Check the env and load the applet if requireWithPath is available. This prevents us from reloading and overwriting
-  // globals after an applet has already loaded Cinnode.
-  if (typeof requireWithPath !== 'undefined') {
-    let applet = requireWithPath(ENTRY_FILE, CURRENT_DIR);
-    return applet;
+function _(str) {
+  let cinnamonTranslation = Gettext.gettext(str);
+  if (cinnamonTranslation !== str) {
+    return cinnamonTranslation;
   }
+  return Gettext.dgettext(UUID, str);
+}
 
-  // inject the cinnode folder to import at runtime internal helpers
-  imports.searchPath.push([PROGRAM_DIR, 'cinnode_modules'].join(DIR_SEPARATOR));
+const CinnamenuPanel = AppletDir.panel.CinnamenuPanel;
 
-  // populate the constants file
-  Object.defineProperties(
-    imports.cinnode.constants, {
-      ENTRY_FILE: {
-        enumerable: true,
-        value: ENTRY_FILE
-      },
-      CURRENT_DIR: {
-        enumerable: true,
-        value: CURRENT_DIR
-      },
-      DEBUG: {
-        enumerable: true,
-        value: ARGV.some(arg => arg === '--debug')
-      },
-      DIR_SEPARATOR: {
-        enumerable: true,
-        value: DIR_SEPARATOR
-      },
-      PROGRAM_NAME: {
-        enumerable: true,
-        value: PROGRAM_NAME
-      },
-      PROGRAM_DIR: {
-        enumerable: true,
-        value: PROGRAM_DIR
-      },
-      TRANSFORM: {
-        enumerable: true,
-        value: typeof Symbol === 'undefined'
-      }
+const PRIVACY_SCHEMA = 'org.cinnamon.desktop.privacy';
+const REMEMBER_RECENT_KEY = 'remember-recent-files';
+
+
+/* =========================================================================
+/* name:    CinnamenuButton
+ * @desc    The main panel object that holds view/apps/menu buttons
+ * ========================================================================= */
+
+function CinnamenuButton(metadata, orientation, panel_height, instance_id) {
+  this._init(metadata, orientation, panel_height, instance_id)
+}
+
+CinnamenuButton.prototype = {
+  __proto__: Applet.TextIconApplet.prototype,
+
+  _init: function(metadata, orientation, panel_height, instance_id) {
+    Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    this.orientation = orientation;
+    this._uuid = metadata.uuid;
+    this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
+
+    this._appletEnterEventId = 0;
+    this._appletLeaveEventId = 0;
+    this._appletHoverDelayId = 0;
+
+    this.appSystem = Cinnamon.AppSystem.get_default();
+    this.appFavorites = AppFavorites.getAppFavorites();
+
+    this.privacy_settings = new Gio.Settings({
+      schema_id: PRIVACY_SCHEMA
+    });
+    this.privacy_settings.connect('changed::' + REMEMBER_RECENT_KEY, Lang.bind(this, this.refresh));
+
+    // Bind Preference Settings
+    this._bindSettingsChanges();
+
+    this._updateActivateOnHover();
+
+    this._updateKeybinding();
+
+    Main.themeManager.connect('theme-set', Lang.bind(this, this._updateIconAndLabel));
+    this._updateIconAndLabel();
+
+    // Connect gtk icontheme for when icons change
+    this._iconsChangedId = IconTheme.get_default().connect('changed', Lang.bind(this, this._onIconsChanged));
+
+    // Connect to AppSys for when new application installed
+    this._installedChangedId = this.appSystem.connect('installed-changed', Lang.bind(this, this._onAppInstalledChanged));
+
+    // Connect to AppFavorites for when favorites change
+    this._favoritesChangedId = this.appFavorites.connect('changed', Lang.bind(this, this._onFavoritesChanged));
+
+    this._setHotSpotTimeoutId = 0;
+    this._display();
+  },
+
+  update_label_visible: function() {
+    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+      this.hide_applet_label(true);
+    } else {
+      this.hide_applet_label(false);
     }
-  );
+  },
 
-  // module handler
-  window.evaluateModule = function (sanitize, nmsp, unique, id, fd) {
-    const
-      dir = id.slice(0, -1 - fd.get_basename().length),
-      exports = {},
-      module = {
-        exports: exports,
-        id: id
-      },
-      content = (sanitize ? transform : String)(
-        replace.call(fd.load_contents(null)[1], /^#![^\n\r]*/, '')
-      );
-    // sanitize && print(transform(content));
-    nmsp[unique] = exports;
-    runtime(
-      'require',
-      'exports',
-      'module',
-      '__dirname',
-      '__filename',
-      content
-    ).call(
-      exports,
-      function require(module) {
-        return requireWithPath(module, dir);
-      },
-      exports,
-      module,
-      dir,
-      id
-    );
-    return (nmsp[unique] = module.exports);
-  }
+  on_orientation_changed: function(orientation) {
+    this.orientation = orientation;
 
-  // bring in polyfills and all modules loaders + process and timers
-  window.polyfills = imports.cinnode.polyfills;
-  const mainloop = imports.cinnode.mainloop;
-  window.__gi = imports.cinnode.gi_modules.withRuntime();
-  window.core = imports.cinnode.core_modules.withRuntime(evaluateModule);
-  window.modules = imports.cinnode.node_modules.withRuntime(evaluateModule);
-  window.Babel = imports.cinnode.babelMin.Babel;
-  window.BabelOptions = {
-    plugins: [
-      'transform-decorators-legacy',
-      'transform-class-properties',
-      'transform-flow-strip-types',
-      'transform-es2015-classes',
-      'transform-es2015-literals',
-      'transform-es2015-object-super',
-      'transform-es2015-parameters',
-      'transform-es2015-shorthand-properties',
-      'transform-es2015-unicode-regex',
-      'transform-exponentiation-operator',
-      'transform-es2015-template-literals'
-    ],
-    moduleIds: true,
-    compact: false
-  };
+    this.update_label_visible();
 
-  if (typeof window.Promise === 'undefined') {
-    global.Promise = imports.cinnode.promise.ES6Promise.Promise;
-    window.Promise = global.Promise;
-  }
+    this.cinnamenuPanel.menu.destroy();
+    this.refresh();
+    this._updateIconAndLabel();
+  },
 
-  global.GObjectProperties = imports.cinnode.extended.GObjectProperties;
-  window.GObjectProperties = global.GObjectProperties;
+  on_applet_removed_from_panel: function() {
+    Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id)
+  },
 
-  global.require = function require(module) {
-    return requireWithPath(module, CURRENT_DIR);
-  }
-  window.require = global.require;
+  on_applet_clicked: function(event) {
+    this.menu.toggle_with_options(this.enableAnimation);
+  },
 
-  global.loadedModules = [];
-  global.redundantModules = 0;
+  _launch_editor: function () {
+    Util.spawnCommandLine('cinnamon-menu-editor');
+  },
 
-  // the actual require
-  window.requireWithPath = function (module, dir) {
+  _updateKeybinding: function() {
+    Main.keybindingManager.addHotKey('overlay-key-' + this.instance_id, this.overlayKey, Lang.bind(this, function() {
+      if (!Main.overview.visible && !Main.expo.visible) {
+        this.menu.toggle_with_options(this.enableAnimation);
+      }
+    }));
+  },
+
+  _updateIconAndLabel: function() {
     try {
-      switch (true) {
-      case core.has(module):
-        return core.get(module);
-      case __gi.has(module):
-        return __gi.get(module);
-      default:
-        return modules.get(module) || modules.load(module, dir);
+      if (this.menuIconCustom) {
+        if (this.menuIcon === '') {
+          this.set_applet_icon_name('');
+        } else if (GLib.path_is_absolute(this.menuIcon) && GLib.file_test(this.menuIcon, GLib.FileTest.EXISTS)) {
+          if (this.menuIcon.search('-symbolic') !== -1) {
+            this.set_applet_icon_symbolic_path(this.menuIcon);
+          } else {
+            this.set_applet_icon_path(this.menuIcon);
+          }
+        } else if (Gtk.IconTheme.get_default().has_icon(this.menuIcon)) {
+          if (this.menuIcon.search('-symbolic') !== -1) {
+            this.set_applet_icon_symbolic_name(this.menuIcon);
+          } else {
+            this.set_applet_icon_name(this.menuIcon);
+          }
+        }
+      } else {
+        this._set_default_menu_icon();
       }
     } catch (e) {
-      if (!e.stack) {
-        e.stack = '';
-      }
-      let moduleName = module.indexOf('/') !== -1 ? module.split('/')[1] : module;
-      let stack = e.stack.split('\n');
-      stack = [String(e)].concat(stack);
-      for (let i = 0, len = stack.length; i < len; i++) {
-        if (i === 0) {
-          continue;
-        }
-        stack[i] = '    ' + stack[i].replace(/Function/g, moduleName).replace(/anonymous/g, '<anonymous>').replace(/@\//g, ' @ /');
-      }
-      e.stack = stack.join('\n');
-      console.log(e.stack)
+      global.logWarning('Could not load icon file ' + this.menuIcon + ' for menu button');
     }
+
+    if (this.menuIconCustom && this.menuIcon === '') {
+      this._applet_icon_box.hide();
+    } else {
+      this._applet_icon_box.show();
+    }
+
+    if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
+      this.set_applet_label('');
+    } else {
+      if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
+        this.set_applet_label(this.menuLabel); // TBD
+        this.set_applet_tooltip(this.menuLabel);
+      } else {
+        this.set_applet_label('');
+      }
+    }
+  },
+
+  _set_default_menu_icon: function() {
+    let path = global.datadir + '/theme/menu.svg';
+    if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
+      this.set_applet_icon_path(path);
+      return;
+    }
+
+    path = global.datadir + '/theme/menu-symbolic.svg';
+    if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
+      this.set_applet_icon_symbolic_path(path);
+      return;
+    }
+    /* If all else fails, this will yield no icon */
+    this.set_applet_icon_path('');
+  },
+
+  refresh: function() {
+    this._clearAll();
+    this._display();
+  },
+
+  _clearAll: function() {
+    if (this.cinnamenuPanel) {
+      this.actor.remove_actor(this.cinnamenuPanel.actor);
+    }
+
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.destroy();
+    }
+    this.cinnamenuPanel = null;
+  },
+
+  _display: function() {
+    // Initialize apps menu button
+    this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
+    this.menuManager.addMenu(this.menu);
+    this.menu.setCustomStyleClass('menu-background');
+    this.cinnamenuPanel = new CinnamenuPanel(this);
+  },
+
+  openMenu: function() {
+    if (!this._applet_context_menu.isOpen) {
+      this.menu.open(this.enableAnimation);
+    }
+  },
+
+  _clearDelayCallbacks: function() {
+    if (this._appletHoverDelayId > 0) {
+      Mainloop.source_remove(this._appletHoverDelayId);
+      this._appletHoverDelayId = 0;
+    }
+    if (this._appletLeaveEventId > 0) {
+      this.actor.disconnect(this._appletLeaveEventId);
+      this._appletLeaveEventId = 0;
+    }
+
+    return false;
+  },
+
+  _updateActivateOnHover: function() {
+    if (this._appletEnterEventId > 0) {
+      this.actor.disconnect(this._appletEnterEventId);
+      this._appletEnterEventId = 0;
+    }
+
+    this._clearDelayCallbacks();
+
+    if (this.activateOnHover) {
+      this._appletEnterEventId = this.actor.connect('enter-event', Lang.bind(this, function() {
+        if (this.hover_delay_ms > 0) {
+          this._appletLeaveEventId = this.actor.connect('leave-event', Lang.bind(this, this._clearDelayCallbacks));
+          this._appletHoverDelayId = Mainloop.timeout_add(this.hover_delay_ms,
+            Lang.bind(this, function() {
+              this.openMenu();
+              this._clearDelayCallbacks();
+            }));
+        } else {
+          this.openMenu();
+        }
+      }));
+    }
+  },
+
+  // handler for when new application installed
+  _onAppInstalledChanged: function() {
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.refresh();
+    }
+  },
+
+  // handler for when favorites change
+  _onFavoritesChanged: function() {
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel._selectFavorites(this.cinnamenuPanel._currentCategoryButton, true);
+    }
+  },
+
+  // handler for when icons change
+  _onIconsChanged: function() {
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.refresh();
+    }
+  },
+
+  // function to bind preference setting changes
+  _bindSettingsChanges: function() {
+    var settingsProps = [{
+        key: 'menu-icon-custom',
+        value: 'menuIconCustom',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'menu-icon',
+        value: 'menuIcon',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'activate-on-hover',
+        value: 'activateOnHover',
+        cb: this._updateActivateOnHover
+      },
+      {
+        key: 'hover-delay',
+        value: 'hover_delay_ms',
+        cb: this._updateActivateOnHover
+      },
+      {
+        key: 'overlay-key',
+        value: 'overlayKey',
+        cb: this._updateKeybinding
+      },
+      {
+        key: 'enable-animation',
+        value: 'enableAnimation',
+        cb: null
+      },
+      {
+        key: 'enable-autoscroll',
+        value: 'enableAutoScroll',
+        cb: null
+      },
+      {
+        key: 'enable-bookmarks',
+        value: 'enableBookmarks',
+        cb: Lang.bind(this, function() {
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
+          }
+        })
+      },
+      {
+        key: 'menu-label',
+        value: 'menuLabel',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'startup-view-mode',
+        value: 'startupViewMode',
+        cb: null
+      },
+      {
+        key: 'apps-grid-column-count',
+        value: 'appsGridColumnCount',
+        cb: Lang.bind(this, function() {
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
+          }
+        })
+      },
+      {
+        key: 'category-icon-size',
+        value: 'categoryIconSize',
+        cb: Lang.bind(this, function() {
+          if (this.cinnamenuPanel) {
+            this.cinnamenuPanel.refresh();
+          }
+        })
+      },
+      {
+        key: 'apps-list-icon-size',
+        value: 'appsListIconSize',
+        cb: null
+      },
+      {
+        key: 'apps-grid-icon-size',
+        value: 'appsGridIconSize',
+        cb: null
+      },
+      {
+        key: 'apps-grid-icon-scale',
+        value: 'appsGridIconScale',
+        cb: null
+      },
+      {
+        key: 'apps-grid-label-width',
+        value: 'appsGridLabelWidth',
+        cb: null
+      },
+    ]
+
+    for (let i = 0, len = settingsProps.length; i < len; i++) {
+      this.settings.bind(settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb);
+    }
+  },
+
+  // function to destroy CinnamenuButton
+  destroy: function() {
+    // Disconnect global signals
+    if (this._installedChangedId) {
+      this.appSystem.disconnect(this._installedChangedId);
+    }
+
+    if (this._favoritesChangedId) {
+      AppFavorites.getAppFavorites().disconnect(this._favoritesChangedId);
+    }
+
+    if (this._iconsChangedId) {
+      IconTheme.get_default().disconnect(this._iconsChangedId);
+    }
+
+    if (this._themeChangedId) {
+      St.ThemeContext.get_for_stage(global.stage).disconnect(this._themeChangedId);
+    }
+
+    if (this._overviewShownId) {
+      Main.overview.disconnect(this._overviewShownId);
+    }
+
+    if (this._overviewHiddenId) {
+      Main.overview.disconnect(this._overviewHiddenId);
+    }
+
+    if (this._overviewPageChangedId) {
+      Main.overview.disconnect(this._overviewPageChangedId);
+    }
+
+    // Destroy main clutter actor: this should be sufficient
+    // From clutter documentation:
+    // If the actor is inside a container, the actor will be removed.
+    // When you destroy a container, its children will be destroyed as well.
+    this.cinnamenuPanel.destroy();
+    this.menu.destroy();
+    this.actor.destroy();
+    this.emit('destroy');
   }
 
-  // makes most ES6 compatible with GJS
-  window.transform = function (code) {
-    BabelOptions.filename = global.lastModule;
-    let transpile = Babel.transform(code, BabelOptions);
-    return transpile.code;
-  }
+};
 
-  // initialize basic global modules
-  ARGV.core = core;
-  window.process = core.get('process');
-  window.timers = core.get('timers');
-  window.console = core.get('console');
-
-  delete ARGV.core;
-  window.clearInterval = global.clearInterval;
-  window.clearTimeout = global.clearTimeout;
-  window.setInterval = global.setInterval;
-  window.setTimeout = global.setTimeout;
-
-  /*
-  The actual applet is required through the importer, processed by Babel, and returned here.
-
-  In the applet's main JS file (i.e. __applet.js), the main function should look like this:
-
-  let [metadata, orientation, panel_height, instance_id] =  global['applet@author'];
-
-  module.exports = (function main(metadata, orientation, panel_height, instance_id) {
-    return new MyApplet(metadata, orientation, panel_height, instance_id);
-  })(metadata, orientation, panel_height, instance_id)
-  */
-  let applet = requireWithPath(ENTRY_FILE, CURRENT_DIR);
-  return applet;
+function main(metadata, orientation, panel_height, instance_id) {
+  return new CinnamenuButton(metadata, orientation, panel_height, instance_id);
 }

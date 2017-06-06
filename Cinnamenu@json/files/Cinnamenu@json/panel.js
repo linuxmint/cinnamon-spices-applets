@@ -14,17 +14,19 @@ const ScreenSaver = imports.misc.screenSaver;
 const Signals = imports.signals;
 const PopupMenu = imports.ui.popupMenu;
 
-const Chromium = require('./webChromium');
-const Firefox = require('./webFirefox');
-const GoogleChrome = require('./webGoogleChrome');
-const Midori = require('./webMidori');
-const Opera = require('./webOpera');
-const PlaceDisplay = require('./placeDisplay');
-const buttons = require('./buttons');
-const CategoryListButton = buttons.CategoryListButton;
-const AppListGridButton = buttons.AppListGridButton;
-const GroupButton = buttons.GroupButton;
-const Fuse = require('./fuse');
+const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
+
+const Chromium = AppletDir.webChromium;
+const Firefox = AppletDir.webFirefox;
+const GoogleChrome = AppletDir.webGoogleChrome;
+const Midori = AppletDir.webMidori;
+const Opera = AppletDir.webOpera;
+const PlaceDisplay = AppletDir.placeDisplay;
+const SearchWebBookmarks = AppletDir.buttons.SearchWebBookmarks;
+const CategoryListButton = AppletDir.buttons.CategoryListButton;
+const AppListGridButton = AppletDir.buttons.AppListGridButton;
+const GroupButton = AppletDir.buttons.GroupButton;
+const Fuse = AppletDir.fuse.Fuse;
 
 // l10n
 const Gettext = imports.gettext;
@@ -113,7 +115,6 @@ CinnamenuPanel.prototype = {
     this._applications = [];
     this._places = [];
     this._recent = [];
-    this.answer = '';
 
     this._applicationsViewMode = this._applet.startupViewMode;
     this._appGridColumns = this._applet.appsGridColumnCount;
@@ -126,6 +127,7 @@ CinnamenuPanel.prototype = {
     this.menuIsOpen = null;
     this._isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
 
+    this._searchWebBookmarks = new SearchWebBookmarks();
     this._searchWebErrorsShown = false;
     this._session = new GnomeSession.SessionManager();
     this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
@@ -133,36 +135,10 @@ CinnamenuPanel.prototype = {
     this.placesManager = null;
     this._displayed = false;
     this.menuHeight = 530;
-    this.fetchBookmarks();
   },
 
   on_panel_edit_mode_changed: function() {
     this.actor.reactive = !global.settings.get_boolean('panel-edit-mode')
-  },
-
-  fetchBookmarks: function() {
-    this.bookmarks = [];
-    let bookmarks = [];
-
-    bookmarks = bookmarks.concat(Chromium.init(this.fetchBookmarks));
-    bookmarks = bookmarks.concat(GoogleChrome.init(this.fetchBookmarks));
-    bookmarks = bookmarks.concat(Firefox.init(this.fetchBookmarks));
-    bookmarks = bookmarks.concat(Midori.init(this.fetchBookmarks));
-    bookmarks = bookmarks.concat(Opera.init(this.fetchBookmarks));
-
-    for (let i = 0, len = bookmarks.length; i < len; i++) {
-      if (!bookmarks[i]) {
-        continue;
-      }
-      this.bookmarks.push({
-        app: bookmarks[i].appInfo,
-        name: bookmarks[i].name,
-        icon: bookmarks[i].appInfo.get_icon(),
-        mime: null,
-        uri: bookmarks[i].uri,
-        type: ApplicationType._places
-      });
-    }
   },
 
   introspectTheme: function(cb) {
@@ -272,7 +248,7 @@ CinnamenuPanel.prototype = {
     var rootDir = root;
     var iter = dir.iter();
     var nextType;
-    while ((nextType = iter.next()) != CMenu.TreeItemType.INVALID) {
+    while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
       if (nextType === CMenu.TreeItemType.ENTRY) {
         var entry = iter.get_entry();
         if (!entry.get_app_info().get_nodisplay()) {
@@ -305,7 +281,7 @@ CinnamenuPanel.prototype = {
     this._clearApplicationsBox(button, refresh);
 
     let category = button._dir;
-    if (typeof category === 'string') {
+    if (typeof category == 'string') {
       this._displayApplications(this._listApplications(category), refresh);
     } else {
       this._displayApplications(this._listApplications(category.get_menu_id()), refresh);
@@ -315,10 +291,16 @@ CinnamenuPanel.prototype = {
     // not showing the app list.
 
     this._currentSelectKey = '_selectCategory';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
   _selectFavorites: function(button, refresh) {
+    if (!button) {
+      button = this._previousCategoryButton;
+    }
     if (button._dir === 'favorites') {
       this._selectCategory(this.favAppCategory);
     }
@@ -335,6 +317,9 @@ CinnamenuPanel.prototype = {
 
     if (!refresh) {
       this._currentSelectKey = '_selectFavorites';
+      if (this._currentCategoryButton) {
+        this._previousCategoryButton = this._currentCategoryButton;
+      }
       this._currentCategoryButton = button;
     } else {
       this[this._currentSelectKey](this._currentCategoryButton);
@@ -352,6 +337,9 @@ CinnamenuPanel.prototype = {
     let allPlaces = places.concat(bookmarks.concat(devices));
     this._displayApplications(allPlaces);
     this._currentSelectKey = '_selectAllPlaces';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
@@ -362,6 +350,9 @@ CinnamenuPanel.prototype = {
     let bookmarks = this._listBookmarks();
     this._displayApplications(bookmarks);
     this._currentSelectKey = '_selectBookmarks';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
@@ -372,6 +363,9 @@ CinnamenuPanel.prototype = {
     let devices = this._listDevices();
     this._displayApplications(devices);
     this._currentSelectKey = '_selectDevices';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
@@ -382,6 +376,9 @@ CinnamenuPanel.prototype = {
     let recent = this._listRecent();
     this._displayApplications(recent);
     this._currentSelectKey = '_selectRecent';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
@@ -392,6 +389,9 @@ CinnamenuPanel.prototype = {
     let webBookmarks = this._listWebBookmarks();
     this._displayApplications(webBookmarks);
     this._currentSelectKey = '_selectWebBookmarks';
+    if (this._currentCategoryButton) {
+      this._previousCategoryButton = this._currentCategoryButton;
+    }
     this._currentCategoryButton = button;
   },
 
@@ -408,7 +408,7 @@ CinnamenuPanel.prototype = {
     }
 
     // switch activeContainer and reset _selectedItemIndex for keyboard navigation
-    if (this._activeContainer === this.applicationsListBox || this._activeContainer === this.applicationsGridBox) {
+    if (this._activeContainer == this.applicationsListBox || this._activeContainer == this.applicationsGridBox) {
 
       // reset active container
       this._activeContainer = (mode === 0) ? this.applicationsListBox : this.applicationsGridBox;
@@ -429,7 +429,7 @@ CinnamenuPanel.prototype = {
     if (categoryActors) {
       for (let i = 0, len = categoryActors.length; i < len; i++) {
         let actor = categoryActors[i];
-        if (selectedCategory && (actor === selectedCategory.actor)) {
+        if (selectedCategory && (actor == selectedCategory.actor)) {
           actor.add_style_class_name('popup-sub-menu');
           if (this._style1) {
             actor.set_style(this._style1);
@@ -450,7 +450,7 @@ CinnamenuPanel.prototype = {
       return;
     }
 
-    if (selectedBox !== this.searchBox && resetSearch) {
+    if (selectedBox != this.searchBox && resetSearch) {
       this.resetSearch();
     }
   },
@@ -467,7 +467,7 @@ CinnamenuPanel.prototype = {
 
     this._activeContainer.get_children().forEach(function(actor) {
       if (selectedContainerActor) {
-        if (selectedContainerActor && (actor === selectedContainerActor)) {
+        if (selectedContainerActor && (actor == selectedContainerActor)) {
           actor.add_style_class_name('selected');
           if (actor._delegate && actor._delegate.select) {
             actor._delegate.select();
@@ -504,7 +504,7 @@ CinnamenuPanel.prototype = {
     }
   },
 
-  _clearApplicationsBox: function(selectedCategory, refresh) {
+  _clearApplicationsBox: function() {
     if (this.applicationsListBox !== undefined) {
       let listActors = this.applicationsListBox.get_children();
       if (listActors) {
@@ -575,7 +575,25 @@ CinnamenuPanel.prototype = {
     }
     this._searchWebErrorsShown = true;
 
-    let res = this.bookmarks;
+    let res = [];
+    let bookmarks = [];
+
+    bookmarks = bookmarks.concat(Chromium.bookmarks);
+    bookmarks = bookmarks.concat(GoogleChrome.bookmarks);
+    bookmarks = bookmarks.concat(Firefox.bookmarks);
+    bookmarks = bookmarks.concat(Midori.bookmarks);
+    bookmarks = bookmarks.concat(Opera.bookmarks);
+
+    for (let i = 0, len = bookmarks.length; i < len; i++) {
+      res.push({
+        app: bookmarks[i].appInfo,
+        name: bookmarks[i].name,
+        icon: bookmarks[i].appInfo.get_icon(),
+        mime: null,
+        uri: bookmarks[i].uri,
+        type: ApplicationType._places
+      });
+    }
 
     // Create a unique list of bookmarks across all browsers.
     let arr = {};
@@ -592,10 +610,13 @@ CinnamenuPanel.prototype = {
     if (pattern) {
       let query = new Fuse(res, {
         keys: [{
+          name: 'app',
+          weight: 0.6
+        }, {
           name: 'uri',
           weight: 0.4
         }],
-        threshold: 0.4,
+        thresholod: 0.4,
         include: ['score']
       });
 
@@ -650,7 +671,7 @@ CinnamenuPanel.prototype = {
           name: 'uri',
           weight: 0.4
         }],
-        threshold: 0.4,
+        thresholod: 0.4,
         include: ['score']
       });
 
@@ -705,7 +726,7 @@ CinnamenuPanel.prototype = {
           name: 'id',
           weight: 0.1
         }],
-        threshold: 0.2,
+        thresholod: 0.2,
         include: ['score']
       });
       res = query.search(pattern);
@@ -743,12 +764,6 @@ CinnamenuPanel.prototype = {
       right: 0
     };
     let searchBoxBorder = {
-      left: 0,
-      top: 0,
-      bottom: 0,
-      right: 0
-    };
-    let searchBoxPadding = {
       left: 0,
       top: 0,
       bottom: 0,
@@ -1013,6 +1028,9 @@ CinnamenuPanel.prototype = {
         appButton.icon.realize();
       } else { // GridView
         let gridLayout = this.applicationsGridBox.layout_manager;
+        if (!gridLayout) {
+          return false;
+        }
         gridLayout.pack(appButton.actor, column, rownum);
         appButton.icon.realize();
         column++;
@@ -1029,11 +1047,12 @@ CinnamenuPanel.prototype = {
     }
 
     for (let z = 0, len = appList.length; z < len; z++) {
-      if (appList[z] === undefined) {
+      let app = appList[z];
+      if (!app) {
         continue;
       }
 
-      let appType = appList[z].type;
+      let appType = app.type;
       if (appType === undefined) {
         appType = ApplicationType._applications;
       }
@@ -1050,7 +1069,6 @@ CinnamenuPanel.prototype = {
 
         ++appIndex;
 
-        let app = appList[z];
         if (refresh || !this._applications[app]) {
           createAppButton(app, appType, len);
         }
@@ -1063,7 +1081,7 @@ CinnamenuPanel.prototype = {
 
   _scrollToActiveContainerButton: function(buttonActor) {
     let sBox;
-    if (this._activeContainer === this.applicationsListBox || this._activeContainer === this.applicationsGridBox) {
+    if (this._activeContainer == this.applicationsListBox || this._activeContainer == this.applicationsGridBox) {
       sBox = this.applicationsScrollBox;
     } else {
       return;
@@ -1082,7 +1100,7 @@ CinnamenuPanel.prototype = {
     if (box_height + current_scroll_value < buttonBox.y2 + 20) {
       new_scroll_value = buttonBox.y2 - box_height + 20;
     }
-    if (new_scroll_value !== current_scroll_value) {
+    if (new_scroll_value != current_scroll_value) {
       vscroll.get_adjustment().set_value(new_scroll_value);
     }
   },
@@ -1095,12 +1113,12 @@ CinnamenuPanel.prototype = {
     let viewMode = this._applicationsViewMode;
 
     let reverse;
-    if (code === 23 && shift) {
+    if (code == 23 && shift) {
       reverse = true;
     }
 
     // Tab navigation
-    if (code === 23) {
+    if (code == 23) {
       if (this._activeContainer) {
         this._clearActiveContainerSelections();
       }
@@ -1116,7 +1134,7 @@ CinnamenuPanel.prototype = {
           if (reverse) {
             this._activeContainer = this.viewModeBox;
           } else {
-            this._activeContainer = (viewMode === ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
+            this._activeContainer = (viewMode == ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
           }
           break;
         case this.applicationsListBox:
@@ -1135,7 +1153,7 @@ CinnamenuPanel.prototype = {
           break;
         case this.powerGroupBox:
           if (reverse) {
-            this._activeContainer = (viewMode === ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
+            this._activeContainer = (viewMode == ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
           } else {
             this._activeContainer = this.categoriesBox;
           }
@@ -1153,10 +1171,10 @@ CinnamenuPanel.prototype = {
     }
 
     // Set initial active container (default is this.applicationsListBox or this.applicationsGridBox)
-    if (this._activeContainer === null && (symbol === Clutter.KEY_Up || symbol === Clutter.KEY_Down)) {
-      this._activeContainer = (viewMode === ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
-    } else if (this._activeContainer === null && (symbol === Clutter.KEY_Left || symbol === Clutter.KEY_Right)) {
-      this._activeContainer = (viewMode === ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
+    if (this._activeContainer === null && (symbol == Clutter.KEY_Up || symbol == Clutter.KEY_Down)) {
+      this._activeContainer = (viewMode == ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
+    } else if (this._activeContainer === null && (symbol == Clutter.KEY_Left || symbol == Clutter.KEY_Right)) {
+      this._activeContainer = (viewMode == ApplicationsViewMode.LIST) ? this.applicationsListBox : this.applicationsGridBox;
     } else if (this._activeContainer === null) {
       return false;
     }
@@ -1170,6 +1188,7 @@ CinnamenuPanel.prototype = {
   },
 
   selectActiveContainerItem: function(symbol, code, isFromSearch) {
+    // Todo: this is old code grom Gnomenu, and needs to be cleaned up.
     // Any items in container?
     let children = [];
     let columns, row;
@@ -1185,11 +1204,11 @@ CinnamenuPanel.prototype = {
     this._previousSelectedItemIndex = this._selectedItemIndex;
 
     // Navigate the active container
-    if (symbol && symbol === Clutter.KEY_Up) {
+    if (symbol && symbol == Clutter.KEY_Up) {
       if (!this._selectedItemIndex || this._selectedItemIndex < 0) {
         index = 0;
       } else if (this._selectedItemInde && this._selectedItemIndex > -1) {
-        if (this._activeContainer === this.applicationsGridBox) {
+        if (this._activeContainer == this.applicationsGridBox) {
           columns = this._appGridColumns;
           index = (this._selectedItemIndex - columns < 0) ? this._selectedItemIndex : this._selectedItemIndex -
             columns;
@@ -1197,23 +1216,23 @@ CinnamenuPanel.prototype = {
           index = (this._selectedItemIndex - 1 < 0) ? this._selectedItemIndex : this._selectedItemIndex - 1;
         }
       }
-    } else if (symbol && symbol === Clutter.KEY_Down) {
+    } else if (symbol && symbol == Clutter.KEY_Down) {
       if (!this._selectedItemIndex || this._selectedItemIndex < 0) {
         index = 0;
       } else {
-        if (this._activeContainer === this.applicationsGridBox) {
+        if (this._activeContainer == this.applicationsGridBox) {
           columns = this._appGridColumns;
           index = (this._selectedItemIndex + columns >= children.length) ? this._selectedItemIndex : this._selectedItemIndex +
             columns;
         } else {
-          index = (this._selectedItemIndex + 1 === children.length) ? children.length : this._selectedItemIndex + 1;
+          index = (this._selectedItemIndex + 1 == children.length) ? children.length : this._selectedItemIndex + 1;
         }
       }
-    } else if (symbol && symbol === Clutter.KEY_Left) {
+    } else if (symbol && symbol == Clutter.KEY_Left) {
       if (!this._selectedItemIndex || this._selectedItemIndex < 0) {
         index = 0;
       } else if (this._selectedItemIndex && this._selectedItemIndex > 0) {
-        if (this._activeContainer === this.applicationsGridBox) {
+        if (this._activeContainer == this.applicationsGridBox) {
           columns = this._appGridColumns;
           row = Math.floor(this._selectedItemIndex / columns);
           var firstCol = (row * columns);
@@ -1222,42 +1241,41 @@ CinnamenuPanel.prototype = {
           index = (this._selectedItemIndex - 1 < 0) ? this._selectedItemIndex : this._selectedItemIndex - 1;
         }
       }
-    } else if (symbol && symbol === Clutter.KEY_Right) {
+    } else if (symbol && symbol == Clutter.KEY_Right) {
       if (!this._selectedItemIndex || this._selectedItemIndex < 0) {
         index = 0;
       } else {
-        if (this._activeContainer === this.applicationsGridBox) {
+        if (this._activeContainer == this.applicationsGridBox) {
           columns = this._appGridColumns;
           row = Math.floor(this._selectedItemIndex / columns);
           var lastCol = (row * columns) + columns;
           lastCol = (lastCol > children.length) ? children.length : lastCol;
           index = (this._selectedItemIndex + 1 >= lastCol) ? index : this._selectedItemIndex + 1;
         } else {
-          index = (this._selectedItemIndex + 1 === children.length) ? children.length : this._selectedItemIndex + 1;
+          index = (this._selectedItemIndex + 1 == children.length) ? children.length : this._selectedItemIndex + 1;
         }
       }
-    } else if (symbol && symbol === Clutter.KEY_Return || symbol === Clutter.KP_Enter) {
-      if (this._activeContainer === this.applicationsListBox || this._activeContainer === this.applicationsGridBox) {
+    } else if (symbol && symbol == Clutter.KEY_Return || symbol == Clutter.KP_Enter) {
+      if (this._activeContainer == this.applicationsListBox || this._activeContainer == this.applicationsGridBox) {
         // Launch application or Nautilus place or Recent document
         let item_actor = children[this._selectedItemIndex];
-        if (item_actor._delegate._type === ApplicationType._applications) {
+        if (item_actor._delegate._type == ApplicationType._applications) {
           this.menu.close();
           item_actor._delegate._app.open_new_window(-1);
-        } else if (item_actor._delegate._type === ApplicationType._places) {
+        } else if (item_actor._delegate._type == ApplicationType._places) {
           this.menu.close();
           if (item_actor._delegate._app.uri) {
             item_actor._delegate._app.app.launch_uris([item_actor._delegate._app.uri], null);
           } else {
             item_actor._delegate._app.launch();
           }
-        } else if (item_actor._delegate._type === ApplicationType._recent) {
+        } else if (item_actor._delegate._type == ApplicationType._recent) {
           this.menu.close();
           Gio.app_info_launch_default_for_uri(item_actor._delegate._app.uri, global.create_app_launch_context(0, -1));
         }
         return true;
-      } else if (this._activeContainer === this.viewModeBox
-        || this._activeContainer === this.powerGroupBox
-        || this._activeContainer === this.categoriesBox) {
+      } else if (this._activeContainer == this.viewModeBox || this._activeContainer ==
+        this.powerGroupBox || this._activeContainer == this.categoriesBox) {
         // Simulate button click
         if (index >= children.length) {
           return false;
@@ -1270,7 +1288,7 @@ CinnamenuPanel.prototype = {
         return false;
       }
     } else {
-      if ((code && code === 23) || isFromSearch) {
+      if ((code && code == 23) || isFromSearch) {
         // Continue
         index = 0;
       } else {
@@ -1281,7 +1299,7 @@ CinnamenuPanel.prototype = {
 
     // Check if position reached its end
     if (index >= children.length) {
-      if (this._activeContainer === this.powerGroupBox) {
+      if (this._activeContainer == this.powerGroupBox) {
         // allow index to be 1 greater to accommodate pref button
         index = children.length;
       } else {
@@ -1304,23 +1322,23 @@ CinnamenuPanel.prototype = {
     this._clearActiveContainerSelections(itemActor);
 
     // Set selected app name/description
-    if (this._activeContainer === this.applicationsListBox
-      || this._activeContainer === this.applicationsGridBox) {
-      if (itemActor._delegate._type === ApplicationType._applications) {
+    if (this._activeContainer == this.applicationsListBox || this._activeContainer ==
+      this.applicationsGridBox) {
+      if (itemActor._delegate._type == ApplicationType._applications) {
         this.selectedAppTitle.set_text(itemActor._delegate._app.get_name());
         if (itemActor._delegate._app.get_description()) {
           this.selectedAppDescription.set_text(itemActor._delegate._app.get_description());
         } else {
           this.selectedAppDescription.set_text('');
         }
-      } else if (itemActor._delegate._type === ApplicationType._places) {
+      } else if (itemActor._delegate._type == ApplicationType._places) {
         this.selectedAppTitle.set_text(itemActor._delegate._app.name);
         if (itemActor._delegate._app.description) {
           this.selectedAppDescription.set_text(itemActor._delegate._app.description);
         } else {
           this.selectedAppDescription.set_text('');
         }
-      } else if (itemActor._delegate._type === ApplicationType._recent) {
+      } else if (itemActor._delegate._type == ApplicationType._recent) {
         this.selectedAppTitle.set_text(itemActor._delegate._app.name);
         if (itemActor._delegate._app.description) {
           this.selectedAppDescription.set_text(itemActor._delegate._app.description);
@@ -1337,8 +1355,12 @@ CinnamenuPanel.prototype = {
   },
 
   resetSearch: function() {
-    this.answerText.set_text('');
-    this.searchEntry.set_text('');
+    if (this.answerText) {
+      this.answerText.set_text('');
+    }
+    if (this.searchEntry) {
+      this.searchEntry.set_text('');
+    }
     this.searchActive = false;
     if (this._activeContainer) {
       this._activeContainer.show();
@@ -1347,10 +1369,11 @@ CinnamenuPanel.prototype = {
 
   resetSearchWithFocus: function() {
     global.stage.set_key_focus(this.searchEntry);
-    this.resetSearch();
+    this.searchEntry.set_text('');
+    this.searchActive = false;
   },
 
-  _onSearchTextChanged: function(se, prop) {
+  _onSearchTextChanged: function() {
     let searchText = this.searchEntry.get_text();
 
     let categoryChildren = this.categoriesBox.get_children();
@@ -1420,7 +1443,8 @@ CinnamenuPanel.prototype = {
     if (isMathExpression) {
       try {
         let answer = eval(pattern);
-        this.answerText.set_text(`${pattern} = ${answer}`);
+        let answerText = pattern + ' = ' + answer;
+        this.answerText.set_text(answerText);
         this.answerText.show();
         this._activeContainer.hide();
       } catch (e) {}
@@ -1571,7 +1595,7 @@ CinnamenuPanel.prototype = {
 
     // ViewModeBox
     let viewModeButtonIcon = 'view-grid-symbolic';
-    if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
+    if (this._applicationsViewMode == ApplicationsViewMode.LIST) {
       viewModeButtonIcon = 'view-list-symbolic';
     }
 
@@ -1609,7 +1633,7 @@ CinnamenuPanel.prototype = {
       this.toggleListGridView.actor.remove_style_pseudo_class('pressed');
       this.selectedAppTitle.set_text('');
       this.selectedAppDescription.set_text('');
-      if (this._applicationsViewMode === ApplicationsViewMode.LIST) {
+      if (this._applicationsViewMode == ApplicationsViewMode.LIST) {
         this.toggleListGridView.setIcon('view-list-symbolic');
         this._switchApplicationsView(ApplicationsViewMode.GRID);
         this._applet.settings.setValue('startup-view-mode', 1);
@@ -1673,7 +1697,7 @@ CinnamenuPanel.prototype = {
 
     // Load Places
     if (PlaceDisplay) {
-      this.placesManager = new PlaceDisplay(false);
+      this.placesManager = new PlaceDisplay.PlacesManager(false);
     } else {
       this.placesManager = null;
     }
@@ -1733,7 +1757,7 @@ CinnamenuPanel.prototype = {
       let nextType;
 
       while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
-        if (nextType === CMenu.TreeItemType.DIRECTORY) {
+        if (nextType == CMenu.TreeItemType.DIRECTORY) {
           dirs.push(iter.get_directory());
         }
       }
@@ -2045,15 +2069,11 @@ CinnamenuPanel.prototype = {
   },
 
   destroy: function() {
-    Chromium.deinit();
-    Firefox.deinit();
-    GoogleChrome.deinit();
-    Midori.deinit();
-    Opera.deinit();
     this._applet = null;
     global.settings.disconnect(this.panelEditId);
     this.destroyAppButtons();
     this.destroyDisplayed();
+    this._searchWebBookmarks.destroy();
   },
 
   destroyDisplayed: function() {
@@ -2092,5 +2112,3 @@ CinnamenuPanel.prototype = {
 };
 
 Signals.addSignalMethods(CinnamenuPanel.prototype)
-
-module.exports = CinnamenuPanel;

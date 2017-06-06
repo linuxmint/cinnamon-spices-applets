@@ -8,6 +8,7 @@ const PopupMenu = imports.ui.popupMenu;
 const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
+const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
 // l10n
 const Gettext = imports.gettext;
@@ -21,6 +22,12 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
+const Chromium = AppletDir.webChromium;
+const Firefox = AppletDir.webFirefox;
+const GoogleChrome = AppletDir.webGoogleChrome;
+const Midori = AppletDir.webMidori;
+const Opera = AppletDir.webOpera;
+
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 
 const ApplicationType = {
@@ -32,6 +39,36 @@ const ApplicationType = {
 const ApplicationsViewMode = {
   LIST: 0,
   GRID: 1
+};
+
+/* =========================================================================
+/* name:    SearchWebBookmarks
+ * @desc    Class to consolodate search of web browser(s) bookmarks
+ * @desc    Code borrowed from SearchBookmarks extension by bmh1980
+ * @desc    at https://extensions.gnome.org/extension/557/search-bookmarks/
+ * ========================================================================= */
+
+function SearchWebBookmarks() {
+  this._init.apply(this, arguments);
+}
+
+SearchWebBookmarks.prototype = {
+
+  _init: function() {
+    Chromium.init();
+    Firefox.init();
+    GoogleChrome.init();
+    Midori.init();
+    Opera.init();
+  },
+
+  destroy: function() {
+    Chromium.deinit();
+    Firefox.deinit();
+    GoogleChrome.deinit();
+    Midori.deinit();
+    Opera.deinit();
+  }
 };
 
 /* =========================================================================
@@ -66,7 +103,6 @@ CategoryListButton.prototype = {
     this._dir = dir;
     this.disabled = false;
     let categoryNameText = '';
-    //let categoryIconName = null;
 
     let icon;
 
@@ -239,12 +275,10 @@ ApplicationContextMenuItem.prototype = {
       case 'add_to_favorites':
         this._appButton._parent._applet.appFavorites.addFavorite(this._appButton.app.get_id());
         this._appButton.menu.close();
-        this._appButton._parent.menuIsOpen = false;
         break;
       case 'remove_from_favorites':
         this._appButton._parent._applet.appFavorites.removeFavorite(this._appButton.app.get_id());
         this._appButton.menu.close();
-        this._appButton._parent.menuIsOpen = false;
         break;
       case 'uninstall':
         Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application')
@@ -283,7 +317,6 @@ AppListGridButton.prototype = {
     this.menu.actor.set_style_class_name('menu-context-menu');
     this.menu.box.set_style('background-color: ' + this._parent.theme.backgroundColor + '; border: 1px solid' + this._parent.theme.borderColor
       + '; border-radius: ' + this._parent.theme.borderRadius + 'px; padding-top: ' + this._parent.theme.padding + 'px; padding-bottom: ' + this._parent.theme.padding + 'px;');
-
     this.menu.isOpen = false;
 
     this.app = app;
@@ -320,19 +353,17 @@ AppListGridButton.prototype = {
     this.actor.y_align = St.Align.MIDDLE;
 
     // appType 0 = application, appType 1 = place, appType 2 = recent
-    if (appType === ApplicationType._applications) {
+    if (appType == ApplicationType._applications) {
       this.icon = app.create_icon_texture(this._iconSize);
       this.label = new St.Label({
         text: app.name,
         style_class: 'menu-application-button-label'
       });
-    } else if (appType === ApplicationType._places) {
-      if (app.icon) {
-        this.icon = new St.Icon({
-          gicon: app.icon,
-          icon_size: this._iconSize
-        });
-      }
+    } else if (appType == ApplicationType._places) {
+      this.icon = new St.Icon({
+        gicon: app.icon,
+        icon_size: this._iconSize
+      });
       if (!this.icon) {
         this.icon = new St.Icon({
           icon_name: 'error',
@@ -344,7 +375,7 @@ AppListGridButton.prototype = {
         text: app.name,
         style_class: 'menu-application-button-label'
       });
-    } else if (appType === ApplicationType._recent) {
+    } else if (appType == ApplicationType._recent) {
       let gicon = Gio.content_type_get_icon(app.mime);
       this.icon = new St.Icon({
         gicon: gicon,
@@ -410,7 +441,7 @@ AppListGridButton.prototype = {
     this.label.realize();
 
     // Connect signals
-    if (appType === ApplicationType._applications) {
+    if (appType == ApplicationType._applications) {
       this._stateChangedId = this.app.connect('notify::state', Lang.bind(this, this._onStateChanged));
     }
 
@@ -499,7 +530,6 @@ AppListGridButton.prototype = {
   },
 
   activate: function (event) {
-    //this.unhighlight();
     this._parent.selectedAppTitle.set_text('');
     this._parent.selectedAppDescription.set_text('');
     if (this.appType === ApplicationType._applications) {
@@ -530,7 +560,7 @@ AppListGridButton.prototype = {
 
   setColumn: function(column) {
     this.column = column;
-    if (column === 0 || column === this.appListLength) {
+    if ((column === 0 || column === this.appListLength) && this.appListLength > 1) {
       this.menu.actor.set_position(-90, 50);
     } else if (column === this._parent._applet.appsGridColumnCount) {
       this.menu.actor.set_position(160, 50);
@@ -543,8 +573,8 @@ AppListGridButton.prototype = {
     if (!this.app) {
       return false;
     }
-    if (this.appType === ApplicationType._applications) {
-      if (this.app.state !== Cinnamon.AppState.STOPPED) {
+    if (this.appType == ApplicationType._applications) {
+      if (this.app.state != Cinnamon.AppState.STOPPED) {
         this.dot.opacity = 255;
       } else {
         this.dot.opacity = 0;
@@ -555,14 +585,14 @@ AppListGridButton.prototype = {
 
   getDragActor: function() {
     let appIcon;
-    if (this.appType === ApplicationType._applications) {
+    if (this.appType == ApplicationType._applications) {
       appIcon = this.app.create_icon_texture(this._iconSize);
-    } else if (this.appType === ApplicationType._places) {
+    } else if (this.appType == ApplicationType._places) {
       appIcon = new St.Icon({
         gicon: this.app.icon,
         icon_size: this._iconSize
       });
-    } else if (this.appType === ApplicationType._recent) {
+    } else if (this.appType == ApplicationType._recent) {
       let gicon = Gio.content_type_get_icon(this.app.mime);
       appIcon = new St.Icon({
         gicon: gicon,
@@ -584,7 +614,6 @@ AppListGridButton.prototype = {
     if (!this.menu.isOpen) {
       let children = this.menu.box.get_children();
       for (var i = 0; i < children.length; i++) {
-        children[i].destroy();
         this.menu.box.remove_actor(children[i]);
       }
       this._parent.menuIsOpen = this.appIndex;
@@ -625,8 +654,7 @@ AppListGridButton.prototype = {
       // Allow other buttons hover functions to take effect.
       this._parent.menuIsOpen = null;
     }
-    this._parent._applet.enableAnimations = typeof this._parent._applet.enableAnimations !== 'undefined' ? this._parent._applet.enableAnimations : false;
-    this.menu.toggle_with_options(this._parent._applet.enableAnimations);
+    this.menu.toggle_with_options(this._parent._applet.enableAnimation);
     return true
   },
 
@@ -636,12 +664,9 @@ AppListGridButton.prototype = {
     let children = this.menu.box.get_children();
     for (var i = 0; i < children.length; i++) {
       this.menu.box.remove_actor(children[i]);
-      children[i].destroy();
     }
     this.menu.destroy();
     this.dot.destroy();
-    this.label.unrealize();
-    this.icon.unrealize();
     this.label.destroy();
     this.icon.destroy();
     if (this._iconContainer) {
@@ -682,7 +707,7 @@ GroupButton.prototype = {
     if (adjustedIconSize > iconSize) {
       adjustedIconSize = iconSize;
     }
-    this.actor.style = `padding-top: ${(adjustedIconSize / 3)}px; padding-bottom: ${(adjustedIconSize / 3)}px; margin:auto;'`;
+    this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px; margin:auto;'
     this.actor.add_style_class_name('menu-favorites-button');
     this.actor._delegate = this;
 
@@ -703,9 +728,6 @@ GroupButton.prototype = {
       });
       this.addActor(this.label);
     }
-
-    // Connect signals
-    //this.actor.connect('touch-event', Lang.bind(this, this._onTouchEvent));
   },
 
   setIcon: function(iconName) {
@@ -753,10 +775,6 @@ GroupButton.prototype = {
     this.buttonReleaseCallback.call();
   },
 
-  /*_onTouchEvent: function(actor, event) {
-    return Clutter.EVENT_PROPAGATE;
-  },*/
-
   _onButtonReleaseEvent: function(actor) {
     return false;
   },
@@ -770,10 +788,4 @@ GroupButton.prototype = {
 
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   },
-};
-
-module.exports = {
-  CategoryListButton: CategoryListButton,
-  AppListGridButton: AppListGridButton,
-  GroupButton: GroupButton
 };
