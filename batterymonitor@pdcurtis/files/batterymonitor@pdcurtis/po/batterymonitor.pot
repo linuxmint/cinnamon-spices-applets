@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-01 21:08+1300\n"
+"POT-Creation-Date: 2017-06-07 10:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,60 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:52
+#: applet.js:55
 msgid "Ok"
 msgstr ""
 
-#: applet.js:100
-msgid "invalid"
-msgstr ""
-
-#: applet.js:132
-msgid "Wait"
-msgstr ""
-
-#: applet.js:144
+#: applet.js:165
 msgid "Waiting"
 msgstr ""
 
-#: applet.js:195
+#: applet.js:231
 msgid "Open Power Statistics"
 msgstr ""
 
-#: applet.js:201
+#: applet.js:237
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:210
+#: applet.js:246
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:213
+#: applet.js:249
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:219
+#: applet.js:255
 msgid "Open the Help file"
 msgstr ""
 
-#: applet.js:225
+#: applet.js:261
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr ""
 
 #. batterymonitor@pdcurtis->metadata.json->name
-#: applet.js:241
+#: applet.js:277
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
 msgstr ""
 
-#: applet.js:246
+#: applet.js:282
 msgid "Note: Alerts not enabled in Settings"
 msgstr ""
 
-#: applet.js:310
+#: applet.js:345
 msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 
-#: applet.js:315
+#: applet.js:350
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -78,32 +70,64 @@ msgid ""
 "or close down your work and suspend or shutdown the machine"
 msgstr ""
 
-#: applet.js:333
+#: applet.js:367
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 
-#: applet.js:356
+#: applet.js:385
 msgid "Charge:"
 msgstr ""
 
-#: applet.js:356
+#: applet.js:385
 msgid "Alert:"
 msgstr ""
 
-#: applet.js:356
+#: applet.js:385
 msgid "Suspend:"
 msgstr ""
 
-#: applet.js:358
+#: applet.js:440
 msgid "Percentage Charge:"
 msgstr ""
 
-#: applet.js:358
+#: applet.js:440
 msgid "Alert at:"
 msgstr ""
 
-#: applet.js:358
+#: applet.js:440
 msgid "Suspend at:"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->description
+msgid "Type of Display"
 msgstr ""
 
 #. batterymonitor@pdcurtis->settings-schema.json->head->description
@@ -119,12 +143,17 @@ msgstr ""
 #. spinner->tooltip
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use"
-" a slow refresh if you have a slow machine"
+" a slow refresh if you have a slow machine. This also governs the flash "
+"speed."
 msgstr ""
 
 #. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->units
 msgid "seconds"
+msgstr ""
+
+#. batterymonitor@pdcurtis->settings-schema.json->head1->description
+msgid "Display Mode"
 msgstr ""
 
 #. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
