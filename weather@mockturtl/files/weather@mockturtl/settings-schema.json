@@ -29,6 +29,11 @@
     , "fahrenheit": "fahrenheit"
     }
   }
+, "temperatureHighFirst":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show high temperature first in forecast"
+  }
 , "windSpeedUnit":
   { "type": "combobox"
   , "default": "kph"
