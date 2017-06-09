@@ -8,6 +8,7 @@ function objectSniff(object_sniff) {
 }
 
 function resolveHome(path) {
+	path = path.replace('file://', '');
 	home = GLib.get_home_dir();
 	return path.replace('~', home);
 }
