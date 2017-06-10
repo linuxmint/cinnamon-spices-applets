@@ -1,7 +1,8 @@
 {
-    "last-edited": "1478743846", 
+    "description": "An applet to manage Homestead.", 
+    "dangerous": true, 
     "uuid": "rancher@centurix", 
     "name": "Homestead manager", 
     "version": "0.1.3", 
-    "description": "An applet to manage Homestead."
+    "last-edited": "1478743846"
 }
