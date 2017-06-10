@@ -75,6 +75,7 @@ const WEATHER_FORECAST_DAYS = 'forecastDays'
 const WEATHER_SHOW_TEXT_IN_PANEL_KEY = 'showTextInPanel'
 const WEATHER_TRANSLATE_CONDITION_KEY = 'translateCondition'
 const WEATHER_TEMPERATURE_UNIT_KEY = 'temperatureUnit'
+const WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst'
 const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit'
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
@@ -82,6 +83,7 @@ const WEATHER_WOEID_KEY = 'woeid'
 
 const KEYS = [
   WEATHER_TEMPERATURE_UNIT_KEY,
+  WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
   WEATHER_WIND_SPEED_UNIT_KEY,
   WEATHER_CITY_KEY,
   WEATHER_WOEID_KEY,
@@ -600,13 +602,16 @@ MyApplet.prototype = {
         let code = forecastData.code
         let t_low = forecastData.low
         let t_high = forecastData.high
+        
+        let first_temperature = this._temperatureHighFirst ? t_high : t_low
+        let second_temperature = this._temperatureHighFirst ? t_low : t_high
 
         let comment = forecastData.text
         if (this._translateCondition)
           comment = this.weatherCondition(code)
 
         forecastUi.Day.text = this.localeDay(forecastData.day)
-        forecastUi.Temperature.text = t_low + ' ' + '\u002F' + ' ' + t_high + ' ' + this.unitToUnicode()
+        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode()
         forecastUi.Summary.text = comment
         forecastUi.Icon.icon_name = this.weatherIconSafely(code)
       }
