@@ -732,9 +732,8 @@ CobiAppButton.prototype = {
   },
   
   getPinnedIndex: function() {
-    let pinned = this._applet.actor.get_children().map(x => x._delegate);
-    pinned = pinned.filter(x => x._pinned);
-    return pinned.indexOf(this);
+    let pinSetting = this._settings.getValue("pinned-apps");
+    return this._pinned ? pinSetting.indexOf(this._app.get_id()) : -1;
   },
   
   addWindow: function(metaWindow) {
@@ -1539,7 +1538,7 @@ CobiWindowList.prototype = {
   },
   
   _lookupApp: function(appId) {
-    let app;
+    let app = null;
     if (appId) {
       app = this._appSys.lookup_app(appId);
       if (!app) {
@@ -1549,38 +1548,35 @@ CobiWindowList.prototype = {
     return app;
   },
   
-  _updatePinnedApps: function(dummy) {
-    let pinnedApps = this._settings.getValue("pinned-apps");
-    let prevPinnedAppButton = null;
+  _updatePinnedApps: function() {
     // find new pinned apps
     if (this._settings.getValue("display-pinned")) {
+      let pinnedApps = this._settings.getValue("pinned-apps");
       for (let i = 0; i < pinnedApps.length; i++) {
         let pinnedAppId = pinnedApps[i];
         let app = this._lookupApp(pinnedAppId);
         let appButton;
-        if (app) {
-          appButton = this._lookupAppButtonForApp(app, i);
-        }
-        if (!appButton) {
-          appButton = this._addAppButton(app);
-        }
-        appButton._pinned = true;
-        let actorIndex = -1;
-        if (prevPinnedAppButton) {
-          let children = this.actor.get_children();
-          for (let i = children.indexOf(prevPinnedAppButton.actor) + 1; i < children.indexOf(appButton.actor); i++) {
-            let checkAppButton = this.actor.get_child_at_index(i)._delegate;
-            let checkAppButtonPinnedIndex = checkAppButton.getPinnedIndex();
-            if (checkAppButtonPinnedIndex >= 0) {
-              actorIndex = checkAppButtonPinnedIndex - 1;
-            }
-          }
-        }
-        if (actorIndex >= 0) {
-          this.actor.move_child(appButton.actor, actorIndex);
+        if (!app) {
+          continue;
         }
         
-        prevPinnedAppButton = appButton;
+        appButton = this._lookupAppButtonForApp(app);
+        if (!appButton) {
+          appButton = this._addAppButton(app);
+          let children = this.actor.get_children();
+          let targetIdx = children.length - 1;
+          for (let j = children.length - 2; j >= 0; j--) {
+            let btn = children[j]._delegate;
+            let btnPinIdx = btn.getPinnedIndex()
+            if (btnPinIdx >= 0 && btnPinIdx > i) {
+              targetIdx = j;
+            }
+          }
+          if (targetIdx >= 0) {
+            this.actor.move_child(appButton.actor, targetIdx);
+          }
+        }
+        appButton._pinned = true;
       }
     }
     
