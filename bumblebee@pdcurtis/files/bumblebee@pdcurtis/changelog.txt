@@ -1,4 +1,4 @@
-Version 3.2.0
+Version 3.2.1
 v20_0.9.0 Beta 12-12-2013
 v20_0.9.1 Added System Monitor and Power Statistics to right click menu
 v20_0.9.2 Added Left Click Menu with 5 Program Launch Items with configuration in Settings - Release Candidate 14-12-2013 
@@ -39,4 +39,9 @@ v30_3.1.0  Changed help file from help.txt to README.md
               - New Translation function
               - Changes to improve translation strings
               - Recreate bumblebee.pot
-              Changes to README.md changelog.txt etc 
+              Changes to README.md changelog.txt etc
+### 3.2.1
+ * Use CHANGELOG.md instead of changelog.txt in context menu
+ * Add symbolic link from UUID folder to applet folder so it is displayed on latest spices web site.
+ * Add check that bumblebee daemon is installed.
+

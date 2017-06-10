@@ -18,6 +18,8 @@ const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const Gettext = imports.gettext; // ++ Needed for translations
+const Main = imports.ui.main;
+
 
 // ++ Always needed for localisation/translation support
 // l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
@@ -117,7 +119,7 @@ MyApplet.prototype = {
 
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
-            this.changelog = metadata.path + "/changelog.txt";
+            this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
             this.gputempScript= metadata.path + "/gputempscript.sh";
             this.appletPath = metadata.path;
@@ -140,6 +142,17 @@ MyApplet.prototype = {
                this.textEd = "gedit";
             } else { 
                this.textEd = "xed";
+            }
+
+            // Check that Bumblebee Daemen is installed 
+            if (!GLib.find_program_in_path("bumblebeed")) {
+                 let icon = new St.Icon({ icon_name: 'error',
+                 icon_type: St.IconType.FULLCOLOR,
+                 icon_size: 36 });
+                 Main.criticalNotify("Bumblebee program not installed", "You appear to be missing some of the required programs for 'bumblebee' to switch graphics processors using NVIDIA Optimus\n\n", icon);
+                 this.bumblebeeMissing = true;
+            } else {
+                 this.bumblebeeMissing = false;
             }
 
             // ++ Set up left click menu
@@ -337,9 +350,10 @@ MyApplet.prototype = {
       // This catches error if bbswitch and hence bumblebee is not loaded                     
       } catch (e) {
 //          global.logError(e);  // Comment out to avoid filling error log
-          this.bbst = "ERROR"
-	  this.set_applet_label(_("ERROR" )); 
-          this.set_applet_tooltip(_("Bumblebee is not installed so applet willl not work"));          
+        this.bbst = "ERROR"
+/*  	  this.set_applet_label(_("Err" )); 
+          this.set_applet_tooltip(_("bbswitch, bumblebee or nvidia drivers are not installed so applet will not work"));
+*/        
       } 
    try {
          if(this.bbst == "OFF") {
@@ -367,6 +381,12 @@ MyApplet.prototype = {
                 // Get temperatures via asyncronous script ready for next cycle
                 GLib.spawn_command_line_async('sh ' + this.gputempScript );
          } 
+
+         if(this.bbst == "ERROR" || this.bumblebeeMissing) {
+	          this.set_applet_label(_("Err" )); 
+              this.set_applet_tooltip(_("Bumble is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
+              this.hide_applet_label(false);       
+         }
       } catch (e) {
           global.logError(e);
       }       
@@ -394,7 +414,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 3.2.0
+Version 3.2.1
 v20_0.9.0 Beta 12-12-2013
 v20_0.9.1 Added System Monitor and Power Statistics to right click menu
 v20_0.9.2 Added Left Click Menu with 5 Program Launch Items with configuration in Settings - Release Candidate 14-12-2013 
@@ -435,5 +455,9 @@ v30_3.1.0  Changed help file from help.txt to README.md
               - New Translation function
               - Changes to improve translation strings
               - Recreate bumblebee.pot
-              Changes to README.md changelog.txt etc 
+              Changes to README.md changelog.txt etc
+### 3.2.1
+ * Use CHANGELOG.md instead of changelog.txt in context menu
+ * Add symbolic link from UUID folder to applet folder so it is displayed on latest spices web site.
+ * Add check that bumblebee daemon is installed.
 */

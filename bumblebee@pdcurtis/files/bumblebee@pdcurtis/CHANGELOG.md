@@ -1,8 +1,14 @@
 ## Changelog for recent versions
 
+### 3.2.1
+
+ * Use CHANGELOG.md instead of changelog.txt in context menu
+ * Add symbolic link from UUID folder to applet folder so it is displayed on latest spices web site.
+ * Add check that bumblebee daemon is installed.
+
 ### 3.2.0
 
-Major changes to support vertical panels and to use icons instead of text to harmonise with other cinnamon applets such as nvidia-prime
+Major changes to support vertical panels and to use icons instead of text to harmonise with other cinnamon applets.
 
  * Allow use of vertical as well as horizontal panels after version number check to see if they are supported ie Cinnamon 3.2 and higher
  * Change to TextIcon applet
