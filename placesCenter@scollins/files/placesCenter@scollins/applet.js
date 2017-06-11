@@ -367,8 +367,9 @@ MyApplet.prototype = {
         for ( let bookmark of bookmarks ) {
             let bookmarkItem = new FolderTypeMenuItem(bookmark.name, bookmark.iconFactory(menu_item_icon_size));
             this.userSection.addMenuItem(bookmarkItem);
+            let launch = bookmark.launch;
             bookmarkItem.connect("activate", Lang.bind(this, function() {
-                bookmark.launch();
+                launch();
             }));
         }
 
