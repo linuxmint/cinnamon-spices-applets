@@ -49,8 +49,9 @@ Rancher.prototype = {
 		Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
 		try {
+		    this.menuManager = new PopupMenu.PopupMenuManager(this);
 			this.menu = new Applet.AppletPopupMenu(this, orientation);
-			this._menuManager.addMenu(this.menu);
+			this.menuManager.addMenu(this.menu);
 
 			this._msgsrc = new MessageTray.SystemNotificationSource("Rancher");
 			Main.messageTray.add(this._msgsrc);
@@ -169,13 +170,7 @@ Rancher.prototype = {
 	},
 
 	on_applet_clicked: function(event) {
-		try {
-			if (!this.menu.isOpen) {
-				this.menu.toggle();
-			}
-		} catch(e) {
-			global.log(UUID + '::on_applet_clicked: ' + e);
-		}
+		this.menu.toggle();
 	},
 
 	editHomestead: function() {
