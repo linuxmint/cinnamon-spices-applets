@@ -614,7 +614,7 @@ CobiAppButton.prototype = {
     
     this._pinned = false;
     
-    this.actor = new St.BoxLayout({
+    this.actor = new St.BoxLayout({style_class: "window-list-item-box",
                                    track_hover: true,
                                    can_focus: true,
                                    reactive: true
@@ -663,6 +663,7 @@ CobiAppButton.prototype = {
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
     this._signalManager.connect(this.actor, "motion-event", this._onMotionEvent);
+    this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState);
     
     this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
       this.actor.remove_style_pseudo_class("neutral");
@@ -946,28 +947,35 @@ CobiAppButton.prototype = {
       if (!this.actor.has_style_pseudo_class("neutral")) {
         this.actor.add_style_pseudo_class("neutral");
       }
+      else if (this.actor.has_style_pseudo_class("hover")) {
+        this.actor.remove_style_pseudo_class("neutral");
+      }
     }
   },
   
   _updateOrientation: function() {
+    this.actor.remove_style_class_name("top");
+    this.actor.remove_style_class_name("bottom");
+    this.actor.remove_style_class_name("left");
+    this.actor.remove_style_class_name("right");
     switch (this._applet.orientation) {
       case St.Side.LEFT:
-        this.actor.set_style_class_name("window-list-item-box left");
+        this.actor.add_style_class_name("left");
         this.actor.set_style("margin-left 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
         this._inhibitLabel = true;
         break;
       case St.Side.RIGHT:
-        this.actor.set_style_class_name("window-list-item-box right");
+        this.actor.add_style_class_name("right");
         this.actor.set_style("margin-left: 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
         this._inhibitLabel = true;
         break;
       case St.Side.TOP:
-        this.actor.set_style_class_name("window-list-item-box top");
+        this.actor.add_style_class_name("top");
         this.actor.set_style("margin-top: 0px; padding-top: 0px;");
         this._inhibitLabel = false;
         break;
       case St.Side.BOTTOM:
-        this.actor.set_style_class_name("window-list-item-box bottom");
+        this.actor.add_style_class_name("bottom");
         this.actor.set_style("margin-bottom: 0px; padding-bottom: 0px;");
         this._inhibitLabel = false;
         break;
