@@ -1125,7 +1125,7 @@ SlingshotView.prototype = {
         });
         this.viewSelector.append(image, _('View as Grid'));
 
-        let image = new St.Icon({
+        image = new St.Icon({
             icon_size: 16,
             gicon: new Gio.ThemedIcon({ name: 'view-list-symbolic' })
         });
