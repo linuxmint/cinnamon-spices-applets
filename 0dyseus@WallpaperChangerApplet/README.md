@@ -31,6 +31,6 @@ Applet based on the gnome-shell extension called [Desk Changer](https://github.c
 
 **Note:** This applet doesn't complement the Cinnamon option called **Play backgrounds as a slideshow**, it replaces it. The Cinnamon option should be disabled at all times for this applet to work as expected. No worries, nothing *fatal* could happen.
 
-[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40WallpaperChangerApplet/CONTRIBUTORS.md)
-
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40WallpaperChangerApplet/CHANGELOG.md)
+#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html)
+#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-contributors)
+#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-changelog)
