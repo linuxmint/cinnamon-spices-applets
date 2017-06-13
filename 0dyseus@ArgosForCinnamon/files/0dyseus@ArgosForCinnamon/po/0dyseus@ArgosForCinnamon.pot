@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@ArgosForCinnamon 1.00\n"
-"POT-Creation-Date: 2017-06-04 15:58-0300\n"
+"Project-Id-Version: 0dyseus@ArgosForCinnamon 1.01\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -419,65 +419,65 @@ msgstr ""
 msgid "Plugin"
 msgstr ""
 
-#: ../../create_localized_help.py:387
-msgid "The following two sections are available only in English."
-msgstr ""
-
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:412 ../../create_localized_help.py:484
+#: ../../create_localized_help.py:440 ../../create_localized_help.py:516
 msgid "language-name"
 msgstr ""
 
-#: ../../create_localized_help.py:487 __init__.js:2460 applet.js:721
+#: ../../create_localized_help.py:446
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:519 __init__.js:2460 applet.js:721
 msgid "Help"
 msgstr ""
 
-#: ../../create_localized_help.py:488
+#: ../../create_localized_help.py:520
 msgid "Contributors"
 msgstr ""
 
-#: ../../create_localized_help.py:489
+#: ../../create_localized_help.py:521
 msgid "Changelog"
 msgstr ""
 
-#: ../../create_localized_help.py:490
+#: ../../create_localized_help.py:522
 msgid "Choose language"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:491 ../../create_localized_help.py:498
+#: ../../create_localized_help.py:523 ../../create_localized_help.py:530
 #, python-format
 msgid "Help for %s"
 msgstr ""
 
-#: ../../create_localized_help.py:499
+#: ../../create_localized_help.py:531
 msgid "IMPORTANT!!!"
 msgstr ""
 
-#: ../../create_localized_help.py:500
+#: ../../create_localized_help.py:532
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
-#: ../../create_localized_help.py:501
+#: ../../create_localized_help.py:533
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
-#: ../../create_localized_help.py:507
+#: ../../create_localized_help.py:539
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
-#: ../../create_localized_help.py:508
+#: ../../create_localized_help.py:540
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:510
+#: ../../create_localized_help.py:542
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
-#: ../../create_localized_help.py:511
+#: ../../create_localized_help.py:543
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
@@ -734,26 +734,26 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:80
 msgid "Seconds"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:83
 msgid "Minutes"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:86
 msgid "Hours"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
 #: __init__.js:89
 msgid "Days"
 msgstr ""
@@ -919,40 +919,20 @@ msgstr ""
 msgid "Script file is already executable."
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->metadata.json->comments
-msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+#. 0dyseus@ArgosForCinnamon->metadata.json->description
+msgid "Create Cinnamon applets in seconds."
 msgstr ""
 
 #. 0dyseus@ArgosForCinnamon->metadata.json->name
 msgid "Argos for Cinnamon"
 msgstr ""
 
+#. 0dyseus@ArgosForCinnamon->metadata.json->comments
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr ""
+
 #. 0dyseus@ArgosForCinnamon->metadata.json->contributors
 msgid "See this xlet help file."
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->metadata.json->description
-msgid "Create Cinnamon applets in seconds."
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
-msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
-msgid "Icon"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
-msgid "Select an icon to show in the panel."
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
-msgid "Show script name on applet"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->tooltip
-msgid "When inside the script there isn't a line assigned to be shown on the applet, the script name will be displayed. With this option disabled, the script name will not be shown on this applet, giving us the possibility to use a custom text for the applet."
 msgstr ""
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->description
@@ -963,41 +943,20 @@ msgstr ""
 msgid "Enter custom text to show in the panel."
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
-msgid "Keep just one sub menu open"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
-msgid "When enabled, the previously opened sub menu will be automatically closed."
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
+msgid "Rotation interval time unit"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head1->description
-msgid "Script settings"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
+msgid "Show script name on applet"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
-msgid "ems"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
-msgid "Spacing for items inside the menu"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
-msgid "Applet settings"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
-msgid "pixels"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
-msgid "Set a default size in pixels for the icons inside this applet main menu. The size of the icon of a menu item can be overridden by setting the \"iconSize\" attribute on the menu item's respective line on the script."
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
-msgid "Default icon size"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->tooltip
+msgid "When inside the script there isn't a line assigned to be shown on the applet, the script name will be displayed. With this option disabled, the script name will not be shown on this applet, giving us the possibility to use a custom text for the applet."
 msgstr ""
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
@@ -1008,8 +967,74 @@ msgstr ""
 msgid "Enables/Disables menu open/close animations."
 msgstr ""
 
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head1->description
+msgid "Script settings"
+msgstr ""
+
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->description
 msgid "Execution interval time unit"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
+msgid "Execution interval"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
+msgid "Set the script execution interval. If set to 0 (zero), the timer will be disabled."
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
+msgid "custom"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
+msgid "Default icon size"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
+msgid "Set a default size in pixels for the icons inside this applet main menu. The size of the icon of a menu item can be overridden by setting the \"iconSize\" attribute on the menu item's respective line on the script."
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
+msgid "pixels"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
+msgid "Spacing for items inside the menu"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
+msgid "ems"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
+msgid "Spacing for items inside the applet"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
+msgid "Extra settings"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
+msgid "Keep just one sub menu open"
+msgstr ""
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
+msgid "When enabled, the previously opened sub menu will be automatically closed."
 msgstr ""
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
@@ -1022,37 +1047,12 @@ msgid ""
 "IMPORTANT!!! The terminal emulator has to support the -e argument."
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
-msgid "custom"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
-msgid "Set the script execution interval. If set to 0 (zero), the timer will be disabled."
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
-msgid "Execution interval"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
-msgid "Rotation interval time unit"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->tooltip
-msgid "Set the applet text rotation interval. If set to 0 (zero), the timer will be disabled. This timer is only used if there are more than one line asigned to be displayed as the applet text. If there is only one line asigned for the applet text, this timer will be completely ignored. So, it isn't needed to set this timer to 0 (zero) to disable it."
-msgstr ""
-
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
 msgid "Rotation interval"
 msgstr ""
 
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
-msgid "Spacing for items inside the applet"
-msgstr ""
-
-#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
-msgid "Extra settings"
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->tooltip
+msgid "Set the applet text rotation interval. If set to 0 (zero), the timer will be disabled. This timer is only used if there are more than one line asigned to be displayed as the applet text. If there is only one line asigned for the applet text, this timer will be completely ignored. So, it isn't needed to set this timer to 0 (zero) to disable it."
 msgstr ""
 
 #. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_file_path->description

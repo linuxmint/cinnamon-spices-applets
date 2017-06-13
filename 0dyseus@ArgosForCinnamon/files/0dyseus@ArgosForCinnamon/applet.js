@@ -748,7 +748,13 @@ MyApplet.prototype = {
     },
 
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.IN, "pref_custom_icon_for_applet", this._updateIconAndLabel],
             [bD.IN, "pref_custom_label_for_applet", this._updateIconAndLabel],
