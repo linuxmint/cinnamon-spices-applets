@@ -614,7 +614,7 @@ CobiAppButton.prototype = {
     
     this._pinned = false;
     
-    this.actor = new St.BoxLayout({
+    this.actor = new St.BoxLayout({style_class: "window-list-item-box",
                                    track_hover: true,
                                    can_focus: true,
                                    reactive: true
@@ -663,6 +663,7 @@ CobiAppButton.prototype = {
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
     this._signalManager.connect(this.actor, "motion-event", this._onMotionEvent);
+    this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState);
     
     this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
       this.actor.remove_style_pseudo_class("neutral");
@@ -732,9 +733,8 @@ CobiAppButton.prototype = {
   },
   
   getPinnedIndex: function() {
-    let pinned = this._applet.actor.get_children().map(x => x._delegate);
-    pinned = pinned.filter(x => x._pinned);
-    return pinned.indexOf(this);
+    let pinSetting = this._settings.getValue("pinned-apps");
+    return this._pinned ? pinSetting.indexOf(this._app.get_id()) : -1;
   },
   
   addWindow: function(metaWindow) {
@@ -947,28 +947,35 @@ CobiAppButton.prototype = {
       if (!this.actor.has_style_pseudo_class("neutral")) {
         this.actor.add_style_pseudo_class("neutral");
       }
+      else if (this.actor.has_style_pseudo_class("hover")) {
+        this.actor.remove_style_pseudo_class("neutral");
+      }
     }
   },
   
   _updateOrientation: function() {
+    this.actor.remove_style_class_name("top");
+    this.actor.remove_style_class_name("bottom");
+    this.actor.remove_style_class_name("left");
+    this.actor.remove_style_class_name("right");
     switch (this._applet.orientation) {
       case St.Side.LEFT:
-        this.actor.set_style_class_name("window-list-item-box left");
+        this.actor.add_style_class_name("left");
         this.actor.set_style("margin-left 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
         this._inhibitLabel = true;
         break;
       case St.Side.RIGHT:
-        this.actor.set_style_class_name("window-list-item-box right");
+        this.actor.add_style_class_name("right");
         this.actor.set_style("margin-left: 0px; padding-left: 0px; padding-right: 0px; margin-right: 0px;");
         this._inhibitLabel = true;
         break;
       case St.Side.TOP:
-        this.actor.set_style_class_name("window-list-item-box top");
+        this.actor.add_style_class_name("top");
         this.actor.set_style("margin-top: 0px; padding-top: 0px;");
         this._inhibitLabel = false;
         break;
       case St.Side.BOTTOM:
-        this.actor.set_style_class_name("window-list-item-box bottom");
+        this.actor.add_style_class_name("bottom");
         this.actor.set_style("margin-bottom: 0px; padding-bottom: 0px;");
         this._inhibitLabel = false;
         break;
@@ -1539,7 +1546,7 @@ CobiWindowList.prototype = {
   },
   
   _lookupApp: function(appId) {
-    let app;
+    let app = null;
     if (appId) {
       app = this._appSys.lookup_app(appId);
       if (!app) {
@@ -1549,38 +1556,35 @@ CobiWindowList.prototype = {
     return app;
   },
   
-  _updatePinnedApps: function(dummy) {
-    let pinnedApps = this._settings.getValue("pinned-apps");
-    let prevPinnedAppButton = null;
+  _updatePinnedApps: function() {
     // find new pinned apps
     if (this._settings.getValue("display-pinned")) {
+      let pinnedApps = this._settings.getValue("pinned-apps");
       for (let i = 0; i < pinnedApps.length; i++) {
         let pinnedAppId = pinnedApps[i];
         let app = this._lookupApp(pinnedAppId);
         let appButton;
-        if (app) {
-          appButton = this._lookupAppButtonForApp(app, i);
-        }
-        if (!appButton) {
-          appButton = this._addAppButton(app);
-        }
-        appButton._pinned = true;
-        let actorIndex = -1;
-        if (prevPinnedAppButton) {
-          let children = this.actor.get_children();
-          for (let i = children.indexOf(prevPinnedAppButton.actor) + 1; i < children.indexOf(appButton.actor); i++) {
-            let checkAppButton = this.actor.get_child_at_index(i)._delegate;
-            let checkAppButtonPinnedIndex = checkAppButton.getPinnedIndex();
-            if (checkAppButtonPinnedIndex >= 0) {
-              actorIndex = checkAppButtonPinnedIndex - 1;
-            }
-          }
-        }
-        if (actorIndex >= 0) {
-          this.actor.move_child(appButton.actor, actorIndex);
+        if (!app) {
+          continue;
         }
         
-        prevPinnedAppButton = appButton;
+        appButton = this._lookupAppButtonForApp(app);
+        if (!appButton) {
+          appButton = this._addAppButton(app);
+          let children = this.actor.get_children();
+          let targetIdx = children.length - 1;
+          for (let j = children.length - 2; j >= 0; j--) {
+            let btn = children[j]._delegate;
+            let btnPinIdx = btn.getPinnedIndex()
+            if (btnPinIdx >= 0 && btnPinIdx > i) {
+              targetIdx = j;
+            }
+          }
+          if (targetIdx >= 0) {
+            this.actor.move_child(appButton.actor, targetIdx);
+          }
+        }
+        appButton._pinned = true;
       }
     }
     
