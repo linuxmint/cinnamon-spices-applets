@@ -214,7 +214,13 @@ MyApplet.prototype = {
     },
 
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.IN, "pref_align_tooltip_text_to_the_left", null],
             [bD.IN, "pref_custom_command", null],
