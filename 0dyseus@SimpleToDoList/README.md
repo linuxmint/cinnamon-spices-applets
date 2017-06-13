@@ -26,6 +26,6 @@ Applet based on two gnome-shell extensions ([Todo list](https://github.com/bsale
 - Configurable hotkey to open close the menu.
 - Read the tooltips of each option on this applet settings window for more details.
 
-[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SimpleToDoList/CONTRIBUTORS.md)
-
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SimpleToDoList/CHANGELOG.md)
+#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html)
+#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-contributors)
+#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-changelog)
