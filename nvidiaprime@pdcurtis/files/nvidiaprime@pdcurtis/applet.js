@@ -18,6 +18,7 @@ const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const Gettext = imports.gettext; // ++ Needed for translations
+const Main = imports.ui.main; // ++ Needed for criticalNotify()
 
 // ++ Always needed for localisation/translation support
 // l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
@@ -82,9 +83,9 @@ MyApplet.prototype = {
             this.nvidea_icon = metadata.path + "/icons/nvidia.png"
             this.intel_icon = metadata.path + "/icons/prime-tray-intel.png"
 
-            this.on_orientation_changed(orientation); // Initialise for panel orientation
+            this.on_orientation_changed(orientation); // ++ Initialise for panel orientation
 
-            this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
+            this.applet_running = true; //** Allow applet to be fully stopped when removed from panel
 
             // Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
             // This could be replaced by use of system editor? but "If it ain't broke don't fix it" 
@@ -92,6 +93,17 @@ MyApplet.prototype = {
                this.textEd = "gedit";
             } else { 
                this.textEd = "xed";
+            }
+
+            // Check that Nvidia drivers are installed 
+            if (!GLib.find_program_in_path("nvidia-settings")) {
+                 let icon = new St.Icon({ icon_name: 'error',
+                 icon_type: St.IconType.FULLCOLOR,
+                 icon_size: 36 });
+                 Main.criticalNotify("Nvidia Prime not installed", "You appear to be missing some of the required programs for Nvidia Prime to switch graphics processors using NVIDIA Optimus.\n\nPlease read the help file.", icon);
+                 this.nvidiaPrimeMissing = true;
+            } else {
+                 this.nvidiaPrimeMissing = false;
             }
 
             // ++ Set up left click menu
@@ -232,13 +244,13 @@ MyApplet.prototype = {
          else {
               this.bbst = "OFF";
          }
-      // This catches error if bbswitch  is not loaded                     
-      } catch (e) {
-//          global.logError(e);  // Comment out to avoid filling error log
-          this.bbst = "ERROR"
-	  this.set_applet_label(_("ERROR")); 
-          this.set_applet_tooltip(_("Nvidia Prime is not installed so applet willl not work"));          
-      } 
+      
+      // This catches error if bbswitch is not loaded                     
+   } catch (e) {
+//          global.logError(e);  // Commented out to avoid filling error log
+        this.bbst = "ERROR";
+   }
+ 
    try {
          if(this.bbst == "OFF") {
                this.set_applet_label(""); 
@@ -252,12 +264,18 @@ MyApplet.prototype = {
                 // Check we have a valid temperature returned before updating 
                 // in case of slow response from nvidia-settings which gives null string
                 if(this.nvidiagputemp1.substr(5,2) > 0){ this.nvidiagputemp = this.nvidiagputemp1.substr(5,2)}; 
-                if (!this.showGpuTemp  || !this.isHorizontal) {
+
+                if (!this.showGpuTemp ) {
 	                  this.set_applet_label("");
                       this.hide_applet_label(true);
                  } else { 
                       this.hide_applet_label(false);
-                      this.set_applet_label(this.nvidiagputemp + " \u1d3cC" );
+                      if ( this.nvidiagputemp < 100 || this.isHorizontal )  { 
+                           this.set_applet_label(this.nvidiagputemp + "\u1d3c" );
+                      } else {
+                           this.set_applet_label(this.nvidiagputemp + "" ); // Needs empty string for typing
+                      }
+
                  }
 
                 this.set_applet_tooltip(_("NVidia based GPU is On and Core Temperature is") + " " + this.nvidiagputemp + "\u1d3cC" );
@@ -266,6 +284,12 @@ MyApplet.prototype = {
                 // Get temperatures via asyncronous script ready for next cycle
                 GLib.spawn_command_line_async('sh ' + this.gputempScript );
          } 
+
+         if(this.bbst == "ERROR" || this.nvidiaPrimeMissing) {
+	          this.set_applet_label(_("Err" )); 
+              this.set_applet_tooltip(_("Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
+              this.hide_applet_label(false);       
+         }
       } catch (e) {
           global.logError(e);
       }       
@@ -293,7 +317,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 3.3.0
+Version 3.3.1
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -329,7 +353,8 @@ v30_3.2.0 Changed help file from help.txt to README.md -can keep copies of READM
           Create nvidiaprime.pot using cinnamon-json-makepot --js po/nvidiaprime.pot
           Version and changes information update in applet.js and changelog.txt
           Update README.md (2x)
-3.3.0     Major new version to support vertical panels and to use icons instead of text to harmonise with other cinnamon applets such as nvidia-prime
+### 3.3.0     
+Major new version to support vertical panels and to use icons instead of text to harmonise with other cinnamon applets such as nvidia-prime
               - Allow use of vertical as well as horizontal panels after version number check to see if they are supported.
               - Change to TextIcon applet
               - Addition of setting to hide temperatures on Horizontal panel.
@@ -337,5 +362,10 @@ v30_3.2.0 Changed help file from help.txt to README.md -can keep copies of READM
               - New Translation function
               - Changes to improve translation strings
               - Recreate bumblebee.pot
-              Changes to README.md changelog.txt etc 
+              Changes to README.md changelog.txt etc
+### 3.3.1
+ * Add checks that Nvidia drivers and nvidia-settings are loaded
+ * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
+ * Update nvidiaprime.pot to identify changes which need to be translated
 */
+

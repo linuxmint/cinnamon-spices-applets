@@ -8,37 +8,37 @@ The preferred method of switching with the latest kernels and nVidia drivers no 
 
 ## Rationale
 
-It is useful to have continuous indication of whether the Discrete Graphics Processor Unit is in use and its temperature which is a concern on some laptops. It can be used in place of the nVidia Prime system applet if panel space is at a premium. 
+It is useful to have continuous indication of whether the Discrete Graphics Processor Unit is in use and its temperature which is a concern on some laptops. 
 
 ## Features
 
-The latest versions 3.3.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon making it consistent with then nvidia-prime system applet. The GPU temperature display is beside the icon on horizontal panels and inhibited on vertical panels. The temperature display in the panel can now be inhibited in horizontal panels to save space if required.  One can also configure the update rate of the applet in settings.
+The latest versions 3.3.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon making it consistent with the nvidia-prime system applet. The GPU temperature display is beside the icon on horizontal panels and inhibited on vertical panels. The temperature display in the panel can now be inhibited in horizontal panels to save space if required.  One can also configure the update rate of the applet in settings.
 
-Clicking the applet opens nvidia-settings which allows one to change GPU in the same way as the built in NVIDIA Prime applet which it can replace if panel space is at a premium.
+Clicking the applet opens nvidia-settings which allows one to change GPU in the same way as the built in NVIDIA Prime applet.
 
 The right click context menu also gives the ability to run the nVidia Settings program as well as the System Monitor and Power Statistics, all useful for monitoring and controlling power consumption which is paramount when using a laptop on batteries.
 
-There is error checking to ensure the switching program bbswith is loaded and does not fill the error logs with messages when that is not the the case. It displays a message of ERROR if it is not found.
+There is error checking to ensure the nvidia drivers, nvidia-settings and bbswith are loaded. It displays a message of Err if these are not found.
 
 ## Requirements
 
-The applet requires at least Cinnamon 2.0 to access the configuration from within the applet. Mint versions with less than Cinnamon 2.0 have now passed their end of life so all current version are supported.
+The applet requires at least Cinnamon 2.0 to access the configuration from within the applet. Mint versions with less than Cinnamon 2.2 have now passed their end of life so all current version are supported.
 
-the nVidia graphics packages obviously need to be installed but no other packages are essential. Cinnamon 3.2 or higher is required to support a vertical panel but not to support other features of the applet.
+the nVidia graphics packages must be installed  and working before installing this applet but no other packages are essential. Cinnamon 3.2 or higher is required to support a vertical panel but not to support other features of the applet.
 
-The latest version has a tick box option on the configuration screen to access enhanced functionality through the Right Click Context Menu. This needs a Cinnamon Restart or log out/in before the change is visible. Currently this adds the glxspheres64 Graphics Processor Test to the menu.
+There is a tick box option on the configuration screen to access enhanced functionality through the Right Click Context Menu. This needs a Cinnamon Restart or log out/in before the change is visible. Currently this adds the glxspheres64 Graphics Processor Test to the menu.
 
-glxsheres64 only needs to be installed if you want to use the applet to test the relative performances of the Intel and nVidia graphics processors. glxsheres64 is part of the VirtualGL package which needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi (should be the default for a right click on the downloaded file). It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU when it is active.
+glxsheres64 only needs to be installed if you want to use the applet to test the relative performances of the Intel and nVidia graphics processors. glxsheres64 is part of the VirtualGL package which needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi (should be the default for a right click on the downloaded file). It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU.
 
 ## Translations and other Contributions
 
-The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I rarely be able to take responsibility for the accuracy of translations!
+The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I am rarely able to take responsibility for the accuracy of translations!
 
-Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team or for translations. 
 
 ## Manual Installation:
   
-   * Make sure the nVidia drivers and nVidia Prime are installed and working
+   * The nVidia drivers and nVidia Prime must be installed and working before installing this applet.
    * Download from the Spices Web Site
    * Unzip and extract folder ```nvidiaprime@pdcurtis``` to ```~/.local/share/cinnamon/applets/```
    * Install glxspheres64 if required.
