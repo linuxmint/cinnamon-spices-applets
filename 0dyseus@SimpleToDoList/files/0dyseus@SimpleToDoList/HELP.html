@@ -12,6 +12,102 @@ exported toggleLocalizationVisibility
 
 /* jshint varstmt: false */
 
+// Source: https://github.com/julienetie/smooth-scroll
+(function(window, document) {
+    var prefixes = ['moz', 'webkit', 'o'],
+        animationFrame;
+
+    // Modern rAF prefixing without setTimeout
+    function requestAnimationFrameNative() {
+        prefixes.map(function(prefix) {
+            if (!window.requestAnimationFrame) {
+                animationFrame = window[prefix + 'RequestAnimationFrame'];
+            } else {
+                animationFrame = requestAnimationFrame;
+            }
+        });
+    }
+    requestAnimationFrameNative();
+
+    function getOffsetTop(el) {
+        if (!el) {
+            return 0;
+        }
+
+        var yOffset = el.offsetTop,
+            parent = el.offsetParent;
+
+        yOffset += getOffsetTop(parent);
+
+        return yOffset;
+    }
+
+    function getScrollTop(scrollable) {
+        return scrollable.scrollTop || document.body.scrollTop || document.documentElement.scrollTop;
+    }
+
+    function scrollTo(scrollable, coords, millisecondsToTake) {
+        var currentY = getScrollTop(scrollable),
+            diffY = coords.y - currentY,
+            startTimestamp = null;
+
+        if (coords.y === currentY || typeof scrollable.scrollTo !== 'function') {
+            return;
+        }
+
+        function doScroll(currentTimestamp) {
+            if (startTimestamp === null) {
+                startTimestamp = currentTimestamp;
+            }
+
+            var progress = currentTimestamp - startTimestamp,
+                fractionDone = (progress / millisecondsToTake),
+                pointOnSineWave = Math.sin(fractionDone * Math.PI / 2);
+            scrollable.scrollTo(0, currentY + (diffY * pointOnSineWave));
+
+            if (progress < millisecondsToTake) {
+                animationFrame(doScroll);
+            } else {
+                // Ensure we're at our destination
+                scrollable.scrollTo(coords.x, coords.y);
+            }
+        }
+
+        animationFrame(doScroll);
+    }
+
+    // Declaire scroll duration, (before script)
+    var speed = window.smoothScrollSpeed || 750;
+
+    function smoothScroll(e) { // no smooth scroll class to ignore links
+        if (e.target.className === 'no-ss') {
+            return;
+        }
+
+        var source = e.target,
+            targetHref = source.hash,
+            target = null;
+
+        if (!source || !targetHref) {
+            return;
+        }
+
+        targetHref = targetHref.substring(1);
+        target = document.getElementById(targetHref);
+        if (!target) {
+            return;
+        }
+
+        scrollTo(window, {
+            x: 0,
+            y: getOffsetTop(target)
+        }, speed);
+    }
+
+    // Uses target's hash for scroll
+    document.addEventListener('click', smoothScroll, false);
+}(window, document));
+
 if (!window.localStorage) {
     /*
     Storage objects are a recent addition to the standard. As such they may not be present
@@ -449,7 +545,7 @@ body {
 <noscript>
 <div class="alert alert-warning">
 <p><strong>Oh snap! This page needs JavaScript enabled to display correctly.</strong></p>
-<p><strong>This page uses JavaScript only to switch between the available languages.</strong></p>
+<p><strong>This page uses JavaScript only to switch between the available languages and/or display images.</strong></p>
 <p><strong>There are no tracking services of any kind and never will be (at least, not from my side).</strong></p>
 </div> <!-- .alert.alert-warning -->
 </noscript>
@@ -458,9 +554,9 @@ body {
     <div class="container-fluid">
     <div class="navbar-header">
         <ul class="nav navbar-nav">
-            <li><a id="nav-xlet-help" class="navbar-brand" href="#xlet-help"></a></li>
-            <li><a id="nav-xlet-contributors" class="navbar-brand" href="#xlet-contributors"></a></li>
-            <li><a id="nav-xlet-changelog" class="navbar-brand" href="#xlet-changelog"></a></li>
+            <li><a id="nav-xlet-help" class="js_smoothScroll navbar-brand" href="#xlet-help"></a></li>
+            <li><a id="nav-xlet-contributors" class="js_smoothScroll navbar-brand" href="#xlet-contributors"></a></li>
+            <li><a id="nav-xlet-changelog" class="js_smoothScroll navbar-brand" href="#xlet-changelog"></a></li>
         </ul>
     </div>
     <form class="navbar-form navbar-collapse collapse navbar-right">
@@ -476,7 +572,7 @@ body {
     </form>
     </div>
 </nav>
-<span id="xlet-help">
+<span id="xlet-help" style="padding-top:70px;">
 <div class="container boxed">
 
 <div id="zh_CN" class="localization-content hidden">
@@ -535,9 +631,9 @@ body {
 <li><strong>任务条目看起来是错的：</strong> 该小程序上的任务条目具有包装其文本的能力，以便在为其设置固定宽度的情况下。 它们也可以是多行（<kbd>Shift</kbd> + <kbd>Enter</kbd>里面的一个条目将创建一个新行）。一些Cinnamon主题，如默认的Mint-X系列主题，为菜单中的条目设置固定宽度和固定高度。 这些固定大小使得无法以编程方式设置条目的所需宽度（至少我找不到办法）。固定高度不允许条目扩展，完全打破条目包装其文本的功能，并且是多行的。</li>
 </ul>
 <h3>这是条目应该有的样子</h3>
-<p><img src="./assets/00-correct-entries-styling.png" alt="正确的条目样式"></p>
+<p><img class="correct-entries-styling" alt="正确的条目样式"></p>
 <h3>这是条目不应该有的样子</h3>
-<p><img src="./assets/00-incorrect-entries-styling.png" alt="不正确的条目样式"></p>
+<p><img class="incorrect-entries-styling" alt="不正确的条目样式"></p>
 <p>解决这个问题的唯一方法（我能找到的）是通过编辑正在使用的Cinnamon主题，并移除那些固定的大小。需要编辑的CSS选择器有<strong>.menu StEntry</strong>、<strong>.menu StEntry:focus</strong>、<strong>.popup-menu StEntry</strong>和 <strong>.popup-menu StEntry:focus</strong>。根据创建主题的Cinnamon版本，可能只能找到前两个选择器，或者最后两个或全部。需要编辑的CSS属性是<strong>width</strong>和<strong>height</strong>。它们可以被删除，但明智的做法是将它们分别重命名为<strong>min-width</strong>和<strong>min-height</strong>。在编辑主题的文件并重新启动Cinnamon之后，该小程序中的条目应该会像他们看起来的那样工作。</p>
 <hr>
 
@@ -548,6 +644,7 @@ body {
 <li>如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。 <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
+<div style="font-weight:bold;" class="alert alert-info">以下两个部分仅使用英语。</div>
 </div> <!-- .localization-content -->
 
 
@@ -607,9 +704,9 @@ body {
 <li><strong>Entradas de tareas lucen mal:</strong> Las entradas de tareas en este applet tienen la habilidad de envolver su texto en el caso de que un ancho fijo es establecido para ellas. Ellas también pueden ser multilínea (<kbd>Shift</kbd> + <kbd>Enter</kbd> dentro de la entrada creará una nueva línea). Algunos temas para Cinnamon, como los temas de la familia Mint-X, establecen un ancho y un alto fijo para entradas que se encuentran dentro de menúes. Estas medidas fijas hacen imposible de establecer programáticamente un ancho para las entradas (al menos, yo no pude encontrar una manera de hacerlo). Y una altura fija no permite a las entradas ser expandidas, rompiendo completamente la capacidad de las entradas de envolver su texto y de ser multilínea.</li>
 </ul>
 <h3>Así es como las entradas de texto deberían lucir</h3>
-<p><img src="./assets/00-correct-entries-styling.png" alt="Estilo correcto de las entradas"></p>
+<p><img class="correct-entries-styling" alt="Estilo correcto de las entradas"></p>
 <h3>Así es como las entradas de texto NO DEBERÍAN lucir</h3>
-<p><img src="./assets/00-incorrect-entries-styling.png" alt="Estilo incorrecto de las entradas"></p>
+<p><img class="incorrect-entries-styling" alt="Estilo incorrecto de las entradas"></p>
 <p>La única manera de arreglar esto (que yo he podido encontrar) es editando el tema de Cinnamon que uno está usando y remover esas medidas fijas. Los selectores CSS que necesitan ser editados son <strong>.menu StEntry</strong>, <strong>.menu StEntry:focus</strong>, <strong>.popup-menu StEntry</strong> y <strong>.popup-menu StEntry:focus</strong>. Dependiendo para qué versión de Cinnamon el tema fue creado, uno puede encontrar sólo los primeros dos selectores, los últimos dos o todos ellos. Las propiedades CSS que necesitan ser editadas son <strong>width</strong> y <strong>height</strong>. Ellas podrían ser eliminadas, pero lo más sensible de hacer es renombrarlas a <strong>min-width</strong> y <strong>min-height</strong> respectivamente. Luego de editar el archivo del tema y reiniciar Cinnamon, las entradas de texto de este applet deberían lucir y funcionar correctamente.</p>
 <hr>
 
@@ -620,6 +717,7 @@ body {
 <li>Si este xlet no está disponible en su idioma, la localización puede ser creada siguiendo las siguientes instrucciones. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
+<div style="font-weight:bold;" class="alert alert-info">Las siguientes dos secciones están disponibles sólo en Inglés.</div>
 </div> <!-- .localization-content -->
 
 
@@ -679,9 +777,9 @@ body {
 <li><strong>Åtgärdsposter ser fel ut:</strong> Uppgiftsposter i detta program, har förmågan att radbryta sin text om man anger en fast bredd för dem. De kan också göras flerradiga manuellt (<kbd>Shift</kbd> + <kbd>Enter</kbd> inuti en post kommer att skapa ny rad). Några Cinnamon-teman, som Mint-X-familjens standarteman, sätter en fast bredd och höjd för poster inuti menyer. Dessa fasta storlekar gör det programatiskt omöjligt att ange en önskad bredd för posterna (jag kunde åtminstone inte hitta ett sätt att göra det). Fast höjd tillåter inte posterna att expandera, bryter helt menyposters förmåga att radbryta text och att bli flerradiga.</li>
 </ul>
 <h3>Så här skall listposter se ut</h3>
-<p><img src="./assets/00-correct-entries-styling.png" alt="Korrekt stilsättning för menyposter"></p>
+<p><img class="correct-entries-styling" alt="Korrekt stilsättning för menyposter"></p>
 <h3>Så här skall listposter INTE se ut</h3>
-<p><img src="./assets/00-incorrect-entries-styling.png" alt="Felaktig stilsättning för menyposter"></p>
+<p><img class="incorrect-entries-styling" alt="Felaktig stilsättning för menyposter"></p>
 <p>Enda sättet att åtgärda detta (som jag kunde hitta), är att redigera det aktuella Cinnamon-tema som används, och ta bort de fasta storlekarna. De CSS-selektorer som behöver redigeras är <strong>.menu StEntry</strong>, <strong>.menu StEntry:focus</strong>, <strong>.popup-menu StEntry</strong> och <strong>.popup-menu StEntry:focus</strong>. Beroende på den Cinnamon-version temat skapades för, kanske man bara hittar de två första selektorerna, eller de två sista, eller samtliga. De CSS-egenskaper som behöver redigeras är <strong>width</strong> och <strong>height</strong>. De kan tas bort, men det vettigaste man kan göra är att byta namn på dem till <strong>min-width</strong> respektive <strong>min-height</strong>. Efter redigering av temafilen och omstart av Cinnamon, bör menyposterna i detta program, se ut och fungera som de skall.</p>
 <hr>
 
@@ -692,6 +790,7 @@ body {
 <li>Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
+<div style="font-weight:bold;" class="alert alert-info">Följande två sektioner är endast tillgängliga på Engelska.</div>
 </div> <!-- .localization-content -->
 
 
@@ -751,9 +850,9 @@ body {
 <li><strong>Task entries look wrong:</strong> Task entries on this applet have the ability to wrap its text in case one sets a fixed width for them. They also can be multi line (<kbd>Shift</kbd> + <kbd>Enter</kbd> inside an entry will create a new line). Some Cinnamon themes, like the default Mint-X family of themes, set a fixed width and a fixed height for entries inside menus. These fixed sizes makes it impossible to programmatically set a desired width for the entries (at least, I couldn't find a way to do it). And the fixed height doesn't allow the entries to expand, completely breaking the entries capability to wrap its text and to be multi line.</li>
 </ul>
 <h3>This is how entries should look like</h3>
-<p><img src="./assets/00-correct-entries-styling.png" alt="Correct entries styling"></p>
+<p><img class="correct-entries-styling" alt="Correct entries styling"></p>
 <h3>This is how entries SHOULD NOT look like</h3>
-<p><img src="./assets/00-incorrect-entries-styling.png" alt="Incorrect entries styling"></p>
+<p><img class="incorrect-entries-styling" alt="Incorrect entries styling"></p>
 <p>The only way to fix this (that I could find) is by editing the Cinnamon theme that one is using and remove those fixed sizes. The CSS selectors that needs to be edited are <strong>.menu StEntry</strong>, <strong>.menu StEntry:focus</strong>, <strong>.popup-menu StEntry</strong> and <strong>.popup-menu StEntry:focus</strong>. Depending on the Cinnamon version the theme was created for, one might find just the first two selectors or the last two or all of them. The CSS properties that need to be edited are <strong>width</strong> and <strong>height</strong>. They could be removed, but the sensible thing to do is to rename them to <strong>min-width</strong> and <strong>min-height</strong> respectively. After editing the theme's file and restarting Cinnamon, the entries inside this applet will look and work like they should.</p>
 <hr>
 
@@ -764,11 +863,11 @@ body {
 <li>If this xlet has no locale available for your language, you could create it by following the following instructions. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
 </ul>
 
+<div style="font-weight:bold;" class="alert alert-info">The following two sections are available only in English.</div>
 </div> <!-- .localization-content -->
 
 </div> <!-- .container.boxed -->
-<div style="font-weight:bold;" class="container alert alert-info">The following two sections are available only in English.</div>
-<span id="xlet-contributors">
+<span id="xlet-contributors" style="padding-top:140px;">
 <div class="container boxed">
 <h2>Contributors/Mentions</h2>
 <ul>
@@ -780,10 +879,20 @@ body {
 
 </div> <!-- .container.boxed -->
 
-<span id="xlet-changelog">
+<span id="xlet-changelog" style="padding-top:70px;">
 <div class="container boxed">
 <h2>Simple ToDo List changelog</h2>
 <h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Tue, 6 Jun 2017 22:30:27 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/e86b5f9">e86b5f9</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Simple ToDo List applet
+- Better handling of **Settings.BindingDirection**. Just to avoid surprises when that constant is
+removed on future versions of Cinnamon.
+</code></pre>
 <hr>
 <ul>
 <li><strong>Date:</strong> Sun, 4 Jun 2017 19:38:41 +0800</li>
@@ -955,6 +1064,14 @@ es.po     0
 </div> <!-- .container.boxed -->
 
 </div> <!-- #mainarea -->
-<script type="text/javascript">toggleLocalizationVisibility(null);</script>
+<script type="text/javascript">toggleLocalizationVisibility(null);
+
+Array.prototype.slice.call(document.getElementsByClassName("incorrect-entries-styling")).forEach(function(aEl) {
+aEl.setAttribute("src", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdIAAAFxCAMAAADwNtlEAAADAFBMVEX+/v7+/v309PT09PT09PT09PT09PT09PT09PTz8/Px8fHy8vLy8vLw8PDv7+/u7u7u7u7t7e3t7e3t7e3s7Ozs7Ozt7e3t7e3u7u7u7u7v7+/v7+/w8PDv7+/v7+/u7u7u7u7r6+vr6+vq6urq6urq6uro6Ojo6Ojm5ubk5OTj4+Pi4uLh4eHf39/f39/d3d3c3Nzc3Nzc3Nzb29va2trZ2dnY2NjX19fV1dXU1NTT09PT09PS0tLS0tLR0dHR0dHQ0c/Q08zN08fLy8rJycjGxsbDw8PCwsLBwcG+vr67u7u/uL/codzcodzdod3codzNp82zs7OwsLCtra2oqKijo6Ofn5+dnZ2cnJybm5ubm5uampqYmJiTk5OPj4+KioqFkJN2mapMk9U6j+ZLi8+AgoR9fX13d3dxcXFtbW1lZWViYmJgYGBeXl5cXFxZWVlWVlZRUVFMTExHR0dERERBQUE+Pj47Ozs2NjYzMzMwMDAsLCwrKyspKSkiIiIdHR0YGBgTExMQEBAMDAwJCQkHBwcFBQUDAwMCAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANAgHGBgTHAgHIAADIAADIAADIAADIAADIAADIAADIAADIAADIAADIAADIAADLAAD+AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD8BAPpy0jozEnozEnozEnozEnozEnmy0rly0vky0vly0vmy0rozEnozEnpzUjp0EPr1jvs2zXt4C7w6CL4+gn5+gj5+wf8/AT9/gL//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD///+EyTVTAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAAAAlwSFlzAAALEwAACxMBAJqcGAAAGiBJREFUeAHs0TERAkEMAEBMxEDauGHOxj3FUT7aoT0YDORn18Le3lyMUqUo/QulKFW6HrS2fkpfozIaI+t+fpWOaI+xl64K2qvnVnpk0F4eW+kMLmAqVYpSlKIUpUpRilKUolQpSlGKUpR2phSlSjmVKlX6YbdsVhtHHiD+FPUCQf6YTJKFzJ/JYlgm4DiJfZNjOX8WOzrpQ7ITWS1Llrrr4XcVuZGs7GEuJoaZOjRUyQVF/6DxKes3UsHn/87CYopPVHvZb6RtrVhp/tNII87qZPGEtr57qdwGj5+B1OETLrydjE2U+lNlPQy8rZQmxsr/VZC6QkhmQkx/GqlxUQcj+mhLsEgKmp+A9EGtgJCFoLwHAJs2Rjmzt7cJ4NM8IaS98fz/payhcYyHN+YLgIcglan7FZjFRb6x3i/uStA/q7y+zP1RhdOUZI4DDcghjDFgvGxl5l0CQo4imdmDlcycM6Bnb+XWOQeA2ixZ3MCiHNY7WjVBM5KppVfoIhrzQpoYkA8IGAAwUjWA4OIMpUaMTgipce9u4jiO7NvO8ZCO8pWf0cNQMQh3zxCcn28YGtofIN2HlmDiOTjQpaTdBQCPcrOj6EJQrlZk/haQszJP3JgBANSmEzG83nFZ72jXBFUQkqP9Cl1szOvLvIMZd6gOmFxjxHjseSYAbHlNnIz6k0Akwh31cDykMGDMmGJCacLoQdB65WtX+0OkOvTooy1LMVv08V3RxHXOGQRDIGEEvNEp88ebH5JXABrmR0HBqFPvaNUg6AFhxfq5LjbmjbkCFhTAhKoDhHyCxa0iuQDgc0qcFlNN9EhIp5ucZI7uhkzmZxAUlN+g/SFSHdZIn6MoMvGuu0BRfDOpDGBNB4JL4JUO4NODyUr3AJpmQcq/GjtaNQgugBdG7wPqYmPejB40UnZwo7Ie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");
+});
+Array.prototype.slice.call(document.getElementsByClassName("correct-entries-styling")).forEach(function(aEl) {
+aEl.setAttribute("src", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdIAAAGhCAMAAADiCMVrAAADAFBMVEX+/v7+/v329vb19fX19fX09PT09PTz8/Pz8/Pz8/Py8vLx8fHx8fHx8fHw8PDw8PDv7+/v7+/v7+/u7u7u7u7u7u7t7e3t7e3s7Ozs7Ozr6+vr6+vr6+vq6urq6urq6urp6enp6eno6Ojo6Ojn5+fm5ubl5eXl5eXk5OTj4+Pi4uLi4uLh4eHh4eHg4ODf39/f39/e3t7e3t7d3d3c3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzb29vb29va2tra2trZ2dnY2NjX19fV1tXV1dTVz9XcodvcodzcoNzcodzco9zS0dLS0tLS0tLS0tLP0c7Ly8vFxcXCwsK/v7+4uLizs7OwsLCtra2oqKijo6OgoKCdnZ2cnJybm5ubm5uampqYmJiUlJSOl5p5m6xIktk6j+ZQjs+NjY2KioqHh4eBgYF6enp0dHRtbW1mZmZjY2NiYmJfX19eXl5cXFxZWVlYWFhWVlZSUlJOTk5LS0tISEhFRUVDQ0NAQEA8PDw6Ojo3Nzc0NDQyMjIvLy8uLi4sLCwrKysqKiopKSkiIiIeHh4cHBwYGBgUFBQREREODg4LCwsJCQkICAgHBwcFBQUDAwMCAgIBAQEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAQEBAQEAAAABAQF7AgG+BAPGBQPHBAPHAgHIAADIAADIAADIAADIAADIAADIAADIAADIAADnAAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD/AAD+AgH9BAP8BQT3LhPooz7prkDowEbny0rnzErozEnozEnozEnozEnozEnozEnozEnozEnozEnozEnozEnozEnpzUnpz0X4+gn5+wj+/gH//wH//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD//wD///8I4BQsAAABAHRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////8AU/cHJQAAAAlwSFlzAAALEwAACxMBAJqcGAAAHpdJREFUeAHsme1LI8u2xvf5NOCGQBhoCgQJGFExjIifZBjmxW/DmHTMu6KGzSGmO92JJuYlMS/daR/un31vdaVXn07veEbvnjhxph6YdK9Va1U9VT90JPXH//5ikpJIJVIpiVRKIpWSSKUkUolU6lUi7bfupF6xWv0Q0v8p7K2zVyyp9b0c5pAW2KuXVCGItL/HXr2k9gYBpM119uoltd4MIL1lv4CkbiVSiVRKIpWSSKUkUimJVCKVkkilJFIpiVRKIpVIpSRSqdeMVEoilZJIpSRSKYlUIpWCRLrKkkilJNIezhbnTDvHfqrI2WJJpHXMVHoy0hYKzFc5z8L6VBtOB0b6ZyDVkGcJfTztZET4xRltshN9MJ1m2emD8bsg1bpdG6NuN/dkpLEE86XCYGF1YfdtZH4C0vRDgzETVg+O6sbXqDJ1glGzyd3UkP31kZI6qLjnYQ6nQ32PsULXmrSL4uAOuqitezEdpvtBRbkhgAmb0wmQYrFTjr4y4BPu84ap2poOKycNe1hdZ2zzejAdVHeZEAVlWJ9ZEXbK9xFu6yHLwxK58GcJ2DORdZdPMwMGD2PDhxPWxdU6c6Wi9bshVa1GbYgaSz3AMEdn7sHttmHGKA4ipaJSD31dY3Pan6ISZ1w6pu0xunHeYNfrgNU0gAJjNfS1Dv10U7DRgnk0Rvk/PsJtPTiGCaieC2oM2NueTjZYASM2+2BZ3HCQnVNdzzKuexytDtLN09K5q2IqtjykLMZiBdyzU0yzLLbJeije4jZO8TxSSuqEJqCSg2F5m31ykGVHExR4g8nYAHeMNaG5+fTnrzYOeGkg4B9dtDb+4yPUxkOO2YQ+M+A3BuydosHYFbqMZfDAZ6ojz0oYOADKfNhAbnWQxlS93el07q6TG8tDmmtPAExY/A7on62zHrqYvmcU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");
+});
+</script>
 </body>
 </html>
