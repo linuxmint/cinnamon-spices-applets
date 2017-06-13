@@ -281,7 +281,8 @@ CobiPopupMenuItem.prototype = {
     }
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
-    this._signalManager.connect(this, "activate", this._onClick);
+    //this._signalManager.connect(this.actor, "button-release-event", this._onButtonReleaseEvent);
+    this._signalManager.connect(this, "activate", this._onActivate);
   },
   
   _onEnterEvent: function() {
@@ -314,6 +315,15 @@ CobiPopupMenuItem.prototype = {
     this._closeIcon.set_opacity(128);
   },
   
+  _onButtonReleaseEvent: function (actor, event) {
+    if (this._settings.getValue("preview-close-on-middle-click") && (event.get_state() & Clutter.ModifierType.BUTTON2_MASK)) {
+      this._onClose();
+      return true;
+    }
+    PopupMenu.PopupBaseMenuItem.prototype._onButtonReleaseEvent.call(this, actor, event);
+    return true;
+  },
+  
   _onClose: function() {
     this._inClosing = true;
     this._metaWindow.delete(global.get_current_time());
@@ -321,7 +331,7 @@ CobiPopupMenuItem.prototype = {
     return true;
   },
   
-  _onClick: function() {
+  _onActivate: function() {
     if (!this._inClosing) {
       Main.activateWindow(this._metaWindow);
     }

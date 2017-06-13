@@ -91,3 +91,6 @@ msgstr "Von Fensterleiste lösen"
 
 msgid "Unmaximize"
 msgstr "De-Maximieren"
+
+msgid "Close window on mouse-wheel click"
+msgstr "Schließe Fenster mit Mausrad-Klick"
