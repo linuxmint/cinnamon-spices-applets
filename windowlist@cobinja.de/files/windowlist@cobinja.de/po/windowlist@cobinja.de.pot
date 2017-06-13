@@ -91,3 +91,6 @@ msgstr ""
 
 msgid "Unmaximize"
 msgstr ""
+
+msgid "Close window on mouse-wheel click"
+msgstr ""
