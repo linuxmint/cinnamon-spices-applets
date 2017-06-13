@@ -198,13 +198,19 @@ MyApplet.prototype = {
             ["pref_custom_icon_for_applet", this._updateIconAndLabel],
             ["pref_custom_label_for_applet", this._updateIconAndLabel],
         ];
-        let bindingDirection = Settings.BindingDirection.BIDIRECTIONAL || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let bindingType = typeof this.settings.bind === "function";
         for (let [property_name, callback] of settingsArray) {
             if (bindingType)
                 this.settings.bind(property_name, property_name, callback);
             else
-                this.settings.bindProperty(bindingDirection, property_name, property_name, callback, null);
+                this.settings.bindProperty(bD.BIDIRECTIONAL, property_name, property_name, callback, null);
         }
     },
 

@@ -11,6 +11,6 @@
     "max-instances": -1,
     "uuid": "0dyseus@ExtensionsManager",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "version": "1.07",
+    "version": "1.08",
     "description": "Allows enabling/disabling extensions (and other tasks) from a menu."
 }
