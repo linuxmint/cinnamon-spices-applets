@@ -112,7 +112,13 @@ MyApplet.prototype = {
     },
 
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.BIDIRECTIONAL, "pref_directory", this._onSettingsDirectory],
             [bD.BIDIRECTIONAL, "pref_sub_menu_icons_file_name", null],
