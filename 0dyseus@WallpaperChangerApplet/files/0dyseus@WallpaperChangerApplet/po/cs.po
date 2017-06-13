@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.00\n"
 "Report-Msgid-Bugs-To: Odyseus\n"
-"POT-Creation-Date: 2017-05-29 06:39+0200\n"
-"PO-Revision-Date: 2017-05-29 06:42+0200\n"
+"POT-Creation-Date: 2017-06-08 06:19+0200\n"
+"PO-Revision-Date: 2017-06-08 06:21+0200\n"
 "Last-Translator: Radek Otáhal <radek.otahal@email.cz>\n"
 "Language-Team: \n"
 "Language: cs\n"
@@ -18,28 +18,44 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "Následující dvě části jsou k dispozici pouze v angličtině."
+
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:94 ../../create_localized_help.py:163
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
 msgid "language-name"
 msgstr "Česky"
 
-#: ../../create_localized_help.py:166
+#: ../../create_localized_help.py:190 settings.py:1022
+msgid "Help"
+msgstr "Nápověda"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "Přispěvatelé"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "Changelog"
+
+#: ../../create_localized_help.py:193
 msgid "Choose language"
 msgstr "Zvolte jazyk"
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:167 ../../create_localized_help.py:174
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
 #, python-format
 msgid "Help for %s"
 msgstr "Nápověda pro %s"
 
-#: ../../create_localized_help.py:175
+#: ../../create_localized_help.py:202
 msgid "IMPORTANT!!!"
 msgstr "DŮLEŽITÉ!!!"
 
-#: ../../create_localized_help.py:176
+#: ../../create_localized_help.py:203
 msgid ""
 "Never delete any of the files found inside this xlet folder. It might break "
 "this xlet functionality."
@@ -47,7 +63,7 @@ msgstr ""
 "Nikdy neodstraňujte soubory ze složky tohoto xletu. Mohlo by to narušit "
 "funkčnost xletu. "
 
-#: ../../create_localized_help.py:177
+#: ../../create_localized_help.py:204
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
 "xlet's repository linked next."
@@ -55,11 +71,11 @@ msgstr ""
 "Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v "
 "repozitáři tohoto xletu, na který je odkaz dále."
 
-#: ../../create_localized_help.py:183
+#: ../../create_localized_help.py:210
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)"
 
-#: ../../create_localized_help.py:184
+#: ../../create_localized_help.py:211
 msgid ""
 "If this xlet was installed from Cinnamon Settings, all of this xlet's "
 "localizations were automatically installed."
@@ -68,7 +84,7 @@ msgstr ""
 "všechny tyto lokalizace xletu automaticky nainstalovány."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:186
+#: ../../create_localized_help.py:213
 msgid ""
 "If this xlet was installed manually and not trough Cinnamon Settings, "
 "localizations can be installed by executing the script called "
@@ -78,7 +94,7 @@ msgstr ""
 "Cinnamonu, mohou být lokalizace instalovány spuštěním skriptu nazvaného ** "
 "localizations.sh ** z terminálu otevřeného uvnitř složky xletu."
 
-#: ../../create_localized_help.py:187
+#: ../../create_localized_help.py:214
 msgid ""
 "If this xlet has no locale available for your language, you could create it "
 "by following the following instructions."
@@ -353,10 +369,6 @@ msgstr "Pamatovat si velikost okna"
 msgid "Restart Cinnamon"
 msgstr "Restartovat Cinnamon"
 
-#: settings.py:1022
-msgid "Help"
-msgstr "Nápověda"
-
 #: settings.py:1024
 msgid "About"
 msgstr "O aplikaci"
@@ -561,22 +573,6 @@ msgstr "Profil změněn na %s"
 msgid "Configure..."
 msgstr "Nastavit..."
 
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid ""
-"Eric Gach: Author of Desk Changer gnome-shell extension. https://github.com/"
-"BigE/desk-changer"
-msgstr ""
-"Eric Gach: Autor rozšíření Desk CHanger pro gnome-shell. https://github.com/"
-"BigE/desk-changer "
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid "eson57: Swedish localization."
-msgstr "eson57: Švédská lokalizace."
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
-msgid "giwhub: Chinese localization."
-msgstr "giwhub: Čínská lokalizace."
-
 #. 0dyseus@WallpaperChangerApplet->metadata.json->comments
 msgid ""
 "Bug reports, feature requests and contributions should be done on this "
@@ -588,3 +584,20 @@ msgstr ""
 #. 0dyseus@WallpaperChangerApplet->metadata.json->description
 msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
 msgstr "Cinnamon aplet pro změnu tapet/pozadí s podporou více profilů."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Viz soubor s nápovědou tohoto xletu."
+
+#~ msgid ""
+#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
+#~ "com/BigE/desk-changer"
+#~ msgstr ""
+#~ "Eric Gach: Autor rozšíření Desk CHanger pro gnome-shell. https://github."
+#~ "com/BigE/desk-changer "
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57: Švédská lokalizace."
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Čínská lokalizace."

@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
-"POT-Creation-Date: 2017-06-02 17:05-0300\n"
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.01\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,65 +15,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 
-#: ../../create_localized_help.py:90
-msgid "The following two sections are available only in English."
-msgstr ""
-
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+#: ../../create_localized_help.py:119 ../../create_localized_help.py:195
 msgid "language-name"
 msgstr ""
 
-#: ../../create_localized_help.py:190 settings.py:1022
+#: ../../create_localized_help.py:125
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:198 settings.py:1022
 msgid "Help"
 msgstr ""
 
-#: ../../create_localized_help.py:191
+#: ../../create_localized_help.py:199
 msgid "Contributors"
 msgstr ""
 
-#: ../../create_localized_help.py:192
+#: ../../create_localized_help.py:200
 msgid "Changelog"
 msgstr ""
 
-#: ../../create_localized_help.py:193
+#: ../../create_localized_help.py:201
 msgid "Choose language"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#: ../../create_localized_help.py:202 ../../create_localized_help.py:209
 #, python-format
 msgid "Help for %s"
 msgstr ""
 
-#: ../../create_localized_help.py:202
+#: ../../create_localized_help.py:210
 msgid "IMPORTANT!!!"
 msgstr ""
 
-#: ../../create_localized_help.py:203
+#: ../../create_localized_help.py:211
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
-#: ../../create_localized_help.py:204
+#: ../../create_localized_help.py:212
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
-#: ../../create_localized_help.py:210
+#: ../../create_localized_help.py:218
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
-#: ../../create_localized_help.py:211
+#: ../../create_localized_help.py:219
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:213
+#: ../../create_localized_help.py:221
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
-#: ../../create_localized_help.py:214
+#: ../../create_localized_help.py:222
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
@@ -521,10 +521,10 @@ msgstr ""
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr ""
 
-#. 0dyseus@WallpaperChangerApplet->metadata.json->description
-msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
-msgstr ""
-
 #. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
 msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
 msgstr ""
