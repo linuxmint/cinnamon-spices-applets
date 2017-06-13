@@ -54,8 +54,6 @@ This applet is a custom version of the default Cinnamon Menu applet, but infinit
 
 ![Whisker menu](https://odyseus.github.io/CinnamonTools/lib/img/CustomCinnamonMenu-001.png "Whisker menu")
 
-[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40CustomCinnamonMenu/CONTRIBUTORS.md)
-
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40CustomCinnamonMenu/CHANGELOG.md)
-
-[ToDo](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40CustomCinnamonMenu/TODO)
+#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@CustomCinnamonMenu.html)
+#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@CustomCinnamonMenu.html#xlet-contributors)
+#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@CustomCinnamonMenu.html#xlet-changelog)

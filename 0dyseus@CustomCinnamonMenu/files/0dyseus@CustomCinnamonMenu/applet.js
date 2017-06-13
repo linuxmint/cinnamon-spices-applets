@@ -214,7 +214,13 @@ MyApplet.prototype = {
      * START mark Odyseus
      */
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.BIDIRECTIONAL, "pref_hide_allapps_category", null],
             [bD.BIDIRECTIONAL, "pref_display_favorites_as_category_menu", null],
