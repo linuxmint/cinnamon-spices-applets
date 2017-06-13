@@ -32,6 +32,6 @@ system.
 
 **Important note:** NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it.
 
-[Contributors/Mentions](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SysmonitorByOrcus/CONTRIBUTORS.md)
-
-[Full change log](https://github.com/Odyseus/CinnamonTools/blob/master/applets/0dyseus%40SysmonitorByOrcus/CHANGELOG.md)
+#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SysmonitorByOrcus.html)
+#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SysmonitorByOrcus.html#xlet-contributors)
+#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SysmonitorByOrcus.html#xlet-changelog)
