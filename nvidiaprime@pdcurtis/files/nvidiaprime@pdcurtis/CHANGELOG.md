@@ -1,5 +1,9 @@
 ## Changelog for recent versions
 
+### 3.3.2
+
+ * Updates to some tooltips and README.md to reflect the latest changes better.
+
 ### 3.3.1
 
  * Add checks that Nvidia drivers and nvidia-settings are loaded

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-13 01:52+0100\n"
+"POT-Creation-Date: 2017-06-14 07:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,8 +55,8 @@ msgstr ""
 
 #: applet.js:290
 msgid ""
-"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
-"drivers installed?"
+"Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-"
+"prime  installed?"
 msgstr ""
 
 #. nvidiaprime@pdcurtis->settings-schema.json->showGpuTemp->description

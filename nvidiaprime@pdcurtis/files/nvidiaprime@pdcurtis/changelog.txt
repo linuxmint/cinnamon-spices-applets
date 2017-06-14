@@ -1,4 +1,4 @@
-Version 3.3.1
+Version 3.3.2
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -47,4 +47,7 @@ Major new version to support vertical panels and to use icons instead of text to
 ### 3.3.1
  * Add checks that Nvidia drivers and nvidia-settings are loaded
  * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
- * Update nvidiaprime.pot to identify changes which need to be translated
+ * Update nvidiaprime.pot to identify changes which need to be translated.
+### 3.3.2
+ * Updates to some tooltips and README.md to reflect the latest changes better.
+ * Update nvidiaprime.pot to identify changes which need to be translated.
