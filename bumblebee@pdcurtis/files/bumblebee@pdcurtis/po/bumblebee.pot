@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-14 03:44+0100\n"
+"POT-Creation-Date: 2017-06-14 01:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,60 +17,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:154
+#: applet.js:172
 msgid "Waiting for Bumblebee"
 msgstr ""
 
-#: applet.js:210
+#: applet.js:232
 msgid "Open nVidia Settings Program"
 msgstr ""
 
-#: applet.js:216
+#: applet.js:238
 msgid "Open Power Statistics"
 msgstr ""
 
-#: applet.js:224
+#: applet.js:244
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:233
+#: applet.js:253
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:236
+#: applet.js:256
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:242
+#: applet.js:262
 msgid "Open the Help file"
 msgstr ""
 
-#: applet.js:258
+#: applet.js:278
 msgid "Launch programs using the nVidia Graphics Processor"
 msgstr ""
 
-#: applet.js:331
-msgid "ERROR"
-msgstr ""
-
-#: applet.js:332
-msgid "Bumblebee is not installed so applet willl not work"
-msgstr ""
-
-#: applet.js:337
+#: applet.js:358
 msgid "NVidia based GPU is Off"
 msgstr ""
 
-#: applet.js:352
+#: applet.js:381
 msgid "NVidia based GPU is On and Core Temperature is"
 msgstr ""
 
+#: applet.js:389
+msgid "Err"
+msgstr ""
+
+#: applet.js:390
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr ""
+
 #. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->description
-msgid "Show GPU Temperature in Horizontal Panels"
+msgid "Show GPU Temperature as well as icon"
 msgstr ""
 
 #. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->tooltip
-msgid "Not available in Vertical Panels"
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
 msgstr ""
 
 #. bumblebee@pdcurtis->settings-schema.json->head2->description

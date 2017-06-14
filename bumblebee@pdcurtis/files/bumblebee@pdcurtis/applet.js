@@ -18,8 +18,7 @@ const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const Gettext = imports.gettext; // ++ Needed for translations
-const Main = imports.ui.main;
-
+const Main = imports.ui.main; // ++ Needed for criticalNotify()
 
 // ++ Always needed for localisation/translation support
 // l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
@@ -133,11 +132,12 @@ MyApplet.prototype = {
             this.nvidea_icon = metadata.path + "/icons/nvidia.png"
             this.intel_icon = metadata.path + "/icons/prime-tray-intel.png"
 
-            this.on_orientation_changed(orientation); // Initialise for panel orientation
+            this.on_orientation_changed(orientation); // ++ Initialise for panel orientation
 
             this.applet_running = true; //** Allow applet to be fully stopped when removed from panel
 
             // Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
+            // This could be replaced by use of system editor? but "If it ain't broke don't fix it" 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else { 
@@ -149,7 +149,7 @@ MyApplet.prototype = {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
-                 Main.criticalNotify("Bumblebee program not installed", "You appear to be missing some of the required programs for 'bumblebee' to switch graphics processors using NVIDIA Optimus\n\n", icon);
+                 Main.criticalNotify("Bumblebee program not installed", "You appear to be missing some of the required programs for 'bumblebee' to switch graphics processors using NVIDIA Optimus.\n\nPlease read the help file.", icon);
                  this.bumblebeeMissing = true;
             } else {
                  this.bumblebeeMissing = false;
@@ -240,8 +240,6 @@ MyApplet.prototype = {
             GLib.spawn_command_line_async('gnome-power-statistics');
         }));
         this._applet_context_menu.addMenuItem(menuitem2);
-
-
 
         this.menuitem3 = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
         this.menuitem3.connect('activate', Lang.bind(this, function (event) {
@@ -348,13 +346,11 @@ MyApplet.prototype = {
               this.bbst = "OFF";
          }
       // This catches error if bbswitch and hence bumblebee is not loaded                     
-      } catch (e) {
-//          global.logError(e);  // Comment out to avoid filling error log
-        this.bbst = "ERROR"
-/*  	  this.set_applet_label(_("Err" )); 
-          this.set_applet_tooltip(_("bbswitch, bumblebee or nvidia drivers are not installed so applet will not work"));
-*/        
-      } 
+   } catch (e) {
+//          global.logError(e);  // Commented out to avoid filling error log
+        this.bbst = "ERROR";
+   }
+ 
    try {
          if(this.bbst == "OFF") {
                this.set_applet_label(""); 
@@ -368,23 +364,30 @@ MyApplet.prototype = {
                 // Check we have a valid temperature returned before updating 
                 // in case of slow response from nvidia-settings which gives null string
                 if(this.nvidiagputemp1.substr(5,2) > 0){ this.nvidiagputemp = this.nvidiagputemp1.substr(5,2)}; 
-                if (!this.showGpuTemp  || !this.isHorizontal) {
+
+                if (!this.showGpuTemp ) {
 	                  this.set_applet_label("");
                       this.hide_applet_label(true);
                  } else { 
                       this.hide_applet_label(false);
-                      this.set_applet_label(this.nvidiagputemp + " \u1d3cC" );
+                      if ( this.nvidiagputemp < 100 || this.isHorizontal )  { 
+                           this.set_applet_label(this.nvidiagputemp + "\u1d3c" );
+                      } else {
+                           this.set_applet_label(this.nvidiagputemp + "" ); // Needs empty string for typing
+                      }
+
                  }
 
                 this.set_applet_tooltip(_("NVidia based GPU is On and Core Temperature is") + " " + this.nvidiagputemp + "\u1d3cC" );
                 this.set_applet_icon_path(this.nvidea_icon);
+
                 // Get temperatures via asyncronous script ready for next cycle
                 GLib.spawn_command_line_async('sh ' + this.gputempScript );
          } 
 
          if(this.bbst == "ERROR" || this.bumblebeeMissing) {
 	          this.set_applet_label(_("Err" )); 
-              this.set_applet_tooltip(_("Bumble is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
+              this.set_applet_tooltip(_("Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
               this.hide_applet_label(false);       
          }
       } catch (e) {
@@ -414,7 +417,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 3.2.1
+Version 3.2.2
 v20_0.9.0 Beta 12-12-2013
 v20_0.9.1 Added System Monitor and Power Statistics to right click menu
 v20_0.9.2 Added Left Click Menu with 5 Program Launch Items with configuration in Settings - Release Candidate 14-12-2013 
@@ -460,4 +463,7 @@ v30_3.1.0  Changed help file from help.txt to README.md
  * Use CHANGELOG.md instead of changelog.txt in context menu
  * Add symbolic link from UUID folder to applet folder so it is displayed on latest spices web site.
  * Add check that bumblebee daemon is installed.
+### 3.2.2
+ * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
+ * Update bumblebee.pot to identify changes which need to be translated
 */

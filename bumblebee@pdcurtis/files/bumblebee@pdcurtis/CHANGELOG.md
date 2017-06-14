@@ -1,5 +1,10 @@
 ## Changelog for recent versions
 
+### 3.2.2
+
+ * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
+ * Update bumblebee.pot to identify changes which need to be translated
+
 ### 3.2.1
 
  * Use CHANGELOG.md instead of changelog.txt in context menu
