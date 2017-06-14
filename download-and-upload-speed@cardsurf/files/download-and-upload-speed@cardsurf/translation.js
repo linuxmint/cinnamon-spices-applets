@@ -51,7 +51,7 @@ Translator.prototype = {
     _generate_mo_files: function(script_path) {
         let process = new ShellUtils.ShellOutputProcess([script_path]);
         let output = process.spawn_sync_and_get_output();
-        return outpu
+        return output;
     },
 
 };
