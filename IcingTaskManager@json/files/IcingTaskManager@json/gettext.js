@@ -1,8 +1,8 @@
 const Gettext = imports.gettext;
 function t (str) {
-  var resultConf = Gettext.dgettext('IcingTaskManager@json', str)
+  var resultConf = Gettext.dgettext('IcingTaskManager@json', str);
   if (resultConf != str) {
-    return resultConf
+    return resultConf;
   }
-  return Gettext.gettext(str)
+  return Gettext.gettext(str);
 };
