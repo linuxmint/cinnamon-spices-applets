@@ -12,7 +12,9 @@ It is useful to have continuous indication of whether the Discrete Graphics Proc
 
 ## Features
 
-The latest versions 3.3.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon making it consistent with the nvidia-prime system applet. The GPU temperature display is beside the icon on horizontal panels and inhibited on vertical panels. The temperature display in the panel can now be inhibited in horizontal panels to save space if required.  One can also configure the update rate of the applet in settings.
+The latest versions 3.3.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon. The GPU temperature display is beside the icon on horizontal panels and below on vertical panels.  The display is shortened (by removing the degree symbol) if over 100 degrees on vertical panels because of width restrictions.
+
+The temperature display in the panel can now be inhibited to save space if required in settings.  One can also configure the update rate of the applet in settings.
 
 Clicking the applet opens nvidia-settings which allows one to change GPU in the same way as the built in NVIDIA Prime applet.
 

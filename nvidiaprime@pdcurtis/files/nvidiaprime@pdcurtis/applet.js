@@ -287,7 +287,7 @@ MyApplet.prototype = {
 
          if(this.bbst == "ERROR" || this.nvidiaPrimeMissing) {
 	          this.set_applet_label(_("Err" )); 
-              this.set_applet_tooltip(_("Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
+              this.set_applet_tooltip(_("Nvidia Prime is not set up correctly - are the nvidia drivers and nvidia-prime  installed?")); 
               this.hide_applet_label(false);       
          }
       } catch (e) {
@@ -317,7 +317,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 3.3.1
+Version 3.3.2
 
 v30_3.0.0 Based on Bumblbee v20_0.9.8 but modified to use nVidia Prime.
           Changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
@@ -367,5 +367,8 @@ Major new version to support vertical panels and to use icons instead of text to
  * Add checks that Nvidia drivers and nvidia-settings are loaded
  * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
  * Update nvidiaprime.pot to identify changes which need to be translated
+### 3.3.2
+ * Updates to some tooltips and README.md to reflect the latest changes better.
+ * Update nvidiaprime.pot to identify changes which need to be translated.
 */
 
