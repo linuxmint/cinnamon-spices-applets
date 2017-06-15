@@ -4,6 +4,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St
 const Tweener = imports.ui.tweener
 const DND = imports.ui.dnd
+const Meta = imports.gi.Meta;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
@@ -32,11 +33,11 @@ AppButton.prototype = {
     this._applet = parent._applet
     this._parent = parent
     this.isFavapp = parent.isFavapp
-    this.metaWindow = []
+    this.metaWindow = null;
     this.metaWindows = []
     this.settings = this._applet.settings
     this.actor = new St.Bin({
-      style_class: 'window-list-item-box app-list-item-box',
+      style_class: 'window-list-item-box',
       reactive: true,
       can_focus: true,
       x_fill: true,
@@ -58,18 +59,16 @@ AppButton.prototype = {
       name: 'iconLabelButton'
     })
 
-    if (this._applet.orientation == St.Side.TOP) {
+    if (this._applet.orientation === St.Side.TOP) {
       this.actor.add_style_class_name('top');
-    }
-    else if (this._applet.orientation == St.Side.BOTTOM) {
+    } else if (this._applet.orientation === St.Side.BOTTOM) {
       this.actor.add_style_class_name('bottom');
-    }
-    else if (this._applet.orientation == St.Side.LEFT) {
+    } else if (this._applet.orientation === St.Side.LEFT) {
       this.actor.add_style_class_name('left');
-    }
-    else if (this._applet.orientation == St.Side.RIGHT) {
+    } else if (this._applet.orientation === St.Side.RIGHT) {
       this.actor.add_style_class_name('right');
     }
+
     this.actor.set_child(this._container)
     this.signals._container.push(this._container.connect('get-preferred-width', Lang.bind(this, this._getPreferredWidth)))
     this.signals._container.push(this._container.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight)))
@@ -82,7 +81,6 @@ AppButton.prototype = {
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel'
     })
-
 
     this._container.add_actor(this.icon)
     this._container.add_actor(this._label)
@@ -117,7 +115,7 @@ AppButton.prototype = {
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4
       this.offsetPadding =  themePadding > 10 ? _.round(themePadding / 4) : themePadding > 7 ? _.round(themePadding / 2) : 5;
     }
-    if (this._applet.orientation === St.Side.TOP || this._applet.orientation == St.Side.BOTTOM) {
+    if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM) {
       var padding;
       if (this._applet.themePadding) {
         padding = padding = this._applet.iconPadding <= 5 ? [this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1 + 'px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4) + 'px'];
@@ -191,7 +189,7 @@ AppButton.prototype = {
     // The label text is starts in the center of the icon, so we should allocate the space
     // needed for the icon plus the space needed for(label - icon/2)
     alloc.min_size = iconMinSize
-    if (this._applet.titleDisplay == 3 && !this._parent.isFavapp) {
+    if (this._applet.titleDisplay === 3 && !this._parent.isFavapp) {
       alloc.natural_size = constants.MAX_BUTTON_WIDTH
     }
     else {
@@ -224,7 +222,7 @@ AppButton.prototype = {
     // Set the icon to be left-justified (or right-justified) and centered vertically
     let [iconNaturalWidth, iconNaturalHeight] = this.icon.get_preferred_size();
     [childBox.y1, childBox.y2] = center(allocHeight, iconNaturalHeight)
-    if (direction == Clutter.TextDirection.LTR) {
+    if (direction === Clutter.TextDirection.LTR) {
       [childBox.x1, childBox.x2] = [0, Math.min(iconNaturalWidth, allocWidth)]
     } else {
       [childBox.x1, childBox.x2] = [Math.max(0, allocWidth - iconNaturalWidth), allocWidth]
@@ -235,7 +233,7 @@ AppButton.prototype = {
     var iconWidth = childBox.x2 - childBox.x1;
     var [naturalWidth, naturalHeight] = this._label.get_preferred_size();
     [childBox.y1, childBox.y2] = center(allocHeight, naturalHeight)
-    if (direction == Clutter.TextDirection.LTR) {
+    if (direction === Clutter.TextDirection.LTR) {
       childBox.x1 = iconWidth
       childBox.x2 = Math.min(allocWidth, constants.MAX_BUTTON_WIDTH)
     } else {
@@ -243,7 +241,7 @@ AppButton.prototype = {
       childBox.x1 = Math.max(0, childBox.x2 - naturalWidth)
     }
     this._label.allocate(childBox, flags)
-    if (direction == Clutter.TextDirection.LTR) {
+    if (direction === Clutter.TextDirection.LTR) {
       childBox.x1 = -3
       childBox.x2 = childBox.x1 + this._numLabel.width
       childBox.y1 = box.y1 - 2
@@ -255,6 +253,15 @@ AppButton.prototype = {
       childBox.y2 = box.y2 - 1
     }
     this._numLabel.allocate(childBox, flags)
+
+    // Call set_icon_geometry for support of Cinnamon's minimize animation
+    let rect = new Meta.Rectangle();
+    [rect.x, rect.y] = this._container.get_transformed_position();
+    [rect.width, rect.height] = this._container.get_transformed_size();
+
+    if (this.metaWindow) {
+      this.metaWindow.set_icon_geometry(rect);
+    }
   },
   showLabel: function (animate, targetWidth=constants.MAX_BUTTON_WIDTH) {
     if (!this._label) {
@@ -431,13 +438,13 @@ AppButton.prototype = {
       if (this._applet.panelLauncherClass) {
         this.setStyle('window-list-item-box')
       }
-      if (this._applet.orientation == St.Side.TOP) {
+      if (this._applet.orientation === St.Side.TOP) {
        this.actor.add_style_class_name('window-list-item-box-top')
-      } else if (this._applet.orientation == St.Side.BOTTOM) {
+      } else if (this._applet.orientation === St.Side.BOTTOM) {
        this.actor.add_style_class_name('window-list-item-box-bottom')
-      } else if (this._applet.orientation == St.Side.LEFT) {
+      } else if (this._applet.orientation === St.Side.LEFT) {
        this.actor.add_style_class_name('window-list-item-box-left')
-      } else if (this._applet.orientation == St.Side.RIGHT) {
+      } else if (this._applet.orientation === St.Side.RIGHT) {
        this.actor.add_style_class_name('window-list-item-box-right')
       }
     }
