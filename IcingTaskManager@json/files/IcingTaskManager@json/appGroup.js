@@ -543,6 +543,9 @@ AppGroup.prototype = {
   },
 
   _windowTitleChanged: function (metaWindow) {
+    if (this.willUnmount) {
+      return false;
+    }
     // We only really want to track title changes of the last focused app
     if (!this._appButton) {
       throw 'Error: got a _windowTitleChanged callback but this._appButton is undefined';

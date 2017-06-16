@@ -571,7 +571,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   hoverOpen: function () {
-    if (!this.isOpen && !this._applet.onClickThumbs) {
+    if (!this.isOpen && !this._applet.onClickThumbs && !this.shouldClose) {
       this.open();
     }
   },
@@ -935,6 +935,7 @@ WindowThumbnail.prototype = {
     this.wasMinimized = false;
     this.appSwitcherItem = parent;
     this.thumbnailPadding = 16;
+    this.willUnmount = false;
     this.signals = {
       actor: [],
       button: [],
@@ -1208,6 +1209,9 @@ WindowThumbnail.prototype = {
   },
 
   _refresh: function (metaWindow, metaWindows) {
+    if (this.willUnmount) {
+      return false;
+    }
     metaWindow = metaWindow ? metaWindow : this.metaWindow;
     metaWindows = metaWindows ? metaWindows : this.metaWindows;
     if (!this.metaWindow) {
@@ -1292,6 +1296,7 @@ WindowThumbnail.prototype = {
   },
 
   destroy: function(skipSignalDisconnect){
+    this.willUnmount = true;
     try {
       if (this._trackerSignal) {
         this.tracker.disconnect(this._trackerSignal);
