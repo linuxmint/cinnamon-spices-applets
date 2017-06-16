@@ -11,7 +11,7 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
 const constants = AppletDir.constants.constants;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 // Creates a button with an icon and a label.
 // The label text must be set with setText

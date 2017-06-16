@@ -10,7 +10,7 @@ const App = AppletDir.applet;
 const AppGroup = AppletDir.appGroup.AppGroup;
 const each = AppletDir.each.each;
 const constants = AppletDir.constants.constants;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 // List of running apps
 function AppList () {

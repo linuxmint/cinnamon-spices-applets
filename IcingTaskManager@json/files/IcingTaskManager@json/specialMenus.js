@@ -20,7 +20,7 @@ const each = AppletDir.each.each;
 const getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
 const constants = AppletDir.constants.constants;
 const t = AppletDir.gettext.t;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 function AppMenuButtonRightClickMenu () {
   this._init.apply(this, arguments);
@@ -598,6 +598,7 @@ AppThumbnailHoverMenu.prototype = {
 
   close: function () {
     if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+      this._tooltip.set_text('');
       this._tooltip.hide();
       this._tooltip.preventShow = true;
     } else {
