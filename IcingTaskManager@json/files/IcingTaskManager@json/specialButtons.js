@@ -110,6 +110,10 @@ AppButton.prototype = {
   },
 
   setIconPadding: function (init) {
+    if (!this.actor.get_stage() && !init) {
+      return false;
+    }
+
     if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node();
       var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
@@ -255,12 +259,16 @@ AppButton.prototype = {
     this._numLabel.allocate(childBox, flags);
 
     // Call set_icon_geometry for support of Cinnamon's minimize animation
-    let rect = new Meta.Rectangle();
-    [rect.x, rect.y] = this._container.get_transformed_position();
-    [rect.width, rect.height] = this._container.get_transformed_size();
+    if (this.metaWindows.length > 0 && this._container.get_stage()) {
+      let rect = new Meta.Rectangle();
+      [rect.x, rect.y] = this._container.get_transformed_position();
+      [rect.width, rect.height] = this._container.get_transformed_size();
 
-    if (this.metaWindow) {
-      this.metaWindow.set_icon_geometry(rect);
+      each(this.metaWindows, (metaWindow)=>{
+        if (metaWindow) {
+          metaWindow.set_icon_geometry(rect);
+        }
+      });
     }
   },
   showLabel: function (animate, targetWidth=constants.MAX_BUTTON_WIDTH) {
