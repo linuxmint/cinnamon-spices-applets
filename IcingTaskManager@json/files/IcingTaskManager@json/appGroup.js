@@ -14,7 +14,7 @@ const App = AppletDir.applet;
 const SpecialMenus = AppletDir.specialMenus;
 const SpecialButtons = AppletDir.specialButtons;
 const constants = AppletDir.constants.constants;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 function AppGroup () {
   this._init.apply(this, arguments);
@@ -47,6 +47,7 @@ AppGroup.prototype = {
     this.timeStamp = timeStamp;
     this.ungroupedIndex = ungroupedIndex;
     this.lastFocused = null;
+    this.willUnmount = false;
 
     this.actor = new St.Bin({
       reactive: true,
@@ -126,7 +127,7 @@ AppGroup.prototype = {
   },
 
   _onDragBegin: function() {
-    if (this._applet.orientation == St.Side.TOP || this._applet.orientation == St.Side.BOTTOM) {
+    if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM) {
       this._draggable._overrideY = this.actor.get_transformed_position()[1];
       this._draggable._overrideX = null;
     } else {
@@ -157,7 +158,7 @@ AppGroup.prototype = {
       return DND.DragMotionResult.CONTINUE;
     }
 
-    if (typeof (this.appList.dragEnterTime) == 'undefined') {
+    if (typeof this.appList.dragEnterTime === 'undefined') {
       this.appList.dragEnterTime = time;
     } else {
       if (time > (this.appList.dragEnterTime + 3000)) {
@@ -542,6 +543,9 @@ AppGroup.prototype = {
   },
 
   _windowTitleChanged: function (metaWindow) {
+    if (this.willUnmount) {
+      return false;
+    }
     // We only really want to track title changes of the last focused app
     if (!this._appButton) {
       throw 'Error: got a _windowTitleChanged callback but this._appButton is undefined';
@@ -622,6 +626,10 @@ AppGroup.prototype = {
   },
 
   _calcWindowNumber: function (metaWorkspace) {
+    if (this.willUnmount) {
+      return false;
+    }
+
     if (!this._appButton) {
       console.log('Error: got a _calcWindowNumber callback but this._appButton is undefined');
     }
@@ -636,14 +644,14 @@ AppGroup.prototype = {
       } else {
         this._appButton._numLabel.show();
       }
-    } else if (numDisplay == constants.NumberDisplay.Normal) {
+    } else if (numDisplay === constants.NumberDisplay.Normal) {
       if (windowNum <= 0) {
         this._appButton._numLabel.hide();
       }
       else {
         this._appButton._numLabel.show();
       }
-    } else if (numDisplay == constants.NumberDisplay.All) {
+    } else if (numDisplay === constants.NumberDisplay.All) {
       this._appButton._numLabel.show();
     } else {
       this._appButton._numLabel.hide();
@@ -668,6 +676,7 @@ AppGroup.prototype = {
   },
 
   destroy: function (skip=false) {
+    this.willUnmount = true;
     // Unwatch all workspaces before we destroy all our actors
     // that callbacks depend on
 

@@ -20,7 +20,7 @@ const each = AppletDir.each.each;
 const getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
 const constants = AppletDir.constants.constants;
 const t = AppletDir.gettext.t;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 function AppMenuButtonRightClickMenu () {
   this._init.apply(this, arguments);
@@ -571,7 +571,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   hoverOpen: function () {
-    if (!this.isOpen && !this._applet.onClickThumbs) {
+    if (!this.isOpen && !this._applet.onClickThumbs && !this.shouldClose) {
       this.open();
     }
   },
@@ -598,6 +598,7 @@ AppThumbnailHoverMenu.prototype = {
 
   close: function () {
     if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+      this._tooltip.set_text('');
       this._tooltip.hide();
       this._tooltip.preventShow = true;
     } else {
@@ -934,6 +935,7 @@ WindowThumbnail.prototype = {
     this.wasMinimized = false;
     this.appSwitcherItem = parent;
     this.thumbnailPadding = 16;
+    this.willUnmount = false;
     this.signals = {
       actor: [],
       button: [],
@@ -1207,6 +1209,9 @@ WindowThumbnail.prototype = {
   },
 
   _refresh: function (metaWindow, metaWindows) {
+    if (this.willUnmount) {
+      return false;
+    }
     metaWindow = metaWindow ? metaWindow : this.metaWindow;
     metaWindows = metaWindows ? metaWindows : this.metaWindows;
     if (!this.metaWindow) {
@@ -1291,6 +1296,7 @@ WindowThumbnail.prototype = {
   },
 
   destroy: function(skipSignalDisconnect){
+    this.willUnmount = true;
     try {
       if (this._trackerSignal) {
         this.tracker.disconnect(this._trackerSignal);

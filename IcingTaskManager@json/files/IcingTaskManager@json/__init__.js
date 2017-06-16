@@ -1,11 +1,3 @@
-const Lang = imports.lang;
-const Mainloop = imports.mainloop;
-const setTimeout = function(cb, duration){
-  Mainloop.timeout_add(duration, Lang.bind(this, ()=>{
-    cb.call(this, arguments);
-  }));
-};
-
 const Main = imports.ui.main;
 function clog() {
   var label = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'LOG';
@@ -29,3 +21,5 @@ function clog() {
     }
   }
 };
+
+window.clog = clog;

@@ -31,7 +31,7 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
 const AppList = AppletDir.appList.AppList;
-const setTimeout = AppletDir.__init__.setTimeout;
+const setTimeout = AppletDir.timers.setTimeout;
 
 // Some functional programming tools
 const range = function (a, b) {
