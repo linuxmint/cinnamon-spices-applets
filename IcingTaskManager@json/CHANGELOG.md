@@ -1,5 +1,11 @@
 Changelog
 
+### 4.6.0
+
+  * Added support for Cinnamon's minimize animation positioning.
+  * Improved timer handling.
+  * Fixed orphan St.Label errors.
+
 ### 4.5.1
 
   * Removed extra tooling causing performance issues.
@@ -276,7 +282,7 @@ Changelog
 
 ### 3.0.10
 
-  * Rewrote parts of the window list handling. 
+  * Rewrote parts of the window list handling.
   * Performance improvements.
   * Localization fixes by [Pandiora](https://github.com/jaszhix/icingtaskmanager/pull/27)
 
