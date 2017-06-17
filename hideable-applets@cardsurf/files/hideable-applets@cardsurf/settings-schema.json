@@ -1,0 +1,121 @@
+{
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "action_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Action",
+        "options" : {
+            "Open or close tray" : 0,
+            "Toggle visibility applets" : 1
+        },
+        "tooltip" : "An action to perform on trigger"
+    },
+    "action_trigger_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Trigger",
+        "options" : {
+            "Left mouse click" : 0,
+            "Mouse hover" : 1,
+            "None" : 2
+        },
+        "tooltip" : "An event that triggers the action"
+    },
+    "side_type" : {
+        "type": "combobox",
+        "default" : 3,
+        "description" : "Applets location",
+        "options" : {
+            "Top": 0,
+            "Right" : 1,
+            "Bottom" : 2,
+            "Left" : 3
+        },
+        "tooltip" : "A location of applets for which to toggle visibility"
+    },
+    "save_every": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 1,
+        "max": 86400,
+        "step": 1,
+        "units": "seconds",
+        "description": "Save every",
+        "tooltip" : "How often to save last used values"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+    "gui_sort_type": {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Sort",
+        "options" : {
+            "Alphabetically": 0,
+            "Panel position" : 1
+        },
+        "tooltip" : "An order of items in the user interface"
+    },
+    "applet_popup_columns": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "",
+        "description": "Columns",
+        "tooltip" : "A number of columns in the applet tray"
+    },
+    "applet_popup_icons_size": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 1,
+        "max": 500,
+        "step": 1,
+        "units": "pixels",
+        "description": "Icon size",
+        "tooltip" : "A size of an icon in the applet tray"
+    },
+    "applet_popup_icons_css": {
+        "type": "entry",
+        "default": "padding: 10px;",
+        "description": "Tray icon CSS",
+        "tooltip": "A CSS style applied to the icons in the applet tray"
+    },
+    "applet_popup_table_css": {
+        "type": "entry",
+        "default": "padding: 15px;",
+        "description": "Tray table CSS",
+        "tooltip": "A CSS style applied to a table in the applet tray"
+    },
+    "applet_popup_close_leave" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Auto close tray",
+        "tooltip": "Close the applet tray when a mouse leaves the user interface"
+    },
+    "show_icon_tooltips" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Show tooltips",
+        "tooltip": "Show icon tooltips in the applet tray"
+    },
+    "gui_icon_filepath" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/hideable-applets@cardsurf/icons/arrow-up.svg",
+        "description" : "Icon",
+        "tooltip": "An icon displayed on a panel"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    }
+
+}
