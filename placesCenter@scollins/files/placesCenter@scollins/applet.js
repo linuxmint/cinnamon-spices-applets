@@ -214,10 +214,10 @@ MyApplet.prototype = {
     on_orientation_changed: function(orientation) {
         this.orientation = orientation;
         if (orientation in [St.Side.LEFT, St.Side.RIGHT]) {
-            this.hide_applet_label(false);
+            this.hide_applet_label(true);
         }
         else {
-            this.hide_applet_label(true);
+            this.hide_applet_label(false);
         }
     },
 
