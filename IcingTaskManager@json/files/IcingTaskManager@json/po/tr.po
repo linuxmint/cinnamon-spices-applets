@@ -1,0 +1,566 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Linux Mint Türkiye\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
+msgstr "Uygulama gruplama ve pencere ön izleme destekli pencere listesi"
+
+#. IcingTaskManager@json->metadata.json->name
+msgid "Icing Task Manager"
+msgstr "Icing Görev Yöneticisi"
+
+#. src->settings-schema.json->thumbnail-size->description
+msgid "Thumbnail size"
+msgstr "Ön izleme boyutu"
+
+#. src->settings-schema.json->thumbnail-size->tooltip
+msgid "Controls the size of the thumbnails."
+msgstr "Ön izlemelerin boyutunu kontrol eder"
+
+#. src->settings-schema.json->thumbnail-size->units
+msgid "size"
+msgstr "boyut"
+
+#. src->settings-schema.json->icon-spacing->description
+msgid "Icon spacing"
+msgstr "Simge boşluğu"
+
+#. src->settings-schema.json->icon-spacing->tooltip
+msgid "Controls how much space is between the icons."
+msgstr "Simgeler arasında ne kadar boşluk olacağını kontrol eder"
+
+#. src->settings-schema.json->icon-spacing->units
+#. src->settings-schema.json->icon-size->units
+#. src->settings-schema.json->icon-padding->units
+#. src->settings-schema.json->appmenu-width->units
+msgid "px"
+msgstr "px"
+
+#. src->settings-schema.json->show-thumbnails->description
+msgid "Show thumbnails"
+msgstr "Ön izlemeleri göster"
+
+#. src->settings-schema.json->show-thumbnails->tooltip
+msgid "Show window thumbnails when hovering over an app button."
+msgstr "Bir uygulama düğmesinin üstüne gelince ön izleme göster."
+
+#. src->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Simge boyutu"
+
+#. src->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Simge boyutunu ayarla"
+
+msgid "Global hotkey to show the order of apps"
+msgstr "Uygulamaların sırasını gösteren genel kısayol tuşu"
+
+msgid "Duration of the apps order display on hotkey press"
+msgstr "Kısayol tuşuna basıldığında uygulama sırası gösterim süresi"
+
+msgid ""
+"When triggered, the window count label will be replaced with its order in "
+"the app list temporarily."
+msgstr ""
+"Tetiklendiğinde, pencere sayısı etiketi uygulama listesindeki sırasıyla "
+"geçici olarak değiştirilir."
+
+msgid ""
+"Determines the duration the window count labels are replaced with the app's "
+"order number."
+msgstr ""
+"Pencere sayısı etiketlerinin uygulamanın sıra numarası ile değiştirilmesi "
+"süresini belirler."
+
+#. src->settings-schema.json->hover-peek-time->description
+msgid "Window fade time"
+msgstr "Pencere solma süresi"
+
+#. src->settings-schema.json->hover-peek-time->tooltip
+msgid "Controls how quickly a window will fade on hover."
+msgstr "Üstüne geldiğinde bir pencerenin nasıl hızlı solacağını kontrol eder."
+
+#. src->settings-schema.json->hover-peek-time->units
+#. src->settings-schema.json->thumbnail-timeout->units
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. src->settings-schema.json->appmenu-number->units
+msgid "number"
+msgstr "sayı"
+
+#. src->settings-schema.json->title-display->description
+msgid "Title display"
+msgstr "Başlık gösterimi"
+
+#. src->settings-schema.json->title-display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+"etkin: etkin pencere başlığını göster, başlık: pencere başlığını göster, "
+"uygulama: uygulama adını göster, hiçbiri: hiç bir şey gösterme"
+
+#. src->settings-schema.json->title-display->options
+#. src->settings-schema.json->number-display->options
+msgid "None"
+msgstr "Hiçbiri"
+
+#. src->settings-schema.json->title-display->options
+msgid "Focused"
+msgstr "Etkin"
+
+#. src->settings-schema.json->title-display->options
+msgid "App"
+msgstr "Uygulama"
+
+#. src->settings-schema.json->title-display->options
+msgid "Title"
+msgstr "Başlık"
+
+#. src->settings-schema.json->show-alerts->description
+msgid "Show app alerts and notifications"
+msgstr "Uygulama uyarıları ve bildirimlerini göster"
+
+#. src->settings-schema.json->show-alerts->tooltip
+msgid "If enabled, notifications and alerts will appear."
+msgstr "Eğer etkinse, bildirimler ve uyarılar görünür."
+
+#. src->settings-schema.json->AppMenu->description
+msgid "Context Menu Settings"
+msgstr "İçerik Menüsü Ayarları"
+
+#. src->settings-schema.json->sort-thumbnails->description
+msgid "Sort windows for each app by last focused"
+msgstr "Her uygulamanın pencerelerini son etkinleştirilene göre sırala"
+
+#. src->settings-schema.json->sort-thumbnails->tooltip
+msgid ""
+"Controls whether the order windows appear for an app is by last focused, or "
+"the order they were opened."
+msgstr ""
+"Her uygulama için, pencere gösterimlerinin son etkinleştirilene göre "
+"sıralanmalarını ya da açılış sıralarına göre dizilmelerini kontrol eder."
+
+#. src->settings-schema.json->hover-peek-opacity->description
+msgid "Window opacity"
+msgstr "Pencere şeffaflığı"
+
+#. src->settings-schema.json->hover-peek-opacity->tooltip
+msgid "Opacity of the windows on hover."
+msgstr "Üstüne gelince etkinleşen pencere şeffaflığı."
+
+#. src->settings-schema.json->hover-peek-opacity->units
+msgid "percent"
+msgstr "oran"
+
+#. src->settings-schema.json->enable-hover-peek->description
+msgid "Show windows when hovered over"
+msgstr "Üstüne geldiğinde pencereleri göster"
+
+#. src->settings-schema.json->enable-hover-peek->tooltip
+msgid "Controls whether or not windows display when hovered over."
+msgstr ""
+"Fare simge üstüne geldiğinde pencere ön izlemesinin görüntülenip "
+"görüntülenmeyeceğini kontrol eder."
+
+#. src->settings-schema.json->icon-padding->description
+msgid "Icon padding"
+msgstr "Simge Dolgusu"
+
+#. src->settings-schema.json->icon-padding->tooltip
+msgid ""
+"Controls how much horizontal padding is inside the app buttons. Padding is "
+"only applied to instances of this applet on horizontal panels."
+msgstr ""
+"Uygulama düğmeleri içinde ne kadar yatay dolgu olacağını kontrol eder. Dolgu "
+"sadece bu uygulamanın yatay panellerdeki örneklerine uygulanır."
+
+msgid "Show autostart option"
+msgstr "Otomatik başlatma seçeneğini göster"
+
+msgid "Apply the monitor move option to all windows"
+msgstr "Monitör taşıma seçeneğini tüm pencerelere uygulayın"
+
+msgid ""
+"When clicking \"Move to monitor\" in the context menu, this option will move "
+"all of an app's windows instead of just the last focused window from the app."
+msgstr ""
+"Bu seçenek içerik menüsündeki \"Monitöre taşı\" seçeneğine tıklandığında, "
+"uygulamanın son etkinleşen penceresi yerine uygulamanın tüm pencerelerini "
+"taşır."
+
+msgid "Shows the autostart toggle option in an app's context menu."
+msgstr "Bu ayar içerik menüsünde Otomatik Başlatma seçeneğini gösterir."
+
+#. src->settings-schema.json->show-pinned->description
+msgid "Show pinned apps"
+msgstr "Sabitlenen uygulamaları göster"
+
+#. src->settings-schema.json->show-pinned->tooltip
+msgid ""
+"Controls whether or not the pinned apps appear in the panel if they are not "
+"open."
+msgstr ""
+"Sabitlenen uygulamaların açık olmadığı halde panelde görünüp görünmeyeceğini "
+"kontrol eder."
+
+#. src->settings-schema.json->WindowList->description
+msgid "Window List Settings"
+msgstr "Pencere Listesi Ayarları"
+
+#. src->settings-schema.json->thumbnail-timeout->description
+msgid "Thumbnail timeout"
+msgstr "Ön izleme gösterim süresi"
+
+#. src->settings-schema.json->thumbnail-timeout->tooltip
+msgid ""
+"Controls how quickly an app's set of window thumbnails will fade out when "
+"the mouse leaves the app button."
+msgstr ""
+"Fare bir uygulama düğmesi üstünden ayrıldığında, uygulama pencere ön "
+"izlemesinin ne kadar hızlı solacağı ayarını kontrol eder."
+
+#. src->settings-schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr "Ön İzleme Ayarları"
+
+#. src->settings-schema.json->show-recent->description
+msgid "Show recent items"
+msgstr "Son kullanılan öğeleri göster"
+
+#. src->settings-schema.json->show-recent->tooltip
+msgid "Controls whether recent items will appear in the context menu."
+msgstr ""
+"Son kullanılan öğelerin içerik menüsünde görünüp görünmeyeceğini kontrol "
+"eder."
+
+msgid "Animate thumbnails"
+msgstr "Ön izleme animasyonu"
+
+msgid "If enabled, thumbnails will animate when appearing and disappearing."
+msgstr "Eğer etkinse, ön izlemelerin görünüp gizlenmesi animasyon ile yapılır."
+
+#. src->settings-schema.json->vertical-thumbnails->description
+msgid "Enable vertical thumbnails"
+msgstr "Dikey ön izleme etkin"
+
+#. src->settings-schema.json->vertical-thumbnails->tooltip
+msgid "If enabled, thumbnails will stack vertically."
+msgstr "Eğer etkinleştirilirse, ön izlemeler dikey olarak yerleştirilir."
+
+#. src->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr ""
+"Temaların ön izleme penceresi kapat düğmesini kontrol etmesine izin verir."
+
+#. src->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr ""
+"Temanın, ön izleme penceresindeki kapat düğmesini kontrol edip etmediğini "
+"belirler."
+
+msgid "Include all app windows"
+msgstr "Tüm uygulama pencerelerini dahil et"
+
+msgid ""
+"Controls whether or not thumbnails for smalller child windows, such as exit "
+"confirmations and file dialogues will be included in the thumbnail list."
+msgstr ""
+"Çıkış onayları ve dosya diyalogları gibi daha küçük alt pencerelerin ön "
+"izleme listesine eklenip eklenmeyeceğini denetler."
+
+#. src->settings-schema.json->enable-iconSize->description
+msgid "Adjust icon size"
+msgstr "Simge boyutunu ayarla"
+
+#. src->settings-schema.json->enable-iconSize->tooltip
+msgid "Adjust icon size independent of Cinnamon's panel scaling."
+msgstr ""
+"Cinnamon'un panel ölçeklemesinden bağımsız olarak simge boyutunu ayarlar."
+
+#. src->settings-schema.json->number-display->description
+msgid "Number display"
+msgstr "Sayıyı göster"
+
+#. src->settings-schema.json->number-display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+"normal: pencere sayısını gösterir, akıllı: eğer birden fazla pencere varsa "
+"sayı gösterilir, hiçbiri: sayı gösterilmez, tümü: favorilerde dahil edilerek "
+"pencere sayıları gösterilir"
+
+#. src->settings-schema.json->number-display->options
+msgid "All"
+msgstr "Tümü"
+
+#. src->settings-schema.json->number-display->options
+msgid "Smart"
+msgstr "Akıllı"
+
+#. src->settings-schema.json->number-display->options
+msgid "Normal"
+msgstr "Normal"
+
+#. src->settings-schema.json->onclick-thumbnails->description
+msgid "Open thumbnails on click"
+msgstr "Ön izlemeyi tıklayınca aç"
+
+#. src->settings-schema.json->onclick-thumbnails->tooltip
+msgid "Open the thumbnails on click if there is more than one window open."
+msgstr "Eğer birden fazla pencere açıksa, ön izlemeyi tıklayınca göster."
+
+#. src->settings-schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr "Üstüne Gelme Ayarları"
+
+#. src->settings-schema.json->firefox-menu->description
+msgid "Firefox context menu"
+msgstr "Firefox içerik menüsü"
+
+#. src->settings-schema.json->firefox-menu->tooltip
+msgid ""
+"Most Visited: show the sites you visit most, Recent History: display the the "
+"last pages you visited, Bookmarks: show your favorite bookmarks."
+msgstr ""
+"En Çok Ziyaret Edilenler: en çok ziyaret ettiğin siteleri gösterir, Son "
+"Kullanılanlar Geçmişi: son ziyaret ettiğin sayfalar gösterilir, Sık "
+"Kullanılanlar: beğeni olarak sık kullanılanlara ekledikleriniz gösterilir."
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Bookmarks"
+msgstr "Sık Kullanılanlar"
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Most Visited"
+msgstr "En Çok Ziyaret Edilenler"
+
+#. src->settings-schema.json->firefox-menu->options
+msgid "Recent History"
+msgstr "Son Kullanılanlar Geçmişi"
+
+#. src->settings-schema.json->group-apps->description
+msgid "Group apps"
+msgstr "Uygulamaları gruplandır"
+
+#. src->settings-schema.json->group-apps->tooltip
+msgid "Group each app's set of windows."
+msgstr "Her uygulamanın pencere kümesini gruplandır."
+
+msgid "Show active app indicators"
+msgstr "Etkin uygulamaları işaret ile göster"
+
+msgid "Active app styling will indicate if an app is active."
+msgstr "Eğer bir uygulama etkinse, bir işaret ile gösterilecektir."
+
+#. src->settings-schema.json->arrange-pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr "Sabitlenmiş uygulamaları sırala"
+
+#. src->settings-schema.json->arrange-pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order."
+msgstr "Sabitlenmiş uygulamaların farklı sıraya alınabilmesini sağlar."
+
+msgid "Visible on all workspaces"
+msgstr "Tüm çalışma alanlarında görünür"
+
+msgid "Only on this workspace"
+msgstr "Sadece bu çalışma alanında görünür"
+
+msgid "Move to left workspace"
+msgstr "Soldaki çalışma alanına taşı"
+
+msgid "Move to right workspace"
+msgstr "Sağdaki çalışma alanına taşı"
+
+msgid "Move to monitor"
+msgstr "Monitöre taşı"
+
+msgid "Remove from Autostart"
+msgstr "Otomatik Başlatmadan Sil"
+
+msgid "Add to Autostart"
+msgstr "Otomatik Başlatmaya Ekle"
+
+msgid "Unpin from Panel"
+msgstr "Panelden Kaldır"
+
+msgid "Pin to Panel"
+msgstr "Panele Sabitle"
+
+msgid "Create Shortcut"
+msgstr "Kısayol Oluştur"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "Close All"
+msgstr "Tümünü Kapat"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
+msgid "ReArrange"
+msgstr "Yeniden sırala"
+
+msgid "Show Pinned"
+msgstr "Sabitlenenleri Göster"
+
+msgid "Show Thumbs"
+msgstr "Ön İzlemeleri Göster"
+
+msgid "Stack Thumbs"
+msgstr "Kümelenmiş Ön İzleme"
+
+msgid "Hover to Peek"
+msgstr "Üstüne Gelme"
+
+msgid "Show Recent"
+msgstr "Son Kullanılanları Göster"
+
+msgid "Vertical Thumbs"
+msgstr "Dikey Ön İzleme"
+
+msgid "     Go to Settings"
+msgstr "     Ayarlara Git"
+
+msgid "Group apps into single icon"
+msgstr "Uygulamaları tek simgeye grupla"
+
+msgid "Group the open app instances into single icon"
+msgstr "Açık uygulama durumlarını tek bir simgeye göre gruplandır"
+
+msgid "Minimize"
+msgstr "Küçült"
+
+msgid "Maximize"
+msgstr "Ekranı Kapla"
+
+msgid "Unmaximize"
+msgstr "Tam ekrandan çık"
+
+msgid "Restore"
+msgstr "Geri yükle"
+
+msgid "Use theme padding to center button icons"
+msgstr "Düğme simgelerini ortalamak için tema dolgu aracını kullanın"
+
+msgid "If button icons look off-centered, toggling this may help."
+msgstr ""
+"Eğer düğme simgeleri ortalanmış görünmüyorsa, buna geçmek yardımcı olabilir."
+
+msgid "App button hover pseudo class"
+msgstr "Uygulama düğmesi üstüne gelme sahte sınıfı"
+
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Üstüne gelmede uygulama düğmeleri için sahte sınıfı geçersiz kılar."
+
+msgid "App button focus pseudo class"
+msgstr "Uygulama düğmesi odaklama sahte sınıfı"
+
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Odaklamada uygulama düğmeleri için sahte sınıfı geçersiz kılar."
+
+msgid "App button active pseudo class"
+msgstr "Uygulama düğmesi aktifleştirme sahte sınıfı"
+
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+"Etkin olduklarında uygulama düğmeleri için sahte sınıfı geçersiz kılar."
+
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Sabitlenmiş uygulamalar için panel başlatıcısı sınıfını kullan"
+
+msgid "Enabling this helps with certain themes."
+msgstr "Bunu etkinleştirmek bazı temalarda yardımcı olur."
+
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Ön izleme menülerinin döngü geçişi için genel kısayol tuşu"
+
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr ""
+"Bu, bir pencereyi etkinleştirmeden menüler arasında gezinmenizi sağlar."
+
+msgid "Update this applet automatically"
+msgstr "Bu uygulamacığı otomatik olarak güncelle"
+
+msgid ""
+"When enabled, ITM will check the Github releases on init, and will start to "
+"upgrade if it finds a newer version."
+msgstr ""
+"Etkinleştirildiğinde, IGY init üzerindeki Github sürümlerini kontrol eder ve "
+"yeni bir sürüm bulursa güncellemeye başlar."
+
+msgid "Theme Settings"
+msgstr "Tema Ayarları"
+
+msgid "ITM Settings"
+msgstr "IGY Ayarları"
+
+msgid "Menu item type"
+msgstr "Menü öğesi türü"
+
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Menü öğesi simgelerinin sembolik, sembolik olmayan ya da gösterilip "
+"gösterilmediğini belirler."
+
+msgid "Symbolic icons"
+msgstr "Sembolik simgeler"
+
+msgid "Non-symbolic icons"
+msgstr "Sembolik olmayan simgeler"
+
+msgid "No icons"
+msgstr "Simge yok"
+
+msgid "Use system tooltips for closed apps"
+msgstr "Kapalı uygulamalar için sistem araç ipuçlarını kullan"
+
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over closed "
+"pinned apps."
+msgstr ""
+"Kapalı olan sabit uygulamaların üzerine gelindiğinde sistem araç ipuçlarının "
+"kullanılıp kullanılmayacağını kontrol eder."
+
+msgid "Middle clicking app buttons creates new app instances"
+msgstr "Uygulama düğmelerine orta tıklama yeni uygulama örneği oluşturur"
+
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. "
+"Setting this to false will close the last focused window from the app group "
+"on middle click."
+msgstr ""
+"Fare orta tıklamalarının uygulama düğmelerindeki davranışını belirler. Bunun "
+"yanlış ayarlandığında, orta tıklama ile uygulama grubundaki son etkinleşen "
+"pencere kapanır."
+
+msgid "Pin apps when dragged to a new position"
+msgstr "Uygulamalar yeni bir konuma sürüklediğinde sabitle"
+
+msgid "About..."
+msgstr "Hakkında..."
+
+msgid "Configure..."
+msgstr "Yapılandır..."
+
+msgid "Remove 'Icing Task Manager'"
+msgstr "Sil 'Icing Görev Yöneticisi'"
