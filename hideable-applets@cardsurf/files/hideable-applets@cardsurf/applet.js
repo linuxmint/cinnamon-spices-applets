@@ -50,6 +50,14 @@ AppletInfo.prototype = {
         return this.applet._meta["icon"];
     },
 
+    get cache_icon() {
+        return GLib.get_home_dir() + "/.cinnamon/spices.cache/applet/" + this.uuid + ".png";
+    },
+
+    get usr_icon() {
+        return "/usr/share/cinnamon/applets/" + this.uuid + "/icon.png";
+    },
+
     get local_icon() {
         return GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this.uuid + "/icon.png";
     },
@@ -60,6 +68,14 @@ AppletInfo.prototype = {
 
     has_system_icon: function () {
         return "icon" in this.applet._meta;
+    },
+
+    has_cache_icon: function () {
+        return this.file_exists(this.cache_icon);
+    },
+
+    has_usr_icon: function () {
+        return this.file_exists(this.usr_icon);
     },
 
     has_local_icon: function () {
@@ -454,11 +470,17 @@ MyApplet.prototype = {
     },
 
     get_applet_icon: function (applet_info) {
-        if(applet_info.has_system_icon()) {
-            return applet_info.system_icon;
+        if(applet_info.has_cache_icon()) {
+            return applet_info.cache_icon;
+        }
+        if(applet_info.has_usr_icon()) {
+            return applet_info.usr_icon;
         }
         if(applet_info.has_local_icon()) {
             return applet_info.local_icon;
+        }
+        if(applet_info.has_system_icon()) {
+            return applet_info.system_icon;
         }
         return this.icon_unknown;
     },
