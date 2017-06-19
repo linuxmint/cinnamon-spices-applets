@@ -162,12 +162,6 @@ CollapsibleSystrayApplet.prototype = {
         this._loadAppIconVisibilityList();
         this.collapseBtn.setVertical(this._direction == this.Direction.VERTICAL);
         this.collapseBtn.refreshReactive();
-
-        //
-        // Hover events
-
-        this._signalManager.connect(this.actor, 'enter-event', Lang.bind(this, this._onEnter));
-        this._signalManager.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
     },
 
     /*
@@ -783,6 +777,7 @@ CollapsibleSystrayApplet.prototype = {
             iconActor.actor.csEnable = function() {
                 iconActor.actor.set_reactive(true);
             }
+            iconActor.actor.csEnableAfter = function() { }
             iconActor.actor.connect('destroy', Lang.bind(this, function() {
                 this._unregisterAppIcon(appIndicator.id, iconActor.actor);
             }));
@@ -842,6 +837,12 @@ CollapsibleSystrayApplet.prototype = {
                 this._hideAppIcons(true);
             }
         }));
+
+        //
+        // Hover events
+
+        this._signalManager.connect(this.actor, 'enter-event', Lang.bind(this, this._onEnter));
+        this._signalManager.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
     },
 
     /*

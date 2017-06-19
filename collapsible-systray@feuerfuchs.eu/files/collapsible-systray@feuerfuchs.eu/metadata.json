@@ -1,6 +1,6 @@
 {
     "website": "https://github.com/Feuerfuchs/Collapsible-Systray-Cinnamon-Applet", 
-    "name": "Collapsible Systray", 
+    "uuid": "collapsible-systray@feuerfuchs.eu", 
     "cinnamon-version": [
         "2.8", 
         "3.0", 
@@ -9,7 +9,7 @@
     ], 
     "max-instances": 1, 
     "description": "A replacement for the abandoned System Tray Collapsible Cinnamon applet", 
-    "uuid": "collapsible-systray@feuerfuchs.eu", 
-    "version": "1.8", 
-    "icon": "indicator-applet"
+    "version": "1.9", 
+    "icon": "indicator-applet", 
+    "name": "Collapsible Systray"
 }
