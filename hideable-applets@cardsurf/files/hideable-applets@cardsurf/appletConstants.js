@@ -15,3 +15,7 @@ const GuiSortType = {
     PANEL_POSITION: 1
 }
 
+const GuiIconType = {
+    FILEPATH: 0,
+    SYMBOLIC: 1
+}
