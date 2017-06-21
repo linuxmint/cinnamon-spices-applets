@@ -120,7 +120,9 @@ MyApplet.prototype = {
         this.applet_popup_icons_css = "";
         this.applet_popup_table_css = "";
         this.show_icon_tooltips = false;
+        this.gui_icon_type = AppletConstants.GuiIconType.FILEPATH;
         this.gui_icon_filepath = "";
+        this.gui_icon_symbolic_name = "";
 
         this.applet_infos = [];
         this.filepath_last_values = "";
@@ -188,7 +190,9 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "applet_popup_icons_css", this.on_applet_popup_icons_css_changed],
                 [Settings.BindingDirection.IN, "applet_popup_table_css", this.on_applet_popup_table_css_changed],
                 [Settings.BindingDirection.IN, "show_icon_tooltips", this.on_show_icon_tooltips_changed],
-                [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_changed] ]){
+                [Settings.BindingDirection.IN, "gui_icon_type", this.on_gui_icon_type_changed],
+                [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_filepath_changed],
+                [Settings.BindingDirection.IN, "gui_icon_symbolic_name", this.on_gui_icon_symbolic_name_changed] ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -218,11 +222,24 @@ MyApplet.prototype = {
         this.set_applet_popup_tooltip_texts();
     },
 
-    on_gui_icon_changed: function () {
-        this.set_gui_icon();
+    on_gui_icon_type_changed: function () {
+        switch(this.gui_icon_type) {
+            case AppletConstants.GuiIconType.FILEPATH: {
+                 this.on_gui_icon_filepath_changed();
+                 break;
+            }
+            case AppletConstants.GuiIconType.SYMBOLIC: {
+                 this.on_gui_icon_symbolic_name_changed();
+                 break;
+            }
+        }
     },
 
-    set_gui_icon: function () {
+    on_gui_icon_filepath_changed: function () {
+        this.set_gui_icon_filepath();
+    },
+
+    set_gui_icon_filepath: function () {
         let path = this.format_path(this.gui_icon_filepath);
         let exists = this.file_exists(path);
         if (exists) {
@@ -249,6 +266,14 @@ MyApplet.prototype = {
 
     file_exists: function (path) {
         return GLib.file_test(path, GLib.FileTest.EXISTS);
+    },
+
+    on_gui_icon_symbolic_name_changed: function () {
+        this.set_gui_icon_symbolic();
+    },
+
+    set_gui_icon_symbolic: function () {
+        this.set_applet_icon_name(this.gui_icon_symbolic_name);
     },
 
     _connect_signals: function() {
@@ -701,7 +726,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.set_gui_icon();
+        this.on_gui_icon_type_changed();
     },
 
     _init_applet_popup: function () {
