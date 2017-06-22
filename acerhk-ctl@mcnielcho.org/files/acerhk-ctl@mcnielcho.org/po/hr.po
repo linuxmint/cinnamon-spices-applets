@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: acerhk-ctl@mcnielcho.org\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-22 22:18+0200\n"
+"PO-Revision-Date: 2017-06-22 22:23+0200\n"
+"Language-Team: Croatian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: hr\n"
+
+#: applet.js:54
+msgid "Acer Hardware Control"
+msgstr "Acer upravljanje hardverom"
+
+#: applet.js:62
+msgid "Activate Wireless Hardware"
+msgstr "Aktiviraj hardver bežične mreže"
+
+#: applet.js:63
+msgid "Deactivate Wireless Hardware"
+msgstr "Deaktiviraj hardver bežične mreže"
+
+#: applet.js:65
+msgid "Activate Bluetooth Hardware"
+msgstr "Aktiviraj Bluetooth hardver"
+
+#: applet.js:66
+msgid "Deactivate Bluetooth Hardware"
+msgstr "Deaktiviraj Bluetooth hardver"
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->description
+msgid ""
+"Provides software interface to Acer hardware keys.  Requires installation of "
+"acerhk.ko."
+msgstr ""
+"Omogućuje softversko sučelje za Acer hardverske tipke.  Zahtijeva "
+"instalaciju acerhk.ko."
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->name
+msgid "AcerHK Control"
+msgstr "AcerHK upravljanje"
