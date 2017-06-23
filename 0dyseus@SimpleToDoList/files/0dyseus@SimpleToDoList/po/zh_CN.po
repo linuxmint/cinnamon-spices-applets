@@ -1,0 +1,840 @@
+# This is a template file for translating the 0dyseus@SimpleToDoList package.
+# Copyright (C) 2017
+# This file is distributed under the same license as the 0dyseus@SimpleToDoList package.
+# FIRST_AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@SimpleToDoList 1.00\n"
+"POT-Creation-Date: 2017-06-04 19:37+0800\n"
+"PO-Revision-Date: 2017-06-04 19:37+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../create_localized_help.py:64
+msgid "Applet usage and features"
+msgstr "小程序用法和功能"
+
+#: ../../create_localized_help.py:65
+msgid ""
+"The usage of this applet is very simple. Each task list is represented by a "
+"sub menu and each sub menu item inside a sub menu represents a task."
+msgstr ""
+"这个小程序的用法非常简单。每个任务列表由子菜单表示，子菜单内的每个子菜单项代"
+"表任务。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:68
+msgid ""
+"To add a new tasks list, simply focus the **New tasks list...** entry, give "
+"a name to the tasks list and press [[Enter]]."
+msgstr ""
+"要添加新的任务列表，只需将焦点放在**新任务列表... **条目，命名任务列表然后按"
+"[[Enter]]键。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:71
+msgid ""
+"To add a new task, simply focus the **New task...** entry, give a name to "
+"the task and press [[Enter]]."
+msgstr ""
+"要添加新任务，只需将焦点放在**新任务**条目，命名任务然后按[[Enter]]键。"
+
+#: ../../create_localized_help.py:72
+msgid "All tasks lists and tasks can be edited in-line."
+msgstr "所有任务列表和任务都可以在线编辑。"
+
+#: ../../create_localized_help.py:73
+msgid ""
+"Tasks can be marked as completed by changing the checked state of their sub "
+"menu items."
+msgstr "通过更改其子菜单项的选中状态，可以将任务标记为已完成。"
+
+#: ../../create_localized_help.py:74
+msgid ""
+"Each tasks list can have its own settings for sorting tasks (by name and/or "
+"by completed state), remove task button visibility and completed tasks "
+"visibility."
+msgstr ""
+"每个任务列表都可以有自己的排序任务的设置（按名称和/或完成的状态），移除任务按"
+"钮的可见性和完成的任务可见性。"
+
+#: ../../create_localized_help.py:75
+msgid ""
+"Each tasks list can be saved as individual TODO files and also can be "
+"exported into a file for backup purposes."
+msgstr ""
+"每个任务列表都可以保存为单独的TODO文件，并且还可以导出到一个文件中进行备份。"
+
+#: ../../create_localized_help.py:76
+msgid ""
+"Tasks can be reordered by simply dragging them inside the tasks list they "
+"belong to (only if all automatic sorting options for the tasks list are "
+"disabled)."
+msgstr ""
+"通过将它们拖到其所属的任务列表内（仅当任务列表的所有自动排序选项被禁用时），"
+"可以重新排序任务。"
+
+#: ../../create_localized_help.py:77
+msgid ""
+"Tasks can be deleted by simply pressing the delete task button (if visible)."
+msgstr "只需按删除任务按钮（如果可见）即可删除任务。"
+
+#: ../../create_localized_help.py:78
+msgid ""
+"Colorized priority tags support. The background and text colors of a task "
+"can be colorized depending on the @tag found inside the task text."
+msgstr ""
+"支持彩色的优先级标签。任务的背景和文字颜色可以根据任务文本中找到的@tag进行着"
+"色。"
+
+#: ../../create_localized_help.py:79
+msgid "Configurable hotkey to open/close the menu."
+msgstr "打开和关闭菜单的配置的热键。"
+
+#: ../../create_localized_help.py:80
+msgid ""
+"Read the tooltips of each option on this applet settings window for more "
+"details."
+msgstr "请阅读此小程序设置窗口中每个选项的提示获取更多详细信息。"
+
+#: ../../create_localized_help.py:82
+msgid "Keyboard shortcuts"
+msgstr "键盘快捷键"
+
+#: ../../create_localized_help.py:83
+msgid ""
+"The keyboard navigation inside this applet menu is very similar to the "
+"keyboard navigation used by any other menu on Cinnamon. But it's slightly "
+"changed to facilitate tasks and sections handling and edition."
+msgstr ""
+"该小程序菜单中的键盘导航与Cinnamon上任何其他菜单使用的键盘导航非常相似。但是"
+"稍稍改变，以方便任务和部分的处理和编辑。"
+
+#: ../../create_localized_help.py:85
+msgid "When the focus is on a task"
+msgstr "当焦点在任务上时"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:87
+msgid ""
+"[[Ctrl]] + [[Spacebar]]: Toggle the completed (checked) state of a task."
+msgstr "[[Ctrl]] + [[Spacebar]]：切换任务的完成（选中）状态。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:89
+msgid ""
+"[[Shift]] + [[Delete]]: Deletes a task and focuses the element above of the "
+"deleted task."
+msgstr "[[Shift]] + [[Delete]]：删除任务并将元素聚焦在已删除任务的上方。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:91
+msgid ""
+"[[Alt]] + [[Delete]]: Deletes a task and focuses the element bellow the "
+"deleted task."
+msgstr "[[Alt]] + [[Delete]]：删除任务并将元素聚焦在已删除任务的下方。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:93
+msgid ""
+"[[Ctrl]] + [[Arrow Up]] or [[Ctrl]] + [[Arrow Down]]: Moves a task inside "
+"its tasks list."
+msgstr ""
+"[[Ctrl]] + [[Arrow Up]]或[[Ctrl]] + [[Arrow Down]]：移动任务列表中的任务。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:95
+msgid ""
+"[[Insert]]: Will focus the **New task...** entry of the currently opened "
+"task section."
+msgstr "[[Insert]]：将会吧焦点放在当前打开的任务部分的**新建任务...**条目。"
+
+#: ../../create_localized_help.py:97
+msgid "When the focus is on a task section"
+msgstr "当焦点在任务部分上时"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:99
+msgid ""
+"[[Arrow Left]] and [[Arrow Right]]: If the tasks list (sub menu) is closed, "
+"these keys will open the sub menu. If the sub menu is open, these keys will "
+"move the cursor inside the sub menu label to allow the edition of the "
+"section text."
+msgstr ""
+"[[Arrow Left]]和[[Arrow Right]]：如果任务列表（子菜单）关闭，这些键将会打开子"
+"菜单。如果子菜单打开，这些键将会移动子菜单标签内的光标以允许编辑段文本。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:101
+msgid ""
+"[[Insert]]: Will focus the **New task...** entry inside the task section. If "
+"the task section sub menu isn't open, it will be opened."
+msgstr ""
+"[[Insert]]：将焦点放在任务部分中的**新建任务...**条目。如果任务部分子菜单没有"
+"打开，将会被打开。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:104
+msgid "When the focus is on the **New task...** entry"
+msgstr "当焦点在**新建任务...**条目上时"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:106
+msgid ""
+"[[Ctrl]] + [[Spacebar]]: Toggles the visibility of the tasks list options "
+"menu."
+msgstr "[[Ctrl]] + [[Spacebar]]：切换任务菜单选项按钮的可见性。"
+
+#: ../../create_localized_help.py:108
+msgid "Known issues"
+msgstr "已知问题"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:110
+msgid ""
+"**Hovering over items inside the menu doesn't highlight menu items nor sub "
+"menus:** This is actually a desired feature. Allowing the items to highlight "
+"on mouse hover would cause the entries to loose focus, resulting in the "
+"impossibility to keep typing text inside them and constantly forcing us to "
+"move the mouse cursor to regain focus."
+msgstr ""
+"**悬停在菜单中的条目上不会高亮菜单条目或子菜单：**这实际上是一个所需的功能。"
+"允许在鼠标悬停时高亮条目将会导致条目失去焦点，造成无法在其中保持键入文本，并"
+"且不断强制我们移动鼠标光标以重新获得焦点。"
+
+#: ../../create_localized_help.py:111
+msgid "Task entries look wrong:"
+msgstr "任务条目看起来是错的："
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:113
+msgid ""
+"Task entries on this applet have the ability to wrap its text in case one "
+"sets a fixed width for them. They also can be multi line ([[Shift]] + "
+"[[Enter]] inside an entry will create a new line). Some Cinnamon themes, "
+"like the default Mint-X family of themes, set a fixed width and a fixed "
+"height for entries inside menus. These fixed sizes makes it impossible to "
+"programmatically set a desired width for the entries (at least, I couldn't "
+"find a way to do it). And the fixed height doesn't allow the entries to "
+"expand, completely breaking the entries capability to wrap its text and to "
+"be multi line."
+msgstr ""
+"该小程序上的任务条目具有包装其文本的能力，以便在为其设置固定宽度的情况下。 它"
+"们也可以是多行（[[Shift]] + [[Enter]]里面的一个条目将创建一个新行）。一些"
+"Cinnamon主题，如默认的Mint-X系列主题，为菜单中的条目设置固定宽度和固定高度。 "
+"这些固定大小使得无法以编程方式设置条目的所需宽度（至少我找不到办法）。固定高"
+"度不允许条目扩展，完全打破条目包装其文本的功能，并且是多行的。"
+
+#: ../../create_localized_help.py:115
+msgid "This is how entries should look like"
+msgstr "这是条目应该有的样子"
+
+#: ../../create_localized_help.py:117
+msgid "Correct entries styling"
+msgstr "正确的条目样式"
+
+#: ../../create_localized_help.py:119
+msgid "This is how entries SHOULD NOT look like"
+msgstr "这是条目不应该有的样子"
+
+#: ../../create_localized_help.py:121
+msgid "Incorrect entries styling"
+msgstr "不正确的条目样式"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:124
+msgid ""
+"The only way to fix this (that I could find) is by editing the Cinnamon "
+"theme that one is using and remove those fixed sizes. The CSS selectors that "
+"needs to be edited are **.menu StEntry**, **.menu StEntry:focus**, **.popup-"
+"menu StEntry** and **.popup-menu StEntry:focus**. Depending on the Cinnamon "
+"version the theme was created for, one might find just the first two "
+"selectors or the last two or all of them. The CSS properties that need to be "
+"edited are **width** and **height**. They could be removed, but the sensible "
+"thing to do is to rename them to **min-width** and **min-height** "
+"respectively. After editing the theme's file and restarting Cinnamon, the "
+"entries inside this applet will look and work like they should."
+msgstr ""
+"解决这个问题的唯一方法（我能找到的）是通过编辑正在使用的Cinnamon主题，并移除"
+"那些固定的大小。需要编辑的CSS选择器有**.menu StEntry**、**.menu StEntry:"
+"focus**、**.popup-menu StEntry**和 **.popup-menu StEntry:focus**。根据创建主"
+"题的Cinnamon版本，可能只能找到前两个选择器，或者最后两个或全部。需要编辑的CSS"
+"属性是**width**和**height**。它们可以被删除，但明智的做法是将它们分别重命名为"
+"**min-width**和**min-height**。在编辑主题的文件并重新启动Cinnamon之后，该小程"
+"序中的条目应该会像他们看起来的那样工作。"
+
+#: ../../create_localized_help.py:146
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:171 ../../create_localized_help.py:243
+msgid "language-name"
+msgstr "简体中文"
+
+#: ../../create_localized_help.py:246 applet.js:716
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:247
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:248
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:249
+msgid "Choose language"
+msgstr "选择语言"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:250 ../../create_localized_help.py:257
+#, python-format
+msgid "Help for %s"
+msgstr "%s的帮助"
+
+#: ../../create_localized_help.py:258
+msgid "IMPORTANT!!!"
+msgstr "重要！！！"
+
+#: ../../create_localized_help.py:259
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+
+#: ../../create_localized_help.py:260
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#: ../../create_localized_help.py:266
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+
+#: ../../create_localized_help.py:267
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:269
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
+"名为**localizations.sh**的脚本安装本地化。"
+
+#: ../../create_localized_help.py:270
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+
+#: appletHelper.py:64
+msgid "Select or enter file to export to"
+msgstr "选择或输入导出的文件"
+
+#. TO TRANSLATORS: Could be left blank.
+#: appletHelper.py:66 appletHelper.py:72 appletHelper.py:79
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: appletHelper.py:67 appletHelper.py:80
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: appletHelper.py:70
+msgid "Select a file to import"
+msgstr "选择要导入的文件"
+
+#. TO TRANSLATORS: Could be left blank.
+#: appletHelper.py:74
+msgid "_Open"
+msgstr "打开(_O)"
+
+#: appletHelper.py:77
+msgid "Select a file to save to"
+msgstr "选择要保存的文件"
+
+#: appletHelper.py:97
+msgid "TODO files"
+msgstr "TODO文件"
+
+#: appletHelper.py:100
+msgid "JSON files"
+msgstr "JSON文件"
+
+#: appletHelper.py:131
+msgid "Nothing to do here."
+msgstr "什么也不做。"
+
+#: __init__.js:38
+msgid "Tasks list - Some examples"
+msgstr "任务列表 - 一些示例"
+
+#: __init__.js:44
+msgid ""
+"Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task "
+"text. For now, there are 5 priority tags available."
+msgstr ""
+"只需通过将“@tagname”作为任务文本的一部分，即可对任务进行“标记”。现在有5个优先"
+"级标记可用。"
+
+#: __init__.js:47
+msgid "This is a @critical priority task"
+msgstr "这是一个@critical优先级任务"
+
+#: __init__.js:50
+msgid "This is a @high priority task"
+msgstr "这是一个@high优先级任务"
+
+#: __init__.js:53
+msgid "This is a @medium priority task"
+msgstr "这是一个@medium优先级任务"
+
+#: __init__.js:56
+msgid "This is a @today priority task"
+msgstr "这是一个@today优先级任务"
+
+#: __init__.js:59
+msgid "This is a @low priority task"
+msgstr "这是一个@low优先级任务"
+
+#. TO TRANSLATORS: This is a priority tag.
+#: __init__.js:192
+msgid "low"
+msgstr "低"
+
+#. TO TRANSLATORS: This is a priority tag.
+#: __init__.js:194
+msgid "today"
+msgstr "今天"
+
+#. TO TRANSLATORS: This is a priority tag.
+#: __init__.js:196
+msgid "medium"
+msgstr "中"
+
+#. TO TRANSLATORS: This is a priority tag.
+#: __init__.js:198
+msgid "high"
+msgstr "高"
+
+#. TO TRANSLATORS: This is a priority tag.
+#: __init__.js:200
+msgid "critical"
+msgstr "紧急"
+
+#: __init__.js:562
+msgid "New task..."
+msgstr "新建任务..."
+
+#: __init__.js:577
+msgid "Tasks list options"
+msgstr "任务列表选项"
+
+#: __init__.js:631
+msgid "Export this tasks list"
+msgstr "导出该任务列表"
+
+#: __init__.js:636
+msgid "Save this tasks list as TODO"
+msgstr "将该任务列表保存为TODO"
+
+#: __init__.js:641
+msgid "Sort tasks alphabetically"
+msgstr "按字母顺序对任务进行排序"
+
+#: __init__.js:646 __init__.js:656
+msgid "Takes effect after closing and re-opening the main menu."
+msgstr "关闭和重新打开主菜单后生效。"
+
+#: __init__.js:651
+msgid "Sort tasks by completed state"
+msgstr "按完成的状态对任务进行排序"
+
+#: __init__.js:661
+msgid "Display remove tasks buttons"
+msgstr "显示移除任务按钮"
+
+#: __init__.js:666 __init__.js:676
+msgid "Takes effect immediately."
+msgstr "立即生效。"
+
+#: __init__.js:671
+msgid "Keep completed tasks hidden"
+msgstr "保持隐藏已完成的任务"
+
+#. TO TRANSLATORS: Full sentence.
+#. "Remove this section/task"
+#: __init__.js:1518
+#, javascript-format
+msgid "Remove this %s"
+msgstr "移除此%s"
+
+#: __init__.js:1521
+msgid "(Hold Ctrl key)"
+msgstr "(按住Ctrl键)"
+
+#: applet.js:91 applet.js:147
+msgid "New tasks list..."
+msgstr "新建任务列表..."
+
+#: applet.js:615
+msgid "Save as TODO"
+msgstr "保存为TODO"
+
+#: applet.js:624
+msgid "Save all current tasks lists as a TODO file."
+msgstr "保存当前的全部任务为TODO文件。"
+
+#: applet.js:630
+msgid "Export tasks"
+msgstr "导出任务"
+
+#: applet.js:639
+msgid "Export all current tasks lists into a JSON file."
+msgstr "导出当前的全部任务为JSON文件。"
+
+#: applet.js:640 applet.js:656
+msgid ""
+"JSON files exported by this applet can be imported back into the applet and "
+"the tasks list found inside the files are added to the tasks lists currently "
+"loaded into the applet."
+msgstr ""
+"此小程序导出的JSON文件可以导回到小程序中，文件中找到的任务列表已添加到该小程"
+"序中当前加载的任务列表中。"
+
+#: applet.js:646
+msgid "Import tasks"
+msgstr "导入任务"
+
+#: applet.js:655
+msgid ""
+"Import tasks lists from a previously exported JSON file into this applet."
+msgstr "在该小程序中从以前导出的JSON文件导入任务列表。"
+
+#: applet.js:665
+msgid "Restore example tasks"
+msgstr "还原示例任务"
+
+#: applet.js:679
+msgid ""
+"Restore the example tasks list that were present when the applet was first "
+"loaded."
+msgstr "当小程序第一次加载时还原出现的示例任务列表。"
+
+#: applet.js:685
+msgid "Reset tasks"
+msgstr "重置任务"
+
+#: applet.js:691 applet.js:707
+msgid "WARNING!!!"
+msgstr "警告！！！"
+
+#: applet.js:692
+msgid "Do you really want to remove all your current tasks?"
+msgstr "您确定要移除您当前所有的任务吗？"
+
+#: applet.js:693 applet.js:707
+msgid "This operation cannot be reverted!!!"
+msgstr "此操作无法撤销！！！"
+
+#: applet.js:706
+msgid "Remove all currently loaded tasks lists from this applet."
+msgstr "从该小程序移除当前全部已加载的任务列表。"
+
+#: applet.js:720
+msgid "Open this applet help file."
+msgstr "打开此小程序的帮助文件。"
+
+#. 0dyseus@SimpleToDoList->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#. 0dyseus@SimpleToDoList->metadata.json->description
+msgid "Simple applet to create ToDo lists."
+msgstr "用以创建待办事项列表的简单的小程序。"
+
+#. 0dyseus@SimpleToDoList->metadata.json->name
+msgid "Simple ToDo List"
+msgstr "简单待办事项列表"
+
+#. 0dyseus@SimpleToDoList->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_today_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_background->description
+msgid "Background color"
+msgstr "背景颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_today_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_foreground->description
+msgid "Text color"
+msgstr "文本颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr "图标"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择要在面板中显示的图标。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head4->description
+msgid "Save as TODO file settings"
+msgstr "保存为TODO文件设置"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_bold->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_bold->description
+msgid "Set bold"
+msgstr "设置粗体"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_min_width->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_min_width->description
+msgid "Set minimum entry width"
+msgstr "设置最小条目宽度"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_min_width->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_min_width->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->units
+msgid "pixels"
+msgstr "像素"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_min_width->tooltip
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_min_width->tooltip
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->tooltip
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->tooltip
+msgid ""
+"Cinnamon menus automatically change their size to accommodate the elements "
+"that they contain. Setting a fixed size for those elements will avoid the "
+"constant resizing of the menu when opening/closing sub menus."
+msgstr ""
+"Cinnamon菜单自动更改尺寸以适应它们包含的元素。为这些元素设置固定大小将避免在"
+"打开/关闭子菜单时不断调整菜单大小。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head3->description
+msgid "Tasks appearance"
+msgstr "任务外观"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head7->description
+msgid "Colors for \"@high\" priority tags"
+msgstr "\"@high\"优先级标记的颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_keep_one_menu_open->description
+msgid "Keep just one sub menu open"
+msgstr "始终保持仅打开一个子菜单"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_keep_one_menu_open->tooltip
+msgid ""
+"When enabled, the previously opened sub menu will be automatically closed."
+msgstr "启用后，之前打开的子菜单将会自动关闭。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head2->description
+msgid "Sections appearance"
+msgstr "部分外观"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->description
+msgid "Set maximum entry width"
+msgstr "设置最大条目宽度"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head1->description
+msgid "Menu settings"
+msgstr "菜单设置"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->description
+msgid "Colorize entire menu item"
+msgstr "为全部菜单条目上色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->tooltip
+msgid ""
+"This option is useful, for example, when the Cinnamon theme used styles "
+"entries with a non transparent background image. The background color set by "
+"a priority tag will not be visible in this case. With this option enabled, "
+"the entire menu item of a task will be colorized and not just its entry."
+msgstr ""
+"此选项很有用，例如在当Cinnamon主题使用具有非透明背景图像的样式条目时。优先级"
+"标签设置的背景颜色在这种情况下将不可见。启用此选项后，任务的全部菜单条目将会"
+"被着色，而不仅仅是其条目。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head9->description
+msgid "Colors for \"@medium\" priority tags"
+msgstr "\"@medium\"优先级标记的颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head6->description
+msgid "Colors for \"@critical\" priority tags"
+msgstr "\"@critical\"优先级标记的颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_remove_native_entry_theming->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_remove_native_entry_theming->description
+msgid "Remove native entry theming (only visuals)"
+msgstr "移除本地条目主题（仅视觉效果）"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->description
+msgid "Custom elements spacing"
+msgstr "自定义元素空间"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->tooltip
+msgid ""
+"Some Cinnamon themes might set the spacing for the popup-menu-item class too "
+"big or too small, resulting in too much space wasted inside this applet menu "
+"or in elements to close to each other. This setting allows to change that "
+"spacing."
+msgstr ""
+"一些Cinnamon主题可能会把弹出菜单条目类别的间距设置得太大或太小，导致在该小程"
+"序菜单或元素中之间的空格太大。此设置可以更改间距。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->description
+msgid "Enable logging"
+msgstr "启用日志记录"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->tooltip
+msgid ""
+"It enables the ability to log the output of several functions used by the "
+"applet."
+msgstr "它能够记录小程序使用的一些函数的输出。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "小程序设置"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "自定义标签"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "输入要在面板中显示的自定义文本。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_remove_native_entry_theming_sizing->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_remove_native_entry_theming_sizing->description
+msgid "Remove native entry theming (also sizing)"
+msgstr "移除本地条目主题（和大小）"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->description
+msgid "Avoid accidental deletions"
+msgstr "避免意外删除"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->tooltip
+msgid ""
+"When enabled, to remove a task or a section of the menu, the Control key "
+"needs to be pressed."
+msgstr "启用后，若要移除任务或菜单的部分，需要按住Control键盘。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head8->description
+msgid "Colors for \"@today\" priority tags"
+msgstr "\"@today\"优先级标记的颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->description
+msgid "Label font size"
+msgstr "标签字体大小"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->units
+msgid "ems"
+msgstr "ems"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head5->description
+msgid "Task priorities settings"
+msgstr "任务优先级设置"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->description
+msgid "Animate menu"
+msgstr "菜单动画"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->tooltip
+msgid "Enables/Disables menu open/close animations."
+msgstr "启用/禁用菜单打开/关闭动画。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head10->description
+msgid "Colors for \"@low\" priority tags"
+msgstr "\"@low\"优先级标记的颜色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->description
+msgid "Character/s for not completed tasks"
+msgstr "未完成的任务的字符"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->tooltip
+msgid ""
+"The character or characters that will represent a not completed task on a "
+"TODO file."
+msgstr "将在TODO文件中表示未完成的任务的字符。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_show_tasks_counter_on_applet->description
+msgid "Display tasks counter on applet"
+msgstr "在小程序显示任务计数"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head11->description
+msgid "Debugging"
+msgstr "调试"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->description
+msgid "Enable priority tags colorization"
+msgstr "启用优先级标签着色"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->tooltip
+msgid ""
+"If enabled, this option will colorize a task entry depending on the tags "
+"found on its text. Tasks can be \"tagged\" by simply writing \"@tagname\" as "
+"part of the task text. For now, there are 5 priority tags available."
+msgstr ""
+"如果启用，此选项将根据在其文本上找到的标记对任务条目进行着色。只需通过简单地"
+"将“@tagname”作为任务文本的一部分，即可对任务进行“标记”。现在有5个优先级标记可"
+"用。"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->description
+msgid "Character/s for completed tasks"
+msgstr "完成的任务的字符"
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->tooltip
+msgid ""
+"The character or characters that will represent a completed task on a TODO "
+"file."
+msgstr "将在TODO文件中表示完成的任务的字符。"
+
+#~ msgid "bsaleil: Author of the gnome-shell extension called Todo list."
+#~ msgstr "bsaleil：名为Todo List的gnome-shell扩展的作者。"
+
+#~ msgid ""
+#~ "Thomas Moreau: Author of the gnome-shell extension called Section Todo "
+#~ "List."
+#~ msgstr "Thomas Moreau：名为Section Todo List的gnome-shell扩展的作者。"
+
+#~ msgid "eson57: Swedish localization"
+#~ msgstr "eson57：瑞典语本地化。"
+
+#~ msgid "giwhub: Chinese localization"
+#~ msgstr "giwhub：中文本地化。"

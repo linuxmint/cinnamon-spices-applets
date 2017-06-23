@@ -164,7 +164,7 @@ msgstr "-------ЦП------- \n"
 
 #: DataProviders.js:113
 msgid "cpu: "
-msgstr "проц.:"
+msgstr "проц.: "
 
 #: DataProviders.js:155
 msgid "MEM"
@@ -272,7 +272,7 @@ msgstr "Запись"
 
 #: prefs.js:457
 msgid "Error while saving file: "
-msgstr "Ошибка сохранения файла:"
+msgstr "Ошибка сохранения файла: "
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->name
 msgid "Multi-Core System Monitor"

@@ -1,0 +1,234 @@
+# This is a template file for translating the 0dyseus@window-list-fork package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@window-list-fork package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@window-list-fork 1.10\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:119 ../../create_localized_help.py:195
+msgid "language-name"
+msgstr ""
+
+#: ../../create_localized_help.py:125
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:198 2.8/applet.js:839 applet.js:937
+msgid "Help"
+msgstr ""
+
+#: ../../create_localized_help.py:199
+msgid "Contributors"
+msgstr ""
+
+#: ../../create_localized_help.py:200
+msgid "Changelog"
+msgstr ""
+
+#: ../../create_localized_help.py:201
+msgid "Choose language"
+msgstr ""
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:202 ../../create_localized_help.py:209
+#, python-format
+msgid "Help for %s"
+msgstr ""
+
+#: ../../create_localized_help.py:210
+msgid "IMPORTANT!!!"
+msgstr ""
+
+#: ../../create_localized_help.py:211
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr ""
+
+#: ../../create_localized_help.py:212
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr ""
+
+#: ../../create_localized_help.py:218
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+
+#: ../../create_localized_help.py:219
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:221
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+
+#: ../../create_localized_help.py:222
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr ""
+
+#: 2.8/applet.js:702 applet.js:801
+msgid "Preferences"
+msgstr ""
+
+#: 2.8/applet.js:717 applet.js:812
+msgid "Move to the other monitor"
+msgstr ""
+
+#: 2.8/applet.js:726 applet.js:821
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr ""
+
+#: 2.8/applet.js:737 applet.js:832
+msgid "Only on this workspace"
+msgstr ""
+
+#: 2.8/applet.js:743 applet.js:838
+msgid "Visible on all workspaces"
+msgstr ""
+
+#: 2.8/applet.js:749 applet.js:844
+msgid "Move to another workspace"
+msgstr ""
+
+#. Close all/others
+#: 2.8/applet.js:771 applet.js:869
+msgid "Close all"
+msgstr ""
+
+#: 2.8/applet.js:780 applet.js:878
+msgid "Close others"
+msgstr ""
+
+#: 2.8/applet.js:794 applet.js:892
+msgid "Restore to full opacity"
+msgstr ""
+
+#: 2.8/applet.js:802 applet.js:900
+msgid "Restore"
+msgstr ""
+
+#: 2.8/applet.js:807 applet.js:905
+msgid "Minimize"
+msgstr ""
+
+#: 2.8/applet.js:815 applet.js:913
+msgid "Unmaximize"
+msgstr ""
+
+#: 2.8/applet.js:820 applet.js:918
+msgid "Maximize"
+msgstr ""
+
+#: 2.8/applet.js:827 applet.js:925
+msgid "Close"
+msgstr ""
+
+#: 2.8/applet.js:846 applet.js:944
+msgid "About..."
+msgstr ""
+
+#: 2.8/applet.js:852 applet.js:950
+msgid "Configure..."
+msgstr ""
+
+#: 2.8/applet.js:867 applet.js:965
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->comments
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->description
+msgid "Fork of the main Cinnamon Window list applet."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->name
+msgid "Window list (Fork By Odyseus)"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
+msgid "pixels"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
+msgid "Show an alert in the window list when a window from another workspace requires attention"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
+msgid "Where to display the \"Preferences\" sub-menu?"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Bottom of menu"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Top of menu"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Do not display"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
+msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
+msgid "Window buttons can have different sizes and use the entire space available"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
+msgid "Do not display tooltips"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
+msgid "Invert context menu items order"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
+msgid "Middle click to close window"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
+msgstr ""

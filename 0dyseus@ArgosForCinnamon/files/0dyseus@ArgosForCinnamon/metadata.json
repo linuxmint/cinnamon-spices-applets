@@ -1,0 +1,16 @@
+{
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.4"
+    ],
+    "uuid": "0dyseus@ArgosForCinnamon",
+    "contributors": "See this xlet help file.",
+    "max-instances": -1,
+    "description": "Create Cinnamon applets in seconds.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "version": "1.01",
+    "name": "Argos for Cinnamon"
+}

@@ -1,5 +1,5 @@
 {
-    "description": "An applet to manage Homestead.",  
+    "description": "An applet to manage Homestead.", 
     "uuid": "rancher@centurix", 
     "name": "Homestead manager", 
     "version": "0.1.3", 

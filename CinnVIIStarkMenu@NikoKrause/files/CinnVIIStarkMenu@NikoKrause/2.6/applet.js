@@ -1506,17 +1506,21 @@ HoverIcon.prototype = {
     }
 };
 
-function ShutdownContextMenuItem(parentMenu, menu, label, action) {
-    this._init(parentMenu, menu, label, action);
+function ShutdownContextMenuItem(parentMenu, menu, label, action, hoverIcon) {
+    this._init(parentMenu, menu, label, action, hoverIcon);
 }
 
 ShutdownContextMenuItem.prototype = {
     __proto__: ApplicationContextMenuItem.prototype,
 
-    _init: function(parentMenu, menu, label, action) {
+    _init: function(parentMenu, menu, label, action, hoverIcon) {
         this.parentMenu = parentMenu;
         ApplicationContextMenuItem.prototype._init.call(this, menu, label, action, null, false);
         this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
+        this.hoverIcon = hoverIcon;
+
+        this.actor.connect('enter-event', Lang.bind(this, this._onEnterEvent));
+        this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
     },
 
     activate: function(event) {
@@ -1545,6 +1549,28 @@ ShutdownContextMenuItem.prototype = {
         this._appButton.toggle();
         this.parentMenu.toggle();
         return false;
+    },
+
+    _onEnterEvent: function() {
+        let icon;
+        if (this._action == "logout")
+            icon = "system-log-out";
+        else
+            icon = "system-lock-screen";
+        this.hoverIcon.showUser = false;
+        this.hoverIcon._refresh(icon);
+    },
+
+    _onLeaveEvent: function() {
+        this.hoverIcon.showUser = true;
+        Tweener.addTween(this, {
+            time: 1,
+            onComplete: function() {
+                if (!this.active) {
+                    this.hoverIcon._onUserChanged();
+                }
+            }
+        });
     }
 
 };
@@ -1576,22 +1602,37 @@ ShutdownMenu.prototype = {
         });
         this.addActor(this.icon);
 
+        this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
+
         this.menu = new PopupMenu.PopupSubMenu(this.actor);
         this.menu.actor.remove_style_class_name("popup-sub-menu");
 
         let menuItem;
-        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Logout"), "logout");
+        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Logout"), "logout", this.hoverIcon);
         this.menu.addMenuItem(menuItem);
-        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Lock Screen"), "lock");
+        menuItem = new ShutdownContextMenuItem(this.parent, this.menu, _("Lock Screen"), "lock", this.hoverIcon);
         this.menu.addMenuItem(menuItem);
 
     },
 
+    _onLeaveEvent: function() {
+        this.hoverIcon.showUser = true;
+        Tweener.addTween(this, {
+            time: 1,
+            onComplete: function() {
+                if (!this.active) {
+                    this.hoverIcon._onUserChanged();
+                }
+            }
+        });
+    },
+
     setActive: function(active) {
         if (active) {
+            this.hoverIcon.showUser = false;
             this.actor.set_style_class_name('menu-category-button-selected');
             this.actor.add_style_class_name('starkmenu-arrow-dropdown-button-selected');
-            this.hoverIcon._refresh('system-log-out');
+            this.hoverIcon._refresh('forward');
         } else {
             this.actor.set_style_class_name('menu-category-button');
             this.actor.add_style_class_name('starkmenu-arrow-dropdown-button');
@@ -1639,8 +1680,9 @@ RightButtonsBox.prototype = {
 
         this.actor._delegate = this;
         this.menu = menu;
-        this.addItems();
 
+        this.hoverIcon = new HoverIcon(this.menu);
+        this.actor.add_actor(this.hoverIcon.userBox);
         this.actor.add_actor(this.itemsBox);
         this.addShutdownBoxes();
     },
@@ -1702,9 +1744,6 @@ RightButtonsBox.prototype = {
 
     addItems: function() {
         this.itemsBox.destroy_all_children();
-
-        this.hoverIcon = new HoverIcon(this.menu);
-        this.itemsBox.add_actor(this.hoverIcon.userBox);
 
         this.quicklinks = [];
         for (let i in this.menu.quicklinks) {
@@ -2070,9 +2109,7 @@ MyApplet.prototype = {
         this._updateQuickLinksView();
 
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-shutdown-menu", "showShutdownMenu", this._updateQuickLinksShutdownView, null);
-
         this.settings.bindProperty(Settings.BindingDirection.IN, "shutdown-menu-layout", "shutdownMenuLayout", this._updateQuickLinks, null);
-        this._updateQuickLinksShutdownView();
 
         this._fileFolderAccessActive = false;
         this._pathCompleter = new Gio.FilenameCompleter();
@@ -2091,6 +2128,7 @@ MyApplet.prototype = {
         this.quicklinksupdated = false;
         this.settings.bindProperty(Settings.BindingDirection.IN, "quicklauncher-layout", "quicklauncherLayout", this._updateQuickLinks, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "user-box-layout", "userBoxLayout", this._updateQuickLinks, null);
+        this._updateQuickLinksShutdownView();
         this._updateQuickLinks();
 
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
@@ -3718,7 +3756,7 @@ MyApplet.prototype = {
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
         this.mainBox.add_style_class_name("starkmenu-applications-box");
 
-        this.leftPane.set_child(this.favsBox, { y_align: St.Align.END, y_fill: false });
+        this.leftPane.set_child(this.favsBox);
 
         this.selectedAppBox = new St.BoxLayout({ style_class: 'menu-selected-app-box', vertical: true });
         //this.selectedAppBox.add_style_class_name("starkmenu-selected-app-box");
@@ -3834,13 +3872,13 @@ MyApplet.prototype = {
                 actor.hide();
             }
         }
-        let actors = this.categoriesBox.get_children();
+        actors = this.categoriesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.style_class = "menu-category-button";
             actor.show();
         }
-        let actors = this.favoritesBox.get_children();
+        actors = this.favoritesBox.get_children();
         for (var i=0; i<actors.length; i++){
             let actor = actors[i];
             actor.remove_style_pseudo_class("hover");

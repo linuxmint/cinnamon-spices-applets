@@ -1,0 +1,462 @@
+# Swedish translation for 0dyseus@QuickMenu package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@QuickMenu package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@QuickMenu 1.07\n"
+"POT-Creation-Date: 2017-06-03 08:01+0200\n"
+"PO-Revision-Date: 2017-06-03 08:03+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../create_localized_help.py:64
+msgid "Applet usage"
+msgstr "Programanvändning"
+
+#: ../../create_localized_help.py:65
+msgid ""
+"Menu items to .desktop files will be displayed with the icon and name "
+"declared inside the .desktop files themselves."
+msgstr "Menyposter från .desktop-filer"
+
+#: ../../create_localized_help.py:68
+msgid ""
+"The menu can be kept open while activating menu items by pressing [[Ctrl]] + "
+"**Left click** or with **Middle click**."
+msgstr ""
+"Menyn kan hållas öppen för aktivering av menyposter, med "
+"[Ctrl]+**Vänsterklick** eller med **Mushjulsklick**."
+
+#: ../../create_localized_help.py:70
+msgid "How to set a different icon for each sub-menu"
+msgstr "Hur man anger olika ikoner för varje undermeny"
+
+#: ../../create_localized_help.py:73
+msgid ""
+"Create a file at the same level as the folders that will be used to create "
+"the sub-menus."
+msgstr ""
+"Skapa en fil på samma nivå som de mappar som skall användas för att skapa "
+"undermenyer."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:75
+msgid ""
+"The file name can be customized, doesn't need to have an extension name and "
+"can be a hidden file (a dot file). By default is called "
+"**0_icons_for_sub_menus.json**."
+msgstr ""
+"Filnamnet kan anpassas, behöver inte ha någon filändelse och kan vara en "
+"dold fil (.filnamn). Som standard heter den **0_icons_for_sub_menus.json**."
+
+#: ../../create_localized_help.py:77
+msgid ""
+"Whatever name is chosen for the file, it will be automatically ignored and "
+"will never be shown on the menu."
+msgstr ""
+"Vad du än väljer för filnamn, kommer den att undantas automatiskt och aldrig "
+"visas på menyn."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:79
+msgid ""
+"The path to the icon has to be a full path. A path starting with **~/** can "
+"be used and will be expanded to the user's home folder."
+msgstr ""
+"Sökvägen till ikonen måste vara en fullständig sökväg. En sökväg som börjar "
+"med tilde (**~/**) kan användas och expanderas till användarens hemkatalog."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:81
+msgid ""
+"If any sub-folder has more folders that need to have custom icons, just "
+"create another **0_icons_for_sub_menus.json** file at the same level that "
+"those folders."
+msgstr ""
+"Om en undermeny har flera mappar som behöver anpassade ikoner, kan du skapa "
+"ännu en **0_icons_for_sub_menus.json** på samma nivå som de mapparna."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:83
+msgid "The content of the file is a *JSON object* and has to look as follows:"
+msgstr "Innehållet i filen är ett JSON-objekt och måste se ut som följer:"
+
+#: ../../create_localized_help.py:91 ../../create_localized_help.py:93
+#: ../../create_localized_help.py:95 ../../create_localized_help.py:97
+msgid "Folder name"
+msgstr "Mappnamn"
+
+#: ../../create_localized_help.py:92 ../../create_localized_help.py:94
+#: ../../create_localized_help.py:96 ../../create_localized_help.py:98
+msgid "Icon name or icon path for Folder name"
+msgstr "Ikonnamn eller ikonsökväg för mappnamn"
+
+#: ../../create_localized_help.py:102
+msgid "Warning!!!"
+msgstr "Varning!!!"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:104
+msgid ""
+"JSON *language* is very strict. Just be sure to ONLY use double quotes. And "
+"the last key/value combination DOESN'T have to end with a comma (**Folder "
+"name #n** in the previous example)."
+msgstr ""
+"JSON *kodspråket* är mycket strikt. Använd ENDAST dubbla citationstecken, "
+"och den sista nyckel-/värdekombinationen behöver INTE avslutas med "
+"kommatecken (**Folder name #n** i föregående exempel)."
+
+#: ../../create_localized_help.py:126
+msgid "The following two sections are available only in English."
+msgstr "Följande två sektioner är endast tillgängliga på Engelska."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:151 ../../create_localized_help.py:223
+msgid "language-name"
+msgstr "Svenska"
+
+#: ../../create_localized_help.py:226 applet.js:453
+msgid "Help"
+msgstr "Hjälp"
+
+#: ../../create_localized_help.py:227
+msgid "Contributors"
+msgstr "Medhjälpare"
+
+#: ../../create_localized_help.py:228
+msgid "Changelog"
+msgstr "Ändringslogg"
+
+#: ../../create_localized_help.py:229
+msgid "Choose language"
+msgstr "Välj språk"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:230 ../../create_localized_help.py:237
+#, python-format
+msgid "Help for %s"
+msgstr "Hjälp för %s"
+
+#: ../../create_localized_help.py:238
+msgid "IMPORTANT!!!"
+msgstr "VIKTIGT!!!"
+
+#: ../../create_localized_help.py:239
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
+"programmets funktioner."
+
+#: ../../create_localized_help.py:240
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
+"kodförråd, på följande länk."
+
+#: ../../create_localized_help.py:246
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Applets/Desklets/Extensions (xlets) översättning"
+
+#: ../../create_localized_help.py:247
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Om denna xlet installerades från Cinnamons inställningar, installerades "
+"också alla översättningar automatiskt."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:249
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
+"kan översättningar installeras genom att köra skriptet **localizations.sh** "
+"från en terminal öppnad i programmappen."
+
+#: ../../create_localized_help.py:250
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
+"följande instruktioner."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:179
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Ta bort \"%s\""
+
+#: applet.js:435
+msgid "Update menu"
+msgstr "Uppdatera menyn"
+
+#: applet.js:440
+msgid "Scan the main folder to re-create the menu."
+msgstr "Skanna huvudmappen för att återskapa menyn."
+
+#: applet.js:443
+msgid "Open folder"
+msgstr "Öppna mappen"
+
+#: applet.js:449
+msgid "Open the main folder."
+msgstr "Öppna huvudmappen."
+
+#: applet.js:459
+msgid "Open the help file."
+msgstr "Öppna hjälpfilen."
+
+#. 0dyseus@QuickMenu->metadata.json->description
+msgid ""
+"Easily and quickly create a menu based on the files/folders found inside an "
+"specific folder."
+msgstr ""
+"Skapa snabbt och enkelt en meny, baserad på filer och undermappar i en "
+"specifik mapp."
+
+#. 0dyseus@QuickMenu->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Se hjälpfilen för denna xlet."
+
+#. 0dyseus@QuickMenu->metadata.json->name
+msgid "Quick Menu"
+msgstr "Snabbmeny"
+
+#. 0dyseus@QuickMenu->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
+"kodförråd, på nedanstående länk."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_menu_item_icon_size->description
+msgid "Menu items icon size"
+msgstr "Ikonstorlek för menyobjekt"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_menu_item_icon_size->units
+#. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icon_size->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_autoupdate->tooltip
+msgid ""
+"If enabled, the applet will monitor the main folder for added/deleted/"
+"renamed files/folders and rebuild the menu.\n"
+"If disabled, the menu will have to be updated manually from its context menu."
+msgstr ""
+"Vid aktivering övervakas huvudmappen och menyn uppdateras automatiskt med "
+"tillagda/borttagna/omdöpta filer och mappar.\n"
+"Vid inaktivering måste menyn uppdateras manuellt, från panelikonens "
+"högerklicksmeny."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_autoupdate->description
+msgid "Auto-update menu"
+msgstr "Uppdatera menyn automatiskt"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_menu_items->tooltip
+msgid "Set a custom style for the menu items."
+msgstr "Anpassa stilen på menyobjekten."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_menu_items->description
+msgid "Style for menu items"
+msgstr "Stil på menyobjekt"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_submenu_icons->tooltip
+msgid "If disabled, all sub-menu items will be created without icons."
+msgstr "Vid inaktivering kommer alla undermenyobjekt att sakna ikoner."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_submenu_icons->description
+msgid "Display sub-menu icons"
+msgstr "Visa ikoner på undermenyer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_sub_menus->tooltip
+msgid "Set a custom style for the sub-menus."
+msgstr "Anpassa stilen på undermenyer."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_style_for_sub_menus->description
+msgid "Style for sub-menus"
+msgstr "Stil på undermenyer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_applications_icons->tooltip
+msgid "If disabled, all menu items will be created without icons."
+msgstr "Vid inaktivering kommer alla menyobjekt att sakna ikoner."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_applications_icons->description
+msgid "Display menu items icon"
+msgstr "Visa ikoner på menyobjekt"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_use_different_icons_for_sub_menus->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icons_file_name->tooltip
+msgid ""
+"Read this applet help for details about this option usage (Applet context "
+"menu > Help item)."
+msgstr ""
+"Läs programhjälpen för detaljerad info om det här alternativets användning "
+"(Panelikonens högerklicksmeny > Hjälp."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_use_different_icons_for_sub_menus->description
+msgid "Allow sub-menus to each have their own icon"
+msgstr "Tillåt varje undermeny att ha sin egen ikon"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_only_desktop_files->tooltip
+msgid ""
+"If enabled, only .desktop files will be used to create the menu.\n"
+"If disabled, all file types will be used to create the menu."
+msgstr ""
+"Vid aktivering används endast .desktop-filer för att skapa menyn.\n"
+"Vid inaktivering används alla filtyper för att skapa menyn."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_only_desktop_files->description
+msgid "Show only .desktop files"
+msgstr "Visa endast .desktop-filer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_head_2->description
+msgid "Menu settings"
+msgstr "Menyinställningar"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icon_size->description
+msgid "Sub-menus icon size"
+msgstr "Storlek på ikon för undermenyer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customtooltip->tooltip
+msgid "Set a custom tooltip for the applet."
+msgstr "Anpassa verktygsbeskrivningen för panelprogrammet."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customtooltip->description
+msgid "Custom Tooltip"
+msgstr "Anpassad verktygsbeskrivning"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_head_1->description
+msgid "Applet settings"
+msgstr "Programinställningar"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_auto_close_opened_sub_menus->tooltip
+msgid ""
+"If enabled, the previously opened sub-menu will be automatically closed.\n"
+"It will only work with sub-menus created at the first level. Sub-menus "
+"inside other sub-menus are not affected."
+msgstr ""
+"Vid aktivering kommer tidigare öppnad undermeny att stängas automatiskt.\n"
+"Det fungerar endast på första nivåns undermenyer. Undermenyer i en annan "
+"undermeny, påverkas inte."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_auto_close_opened_sub_menus->description
+msgid "Auto-hide opened sub-menus (EXPERIMENTAL/BUGGY)"
+msgstr "Dölj öppnade undermenyer automatiskt (EXPERIMENTELL / FELBENÄGEN)"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_icon_for_menus->tooltip
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customicon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr "Anpassa ikonen för panelprogrammet."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_icon_for_menus->description
+msgid "Icon for sub-menus"
+msgstr "Ikon för undermenyer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_hotkey->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icons_file_name->description
+msgid "Name for the file containing the icons for sub-menus"
+msgstr "Namn på den fil som innehåller ikonen för undermenyer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_applet_title->description
+msgid "Title for Applet"
+msgstr "Programnamn"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_applet_title->tooltip
+msgid "Set a custom title for the applet."
+msgstr "Anpassa namnet på panelprogrammet."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_files->tooltip
+msgid "If enabled, hidden files will be used to create menu items."
+msgstr "Vid aktivering kommer dolda filer att visas i menyn."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_files->description
+msgid "Show hidden files"
+msgstr "Visa dolda filer"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_ignore_sub_folders->tooltip
+msgid ""
+"If enabled, the sub folders found inside the main folder will be ignored and "
+"sub-menus will not be created."
+msgstr ""
+"Vid aktivering kommer undermappar som hittas i huvudmappen att undantas och "
+"inga undermenyer skapas."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_ignore_sub_folders->description
+msgid "Ignore sub folders"
+msgstr "Undanta undermappar"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_applet_title->tooltip
+msgid "Display this applet title."
+msgstr "Visa namn på detta panelprogram"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_applet_title->description
+msgid "Show Applet title"
+msgstr "Visa programnamn"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_folders->tooltip
+msgid "If enabled, hidden sub folders will also be used to create sub-menus."
+msgstr "Vid aktivering kommer även dolda undermappar att skapa undermenyer."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_folders->description
+msgid "Show hidden folders"
+msgstr "Visa dolda mappar"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_directory->tooltip
+msgid ""
+"Choose a directory with files and/or folders in it.\n"
+"The files will be used to create the menu items.\n"
+"The folders will be used to create sub-menus."
+msgstr ""
+"Välj en mapp med filer och/eller undermappar i.\n"
+"Filerna används för att skapa menyobjekt.\n"
+"Mapparna används för att skapa undermenyer."
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_directory->description
+msgid "Choose main directory"
+msgstr "Välj huvudmapp"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_customicon->tooltip
+msgid "Display this applet icon."
+msgstr "Visa ikon för detta panelprogram"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_show_customicon->description
+msgid "Show Applet icon"
+msgstr "Visa programikon"
+
+#. 0dyseus@QuickMenu->settings-schema.json->pref_customicon->description
+msgid "Icon for Applet"
+msgstr "Programikon"
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena: Kroatisk översättning."
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Kinesisk översättning."
+
+#~ msgid "Desktop"
+#~ msgstr "Arbetsyta"

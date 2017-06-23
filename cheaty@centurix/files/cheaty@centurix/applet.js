@@ -123,8 +123,9 @@ Cheaty.prototype = {
 		this.set_applet_icon_path(ICON);
 		this.set_applet_tooltip(_("Cheaty: Easy access cheatsheets"));
 
+		this.menuManager = new PopupMenu.PopupMenuManager(this);
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
-		this._menuManager.addMenu(this.menu);
+		this.menuManager.addMenu(this.menu);
 
 		this.settingsApiCheck();
 
@@ -224,12 +225,7 @@ Cheaty.prototype = {
 	},
 
 	on_applet_clicked: function(event) {
-		try {
-			if (!this.menu.isOpen) {
-				this.menu.toggle();
-			}
-		} catch(e) {
-		}
+		this.menu.toggle();
 	}
 }
 

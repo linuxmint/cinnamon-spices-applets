@@ -13,14 +13,18 @@ const Settings = imports.ui.settings; // Needed for settings API
 const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls 
+const Gettext = imports.gettext; // ++ Needed for translations
 
-// l10n/translation support as per NikoKrause tutorial modified as UUID already used!
-const Gettext = imports.gettext
-const UUIDl10n = "netusagemonitor@pdcurtis"
-Gettext.bindtextdomain(UUIDl10n, GLib.get_home_dir() + "/.local/share/locale")
+// ++ Always needed for localisation/translation support
+// l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
+// UUID is set in MyApplet _init: below and before function called
 
+var UUID;
 function _(str) {
-  return Gettext.dgettext(UUIDl10n, str);
+    let customTrans = Gettext.dgettext(UUID, str);
+    if (customTrans !== str && customTrans !== "")
+        return customTrans;
+    return Gettext.gettext(str);
 }
 
 // Alert response using a Modal Dialog - approach thanks to Mark Bolin 
@@ -58,7 +62,6 @@ MyApplet.prototype = {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
         try {
 
-            this.UUID = metadata.uuid // Pick up UUID from metadata to make everything location independent
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "refreshInterval-spinner",
@@ -212,11 +215,15 @@ MyApplet.prototype = {
                 null);
 
             this.cssfile = metadata.path + "/stylesheet.css";
-            this.changelog = metadata.path + "/changelog.txt";
+            this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
-            this.UUID = metadata.uuid;
+//            this.UUID = metadata.uuid;
+            // ++ Part of l10n support;
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+
             this.applet_running = true; //** New
  
             this._client = NMClient.Client.new(); //++
@@ -402,7 +409,7 @@ MyApplet.prototype = {
             //			this.menu.addActor(this.imageWidget);      // Old way with actor added directly to menu
             try {
                 this.menu.addActor(this.mainBox); // Now add mainbox
-                this.mainBox.add_actor(this.imageWidget); // and add actor for to it which can be removed
+                this.mainBox.add_actor(this.imageWidget); // and add actor in way that it can be removed
                 this.mainBox.add_actor(this.textWidget); // and text actor to handle case where vnstat not installed
 
                 GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
@@ -424,6 +431,11 @@ MyApplet.prototype = {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemHead0);
+            this.menuitemHead1 = new PopupMenu.PopupMenuItem("          " + _("If no Interface is Active, the last available information has been displayed"), {
+                reactive: false
+            });
+            this.menu.addMenuItem(this.menuitemHead1);
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
         }
 
@@ -523,41 +535,17 @@ MyApplet.prototype = {
 
     // Build right click context menu
     buildContextMenu: function () {
-      // No longer needed
-      // this._applet_context_menu.removeAll();
 
 /*
 The code following allows me to retain the 'standard' additions of 'About...' 'Configure...' and 'Remove' when rebuilding the Context menu.
-
-The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. The following code adds all the menu items to the applet context menu without touching the default items.
-
-    // Build right click context menu
-    buildContextMenu: function() {
-        // Not needed.
-        // this._applet_context_menu.removeAll();
-
-        if (this.myMenuSection)
-            this.myMenuSection.destroy();
-
-        this.myMenuSection = new PopupMenu.PopupMenuSection();
-        this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
-
-        // Rest of buildContextMenu function.
-        // Items added to this.myMenuSection insted of this._applet_context_menu.
-    },
-
-Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items. Maybe @collinss could shed some light on why this happened?
+The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. 
+Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items.
 */
 
         if (this.myMenuSection)
             this.myMenuSection.destroy();
-
         this.myMenuSection = new PopupMenu.PopupMenuSection();
         this._applet_context_menu.addMenuItem(this.myMenuSection, 0);
-
-
-
-
 
 // Old code continues
 
@@ -607,13 +595,13 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         if (this.monitoredInterfaceName == "bnep0") {
             displayname3 = "\u2714" + displayname3;
         }
-        let menuitem = new PopupMenu.PopupMenuItem(displayname3);
+        menuitem = new PopupMenu.PopupMenuItem(displayname3);
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("bnep0");
         }));
         this.myMenuSection.addMenuItem(menuitem)
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Check for Changes in Devices and Display Options"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.rebuildFlag = true;
         }));
@@ -621,7 +609,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         this.myMenuSection.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Toggle Display from \u2193 and \u2191 to \u21f5"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.compactDisplay) {
                 this.compactDisplay = false;
@@ -635,7 +623,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         // Code to reset Cumulative Data Usage and set their comments to the current date and time
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT1 = 0;
@@ -645,7 +633,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT2 = 0;
@@ -655,7 +643,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
         let d = new Date();
         this.cT3 = 0;
@@ -731,16 +719,6 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             this.subMenu1.menu.addMenuItem(this.subMenuItem7);
          }
     },
-/*
-//      Following no longer needed as it is provided in default context menu items 
-
-//        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        let menuitem = new PopupMenu.PopupMenuItem(_("Configure"));
-        menuitem.connect('activate', Lang.bind(this, function (event) {
-            GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
-        }));
-        this.myMenuSection.addMenuItem(menuitem);
-*/
 
     setMonitoredInterface: function (name) {
         this.monitoredInterfaceName = name;
@@ -772,7 +750,6 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
     playAlert: function(){
         if(this.useAlertSound) {
             GLib.spawn_command_line_async('play ' + this.alertSound);
-//            GLib.spawn_command_line_async('play /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga');
         }
     },
 
@@ -998,7 +975,7 @@ function main(metadata, orientation, panel_height, instance_id) {
 }
 
 /*
-Version 3.1.2
+Version 3.2.1
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -1151,4 +1128,16 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Update README.md (2x) for contributions from @collinss and @Odyseus.
 3.1.2     Change spawn_command_line_sync to spawn_command_line_async to remove one reason for 'dangerous' classification.
           Correct several spelling errors in comments and .md files.
+3.2.0     Remove duplicate let declarations occurances in common coding for Cinnamon 3.4 thanks to @NikoKraus  [#604]
+3.2.1     Harmonise with code writen by author for vnstat@cinnamon.org and revert 3.1.2 until further testing.
+          Updated netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot as string added. 
+          Tidy up comments in applet.js
+          Update README.md to remove a couple of references to Ubuntu from early days.
+          Usual updates to new version in applet.js, changelog and metadata.json
+3.2.2     Removed unused this.UUID = metadata.uuid 
+          Improved l10n translation support.
+          Added CHANGELOG.md to applet folder and use it instead of changelog.txt in right click menu
+          CHANGELOG.md based on recent entries to changelog.txt with last changes at the top. changelog.txt currently remains in applet folder but is not used.
+          Use symbolic links for README.md and CHANGELOG.md instead of copies from the applet folder to UUID folder for the Cinnamon Web Site to pick up
+          
 */

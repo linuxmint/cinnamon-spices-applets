@@ -99,7 +99,7 @@ MyApplet.prototype = {
 
             // ++ Make metadata values available within applet for context menu.
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
-            this.changelog = metadata.path + "/changelog.txt";
+            this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
             this.appletPath = metadata.path;
 
@@ -155,7 +155,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "paused";
             this.pausedAt = this.currentCount; // Changed to reduce load on Settings
@@ -163,14 +163,14 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "ready";
             this.updateUI();
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
+        menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.updateUI();
@@ -181,7 +181,7 @@ MyApplet.prototype = {
         }));
         this._applet_context_menu.addMenuItem(menuitem);
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from original start time"));
+        menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from original start time"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             if (this.counterStatus == "paused") {
                 this.counterStatus = "running";
@@ -380,7 +380,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 2.0.5
+Version 2.1.0
 0.9.0 Release Candidate 30-07-2013
 0.9.1 Help file facility added and link to gnome-system-monitor
 0.9.2 Change Hold to Pause in Tooltip
@@ -423,4 +423,9 @@ Version 2.0.5
         UUID set from metadata.uuid so no need for explicit definition.
         _() function now checks for system translations if a local one not found.
         Based on ideas from @Odyseus, @lestcape and @NikoKrause
+## 2.1.0
+ * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
+ * CHANGELOG.md is a simplified version of the existing changelog.txt
+ * Applet updated so CHANGELOG.md is displayed from context 
+ * README.md in UUID is now symbolic link from UUID 
 */

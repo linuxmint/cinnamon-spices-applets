@@ -14,7 +14,10 @@ GraphVBars.prototype = {
 
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     // Background
@@ -54,7 +57,7 @@ GraphVBars.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -97,7 +100,10 @@ GraphPieChart.prototype = {
     this.datalist = [];
     this.provider = provider;
   },
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
 
     //Draw Background
@@ -151,7 +157,7 @@ GraphPieChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
@@ -247,7 +253,7 @@ GraphLineChart.prototype = {
     if (this.logScale && this.maxvalue > 1.0) {
       this.scale = 1.0 / Math.log(this.maxvalue);
     }
-    //global.logError("scale: "+this.scale+" this.max:"+this.maxvalue+" this.minmaxVal:"+this.minMaxValue);
+
     return true;
   },
 
@@ -271,7 +277,10 @@ GraphLineChart.prototype = {
     this.dataPointsList = newdatapointslist;
   },
 
-  paint: function(area, labelson, width, height, bgcolor, colorslist) {
+  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+    if (!labelColor) {
+      labelColor = [1, 1, 1, 0.1]
+    }
     let cr = area.get_context();
     if (this.dataPointsListSize != this.getDataPointsListSize(width)) {
       this.resizeDataPointsList(this.getDataPointsListSize(width), colorslist.length);
@@ -288,8 +297,6 @@ GraphLineChart.prototype = {
       numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
     }
     for (var i = 0; i < numLinesOnChart; i++) {
-      /*var lastval = 0;
-      var beforelastval = 0;*/
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
       //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
       var datapointnum = i % colorslist.length;
@@ -299,15 +306,9 @@ GraphLineChart.prototype = {
       var a = colorslist[datapointnum][3];
       cr.setSourceRGBA(r, g, b, a);
       cr.setLineWidth(1);
-      //cr.setAntialias(1) //none
+
       cr.setLineJoin(1); //rounded
       for (var j = 1; j < this.dataPointsList.length; j++) {
-        //var maxvalue = this.minMaxValue;
-        if (this.maxvalue > this.minMaxValue) {
-          maxvalue = this.maxvalue;
-        }
-
-        //var val = Math.floor((height-1) * (this.dataPointsList[j][i]/(maxvalue)));
 
         var x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
         var x2 = this.pixelsPerDataPoint * (j) + this.pixelsPerDataPoint / 4;
@@ -325,12 +326,10 @@ GraphLineChart.prototype = {
             rawy2 = Math.log(rawy2);
           }
         }
-        //var y1 = height-Math.floor((height-1) * (rawy1/(maxvalue)));
-        //var y2 = height-Math.floor((height-1) * (rawy2/(maxvalue)));
+
         var y1 = height - Math.floor((height - 1) * (rawy1 * this.scale));
         var y2 = height - Math.floor((height - 1) * (rawy2 * this.scale));
-        //if(y1<0 || y2<0 || y1>30 || y2>30)
-        //global.logError("rawy1: "+rawy1+" rawy2: "+rawy2+" y1: "+y1+" y2:"+y2+" scale: "+this.scale+" maxvale:"+maxvalue+" effscale: "+(1.0/maxvalue)+" this.maxv:"+this.maxvalue);
+
         cr.curveTo(x1, y1, x1, y2, x2, y2);
       }
       cr.stroke();
@@ -347,7 +346,7 @@ GraphLineChart.prototype = {
       var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
       pangolayout.set_font_description(fontdesc);
 
-      cr.setSourceRGBA(1, 1, 1, 1);
+      cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
       cr.moveTo(width / 2, 0); //place text in center of graph area
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();

@@ -1,7 +1,7 @@
 {
-    "uuid": "bumblebee@pdcurtis", 
+    "description": "Displays Status of Bumblebee and nVidia GPU Temperature with associated support functions including starting selected programs with optirun or primusrun", 
     "max-instances": "1", 
-    "name": "Bumblebee And NVidia Display (BAND)", 
-    "version": "3.1.2", 
-    "description": "Displays Status of Bumblebee and nVidia GPU Temperature"
+    "name": "Bumblebee Status with NVidia Temperature Display", 
+    "version": "3.2.2", 
+    "uuid": "bumblebee@pdcurtis"
 }

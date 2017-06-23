@@ -4,7 +4,7 @@
 
 This is a simple applet I have written for my laptop because I have recently had a couple of times where I have missed the notifications about low battery and have had shutdowns losing data and potentially reducing battery capacity through a complete discharge. The applet draws on my code for the NUMA (Network Utilisation Monitoring and Alert) Applet so much of the code is well developed and tested.
 
-This applet allows one to set a level at which the machine starts to shutdown (suspend to memory as currently set up) with plenty of warning - the shutdown level is 2/3 of the initial alert level which can be adjusted between 10% and 40%. It is designed for a horizontal panel where it can replace the existing power applet if panel space is limited.
+This applet allows one to set a level at which the machine starts to shutdown (suspend to memory as currently set up) with plenty of warning - the shutdown level is 2/3 of the initial alert level which can be adjusted between 10% and 40%. 
 
 ## Rationale
 
@@ -14,23 +14,35 @@ The current Settings and Power Applet only allow limited choices of handling low
 
 Fully supported by Author, under continuing development and in continuous use on several machines. 
 
+It has been redesigned in version 1.3.0 with modes for use in vertical panels when used in Cinnamon 3.2 and higher but please note that not all themes fully support vertical panels.
+
 ## Features
 
 The applet normally shows the percentage charge on a coloured background which is: 
 
   * Green when above the alert level (set currently to 1.5 times the 'shutdown' level.)
-  * Green has Red Border when discharging (Added in version 1.2.2)
+  * Green has Red Border when discharging.
   * Orange between the warning and shutdown level
   * Red and flashing at and below the Shutdown level (even when charging).
 
-   When the battery is Discharging the warning and shutdown regions have a much larger flashing message in the applet which is difficult to miss. 
+   When the battery is Discharging the warning and shutdown regions have a much longer flashing message in the applet which is difficult to miss. 
 
-  * When the Alert level is reached a modal alert is put up which can not be missed as no input can be made until it is cleared and short fixed audible alert is also given (Added in 1.2.2)
+  * When the Alert level is reached a modal alert is put up which can not be missed as no input can be made until it is cleared and short fixed audible alert is also given.
   * When the shutdown level is reached a normal alert box is put up with options of an immediate suspend or cancel - if nothing is done it suspends 30 seconds latter. If cancelled (or the machine is turned back on without the battery being on charge) the alert and shutdown sequence is restarted after the battery has dropped another 1%. The alert box is accompagnied by a short audible alert.
 
 The alert level can be set to between 10% and 40% of full by a slider on the left click menu or in the configuration screen. The refresh rate can also be set in the configuration screen.
 
 The intention is to allow the possibility of leaving suspend with enough battery to close programs and shut down after powering up from suspend without a charger after an accidental unattended suspend. It is suggested that the 'shutdown level' is set to about 10% to allow time. Do not forget that the battery still drains, although slowly, during suspend.
+
+Version 1.3.0 introduces support for vertical panels and has extra display modes including an optional icon showing battery state. The modes, which are selected in the Configure screen, are:
+
+  * Classic - Battery Percentage with an extended message in the panel as above (only fo horizontal panels)
+  * Classic Plus - Classic with addition of a Battery Icon (only for horizontal panels)
+  * Compact - Battery Percentage without an extended message, just the background changes (suitable for vertical panels)
+  * Compact Plus - Compact  with addition of Battery Icon (suitable for vertical panels)
+  * Battery Icon Only - retains the coloured background showing status (suitable for vertical panels)
+
+If a Classic mode is used on a vertical panel the extended message is not shown which allows it to be used in a vertical panel in the default 'Classic' configuration.
 
 The right click menu gives access to some useful utilities as well as the change log and this help file.
 
@@ -38,13 +50,13 @@ Many laptops do not implement a suspend well. The suspend which is in use is a S
 
 ## Translations and other Contributions
 
-The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I rarely be able to take responsibility for the accuracy of translations!
+The internal changes required in the applet to allow translations are implemented and several translations are available. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I will rarely be able to take responsibility for the accuracy of translations!
 
 Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
 
 ## Requirements:
 
-Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. It has been tested up to Cinnamon 3.2 and Mint 18.1
+Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. It has been tested up to Cinnamon 3.2 and Mint 18.1. 
     
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
  

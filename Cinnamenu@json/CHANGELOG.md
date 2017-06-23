@@ -1,5 +1,16 @@
 Changelog
 
+### 1.3.1
+
+  * Removed extra tooling causing performance issues.
+  * Fixed some Clutter errors occurring when adding/removing favorites.
+
+### 1.3.0
+
+  * Moved the Favorite Apps category to the bottom of the category list.
+  * Added a feature allowing you to evaluate math expressions from the search field.
+  * Fixed various CJS warnings.
+
 ### 1.2.1
 
   * Fixed the application list view having excessive width.

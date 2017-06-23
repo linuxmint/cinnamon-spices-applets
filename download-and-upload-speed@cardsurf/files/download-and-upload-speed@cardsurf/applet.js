@@ -6,6 +6,7 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+const PopupMenu = imports.ui.popupMenu;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
@@ -92,11 +93,13 @@ MyApplet.prototype = {
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
 
+        this.menu_item_update_network_position = 4;
         this.gui_speed = null;
         this.gui_data_limit = null;
         this.menu_item_gui = null;
         this.menu_item_network = null;
         this.menu_item_byte_start_times = null;
+        this.menu_item_update_network = null;
         this.hover_popup = null;
 
         this._init_translations();
@@ -227,8 +230,16 @@ MyApplet.prototype = {
     },
 
     data_limit_exceeded: function () {
-        let data_limit_bytes = this.convert_data_limit_bytes();
-        return this.bytes_total > data_limit_bytes;
+        let enabled = this.is_data_limit_enabled();
+        if(enabled) {
+            let data_limit_bytes = this.convert_data_limit_bytes();
+            return this.bytes_total > data_limit_bytes;
+        }
+        return false;
+    },
+
+    is_data_limit_enabled: function () {
+        return this.data_limit > 0;
     },
 
     convert_data_limit_bytes: function () {
@@ -291,6 +302,53 @@ MyApplet.prototype = {
         this.is_running = false;
     },
 
+    // Override
+    on_applet_added_to_panel: function(userEnabled) {
+        this._init_menu_item_update_network_interfaces();
+    },
+
+    _init_menu_item_update_network_interfaces: function () {
+        this.menu_item_update_network = new PopupMenu.PopupIconMenuItem("Update network interfaces", "view-refresh",
+                                                                        St.IconType.SYMBOLIC);
+        this.menu_item_update_network.connect('activate', Lang.bind(this, this.update_network_interfaces));
+        this._applet_context_menu.addMenuItem(this.menu_item_update_network, this.menu_item_update_network_position);
+    },
+
+    update_network_interfaces: function () {
+         let updated = this.is_network_interface_updated();
+         if(updated) {
+             this._update_network_properties();
+             this._reload_menu_item_network();
+         }
+    },
+
+    is_network_interface_updated: function () {
+         let network_interfaces = this._init_network_interfaces();
+         let updated = !this.arrays_equal(this.network_interfaces, network_interfaces);
+         return updated;
+    },
+
+    arrays_equal: function (array1, array2) {
+        return array1.length == array2.length &&
+               array1.every(function(value, index) { return value === array2[index]; });
+    },
+
+    _update_network_properties: function () {
+         this.network_interfaces = this._init_network_interfaces();
+         let network_interface = this._init_network_interface();
+         this.on_menu_item_network_clicked(network_interface, -1);
+    },
+
+    _reload_menu_item_network: function () {
+        this.menu_item_network.reload_options(this.network_interfaces);
+        this._set_menu_item_network_active_option();
+    },
+
+    _set_menu_item_network_active_option: function () {
+        let index = this.network_interfaces.indexOf(this.network_interface);
+        this.menu_item_network.set_active_option(index);
+    },
+
     _init_network_properties: function () {
         this.network_interfaces = this._init_network_interfaces();
         this.network_interface = this._init_network_interface();
@@ -343,10 +401,9 @@ MyApplet.prototype = {
 
     _init_menu_item_network: function () {
         this.menu_item_network = new AppletGui.RadioMenuItem(_("Network interface"), this.network_interfaces);
-        index = this.network_interfaces.indexOf(this.network_interface);
-        this.menu_item_network.set_active_option(index);
         this.menu_item_network.set_callback_option_clicked(this, this.on_menu_item_network_clicked);
         this._applet_context_menu.addMenuItem(this.menu_item_network);
+        this._set_menu_item_network_active_option();
     },
 
     on_menu_item_network_clicked: function (option_name, option_index) {
@@ -383,12 +440,12 @@ MyApplet.prototype = {
     },
 
     _update_menu_item_byte_start_times_option: function () {
-        index = this.byte_start_times.indexOf(this.bytes_start_time);
+        let index = this.byte_start_times.indexOf(this.bytes_start_time);
         this.menu_item_byte_start_times.set_active_option(index);
     },
 
     on_menu_item_byte_start_times_clicked: function (option_name, option_index) {
-        start_time = this.byte_start_times[option_index];
+        let start_time = this.byte_start_times[option_index];
         if(this.bytes_start_time != start_time) {
            this.bytes_start_time = start_time;
            this.on_bytes_start_time_changed();
@@ -547,9 +604,9 @@ MyApplet.prototype = {
         this.update_bytes_total();
 
         let received = this.scale(this.bytes_received_iteration);
-        let received = this.convert_to_readable_string(received);
+        received = this.convert_to_readable_string(received);
         let sent = this.scale(this.bytes_sent_iteration);
-        let sent = this.convert_to_readable_string(sent);
+        sent = this.convert_to_readable_string(sent);
         let received_total = this.convert_to_two_decimals_string(this.bytes_received_total);
         let sent_total = this.convert_to_two_decimals_string(this.bytes_sent_total);
 
@@ -561,21 +618,23 @@ MyApplet.prototype = {
     },
 
     update_bytes_received: function () {;
-        let bytes_received = this.read_file(this.file_bytes_received);
+        let bytes_received = this.read_number(this.file_bytes_received, this.bytes_received_previous);
         this.bytes_received_iteration = this.calculate_bytes_difference(bytes_received, this.bytes_received_previous);
         this.bytes_received_previous = bytes_received;
         this.bytes_received_interface_session += this.bytes_received_iteration;
         this.bytes_received_total += this.bytes_received_iteration;
     },
 
-    read_file: function (file) {
-        let file_content = "";
+    read_number: function (file, default_number) {
         try {
-            file_content = file.read_chars();
+            let array_bytes = file.read_chars();
+            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
+            let number = parseInt(string);
+            return number;
         }
         catch(exception) {
+            return default_number;
         }
-        return file_content;
     },
 
     scale: function (bytes) {
@@ -675,7 +734,7 @@ MyApplet.prototype = {
     },
 
     update_bytes_sent: function () {
-        let bytes_sent = this.read_file(this.file_bytes_sent);
+        let bytes_sent = this.read_number(this.file_bytes_sent, this.bytes_sent_previous);
         this.bytes_sent_iteration = this.calculate_bytes_difference(bytes_sent, this.bytes_sent_previous);
         this.bytes_sent_previous = bytes_sent;
         this.bytes_sent_interface_session += this.bytes_sent_iteration;
@@ -709,7 +768,7 @@ MyApplet.prototype = {
         let precision = decimals - 1;
         let rounded = number.toFixed(precision);
         let zero = 0.0;
-        let zero = zero.toFixed(precision);
+        zero = zero.toFixed(precision);
         return rounded == zero;
     },
 

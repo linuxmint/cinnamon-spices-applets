@@ -1,0 +1,42 @@
+# Polish translation for vboxlauncher@mockturtl.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# xearonet , 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-28 00:34+0100\n"
+"PO-Revision-Date: 2017-04-30 13:54+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Last-Translator: \n"
+"Language-Team: xearonet\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: applet.js:81
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: applet.js:127
+msgid "ERROR. No compatible virtual machine programs found."
+msgstr "BŁĄD. Nie znaleziono zgodnych maszyn wirtualnych."
+
+#: applet.js:197
+msgid "Update list"
+msgstr "Odśwież listę"
+
+#. vboxlauncher@mockturtl->settings-schema.json->autoUpdate->description
+msgid "Auto update (slow)"
+msgstr "Auto-odświeżanie (wolne)"
+
+#. vboxlauncher@mockturtl->metadata.json->name
+msgid "Vbox Launcher"
+msgstr "Starter VBox"
+
+#. vboxlauncher@mockturtl->metadata.json->description
+msgid "An applet to launch virtual machines."
+msgstr "Aplet do uruchamiania maszyn wirtualnych."

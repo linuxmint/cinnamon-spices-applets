@@ -1,0 +1,142 @@
+# Swedish translation for windows-quick-list-with-close-button@koutch.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: windows-quick-list-with-close-button@koutch\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-16 14:56+0200\n"
+"PO-Revision-Date: 2017-05-16 19:26+0200\n"
+"Language-Team: Svenska Språkfiler <contactlist@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:57
+msgid "Yes"
+msgstr "Ja"
+
+#: applet.js:68
+msgid "No"
+msgstr "Nej"
+
+#: applet.js:167
+msgid "All windows"
+msgstr "Alla fönster"
+
+#: applet.js:373
+msgid "Settings"
+msgstr "Inställningar"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->description
+msgid "Quickly access windows from all workspaces with close buttons and settings"
+msgstr "Snabb åtkomst till fönster med stängknappar och inställningar, från alla arbetsytor"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->name
+msgid "Windows Quick List with close button"
+msgstr "Fönsterlista med stängknappar"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->description
+msgid "Menu icon size:"
+msgstr "Menyikonstorlek:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->tooltip
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->tooltip
+msgid "From 12 to 48"
+msgstr "Från 12 till 48"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->units
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->units
+msgid "Pixels"
+msgstr "Bildpunkter"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->description
+msgid "Workspace's name clickable"
+msgstr "Klickbara arbetsytenamn"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->tooltip
+msgid "Switch between workspaces"
+msgstr "Växla mellan arbetsytor"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-1->description
+msgid "msg1 : "
+msgstr "mess1: "
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->description
+msgid "Windows group"
+msgstr "Fönstergrupp"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->tooltip
+msgid "Group windows by applications"
+msgstr "Gruppera fönster efter program"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. WKS-CLOSE-BUTTON->description
+msgid "Display workspaces close button"
+msgstr "Visa stängknapp för arbetsytor"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->description
+msgid "Keep open"
+msgstr "Behåll öppen"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->tooltip
+msgid "Stay open while closing windows "
+msgstr "Behåll menyn öppen vid fönsterstängning"
+
+#. windows-quick-list-with-close-button@koutch->settings-
+#. schema.json->head1->description
+msgid "Set confirm message (msg1 'number of windows' msg2)"
+msgstr "Ange bekräftelsemeddelande (mess1 \"antal fönster\" mess2)"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP-CLOSE-BUTTON->description
+msgid "Display window groups close button"
+msgstr "Visa stängknapp för fönstergrupper"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-2->description
+msgid "msg2 : "
+msgstr "mess2: "
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->description
+msgid "Submenu icon size:"
+msgstr "Undermenyns ikonstorlek:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. CLOSE-BUTTON->description
+msgid "Display close buttons"
+msgstr "Visa stängknappar"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->description
+msgid "Window title length:"
+msgstr "Längd på fönstertitel:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->tooltip
+msgid "From 10 to 100"
+msgstr "Från 10 till 100"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->units
+msgid "Characters"
+msgstr "Tecken"

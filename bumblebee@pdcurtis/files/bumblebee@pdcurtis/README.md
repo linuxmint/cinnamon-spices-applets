@@ -12,23 +12,27 @@ The latest versions of Cinnamon provide more support to Bumblebee but the option
 
 ## Status
 
-I have just reloaded Bumblebee using the instructions at http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html under Mint 17.3 (32 bit) and 18.1 (64 bit) (I have a dual boot system) and it all seems to still work fine under both.
+I have recently reloaded Bumblebee using the instructions at http://www.webupd8.org/2016/08/how-to-install-and-configure-bumblebee.html under Mint 17.3 (32 bit) and 18.1 (64 bit) (I have a dual boot system) and it all seems to still work fine under both. The use of vertical panels has only been tested under Mint 18.1 with Cinnamon 3.2.
  
 ## Features
 
+The latest versions 3.2.0 and higher work with horizontal and vertical panels.  The indication of which GPU is active has changed to be an icon. The GPU temperature display is beside the icon on horizontal panels and below on vertical panels.  The display is shortened (by removing the degree symbol) if over 100 degrees on vertical panels because of width restrictions.
+
+The temperature display in the panel can now be inhibited to save space if required in settings.  One can also configure the update rate of the applet in settings.
+
 The Right Click (Context menu) gives the ability to easily run the nVidia Settings program without use of the terminal and also the System Monitor and Power Statistics, all useful for monitoring Bumblebee and Power consumption which is paramount when using a laptop on batteries.
 
-The standard Left Click menu provides a configurable list of programs which one can run using the discrete nVidia graphics through Bumblebee - this otherwise requires them to be called through optirun in a terminal or via a modified launcher. This list is configured using the standard applet configuration mechanism.  Currently there are two examples - glxspheres64 is a very good test of the speed of the graphics but may need to be installed. The other example is the nVidia Settings program. There are 5 'slots' currently and if you do not require a slot set the Display Name to null or leave it completely empty. One can also configure the update rate of the applet in settings.
+The standard Left Click menu provides a configurable list of programs which one can run using the discrete nVidia graphics through Bumblebee. This list is configured using the standard applet configuration mechanism.  Currently there are two examples - glxspheres64 is a very good test of the speed of the graphics but may need to be installed. The other example is the nVidia Settings program. There are 5 'slots' currently and if you do not require a slot set the Display Name to null or leave it completely empty.
 
-The current version has improved error checking to ensure bumblebee is loaded and does not fill the error logs with messages when that is the case. It displays a message of ERROR if bumblebee is not loaded and a message when you hover. The check is actually for bbswitch which is also loaded by Nvidia Prime so this check may need to be updated.
+There is error checking to ensure bumblebee is loaded and does not fill the error logs with messages when that is the case. It displays a message of Err if bumblebee is not loaded and a message when you hover. 
 
 ## Requirements
 
-The applet requires at least Cinnamon 1.8 and 2.0 is desirable to access the configuration from within the applet. 
+The applet requires at least Cinnamon 2.0. Mint versions with less than Cinnamon 2.2 have now passed their end of life so all current version including 3.4 are supported. Cinnamon 3.2 or higher is required to support a vertical panel but not to support other features of the applet.
 
 The Bumblebee and the nVidia graphics packages obviously need to be installed but no other packages are essential.
 
-glxsheres64 only needs to be installed if you want to use the applet to test the relative performances of the Intel and nVidia graphics processors. glxsheres64 is part of the VirtualGL package which needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi (should be the default for a right click on the downloaded file). It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU when it is active.
+glxsheres64 only needs to be installed if you want to use the applet to test the relative performances of the Intel and nVidia graphics processors. glxsheres64 is part of the VirtualGL package which needs to be installed from  http://sourceforge.net/projects/virtualgl/files/VirtualGL/ - download the latest version and install using gdebi. It should run about five times faster when the nVidia GPU is active and is a very good test as to how good your cooling is for both the CPU and nVidia GPU when it is active.
 
 ## Translations and other Contributions
 

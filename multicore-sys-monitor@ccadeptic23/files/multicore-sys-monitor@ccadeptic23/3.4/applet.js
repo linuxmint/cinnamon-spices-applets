@@ -28,6 +28,7 @@ try {
   var St = imports.gi.St;
   var Gtk = imports.gi.Gtk;
   var GLib = imports.gi.GLib;
+  var Gio = imports.gi.Gio;
   var Cinnamon = imports.gi.Cinnamon;
   var Gettext = imports.gettext;
   var GTop = imports.gi.GTop; //psst this is really only to see if we can
@@ -37,6 +38,7 @@ try {
   var ConfigSettings = null; //defined in main (my library)
   var Graphs = null; //defined in main (my library)
   var DataProviders = null; //defined in main (my library)
+  var Util = imports.misc.util;
 
 
 } catch (err) {
@@ -66,9 +68,21 @@ MyApplet.prototype = {
     this.childProcessHandler = null;
 
     this.metadata = metadata;
-    this.configfilepath = this.metadata.path; //apparently this is predefined which is nice to know
+    this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
 
-    this.configSettings = new ConfigSettings(this.configfilepath);
+    let configFile = Gio.file_new_for_path(this.configFilePath);
+
+    if (!configFile.query_exists(null)) {
+      Util.spawnCommandLineAsync('mkdir ' + this.configFilePath, ()=>{
+        this.__init();
+      });
+    } else {
+      this.__init();
+    }
+  },
+
+  __init: function () {
+    this.configSettings = new ConfigSettings(this.configFilePath);
 
     this._initContextMenu();
 
@@ -132,9 +146,9 @@ MyApplet.prototype = {
   },
   launchPreferences: function() {
     var currprefs = this.configSettings.getCurrentPreferencesString();
-
+    print(this.configFilePath, ["prefs.js", currprefs])
     if (this.childProcessHandler == null) {
-      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.configfilepath, ["prefs.js", currprefs]);
+      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.metadata.path, ["prefs.js", currprefs]);
     }
   },
   on_orientation_changed: function(orientation) {
@@ -152,57 +166,54 @@ MyApplet.prototype = {
   },
 
   _update: function() {
-    try {
-      if (this.childProcessHandler != null) {
-        var currentmsg = this.childProcessHandler.getCurrentMessage();
+    if (this.childProcessHandler != null) {
+      var currentmsg = this.childProcessHandler.getCurrentMessage();
 
-        if (currentmsg === "SAVE") {
-          this.configSettings.saveSettings();
-        } else if (currentmsg !== "SAVE" && currentmsg !== "") //currentmsg is "" when we have not had time to read anything yet
-        {
-          this.configSettings.updateSettings(currentmsg);
-        }
-
-        if (this.childProcessHandler.isChildFinished()) {
-          this.childProcessHandler.destroy();
-          this.childProcessHandler = null;
-        }
-      }
-      //Do any required processing when configuration changes
-      this.netProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
-      this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
-      this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
-      //check for new drives that are mounted
-      this.configSettings.adjustDiskDevices(Object.keys(this.diskProvider.getDiskDevices()));
-      this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
-      this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
-
-      //update data from providers.. a bit convoluted i may change later
-
-      this.multiCpuProvider.isEnabled = this.configSettings.isCPUEnabled()
-      this.memProvider.isEnabled = this.configSettings.isMEMEnabled();
-      this.netProvider.isEnabled = this.configSettings.isNETEnabled();
-      this.diskProvider.isEnabled = this.configSettings.isDiskEnabled();
-
-      for (var i = 0; i < this.graphs.length; i++) {
-        this.graphs[i].refreshData();
+      if (currentmsg === "SAVE") {
+        this.configSettings.saveSettings();
+      } else if (currentmsg !== "SAVE" && currentmsg !== "") //currentmsg is "" when we have not had time to read anything yet
+      {
+        this.configSettings.updateSettings(currentmsg);
       }
 
-      //global.logError(this.diskProvider.getData());
-
-      this.graphArea.queue_repaint();
-
-      //Set the Applet Tooltip
-      var appletTooltipstr = "";
-      appletTooltipstr += this.multiCpuProvider.getTooltipString();
-      appletTooltipstr += this.memProvider.getTooltipString();
-      appletTooltipstr += this.swapProvider.getTooltipString();
-      appletTooltipstr += this.netProvider.getTooltipString();
-      appletTooltipstr += this.diskProvider.getTooltipString();
-      this.set_applet_tooltip(appletTooltipstr.trim());
-    } catch (err) {
-      global.logError(err);
+      if (this.childProcessHandler.isChildFinished()) {
+        this.childProcessHandler.destroy();
+        this.childProcessHandler = null;
+      }
     }
+    //Do any required processing when configuration changes
+    this.netProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
+    this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
+    this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
+    //check for new drives that are mounted
+    this.configSettings.adjustDiskDevices(Object.keys(this.diskProvider.getDiskDevices()));
+    this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
+    this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
+
+    //update data from providers.. a bit convoluted i may change later
+
+    this.multiCpuProvider.isEnabled = this.configSettings.isCPUEnabled()
+    this.memProvider.isEnabled = this.configSettings.isMEMEnabled();
+    this.netProvider.isEnabled = this.configSettings.isNETEnabled();
+    this.diskProvider.isEnabled = this.configSettings.isDiskEnabled();
+
+    for (var i = 0; i < this.graphs.length; i++) {
+      this.graphs[i].refreshData();
+    }
+
+    //global.logError(this.diskProvider.getData());
+
+    this.graphArea.queue_repaint();
+
+    //Set the Applet Tooltip
+    var appletTooltipstr = "";
+    appletTooltipstr += this.multiCpuProvider.getTooltipString();
+    appletTooltipstr += this.memProvider.getTooltipString();
+    appletTooltipstr += this.swapProvider.getTooltipString();
+    appletTooltipstr += this.netProvider.getTooltipString();
+    appletTooltipstr += this.diskProvider.getTooltipString();
+    this.set_applet_tooltip(appletTooltipstr.trim());
+
     //set next refresh time
     Mainloop.timeout_add(this.configSettings.getRefreshRate(), Lang.bind(this, this._update));
   },
@@ -240,6 +251,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getCPUWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getCPUColorList());
 
@@ -254,7 +266,9 @@ MyApplet.prototype = {
         this.swapGraph.paint(area,
           false, //never use labels for the backdrop
           this.configSettings.getMEMWidth(),
-          this.configSettings.getHeight(), [0, 0, 0, 0], //want a clear background so that it doesnt mess up the other one
+          this.configSettings.getHeight(),
+          [0, 0, 0, 0],
+          [0, 0, 0, 0], //want a clear background so that it doesnt mess up the other one
           this.configSettings.getSwapColorList());
 
         //paint the memory piechart over it
@@ -262,6 +276,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getMEMWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getMEMColorList());
 
@@ -278,6 +293,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getNETWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getNETColorList());
 
@@ -293,6 +309,7 @@ MyApplet.prototype = {
           this.configSettings.getLabelsOn(),
           this.configSettings.getDiskWidth(),
           this.configSettings.getHeight(),
+          this.configSettings.getLabelColor(),
           this.configSettings.getBackgroundColor(),
           this.configSettings.getDiskColorList());
 
@@ -302,7 +319,7 @@ MyApplet.prototype = {
       area.set_width(this.getAppletWidth());
 
     } catch (e) {
-      global.logError("in onGraphRepaint: " + e);
+      global.logError("in onGraphRepaint: " + e.stack);
     }
   }
 };

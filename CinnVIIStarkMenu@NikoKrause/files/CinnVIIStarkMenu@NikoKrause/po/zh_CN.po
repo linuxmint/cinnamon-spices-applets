@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 14:21+0100\n"
-"PO-Revision-Date: 2017-03-20 10:03+0000\n"
+"POT-Creation-Date: 2017-05-08 14:37+0200\n"
+"PO-Revision-Date: 2017-05-08 14:37+0200\n"
 "Last-Translator: Niko Krause <nikokrause@gmx.de>\n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Launchpad-Export-Date: 2017-03-22 07:22+0000\n"
-"X-Generator: Launchpad (build 18334)\n"
-"Language: zh_CN\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
@@ -47,84 +47,133 @@ msgstr "卸载"
 msgid "Run with NVIDIA GPU"
 msgstr "使用NVIDIA GPU运行"
 
-#: 3.2/applet.js:425 3.2/applet.js:459 2.6/applet.js:426 2.6/applet.js:460
+#: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
 msgid "No description available"
 msgstr "没有可用的描述"
 
-#: 3.2/applet.js:746 2.6/applet.js:761
-msgid "Open with"
-msgstr "打开方式"
-
-#: 3.2/applet.js:792 2.6/applet.js:807
-msgid "Other application..."
-msgstr "其他应用程序..."
-
-#: 3.2/applet.js:869 2.6/applet.js:884
-msgid "Clear list"
-msgstr "清除列表"
-
-#: 3.2/applet.js:917 2.6/applet.js:932
-msgid "All Applications"
-msgstr "所有应用程序"
-
-#: 3.2/applet.js:945 2.6/applet.js:960
-msgid "Places"
-msgstr "位置"
-
-#: 3.2/applet.js:969 2.6/applet.js:984
-msgid "Recent Files"
-msgstr "最近的文件"
-
-#: 3.2/applet.js:1568 3.2/applet.js:1744 2.6/applet.js:1583 2.6/applet.js:1759
-msgid "Logout"
-msgstr "登出"
-
-#: 3.2/applet.js:1570 2.6/applet.js:1585
-msgid "Lock Screen"
-msgstr "锁定屏幕"
-
-#: 3.2/applet.js:1737 2.6/applet.js:1752
-msgid "Shutdown the computer"
-msgstr "关闭计算机"
-
-#: 3.2/applet.js:1738 2.6/applet.js:1753
-msgid "Leave the session"
-msgstr "离开会话"
-
-#: 3.2/applet.js:1739 2.6/applet.js:1754
-msgid "Lock the screen"
-msgstr "锁定屏幕"
-
-#: 3.2/applet.js:1741 3.2/applet.js:1742 2.6/applet.js:1756 2.6/applet.js:1757
-msgid "Quit"
-msgstr "退出"
-
-#: 3.2/applet.js:1753 3.2/applet.js:1757 2.6/applet.js:1768 2.6/applet.js:1772
-msgid "Lock screen"
-msgstr "锁定屏幕"
-
-#. 3.2->settings-schema.json->menu->title
-#: 3.2/applet.js:1971 2.6/applet.js:1983
-msgid "Menu"
-msgstr "菜单"
-
-#: 3.2/applet.js:3308 2.6/applet.js:3289
+#: 3.2/applet.js:740 2.6/applet.js:3289
 msgid "This file is no longer available"
 msgstr "此文件不可用"
 
-#: 3.2/applet.js:3340 2.6/applet.js:3321
+#: 3.2/applet.js:790 2.6/applet.js:761
+msgid "Open with"
+msgstr "打开方式"
+
+#: 3.2/applet.js:836 2.6/applet.js:807
+msgid "Other application..."
+msgstr "其他应用程序..."
+
+#: 3.2/applet.js:911 2.6/applet.js:884
+msgid "Clear list"
+msgstr "清除列表"
+
+#: 3.2/applet.js:957 2.6/applet.js:932
+msgid "All Applications"
+msgstr "所有应用程序"
+
+#: 3.2/applet.js:986 2.6/applet.js:960
+msgid "Places"
+msgstr "位置"
+
+#: 3.2/applet.js:1010 2.6/applet.js:984
+msgid "Recent Files"
+msgstr "最近的文件"
+
+#: 3.2/applet.js:1609 3.2/applet.js:1792 2.6/applet.js:1583 2.6/applet.js:1759
+msgid "Logout"
+msgstr "登出"
+
+#: 3.2/applet.js:1611 2.6/applet.js:1585
+msgid "Lock Screen"
+msgstr "锁定屏幕"
+
+#: 3.2/applet.js:1785 2.6/applet.js:1752
+msgid "Shutdown the computer"
+msgstr "关闭计算机"
+
+#: 3.2/applet.js:1786 2.6/applet.js:1753
+msgid "Leave the session"
+msgstr "离开会话"
+
+#: 3.2/applet.js:1787 2.6/applet.js:1754
+msgid "Lock the screen"
+msgstr "锁定屏幕"
+
+#: 3.2/applet.js:1789 3.2/applet.js:1790 2.6/applet.js:1756 2.6/applet.js:1757
+msgid "Quit"
+msgstr "退出"
+
+#: 3.2/applet.js:1801 3.2/applet.js:1805 2.6/applet.js:1768 2.6/applet.js:1772
+msgid "Lock screen"
+msgstr "锁定屏幕"
+
+# ########################################################################
+#: 3.2/applet.js:2012
+msgid "All Programs"
+msgstr "所有程序"
+
+#: 3.2/applet.js:2012
+msgid "Favorites"
+msgstr "收藏夹"
+
+#: 3.2/applet.js:2013
+msgid "Documents"
+msgstr "文档"
+
+#: 3.2/applet.js:2013
+msgid "nemo Documents"
+msgstr "nemo文档"
+
+#: 3.2/applet.js:2014
+msgid "Pictures"
+msgstr "图片"
+
+#: 3.2/applet.js:2014
+msgid "nemo Pictures"
+msgstr "nemo图片"
+
+#: 3.2/applet.js:2015
+msgid "Music"
+msgstr "音乐"
+
+#: 3.2/applet.js:2015
+msgid "nemo Music"
+msgstr "nemo音乐"
+
+#: 3.2/applet.js:2016
+msgid "Videos"
+msgstr "视频"
+
+#: 3.2/applet.js:2016
+msgid "nemo Videos"
+msgstr "nemo视频"
+
+#: 3.2/applet.js:2017
+msgid "Downloads"
+msgstr "下载"
+
+#: 3.2/applet.js:2017
+msgid "nemo Downloads"
+msgstr "nemo下载"
+
+#. 3.2->settings-schema.json->menu->title
+#: 3.2/applet.js:2033 2.6/applet.js:1983
+msgid "Menu"
+msgstr "菜单"
+
+#: 3.2/applet.js:3473 2.6/applet.js:3321
 msgid "No recent documents"
 msgstr "没有最近的文档"
 
-#: 3.2/applet.js:3638 2.6/applet.js:3634
+#: 3.2/applet.js:3861 2.6/applet.js:3634
 msgid "Type to search..."
 msgstr "键入以搜索"
 
-#: 3.2/applet.js:4141 2.6/applet.js:4136
+#: 3.2/applet.js:4380 2.6/applet.js:4136
 msgid "No results found"
 msgstr "没有找到结果"
 
-#: 3.2/applet.js:4143 2.6/applet.js:4138
+#: 3.2/applet.js:4382 2.6/applet.js:4138
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
@@ -869,52 +918,3 @@ msgstr "带有Windows7开始菜单或MATE菜单外观的Cinnamon Menu"
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
 msgstr "CinnVIIStarkMenu"
-
-# ########################################################################
-#. 2.6->settings-schema.json->all-programs-label->default
-msgid "All Programs"
-msgstr "所有程序"
-
-#. 2.6->settings-schema.json->favorites-label->default
-msgid "Favorites"
-msgstr "收藏夹"
-
-#. 2.6->settings-schema.json->quicklauncher-2-label->default
-msgid "Documents"
-msgstr "文档"
-
-#. 2.6->settings-schema.json->quicklauncher-2-command->default
-msgid "nemo Documents"
-msgstr "nemo文档"
-
-#. 2.6->settings-schema.json->quicklauncher-3-label->default
-msgid "Pictures"
-msgstr "图片"
-
-#. 2.6->settings-schema.json->quicklauncher-3-command->default
-msgid "nemo Pictures"
-msgstr "nemo图片"
-
-#. 2.6->settings-schema.json->quicklauncher-4-label->default
-msgid "Music"
-msgstr "音乐"
-
-#. 2.6->settings-schema.json->quicklauncher-4-command->default
-msgid "nemo Music"
-msgstr "nemo音乐"
-
-#. 2.6->settings-schema.json->quicklauncher-5-label->default
-msgid "Videos"
-msgstr "视频"
-
-#. 2.6->settings-schema.json->quicklauncher-5-command->default
-msgid "nemo Videos"
-msgstr "nemo视频"
-
-#. 2.6->settings-schema.json->quicklauncher-6-label->default
-msgid "Downloads"
-msgstr "下载"
-
-#. 2.6->settings-schema.json->quicklauncher-6-command->default
-msgid "nemo Downloads"
-msgstr "nemo下载"

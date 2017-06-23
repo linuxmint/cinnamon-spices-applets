@@ -1,4 +1,4 @@
-Version 3.1.2
+Version 3.2.1
 1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
     Built in function used for left click menu. 
 1.1 Right click menu item added to open Settings Screen. 
@@ -54,7 +54,7 @@ Conclusion - change to a drop down selection of options, initially the three cur
 2.3.5 Major change in use of css styles for the background colours which show connection and alert status.
       This allows the user to match colours etc to a particular theme.
 2.3.6 Minor bug fix - Context Menu not always rebuilt after adding or removing advanced functions submenu.
-2.3.7 Bug fix - cumulative counters 1 and 3 not being saved correctly
+2.3.7 Bug fix - Cumulative counters 1 and 3 not being saved correctly
 2.3.8  Anomoly fix - Avoid calling  GTop.glibtop_get_netload() without valid interface -
        possible latest versions can segfault if interface not valid.
 2.3.9  Add fix for Applet not being fully halted when removed from panel (from dansie)
@@ -151,3 +151,9 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Update README.md (2x) for contributions from @collinss and @Odyseus.
 3.1.2     Change spawn_command_line_sync to spawn_command_line_async to remove one reason for 'dangerous' classification.
           Correct several spelling errors in comments and .md files.
+3.2.0     Remove duplicate let declarations occurances in common coding for Cinnamon 3.4 thanks to @NikoKraus  [#604]
+3.2.1     Harmonise with code writen by author for vnstat@cinnamon.org and revert 3.1.2 until further testing.
+          Updated netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot as string added. 
+          Tidy up comments in applet.js
+          Update README.md to remove a couple of references to Ubuntu from early days.
+          Usual updates to new version in applet.js, changelog and metadata.json

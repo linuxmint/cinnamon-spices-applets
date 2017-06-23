@@ -7,320 +7,457 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.09\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-12 17:23+0800\n"
-"PO-Revision-Date: 2017-03-12 17:46+0800\n"
+"POT-Creation-Date: 2017-06-04 19:39+0800\n"
+"PO-Revision-Date: 2017-06-04 19:39+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: applet.js:277 3.2/applet.js:277
+#: ../../create_localized_help.py:64
+msgid "Dependencies"
+msgstr "检查依赖关系"
+
+#: ../../create_localized_help.py:66
+msgid ""
+"The gtop library reads information about processes and the state of the "
+"system."
+msgstr "gtop库读取有关进程和系统状态的信息。"
+
+#: ../../create_localized_help.py:67 ../../create_localized_help.py:78
+msgid "Debian based distributions:"
+msgstr "Debian系发行版："
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:69
+msgid "The package is called **gir1.2-gtop-2.0**."
+msgstr "该软件包名为**gir1.2-gtop-2.0**。"
+
+#: ../../create_localized_help.py:70 ../../create_localized_help.py:81
+msgid "Archlinux based distributions:"
+msgstr "Archlinux系发行版："
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:72
+msgid "The package is called **libgtop**."
+msgstr "该软件包名为**libgtop**。"
+
+#: ../../create_localized_help.py:73 ../../create_localized_help.py:84
+msgid "Fedora based distributions:"
+msgstr "Fedora系发行版："
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:75
+msgid "The package is called **libgtop2-devel**."
+msgstr "该软件包名为**libgtop2-devel**。"
+
+#: ../../create_localized_help.py:77
+msgid ""
+"NetworkManager is a system network service that manages your network devices "
+"and connections, attempting to keep active network connectivity when "
+"available."
+msgstr ""
+"NetworkManager是一种管理您的网络设备和连接的系统网络服务，尝试在可用时保持活"
+"动的网络连接。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:80
+msgid "The package is called **gir1.2-networkmanager-1.0**."
+msgstr "该软件包名为**gir1.2-networkmanager-1.0**。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:83
+msgid "The package is called **networkmanager**."
+msgstr "该软件包名为**networkmanager**。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:86
+msgid "The package is called **NetworkManager**."
+msgstr "该软件包名为**NetworkManager**。"
+
+#: ../../create_localized_help.py:88
+msgid "Important note:"
+msgstr "重要提示："
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:90
+msgid ""
+"NetworkManager is only used if the **GTop** library version installed on a "
+"system is < **2.32** and doesn't support certain library calls. So, "
+"basically, if the network graph on this applet works without having "
+"installed NetworkManager, then you don't need to install it."
+msgstr ""
+"仅当系统上安装的** GTop **库版本<** 2.32 **且不支持某些库调用时，才使用"
+"NetworkManager。 所以，基本上，如果这个小程序上的网络图表在没有安装"
+"NetworkManager的情况下工作，那么你无需安装它。"
+
+#: ../../create_localized_help.py:92
+msgid ""
+"Restart Cinnamon after installing the packages for the applet to recognize "
+"them."
+msgstr "安装软件包之后重启Cinnamon以便小程序能够识别。"
+
+#: ../../create_localized_help.py:114
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:139 ../../create_localized_help.py:211
+msgid "language-name"
+msgstr "简体中文"
+
+#: ../../create_localized_help.py:214 applet.js:343
 msgid "Help"
 msgstr "帮助"
 
-#: applet.js:448 3.2/applet.js:448
-msgid "CPU: "
+#: ../../create_localized_help.py:215
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:216
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:217
+msgid "Choose language"
+msgstr "选择语言"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:218 ../../create_localized_help.py:225
+#, python-format
+msgid "Help for %s"
+msgstr "%s的帮助"
+
+#: ../../create_localized_help.py:226
+msgid "IMPORTANT!!!"
+msgstr "重要！！！"
+
+#: ../../create_localized_help.py:227
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+
+#: ../../create_localized_help.py:228
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#: ../../create_localized_help.py:234
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+
+#: ../../create_localized_help.py:235
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:237
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
+"名为**localizations.sh**的脚本安装本地化。"
+
+#: ../../create_localized_help.py:238
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+
+#: __init__.js:192
+msgid "CPU:"
 msgstr "CPU："
 
-#: applet.js:474 3.2/applet.js:474
-msgid "Memory: "
+#: __init__.js:225
+msgid "Memory:"
 msgstr "内存："
 
-#: applet.js:474 applet.js:499 3.2/applet.js:474 3.2/applet.js:499
-msgid " MB"
-msgstr " MB"
+#. TO TRANSLATORS: Don't know if this would need translation.
+#. MB = Megabytes.
+#: __init__.js:228 __init__.js:263
+msgid "MB"
+msgstr "MB"
 
-#: applet.js:499 3.2/applet.js:499
-msgid "Swap: "
-msgstr "交换分区："
+#: __init__.js:260
+msgid "Swap:"
+msgstr "交换分区:\t"
 
-#: applet.js:538 3.2/applet.js:538
-msgid "Network D/U: "
+#. TO TRANSLATORS:
+#. D = Download
+#. U = Upload
+#: __init__.js:320
+msgid "Network D/U:"
 msgstr "网络 下行/上行："
 
-#: applet.js:538 3.2/applet.js:538
-msgid " KB/s"
-msgstr " KB/s"
+#. TO TRANSLATORS: Don't know if this would need translation.
+#. KB/s = Kilobytes per second.
+#: __init__.js:323
+msgid "KB/s"
+msgstr "KB/s"
 
-#: applet.js:576 3.2/applet.js:576
-msgid "Load average: "
+#: __init__.js:369
+msgid "Load average:"
 msgstr "负载平均："
 
-#. 3.2->settings-schema.json->pref_show_swap_graph->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_show_swap_graph->description
-msgid "Show Swap graph:"
-msgstr "显示交换分区图表："
+#: applet.js:185
+msgid "Missing dependency!!!"
+msgstr "依赖缺失！！！"
 
-#. 3.2->settings-schema.json->pref_show_network_graph->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_show_network_graph->description
-msgid "Show Network graph:"
-msgstr "显示网络图表："
+#: applet.js:186
+msgid ""
+"This applet needs the GTop library installed on your system for it  to work."
+msgstr "您的系统必须安装这个小程序需要的GTop库才能工作。"
 
-#. 3.2->settings-schema.json->head44->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head44->description
-msgid "Network graph colors"
-msgstr "网络图表颜色"
+#: applet.js:187
+msgid ""
+"Read this applet help for more details (Applet context menu > Help item)."
+msgstr "请阅读此小程序的帮助获取详情（小程序右键菜单>帮助条目）。"
 
-#. 3.2->settings-schema.json->head33->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head33->description
-msgid "Swap graph colors"
-msgstr "交换分区图表颜色"
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
 
-#. 3.2->settings-schema.json->pref_network_graph_width->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_network_graph_width->description
-msgid "Network graph width"
-msgstr "网络图表宽度"
-
-#. 3.2->settings-schema.json->pref_network_graph_width->units
-#. 3.2->settings-schema.json->pref_memory_graph_width->units
-#. 3.2->settings-schema.json->pref_swap_graph_width->units
-#. 3.2->settings-schema.json->pref_load_graph_width->units
-#. 3.2->settings-schema.json->pref_cpu_graph_width->units
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_network_graph_width->units
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_memory_graph_width->units
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_load_graph_width->units
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_swap_graph_width->units
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_width->units
-msgid "pixels"
-msgstr "像素"
-
-#. 3.2->settings-schema.json->pref_border_color->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_border_color->description
-msgid "Border color:"
-msgstr "边框颜色："
-
-#. 3.2->settings-schema.json->pref_align_tooltip_text_to_the_left->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_align_tooltip_text_to_the_left->description
-msgid "Align tooltip text to the left"
-msgstr "将提示文本向左对齐"
-
-#. 3.2->settings-schema.json->pref_background_color->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_background_color->description
-msgid "Background color:"
-msgstr "背景颜色："
-
-#. 3.2->settings-schema.json->pref_memory_graph_width->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_memory_graph_width->description
-msgid "Memory graph width"
-msgstr "内存图表宽度"
-
-#. 3.2->settings-schema.json->pref_custom_command->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_custom_command->description
-msgid "Custom command on applet click:"
-msgstr "点击小程序的自定义命令："
-
-#. 3.2->settings-schema.json->head55->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head55->description
-msgid "Load graph colors"
-msgstr "负载图表颜色"
-
-#. 3.2->settings-schema.json->pref_refresh_rate->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_refresh_rate->description
-msgid "Refresh rate:"
-msgstr "刷新频率："
-
-#. 3.2->settings-schema.json->pref_refresh_rate->units
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->units
-msgid "milliseconds"
-msgstr "毫秒"
-
-#. 3.2->settings-schema.json->pref_swap_graph_color_used->description
-#. 3.2->settings-schema.json->pref_memory_graph_color_used->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_swap_graph_color_used->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_memory_graph_color_used->description
-msgid "Used:"
-msgstr "已使用："
-
-#. 3.2->settings-schema.json->head4->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head4->description
-msgid "Network graph"
-msgstr "网络图表"
-
-#. 3.2->settings-schema.json->pref_cpu_graph_color_kernel->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_color_kernel->description
-msgid "Kernel:"
-msgstr "内核："
-
-#. 3.2->settings-schema.json->pref_network_graph_color_download->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_network_graph_color_download->description
-msgid "Download:"
-msgstr "下载："
-
-#. 3.2->settings-schema.json->pref_network_graph_color_upload->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_network_graph_color_upload->description
-msgid "Upload:"
-msgstr "上传："
-
-#. 3.2->settings-schema.json->pref_cpu_graph_color_nice->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_color_nice->description
-msgid "Nice:"
-msgstr "Nice："
-
-#. 3.2->settings-schema.json->pref_draw_border->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_draw_border->description
-msgid "Draw graph border"
-msgstr "绘制图表边框"
-
-#. 3.2->settings-schema.json->pref_use_smooth_graphs->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_use_smooth_graphs->description
-msgid "Use smooth graphs"
-msgstr "使用平滑图表"
-
-#. 3.2->settings-schema.json->pref_show_memmory_graph->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_show_memmory_graph->description
-msgid "Show Memory graph:"
-msgstr "显示内存图表："
-
-#. 3.2->settings-schema.json->demo-button2->description
-#. 3.2->settings-schema.json->demo-button1->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
-msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
-msgstr "要应用这些设置，需要重新启动Cinnamon。点击我！"
-
-#. 3.2->settings-schema.json->demo-button2->tooltip
-#. 3.2->settings-schema.json->demo-button1->tooltip
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->tooltip
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->tooltip
-msgid "Restart Cinnamon"
-msgstr "重启Cinnamon"
-
-#. 3.2->settings-schema.json->pref_swap_graph_width->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_swap_graph_width->description
-msgid "Swap graph width"
-msgstr "交换分区图表宽度"
-
-#. 3.2->settings-schema.json->head11->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head11->description
-msgid "CPU graph colors"
-msgstr "CPU图表颜色"
-
-#. 3.2->settings-schema.json->pref_show_cpu_graph->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_show_cpu_graph->description
-msgid "Show CPU graph:"
-msgstr "显示CPU图表："
-
-#. 3.2->settings-schema.json->pref_show_load_graph->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_show_load_graph->description
-msgid "Show Load graph:"
-msgstr "显示负载图表："
-
-#. 3.2->settings-schema.json->head5->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head5->description
-msgid "Load graph"
-msgstr "负载图表"
-
-#. 3.2->settings-schema.json->pref_draw_background->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_draw_background->description
-msgid "Draw graph background"
-msgstr "绘制图表背景"
-
-#. 3.2->settings-schema.json->head3->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head3->description
-msgid "Swap graph"
-msgstr "交换分区图表"
-
-#. 3.2->settings-schema.json->head2->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head2->description
-msgid "Memory graph"
-msgstr "内存图表"
-
-#. 3.2->settings-schema.json->head1->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head1->description
-msgid "CPU graph"
-msgstr "CPU图表"
-
-#. 3.2->settings-schema.json->head0->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head0->description
-msgid "General settings"
-msgstr "常规设置"
-
-#. 3.2->settings-schema.json->pref_cpu_graph_color_user->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_color_user->description
-msgid "User:"
-msgstr "用户："
-
-#. 3.2->settings-schema.json->pref_load_graph_width->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_load_graph_width->description
-msgid "Load graph width"
-msgstr "负载图表宽度"
-
-#. 3.2->settings-schema.json->pref_load_graph_color_load->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_load_graph_color_load->description
-msgid "Load:"
-msgstr "负载："
-
-#. 3.2->settings-schema.json->pref_cpu_graph_color_iowait->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_color_iowait->description
-msgid "IOWait:"
-msgstr "IOWait："
-
-#. 3.2->settings-schema.json->pref_memory_graph_color_cached->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_memory_graph_color_cached->description
-msgid "Cached:"
-msgstr "已缓存："
-
-#. 3.2->settings-schema.json->pref_cpu_graph_width->description
-#. 0dyseus@SysmonitorByOrcus->settings-
-#. schema.json->pref_cpu_graph_width->description
-msgid "CPU graph width"
-msgstr "CPU图表宽度"
-
-#. 3.2->settings-schema.json->head22->description
-#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head22->description
-msgid "Memory graph colors"
-msgstr "内存图表颜色"
+#. 0dyseus@SysmonitorByOrcus->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->description
 msgid "Displays CPU, memory, swap, network usage and load in graphs."
 msgstr "以图表形式显示CPU、内存、交换、网络使用情况和负载。"
 
-#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
-msgid "buzz: Bug fixes."
-msgstr "buzz: 错误修正。"
-
-#. 0dyseus@SysmonitorByOrcus->metadata.json->comments
-msgid ""
-"Bug reports and feature requests should be reported on this applet's "
-"repository linked below."
-msgstr "错误报告和功能请求应当报告在这个小程序链接下方的的仓库上。"
-
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"
 msgstr "系统监视器 (Fork By Odyseus)"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_use_smooth_graphs->description
+msgid "Use smooth graphs"
+msgstr "使用平滑图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head1->description
+msgid "CPU graph"
+msgstr "CPU图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->tooltip
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->tooltip
+msgid "Restart Cinnamon"
+msgstr "重启Cinnamon"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
+msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
+msgstr "要应用这些设置，需要重新启动Cinnamon。点击我！"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head0->description
+msgid "General settings"
+msgstr "常规设置"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head3->description
+msgid "Swap graph"
+msgstr "交换分区图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_color_download->description
+msgid "Download:"
+msgstr "下载："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_color_cached->description
+msgid "Cached:"
+msgstr "已缓存："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_kernel->description
+msgid "Kernel:"
+msgstr "内核："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head22->description
+msgid "Memory graph colors"
+msgstr "内存图表颜色"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_color_used->description
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_color_used->description
+msgid "Used:"
+msgstr "已使用："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_user->description
+msgid "User:"
+msgstr "用户："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_swap_graph->description
+msgid "Show Swap graph:"
+msgstr "显示交换分区图表："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_nice->description
+msgid "Nice:"
+msgstr "Nice："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->tooltip
+msgid ""
+"For those of us who suffer from the stupidity of using a theme with tooltips "
+"aligned to the center. ¬¬"
+msgstr "提供给我们这些使用带有居中对齐的提示的主题的笨人。¬¬"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->description
+msgid "Align tooltip text to the left"
+msgstr "将提示文本向左对齐"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_width->description
+msgid "Network graph width"
+msgstr "网络图表宽度"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_width->units
+msgid "pixels"
+msgstr "像素"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head5->description
+msgid "Load graph"
+msgstr "负载图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_memmory_graph->description
+msgid "Show Memory graph:"
+msgstr "显示内存图表："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_width->description
+msgid "Swap graph width"
+msgstr "交换分区图表宽度"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_load_graph->description
+msgid "Show Load graph:"
+msgstr "显示负载图表："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_network_graph->description
+msgid "Show Network graph:"
+msgstr "显示网络图表："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head11->description
+msgid "CPU graph colors"
+msgstr "CPU图表颜色"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_background_color->description
+msgid "Background color:"
+msgstr "背景颜色："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_border_color->description
+msgid "Border color:"
+msgstr "边框颜色："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head44->description
+msgid "Network graph colors"
+msgstr "网络图表颜色"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head33->description
+msgid "Swap graph colors"
+msgstr "交换分区图表颜色"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head2->description
+msgid "Memory graph"
+msgstr "内存图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_custom_command->description
+msgid "Custom command on applet click:"
+msgstr "点击小程序的自定义命令："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_color_load->description
+msgid "Load:"
+msgstr "负载："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_width->description
+msgid "CPU graph width"
+msgstr "CPU图表宽度"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->description
+msgid "Refresh rate:"
+msgstr "刷新频率："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_iowait->description
+msgid "IOWait:"
+msgstr "IOWait："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_color_upload->description
+msgid "Upload:"
+msgstr "上传："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_width->description
+msgid "Memory graph width"
+msgstr "内存图表宽度"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_draw_border->description
+msgid "Draw graph border"
+msgstr "绘制图表边框"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_width->description
+msgid "Load graph width"
+msgstr "负载图表宽度"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head4->description
+msgid "Network graph"
+msgstr "网络图表"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_cpu_graph->description
+msgid "Show CPU graph:"
+msgstr "显示CPU图表："
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_draw_background->description
+msgid "Draw graph background"
+msgstr "绘制图表背景"
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head55->description
+msgid "Load graph colors"
+msgstr "负载图表颜色"
+
+#~ msgid "buzz: Bug fixes."
+#~ msgstr "buzz: 错误修正。"
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena：克罗地亚语本地化。"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57：瑞典语本地化。"
+
+#~ msgid "CPU: "
+#~ msgstr "CPU："
+
+#~ msgid "Memory: "
+#~ msgstr "内存："
+
+#~ msgid " MB"
+#~ msgstr " MB"
+
+#~ msgid "Swap: "
+#~ msgstr "交换分区："
+
+#~ msgid "Network D/U: "
+#~ msgstr "网络 下行/上行："
+
+#~ msgid " KB/s"
+#~ msgstr " KB/s"
+
+#~ msgid "Load average: "
+#~ msgstr "负载平均："
+
+#~ msgid ""
+#~ "Bug reports and feature requests should be reported on this applet's "
+#~ "repository linked below."
+#~ msgstr "错误报告和功能请求应该在此小程序下方链接的仓库上报告。"

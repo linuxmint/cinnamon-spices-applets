@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-16 12:36+0200\n"
+"PO-Revision-Date: 2017-05-16 12:45+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:32
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Schnappschuss oder Videoaufnahme des Bildschirms machen"
+
+#: applet.js:43
+msgid "ScreenShot"
+msgstr "Bildschirmfoto"
+
+#: applet.js:48
+msgid "Whole Screen"
+msgstr "Gesamter Bildschirm"
+
+#: applet.js:50
+msgid "1 Second Delay"
+msgstr "1 Sekunde Verzögerung"
+
+#: applet.js:54
+msgid "3 Second Delay"
+msgstr "3 Sekunden Verzögerung"
+
+#: applet.js:58
+msgid "5 Second Delay"
+msgstr "5 Sekunden Verzögerung"
+
+#: applet.js:68
+msgid "Current Window"
+msgstr "Aktuelles Fenster"
+
+#: applet.js:73
+msgid "Selected Area"
+msgstr "Aufnahmebereich"
+
+#: applet.js:79
+msgid "Record Desktop"
+msgstr "Bildschirm aufnehmen"
+
+#: applet.js:81
+msgid "Start With Audio"
+msgstr "Start mit Ton"
+
+#: applet.js:83 applet.js:88
+msgid "Recording"
+msgstr "Aufnahme läuft"
+
+#: applet.js:83
+msgid "With-Audio"
+msgstr "Mit Ton"
+
+#: applet.js:86
+msgid "Start No Audio"
+msgstr "Start ohne Ton"
+
+#: applet.js:88
+msgid "No-Audio"
+msgstr "Ohne Ton"
+
+#: applet.js:91
+msgid "Stop"
+msgstr "Anhalten"
+
+#: applet.js:95
+msgid "Recording-Stopped"
+msgstr "Aufnahme angehalten"
+
+#: applet.js:96
+msgid "Recording-Finished"
+msgstr "Aufnahme beendet"
+
+#: applet.js:103
+msgid "Pictures Folder"
+msgstr "Bilder-Ordner"
+
+#: applet.js:109
+msgid "Videos Folder"
+msgstr "Videos-Ordner"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->description
+msgid "Take A Snapshot Or Record Your Desktop"
+msgstr "Schnappschuss oder Videoaufnahme des Bildschirms machen"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "ScreenShot+Record Desktop"

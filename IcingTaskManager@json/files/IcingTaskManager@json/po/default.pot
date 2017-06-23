@@ -1,11 +1,11 @@
 msgid ""
 msgstr ""
 
-#. src->metadata.json->description
-msgid "Window list with app grouping and window thumbnails"
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
 msgstr ""
 
-#. src->metadata.json->name
+#. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 
 #. src->settings-schema.json->show-pinned->description
 msgid "Show pinned apps"
-msgstr "Zeige angedockte Anwendungen"
+msgstr ""
 
 #. src->settings-schema.json->show-pinned->tooltip
 msgid ""
@@ -496,4 +496,16 @@ msgid ""
 "Determines the behavior of middle mouse button clicks on app buttons. Setting"
 " this to false will close the last focused window from the app group on"
 " middle click."
+msgstr ""
+
+msgid "Pin apps when dragged to a new position"
+msgstr ""
+
+msgid "About..."
+msgstr ""
+
+msgid "Configure..."
+msgstr ""
+
+msgid "Remove \'Icing Task Manager\'"
 msgstr ""

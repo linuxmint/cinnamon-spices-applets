@@ -1,0 +1,35 @@
+# Swedish translation for windowTitle@rymate1234.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: windowTitle@rymate1234\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-05 09:43+0200\n"
+"PO-Revision-Date: 2017-06-05 09:44+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:27
+msgid "Desktop"
+msgstr "Skrivbord"
+
+#: applet.js:28
+msgid "This should be showing the current window title."
+msgstr "Detta skall visa aktuell fönstertitel."
+
+#. windowTitle@rymate1234->metadata.json->description
+msgid "Shows the title of the current window in a applet."
+msgstr "Visar aktuell fönstertitel."
+
+#. windowTitle@rymate1234->metadata.json->name
+msgid "Window Title Applet"
+msgstr "Window Title Applet"

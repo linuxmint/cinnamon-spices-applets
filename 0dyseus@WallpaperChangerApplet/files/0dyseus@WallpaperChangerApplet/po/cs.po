@@ -1,0 +1,603 @@
+# This is a template file for translating the Cinnamon applet called Wallpaper Changer.
+# Copyright (C) 2017
+# This file is distributed under the same license as the Wallpaper Changer applet.
+# Odyseus <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.00\n"
+"Report-Msgid-Bugs-To: Odyseus\n"
+"POT-Creation-Date: 2017-06-08 06:19+0200\n"
+"PO-Revision-Date: 2017-06-08 06:21+0200\n"
+"Last-Translator: Radek Otáhal <radek.otahal@email.cz>\n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "Následující dvě části jsou k dispozici pouze v angličtině."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "Česky"
+
+#: ../../create_localized_help.py:190 settings.py:1022
+msgid "Help"
+msgstr "Nápověda"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "Přispěvatelé"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "Changelog"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "Zvolte jazyk"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "Nápověda pro %s"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "DŮLEŽITÉ!!!"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Nikdy neodstraňujte soubory ze složky tohoto xletu. Mohlo by to narušit "
+"funkčnost xletu. "
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v "
+"repozitáři tohoto xletu, na který je odkaz dále."
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Pokud byl tento xlet nainstalován z nastavení systému v Cinnamonu, byly "
+"všechny tyto lokalizace xletu automaticky nainstalovány."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Pokud byl tento xlet nainstalován ručně a nikoliv pomocí nastavení systému v "
+"Cinnamonu, mohou být lokalizace instalovány spuštěním skriptu nazvaného ** "
+"localizations.sh ** z terminálu otevřeného uvnitř složky xletu."
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Pokud tento xlet nemá k dispozici překlad pro váš jazyk, můžete jej vytvořit "
+"podle následujících pokynů."
+
+#. TO TRANSLATORS: This is the applet name.
+#. 0dyseus@WallpaperChangerApplet->metadata.json->name
+#: settings.py:60
+msgid "Wallpaper Changer"
+msgstr "Měnič tapet"
+
+#: settings.py:171
+msgid "Choose an Icon"
+msgstr "Zvolte ikonu"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:174 settings.py:814 settings.py:1099 settings.py:1105
+msgid "_Cancel"
+msgstr "_Zrušit"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:175 settings.py:1107
+msgid "_Open"
+msgstr "_Otevřít"
+
+#: settings.py:178
+msgid "Image files"
+msgstr "Obrázkové soubory"
+
+#: settings.py:275
+msgid "Warnings related to this specific section"
+msgstr "Upozornění týkající se této konkrétní části"
+
+#. Daemon settings
+#: settings.py:363
+msgid "Daemon"
+msgstr "Démon"
+
+#: settings.py:367
+msgid "This is the current profile that the daemon will load."
+msgstr "Toto je aktuální profil, který démon načte."
+
+#: settings.py:368
+msgid "Current Profile"
+msgstr "Aktuální profil"
+
+#: settings.py:382 __init__.js:768
+msgid "Toggle and display the daemon status."
+msgstr "Přepínání a zobrazení stavu démona."
+
+#: settings.py:383 __init__.js:758
+msgid "Daemon Status"
+msgstr "Stav démona"
+
+#: settings.py:410
+msgid "Autostart Daemon"
+msgstr "Automatické spuštění démona"
+
+#: settings.py:411 applet.js:95
+msgid ""
+"When enabled, the daemon will be automatically started when the applet is "
+"loaded. If it is already running or this is disabled, no action will be "
+"taken."
+msgstr ""
+"Pokud je povoleno, démon je spuštěn při načítání apletu. Pokud je již "
+"spuštěn, nebo je tato volba zakázána, tak nebude provedena žádná akce."
+
+#: settings.py:415
+msgid "Wallpaper Timer Interval (seconds)"
+msgstr "Interval časovače tapety (sekundy)"
+
+#: settings.py:424 settings.py:550
+msgid "Save"
+msgstr "Uložit"
+
+#: settings.py:435
+msgid "Manage keyboard shortcuts"
+msgstr "Správa klávesových zkratek"
+
+#: settings.py:449 __init__.js:661
+msgid "Next Wallpaper"
+msgstr "Další tapeta"
+
+#: settings.py:453 __init__.js:664
+msgid "Previous Wallpaper"
+msgstr "Předchozí tapeta"
+
+#: settings.py:457
+msgid "Open/Close Menu"
+msgstr "Otevřít/zavřít menu"
+
+#: settings.py:479
+msgid "Shortcut action"
+msgstr "Akce pro klávesovou zkratku"
+
+#: settings.py:495
+msgid "Shortcut"
+msgstr "Klávesová zkratka"
+
+#: settings.py:506
+msgid "Other"
+msgstr "Ostatní"
+
+#. Applet settings
+#: settings.py:512 settings.py:582
+msgid "Applet"
+msgstr "Aplet"
+
+#: settings.py:517
+msgid "Custom icon"
+msgstr "Vlastní ikona"
+
+#: settings.py:518
+msgid "Select a custom icon for the applet."
+msgstr "Použít vlastní ikonu"
+
+#: settings.py:522
+msgid "Enter custom text to show in the panel."
+msgstr "Vložte text, který se zobrazí na panelu."
+
+#: settings.py:525
+msgid "Custom label"
+msgstr "Uživatelský název"
+
+#: settings.py:541
+msgid "Wallpaper Preview Width"
+msgstr "Šířka náhledu tapety"
+
+#: settings.py:561
+msgid "Invert Menu Items Order"
+msgstr "Obrátit pořadí položek menu"
+
+#: settings.py:566
+msgid "Remember Profiles State"
+msgstr "Pamatovat si stav profilu"
+
+#: settings.py:567 applet.js:110
+msgid ""
+"When enabled, the daemon will remember its current and next wallpaper for "
+"the current profile when the profile is changed. This means returning back "
+"to the profile will restore the previous background plus the next in queue."
+msgstr ""
+"Pokud je povoleno, démon si bude pamatovat aktuální a následující tapetu pro "
+"aktuální profil při změně profilu. To znamená, že při změně profilu zpět "
+"obnoví předchozí pozadí plus následující ve frontě."
+
+#: settings.py:571
+msgid "Show Notifications"
+msgstr "Zobrazovat upozornění"
+
+#: settings.py:572 applet.js:105
+msgid ""
+"Display a notification each time an event happens with wallpaper changer. "
+"This does not stop the applet from reporting errors."
+msgstr ""
+"Zobrazit upozornění vždy, když nastane událost související se změnou tapety. "
+"To nezastaví zasílání zpráv o chybách apletu."
+
+#: settings.py:576
+msgid "Enable Logging"
+msgstr "Povolit protokolování"
+
+#: settings.py:577
+msgid ""
+"It enables the ability to log the output of several functions used by the "
+"applet."
+msgstr "Povoluje možnost logovat výstup z několika funkcí používaných apletem."
+
+#: settings.py:585
+msgid "Manage profiles"
+msgstr "Správa profilů"
+
+#: settings.py:595
+msgid "Profile"
+msgstr "Profil"
+
+#: settings.py:605 settings.py:804
+msgid "Create a new profile"
+msgstr "Vytvořit nový profil"
+
+#: settings.py:613 settings.py:779
+msgid "Remove profile"
+msgstr "Odebrat profil"
+
+#: settings.py:653
+msgid "Path"
+msgstr "Cesta"
+
+#: settings.py:662
+msgid "Sub Folders"
+msgstr "Podadresáře"
+
+#: settings.py:690 settings.py:716
+msgid "Add Image"
+msgstr "Přidat obrázek"
+
+#: settings.py:693 settings.py:723
+msgid "Add Folder"
+msgstr "Přidat složku"
+
+#: settings.py:709
+msgid "Remove"
+msgstr "Odstranit"
+
+#: settings.py:730
+msgid "Profiles"
+msgstr "Profily"
+
+#: settings.py:740
+msgid "Click to set a new hotkey."
+msgstr "Klepněte k nastavení nové klávesové zkratky."
+
+#: settings.py:749
+msgid "Whether or not to include images from sub-folders."
+msgstr "Zda chcete zahrnout obrázky z podadresářů."
+
+#: settings.py:759 settings.py:769
+msgid "Failed to update keybinding"
+msgstr "Nepodařilo se aktualizovat klávesovou zkratku"
+
+#: settings.py:782
+#, python-format
+msgid "Are you sure you want to delete the profile »%s«?"
+msgstr "Opravdu chcete odstranit profil »%s«?"
+
+#: settings.py:785
+msgid "Yes"
+msgstr "Ano"
+
+#: settings.py:786
+msgid "No"
+msgstr "Ne"
+
+#: settings.py:807
+msgid "Profile Name"
+msgstr "Jméno profilu"
+
+#: settings.py:813
+msgid "OK"
+msgstr "OK"
+
+#: settings.py:926
+msgid "Contributors/Mentions:"
+msgstr "Přispěvatelé/uznání:"
+
+#. TO TRANSLATORS:
+#. Here goes the name/s of the author/s of the translations.
+#. Only e-mail addresses and links to GitHub accounts are allowed. NOTHING MORE.
+#: settings.py:934
+msgid "translator-credits"
+msgstr "překladatelé-zásluhy"
+
+#: settings.py:1004
+msgid "Reset settings to defaults"
+msgstr "Obnovit výchozí hodnoty"
+
+#: settings.py:1006
+msgid "Import settings from a file"
+msgstr "Importovat nastavení ze souboru"
+
+#: settings.py:1008
+msgid "Export settings to a file"
+msgstr "Exportovat nastavení do souboru"
+
+#: settings.py:1013
+msgid "Remember window size"
+msgstr "Pamatovat si velikost okna"
+
+#: settings.py:1018
+msgid "Restart Cinnamon"
+msgstr "Restartovat Cinnamon"
+
+#: settings.py:1024
+msgid "About"
+msgstr "O aplikaci"
+
+#: settings.py:1031
+msgid "Manage settings"
+msgstr "Spravovat nastavení"
+
+#. TO TRANSLATORS: Full sentence:
+#. Warning: Trying to reset all AppletName settings!!!
+#: settings.py:1074
+#, python-format
+msgid "Warning: Trying to reset all %s settings!!!"
+msgstr "Upozornění: Probíhá reset všech %s nastavení!!!"
+
+#. TO TRANSLATORS: Full sentence:
+#. Reset all AppletName settings to default?
+#: settings.py:1078
+#, python-format
+msgid "Reset all %s settings to default?"
+msgstr "Resetovat všechna %s nastavení na jejich výchozí hodnoty?"
+
+#: settings.py:1097
+msgid "Select or enter file to export to"
+msgstr "Vyberte nebo zadejte soubor, do něhož se bude exportovat"
+
+#: settings.py:1100
+msgid "_Save"
+msgstr "_Uložit"
+
+#: settings.py:1103
+msgid "Select a file to import"
+msgstr "Vyberte soubor pro import"
+
+#: settings.py:1119
+msgid "DCONF files"
+msgstr "DCONF soubory"
+
+#. TO TRANSLATORS: Full sentence:
+#. AppletName applet preferences
+#: settings.py:1188
+#, python-format
+msgid "%s applet preferences"
+msgstr "%s aplet předvolby"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1242
+#, python-format
+msgid ""
+"Please enter your password to install the required settings schema for %s"
+msgstr ""
+"Prosím zadejte své heslo k instalaci vyžadovaných nastavení schémat pro %s"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1253
+#, python-format
+msgid ""
+"Could not install the settings schema for %s.  You will have to perform this "
+"step yourself."
+msgstr ""
+"Nelze nainstalovat nastavení schémat pro %s. Tyto kroky musíte provést "
+"osobně."
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1259
+#, python-format
+msgid "Please enter your password to remove the settings schema for %s"
+msgstr "Vložte prosím své heslo k odebrání nastavení schémat pro %s"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1270
+#, python-format
+msgid ""
+"Could not remove the settings schema for %s.  You will have to perform this "
+"step yourself.  This is not a critical error."
+msgstr ""
+"Nelze odebrat nastavení schémat pro %s. Tento krok budete muset provést "
+"osobně. Nejedná se o závažnou chybu."
+
+#: __init__.js:56
+#, javascript-format
+msgid "Schema %s could not be found for extension %s."
+msgstr "Schéma %s nemůže být nalezeno pro rozšíření %s."
+
+#: __init__.js:57
+msgid "Please check your installation."
+msgstr "Zkontrolujte prosím instalaci."
+
+#: __init__.js:458
+msgid "Wallpapers will be changed in random order"
+msgstr "Tapety se změní v náhodném pořadí"
+
+#: __init__.js:460
+msgid "Wallpapers will be changed in alphabetical order"
+msgstr "Tapety se změní v abecedním pořadí"
+
+#: __init__.js:462
+#, javascript-format
+msgid "Wallpaper rotation every %s seconds"
+msgstr "Tapety budou rotovat každých %s sekund"
+
+#: __init__.js:464
+msgid "Automatic rotation disabled"
+msgstr "Automatická rotace vypnuta"
+
+#: __init__.js:466
+msgid "Wallpaper rotation at the beginning of every hour"
+msgstr "Rotace tapety na začátku každé hodiny"
+
+#: __init__.js:608
+msgid "You must provide at least two states for the button"
+msgstr "Je třeba zadat minimálně dva stavy pro tlačítko"
+
+#: __init__.js:734
+msgid "Unable to go back any further, no history available"
+msgstr "Nelze se vrátit zpět, historie není k dispozici"
+
+#: __init__.js:795
+msgid "Open Current Wallpaper"
+msgstr "Otevřít aktuální tapetu"
+
+#: __init__.js:835
+msgid "Open Next Wallpaper"
+msgstr "Otevřít další tapetu"
+
+#: __init__.js:872 __init__.js:882
+#, javascript-format
+msgid "Profile: %s"
+msgstr "Profil: %s"
+
+#: __init__.js:1126
+msgid "Applet activation aborted!!!"
+msgstr "Aktivace apletuí zrušena!!!"
+
+#: __init__.js:1127
+msgid "Your Cinnamon version may not be compatible!!!"
+msgstr "Vaše verze Cinnamonu nemusí být kompatibilní!!!"
+
+#: __init__.js:1128
+msgid "Minimum Cinnamon version allowed: 3.0"
+msgstr "Minimální Cinnamon verze: 3.0"
+
+#: applet.js:90
+msgid "Extra Options"
+msgstr "Další volby"
+
+#: applet.js:94
+msgid "Auto Start Daemon"
+msgstr "Automaticky spustit démona"
+
+#: applet.js:99
+msgid "Change with Profile"
+msgstr "Změnit s profilem"
+
+#: applet.js:100
+msgid ""
+"When enabled, this will cause the daemon to automatically change the "
+"wallpaper whenever the current profile is changed."
+msgstr ""
+"Pokud je povoleno, bude démon automaticky měnit tapetu, pokaždé, když se "
+"změní aktuální profil."
+
+#: applet.js:104
+msgid "Notifications"
+msgstr "Oznámení"
+
+#: applet.js:109
+msgid "Remember Profile State"
+msgstr "Pamatovat si stav profilu"
+
+#: applet.js:179
+msgid "Wallpaper Changed"
+msgstr "Tapeta byla změněna"
+
+#: applet.js:185
+msgid "Daemon Error"
+msgstr "Chyba démona"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:195
+#, javascript-format
+msgid "Notifications are now %s"
+msgstr "Oznámení jsou nyní %s"
+
+#: applet.js:198
+msgid "disabled"
+msgstr "zakázaná"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:198
+msgid "enabled"
+msgstr "povolená"
+
+#: applet.js:223
+#, javascript-format
+msgid "Profile changed to %s"
+msgstr "Profil změněn na %s"
+
+#: applet.js:255
+msgid "Configure..."
+msgstr "Nastavit..."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v "
+"repozitáři tohoto xletu, na který je odkaz níže."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "Cinnamon aplet pro změnu tapet/pozadí s podporou více profilů."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Viz soubor s nápovědou tohoto xletu."
+
+#~ msgid ""
+#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
+#~ "com/BigE/desk-changer"
+#~ msgstr ""
+#~ "Eric Gach: Autor rozšíření Desk CHanger pro gnome-shell. https://github."
+#~ "com/BigE/desk-changer "
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57: Švédská lokalizace."
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Čínská lokalizace."

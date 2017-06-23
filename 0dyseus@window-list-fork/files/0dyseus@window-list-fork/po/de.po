@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.03\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-16 08:39-0300\n"
+"POT-Creation-Date: 2017-05-13 20:35-0300\n"
 "PO-Revision-Date: 2017-01-16 08:39-0300\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: GERMAN\n"
@@ -17,186 +17,165 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: 3.0/applet.js:883 2.8/applet.js:703 3.2/applet.js:883
+#: applet.js:792 2.8/applet.js:699
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: 3.0/applet.js:894 2.8/applet.js:718 3.2/applet.js:894
+#: applet.js:803 2.8/applet.js:714
 msgid "Move to the other monitor"
 msgstr "Zu anderem Bildschirm verschieben"
 
-#: 3.0/applet.js:903 2.8/applet.js:727 3.2/applet.js:903
+#: applet.js:812 2.8/applet.js:723
 #, javascript-format
 msgid "Move to monitor %d"
 msgstr "Auf Bildschirm %d verschieben"
 
-#: 3.0/applet.js:914 2.8/applet.js:738 3.2/applet.js:914
+#: applet.js:823 2.8/applet.js:734
 msgid "Only on this workspace"
 msgstr "Nur auf dieser Arbeitsfläche"
 
-#: 3.0/applet.js:920 2.8/applet.js:744 3.2/applet.js:920
+#: applet.js:829 2.8/applet.js:740
 msgid "Visible on all workspaces"
 msgstr "Auf allen Arbeitsflächen anzeigen"
 
-#: 3.0/applet.js:926 2.8/applet.js:750 3.2/applet.js:926
+#: applet.js:835 2.8/applet.js:746
 msgid "Move to another workspace"
 msgstr "Auf andere Arbeitsfläche verschieben"
 
 #. Close all/others
-#: 3.0/applet.js:951 2.8/applet.js:772 3.2/applet.js:951
+#: applet.js:861 2.8/applet.js:768
 msgid "Close all"
 msgstr "Alle schließen"
 
-#: 3.0/applet.js:960 2.8/applet.js:781 3.2/applet.js:960
+#: applet.js:870 2.8/applet.js:777
 msgid "Close others"
 msgstr "Andere schließen"
 
-#: 3.0/applet.js:974 2.8/applet.js:795 3.2/applet.js:974
+#: applet.js:884 2.8/applet.js:791
 msgid "Restore to full opacity"
 msgstr "Die volle Deckkraft wiederherstellen"
 
-#: 3.0/applet.js:982 2.8/applet.js:803 3.2/applet.js:982
+#: applet.js:892 2.8/applet.js:799
 msgid "Restore"
 msgstr "Wiederherstellen"
 
-#: 3.0/applet.js:987 2.8/applet.js:808 3.2/applet.js:987
+#: applet.js:897 2.8/applet.js:804
 msgid "Minimize"
 msgstr "Minimieren"
 
-#: 3.0/applet.js:995 2.8/applet.js:816 3.2/applet.js:995
+#: applet.js:905 2.8/applet.js:812
 msgid "Unmaximize"
 msgstr "Maximieren aufheben"
 
-#: 3.0/applet.js:1000 2.8/applet.js:821 3.2/applet.js:1000
+#: applet.js:910 2.8/applet.js:817
 msgid "Maximize"
 msgstr "Maximieren"
 
-#: 3.0/applet.js:1007 2.8/applet.js:828 3.2/applet.js:1007
+#: applet.js:917 2.8/applet.js:824
 msgid "Close"
 msgstr "Schließen"
 
-#: 3.0/applet.js:1019 2.8/applet.js:840 3.2/applet.js:1019
+#: applet.js:929 2.8/applet.js:836
+msgid "Help"
+msgstr ""
+
+#: applet.js:936 2.8/applet.js:843
 msgid "About..."
 msgstr "Über …"
 
-#: 3.0/applet.js:1025 2.8/applet.js:846 3.2/applet.js:1025
+#: applet.js:942 2.8/applet.js:849
 msgid "Configure..."
 msgstr "Einrichten …"
 
-#: 3.0/applet.js:1039 2.8/applet.js:860 3.2/applet.js:1039
+#: applet.js:957 2.8/applet.js:864
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "»%s« entfernen"
 
-#. 3.0->settings-schema.json->pref_hide_labels->description
-#. 2.8->settings-schema.json->pref_hide_labels->description
-#. 3.2->settings-schema.json->pref_hide_labels->description
-msgid "Hide labels in the window list buttons"
-msgstr "Beschriftungen auf den Knöpfen der Fensterliste verbergen"
-
-#. 3.0->settings-schema.json->pref_invert_menu_items_order->description
-#. 2.8->settings-schema.json->pref_invert_menu_items_order->description
-#. 3.2->settings-schema.json->pref_invert_menu_items_order->description
-msgid "Invert context menu items order"
-msgstr "Reihenfolge der Kontextmenüelemente umkehren"
-
-#. 3.0->settings-schema.json->pref_reverse_scrolling->description
-#. 2.8->settings-schema.json->pref_reverse_scrolling->description
-#. 3.2->settings-schema.json->pref_reverse_scrolling->description
-msgid "Reverse the direction of mouse-wheel scrolling in the window list"
-msgstr "Die Richtung des Mausradrollens in der Fensterliste umkehren"
-
-#. 3.0->settings-schema.json->pref_enable_scrolling->description
-#. 2.8->settings-schema.json->pref_enable_scrolling->description
-#. 3.2->settings-schema.json->pref_enable_scrolling->description
-msgid "Enable mouse-wheel scrolling in the window list"
-msgstr "Mausradrollen in der Fensterliste aktivieren"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_height->description
-#. 2.8->settings-schema.json->pref_window_preview_custom_height->description
-#. 3.2->settings-schema.json->pref_window_preview_custom_height->description
-msgid "Custom height for window thumbnails"
-msgstr "Benutzerdefinierte Höhe für Fenstervorschau"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_height->units
-#. 3.0->settings-schema.json->pref_window_preview_custom_width->units
-#. 2.8->settings-schema.json->pref_window_preview_custom_height->units
-#. 2.8->settings-schema.json->pref_window_preview_custom_width->units
-#. 3.2->settings-schema.json->pref_window_preview_custom_height->units
-#. 3.2->settings-schema.json->pref_window_preview_custom_width->units
-msgid "pixels"
-msgstr "Pixel"
-
-#. 3.0->settings-schema.json->pref_window_preview->description
-#. 2.8->settings-schema.json->pref_window_preview->description
-#. 3.2->settings-schema.json->pref_window_preview->description
-msgid "Show window thumbnails on hover"
-msgstr "Fenstervorschau beim Darüberbewegen anzeigen"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->description
-#. 2.8->settings-schema.json->pref_sub_menu_placement->description
-#. 3.2->settings-schema.json->pref_sub_menu_placement->description
-msgid "Where to display the \"Preferences\" sub-menu?"
-msgstr "Wo soll das Untermenü »Einstellungen« angezeigt werden?"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->tooltip
-#. 2.8->settings-schema.json->pref_sub_menu_placement->tooltip
-#. 3.2->settings-schema.json->pref_sub_menu_placement->tooltip
-msgid ""
-"If the option \"Invert context menu items order\" is enabled, the \"Top of "
-"menu\" will actually be the \"Bottom of menu\" and vice versa."
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:94 ../../create_localized_help.py:163
+msgid "language-name"
 msgstr ""
-"Wenn die Option »Reihenfolge der Kontextmenüelemente umkehren« aktiviert "
-"ist, wird \"Im Menü oben\" tatsächlich »Im Menü unten« sein und umgekehrt."
 
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Do not display"
-msgstr "Nicht anzeigen"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Top of menu"
-msgstr "Im Menü oben"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Bottom of menu"
-msgstr "Im Menü unten"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_width->description
-#. 2.8->settings-schema.json->pref_window_preview_custom_width->description
-#. 3.2->settings-schema.json->pref_window_preview_custom_width->description
-msgid "Custom width for window thumbnails"
-msgstr "Benutzerdefinierte Breite für Fenstervorschau"
-
-#. 3.0->settings-schema.json->pref_buttons_use_entire_space->description
-#. 2.8->settings-schema.json->pref_buttons_use_entire_space->description
-#. 3.2->settings-schema.json->pref_buttons_use_entire_space->description
-msgid ""
-"Window buttons can have different sizes and use the entire space available"
+#: ../../create_localized_help.py:166
+msgid "Choose language"
 msgstr ""
-"Die Fensterknöpfe können verschiedene Größen haben und den verfügbaren Platz "
-"ausfüllen"
 
-#. 3.0->settings-schema.json->pref_middle_click_close->description
-#. 2.8->settings-schema.json->pref_middle_click_close->description
-#. 3.2->settings-schema.json->pref_middle_click_close->description
-msgid "Middle click to close window"
-msgstr "Mittelklick, um das Fenster zu schließen"
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:167 ../../create_localized_help.py:174
+#, python-format
+msgid "Help for %s"
+msgstr ""
 
-#. 3.0->settings-schema.json->pref_hide_tooltips->description
-#. 2.8->settings-schema.json->pref_hide_tooltips->description
-#. 3.2->settings-schema.json->pref_hide_tooltips->description
-msgid "Do not display tooltips"
-msgstr "Tooltips nicht anzeigen"
+#: ../../create_localized_help.py:175
+msgid "IMPORTANT!!!"
+msgstr ""
 
-#. 3.0->settings-schema.json->pref_enable_alerts->description
-#. 2.8->settings-schema.json->pref_enable_alerts->description
-#. 3.2->settings-schema.json->pref_enable_alerts->description
+#: ../../create_localized_help.py:176
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+
+#: ../../create_localized_help.py:177
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+
+#: ../../create_localized_help.py:183
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+
+#: ../../create_localized_help.py:184
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:186
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+
+#: ../../create_localized_help.py:187
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->description
+msgid "Fork of the main Cinnamon Window list applet."
+msgstr "Fork des Cinnamon-Haupfensterlisten-Applets"
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "NikoKrause: Bug fixes and German localization."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "muzena: Croatian localization."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "giwhub: Chinese localization."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+
+#. 0dyseus@window-list-fork->metadata.json->name
+msgid "Window list (Fork By Odyseus)"
+msgstr "Fensterliste (Fork von Odyseus)"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
 msgid ""
 "Show an alert in the window list when a window from another workspace "
 "requires attention"
@@ -204,13 +183,77 @@ msgstr ""
 "Einen Hinweis in der Fensterliste anzeigen, wenn ein Fenster auf einer "
 "anderen Arbeitsfläche Aufmerksamkeit verlangt"
 
-#. 0dyseus@window-list-fork->metadata.json->description
-msgid "Fork of the main Cinnamon Window list applet."
-msgstr "Fork des Cinnamon-Haupfensterlisten-Applets"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Fenstervorschau beim Darüberbewegen anzeigen"
 
-#. 0dyseus@window-list-fork->metadata.json->name
-msgid "Window list (Fork By Odyseus)"
-msgstr "Fensterliste (Fork von Odyseus)"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "Die Richtung des Mausradrollens in der Fensterliste umkehren"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Die Fensterknöpfe können verschiedene Größen haben und den verfügbaren Platz "
+"ausfüllen"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
+msgid "Do not display tooltips"
+msgstr "Tooltips nicht anzeigen"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
+msgstr "Beschriftungen auf den Knöpfen der Fensterliste verbergen"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
+msgid "Where to display the \"Preferences\" sub-menu?"
+msgstr "Wo soll das Untermenü »Einstellungen« angezeigt werden?"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
+msgid ""
+"If the option \"Invert context menu items order\" is enabled, the \"Top of "
+"menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr ""
+"Wenn die Option »Reihenfolge der Kontextmenüelemente umkehren« aktiviert "
+"ist, wird \"Im Menü oben\" tatsächlich »Im Menü unten« sein und umgekehrt."
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Do not display"
+msgstr "Nicht anzeigen"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Top of menu"
+msgstr "Im Menü oben"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Bottom of menu"
+msgstr "Im Menü unten"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
+msgstr "Benutzerdefinierte Höhe für Fenstervorschau"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
+msgstr "Benutzerdefinierte Breite für Fenstervorschau"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Mausradrollen in der Fensterliste aktivieren"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
+msgid "Middle click to close window"
+msgstr "Mittelklick, um das Fenster zu schließen"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
+msgid "Invert context menu items order"
+msgstr "Reihenfolge der Kontextmenüelemente umkehren"
 
 #~ msgid "Configure the window list"
 #~ msgstr "Fensterliste konfigurieren …"

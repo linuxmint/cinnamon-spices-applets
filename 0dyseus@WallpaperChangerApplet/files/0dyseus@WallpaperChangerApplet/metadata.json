@@ -1,0 +1,17 @@
+{
+    "external-configuration-app": "settings.py",
+    "cinnamon-version": [
+        "3.0",
+        "3.2",
+        "3.4"
+    ],
+    "uuid": "0dyseus@WallpaperChangerApplet",
+    "contributors": "See this xlet help file.",
+    "max-instances": 1,
+    "description": "Cinnamon wallpaper slideshow applet with multiple profiles support.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "version": "1.01",
+    "schema-file": "schemas/org.cinnamon.applets.0dyseus@WallpaperChangerApplet.gschema.xml",
+    "name": "Wallpaper Changer"
+}

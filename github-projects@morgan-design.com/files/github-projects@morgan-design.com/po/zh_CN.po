@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-27 12:03+0800\n"
+"POT-Creation-Date: 2017-05-21 09:31+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,6 +13,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:45
+msgid "Attempting to Load your GitHub Repos"
+msgstr "尝试加载您的Github存储库"
+
+#: applet.js:46
+msgid "Successfully Loaded GitHub Repos for user"
+msgstr "成功加载用户的Github存储库"
+
+#: applet.js:47
+msgid "Failed to load GitHub Repositories! Check applet Configuration"
+msgstr "加载Github存储库失败！请检查小程序配置"
 
 #: applet.js:166
 msgid "Settings"

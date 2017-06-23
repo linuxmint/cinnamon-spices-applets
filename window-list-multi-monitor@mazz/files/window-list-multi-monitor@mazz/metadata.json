@@ -1,7 +1,0 @@
-{
- "uuid": "window-list-multi-monitor@mazz",
- "name": "Window list for multi monitors",
- "description": "Forked cinnamon window list only shows items from one monitor",
- "icon": "gnome-panel-window-list",
- "max-instances": 2
-}

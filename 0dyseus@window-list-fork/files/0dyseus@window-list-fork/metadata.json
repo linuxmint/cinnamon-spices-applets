@@ -1,17 +1,17 @@
 {
+    "website": "https://github.com/Odyseus/CinnamonTools",
+    "multiversion": true,
     "uuid": "0dyseus@window-list-fork",
+    "contributors": "See this xlet help file.",
     "max-instances": -1,
     "description": "Fork of the main Cinnamon Window list applet.",
-    "multiversion": true,
-    "version": "1.07",
-    "last-edited": "1472973983",
-    "name": "Window list (Fork By Odyseus)",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "website": "https://github.com/Odyseus/CinnamonTools",
-    "contributors": "NikoKrause: Bug fixes and German localization.,muzena: Croatian localization.,giwhub: Chinese localization.",
+    "version": "1.10",
     "cinnamon-version": [
         "2.8",
         "3.0",
-        "3.2"
-    ]
+        "3.2",
+        "3.4"
+    ],
+    "name": "Window list (Fork By Odyseus)"
 }

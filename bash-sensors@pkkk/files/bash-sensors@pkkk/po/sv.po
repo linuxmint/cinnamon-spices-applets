@@ -1,0 +1,79 @@
+# Swedish translation for bash-sensors@pkkk.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bash-sensors@pkkk\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-22 13:04+0200\n"
+"PO-Revision-Date: 2017-05-22 13:26+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:36
+msgid "Bash Sensors!"
+msgstr "Bash-sensorer!"
+
+#: applet.js:67 applet.js:80
+msgid "script error"
+msgstr "skriptfel"
+
+#. bash-sensors@pkkk->metadata.json->name
+msgid "Bash Sensors"
+msgstr "Bash-sensorer"
+
+#. bash-sensors@pkkk->metadata.json->description
+msgid ""
+"Write your Bash commands to specify applet output (temperature sensors and "
+"not only!)"
+msgstr ""
+"Skriv dina Bash-kommandon för att specificera utdata i panelen (inte bara "
+"temperatursensorer)"
+
+#. bash-sensors@pkkk->settings-schema.json->head->description
+msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr "Inställningar - Bash-sensorer (skriv kommandon i Bash)"
+
+#. bash-sensors@pkkk->settings-schema.json->enableScript2->description
+msgid "Two-line mode (command 2 enabled)"
+msgstr "2-raderssläge (kommando 2 aktiverat)"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->description
+msgid "Menu command (on applet left-click)"
+msgstr "Menykommando (vid klick på panelikonen)"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->tooltip
+msgid "allows to display lots of information in popup menu"
+msgstr "låter dig visa mycket information i en popup-meny"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->description
+msgid "Command 1"
+msgstr "Kommando 1"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->tooltip
+msgid "first line of output"
+msgstr "första radens utdata"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->description
+msgid "Command 2"
+msgstr "Kommando 2"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->tooltip
+msgid "second line of output (optional)"
+msgstr "andra radens utdata (tillval)"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "Uppdateringsintervall"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "sekunder"

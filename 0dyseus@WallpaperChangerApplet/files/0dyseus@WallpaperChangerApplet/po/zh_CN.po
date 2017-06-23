@@ -1,0 +1,582 @@
+# This is a template file for translating the 0dyseus@WallpaperChangerApplet package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@WallpaperChangerApplet package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
+"POT-Creation-Date: 2017-06-04 19:41+0800\n"
+"PO-Revision-Date: 2017-06-04 19:41+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "简体中文"
+
+#: ../../create_localized_help.py:190 settings.py:1022
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "选择语言"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "%s的帮助"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "重要！！！"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
+"名为**localizations.sh**的脚本安装本地化。"
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+
+#. TO TRANSLATORS: This is the applet name.
+#. 0dyseus@WallpaperChangerApplet->metadata.json->name
+#: settings.py:60
+msgid "Wallpaper Changer"
+msgstr "壁纸更改程序"
+
+#: settings.py:171
+msgid "Choose an Icon"
+msgstr "选择图标"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:174 settings.py:814 settings.py:1099 settings.py:1105
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:175 settings.py:1107
+msgid "_Open"
+msgstr "打开(_O)"
+
+#: settings.py:178
+msgid "Image files"
+msgstr "图像文件"
+
+#: settings.py:275
+msgid "Warnings related to this specific section"
+msgstr "与该具体部分相关的警告"
+
+#. Daemon settings
+#: settings.py:363
+msgid "Daemon"
+msgstr "守护进程"
+
+#: settings.py:367
+msgid "This is the current profile that the daemon will load."
+msgstr "这是守护进程将加载的当前配置文件。"
+
+#: settings.py:368
+msgid "Current Profile"
+msgstr "当前配置文件"
+
+#: settings.py:382 __init__.js:768
+msgid "Toggle and display the daemon status."
+msgstr "切换和显示守护进程状态。"
+
+#: settings.py:383 __init__.js:758
+msgid "Daemon Status"
+msgstr "守护进程状态"
+
+#: settings.py:410
+msgid "Autostart Daemon"
+msgstr "自动启动守护进程"
+
+#: settings.py:411 applet.js:95
+msgid ""
+"When enabled, the daemon will be automatically started when the applet is "
+"loaded. If it is already running or this is disabled, no action will be "
+"taken."
+msgstr ""
+"启用后，当小程序加载时，守护程序将会自动启动。 如果该进程已在运行或者禁用，则"
+"不会采取任何操作。"
+
+#: settings.py:415
+msgid "Wallpaper Timer Interval (seconds)"
+msgstr "壁纸定时器间隔（秒）"
+
+#: settings.py:424 settings.py:550
+msgid "Save"
+msgstr "保存"
+
+#: settings.py:435
+msgid "Manage keyboard shortcuts"
+msgstr "管理键盘快捷键"
+
+#: settings.py:449 __init__.js:661
+msgid "Next Wallpaper"
+msgstr "下一张壁纸"
+
+#: settings.py:453 __init__.js:664
+msgid "Previous Wallpaper"
+msgstr "上一张壁纸"
+
+#: settings.py:457
+msgid "Open/Close Menu"
+msgstr "打开/关闭菜单"
+
+#: settings.py:479
+msgid "Shortcut action"
+msgstr "快捷键动作"
+
+#: settings.py:495
+msgid "Shortcut"
+msgstr "快捷键"
+
+#: settings.py:506
+msgid "Other"
+msgstr "其他"
+
+#. Applet settings
+#: settings.py:512 settings.py:582
+msgid "Applet"
+msgstr "小程序"
+
+#: settings.py:517
+msgid "Custom icon"
+msgstr "自定义图标"
+
+#: settings.py:518
+msgid "Select a custom icon for the applet."
+msgstr "设置小程序的自定义图标。"
+
+#: settings.py:522
+msgid "Enter custom text to show in the panel."
+msgstr "输入要在面板中显示的自定义文本。"
+
+#: settings.py:525
+msgid "Custom label"
+msgstr "自定义标签"
+
+#: settings.py:541
+msgid "Wallpaper Preview Width"
+msgstr "壁纸预览宽度"
+
+#: settings.py:561
+msgid "Invert Menu Items Order"
+msgstr "反转菜单条目顺序"
+
+#: settings.py:566
+msgid "Remember Profiles State"
+msgstr "记住配置文件状态"
+
+#: settings.py:567 applet.js:110
+msgid ""
+"When enabled, the daemon will remember its current and next wallpaper for "
+"the current profile when the profile is changed. This means returning back "
+"to the profile will restore the previous background plus the next in queue."
+msgstr ""
+"启用后，当配置文件更改时，守护程序将会记住当前配置文件的当前和下一张壁纸。这"
+"意味着返回到配置文件将恢复以前的后台加上队列中的下一个。"
+
+#: settings.py:571
+msgid "Show Notifications"
+msgstr "显示通知"
+
+#: settings.py:572 applet.js:105
+msgid ""
+"Display a notification each time an event happens with wallpaper changer. "
+"This does not stop the applet from reporting errors."
+msgstr "每当壁纸更换程序发生事件时显示通知。这不会阻止小程序报告错误。"
+
+#: settings.py:576
+msgid "Enable Logging"
+msgstr "启用日志记录"
+
+#: settings.py:577
+msgid ""
+"It enables the ability to log the output of several functions used by the "
+"applet."
+msgstr "它能够记录小程序使用的一些函数的输出。"
+
+#: settings.py:585
+msgid "Manage profiles"
+msgstr "管理配置文件"
+
+#: settings.py:595
+msgid "Profile"
+msgstr "配置文件"
+
+#: settings.py:605 settings.py:804
+msgid "Create a new profile"
+msgstr "创建新的配置文件"
+
+#: settings.py:613 settings.py:779
+msgid "Remove profile"
+msgstr "移除配置文件"
+
+#: settings.py:653
+msgid "Path"
+msgstr "路径"
+
+#: settings.py:662
+msgid "Sub Folders"
+msgstr "子文件夹"
+
+#: settings.py:690 settings.py:716
+msgid "Add Image"
+msgstr "添加图片"
+
+#: settings.py:693 settings.py:723
+msgid "Add Folder"
+msgstr "添加文件夹"
+
+#: settings.py:709
+msgid "Remove"
+msgstr "移除"
+
+#: settings.py:730
+msgid "Profiles"
+msgstr "配置文件"
+
+#: settings.py:740
+msgid "Click to set a new hotkey."
+msgstr "点击设置新的热键。"
+
+#: settings.py:749
+msgid "Whether or not to include images from sub-folders."
+msgstr "是否包含子文件夹中的图片。"
+
+#: settings.py:759 settings.py:769
+msgid "Failed to update keybinding"
+msgstr "更新键绑定失败"
+
+#: settings.py:782
+#, python-format
+msgid "Are you sure you want to delete the profile »%s«?"
+msgstr "您确定要删除配置文件»%s«吗？"
+
+#: settings.py:785
+msgid "Yes"
+msgstr "是"
+
+#: settings.py:786
+msgid "No"
+msgstr "否"
+
+#: settings.py:807
+msgid "Profile Name"
+msgstr "配置文件名称"
+
+#: settings.py:813
+msgid "OK"
+msgstr "确定"
+
+#: settings.py:926
+msgid "Contributors/Mentions:"
+msgstr "贡献者/提供者："
+
+#. TO TRANSLATORS:
+#. Here goes the name/s of the author/s of the translations.
+#. Only e-mail addresses and links to GitHub accounts are allowed. NOTHING MORE.
+#: settings.py:934
+msgid "translator-credits"
+msgstr "giwhub"
+
+#: settings.py:1004
+msgid "Reset settings to defaults"
+msgstr "重置设置为默认"
+
+#: settings.py:1006
+msgid "Import settings from a file"
+msgstr "从文件导入设置"
+
+#: settings.py:1008
+msgid "Export settings to a file"
+msgstr "导出设置到文件"
+
+#: settings.py:1013
+msgid "Remember window size"
+msgstr "记住窗口大小"
+
+#: settings.py:1018
+msgid "Restart Cinnamon"
+msgstr "重新启动Cinnamon"
+
+#: settings.py:1024
+msgid "About"
+msgstr "关于"
+
+#: settings.py:1031
+msgid "Manage settings"
+msgstr "管理设置"
+
+#. TO TRANSLATORS: Full sentence:
+#. Warning: Trying to reset all AppletName settings!!!
+#: settings.py:1074
+#, python-format
+msgid "Warning: Trying to reset all %s settings!!!"
+msgstr "警告：正在尝试重置所有的%s设置！！！"
+
+#. TO TRANSLATORS: Full sentence:
+#. Reset all AppletName settings to default?
+#: settings.py:1078
+#, python-format
+msgid "Reset all %s settings to default?"
+msgstr "重置所有的%s设置为默认吗？"
+
+#: settings.py:1097
+msgid "Select or enter file to export to"
+msgstr "选择或输入导出的文件"
+
+#: settings.py:1100
+msgid "_Save"
+msgstr "保存(_S)"
+
+#: settings.py:1103
+msgid "Select a file to import"
+msgstr "选择要导入的文件"
+
+#: settings.py:1119
+msgid "DCONF files"
+msgstr "DCONF文件"
+
+#. TO TRANSLATORS: Full sentence:
+#. AppletName applet preferences
+#: settings.py:1188
+#, python-format
+msgid "%s applet preferences"
+msgstr "%s小程序首选项"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1242
+#, python-format
+msgid ""
+"Please enter your password to install the required settings schema for %s"
+msgstr "请输入您的密码安装%s需要的设置模式"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1253
+#, python-format
+msgid ""
+"Could not install the settings schema for %s.  You will have to perform this "
+"step yourself."
+msgstr "无法安装%s的设置模式。您必须亲自执行这个步骤。"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1259
+#, python-format
+msgid "Please enter your password to remove the settings schema for %s"
+msgstr "请输入您的密码移除%s需要的设置模式"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1270
+#, python-format
+msgid ""
+"Could not remove the settings schema for %s.  You will have to perform this "
+"step yourself.  This is not a critical error."
+msgstr "无法移除%s的设置模式。您必须亲自执行这个步骤。这不是一个严重错误。"
+
+#: __init__.js:56
+#, javascript-format
+msgid "Schema %s could not be found for extension %s."
+msgstr "无法找到扩展%s的模式%s。"
+
+#: __init__.js:57
+msgid "Please check your installation."
+msgstr "请检查您的安装。"
+
+#: __init__.js:458
+msgid "Wallpapers will be changed in random order"
+msgstr "壁纸将会以随机顺序更改"
+
+#: __init__.js:460
+msgid "Wallpapers will be changed in alphabetical order"
+msgstr "壁纸将会按字母顺序更改"
+
+#: __init__.js:462
+#, javascript-format
+msgid "Wallpaper rotation every %s seconds"
+msgstr "每%s秒轮流壁纸"
+
+#: __init__.js:464
+msgid "Automatic rotation disabled"
+msgstr "自动轮流已禁用"
+
+#: __init__.js:466
+msgid "Wallpaper rotation at the beginning of every hour"
+msgstr "每个小时开始时轮流壁纸"
+
+#: __init__.js:608
+msgid "You must provide at least two states for the button"
+msgstr "您必须至少提供按钮的两个状态"
+
+#: __init__.js:734
+msgid "Unable to go back any further, no history available"
+msgstr "无法再回溯，没有可用的历史"
+
+#: __init__.js:795
+msgid "Open Current Wallpaper"
+msgstr "打开当前壁纸"
+
+#: __init__.js:835
+msgid "Open Next Wallpaper"
+msgstr "打开下一张壁纸"
+
+#: __init__.js:872 __init__.js:882
+#, javascript-format
+msgid "Profile: %s"
+msgstr "配置文件：%s"
+
+#: __init__.js:1126
+msgid "Applet activation aborted!!!"
+msgstr "小程序激活停止！！！"
+
+#: __init__.js:1127
+msgid "Your Cinnamon version may not be compatible!!!"
+msgstr "您的Cinnamon版本可能不兼容！！！"
+
+#: __init__.js:1128
+msgid "Minimum Cinnamon version allowed: 3.0"
+msgstr "允许的Cinnamon最低版本：3.0"
+
+#: applet.js:90
+msgid "Extra Options"
+msgstr "附加选项"
+
+#: applet.js:94
+msgid "Auto Start Daemon"
+msgstr "自动启动守护进程"
+
+#: applet.js:99
+msgid "Change with Profile"
+msgstr "更改配置文件"
+
+#: applet.js:100
+msgid ""
+"When enabled, this will cause the daemon to automatically change the "
+"wallpaper whenever the current profile is changed."
+msgstr "启用后，无论当前配置文件是否更改，这将会导致守护程序自动更改壁纸。"
+
+#: applet.js:104
+msgid "Notifications"
+msgstr "通知"
+
+#: applet.js:109
+msgid "Remember Profile State"
+msgstr "记住配置文件状态"
+
+#: applet.js:179
+msgid "Wallpaper Changed"
+msgstr "壁纸已更改"
+
+#: applet.js:185
+msgid "Daemon Error"
+msgstr "守护进程错误"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:195
+#, javascript-format
+msgid "Notifications are now %s"
+msgstr "通知现在%s"
+
+#: applet.js:198
+msgid "disabled"
+msgstr "已禁用"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:198
+msgid "enabled"
+msgstr "已启用"
+
+#: applet.js:223
+#, javascript-format
+msgid "Profile changed to %s"
+msgstr "配置文件已更改为%s"
+
+#: applet.js:255
+msgid "Configure..."
+msgstr "配置..."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
+
+#~ msgid ""
+#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
+#~ "com/BigE/desk-changer"
+#~ msgstr ""
+#~ "Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/"
+#~ "desk-changer"
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57：瑞典语本地化。"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"

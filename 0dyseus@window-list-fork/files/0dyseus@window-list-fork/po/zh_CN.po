@@ -7,198 +7,168 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.06\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-13 18:37+0800\n"
-"PO-Revision-Date: 2017-03-16 15:51+0800\n"
+"POT-Creation-Date: 2017-06-04 19:43+0800\n"
+"PO-Revision-Date: 2017-06-04 19:43+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: 3.0/applet.js:883 2.8/applet.js:703 3.2/applet.js:883
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "简体中文"
+
+#: ../../create_localized_help.py:190 2.8/applet.js:836 applet.js:933
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "选择语言"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "%s的帮助"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "重要！！！"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
+"名为**localizations.sh**的脚本安装本地化。"
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+
+#: 2.8/applet.js:699 applet.js:797
 msgid "Preferences"
 msgstr "首选项"
 
-#: 3.0/applet.js:894 2.8/applet.js:718 3.2/applet.js:894
+#: 2.8/applet.js:714 applet.js:808
 msgid "Move to the other monitor"
 msgstr "移动到其他显示器"
 
-#: 3.0/applet.js:903 2.8/applet.js:727 3.2/applet.js:903
+#: 2.8/applet.js:723 applet.js:817
 #, javascript-format
 msgid "Move to monitor %d"
 msgstr "移动到显示器%d"
 
-#: 3.0/applet.js:914 2.8/applet.js:738 3.2/applet.js:914
+#: 2.8/applet.js:734 applet.js:828
 msgid "Only on this workspace"
 msgstr "仅在此工作区上"
 
-#: 3.0/applet.js:920 2.8/applet.js:744 3.2/applet.js:920
+#: 2.8/applet.js:740 applet.js:834
 msgid "Visible on all workspaces"
 msgstr "在所有的工作区可见"
 
-#: 3.0/applet.js:926 2.8/applet.js:750 3.2/applet.js:926
+#: 2.8/applet.js:746 applet.js:840
 msgid "Move to another workspace"
 msgstr "移动到另一个工作区"
 
 #. Close all/others
-#: 3.0/applet.js:951 2.8/applet.js:772 3.2/applet.js:951
+#: 2.8/applet.js:768 applet.js:865
 msgid "Close all"
 msgstr "关闭全部"
 
-#: 3.0/applet.js:960 2.8/applet.js:781 3.2/applet.js:960
+#: 2.8/applet.js:777 applet.js:874
 msgid "Close others"
 msgstr "关闭其他"
 
-#: 3.0/applet.js:974 2.8/applet.js:795 3.2/applet.js:974
+#: 2.8/applet.js:791 applet.js:888
 msgid "Restore to full opacity"
 msgstr "恢复到完全不透明"
 
-#: 3.0/applet.js:982 2.8/applet.js:803 3.2/applet.js:982
+#: 2.8/applet.js:799 applet.js:896
 msgid "Restore"
 msgstr "恢复"
 
-#: 3.0/applet.js:987 2.8/applet.js:808 3.2/applet.js:987
+#: 2.8/applet.js:804 applet.js:901
 msgid "Minimize"
 msgstr "最小化"
 
-#: 3.0/applet.js:995 2.8/applet.js:816 3.2/applet.js:995
+#: 2.8/applet.js:812 applet.js:909
 msgid "Unmaximize"
 msgstr "取消最大化"
 
-#: 3.0/applet.js:1000 2.8/applet.js:821 3.2/applet.js:1000
+#: 2.8/applet.js:817 applet.js:914
 msgid "Maximize"
 msgstr "最大化"
 
-#: 3.0/applet.js:1007 2.8/applet.js:828 3.2/applet.js:1007
+#: 2.8/applet.js:824 applet.js:921
 msgid "Close"
 msgstr "关闭"
 
-#: 3.0/applet.js:1019 2.8/applet.js:840 3.2/applet.js:1019
+#: 2.8/applet.js:843 applet.js:940
 msgid "About..."
 msgstr "关于..."
 
-#: 3.0/applet.js:1025 2.8/applet.js:846 3.2/applet.js:1025
+#: 2.8/applet.js:849 applet.js:946
 msgid "Configure..."
 msgstr "配置..."
 
-#: 3.0/applet.js:1039 2.8/applet.js:860 3.2/applet.js:1039
+#: 2.8/applet.js:864 applet.js:961
 #, javascript-format
 msgid "Remove '%s'"
 msgstr "移除'%s'"
 
-#. 3.0->settings-schema.json->pref_hide_labels->description
-#. 2.8->settings-schema.json->pref_hide_labels->description
-#. 3.2->settings-schema.json->pref_hide_labels->description
-msgid "Hide labels in the window list buttons"
-msgstr "隐藏窗口列表按钮中的标签"
-
-#. 3.0->settings-schema.json->pref_invert_menu_items_order->description
-#. 2.8->settings-schema.json->pref_invert_menu_items_order->description
-#. 3.2->settings-schema.json->pref_invert_menu_items_order->description
-msgid "Invert context menu items order"
-msgstr "反转右键菜单条目顺序"
-
-#. 3.0->settings-schema.json->pref_reverse_scrolling->description
-#. 2.8->settings-schema.json->pref_reverse_scrolling->description
-#. 3.2->settings-schema.json->pref_reverse_scrolling->description
-msgid "Reverse the direction of mouse-wheel scrolling in the window list"
-msgstr "反转窗口列表中鼠标滚轮滚动的方向"
-
-#. 3.0->settings-schema.json->pref_enable_scrolling->description
-#. 2.8->settings-schema.json->pref_enable_scrolling->description
-#. 3.2->settings-schema.json->pref_enable_scrolling->description
-msgid "Enable mouse-wheel scrolling in the window list"
-msgstr "启用窗口列表中的鼠标滚轮滚动"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_height->description
-#. 2.8->settings-schema.json->pref_window_preview_custom_height->description
-#. 3.2->settings-schema.json->pref_window_preview_custom_height->description
-msgid "Custom height for window thumbnails"
-msgstr "窗口缩略图的自定义高度"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_height->units
-#. 3.0->settings-schema.json->pref_window_preview_custom_width->units
-#. 2.8->settings-schema.json->pref_window_preview_custom_height->units
-#. 2.8->settings-schema.json->pref_window_preview_custom_width->units
-#. 3.2->settings-schema.json->pref_window_preview_custom_height->units
-#. 3.2->settings-schema.json->pref_window_preview_custom_width->units
-msgid "pixels"
-msgstr "像素"
-
-#. 3.0->settings-schema.json->pref_window_preview->description
-#. 2.8->settings-schema.json->pref_window_preview->description
-#. 3.2->settings-schema.json->pref_window_preview->description
-msgid "Show window thumbnails on hover"
-msgstr "悬停时显示窗口缩略图"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->description
-#. 2.8->settings-schema.json->pref_sub_menu_placement->description
-#. 3.2->settings-schema.json->pref_sub_menu_placement->description
-msgid "Where to display the \"Preferences\" sub-menu?"
-msgstr "在哪里显示“首选项”子菜单？"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->tooltip
-#. 2.8->settings-schema.json->pref_sub_menu_placement->tooltip
-#. 3.2->settings-schema.json->pref_sub_menu_placement->tooltip
+#. 0dyseus@window-list-fork->metadata.json->comments
 msgid ""
-"If the option \"Invert context menu items order\" is enabled, the \"Top of "
-"menu\" will actually be the \"Bottom of menu\" and vice versa."
-msgstr ""
-"如果启用选项“反转右键菜单条目顺序”，“菜单顶部”将会变成“菜单底部”，反之亦然。"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Do not display"
-msgstr "不显示"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Top of menu"
-msgstr "菜单顶部"
-
-#. 3.0->settings-schema.json->pref_sub_menu_placement->options
-#. 2.8->settings-schema.json->pref_sub_menu_placement->options
-#. 3.2->settings-schema.json->pref_sub_menu_placement->options
-msgid "Bottom of menu"
-msgstr "菜单底部"
-
-#. 3.0->settings-schema.json->pref_window_preview_custom_width->description
-#. 2.8->settings-schema.json->pref_window_preview_custom_width->description
-#. 3.2->settings-schema.json->pref_window_preview_custom_width->description
-msgid "Custom width for window thumbnails"
-msgstr "窗口缩略图的自定义宽度"
-
-#. 3.0->settings-schema.json->pref_buttons_use_entire_space->description
-#. 2.8->settings-schema.json->pref_buttons_use_entire_space->description
-#. 3.2->settings-schema.json->pref_buttons_use_entire_space->description
-msgid ""
-"Window buttons can have different sizes and use the entire space available"
-msgstr "窗口按钮可以拥有不同的大小并使用全部可用的空间"
-
-#. 3.0->settings-schema.json->pref_middle_click_close->description
-#. 2.8->settings-schema.json->pref_middle_click_close->description
-#. 3.2->settings-schema.json->pref_middle_click_close->description
-msgid "Middle click to close window"
-msgstr "中键关闭窗口"
-
-#. 3.0->settings-schema.json->pref_hide_tooltips->description
-#. 2.8->settings-schema.json->pref_hide_tooltips->description
-#. 3.2->settings-schema.json->pref_hide_tooltips->description
-msgid "Do not display tooltips"
-msgstr "不显示提示"
-
-#. 3.0->settings-schema.json->pref_enable_alerts->description
-#. 2.8->settings-schema.json->pref_enable_alerts->description
-#. 3.2->settings-schema.json->pref_enable_alerts->description
-msgid ""
-"Show an alert in the window list when a window from another workspace "
-"requires attention"
-msgstr "当来自另一个工作区的窗口需要注意时在窗口列表中显示警告"
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@window-list-fork->metadata.json->description
 msgid "Fork of the main Cinnamon Window list applet."
@@ -207,3 +177,94 @@ msgstr "Cinnamon主窗口列表小程序的分支。"
 #. 0dyseus@window-list-fork->metadata.json->name
 msgid "Window list (Fork By Odyseus)"
 msgstr "窗口列表 (Fork By Odyseus)"
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "启用窗口列表中的鼠标滚轮滚动"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
+msgid "Middle click to close window"
+msgstr "中键关闭窗口"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
+msgid "pixels"
+msgstr "像素"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
+msgstr "窗口缩略图的自定义宽度"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "反转窗口列表中鼠标滚轮滚动的方向"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
+msgstr "隐藏窗口列表按钮中的标签"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
+msgstr "悬停时显示窗口缩略图"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
+msgid "Do not display tooltips"
+msgstr "不显示提示"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Do not display"
+msgstr "不显示"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Top of menu"
+msgstr "菜单顶部"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Bottom of menu"
+msgstr "菜单底部"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
+msgid "Where to display the \"Preferences\" sub-menu?"
+msgstr "在哪里显示“首选项”子菜单？"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
+msgid ""
+"If the option \"Invert context menu items order\" is enabled, the \"Top of "
+"menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr ""
+"如果启用选项“反转右键菜单条目顺序”，“菜单顶部”将会变成“菜单底部”，反之亦然。"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
+msgid "Invert context menu items order"
+msgstr "反转右键菜单条目顺序"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
+msgstr "窗口缩略图的自定义高度"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr "窗口按钮可以拥有不同的大小并使用全部可用的空间"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr "当来自另一个工作区的窗口需要注意时在窗口列表中显示警告"
+
+#~ msgid "NikoKrause: Bug fixes and German localization."
+#~ msgstr "NikoKrause：错误修正和德语本地化。"
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena：克罗地亚语本地化。"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57：瑞典语本地化。"

@@ -1,0 +1,118 @@
+{
+  "section1": {
+    "type": "section",
+    "description" : "Captions"
+  },
+  "caption-type": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "Name": 0,
+      "Title": 1
+    },
+    "description": "Caption type"
+  },
+  "display-caption-for": {
+    "type": "combobox",
+    "default": 0,
+    "options": {
+      "None": 0,
+      "All": 1,
+      "Running": 2,
+      "Focused": 3
+    },
+    "description": "Display Caption For"
+  },
+  "label-width": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 5,
+    "max": 1000,
+    "units": "pixels",
+    "step": 1,
+    "description": "Label width"
+  },
+  "label-animation": {
+    "type": "switch",
+    "default": true,
+    "description": "Animate label"
+  },
+  "label-animation-time": {
+    "type": "spinbutton",
+    "default": 500,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Label animation time"
+  },
+  "display-number": {
+    "type": "combobox",
+    "default": 1,
+    "options": {
+      "None": 0,
+      "All": 1,
+      "Smart": 2
+    },
+    "description": "Display Number"
+  },
+  "section2": {
+    "type": "section",
+    "description" : "Icons"
+  },
+  "group-windows": {
+    "type": "switch",
+    "default": true,
+    "description": "Group Windows"
+  },
+  "display-pinned": {
+    "type": "switch",
+    "default": true,
+    "description": "Display Favorites"
+  },
+  "animation-time": {
+    "type": "spinbutton",
+    "default": 2000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Animation Time"
+  },
+  "section3": {
+    "type": "section",
+    "description" : "Previews"
+  },
+  "hover-preview": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on Hover"
+  },
+  "preview-timeout-show": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Timeout Show"
+  },
+  "preview-timeout-hide": {
+    "type": "spinbutton",
+    "default": 1000,
+    "min": 5,
+    "max": 10000,
+    "units": "milliseconds",
+    "step": 1,
+    "description": "Timeout Hide"
+  },
+  "preview-close-on-middle-click": {
+    "type": "switch",
+    "default": false,
+    "description": "Close window on mouse-wheel click"
+  },
+  "pinned-apps": {
+    "type": "generic",
+    "default": ["nemo.desktop", "firefox.desktop"]
+  }
+}

@@ -1,0 +1,75 @@
+# Swedish translation for color-picker@fmete.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: color-picker@fmete\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-02 05:37+0200\n"
+"PO-Revision-Date: 2017-06-02 05:47+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:72
+msgid "click here to pick a color"
+msgstr "Klicka här för att hämta en färg"
+
+#. color-picker@fmete->metadata.json->description
+msgid "Click on applet to pick color"
+msgstr "Klicka på panelikonen för att hämta en färg"
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr "Färghämtare"
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr "Inställningar för färghämtaren"
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr "Inställningar för panelprogrammet"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Please Select Color Pick Option:"
+msgstr "Välj alternativ för färghämtning"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid "A combo selection can select between int, boolean, float, and string values"
+msgstr "Välj mellan int-, boolean-, float-, och strängvärde"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "00,00,00"
+msgstr "00,00,00"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#XXXXXX"
+msgstr "#XXXXXX"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "(00,00,00)"
+msgstr "(00,00,00)"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#xxxxxx"
+msgstr "#xxxxxx"
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr "Ikon att använda i panelen:"
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Välj en ikonfil eller skriv ett ikonnamn i textfältet"
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Set the keybinding here to activate an action: "
+msgstr "Ange tangentbordsgenväg för att aktivera färghämtaren: "

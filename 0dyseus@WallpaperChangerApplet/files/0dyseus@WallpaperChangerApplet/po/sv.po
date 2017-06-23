@@ -1,0 +1,600 @@
+# This is a Swedish translation for the 0dyseus@WallpaperChangerApplet package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@WallpaperChangerApplet package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
+"POT-Creation-Date: 2017-06-03 08:15+0200\n"
+"PO-Revision-Date: 2017-06-03 08:17+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "Följande två sektioner är endast tillgängliga på Engelska."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "Svenska"
+
+#: ../../create_localized_help.py:190 settings.py:1022
+msgid "Help"
+msgstr "Hjälp"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "Medhjälpare"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "Ändringslogg"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "Välj språk"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "Hjälp för %s"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "VIKTIGT!!!"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
+"programmets funktioner."
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
+"kodförråd, på följande länk."
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Applets/Desklets/Extensions (xlets) översättning"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Om denna xlet installerades från Cinnamons inställningar, installerades "
+"också alla översättningar automatiskt."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
+"kan översättningar installeras genom att köra skriptet **localizations.sh** "
+"från en terminal öppnad i programmappen."
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
+"följande instruktioner."
+
+#. TO TRANSLATORS: This is the applet name.
+#. 0dyseus@WallpaperChangerApplet->metadata.json->name
+#: settings.py:60
+msgid "Wallpaper Changer"
+msgstr "Bakgrundsväxlare"
+
+#: settings.py:171
+msgid "Choose an Icon"
+msgstr "Välj en ikon"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:174 settings.py:814 settings.py:1099 settings.py:1105
+msgid "_Cancel"
+msgstr "_Avbryt"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:175 settings.py:1107
+msgid "_Open"
+msgstr "_Öppna"
+
+#: settings.py:178
+msgid "Image files"
+msgstr "Bildfiler"
+
+#: settings.py:275
+msgid "Warnings related to this specific section"
+msgstr "Varningar relaterade till denna specifika sektion"
+
+#. Daemon settings
+#: settings.py:363
+msgid "Daemon"
+msgstr "Daemon"
+
+#: settings.py:367
+msgid "This is the current profile that the daemon will load."
+msgstr "Detta är den aktuella profil som tjänsten läser in."
+
+#: settings.py:368
+msgid "Current Profile"
+msgstr "Aktuell profil"
+
+#: settings.py:382 __init__.js:768
+msgid "Toggle and display the daemon status."
+msgstr "Växla och visa tjänstens status"
+
+#: settings.py:383 __init__.js:758
+msgid "Daemon Status"
+msgstr "Tjänststatus"
+
+#: settings.py:410
+msgid "Autostart Daemon"
+msgstr "Starta tjänsten automatiskt"
+
+#: settings.py:411 applet.js:95
+msgid ""
+"When enabled, the daemon will be automatically started when the applet is "
+"loaded. If it is already running or this is disabled, no action will be "
+"taken."
+msgstr ""
+"Vid aktivering kommer tjänsten att startas automatiskt när panelprogrammet "
+"läses in. Om den redan körs eller om detta inaktiveras, vidtas inga åtgärder."
+
+#: settings.py:415
+msgid "Wallpaper Timer Interval (seconds)"
+msgstr "Bakgrundernas tidsintervall (sekunder)"
+
+#: settings.py:424 settings.py:550
+msgid "Save"
+msgstr "Spara"
+
+#: settings.py:435
+msgid "Manage keyboard shortcuts"
+msgstr "Hantera tangentbordsgenvägar"
+
+#: settings.py:449 __init__.js:661
+msgid "Next Wallpaper"
+msgstr "Nästa bakgrundsbild"
+
+#: settings.py:453 __init__.js:664
+msgid "Previous Wallpaper"
+msgstr "Föregående bakgrund"
+
+#: settings.py:457
+msgid "Open/Close Menu"
+msgstr "Öppna/Stäng menyn"
+
+#: settings.py:479
+msgid "Shortcut action"
+msgstr "Genvägsåtgärd"
+
+#: settings.py:495
+msgid "Shortcut"
+msgstr "Genväg"
+
+#: settings.py:506
+msgid "Other"
+msgstr "Annat"
+
+#. Applet settings
+#: settings.py:512 settings.py:582
+msgid "Applet"
+msgstr "Panelprogram"
+
+#: settings.py:517
+msgid "Custom icon"
+msgstr "Anpassad ikon"
+
+#: settings.py:518
+msgid "Select a custom icon for the applet."
+msgstr "Välj en anpassad ikon för panelen."
+
+#: settings.py:522
+msgid "Enter custom text to show in the panel."
+msgstr "Ange anpassad text att visa i panelen"
+
+#: settings.py:525
+msgid "Custom label"
+msgstr "Anpassat panelnamn"
+
+#: settings.py:541
+msgid "Wallpaper Preview Width"
+msgstr "Bredd på förhandsgranskningsbilden"
+
+#: settings.py:561
+msgid "Invert Menu Items Order"
+msgstr "Vänd på menyobjektens ordning"
+
+#: settings.py:566
+msgid "Remember Profiles State"
+msgstr "Kom ihåg profilstatus"
+
+#: settings.py:567 applet.js:110
+msgid ""
+"When enabled, the daemon will remember its current and next wallpaper for "
+"the current profile when the profile is changed. This means returning back "
+"to the profile will restore the previous background plus the next in queue."
+msgstr ""
+"Vid aktivering kommer tjänsten ihåg nuvarande och nästa bakgrund för den "
+"aktuella profilen, när profilen byts. Det innebär att när du byter tillbaka "
+"till föregående profil, återställs föregående bakgrund och nästa i kön."
+
+#: settings.py:571
+msgid "Show Notifications"
+msgstr "Visa aviseringar"
+
+#: settings.py:572 applet.js:105
+msgid ""
+"Display a notification each time an event happens with wallpaper changer. "
+"This does not stop the applet from reporting errors."
+msgstr ""
+"Visa en avisering varje gång något händer i bakgrundsväxlaren. Detta hindrar "
+"inte programmet från att rapportera fel."
+
+#: settings.py:576
+msgid "Enable Logging"
+msgstr "Aktivera loggning"
+
+#: settings.py:577
+msgid ""
+"It enables the ability to log the output of several functions used by the "
+"applet."
+msgstr ""
+"Aktiverar loggning av utdata från flera funktioner som används av detta "
+"panelprogram."
+
+#: settings.py:585
+msgid "Manage profiles"
+msgstr "Hantera profiler"
+
+#: settings.py:595
+msgid "Profile"
+msgstr "Profil"
+
+#: settings.py:605 settings.py:804
+msgid "Create a new profile"
+msgstr "Skapa en ny profil"
+
+#: settings.py:613 settings.py:779
+msgid "Remove profile"
+msgstr "Ta bort profilen"
+
+#: settings.py:653
+msgid "Path"
+msgstr "Sökväg"
+
+#: settings.py:662
+msgid "Sub Folders"
+msgstr "Undermappar"
+
+#: settings.py:690 settings.py:716
+msgid "Add Image"
+msgstr "Lägg till en bild"
+
+#: settings.py:693 settings.py:723
+msgid "Add Folder"
+msgstr "Lägg till en mapp"
+
+#: settings.py:709
+msgid "Remove"
+msgstr "Ta bort"
+
+#: settings.py:730
+msgid "Profiles"
+msgstr "Profiler"
+
+#: settings.py:740
+msgid "Click to set a new hotkey."
+msgstr "Klicka för att ange en ny snabbtangent"
+
+#: settings.py:749
+msgid "Whether or not to include images from sub-folders."
+msgstr "Om undermappar skall inkluderas."
+
+#: settings.py:759 settings.py:769
+msgid "Failed to update keybinding"
+msgstr "Kunde inte uppdatera tangentbindningen"
+
+#: settings.py:782
+#, python-format
+msgid "Are you sure you want to delete the profile »%s«?"
+msgstr "Vill du verkligen ta bort profilen »%s«?"
+
+#: settings.py:785
+msgid "Yes"
+msgstr "Ja"
+
+#: settings.py:786
+msgid "No"
+msgstr "Nej"
+
+#: settings.py:807
+msgid "Profile Name"
+msgstr "Profilnamn"
+
+#: settings.py:813
+msgid "OK"
+msgstr "OK"
+
+#: settings.py:926
+msgid "Contributors/Mentions:"
+msgstr "Bidragsgivare/Omnämnanden:"
+
+#. TO TRANSLATORS:
+#. Here goes the name/s of the author/s of the translations.
+#. Only e-mail addresses and links to GitHub accounts are allowed. NOTHING MORE.
+#: settings.py:934
+msgid "translator-credits"
+msgstr "Åke Engelbrektson"
+
+#: settings.py:1004
+msgid "Reset settings to defaults"
+msgstr "Återställ inställningarna till standard"
+
+#: settings.py:1006
+msgid "Import settings from a file"
+msgstr "Importera inställningar från en fil"
+
+#: settings.py:1008
+msgid "Export settings to a file"
+msgstr "Exportera inställningarna till en fil"
+
+#: settings.py:1013
+msgid "Remember window size"
+msgstr "Kom ihåg fönsterstorlek"
+
+#: settings.py:1018
+msgid "Restart Cinnamon"
+msgstr "Starta om Cinnamon"
+
+#: settings.py:1024
+msgid "About"
+msgstr "Om"
+
+#: settings.py:1031
+msgid "Manage settings"
+msgstr "Hantera inställningar"
+
+#. TO TRANSLATORS: Full sentence:
+#. Warning: Trying to reset all AppletName settings!!!
+#: settings.py:1074
+#, python-format
+msgid "Warning: Trying to reset all %s settings!!!"
+msgstr "Varning! Du försöker återställa alla %s-inställningar!!!"
+
+#. TO TRANSLATORS: Full sentence:
+#. Reset all AppletName settings to default?
+#: settings.py:1078
+#, python-format
+msgid "Reset all %s settings to default?"
+msgstr "Vill du återställa alla %s-inställningar till standardinställning?"
+
+#: settings.py:1097
+msgid "Select or enter file to export to"
+msgstr "Välj eller ange en fil att exportera till"
+
+#: settings.py:1100
+msgid "_Save"
+msgstr "_Spara"
+
+#: settings.py:1103
+msgid "Select a file to import"
+msgstr "Välj en fil att importera"
+
+#: settings.py:1119
+msgid "DCONF files"
+msgstr "DCONF-filer"
+
+#. TO TRANSLATORS: Full sentence:
+#. AppletName applet preferences
+#: settings.py:1188
+#, python-format
+msgid "%s applet preferences"
+msgstr "%s programinställningar"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1242
+#, python-format
+msgid ""
+"Please enter your password to install the required settings schema for %s"
+msgstr ""
+"Ange ditt lösenord för att installera det obligatoriska inställningsschemat "
+"för %s"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1253
+#, python-format
+msgid ""
+"Could not install the settings schema for %s.  You will have to perform this "
+"step yourself."
+msgstr ""
+"Kunde inte installera inställningsschemat för %s. Du måste utföra detta steg "
+"manuellt."
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1259
+#, python-format
+msgid "Please enter your password to remove the settings schema for %s"
+msgstr "Ange ditt lösenord för att ta bort inställningsschemat för %s"
+
+#. TO TRANSLATORS: Could be left blank.
+#: settings.py:1270
+#, python-format
+msgid ""
+"Could not remove the settings schema for %s.  You will have to perform this "
+"step yourself.  This is not a critical error."
+msgstr ""
+"Kunde inte ta bort inställningsschemat för %s. Du måste utföra detta steg "
+"manuellt. Detta är inget allvarligt fel."
+
+#: __init__.js:56
+#, javascript-format
+msgid "Schema %s could not be found for extension %s."
+msgstr "Schema %s kunde inte hittas för tillägg %s."
+
+#: __init__.js:57
+msgid "Please check your installation."
+msgstr "Kontrollera din installation."
+
+#: __init__.js:458
+msgid "Wallpapers will be changed in random order"
+msgstr "Bakgrunderna byts i slumpmässig ordning"
+
+#: __init__.js:460
+msgid "Wallpapers will be changed in alphabetical order"
+msgstr "Bakgrunderna byts i alfabetisk ordning"
+
+#: __init__.js:462
+#, javascript-format
+msgid "Wallpaper rotation every %s seconds"
+msgstr "Bakgrundsbyte var %s:e sekund"
+
+#: __init__.js:464
+msgid "Automatic rotation disabled"
+msgstr "Automatiskt byte inaktiverat"
+
+#: __init__.js:466
+msgid "Wallpaper rotation at the beginning of every hour"
+msgstr "Bakgrundsbyte i början på varje timma"
+
+#: __init__.js:608
+msgid "You must provide at least two states for the button"
+msgstr "Du måste ange minst två tillstånd för knappen"
+
+#: __init__.js:734
+msgid "Unable to go back any further, no history available"
+msgstr "Kan inte backa längre, det finns ingen historik"
+
+#: __init__.js:795
+msgid "Open Current Wallpaper"
+msgstr "Öppna nuvarande bakgrund"
+
+#: __init__.js:835
+msgid "Open Next Wallpaper"
+msgstr "Öppna nästa bakgrund"
+
+#: __init__.js:872 __init__.js:882
+#, javascript-format
+msgid "Profile: %s"
+msgstr "Profil: %s"
+
+#: __init__.js:1126
+msgid "Applet activation aborted!!!"
+msgstr "Programaktivering avbruten!!!"
+
+#: __init__.js:1127
+msgid "Your Cinnamon version may not be compatible!!!"
+msgstr "Din Cinnamon-version kanske inte är kompatibel!!!"
+
+#: __init__.js:1128
+msgid "Minimum Cinnamon version allowed: 3.0"
+msgstr "Lägsta Cinnamon-version som stöds: 3.0"
+
+#: applet.js:90
+msgid "Extra Options"
+msgstr "Extra alternativ"
+
+#: applet.js:94
+msgid "Auto Start Daemon"
+msgstr "Starta tjänsten automatiskt"
+
+#: applet.js:99
+msgid "Change with Profile"
+msgstr "Byt med profil"
+
+#: applet.js:100
+msgid ""
+"When enabled, this will cause the daemon to automatically change the "
+"wallpaper whenever the current profile is changed."
+msgstr ""
+"Vid aktivering kommer tjänsten att byta bakgrund automatiskt, varje gång som "
+"aktuell profil ändras."
+
+#: applet.js:104
+msgid "Notifications"
+msgstr "Aviseringar"
+
+#: applet.js:109
+msgid "Remember Profile State"
+msgstr "Kom ihåg profilstatus"
+
+#: applet.js:179
+msgid "Wallpaper Changed"
+msgstr "Bakgrund ändrad"
+
+#: applet.js:185
+msgid "Daemon Error"
+msgstr "Tjänstfel"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:195
+#, javascript-format
+msgid "Notifications are now %s"
+msgstr "Aviseringar är nu %s"
+
+#: applet.js:198
+msgid "disabled"
+msgstr "inaktiverade"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Notifications are now enabled/disabled"
+#: applet.js:198
+msgid "enabled"
+msgstr "aktiverade"
+
+#: applet.js:223
+#, javascript-format
+msgid "Profile changed to %s"
+msgstr "Profil ändrad till %s"
+
+#: applet.js:255
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
+"kodförråd, på nedanstående länk."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "Cinnamon-växlare för skrivbordsbakgrunder med flerprofilsstöd."
+
+#. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Se hjälpfilen för denna xlet."
+
+#~ msgid ""
+#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
+#~ "com/BigE/desk-changer"
+#~ msgstr ""
+#~ "Eric Gach: Utvecklare av Desk Changer gnome-tillägg. https://github.com/"
+#~ "BigE/desk-changer"

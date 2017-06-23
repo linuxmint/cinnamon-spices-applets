@@ -1,4 +1,4 @@
-Version   1.2.2
+Version   1.3.0
 v30_1.0.0 Developed using code from NUMA, Bumblebee and Timer Applets
           Includes changes to work with Mint 18 and Cinnamon 3.0 -gedit -> xed
           Tested with Cinnamon 3.0 in Mint 18 
@@ -26,10 +26,10 @@ v30_1.1.4 Old call removed from batterytempscript.sh which was filling error log
           Error checks on status to ensure valid
           Spelling corrections
           Help File extended
-v30_1.1.5 Minor text changes to improve consistency
+v30_1.1.5 Minor text changes to improve consistency. First Release 16-07-2016
 v30_1.1.7 NOTE 1.1.6 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 1.1.5 to the cinnamon-spices web site
-v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets
-v30_1.1.9 Added ability to edit stylesheet.css to context menu.
+v30_1.1.8 Corrected icon.png in applet folder which is used by Add Applets - Released 01-08-2016
+v30_1.1.9 Added ability to edit stylesheet.css to context menu. Released 17-09-2016
           Added warnings about editing to stylesheet.css
 
 Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/cinnamon-applets
@@ -53,3 +53,18 @@ v32_1.2.1 First major update following transition to cinnamon-spices-applets rep
           Version numbering harmonised with other Cinnamon applets and added to metadata.json so it shows in 'About...'
           icon.png copied back into applet folder so it shows in 'About...'
           Version information updated in applet.js, changelog.txt and README.md
+### 1.2.3
+ * Added CHANGELOG.md to applet folder with symbolic link to it in UUID so it shows on latest cinnamon spices web site.
+ * CHANGELOG.md is a simplified and reformatted version of changelog.txt.
+ * Changed 'view changelog' in context menu to use CHANGELOG.md
+### 1.3.0
+Major update - now includes support for Vertical Panels, Battery icons and 5 Display Modes
+ * Renamed batterytempscript to batteryscript - cosmetic
+ * Change to improved form of l10n support function
+ * Code added to allow display on vertical panels and added on_orientation_changed function with call to initialise.
+ * Options of display of icon and shortening message text with prime aim of support of vertical panels
+ * Display Modes added to Configuration as Dropdown with 5 types (modes) and implemented. Includes a Classic mode which is the same as version 1.2.3 of applet.
+ * Removed some redundant code still present from earlier versions which affected vertical display
+ * Code comments improved and some commented out code removed.
+ * Update README.md, CHANGELOG.md and metadata.json
+ * Recreate batterymonitor.pot to allow translation support to be updated.

@@ -36,6 +36,8 @@ def importConfig():
                             ('show-alerts', config['show-alerts']),
                             ('show-pinned', config['show-pinned']),
                             ('arrange-pinnedApps', config['arrange-pinnedApps']),
+                            ('pinOnDrag', config['pinOnDrag']),
+                            ('middle-click-action', config['middle-click-action']),
                             ('cycleMenusHotkey', config['cycleMenusHotkey']),
                             ('show-apps-order-hotkey', config['show-apps-order-hotkey']),
                             ('show-apps-order-timeout', config['show-apps-order-timeout']),
@@ -74,6 +76,7 @@ def importConfig():
                             ('activePseudoClass', config['activePseudoClass']),
                             ('panelLauncherClass', config['panelLauncherClass']),
                             ('close-button-style', config['close-button-style']),
+                            ('useSystemTooltips', config['useSystemTooltips']),
                             ('__md5__', config['__md5__']),
                             ])
 

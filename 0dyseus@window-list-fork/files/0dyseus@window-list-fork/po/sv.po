@@ -1,0 +1,283 @@
+# This is a Swedish translation for the 0dyseus@window-list-fork package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@window-list-fork package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@window-list-fork 1.09\n"
+"POT-Creation-Date: 2017-06-03 08:19+0200\n"
+"PO-Revision-Date: 2017-06-03 08:20+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "Följande två sektioner är endast tillgängliga på Engelska."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "Svenska"
+
+#: ../../create_localized_help.py:190 2.8/applet.js:836 applet.js:933
+msgid "Help"
+msgstr "Hjälp"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "Medhjälpare"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "Ändringslogg"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "Välj språk"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "Hjälp för %s"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "VIKTIGT!!!"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
+"programmets funktioner."
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
+"kodförråd, på följande länk."
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Applets/Desklets/Extensions (xlets) översättning"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Om denna xlet installerades från Cinnamons inställningar, installerades "
+"också alla översättningar automatiskt."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
+"kan översättningar installeras genom att köra skriptet **localizations.sh** "
+"från en terminal öppnad i programmappen."
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
+"följande instruktioner."
+
+#: 2.8/applet.js:699 applet.js:797
+msgid "Preferences"
+msgstr "Inställningar"
+
+#: 2.8/applet.js:714 applet.js:808
+msgid "Move to the other monitor"
+msgstr "Flytta till annan skärm"
+
+#: 2.8/applet.js:723 applet.js:817
+#, javascript-format
+msgid "Move to monitor %d"
+msgstr "Flytta till skärm %d"
+
+#: 2.8/applet.js:734 applet.js:828
+msgid "Only on this workspace"
+msgstr "Endast på denna arbetsyta"
+
+#: 2.8/applet.js:740 applet.js:834
+msgid "Visible on all workspaces"
+msgstr "Synlig på alla arbetsytor"
+
+#: 2.8/applet.js:746 applet.js:840
+msgid "Move to another workspace"
+msgstr "Flytta till annan arbetsyta"
+
+#. Close all/others
+#: 2.8/applet.js:768 applet.js:865
+msgid "Close all"
+msgstr "Stäng alla"
+
+#: 2.8/applet.js:777 applet.js:874
+msgid "Close others"
+msgstr "Stäng alla andra"
+
+#: 2.8/applet.js:791 applet.js:888
+msgid "Restore to full opacity"
+msgstr "Återställ fullständig opacitet"
+
+#: 2.8/applet.js:799 applet.js:896
+msgid "Restore"
+msgstr "Återställ"
+
+#: 2.8/applet.js:804 applet.js:901
+msgid "Minimize"
+msgstr "Minimera"
+
+#: 2.8/applet.js:812 applet.js:909
+msgid "Unmaximize"
+msgstr "Avmaximera"
+
+#: 2.8/applet.js:817 applet.js:914
+msgid "Maximize"
+msgstr "Maximera"
+
+#: 2.8/applet.js:824 applet.js:921
+msgid "Close"
+msgstr "Stäng"
+
+#: 2.8/applet.js:843 applet.js:940
+msgid "About..."
+msgstr "Om..."
+
+#: 2.8/applet.js:849 applet.js:946
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+#: 2.8/applet.js:864 applet.js:961
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Ta bort \"%s\""
+
+#. 0dyseus@window-list-fork->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
+"kodförråd, på nedanstående länk."
+
+#. 0dyseus@window-list-fork->metadata.json->description
+msgid "Fork of the main Cinnamon Window list applet."
+msgstr "Kodförgrening av Cinnamons ursprungliga \"Fönsterlista\"."
+
+#. 0dyseus@window-list-fork->metadata.json->name
+msgid "Window list (Fork By Odyseus)"
+msgstr "Fönsterlista (Förgrening av Odyseus)"
+
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Se hjälpfilen för denna xlet."
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr "Aktivera mushjulsbläddring i fönsterlistan"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
+msgid "Middle click to close window"
+msgstr "Mushjulsklick för att stänga fönster"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
+msgstr "Anpassad bredd för fönsterminiatyrer"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
+msgid "Reverse the direction of mouse-wheel scrolling in the window list"
+msgstr "Omvänd riktning på mushjulsbläddring i fönsterlistan"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
+msgstr "Dölj namnetiketter i fönsterlistan"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
+msgstr "Visa fönsterminiatyrer vid hovring"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
+msgid "Do not display tooltips"
+msgstr "Visa inte verktygsbeskrivningar"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Do not display"
+msgstr "Visa inte"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Top of menu"
+msgstr "Menyns övre del"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
+msgid "Bottom of menu"
+msgstr "Menyns undre del"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
+msgid "Where to display the \"Preferences\" sub-menu?"
+msgstr "Var skall undermenyn \"Inställningar\" visas?"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
+msgid ""
+"If the option \"Invert context menu items order\" is enabled, the \"Top of "
+"menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr ""
+"Om alternativet \"Invertera ordningen på kontextmenyposter\" aktiveras, "
+"kommer menyns övre del att bli underdel och vice versa."
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
+msgid "Invert context menu items order"
+msgstr "Invertera ordningen på kontextmenyposter"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
+msgstr "Anpassad höjd för fönsterminiatyrer"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
+msgid ""
+"Window buttons can have different sizes and use the entire space available"
+msgstr ""
+"Fönsterknappar kan ha olika storlekar och använda hela det tillgängliga "
+"utrymmet"
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
+msgid ""
+"Show an alert in the window list when a window from another workspace "
+"requires attention"
+msgstr ""
+"Visa en varning i fönsterlistan, när ett fönster på annan arbetsyta kräver "
+"uppmärksamhet."
+
+#~ msgid "NikoKrause: Bug fixes and German localization."
+#~ msgstr "NikoKrause: Felfixar och Tysk översättning."
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena: Kroatisk översättning."
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Kinesisk översättning."

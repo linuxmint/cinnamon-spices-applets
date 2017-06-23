@@ -97,7 +97,7 @@
         "description": "Custom places",
         "default": "",
         "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
     },
 
     "showTrash": {
@@ -148,7 +148,7 @@
         "description": "Custom places",
         "default": "",
         "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
     },
 
     "showRecentDocuments": {

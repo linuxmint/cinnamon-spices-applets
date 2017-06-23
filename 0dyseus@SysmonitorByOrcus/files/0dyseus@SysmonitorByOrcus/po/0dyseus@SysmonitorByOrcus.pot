@@ -1,0 +1,387 @@
+# This is a template file for translating the 0dyseus@SysmonitorByOrcus package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@SysmonitorByOrcus package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.14\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+
+#: ../../create_localized_help.py:64
+msgid "Dependencies"
+msgstr ""
+
+#: ../../create_localized_help.py:66
+msgid "The gtop library reads information about processes and the state of the system."
+msgstr ""
+
+#: ../../create_localized_help.py:67 ../../create_localized_help.py:78
+msgid "Debian based distributions:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:69
+msgid "The package is called **gir1.2-gtop-2.0**."
+msgstr ""
+
+#: ../../create_localized_help.py:70 ../../create_localized_help.py:81
+msgid "Archlinux based distributions:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:72
+msgid "The package is called **libgtop**."
+msgstr ""
+
+#: ../../create_localized_help.py:73 ../../create_localized_help.py:84
+msgid "Fedora based distributions:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:75
+msgid "The package is called **libgtop2-devel**."
+msgstr ""
+
+#: ../../create_localized_help.py:77
+msgid "NetworkManager is a system network service that manages your network devices and connections, attempting to keep active network connectivity when available."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:80
+msgid "The package is called **gir1.2-networkmanager-1.0**."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:83
+msgid "The package is called **networkmanager**."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:86
+msgid "The package is called **NetworkManager**."
+msgstr ""
+
+#: ../../create_localized_help.py:88
+msgid "Important note:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:90
+msgid "NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it."
+msgstr ""
+
+#: ../../create_localized_help.py:92
+msgid "Restart Cinnamon after installing the packages for the applet to recognize them."
+msgstr ""
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:143 ../../create_localized_help.py:219
+msgid "language-name"
+msgstr ""
+
+#: ../../create_localized_help.py:149
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:222 applet.js:349
+msgid "Help"
+msgstr ""
+
+#: ../../create_localized_help.py:223
+msgid "Contributors"
+msgstr ""
+
+#: ../../create_localized_help.py:224
+msgid "Changelog"
+msgstr ""
+
+#: ../../create_localized_help.py:225
+msgid "Choose language"
+msgstr ""
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:226 ../../create_localized_help.py:233
+#, python-format
+msgid "Help for %s"
+msgstr ""
+
+#: ../../create_localized_help.py:234
+msgid "IMPORTANT!!!"
+msgstr ""
+
+#: ../../create_localized_help.py:235
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr ""
+
+#: ../../create_localized_help.py:236
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr ""
+
+#: ../../create_localized_help.py:242
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+
+#: ../../create_localized_help.py:243
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:245
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+
+#: ../../create_localized_help.py:246
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr ""
+
+#: __init__.js:192
+msgid "CPU:"
+msgstr ""
+
+#: __init__.js:225
+msgid "Memory:"
+msgstr ""
+
+#. TO TRANSLATORS: Don't know if this would need translation.
+#. MB = Megabytes.
+#: __init__.js:228 __init__.js:263
+msgid "MB"
+msgstr ""
+
+#: __init__.js:260
+msgid "Swap:"
+msgstr ""
+
+#. TO TRANSLATORS:
+#. D = Download
+#. U = Upload
+#: __init__.js:320
+msgid "Network D/U:"
+msgstr ""
+
+#. TO TRANSLATORS: Don't know if this would need translation.
+#. KB/s = Kilobytes per second.
+#: __init__.js:323
+msgid "KB/s"
+msgstr ""
+
+#: __init__.js:369
+msgid "Load average:"
+msgstr ""
+
+#: applet.js:185
+msgid "Missing dependency!!!"
+msgstr ""
+
+#: applet.js:186
+msgid "This applet needs the GTop library installed on your system for it  to work."
+msgstr ""
+
+#: applet.js:187
+msgid "Read this applet help for more details (Applet context menu > Help item)."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->comments
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->name
+msgid "System Monitor (Fork By Odyseus)"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->metadata.json->description
+msgid "Displays CPU, memory, swap, network usage and load in graphs."
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
+msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->tooltip
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->tooltip
+msgid "Restart Cinnamon"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_border_color->description
+msgid "Border color:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_color_cached->description
+msgid "Cached:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_nice->description
+msgid "Nice:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_memmory_graph->description
+msgid "Show Memory graph:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_draw_background->description
+msgid "Draw graph background"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->units
+msgid "milliseconds"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_refresh_rate->description
+msgid "Refresh rate:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head1->description
+msgid "CPU graph"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_iowait->description
+msgid "IOWait:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_user->description
+msgid "User:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head33->description
+msgid "Swap graph colors"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_color_used->description
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_color_used->description
+msgid "Used:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_color_upload->description
+msgid "Upload:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head55->description
+msgid "Load graph colors"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_draw_border->description
+msgid "Draw graph border"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_color_download->description
+msgid "Download:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_width->units
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_width->units
+msgid "pixels"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_width->description
+msgid "CPU graph width"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_swap_graph_width->description
+msgid "Swap graph width"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_cpu_graph_color_kernel->description
+msgid "Kernel:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head0->description
+msgid "General settings"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head44->description
+msgid "Network graph colors"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_color_load->description
+msgid "Load:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->tooltip
+msgid "For those of us who suffer from the stupidity of using a theme with tooltips aligned to the center. ¬¬"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->description
+msgid "Align tooltip text to the left"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_background_color->description
+msgid "Background color:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_memory_graph_width->description
+msgid "Memory graph width"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_load_graph->description
+msgid "Show Load graph:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head22->description
+msgid "Memory graph colors"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head4->description
+msgid "Network graph"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_use_smooth_graphs->description
+msgid "Use smooth graphs"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_cpu_graph->description
+msgid "Show CPU graph:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_network_graph->description
+msgid "Show Network graph:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head2->description
+msgid "Memory graph"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_show_swap_graph->description
+msgid "Show Swap graph:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head11->description
+msgid "CPU graph colors"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head5->description
+msgid "Load graph"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_network_graph_width->description
+msgid "Network graph width"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_custom_command->description
+msgid "Custom command on applet click:"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->head3->description
+msgid "Swap graph"
+msgstr ""
+
+#. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_load_graph_width->description
+msgid "Load graph width"
+msgstr ""

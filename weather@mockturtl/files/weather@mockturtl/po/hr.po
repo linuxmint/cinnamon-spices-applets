@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-30 15:41+0200\n"
-"PO-Revision-Date: 2017-04-30 15:46+0200\n"
+"PO-Revision-Date: 2017-05-04 17:25+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -431,7 +431,7 @@ msgstr "in Hg"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
 msgid "Update interval"
-msgstr "Razdoblje ažuriranja"
+msgstr "Razdoblje nadopunjavanja"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->units
 msgid "minutes"

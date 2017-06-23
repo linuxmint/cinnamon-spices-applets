@@ -13,7 +13,17 @@
         "description": "Refresh Interval for Display:",
         "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
      },
-    "head1": {
+
+    "showGpuTemp": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show GPU Temperature as well as icon",
+        "tooltip": "Available in Horizontal and Vertical Panels. Display is in Degrees Centigrade."
+    },
+
+
+
+   "head2": {
         "type": "header",
         "description": "Additional Functionality"
     },

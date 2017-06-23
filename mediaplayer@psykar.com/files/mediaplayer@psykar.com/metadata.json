@@ -1,7 +1,0 @@
-{
-    "last-edited": "1385443261", 
-    "description": "A Cinnamon applet to display control sound and music", 
-    "icon": "stock_volume", 
-    "uuid": "mediaplayer@psykar.com", 
-    "name": "Media Player Indicator"
-}

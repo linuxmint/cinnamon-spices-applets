@@ -7,94 +7,212 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.05\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-13 18:36+0800\n"
-"PO-Revision-Date: 2017-03-15 22:31+0800\n"
+"POT-Creation-Date: 2017-06-04 19:32+0800\n"
+"PO-Revision-Date: 2017-06-04 19:32+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: applet.js:111 3.2/applet.js:111
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "以下两个部分仅使用英语。"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "简体中文"
+
+#: ../../create_localized_help.py:190 applet.js:155
+msgid "Help"
+msgstr "帮助"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "贡献者"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "变更日志"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "选择语言"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "%s的帮助"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "重要！！！"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
+"名为**localizations.sh**的脚本安装本地化。"
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
+
+#: appletHelper.py:268
+msgid ""
+"This terminal will list the errors of extensions that couldn't be loaded by "
+"Extensions Manager."
+msgstr "此终端将列出扩展管理器无法加载的扩展的错误。"
+
+#: appletHelper.py:289 appletHelper.py:308
+msgid "Extensions Manager debugger"
+msgstr "扩展管理器调试器"
+
+#: appletHelper.py:323
+msgid "Helper script for Extensions Manager applet for Cinnamon."
+msgstr "用于Cinnamon扩展管理器小程序的帮助脚本。"
+
+#: appletHelper.py:328
+msgid "Returns a JSON string with a list of all installed extensions."
+msgstr "返回一个包含所有已安装扩展名列表的JSON字符串。"
+
+#: appletHelper.py:332
+msgid "Process all extensions, but it will only display possible errors."
+msgstr "处理所有扩展，但它只会显示可能的错误。"
+
+#: appletHelper.py:336
+msgid "Launch the debug process from a virtual terminal."
+msgstr "从虚拟终端启动调试进程。"
+
+#: __init__.js:116
 msgid "Cancel"
 msgstr "取消"
 
-#: applet.js:117 3.2/applet.js:117
+#: __init__.js:122
 msgid "OK"
 msgstr "确定"
 
-#: applet.js:174 3.2/applet.js:174
+#: __init__.js:180
 msgid "Open settings window"
 msgstr "打开设置窗口"
 
-#: applet.js:193 3.2/applet.js:193
+#: __init__.js:200
 msgid "Spices page"
 msgstr "Spices页面"
 
-#: applet.js:211 3.2/applet.js:211
+#: __init__.js:219
 msgid "Edit extension main file"
 msgstr "编辑扩展主文件"
 
-#: applet.js:226 3.2/applet.js:226
+#: __init__.js:235
 msgid "Open extension folder"
 msgstr "打开扩展文件夹"
 
-#: applet.js:283 applet.js:290
+#: __init__.js:292 __init__.js:299
 msgid "Name"
 msgstr "名称"
 
-#: applet.js:285 applet.js:292
+#: __init__.js:294 __init__.js:301
 msgid "Description"
 msgstr "描述"
 
-#: applet.js:495 3.2/applet.js:496
+#: __init__.js:412
+msgid "Error parsing JSON string."
+msgstr "解析JSON字符串出错。"
+
+#: __init__.js:414
+msgid "A detailed error has been logged into ~/.cinnamon/glass.log."
+msgstr "详细的错误已记录到~/.cinnamon/glass.log文件中。"
+
+#: applet.js:99
 msgid "Open extensions manager"
 msgstr "打开扩展管理器"
 
-#: applet.js:508 3.2/applet.js:509
+#: applet.js:112
 msgid "Disable all extensions"
 msgstr "禁用所有扩展"
 
-#: applet.js:518 3.2/applet.js:519
+#: applet.js:122
 msgid ""
 "This will disable all active extensions. Are you sure you want to do this?"
 msgstr "这将会禁用所有激活的扩展。您确定要这么做吗？"
 
-#: applet.js:526 3.2/applet.js:527
+#: applet.js:130
 msgid "Refresh extension list"
 msgstr "刷新扩展列表"
 
-#: applet.js:533 3.2/applet.js:534
+#: applet.js:137
 msgid "Restart Cinnamon"
 msgstr "重启Cinnamon"
 
-#: applet.js:737 3.2/applet.js:738
+#: applet.js:146
+msgid "Debug"
+msgstr "调试"
+
+#: applet.js:237 applet.js:283
+#, javascript-format
+msgid "Source of error: %s"
+msgstr "错误来源：%s"
+
+#: applet.js:373
 msgid ""
 "There aren't any extensions installed on your system. Or you may need to "
 "refresh the list of extensions from this applet context menu."
 msgstr ""
 "您的系统上尚未安装任何扩展。否则您可能需要从此小程序的右键菜单刷新扩展列表。"
 
-#: applet.js:804 3.2/applet.js:805
+#: applet.js:442
 msgid "Enabled extensions"
 msgstr "已启用的扩展"
 
-#: applet.js:807 3.2/applet.js:808
+#: applet.js:445
 msgid "No enabled extensions"
 msgstr "没有已启用的扩展"
 
-#: applet.js:811 3.2/applet.js:812
+#: applet.js:449
 msgid "Disabled extensions"
 msgstr "已禁用的扩展"
 
-#: applet.js:813 3.2/applet.js:814
+#: applet.js:451
 msgid "No disabled extensions"
 msgstr "没有已禁用的扩展"
 
-#: applet.js:850 3.2/applet.js:851
+#: applet.js:488
 #, javascript-format
 msgid ""
 "Extension %s is not compatible with current version of cinnamon. Using it "
@@ -102,27 +220,63 @@ msgid ""
 msgstr ""
 "扩展%s与cinnamon当前的版本不兼容。使用它可能会损坏您的系统。仍然要加载吗？"
 
-#. 3.2->settings-schema.json->pref_custom_label_for_applet->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_custom_label_for_applet->description
-msgid "Custom label"
-msgstr "自定义标签"
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "查看该xlet帮助文件。"
 
-#. 3.2->settings-schema.json->pref_custom_label_for_applet->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_custom_label_for_applet->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr "输入要显示在面板中的自定义文本。"
+#. 0dyseus@ExtensionsManager->metadata.json->name
+msgid "Extensions Manager"
+msgstr "扩展管理器"
 
-#. 3.2->settings-schema.json->pref_show_spices_button->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_spices_button->description
-msgid "Show \"Spices page\" button on extensions menu"
-msgstr "在扩展菜单上显示“Spices页面”按钮"
+#. 0dyseus@ExtensionsManager->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
-#. 3.2->settings-schema.json->pref_show_spices_button->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_spices_button->tooltip
+#. 0dyseus@ExtensionsManager->metadata.json->description
+msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
+msgstr "允许从菜单启用/禁用扩展（和其它任务）。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_enabled_extensions_style->description
+msgid "Style for \"Enabled extensions\" sub-menu"
+msgstr "“已启用的扩展”子菜单的风格"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_menu_height->description
+msgid "Max height for menu"
+msgstr "菜单的最大高度"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_menu_height->units
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_options_icon_size->units
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_icon_size->units
+msgid "pixels"
+msgstr "像素"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->tooltip
+msgid ""
+"If enabled, every time that the menu is open, the \"Enabled extensions\" sub "
+"menu will be open too."
+msgstr "如果启用，每次打开菜单时，也会打开“已启用的扩展”子菜单。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->description
+msgid "Keep \"Enabled extensions\" menu open"
+msgstr "保持打开“已启用的扩展”菜单"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_disabled_extensions_style->description
+msgid "Style for \"Disabled extensions\" sub-menu"
+msgstr "“已禁用的扩展”子菜单的风格"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->tooltip
+msgid ""
+"If enabled, it will display a button in each extension menu item that will "
+"open the location where the extension is installed."
+msgstr "如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展安装位置的按钮。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->description
+msgid "Show \"Open extension folder\" button on extensions menu"
+msgstr "在扩展菜单上显示“打开扩展文件夹”按钮"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->tooltip
 msgid ""
 "If enabled, it will display a button in each extension menu item that will "
 "open the extension's Spices page (if the extension is published on Spices)."
@@ -130,147 +284,15 @@ msgstr ""
 "如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展Spices页面的按钮（如果"
 "扩展已在Spices上发布）。"
 
-#. 3.2->settings-schema.json->pref_set_max_menu_height->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_set_max_menu_height->description
-msgid "Set max height for the main menu"
-msgstr "设置主菜单的最大高度"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->description
+msgid "Show \"Spices page\" button on extensions menu"
+msgstr "在扩展菜单上显示“Spices页面”按钮"
 
-#. 3.2->settings-
-#. schema.json->pref_keep_disabled_extension_menu_open->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_keep_disabled_extension_menu_open->description
-msgid "Keep \"Disabled extensions\" menu open"
-msgstr "保持打开“已禁用的扩展”菜单"
-
-#. 3.2->settings-schema.json->pref_keep_disabled_extension_menu_open->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_keep_disabled_extension_menu_open->tooltip
-msgid ""
-"If enabled, every time that the menu is open, the \"Disabled extensions\" "
-"sub menu will be open too."
-msgstr "如果启用，每次菜单时，也会打开“已禁用的扩展”子菜单。"
-
-#. 3.2->settings-
-#. schema.json->pref_show_open_extension_folder_button->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_open_extension_folder_button->description
-msgid "Show \"Open extension folder\" button on extensions menu"
-msgstr "在扩展菜单上显示“打开扩展文件夹”按钮"
-
-#. 3.2->settings-schema.json->pref_show_open_extension_folder_button->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_open_extension_folder_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the location where the extension is installed."
-msgstr "如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展安装位置的按钮。"
-
-#. 3.2->settings-schema.json->pref_disabled_extensions_style->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_disabled_extensions_style->description
-msgid "Style for \"Disabled extensions\" sub-menu"
-msgstr "“已禁用的扩展”子菜单的风格"
-
-#. 3.2->settings-schema.json->pref_use_extension_names_as_label->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_use_extension_names_as_label->description
-msgid "Use extension name as label"
-msgstr "使用扩展名称作为标签"
-
-#. 3.2->settings-schema.json->pref_use_extension_names_as_label->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_use_extension_names_as_label->tooltip
-msgid ""
-"If disabled, the extension UUID will be used as label for the menu items."
-msgstr "如果禁用，扩展的UUID将会被用作菜单条目的标签。"
-
-#. 3.2->settings-schema.json->pref_custom_icon_for_applet->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_custom_icon_for_applet->description
-msgid "Icon"
-msgstr "图标"
-
-#. 3.2->settings-schema.json->pref_custom_icon_for_applet->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_custom_icon_for_applet->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "选择一个要显示在面板中的图标。"
-
-#. 3.2->settings-schema.json->pref_enabled_extensions_style->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_enabled_extensions_style->description
-msgid "Style for \"Enabled extensions\" sub-menu"
-msgstr "“已启用的扩展”子菜单的风格"
-
-#. 3.2->settings-
-#. schema.json->pref_show_edit_extension_file_button->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_edit_extension_file_button->description
-msgid "Show \"Edit extension main file\" button on extensions menu"
-msgstr "在扩展菜单上显示“编辑扩展主文件”按钮"
-
-#. 3.2->settings-schema.json->pref_show_edit_extension_file_button->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_edit_extension_file_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open main extension file (extension.js) with a text editor."
-msgstr ""
-"如果启用，将会在每个扩展按钮条目中显示一个可以打开扩展主文件（extension.js）"
-"和文本编辑器的按钮。"
-
-#. 3.2->settings-schema.json->pref_icons_size->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_icons_size->description
-msgid "Icon size for menu items"
-msgstr "菜单条目的图标大小"
-
-#. 3.2->settings-schema.json->pref_icons_size->units
-#. 3.2->settings-schema.json->pref_max_menu_height->units
-#. 0dyseus@ExtensionsManager->settings-schema.json->pref_icons_size->units
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_max_menu_height->units
-msgid "pixels"
-msgstr "像素"
-
-#. 3.2->settings-schema.json->pref_max_menu_height->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_max_menu_height->description
-msgid "Max height for menu"
-msgstr "菜单的最大高度"
-
-#. 3.2->settings-schema.json->pref_keep_only_one_menu_open->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_keep_only_one_menu_open->description
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_only_one_menu_open->description
 msgid "Keep only one menu open at all times"
 msgstr "始终保持仅打开一个菜单"
 
-#. 3.2->settings-schema.json->pref_max_width_for_menu_items_label->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_max_width_for_menu_items_label->description
-msgid "Max width for menu items label"
-msgstr "菜单条目标签的最大宽度"
-
-#. 3.2->settings-schema.json->pref_max_width_for_menu_items_label->units
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_max_width_for_menu_items_label->units
-msgid "ems"
-msgstr "ems"
-
-#. 3.2->settings-schema.json->head2->description
-msgid "Appearance"
-msgstr "外观"
-
-#. 3.2->settings-schema.json->pref_show_config_button->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_config_button->description
-msgid "Show \"Open settings window\" button on extensions menu"
-msgstr "在扩展菜单上显示“打开设置窗口”按钮"
-
-#. 3.2->settings-schema.json->pref_show_config_button->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_show_config_button->tooltip
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->tooltip
 msgid ""
 "If enabled, it will display a button in each extension menu item that will "
 "open the extension's settings page (if the extension has a configuration "
@@ -279,55 +301,103 @@ msgstr ""
 "如果启用，将会在每个扩展条目中显示一个可以打开扩展设置页面的按钮（如果扩展拥"
 "有一个配置机制）。"
 
-#. 3.2->settings-
-#. schema.json->pref_keep_enabled_extension_menu_open->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_keep_enabled_extension_menu_open->description
-msgid "Keep \"Enabled extensions\" menu open"
-msgstr "保持打开“已启用的扩展”菜单"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->description
+msgid "Show \"Open settings window\" button on extensions menu"
+msgstr "在扩展菜单上显示“打开设置窗口”按钮"
 
-#. 3.2->settings-schema.json->pref_keep_enabled_extension_menu_open->tooltip
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_keep_enabled_extension_menu_open->tooltip
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "输入要显示在面板中的自定义文本。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "自定义标签"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->tooltip
 msgid ""
-"If enabled, every time that the menu is open, the \"Enabled extensions\" sub "
-"menu will be open too."
-msgstr "如果启用，每次打开菜单时，也会打开“已启用的扩展”子菜单。"
+"If disabled, the extension UUID will be used as label for the menu items."
+msgstr "如果禁用，扩展的UUID将会被用作菜单条目的标签。"
 
-#. 3.2->settings-schema.json->head1->description
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->description
+msgid "Use extension name as label"
+msgstr "使用扩展名称作为标签"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->tooltip
+msgid ""
+"If enabled, every time that the menu is open, the \"Disabled extensions\" "
+"sub menu will be open too."
+msgstr "如果启用，每次菜单时，也会打开“已禁用的扩展”子菜单。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->description
+msgid "Keep \"Disabled extensions\" menu open"
+msgstr "保持打开“已禁用的扩展”菜单"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_options_icon_size->description
+msgid "Icon size for the extension option buttons"
+msgstr "扩展选项按钮的图标大小"
+
 #. 0dyseus@ExtensionsManager->settings-schema.json->head1->description
 msgid "Extensions menu settings"
 msgstr "扩展菜单设置"
 
-#. 3.2->settings-schema.json->head0->description
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_set_max_menu_height->description
+msgid "Set max height for the main menu"
+msgstr "设置主菜单的最大高度"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->tooltip
+msgid ""
+"If enabled, it will display a button in each extension menu item that will "
+"open main extension file (extension.js) with a text editor."
+msgstr ""
+"如果启用，将会在每个扩展按钮条目中显示一个可以打开扩展主文件（extension.js）"
+"和文本编辑器的按钮。"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->description
+msgid "Show \"Edit extension main file\" button on extensions menu"
+msgstr "在扩展菜单上显示“编辑扩展主文件”按钮"
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_icons_on_menu->description
+msgid "Show icons on menu items"
+msgstr "在菜单条目上显示图标"
+
 #. 0dyseus@ExtensionsManager->settings-schema.json->head0->description
 msgid "Applet settings"
 msgstr "小程序设置"
 
-#. 3.2->settings-schema.json->pref_icons_on_menu->description
-#. 0dyseus@ExtensionsManager->settings-
-#. schema.json->pref_icons_on_menu->description
-msgid "Show icons on menu items"
-msgstr "在菜单条目上显示图标"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_width_for_menu_items_label->units
+msgid "ems"
+msgstr "ems"
 
-#. 0dyseus@ExtensionsManager->metadata.json->contributors
-msgid "Radek71: Czech localization."
-msgstr "Radek71：捷克语本地化。"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_width_for_menu_items_label->description
+msgid "Max width for menu items label"
+msgstr "菜单条目标签的最大宽度"
 
-#. 0dyseus@ExtensionsManager->metadata.json->contributors
-msgid "muzena: Croatian localization."
-msgstr "muzena：克罗地亚语本地化。"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_icon_size->description
+msgid "Icon size for the extension logo"
+msgstr "扩展标志的图标大小"
 
-#. 0dyseus@ExtensionsManager->metadata.json->description
-msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
-msgstr "允许从菜单启用/禁用扩展（和其它任务）。"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择一个要显示在面板中的图标。"
 
-#. 0dyseus@ExtensionsManager->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr "图标"
 
-#. 0dyseus@ExtensionsManager->metadata.json->name
-msgid "Extensions Manager"
-msgstr "扩展管理器"
+#~ msgid "Radek71: Czech localization."
+#~ msgstr "Radek71：捷克语本地化。"
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena：克罗地亚语本地化。"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub：中文本地化。"
+
+#~ msgid "eson57: Swedish localization."
+#~ msgstr "eson57：瑞典语本地化。"
+
+#~ msgid "Icon size for menu items"
+#~ msgstr "菜单条目的图标大小"
+
+#~ msgid "Appearance"
+#~ msgstr "外观"

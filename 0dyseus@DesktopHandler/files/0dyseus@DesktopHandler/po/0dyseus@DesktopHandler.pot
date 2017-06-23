@@ -1,0 +1,518 @@
+# This is a template file for translating the 0dyseus@DesktopHandler package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@DesktopHandler package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@DesktopHandler 1.08\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:119 ../../create_localized_help.py:195
+msgid "language-name"
+msgstr ""
+
+#: ../../create_localized_help.py:125
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:198 applet.js:486
+msgid "Help"
+msgstr ""
+
+#: ../../create_localized_help.py:199
+msgid "Contributors"
+msgstr ""
+
+#: ../../create_localized_help.py:200
+msgid "Changelog"
+msgstr ""
+
+#: ../../create_localized_help.py:201
+msgid "Choose language"
+msgstr ""
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:202 ../../create_localized_help.py:209
+#, python-format
+msgid "Help for %s"
+msgstr ""
+
+#: ../../create_localized_help.py:210
+msgid "IMPORTANT!!!"
+msgstr ""
+
+#: ../../create_localized_help.py:211
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr ""
+
+#: ../../create_localized_help.py:212
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr ""
+
+#: ../../create_localized_help.py:218
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+
+#: ../../create_localized_help.py:219
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:221
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+
+#: ../../create_localized_help.py:222
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr ""
+
+#: applet.js:250 applet.js:363
+msgid "Close window"
+msgstr ""
+
+#: applet.js:304
+msgid "Close all windows from this wrokspace"
+msgstr ""
+
+#: applet.js:409
+msgid "No open windows"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:422 applet.js:704
+msgid "Expo"
+msgstr ""
+
+#: applet.js:430
+msgid "Close all windows from all workspaces"
+msgstr ""
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:497
+msgid "About..."
+msgstr ""
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:507
+msgid "Configure..."
+msgstr ""
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:521
+#, javascript-format
+msgid "Remove '%s'"
+msgstr ""
+
+#: applet.js:530
+#, javascript-format
+msgid "Are you sure that you want to remove '%s' from your panel?"
+msgstr ""
+
+#: applet.js:532
+msgid "Cancel"
+msgstr ""
+
+#: applet.js:532
+msgid "OK"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:705
+msgid "Overview"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:706
+msgid "Launch App Switcher"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:707
+msgid "Run 1st Custom Command"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:708
+msgid "Run 2nd Custom Command"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:709
+msgid "Run 3rd Custom Command"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:710
+msgid "Run 4rd Custom Command"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:711
+msgid "None"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:712
+msgid "Icons only"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:713
+msgid "Thumbnails only"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:714
+msgid "Icons and thumbnails"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:715
+msgid "Icons and window preview"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:716
+msgid "Window preview (no icons)"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:717
+msgid "Coverflow (3D)"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:718
+msgid "Timeline (3D)"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:719
+msgid "System default"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:720
+msgid "Switch between workspaces"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:721
+msgid "Adjust opacity of windows"
+msgstr ""
+
+#: applet.js:722
+msgid "Toggle show desktop"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:723
+msgid "Switch between windows"
+msgstr ""
+
+#: applet.js:724
+msgid "Open windows list menu"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->metadata.json->name
+#: applet.js:738
+msgid "Desktop Handler"
+msgstr ""
+
+#: applet.js:741
+msgid "Scroll Up"
+msgstr ""
+
+#: applet.js:742
+msgid "Scroll Down"
+msgstr ""
+
+#: applet.js:744
+msgid "Scroll"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:751
+msgid "Left click"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:757
+msgid "Middle click"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:761
+msgid "Right click"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->metadata.json->description
+msgid "Various shortcuts to handle desktop actions."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->metadata.json->comments
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head3->description
+msgid "Windows menu options"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head0->description
+msgid "Applet options: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_remove->description
+msgid "Show \"Remove this applet\""
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->units
+msgid "pixels"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->description
+msgid "Applet custom width (Set to 0 (zero) to not set a width):"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_about->description
+msgid "Show \"About...\""
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_all_buttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->description
+msgid "App switcher style: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_blur_effect_enabled->description
+msgid "Blur windows on hover"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->description
+msgid "Action on scrolling up: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+msgid "Toggle Show desktop"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd1_action->description
+msgid "1st Custom Command:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desklets->description
+msgid "Opacify desklets"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_keep_menu_open->description
+msgid "Keep menu open while closing windows"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head1->description
+msgid "Mouse scroll options: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->description
+msgid "Action on scrolling: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->description
+msgid "Modifier key: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Ctrl"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Shift"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->units
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->description
+msgid "Minimum delay between scrolls:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->description
+msgid "Opacify windows on hover (a.k.a. desktop peek)"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desktop_icons->description
+msgid "Opacify the icons on the desktop"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->description
+msgid "Icon for Applet (Leave blank to remove icon):"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_default_items->description
+msgid "Show context menu default items on right click"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd2_action->description
+msgid "2nd Custom Command:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_buttons->description
+msgid "Show close buttons on windows list"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_windows_list_menu_enabled->description
+msgid "Enable Windows list menu"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->description
+msgid "Peek desktop trigger delay:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_configure->description
+msgid "Show \"Configure...\""
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_help->description
+msgid "Show \"Help\""
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head5->description
+msgid "Custom Commands: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->description
+msgid "Action on applet left click: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_opacity->description
+msgid "Level of opacity:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head2->description
+msgid "Mouse click options: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_prevent_fast_scroll->description
+msgid "Prevent accidental workspace/window switching on rapid scrolling"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd3_action->description
+msgid "3rd Custom Command:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->description
+msgid "Background color for the applet:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->tooltip
+msgid "I mainly added this so it's easy to see the applet the first time is placed in a panel."
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->description
+msgid "Switch between windows from: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current workspace"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current Application"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "All workspaces"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_separated_scroll_action->description
+msgid "Independent actions for scrolling up and down"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->description
+msgid "Action on scrolling down: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->description
+msgid "Mouse button to open menu (It will override mouse click actions):"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head4->description
+msgid "Peek at desktop options:"
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head6->description
+msgid "App Switcher Settings: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->description
+msgid "Action on applet middle click: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->description
+msgid "When a modifier key is pressed, switch between windows from: "
+msgstr ""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd4_action->description
+msgid "4rd Custom Command:"
+msgstr ""

@@ -43,7 +43,8 @@
  * (using Tooltips.PanelItemTooltip) in the tooltip. The window preview is
  * generated on the fly when needed instead of cached.
  */
-
+const $ = imports.applet.__init__;
+const _ = $._;
 const Cinnamon = imports.gi.Cinnamon;
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
@@ -56,17 +57,15 @@ const St = imports.gi.St;
 const Applet = imports.ui.applet;
 const DND = imports.ui.dnd;
 const Main = imports.ui.main;
-const Panel = imports.ui.panel;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
 const Tooltips = imports.ui.tooltips;
-const Tweener = imports.ui.tweener;
 const Util = imports.misc.util;
 
 const DEFAULT_ICON_SIZE = 24; // too bad this can't be defined in theme (cinnamon-app.create_icon_texture returns a clutter actor, not a themable object -
 // probably something that could be addressed
-const ICON_HEIGHT_FACTOR = .84;
+const ICON_HEIGHT_FACTOR = 0.84;
 const MAX_TEXT_LENGTH = 1000;
 const FLASH_INTERVAL = 500;
 
@@ -89,8 +88,8 @@ WindowPreview.prototype = {
 
         this.scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
-        this.actor.set_size(this._applet.pref_window_preview_custom_width * 1.3 * this.scaleFactor,
-            this._applet.pref_window_preview_custom_height * 1.3 * this.scaleFactor);
+        this.actor.set_size(this._applet.pref_window_preview_custom_width * 1.2 * this.scaleFactor,
+            this._applet.pref_window_preview_custom_height * 1.2 * this.scaleFactor);
         Main.uiGroup.add_actor(this.actor);
 
         this.metaWindow = metaWindow;
@@ -140,13 +139,16 @@ WindowPreview.prototype = {
 
     show: function() {
         if (!this.actor || this._applet._menuOpen)
-            return
+            return;
 
         let muffinWindow = this.metaWindow.get_compositor_private();
         let windowTexture = muffinWindow.get_texture();
         let [width, height] = windowTexture.get_size();
+        // the 18 is 16 for the icon size + 2px min padding
+        // this is not foolproof - the font used might be large enough to make the
+        // label bigger than the icon
         let scale = Math.min(1.0, this._applet.pref_window_preview_custom_width / width,
-            this._applet.pref_window_preview_custom_height / height);
+            (this._applet.pref_window_preview_custom_height - 18) / height);
 
         if (this.thumbnail) {
             this.thumbnailBin.set_child(null);
@@ -209,7 +211,7 @@ WindowPreview.prototype = {
         }
         this.actor = null;
     }
-}
+};
 
 function AppMenuButton(applet, metaWindow, alert) {
     this._init(applet, metaWindow, alert);
@@ -290,7 +292,7 @@ AppMenuButton.prototype = {
         this._needsAttention = false;
 
         this.setDisplayTitle();
-        this.onFocus()
+        this.onFocus();
 
         if (this.alert)
             this.getAttention();
@@ -344,7 +346,7 @@ AppMenuButton.prototype = {
             return;
 
         //                   v   home-made xor
-        if ((direction == 0) != this._applet.pref_reverse_scrolling)
+        if ((direction === 0) != this._applet.pref_reverse_scrolling)
             i++;
         else
             i--;
@@ -388,7 +390,7 @@ AppMenuButton.prototype = {
         return this.actor;
     },
 
-    handleDragOver: function(source, actor, x, y, time) {
+    handleDragOver: function(source, actor, x, y, time) { // jshint ignore:line
         if (this._draggable && this._draggable.inhibit)
             return DND.DragMotionResult.MOVE_DROP;
 
@@ -403,7 +405,7 @@ AppMenuButton.prototype = {
         return DND.DragMotionResult.NO_DROP;
     },
 
-    acceptDrop: function(source, actor, x, y, time) {
+    acceptDrop: function(source, actor, x, y, time) { // jshint ignore:line
         return false;
     },
 
@@ -544,13 +546,13 @@ AppMenuButton.prototype = {
     },
 
     _getPreferredWidth: function(actor, forHeight, alloc) {
-        let [minSize, naturalSize] = this._iconBox.get_preferred_width(forHeight);
+        let [minSize, naturalSize] = this._iconBox.get_preferred_width(forHeight); // jshint ignore:line
         // minimum size just enough for icon if we ever get that many apps going
         alloc.min_size = naturalSize + 2 * 3 * global.ui_scale;
 
         if (!this._applet.pref_hide_labels) {
             if (this._applet.pref_buttons_use_entire_space) {
-                let [lminSize, lnaturalSize] = this._label.get_preferred_width(forHeight);
+                let [lminSize, lnaturalSize] = this._label.get_preferred_width(forHeight); // jshint ignore:line
                 alloc.natural_size = Math.max(150 * global.ui_scale,
                     lnaturalSize + naturalSize + 3 * 3 * global.ui_scale);
             } else {
@@ -582,7 +584,7 @@ AppMenuButton.prototype = {
         childBox.y2 = childBox.y1 + Math.min(naturalHeight, allocHeight);
         if (direction == Clutter.TextDirection.LTR) {
             if (allocWidth < naturalWidth + xPadding * 2)
-                childBox.x1 = Math.max(0, (allocWidth - naturalWidth) / 2)
+                childBox.x1 = Math.max(0, (allocWidth - naturalWidth) / 2);
             else
                 childBox.x1 = Math.min(allocWidth, xPadding);
             childBox.x2 = Math.min(childBox.x1 + naturalWidth, allocWidth);
@@ -594,9 +596,6 @@ AppMenuButton.prototype = {
             childBox.x2 = Math.min(childBox.x1 + naturalWidth, allocWidth);
         }
         this._iconBox.allocate(childBox, flags);
-
-        let remX1 = childBox.x2,
-            remX2 = allocWidth;
 
         [minWidth, minHeight, naturalWidth, naturalHeight] = this._label.get_preferred_size();
 
@@ -758,7 +757,7 @@ AppMenuButtonRightClickMenu.prototype = {
                     let j = i;
                     item.menu.addAction(
                         Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i),
-                        function() {
+                        function() { // jshint ignore:line
                             mw.change_workspace(global.screen.get_workspace_by_index(j));
                         });
                 }
@@ -837,6 +836,13 @@ AppMenuButtonRightClickMenu.prototype = {
         }
 
         if (this._launcher._applet.pref_sub_menu_placement !== 0) {
+            item = new PopupMenu.PopupIconMenuItem(_("Help"), "dialog-information",
+                St.IconType.SYMBOLIC);
+            item.connect('activate', Lang.bind(this, function() {
+                Util.spawn_async(["xdg-open", this._launcher._applet.metadata.path + "/HELP.html"]);
+            }));
+            subMenu.menu.addMenuItem(item);
+
             item = new PopupMenu.PopupIconMenuItem(_("About..."), "dialog-question",
                 St.IconType.SYMBOLIC);
             item.connect('activate', Lang.bind(this._launcher._applet,
@@ -851,13 +857,14 @@ AppMenuButtonRightClickMenu.prototype = {
                 if (typeof this._launcher._applet.configureApplet === "function")
                     this._launcher._applet.configureApplet();
                 else
-                    Util.spawnCommandLine("cinnamon-settings applets " +
-                        this._launcher._applet._uuid + " " + this._launcher._applet.instance_id);
+                    Util.spawn_async(["cinnamon-settings", "applets",
+                        this._launcher._applet._uuid, this._launcher._applet.instance_id
+                    ], null);
             })));
             subMenu.menu.addMenuItem(item);
 
             item = new PopupMenu.PopupIconMenuItem(
-                _("Remove '%s'").format(this._launcher._applet._metadata.name),
+                _("Remove '%s'").format(this._launcher._applet.metadata.name),
                 "edit-delete",
                 St.IconType.SYMBOLIC);
             item.connect('activate', Lang.bind(this, function() {
@@ -882,21 +889,22 @@ AppMenuButtonRightClickMenu.prototype = {
     },
 };
 
-function MyApplet(metadata, orientation, panel_height, instance_id) {
-    this._init(metadata, orientation, panel_height, instance_id);
+function MyApplet() {
+    this._init.apply(this, arguments);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.Applet.prototype,
 
-    _init: function(metadata, orientation, panel_height, instance_id) {
-        Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
+    _init: function(aMetadata, aOrientation, aPanel_height, aInstance_id) {
+        Applet.Applet.prototype._init.call(this, aOrientation, aPanel_height, aInstance_id);
 
         this.actor.set_track_hover(false);
         this.actor.add_style_class_name("window-list-box");
 
-        this._metadata = metadata;
-        this.orientation = orientation;
+        this.metadata = aMetadata;
+        this.instance_id = aInstance_id;
+        this.orientation = aOrientation;
         this.dragInProgress = false;
         this._tooltipShowing = false;
         this._tooltipErodeTimer = null;
@@ -905,7 +913,7 @@ MyApplet.prototype = {
         this._windows = [];
         this._monitorWatchList = [];
 
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
+        this.settings = new Settings.AppletSettings(this, aMetadata.uuid, aInstance_id);
         this._bindSettings();
 
         this.signals = new SignalManager.SignalManager(this);
@@ -926,13 +934,19 @@ MyApplet.prototype = {
 
         global.settings.bind("panel-edit-mode", this.actor, "reactive", Gio.SettingsBindFlags.DEFAULT);
 
-        this.on_orientation_changed(orientation);
+        this.on_orientation_changed(aOrientation);
         this._onNWorkspacesChanged();
         this._updateAttentionGrabber();
     },
 
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.IN, "pref_enable_alerts", this._updateAttentionGrabber],
             [bD.IN, "pref_enable_scrolling", this._onEnableScrollChanged],
@@ -1172,7 +1186,7 @@ MyApplet.prototype = {
             this._monitorWatchList.indexOf(metaWindow.get_monitor()) != -1;
     },
 
-    handleDragOver: function(source, actor, x, y, time) {
+    handleDragOver: function(source, actor, x, y, time) { // jshint ignore:line
         if (this._inEditMode)
             return DND.DragMotionResult.MOVE_DROP;
         if (!(source instanceof AppMenuButton))
@@ -1186,7 +1200,7 @@ MyApplet.prototype = {
 
         this._dragPlaceholderPos = pos;
 
-        if (this._dragPlaceholder == undefined) {
+        if (this._dragPlaceholder === undefined) {
             this._dragPlaceholder = new DND.GenericDragPlaceholderItem();
             this._dragPlaceholder.child.set_width(source.actor.width);
             this._dragPlaceholder.child.set_height(source.actor.height);
@@ -1200,9 +1214,11 @@ MyApplet.prototype = {
         return DND.DragMotionResult.MOVE_DROP;
     },
 
-    acceptDrop: function(source, actor, x, y, time) {
-        if (!(source instanceof AppMenuButton)) return false;
-        if (this._dragPlaceholderPos == undefined) return false;
+    acceptDrop: function(source, actor, x, y, time) { // jshint ignore:line
+        if (!(source instanceof AppMenuButton))
+            return false;
+        if (this._dragPlaceholderPos === undefined)
+            return false;
 
         this.actor.move_child(source.actor, this._dragPlaceholderPos);
 
@@ -1238,7 +1254,7 @@ MyApplet.prototype = {
     }
 };
 
-function main(metadata, orientation, panel_height, instance_id) {
-    let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
+function main(aMetadata, aOrientation, aPanel_height, aInstance_id) {
+    let myApplet = new MyApplet(aMetadata, aOrientation, aPanel_height, aInstance_id);
     return myApplet;
 }

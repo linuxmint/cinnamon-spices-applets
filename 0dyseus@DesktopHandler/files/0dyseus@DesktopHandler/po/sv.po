@@ -1,0 +1,557 @@
+# Swedish translation for the 0dyseus@DesktopHandler package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@DesktopHandler package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@DesktopHandler 1.07\n"
+"POT-Creation-Date: 2017-06-03 07:43+0200\n"
+"PO-Revision-Date: 2017-06-03 07:52+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../create_localized_help.py:90
+msgid "The following two sections are available only in English."
+msgstr "Följande två sektioner är endast tillgängliga på Engelska."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+msgid "language-name"
+msgstr "Svenska"
+
+#: ../../create_localized_help.py:190 applet.js:480
+msgid "Help"
+msgstr "Hjälp"
+
+#: ../../create_localized_help.py:191
+msgid "Contributors"
+msgstr "Medhjälpare"
+
+#: ../../create_localized_help.py:192
+msgid "Changelog"
+msgstr "Ändringslogg"
+
+#: ../../create_localized_help.py:193
+msgid "Choose language"
+msgstr "Välj språk"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#, python-format
+msgid "Help for %s"
+msgstr "Hjälp för %s"
+
+#: ../../create_localized_help.py:202
+msgid "IMPORTANT!!!"
+msgstr "VIKTIGT!!!"
+
+#: ../../create_localized_help.py:203
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
+"programmets funktioner."
+
+#: ../../create_localized_help.py:204
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
+"kodförråd, på följande länk."
+
+#: ../../create_localized_help.py:210
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Applets/Desklets/Extensions (xlets) översättning"
+
+#: ../../create_localized_help.py:211
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Om denna xlet installerades från Cinnamons inställningar, installerades "
+"också alla översättningar automatiskt."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:213
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
+"kan översättningar installeras genom att köra skriptet **localizations.sh** "
+"från en terminal öppnad i programmappen."
+
+#: ../../create_localized_help.py:214
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
+"följande instruktioner."
+
+#: applet.js:244 applet.js:357
+msgid "Close window"
+msgstr "Stäng fönstret"
+
+#: applet.js:298
+msgid "Close all windows from this wrokspace"
+msgstr "Stäng alla fönster på arbetsytan"
+
+#: applet.js:403
+msgid "No open windows"
+msgstr "Inga öppna fönster"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:416 applet.js:698
+msgid "Expo"
+msgstr "Expo"
+
+#: applet.js:424
+msgid "Close all windows from all workspaces"
+msgstr "Stäng alla fönster på alla arbetsytor"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:491
+msgid "About..."
+msgstr "Om..."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:501
+msgid "Configure..."
+msgstr "Konfigurera..."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:515
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Ta bort \"%s\""
+
+#: applet.js:524
+#, javascript-format
+msgid "Are you sure that you want to remove '%s' from your panel?"
+msgstr "Vill du verkligen ta bort \"%s\" från panelen?"
+
+#: applet.js:526
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: applet.js:526
+msgid "OK"
+msgstr "OK"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:699
+msgid "Overview"
+msgstr "Översikt"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:700
+msgid "Launch App Switcher"
+msgstr "Starta programväxlaren"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:701
+msgid "Run 1st Custom Command"
+msgstr "Kör 1:a anpassade kommandot"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:702
+msgid "Run 2nd Custom Command"
+msgstr "Kör 2:a anpassade kommandot"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:703
+msgid "Run 3rd Custom Command"
+msgstr "Kör 3:e anpassade kommandot"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:704
+msgid "Run 4rd Custom Command"
+msgstr "Kör 4:e anpassade kommandot"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#: applet.js:705
+msgid "None"
+msgstr "Ingen"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:706
+msgid "Icons only"
+msgstr "Endast ikoner"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:707
+msgid "Thumbnails only"
+msgstr "Endast miniatyrer"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:708
+msgid "Icons and thumbnails"
+msgstr "Ikoner och miniatyrer"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:709
+msgid "Icons and window preview"
+msgstr "Ikoner och förhandsvisning"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:710
+msgid "Window preview (no icons)"
+msgstr "Förhandsvisning (inga ikoner)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:711
+msgid "Coverflow (3D)"
+msgstr "Omslagsflöde (3D)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:712
+msgid "Timeline (3D)"
+msgstr "Tidslinje (3D)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:713
+msgid "System default"
+msgstr "Systemstandard"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:714
+msgid "Switch between workspaces"
+msgstr "Växla mellan arbetsytor"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:715
+msgid "Adjust opacity of windows"
+msgstr "Justera fönsteropacitet"
+
+#: applet.js:716
+msgid "Toggle show desktop"
+msgstr "Visa/Dölj skrivbordet"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: applet.js:717
+msgid "Switch between windows"
+msgstr "Växla mellan fönster"
+
+#: applet.js:718
+msgid "Open windows list menu"
+msgstr "Öppna fönsterlista"
+
+#. 0dyseus@DesktopHandler->metadata.json->name
+#: applet.js:732
+msgid "Desktop Handler"
+msgstr "Skrivbordshanterare"
+
+#: applet.js:735
+msgid "Scroll Up"
+msgstr "Skrolla upp"
+
+#: applet.js:736
+msgid "Scroll Down"
+msgstr "Skrolla ner"
+
+#: applet.js:738
+msgid "Scroll"
+msgstr "Skrolla"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:745
+msgid "Left click"
+msgstr "Vänsterklick"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:751
+msgid "Middle click"
+msgstr "Mushjulsklick"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:755
+msgid "Right click"
+msgstr "Högerklick"
+
+#. 0dyseus@DesktopHandler->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Se hjälpfilen för denna xlet."
+
+#. 0dyseus@DesktopHandler->metadata.json->description
+msgid "Various shortcuts to handle desktop actions."
+msgstr "Diverse genvägar för att hantera skrivbordsåtgärder."
+
+#. 0dyseus@DesktopHandler->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
+"kodförråd, på nedanstående länk."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->tooltip
+msgid ""
+"I mainly added this so it's easy to see the applet the first time is placed "
+"in a panel."
+msgstr ""
+"Jag lade till det här, huvudsakligen för att det är enkelt att se programmet "
+"första gången det placeras i panelen."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->description
+msgid "Background color for the applet:"
+msgstr "Panelprogrammets bakgrundsfärg: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr "Anpassa ikonen för panelprogrammet."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->description
+msgid "Icon for Applet (Leave blank to remove icon):"
+msgstr "Ikon för panelprogrammet (Lämnas tom för att ta bort ikonen):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->description
+msgid "Action on applet left click: "
+msgstr "Åtgärd vid vänsterklick på panelikonen: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+msgid "Toggle Show desktop"
+msgstr "Visa skrivbordet"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd1_action->description
+msgid "1st Custom Command:"
+msgstr "1:a anpassade kommandot:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_about->description
+msgid "Show \"About...\""
+msgstr "Visa \"Om...\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head0->description
+msgid "Applet options: "
+msgstr "Alternativ för panelprogrammet: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd3_action->description
+msgid "3rd Custom Command:"
+msgstr "3:e anpassade kommandot:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_separated_scroll_action->description
+msgid "Independent actions for scrolling up and down"
+msgstr "Oberoende åtgärder för att skrolla upp och ner"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->description
+msgid "Action on scrolling down: "
+msgstr "Åtgärd vid skrollning neråt: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_all_buttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr "Visa \"Stäng alla fönster\" för arbetsytor"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->units
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->description
+msgid "Minimum delay between scrolls:"
+msgstr "Minsta fördröjning mellan scrollningar:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->description
+msgid "App switcher style: "
+msgstr "Stil på programväxlare: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_default_items->description
+msgid "Show context menu default items on right click"
+msgstr "Visa standardobjekt i kontextmenyn vid högerklick"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_help->description
+msgid "Show \"Help\""
+msgstr "Visa \"Hjälp\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_buttons->description
+msgid "Show close buttons on windows list"
+msgstr "Visa stängknappar i fönsterlistan"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_opacity->description
+msgid "Level of opacity:"
+msgstr "Opacitetsnivå:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head3->description
+msgid "Windows menu options"
+msgstr "Alternativ för fönstermeny"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->description
+msgid "Action on applet middle click: "
+msgstr "Åtgärd vid mushjulsklick på panelikonen: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "Ta en titt på ditt skrivbord och dina skrivbordsprogram"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->description
+msgid "Opacify windows on hover (a.k.a. desktop peek)"
+msgstr "Semitransparenta fönster vid hovring (förhandsgranskning av skrivbord)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->description
+msgid "When a modifier key is pressed, switch between windows from: "
+msgstr "När en modifieringstangent hålls ner, växla mellan fönster från: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+msgid "Current Application"
+msgstr "Aktuellt program"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+msgid "All workspaces"
+msgstr "Alla arbetsytor"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+msgid "Current workspace"
+msgstr "Aktuell arbetsyta"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd2_action->description
+msgid "2nd Custom Command:"
+msgstr "2:a anpassade kommandot:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desklets->description
+msgid "Opacify desklets"
+msgstr "Semitransparenta skrivbordsprogram"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->description
+msgid "Switch between windows from: "
+msgstr "Växla mellan fönster från: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->description
+msgid "Mouse button to open menu (It will override mouse click actions):"
+msgstr "Musknapp för att öppna menyn (det åsidosätter andra klickåtgärder):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head6->description
+msgid "App Switcher Settings: "
+msgstr "Inställningar för programväxlare: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head5->description
+msgid "Custom Commands: "
+msgstr "Anpassade kommandon: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_configure->description
+msgid "Show \"Configure...\""
+msgstr "Visa \"Konfigurera...\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head1->description
+msgid "Mouse scroll options: "
+msgstr "Skrollalternativ: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_keep_menu_open->description
+msgid "Keep menu open while closing windows"
+msgstr "Behåll menyn öppen medan fönster stängs"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->description
+msgid "Modifier key: "
+msgstr "Modifieringstangent: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Shift"
+msgstr "Shift"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->description
+msgid "Action on scrolling: "
+msgstr "Åtgärd vid skrollning: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_windows_list_menu_enabled->description
+msgid "Enable Windows list menu"
+msgstr "Aktivera fönsterlista"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head4->description
+msgid "Peek at desktop options:"
+msgstr "Alternativ för förhandsgranskning av skrivbordet:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->description
+msgid "Action on scrolling up: "
+msgstr "Åtgärd vid skrollning uppåt: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_prevent_fast_scroll->description
+msgid "Prevent accidental workspace/window switching on rapid scrolling"
+msgstr "Förhindra oavsiktlig växling av arbetsyta/fönster vid snabb skrollning"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_remove->description
+msgid "Show \"Remove this applet\""
+msgstr "Visa \"Ta bort det här panelprogrammet\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desktop_icons->description
+msgid "Opacify the icons on the desktop"
+msgstr "Semitransparenta ikoner på skrivbordet"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->description
+msgid "Applet custom width (Set to 0 (zero) to not set a width):"
+msgstr "Anpassad bredd på panelprogrammet (0 för ingen anpassning):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head2->description
+msgid "Mouse click options: "
+msgstr "Musklicksalternativ: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd4_action->description
+msgid "4rd Custom Command:"
+msgstr "4:e anpassade kommandot:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_blur_effect_enabled->description
+msgid "Blur windows on hover"
+msgstr "Gör fönster otydliga vid hovring"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->description
+msgid "Peek desktop trigger delay:"
+msgstr "Fördröjning vid förhandsgranskning av skrivbordet:"
+
+#~ msgid "muzena: Croatian localization."
+#~ msgstr "muzena: Kroatisk översättning."
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Kinesisk översättning."

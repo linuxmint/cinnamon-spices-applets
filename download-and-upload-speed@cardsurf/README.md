@@ -1,8 +1,6 @@
 # Download and upload speed
 An applet that shows usage of a network interface for Linux Mint Cinnamon
 
-![Alt text](../master/screenshots/compact.png "Download and upload speed")
-
 ## Features
 * Shows current download and upload speed
 * Shows a hover popup with total amount of data downloaded and uploaded

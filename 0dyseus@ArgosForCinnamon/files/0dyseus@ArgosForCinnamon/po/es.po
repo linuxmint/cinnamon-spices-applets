@@ -1,0 +1,1586 @@
+# This is a template file for translating the Cinnamon applet called Argos for Cinnamon.
+# Copyright (C) 2017
+# This file is distributed under the same license as the Argos for Cinnamon applet.
+# Odyseus <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.00\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-04 15:58-0300\n"
+"PO-Revision-Date: 2017-06-04 16:00-0300\n"
+"Last-Translator: Odyseus\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../../create_localized_help.py:64 ../../create_localized_help.py:162
+#: ../../create_localized_help.py:228 ../../create_localized_help.py:247
+msgid "Description"
+msgstr "Descripción"
+
+#: ../../create_localized_help.py:65
+msgid ""
+"Argos for Cinnamon is an applet that turns executables' standard output into "
+"panel dropdown menus. It is inspired by, and fully compatible with, the "
+"Gnome Shell extension called [Argos](https://github.com/p-e-w/argos) by "
+"[Philipp Emanuel Weidmann](https://github.com/p-e-w), which in turn is "
+"inspired by, and fully compatible with, the [BitBar](https://github.com/"
+"matryer/bitbar) application for macOS. Argos for Cinnamon supports many "
+"[BitBar plugins](https://github.com/matryer/bitbar-plugins) without "
+"modifications, giving you access to a large library of well-tested scripts "
+"in addition to being able to write your own."
+msgstr ""
+"Argos para Cinnamon es un applet que convierte la salida estándar de "
+"archivos de comando en menúes desplegables del panel.  Está inspirado y es "
+"totalmente compatible con la extensión para Gnome Shell llamada [Argos]"
+"(https://github.com/pew/argos) por [Philipp Emanuel Weidmann](https://github."
+"com/pew), que  a su vez está inspirada y es totalmente compatible con la "
+"aplicación [BitBar](https://github.com/matryer/bitbar) para macOS.  Argos "
+"para Cinnamon soporta muchos [complementos de BitBar](https://github.com/"
+"matryer/bitbar-plugins) sin modificaciones, lo que le da acceso a una gran "
+"biblioteca de archivos de comandos bien probados, además de ser capaz de "
+"escribir el suyo propio."
+
+#: ../../create_localized_help.py:67
+msgid ""
+"I will use the words *plugin* or *script* when referring to a script file "
+"associated with an instance on **Argos for Cinnamon** applet."
+msgstr ""
+"Voy a usar las palabras *complemento* o *archivo de comandos* cuando me "
+"refiera a un archivo de comandos asociado a una instancia del applet **Argos "
+"para Cinnamon**."
+
+#: ../../create_localized_help.py:72
+msgid "Key features"
+msgstr "Características principales"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:75
+msgid ""
+"**100% API compatible with BitBar 1.9.2:** All BitBar plugins that run on "
+"Linux (i.e. do not contain macOS-specific code) will work with Argos (else "
+"it's a bug)."
+msgstr ""
+"**100% API compatible con BitBar 1.9.2:** Todos los complementos para BitBar "
+"que corren en Linux (por ejemplo, que no contienen código específico de "
+"macOS) van a funcionar con Argos (si no funcionan, es un error en Argos)."
+
+#: ../../create_localized_help.py:76
+msgid "See **BitBar plugins with Argos for Cinnamon**."
+msgstr "Ver **Complementos de BitBar con Argos para Cinnamon**."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:78
+msgid ""
+"**Beyond BitBar:** Argos can do everything that BitBar can do, but also some "
+"things that BitBar can't do (yet). See the documentation for details."
+msgstr ""
+"**Más allá de BitBar:** Argos puede hacer todo lo que BitBar puede hacer, "
+"pero también algunas cosas que BitBar no puede hacer (todavía). Continuar "
+"leyendo esta documentación para más detalles."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:80
+msgid ""
+"**Sophisticated asynchronous execution engine:** No matter how long your "
+"scripts take to run, Argos will schedule them intelligently and prevent "
+"blocking."
+msgstr ""
+"**Motor de ejecución asincrónica sofisticado:** No importa cuánto tiempo "
+"tomen sus archivos de comandos en ejecutarse, Argos las programará "
+"inteligentemente y evitará el bloqueo."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:84
+msgid ""
+"**Unicode support:** Just print your text to stdout. It will be rendered the "
+"way you expect."
+msgstr ""
+"**Soporte Unicode:** Sólo imprima su texto en stdout.  Se traducirá de la "
+"manera que usted espera."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:86
+msgid ""
+"**Optimized for minimum resource consumption:** Even with multiple plugins "
+"refreshing every second, Argos typically uses less than 1 percent of the CPU."
+msgstr ""
+"**Optimizado para el consumo mínimo de recursos:** Incluso con varios "
+"complementos actualizando cada segundo, Argos normalmente usa menos del 1 "
+"por ciento de la CPU."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:88
+msgid "**Fully documented:**"
+msgstr "**Totalmente documentado:**"
+
+#: ../../create_localized_help.py:88
+msgid "See **Usage**."
+msgstr "Ver **Uso del applet**."
+
+#: ../../create_localized_help.py:91
+msgid "Dependencies"
+msgstr "Dependencias"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:93
+msgid "xdg-open command"
+msgstr "Comando xdg-open"
+
+#: ../../create_localized_help.py:95
+msgid "Debian and Archlinux based distributions:"
+msgstr "Distribuciones basadas en Debian y Archlinux:"
+
+#: ../../create_localized_help.py:96
+msgid "This command is installed with the package called **xdg-utils**."
+msgstr ""
+"Distribuciones basadas en Debian y Archlinux: Este comando es instalado por "
+"el paquete llamado **xdg-utils**."
+
+#: ../../create_localized_help.py:97
+msgid "Installed by default in modern versions of Linux Mint."
+msgstr "Instalado por defecto en todas las versiones modernas de Linux Mint."
+
+#: ../../create_localized_help.py:100
+msgid "Usage"
+msgstr "Uso del applet"
+
+#: ../../create_localized_help.py:102
+msgid ""
+"After placing a new instance of **Argos for Cinnamon** into a panel, one of "
+"the example scripts provided by this applet will be automatically attached "
+"to it and a menu will be created based on the output of the executed plugin. "
+"These example scripts contain various examples of what **Argos for "
+"Cinnamon** can do."
+msgstr ""
+"Después de colocar una nueva instancia de **Argos para Cinnamon** en un "
+"panel, uno de los archivos de comandos de ejemplo proporcionados por este "
+"applet se adjuntará automáticamente a él y se creará un menú basado en la "
+"salida del complemento ejecutado.  Estos archivos de comandos de ejemplo "
+"contienen varios ejemplos de lo que **Argos para Cinnamon** es capaz de "
+"hacer."
+
+#: ../../create_localized_help.py:104
+msgid ""
+"A just placed applet will have an initial execution interval of 0 seconds "
+"(zero seconds) and an initial applet text rotation interval of 3 seconds "
+"(three seconds). The execution interval is set to 0 seconds because the "
+"initial example script doesn't have any dynamic data that requires update. "
+"And the applet text rotation interval is set to 3 seconds so the text "
+"rotation of the example script can be seen in action."
+msgstr ""
+"Un applet recién colocado tendrá un intervalo de ejecución inicial de 0 "
+"segundos (cero segundos) y un intervalo inicial de rotación de texto de "
+"applet de 3 segundos (tres segundos).  El intervalo de ejecución se "
+"establece en 0 segundos porque la secuencia de comandos de ejemplo inicial "
+"no tiene ningún dato dinámico que requiera actualización.  Y el intervalo de "
+"rotación de texto de applet se establece en 3 segundos para que la rotación "
+"de texto del archivo de comandos de ejemplo se pueda ver en acción."
+
+#: ../../create_localized_help.py:106
+msgid ""
+"For scripts that display non dynamic data, it isn't needed an execution "
+"interval. But if your script displays dynamic data (a clock for example), "
+"then an execution and/or applet text rotation interval needs to be "
+"specified. Both of these values can be set from the applet context menu."
+msgstr ""
+"Para los archivos de comandos que muestran datos no dinámicos, no se "
+"necesita un intervalo de ejecución.  Pero si su archivo de comandos muestra "
+"datos dinámicos (un reloj por ejemplo), entonces se debe especificar un "
+"intervalo de ejecución y/o de rotación de texto del  applet.  Ambos valores "
+"se pueden establecer desde el menú contextual del applet."
+
+#: ../../create_localized_help.py:109
+msgid ""
+"The three example scripts provided by this applet will produce the exact "
+"same output, but they are created using three different languages "
+"(**bash_examples.sh**, **python_examples.py** and **ruby_examples.rb**)."
+msgstr ""
+"Los tres archivos de comandos de ejemplo proporcionados por este applet "
+"producirán exactamente la misma salida, pero se crean utilizando tres "
+"idiomas diferentes (**bash_examples.sh**, **python_examples.py** y "
+"**ruby_examples.rb**)."
+
+#: ../../create_localized_help.py:114
+msgid ""
+"Never save your custom plugins/scripts inside this applet folder. Otherwise, "
+"you will loose them all when there is an update for the applet."
+msgstr ""
+"Nunca guarde sus complementos/archivos de comandos personalizados dentro de "
+"la carpeta de este applet.  De lo contrario, los perderá todos cuando haya "
+"una actualización para el applet."
+
+#: ../../create_localized_help.py:117
+msgid "File name format"
+msgstr "Formato del nombre de archivo"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:119
+msgid ""
+"**Argos for Gnome Shell** parses the script's file name to extract certain "
+"set of preferences. **Argos for Cinnamon** doesn't parse the script's file "
+"name in such way (nor in any other way). All the applet settings can be set "
+"from the applet settings window and/or from the applet context menu."
+msgstr ""
+"**Argos para Gnome Shell** analiza el nombre de archivo de los archivos de "
+"comandos para extraer cierto conjunto de preferencias.  **Argos para "
+"Cinnamon** no analiza el nombre de los archivos de comandos de tal manera "
+"(ni de ninguna otra manera).  Todas las configuraciones del applet se pueden "
+"realizar desde la ventana de configuración del applet y/o desde el menú "
+"contextual del applet."
+
+#: ../../create_localized_help.py:120
+msgid "Output format"
+msgstr "Formato de salida"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:122
+msgid ""
+"Argos plugins are executables (such as shell scripts **(*)**) that print to "
+"standard output lines of the following form:"
+msgstr ""
+"Los complementos de Argos son ejecutables (como archivos de comandos de "
+"shell **(*)**) que imprimen líneas de salida estándar de la siguiente forma:"
+
+#: ../../create_localized_help.py:127
+msgid ""
+"All attributes are optional, so the most basic plugins simply print lines "
+"consisting of text to be displayed. To include whitespace, attribute values "
+"may be quoted using the same convention employed by most command line shells."
+msgstr ""
+"Todos los atributos son opcionales, por lo que los complementos más básicos "
+"simplemente imprimen líneas que consisten en texto que se mostrará.  Para "
+"incluir espacios en blanco, los valores de atributo se pueden citar "
+"utilizando la misma convención empleada por la mayoría de los shells de "
+"línea de comandos."
+
+#: ../../create_localized_help.py:131
+msgid ""
+"(*) Not just shell scripts, but also python scripts, ruby scripts or any "
+"other script in any other language that can print to standard output."
+msgstr ""
+"(*) No sólo archivos de comandos shell, sino también archivos de comandos "
+"python, archivos de comandos ruby ​​o cualquier otro archivos de comandos en "
+"cualquier otro idioma que pueda imprimir a salida estándar."
+
+#: ../../create_localized_help.py:134
+msgid "Rendering"
+msgstr "Representación"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:137
+msgid "Lines containing only dashes (`---`) are *separators*."
+msgstr "Las líneas que contienen sólo guiones (`---`) son *separadores*."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:140
+msgid ""
+"Lines above the first separator belong to the applet button itself. If there "
+"are multiple such lines, they are displayed in succession, each of them for "
+"a configurable amount of time (rotation interval) before switching to the "
+"next. Additionally, all button lines get a dropdown menu item, except if "
+"their `dropdown` attribute is set to `false`."
+msgstr ""
+"Las líneas sobre el primer separador pertenecen al propio botón del applet.  "
+"Si hay varias líneas de este tipo, se muestran sucesivamente, cada una de "
+"ellas durante un intervalo de tiempo configurable (intervalo de rotación) "
+"antes de pasar a la siguiente.  Además, todas las líneas de botones obtienen "
+"un elemento de menú desplegable, excepto si su atributo `dropdown` está "
+"establecido en `false`."
+
+#: ../../create_localized_help.py:142
+msgid ""
+"Lines below the first separator are rendered as dropdown menu items. Further "
+"separators create graphical separator menu items."
+msgstr ""
+"Las líneas debajo del primer separador se representan como elementos del "
+"menú desplegable.  Otros separadores crean separadores gráficos de elementos "
+"del menú."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:145
+msgid ""
+"Lines beginning with `--` are rendered in a submenu associated with the "
+"preceding unindented line. **Argos for Cinnamon** supports unlimited number "
+"of nested submenus."
+msgstr ""
+"Las líneas que comienzan con `--` son representadas como un submenú asociado "
+"con la línea sin sangría precedente.  **Argos para Cinnamon** soporta un "
+"número ilimitado de submenús anidados."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:148
+msgid ""
+"[Emoji codes](http://www.emoji-cheat-sheet.com) like `:horse:` and `:smile:` "
+"in the line text are replaced with their corresponding Unicode characters "
+"(unless the `emojize` attribute is set to `false`). Note that unpatched "
+"Cinnamon does not yet support multicolor emoji."
+msgstr ""
+"[Códigos emoji](http://www.emoji-cheat-sheet.com) como `:horse:` y `:smile:` "
+"en el texto de línea se sustituyen por sus caracteres Unicode "
+"correspondientes (a menos que el atributo `emojize` sea  establecido en "
+"`false`).  Tener en cuenta que Cinnamon \"sin parchear\" todavía no soporta "
+"emojis multicolor."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:151
+msgid ""
+"[ANSI SGR escape sequences](https://en.wikipedia.org/wiki/"
+"ANSI_escape_code#graphics) and [Pango markup](https://developer.gnome.org/"
+"pango/stable/PangoMarkupFormat.html) tags may be used for styling. This can "
+"be disabled by setting the `ansi` and `useMarkup` attributes, respectively, "
+"to `false`."
+msgstr ""
+"[Secuencias de escape ANSI SGR](https://en.wikipedia.org/wiki/"
+"ANSI_escape_code#graphics) y [etiquetas de marcado Pango](https://developer."
+"gnome.org/pango/stable/PangoMarkupFormat.html) pueden ser utilizadas para "
+"darle estilo al texto.  Esto puede desactivarse estableciendo los atributos "
+"`ansi` y `useMarkup`, respectivamente, en `false`."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:154
+msgid ""
+"Backslash escapes such as `\\n` and `\\t` in the line text are converted to "
+"their corresponding characters (newline and tab in this case), which can be "
+"prevented by setting the `unescape` attribute to `false`. Newline escapes "
+"can be used to create multi-line menu items."
+msgstr ""
+"Los escapes de barra invertida como `\\n` y ` \\t` en el texto de línea se "
+"convierten a sus caracteres correspondientes (nueva línea y tabulador en "
+"este caso), lo que puede evitarse si se establece el atributo `unescape` en "
+"`false`.  Las salidas de nueva línea se pueden utilizar para crear elementos "
+"de menú de varias líneas."
+
+#: ../../create_localized_help.py:157
+msgid "Line attributes"
+msgstr "Atributos de línea"
+
+#: ../../create_localized_help.py:159
+msgid "Display"
+msgstr "Visualización"
+
+#: ../../create_localized_help.py:160
+msgid "Control how the line is rendered."
+msgstr "Controla cómo se representa la línea."
+
+#: ../../create_localized_help.py:162 ../../create_localized_help.py:228
+#: ../../create_localized_help.py:247
+msgid "Attribute"
+msgstr "Atributo"
+
+#: ../../create_localized_help.py:162 ../../create_localized_help.py:228
+#: ../../create_localized_help.py:247
+msgid "Value"
+msgstr "Valor"
+
+#: ../../create_localized_help.py:164
+msgid "Hex RGB/RGBA or color name"
+msgstr "Representación hexadecimal RGB/RGBA o nombre de color"
+
+#: ../../create_localized_help.py:165
+msgid "Sets the text color for the item."
+msgstr "Establece el color de texto para el ítem."
+
+#: ../../create_localized_help.py:166
+msgid "Font name"
+msgstr "Nombre de fuente"
+
+#: ../../create_localized_help.py:166
+msgid "Sets the font for the item."
+msgstr "Establece la fuente para el ítem."
+
+#: ../../create_localized_help.py:167
+msgid "Font size in points"
+msgstr "Tamaño de fuente en puntos (points)."
+
+#: ../../create_localized_help.py:168
+msgid "Sets the font size for the item."
+msgstr "Establece el tamaño de fuente para el ítem."
+
+#: ../../create_localized_help.py:169
+msgid "Icon name"
+msgstr "Nombre de ícono"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:171
+msgid ""
+"Sets a menu icon for the item. See the [freedesktop.org icon naming "
+"specification](https://specifications.freedesktop.org/icon-naming-spec/icon-"
+"naming-spec-latest.html) for a list of valid names. **Argos only.** **Argos "
+"for Cinnamon** also supports a path to an icon file (paths starting with `~/"
+"` will be expanded to the user's home folder)."
+msgstr ""
+"Establece un ícono para el elemento de menú.  Consulte la [especificación de "
+"nombres del icono en freedesktop.org](https://specifications.freedesktop.org/"
+"icon-naming-spec/icon-naming-spec-latest.html) para obtener una lista de "
+"nombres válidos.  **Argos only.** **Argos para Cinnamon** también soporta "
+"una ruta a un archivo de ìcono (las rutas que comienzan con `~ /` se "
+"expandirán a la carpeta del usuario)."
+
+#: ../../create_localized_help.py:172
+msgid "Base64-encoded image file"
+msgstr "Archivo de imagen codificado en Base-64"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect
+#. formatting.
+#: ../../create_localized_help.py:175
+msgid ""
+"Renders an image inside the item. The image is positioned to the left of the "
+"text and to the right of the icon. Cinnamon does not have a concept of "
+"*template images*, so `image` and `templateImage` are interchangeable in "
+"Argos."
+msgstr ""
+"Procesa una imagen dentro del elemento.  La imagen se coloca a la izquierda "
+"del texto y a la derecha del icono.  Cinnamon no tiene un concepto de "
+"*plantilla de imágenes*, por lo que `image` y ` templateImage` son "
+"intercambiables en Argos."
+
+#: ../../create_localized_help.py:176
+msgid "Width/height in pixels"
+msgstr "Ancho/Altura en píxeles"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect
+#. formatting.
+#: ../../create_localized_help.py:179
+msgid ""
+"Sets the dimensions of the image. If only one dimension is specified, the "
+"image's original aspect ratio is maintained. **Argos only.**"
+msgstr ""
+"Establece las dimensiones de la imagen.  Si sólo se especifica una "
+"dimensión, se mantiene la relación de aspecto original de la imagen.  "
+"**Argos solamente.**"
+
+#: ../../create_localized_help.py:180
+msgid "Length in characters"
+msgstr "Longitud en caracteres"
+
+#: ../../create_localized_help.py:181
+msgid ""
+"Truncate the line text to the specified number of characters, ellipsizing "
+"the truncated part."
+msgstr ""
+"Truncar el texto de línea al número especificado de caracteres, elipsando la "
+"parte truncada."
+
+#. TO TRANSLATORS: Conjunction used as follows:
+#. "true or false"
+#: ../../create_localized_help.py:185 ../../create_localized_help.py:191
+#: ../../create_localized_help.py:197 ../../create_localized_help.py:203
+#: ../../create_localized_help.py:209 ../../create_localized_help.py:215
+#: ../../create_localized_help.py:221 ../../create_localized_help.py:238
+#: ../../create_localized_help.py:254 ../../create_localized_help.py:269
+msgid "or"
+msgstr "o"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:187
+msgid "If `false`, preserve leading and trailing whitespace of the line text."
+msgstr ""
+"Si `false`, conserva los espacios en blanco al inicio y al final de la línea "
+"de texto."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:193
+msgid ""
+"If `false` and the line is a button line (see above), exclude it from being "
+"displayed in the dropdown menu."
+msgstr ""
+"Si `false` y la línea es una línea para el botón (ver arriba), excluya que "
+"se muestre en el menú desplegable."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:199
+msgid ""
+"If `true`, the item is hidden by default, and shown in place of the "
+"preceding item when the [[Alt]] key is pressed."
+msgstr ""
+"Si `true`, el elemento se oculta de forma predeterminada y se muestra en "
+"lugar del elemento anterior cuando se pulsa la tecla [[Alt]]."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:205
+msgid ""
+"If `false`, disable substitution of `:emoji_name:` with emoji characters in "
+"the line text."
+msgstr ""
+"Si `false`, deshabilita la sustitución de `:emoji_name:` con caracteres "
+"emoji en el texto de línea."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:211
+msgid ""
+"If `false`, disable interpretation of ANSI escape sequences in the line text."
+msgstr ""
+"Si `false`, desactivar la interpretación de las secuencias de escape ANSI en "
+"el texto de línea."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:217
+msgid ""
+"If `false`, disable interpretation of Pango markup in the line text. **Argos "
+"only.**"
+msgstr ""
+"Si `false`, deshabilita la interpretación del marcado de Pango en el texto "
+"de línea.  **Argos solamente.**"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:223
+msgid ""
+"If `false`, disable interpretation of backslash escapes such as `\\n` in the "
+"line text. **Argos only.**"
+msgstr ""
+"Si `false`, deshabilitar la interpretación de los escapes de barra invertida "
+"como `\\n` en el texto de línea.  **Argos solamente.**"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:226
+msgid "Attributes available on **Argos for Cinnamon** only."
+msgstr "Atributos disponibles en **Argos para Cinnamon** solamente."
+
+#: ../../create_localized_help.py:230
+msgid "Text to display as toolip"
+msgstr "Texto a mostrar como información sobre herramientas"
+
+#: ../../create_localized_help.py:231
+msgid "Sets the tooltip for the item."
+msgstr "Establece la información de herramientas para el elemento."
+
+#: ../../create_localized_help.py:232
+msgid "An integer from 12 to 512"
+msgstr "Un número entero de 12 a 512"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:234
+msgid "Sets the size for the item's `iconName`."
+msgstr "Establece el tamaño del ícono `iconName` del elemento."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:240
+msgid ""
+"If `true`, the symbolic version of `iconName` will be used on the item (if "
+"exists)."
+msgstr ""
+"Si `true`, la versión simbólica de `iconName` se utilizará en el elemento "
+"(si existe)."
+
+#: ../../create_localized_help.py:241
+msgid "Actions"
+msgstr "Acciones"
+
+#: ../../create_localized_help.py:242
+msgid ""
+"Define actions to be performed when the user clicks on the line's menu item."
+msgstr ""
+"Defina las acciones a realizar cuando el usuario hace clic en el elemento de "
+"menú de la línea."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:245
+msgid ""
+"Action attributes are *not* mutually exclusive. Any combination of them may "
+"be associated with the same item, and all actions are executed when the item "
+"is clicked."
+msgstr ""
+"Los atributos de acción no son mutuamente exclusivos.  Cualquier combinación "
+"de ellos puede estar asociada con el mismo elemento, y todas las acciones se "
+"ejecutan cuando se hace clic en el elemento."
+
+#: ../../create_localized_help.py:249
+msgid "Bash command"
+msgstr "Comando Bash"
+
+#: ../../create_localized_help.py:250
+msgid "Runs a command using `bash` inside any terminal emulator window."
+msgstr ""
+"Ejecuta un comando usando `bash` dentro de cualquier ventana de emulador de "
+"terminal."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:256
+msgid ""
+"If `false`, runs the Bash command in the background (i.e. without opening a "
+"terminal window)."
+msgstr ""
+"Si `false`, ejecuta el comando Bash en el fondo (es decir, sin abrir una "
+"ventana de terminal)."
+
+#: ../../create_localized_help.py:257
+msgid "Command line arguments"
+msgstr "Argumentos de la línea de comandos"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect
+#. formatting.
+#: ../../create_localized_help.py:260
+msgid ""
+"Arguments to be passed to the Bash command. *Note: Provided for "
+"compatibility with BitBar only. Argos allows placing arguments directly in "
+"the command string.*"
+msgstr ""
+"Argumentos que se deben pasar al comando Bash.  *Nota: Sólo para "
+"compatibilidad con BitBar.  Argos permite colocar argumentos directamente en "
+"la cadena de comandos.*"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:262
+msgid ""
+"Opens a URI in the application registered to handle it. URIs starting with "
+"`http://` launch the web browser, while `file://` URIs open the file in its "
+"associated default application. **Argos for Cinnamon** also supports paths "
+"starting with `~/` that will be automatically expanded to the user's home "
+"folder."
+msgstr ""
+"Abre una URI en la aplicación registrada para manejarla.  Las URIs que "
+"empiezan con `http: //` lanzan el navegador web, mientras que las URIs que "
+"empiezan con `file: //` abren el archivo con su aplicación predeterminada "
+"asociada.  **Argos for Cinnamon** también admite rutas que comienzan con `~ /"
+"` que se expandirán automáticamente a la carpeta del usuario."
+
+#: ../../create_localized_help.py:263
+msgid "JavaScript code"
+msgstr "Código JavaScript"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:265
+msgid "Passes the code to JavaScript's `eval` function. **Argos only.**"
+msgstr "Pasa el código a la función JavaScript `eval`.  **Argos solamente.**"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:271
+msgid "If `true`, re-runs the plugin, updating its output."
+msgstr "Si `true`, vuelve a ejecutar el complemento, actualizando su salida."
+
+#: ../../create_localized_help.py:273
+msgid "BitBar plugins with Argos for Cinnamon"
+msgstr "Complementos de BitBar con Argos para Cinnamon"
+
+#: ../../create_localized_help.py:276
+msgid "WARNING!!! DO NOT RANDOMLY TEST SCRIPTS!!!"
+msgstr ""
+"¡¡¡ADVERTENCIA!!!  ¡NO REALIZAR PRUEBAS ALEATORIAS CON ARCHIVOS DE COMANDOS!"
+
+#: ../../create_localized_help.py:278
+msgid ""
+"1. Apply common sense. Read and understand what a script does and how "
+"demanding it could be."
+msgstr ""
+"1. Aplicar sentido común.  Leer y entender lo que hace un archivo de "
+"comandos y lo exigente que podría ser."
+
+#: ../../create_localized_help.py:280
+msgid ""
+"2. Test unknown scripts on an environment from which you can recover easily "
+"(for example, a virtual machine)."
+msgstr ""
+"2. Probar archivos de comandos desconocidos en un entorno desde el que pueda "
+"recuperarse fácilmente (como por ejemplo, una máquina virtual)."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:283
+msgid ""
+"3. I found one specific case in which a script can freeze and ultimately "
+"crash Cinnamon. It's a script that downloads a GIF image from the internet, "
+"converts it to Base64 and then that encoded image is inserted into a menu "
+"item using the *image* attribute. I will not provide a link to that script, "
+"but if you follow the very first advice that I listed here, when you see "
+"that script, you will know."
+msgstr ""
+"3. He encontrado un caso específico en el que un archivo de comandos puede "
+"congelar y finalmente bloquear Cinnamon.  Es un archivo de comandos que "
+"descarga una imagen GIF desde Internet, la convierte en Base64 y luego esa "
+"imagen codificada se inserta en un elemento de menú utilizando el atributo "
+"*image*.  No voy a proporcionar un enlace a ese script, pero si se ha "
+"seguido el primer consejo que he enumerado aquí, cuando ese archivo de "
+"comandos es encontrado, se sabrá de lo que hablo."
+
+#: ../../create_localized_help.py:288
+msgid ""
+"These screenshots show how some scripts from the BitBar plugin repository "
+"look when rendered by Argos compared to the \"canonical\" BitBar rendering "
+"(macOS screenshots taken from https://getbitbar.com)."
+msgstr ""
+"Estas capturas de pantalla muestran cómo algunas secuencias de comandos del "
+"repositorio de complementos de BitBar se ven cuando son procesadas por Argos "
+"en comparación con la representación *canónica* de BitBar (capturas de "
+"pantalla de macOS tomadas de https://getbitbar.com)."
+
+#: ../../create_localized_help.py:290
+msgid "Argos on Cinnamon"
+msgstr "Argos para Cinnamon"
+
+#: ../../create_localized_help.py:290
+msgid "BitBar on macOS"
+msgstr "BitBar en macOS"
+
+#: ../../create_localized_help.py:290
+msgid "Plugin"
+msgstr "Complemento"
+
+#: ../../create_localized_help.py:387
+msgid "The following two sections are available only in English."
+msgstr "Las siguientes dos secciones están disponibles sólo en Inglés."
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:412 ../../create_localized_help.py:484
+msgid "language-name"
+msgstr "Español"
+
+#: ../../create_localized_help.py:487 __init__.js:2460 applet.js:721
+msgid "Help"
+msgstr "Ayuda"
+
+#: ../../create_localized_help.py:488
+msgid "Contributors"
+msgstr "Colaboradores"
+
+#: ../../create_localized_help.py:489
+msgid "Changelog"
+msgstr "Registro de cambios"
+
+#: ../../create_localized_help.py:490
+msgid "Choose language"
+msgstr "Elegir idioma"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:491 ../../create_localized_help.py:498
+#, python-format
+msgid "Help for %s"
+msgstr "Ayuda para %s"
+
+#: ../../create_localized_help.py:499
+msgid "IMPORTANT!!!"
+msgstr "¡IMPORTANTE!"
+
+#: ../../create_localized_help.py:500
+msgid ""
+"Never delete any of the files found inside this xlet folder. It might break "
+"this xlet functionality."
+msgstr ""
+"Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de "
+"este xlet. Podría romper la funcionalidad del xlet."
+
+#: ../../create_localized_help.py:501
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked next."
+msgstr ""
+"Los reportes de fallos, peticiones de características y contribuciones deben "
+"hacerse en el repositorio de este xlet vinculado a continuación."
+
+#: ../../create_localized_help.py:507
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+"Localización de applets/desklets/extensiones (también conocidos como xlets)"
+
+#: ../../create_localized_help.py:508
+msgid ""
+"If this xlet was installed from Cinnamon Settings, all of this xlet's "
+"localizations were automatically installed."
+msgstr ""
+"Si este xlet se instaló desde Configuración de Cinnamon, todas las "
+"localizaciones de este xlet se instalaron automáticamente."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:510
+msgid ""
+"If this xlet was installed manually and not trough Cinnamon Settings, "
+"localizations can be installed by executing the script called "
+"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+"Si este xlet se instaló manualmente y no a través de Configuración de "
+"Cinnamon, las localizaciones se pueden instalar ejecutando el archivo "
+"llamado **localizations.sh** desde una terminal abierta dentro de la carpeta "
+"del xlet."
+
+#: ../../create_localized_help.py:511
+msgid ""
+"If this xlet has no locale available for your language, you could create it "
+"by following the following instructions."
+msgstr ""
+"Si este xlet no está disponible en su idioma, la localización puede ser "
+"creada siguiendo las siguientes instrucciones."
+
+#: appletHelper.py:63
+msgid "Select a file"
+msgstr "Seleccionar un archivo"
+
+#. TO TRANSLATORS: Could be left blank.
+#: appletHelper.py:65
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#. TO TRANSLATORS: Could be left blank.
+#: appletHelper.py:67
+msgid "_Open"
+msgstr "_Abrir"
+
+#: appletHelper.py:97
+msgid "Nothing to do here."
+msgstr "Nada que hacer aquí."
+
+#: examples/python_examples.py:88
+msgid "Argos line 1"
+msgstr "Argos línea 1"
+
+#: examples/python_examples.py:89
+msgid "Argos line 2"
+msgstr "Argos línea 2"
+
+#. TO TRANSLATORS:
+#. The words "eval", "tooltip" and "alternate" are attributes
+#. and aren't meant to be translated.
+#: examples/python_examples.py:93
+msgid "eval, tooltip and alternate examples"
+msgstr "Ejemplos de eval, tooltip y alternate"
+
+#. TO TRANSLATORS:
+#. The word "eval" is an attribute and isn't meant to be translated.
+#: examples/python_examples.py:96
+msgid "Press Alt key to see effect"
+msgstr "Presionar la tecla Alt para ver el efecto"
+
+#: examples/python_examples.py:97
+msgid "Default item - eval example"
+msgstr "Ítem predeterminado - ejemplo de eval"
+
+#: examples/python_examples.py:98
+msgid "Default item tooltip - Press Alt key to display alternate item"
+msgstr ""
+"Caja de herramientas del ítem predeterminado - Presionar la tecla Alt para "
+"mostrar el ítem alternativo"
+
+#: examples/python_examples.py:99
+msgid "Default item"
+msgstr "Ítem predeterminado"
+
+#: examples/python_examples.py:100
+msgid "Notification activated by default item."
+msgstr "Notificación activada por el ítem predeterminado"
+
+#: examples/python_examples.py:101
+msgid "Alternate item - eval example"
+msgstr "Ítem alternativo - ejemplo de eval"
+
+#: examples/python_examples.py:102
+msgid "Alternate item tooltip"
+msgstr "Caja de herramientas del ítem alternativo"
+
+#: examples/python_examples.py:103
+msgid "Alternate item"
+msgstr "Ítem alternativo"
+
+#: examples/python_examples.py:104
+msgid "Notification activated by alternate item."
+msgstr "Notificación activada por el ítem alternativo"
+
+#: examples/python_examples.py:105
+msgid "Default - PyGObject API Reference - URL example"
+msgstr "Predeterminado - Referencia de API de PyGObject - Ejemplo de URL"
+
+#: examples/python_examples.py:106
+msgid "Alternate - DistroWatch - URL example"
+msgstr "Alternativo - DistroWatch - ejemplo de URL"
+
+#: examples/python_examples.py:107
+msgid "Default - Looking Glass log - URI to file example"
+msgstr "Predeterminado - Registro Looking Glass - ejemplo de URI de archivo"
+
+#: examples/python_examples.py:108
+msgid "Alternate - xsession-errors log - URI to file example"
+msgstr "Alternativo - Registro de xsession-errors - ejemplo de URI de archivo"
+
+#: examples/python_examples.py:109
+msgid "Menu and submenu examples"
+msgstr "Ejemplos de menúes y submenúes"
+
+#: examples/python_examples.py:110
+msgid "Sub menu level 2"
+msgstr "Submenú nivel 2"
+
+#: examples/python_examples.py:111
+msgid "Sub menu item level 2"
+msgstr "Ítem de submenú nivel 2"
+
+#: examples/python_examples.py:112
+msgid "Sub menu level 3"
+msgstr "Submenú nivel 3"
+
+#: examples/python_examples.py:113
+msgid "Sub menu item level 3"
+msgstr "Ítem de submenú nivel 3"
+
+#: examples/python_examples.py:114
+msgid "Sub menu level 4"
+msgstr "Submenú nivel 4"
+
+#: examples/python_examples.py:115
+msgid "Sub menu item level 4"
+msgstr "Ítem de submenú nivel 4"
+
+#: examples/python_examples.py:116
+msgid "Menu items with icons examples"
+msgstr "Ejemplos de menú ítems con íconos"
+
+#: examples/python_examples.py:117
+msgid "A default icon size can be set on the applet settings window"
+msgstr ""
+"El tamaño de íconos predeterminado puede ser establecido las preferencias "
+"del applet"
+
+#: examples/python_examples.py:118
+msgid "Item with a 12 pixels symbolic icon"
+msgstr "Ítem con un ícono simbólico de 12 píxeles"
+
+#: examples/python_examples.py:119
+msgid "Item with a 14 pixels icon"
+msgstr "Ítem con un ícono de 14 píxeles"
+
+#: examples/python_examples.py:120
+msgid "Item with a 16 pixels symbolic icon"
+msgstr "Ítem con un ícono simbólico de 16 píxeles"
+
+#: examples/python_examples.py:121
+msgid "Item with a 18 pixels icon"
+msgstr "Ítem con un ícono de 18 píxeles"
+
+#: examples/python_examples.py:122
+msgid "Item with a 20 pixels symbolic icon"
+msgstr "Ítem con un ícono simbólico de 20 píxeles"
+
+#: examples/python_examples.py:123
+msgid "ANSI colors and emojis examples"
+msgstr "Ejemplos de colores ANSI y emotíconos"
+
+#: examples/python_examples.py:124
+msgid "ANSI colors example"
+msgstr "Ejemplos de colores ANSI"
+
+#: examples/python_examples.py:125
+msgid "Pango markup examples"
+msgstr "Ejemplos de Pango markup"
+
+#: examples/python_examples.py:126
+msgid "Convenience tags"
+msgstr "Etiquetas de conveniencia"
+
+#: examples/python_examples.py:127
+msgid "Bold text"
+msgstr "Texto en negrita"
+
+#: examples/python_examples.py:128
+msgid "Italic text"
+msgstr "Texto en itálica"
+
+#: examples/python_examples.py:129
+msgid "Strikethrough text"
+msgstr "Texto tachado"
+
+#: examples/python_examples.py:130
+msgid "Underline text"
+msgstr "Texto subrayado"
+
+#: examples/python_examples.py:131
+msgid "Subscript text"
+msgstr "Texto de subíndice"
+
+#: examples/python_examples.py:132
+msgid "Superscript text"
+msgstr "Texto de superíndice"
+
+#: examples/python_examples.py:133
+msgid "Big text"
+msgstr "Texto grande"
+
+#: examples/python_examples.py:134
+msgid "Small text"
+msgstr "Texto pequeño"
+
+#: examples/python_examples.py:135
+msgid "Monospace font"
+msgstr "Fuente mono-espacio"
+
+#. TO TRANSLATORS: Full sentence:
+#. "<span> attributes", which means "attributes that can be used on
+#. the Pango tag called span"
+#: examples/python_examples.py:139
+#, python-format
+msgid "%s attributes"
+msgstr "Atributos para %s"
+
+#: examples/python_examples.py:140
+msgid "Background and foreground colors"
+msgstr "Colores de fondo y de primer plano"
+
+#: examples/python_examples.py:141
+msgid "Single underline"
+msgstr "Subrayado simple"
+
+#: examples/python_examples.py:142
+msgid "Double underline"
+msgstr "Subrayado doble"
+
+#: examples/python_examples.py:143
+msgid "Low underline"
+msgstr "Subrayado bajo"
+
+#: examples/python_examples.py:144
+msgid "Error underline"
+msgstr "Subrayado de error"
+
+#: __init__.js:62
+msgid "millisecond"
+msgid_plural "milliseconds"
+msgstr[0] "milisegundo"
+msgstr[1] "milisegundos"
+
+#: __init__.js:64
+msgid "second"
+msgid_plural "seconds"
+msgstr[0] "segundo"
+msgstr[1] "segundos"
+
+#: __init__.js:66
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "minuto"
+msgstr[1] "minutos"
+
+#: __init__.js:68
+msgid "hour"
+msgid_plural "hours"
+msgstr[0] "hora"
+msgstr[1] "horas"
+
+#: __init__.js:70
+msgid "day"
+msgid_plural "days"
+msgstr[0] "día"
+msgstr[1] "días"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#: __init__.js:80
+msgid "Seconds"
+msgstr "Segundos"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#: __init__.js:83
+msgid "Minutes"
+msgstr "Minutos"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#: __init__.js:86
+msgid "Hours"
+msgstr "Hours"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->options
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->options
+#: __init__.js:89
+msgid "Days"
+msgstr "Días"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Unable to load image from Base64 representation: ErrorMessage"
+#: __init__.js:1664
+#, javascript-format
+msgid "Unable to load image from Base64 representation: %s"
+msgstr "No se puede cargar la imagen desde la representación de Base64: %s"
+
+#: __init__.js:2457
+msgid "Check this applet help file for instructions."
+msgstr ""
+"Comprobar el archivo de ayuda de este applet para obtener instrucciones."
+
+#. Just in case.
+#: __init__.js:2461 applet.js:725
+msgid "Open this applet help file."
+msgstr "Abrir el archivo de ayuda de este applet."
+
+#: applet.js:116
+msgid "Script file is not executable."
+msgstr "El archivo de comandos no es ejecutable."
+
+#: applet.js:118
+msgid "The script file can be made executable from this applet context menu."
+msgstr ""
+"El archivo de comandos puede hacerse ejecutable desde el menú contextual de "
+"este applet."
+
+#: applet.js:125 applet.js:705
+msgid "Script file isn't a file, but a directory."
+msgstr "El archivo de comandos no es una archivo, es un directorio."
+
+#: applet.js:136 applet.js:712
+msgid "Script file doesn't exists."
+msgstr "El archivo de comandos no existe."
+
+#. TO TRANSLATORS: Full sentence:
+#. "Unable to execute file 'FileName':"
+#: applet.js:216
+#, javascript-format
+msgid "Unable to execute file '%s':"
+msgstr "Imposible ejecutar el archivo '%s':"
+
+#: applet.js:221 applet.js:535 applet.js:578
+msgid "Script file not set, cannot be found or it isn't an executable."
+msgstr ""
+"Archivo de comandos no establecido, no puede ser encontrado o no es "
+"ejecutable."
+
+#. TO TRANSLATORS: Full sentence:
+#. "Invalid menu level for line 'LineWithTheError'"
+#: applet.js:319
+#, javascript-format
+msgid "Invalid menu level for line '%s'"
+msgstr "Nivel de menú inválido para la línea '%s'"
+
+#: applet.js:377 applet.js:379
+msgid "Script file name:"
+msgstr "Nombre del archivo de secuencia de comandos:"
+
+#: applet.js:379
+msgid "No script set"
+msgstr "Archivo de comandos no establecido"
+
+#: applet.js:381 applet.js:464
+msgid "Execution interval:"
+msgstr "Intervalo de ejecución:"
+
+#: applet.js:384 applet.js:602
+msgid "Rotation interval:"
+msgstr "Intervalo de rotación:"
+
+#: applet.js:391
+msgid "Script execution time:"
+msgstr "Tiempo de ejecución de secuencias de comandos:"
+
+#: applet.js:399
+msgid "Output process time:"
+msgstr "Tiempo de procesado de salida:"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->tooltip
+#: applet.js:472
+msgid "Choose the time unit for the script execution interval."
+msgstr ""
+"Elegir la unidad de tiempo para el intervalo de ejecución del archivo de "
+"comandos."
+
+#: applet.js:485
+msgid "Set the script execution interval."
+msgstr "Elegir el intervalo de ejecución del archivo de comandos."
+
+#: applet.js:495
+msgid "Choose script"
+msgstr "Elegir archivo de comandos"
+
+#: applet.js:521
+msgid "Choose a script file."
+msgstr "Elegir un archivo de comandos."
+
+#: applet.js:527
+msgid "Edit script"
+msgstr "Editar archivo de comandos"
+
+#: applet.js:562
+msgid "Edit the script file with your prefered text editor."
+msgstr "Editar el archivo de comandos con su editor de textos preferido."
+
+#: applet.js:563
+msgid ""
+"After saving the changes made, the applet will update its data automatically "
+"if there is an interval set."
+msgstr ""
+"Luego de guardar los cambios realizados, el applet actualizará sus datos "
+"automáticamente si hay un intervalo de ejecución  establecido."
+
+#: applet.js:564
+msgid ""
+"Or the update could be done manually with the »Refresh« item on this applet "
+"context menu."
+msgstr ""
+"O la actualización puede realizarse manualmente con el ítem »Refrescar« en "
+"el menú contextual de este applet."
+
+#: applet.js:570
+msgid "Refresh"
+msgstr "Refrescar"
+
+#: applet.js:586
+msgid ""
+"This will re-run on demand the script assigned to this applet for the "
+"purpose of updating its output."
+msgstr ""
+"Esto volverá a ejecutar a petición el archivo de comandos asignado a este "
+"applet con el propósito de actualizar su salida."
+
+#: applet.js:587
+msgid ""
+"This is only needed when there is no update interval set (or the interval is "
+"too long), so the update needs to be done manually in case the script is "
+"edited."
+msgstr ""
+"Esto es sólo necesario si no hay un intervalo de actualización establecido "
+"(o si el intervalo es muy largo), así que la actualización necesita "
+"realizarse manualmente en caso de que el archivo de comandos haya sido "
+"editado."
+
+#. Extras submenu
+#: applet.js:594
+msgid "Extras"
+msgstr "Extras"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->tooltip
+#: applet.js:608
+msgid "Choose the time unit for the applet text rotation interval."
+msgstr ""
+"Elegir la unidad de tiempo para el intervalo de rotación del texto del "
+"applet."
+
+#: applet.js:621
+msgid "Set the applet text rotation interval."
+msgstr "Establecer el intervalo de rotación del texto del applet."
+
+#: applet.js:630
+msgid "Clear script"
+msgstr "Vaciar archivo de comandos"
+
+#: applet.js:636 applet.js:654
+msgid ""
+"This operation will remove the current script from this applet leaving it "
+"\"blank\"."
+msgstr ""
+"Esta operación eliminará el archivo de comandos de este applet dejándolo "
+"\"en blanco\"."
+
+#: applet.js:637
+msgid ""
+"The current applet settings will be untouched and the actual script file "
+"will not be deleted."
+msgstr ""
+"Las preferencias actuales del applet no serán modificadas y el archivo de "
+"comando en sí no será borrado."
+
+#: applet.js:638
+msgid "Do you want to proceed?"
+msgstr "¿Desea proceder?"
+
+#: applet.js:668
+msgid "Make script executable"
+msgstr "Hacer archivo de comandos ejecutable"
+
+#: applet.js:674
+msgid "Make the script file executable so it can be used by this applet."
+msgstr ""
+"Hacer el archivo de comandos ejecutable para que pueda ser utilizado por "
+"este applet."
+
+#: applet.js:698
+msgid "Script file is already executable."
+msgstr "El archivo de comandos ya es ejecutable."
+
+#. 0dyseus@ArgosForCinnamon->metadata.json->comments
+msgid ""
+"Bug reports, feature requests and contributions should be done on this "
+"xlet's repository linked below."
+msgstr ""
+"Los reportes de fallos, peticiones de características y contribuciones deben "
+"hacerse en el repositorio de este xlet vinculado a continuación."
+
+#. 0dyseus@ArgosForCinnamon->metadata.json->name
+msgid "Argos for Cinnamon"
+msgstr "Argos para Cinnamon"
+
+#. 0dyseus@ArgosForCinnamon->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Ver el archivo de ayuda de este xlet."
+
+#. 0dyseus@ArgosForCinnamon->metadata.json->description
+msgid "Create Cinnamon applets in seconds."
+msgstr "Crear applets para Cinnamon en segundos."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Atajo de teclado para abrir o cerrar el menú"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr "Ícono"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Seleccionar un ícono para mostrar en el panel."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->description
+msgid "Show script name on applet"
+msgstr "Mostrar el nombre del archivo de comandos en el applet"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_show_script_name->tooltip
+msgid ""
+"When inside the script there isn't a line assigned to be shown on the "
+"applet, the script name will be displayed. With this option disabled, the "
+"script name will not be shown on this applet, giving us the possibility to "
+"use a custom text for the applet."
+msgstr ""
+"Cuando dentro del archivo de comandos no hay una línea asignada para ser "
+"mostrada en el applet, el nombre del archivo de comandos será mostrado. Con "
+"esta opción deshabilitada, el nombre del archivo de comandos no será "
+"mostrado en el applet, dándonos la posibilidad de usar un texto "
+"personalizado para el applet."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr "Etiqueta personalizada"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Introduzca un texto personalizado para mostrar en el panel."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->description
+msgid "Keep just one sub menu open"
+msgstr "Mantener un solo menú abierto en todo momento"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_keep_one_menu_open->tooltip
+msgid ""
+"When enabled, the previously opened sub menu will be automatically closed."
+msgstr ""
+"Con esta opción habilitada, un submenú previamente abierto será "
+"automáticamente cerrado."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head1->description
+msgid "Script settings"
+msgstr "Preferencias del archivo de comandos"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->units
+msgid "ems"
+msgstr "ems"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_menu_spacing->description
+msgid "Spacing for items inside the menu"
+msgstr "Espaciado para ítems dentro del menú"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr "Preferencias del applet"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->units
+msgid "pixels"
+msgstr "píxeles"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->tooltip
+msgid ""
+"Set a default size in pixels for the icons inside this applet main menu. The "
+"size of the icon of a menu item can be overridden by setting the \"iconSize"
+"\" attribute on the menu item's respective line on the script."
+msgstr ""
+"Establecer un tamaño preestablecido en píxeles para íconos dentro del menú "
+"del applet. El tamaño de un ítem del menú puede ser anulado estableciendo el "
+"atributo \"iconSize\" en la línea correspondiente ítem del menú  en el "
+"archivo de comandos."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_default_icon_size->description
+msgid "Default icon size"
+msgstr "Tamaño de ícono predeterminado"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->description
+msgid "Animate menu"
+msgstr "Animar apertura/cerrado del menú"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_animate_menu->tooltip
+msgid "Enables/Disables menu open/close animations."
+msgstr "Habilita/Deshabilita la animación de apertura/cierre del menú."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval_units->description
+msgid "Execution interval time unit"
+msgstr "Unidad de tiempo para el intervalo de ejecución"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->description
+msgid "Terminal emulator"
+msgstr "Emulador de terminal:"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_terminal_emulator->tooltip
+msgid ""
+"Choose the terminal emulator used by this applet.\n"
+"IMPORTANT!!! The terminal emulator has to support the -e argument."
+msgstr ""
+"Elegir el emulador de terminal usado por este applet.\n"
+"¡INPORTANTE! El emulador de terminal debe soportar el argumento -e."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->units
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->units
+msgid "custom"
+msgstr "personalizado"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->tooltip
+msgid ""
+"Set the script execution interval. If set to 0 (zero), the timer will be "
+"disabled."
+msgstr ""
+"Establecer el intervalo de ejecución del archivo de comandos. Si se "
+"establece en 0 (cero), el temporizador se desactivará."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_update_interval->description
+msgid "Execution interval"
+msgstr "Intervalo de ejecución"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval_units->description
+msgid "Rotation interval time unit"
+msgstr "Unidad de tiempo para el intervalo de rotación"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->tooltip
+msgid ""
+"Set the applet text rotation interval. If set to 0 (zero), the timer will be "
+"disabled. This timer is only used if there are more than one line asigned to "
+"be displayed as the applet text. If there is only one line asigned for the "
+"applet text, this timer will be completely ignored. So, it isn't needed to "
+"set this timer to 0 (zero) to disable it."
+msgstr ""
+"Establecer el intervalo de rotación del texto del applet. Si se establece en "
+"0 (cero), el temporizador se desactivará. Este temporizador es sólo usado si "
+"en el archivo de comandos hay más de una línea asignada para ser mostrada "
+"como texto pare el applet. Si hay sólo una línea asignada para el texto del "
+"applet, este temporizador será completamente ignorado. Así que no es "
+"necesario establecer este temporizador a 0 (cero) para deshabilitarlo."
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_rotation_interval->description
+msgid "Rotation interval"
+msgstr "Intervalo de rotación"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_applet_spacing->description
+msgid "Spacing for items inside the applet"
+msgstr "Espaciado para ítems dentro del applet"
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->head2->description
+msgid "Extra settings"
+msgstr "Extra "
+
+#. 0dyseus@ArgosForCinnamon->settings-schema.json->pref_file_path->description
+msgid "Path to script"
+msgstr "Ruta al archivo de comandos"
+
+#~ msgid "See **BitBar plugins with Argos for Cinnamon**"
+#~ msgstr "Ver **Complementos de BitBar con Argos para Cinnamon**."
+
+#~ msgid "See **Usage**"
+#~ msgstr "Ver **Uso del applet**."
+
+#~ msgid ""
+#~ "**100% API [compatible with BitBar 1.9.2](#argos-bitbar-compatibility):** "
+#~ "All BitBar plugins that run on Linux (i.e. do not contain macOS-specific "
+#~ "code) will work with Argos (else it's a bug)."
+#~ msgstr ""
+#~ "**100% API [compatible con BitBar 1.9.2](#argos-bitbar-compatibility):** "
+#~ "Todos los complementos para BitBar que corren en Linux (por ejemplo, que "
+#~ "no contienen código específico de macOS) van a funcionar con Argos (si no "
+#~ "funcionan, es un error en Argos)."
+
+#~ msgid "**Fully [documented](#argos-usage).**"
+#~ msgstr "**Totalmente [documentado](#argos-usage).**"
+
+#~ msgid "Read CONTRIBUTORS.md file inside this xlet folder."
+#~ msgstr "Leer el archivo CONTRIBUTORS.md dentro de la carpeta de este xlet."
+
+#~ msgid ""
+#~ "A full list of contributors can be found in the CONTRIBUTORS.md file on "
+#~ "the root of this xlet folder."
+#~ msgstr ""
+#~ "Se puede encontrar una lista completa de contribuyentes en el archivo "
+#~ "CONTRIBUTORS.md en la raíz de la carpeta de este xlet."
+
+#~ msgid ""
+#~ "Philipp Emanuel Weidmann: Author of the gnome-shell extension called Argos"
+#~ msgstr ""
+#~ "Philipp Emanuel Weidmann: Autor de la extensión para Gnome Shell llamada "
+#~ "Argos"
+
+#~ msgid "giwhub: Chinese localization."
+#~ msgstr "giwhub: Localización China."
+
+#~ msgid ""
+#~ "**Optimized for minimum resource consumption:** Even with multiple "
+#~ "plugins refreshing every second, Argos typically uses less than 1%% of "
+#~ "the CPU."
+#~ msgstr ""
+#~ "**Optimizado para el consumo mínimo de recursos:** Incluso con varios "
+#~ "complementos actualizando cada segundo, Argos normalmente usa menos del 1 "
+#~ "por ciento de la CPU."
+
+#~ msgid ""
+#~ "**Optimized for minimum resource consumption:** Even with multiple "
+#~ "plugins refreshing every second, Argos typically uses less than 1% of the "
+#~ "CPU."
+#~ msgstr ""
+#~ "**Optimizado para el consumo mínimo de recursos:** Incluso con varios "
+#~ "complementos actualizando cada segundo, Argos normalmente usa menos del "
+#~ "1% de la CPU."
+
+#~ msgid "Error executing command!!!"
+#~ msgstr "¡Error al ejecutar comando!"
+
+#~ msgid ""
+#~ "You might need to set up the correct terminal emulator from this applet "
+#~ "settings window."
+#~ msgstr ""
+#~ "Puede que tenga que configurar el emulador de terminal correcto en la "
+#~ "ventana de configuración de este applet."
+
+#~ msgid "A dependency might be missing!!!"
+#~ msgstr "¡Una dependencia podría faltar!"
+
+#~ msgid ""
+#~ "2. Test unknown scripts on an environment from which you can recover "
+#~ "easily (i.e. a virtual machine)."
+#~ msgstr ""
+#~ "2. Probar archivos de comandos desconocidos en un entorno desde el que "
+#~ "pueda recuperarse fácilmente (como por ejemplo, una máquina virtual)."
+
+#~ msgid ""
+#~ "If `false`, the symbolic version of `iconName` will be used on the item "
+#~ "(if exists)."
+#~ msgstr ""
+#~ "Si `true`, la versión simbólica de` iconName` se utilizará en el elemento "
+#~ "(si existe)."
+
+#~ msgid "Help for {xlet_name}"
+#~ msgstr "Ayuda para {xlet_name}"
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
+
+#~ msgid "minutes"
+#~ msgstr "minutos"
+
+#~ msgid "hours"
+#~ msgstr "horas"
+
+#~ msgid "days"
+#~ msgstr "días"
+
+#~ msgid "Execution interval (%s):"
+#~ msgstr "Intervalo de ejecución (%s):"
+
+#~ msgid "Rotation interval (%s):"
+#~ msgstr "Intervalo de rotación (%s):"
+
+#~ msgid "Script name:"
+#~ msgstr "Nombre del archivo de secuencia de comandos:"
+
+#~ msgid "ANSI colors, emojis and font size examples"
+#~ msgstr "Ejemplos de colores ANSI, emotíconos y tamaño de fuente"
+
+#~ msgid "Default PyGObject API Reference - URL example"
+#~ msgstr "Referencia de API de PyGObject predeterminada - ejemplo de URL"
+
+#~ msgid "Unable to execute file '%s': %s"
+#~ msgstr "Imposible ejecutar el archivo '%s': %s"
+
+#~ msgid "Script file not set or it cannot be found."
+#~ msgstr "Archivo de comandos no establecido o no puede ser encontrado."

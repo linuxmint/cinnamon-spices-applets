@@ -1,0 +1,338 @@
+# This is a template file for translating the 0dyseus@ExtensionsManager package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@ExtensionsManager package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@ExtensionsManager 1.08\n"
+"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+
+#. TO TRANSLATORS: This is a placeholder.
+#. Here goes your language name in your own language (a.k.a. endonym).
+#: ../../create_localized_help.py:119 ../../create_localized_help.py:195
+msgid "language-name"
+msgstr ""
+
+#: ../../create_localized_help.py:125
+msgid "The following two sections are available only in English."
+msgstr ""
+
+#: ../../create_localized_help.py:198 applet.js:160
+msgid "Help"
+msgstr ""
+
+#: ../../create_localized_help.py:199
+msgid "Contributors"
+msgstr ""
+
+#: ../../create_localized_help.py:200
+msgid "Changelog"
+msgstr ""
+
+#: ../../create_localized_help.py:201
+msgid "Choose language"
+msgstr ""
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:202 ../../create_localized_help.py:209
+#, python-format
+msgid "Help for %s"
+msgstr ""
+
+#: ../../create_localized_help.py:210
+msgid "IMPORTANT!!!"
+msgstr ""
+
+#: ../../create_localized_help.py:211
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr ""
+
+#: ../../create_localized_help.py:212
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr ""
+
+#: ../../create_localized_help.py:218
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr ""
+
+#: ../../create_localized_help.py:219
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:221
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr ""
+
+#: ../../create_localized_help.py:222
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr ""
+
+#: appletHelper.py:268
+msgid "This terminal will list the errors of extensions that couldn't be loaded by Extensions Manager."
+msgstr ""
+
+#: appletHelper.py:289 appletHelper.py:308
+msgid "Extensions Manager debugger"
+msgstr ""
+
+#: appletHelper.py:323
+msgid "Helper script for Extensions Manager applet for Cinnamon."
+msgstr ""
+
+#: appletHelper.py:328
+msgid "Returns a JSON string with a list of all installed extensions."
+msgstr ""
+
+#: appletHelper.py:332
+msgid "Process all extensions, but it will only display possible errors."
+msgstr ""
+
+#: appletHelper.py:336
+msgid "Launch the debug process from a virtual terminal."
+msgstr ""
+
+#: __init__.js:116
+msgid "Cancel"
+msgstr ""
+
+#: __init__.js:122
+msgid "OK"
+msgstr ""
+
+#: __init__.js:180
+msgid "Open settings window"
+msgstr ""
+
+#: __init__.js:200
+msgid "Spices page"
+msgstr ""
+
+#: __init__.js:219
+msgid "Edit extension main file"
+msgstr ""
+
+#: __init__.js:235
+msgid "Open extension folder"
+msgstr ""
+
+#: __init__.js:292 __init__.js:299
+msgid "Name"
+msgstr ""
+
+#: __init__.js:294 __init__.js:301
+msgid "Description"
+msgstr ""
+
+#: __init__.js:412
+msgid "Error parsing JSON string."
+msgstr ""
+
+#: __init__.js:414
+msgid "A detailed error has been logged into ~/.cinnamon/glass.log."
+msgstr ""
+
+#: applet.js:104
+msgid "Open extensions manager"
+msgstr ""
+
+#: applet.js:117
+msgid "Disable all extensions"
+msgstr ""
+
+#: applet.js:127
+msgid "This will disable all active extensions. Are you sure you want to do this?"
+msgstr ""
+
+#: applet.js:135
+msgid "Refresh extension list"
+msgstr ""
+
+#: applet.js:142
+msgid "Restart Cinnamon"
+msgstr ""
+
+#: applet.js:151
+msgid "Debug"
+msgstr ""
+
+#: applet.js:248 applet.js:294
+#, javascript-format
+msgid "Source of error: %s"
+msgstr ""
+
+#: applet.js:384
+msgid "There aren't any extensions installed on your system. Or you may need to refresh the list of extensions from this applet context menu."
+msgstr ""
+
+#: applet.js:453
+msgid "Enabled extensions"
+msgstr ""
+
+#: applet.js:456
+msgid "No enabled extensions"
+msgstr ""
+
+#: applet.js:460
+msgid "Disabled extensions"
+msgstr ""
+
+#: applet.js:462
+msgid "No disabled extensions"
+msgstr ""
+
+#: applet.js:499
+#, javascript-format
+msgid "Extension %s is not compatible with current version of cinnamon. Using it may break your system. Load anyway?"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->name
+msgid "Extensions Manager"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->description
+msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->metadata.json->comments
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_width_for_menu_items_label->units
+msgid "ems"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_width_for_menu_items_label->description
+msgid "Max width for menu items label"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_options_icon_size->units
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_icon_size->units
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_menu_height->units
+msgid "pixels"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_options_icon_size->description
+msgid "Icon size for the extension option buttons"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_extension_icon_size->description
+msgid "Icon size for the extension logo"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_enabled_extensions_style->description
+msgid "Style for \"Enabled extensions\" sub-menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->description
+msgid "Keep \"Disabled extensions\" menu open"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->tooltip
+msgid "If enabled, every time that the menu is open, the \"Disabled extensions\" sub menu will be open too."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_set_max_menu_height->description
+msgid "Set max height for the main menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->description
+msgid "Show \"Open settings window\" button on extensions menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->tooltip
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's settings page (if the extension has a configuration mechanism)."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_only_one_menu_open->description
+msgid "Keep only one menu open at all times"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->description
+msgid "Show \"Spices page\" button on extensions menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->tooltip
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's Spices page (if the extension is published on Spices)."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->head1->description
+msgid "Extensions menu settings"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->description
+msgid "Show \"Open extension folder\" button on extensions menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->tooltip
+msgid "If enabled, it will display a button in each extension menu item that will open the location where the extension is installed."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_icons_on_menu->description
+msgid "Show icons on menu items"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->description
+msgid "Use extension name as label"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->tooltip
+msgid "If disabled, the extension UUID will be used as label for the menu items."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->description
+msgid "Keep \"Enabled extensions\" menu open"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->tooltip
+msgid "If enabled, every time that the menu is open, the \"Enabled extensions\" sub menu will be open too."
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_max_menu_height->description
+msgid "Max height for menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_disabled_extensions_style->description
+msgid "Style for \"Disabled extensions\" sub-menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->description
+msgid "Show \"Edit extension main file\" button on extensions menu"
+msgstr ""
+
+#. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->tooltip
+msgid "If enabled, it will display a button in each extension menu item that will open main extension file (extension.js) with a text editor."
+msgstr ""

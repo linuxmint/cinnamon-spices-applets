@@ -31,7 +31,7 @@ In order to use Firefox bookmarks, you need to install the ```gir1.2-gda-5.0``` 
 
 ### Contributing
 
-It is recommended to submit issues and PRs on ITM's [dedicated repository](https://github.com/jaszhix/icingtaskmanager), but if you want to contribute to ITM through Cinnamon Spices, you must use some NodeJS tools to work with the ES2015 source. All work files are in ```IcingTaskManager@json/src```. Avoid editing the files in ```files```, as they will be replaced by generated code from Babel.
+It is recommended to submit issues on ITM's [dedicated repository](https://github.com/jaszhix/icingtaskmanager). All PRs should be submitted to the Cinnamon Spices repository.
 
 *  Use [Node 6.x LTS](https://github.com/nodesource/distributions).
 ```sh
@@ -47,4 +47,3 @@ sudo apt-get install -y nodejs
   * ```tail -f -n100 ~/.xsession-errors.log```
 * Use two spaces for indentation, and ES2015 equivalent syntax when possible. 
   * You may want to read Babel's [documentation](https://babeljs.io/learn-es2015/) if you are not familiar with ES2015.
-* After you have finished making changes, include both the changed files in the ```src``` and ```files``` directories in your PR.

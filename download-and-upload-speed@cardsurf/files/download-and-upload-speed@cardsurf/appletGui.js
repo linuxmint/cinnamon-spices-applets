@@ -126,7 +126,7 @@ GuiSpeed.prototype = {
         icon_path = this._remove_file_schema(icon_path);
         icon_path = this._replace_tilde_with_home_directory(icon_path)
         let icon_file = Gio.file_new_for_path(icon_path);
-        let icon_file = new Gio.FileIcon({ file: icon_file });
+        icon_file = new Gio.FileIcon({ file: icon_file });
         return icon_file;
     },
 
@@ -258,10 +258,10 @@ RadioMenuItem.prototype = {
         this.active_option_index = -1;
         this.callback_object = null;
         this.callback_option_clicked = null;
-        this._init_options(option_names);
+        this._add_options(option_names);
     },
 
-    _init_options: function(option_names) {
+    _add_options: function(option_names) {
         for(let option_name of option_names) {
              let option = new PopupMenu.PopupMenuItem(option_name, false);
              option.connect('activate', Lang.bind(this, this._on_option_clicked));
@@ -274,6 +274,17 @@ RadioMenuItem.prototype = {
         let index_clicked = this.options.indexOf(option);
         this.set_active_option(index_clicked);
         this._invoke_callback_option_clicked();
+    },
+
+    reload_options: function(option_names) {
+        this._remove_options();
+        this._add_options(option_names);
+    },
+
+    _remove_options: function() {
+         this.menu.removeAll()
+         this.options = [];
+         this.active_option_index = -1;
     },
 
     set_active_option: function(index) {

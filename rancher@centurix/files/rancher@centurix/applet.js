@@ -49,8 +49,9 @@ Rancher.prototype = {
 		Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
 		try {
+		    this.menuManager = new PopupMenu.PopupMenuManager(this);
 			this.menu = new Applet.AppletPopupMenu(this, orientation);
-			this._menuManager.addMenu(this.menu);
+			this.menuManager.addMenu(this.menu);
 
 			this._msgsrc = new MessageTray.SystemNotificationSource("Rancher");
 			Main.messageTray.add(this._msgsrc);
@@ -169,13 +170,7 @@ Rancher.prototype = {
 	},
 
 	on_applet_clicked: function(event) {
-		try {
-			if (!this.menu.isOpen) {
-				this.menu.toggle();
-			}
-		} catch(e) {
-			global.log(UUID + '::on_applet_clicked: ' + e);
-		}
+		this.menu.toggle();
 	},
 
 	editHomestead: function() {
@@ -259,6 +254,10 @@ Rancher.prototype = {
 		Main.Util.spawnCommandLine("xdg-open http://laravel.com/docs/homestead");
 	},
 
+	openVagrantDownload: function() {
+		Main.Util.spawnCommandLine("xdg-open https://www.vagrantup.com/downloads.html");
+	},
+
 	editHosts: function() {
 		Main.Util.spawnCommandLine("gksudo " + this.editor + " /etc/hosts");
 	},
@@ -273,6 +272,12 @@ Rancher.prototype = {
 			}
 
 			this.set_applet_icon_path(ICON_DOWN);
+
+			if (status == Homestead.STATUS_VAGRANT_OUT_OF_DATE) {
+				this.set_applet_icon_path(ICON_MISSING);
+				this.set_applet_tooltip(_("Vagrant is out of date, please update."));
+				this.notification(_("Vagrant is out of date, please update."));				
+			}
 
 			if (status == Homestead.STATUS_KERNAL_NOT_LOADED) {
 				this.set_applet_icon_path(ICON_MISSING);
@@ -323,6 +328,13 @@ Rancher.prototype = {
 			if (status == Homestead.STATUS_KERNAL_NOT_LOADED) {
 				this.menu.addMenuItem(this.newIconMenuItem('apport', _('Kernel Module not loaded. Needs recompilation.'), null, {reactive: false}));
 				this.menu.addMenuItem(this.newIconMenuItem('system-run', _('Recompile Kernel Module.'), this.homesteadRecompile));
+				return false;
+			}
+
+			if (status == Homestead.STATUS_VAGRANT_OUT_OF_DATE) {
+				this.menu.addMenuItem(this.newIconMenuItem('apport', _('Vagrant is out of date for this version of Homestead, please update.'), null, {reactive: false}));
+				this.menu.addMenuItem(this.newIconMenuItem('emblem-web', _('Click here for the Vagrant download page.'), this.openVagrantDownload));
+				this.menu.addMenuItem(this.newIconMenuItem('view-refresh', _('Refresh this menu'), this.refreshApplet));
 				return false;
 			}
 

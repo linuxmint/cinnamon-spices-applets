@@ -43,6 +43,8 @@ CollapsibleSystrayApplet.prototype = {
     },
 
     _init: function(orientation, panel_height, instance_id) {
+        this._orientation = orientation;
+        
         //
         // Expand/collapse button
 
@@ -57,10 +59,18 @@ CollapsibleSystrayApplet.prototype = {
                 this._initialCollapseTimerID = null;
             }
 
-            if (this._iconsAreHidden) {
-                this._showAppIcons(true);
-            } else {
-                this._hideAppIcons(true);
+            switch (this.collapseBtn.state) {
+                case this.collapseBtn.State.EXPANDED:
+                    this._hideAppIcons(true);
+                    break;
+
+                case this.collapseBtn.State.COLLAPSED:
+                    this._showAppIcons(true);
+                    break;
+
+                case this.collapseBtn.State.UNAVAILABLE:
+                    this._applet_context_menu.toggle();
+                    break;
             }
         }));
 
@@ -76,7 +86,7 @@ CollapsibleSystrayApplet.prototype = {
         //
         // Variables
 
-        this._direction          = (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM) ? this.Direction.HORIZONTAL : this.Direction.VERTICAL;
+        this._direction          = (orientation == St.Side.TOP || orientation == St.Side.BOTTOM) ? this.Direction.HORIZONTAL : this.Direction.VERTICAL;
         this._signalManager      = new SignalManager.SignalManager(this);
         this._hovering           = false;
         this._hoverTimerID       = null;
@@ -99,8 +109,13 @@ CollapsibleSystrayApplet.prototype = {
         // Add horizontal scrolling and scroll to the end on each redraw so that it looks like the
         // collapse button "eats" the icons on collapse
         this.hiddenIconsContainer.hadjustment = new St.Adjustment();
-        this.hiddenIconsContainer.connect('queue-redraw', Lang.bind(this.hiddenIconsContainer, function() {
-            this.hadjustment.set_value(this.hadjustment.upper);
+        this.hiddenIconsContainer.vadjustment = new St.Adjustment();
+        this.hiddenIconsContainer.connect('queue-redraw', Lang.bind(this, function() {
+            if (this._direction == this.Direction.HORIZONTAL) {
+                this.hiddenIconsContainer.hadjustment.set_value(this.hiddenIconsContainer.hadjustment.upper);
+            } else {
+                this.hiddenIconsContainer.vadjustment.set_value(this.hiddenIconsContainer.vadjustment.upper);
+            }
         }));
 
         //
@@ -134,12 +149,8 @@ CollapsibleSystrayApplet.prototype = {
         this._settings.bindProperty(Settings.BindingDirection.IN,            "animation-duration",            "animationDuration",          this._onSettingsUpdated,         "animationDuration");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "horizontal-expand-icon-name",   "horizontalExpandIconName",   this._onSettingsUpdated,         "horizontalExpandIconName");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "horizontal-collapse-icon-name", "horizontalCollapseIconName", this._onSettingsUpdated,         "horizontalCollapseIconName");
-
-        // FIXME
-        // I'll wait for the next Cinnamon release that contains support for vertical panels before I introduce these settings
-        this.verticalExpandIconName   = "pan-up";
-        this.verticalCollapseIconName = "pan-down";
-
+        this._settings.bindProperty(Settings.BindingDirection.IN,            "vertical-expand-icon-name",     "verticalExpandIconName",     this._onSettingsUpdated,         "verticalExpandIconName");
+        this._settings.bindProperty(Settings.BindingDirection.IN,            "vertical-collapse-icon-name",   "verticalCollapseIconName",   this._onSettingsUpdated,         "verticalCollapseIconName");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "tray-icon-padding",             "trayIconPadding",            this._onSettingsUpdated,         "trayIconPadding");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "expand-on-hover",               "expandOnHover",              this._onSettingsUpdated,         "expandOnHover");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "expand-on-hover-delay",         "expandOnHoverDelay",         this._onSettingsUpdated,         "expandOnHoverDelay");
@@ -147,14 +158,10 @@ CollapsibleSystrayApplet.prototype = {
         this._settings.bindProperty(Settings.BindingDirection.IN,            "collapse-on-leave-delay",       "collapseOnLeaveDelay",       this._onSettingsUpdated,         "collapseOnLeaveDelay");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "no-hover-for-tray-icons",       "noHoverForTrayIcons",        this._onSettingsUpdated,         "noHoverForTrayIcons");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "sort-icons",                    "sortIcons",                  this._onSettingsUpdated,         "sortIcons");
+        
         this._loadAppIconVisibilityList();
-        this.collapseBtn.setIsExpanded(!this._iconsAreHidden);
-
-        //
-        // Hover events
-
-        this._signalManager.connect(this.actor, 'enter-event', Lang.bind(this, this._onEnter));
-        this._signalManager.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
+        this.collapseBtn.setVertical(this._direction == this.Direction.VERTICAL);
+        this.collapseBtn.refreshReactive();
     },
 
     /*
@@ -176,6 +183,27 @@ CollapsibleSystrayApplet.prototype = {
             return this.horizontalExpandIconName;
         } else {
             return this.verticalExpandIconName;
+        }
+    },
+
+    /*
+     * Set the collapse button's state
+     */
+    _refreshCollapseBtnState: function() {
+        let collapsible = false;
+        for (let id in this.iconVisibilityList) {
+            if (this.iconVisibilityList.hasOwnProperty(id) && this._registeredAppIcons.hasOwnProperty(id)) {
+                if (!this.iconVisibilityList[id]) {
+                    collapsible = true;
+                    break;
+                }
+            }
+        }
+
+        if (collapsible) {
+            this.collapseBtn.setState(this._iconsAreHidden ? this.collapseBtn.State.COLLAPSED : this.collapseBtn.State.EXPANDED);
+        } else {    
+            this.collapseBtn.setState(this.collapseBtn.State.UNAVAILABLE);
         }
     },
 
@@ -222,9 +250,6 @@ CollapsibleSystrayApplet.prototype = {
         }
         container.insert_actor(actor, index);
 
-        const [minWidth,  natWidth]  = actor.get_preferred_width(-1);
-        const [minHeight, natHeight] = actor.get_preferred_height(-1);
-
         actor.appID = id;
 
         if (this._iconsAreHidden && !this.iconVisibilityList[id]) {
@@ -232,6 +257,7 @@ CollapsibleSystrayApplet.prototype = {
         }
 
         this._addApplicationMenuItem(id, this.Menu.ACTIVE_APPLICATIONS);
+        this._refreshCollapseBtnState();
     },
 
     /*
@@ -255,6 +281,7 @@ CollapsibleSystrayApplet.prototype = {
             delete instanceArray;
             delete this._registeredAppIcons[id];
             this._addApplicationMenuItem(id, this.Menu.INACTIVE_APPLICATIONS);
+            this._refreshCollapseBtnState();
         }
     },
 
@@ -342,7 +369,7 @@ CollapsibleSystrayApplet.prototype = {
             }
 
             this._animating = false;
-            this.collapseBtn.setIsExpanded(false);
+            this._refreshCollapseBtnState();
         });
 
         if (animate) {
@@ -392,10 +419,14 @@ CollapsibleSystrayApplet.prototype = {
                 icon.csEnableAfter();
             });
 
-            this.hiddenIconsContainer.set_width(-1);
+            if (this._direction == this.Direction.HORIZONTAL) {
+                this.hiddenIconsContainer.set_width(-1);
+            } else {
+                this.hiddenIconsContainer.set_height(-1);
+            }
 
             this._animating = false;
-            this.collapseBtn.setIsExpanded(true);
+            this._refreshCollapseBtnState();
         });
 
         this.hiddenIconsContainer.get_children().forEach(function(icon, index) {
@@ -467,7 +498,8 @@ CollapsibleSystrayApplet.prototype = {
             }
 
             instances.forEach(Lang.bind(this, function(actor, index) {
-                actor.reparent(container);
+                actor.get_parent().remove_child(actor);
+                container.add_child(actor);
                 container.set_child_at_index(actor, index);
 
                 if (this._iconsAreHidden) {
@@ -482,6 +514,7 @@ CollapsibleSystrayApplet.prototype = {
         }
 
         this._saveAppIconVisibilityList();
+        this._refreshCollapseBtnState();
     },
 
     /*
@@ -506,6 +539,8 @@ CollapsibleSystrayApplet.prototype = {
     _loadAppIconVisibilityList: function() {
         try {
             this.iconVisibilityList = JSON.parse(this.savedIconVisibilityList);
+
+            this._refreshCollapseBtnState();
 
             for (let id in this.iconVisibilityList) {
                 if (this.iconVisibilityList.hasOwnProperty(id) && !this._registeredAppIcons.hasOwnProperty(id)) {
@@ -533,7 +568,7 @@ CollapsibleSystrayApplet.prototype = {
         switch(setting) {
             case 'expandIconName':
             case 'collapseIconName':
-                this.collapseBtn.setIsExpanded(!this._iconsAreHidden);
+                this._refreshCollapseBtnState();
                 break;
 
             case 'trayIconPadding':
@@ -609,7 +644,7 @@ CollapsibleSystrayApplet.prototype = {
 
         CinnamonSystray.MyApplet.prototype._setAppletReactivity.call(this);
 
-        this.collapseBtn.actor.set_reactive(this._draggable.inhibit);
+        this.collapseBtn.refreshReactive();
 
         if (this._hoverTimerID) {
             Mainloop.source_remove(this._hoverTimerID);
@@ -657,6 +692,9 @@ CollapsibleSystrayApplet.prototype = {
         if (icon.obsolete == true) {
             return;
         }
+        if (role.trim() == "") {
+            role = "[empty name]";
+        }
 
         global.log("[" + uuid + "] Event: _insertStatusItem - " + role);
 
@@ -666,15 +704,25 @@ CollapsibleSystrayApplet.prototype = {
 
         const iconWrap        = new St.BoxLayout({ style_class: 'applet-box', reactive: true, track_hover: !this.noHoverForTrayIcons });
         const iconWrapContent = new St.Bin({ child: icon });
+
         iconWrap.add_style_class_name('ff-collapsible-systray__status-icon');
+        iconWrap.add_actor(iconWrapContent);
         if (this._direction == this.Direction.HORIZONTAL) {
             iconWrap.set_style('padding-left: ' + this.trayIconPadding + 'px; padding-right: ' + this.trayIconPadding + 'px;');
         } else {
             iconWrap.set_style('padding-top: ' + this.trayIconPadding + 'px; padding-bottom: ' + this.trayIconPadding + 'px;');
         }
-        iconWrap.add_actor(iconWrapContent, { a_align: St.Align.MIDDLE, y_fill: false });
         iconWrap.isIndicator = false;
-        iconWrap.icon = icon;
+        iconWrap.icon        = icon;
+        iconWrap.setVertical = function(vertical) {
+            iconWrap.set_vertical(vertical);
+            if (vertical) {
+                iconWrap.add_style_class_name('vertical');
+            } else {
+                iconWrap.remove_style_class_name('vertical');
+            }
+        }
+        iconWrap.setVertical(this._direction == this.Direction.VERTICAL);
 
         if (["livestreamer-twitch-gui", "chromium", "swt"].indexOf(role) != -1) {
             iconWrap.csDisable = function() {
@@ -729,6 +777,7 @@ CollapsibleSystrayApplet.prototype = {
             iconActor.actor.csEnable = function() {
                 iconActor.actor.set_reactive(true);
             }
+            iconActor.actor.csEnableAfter = function() { }
             iconActor.actor.connect('destroy', Lang.bind(this, function() {
                 this._unregisterAppIcon(appIndicator.id, iconActor.actor);
             }));
@@ -745,18 +794,31 @@ CollapsibleSystrayApplet.prototype = {
 
         CinnamonSystray.MyApplet.prototype.on_orientation_changed.call(this, orientation);
 
-        this.orientation = orientation;
+        this._orientation = orientation;
         this._direction  = (orientation == St.Side.TOP || orientation == St.Side.BOTTOM) ? this.Direction.HORIZONTAL : this.Direction.VERTICAL;
 
         if (this._direction == this.Direction.VERTICAL) {
             this.mainLayout.set_vertical(true);
             this.hiddenIconsContainer.set_vertical(true);
             this.shownIconsContainer.set_vertical(true);
+            this.collapseBtn.setVertical(true);
+
+            this.hiddenIconsContainer.get_children().forEach(function(icon, index) {
+                icon.setVertical(true);
+            });
         } else {
             this.mainLayout.set_vertical(false);
             this.hiddenIconsContainer.set_vertical(false);
             this.shownIconsContainer.set_vertical(false);
+            this.collapseBtn.setVertical(false);
+
+            this.hiddenIconsContainer.get_children().forEach(function(icon, index) {
+                icon.setVertical(false);
+            });
         }
+
+        this.hiddenIconsContainer.hadjustment.set_value(0);
+        this.hiddenIconsContainer.vadjustment.set_value(0);
     },
 
     /*
@@ -775,6 +837,12 @@ CollapsibleSystrayApplet.prototype = {
                 this._hideAppIcons(true);
             }
         }));
+
+        //
+        // Hover events
+
+        this._signalManager.connect(this.actor, 'enter-event', Lang.bind(this, this._onEnter));
+        this._signalManager.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
     },
 
     /*

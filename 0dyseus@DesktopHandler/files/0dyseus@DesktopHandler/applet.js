@@ -1,17 +1,10 @@
-/**
- * [Desktop Handler]
- *
- * This applet is based on other applets/extensions for Cinnamon:
- *     - Smart Panel Extension By mohammad-sn.
- *     - Show Desktop ++ Applet By mohammad-sn.
- */
+const $ = imports.applet.__init__;
+const _ = $._;
 
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
 const Gtk = imports.gi.Gtk;
-
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const Clutter = imports.gi.Clutter;
@@ -23,108 +16,8 @@ const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Util = imports.misc.util;
 const Meta = imports.gi.Meta;
-
-const CoverflowSwitcher = imports.ui.appSwitcher.coverflowSwitcher;
-const TimelineSwitcher = imports.ui.appSwitcher.timelineSwitcher;
-const ClassicSwitcher = imports.ui.appSwitcher.classicSwitcher;
-const AppSwitcher = imports.ui.appSwitcher.appSwitcher;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
-const AppletManager = imports.ui.appletManager;
-
-// Needed for confirmation dialogs.
-const ModalDialog = imports.ui.modalDialog;
-
-// For translation mechanism.
-// Comments that start with // NOTE: are to be extracted by xgettext
-// and are directed to translators only.
-var UUID;
-
-function _(aStr) {
-    let customTrans = Gettext.dgettext(UUID, aStr);
-
-    if (customTrans !== aStr && customTrans !== "") {
-        return customTrans;
-    }
-
-    return Gettext.gettext(aStr);
-}
-
-/**
- * #MenuItem
- * @_text (string): Text to be displayed in the menu item
- * @_icon (string): Name of icon to be displayed in the menu item
- * @_callback (Function): Callback function when the menu item is clicked
- * @icon (St.Icon): Icon of the menu item
- *
- * A menu item that contains an icon, a text and responds to clicks
- *
- * Inherits: PopupMenu.PopupBaseMenuItem
- */
-function MenuItem(label, icon, callback) {
-    this._init(label, icon, callback);
-}
-
-MenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    /**
-     * _init:
-     * @text (string): text to be displayed in the menu item
-     * @icon (string): name of icon to be displayed in the menu item
-     * @callback (Function): callback function to be called when the menu item is clicked
-     *
-     * Constructor function
-     */
-    _init: function(text, icon, callback) {
-        PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
-
-        this._text = text;
-        this._icon = icon;
-        this._callback = callback;
-
-        let table = new St.Table({
-            homogeneous: false,
-            reactive: true
-        });
-        this.icon = icon;
-        table.add(this.icon, {
-            row: 0,
-            col: 0,
-            col_span: 1,
-            x_expand: false,
-            y_fill: St.Align.START,
-            x_fill: St.Align.START,
-            x_align: St.Align.START
-        });
-
-        this.label = new St.Label({
-            text: text
-        });
-        this.label.set_margin_left(6.0);
-        table.add(this.label, {
-            row: 0,
-            col: 1,
-            col_span: 1,
-            x_align: St.Align.START
-        });
-        this.addActor(table, {
-            expand: true,
-            span: 1,
-            align: St.Align.START
-        });
-        this.connect('activate', callback);
-    },
-
-    /**
-     * clone:
-     * Clones the menu item
-     * Returns (MenuItem): a clone of this menu item
-     */
-    clone: function() {
-        return new MenuItem(this._text, this._icon, this._callback);
-    }
-};
 
 function MyApplet(aMetadata, aOrientation, aPanel_height, aInstance_id) {
     this._init(aMetadata, aOrientation, aPanel_height, aInstance_id);
@@ -136,31 +29,15 @@ MyApplet.prototype = {
     _init: function(aMetadata, aOrientation, aPanel_height, aInstance_id) {
         Applet.IconApplet.prototype._init.call(this, aOrientation, aPanel_height, aInstance_id);
 
-        this.applet_dir = aMetadata.path;
-        this.main_applet_dir = this.applet_dir;
-
         // Condition needed for retro-compatibility.
         // Mark for deletion on EOL.
         if (Applet.hasOwnProperty("AllowedLayout"))
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         try {
-            // Use the this.main_applet_dir directory for imports shared by all supported Cinnamon versions.
-            // If I use just this.applet_dir, I would be forced to put the files to be imported
-            // repeatedly inside each version folder. ¬¬
-            let regExp = new RegExp("(" + aMetadata.uuid + ")$", "g");
-            if (!regExp.test(this.main_applet_dir)) {
-                let tempFile = Gio.file_new_for_path(this.main_applet_dir);
-                this.main_applet_dir = tempFile.get_parent().get_path();
-            }
-
-            // Prepare translation mechanism.
-            UUID = aMetadata.uuid;
-            Gettext.bindtextdomain(aMetadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
-
             this.settings = new Settings.AppletSettings(this, aMetadata.uuid, aInstance_id);
 
-            Gtk.IconTheme.get_default().append_search_path(this.main_applet_dir + "/icons/");
+            Gtk.IconTheme.get_default().append_search_path(aMetadata.path + "/icons/");
 
             this._bindSettings();
 
@@ -174,9 +51,9 @@ MyApplet.prototype = {
             this._lastScroll = Date.now();
             this.didpeek = false;
             this.uptgg = true;
-            this._orientation = aOrientation;
-            this._instance_id = aInstance_id;
-            this._metadata = aMetadata;
+            this.orientation = aOrientation;
+            this.instance_id = aInstance_id;
+            this.metadata = aMetadata;
 
             this.actor.connect("scroll-event", Lang.bind(this, this._onScroll));
 
@@ -196,7 +73,13 @@ MyApplet.prototype = {
     },
 
     _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
+        // Needed for retro-compatibility.
+        // Mark for deletion on EOL.
+        let bD = {
+            IN: 1,
+            OUT: 2,
+            BIDIRECTIONAL: 3
+        };
         let settingsArray = [
             [bD.BIDIRECTIONAL, "pref_applet_background_color", this._setAppletStyle],
             [bD.BIDIRECTIONAL, "pref_applet_with", this._setAppletStyle],
@@ -294,7 +177,7 @@ MyApplet.prototype = {
             this._winMenu = this._applet_context_menu;
         else { // Left or Middle click
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this._winMenu = new Applet.AppletPopupMenu(this, this._orientation, this._instance_id);
+            this._winMenu = new Applet.AppletPopupMenu(this, this.orientation, this.instance_id);
             this.menuManager.addMenu(this._winMenu);
         }
 
@@ -303,10 +186,27 @@ MyApplet.prototype = {
         } catch (aErr) {}
     },
 
+    _createCloseIcon: function(aIsWindow) {
+        let close_icon = new St.Icon({
+            icon_name: (aIsWindow ? "window-close" : "edit-delete"),
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 14,
+            style_class: "popup-menu-icon"
+        });
+
+        if (aIsWindow)
+            close_icon["style_class"] = "popup-menu-icon";
+
+        return new St.Button({
+            child: close_icon
+        });
+    },
+
     updateMenu: function() {
         let allwins = [];
         this._winMenu.removeAll();
         let empty_menu = true;
+
         try {
             let tracker = Cinnamon.WindowTracker.get_default();
             for (let wks = 0; wks < global.screen.n_workspaces; ++wks) {
@@ -328,7 +228,7 @@ MyApplet.prototype = {
                         iLen = sticky_windows.length;
                     for (; i < iLen; ++i) {
                         let metaWindow = sticky_windows[i];
-                        let TL_Dot = '...';
+                        let TL_Dot = "...";
 
                         if (metaWindow.get_title().length < 69) {
                             TL_Dot = "";
@@ -336,38 +236,40 @@ MyApplet.prototype = {
 
                         let app = tracker.get_window_app(metaWindow);
                         let icon = app.create_icon_texture(18);
-                        let item = new MenuItem(metaWindow.get_title().substring(0, 68) + TL_Dot, icon,
+                        let item = new $.MenuItem(
+                            metaWindow.get_title().substring(0, 68) + TL_Dot,
+                            icon,
                             Lang.bind(this, function() {
                                 this.activateWindow(metaWorkspace, metaWindow);
-                            }));
+                            })
+                        );
 
                         if (this.pref_show_close_buttons) {
-                            let close_icon = new St.Icon({
-                                icon_name: 'window-close',
-                                icon_type: St.IconType.SYMBOLIC,
-                                style_class: 'popup-menu-icon'
-                            });
-                            let close_button = new St.Button({
-                                child: close_icon
-                            });
-                            close_button.connect('clicked', Lang.bind(this, function() {
+                            let close_button = this._createCloseIcon(true);
+                            close_button.tooltip = new Tooltips.Tooltip(close_button,
+                                _("Close window"));
+                            close_button.connect("clicked", Lang.bind(this, function() {
+                                let fallback = false;
+                                let items = this._winMenu._getMenuItems();
+                                let ii = items.indexOf(item);
+
+                                if (this.pref_keep_menu_open) {
+                                    if (items[ii + 1] && items[ii + 1].actor)
+                                        items[ii + 1].actor.grab_key_focus();
+                                    else
+                                        fallback = true;
+                                }
+
                                 item.destroy();
                                 delete allwins[allwins.indexOf(metaWindow)];
                                 metaWindow.delete(global.get_current_time());
-                                if (this.pref_keep_menu_open) {
+
+                                // Fallback in case there wasn't an item to focus on.
+                                if (this.pref_keep_menu_open && fallback) {
                                     this.uptgg = false;
                                     this._winMenu.toggle();
                                 }
                             }));
-                            close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].set_style_class_name('popup-menu-icon');
-                                _children[_children.length - 1].add_style_class_name('popup-inactive-menu-item');
-                            })));
-                            close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].set_style_class_name('popup-menu-icon');
-                            })));
                             item.addActor(close_button, {
                                 align: St.Align.END
                             });
@@ -390,22 +292,17 @@ MyApplet.prototype = {
                         let item = new PopupMenu.PopupMenuItem(workspace_name);
                         item.actor.reactive = false;
                         item.actor.can_focus = false;
-                        item.label.add_style_class_name('popup-subtitle-menu-item');
+                        item.label.add_style_class_name("popup-subtitle-menu-item");
 
                         if (wks == global.screen.get_active_workspace().index()) {
                             item.setShowDot(true);
                         }
 
                         if (this.pref_show_close_buttons && this.pref_show_close_all_buttons) {
-                            let close_icon = new St.Icon({
-                                icon_name: Gtk.STOCK_DELETE,
-                                icon_type: St.IconType.FULLCOLOR,
-                                style: 'icon-size: 0.85em;'
-                            });
-                            let close_button = new St.Button({
-                                child: close_icon
-                            });
-                            close_button.connect('clicked', Lang.bind(this, function() {
+                            let close_button = this._createCloseIcon(false);
+                            close_button.tooltip = new Tooltips.Tooltip(close_button,
+                                _("Close all windows from this wrokspace"));
+                            close_button.connect("clicked", Lang.bind(this, function() {
                                 let items = this._winMenu._getMenuItems();
                                 for (let ii = items.indexOf(item); ii < items.length; ii++) {
                                     if (items[ii] instanceof PopupMenu.PopupSeparatorMenuItem)
@@ -425,19 +322,14 @@ MyApplet.prototype = {
                                     this._winMenu.toggle();
                                 }
 
+                                // Keep this method to keep the menu open.
+                                // Implementing the same that I did in the other cases
+                                // would be a nightmare.
                                 if (this.pref_keep_menu_open) {
                                     this.uptgg = false;
                                     this._winMenu.toggle();
                                 }
                             }));
-                            close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].get_children()[0].style = "icon-size: 1em;";
-                            })));
-                            close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].get_children()[0].style = "icon-size: 0.85em;";
-                            })));
                             item.addActor(close_button, {
                                 align: St.Align.MIDDLE
                             });
@@ -451,27 +343,27 @@ MyApplet.prototype = {
                         iLen = windows.length;
                     for (; i < iLen; ++i) {
                         let metaWindow = windows[i];
-                        let TL_Dot = '...';
+                        let TL_Dot = "...";
                         if (metaWindow.get_title().length < 69) {
                             TL_Dot = "";
                         }
                         let app = tracker.get_window_app(metaWindow);
                         let icon = app.create_icon_texture(18);
-                        let item = new MenuItem(metaWindow.get_title().substring(0, 68) + TL_Dot, icon,
+                        let item = new $.MenuItem(
+                            metaWindow.get_title().substring(0, 68) + TL_Dot,
+                            icon,
                             Lang.bind(this, function() {
                                 this.activateWindow(metaWorkspace, metaWindow);
-                            }));
+                            })
+                        );
 
                         if (this.pref_show_close_buttons) {
-                            let close_icon = new St.Icon({
-                                icon_name: 'window-close',
-                                icon_type: St.IconType.SYMBOLIC,
-                                style_class: 'popup-menu-icon'
-                            });
-                            let close_button = new St.Button({
-                                child: close_icon
-                            });
-                            close_button.connect('clicked', Lang.bind(this, function() {
+                            let close_button = this._createCloseIcon(true);
+                            close_button.tooltip = new Tooltips.Tooltip(close_button,
+                                _("Close window"));
+                            close_button.connect("clicked", Lang.bind(this, function() {
+                                let fallback = false;
+
                                 let items = this._winMenu._getMenuItems();
                                 let ii = items.indexOf(item);
 
@@ -480,25 +372,24 @@ MyApplet.prototype = {
                                     items[ii - 1].destroy();
                                 }
 
+                                if (this.pref_keep_menu_open) {
+                                    if (items[ii + 1] && items[ii + 1].actor)
+                                        items[ii + 1].actor.grab_key_focus();
+                                    else
+                                        fallback = true;
+                                }
+
                                 item.destroy();
                                 delete allwins[allwins.indexOf(metaWindow)];
                                 delete windows[windows.indexOf(metaWindow)];
                                 metaWindow.delete(global.get_current_time());
 
-                                if (this.pref_keep_menu_open) {
+                                // Fallback in case there wasn't an item to focus on.
+                                if (this.pref_keep_menu_open && fallback) {
                                     this.uptgg = false;
                                     this._winMenu.toggle();
                                 }
                             }));
-                            close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].set_style_class_name('popup-menu-icon');
-                                _children[_children.length - 1].add_style_class_name('popup-inactive-menu-item');
-                            })));
-                            close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function() {
-                                let _children = item.actor.get_children();
-                                _children[_children.length - 1].set_style_class_name('popup-menu-icon');
-                            })));
                             item.addActor(close_button, {
                                 align: St.Align.END
                             });
@@ -518,31 +409,26 @@ MyApplet.prototype = {
             let item = new PopupMenu.PopupMenuItem(_("No open windows"));
             item.actor.reactive = false;
             item.actor.can_focus = false;
-            item.label.add_style_class_name('popup-subtitle-menu-item');
+            item.label.add_style_class_name("popup-subtitle-menu-item");
             this._winMenu.addMenuItem(item);
         }
 
         this._winMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         let icon = new St.Icon({
-            icon_name: 'cinnamon-expo-symbolic',
+            icon_name: "cinnamon-expo-symbolic",
             icon_type: St.IconType.SYMBOLIC,
             icon_size: 18
         });
-        let item = new MenuItem(_("Expo"), icon, Lang.bind(this, function() {
+        let item = new $.MenuItem(_("Expo"), icon, Lang.bind(this, function() {
             if (!Main.expo.animationInProgress)
                 Main.expo.toggle();
         }));
 
         if (allwins.length > 0 && this.pref_show_close_buttons && this.pref_show_close_all_buttons) {
-            let close_icon = new St.Icon({
-                icon_name: Gtk.STOCK_DELETE,
-                icon_type: St.IconType.FULLCOLOR,
-                style: 'icon-size: 0.8em;'
-            });
-            let close_button = new St.Button({
-                child: close_icon
-            });
-            close_button.connect('clicked', Lang.bind(this, function() {
+            let close_button = this._createCloseIcon(false);
+            close_button.tooltip = new Tooltips.Tooltip(close_button,
+                _("Close all windows from all workspaces"));
+            close_button.connect("clicked", Lang.bind(this, function() {
                 let wi = 0,
                     wiLen = allwins.length;
                 for (; wi < wiLen; wi++) {
@@ -551,11 +437,11 @@ MyApplet.prototype = {
                 }
                 this._winMenu.toggle();
             }));
-            close_button.connect('enter-event', Lang.bind(this, Lang.bind(this, function() {
+            close_button.connect("enter-event", Lang.bind(this, Lang.bind(this, function() {
                 let _children = item.actor.get_children();
                 _children[_children.length - 1].get_children()[0].style = "icon-size: 1em;";
             })));
-            close_button.connect('leave-event', Lang.bind(this, Lang.bind(this, function() {
+            close_button.connect("leave-event", Lang.bind(this, Lang.bind(this, function() {
                 let _children = item.actor.get_children();
                 _children[_children.length - 1].get_children()[0].style = "icon-size: 0.8em;";
             })));
@@ -600,7 +486,7 @@ MyApplet.prototype = {
             let menuItem = new PopupMenu.PopupIconMenuItem(_("Help"),
                 "dialog-information", St.IconType.SYMBOLIC);
             menuItem.connect("activate", Lang.bind(this, function() {
-                Util.spawnCommandLine("xdg-open " + this.main_applet_dir + "/HELP.html");
+                Util.spawn_async(["xdg-open", this.metadata.path + "/HELP.html"], null);
             }));
             this._applet_context_menu.addMenuItem(menuItem);
         }
@@ -611,7 +497,7 @@ MyApplet.prototype = {
             this.context_menu_item_about = new PopupMenu.PopupIconMenuItem(_("About..."),
                 "dialog-question",
                 St.IconType.SYMBOLIC);
-            this.context_menu_item_about.connect('activate', Lang.bind(this, this.openAbout));
+            this.context_menu_item_about.connect("activate", Lang.bind(this, this.openAbout));
             this._applet_context_menu.addMenuItem(this.context_menu_item_about);
         }
 
@@ -621,9 +507,10 @@ MyApplet.prototype = {
             this.context_menu_item_configure = new PopupMenu.PopupIconMenuItem(_("Configure..."),
                 "system-run",
                 St.IconType.SYMBOLIC);
-            this.context_menu_item_configure.connect('activate', Lang.bind(this, function() {
-                Util.spawnCommandLine("cinnamon-settings applets " + this._metadata.uuid +
-                    " " + this._instance_id);
+            this.context_menu_item_configure.connect("activate", Lang.bind(this, function() {
+                Util.spawn_async(["cinnamon-settings applets", this.metadata.uuid,
+                    this.instance_id
+                ], null);
             }));
             this._applet_context_menu.addMenuItem(this.context_menu_item_configure);
         }
@@ -632,16 +519,16 @@ MyApplet.prototype = {
             // NOTE: This string could be left blank because it's a default string,
             // so it's already translated by Cinnamon. It's up to the translators.
             this.context_menu_item_remove = new PopupMenu.PopupIconMenuItem(_("Remove '%s'")
-                .format(this._metadata.name),
+                .format(this.metadata.name),
                 "edit-delete",
                 St.IconType.SYMBOLIC);
-            this.context_menu_item_remove.connect('activate', Lang.bind(this, function() {
-                new ConfirmationDialog(Lang.bind(this, function() {
-                        Main.AppletManager._removeAppletFromPanel(this._metadata.uuid, this._instance_id);
+            this.context_menu_item_remove.connect("activate", Lang.bind(this, function() {
+                new $.ConfirmationDialog(Lang.bind(this, function() {
+                        Main.AppletManager._removeAppletFromPanel(this.metadata.uuid, this.instance_id);
                     }),
-                    this._metadata.name,
+                    this.metadata.name,
                     _("Are you sure that you want to remove '%s' from your panel?")
-                    .format(this._metadata.name),
+                    .format(this.metadata.name),
                     _("Cancel"), _("OK")).open();
             }));
             this._applet_context_menu.addMenuItem(this.context_menu_item_remove);
@@ -706,7 +593,7 @@ MyApplet.prototype = {
         });
     },
 
-    _onEntered: function(event) {
+    _onEntered: function(event) { // jshint ignore:line
         if (this.pref_peek_desktop_enabled) {
             if (this._peektimeoutid)
                 Mainloop.source_remove(this._peektimeoutid);
@@ -740,7 +627,7 @@ MyApplet.prototype = {
                         if (this.pref_blur_effect_enabled) {
                             if (!compositor.eff)
                                 compositor.eff = new Clutter.BlurEffect();
-                            compositor.add_effect_with_name('blur', compositor.eff);
+                            compositor.add_effect_with_name("blur", compositor.eff);
                         }
                     }
 
@@ -758,7 +645,7 @@ MyApplet.prototype = {
         }
     },
 
-    _onLEntered: function(event) {
+    _onLEntered: function(event) { // jshint ignore:line
         if (this.didpeek) {
             this.show_all(0.2);
             this.didpeek = false;
@@ -873,7 +760,7 @@ MyApplet.prototype = {
             this.pref_button_to_open_menu === "winlistmenu3")
             tt += boldSpan(_("Right click") + ": ") + this._strMap("winmenu") + "\n";
 
-        this.tooltip = new Tooltips.PanelItemTooltip(this, "", this._orientation);
+        this.tooltip = new Tooltips.PanelItemTooltip(this, "", this.orientation);
 
         try {
             this.tooltip._tooltip.set_style("text-align: left;");
@@ -1123,7 +1010,7 @@ MyApplet.prototype = {
                 switch (style) {
                     case "coverflow":
                         if (!this._switcherIsRuning)
-                            new myCoverflowSwitcher(this);
+                            new $.MyCoverflowSwitcher(this);
 
                         this._switcherIsRuning = true;
                         Mainloop.timeout_add(delay, Lang.bind(this, function() {
@@ -1132,7 +1019,7 @@ MyApplet.prototype = {
                         break;
                     case "timeline":
                         if (!this._switcherIsRuning)
-                            new myTimelineSwitcher(this);
+                            new $.MyTimelineSwitcher(this);
 
                         this._switcherIsRuning = true;
                         Mainloop.timeout_add(delay, Lang.bind(this, function() {
@@ -1140,7 +1027,7 @@ MyApplet.prototype = {
                         }));
                         break;
                     default:
-                        new myClassicSwitcher(this);
+                        new $.MyClassicSwitcher(this);
                         break;
                 }
 
@@ -1233,252 +1120,9 @@ MyApplet.prototype = {
         return not_ours;
     },
 
-    _notifyme: function(aMsg) {
-        GLib.spawn_command_line_async("notify-send --icon=image-missing '" + aMsg + "'");
-    },
-
     on_applet_removed_from_panel: function() {
         this.settings.finalize();
     },
-};
-
-function myClassicSwitcher() {
-    this._init.apply(this, arguments);
-}
-
-myClassicSwitcher.prototype = {
-    __proto__: ClassicSwitcher.ClassicSwitcher.prototype,
-
-    _init: function() {
-        AppSwitcher.AppSwitcher.prototype._init.apply(this, arguments);
-
-        this.actor = new Cinnamon.GenericContainer({
-            name: "altTabPopup",
-            reactive: true,
-            visible: false
-        });
-
-        this._thumbnailTimeoutId = 0;
-        this.thumbnailsVisible = false;
-        this._displayPreviewTimeoutId = 0;
-
-        Main.uiGroup.add_actor(this.actor);
-
-        if (!this._setupModal())
-            return true;
-
-        let styleSettings = this._binding.pref_switcher_style;
-
-        if (styleSettings === "default")
-            styleSettings = global.settings.get_string("alttab-switcher-style");
-
-        let features = styleSettings.split("+");
-        this._iconsEnabled = features.indexOf("icons") !== -1;
-        this._previewEnabled = features.indexOf("preview") !== -1;
-        this._thumbnailsEnabled = features.indexOf("thumbnails") !== -1;
-
-        if (!this._iconsEnabled && !this._previewEnabled && !this._thumbnailsEnabled)
-            this._iconsEnabled = true;
-
-        this._showThumbnails = this._thumbnailsEnabled && !this._iconsEnabled;
-        this._showArrows = this._thumbnailsEnabled && this._iconsEnabled;
-
-        this._updateList(0);
-
-        this.actor.connect("get-preferred-width", Lang.bind(this, this._getPreferredWidth));
-        this.actor.connect("get-preferred-height", Lang.bind(this, this._getPreferredHeight));
-        this.actor.connect("allocate", Lang.bind(this, this._allocate));
-
-        // Need to force an allocation so we can figure out whether we
-        // need to scroll when selecting
-        this.actor.opacity = 0;
-        this.actor.show();
-        this.actor.get_allocation_box();
-
-        return true;
-    },
-
-    _setupModal: function() {
-        this._haveModal = Main.pushModal(this.actor);
-        if (!this._haveModal)
-            this._activateSelected();
-        else {
-            this._disableHover();
-            this.actor.connect("key-press-event", Lang.bind(this, this._keyPressEvent));
-            this.actor.connect("key-release-event", Lang.bind(this, this._keyReleaseEvent));
-            this.actor.connect("scroll-event", Lang.bind(this, this._scrollEvent));
-            this.actor.connect("button-press-event", Lang.bind(this, this.owndestroy));
-            let delay = global.settings.get_int("alttab-switcher-delay");
-            this._initialDelayTimeoutId = Mainloop.timeout_add(delay, Lang.bind(this, this._show));
-            this._currentIndex--;
-        }
-        return this._haveModal;
-    },
-
-    _keyReleaseEvent: function(actor, event) {
-        let key = event.get_key_symbol();
-        if (key == Clutter.KEY_Right || key == Clutter.KEY_Left) return true;
-        if (this._initialDelayTimeoutId !== 0)
-            this._currentIndex = (this._currentIndex + 1) % this._windows.length;
-        this._activateSelected();
-        return true;
-    },
-
-    owndestroy: function() {
-        this._activateSelected();
-    },
-};
-
-function myTimelineSwitcher() {
-    this._init.apply(this, arguments);
-}
-
-myTimelineSwitcher.prototype = {
-    __proto__: TimelineSwitcher.TimelineSwitcher.prototype,
-
-    _init: function() {
-        TimelineSwitcher.TimelineSwitcher.prototype._init.apply(this, arguments);
-    },
-
-    _setupModal: function() {
-        this._haveModal = Main.pushModal(this.actor);
-        if (!this._haveModal)
-            this._activateSelected();
-        else {
-            this._disableHover();
-
-            this.actor.connect("key-press-event", Lang.bind(this, this._keyPressEvent));
-            this.actor.connect("key-release-event", Lang.bind(this, this._keyReleaseEvent));
-            this.actor.connect("scroll-event", Lang.bind(this, this._scrollEvent));
-            this.actor.connect("button-press-event", Lang.bind(this, this.owndestroy));
-            let delay = global.settings.get_int("alttab-switcher-delay");
-            this._initialDelayTimeoutId = Mainloop.timeout_add(delay, Lang.bind(this, this._show));
-            this._currentIndex--;
-        }
-        return this._haveModal;
-    },
-
-    _keyReleaseEvent: function(actor, event) {
-        let key = event.get_key_symbol();
-        if (key == Clutter.KEY_Right || key == Clutter.KEY_Left) return true;
-        if (this._initialDelayTimeoutId !== 0)
-            this._currentIndex = (this._currentIndex + 1) % this._windows.length;
-        this._activateSelected();
-        return true;
-    },
-
-    owndestroy: function() {
-        this._activateSelected();
-    },
-};
-
-function myCoverflowSwitcher() {
-    this._init.apply(this, arguments);
-}
-
-myCoverflowSwitcher.prototype = {
-    __proto__: CoverflowSwitcher.CoverflowSwitcher.prototype,
-
-    _init: function() {
-        CoverflowSwitcher.CoverflowSwitcher.prototype._init.apply(this, arguments);
-    },
-
-    _setupModal: function() {
-        this._haveModal = Main.pushModal(this.actor);
-        if (!this._haveModal)
-            this._activateSelected();
-        else {
-            this._disableHover();
-
-            this.actor.connect("key-press-event", Lang.bind(this, this._keyPressEvent));
-            this.actor.connect("key-release-event", Lang.bind(this, this._keyReleaseEvent));
-            this.actor.connect("scroll-event", Lang.bind(this, this._scrollEvent));
-            this.actor.connect("button-press-event", Lang.bind(this, this.owndestroy));
-            let delay = global.settings.get_int("alttab-switcher-delay");
-            this._initialDelayTimeoutId = Mainloop.timeout_add(delay, Lang.bind(this, this._show));
-            this._currentIndex--;
-        }
-        return this._haveModal;
-    },
-
-    _keyReleaseEvent: function(actor, event) {
-        let key = event.get_key_symbol();
-        if (key == Clutter.KEY_Right || key == Clutter.KEY_Left) return true;
-        if (this._initialDelayTimeoutId !== 0)
-            this._currentIndex = (this._currentIndex + 1) % this._windows.length;
-        this._activateSelected();
-        return true;
-    },
-
-    owndestroy: function() {
-        this._activateSelected();
-    },
-
-};
-
-function ConfirmationDialog() {
-    this._init.apply(this, arguments);
-}
-
-ConfirmationDialog.prototype = {
-    __proto__: ModalDialog.ModalDialog.prototype,
-
-    _init: function(aCallback, aDialogLabel, aDialogMessage, aCancelButtonLabel, aDoButtonLabel) {
-        ModalDialog.ModalDialog.prototype._init.call(this, {
-            styleClass: null
-        });
-
-        let mainContentBox = new St.BoxLayout({
-            style_class: 'polkit-dialog-main-layout',
-            vertical: false
-        });
-        this.contentLayout.add(mainContentBox, {
-            x_fill: true,
-            y_fill: true
-        });
-
-        let messageBox = new St.BoxLayout({
-            style_class: 'polkit-dialog-message-layout',
-            vertical: true
-        });
-        mainContentBox.add(messageBox, {
-            y_align: St.Align.START
-        });
-
-        this._subjectLabel = new St.Label({
-            style_class: 'polkit-dialog-headline',
-            text: aDialogLabel
-        });
-
-        messageBox.add(this._subjectLabel, {
-            y_fill: false,
-            y_align: St.Align.START
-        });
-
-        this._descriptionLabel = new St.Label({
-            style_class: 'polkit-dialog-description',
-            text: aDialogMessage
-        });
-
-        messageBox.add(this._descriptionLabel, {
-            y_fill: true,
-            y_align: St.Align.START
-        });
-
-        this.setButtons([{
-            label: aCancelButtonLabel,
-            action: Lang.bind(this, function() {
-                this.close();
-            }),
-            key: Clutter.Escape
-        }, {
-            label: aDoButtonLabel,
-            action: Lang.bind(this, function() {
-                this.close();
-                aCallback();
-            })
-        }]);
-    }
 };
 
 function main(aMetadata, aOrientation, aPanel_height, aInstance_id) {

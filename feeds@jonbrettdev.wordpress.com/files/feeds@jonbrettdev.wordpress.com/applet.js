@@ -310,7 +310,7 @@ FeedApplet.prototype = {
             this.set_applet_tooltip(tooltip);
         } else {
             this.set_applet_icon_symbolic_name("feed");
-            this.set_applet_tooltip("No unread feeds");
+            this.set_applet_tooltip(_("No unread feeds"));
         }
     },
 

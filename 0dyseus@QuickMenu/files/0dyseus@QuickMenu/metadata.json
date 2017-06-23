@@ -1,17 +1,16 @@
 {
-    "uuid": "0dyseus@QuickMenu",
-    "max-instances": "-1",
-    "name": "Quick Menu",
-    "version": "1.06",
-    "multiversion": true,
-    "last-edited": "1473934114",
-    "description": "Easily and quickly create a menu based on the files/folders found inside an specific folder.",
-    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "contributors": "muzena: Croatian localization.,giwhub: Chinese localization.",
     "website": "https://github.com/Odyseus/CinnamonTools",
+    "description": "Easily and quickly create a menu based on the files/folders found inside an specific folder.",
     "cinnamon-version": [
         "2.8",
         "3.0",
-        "3.2"
-    ]
+        "3.2",
+        "3.4"
+    ],
+    "max-instances": "-1",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "contributors": "See this xlet help file.",
+    "name": "Quick Menu",
+    "version": "1.08",
+    "uuid": "0dyseus@QuickMenu"
 }
