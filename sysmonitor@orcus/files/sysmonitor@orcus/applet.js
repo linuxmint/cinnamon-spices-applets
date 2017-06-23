@@ -259,8 +259,10 @@ MyApplet.prototype = {
 
     on_cfg_changed_smooth: function() {
         for (let g of this.graphs) {
-            g.smooth = this.cfg_smooth;
-            g.repaint();
+            if (g) {
+                g.smooth = this.cfg_smooth;
+                g.repaint();
+            }
         }
     },
 
@@ -270,14 +272,17 @@ MyApplet.prototype = {
             this.update_timeout_id = 0;
         }
         for (let g of this.graphs)
-            g.provider.refresh_rate = this.cfg_refresh_rate;
+            if (g)
+                g.provider.refresh_rate = this.cfg_refresh_rate;
         this.update();
     },
 
     on_cfg_changed_draw_border: function() {
         for (let g of this.graphs) {
-            g.setDrawBorder(this.cfg_draw_border);
-            g.repaint();
+            if (g) {
+                g.setDrawBorder(this.cfg_draw_border);
+                g.repaint();
+            }
         }
     },
 
@@ -285,9 +290,11 @@ MyApplet.prototype = {
         this.bg_color = colorToArray(this.cfg_bg_color);
         this.border_color = colorToArray(this.cfg_border_color);
         for (let g of this.graphs) {
-            g.bg_color = this.bg_color;
-            g.border_color = this.border_color;
-            g.repaint();
+            if (g) {
+                g.bg_color = this.bg_color;
+                g.border_color = this.border_color;
+                g.repaint();
+            }
         }
     },
 
