@@ -53,7 +53,7 @@ Docker.prototype = {
         let columns = this.parseColumnMetadata(output_lines[0]);
         let lines = [];
         for (let index = 1; index < output_lines.length - 1; index++) {
-            line = {};
+            let line = {};
             columns.forEach(function(column) {
                 if (column.length != -1) {
                     line[column.name.toLowerCase()] = output_lines[index].substr(column.position, column.length).trim();

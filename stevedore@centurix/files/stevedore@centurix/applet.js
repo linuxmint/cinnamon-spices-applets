@@ -560,7 +560,7 @@ Stevedore.prototype = {
                 {reactive: false}
             ));
             let mounts = this.docker.mounts(containers[index].names);
-            if (mounts) {
+            if (mounts && mounts.length > 0) {
                 this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
                     'folder',
                     '\t' + _("Mount: ") + mounts[0].Source + ':' + mounts[0].Destination,
