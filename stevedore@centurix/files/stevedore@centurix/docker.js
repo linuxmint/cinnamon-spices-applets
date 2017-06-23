@@ -4,6 +4,10 @@ const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 
+/**
+ * Be version aware, 1.12.6 doesn't have the container/image commands!
+ **/
+
 function Docker() {
     this._init();
 }
@@ -22,13 +26,13 @@ Docker.prototype = {
     },
 
     parseColumnMetadata: function(original_row) {
-        row = original_row;
-        last_reduction = '';
+        let row = original_row;
+        let last_reduction = '';
         while (row != last_reduction) {
             last_reduction = row;
             row = row.replace(/   /gi, '  ');
         }
-        positions = [];
+        let positions = [];
         row.split('  ').forEach(function(element) {
             positions.push({
                 name: element,
@@ -36,7 +40,7 @@ Docker.prototype = {
                 length: -1
             });
         });
-        for (var index = 0; index < positions.length - 1; index++) {
+        for (let index = 0; index < positions.length - 1; index++) {
             positions[index].length = positions[index + 1].position - positions[index].position;
         }
         return positions;
@@ -44,11 +48,11 @@ Docker.prototype = {
 
     colCommand: function(command) {
         let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + ' ' + command);
-        output_lines = list.toString().split('\n');
+        let output_lines = list.toString().split('\n');
         // Each column is a minimum of 20 characters, but can be larger. Column headings tell us how wide...
-        columns = this.parseColumnMetadata(output_lines[0]);
-        lines = [];
-        for (var index = 1; index < output_lines.length - 1; index++) {
+        let columns = this.parseColumnMetadata(output_lines[0]);
+        let lines = [];
+        for (let index = 1; index < output_lines.length - 1; index++) {
             line = {};
             columns.forEach(function(column) {
                 if (column.length != -1) {
@@ -64,11 +68,13 @@ Docker.prototype = {
 
     // --format option may help a lot here...
     listImages: function() {
-        return this.colCommand('image ls');
+        // return this.colCommand('image ls');
+        return this.colCommand('images');
     },
 
     addImage: function(image_name) {
         try {
+            global.log('Adding a new image: ' + this.commandPath() + ' pull ' + image_name);
             let [res, list, err, status] = GLib.spawn_command_line_async(this.commandPath() + ' pull ' + image_name);
             return true
         } catch(e) {
@@ -113,25 +119,32 @@ Docker.prototype = {
 
     newContainer: function(image_id, volume, workdir, memory, memorySwap, entrypoint, params) {
         try {
-            arguments = ' create';
+            let command_arguments = ' create';
+            
             if (params != '')
-                arguments += ' ' + params;
-            arguments += ' --tty';
-            if (volume != '')
-                arguments += ' --volume=' + volume;
-            if (workdir != '')
-                arguments += ' --workdir=' + workdir;
-            if (memory != '')
-                arguments += ' --memory=' + memory;
-            if (memorySwap != '')
-                arguments += ' --memory-swap=' + memorySwap;
+                command_arguments += ' ' + params;
 
-            arguments += ' ' + image_id + ' ';
+            command_arguments += ' --tty';
+            
+            if (volume != '')
+                command_arguments += ' --volume=' + volume;
+            
+            if (workdir != '')
+                command_arguments += ' --workdir=' + workdir;
+            
+            if (memory != '')
+                command_arguments += ' --memory=' + memory;
+            
+            if (memorySwap != '')
+                command_arguments += ' --memory-swap=' + memorySwap;
+
+            command_arguments += ' ' + image_id + ' ';
 
             if (entrypoint != '')
-                arguments += ' ' + entrypoint;
+                command_arguments += ' ' + entrypoint;
 
-            let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + arguments);
+            global.log('Creating a new container: ' + this.commandPath() + command_arguments);
+            let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + command_arguments);
             return true;
         } catch(e) {
             global.log(e);
@@ -158,7 +171,7 @@ Docker.prototype = {
 
     hasSSH: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return ('22/tcp' in container.NetworkSettings.Ports);
         } catch(e) {
             global.log(e);
@@ -168,7 +181,7 @@ Docker.prototype = {
 
     hasWeb: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return ('80/tcp' in container.NetworkSettings.Ports);
         } catch(e) {
             global.log(e);
@@ -178,7 +191,7 @@ Docker.prototype = {
 
     IPAddress: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return container.NetworkSettings.Networks.bridge.IPAddress;
         } catch(e) {
             global.log(e);
@@ -188,7 +201,7 @@ Docker.prototype = {
 
     mounts: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return container.Mounts;
         } catch(e) {
             global.log(e);
@@ -198,7 +211,7 @@ Docker.prototype = {
 
     path: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return container.Path;
         } catch(e) {
             global.log(e);
@@ -208,7 +221,7 @@ Docker.prototype = {
 
     memory: function(container_id) {
         try {
-            container = this.inspectContainer(container_id);
+            let container = this.inspectContainer(container_id);
             return container.HostConfig.Memory;
         } catch(e) {
             global.log(e);

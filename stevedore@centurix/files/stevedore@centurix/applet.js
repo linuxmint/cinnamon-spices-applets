@@ -58,6 +58,7 @@ CreateContainerDialog.prototype = {
                 /*style_class: 'polkit-dialog-message-layout',*/
                 vertical: true
             });
+
             mainContentBox.add(messageBox, {
                 y_align: St.Align.START
             });
@@ -275,6 +276,7 @@ NewImageDialog.prototype = {
                 /* style_class: 'polkit-dialog-main-layout',*/
                 vertical: false
             });
+
             this.contentLayout.add(mainContentBox, {
                 x_fill: true,
                 y_fill: true
@@ -284,6 +286,7 @@ NewImageDialog.prototype = {
                 /*style_class: 'polkit-dialog-message-layout',*/
                 vertical: true
             });
+            
             mainContentBox.add(messageBox, {
                 y_align: St.Align.START
             });
@@ -339,19 +342,19 @@ NewImageDialog.prototype = {
 
     _onKeyPressEvent: function(actor, event) {
         try {
-            searchTerm = this._imageSearch.text;
+            let searchTerm = this._imageSearch.text;
             if (searchTerm == '') {
                 return false;
             }
             let key = event.get_key_symbol();
-            if (this._timer > 0) {
+            if (this._timer && this._timer > 0) {
                 Mainloop.source_remove(this._timer);
             }
             if (key == Clutter.Return) {
                 this.imageSearch(searchTerm, Lang.bind(this, this.displayResults));
             } else {
                 this._timer = Mainloop.timeout_add(2000, Lang.bind(this, function() {
-                    if (this._timer > 0) {
+                    if (this._timer && this._timer > 0) {
                         Mainloop.source_remove(this._timer);
                     }
                     this.imageSearch(searchTerm, Lang.bind(this, this.displayResults));
@@ -370,7 +373,7 @@ NewImageDialog.prototype = {
             this._images = [];
             this._buttons = [];
             this._imageResults.destroy_all_children();
-            for (index = 0; index < json.summaries.length; index++) {
+            for (let index = 0; index < json.summaries.length; index++) {
                 this._images[index] = new St.Label({
                     style_class: 'image-name',
                     text: json.summaries[index].name
@@ -402,7 +405,7 @@ NewImageDialog.prototype = {
         // Search for Docker images
         try {
             this._imageResults.destroy_all_children();
-            temp_note = new St.Label({
+            let temp_note = new St.Label({
                 style_class: 'image-name',
                 text: _("Searching...")
             });
@@ -458,6 +461,18 @@ Stevedore.prototype = {
             ));
             return;
         }
+        let versions = this.docker.versions();
+        if (parseInt(versions.docker.split('.')[0]) < 17) {
+            this.set_applet_icon_path(ICON_MISSING);
+            this.set_applet_tooltip(_("Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."));
+            this.notification(_("Stevedor: Docker is out of date, please install version 17.03.0-ce or higher."));
+            this.menu.addMenuItem(this.newIconMenuItem(
+                'package_network',
+                _('Get Docker'),
+                this.openDockerInstall
+            ));
+            return;            
+        }
         this.refreshMenu();
     },
 
@@ -473,7 +488,7 @@ Stevedore.prototype = {
             this.openDialog
         ));
         this.subMenuImages = this.newSubMenuItem(_('Images'));
-        images = this.docker.listImages();
+        let images = this.docker.listImages();
         this.imageMenus = [];
         if (images.length == 0) {
             this.subMenuImages.menu.addMenuItem(this.newIconMenuItem(
@@ -483,9 +498,9 @@ Stevedore.prototype = {
                 {reactive: false}
             ));
         }
-        for (var index = 0; index < images.length; index++) {
+        for (let index = 0; index < images.length; index++) {
             this.imageMenus.push(this.newSubMenuItem('\t' + images[index].repository));
-            menu_index = this.imageMenus.length - 1;
+            let menu_index = this.imageMenus.length - 1;
             this.imageMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
                 'go-up', 
                 '\t' + _('Start a new container from this image'),
@@ -512,7 +527,7 @@ Stevedore.prototype = {
         this.menu.addMenuItem(this.subMenuImages);
 
         this.subMenuContainers = this.newSubMenuItem(_('Containers'));
-        containers = this.docker.listContainers();
+        let containers = this.docker.listContainers();
         if (containers.length == 0) {
             this.subMenuContainers.menu.addMenuItem(this.newIconMenuItem(
                 'package_network', 
@@ -522,10 +537,10 @@ Stevedore.prototype = {
             ));
         }
         this.containerMenus = [];
-        for (var index = 0; index < containers.length; index++) {
-            status_tokens = containers[index].status.split(' ');
+        for (let index = 0; index < containers.length; index++) {
+            let status_tokens = containers[index].status.split(' ');
             this.containerMenus.push(this.newSubMenuItem('\t' + containers[index].names + ' (' + containers[index].image + ', ' + ((status_tokens[0] == 'Up') ? _('Running') : _('Stopped')) + ')'));
-            menu_index = this.containerMenus.length - 1;
+            let menu_index = this.containerMenus.length - 1;
             this.containerMenus[menu_index].menu.addMenuItem(this.newSwitchMenuItem(
                 '\t\t' + ((status_tokens[0] == 'Up') ? _('Running') : _('Stopped')) + ' (' + containers[index].image + ')',
                 (status_tokens[0] == 'Up'),
@@ -544,7 +559,7 @@ Stevedore.prototype = {
                 null,
                 {reactive: false}
             ));
-            mounts = this.docker.mounts(containers[index].names);
+            let mounts = this.docker.mounts(containers[index].names);
             if (mounts) {
                 this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
                     'folder',
@@ -598,7 +613,7 @@ Stevedore.prototype = {
             this.subMenuContainers.menu.addMenuItem(this.containerMenus[menu_index]);
         }
         this.menu.addMenuItem(this.subMenuContainers);
-        var versions = this.docker.versions();
+        let versions = this.docker.versions();
         this.subMenuVersions = new PopupMenu.PopupSubMenuMenuItem(_('Docker Version'));
         this.subMenuVersions.menu.addMenuItem(this.newIconMenuItem('info', _('Docker Version: ') + versions.docker, null, {reactive: false}));
         this.subMenuVersions.menu.addMenuItem(this.newIconMenuItem('info', _('API Version: ') + versions.api, null, {reactive: false}));
@@ -615,7 +630,7 @@ Stevedore.prototype = {
     },
 
     openDialog: function() {
-        dialog = new NewImageDialog(Lang.bind(this, this.addImage));
+        let dialog = new NewImageDialog(Lang.bind(this, this.addImage));
     },
 
     addImage: function(image_name) {
@@ -663,8 +678,12 @@ Stevedore.prototype = {
         Main.Util.spawnCommandLine("xdg-open https://hub.docker.com/r/" + menuItem.value);
     },
 
-    openDockerHome: function(url) {
+    openDockerHome: function() {
         Main.Util.spawnCommandLine("xdg-open https://www.docker.com");
+    },
+
+    openDockerInstall: function() {
+        Main.Util.spawnCommandLine("xdg-open https://docs.docker.com/engine/installation/linux/ubuntu/");
     },
 
     notification: function(message) {
@@ -726,7 +745,7 @@ Stevedore.prototype = {
     },
 
     startContainer: function(menuItem) {
-        dialog = new CreateContainerDialog(menuItem.value, Lang.bind(this, this.createContainer));
+        let dialog = new CreateContainerDialog(menuItem.value, Lang.bind(this, this.createContainer));
     },
 
     createContainer: function(image, mount, dest, workdir, memory, swap, entrypoint, params) {
@@ -775,7 +794,7 @@ Stevedore.prototype = {
 
     formatBytes: function(a,b) {
         if(0 == a) return "0 Bytes";
-        var c = 1e3, d = b || 2, e = ["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"], f = Math.floor(Math.log(a) / Math.log(c));
+        let c = 1e3, d = b || 2, e = ["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"], f = Math.floor(Math.log(a) / Math.log(c));
         return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f];
     }
 }
