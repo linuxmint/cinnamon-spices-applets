@@ -30,7 +30,13 @@ Graph.prototype = {
     _resizeData: function() {
         let datasize = this.width - (this.draw_border ? 2 : 0);
         if (datasize > this.data.length) {
-            this.data = Array(datasize - this.data.length).fill(Array(this.dim).fill(0)).concat(this.data);
+            let d = Array(datasize - this.data.length);
+            for (let i = 0; i < d.length; i++) {
+                d[i] = Array(this.dim);
+                for (let j = 0; j < this.dim; j++)
+                    d[i][j] = 0;
+            }
+            this.data = d.concat(this.data);
         }
         else if (datasize < this.data.length)
             this.data = this.data.slice(this.data.length - datasize);

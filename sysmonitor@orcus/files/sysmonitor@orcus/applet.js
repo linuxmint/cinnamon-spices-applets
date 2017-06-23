@@ -119,10 +119,15 @@ MyApplet.prototype = {
 
             this.bg_color = colorToArray(this.cfg_bg_color);
             this.border_color = colorToArray(this.cfg_border_color);
-            this.areas = new Array(this.graph_ids.length).fill(null);
-            this.graphs = new Array(this.graph_ids.length).fill(null);
+            this.areas = new Array(this.graph_ids.length)
+            this.graphs = new Array(this.graph_ids.length)
+            this.graph_indices = new Array(this.graph_ids.length)
+            for (let i = 0; i < this.graph_ids.length; i++) {
+                this.areas[i] = null;
+                this.graphs[i] = null;
+                this.graph_indices[i] = null;
+            }
             this.graph_order = [0,1,2,3,4];
-            this.graph_indices = new Array(this.graph_ids.length).fill(null);
             
             this.on_cfg_changed_graph_enabled();
             this.update();

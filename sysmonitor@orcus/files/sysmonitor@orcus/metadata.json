@@ -1,6 +1,5 @@
 {
     "description": "Displays CPU, memory, swap and network usage and load in graphs", 
-    "dangerous": true, 
     "uuid": "sysmonitor@orcus", 
     "name": "System Monitor", 
     "version": "1.5", 
