@@ -18,7 +18,7 @@ const UUID = "axos88@countdown-timer";
 const AppletMeta = imports.ui.appletManager.applets[UUID];
 const AssetDir = imports.ui.appletManager.appletMeta[UUID].path + "/assets";
 const ConfigFile = GLib.build_filenamev([global.userdatadir, 'applets/' + UUID + '/config.js']);
-const AppOptions = AppletMeta.config.Options;
+let AppOptions = AppletMeta.config.Options;
 const OpenFileCmd = "xdg-open";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
