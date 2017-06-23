@@ -545,12 +545,14 @@ Stevedore.prototype = {
                 {reactive: false}
             ));
             mounts = this.docker.mounts(containers[index].names);
-            this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
-                'folder',
-                '\t' + _("Mount: ") + mounts[0].Source + ':' + mounts[0].Destination,
-                null,
-                {reactive: false}
-            ));
+            if (mounts) {
+                this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
+                    'folder',
+                    '\t' + _("Mount: ") + mounts[0].Source + ':' + mounts[0].Destination,
+                    null,
+                    {reactive: false}
+                ));
+            }
             if (status_tokens[0] == 'Up') {
                 this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
                     'network-wired',
