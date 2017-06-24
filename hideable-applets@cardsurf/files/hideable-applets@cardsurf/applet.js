@@ -189,6 +189,8 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "applet_popup_icons_size", this.on_applet_popup_icons_size_changed],
                 [Settings.BindingDirection.IN, "applet_popup_icons_css", this.on_applet_popup_icons_css_changed],
                 [Settings.BindingDirection.IN, "applet_popup_table_css", this.on_applet_popup_table_css_changed],
+                [Settings.BindingDirection.IN, "show_grayscale_icons", this.on_show_grayscale_icons_changed],
+                [Settings.BindingDirection.IN, "grayscale_brightness", this.on_grayscale_brightness_changed],
                 [Settings.BindingDirection.IN, "show_icon_tooltips", this.on_show_icon_tooltips_changed],
                 [Settings.BindingDirection.IN, "gui_icon_type", this.on_gui_icon_type_changed],
                 [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_filepath_changed],
@@ -215,6 +217,15 @@ MyApplet.prototype = {
 
     on_applet_popup_table_css_changed: function () {
         this.applet_popup.set_table_style(this.applet_popup_table_css);
+    },
+
+    on_show_grayscale_icons_changed: function () {
+        this.update_gui();
+        this.set_applet_popup_icons_grayscale();
+    },
+
+    on_grayscale_brightness_changed: function () {
+        this.reload_gui();
     },
 
     on_show_icon_tooltips_changed: function () {
@@ -381,6 +392,7 @@ MyApplet.prototype = {
 
     perform_action_show_applet_popup: function() {
         this.update_gui();
+        this.set_applet_popup_icons_grayscale();
         this.applet_popup.open();
     },
 
@@ -480,12 +492,14 @@ MyApplet.prototype = {
 
     reload_applet_popup: function () {
         this.applet_popup.set_columns(this.applet_popup_columns);
+        this.applet_popup.set_grayscale_brightness(this.grayscale_brightness)
         let icon_paths = this.get_applet_icon_paths();
         let icon_names = this.get_applet_names();
         this.applet_popup.reload_icons(icon_paths, icon_names);
         this.on_applet_popup_icons_size_changed();
         this.on_applet_popup_icons_css_changed();
         this.on_applet_popup_table_css_changed();
+        this.set_applet_popup_icons_grayscale();
         this.set_applet_popup_tooltip_texts();
     },
 
@@ -508,6 +522,31 @@ MyApplet.prototype = {
             return applet_info.system_icon;
         }
         return this.icon_unknown;
+    },
+
+    set_applet_popup_icons_grayscale: function () {
+        let is_grayscale_on_array = this.get_is_grayscale_on_array();
+        this.applet_popup.set_grayscales(is_grayscale_on_array);
+    },
+
+    get_is_grayscale_on_array: function () {
+        let is_grayscale_on_array = this.show_grayscale_icons ?
+                                    this.get_applet_visibilities_reversed() : this.get_grayscale_off_array();
+        return is_grayscale_on_array;
+    },
+
+    get_applet_visibilities_reversed: function () {
+        let visibilities_reversed = this.applet_infos.map(function(info) {
+              return !info.is_visible;
+        });
+        return visibilities_reversed;
+    },
+
+    get_grayscale_off_array: function () {
+        let grayscale_off_array = this.applet_infos.map(function(info) {
+              return false;
+        });
+        return grayscale_off_array;
     },
 
     set_applet_popup_tooltip_texts: function () {
@@ -736,6 +775,7 @@ MyApplet.prototype = {
 
     on_applet_popup_icon_clicked: function (icon_index) {
         this.toggle_visibility(icon_index);
+        this.toggle_grayscale_enabled(icon_index);
     },
 
     toggle_visibility: function (index) {
@@ -746,6 +786,23 @@ MyApplet.prototype = {
         }
         catch(e) {
             global.log("Error while toggling applet visibility: " + e);
+        }
+    },
+
+    toggle_grayscale_enabled: function (index) {
+        if(this.show_grayscale_icons) {
+            this.toggle_grayscale(index);
+        }
+    },
+
+    toggle_grayscale: function (index) {
+        try{
+            let applet_info = this.applet_infos[index];
+            let is_grayscale_on = !applet_info.is_visible;
+            this.applet_popup.set_grayscale(index, is_grayscale_on);
+        }
+        catch(e) {
+            global.log("Error while toggling applet icon grayscale: " + e);
         }
     },
 
