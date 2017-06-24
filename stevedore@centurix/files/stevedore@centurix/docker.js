@@ -192,7 +192,15 @@ Docker.prototype = {
     IPAddress: function(container_id) {
         try {
             let container = this.inspectContainer(container_id);
-            return container.NetworkSettings.Networks.bridge.IPAddress;
+            last_ip = '';
+            for (var key in container.NetworkSettings.Networks) {
+                if (container.NetworkSettings.Networks.hasOwnProperty(key)) {
+                    if ('IPAddress' in container.NetworkSettings.Networks[key]) {
+                        last_ip = container.NetworkSettings.Networks[key].IPAddress;
+                    }
+                }
+            }
+            return last_ip;
         } catch(e) {
             global.log(e);
             return false;
