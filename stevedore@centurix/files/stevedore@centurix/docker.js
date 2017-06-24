@@ -75,7 +75,7 @@ Docker.prototype = {
     addImage: function(image_name) {
         try {
             global.log('Adding a new image: ' + this.commandPath() + ' pull ' + image_name);
-            let [res, list, err, status] = GLib.spawn_command_line_async(this.commandPath() + ' pull ' + image_name);
+            GLib.spawn_command_line_async(this.commandPath() + ' pull ' + image_name);
             return true
         } catch(e) {
             global.log(e);
@@ -83,7 +83,7 @@ Docker.prototype = {
     },
 
     removeImage: function(image_name) {
-        let [res, list, err, status] = GLib.spawn_command_line_async(this.commandPath() + ' image rm -f ' + image_name);
+        GLib.spawn_command_line_async(this.commandPath() + ' image rm -f ' + image_name);
         return true;
     },
 
@@ -98,7 +98,7 @@ Docker.prototype = {
 
     startContainer: function(container_id) {
         try {
-            let [res, list, err, status] = GLib.spawn_command_line_async(this.commandPath() + ' start -i ' + container_id);
+            GLib.spawn_command_line_async(this.commandPath() + ' start -i ' + container_id);
             // Parse list to make sure it started properly, what kind of errors do we get?
             return true;
         } catch(e) {
