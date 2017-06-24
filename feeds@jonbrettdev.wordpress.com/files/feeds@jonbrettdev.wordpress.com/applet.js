@@ -27,7 +27,7 @@ const MIN_MENU_WIDTH = 400;
 const GLib = imports.gi.GLib;
 // Set the path constants 
 const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
-const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/configs/" + UUID;
+const DATA_PATH = GLib.get_home_dir() + "/.cinnamon/" + UUID;
 const ICON_PATH = APPLET_PATH + '/icons/';
 const FEED_CONFIG_FILE = DATA_PATH + "/feeds.json";
 imports.searchPath.push(APPLET_PATH);
