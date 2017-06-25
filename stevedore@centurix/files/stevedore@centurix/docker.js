@@ -1,12 +1,10 @@
+/*jshint esversion: 6 */
 const Mainloop = imports.mainloop;
 const TerminalReader = imports.applet.terminal_reader;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 
-/**
- * Be version aware, 1.12.6 doesn't have the container/image commands!
- **/
 
 function Docker() {
     this._init();
@@ -54,32 +52,30 @@ Docker.prototype = {
         let lines = [];
         for (let index = 1; index < output_lines.length - 1; index++) {
             let line = {};
-            columns.forEach(function(column) {
-                if (column.length != -1) {
-                    line[column.name.toLowerCase()] = output_lines[index].substr(column.position, column.length).trim();
+            for (let column_index = 0; column_index < columns.length; column_index++) {
+                if (columns[column_index].length != -1) {
+                    line[columns[column_index].name.toLowerCase()] = output_lines[index].substr(columns[column_index].position, columns[column_index].length).trim();
                 } else {
-                    line[column.name.toLowerCase()] = output_lines[index].substr(column.position).trim();
+                    line[columns[column_index].name.toLowerCase()] = output_lines[index].substr(columns[column_index].position).trim();
                 }
-            });
+            }
             lines.push(line);
         }
         return lines;
     },
 
-    // --format option may help a lot here...
     listImages: function() {
-        // return this.colCommand('image ls');
-        return this.colCommand('images');
+        return this.colCommand('image ls');
     },
 
     addImage: function(image_name) {
         try {
             global.log('Adding a new image: ' + this.commandPath() + ' pull ' + image_name);
             GLib.spawn_command_line_async(this.commandPath() + ' pull ' + image_name);
-            return true
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     removeImage: function(image_name) {
@@ -100,21 +96,20 @@ Docker.prototype = {
         try {
             GLib.spawn_command_line_async(this.commandPath() + ' start -i ' + container_id);
             // Parse list to make sure it started properly, what kind of errors do we get?
-            return true;
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     stopContainer: function(container_id) {
         try {
             // Brutally kill a docker image
             let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + ' stop -t 5 ' + container_id);
-            // Parse list to make sure it stopped properly, what kind of errors do we get?
-            return true;
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     newContainer: function(image_id, volume, workdir, memory, memorySwap, entrypoint, params) {
@@ -145,19 +140,19 @@ Docker.prototype = {
 
             global.log('Creating a new container: ' + this.commandPath() + command_arguments);
             let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + command_arguments);
-            return true;
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     removeContainer: function(container_id) {
         try {
             let [res, list, err, status] = GLib.spawn_command_line_sync(this.commandPath() + ' rm -f ' + container_id);
-            return true;
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     inspectContainer: function(container_id) {
@@ -167,6 +162,7 @@ Docker.prototype = {
         } catch(e) {
             global.log(e);
         }
+        return '{}';
     },
 
     hasSSH: function(container_id) {
@@ -189,18 +185,18 @@ Docker.prototype = {
         }
     },
 
-    IPAddress: function(container_id) {
+    IPAddresses: function(container_id) {
         try {
             let container = this.inspectContainer(container_id);
-            last_ip = '';
+            let ip_addresses = [];
             for (var key in container.NetworkSettings.Networks) {
                 if (container.NetworkSettings.Networks.hasOwnProperty(key)) {
                     if ('IPAddress' in container.NetworkSettings.Networks[key]) {
-                        last_ip = container.NetworkSettings.Networks[key].IPAddress;
+                        ip_addresses.push(container.NetworkSettings.Networks[key].IPAddress);
                     }
                 }
             }
-            return last_ip;
+            return ip_addresses;
         } catch(e) {
             global.log(e);
             return false;
@@ -254,6 +250,6 @@ Docker.prototype = {
             commit: (/Git commit:(.*)/gi).exec(list)[1].trim(),
             built: (/Built:(.*)/gi).exec(list)[1].trim(),
             os: (/OS\/Arch:(.*)/gi).exec(list)[1].trim()
-        }
+        };
     }
-}
+};

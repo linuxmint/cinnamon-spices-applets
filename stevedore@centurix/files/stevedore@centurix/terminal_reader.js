@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;

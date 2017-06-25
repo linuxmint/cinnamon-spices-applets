@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 const Gtk = imports.gi.Gtk;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
@@ -25,7 +26,7 @@ const ICON_DOCKER = APPLET_PATH + "/icons/docker.png";
 /**
  * L10n support
  **/
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
@@ -257,7 +258,7 @@ CreateContainerDialog.prototype = {
             global.log(e);
         }
     }
-}
+};
 
 function NewImageDialog() {
     this._init.apply(this, arguments);
@@ -315,7 +316,7 @@ NewImageDialog.prototype = {
             this._imageResults = new St.Table({
                 homogeneous: false,
                 reactive: true
-            })
+            });
 
             messageBox.add(this._imageResults, {
                 y_fill: false,
@@ -349,23 +350,21 @@ NewImageDialog.prototype = {
             let key = event.get_key_symbol();
             if (this._timer && this._timer > 0) {
                 Mainloop.source_remove(this._timer);
+                this._timer = 0;
             }
             if (key == Clutter.Return) {
                 this.imageSearch(searchTerm, Lang.bind(this, this.displayResults));
             } else {
                 this._timer = Mainloop.timeout_add(2000, Lang.bind(this, function() {
-                    if (this._timer && this._timer > 0) {
-                        Mainloop.source_remove(this._timer);
-                    }
                     this.imageSearch(searchTerm, Lang.bind(this, this.displayResults));
+                    this._timer = 0;
                     return false;
                 }));
-            }
-            return false;
-            
+            }            
         } catch(e) {
             global.log(e);
         }
+        return false;
     },
 
     displayResults: function(json) {
@@ -426,7 +425,7 @@ NewImageDialog.prototype = {
             global.log(e);
         }
     }
-}
+};
 
 function Stevedore(metadata, orientation, panelHeight, instanceId) {
     // this.settings = new Settings.AppletSettings(this, UUID, instanceId);
@@ -569,38 +568,55 @@ Stevedore.prototype = {
                 ));
             }
             if (status_tokens[0] == 'Up') {
-                this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
-                    'network-wired',
-                    '\t' + _("IP Address: ") + this.docker.IPAddress(containers[index].names),
-                    this.copyToClipboard,
-                    {},
-                    this.docker.IPAddress(containers[index].names)
-                ));
+                let addresses = this.docker.IPAddresses(containers[index].names);
+                if (addresses.length > 0) {
+                    for (let ip_index = 0; ip_index < addresses.length; ip_index++) {
+                        this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
+                            'network-wired',
+                            '\t' + _("IP Address: ") + addresses[ip_index],
+                            this.copyToClipboard,
+                            {},
+                            addresses[ip_index]
+                        ));
+                    }
+                }
                 if (this.docker.hasSSH(containers[index].names)) {
-                    this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
-                        'terminal',
-                        '\t' + _('Open a terminal'),
-                        this.openTerminal,
-                        {},
-                        containers[index].names
-                    ));
+                    if (addresses.length > 0) {
+                        for (let ip_index = 0; ip_index < addresses.length; ip_index++) {
+                            this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
+                                'terminal',
+                                '\t' + _('Open a terminal'),
+                                this.openTerminal,
+                                {},
+                                addresses[ip_index]
+                            ));
+                        }
+                    }
                 } else {
-                    this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
-                        'terminal',
-                        '\t' + _('Show TTY Session'),
-                        this.openTTY,
-                        {},
-                        containers[index].names
-                    ));
+                    if (addresses.length > 0) {
+                        for (let ip_index = 0; ip_index < addresses.length; ip_index++) {
+                            this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
+                                'terminal',
+                                '\t' + _('Show TTY Session'),
+                                this.openTTY,
+                                {},
+                                addresses[ip_index]
+                            ));
+                        }
+                    }
                 }
                 if (this.docker.hasWeb(containers[index].names)) {
-                    this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
-                        'emblem-web',
-                        '\t' + _('Open a browser'),
-                        this.openBrowser,
-                        {},
-                        this.docker.IPAddress(containers[index].names)
-                    ));
+                    if (addresses.length > 0) {
+                        for (let ip_index = 0; ip_index < addresses.length; ip_index++) {
+                            this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
+                                'emblem-web',
+                                '\t' + _('Open a browser'),
+                                this.openBrowser,
+                                {},
+                                addresses[ip_index]
+                            ));
+                        }
+                    }
                 }
             }
             this.containerMenus[menu_index].menu.addMenuItem(this.newIconMenuItem(
@@ -649,10 +665,10 @@ Stevedore.prototype = {
                 this.refreshMenu();
                 return false;
             }
-            return true;
         } catch(e) {
             global.log(e);
         }
+        return true;
     },
 
     resetIconAnimation: function() {
@@ -720,6 +736,7 @@ Stevedore.prototype = {
         } catch(e) {
             global.log(UUID + "::newIconMenuItem: " + e);
         }
+        return null;
     },
 
     newSwitchMenuItem: function(label, state, callback, value = null) {
@@ -727,7 +744,7 @@ Stevedore.prototype = {
         if (callback) {
             newItem.connect("activate", Lang.bind(this, callback));
         }
-        newItem.value = value
+        newItem.value = value;
         return newItem;
     },
 
@@ -742,6 +759,7 @@ Stevedore.prototype = {
             this.notification(_('Container down'));
         }
         this.refreshMenu();
+        return true;
     },
 
     startContainer: function(menuItem) {
@@ -757,7 +775,11 @@ Stevedore.prototype = {
 
     openTerminal: function(menuItem) {
         try {
-            Main.Util.spawnCommandLine("gnome-terminal -x ssh " + this.docker.IPAddress(menuItem.value));
+            Main.Util.spawnCommandLine("gnome-terminal -x ssh " + menuItem.value);
+            // let addresses = this.docker.IPAddresses(menuItem.value);
+            // if (addresses.length > 0) {
+            //     Main.Util.spawnCommandLine("gnome-terminal -x ssh " + addresses[0]);
+            // }
         } catch(e) {
             global.log(e);
         }
@@ -797,7 +819,7 @@ Stevedore.prototype = {
         let c = 1e3, d = b || 2, e = ["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"], f = Math.floor(Math.log(a) / Math.log(c));
         return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f];
     }
-}
+};
 
 function main(metadata, orientation, panelHeight, instanceId) {
     return new Stevedore(metadata, orientation, panelHeight, instanceId);
