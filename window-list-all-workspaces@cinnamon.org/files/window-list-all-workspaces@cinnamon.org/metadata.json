@@ -1,7 +1,0 @@
-{
- "uuid": "window-list-all-workspaces@cinnamon.org",
- "name": "Cinnamon Window list all workspaces",
- "description": "Main Cinnamon window list of all workspaces",
- "icon": "gnome-panel-window-list",
- "role": "windowlist"
-}
