@@ -162,8 +162,8 @@ HoverMenuIcons.prototype={
     reload_icons: function(icon_paths, icon_names) {
         this.remove_icons();
         this.create_icons(icon_paths);
-        this.create_grayscale_effects();
         this.create_tooltips(icon_names);
+        this.create_grayscale_effects();
         this.add_icons(icon_names);
     },
 
@@ -231,19 +231,6 @@ HoverMenuIcons.prototype={
         }
     },
 
-    create_grayscale_effects: function(){
-        for(let i = 0; i < this.icons.length; ++i) {
-            let effect = this.create_grayscale_effect();
-            this.grayscale_effects.push(effect);
-        }
-    },
-
-    create_grayscale_effect: function(){
-        let effect = new Clutter.ColorizeEffect(this.grayscale_color);
-        effect.set_tint(this.grayscale_color);
-        return effect;
-    },
-
     create_tooltips: function(icon_names) {
         for(let i = 0; i < this.icons.length; ++i) {
             let icon = this.icons[i];
@@ -260,6 +247,19 @@ HoverMenuIcons.prototype={
             tooltip._tooltip.set_width(this.max_tooltip_width);
         }
         return tooltip;
+    },
+
+    create_grayscale_effects: function(){
+        for(let i = 0; i < this.icons.length; ++i) {
+            let effect = this.create_grayscale_effect();
+            this.grayscale_effects.push(effect);
+        }
+    },
+
+    create_grayscale_effect: function(){
+        let effect = new Clutter.ColorizeEffect(this.grayscale_color);
+        effect.set_tint(this.grayscale_color);
+        return effect;
     },
 
     add_icons: function(icon_names) {
@@ -330,6 +330,14 @@ HoverMenuIcons.prototype={
         this._set_widgets_style(css_style, [this.actor]);
     },
 
+    set_icon_tooltip_texts: function(tooltip_texts) {
+        for(let i = 0; i < this.tooltips.length; ++i) {
+            let tooltip_text = tooltip_texts[i];
+            let tooltip = this.tooltips[i];
+            tooltip.set_text(tooltip_text);
+        }
+    },
+
     set_grayscale_brightness: function(brightness_zero_hundred) {
         let brightness_rgb = this.get_brightness_rgb(brightness_zero_hundred);
         this.grayscale_color = new Clutter.Color({ red: brightness_rgb, green: brightness_rgb,
@@ -383,14 +391,6 @@ HoverMenuIcons.prototype={
         let enabled = this.has_grayscale(icon);
         if(enabled) {
             icon.remove_effect_by_name(this.grayscale_effect_name);
-        }
-    },
-
-    set_icon_tooltip_texts: function(tooltip_texts) {
-        for(let i = 0; i < this.tooltips.length; ++i) {
-            let tooltip_text = tooltip_texts[i];
-            let tooltip = this.tooltips[i];
-            tooltip.set_text(tooltip_text);
         }
     },
 
