@@ -25,9 +25,8 @@ MyApplet.prototype = {
         this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
         let configFile = Gio.file_new_for_path(this.configFilePath);
         if (!configFile.query_exists(null)) {
-            Util.spawnCommandLineAsync('mkdir ' + this.configFilePath, () => {
-                this.__init();
-            });
+            Util.spawnCommandLine('mkdir ' + this.configFilePath);
+            Mainloop.timeout_add(2000, ()=>this.__init());
         } else {
             this.__init();
         }
@@ -62,9 +61,8 @@ MyApplet.prototype = {
         let scriptDir = Gio.file_new_for_path(this.toolsFile);
         if (!scriptDir.query_exists(null)) {
             let cmd = 'bash -c "' + 'cp -avrf ' + this.metadata.path + '/scripts/* ' + this.configFilePath + '"'
-            Util.spawnCommandLineAsync(cmd, ()=>setupApplet(), ()=>{
-                global.logError('errrr')
-            });
+            Util.spawnCommandLine(cmd);
+            Mainloop.timeout_add(2000, setupApplet);
         } else {
             setupApplet();
         }
