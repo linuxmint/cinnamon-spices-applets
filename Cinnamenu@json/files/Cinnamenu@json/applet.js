@@ -1,20 +1,3 @@
-/* ========================================================================================================
- * applet.js - Cinnamenu extension
- * --------------------------------------------------------------------------------------------------------
- *  CREDITS:
- *  Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
- *  Ported to Cinnamon by Jason Hicks.
- *  A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks
- *  to those developers for their great extensions and laying the foundation for Cinnamenu.
- *
- *  Some parts of this code also come from:
- *  gnome-shell-extensions -  http://git.gnome.org/browse/gnome-shell-extensions/
- *  places status indicator extension - http://git.gnome.org/gnome-shell-extensions
- *  recent items extension - http://www.bananenfisch.net/gnome
- *  applications menu extension - https://extensions.gnome.org/extension/6/applications-menu/
- *  search bookmarks extension - https://extensions.gnome.org/extension/557/search-bookmarks/
- * ========================================================================================================
- */
 const Main = imports.ui.main;
 const IconTheme = imports.gi.Gtk.IconTheme;
 const GLib = imports.gi.GLib;
