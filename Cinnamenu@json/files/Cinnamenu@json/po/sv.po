@@ -47,7 +47,7 @@ msgid "Run with NVIDIA GPU"
 msgstr "Kör med NVIDIA GPU"
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
 msgstr "Gno-Meny: Sök i Firefox bokmärken inaktiverat"
 
 #: panel.js:535
@@ -59,7 +59,7 @@ msgstr ""
 "libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
 msgstr "Gno-Meny: Sök i Midori bokmärken inaktiverat"
 
 #: panel.js:543
@@ -313,3 +313,35 @@ msgstr "En flexibel meny med formateringsalternativ och bokmärken."
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
+
+msgid "Show bookmarks and places"
+msgstr "Visa bokmärken och platser"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Välj om bokmärken och platser skall visas i menyn."
+
+msgid "Show application icons"
+msgstr "Visa programikoner"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Välj om programikoner skall visas."
+
+msgid "Show category icons"
+msgstr "Visa kategoriikoner"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Välj om kategoriikoner skall visas."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Aktivera filsystemsökvägar i sökfältet"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Tillåt filsystemsökvägar i menyns sökfält."
+
+msgid "Show application's description under their titles"
+msgstr "Visa programbeskrivningar under programnamnen"
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr "Välj om programbeskrivningar skall visas på programknappar."

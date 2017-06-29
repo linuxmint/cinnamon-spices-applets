@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:10+0100\n"
 "PO-Revision-Date: 2017-03-22 11:10+0100\n"
@@ -41,8 +41,8 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Firefox ブックマークの検索は使用できません"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
+msgstr "Cinnamenu: Firefox ブックマークの検索は使用できません"
 
 #: panel.js:535
 msgid ""
@@ -51,8 +51,8 @@ msgid ""
 msgstr ""
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Midori ブックマークの検索は使用できません"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
+msgstr "Cinnamenu: Midori ブックマークの検索は使用できません"
 
 #: panel.js:543
 msgid ""
@@ -294,140 +294,34 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid ""
-#~ "If you want to search Firefox bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "もし Firefox ブックマークの検索を使用したい場合は、次のパッケージをインス"
-#~ "トールする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
-#~ "(Fedora)"
+msgid "Show bookmarks and places"
+msgstr "ブックマークと場所を表示する"
 
-#~ msgid ""
-#~ "If you want to search Midori bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "もし Midori ブックマークの検索を使用したい場合は、次のパッケージをインス"
-#~ "トールする必要があります: libgir1.2-gda-5.0 (Ubuntu) または libgda-sqlite "
-#~ "(Fedora)"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "メニューにブックマークと場所を表示するかどうかを選択します。"
 
-#~ msgid "Web"
-#~ msgstr "Web"
+msgid "Show application icons"
+msgstr "アプリケーションアイコンを表示する"
 
-#~ msgid "Favorites"
-#~ msgstr "Favorites"
+msgid "Choose whether or not to show icons on applications."
+msgstr "アプリケーションにアイコンを表示するかどうかを選択します。"
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Frequent Apps"
+msgid "Show category icons"
+msgstr "カテゴリアイコンを表示する"
 
-#~ msgid "Restart Shell"
-#~ msgstr "シェルの再起動"
+msgid "Choose whether or not to show icons on categories."
+msgstr "カテゴリにアイコンを表示するかどうかを選択します。"
 
-#~ msgid "Suspend"
-#~ msgstr "サスペンド"
+msgid "Enable filesystem path entry in search box"
+msgstr "検索ボックスでファイルシステムのパスエントリを有効にする"
 
-#~ msgid "Shutdown"
-#~ msgstr "シャットダウン"
+msgid "Allows path entry in the menu search box."
+msgstr "メニュー検索ボックスのパス入力を許可します。"
 
-#~ msgid "Logout User"
-#~ msgstr "ユーザーのログアウト"
+msgid "Show application's description under their titles"
+msgstr "タイトルの下にアプリケーションの説明を表示する"
 
-#~ msgid "Preferences"
-#~ msgstr "設定"
-
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "cinnamenu スタイルシートが見つかりません"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "ランチャー \"%s\" に問題があります"
-
-#~ msgid "Browse Network"
-#~ msgstr "ネットワークの閲覧"
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>パネルの設定</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "ホットコーナーの動作を無効にする"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "パネルの表示ボタンを削除"
-
-#~ msgid "Label for View button"
-#~ msgstr "Label for View button"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Use icon with View button"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "パネルからアプリボタンを削除"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Label for Apps button"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Use icon with Apps button"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "パネルのメニューボタンを削除"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Label for Menu button"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Use icon with Menu button"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "ホットスポットのメニューボタンを無効"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "ショートカットのメニューボタンを無効"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>メニュー設定</b>"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Hide Shortcuts Panel"
-
-#~ msgid "Menu layout size"
-#~ msgstr "メニューレイアウトスタイル"
-
-#~ msgid "Large"
-#~ msgstr "Large"
-
-#~ msgid "Medium"
-#~ msgstr "Medium"
-
-#~ msgid "Small"
-#~ msgstr "Small"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Icons to display on Shortcuts Panel"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "開始時に表示するアプリケーション"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "アプリケーションの標準表示モード"
-
-#~ msgid "Category selection method"
-#~ msgstr "カテゴリの選択方法"
-
-#~ msgid "Hover"
-#~ msgstr "Hover"
-
-#~ msgid "Click"
-#~ msgstr "Click"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "お気に入りパネルアイコンのサイズ"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "アプリケーションリストアイコンのサイズ"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "アプリケーショングリットアイコンのサイズ"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr "アプリケーションボタンにアプリケーションの説明を表示するかどうかを選択します。"

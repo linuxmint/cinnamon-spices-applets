@@ -3,7 +3,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:10+0100\n"
 "PO-Revision-Date: 2017-03-22 11:10+0100\n"
@@ -46,8 +46,8 @@ msgid "Run with NVIDIA GPU"
 msgstr "Запустить с NVIDIA GPU"
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: поиск по закладкам Firefox отключен"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
+msgstr "Cinnamenu: поиск по закладкам Firefox отключен"
 
 #: panel.js:535
 msgid ""
@@ -58,8 +58,8 @@ msgstr ""
 "дополнительные пакеты: libgir1.2-gda-5.0 [Ubuntu] или libgda-sqlite [Fedora]"
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: поиск по закладкам Midori отключен"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
+msgstr "Cinnamenu: поиск по закладкам Midori отключен"
 
 #: panel.js:543
 msgid ""
@@ -303,158 +303,35 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#~ msgid "Webmarks"
-#~ msgstr "Веб-закладки"
+msgid "Show bookmarks and places"
+msgstr "Показывать закладки и места"
 
-#~ msgid "Favorites"
-#~ msgstr "Избранное"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Выберите, следует ли показывать закладки и места в меню."
 
-#~ msgid "Toggle Startup Apps View"
-#~ msgstr "Переключить категорию отображаемую при запуске"
+msgid "Show application icons"
+msgstr "Показывать значки приложений"
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Часто используемые"
+msgid "Choose whether or not to show icons on applications."
+msgstr "Выбрать показывать или нет иконки в приложениях."
 
-#~ msgid "Restart Shell"
-#~ msgstr "Перезапустить Shell"
+msgid "Show category icons"
+msgstr "Показывать значки категорий"
 
-#~ msgid "Suspend"
-#~ msgstr "Перейти в режим ожидания"
+msgid "Choose whether or not to show icons on categories."
+msgstr "Выбрать показывать или нет иконки в категориях."
 
-#~ msgid "Shutdown"
-#~ msgstr "Выключить компьютер"
+msgid "Enable filesystem path entry in search box"
+msgstr "Включить путь файловой системы в окне поиска"
 
-#~ msgid "Logout User"
-#~ msgstr "Завершить сеанс"
+msgid "Allows path entry in the menu search box."
+msgstr "Позволяет вводить путь в окне поиска меню."
 
-#~ msgid "Preferences"
-#~ msgstr "Настройки"
+msgid "Show application's description under their titles"
+msgstr "Показать примечания к программам под их заголовком"
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Не найден стиль для cinnamenu"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Не удалось запустить «%s»"
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>Настройки панели</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Отключить «Горячий угол»"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Удалить кнопку «Обзор» с панели"
-
-#~ msgid "Label for View button"
-#~ msgstr "Текст для кнопки «Обзор»"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Показывать иконку для кнопки «Обзор»"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Удалить кнопку «Приложения» с панели"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Текст для кнопки «Приложения»"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Показывать иконку для кнопки «Приложения»"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Удалить кнопку «Меню» с панели"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Текст для кнопки «Меню»"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Показывать иконку для кнопки «Меню»"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Отключить горячую область у кнопки «Меню»"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Отключить вызов «Меню» по горячей клавише"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Неверно указана горячая клавиша. Попробуйте F12, <Super>space, "
-#~ "<Ctrl><Alt><Shift>a, и др."
-
-#~ msgid "Set Menu button position"
-#~ msgstr "Положение кнопки «Меню»"
-
-#~ msgid "Left"
-#~ msgstr "Слева"
-
-#~ msgid "Center"
-#~ msgstr "По центру"
-
-#~ msgid "Right"
-#~ msgstr "Справа"
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Настройки меню</b>"
-
-#~ msgid "Hide User Options Panel"
-#~ msgstr "Скрыть дополнительную панель"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Скрыть панель быстрого доступа"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Размер меню"
-
-#~ msgid "Normal"
-#~ msgstr "Нормальный"
-
-#~ msgid "Compact"
-#~ msgstr "Компактный"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Элементы на панели быстрого доступа"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Приложения показываемые при запуске"
-
-#~ msgid "All"
-#~ msgstr "Все"
-
-#~ msgid "Frequent"
-#~ msgstr "Частые"
-
-#~ msgid "None"
-#~ msgstr "Нет"
-
-#~ msgid "Number of columns in Application Grid"
-#~ msgstr "Количество колонок приложений в сетке"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Вид для обзора приложений по умолчанию"
-
-#~ msgid "Hide Categories Panel"
-#~ msgstr "Скрыть панель категорий"
-
-#~ msgid "Category selection method"
-#~ msgstr "Метод выбора категории"
-
-#~ msgid "Hover"
-#~ msgstr "Наведение"
-
-#~ msgid "Click"
-#~ msgstr "Нажатие"
-
-#~ msgid "Menu hover delay"
-#~ msgstr "Задержка выбора категории при наведении"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "Размер иконок для панели быстрого доступа"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "Размер иконок для приложений в виде списка"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "Размер иконок для приложений в виде сетки"
-
-#~ msgid "Width of Application Grid labels"
-#~ msgstr "Ширина сетки приложений"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
+"Выберите будут ли показываться примечания к программам под их заголовком"

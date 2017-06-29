@@ -1,7 +1,7 @@
 # Livedevelop Live User <mortaromarcello@gmail.com>, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:10+0100\n"
 "PO-Revision-Date: 2017-03-22 11:10+0100\n"
@@ -44,8 +44,8 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Ricerca segnalibri Firefox disabilitata"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
+msgstr "Cinnamenu: Ricerca segnalibri Firefox disabilitata"
 
 #: panel.js:535
 msgid ""
@@ -54,8 +54,8 @@ msgid ""
 msgstr ""
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Ricerca segnalibri Midori disabilitata"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
+msgstr "Cinnamenu: Ricerca segnalibri Midori disabilitata"
 
 #: panel.js:543
 msgid ""
@@ -423,3 +423,35 @@ msgstr ""
 
 #~ msgid "Category selection method"
 #~ msgstr "Metodo di selezione della categoria"
+
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
+
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+msgid "Show application's description under their titles"
+msgstr ""
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""

@@ -48,8 +48,8 @@ msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Pretraga Firefox zabilješki je onemogućena"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
+msgstr "Cinnamenu: Pretraga Firefox zabilješki je onemogućena"
 
 #: panel.js:535
 msgid ""
@@ -60,8 +60,8 @@ msgstr ""
 "pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Pretraga Midori zabilješki je onemogućena"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
+msgstr "Cinnamenu: Pretraga Midori zabilješki je onemogućena"
 
 #: panel.js:543
 msgid ""
@@ -317,3 +317,37 @@ msgstr "Prilagodljiv izbornik koji pruža mogućnosti oblikovanja i zabilješke.
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinna izbornik"
+
+msgid "Show bookmarks and places"
+msgstr "Prikaži zabilješke i lokacije"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+"Odaberite želite li ili ne imati prikazane zabilješke i lokacije u izborniku."
+
+msgid "Show application icons"
+msgstr "Prikaži ikone aplikacija"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Odaberite treba li ili ne prikazati ikone na aplikacijama."
+
+msgid "Show category icons"
+msgstr "Prikaži ikone kategorija"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Odaberite treba li ili ne prikazati ikone u kategorijama."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Omogući putanju unosa datotečnih sustava u okviru pretraživanja"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Omogućuje unos putanje u izborniku okvira pretrage."
+
+msgid "Show application's description under their titles"
+msgstr "Prikaži opis aplikacija ispod njihovih naziva"
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
+"Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."

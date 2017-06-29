@@ -46,7 +46,7 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
 msgstr ""
 
 #: panel.js:535
@@ -56,7 +56,7 @@ msgid ""
 msgstr ""
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
 msgstr ""
 
 #: panel.js:543
@@ -306,4 +306,36 @@ msgstr ""
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
+msgstr ""
+
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
+
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+msgid "Show application's description under their titles"
+msgstr ""
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
 msgstr ""

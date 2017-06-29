@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:10+0100\n"
 "PO-Revision-Date: 2017-03-22 11:10+0100\n"
@@ -41,7 +41,7 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
+msgid "Cinnamenu: Search Firefox bookmarks disabled"
 msgstr ""
 
 #: panel.js:535
@@ -51,7 +51,7 @@ msgid ""
 msgstr ""
 
 #: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
+msgid "Cinnamenu: Search Midori bookmarks disabled"
 msgstr ""
 
 #: panel.js:543
@@ -294,151 +294,34 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid "Webmarks"
-#~ msgstr "Podgląd"
+msgid "Show bookmarks and places"
+msgstr ""
 
-#~ msgid "Favorites"
-#~ msgstr "Ulubione"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
 
-#~ msgid "Toggle Startup Apps View"
-#~ msgstr "Ustaw widok startowy"
+msgid "Show application icons"
+msgstr ""
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Często używane"
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
 
-#~ msgid "Restart Shell"
-#~ msgstr "Uruchom ponownie środowisko Gnome"
+msgid "Show category icons"
+msgstr ""
 
-#~ msgid "Suspend"
-#~ msgstr "Wstrzymaj komputer"
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
 
-#~ msgid "Shutdown"
-#~ msgstr "Wyłącz komputer"
+msgid "Enable filesystem path entry in search box"
+msgstr ""
 
-#~ msgid "Logout User"
-#~ msgstr "Wyloguj się"
+msgid "Allows path entry in the menu search box."
+msgstr ""
 
-#~ msgid "Preferences"
-#~ msgstr "Ustawienia"
+msgid "Show application's description under their titles"
+msgstr ""
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Nie znaleziono arkusza stylów cinnamenu"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Nie udało się uruchomić \"%s\""
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>Ustawienia panelu</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Nieaktywny \"gorący narożnik\" Podglądu"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Nie pokazuj przycisku Podgląd"
-
-#~ msgid "Label for View button"
-#~ msgstr "Etykieta dla przycisku Podgląd"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Pokazuj ikonę przycisku Podgląd"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Nie pokazuj przycisku Programy"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Etykieta dla przycisku Programy"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Pokazuj ikonę przycisku Programy"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Nie pokazuj przycisku Menu"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Etykieta dla przycisku Menu"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Pokazuj ikonę przycisku Menu"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Nie aktywuj menu na krawędzi ekranu"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Nie aktywuj menu za pomocą skrótu klawiszowego"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Niewłaściwy skrót. Spróbuj F12, <Super>spacja, <Ctrl><Alt><Shift>a, itp."
-
-#~ msgid "Set Menu button position"
-#~ msgstr "Ustaw pozycję przycisku Menu"
-
-#~ msgid "Left"
-#~ msgstr "Z lewej"
-
-#~ msgid "Center"
-#~ msgstr "W środku"
-
-#~ msgid "Right"
-#~ msgstr "Z prawej"
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Ustawienia Menu</b>"
-
-#~ msgid "Hide User Options Panel"
-#~ msgstr "Ukryj panel opcji użytkownika"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Ukryj panel skrótów"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Rozmiar widoku menu"
-
-#~ msgid "Normal"
-#~ msgstr "Zwykły"
-
-#~ msgid "Compact"
-#~ msgstr "Kompaktowy"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Pokaż na panelu skrótów"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Po wyświetleniu menu pokazuj"
-
-#~ msgid "All"
-#~ msgstr "Wszystkie"
-
-#~ msgid "Frequent"
-#~ msgstr "Często używane"
-
-#~ msgid "None"
-#~ msgstr "Żadne"
-
-#~ msgid "Number of columns in Application Grid"
-#~ msgstr "Liczba kolumn w siatce programów"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Domyślny tryb widoku dla programów"
-
-#~ msgid "Hide Categories Panel"
-#~ msgstr "Ukryj kategorie"
-
-#~ msgid "Category selection method"
-#~ msgstr "Sposób zaznaczania kategorii"
-
-#~ msgid "Hover"
-#~ msgstr "Wskazanie"
-
-#~ msgid "Click"
-#~ msgstr "Kliknięcie"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "Rozmiar ikon panelu skrótów"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "Rozmiar ikon listy programów"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "Rozmiar ikon siatki programów"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
