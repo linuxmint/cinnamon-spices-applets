@@ -1,3 +1,17 @@
+/*window.log2 = function () {
+  let args = arguments;
+  let output = [];
+  for (var i = 0, len = args.length; i < len; i++) {
+
+    if (typeof args[i] === 'object') {
+      args[i] = JSON.stringify(args[i]);
+    } else if (typeof args[i] !== 'string') {
+      args[i] = args[i].toString();
+    }
+    output.push(args[i])
+  }
+  log(Date.now() + ': ' + output.join(' '))
+};*/
 const Main = imports.ui.main;
 const IconTheme = imports.gi.Gtk.IconTheme;
 const GLib = imports.gi.GLib;
@@ -15,29 +29,20 @@ const Settings = imports.ui.settings;
 
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 
-// l10n
-const Gettext = imports.gettext;
-const UUID = 'Cinnamenu@json';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
-
-function _(str) {
-  let cinnamonTranslation = Gettext.gettext(str);
-  if (cinnamonTranslation !== str) {
-    return cinnamonTranslation;
-  }
-  return Gettext.dgettext(UUID, str);
-}
-
 const CinnamenuPanel = AppletDir.panel.CinnamenuPanel;
 
 const PRIVACY_SCHEMA = 'org.cinnamon.desktop.privacy';
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 
-
-/* =========================================================================
-/* name:    CinnamenuButton
- * @desc    The main panel object that holds view/apps/menu buttons
- * ========================================================================= */
+/**
+ * @name CinnamenuButton
+ * @description The main panel object that holds view/apps/menu buttons
+ *
+ * @param {object} metadata
+ * @param {number} orientation
+ * @param {number} panel_height
+ * @param {number} instance_id
+ */
 
 function CinnamenuButton(metadata, orientation, panel_height, instance_id) {
   this._init(metadata, orientation, panel_height, instance_id)
@@ -94,7 +99,7 @@ CinnamenuButton.prototype = {
   },
 
   update_label_visible: function() {
-    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+    if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
       this.hide_applet_label(true);
     } else {
       this.hide_applet_label(false);
@@ -260,23 +265,21 @@ CinnamenuButton.prototype = {
 
   // handler for when new application installed
   _onAppInstalledChanged: function() {
-    if (this.cinnamenuPanel) {
-      this.cinnamenuPanel.refresh();
-    }
+    this.refreshPanel();
   },
 
   // handler for when favorites change
   _onFavoritesChanged: function() {
     if (this.cinnamenuPanel) {
-      this.cinnamenuPanel._selectFavorites(this.cinnamenuPanel._currentCategoryButton, true);
+      this.cinnamenuPanel._selectFavorites(this.cinnamenuPanel._currentCategoryButton);
     }
   },
 
   // handler for when icons change
   _onIconsChanged: function() {
-    if (this.cinnamenuPanel) {
-      this.cinnamenuPanel.refresh();
-    }
+    // AppFavorites' changed signal gets called before the applet finishes initializing, so
+    // we need to defer it here for now.
+    Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, this.refreshPanel));
   },
 
   // function to bind preference setting changes
@@ -319,11 +322,7 @@ CinnamenuButton.prototype = {
       {
         key: 'enable-bookmarks',
         value: 'enableBookmarks',
-        cb: Lang.bind(this, function() {
-          if (this.cinnamenuPanel) {
-            this.cinnamenuPanel.refresh();
-          }
-        })
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'menu-label',
@@ -333,35 +332,27 @@ CinnamenuButton.prototype = {
       {
         key: 'startup-view-mode',
         value: 'startupViewMode',
-        cb: null
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'apps-grid-column-count',
         value: 'appsGridColumnCount',
-        cb: Lang.bind(this, function() {
-          if (this.cinnamenuPanel) {
-            this.cinnamenuPanel.refresh();
-          }
-        })
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'category-icon-size',
         value: 'categoryIconSize',
-        cb: Lang.bind(this, function() {
-          if (this.cinnamenuPanel) {
-            this.cinnamenuPanel.refresh();
-          }
-        })
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'apps-list-icon-size',
         value: 'appsListIconSize',
-        cb: null
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'apps-grid-icon-size',
         value: 'appsGridIconSize',
-        cb: null
+        cb: Lang.bind(this, this.refreshPanel)
       },
       {
         key: 'apps-grid-icon-scale',
@@ -369,14 +360,40 @@ CinnamenuButton.prototype = {
         cb: null
       },
       {
-        key: 'apps-grid-label-width',
-        value: 'appsGridLabelWidth',
-        cb: null
+        key: 'show-places',
+        value: 'showPlaces',
+        cb: Lang.bind(this, this.refreshPanel)
+      },
+      {
+        key: 'show-application-icons',
+        value: 'showApplicationIcons',
+        cb: Lang.bind(this, this.refreshPanel)
+      },
+      {
+        key: 'show-category-icons',
+        value: 'showCategoryIcons',
+        cb: Lang.bind(this, this.refreshPanel)
+      },
+      {
+        key: 'search-filesystem',
+        value: 'searchFilesystem',
+        cb: Lang.bind(this, this.refreshPanel)
+      },
+      {
+        key: 'show-apps-description-on-buttons',
+        value: 'showAppDescriptionsOnButtons',
+        cb: Lang.bind(this, this.refreshPanel)
       },
     ]
 
     for (let i = 0, len = settingsProps.length; i < len; i++) {
       this.settings.bind(settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb);
+    }
+  },
+
+  refreshPanel: function () {
+    if (this.cinnamenuPanel) {
+      this.cinnamenuPanel.refresh();
     }
   },
 
