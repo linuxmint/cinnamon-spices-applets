@@ -1354,6 +1354,26 @@ CinnamenuPanel.prototype = {
     return true;
   },
 
+  _getCompletion: function(text) {
+    if (text.indexOf('/') !== -1) {
+      if (text.substr(text.length - 1) === '/') {
+        return '';
+      } else {
+        return this._applet._pathCompleter.get_completion_suffix(text);
+      }
+    } else {
+      return false;
+    }
+  },
+
+  _getCompletions: function(text) {
+    if (text.indexOf('/') !== -1) {
+      return this._applet._pathCompleter.get_completions(text);
+    } else {
+      return [];
+    }
+  },
+
   resetSearch: function() {
     if (this.answerText) {
       this.answerText.set_text('');
@@ -1486,7 +1506,11 @@ CinnamenuPanel.prototype = {
 
     let recentResults = this._listRecent(pattern);
 
-    let results = appResults.concat(placesResults).concat(recentResults);
+    let acResults = []; // search box autocompletion results
+    if (this._applet.searchFilesystem) {
+      // Don't use the pattern here, as filesystem is case sensitive
+      acResults = this._getCompletions(text);
+    }
 
     results = results.sort(this.sortAppsByScore);
 

@@ -65,6 +65,11 @@ CinnamenuButton.prototype = {
     });
     this.privacy_settings.connect('changed::' + REMEMBER_RECENT_KEY, Lang.bind(this, this.refresh));
 
+    // FS search
+    this._fileFolderAccessActive = false;
+    this._pathCompleter = new Gio.FilenameCompleter();
+    this._pathCompleter.set_dirs_only(false);
+
     // Bind Preference Settings
     this._bindSettingsChanges();
 
