@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-15 07:00+0200\n"
-"PO-Revision-Date: 2017-05-15 09:06+0200\n"
+"PO-Revision-Date: 2017-06-29 09:06+0200\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -48,7 +48,7 @@ msgstr "Kör med NVIDIA GPU"
 
 #: panel.js:533
 msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Gno-Meny: Sök i Firefox bokmärken inaktiverat"
+msgstr "Cinnamenu: Sök i Firefox bokmärken inaktiverat"
 
 #: panel.js:535
 msgid ""
@@ -60,7 +60,7 @@ msgstr ""
 
 #: panel.js:541
 msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Gno-Meny: Sök i Midori bokmärken inaktiverat"
+msgstr "Cinnamenu: Sök i Midori bokmärken inaktiverat"
 
 #: panel.js:543
 msgid ""
