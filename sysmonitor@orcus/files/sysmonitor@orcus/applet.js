@@ -23,12 +23,12 @@ const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
 const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
-const GTop = imports.gi.GTop;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
 const _ = imports.applet._;
+const GTop = imports.applet.GTop;
 const Graph = imports.applet.graph.Graph;
 const Providers = imports.applet.providers;
 
@@ -65,7 +65,21 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
 
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
         try {
+            if (!GTop) {
+                let icon = new St.Icon();
+                icon.set_icon_size(panel_height);
+                icon.set_icon_name("face-sad");
+                let label = new St.Label();
+                label.set_text("Error initializing applet");
+                this.actor.add(icon);
+                this.actor.add(label);
+                this.set_applet_tooltip("glibtop not found, please install glibtop with GObject introspection and reload the applet.\n\nLinux Mint, Ubuntu: sudo apt-get install gir1.2-gtop-2.0\nFedora: sudo dnf install libgtop2");
+                return;
+            }
+            this.vertical = orientation == St.Side.LEFT || orientation == St.Side.RIGHT;
             this.graph_ids = ["cpu", "mem", "swap", "net", "load"];
             this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
             let binds = [
@@ -73,6 +87,9 @@ MyApplet.prototype = {
                 ["smooth", this.on_cfg_changed_smooth],
                 ["refresh_rate", this.on_cfg_changed_refresh_rate],
                 ["draw_border", this.on_cfg_changed_draw_border],
+                ["use_padding", this.on_cfg_changed_padding],
+                ["padding_lr", this.on_cfg_changed_padding],
+                ["padding_tb", this.on_cfg_changed_padding],
                 ["bg_color", this.on_cfg_changed_bg_border_color],
                 ["border_color", this.on_cfg_changed_bg_border_color],
                 ["graph_width", this.on_cfg_changed_graph_width],
@@ -129,6 +146,7 @@ MyApplet.prototype = {
             }
             this.graph_order = [0,1,2,3,4];
             
+            this.on_cfg_changed_padding();
             this.on_cfg_changed_graph_enabled();
             this.update();
         }
@@ -148,7 +166,7 @@ MyApplet.prototype = {
 
         provider.refresh_rate = this.cfg_refresh_rate;
         graph.smooth = this.cfg_smooth;
-        graph.setWidth(this.getGraphWidth(graph_idx));
+        graph.setWidth(this.getGraphWidth(graph_idx), this.vertical);
         graph.setColors(this.getGraphColors(graph_idx));
         graph.setDrawBorder(this.cfg_draw_border);
         graph.bg_color = this.bg_color;
@@ -210,7 +228,8 @@ MyApplet.prototype = {
     
     //Cinnamon callbacks
     on_applet_clicked: function(event) {
-        GLib.spawn_command_line_async(this.cfg_onclick_program);
+        if (this.cfg_onclick_program)
+            GLib.spawn_command_line_async(this.cfg_onclick_program);
     },
 
     on_applet_removed_from_panel: function() {
@@ -218,7 +237,14 @@ MyApplet.prototype = {
             Mainloop.source_remove(this.update_timeout_id);
             this.update_timeout_id = 0;
         }
-        this.settings.finalize();
+        if (this.settings)
+            this.settings.finalize();
+    },
+
+    on_orientation_changed: function(orientation) {
+        global.log("Orientation changed");
+        this.vertical = orientation == St.Side.LEFT || orientation == St.Side.RIGHT;
+        this.on_cfg_changed_graph_width();
     },
 
     //Configuration change callbacks
@@ -286,6 +312,18 @@ MyApplet.prototype = {
         }
     },
 
+    on_cfg_changed_padding: function() {
+        if (this.cfg_use_padding) {
+            let style = "padding:" + this.cfg_padding_tb + "px " + this.cfg_padding_lr + "px;";
+            this.actor.set_style(style);
+        }
+        else
+            this.actor.set_style("");
+        for (let g of this.graphs)
+            if (g)
+                g.updateSize();
+    },
+
     on_cfg_changed_bg_border_color: function() {
         this.bg_color = colorToArray(this.cfg_bg_color);
         this.border_color = colorToArray(this.cfg_border_color);
@@ -301,12 +339,12 @@ MyApplet.prototype = {
     on_cfg_changed_graph_width: function(width, graph_idx) {
         if (graph_idx) {
             if (this.graphs[graph_idx])
-                this.graphs[graph_idx].setWidth(this.getGraphWidth(graph_idx));
+                this.graphs[graph_idx].setWidth(this.getGraphWidth(graph_idx), this.vertical);
         }
         else
             for (let i = 0; i < this.graphs.length; i++)
                 if (this.graphs[i])
-                    this.graphs[i].setWidth(this.getGraphWidth(i));
+                    this.graphs[i].setWidth(this.getGraphWidth(i), this.vertical);
     },
 
     on_cfg_changed_color: function(width, graph_idx) {

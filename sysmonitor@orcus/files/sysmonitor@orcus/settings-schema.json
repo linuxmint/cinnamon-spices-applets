@@ -10,7 +10,7 @@
         "common_g": {
             "type": "section",
             "title": "General",
-            "keys": ["onclick_program", "smooth", "draw_border", "graph_width", "refresh_rate"]
+            "keys": ["onclick_program", "smooth", "draw_border", "graph_width", "refresh_rate", "use_padding", "padding_lr", "padding_tb"]
         },
         "common_c": {
             "type": "section",
@@ -115,7 +115,8 @@
         "max": 1000,
         "step": 1,
         "description": "Common graph width",
-        "units": "pixels"
+        "units": "pixels",
+        "tooltip": "If the applet is in a vertical panel, this sets the graph height. The graph width is then the panel width minus padding"
     },
     "refresh_rate": {
         "type": "spinbutton",
@@ -125,6 +126,31 @@
         "step": 50,
         "description": "Refresh rate",
         "units": "ms"
+    },
+    "use_padding": {
+        "type": "switch",
+        "default": false,
+        "description": "Use custom applet padding"
+    },
+    "padding_lr": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Left/right padding",
+        "units": "pixels",
+        "dependency": "use_padding"
+    },
+    "padding_tb": {
+        "type": "spinbutton",
+        "default": 1,
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "description": "Top/bottom padding",
+        "units": "pixels",
+        "dependency": "use_padding"
     },
     "bg_color": {
         "type": "colorchooser",

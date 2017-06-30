@@ -17,6 +17,7 @@ Graph.prototype = {
         this.autoScale = false;
         this.scale = 1;
         this.width = 1;
+        this.vertical = false;
         this.draw_border = true;
         this.paint_queued = false;
         this.area.connect('repaint', Lang.bind(this, function() {this.paint();}));
@@ -42,11 +43,21 @@ Graph.prototype = {
             this.data = this.data.slice(this.data.length - datasize);
     },
 
-    setWidth: function(width) {
-        this.width = width;
-        this.area.set_width(width);
-        this._resizeData();
+    updateSize: function() {
+        this.width = null;
         this.repaint();
+    },
+
+    setWidth: function(width, vertical) {
+        if (vertical) {
+            this.area.set_width(-1);
+            this.area.set_height(width);
+        }
+        else {
+            this.area.set_width(width);
+            this.area.set_height(-1);
+        }
+        this.updateSize();
     },
 
     setDrawBorder: function(draw_border) {
@@ -97,6 +108,10 @@ Graph.prototype = {
         this.paint_queued = false;
         let cr = this.area.get_context();
         let [width, height] = this.area.get_size();
+        if (!this.width) {
+            this.width = width;
+            this._resizeData();
+        }
         let border_width = this.draw_border ? 1 : 0;
         let graph_width = width - 2 * border_width;
         let graph_height = height - 2 * border_width;
