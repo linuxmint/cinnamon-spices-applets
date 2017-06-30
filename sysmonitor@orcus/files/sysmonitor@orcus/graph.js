@@ -61,8 +61,7 @@ Graph.prototype = {
 
     setDrawBorder: function(draw_border) {
         this.draw_border = draw_border;
-        this._resizeData();
-        this.repaint();
+        this.updateSize();
     },
     
     setColors: function(c) {
