@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-23 15:52+0200\n"
+"POT-Creation-Date: 2017-06-30 20:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -76,7 +76,9 @@ msgstr ""
 
 #. sysmonitor@orcus->settings-schema.json->load_graph_width->units
 #. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
 #. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
 #. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
 #. sysmonitor@orcus->settings-schema.json->graph_width->units
 #. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
@@ -91,8 +93,16 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr ""
+
 #. sysmonitor@orcus->settings-schema.json->onclick_program->description
 msgid "Program to launch on click"
+msgstr ""
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
 msgstr ""
 
 #. sysmonitor@orcus->settings-schema.json->load->title
@@ -154,6 +164,10 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr ""
+
 #. sysmonitor@orcus->settings-schema.json->border_color->description
 msgid "Border color"
 msgstr ""
@@ -184,6 +198,12 @@ msgstr ""
 
 #. sysmonitor@orcus->settings-schema.json->graph_width->description
 msgid "Common graph width"
+msgstr ""
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
 msgstr ""
 
 #. sysmonitor@orcus->settings-schema.json->net_color_1->description
