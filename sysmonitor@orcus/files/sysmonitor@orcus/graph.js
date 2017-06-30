@@ -17,7 +17,6 @@ Graph.prototype = {
         this.autoScale = false;
         this.scale = 1;
         this.width = 1;
-        this.vertical = false;
         this.draw_border = true;
         this.paint_queued = false;
         this.area.connect('repaint', Lang.bind(this, function() {this.paint();}));
