@@ -75,15 +75,15 @@ SearchWebBookmarks.prototype = {
 };
 
 /**
-   * @name CategoryListButton
-   * @description A button with an icon that holds category info
-   *
-   * @param {class} _parent
-   * @param {string} dir
-   * @param {string} altNameText
-   * @param {any} altIconName
-   * @param {string} selectorMethod
-   */
+ * @name CategoryListButton
+ * @description A button with an icon that holds category info
+ *
+ * @param {class} _parent
+ * @param {string} dir
+ * @param {string} altNameText
+ * @param {any} altIconName
+ * @param {string} selectorMethod
+ */
 
 function CategoryListButton() {
   this._init.apply(this, arguments);
@@ -104,7 +104,6 @@ CategoryListButton.prototype = {
     this.selectorMethod = selectorMethod;
 
     this._parent = _parent;
-    this._ignoreHoverSelect = null;
 
     this.actor.set_style_class_name('menu-category-button');
     this.actor._delegate = this;
@@ -115,6 +114,7 @@ CategoryListButton.prototype = {
     let dirName = !isStrDir ? dir.get_name() : null;
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
+    this.entered = null;
 
     if (this._parent.showCategoryIcons) {
       let icon;
@@ -161,17 +161,21 @@ CategoryListButton.prototype = {
     this.actor.connect('button-release-event', Lang.bind(this, this.handleButtonRelease));
   },
 
-  handleEnter: function () {
+  handleEnter: function (actor, event) {
     if (this.disabled) {
       return false;
     }
 
-    this.actor.add_style_class_name('menu-category-button-selected');
-    this._parent.selectedAppTitle.set_text(this.categoryNameText);
-    this._parent.selectedAppDescription.set_text('');
+    if (event) {
+      this._parent._clearEnteredActors();
+    }
 
-    if (this._ignoreHoverSelect) {
-      return false;
+    this.entered = true;
+    this.actor.set_style_class_name('menu-category-button-selected');
+
+    if (!this._parent.showAppDescriptionsOnButtons) {
+      this._parent.selectedAppTitle.set_text(this.categoryNameText);
+      this._parent.selectedAppDescription.set_text('');
     }
 
     Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
@@ -181,7 +185,8 @@ CategoryListButton.prototype = {
   },
 
   handleLeave: function () {
-    this.actor.remove_style_class_name('menu-category-button-selected');
+    this.entered = null;
+    this.actor.set_style_class_name('menu-category-button');
     this._parent.selectedAppTitle.set_text('');
     this._parent.selectedAppDescription.set_text('');
   },
@@ -203,11 +208,16 @@ CategoryListButton.prototype = {
 
     this.actor.set_style_class_name('menu-category-button-greyed');
     this.disabled = true;
+    this.entered = null;
   },
 
   enable: function () {
     this.actor.set_style_class_name('menu-category-button');
     this.disabled = false;
+  },
+
+  _onKeyFocusIn: function () {
+    global.stage.set_key_focus(this._parent.searchEntry);
   },
 
   destroy: function(actor) {
@@ -223,14 +233,14 @@ CategoryListButton.prototype = {
 };
 
 /**
- * @name ApplicationContextMenuItem
- * @description Context menu class based on the one found in the default Cinnamon applet.
- *
- * @param {class} appButton
- * @param {string} label
- * @param {boolean} action
- * @param {string} iconName
- */
+* @name ApplicationContextMenuItem
+* @description Context menu class based on the one found in the default Cinnamon applet.
+*
+* @param {class} appButton
+* @param {string} label
+* @param {boolean} action
+* @param {string} iconName
+*/
 
 function ApplicationContextMenuItem() {
   this._init.apply(this, arguments);
@@ -315,24 +325,24 @@ ApplicationContextMenuItem.prototype = {
   }
 };
 
-  /**
-   * @name AppListGridButton
-   * @description A button container with an icon, label, and dot responsible for
-   * @description handling both list and grid views.
-   *
-   * @param {class} _parent
-   * @param {object} app
-   * @param {number} appType
-   * @param {number} appIndex
-   * @param {number} appListLength
-   */
+/**
+ * @name AppListGridButton
+ * @description A button container with an icon, label, and dot responsible for
+ * @description handling both list and grid views.
+ *
+ * @param {class} _parent
+ * @param {object} app
+ * @param {number} appType
+ * @param {number} appIndex
+ * @param {number} appListLength
+ */
 
 function AppListGridButton() {
   this._init.apply(this, arguments);
 }
 
 AppListGridButton.prototype = {
-  __proto__: PopupMenu.PopupSubMenuMenuItem.prototype,
+  __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
   _init: function(_parent, app, appType, appIndex, appListLength) {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
@@ -351,25 +361,18 @@ AppListGridButton.prototype = {
 
     this.app = app;
     this.appType = appType;
+    this.appIndex = appIndex;
+    this.appListLength = appListLength;
     this.isStrApp = typeof app === 'string';
     this.isGridType = this._parent.startupViewMode === ApplicationsViewMode.GRID;
-    this.appListLength = appListLength;
     this._stateChangedId = 0;
     this.column = null;
     let className = '';
-    this.appIndex = appIndex;
+    this.entered = null;
 
     if (this.isGridType) {
       className = 'menu-application-button'
-      if (this._parent.appsGridIconScale) {
-        let size = Math.round(Math.abs((Math.round(appListLength / this._parent.appsGridColumnCount)) - 2048) / appListLength);
-        size = isNaN(size) || size < 48 ? 48 : size > 102 ? 102 : size;
-        this._iconSize = size;
-      } else {
-        this._iconSize = this._parent.appsGridIconSize > 0 ? this._parent.appsGridIconSize : 64;
-      }
-
-
+      this._iconSize = this._parent.appsGridIconSize > 0 ? this._parent.appsGridIconSize : 64;
     } else {
       className = 'menu-application-button';
       this._iconSize = (this._parent.appsListIconSize > 0) ? this._parent.appsListIconSize : 28;
@@ -547,13 +550,14 @@ AppListGridButton.prototype = {
     if (this._parent.searchActive) {
       this.formatLabel({});
     }
-    if (this.icon) {
+    /*if (this.icon) {
       this.icon.realize();
-    }
+    }*/
     if (this._parent.showAppDescriptionsOnButtons) {
       this.formatLabel({});
     }
-    this.label.realize();
+
+    //this.label.realize();
   },
 
   formatLabel: function (opts) {
@@ -636,14 +640,24 @@ AppListGridButton.prototype = {
     this.marqueeTimer = setTimeout(()=>this.handleMarquee(opts), interval);
   },
 
-  handleEnter: function () {
+  _onKeyFocusIn: function () {
+    global.stage.set_key_focus(this._parent.searchEntry);
+  },
+
+  handleEnter: function (actor, event) {
     if (this._parent.menuIsOpen && this._parent.menuIsOpen !== this.appIndex) {
       return false;
     }
 
-    this._parent._selectedItemIndex = this.appIndex;
+    if (event) {
+      this._parent._clearEnteredActors();
+    } else {
+      this._parent._scrollToButton(this);
+    }
 
-    this.actor.add_style_class_name('menu-application-button-selected');
+    this.entered = true;
+
+    this.actor.set_style_class_name('menu-application-button-selected');
 
     // Check marquee conditions, and set it up
     let labelWidth, actorWidth, allocatedTextLength;
@@ -671,11 +685,9 @@ AppListGridButton.prototype = {
     return true;
   },
 
-  handleLeave: function (fromKey) {
-    if (fromKey === true) {
-      this._parent._selectedItemIndex = -1;
-    }
-
+  handleLeave: function () {
+    this.entered = null;
+    this.actor.set_style_class_name('menu-application-button');
     if (this.description) {
       this.app.description = this.description;
       this.formatLabel({});
@@ -683,24 +695,10 @@ AppListGridButton.prototype = {
         clearTimeout(this.marqueeTimer);
       }
     }
-
-    //this.actor.remove_style_class_name('menu-application-button-selected');
-    this.actor.set_style_class_name('menu-application-button');
-    this._parent.selectedAppTitle.set_text('');
-    this._parent.selectedAppDescription.set_text('');
-  },
-
-  highlight: function () { // TBD
-    this.actor.add_style_pseudo_class('highlighted');
-  },
-
-  unhighlight: function () { // TBD
-    var app_key = this.app.get_id();
-    if (app_key === null) {
-      app_key = this.app.get_name() + ':' + this.app.get_description();
+    if (!this._parent.showAppDescriptionsOnButtons) {
+      this._parent.selectedAppTitle.set_text('');
+      this._parent.selectedAppDescription.set_text('');
     }
-    //this.appsMenuButton._knownApps.push(app_key);
-    this.actor.remove_style_pseudo_class('highlighted');
   },
 
   _onButtonReleaseEvent: function(actor, e){
@@ -887,24 +885,24 @@ AppListGridButton.prototype = {
   }
 };
 
-  /**
-   * @name GroupButton
-   * @description A generic icon button used for user/power group buttons
-   *
-   * @param {class} _parent
-   * @param {string} iconName
-   * @param {number} iconSize
-   * @param {string} name
-   * @param {string} description
-   * @param {function} buttonReleaseCallback
-   */
+/**
+ * @name GroupButton
+ * @description A generic icon button used for user/power group buttons
+ *
+ * @param {class} _parent
+ * @param {string} iconName
+ * @param {number} iconSize
+ * @param {string} name
+ * @param {string} description
+ * @param {function} buttonReleaseCallback
+ */
 
 function GroupButton() {
   this._init.apply(this, arguments);
 }
 
 GroupButton.prototype = {
-  __proto__: PopupMenu.PopupSubMenuMenuItem.prototype,
+  __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
 
   _init: function (_parent, iconName, iconSize, name, description, buttonReleaseCallback) {
@@ -926,6 +924,7 @@ GroupButton.prototype = {
     this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px; margin:auto;'
     this.actor.add_style_class_name('menu-favorites-button');
     this.actor._delegate = this;
+    this.entered = null;
 
     if (iconName && iconSize) {
       this._iconSize = adjustedIconSize;
@@ -937,7 +936,8 @@ GroupButton.prototype = {
       this.addActor(this.icon);
       this.icon.realize();
     }
-
+    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
+    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
     this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
   },
 
@@ -946,11 +946,28 @@ GroupButton.prototype = {
     this.buttonReleaseCallback();
   },
 
-  destroy: function(actor) {
+  handleEnter: function (actor) {
+    if (actor) {
+      this._parent._clearEnteredActors();
+    }
+    this.entered = true;
+    this.actor.add_style_pseudo_class('hover');
+  },
+
+  handleLeave: function () {
+    this.entered = null;
+    this.actor.remove_style_pseudo_class('hover');
+    this._parent.selectedAppTitle.set_text(this.name);
+    this._parent.selectedAppDescription.set_text(this.description);
+  },
+
+  destroy: function() {
     this.label.destroy();
     if (this.icon) {
       this.icon.destroy();
     }
+    this._parent.selectedAppTitle.set_text('');
+    this._parent.selectedAppDescription.set_text('');
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   },
 };
