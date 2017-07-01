@@ -260,18 +260,6 @@ msgstr "Öppna menyn när jag för muspekaren över den"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Aktivera menyn när muspekaren förs över panelikonen"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Skala ikonvyn efter tillgängligt utrymme"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Detta gör ikonvyns ikonstorlek variabel, beroende på hur många program som "
-"visas. Det åsidosätter alternativet för ikonstorlek."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivera automatisk skrollning i programlistan"

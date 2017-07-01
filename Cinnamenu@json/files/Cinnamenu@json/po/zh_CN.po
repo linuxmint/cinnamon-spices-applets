@@ -256,16 +256,6 @@ msgstr "当我移动鼠标到菜单上时打开菜单"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "启用当鼠标进入小程序时打开菜单"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "按可用空间缩放网格图标"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr "这将会使网格图标大小随应用程序显示的数量而变化。这将会覆盖网格图标大小选项。"
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "在应用程序列表中启用自动滚动"

@@ -262,18 +262,6 @@ msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Prilagodi veličinu mreže ikona prema dostupnom prostoru"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Ovo čini veličinu mreže ikona prilagodljivu ovisno o tome koliko je "
-"prikazanih aplikacija. Ovo zaobilazi mogućnost veličine mreže ikona."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"

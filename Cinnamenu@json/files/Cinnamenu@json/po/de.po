@@ -248,19 +248,6 @@ msgstr "Das Menü öffnen, wenn die Maus darüber bewegt wird"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Öffnen des Menüs aktivieren, wenn sich die Maus auf das Applet bewegt"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Symbole in Rasteransicht nach verfügbarem Platz skalieren"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Dies macht die Größe der Symbole in der Rasteransicht variabel je nachdem, "
-"wie viele Anwendungen angezeigt werden. Die Option »Größe der Symbole in der "
-"Rasteransicht« wird überschrieben."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Automatischen Bildlauf in der Anwendungsliste aktivieren"
