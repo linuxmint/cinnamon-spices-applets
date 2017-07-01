@@ -186,6 +186,7 @@ CategoryListButton.prototype = {
 
   handleLeave: function () {
     this.entered = null;
+    this._parent._currentCategory = this.categoryNameText;
     this.actor.set_style_class_name('menu-category-button');
     this._parent.selectedAppTitle.set_text('');
     this._parent.selectedAppDescription.set_text('');
@@ -522,7 +523,8 @@ AppListGridButton.prototype = {
     if (this.icon) {
       this.icon.realize();
     }
-    if (this._parent.showAppDescriptionsOnButtons) {
+    if (this._parent.showAppDescriptionsOnButtons
+      || this.app.shouldHighlight) {
       this.formatLabel({});
     }
     this.label.realize();

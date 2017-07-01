@@ -136,6 +136,7 @@ CinnamenuApplet.prototype = {
     this._newInstance = true;
     this._knownApps = [];
     this.applicationsByCategory = {};
+    this._currentCategory = null;
     this.favorites = [];
     this._allItems = [];
     this._applicationsViewMode = this.startupViewMode;
@@ -522,8 +523,7 @@ CinnamenuApplet.prototype = {
     this.menu.removeAll();
   },
 
-  _loadAppCategories: function(dir, root) {
-    let rootDir = root;
+  _loadAppCategories: function(dir, rootDir, dirId) {
     let iter = dir.iter();
     let nextType;
     while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
@@ -532,15 +532,14 @@ CinnamenuApplet.prototype = {
         if (!entry.get_app_info().get_nodisplay()) {
           let id = entry.get_desktop_file_id();
           let app = this.appSystem.lookup_app(id);
-          if (rootDir) {
+          if (rootDir && typeof rootDir.get_menu_id === 'function') {
             let rootDirId = rootDir.get_menu_id();
             if (rootDirId) {
               this.applicationsByCategory[rootDirId].push(app);
             }
           } else {
-            let dirMenuId = dir.get_menu_id();
-            if (dirMenuId) {
-              this.applicationsByCategory[dirMenuId].push(app);
+            if (dirId) {
+              this.applicationsByCategory[dirId].push(app);
             }
           }
           let appIsKnown = this._knownApps.indexOf(id) > -1;
@@ -554,9 +553,9 @@ CinnamenuApplet.prototype = {
         }
       } else if (nextType === CMenu.TreeItemType.DIRECTORY) {
         if (rootDir) {
-          this._loadAppCategories(iter.get_directory(), rootDir);
+          this._loadAppCategories(iter.get_directory(), rootDir, null);
         } else {
-          this._loadAppCategories(iter.get_directory(), dir);
+          this._loadAppCategories(iter.get_directory(), dir, dirId);
         }
       }
     }
@@ -610,15 +609,16 @@ CinnamenuApplet.prototype = {
         }
       }
       dirs = sortDirs(dirs)
-      for (let i = 0, len = dirs.length; i < len; i++) {
-        let dir = dirs[i];
+      for (let z = 0, len = dirs.length; z < len; z++) {
+        let dir = dirs[z];
         if (dir.get_is_nodisplay()) {
           continue;
         }
-        this.applicationsByCategory[dir.get_menu_id()] = [];
-        this._loadAppCategories(dir);
-        if (this.applicationsByCategory[dir.get_menu_id()].length > 0) {
-          let appCategory = new CategoryListButton(this, dir);
+        let dirId = dir.get_menu_id();
+        this.applicationsByCategory[dirId] = [];
+        this._loadAppCategories(dir, null, dirId);
+        if (this.applicationsByCategory[dirId].length > 0) {
+          let appCategory = new CategoryListButton(this, dir, dirId);
           this.categoriesBox.add_actor(appCategory.actor);
         }
       }
@@ -634,63 +634,47 @@ CinnamenuApplet.prototype = {
       this.categoriesBox.add_actor(this.recentCategory.actor);
     }
     // Load 'favorite applications' category
-    let favAppCategory = new CategoryListButton(this, 'favorites', t("Favorite Apps"), 'address-book-new');
-    this.favAppCategory = favAppCategory;
-    this.categoriesBox.add_actor(favAppCategory.actor);
+    this.favAppCategory = new CategoryListButton(this, 'favorites', t("Favorite Apps"), 'address-book-new');
+    this.categoriesBox.add_actor(this.favAppCategory.actor);
   },
 
   _selectCategory: function(button) {
     this._clearApplicationsBox();
-
     let category = typeof button === 'string' ? button : button._dir;
     if (typeof category === 'string') {
       this._displayApplications(this._listApplications(category));
     } else {
       this._displayApplications(this._listApplications(category.get_menu_id()));
     }
-    // Cache the current category button so we can invoke this function to get around the list/grid toggle
-    // not showing the app list.
-    this._currentSelectKey = '_selectCategory';
-    this._currentCategoryButton = button;
   },
 
-  _selectAllPlaces: function(button) {
+  _selectAllPlaces: function() {
     this._clearApplicationsBox();
     let places = _.chain(this._listPlaces())
       .concat(this._listBookmarks())
       .concat(this._listDevices())
       .value();
     this._displayApplications(places);
-    this._currentSelectKey = '_selectAllPlaces';
-    this._currentCategoryButton = button;
   },
 
-  _selectBookmarks: function(button) {
+  _selectBookmarks: function() {
     this._clearApplicationsBox();
     this._displayApplications(this._listBookmarks());
-    this._currentSelectKey = '_selectBookmarks';
-    this._currentCategoryButton = button;
   },
 
-  _selectDevices: function(button) {
+  _selectDevices: function() {
     this._clearApplicationsBox();
     this._displayApplications(this._listDevices());
-    this._currentSelectKey = '_selectDevices';
-    this._currentCategoryButton = button;
   },
 
-  _selectRecent: function(button) {
+  _selectRecent: function() {
     this._clearApplicationsBox();
     this._displayApplications(this._listRecent());
-    this._currentSelectKey = '_selectRecent';
-    this._currentCategoryButton = button;
   },
 
-  _selectWebBookmarks: function(button) {
+  _selectWebBookmarks: function() {
     this._clearApplicationsBox();
     this._displayApplications(this._listWebBookmarks());
-    this._currentSelectKey = '_selectWebBookmarks';
-    this._currentCategoryButton = button;
   },
 
   _switchApplicationsView: function() {
@@ -833,7 +817,6 @@ CinnamenuApplet.prototype = {
     this._searchWebErrorsShown = true;
 
     let res = [];
-    log2(Opera.bookmarks)
     let bookmarks = _.chain(Chromium.bookmarks)
       .concat(GoogleChrome.bookmarks)
       .concat(Firefox.bookmarks)
@@ -1154,7 +1137,10 @@ CinnamenuApplet.prototype = {
 
     //log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'enteredCategoryExists', 'refPowerGroupItemIndex', refPowerGroupItemIndex, enteredCategoryExists, 'enteredItemExists', enteredItemExists)
 
-    let startingCategoryIndex = categoryChildren.length - 1;
+    let startingCategoryIndex = _.findIndex(categoryChildren, (actor) => {
+      return this._currentCategory === actor._delegate.categoryNameText;
+    });
+    startingCategoryIndex = this.enableBookmarks && startingCategoryIndex <= 0 ? 1 : startingCategoryIndex;
 
     const previousItemNavigation = (index) => {
       let up = (typeof itemChildren[index] === 'undefined' && enteredItemExists
