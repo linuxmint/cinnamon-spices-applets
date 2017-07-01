@@ -47,8 +47,7 @@
         "category-icon-size",
         "show-application-icons",
         "apps-list-icon-size",
-        "apps-grid-icon-size",
-        "apps-grid-icon-scale"
+        "apps-grid-icon-size"
       ]
     },
     "menu-behave" : {
@@ -118,14 +117,6 @@
     "units": "pixels",
     "description": "Applications grid icon size",
     "tooltip": "Applications grid icon size"
-  },
-  "apps-grid-icon-scale": {
-    "indent": true,
-    "dependency": "show-application-icons",
-    "type": "checkbox",
-    "default": false,
-    "description": "Scale grid icons by available space",
-    "tooltip": "This makes the grid icon size variable depending on how many apps are being shown. This overrides the grid icon size option."
   },
   "overlay-key": {
     "type": "keybinding",
