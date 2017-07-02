@@ -923,7 +923,7 @@ GroupButton.prototype = {
     if (adjustedIconSize > iconSize) {
       adjustedIconSize = iconSize;
     }
-    this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px; margin:auto;'
+    this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;'
     this.actor.add_style_class_name('menu-favorites-button');
     this.actor._delegate = this;
     this.entered = null;
