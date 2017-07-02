@@ -5,7 +5,8 @@ window.log2 = function () {
     if (typeof args[i] === 'undefined') {
       args[i] = typeof args[i];
     }
-    if (typeof args[i] === 'object') {
+    if (typeof args[i] === 'object'
+      && args[i].toString().indexOf('[0x') === -1) {
       args[i] = JSON.stringify(args[i]);
     } else if (typeof args[i] !== 'string') {
       args[i] = args[i].toString();
@@ -33,6 +34,7 @@ const PopupMenu = imports.ui.popupMenu;
 const AppFavorites = imports.ui.appFavorites;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
+const Tweener = imports.ui.tweener;
 /*const DT = imports.misc.timers.DebugTimer;
 const dt = new DT('1')*/
 
@@ -699,19 +701,48 @@ CinnamenuApplet.prototype = {
     this._clearApplicationsBox();
   },
 
+  _isNotInScrollView: function (button) {
+    let adjustment = this.applicationsScrollBox.get_vscroll_bar().get_adjustment();
+    let currentScrollValue = adjustment.get_value();
+    let boxHeight = this.applicationsScrollBox.get_allocation_box().y2 - this.applicationsScrollBox.get_allocation_box().y1;
+    let allocationBox = button.actor.get_allocation_box();
+    log(boxHeight + currentScrollValue < allocationBox.y2 + 100)
+    return boxHeight + currentScrollValue < allocationBox.y2 + 100;
+  },
+
   _scrollToButton: function(button) {
-    let currentScrollValue = this.applicationsScrollBox.get_vscroll_bar().get_adjustment().get_value();
-    let box_height = this.applicationsScrollBox.get_allocation_box().y2 - this.applicationsScrollBox.get_allocation_box().y1;
-    let newScrollValue = currentScrollValue;
-    if (currentScrollValue > button.actor.get_allocation_box().y1 - 10) {
-      newScrollValue = button.actor.get_allocation_box().y1 - 10;
+    // Based on https://github.com/GNOME/gnome-shell/blob/817ff52414d18eb11cb97141c594e79d3e0c0512/js/misc/util.js#L403
+    let adjustment = this.applicationsScrollBox.vscroll.adjustment;
+    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+    let offset = 0;
+    let vfade = this.applicationsScrollBox.get_effect('fade');
+    if (vfade) {
+      offset = vfade.vfade_offset;
     }
-    if (box_height+currentScrollValue < button.actor.get_allocation_box().y2 + 10) {
-      newScrollValue = button.actor.get_allocation_box().y2-box_height + 10;
+    let box = button.actor.get_allocation_box();
+    let y1 = box.y1, y2 = box.y2;
+    let parent = button.actor.get_parent();
+    while (parent !== this.applicationsScrollBox) {
+      if (!parent) {
+        return false;
+      }
+      let box = parent.get_allocation_box();
+      y1 += box.y1;
+      y2 += box.y1;
+      parent = parent.get_parent();
     }
-    if (newScrollValue !== currentScrollValue) {
-      this.applicationsScrollBox.get_vscroll_bar().get_adjustment().set_value(newScrollValue);
+    if (y1 < value + offset) {
+      value = Math.max(0, y1 - offset);
+    } else if (y2 > value + pageSize - offset) {
+      value = Math.min(upper, y2 + offset - pageSize);
+    } else {
+      return false;
     }
+    Tweener.addTween(adjustment, {
+      value: value,
+      time: 0.1,
+      transition: 'easeOutQuad'
+    });
   },
 
   _clearEnteredActors: function () {
@@ -734,6 +765,7 @@ CinnamenuApplet.prototype = {
       return actor._delegate.entered != null;
     });
     if (refPowerGroupItemIndex > -1 && powerGroupChildren[refPowerGroupItemIndex]) {
+      powerGroupChildren[refPowerGroupItemIndex]._delegate.closeMenu();
       powerGroupChildren[refPowerGroupItemIndex]._delegate.handleLeave();
     }
   },
@@ -1236,6 +1268,10 @@ CinnamenuApplet.prototype = {
     };
 
     const activateItem = () => {
+      if (ctrlKey) {
+        itemChildren[refItemIndex]._delegate.toggleMenu();
+        return false;
+      }
       if (enteredItemExists) {
         itemChildren[refItemIndex]._delegate.activate();
       } else if (this.searchActive && itemChildren.length > 0) {

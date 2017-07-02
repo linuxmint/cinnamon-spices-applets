@@ -79,7 +79,7 @@ SearchWebBookmarks.prototype = {
  * @description A button with an icon that holds category info
  *
  * @param {class} _parent
- * @param {string} dir
+ * @param {string|object} dir
  * @param {string} altNameText
  * @param {any} altIconName
  * @param {string} selectorMethod
@@ -185,6 +185,9 @@ CategoryListButton.prototype = {
   },
 
   handleLeave: function () {
+    if (this.disabled) {
+      return false;
+    }
     this.entered = null;
     this._parent._currentCategory = this.categoryNameText;
     this.actor.set_style_class_name('menu-category-button');
@@ -544,7 +547,8 @@ AppListGridButton.prototype = {
     this.actor.connect('parent-set', Lang.bind(this, this.handleParentChange));
   },
 
-  handleParentChange: function () {
+  handleParentChange: function (actor) {
+    this.actor = actor;
     this.isGridType = this._parent.startupViewMode === ApplicationsViewMode.GRID;
     if (!this.app.description) {
       this.app.description = this._parent.fallbackDescription;
@@ -611,6 +615,12 @@ AppListGridButton.prototype = {
   },
 
   handleMarquee: function (opts) {
+    if (!this.app) {
+      if (this.marqueeTimer) {
+        clearTimeout(this.marqueeTimer);
+      }
+      return false;
+    }
     if (opts.reset === 2) {
       opts.reset = 0;
     }
@@ -647,7 +657,7 @@ AppListGridButton.prototype = {
   },
 
   handleEnter: function (actor, event) {
-    if (this._parent.menuIsOpen && this._parent.menuIsOpen !== this.appIndex) {
+    if (this._parent.menuIsOpen || this.menu.isOpen) {
       return false;
     }
 
@@ -673,7 +683,7 @@ AppListGridButton.prototype = {
       actorWidth = 16;
       allocatedTextLength = 16;
     }
-    if (labelWidth > actorWidth && !this._parent.menuIsOpen) {
+    if (labelWidth > actorWidth) {
       this.description = this.app.description;
       this.marqueeTimer = setTimeout(()=>this.handleMarquee({
         start: 0,
@@ -688,13 +698,18 @@ AppListGridButton.prototype = {
   },
 
   handleLeave: function () {
+    if (this._parent.menuIsOpen === this.appIndex && this.menu.isOpen) {
+      return false;
+    }
+
     this.entered = null;
     this.actor.set_style_class_name('menu-application-button');
     if (this.description) {
       this.app.description = this.description;
       this.formatLabel({});
-      if (!this._parent.menuIsOpen) {
+      if (!this._parent.menuIsOpen && this.marqueeTimer) {
         clearTimeout(this.marqueeTimer);
+        this.marqueeTimer = null;
       }
     }
     if (!this._parent.showAppDescriptionsOnButtons) {
@@ -707,7 +722,7 @@ AppListGridButton.prototype = {
     let button = e.get_button();
     if (button === 1) {
       if (this.menuIsOpen) {
-        if (this._parent.menuIsopen !== this.appIndex && this.menu._activeMenuItem) {
+        if (this.menu.isOpen && this.menu._activeMenuItem) {
           this.menu._activeMenuItem.activate();
         } else {
           this.menu.close();
@@ -716,6 +731,12 @@ AppListGridButton.prototype = {
       }
       this.activate(e);
     } else if (button === 3) {
+      // Prevent the menu from clipping if this button is partially visible.
+      if (this._parent._isNotInScrollView(this)) {
+        let [x, y] = this.menu.actor.get_position();
+        y = -100;
+        this.menu.actor.set_position(x, y)
+      }
       this.activateContextMenus(e);
     }
     return true;
@@ -753,6 +774,7 @@ AppListGridButton.prototype = {
       for (let i = 0, len = children.length; i < len; i++) {
         if (this.appIndex !== children[i]._delegate.appIndex) {
           children[i]._delegate.closeMenu();
+          children[i]._delegate.handleLeave(true);
         }
       }
     }
@@ -761,13 +783,14 @@ AppListGridButton.prototype = {
 
   setColumn: function(column) {
     this.column = column;
-    if ((column === 0 || column === this.appListLength) && this.appListLength > 1) {
-      this.menu.actor.set_position(-90, 50);
+    let x = 0, y = 50;
+    if ((column === 0 || column === this.appListLength)
+      && this.appListLength > 1) {
+      x = -90
     } else if (column === this._parent.appsGridColumnCount) {
-      this.menu.actor.set_position(160, 50);
-    } else {
-      this.menu.actor.set_position(0, 50);
+      x = 160
     }
+    this.menu.actor.set_position(x, y);
   },
 
   _onStateChanged: function () {
@@ -775,7 +798,7 @@ AppListGridButton.prototype = {
       return false;
     }
     if (this.appType === ApplicationType._applications) {
-      if (this.app.state != Cinnamon.AppState.STOPPED) {
+      if (this.app.state !== Cinnamon.AppState.STOPPED) {
         this.dot.opacity = 255;
       } else {
         this.dot.opacity = 0;
@@ -813,11 +836,13 @@ AppListGridButton.prototype = {
     }
 
     if (!this.menu.isOpen) {
+      this._parent._clearEnteredActors();
       let children = this.menu.box.get_children();
-      for (var i = 0; i < children.length; i++) {
+      for (var i = 0, len = children.length; i < len; i++) {
         this.menu.box.remove_actor(children[i]);
       }
       this._parent.menuIsOpen = this.appIndex;
+      this.actor.set_style_class_name('menu-application-button-selected');
 
       let menuItem;
       menuItem = new ApplicationContextMenuItem(this, _('Add to panel'), 'add_to_panel', 'list-add');
@@ -854,6 +879,7 @@ AppListGridButton.prototype = {
       }
       // Allow other buttons hover functions to take effect.
       this._parent.menuIsOpen = null;
+      this.actor.set_style_class_name('menu-application-button');
     }
     this.menu.toggle_with_options(this._parent.enableAnimation);
     return true
@@ -923,7 +949,7 @@ GroupButton.prototype = {
     if (adjustedIconSize > iconSize) {
       adjustedIconSize = iconSize;
     }
-    this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;'
+    this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
     this.actor.add_style_class_name('menu-favorites-button');
     this.actor._delegate = this;
     this.entered = null;
