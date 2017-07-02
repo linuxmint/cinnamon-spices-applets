@@ -36,6 +36,12 @@
         },
         "tooltip" : "A location of applets for which to toggle visibility"
     },
+    "restore_hidden_string": {
+        "type" : "entry",
+        "default" : "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org",
+        "description" : "Restore as hidden",
+        "tooltip": "A comma-separated list of applet UUIDs.\nAn applet from this list will be hidden if the applet is configured as hidden and the applet shows up."
+    },
     "save_every": {
         "type": "spinbutton",
         "default": 60,
@@ -92,9 +98,15 @@
         "description": "Auto close",
         "tooltip": "Close the applet tray when a mouse leaves the user interface"
     },
+    "show_icon_tooltips" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Show tooltips",
+        "tooltip": "Show icon tooltips in the applet tray"
+    },
     "show_grayscale_icons" : {
         "type" : "checkbox",
-        "default" : true,
+        "default" : false,
         "description": "Show grayscale icons",
         "tooltip": "Show icons of hidden applets in grayscale"
     },
@@ -107,12 +119,6 @@
         "units": "%",
         "description": "Grayscale brightness",
         "tooltip" : "A brightness level of grayscale icons"
-    },
-    "show_icon_tooltips" : {
-        "type" : "checkbox",
-        "default" : false,
-        "description": "Show tooltips",
-        "tooltip": "Show icon tooltips in the applet tray"
     },
     "tray_end" : {
         "type" : "separator"

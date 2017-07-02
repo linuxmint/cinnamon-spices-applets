@@ -1,4 +1,4 @@
-const GTop = imports.gi.GTop;
+const GTop = imports.applet.GTop;
 const _ = imports.applet._;
 
 function CpuData() {

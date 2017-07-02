@@ -42,17 +42,26 @@ Graph.prototype = {
             this.data = this.data.slice(this.data.length - datasize);
     },
 
-    setWidth: function(width) {
-        this.width = width;
-        this.area.set_width(width);
-        this._resizeData();
+    updateSize: function() {
+        this.width = null;
         this.repaint();
+    },
+
+    setWidth: function(width, vertical) {
+        if (vertical) {
+            this.area.set_width(-1);
+            this.area.set_height(width);
+        }
+        else {
+            this.area.set_width(width);
+            this.area.set_height(-1);
+        }
+        this.updateSize();
     },
 
     setDrawBorder: function(draw_border) {
         this.draw_border = draw_border;
-        this._resizeData();
-        this.repaint();
+        this.updateSize();
     },
     
     setColors: function(c) {
@@ -97,6 +106,10 @@ Graph.prototype = {
         this.paint_queued = false;
         let cr = this.area.get_context();
         let [width, height] = this.area.get_size();
+        if (!this.width) {
+            this.width = width;
+            this._resizeData();
+        }
         let border_width = this.draw_border ? 1 : 0;
         let graph_width = width - 2 * border_width;
         let graph_height = height - 2 * border_width;
