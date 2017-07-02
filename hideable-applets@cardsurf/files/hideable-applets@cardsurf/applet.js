@@ -31,6 +31,7 @@ AppletInfo.prototype = {
 
         this.default_handler_id = 0;
         this.show_handler_id = this.default_handler_id;
+        this.removed_children = [];
     },
 
     get actor() {
@@ -99,6 +100,29 @@ AppletInfo.prototype = {
 
     has_show_handler: function () {
         return this.show_handler_id != this.default_handler_id;
+    },
+
+    remove_children: function () {
+        let removed = this.has_removed_children();
+        if(!removed) {
+            this.removed_children = this.actor.get_children();
+            this.actor.remove_all_children();
+        }
+    },
+
+    has_removed_children: function () {
+        return this.removed_children.length > 0;
+    },
+
+    add_removed_children: function () {
+        let removed = this.has_removed_children();
+        if(removed) {
+            for(let i = 0; i < this.removed_children.length; ++i) {
+                let child = this.removed_children[i];
+                this.actor.add_child(child);
+            }
+            this.removed_children = [];
+        }
     },
 
 }
@@ -731,12 +755,58 @@ MyApplet.prototype = {
 
     set_visibility: function (actor, is_visible) {
         if(is_visible) {
-            actor.show();
+            this.show_actor(actor);
         }
         else {
-            actor.hide();
+            this.hide_actor(actor);
         }
     },
+
+    show_actor: function (actor) {
+        actor.show();
+        this.toggle_removed_children_actor(actor, false);
+    },
+
+    toggle_removed_children_actor: function (actor, remove) {
+        let index = this.find_applet_info_index(actor._applet);
+        if(index >= 0) {
+            let applet_info = this.applet_infos[index];
+            this.toggle_removed_children_applet(applet_info, remove);
+        }
+    },
+
+    toggle_removed_children_applet: function (applet_info, remove) {
+        if(remove) {
+            this.remove_children(applet_info);
+        }
+        else {
+            this.add_removed_children(applet_info);
+        }
+    },
+
+    remove_children: function (applet_info) {
+        let remove = this.is_click_registered_when_hidden_applet(applet_info);
+        if(remove) {
+            applet_info.remove_children();
+        }
+    },
+
+    is_click_registered_when_hidden_applet: function(applet_info) {
+        return applet_info.uuid == "systray@cinnamon.org";
+    },
+
+    add_removed_children: function (applet_info) {
+        let add = this.is_click_registered_when_hidden_applet(applet_info);
+        if(add) {
+            applet_info.add_removed_children();
+        }
+    },
+
+    hide_actor: function (actor) {
+        actor.hide();
+        this.toggle_removed_children_actor(actor, true);
+    },
+
 
     get_actors_panel_vertical: function() {
         let actors = this.side_type == St.Side.TOP ? this.get_actors_left() : this.get_actors_right();
