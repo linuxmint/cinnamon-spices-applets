@@ -762,7 +762,7 @@ AppListGridButton.prototype = {
         this.app.launch();
       }
     } else if (this.appType === ApplicationType._recent) {
-      Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context(0, -1));
+      Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
     }
     this._parent.menu.close();
   },
