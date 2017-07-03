@@ -9,6 +9,6 @@
 
  - Distribution (In a terminal run "lsb_release -a".)
  - Cinnamon version (In a terminal run "cinnamon --version".)
- - Applet version (Right-click the applet, then click "About...", or go to its directory and include the version/last-edited values.)
+ - Applet version (Right-click the applet, then click "About...", or go to its directory and include the version/last-edited values in metadata.json.)
  - ~/.cinnamon/glass.log (Use pastebin or a small snippet that's relavent to the issue.)
  - ~/.xsession-errors (If you have one.)
