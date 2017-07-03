@@ -7,8 +7,8 @@
 
 [Tips]: <> For bug reports, it helps the maintainer of the applet you are reporting an issue on when you give them some environmental information for debugging. This can help them figure out what is wrong with it more quickly. Some things you can include in your bug report are the:
 
- - Distribution
- - Cinnamon version
- - Applet version
- - ~/.cinnamon/glass.log (use pastebin or a small snippet that's relavent to the issue)
- - ~/.xsession-errors (if you have one)
+ - Distribution (In a terminal run "lsb_release -a".)
+ - Cinnamon version (In a terminal run "cinnamon --version".)
+ - Applet version (Right-click the applet, then click "About...", or go to its directory and include the version/last-edited values.)
+ - ~/.cinnamon/glass.log (Use pastebin or a small snippet that's relavent to the issue.)
+ - ~/.xsession-errors (If you have one.)
