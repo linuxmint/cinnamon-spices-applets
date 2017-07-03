@@ -193,7 +193,7 @@ CinnamenuApplet.prototype = {
     if (symbol === Clutter.KEY_space || symbol === Clutter.KEY_Return) {
       this.menu.toggle();
       return true;
-    } else if (symbol === Clutter.KEY_Escape && this.menu.isOpen) {
+    } else if (symbol === Clutter.KEY_Escape && this.menu.isOpen && this.menuIsOpen == null) {
       this.menu.close();
       return true;
     } else if (symbol === Clutter.KEY_Down) {
@@ -334,7 +334,7 @@ CinnamenuApplet.prototype = {
   // handler for when favorites change
   _onFavoritesChanged: function() {
     this.favorites = this.appFavorites.getFavorites();
-    this._selectCategory(this.favAppCategory);
+    this._selectCategory('favorites');
   },
 
   // handler for when icons change
@@ -642,7 +642,7 @@ CinnamenuApplet.prototype = {
 
   _selectCategory: function(button) {
     this._clearApplicationsBox();
-    let category = typeof button === 'string' ? button : button._dir;
+    let category = _.isString(button) ? button : button._dir;
     if (typeof category === 'string') {
       this._displayApplications(this._listApplications(category));
     } else {
@@ -747,9 +747,12 @@ CinnamenuApplet.prototype = {
   _clearEnteredActors: function () {
     let itemChildren = this._activeContainer.get_children();
     let refItemIndex = _.findIndex(itemChildren, (actor) => {
-      return actor._delegate.entered != null;
+      return (actor.has_style_class_name('menu-application-button-selected')
+        || actor._delegate.entered != null
+        || actor._delegate.menu.isOpen);
     });
     if (refItemIndex > -1 && itemChildren[refItemIndex]) {
+      itemChildren[refItemIndex]._delegate.closeMenu();;
       itemChildren[refItemIndex]._delegate.handleLeave();
     }
     let categoryChildren = this.categoriesBox.get_children();
@@ -764,7 +767,6 @@ CinnamenuApplet.prototype = {
       return actor._delegate.entered != null;
     });
     if (refPowerGroupItemIndex > -1 && powerGroupChildren[refPowerGroupItemIndex]) {
-      powerGroupChildren[refPowerGroupItemIndex]._delegate.closeMenu();
       powerGroupChildren[refPowerGroupItemIndex]._delegate.handleLeave();
     }
   },
@@ -1028,12 +1030,16 @@ CinnamenuApplet.prototype = {
 
   _resetDisplayApplicationsToStartup: function() {
     this.resetSearch();
-    this._selectCategory(this.favAppCategory);
+    this._selectCategory('favorites');
   },
 
   _displayApplications: function(appList) {
     //dt.start();
     if (!appList) {
+      return false;
+    }
+    if (!this.theme) {
+      this.introspectTheme(()=>this._displayApplications(appList));
       return false;
     }
     let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
@@ -1046,9 +1052,9 @@ CinnamenuApplet.prototype = {
     //global.dump_gjs_stack();
     this.menuIsOpen = null;
 
-    let appIndex = 0;
+    //let appIndex = 0;
 
-    let createAppButton = (app, appType, len)=>{
+    let createAppButton = (app, appType, len, appIndex)=>{
       let appButton;
       let refAppButton = -1;
       for (let i = 0, _len = this._allItems.length; i < _len; i++) {
@@ -1106,9 +1112,9 @@ CinnamenuApplet.prototype = {
           continue;
         }
 
-        ++appIndex;
+        //++appIndex;
 
-        createAppButton(app, appType, len);
+        createAppButton(app, appType, len, z);
       }
     }
     this.columnsCount = columnsCount;
@@ -1116,7 +1122,7 @@ CinnamenuApplet.prototype = {
   },
 
 
-  _onMenuKeyPress: function(actor, event, ctrlKey) {
+  _onMenuKeyPress: function(actor, event) {
     // TODO - Add key navigation for context menus
     let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
@@ -1132,16 +1138,14 @@ CinnamenuApplet.prototype = {
       return true;
     }
 
-    ctrlKey = ctrlKey ? ctrlKey : modifierState & Clutter.ModifierType.CONTROL_MASK;
-    if (ctrlKey) {
-      return;
-    }
-    // ... context menu ...
+    ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
 
     let itemChildren = this._activeContainer.get_children();
 
     let refItemIndex = _.findIndex(itemChildren, (actor) => {
-      return actor._delegate.entered != null;
+      return (actor.has_style_class_name('menu-application-button-selected')
+        || actor._delegate.entered != null
+        || actor._delegate.menu.isOpen);
     });
 
     let categoryChildren = this.categoriesBox.get_children();
@@ -1154,22 +1158,38 @@ CinnamenuApplet.prototype = {
       return actor._delegate.entered != null;
     });
 
+    let contextMenuChildren = [];
+    let refContextMenuItemIndex = -1;
+
     let enteredItemExists = refItemIndex > -1 && itemChildren[refItemIndex] != null;
     let enteredCategoryExists = refCategoryIndex > -1 && categoryChildren[refCategoryIndex] != null;
     let enteredPowerGroupItemExists = refPowerGroupItemIndex > -1 && powerGroupChildren[refPowerGroupItemIndex] != null;
+    let enteredContextMenuItemExists = false;
 
     if (enteredItemExists) {
-      itemChildren[refItemIndex]._delegate.handleLeave();
+      if (ctrlKey || itemChildren[refItemIndex]._delegate.menu.isOpen) {
+        contextMenuChildren = itemChildren[refItemIndex]._delegate.menu.box.get_children();
+        refContextMenuItemIndex = _.findIndex(contextMenuChildren, (actor) => {
+          return actor._delegate.entered != null;
+        });
+        enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
+        if (enteredContextMenuItemExists) {
+          contextMenuChildren[refContextMenuItemIndex]._delegate.handleLeave();
+        }
+      } else {
+        itemChildren[refItemIndex]._delegate.handleLeave();
+      }
+
     }
-    if (enteredCategoryExists) {
+    if (enteredCategoryExists && !ctrlKey) {
       categoryChildren[refCategoryIndex]._delegate.handleLeave();
     }
-    if (enteredPowerGroupItemExists) {
+    if (enteredPowerGroupItemExists && !ctrlKey) {
       powerGroupChildren[refPowerGroupItemIndex]._delegate.handleLeave();
     }
-
-    //log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'enteredCategoryExists', 'refPowerGroupItemIndex', refPowerGroupItemIndex, enteredCategoryExists, 'enteredItemExists', enteredItemExists)
-
+    /*log2('symbol', symbol)
+    log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'refPowerGroupItemIndex', refPowerGroupItemIndex, 'refContextMenuItemIndex', refContextMenuItemIndex)
+    log2('isListView', isListView)*/
     let startingCategoryIndex = _.findIndex(categoryChildren, (actor) => {
       return this._currentCategory === actor._delegate.categoryNameText;
     });
@@ -1182,7 +1202,11 @@ CinnamenuApplet.prototype = {
       if (index < 0) {
         index = 0;
       }
-      if (up) {
+      if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
+        contextMenuChildren[index]._delegate.handleEnter();
+      } else if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
+        _.last(contextMenuChildren)._delegate.handleEnter();
+      } else if (up) {
         categoryChildren[startingCategoryIndex]._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex - 1]._delegate.handleEnter();
@@ -1200,7 +1224,11 @@ CinnamenuApplet.prototype = {
       if (index < 0) {
         index = 0;
       }
-      if (down) {
+      if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
+        contextMenuChildren[index]._delegate.handleEnter();
+      } else if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
+        _.first(contextMenuChildren)._delegate.handleEnter();
+      } else if (down) {
         _.first(powerGroupChildren)._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex + 1]._delegate.handleEnter();
@@ -1239,9 +1267,11 @@ CinnamenuApplet.prototype = {
     };
 
     const downNavigation = () => {
-      if (enteredPowerGroupItemExists) {
+      if (enteredContextMenuItemExists) {
+        nextItemNavigation(refContextMenuItemIndex + 1);
+      } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex]._delegate.handleEnter();
-      } else if (isListView) {
+      } else if (isListView || enteredContextMenuItemExists) {
         nextItemNavigation(refItemIndex + 1);
       } else {
         nextItemNavigation((refItemIndex + 1) + (this.appsGridColumnCount - 1));
@@ -1259,9 +1289,11 @@ CinnamenuApplet.prototype = {
     };
 
     const upNavigation = () => {
-      if (enteredPowerGroupItemExists) {
+      if (enteredContextMenuItemExists) {
+        previousItemNavigation(refContextMenuItemIndex - 1);
+      } else if (enteredPowerGroupItemExists) {
         tabNavigation();
-      } else if (isListView) {
+      } else if (isListView || enteredContextMenuItemExists) {
         previousItemNavigation(refItemIndex - 1);
       } else {
         previousItemNavigation((refItemIndex - 1) - (this.appsGridColumnCount - 1));
@@ -1269,12 +1301,14 @@ CinnamenuApplet.prototype = {
     };
 
     const activateItem = () => {
-      if (ctrlKey) {
-        itemChildren[refItemIndex]._delegate.toggleMenu();
-        return false;
-      }
-      if (enteredItemExists) {
-        itemChildren[refItemIndex]._delegate.activate();
+      if (enteredContextMenuItemExists) {
+        contextMenuChildren[refContextMenuItemIndex]._delegate.activate();
+      } else if (enteredItemExists) {
+        if (ctrlKey) {
+          itemChildren[refItemIndex]._delegate.toggleMenu(true);
+        } else {
+          itemChildren[refItemIndex]._delegate.activate();
+        }
       } else if (this.searchActive && itemChildren.length > 0) {
         _.first(itemChildren)._delegate.activate();
       }
@@ -1319,6 +1353,12 @@ CinnamenuApplet.prototype = {
       case symbol === Clutter.Tab:
         tabNavigation();
         return true;
+      case symbol === Clutter.KEY_Escape:
+      case symbol === Clutter.Escape:
+        if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
+          itemChildren[refItemIndex]._delegate.toggleMenu(true);
+          return true;
+        }
       default:
     }
   },

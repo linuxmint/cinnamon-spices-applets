@@ -255,15 +255,16 @@ ApplicationContextMenuItem.prototype = {
 
   _init: function(appButton, label, action, iconName) {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
-      focusOnHover: false
+      focusOnHover: false,
+      activate: false,
+      hover: false
     });
-
+    this.actor._delegate = this;
     this._appButton = appButton;
     this._action = action;
     this.label = new St.Label({
       text: label
     });
-
     if (iconName !== null) {
       this.icon = new St.Icon({
         icon_name: iconName,
@@ -275,8 +276,23 @@ ApplicationContextMenuItem.prototype = {
         this.icon.realize();
       }
     }
-
     this.addActor(this.label);
+    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
+    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
+  },
+
+  handleEnter: function (actor, event) {
+    this.entered = true;
+    this.actor.add_style_pseudo_class('active');
+  },
+
+  handleLeave: function () {
+    this.entered = null;
+    this.actor.remove_style_pseudo_class('active');
+  },
+
+  _onKeyFocusIn: function () {
+    global.stage.set_key_focus(this.appButton._parent.searchEntry);
   },
 
   activate: function(event) {
@@ -359,8 +375,10 @@ AppListGridButton.prototype = {
 
     this.menu = new PopupMenu.PopupSubMenu(this.actor);
     this.menu.actor.set_style_class_name('menu-context-menu');
-    this.menu.box.set_style('background-color: ' + this._parent.theme.backgroundColor + '; border: 1px solid' + this._parent.theme.borderColor
+    if (this._parent.theme) {
+      this.menu.box.set_style('background-color: ' + this._parent.theme.backgroundColor + '; border: 1px solid' + this._parent.theme.borderColor
       + '; border-radius: ' + this._parent.theme.borderRadius + 'px; padding-top: ' + this._parent.theme.padding + 'px; padding-bottom: ' + this._parent.theme.padding + 'px;');
+    }
     this.menu.isOpen = false;
 
     this.app = app;
@@ -775,7 +793,7 @@ AppListGridButton.prototype = {
         }
       }
     }
-    this.toggleMenu(!this.isGridType);
+    this.toggleMenu();
   },
 
   setColumn: function(column) {
@@ -862,7 +880,6 @@ AppListGridButton.prototype = {
         menuItem = new ApplicationContextMenuItem(this, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu');
         this.menu.addMenuItem(menuItem);
       }
-      this.actor.add_style_class_name('menu-application-button-selected');
 
       // In grid mode we will ensure our menu isn't overlapped by any other actors.
       if (this.isGridType) {
@@ -872,11 +889,11 @@ AppListGridButton.prototype = {
     } else {
       if (this.isGridType) {
         // Reset the actor depth.
-        //this.buttonBox.lower_bottom();
+        this._parent.applicationsGridBox.set_child_at_index(this.actor, this.appIndex);
       }
       // Allow other buttons hover functions to take effect.
       this._parent.menuIsOpen = null;
-      this.actor.set_style_class_name('menu-application-button');
+      //this.actor.set_style_class_name('menu-application-button');
     }
     this.menu.toggle_with_options(this._parent.enableAnimation);
     return true
