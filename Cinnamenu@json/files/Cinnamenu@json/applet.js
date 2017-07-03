@@ -706,7 +706,6 @@ CinnamenuApplet.prototype = {
     let currentScrollValue = adjustment.get_value();
     let boxHeight = this.applicationsScrollBox.get_allocation_box().y2 - this.applicationsScrollBox.get_allocation_box().y1;
     let allocationBox = button.actor.get_allocation_box();
-    log(boxHeight + currentScrollValue < allocationBox.y2 + 100)
     return boxHeight + currentScrollValue < allocationBox.y2 + 100;
   },
 

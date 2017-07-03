@@ -371,14 +371,12 @@ AppListGridButton.prototype = {
     this.isGridType = this._parent.startupViewMode === ApplicationsViewMode.GRID;
     this._stateChangedId = 0;
     this.column = null;
-    let className = '';
+    let className = 'menu-application-button';
     this.entered = null;
 
     if (this.isGridType) {
-      className = 'menu-application-button'
       this._iconSize = this._parent.appsGridIconSize > 0 ? this._parent.appsGridIconSize : 64;
     } else {
-      className = 'menu-application-button';
       this._iconSize = (this._parent.appsListIconSize > 0) ? this._parent.appsListIconSize : 28;
       this._iconContainer = new St.BoxLayout({
         vertical: true
@@ -520,9 +518,8 @@ AppListGridButton.prototype = {
       x_align: this.isGridType ? St.Align.MIDDLE : St.Align.END,
       y_align: this.isGridType ? St.Align.START : St.Align.END
     });
-
-    this.buttonBox.add_actor(this.menu.actor);
     this.addActor(this.buttonBox);
+    this.buttonBox.add_child(this.menu.actor);
     if (this.icon) {
       this.icon.realize();
     }
@@ -732,10 +729,10 @@ AppListGridButton.prototype = {
       this.activate(e);
     } else if (button === 3) {
       // Prevent the menu from clipping if this button is partially visible.
-      if (this._parent._isNotInScrollView(this)) {
+      if (this.isGridType && this._parent._isNotInScrollView(this)) {
         let [x, y] = this.menu.actor.get_position();
         y = -100;
-        this.menu.actor.set_position(x, y)
+        this.menu.actor.set_position(x, y);
       }
       this.activateContextMenus(e);
     }
@@ -772,7 +769,7 @@ AppListGridButton.prototype = {
       // Make sure all other context menus are closed before toggle.
       let children = this._parent._activeContainer.get_children();
       for (let i = 0, len = children.length; i < len; i++) {
-        if (this.appIndex !== children[i]._delegate.appIndex) {
+        if (children[i]._delegate.appIndex !== this.appIndex) {
           children[i]._delegate.closeMenu();
           children[i]._delegate.handleLeave(true);
         }
