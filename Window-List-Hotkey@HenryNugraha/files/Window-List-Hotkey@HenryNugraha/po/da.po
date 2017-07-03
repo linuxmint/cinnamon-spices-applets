@@ -1,0 +1,80 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-03 19:56+0200\n"
+"PO-Revision-Date: 2017-07-03 19:59+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:106
+msgid "Close"
+msgstr "Luk"
+
+#: applet.js:109
+msgid "Close all"
+msgstr "Luk alle"
+
+#: applet.js:112
+msgid "Close others"
+msgstr "Luk andre"
+
+#: applet.js:115
+msgid "Restore"
+msgstr "Gendan"
+
+#: applet.js:115
+msgid "Minimize"
+msgstr "Minimér"
+
+#: applet.js:118
+msgid "Unmaximize"
+msgstr "Gendan"
+
+#: applet.js:118
+msgid "Maximize"
+msgstr "Maksimér"
+
+#: applet.js:121
+msgid "Move to left workspace"
+msgstr "Flyt til arbejdsområde til venstre"
+
+#: applet.js:124
+msgid "Move to right workspace"
+msgstr "Flyt til arbejdsområde til højre"
+
+#: applet.js:127 applet.js:142
+msgid "Visible on all workspaces"
+msgstr "Synlig på alle arbejdsområder"
+
+#: applet.js:130
+msgid "Restore to full opacity"
+msgstr "Gendan til fuld uigennemsigtighed"
+
+#: applet.js:138
+msgid "Only on this workspace"
+msgstr "Kun på dette arbejdsområde"
+
+#: applet.js:159
+#, c-format
+msgid "Move to monitor %d"
+msgstr "Flyt til skærm %d"
+
+#. Window-List-Hotkey@HenryNugraha->metadata.json->description
+msgid "Main Cinnamon window list with hotkey (SUPER + NUMBER)."
+msgstr "Cinnamon-vinduesliste med genvejstast (SUPER + TAL)."
+
+#. Window-List-Hotkey@HenryNugraha->metadata.json->name
+msgid "Window list with hotkey"
+msgstr "Vinduesliste med genvejstast"
