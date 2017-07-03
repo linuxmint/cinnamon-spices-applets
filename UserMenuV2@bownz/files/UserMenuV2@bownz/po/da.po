@@ -1,0 +1,87 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-03 19:51+0200\n"
+"PO-Revision-Date: 2017-07-03 19:54+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:46
+msgid "Are you sure you want to shut down this system?\n"
+msgstr "Er du sikker på, du vil slukke systemet?\n"
+
+#: applet.js:48
+msgid "You are currently signed in as: "
+msgstr "Du er logget på som: "
+
+#: applet.js:54 beta.js:63
+msgid "Suspend"
+msgstr "Sæt i hviletilstand"
+
+#: applet.js:61 beta.js:70
+msgid "Hibernate"
+msgstr "Sæt i dvaletilstand"
+
+#: applet.js:68 beta.js:77
+msgid "Restart"
+msgstr "Genstart"
+
+#: applet.js:75 beta.js:84 beta.js:115
+msgid "Cancel"
+msgstr "Annullér"
+
+#: applet.js:81 beta.js:90
+msgid "Shut Down"
+msgstr "Sluk"
+
+#: applet.js:162
+msgid "Online Accounts"
+msgstr "Onlinekonti"
+
+#: applet.js:166 beta.js:226
+msgid "System Settings"
+msgstr "Systemindstillinger"
+
+#: applet.js:172
+msgid "Lock Screen"
+msgstr "Låseskærm"
+
+#: applet.js:177
+msgid "Log Out..."
+msgstr "Log ud ..."
+
+#: applet.js:183
+msgid "Shut Down..."
+msgstr "Sluk ..."
+
+#: beta.js:121 beta.js:236
+msgid "Log Out"
+msgstr "Log ud"
+
+#: beta.js:231
+msgid "Power Off"
+msgstr "Sluk"
+
+#: beta.js:243
+msgid "Lock"
+msgstr "Lås"
+
+#. UserMenuV2@bownz->metadata.json->description
+msgid "A menu for your Account."
+msgstr "En menu til din konto."
+
+#. UserMenuV2@bownz->metadata.json->name
+msgid "UserMenu"
+msgstr "Brugermenu"
