@@ -604,7 +604,7 @@ AppListGridButton.prototype = {
     }
     let clutterText = this.label.get_clutter_text();
     if (clutterText) {
-      this.label.get_clutter_text().set_markup(markup);
+      clutterText.set_markup(markup);
       clutterText.ellipsize = opts.reset && opts.reset === 1 ? null : Pango.EllipsizeMode.END;
     }
 
