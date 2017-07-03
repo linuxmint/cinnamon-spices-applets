@@ -1218,10 +1218,10 @@ CinnamenuApplet.prototype = {
         || (!enteredItemExists
           && !enteredCategoryExists
           && !enteredPowerGroupItemExists)) {
-        if (!enteredCategoryExists) {
+        if (!enteredCategoryExists && !this.searchActive) {
           categoryChildren[startingCategoryIndex]._delegate.handleEnter();
         }
-      } else {
+      } else if (!enteredCategoryExists) {
         previousItemNavigation(refItemIndex - 1);
       }
     };
