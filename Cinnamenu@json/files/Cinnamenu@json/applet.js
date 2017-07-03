@@ -1116,7 +1116,7 @@ CinnamenuApplet.prototype = {
   },
 
 
-  _onMenuKeyPress: function(actor, event) {
+  _onMenuKeyPress: function(actor, event, ctrlKey) {
     // TODO - Add key navigation for context menus
     let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
@@ -1132,8 +1132,10 @@ CinnamenuApplet.prototype = {
       return true;
     }
 
-    //let ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK;
-
+    ctrlKey = ctrlKey ? ctrlKey : modifierState & Clutter.ModifierType.CONTROL_MASK;
+    if (ctrlKey) {
+      return;
+    }
     // ... context menu ...
 
     let itemChildren = this._activeContainer.get_children();
@@ -1199,7 +1201,7 @@ CinnamenuApplet.prototype = {
         index = 0;
       }
       if (down) {
-        powerGroupChildren[0]._delegate.handleEnter();
+        _.first(powerGroupChildren)._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex + 1]._delegate.handleEnter();
       } else if (enteredCategoryExists) {
@@ -1227,7 +1229,7 @@ CinnamenuApplet.prototype = {
 
     const rightNavigation = () => {
       if (enteredItemExists && refItemIndex === itemChildren.length - 1) {
-        itemChildren[0]._delegate.handleEnter();
+        _.first(itemChildren)._delegate.handleEnter();
       } else if (isListView && enteredItemExists) {
         itemChildren[refItemIndex]._delegate.handleEnter();
       } else {
@@ -1248,11 +1250,11 @@ CinnamenuApplet.prototype = {
 
     const tabNavigation = () => {
       if (enteredItemExists) {
-        powerGroupChildren[0]._delegate.handleEnter();
+        _.first(powerGroupChildren)._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         categoryChildren[startingCategoryIndex]._delegate.handleEnter();
       } else {
-        itemChildren[0]._delegate.handleEnter();
+        _.first(itemChildren)._delegate.handleEnter();
       }
     };
 
@@ -1274,38 +1276,47 @@ CinnamenuApplet.prototype = {
       if (enteredItemExists) {
         itemChildren[refItemIndex]._delegate.activate();
       } else if (this.searchActive && itemChildren.length > 0) {
-        itemChildren[0]._delegate.activate();
+        _.first(itemChildren)._delegate.activate();
       }
     };
 
-    switch (symbol) {
-      case Clutter.KP_Enter:
-      case Clutter.KEY_Return:
+    switch (true) {
+      case symbol === Clutter.KP_Enter:
+      case symbol === Clutter.KEY_Return:
         activateItem();
         return true;
-      case Clutter.KEY_Up:
+      case symbol === Clutter.KEY_Up:
         upNavigation();
         return true;
-      case Clutter.KEY_Down:
+      case symbol === Clutter.KEY_Down:
         downNavigation();
         return true;
-      case Clutter.KEY_Page_Up:
-
-        break;
-      case Clutter.KEY_Page_Down:
-
-        break;
-      case Clutter.KEY_Right:
+      case symbol === Clutter.KEY_Page_Up:
+        if (enteredItemExists) {
+          _.first(itemChildren)._delegate.handleEnter();
+        } else if (enteredCategoryExists) {
+          _.first(categoryChildren)._delegate.handleEnter();
+        } else if (enteredPowerGroupItemExists) {
+          _.first(powerGroupChildren)._delegate.handleEnter();
+        }
+        return true
+      case symbol === Clutter.KEY_Page_Down:
+        if (enteredItemExists) {
+          _.last(itemChildren)._delegate.handleEnter();
+        } else if (enteredCategoryExists) {
+          _.last(categoryChildren)._delegate.handleEnter();
+        } else if (enteredPowerGroupItemExists) {
+          _.last(powerGroupChildren)._delegate.handleEnter();
+        }
+        return true
+      case symbol === Clutter.KEY_Right:
         rightNavigation();
         return true;
-      case Clutter.KEY_Left:
-        if (this.searchActive) {
-          return false;
-        }
+      case symbol === Clutter.KEY_Left:
         leftNavigation();
         return true;
-      case Clutter.ISO_Left_Tab:
-      case Clutter.Tab:
+      case symbol === Clutter.ISO_Left_Tab:
+      case symbol === Clutter.Tab:
         tabNavigation();
         return true;
       default:
