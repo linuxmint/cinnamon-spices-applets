@@ -5,3 +5,10 @@
 
 [Issue]: <> (Describe your issue below.)
 
+[Tips]: <> For bug reports, it helps the maintainer of the applet you are reporting an issue on when you give them some environmental information for debugging. This can help them figure out what is wrong with it more quickly. Some things you can include in your bug report are the:
+
+ - Distribution
+ - Cinnamon version
+ - Applet version
+ - ~/.cinnamon/glass.log (use pastebin or a small snippet that's relavent to the issue)
+ - ~/.xsession-errors (if you have one)
