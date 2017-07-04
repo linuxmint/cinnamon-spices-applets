@@ -513,6 +513,21 @@ AppListGridButton.prototype = {
       x_align: this._parent.isListView ? St.Align.END : St.Align.MIDDLE,
       y_align: this._parent.isListView ? St.Align.END : St.Align.START
     });
+    // Context menu
+    if (this.appType === ApplicationType._applications) {
+      this.menu = new PopupMenu.PopupSubMenu(this.actor);
+      this.menu.actor.set_style_class_name('menu-context-menu');
+      if (this._parent.theme) {
+        this.menu.box.set_style('background-color: ' + this._parent.theme.backgroundColor + '; border: 1px solid' + this._parent.theme.borderColor
+        + '; border-radius: ' + this._parent.theme.borderRadius + 'px; padding-top: ' + this._parent.theme.padding + 'px; padding-bottom: ' + this._parent.theme.padding + 'px;');
+      }
+      this.menu.isOpen = false;
+      this.buttonBox.add_child(this.menu.actor);
+    } else {
+      this.menu = {
+        isOpen: false
+      };
+    }
     this.addActor(this.buttonBox);
 
     if (this.icon) {
@@ -541,22 +556,6 @@ AppListGridButton.prototype = {
 
   handleParentChange: function (actor) {
     this.onStage = true;
-
-    // Context menu
-    if (this.appType === ApplicationType._applications) {
-      this.menu = new PopupMenu.PopupSubMenu(this.actor);
-      this.menu.actor.set_style_class_name('menu-context-menu');
-      if (this._parent.theme) {
-        this.menu.box.set_style('background-color: ' + this._parent.theme.backgroundColor + '; border: 1px solid' + this._parent.theme.borderColor
-        + '; border-radius: ' + this._parent.theme.borderRadius + 'px; padding-top: ' + this._parent.theme.padding + 'px; padding-bottom: ' + this._parent.theme.padding + 'px;');
-      }
-      this.menu.isOpen = false;
-      this.buttonBox.add_child(this.menu.actor);
-    } else {
-      this.menu = {
-        isOpen: false
-      };
-    }
 
     if (this._parent.showAppDescriptionsOnButtons
       || this.app.shouldHighlight
@@ -821,9 +820,7 @@ AppListGridButton.prototype = {
   },
 
   closeMenu: function () {
-    if (this.menu.menuIsOpen) {
-      this.menu.toggleMenu();
-    }
+    this.menu.close();
   },
 
   toggleMenu: function (fromClear) {
@@ -871,7 +868,7 @@ AppListGridButton.prototype = {
     } else {
       if (!this._parent.isListView) {
         // Reset the actor depth.
-        this._parent.applicationsGridBox.set_child_at_index(this.actor, this.appIndex);
+        //this._parent.applicationsGridBox.set_child_at_index(this.actor, this.appIndex);
       }
       // Allow other buttons hover functions to take effect.
       this._parent.menuIsOpen = null;

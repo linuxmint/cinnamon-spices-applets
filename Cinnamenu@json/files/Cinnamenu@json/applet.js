@@ -700,6 +700,7 @@ CinnamenuApplet.prototype = {
       let newScrollValue = this.applicationsScrollBox.get_allocation_box().y1;
       vscroll.get_adjustment().set_value(newScrollValue);
     }
+    this._clearEnteredActors();
     this._clearApplicationsBox();
     if (fromToggle) {
       this.destroyAppButtons();
@@ -766,7 +767,7 @@ CinnamenuApplet.prototype = {
     });
     if (refItemIndex > -1 && itemChildren[refItemIndex]) {
       if (itemChildren[refItemIndex]._delegate.menu.isOpen) {
-        itemChildren[refItemIndex]._delegate.toggleMenu();
+        itemChildren[refItemIndex]._delegate.closeMenu();
       }
       itemChildren[refItemIndex]._delegate.handleLeave();
     }
@@ -1321,7 +1322,7 @@ CinnamenuApplet.prototype = {
         contextMenuChildren[refContextMenuItemIndex]._delegate.activate();
       } else if (enteredItemExists) {
         if (ctrlKey) {
-          itemChildren[refItemIndex]._delegate.toggleMenu(true);
+          itemChildren[refItemIndex]._delegate.closeMenu();
         } else {
           itemChildren[refItemIndex]._delegate.activate();
         }
