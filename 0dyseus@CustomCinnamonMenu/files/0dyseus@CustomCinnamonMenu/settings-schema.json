@@ -365,19 +365,24 @@
         "type": "header",
         "description": "Search box"
     },
+    "pref_search_type": {
+        "type": "combobox",
+        "indent": true,
+        "default": "default",
+        "description": "Search type:",
+        "options": {
+            "Default": "default",
+            "Fuzzy (EXPERIMENTAL)": "fuzzy",
+            "App name only": "app_name_only"
+        },
+        "tooltip": "Choose the type of search you want the menu to perform.\n\nDefault: This is the same search used by the default Cinnamon menu applet. It searches for the application name, keywords, description and id. In 99% of cases, this type of search gives totally annoying, useless and unproductive results.\n\nFuzzy: This option enables an infinitely better sorting of search results. It's marked as experimental because it has a huge impact on performance every time the search box is cleared.\n\nApp name only: This type of search is similar to the default one, but it will only display results that matches the application name and nothing else."
+    },
     "pref_search_filesystem": {
         "type": "checkbox",
         "indent": true,
         "default": false,
         "description": "Enable file system path entry in search box",
         "tooltip": "Allows path entry in the menu search box."
-    },
-    "pref_fuzzy_search_enabled": {
-        "type": "checkbox",
-        "indent": true,
-        "default": false,
-        "description": "Enable fuzzy search (EXPERIMENTAL)",
-        "tooltip": "This option enables an infinitelly better sorting of search results. It's marked as experimental because it has a huge impact on performance every time the search box is cleared."
     },
     "sep5": {
         "type": "separator"

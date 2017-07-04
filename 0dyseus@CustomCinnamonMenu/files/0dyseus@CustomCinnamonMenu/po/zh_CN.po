@@ -5,31 +5,26 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.20\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@CustomCinnamonMenu 1.24\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:18+0800\n"
 "PO-Revision-Date: 2017-06-04 19:19+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../../create_localized_help.py:64
 msgid "Keyboard navigation"
 msgstr "键盘导航"
 
 #: ../../create_localized_help.py:66
-msgid ""
-"Almost all keyboard shortcuts on this menu are the same as the original "
-"menu. There are just a couple of differences that I was forced to add to my "
-"menu to make some of its features to work."
-msgstr ""
-"此菜单上的所有键盘快捷键几乎与原来的菜单相同。只是有些不同，我只好将其添加到"
-"我的菜单以使其中一些功能能够工作。"
+msgid "Almost all keyboard shortcuts on this menu are the same as the original menu. There are just a couple of differences that I was forced to add to my menu to make some of its features to work."
+msgstr "此菜单上的所有键盘快捷键几乎与原来的菜单相同。只是有些不同，我只好将其添加到我的菜单以使其中一些功能能够工作。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:66
@@ -42,15 +37,11 @@ msgid "[[Left Arrow]] and [[Right Arrow]] keys:"
 msgstr "[[Left Arrow]]和[[Right Arrow]]键："
 
 #: ../../create_localized_help.py:71
-msgid ""
-"Cycles through the favorites box, applications box and categories box if the "
-"focus is in one of these boxes."
+msgid "Cycles through the favorites box, applications box and categories box if the focus is in one of these boxes."
 msgstr "如果焦点位于收藏夹框、应用程序框和类别框其中一个，在它们之间循环切换。"
 
 #: ../../create_localized_help.py:73
-msgid ""
-"If the focus is on the custom launchers box, these keys will cycle through "
-"this box buttons."
+msgid "If the focus is on the custom launchers box, these keys will cycle through this box buttons."
 msgstr "如果焦点位于自定义启动器框上，这些键将在此框按钮循环切换。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -59,27 +50,16 @@ msgid "[[Tab]] key:"
 msgstr "[[Tab]]键："
 
 #: ../../create_localized_help.py:78
-msgid ""
-"If the favorites box, applications box or categories box are currently "
-"focused, the [[Tab]] key will switch the focus to the custom launchers box."
-msgstr ""
-"如果收藏夹框、应用程序框或类别框当前被聚焦，[[Tab]]键将会把焦点切换到自定义启"
-"动器框。"
+msgid "If the favorites box, applications box or categories box are currently focused, the [[Tab]] key will switch the focus to the custom launchers box."
+msgstr "如果收藏夹框、应用程序框或类别框当前被聚焦，[[Tab]]键将会把焦点切换到自定义启动器框。"
 
 #: ../../create_localized_help.py:80 ../../create_localized_help.py:88
-msgid ""
-"If the focus is on the custom launchers box, the focus will go back to the "
-"categories box."
+msgid "If the focus is on the custom launchers box, the focus will go back to the categories box."
 msgstr "如果焦点位于自定义启动器框上，焦点将返回到类别框。"
 
 #: ../../create_localized_help.py:83
-msgid ""
-"If the custom launchers box isn't part of the menu, the [[Tab]] key alone or "
-"[[Ctrl]]/[[Shift]] + [[Tab]] key are pressed, it will cycle through the "
-"favorites box, applications box and categories box."
-msgstr ""
-"如果自定义启动器框不是菜单的一部分，单击[[Tab]]键或按[[Ctrl]]/[[Shift]] + "
-"[[Tab]]键将会在收藏夹框、应用程序框和类别框循环切换。"
+msgid "If the custom launchers box isn't part of the menu, the [[Tab]] key alone or [[Ctrl]]/[[Shift]] + [[Tab]] key are pressed, it will cycle through the favorites box, applications box and categories box."
+msgstr "如果自定义启动器框不是菜单的一部分，单击[[Tab]]键或按[[Ctrl]]/[[Shift]] + [[Tab]]键将会在收藏夹框、应用程序框和类别框循环切换。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:85
@@ -87,30 +67,18 @@ msgid "[[Up Arrow]] and [[Down Arrow]] keys:"
 msgstr "[[Up Arrow]]和[[Down Arrow]]键："
 
 #: ../../create_localized_help.py:86
-msgid ""
-"If the favorites box, applications box or categories box are currently "
-"focused, these keys will cycle through the items in the currently "
-"highlighted box."
-msgstr ""
-"如果收藏夹框、应用程序框或类别框当前被聚焦，这些键将循环切换到当前高亮的框中"
-"的条目。"
+msgid "If the favorites box, applications box or categories box are currently focused, these keys will cycle through the items in the currently highlighted box."
+msgstr "如果收藏夹框、应用程序框或类别框当前被聚焦，这些键将循环切换到当前高亮的框中的条目。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:90
-msgid ""
-"[[Page Up]] and [[Page Down]] keys: Jumps to the first and last item of the "
-"currently selected box. This doesn't affect the custom launchers."
-msgstr ""
-"[[Page Up]]和[[Page Down]]键：跳转到当前选中框的第一个和最后一个条目。这不会"
-"影响自定义启动器。"
+msgid "[[Page Up]] and [[Page Down]] keys: Jumps to the first and last item of the currently selected box. This doesn't affect the custom launchers."
+msgstr "[[Page Up]]和[[Page Down]]键：跳转到当前选中框的第一个和最后一个条目。这不会影响自定义启动器。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:92
-msgid ""
-"[[Menu]] or [[Alt]] + [[Enter]] keys: Opens and closes the context menu (if "
-"any) of the currently highlighted item."
-msgstr ""
-"[[Menu]]或[[Alt]] + [[Enter]]键：打开并关闭当前高亮条目的右键菜单（如果有）。"
+msgid "[[Menu]] or [[Alt]] + [[Enter]] keys: Opens and closes the context menu (if any) of the currently highlighted item."
+msgstr "[[Menu]]或[[Alt]] + [[Enter]]键：打开并关闭当前高亮条目的右键菜单（如果有）。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:94
@@ -119,47 +87,29 @@ msgstr "[[Enter]]键：执行当前高亮的条目。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:96
-msgid ""
-"[[Escape]] key: It closes the main menu. If a context menu is open, it will "
-"close the context menu instead and a second tap of this key will close the "
-"main menu."
-msgstr ""
-"[[Escape]]键：关闭主菜单。如果打开了一个右键菜单，它将会关闭右键菜单，再次点"
-"击此键将会关闭主菜单。"
+msgid "[[Escape]] key: It closes the main menu. If a context menu is open, it will close the context menu instead and a second tap of this key will close the main menu."
+msgstr "[[Escape]]键：关闭主菜单。如果打开了一个右键菜单，它将会关闭右键菜单，再次点击此键将会关闭主菜单。"
 
 #: ../../create_localized_help.py:99
-msgid ""
-"[[Shift]] + [[Enter]]: Executes the application as root. This doesn't affect "
-"the custom launchers."
-msgstr ""
-"[[Shift]] + [[Enter]]：以root身份执行应用程序。这不会影响自定义启动器。"
+msgid "[[Shift]] + [[Enter]]: Executes the application as root. This doesn't affect the custom launchers."
+msgstr "[[Shift]] + [[Enter]]：以root身份执行应用程序。这不会影响自定义启动器。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:101
-msgid ""
-"[[Ctrl]] + [[Enter]]: Open a terminal and run application from there. This "
-"doesn't affect the custom launchers."
-msgstr ""
-"[[Ctrl]] + [[Enter]]：打开终端并从中运行应用程序。这不会影响自定义启动器。"
+msgid "[[Ctrl]] + [[Enter]]: Open a terminal and run application from there. This doesn't affect the custom launchers."
+msgstr "[[Ctrl]] + [[Enter]]：打开终端并从中运行应用程序。这不会影响自定义启动器。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:103
-msgid ""
-"[[Ctrl]] + [[Shift]] + [[Enter]]: Open a terminal and run application from "
-"there, but the application is executed as root. This doesn't affect the "
-"custom launchers."
-msgstr ""
-"[[Ctrl]] + [[Shift]] + [[Enter]]：打开终端并从中运行应用程序，但应用程序会以"
-"root用户身份执行。这不会影响自定义启动器。"
+msgid "[[Ctrl]] + [[Shift]] + [[Enter]]: Open a terminal and run application from there, but the application is executed as root. This doesn't affect the custom launchers."
+msgstr "[[Ctrl]] + [[Shift]] + [[Enter]]：打开终端并从中运行应用程序，但应用程序会以root用户身份执行。这不会影响自定义启动器。"
 
 #: ../../create_localized_help.py:106
 msgid "Applications left click extra actions"
 msgstr "左键点击应用程序附加动作"
 
 #: ../../create_localized_help.py:107
-msgid ""
-"When left clicking an application on the menu, certain key modifiers can be "
-"pressed to execute an application in a special way."
+msgid "When left clicking an application on the menu, certain key modifiers can be pressed to execute an application in a special way."
 msgstr "当左键点击菜单上的应用程序时，可以用特定方式按某些修饰键执行应用程序。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -169,52 +119,26 @@ msgstr "[[Shift]] + **左键单击**：以root身份执行应用程序。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:111
-msgid ""
-"[[Ctrl]] + **Left click**: Open a terminal and run application from there."
+msgid "[[Ctrl]] + **Left click**: Open a terminal and run application from there."
 msgstr "[[Ctrl]] + **左键单击**：打开终端并从中运行应用程序。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:113
-msgid ""
-"[[Ctrl]] + [[Shift]] + **Left click**: Open a terminal and run application "
-"from there, but the application is executed as root."
-msgstr ""
-"[[Ctrl]] + [[Shift]] + **左键单击**：打开终端并从中运行应用程序，但应用程序会"
-"以root用户身份执行。"
+msgid "[[Ctrl]] + [[Shift]] + **Left click**: Open a terminal and run application from there, but the application is executed as root."
+msgstr "[[Ctrl]] + [[Shift]] + **左键单击**：打开终端并从中运行应用程序，但应用程序会以root用户身份执行。"
 
 #: ../../create_localized_help.py:115
 msgid "About \"Run from terminal\" options"
 msgstr "关于“从终端运行”选项"
 
 #: ../../create_localized_help.py:116
-msgid ""
-"These options are meant for debugging purposes (to see the console output "
-"after opening/closing a program to detect possible errors, for example). "
-"Instead of opening a terminal to launch a program of which one might not "
-"know its command, one can do it directly from the menu and in just one step. "
-"Options to run from a terminal an application listed on the menu can be "
-"found on the applications context menu and can be hidden/shown from this "
-"applet settings window."
-msgstr ""
-"这些选项用于调试目的（例如，打开/关闭程序以检测可能出现的错误后查看控制台输"
-"出）。不用打开一个终端来启动一个可能不知道其命令的程序，可以直接从菜单中进"
-"行，只需一个步骤。可以从应用程序右键菜单上找到菜单上列出的从终端运行应用程序"
-"的选项，并可以从此小程序设置窗口中隐藏/显示。"
+msgid "These options are meant for debugging purposes (to see the console output after opening/closing a program to detect possible errors, for example). Instead of opening a terminal to launch a program of which one might not know its command, one can do it directly from the menu and in just one step. Options to run from a terminal an application listed on the menu can be found on the applications context menu and can be hidden/shown from this applet settings window."
+msgstr "这些选项用于调试目的（例如，打开/关闭程序以检测可能出现的错误后查看控制台输出）。不用打开一个终端来启动一个可能不知道其命令的程序，可以直接从菜单中进行，只需一个步骤。可以从应用程序右键菜单上找到菜单上列出的从终端运行应用程序的选项，并可以从此小程序设置窗口中隐藏/显示。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:119
-msgid ""
-"By default, these options will use the system's default terminal emulator "
-"(**x-terminal-emulator** on Debian based distributions). Any other terminal "
-"emulator can be specified inside the settings window of this applet, as long "
-"as said emulator has support for the **-e** argument. I did my tests with "
-"**gnome-terminal**, **xterm** and **terminator**. Additional arguments could "
-"be passed to the terminal emulator, but it's not supported by me."
-msgstr ""
-"默认情况下，这些选项将使用系统的默认终端仿真器（Debian系发行版上是**x-"
-"terminal-emulator**）。只要所说的终端仿真器支持**-e**参数，就可以在该小程序的"
-"设置窗口中指定任何其他终端仿真器。我用**gnome-terminal**、**xterm**和"
-"**terminator**进行了测试。额外的参数可以传递给终端仿真器，但我不会支持。"
+msgid "By default, these options will use the system's default terminal emulator (**x-terminal-emulator** on Debian based distributions). Any other terminal emulator can be specified inside the settings window of this applet, as long as said emulator has support for the **-e** argument. I did my tests with **gnome-terminal**, **xterm** and **terminator**. Additional arguments could be passed to the terminal emulator, but it's not supported by me."
+msgstr "默认情况下，这些选项将使用系统的默认终端仿真器（Debian系发行版上是**x-terminal-emulator**）。只要所说的终端仿真器支持**-e**参数，就可以在该小程序的设置窗口中指定任何其他终端仿真器。我用**gnome-terminal**、**xterm**和**terminator**进行了测试。额外的参数可以传递给终端仿真器，但我不会支持。"
 
 #: ../../create_localized_help.py:121
 msgid "Favorites handling"
@@ -222,41 +146,22 @@ msgstr "收藏夹处理"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:123
-msgid ""
-"If the favorites box is **displayed**, favorites can be added/removed from "
-"the context menu for applications and by dragging and dropping applications "
-"to/from the favorites box."
-msgstr ""
-"如果“收藏夹”框**已显示**，则可以从应用程序的右键菜单添加/删除收藏，也可以将应"
-"用程序拖进/出收藏夹框。"
+msgid "If the favorites box is **displayed**, favorites can be added/removed from the context menu for applications and by dragging and dropping applications to/from the favorites box."
+msgstr "如果“收藏夹”框**已显示**，则可以从应用程序的右键菜单添加/删除收藏，也可以将应用程序拖进/出收藏夹框。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:126
-msgid ""
-"**Note:** To remove a favorite, drag a favorite outside the favorites box "
-"into any part of the menu."
+msgid "**Note:** To remove a favorite, drag a favorite outside the favorites box into any part of the menu."
 msgstr "**注意:**要删除收藏夹，请将收藏拖动到收藏夹外部的菜单的任意部分。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:128
-msgid ""
-"If the favorites box is **hidden** and the favorites category is enabled, "
-"favorites can be added/removed from the context menu for applications and by "
-"dragging and dropping applications to the favorites category. Its simple, if "
-"a favorite is dragged into the favorites category, the favorite will be "
-"removed. If what you drag into the favorites category is a non bookmarked "
-"application, then that application will be added to the favorites."
-msgstr ""
-"如果收藏夹框**隐藏**并已启用了收藏夹类别，则可以从应用程序的右键菜单中添加/删"
-"除收藏，并将应用程序拖放到收藏夹类别。很简单，如果将收藏拖到收藏夹类别，收藏"
-"将会被删除。如果您拖到收藏夹类别不是已加为书签的应用程序，那么该应用程序将会"
-"被添加到收藏夹。"
+msgid "If the favorites box is **hidden** and the favorites category is enabled, favorites can be added/removed from the context menu for applications and by dragging and dropping applications to the favorites category. Its simple, if a favorite is dragged into the favorites category, the favorite will be removed. If what you drag into the favorites category is a non bookmarked application, then that application will be added to the favorites."
+msgstr "如果收藏夹框**隐藏**并已启用了收藏夹类别，则可以从应用程序的右键菜单中添加/删除收藏，并将应用程序拖放到收藏夹类别。很简单，如果将收藏拖到收藏夹类别，收藏将会被删除。如果您拖到收藏夹类别不是已加为书签的应用程序，那么该应用程序将会被添加到收藏夹。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:130
-msgid ""
-"**Note:** The favorites category will update its content after changing to "
-"another category and going back to the favorites category."
+msgid "**Note:** The favorites category will update its content after changing to another category and going back to the favorites category."
 msgstr "**注意:**收藏夹类别将在更改为其他类别和返回到收藏夹类别后更新其内容。"
 
 #: ../../create_localized_help.py:132
@@ -273,13 +178,8 @@ msgid "Debian based distributions:"
 msgstr "Debian系发行版："
 
 #: ../../create_localized_help.py:136
-msgid ""
-"If the command **x-terminal-emulator** doesn't run the terminal emulator "
-"that one wants to be the default, run the following command to set a "
-"different default terminal emulator."
-msgstr ""
-"如果命令**x-terminal-emulator**不运行默认的终端仿真器，请运行以下命令设置其他"
-"的默认终端仿真器。"
+msgid "If the command **x-terminal-emulator** doesn't run the terminal emulator that one wants to be the default, run the following command to set a different default terminal emulator."
+msgstr "如果命令**x-terminal-emulator**不运行默认的终端仿真器，请运行以下命令设置其他的默认终端仿真器。"
 
 #: ../../create_localized_help.py:139
 msgid "Type in the number of the selection and hit enter."
@@ -290,30 +190,18 @@ msgid "For other distributions:"
 msgstr "其他发行版："
 
 #: ../../create_localized_help.py:142
-msgid ""
-"Just set the terminal executable of your choice on this applet settings "
-"window."
+msgid "Just set the terminal executable of your choice on this applet settings window."
 msgstr "只需在此小程序设置窗口中设置您选择的终端可执行文件即可。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:144
-msgid ""
-"There is a file inside this applet directory called **run_from_terminal."
-"sh**. ***Do not remove, rename or edit this file***. Otherwise, all of the "
-"*Run from terminal* options will break."
-msgstr ""
-"该小程序目录中有一个名为**run_from_terminal.sh**的文件。***请勿删除，重命名或"
-"编辑此文件***。否则，所有*从终端运行*的选项都会损坏。"
+msgid "There is a file inside this applet directory called **run_from_terminal.sh**. ***Do not remove, rename or edit this file***. Otherwise, all of the *Run from terminal* options will break."
+msgstr "该小程序目录中有一个名为**run_from_terminal.sh**的文件。***请勿删除，重命名或编辑此文件***。否则，所有*从终端运行*的选项都会损坏。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:146
-msgid ""
-"There is a folder named **icons** inside this applet directory. It contains "
-"several symbolic icons (most of them are from the Faenza icon theme) and "
-"each icon can be used directly by name (on a custom launcher, for example)."
-msgstr ""
-"该小程序目录中有一个名为**icons**的文件夹。它包含一些符号图标（大多数来自"
-"Faenza图标主题），每个图标可以直接使用名称（例如在自定义启动器上）。"
+msgid "There is a folder named **icons** inside this applet directory. It contains several symbolic icons (most of them are from the Faenza icon theme) and each icon can be used directly by name (on a custom launcher, for example)."
+msgstr "该小程序目录中有一个名为**icons**的文件夹。它包含一些符号图标（大多数来自Faenza图标主题），每个图标可以直接使用名称（例如在自定义启动器上）。"
 
 #: ../../create_localized_help.py:168
 msgid "The following two sections are available only in English."
@@ -353,15 +241,11 @@ msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
 #: ../../create_localized_help.py:281
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
 #: ../../create_localized_help.py:282
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #: ../../create_localized_help.py:288
@@ -369,25 +253,16 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
 #: ../../create_localized_help.py:289
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:291
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内名为**localizations.sh**的脚本安装本地化。"
 
 #: ../../create_localized_help.py:292
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
 
 #. NOTE: This string could be left blank because it's a default string,
@@ -824,13 +699,8 @@ msgstr "显示类别图标"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->tooltip
-msgid ""
-"This option allows to display the user picture on the menu. Clicking on the "
-"picture will open \"Account details\". For the image to be shown, the "
-"applications info box also has to be displayed."
-msgstr ""
-"此选项允许在菜单上显示用户图片。点击图片时将打开“帐户详情”。为了显示图片，还"
-"必须显示应用程序信息框。"
+msgid "This option allows to display the user picture on the menu. Clicking on the picture will open \"Account details\". For the image to be shown, the applications info box also has to be displayed."
+msgstr "此选项允许在菜单上显示用户图片。点击图片时将打开“帐户详情”。为了显示图片，还必须显示应用程序信息框。"
 
 #. 3.2->settings-schema.json->pref_user_picture_placement->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_placement->description
@@ -854,9 +724,7 @@ msgstr "应用程序信息框左侧"
 
 #. 3.2->settings-schema.json->pref_cat_select_on_hover->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_cat_select_on_hover->tooltip
-msgid ""
-"If disabled, categories can be selected by clicking on them instead of just "
-"hovering."
+msgid "If disabled, categories can be selected by clicking on them instead of just hovering."
 msgstr "如果禁用，可以通过点击类别而不是悬停来选择类别。"
 
 #. 3.2->settings-schema.json->pref_cat_select_on_hover->description
@@ -923,13 +791,8 @@ msgstr "框底部边距："
 
 #. 3.2->settings-schema.json->pref_fuzzy_search_enabled->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_fuzzy_search_enabled->tooltip
-msgid ""
-"This option enables an infinitelly better sorting of search results. It's "
-"marked as experimental because it has a huge impact on performance every "
-"time the search box is cleared."
-msgstr ""
-"此项能够更好地对搜索结果进行排序。标为实验性是因为每次清除搜索框时它对性能有"
-"很大的影响。"
+msgid "This option enables an infinitelly better sorting of search results. It's marked as experimental because it has a huge impact on performance every time the search box is cleared."
+msgstr "此项能够更好地对搜索结果进行排序。标为实验性是因为每次清除搜索框时它对性能有很大的影响。"
 
 #. 3.2->settings-schema.json->pref_fuzzy_search_enabled->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_fuzzy_search_enabled->description
@@ -953,13 +816,8 @@ msgstr "隐藏“所有应用程序”类别"
 
 #. 3.2->settings-schema.json->pref_autofit_searchbox_width->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_autofit_searchbox_width->tooltip
-msgid ""
-"If enabled, Custom width for search box will be ignored. Also, this option "
-"is ignored if the custom launchers box is placed at either side of the "
-"searchbox."
-msgstr ""
-"如果禁用，将会忽略搜索框的自定义宽度。此外，如果自定义启动器框位于搜索框的任"
-"意一侧，此选项将会被忽略。"
+msgid "If enabled, Custom width for search box will be ignored. Also, this option is ignored if the custom launchers box is placed at either side of the searchbox."
+msgstr "如果禁用，将会忽略搜索框的自定义宽度。此外，如果自定义启动器框位于搜索框的任意一侧，此选项将会被忽略。"
 
 #. 3.2->settings-schema.json->pref_autofit_searchbox_width->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_autofit_searchbox_width->description
@@ -973,13 +831,8 @@ msgstr "在右键显示“添加到面板”"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_invert_order->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_invert_order->tooltip
-msgid ""
-"By default, the most recently used application is at the top of the list. "
-"With this option enabled, the most recently used application will be at the "
-"bottom of the list."
-msgstr ""
-"默认情况下，最近使用的应用程序位于列表的顶部。启用此项后，最近使用的应用程序"
-"将会位于列表的底部。"
+msgid "By default, the most recently used application is at the top of the list. With this option enabled, the most recently used application will be at the bottom of the list."
+msgstr "默认情况下，最近使用的应用程序位于列表的顶部。启用此项后，最近使用的应用程序将会位于列表的底部。"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_invert_order->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_invert_order->description
@@ -989,13 +842,10 @@ msgstr "反转最近使用的应用程序顺序"
 #. 3.2->settings-schema.json->pref_remember_recently_used_apps->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_remember_recently_used_apps->tooltip
 msgid ""
-"From the moment this option is enabled, every application launched from the "
-"menu will be stored and displayed in the \"Recent Applications\" category.\n"
-"Every time this option is disabled, the list of recently used applications "
-"will be cleared."
+"From the moment this option is enabled, every application launched from the menu will be stored and displayed in the \"Recent Applications\" category.\n"
+"Every time this option is disabled, the list of recently used applications will be cleared."
 msgstr ""
-"从启用此项开始，将会储存从菜单启动的每个应用程序并显示在“最近的应用程序”类别"
-"中。\n"
+"从启用此项开始，将会储存从菜单启动的每个应用程序并显示在“最近的应用程序”类别中。\n"
 "每当此项禁用时，将会清除最近使用的应用程序列表。"
 
 #. 3.2->settings-schema.json->pref_remember_recently_used_apps->description
@@ -1086,12 +936,10 @@ msgstr "ems"
 #. 3.2->settings-schema.json->pref_recently_used_apps_separator->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recently_used_apps_separator->tooltip
 msgid ""
-"This option, when enabled, will break the menu keyboard navigation. Only "
-"enable this option if you will never use the keyboard to navigate the menu.\n"
+"This option, when enabled, will break the menu keyboard navigation. Only enable this option if you will never use the keyboard to navigate the menu.\n"
 "This message is only temporary until I figure out how to fix this."
 msgstr ""
-"此选项启用时，将会破坏菜单键盘导航。仅在您不使用键盘来导航菜单时才启用此选"
-"项。\n"
+"此选项启用时，将会破坏菜单键盘导航。仅在您不使用键盘来导航菜单时才启用此选项。\n"
 "此消息只是暂时的，直到我想出如何解决这个问题。"
 
 #. 3.2->settings-schema.json->pref_recently_used_apps_separator->description
@@ -1205,13 +1053,8 @@ msgstr "终端模拟器："
 
 #. 3.2->settings-schema.json->pref_swap_categories_box->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_swap_categories_box->tooltip
-msgid ""
-"By default, the categories box is to the left of the applications list. With "
-"this option enabled, the categories box will be placed to the right of the "
-"applications list."
-msgstr ""
-"默认请将下，类别框位于应用程序列表的左侧。启用此项后，类别框将会放置到应用程"
-"序列表的右侧。"
+msgid "By default, the categories box is to the left of the applications list. With this option enabled, the categories box will be placed to the right of the applications list."
+msgstr "默认请将下，类别框位于应用程序列表的左侧。启用此项后，类别框将会放置到应用程序列表的右侧。"
 
 #. 3.2->settings-schema.json->pref_swap_categories_box->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_swap_categories_box->description
@@ -1250,8 +1093,7 @@ msgstr "显示书签和位置"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_shutdown_button_custom_icon->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_logout_button_custom_icon->tooltip
 msgid ""
-"Only valid if the System buttons box is placed next to the Custom launchers "
-"box.\n"
+"Only valid if the System buttons box is placed next to the Custom launchers box.\n"
 "Leave blank to use default."
 msgstr ""
 "仅当系统按钮框位于自定义启动器框旁有效。\n"
@@ -1300,8 +1142,7 @@ msgstr "第二个位置元素"
 #. 3.2->settings-schema.json->custom_padding_label->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->appearance7->description
 msgid ""
-"Note: Most themes stylesheets come with hardcoded sizes for certain "
-"elemets.\n"
+"Note: Most themes stylesheets come with hardcoded sizes for certain elemets.\n"
 "This section is for overriding those stylesheets."
 msgstr ""
 "注意：大多数主题样式表都带有某些元素的硬编码大小。\n"
@@ -1309,9 +1150,7 @@ msgstr ""
 
 #. 3.2->settings-schema.json->pref_show_recents_button->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_recents_button->tooltip
-msgid ""
-"For people who want the \"Recent documents\" category hidden without "
-"disabling recent documents globally."
+msgid "For people who want the \"Recent documents\" category hidden without disabling recent documents globally."
 msgstr "提供给希望隐藏“最近的文档”类别而不用全局禁用最近的文档的用户。"
 
 #. 3.2->settings-schema.json->pref_show_recents_button->description
@@ -1331,14 +1170,11 @@ msgstr "选择要显示在面板中的图标。"
 
 #. 3.2->settings-schema.json->custom_launchers_label->description
 msgid ""
-"Fields marked with asterisks (*) are mandatory. Otherwise, the button will "
-"not appear on the menu.\n"
-"Icons can be any icon name or path to an icon file (symbolic or full "
-"color).\n"
+"Fields marked with asterisks (*) are mandatory. Otherwise, the button will not appear on the menu.\n"
+"Icons can be any icon name or path to an icon file (symbolic or full color).\n"
 "Commands can be any command (as entered in a terminal) or a path to a file.\n"
 "If the file is an executable script, an attempt to execute it will be made.\n"
-"Otherwise, the file will be opened with the systems handler for that file "
-"type."
+"Otherwise, the file will be opened with the systems handler for that file type."
 msgstr ""
 "标有星号(*)的字段是必填项。否则，按钮将不会在菜单上出现。\n"
 "图标可以是任何图标文件或图标文件的路径(符号或全彩)。\n"
@@ -1505,8 +1341,7 @@ msgstr "自定义标签"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_privilege_elevator->tooltip
 msgid ""
 "The graphical front-end to use to run applications as root.\n"
-"This is used by the \"Open as Root\" context menu and the option \"Gain "
-"privileges of not owned files\"."
+"This is used by the \"Open as Root\" context menu and the option \"Gain privileges of not owned files\"."
 msgstr ""
 "用来以root身份运行应用程序的图形前端。\n"
 "此项用于右键菜单“以Root身份打开”和“获取非所属文件的权限”选项。"
@@ -1558,9 +1393,7 @@ msgstr "在右键显示“从终端运行”"
 
 #. 3.2->settings-schema.json->pref_recent_apps_ignore_favorites->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_recent_apps_ignore_favorites->tooltip
-msgid ""
-"If enabled, applications set as Favorite will not be stored in the \"Recent "
-"Applications\" category."
+msgid "If enabled, applications set as Favorite will not be stored in the \"Recent Applications\" category."
 msgstr "如果启用，设置为收藏的应用程序将不会储存在“最近的应用程序”类别中。"
 
 #. 3.2->settings-schema.json->pref_recent_apps_ignore_favorites->description
@@ -1605,13 +1438,8 @@ msgstr "用户图片大小："
 
 #. 3.2->settings-schema.json->pref_use_alternate_vector_box->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_alternate_vector_box->tooltip
-msgid ""
-"With this option enabled, an alternate method to select categories will be "
-"used. This method can improve the performance of the menu and is extracted "
-"from the applet called Configurable Menu by lestcape."
-msgstr ""
-"启用此项后，将会使用选择类别的备用方式。这种方式可以提高菜单的性能，并从名为"
-"Configurable Menu by lestcape的小程序提取。"
+msgid "With this option enabled, an alternate method to select categories will be used. This method can improve the performance of the menu and is extracted from the applet called Configurable Menu by lestcape."
+msgstr "启用此项后，将会使用选择类别的备用方式。这种方式可以提高菜单的性能，并从名为Configurable Menu by lestcape的小程序提取。"
 
 #. 3.2->settings-schema.json->pref_use_alternate_vector_box->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_alternate_vector_box->description
@@ -1620,9 +1448,7 @@ msgstr "使用备用的类别选择方式（实验性）"
 
 #. 3.2->settings-schema.json->pref_enable_autoscroll->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_enable_autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth auto-scrolling in the application "
-"list."
+msgid "Choose whether or not to enable smooth auto-scrolling in the application list."
 msgstr "选择是否在应用程序列表中启用平滑滚动。"
 
 #. 3.2->settings-schema.json->pref_enable_autoscroll->description
@@ -1687,12 +1513,8 @@ msgstr "在“收藏夹”框内"
 
 #. 3.2->settings-schema.json->pref_show_edit_desktop_file_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_edit_desktop_file_on_context->tooltip
-msgid ""
-"It adds to the applications context menu an entry that will allow you to "
-"open the current selected application's .desktop file in a text editor."
-msgstr ""
-"向应用程序右键菜单添加一个允许您使用文本编辑器打开当前选定的应用程序的."
-"desktop文件的条目。"
+msgid "It adds to the applications context menu an entry that will allow you to open the current selected application's .desktop file in a text editor."
+msgstr "向应用程序右键菜单添加一个允许您使用文本编辑器打开当前选定的应用程序的.desktop文件的条目。"
 
 #. 3.2->settings-schema.json->pref_show_edit_desktop_file_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_show_edit_desktop_file_on_context->description
@@ -1702,16 +1524,12 @@ msgstr "在右键显示“编辑.desktop文件”"
 #. 3.2->settings-schema.json->pref_gain_privileges_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_gain_privileges_on_context->tooltip
 msgid ""
-"If enabled, this options will open as root .desktop files that aren't owned "
-"by the current user.\n"
+"If enabled, this options will open as root .desktop files that aren't owned by the current user.\n"
 "\n"
-"This isn't needed for all text editors. Some text editors will allow you to "
-"open and edit not owned files and will ask for the root password at the "
-"moment of saving the changes."
+"This isn't needed for all text editors. Some text editors will allow you to open and edit not owned files and will ask for the root password at the moment of saving the changes."
 msgstr ""
 "如果启用，此项将会以root身份打开不属于当前用户所拥有的.desktop文件。\n"
-"并非所有的文本编辑器都需要这样。某些文本编辑器会允许您打开和编辑非所属的文件"
-"并会在保存更改时请求root密码。"
+"并非所有的文本编辑器都需要这样。某些文本编辑器会允许您打开和编辑非所属的文件并会在保存更改时请求root密码。"
 
 #. 3.2->settings-schema.json->pref_gain_privileges_on_context->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_gain_privileges_on_context->description
@@ -1720,9 +1538,7 @@ msgstr "获取非所属文件的权限"
 
 #. 3.2->settings-schema.json->pref_user_picture_stylized->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_user_picture_stylized->tooltip
-msgid ""
-"With this option enabled, the box containing the user picture will have the "
-"same style as the Favorites box."
+msgid "With this option enabled, the box containing the user picture will have the same style as the Favorites box."
 msgstr "启用此项后，包含用户图片的框将会拥有和收藏夹相同的风格。"
 
 #. 3.2->settings-schema.json->pref_user_picture_stylized->description
@@ -1751,13 +1567,8 @@ msgstr ""
 
 #. 3.2->settings-schema.json->pref_use_hover_feedback->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_hover_feedback->tooltip
-msgid ""
-"If enabled, and the user picture is shown, every time an application/"
-"favorite/place/recent file is hovered or selected with keyboard navigation, "
-"its icon will be displayed where the user picture is located."
-msgstr ""
-"如果启用并已显示用户图片，每次悬停或使用键盘导航选择应用程序/收藏/位置/最近的"
-"文件时，其图标将会显示在用户图片的位置。"
+msgid "If enabled, and the user picture is shown, every time an application/favorite/place/recent file is hovered or selected with keyboard navigation, its icon will be displayed where the user picture is located."
+msgstr "如果启用并已显示用户图片，每次悬停或使用键盘导航选择应用程序/收藏/位置/最近的文件时，其图标将会显示在用户图片的位置。"
 
 #. 3.2->settings-schema.json->pref_use_hover_feedback->description
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_use_hover_feedback->description
@@ -1772,12 +1583,10 @@ msgstr "自定义文本编辑器："
 #. 3.2->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->tooltip
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->pref_custom_editor_for_edit_desktop_file_on_context->tooltip
 msgid ""
-"Set a custom text editor to open .desktop files (just the name of the text "
-"editor executable or the path to it).\n"
+"Set a custom text editor to open .desktop files (just the name of the text editor executable or the path to it).\n"
 "Leave it blank to let the system decide."
 msgstr ""
-"设置打开.desktop文件的自定义文本编辑器（文本编辑器可执行文件的名称或其路径即"
-"可）。\n"
+"设置打开.desktop文件的自定义文本编辑器（文本编辑器可执行文件的名称或其路径即可）。\n"
 "留空则由系统决定。"
 
 #. 3.2->settings-schema.json->pref_custom_commands_box_alignment->description
@@ -1821,9 +1630,7 @@ msgid "Custom launchers icon size:"
 msgstr "自定义启动器图标大小："
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->description
-msgid ""
-"Custom version of the default Cinnamon Menu applet, but infinitely more "
-"customizable."
+msgid "Custom version of the default Cinnamon Menu applet, but infinitely more customizable."
 msgstr "默认Cinnamon菜单小程序的自定义版本，但是定制性更大。"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->name
@@ -1831,9 +1638,7 @@ msgid "Custom Cinnamon Menu"
 msgstr "自定义Cinnamon菜单"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@CustomCinnamonMenu->metadata.json->contributors
@@ -1856,14 +1661,11 @@ msgstr "点击这里保存设置"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head8->description
 msgid ""
 "Custom launchers notes\n"
-"Fields marked with asterisks (*) are mandatory. Otherwise, the button will "
-"not appear on the menu.\n"
-"Icons can be any icon name or path to an icon file (symbolic or full "
-"color).\n"
+"Fields marked with asterisks (*) are mandatory. Otherwise, the button will not appear on the menu.\n"
+"Icons can be any icon name or path to an icon file (symbolic or full color).\n"
 "Commands can be any command (as entered in a terminal) or a path to a file.\n"
 "If the file is an executable script, an attempt to execute it will be made.\n"
-"Otherwise, the file will be opened with the systems handler for that file "
-"type."
+"Otherwise, the file will be opened with the systems handler for that file type."
 msgstr ""
 "自定义启动器说明\n"
 "标有星号 (*)的字段是必填项。否则，按钮将不会在菜单上出现。\n"
@@ -1879,8 +1681,7 @@ msgstr "应用程序右键菜单附加选项"
 #. 0dyseus@CustomCinnamonMenu->settings-schema.json->head->description
 msgid ""
 "Most settings are not automatically saved when modified.\n"
-"Press any of the \"Click here to save settings\" buttons for the settings to "
-"take effect."
+"Press any of the \"Click here to save settings\" buttons for the settings to take effect."
 msgstr ""
 "大多数设置在修改时不会自动保存。\n"
 "按任何 \"点击这里保存设置\" 按钮以使设置生效。"
