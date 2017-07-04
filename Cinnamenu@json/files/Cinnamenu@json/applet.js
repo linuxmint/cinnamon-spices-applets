@@ -705,7 +705,6 @@ CinnamenuApplet.prototype = {
     if (fromToggle) {
       this.destroyAppButtons();
       this._resetDisplayApplicationsToStartup();
-      //this.mainBox.show();
     }
   },
 
@@ -1322,7 +1321,7 @@ CinnamenuApplet.prototype = {
         contextMenuChildren[refContextMenuItemIndex]._delegate.activate();
       } else if (enteredItemExists) {
         if (ctrlKey) {
-          itemChildren[refItemIndex]._delegate.closeMenu();
+          itemChildren[refItemIndex]._delegate.toggleMenu();
         } else {
           itemChildren[refItemIndex]._delegate.activate();
         }
@@ -1378,6 +1377,11 @@ CinnamenuApplet.prototype = {
           itemChildren[refItemIndex]._delegate.toggleMenu();
           return true;
         }
+      case ctrlKey:
+        if (enteredItemExists) {
+          itemChildren[refItemIndex]._delegate.handleEnter();
+        }
+        return true;
       default:
     }
   },

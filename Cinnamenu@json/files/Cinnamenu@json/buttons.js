@@ -823,18 +823,15 @@ AppListGridButton.prototype = {
     this.menu.close();
   },
 
-  toggleMenu: function (fromClear) {
+  toggleMenu: function () {
     if (this.appType !== ApplicationType._applications) {
       return false;
     }
 
     if (!this.menu.isOpen) {
-      if (!fromClear) {
-        this._parent._clearEnteredActors();
-      }
       let children = this.menu.box.get_children();
       for (var i = 0, len = children.length; i < len; i++) {
-        this.menu.box.remove_actor(children[i]);
+        this.menu.box.remove_child(children[i]);
       }
       this._parent.menuIsOpen = this.appIndex;
       this.actor.set_style_class_name('menu-application-button-selected');
