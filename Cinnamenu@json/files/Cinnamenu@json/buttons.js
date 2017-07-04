@@ -617,7 +617,8 @@ AppListGridButton.prototype = {
     if (clutterText
       && (this._parent.showAppDescriptionsOnButtons
         || this._parent.searchActive
-        || this.app.shouldHighlight)) {
+        || this.app.shouldHighlight)
+        || opts.removeFormatting) {
       clutterText.set_markup(markup);
       clutterText.ellipsize = Pango.EllipsizeMode.END;
     }
