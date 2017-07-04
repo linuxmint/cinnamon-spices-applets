@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.06\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@window-list-fork 1.11\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:43+0800\n"
 "PO-Revision-Date: 2017-06-04 19:43+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../../create_localized_help.py:90
 msgid "The following two sections are available only in English."
@@ -56,15 +56,11 @@ msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
 #: ../../create_localized_help.py:203
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
 #: ../../create_localized_help.py:204
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #: ../../create_localized_help.py:210
@@ -72,25 +68,16 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
 #: ../../create_localized_help.py:211
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:213
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内名为**localizations.sh**的脚本安装本地化。"
 
 #: ../../create_localized_help.py:214
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
 
 #: 2.8/applet.js:699 applet.js:797
@@ -165,9 +152,7 @@ msgid "Remove '%s'"
 msgstr "移除'%s'"
 
 #. 0dyseus@window-list-fork->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@window-list-fork->metadata.json->description
@@ -232,11 +217,8 @@ msgid "Where to display the \"Preferences\" sub-menu?"
 msgstr "在哪里显示“首选项”子菜单？"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
-msgid ""
-"If the option \"Invert context menu items order\" is enabled, the \"Top of "
-"menu\" will actually be the \"Bottom of menu\" and vice versa."
-msgstr ""
-"如果启用选项“反转右键菜单条目顺序”，“菜单顶部”将会变成“菜单底部”，反之亦然。"
+msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr "如果启用选项“反转右键菜单条目顺序”，“菜单顶部”将会变成“菜单底部”，反之亦然。"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
 msgid "Invert context menu items order"
@@ -247,14 +229,11 @@ msgid "Custom height for window thumbnails"
 msgstr "窗口缩略图的自定义高度"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
-msgid ""
-"Window buttons can have different sizes and use the entire space available"
+msgid "Window buttons can have different sizes and use the entire space available"
 msgstr "窗口按钮可以拥有不同的大小并使用全部可用的空间"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
-msgid ""
-"Show an alert in the window list when a window from another workspace "
-"requires attention"
+msgid "Show an alert in the window list when a window from another workspace requires attention"
 msgstr "当来自另一个工作区的窗口需要注意时在窗口列表中显示警告"
 
 #~ msgid "NikoKrause: Bug fixes and German localization."

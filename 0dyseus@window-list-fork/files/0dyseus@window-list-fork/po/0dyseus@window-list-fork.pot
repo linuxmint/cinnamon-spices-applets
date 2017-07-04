@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@window-list-fork 1.10\n"
-"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"POT-Creation-Date: 2017-06-30 23:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,65 +15,98 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 
-#. TO TRANSLATORS: This is a placeholder.
-#. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:119 ../../create_localized_help.py:195
-msgid "language-name"
+#: ../../create_localized_help.py:76
+msgid "Description"
 msgstr ""
 
-#: ../../create_localized_help.py:125
+#: ../../create_localized_help.py:78
+msgid "This applet is a fork of the default Window list applet shipped with Cinnamon."
+msgstr ""
+
+#: ../../create_localized_help.py:80
+msgid "Differences with the original applet"
+msgstr ""
+
+#: ../../create_localized_help.py:82
+msgid "Added option to remove the label from the window list buttons."
+msgstr ""
+
+#: ../../create_localized_help.py:83
+msgid "Added option to remove the tooltips from the window list buttons."
+msgstr ""
+
+#: ../../create_localized_help.py:84
+msgid "Added icons to the window list button's context menu."
+msgstr ""
+
+#: ../../create_localized_help.py:85
+msgid "Added option to invert the contex menu items."
+msgstr ""
+
+#: ../../create_localized_help.py:86
+msgid "Added option to hide/move the **Preferences** sub menu."
+msgstr ""
+
+#: ../../create_localized_help.py:170
 msgid "The following two sections are available only in English."
 msgstr ""
 
-#: ../../create_localized_help.py:198 2.8/applet.js:839 applet.js:937
+#: ../../create_localized_help.py:174
+msgid "Do not install on any other version of Cinnamon."
+msgstr ""
+
+#: ../../create_localized_help.py:180
+msgid "Compatibility"
+msgstr ""
+
+#. Define them first before self.get_language_stats() is called so these
+#. strings are also counted.
+#: ../../create_localized_help.py:286 2.8/applet.js:839 applet.js:937
 msgid "Help"
 msgstr ""
 
-#: ../../create_localized_help.py:199
+#: ../../create_localized_help.py:287
 msgid "Contributors"
 msgstr ""
 
-#: ../../create_localized_help.py:200
+#: ../../create_localized_help.py:288
 msgid "Changelog"
-msgstr ""
-
-#: ../../create_localized_help.py:201
-msgid "Choose language"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:202 ../../create_localized_help.py:209
+#: ../../create_localized_help.py:289 ../../create_localized_help.py:308
 #, python-format
 msgid "Help for %s"
 msgstr ""
 
-#: ../../create_localized_help.py:210
+#: ../../create_localized_help.py:309
 msgid "IMPORTANT!!!"
 msgstr ""
 
-#: ../../create_localized_help.py:211
+#: ../../create_localized_help.py:310
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
-#: ../../create_localized_help.py:212
+#. 0dyseus@window-list-fork->metadata.json->comments
+#: ../../create_localized_help.py:311
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
-#: ../../create_localized_help.py:218
+#: ../../create_localized_help.py:317
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
-#: ../../create_localized_help.py:219
+#: ../../create_localized_help.py:318
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:221
+#: ../../create_localized_help.py:320
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
-#: ../../create_localized_help.py:222
+#: ../../create_localized_help.py:321
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
@@ -148,33 +181,16 @@ msgstr ""
 msgid "Remove '%s'"
 msgstr ""
 
-#. 0dyseus@window-list-fork->metadata.json->comments
-msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "See this xlet help file."
 msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->description
 msgid "Fork of the main Cinnamon Window list applet."
 msgstr ""
 
-#. 0dyseus@window-list-fork->metadata.json->contributors
-msgid "See this xlet help file."
-msgstr ""
-
 #. 0dyseus@window-list-fork->metadata.json->name
 msgid "Window list (Fork By Odyseus)"
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
-msgid "Custom width for window thumbnails"
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
-msgid "pixels"
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
-msgid "Show an alert in the window list when a window from another workspace requires attention"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
@@ -186,49 +202,62 @@ msgid "Bottom of menu"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
-msgid "Top of menu"
+msgid "Do not display"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
-msgid "Do not display"
+msgid "Top of menu"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
 msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
-msgid "Enable mouse-wheel scrolling in the window list"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
-msgid "Window buttons can have different sizes and use the entire space available"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->units
+msgid "pixels"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
-msgid "Do not display tooltips"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
+msgid "Show an alert in the window list when a window from another workspace requires attention"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
-msgid "Show window thumbnails on hover"
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
-msgid "Invert context menu items order"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr ""
 
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
+msgid "Invert context menu items order"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
+msgid "Do not display tooltips"
+msgstr ""
+
 #. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
 msgid "Middle click to close window"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
-msgid "Custom height for window thumbnails"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
+msgid "Window buttons can have different sizes and use the entire space available"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
-msgid "Hide labels in the window list buttons"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
 msgstr ""
