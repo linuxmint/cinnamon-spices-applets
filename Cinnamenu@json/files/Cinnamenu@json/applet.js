@@ -633,7 +633,7 @@ CinnamenuApplet.prototype = {
     }
     // Load 'recent' category
     if (this._recentEnabled) {
-      this.recentCategory = new CategoryListButton(this, 'recent', t("Recent"), 'folder-recent', '_selectRecent');
+      this.recentCategory = new CategoryListButton(this, 'recent', t("Recent Files"), 'folder-recent', '_selectRecent');
       this.categoriesBox.add_actor(this.recentCategory.actor);
     }
     // Load 'favorite applications' category
@@ -682,8 +682,8 @@ CinnamenuApplet.prototype = {
 
   _switchApplicationsView: function() {
     this._applicationsViewMode = this.startupViewMode;
-    let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
-    if (isListView) {
+    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    if (this.isListView) {
       this.applicationsListBox.show();
       this.applicationsGridBox.hide();
     } else {
@@ -693,7 +693,7 @@ CinnamenuApplet.prototype = {
     // switch activeContainer
     if (_.isEqual(this._activeContainer, this.applicationsListBox) || _.isEqual(this._activeContainer, this.applicationsListBox)) {
       // reset active container
-      this._activeContainer = isListView ? this.applicationsListBox : this.applicationsGridBox;
+      this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
       // reset scroll to top
       let vscroll = this.applicationsScrollBox.get_vscroll_bar();
       let newScrollValue = this.applicationsScrollBox.get_allocation_box().y1;
@@ -750,6 +750,8 @@ CinnamenuApplet.prototype = {
   },
 
   _clearEnteredActors: function () {
+    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
     let itemChildren = this._activeContainer.get_children();
     let refItemIndex = _.findIndex(itemChildren, (actor) => {
       return (actor.has_style_class_name('menu-application-button-selected')
@@ -779,6 +781,10 @@ CinnamenuApplet.prototype = {
   },
 
   _clearApplicationsBox: function() {
+    if (!this.searchActive) {
+      this.answerText.set_text('');
+      this.answerText.hide();
+    }
     if (this.applicationsListBox) {
       let listActors = this.applicationsListBox.get_children();
       if (listActors) {
@@ -834,23 +840,12 @@ CinnamenuApplet.prototype = {
     if (!this.enableBookmarks) {
       return [];
     }
-    if (!this._searchWebErrorsShown) {
-      if (!Firefox.Gda) {
-        let notifyTitle = t("Cinnamenu: Search Firefox bookmarks disabled");
-        let notifyMessage = t(
-          "If you want to search Firefox bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-        );
-        this.selectedAppTitle.set_text(notifyTitle);
-        this.selectedAppDescription.set_text(notifyMessage);
-      }
-      if (!Midori.Gda) {
-        let notifyTitle = t("Cinnamenu: Search Midori bookmarks disabled");
-        let notifyMessage = t(
-          "If you want to search Midori bookmarks, you must install the required pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-        );
-        this.selectedAppTitle.set_text(notifyTitle);
-        this.selectedAppDescription.set_text(notifyMessage);
-      }
+    if (!this._searchWebErrorsShown && !Firefox.Gda) {
+      let notifyMessage = t('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.');
+      this.answerText.set_text(notifyMessage);
+      this.answerText.show();
+    } else if (this.answerText.is_visible()) {
+      this.answerText.hide();
     }
     this._searchWebErrorsShown = true;
 
@@ -931,18 +926,38 @@ CinnamenuApplet.prototype = {
     let recentFiles = this.recentManager.get_items();
     let res = []
 
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; i < 23; i++) {
+      if (!recentFiles[i]) {
+        continue;
+      }
       let recentInfo = recentFiles[i];
       if (recentInfo.exists()) {
         res.push({
           name: recentInfo.get_display_name(),
           icon: recentInfo.get_gicon(),
-          mime: recentInfo.get_mime_type(),
+          //mime: recentInfo.get_mime_type(),
           uri: recentInfo.get_uri(),
           description: recentInfo.get_uri(),
           type: ApplicationType._recent
         });
       }
+    }
+
+    if (res.length > 0) {
+      res.push({
+        name: t('Clear List'),
+        clearList: true,
+        icon: new St.Icon({
+          icon_name: 'edit-clear',
+          icon_type: St.IconType.SYMBOLIC
+        }),
+        uri: null,
+        description: null,
+        type: ApplicationType._recent
+      });
+    } else if (!pattern) {
+      this.answerText.set_text(t('No recent documents'));
+      this.answerText.show();
     }
 
     if (pattern) {
@@ -1047,13 +1062,13 @@ CinnamenuApplet.prototype = {
       this.introspectTheme(() => this._displayApplications(appList));
       return false;
     }
-    let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
 
     let column = 0;
     let columnsCount = 0;
     let rownum = 0;
 
-    this._activeContainer = isListView ? this.applicationsListBox : this.applicationsGridBox;
+    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
     //global.dump_gjs_stack();
     this.menuIsOpen = null;
 
@@ -1078,9 +1093,9 @@ CinnamenuApplet.prototype = {
         this._allItems.push(appButton);
       }
 
-      if (isListView) { // ListView
+      if (this.isListView) {
         this.applicationsListBox.add_child(appButton.actor);
-      } else { // GridView
+      } else {
         let gridLayout = this.applicationsGridBox.layout_manager;
         if (!gridLayout) {
           return false;
@@ -1098,28 +1113,20 @@ CinnamenuApplet.prototype = {
       }
     };
 
-    if (!this.searchActive) {
+    if (!this.searchActive && _.last(appList) && !_.last(appList).clearList) {
       appList = _.orderBy(appList, 'name');
     }
     for (let z = 0, len = appList.length; z < len; z++) {
-      let app = appList[z];
-      if (!app) {
-        continue;
-      }
-
-      let appType = app.type;
-      if (appType === undefined) {
-        appType = ApplicationType._applications;
+      if (appList[z].type === undefined) {
+        appList[z].type = ApplicationType._applications;
       }
 
       for (let y = 0, len = AppTypes.length; y < len; y++) {
-        if (ApplicationType[AppTypes[y]] !== appType) {
+        if (ApplicationType[AppTypes[y]] !== appList[z].type) {
           continue;
         }
 
-        //++appIndex;
-
-        createAppButton(app, appType, len, z);
+        createAppButton(appList[z], appList[z].type, len, z);
       }
     }
     this.columnsCount = columnsCount;
@@ -1129,7 +1136,7 @@ CinnamenuApplet.prototype = {
 
   _onMenuKeyPress: function(actor, event) {
     // TODO - Add key navigation for context menus
-    let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
 
     let keyCode = event.get_key_code();
@@ -1143,7 +1150,7 @@ CinnamenuApplet.prototype = {
       return true;
     }
 
-    ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
+    let ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
 
     let itemChildren = this._activeContainer.get_children();
 
@@ -1172,7 +1179,8 @@ CinnamenuApplet.prototype = {
     let enteredContextMenuItemExists = false;
 
     if (enteredItemExists) {
-      if (ctrlKey || itemChildren[refItemIndex]._delegate.menu.isOpen) {
+      if ((ctrlKey || itemChildren[refItemIndex]._delegate.menu.isOpen)
+        && itemChildren[refItemIndex]._delegate.menu.box) {
         contextMenuChildren = itemChildren[refItemIndex]._delegate.menu.box.get_children();
         refContextMenuItemIndex = _.findIndex(contextMenuChildren, (actor) => {
           return actor._delegate.entered != null;
@@ -1194,7 +1202,7 @@ CinnamenuApplet.prototype = {
     }
     /*log2('symbol', symbol)
     log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'refPowerGroupItemIndex', refPowerGroupItemIndex, 'refContextMenuItemIndex', refContextMenuItemIndex)
-    log2('isListView', isListView)*/
+    log2('this.isListView', this.isListView)*/
     let startingCategoryIndex = _.findIndex(categoryChildren, (actor) => {
       return this._currentCategory === actor._delegate.categoryNameText;
     });
@@ -1248,7 +1256,7 @@ CinnamenuApplet.prototype = {
       if ((enteredItemExists
         && refItemIndex === 0)
         || (enteredItemExists
-        && isListView)
+        && this.isListView)
         || (!enteredItemExists
           && !enteredCategoryExists
           && !enteredPowerGroupItemExists)) {
@@ -1263,7 +1271,7 @@ CinnamenuApplet.prototype = {
     const rightNavigation = () => {
       if (enteredItemExists && refItemIndex === itemChildren.length - 1) {
         _.first(itemChildren)._delegate.handleEnter();
-      } else if (isListView && enteredItemExists) {
+      } else if (this.isListView && enteredItemExists) {
         itemChildren[refItemIndex]._delegate.handleEnter();
       } else {
         enteredCategoryExists = null;
@@ -1276,7 +1284,7 @@ CinnamenuApplet.prototype = {
         nextItemNavigation(refContextMenuItemIndex + 1);
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex]._delegate.handleEnter();
-      } else if (isListView || enteredContextMenuItemExists) {
+      } else if (this.isListView || enteredContextMenuItemExists) {
         nextItemNavigation(refItemIndex + 1);
       } else {
         nextItemNavigation((refItemIndex + 1) + (this.appsGridColumnCount - 1));
@@ -1298,7 +1306,7 @@ CinnamenuApplet.prototype = {
         previousItemNavigation(refContextMenuItemIndex - 1);
       } else if (enteredPowerGroupItemExists) {
         tabNavigation();
-      } else if (isListView || enteredContextMenuItemExists) {
+      } else if (this.isListView || enteredContextMenuItemExists) {
         previousItemNavigation(refItemIndex - 1);
       } else {
         previousItemNavigation((refItemIndex - 1) - (this.appsGridColumnCount - 1));
@@ -1716,6 +1724,18 @@ CinnamenuApplet.prototype = {
       style_class: 'menu-applications-inner-box',
       vertical: true
     });
+    this.answerText = new St.Label({
+      style_class: 'menu-selected-app-title',
+      style: 'padding-top: 14px; min-width: 240px; text-align; center;',
+      text: '',
+      show_on_set_parent: false
+    });
+    this.applicationsBoxWrapper.add(this.answerText, {
+      x_fill: false,
+      y_fill: false,
+      x_align: St.Align.START,
+      y_align: St.Align.START
+    });
     this.applicationsBoxWrapper.add(this.applicationsGridBox, {
       x_fill: false,
       y_fill: false,
@@ -1723,18 +1743,6 @@ CinnamenuApplet.prototype = {
       y_align: St.Align.START
     });
     this.applicationsBoxWrapper.add(this.applicationsListBox, {
-      x_fill: false,
-      y_fill: false,
-      x_align: St.Align.START,
-      y_align: St.Align.START
-    });
-    this.answerText = new St.Label({
-      style_class: 'menu-selected-app-title',
-      style: 'padding-top: 14px; min-width: 240px;',
-      text: '',
-      show_on_set_parent: false
-    });
-    this.applicationsBoxWrapper.add(this.answerText, {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
@@ -1925,8 +1933,10 @@ CinnamenuApplet.prototype = {
 
   destroyAppButtons: function() {
     for (let i = 0, len = this._allItems.length; i < len; i++) {
-      this._allItems[i].destroy();
-      this._allItems[i] = null;
+      if (this._allItems[i]) {
+        this._allItems[i].destroy();
+      }
+      _.pullAt(this._allItems, i);
     }
     this._allItems = [];
   },
