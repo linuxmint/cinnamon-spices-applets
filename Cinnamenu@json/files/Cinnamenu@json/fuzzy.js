@@ -24,7 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const _ = global.lo;
+const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
+const _ = AppletDir.lodash._;
 const fuzzy = function (q, str, opts) {
   if (typeof q !== 'string' || typeof str !== 'string') {
     return {
