@@ -5,18 +5,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.00\n"
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.02\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:41+0800\n"
 "PO-Revision-Date: 2017-06-04 19:41+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 "X-Generator: Poedit 1.8.11\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../../create_localized_help.py:90
 msgid "The following two sections are available only in English."
@@ -56,15 +57,11 @@ msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
 #: ../../create_localized_help.py:203
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
 #: ../../create_localized_help.py:204
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #: ../../create_localized_help.py:210
@@ -72,25 +69,16 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
 #: ../../create_localized_help.py:211
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:213
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内名为**localizations.sh**的脚本安装本地化。"
 
 #: ../../create_localized_help.py:214
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
 
 #. TO TRANSLATORS: This is the applet name.
@@ -147,13 +135,8 @@ msgid "Autostart Daemon"
 msgstr "自动启动守护进程"
 
 #: settings.py:411 applet.js:95
-msgid ""
-"When enabled, the daemon will be automatically started when the applet is "
-"loaded. If it is already running or this is disabled, no action will be "
-"taken."
-msgstr ""
-"启用后，当小程序加载时，守护程序将会自动启动。 如果该进程已在运行或者禁用，则"
-"不会采取任何操作。"
+msgid "When enabled, the daemon will be automatically started when the applet is loaded. If it is already running or this is disabled, no action will be taken."
+msgstr "启用后，当小程序加载时，守护程序将会自动启动。 如果该进程已在运行或者禁用，则不会采取任何操作。"
 
 #: settings.py:415
 msgid "Wallpaper Timer Interval (seconds)"
@@ -225,22 +208,15 @@ msgid "Remember Profiles State"
 msgstr "记住配置文件状态"
 
 #: settings.py:567 applet.js:110
-msgid ""
-"When enabled, the daemon will remember its current and next wallpaper for "
-"the current profile when the profile is changed. This means returning back "
-"to the profile will restore the previous background plus the next in queue."
-msgstr ""
-"启用后，当配置文件更改时，守护程序将会记住当前配置文件的当前和下一张壁纸。这"
-"意味着返回到配置文件将恢复以前的后台加上队列中的下一个。"
+msgid "When enabled, the daemon will remember its current and next wallpaper for the current profile when the profile is changed. This means returning back to the profile will restore the previous background plus the next in queue."
+msgstr "启用后，当配置文件更改时，守护程序将会记住当前配置文件的当前和下一张壁纸。这意味着返回到配置文件将恢复以前的后台加上队列中的下一个。"
 
 #: settings.py:571
 msgid "Show Notifications"
 msgstr "显示通知"
 
 #: settings.py:572 applet.js:105
-msgid ""
-"Display a notification each time an event happens with wallpaper changer. "
-"This does not stop the applet from reporting errors."
+msgid "Display a notification each time an event happens with wallpaper changer. This does not stop the applet from reporting errors."
 msgstr "每当壁纸更换程序发生事件时显示通知。这不会阻止小程序报告错误。"
 
 #: settings.py:576
@@ -248,9 +224,7 @@ msgid "Enable Logging"
 msgstr "启用日志记录"
 
 #: settings.py:577
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
+msgid "It enables the ability to log the output of several functions used by the applet."
 msgstr "它能够记录小程序使用的一些函数的输出。"
 
 #: settings.py:585
@@ -405,16 +379,13 @@ msgstr "%s小程序首选项"
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1242
 #, python-format
-msgid ""
-"Please enter your password to install the required settings schema for %s"
+msgid "Please enter your password to install the required settings schema for %s"
 msgstr "请输入您的密码安装%s需要的设置模式"
 
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1253
 #, python-format
-msgid ""
-"Could not install the settings schema for %s.  You will have to perform this "
-"step yourself."
+msgid "Could not install the settings schema for %s.  You will have to perform this step yourself."
 msgstr "无法安装%s的设置模式。您必须亲自执行这个步骤。"
 
 #. TO TRANSLATORS: Could be left blank.
@@ -426,9 +397,7 @@ msgstr "请输入您的密码移除%s需要的设置模式"
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1270
 #, python-format
-msgid ""
-"Could not remove the settings schema for %s.  You will have to perform this "
-"step yourself.  This is not a critical error."
+msgid "Could not remove the settings schema for %s.  You will have to perform this step yourself.  This is not a critical error."
 msgstr "无法移除%s的设置模式。您必须亲自执行这个步骤。这不是一个严重错误。"
 
 #: __init__.js:56
@@ -507,9 +476,7 @@ msgid "Change with Profile"
 msgstr "更改配置文件"
 
 #: applet.js:100
-msgid ""
-"When enabled, this will cause the daemon to automatically change the "
-"wallpaper whenever the current profile is changed."
+msgid "When enabled, this will cause the daemon to automatically change the wallpaper whenever the current profile is changed."
 msgstr "启用后，无论当前配置文件是否更改，这将会导致守护程序自动更改壁纸。"
 
 #: applet.js:104
@@ -555,9 +522,7 @@ msgid "Configure..."
 msgstr "配置..."
 
 #. 0dyseus@WallpaperChangerApplet->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@WallpaperChangerApplet->metadata.json->description
@@ -568,12 +533,8 @@ msgstr "支持多个配置文件的Cinnamon壁纸幻灯片小程序。"
 msgid "See this xlet help file."
 msgstr "查看该xlet帮助文件。"
 
-#~ msgid ""
-#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
-#~ "com/BigE/desk-changer"
-#~ msgstr ""
-#~ "Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/"
-#~ "desk-changer"
+#~ msgid "Eric Gach: Author of Desk Changer gnome-shell extension. https://github.com/BigE/desk-changer"
+#~ msgstr "Eric Gach：Desk Changer gnome-shell扩展的作者。https://github.com/BigE/desk-changer"
 
 #~ msgid "eson57: Swedish localization."
 #~ msgstr "eson57：瑞典语本地化。"
