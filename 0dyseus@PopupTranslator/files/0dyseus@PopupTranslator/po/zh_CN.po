@@ -5,27 +5,25 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.04\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@PopupTranslator 1.07\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:34+0800\n"
 "PO-Revision-Date: 2017-06-04 19:34+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../../create_localized_help.py:64
 msgid "Dependencies"
 msgstr "依赖关系"
 
 #: ../../create_localized_help.py:65
-msgid ""
-"If one or more of these dependencies are missing in your system, you will "
-"not be able to use this applet."
+msgid "If one or more of these dependencies are missing in your system, you will not be able to use this applet."
 msgstr "如果您的系统中缺少其中一个或多个依赖，您将不能够使用该小程序。"
 
 #: ../../create_localized_help.py:66
@@ -33,13 +31,10 @@ msgid "xsel command"
 msgstr "xsel命令"
 
 #: ../../create_localized_help.py:67
-msgid ""
-"XSel is a command-line program for getting and setting the contents of the X "
-"selection."
+msgid "XSel is a command-line program for getting and setting the contents of the X selection."
 msgstr "XSel是一个获取和设置X选择的内容的命令行程序。"
 
-#: ../../create_localized_help.py:69 ../../create_localized_help.py:77
-#: ../../create_localized_help.py:89
+#: ../../create_localized_help.py:69 ../../create_localized_help.py:77 ../../create_localized_help.py:89
 msgid "Debian and Archlinux based distributions:"
 msgstr "Debian和Archlinux系发行版："
 
@@ -53,9 +48,7 @@ msgid "xdg-open command"
 msgstr "xdg-open命令"
 
 #: ../../create_localized_help.py:75
-msgid ""
-"Open a URI in the user's preferred application that handles the respective "
-"URI or file type."
+msgid "Open a URI in the user's preferred application that handles the respective URI or file type."
 msgstr "在用户首选的处理相应URI或文件类型的应用程序中打开URI。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -63,8 +56,7 @@ msgstr "在用户首选的处理相应URI或文件类型的应用程序中打开
 msgid "This command is installed with the package called **xdg-utils**."
 msgstr "该命令和名为**xdg-utils**的软件包一同安装。"
 
-#: ../../create_localized_help.py:80 ../../create_localized_help.py:92
-#: ../../create_localized_help.py:98
+#: ../../create_localized_help.py:80 ../../create_localized_help.py:92 ../../create_localized_help.py:98
 msgid "Installed by default in modern versions of Linux Mint."
 msgstr "现在的Linux Mint版本中已经默认安装。"
 
@@ -81,15 +73,8 @@ msgid "requests Python 3 module"
 msgstr "需要Python 3模块"
 
 #: ../../create_localized_help.py:87
-msgid ""
-"Requests allow you to send HTTP/1.1 requests. You can add headers, form "
-"data, multi-part files, and parameters with simple Python dictionaries, and "
-"access the response data in the same way. It's powered by httplib and "
-"urllib3, but it does all the hard work and crazy hacks for you."
-msgstr ""
-"请求允许您发送HTTP/1.1请求。您可以使用简单的Python字典添加标题、表单数据、多"
-"部分文件和参数，并以相同的方式访问响应数据。它由httplib和urllib3驱动，但它为"
-"您做了所有艰难的工作和疯狂的雇佣文人。"
+msgid "Requests allow you to send HTTP/1.1 requests. You can add headers, form data, multi-part files, and parameters with simple Python dictionaries, and access the response data in the same way. It's powered by httplib and urllib3, but it does all the hard work and crazy hacks for you."
+msgstr "请求允许您发送HTTP/1.1请求。您可以使用简单的Python字典添加标题、表单数据、多部分文件和参数，并以相同的方式访问响应数据。它由httplib和urllib3驱动，但它为您做了所有艰难的工作和疯狂的雇佣文人。"
 
 #: ../../create_localized_help.py:95
 msgid "Debian based distributions:"
@@ -110,19 +95,12 @@ msgid "The package is called **python-requests**."
 msgstr "该软件包名为**python-requests**。"
 
 #: ../../create_localized_help.py:106
-msgid ""
-"After installing any of the missing dependencies, Cinnamon needs to be "
-"restarted"
+msgid "After installing any of the missing dependencies, Cinnamon needs to be restarted"
 msgstr "安装任何缺少的依赖后，需要重新启动Cinnamon"
 
 #: ../../create_localized_help.py:108
-msgid ""
-"I don't use any other type of Linux distribution (Gentoo based, Slackware "
-"based, etc.). If any of the previous packages/modules are named differently, "
-"please, let me know and I will specify them in this help file."
-msgstr ""
-"我不使用任何其他类型的Linux发行版（Gentoo系、Slackware系，等等）。如果任何前"
-"面的软件包/模块以不同的方式命名，请告诉我，我将在此帮助文件中指定它们。"
+msgid "I don't use any other type of Linux distribution (Gentoo based, Slackware based, etc.). If any of the previous packages/modules are named differently, please, let me know and I will specify them in this help file."
+msgstr "我不使用任何其他类型的Linux发行版（Gentoo系、Slackware系，等等）。如果任何前面的软件包/模块以不同的方式命名，请告诉我，我将在此帮助文件中指定它们。"
 
 #: ../../create_localized_help.py:108
 msgid "Note:"
@@ -134,113 +112,68 @@ msgstr "用法"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:112
-msgid ""
-"There are 4 *translations mechanisms* (**Left click**, **Middle click**, "
-"**Hotkey #1** and **Hotkey #2**). Each translation mechanism can be "
-"configured with their own service providers, language pairs and hotkeys."
-msgstr ""
-"有4种*翻译机制*（**左键点击**、**中键点击**、**热键 #1**和**热键 #2**）。每个"
-"翻译机制都可以配置自己的服务提供者，语言配对和热键。"
+msgid "There are 4 *translations mechanisms* (**Left click**, **Middle click**, **Hotkey #1** and **Hotkey #2**). Each translation mechanism can be configured with their own service providers, language pairs and hotkeys."
+msgstr "有4种*翻译机制*（**左键点击**、**中键点击**、**热键 #1**和**热键 #2**）。每个翻译机制都可以配置自己的服务提供者，语言配对和热键。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:114
-msgid ""
-"**First translation mechanism (Left click):** Translates any selected text "
-"from any application on your system. A hotkey can be assigned to perform "
-"this task."
-msgstr ""
-"**第一个翻译机制(左键点击):**翻译您系统上的任何应用程序中选中的文本。可以分配"
-"热键执行此任务。"
+msgid "**First translation mechanism (Left click):** Translates any selected text from any application on your system. A hotkey can be assigned to perform this task."
+msgstr "**第一个翻译机制(左键点击):**翻译您系统上的任何应用程序中选中的文本。可以分配热键执行此任务。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:116
-msgid ""
-"**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left "
-"click**, but it will bypass the translation history. A hotkey can be "
-"assigned to perform this task."
-msgstr ""
-"**第一个翻译机制([[Ctrl]] + 左键点击):**同**左键点击**，但是会绕过翻译历史。"
-"可以分配热键执行此任务。"
+msgid "**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left click**, but it will bypass the translation history. A hotkey can be assigned to perform this task."
+msgstr "**第一个翻译机制([[Ctrl]] + 左键点击):**同**左键点击**，但是会绕过翻译历史。可以分配热键执行此任务。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:118
-msgid ""
-"**Second translation mechanism (Middle click):** Same as **Left click**."
+msgid "**Second translation mechanism (Middle click):** Same as **Left click**."
 msgstr "**第二个翻译机制(中键点击):**同**左键点击**。"
 
 #: ../../create_localized_help.py:121
-msgid ""
-"**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] "
-"+ **Left click**."
+msgid "**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] + **Left click**."
 msgstr "**第二个翻译机制([[Ctrl]] + 中键点击):**同[[Ctrl]] + **左键点击**。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:123
-msgid ""
-"**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
+msgid "**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured to perform a translation and a forced translation."
 msgstr "**第三个翻译机制(热键 #1):**可以配置两个热键用来执行翻译和强制翻译。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:125
-msgid ""
-"**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
+msgid "**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured to perform a translation and a forced translation."
 msgstr "**第四个翻译机制(热键 #2):**可以配置两个热键用来执行翻译和强制翻译。"
 
 #: ../../create_localized_help.py:126
-msgid ""
-"All translations are stored into the translation history. If a string of "
-"text was already translated in the past, the popup will display that stored "
-"translated text without making use of the provider's translation service."
-msgstr ""
-"所有的翻译都存储在翻译历史中。如果在以前已经翻译了一串文本，弹窗将会显示所存"
-"储的翻译文本而不使用提供者的翻译服务。"
+msgid "All translations are stored into the translation history. If a string of text was already translated in the past, the popup will display that stored translated text without making use of the provider's translation service."
+msgstr "所有的翻译都存储在翻译历史中。如果在以前已经翻译了一串文本，弹窗将会显示所存储的翻译文本而不使用提供者的翻译服务。"
 
 #: ../../create_localized_help.py:128
 msgid "About translation history"
 msgstr "关于翻译历史"
 
 #: ../../create_localized_help.py:129
-msgid ""
-"I created the translation history mechanism mainly to avoid the abuse of the "
-"translation services."
+msgid "I created the translation history mechanism mainly to avoid the abuse of the translation services."
 msgstr "我创建了翻译历史机制，主要是为了避免翻译服务的滥用。"
 
 #: ../../create_localized_help.py:130
-msgid ""
-"If the Google Translate service is \"abused\", Google may block temporarily "
-"your IP. Or what is worse, they could change the translation mechanism "
-"making this applet useless and forcing me to update its code."
-msgstr ""
-"如果Google Translate服务被滥用，Google可能暂时阻止您的IP。但更糟糕的是，他们"
-"可以改变翻译机制使得这个小程序无用，并迫使我更新其代码。"
+msgid "If the Google Translate service is \"abused\", Google may block temporarily your IP. Or what is worse, they could change the translation mechanism making this applet useless and forcing me to update its code."
+msgstr "如果Google Translate服务被滥用，Google可能暂时阻止您的IP。但更糟糕的是，他们可以改变翻译机制使得这个小程序无用，并迫使我更新其代码。"
 
 #: ../../create_localized_help.py:131
-msgid ""
-"If the Yandex Translate service is \"abused\", you are \"wasting\" your API "
-"keys quota and they will be blocked (temporarily or permanently)."
-msgstr ""
-"如果Yandex Translate服务被“滥用”，您正在“浪费”您的API密钥配额并将会（临时或永"
-"久）被封。"
+msgid "If the Yandex Translate service is \"abused\", you are \"wasting\" your API keys quota and they will be blocked (temporarily or permanently)."
+msgstr "如果Yandex Translate服务被“滥用”，您正在“浪费”您的API密钥配额并将会（临时或永久）被封。"
 
 #: ../../create_localized_help.py:132
-msgid ""
-"In the context menu of this applet is an item that can open the folder were "
-"the translation history file is stored. From there, the translation history "
-"file can be backed up or deleted."
-msgstr ""
-"在这个小程序的右键菜单中有一个条目可以打开翻译历史文件所存储的文件夹。从那里"
-"可以备份或删除翻译历史文件。"
+msgid "In the context menu of this applet is an item that can open the folder were the translation history file is stored. From there, the translation history file can be backed up or deleted."
+msgstr "在这个小程序的右键菜单中有一个条目可以打开翻译历史文件所存储的文件夹。从那里可以备份或删除翻译历史文件。"
 
 #: ../../create_localized_help.py:134
 msgid "NEVER edit the translation history file manually!!!"
 msgstr "不要手动编辑翻译历史文件！！！"
 
 #: ../../create_localized_help.py:136
-msgid ""
-"If the translation history file is deleted/renamed/moved, Cinnamon needs to "
-"be restarted."
+msgid "If the translation history file is deleted/renamed/moved, Cinnamon needs to be restarted."
 msgstr "如果删除/重命名/移动了翻译历史文件，需要重新启动Cinnamon。"
 
 #: ../../create_localized_help.py:138
@@ -248,9 +181,7 @@ msgid "How to get Yandex translator API keys"
 msgstr "获取Yandex translator API密钥的方法"
 
 #: ../../create_localized_help.py:139
-msgid ""
-"Visit one of the following links and register a Yandex account (or use one "
-"of the available social services)."
+msgid "Visit one of the following links and register a Yandex account (or use one of the available social services)."
 msgstr "访问以下其中一个链接并注册Yandex帐户（或使用其中一个可用的社交服务）。"
 
 #. TO TRANSLATORS: URL pointing to website in English
@@ -265,52 +196,30 @@ msgstr "俄语："
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:145
-msgid ""
-"Once you successfully finish creating your Yandex account, you can visit the "
-"link provided several times to create several API keys. **DO NOT ABUSE!!!**"
-msgstr ""
-"一旦您成功创建了您的Yandex帐户，您可以访问多次提供的链接来创建多个API密钥。**"
-"请勿滥用！！！**"
+msgid "Once you successfully finish creating your Yandex account, you can visit the link provided several times to create several API keys. **DO NOT ABUSE!!!**"
+msgstr "一旦您成功创建了您的Yandex帐户，您可以访问多次提供的链接来创建多个API密钥。**请勿滥用！！！**"
 
 #: ../../create_localized_help.py:146
-msgid ""
-"Once you have several API keys, you can add them to Popup Translator's "
-"settings window (one API key per line)."
-msgstr ""
-"一旦你有几个API密钥，你可以将其添加到Popup Translator的设置窗口（每行一个API"
-"密钥）。"
+msgid "Once you have several API keys, you can add them to Popup Translator's settings window (one API key per line)."
+msgstr "一旦你有几个API密钥，你可以将其添加到Popup Translator的设置窗口（每行一个API密钥）。"
 
 #: ../../create_localized_help.py:148
 msgid "Important notes about Yandex API keys"
 msgstr "关于Yandex API密钥的重要提示"
 
 #: ../../create_localized_help.py:149
-msgid ""
-"The API keys will be stored into a preference. Keep your API keys backed up "
-"in case you reset Popup Translator's preferences."
-msgstr ""
-"API密钥将会被存储到首选项中。保持备份您的API密钥，以防您重置Popup Translator"
-"的首选项。"
+msgid "The API keys will be stored into a preference. Keep your API keys backed up in case you reset Popup Translator's preferences."
+msgstr "API密钥将会被存储到首选项中。保持备份您的API密钥，以防您重置Popup Translator的首选项。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:151
-msgid ""
-"**NEVER make your API keys public!!!** The whole purpose of going to the "
-"trouble of getting your own API keys is that the only one \"consuming their "
-"limits\" is you and nobody else."
-msgstr ""
-"**不要公开您的API密钥！！！**获取您自己的API密钥遇到麻烦的原因只有一个，你和"
-"别人“正在消耗他们的极限”。"
+msgid "**NEVER make your API keys public!!!** The whole purpose of going to the trouble of getting your own API keys is that the only one \"consuming their limits\" is you and nobody else."
+msgstr "**不要公开您的API密钥！！！**获取您自己的API密钥遇到麻烦的原因只有一个，你和别人“正在消耗他们的极限”。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:153
-msgid ""
-"With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 "
-"million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) "
-"per month."
-msgstr ""
-"使用每个Yandex translator密钥，您**至多**每天可以翻译1.000.000 (1百万)个字"
-"符，**但不能超过**每个月10.000.000 (10百万)个字符。"
+msgid "With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) per month."
+msgstr "使用每个Yandex translator密钥，您**至多**每天可以翻译1.000.000 (1百万)个字符，**但不能超过**每个月10.000.000 (10百万)个字符。"
 
 #: ../../create_localized_help.py:175
 msgid "The following two sections are available only in English."
@@ -350,15 +259,11 @@ msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
 #: ../../create_localized_help.py:288
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
 #: ../../create_localized_help.py:289
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #: ../../create_localized_help.py:295
@@ -366,25 +271,16 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
 #: ../../create_localized_help.py:296
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:298
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内名为**localizations.sh**的脚本安装本地化。"
 
 #: ../../create_localized_help.py:299
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
 
 #: appletHelper.py:310
@@ -599,9 +495,7 @@ msgid "Unable to execute file/command '%s':"
 msgstr "无法执行文件/命令'%s'："
 
 #. 0dyseus@PopupTranslator->metadata.json->description
-msgid ""
-"Simple translator applet that will allow to display any selected text from "
-"any application on a system in a popup."
+msgid "Simple translator applet that will allow to display any selected text from any application on a system in a popup."
 msgstr "允许在弹窗中显示从系统上任意程序选中的任意文本的简单翻译器小程序。"
 
 #. 0dyseus@PopupTranslator->metadata.json->contributors
@@ -609,9 +503,7 @@ msgid "See this xlet help file."
 msgstr "查看该xlet帮助文件。"
 
 #. 0dyseus@PopupTranslator->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@PopupTranslator->metadata.json->name
@@ -684,9 +576,7 @@ msgid "Enable logging"
 msgstr "启用日志记录"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_loggin_enabled->tooltip
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
+msgid "It enables the ability to log the output of several functions used by the applet."
 msgstr "它能够记录小程序使用的一些函数的输出。"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_3->description
@@ -700,13 +590,8 @@ msgstr "用以执行强制翻译的键盘快捷键"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_4->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_2->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_1->tooltip
-msgid ""
-"Choose a keybinding to perform a FORCED translation. A \"forced translation"
-"\" forces the translation of any string stored on the translation history "
-"and overwrites the existing one."
-msgstr ""
-"选择用以执行强制翻译的键绑定。“强制翻译”强制任何字符串的翻译储存在翻译历史上"
-"并覆盖已有的翻译。"
+msgid "Choose a keybinding to perform a FORCED translation. A \"forced translation\" forces the translation of any string stored on the translation history and overwrites the existing one."
+msgstr "选择用以执行强制翻译的键绑定。“强制翻译”强制任何字符串的翻译储存在翻译历史上并覆盖已有的翻译。"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_style_for_language_pair->description
 msgid "Language pair style"
@@ -723,21 +608,17 @@ msgstr "API密钥"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_yandex_api_keys->tooltip
 msgid ""
 "Enter one API key per line.\n"
-"Read the help file (Help item on this applet context menu) found inside this "
-"applet folder to know how to get free Yandex API keys."
+"Read the help file (Help item on this applet context menu) found inside this applet folder to know how to get free Yandex API keys."
 msgstr ""
 "每行输入一个API密钥。\n"
-"阅读小程序文件夹中的帮助文件（帮助条目在此小程序的右键菜单）以了解如何获取免"
-"费的 Yandex API 密钥。"
+"阅读小程序文件夹中的帮助文件（帮助条目在此小程序的右键菜单）以了解如何获取免费的 Yandex API 密钥。"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_width_to_trigger_word_wrap->description
 msgid "Width to trigger word wrap"
 msgstr "触发自动换行的宽度"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
-msgid ""
-"The \"Source text\" and \"Target text\" columns on the history window will "
-"wrap its text at the width defined by this setting."
+msgid "The \"Source text\" and \"Target text\" columns on the history window will wrap its text at the width defined by this setting."
 msgstr "历史窗口上的“源文本”和“目标文本”列将以此设置定义的宽度进行换行。"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_custom_label_for_applet->description
@@ -834,7 +715,5 @@ msgstr "页脚样式"
 #~ msgid "Translation Mechanisms"
 #~ msgstr "翻译机制"
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
 #~ msgstr "错误报告和功能请求应当在此小程序下方链接的仓库上报告。"
