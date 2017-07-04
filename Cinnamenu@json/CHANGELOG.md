@@ -22,6 +22,7 @@ Changelog
   * Removed automatic icon scaling.
   *  Fixed Opera bookmarks.
   * Fixed the missing gda library error message.
+  * Improved performance. (YMMV)
 
 ### 1.3.1
 
