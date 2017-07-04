@@ -18,9 +18,6 @@ const OrnamentType = {
     ICON: 3
 };
 
-const TODO_LIST_MAX_LENGTH = 100;
-const ENTRY_ITEM_MAX_LENGTH = 75;
-
 Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(aStr) {
@@ -565,6 +562,10 @@ NewTaskEntry.prototype = {
             can_focus: true
         });
 
+        this.newTask.clutter_text.set_single_line_mode(false);
+        this.newTask.clutter_text.set_line_wrap(true);
+        this.newTask.clutter_text.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
+
         let icon = new St.Icon({
             icon_name: "system-run",
             icon_size: 16,
@@ -588,7 +589,6 @@ NewTaskEntry.prototype = {
         });
 
         let _ct = this.newTask.get_clutter_text();
-        _ct.set_max_length(ENTRY_ITEM_MAX_LENGTH);
 
         // Callback to add section when ENTER is press
         let conn = _ct.connect("key-press-event", Lang.bind(this, this._onKeyPressEvent));
@@ -748,8 +748,9 @@ NewTaskEntry.prototype = {
             return true;
         }
 
-        if (symbol == Clutter.KEY_Return ||
-            symbol == Clutter.KEY_KP_Enter) {
+        if ((!this.altKey && !this.shiftKey) &&
+            (symbol == Clutter.KEY_Return ||
+                symbol == Clutter.KEY_KP_Enter)) {
             this._log && debug("'new_task' signal emitted");
             this.emit("new_task", aEntry.get_text());
             aEntry.set_text("");
@@ -1218,43 +1219,43 @@ TasksListItem.prototype = {
     },
 
     _draw_section: function() {
-            this._clear();
+        this._clear();
 
-            this.tasksContainer = new TasksContainer();
-            this.tasksContainer._delegated_section = this;
-            this.menu.addMenuItem(this.tasksContainer);
+        this.tasksContainer = new TasksContainer();
+        this.tasksContainer._delegated_section = this;
+        this.menu.addMenuItem(this.tasksContainer);
 
-            // Initiate the task count
-            this.n_tasks = 0;
+        // Initiate the task count
+        this.n_tasks = 0;
 
-            // Initiate completed count
-            this.n_completed = 0;
+        // Initiate completed count
+        this.n_completed = 0;
 
-            // Add tasks item in the section
-            let i = 0,
-                iLen = this.tasks.length;
-            for (; i < iLen; i++)
-                this._add_task(i);
+        // Add tasks item in the section
+        let i = 0,
+            iLen = this.tasks.length;
+        for (; i < iLen; i++)
+            this._add_task(i);
 
-            // Update the title of the section with the right task count
-            // and notify the ToDo list applet if this count changed.
-            this._set_text();
+        // Update the title of the section with the right task count
+        // and notify the ToDo list applet if this count changed.
+        this._set_text();
 
-            // If there is no task in the section,show the delete button.
-            if (this.n_tasks === 0) {
-                this.delete_btn.set_width(-1);
-                this.delete_btn.show();
-            }
+        // If there is no task in the section,show the delete button.
+        if (this.n_tasks === 0) {
+            this.delete_btn.set_width(-1);
+            this.delete_btn.show();
+        }
 
-            // Add the NewTaskEntry to allow adding new tasks in this section.
-            this.newTaskEntry = new NewTaskEntry(this._applet);
-            this.newTaskEntry._delegated_section = this;
-            this.newTaskEntry.menu = this.tasksContainer;
+        // Add the NewTaskEntry to allow adding new tasks in this section.
+        this.newTaskEntry = new NewTaskEntry(this._applet);
+        this.newTaskEntry._delegated_section = this;
+        this.newTaskEntry.menu = this.tasksContainer;
 
-            let conn = this.newTaskEntry.connect("new_task", Lang.bind(this, this._create_task));
-            this.connections.push([this.newTaskEntry, conn]);
+        let conn = this.newTaskEntry.connect("new_task", Lang.bind(this, this._create_task));
+        this.connections.push([this.newTaskEntry, conn]);
 
-            this.menu.addMenuItem(this.newTaskEntry);
+        this.menu.addMenuItem(this.newTaskEntry);
     },
 
     destroy: function() {
@@ -1611,6 +1612,5 @@ function getStack() {
 }
 
 /*
-exported TODO_LIST_MAX_LENGTH,
-         DefaultExampleTasks
+exported DefaultExampleTasks
  */

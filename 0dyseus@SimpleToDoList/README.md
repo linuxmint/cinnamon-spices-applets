@@ -1,11 +1,27 @@
 <h2 style="color:red;">Bug reports, feature requests and contributions</h2>
-<span style="color:red;">
-If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
-</span>
+<p style="color:red;">
+Bug reports, feature requests and contributions should be done on this xlet's repository linked next.
+</p>
 
-## Simple ToDo List applet description
+<table><tbody>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/issues.svg"></td>
+<td><a href="https://github.com/Odyseus/CinnamonTools"><strong style="font-size: 1.2em">
+Bug reports/Feature requests/Contributions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/help.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html"><strong style="font-size: 1.2em">
+Localized help
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/contributors.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-contributors"><strong style="font-size: 1.2em">
+Contributors/Mentions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/changelog.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-changelog"><strong style="font-size: 1.2em">
+Full change log
+</strong></a></td></tr>
 
-Applet based on two gnome-shell extensions ([Todo list](https://github.com/bsaleil/todolist-gnome-shell-extension) and [Section Todo List](https://github.com/tomMoral/ToDoList)). It allows to create simple ToDo lists from a menu on the panel.
+</tbody></table>
 
 ## Compatibility
 
@@ -14,18 +30,24 @@ Applet based on two gnome-shell extensions ([Todo list](https://github.com/bsale
 ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg)
 ![Cinnamon 3.4](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.4.svg)
 
-## Features
+<span style="color:red;"><strong>Do not install on any other version of Cinnamon.</strong></span>
 
+## Description
+
+Applet based on two gnome-shell extensions ([Todo list](https://github.com/bsaleil/todolist-gnome-shell-extension) and [Section Todo List](https://github.com/tomMoral/ToDoList)). It allows to create simple ToDo lists from a menu on the panel.
+
+## Applet usage and features
+
+The usage of this applet is very simple. Each task list is represented by a sub menu and each sub menu item inside a sub menu represents a task.
+
+- To add a new tasks list, simply focus the **New tasks list...** entry, give a name to the tasks list and press <kbd>Enter</kbd>.
+- To add a new task, simply focus the **New task...** entry, give a name to the task and press <kbd>Enter</kbd>.
 - All tasks lists and tasks can be edited in-line.
 - Tasks can be marked as completed by changing the checked state of their sub menu items.
 - Each tasks list can have its own settings for sorting tasks (by name and/or by completed state), remove task button visibility and completed tasks visibility.
 - Each tasks list can be saved as individual TODO files and also can be exported into a file for backup purposes.
-- Tasks can be reordered by simply dragging them inside the task list they belong to (only if all automatic reordering options for the tasks list are disabled).
+- Tasks can be reordered by simply dragging them inside the tasks list they belong to (only if all automatic sorting options for the tasks list are disabled).
 - Tasks can be deleted by simply pressing the delete task button (if visible).
 - Colorized priority tags support. The background and text colors of a task can be colorized depending on the @tag found inside the task text.
-- Configurable hotkey to open close the menu.
+- Configurable hotkey to open/close the menu.
 - Read the tooltips of each option on this applet settings window for more details.
-
-#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html)
-#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-contributors)
-#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-changelog)
