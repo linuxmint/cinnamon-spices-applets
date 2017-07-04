@@ -140,7 +140,6 @@ CategoryListButton.prototype = {
         });
       }
       this.addActor(this.icon);
-      this.icon.realize();
     }
 
     this.categoryNameText = categoryNameText;
@@ -1004,7 +1003,7 @@ GroupButton.prototype = {
   },
 
   _onButtonReleaseEvent: function () {
-    if (this.icon.icon_name.indexOf('view') === -1) {
+    if (this._user || this.icon.icon_name.indexOf('view') === -1) {
       this._parent.menu.close();
     }
     this.buttonReleaseCallback();

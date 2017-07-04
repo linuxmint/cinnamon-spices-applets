@@ -35,8 +35,8 @@ const AppFavorites = imports.ui.appFavorites;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Tweener = imports.ui.tweener;
-const DT = imports.misc.timers.DebugTimer;
-const dt = new DT('1')
+/*const DT = imports.misc.timers.DebugTimer;
+const dt = new DT('1')*/
 
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 const fuzzy = AppletDir.fuzzy.fuzzy
@@ -891,7 +891,7 @@ CinnamenuApplet.prototype = {
       let match = null;
       if (pattern) {
         for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-          match = fuzzy.match(pattern, bookmark[searchableProps[z]], fuzzyOptions)
+          match = fuzzy(pattern, bookmark[searchableProps[z]], fuzzyOptions)
           if (bookmark[searchableProps[z]] && match.score > 0.6) {
             bookmark.score = match.score;
             bookmark[searchableProps[z]] = match.result;
@@ -975,7 +975,7 @@ CinnamenuApplet.prototype = {
         let match = null;
         if (pattern) {
           for (let z = 0, len = searchableProps.length; z < len; z++) {
-            match = fuzzy.match(pattern, recentItem[searchableProps[z]], fuzzyOptions)
+            match = fuzzy(pattern, recentItem[searchableProps[z]], fuzzyOptions)
             if (recentItem[searchableProps[z]] && match.score > 0.6) {
               recentItem.score = match.score;
               recentItem[searchableProps[z]] = match.result;
@@ -1024,7 +1024,7 @@ CinnamenuApplet.prototype = {
         let searchableProps = ['name', 'keywords', 'description'];
         let match = null;
         for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-          match = fuzzy.match(pattern, app[searchableProps[z]], fuzzyOptions)
+          match = fuzzy(pattern, app[searchableProps[z]], fuzzyOptions)
           if (app[searchableProps[z]] && match.score > 0.4) {
             app.score = match.score;
             app[searchableProps[z]] = match.result;
@@ -1060,7 +1060,7 @@ CinnamenuApplet.prototype = {
   },
 
   _displayApplications: function(appList) {
-    dt.start();
+    //dt.start();
     if (!appList) {
       return false;
     }
@@ -1133,12 +1133,11 @@ CinnamenuApplet.prototype = {
       }
     }
     this.columnsCount = columnsCount;
-    dt.stop();
+    //dt.stop();
   },
 
 
   _onMenuKeyPress: function(actor, event) {
-    // TODO - Add key navigation for context menus
     this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
 
