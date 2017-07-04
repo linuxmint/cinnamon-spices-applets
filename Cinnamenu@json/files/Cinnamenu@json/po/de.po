@@ -41,30 +41,8 @@ msgid "Run with NVIDIA GPU"
 msgstr "Mit NVIDIA-GPU ausführen"
 
 #: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Firefox-Lesezeichen durchsuchen ist deaktiviert"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Wenn Sie Firefox-Lesezeichen durchsuchen wollen, müssen Sie die "
-"erforderlichen Pakete installieren: libgir1.2-gda-5.0 [Ubuntu] oder libgda-"
-"sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Midori-Lesezeichen durchsuchen ist deaktiviert"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Wenn Sie Midori-Lesezeichen durchsuchen wollen, müssen Sie die "
-"erforderlichen Pakete installieren: libgir1.2-gda-5.0 [Ubuntu] oder libgda-"
-"sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 Paket für Firefox und Midori Lesezeichen erforderlich."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,8 +77,8 @@ msgid "Places"
 msgstr "Orte"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Kürzlich"
+msgid "Recent Files"
+msgstr "Zuletzt verwendete Dateien"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -325,3 +303,6 @@ msgid ""
 msgstr ""
 "Legt fest, ob die Anwendungsbeschreibung auf den Anwendungsknöpfen angezeigt "
 "wird."
+
+msgid "Clear List"
+msgstr "Liste Leeren"

@@ -43,28 +43,8 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "غنو-مينيو: تم تعطيل البحث في علامات فيرفكس"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
-"لتفعيل البحث بعلامات فيرفكس، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
-"أو libgda-sqlite لفيدورا"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "غنو-مينيو: تم تعطيل البحث في علامات ميدوري"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"لتفعيل البحث بعلامات ميدوري، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
-"أو libgda-sqlite لفيدورا"
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,7 +79,7 @@ msgid "Places"
 msgstr "الأماكن"
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr "الحديثة"
 
 #: panel.js:1757
@@ -320,4 +300,7 @@ msgstr "
 msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
+msgstr ""
+
+msgid "Clear List"
 msgstr ""

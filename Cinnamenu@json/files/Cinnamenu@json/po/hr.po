@@ -47,29 +47,8 @@ msgstr "Deinstaliraj"
 msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Pretraga Firefox zabilješki je onemogućena"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ako želite pretraživati Firefox zabilješke, morate instalirati potrebne "
-"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Pretraga Midori zabilješki je onemogućena"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ako želite pretraživati Midori zabilješke, morate instalirati potrebne "
-"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Paket gir1.2-gda-5.0 potreban za oznake Firefox i Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -104,8 +83,8 @@ msgid "Places"
 msgstr "Lokacije"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Nedavno"
+msgid "Recent Files"
+msgstr "Nedavne datoteke"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -339,3 +318,6 @@ msgid ""
 " buttons."
 msgstr ""
 "Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
+
+msgid "Clear List"
+msgstr "Obriši Popis"

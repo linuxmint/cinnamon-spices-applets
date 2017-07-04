@@ -43,25 +43,9 @@ msgstr ""
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Ricerca segnalibri Firefox disabilitata"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Ricerca segnalibri Midori disabilitata"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Il pacchetto gir1.2-gda-5.0 è richiesto per i segnalibri di Firefox "
+"e di Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -96,7 +80,7 @@ msgid "Places"
 msgstr "Posizioni"
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr "Recenti"
 
 #: panel.js:1757
@@ -287,133 +271,6 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid ""
-#~ "If you want to search Firefox bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "Se vuoi ricercare i segnalibi di Firefox, devi installare i seguenti "
-#~ "pacchetti: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-
-#~ msgid ""
-#~ "If you want to search Midori bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "Se vuoi ricercare i segnalibi di Midori, devi installare i seguenti "
-#~ "pacchetti: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-
-#~ msgid "Web"
-#~ msgstr "Web"
-
-#~ msgid "Favorites"
-#~ msgstr "Favorites"
-
-#~ msgid "Frequent Apps"
-#~ msgstr "Frequent Apps"
-
-#~ msgid "Restart Shell"
-#~ msgstr "Riavvia la Shell"
-
-#~ msgid "Suspend"
-#~ msgstr "Suspend"
-
-#~ msgid "Shutdown"
-#~ msgstr "Arresta"
-
-#~ msgid "Logout User"
-#~ msgstr "Logout dell'utente"
-
-#~ msgid "Preferences"
-#~ msgstr "Preferenze"
-
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Stylesheet cinnamenu non trovato"
-
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Impossibile avviare \"%s\""
-
-#~ msgid "Browse Network"
-#~ msgstr "Esplora rete"
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>Impostazioni Pannello</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Disabilita attività hot corner"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Rimuovi pulsante Vista dal pannello"
-
-#~ msgid "Label for View button"
-#~ msgstr "Etichetta per il pulsante Vista"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Use icon with View button"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Rimuovi pulsante Applicazioni dal pannello"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Etichetta per il pulsante Applicazioni"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Use icon with Apps button"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Rimuovi pulsante Menu dal pannello"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Label for Menu button"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Use icon with Menu button"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Disabilita pulsante Menu hot spot"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Disabilita scorciatoia tastiera pulsante Menu"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Impostazioni Menu</b>"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Hide Shortcuts Panel"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Stile visualizzazione Menu"
-
-#~ msgid "Large"
-#~ msgstr "Large"
-
-#~ msgid "Medium"
-#~ msgstr "Medium"
-
-#~ msgid "Small"
-#~ msgstr "Small"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Icons to display on Shortcuts Panel"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Applicazioni di Avvio sul display"
-
-#~ msgid "All"
-#~ msgstr "All"
-
-#~ msgid "Frequent"
-#~ msgstr "Frequent"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Modo visuale di default per applicazioni"
-
-#~ msgid "Category selection method"
-#~ msgstr "Metodo di selezione della categoria"
-
 msgid "Show bookmarks and places"
 msgstr ""
 
@@ -444,4 +301,7 @@ msgstr ""
 msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
+msgstr ""
+
+msgid "Clear List"
 msgstr ""

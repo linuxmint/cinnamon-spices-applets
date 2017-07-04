@@ -46,25 +46,8 @@ msgstr "卸载"
 msgid "Run with NVIDIA GPU"
 msgstr "使用NVIDIA GPU运行"
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu：搜索Firefox书签已禁用"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "如果您想要搜索Firefox书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu：搜索Midori书签已禁用"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "如果您想要搜索Midori书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox和Midori书签所需的gir1.2-gda-5.0包。"
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,8 +82,8 @@ msgid "Places"
 msgstr "位置"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "最近"
+msgid "Recent Files"
+msgstr "最近的文件"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -329,3 +312,6 @@ msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
 msgstr "选择是否在应用程序按钮上显示应用程序说明。"
+
+msgid "Clear List"
+msgstr "清除列表"

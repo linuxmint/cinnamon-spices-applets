@@ -40,25 +40,8 @@ msgstr ""
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Firefox ブックマークの検索は使用できません"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Midori ブックマークの検索は使用できません"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "FirefoxとMidoriのブックマークにはgir1.2-gda-5.0パッケージが必要です。"
 
 #: panel.js:1578
 msgid "Grid View"
@@ -93,7 +76,7 @@ msgid "Places"
 msgstr "場所"
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr "最近"
 
 #: panel.js:1757
@@ -315,3 +298,6 @@ msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
 msgstr "アプリケーションボタンにアプリケーションの説明を表示するかどうかを選択します。"
+
+msgid "Clear List"
+msgstr ""

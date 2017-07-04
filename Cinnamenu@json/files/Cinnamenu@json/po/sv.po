@@ -46,29 +46,8 @@ msgstr "Avinstallera"
 msgid "Run with NVIDIA GPU"
 msgstr "Kör med NVIDIA GPU"
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Sök i Firefox bokmärken inaktiverat"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Om du vill söka i Firefox bokmärken, måste du installera nödvändiga paket: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Sök i Midori bokmärken inaktiverat"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Om du vill söka i Midoris bokmärken, måste du installera nödvändiga paket: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-paketet krävs för Firefox och Midori-bokmärken."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -103,8 +82,8 @@ msgid "Places"
 msgstr "Platser"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Tidigare"
+msgid "Recent Files"
+msgstr "Tidigare filer"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -333,3 +312,6 @@ msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
 msgstr "Välj om programbeskrivningar skall visas på programknappar."
+
+msgid "Clear List"
+msgstr "Rensa listan"

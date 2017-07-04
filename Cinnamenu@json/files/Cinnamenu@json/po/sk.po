@@ -41,29 +41,8 @@ msgstr ""
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: Vyhľadávanie záložiek aplikácie Firefox je zakázané"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ak chcete vyhľadávať záložky aplikácie Firefox, musíte nainštalovať potrebné "
-"balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: Vyhľadávanie záložiek aplikácie Midori je zakázané"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ak chcete vyhľadávať záložky aplikácie Midori, musíte nainštalovať potrebné "
-"balíky: libgir1.2-gda-5.0 [Ubuntu] alebo libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Balík gir1.2-gda-5.0 je potrebný pre záložky Firefox a Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -98,7 +77,7 @@ msgid "Places"
 msgstr "Miesta"
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr "Nedávne"
 
 #: panel.js:1757
@@ -319,4 +298,7 @@ msgstr ""
 msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
+msgstr ""
+
+msgid "Clear List"
 msgstr ""

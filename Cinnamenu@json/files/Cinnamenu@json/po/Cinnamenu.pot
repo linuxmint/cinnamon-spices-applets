@@ -45,24 +45,7 @@ msgstr ""
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr ""
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr ""
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 
 #: panel.js:1578
@@ -98,7 +81,7 @@ msgid "Places"
 msgstr ""
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr ""
 
 #: panel.js:1757
@@ -329,3 +312,7 @@ msgid ""
 "Choose whether or not to show the application description on the application"
 " buttons."
 msgstr ""
+
+msgid "Clear List"
+msgstr ""
+

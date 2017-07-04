@@ -45,29 +45,8 @@ msgstr "Удалить"
 msgid "Run with NVIDIA GPU"
 msgstr "Запустить с NVIDIA GPU"
 
-#: panel.js:533
-msgid "Cinnamenu: Search Firefox bookmarks disabled"
-msgstr "Cinnamenu: поиск по закладкам Firefox отключен"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Для включения поиска по закладкам Firefox необходимо установить "
-"дополнительные пакеты: libgir1.2-gda-5.0 [Ubuntu] или libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Cinnamenu: Search Midori bookmarks disabled"
-msgstr "Cinnamenu: поиск по закладкам Midori отключен"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Для включения поиска по закладкам Midori необходимо установить "
-"дополнительные пакеты: libgir1.2-gda-5.0 [Ubuntu] или libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0, необходимый для закладок Firefox и Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -102,8 +81,8 @@ msgid "Places"
 msgstr "Места"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Недавние"
+msgid "Recent Files"
+msgstr "Недавние файлы"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -325,3 +304,6 @@ msgid ""
 " buttons."
 msgstr ""
 "Выберите будут ли показываться примечания к программам под их заголовком"
+
+msgid "Clear List"
+msgstr "Очистить список"
