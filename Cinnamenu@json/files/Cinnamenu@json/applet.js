@@ -334,7 +334,7 @@ CinnamenuApplet.prototype = {
   // handler for when favorites change
   _onFavoritesChanged: function() {
     this.favorites = this.appFavorites.getFavorites();
-    this._selectCategory('favorites');
+    this._switchApplicationsView(true);
   },
 
   // handler for when icons change
@@ -1190,16 +1190,18 @@ CinnamenuApplet.prototype = {
         enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
         if (enteredContextMenuItemExists) {
           contextMenuChildren[refContextMenuItemIndex]._delegate.handleLeave();
+        } else {
+          itemChildren[refItemIndex]._delegate.handleLeave();
         }
       } else {
         itemChildren[refItemIndex]._delegate.handleLeave();
       }
 
     }
-    if (enteredCategoryExists && !ctrlKey) {
+    if (enteredCategoryExists) {
       categoryChildren[refCategoryIndex]._delegate.handleLeave();
     }
-    if (enteredPowerGroupItemExists && !ctrlKey) {
+    if (enteredPowerGroupItemExists) {
       powerGroupChildren[refPowerGroupItemIndex]._delegate.handleLeave();
     }
     /*log2('symbol', symbol)
