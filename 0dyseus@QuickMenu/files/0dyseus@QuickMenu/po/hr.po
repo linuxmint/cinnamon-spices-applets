@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@QuickMenu1.05\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@QuickMenu 1.09\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-05-13 20:35-0300\n"
 "PO-Revision-Date: 2017-05-08 13:19+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
@@ -15,9 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. NOTE: This string could be left blank because it's a default string,
 #. so it's already translated by Cinnamon. It's up to the translators.
@@ -55,15 +54,11 @@ msgid "Applet usage"
 msgstr ""
 
 #: ../../create_localized_help.py:64
-msgid ""
-"Menu items to .desktop files will be displayed with the icon and name "
-"declared inside the .desktop files themselves."
+msgid "Menu items to .desktop files will be displayed with the icon and name declared inside the .desktop files themselves."
 msgstr ""
 
 #: ../../create_localized_help.py:67
-msgid ""
-"The menu can be kept open while activating menu items by pressing [[Ctrl]] + "
-"**Left click** or with **Middle click**."
+msgid "The menu can be kept open while activating menu items by pressing [[Ctrl]] + **Left click** or with **Middle click**."
 msgstr ""
 
 #: ../../create_localized_help.py:69
@@ -71,38 +66,26 @@ msgid "How to set a different icon for each sub-menu"
 msgstr ""
 
 #: ../../create_localized_help.py:72
-msgid ""
-"Create a file at the same level as the folders that will be used to create "
-"the sub-menus."
+msgid "Create a file at the same level as the folders that will be used to create the sub-menus."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:74
-msgid ""
-"The file name can be customized, doesn't need to have an extension name and "
-"can be a hidden file (a dot file). By default is called "
-"**0_icons_for_sub_menus.json**."
+msgid "The file name can be customized, doesn't need to have an extension name and can be a hidden file (a dot file). By default is called **0_icons_for_sub_menus.json**."
 msgstr ""
 
 #: ../../create_localized_help.py:76
-msgid ""
-"Whatever name is chosen for the file, it will be automatically ignored and "
-"will never be shown on the menu."
+msgid "Whatever name is chosen for the file, it will be automatically ignored and will never be shown on the menu."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:78
-msgid ""
-"The path to the icon has to be a full path. A path starting with **~/** can "
-"be used and will be expanded to the user's home folder."
+msgid "The path to the icon has to be a full path. A path starting with **~/** can be used and will be expanded to the user's home folder."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:80
-msgid ""
-"If any sub-folder has more folders that need to have custom icons, just "
-"create another **0_icons_for_sub_menus.json** file at the same level that "
-"those folders."
+msgid "If any sub-folder has more folders that need to have custom icons, just create another **0_icons_for_sub_menus.json** file at the same level that those folders."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -110,13 +93,11 @@ msgstr ""
 msgid "The content of the file is a *JSON object* and has to look as follows:"
 msgstr ""
 
-#: ../../create_localized_help.py:90 ../../create_localized_help.py:92
-#: ../../create_localized_help.py:94 ../../create_localized_help.py:96
+#: ../../create_localized_help.py:90 ../../create_localized_help.py:92 ../../create_localized_help.py:94 ../../create_localized_help.py:96
 msgid "Folder name"
 msgstr ""
 
-#: ../../create_localized_help.py:91 ../../create_localized_help.py:93
-#: ../../create_localized_help.py:95 ../../create_localized_help.py:97
+#: ../../create_localized_help.py:91 ../../create_localized_help.py:93 ../../create_localized_help.py:95 ../../create_localized_help.py:97
 msgid "Icon name or icon path for Folder name"
 msgstr ""
 
@@ -126,10 +107,7 @@ msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:103
-msgid ""
-"JSON *language* is very strict. Just be sure to ONLY use double quotes. And "
-"the last key/value combination DOESN'T have to end with a comma (**Folder "
-"name #n** in the previous example)."
+msgid "JSON *language* is very strict. Just be sure to ONLY use double quotes. And the last key/value combination DOESN'T have to end with a comma (**Folder name #n** in the previous example)."
 msgstr ""
 
 #. TO TRANSLATORS: This is a placeholder.
@@ -154,15 +132,11 @@ msgid "IMPORTANT!!!"
 msgstr ""
 
 #: ../../create_localized_help.py:212
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
 #: ../../create_localized_help.py:213
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
 #: ../../create_localized_help.py:219
@@ -170,40 +144,25 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
 #: ../../create_localized_help.py:220
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:222
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
 #: ../../create_localized_help.py:223
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
 #. 0dyseus@QuickMenu->metadata.json->description
-msgid ""
-"Easily and quickly create a menu based on the files/folders found inside an "
-"specific folder."
-msgstr ""
-"Lako i brzo stvorite izbornike temeljene na datotekama/mapama pronađenim "
-"unutar zadane mape."
+msgid "Easily and quickly create a menu based on the files/folders found inside an specific folder."
+msgstr "Lako i brzo stvorite izbornike temeljene na datotekama/mapama pronađenim unutar zadane mape."
 
 #. 0dyseus@QuickMenu->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti "
-"podneseni na poveznici xlet repozitorija ispod."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti podneseni na poveznici xlet repozitorija ispod."
 
 #. 0dyseus@QuickMenu->metadata.json->name
 msgid "Quick Menu"
@@ -227,14 +186,11 @@ msgstr "Automatski nadopuni izbornik"
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_autoupdate->tooltip
 msgid ""
-"If enabled, the applet will monitor the main folder for added/deleted/"
-"renamed files/folders and rebuild the menu.\n"
+"If enabled, the applet will monitor the main folder for added/deleted/renamed files/folders and rebuild the menu.\n"
 "If disabled, the menu will have to be updated manually from its context menu."
 msgstr ""
-"Ako je omogućeno, aplet će nadgledati glavnu mapu za dodane/obrisane/"
-"preimenovane datoteke/mape i ponovno će izgraditi izbornik.\n"
-"Ako je onemogućeno, izbornik će biti potrebno nadopuniti ručno iz njegovog "
-"sadržajnog izbornika."
+"Ako je omogućeno, aplet će nadgledati glavnu mapu za dodane/obrisane/preimenovane datoteke/mape i ponovno će izgraditi izbornik.\n"
+"Ako je onemogućeno, izbornik će biti potrebno nadopuniti ručno iz njegovog sadržajnog izbornika."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_show_submenu_icons->description
 msgid "Display sub-menu icons"
@@ -272,9 +228,7 @@ msgstr "Prikaži skrivene datoteke"
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_files->tooltip
 msgid "If enabled, hidden files will be used to create menu items."
-msgstr ""
-"Ako je omogućeno, skrivene datoteke će se koristiti za stvaranje stavki "
-"izbornika."
+msgstr "Ako je omogućeno, skrivene datoteke će se koristiti za stvaranje stavki izbornika."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_use_different_icons_for_sub_menus->description
 msgid "Allow sub-menus to each have their own icon"
@@ -282,12 +236,8 @@ msgstr "Dopusti podizbornicima da svaki ima svoju ikonu"
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_use_different_icons_for_sub_menus->tooltip
 #. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icons_file_name->tooltip
-msgid ""
-"Read this applet help for details about this option usage (Applet context "
-"menu > Help item)."
-msgstr ""
-"Pročitajte pomoć ovog apleta za pojedinosti o upotrebi ove mogućnosti (Aplet "
-"izbornik > stavka pomoći)."
+msgid "Read this applet help for details about this option usage (Applet context menu > Help item)."
+msgstr "Pročitajte pomoć ovog apleta za pojedinosti o upotrebi ove mogućnosti (Aplet izbornik > stavka pomoći)."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_hotkey->description
 msgid "Keyboard shortcut to open and close the menu"
@@ -300,12 +250,10 @@ msgstr "Automatski sakrij otvorene podizbornike (EKSPERIMENTALNO/NESTABILNO)"
 #. 0dyseus@QuickMenu->settings-schema.json->pref_auto_close_opened_sub_menus->tooltip
 msgid ""
 "If enabled, the previously opened sub-menu will be automatically closed.\n"
-"It will only work with sub-menus created at the first level. Sub-menus "
-"inside other sub-menus are not affected."
+"It will only work with sub-menus created at the first level. Sub-menus inside other sub-menus are not affected."
 msgstr ""
 "Ako je omogućeno, prije otvoreni podizbornik će biti automatski zatvoren.\n"
-"Samo će raditi s podizbornicima stvorenim na prvoj razini. Podizbornici "
-"unutar ostalih podizbornika nisu obuhvaćeni."
+"Samo će raditi s podizbornicima stvorenim na prvoj razini. Podizbornici unutar ostalih podizbornika nisu obuhvaćeni."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_show_only_desktop_files->description
 msgid "Show only .desktop files"
@@ -316,10 +264,8 @@ msgid ""
 "If enabled, only .desktop files will be used to create the menu.\n"
 "If disabled, all file types will be used to create the menu."
 msgstr ""
-"Ako je omogućeno, samo će se koristiti .desktop datoteke za stvaranje "
-"izbornika.\n"
-"Ako je onemogućeno, sve vrste datoteka će se koristiti za stvaranje "
-"izbornika."
+"Ako je omogućeno, samo će se koristiti .desktop datoteke za stvaranje izbornika.\n"
+"Ako je onemogućeno, sve vrste datoteka će se koristiti za stvaranje izbornika."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_menu_item_icon_size->description
 msgid "Menu items icon size"
@@ -376,8 +322,7 @@ msgstr "Prikaži skrivene mape"
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_show_hidden_folders->tooltip
 msgid "If enabled, hidden sub folders will also be used to create sub-menus."
-msgstr ""
-"Ako je omogućeno, skrivene podmape će se koristiti za stvaranje podizbornika."
+msgstr "Ako je omogućeno, skrivene podmape će se koristiti za stvaranje podizbornika."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_icon_for_menus->description
 msgid "Icon for sub-menus"
@@ -405,12 +350,8 @@ msgid "Ignore sub folders"
 msgstr "Zanemari podmape"
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_ignore_sub_folders->tooltip
-msgid ""
-"If enabled, the sub folders found inside the main folder will be ignored and "
-"sub-menus will not be created."
-msgstr ""
-"Ako je omogućeno, podmape pronađene unutar glavne mape će biti zanemarene i "
-"podizbornici neće biti stvoreni."
+msgid "If enabled, the sub folders found inside the main folder will be ignored and sub-menus will not be created."
+msgstr "Ako je omogućeno, podmape pronađene unutar glavne mape će biti zanemarene i podizbornici neće biti stvoreni."
 
 #. 0dyseus@QuickMenu->settings-schema.json->pref_sub_menu_icons_file_name->description
 msgid "Name for the file containing the icons for sub-menus"
@@ -427,9 +368,5 @@ msgstr "Veličina ikona podizbornika"
 #~ msgid "Desktop"
 #~ msgstr "Radna površina"
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
-#~ "na poveznici repozitorija ovog apleta."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
+#~ msgstr "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na poveznici repozitorija ovog apleta."
