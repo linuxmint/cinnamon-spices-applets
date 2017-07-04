@@ -569,7 +569,7 @@ AppListGridButton.prototype = {
   },
 
   formatLabel: function (opts) {
-    let description = this.app.description;
+    let description = this.app.description ? this.app.description : '';
     if (this.description) {
       let diff = this.description.length - description.length;
       diff = Array(Math.abs(Math.ceil(diff))).join(' ');

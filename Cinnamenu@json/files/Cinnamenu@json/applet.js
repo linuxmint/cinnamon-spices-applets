@@ -941,7 +941,6 @@ CinnamenuApplet.prototype = {
         res.push({
           name: recentInfo.get_display_name(),
           icon: recentInfo.get_gicon(),
-          //mime: recentInfo.get_mime_type(),
           uri: recentInfo.get_uri(),
           description: recentInfo.get_uri(),
           type: ApplicationType._recent
@@ -957,8 +956,8 @@ CinnamenuApplet.prototype = {
           icon_name: 'edit-clear',
           icon_type: St.IconType.SYMBOLIC
         }),
-        uri: null,
-        description: null,
+        uri: '',
+        description: '',
         type: ApplicationType._recent
       });
     } else if (!pattern) {
