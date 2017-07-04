@@ -256,8 +256,6 @@ ApplicationContextMenuItem.prototype = {
   _init: function(appButton, label, action, iconName) {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
       focusOnHover: false,
-      activate: false,
-      hover: false
     });
     this.actor._delegate = this;
     this._appButton = appButton;
@@ -437,7 +435,7 @@ AppListGridButton.prototype = {
 
     if (this.app.description) {
       let slice = this.app.description.slice(0, 7);
-      if (slice === 'http://' || slice === 'file://') {
+      if (slice === 'https://' || slice === 'http://' || slice === 'file://') {
         this.app.description = this.app.description.slice(7);
       }
       if (this.app.description.slice(-1) === '/') {
@@ -620,7 +618,7 @@ AppListGridButton.prototype = {
     let clutterText = this.label.get_clutter_text();
     if (clutterText) {
       clutterText.set_markup(markup);
-      clutterText.ellipsize = opts.reset && opts.reset === 1 ? null : Pango.EllipsizeMode.END;
+      clutterText.ellipsize = Pango.EllipsizeMode.END;
     }
 
     if (this.isGridType) {
@@ -842,16 +840,20 @@ AppListGridButton.prototype = {
   },
 
   closeMenu: function () {
-    this.menu.close();
+    if (this.menu.menuIsOpen) {
+      this.menu.toggleMenu();
+    }
   },
 
-  toggleMenu: function () {
+  toggleMenu: function (fromClear) {
     if (this.appType !== ApplicationType._applications) {
       return false;
     }
 
     if (!this.menu.isOpen) {
-      this._parent._clearEnteredActors();
+      if (!fromClear) {
+        this._parent._clearEnteredActors();
+      }
       let children = this.menu.box.get_children();
       for (var i = 0, len = children.length; i < len; i++) {
         this.menu.box.remove_actor(children[i]);
@@ -885,7 +887,6 @@ AppListGridButton.prototype = {
       if (this.isGridType) {
         this.actor.raise_top();
       }
-
     } else {
       if (this.isGridType) {
         // Reset the actor depth.

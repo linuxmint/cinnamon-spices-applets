@@ -469,7 +469,7 @@ CinnamenuApplet.prototype = {
   },
 
   _onOpenStateToggled: function(menu, open) {
-    if (global.settings.get_boolean('panel-edit-mode') || this.menuIsOpen) {
+    if (global.settings.get_boolean('panel-edit-mode')) {
       return false;
     }
     if (this._appletEnterEventId > 0) {
@@ -496,13 +496,13 @@ CinnamenuApplet.prototype = {
       });
     } else {
       // Clear 'entered' actor
-      this._clearEnteredActors();
       if (this._appletEnterEventId > 0) {
         this.actor.handler_unblock(this._appletEnterEventId);
       }
       if (this.searchActive) {
         this.resetSearch();
       }
+      this._clearEnteredActors();
       this._clearApplicationsBox();
       // TBD - containers probably don't need to be destroyed. The more things Cinnamenu destroys over and over,
       // the less effective the GC seems to be. Refresh can handle this instead.
@@ -518,6 +518,7 @@ CinnamenuApplet.prototype = {
     this.destroyDisplayed();
     this._displayed = false;
     this._display();
+    this._clearEnteredActors();
     this.destroyAppButtons();
   },
 
@@ -737,11 +738,15 @@ CinnamenuApplet.prototype = {
     } else {
       return false;
     }
-    Tweener.addTween(adjustment, {
-      value: value,
-      time: 0.1,
-      transition: 'easeOutQuad'
-    });
+    if (this.enableAnimation) {
+      Tweener.addTween(adjustment, {
+        value: value,
+        time: 0.1,
+        transition: 'easeOutQuad'
+      });
+    } else {
+      adjustment.set_value(value);
+    }
   },
 
   _clearEnteredActors: function () {
@@ -752,7 +757,9 @@ CinnamenuApplet.prototype = {
         || actor._delegate.menu.isOpen);
     });
     if (refItemIndex > -1 && itemChildren[refItemIndex]) {
-      itemChildren[refItemIndex]._delegate.closeMenu();;
+      if (itemChildren[refItemIndex]._delegate.menu.isOpen) {
+        itemChildren[refItemIndex]._delegate.toggleMenu();
+      }
       itemChildren[refItemIndex]._delegate.handleLeave();
     }
     let categoryChildren = this.categoriesBox.get_children();
@@ -776,7 +783,6 @@ CinnamenuApplet.prototype = {
       let listActors = this.applicationsListBox.get_children();
       if (listActors) {
         for (let i = 0, len = listActors.length; i < len; i++) {
-          listActors[i]._delegate.closeMenu();
           this.applicationsListBox.remove_child(listActors[i]);
         }
       }
@@ -786,7 +792,6 @@ CinnamenuApplet.prototype = {
       let gridActors = this.applicationsGridBox.get_children();
       if (gridActors) {
         for (let i = 0, len = gridActors.length; i < len; i++) {
-          gridActors[i]._delegate.closeMenu();
           this.applicationsGridBox.remove_child(gridActors[i]);
         }
       }
@@ -1038,8 +1043,8 @@ CinnamenuApplet.prototype = {
     if (!appList) {
       return false;
     }
-    if (!this.theme) {
-      this.introspectTheme(()=>this._displayApplications(appList));
+    if (this.mainBox && !this.theme) {
+      this.introspectTheme(() => this._displayApplications(appList));
       return false;
     }
     let isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
@@ -1356,7 +1361,7 @@ CinnamenuApplet.prototype = {
       case symbol === Clutter.KEY_Escape:
       case symbol === Clutter.Escape:
         if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
-          itemChildren[refItemIndex]._delegate.toggleMenu(true);
+          itemChildren[refItemIndex]._delegate.toggleMenu();
           return true;
         }
       default:
@@ -1920,7 +1925,6 @@ CinnamenuApplet.prototype = {
 
   destroyAppButtons: function() {
     for (let i = 0, len = this._allItems.length; i < len; i++) {
-      this._allItems[i].closeMenu();
       this._allItems[i].destroy();
       this._allItems[i] = null;
     }
