@@ -35,8 +35,8 @@ const AppFavorites = imports.ui.appFavorites;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Tweener = imports.ui.tweener;
-/*const DT = imports.misc.timers.DebugTimer;
-const dt = new DT('1')*/
+const DT = imports.misc.timers.DebugTimer;
+const dt = new DT('1')
 
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 const fuzzy = AppletDir.fuzzy.fuzzy
@@ -141,7 +141,6 @@ CinnamenuApplet.prototype = {
     this._currentCategory = null;
     this.favorites = [];
     this._allItems = [];
-    this._applicationsViewMode = this.startupViewMode;
     this._searchTimeoutId = 0;
     this._searchIconClickedId = 0;
     this._activeContainer = null;
@@ -159,6 +158,7 @@ CinnamenuApplet.prototype = {
     this.placesManager = null;
     this._displayed = false;
     this.menuHeight = 530;
+    this.gridWidths = [0, 0, 0, 625, 700, 725, 900, 1025];
     this.fallbackDescription = '';
     if (this.showAppDescriptionsOnButtons) {
       this.fallbackDescription = 'No description available';
@@ -481,7 +481,7 @@ CinnamenuApplet.prototype = {
       }
       this.introspectTheme(()=>{
         // Load Startup Applications category
-        this._switchApplicationsView();
+        this._switchApplicationsView(false);
         this.appsGridColumnCount = this.appsGridColumnCount;
         // Set Category
         this.categoriesBox.show();
@@ -597,7 +597,6 @@ CinnamenuApplet.prototype = {
     }
     // Load 'all applications' category
     let allAppCategory = new CategoryListButton(this, 'all', t("All Applications"), 'computer');
-    this.allAppCategory = allAppCategory;
     this.categoriesBox.add_actor(allAppCategory.actor);
     let trees = [this.appSystem.get_tree()];
     for (let i = 0, len = trees.length; i < len; i++) {
@@ -680,13 +679,15 @@ CinnamenuApplet.prototype = {
     this._displayApplications(this._listWebBookmarks());
   },
 
-  _switchApplicationsView: function() {
-    this._applicationsViewMode = this.startupViewMode;
-    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+  _switchApplicationsView: function(fromToggle) {
+    this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     if (this.isListView) {
-      this.applicationsListBox.show();
+      this._lastGridWidth = this.applicationsGridBox.width
+      this.applicationsGridBox.width = this.applicationsListBox.width;
       this.applicationsGridBox.hide();
+      this.applicationsListBox.show();
     } else {
+      this.applicationsGridBox.width = this.gridWidths[this.appsGridColumnCount];
       this.applicationsListBox.hide();
       this.applicationsGridBox.show();
     }
@@ -700,6 +701,11 @@ CinnamenuApplet.prototype = {
       vscroll.get_adjustment().set_value(newScrollValue);
     }
     this._clearApplicationsBox();
+    if (fromToggle) {
+      this.destroyAppButtons();
+      this._resetDisplayApplicationsToStartup();
+      //this.mainBox.show();
+    }
   },
 
   _isNotInScrollView: function (button) {
@@ -750,7 +756,7 @@ CinnamenuApplet.prototype = {
   },
 
   _clearEnteredActors: function () {
-    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
     let itemChildren = this._activeContainer.get_children();
     let refItemIndex = _.findIndex(itemChildren, (actor) => {
@@ -1054,7 +1060,7 @@ CinnamenuApplet.prototype = {
   },
 
   _displayApplications: function(appList) {
-    //dt.start();
+    dt.start();
     if (!appList) {
       return false;
     }
@@ -1067,12 +1073,9 @@ CinnamenuApplet.prototype = {
     let columnsCount = 0;
     let rownum = 0;
 
-    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
-    //global.dump_gjs_stack();
     this.menuIsOpen = null;
-
-    //let appIndex = 0;
 
     let createAppButton = (app, appType, len, appIndex)=>{
       let appButton;
@@ -1130,13 +1133,13 @@ CinnamenuApplet.prototype = {
       }
     }
     this.columnsCount = columnsCount;
-    //dt.stop();
+    dt.stop();
   },
 
 
   _onMenuKeyPress: function(actor, event) {
     // TODO - Add key navigation for context menus
-    this.isListView = this._applicationsViewMode === ApplicationsViewMode.LIST;
+    this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
 
     let keyCode = event.get_key_code();
@@ -1322,6 +1325,8 @@ CinnamenuApplet.prototype = {
         } else {
           itemChildren[refItemIndex]._delegate.activate();
         }
+      } else if (enteredPowerGroupItemExists) {
+        powerGroupChildren[refPowerGroupItemIndex]._delegate._onButtonReleaseEvent();
       } else if (this.searchActive && itemChildren.length > 0) {
         _.first(itemChildren)._delegate.activate();
       }
@@ -1441,7 +1446,7 @@ CinnamenuApplet.prototype = {
       this._activeContainer.show();
     }
     if (!this._activeContainer) {
-      this._activeContainer = this._applicationsViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
+      this._activeContainer = this.startupViewMode === ApplicationsViewMode.LIST ? this.applicationsListBox : this.applicationsGridBox;
     }
     let apps = this._activeContainer.get_children();
     for (let i = 0, len = apps.length; i < len; i++) {
@@ -1571,21 +1576,10 @@ CinnamenuApplet.prototype = {
   },
 
   _display: function() {
+    this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     this._displayed = true;
 
     let section = new PopupMenu.PopupMenuSection();
-    this._dummySeparator = new PopupMenu.PopupSeparatorMenuItem();
-    this._dummySeparator.opacity = 0;
-    this._dummyButton = new St.Button({
-      style_class: 'button'
-    });
-    this._dummyButton.opacity = 0;
-    this._dummyButton.set_size(0, 0);
-    this._dummyButton2 = new St.Button({
-      style_class: 'system-menu-action'
-    });
-    this._dummyButton2.opacity = 0;
-    this._dummyButton2.set_size(0, 0);
 
     this.mainBox = new St.BoxLayout({
       style_class: 'menu-applications-outer-box',
@@ -1620,7 +1614,7 @@ CinnamenuApplet.prototype = {
       y_fill: false,
       height: this.menuHeight,
       y_align: St.Align.START,
-      style_class: 'vfade cinnamenu-categories-workspaces-scrollbox'
+      style_class: 'vfade menu-applications-scrollbox'
     });
 
     let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
@@ -1713,12 +1707,11 @@ CinnamenuApplet.prototype = {
       x_expand: true
     });
 
-    let widths = [0, 0, 0, 625, 700, 725, 900, 1025];
     this.applicationsGridBox = new St.Widget({
       layout_manager: new Clutter.GridLayout(),
       reactive: true,
       style_class: '',
-      width: widths[this.appsGridColumnCount]
+      width: this.gridWidths[this.appsGridColumnCount]
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
@@ -1733,7 +1726,7 @@ CinnamenuApplet.prototype = {
     this.applicationsBoxWrapper.add(this.answerText, {
       x_fill: false,
       y_fill: false,
-      x_align: St.Align.START,
+      x_align: St.Align.MIDDLE,
       y_align: St.Align.START
     });
     this.applicationsBoxWrapper.add(this.applicationsGridBox, {
@@ -1746,7 +1739,8 @@ CinnamenuApplet.prototype = {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
-      y_align: St.Align.START
+      y_align: St.Align.START,
+      expand: false
     });
     this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
     this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
@@ -1767,6 +1761,39 @@ CinnamenuApplet.prototype = {
       style_class: ''
     });
 
+    let user = new GroupButton(
+      this,
+      'user',
+      16,
+      '',
+      '',
+      () => Util.spawnCommandLine('cinnamon-settings user')
+    );
+    let _t = this;
+    let viewModeToggle = new GroupButton(
+      this,
+      this.isListView ? 'view-list-symbolic' : 'view-grid-symbolic',
+      16,
+      this.isListView ? t("Grid View") : t("List View"),
+      this.isListView ? t("Switch to grid view") : t("Switch to list view"),
+      function (actor) {
+        //let parent = actor.get_parent();
+        if (_t.isListView) {
+          _t.isListView = false;
+          this.setIcon('view-list-symbolic');
+          this.name = t("List View");
+          this.description = t("Switch to list view");
+          _t.settings.setValue('startup-view-mode', 1);
+        } else {
+          _t.isListView = true;
+          this.setIcon('view-grid-symbolic');
+          this.name = t("Grid View");
+          this.description = t("Switch to grid view");
+          _t.settings.setValue('startup-view-mode', 0);
+        }
+        _t._switchApplicationsView(true);
+      }
+    );
     let lockScreen = new GroupButton(
       this,
       'system-lock-screen',
@@ -1811,6 +1838,8 @@ CinnamenuApplet.prototype = {
       x_align: St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
     };
+    this.powerGroupBox.add(user.actor, powerGroupBoxChildProperties);
+    this.powerGroupBox.add(viewModeToggle.actor, powerGroupBoxChildProperties);
     this.powerGroupBox.add(lockScreen.actor, powerGroupBoxChildProperties);
     this.powerGroupBox.add(logoutUser.actor, powerGroupBoxChildProperties);
     this.powerGroupBox.add(systemShutdown.actor, powerGroupBoxChildProperties);
@@ -1849,22 +1878,11 @@ CinnamenuApplet.prototype = {
       y_align: St.Align.START
     });
 
-    // bottomPane packs horizontally
-    let bottomPaneSpacer1 = new St.Label({
-      text: ''
-    });
-    this.bottomPane.add(this._dummyButton);
-    this.bottomPane.add(this._dummyButton2);
     this.bottomPane.add(this.powerGroupBox, {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
       y_align: St.Align.START
-    });
-    this.bottomPane.add(bottomPaneSpacer1, {
-      expand: false,
-      x_align: St.Align.MIDDLE,
-      y_align: St.Align.MIDDLE
     });
 
     this.bottomPane.add(this.searchBox, {
@@ -1882,7 +1900,6 @@ CinnamenuApplet.prototype = {
 
     // add section as menu item
     this.menu.addMenuItem(section);
-    this.menu.addMenuItem(this._dummySeparator);
 
     // Set height constraints on scrollboxes (we also set height when menu toggle)
     this.applicationsScrollBox.add_constraint(new Clutter.BindConstraint({

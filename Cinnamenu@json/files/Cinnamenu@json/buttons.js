@@ -5,6 +5,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Pango = imports.gi.Pango;
+const AccountsService = imports.gi.AccountsService;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const FileUtils = imports.misc.fileUtils;
@@ -38,11 +39,6 @@ const ApplicationType = {
   _applications: 0,
   _places: 1,
   _recent: 2
-};
-
-const ApplicationsViewMode = {
-  LIST: 0,
-  GRID: 1
 };
 
 /**
@@ -480,14 +476,14 @@ AppListGridButton.prototype = {
       style: 'width: 5px; height: 5px; background-color: ' + this._parent.theme.mainBoxBorderColor + '; margin-bottom: 2px; border-radius: 128px;',
       layout_manager: new Clutter.BinLayout(),
       x_expand: true,
-      y_expand: true,
+      y_expand: false,
       x_align: Clutter.ActorAlign.CENTER,
       y_align: Clutter.ActorAlign.END
     });
 
     this.buttonBox = new St.BoxLayout({
       vertical: !this._parent.isListView,
-      width: 250
+      width: 240
     });
     let iconDotContainer = this._parent.isListView ? '_iconContainer' : 'buttonBox';
     if (this.icon) {
@@ -953,17 +949,30 @@ GroupButton.prototype = {
       adjustedIconSize = iconSize;
     }
     this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
-    this.actor.add_style_class_name('menu-favorites-button');
+    this.actor.set_style_class_name('menu-favorites-button');
     this.actor._delegate = this;
     this.entered = null;
 
     if (iconName && iconSize) {
-      this._iconSize = adjustedIconSize;
-      this.icon = new St.Icon({
-        icon_name: iconName,
+      let iconObj = {
         icon_size: adjustedIconSize,
         icon_type: adjustedIconSize <= 25 ? St.IconType.SYMBOLIC : St.IconType.FULLCOLOR
-      });
+      };
+      if (iconName === 'user') {
+        this.defaultAvatar = new Gio.ThemedIcon({
+          name: 'avatar-default'
+        });
+        iconObj.gicon = this.defaultAvatar;
+        this.name = GLib.get_user_name();
+        this._user = AccountsService.UserManager.get_default().get_user(this.name);
+        this._userLoadedId = this._user.connect('notify::is_loaded', Lang.bind(this, this._onUserChanged));
+        this._userChangedId = this._user.connect('changed', Lang.bind(this, this._onUserChanged));
+        setTimeout(Lang.bind(this, this._onUserChanged), 0);
+      } else {
+        iconObj.icon_name = iconName;
+      }
+      this._iconSize = adjustedIconSize;
+      this.icon = new St.Icon(iconObj);
       this.addActor(this.icon);
       this.icon.realize();
     }
@@ -972,9 +981,34 @@ GroupButton.prototype = {
     this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
   },
 
+  _onUserChanged: function() {
+    if (this._user.is_loaded) {
+      this.name = this._user.get_real_name();
+      this._parent.selectedAppTitle.set_text(this.name);
+      this._parent.selectedAppDescription.set_text(this.description);
+      if (this.icon) {
+        let iconFileName = this._user.get_icon_file();
+        let iconFile = Gio.file_new_for_path(iconFileName);
+        let icon;
+        if (iconFile.query_exists(null)) {
+          icon = new Gio.FileIcon({
+            file: iconFile
+          });
+        } else {
+          icon = this.defaultAvatar;
+        }
+        this.icon.set_gicon(icon);
+        this.icon.realize();
+      }
+    }
+  },
+
   _onButtonReleaseEvent: function () {
-    this._parent.menu.close();
+    if (this.icon.icon_name.indexOf('view') === -1) {
+      this._parent.menu.close();
+    }
     this.buttonReleaseCallback();
+    return true;
   },
 
   handleEnter: function (actor) {
@@ -994,10 +1028,26 @@ GroupButton.prototype = {
     this._parent.selectedAppDescription.set_text('');
   },
 
+  setIcon: function(iconName) {
+    this.removeActor(this.icon);
+    this.icon.destroy();
+    this.icon = this.icon = new St.Icon({
+      icon_name: iconName,
+      icon_size: this._iconSize,
+      icon_type: St.IconType.FULLCOLOR
+    });
+    this.addActor(this.icon);
+    this.icon.realize();
+  },
+
   destroy: function() {
     this.label.destroy();
     if (this.icon) {
       this.icon.destroy();
+    }
+    if (this._user) {
+      this._user.disconnect(this._userLoadedId);
+      this._user.disconnect(this._userChangedId);
     }
     this._parent.selectedAppTitle.set_text('');
     this._parent.selectedAppDescription.set_text('');
