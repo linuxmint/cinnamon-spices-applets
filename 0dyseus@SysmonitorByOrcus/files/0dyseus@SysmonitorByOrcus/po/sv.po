@@ -5,7 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.13\n"
+"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.15\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-03 08:09+0200\n"
 "PO-Revision-Date: 2017-06-03 08:12+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
@@ -14,20 +15,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../create_localized_help.py:64
 msgid "Dependencies"
 msgstr "Beroenden"
 
 #: ../../create_localized_help.py:66
-msgid ""
-"The gtop library reads information about processes and the state of the "
-"system."
-msgstr ""
-"gtop-biblioteket läser information om processer och status för systemet."
+msgid "The gtop library reads information about processes and the state of the system."
+msgstr "gtop-biblioteket läser information om processer och status för systemet."
 
 #: ../../create_localized_help.py:67 ../../create_localized_help.py:78
 msgid "Debian based distributions:"
@@ -57,14 +55,8 @@ msgid "The package is called **libgtop2-devel**."
 msgstr "Paketet heter **libgtop2-devel**."
 
 #: ../../create_localized_help.py:77
-msgid ""
-"NetworkManager is a system network service that manages your network devices "
-"and connections, attempting to keep active network connectivity when "
-"available."
-msgstr ""
-"Nätverkshanteraren är en systemnätverkstjänst som hanterar dina "
-"nätverksenheter och anslutningar. Försöker hålla nätverksanslutningar "
-"aktiva, när tillgängliga."
+msgid "NetworkManager is a system network service that manages your network devices and connections, attempting to keep active network connectivity when available."
+msgstr "Nätverkshanteraren är en systemnätverkstjänst som hanterar dina nätverksenheter och anslutningar. Försöker hålla nätverksanslutningar aktiva, när tillgängliga."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:80
@@ -87,24 +79,12 @@ msgstr "Viktig notis:"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:90
-msgid ""
-"NetworkManager is only used if the **GTop** library version installed on a "
-"system is < **2.32** and doesn't support certain library calls. So, "
-"basically, if the network graph on this applet works without having "
-"installed NetworkManager, then you don't need to install it."
-msgstr ""
-"NetworkManager används endast om **GTop**-biblioteket version < **2.32** "
-"finns installerat i systemet och inte stödjer vissa biblioteksanrop. Så om "
-"nätverksdiagrammet på detta panelprogram fungerar utan att du har "
-"installerat \"NetworkManager\", behöver du heller inte installera det."
+msgid "NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it."
+msgstr "NetworkManager används endast om **GTop**-biblioteket version < **2.32** finns installerat i systemet och inte stödjer vissa biblioteksanrop. Så om nätverksdiagrammet på detta panelprogram fungerar utan att du har installerat \"NetworkManager\", behöver du heller inte installera det."
 
 #: ../../create_localized_help.py:92
-msgid ""
-"Restart Cinnamon after installing the packages for the applet to recognize "
-"them."
-msgstr ""
-"Starta om Cinnamon efter paketinstallationen så att panelprogrammet kan "
-"identifiera dem."
+msgid "Restart Cinnamon after installing the packages for the applet to recognize them."
+msgstr "Starta om Cinnamon efter paketinstallationen så att panelprogrammet kan identifiera dem."
 
 #: ../../create_localized_help.py:114
 msgid "The following two sections are available only in English."
@@ -144,51 +124,29 @@ msgid "IMPORTANT!!!"
 msgstr "VIKTIGT!!!"
 
 #: ../../create_localized_help.py:227
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
-msgstr ""
-"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
-"programmets funktioner."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner."
 
 #: ../../create_localized_help.py:228
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
-"kodförråd, på följande länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk."
 
 #: ../../create_localized_help.py:234
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Applets/Desklets/Extensions (xlets) översättning"
 
 #: ../../create_localized_help.py:235
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
-msgstr ""
-"Om denna xlet installerades från Cinnamons inställningar, installerades "
-"också alla översättningar automatiskt."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:237
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
-"kan översättningar installeras genom att köra skriptet **localizations.sh** "
-"från en terminal öppnad i programmappen."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet **localizations.sh** från en terminal öppnad i programmappen."
 
 #: ../../create_localized_help.py:238
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
-msgstr ""
-"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
-"följande instruktioner."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner."
 
 #: __init__.js:192
 msgid "CPU:"
@@ -230,34 +188,24 @@ msgid "Missing dependency!!!"
 msgstr "Saknat beroende!!!"
 
 #: applet.js:186
-msgid ""
-"This applet needs the GTop library installed on your system for it  to work."
-msgstr ""
-"Det här panelprogrammet behöver GTop-biblioteket installerat för att fungera."
+msgid "This applet needs the GTop library installed on your system for it  to work."
+msgstr "Det här panelprogrammet behöver GTop-biblioteket installerat för att fungera."
 
 #: applet.js:187
-msgid ""
-"Read this applet help for more details (Applet context menu > Help item)."
-msgstr ""
-"Läs programhjälpen för mer detaljerad information (Hjälp i kontextmenyn)."
+msgid "Read this applet help for more details (Applet context menu > Help item)."
+msgstr "Läs programhjälpen för mer detaljerad information (Hjälp i kontextmenyn)."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "See this xlet help file."
 msgstr "Se hjälpfilen för denna xlet."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
-"kodförråd, på nedanstående länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets kodförråd, på nedanstående länk."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->description
 msgid "Displays CPU, memory, swap, network usage and load in graphs."
-msgstr ""
-"Visar CPU-, minnes-, växlingsutrymmes-, nätverksanvändning och belastning i "
-"diagram."
+msgstr "Visar CPU-, minnes-, växlingsutrymmes-, nätverksanvändning och belastning i diagram."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->name
 msgid "System Monitor (Fork By Odyseus)"
@@ -279,8 +227,7 @@ msgstr "Starta om Cinnamon"
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
 msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
-msgstr ""
-"För att tillämpa dessa inställningar, måste Cinnamon startas om. Klicka här!"
+msgstr "För att tillämpa dessa inställningar, måste Cinnamon startas om. Klicka här!"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head0->description
 msgid "General settings"
@@ -324,12 +271,8 @@ msgid "Nice:"
 msgstr "Bra:"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->tooltip
-msgid ""
-"For those of us who suffer from the stupidity of using a theme with tooltips "
-"aligned to the center. ¬¬"
-msgstr ""
-"För oss som lider av det dumma i att använda teman med centrerade "
-"verktygsbeskrivningar. ¬¬"
+msgid "For those of us who suffer from the stupidity of using a theme with tooltips aligned to the center. ¬¬"
+msgstr "För oss som lider av det dumma i att använda teman med centrerade verktygsbeskrivningar. ¬¬"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->description
 msgid "Align tooltip text to the left"
