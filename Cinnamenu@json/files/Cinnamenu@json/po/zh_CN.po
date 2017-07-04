@@ -46,25 +46,8 @@ msgstr "卸载"
 msgid "Run with NVIDIA GPU"
 msgstr "使用NVIDIA GPU运行"
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu：搜索Firefox书签已禁用"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "如果您想要搜索Firefox书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu：搜索Midori书签已禁用"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr "如果您想要搜索Midori书签，您必须安装所需要的软件包：libgir1.2-gda-5.0 [Ubuntu]或libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox和Midori书签所需的gir1.2-gda-5.0包。"
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,8 +82,8 @@ msgid "Places"
 msgstr "位置"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "最近"
+msgid "Recent Files"
+msgstr "最近的文件"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -256,16 +239,6 @@ msgstr "当我移动鼠标到菜单上时打开菜单"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "启用当鼠标进入小程序时打开菜单"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "按可用空间缩放网格图标"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr "这将会使网格图标大小随应用程序显示的数量而变化。这将会覆盖网格图标大小选项。"
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "在应用程序列表中启用自动滚动"
@@ -307,3 +280,41 @@ msgstr "一个提供格式选项和书签的灵活菜单。"
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
+
+msgid "Show bookmarks and places"
+msgstr "显示书签和位置"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "选择是否在菜单中显示书签和位置。"
+
+msgid "Show application icons"
+msgstr "显示应用程序图标"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "选择是否显示应用程序的图标。"
+
+msgid "Show category icons"
+msgstr "显示类别图标"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "选择是否显示类别图标。"
+
+msgid "Enable filesystem path entry in search box"
+msgstr "在搜索框中启用文件系统路径条目"
+
+msgid "Allows path entry in the menu search box."
+msgstr "在菜单搜索框中允许路径条目。"
+
+msgid "Show application's description under their titles"
+msgstr "在应用程序的标题下方显示其描述"
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr "选择是否在应用程序按钮上显示应用程序说明。"
+
+msgid "Clear List"
+msgstr "清除列表"
+
+msgid "No recent documents"
+msgstr "没有最近的文档"

@@ -36,7 +36,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 
 const _appSystem = Cinnamon.AppSystem.get_default();
-//const _foundApps = _appSystem.initial_search(['firefox']);
 const _foundApps = _appSystem.lookup_desktop_wmclass('firefox');
 const _firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla',
   'firefox'

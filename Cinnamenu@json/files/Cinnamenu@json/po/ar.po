@@ -1,7 +1,7 @@
 # Mosaab Alzoubi <moceap@hotmail.com>, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:08+0100\n"
 "PO-Revision-Date: 2017-03-22 11:08+0100\n"
@@ -43,28 +43,8 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "غنو-مينيو: تم تعطيل البحث في علامات فيرفكس"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
-"لتفعيل البحث بعلامات فيرفكس، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
-"أو libgda-sqlite لفيدورا"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "غنو-مينيو: تم تعطيل البحث في علامات ميدوري"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"لتفعيل البحث بعلامات ميدوري، يجب أن تثبت الحزمة: libgir1.2-gda-5.0 لأوبنتو "
-"أو libgda-sqlite لفيدورا"
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,7 +79,7 @@ msgid "Places"
 msgstr "الأماكن"
 
 #: panel.js:1752
-msgid "Recent"
+msgid "Recent Files"
 msgstr "الحديثة"
 
 #: panel.js:1757
@@ -248,16 +228,6 @@ msgstr ""
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr ""
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr ""
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr ""
@@ -300,165 +270,40 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid "Webmarks"
-#~ msgstr "علامات الويب"
+msgid "Show bookmarks and places"
+msgstr ""
 
-#~ msgid "Favorites"
-#~ msgstr "المفضلة"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
 
-#~ msgid "Toggle Startup Apps View"
-#~ msgstr "التبديل بين عرض التطبيقات المبدئي"
+msgid "Show application icons"
+msgstr "
 
-#~ msgid "Frequent Apps"
-#~ msgstr "التطبيقات الشائعة"
+msgid "Choose whether or not to show icons on applications."
+msgstr "
 
-#~ msgid "Restart Shell"
-#~ msgstr "إعادة تشغيل غنوم"
+msgid "Show category icons"
+msgstr "
 
-#~ msgid "Suspend"
-#~ msgstr "علّق"
+msgid "Choose whether or not to show icons on categories."
+msgstr "
 
-#~ msgid "Shutdown"
-#~ msgstr "أطفئ"
+msgid "Enable filesystem path entry in search box"
+msgstr "
 
-#~ msgid "Logout User"
-#~ msgstr "اخرج"
+msgid "Allows path entry in the menu search box."
+msgstr "
 
-#~ msgid "Preferences"
-#~ msgstr "تفضيلات القائمة"
+msgid "Show application's description under their titles"
+msgstr "
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "لم يعثر على نمط عرض غنو-مينيو"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
 
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "تعذر بدء \"%s\""
+msgid "Clear List"
+msgstr ""
 
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>إعدادات الشريط</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "عطّل الزاوية النشطة"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "احذف زر العرض من الشريط"
-
-#~ msgid "Label for View button"
-#~ msgstr "عبارة زر العرض"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "استعمل رمز لزر العرض"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "احذف زر التطبيقات من الشريط"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "عبارة زر التطبيقات"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "استعمل رمز لزر التطبيقات"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "احذف زر القائمة من الشريط"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "عبارة زر القائمة"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "استعمل رمز لزر القائمة"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "عطل بقعة زر القائمة النشطة"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "عطل اختصار زر القائمة"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr "اختصار خاطئ. جرب F12، <Super>space، <Ctrl><Alt><Shift>a، إلخ."
-
-#~ msgid "Set Menu button position"
-#~ msgstr "اضبط موضع زر القائمة"
-
-#~ msgid "Left"
-#~ msgstr "يسار"
-
-#~ msgid "Center"
-#~ msgstr "وسط"
-
-#~ msgid "Right"
-#~ msgstr "يمين"
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>إعدادات القائمة</b>"
-
-#~ msgid "Hide User Options Panel"
-#~ msgstr "أخفِ شريط خيارات المستخدم"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "أخف شريط الاختصارات"
-
-#~ msgid "Menu layout size"
-#~ msgstr "حجم نمط القائمة"
-
-#~ msgid "Normal"
-#~ msgstr "عادي"
-
-#~ msgid "Compact"
-#~ msgstr "متراص"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "الرموز المعروضة بشريط الاختصارات"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "التطبيقات المعروضة بالبداية"
-
-#~ msgid "All"
-#~ msgstr "الكل"
-
-#~ msgid "Frequent"
-#~ msgstr "المتكررة"
-
-#~ msgid "None"
-#~ msgstr "لا شيء"
-
-#~ msgid "Number of columns in Application Grid"
-#~ msgstr "عدد الأعمدة في الشبكة"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "6"
-#~ msgstr "6"
-
-#~ msgid "7"
-#~ msgstr "7"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "النمط الافتراضي لعرض التطبيقات"
-
-#~ msgid "Hide Categories Panel"
-#~ msgstr "أخفِ شريط التصنيفات"
-
-#~ msgid "Category selection method"
-#~ msgstr "طريقة اختيار التصنيفات"
-
-#~ msgid "Hover"
-#~ msgstr "التمرير"
-
-#~ msgid "Click"
-#~ msgstr "النقر"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "حجم رموز شريط الاختصارات"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "حجم رموز قائمة التطبيقات"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "حجم رموز شبكة التطبيقات"
+msgid "No recent documents"
+msgstr ""

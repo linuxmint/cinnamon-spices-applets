@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-15 07:00+0200\n"
-"PO-Revision-Date: 2017-05-15 09:06+0200\n"
+"PO-Revision-Date: 2017-06-29 09:06+0200\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,29 +46,8 @@ msgstr "Avinstallera"
 msgid "Run with NVIDIA GPU"
 msgstr "Kör med NVIDIA GPU"
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Meny: Sök i Firefox bokmärken inaktiverat"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Om du vill söka i Firefox bokmärken, måste du installera nödvändiga paket: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Meny: Sök i Midori bokmärken inaktiverat"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Om du vill söka i Midoris bokmärken, måste du installera nödvändiga paket: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-paketet krävs för Firefox och Midori-bokmärken."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -103,8 +82,8 @@ msgid "Places"
 msgstr "Platser"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Tidigare"
+msgid "Recent Files"
+msgstr "Tidigare filer"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -260,18 +239,6 @@ msgstr "Öppna menyn när jag för muspekaren över den"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Aktivera menyn när muspekaren förs över panelikonen"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Skala ikonvyn efter tillgängligt utrymme"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Detta gör ikonvyns ikonstorlek variabel, beroende på hur många program som "
-"visas. Det åsidosätter alternativet för ikonstorlek."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivera automatisk skrollning i programlistan"
@@ -313,3 +280,41 @@ msgstr "En flexibel meny med formateringsalternativ och bokmärken."
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
+
+msgid "Show bookmarks and places"
+msgstr "Visa bokmärken och platser"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Välj om bokmärken och platser skall visas i menyn."
+
+msgid "Show application icons"
+msgstr "Visa programikoner"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Välj om programikoner skall visas."
+
+msgid "Show category icons"
+msgstr "Visa kategoriikoner"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Välj om kategoriikoner skall visas."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Aktivera filsystemsökvägar i sökfältet"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Tillåt filsystemsökvägar i menyns sökfält."
+
+msgid "Show application's description under their titles"
+msgstr "Visa programbeskrivningar under programnamnen"
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr "Välj om programbeskrivningar skall visas på programknappar."
+
+msgid "Clear List"
+msgstr "Rensa listan"
+
+msgid "Type to search..."
+msgstr "Skriv för att söka..."

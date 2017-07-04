@@ -46,25 +46,8 @@ msgstr ""
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Pesquisa nos favoritos Firefox desabilitada"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Pesquisa nos favoritos Midori desabilitada"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Pacote gir1.2-gda-5.0 necessário para os favoritos do Firefox e Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,8 +82,8 @@ msgid "Places"
 msgstr "Locais"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Recente"
+msgid "Recent Files"
+msgstr "Ficheiros recentes"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -248,16 +231,6 @@ msgstr ""
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr ""
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr ""
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr ""
@@ -300,141 +273,40 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid ""
-#~ "If you want to search Firefox bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "Se você quer pesquisar nos favoritos do Firefox, deve instalar os pacotes "
-#~ "requeridos: libgir1.2-gda-5.0 (Ubuntu) ou libgda-sqlite (Fedora)"
+msgid "Show bookmarks and places"
+msgstr ""
 
-#~ msgid ""
-#~ "If you want to search Midori bookmarks, you must install the required "
-#~ "pacakages: libgir1.2-gda-5.0 (Ubuntu) or libgda-sqlite (Fedora)"
-#~ msgstr ""
-#~ "Se você quer pesquisar nos favoritos Midori, deve instalar os pacotes "
-#~ "requeridos: libgir1.2-gda-5.0 (Ubuntu) ou libgda-sqlite (Fedora)"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
 
-#~ msgid "Web"
-#~ msgstr "Web"
+msgid "Show application icons"
+msgstr ""
 
-#~ msgid "Favorites"
-#~ msgstr "Favoritos"
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Aplicativos frequentes"
+msgid "Show category icons"
+msgstr ""
 
-#~ msgid "Restart Shell"
-#~ msgstr "Reiniciar o Shell"
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
 
-#~ msgid "Suspend"
-#~ msgstr "Suspender"
+msgid "Enable filesystem path entry in search box"
+msgstr ""
 
-#~ msgid "Shutdown"
-#~ msgstr "Desligar"
+msgid "Allows path entry in the menu search box."
+msgstr ""
 
-#~ msgid "Logout User"
-#~ msgstr "Encerrar sessão"
+msgid "Show application's description under their titles"
+msgstr ""
 
-#~ msgid "Preferences"
-#~ msgstr "Preferências"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Nenhuma folha de estilos do cinnamenu encontrada"
+msgid "Clear List"
+msgstr "Limpar lista"
 
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Falha ao carregar \"%s\""
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>Configurações do painel</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Desabilitar as atividades do canto superior"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Remover botão View do painel"
-
-#~ msgid "Label for View button"
-#~ msgstr "Rótulo para o botão View"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Usar ícone com o botão View"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Remover o botão Apps do painel"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Rótulo para o botão Apps"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Usar ícone com o botão Apps"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Remover o botão Menu do painel"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Rótulo para o botão Menu"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Usar ícone com o botão Menu"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Desabilitar ponto de acesso do botão Menu"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Desabilitar tecla de atalho do botão Menu"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Acelerador inválido. Tente F12, <Super>espaço, <Ctrl><Alt><Shift>a, etc."
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Configurações do menu</b>"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Ocultar painel de atalhos"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Tamanho do layout do menu"
-
-#~ msgid "Large"
-#~ msgstr "Grande"
-
-#~ msgid "Medium"
-#~ msgstr "Médio"
-
-#~ msgid "Small"
-#~ msgstr "Pequeno"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Ícones exibidos no painel de atalhos"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Aplicativos exibidos na inicialização"
-
-#~ msgid "All"
-#~ msgstr "Tudo"
-
-#~ msgid "Frequent"
-#~ msgstr "Frequente"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Modo de visualização para os aplicativos"
-
-#~ msgid "Category selection method"
-#~ msgstr "Método de seleção da categoria"
-
-#~ msgid "Hover"
-#~ msgstr "Foco"
-
-#~ msgid "Click"
-#~ msgstr "Clique"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "Tamanho dos ícones do painel de atalhos"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "Tamanho dos ícones da lista de aplicativos"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "Tamanho dos ícones da grade de aplicativos"
+msgid "No recent documents"
+msgstr "Sem documentos recentes"

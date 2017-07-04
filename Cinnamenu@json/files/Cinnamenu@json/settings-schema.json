@@ -1,21 +1,66 @@
 {
-  "cinnamenu": {
-    "type": "header",
-    "description": "Cinnamenu Settings"
-  },
-  "header0": {
-    "type": "header",
-    "description": "Menu Entries"
+  "layout" : {
+    "type" : "layout",
+    "pages" : ["panel", "menu"],
+    "panel" : {
+      "type" : "page",
+      "title" : "Panel",
+      "sections" : ["panel-appear", "panel-behave"]
+    },
+    "menu" : {
+      "type" : "page",
+      "title" : "Menu",
+      "sections" : ["menu-layout", "menu-icons", "menu-behave"]
+    },
+    "panel-appear" : {
+      "type" : "section",
+      "title" : "Appearance",
+      "keys" : ["menu-icon-custom", "menu-icon", "menu-label"]
+    },
+    "panel-behave" : {
+      "type" : "section",
+      "title" : "Behavior",
+      "keys" : [
+        "overlay-key",
+        "activate-on-hover",
+        "hover-delay",
+        "enable-animation"
+      ]
+    },
+    "menu-layout" : {
+      "type" : "section",
+      "title" : "Layout and content",
+      "keys" : [
+        "menu-editor-button",
+        "startup-view-mode",
+        "show-apps-description-on-buttons",
+        "apps-grid-column-count",
+        "show-places",
+        "enable-bookmarks"
+      ]
+    },
+    "menu-icons" : {
+      "type" : "section",
+      "title" : "Icons",
+      "keys" : [
+        "show-category-icons",
+        "category-icon-size",
+        "show-application-icons",
+        "apps-list-icon-size",
+        "apps-grid-icon-size"
+      ]
+    },
+    "menu-behave" : {
+      "type" : "section",
+      "title" : "Behavior",
+      "keys" : ["enable-autoscroll", "search-filesystem"]
+    }
   },
   "menu-editor-button": {
     "type": "button",
     "description": "Open the menu editor",
     "callback": "_launch_editor",
     "tooltip": "Press this button to customize your menu entries."
-  },
-  "header1": {
-    "type": "header",
-    "description": "Appearance"
   },
   "menu-icon-custom": {
     "type": "checkbox",
@@ -38,8 +83,10 @@
     "tooltip": "Set the custom menu button icon name"
   },
   "category-icon-size": {
+    "indent": true,
+    "dependency": "show-category-icons",
     "type": "spinbutton",
-    "default": 24,
+    "default": 18,
     "min": 16,
     "max": 256,
     "step": 1,
@@ -48,8 +95,10 @@
     "tooltip": "Category icon size"
   },
   "apps-list-icon-size": {
+    "indent": true,
+    "dependency": "show-application-icons",
     "type": "spinbutton",
-    "default": 24,
+    "default": 18,
     "min": 16,
     "max": 256,
     "step": 1,
@@ -58,34 +107,16 @@
     "tooltip": "Applications list icon size"
   },
   "apps-grid-icon-size": {
+    "indent": true,
+    "dependency": "show-application-icons",
     "type": "spinbutton",
-    "default": 48,
+    "default": 64,
     "min": 16,
     "max": 256,
     "step": 1,
     "units": "pixels",
     "description": "Applications grid icon size",
     "tooltip": "Applications grid icon size"
-  },
-  "apps-grid-icon-scale": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Scale grid icons by available space",
-    "tooltip": "This makes the grid icon size variable depending on how many apps are being shown. This overrides the grid icon size option."
-  },
-  "apps-grid-label-width": {
-    "type": "spinbutton",
-    "default": 96,
-    "min": 16,
-    "max": 256,
-    "step": 1,
-    "units": "pixels",
-    "description": "Applications grid label width",
-    "tooltip": "Applications grid label width"
-  },
-  "header2": {
-    "type": "header",
-    "description": "Behavior"
   },
   "overlay-key": {
     "type": "keybinding",
@@ -99,6 +130,8 @@
     "tooltip": "Enable opening the menu when the mouse enters the applet"
   },
   "hover-delay": {
+    "indent": true,
+    "dependency": "activate-on-hover",
     "type": "spinbutton",
     "default": 0,
     "min": 0,
@@ -145,5 +178,35 @@
     "units": "columns",
     "description": "Number of columns in apps grid",
     "tooltip": "Number of columns in apps grid"
+  },
+  "show-places" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu."
+  },
+  "show-application-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Show application icons",
+    "tooltip" : "Choose whether or not to show icons on applications."
+  },
+  "show-category-icons" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Show category icons",
+    "tooltip" : "Choose whether or not to show icons on categories."
+  },
+  "search-filesystem" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box."
+  },
+  "show-apps-description-on-buttons": {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Show application's description under their titles",
+    "tooltip" : "Choose whether or not to show the application description on the application buttons."
   }
 }
