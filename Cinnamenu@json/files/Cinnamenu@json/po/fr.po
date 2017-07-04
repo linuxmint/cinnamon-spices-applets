@@ -304,3 +304,6 @@ msgstr "Afficher ou masquer la description du programme sous son icône"
 
 msgid "Clear List"
 msgstr "Effacer la liste"
+
+msgid "No recent documents"
+msgstr "Aucun document récent"

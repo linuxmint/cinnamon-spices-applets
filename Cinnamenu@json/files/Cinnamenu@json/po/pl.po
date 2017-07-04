@@ -301,3 +301,6 @@ msgstr ""
 
 msgid "Clear List"
 msgstr ""
+
+msgid "No recent documents"
+msgstr ""

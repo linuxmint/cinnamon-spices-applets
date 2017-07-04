@@ -321,3 +321,6 @@ msgstr ""
 
 msgid "Clear List"
 msgstr "Obriši Popis"
+
+msgid "No recent documents"
+msgstr "Nema nedavnih dokumenata"

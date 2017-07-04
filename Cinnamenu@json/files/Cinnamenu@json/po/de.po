@@ -306,3 +306,6 @@ msgstr ""
 
 msgid "Clear List"
 msgstr "Liste Leeren"
+
+msgid "No recent documents"
+msgstr "Keine kürzlich verwendeten Dokumente"

@@ -315,3 +315,6 @@ msgstr "选择是否在应用程序按钮上显示应用程序说明。"
 
 msgid "Clear List"
 msgstr "清除列表"
+
+msgid "No recent documents"
+msgstr "没有最近的文档"

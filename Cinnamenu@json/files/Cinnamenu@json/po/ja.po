@@ -301,3 +301,6 @@ msgstr "アプリケーションボタンにアプリケーションの説明を
 
 msgid "Clear List"
 msgstr ""
+
+msgid "No recent documents"
+msgstr ""
