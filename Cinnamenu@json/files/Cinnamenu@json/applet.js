@@ -931,7 +931,7 @@ CinnamenuApplet.prototype = {
     let recentFiles = this.recentManager.get_items();
     let res = []
 
-    for (let i = 0, len = recentFiles.length; i < len; i++) {
+    for (let i = 0; i < 24; i++) {
       let recentInfo = recentFiles[i];
       if (recentInfo.exists()) {
         res.push({
