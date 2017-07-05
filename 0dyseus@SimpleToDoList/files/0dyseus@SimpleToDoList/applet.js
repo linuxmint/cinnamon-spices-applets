@@ -50,6 +50,7 @@ MyApplet.prototype = {
             this.menu.connect("open-state-changed", Lang.bind(this, this._onOpenStateChanged));
             this.menuManager.addMenu(this.menu);
 
+            this.set_applet_tooltip(_(this.metadata.name));
             this._load();
             this._buildUI();
 
@@ -95,7 +96,6 @@ MyApplet.prototype = {
                 this.newTaskList.set_style("padding: 7px 9px !important;min-width: 150px;");
 
                 let entryNewTask = this.newTaskList.get_clutter_text();
-                entryNewTask.set_max_length($.TODO_LIST_MAX_LENGTH);
 
                 // Callback to add section when Enter is pressed
                 entryNewTask.connect("key-press-event", Lang.bind(this, function(aActor, aEvent) {
@@ -121,12 +121,11 @@ MyApplet.prototype = {
     // Fill UI with the section items
     _fill_ui: function() {
         try {
-
             this._log && this._log && $.debug("Fill UI");
 
-            // Check if tasks file exists
             this._clear();
-            this.n_tasks = 0;
+            this.n_total_tasks = 0;
+            this.n_total_completed_tasks = 0;
 
             for (let id in this.sections) {
                 if (typeof this.sections[id] === "function")
@@ -154,7 +153,7 @@ MyApplet.prototype = {
 
         this.todosSec.addMenuItem(item);
 
-        this.n_tasks += item.n_tasks;
+        this.n_total_tasks += item.n_tasks;
 
         item.connect("save_signal", Lang.bind(this, this._saveTasks));
         item.connect("remove_section_signal", Lang.bind(this, this._remove_section));
@@ -162,10 +161,11 @@ MyApplet.prototype = {
     },
 
     _update_counter: function(aItem, aDiff) {
-        this.n_tasks -= aDiff;
+        this.n_total_tasks -= aDiff;
 
-        if (this.pref_show_tasks_counter_on_applet)
+        if (this.pref_show_tasks_counter_on_applet) {
             this._updateLabel();
+        }
     },
 
     _clear: function() {
@@ -459,12 +459,27 @@ MyApplet.prototype = {
         }
 
         // this._buildUI is triggered after a delay. If I call _updateLabel without a delay,
-        // this.n_tasks will be undefined.
+        // this.n_total_tasks will be undefined.
         this._update_label_id = Mainloop.timeout_add(500, Lang.bind(this, function() {
             if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) { // no menu label if in a vertical panel
                 this.set_applet_label("");
             } else {
                 if (this.pref_custom_label_for_applet !== "" || this.pref_show_tasks_counter_on_applet) {
+                    if (this.pref_show_tasks_counter_on_applet) {
+                        this.n_total_completed_tasks = 0;
+                        let children = this.todosSec._getMenuItems();
+                        let i = 0,
+                            iLen = children.length;
+
+                        for (; i < iLen; i++) {
+                            let section = children[i];
+
+                            if (section.hasOwnProperty("n_completed") && section instanceof $.TasksListItem) {
+                                this.n_total_completed_tasks += section.n_completed;
+                            }
+                        }
+                    }
+
                     let label = _(this.pref_custom_label_for_applet);
                     // Add an empty space only if the label isn't empty.
                     label += ((this.pref_show_tasks_counter_on_applet &&
@@ -472,13 +487,13 @@ MyApplet.prototype = {
                         " " :
                         "");
                     label += (this.pref_show_tasks_counter_on_applet ?
-                        "(" + (this.n_tasks || 0) + ")" :
+                        "(" + (this.n_total_completed_tasks || 0) + "/" + (this.n_total_tasks || 0) + ")" :
                         "");
 
                     this.set_applet_label(label);
 
                     // Just in case.
-                    if (typeof this.n_tasks !== "number")
+                    if (typeof this.n_total_tasks !== "number")
                         this._updateLabel();
                 } else {
                     this.set_applet_label("");

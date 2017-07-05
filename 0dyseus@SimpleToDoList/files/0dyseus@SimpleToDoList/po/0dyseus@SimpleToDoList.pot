@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0dyseus@SimpleToDoList 1.01\n"
-"POT-Creation-Date: 2017-06-12 22:20-0300\n"
+"POT-Creation-Date: 2017-06-30 23:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,219 +15,227 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 
-#: ../../create_localized_help.py:64
+#: ../../create_localized_help.py:76
+msgid "Description"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:79
+msgid "Applet based on two gnome-shell extensions ([Todo list](https://github.com/bsaleil/todolist-gnome-shell-extension) and [Section Todo List](https://github.com/tomMoral/ToDoList)). It allows to create simple ToDo lists from a menu on the panel."
+msgstr ""
+
+#: ../../create_localized_help.py:81
 msgid "Applet usage and features"
 msgstr ""
 
-#: ../../create_localized_help.py:65
+#: ../../create_localized_help.py:83
 msgid "The usage of this applet is very simple. Each task list is represented by a sub menu and each sub menu item inside a sub menu represents a task."
 msgstr ""
 
-#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:68
+#: ../../create_localized_help.py:87
 msgid "To add a new tasks list, simply focus the **New tasks list...** entry, give a name to the tasks list and press [[Enter]]."
 msgstr ""
 
-#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:71
+#: ../../create_localized_help.py:90
 msgid "To add a new task, simply focus the **New task...** entry, give a name to the task and press [[Enter]]."
 msgstr ""
 
-#: ../../create_localized_help.py:72
+#: ../../create_localized_help.py:91
 msgid "All tasks lists and tasks can be edited in-line."
 msgstr ""
 
-#: ../../create_localized_help.py:73
+#: ../../create_localized_help.py:92
 msgid "Tasks can be marked as completed by changing the checked state of their sub menu items."
 msgstr ""
 
-#: ../../create_localized_help.py:74
+#: ../../create_localized_help.py:93
 msgid "Each tasks list can have its own settings for sorting tasks (by name and/or by completed state), remove task button visibility and completed tasks visibility."
 msgstr ""
 
-#: ../../create_localized_help.py:75
+#: ../../create_localized_help.py:94
 msgid "Each tasks list can be saved as individual TODO files and also can be exported into a file for backup purposes."
 msgstr ""
 
-#: ../../create_localized_help.py:76
+#: ../../create_localized_help.py:95
 msgid "Tasks can be reordered by simply dragging them inside the tasks list they belong to (only if all automatic sorting options for the tasks list are disabled)."
 msgstr ""
 
-#: ../../create_localized_help.py:77
+#: ../../create_localized_help.py:96
 msgid "Tasks can be deleted by simply pressing the delete task button (if visible)."
 msgstr ""
 
-#: ../../create_localized_help.py:78
+#: ../../create_localized_help.py:97
 msgid "Colorized priority tags support. The background and text colors of a task can be colorized depending on the @tag found inside the task text."
 msgstr ""
 
-#: ../../create_localized_help.py:79
+#: ../../create_localized_help.py:98
 msgid "Configurable hotkey to open/close the menu."
 msgstr ""
 
-#: ../../create_localized_help.py:80
+#: ../../create_localized_help.py:99
 msgid "Read the tooltips of each option on this applet settings window for more details."
 msgstr ""
 
-#: ../../create_localized_help.py:82
+#: ../../create_localized_help.py:106
 msgid "Keyboard shortcuts"
 msgstr ""
 
-#: ../../create_localized_help.py:83
+#: ../../create_localized_help.py:107
 msgid "The keyboard navigation inside this applet menu is very similar to the keyboard navigation used by any other menu on Cinnamon. But it's slightly changed to facilitate tasks and sections handling and edition."
 msgstr ""
 
-#: ../../create_localized_help.py:85
+#: ../../create_localized_help.py:109
 msgid "When the focus is on a task"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:87
+#: ../../create_localized_help.py:111
 msgid "[[Ctrl]] + [[Spacebar]]: Toggle the completed (checked) state of a task."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:89
+#: ../../create_localized_help.py:113
 msgid "[[Shift]] + [[Delete]]: Deletes a task and focuses the element above of the deleted task."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:91
+#: ../../create_localized_help.py:115
 msgid "[[Alt]] + [[Delete]]: Deletes a task and focuses the element bellow the deleted task."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:93
+#: ../../create_localized_help.py:117
 msgid "[[Ctrl]] + [[Arrow Up]] or [[Ctrl]] + [[Arrow Down]]: Moves a task inside its tasks list."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:95
+#: ../../create_localized_help.py:119
 msgid "[[Insert]]: Will focus the **New task...** entry of the currently opened task section."
 msgstr ""
 
-#: ../../create_localized_help.py:97
+#: ../../create_localized_help.py:121
 msgid "When the focus is on a task section"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:99
+#: ../../create_localized_help.py:123
 msgid "[[Arrow Left]] and [[Arrow Right]]: If the tasks list (sub menu) is closed, these keys will open the sub menu. If the sub menu is open, these keys will move the cursor inside the sub menu label to allow the edition of the section text."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:101
+#: ../../create_localized_help.py:125
 msgid "[[Insert]]: Will focus the **New task...** entry inside the task section. If the task section sub menu isn't open, it will be opened."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:104
+#: ../../create_localized_help.py:128
 msgid "When the focus is on the **New task...** entry"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:106
+#: ../../create_localized_help.py:130
 msgid "[[Ctrl]] + [[Spacebar]]: Toggles the visibility of the tasks list options menu."
 msgstr ""
 
-#: ../../create_localized_help.py:108
+#: ../../create_localized_help.py:132
 msgid "Known issues"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:110
+#: ../../create_localized_help.py:134
 msgid "**Hovering over items inside the menu doesn't highlight menu items nor sub menus:** This is actually a desired feature. Allowing the items to highlight on mouse hover would cause the entries to loose focus, resulting in the impossibility to keep typing text inside them and constantly forcing us to move the mouse cursor to regain focus."
 msgstr ""
 
-#: ../../create_localized_help.py:111
+#: ../../create_localized_help.py:135
 msgid "Task entries look wrong:"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:113
+#: ../../create_localized_help.py:137
 msgid "Task entries on this applet have the ability to wrap its text in case one sets a fixed width for them. They also can be multi line ([[Shift]] + [[Enter]] inside an entry will create a new line). Some Cinnamon themes, like the default Mint-X family of themes, set a fixed width and a fixed height for entries inside menus. These fixed sizes makes it impossible to programmatically set a desired width for the entries (at least, I couldn't find a way to do it). And the fixed height doesn't allow the entries to expand, completely breaking the entries capability to wrap its text and to be multi line."
 msgstr ""
 
-#: ../../create_localized_help.py:115
+#: ../../create_localized_help.py:139
 msgid "This is how entries should look like"
 msgstr ""
 
-#: ../../create_localized_help.py:117
+#: ../../create_localized_help.py:141
 msgid "Correct entries styling"
 msgstr ""
 
-#: ../../create_localized_help.py:119
+#: ../../create_localized_help.py:143
 msgid "This is how entries SHOULD NOT look like"
 msgstr ""
 
-#: ../../create_localized_help.py:121
+#: ../../create_localized_help.py:145
 msgid "Incorrect entries styling"
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:124
+#: ../../create_localized_help.py:148
 msgid "The only way to fix this (that I could find) is by editing the Cinnamon theme that one is using and remove those fixed sizes. The CSS selectors that needs to be edited are **.menu StEntry**, **.menu StEntry:focus**, **.popup-menu StEntry** and **.popup-menu StEntry:focus**. Depending on the Cinnamon version the theme was created for, one might find just the first two selectors or the last two or all of them. The CSS properties that need to be edited are **width** and **height**. They could be removed, but the sensible thing to do is to rename them to **min-width** and **min-height** respectively. After editing the theme's file and restarting Cinnamon, the entries inside this applet will look and work like they should."
 msgstr ""
 
-#. TO TRANSLATORS: This is a placeholder.
-#. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:181 ../../create_localized_help.py:257
-msgid "language-name"
-msgstr ""
-
-#: ../../create_localized_help.py:187
+#: ../../create_localized_help.py:222
 msgid "The following two sections are available only in English."
 msgstr ""
 
-#: ../../create_localized_help.py:260 applet.js:722
+#: ../../create_localized_help.py:226
+msgid "Do not install on any other version of Cinnamon."
+msgstr ""
+
+#: ../../create_localized_help.py:232
+msgid "Compatibility"
+msgstr ""
+
+#. Define them first before self.get_language_stats() is called so these
+#. strings are also counted.
+#: ../../create_localized_help.py:338 applet.js:737
 msgid "Help"
 msgstr ""
 
-#: ../../create_localized_help.py:261
+#: ../../create_localized_help.py:339
 msgid "Contributors"
 msgstr ""
 
-#: ../../create_localized_help.py:262
+#: ../../create_localized_help.py:340
 msgid "Changelog"
-msgstr ""
-
-#: ../../create_localized_help.py:263
-msgid "Choose language"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:264 ../../create_localized_help.py:271
+#: ../../create_localized_help.py:341 ../../create_localized_help.py:360
 #, python-format
 msgid "Help for %s"
 msgstr ""
 
-#: ../../create_localized_help.py:272
+#: ../../create_localized_help.py:361
 msgid "IMPORTANT!!!"
 msgstr ""
 
-#: ../../create_localized_help.py:273
+#: ../../create_localized_help.py:362
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
-#: ../../create_localized_help.py:274
+#. 0dyseus@SimpleToDoList->metadata.json->comments
+#: ../../create_localized_help.py:363
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
-#: ../../create_localized_help.py:280
+#: ../../create_localized_help.py:369
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
-#: ../../create_localized_help.py:281
+#: ../../create_localized_help.py:370
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:283
+#: ../../create_localized_help.py:372
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
-#: ../../create_localized_help.py:284
+#: ../../create_localized_help.py:373
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
@@ -269,64 +277,64 @@ msgstr ""
 msgid "Nothing to do here."
 msgstr ""
 
-#: __init__.js:38
+#: __init__.js:35
 msgid "Tasks list - Some examples"
 msgstr ""
 
-#: __init__.js:44
+#: __init__.js:41
 msgid "Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task text. For now, there are 5 priority tags available."
 msgstr ""
 
-#: __init__.js:47
+#: __init__.js:44
 msgid "This is a @critical priority task"
 msgstr ""
 
-#: __init__.js:50
+#: __init__.js:47
 msgid "This is a @high priority task"
 msgstr ""
 
-#: __init__.js:53
+#: __init__.js:50
 msgid "This is a @medium priority task"
 msgstr ""
 
-#: __init__.js:56
+#: __init__.js:53
 msgid "This is a @today priority task"
 msgstr ""
 
-#: __init__.js:59
+#: __init__.js:56
 msgid "This is a @low priority task"
 msgstr ""
 
 #. TO TRANSLATORS: This is a priority tag.
-#: __init__.js:192
+#: __init__.js:189
 msgid "low"
 msgstr ""
 
 #. TO TRANSLATORS: This is a priority tag.
-#: __init__.js:194
+#: __init__.js:191
 msgid "today"
 msgstr ""
 
 #. TO TRANSLATORS: This is a priority tag.
-#: __init__.js:196
+#: __init__.js:193
 msgid "medium"
 msgstr ""
 
 #. TO TRANSLATORS: This is a priority tag.
-#: __init__.js:198
+#: __init__.js:195
 msgid "high"
 msgstr ""
 
 #. TO TRANSLATORS: This is a priority tag.
-#: __init__.js:200
+#: __init__.js:197
 msgid "critical"
 msgstr ""
 
-#: __init__.js:562
+#: __init__.js:559
 msgid "New task..."
 msgstr ""
 
-#: __init__.js:577
+#: __init__.js:578
 msgid "Tasks list options"
 msgstr ""
 
@@ -364,108 +372,172 @@ msgstr ""
 
 #. TO TRANSLATORS: Full sentence.
 #. "Remove this section/task"
-#: __init__.js:1518
+#: __init__.js:1519
 #, javascript-format
 msgid "Remove this %s"
 msgstr ""
 
-#: __init__.js:1521
+#: __init__.js:1522
 msgid "(Hold Ctrl key)"
 msgstr ""
 
-#: applet.js:91 applet.js:147
+#: applet.js:92 applet.js:146
 msgid "New tasks list..."
 msgstr ""
 
-#: applet.js:621
+#: applet.js:636
 msgid "Save as TODO"
 msgstr ""
 
-#: applet.js:630
+#: applet.js:645
 msgid "Save all current tasks lists as a TODO file."
 msgstr ""
 
-#: applet.js:636
+#: applet.js:651
 msgid "Export tasks"
 msgstr ""
 
-#: applet.js:645
+#: applet.js:660
 msgid "Export all current tasks lists into a JSON file."
 msgstr ""
 
-#: applet.js:646 applet.js:662
+#: applet.js:661 applet.js:677
 msgid "JSON files exported by this applet can be imported back into the applet and the tasks list found inside the files are added to the tasks lists currently loaded into the applet."
 msgstr ""
 
-#: applet.js:652
+#: applet.js:667
 msgid "Import tasks"
 msgstr ""
 
-#: applet.js:661
+#: applet.js:676
 msgid "Import tasks lists from a previously exported JSON file into this applet."
 msgstr ""
 
-#: applet.js:671
+#: applet.js:686
 msgid "Restore example tasks"
 msgstr ""
 
-#: applet.js:685
+#: applet.js:700
 msgid "Restore the example tasks list that were present when the applet was first loaded."
 msgstr ""
 
-#: applet.js:691
+#: applet.js:706
 msgid "Reset tasks"
 msgstr ""
 
-#: applet.js:697 applet.js:713
+#: applet.js:712 applet.js:728
 msgid "WARNING!!!"
 msgstr ""
 
-#: applet.js:698
+#: applet.js:713
 msgid "Do you really want to remove all your current tasks?"
 msgstr ""
 
-#: applet.js:699 applet.js:713
+#: applet.js:714 applet.js:728
 msgid "This operation cannot be reverted!!!"
 msgstr ""
 
-#: applet.js:712
+#: applet.js:727
 msgid "Remove all currently loaded tasks lists from this applet."
 msgstr ""
 
-#: applet.js:726
+#: applet.js:741
 msgid "Open this applet help file."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->metadata.json->contributors
-msgid "See this xlet help file."
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->metadata.json->description
 msgid "Simple applet to create ToDo lists."
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->metadata.json->comments
-msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+#. 0dyseus@SimpleToDoList->metadata.json->contributors
+msgid "See this xlet help file."
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->metadata.json->name
 msgid "Simple ToDo List"
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_foreground->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_foreground->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_foreground->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_bold->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_bold->description
+msgid "Set bold"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head5->description
+msgid "Task priorities settings"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_remove_native_entry_theming->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_remove_native_entry_theming->description
+msgid "Remove native entry theming (only visuals)"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->description
+msgid "Icon"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->description
+msgid "Character/s for completed tasks"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->tooltip
+msgid "The character or characters that will represent a completed task on a TODO file."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_show_tasks_counter_on_applet->description
+msgid "Display tasks counter on applet"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_overlay_key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->description
+msgid "Enable priority tags colorization"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->tooltip
+msgid "If enabled, this option will colorize a task entry depending on the tags found on its text. Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task text. For now, there are 5 priority tags available."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_today_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_background->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_background->description
+msgid "Background color"
+msgstr ""
+
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_today_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_foreground->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_foreground->description
 msgid "Text color"
 msgstr ""
 
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->units
+msgid "ems"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->description
+msgid "Label font size"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head0->description
+msgid "Applet settings"
+msgstr ""
+
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_min_width->units
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->units
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_min_width->units
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->units
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->units
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->units
 msgid "pixels"
 msgstr ""
 
@@ -481,81 +553,13 @@ msgstr ""
 msgid "Cinnamon menus automatically change their size to accommodate the elements that they contain. Setting a fixed size for those elements will avoid the constant resizing of the menu when opening/closing sub menus."
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->description
-msgid "Icon"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_icon_for_applet->tooltip
-msgid "Select an icon to show in the panel."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->description
-msgid "Enable logging"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->tooltip
-msgid "It enables the ability to log the output of several functions used by the applet."
+#. 0dyseus@SimpleToDoList->settings-schema.json->head2->description
+msgid "Sections appearance"
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_remove_native_entry_theming_sizing->description
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_remove_native_entry_theming_sizing->description
 msgid "Remove native entry theming (also sizing)"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head1->description
-msgid "Menu settings"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_remove_native_entry_theming->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_remove_native_entry_theming->description
-msgid "Remove native entry theming (only visuals)"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head11->description
-msgid "Debugging"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_bold->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_bold->description
-msgid "Set bold"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head0->description
-msgid "Applet settings"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->description
-msgid "Character/s for completed tasks"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->tooltip
-msgid "The character or characters that will represent a completed task on a TODO file."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->description
-msgid "Character/s for not completed tasks"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->tooltip
-msgid "The character or characters that will represent a not completed task on a TODO file."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->units
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->units
-msgid "ems"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_font_size->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_font_size->description
-msgid "Label font size"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_high_background->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_medium_background->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_critical_background->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_low_background->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_today_background->description
-msgid "Background color"
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head3->description
@@ -570,81 +574,24 @@ msgstr ""
 msgid "When enabled, the previously opened sub menu will be automatically closed."
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->head4->description
-msgid "Save as TODO file settings"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->description
-msgid "Enable priority tags colorization"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->tooltip
-msgid "If enabled, this option will colorize a task entry depending on the tags found on its text. Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task text. For now, there are 5 priority tags available."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head2->description
-msgid "Sections appearance"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->description
-msgid "Custom label"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->tooltip
-msgid "Enter custom text to show in the panel."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head5->description
-msgid "Task priorities settings"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head7->description
-msgid "Colors for \"@high\" priority tags"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->description
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->description
-msgid "Set maximum entry width"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_show_tasks_counter_on_applet->description
-msgid "Display tasks counter on applet"
+#. 0dyseus@SimpleToDoList->settings-schema.json->head8->description
+msgid "Colors for \"@today\" priority tags"
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head9->description
 msgid "Colors for \"@medium\" priority tags"
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_overlay_key->description
-msgid "Keyboard shortcut to open and close the menu"
+#. 0dyseus@SimpleToDoList->settings-schema.json->head11->description
+msgid "Debugging"
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->description
-msgid "Animate menu"
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->description
+msgid "Enable logging"
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->tooltip
-msgid "Enables/Disables menu open/close animations."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->description
-msgid "Colorize entire menu item"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->tooltip
-msgid "This option is useful, for example, when the Cinnamon theme used styles entries with a non transparent background image. The background color set by a priority tag will not be visible in this case. With this option enabled, the entire menu item of a task will be colorized and not just its entry."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->description
-msgid "Avoid accidental deletions"
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->tooltip
-msgid "When enabled, to remove a task or a section of the menu, the Control key needs to be pressed."
-msgstr ""
-
-#. 0dyseus@SimpleToDoList->settings-schema.json->head10->description
-msgid "Colors for \"@low\" priority tags"
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->tooltip
+msgid "It enables the ability to log the output of several functions used by the applet."
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->description
@@ -655,10 +602,67 @@ msgstr ""
 msgid "Some Cinnamon themes might set the spacing for the popup-menu-item class too big or too small, resulting in too much space wasted inside this applet menu or in elements to close to each other. This setting allows to change that spacing."
 msgstr ""
 
-#. 0dyseus@SimpleToDoList->settings-schema.json->head8->description
-msgid "Colors for \"@today\" priority tags"
+#. 0dyseus@SimpleToDoList->settings-schema.json->head10->description
+msgid "Colors for \"@low\" priority tags"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head7->description
+msgid "Colors for \"@high\" priority tags"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head4->description
+msgid "Save as TODO file settings"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->description
+msgid "Animate menu"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_animate_menu->tooltip
+msgid "Enables/Disables menu open/close animations."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->description
+msgid "Custom label"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_custom_label_for_applet->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->description
+msgid "Avoid accidental deletions"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->tooltip
+msgid "When enabled, to remove a task or a section of the menu, the Control key needs to be pressed."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->description
+msgid "Character/s for not completed tasks"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->tooltip
+msgid "The character or characters that will represent a not completed task on a TODO file."
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->head1->description
+msgid "Menu settings"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->description
+msgid "Colorize entire menu item"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->tooltip
+msgid "This option is useful, for example, when the Cinnamon theme used styles entries with a non transparent background image. The background color set by a priority tag will not be visible in this case. With this option enabled, the entire menu item of a task will be colorized and not just its entry."
 msgstr ""
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head6->description
 msgid "Colors for \"@critical\" priority tags"
+msgstr ""
+
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->description
+#. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->description
+msgid "Set maximum entry width"
 msgstr ""
