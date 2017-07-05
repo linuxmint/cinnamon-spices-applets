@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@PopupTranslator 1.04\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@PopupTranslator 1.07\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-05-13 20:35-0300\n"
 "PO-Revision-Date: 2017-05-08 13:17+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
@@ -15,9 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applet.js:83
 msgid "Source language"
@@ -239,9 +238,7 @@ msgid "Dependencies"
 msgstr ""
 
 #: ../../create_localized_help.py:64
-msgid ""
-"If one or more of these dependencies are missing in your system, you will "
-"not be able to use this applet."
+msgid "If one or more of these dependencies are missing in your system, you will not be able to use this applet."
 msgstr ""
 
 #: ../../create_localized_help.py:65
@@ -249,13 +246,10 @@ msgid "xsel command"
 msgstr ""
 
 #: ../../create_localized_help.py:66
-msgid ""
-"XSel is a command-line program for getting and setting the contents of the X "
-"selection."
+msgid "XSel is a command-line program for getting and setting the contents of the X selection."
 msgstr ""
 
-#: ../../create_localized_help.py:68 ../../create_localized_help.py:76
-#: ../../create_localized_help.py:88
+#: ../../create_localized_help.py:68 ../../create_localized_help.py:76 ../../create_localized_help.py:88
 msgid "Debian and Archlinux based distributions:"
 msgstr ""
 
@@ -269,9 +263,7 @@ msgid "xdg-open command"
 msgstr ""
 
 #: ../../create_localized_help.py:74
-msgid ""
-"Open a URI in the user's preferred application that handles the respective "
-"URI or file type."
+msgid "Open a URI in the user's preferred application that handles the respective URI or file type."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -279,8 +271,7 @@ msgstr ""
 msgid "This command is installed with the package called **xdg-utils**."
 msgstr ""
 
-#: ../../create_localized_help.py:79 ../../create_localized_help.py:91
-#: ../../create_localized_help.py:97
+#: ../../create_localized_help.py:79 ../../create_localized_help.py:91 ../../create_localized_help.py:97
 msgid "Installed by default in modern versions of Linux Mint."
 msgstr ""
 
@@ -297,11 +288,7 @@ msgid "requests Python 3 module"
 msgstr ""
 
 #: ../../create_localized_help.py:86
-msgid ""
-"Requests allow you to send HTTP/1.1 requests. You can add headers, form "
-"data, multi-part files, and parameters with simple Python dictionaries, and "
-"access the response data in the same way. It's powered by httplib and "
-"urllib3, but it does all the hard work and crazy hacks for you."
+msgid "Requests allow you to send HTTP/1.1 requests. You can add headers, form data, multi-part files, and parameters with simple Python dictionaries, and access the response data in the same way. It's powered by httplib and urllib3, but it does all the hard work and crazy hacks for you."
 msgstr ""
 
 #: ../../create_localized_help.py:94
@@ -323,9 +310,7 @@ msgid "The package is called **python-requests**."
 msgstr ""
 
 #: ../../create_localized_help.py:105
-msgid ""
-"After installing any of the missing dependencies, Cinnamon needs to be "
-"restarted"
+msgid "After installing any of the missing dependencies, Cinnamon needs to be restarted"
 msgstr ""
 
 #: ../../create_localized_help.py:107
@@ -333,10 +318,7 @@ msgid "Note:"
 msgstr ""
 
 #: ../../create_localized_help.py:107
-msgid ""
-"I don't use any other type of Linux distribution (Gentoo based, Slackware "
-"based, etc.). If any of the previous packages/modules are named differently, "
-"please, let me know and I will specify them in this help file."
+msgid "I don't use any other type of Linux distribution (Gentoo based, Slackware based, etc.). If any of the previous packages/modules are named differently, please, let me know and I will specify them in this help file."
 msgstr ""
 
 #: ../../create_localized_help.py:109
@@ -345,59 +327,40 @@ msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:111
-msgid ""
-"There are 4 *translations mechanisms* (**Left click**, **Middle click**, "
-"**Hotkey #1** and **Hotkey #2**). Each translation mechanism can be "
-"configured with their own service providers, language pairs and hotkeys."
+msgid "There are 4 *translations mechanisms* (**Left click**, **Middle click**, **Hotkey #1** and **Hotkey #2**). Each translation mechanism can be configured with their own service providers, language pairs and hotkeys."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:113
-msgid ""
-"**First translation mechanism (Left click):** Translates any selected text "
-"from any application on your system. A hotkey can be assigned to perform "
-"this task."
+msgid "**First translation mechanism (Left click):** Translates any selected text from any application on your system. A hotkey can be assigned to perform this task."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:115
-msgid ""
-"**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left "
-"click**, but it will bypass the translation history. A hotkey can be "
-"assigned to perform this task."
+msgid "**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left click**, but it will bypass the translation history. A hotkey can be assigned to perform this task."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:117
-msgid ""
-"**Second translation mechanism (Middle click):** Same as **Left click**."
+msgid "**Second translation mechanism (Middle click):** Same as **Left click**."
 msgstr ""
 
 #: ../../create_localized_help.py:120
-msgid ""
-"**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] "
-"+ **Left click**."
+msgid "**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] + **Left click**."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:122
-msgid ""
-"**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
+msgid "**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured to perform a translation and a forced translation."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:124
-msgid ""
-"**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
+msgid "**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured to perform a translation and a forced translation."
 msgstr ""
 
 #: ../../create_localized_help.py:125
-msgid ""
-"All translations are stored into the translation history. If a string of "
-"text was already translated in the past, the popup will display that stored "
-"translated text without making use of the provider's translation service."
+msgid "All translations are stored into the translation history. If a string of text was already translated in the past, the popup will display that stored translated text without making use of the provider's translation service."
 msgstr ""
 
 #: ../../create_localized_help.py:127
@@ -405,29 +368,19 @@ msgid "About translation history"
 msgstr ""
 
 #: ../../create_localized_help.py:128
-msgid ""
-"I created the translation history mechanism mainly to avoid the abuse of the "
-"translation services."
+msgid "I created the translation history mechanism mainly to avoid the abuse of the translation services."
 msgstr ""
 
 #: ../../create_localized_help.py:129
-msgid ""
-"If the Google Translate service is \"abused\", Google may block temporarily "
-"your IP. Or what is worse, they could change the translation mechanism "
-"making this applet useless and forcing me to update its code."
+msgid "If the Google Translate service is \"abused\", Google may block temporarily your IP. Or what is worse, they could change the translation mechanism making this applet useless and forcing me to update its code."
 msgstr ""
 
 #: ../../create_localized_help.py:130
-msgid ""
-"If the Yandex Translate service is \"abused\", you are \"wasting\" your API "
-"keys quota and they will be blocked (temporarily or permanently)."
+msgid "If the Yandex Translate service is \"abused\", you are \"wasting\" your API keys quota and they will be blocked (temporarily or permanently)."
 msgstr ""
 
 #: ../../create_localized_help.py:131
-msgid ""
-"In the context menu of this applet is an item that can open the folder were "
-"the translation history file is stored. From there, the translation history "
-"file can be backed up or deleted."
+msgid "In the context menu of this applet is an item that can open the folder were the translation history file is stored. From there, the translation history file can be backed up or deleted."
 msgstr ""
 
 #: ../../create_localized_help.py:133
@@ -435,9 +388,7 @@ msgid "NEVER edit the translation history file manually!!!"
 msgstr ""
 
 #: ../../create_localized_help.py:135
-msgid ""
-"If the translation history file is deleted/renamed/moved, Cinnamon needs to "
-"be restarted."
+msgid "If the translation history file is deleted/renamed/moved, Cinnamon needs to be restarted."
 msgstr ""
 
 #: ../../create_localized_help.py:137
@@ -445,9 +396,7 @@ msgid "How to get Yandex translator API keys"
 msgstr ""
 
 #: ../../create_localized_help.py:138
-msgid ""
-"Visit one of the following links and register a Yandex account (or use one "
-"of the available social services)."
+msgid "Visit one of the following links and register a Yandex account (or use one of the available social services)."
 msgstr ""
 
 #. TO TRANSLATORS: URL pointing to website in English
@@ -462,15 +411,11 @@ msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:144
-msgid ""
-"Once you successfully finish creating your Yandex account, you can visit the "
-"link provided several times to create several API keys. **DO NOT ABUSE!!!**"
+msgid "Once you successfully finish creating your Yandex account, you can visit the link provided several times to create several API keys. **DO NOT ABUSE!!!**"
 msgstr ""
 
 #: ../../create_localized_help.py:145
-msgid ""
-"Once you have several API keys, you can add them to Popup Translator's "
-"settings window (one API key per line)."
+msgid "Once you have several API keys, you can add them to Popup Translator's settings window (one API key per line)."
 msgstr ""
 
 #: ../../create_localized_help.py:147
@@ -478,25 +423,17 @@ msgid "Important notes about Yandex API keys"
 msgstr ""
 
 #: ../../create_localized_help.py:148
-msgid ""
-"The API keys will be stored into a preference. Keep your API keys backed up "
-"in case you reset Popup Translator's preferences."
+msgid "The API keys will be stored into a preference. Keep your API keys backed up in case you reset Popup Translator's preferences."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:150
-msgid ""
-"**NEVER make your API keys public!!!** The whole purpose of going to the "
-"trouble of getting your own API keys is that the only one \"consuming their "
-"limits\" is you and nobody else."
+msgid "**NEVER make your API keys public!!!** The whole purpose of going to the trouble of getting your own API keys is that the only one \"consuming their limits\" is you and nobody else."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:152
-msgid ""
-"With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 "
-"million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) "
-"per month."
+msgid "With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) per month."
 msgstr ""
 
 #. TO TRANSLATORS: This is a placeholder.
@@ -521,15 +458,11 @@ msgid "IMPORTANT!!!"
 msgstr ""
 
 #: ../../create_localized_help.py:261
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
 #: ../../create_localized_help.py:262
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
 #: ../../create_localized_help.py:268
@@ -537,40 +470,25 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
 #: ../../create_localized_help.py:269
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:271
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
 #: ../../create_localized_help.py:272
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
 #. 0dyseus@PopupTranslator->metadata.json->description
-msgid ""
-"Simple translator applet that will allow to display any selected text from "
-"any application on a system in a popup."
-msgstr ""
-"Jednostavan aplet za prijevod koji omogućuje prikaz bilo kojeg odabranog "
-"teksta iz bilo koje aplikacije na računalu u skočnom prozoru."
+msgid "Simple translator applet that will allow to display any selected text from any application on a system in a popup."
+msgstr "Jednostavan aplet za prijevod koji omogućuje prikaz bilo kojeg odabranog teksta iz bilo koje aplikacije na računalu u skočnom prozoru."
 
 #. 0dyseus@PopupTranslator->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti "
-"podneseni na poveznici xlet repozitorija ispod."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti podneseni na poveznici xlet repozitorija ispod."
 
 #. 0dyseus@PopupTranslator->metadata.json->contributors
 msgid "NikoKrause: German localization and bug reports."
@@ -654,13 +572,10 @@ msgstr "API ključevi"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_yandex_api_keys->tooltip
 msgid ""
 "Enter one API key per line.\n"
-"Read the help file (Help item on this applet context menu) found inside this "
-"applet folder to know how to get free Yandex API keys."
+"Read the help file (Help item on this applet context menu) found inside this applet folder to know how to get free Yandex API keys."
 msgstr ""
 "Upišite jedan API ključ po redku.\n"
-"Pročitajte datoteku pomoći (Stavka pomoći u izborniku ovog apleta) koja se "
-"nalazi unutar mape apleta kako bi saznali, kako dobiti besplatne Yandex API "
-"ključeve."
+"Pročitajte datoteku pomoći (Stavka pomoći u izborniku ovog apleta) koja se nalazi unutar mape apleta kako bi saznali, kako dobiti besplatne Yandex API ključeve."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_initial_window_width->description
 msgid "History window initial width"
@@ -677,12 +592,8 @@ msgid "Enable logging"
 msgstr "Omogući zapisivanje"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_loggin_enabled->tooltip
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
-msgstr ""
-"Omogućuje mogućnost zapisivanja nekoliko izlaznih funkcija koje koristi "
-"aplet."
+msgid "It enables the ability to log the output of several functions used by the applet."
+msgstr "Omogućuje mogućnost zapisivanja nekoliko izlaznih funkcija koje koristi aplet."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->head3->description
 msgid "Translation history settings"
@@ -699,14 +610,8 @@ msgstr "Prečac tipkovnice za izvođenje PRISILNOG prijevoda"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_2->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_1->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_3->tooltip
-msgid ""
-"Choose a keybinding to perform a FORCED translation. A \"forced translation"
-"\" forces the translation of any string stored on the translation history "
-"and overwrites the existing one."
-msgstr ""
-"Odaberite kombinaciju tipki za izvođenje PRISILNOG prevođenja. \"Prisilno "
-"prevođenje\" sili prevođenje bilo kojeg izraza pohranjenog u povijest "
-"prevođenja i zamjenjuje postojeći."
+msgid "Choose a keybinding to perform a FORCED translation. A \"forced translation\" forces the translation of any string stored on the translation history and overwrites the existing one."
+msgstr "Odaberite kombinaciju tipki za izvođenje PRISILNOG prevođenja. \"Prisilno prevođenje\" sili prevođenje bilo kojeg izraza pohranjenog u povijest prevođenja i zamjenjuje postojeći."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_initial_window_height->description
 msgid "History window initial height"
@@ -771,12 +676,8 @@ msgid "Width to trigger word wrap"
 msgstr "Širina pokretanja prijeloma riječi"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
-msgid ""
-"The \"Source text\" and \"Target text\" columns on the history window will "
-"wrap its text at the width defined by this setting."
-msgstr ""
-"Stupci \"Tekst izvora\" i \"Tekst prijevoda\" u prozoru povijesti će "
-"prelomiti tekst po širini određenoj u ovoj postavki."
+msgid "The \"Source text\" and \"Target text\" columns on the history window will wrap its text at the width defined by this setting."
+msgstr "Stupci \"Tekst izvora\" i \"Tekst prijevoda\" u prozoru povijesti će prelomiti tekst po širini određenoj u ovoj postavki."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_timestamp->description
 msgid "Timestamp for translation history entries"
@@ -804,12 +705,8 @@ msgstr "Izgled jezičnog para"
 #~ msgid "Translation Mechanisms"
 #~ msgstr "Mehanizam prevođenja"
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
-#~ "na poveznici repozitorija ovog apleta."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
+#~ msgstr "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na poveznici repozitorija ovog apleta."
 
 #~ msgid "Estonian"
 #~ msgstr "Estonski"
