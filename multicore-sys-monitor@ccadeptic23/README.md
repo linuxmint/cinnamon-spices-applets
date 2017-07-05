@@ -1,12 +1,13 @@
 You must install the **gir1.2-gtop-2.0** package to use this applet.
 
-// Multi-core System Monitor Readme
-// Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
+**Instructions for upgrading to Cinnamon 3.4**
+
+Uninstall the applet from Applet Settings, delete ```~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23``` and ```~/.cinnamon/configs/multicore-sys-monitor@ccadeptic23```. Then reinstall from Applet Settings, so it re-downloads it.
 
 The below instructions are outdated. You can customize the color scheme in the applet's settings app.
 
-How to Configure Colors (in prefs.json)
-======================================
+**How to Configure Colors (in prefs.json)**
+
 Edit config file in called prefs.json. Also backup the file, and only do it if you feel comfortable.
 There are three values that control the color of the applet that all use arrays in the settings format:
 
