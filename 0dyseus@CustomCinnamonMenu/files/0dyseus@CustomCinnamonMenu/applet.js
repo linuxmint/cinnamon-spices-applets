@@ -260,7 +260,7 @@ MyApplet.prototype = {
             [bD.IN, "pref_info_box_description_font_size", null],
             [bD.IN, "pref_swap_categories_box", null],
             [bD.IN, "pref_disable_new_apps_highlighting", null],
-            [bD.IN, "pref_fuzzy_search_enabled", null],
+            [bD.IN, "pref_search_type", null],
             [bD.IN, "pref_show_recents_button", null],
             [bD.IN, "pref_system_buttons_display", null],
             [bD.IN, "pref_show_lock_button", null],
@@ -841,7 +841,7 @@ MyApplet.prototype = {
          * START mark Odyseus
          */
         // From Sane Menu
-        if (this.pref_fuzzy_search_enabled)
+        if (this.pref_search_type === "fuzzy")
             this._applicationsButtons = Object.create(this._applicationsButtonsBackup);
         /**
          * END
@@ -1959,7 +1959,7 @@ MyApplet.prototype = {
         this._recentAppsButtons = [];
         this._recentAppsApps = [];
 
-        if (this.pref_recently_used_apps.length > 0 && this.recentAppsButton !== null) {
+        if (this.pref_recently_used_apps.length > 0) {
             Array.prototype.slice.call(this._applicationsButtons).forEach(Lang.bind(this, function(aBtn) {
                 let appId = aBtn.get_app_id();
                 let c = 0,
@@ -2402,7 +2402,7 @@ MyApplet.prototype = {
          * START mark Odyseus
          */
         // From Sane Menu
-        if (this.pref_fuzzy_search_enabled)
+        if (this.pref_search_type === "fuzzy")
             this._applicationsButtonsBackup = Object.create(this._applicationsButtons);
         //
         if (this._menuLayout.indexOf("searchBox") !== -1 &&
@@ -2605,14 +2605,16 @@ MyApplet.prototype = {
                     has_entries = true;
 
                     let app = appsys.lookup_app_by_tree_entry(entry);
+
                     if (!app)
                         app = appsys.lookup_settings_app_by_tree_entry(entry);
+
                     let app_key = app.get_id();
 
                     if (app_key === null) {
-                        app_key = app.get_name() + ":" +
-                            app.get_description();
+                        app_key = app.get_name() + ":" + app.get_description();
                     }
+
                     if (!(app_key in this._applicationsButtonFromApp)) {
 
                         let applicationButton = new $.ApplicationButton(this, app, this.pref_display_application_icons);
@@ -3451,13 +3453,13 @@ MyApplet.prototype = {
                  */
                 // From Sane menu
                 if (apps.indexOf(this._applicationsButtons[i].app.get_id()) != -1) {
-                    if (this.pref_fuzzy_search_enabled && !appCategory) {
+                    if (this.pref_search_type === "fuzzy" && !appCategory) {
                         this.applicationsBox.add_actor(this._applicationsButtons[i].actor);
                         this.applicationsBox.add_actor(this._applicationsButtons[i].menu.actor);
                     } else
                         this._applicationsButtons[i].actor.show();
                 } else {
-                    this.pref_fuzzy_search_enabled || this._applicationsButtons[i].actor.hide();
+                    this.pref_search_type === "fuzzy" || this._applicationsButtons[i].actor.hide();
                 }
                 /**
                  * END
@@ -3609,7 +3611,7 @@ MyApplet.prototype = {
                  */
                 // From Sane Menu
                 // TODO: Find a better way to restore initial state
-                if (this.pref_fuzzy_search_enabled) {
+                if (this.pref_search_type === "fuzzy") {
                     this._refreshApps();
                     if (this.pref_show_places)
                         this._refreshPlaces();
@@ -3695,19 +3697,30 @@ MyApplet.prototype = {
                 /**
                  * START mark Odyseus
                  */
-                // From Sane Menu
-                if (this.pref_fuzzy_search_enabled) {
-                    let fuzzy = this._fuzzysearch(pattern, Util.latinise(app.get_name().toLowerCase()));
-                    if (fuzzy[0]) {
-                        res.push(app.get_id());
-                        this._applicationsOrder[app.get_id()] = fuzzy[1];
-                    }
-                } else {
-                    if (Util.latinise(app.get_name().toLowerCase()).indexOf(pattern) != -1 ||
-                        (app.get_keywords() && Util.latinise(app.get_keywords().toLowerCase()).indexOf(pattern) != -1) ||
-                        (app.get_description() && Util.latinise(app.get_description().toLowerCase()).indexOf(pattern) != -1) ||
-                        (app.get_id() && Util.latinise(app.get_id().slice(0, -8).toLowerCase()).indexOf(pattern) != -1))
-                        res.push(app.get_id());
+                switch (this.pref_search_type) {
+                    case "fuzzy":
+                        // From Sane Menu
+                        let fuzzy = this._fuzzysearch(pattern, Util.latinise(app.get_name().toLowerCase()));
+                        if (fuzzy[0]) {
+                            res.push(app.get_id());
+                            this._applicationsOrder[app.get_id()] = fuzzy[1];
+                        }
+                        break;
+                    case "app_name_only":
+                        if (app.get_name() && Util.latinise(app.get_name().toLowerCase()).indexOf(pattern) != -1)
+                            res.push(app.get_id());
+                        break;
+                    default:
+                        if (app.get_name() &&
+                            Util.latinise(app.get_name().toLowerCase()).indexOf(pattern) != -1 ||
+                            (app.get_keywords() &&
+                                Util.latinise(app.get_keywords().toLowerCase()).indexOf(pattern) != -1) ||
+                            (app.get_description() &&
+                                Util.latinise(app.get_description().toLowerCase()).indexOf(pattern) != -1) ||
+                            (app.get_id() &&
+                                Util.latinise(app.get_id().slice(0, -8).toLowerCase()).indexOf(pattern) != -1)
+                        )
+                            res.push(app.get_id());
                 }
                 /**
                  * END
@@ -3829,7 +3842,7 @@ MyApplet.prototype = {
          */
         // From Sane Menu
         // remove all buttons here for sort to have effect
-        if (this.pref_fuzzy_search_enabled) {
+        if (this.pref_search_type === "fuzzy") {
             this.applicationsBox.remove_all_children();
             this._applicationsButtons = this._applicationsButtons.sort(this._fuzzysort(this._applicationsOrder));
         }
