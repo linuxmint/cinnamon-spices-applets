@@ -1,9 +1,38 @@
 <h2 style="color:red;">Bug reports, feature requests and contributions</h2>
-<span style="color:red;">
-If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
-</span>
+<p style="color:red;">
+Bug reports, feature requests and contributions should be done on this xlet's repository linked next.
+</p>
 
-## Extensions Manager applet description
+<table><tbody>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/issues.svg"></td>
+<td><a href="https://github.com/Odyseus/CinnamonTools"><strong style="font-size: 1.2em">
+Bug reports/Feature requests/Contributions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/help.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html"><strong style="font-size: 1.2em">
+Localized help
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/contributors.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html#xlet-contributors"><strong style="font-size: 1.2em">
+Contributors/Mentions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/changelog.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html#xlet-changelog"><strong style="font-size: 1.2em">
+Full change log
+</strong></a></td></tr>
+
+</tbody></table>
+
+## Compatibility
+
+![Cinnamon 2.8](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-2.8.svg)
+![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg)
+![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg)
+![Cinnamon 3.4](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.4.svg)
+
+<span style="color:red;"><strong>Do not install on any other version of Cinnamon.</strong></span>
+
+## Description
 
 This applet creates a menu with a list of all installed extensions in Cinnamon. From each menu item different tasks can be performed:
 
@@ -13,15 +42,6 @@ This applet creates a menu with a list of all installed extensions in Cinnamon. 
 - Open the extension folder
 - Open its extension.js file
 
-## Compatibility
-
-![Cinnamon 2.8](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-2.8.svg)
-![Cinnamon 3.0](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.0.svg)
-![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg)
-![Cinnamon 3.4](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.4.svg)
+## Settings window
 
 ![Settings window](https://odyseus.github.io/CinnamonTools/lib/img/ExtensionsManager-001.png "Settings window")
-
-#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html)
-#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html#xlet-contributors)
-#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ExtensionsManager.html#xlet-changelog)

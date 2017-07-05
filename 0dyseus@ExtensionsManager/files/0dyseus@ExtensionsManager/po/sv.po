@@ -5,7 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@ExtensionsManager 1.07\n"
+"Project-Id-Version: 0dyseus@ExtensionsManager 1.09\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-03 07:46+0200\n"
 "PO-Revision-Date: 2017-06-03 07:49+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
@@ -14,9 +15,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../create_localized_help.py:90
 msgid "The following two sections are available only in English."
@@ -56,59 +57,33 @@ msgid "IMPORTANT!!!"
 msgstr "VIKTIGT!!!"
 
 #: ../../create_localized_help.py:203
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
-msgstr ""
-"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
-"programmets funktioner."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner."
 
 #: ../../create_localized_help.py:204
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
-"kodförråd, på följande länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk."
 
 #: ../../create_localized_help.py:210
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Applets/Desklets/Extensions (xlets) översättning"
 
 #: ../../create_localized_help.py:211
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
-msgstr ""
-"Om denna xlet installerades från Cinnamons inställningar, installerades "
-"också alla översättningar automatiskt."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:213
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
-"kan översättningar installeras genom att köra skriptet **localizations.sh** "
-"från en terminal öppnad i programmappen."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet **localizations.sh** från en terminal öppnad i programmappen."
 
 #: ../../create_localized_help.py:214
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
-msgstr ""
-"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
-"följande instruktioner."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner."
 
 #: appletHelper.py:268
-msgid ""
-"This terminal will list the errors of extensions that couldn't be loaded by "
-"Extensions Manager."
-msgstr ""
-"I terminalen listas felen för de tillägg som kan läsas in av "
-"tilläggshanteraren."
+msgid "This terminal will list the errors of extensions that couldn't be loaded by Extensions Manager."
+msgstr "I terminalen listas felen för de tillägg som kan läsas in av tilläggshanteraren."
 
 #: appletHelper.py:289 appletHelper.py:308
 msgid "Extensions Manager debugger"
@@ -179,8 +154,7 @@ msgid "Disable all extensions"
 msgstr "Inaktivera alla tillägg"
 
 #: applet.js:122
-msgid ""
-"This will disable all active extensions. Are you sure you want to do this?"
+msgid "This will disable all active extensions. Are you sure you want to do this?"
 msgstr "Detta inaktiverar alla aktiva tillägg. Vill du verkligen göra det?"
 
 #: applet.js:130
@@ -201,12 +175,8 @@ msgid "Source of error: %s"
 msgstr "Felkälla: %s"
 
 #: applet.js:373
-msgid ""
-"There aren't any extensions installed on your system. Or you may need to "
-"refresh the list of extensions from this applet context menu."
-msgstr ""
-"Det finns inga tillägg installerade i ditt system, eller så kanske du "
-"behöver uppdatera tilläggslistan från detta panelprograms kontextmeny."
+msgid "There aren't any extensions installed on your system. Or you may need to refresh the list of extensions from this applet context menu."
+msgstr "Det finns inga tillägg installerade i ditt system, eller så kanske du behöver uppdatera tilläggslistan från detta panelprograms kontextmeny."
 
 #: applet.js:442
 msgid "Enabled extensions"
@@ -226,12 +196,8 @@ msgstr "Inga inaktiverade tillägg"
 
 #: applet.js:488
 #, javascript-format
-msgid ""
-"Extension %s is not compatible with current version of cinnamon. Using it "
-"may break your system. Load anyway?"
-msgstr ""
-"Tillägget %s är inte kompatibelt med aktuell version av Cinnamon. Användning "
-"kan möjligen skada ditt system. Vill du läsa in det ändå?"
+msgid "Extension %s is not compatible with current version of cinnamon. Using it may break your system. Load anyway?"
+msgstr "Tillägget %s är inte kompatibelt med aktuell version av Cinnamon. Användning kan möjligen skada ditt system. Vill du läsa in det ändå?"
 
 #. 0dyseus@ExtensionsManager->metadata.json->contributors
 msgid "See this xlet help file."
@@ -242,12 +208,8 @@ msgid "Extensions Manager"
 msgstr "Tilläggshanterare"
 
 #. 0dyseus@ExtensionsManager->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
-"kodförråd, på nedanstående länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets kodförråd, på nedanstående länk."
 
 #. 0dyseus@ExtensionsManager->metadata.json->description
 msgid "Allows enabling/disabling extensions (and other tasks) from a menu."
@@ -268,12 +230,8 @@ msgid "pixels"
 msgstr "pixlar"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->tooltip
-msgid ""
-"If enabled, every time that the menu is open, the \"Enabled extensions\" sub "
-"menu will be open too."
-msgstr ""
-"Vid aktivering öppnas också undermenyn \"Aktiverade tillägg\", varje gång "
-"huvudmenyn öppnas."
+msgid "If enabled, every time that the menu is open, the \"Enabled extensions\" sub menu will be open too."
+msgstr "Vid aktivering öppnas också undermenyn \"Aktiverade tillägg\", varje gång huvudmenyn öppnas."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->description
 msgid "Keep \"Enabled extensions\" menu open"
@@ -284,24 +242,16 @@ msgid "Style for \"Disabled extensions\" sub-menu"
 msgstr "Stil för undermenyn \"Inaktiverade tillägg\""
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the location where the extension is installed."
-msgstr ""
-"Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets "
-"installationsmapp."
+msgid "If enabled, it will display a button in each extension menu item that will open the location where the extension is installed."
+msgstr "Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets installationsmapp."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->description
 msgid "Show \"Open extension folder\" button on extensions menu"
 msgstr "Visa \"Öppna tilläggsmappen\" på tilläggets meny"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the extension's Spices page (if the extension is published on Spices)."
-msgstr ""
-"Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets "
-"Spises-sida (om tillägget har publicerats på Spices)."
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's Spices page (if the extension is published on Spices)."
+msgstr "Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets Spises-sida (om tillägget har publicerats på Spices)."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->description
 msgid "Show \"Spices page\" button on extensions menu"
@@ -312,13 +262,8 @@ msgid "Keep only one menu open at all times"
 msgstr "Endast en öppen undermeny åt gången"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the extension's settings page (if the extension has a configuration "
-"mechanism)."
-msgstr ""
-"Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets "
-"inställningsfönster (om tillägget har några inställningar)."
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's settings page (if the extension has a configuration mechanism)."
+msgstr "Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets inställningsfönster (om tillägget har några inställningar)."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->description
 msgid "Show \"Open settings window\" button on extensions menu"
@@ -333,8 +278,7 @@ msgid "Custom label"
 msgstr "Anpassat panelnamn"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->tooltip
-msgid ""
-"If disabled, the extension UUID will be used as label for the menu items."
+msgid "If disabled, the extension UUID will be used as label for the menu items."
 msgstr "Vid inaktivering används tilläggens UUID som etikett på menyposterna."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->description
@@ -342,12 +286,8 @@ msgid "Use extension name as label"
 msgstr "Använd tilläggsnamnet som menyetikett"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->tooltip
-msgid ""
-"If enabled, every time that the menu is open, the \"Disabled extensions\" "
-"sub menu will be open too."
-msgstr ""
-"Vid aktivering öppnas också undermenyn \"Inaktiverade tillägg\", varje gång "
-"huvudmenyn öppnas."
+msgid "If enabled, every time that the menu is open, the \"Disabled extensions\" sub menu will be open too."
+msgstr "Vid aktivering öppnas också undermenyn \"Inaktiverade tillägg\", varje gång huvudmenyn öppnas."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->description
 msgid "Keep \"Disabled extensions\" menu open"
@@ -366,12 +306,8 @@ msgid "Set max height for the main menu"
 msgstr "Ange maxhöjd för huvudmenyn"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open main extension file (extension.js) with a text editor."
-msgstr ""
-"Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets "
-"huvudfil (extension.js) i en textredigerare."
+msgid "If enabled, it will display a button in each extension menu item that will open main extension file (extension.js) with a text editor."
+msgstr "Vid aktivering visas en knapp i varje tilläggspost, som öppnar tilläggets huvudfil (extension.js) i en textredigerare."
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->description
 msgid "Show \"Edit extension main file\" button on extensions menu"

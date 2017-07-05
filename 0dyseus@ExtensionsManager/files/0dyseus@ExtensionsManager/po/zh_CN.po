@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.05\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@ExtensionsManager 1.09\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:32+0800\n"
 "PO-Revision-Date: 2017-06-04 19:32+0800\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: ../../create_localized_help.py:90
 msgid "The following two sections are available only in English."
@@ -56,15 +56,11 @@ msgid "IMPORTANT!!!"
 msgstr "重要！！！"
 
 #: ../../create_localized_help.py:203
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "不要删除该xlet文件夹内的任何文件。可能会损坏该xlet的功能。"
 
 #: ../../create_localized_help.py:204
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #: ../../create_localized_help.py:210
@@ -72,31 +68,20 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "小程序/桌面小工具/扩展（也称为xlets）本地化"
 
 #: ../../create_localized_help.py:211
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "如果该xlet安装自Cinnamon设置，该xlet的所有本地化已经自动安装。"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:213
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内"
-"名为**localizations.sh**的脚本安装本地化。"
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "如果该xlet是通过手动安装而不是Cinnamon设置，可以通过打开终端执行xlet文件夹内名为**localizations.sh**的脚本安装本地化。"
 
 #: ../../create_localized_help.py:214
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "如果该xlet没有您的语言的本地化，您可以按照以下说明进行创建。"
 
 #: appletHelper.py:268
-msgid ""
-"This terminal will list the errors of extensions that couldn't be loaded by "
-"Extensions Manager."
+msgid "This terminal will list the errors of extensions that couldn't be loaded by Extensions Manager."
 msgstr "此终端将列出扩展管理器无法加载的扩展的错误。"
 
 #: appletHelper.py:289 appletHelper.py:308
@@ -168,8 +153,7 @@ msgid "Disable all extensions"
 msgstr "禁用所有扩展"
 
 #: applet.js:122
-msgid ""
-"This will disable all active extensions. Are you sure you want to do this?"
+msgid "This will disable all active extensions. Are you sure you want to do this?"
 msgstr "这将会禁用所有激活的扩展。您确定要这么做吗？"
 
 #: applet.js:130
@@ -190,11 +174,8 @@ msgid "Source of error: %s"
 msgstr "错误来源：%s"
 
 #: applet.js:373
-msgid ""
-"There aren't any extensions installed on your system. Or you may need to "
-"refresh the list of extensions from this applet context menu."
-msgstr ""
-"您的系统上尚未安装任何扩展。否则您可能需要从此小程序的右键菜单刷新扩展列表。"
+msgid "There aren't any extensions installed on your system. Or you may need to refresh the list of extensions from this applet context menu."
+msgstr "您的系统上尚未安装任何扩展。否则您可能需要从此小程序的右键菜单刷新扩展列表。"
 
 #: applet.js:442
 msgid "Enabled extensions"
@@ -214,11 +195,8 @@ msgstr "没有已禁用的扩展"
 
 #: applet.js:488
 #, javascript-format
-msgid ""
-"Extension %s is not compatible with current version of cinnamon. Using it "
-"may break your system. Load anyway?"
-msgstr ""
-"扩展%s与cinnamon当前的版本不兼容。使用它可能会损坏您的系统。仍然要加载吗？"
+msgid "Extension %s is not compatible with current version of cinnamon. Using it may break your system. Load anyway?"
+msgstr "扩展%s与cinnamon当前的版本不兼容。使用它可能会损坏您的系统。仍然要加载吗？"
 
 #. 0dyseus@ExtensionsManager->metadata.json->contributors
 msgid "See this xlet help file."
@@ -229,9 +207,7 @@ msgid "Extensions Manager"
 msgstr "扩展管理器"
 
 #. 0dyseus@ExtensionsManager->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
 msgstr "错误报告，功能请求和贡献应该在下方链接的xlet的仓库上完成。"
 
 #. 0dyseus@ExtensionsManager->metadata.json->description
@@ -253,9 +229,7 @@ msgid "pixels"
 msgstr "像素"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->tooltip
-msgid ""
-"If enabled, every time that the menu is open, the \"Enabled extensions\" sub "
-"menu will be open too."
+msgid "If enabled, every time that the menu is open, the \"Enabled extensions\" sub menu will be open too."
 msgstr "如果启用，每次打开菜单时，也会打开“已启用的扩展”子菜单。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_enabled_extension_menu_open->description
@@ -267,9 +241,7 @@ msgid "Style for \"Disabled extensions\" sub-menu"
 msgstr "“已禁用的扩展”子菜单的风格"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the location where the extension is installed."
+msgid "If enabled, it will display a button in each extension menu item that will open the location where the extension is installed."
 msgstr "如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展安装位置的按钮。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_open_extension_folder_button->description
@@ -277,12 +249,8 @@ msgid "Show \"Open extension folder\" button on extensions menu"
 msgstr "在扩展菜单上显示“打开扩展文件夹”按钮"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the extension's Spices page (if the extension is published on Spices)."
-msgstr ""
-"如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展Spices页面的按钮（如果"
-"扩展已在Spices上发布）。"
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's Spices page (if the extension is published on Spices)."
+msgstr "如果启用，将会在每个扩展菜单条目中显示一个可以打开扩展Spices页面的按钮（如果扩展已在Spices上发布）。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_spices_button->description
 msgid "Show \"Spices page\" button on extensions menu"
@@ -293,13 +261,8 @@ msgid "Keep only one menu open at all times"
 msgstr "始终保持仅打开一个菜单"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open the extension's settings page (if the extension has a configuration "
-"mechanism)."
-msgstr ""
-"如果启用，将会在每个扩展条目中显示一个可以打开扩展设置页面的按钮（如果扩展拥"
-"有一个配置机制）。"
+msgid "If enabled, it will display a button in each extension menu item that will open the extension's settings page (if the extension has a configuration mechanism)."
+msgstr "如果启用，将会在每个扩展条目中显示一个可以打开扩展设置页面的按钮（如果扩展拥有一个配置机制）。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_config_button->description
 msgid "Show \"Open settings window\" button on extensions menu"
@@ -314,8 +277,7 @@ msgid "Custom label"
 msgstr "自定义标签"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->tooltip
-msgid ""
-"If disabled, the extension UUID will be used as label for the menu items."
+msgid "If disabled, the extension UUID will be used as label for the menu items."
 msgstr "如果禁用，扩展的UUID将会被用作菜单条目的标签。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_use_extension_names_as_label->description
@@ -323,9 +285,7 @@ msgid "Use extension name as label"
 msgstr "使用扩展名称作为标签"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->tooltip
-msgid ""
-"If enabled, every time that the menu is open, the \"Disabled extensions\" "
-"sub menu will be open too."
+msgid "If enabled, every time that the menu is open, the \"Disabled extensions\" sub menu will be open too."
 msgstr "如果启用，每次菜单时，也会打开“已禁用的扩展”子菜单。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_keep_disabled_extension_menu_open->description
@@ -345,12 +305,8 @@ msgid "Set max height for the main menu"
 msgstr "设置主菜单的最大高度"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->tooltip
-msgid ""
-"If enabled, it will display a button in each extension menu item that will "
-"open main extension file (extension.js) with a text editor."
-msgstr ""
-"如果启用，将会在每个扩展按钮条目中显示一个可以打开扩展主文件（extension.js）"
-"和文本编辑器的按钮。"
+msgid "If enabled, it will display a button in each extension menu item that will open main extension file (extension.js) with a text editor."
+msgstr "如果启用，将会在每个扩展按钮条目中显示一个可以打开扩展主文件（extension.js）和文本编辑器的按钮。"
 
 #. 0dyseus@ExtensionsManager->settings-schema.json->pref_show_edit_extension_file_button->description
 msgid "Show \"Edit extension main file\" button on extensions menu"
