@@ -508,7 +508,7 @@ MyApplet.prototype = {
                 "system-run",
                 St.IconType.SYMBOLIC);
             this.context_menu_item_configure.connect("activate", Lang.bind(this, function() {
-                Util.spawn_async(["cinnamon-settings applets", this.metadata.uuid,
+                Util.spawn_async(["cinnamon-settings", "applets", this.metadata.uuid,
                     this.instance_id
                 ], null);
             }));
