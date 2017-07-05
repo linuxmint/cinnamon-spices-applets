@@ -1264,7 +1264,11 @@ CinnamenuApplet.prototype = {
           && !enteredCategoryExists
           && !enteredPowerGroupItemExists)) {
         if (!enteredCategoryExists && !this.searchActive) {
-          categoryChildren[startingCategoryIndex]._delegate.handleEnter();
+          if (typeof categoryChildren[startingCategoryIndex] !== 'undefined') {
+            categoryChildren[startingCategoryIndex]._delegate.handleEnter();
+          } else {
+            _.last(categoryChildren)._delegate.handleEnter();
+          }
         }
       } else if (!enteredCategoryExists) {
         previousItemNavigation(refItemIndex - 1);
