@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@window-list-fork 1.06\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@window-list-fork 1.11\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-05-13 20:35-0300\n"
 "PO-Revision-Date: 2017-05-08 13:22+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
@@ -15,9 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applet.js:792 2.8/applet.js:699
 msgid "Preferences"
@@ -116,15 +115,11 @@ msgid "IMPORTANT!!!"
 msgstr ""
 
 #: ../../create_localized_help.py:176
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
 #: ../../create_localized_help.py:177
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
 #: ../../create_localized_help.py:183
@@ -132,23 +127,16 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
 #: ../../create_localized_help.py:184
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:186
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
 #: ../../create_localized_help.py:187
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
 #. 0dyseus@window-list-fork->metadata.json->description
@@ -168,24 +156,16 @@ msgid "giwhub: Chinese localization."
 msgstr "giwhub: Kineska lokalizacija."
 
 #. 0dyseus@window-list-fork->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti "
-"podneseni na poveznici xlet repozitorija ispod."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti podneseni na poveznici xlet repozitorija ispod."
 
 #. 0dyseus@window-list-fork->metadata.json->name
 msgid "Window list (Fork By Odyseus)"
 msgstr "Popis prozora (Fork od Odyseusa)"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
-msgid ""
-"Show an alert in the window list when a window from another workspace "
-"requires attention"
-msgstr ""
-"Prikaži upozorenje na popisu prozora kada prozor s drugog radnog prostora "
-"treba pozornost"
+msgid "Show an alert in the window list when a window from another workspace requires attention"
+msgstr "Prikaži upozorenje na popisu prozora kada prozor s drugog radnog prostora treba pozornost"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
 msgid "Show window thumbnails on hover"
@@ -196,11 +176,8 @@ msgid "Reverse the direction of mouse-wheel scrolling in the window list"
 msgstr "Obrni smjer pomicanja kotatčićem miša u popisu prozora"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
-msgid ""
-"Window buttons can have different sizes and use the entire space available"
-msgstr ""
-"Kartice prozora mogu imati različite veličine i koristiti cijeli dostupan "
-"prozor"
+msgid "Window buttons can have different sizes and use the entire space available"
+msgstr "Kartice prozora mogu imati različite veličine i koristiti cijeli dostupan prozor"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_hide_tooltips->description
 msgid "Do not display tooltips"
@@ -215,12 +192,8 @@ msgid "Where to display the \"Preferences\" sub-menu?"
 msgstr "Gdje prikazati \"Osobitosti\" podizbornik?"
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
-msgid ""
-"If the option \"Invert context menu items order\" is enabled, the \"Top of "
-"menu\" will actually be the \"Bottom of menu\" and vice versa."
-msgstr ""
-"Ako je \"Obrni redoslijed stavki izbornika\" omogućena, \"Vrh izbornika\" će "
-"zapravo biti \"Dno izbornika\" i obrnuto."
+msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
+msgstr "Ako je \"Obrni redoslijed stavki izbornika\" omogućena, \"Vrh izbornika\" će zapravo biti \"Dno izbornika\" i obrnuto."
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
 msgid "Do not display"
@@ -259,9 +232,5 @@ msgstr "Srednji klik za zatvaranje prozora"
 msgid "Invert context menu items order"
 msgstr "Obrni redoslijed stavki izbornika"
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
-#~ "na poveznici repozitorija ovog apleta."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
+#~ msgstr "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na poveznici repozitorija ovog apleta."
