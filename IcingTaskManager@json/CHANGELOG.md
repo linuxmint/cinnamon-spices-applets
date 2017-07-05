@@ -1,5 +1,10 @@
 Changelog
 
+### 4.6.1
+
+  * Fixed a bug preventing some apps, such as Transmission, from having their app button removed from the panel after they are closed.
+  * Fixed a couple warnings when windows are minimized through ITM.
+
 ### 4.6.0
 
   * Added support for Cinnamon's minimize animation positioning.

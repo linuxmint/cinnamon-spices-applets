@@ -410,7 +410,7 @@ AppList.prototype = {
 
     for (let i = 0, len = windows.length; i < len; i++) {
       let windowWorkspace = windows[i].get_workspace();
-      if (windowWorkspace.index() === workspace.index()) {
+      if (windowWorkspace && windowWorkspace.index() === workspace.index()) {
         ++result;
       }
     }

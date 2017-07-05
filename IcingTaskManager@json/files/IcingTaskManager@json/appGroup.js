@@ -366,12 +366,12 @@ AppGroup.prototype = {
         }
         Main.activateWindow(nextWindow, global.get_current_time());
       } else {
-        this.lastFocused.minimize(global.get_current_time());
+        this.lastFocused.minimize();
         this.actor.remove_style_pseudo_class('focus');
       }
     } else {
       if (this.lastFocused.minimized) {
-        this.lastFocused.unminimize(global.get_current_time());
+        this.lastFocused.unminimize();
       }
       let ws = this.lastFocused.get_workspace().index();
       if (ws != global.screen.get_active_workspace_index()) {

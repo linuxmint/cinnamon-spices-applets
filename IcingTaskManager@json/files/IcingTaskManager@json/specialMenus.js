@@ -331,7 +331,7 @@ AppMenuButtonRightClickMenu.prototype = {
         Miscellaneous
       */
 
-      if (mw.get_compositor_private().opacity != 255) {
+      if (mw.get_compositor_private().opacity !== 255) {
         item = createMenuItem({label: 'Restore to full opacity'});
         item.connect('activate', function() {
           mw.get_compositor_private().set_opacity(255);
@@ -347,7 +347,7 @@ AppMenuButtonRightClickMenu.prototype = {
       } else {
         item = createMenuItem({label: 'Minimize', icon: 'view-sort-ascending'});
         item.connect('activate', function() {
-          mw.minimize(global.get_current_time());
+          mw.minimize();
         });
       }
       this.addMenuItem(item);
