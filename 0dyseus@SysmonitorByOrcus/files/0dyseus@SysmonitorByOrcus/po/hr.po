@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.09\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@SysmonitorByOrcus 1.15\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-05-13 20:35-0300\n"
 "PO-Revision-Date: 2017-05-04 18:20+0200\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
@@ -15,26 +15,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applet.js:178
 msgid "Missing dependency!!!"
 msgstr "Nedostaje zavisnost!!!"
 
 #: applet.js:179
-msgid ""
-"This applet needs the GTop library installed on your system for it  to work."
-msgstr ""
-"Ovaj aplet zahtijeva GTop biblioteku instaliranu na vašem računalu kako bi "
-"radio."
+msgid "This applet needs the GTop library installed on your system for it  to work."
+msgstr "Ovaj aplet zahtijeva GTop biblioteku instaliranu na vašem računalu kako bi radio."
 
 #: applet.js:180
-msgid ""
-"Read this applet help for more details (Applet context menu > Help item)."
-msgstr ""
-"Pročitajte pomoć ovog apleta za pojedinosti (Aplet izbornik > stavka pomoći)."
+msgid "Read this applet help for more details (Applet context menu > Help item)."
+msgstr "Pročitajte pomoć ovog apleta za pojedinosti (Aplet izbornik > stavka pomoći)."
 
 #: applet.js:331
 msgid "Help"
@@ -80,9 +74,7 @@ msgid "Dependencies"
 msgstr ""
 
 #: ../../create_localized_help.py:65
-msgid ""
-"The gtop library reads information about processes and the state of the "
-"system."
+msgid "The gtop library reads information about processes and the state of the system."
 msgstr ""
 
 #: ../../create_localized_help.py:66 ../../create_localized_help.py:77
@@ -113,10 +105,7 @@ msgid "The package is called **libgtop2-devel**."
 msgstr ""
 
 #: ../../create_localized_help.py:76
-msgid ""
-"NetworkManager is a system network service that manages your network devices "
-"and connections, attempting to keep active network connectivity when "
-"available."
+msgid "NetworkManager is a system network service that manages your network devices and connections, attempting to keep active network connectivity when available."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
@@ -140,17 +129,11 @@ msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:89
-msgid ""
-"NetworkManager is only used if the **GTop** library version installed on a "
-"system is < **2.32** and doesn't support certain library calls. So, "
-"basically, if the network graph on this applet works without having "
-"installed NetworkManager, then you don't need to install it."
+msgid "NetworkManager is only used if the **GTop** library version installed on a system is < **2.32** and doesn't support certain library calls. So, basically, if the network graph on this applet works without having installed NetworkManager, then you don't need to install it."
 msgstr ""
 
 #: ../../create_localized_help.py:91
-msgid ""
-"Restart Cinnamon after installing the packages for the applet to recognize "
-"them."
+msgid "Restart Cinnamon after installing the packages for the applet to recognize them."
 msgstr ""
 
 #. TO TRANSLATORS: This is a placeholder.
@@ -175,15 +158,11 @@ msgid "IMPORTANT!!!"
 msgstr ""
 
 #: ../../create_localized_help.py:200
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
 #: ../../create_localized_help.py:201
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
 #: ../../create_localized_help.py:207
@@ -191,32 +170,21 @@ msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
 #: ../../create_localized_help.py:208
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:210
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
 #: ../../create_localized_help.py:211
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti "
-"podneseni na poveznici xlet repozitorija ispod."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Izvještaji grešaka, zahtjevi novih značajki i doprinosi trebali bi biti podneseni na poveznici xlet repozitorija ispod."
 
 #. 0dyseus@SysmonitorByOrcus->metadata.json->contributors
 msgid "buzz: Bug fixes."
@@ -275,12 +243,8 @@ msgid "Show Memory graph:"
 msgstr "Prikaži graf memorije"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->tooltip
-msgid ""
-"For those of us who suffer from the stupidity of using a theme with tooltips "
-"aligned to the center. ¬¬"
-msgstr ""
-"Za one od nas koji pate od gluposti korištenja teme s napomenama pravnanim u "
-"sredinu. ¬¬"
+msgid "For those of us who suffer from the stupidity of using a theme with tooltips aligned to the center. ¬¬"
+msgstr "Za one od nas koji pate od gluposti korištenja teme s napomenama pravnanim u sredinu. ¬¬"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->pref_align_tooltip_text_to_the_left->description
 msgid "Align tooltip text to the left"
@@ -338,9 +302,7 @@ msgstr "Ponovno pokreni Cinnamon"
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button2->description
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->demo-button1->description
 msgid "To apply these settings, Cinnamon needs to be restarted. Click me!!!"
-msgstr ""
-"Za primjenu ovih postavki, potrebno je ponovno pokrenuti Cinnamon. Kliknite "
-"ovdje!!!"
+msgstr "Za primjenu ovih postavki, potrebno je ponovno pokrenuti Cinnamon. Kliknite ovdje!!!"
 
 #. 0dyseus@SysmonitorByOrcus->settings-schema.json->head3->description
 msgid "Swap graph"
@@ -444,9 +406,5 @@ msgstr "Graf memorije"
 #~ msgid "Load average: "
 #~ msgstr "Prosječno opterećenje: "
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod "
-#~ "na poveznici repozitorija ovog apleta."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
+#~ msgstr "Prijave grešaka i zahtjevi novih značajki trebali bi se prijaviti ispod na poveznici repozitorija ovog apleta."
