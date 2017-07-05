@@ -1,11 +1,27 @@
 <h2 style="color:red;">Bug reports, feature requests and contributions</h2>
-<span style="color:red;">
-If anyone has bugs to report, a feature request or a contribution, do so on <a href="https://github.com/Odyseus/CinnamonTools">this xlet GitHub page</a>.
-</span>
+<p style="color:red;">
+Bug reports, feature requests and contributions should be done on this xlet's repository linked next.
+</p>
 
-## Wallpaper Changer applet description
+<table><tbody>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/issues.svg"></td>
+<td><a href="https://github.com/Odyseus/CinnamonTools"><strong style="font-size: 1.2em">
+Bug reports/Feature requests/Contributions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/help.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html"><strong style="font-size: 1.2em">
+Localized help
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/contributors.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-contributors"><strong style="font-size: 1.2em">
+Contributors/Mentions
+</strong></a></td></tr>
+<tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/changelog.svg"></td>
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-changelog"><strong style="font-size: 1.2em">
+Full change log
+</strong></a></td></tr>
 
-Applet based on the gnome-shell extension called [Desk Changer](https://github.com/BigE/desk-changer) by [Eric Gach](https://github.com/BigE). A wallpaper slideshow applet with multiple profiles support.
+</tbody></table>
 
 ## Compatibility
 
@@ -13,9 +29,11 @@ Applet based on the gnome-shell extension called [Desk Changer](https://github.c
 ![Cinnamon 3.2](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.2.svg)
 ![Cinnamon 3.4](https://odyseus.github.io/CinnamonTools/lib/badges/cinn-3.4.svg)
 
-<span style="color:red;font-size:large;">
-**Important note:** Do not try to install and force compatibility for any other version of Cinnamon older than 3.0.x. As a protection mechanism, the applet will auto-remove itself from the panel.
-</span>
+<span style="color:red;"><strong>Do not install on any other version of Cinnamon.</strong></span>
+
+## Description
+
+Applet based on the gnome-shell extension called [Desk Changer](https://github.com/BigE/desk-changer) by [Eric Gach](https://github.com/BigE). A wallpaper slideshow applet with multiple profiles support.
 
 ## Features
 
@@ -28,9 +46,3 @@ Applet based on the gnome-shell extension called [Desk Changer](https://github.c
 - Possibility to display a notification every time the wallpaper is switched.
 - Configurable hotkeys to switch to next/previous wallpaper.
 - Read the tooltips of each option on this applet settings window for more details.
-
-**Note:** This applet doesn't complement the Cinnamon option called **Play backgrounds as a slideshow**, it replaces it. The Cinnamon option should be disabled at all times for this applet to work as expected. No worries, nothing *fatal* could happen.
-
-#### [Localized help](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html)
-#### [Contributors/Mentions](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-contributors)
-#### [Full change log](https://odyseus.github.io/CinnamonTools/help_files/0dyseus@WallpaperChangerApplet.html#xlet-changelog)
