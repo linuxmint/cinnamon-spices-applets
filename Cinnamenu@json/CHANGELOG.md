@@ -1,5 +1,10 @@
 Changelog
 
+### 2.0.1
+
+  * Changed the default column count to 4.
+  * Improved the context menu positioning.
+
 ### 2.0.0
 
   * Reorganized the layout for more efficient use of space.

@@ -3,6 +3,6 @@
  "name": "Cinnamenu",
  "description": "A flexible menu providing formatting options, fuzzy searching, and web bookmarks.",
  "max-instances": -1,
- "version": "2.0.0",
+ "version": "2.0.1",
   "cinnamon-version": ["3.2", "3.4"]
 }

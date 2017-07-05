@@ -738,9 +738,9 @@ AppListGridButton.prototype = {
     } else if (button === 3) {
       // Prevent the menu from clipping if this button is partially visible.
       if (!this._parent.isListView && this._parent._isNotInScrollView(this)) {
-        let [x, y] = this.menu.actor.get_position();
+        let y = this.menu.actor.get_position()[1];
         y = -100;
-        this.menu.actor.set_position(x, y);
+        this.menu.actor.set_position(this.x, y);
       }
       this.activateContextMenus(e);
     }
@@ -791,17 +791,16 @@ AppListGridButton.prototype = {
   },
 
   setColumn: function(column) {
-    if (this.appType !== ApplicationType._applications) {
+    if (!this.menu.actor) {
       return false;
     }
     this.column = column;
-    let x = 0, y = 50;
+    let x = 45, y = 50;
     if ((column === 0 || column === this.appListLength)
       && this.appListLength > 1) {
       x = -90
-    } else if (column === this._parent.appsGridColumnCount) {
-      x = 160
     }
+    this.x = x;
     this.menu.actor.set_position(x, y);
   },
 
