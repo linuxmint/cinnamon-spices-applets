@@ -10,7 +10,7 @@
     "contributors": "See this xlet help file.",
     "max-instances": -1,
     "description": "Create Cinnamon applets in seconds.",
-    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
-    "version": "1.01",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked next.",
+    "version": "1.02",
     "name": "Argos for Cinnamon"
 }
