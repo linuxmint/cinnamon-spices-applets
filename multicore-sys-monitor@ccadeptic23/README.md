@@ -1,6 +1,6 @@
 You must install the **gir1.2-gtop-2.0** package to use this applet.
 
-**Instructions for upgrading from Cinnamon 3.2 to 3.4**
+**Instructions for upgrading to Cinnamon 3.4**
 
 Uninstall the applet from Applet Settings, delete ```~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23``` and ```~/.cinnamon/configs/multicore-sys-monitor@ccadeptic23```. Then reinstall from Applet Settings, so it re-downloads it.
 
