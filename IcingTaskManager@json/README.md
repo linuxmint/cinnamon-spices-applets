@@ -42,8 +42,7 @@ sudo apt-get install -y nodejs
 *  Install gulp globally: ```sudo npm install -g gulp```
 *  From the root of this applet's directory, start transpile watch task: ```gulp spawn-watch```
   * This task will auto-reload the extension on every edit.
-*  Monitor the logging output of these files: 
+*  Monitor the logging output of these files:
   * ```tail -f -n100 ~/.cinnamon/glass.log```
   * ```tail -f -n100 ~/.xsession-errors.log```
-* Use two spaces for indentation, and ES2015 equivalent syntax when possible. 
-  * You may want to read Babel's [documentation](https://babeljs.io/learn-es2015/) if you are not familiar with ES2015.
+* Use two spaces for indentation.
