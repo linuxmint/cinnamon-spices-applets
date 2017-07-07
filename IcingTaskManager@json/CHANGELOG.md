@@ -1,5 +1,9 @@
 Changelog
 
+### 4.6.2
+
+  * Fixed icon sizing in high DPI mode.
+
 ### 4.6.1
 
   * Fixed a bug preventing some apps, such as Transmission, from having their app button removed from the panel after they are closed.

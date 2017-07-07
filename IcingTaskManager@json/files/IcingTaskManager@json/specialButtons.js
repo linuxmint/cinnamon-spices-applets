@@ -27,9 +27,7 @@ function AppButton () {
 AppButton.prototype = {
 
   _init: function (parent) {
-    this.icon_size = Math.floor(parent._applet._panelHeight - 4);
     this.app = parent.app;
-    this.icon = this.app.create_icon_texture(this.icon_size);
     this._applet = parent._applet;
     this._parent = parent;
     this.isFavapp = parent.isFavapp;
@@ -74,6 +72,9 @@ AppButton.prototype = {
     this.signals._container.push(this._container.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight)));
     this.signals._container.push(this._container.connect('allocate', Lang.bind(this, this._allocate)));
 
+    this.iconSize = this._applet.enableIconSize ? this._applet.iconSize : 16;
+    this.icon = this.app.create_icon_texture(this.iconSize);
+
     this._label = new St.Label({
       style_class: 'app-button-label',
       text: ''
@@ -87,7 +88,6 @@ AppButton.prototype = {
     this._container.add_actor(this._numLabel);
 
     setTimeout(()=>this.setIconPadding(true), 0);
-    this.setIconSize();
 
     this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
@@ -110,17 +110,18 @@ AppButton.prototype = {
   },
 
   setIconPadding: function (init) {
+    // TBD - this method doesn't work across all themes and needs to be fixed or replaced
     if (!this.actor.get_stage() && !init) {
       return false;
     }
 
     if (init && this._applet.themePadding) {
       this.themeNode = this.actor.peek_theme_node();
-      var themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
+      let themePadding = this.themeNode ? this.themeNode.get_horizontal_padding() : 4;
       this.offsetPadding =  themePadding > 10 ? _.round(themePadding / 4) : themePadding > 7 ? _.round(themePadding / 2) : 5;
     }
     if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM) {
-      var padding;
+      let padding;
       if (this._applet.themePadding) {
         padding = padding = this._applet.iconPadding <= 5 ? [this.offsetPadding % 2 === 1 ? this.offsetPadding : this.offsetPadding - 1 + 'px', '0px'] : [this._applet.iconPadding + 'px', this._applet.iconPadding - (this.offsetPadding > 0 && this.offsetPadding % 2 === 1 ? 5 : 4) + 'px'];
       } else {
@@ -131,9 +132,11 @@ AppButton.prototype = {
   },
 
   setIconSize: function () {
-    var size = this._applet.iconSize;
+    let size = this._applet.iconSize;
     if (this._applet.enableIconSize) {
-      this.icon.set_size(size, size);
+      this.icon.destroy();
+      this.icon = this.app.create_icon_texture(this._applet.iconSize);
+      this._container.insert_child_at_index(this.icon, 0);
     }
   },
 
@@ -159,7 +162,7 @@ AppButton.prototype = {
     }
 
     this._needsAttention = true;
-    var counter = 0;
+    let counter = 0;
     this._flashButton(counter);
     return true;
   },
@@ -213,15 +216,15 @@ AppButton.prototype = {
     // centered in length
 
     function center (length, naturalLength) {
-      var maxLength = Math.min(length, naturalLength);
-      var x1 = Math.max(0, Math.floor((length - maxLength) / 2));
-      var x2 = Math.min(length, x1 + maxLength);
+      let maxLength = Math.min(length, naturalLength);
+      let x1 = Math.max(0, Math.floor((length - maxLength) / 2));
+      let x2 = Math.min(length, x1 + maxLength);
       return [x1, x2];
     }
-    var allocWidth = box.x2 - box.x1;
-    var allocHeight = box.y2 - box.y1;
-    var childBox = new Clutter.ActorBox();
-    var direction = this.actor.get_text_direction();
+    let allocWidth = box.x2 - box.x1;
+    let allocHeight = box.y2 - box.y1;
+    let childBox = new Clutter.ActorBox();
+    let direction = this.actor.get_text_direction();
 
     // Set the icon to be left-justified (or right-justified) and centered vertically
     let [iconNaturalWidth, iconNaturalHeight] = this.icon.get_preferred_size();
@@ -234,8 +237,8 @@ AppButton.prototype = {
     this.icon.allocate(childBox, flags);
 
     // Set the label to start its text in the left of the icon
-    var iconWidth = childBox.x2 - childBox.x1;
-    var [naturalWidth, naturalHeight] = this._label.get_preferred_size();
+    let iconWidth = childBox.x2 - childBox.x1;
+    let [naturalWidth, naturalHeight] = this._label.get_preferred_size();
     [childBox.y1, childBox.y2] = center(allocHeight, naturalHeight);
     if (direction === Clutter.TextDirection.LTR) {
       childBox.x1 = iconWidth;
@@ -279,14 +282,14 @@ AppButton.prototype = {
       this._label.set_text('');
     }
     // TBD
-    /*var setToZero
+    /*let setToZero
     if (this._label.width < 2) {
       this._label.set_width(-1)
       setToZero = true
     } else if (this._label.text && this._label.width < (this._label.text.length * 7) - 5 || this._label.width > (this._label.text.length * 7) + 5) {
       this._label.set_width(-1)
     }
-    var width = Math.min(targetWidth)
+    let width = Math.min(targetWidth)
     if (setToZero) {
       this._label.width = 1
     }
@@ -373,7 +376,7 @@ AppButton.prototype = {
   },
 
   _hasFocus: function () {
-    var workspaceIds = [];
+    let workspaceIds = [];
 
     let workspaces = _.map(this._applet.metaWorkspaces, 'ws');
 
@@ -381,12 +384,12 @@ AppButton.prototype = {
       workspaceIds.push(workspaces[i].index());
     }
 
-    var windows = _.filter(this.metaWindows, (win)=>{
+    let windows = _.filter(this.metaWindows, (win)=>{
       return workspaceIds.indexOf(this._applet.currentWs) >= 0;
     });
 
-    var hasTransient = false;
-    var handleTransient = function(transient){
+    let hasTransient = false;
+    let handleTransient = function(transient){
       if (transient.has_focus()) {
         hasTransient = true;
         return false;
@@ -421,7 +424,7 @@ AppButton.prototype = {
   },
 
   _onWindowDemandsAttention: function (display, window) {
-    var windows = this.app.get_windows();
+    let windows = this.app.get_windows();
     for (let i = 0, len = windows.length; i < len; i++) {
       if (_.isEqual(windows[i], window)) {
         this.getAttention();
