@@ -5,19 +5,19 @@ Bug reports, feature requests and contributions should be done on this xlet's re
 
 <table><tbody>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/issues.svg"></td>
-<td><a href="https://github.com/Odyseus/CinnamonTools"><strong style="font-size: 1.2em">
+<td><a href="https://github.com/Odyseus/CinnamonTools"><strong>
 Bug reports/Feature requests/Contributions
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/help.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html"><strong>
 Localized help
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/contributors.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html#xlet-contributors"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html#xlet-contributors"><strong>
 Contributors/Mentions
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/changelog.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html#xlet-changelog"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@ArgosForCinnamon.html#xlet-changelog"><strong>
 Full change log
 </strong></a></td></tr>
 
