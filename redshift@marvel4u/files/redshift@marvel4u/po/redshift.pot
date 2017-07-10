@@ -1,0 +1,11 @@
+#
+msgid ""
+msgstr ""
+
+#. redshift@marvel4u->metadata.json->description
+msgid "An app to change the red filter level for late night screen time. Requires redshift: sudo apt-get install redshift"
+msgstr ""
+
+#. redshift@marvel4u->metadata.json->name
+msgid "Redshift"
+msgstr ""
