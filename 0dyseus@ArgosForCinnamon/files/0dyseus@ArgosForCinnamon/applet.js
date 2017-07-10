@@ -62,6 +62,7 @@ MyApplet.prototype = {
             this._updateRunning = false;
             this._processingFile = false;
             this._sliderIsSliding = false;
+            this._script_path = "";
 
             this._expandAppletContextMenu();
             this._processFile();
@@ -99,22 +100,22 @@ MyApplet.prototype = {
 
             this._setAppletTooltip();
 
-            let path = this.pref_file_path;
+            this._script_path = this.pref_file_path;
 
-            if (/^file:\/\//.test(path))
-                path = path.substr(7);
+            if (/^file:\/\//.test(this._script_path))
+                this._script_path = this._script_path.substr(7);
 
             // Make all checks individually so I can make precise notifications.
-            if (GLib.file_test(this.pref_file_path, GLib.FileTest.EXISTS)) {
-                if (!GLib.file_test(this.pref_file_path, GLib.FileTest.IS_DIR)) {
-                    if (GLib.file_test(this.pref_file_path, GLib.FileTest.IS_EXECUTABLE)) {
-                        this._file = Gio.file_new_for_path(path);
+            if (GLib.file_test(this._script_path, GLib.FileTest.EXISTS)) {
+                if (!GLib.file_test(this._script_path, GLib.FileTest.IS_DIR)) {
+                    if (GLib.file_test(this._script_path, GLib.FileTest.IS_EXECUTABLE)) {
+                        this._file = Gio.file_new_for_path(this._script_path);
                     } else {
                         this._file = null;
                         Main.notify(
                             _(this.metadata.name),
                             _("Script file is not executable.") + "\n" +
-                            this.pref_file_path + "\n" +
+                            this._script_path + "\n" +
                             _("The script file can be made executable from this applet context menu.")
                         );
                     }
@@ -123,26 +124,26 @@ MyApplet.prototype = {
                     Main.notify(
                         _(this.metadata.name),
                         _("Script file isn't a file, but a directory.") + "\n" +
-                        this.pref_file_path
+                        this._script_path
                     );
                 }
             } else {
                 this._file = null;
                 // Notify only if the path to the script is not set.
                 // Otherwise, it would be ultra annoying. LOL
-                if (this.pref_file_path !== "") {
+                if (this._script_path !== "") {
                     Main.notify(
                         _(this.metadata.name),
                         _("Script file doesn't exists.") + "\n" +
-                        this.pref_file_path
+                        this._script_path
                     );
                 }
             }
 
-            if (GLib.file_test(path, GLib.FileTest.EXISTS) &&
-                GLib.file_test(path, GLib.FileTest.IS_EXECUTABLE) &&
-                !GLib.file_test(path, GLib.FileTest.IS_DIR)) {
-                this._file = Gio.file_new_for_path(path);
+            if (GLib.file_test(this._script_path, GLib.FileTest.EXISTS) &&
+                GLib.file_test(this._script_path, GLib.FileTest.IS_EXECUTABLE) &&
+                !GLib.file_test(this._script_path, GLib.FileTest.IS_DIR)) {
+                this._file = Gio.file_new_for_path(this._script_path);
             } else {
                 this._file = null;
             }
@@ -675,15 +676,15 @@ MyApplet.prototype = {
         );
         menuItem.connect("activate", Lang.bind(this, function() {
             // Make all checks individually so I can make precise notifications.
-            if (GLib.file_test(this.pref_file_path, GLib.FileTest.EXISTS)) {
-                if (!GLib.file_test(this.pref_file_path, GLib.FileTest.IS_DIR)) {
-                    if (!GLib.file_test(this.pref_file_path, GLib.FileTest.IS_EXECUTABLE)) {
+            if (GLib.file_test(this._script_path, GLib.FileTest.EXISTS)) {
+                if (!GLib.file_test(this._script_path, GLib.FileTest.IS_DIR)) {
+                    if (!GLib.file_test(this._script_path, GLib.FileTest.IS_EXECUTABLE)) {
                         try {
                             if (FileUtils.hasOwnProperty("changeModeGFile")) {
-                                let file = Gio.file_new_for_path(this.pref_file_path);
+                                let file = Gio.file_new_for_path(this._script_path);
                                 FileUtils.changeModeGFile(file, 755);
                             } else {
-                                Util.spawnCommandLine("chmod +x \"" + this.pref_file_path + "\"");
+                                Util.spawnCommandLine("chmod +x \"" + this._script_path + "\"");
                             }
                         } finally {
                             this._setFileModeTimeout = Mainloop.timeout_add_seconds(1,
@@ -696,21 +697,21 @@ MyApplet.prototype = {
                         Main.notify(
                             _(this.metadata.name),
                             _("Script file is already executable.") + "\n" +
-                            this.pref_file_path
+                            this._script_path
                         );
                     }
                 } else {
                     Main.notify(
                         _(this.metadata.name),
                         _("Script file isn't a file, but a directory.") + "\n" +
-                        this.pref_file_path
+                        this._script_path
                     );
                 }
             } else {
                 Main.notify(
                     _(this.metadata.name),
                     _("Script file doesn't exists.") + "\n" +
-                    this.pref_file_path
+                    this._script_path
                 );
             }
         }));
