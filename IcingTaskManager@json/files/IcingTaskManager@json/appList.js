@@ -2,11 +2,11 @@ const Lang = imports.lang;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
+const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
 const _ = AppletDir.lodash._;
-const App = AppletDir.applet;
 const AppGroup = AppletDir.appGroup.AppGroup;
 const each = AppletDir.each.each;
 const constants = AppletDir.constants.constants;
@@ -21,25 +21,19 @@ AppList.prototype = {
   _init: function (applet, metaWorkspace) {
     this._applet = applet;
     this.settings = applet.settings;
-    this.signals = {
-      actor: [],
-      settings: [],
-      metaWorkspace: []
-    };
     this.orientation = applet.orientation;
+    this.signals = new SignalManager.SignalManager(this);
     this.metaWorkspace = metaWorkspace;
     this.actor = new St.BoxLayout();
 
-    var manager;
-    if (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM) {
-      manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.HORIZONTAL });
+    if (this.orientation === St.Side.TOP || this.orientation === St.Side.BOTTOM) {
+      this.manager = manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.HORIZONTAL });
     } else {
-      manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
+      this.manager = manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
       this.actor.add_style_class_name('vertical');
       this._applet.actor.add_style_class_name('vertical');
     }
 
-    this.manager = manager;
     this.manager_container = new Clutter.Actor({ layout_manager: manager });
     this.actor.add_actor(this.manager_container);
 
@@ -53,13 +47,9 @@ AppList.prototype = {
     this._setSignals();
     this._refreshList(true);
 
-    this.signals.actor.push(this.actor.connect('style-changed', Lang.bind(this, this._updateSpacing)));
+    this.signals.connect(this.actor, 'style-changed', Lang.bind(this, this._updateSpacing));
 
     this.on_orientation_changed(this._applet.orientation, true);
-  },
-
-  on_panel_edit_mode_changed: function () {
-    this.actor.reactive = global.settings.get_boolean('panel-edit-mode');
   },
 
   on_applet_added_to_panel: function(userEnabled) {
@@ -76,24 +66,24 @@ AppList.prototype = {
     // Any padding/margin is removed on one side so that the AppMenuButton
     // boxes butt up against the edge of the screen
 
-    var containerChildren = this.manager_container.get_children();
+    let containerChildren = this.manager_container.get_children();
 
-    var orientationKey = null;
+    let orientationKey = null;
     each(St.Side, (side, key)=>{
       if (orientation === St.Side[key]) {
         orientationKey = key.toLowerCase();
         return;
       }
     });
-    var style = 'margin-' + orientationKey + ': 0px; padding-' + orientationKey + ': 0px;';
-    var isVertical = orientationKey === 'left' || orientationKey === 'right';
+    let style = 'margin-' + orientationKey + ': 0px; padding-' + orientationKey + ': 0px;';
+    let isVertical = orientationKey === 'left' || orientationKey === 'right';
 
     if (isVertical) {
       this.manager.set_vertical(true);
       this.actor.add_style_class_name('vertical');
       this.actor.set_x_align(Clutter.ActorAlign.CENTER);
       this.actor.set_important(true);
-      var opposite = orientationKey === 'left' ? 'right' : 'left';
+      let opposite = orientationKey === 'left' ? 'right' : 'left';
       style += 'padding-' + opposite + ': 0px; margin-' + opposite + ': 0px;';
     } else {
       this.manager.set_vertical(false);
@@ -106,17 +96,23 @@ AppList.prototype = {
     }
 
     each(containerChildren, (child, key)=>{
-      child.set_style(style);
+      //child.set_style(style); TBD
       if (isVertical) {
         child.set_x_align(Clutter.ActorAlign.CENTER);
       }
     });
-    this.actor.set_style(style);
+    //this.actor.set_style(style);
 
     if (this._applet.appletEnabled) {
       this._updateSpacing();
     }
   },
+
+  _setSignals: function () {
+    this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
+    this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
+  },
+
   _closeAllHoverMenus: function(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       if (this.appList[i].appGroup.hoverMenu.isOpen) {
@@ -150,14 +146,14 @@ AppList.prototype = {
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number-1].appGroup._onAppKeyPress(number);
+    this.appList[number - 1].appGroup._onAppKeyPress(number);
   },
 
   _onNewAppKeyPress: function(number){
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number-1].appGroup._onNewAppKeyPress(number);
+    this.appList[number - 1].appGroup._onNewAppKeyPress(number);
   },
 
   _showAppsOrder: function(){
@@ -172,16 +168,16 @@ AppList.prototype = {
   },
 
   _cycleMenus: function(){
-    var refApp = 0;
+    let refApp = 0;
     if (!this.lastCycled && this.lastFocusedApp) {
       refApp = _.findIndex(this.appList, {id: this.lastFocusedApp});
     }
     if (this.lastCycled) {
       this.appList[this.lastCycled].appGroup.hoverMenu.close();
-      refApp = this.lastCycled+1;
+      refApp = this.lastCycled + 1;
     }
     if (refApp === this.lastCycled) {
-      refApp = this.lastCycled+1;
+      refApp = this.lastCycled + 1;
     }
     this.lastCycled = refApp;
     if (refApp > this.appList.length - 1) {
@@ -197,16 +193,6 @@ AppList.prototype = {
 
   _updateSpacing: function() {
     this.manager.set_spacing(this._applet.iconSpacing * global.ui_scale);
-  },
-
-  _setSignals: function () {
-    // We use connect_after so that the window-tracker time to identify the app
-    this.signals.metaWorkspace.push(this.metaWorkspace.connect_after('window-added', Lang.bind(this, this._windowAdded)));
-    this.signals.metaWorkspace.push(this.metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved)));
-
-    this.signals.settings.push(this.settings.connect('changed::show-pinned', Lang.bind(this, this._refreshList)));
-    this.signals.settings.push(this.settings.connect('changed::icon-spacing', Lang.bind(this, this._updateSpacing)));
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
   },
 
   _setLastFocusedApp: function(id){
@@ -237,6 +223,7 @@ AppList.prototype = {
     this.registeredApps = this._getSpecialApps();
     this._loadFavorites(init);
     this._refreshApps(init);
+    this._updateFocusState();
   },
 
   /*
@@ -244,18 +231,18 @@ AppList.prototype = {
   */
 
   _refreshAppById: function(appId, opts){
-    var refApp = _.findIndex(this.appList, {id: appId});
+    let refApp = _.findIndex(this.appList, {id: appId});
     if (refApp !== -1) {
-      var app = this.appList[refApp].appGroup.app;
-      var isFavapp = opts.favChange ? opts.isFavapp : this.appList[refApp].appGroup.isFavapp;
-      var index = this.appList[refApp].ungroupedIndex;
+      let app = this.appList[refApp].appGroup.app;
+      let isFavapp = opts.favChange ? opts.isFavapp : this.appList[refApp].appGroup.isFavapp;
+      let index = this.appList[refApp].ungroupedIndex;
 
       this.appList[refApp].appGroup.destroy();
 
-      var windows = app.get_windows();
+      let windows = app.get_windows();
 
-      var window = null;
-      var hasWindows = windows.length > 0;
+      let window = null;
+      let hasWindows = windows.length > 0;
 
       if (!isFavapp && !hasWindows && opts.favChange) {
         _.pullAt(this.appList, refApp);
@@ -266,7 +253,7 @@ AppList.prototype = {
         window = app.get_windows()[0];
       }
 
-      var time = Date.now();
+      let time = Date.now();
 
       let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
 
@@ -276,7 +263,7 @@ AppList.prototype = {
       this.appList[refApp].appGroup = appGroup;
       this.appList[refApp].time = time;
 
-      var refPos = opts.favPos ? opts.favPos : refApp;
+      let refPos = opts.favPos ? opts.favPos : refApp;
 
       this.appList.splice(refPos, 0, this.appList.splice(refApp, 1)[0]);
 
@@ -307,18 +294,26 @@ AppList.prototype = {
   },
 
   _refreshApps: function (init) {
-    var windows = this.metaWorkspace.list_windows();
+    let windows = this.metaWorkspace.list_windows();
 
     for (let i = 0, len = windows.length; i < len; i++) {
       this._windowAdded(this.metaWorkspace, windows[i], null, null);
     }
   },
 
+  _updateFocusState: function () {
+    each(this.appList, (appObject)=>{
+      if (appObject.appGroup.metaWindows) {
+        appObject.appGroup._appButton._onFocusChange();
+      }
+    });
+  },
+
   _windowAdded: function (metaWorkspace, metaWindow, favapp, isFavapp, forceUngroupedWindow=false) {
     // Check to see if the window that was added already has an app group.
     // If it does, then we don't need to do anything.  If not, we need to
     // create an app group.
-    var app = null;
+    let app = null;
     if (favapp) {
       app = favapp;
     } else {
@@ -331,17 +326,16 @@ AppList.prototype = {
       return;
     }
 
-    var appId = app.get_id();
+    let appId = app.get_id();
 
-    var refApp = _.findIndex(this.appList, {id: appId});
+    let refApp = _.findIndex(this.appList, {id: appId});
 
     // If forceUngroupedWindow is set, then this method is being called from the first appGroup instance for this app, to override app grouping.
     if (forceUngroupedWindow && !favapp) {
       refApp = -1;
     }
-
-    var initApp = (wsWindows, window, index)=>{
-      var time = Date.now();
+    let initApp = (wsWindows, window, index)=>{
+      let time = Date.now();
       let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
       appGroup.watchWorkspace(metaWorkspace);
@@ -362,21 +356,24 @@ AppList.prototype = {
       if (this._applet.groupApps || forceUngroupedWindow && !favapp) {
         initApp();
       } else {
-        var windows = app.get_windows();
-        var wsWindows = metaWorkspace.list_windows();
+        let windows = app.get_windows();
+        let wsWindows = metaWorkspace.list_windows();
         windows = _.intersectionWith(windows, wsWindows, _.isEqual);
 
-        var _windows = windows.length > 0 ? windows : [null];
+        let _windows = windows.length > 0 ? windows : [null];
 
         for (let i = 0, len = _windows.length; i < len; i++) {
           initApp(wsWindows, _windows[i], i);
         }
       }
+    } else if (metaWindow) {
+      this.appList[refApp].appGroup._windowAdded(metaWorkspace, metaWindow);
     }
+
   },
 
   _appGroupNumber: function (parentApp) {
-    var result;
+    let result;
     for (let i = 0, len = this.appList.length; i < len; i++) {
       if (this.appList[i].appGroup.app === parentApp) {
         result = i+1;
@@ -387,14 +384,14 @@ AppList.prototype = {
   },
 
   _onAppWindowsChanged: function (app, cb) {
-    let numberOfwindows = this._getNumberOfAppWindowsInWorkspace(app, this.metaWorkspace);
+    /*let numberOfwindows = this._getNumberOfAppWindowsInWorkspace(app, this.metaWorkspace);
     if (!numberOfwindows || numberOfwindows === 0) {
-      this._removeApp(app);
+      this._windowRemoved(this.metaWorkspace, null, app);
       this._calcAllWindowNumbers();
     }
     if (typeof cb === 'function') {
       cb();
-    }
+    }*/
   },
 
   _calcAllWindowNumbers: function () {
@@ -404,7 +401,7 @@ AppList.prototype = {
   },
 
   _getNumberOfAppWindowsInWorkspace: function (app, workspace) {
-    var windows = app.get_windows();
+    let windows = app.get_windows();
 
     let result = 0;
 
@@ -419,7 +416,7 @@ AppList.prototype = {
 
   _fixAppGroupIndexAfterDrag: function (appId) {
     let originPos = _.findIndex(this.appList, {id: appId}); // app object
-    var pos = _.findIndex(this.manager_container.get_children(), this.appList[originPos].appGroup.actor);
+    let pos = _.findIndex(this.manager_container.get_children(), this.appList[originPos].appGroup.actor);
     if (originPos === pos
             || originPos < 0
             || pos < 0) {
@@ -435,66 +432,60 @@ AppList.prototype = {
     this.appList.splice(pos, 0, data);
   },
 
-  _windowRemoved: function (metaWorkspace, metaWindow, app) {
-
+  _windowRemoved: function (metaWorkspace, metaWindow, app, timeStamp) {
+    //log2(metaWorkspace, metaWindow, app, timeStamp);
     // When a window is closed, we need to check if the app it belongs
     // to has no windows left.  If so, we need to remove the corresponding AppGroup
-    if (!app) {
+
+    /*if (!app) {
       app = this._applet.getAppFromWMClass(this.specialApps, metaWindow);
 
       if (!app){
         app = this._applet.tracker.get_window_app(metaWindow);
       }
-      if (!app) {
-        return;
-      }
-    }
-    let hasWindowsOnWorkspace;
-    if (app.wmClass) {
-      hasWindowsOnWorkspace = metaWorkspace.list_windows().some(function (win) {
-        return _.isEqual(app.wmClass, win.get_wm_class_instance());
-      });
-    } else {
-      hasWindowsOnWorkspace = app.get_windows().some(function (win) {
-        return _.isEqual(win.get_workspace(), metaWorkspace);
-      });
-    }
-
-    if (app && !hasWindowsOnWorkspace) {
-      this._removeApp(app);
-    }
-  },
-
-  _removeApp: function (app, timeStamp) {
-    // This function may get called multiple times on the same app and so the app may have already been removed
-    var refApp = -1;
-    if (this._applet.groupApps || !timeStamp) {
+    }*/
+    let refApp = -1, refWindow = -1;
+    /*if (app && (this._applet.groupApps || !timeStamp)) { // TBD
       refApp = _.findIndex(this.appList, {id: app.get_id()});
     } else if (timeStamp) {
-      refApp = _.findIndex(this.appList, (_app)=>{
-        return _app.timeStamp === timeStamp;
+      refApp = _.findIndex(this.appList, (appObject)=>{
+        return appObject.timeStamp === timeStamp;
       });
-    }
-    if (refApp !== -1) {
-      if ((this.appList[refApp].appGroup.wasFavapp || this.appList[refApp].appGroup.isFavapp) && !timeStamp) {
-        this.appList[refApp].appGroup._isFavorite(true);
-
-        this._refreshApps();
-        return;
+    }*/
+    each(this.appList, (appObject, i)=>{
+      let shouldReturn = false;
+      each(appObject.appGroup.metaWindows, (win, z)=>{
+        if (_.isEqual(win.win, metaWindow)) {
+          refApp = i;
+          refWindow = z;
+          shouldReturn = true;
+          return false;
+        }
+      });
+      if (shouldReturn) {
+        return false;
       }
+    });
+    if (refApp > -1) {
+      this.appList[refApp].appGroup._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavapp)=>{
+        log2(this.appList[refApp].appGroup.wasFavapp, this.appList[refApp].appGroup.isFavapp, !timeStamp)
+        if ((this.appList[refApp].appGroup.wasFavapp || this.appList[refApp].appGroup.isFavapp) && !timeStamp) {
+          this.appList[refApp].appGroup._isFavorite(true);
+          this._refreshApps();
+          return;
+        }
+        this.appList[refApp].appGroup.destroy();
+        _.pullAt(this.appList, refApp);
 
-      this.appList[refApp].appGroup.destroy();
-      _.pullAt(this.appList, refApp);
+        if (isFavapp) {
+          this._applet.refreshAppFromCurrentListById(appId, {favChange: true, isFavapp: isFavapp});
+        }
+      });
     }
   },
 
   destroy: function () {
-    each(this.signals, (signal, key)=>{
-      each(signal, (id)=>{
-        this[key].disconnect(id);
-      });
-    });
-    global.settings.disconnect(this.panelEditId);
+    this.signals.disconnectAllSignals();
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].appGroup.destroy();
     }

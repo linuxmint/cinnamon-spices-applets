@@ -190,8 +190,8 @@ AppGroup.prototype = {
     });
     if (refWs === -1) {
       // We use connect_after so that the window-tracker time to identify the app, otherwise get_window_app might return null!
-      let windowAddedSignal = metaWorkspace.connect_after('window-added', (metaWorkspace, metaWindow)=>this._windowAdded(metaWorkspace, metaWindow));
-      let windowRemovedSignal = metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved));
+      let windowAddedSignal = null//metaWorkspace.connect_after('window-added', Lang.bind(this, this._windowAdded));
+      let windowRemovedSignal = null//metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved));
       // Workspace is cached so the signals are disconnected reliably in unwatchWorkspace.
       this.metaWorkspacesSignals.push({
         workspace: metaWorkspace,
@@ -207,6 +207,7 @@ AppGroup.prototype = {
   // Stop monitoring a workspace for added and removed windows.
   // @metaWorkspace: if null, will remove all signals
   unwatchWorkspace: function (metaWorkspace, unmount) {
+    return
     unmount = unmount ? unmount : false;
     if (!metaWorkspace) {
       let removeSignals = (obj)=> {
@@ -420,9 +421,7 @@ AppGroup.prototype = {
     }
   },
 
-  _windowAdded: function (metaWorkspace, metaWindow, metaWindows, recursion) {
-    recursion = recursion ? recursion : 0;
-
+  _windowAdded: function (metaWorkspace, metaWindow, metaWindows) {
     let app = this._applet.getAppFromWMClass(this.appList.specialApps, metaWindow);
     if (!app) {
       app = this._applet.tracker.get_window_app(metaWindow);
@@ -465,10 +464,6 @@ AppGroup.prototype = {
           data: data
         });
 
-        if (this._applet.showActive) {
-          this._appButton.setActiveStatus(this.metaWindows);
-        }
-
         // Instead of initializing rightClickMenu in _init right away, we'll prevent the exception caused by its absence and then initialize it. This speeds up init time, and fixes the monitor move options not appearing on first init.
         if (this.rightClickMenu !== undefined) {
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
@@ -492,54 +487,49 @@ AppGroup.prototype = {
     }
   },
 
-  _windowRemoved: function (metaWorkspace, metaWindow) {
-    var refWindow = _.findIndex(this.metaWindows, (win)=>{
-      return _.isEqual(win.win, metaWindow);
-    });
-
-    if (refWindow !== -1) {
-      if (!this._applet.groupApps) {
-        if (!this.wasFavapp) {
-          this.appList._removeApp(this.app, this.timeStamp);
-        } else {
-          this._applet.refreshAppFromCurrentListById(this.appId, {favChange: true, isFavapp: this.wasFavapp});
-        }
-        return;
-      } else {
-        // Clean up all the signals we've connected
-        for (let i = 0, len = this.metaWindows[refWindow].data.signals.length; i < len; i++) {
-          this.metaWindows[refWindow].win.disconnect(this.metaWindows[refWindow].data.signals[i]);
-        }
-      }
-
-      _.pullAt(this.metaWindows, refWindow);
-
-      if (this.metaWindows.length > 0) {
-        this.lastFocused = _.last(this.metaWindows).win;
-        this._windowTitleChanged(this.lastFocused);
-        this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
-        /*
-          Workaround for #86 - https://github.com/jaszhix/icingtaskmanager/issues/86
-          this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls
-          this.hoverMenu.appSwitcherItem._refresh with an outdated metaWindows cache. Better fix TBD.
-        */
-        this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(_.map(this.metaWindows, 'win'));
-
-        if (this.rightClickMenu !== undefined) {
-          this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
-        }
-        this.hoverMenu.appSwitcherItem._refreshThumbnails();
-        this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
-      } else {
-        this.appList._onAppWindowsChanged(this.app, ()=>{
-          if (this.isFavapp) {
-            this._applet.refreshAppFromCurrentListById(this.appId, {favChange: true, isFavapp: this.isFavapp});
-          }
-        });
-      }
-
-      this._calcWindowNumber(metaWorkspace);
+  _windowRemoved: function (metaWorkspace, metaWindow, refWindow, cb) {
+    if (refWindow === -1) {
+      return false;
     }
+    if (!this._applet.groupApps) {
+      if (!this.wasFavapp) {
+        this.appList._windowRemoved(metaWorkspace, metaWindow, this.app, this.timeStamp);
+      } else {
+        this._applet.refreshAppFromCurrentListById(this.appId, {favChange: true, isFavapp: this.wasFavapp});
+      }
+      return;
+    } else {
+      // Clean up all the signals we've connected
+      for (let i = 0, len = this.metaWindows[refWindow].data.signals.length; i < len; i++) {
+        this.metaWindows[refWindow].win.disconnect(this.metaWindows[refWindow].data.signals[i]);
+      }
+    }
+
+    _.pullAt(this.metaWindows, refWindow);
+
+    if (this.metaWindows.length > 0) {
+      this.lastFocused = _.last(this.metaWindows).win;
+      this._windowTitleChanged(this.lastFocused);
+      this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
+      /*
+        Workaround for #86 - https://github.com/jaszhix/icingtaskmanager/issues/86
+        this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls
+        this.hoverMenu.appSwitcherItem._refresh with an outdated metaWindows cache. Better fix TBD.
+      */
+      this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(_.map(this.metaWindows, 'win'));
+
+      if (this.rightClickMenu !== undefined) {
+        this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
+      }
+      this.hoverMenu.appSwitcherItem._refreshThumbnails();
+      this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
+    } else {
+      // This is the last app, so this group needs to be destroyed. We'll call back _windowRemoved in appList
+      // to put the final nail in the coffin.
+      cb(this.appId, this.isFavapp);
+    }
+
+    this._calcWindowNumber(metaWorkspace);
   },
 
   _windowTitleChanged: function (metaWindow) {

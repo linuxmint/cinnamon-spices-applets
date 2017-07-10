@@ -666,10 +666,10 @@ PopupMenuAppSwitcherItem.prototype = {
     this.box = new St.BoxLayout();
 
     this.appContainer = new St.BoxLayout({
-      style_class: 'switcher-list'
+      //style_class: 'switcher-list'
     });
 
-    this.appContainer.add_style_class_name('thumbnail-row');
+    //this.appContainer.add_style_class_name('thumbnail-row');
 
     this.appThumbnails = [];
 

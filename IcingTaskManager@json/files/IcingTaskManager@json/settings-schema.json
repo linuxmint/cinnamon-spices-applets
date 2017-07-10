@@ -289,7 +289,7 @@
   },
   "icon-size": {
     "type": "spinbutton",
-    "default": 16,
+    "default": 24,
     "min": 0,
     "max": 150,
     "step": 1,

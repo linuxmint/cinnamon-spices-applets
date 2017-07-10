@@ -61,7 +61,7 @@ PinnedFavs.prototype = {
     let ids = this._applet.settings.getValue('pinned-apps');
 
     for (let i = 0, len = ids.length; i < len; i++) {
-      var refFav = _.findIndex(this._favorites, {id: ids[i]});
+      let refFav = _.findIndex(this._favorites, {id: ids[i]});
       if (refFav === -1) {
         let app = this._applet._appSystem.lookup_app(ids[i]);
         this._favorites.push({
@@ -85,7 +85,7 @@ PinnedFavs.prototype = {
   },
 
   isFavorite: function (appId) {
-    var refFav = _.findIndex(this._favorites, {id: appId});
+    let refFav = _.findIndex(this._favorites, {id: appId});
     return refFav !== -1;
   },
 
@@ -113,7 +113,7 @@ PinnedFavs.prototype = {
       return false;
     }
 
-    var newFav = {
+    let newFav = {
       id: opts.appId,
       app: opts.app
     };
@@ -140,7 +140,7 @@ PinnedFavs.prototype = {
   },
 
   _removeFavorite: function (appId) {
-    var refFav = _.findIndex(this._favorites, {id: appId});
+    let refFav = _.findIndex(this._favorites, {id: appId});
     if (refFav === -1) {
       this.triggerUpdate(appId, -1, false);
     }
@@ -148,8 +148,8 @@ PinnedFavs.prototype = {
     _.pullAt(this._favorites, refFav);
     this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
 
-    var refApp = _.findIndex(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, {id: appId});
-    var hasOpenWindows = this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].appGroup.app.get_windows().length > 0;
+    let refApp = _.findIndex(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, {id: appId});
+    let hasOpenWindows = this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].appGroup.app.get_windows().length > 0;
 
     if (hasOpenWindows) {
       this.triggerUpdate(appId, -1, false);
@@ -198,7 +198,7 @@ MyApplet.prototype = {
     this.execInstallLanguage();
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
 
-    var settingsProps = [
+    let settingsProps = [
       {key: 'show-pinned', value: 'showPinned', cb: null},
       {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
       {key: 'show-alerts', value: 'showAlerts', cb: null},
@@ -247,7 +247,7 @@ MyApplet.prototype = {
       }
     } else {
       for (let i = 0, len = settingsProps.length; i < len; i++) {
-        var direction = settingsProps[i].value === 'pinnedApps' ? 'BIDIRECTIONAL' : 'IN';
+        let direction = settingsProps[i].value === 'pinnedApps' ? 'BIDIRECTIONAL' : 'IN';
         this.settings.bindProperty(Settings.BindingDirection[direction], settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb, null);
       }
     }
@@ -265,25 +265,33 @@ MyApplet.prototype = {
     this.sortRecentItems(this.recentManager.get_items());
 
     this.metaWorkspaces = [];
-
     this.autostartApps = [];
-
-    // Boolean states
     this._menuOpen = false;
     this.forceRefreshList = false;
+    this._dragPlaceholder = null;
+    this._dragPlaceholderPos = -1;
+    this._animatingPlaceholdersCount = 0;
+
+    SignalManager.SignalManager.prototype.connect_after = function(obj, sigName, callback, bind, force) {
+      if (!force && this.isConnected(sigName, obj, callback)) {
+        return;
+      }
+      let id = bind ? obj.connect_after(sigName, Lang.bind(bind, callback)) : obj.connect_after(sigName, Lang.bind(this._object, callback));
+      this._storage.push([sigName, obj, callback, id]);
+    };
 
     this.signals = new SignalManager.SignalManager(this);
     this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
     this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
+    this.signals.connect(global.settings, 'changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.signals.connect(Main.overview, 'showing', this._onOverviewShow);
     this.signals.connect(Main.overview, 'hiding', this._onOverviewHide);
     this.signals.connect(Main.expo, 'showing', this._onOverviewShow);
     this.signals.connect(Main.expo, 'hiding', this._onOverviewHide);
     this.signals.connect(Main.themeManager, 'theme-set', this.onThemeChange);
-
-    this._dragPlaceholder = null;
-    this._dragPlaceholderPos = -1;
-    this._animatingPlaceholdersCount = 0;
+    this.signals.connect(this.settings, 'changed::show-pinned', Lang.bind(this, this.refreshCurrentAppList));
+    this.signals.connect(this.settings, 'changed::icon-spacing', Lang.bind(this, this._updateSpacingOnAllAppLists));
+    this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
 
@@ -291,8 +299,6 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
-
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
   },
 
   on_panel_height_changed: function() {
@@ -314,7 +320,7 @@ MyApplet.prototype = {
 
   _bindAppKey: function(){
     this._unbindAppKey();
-    var addLaunchHotkeys = (i)=>{
+    let addLaunchHotkeys = (i)=>{
       Main.keybindingManager.addHotKey('launch-app-key-' + i, '<Super>' + i, () => this._onAppKeyPress(i));
       Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, () => this._onNewAppKeyPress(i));
     };
@@ -327,7 +333,7 @@ MyApplet.prototype = {
   },
 
   _unbindAppKey: function(){
-    for (var i = 1; i < 10; i++) {
+    for (let i = 1; i < 10; i++) {
       let _i = i.toString();
       Main.keybindingManager.removeHotKey('launch-app-key-' + _i);
       Main.keybindingManager.removeHotKey('launch-new-app-key-' + _i);
@@ -356,6 +362,18 @@ MyApplet.prototype = {
     setTimeout(()=>{
       this.metaWorkspaces[this.currentWs].appList._refreshList();
     }, 15);
+  },
+
+  _updateSpacingOnAllAppLists: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      workspace.appList._updateSpacing();
+    });
+  },
+
+  _updateFocusState: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      workspace.appList._updateFocusState();
+    });
   },
 
   refreshAppFromCurrentListById: function(appId, opts){
@@ -397,23 +415,25 @@ MyApplet.prototype = {
   },
 
   getAutostartApps: function(){
-    var info;
+    let info;
 
-    var getChildren = ()=>{
-      var children = autostartDir.enumerate_children('standard::name,standard::type,time::modified', Gio.FileQueryInfoFlags.NONE, null);
+    let autoStartDir;
+
+    let getChildren = ()=>{
+      let children = autoStartDir.enumerate_children('standard::name,standard::type,time::modified', Gio.FileQueryInfoFlags.NONE, null);
       while ((info = children.next_file(null)) !== null) {
         if (info.get_file_type() === Gio.FileType.REGULAR) {
-          var name = info.get_name();
-          var file = Gio.file_new_for_path(this.autostartStrDir + '/' + name);
+          let name = info.get_name();
+          let file = Gio.file_new_for_path(this.autostartStrDir + '/' + name);
           this.autostartApps.push({id: name, file: file});
         }
       }
     };
 
     this.autostartStrDir = this.homeDir + '/.config/autostart';
-    var autostartDir = Gio.file_new_for_path(this.autostartStrDir);
+    autoStartDir = Gio.file_new_for_path(this.autostartStrDir);
 
-    if (autostartDir.query_exists(null)) {
+    if (autoStartDir.query_exists(null)) {
       getChildren();
     } else {
       Util.trySpawnCommandLine('bash -c "mkdir ' + this.autostartStrDir + '"');
@@ -440,13 +460,13 @@ MyApplet.prototype = {
       return DND.DragMotionResult.NO_DROP;
     }
 
-    var children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
-    var windowPos = children.indexOf(source.actor);
+    let children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
+    let windowPos = children.indexOf(source.actor);
 
-    var pos = 0;
+    let pos = 0;
 
-    var isVertical = this.metaWorkspaces[this.currentWs].appList.manager_container.height > this.metaWorkspaces[this.currentWs].appList.manager_container.width;
-    var axis = isVertical ? [y, 'y1'] : [x, 'x1'];
+    let isVertical = this.metaWorkspaces[this.currentWs].appList.manager_container.height > this.metaWorkspaces[this.currentWs].appList.manager_container.width;
+    let axis = isVertical ? [y, 'y1'] : [x, 'x1'];
     each(children, (child, i)=>{
       if (axis[0] > children[i].get_allocation_box()[axis[1]] + children[i].width / 2) {
         pos = i;
@@ -473,7 +493,7 @@ MyApplet.prototype = {
       // If the placeholder already exists, we just move
       // it, but if we are adding it, expand its size in
       // an animation
-      var fadeIn;
+      let fadeIn;
       if (this._dragPlaceholder) {
         this._dragPlaceholder.actor.destroy();
         fadeIn = false;
@@ -481,8 +501,8 @@ MyApplet.prototype = {
         fadeIn = true;
       }
 
-      var childWidth;
-      var childHeight;
+      let childWidth;
+      let childHeight;
       if (source.isDraggableApp) {
         childWidth = 30;
         childHeight = 24;
@@ -516,26 +536,26 @@ MyApplet.prototype = {
     }
     this.metaWorkspaces[this.currentWs].appList.manager_container.set_child_at_index(source.actor, this._dragPlaceholderPos);
 
-    var app = source.app;
+    let app = source.app;
 
     // Don't allow favoriting of transient apps
     if (!app || app.is_window_backed()) {
       return false;
     }
 
-    var id = app.get_id();
+    let id = app.get_id();
     if (app.is_window_backed()) {
       id = app.get_name().toLowerCase() + '.desktop';
     }
 
-    var favorites = this.pinnedAppsContr.getFavoriteMap();
-    var refFav = _.findIndex(favorites, {id: id});
-    var favPos = this._dragPlaceholderPos;
+    let favorites = this.pinnedAppsContr.getFavoriteMap();
+    let refFav = _.findIndex(favorites, {id: id});
+    let favPos = this._dragPlaceholderPos;
 
     if (favPos === -1) {
-      var children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
+      let children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
 
-      var pos = 0;
+      let pos = 0;
 
       for (let i = 0, len = children.length; i < len; i++) {
         if (x > children[i].get_allocation_box().x1 + children[i].width / 2) {
@@ -622,7 +642,7 @@ MyApplet.prototype = {
   },
 
   _onWorkspaceCreatedOrDestroyed: function (i) {
-    var workspaces = _.filter(global.screen.get_workspace_by_index(i), (ws, key)=>{
+    let workspaces = _.filter(global.screen.get_workspace_by_index(i), (ws, key)=>{
       return key in range(global.screen.n_workspaces);
     });
 
@@ -643,9 +663,10 @@ MyApplet.prototype = {
 
     // If the workspace we switched to isn't in our list,
     // we need to create an AppList for it
-    var refWorkspace = _.findIndex(this.metaWorkspaces, {index: this.currentWs});
+    let refWorkspace = _.findIndex(this.metaWorkspaces, {index: this.currentWs});
+    let appList;
     if (refWorkspace === -1) {
-      var appList = new AppList(this, metaWorkspace);
+      appList = new AppList(this, metaWorkspace);
       this.metaWorkspaces.push({
         ws: metaWorkspace,
         appList: appList,
@@ -656,7 +677,7 @@ MyApplet.prototype = {
     // this.actor can only have one child, so setting the child
     // will automatically unparent anything that was previously there, which
     // is exactly what we want.
-    var list = refWorkspace !== -1 ? this.metaWorkspaces[refWorkspace].appList : appList;
+    let list = refWorkspace !== -1 ? this.metaWorkspaces[refWorkspace].appList : appList;
     this._box.set_child(list.actor);
     list._refreshList();
   },

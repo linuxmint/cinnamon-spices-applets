@@ -98,7 +98,7 @@ AppButton.prototype = {
       this._isFavorite(true);
     }
 
-    this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
+    //this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
     this._updateAttentionGrabber(null, null, this._applet.showAlerts);
     this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
     this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
@@ -147,12 +147,6 @@ AppButton.prototype = {
       if (text.length > 0) {
         this._label.set_style('padding-right: 4px;');
       }
-    }
-  },
-
-  setStyle: function (name) {
-    if (name) {
-      this.actor.set_style_class_name(name);
     }
   },
 
@@ -347,10 +341,11 @@ AppButton.prototype = {
   },
 
   setActiveStatus: function(windows){
-    if (windows.length > 0) {
-      this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+    let pseudoClass = _.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label;
+    if (windows.length > 0 && !this.actor.has_style_pseudo_class(pseudoClass)) {
+      this.actor.add_style_pseudo_class(pseudoClass);
     } else {
-      this.actor.remove_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+      this.actor.remove_style_pseudo_class(pseudoClass);
     }
   },
 
@@ -369,9 +364,9 @@ AppButton.prototype = {
       this._needsAttention = false;
     } else {
       this.actor.remove_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.focusPseudoClass}).label);
-      /*if (this._applet.showActive && this.metaWindows.length > 0) {
-        this.actor.add_style_pseudo_class('active')
-      }*/
+      if (this._applet.showActive && this.metaWindows.length > 0) {
+        this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+      }
     }
   },
 
@@ -434,20 +429,29 @@ AppButton.prototype = {
     return false;
   },
 
-  _isFavorite: function (isFav) {
-    this.isFavapp = isFav;
-    if (isFav && this._applet.panelLauncherClass) {
+  _setFavoriteAttributes: function () {
+    if (this._applet.panelLauncherClass) {
       if (this._applet.orientation === St.Side.LEFT || this._applet.orientation === St.Side.RIGHT) {
-       this.setStyle('panel-launcher-vertical');
+       this.actor.set_style_class_name('panel-launcher-vertical');
       } else {
-       this.setStyle('panel-launcher');
+       this.actor.set_style_class_name('panel-launcher');
       }
       if (this._label) {
         this._label.set_text('');
       }
+    }
+    if (this.actor.has_style_pseudo_class('active')) {
+      this.actor.remove_style_pseudo_class('active');
+    }
+  },
+
+  _isFavorite: function (isFav) {
+    this.isFavapp = isFav;
+    if (isFav) {
+      this._setFavoriteAttributes();
     } else {
       if (this._applet.panelLauncherClass) {
-        this.setStyle('window-list-item-box');
+        this.actor.set_style_class_name('window-list-item-box');
       }
       if (this._applet.orientation === St.Side.TOP) {
        this.actor.add_style_class_name('window-list-item-box-top');
@@ -462,7 +466,6 @@ AppButton.prototype = {
   },
 
   destroy: function () {
-    this._applet.tracker.disconnect(this._trackerSignal);
     each(this.signals, (signal, key)=>{
       each(signal, (id)=>{
         this[key].disconnect(id);

@@ -1,7 +1,9 @@
 const each = (obj, cb)=>{
   if (Array.isArray(obj)) {
     for (let i = 0, len = obj.length; i < len; i++) {
-      cb(obj[i], i);
+      if (cb(obj[i], i) === false) {
+        return;
+      }
     }
   } else {
     for (let key in obj) {
