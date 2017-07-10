@@ -747,6 +747,16 @@ CobiAppButton.prototype = {
     return this._pinned ? pinSetting.indexOf(this._app.get_id()) : -1;
   },
   
+  _onWmClassChanged: function(metaWindow) {
+    this._applet._windowRemoved(metaWindow.get_workspace(), metaWindow);
+    this._applet._windowAdded(metaWindow.get_workspace(), metaWindow);
+  },
+  
+  _onGtkApplicationChanged: function(metaWindow) {
+    this._applet._windowRemoved(metaWindow.get_workspace(), metaWindow);
+    this._applet._windowAdded(metaWindow.get_workspace(), metaWindow);
+  },
+  
   addWindow: function(metaWindow) {
     this._windows.push(metaWindow);
     if (this.menu.isOpen) {
@@ -760,6 +770,8 @@ CobiAppButton.prototype = {
     this._signalManager.connect(metaWindow, "notify::minimized", this._onMinimized);
     this._signalManager.connect(metaWindow, "notify::urgent", this._updateUrgentState);
     this._signalManager.connect(metaWindow, "notify::demands-attention", this._updateUrgentState);
+    this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged);
+    this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged);
     
     this.actor.remove_style_pseudo_class("neutral");
     this._updateTooltip();
@@ -774,6 +786,8 @@ CobiAppButton.prototype = {
     this._signalManager.disconnect("notify::minimized", metaWindow);
     this._signalManager.disconnect("notify::urgent", metaWindow);
     this._signalManager.disconnect("notify::demands-attention", metaWindow);
+    this._signalManager.disconnect("notify::gtk-application-id", metaWindow);
+    this._signalManager.disconnect("notify::wm-class", metaWindow);
     
     let arIndex = this._windows.indexOf(metaWindow);
     if (arIndex >= 0) {
