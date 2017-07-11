@@ -283,6 +283,8 @@ MyApplet.prototype = {
     this.signals = new SignalManager.SignalManager(this);
     this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
     this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
+    this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
+    this.signals.connect(global.display, 'window-demands-attention', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.settings, 'changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
     this.signals.connect(Main.overview, 'showing', this._onOverviewShow);
     this.signals.connect(Main.overview, 'hiding', this._onOverviewHide);
@@ -291,6 +293,8 @@ MyApplet.prototype = {
     this.signals.connect(Main.themeManager, 'theme-set', this.onThemeChange);
     this.signals.connect(this.settings, 'changed::show-pinned', Lang.bind(this, this.refreshCurrentAppList));
     this.signals.connect(this.settings, 'changed::icon-spacing', Lang.bind(this, this._updateSpacingOnAllAppLists));
+    this.signals.connect(this.settings, 'changed::show-alerts', Lang.bind(this, this._updateAttentionState));
+    this.signals.connect(this.settings, 'changed::number-display', Lang.bind(this, this._updateWindowNumberState));
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
@@ -370,9 +374,24 @@ MyApplet.prototype = {
     });
   },
 
+  _updateWindowNumberState: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      workspace.appList._calcAllWindowNumbers();
+    });
+  },
+
   _updateFocusState: function() {
     each(this.metaWorkspaces, (workspace)=>{
       workspace.appList._updateFocusState();
+    });
+  },
+
+  _updateAttentionState: function(display, window) {
+    if (!this.showAlerts) {
+      return false;
+    }
+    each(this.metaWorkspaces, (workspace)=>{
+      workspace.appList._updateAttentionState(display, window);
     });
   },
 

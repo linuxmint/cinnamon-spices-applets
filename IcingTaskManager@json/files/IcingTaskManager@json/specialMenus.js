@@ -672,7 +672,6 @@ PopupMenuAppSwitcherItem.prototype = {
 
     this.signals.settings.push(this.settings.connect('changed::vertical-thumbnails', Lang.bind(this, this._setVerticalSetting)));
     this._setVerticalSetting();
-    //this.addActor(this.box);
 
     this.actor.connect('key-press-event', (actor, e)=>this._onKeyPress(actor, e));
   },
@@ -949,21 +948,22 @@ WindowThumbnail.prototype = {
     this.actor._delegate = this;
     // Override with own theme.
     this.actor.add_style_class_name('thumbnail-box');
-    this.thumbnailActor = new St.Bin();
+    this.thumbnailActor = new St.Bin({
+      style_class: 'thumbnail'
+    });
 
     this._container = new St.BoxLayout({
-      style_class: this._applet.thumbCloseBtnStyle ? 'thumbnail-iconlabel' : 'thumbnail-iconlabel-cont'
+     // style_class: this._applet.thumbCloseBtnStyle ? 'thumbnail-iconlabel' : 'thumbnail-iconlabel-cont'
     });
 
     this.bin = new St.BoxLayout({
-      y_expand: false,
-      style_class: 'thumbnail-label-bin'
+      y_expand: false
     });
 
     this.icon = this.app.create_icon_texture(16);
     this.themeIcon = new St.BoxLayout({
       //y_align: St.Align.START,
-      style_class: 'thumbnail-icon'
+      //style_class: 'thumbnail-icon'
     });
     this.themeIcon.add_actor(this.icon);
     this._container.add_actor(this.themeIcon);
@@ -973,8 +973,8 @@ WindowThumbnail.prototype = {
     });
     this._container.add_actor(this._label);
     this.button = new St.BoxLayout({
-      style_class: this._applet.thumbCloseBtnStyle ? 'window-close' : 'thumbnail-close',
-      style: this._applet.thumbCloseBtnStyle ? 'padding: 0px; width: 16px; height: 16px; max-width: 16px; max-height: 16px;' : null,
+      style_class: 'window-close',
+      style: 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 16px 16px;',
       reactive: true
     });
 
@@ -986,16 +986,6 @@ WindowThumbnail.prototype = {
 
     this._isFavorite(this.isFavapp, this.metaWindow, this.metaWindows);
 
-    if (this.metaWindow) {
-      this.windowTitleId = this.metaWindow.connect('notify::title', ()=> {
-        this._label.set_text(this.metaWindow.get_title());
-      });
-      this.windowFocusId = this.metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange));
-      this._updateAttentionGrabber(null, null, this._applet.showAlerts);
-      this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
-      this.tracker = this._applet.tracker;
-      this._trackerSignal = this.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
-    }
     this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this.handleEnterEvent)));
     this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this.handleLeaveEvent)));
     this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)));
@@ -1044,26 +1034,12 @@ WindowThumbnail.prototype = {
     this.metaWindows = metaWindows;
   },
 
-  _updateAttentionGrabber: function (obj, oldVal, newVal) {
-    if (newVal) {
-      this._urgent_signal = global.display.connect('window-marked-urgent', Lang.bind(this, this._onWindowDemandsAttention));
-      this._attention_signal = global.display.connect('window-demands-attention', Lang.bind(this, this._onWindowDemandsAttention));
-    } else {
-      if (this._urgent_signal) {
-        global.display.disconnect(this._urgent_signal);
-      }
-      if (this._attention_signal) {
-        global.display.disconnect(this._attention_signal);
-      }
-    }
-  },
-
-  _onWindowDemandsAttention: function (display, _window) {
+  _onWindowDemandsAttention: function (window) {
     if (this._needsAttention) {
       return false;
     }
     this._needsAttention = true;
-    if (_.isEqual(this.metaWindow, _window)) {
+    if (_.isEqual(this.metaWindow, window)) {
       this.actor.add_style_class_name('thumbnail-alerts');
       return true;
     }

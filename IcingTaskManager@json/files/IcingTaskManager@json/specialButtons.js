@@ -93,16 +93,13 @@ AppButton.prototype = {
     this.signals.settings.push(this.settings.connect('changed::icon-padding', Lang.bind(this, this.setIconPadding)));
     this.signals.settings.push(this.settings.connect('changed::icon-size', Lang.bind(this, this.setIconSize)));
     this.signals.settings.push(this.settings.connect('changed::enable-iconSize', Lang.bind(this, this.setIconSize)));
+    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
+    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)));
 
     if (this.isFavapp) {
       this._isFavorite(true);
     }
-
-    //this._trackerSignal = this._applet.tracker.connect('notify::focus-app', Lang.bind(this, this._onFocusChange));
-    this._updateAttentionGrabber(null, null, this._applet.showAlerts);
-    this.signals.settings.push(this.settings.connect('changed::show-alerts', Lang.bind(this, this._updateAttentionGrabber)));
-    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onEnter)));
-    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onLeave)));
+    this._onFocusChange();
   },
 
   on_panel_edit_mode_changed: function () {
@@ -404,21 +401,7 @@ AppButton.prototype = {
     return hasTransient;
   },
 
-  _updateAttentionGrabber: function (obj, oldVal, newVal) {
-    if (newVal) {
-      this._urgent_signal = global.display.connect('window-marked-urgent', Lang.bind(this, this._onWindowDemandsAttention));
-      this._attention_signal = global.display.connect('window-demands-attention', Lang.bind(this, this._onWindowDemandsAttention));
-    } else {
-      if (this._urgent_signal) {
-        global.display.disconnect(this._urgent_signal);
-      }
-      if (this._attention_signal) {
-        global.display.disconnect(this._attention_signal);
-      }
-    }
-  },
-
-  _onWindowDemandsAttention: function (display, window) {
+  _onWindowDemandsAttention: function (window) {
     let windows = this.app.get_windows();
     for (let i = 0, len = windows.length; i < len; i++) {
       if (_.isEqual(windows[i], window)) {

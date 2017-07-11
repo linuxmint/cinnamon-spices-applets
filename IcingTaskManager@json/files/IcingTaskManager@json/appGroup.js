@@ -14,6 +14,7 @@ const _ = AppletDir.lodash._;
 const SpecialMenus = AppletDir.specialMenus;
 const SpecialButtons = AppletDir.specialButtons;
 const constants = AppletDir.constants.constants;
+const each = AppletDir.each.each;
 const setTimeout = AppletDir.timers.setTimeout;
 
 function AppGroup () {
@@ -162,47 +163,6 @@ AppGroup.prototype = {
   // we show as the item is being dragged.
   getDragActorSource: function () {
     return this.actor;
-  },
-
-  // Add a workspace to the list of workspaces that are watched for
-  // windows being added and removed
-  watchWorkspace: function (metaWorkspace) {
-    var refWs = _.findIndex(this.metaWorkspacesSignals, (ws)=>{
-      return _.isEqual(ws.workspace, metaWorkspace);
-    });
-    if (refWs === -1) {
-      // We use connect_after so that the window-tracker time to identify the app, otherwise get_window_app might return null!
-      let windowAddedSignal = null//metaWorkspace.connect_after('window-added', Lang.bind(this, this._windowAdded));
-      let windowRemovedSignal = null//metaWorkspace.connect_after('window-removed', Lang.bind(this, this._windowRemoved));
-      // Workspace is cached so the signals are disconnected reliably in unwatchWorkspace.
-      this.metaWorkspacesSignals.push({
-        workspace: metaWorkspace,
-        signals: [windowAddedSignal, windowRemovedSignal]
-      });
-    }
-    this._calcWindowNumber(metaWorkspace);
-    this.numDisplaySignal = this._applet.settings.connect('changed::number-display', ()=>{
-      this._calcWindowNumber(metaWorkspace);
-    });
-  },
-
-  // Stop monitoring a workspace for added and removed windows.
-  // @metaWorkspace: if null, will remove all signals
-  unwatchWorkspace: function (metaWorkspace, unmount) {
-    return
-    unmount = unmount ? unmount : false;
-    if (!metaWorkspace) {
-      let removeSignals = (obj)=> {
-        let signals = obj.signals;
-        for (let i = 0, len = signals.length; i < len; i++) {
-          obj.workspace.disconnect(signals[i]);
-        }
-      };
-      for (let i = 0, len = this.metaWorkspacesSignals.length; i < len; i++) {
-        removeSignals(this.metaWorkspacesSignals[i]);
-        _.pullAt(this.metaWorkspacesSignals, i);
-      }
-    }
   },
 
   hideAppButton: function () {
@@ -431,8 +391,8 @@ AppGroup.prototype = {
         this.lastFocused = metaWindow;
 
         let signals = [];
-        signals.push(metaWindow.connect('notify::title', Lang.bind(this, this._windowTitleChanged)));
-        signals.push(metaWindow.connect('notify::appears-focused', Lang.bind(this, this._focusWindowChange)));
+        this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, this._windowTitleChanged));
+        this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
 
         // Set the initial button label as not all windows will get updated via signals initially.
         this._windowTitleChanged(metaWindow);
@@ -518,18 +478,20 @@ AppGroup.prototype = {
     if (this.willUnmount) {
       return false;
     }
-    // We only really want to track title changes of the last focused app
-    if (!this._appButton) {
-      throw 'Error: got a _windowTitleChanged callback but this._appButton is undefined';
-    }
+    let title = metaWindow.get_title();
+    each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+      if (_.isEqual(thumbnailObject.thumbnail.metaWindow, metaWindow)) {
+        thumbnailObject.thumbnail._label.set_text(title);
+        return false;
+      }
+    });
+
     if (!_.isEqual(metaWindow, this.lastFocused) || this.isFavapp) {
-      return;
+      title = null;
+      return false;
     }
     let titleType = this._applet.settings.getValue('title-display');
-
-    var title = metaWindow.get_title();
     this.appName = this.app.get_name();
-
     if (titleType === constants.TitleDisplay.None || (this._applet.c32 && (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT))) {
       this._appButton.setText('');
     } else if (titleType === constants.TitleDisplay.Title) {
@@ -555,6 +517,14 @@ AppGroup.prototype = {
       this.appList._setLastFocusedApp(this.appId);
       this.lastFocused = metaWindow;
       this._windowTitleChanged(this.lastFocused);
+      if (this.hoverMenu.isOpen) {
+        each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+          if (_.isEqual(thumbnailObject.thumbnail.metaWindow, metaWindow)) {
+            thumbnailObject.thumbnail._focusWindowChange();
+            return false;
+          }
+        });
+      }
       if (this._applet.sortThumbs) {
         this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       }
@@ -662,10 +632,6 @@ AppGroup.prototype = {
     for (let i = 0, len = this.metaWindows.length; i < len; i++) {
       destroyWindowSignal(this.metaWindows[i]);
     }
-
-    this._applet.settings.disconnect(this.numDisplaySignal);
-
-    this.unwatchWorkspace(null, true);
 
     if (this.rightClickMenu) {
       this.rightClickMenu.destroy();

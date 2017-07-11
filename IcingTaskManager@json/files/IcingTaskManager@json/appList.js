@@ -258,7 +258,6 @@ AppList.prototype = {
       let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
 
       appGroup._updateMetaWindows(this.metaWorkspace, app, window);
-      appGroup.watchWorkspace(this.metaWorkspace);
 
       this.appList[refApp].appGroup = appGroup;
       this.appList[refApp].time = time;
@@ -306,6 +305,26 @@ AppList.prototype = {
       if (appObject.appGroup.metaWindows) {
         appObject.appGroup._appButton._onFocusChange();
       }
+      if (appObject.appGroup.hoverMenu.isOpen) {
+        each(appObject.appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+          thumbnailObject.thumbnail._onFocusChange();
+          return false;
+        });
+      }
+    });
+  },
+
+  _updateAttentionState: function (display, window) {
+    each(this.appList, (appObject)=>{
+      if (appObject.appGroup.metaWindows) {
+        appObject.appGroup._appButton._onWindowDemandsAttention(window);
+      }
+      if (appObject.appGroup.hoverMenu.isOpen) {
+        each(appObject.appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+          thumbnailObject.thumbnail._onWindowDemandsAttention(window);
+          return false;
+        });
+      }
     });
   },
 
@@ -338,7 +357,6 @@ AppList.prototype = {
       let time = Date.now();
       let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
-      appGroup.watchWorkspace(metaWorkspace);
 
       this.appList.push({
         id: appId,
@@ -381,17 +399,6 @@ AppList.prototype = {
       }
     }
     return result;
-  },
-
-  _onAppWindowsChanged: function (app, cb) {
-    /*let numberOfwindows = this._getNumberOfAppWindowsInWorkspace(app, this.metaWorkspace);
-    if (!numberOfwindows || numberOfwindows === 0) {
-      this._windowRemoved(this.metaWorkspace, null, app);
-      this._calcAllWindowNumbers();
-    }
-    if (typeof cb === 'function') {
-      cb();
-    }*/
   },
 
   _calcAllWindowNumbers: function () {
