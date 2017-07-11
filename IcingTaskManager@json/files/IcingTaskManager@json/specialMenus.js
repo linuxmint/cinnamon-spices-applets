@@ -521,7 +521,7 @@ AppThumbnailHoverMenu.prototype = {
     this.isFavapp = parent.isFavapp;
     this.appList = parent.appList;
 
-    this.box.set_style_class_name('thumbnail-popup-content');
+    //this.box.set_style_class_name('thumbnail-popup-content');
 
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -543,7 +543,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   _onButtonPress: function (actor, event) {
-    if (this._applet.onClickThumbs && this.appSwitcherItem.appContainer.get_children().length > 1) {
+    if (this._applet.onClickThumbs && this.appSwitcherItem.box.get_children().length > 1) {
       return;
     }
     this.shouldClose = true;
@@ -663,19 +663,16 @@ PopupMenuAppSwitcherItem.prototype = {
     this.actor.style_class = '';
     this.hoverMenu = parent;
 
-    this.box = new St.BoxLayout();
+    this.box = parent.box;
+    this.box.set_style_class_name('switcher-list');
 
-    this.appContainer = new St.BoxLayout({
-      //style_class: 'switcher-list'
-    });
-
-    //this.appContainer.add_style_class_name('thumbnail-row');
+    //this.box.add_style_class_name('thumbnail-row');
 
     this.appThumbnails = [];
 
     this.signals.settings.push(this.settings.connect('changed::vertical-thumbnails', Lang.bind(this, this._setVerticalSetting)));
     this._setVerticalSetting();
-    this.addActor(this.box);
+    //this.addActor(this.box);
 
     this.actor.connect('key-press-event', (actor, e)=>this._onKeyPress(actor, e));
   },
@@ -739,17 +736,17 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   _setVerticalSetting: function () {
-    var children = this.box.get_children();
+    /*var children = this.box.get_children();
 
     if (children.length > 0) {
       this.box.remove_actor(this.appContainer);
       this.box.add_actor(this.appContainer);
     } else {
       this.box.add_actor(this.appContainer);
-    }
+    }*/
 
-    this.appContainer.vertical = this._applet.verticalThumbs;
-    this.box.vertical = !this._applet.verticalThumbs;
+    this.box.vertical = this._applet.verticalThumbs;
+    //this.box.vertical = !this._applet.verticalThumbs;
   },
 
   setMetaWindow: function (metaWindow, metaWindows) {
@@ -775,7 +772,7 @@ PopupMenuAppSwitcherItem.prototype = {
     var isPinned = windows.length === 0 && !metaWindow && this.isFavapp;
     if (isPinned || (windows.length === 0 && !this.metaWindowThumbnail)) {
       this.metaWindowThumbnail = new WindowThumbnail(this, metaWindow, windows);
-      this.appContainer.insert_actor(this.metaWindowThumbnail.actor, 0);
+      this.box.insert_actor(this.metaWindowThumbnail.actor, 0);
       setTimeout(()=>this.setStyleOptions(null), 0);
       // Update appThumbnails to remove old programs
       this.removeStaleWindowThumbnails(windows);
@@ -824,9 +821,9 @@ PopupMenuAppSwitcherItem.prototype = {
 
   addWindowThumbnails: function (windows) {
     if (windows.length > 0) {
-      var children = this.appContainer.get_children();
+      var children = this.box.get_children();
       for (let w = 0, len = children.length; w < len; w++) {
-        this.appContainer.remove_actor(children[w]);
+        this.box.remove_actor(children[w]);
       }
       if (this._applet.sortThumbs) {
         this.appThumbnails = _.orderBy(this.appThumbnails, ['metaWindow.user_time'], ['asc']);
@@ -839,7 +836,7 @@ PopupMenuAppSwitcherItem.prototype = {
       var refThumb = _.findIndex(this.appThumbnails, {metaWindow: metaWindow});
       if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
         if (this.reAdd) {
-          this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
+          this.box.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
         }
       } else {
         if (this.metaWindowThumbnail) {
@@ -851,18 +848,17 @@ PopupMenuAppSwitcherItem.prototype = {
           metaWindow: metaWindow,
           thumbnail: thumbnail
         });
-        this.appContainer.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
+        this.box.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
       }
     }
-    this.appContainer.show();
+    this.box.show();
   },
   setStyleOptions: function (windows) {
-    this.appContainer.style = null;
     this.box.style = null;
-    var thumbnailTheme = this.appContainer.peek_theme_node();
+    var thumbnailTheme = this.box.peek_theme_node();
     var padding = thumbnailTheme ? thumbnailTheme.get_horizontal_padding() : null;
     var thumbnailPadding = (padding && (padding > 1 && padding < 21) ? padding : 10);
-    this.appContainer.style = 'padding:' + (thumbnailPadding / 2) + 'px';
+    this.box.style = 'padding:' + (thumbnailPadding / 2) + 'px';
     var boxTheme = this.box.peek_theme_node();
     padding = boxTheme ? boxTheme.get_vertical_padding() : null;
     var boxPadding = (padding && (padding > 0) ? padding : 3);
@@ -885,7 +881,7 @@ PopupMenuAppSwitcherItem.prototype = {
     for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
       if (this.appThumbnails[i] !== undefined && windows.indexOf(this.appThumbnails[i].metaWindow) === -1) {
         if (this.appThumbnails[i].thumbnail) {
-          this.appContainer.remove_actor(this.appThumbnails[i].thumbnail.actor);
+          this.box.remove_actor(this.appThumbnails[i].thumbnail.actor);
           this.appThumbnails[i].thumbnail.destroy();
         }
         _.pullAt(this.appThumbnails, i);
@@ -904,12 +900,12 @@ PopupMenuAppSwitcherItem.prototype = {
         this.appThumbnails[w].thumbnail.destroy(true);
       }
     }
-    var children = this.appContainer.get_children();
+    /*var children = this.box.get_children();
     for (let w = 0, len = children.length; w < len; w++) {
-      this.appContainer.remove_actor(children[w]);
-    }
-    this.appContainer.destroy_children();
-    this.appContainer.destroy();
+      this.box.remove_actor(children[w]);
+    }*/
+    this.box.destroy_children();
+    this.box.destroy();
     children = this.box.get_children();
     for (let w = 0, len = children.length; w < len; w++) {
       this.box.remove_actor(children[w]);
