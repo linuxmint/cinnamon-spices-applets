@@ -6,11 +6,11 @@ const Tweener = imports.ui.tweener;
 const PopupMenu = imports.ui.popupMenu;
 const Signals = imports.signals;
 const DND = imports.ui.dnd;
+const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
 const _ = AppletDir.lodash._;
-const App = AppletDir.applet;
 const SpecialMenus = AppletDir.specialMenus;
 const SpecialButtons = AppletDir.specialButtons;
 const constants = AppletDir.constants.constants;
@@ -56,10 +56,7 @@ AppGroup.prototype = {
       y_fill: false,
       track_hover: true
     });
-    this.signals = {
-      _appButton: [],
-      _draggable: []
-    };
+    this.signals = new SignalManager.SignalManager(this);
     this.metaWorkspacesSignals = [];
 
     this.appList.manager_container.add_actor(this.actor);
@@ -70,8 +67,6 @@ AppGroup.prototype = {
 
     this.actor.add_actor(this._appButton.actor);
 
-    this.signals._appButton.push(this._appButton.actor.connect('button-release-event', Lang.bind(this, this._onAppButtonRelease)));
-    this.signals._appButton.push(this._appButton.actor.connect('button-press-event', Lang.bind(this, this._onAppButtonPress)));
 
     // Initialized in _windowAdded first for open apps, then deferred here for init speed up.
     setTimeout(()=>{
@@ -89,29 +84,16 @@ AppGroup.prototype = {
     this._hoverMenuManager.addMenu(this.hoverMenu);
 
     this._draggable = SpecialButtons.makeDraggable(this.actor);
-
-    this.signals._draggable.push(this._draggable.connect('drag-begin', Lang.bind(this, this._onDragBegin)));
-    this.signals._draggable.push(this._draggable.connect('drag-cancelled', Lang.bind(this, this._onDragCancelled)));
-    this.signals._draggable.push(this._draggable.connect('drag-end', Lang.bind(this, this._onDragEnd)));
+    this.signals.connect(this._appButton.actor, 'button-release-event', Lang.bind(this, this._onAppButtonRelease));
+    this.signals.connect(this._appButton.actor, 'button-press-event', Lang.bind(this, this._onAppButtonPress));
+    this.signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
+    this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
+    this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this.isDraggableApp = true;
-
-    this.on_panel_edit_mode_changed();
-    this.on_arrange_pinned();
-    this.panelEditId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-    this.arrangePinnedId = this._applet.settings.connect('changed::arrange-pinnedApps', Lang.bind(this, this.on_arrange_pinned));
   },
 
   getId: function () {
     return this.appId;
-  },
-
-  on_arrange_pinned: function () {
-    this._draggable.inhibit = !this._applet.settings.getValue('arrange-pinnedApps');
-  },
-
-  on_panel_edit_mode_changed: function () {
-    this._draggable.inhibit = global.settings.get_boolean('panel-edit-mode');
-    this.actor.reactive = !global.settings.get_boolean('panel-edit-mode');
   },
 
   on_title_display_changed: function (metaWindow) {
@@ -666,6 +648,7 @@ AppGroup.prototype = {
   },
 
   destroy: function (skip=false) {
+    this.signals.disconnectAllSignals();
     this.willUnmount = true;
     // Unwatch all workspaces before we destroy all our actors
     // that callbacks depend on
@@ -679,15 +662,8 @@ AppGroup.prototype = {
     for (let i = 0, len = this.metaWindows.length; i < len; i++) {
       destroyWindowSignal(this.metaWindows[i]);
     }
-    for (let i = 0, len = this.signals._appButton.length; i < len; i++) {
-      this._appButton.actor.disconnect(this.signals._appButton[i]);
-    }
-    for (let i = 0, len = this.signals._draggable.length; i < len; i++) {
-      this._draggable.disconnect(this.signals._draggable[i]);
-    }
+
     this._applet.settings.disconnect(this.numDisplaySignal);
-    global.settings.disconnect(this.panelEditId);
-    this._applet.settings.disconnect(this.arrangePinnedId);
 
     this.unwatchWorkspace(null, true);
 
