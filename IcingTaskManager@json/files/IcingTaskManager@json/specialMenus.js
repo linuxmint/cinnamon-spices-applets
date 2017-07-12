@@ -1,4 +1,3 @@
-/* jshint moz:true */
 const Clutter = imports.gi.Clutter;
 const AppletManager = imports.ui.appletManager;
 const Lang = imports.lang;
@@ -12,6 +11,7 @@ const Gio = imports.gi.Gio;
 const Tweener = imports.ui.tweener;
 const Applet = imports.ui.applet;
 const Tooltips = imports.ui.tooltips;
+const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
@@ -503,43 +503,34 @@ AppThumbnailHoverMenu.prototype = {
   _init: function (parent) {
     this.appGroup = parent;
     this._applet = parent._applet;
-    //this.orientation = parent._applet.orientation
+    this.signals = new SignalManager.SignalManager(this);
     if (parent._applet.c32) {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
     } else {
       PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, 0.5, parent.orientation);
     }
-    this.signals = {
-      parentActor: [],
-      actor: []
-    };
 
+    this.parentActor = parent.actor;
     this.metaWindow = parent.metaWindow;
     this.metaWindows = [];
 
     this.app = parent.app;
     this.isFavapp = parent.isFavapp;
     this.appList = parent.appList;
-
-    //this.box.set_style_class_name('thumbnail-popup-content');
-
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
     this.actor.hide();
-    this.parentActor = parent.actor;
-
     Main.layoutManager.addChrome(this.actor, {});
 
     this.appSwitcherItem = new PopupMenuAppSwitcherItem(this);
     this.addMenuItem(this.appSwitcherItem);
 
-    this.signals.parentActor.push(this.parentActor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
-    this.signals.parentActor.push(this.parentActor.connect('leave-event', Lang.bind(this, this._onMenuLeave)));
-    this.signals.parentActor.push(this.parentActor.connect('button-release-event', Lang.bind(this, this._onButtonPress)));
-
-    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this._onMenuEnter)));
-    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this._onMenuLeave)));
-    this.signals.actor.push(this.actor.connect('key-release-event', (actor, e)=>this._onKeyRelease(actor, e)));
+    this.signals.connect(this.parentActor, 'enter-event', Lang.bind(this, this._onMenuEnter));
+    this.signals.connect(this.parentActor, 'leave-event', Lang.bind(this, this._onMenuLeave));
+    this.signals.connect(this.parentActor, 'button-release-event', Lang.bind(this, this._onButtonPress));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this._onMenuEnter));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this._onMenuLeave));
+    this.signals.connect(this.actor, 'key-release-event', Lang.bind(this, this._onKeyRelease));
   },
 
   _onButtonPress: function (actor, event) {
@@ -583,9 +574,6 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   open: function () {
-    // Refresh all the thumbnails, etc when the menu opens.  These cannot
-    // be created when the menu is initalized because a lot of the clutter window surfaces
-    // have not been created yet...
     if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
       this._tooltip.set_text(this.appGroup.appName);
       this._tooltip.show();
@@ -607,22 +595,9 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   destroy: function () {
-    var children = this._getMenuItems();
-    for (var i = 0; i < children.length; i++) {
-      var item = children[i];
-      this.box.remove_actor(item.actor);
-      item.actor.destroy();
-    }
-    each(this.signals, (signal, key)=>{
-      each(signal, (id)=>{
-        if (this[key] && id) {
-          this[key].disconnect(id);
-        }
-      });
-    });
+    this.signals.disconnectAllSignals();
+    this.removeAll();
     this.appSwitcherItem.destroy();
-    this.box.destroy();
-    this.actor.destroy();
     PopupMenu.PopupMenu.prototype.destroy.call(this);
   },
 
@@ -653,25 +628,19 @@ PopupMenuAppSwitcherItem.prototype = {
 
     this._applet = parent._applet;
     this.settings = parent._applet.settings;
-    this.signals = {
-      settings: []
-    };
     this.metaWindow = parent.metaWindow;
     this.metaWindows = [];
     this.app = parent.app;
     this.isFavapp = parent.isFavapp;
-    this.actor.style_class = '';
     this.hoverMenu = parent;
-
     this.box = parent.box;
+    this.actor.set_style_class_name('');
     this.box.set_style_class_name('switcher-list');
-
-    //this.box.add_style_class_name('thumbnail-row');
 
     this.appThumbnails = [];
     this._setVerticalSetting();
 
-    this.actor.connect('key-press-event', (actor, e)=>this._onKeyPress(actor, e));
+    this.box.connect('key-press-event', Lang.bind(this, this._onKeyPress));
   },
 
   _onKeyPress: function(actor, e){
@@ -693,13 +662,13 @@ PopupMenuAppSwitcherItem.prototype = {
     }
     let args = this._applet.verticalThumbs ? [Clutter.KEY_Up, Clutter.KEY_Down] : [Clutter.KEY_Left, Clutter.KEY_Right];
     let closeArg;
-    if (this._applet.orientation == St.Side.TOP) {
+    if (this._applet.orientation === St.Side.TOP) {
       closeArg = Clutter.KEY_Up;
-    } else if (this._applet.orientation == St.Side.BOTTOM) {
+    } else if (this._applet.orientation === St.Side.BOTTOM) {
       closeArg = Clutter.KEY_Down;
-    } else if (this._applet.orientation == St.Side.LEFT) {
+    } else if (this._applet.orientation === St.Side.LEFT) {
       closeArg = Clutter.KEY_Left;
-    } else if (this._applet.orientation == St.Side.RIGHT) {
+    } else if (this._applet.orientation === St.Side.RIGHT) {
       closeArg = Clutter.KEY_Right;
     }
     var index;
@@ -733,17 +702,7 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   _setVerticalSetting: function () {
-    /*var children = this.box.get_children();
-
-    if (children.length > 0) {
-      this.box.remove_actor(this.appContainer);
-      this.box.add_actor(this.appContainer);
-    } else {
-      this.box.add_actor(this.appContainer);
-    }*/
-
     this.box.vertical = this._applet.verticalThumbs;
-    //this.box.vertical = !this._applet.verticalThumbs;
   },
 
   setMetaWindow: function (metaWindow, metaWindows) {
@@ -887,29 +846,11 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   destroy: function(){
-    each(this.signals, (signal, key)=>{
-      each(signal, (id)=>{
-        this[key].disconnect(id);
-      });
-    });
     for (let w = 0, len = this.appThumbnails.length; w < len; w++) {
       if (this.appThumbnails[w] !== undefined) {
         this.appThumbnails[w].thumbnail.destroy(true);
       }
     }
-    /*var children = this.box.get_children();
-    for (let w = 0, len = children.length; w < len; w++) {
-      this.box.remove_actor(children[w]);
-    }*/
-    this.box.destroy_children();
-    this.box.destroy();
-    children = this.box.get_children();
-    for (let w = 0, len = children.length; w < len; w++) {
-      this.box.remove_actor(children[w]);
-    }
-    this.box.destroy_children();
-    this.box.destroy();
-    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
 
@@ -950,9 +891,7 @@ WindowThumbnail.prototype = {
       style_class: 'thumbnail'
     });
 
-    this._container = new St.BoxLayout({
-     // style_class: this._applet.thumbCloseBtnStyle ? 'thumbnail-iconlabel' : 'thumbnail-iconlabel-cont'
-    });
+    this._container = new St.BoxLayout();
 
     this.bin = new St.BoxLayout({
       y_expand: false
@@ -960,19 +899,17 @@ WindowThumbnail.prototype = {
 
     this.icon = this.app.create_icon_texture(16);
     this.themeIcon = new St.BoxLayout({
-      //y_align: St.Align.START,
-      //style_class: 'thumbnail-icon'
+      style_class: 'thumbnail-icon'
     });
     this.themeIcon.add_actor(this.icon);
     this._container.add_actor(this.themeIcon);
     this._label = new St.Label({
-      //y_align: St.Align.START,
       style_class: 'thumbnail-label'
     });
     this._container.add_actor(this._label);
     this.button = new St.BoxLayout({
       style_class: 'window-close',
-      style: 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 16px 16px;',
+      style: 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 18px 18px;',
       reactive: true
     });
 

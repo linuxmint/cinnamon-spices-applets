@@ -22,19 +22,14 @@ function AppGroup () {
 }
 
 AppGroup.prototype = {
-  __proto__: Object.prototype,
   _init: function (applet, appList, app, isFavapp, window, timeStamp, ungroupedIndex, appId) {
     appId = appId ? appId : '';
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this);
     }
-
     this._applet = applet;
     this.appList = appList;
-
-    this._deligate = this;
-    // This convert the applet class in a launcherBox (is requiered to be a launcher dragable object)
-    // but you have duplicate object this._applet then... // TBD
+    this.signals = new SignalManager.SignalManager(this);
     this.launchersBox = applet;
     this.app = app;
     this.appId = appId;
@@ -57,7 +52,7 @@ AppGroup.prototype = {
       y_fill: false,
       track_hover: true
     });
-    this.signals = new SignalManager.SignalManager(this);
+
     this.metaWorkspacesSignals = [];
 
     this.appList.manager_container.add_actor(this.actor);
@@ -406,7 +401,8 @@ AppGroup.prototype = {
           data: data
         });
 
-        // Instead of initializing rightClickMenu in _init right away, we'll prevent the exception caused by its absence and then initialize it. This speeds up init time, and fixes the monitor move options not appearing on first init.
+        // Instead of initializing rightClickMenu in _init right away, we'll prevent the exception caused by its absence and then initialize it.
+        // This speeds up init time, and fixes the monitor move options not appearing on first init.
         if (this.rightClickMenu !== undefined) {
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
         } else {
@@ -466,11 +462,10 @@ AppGroup.prototype = {
       this.hoverMenu.appSwitcherItem._refreshThumbnails();
       this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
     } else {
-      // This is the last app, so this group needs to be destroyed. We'll call back _windowRemoved in appList
-      // to put the final nail in the coffin.
+      // This is the last app, so this group needs to be destroyed. We'll call back _windowRemoved
+      // in appList to put the final nail in the coffin.
       cb(this.appId, this.isFavapp);
     }
-
     this._calcWindowNumber(metaWorkspace);
   },
 

@@ -27,14 +27,14 @@ AppList.prototype = {
     this.actor = new St.BoxLayout();
 
     if (this.orientation === St.Side.TOP || this.orientation === St.Side.BOTTOM) {
-      this.manager = manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.HORIZONTAL });
+      this.manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.HORIZONTAL });
     } else {
-      this.manager = manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
+      this.manager = new Clutter.BoxLayout({ orientation: Clutter.Orientation.VERTICAL });
       this.actor.add_style_class_name('vertical');
       this._applet.actor.add_style_class_name('vertical');
     }
 
-    this.manager_container = new Clutter.Actor({ layout_manager: manager });
+    this.manager_container = new Clutter.Actor({ layout_manager: this.manager });
     this.actor.add_actor(this.manager_container);
 
     this.registeredApps = [];
@@ -52,7 +52,7 @@ AppList.prototype = {
     this.on_orientation_changed(this._applet.orientation, true);
   },
 
-  on_applet_added_to_panel: function(userEnabled) {
+  on_applet_added_to_panel: function() {
     this._updateSpacing();
     this._applet.appletEnabled = true;
   },
