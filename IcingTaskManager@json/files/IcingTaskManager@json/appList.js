@@ -440,25 +440,7 @@ AppList.prototype = {
   },
 
   _windowRemoved: function (metaWorkspace, metaWindow, app, timeStamp) {
-    //log2(metaWorkspace, metaWindow, app, timeStamp);
-    // When a window is closed, we need to check if the app it belongs
-    // to has no windows left.  If so, we need to remove the corresponding AppGroup
-
-    /*if (!app) {
-      app = this._applet.getAppFromWMClass(this.specialApps, metaWindow);
-
-      if (!app){
-        app = this._applet.tracker.get_window_app(metaWindow);
-      }
-    }*/
     let refApp = -1, refWindow = -1;
-    /*if (app && (this._applet.groupApps || !timeStamp)) { // TBD
-      refApp = _.findIndex(this.appList, {id: app.get_id()});
-    } else if (timeStamp) {
-      refApp = _.findIndex(this.appList, (appObject)=>{
-        return appObject.timeStamp === timeStamp;
-      });
-    }*/
     each(this.appList, (appObject, i)=>{
       let shouldReturn = false;
       each(appObject.appGroup.metaWindows, (win, z)=>{
@@ -475,7 +457,6 @@ AppList.prototype = {
     });
     if (refApp > -1) {
       this.appList[refApp].appGroup._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavapp)=>{
-        log2(this.appList[refApp].appGroup.wasFavapp, this.appList[refApp].appGroup.isFavapp, !timeStamp)
         if ((this.appList[refApp].appGroup.wasFavapp || this.appList[refApp].appGroup.isFavapp) && !timeStamp) {
           this.appList[refApp].appGroup._isFavorite(true);
           this._refreshApps();
