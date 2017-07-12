@@ -669,8 +669,6 @@ PopupMenuAppSwitcherItem.prototype = {
     //this.box.add_style_class_name('thumbnail-row');
 
     this.appThumbnails = [];
-
-    this.signals.settings.push(this.settings.connect('changed::vertical-thumbnails', Lang.bind(this, this._setVerticalSetting)));
     this._setVerticalSetting();
 
     this.actor.connect('key-press-event', (actor, e)=>this._onKeyPress(actor, e));

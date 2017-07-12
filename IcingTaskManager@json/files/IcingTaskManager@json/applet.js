@@ -199,9 +199,9 @@ MyApplet.prototype = {
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
 
     let settingsProps = [
-      {key: 'show-pinned', value: 'showPinned', cb: null},
+      {key: 'show-pinned', value: 'showPinned', cb: this.refreshCurrentAppList},
       {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
-      {key: 'show-alerts', value: 'showAlerts', cb: null},
+      {key: 'show-alerts', value: 'showAlerts', cb: this._updateAttentionState},
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
       {key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null},
       {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
@@ -221,14 +221,14 @@ MyApplet.prototype = {
       {key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null},
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
       {key: 'sort-thumbnails', value: 'sortThumbs', cb: null},
-      {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: null},
+      {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
       {key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList},
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
-      {key: 'number-display', value: 'numDisplay', cb: null},
+      {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
       {key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList},
-      {key: 'icon-spacing', value: 'iconSpacing', cb: null},
+      {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacingOnAllAppLists},
       {key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList},
       {key: 'icon-padding', value: 'iconPadding', cb: null},
       {key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList},
@@ -291,10 +291,6 @@ MyApplet.prototype = {
     this.signals.connect(Main.expo, 'showing', this._onOverviewShow);
     this.signals.connect(Main.expo, 'hiding', this._onOverviewHide);
     this.signals.connect(Main.themeManager, 'theme-set', this.onThemeChange);
-    this.signals.connect(this.settings, 'changed::show-pinned', Lang.bind(this, this.refreshCurrentAppList));
-    this.signals.connect(this.settings, 'changed::icon-spacing', Lang.bind(this, this._updateSpacingOnAllAppLists));
-    this.signals.connect(this.settings, 'changed::show-alerts', Lang.bind(this, this._updateAttentionState));
-    this.signals.connect(this.settings, 'changed::number-display', Lang.bind(this, this._updateWindowNumberState));
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
@@ -392,6 +388,14 @@ MyApplet.prototype = {
     }
     each(this.metaWorkspaces, (workspace)=>{
       workspace.appList._updateAttentionState(display, window);
+    });
+  },
+
+  _updateVerticalThumbnailState: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      each(workspace.appList.appList, (appObject)=>{
+        appObject.appGroup.hoverMenu.appSwitcherItem._setVerticalSetting();
+      });
     });
   },
 
