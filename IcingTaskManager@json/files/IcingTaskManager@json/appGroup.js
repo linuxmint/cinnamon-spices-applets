@@ -55,7 +55,7 @@ AppGroup.prototype = {
 
     this.metaWorkspacesSignals = [];
 
-    this.appList.manager_container.add_actor(this.actor);
+    this.appList.managerContainer.add_actor(this.actor);
 
     this.actor._delegate = this;
 
@@ -634,7 +634,7 @@ AppGroup.prototype = {
 
     this.hoverMenu.destroy();
     this._appButton.destroy();
-    this.appList.manager_container.remove_actor(this.actor);
+    this.appList.managerContainer.remove_actor(this.actor);
     this.actor.destroy();
   }
 };

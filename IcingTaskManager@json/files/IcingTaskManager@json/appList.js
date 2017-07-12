@@ -34,8 +34,8 @@ AppList.prototype = {
       this._applet.actor.add_style_class_name('vertical');
     }
 
-    this.manager_container = new Clutter.Actor({ layout_manager: this.manager });
-    this.actor.add_actor(this.manager_container);
+    this.managerContainer = new Clutter.Actor({ layout_manager: this.manager });
+    this.actor.add_actor(this.managerContainer);
 
     this.registeredApps = [];
 
@@ -66,7 +66,7 @@ AppList.prototype = {
     // Any padding/margin is removed on one side so that the AppMenuButton
     // boxes butt up against the edge of the screen
 
-    let containerChildren = this.manager_container.get_children();
+    let containerChildren = this.managerContainer.get_children();
 
     let orientationKey = null;
     each(St.Side, (side, key)=>{
@@ -267,7 +267,7 @@ AppList.prototype = {
       this.appList.splice(refPos, 0, this.appList.splice(refApp, 1)[0]);
 
       for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.manager_container.set_child_at_index(this.appList[i].appGroup.actor, i);
+        this.managerContainer.set_child_at_index(this.appList[i].appGroup.actor, i);
       }
     } else if (opts.favChange) {
       this._applet.refreshCurrentAppList();
@@ -423,7 +423,7 @@ AppList.prototype = {
 
   _fixAppGroupIndexAfterDrag: function (appId) {
     let originPos = _.findIndex(this.appList, {id: appId}); // app object
-    let pos = _.findIndex(this.manager_container.get_children(), this.appList[originPos].appGroup.actor);
+    let pos = _.findIndex(this.managerContainer.get_children(), this.appList[originPos].appGroup.actor);
     if (originPos === pos
             || originPos < 0
             || pos < 0) {

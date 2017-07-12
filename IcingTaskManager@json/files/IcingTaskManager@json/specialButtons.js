@@ -72,7 +72,7 @@ AppButton.prototype = {
     this.signals._container.push(this._container.connect('get-preferred-height', Lang.bind(this, this._getPreferredHeight)));
     this.signals._container.push(this._container.connect('allocate', Lang.bind(this, this._allocate)));
 
-    this.iconSize = this._applet.enableIconSize ? this._applet.iconSize : 16;
+    this.iconSize = this._applet.enableIconSize ? this._applet.iconSize : 24;
     this.icon = this.app.create_icon_texture(this.iconSize);
 
     this._label = new St.Label({

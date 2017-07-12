@@ -1,4 +1,109 @@
 {
+  "layout": {
+    "type" : "layout",
+    "pages" : ["panelPage", "thumbnailsPage", "contextMenuPage", "themePage"],
+    "panelPage": {
+      "type" : "page",
+      "title" : "Panel",
+      "sections" : ["appButtonsSection", "hotKeysSection"]
+    },
+    "thumbnailsPage": {
+      "type" : "page",
+      "title" : "Thumbnails",
+      "sections" : ["thumbnailsSection", "hoverPeekSection"]
+    },
+    "contextMenuPage": {
+      "type" : "page",
+      "title" : "Context Menu",
+      "sections" : ["contextMenuSection"]
+    },
+    "themePage": {
+      "type" : "page",
+      "title" : "Theming",
+      "sections" : ["stylingSection", "iconSection"]
+    },
+    "appButtonsSection": {
+      "type" : "section",
+      "title" : "App Buttons",
+      "keys" : [
+        "number-display",
+        "title-display",
+        "pinned-apps",
+        "group-apps",
+        "show-alerts",
+        "show-pinned",
+        "arrange-pinnedApps",
+        "pinOnDrag",
+        "middle-click-action"
+      ]
+    },
+    "hotKeysSection": {
+      "type" : "section",
+      "title" : "Hot Keys",
+      "keys" : [
+        "cycleMenusHotkey",
+        "show-apps-order-hotkey",
+        "show-apps-order-timeout"
+      ]
+    },
+    "thumbnailsSection": {
+      "type" : "section",
+      "title" : "Thumbnails",
+      "keys" : [
+        "thumbnail-timeout",
+        "thumbnail-size",
+        "show-thumbnails",
+        "animate-thumbnails",
+        "vertical-thumbnails",
+        "sort-thumbnails",
+        "onclick-thumbnails",
+        "include-all-windows"
+      ]
+    },
+    "hoverPeekSection": {
+      "type" : "section",
+      "title" : "Hover Peek",
+      "keys" : [
+        "enable-hover-peek",
+        "hover-peek-time",
+        "hover-peek-opacity"
+      ]
+    },
+    "contextMenuSection": {
+      "type" : "section",
+      "title" : "",
+      "keys" : [
+        "show-recent",
+        "firefox-menu",
+        "menuItemType",
+        "autostart-menu-item",
+        "monitor-move-all-windows"
+      ]
+    },
+    "stylingSection": {
+      "type" : "section",
+      "title" : "Styling",
+      "keys" : [
+        "show-active",
+        "panelLauncherClass",
+        "close-button-style",
+        "hoverPseudoClass",
+        "focusPseudoClass",
+        "activePseudoClass"
+      ]
+    },
+    "iconSection": {
+      "type" : "section",
+      "title" : "Icons",
+      "keys" : [
+        "icon-spacing",
+        "icon-padding",
+        "themePadding",
+        "enable-iconSize",
+        "icon-size"
+      ]
+    }
+  },
   "ITM": {
     "type": "header",
     "description": "ITM Settings"
@@ -188,6 +293,7 @@
   },
   "firefox-menu": {
     "type": "combobox",
+    "dependency": "show-recent",
     "default": 1,
     "description": "Firefox context menu",
     "options": {
@@ -224,6 +330,7 @@
   },
   "hover-peek-time": {
     "type": "spinbutton",
+    "dependency": "enable-hover-peek",
     "default": 150,
     "min": 0,
     "max": 1000,
@@ -234,6 +341,7 @@
   },
   "hover-peek-opacity": {
     "type": "spinbutton",
+    "dependency": "enable-hover-peek",
     "default": 10,
     "min": 0,
     "max": 100,
@@ -289,6 +397,7 @@
   },
   "icon-size": {
     "type": "spinbutton",
+    "dependency": "enable-iconSize",
     "default": 24,
     "min": 0,
     "max": 150,

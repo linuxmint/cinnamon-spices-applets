@@ -483,12 +483,12 @@ MyApplet.prototype = {
       return DND.DragMotionResult.NO_DROP;
     }
 
-    let children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
+    let children = this.metaWorkspaces[this.currentWs].appList.managerContainer.get_children();
     let windowPos = children.indexOf(source.actor);
 
     let pos = 0;
 
-    let isVertical = this.metaWorkspaces[this.currentWs].appList.manager_container.height > this.metaWorkspaces[this.currentWs].appList.manager_container.width;
+    let isVertical = this.metaWorkspaces[this.currentWs].appList.managerContainer.height > this.metaWorkspaces[this.currentWs].appList.managerContainer.width;
     let axis = isVertical ? [y, 'y1'] : [x, 'x1'];
     each(children, (child, i)=>{
       if (axis[0] > children[i].get_allocation_box()[axis[1]] + children[i].width / 2) {
@@ -536,7 +536,7 @@ MyApplet.prototype = {
       this._dragPlaceholder = new DND.GenericDragPlaceholderItem();
       this._dragPlaceholder.child.width = childWidth;
       this._dragPlaceholder.child.height = childHeight;
-      this.metaWorkspaces[this.currentWs].appList.manager_container.insert_child_at_index(this._dragPlaceholder.actor, this._dragPlaceholderPos);
+      this.metaWorkspaces[this.currentWs].appList.managerContainer.insert_child_at_index(this._dragPlaceholder.actor, this._dragPlaceholderPos);
 
       if (fadeIn) {
         this._dragPlaceholder.animateIn();
@@ -546,18 +546,18 @@ MyApplet.prototype = {
     return DND.DragMotionResult.MOVE_DROP;
   },
 
-  acceptDrop: function (source, actor, x, y, time) {
+  acceptDrop: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
       return false;
     }
 
     if (!(source.isFavapp || source.wasFavapp || source.isDraggableApp || (source instanceof DND.LauncherDraggable)) || source.isNotFavapp) {
       if (this._dragPlaceholderPos !== -1) {
-        this.metaWorkspaces[this.currentWs].appList.manager_container.set_child_at_index(source.actor, this._dragPlaceholderPos);
+        this.metaWorkspaces[this.currentWs].appList.managerContainer.set_child_at_index(source.actor, this._dragPlaceholderPos);
       }
       this._clearDragPlaceholder();
     }
-    this.metaWorkspaces[this.currentWs].appList.manager_container.set_child_at_index(source.actor, this._dragPlaceholderPos);
+    this.metaWorkspaces[this.currentWs].appList.managerContainer.set_child_at_index(source.actor, this._dragPlaceholderPos);
 
     let app = source.app;
 
@@ -576,7 +576,7 @@ MyApplet.prototype = {
     let favPos = this._dragPlaceholderPos;
 
     if (favPos === -1) {
-      let children = this.metaWorkspaces[this.currentWs].appList.manager_container.get_children();
+      let children = this.metaWorkspaces[this.currentWs].appList.managerContainer.get_children();
 
       let pos = 0;
 
@@ -589,7 +589,7 @@ MyApplet.prototype = {
         favPos = pos;
       }
     }
-    this.metaWorkspaces[this.currentWs].appList.manager_container.set_child_at_index(source.actor, favPos);
+    this.metaWorkspaces[this.currentWs].appList.managerContainer.set_child_at_index(source.actor, favPos);
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function () {
       if (refFav !== -1) {
@@ -718,9 +718,9 @@ MyApplet.prototype = {
     this.signals.disconnectAllSignals();
     global.settings.disconnect(this.panelEditId);
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      let children = this.metaWorkspaces[i].appList.manager_container.get_children();
+      let children = this.metaWorkspaces[i].appList.managerContainer.get_children();
       for (let z = 0, len = children.length; z < len; z++) {
-        this.metaWorkspaces[i].appList.manager_container.remove_actor(children[z]);
+        this.metaWorkspaces[i].appList.managerContainer.remove_actor(children[z]);
         children[z].destroy();
       }
       this.metaWorkspaces[i].appList.destroy();
