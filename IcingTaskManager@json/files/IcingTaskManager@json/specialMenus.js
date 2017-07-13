@@ -542,11 +542,20 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   _onMenuEnter: function () {
+    if (this._applet.panelEditMode) {
+      return false;
+    }
+    if (this.appGroup.rightClickMenu.isOpen) {
+      return false;
+    }
     this.shouldClose = false;
     setTimeout(()=>this.hoverOpen(), this._applet.thumbTimeout);
   },
 
   _onMenuLeave: function () {
+    if (this.appGroup.rightClickMenu.isOpen || this._applet.panelEditMode) {
+      return false;
+    }
     this.shouldClose = true;
     setTimeout(()=>this.hoverClose(), this._applet.thumbTimeout);
   },
@@ -702,7 +711,11 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   _setVerticalSetting: function () {
-    this.box.vertical = this._applet.verticalThumbs;
+    if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM) {
+      this.box.vertical = this._applet.verticalThumbs;
+    } else {
+      this.box.vertical = true;
+    }
   },
 
   setMetaWindow: function (metaWindow, metaWindows) {
@@ -744,7 +757,7 @@ PopupMenuAppSwitcherItem.prototype = {
     var windows = _.map(this.metaWindows, 'win');
 
 
-    if (this.metaWindowThumbnail && this.metaWindowThumbnail.needs_refresh()) {
+    if (this.metaWindowThumbnail && this.metaWindowThumbnail.thumbnail != null) {
       this.metaWindowThumbnail = null;
     }
     if (this.metaWindowThumbnail && _.isEqual(this.metaWindowThumbnail.metaWindow, this.metaWindow)) {
@@ -870,11 +883,7 @@ WindowThumbnail.prototype = {
     this.appSwitcherItem = parent;
     this.thumbnailPadding = 16;
     this.willUnmount = false;
-    this.signals = {
-      actor: [],
-      button: [],
-      settings: []
-    };
+    this.signals = new SignalManager.SignalManager(this);
 
     // Inherit the theme from the alt-tab menu
     this.actor = new St.BoxLayout({
@@ -908,10 +917,17 @@ WindowThumbnail.prototype = {
     });
     this._container.add_actor(this._label);
     this.button = new St.BoxLayout({
-      style_class: 'window-close',
-      style: 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 18px 18px;',
       reactive: true
     });
+
+    if (this._applet.thumbCloseBtnStyle) {
+      this.button.style_class = 'window-close';
+      this.button.width = 16;
+      this.button.height = 16;
+      this.button.style = 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 16px 16px;';
+    } else {
+      this.button.style_class = 'thumbnail-close';
+    }
 
     this.button.hide();
     this.bin.add_actor(this._container);
@@ -921,10 +937,10 @@ WindowThumbnail.prototype = {
 
     this._isFavorite(this.isFavapp, this.metaWindow, this.metaWindows);
 
-    this.signals.actor.push(this.actor.connect('enter-event', Lang.bind(this, this.handleEnterEvent)));
-    this.signals.actor.push(this.actor.connect('leave-event', Lang.bind(this, this.handleLeaveEvent)));
-    this.signals.button.push(this.button.connect('button-release-event', Lang.bind(this, this._onButtonRelease)));
-    this.signals.actor.push(this.actor.connect('button-release-event', Lang.bind(this, this._connectToWindow)));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnterEvent));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeaveEvent));
+    this.signals.connect(this.button, 'button-release-event', Lang.bind(this, this._onCloseButtonRelease));
+    this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._connectToWindow));
     //update focused style
     this._focusWindowChange();
     this.entered = false;
@@ -1041,10 +1057,6 @@ WindowThumbnail.prototype = {
     }
   },
 
-  needs_refresh: function () {
-    return this.thumbnail;
-  },
-
   thumbnailIconSize: function () {
     var thumbnailTheme = this.themeIcon.peek_theme_node();
     if (thumbnailTheme) {
@@ -1095,7 +1107,7 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _onButtonRelease: function (actor, event) {
+  _onCloseButtonRelease: function (actor, event) {
     var button = event.get_button();
     if (button === 1 && _.isEqual(actor, this.button)) {
       this.handleAfterClick();
@@ -1175,7 +1187,7 @@ WindowThumbnail.prototype = {
     return false;
   },
 
-  _hoverPeek: function (opacity, metaWin, enterEvent) {
+  _hoverPeek: function (opacity, metaWin) {
     var applet = this._applet;
     if (!applet.enablePeek) {
       return;
@@ -1202,36 +1214,9 @@ WindowThumbnail.prototype = {
     }
   },
 
-  destroy: function(skipSignalDisconnect){
+  destroy: function(){
     this.willUnmount = true;
-    try {
-      if (this._trackerSignal) {
-        this.tracker.disconnect(this._trackerSignal);
-      }
-      if (this._urgent_signal) {
-        global.display.disconnect(this._urgent_signal);
-      }
-      if (this._attention_signal) {
-        global.display.disconnect(this._attention_signal);
-      }
-      if (this.windowTitleId) {
-        this.metaWindow.disconnect(this.windowTitleId);
-      }
-      if (this.windowFocusId) {
-        this.metaWindow.disconnect(this.windowFocusId);
-      }
-    } catch (e) {
-      /* Signal is invalid */
-    }
-    if (!skipSignalDisconnect) {
-      each(this.signals, (signal, key)=>{
-        each(signal, (id)=>{
-          if (this[key] && id) {
-            this[key].disconnect(id);
-          }
-        });
-      });
-    }
+    this.signals.disconnectAllSignals();
     var refThumb = _.findIndex(this.appSwitcherItem.appThumbnails, (thumb)=>{
       return _.isEqual(thumb.metaWindow, this.metaWindow);
     });

@@ -242,11 +242,15 @@ AppGroup.prototype = {
       }
 
     } else if (button === 3) {
-      this.appList._closeAllRightClickMenus(()=>{
-        this.appList._closeAllHoverMenus(()=>{
-          this.rightClickMenu.open();
+      if (!this.rightClickMenu.isOpen) {
+        this.appList._closeAllRightClickMenus(()=>{
+          this.appList._closeAllHoverMenus(()=>{
+            this.rightClickMenu.open();
+          });
         });
-      });
+      } else {
+        this.appList._closeAllRightClickMenus(Lang.bind(this, this.appList._closeAllHoverMenus));
+      }
     }
   },
 

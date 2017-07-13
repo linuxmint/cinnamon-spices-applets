@@ -26,6 +26,7 @@
       "type" : "section",
       "title" : "App Buttons",
       "keys" : [
+        "app-button-width",
         "number-display",
         "title-display",
         "pinned-apps",
@@ -97,26 +98,10 @@
       "title" : "Icons",
       "keys" : [
         "icon-spacing",
-        "icon-padding",
-        "themePadding",
         "enable-iconSize",
         "icon-size"
       ]
     }
-  },
-  "ITM": {
-    "type": "header",
-    "description": "ITM Settings"
-  },
-  "seperator0": {
-    "type": "separator"
-  },
-  "WindowList": {
-    "type": "header",
-    "description": "Window List Settings"
-  },
-  "seperator1": {
-    "type": "separator"
   },
   "number-display": {
     "type": "combobox",
@@ -204,12 +189,15 @@
     "description": "Duration of the apps order display on hotkey press",
     "tooltip": "Determines the duration the window count labels are replaced with the app's order number."
   },
-  "Thumbnails": {
-    "type": "header",
-    "description": "Thumbnail Settings"
-  },
-  "seperator4": {
-    "type": "separator"
+  "app-button-width": {
+    "type": "spinbutton",
+    "default": 31,
+    "min": 1,
+    "max": 250,
+    "step": 2,
+    "units": "px",
+    "description": "App button width",
+    "tooltip": "Controls the width of the application button."
   },
   "thumbnail-timeout": {
     "type": "spinbutton",
@@ -267,13 +255,6 @@
     "description": "Include all app windows",
     "tooltip": "Controls whether or not thumbnails for smalller child windows, such as exit confirmations and file dialogues will be included in the thumbnail list."
   },
-  "AppMenu": {
-    "type": "header",
-    "description": "Context Menu Settings"
-  },
-  "seperator5": {
-    "type": "separator"
-  },
   "show-recent": {
     "type": "checkbox",
     "default": true,
@@ -315,16 +296,9 @@
     "description": "Apply the monitor move option to all windows",
     "tooltip": "When clicking \"Move to monitor\" in the context menu, this option will move all of an app's windows instead of just the last focused window from the app."
   },
-  "HoverPeek": {
-    "type": "header",
-    "description": "Hover Peek Settings"
-  },
-  "seperator3": {
-    "type": "separator"
-  },
   "enable-hover-peek": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Show windows when hovered over",
     "tooltip": "Controls whether or not windows display when hovered over."
   },
@@ -349,13 +323,6 @@
     "units": "percent",
     "description": "Window opacity",
     "tooltip": "Opacity of the windows on hover."
-  },
-  "ThemeSettings": {
-    "type": "header",
-    "description": "Theme Settings"
-  },
-  "seperator2": {
-    "type": "separator"
   },
   "show-active": {
     "type": "checkbox",
@@ -383,12 +350,6 @@
     "description": "Icon padding",
     "tooltip": "Controls how much horizontal padding is inside the app buttons. Padding is only applied to instances of this applet on horizontal panels."
   },
-  "themePadding": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Use theme padding to center button icons",
-    "tooltip": "If button icons look off-centered, toggling this may help."
-  },
   "enable-iconSize": {
     "type": "checkbox",
     "default": false,
@@ -399,9 +360,9 @@
     "type": "spinbutton",
     "dependency": "enable-iconSize",
     "default": 24,
-    "min": 0,
-    "max": 150,
-    "step": 1,
+    "min": 16,
+    "max": 128,
+    "step": 2,
     "units": "px",
     "description": "Icon size",
     "tooltip": "Set icon size"
@@ -453,13 +414,13 @@
   },
   "close-button-style": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Allow themes to control the thumbnail close button",
     "tooltip": "Controls whether or not the theme controls the window thumbnail's close button."
   },
   "useSystemTooltips": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Use system tooltips for closed apps",
     "tooltip": "Controls whether or not system tooltips are in use when hovering over closed pinned apps."
   }

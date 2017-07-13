@@ -229,16 +229,15 @@ MyApplet.prototype = {
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
       {key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList},
       {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacingOnAllAppLists},
-      {key: 'themePadding', value: 'themePadding', cb: this.refreshCurrentAppList},
-      {key: 'icon-padding', value: 'iconPadding', cb: null},
       {key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList},
-      {key: 'icon-size', value: 'iconSize', cb: null},
+      {key: 'icon-size', value: 'iconSize', cb: this._updateIconSizes},
       {key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList},
       {key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList},
       {key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList},
       {key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
       {key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null},
+      {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
     ];
 
     if (this.c32) {
@@ -272,15 +271,8 @@ MyApplet.prototype = {
     this._dragPlaceholderPos = -1;
     this._animatingPlaceholdersCount = 0;
 
-    SignalManager.SignalManager.prototype.connect_after = function(obj, sigName, callback, bind, force) {
-      if (!force && this.isConnected(sigName, obj, callback)) {
-        return;
-      }
-      let id = bind ? obj.connect_after(sigName, Lang.bind(bind, callback)) : obj.connect_after(sigName, Lang.bind(this._object, callback));
-      this._storage.push([sigName, obj, callback, id]);
-    };
-
     this.signals = new SignalManager.SignalManager(this);
+    //this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon);
     this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
     this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
@@ -301,6 +293,18 @@ MyApplet.prototype = {
     this._bindAppKey();
   },
 
+  on_panel_edit_mode_changed: function () {
+    this.panelEditMode = global.settings.get_boolean('panel-edit-mode');
+    each(this.metaWorkspaces, (workspace)=>{
+      each(workspace.appList.appList, (appObject)=>{
+        appObject.appGroup.hoverMenu.actor.reactive = !this.panelEditMode;
+        appObject.appGroup.hoverMenu.appSwitcherItem.actor.reactive = !this.panelEditMode;
+        appObject.appGroup.rightClickMenu.actor.reactive = !this.panelEditMode;
+        appObject.appGroup._appButton.actor.reactive = !this.panelEditMode;
+      });
+    });
+  },
+
   on_panel_height_changed: function() {
     this.refreshCurrentAppList();
   },
@@ -314,7 +318,10 @@ MyApplet.prototype = {
   },
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
-  _onButtonPressEvent: function() {
+  _onButtonPressEvent: function(actor, event) {
+    if (this.panelEditMode) {
+      Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
+    }
     return false;
   },
 
@@ -362,6 +369,23 @@ MyApplet.prototype = {
     setTimeout(()=>{
       this.metaWorkspaces[this.currentWs].appList._refreshList();
     }, 15);
+  },
+
+  _updateIconSizes: function () {
+    each(this.metaWorkspaces, (workspace)=>{
+      each(workspace.appList.appList, (appObject)=>{
+        appObject.appGroup._appButton.setIconSize();
+        appObject.appGroup._appButton.setIconPadding();
+      });
+    });
+  },
+
+  _updateAppButtonWidths: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      each(workspace.appList.appList, (appObject)=>{
+        appObject.appGroup._appButton.setActorWidth();
+      });
+    });
   },
 
   _updateSpacingOnAllAppLists: function() {
@@ -634,10 +658,6 @@ MyApplet.prototype = {
     return false;
   },
 
-  on_panel_edit_mode_changed: function () {
-    this.actor.reactive = global.settings.get_boolean('panel-edit-mode');
-  },
-
   pinned_app_contr: function () {
     let pinnedAppsContr = this.pinnedAppsContr;
     return pinnedAppsContr;
@@ -716,7 +736,6 @@ MyApplet.prototype = {
   destroy: function () {
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
-    global.settings.disconnect(this.panelEditId);
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
       let children = this.metaWorkspaces[i].appList.managerContainer.get_children();
       for (let z = 0, len = children.length; z < len; z++) {
