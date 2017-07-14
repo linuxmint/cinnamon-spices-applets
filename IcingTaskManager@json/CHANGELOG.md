@@ -1,5 +1,22 @@
 Changelog
 
+### 5.0.0
+
+  * Fixed off-center app button icons.
+  * Fixed the extra menu theming on the thumbnail menu.
+  * Fixed active window markers disappearing.
+  * Fixed app buttons not using the full width of vertical panels.
+  * Fixed the app order display numbering.
+  * Fixed LibreOffice apps not being grouped correctly.
+  * Added a layout to the settings schema.
+  * Hover peek and thumbnail close button theming enabled by default.
+  * The non-system tooltip option was removed to help speed up code improvements in the thumbnail menu, and improve performance.
+  * Changed the default icon size from 16 to 24.
+  * Added an app button width option, which now makes the icon padding options obsolete.
+  * Overhauled ungrouped window mode.
+  * Vertical thumbnails are now enabled automatically on vertical panels.
+  * A lot of optimizations and code improvement.
+
 ### 4.6.2
 
   * Fixed icon sizing in high DPI mode.

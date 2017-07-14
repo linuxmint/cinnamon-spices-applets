@@ -40,7 +40,6 @@ AppMenuButtonRightClickMenu.prototype = {
     this.app = this._parent.app;
     this.appId = this._parent.appId;
     this.appInfo = this.app.get_app_info();
-    this.isFavapp = this._parent.isFavapp;
     this.pinnedFavorites = this._applet.pinnedFavorites;
     this.metaWindow = params.metaWindow;
     this.metaWindows = params.metaWindows;
@@ -61,10 +60,10 @@ AppMenuButtonRightClickMenu.prototype = {
       this.metaWindow = this._parent._getLastFocusedWindow();
     }
 
-    var mw = this.metaWindow;
-    var item;
-    var length;
-    var hasWindows = this.metaWindows.length > 0;
+    let mw = this.metaWindow;
+    let item;
+    let length;
+    let hasWindows = this.metaWindows.length > 0;
 
     let createMenuItem = (opts={label: '', icon: null})=>{
       if (this._applet.menuItemType < 3 && opts.icon) {
@@ -78,11 +77,11 @@ AppMenuButtonRightClickMenu.prototype = {
     if (hasWindows) {
       // Monitors
       if (Main.layoutManager.monitors.length > 1) {
-        var connectMonitorEvent = (item, mw, i)=>{
+        let connectMonitorEvent = (item, mw, i)=>{
           item.connect('activate', ()=>{
             if (this._applet.monitorMoveAllWindows) {
               for (let z = 0, len = this.metaWindows.length; z < len; z++) {
-                var focused = 0;
+                let focused = 0;
                 this.metaWindows[z].move_to_monitor(i);
                 if (this.metaWindows[z].has_focus()) {
                   ++focused;
@@ -124,13 +123,13 @@ AppMenuButtonRightClickMenu.prototype = {
           item = new PopupMenu.PopupSubMenuMenuItem(t('Move to another workspace'));
           this.addMenuItem(item);
 
-          var connectWorkspaceEvent = (ws, j)=>{
+          let connectWorkspaceEvent = (ws, j)=>{
             ws.connect('activate', function() {
               mw.change_workspace(global.screen.get_workspace_by_index(j));
             });
           };
           for (let i = 0; i < length; i++) {
-            // Make the index a local variable to pass to function
+            // Make the index a local letiable to pass to function
             let j = i;
             let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
             let ws = createMenuItem({label: name});
@@ -157,11 +156,11 @@ AppMenuButtonRightClickMenu.prototype = {
         let subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Places'));
         this.addMenuItem(subMenu);
 
-        var defualtPlaces = this._listDefaultPlaces();
-        var bookmarks = this._listBookmarks();
-        var devices = this._listDevices();
-        var places = defualtPlaces.concat(bookmarks).concat(devices);
-        var handlePlaceLaunch = (item, i)=>item.connect('activate', ()=>places[i].launch());
+        let defualtPlaces = this._listDefaultPlaces();
+        let bookmarks = this._listBookmarks();
+        let devices = this._listDevices();
+        let places = defualtPlaces.concat(bookmarks).concat(devices);
+        let handlePlaceLaunch = (item, i)=>item.connect('activate', ()=>places[i].launch());
         for (let i = 0, len = places.length; i < len; i++) {
           item = createMenuItem({label: places[i].name, icon: 'folder'});
           handlePlaceLaunch(item, i);
@@ -176,10 +175,10 @@ AppMenuButtonRightClickMenu.prototype = {
         let subMenu = new PopupMenu.PopupSubMenuMenuItem(t(_.find(constants.ffOptions, {id: this._applet.firefoxMenu}).label));
         this.addMenuItem(subMenu);
 
-        var histories = getFirefoxHistory(this._applet);
+        let histories = getFirefoxHistory(this._applet);
         if (histories) {
           try {
-            var handleHistoryLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
+            let handleHistoryLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
             for (let i = 0, len = histories.length; i < len; i++) {
               item = createMenuItem({label: histories[i].title, icon: 'go-next'});
               handleHistoryLaunch(item, i);
@@ -192,26 +191,26 @@ AppMenuButtonRightClickMenu.prototype = {
       }
 
       // Recent Files
-      var recentItems = this._applet.recentItems;
-      var items = [];
+      let recentItems = this._applet.recentItems;
+      let items = [];
 
       for (let i = 0, len = recentItems.length; i < len; i++) {
-        var mimeType = recentItems[i].get_mime_type();
-        var appInfo = Gio.app_info_get_default_for_type(mimeType, false);
+        let mimeType = recentItems[i].get_mime_type();
+        let appInfo = Gio.app_info_get_default_for_type(mimeType, false);
         if (appInfo && this.appInfo && appInfo.get_id() === this.appId) {
           items.push(recentItems[i]);
         }
       }
-      var itemsLength = items.length;
+      let itemsLength = items.length;
 
       if (itemsLength > 0) {
         let subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Recent'));
         this.addMenuItem(subMenu);
-        var num = 10;
+        let num = 10;
         if (itemsLength > num) {
           itemsLength = num;
         }
-        var handleRecentLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(items[i].get_uri(), global.create_app_launch_context()));
+        let handleRecentLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(items[i].get_uri(), global.create_app_launch_context()));
         for (let i = 0; i < itemsLength; i++) {
           item = createMenuItem({label: items[i].get_short_name(), icon: 'list-add'});
           handleRecentLaunch(item, i);
@@ -243,12 +242,12 @@ AppMenuButtonRightClickMenu.prototype = {
     subMenu.menu.addMenuItem(item);
 
     // Actions
-    var actions = null;
+    let actions = null;
     try {
       actions = this.appInfo.list_actions();
       if (this.appInfo && actions) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        var handleAction = (action)=>{
+        let handleAction = (action)=>{
           item = createMenuItem({label: this.appInfo.get_action_name(action), icon: 'document-new'});
           item.connect('activate', ()=>this.appInfo.launch_action(action, global.create_app_launch_context()));
           this.recentMenuItems.push(item);
@@ -269,14 +268,13 @@ AppMenuButtonRightClickMenu.prototype = {
     // Pin/unpin, shortcut handling
     if (!this.app.is_window_backed()) {
       if (this._applet.showPinned !== constants.FavType.none && !this.app.is_window_backed()) {
-        if (this.isFavapp) {
-          item = createMenuItem({label: 'Unpin from Panel', icon: 'list-remove'});
-          item.connect('activate', Lang.bind(this, this._toggleFav));
+        if (this._parent.isFavoriteApp) {
+          this.pinToggleItem = createMenuItem({label: 'Unpin from Panel', icon: 'list-remove'});
         } else {
-          item = createMenuItem({label: 'Pin to Panel', icon: 'bookmark-new'});
-          item.connect('activate', Lang.bind(this, this._toggleFav));
+          this.pinToggleItem = createMenuItem({label: 'Pin to Panel', icon: 'bookmark-new'});
         }
-        this.addMenuItem(item);
+        this.pinToggleItem.connect('activate', Lang.bind(this, this._toggleFav));
+        this.addMenuItem(this.pinToggleItem);
       }
       if (this._applet.autoStart) {
         if (this.autostartIndex !== -1) {
@@ -346,6 +344,9 @@ AppMenuButtonRightClickMenu.prototype = {
         // Close all
         item = createMenuItem({label: 'Close all', icon: 'application-exit'});
         item.connect('activate', Lang.bind(this, function() {
+          if (!this._parent.isFavoriteApp) {
+            this._parent.willUnmount = true;
+          }
           each(this.metaWindows, (metaWindow)=>{
             if (!metaWindow._needsAttention) {
               metaWindow.delete(global.get_current_time());
@@ -385,7 +386,7 @@ AppMenuButtonRightClickMenu.prototype = {
       this._applet.removeAutostartApp(this.autostartIndex);
       this.autostartIndex = -1;
     } else {
-      var filePath = this.appInfo.get_filename();
+      let filePath = this.appInfo.get_filename();
       Util.trySpawnCommandLine('bash -c "cp ' + filePath + ' ' + this._applet.autostartStrDir + '"');
       setTimeout(()=>{
         this._applet.getAutostartApps();
@@ -395,24 +396,32 @@ AppMenuButtonRightClickMenu.prototype = {
   },
 
   _toggleFav: function (actor, event) {
-    if (this.isFavapp) {
+    if (this._parent.isFavoriteApp) {
       this.pinnedFavorites.removeFavorite(this.appId);
+      //this.pinToggleItem.label.set_text('Pin to Panel');
+      //this.pinToggleItem._icon.set_icon_name('bookmark-new');
     } else {
       if (!this.app.is_window_backed()) {
-        this.pinnedFavorites._addFavorite({appId: this.appId, app: this.app, pos: -1});
+        this.pinnedFavorites._addFavorite({
+          appId: this.appId,
+          app: this.app,
+          pos: -1
+        });
+        //this.pinToggleItem.label.set_text('Unpin from Panel');
+        //this.pinToggleItem._icon.set_icon_name('list-remove');
       }
     }
   },
 
   _createShortcut: function (actor, event) {
-    var proc = this.app.get_windows()[0].get_pid();
-    var cmd = 'bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ' + proc.toString() + '"';
+    let proc = this.app.get_windows()[0].get_pid();
+    let cmd = 'bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ' + proc.toString() + '"';
     Util.trySpawnCommandLine(cmd);
   },
 
   _listDefaultPlaces: function (pattern) {
-    var defaultPlaces = Main.placesManager.getDefaultPlaces();
-    var res = [];
+    let defaultPlaces = Main.placesManager.getDefaultPlaces();
+    let res = [];
     for (let i = 0, len = defaultPlaces.length; i < len; i++) {
       if (!pattern || defaultPlaces[i].name.toLowerCase().indexOf(pattern) != -1) {
         res.push(defaultPlaces[i]);
@@ -422,10 +431,10 @@ AppMenuButtonRightClickMenu.prototype = {
   },
 
   _listBookmarks: function (pattern) {
-    var bookmarks = Main.placesManager.getBookmarks();
-    var res = [];
+    let bookmarks = Main.placesManager.getBookmarks();
+    let res = [];
     for (let i = 0, len = bookmarks.length; i < len; i++) {
-      if (!pattern || bookmarks[i].name.toLowerCase().indexOf(pattern) != -1) {
+      if (!pattern || bookmarks[i].name.toLowerCase().indexOf(pattern) !== -1) {
         res.push(bookmarks[i]);
       }
     }
@@ -433,10 +442,10 @@ AppMenuButtonRightClickMenu.prototype = {
   },
 
   _listDevices: function (pattern) {
-    var devices = Main.placesManager.getMounts();
-    var res = [];
+    let devices = Main.placesManager.getMounts();
+    let res = [];
     for (let i = 0, len = devices.length; i < len; i++) {
-      if (!pattern || devices[i].name.toLowerCase().indexOf(pattern) != -1) {
+      if (!pattern || devices[i].name.toLowerCase().indexOf(pattern) !== -1) {
         res.push(devices[i]);
       }
     }
@@ -451,7 +460,7 @@ function HoverMenuController (owner) {
 HoverMenuController.prototype = {
   __proto__: PopupMenu.PopupMenuManager.prototype,
 
-  _onEventCapture: function (actor, event) {
+  _onEventCapture: function () {
     return false;
   }
 };
@@ -478,7 +487,7 @@ AppThumbnailHoverMenu.prototype = {
     this.metaWindows = [];
 
     this.app = parent.app;
-    this.isFavapp = parent.isFavapp;
+    this.isFavoriteApp = parent.isFavoriteApp;
     this.appList = parent.appList;
     this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
 
@@ -496,7 +505,7 @@ AppThumbnailHoverMenu.prototype = {
     this.signals.connect(this.actor, 'key-release-event', Lang.bind(this, this._onKeyRelease));
   },
 
-  _onButtonPress: function (actor, event) {
+  _onButtonPress: function (actor) {
     if (this._applet.onClickThumbs && this.appSwitcherItem.box.get_children().length > 1) {
       return;
     }
@@ -546,7 +555,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   open: function () {
-    if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+    if (this.metaWindows.length === 0) {
       this._tooltip.set_text(this.appGroup.appName);
       this._tooltip.show();
       this._tooltip.preventShow = false;
@@ -557,7 +566,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   close: function () {
-    if (this.metaWindows.length === 0 && this._applet.useSystemTooltips) {
+    if (this.metaWindows.length === 0) {
       this._tooltip.set_text('');
       this._tooltip.hide();
       this._tooltip.preventShow = true;
@@ -602,7 +611,7 @@ PopupMenuAppSwitcherItem.prototype = {
     this.metaWindow = parent.metaWindow;
     this.metaWindows = [];
     this.app = parent.app;
-    this.isFavapp = parent.isFavapp;
+    this.isFavoriteApp = parent.isFavoriteApp;
     this.hoverMenu = parent;
     this.box = parent.box;
     this.actor.set_style_class_name('');
@@ -642,7 +651,7 @@ PopupMenuAppSwitcherItem.prototype = {
     } else if (this._applet.orientation === St.Side.RIGHT) {
       closeArg = Clutter.KEY_Right;
     }
-    var index;
+    let index;
     if (symbol === args[0]) {
       if (!entered) {
         index = i;
@@ -692,14 +701,14 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   _isFavorite: function (isFav) {
-    this.isFavapp = isFav;
+    this.isFavoriteApp = isFav;
   },
 
   handleUnopenedPinnedApp: function(metaWindow, metaWindows){
     if (this.metaWindowThumbnail) {
       this.metaWindowThumbnail.destroy();
     }
-    var isPinned = metaWindows.length === 0 && !metaWindow && this.isFavapp;
+    let isPinned = metaWindows.length === 0 && !metaWindow && this.isFavoriteApp;
     if (isPinned || (metaWindows.length === 0 && !this.metaWindowThumbnail)) {
       this.metaWindowThumbnail = new WindowThumbnail({
         parent: this,
@@ -719,14 +728,14 @@ PopupMenuAppSwitcherItem.prototype = {
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
     // Get a list of all windows of our app that are running in the current workspace
-    var windows = this.metaWindows;
+    let windows = this.metaWindows;
 
 
     if (this.metaWindowThumbnail && this.metaWindowThumbnail.thumbnail != null) {
       this.metaWindowThumbnail = null;
     }
     if (this.metaWindowThumbnail && _.isEqual(this.metaWindowThumbnail.metaWindow, this.metaWindow)) {
-      this.metaWindowThumbnail._isFavorite(this.isFavapp);
+      this.metaWindowThumbnail._isFavorite(this.isFavoriteApp);
     } else if (this.handleUnopenedPinnedApp(this.metaWindow, windows)) {
       return;
     }
@@ -755,7 +764,7 @@ PopupMenuAppSwitcherItem.prototype = {
 
   addWindowThumbnails: function (metaWindows) {
     if (metaWindows.length > 0) {
-      var children = this.box.get_children();
+      let children = this.box.get_children();
       for (let w = 0, len = children.length; w < len; w++) {
         this.box.remove_actor(children[w]);
       }
@@ -766,8 +775,8 @@ PopupMenuAppSwitcherItem.prototype = {
     }
 
     for (let i = 0, len = metaWindows.length; i < len; i++) {
-      var metaWindow = metaWindows[i];
-      var refThumb = _.findIndex(this.appThumbnails, {metaWindow: metaWindow});
+      let metaWindow = metaWindows[i];
+      let refThumb = _.findIndex(this.appThumbnails, {metaWindow: metaWindow});
       if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
         if (this.reAdd) {
           this.box.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
@@ -776,7 +785,7 @@ PopupMenuAppSwitcherItem.prototype = {
         if (this.metaWindowThumbnail) {
           this.metaWindowThumbnail.destroy(true);
         }
-        var thumbnail = new WindowThumbnail({
+        let thumbnail = new WindowThumbnail({
           parent: this,
           metaWindow: metaWindow,
           metaWindows: metaWindows
@@ -793,15 +802,15 @@ PopupMenuAppSwitcherItem.prototype = {
   },
   setStyleOptions: function (windows) {
     this.box.style = null;
-    var thumbnailTheme = this.box.peek_theme_node();
-    var padding = thumbnailTheme ? thumbnailTheme.get_horizontal_padding() : null;
-    var thumbnailPadding = (padding && (padding > 1 && padding < 21) ? padding : 10);
+    let thumbnailTheme = this.box.peek_theme_node();
+    let padding = thumbnailTheme ? thumbnailTheme.get_horizontal_padding() : null;
+    let thumbnailPadding = (padding && (padding > 1 && padding < 21) ? padding : 10);
     this.box.style = 'padding:' + (thumbnailPadding / 2) + 'px';
-    var boxTheme = this.box.peek_theme_node();
+    let boxTheme = this.box.peek_theme_node();
     padding = boxTheme ? boxTheme.get_vertical_padding() : null;
-    var boxPadding = (padding && (padding > 0) ? padding : 3);
+    let boxPadding = (padding && (padding > 0) ? padding : 3);
     this.box.style = 'padding:' + boxPadding + 'px;';
-    if (this.isFavapp && this.metaWindowThumbnail) {
+    if (this.isFavoriteApp && this.metaWindowThumbnail) {
       this.metaWindowThumbnail.thumbnailIconSize();
       return;
     }
@@ -848,7 +857,7 @@ WindowThumbnail.prototype = {
     this.metaWindow = params.metaWindow || null;
     this.metaWindows = params.metaWindows;
     this.app = this.appSwitcherItem.app;
-    this.isFavapp = this.appSwitcherItem.isFavapp || false;
+    this.isFavoriteApp = this.appSwitcherItem.isFavoriteApp || false;
     this.wasMinimized = false;
     this.thumbnailPadding = 16;
     this.willUnmount = false;
@@ -904,7 +913,7 @@ WindowThumbnail.prototype = {
     this.actor.add_actor(this.bin);
     this.actor.add_actor(this.thumbnailActor);
 
-    this._isFavorite(this.isFavapp, this.metaWindow, this.metaWindows);
+    this._isFavorite(this.isFavoriteApp, this.metaWindow, this.metaWindows);
 
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnterEvent));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeaveEvent));
@@ -917,7 +926,7 @@ WindowThumbnail.prototype = {
 
   handleEnterEvent: function(){
     this.entered = true;
-    if (!this.isFavapp) {
+    if (!this.isFavoriteApp) {
       this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true);
       this.actor.add_style_pseudo_class('outlined');
       this.actor.add_style_pseudo_class('selected');
@@ -936,7 +945,7 @@ WindowThumbnail.prototype = {
 
   handleLeaveEvent: function(){
     this.entered = false;
-    if (!this.isFavapp) {
+    if (!this.isFavoriteApp) {
       this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
       this.actor.remove_style_pseudo_class('outlined');
       this._focusWindowChange();
@@ -993,7 +1002,7 @@ WindowThumbnail.prototype = {
       return true;
     }
 
-    var transientHasFocus = false;
+    let transientHasFocus = false;
     this.metaWindow.foreach_transient(function (transient) {
       if (transient.has_focus()) {
         transientHasFocus = true;
@@ -1004,56 +1013,44 @@ WindowThumbnail.prototype = {
     return transientHasFocus;
   },
 
-  _isFavorite: function (isFav, metaWindow, metaWindows) {
-    metaWindow = metaWindow ? metaWindow : this.metaWindow;
-    metaWindows = metaWindows ? metaWindows : this.metaWindows;
-    // Whether we create a favorite tooltip or a window thumbnail
-    if (isFav) {
-      // this.thumbnailActor.height = 0
-      // this.thumbnailActor.width = 0
-      this.thumbnailActor.child = null;
-      var apptext = this.appSwitcherItem.hoverMenu.appGroup.appName;
-      // not sure why it's 7
-      this.thumbnailWidth = constants.THUMBNAIL_ICON_SIZE + Math.floor(apptext.length * 7.0);
-      this._label.text = apptext;
-      this.isFavapp = true;
-      this.actor.style = 'border-width:2px;padding: 2px';
-    } else {
+  _isFavorite: function (isFav) {
+    this.isFavoriteApp = isFav;
+
+    if (this.metaWindows.length > 0) {
       this.actor.style = null;
-      // HACK used to make sure everything is on the stage
       setTimeout(()=>this.thumbnailPaddingSize(), 0);
-      this._refresh(metaWindow, metaWindows);
+      this._refresh(this.metaWindow, this.metaWindows);
     }
   },
 
   thumbnailIconSize: function () {
-    var thumbnailTheme = this.themeIcon.peek_theme_node();
+    let thumbnailTheme = this.themeIcon.peek_theme_node();
     if (thumbnailTheme) {
-      var width = thumbnailTheme.get_width();
-      var height = thumbnailTheme.get_height();
+      let width = thumbnailTheme.get_width();
+      let height = thumbnailTheme.get_height();
       this.icon.set_size(width, height);
     }
   },
 
   thumbnailPaddingSize: function () {
-    var thumbnailTheme = this.actor.peek_theme_node();
-    var padding = thumbnailTheme ? thumbnailTheme.get_horizontal_padding() : null;
+    let thumbnailTheme = this.actor.peek_theme_node();
+    let padding = thumbnailTheme ? thumbnailTheme.get_horizontal_padding() : null;
     this.thumbnailPadding = (padding && (padding > 3 && padding < 21) ? padding : 12);
     this.actor.style = 'border-width:2px;padding:' + ((this.thumbnailPadding / 2)) + 'px;';
   },
 
   _getThumbnail: function () {
     // Create our own thumbnail if it doesn't exist
-    var thumbnail = null;
+    let thumbnail = null;
     if (this.sizeChangeId && this.muffinWindow) {
       this.muffinWindow.disconnect(this.sizeChangeId);
     }
     this.muffinWindow = this.metaWindow.get_compositor_private();
     if (this.muffinWindow) {
-      var windowTexture = this.muffinWindow.get_texture();
+      let windowTexture = this.muffinWindow.get_texture();
       let [width, height] = windowTexture.get_size();
       this.sizeChangeId = this.muffinWindow.connect('size-changed', ()=>this._refresh());
-      var scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
+      let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       thumbnail = new Clutter.Clone({
         source: windowTexture,
         reactive: true,
@@ -1077,16 +1074,19 @@ WindowThumbnail.prototype = {
   },
 
   _onCloseButtonRelease: function (actor, event) {
-    var button = event.get_button();
+    let button = event.get_button();
     if (button === 1 && _.isEqual(actor, this.button)) {
       this.handleAfterClick();
     }
   },
 
   _connectToWindow: function (actor, event) {
+    if (this.metaWindows.length === 0) {
+      return false;
+    }
     this.wasMinimized = false;
-    var button = event.get_button();
-    if (button === 1 && !this.stopClick && !this.isFavapp) {
+    let button = event.get_button();
+    if (button === 1 && !this.stopClick && !this.isFavoriteApp) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
 
       this.appSwitcherItem.hoverMenu.close();
@@ -1107,13 +1107,13 @@ WindowThumbnail.prototype = {
     }
 
     // Turn favorite tooltip into a normal thumbnail
-    var monitor = Main.layoutManager.primaryMonitor;
+    let monitor = Main.layoutManager.primaryMonitor;
 
-    var setThumbSize = (divider=70, offset=16)=>{
+    let setThumbSize = (divider=70, offset=16)=>{
       this.thumbnailWidth = Math.floor((monitor.width / divider) * this._applet.thumbSize) + offset;
       this.thumbnailHeight = Math.floor((monitor.height / divider) * this._applet.thumbSize) + offset;
 
-      var monitorSize, thumbnailSize;
+      let monitorSize, thumbnailSize;
       if (this._applet.verticalThumbs) {
         monitorSize = monitor.height;
         thumbnailSize = this.thumbnailHeight;
@@ -1139,7 +1139,7 @@ WindowThumbnail.prototype = {
         this.thumbnailActor.width = this.thumbnailWidth;
         this._container.style = 'width: ' + Math.floor(this.thumbnailWidth - 16) + 'px';
 
-        this.isFavapp = false;
+        this.isFavoriteApp = false;
 
         // Replace the old thumbnail
         this._label.text = this.metaWindow.get_title();
@@ -1157,22 +1157,21 @@ WindowThumbnail.prototype = {
   },
 
   _hoverPeek: function (opacity, metaWin) {
-    var applet = this._applet;
-    if (!applet.enablePeek) {
+    if (!this._applet.enablePeek) {
       return;
     }
 
-    function setOpacity (window_actor, target_opacity) {
+    const setOpacity = (window_actor, target_opacity) => {
       Tweener.addTween(window_actor, {
-        time: applet.peekTime * 0.001,
+        time: this._applet.peekTime * 0.001,
         transition: 'easeOutQuad',
         opacity: target_opacity
       });
-    }
-    var monitorOrigin = metaWin.get_monitor();
-    var wa = global.get_window_actors();
+    };
+    let monitorOrigin = metaWin.get_monitor();
+    let wa = global.get_window_actors();
     for (let i = 0, len = wa.length; i < len; i++) {
-      var waWin = wa[i].get_meta_window();
+      let waWin = wa[i].get_meta_window();
       if (metaWin === waWin || waWin.get_monitor() !== monitorOrigin) {
         continue;
       }
@@ -1186,7 +1185,7 @@ WindowThumbnail.prototype = {
   destroy: function(){
     this.willUnmount = true;
     this.signals.disconnectAllSignals();
-    var refThumb = _.findIndex(this.appSwitcherItem.appThumbnails, (thumb)=>{
+    let refThumb = _.findIndex(this.appSwitcherItem.appThumbnails, (thumb)=>{
       return _.isEqual(thumb.metaWindow, this.metaWindow);
     });
     if (refThumb !== -1) {
@@ -1204,6 +1203,5 @@ WindowThumbnail.prototype = {
       this.actor.destroy_children();
     } catch (e) {}
     this.actor.destroy();
-
   }
 };

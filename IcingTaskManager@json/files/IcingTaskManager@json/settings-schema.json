@@ -425,12 +425,6 @@
     "description": "Allow themes to control the thumbnail close button",
     "tooltip": "Controls whether or not the theme controls the window thumbnail's close button."
   },
-  "useSystemTooltips": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Use system tooltips for closed apps",
-    "tooltip": "Controls whether or not system tooltips are in use when hovering over closed pinned apps."
-  },
   "mintYPreset": {
     "type" : "button",
     "description" : "Mint Y and Variants",

@@ -31,7 +31,7 @@ AppButton.prototype = {
     this.app = parent.app;
     this._applet = parent._applet;
     this._parent = parent;
-    this.isFavapp = parent.isFavapp;
+    this.isFavoriteApp = parent.isFavoriteApp;
     this.metaWindow = null;
     this.metaWindows = [];
     this.settings = this._applet.settings;
@@ -82,7 +82,7 @@ AppButton.prototype = {
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this._onEnter));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
 
-    this._isFavorite(parent.isFavapp);
+    this._isFavorite(parent.isFavoriteApp);
     this._onFocusChange();
   },
 
@@ -101,6 +101,9 @@ AppButton.prototype = {
   },
 
   setIconPadding: function () {
+    if (!this.actor) {
+      return;
+    }
     if (!this.actor.get_stage()) {
       setTimeout(()=>this.setIconPadding(true), 500);
       return;
@@ -193,7 +196,7 @@ AppButton.prototype = {
     // needed for the icon plus the space needed for(label - icon/2)
     alloc.min_size = iconMinSize;
     if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM ) {
-      if (this._applet.titleDisplay === 3 && !this._parent.isFavapp) {
+      if (this._applet.titleDisplay === 3 && !this._parent.isFavoriteApp) {
         alloc.natural_size = constants.MAX_BUTTON_WIDTH;
       } else {
         alloc.natural_size = Math.min(iconNaturalSize + Math.max(0, labelNaturalSize), constants.MAX_BUTTON_WIDTH);
@@ -411,13 +414,13 @@ AppButton.prototype = {
         this._label.set_text('');
       }
     }
-    if (this.actor.has_style_pseudo_class('active')) {
+    if (this.actor.has_style_pseudo_class('active') && this.metaWindows.length === 0) {
       this.actor.remove_style_pseudo_class('active');
     }
   },
 
   _isFavorite: function (isFav) {
-    this.isFavapp = isFav;
+    this.isFavoriteApp = isFav;
     if (isFav) {
       this._setFavoriteAttributes();
     } else {
@@ -443,6 +446,10 @@ AppButton.prototype = {
     } catch (e) {}
     this._container.destroy();
     this.actor.destroy();
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   }
 };
 

@@ -72,35 +72,14 @@ PinnedFavs.prototype = {
     }
   },
 
-  _getIds: function () {
-    return _.map(this._favorites, 'id');
-  },
-
-  getFavoriteMap: function () {
-    return this._favorites;
-  },
-
-  getFavorites: function () {
-    return _.map(this._favorites, 'app');
-  },
-
-  isFavorite: function (appId) {
-    let refFav = _.findIndex(this._favorites, {id: appId});
-    return refFav !== -1;
-  },
-
-  triggerUpdate: function (appId, pos, isFavapp) {
-    isFavapp = isFavapp ? isFavapp : false;
-    setTimeout(()=>{
-      this._applet.refreshAppFromCurrentListById(appId, {favChange: true, favPos: pos, isFavapp: isFavapp});
-    }, 15);
+  triggerUpdate: function (appId, pos, isFavoriteApp) {
+    let refApp = _.findIndex(this._applet.getCurrentAppList().appList, {appId: appId});
+    if (refApp > -1) {
+      this._applet.getCurrentAppList().appList[refApp]._isFavorite(isFavoriteApp);
+    }
   },
 
   _addFavorite: function (opts={appId: null, app: null, pos: -1}) {
-    if (this.isFavorite(opts.appId)) {
-      return false;
-    }
-
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_app(opts.appId);
     }
@@ -120,10 +99,12 @@ PinnedFavs.prototype = {
 
     this._favorites.push(newFav);
 
+
     if (opts.pos !== -1) {
       this.moveFavoriteToPos(opts.appId, opts.pos);
       return true;
     }
+    this._favorites = _.uniqBy(this._favorites, 'id');
     this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
     this.triggerUpdate(opts.appId, -1, true);
     return true;
@@ -139,7 +120,7 @@ PinnedFavs.prototype = {
     this.triggerUpdate(appId, pos, true);
   },
 
-  _removeFavorite: function (appId) {
+  removeFavorite: function (appId) {
     let refFav = _.findIndex(this._favorites, {id: appId});
     if (refFav === -1) {
       this.triggerUpdate(appId, -1, false);
@@ -148,23 +129,19 @@ PinnedFavs.prototype = {
     _.pullAt(this._favorites, refFav);
     this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
 
-    let refApp = _.findIndex(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, {id: appId});
-    let hasOpenWindows = this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].app.get_windows().length > 0;
+    let refApp = _.findIndex(this._applet.getCurrentAppList().appList, {appId: appId});
+    let hasOpenWindows = this._applet.getCurrentAppList().appList[refApp].app.get_windows().length > 0;
 
     if (hasOpenWindows) {
       this.triggerUpdate(appId, -1, false);
     } else {
       setTimeout(()=>{
-        this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].destroy();
+        this._applet.getCurrentAppList().appList[refApp].destroy();
         _.pullAt(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, refApp);
       }, 15);
     }
     return true;
   },
-
-  removeFavorite: function (appId) {
-    this._removeFavorite(appId);
-  }
 };
 Signals.addSignalMethods(PinnedFavs.prototype);
 
@@ -242,14 +219,13 @@ MyApplet.prototype = {
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
       {key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList},
       {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacingOnAllAppLists},
-      {key: 'enable-iconSize', value: 'enableIconSize', cb: this.refreshCurrentAppList},
+      {key: 'enable-iconSize', value: 'enableIconSize', cb: this._updateIconSizes},
       {key: 'icon-size', value: 'iconSize', cb: this._updateIconSizes},
       {key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList},
       {key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList},
       {key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList},
       {key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
-      {key: 'useSystemTooltips', value: 'useSystemTooltips', cb: null},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
     ];
 
@@ -281,7 +257,6 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
-    log2(this._appSystem.get_running())
   },
 
   on_panel_edit_mode_changed: function () {
@@ -357,9 +332,7 @@ MyApplet.prototype = {
   },
 
   refreshCurrentAppList: function(){
-    setTimeout(()=>{
-      this.metaWorkspaces[this.currentWs].appList._refreshList();
-    }, 15);
+    this.metaWorkspaces[this.currentWs].appList._refreshList();
   },
 
   handleMintYThemePreset: function() {
@@ -420,13 +393,6 @@ MyApplet.prototype = {
         appGroup.hoverMenu.appSwitcherItem._setVerticalSetting();
       });
     });
-  },
-
-  refreshAppFromCurrentListById: function(appId, opts){
-    if (!opts) {
-      opts = {favChange: false, favPos: null, isFavapp: false};
-    }
-    this.metaWorkspaces[this.currentWs].appList._refreshAppById(appId, opts);
   },
 
   refreshThumbnailsFromCurrentAppList: function(){
@@ -503,7 +469,8 @@ MyApplet.prototype = {
   },
 
   handleDragOver: function (source, actor, x, y) {
-    if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
+    if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
+      || !this.arrangePinned) {
       return DND.DragMotionResult.NO_DROP;
     }
 
@@ -573,11 +540,12 @@ MyApplet.prototype = {
   acceptDrop: function (source, actor, x, y) {
     if (!(source.isDraggableApp
       || (source instanceof DND.LauncherDraggable))
-      || this.panelEditMode) {
+      || this.panelEditMode
+      || !this.arrangePinned) {
       return false;
     }
 
-    if (!(source.isFavapp || source.wasFavapp || source.isDraggableApp || (source instanceof DND.LauncherDraggable)) || source.isNotFavapp) {
+    if (!(source.isFavoriteApp || source.wasFavapp || source.isDraggableApp || (source instanceof DND.LauncherDraggable)) || source.isNotFavapp) {
       if (this._dragPlaceholderPos !== -1) {
         this.metaWorkspaces[this.currentWs].appList.managerContainer.set_child_at_index(source.actor, this._dragPlaceholderPos);
       }
@@ -597,7 +565,7 @@ MyApplet.prototype = {
       id = app.get_name().toLowerCase() + '.desktop';
     }
 
-    let favorites = this.pinnedFavorites.getFavoriteMap();
+    let favorites = this.pinnedFavorites._favorites;
     let refFav = _.findIndex(favorites, {id: id});
     let favPos = this._dragPlaceholderPos;
 

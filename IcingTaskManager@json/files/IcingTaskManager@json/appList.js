@@ -37,15 +37,13 @@ AppList.prototype = {
     this.managerContainer = new Clutter.Actor({ layout_manager: this.manager });
     this.actor.add_actor(this.managerContainer);
 
-    this.registeredApps = [];
-
     this.appList = [];
     this.lastFocusedApp = null;
     this.lastCycled = null;
 
     // Connect all the signals
     this._setSignals();
-    this._refreshList(true);
+    setTimeout(()=>this._refreshList(true), 0);
 
     this.signals.connect(this.actor, 'style-changed', Lang.bind(this, this._updateSpacing));
 
@@ -75,7 +73,6 @@ AppList.prototype = {
         return;
       }
     });
-    let style = 'margin-' + orientationKey + ': 0px; padding-' + orientationKey + ': 0px;';
     let isVertical = orientationKey === 'left' || orientationKey === 'right';
 
     if (isVertical) {
@@ -83,8 +80,6 @@ AppList.prototype = {
       this.actor.add_style_class_name('vertical');
       this.actor.set_x_align(Clutter.ActorAlign.CENTER);
       this.actor.set_important(true);
-      let opposite = orientationKey === 'left' ? 'right' : 'left';
-      style += 'padding-' + opposite + ': 0px; margin-' + opposite + ': 0px;';
     } else {
       this.manager.set_vertical(false);
       this.actor.remove_style_class_name('vertical');
@@ -95,13 +90,11 @@ AppList.prototype = {
       this.settings.setValue('vertical-thumbnails', isVertical);
     }
 
-    each(containerChildren, (child, key)=>{
-      //child.set_style(style); TBD
+    each(containerChildren, (child)=>{
       if (isVertical) {
         child.set_x_align(Clutter.ActorAlign.CENTER);
       }
     });
-    //this.actor.set_style(style);
 
     if (this._applet.appletEnabled) {
       this._updateSpacing();
@@ -200,7 +193,6 @@ AppList.prototype = {
   },
 
   // Gets a list of every app on the current workspace
-
   _getSpecialApps: function () {
     this.specialApps = [];
     let apps = Gio.app_info_get_all();
@@ -214,76 +206,23 @@ AppList.prototype = {
     }
   },
 
-  _refreshList: function (init=null) {
+  _refreshList: function () {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].destroy();
     }
 
     this.appList = [];
-    this.registeredApps = this._getSpecialApps();
-    this._loadFavorites(init);
-    this._refreshApps(init);
+    this._getSpecialApps();
+    this._loadFavorites();
+    this._refreshApps();
     this._updateFocusState();
   },
 
-  /*
-    Refresh specific apps by finding their index, destroying, and recreating them.
-  */
-
-  _refreshAppById: function(appId, opts){
-    let refApp = _.findIndex(this.appList, {appId: appId});
-    if (refApp !== -1) {
-      let app = this.appList[refApp].app;
-      let isFavapp = opts.favChange ? opts.isFavapp : this.appList[refApp].isFavapp;
-      let index = this.appList[refApp].ungroupedIndex;
-
-      this.appList[refApp].destroy();
-
-      let windows = app.get_windows();
-
-      let window = null;
-      let hasWindows = windows.length > 0;
-
-      if (!isFavapp && !hasWindows && opts.favChange) {
-        _.pullAt(this.appList, refApp);
-        return;
-      }
-
-      if (!this._applet.groupApps) {
-        window = app.get_windows()[0];
-      }
-
-      let time = Date.now();
-
-      let appGroup = new AppGroup({
-        appList: this,
-        app: app,
-        isFavapp: isFavapp,
-        window: window,
-        time: time,
-        ungroupedIndex: index,
-        appId: appId
-      });
-
-      appGroup._updateMetaWindows(this.metaWorkspace, app, window);
-
-      let refPos = opts.favPos ? opts.favPos : refApp;
-
-      this.appList.splice(refPos, 0, this.appList.splice(refApp, 1)[0]);
-
-      for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.managerContainer.set_child_at_index(this.appList[i].actor, i);
-      }
-    } else if (opts.favChange) {
-      this._applet.refreshCurrentAppList();
-    }
-  },
-
-  _loadFavorites: function (init) {
+  _loadFavorites: function () {
     if (!this.settings.getValue('show-pinned')) {
       return;
     }
-    let launchers =  this._applet.pinnedFavorites._getIds();
+    let launchers = _.map(this._applet.pinnedFavorites._favorites, 'id');
 
     for (let i = 0, len = launchers.length; i < len; i++) {
       let app = this._applet._appSystem.lookup_app(launchers[i]);
@@ -297,11 +236,11 @@ AppList.prototype = {
     }
   },
 
-  _refreshApps: function (init) {
+  _refreshApps: function () {
     let windows = this.metaWorkspace.list_windows();
 
     for (let i = 0, len = windows.length; i < len; i++) {
-      this._windowAdded(this.metaWorkspace, windows[i], null, null);
+      this._windowAdded(this.metaWorkspace, windows[i]);
     }
   },
 
@@ -333,14 +272,11 @@ AppList.prototype = {
     });
   },
 
-  _windowAdded: function (metaWorkspace, metaWindow, favapp, isFavapp, forceUngroupedWindow=false) {
+  _windowAdded: function (metaWorkspace, metaWindow, app, isFavoriteApp) {
     // Check to see if the window that was added already has an app group.
     // If it does, then we don't need to do anything.  If not, we need to
     // create an app group.
-    let app = null;
-    if (favapp) {
-      app = favapp;
-    } else {
+    if (_.isNil(app)) {
       app = this._applet.getAppFromWMClass(this.specialApps, metaWindow);
     }
     if (!app) {
@@ -349,30 +285,61 @@ AppList.prototype = {
     if (!app) {
       return;
     }
-
     let appId = app.get_id();
 
-    let refApp = _.findIndex(this.appList, {appId: appId});
+    let refApp = -1, refWindow = -1, transientFavorite = false;
+    each(this.appList, (appGroup, i)=>{
+      let shouldReturn = false;
+      if (_.isEqual(app, appGroup.app)) {
+        refApp = i;
+      }
+      each(appGroup.metaWindows, (win, z)=>{
+        if (_.isEqual(win, metaWindow)) {
+          if (refApp === -1 || !this._applet.groupApps) { // Could determine if ungrouped windows should be grouped in a row or not
+            refApp = i;
+          }
+          refWindow = z;
+          shouldReturn = true;
+          return false;
+        }
+      });
+      if (shouldReturn) {
+        return false;
+      }
+    });
 
-    // If forceUngroupedWindow is set, then this method is being called from the first appGroup instance for this app, to override app grouping.
-    if (forceUngroupedWindow && !favapp) {
-      refApp = -1;
+    if (!this._applet.groupApps && !isFavoriteApp) {
+      let refFav = _.findIndex(this._applet.pinnedFavorites._favorites, (appGroup)=>{
+        return _.isEqual(appGroup.app, app);
+      });
+      if (refFav > -1) {
+        transientFavorite = true;
+      }
     }
-    let initApp = (wsWindows, window, index)=>{
+
+    let initApp = (metaWindows, window, index)=>{
       let time = Date.now();
 
       let appGroup = new AppGroup({
         appList: this,
         app: app,
-        isFavapp: isFavapp,
-        window: window,
+        isFavoriteApp: isFavoriteApp,
+        metaWorkspace: metaWorkspace,
+        metaWindows: metaWindows,
+        metaWindow: metaWindow,
         timeStamp: time,
         ungroupedIndex: index,
-        appId: appId
+        appId: appId,
       });
-      appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
-
       this.appList.push(appGroup);
+
+      if (this._applet.groupApps && metaWindows.length > 0) {
+        each(metaWindows, (win)=>{
+          appGroup._windowAdded(win, metaWindows);
+        });
+      } else {
+        appGroup._windowAdded(window);
+      }
 
       if (this.settings.getValue('title-display') === constants.TitleDisplay.Focused) {
         appGroup._appButton.hideLabel(false);
@@ -380,21 +347,26 @@ AppList.prototype = {
     };
 
     if (refApp === -1) {
-      if (this._applet.groupApps || forceUngroupedWindow && !favapp) {
-        initApp();
+      let appWindows = app.get_windows();
+      if (this._applet.groupApps) {
+        initApp(appWindows);
       } else {
-        let windows = app.get_windows();
-        let wsWindows = metaWorkspace.list_windows();
-        windows = _.intersectionWith(windows, wsWindows, _.isEqual);
-
-        let _windows = windows.length > 0 ? windows : [null];
-
-        for (let i = 0, len = _windows.length; i < len; i++) {
-          initApp(wsWindows, _windows[i], i);
+        if (appWindows.length > 0) {
+          each(appWindows, (win)=>{
+            initApp([win], win);
+          });
+        } else {
+          initApp([], null);
         }
       }
     } else if (metaWindow) {
-      this.appList[refApp]._windowAdded(metaWorkspace, metaWindow);
+      if (this._applet.groupApps) {
+        this.appList[refApp]._windowAdded(metaWindow, null);
+      } else if (transientFavorite && this.appList[refApp].metaWindows.length === 0) {
+        this.appList[refApp]._windowAdded(metaWindow, [metaWindow]);
+      } else if (refWindow === -1) {
+        initApp([metaWindow], metaWindow);
+      }
     }
 
   },
@@ -403,7 +375,7 @@ AppList.prototype = {
     let result;
     for (let i = 0, len = this.appList.length; i < len; i++) {
       if (this.appList[i].app === parentApp) {
-        result = i+1;
+        result = i + 1;
         break;
       }
     }
@@ -434,8 +406,8 @@ AppList.prototype = {
     let originPos = _.findIndex(this.appList, {appId: appId}); // app object
     let pos = _.findIndex(this.managerContainer.get_children(), this.appList[originPos].actor);
     if (originPos === pos
-            || originPos < 0
-            || pos < 0) {
+      || originPos < 0
+      || pos < 0) {
       return;
     }
     if (pos > originPos) {
@@ -449,14 +421,19 @@ AppList.prototype = {
   },
 
   _windowRemoved: function (metaWorkspace, metaWindow, app, timeStamp) {
-    let refApp = -1, refWindow = -1;
+    let refApp = -1, refWindow = -1, windowCount = 0;
+    let wmClass = metaWindow.get_wm_class();
     each(this.appList, (appGroup, i)=>{
       let shouldReturn = false;
       each(appGroup.metaWindows, (win, z)=>{
+        if (win.get_wm_class() === wmClass) {
+          ++windowCount;
+        }
         if (_.isEqual(win, metaWindow)) {
+          ++windowCount;
           refApp = i;
           refWindow = z;
-          shouldReturn = true;
+          shouldReturn = this._applet.groupApps;
           return false;
         }
       });
@@ -465,18 +442,14 @@ AppList.prototype = {
       }
     });
     if (refApp > -1) {
-      this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavapp)=>{
-        if ((this.appList[refApp].wasFavapp || this.appList[refApp].isFavapp) && !timeStamp) {
+      this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavoriteApp)=>{
+        if ((isFavoriteApp && !timeStamp) || (isFavoriteApp && !this._applet.groupApps && windowCount === 2)) {
           this.appList[refApp]._isFavorite(true);
           this._refreshApps();
           return;
         }
         this.appList[refApp].destroy();
         _.pullAt(this.appList, refApp);
-
-        if (isFavapp) {
-          this._applet.refreshAppFromCurrentListById(appId, {favChange: true, isFavapp: isFavapp});
-        }
       });
     }
   },
@@ -487,6 +460,5 @@ AppList.prototype = {
       this.appList[i].destroy();
     }
     this.appList.destroy();
-    this.appList = null;
   }
 };
