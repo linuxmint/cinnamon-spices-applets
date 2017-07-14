@@ -83,12 +83,12 @@ AppMenuButtonRightClickMenu.prototype = {
             if (this._applet.monitorMoveAllWindows) {
               for (let z = 0, len = this.metaWindows.length; z < len; z++) {
                 var focused = 0;
-                this.metaWindows[z].win.move_to_monitor(i);
-                if (this.metaWindows[z].win.has_focus()) {
+                this.metaWindows[z].move_to_monitor(i);
+                if (this.metaWindows[z].has_focus()) {
                   ++focused;
                 }
                 if (z === len - 1 && focused === 0) {
-                  this.app.activate(this.metaWindows[z].win, global.get_current_time());
+                  this.app.activate(this.metaWindows[z], global.get_current_time());
                 }
               }
             } else {
@@ -337,8 +337,8 @@ AppMenuButtonRightClickMenu.prototype = {
         item = createMenuItem({label: 'Close others', icon: 'window-close'});
         item.connect('activate', Lang.bind(this, function() {
           each(this.metaWindows, (metaWindow)=>{
-            if (!_.isEqual(metaWindow.win, mw) && !metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time());
+            if (!_.isEqual(metaWindow, mw) && !metaWindow._needsAttention) {
+              metaWindow.delete(global.get_current_time());
             }
           });
         }));
@@ -347,8 +347,8 @@ AppMenuButtonRightClickMenu.prototype = {
         item = createMenuItem({label: 'Close all', icon: 'application-exit'});
         item.connect('activate', Lang.bind(this, function() {
           each(this.metaWindows, (metaWindow)=>{
-            if (!metaWindow.win._needsAttention) {
-              metaWindow.win.delete(global.get_current_time());
+            if (!metaWindow._needsAttention) {
+              metaWindow.delete(global.get_current_time());
             }
           });
         }));
@@ -719,7 +719,7 @@ PopupMenuAppSwitcherItem.prototype = {
     // Check to see if this.metaWindow has changed.  If so, we need to recreate
     // our thumbnail, etc.
     // Get a list of all windows of our app that are running in the current workspace
-    var windows = _.map(this.metaWindows, 'win');
+    var windows = this.metaWindows;
 
 
     if (this.metaWindowThumbnail && this.metaWindowThumbnail.thumbnail != null) {

@@ -347,7 +347,7 @@ AppButton.prototype = {
 
   setMetaWindow: function (metaWindow, metaWindows) {
     this.metaWindow = metaWindow;
-    this.metaWindows = _.map(metaWindows, 'win');
+    this.metaWindows = metaWindows;
   },
 
   _onFocusChange: function () {

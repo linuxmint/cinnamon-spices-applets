@@ -39,7 +39,7 @@ AppGroup.prototype = {
     this.orientation = this._applet.orientation;
 
     this.metaWindows = this._applet.groupApps ? [] : [params.window];
-    this.timeStamp = params.timeStamp;
+    this.time = params.time;
     this.ungroupedIndex = params.ungroupedIndex;
     this.lastFocused = null;
     this.focusState = false;
@@ -179,7 +179,7 @@ AppGroup.prototype = {
       return;
     }
 
-    let appWindows = this._applet.groupApps ? this.app.get_windows() : [this.metaWindows[0].win];
+    let appWindows = this._applet.groupApps ? this.app.get_windows() : [this.metaWindows[0]];
     let appWindowsLen = appWindows.length;
 
     let handleMinimizeToggle = (win)=>{
@@ -276,13 +276,13 @@ AppGroup.prototype = {
       if (this.metaWindows.length > 1) {
         let nextWindow = null;
         for (let i = 0, max = this.metaWindows.length - 1; i < max; i++) {
-          if (this.metaWindows[i].win._lgId === this.lastFocused._lgId) {
-            nextWindow = this.metaWindows[i + 1].win;
+          if (this.metaWindows[i]._lgId === this.lastFocused._lgId) {
+            nextWindow = this.metaWindows[i + 1];
             break;
           }
         }
         if (nextWindow === null){
-          nextWindow = this.metaWindows[0].win;
+          nextWindow = this.metaWindows[0];
         }
         Main.activateWindow(nextWindow, global.get_current_time());
       } else {
@@ -324,7 +324,7 @@ AppGroup.prototype = {
       if (!this._applet.includeAllWindows) {
         filterArgs = filterArgs && this._applet.tracker.is_window_interesting(win);
       }
-      return _.isEqual(app, this.app);
+      return app.toString() === this.app.toString();
     });
 
     this.metaWindows = [];
@@ -351,7 +351,7 @@ AppGroup.prototype = {
     }
 
     let refWindow = _.findIndex(this.metaWindows, (win)=>{
-      return _.isEqual(win.win, metaWindow);
+      return _.isEqual(win, metaWindow);
     });
     let windowAddArgs = _.isEqual(app, this.app) && refWindow === -1;
     if (!this._applet.includeAllWindows) {
@@ -366,22 +366,12 @@ AppGroup.prototype = {
           return;
         }
         this.lastFocused = metaWindow;
-
-        let signals = [];
         this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, this._windowTitleChanged));
         this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
 
         // Set the initial button label as not all windows will get updated via signals initially.
         this._windowTitleChanged(metaWindow);
-
-        let data = {
-          signals: signals
-        };
-
-        this.metaWindows.push({
-          win: metaWindow,
-          data: data
-        });
+        this.metaWindows.push(metaWindow);
 
         // Instead of initializing rightClickMenu in _init right away, we'll prevent the exception caused by its absence and then initialize it.
         // This speeds up init time, and fixes the monitor move options not appearing on first init.
@@ -417,22 +407,22 @@ AppGroup.prototype = {
     }
     if (!this._applet.groupApps) {
       if (!this.wasFavapp) {
-        this.appList._windowRemoved(metaWorkspace, metaWindow, this.app, this.timeStamp);
+        this.appList._windowRemoved(metaWorkspace, metaWindow, this.app, this.time);
       } else {
         this._applet.refreshAppFromCurrentListById(this.appId, {favChange: true, isFavapp: this.wasFavapp});
       }
       return;
-    } else {
+    } /*else {
       // Clean up all the signals we've connected
       for (let i = 0, len = this.metaWindows[refWindow].data.signals.length; i < len; i++) {
-        this.metaWindows[refWindow].win.disconnect(this.metaWindows[refWindow].data.signals[i]);
+        this.metaWindows[refWindow].disconnect(this.metaWindows[refWindow].data.signals[i]);
       }
-    }
+    }*/
 
     _.pullAt(this.metaWindows, refWindow);
 
     if (this.metaWindows.length > 0) {
-      this.lastFocused = _.last(this.metaWindows).win;
+      this.lastFocused = _.last(this.metaWindows);
       this._windowTitleChanged(this.lastFocused);
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       /*
@@ -440,7 +430,7 @@ AppGroup.prototype = {
         this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls
         this.hoverMenu.appSwitcherItem._refresh with an outdated metaWindows cache. Better fix TBD.
       */
-      this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(_.map(this.metaWindows, 'win'));
+      this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(this.metaWindows);
 
       if (this.rightClickMenu !== undefined) {
         this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
@@ -521,8 +511,8 @@ AppGroup.prototype = {
   _updateFocusedStatus: function (force) {
     let focusState;
     for (let i = 0, len = this.metaWindows.length; i < len; i++) {
-      if (this.metaWindows[i].win.appears_focused) {
-        focusState = this.metaWindows[i].win;
+      if (this.metaWindows[i].appears_focused) {
+        focusState = this.metaWindows[i];
         break;
       }
     }
@@ -596,15 +586,15 @@ AppGroup.prototype = {
     // Unwatch all workspaces before we destroy all our actors
     // that callbacks depend on
 
-    let destroyWindowSignal = (metaWindow)=>{
+/*    let destroyWindowSignal = (metaWindow)=>{
       for (let i = 0, len = metaWindow.data.signals.length; i < len; i++) {
-        metaWindow.win.disconnect(metaWindow.data.signals[i]);
+        metaWindow.disconnect(metaWindow.data.signals[i]);
       }
     };
 
     for (let i = 0, len = this.metaWindows.length; i < len; i++) {
       destroyWindowSignal(this.metaWindows[i]);
-    }
+    }*/
 
     if (this.rightClickMenu) {
       this.rightClickMenu.destroy();

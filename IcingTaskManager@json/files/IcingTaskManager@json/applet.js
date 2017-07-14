@@ -149,13 +149,13 @@ PinnedFavs.prototype = {
     this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
 
     let refApp = _.findIndex(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, {id: appId});
-    let hasOpenWindows = this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].appGroup.app.get_windows().length > 0;
+    let hasOpenWindows = this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].app.get_windows().length > 0;
 
     if (hasOpenWindows) {
       this.triggerUpdate(appId, -1, false);
     } else {
       setTimeout(()=>{
-        this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].appGroup.destroy();
+        this._applet.metaWorkspaces[this._applet.currentWs].appList.appList[refApp].destroy();
         _.pullAt(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, refApp);
       }, 15);
     }
@@ -281,16 +281,17 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
+    log2(this._appSystem.get_running())
   },
 
   on_panel_edit_mode_changed: function () {
     this.panelEditMode = global.settings.get_boolean('panel-edit-mode');
     each(this.metaWorkspaces, (workspace)=>{
-      each(workspace.appList.appList, (appObject)=>{
-        appObject.appGroup.hoverMenu.actor.reactive = !this.panelEditMode;
-        appObject.appGroup.hoverMenu.appSwitcherItem.actor.reactive = !this.panelEditMode;
-        appObject.appGroup.rightClickMenu.actor.reactive = !this.panelEditMode;
-        appObject.appGroup._appButton.actor.reactive = !this.panelEditMode;
+      each(workspace.appList.appList, (appGroup)=>{
+        appGroup.hoverMenu.actor.reactive = !this.panelEditMode;
+        appGroup.hoverMenu.appSwitcherItem.actor.reactive = !this.panelEditMode;
+        appGroup.rightClickMenu.actor.reactive = !this.panelEditMode;
+        appGroup._appButton.actor.reactive = !this.panelEditMode;
       });
     });
   },
@@ -371,17 +372,17 @@ MyApplet.prototype = {
 
   _updateIconSizes: function () {
     each(this.metaWorkspaces, (workspace)=>{
-      each(workspace.appList.appList, (appObject)=>{
-        appObject.appGroup._appButton.setIconSize();
-        appObject.appGroup._appButton.setIconPadding();
+      each(workspace.appList.appList, (appGroup)=>{
+        appGroup._appButton.setIconSize();
+        appGroup._appButton.setIconPadding();
       });
     });
   },
 
   _updateAppButtonWidths: function() {
     each(this.metaWorkspaces, (workspace)=>{
-      each(workspace.appList.appList, (appObject)=>{
-        appObject.appGroup._appButton.setActorWidth();
+      each(workspace.appList.appList, (appGroup)=>{
+        appGroup._appButton.setActorWidth();
       });
     });
   },
@@ -415,8 +416,8 @@ MyApplet.prototype = {
 
   _updateVerticalThumbnailState: function() {
     each(this.metaWorkspaces, (workspace)=>{
-      each(workspace.appList.appList, (appObject)=>{
-        appObject.appGroup.hoverMenu.appSwitcherItem._setVerticalSetting();
+      each(workspace.appList.appList, (appGroup)=>{
+        appGroup.hoverMenu.appSwitcherItem._setVerticalSetting();
       });
     });
   },

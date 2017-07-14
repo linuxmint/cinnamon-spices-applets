@@ -115,8 +115,8 @@ AppList.prototype = {
 
   _closeAllHoverMenus: function(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      if (this.appList[i].appGroup.hoverMenu.isOpen) {
-        this.appList[i].appGroup.hoverMenu.close();
+      if (this.appList[i].hoverMenu.isOpen) {
+        this.appList[i].hoverMenu.close();
       }
     }
     if (typeof cb === 'function') {
@@ -126,9 +126,9 @@ AppList.prototype = {
 
   _closeAllRightClickMenus: function(cb) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      if (typeof this.appList[i].appGroup.rightClickMenu !== 'undefined'
-        && this.appList[i].appGroup.rightClickMenu.isOpen) {
-        this.appList[i].appGroup.rightClickMenu.close();
+      if (typeof this.appList[i].rightClickMenu !== 'undefined'
+        && this.appList[i].rightClickMenu.isOpen) {
+        this.appList[i].rightClickMenu.close();
       }
     }
     if (typeof cb === 'function') {
@@ -138,7 +138,7 @@ AppList.prototype = {
 
   _refreshAllThumbnails: function() {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.hoverMenu.appSwitcherItem._refresh(true);
+      this.appList[i].hoverMenu.appSwitcherItem._refresh(true);
     }
   },
 
@@ -146,23 +146,23 @@ AppList.prototype = {
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number - 1].appGroup._onAppKeyPress(number);
+    this.appList[number - 1]._onAppKeyPress(number);
   },
 
   _onNewAppKeyPress: function(number){
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number - 1].appGroup._onNewAppKeyPress(number);
+    this.appList[number - 1]._onNewAppKeyPress(number);
   },
 
   _showAppsOrder: function(){
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.showOrderLabel(i);
+      this.appList[i].showOrderLabel(i);
     }
     setTimeout(() => {
       for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.appList[i].appGroup._calcWindowNumber();
+        this.appList[i]._calcWindowNumber();
       }
     }, this._applet.showAppsOrderTimeout);
   },
@@ -170,10 +170,10 @@ AppList.prototype = {
   _cycleMenus: function(){
     let refApp = 0;
     if (!this.lastCycled && this.lastFocusedApp) {
-      refApp = _.findIndex(this.appList, {id: this.lastFocusedApp});
+      refApp = _.findIndex(this.appList, {appId: this.lastFocusedApp});
     }
     if (this.lastCycled) {
-      this.appList[this.lastCycled].appGroup.hoverMenu.close();
+      this.appList[this.lastCycled].hoverMenu.close();
       refApp = this.lastCycled + 1;
     }
     if (refApp === this.lastCycled) {
@@ -184,8 +184,8 @@ AppList.prototype = {
       refApp = 0;
       this.lastCycled = 0;
     }
-    if (this.appList[refApp].appGroup.metaWindows.length > 0) {
-      this.appList[refApp].appGroup.hoverMenu.open();
+    if (this.appList[refApp].metaWindows.length > 0) {
+      this.appList[refApp].hoverMenu.open();
     } else {
       setTimeout(()=>this._cycleMenus(), 0);
     }
@@ -216,7 +216,7 @@ AppList.prototype = {
 
   _refreshList: function (init=null) {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.destroy();
+      this.appList[i].destroy();
     }
 
     this.appList = [];
@@ -231,13 +231,13 @@ AppList.prototype = {
   */
 
   _refreshAppById: function(appId, opts){
-    let refApp = _.findIndex(this.appList, {id: appId});
+    let refApp = _.findIndex(this.appList, {appId: appId});
     if (refApp !== -1) {
-      let app = this.appList[refApp].appGroup.app;
-      let isFavapp = opts.favChange ? opts.isFavapp : this.appList[refApp].appGroup.isFavapp;
+      let app = this.appList[refApp].app;
+      let isFavapp = opts.favChange ? opts.isFavapp : this.appList[refApp].isFavapp;
       let index = this.appList[refApp].ungroupedIndex;
 
-      this.appList[refApp].appGroup.destroy();
+      this.appList[refApp].destroy();
 
       let windows = app.get_windows();
 
@@ -260,22 +260,19 @@ AppList.prototype = {
         app: app,
         isFavapp: isFavapp,
         window: window,
-        timeStamp: time,
+        time: time,
         ungroupedIndex: index,
         appId: appId
       });
 
       appGroup._updateMetaWindows(this.metaWorkspace, app, window);
 
-      this.appList[refApp].appGroup = appGroup;
-      this.appList[refApp].time = time;
-
       let refPos = opts.favPos ? opts.favPos : refApp;
 
       this.appList.splice(refPos, 0, this.appList.splice(refApp, 1)[0]);
 
       for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.managerContainer.set_child_at_index(this.appList[i].appGroup.actor, i);
+        this.managerContainer.set_child_at_index(this.appList[i].actor, i);
       }
     } else if (opts.favChange) {
       this._applet.refreshCurrentAppList();
@@ -309,12 +306,12 @@ AppList.prototype = {
   },
 
   _updateFocusState: function () {
-    each(this.appList, (appObject)=>{
-      if (appObject.appGroup.metaWindows) {
-        appObject.appGroup._appButton._onFocusChange();
+    each(this.appList, (appGroup)=>{
+      if (appGroup.metaWindows) {
+        appGroup._appButton._onFocusChange();
       }
-      if (appObject.appGroup.hoverMenu.isOpen) {
-        each(appObject.appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+      if (appGroup.hoverMenu.isOpen) {
+        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
           thumbnailObject.thumbnail._onFocusChange();
           return false;
         });
@@ -323,12 +320,12 @@ AppList.prototype = {
   },
 
   _updateAttentionState: function (display, window) {
-    each(this.appList, (appObject)=>{
-      if (appObject.appGroup.metaWindows) {
-        appObject.appGroup._appButton._onWindowDemandsAttention(window);
+    each(this.appList, (appGroup)=>{
+      if (appGroup.metaWindows) {
+        appGroup._appButton._onWindowDemandsAttention(window);
       }
-      if (appObject.appGroup.hoverMenu.isOpen) {
-        each(appObject.appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
+      if (appGroup.hoverMenu.isOpen) {
+        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
           thumbnailObject.thumbnail._onWindowDemandsAttention(window);
           return false;
         });
@@ -355,7 +352,7 @@ AppList.prototype = {
 
     let appId = app.get_id();
 
-    let refApp = _.findIndex(this.appList, {id: appId});
+    let refApp = _.findIndex(this.appList, {appId: appId});
 
     // If forceUngroupedWindow is set, then this method is being called from the first appGroup instance for this app, to override app grouping.
     if (forceUngroupedWindow && !favapp) {
@@ -375,12 +372,7 @@ AppList.prototype = {
       });
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
 
-      this.appList.push({
-        id: appId,
-        appGroup: appGroup,
-        timeStamp: time,
-        ungroupedIndex: index
-      });
+      this.appList.push(appGroup);
 
       if (this.settings.getValue('title-display') === constants.TitleDisplay.Focused) {
         appGroup._appButton.hideLabel(false);
@@ -402,7 +394,7 @@ AppList.prototype = {
         }
       }
     } else if (metaWindow) {
-      this.appList[refApp].appGroup._windowAdded(metaWorkspace, metaWindow);
+      this.appList[refApp]._windowAdded(metaWorkspace, metaWindow);
     }
 
   },
@@ -410,7 +402,7 @@ AppList.prototype = {
   _appGroupNumber: function (parentApp) {
     let result;
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      if (this.appList[i].appGroup.app === parentApp) {
+      if (this.appList[i].app === parentApp) {
         result = i+1;
         break;
       }
@@ -420,7 +412,7 @@ AppList.prototype = {
 
   _calcAllWindowNumbers: function () {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup._calcWindowNumber(this.metaWorkspace);
+      this.appList[i]._calcWindowNumber(this.metaWorkspace);
     }
   },
 
@@ -439,8 +431,8 @@ AppList.prototype = {
   },
 
   _fixAppGroupIndexAfterDrag: function (appId) {
-    let originPos = _.findIndex(this.appList, {id: appId}); // app object
-    let pos = _.findIndex(this.managerContainer.get_children(), this.appList[originPos].appGroup.actor);
+    let originPos = _.findIndex(this.appList, {appId: appId}); // app object
+    let pos = _.findIndex(this.managerContainer.get_children(), this.appList[originPos].actor);
     if (originPos === pos
             || originPos < 0
             || pos < 0) {
@@ -458,10 +450,10 @@ AppList.prototype = {
 
   _windowRemoved: function (metaWorkspace, metaWindow, app, timeStamp) {
     let refApp = -1, refWindow = -1;
-    each(this.appList, (appObject, i)=>{
+    each(this.appList, (appGroup, i)=>{
       let shouldReturn = false;
-      each(appObject.appGroup.metaWindows, (win, z)=>{
-        if (_.isEqual(win.win, metaWindow)) {
+      each(appGroup.metaWindows, (win, z)=>{
+        if (_.isEqual(win, metaWindow)) {
           refApp = i;
           refWindow = z;
           shouldReturn = true;
@@ -473,13 +465,13 @@ AppList.prototype = {
       }
     });
     if (refApp > -1) {
-      this.appList[refApp].appGroup._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavapp)=>{
-        if ((this.appList[refApp].appGroup.wasFavapp || this.appList[refApp].appGroup.isFavapp) && !timeStamp) {
-          this.appList[refApp].appGroup._isFavorite(true);
+      this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavapp)=>{
+        if ((this.appList[refApp].wasFavapp || this.appList[refApp].isFavapp) && !timeStamp) {
+          this.appList[refApp]._isFavorite(true);
           this._refreshApps();
           return;
         }
-        this.appList[refApp].appGroup.destroy();
+        this.appList[refApp].destroy();
         _.pullAt(this.appList, refApp);
 
         if (isFavapp) {
@@ -492,7 +484,7 @@ AppList.prototype = {
   destroy: function () {
     this.signals.disconnectAllSignals();
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.destroy();
+      this.appList[i].destroy();
     }
     this.appList.destroy();
     this.appList = null;
