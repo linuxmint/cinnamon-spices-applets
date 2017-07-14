@@ -87,10 +87,6 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->close-button-
 #. style->description
-#. IcingTaskManager@json->settings-schema.json->close-button-
-#. style->description
-#. IcingTaskManager@json->settings-schema.json->close-button-
-#. style->description
 msgid "Allow themes to control the thumbnail close button"
 msgstr ""
 
@@ -150,17 +146,9 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. hotkey->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->description
 msgid "Global hotkey to show the order of apps"
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->tooltip
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->tooltip
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. hotkey->tooltip
 msgid ""
@@ -189,10 +177,6 @@ msgstr ""
 msgid "Non-symbolic icons"
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->hover-peek-
-#. opacity->description
-#. IcingTaskManager@json->settings-schema.json->hover-peek-
-#. opacity->description
 #. IcingTaskManager@json->settings-schema.json->hover-peek-
 #. opacity->description
 msgid "Window opacity"
@@ -261,10 +245,6 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->animate-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->animate-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->animate-
-#. thumbnails->description
 msgid "Animate thumbnails"
 msgstr ""
 
@@ -272,10 +252,6 @@ msgstr ""
 msgid "If enabled, thumbnails will animate when appearing and disappearing."
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->autostart-menu-
-#. item->description
-#. IcingTaskManager@json->settings-schema.json->autostart-menu-
-#. item->description
 #. IcingTaskManager@json->settings-schema.json->autostart-menu-
 #. item->description
 msgid "Show autostart option"
@@ -313,10 +289,6 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->vertical-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->vertical-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->vertical-
-#. thumbnails->description
 msgid "Enable vertical thumbnails"
 msgstr ""
 
@@ -346,10 +318,16 @@ msgid ""
 "the mouse leaves the app button."
 msgstr ""
 
-#. IcingTaskManager@json->settings-
-#. schema.json->panelLauncherClass->description
-#. IcingTaskManager@json->settings-
-#. schema.json->panelLauncherClass->description
+#. IcingTaskManager@json->settings-schema.json->useSystemTooltips->description
+msgid "Use system tooltips for closed apps"
+msgstr ""
+
+#. IcingTaskManager@json->settings-schema.json->useSystemTooltips->tooltip
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over closed"
+" pinned apps."
+msgstr ""
+
 #. IcingTaskManager@json->settings-
 #. schema.json->panelLauncherClass->description
 msgid "Use the panel launcher class for pinned apps"
@@ -359,10 +337,6 @@ msgstr ""
 msgid "Enabling this helps with certain themes."
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->arrange-
-#. pinnedApps->description
-#. IcingTaskManager@json->settings-schema.json->arrange-
-#. pinnedApps->description
 #. IcingTaskManager@json->settings-schema.json->arrange-
 #. pinnedApps->description
 msgid "Arrange pinned apps"
@@ -414,10 +388,6 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->onclick-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->onclick-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->onclick-
-#. thumbnails->description
 msgid "Open thumbnails on click"
 msgstr ""
 
@@ -435,10 +405,6 @@ msgid ""
 "only applied to instances of this applet on horizontal panels."
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->middle-click-
-#. action->description
-#. IcingTaskManager@json->settings-schema.json->middle-click-
-#. action->description
 #. IcingTaskManager@json->settings-schema.json->middle-click-
 #. action->description
 msgid "Middle clicking app buttons creates new app instances"
@@ -491,17 +457,9 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. timeout->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->description
 msgid "Duration of the apps order display on hotkey press"
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->tooltip
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->tooltip
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. timeout->tooltip
 msgid ""
@@ -509,10 +467,6 @@ msgid ""
 "order number."
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->include-all-
-#. windows->description
-#. IcingTaskManager@json->settings-schema.json->include-all-
-#. windows->description
 #. IcingTaskManager@json->settings-schema.json->include-all-
 #. windows->description
 msgid "Include all app windows"
@@ -526,17 +480,9 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->monitor-move-all-
 #. windows->description
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->description
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->description
 msgid "Apply the monitor move option to all windows"
 msgstr ""
 
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->tooltip
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->tooltip
 #. IcingTaskManager@json->settings-schema.json->monitor-move-all-
 #. windows->tooltip
 msgid ""
@@ -561,13 +507,4 @@ msgstr ""
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
-
-#. IcingTaskManager@json->settings-schema.json->presetSection->title
-msgid "Recommended Presets"
-msgstr ""
-
-#. IcingTaskManager@json->settings-schema.json->mintYPreset->description
-#. IcingTaskManager@json->settings-schema.json->mintYPreset->tooltip
-msgid "Mint Y and Variants"
 msgstr ""
