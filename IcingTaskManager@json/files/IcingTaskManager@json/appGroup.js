@@ -22,27 +22,27 @@ function AppGroup () {
 }
 
 AppGroup.prototype = {
-  _init: function (applet, appList, app, isFavapp, window, timeStamp, ungroupedIndex, appId) {
-    appId = appId ? appId : '';
+  _init: function (params) {
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this);
     }
-    this._applet = applet;
-    this.appList = appList;
+    this._applet = params.appList._applet;
+    this.appList = params.appList;
     this.signals = new SignalManager.SignalManager(this);
-    this.launchersBox = applet;
-    this.app = app;
-    this.appId = appId;
+    this.launchersBox = this._applet;
+    this.app = params.app;
+    this.appId = params.appId;
     this.appName = this.app.get_name();
-    this.autostartIndex = _.findIndex(this._applet.autostartApps, {id: appId});
-    this.isFavapp = isFavapp;
+    this.autostartIndex = _.findIndex(this._applet.autostartApps, {id: this.appId});
+    this.isFavapp = params.isFavapp;
     this.wasFavapp = false;
-    this.orientation = applet.orientation;
+    this.orientation = this._applet.orientation;
 
-    this.metaWindows = this._applet.groupApps ? [] : [window];
-    this.timeStamp = timeStamp;
-    this.ungroupedIndex = ungroupedIndex;
+    this.metaWindows = this._applet.groupApps ? [] : [params.window];
+    this.timeStamp = params.timeStamp;
+    this.ungroupedIndex = params.ungroupedIndex;
     this.lastFocused = null;
+    this.focusState = false;
     this.willUnmount = false;
 
     this.actor = new St.Bin({
@@ -67,7 +67,11 @@ AppGroup.prototype = {
     // Initialized in _windowAdded first for open apps, then deferred here for init speed up.
     setTimeout(()=>{
       if (this.isFavapp) {
-        this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu(this, this.lastFocused, [this.lastFocused], this._applet.orientation);
+        this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu({
+          parent: this,
+          metaWindow: this.lastFocused,
+          metaWindows: [this.lastFocused]
+        });
         this._menuManager = new PopupMenu.PopupMenuManager(this);
         this._menuManager.addMenu(this.rightClickMenu);
         this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
@@ -88,19 +92,15 @@ AppGroup.prototype = {
     this.isDraggableApp = true;
   },
 
-  getId: function () {
-    return this.appId;
-  },
-
   on_title_display_changed: function (metaWindow) {
     this._windowTitleChanged(metaWindow);
     let titleType = this._applet.settings.getValue('title-display');
     if (titleType === constants.TitleDisplay.Title) {
-      this.showAppButtonLabel(true);
+      this._appButton.showLabel(true);
     } else if (titleType === constants.TitleDisplay.App) {
-      this.showAppButtonLabel(true);
+      this._appButton.showLabel(true);
     } else if (titleType === constants.TitleDisplay.None) {
-      this.hideAppButtonLabel(true);
+      this._appButton.hideLabel(true);
     }
   },
 
@@ -160,36 +160,14 @@ AppGroup.prototype = {
     return this.actor;
   },
 
-  hideAppButton: function () {
-    this._appButton.actor.hide();
-  },
-
-  showAppButton: function () {
-    this._appButton.actor.show();
-  },
-
-  hideAppButtonLabel: function (animate) {
-    this._appButton.hideLabel(animate);
-  },
-
-  showAppButtonLabel: function (animate, targetWidth) {
-    this._appButton.showLabel(animate, targetWidth);
-  },
-
-  // TBD: share the _appButton._numLabel with "window number display"
   showOrderLabel: function (number){
-    var label = this._appButton._numLabel;
-    label.text = number + 1;
-    label.show();
-  },
-
-  hideOrderLabel: function (){
-    this._calcWindowNumber(this.appList.metaWorkspace);
+    this._appButton._numLabel.text = (number + 1).toString();
+    this._appButton._numLabel.show();
   },
 
   _onAppButtonRelease: function(actor, event) {
     this._applet._clearDragPlaceholder();
-    var button = event.get_button();
+    let button = event.get_button();
 
     if (button === 1 && this.isFavapp || button === 2) {
       if (button === 2 && !this._applet.middleClickAction && this.lastFocused) {
@@ -204,7 +182,7 @@ AppGroup.prototype = {
     let appWindows = this._applet.groupApps ? this.app.get_windows() : [this.metaWindows[0].win];
     let appWindowsLen = appWindows.length;
 
-    var handleMinimizeToggle = (win)=>{
+    let handleMinimizeToggle = (win)=>{
       if (this._applet.onClickThumbs && appWindowsLen > 1) {
         if (this.hoverMenu.isOpen) {
           this.hoverMenu.close();
@@ -228,7 +206,7 @@ AppGroup.prototype = {
       if (appWindows.length === 1) {
         handleMinimizeToggle(appWindows[0]);
       } else {
-        var actionTaken = false;
+        let actionTaken = false;
         for (let i = 0, len = appWindows.length; i < len; i++) {
           if (this.lastFocused && appWindows[i]._lgId === this.lastFocused._lgId) {
             handleMinimizeToggle(appWindows[i]);
@@ -255,7 +233,7 @@ AppGroup.prototype = {
   },
 
   _onAppButtonPress: function(actor, event){
-    var button = event.get_button();
+    let button = event.get_button();
     if (button === 3) {
       return true;
     }
@@ -296,7 +274,7 @@ AppGroup.prototype = {
         return;
       }
       if (this.metaWindows.length > 1) {
-        var nextWindow = null;
+        let nextWindow = null;
         for (let i = 0, max = this.metaWindows.length - 1; i < max; i++) {
           if (this.metaWindows[i].win._lgId === this.lastFocused._lgId) {
             nextWindow = this.metaWindows[i + 1].win;
@@ -332,11 +310,11 @@ AppGroup.prototype = {
   // metaWorkspace
   _updateMetaWindows: function (metaWorkspace, app, window, _wsWindows) {
     // Get a list of all interesting windows that are part of this app on the current workspace
-    var wsWindows = _wsWindows ? _wsWindows : metaWorkspace.list_windows();
-    var windowsSource = window ? [window] : wsWindows;
+    let wsWindows = _wsWindows ? _wsWindows : metaWorkspace.list_windows();
+    let windowsSource = window ? [window] : wsWindows;
 
-    var filterArgs = _.isEqual(app, this.app);
-    var windowList = _.filter(windowsSource, (win)=>{
+    let filterArgs = _.isEqual(app, this.app);
+    let windowList = _.filter(windowsSource, (win)=>{
       if (!app) {
         app = this._applet.getAppFromWMClass(this.appList.specialApps, win);
         if (!app) {
@@ -372,10 +350,10 @@ AppGroup.prototype = {
       return;
     }
 
-    var refWindow = _.findIndex(this.metaWindows, (win)=>{
+    let refWindow = _.findIndex(this.metaWindows, (win)=>{
       return _.isEqual(win.win, metaWindow);
     });
-    var windowAddArgs = _.isEqual(app, this.app) && refWindow === -1;
+    let windowAddArgs = _.isEqual(app, this.app) && refWindow === -1;
     if (!this._applet.includeAllWindows) {
       windowAddArgs = windowAddArgs && this._applet.tracker.is_window_interesting(metaWindow);
     }
@@ -410,7 +388,11 @@ AppGroup.prototype = {
         if (this.rightClickMenu !== undefined) {
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
         } else {
-          this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu(this, metaWindow, metaWindows, this._applet.orientation);
+          this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu({
+            parent: this,
+            metaWindow: metaWindow,
+            metaWindows: metaWindows
+          });
           this._menuManager = new PopupMenu.PopupMenuManager(this);
           this._menuManager.addMenu(this.rightClickMenu);
           this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
@@ -466,7 +448,7 @@ AppGroup.prototype = {
       this.hoverMenu.appSwitcherItem._refreshThumbnails();
       this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
     } else {
-      // This is the last app, so this group needs to be destroyed. We'll call back _windowRemoved
+      // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
       cb(this.appId, this.isFavapp);
     }
@@ -496,7 +478,7 @@ AppGroup.prototype = {
     } else if (titleType === constants.TitleDisplay.Title) {
       if (title) {
         this._appButton.setText(title);
-        this.showAppButtonLabel(true);
+        this._appButton.showLabel(true);
       }
     } else if (titleType === constants.TitleDisplay.Focused) {
       if (title) {
@@ -506,7 +488,7 @@ AppGroup.prototype = {
     } else if (titleType === constants.TitleDisplay.App) {
       if (this.appName) {
         this._appButton.setText(this.appName);
-        this.showAppButtonLabel(true);
+        this._appButton.showLabel(true);
       }
     }
   },
@@ -544,18 +526,14 @@ AppGroup.prototype = {
         break;
       }
     }
-    if (this.focusState != focusState || force) {
-      this._focusedLabel(focusState);
+    if (this.focusState !== focusState || force) {
+      if (focusState) {
+        this._appButton.showLabel(true);
+      } else {
+        this._appButton.hideLabel(true);
+      }
     }
     this.focusState = focusState;
-  },
-
-  _focusedLabel: function (focusState) {
-    if (focusState) {
-      this.showAppButtonLabel(true);
-    } else {
-      this.hideAppButtonLabel(true);
-    }
   },
 
   _isFavorite: function (isFav) {
@@ -566,13 +544,9 @@ AppGroup.prototype = {
     this._windowTitleChanged(this.lastFocused);
   },
 
-  _calcWindowNumber: function (metaWorkspace) {
+  _calcWindowNumber: function () {
     if (this.willUnmount) {
       return false;
-    }
-
-    if (!this._appButton) {
-      console.log('Error: got a _calcWindowNumber callback but this._appButton is undefined');
     }
 
     let windowNum = this.metaWindows.length;
@@ -622,7 +596,7 @@ AppGroup.prototype = {
     // Unwatch all workspaces before we destroy all our actors
     // that callbacks depend on
 
-    var destroyWindowSignal = (metaWindow)=>{
+    let destroyWindowSignal = (metaWindow)=>{
       for (let i = 0, len = metaWindow.data.signals.length; i < len; i++) {
         metaWindow.win.disconnect(metaWindow.data.signals[i]);
       }

@@ -144,9 +144,12 @@ AppButton.prototype = {
     text = text ? text : '';
     if (text && text.length > 0
       && text.indexOf('null') === -1
-      && text.length > 0) {
+      && text.length > 0
+      && this._label) {
       this._label.set_text(text);
-      this._label.set_style('padding-right: 4px;');
+      if (this._label.is_realized()) {
+        this._label.set_style('padding-right: 4px;');
+      }
     }
   },
 
@@ -185,7 +188,7 @@ AppButton.prototype = {
 
   _getPreferredWidth: function (actor, forHeight, alloc) {
     let [iconMinSize, iconNaturalSize] = this.icon.get_preferred_width(forHeight);
-    let [labelMinSize, labelNaturalSize] = this._label.get_preferred_width(forHeight);
+    let labelNaturalSize = this._label.get_preferred_width(forHeight)[1];
     // The label text starts in the center of the icon, so we should allocate the space
     // needed for the icon plus the space needed for(label - icon/2)
     alloc.min_size = iconMinSize;
@@ -270,7 +273,7 @@ AppButton.prototype = {
       });
     }
   },
-  showLabel: function (animate, targetWidth=constants.MAX_BUTTON_WIDTH) {
+  showLabel: function () {
     if (!this._label) {
       return false;
     }
@@ -279,7 +282,7 @@ AppButton.prototype = {
     }
     this._label.show();
     Tweener.addTween(this._label, {
-      width: targetWidth,
+      width: constants.MAX_BUTTON_WIDTH, // Should probably check preferred width
       time: constants.BUTTON_BOX_ANIMATION_TIME,
       transition: 'easeOutQuad'
     });
@@ -312,7 +315,7 @@ AppButton.prototype = {
   },
 
   _onEnter: function(){
-    if (!this.actor.reactive) {
+    if (this._applet.panelEditMode) {
       return false;
     }
     this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label);
@@ -365,18 +368,6 @@ AppButton.prototype = {
   },
 
   _hasFocus: function () {
-    let workspaceIds = [];
-
-    let workspaces = _.map(this._applet.metaWorkspaces, 'ws');
-
-    for (let i = 0, len = workspaces.length; i < len; i++) {
-      workspaceIds.push(workspaces[i].index());
-    }
-
-    let windows = _.filter(this.metaWindows, (win)=>{
-      return workspaceIds.indexOf(this._applet.currentWs) >= 0;
-    });
-
     let hasTransient = false;
     let handleTransient = function(transient){
       if (transient.has_focus()) {
@@ -385,16 +376,16 @@ AppButton.prototype = {
       }
       return true;
     };
-
-    for (let i = 0, len = windows.length; i < len; i++) {
-      if (windows[i].minimized) {
-        continue;
-      }
-      if (windows[i].has_focus()) {
+    each(this.metaWindows, (win)=>{
+      if (win.minimized) {
         return true;
       }
-      windows[i].foreach_transient(handleTransient);
-    }
+      if (win.has_focus()) {
+        hasTransient = true;
+        return false;
+      }
+      win.foreach_transient(handleTransient);
+    });
     return hasTransient;
   },
 

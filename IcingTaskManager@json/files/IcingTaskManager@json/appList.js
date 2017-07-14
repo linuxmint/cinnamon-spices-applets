@@ -158,11 +158,11 @@ AppList.prototype = {
 
   _showAppsOrder: function(){
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].appGroup.showOrderLabel(i.toString());
+      this.appList[i].appGroup.showOrderLabel(i);
     }
     setTimeout(() => {
       for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.appList[i].appGroup.hideOrderLabel();
+        this.appList[i].appGroup._calcWindowNumber();
       }
     }, this._applet.showAppsOrderTimeout);
   },
@@ -255,7 +255,15 @@ AppList.prototype = {
 
       let time = Date.now();
 
-      let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
+      let appGroup = new AppGroup({
+        appList: this,
+        app: app,
+        isFavapp: isFavapp,
+        window: window,
+        timeStamp: time,
+        ungroupedIndex: index,
+        appId: appId
+      });
 
       appGroup._updateMetaWindows(this.metaWorkspace, app, window);
 
@@ -278,7 +286,7 @@ AppList.prototype = {
     if (!this.settings.getValue('show-pinned')) {
       return;
     }
-    let launchers =  this._applet.pinned_app_contr()._getIds();
+    let launchers =  this._applet.pinnedFavorites._getIds();
 
     for (let i = 0, len = launchers.length; i < len; i++) {
       let app = this._applet._appSystem.lookup_app(launchers[i]);
@@ -355,7 +363,16 @@ AppList.prototype = {
     }
     let initApp = (wsWindows, window, index)=>{
       let time = Date.now();
-      let appGroup = new AppGroup(this._applet, this, app, isFavapp, window, time, index, appId);
+
+      let appGroup = new AppGroup({
+        appList: this,
+        app: app,
+        isFavapp: isFavapp,
+        window: window,
+        timeStamp: time,
+        ungroupedIndex: index,
+        appId: appId
+      });
       appGroup._updateMetaWindows(metaWorkspace, app, window, wsWindows);
 
       this.appList.push({
@@ -366,7 +383,7 @@ AppList.prototype = {
       });
 
       if (this.settings.getValue('title-display') === constants.TitleDisplay.Focused) {
-        appGroup.hideAppButtonLabel(false);
+        appGroup._appButton.hideLabel(false);
       }
     };
 

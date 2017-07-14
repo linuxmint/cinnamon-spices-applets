@@ -1,8 +1,13 @@
 const each = (obj, cb)=>{
   if (Array.isArray(obj)) {
     for (let i = 0, len = obj.length; i < len; i++) {
-      if (cb(obj[i], i) === false) {
+      let returnValue = cb(obj[i], i);
+      if (returnValue === false) {
         return;
+      } else if (returnValue === null) {
+        break;
+      } else if (returnValue === true) {
+        continue;
       }
     }
   } else {

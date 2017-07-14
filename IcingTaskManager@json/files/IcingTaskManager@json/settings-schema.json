@@ -20,7 +20,7 @@
     "themePage": {
       "type" : "page",
       "title" : "Theming",
-      "sections" : ["stylingSection", "iconSection"]
+      "sections" : ["stylingSection", "iconSection", "presetSection"]
     },
     "appButtonsSection": {
       "type" : "section",
@@ -100,6 +100,13 @@
         "icon-spacing",
         "enable-iconSize",
         "icon-size"
+      ]
+    },
+    "presetSection": {
+      "type" : "section",
+      "title" : "Recommended Presets",
+      "keys" : [
+        "mintYPreset"
       ]
     }
   },
@@ -423,5 +430,11 @@
     "default": true,
     "description": "Use system tooltips for closed apps",
     "tooltip": "Controls whether or not system tooltips are in use when hovering over closed pinned apps."
+  },
+  "mintYPreset": {
+    "type" : "button",
+    "description" : "Mint Y and Variants",
+    "callback" : "handleMintYThemePreset",
+    "tooltip" : "Mint Y and Variants"
   }
 }

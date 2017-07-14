@@ -177,15 +177,28 @@ MyApplet.prototype = {
 
   _init: function (metadata, orientation, panel_height, instance_id) {
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
+    this.orientation = orientation;
     this._uuid = metadata.uuid;
     this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
+    this.signals = new SignalManager.SignalManager(this);
+    this.tracker = Cinnamon.WindowTracker.get_default();
+    this._appSystem = Cinnamon.AppSystem.get_default();
+    this.recentManager = Gtk.RecentManager.get_default();
+    this.sortRecentItems(this.recentManager.get_items());
+    this.pinnedFavorites = new PinnedFavs(this);
+    this.metaWorkspaces = [];
+    this.autostartApps = [];
+    this._menuOpen = false;
+    this.forceRefreshList = false;
+    this._dragPlaceholder = null;
+    this._dragPlaceholderPos = -1;
+    this._animatingPlaceholdersCount = 0;
     this.homeDir = GLib.get_home_dir();
-
-    this.actor.set_track_hover(false);
-    this.orientation = orientation;
     this.appletEnabled = false;
-
     this.c32 = true;
+    this.actor.set_track_hover(false);
+    this._box = new St.Bin();
+    this.actor.add(this._box);
 
     // Declare vertical panel compatibility
     try {
@@ -251,28 +264,6 @@ MyApplet.prototype = {
       }
     }
 
-    this._box = new St.Bin();
-
-    this.actor.add(this._box);
-
-    this.tracker = Cinnamon.WindowTracker.get_default();
-    this._appSystem = Cinnamon.AppSystem.get_default();
-
-    this.pinnedAppsContr = new PinnedFavs(this);
-
-    this.recentManager = Gtk.RecentManager.get_default();
-    this.sortRecentItems(this.recentManager.get_items());
-
-    this.metaWorkspaces = [];
-    this.autostartApps = [];
-    this._menuOpen = false;
-    this.forceRefreshList = false;
-    this._dragPlaceholder = null;
-    this._dragPlaceholderPos = -1;
-    this._animatingPlaceholdersCount = 0;
-
-    this.signals = new SignalManager.SignalManager(this);
-    //this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon);
     this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
     this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
@@ -282,11 +273,10 @@ MyApplet.prototype = {
     this.signals.connect(Main.overview, 'hiding', this._onOverviewHide);
     this.signals.connect(Main.expo, 'showing', this._onOverviewShow);
     this.signals.connect(Main.expo, 'hiding', this._onOverviewHide);
-    this.signals.connect(Main.themeManager, 'theme-set', this.onThemeChange);
+    this.signals.connect(Main.themeManager, 'theme-set', this.refreshCurrentAppList);
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
-
     // Query apps for the current workspace
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
@@ -369,6 +359,14 @@ MyApplet.prototype = {
     setTimeout(()=>{
       this.metaWorkspaces[this.currentWs].appList._refreshList();
     }, 15);
+  },
+
+  handleMintYThemePreset: function() {
+    this.settings.setValue('hoverPseudoClass', 1);
+    this.settings.setValue('focusPseudoClass', 1);
+    this.settings.setValue('activePseudoClass', 3);
+    this.settings.setValue('number-display', 1);
+    this.settings.setValue('show-active', true);
   },
 
   _updateIconSizes: function () {
@@ -454,17 +452,18 @@ MyApplet.prototype = {
   },
 
   getCurrentAppList: function(){
-    return this.metaWorkspaces[this.currentWs].appList;
-  },
-
-  onThemeChange: function(e){
-    this.refreshCurrentAppList();
+    if (typeof this.metaWorkspaces[this.currentWs] !== 'undefined') {
+      return this.metaWorkspaces[this.currentWs].appList;
+    } else if (typeof this.metaWorkspaces[0] !== 'undefined') {
+      return this.metaWorkspaces[0].appList;
+    } else {
+      global.logError('ITM Error: Could not retrieve the current app list.');
+      return null;
+    }
   },
 
   getAutostartApps: function(){
-    let info;
-
-    let autoStartDir;
+    let info, autoStartDir;
 
     let getChildren = ()=>{
       let children = autoStartDir.enumerate_children('standard::name,standard::type,time::modified', Gio.FileQueryInfoFlags.NONE, null);
@@ -502,7 +501,7 @@ MyApplet.prototype = {
     }
   },
 
-  handleDragOver: function (source, actor, x, y, time) {
+  handleDragOver: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
       return DND.DragMotionResult.NO_DROP;
     }
@@ -571,7 +570,9 @@ MyApplet.prototype = {
   },
 
   acceptDrop: function (source, actor, x, y) {
-    if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))) {
+    if (!(source.isDraggableApp
+      || (source instanceof DND.LauncherDraggable))
+      || this.panelEditMode) {
       return false;
     }
 
@@ -595,15 +596,13 @@ MyApplet.prototype = {
       id = app.get_name().toLowerCase() + '.desktop';
     }
 
-    let favorites = this.pinnedAppsContr.getFavoriteMap();
+    let favorites = this.pinnedFavorites.getFavoriteMap();
     let refFav = _.findIndex(favorites, {id: id});
     let favPos = this._dragPlaceholderPos;
 
     if (favPos === -1) {
       let children = this.metaWorkspaces[this.currentWs].appList.managerContainer.get_children();
-
       let pos = 0;
-
       for (let i = 0, len = children.length; i < len; i++) {
         if (x > children[i].get_allocation_box().x1 + children[i].width / 2) {
           pos = i;
@@ -617,18 +616,14 @@ MyApplet.prototype = {
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function () {
       if (refFav !== -1) {
-        this.pinnedAppsContr.moveFavoriteToPos(id, favPos);
+        this.pinnedFavorites.moveFavoriteToPos(id, favPos);
       } else if (this.pinOnDrag) {
-        this.pinnedAppsContr._addFavorite({appId: id, app: app, pos: favPos});
+        this.pinnedFavorites._addFavorite({appId: id, app: app, pos: favPos});
       }
       return false;
     }));
     this._clearDragPlaceholder();
     return true;
-  },
-
-  _reloadApp: function () {
-    Util.trySpawnCommandLine('bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py reload"');
   },
 
   _clearDragPlaceholder: function () {
@@ -639,44 +634,8 @@ MyApplet.prototype = {
     }
   },
 
-  _makeDirectoy: function (fDir) {
-    if (!this._isDirectory(fDir)) {
-      this._makeDirectoy(fDir.get_parent());
-    }
-    if (!this._isDirectory(fDir)) {
-      fDir.make_directory(null);
-    }
-  },
-
-  _isDirectory: function (fDir) {
-    try {
-      let info = fDir.query_filesystem_info('standard::type', null);
-      if ((info) && (info.get_file_type() != Gio.FileType.DIRECTORY)) {
-        return true;
-      }
-    } catch(e) {}
-    return false;
-  },
-
-  pinned_app_contr: function () {
-    let pinnedAppsContr = this.pinnedAppsContr;
-    return pinnedAppsContr;
-  },
-
   acceptNewLauncher: function (path) {
-    this.pinnedAppsContr._addFavorite({appId: path, pos: -1});
-  },
-
-  removeLauncher: function (appGroup) {
-    // Add code here to remove the launcher if you want.
-  },
-
-  recent_items_contr: function () {
-    return this.recentItems;
-  },
-
-  recent_items_manager: function () {
-    return this.recentManager;
+    this.pinnedFavorites._addFavorite({appId: path, pos: -1});
   },
 
   sortRecentItems: function (items) {
@@ -691,7 +650,6 @@ MyApplet.prototype = {
 
     // We'd like to know what workspaces in this.metaWorkspaces have been destroyed and
     // so are no longer in the workspaces list.  For each of those, we should destroy them
-
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
       if (workspaces.indexOf(this.metaWorkspaces[i].ws) == -1) {
         this.metaWorkspaces[i].appList.destroy();
