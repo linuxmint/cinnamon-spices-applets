@@ -7,7 +7,7 @@ To install them you need pip for python3. Short install list:
 ```
 sudo apt-get install pip3
 sudo pip3 install feedparser
-sudo pip3 install keyrings
+sudo pip3 install keyring
 sudo pip3 install keyrings-alt
 ```
 ## Storage of username and password
