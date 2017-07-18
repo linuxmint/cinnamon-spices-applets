@@ -83,7 +83,6 @@ AppButton.prototype = {
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this._onLeave));
 
     this._isFavorite(parent.isFavoriteApp);
-    this._onFocusChange();
   },
 
   setActorWidth: function() {
@@ -364,9 +363,9 @@ AppButton.prototype = {
       this._needsAttention = false;
     } else {
       this.actor.remove_style_pseudo_class(focusPseudoClass);
-      if (this._applet.showActive && this.metaWindows.length > 0) {
-        this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
-      }
+    }
+    if (this._applet.showActive && this.metaWindows.length > 0) {
+      this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
     }
   },
 

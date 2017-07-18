@@ -292,52 +292,32 @@ AppGroup.prototype = {
       this.actor.add_style_pseudo_class('focus');
     }
   },
+
   _getLastFocusedWindow: function () {
     return this.lastFocused;
   },
 
-  // updates the internal list of metaWindows
-  // to include all windows corresponding to this.app on the workspace
-  // metaWorkspace
-  _updateMetaWindows: function (metaWorkspace, app, window, _wsWindows) {
-    // Get a list of all interesting windows that are part of this app on the current workspace
-    let wsWindows = _wsWindows ? _wsWindows : metaWorkspace.list_windows();
-    let windowsSource = window ? [window] : wsWindows;
-
-    let windowList = _.filter(windowsSource, (win)=>{
-      if (!app) {
-        app = this._applet.getAppFromWMClass(this.appList.specialApps, win);
-        if (!app) {
-          app = this._applet.tracker.get_window_app(win);
-        }
-      }
-      return app.toString() === this.app.toString();
-    });
-
-    this.metaWindows = [];
-
-    for (let i = 0, len = windowList.length; i < len; i++) {
-      this._windowAdded(metaWorkspace, windowList[i], windowList);
-    }
-
-    if (this.lastFocused && _.isObject(this.lastFocused)) {
-      if (this.rightClickMenu !== undefined) {
-        this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
-      }
-    }
-  },
-
-  _windowAdded: function (metaWindow, metaWindows) {
-    if (metaWindows) {
-      this.metaWindows = metaWindows;
-    }
-    let refWindow = _.findIndex(this.metaWindows, (win)=>{
-      return _.isEqual(win, metaWindow);
-    });
+  _shouldWindowBeAdded: function(metaWindow) {
     let windowAddArgs = !_.isNil(metaWindow) || !this._applet.groupApps;
     if (!this._applet.includeAllWindows) {
       windowAddArgs = windowAddArgs && this._applet.tracker.is_window_interesting(metaWindow);
     }
+    if (this._applet.panel && metaWindow) {
+      windowAddArgs = windowAddArgs && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) > -1;
+    }
+    return windowAddArgs;
+  },
+
+  _windowAdded: function (metaWindow, metaWindows) {
+    if (metaWindows) {
+      this.metaWindows = _.filter(metaWindows, (metaWindow)=>{
+        return this._shouldWindowBeAdded(metaWindow);
+      });
+    }
+    let refWindow = _.findIndex(this.metaWindows, (win)=>{
+      return _.isEqual(win, metaWindow);
+    });
+    let windowAddArgs = this._shouldWindowBeAdded(metaWindow);
     if (windowAddArgs) {
       if (metaWindow) {
         this.lastFocused = metaWindow;
@@ -351,31 +331,15 @@ AppGroup.prototype = {
         if (refWindow === -1) {
           this.metaWindows.push(metaWindow);
         }
+        this._calcWindowNumber();
+        this._appButton._onFocusChange();
       }
 
-      // Instead of initializing rightClickMenu in _init right away, we'll prevent the exception caused by its absence and then initialize it.
-      // This speeds up init time, and fixes the monitor move options not appearing on first init.
-      if (this.rightClickMenu !== undefined) {
-        this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
-      } else {
-        this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu({
-          parent: this,
-          metaWindow: this.lastFocused,
-          metaWindows: this.metaWindows
-        });
-        this._menuManager = new PopupMenu.PopupMenuManager(this);
-        this._menuManager.addMenu(this.rightClickMenu);
-        this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
-      }
-
+      this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       this.hoverMenu.appSwitcherItem._refreshThumbnails();
       this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
-
-
       this._isFavorite(this.isFavoriteApp);
-
-      this._calcWindowNumber();
     }
   },
 
@@ -400,18 +364,19 @@ AppGroup.prototype = {
         this.hoverMenu.appSwitcherItem._refresh with an outdated metaWindows cache. Better fix TBD.
       */
       this.hoverMenu.appSwitcherItem.removeStaleWindowThumbnails(this.metaWindows);
-
       if (this.rightClickMenu !== undefined) {
         this.rightClickMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       }
       this.hoverMenu.appSwitcherItem._refreshThumbnails();
       this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
+      this._calcWindowNumber();
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
-      cb(this.appId, this.isFavoriteApp);
+      if (typeof cb === 'function') {
+        cb(this.appId, this.isFavoriteApp);
+      }
     }
-    this._calcWindowNumber();
   },
 
   _onAppChange: function(metaWindow) {
@@ -424,9 +389,9 @@ AppGroup.prototype = {
       return false;
     }
     let title = metaWindow.get_title();
-    each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
-      if (_.isEqual(thumbnailObject.thumbnail.metaWindow, metaWindow)) {
-        thumbnailObject.thumbnail._label.set_text(title);
+    each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+      if (_.isEqual(thumbnail.metaWindow, metaWindow)) {
+        thumbnail._label.set_text(title);
         return false;
       }
     });
@@ -459,9 +424,9 @@ AppGroup.prototype = {
       this.lastFocused = metaWindow;
       this._windowTitleChanged(this.lastFocused);
       if (this.hoverMenu.isOpen) {
-        each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
-          if (_.isEqual(thumbnailObject.thumbnail.metaWindow, metaWindow)) {
-            thumbnailObject.thumbnail._focusWindowChange();
+        each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+          if (_.isEqual(thumbnail.metaWindow, metaWindow)) {
+            thumbnail._focusWindowChange();
             return false;
           }
         });

@@ -23,6 +23,7 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const Meta = imports.gi.Meta;
 const SignalManager = imports.misc.signalManager;
 
@@ -159,10 +160,12 @@ MyApplet.prototype = {
     this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
     this.signals = new SignalManager.SignalManager(this);
     this.tracker = Cinnamon.WindowTracker.get_default();
+    this.scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     this._appSystem = Cinnamon.AppSystem.get_default();
     this.recentManager = Gtk.RecentManager.get_default();
     this.sortRecentItems(this.recentManager.get_items());
     this.pinnedFavorites = new PinnedFavs(this);
+    this._monitorWatchList = [];
     this.metaWorkspaces = [];
     this.autostartApps = [];
     this._menuOpen = false;
@@ -240,16 +243,18 @@ MyApplet.prototype = {
       }
     }
 
-    this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
-    this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
+    this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
+    this.signals.connect(global.screen, 'notify::n-workspaces', Lang.bind(this, this._onWorkspaceCreatedOrDestroyed));
+    this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
+    this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, this.on_applet_instances_changed));
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.display, 'window-demands-attention', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.settings, 'changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-    this.signals.connect(Main.overview, 'showing', this._onOverviewShow);
-    this.signals.connect(Main.overview, 'hiding', this._onOverviewHide);
-    this.signals.connect(Main.expo, 'showing', this._onOverviewShow);
-    this.signals.connect(Main.expo, 'hiding', this._onOverviewHide);
-    this.signals.connect(Main.themeManager, 'theme-set', this.refreshCurrentAppList);
+    this.signals.connect(Main.overview, 'showing', Lang.bind(this, this._onOverviewShow));
+    this.signals.connect(Main.overview, 'hiding', Lang.bind(this, this._onOverviewHide));
+    this.signals.connect(Main.expo, 'showing', Lang.bind(this, this._onOverviewShow));
+    this.signals.connect(Main.expo, 'hiding', Lang.bind(this, this._onOverviewHide));
+    this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this.refreshCurrentAppList));
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
@@ -257,6 +262,37 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
+  },
+
+  on_applet_instances_changed: function() {
+    let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
+    let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
+    let instances = Main.AppletManager.getRunningInstancesForUuid(this._uuid);
+
+    /* Simple cases */
+    if (numberOfMonitors === 1) {
+      this._monitorWatchList = [Main.layoutManager.primaryIndex];
+    } else if (instances.length > 1 && !onPrimary) {
+      this._monitorWatchList = [this.panel.monitorIndex];
+    } else {
+      /* This is an instance on the primary monitor - it will be
+       * responsible for any monitors not covered individually.  First
+       * convert the instances list into a list of the monitor indices,
+       * and then add the monitors not present to the monitor watch list
+       * */
+      this._monitorWatchList = [this.panel.monitorIndex];
+
+      instances = _.map(instances, function(instance) {
+        return instance.panel.monitorIndex;
+      });
+
+      for (let i = 0; i < numberOfMonitors; i++) {
+        if (instances.indexOf(i) === -1) {
+          this._monitorWatchList.push(i);
+        }
+      }
+    }
+    this.refreshCurrentAppList();
   },
 
   on_panel_edit_mode_changed: function () {
@@ -289,6 +325,11 @@ MyApplet.prototype = {
       Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
     }
     return false;
+  },
+
+  _onWindowMonitorChanged: function(screen, metaWindow, metaWorkspace) {
+    this.getCurrentAppList()._windowRemoved(metaWorkspace, metaWindow);
+    this.getCurrentAppList()._windowAdded(metaWorkspace, metaWindow);
   },
 
   _bindAppKey: function(){

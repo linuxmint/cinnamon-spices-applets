@@ -489,7 +489,7 @@ AppThumbnailHoverMenu.prototype = {
     this.app = parent.app;
     this.isFavoriteApp = parent.isFavoriteApp;
     this.appList = parent.appList;
-    this._tooltip = new Tooltips.PanelItemTooltip(this._applet, '', parent.orientation);
+    this._tooltip = new Tooltips.PanelItemTooltip(parent, '', this._applet.orientation);
 
     this.actor.hide();
     Main.layoutManager.addChrome(this.actor, {});
@@ -505,7 +505,7 @@ AppThumbnailHoverMenu.prototype = {
     this.signals.connect(this.actor, 'key-release-event', Lang.bind(this, this._onKeyRelease));
   },
 
-  _onButtonPress: function (actor) {
+  _onButtonPress: function () {
     if (this._applet.onClickThumbs && this.appSwitcherItem.box.get_children().length > 1) {
       return;
     }
@@ -558,7 +558,6 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text(this.appGroup.appName);
       this._tooltip.show();
-      this._tooltip.preventShow = false;
     } else {
       setTimeout(()=>this.appSwitcherItem._refresh(), 0);
       PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
@@ -569,7 +568,6 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text('');
       this._tooltip.hide();
-      this._tooltip.preventShow = true;
     } else {
       PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
     }
@@ -625,16 +623,16 @@ PopupMenuAppSwitcherItem.prototype = {
 
   _onKeyPress: function(actor, e){
     let symbol = e.get_key_symbol();
-    let i = _.findIndex(this.appThumbnails, (thumb)=>{
-      return thumb.thumbnail.entered;
+    let i = _.findIndex(this.appThumbnails, (thumbnail)=>{
+      return thumbnail.entered;
     });
 
     let entered = i > -1;
     if (entered) {
-      this.appThumbnails[i].thumbnail.handleLeaveEvent();
+      this.appThumbnails[i].handleLeaveEvent();
     } else {
-      i = _.findIndex(this.appThumbnails, (thumb)=>{
-        return thumb.thumbnail._hasFocus();
+      i = _.findIndex(this.appThumbnails, (thumbnail)=>{
+        return thumbnail._hasFocus();
       });
       if (i === -1) {
         i = 0;
@@ -677,7 +675,7 @@ PopupMenuAppSwitcherItem.prototype = {
       return;
     }
     if (this.appThumbnails[index] !== undefined) {
-      this.appThumbnails[index].thumbnail.handleEnterEvent();
+      this.appThumbnails[index].handleEnterEvent();
     }
   },
 
@@ -696,7 +694,7 @@ PopupMenuAppSwitcherItem.prototype = {
       this.metaWindowThumbnail.setMetaWindow(metaWindow, metaWindows);
     }
     for (let w = 0, len = this.appThumbnails.length; w < len; w++) {
-      this.appThumbnails[w].thumbnail.setMetaWindow(null, metaWindows);
+      this.appThumbnails[w].setMetaWindow(null, metaWindows);
     }
   },
 
@@ -731,7 +729,7 @@ PopupMenuAppSwitcherItem.prototype = {
     let windows = this.metaWindows;
 
 
-    if (this.metaWindowThumbnail && this.metaWindowThumbnail.thumbnail != null) {
+    if (this.metaWindowThumbnail && this.metaWindowThumbnail != null) {
       this.metaWindowThumbnail = null;
     }
     if (this.metaWindowThumbnail && _.isEqual(this.metaWindowThumbnail.metaWindow, this.metaWindow)) {
@@ -749,15 +747,15 @@ PopupMenuAppSwitcherItem.prototype = {
     setTimeout(()=>this.setStyleOptions(windows), 0);
     if (refreshThumbnails) {
       for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
-        this.appThumbnails[i].thumbnail._refresh(windows[0], windows);
+        this.appThumbnails[i]._refresh(windows[0], windows);
       }
     }
   },
 
   _refreshThumbnails: function(){
     for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
-      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i].thumbnail) {
-        this.appThumbnails[i].thumbnail._refresh();
+      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i]) {
+        this.appThumbnails[i]._refresh();
       }
     }
   },
@@ -779,7 +777,7 @@ PopupMenuAppSwitcherItem.prototype = {
       let refThumb = _.findIndex(this.appThumbnails, {metaWindow: metaWindow});
       if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
         if (this.reAdd) {
-          this.box.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
+          this.box.insert_actor(this.appThumbnails[i].actor, 0);
         }
       } else {
         if (this.metaWindowThumbnail) {
@@ -791,11 +789,8 @@ PopupMenuAppSwitcherItem.prototype = {
           metaWindows: metaWindows
         });
         thumbnail.setMetaWindow(metaWindow, metaWindows);
-        this.appThumbnails.push({
-          metaWindow: metaWindow,
-          thumbnail: thumbnail
-        });
-        this.box.insert_actor(this.appThumbnails[i].thumbnail.actor, 0);
+        this.appThumbnails.push(thumbnail);
+        this.box.insert_actor(this.appThumbnails[i].actor, 0);
       }
     }
     this.box.show();
@@ -818,8 +813,8 @@ PopupMenuAppSwitcherItem.prototype = {
       return;
     }
     for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
-      if (this.appThumbnails[i].thumbnail) {
-        this.appThumbnails[i].thumbnail.thumbnailIconSize();
+      if (this.appThumbnails[i]) {
+        this.appThumbnails[i].thumbnailIconSize();
       }
     }
   },
@@ -827,9 +822,9 @@ PopupMenuAppSwitcherItem.prototype = {
   removeStaleWindowThumbnails: function (windows) {
     for (let i = 0, len = this.appThumbnails.length; i < len; i++) {
       if (this.appThumbnails[i] !== undefined && windows.indexOf(this.appThumbnails[i].metaWindow) === -1) {
-        if (this.appThumbnails[i].thumbnail) {
-          this.box.remove_actor(this.appThumbnails[i].thumbnail.actor);
-          this.appThumbnails[i].thumbnail.destroy();
+        if (this.appThumbnails[i]) {
+          this.box.remove_actor(this.appThumbnails[i].actor);
+          this.appThumbnails[i].destroy();
         }
         _.pullAt(this.appThumbnails, i);
       }
@@ -837,9 +832,12 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   destroy: function(){
+    if (this.metaWindowThumbnail && this.metaWindowThumbnail != null) {
+      this.metaWindowThumbnail.destroy();
+    }
     for (let w = 0, len = this.appThumbnails.length; w < len; w++) {
       if (this.appThumbnails[w] !== undefined) {
-        this.appThumbnails[w].thumbnail.destroy(true);
+        this.appThumbnails[w].destroy(true);
       }
     }
   }
@@ -1042,19 +1040,19 @@ WindowThumbnail.prototype = {
   _getThumbnail: function () {
     // Create our own thumbnail if it doesn't exist
     let thumbnail = null;
-    if (this.sizeChangeId && this.muffinWindow) {
-      this.muffinWindow.disconnect(this.sizeChangeId);
+    if (this.muffinWindow) {
+      this.signals.disconnect('size-changed', this.muffinWindow);
     }
     this.muffinWindow = this.metaWindow.get_compositor_private();
     if (this.muffinWindow) {
       let windowTexture = this.muffinWindow.get_texture();
       let [width, height] = windowTexture.get_size();
-      this.sizeChangeId = this.muffinWindow.connect('size-changed', ()=>this._refresh());
+      this.signals.connect(this.muffinWindow, 'size-changed', Lang.bind(this, this._refresh));
       let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       thumbnail = new Clutter.Clone({
         source: windowTexture,
         reactive: true,
-        width: width * scale,
+        width: width * scale * this._applet.scaleFactor,
         height: height * scale
       });
     }
@@ -1088,7 +1086,6 @@ WindowThumbnail.prototype = {
     let button = event.get_button();
     if (button === 1 && !this.stopClick && !this.isFavoriteApp) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
-
       this.appSwitcherItem.hoverMenu.close();
     } else if (button === 2 && !this.stopClick) {
       this.handleAfterClick();
@@ -1131,13 +1128,13 @@ WindowThumbnail.prototype = {
         setThumbSize(divider * divideMultiplier, 16);
         return;
       } else {
+        this.thumbnailActor.width = this.thumbnailWidth;
+        this._container.style = 'width: ' + Math.floor(this.thumbnailWidth - 16) + 'px;';
         if (this._applet.verticalThumbs && this._applet.showThumbs) {
           this.thumbnailActor.height = this.thumbnailHeight;
         } else if (this._applet.verticalThumbs) {
           this.thumbnailActor.height = 0;
         }
-        this.thumbnailActor.width = this.thumbnailWidth;
-        this._container.style = 'width: ' + Math.floor(this.thumbnailWidth - 16) + 'px';
 
         this.isFavoriteApp = false;
 
