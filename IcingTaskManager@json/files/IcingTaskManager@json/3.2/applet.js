@@ -23,6 +23,7 @@ const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const Meta = imports.gi.Meta;
 const SignalManager = imports.misc.signalManager;
 
@@ -53,13 +54,29 @@ function PinnedFavs () {
 PinnedFavs.prototype = {
   _init: function (applet) {
     this._applet = applet;
-    this._favorites = [];
+    this.favoriteSettingKey = 'favorite-apps';
     this._reload();
   },
 
   _reload: function () {
-    let ids = this._applet.settings.getValue('pinned-apps');
-
+    if (this._applet.signals.isConnected('favorite-apps', global.settings)) {
+      this._applet.signals.disconnect('favorite-apps', global.settings);
+    }
+    if (this._applet.signals.isConnected('pinned-apps', this._applet.settings)) {
+      this._applet.signals.disconnect('pinned-apps', this._applet.settings);
+    }
+    if (this._applet.systemFavorites) {
+      this._applet.signals.connect(global.settings, 'changed::favorite-apps', Lang.bind(this, this._onFavoritesChange));
+    } else {
+      this._applet.signals.connect(this._applet.settings, 'changed::pinned-apps', Lang.bind(this, this._onFavoritesChange));
+    }
+    this._favorites = [];
+    let ids = [];
+    if (this._applet.systemFavorites) {
+      ids = global.settings.get_strv(this.favoriteSettingKey);
+    } else {
+      ids = this._applet.settings.getValue('pinned-apps');
+    }
     for (let i = 0, len = ids.length; i < len; i++) {
       let refFav = _.findIndex(this._favorites, {id: ids[i]});
       if (refFav === -1) {
@@ -75,38 +92,65 @@ PinnedFavs.prototype = {
   triggerUpdate: function (appId, pos, isFavoriteApp) {
     let refApp = _.findIndex(this._applet.getCurrentAppList().appList, {appId: appId});
     if (refApp > -1) {
-      this._applet.getCurrentAppList().appList[refApp]._isFavorite(isFavoriteApp);
+      let currentAppList = this._applet.getCurrentAppList();
+      if (!isFavoriteApp && currentAppList.appList[refApp].metaWindows.length === 0) {
+        currentAppList.appList[refApp].destroy();
+        _.pullAt(currentAppList.appList, refApp);
+      } else {
+        currentAppList.appList[refApp]._isFavorite(isFavoriteApp);
+        currentAppList.managerContainer.set_child_at_index(currentAppList.appList[refApp].actor, pos);
+      }
     }
+  },
+
+  _saveFavorites: function() {
+    this._favorites = _.uniqBy(this._favorites, 'id');
+    let ids = _.map(this._favorites, 'id');
+    if (this._applet.systemFavorites) {
+      global.settings.set_strv(this.favoriteSettingKey, ids);
+    } else {
+      this._applet.settings.setValue('pinned-apps', ids);
+    }
+  },
+
+  _onFavoritesChange: function() {
+    const oldFavorites = this._favorites;
+    this._reload();
+    let removedFavorites = _.differenceBy(oldFavorites, this._favorites, 'id');
+    each(removedFavorites, (favorite)=>{
+      this.triggerUpdate(favorite.id, -1, false);
+    });
+    each(this._favorites, (favorite, i)=>{
+      this.triggerUpdate(favorite.id, i, true);
+    });
   },
 
   _addFavorite: function (opts={appId: null, app: null, pos: -1}) {
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_app(opts.appId);
     }
-
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_settings_app(opts.appId);
     }
-
     if (!opts.app) {
       return false;
+    }
+    if (!opts.pos) {
+      opts.pos = -1;
     }
 
     let newFav = {
       id: opts.appId,
       app: opts.app
     };
-
     this._favorites.push(newFav);
-
 
     if (opts.pos !== -1) {
       this.moveFavoriteToPos(opts.appId, opts.pos);
       return true;
     }
-    this._favorites = _.uniqBy(this._favorites, 'id');
-    this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
-    this.triggerUpdate(opts.appId, -1, true);
+
+    this._saveFavorites();
     return true;
   },
 
@@ -116,30 +160,14 @@ PinnedFavs.prototype = {
       pos = pos - 1;
     }
     this._favorites.splice(pos, 0, this._favorites.splice(oldIndex, 1)[0]);
-    this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
-    this.triggerUpdate(appId, pos, true);
+    this._saveFavorites();
   },
 
   removeFavorite: function (appId) {
     let refFav = _.findIndex(this._favorites, {id: appId});
-    if (refFav === -1) {
-      this.triggerUpdate(appId, -1, false);
-    }
-
+    this.triggerUpdate(appId, -1, false);
     _.pullAt(this._favorites, refFav);
-    this._applet.settings.setValue('pinned-apps', _.map(this._favorites, 'id'));
-
-    let refApp = _.findIndex(this._applet.getCurrentAppList().appList, {appId: appId});
-    let hasOpenWindows = this._applet.getCurrentAppList().appList[refApp].app.get_windows().length > 0;
-
-    if (hasOpenWindows) {
-      this.triggerUpdate(appId, -1, false);
-    } else {
-      setTimeout(()=>{
-        this._applet.getCurrentAppList().appList[refApp].destroy();
-        _.pullAt(this._applet.metaWorkspaces[this._applet.currentWs].appList.appList, refApp);
-      }, 15);
-    }
+    this._saveFavorites();
     return true;
   },
 };
@@ -159,10 +187,11 @@ MyApplet.prototype = {
     this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
     this.signals = new SignalManager.SignalManager(this);
     this.tracker = Cinnamon.WindowTracker.get_default();
+    this.scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     this._appSystem = Cinnamon.AppSystem.get_default();
     this.recentManager = Gtk.RecentManager.get_default();
     this.sortRecentItems(this.recentManager.get_items());
-    this.pinnedFavorites = new PinnedFavs(this);
+    this._monitorWatchList = [];
     this.metaWorkspaces = [];
     this.autostartApps = [];
     this._menuOpen = false;
@@ -210,7 +239,7 @@ MyApplet.prototype = {
       {key: 'hover-peek-time', value: 'peekTime', cb: null},
       {key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null},
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
-      {key: 'sort-thumbnails', value: 'sortThumbs', cb: null},
+      {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateThumbnailOrder},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
@@ -227,6 +256,7 @@ MyApplet.prototype = {
       {key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
+      {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
     ];
 
     if (this.c32) {
@@ -240,16 +270,20 @@ MyApplet.prototype = {
       }
     }
 
-    this.signals.connect(global.window_manager, 'switch-workspace', this._onSwitchWorkspace);
-    this.signals.connect(global.screen, 'notify::n-workspaces', this._onWorkspaceCreatedOrDestroyed);
+    this.pinnedFavorites = new PinnedFavs(this);
+
+    this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
+    this.signals.connect(global.screen, 'notify::n-workspaces', Lang.bind(this, this._onWorkspaceCreatedOrDestroyed));
+    this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
+    this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, this.on_applet_instances_changed));
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.display, 'window-demands-attention', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.settings, 'changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
-    this.signals.connect(Main.overview, 'showing', this._onOverviewShow);
-    this.signals.connect(Main.overview, 'hiding', this._onOverviewHide);
-    this.signals.connect(Main.expo, 'showing', this._onOverviewShow);
-    this.signals.connect(Main.expo, 'hiding', this._onOverviewHide);
-    this.signals.connect(Main.themeManager, 'theme-set', this.refreshCurrentAppList);
+    this.signals.connect(Main.overview, 'showing', Lang.bind(this, this._onOverviewShow));
+    this.signals.connect(Main.overview, 'hiding', Lang.bind(this, this._onOverviewHide));
+    this.signals.connect(Main.expo, 'showing', Lang.bind(this, this._onOverviewShow));
+    this.signals.connect(Main.expo, 'hiding', Lang.bind(this, this._onOverviewHide));
+    this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this.refreshCurrentAppList));
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
@@ -257,6 +291,37 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
+  },
+
+  on_applet_instances_changed: function() {
+    let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
+    let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
+    let instances = Main.AppletManager.getRunningInstancesForUuid(this._uuid);
+
+    /* Simple cases */
+    if (numberOfMonitors === 1) {
+      this._monitorWatchList = [Main.layoutManager.primaryIndex];
+    } else if (instances.length > 1 && !onPrimary) {
+      this._monitorWatchList = [this.panel.monitorIndex];
+    } else {
+      /* This is an instance on the primary monitor - it will be
+       * responsible for any monitors not covered individually.  First
+       * convert the instances list into a list of the monitor indices,
+       * and then add the monitors not present to the monitor watch list
+       * */
+      this._monitorWatchList = [this.panel.monitorIndex];
+
+      instances = _.map(instances, function(instance) {
+        return instance.panel.monitorIndex;
+      });
+
+      for (let i = 0; i < numberOfMonitors; i++) {
+        if (instances.indexOf(i) === -1) {
+          this._monitorWatchList.push(i);
+        }
+      }
+    }
+    this.refreshCurrentAppList();
   },
 
   on_panel_edit_mode_changed: function () {
@@ -289,6 +354,11 @@ MyApplet.prototype = {
       Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
     }
     return false;
+  },
+
+  _onWindowMonitorChanged: function(screen, metaWindow, metaWorkspace) {
+    this.getCurrentAppList()._windowRemoved(metaWorkspace, metaWindow);
+    this.getCurrentAppList()._windowAdded(metaWorkspace, metaWindow);
   },
 
   _bindAppKey: function(){
@@ -341,6 +411,19 @@ MyApplet.prototype = {
     this.settings.setValue('activePseudoClass', 3);
     this.settings.setValue('number-display', 1);
     this.settings.setValue('show-active', true);
+  },
+
+  _updateFavorites: function() {
+    this.pinnedFavorites._reload();
+    this.refreshCurrentAppList();
+  },
+
+  _updateThumbnailOrder: function() {
+    each(this.metaWorkspaces, (workspace)=>{
+      each(workspace.appList.appList, (appGroup)=>{
+        appGroup.hoverMenu.appSwitcherItem.addWindowThumbnails();
+      });
+    });
   },
 
   _updateIconSizes: function () {

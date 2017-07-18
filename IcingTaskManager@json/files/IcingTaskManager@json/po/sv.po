@@ -169,20 +169,11 @@ msgstr "Fäst program när de dras till en ny position"
 
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. hotkey->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->description
 msgid "Global hotkey to show the order of apps"
 msgstr "Systemövergripande snabbtangent för att visa programordning"
 
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. hotkey->tooltip
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->tooltip
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. hotkey->tooltip
-msgid ""
 "When triggered, the window count label will be replaced with its order in "
 "the app list temporarily."
 msgstr ""
@@ -212,10 +203,6 @@ msgstr "Inga ikoner"
 msgid "Non-symbolic icons"
 msgstr "Icke-symboliska ikoner"
 
-#. IcingTaskManager@json->settings-schema.json->hover-peek-
-#. opacity->description
-#. IcingTaskManager@json->settings-schema.json->hover-peek-
-#. opacity->description
 #. IcingTaskManager@json->settings-schema.json->hover-peek-
 #. opacity->description
 msgid "Window opacity"
@@ -284,10 +271,6 @@ msgstr "Temasättning"
 
 #. IcingTaskManager@json->settings-schema.json->animate-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->animate-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->animate-
-#. thumbnails->description
 msgid "Animate thumbnails"
 msgstr "Animera miniatyrer"
 
@@ -295,10 +278,6 @@ msgstr "Animera miniatyrer"
 msgid "If enabled, thumbnails will animate when appearing and disappearing."
 msgstr "Vid aktivering animeras miniatyrer vid in- och uttoning."
 
-#. IcingTaskManager@json->settings-schema.json->autostart-menu-
-#. item->description
-#. IcingTaskManager@json->settings-schema.json->autostart-menu-
-#. item->description
 #. IcingTaskManager@json->settings-schema.json->autostart-menu-
 #. item->description
 msgid "Show autostart option"
@@ -336,10 +315,6 @@ msgstr "Avgör om tidigare objekt skall visas i kontextmenyn."
 
 #. IcingTaskManager@json->settings-schema.json->vertical-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->vertical-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->vertical-
-#. thumbnails->description
 msgid "Enable vertical thumbnails"
 msgstr "Aktivera vertikala miniatyrer"
 
@@ -373,10 +348,6 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-
 #. schema.json->panelLauncherClass->description
-#. IcingTaskManager@json->settings-
-#. schema.json->panelLauncherClass->description
-#. IcingTaskManager@json->settings-
-#. schema.json->panelLauncherClass->description
 msgid "Use the panel launcher class for pinned apps"
 msgstr "Använd panelstartklassen för fastnålade program"
 
@@ -384,10 +355,6 @@ msgstr "Använd panelstartklassen för fastnålade program"
 msgid "Enabling this helps with certain themes."
 msgstr "Aktivering hjälper i vissa teman"
 
-#. IcingTaskManager@json->settings-schema.json->arrange-
-#. pinnedApps->description
-#. IcingTaskManager@json->settings-schema.json->arrange-
-#. pinnedApps->description
 #. IcingTaskManager@json->settings-schema.json->arrange-
 #. pinnedApps->description
 msgid "Arrange pinned apps"
@@ -441,10 +408,6 @@ msgstr "Normal"
 
 #. IcingTaskManager@json->settings-schema.json->onclick-
 #. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->onclick-
-#. thumbnails->description
-#. IcingTaskManager@json->settings-schema.json->onclick-
-#. thumbnails->description
 msgid "Open thumbnails on click"
 msgstr "Öppna miniatyrer vid klick"
 
@@ -464,10 +427,6 @@ msgstr ""
 "Avgör hur mycket horisontell inramning som skall visas i programknappar. "
 "Inramning tillämpas bara på detta panelprogram i horisontella paneler."
 
-#. IcingTaskManager@json->settings-schema.json->middle-click-
-#. action->description
-#. IcingTaskManager@json->settings-schema.json->middle-click-
-#. action->description
 #. IcingTaskManager@json->settings-schema.json->middle-click-
 #. action->description
 msgid "Middle clicking app buttons creates new app instances"
@@ -524,17 +483,9 @@ msgstr "Indikator visar om ett program är aktivt."
 
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. timeout->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->description
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->description
 msgid "Duration of the apps order display on hotkey press"
 msgstr "Varaktighet för visning av programordning vid snabbtangenttryck"
 
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->tooltip
-#. IcingTaskManager@json->settings-schema.json->show-apps-order-
-#. timeout->tooltip
 #. IcingTaskManager@json->settings-schema.json->show-apps-order-
 #. timeout->tooltip
 msgid ""
@@ -543,10 +494,6 @@ msgid ""
 msgstr ""
 "Avgör hur länge fönsterantalet skall ersättas med programmets ordningsnummer."
 
-#. IcingTaskManager@json->settings-schema.json->include-all-
-#. windows->description
-#. IcingTaskManager@json->settings-schema.json->include-all-
-#. windows->description
 #. IcingTaskManager@json->settings-schema.json->include-all-
 #. windows->description
 msgid "Include all app windows"
@@ -562,17 +509,9 @@ msgstr ""
 
 #. IcingTaskManager@json->settings-schema.json->monitor-move-all-
 #. windows->description
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->description
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->description
 msgid "Apply the monitor move option to all windows"
 msgstr "Tillämpa alternativet \"Flytta till skärm\" på alla fönster"
 
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->tooltip
-#. IcingTaskManager@json->settings-schema.json->monitor-move-all-
-#. windows->tooltip
 #. IcingTaskManager@json->settings-schema.json->monitor-move-all-
 #. windows->tooltip
 msgid ""

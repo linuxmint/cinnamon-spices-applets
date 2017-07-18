@@ -209,6 +209,7 @@ AppList.prototype = {
   _refreshList: function () {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].destroy();
+      this.appList[i] = null;
     }
 
     this.appList = [];
@@ -249,12 +250,11 @@ AppList.prototype = {
       if (appGroup.metaWindows) {
         appGroup._appButton._onFocusChange();
       }
-      if (appGroup.hoverMenu.isOpen) {
-        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
-          thumbnailObject.thumbnail._onFocusChange();
+      each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+          thumbnail.handleLeaveEvent();
+          thumbnail._focusWindowChange();
           return false;
         });
-      }
     });
   },
 
@@ -264,8 +264,8 @@ AppList.prototype = {
         appGroup._appButton._onWindowDemandsAttention(window);
       }
       if (appGroup.hoverMenu.isOpen) {
-        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnailObject)=>{
-          thumbnailObject.thumbnail._onWindowDemandsAttention(window);
+        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+          thumbnail._onWindowDemandsAttention(window);
           return false;
         });
       }
@@ -282,7 +282,10 @@ AppList.prototype = {
     if (!app) {
       app = this._applet.tracker.get_window_app(metaWindow);
     }
-    if (!app) {
+    if (!app
+      || (!isFavoriteApp
+        && metaWindow
+        && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) === -1)) {
       return;
     }
     let appId = app.get_id();
@@ -420,7 +423,7 @@ AppList.prototype = {
     this.appList.splice(pos, 0, data);
   },
 
-  _windowRemoved: function (metaWorkspace, metaWindow, app, timeStamp) {
+  _windowRemoved: function (metaWorkspace, metaWindow, positionChange) {
     let refApp = -1, refWindow = -1, windowCount = 0;
     let wmClass = metaWindow.get_wm_class();
     each(this.appList, (appGroup, i)=>{
@@ -443,14 +446,14 @@ AppList.prototype = {
     });
     if (refApp > -1) {
       this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavoriteApp)=>{
-        if ((isFavoriteApp && !timeStamp) || (isFavoriteApp && !this._applet.groupApps && windowCount === 2)) {
+        if (isFavoriteApp || (isFavoriteApp && !this._applet.groupApps && windowCount === 2)) {
           this.appList[refApp]._isFavorite(true);
           this._refreshApps();
           return;
         }
         this.appList[refApp].destroy();
         _.pullAt(this.appList, refApp);
-      });
+      }, positionChange);
     }
   },
 
@@ -459,6 +462,12 @@ AppList.prototype = {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].destroy();
     }
-    this.appList.destroy();
+    if (this._appButton) {
+      this._appButton.destroy();
+    }
+    if (this.rightClickMenu) {
+      this.rightClickMenu.destroy();
+    }
+    this.actor.destroy();
   }
 };

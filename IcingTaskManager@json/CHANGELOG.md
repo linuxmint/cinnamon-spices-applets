@@ -1,5 +1,13 @@
 Changelog
 
+### 5.1.0
+
+  * Multiple ITM instances now only display windows from the monitor the instance is displayed on, like the default Cinnamon window list.
+  * Added a new option that controls whether or not pinned apps should use system favorites, or the pinned list in the applet configuration.
+  * Improved thumbnail sorting.
+  * Fixed thumbnail menu key controls for all panel orientations.
+  * Fixed pinning favorites not appending to the end of the pinned app group, and unpinning apps not moving the app to the end of the app list.
+
 ### 5.0.0
 
   * Fixed off-center app button icons.

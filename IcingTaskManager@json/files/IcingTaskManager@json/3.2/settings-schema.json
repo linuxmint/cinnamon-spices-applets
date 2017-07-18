@@ -33,6 +33,7 @@
         "group-apps",
         "show-alerts",
         "show-pinned",
+        "system-favorites",
         "arrange-pinnedApps",
         "pinOnDrag",
         "middle-click-action"
@@ -155,6 +156,12 @@
     "default": true,
     "description": "Show pinned apps",
     "tooltip": "Controls whether or not the pinned apps appear in the panel if they are not open."
+  },
+  "system-favorites": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use system favorites for pinned apps",
+    "tooltip": "Controls whether or not pinned apps consist of the system favorites list."
   },
   "arrange-pinnedApps": {
     "type": "checkbox",
