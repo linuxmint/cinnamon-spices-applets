@@ -49,3 +49,10 @@ Argos for Cinnamon is an applet that turns executables' standard output into pan
 
 - **xdg-open command:** Open a URI in the user's preferred application that handles the respective URI or file type.
     - Debian and Archlinux based distributions: This command is installed with the package called **xdg-utils**. Installed by default in modern versions of Linux Mint.
+
+
+<h1 style="color:red;">Spices comments</h1>
+
+<strong style="color:red;font-size:x-large;">
+The Spices website has no notification system. I will not receive a notification when a comment is posted and you will not receive a notification if I answer a question. Do not expect answers from me on this Spices page EVER. Make your inquiries on <a href="https://github.com/Odyseus/CinnamonTools">this xlet's repository</a> and nowhere else.
+</strong>
