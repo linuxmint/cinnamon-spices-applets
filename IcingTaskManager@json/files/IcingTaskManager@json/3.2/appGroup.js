@@ -423,14 +423,9 @@ AppGroup.prototype = {
       this.appList._setLastFocusedApp(this.appId);
       this.lastFocused = metaWindow;
       this._windowTitleChanged(this.lastFocused);
-      if (this.hoverMenu.isOpen) {
-        each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
-          if (_.isEqual(thumbnail.metaWindow, metaWindow)) {
-            thumbnail._focusWindowChange();
-            return false;
-          }
-        });
-      }
+      each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+        thumbnail._focusWindowChange();
+      });
       if (this._applet.sortThumbs) {
         this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       }

@@ -250,12 +250,11 @@ AppList.prototype = {
       if (appGroup.metaWindows) {
         appGroup._appButton._onFocusChange();
       }
-      if (appGroup.hoverMenu.isOpen) {
-        each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
-          thumbnail._onFocusChange();
+      each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
+          thumbnail.handleLeaveEvent();
+          thumbnail._focusWindowChange();
           return false;
         });
-      }
     });
   },
 

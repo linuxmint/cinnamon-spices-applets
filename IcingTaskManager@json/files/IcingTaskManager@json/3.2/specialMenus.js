@@ -638,31 +638,35 @@ PopupMenuAppSwitcherItem.prototype = {
         i = 0;
       }
     }
-    let args = this._applet.verticalThumbs ? [Clutter.KEY_Up, Clutter.KEY_Down] : [Clutter.KEY_Left, Clutter.KEY_Right];
+    let args;
     let closeArg;
     if (this._applet.orientation === St.Side.TOP) {
       closeArg = Clutter.KEY_Up;
+      args = [Clutter.KEY_Left, Clutter.KEY_Right];
     } else if (this._applet.orientation === St.Side.BOTTOM) {
       closeArg = Clutter.KEY_Down;
+      args = [Clutter.KEY_Right, Clutter.KEY_Left];
     } else if (this._applet.orientation === St.Side.LEFT) {
       closeArg = Clutter.KEY_Left;
+      args = [Clutter.KEY_Up, Clutter.KEY_Down];
     } else if (this._applet.orientation === St.Side.RIGHT) {
       closeArg = Clutter.KEY_Right;
+      args = [Clutter.KEY_Down, Clutter.KEY_Up];
     }
     let index;
     if (symbol === args[0]) {
       if (!entered) {
         index = i;
-      } else if (this.appThumbnails[i+1] !== undefined) {
-        index = i+1;
+      } else if (this.appThumbnails[i + 1] !== undefined) {
+        index = i + 1;
       } else {
         index = 0;
       }
     } else if (symbol === args[1]) {
       if (!entered) {
         index = i;
-      } else if (this.appThumbnails[i-1] !== undefined) {
-        index = i-1;
+      } else if (this.appThumbnails[i - 1] !== undefined) {
+        index = i - 1;
       } else {
         index = this.appThumbnails.length - 1;
       }
@@ -761,13 +765,13 @@ PopupMenuAppSwitcherItem.prototype = {
   },
 
   addWindowThumbnails: function (metaWindows) {
+    if (!metaWindows) {
+      metaWindows = this.metaWindows;
+    }
     if (metaWindows.length > 0) {
       let children = this.box.get_children();
       for (let w = 0, len = children.length; w < len; w++) {
         this.box.remove_actor(children[w]);
-      }
-      if (this._applet.sortThumbs) {
-        this.appThumbnails = _.orderBy(this.appThumbnails, ['metaWindow.user_time'], ['asc']);
       }
       this.reAdd = true;
     }
@@ -775,11 +779,7 @@ PopupMenuAppSwitcherItem.prototype = {
     for (let i = 0, len = metaWindows.length; i < len; i++) {
       let metaWindow = metaWindows[i];
       let refThumb = _.findIndex(this.appThumbnails, {metaWindow: metaWindow});
-      if (this.appThumbnails[i] !== undefined && this.appThumbnails[i] && refThumb !== -1) {
-        if (this.reAdd) {
-          this.box.insert_actor(this.appThumbnails[i].actor, 0);
-        }
-      } else {
+      if (!this.appThumbnails[i] && refThumb === -1) {
         if (this.metaWindowThumbnail) {
           this.metaWindowThumbnail.destroy(true);
         }
@@ -790,9 +790,16 @@ PopupMenuAppSwitcherItem.prototype = {
         });
         thumbnail.setMetaWindow(metaWindow, metaWindows);
         this.appThumbnails.push(thumbnail);
-        this.box.insert_actor(this.appThumbnails[i].actor, 0);
       }
     }
+    if (this._applet.sortThumbs) {
+      this.appThumbnails = _.orderBy(this.appThumbnails, (thumbnail)=>{
+        return thumbnail.metaWindow.user_time;
+      }, ['desc']);
+    }
+    each(this.appThumbnails, (thumbnail, i)=>{
+      this.box.insert_actor(thumbnail.actor, i);
+    });
     this.box.show();
   },
   setStyleOptions: function (windows) {
@@ -973,36 +980,27 @@ WindowThumbnail.prototype = {
     return false;
   },
 
-  _onFocusChange: function () {
-    if (this._hasFocus()) {
-      this.actor.remove_style_class_name('thumbnail-alerts');
-    }
-  },
-
   _focusWindowChange: function () {
     if (this._hasFocus()) {
-      this.actor.add_style_pseudo_class('selected');
+      this.actor.set_style_pseudo_class('selected');
     } else {
       this.actor.remove_style_pseudo_class('selected');
     }
   },
 
   _hasFocus: function () {
-    if (!this.metaWindow) {
+    if (!this.metaWindow
+      || this.metaWindow.minimized) {
       return false;
     }
 
-    if (this.metaWindow.minimized) {
-      return false;
-    }
-
-    if (this.metaWindow.has_focus()) {
+    if (this.metaWindow.appears_focused) {
       return true;
     }
 
     let transientHasFocus = false;
     this.metaWindow.foreach_transient(function (transient) {
-      if (transient.has_focus()) {
+      if (transient.appears_focused) {
         transientHasFocus = true;
         return false;
       }

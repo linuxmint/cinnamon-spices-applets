@@ -508,3 +508,10 @@ msgstr ""
 #. IcingTaskManager@json->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
 msgstr ""
+
+msgid "Use system favorites for pinned apps"
+msgstr ""
+
+msgid "Controls whether or not pinned apps consist of the system favorites"
+" list."
+msgstr ""
