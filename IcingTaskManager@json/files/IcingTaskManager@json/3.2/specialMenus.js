@@ -1050,7 +1050,7 @@ WindowThumbnail.prototype = {
       thumbnail = new Clutter.Clone({
         source: windowTexture,
         reactive: true,
-        width: width * scale * this._applet.scaleFactor,
+        width: width * scale,
         height: height * scale
       });
     }

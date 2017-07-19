@@ -59,11 +59,11 @@ PinnedFavs.prototype = {
   },
 
   _reload: function () {
-    if (this._applet.signals.isConnected('favorite-apps', global.settings)) {
-      this._applet.signals.disconnect('favorite-apps', global.settings);
+    if (this._applet.signals.isConnected('changed::favorite-apps', global.settings)) {
+      this._applet.signals.disconnect('changed::favorite-apps', global.settings);
     }
-    if (this._applet.signals.isConnected('pinned-apps', this._applet.settings)) {
-      this._applet.signals.disconnect('pinned-apps', this._applet.settings);
+    if (this._applet.signals.isConnected('changed::pinned-apps', this._applet.settings)) {
+      this._applet.signals.disconnect('changed::pinned-apps', this._applet.settings);
     }
     if (this._applet.systemFavorites) {
       this._applet.signals.connect(global.settings, 'changed::favorite-apps', Lang.bind(this, this._onFavoritesChange));
@@ -187,7 +187,6 @@ MyApplet.prototype = {
     this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
     this.signals = new SignalManager.SignalManager(this);
     this.tracker = Cinnamon.WindowTracker.get_default();
-    this.scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
     this._appSystem = Cinnamon.AppSystem.get_default();
     this.recentManager = Gtk.RecentManager.get_default();
     this.sortRecentItems(this.recentManager.get_items());
@@ -664,7 +663,6 @@ MyApplet.prototype = {
         favPos = pos;
       }
     }
-    this.metaWorkspaces[this.currentWs].appList.managerContainer.set_child_at_index(source.actor, favPos);
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, Lang.bind(this, function () {
       if (refFav !== -1) {
