@@ -166,7 +166,7 @@ AppButton.prototype = {
   },
 
   _flashButton: function (counter) {
-    if (!this._needsAttention) {
+    if (!this._needsAttention || !this.actor) {
       return;
     }
     if (this._applet.showActive) {
@@ -175,7 +175,7 @@ AppButton.prototype = {
     this.actor.add_style_class_name('window-list-item-demands-attention');
     if (counter < 4) {
       setTimeout(()=>{
-        if (this.actor.has_style_class_name('window-list-item-demands-attention')) {
+        if (this.actor && this.actor.has_style_class_name('window-list-item-demands-attention')) {
           this.actor.remove_style_class_name('window-list-item-demands-attention');
           if (this._applet.showActive) {
             this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
