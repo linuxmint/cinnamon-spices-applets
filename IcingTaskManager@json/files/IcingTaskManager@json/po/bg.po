@@ -18,7 +18,7 @@ msgstr "Списък с прозорци с групиране и миниатю
 
 #. src->metadata.json->name
 msgid "Icing Task Manager"
-msgstr "Диспечер на задачи"
+msgstr "Диспечер на задачите"
 
 #. src->settings-schema.json->thumbnail-size->description
 msgid "Thumbnail size"
@@ -64,24 +64,24 @@ msgid "Set icon size"
 msgstr "Задаване на размера на иконките"
 
 msgid "Global hotkey to show the order of apps"
-msgstr "Global клавишна комбинация, за да се покаже на реда на приложения"
+msgstr "Повсеместна клавишна комбинация за показване на реда на програмите"
 
 msgid "Duration of the apps order display on hotkey press"
-msgstr "Продължителност на приложенията ред Покажи на клавиш натиснете"
+msgstr "Продължителност на показването на реда при натискане на клавиш"
 
 msgid ""
 "When triggered, the window count label will be replaced with its order in "
 "the app list temporarily."
 msgstr ""
-"При задействане етикета на прозореца брой ще бъде заменен с неговия ред в "
-"списъка с приложения временно."
+"При задействане, брояча на прозорците временно ще бъде заменен с реда в "
+"списъка с приложения."
 
 msgid ""
 "Determines the duration the window count labels are replaced with the "
 "app's order number."
 msgstr ""
-"Определя продължителността етикетите на прозорец броене се заменят с "
-"пореден номер на приложението."
+"Определя продължителността на брояча на прозорците, когато се заменят с "
+"поредния номер на програмата."
 
 #. src->settings-schema.json->hover-peek-time->description
 msgid "Window fade time"
@@ -150,7 +150,7 @@ msgid ""
 "Controls whether the order windows appear for an app is by last focused, or "
 "the order they were opened."
 msgstr ""
-"Регулира дали реда на прозорците за дадена програма:"
+"Регулира дали реда на прозорците за дадена програма е"
 "по последно фокусиране или ред на отваряне."
 
 #. src->settings-schema.json->hover-peek-opacity->description
@@ -189,16 +189,16 @@ msgid "Show autostart option"
 msgstr "Показване на опцията за автоматично пускане"
 
 msgid "Apply the monitor move option to all windows"
-msgstr "Нанесете опцията монитор ход на всички прозорци"
+msgstr "Прилагане на опцията за местене на монитор на всички прозорци"
 
 msgid ""
 "When clicking \"Move to monitor\" in the context menu, this option "
 "will move all of an app's windows instead of just the last focused "
 "window from the app."
 msgstr ""
-"Когато кликнете върху \"Преместване да следи\" в контекстното меню, тази "
-"опция Ще се премести на всички прозорци на дадено приложение, а не само "
-"последната фокусирани Прозорец от приложението."
+"Когато щракнете върху \"Преместване на монитор\" в контекстното меню, тази "
+"опция ще премести всички прозорци на дадена програма, а не само "
+"последната фокусирания."
 
 msgid "Shows the autostart toggle option in an app's context menu."
 msgstr "Показва опцията за автоматично пускане в контекстното меню."
@@ -449,102 +449,100 @@ msgid "Restore"
 msgstr "Възстановяване"
 
 msgid "Use theme padding to center button icons"
-msgstr "Използвайте тема подложка, за да центрирате икони на бутони"
+msgstr "Използване на отстоянието на темата за центриране на иконкине на копчетата"
 
 msgid "If button icons look off-centered, toggling this may help."
 msgstr ""
-"Ако иконите на бутоните изглеждат извън центъра, позволява да "
-"се превключва това може да помогне."
+"Това може да помогне, ако иконките на копчетата не са центрирани."
 
 msgid "App button hover pseudo class"
-msgstr "App бутон навъртам псевдо клас"
+msgstr "Псевдоклас за посочване на копчето на програма"
 
 msgid "Overrides the pseudo class for app buttons on hover."
-msgstr "Overrides псевдо класа за приложението бутони на висене."
+msgstr "Замества псевдокласа за посочване на копчето на програма."
 
 msgid "App button focus pseudo class"
-msgstr "App бутон фокус псевдо клас"
+msgstr "Псевдоклас за фокусиране на копчето на програма"
 
 msgid "Overrides the pseudo class for app button on focus."
-msgstr "Overrides псевдо класа за бутон приложение на фокус."
+msgstr "Замества псевдокласа за фокусиране на копчето на програма."
 
 msgid "App button active pseudo class"
-msgstr "Бутон App активна псевдо клас"
+msgstr "Псевдоклас за активно копче на програма"
 
 msgid "Overrides the pseudo class for app buttons when they are active."
-msgstr "Overrides псевдо класа за бутони за приложения, когато те са активни."
+msgstr "Замества псевдокласа за активни копчета на програма."
 
 msgid "Use the panel launcher class for pinned apps"
-msgstr "Използвайте класа панел стартер за фиксирани приложения"
+msgstr "Използване на класа за стартер в панела за закачени програми"
 
 msgid "Enabling this helps with certain themes."
 msgstr "Разрешаването на това помага с определени теми."
 
 msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "Global клавишна комбинация за колоездене през миниатюрни менюта"
+msgstr "Повсеместна клавишна комбинация за прелистване през менюта с миниатюри"
 
 msgid "This allows you to cycle through the menus without activating a window."
 msgstr ""
-"Това ви позволява да преминете през менютата без активиране на "
+"Това ви позволява да прелиствате през менютата без активиране на "
 "прозореца."
 
 msgid "Update this applet automatically"
-msgstr "Актуализиране на този аплет автоматично"
+msgstr "Автоматично обновяване на аплета"
 
 msgid ""
 "When enabled, ITM will check the Github releases on init, and will "
 "start to upgrade if it finds a newer version."
 msgstr ""
-"Когато е активиран, ITM ще провери GitHub пуска на първоначален, "
-"и ще започне да ъпгрейд, ако установи по-нова версия."
+"Когато е включено, ITM ще провери изданията в GitHub и ще "
+"започне да надгражда, ако намери по-нова версия."
 
 msgid "Theme Settings"
-msgstr "Настройки тема"
+msgstr "Настройки на темата"
 
 msgid "ITM Settings"
-msgstr "Настройки Двамата ръководители"
+msgstr "Настройки на ITM"
 
 msgid "Menu item type"
-msgstr "тип Елемент от меню"
+msgstr "Вид на елемент от менюто"
 
 msgid ""
 "Determines whether menu item icons are symbolic, non-symbolic, or not shown."
 msgstr ""
-"Определя дали елемент от менюто икони са символични, които не са символични, "
-"или които не са показани."
+"Определя дали иконките на елемент от менюто са символични, несимволични"
+"или не се показват."
 
 msgid "Symbolic icons"
-msgstr "Символичните икони"
+msgstr "Символични иконки"
 
 msgid "Non-symbolic icons"
-msgstr "Non-символични икони"
+msgstr "Несимволични иконки"
 
 msgid "No icons"
-msgstr "Не икони"
+msgstr "Без иконки"
 
 msgid "Use system tooltips for closed apps"
-msgstr "Използвайте системата пояснения за затворените приложения"
+msgstr "Използване на системни подсказки за затворените програми"
 
 msgid ""
 "Controls whether or not system tooltips are in use when hovering over "
 "closed pinned apps."
 msgstr ""
-"Контролира дали или не системни пояснения са в употреба, когато кръжи над "
-"затворените фиксирани приложения."
+"Контролира дали системните подсказки се използват, когато се посочват "
+"затворените закачени програми."
 
 msgid "Middle clicking app buttons creates new app instances"
 msgstr ""
-"Средните бутони за кликвания на приложения създава нови приложения"
-" случаи"
+"Щракване със средното копче на мишката създава нови екземпляри"
 
 msgid ""
 "Determines the behavior of middle mouse button clicks on app buttons. Setting"
 " this to false will close the last focused window from the app group on"
 " middle click."
 msgstr ""
-"Определя поведението на кликвания върху бутона средата на мишката върху"
-" бутона за приложения. Задаването на това да фалшива ще закрие последната"
-" фокусиран прозорец от групата на приложение на средна кликване."
+"Определя поведението на щракванията със средното копче на мишката върху копчета"
+" на програми. Ако е изключено (зададено на грешно), щракването ще затвори"
+" последно фокусирания прозорец от групата."
 
 msgid "Pin apps when dragged to a new position"
-msgstr "Pin приложения, когато се проточи до нова позиция"
+msgstr "Закачане на програми, когато се провлачат до нова позиция"
