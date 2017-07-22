@@ -5,19 +5,19 @@ Bug reports, feature requests and contributions should be done on this xlet's re
 
 <table><tbody>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/issues.svg"></td>
-<td><a href="https://github.com/Odyseus/CinnamonTools"><strong style="font-size: 1.2em">
+<td><a href="https://github.com/Odyseus/CinnamonTools"><strong>
 Bug reports/Feature requests/Contributions
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/help.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html"><strong>
 Localized help
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/contributors.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-contributors"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-contributors"><strong>
 Contributors/Mentions
 </strong></a></td></tr>
 <tr><td><img src="https://odyseus.github.io/CinnamonTools/lib/img/changelog.svg"></td>
-<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-changelog"><strong style="font-size: 1.2em">
+<td><a href="https://odyseus.github.io/CinnamonTools/help_files/0dyseus@SimpleToDoList.html#xlet-changelog"><strong>
 Full change log
 </strong></a></td></tr>
 
@@ -51,3 +51,8 @@ The usage of this applet is very simple. Each task list is represented by a sub 
 - Colorized priority tags support. The background and text colors of a task can be colorized depending on the @tag found inside the task text.
 - Configurable hotkey to open/close the menu.
 - Read the tooltips of each option on this applet settings window for more details.
+<h1 style="color:red;">Spices comments</h1>
+
+<strong style="color:red;font-size:x-large;">
+The Spices website has no notification system. I will not receive a notification when a comment is posted and you will not receive a notification if I answer a question. Do not expect answers from me on this Spices page EVER. Make your inquiries on <a href="https://github.com/Odyseus/CinnamonTools">this xlet's repository</a> and nowhere else.
+</strong>
