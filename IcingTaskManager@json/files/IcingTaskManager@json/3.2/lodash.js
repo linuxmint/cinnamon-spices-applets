@@ -14169,7 +14169,7 @@ var runInContext = (function runInContext(context) {
    * @returns {string} Returns the deburred string.
    * @example
    *
-   * _.deburr('déjà vu');
+   *
    * // => 'deja vu'
    */
   function deburr(string) {
