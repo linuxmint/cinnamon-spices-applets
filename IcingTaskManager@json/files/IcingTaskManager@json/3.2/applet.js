@@ -221,7 +221,7 @@ MyApplet.prototype = {
       {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
       {key: 'show-alerts', value: 'showAlerts', cb: this._updateAttentionState},
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
-      {key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null},
+      {key: 'enable-app-button-dragging', value: 'enableDragging', cb: null},
       {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
       {key: 'middle-click-action', value: 'middleClickAction', cb: null},
@@ -551,7 +551,7 @@ MyApplet.prototype = {
 
   handleDragOver: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
-      || !this.arrangePinned) {
+      || !this.enableDragging) {
       return DND.DragMotionResult.NO_DROP;
     }
 
@@ -622,7 +622,7 @@ MyApplet.prototype = {
     if (!(source.isDraggableApp
       || (source instanceof DND.LauncherDraggable))
       || this.panelEditMode
-      || !this.arrangePinned) {
+      || !this.enableDragging) {
       return false;
     }
 
