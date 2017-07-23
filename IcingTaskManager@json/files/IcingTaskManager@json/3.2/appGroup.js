@@ -356,8 +356,8 @@ AppGroup.prototype = {
 
     if (this.metaWindows.length > 0 && !this.willUnmount) {
       this.lastFocused = _.last(this.metaWindows);
-      this._windowTitleChanged(this.lastFocused);
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
+      this._windowTitleChanged(this.lastFocused);
       /*
         Workaround for #86 - https://github.com/jaszhix/icingtaskmanager/issues/86
         this.hoverMenu.setMetaWindow is being called after this.hoverMenu.open calls
@@ -385,7 +385,11 @@ AppGroup.prototype = {
   },
 
   _windowTitleChanged: function (metaWindow) {
-    if (this.willUnmount || !metaWindow) {
+    if (this.willUnmount) {
+      return false;
+    }
+    if (!metaWindow || (this.metaWindows.length === 0 && this.isFavoriteApp)) {
+      this._appButton.hideLabel();
       return false;
     }
     let title = metaWindow.get_title();
@@ -395,10 +399,10 @@ AppGroup.prototype = {
         return false;
       }
     });
-
     let titleType = this._applet.settings.getValue('title-display');
     this.appName = this.app.get_name();
-    if (titleType === constants.TitleDisplay.None || (this._applet.c32 && (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT))) {
+    if (titleType === constants.TitleDisplay.None
+      || (this._applet.c32 && (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT))) {
       this._appButton.setText('');
     } else if (titleType === constants.TitleDisplay.Title) {
       if (title) {
