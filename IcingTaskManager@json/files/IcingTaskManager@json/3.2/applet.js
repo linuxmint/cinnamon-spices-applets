@@ -231,7 +231,6 @@ MyApplet.prototype = {
       {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList},
       {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList},
       {key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList},
-      {key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList},
       {key: 'enable-hover-peek', value: 'enablePeek', cb: null},
       {key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null},
       {key: 'hover-peek-opacity', value: 'peekOpacity', cb: null},

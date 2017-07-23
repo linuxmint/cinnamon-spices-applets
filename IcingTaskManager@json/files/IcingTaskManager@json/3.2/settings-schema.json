@@ -420,12 +420,6 @@
     },
     "tooltip": "Overrides the pseudo class for app buttons when they are active."
   },
-  "panelLauncherClass": {
-    "type": "checkbox",
-    "default": false,
-    "description": "Use the panel launcher class for pinned apps",
-    "tooltip": "Enabling this helps with certain themes."
-  },
   "close-button-style": {
     "type": "checkbox",
     "default": true,
