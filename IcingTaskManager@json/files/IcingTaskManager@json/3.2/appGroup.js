@@ -232,7 +232,7 @@ AppGroup.prototype = {
   },
 
   _onAppKeyPress: function () {
-    if (this.isFavoriteApp) {
+    if (this.isFavoriteApp && this.metaWindows.length === 0) {
       this.app.open_new_window(-1);
       this._animate();
     } else {
@@ -245,7 +245,7 @@ AppGroup.prototype = {
     }
   },
 
-  _onNewAppKeyPress: function (number) {
+  _onNewAppKeyPress: function () {
     this.app.open_new_window(-1);
     this._animate();
   },
