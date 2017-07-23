@@ -302,7 +302,7 @@ AppGroup.prototype = {
     if (!this._applet.includeAllWindows) {
       windowAddArgs = windowAddArgs && this._applet.tracker.is_window_interesting(metaWindow);
     }
-    if (this._applet.panel && metaWindow) {
+    if (this._applet.panel && metaWindow && this._applet.listMonitorWindows) {
       windowAddArgs = windowAddArgs && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) > -1;
     }
     return windowAddArgs;

@@ -255,6 +255,7 @@ MyApplet.prototype = {
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
+      {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
     ];
 
     if (this.c32) {
