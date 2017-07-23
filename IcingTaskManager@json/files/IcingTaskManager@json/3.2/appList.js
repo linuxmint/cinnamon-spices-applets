@@ -251,10 +251,10 @@ AppList.prototype = {
         appGroup._appButton._onFocusChange();
       }
       each(appGroup.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
-          thumbnail.handleLeaveEvent();
-          thumbnail._focusWindowChange();
-          return false;
-        });
+        thumbnail.handleLeaveEvent();
+        thumbnail._focusWindowChange();
+        return false;
+      });
     });
   },
 
@@ -452,6 +452,7 @@ AppList.prototype = {
           return;
         }
         this.appList[refApp].destroy();
+        this.appList[refApp] = null;
         _.pullAt(this.appList, refApp);
       }, positionChange);
     }

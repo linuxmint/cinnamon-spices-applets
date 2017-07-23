@@ -403,16 +403,6 @@ AppButton.prototype = {
   },
 
   _setFavoriteAttributes: function () {
-    if (this._applet.panelLauncherClass) {
-      if (this._applet.orientation === St.Side.LEFT || this._applet.orientation === St.Side.RIGHT) {
-        this.actor.set_style_class_name('panel-launcher-vertical');
-      } else {
-        this.actor.set_style_class_name('panel-launcher');
-      }
-      if (this._label) {
-        this._label.set_text('');
-      }
-    }
     if (this.actor.has_style_pseudo_class('active') && this.metaWindows.length === 0) {
       this.actor.remove_style_pseudo_class('active');
     }
@@ -423,9 +413,6 @@ AppButton.prototype = {
     if (isFav) {
       this._setFavoriteAttributes();
     } else {
-      if (this._applet.panelLauncherClass) {
-        this.actor.set_style_class_name('window-list-item-box');
-      }
       if (this._applet.orientation === St.Side.TOP) {
         this.actor.add_style_class_name('window-list-item-box-top');
       } else if (this._applet.orientation === St.Side.BOTTOM) {

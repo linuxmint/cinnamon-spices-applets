@@ -221,7 +221,7 @@ MyApplet.prototype = {
       {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
       {key: 'show-alerts', value: 'showAlerts', cb: this._updateAttentionState},
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
-      {key: 'arrange-pinnedApps', value: 'arrangePinned', cb: null},
+      {key: 'enable-app-button-dragging', value: 'enableDragging', cb: null},
       {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
       {key: 'middle-click-action', value: 'middleClickAction', cb: null},
@@ -231,7 +231,6 @@ MyApplet.prototype = {
       {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList},
       {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList},
       {key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList},
-      {key: 'panelLauncherClass', value: 'panelLauncherClass', cb: this.refreshCurrentAppList},
       {key: 'enable-hover-peek', value: 'enablePeek', cb: null},
       {key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null},
       {key: 'hover-peek-opacity', value: 'peekOpacity', cb: null},
@@ -256,6 +255,7 @@ MyApplet.prototype = {
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
+      {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
     ];
 
     if (this.c32) {
@@ -552,7 +552,7 @@ MyApplet.prototype = {
 
   handleDragOver: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
-      || !this.arrangePinned) {
+      || !this.enableDragging) {
       return DND.DragMotionResult.NO_DROP;
     }
 
@@ -623,7 +623,7 @@ MyApplet.prototype = {
     if (!(source.isDraggableApp
       || (source instanceof DND.LauncherDraggable))
       || this.panelEditMode
-      || !this.arrangePinned) {
+      || !this.enableDragging) {
       return false;
     }
 

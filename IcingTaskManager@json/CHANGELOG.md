@@ -1,5 +1,18 @@
 Changelog
 
+### 5.2.0
+
+  * Made the new window listing by monitor behavior optional.
+  * Fixed the app hot key only launching new windows.
+  * Fixed titles not hiding when pinned apps are closed.
+  * Fixed issues with how the translation files are processed.
+  * Renamed the "Arrange pinned apps" option to "Enable app button dragging" for clarity.
+  * Removed the panel launcher class option as it was a bad workaround that caused bugs.
+
+### 5.1.1
+
+  * Fixed a bug that could freeze Cinnamon.
+
 ### 5.1.0
 
   * Multiple ITM instances now only display windows from the monitor the instance is displayed on, like the default Cinnamon window list.
