@@ -126,11 +126,15 @@ PinnedFavs.prototype = {
   },
 
   _addFavorite: function (opts={appId: null, app: null, pos: -1}) {
+    this._applet._appSystem = Cinnamon.AppSystem.get_default();
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_app(opts.appId);
     }
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_settings_app(opts.appId);
+    }
+    if (!opts.app) {
+      opts.app = this._applet._appSystem.lookup_desktop_wmclass(opts.appId);
     }
     if (!opts.app) {
       return false;

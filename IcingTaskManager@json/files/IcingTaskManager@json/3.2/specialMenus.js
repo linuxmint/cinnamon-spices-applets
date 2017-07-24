@@ -413,10 +413,21 @@ AppMenuButtonRightClickMenu.prototype = {
     }
   },
 
-  _createShortcut: function (actor, event) {
-    let proc = this.app.get_windows()[0].get_pid();
-    let cmd = 'bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ' + proc.toString() + '"';
-    Util.trySpawnCommandLine(cmd);
+  _createShortcut: function () {
+    let proc = this.metaWindow.get_pid();
+    let cmd = [
+      'bash',
+      '-c',
+      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.2/utils.py get_process ' + proc.toString()
+    ];
+    Util.spawn_async(cmd, (stdout) => {
+      if (stdout) {
+        setTimeout(() => {
+          this._applet.pinnedFavorites._addFavorite({appId: stdout.trim(), app: null, pos: -1});
+          this._applet.refreshCurrentAppList();
+        }, 2000);
+      }
+    });
   },
 
   _listDefaultPlaces: function (pattern) {
