@@ -216,11 +216,10 @@ AppList.prototype = {
   },
 
   _loadFavorites: function () {
-    if (!this.settings.getValue('show-pinned')) {
+    if (!this._applet.showPinned) {
       return;
     }
     let launchers = _.map(this._applet.pinnedFavorites._favorites, 'id');
-
     for (let i = 0, len = launchers.length; i < len; i++) {
       let app = this._applet._appSystem.lookup_app(launchers[i]);
       if (!app) {
@@ -295,7 +294,7 @@ AppList.prototype = {
       }
       each(appGroup.metaWindows, (win, z)=>{
         if (_.isEqual(win, metaWindow)) {
-          if (refApp === -1 || !this._applet.groupApps) { // Could determine if ungrouped windows should be grouped in a row or not
+          if (refApp === -1 || !this._applet.groupApps) {
             refApp = i;
           }
           refWindow = z;
@@ -319,7 +318,6 @@ AppList.prototype = {
 
     let initApp = (metaWindows, window, index)=>{
       let time = Date.now();
-
       let appGroup = new AppGroup({
         appList: this,
         app: app,
