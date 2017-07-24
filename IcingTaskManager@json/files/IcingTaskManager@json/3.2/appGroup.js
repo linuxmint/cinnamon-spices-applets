@@ -523,6 +523,11 @@ AppGroup.prototype = {
     this._appButton.destroy();
     this.appList.managerContainer.remove_child(this.actor);
     this.actor.destroy();
+
+    let propKeys = Object.keys(this);
+    for (var i = 0, len = propKeys.length; i < len; i++) {
+      this[propKeys[i]] = null;
+    }
   }
 };
 Signals.addSignalMethods(AppGroup.prototype);

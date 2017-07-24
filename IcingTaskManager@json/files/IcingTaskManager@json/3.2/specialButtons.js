@@ -46,7 +46,7 @@ AppButton.prototype = {
       y_fill: true,
       track_hover: true
     });
-    this.actor._delegate = this;
+    this.actor._delegate = null;
     if (this._applet.orientation === St.Side.TOP) {
       this.actor.add_style_class_name('top');
     } else if (this._applet.orientation === St.Side.BOTTOM) {
@@ -329,12 +329,12 @@ AppButton.prototype = {
     }
     let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
     if (this.metaWindows.length > 0 && (this._applet.activePseudoClass === 1 || (this._applet.focusPseudoClass === 1 && this._hasFocus()))) {
-      setTimeout(()=>this.actor.add_style_pseudo_class(hoverPseudoClass), 0);
+      this.actor.add_style_pseudo_class(hoverPseudoClass);
     } else if (this._applet.hoverPseudoClass > 1) {
       if (this._applet.hoverPseudoClass === this._applet.activePseudoClass && this.metaWindows.length > 0) {
         return;
       }
-      setTimeout(()=>this.actor.remove_style_pseudo_class(hoverPseudoClass), 0);
+      this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
   },
 
