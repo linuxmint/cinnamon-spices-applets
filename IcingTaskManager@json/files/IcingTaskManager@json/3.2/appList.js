@@ -42,7 +42,8 @@ AppList.prototype = {
     this.lastCycled = null;
 
     // Connect all the signals
-    this._setSignals();
+    this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
+    this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
     setTimeout(()=>this._refreshList(true), 0);
 
     this.signals.connect(this.actor, 'style-changed', Lang.bind(this, this._updateSpacing));
@@ -65,16 +66,16 @@ AppList.prototype = {
     // boxes butt up against the edge of the screen
 
     let containerChildren = this.managerContainer.get_children();
-
     let orientationKey = null;
+
     each(St.Side, (side, key)=>{
       if (orientation === St.Side[key]) {
         orientationKey = key.toLowerCase();
         return;
       }
     });
-    let isVertical = orientationKey === 'left' || orientationKey === 'right';
 
+    let isVertical = orientationKey === 'left' || orientationKey === 'right';
     if (isVertical) {
       this.manager.set_vertical(true);
       this.actor.add_style_class_name('vertical');
@@ -99,11 +100,6 @@ AppList.prototype = {
     if (this._applet.appletEnabled) {
       this._updateSpacing();
     }
-  },
-
-  _setSignals: function () {
-    this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
-    this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
   },
 
   _closeAllHoverMenus: function(cb) {
@@ -285,7 +281,8 @@ AppList.prototype = {
     if (!app
       || (!isFavoriteApp
         && metaWindow
-        && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) === -1)) {
+        && (this._applet.listMonitorWindows
+          && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) === -1))) {
       return;
     }
     let appId = app.get_id();
@@ -371,7 +368,6 @@ AppList.prototype = {
         initApp([metaWindow], metaWindow);
       }
     }
-
   },
 
   _appGroupNumber: function (parentApp) {
@@ -393,7 +389,6 @@ AppList.prototype = {
 
   _getNumberOfAppWindowsInWorkspace: function (app, workspace) {
     let windows = app.get_windows();
-
     let result = 0;
 
     for (let i = 0, len = windows.length; i < len; i++) {
