@@ -461,5 +461,9 @@ AppList.prototype = {
       this.rightClickMenu.destroy();
     }
     this.actor.destroy();
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   }
 };

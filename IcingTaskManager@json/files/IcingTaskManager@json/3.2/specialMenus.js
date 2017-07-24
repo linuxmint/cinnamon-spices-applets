@@ -452,6 +452,10 @@ AppMenuButtonRightClickMenu.prototype = {
   destroy: function() {
     this.signals.disconnectAllSignals();
     Applet.AppletPopupMenu.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   },
 };
 
@@ -577,6 +581,10 @@ AppThumbnailHoverMenu.prototype = {
     this.removeAll();
     this.appSwitcherItem.destroy();
     PopupMenu.PopupMenu.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   },
 
   setMetaWindow: function (metaWindow, metaWindows) {

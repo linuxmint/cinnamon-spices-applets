@@ -427,9 +427,6 @@ AppButton.prototype = {
 
   destroy: function () {
     this.signals.disconnectAllSignals();
-    try {
-      this._container.destroy_children();
-    } catch (e) {}
     this._container.destroy();
     this.actor.destroy();
     let props = Object.keys(this);

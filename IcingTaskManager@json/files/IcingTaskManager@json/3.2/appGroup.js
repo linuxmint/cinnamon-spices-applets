@@ -524,10 +524,10 @@ AppGroup.prototype = {
     this.appList.managerContainer.remove_child(this.actor);
     this.actor.destroy();
 
-    let propKeys = Object.keys(this);
-    for (var i = 0, len = propKeys.length; i < len; i++) {
-      this[propKeys[i]] = null;
-    }
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   }
 };
 Signals.addSignalMethods(AppGroup.prototype);
