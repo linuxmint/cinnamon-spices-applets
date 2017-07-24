@@ -16,12 +16,12 @@ msgstr ""
 #: 3.2/specialMenus.js:103
 #, fuzzy
 msgid "Move to the other monitor"
-msgstr "Преместване на монитор"
+msgstr "Преместване на другия монитор"
 
 #: 3.2/specialMenus.js:103
 #, fuzzy
 msgid "Move to monitor "
-msgstr "Преместване на монитор"
+msgstr "Преместване на монитор "
 
 #: 3.2/specialMenus.js:111
 msgid "Only on this workspace"
@@ -34,32 +34,32 @@ msgstr "Видимо на всички работни места"
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
 #, fuzzy
 msgid "Move to another workspace"
-msgstr "Преместване на лявото работно място"
+msgstr "Преместване на друго работно място"
 
 #: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
 msgid "Places"
-msgstr ""
+msgstr "Места"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
 #, fuzzy
 msgid "Recent"
-msgstr "проценти"
+msgstr "Скорошни"
 
 #: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
 msgid "Preferences"
-msgstr ""
+msgstr "Предпочитания"
 
 #: 3.2/specialMenus.js:228
 msgid "About..."
-msgstr ""
+msgstr "Относно"
 
 #: 3.2/specialMenus.js:233
 msgid "Configure..."
-msgstr ""
+msgstr "Настройване"
 
 #: 3.2/specialMenus.js:238
 msgid "Remove"
-msgstr ""
+msgstr "Премахване"
 
 #: 3.2/specialMenus.js:272
 msgid "Unpin from Panel"
@@ -83,7 +83,7 @@ msgstr "Създаване на пряк път"
 
 #: 3.2/specialMenus.js:300
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Възстановяване на непрозрачността"
 
 #: 3.2/specialMenus.js:308
 msgid "Restore"
@@ -103,7 +103,7 @@ msgstr "Уголемяване"
 
 #: 3.2/specialMenus.js:335
 msgid "Close others"
-msgstr ""
+msgstr "Затваряне на другите"
 
 #: 3.2/specialMenus.js:345
 #, fuzzy
@@ -131,7 +131,7 @@ msgstr "Замества псевдокласа за фокусиране на �
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "active"
-msgstr ""
+msgstr "активно"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -140,7 +140,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "outlined"
-msgstr ""
+msgstr "очертано"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -149,7 +149,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr ""
+msgstr "посочено"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -168,7 +168,7 @@ msgstr "Фокусирано"
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "selected"
-msgstr ""
+msgstr "избрано"
 
 #. 3.2->settings-schema.json->icon-spacing->description
 #. 3.0->settings-schema.json->icon-spacing->description
@@ -241,7 +241,7 @@ msgid ""
 "diplay app name, none: don't display anything"
 msgstr ""
 "Фокусирано: показва заглавието на фокусирания прозорец. Заглавие: показва "
-"заглавието на прозореца.Програма: показва името на програмата. Без: не "
+"заглавието на прозореца. Програма: показва името на програмата. Без: не "
 "показва нищо."
 
 #. 3.2->settings-schema.json->title-display->options
@@ -338,13 +338,13 @@ msgstr "Несимволични иконки"
 #. 3.2->settings-schema.json->system-favorites->description
 #, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Използвайте системата пояснения за затворените приложения"
+msgstr "Използване на любимите като закачени програми"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
 #, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
-msgstr "Регулира показването на закачените програми ако не са отворени."
+msgstr "Регулира дали любимите се показват като закачени програми."
 
 #. 3.2->settings-schema.json->hover-peek-opacity->description
 #. 3.0->settings-schema.json->hover-peek-opacity->description
@@ -369,12 +369,12 @@ msgstr "Показване на прозорците при посочване"
 #. 3.2->settings-schema.json->enable-hover-peek->tooltip
 #. 3.0->settings-schema.json->enable-hover-peek->tooltip
 msgid "Controls whether or not windows display when hovered over."
-msgstr "Регулира дали прозорците ще се покажат при посочване на миниатюрите."
+msgstr "Регулира дали прозорците ще се покажат при посочване."
 
 #. 3.2->settings-schema.json->activePseudoClass->description
 #. 3.0->settings-schema.json->activePseudoClass->description
 msgid "App button active pseudo class"
-msgstr "БПсевдоклас за активно копче на програма"
+msgstr "Псевдоклас за активно копче на програма"
 
 #. 3.2->settings-schema.json->activePseudoClass->tooltip
 #. 3.0->settings-schema.json->activePseudoClass->tooltip
@@ -385,11 +385,11 @@ msgstr "Замества псевдокласа за активни копчет
 #. 3.2->settings-schema.json->thumbnailsSection->title
 #, fuzzy
 msgid "Thumbnails"
-msgstr "Размер на миниатюрите"
+msgstr "Миниатюри"
 
 #. 3.2->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "Копчета на програми"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
 #, fuzzy
@@ -398,34 +398,34 @@ msgstr "Посочване за надничане към прозорец"
 
 #. 3.2->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "Лента"
 
 #. 3.2->settings-schema.json->iconSection->title
 #, fuzzy
 msgid "Icons"
-msgstr "Размер на иконките"
+msgstr "Иконки"
 
 #. 3.2->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "Препоръчани настройки"
 
 #. 3.2->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "Клавишни комбинации"
 
 #. 3.2->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "Стил"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
 #, fuzzy
 msgid "Context Menu"
-msgstr "Настройки на контекстното меню"
+msgstr "Контекстно меню"
 
 #. 3.2->settings-schema.json->themePage->title
 #, fuzzy
 msgid "Theming"
-msgstr "Настройки тема"
+msgstr "Тема"
 
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 3.0->settings-schema.json->animate-thumbnails->description
@@ -440,7 +440,7 @@ msgstr "Ако е включено, миниатюрите ще са аними�
 #. 3.2->settings-schema.json->mintYPreset->description
 #. 3.2->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Минт Y и вариантите"
 
 #. 3.2->settings-schema.json->autostart-menu-item->description
 #. 3.0->settings-schema.json->autostart-menu-item->description
@@ -462,21 +462,21 @@ msgstr "Показване на закачените програми"
 msgid ""
 "Controls whether or not the pinned apps appear in the panel if they are not "
 "open."
-msgstr "Регулира показването на закачените програми ако не са отворени."
+msgstr "Регулира показването на закачените програми, ако не са отворени."
 
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Позволяване на провлачването на копчета"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "Ширина на копчето"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
 #, fuzzy
 msgid "Controls the width of the application button."
-msgstr "Регулира размера на миниатюрите."
+msgstr "Регулира ширината на копчето на програма."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 3.0->settings-schema.json->show-recent->description
@@ -564,13 +564,13 @@ msgstr ""
 
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "Да се показват само прозорци от текущо показващия монитор"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
-msgstr ""
+msgstr "Опцията се задейства само за монитори, показващи екземпляр на ITM"
 
 #. 3.2->settings-schema.json->number-display->description
 #. 3.0->settings-schema.json->number-display->description
@@ -585,7 +585,7 @@ msgid ""
 "too"
 msgstr ""
 "Обикновено: показване на брой. Умно: показване на брой при повече от един "
-"прозорец.Без: не се показва брой. Всички: показване на брой и за любимите."
+"прозорец. Без: не се показва брой. Всички: показване на брой и за любимите."
 
 #. 3.2->settings-schema.json->number-display->options
 #. 3.0->settings-schema.json->number-display->options
@@ -625,8 +625,8 @@ msgid ""
 "Controls how much horizontal padding is inside the app buttons. Padding is "
 "only applied to instances of this applet on horizontal panels."
 msgstr ""
-"Регулира колко водоравно вътрешно отстояние има в копчетата.Отстоянието се "
-"прилага само на водоравни ленти в този аплет."
+"Регулира колко водоравно вътрешно отстояние има в копчетата. Отстоянието се "
+"прилага само на водоравни ленти."
 
 #. 3.2->settings-schema.json->middle-click-action->description
 #. 3.0->settings-schema.json->middle-click-action->description
@@ -657,7 +657,7 @@ msgid ""
 "last pages you visited, Bookmarks: show your favorite bookmarks."
 msgstr ""
 "Най-посещавани: показва най-посещаваните места. Скорошна история: "
-"показвапоследно посетените страници. Отметки: показва любимите ви отметки."
+"показва последно посетените страници. Отметки: показва любимите ви отметки."
 
 #. 3.2->settings-schema.json->firefox-menu->options
 #. 3.0->settings-schema.json->firefox-menu->options
@@ -692,7 +692,7 @@ msgstr "Показване на показателя за активна про�
 #. 3.2->settings-schema.json->show-active->tooltip
 #. 3.0->settings-schema.json->show-active->tooltip
 msgid "Active app styling will indicate if an app is active."
-msgstr "Показателя указва дали дадена програма е активна."
+msgstr "Показателят указва дали дадена програма е активна."
 
 #. 3.2->settings-schema.json->show-apps-order-timeout->description
 #. 3.0->settings-schema.json->show-apps-order-timeout->description
@@ -705,8 +705,8 @@ msgid ""
 "Determines the duration the window count labels are replaced with the app's "
 "order number."
 msgstr ""
-"Определя продължителността етикетите на прозорец броене се заменят с пореден "
-"номер на приложението."
+"Определя продължителността, след която броячите се заменят с пореден "
+"номер на програмата."
 
 #. 3.2->settings-schema.json->include-all-windows->description
 #. 3.0->settings-schema.json->include-all-windows->description
@@ -719,7 +719,7 @@ msgid ""
 "Controls whether or not thumbnails for smalller child windows, such as exit "
 "confirmations and file dialogues will be included in the thumbnail list."
 msgstr ""
-"Регулира дали в списъка ще се показват миниатюри за по-малки прозорци,като "
+"Регулира дали в списъка ще се показват миниатюри за по-малки прозорци, като "
 "потвърждения и диалози."
 
 #. 3.2->settings-schema.json->monitor-move-all-windows->description
@@ -735,7 +735,7 @@ msgid ""
 msgstr ""
 "Когато щракнете върху \"Преместване на монитор\" в контекстното меню, тази "
 "опция ще премести всички прозорци на дадена програма, а не само "
-"последната фокусирания."
+"последно фокусирания."
 
 #. 3.2->settings-schema.json->sort-thumbnails->description
 #. 3.0->settings-schema.json->sort-thumbnails->description
@@ -748,7 +748,7 @@ msgid ""
 "Controls whether the order windows appear for an app is by last focused, or "
 "the order they were opened."
 msgstr ""
-"Регулира дали реда на прозорците за дадена програма: eпоследно фокусиране "
+"Регулира дали реда на прозорците за дадена програма e последно фокусиране "
 "или ред на отваряне."
 
 #. 3.0->settings-schema.json->useSystemTooltips->description
@@ -816,7 +816,7 @@ msgstr "Подреждане на закачените програми по д�
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr "Диспечер на задачите"
+msgstr "Диспечер на задачите с глазура"
 
 #. IcingTaskManager@json->metadata.json->description
 #, fuzzy
@@ -826,7 +826,7 @@ msgstr "Списък с прозорци с групиране и миниатю
 #~ msgid "number"
 #~ msgstr "число"
 
-#~ msgid "Move to right workspace"GF
+#~ msgid "Move to right workspace"
 #~ msgstr "Преместване на дясното работно място"
 
 #~ msgid "Settings"
