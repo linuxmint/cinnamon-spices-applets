@@ -46,8 +46,7 @@ msgstr "Valg af farveformat:"
 msgid ""
 "A combo selection can select between int, boolean, float, and string values"
 msgstr ""
-"En kombinationsmarkering kan vælge mellem heltal, boolesk, flydende og "
-"tekststrengværdier"
+"En kombinationsboks kan indeholde heltal, booleske, flydende og tekststrengværdier"
 
 #. color-picker@fmete->settings-schema.json->combo-selection->options
 msgid "00,00,00"
