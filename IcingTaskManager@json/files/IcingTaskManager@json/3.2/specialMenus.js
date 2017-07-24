@@ -914,12 +914,13 @@ WindowThumbnail.prototype = {
       this.button.style_class = 'window-close';
       this.button.width = 16;
       this.button.height = 16;
-      this.button.style = 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 16px 16px;';
+      let left = global.ui_scale > 1 ? -10 : 0;
+      this.button.style = 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: 16px 16px;';
     } else {
       this.button.style_class = 'thumbnail-close';
     }
 
-    this.button.hide();
+    this.button.set_opacity(0)
     this.bin.add_actor(this._container);
     this.bin.add_actor(this.button);
     this.actor.add_actor(this.bin);
@@ -942,7 +943,7 @@ WindowThumbnail.prototype = {
       this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true);
       this.actor.add_style_pseudo_class('outlined');
       this.actor.add_style_pseudo_class('selected');
-      this.button.show();
+      this.button.set_opacity(255);
       if (this.metaWindow.minimized && this._applet.enablePeek  && this.appSwitcherItem.hoverMenu.appGroup.appName !== 'Steam') {
         this.metaWindow.unminimize();
         if (this.metaWindow.is_fullscreen()) {
@@ -961,7 +962,7 @@ WindowThumbnail.prototype = {
       this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
       this.actor.remove_style_pseudo_class('outlined');
       this._focusWindowChange();
-      this.button.hide();
+      this.button.set_opacity(0);
       if (this.wasMinimized) {
         this.metaWindow.minimize();
       }
@@ -1194,17 +1195,8 @@ WindowThumbnail.prototype = {
     if (refThumb !== -1) {
       _.pullAt(this.appSwitcherItem.appThumbnails, refThumb);
     }
-    try {
-      this._container.destroy_children();
-    } catch (e) {}
     this._container.destroy();
-    try {
-      this.bin.destroy_children();
-    } catch (e) {}
     this.bin.destroy();
-    try {
-      this.actor.destroy_children();
-    } catch (e) {}
     this.actor.destroy();
   }
 };
