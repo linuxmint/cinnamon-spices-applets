@@ -340,10 +340,6 @@ AppList.prototype = {
       } else {
         appGroup._windowAdded(window);
       }
-
-      if (this.settings.getValue('title-display') === constants.TitleDisplay.Focused) {
-        appGroup._appButton.hideLabel(false);
-      }
     };
 
     if (refApp === -1) {
