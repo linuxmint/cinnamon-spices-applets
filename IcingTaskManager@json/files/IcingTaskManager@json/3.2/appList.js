@@ -9,7 +9,7 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const AppGroup = AppletDir.appGroup.AppGroup;
 const each = AppletDir.each.each;
-const constants = AppletDir.constants.constants;
+//const constants = AppletDir.constants.constants;
 const setTimeout = AppletDir.timers.setTimeout;
 
 // List of running apps

@@ -32,7 +32,6 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
 const AppList = AppletDir.appList.AppList;
-const setTimeout = AppletDir.timers.setTimeout;
 
 // Some functional programming tools
 const range = function (a, b) {
@@ -478,7 +477,7 @@ MyApplet.prototype = {
     let startupClass = (wmclass)=> {
       let app_final = null;
       for (let i = 0, len = specialApps.length; i < len; i++) {
-        if (specialApps[i].wmClass == wmclass) {
+        if (specialApps[i].wmClass === wmclass) {
           app_final = this._appSystem.lookup_app(specialApps[i].id);
           if (!app_final) {
             app_final = this._appSystem.lookup_settings_app(specialApps[i].id);
@@ -609,7 +608,7 @@ MyApplet.prototype = {
     return DND.DragMotionResult.MOVE_DROP;
   },
 
-  acceptDrop: function (source, actor, x, y) {
+  acceptDrop: function (source, actor, x) {
     if (!(source.isDraggableApp
       || (source instanceof DND.LauncherDraggable))
       || this.panelEditMode
@@ -691,7 +690,7 @@ MyApplet.prototype = {
     // We'd like to know what workspaces in this.metaWorkspaces have been destroyed and
     // so are no longer in the workspaces list.  For each of those, we should destroy them
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      if (workspaces.indexOf(this.metaWorkspaces[i].ws) == -1) {
+      if (workspaces.indexOf(this.metaWorkspaces[i].ws) === -1) {
         this.metaWorkspaces[i].appList.destroy();
         _.pullAt(this.metaWorkspaces, i);
       }
