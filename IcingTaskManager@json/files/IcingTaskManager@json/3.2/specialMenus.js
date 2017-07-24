@@ -35,7 +35,8 @@ AppMenuButtonRightClickMenu.prototype = {
 
     this._parent = params.parent;
     this._applet = this._parent._applet;
-    this.connect('open-state-changed', Lang.bind(this, this._onToggled));
+    this.signals = new SignalManager.SignalManager(this);
+    this.signals.connect(this, 'open-state-changed', Lang.bind(this, this._onToggled));
 
     this.app = this._parent.app;
     this.appId = this._parent.appId;
@@ -55,17 +56,39 @@ AppMenuButtonRightClickMenu.prototype = {
     this.metaWindows = metaWindows;
   },
 
+  monitorMoveWindows: function(arg1, arg2, arg3, i) {
+    if (this._applet.monitorMoveAllWindows) {
+      for (let z = 0, len = this.metaWindows.length; z < len; z++) {
+        if (!this.metaWindows[z]) {
+          continue;
+        }
+        let focused = 0;
+        if (this.metaWindows[z].has_focus()) {
+          ++focused;
+        }
+        if (z === len - 1 && focused === 0) {
+          Main.activateWindow(this.metaWindows[z], global.get_current_time());
+        }
+        this.metaWindows[z].move_to_monitor(i);
+      }
+    } else {
+      this.metaWindow.move_to_monitor(i);
+      Main.activateWindow(this.metaWindow, global.get_current_time());
+    }
+  },
+
   _populateMenu: function() {
+    this.signals.disconnectAllSignals();
+    this.signals.connect(this, 'open-state-changed', Lang.bind(this, this._onToggled));
     if (!this.metaWindow) {
       this.metaWindow = this._parent._getLastFocusedWindow();
     }
 
-    let mw = this.metaWindow;
     let item;
     let length;
     let hasWindows = this.metaWindows.length > 0;
 
-    let createMenuItem = (opts={label: '', icon: null})=>{
+    let createMenuItem = (opts={label: '', icon: null}) => {
       if (this._applet.menuItemType < 3 && opts.icon) {
         let refMenuType = _.find(constants.menuItemTypeOptions, {id: this._applet.menuItemType});
         return new PopupMenu.PopupIconMenuItem(opts.label, opts.icon, St.IconType[refMenuType.label]);
@@ -77,56 +100,34 @@ AppMenuButtonRightClickMenu.prototype = {
     if (hasWindows) {
       // Monitors
       if (Main.layoutManager.monitors.length > 1) {
-        let connectMonitorEvent = (item, mw, i)=>{
-          item.connect('activate', ()=>{
-            if (this._applet.monitorMoveAllWindows) {
-              for (let z = 0, len = this.metaWindows.length; z < len; z++) {
-                let focused = 0;
-                this.metaWindows[z].move_to_monitor(i);
-                if (this.metaWindows[z].has_focus()) {
-                  ++focused;
-                }
-                if (z === len - 1 && focused === 0) {
-                  this.app.activate(this.metaWindows[z], global.get_current_time());
-                }
-              }
-            } else {
-              mw.move_to_monitor(i);
-              this.app.activate(mw, global.get_current_time());
-            }
-          });
+        let connectMonitorEvent = (item, i) => {
+          this.signals.connect(item, 'activate', Lang.bind(this, this.monitorMoveWindows, i));
         };
         for (let i = 0, len = Main.layoutManager.monitors.length; i < len; i++) {
-          if (i === mw.get_monitor()) {
+          if (i === this.metaWindow.get_monitor()) {
             continue;
           }
           item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? t('Move to the other monitor') : t('Move to monitor ') + (i + 1).toString()});
-          connectMonitorEvent(item, mw, i);
+          connectMonitorEvent(item, i);
           this.addMenuItem(item);
         }
       }
       // Workspace
       if ((length = global.screen.n_workspaces) > 1) {
-        if (mw.is_on_all_workspaces()) {
+        if (this.metaWindow.is_on_all_workspaces()) {
           item = createMenuItem({label: t('Only on this workspace')});
-          item.connect('activate', function() {
-            mw.unstick();
-          });
+          this.signals.connect(item, 'activate', () => this.metaWindow.unstick());
           this.addMenuItem(item);
         } else {
           item = createMenuItem({label: t('Visible on all workspaces')});
-          item.connect('activate', function() {
-            mw.stick();
-          });
+          this.signals.connect(item, 'activate', () => this.metaWindow.stick());
           this.addMenuItem(item);
 
           item = new PopupMenu.PopupSubMenuMenuItem(t('Move to another workspace'));
           this.addMenuItem(item);
 
           let connectWorkspaceEvent = (ws, j)=>{
-            ws.connect('activate', function() {
-              mw.change_workspace(global.screen.get_workspace_by_index(j));
-            });
+            this.signals.connect(ws, 'activate', () => this.metaWindow.change_workspace(global.screen.get_workspace_by_index(j)));
           };
           for (let i = 0; i < length; i++) {
             // Make the index a local letiable to pass to function
@@ -141,10 +142,8 @@ AppMenuButtonRightClickMenu.prototype = {
             connectWorkspaceEvent(ws, j);
             item.menu.addMenuItem(ws);
           }
-
         }
       }
-
       this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
 
@@ -160,7 +159,9 @@ AppMenuButtonRightClickMenu.prototype = {
         let bookmarks = this._listBookmarks();
         let devices = this._listDevices();
         let places = defualtPlaces.concat(bookmarks).concat(devices);
-        let handlePlaceLaunch = (item, i)=>item.connect('activate', ()=>places[i].launch());
+        let handlePlaceLaunch = (item, i) => {
+          this.signals.connect(item, 'activate', () => places[i].launch());
+        };
         for (let i = 0, len = places.length; i < len; i++) {
           item = createMenuItem({label: t(places[i].name), icon: 'folder'});
           handlePlaceLaunch(item, i);
@@ -178,7 +179,9 @@ AppMenuButtonRightClickMenu.prototype = {
         let histories = getFirefoxHistory(this._applet);
         if (histories) {
           try {
-            let handleHistoryLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
+            let handleHistoryLaunch = (item, i) => {
+              this.signals.connect(item, 'activate', () => Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
+            };
             for (let i = 0, len = histories.length; i < len; i++) {
               item = createMenuItem({label: t(histories[i].title), icon: 'go-next'});
               handleHistoryLaunch(item, i);
@@ -210,7 +213,9 @@ AppMenuButtonRightClickMenu.prototype = {
         if (itemsLength > num) {
           itemsLength = num;
         }
-        let handleRecentLaunch = (item, i)=>item.connect('activate', ()=>Gio.app_info_launch_default_for_uri(items[i].get_uri(), global.create_app_launch_context()));
+        let handleRecentLaunch = (item, i) => {
+          this.signals.connect(item, 'activate', () => Gio.app_info_launch_default_for_uri(items[i].get_uri(), global.create_app_launch_context()));
+        };
         for (let i = 0; i < itemsLength; i++) {
           item = createMenuItem({label: t(items[i].get_short_name()), icon: 'list-add'});
           handleRecentLaunch(item, i);
@@ -226,19 +231,17 @@ AppMenuButtonRightClickMenu.prototype = {
     this.addMenuItem(subMenu);
 
     item = createMenuItem({label: t('About...'), icon: 'dialog-question'});
-    item.connect('activate', Lang.bind(this._applet, this._applet.openAbout));
+    this.signals.connect(item, 'activate', Lang.bind(this._applet, this._applet.openAbout));
     subMenu.menu.addMenuItem(item);
 
-    if (this._applet.configureApplet) { // Cinnamon 3.0.7 check
-      item = createMenuItem({label: t('Configure...'), icon: 'system-run'});
-      item.connect('activate', Lang.bind(this._applet, this._applet.configureApplet));
-      subMenu.menu.addMenuItem(item);
-    }
+    item = createMenuItem({label: t('Configure...'), icon: 'system-run'});
+    this.signals.connect(item, 'activate', Lang.bind(this._applet, this._applet.configureApplet));
+    subMenu.menu.addMenuItem(item);
 
     item = createMenuItem({label: t('Remove') + ' \'Icing Task Manager\'', icon: 'edit-delete'});
-    item.connect('activate', Lang.bind(this, function() {
+    this.signals.connect(item, 'activate', () => {
       AppletManager._removeAppletFromPanel(this._applet._uuid, this._applet.instance_id);
-    }));
+    });
     subMenu.menu.addMenuItem(item);
 
     // Actions
@@ -249,7 +252,9 @@ AppMenuButtonRightClickMenu.prototype = {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         let handleAction = (action)=>{
           item = createMenuItem({label: t(this.appInfo.get_action_name(action)), icon: 'document-new'});
-          item.connect('activate', ()=>this.appInfo.launch_action(action, global.create_app_launch_context()));
+          this.signals.connect(item, 'activate', () => {
+            this.appInfo.launch_action(action, global.create_app_launch_context());
+          });
           this.recentMenuItems.push(item);
         };
 
@@ -268,27 +273,20 @@ AppMenuButtonRightClickMenu.prototype = {
     // Pin/unpin, shortcut handling
     if (!this.app.is_window_backed()) {
       if (this._applet.showPinned !== constants.FavType.none && !this.app.is_window_backed()) {
-        if (this._parent.isFavoriteApp) {
-          this.pinToggleItem = createMenuItem({label: t('Unpin from Panel'), icon: 'list-remove'});
-        } else {
-          this.pinToggleItem = createMenuItem({label: t('Pin to Panel'), icon: 'bookmark-new'});
-        }
-        this.pinToggleItem.connect('activate', Lang.bind(this, this._toggleFav));
+        let label = this._parent.isFavoriteApp ? t('Unpin from Panel') : t('Pin to Panel');
+        this.pinToggleItem = createMenuItem({label: label, icon: 'bookmark-new'});
+        this.signals.connect(this.pinToggleItem, 'activate', Lang.bind(this, this._toggleFav));
         this.addMenuItem(this.pinToggleItem);
       }
       if (this._applet.autoStart) {
-        if (this.autostartIndex !== -1) {
-          item = createMenuItem({label: t('Remove from Autostart'), icon: 'process-stop'});
-          item.connect('activate', Lang.bind(this, this._toggleAutostart));
-        } else {
-          item = createMenuItem({label: t('Add to Autostart'), icon: 'insert-object'});
-          item.connect('activate', Lang.bind(this, this._toggleAutostart));
-        }
+        let label = this.autostartIndex !== -1 ? t('Remove from Autostart') : t('Add to Autostart');
+        item = createMenuItem({label: label, icon: 'insert-object'});
+        this.signals.connect(item, 'activate', Lang.bind(this, this._toggleAutostart));
         this.addMenuItem(item);
       }
     } else {
       item = createMenuItem({label: t('Create Shortcut'), icon: 'list-add'});
-      item.connect('activate', Lang.bind(this, this._createShortcut));
+      this.signals.connect(item, 'activate', Lang.bind(this, this._createShortcut));
       this.addMenuItem(item);
     }
     this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -296,36 +294,36 @@ AppMenuButtonRightClickMenu.prototype = {
     // Window controls
     if (hasWindows) {
       // Miscellaneous
-      if (mw.get_compositor_private().opacity !== 255) {
+      if (this.metaWindow.get_compositor_private().opacity !== 255) {
         item = createMenuItem({label: t('Restore to full opacity')});
-        item.connect('activate', function() {
-          mw.get_compositor_private().set_opacity(255);
+        this.signals.connect(item, 'activate', () => {
+          this.metaWindow.get_compositor_private().set_opacity(255);
         });
         this.addMenuItem(item);
       }
 
-      if (mw.minimized) {
+      if (this.metaWindow.minimized) {
         item = createMenuItem({label: t('Restore'), icon: 'view-sort-descending'});
-        item.connect('activate', function() {
-          Main.activateWindow(mw, global.get_current_time());
+        this.signals.connect(item, 'activate', () => {
+          Main.activateWindow(this.metaWindow, global.get_current_time());
         });
       } else {
         item = createMenuItem({label: t('Minimize'), icon: 'view-sort-ascending'});
-        item.connect('activate', function() {
-          mw.minimize();
+        this.signals.connect(item, 'activate', () => {
+          this.metaWindow.minimize();
         });
       }
       this.addMenuItem(item);
 
-      if (mw.get_maximized()) {
+      if (this.metaWindow.get_maximized()) {
         item = createMenuItem({label: t('Unmaximize'), icon: 'view-restore'});
-        item.connect('activate', function() {
-          mw.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+        this.signals.connect(item, 'activate', () => {
+          this.metaWindow.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
         });
       } else {
         item = createMenuItem({label: t('Maximize'), icon: 'view-fullscreen'});
-        item.connect('activate', function() {
-          mw.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
+        this.signals.connect(item, 'activate', () => {
+          this.metaWindow.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
         });
       }
       this.addMenuItem(item);
@@ -333,32 +331,28 @@ AppMenuButtonRightClickMenu.prototype = {
       if (this.metaWindows.length > 1) {
         // Close others
         item = createMenuItem({label: t('Close others'), icon: 'window-close'});
-        item.connect('activate', Lang.bind(this, function() {
-          each(this.metaWindows, (metaWindow)=>{
-            if (!_.isEqual(metaWindow, mw) && !metaWindow._needsAttention) {
+        this.signals.connect(item, 'activate', () => {
+          each(this.metaWindows, (metaWindow) => {
+            if (!_.isEqual(metaWindow, this.metaWindow) && !metaWindow._needsAttention) {
               metaWindow.delete(global.get_current_time());
             }
           });
-        }));
+        });
         this.addMenuItem(item);
         // Close all
         item = createMenuItem({label: t('Close all'), icon: 'application-exit'});
-        item.connect('activate', Lang.bind(this, function() {
+        this.signals.connect(item, 'activate', () => {
           if (!this._parent.isFavoriteApp) {
             this._parent.willUnmount = true;
           }
-          each(this.metaWindows, (metaWindow)=>{
-            if (!metaWindow._needsAttention) {
-              metaWindow.delete(global.get_current_time());
-            }
-          });
-        }));
+          this._parent.app.request_quit();
+        });
         this.addMenuItem(item);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       } else {
         item = createMenuItem({label: t('Close'), icon: 'edit-delete'});
-        item.connect('activate', function() {
-          mw.delete(global.get_current_time());
+        this.signals.connect(item, 'activate', () => {
+          this.metaWindow.delete(global.get_current_time());
         });
         this.addMenuItem(item);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -367,11 +361,7 @@ AppMenuButtonRightClickMenu.prototype = {
   },
 
   _onToggled: function(actor, isOpening) {
-    if (this.isOpen) {
-      this._applet._menuOpen = true;
-    } else {
-      this._applet._menuOpen = false;
-    }
+    this._applet._menuOpen = this.isOpen;
 
     if (!isOpening) {
       return;
@@ -395,11 +385,9 @@ AppMenuButtonRightClickMenu.prototype = {
     }
   },
 
-  _toggleFav: function (actor, event) {
+  _toggleFav: function () {
     if (this._parent.isFavoriteApp) {
       this.pinnedFavorites.removeFavorite(this.appId);
-      //this.pinToggleItem.label.set_text('Pin to Panel');
-      //this.pinToggleItem._icon.set_icon_name('bookmark-new');
     } else {
       if (!this.app.is_window_backed()) {
         this.pinnedFavorites._addFavorite({
@@ -407,23 +395,32 @@ AppMenuButtonRightClickMenu.prototype = {
           app: this.app,
           pos: -1
         });
-        //this.pinToggleItem.label.set_text('Unpin from Panel');
-        //this.pinToggleItem._icon.set_icon_name('list-remove');
       }
     }
   },
 
-  _createShortcut: function (actor, event) {
-    let proc = this.app.get_windows()[0].get_pid();
-    let cmd = 'bash -c "python ~/.local/share/cinnamon/applets/IcingTaskManager@json/utils.py get_process ' + proc.toString() + '"';
-    Util.trySpawnCommandLine(cmd);
+  _createShortcut: function () {
+    let proc = this.metaWindow.get_pid();
+    let cmd = [
+      'bash',
+      '-c',
+      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.2/utils.py get_process ' + proc.toString()
+    ];
+    Util.spawn_async(cmd, (stdout) => {
+      if (stdout) {
+        setTimeout(() => {
+          this._applet.pinnedFavorites._addFavorite({appId: stdout.trim(), app: null, pos: -1});
+          this._applet.refreshCurrentAppList();
+        }, 2000);
+      }
+    });
   },
 
   _listDefaultPlaces: function (pattern) {
     let defaultPlaces = Main.placesManager.getDefaultPlaces();
     let res = [];
     for (let i = 0, len = defaultPlaces.length; i < len; i++) {
-      if (!pattern || defaultPlaces[i].name.toLowerCase().indexOf(pattern) != -1) {
+      if (!pattern || defaultPlaces[i].name.toLowerCase().indexOf(pattern) !== -1) {
         res.push(defaultPlaces[i]);
       }
     }
@@ -451,6 +448,15 @@ AppMenuButtonRightClickMenu.prototype = {
     }
     return res;
   },
+
+  destroy: function() {
+    this.signals.disconnectAllSignals();
+    Applet.AppletPopupMenu.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
+  },
 };
 
 function HoverMenuController (owner) {
@@ -476,11 +482,7 @@ AppThumbnailHoverMenu.prototype = {
     this.appGroup = parent;
     this._applet = parent._applet;
     this.signals = new SignalManager.SignalManager(this);
-    if (parent._applet.c32) {
-      PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
-    } else {
-      PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, 0.5, parent.orientation);
-    }
+    PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
 
     this.parentActor = parent.actor;
     this.metaWindow = parent.metaWindow;
@@ -558,8 +560,8 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text(this.appGroup.appName);
       this._tooltip.show();
-    } else {
-      setTimeout(()=>this.appSwitcherItem._refresh(), 0);
+    } else if (!this.isOpen) {
+      this.appSwitcherItem._refresh();
       PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
     }
   },
@@ -568,7 +570,8 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text('');
       this._tooltip.hide();
-    } else {
+    }
+    if (this.isOpen) {
       PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
     }
   },
@@ -578,6 +581,10 @@ AppThumbnailHoverMenu.prototype = {
     this.removeAll();
     this.appSwitcherItem.destroy();
     PopupMenu.PopupMenu.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   },
 
   setMetaWindow: function (metaWindow, metaWindows) {
@@ -876,7 +883,7 @@ WindowThumbnail.prototype = {
       vertical: true,
       can_focus: true
     });
-    this.actor._delegate = this;
+    this.actor._delegate = null;
     // Override with own theme.
     this.actor.add_style_class_name('thumbnail-box');
     this.thumbnailActor = new St.Bin({
@@ -907,12 +914,13 @@ WindowThumbnail.prototype = {
       this.button.style_class = 'window-close';
       this.button.width = 16;
       this.button.height = 16;
-      this.button.style = 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; background-position: 0px -2px; background-size: 16px 16px;';
+      let left = global.ui_scale > 1 ? -10 : 0;
+      this.button.style = 'padding: 0px; width: 8px; height: 8px; max-width: 8px; max-height: 8px; -cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: 16px 16px;';
     } else {
       this.button.style_class = 'thumbnail-close';
     }
 
-    this.button.hide();
+    this.button.set_opacity(0)
     this.bin.add_actor(this._container);
     this.bin.add_actor(this.button);
     this.actor.add_actor(this.bin);
@@ -935,7 +943,7 @@ WindowThumbnail.prototype = {
       this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true);
       this.actor.add_style_pseudo_class('outlined');
       this.actor.add_style_pseudo_class('selected');
-      this.button.show();
+      this.button.set_opacity(255);
       if (this.metaWindow.minimized && this._applet.enablePeek  && this.appSwitcherItem.hoverMenu.appGroup.appName !== 'Steam') {
         this.metaWindow.unminimize();
         if (this.metaWindow.is_fullscreen()) {
@@ -954,7 +962,7 @@ WindowThumbnail.prototype = {
       this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
       this.actor.remove_style_pseudo_class('outlined');
       this._focusWindowChange();
-      this.button.hide();
+      this.button.set_opacity(0);
       if (this.wasMinimized) {
         this.metaWindow.minimize();
       }
@@ -1064,7 +1072,7 @@ WindowThumbnail.prototype = {
     this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
 
     this.metaWindow.delete(global.get_current_time());
-    if (this.metaWindows.length === 1) {
+    if (this.metaWindows.length <= 1) {
       this.appSwitcherItem.hoverMenu.close();
     }
   },
@@ -1077,7 +1085,8 @@ WindowThumbnail.prototype = {
   },
 
   _connectToWindow: function (actor, event) {
-    if (this.metaWindows.length === 0) {
+    if (!this.metaWindow || this.metaWindows.length === 0) {
+      this.appSwitcherItem.hoverMenu.close();
       return false;
     }
     this.wasMinimized = false;
@@ -1186,17 +1195,8 @@ WindowThumbnail.prototype = {
     if (refThumb !== -1) {
       _.pullAt(this.appSwitcherItem.appThumbnails, refThumb);
     }
-    try {
-      this._container.destroy_children();
-    } catch (e) {}
     this._container.destroy();
-    try {
-      this.bin.destroy_children();
-    } catch (e) {}
     this.bin.destroy();
-    try {
-      this.actor.destroy_children();
-    } catch (e) {}
     this.actor.destroy();
   }
 };

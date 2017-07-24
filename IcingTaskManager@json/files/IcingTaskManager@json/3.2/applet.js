@@ -32,7 +32,6 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
 const AppList = AppletDir.appList.AppList;
-const setTimeout = AppletDir.timers.setTimeout;
 
 // Some functional programming tools
 const range = function (a, b) {
@@ -126,11 +125,15 @@ PinnedFavs.prototype = {
   },
 
   _addFavorite: function (opts={appId: null, app: null, pos: -1}) {
+    this._applet._appSystem = Cinnamon.AppSystem.get_default();
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_app(opts.appId);
     }
     if (!opts.app) {
       opts.app = this._applet._appSystem.lookup_settings_app(opts.appId);
+    }
+    if (!opts.app) {
+      opts.app = this._applet._appSystem.lookup_desktop_wmclass(opts.appId);
     }
     if (!opts.app) {
       return false;
@@ -200,18 +203,12 @@ MyApplet.prototype = {
     this._animatingPlaceholdersCount = 0;
     this.homeDir = GLib.get_home_dir();
     this.appletEnabled = false;
-    this.c32 = true;
     this.actor.set_track_hover(false);
     this._box = new St.Bin();
     this.actor.add(this._box);
 
     // Declare vertical panel compatibility
-    try {
-      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-    } catch (e) {
-      this.c32 = null;
-      // We are on Cinnamon < 3.2
-    }
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     this.execInstallLanguage();
     Gettext.bindtextdomain(this._uuid, GLib.get_home_dir() + '/.local/share/locale');
@@ -228,9 +225,9 @@ MyApplet.prototype = {
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey},
-      {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList},
-      {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList},
-      {key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList},
+      {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: null},
+      {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: null},
+      {key: 'activePseudoClass', value: 'activePseudoClass', cb: null},
       {key: 'enable-hover-peek', value: 'enablePeek', cb: null},
       {key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null},
       {key: 'hover-peek-opacity', value: 'peekOpacity', cb: null},
@@ -248,25 +245,18 @@ MyApplet.prototype = {
       {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacingOnAllAppLists},
       {key: 'enable-iconSize', value: 'enableIconSize', cb: this._updateIconSizes},
       {key: 'icon-size', value: 'iconSize', cb: this._updateIconSizes},
-      {key: 'show-recent', value: 'showRecent', cb: this.refreshCurrentAppList},
-      {key: 'menuItemType', value: 'menuItemType', cb: this.refreshCurrentAppList},
-      {key: 'firefox-menu', value: 'firefoxMenu', cb: this.refreshCurrentAppList},
-      {key: 'autostart-menu-item', value: 'autoStart', cb: this.refreshCurrentAppList},
-      {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: this.refreshCurrentAppList},
+      {key: 'show-recent', value: 'showRecent', cb: null},
+      {key: 'menuItemType', value: 'menuItemType', cb: null},
+      {key: 'firefox-menu', value: 'firefoxMenu', cb: null},
+      {key: 'autostart-menu-item', value: 'autoStart', cb: null},
+      {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: null},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
       {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
     ];
 
-    if (this.c32) {
-      for (let i = 0, len = settingsProps.length; i < len; i++) {
-        this.settings.bind(settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb);
-      }
-    } else {
-      for (let i = 0, len = settingsProps.length; i < len; i++) {
-        let direction = settingsProps[i].value === 'pinnedApps' ? 'BIDIRECTIONAL' : 'IN';
-        this.settings.bindProperty(Settings.BindingDirection[direction], settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb, null);
-      }
+    for (let i = 0, len = settingsProps.length; i < len; i++) {
+      this.settings.bind(settingsProps[i].key, settingsProps[i].value, settingsProps[i].cb);
     }
 
     this.pinnedFavorites = new PinnedFavs(this);
@@ -356,8 +346,10 @@ MyApplet.prototype = {
   },
 
   _onWindowMonitorChanged: function(screen, metaWindow, metaWorkspace) {
-    this.getCurrentAppList()._windowRemoved(metaWorkspace, metaWindow);
-    this.getCurrentAppList()._windowAdded(metaWorkspace, metaWindow);
+    if (this.listMonitorWindows) {
+      this.getCurrentAppList()._windowRemoved(metaWorkspace, metaWindow);
+      this.getCurrentAppList()._windowAdded(metaWorkspace, metaWindow);
+    }
   },
 
   _bindAppKey: function(){
@@ -485,7 +477,7 @@ MyApplet.prototype = {
     let startupClass = (wmclass)=> {
       let app_final = null;
       for (let i = 0, len = specialApps.length; i < len; i++) {
-        if (specialApps[i].wmClass == wmclass) {
+        if (specialApps[i].wmClass === wmclass) {
           app_final = this._appSystem.lookup_app(specialApps[i].id);
           if (!app_final) {
             app_final = this._appSystem.lookup_settings_app(specialApps[i].id);
@@ -531,10 +523,7 @@ MyApplet.prototype = {
     if (autoStartDir.query_exists(null)) {
       getChildren();
     } else {
-      Util.trySpawnCommandLine('bash -c "mkdir ' + this.autostartStrDir + '"');
-      setTimeout(()=>{
-        getChildren();
-      }, 50);
+      Util.spawnCommandLineAsync('bash -c "mkdir ' + this.autostartStrDir + '"', () => getChildren());
     }
   },
 
@@ -619,7 +608,7 @@ MyApplet.prototype = {
     return DND.DragMotionResult.MOVE_DROP;
   },
 
-  acceptDrop: function (source, actor, x, y) {
+  acceptDrop: function (source, actor, x) {
     if (!(source.isDraggableApp
       || (source instanceof DND.LauncherDraggable))
       || this.panelEditMode
@@ -701,7 +690,7 @@ MyApplet.prototype = {
     // We'd like to know what workspaces in this.metaWorkspaces have been destroyed and
     // so are no longer in the workspaces list.  For each of those, we should destroy them
     for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      if (workspaces.indexOf(this.metaWorkspaces[i].ws) == -1) {
+      if (workspaces.indexOf(this.metaWorkspaces[i].ws) === -1) {
         this.metaWorkspaces[i].appList.destroy();
         _.pullAt(this.metaWorkspaces, i);
       }

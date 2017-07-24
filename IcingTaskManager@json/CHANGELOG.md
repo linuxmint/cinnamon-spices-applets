@@ -1,5 +1,14 @@
 Changelog
 
+### 5.2.1
+
+  * Fixed disabling the window listing by monitor option not working.
+  * Fixed shortcut creation for Wine and window backed applications.
+  * Fixed the Close All menu option leaving empty thumbnails when opening the thumbnail menu right after.
+  * Fixed the focus pseudo class not persisting when clicking an app button.
+  * Fixed the close button spacing on thumbnails in high DPI mode.
+  * Performance optimizations.
+
 ### 5.2.0
 
   * Made the new window listing by monitor behavior optional.

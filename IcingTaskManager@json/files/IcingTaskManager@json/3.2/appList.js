@@ -9,7 +9,7 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const AppGroup = AppletDir.appGroup.AppGroup;
 const each = AppletDir.each.each;
-const constants = AppletDir.constants.constants;
+//const constants = AppletDir.constants.constants;
 const setTimeout = AppletDir.timers.setTimeout;
 
 // List of running apps
@@ -42,7 +42,8 @@ AppList.prototype = {
     this.lastCycled = null;
 
     // Connect all the signals
-    this._setSignals();
+    this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
+    this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
     setTimeout(()=>this._refreshList(true), 0);
 
     this.signals.connect(this.actor, 'style-changed', Lang.bind(this, this._updateSpacing));
@@ -65,16 +66,16 @@ AppList.prototype = {
     // boxes butt up against the edge of the screen
 
     let containerChildren = this.managerContainer.get_children();
-
     let orientationKey = null;
+
     each(St.Side, (side, key)=>{
       if (orientation === St.Side[key]) {
         orientationKey = key.toLowerCase();
         return;
       }
     });
-    let isVertical = orientationKey === 'left' || orientationKey === 'right';
 
+    let isVertical = orientationKey === 'left' || orientationKey === 'right';
     if (isVertical) {
       this.manager.set_vertical(true);
       this.actor.add_style_class_name('vertical');
@@ -99,11 +100,6 @@ AppList.prototype = {
     if (this._applet.appletEnabled) {
       this._updateSpacing();
     }
-  },
-
-  _setSignals: function () {
-    this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
-    this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
   },
 
   _closeAllHoverMenus: function(cb) {
@@ -220,11 +216,10 @@ AppList.prototype = {
   },
 
   _loadFavorites: function () {
-    if (!this.settings.getValue('show-pinned')) {
+    if (!this._applet.showPinned) {
       return;
     }
     let launchers = _.map(this._applet.pinnedFavorites._favorites, 'id');
-
     for (let i = 0, len = launchers.length; i < len; i++) {
       let app = this._applet._appSystem.lookup_app(launchers[i]);
       if (!app) {
@@ -285,7 +280,8 @@ AppList.prototype = {
     if (!app
       || (!isFavoriteApp
         && metaWindow
-        && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) === -1)) {
+        && (this._applet.listMonitorWindows
+          && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) === -1))) {
       return;
     }
     let appId = app.get_id();
@@ -298,7 +294,7 @@ AppList.prototype = {
       }
       each(appGroup.metaWindows, (win, z)=>{
         if (_.isEqual(win, metaWindow)) {
-          if (refApp === -1 || !this._applet.groupApps) { // Could determine if ungrouped windows should be grouped in a row or not
+          if (refApp === -1 || !this._applet.groupApps) {
             refApp = i;
           }
           refWindow = z;
@@ -322,7 +318,6 @@ AppList.prototype = {
 
     let initApp = (metaWindows, window, index)=>{
       let time = Date.now();
-
       let appGroup = new AppGroup({
         appList: this,
         app: app,
@@ -342,10 +337,6 @@ AppList.prototype = {
         });
       } else {
         appGroup._windowAdded(window);
-      }
-
-      if (this.settings.getValue('title-display') === constants.TitleDisplay.Focused) {
-        appGroup._appButton.hideLabel(false);
       }
     };
 
@@ -371,7 +362,6 @@ AppList.prototype = {
         initApp([metaWindow], metaWindow);
       }
     }
-
   },
 
   _appGroupNumber: function (parentApp) {
@@ -393,7 +383,6 @@ AppList.prototype = {
 
   _getNumberOfAppWindowsInWorkspace: function (app, workspace) {
     let windows = app.get_windows();
-
     let result = 0;
 
     for (let i = 0, len = windows.length; i < len; i++) {
@@ -470,5 +459,9 @@ AppList.prototype = {
       this.rightClickMenu.destroy();
     }
     this.actor.destroy();
+    let props = Object.keys(this);
+    each(props, (propKey)=>{
+      delete this[propKey];
+    });
   }
 };

@@ -46,7 +46,7 @@ AppButton.prototype = {
       y_fill: true,
       track_hover: true
     });
-    this.actor._delegate = this;
+    this.actor._delegate = null;
     if (this._applet.orientation === St.Side.TOP) {
       this.actor.add_style_class_name('top');
     } else if (this._applet.orientation === St.Side.BOTTOM) {
@@ -320,7 +320,10 @@ AppButton.prototype = {
     if (this._applet.panelEditMode) {
       return false;
     }
-    this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label);
+    let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
+    if (!this.actor.has_style_pseudo_class(hoverPseudoClass)) {
+      this.actor.add_style_pseudo_class(hoverPseudoClass);
+    }
   },
 
   _onLeave: function(){
@@ -328,14 +331,8 @@ AppButton.prototype = {
       return false;
     }
     let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
-    if (this.metaWindows.length > 0 && (this._applet.activePseudoClass === 1 || (this._applet.focusPseudoClass === 1 && this._hasFocus()))) {
-      setTimeout(()=>this.actor.add_style_pseudo_class(hoverPseudoClass), 0);
-    } else if (this._applet.hoverPseudoClass > 1) {
-      if (this._applet.hoverPseudoClass === this._applet.activePseudoClass && this.metaWindows.length > 0) {
-        return;
-      }
-      setTimeout(()=>this.actor.remove_style_pseudo_class(hoverPseudoClass), 0);
-    }
+    this.actor.remove_style_pseudo_class(hoverPseudoClass);
+    setTimeout(()=>this._onFocusChange(), 0);
   },
 
   setActiveStatus: function(windows){
@@ -427,9 +424,6 @@ AppButton.prototype = {
 
   destroy: function () {
     this.signals.disconnectAllSignals();
-    try {
-      this._container.destroy_children();
-    } catch (e) {}
     this._container.destroy();
     this.actor.destroy();
     let props = Object.keys(this);
