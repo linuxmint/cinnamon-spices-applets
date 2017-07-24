@@ -56,15 +56,10 @@ AppGroup.prototype = {
       y_fill: false,
       track_hover: true
     });
-
-    this.metaWorkspacesSignals = [];
-
     this.appList.managerContainer.add_actor(this.actor);
-
     this.actor._delegate = this;
 
     this._appButton = new SpecialButtons.AppButton(this);
-
     this.actor.add_actor(this._appButton.actor);
 
     this.rightClickMenu = new SpecialMenus.AppMenuButtonRightClickMenu({
@@ -209,7 +204,6 @@ AppGroup.prototype = {
           handleMinimizeToggle(appWindows[0]);
         }
       }
-
     } else if (button === 3) {
       if (!this.rightClickMenu.isOpen) {
         this.appList._closeAllRightClickMenus(()=>{
@@ -402,7 +396,7 @@ AppGroup.prototype = {
     let titleType = this._applet.settings.getValue('title-display');
     this.appName = this.app.get_name();
     if (titleType === constants.TitleDisplay.None
-      || (this._applet.c32 && (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT))) {
+      || (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT)) {
       this._appButton.setText('');
     } else if (titleType === constants.TitleDisplay.Title) {
       if (title) {
@@ -464,7 +458,10 @@ AppGroup.prototype = {
     this.isFavoriteApp = isFav;
     this.wasFavapp = !isFav;
     this._appButton._isFavorite(isFav);
-    this.hoverMenu.appSwitcherItem._isFavorite(isFav);
+    if (this.metaWindows.length === 0) {
+      this.hoverMenu.appSwitcherItem._isFavorite(isFav);
+      this.hoverMenu.close();
+    }
     this._windowTitleChanged(this.lastFocused);
   },
 

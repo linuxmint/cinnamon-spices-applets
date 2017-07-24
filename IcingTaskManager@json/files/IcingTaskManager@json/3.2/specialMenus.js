@@ -343,16 +343,12 @@ AppMenuButtonRightClickMenu.prototype = {
         this.addMenuItem(item);
         // Close all
         item = createMenuItem({label: t('Close all'), icon: 'application-exit'});
-        item.connect('activate', Lang.bind(this, function() {
+        this.signals.connect(item, 'activate', () => {
           if (!this._parent.isFavoriteApp) {
             this._parent.willUnmount = true;
           }
-          each(this.metaWindows, (metaWindow)=>{
-            if (!metaWindow._needsAttention) {
-              metaWindow.delete(global.get_current_time());
-            }
-          });
-        }));
+          this._parent.app.request_quit();
+        });
         this.addMenuItem(item);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       } else {
@@ -487,11 +483,7 @@ AppThumbnailHoverMenu.prototype = {
     this.appGroup = parent;
     this._applet = parent._applet;
     this.signals = new SignalManager.SignalManager(this);
-    if (parent._applet.c32) {
-      PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
-    } else {
-      PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, 0.5, parent.orientation);
-    }
+    PopupMenu.PopupMenu.prototype._init.call(this, parent.actor, parent.orientation, 0.5);
 
     this.parentActor = parent.actor;
     this.metaWindow = parent.metaWindow;
@@ -569,8 +561,8 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text(this.appGroup.appName);
       this._tooltip.show();
-    } else {
-      setTimeout(()=>this.appSwitcherItem._refresh(), 0);
+    } else if (!this.isOpen) {
+      this.appSwitcherItem._refresh();
       PopupMenu.PopupMenu.prototype.open.call(this, this._applet.animateThumbs);
     }
   },
@@ -579,7 +571,8 @@ AppThumbnailHoverMenu.prototype = {
     if (this.metaWindows.length === 0) {
       this._tooltip.set_text('');
       this._tooltip.hide();
-    } else {
+    }
+    if (this.isOpen) {
       PopupMenu.PopupMenu.prototype.close.call(this, this._applet.animateThumbs);
     }
   },
@@ -1075,7 +1068,7 @@ WindowThumbnail.prototype = {
     this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
 
     this.metaWindow.delete(global.get_current_time());
-    if (this.metaWindows.length === 1) {
+    if (this.metaWindows.length <= 1) {
       this.appSwitcherItem.hoverMenu.close();
     }
   },
@@ -1088,7 +1081,8 @@ WindowThumbnail.prototype = {
   },
 
   _connectToWindow: function (actor, event) {
-    if (this.metaWindows.length === 0) {
+    if (!this.metaWindow || this.metaWindows.length === 0) {
+      this.appSwitcherItem.hoverMenu.close();
       return false;
     }
     this.wasMinimized = false;
