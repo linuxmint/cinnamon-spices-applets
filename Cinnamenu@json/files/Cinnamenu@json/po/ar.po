@@ -277,25 +277,25 @@ msgid "Choose whether or not to show bookmarks and places in the menu."
 msgstr ""
 
 msgid "Show application icons"
-msgstr "
+msgstr ""
 
 msgid "Choose whether or not to show icons on applications."
-msgstr "
+msgstr ""
 
 msgid "Show category icons"
-msgstr "
+msgstr ""
 
 msgid "Choose whether or not to show icons on categories."
-msgstr "
+msgstr ""
 
 msgid "Enable filesystem path entry in search box"
-msgstr "
+msgstr ""
 
 msgid "Allows path entry in the menu search box."
-msgstr "
+msgstr ""
 
 msgid "Show application's description under their titles"
-msgstr "
+msgstr ""
 
 msgid ""
 "Choose whether or not to show the application description on the application"
