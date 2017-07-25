@@ -307,6 +307,3 @@ msgstr ""
 
 msgid "Clear List"
 msgstr "Очистить список"
-
-msgid "Type to search..."
-msgstr "Найти…"
