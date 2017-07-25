@@ -14,12 +14,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to the other monitor"
 msgstr "Преместване на другия монитор"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to monitor "
 msgstr "Преместване на монитор "
 
@@ -32,7 +30,6 @@ msgid "Visible on all workspaces"
 msgstr "Видимо на всички работни места"
 
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
-#, fuzzy
 msgid "Move to another workspace"
 msgstr "Преместване на друго работно място"
 
@@ -41,7 +38,6 @@ msgid "Places"
 msgstr "Места"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
-#, fuzzy
 msgid "Recent"
 msgstr "Скорошни"
 
@@ -75,7 +71,7 @@ msgstr "Премахване от автоматично пусканите"
 
 #: 3.2/specialMenus.js:284
 msgid "Add to Autostart"
-msgstr "Добяване към автоматично пусканите"
+msgstr "Добавяне към автоматично пусканите"
 
 #: 3.2/specialMenus.js:290
 msgid "Create Shortcut"
@@ -106,7 +102,6 @@ msgid "Close others"
 msgstr "Затваряне на другите"
 
 #: 3.2/specialMenus.js:345
-#, fuzzy
 msgid "Close all"
 msgstr "Затваряне на всички"
 
@@ -157,7 +152,6 @@ msgstr "посочено"
 #. 3.0->settings-schema.json->focusPseudoClass->options
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
-#, fuzzy
 msgid "focus"
 msgstr "Фокусирано"
 
@@ -336,12 +330,10 @@ msgid "Non-symbolic icons"
 msgstr "Несимволични иконки"
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
 msgstr "Използване на любимите като закачени програми"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
 msgstr "Регулира дали любимите се показват като закачени програми."
@@ -383,7 +375,6 @@ msgstr "Замества псевдокласа за активни копчет
 
 #. 3.2->settings-schema.json->thumbnailsPage->title
 #. 3.2->settings-schema.json->thumbnailsSection->title
-#, fuzzy
 msgid "Thumbnails"
 msgstr "Миниатюри"
 
@@ -392,7 +383,6 @@ msgid "App Buttons"
 msgstr "Копчета на програми"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
-#, fuzzy
 msgid "Hover Peek"
 msgstr "Посочване за надничане към прозорец"
 
@@ -401,7 +391,6 @@ msgid "Panel"
 msgstr "Лента"
 
 #. 3.2->settings-schema.json->iconSection->title
-#, fuzzy
 msgid "Icons"
 msgstr "Иконки"
 
@@ -418,12 +407,10 @@ msgid "Styling"
 msgstr "Стил"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
-#, fuzzy
 msgid "Context Menu"
 msgstr "Контекстно меню"
 
 #. 3.2->settings-schema.json->themePage->title
-#, fuzzy
 msgid "Theming"
 msgstr "Тема"
 
@@ -474,7 +461,6 @@ msgid "App button width"
 msgstr "Ширина на копчето"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid "Controls the width of the application button."
 msgstr "Регулира ширината на копчето на програма."
 
@@ -819,7 +805,6 @@ msgid "Icing Task Manager"
 msgstr "Диспечер на задачите с глазура"
 
 #. IcingTaskManager@json->metadata.json->description
-#, fuzzy
 msgid "Window list with app grouping and thumbnails"
 msgstr "Списък с прозорци с групиране и миниатюри"
 
