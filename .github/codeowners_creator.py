@@ -45,7 +45,7 @@ class Main():
                         if xlet_author == "none":
                             donated_xlets_list.append("# " + name)
                         else:
-                            xlets_list.append("{:<50}".format(name + "/*") + " @" + xlet_author)
+                            xlets_list.append("{:<50}".format(name + "/**") + " @" + xlet_author)
         finally:
             with open(os.path.join(repo_folder, ".github", "CODEOWNERS"), "w") as codeowners_file:
                 file_content = "{}{}{}{}{}".format(
