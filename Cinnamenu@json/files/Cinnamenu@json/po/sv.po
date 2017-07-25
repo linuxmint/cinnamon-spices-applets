@@ -315,6 +315,3 @@ msgstr "Välj om programbeskrivningar skall visas på programknappar."
 
 msgid "Clear List"
 msgstr "Rensa listan"
-
-msgid "Type to search..."
-msgstr "Skriv för att söka..."
