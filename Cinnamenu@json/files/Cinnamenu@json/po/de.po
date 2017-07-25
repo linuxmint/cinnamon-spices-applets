@@ -286,7 +286,7 @@ msgid "Show category icons"
 msgstr "Kategoriesymbole anzeigen"
 
 msgid "Choose whether or not to show icons on categories."
-msgstr "msgstr "Legt fest, ob Symbole an Kategorien angezeigt werden.""
+msgstr "Legt fest, ob Symbole an Kategorien angezeigt werden."
 
 msgid "Enable filesystem path entry in search box"
 msgstr "Eingabe des Dateisystempfades im Suchfeld erlauben"
