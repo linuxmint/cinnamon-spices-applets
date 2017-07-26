@@ -1,5 +1,10 @@
 Changelog
 
+### 5.3.0
+
+  * Rewrote the hover peek functionality. It now only overlays a single window object on the screen!
+  * Improved the styling of closed pinned app buttons.
+
 ### 5.2.1
 
   * Fixed disabling the window listing by monitor option not working.

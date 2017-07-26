@@ -336,10 +336,10 @@
   "hover-peek-opacity": {
     "type": "spinbutton",
     "dependency": "enable-hover-peek",
-    "default": 10,
+    "default": 94,
     "min": 0,
     "max": 100,
-    "step": 2,
+    "step": 1,
     "units": "percent",
     "description": "Window opacity",
     "tooltip": "Opacity of the windows on hover."
