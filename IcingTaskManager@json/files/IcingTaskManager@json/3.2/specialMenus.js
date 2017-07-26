@@ -940,32 +940,25 @@ WindowThumbnail.prototype = {
   handleEnterEvent: function(){
     this.entered = true;
     if (!this.isFavoriteApp) {
-      this._hoverPeek(this._applet.peekOpacity, this.metaWindow, true);
+      this._hoverPeek(this._applet.peekOpacity, this.metaWindow);
       this.actor.add_style_pseudo_class('outlined');
       this.actor.add_style_pseudo_class('selected');
       this.button.set_opacity(255);
-      if (this.metaWindow.minimized && this._applet.enablePeek  && this.appSwitcherItem.hoverMenu.appGroup.appName !== 'Steam') {
-        this.metaWindow.unminimize();
-        if (this.metaWindow.is_fullscreen()) {
-          this.metaWindow.unmaximize(global.get_current_time());
-        }
-        this.wasMinimized = true;
-      } else {
-        this.wasMinimized = false;
-      }
     }
   },
 
   handleLeaveEvent: function(){
     this.entered = false;
     if (!this.isFavoriteApp) {
-      this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
+      this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow);
       this.actor.remove_style_pseudo_class('outlined');
       this._focusWindowChange();
       this.button.set_opacity(0);
-      if (this.wasMinimized) {
-        this.metaWindow.minimize();
-      }
+    }
+    if (this.overlayPreview) {
+      global.overlay_group.remove_child(this.overlayPreview);
+      this.overlayPreview.destroy();
+      this.overlayPreview = null;
     }
   },
 
@@ -1089,6 +1082,9 @@ WindowThumbnail.prototype = {
       this.appSwitcherItem.hoverMenu.close();
       return false;
     }
+    if (this.overlayPreview) {
+      this.handleLeaveEvent();
+    }
     this.wasMinimized = false;
     let button = event.get_button();
     if (button === 1 && !this.stopClick && !this.isFavoriteApp) {
@@ -1161,29 +1157,32 @@ WindowThumbnail.prototype = {
   },
 
   _hoverPeek: function (opacity, metaWin) {
-    if (!this._applet.enablePeek) {
+    if (!this._applet.enablePeek || this.overlayPreview) {
       return;
     }
-
-    const setOpacity = (window_actor, target_opacity) => {
+    const convertRange = function(value, r1, r2) {
+      return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
+    };
+    const setOpacity = (window_actor, targetOpacity) => {
       Tweener.addTween(window_actor, {
         time: this._applet.peekTime * 0.001,
         transition: 'easeOutQuad',
-        opacity: target_opacity
+        opacity: convertRange(targetOpacity, [0, 100], [0, 255])
       });
     };
-    let monitorOrigin = metaWin.get_monitor();
-    let wa = global.get_window_actors();
-    for (let i = 0, len = wa.length; i < len; i++) {
-      let waWin = wa[i].get_meta_window();
-      if (metaWin === waWin || waWin.get_monitor() !== monitorOrigin) {
-        continue;
-      }
-
-      if (waWin.get_window_type() !== Meta.WindowType.DESKTOP) {
-        setOpacity(wa[i], opacity);
-      }
+    let metaWindowActor = metaWin.get_compositor_private();
+    if (!metaWindowActor) {
+      return;
     }
+    this.overlayPreview = new Clutter.Clone({
+      source: metaWindowActor.get_texture(),
+      opacity: 0
+    });
+    let [x, y] = metaWindowActor.get_position();
+    this.overlayPreview.set_position(x, y);
+    global.overlay_group.add_child(this.overlayPreview);
+    global.overlay_group.set_child_above_sibling(this.overlayPreview, null);
+    setOpacity(this.overlayPreview, opacity);
   },
 
   destroy: function(){
