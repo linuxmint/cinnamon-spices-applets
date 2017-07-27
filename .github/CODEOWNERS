@@ -57,7 +57,6 @@ netusagemonitor@pdcurtis/**                        @pdcurtis
 network@brownsr/**                                 @brownsr
 nvidiaprime@pdcurtis/**                            @pdcurtis
 officeCenter@scollins/**                           @collinss
-pa-equalizer@jschug.com/**                         @jschug.com
 panel-separator-icon@mordant23/**                  @mordant23
 placesCenter@scollins/**                           @collinss
 pomodoro@gregfreeman.org/**                        @gfreeau
@@ -72,7 +71,6 @@ sessionManager@scollins/**                         @collinss
 show-hide-applets@mohammad-sn/**                   @mohammad-sn
 slingshot@jfarthing84/**                           @jfarthing84
 smallcalc_applet@lerc.sds/**                       @lerc
-smogwawelski@pamsoft.pl/**                         @pamsoft.pl
 soft-numlock@d5xtgr/**                             @d5xtgr
 sound-with-apps-volume@koutch/**                   @koutch
 sshlauncher@sumo/**                                @sumo
@@ -157,6 +155,7 @@ xampp-panel@backids99/**                           @backids99
 # montrer-le-bureau@cannelle.org
 # mybookmarks@markbokil.com
 # mylauncher@markbokil.com
+# pa-equalizer@jschug.com
 # path-monitor@kamikaze
 # places-bookmarks@dmo60.de
 # places-with-terminal@mtwebster
@@ -169,6 +168,7 @@ xampp-panel@backids99/**                           @backids99
 # search-box@mtwebster
 # search@bownz
 # shutdown-timer@webum.by
+# smogwawelski@pamsoft.pl
 # softyubikey@yubiserver.include.gr
 # sports-update@pavanred
 # sysmenu@tuxuls@gmail.com
