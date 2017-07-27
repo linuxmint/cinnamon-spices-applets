@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
-"PO-Revision-Date: 2016-11-10 02:29+0100\n"
+"POT-Creation-Date: 2017-07-27 12:36+0200\n"
+"PO-Revision-Date: 2017-07-27 12:54+0200\n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -15,14 +15,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "Verschieben auf Monitor"
+msgstr "Auf den anderen Monitor verschieben"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to monitor "
-msgstr "Verschieben auf Monitor"
+msgstr "Verschieben auf Monitor "
 
 #: 3.2/specialMenus.js:111
 msgid "Only on this workspace"
@@ -33,34 +31,32 @@ msgid "Visible on all workspaces"
 msgstr "Auf allen Arbeitsflächen anzeigen"
 
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
-#, fuzzy
 msgid "Move to another workspace"
-msgstr "Auf linke Arbeitsfläche verschieben"
+msgstr "Auf andere Arbeitsfläche verschieben"
 
 #: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
 msgid "Places"
-msgstr ""
+msgstr "Orte"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
-#, fuzzy
 msgid "Recent"
-msgstr "Prozent"
+msgstr "Kürzlich"
 
 #: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
 msgid "Preferences"
-msgstr ""
+msgstr "Einstellungen"
 
 #: 3.2/specialMenus.js:228
 msgid "About..."
-msgstr ""
+msgstr "Über …"
 
 #: 3.2/specialMenus.js:233
 msgid "Configure..."
-msgstr ""
+msgstr "Einrichten …"
 
 #: 3.2/specialMenus.js:238
 msgid "Remove"
-msgstr ""
+msgstr "Entfernen"
 
 #: 3.2/specialMenus.js:272
 msgid "Unpin from Panel"
@@ -84,7 +80,7 @@ msgstr "Verknüpfung erstellen"
 
 #: 3.2/specialMenus.js:300
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Volle Deckkraft wiederherstellen"
 
 #: 3.2/specialMenus.js:308
 msgid "Restore"
@@ -104,12 +100,11 @@ msgstr "Maximieren"
 
 #: 3.2/specialMenus.js:335
 msgid "Close others"
-msgstr ""
+msgstr "Andere schließen"
 
 #: 3.2/specialMenus.js:345
-#, fuzzy
 msgid "Close all"
-msgstr "Alles schließen"
+msgstr "Alle schließen"
 
 #: 3.2/specialMenus.js:359
 msgid "Close"
@@ -132,7 +127,7 @@ msgstr "Überschreibt die Pseudoklasse für App-Schaltfläche auf Fokus."
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -141,7 +136,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "outlined"
-msgstr ""
+msgstr "eingerahmt"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -150,7 +145,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr ""
+msgstr "schweben"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -158,9 +153,8 @@ msgstr ""
 #. 3.0->settings-schema.json->focusPseudoClass->options
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
-#, fuzzy
 msgid "focus"
-msgstr "Fokussiert"
+msgstr "fokussieren"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -169,7 +163,7 @@ msgstr "Fokussiert"
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "selected"
-msgstr ""
+msgstr "ausgewählt"
 
 #. 3.2->settings-schema.json->icon-spacing->description
 #. 3.0->settings-schema.json->icon-spacing->description
@@ -339,17 +333,15 @@ msgid "Non-symbolic icons"
 msgstr "Nicht-symbolische Icons"
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Verwende System-Tooltips für geschlossene Anwendungen"
+msgstr "Verwende Systemfavoriten für angeheftete Anwendungen"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
 msgstr ""
-"Steuert, ob angeheftete Anwendungen angezeigt werden, wenn sie nicht "
-"geöffnet sind."
+"Steuert, ob angeheftete Anwendungen aus den Systemfavoriten angezeigt werden "
+"sollen."
 
 #. 3.2->settings-schema.json->hover-peek-opacity->description
 #. 3.0->settings-schema.json->hover-peek-opacity->description
@@ -389,49 +381,44 @@ msgstr ""
 
 #. 3.2->settings-schema.json->thumbnailsPage->title
 #. 3.2->settings-schema.json->thumbnailsSection->title
-#, fuzzy
 msgid "Thumbnails"
-msgstr "Vorschaubild-Größe"
+msgstr "Fenstervorschau"
 
 #. 3.2->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "Anwendungsknöpfe"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
-#, fuzzy
 msgid "Hover Peek"
-msgstr "Hovern für Vorschau"
+msgstr "Vorschau, wenn Maus"
 
 #. 3.2->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "Leiste"
 
 #. 3.2->settings-schema.json->iconSection->title
-#, fuzzy
 msgid "Icons"
-msgstr "Icongröße"
+msgstr "Icons"
 
 #. 3.2->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "Empfohlene Voreinstellungen"
 
 #. 3.2->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "Tastenkürzel"
 
 #. 3.2->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "Design"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
-#, fuzzy
 msgid "Context Menu"
-msgstr "Kontextmenü-Einstellungen"
+msgstr "Kontextmenü"
 
 #. 3.2->settings-schema.json->themePage->title
-#, fuzzy
 msgid "Theming"
-msgstr "Themen-Einstellungen"
+msgstr "Themen einstellen"
 
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 3.0->settings-schema.json->animate-thumbnails->description
@@ -448,7 +435,7 @@ msgstr ""
 #. 3.2->settings-schema.json->mintYPreset->description
 #. 3.2->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Mint-Y und Varianten"
 
 #. 3.2->settings-schema.json->autostart-menu-item->description
 #. 3.0->settings-schema.json->autostart-menu-item->description
@@ -477,16 +464,15 @@ msgstr ""
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Ziehen von Anwendungsknöpfen erlauben"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "Breite der Anwendungsknöpfe"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid "Controls the width of the application button."
-msgstr "Steuert die Größe der Vorschaubilder."
+msgstr "Steuert die Größe der Anwendungsknöpfe."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 3.0->settings-schema.json->show-recent->description
@@ -578,12 +564,15 @@ msgstr "Icongröße unabhängig von der Cinnamon-Leiste anpassen."
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
 msgstr ""
+"Nur Fenster von dem Monitor auflisten, auf dem diese Instanz angezeigt wird"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
 msgstr ""
+"Diese Option wird nur für Monitore, die eine ITM-Instanz anzeigen, in Kraft "
+"treten."
 
 #. 3.2->settings-schema.json->number-display->description
 #. 3.0->settings-schema.json->number-display->description
@@ -712,9 +701,8 @@ msgstr "Geöffnete Anwendungen werden besonders hervorgehoben."
 
 #. 3.2->settings-schema.json->show-apps-order-timeout->description
 #. 3.0->settings-schema.json->show-apps-order-timeout->description
-#, fuzzy
 msgid "Duration of the apps order display on hotkey press"
-msgstr "Dauer der Anwendungs-Auflistung beim Verwenden des Tastaturkürzels"
+msgstr "Dauer der Anwendungsauflistung beim Verwenden des Tastaturkürzels"
 
 #. 3.2->settings-schema.json->show-apps-order-timeout->tooltip
 #. 3.0->settings-schema.json->show-apps-order-timeout->tooltip
@@ -837,9 +825,8 @@ msgid "Icing Task Manager"
 msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
-#, fuzzy
 msgid "Window list with app grouping and thumbnails"
-msgstr "Fensterliste mit Anwendungs-Gruppierung und Vorschaubildern"
+msgstr "Fensterliste mit Anwendungsgruppierung und Fenstervorschau"
 
 #~ msgid "number"
 #~ msgstr "Anzahl"
