@@ -7,76 +7,76 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-15 19:37+0800\n"
-"PO-Revision-Date: 2017-04-15 19:51+0800\n"
+"POT-Creation-Date: 2017-07-28 17:17+0800\n"
+"PO-Revision-Date: 2017-07-28 17:25+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: applet.js:141
+#: applet.js:172
 msgid "Waiting for Bumblebee"
 msgstr "等待Bumblebee"
 
-#: applet.js:186
+#: applet.js:232
 msgid "Open nVidia Settings Program"
 msgstr "打开nVidia设置程序"
 
-#: applet.js:192
+#: applet.js:238
 msgid "Open Power Statistics"
 msgstr "打开电源统计"
 
-#: applet.js:200
+#: applet.js:244
 msgid "Open System Monitor"
 msgstr "打开系统监视器"
 
-#: applet.js:209
+#: applet.js:253
 msgid "Housekeeping and System Sub Menu"
 msgstr "内务处理和系统子菜单"
 
-#: applet.js:212
+#: applet.js:256
 msgid "View the Changelog"
 msgstr "查看变更日志"
 
-#: applet.js:218
+#: applet.js:262
 msgid "Open the Help file"
 msgstr "打开帮助文件"
 
-#: applet.js:234
+#: applet.js:278
 msgid "Launch programs using the nVidia Graphics Processor"
 msgstr "使用nVidia图形处理器启动程序"
 
-#: applet.js:307
-msgid "ERROR"
+#: applet.js:358
+msgid "NVidia based GPU is Off"
+msgstr "基于NVidia的GPU已关闭"
+
+#: applet.js:381
+msgid "NVidia based GPU is On and Core Temperature is"
+msgstr "基于NVidia的GPU已打开和核心温度是"
+
+#: applet.js:389
+msgid "Err"
 msgstr "错误"
 
-#: applet.js:308
-msgid "Bumblebee is not installed so applet willl not work"
-msgstr "未安装Bumblebee，因此小程序不会工作"
+#: applet.js:390
+msgid ""
+"Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
+"drivers installed?"
+msgstr "Bumblebee没有设置正确 - 是否安装了bbswitch、bumblebee和nvidia驱动？"
 
-#: applet.js:312
-msgid "GPU OFF"
-msgstr "GPU关"
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->description
+msgid "Show GPU Temperature as well as icon"
+msgstr "显示GPU温度和图标"
 
-#: applet.js:313 applet.js:322
-msgid "NVidia based GPU is"
-msgstr "基于NVidia的GPU是"
-
-#: applet.js:321
-msgid "GPU"
-msgstr "GPU"
-
-#: applet.js:322
-msgid "and Core Temperature is"
-msgstr "和核心温度是"
-
-#. bumblebee@pdcurtis->settings-schema.json->head->description
-msgid "General Settings for the nVidia Monitoring Applet"
-msgstr "nVidia监视小程序的常规设置"
+#. bumblebee@pdcurtis->settings-schema.json->showGpuTemp->tooltip
+msgid ""
+"Available in Horizontal and Vertical Panels. Display is in Degrees "
+"Centigrade."
+msgstr "可用于水平和垂直面板。以摄氏温度显示。"
 
 #. bumblebee@pdcurtis->settings-schema.json->head2->description
 msgid "Programs settings for Optimus"
@@ -103,6 +103,10 @@ msgstr "程序3的命令字符串"
 #. bumblebee@pdcurtis->settings-schema.json->commandString1->description
 msgid "Command String for Program 1"
 msgstr "程序1的命令字符串"
+
+#. bumblebee@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the nVidia Monitoring Applet"
+msgstr "nVidia监视小程序的常规设置"
 
 #. bumblebee@pdcurtis->settings-schema.json->commandString4->description
 msgid "Command String for Program 4"
@@ -162,9 +166,38 @@ msgid "seconds"
 msgstr "秒"
 
 #. bumblebee@pdcurtis->metadata.json->description
-msgid "Displays Status of Bumblebee and nVidia GPU Temperature"
-msgstr "显示Bumblebee和nVidia GPU温度的状态"
+msgid ""
+"Displays Status of Bumblebee and nVidia GPU Temperature with associated "
+"support functions including starting selected programs with optirun or "
+"primusrun"
+msgstr ""
+"显示Bumblebee的状态和nVidia GPU温度的相关支持功能，包括启动选择的程序和"
+"optirun或primusrun "
 
 #. bumblebee@pdcurtis->metadata.json->name
-msgid "Bumblebee and nVidia Display"
-msgstr "Bumblebee和nVidia显示"
+msgid "Bumblebee Status with NVidia Temperature Display"
+msgstr "Bumblebee状态和NVidia 温度显示"
+
+#~ msgid "ERROR"
+#~ msgstr "错误"
+
+#~ msgid "Bumblebee is not installed so applet willl not work"
+#~ msgstr "未安装Bumblebee，因此小程序不会工作"
+
+#~ msgid "GPU OFF"
+#~ msgstr "GPU关"
+
+#~ msgid "NVidia based GPU is"
+#~ msgstr "基于NVidia的GPU是"
+
+#~ msgid "GPU"
+#~ msgstr "GPU"
+
+#~ msgid "and Core Temperature is"
+#~ msgstr "和核心温度是"
+
+#~ msgid "Displays Status of Bumblebee and nVidia GPU Temperature"
+#~ msgstr "显示Bumblebee和nVidia GPU温度的状态"
+
+#~ msgid "Bumblebee and nVidia Display"
+#~ msgstr "Bumblebee和nVidia显示"
