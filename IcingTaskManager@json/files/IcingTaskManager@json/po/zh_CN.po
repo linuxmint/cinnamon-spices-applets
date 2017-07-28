@@ -10,19 +10,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "移至显示器"
+msgstr "移到其他显示器"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to monitor "
-msgstr "移至显示器"
+msgstr "移到显示器"
 
 #: 3.2/specialMenus.js:111
 msgid "Only on this workspace"
@@ -33,34 +31,32 @@ msgid "Visible on all workspaces"
 msgstr "在所有工作区可见"
 
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
-#, fuzzy
 msgid "Move to another workspace"
-msgstr "移动到上一个（左）工作区"
+msgstr "移动到另一个工作区"
 
 #: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
 msgid "Places"
-msgstr ""
+msgstr "位置"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
-#, fuzzy
 msgid "Recent"
-msgstr "%"
+msgstr "最近"
 
 #: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
 msgid "Preferences"
-msgstr ""
+msgstr "首选项"
 
 #: 3.2/specialMenus.js:228
 msgid "About..."
-msgstr ""
+msgstr "关于..."
 
 #: 3.2/specialMenus.js:233
 msgid "Configure..."
-msgstr ""
+msgstr "配置..."
 
 #: 3.2/specialMenus.js:238
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: 3.2/specialMenus.js:272
 msgid "Unpin from Panel"
@@ -84,7 +80,7 @@ msgstr "创建快捷方式"
 
 #: 3.2/specialMenus.js:300
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "恢复到完全不透明"
 
 #: 3.2/specialMenus.js:308
 msgid "Restore"
@@ -104,10 +100,9 @@ msgstr "最大化"
 
 #: 3.2/specialMenus.js:335
 msgid "Close others"
-msgstr ""
+msgstr "关闭其他"
 
 #: 3.2/specialMenus.js:345
-#, fuzzy
 msgid "Close all"
 msgstr "关闭全部"
 
@@ -132,7 +127,7 @@ msgstr "覆盖焦点上的app按钮的伪类。"
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "active"
-msgstr ""
+msgstr "活动"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -141,7 +136,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "outlined"
-msgstr ""
+msgstr "概述"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -150,7 +145,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr ""
+msgstr "悬停"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -158,9 +153,8 @@ msgstr ""
 #. 3.0->settings-schema.json->focusPseudoClass->options
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
-#, fuzzy
 msgid "focus"
-msgstr "激活的"
+msgstr "焦点"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -169,7 +163,7 @@ msgstr "激活的"
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "selected"
-msgstr ""
+msgstr "已选中"
 
 #. 3.2->settings-schema.json->icon-spacing->description
 #. 3.0->settings-schema.json->icon-spacing->description
@@ -332,15 +326,13 @@ msgid "Non-symbolic icons"
 msgstr "非符号图标"
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "对已关闭的应用使用系统工具提示"
+msgstr "为固定的应用程序使用系统收藏夹"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
-msgstr "是否在应用菜单里显示固定开关"
+msgstr "控制是否固定包含在系统收藏列表的应用程序。"
 
 #. 3.2->settings-schema.json->hover-peek-opacity->description
 #. 3.0->settings-schema.json->hover-peek-opacity->description
@@ -379,49 +371,44 @@ msgstr "当应用按钮处于活动状态时覆盖应用按钮的伪类。"
 
 #. 3.2->settings-schema.json->thumbnailsPage->title
 #. 3.2->settings-schema.json->thumbnailsSection->title
-#, fuzzy
 msgid "Thumbnails"
-msgstr "缩略图尺寸"
+msgstr "缩略图"
 
 #. 3.2->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "应用程序按钮"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
-#, fuzzy
 msgid "Hover Peek"
 msgstr "悬停预览"
 
 #. 3.2->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "面板"
 
 #. 3.2->settings-schema.json->iconSection->title
-#, fuzzy
 msgid "Icons"
-msgstr "图标尺寸"
+msgstr "图标"
 
 #. 3.2->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "推荐预设值"
 
 #. 3.2->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "热键"
 
 #. 3.2->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "样式"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
-#, fuzzy
 msgid "Context Menu"
-msgstr "菜单设置"
+msgstr "右键菜单"
 
 #. 3.2->settings-schema.json->themePage->title
-#, fuzzy
 msgid "Theming"
-msgstr "主题设置"
+msgstr "主题"
 
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 3.0->settings-schema.json->animate-thumbnails->description
@@ -436,7 +423,7 @@ msgstr "是否显示在缩略图显示和隐藏时启用动画"
 #. 3.2->settings-schema.json->mintYPreset->description
 #. 3.2->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Mint Y 及其变种"
 
 #. 3.2->settings-schema.json->autostart-menu-item->description
 #. 3.0->settings-schema.json->autostart-menu-item->description
@@ -463,16 +450,15 @@ msgstr "是否在应用菜单里显示固定开关"
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "启用应用程序按钮拖动"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "应用程序按钮宽度"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid "Controls the width of the application button."
-msgstr "调节缩略图的尺寸"
+msgstr "控制应用程序按钮的宽度。"
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 3.0->settings-schema.json->show-recent->description
@@ -555,13 +541,13 @@ msgstr "自定义图标尺寸，不使用自带的缩放"
 
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "仅显示该实例的显示器的列表窗口"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
-msgstr ""
+msgstr "该选项仅对显示ITM实例的显示器生效。"
 
 #. 3.2->settings-schema.json->number-display->description
 #. 3.0->settings-schema.json->number-display->description
@@ -791,9 +777,8 @@ msgid "Icing Task Manager"
 msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
-#, fuzzy
 msgid "Window list with app grouping and thumbnails"
-msgstr "窗口列表，可按应用分组折叠，并提供窗口缩略图"
+msgstr "带应用程序分组和缩略图的窗口列表"
 
 #~ msgid "number"
 #~ msgstr "个数"
