@@ -345,6 +345,10 @@ msgstr ""
 msgid "celsius"
 msgstr ""
 
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr ""
+
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
 msgstr ""
