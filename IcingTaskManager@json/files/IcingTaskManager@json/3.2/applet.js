@@ -32,6 +32,7 @@ const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
 const AppList = AppletDir.appList.AppList;
+const setTimeout = AppletDir.timers.setTimeout;
 
 // Some functional programming tools
 const range = function (a, b) {
@@ -564,7 +565,8 @@ MyApplet.prototype = {
     if (autoStartDir.query_exists(null)) {
       getChildren();
     } else {
-      Util.spawnCommandLineAsync('bash -c "mkdir ' + this.autostartStrDir + '"', () => getChildren());
+      Util.trySpawnCommandLine('bash -c "mkdir ' + this.autostartStrDir + '"');
+      setTimeout(() => getChildren(), 2000);
     }
   },
 

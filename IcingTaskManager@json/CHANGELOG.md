@@ -1,5 +1,9 @@
 Changelog
 
+### 5.3.1
+
+  * Fixed a bug preventing the applet from starting on Cinnamon 3.2 when no autostart entries have been created.
+
 ### 5.3.0
 
   * Rewrote the hover peek functionality. It now only overlays a single window object on the screen!
