@@ -5,104 +5,133 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.00\n"
-"Report-Msgid-Bugs-To: Odyseus\n"
-"POT-Creation-Date: 2017-06-02 17:09-0300\n"
-"PO-Revision-Date: 2017-06-02 17:09-0300\n"
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.02\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
+"POT-Creation-Date: 2017-06-21 03:32-0300\n"
+"PO-Revision-Date: 2017-06-19 00:02-0300\n"
 "Last-Translator: Odyseus\n"
-"Language-Team: \n"
+"Language-Team: Spanish\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: ../../create_localized_help.py:90
-msgid "The following two sections are available only in English."
-msgstr "Las siguientes dos secciones están disponibles sólo en Inglés."
+#: ../../create_localized_help.py:72
+msgid "Description"
+msgstr "Descripción"
+
+#: ../../create_localized_help.py:74
+msgid "Applet based on the gnome-shell extension called [Desk Changer](https://github.com/BigE/desk-changer) by [Eric Gach](https://github.com/BigE). A wallpaper slideshow applet with multiple profiles support."
+msgstr "Applet basado en la extensión para gnome-shell llamada [Desk Changer](https://github.com/BigE/desk-changer) por [Eric Gach](https://github.com/BigE). Un applet de diapositivas de papel tapiz con soporte para múltiples perfiles."
+
+#: ../../create_localized_help.py:76
+msgid "Features"
+msgstr "Características"
+
+#: ../../create_localized_help.py:78
+msgid "Possibility to create and switch between several profiles. A profile is simply a list of images and/or folders containing images that this applet will use to switch the wallpaper."
+msgstr "Posibilidad de crear y alternar entre varios perfiles.  Un perfil es simplemente una lista de imágenes y/o carpetas que contienen imágenes que este applet utilizará para cambiar el fondo de pantalla."
+
+#: ../../create_localized_help.py:79
+msgid "Possibility to preview the next wallpaper from this applet menu."
+msgstr "Posibilidad de previsualizar el siguiente fondo de pantalla desde el menú de este applet."
+
+#: ../../create_localized_help.py:80
+msgid "Wallpapers can be switched on demand from the controls found in this applet menu."
+msgstr "Los fondos de pantalla se pueden cambiar bajo demanda desde los controles que se encuentran en el menú de este applet."
+
+#: ../../create_localized_help.py:81
+msgid "The wallpapers rotation can be alphabetically or random."
+msgstr "La rotación de fondos de pantalla puede ser alfabética o aleatoria."
+
+#: ../../create_localized_help.py:82
+msgid "The wallpapers rotation can be defined by an interval in seconds or hourly."
+msgstr "La rotación de fondos de pantalla se puede definir por un intervalo en segundos o por hora."
+
+#: ../../create_localized_help.py:83
+msgid "Possibility to open the next or current wallpapers from this applet menu."
+msgstr "Posibilidad de abrir los fondos de pantalla siguientes o actuales desde el menú de este applet."
+
+#: ../../create_localized_help.py:84
+msgid "Possibility to display a notification every time the wallpaper is switched."
+msgstr "Posibilidad de mostrar una notificación cada vez que se cambia el fondo de pantalla."
+
+#: ../../create_localized_help.py:85
+msgid "Configurable hotkeys to switch to next/previous wallpaper."
+msgstr "Teclas de acceso rápido configurables para cambiar al fondo de pantalla siguiente/anterior."
+
+#: ../../create_localized_help.py:86
+msgid "Read the tooltips of each option on this applet settings window for more details."
+msgstr "Lea las sugerencias de cada opción en la ventana de configuración de este applet para obtener más detalles."
 
 #. TO TRANSLATORS: This is a placeholder.
 #. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:115 ../../create_localized_help.py:187
+#: ../../create_localized_help.py:159 ../../create_localized_help.py:250
 msgid "language-name"
 msgstr "Español"
 
-#: ../../create_localized_help.py:190 settings.py:1022
+#: ../../create_localized_help.py:165
+msgid "The following two sections are available only in English."
+msgstr "Las siguientes dos secciones están disponibles sólo en Inglés."
+
+#: ../../create_localized_help.py:169
+msgid "Do not install on any other version of Cinnamon."
+msgstr "No instalar en ninguna otra versión de Cinnamon."
+
+#: ../../create_localized_help.py:175
+msgid "Compatibility"
+msgstr "Copatibilidad"
+
+#: ../../create_localized_help.py:253 settings.py:1022
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../../create_localized_help.py:191
+#: ../../create_localized_help.py:254
 msgid "Contributors"
 msgstr "Colaboradores"
 
-#: ../../create_localized_help.py:192
+#: ../../create_localized_help.py:255
 msgid "Changelog"
 msgstr "Registro de cambios"
 
-#: ../../create_localized_help.py:193
-msgid "Choose language"
-msgstr "Elegir idioma"
-
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:194 ../../create_localized_help.py:201
+#: ../../create_localized_help.py:256 ../../create_localized_help.py:263
 #, python-format
 msgid "Help for %s"
 msgstr "Ayuda para %s"
 
-#: ../../create_localized_help.py:202
+#: ../../create_localized_help.py:264
 msgid "IMPORTANT!!!"
 msgstr "¡IMPORTANTE!"
 
-#: ../../create_localized_help.py:203
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
-msgstr ""
-"Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de "
-"este xlet. Podría romper la funcionalidad del xlet."
+#: ../../create_localized_help.py:265
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet."
 
-#: ../../create_localized_help.py:204
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
-msgstr ""
-"Los reportes de fallos, peticiones de características y contribuciones deben "
-"hacerse en el repositorio de este xlet vinculado a continuación."
+#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
+#: ../../create_localized_help.py:266
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación."
 
-#: ../../create_localized_help.py:210
+#: ../../create_localized_help.py:272
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
-msgstr ""
-"Localización de applets/desklets/extensiones (también conocidos como xlets)"
+msgstr "Localización de applets/desklets/extensiones (también conocidos como xlets)"
 
-#: ../../create_localized_help.py:211
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
-msgstr ""
-"Si este xlet se instaló desde Configuración de Cinnamon, todas las "
-"localizaciones de este xlet se instalaron automáticamente."
+#: ../../create_localized_help.py:273
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:213
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"Si este xlet se instaló manualmente y no a través de Configuración de "
-"Cinnamon, las localizaciones se pueden instalar ejecutando el archivo "
-"llamado **localizations.sh** desde una terminal abierta dentro de la carpeta "
-"del xlet."
+#: ../../create_localized_help.py:275
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado **localizations.sh** desde una terminal abierta dentro de la carpeta del xlet."
 
-#: ../../create_localized_help.py:214
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
-msgstr ""
-"Si este xlet no está disponible en su idioma, la localización puede ser "
-"creada siguiendo las siguientes instrucciones."
+#: ../../create_localized_help.py:276
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Si este xlet no está disponible en su idioma, la localización puede ser creada siguiendo las siguientes instrucciones."
 
 #. TO TRANSLATORS: This is the applet name.
 #. 0dyseus@WallpaperChangerApplet->metadata.json->name
@@ -158,14 +187,8 @@ msgid "Autostart Daemon"
 msgstr "Auto Iniciar Demonio"
 
 #: settings.py:411 applet.js:95
-msgid ""
-"When enabled, the daemon will be automatically started when the applet is "
-"loaded. If it is already running or this is disabled, no action will be "
-"taken."
-msgstr ""
-"Con esta opción activada, el demonio se iniciará automáticamente cuando se "
-"cargue el applet.  Si el demonio ya se está ejecutando o si esta opción está "
-"deshabilitada, no se realizará ninguna acción."
+msgid "When enabled, the daemon will be automatically started when the applet is loaded. If it is already running or this is disabled, no action will be taken."
+msgstr "Con esta opción activada, el demonio se iniciará automáticamente cuando se cargue el applet.  Si el demonio ya se está ejecutando o si esta opción está deshabilitada, no se realizará ninguna acción."
 
 #: settings.py:415
 msgid "Wallpaper Timer Interval (seconds)"
@@ -237,39 +260,24 @@ msgid "Remember Profiles State"
 msgstr "Recordar Estado del Perfil"
 
 #: settings.py:567 applet.js:110
-msgid ""
-"When enabled, the daemon will remember its current and next wallpaper for "
-"the current profile when the profile is changed. This means returning back "
-"to the profile will restore the previous background plus the next in queue."
-msgstr ""
-"Con esta opción activada, el demonio recordará su fondo de pantalla actual y "
-"siguiente para el perfil actual cuando se cambia el perfil.  Esto significa "
-"que volver al perfil restablecerá el fondo anterior más el siguiente en la "
-"cola."
+msgid "When enabled, the daemon will remember its current and next wallpaper for the current profile when the profile is changed. This means returning back to the profile will restore the previous background plus the next in queue."
+msgstr "Con esta opción activada, el demonio recordará su fondo de pantalla actual y siguiente para el perfil actual cuando se cambia el perfil.  Esto significa que volver al perfil restablecerá el fondo anterior más el siguiente en la cola."
 
 #: settings.py:571
 msgid "Show Notifications"
 msgstr "Mostrar Notificaciones"
 
 #: settings.py:572 applet.js:105
-msgid ""
-"Display a notification each time an event happens with wallpaper changer. "
-"This does not stop the applet from reporting errors."
-msgstr ""
-"Mostrar una notificación cada vez que ocurre un evento con el cambiador de "
-"fondo de pantalla.  Esto no impide que el applet informe sobre errores."
+msgid "Display a notification each time an event happens with wallpaper changer. This does not stop the applet from reporting errors."
+msgstr "Mostrar una notificación cada vez que ocurre un evento con el cambiador de fondo de pantalla.  Esto no impide que el applet informe sobre errores."
 
 #: settings.py:576
 msgid "Enable Logging"
 msgstr "Habilitar el registro"
 
 #: settings.py:577
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
-msgstr ""
-"Permite la capacidad de registrar la salida de varias funciones utilizadas "
-"por el applet."
+msgid "It enables the ability to log the output of several functions used by the applet."
+msgstr "Permite la capacidad de registrar la salida de varias funciones utilizadas por el applet."
 
 #: settings.py:585
 msgid "Manage profiles"
@@ -423,39 +431,26 @@ msgstr "Preferencias del applet %s"
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1242
 #, python-format
-msgid ""
-"Please enter your password to install the required settings schema for %s"
-msgstr ""
-"Por favor, introduzca su contraseña para instalar el esquema de "
-"configuración necesario para %s"
+msgid "Please enter your password to install the required settings schema for %s"
+msgstr "Por favor, introduzca su contraseña para instalar el esquema de configuración necesario para %s"
 
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1253
 #, python-format
-msgid ""
-"Could not install the settings schema for %s.  You will have to perform this "
-"step yourself."
-msgstr ""
-"No se ha podido instalar el esquema de configuración para %s. Tendrá que "
-"realizar este paso usted mismo."
+msgid "Could not install the settings schema for %s.  You will have to perform this step yourself."
+msgstr "No se ha podido instalar el esquema de configuración para %s. Tendrá que realizar este paso usted mismo."
 
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1259
 #, python-format
 msgid "Please enter your password to remove the settings schema for %s"
-msgstr ""
-"Por favor, introduzca su contraseña para eliminar el esquema de "
-"configuración para %s"
+msgstr "Por favor, introduzca su contraseña para eliminar el esquema de configuración para %s"
 
 #. TO TRANSLATORS: Could be left blank.
 #: settings.py:1270
 #, python-format
-msgid ""
-"Could not remove the settings schema for %s.  You will have to perform this "
-"step yourself.  This is not a critical error."
-msgstr ""
-"No se pudo eliminar el esquema de configuración para %s. Tendrá que realizar "
-"este paso usted mismo. Esto no es un error crítico."
+msgid "Could not remove the settings schema for %s.  You will have to perform this step yourself.  This is not a critical error."
+msgstr "No se pudo eliminar el esquema de configuración para %s. Tendrá que realizar este paso usted mismo. Esto no es un error crítico."
 
 #: __init__.js:56
 #, javascript-format
@@ -533,12 +528,8 @@ msgid "Change with Profile"
 msgstr "Cambiar con el Perfil"
 
 #: applet.js:100
-msgid ""
-"When enabled, this will cause the daemon to automatically change the "
-"wallpaper whenever the current profile is changed."
-msgstr ""
-"Con esta opción activada, el demonio cambiará automáticamente el fondo de "
-"pantalla siempre que se cambie el perfil actual."
+msgid "When enabled, this will cause the daemon to automatically change the wallpaper whenever the current profile is changed."
+msgstr "Con esta opción activada, el demonio cambiará automáticamente el fondo de pantalla siempre que se cambie el perfil actual."
 
 #: applet.js:104
 msgid "Notifications"
@@ -582,40 +573,28 @@ msgstr "Perfil cambiado a %s"
 msgid "Configure..."
 msgstr "Configurar..."
 
-#. 0dyseus@WallpaperChangerApplet->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Los reportes de fallos, peticiones de características y contribuciones deben "
-"hacerse en el repositorio de este xlet vinculado a continuación."
-
-#. 0dyseus@WallpaperChangerApplet->metadata.json->description
-msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
-msgstr ""
-"Diapositivas de fondos de pantalla para Cinnamon con soporte para múltiples "
-"perfiles."
-
 #. 0dyseus@WallpaperChangerApplet->metadata.json->contributors
 msgid "See this xlet help file."
 msgstr "Ver el archivo de ayuda de este xlet."
 
+#. 0dyseus@WallpaperChangerApplet->metadata.json->description
+msgid "Cinnamon wallpaper slideshow applet with multiple profiles support."
+msgstr "Diapositivas de fondos de pantalla para Cinnamon con soporte para múltiples perfiles."
+
+#~ msgid "Choose language"
+#~ msgstr "Elegir idioma"
+
+#~ msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+#~ msgstr "Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación."
+
 #~ msgid "Read CONTRIBUTORS.md file inside this xlet folder."
 #~ msgstr "Leer el archivo CONTRIBUTORS.md dentro de la carpeta de este xlet."
 
-#~ msgid ""
-#~ "A full list of contributors can be found in the CONTRIBUTORS.md file on "
-#~ "the root of this xlet folder."
-#~ msgstr ""
-#~ "Se puede encontrar una lista completa de contribuyentes en el archivo "
-#~ "CONTRIBUTORS.md en la raíz de la carpeta de este xlet."
+#~ msgid "A full list of contributors can be found in the CONTRIBUTORS.md file on the root of this xlet folder."
+#~ msgstr "Se puede encontrar una lista completa de contribuyentes en el archivo CONTRIBUTORS.md en la raíz de la carpeta de este xlet."
 
-#~ msgid ""
-#~ "Eric Gach: Author of Desk Changer gnome-shell extension. https://github."
-#~ "com/BigE/desk-changer"
-#~ msgstr ""
-#~ "Eric Gach: Autor de la extnsión para gnome-shell Desk Changer https://"
-#~ "github.com/BigE/desk-changer."
+#~ msgid "Eric Gach: Author of Desk Changer gnome-shell extension. https://github.com/BigE/desk-changer"
+#~ msgstr "Eric Gach: Autor de la extnsión para gnome-shell Desk Changer https://github.com/BigE/desk-changer."
 
 #~ msgid "eson57: Swedish localization."
 #~ msgstr "eson57: Localización Sueca."
@@ -626,13 +605,5 @@ msgstr "Ver el archivo de ayuda de este xlet."
 #~ msgid "Help for {xlet_name}"
 #~ msgstr "Ayuda para {xlet_name}"
 
-#~ msgid ""
-#~ "If this xlet was installed manually and not trough Cinnamon Settings, "
-#~ "localizations can be installed by executing the script called "
-#~ "<strong>localizations.sh</strong> from a terminal opened inside the "
-#~ "xlet's folder."
-#~ msgstr ""
-#~ "Si este xlet se instaló manualmente y no a través de Configuración de "
-#~ "Cinnamon, las localizaciones se pueden instalar ejecutando el archivo "
-#~ "llamado <strong>localizations.sh</strong> desde una terminal abierta "
-#~ "dentro de la carpeta del xlet."
+#~ msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called <strong>localizations.sh</strong> from a terminal opened inside the xlet's folder."
+#~ msgstr "Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado <strong>localizations.sh</strong> desde una terminal abierta dentro de la carpeta del xlet."

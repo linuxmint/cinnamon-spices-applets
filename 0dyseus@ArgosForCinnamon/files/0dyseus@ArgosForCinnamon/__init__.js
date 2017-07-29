@@ -1422,7 +1422,7 @@ UnitSelectorSubMenuMenuItem.prototype = {
         this._valueKey = aValueKey;
         this._label = aLabel;
 
-        PopupMenu.PopupSubMenuMenuItem.prototype._init.call(this, "");
+        PopupMenu.PopupSubMenuMenuItem.prototype._init.call(this, " "); // ¬¬
 
         this.setLabel();
         this._populateMenu();
@@ -2396,59 +2396,59 @@ Avoid its use for the moment until I figure out WTF is going on.
  */
 
 // https://github.com/rjanja/desktop-capture/blob/master/capture%40rjanja/3.2/apputil.js
-function TryExec(aCmd, aOnStart, aOnFailure, aOnComplete, aLogger) {
-    try {
-        let success, argv, pid, in_fd, out_fd, err_fd;
-        [success, argv] = GLib.shell_parse_argv(aCmd);
+// function TryExec(aCmd, aOnStart, aOnFailure, aOnComplete, aLogger) {
+//     try {
+//         let success, argv, pid, in_fd, out_fd, err_fd;
+//         [success, argv] = GLib.shell_parse_argv(aCmd);
 
-        try {
-            [success, pid, in_fd, out_fd, err_fd] = GLib.spawn_async_with_pipes(
-                null,
-                argv,
-                null,
-                GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-                null,
-                null);
-        } catch (aErr) {
-            typeof aLogger === "function" && aLogger("Failure creating process");
-            typeof aOnFailure === "function" && aOnFailure(aCmd);
-            return;
-        }
+//         try {
+//             [success, pid, in_fd, out_fd, err_fd] = GLib.spawn_async_with_pipes(
+//                 null,
+//                 argv,
+//                 null,
+//                 GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+//                 null,
+//                 null);
+//         } catch (aErr) {
+//             typeof aLogger === "function" && aLogger("Failure creating process");
+//             typeof aOnFailure === "function" && aOnFailure(aCmd);
+//             return;
+//         }
 
-        if (success && pid !== 0) {
-            let out_reader = new Gio.DataInputStream({
-                base_stream: new Gio.UnixInputStream({
-                    fd: out_fd
-                })
-            });
-            // Wait for answer
-            typeof aLogger === "function" && aLogger("Spawned process with pid=" + pid);
-            typeof aOnStart === "function" && aOnStart(pid);
-            GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid,
-                function(pid, status) {
-                    GLib.spawn_close_pid(pid);
-                    let [line, size, buf] = [null, 0, ""];
+//         if (success && pid !== 0) {
+//             let out_reader = new Gio.DataInputStream({
+//                 base_stream: new Gio.UnixInputStream({
+//                     fd: out_fd
+//                 })
+//             });
+//             // Wait for answer
+//             typeof aLogger === "function" && aLogger("Spawned process with pid=" + pid);
+//             typeof aOnStart === "function" && aOnStart(pid);
+//             GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid,
+//                 function(pid, status) {
+//                     GLib.spawn_close_pid(pid);
+//                     let [line, size, buf] = [null, 0, ""];
 
-                    while (([line, size] = out_reader.read_line(null)) !== null && line !== null) {
-                        buf += line;
-                    }
+//                     while (([line, size] = out_reader.read_line(null)) !== null && line !== null) {
+//                         buf += line;
+//                     }
 
-                    if (buf.indexOf("Error during recording") > 0) {
-                        typeof aOnFailure === "function" && aOnFailure(aCmd);
-                    } else {
-                        typeof aOnComplete === "function" && aOnComplete(status, buf);
-                    }
-                });
-        } else {
-            typeof aLogger === "function" && aLogger("Failed to spawn process");
-            typeof aOnFailure === "function" && aOnFailure(aCmd);
-        }
+//                     if (buf.indexOf("Error during recording") > 0) {
+//                         typeof aOnFailure === "function" && aOnFailure(aCmd);
+//                     } else {
+//                         typeof aOnComplete === "function" && aOnComplete(status, buf);
+//                     }
+//                 });
+//         } else {
+//             typeof aLogger === "function" && aLogger("Failed to spawn process");
+//             typeof aOnFailure === "function" && aOnFailure(aCmd);
+//         }
 
-        return true;
-    } catch (aErr) {
-        global.logError(aErr);
-    }
-}
+//         return true;
+//     } catch (aErr) {
+//         global.logError(aErr);
+//     }
+// }
 
 function informAboutMissingDependencies(aMsg, aRes) {
     customNotify(

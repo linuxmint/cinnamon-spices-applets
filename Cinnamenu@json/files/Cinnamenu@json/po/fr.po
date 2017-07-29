@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-22 11:09+0100\n"
 "PO-Revision-Date: 2017-03-22 11:09+0100\n"
@@ -41,29 +41,8 @@ msgid "Run with NVIDIA GPU"
 msgstr ""
 
 #: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Recherche dans les marque-pages Firefox désactivée"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Si vous voulez rechercher dans les marque-pages Firefox, vous devez "
-"installer les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite "
-"[Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Recherche dans les marque-pages Midori désactivée"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Si vous voulez rechercher dans les marque-pages Midori, vous devez installer "
-"les paquages requis: libgir1.2-gda-5.0 [Ubuntu] ou libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Ensemble gir1.2-gda-5.0 requis pour les favoris Firefox et Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -98,8 +77,8 @@ msgid "Places"
 msgstr "Emplacements"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Récent"
+msgid "Recent Files"
+msgstr "Documents récents"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -247,16 +226,6 @@ msgstr ""
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr ""
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr ""
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr ""
@@ -299,170 +268,42 @@ msgstr ""
 msgid "Cinnamenu"
 msgstr ""
 
-#~ msgid "Webmarks"
-#~ msgstr "Signets"
+msgid "Show bookmarks and places"
+msgstr "Afficher les signets et les emplacements"
 
-#~ msgid "Favorites"
-#~ msgstr "Favoris"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+"Choisir d'afficher ou non les favoris et les emplacements dans le menu."
 
-#~ msgid "Toggle Startup Apps View"
-#~ msgstr "Alterner vue des Apps au démarrage"
+msgid "Show application icons"
+msgstr "Afficher les icônes des applications"
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Applications Fréquentes"
+msgid "Choose whether or not to show icons on applications."
+msgstr "Choisir d'afficher ou non les icônes des applications."
 
-#~ msgid "Restart Shell"
-#~ msgstr "Redémarrer Shell"
+msgid "Show category icons"
+msgstr "Afficher les icônes de catégorie"
 
-#~ msgid "Suspend"
-#~ msgstr "Mise en Veille"
+msgid "Choose whether or not to show icons on categories."
+msgstr "Choisir d'afficher ou non les icônes de catégorie."
 
-#~ msgid "Shutdown"
-#~ msgstr "Éteindre"
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+"Activer l'entrée du chemin du système de fichier dans la boîte de recherche"
 
-#~ msgid "Logout User"
-#~ msgstr "Fermer Session"
+msgid "Allows path entry in the menu search box."
+msgstr "Permet la recherche de chemins de fichiers."
 
-#~ msgid "Preferences"
-#~ msgstr "Préférences"
+msgid "Show application's description under their titles"
+msgstr "Afficher la description du programme sous son icône"
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Aucun style cinnamenu trouvé"
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr "Afficher ou masquer la description du programme sous son icône"
 
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Échec de lancement"
+msgid "Clear List"
+msgstr "Effacer la liste"
 
-#~ msgid "Browse Network"
-#~ msgstr "Parcouris Réseau"
-
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "Paramètres du Panneau"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Désactive "
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Supprimer le bouton View du panel"
-
-#~ msgid "Label for View button"
-#~ msgstr "Nom affiché du bouton View"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Utiliser l'icone avec le bouton View"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Supprimer le bouton Apps du panel"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Nom affiché du bouton Apps"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Utiliser l'icone avec le bouton Apps"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Supprimer le bouton Menu du panel"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Nom affiché du bouton Menu"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Nom affiché du bouton Menu"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Désactive hot spot du bouton Menu"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Désactiver raccourci clavier du bouton Menu"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Accelerateur invalide. Essayez F12, <Super>space, <Ctrl><Alt><Shift>a, "
-#~ "etc."
-
-#~ msgid "Set Menu button position"
-#~ msgstr "Définir position bouton Menu"
-
-#~ msgid "Left"
-#~ msgstr "Gauche"
-
-#~ msgid "Center"
-#~ msgstr "Centre"
-
-#~ msgid "Right"
-#~ msgstr "Droite"
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Paramètres Menu</b>"
-
-#~ msgid "Hide User Options Panel"
-#~ msgstr "Masquer le panneau de paramètres utilisateur"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Masquer panneau de raccourcis"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Taille agencement du panneau"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Compact"
-#~ msgstr "Compact"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Icones à afficher sur le Panneau des raccourcis"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Applications à afficher au démarrage"
-
-#~ msgid "All"
-#~ msgstr "Tout"
-
-#~ msgid "Frequent"
-#~ msgstr "Fréquent"
-
-#~ msgid "None"
-#~ msgstr "Rien"
-
-#~ msgid "Number of columns in Application Grid"
-#~ msgstr "Nombre de colonnes dans la Grille Application"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "6"
-#~ msgstr "6"
-
-#~ msgid "7"
-#~ msgstr "7"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Mode de vue par défaut pour les applications"
-
-#~ msgid "Hide Categories Panel"
-#~ msgstr "Masquer panneau Catégories"
-
-#~ msgid "Category selection method"
-#~ msgstr "Méthode de sélection d'une Catégorie"
-
-#~ msgid "Hover"
-#~ msgstr "Survol"
-
-#~ msgid "Click"
-#~ msgstr "Clique"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "Taille des icones du panneau Raccourcis"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "Taille des icones des Applications en vue Liste"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "Taille des icones des Application en vue Grille"
+msgid "No recent documents"
+msgstr "Aucun document récent"

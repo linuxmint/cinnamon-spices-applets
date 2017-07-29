@@ -5,7 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@SimpleToDoList 1.00\n"
+"Project-Id-Version: 0dyseus@SimpleToDoList 1.02\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-03 08:05+0200\n"
 "PO-Revision-Date: 2017-06-03 08:06+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
@@ -14,118 +15,71 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: make-xlet-pot.py 1.0.32\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../../create_localized_help.py:64
 msgid "Applet usage and features"
 msgstr "Programanvändning och funktioner"
 
 #: ../../create_localized_help.py:65
-msgid ""
-"The usage of this applet is very simple. Each task list is represented by a "
-"sub menu and each sub menu item inside a sub menu represents a task."
-msgstr ""
-"Det här panelprogrammet är mycket enkelt att använda. Varje uppgiftslista "
-"representeras av en undermeny och varje undermenypost representerar en "
-"uppgift."
+msgid "The usage of this applet is very simple. Each task list is represented by a sub menu and each sub menu item inside a sub menu represents a task."
+msgstr "Det här panelprogrammet är mycket enkelt att använda. Varje uppgiftslista representeras av en undermeny och varje undermenypost representerar en uppgift."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:68
-msgid ""
-"To add a new tasks list, simply focus the **New tasks list...** entry, give "
-"a name to the tasks list and press [[Enter]]."
-msgstr ""
-"För att lägga till en ny uppgiftslista, fokuserar du menyposten **Ny "
-"uppgiftslista..**, skriver ett listnamn och trycker [[Enter]]."
+msgid "To add a new tasks list, simply focus the **New tasks list...** entry, give a name to the tasks list and press [[Enter]]."
+msgstr "För att lägga till en ny uppgiftslista, fokuserar du menyposten **Ny uppgiftslista..**, skriver ett listnamn och trycker [[Enter]]."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:71
-msgid ""
-"To add a new task, simply focus the **New task...** entry, give a name to "
-"the task and press [[Enter]]."
-msgstr ""
-"För att lägga till en ny uppgift, fokuserar du menyposten **Ny uppgift...**, "
-"skriver din uppgiftstext och trycker [[Enter]]."
+msgid "To add a new task, simply focus the **New task...** entry, give a name to the task and press [[Enter]]."
+msgstr "För att lägga till en ny uppgift, fokuserar du menyposten **Ny uppgift...**, skriver din uppgiftstext och trycker [[Enter]]."
 
 #: ../../create_localized_help.py:72
 msgid "All tasks lists and tasks can be edited in-line."
 msgstr "Alla uppgiftslistor och uppgifter kan redigeras direkt i menyn."
 
 #: ../../create_localized_help.py:73
-msgid ""
-"Tasks can be marked as completed by changing the checked state of their sub "
-"menu items."
+msgid "Tasks can be marked as completed by changing the checked state of their sub menu items."
 msgstr "Åtgärder kan markeras som slutförda, genom att bocka i statusrutan."
 
 #: ../../create_localized_help.py:74
-msgid ""
-"Each tasks list can have its own settings for sorting tasks (by name and/or "
-"by completed state), remove task button visibility and completed tasks "
-"visibility."
-msgstr ""
-"Varje uppgiftslista kan ha sina egna inställningar för uppgiftssortering "
-"(efter namn och/eller slutförd-status), synlighet för borttagningsknappar "
-"och slutförd-status."
+msgid "Each tasks list can have its own settings for sorting tasks (by name and/or by completed state), remove task button visibility and completed tasks visibility."
+msgstr "Varje uppgiftslista kan ha sina egna inställningar för uppgiftssortering (efter namn och/eller slutförd-status), synlighet för borttagningsknappar och slutförd-status."
 
 #: ../../create_localized_help.py:75
-msgid ""
-"Each tasks list can be saved as individual TODO files and also can be "
-"exported into a file for backup purposes."
-msgstr ""
-"Varje uppgiftslista kan sparas som individuell TODO-fil och exporteras till "
-"en fil för säkerhetskopiering."
+msgid "Each tasks list can be saved as individual TODO files and also can be exported into a file for backup purposes."
+msgstr "Varje uppgiftslista kan sparas som individuell TODO-fil och exporteras till en fil för säkerhetskopiering."
 
 #: ../../create_localized_help.py:76
-msgid ""
-"Tasks can be reordered by simply dragging them inside the tasks list they "
-"belong to (only if all automatic sorting options for the tasks list are "
-"disabled)."
-msgstr ""
-"Uppgifter kan sorteras om, genom att dra och släppa dem inom den egna "
-"uppgiftslistan (endast om all automatisk sortering är inaktiverad)."
+msgid "Tasks can be reordered by simply dragging them inside the tasks list they belong to (only if all automatic sorting options for the tasks list are disabled)."
+msgstr "Uppgifter kan sorteras om, genom att dra och släppa dem inom den egna uppgiftslistan (endast om all automatisk sortering är inaktiverad)."
 
 #: ../../create_localized_help.py:77
-msgid ""
-"Tasks can be deleted by simply pressing the delete task button (if visible)."
-msgstr ""
-"Åtgärder kan tas bort genom att trycka på borttagningsknappen (om synlig)."
+msgid "Tasks can be deleted by simply pressing the delete task button (if visible)."
+msgstr "Åtgärder kan tas bort genom att trycka på borttagningsknappen (om synlig)."
 
 #: ../../create_localized_help.py:78
-msgid ""
-"Colorized priority tags support. The background and text colors of a task "
-"can be colorized depending on the @tag found inside the task text."
-msgstr ""
-"Stöd för färgade prioritetstaggar. Bakgrund och text för en uppgift, kan "
-"färgas beroende på den @tagg som anges i uppgiftstexten."
+msgid "Colorized priority tags support. The background and text colors of a task can be colorized depending on the @tag found inside the task text."
+msgstr "Stöd för färgade prioritetstaggar. Bakgrund och text för en uppgift, kan färgas beroende på den @tagg som anges i uppgiftstexten."
 
 #: ../../create_localized_help.py:79
 msgid "Configurable hotkey to open/close the menu."
 msgstr "Konfigurerbar snabbtangent för att öppna/stänga menyn."
 
 #: ../../create_localized_help.py:80
-msgid ""
-"Read the tooltips of each option on this applet settings window for more "
-"details."
-msgstr ""
-"Läs verktygsbeskrivningen för varje alternativ i programmets inställningar, "
-"för mer detaljerad information."
+msgid "Read the tooltips of each option on this applet settings window for more details."
+msgstr "Läs verktygsbeskrivningen för varje alternativ i programmets inställningar, för mer detaljerad information."
 
 #: ../../create_localized_help.py:82
 msgid "Keyboard shortcuts"
 msgstr "Tangentbordsgenvägar"
 
 #: ../../create_localized_help.py:83
-msgid ""
-"The keyboard navigation inside this applet menu is very similar to the "
-"keyboard navigation used by any other menu on Cinnamon. But it's slightly "
-"changed to facilitate tasks and sections handling and edition."
-msgstr ""
-"Tangentbordsnavigering i det här panelprogrammet, är mycket lik "
-"tangentbordsnavigering i vilken annan Cinnamon-meny som helst. Den är dock "
-"något ändrad för att underlätta aktiviteter vid uppgifts-/listhantering och "
-"redigering."
+msgid "The keyboard navigation inside this applet menu is very similar to the keyboard navigation used by any other menu on Cinnamon. But it's slightly changed to facilitate tasks and sections handling and edition."
+msgstr "Tangentbordsnavigering i det här panelprogrammet, är mycket lik tangentbordsnavigering i vilken annan Cinnamon-meny som helst. Den är dock något ändrad för att underlätta aktiviteter vid uppgifts-/listhantering och redigering."
 
 #: ../../create_localized_help.py:85
 msgid "When the focus is on a task"
@@ -133,44 +87,27 @@ msgstr "När fokus är på en uppgiftspost"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:87
-msgid ""
-"[[Ctrl]] + [[Spacebar]]: Toggle the completed (checked) state of a task."
-msgstr ""
-"[[Ctrl]] + [[Blanksteg]]: Växlar status mellan slutförd (ibockad) och icke "
-"slutförd uppgift."
+msgid "[[Ctrl]] + [[Spacebar]]: Toggle the completed (checked) state of a task."
+msgstr "[[Ctrl]] + [[Blanksteg]]: Växlar status mellan slutförd (ibockad) och icke slutförd uppgift."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:89
-msgid ""
-"[[Shift]] + [[Delete]]: Deletes a task and focuses the element above of the "
-"deleted task."
-msgstr ""
-"[[Shift]] + [[Delete]]: Tar bort en uppgift och fokuserar posten ovanför den "
-"borttagna."
+msgid "[[Shift]] + [[Delete]]: Deletes a task and focuses the element above of the deleted task."
+msgstr "[[Shift]] + [[Delete]]: Tar bort en uppgift och fokuserar posten ovanför den borttagna."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:91
-msgid ""
-"[[Alt]] + [[Delete]]: Deletes a task and focuses the element bellow the "
-"deleted task."
-msgstr ""
-"[[Alt]] + [[Delete]]: Tar bort en post och fokuserar nästa, under den "
-"borttagna posten."
+msgid "[[Alt]] + [[Delete]]: Deletes a task and focuses the element bellow the deleted task."
+msgstr "[[Alt]] + [[Delete]]: Tar bort en post och fokuserar nästa, under den borttagna posten."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:93
-msgid ""
-"[[Ctrl]] + [[Arrow Up]] or [[Ctrl]] + [[Arrow Down]]: Moves a task inside "
-"its tasks list."
-msgstr ""
-"[[Ctrl]] + [[Uppåtpil]] eller [[Ctrl]] + [[Neråtpil]]: Flyttar ett steg "
-"uppåt eller neråt i uppgiftsslistan."
+msgid "[[Ctrl]] + [[Arrow Up]] or [[Ctrl]] + [[Arrow Down]]: Moves a task inside its tasks list."
+msgstr "[[Ctrl]] + [[Uppåtpil]] eller [[Ctrl]] + [[Neråtpil]]: Flyttar ett steg uppåt eller neråt i uppgiftsslistan."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:95
-msgid ""
-"[[Insert]]: Will focus the **New task...** entry of the currently opened "
-"task section."
+msgid "[[Insert]]: Will focus the **New task...** entry of the currently opened task section."
 msgstr "[[Insert]]: fokuserar posten **Ny uppgift...** i öppnad uppgiftslista."
 
 #: ../../create_localized_help.py:97
@@ -179,24 +116,13 @@ msgstr "När fokus är på en uppgiftslista"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:99
-msgid ""
-"[[Arrow Left]] and [[Arrow Right]]: If the tasks list (sub menu) is closed, "
-"these keys will open the sub menu. If the sub menu is open, these keys will "
-"move the cursor inside the sub menu label to allow the edition of the "
-"section text."
-msgstr ""
-"[[Vänsterpil]] och [[Högerpil]]: Om uppgiftslistan (undermenyn) är stängd, "
-"öppnas den med dessa tangenter. Om undermenyn är öppen, flyttas markören "
-"inne i undermenyposten, för att möjliggöra textredigering."
+msgid "[[Arrow Left]] and [[Arrow Right]]: If the tasks list (sub menu) is closed, these keys will open the sub menu. If the sub menu is open, these keys will move the cursor inside the sub menu label to allow the edition of the section text."
+msgstr "[[Vänsterpil]] och [[Högerpil]]: Om uppgiftslistan (undermenyn) är stängd, öppnas den med dessa tangenter. Om undermenyn är öppen, flyttas markören inne i undermenyposten, för att möjliggöra textredigering."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:101
-msgid ""
-"[[Insert]]: Will focus the **New task...** entry inside the task section. If "
-"the task section sub menu isn't open, it will be opened."
-msgstr ""
-"[[Insert]]: Fokuserar menyposten **Ny uppgift...**, i uppgiftslistan. Om "
-"undermenyn inte är öppen, kommer den att öppnas."
+msgid "[[Insert]]: Will focus the **New task...** entry inside the task section. If the task section sub menu isn't open, it will be opened."
+msgstr "[[Insert]]: Fokuserar menyposten **Ny uppgift...**, i uppgiftslistan. Om undermenyn inte är öppen, kommer den att öppnas."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:104
@@ -205,11 +131,8 @@ msgstr "När fokus är på menyposten **Ny uppgift...**"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:106
-msgid ""
-"[[Ctrl]] + [[Spacebar]]: Toggles the visibility of the tasks list options "
-"menu."
-msgstr ""
-"[[Ctrl]] + [[Spacebar]]: Öppnar/Stänger uppgiftslistans alternativmeny."
+msgid "[[Ctrl]] + [[Spacebar]]: Toggles the visibility of the tasks list options menu."
+msgstr "[[Ctrl]] + [[Spacebar]]: Öppnar/Stänger uppgiftslistans alternativmeny."
 
 #: ../../create_localized_help.py:108
 msgid "Known issues"
@@ -217,18 +140,8 @@ msgstr "Kända problem"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:110
-msgid ""
-"**Hovering over items inside the menu doesn't highlight menu items nor sub "
-"menus:** This is actually a desired feature. Allowing the items to highlight "
-"on mouse hover would cause the entries to loose focus, resulting in the "
-"impossibility to keep typing text inside them and constantly forcing us to "
-"move the mouse cursor to regain focus."
-msgstr ""
-"**Hovring över en menypost markerar inte objektet.** Detta är faktiskt ett "
-"önskvärt beteende. Om man låter muspekaren markera ett objekt vid hovring, "
-"kommer menyposterna att förlora fokus, vilket gör det omöjligt att fortsätta "
-"skriva text i dem och dessutom tvinga oss att flytta muspekaren för att "
-"återfå fokus."
+msgid "**Hovering over items inside the menu doesn't highlight menu items nor sub menus:** This is actually a desired feature. Allowing the items to highlight on mouse hover would cause the entries to loose focus, resulting in the impossibility to keep typing text inside them and constantly forcing us to move the mouse cursor to regain focus."
+msgstr "**Hovring över en menypost markerar inte objektet.** Detta är faktiskt ett önskvärt beteende. Om man låter muspekaren markera ett objekt vid hovring, kommer menyposterna att förlora fokus, vilket gör det omöjligt att fortsätta skriva text i dem och dessutom tvinga oss att flytta muspekaren för att återfå fokus."
 
 #: ../../create_localized_help.py:111
 msgid "Task entries look wrong:"
@@ -236,26 +149,8 @@ msgstr "Åtgärdsposter ser fel ut:"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:113
-msgid ""
-"Task entries on this applet have the ability to wrap its text in case one "
-"sets a fixed width for them. They also can be multi line ([[Shift]] + "
-"[[Enter]] inside an entry will create a new line). Some Cinnamon themes, "
-"like the default Mint-X family of themes, set a fixed width and a fixed "
-"height for entries inside menus. These fixed sizes makes it impossible to "
-"programmatically set a desired width for the entries (at least, I couldn't "
-"find a way to do it). And the fixed height doesn't allow the entries to "
-"expand, completely breaking the entries capability to wrap its text and to "
-"be multi line."
-msgstr ""
-"Uppgiftsposter i detta program, har förmågan att radbryta sin text om man "
-"anger en fast bredd för dem. De kan också göras flerradiga manuellt "
-"([[Shift]] + [[Enter]] inuti en post kommer att skapa ny rad). Några "
-"Cinnamon-teman, som Mint-X-familjens standarteman, sätter en fast bredd och "
-"höjd för poster inuti menyer. Dessa fasta storlekar gör det programatiskt "
-"omöjligt att ange en önskad bredd för posterna (jag kunde åtminstone inte "
-"hitta ett sätt att göra det). Fast höjd tillåter inte posterna att "
-"expandera, bryter helt menyposters förmåga att radbryta text och att bli "
-"flerradiga."
+msgid "Task entries on this applet have the ability to wrap its text in case one sets a fixed width for them. They also can be multi line ([[Shift]] + [[Enter]] inside an entry will create a new line). Some Cinnamon themes, like the default Mint-X family of themes, set a fixed width and a fixed height for entries inside menus. These fixed sizes makes it impossible to programmatically set a desired width for the entries (at least, I couldn't find a way to do it). And the fixed height doesn't allow the entries to expand, completely breaking the entries capability to wrap its text and to be multi line."
+msgstr "Uppgiftsposter i detta program, har förmågan att radbryta sin text om man anger en fast bredd för dem. De kan också göras flerradiga manuellt ([[Shift]] + [[Enter]] inuti en post kommer att skapa ny rad). Några Cinnamon-teman, som Mint-X-familjens standarteman, sätter en fast bredd och höjd för poster inuti menyer. Dessa fasta storlekar gör det programatiskt omöjligt att ange en önskad bredd för posterna (jag kunde åtminstone inte hitta ett sätt att göra det). Fast höjd tillåter inte posterna att expandera, bryter helt menyposters förmåga att radbryta text och att bli flerradiga."
 
 #: ../../create_localized_help.py:115
 msgid "This is how entries should look like"
@@ -275,28 +170,8 @@ msgstr "Felaktig stilsättning för menyposter"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:124
-msgid ""
-"The only way to fix this (that I could find) is by editing the Cinnamon "
-"theme that one is using and remove those fixed sizes. The CSS selectors that "
-"needs to be edited are **.menu StEntry**, **.menu StEntry:focus**, **.popup-"
-"menu StEntry** and **.popup-menu StEntry:focus**. Depending on the Cinnamon "
-"version the theme was created for, one might find just the first two "
-"selectors or the last two or all of them. The CSS properties that need to be "
-"edited are **width** and **height**. They could be removed, but the sensible "
-"thing to do is to rename them to **min-width** and **min-height** "
-"respectively. After editing the theme's file and restarting Cinnamon, the "
-"entries inside this applet will look and work like they should."
-msgstr ""
-"Enda sättet att åtgärda detta (som jag kunde hitta), är att redigera det "
-"aktuella Cinnamon-tema som används, och ta bort de fasta storlekarna. De CSS-"
-"selektorer som behöver redigeras är **.menu StEntry**, **.menu StEntry:"
-"focus**, **.popup-menu StEntry** och **.popup-menu StEntry:focus**. Beroende "
-"på den Cinnamon-version temat skapades för, kanske man bara hittar de två "
-"första selektorerna, eller de två sista, eller samtliga. De CSS-egenskaper "
-"som behöver redigeras är **width** och **height**. De kan tas bort, men det "
-"vettigaste man kan göra är att byta namn på dem till **min-width** "
-"respektive **min-height**. Efter redigering av temafilen och omstart av "
-"Cinnamon, bör menyposterna i detta program, se ut och fungera som de skall."
+msgid "The only way to fix this (that I could find) is by editing the Cinnamon theme that one is using and remove those fixed sizes. The CSS selectors that needs to be edited are **.menu StEntry**, **.menu StEntry:focus**, **.popup-menu StEntry** and **.popup-menu StEntry:focus**. Depending on the Cinnamon version the theme was created for, one might find just the first two selectors or the last two or all of them. The CSS properties that need to be edited are **width** and **height**. They could be removed, but the sensible thing to do is to rename them to **min-width** and **min-height** respectively. After editing the theme's file and restarting Cinnamon, the entries inside this applet will look and work like they should."
+msgstr "Enda sättet att åtgärda detta (som jag kunde hitta), är att redigera det aktuella Cinnamon-tema som används, och ta bort de fasta storlekarna. De CSS-selektorer som behöver redigeras är **.menu StEntry**, **.menu StEntry:focus**, **.popup-menu StEntry** och **.popup-menu StEntry:focus**. Beroende på den Cinnamon-version temat skapades för, kanske man bara hittar de två första selektorerna, eller de två sista, eller samtliga. De CSS-egenskaper som behöver redigeras är **width** och **height**. De kan tas bort, men det vettigaste man kan göra är att byta namn på dem till **min-width** respektive **min-height**. Efter redigering av temafilen och omstart av Cinnamon, bör menyposterna i detta program, se ut och fungera som de skall."
 
 #: ../../create_localized_help.py:146
 msgid "The following two sections are available only in English."
@@ -336,51 +211,29 @@ msgid "IMPORTANT!!!"
 msgstr "VIKTIGT!!!"
 
 #: ../../create_localized_help.py:259
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
-msgstr ""
-"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
-"programmets funktioner."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner."
 
 #: ../../create_localized_help.py:260
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
-"kodförråd, på följande länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk."
 
 #: ../../create_localized_help.py:266
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Applets/Desklets/Extensions (xlets) översättning"
 
 #: ../../create_localized_help.py:267
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
-msgstr ""
-"Om denna xlet installerades från Cinnamons inställningar, installerades "
-"också alla översättningar automatiskt."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:269
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
-"kan översättningar installeras genom att köra skriptet **localizations.sh** "
-"från en terminal öppnad i programmappen."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet **localizations.sh** från en terminal öppnad i programmappen."
 
 #: ../../create_localized_help.py:270
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
-msgstr ""
-"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
-"följande instruktioner."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner."
 
 #: appletHelper.py:64
 msgid "Select or enter file to export to"
@@ -425,12 +278,8 @@ msgid "Tasks list - Some examples"
 msgstr "Åtgärdslista - Några exempel"
 
 #: __init__.js:44
-msgid ""
-"Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task "
-"text. For now, there are 5 priority tags available."
-msgstr ""
-"Åtgärder kan \"taggas\" genom att skriva \"@taggnamn\" som en del av "
-"uppgiftstexten. För närvarande finns det 5 prioritetstaggar."
+msgid "Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task text. For now, there are 5 priority tags available."
+msgstr "Åtgärder kan \"taggas\" genom att skriva \"@taggnamn\" som en del av uppgiftstexten. För närvarande finns det 5 prioritetstaggar."
 
 #: __init__.js:47
 msgid "This is a @critical priority task"
@@ -549,21 +398,15 @@ msgid "Export all current tasks lists into a JSON file."
 msgstr "Exportera aktuella uppgiftslistor i en JSON-fil."
 
 #: applet.js:640 applet.js:656
-msgid ""
-"JSON files exported by this applet can be imported back into the applet and "
-"the tasks list found inside the files are added to the tasks lists currently "
-"loaded into the applet."
-msgstr ""
-"JSON-filer som exporteras från det här programmet, kan återimporteras till "
-"programmet och uppgiftslistorna i filen, läggs till de andra listorna."
+msgid "JSON files exported by this applet can be imported back into the applet and the tasks list found inside the files are added to the tasks lists currently loaded into the applet."
+msgstr "JSON-filer som exporteras från det här programmet, kan återimporteras till programmet och uppgiftslistorna i filen, läggs till de andra listorna."
 
 #: applet.js:646
 msgid "Import tasks"
 msgstr "Importera uppgifter"
 
 #: applet.js:655
-msgid ""
-"Import tasks lists from a previously exported JSON file into this applet."
+msgid "Import tasks lists from a previously exported JSON file into this applet."
 msgstr "Importera uppgiftslistor från en tidigare exporterad JSON-fil."
 
 #: applet.js:665
@@ -571,11 +414,8 @@ msgid "Restore example tasks"
 msgstr "Återställ exempeluppgifter"
 
 #: applet.js:679
-msgid ""
-"Restore the example tasks list that were present when the applet was first "
-"loaded."
-msgstr ""
-"Återställ de exempeluppgifter som fanns när programmet var nyinstallerat."
+msgid "Restore the example tasks list that were present when the applet was first loaded."
+msgstr "Återställ de exempeluppgifter som fanns när programmet var nyinstallerat."
 
 #: applet.js:685
 msgid "Reset tasks"
@@ -602,12 +442,8 @@ msgid "Open this applet help file."
 msgstr "Öppna programmets hjälpfil."
 
 #. 0dyseus@SimpleToDoList->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
-"kodförråd, på nedanstående länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets kodförråd, på nedanstående länk."
 
 #. 0dyseus@SimpleToDoList->metadata.json->description
 msgid "Simple applet to create ToDo lists."
@@ -671,14 +507,8 @@ msgstr "pixlar"
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_min_width->tooltip
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_section_set_max_width->tooltip
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_max_width->tooltip
-msgid ""
-"Cinnamon menus automatically change their size to accommodate the elements "
-"that they contain. Setting a fixed size for those elements will avoid the "
-"constant resizing of the menu when opening/closing sub menus."
-msgstr ""
-"Cinnamon-menyer ändrar automatiskt storlek för att anpassa sig efter "
-"innehållet. För att undvika ständiga storleksändringar när undermenyer "
-"öppnas/stängs, kan du ange en konstant storlek på menyposterna."
+msgid "Cinnamon menus automatically change their size to accommodate the elements that they contain. Setting a fixed size for those elements will avoid the constant resizing of the menu when opening/closing sub menus."
+msgstr "Cinnamon-menyer ändrar automatiskt storlek för att anpassa sig efter innehållet. För att undvika ständiga storleksändringar när undermenyer öppnas/stängs, kan du ange en konstant storlek på menyposterna."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head3->description
 msgid "Tasks appearance"
@@ -693,10 +523,8 @@ msgid "Keep just one sub menu open"
 msgstr "Håll bara en undermeny öppen"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_keep_one_menu_open->tooltip
-msgid ""
-"When enabled, the previously opened sub menu will be automatically closed."
-msgstr ""
-"Vid aktivering, kommer tidigare öppnad undermeny att stängas automatiskt."
+msgid "When enabled, the previously opened sub menu will be automatically closed."
+msgstr "Vid aktivering, kommer tidigare öppnad undermeny att stängas automatiskt."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head2->description
 msgid "Sections appearance"
@@ -716,16 +544,8 @@ msgid "Colorize entire menu item"
 msgstr "Färga hela menyposten"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_highlight_entire_row->tooltip
-msgid ""
-"This option is useful, for example, when the Cinnamon theme used styles "
-"entries with a non transparent background image. The background color set by "
-"a priority tag will not be visible in this case. With this option enabled, "
-"the entire menu item of a task will be colorized and not just its entry."
-msgstr ""
-"Det här alternativet är användbart, t.ex. när det aktuella Cinnamon-temat "
-"använder menystilar med en icke transparent bakgrundsbild. Bakgrundsfärgen "
-"som anges av en prioritetstagg visas inte i det fallet. Med det här "
-"alternativet aktiverat, färgas hela uppgiftsposten och inte bara texten."
+msgid "This option is useful, for example, when the Cinnamon theme used styles entries with a non transparent background image. The background color set by a priority tag will not be visible in this case. With this option enabled, the entire menu item of a task will be colorized and not just its entry."
+msgstr "Det här alternativet är användbart, t.ex. när det aktuella Cinnamon-temat använder menystilar med en icke transparent bakgrundsbild. Bakgrundsfärgen som anges av en prioritetstagg visas inte i det fallet. Med det här alternativet aktiverat, färgas hela uppgiftsposten och inte bara texten."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head9->description
 msgid "Colors for \"@medium\" priority tags"
@@ -745,28 +565,16 @@ msgid "Custom elements spacing"
 msgstr "Anpassat objektutrymme"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_set_custom_spacing->tooltip
-msgid ""
-"Some Cinnamon themes might set the spacing for the popup-menu-item class too "
-"big or too small, resulting in too much space wasted inside this applet menu "
-"or in elements to close to each other. This setting allows to change that "
-"spacing."
-msgstr ""
-"Vissa Cinnamon-teman kan sätta för stora eller för små mellanrum, mellan "
-"olika popup-menyobjekt. Resultatet kan bli för stora eller för små avstånd "
-"mellan text- och andra menyobjekt. Denna inställning låter dig ändra dessa "
-"avstånd."
+msgid "Some Cinnamon themes might set the spacing for the popup-menu-item class too big or too small, resulting in too much space wasted inside this applet menu or in elements to close to each other. This setting allows to change that spacing."
+msgstr "Vissa Cinnamon-teman kan sätta för stora eller för små mellanrum, mellan olika popup-menyobjekt. Resultatet kan bli för stora eller för små avstånd mellan text- och andra menyobjekt. Denna inställning låter dig ändra dessa avstånd."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->description
 msgid "Enable logging"
 msgstr "Aktivera loggning"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_logging_enabled->tooltip
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
-msgstr ""
-"Aktiverar loggning av utdata från flera funktioner som används av detta "
-"panelprogram."
+msgid "It enables the ability to log the output of several functions used by the applet."
+msgstr "Aktiverar loggning av utdata från flera funktioner som används av detta panelprogram."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head0->description
 msgid "Applet settings"
@@ -794,12 +602,8 @@ msgid "Avoid accidental deletions"
 msgstr "Undvik oavsiktliga borttagningar"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_use_fail_safe->tooltip
-msgid ""
-"When enabled, to remove a task or a section of the menu, the Control key "
-"needs to be pressed."
-msgstr ""
-"Vid aktivering måste Ctrl-tangenten hållas ner, för att ta bort en lista "
-"eller en uppgiftspost."
+msgid "When enabled, to remove a task or a section of the menu, the Control key needs to be pressed."
+msgstr "Vid aktivering måste Ctrl-tangenten hållas ner, för att ta bort en lista eller en uppgiftspost."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->head8->description
 msgid "Colors for \"@today\" priority tags"
@@ -836,11 +640,8 @@ msgid "Character/s for not completed tasks"
 msgstr "Tecken för icke slutförda uppgifter"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_notcompleted_character->tooltip
-msgid ""
-"The character or characters that will represent a not completed task on a "
-"TODO file."
-msgstr ""
-"Det eller de tecken som markerar en icke slutförd uppgift i en TODO-fil."
+msgid "The character or characters that will represent a not completed task on a TODO file."
+msgstr "Det eller de tecken som markerar en icke slutförd uppgift i en TODO-fil."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_show_tasks_counter_on_applet->description
 msgid "Display tasks counter on applet"
@@ -855,30 +656,19 @@ msgid "Enable priority tags colorization"
 msgstr "Aktivera färgning av prioritetstaggar"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_tasks_priorities_colors_enabled->tooltip
-msgid ""
-"If enabled, this option will colorize a task entry depending on the tags "
-"found on its text. Tasks can be \"tagged\" by simply writing \"@tagname\" as "
-"part of the task text. For now, there are 5 priority tags available."
-msgstr ""
-"Vid aktivering, färgar det här alternativet uppgiftsposterna beroende på "
-"taggar angivna i texten. Uppgifter kan taggas genom att skriva \"@taggnamn\" "
-"som en del av uppgiftstexten. För närvarande finns det 5 prioritetstaggar "
-"tillgängliga."
+msgid "If enabled, this option will colorize a task entry depending on the tags found on its text. Tasks can be \"tagged\" by simply writing \"@tagname\" as part of the task text. For now, there are 5 priority tags available."
+msgstr "Vid aktivering, färgar det här alternativet uppgiftsposterna beroende på taggar angivna i texten. Uppgifter kan taggas genom att skriva \"@taggnamn\" som en del av uppgiftstexten. För närvarande finns det 5 prioritetstaggar tillgängliga."
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->description
 msgid "Character/s for completed tasks"
 msgstr "Tecken för slutförda uppgifter"
 
 #. 0dyseus@SimpleToDoList->settings-schema.json->pref_task_completed_character->tooltip
-msgid ""
-"The character or characters that will represent a completed task on a TODO "
-"file."
+msgid "The character or characters that will represent a completed task on a TODO file."
 msgstr "Det eller de tecken som markerar en slutförd uppgift i en TODO-fil."
 
 #~ msgid "bsaleil: Author of the gnome-shell extension called Todo list."
 #~ msgstr "bsaleil: Utvecklare av gnome-tillägget Todo list."
 
-#~ msgid ""
-#~ "Thomas Moreau: Author of the gnome-shell extension called Section Todo "
-#~ "List."
+#~ msgid "Thomas Moreau: Author of the gnome-shell extension called Section Todo List."
 #~ msgstr "Thomas Moreau: Utvecklare av gnome-tillägget Section Todo List."

@@ -1,4 +1,5 @@
 const GTop = imports.applet.GTop;
+const Gio = imports.gi.Gio;
 const _ = imports.applet._;
 
 function CpuData() {
@@ -107,8 +108,18 @@ function NetData() {
 NetData.prototype = {
     _init: function () {
         this.gtop = new GTop.glibtop_netload();
-        let nl = new GTop.glibtop_netlist();
-        this.devices = GTop.glibtop.get_netlist(nl);
+        try {
+            let nl = new GTop.glibtop_netlist();
+            this.devices = GTop.glibtop.get_netlist(nl);
+        }
+        catch(e) {
+            this.devices = [];
+            let d = Gio.File.new_for_path("/sys/class/net");
+            let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+            while ((info = en.next_file(null)))
+                this.devices.push(info.get_name())
+        }
+        this.devices = this.devices.filter(v => v !== "lo"); //don't measure loopback interface
         try {
             //Workaround, because string match() function throws an error for some reason if called after GTop.glibtop.get_netlist(). After the error is thrown, everything works fine.
             //If the match() would not be called here, the error would be thrown somewhere in Cinnamon applet init code and applet init would fail.

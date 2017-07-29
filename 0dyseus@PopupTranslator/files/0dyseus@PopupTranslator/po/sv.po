@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.04\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: 0dyseus@PopupTranslator 1.07\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-03 07:56+0200\n"
 "PO-Revision-Date: 2017-06-03 07:59+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
@@ -15,35 +15,26 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: ../../create_localized_help.py:64
 msgid "Dependencies"
 msgstr "Beroenden"
 
 #: ../../create_localized_help.py:65
-msgid ""
-"If one or more of these dependencies are missing in your system, you will "
-"not be able to use this applet."
-msgstr ""
-"Om ett eller flera av dessa beroenden saknas i ditt system, kommer du inte "
-"att kunna använda det här panelprogrammet."
+msgid "If one or more of these dependencies are missing in your system, you will not be able to use this applet."
+msgstr "Om ett eller flera av dessa beroenden saknas i ditt system, kommer du inte att kunna använda det här panelprogrammet."
 
 #: ../../create_localized_help.py:66
 msgid "xsel command"
 msgstr "xsel-kommando"
 
 #: ../../create_localized_help.py:67
-msgid ""
-"XSel is a command-line program for getting and setting the contents of the X "
-"selection."
-msgstr ""
-"XSel är ett kommandoradsprogram för att hämta och ställa in innehållet i X-"
-"samlingen."
+msgid "XSel is a command-line program for getting and setting the contents of the X selection."
+msgstr "XSel är ett kommandoradsprogram för att hämta och ställa in innehållet i X-samlingen."
 
-#: ../../create_localized_help.py:69 ../../create_localized_help.py:77
-#: ../../create_localized_help.py:89
+#: ../../create_localized_help.py:69 ../../create_localized_help.py:77 ../../create_localized_help.py:89
 msgid "Debian and Archlinux based distributions:"
 msgstr "Debian- och Archlinux-baserade distributioner:"
 
@@ -57,20 +48,15 @@ msgid "xdg-open command"
 msgstr "xdg-open-kommando"
 
 #: ../../create_localized_help.py:75
-msgid ""
-"Open a URI in the user's preferred application that handles the respective "
-"URI or file type."
-msgstr ""
-"Öppna en URI i användarens föredragna program, som hanterar respektive URI "
-"eller filtyp."
+msgid "Open a URI in the user's preferred application that handles the respective URI or file type."
+msgstr "Öppna en URI i användarens föredragna program, som hanterar respektive URI eller filtyp."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:79 ../../create_localized_help.py:91
 msgid "This command is installed with the package called **xdg-utils**."
 msgstr "Detta kommando installeras med paketet **xdg-utils**."
 
-#: ../../create_localized_help.py:80 ../../create_localized_help.py:92
-#: ../../create_localized_help.py:98
+#: ../../create_localized_help.py:80 ../../create_localized_help.py:92 ../../create_localized_help.py:98
 msgid "Installed by default in modern versions of Linux Mint."
 msgstr "Installerad som standard i nyare versioner av Linux Mint."
 
@@ -87,16 +73,8 @@ msgid "requests Python 3 module"
 msgstr "begär Python 3-modul"
 
 #: ../../create_localized_help.py:87
-msgid ""
-"Requests allow you to send HTTP/1.1 requests. You can add headers, form "
-"data, multi-part files, and parameters with simple Python dictionaries, and "
-"access the response data in the same way. It's powered by httplib and "
-"urllib3, but it does all the hard work and crazy hacks for you."
-msgstr ""
-"Requests låter dig skicka HTTP/1.1-förfrågningar. Du kan lägga till \"headers"
-"\", formulärdata, multi-part-filer och parametrar med enkla Python-"
-"ordlistor, och komma åt svarsdata på samma sätt. Det drivs av httplib och "
-"urllib3, men det gör jobbet och alla galna hack åt dig."
+msgid "Requests allow you to send HTTP/1.1 requests. You can add headers, form data, multi-part files, and parameters with simple Python dictionaries, and access the response data in the same way. It's powered by httplib and urllib3, but it does all the hard work and crazy hacks for you."
+msgstr "Requests låter dig skicka HTTP/1.1-förfrågningar. Du kan lägga till \"headers\", formulärdata, multi-part-filer och parametrar med enkla Python-ordlistor, och komma åt svarsdata på samma sätt. Det drivs av httplib och urllib3, men det gör jobbet och alla galna hack åt dig."
 
 #: ../../create_localized_help.py:95
 msgid "Debian based distributions:"
@@ -117,21 +95,12 @@ msgid "The package is called **python-requests**."
 msgstr "Detta paket kallas **python-requests**."
 
 #: ../../create_localized_help.py:106
-msgid ""
-"After installing any of the missing dependencies, Cinnamon needs to be "
-"restarted"
-msgstr ""
-"Efter installation av något saknat beroende, måste Cinnamon startas om."
+msgid "After installing any of the missing dependencies, Cinnamon needs to be restarted"
+msgstr "Efter installation av något saknat beroende, måste Cinnamon startas om."
 
 #: ../../create_localized_help.py:108
-msgid ""
-"I don't use any other type of Linux distribution (Gentoo based, Slackware "
-"based, etc.). If any of the previous packages/modules are named differently, "
-"please, let me know and I will specify them in this help file."
-msgstr ""
-"Jag använder inga andra typer av Linux-distributioner (Gentoo-baserade, "
-"Slackware-baserade, etc.). Meddela mig, om något av föregående paket/moduler "
-"är annorlunda namngivna, så kan jag specificera dem i denna hjälpfil."
+msgid "I don't use any other type of Linux distribution (Gentoo based, Slackware based, etc.). If any of the previous packages/modules are named differently, please, let me know and I will specify them in this help file."
+msgstr "Jag använder inga andra typer av Linux-distributioner (Gentoo-baserade, Slackware-baserade, etc.). Meddela mig, om något av föregående paket/moduler är annorlunda namngivna, så kan jag specificera dem i denna hjälpfil."
 
 #: ../../create_localized_help.py:108
 msgid "Note:"
@@ -143,145 +112,77 @@ msgstr "Användning"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:112
-msgid ""
-"There are 4 *translations mechanisms* (**Left click**, **Middle click**, "
-"**Hotkey #1** and **Hotkey #2**). Each translation mechanism can be "
-"configured with their own service providers, language pairs and hotkeys."
-msgstr ""
-"Det finns 4 *översättningsfunktioner* (**Vänsterklick**, **Mushjulsklick**, "
-"**Snabbtangent #1** och **Snabbtangent #2**). Varje översättningsfunktion "
-"kan konfigureras med sin egen uppsättning tjänstleverantör, språkpar och "
-"snabbtangent."
+msgid "There are 4 *translations mechanisms* (**Left click**, **Middle click**, **Hotkey #1** and **Hotkey #2**). Each translation mechanism can be configured with their own service providers, language pairs and hotkeys."
+msgstr "Det finns 4 *översättningsfunktioner* (**Vänsterklick**, **Mushjulsklick**, **Snabbtangent #1** och **Snabbtangent #2**). Varje översättningsfunktion kan konfigureras med sin egen uppsättning tjänstleverantör, språkpar och snabbtangent."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:114
-msgid ""
-"**First translation mechanism (Left click):** Translates any selected text "
-"from any application on your system. A hotkey can be assigned to perform "
-"this task."
-msgstr ""
-"**Första översättningsfunktionen (Vänsterklick):** Översätter fritt markerad "
-"text från valfritt program i ditt system. En snabbtangent kan tilldelas för "
-"att utföra åtgärden."
+msgid "**First translation mechanism (Left click):** Translates any selected text from any application on your system. A hotkey can be assigned to perform this task."
+msgstr "**Första översättningsfunktionen (Vänsterklick):** Översätter fritt markerad text från valfritt program i ditt system. En snabbtangent kan tilldelas för att utföra åtgärden."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:116
-msgid ""
-"**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left "
-"click**, but it will bypass the translation history. A hotkey can be "
-"assigned to perform this task."
-msgstr ""
-"**Första översättningsfunktionen ([[Ctrl]] + Vänsterklick):** Samma som "
-"**Vänsterklick**, men det kringgår översättningshistoriken. En snabbtangent "
-"kan tilldelas för att utföra åtgärden."
+msgid "**First translation mechanism ([[Ctrl]] + Left click):** Same as **Left click**, but it will bypass the translation history. A hotkey can be assigned to perform this task."
+msgstr "**Första översättningsfunktionen ([[Ctrl]] + Vänsterklick):** Samma som **Vänsterklick**, men det kringgår översättningshistoriken. En snabbtangent kan tilldelas för att utföra åtgärden."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:118
-msgid ""
-"**Second translation mechanism (Middle click):** Same as **Left click**."
-msgstr ""
-"**Andra översättningsfunktionen (Mushjulsklick):** Samma som "
-"**Vänsterklick**."
+msgid "**Second translation mechanism (Middle click):** Same as **Left click**."
+msgstr "**Andra översättningsfunktionen (Mushjulsklick):** Samma som **Vänsterklick**."
 
 #: ../../create_localized_help.py:121
-msgid ""
-"**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] "
-"+ **Left click**."
-msgstr ""
-"**Andra översättningsfunktionen ([[Ctrl]] + Mushjulsklick):** Samma som "
-"[[Ctrl]] + **Vänsterklick**."
+msgid "**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] + **Left click**."
+msgstr "**Andra översättningsfunktionen ([[Ctrl]] + Mushjulsklick):** Samma som [[Ctrl]] + **Vänsterklick**."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:123
-msgid ""
-"**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
-msgstr ""
-"**Tredje översättningsfunktionen (Snabbtangent #1):** Två snabbtangenter kan "
-"konfigureras för att utföra en översättning och en \"Tvingad\" översättning."
+msgid "**Third translation mechanism (Hotkey #1):** Two hotkeys can be configured to perform a translation and a forced translation."
+msgstr "**Tredje översättningsfunktionen (Snabbtangent #1):** Två snabbtangenter kan konfigureras för att utföra en översättning och en \"Tvingad\" översättning."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:125
-msgid ""
-"**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured "
-"to perform a translation and a forced translation."
-msgstr ""
-"**Fjärde översättningsfunktionen (Snabbtangent #2):** Två snabbtangenter kan "
-"konfigureras för att utföra en översättning och en \"Tvingad\" översättning."
+msgid "**Fourth translation mechanism (Hotkey #2):** Two hotkeys can be configured to perform a translation and a forced translation."
+msgstr "**Fjärde översättningsfunktionen (Snabbtangent #2):** Två snabbtangenter kan konfigureras för att utföra en översättning och en \"Tvingad\" översättning."
 
 #: ../../create_localized_help.py:126
-msgid ""
-"All translations are stored into the translation history. If a string of "
-"text was already translated in the past, the popup will display that stored "
-"translated text without making use of the provider's translation service."
-msgstr ""
-"Alla översättningar lagras i översättningshistoriken. Om en textsträng redan "
-"tidigare har översatts, Kommer popup-rutan att visa den lagrade "
-"översättningen, utan att använda leverantörens översättningstjänst."
+msgid "All translations are stored into the translation history. If a string of text was already translated in the past, the popup will display that stored translated text without making use of the provider's translation service."
+msgstr "Alla översättningar lagras i översättningshistoriken. Om en textsträng redan tidigare har översatts, Kommer popup-rutan att visa den lagrade översättningen, utan att använda leverantörens översättningstjänst."
 
 #: ../../create_localized_help.py:128
 msgid "About translation history"
 msgstr "Om översättningshistorik"
 
 #: ../../create_localized_help.py:129
-msgid ""
-"I created the translation history mechanism mainly to avoid the abuse of the "
-"translation services."
-msgstr ""
-"Jag skapade historikfunktionen för översättningar, i huvudsak för att "
-"undvika missbruk av översättningstjänsterna."
+msgid "I created the translation history mechanism mainly to avoid the abuse of the translation services."
+msgstr "Jag skapade historikfunktionen för översättningar, i huvudsak för att undvika missbruk av översättningstjänsterna."
 
 #: ../../create_localized_help.py:130
-msgid ""
-"If the Google Translate service is \"abused\", Google may block temporarily "
-"your IP. Or what is worse, they could change the translation mechanism "
-"making this applet useless and forcing me to update its code."
-msgstr ""
-"Om Google Translate \"missbrukas\" kan det hända att Google blockerar din IP-"
-"adress temporärt. Eller vad som är värre, de kan ändra "
-"översättningsfunktionen så att det här panelprogrammet blir obrukbart och "
-"tvinga mig att skriva om koden."
+msgid "If the Google Translate service is \"abused\", Google may block temporarily your IP. Or what is worse, they could change the translation mechanism making this applet useless and forcing me to update its code."
+msgstr "Om Google Translate \"missbrukas\" kan det hända att Google blockerar din IP-adress temporärt. Eller vad som är värre, de kan ändra översättningsfunktionen så att det här panelprogrammet blir obrukbart och tvinga mig att skriva om koden."
 
 #: ../../create_localized_help.py:131
-msgid ""
-"If the Yandex Translate service is \"abused\", you are \"wasting\" your API "
-"keys quota and they will be blocked (temporarily or permanently)."
-msgstr ""
-"Om Yandex Translate \"missbrukas\", har du \"kastat bort\" dina API-nycklar "
-"som kommer att blockeras (temporärt eller permanent)."
+msgid "If the Yandex Translate service is \"abused\", you are \"wasting\" your API keys quota and they will be blocked (temporarily or permanently)."
+msgstr "Om Yandex Translate \"missbrukas\", har du \"kastat bort\" dina API-nycklar som kommer att blockeras (temporärt eller permanent)."
 
 #: ../../create_localized_help.py:132
-msgid ""
-"In the context menu of this applet is an item that can open the folder were "
-"the translation history file is stored. From there, the translation history "
-"file can be backed up or deleted."
-msgstr ""
-"I panelprogrammets kontextmeny (högerklick på ikonen) kan du öppna den mapp "
-"där översättningshistoriken lagras. Därifrån kan du säkerhetskopiera eller "
-"ta bort historiken."
+msgid "In the context menu of this applet is an item that can open the folder were the translation history file is stored. From there, the translation history file can be backed up or deleted."
+msgstr "I panelprogrammets kontextmeny (högerklick på ikonen) kan du öppna den mapp där översättningshistoriken lagras. Därifrån kan du säkerhetskopiera eller ta bort historiken."
 
 #: ../../create_localized_help.py:134
 msgid "NEVER edit the translation history file manually!!!"
 msgstr "Redigera ALDRIG översättningshistoriken manuellt!"
 
 #: ../../create_localized_help.py:136
-msgid ""
-"If the translation history file is deleted/renamed/moved, Cinnamon needs to "
-"be restarted."
-msgstr ""
-"Om historikfilen tas bort, döps om eller flyttas, måste Cinnamon startas om."
+msgid "If the translation history file is deleted/renamed/moved, Cinnamon needs to be restarted."
+msgstr "Om historikfilen tas bort, döps om eller flyttas, måste Cinnamon startas om."
 
 #: ../../create_localized_help.py:138
 msgid "How to get Yandex translator API keys"
 msgstr "Hur man skaffar Yandex translators API-nycklar"
 
 #: ../../create_localized_help.py:139
-msgid ""
-"Visit one of the following links and register a Yandex account (or use one "
-"of the available social services)."
-msgstr ""
-"Besök en av följande länkar och registrera ett Yandex-konto (eller använd "
-"ett av tillgängliga sociala medier)."
+msgid "Visit one of the following links and register a Yandex account (or use one of the available social services)."
+msgstr "Besök en av följande länkar och registrera ett Yandex-konto (eller använd ett av tillgängliga sociala medier)."
 
 #. TO TRANSLATORS: URL pointing to website in English
 #: ../../create_localized_help.py:141
@@ -295,55 +196,30 @@ msgstr "Ryska:"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:145
-msgid ""
-"Once you successfully finish creating your Yandex account, you can visit the "
-"link provided several times to create several API keys. **DO NOT ABUSE!!!**"
-msgstr ""
-"När du har skapat ditt Yandex-konto, kan du besöka den angivna länken flera "
-"gånger, för att skapa flera API-nycklar. **MISSBRUKA INTE DETTA!!!**"
+msgid "Once you successfully finish creating your Yandex account, you can visit the link provided several times to create several API keys. **DO NOT ABUSE!!!**"
+msgstr "När du har skapat ditt Yandex-konto, kan du besöka den angivna länken flera gånger, för att skapa flera API-nycklar. **MISSBRUKA INTE DETTA!!!**"
 
 #: ../../create_localized_help.py:146
-msgid ""
-"Once you have several API keys, you can add them to Popup Translator's "
-"settings window (one API key per line)."
-msgstr ""
-"När du har flera API-nycklar, kan du lägga till dem i Popup Translators "
-"inställningar (en API-nyckel per rad)."
+msgid "Once you have several API keys, you can add them to Popup Translator's settings window (one API key per line)."
+msgstr "När du har flera API-nycklar, kan du lägga till dem i Popup Translators inställningar (en API-nyckel per rad)."
 
 #: ../../create_localized_help.py:148
 msgid "Important notes about Yandex API keys"
 msgstr "Viktig information om Yandex API-nycklar"
 
 #: ../../create_localized_help.py:149
-msgid ""
-"The API keys will be stored into a preference. Keep your API keys backed up "
-"in case you reset Popup Translator's preferences."
-msgstr ""
-"API-nycklarna kommer att lagras som en inställning. Bevara en säkerhetskopia "
-"på dina API-nycklar, ifall du behöver återställa Popup Translators "
-"inställningar."
+msgid "The API keys will be stored into a preference. Keep your API keys backed up in case you reset Popup Translator's preferences."
+msgstr "API-nycklarna kommer att lagras som en inställning. Bevara en säkerhetskopia på dina API-nycklar, ifall du behöver återställa Popup Translators inställningar."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:151
-msgid ""
-"**NEVER make your API keys public!!!** The whole purpose of going to the "
-"trouble of getting your own API keys is that the only one \"consuming their "
-"limits\" is you and nobody else."
-msgstr ""
-"**Offentliggör ALDRIG dina API-nycklar!!!** Hela syftet med att göra sig "
-"besväret att skaffa sina egna API-nycklar, är att endast du skall kunna "
-"nyttja den begränsade mängden översatta tecken."
+msgid "**NEVER make your API keys public!!!** The whole purpose of going to the trouble of getting your own API keys is that the only one \"consuming their limits\" is you and nobody else."
+msgstr "**Offentliggör ALDRIG dina API-nycklar!!!** Hela syftet med att göra sig besväret att skaffa sina egna API-nycklar, är att endast du skall kunna nyttja den begränsade mängden översatta tecken."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:153
-msgid ""
-"With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 "
-"million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) "
-"per month."
-msgstr ""
-"Med varje Yandex translator API-nyckel kan du översätta **UPP TILL** "
-"1.000.000 (1 miljon) tecken per dag. **MEN INTE MER ÄN** 10.000.000 (10 "
-"miljoner) per månad."
+msgid "With each Yandex translator API key you can translate **UP TO** 1.000.000 (1 million) characters per day **BUT NOT MORE** than 10.000.000 (10 millions) per month."
+msgstr "Med varje Yandex translator API-nyckel kan du översätta **UPP TILL** 1.000.000 (1 miljon) tecken per dag. **MEN INTE MER ÄN** 10.000.000 (10 miljoner) per månad."
 
 #: ../../create_localized_help.py:175
 msgid "The following two sections are available only in English."
@@ -383,51 +259,29 @@ msgid "IMPORTANT!!!"
 msgstr "VIKTIGT!!!"
 
 #: ../../create_localized_help.py:288
-msgid ""
-"Never delete any of the files found inside this xlet folder. It might break "
-"this xlet functionality."
-msgstr ""
-"Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra "
-"programmets funktioner."
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Ta aldrig bort någon av filerna i den här xlet-mappen. Det kan förstöra programmets funktioner."
 
 #: ../../create_localized_help.py:289
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked next."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets "
-"kodförråd, på följande länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas i denna xlets kodförråd, på följande länk."
 
 #: ../../create_localized_help.py:295
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Applets/Desklets/Extensions (xlets) översättning"
 
 #: ../../create_localized_help.py:296
-msgid ""
-"If this xlet was installed from Cinnamon Settings, all of this xlet's "
-"localizations were automatically installed."
-msgstr ""
-"Om denna xlet installerades från Cinnamons inställningar, installerades "
-"också alla översättningar automatiskt."
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Om denna xlet installerades från Cinnamons inställningar, installerades också alla översättningar automatiskt."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
 #: ../../create_localized_help.py:298
-msgid ""
-"If this xlet was installed manually and not trough Cinnamon Settings, "
-"localizations can be installed by executing the script called "
-"**localizations.sh** from a terminal opened inside the xlet's folder."
-msgstr ""
-"Om denna xlet installerades manuellt och inte via Cinnamons inställningar, "
-"kan översättningar installeras genom att köra skriptet **localizations.sh** "
-"från en terminal öppnad i programmappen."
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Om denna xlet installerades manuellt och inte via Cinnamons inställningar, kan översättningar installeras genom att köra skriptet **localizations.sh** från en terminal öppnad i programmappen."
 
 #: ../../create_localized_help.py:299
-msgid ""
-"If this xlet has no locale available for your language, you could create it "
-"by following the following instructions."
-msgstr ""
-"Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av "
-"följande instruktioner."
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Om ditt språk saknas i denna xlet, kan du översätta den med hjälp av följande instruktioner."
 
 #: appletHelper.py:310
 msgid "Popup Translator history"
@@ -568,8 +422,7 @@ msgstr "Kontrollera beroenden"
 
 #: applet.js:340
 msgid "Check whether the dependencies for this applet are met."
-msgstr ""
-"Kontrollera om alla beroenden för det här panelprogrammet har uppfyllts."
+msgstr "Kontrollera om alla beroenden för det här panelprogrammet har uppfyllts."
 
 #: applet.js:354
 msgid "Open this applet help file."
@@ -642,24 +495,16 @@ msgid "Unable to execute file/command '%s':"
 msgstr "Kan inte köra filen/kommandot \"%s\":"
 
 #. 0dyseus@PopupTranslator->metadata.json->description
-msgid ""
-"Simple translator applet that will allow to display any selected text from "
-"any application on a system in a popup."
-msgstr ""
-"Enkelt översättningsprogram som visar valfri markerad text, från valfri "
-"applikation, i en panel-popup."
+msgid "Simple translator applet that will allow to display any selected text from any application on a system in a popup."
+msgstr "Enkelt översättningsprogram som visar valfri markerad text, från valfri applikation, i en panel-popup."
 
 #. 0dyseus@PopupTranslator->metadata.json->contributors
 msgid "See this xlet help file."
 msgstr "Se hjälpfilen för denna xlet."
 
 #. 0dyseus@PopupTranslator->metadata.json->comments
-msgid ""
-"Bug reports, feature requests and contributions should be done on this "
-"xlet's repository linked below."
-msgstr ""
-"Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets "
-"kodförråd, på nedanstående länk."
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked below."
+msgstr "Felrapporter, funktionsönskemål och kodbidrag kan lämnas  i denna xlets kodförråd, på nedanstående länk."
 
 #. 0dyseus@PopupTranslator->metadata.json->name
 msgid "Popup Translator"
@@ -731,12 +576,8 @@ msgid "Enable logging"
 msgstr "Aktivera loggning"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_loggin_enabled->tooltip
-msgid ""
-"It enables the ability to log the output of several functions used by the "
-"applet."
-msgstr ""
-"Aktiverar loggning av utdata från flera funktioner som används av detta "
-"panelprogram."
+msgid "It enables the ability to log the output of several functions used by the applet."
+msgstr "Aktiverar loggning av utdata från flera funktioner som används av detta panelprogram."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_3->description
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_4->description
@@ -749,14 +590,8 @@ msgstr "Tangentbordsgenväg för att utföra en TVINGAD översättning"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_4->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_2->tooltip
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_translate_key_forced_1->tooltip
-msgid ""
-"Choose a keybinding to perform a FORCED translation. A \"forced translation"
-"\" forces the translation of any string stored on the translation history "
-"and overwrites the existing one."
-msgstr ""
-"Välj en tangentbindning för att utföra en TVINGAD översättning. En \"tvingad "
-"översättning\" forcerar översättningen av valfri sträng som lagrats i "
-"översättningshistoriken och skriver över den befintliga."
+msgid "Choose a keybinding to perform a FORCED translation. A \"forced translation\" forces the translation of any string stored on the translation history and overwrites the existing one."
+msgstr "Välj en tangentbindning för att utföra en TVINGAD översättning. En \"tvingad översättning\" forcerar översättningen av valfri sträng som lagrats i översättningshistoriken och skriver över den befintliga."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_style_for_language_pair->description
 msgid "Language pair style"
@@ -773,24 +608,18 @@ msgstr "API-nycklar"
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_yandex_api_keys->tooltip
 msgid ""
 "Enter one API key per line.\n"
-"Read the help file (Help item on this applet context menu) found inside this "
-"applet folder to know how to get free Yandex API keys."
+"Read the help file (Help item on this applet context menu) found inside this applet folder to know how to get free Yandex API keys."
 msgstr ""
 "Ange en API-nyckel per rad.\n"
-"Läs hjälpfilen (Hjälp i programikonens högerklicksmeny), för att få reda på "
-"hur du skaffar Yandex API-nycklar gratis."
+"Läs hjälpfilen (Hjälp i programikonens högerklicksmeny), för att få reda på hur du skaffar Yandex API-nycklar gratis."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_width_to_trigger_word_wrap->description
 msgid "Width to trigger word wrap"
 msgstr "Bredd som utlöser radbrytning"
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_history_width_to_trigger_word_wrap->tooltip
-msgid ""
-"The \"Source text\" and \"Target text\" columns on the history window will "
-"wrap its text at the width defined by this setting."
-msgstr ""
-"Kolumnerna \"Källtext\" och \"Måltext\" i historikfönstret, kommer att "
-"radbrytas vid den bredd  som definieras av denna inställning."
+msgid "The \"Source text\" and \"Target text\" columns on the history window will wrap its text at the width defined by this setting."
+msgstr "Kolumnerna \"Källtext\" och \"Måltext\" i historikfönstret, kommer att radbrytas vid den bredd  som definieras av denna inställning."
 
 #. 0dyseus@PopupTranslator->settings-schema.json->pref_custom_label_for_applet->description
 msgid "Custom label"
@@ -862,12 +691,8 @@ msgstr "Tidsstämpel för historikposter"
 msgid "Footer style"
 msgstr "Sidfotstil"
 
-#~ msgid ""
-#~ "**Second translation mechanism ([[Ctrl]] + Middle click):** Same as "
-#~ "[[Ctrl]] + Left click."
-#~ msgstr ""
-#~ "**Andra översättningsfunktionen ([[Ctrl]] + Mushjulsklick):** Samma som "
-#~ "[[Ctrl]] + Vänsterklick."
+#~ msgid "**Second translation mechanism ([[Ctrl]] + Middle click):** Same as [[Ctrl]] + Left click."
+#~ msgstr "**Andra översättningsfunktionen ([[Ctrl]] + Mushjulsklick):** Samma som [[Ctrl]] + Vänsterklick."
 
 #~ msgid "NikoKrause: German localization and bug reports."
 #~ msgstr "NikoKrause: Tysk översättning och felrapporter."
@@ -893,9 +718,5 @@ msgstr "Sidfotstil"
 #~ msgid "Translation Mechanisms"
 #~ msgstr "Översättningsfunktioner"
 
-#~ msgid ""
-#~ "Bug reports and feature requests should be reported on this applet's "
-#~ "repository linked below."
-#~ msgstr ""
-#~ "Felrapporter och funktionsönskemål bör rapporteras på programmets "
-#~ "förrådsplats, som länkas nedan."
+#~ msgid "Bug reports and feature requests should be reported on this applet's repository linked below."
+#~ msgstr "Felrapporter och funktionsönskemål bör rapporteras på programmets förrådsplats, som länkas nedan."

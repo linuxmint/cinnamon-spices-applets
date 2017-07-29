@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Gno-Menu\n"
+"Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-22 11:03+0100\n"
-"PO-Revision-Date: 2017-03-22 11:03+0100\n"
+"POT-Creation-Date: 2017-07-25 17:54+0200\n"
+"PO-Revision-Date: 2017-07-25 17:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -40,31 +40,8 @@ msgstr "Deinstallieren"
 msgid "Run with NVIDIA GPU"
 msgstr "Mit NVIDIA-GPU ausführen"
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Firefox-Lesezeichen durchsuchen ist deaktiviert"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Wenn Sie Firefox-Lesezeichen durchsuchen wollen, müssen Sie die "
-"erforderlichen Pakete installieren: libgir1.2-gda-5.0 [Ubuntu] oder libgda-"
-"sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Midori-Lesezeichen durchsuchen ist deaktiviert"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Wenn Sie Midori-Lesezeichen durchsuchen wollen, müssen Sie die "
-"erforderlichen Pakete installieren: libgir1.2-gda-5.0 [Ubuntu] oder libgda-"
-"sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 Paket für Firefox und Midori Lesezeichen erforderlich."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -99,8 +76,8 @@ msgid "Places"
 msgstr "Orte"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Kürzlich"
+msgid "Recent Files"
+msgstr "Zuletzt verwendete Dateien"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -222,6 +199,14 @@ msgstr "Anzahl der Spalten im Anwendungsraster"
 msgid "columns"
 msgstr "Spalten"
 
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr "Web-Lesezeichen aktivieren"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Auswählen, ob Lesezeichen im Menü indiziert werden sollen"
+
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->description
 #. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
 msgid "Startup applications view mode"
@@ -247,19 +232,6 @@ msgstr "Das Menü öffnen, wenn die Maus darüber bewegt wird"
 #. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Öffnen des Menüs aktivieren, wenn sich die Maus auf das Applet bewegt"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Symbole in Rasteransicht nach verfügbarem Platz skalieren"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Dies macht die Größe der Symbole in der Rasteransicht variabel je nachdem, "
-"wie viele Anwendungen angezeigt werden. Die Option »Größe der Symbole in der "
-"Rasteransicht« wird überschrieben."
 
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
@@ -305,167 +277,42 @@ msgstr "Ein flexibles Menü mit Formatierungsoptionen und Lesezeichen."
 msgid "Cinnamenu"
 msgstr "Cinnamenü"
 
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Starten von »%s« schlug fehl"
+msgid "Show bookmarks and places"
+msgstr "Lesezeichen und Orte anzeigen"
 
-#~ msgid "Webmarks"
-#~ msgstr "Lesezeichen"
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Legt fest, ob Lesezeichen und Orte im Menü angezeigt werden."
 
-#~ msgid "Favorites"
-#~ msgstr "Favoriten"
+msgid "Show application icons"
+msgstr "Anwendungssymbole anzeigen"
 
-#~ msgid "Toggle Startup Apps View"
-#~ msgstr "Ansicht wechseln"
+msgid "Choose whether or not to show icons on applications."
+msgstr "Legt fest, ob Symbole an Anwendungen angezeigt werden."
 
-#~ msgid "Frequent Apps"
-#~ msgstr "Häufige Programme"
+msgid "Show category icons"
+msgstr "Kategoriesymbole anzeigen"
 
-#~ msgid "Restart Shell"
-#~ msgstr "Oberfläche neustarten"
+msgid "Choose whether or not to show icons on categories."
+msgstr "Legt fest, ob Symbole an Kategorien angezeigt werden."
 
-#~ msgid "Suspend"
-#~ msgstr "Ruhen"
+msgid "Enable filesystem path entry in search box"
+msgstr "Eingabe des Dateisystempfades im Suchfeld erlauben"
 
-#~ msgid "Shutdown"
-#~ msgstr "Ausschalten"
+msgid "Allows path entry in the menu search box."
+msgstr "Ermöglicht die Pfadeingabe im Suchfeld des Menüs."
 
-#~ msgid "Logout User"
-#~ msgstr "Benutzer ausloggen"
+msgid "Show application's description under their titles"
+msgstr "Beschreibung der Anwendung unter Anwendungsnamen anzeigen"
 
-#~ msgid "Preferences"
-#~ msgstr "Einstellungen"
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+"Legt fest, ob die Anwendungsbeschreibung auf den Anwendungsknöpfen angezeigt "
+"wird."
 
-#~ msgid "No cinnamenu stylesheet found"
-#~ msgstr "Kein cinnamenu Design gefuden"
+msgid "Clear List"
+msgstr "Liste Leeren"
 
-#~ msgid "<b>Panel Settings</b>"
-#~ msgstr "<b>Einstellungen der Statusleiste</b>"
-
-#~ msgid "Disable activities hot corner"
-#~ msgstr "Deaktiviere die Hotcorner der Übersicht"
-
-#~ msgid "Remove View button from panel"
-#~ msgstr "Entferne den Übersichtbutton von der Statusleiste"
-
-#~ msgid "Label for View button"
-#~ msgstr "Text des Übersichtbuttons"
-
-#~ msgid "Use icon with View button"
-#~ msgstr "Bild des Übersichtbuttons"
-
-#~ msgid "Remove Apps button from panel"
-#~ msgstr "Entferne den Programmebutton von der Statusleiste"
-
-#~ msgid "Label for Apps button"
-#~ msgstr "Text des Programmebuttons"
-
-#~ msgid "Use icon with Apps button"
-#~ msgstr "Bild des Programmebuttons"
-
-#~ msgid "Remove Menu button from panel"
-#~ msgstr "Entferne den Menubutton von der Statusleiste"
-
-#~ msgid "Label for Menu button"
-#~ msgstr "Text des Menubuttons"
-
-#~ msgid "Use icon with Menu button"
-#~ msgstr "Bild des Menubuttons"
-
-#~ msgid "Disable Menu button hot spot"
-#~ msgstr "Deaktiviere die Hotcorner des Menubuttons"
-
-#~ msgid "Disable Menu button shortcut key"
-#~ msgstr "Deaktiviere Menubutton Kürzel"
-
-#~ msgid ""
-#~ "Invalid accelerator. Try F12, <Super>space, <Ctrl><Alt><Shift>a, etc."
-#~ msgstr ""
-#~ "Unzulässiges Kürzel. Versuchen Sie F12, <Super>space, "
-#~ "<Ctrl><Alt><Shift>a, usw."
-
-#~ msgid "Set Menu button position"
-#~ msgstr "Position des Menubuttons"
-
-#~ msgid "Left"
-#~ msgstr "Links"
-
-#~ msgid "Center"
-#~ msgstr "Mittig"
-
-#~ msgid "Right"
-#~ msgstr "Rechts"
-
-#~ msgid "<b>Menu Settings</b>"
-#~ msgstr "<b>Einstellungen des Menus</b>"
-
-#~ msgid "Hide User Options Panel"
-#~ msgstr "Benutzeroptionen verstecken"
-
-#~ msgid "Hide Shortcuts Panel"
-#~ msgstr "Kürzel verstecken"
-
-#~ msgid "Menu layout size"
-#~ msgstr "Größe des Menus"
-
-#~ msgid "Normal"
-#~ msgstr "Normal"
-
-#~ msgid "Compact"
-#~ msgstr "Kompakt"
-
-#~ msgid "Icons to display on Shortcuts Panel"
-#~ msgstr "Anzuzeigende Bilder in der Schnellleiste"
-
-#~ msgid "Applications to display at startup"
-#~ msgstr "Beim Start anzuzeigende Programme"
-
-#~ msgid "All"
-#~ msgstr "Alle"
-
-#~ msgid "Frequent"
-#~ msgstr "Häufige"
-
-#~ msgid "None"
-#~ msgstr "Keine"
-
-#~ msgid "Number of columns in Application Grid"
-#~ msgstr "Anzahl der Spalten im Programmraster"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "5"
-#~ msgstr "5"
-
-#~ msgid "6"
-#~ msgstr "6"
-
-#~ msgid "7"
-#~ msgstr "7"
-
-#~ msgid "Default view mode for applications"
-#~ msgstr "Standardansicht für Programme"
-
-#~ msgid "Hide Categories Panel"
-#~ msgstr "Kategorien verstecken"
-
-#~ msgid "Category selection method"
-#~ msgstr "Auswahlmodus für Kategorien"
-
-#~ msgid "Hover"
-#~ msgstr "Zeigen"
-
-#~ msgid "Click"
-#~ msgstr "Klicken"
-
-#~ msgid "Size of Shortcuts Panel icons"
-#~ msgstr "Bildergröße der Kürzel"
-
-#~ msgid "Size of Application List icons"
-#~ msgstr "Bildergröße in der Programmliste"
-
-#~ msgid "Size of Application Grid icons"
-#~ msgstr "Bildergröße im Programmraster"
+msgid "No recent documents"
+msgstr "Keine kürzlich verwendeten Dokumente"

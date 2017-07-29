@@ -47,29 +47,8 @@ msgstr "Deinstaliraj"
 msgid "Run with NVIDIA GPU"
 msgstr "Pokreni s NVIDIA GPU"
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Pretraga Firefox zabilješki je onemogućena"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ako želite pretraživati Firefox zabilješke, morate instalirati potrebne "
-"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Pretraga Midori zabilješki je onemogućena"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Ako želite pretraživati Midori zabilješke, morate instalirati potrebne "
-"pakete: libgir1.2-gda-5.0 [Ubuntu] ili libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Paket gir1.2-gda-5.0 potreban za oznake Firefox i Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -104,8 +83,8 @@ msgid "Places"
 msgstr "Lokacije"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Nedavno"
+msgid "Recent Files"
+msgstr "Nedavne datoteke"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -262,18 +241,6 @@ msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Prilagodi veličinu mreže ikona prema dostupnom prostoru"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Ovo čini veličinu mreže ikona prilagodljivu ovisno o tome koliko je "
-"prikazanih aplikacija. Ovo zaobilazi mogućnost veličine mreže ikona."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
@@ -317,3 +284,43 @@ msgstr "Prilagodljiv izbornik koji pruža mogućnosti oblikovanja i zabilješke.
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinna izbornik"
+
+msgid "Show bookmarks and places"
+msgstr "Prikaži zabilješke i lokacije"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+"Odaberite želite li ili ne imati prikazane zabilješke i lokacije u izborniku."
+
+msgid "Show application icons"
+msgstr "Prikaži ikone aplikacija"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Odaberite treba li ili ne prikazati ikone na aplikacijama."
+
+msgid "Show category icons"
+msgstr "Prikaži ikone kategorija"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Odaberite treba li ili ne prikazati ikone u kategorijama."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Omogući putanju unosa datotečnih sustava u okviru pretraživanja"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Omogućuje unos putanje u izborniku okvira pretrage."
+
+msgid "Show application's description under their titles"
+msgstr "Prikaži opis aplikacija ispod njihovih naziva"
+
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
+"Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
+
+msgid "Clear List"
+msgstr "Obriši Popis"
+
+msgid "No recent documents"
+msgstr "Nema nedavnih dokumenata"

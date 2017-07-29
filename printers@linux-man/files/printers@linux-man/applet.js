@@ -194,6 +194,7 @@ MyApplet.prototype = {
               for(var n = 0; n < sendJobs.length; n++) subMenu.menu.addMenuItem(sendJobs[n]);
               this.menu.addMenuItem(subMenu);
             }
+            this.updating = false;
 //Update Icon
             if(this.jobsCount > 0 && this.show_jobs) this.set_applet_label(this.jobsCount.toString());
             else this.set_applet_label('');
@@ -203,7 +204,6 @@ MyApplet.prototype = {
               if(this.printWarning) this.setIcon('printer-warning');
               else if(this.show_error && this.printError) this.setIcon('printer-error');
               else this.setIcon('printer-printing');
-              this.updating = false;
             }));
           }))
         }))

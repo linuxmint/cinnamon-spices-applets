@@ -1,5 +1,34 @@
 Changelog
 
+### 2.0.1
+
+  * Changed the default column count to 4.
+  * Improved the context menu positioning.
+
+### 2.0.0
+
+  * Reorganized the layout for more efficient use of space.
+    * Search box has been moved to the bottom right corner.
+    * Selected app box has been moved to bottom left column.
+  * Added settings from the default menu that were missing.
+    * Translations for these were added from CinnVIIStarkMenu's PO files.
+  * Added an option to display the description on each app button.
+  * Added a user account button showing the current user's avatar.
+  * Added key navigation.
+  * Added a "Clear List" button for recent files.
+  * Renamed the Recent category to Recent Files.
+  * Descriptions now scroll horizontally if they are truncated.
+  * Faster fuzzy searching.
+    * Searches now highlight the matching characters in item names and descriptions.
+  * Added filesystem path entry autocompletion based on the Cinnamon menu's code.
+  * Added highlighting for newly installed apps.
+  * Formatted the settings using the layout API.
+  * Removed a lot of stale/dead code from the Gno-menu project, and refactored a lot of the button handling.
+  * Removed automatic icon scaling.
+  *  Fixed Opera bookmarks.
+  * Fixed the missing gda library error message.
+  * Improved performance. (YMMV)
+
 ### 1.3.1
 
   * Removed extra tooling causing performance issues.

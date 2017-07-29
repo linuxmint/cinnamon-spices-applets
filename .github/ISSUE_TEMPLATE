@@ -1,7 +1,15 @@
-[Have you read the guidelines for contributing?]: <> (Before opening an issue, please read the guidelines for contributing linked above. Else the issue will be closed. Also don't forget to notify the author.)
+Have you read the guidelines for contributing?
 
-[Notify author of applet]: <> (You should mention the author on GitHub by typing @ plus his/her username to trigger a notification and bring his/her attention to an issue or pull request. You find the username of the author on the cinnamon spices website: https://cinnamon-spices.linuxmint.com/)
-@AuthorName
+Before opening an issue, please read the guidelines for contributing linked above. Issues with invalid formats, or issues not mentioning the maintainer of the applet, may not get a response, and eventually will be closed. You can find the author by visiting the applet's page on the Spices website (https://cinnamon-spices.linuxmint.com/), or going to the applet's directory on this repository, and checking the the author field in info.json. If it is set to none in info.json, or there is no author listed on the site, then this step is not necessary.
+
+[Notify author of applet]: @<GithubAuthor>
+
+[Tips]: <> For bug reports, it helps the maintainer of the applet you are reporting an issue on when you give them some environmental information for debugging. This can help them figure out what is wrong with it more quickly. Some things you can include in your bug report are the:
+
+ - Distribution (In a terminal run "lsb_release -a".)
+ - Cinnamon version (In a terminal run "cinnamon --version".)
+ - Applet version (Right-click the applet, then click "About...", or go to its directory and include the version/last-edited values in metadata.json.)
+ - ~/.cinnamon/glass.log (Use pastebin or a small snippet that's relavent to the issue.)
+ - ~/.xsession-errors (If you have one.)
 
 [Issue]: <> (Describe your issue below.)
-

@@ -4,9 +4,9 @@
     "description": "Custom version of the default Cinnamon Menu applet, but infinitely more customizable.",
     "contributors": "See this xlet help file.",
     "max-instances": -1,
-    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked below.",
+    "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked next.",
     "name": "Custom Cinnamon Menu",
-    "version": "1.23",
+    "version": "1.24",
     "cinnamon-version": [
         "3.0",
         "3.2",

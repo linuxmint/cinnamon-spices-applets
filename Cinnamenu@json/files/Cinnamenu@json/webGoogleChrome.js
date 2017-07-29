@@ -43,13 +43,11 @@ function _readBookmarks() {
 
   let content;
   let jsonResult;
-  let size;
   let success;
 
   try {
     [success, content, size] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    log("ERROR: " + e.message);
     return;
   }
 
@@ -60,7 +58,6 @@ function _readBookmarks() {
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
-    log("ERROR: " + e.message);
     return;
   }
 
@@ -70,7 +67,7 @@ function _readBookmarks() {
 
   let recurseBookmarks = (children, cont)=>{
     for (let i = 0, len = children.length; i < len; i++) {
-      if (children[i].type == 'url') {
+      if (children[i].type === 'url') {
         bookmarks.push({
           appInfo: _appInfo,
           name: children[i].name,
@@ -83,8 +80,9 @@ function _readBookmarks() {
     }
   };
 
-  for (let bookmarkLocation in jsonResult.roots) {
-    let children = jsonResult.roots[bookmarkLocation].children;
+  let rootKeys = Object.keys(jsonResult.roots);
+  for (let i = 0, len = rootKeys.length; i < len; i++) {
+    let children = jsonResult.roots[rootKeys[i]].children;
     if (children === undefined) {
       continue;
     }
