@@ -98,6 +98,12 @@
         "description": "Auto close",
         "tooltip": "Close the applet tray when a mouse leaves the user interface"
     },
+    "match_panel_icons_size": {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Match panel size",
+        "tooltip": "Match a size of an icon in the applet tray to a size of the panel"
+    },
     "show_icon_tooltips" : {
         "type" : "checkbox",
         "default" : false,
