@@ -50,15 +50,23 @@ msgid "Selected Area"
 msgstr ""
 
 #: applet.js:79
-msgid "Record Desktop"
+msgid "Record Screencast"
 msgstr ""
 
 #: applet.js:81
-msgid "Start With Audio"
+msgid "Record Desktop With Audio"
+msgstr ""
+
+#: applet.js:81
+msgid "Record Desktop Without Audio"
 msgstr ""
 
 #: applet.js:83 applet.js:88
-msgid "Recording"
+msgid "Recording Current Window with Audio"
+msgstr ""
+
+#: applet.js:83 applet.js:88
+msgid "Recording Current Window without Audio"
 msgstr ""
 
 #: applet.js:83
