@@ -1,6 +1,7 @@
 {
-"uuid": "ScreenShot+RecordDesktop@tech71",
-"name": "ScreenShot+Record Desktop",
-"description": "Take A Snapshot Or Record Your Desktop",
-"icon": "applets-screenshooter"
+    "dangerous": false, 
+    "description": "Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, xdotool, xdpyinfo)", 
+    "icon": "applets-screenshooter", 
+    "uuid": "ScreenShot+RecordDesktop@tech71", 
+    "name": "ScreenShot+Record Desktop"
 }
