@@ -163,6 +163,7 @@ MyApplet.prototype = {
         this.applet_popup_table_css = "";
         this.match_panel_icons_size = false;
         this.show_icon_tooltips = false;
+        this.show_grayscale_icons = false;
         this.grayscale_brightness = 80;
         this.gui_icon_type = AppletConstants.GuiIconType.FILEPATH;
         this.gui_icon_filepath = "";
@@ -261,6 +262,12 @@ MyApplet.prototype = {
     },
 
     on_applet_popup_icons_size_changed: function () {
+        if(!this.match_panel_icons_size) {
+            this.set_applet_popup_icons_custom_size();
+        }
+    },
+
+    set_applet_popup_icons_custom_size: function () {
         this.applet_popup.set_icons_size(this.applet_popup_icons_size);
     },
 
@@ -274,11 +281,15 @@ MyApplet.prototype = {
 
     on_match_panel_icons_size_changed: function () {
         if(this.match_panel_icons_size) {
-            this.applet_popup.set_icons_size(this._panelHeight);
+            this.set_applet_popup_icons_panel_size();
         }
         else {
-            this.on_applet_popup_icons_size_changed();
+            this.set_applet_popup_icons_custom_size();
         }
+    },
+
+    set_applet_popup_icons_panel_size: function () {
+        this.applet_popup.set_icons_size(this._panelHeight);
     },
 
     on_show_icon_tooltips_changed: function () {
@@ -1038,7 +1049,9 @@ MyApplet.prototype = {
 
     // Override
     on_panel_height_changed: function() {
-        this.on_match_panel_icons_size_changed();
+        if(this.match_panel_icons_size) {
+            this.set_applet_popup_icons_panel_size();
+        }
     },
 
     // Override
