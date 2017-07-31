@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: genaloner@gmail.com\n"
 "POT-Creation-Date: 2017-04-21 19:27+0800\n"
-"PO-Revision-Date: 2017-07-21 11:41+0300\n"
+"PO-Revision-Date: 2017-07-21 21:21+0300\n"
 "Last-Translator: Gena <genaloner@gmail.com>\n"
 "Language-Team: русский <>\n"
 "Language: \n"
@@ -21,13 +21,21 @@ msgstr ""
 msgid "just now"
 msgstr "только что"
 
+#: applet.js:169
+msgid "1 minute ago"
+msgstr "1 минуту назад"
+
 #: applet.js:173
 msgid " minutes ago"
-msgstr "пару минут назад"
+msgstr " минут(ы/у) назад"
+
+#: applet.js:177
+msgid "1 hour ago"
+msgstr "1 час назад"
 
 #: applet.js:181
 msgid " hours ago"
-msgstr "пару часов назад"
+msgstr " час(a/ов) назад"
 
 #: applet.js:188
 msgid "yesterday"
@@ -35,11 +43,11 @@ msgstr "вчера"
 
 #: applet.js:192
 msgid " days ago"
-msgstr "пару дней назад"
+msgstr " дн(ей/я) назад"
 
 #: applet.js:196
 msgid " weeks ago"
-msgstr "пару недель назад"
+msgstr " недел(ь/ю/и) назад"
 
 #: applet.js:281
 msgid "Configure Mailnag"
@@ -47,11 +55,11 @@ msgstr "Настроить Mailnag"
 
 #: applet.js:360
 msgid "Mailnag daemon stopped working!"
-msgstr "Демон Mailnag отключен!"
+msgstr "Демон Mailnag перестал работать!"
 
 #: applet.js:364
 msgid "Mailnag daemon isn't running! Do you have it installed?"
-msgstr "Демон Mailnag не запущен. Вы его устанавливали?"
+msgstr "Демон Mailnag не запущен! Вы его устанавливали?"
 
 #: applet.js:593
 #, c-format
@@ -102,19 +110,19 @@ msgstr "Mailnag"
 
 #. mailnagapplet@ozderya.net->metadata.json->description
 msgid "Mailnag mail notifier applet"
-msgstr "Оповещения Mailnag"
+msgstr "Аппдет оповещений для Mailnag"
 
 #. mailnagapplet@ozderya.net->settings-schema.json->notifications->description
 msgid "Show notifications"
-msgstr "Показать оповещения"
+msgstr "Показывать оповещения"
 
 #. mailnagapplet@ozderya.net->settings-schema.json->notifications->tooltip
 msgid ""
 "Enables display of mail arrived notifications by applet. Make sure you "
 "disable mailnag notification plugin, otherwise you will have duplicates."
 msgstr ""
-"Позволяет отображать сообщения, отправляемые по почте аплетами. Убедитесь, "
-"что вы отключили плагин уведомлений mailnag, иначе у вас будут дубликаты."
+"Включает уведомления о письмах через аппллет. Убедитесь, что вы отключили "
+"плагин уведомлений Mailnag, иначе уведомления будут дублироваться."
 
 #. mailnagapplet@ozderya.net->settings-schema.json->client->description
 msgid "Mail client to launch (or webpage)"
@@ -144,7 +152,7 @@ msgstr "По клику средней кнопки мыши:"
 
 #. mailnagapplet@ozderya.net->settings-schema.json->middle_click->tooltip
 msgid "What to do when middle clicked on applet icon"
-msgstr "Что делать при нажатии средней кнопки мышина значке апплета"
+msgstr "Что делать при нажатии средней кнопки мыши на значке апплета"
 
 #. mailnagapplet@ozderya.net->settings-schema.json->middle_click->options
 msgid "Mark all read"
