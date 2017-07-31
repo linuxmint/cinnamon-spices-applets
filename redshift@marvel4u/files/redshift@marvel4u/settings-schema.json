@@ -38,7 +38,7 @@
 	"changeOnNight": {
 		"type": "checkbox",
 		"default": true,
-		"description": "Change temperature colour between day and night"
+		"description": "Change temperature colour and Redshift brightness between day and night"
 	},
 	"nightColour":
 	{ "type": "spinbutton",

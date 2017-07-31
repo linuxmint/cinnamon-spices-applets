@@ -292,8 +292,8 @@ MyApplet.prototype = {
 	doRedshiftSwitch: function() {
 		this.enabled = this.redshiftSwitch.state;
 		// Stop redshift before launch another instance
-		Util.spawnCommandLine('redshift -x');
 		Util.spawnCommandLine('killall redshift');
+		Util.spawnCommandLine('redshift -x');
 		if (this.enabled) {
 			// Icon on
 			this.set_applet_icon_symbolic_path(ICON_PATH + "redshift-on.svg");
