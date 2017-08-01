@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
+"Language: es\n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
 #: applet.js:56 applet.js:221
