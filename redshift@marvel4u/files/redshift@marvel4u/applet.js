@@ -34,6 +34,9 @@ const LATITUDE = 'latitude';
 const LONGITUDE = 'longitude';
 
 const ICON_PATH = GLib.get_home_dir() + '/.local/share/cinnamon/applets/redshift@marvel4u/';
+const ICON_OFF = ICON_PATH + "Material_Design_Icons/lightbulb.svg";
+const ICON_ON = ICON_PATH + "Material_Design_Icons/lightbulb-on-outline.svg";
+const ICON_SUNSET = ICON_PATH + "Material_Design_Icons/weather-sunset.svg";
 
 
 //const SetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ';
@@ -52,7 +55,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation, instanceId);
 
         try {
-			this.set_applet_icon_symbolic_path(ICON_PATH + "redshfit-off.svg");
+			this.set_applet_icon_symbolic_path(ICON_OFF);
             this.set_applet_tooltip(_("Brightness")); // applet tooltip
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -296,8 +299,8 @@ MyApplet.prototype = {
 		Util.spawnCommandLine('redshift -x');
 		if (this.enabled) {
 			// Icon on
-			this.set_applet_icon_symbolic_path(ICON_PATH + "redshift-on.svg");
 			if (this.changeOnNight) {
+				this.set_applet_icon_symbolic_path(ICON_SUNSET);
 				if (this.latitude && this.longitude) {
 					Util.spawnCommandLine('redshift -l ' + this.latitude + ':' + this.longitude
 						+ ' -t ' + this.dayColor + ':' + this.nightColor
@@ -307,11 +310,12 @@ MyApplet.prototype = {
 						+ ' -b ' + (this.redshiftDayBrightness / 100) + ':' + (this.redshiftNightBrightness / 100));
 				}
 			} else {
+				this.set_applet_icon_symbolic_path(ICON_ON);
 				Util.spawnCommandLine('redshift -O ' + this.dayColor + ' -b ' + (this.redshiftDayBrightness / 100));
 			}
     	} else {
 			// Icon off
-			this.set_applet_icon_symbolic_path(ICON_PATH + "redshift-off.svg");
+			this.set_applet_icon_symbolic_path(ICON_OFF);
 		}
 	},
 
