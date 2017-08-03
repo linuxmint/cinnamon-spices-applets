@@ -108,24 +108,13 @@ AppGroup.prototype = {
   },
 
   handleDragOver: function (source, actor, x, y, time) {
-    let IsLauncherDraggable = null;
-    if (DND.LauncherDraggable) {
-      IsLauncherDraggable = source instanceof DND.LauncherDraggable;
-    }
-    if (source instanceof AppGroup || source.isDraggableApp || IsLauncherDraggable) {
+    if (source instanceof AppGroup
+      || source.isDraggableApp
+      || (DND.LauncherDraggable && source instanceof DND.LauncherDraggable)) {
       return DND.DragMotionResult.CONTINUE;
     }
-
-    if (typeof this.appList.dragEnterTime === 'undefined') {
-      this.appList.dragEnterTime = time;
-    } else {
-      if (time > (this.appList.dragEnterTime + 3000)) {
-        this.appList.dragEnterTime = time;
-      }
-    }
-
-    if (time > (this.appList.dragEnterTime + 300) && !(this.isFavoriteApp || source.isDraggableApp)) {
-      this._windowHandle(true);
+    if (this.metaWindows.length > 0 && this.lastFocused) {
+      Main.activateWindow(this.lastFocused, global.get_current_time());
     }
     return true;
   },
