@@ -23,7 +23,6 @@ const Clutter = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Meta = imports.gi.Meta;
-const IconTheme = imports.gi.Gtk.IconTheme;
 const Util = imports.misc.util;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
@@ -35,6 +34,7 @@ const AppFavorites = imports.ui.appFavorites;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Tweener = imports.ui.tweener;
+const SignalManager = imports.misc.signalManager;
 /*const DT = imports.misc.timers.DebugTimer;
 const dt = new DT('1')*/
 
@@ -103,7 +103,8 @@ CinnamenuApplet.prototype = {
     this.createMenu(orientation);
     this.actor.connect('key-press-event', Lang.bind(this, this._onSourceKeyPress));
     this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-
+    this.signals = new SignalManager.SignalManager(this);
+    this.displaySignals = new SignalManager.SignalManager(this);
     this._appletEnterEventId = 0;
     this._appletLeaveEventId = 0;
     this._appletHoverDelayId = 0;
@@ -113,7 +114,7 @@ CinnamenuApplet.prototype = {
     this.privacy_settings = new Gio.Settings({
       schema_id: PRIVACY_SCHEMA
     });
-    this.privacy_settings.connect('changed::' + REMEMBER_RECENT_KEY, Lang.bind(this, this.refresh));
+    this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, Lang.bind(this, this.refresh));
 
     // FS search
     this._fileFolderAccessActive = false;
@@ -124,16 +125,17 @@ CinnamenuApplet.prototype = {
     this._bindSettingsChanges();
     this._updateActivateOnHover();
     this._updateKeybinding();
-    Main.themeManager.connect('theme-set', Lang.bind(this, this._updateIconAndLabel));
+    this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this._updateIconAndLabel));
     this._updateIconAndLabel();
 
     // Connect gtk icontheme for when icons change
-    this._iconsChangedId = IconTheme.get_default().connect('changed', Lang.bind(this, this._onIconsChanged));
+    this._iconTheme = Gtk.IconTheme.get_default();
+    this.signals.connect(this._iconTheme, 'changed', Lang.bind(this, this._onIconsChanged));
     // Connect to AppSys for when new application installed
-    this._installedChangedId = this.appSystem.connect('installed-changed', Lang.bind(this, this._onAppInstalledChanged));
+    this.signals.connect(this.appSystem, 'installed-changed', Lang.bind(this, this._onAppInstalledChanged));
     // Connect to AppFavorites for when favorites change
-    this._favoritesChangedId = this.appFavorites.connect('changed', Lang.bind(this, this._onFavoritesChanged));
-    this.menu.connect('open-state-changed', Lang.bind(this, this._onOpenStateToggled));
+    this.signals.connect(this.appFavorites, 'changed', Lang.bind(this, this._onFavoritesChanged));
+    this.signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._onOpenStateToggled));
 
     this._newInstance = true;
     this._knownApps = [];
@@ -142,7 +144,6 @@ CinnamenuApplet.prototype = {
     this.favorites = [];
     this._allItems = [];
     this._searchTimeoutId = 0;
-    this._searchIconClickedId = 0;
     this._activeContainer = null;
     this.menuIsOpen = null;
     this._isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
@@ -230,7 +231,7 @@ CinnamenuApplet.prototype = {
           } else {
             this.set_applet_icon_path(this.menuIcon);
           }
-        } else if (Gtk.IconTheme.get_default().has_icon(this.menuIcon)) {
+        } else if (this._iconTheme.has_icon(this.menuIcon)) {
           if (this.menuIcon.search('-symbolic') !== -1) {
             this.set_applet_icon_symbolic_name(this.menuIcon);
           } else {
@@ -1494,17 +1495,14 @@ CinnamenuApplet.prototype = {
     if (this.searchActive) {
       this.searchEntry.set_secondary_icon(this._searchActiveIcon);
 
-      if (this._searchIconClickedId === 0) {
-        this._searchIconClickedId = this.searchEntry.connect('secondary-icon-clicked', Lang.bind(this, function() {
-          this._resetDisplayApplicationsToStartup();
-        }));
+      if (!this.signals.isConnected('secondary-icon-clicked', this.searchEntry)) {
+        this.signals.connect(this.searchEntry, 'secondary-icon-clicked', this._resetDisplayApplicationsToStartup);
       }
     } else {
-      if (this._searchIconClickedId > 0) {
-        this.searchEntry.disconnect(this._searchIconClickedId);
+      if (this.signals.isConnected('secondary-icon-clicked', this.searchEntry)) {
+        this.signals.disconnect('secondary-icon-clicked', this.searchEntry)
       }
 
-      this._searchIconClickedId = 0;
       this.searchEntry.set_secondary_icon(null);
     }
     if (!this.searchActive) {
@@ -1630,10 +1628,10 @@ CinnamenuApplet.prototype = {
     });
 
     let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
-    vscrollCategories.connect('scroll-start', Lang.bind(this, function() {
+    this.displaySignals.connect(vscrollCategories, 'scroll-start', Lang.bind(this, function() {
       this.menu.passEvents = true;
     }));
-    vscrollCategories.connect('scroll-stop', Lang.bind(this, function() {
+    this.displaySignals.connect(vscrollCategories, 'scroll-stop', Lang.bind(this, function() {
       this.menu.passEvents = false;
     }));
     this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
@@ -1683,11 +1681,11 @@ CinnamenuApplet.prototype = {
     });
     this.searchActive = false;
     this.searchEntryText = this.searchEntry.clutter_text;
-    this.searchEntryText.connect('text-changed', Lang.bind(this, this._onSearchTextChanged));
-    this.searchEntryText.connect('key-press-event', Lang.bind(this, this._onMenuKeyPress));
+    this.displaySignals.connect(this.searchEntryText, 'text-changed', Lang.bind(this, this._onSearchTextChanged));
+    this.displaySignals.connect(this.searchEntryText, 'key-press-event', Lang.bind(this, this._onMenuKeyPress));
     this._previousSearchPattern = '';
 
-    //Load Favorites
+    // Load Favorites
     this.favorites = this.appFavorites.getFavorites();
 
     // Load Places
@@ -1706,10 +1704,10 @@ CinnamenuApplet.prototype = {
       style_class: 'vfade menu-applications-scrollbox'
     });
     let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
-    vscrollApplications.connect('scroll-start', () => {
+    this.displaySignals.connect(vscrollApplications, 'scroll-start', () => {
       this.menu.passEvents = true;
     });
-    vscrollApplications.connect('scroll-stop', () => {
+    this.displaySignals.connect(vscrollApplications, 'scroll-stop', () => {
       this.menu.passEvents = false;
     });
 
@@ -1939,6 +1937,7 @@ CinnamenuApplet.prototype = {
   },
 
   destroyDisplayed: function() {
+    this.displaySignals.disconnectAllSignals();
     let containers = [
       'searchBox',
       'categoriesBox',
@@ -1971,44 +1970,22 @@ CinnamenuApplet.prototype = {
   },
 
   destroy: function() {
+    this.signals.disconnectAllSignals();
     this.destroyAppButtons();
     this._activeContainer.destroy();
     this.destroyDisplayed();
     if (this._searchWebBookmarks) {
       this._searchWebBookmarks.destroy();
     }
-    // Disconnect global signals
-    if (this._installedChangedId) {
-      this.appSystem.disconnect(this._installedChangedId);
-    }
-
-    if (this._favoritesChangedId) {
-      AppFavorites.getAppFavorites().disconnect(this._favoritesChangedId);
-    }
-
-    if (this._iconsChangedId) {
-      IconTheme.get_default().disconnect(this._iconsChangedId);
-    }
-
-    if (this._themeChangedId) {
-      St.ThemeContext.get_for_stage(global.stage).disconnect(this._themeChangedId);
-    }
-
-    if (this._overviewShownId) {
-      Main.overview.disconnect(this._overviewShownId);
-    }
-
-    if (this._overviewHiddenId) {
-      Main.overview.disconnect(this._overviewHiddenId);
-    }
-
-    if (this._overviewPageChangedId) {
-      Main.overview.disconnect(this._overviewPageChangedId);
-    }
 
     this.menu.destroy();
     this.actor.destroy();
     this.emit('destroy');
+
+    let props = Object.keys(this);
+    for (let i = 0, len = props.length; i < len; i++) {
+      this[props[i]] = undefined;
+    }
   },
 };
 
