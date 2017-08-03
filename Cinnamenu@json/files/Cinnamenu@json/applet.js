@@ -334,7 +334,10 @@ CinnamenuApplet.prototype = {
   // handler for when favorites change
   _onFavoritesChanged: function() {
     this.favorites = this.appFavorites.getFavorites();
-    this._switchApplicationsView(true);
+    // Check if the menu has been rendered at least once
+    if (this.applicationsGridBox && this.applicationsListBox) {
+      this._switchApplicationsView(true);
+    }
   },
 
   // handler for when icons change
