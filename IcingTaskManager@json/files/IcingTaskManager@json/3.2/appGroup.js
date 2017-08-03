@@ -375,6 +375,9 @@ AppGroup.prototype = {
 
   _onAppChange: function(metaWindow) {
     this.appList._windowRemoved(this.metaWorkspace, metaWindow);
+    if (!this.appList) {
+      return;
+    }
     this.appList._windowAdded(this.metaWorkspace, metaWindow);
   },
 
@@ -511,7 +514,7 @@ AppGroup.prototype = {
     });
   },
 
-  destroy: function () {
+  destroy: function (skipRefCleanup) {
     this.signals.disconnectAllSignals();
     this.willUnmount = true;
 
@@ -524,10 +527,12 @@ AppGroup.prototype = {
     this.appList.managerContainer.remove_child(this.actor);
     this.actor.destroy();
 
-    let props = Object.keys(this);
-    each(props, (propKey)=>{
-      delete this[propKey];
-    });
+    if (!skipRefCleanup) {
+      let props = Object.keys(this);
+      each(props, (propKey)=>{
+        this[propKey] = undefined;
+      });
+    }
   }
 };
 Signals.addSignalMethods(AppGroup.prototype);
