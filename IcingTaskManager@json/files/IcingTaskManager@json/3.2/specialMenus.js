@@ -454,7 +454,7 @@ AppMenuButtonRightClickMenu.prototype = {
     Applet.AppletPopupMenu.prototype.destroy.call(this);
     let props = Object.keys(this);
     each(props, (propKey)=>{
-      delete this[propKey];
+      this[propKey] = undefined;
     });
   },
 };
@@ -583,7 +583,7 @@ AppThumbnailHoverMenu.prototype = {
     PopupMenu.PopupMenu.prototype.destroy.call(this);
     let props = Object.keys(this);
     each(props, (propKey)=>{
-      delete this[propKey];
+      this[propKey] = undefined;
     });
   },
 

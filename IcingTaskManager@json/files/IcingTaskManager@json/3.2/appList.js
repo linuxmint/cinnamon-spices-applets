@@ -440,8 +440,8 @@ AppList.prototype = {
           this._refreshApps();
           return;
         }
-        this.appList[refApp].destroy();
-        this.appList[refApp] = null;
+        this.appList[refApp].destroy(true);
+        this.appList[refApp] = undefined;
         _.pullAt(this.appList, refApp);
       }, positionChange);
     }
@@ -461,7 +461,7 @@ AppList.prototype = {
     this.actor.destroy();
     let props = Object.keys(this);
     each(props, (propKey)=>{
-      delete this[propKey];
+      this[propKey] = undefined;
     });
   }
 };
