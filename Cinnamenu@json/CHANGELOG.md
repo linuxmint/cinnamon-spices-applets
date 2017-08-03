@@ -1,5 +1,10 @@
 Changelog
 
+### 2.0.2
+
+  * Fixed an error occurring when favorites change before the menu has been opened for the first time.
+  * Improved signal management.
+
 ### 2.0.1
 
   * Changed the default column count to 4.
