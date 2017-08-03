@@ -3050,7 +3050,9 @@ var runInContext = (function runInContext(context) {
         length = path.length;
 
     while (object != null && index < length) {
-      object = object[toKey(path[index++])];
+      // Changed to prevent CJS warning "reference to undefined property object[toKey(...)]"
+      let _object = object[toKey(path[index++])];
+      object = _object ? _object : undefined;
     }
     return (index && index == length) ? object : undefined;
   }
