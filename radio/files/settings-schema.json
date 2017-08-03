@@ -1,0 +1,49 @@
+{
+  "layout1": {
+    "type": "layout",
+    "pages": ["page1"],
+    "page1": {
+      "type": "page",
+      "title": "List of stations",
+      "sections": ["section1"]
+    },
+    "section1": {
+      "type": "section",
+      "title": "Radio",
+      "keys": ["tree"]
+    }
+  },
+
+  "tree": {
+    "type": "list",
+    "description": "List of stations",
+    "columns": [{
+        "id": "name",
+        "title": "Title",
+        "type": "string"
+      },
+      {
+        "id": "url",
+        "title": "URL",
+        "type": "string"
+      }
+    ],
+    "default": [{
+        "name": "Akustika",
+        "url": "http://ic3.101.ru:8000/c16_34"
+      },
+      {
+        "name": "Rock Hits",
+        "url": "http://icecast.radiomaximum.cdnvideo.ru/st25.mp3"
+      },
+      {
+        "name": "Hit FM",
+        "url": "http://icecast.radiohitfm.cdnvideo.ru/hit.mp3"
+      },
+      {
+        "name": "Chillout",
+        "url": "http://ic7.101.ru:8000/c15_3"
+      }
+    ]
+  }
+}
