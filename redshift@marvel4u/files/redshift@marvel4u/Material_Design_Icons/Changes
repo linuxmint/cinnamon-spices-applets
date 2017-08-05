@@ -3,4 +3,4 @@ Icons from Material Design Icons (https://materialdesignicons.com, https://githu
 The following changes have been done on icons:
 
 - lightbulb-on-outline: Fill bulb and rays with #D40000 color instead transparency.
-- weather-sunset: Fill sunset with white color instead transparency and change contour color to #D40000.
+- weather-sunset: Scale to 120%, fill sunset with #D40000 color instead transparency and change contour color to #D40000.
