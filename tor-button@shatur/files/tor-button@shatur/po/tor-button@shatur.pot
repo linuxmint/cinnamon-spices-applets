@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 03:56+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: LANGUAGE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:13
+msgid "Press to enable Tor"
+msgstr ""
+
+#: applet.js:14
+msgid "Press to disable Tor"
+msgstr ""
+
+#: applet.js:80
+msgid "Tor closed."
+msgstr ""
+
+#: applet.js:86
+msgid "Tor launched."
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->location->description
+msgid "Tor location path"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->location->tooltip
+msgid "Enter the command to launch Tor."
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for check Tor activity:"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
+msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine."
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show Tor notifications launch."
+msgstr ""
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr ""
+
+#. tor-button@shatur->metadata.json->description
+msgid "Click on the applet to enable or disable Tor"
+msgstr ""

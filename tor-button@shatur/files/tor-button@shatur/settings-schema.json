@@ -1,0 +1,25 @@
+{
+    "location" : {
+        "type" : "entry",
+        "default" : "tor",
+        "description" : "Tor location path",
+        "tooltip" : "Enter the command to launch Tor.",
+        "indent" : true
+    },
+    "refreshInterval": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval for check Tor activity:",
+        "tooltip": "Increase or decrease this spinner value to change the refresh interval for check Tor status - use a slow refresh if you have a slow machine."
+     },
+    "showNotifications": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show notifications",
+        "tooltip": "Show Tor notifications launch."
+    }
+}

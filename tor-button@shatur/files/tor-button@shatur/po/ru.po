@@ -1,0 +1,66 @@
+# Official Russian Translation
+# Gena <genaloner@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: genaloner@gmail.com\n"
+"POT-Creation-Date: 2017-08-03 03:56+0800\n"
+"PO-Revision-Date: 2017-08-03 04:07+0300\n"
+"Last-Translator: Gena <genaloner@gmail.com>\n"
+"Language-Team: русский <>\n"
+"Language: русский\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: applet.js:13
+msgid "Press to enable Tor"
+msgstr "Нажмите, чтобы включить Tor"
+
+#: applet.js:14
+msgid "Press to disable Tor"
+msgstr "Нажмите, чтобы выключить Tor"
+
+#: applet.js:80
+msgid "Tor closed."
+msgstr "Tor остановлен."
+
+#: applet.js:86
+msgid "Tor launched."
+msgstr "Tor запущен."
+
+#. tor-button@shatur->settings-schema.json->location->description
+msgid "Tor location path"
+msgstr "Расположение Tor"
+
+#. tor-button@shatur->settings-schema.json->location->tooltip
+msgid "Enter the command to launch Tor."
+msgstr "Введите команду для запуска Tor."
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for check Tor activity:"
+msgstr "Интервал обновления проверки статуса Tor:"
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
+msgid "Increase or decrease this spinner value to change the refresh interval for check Tor activity - use a slow refresh if you have a slow machine."
+msgstr "Увеличить или уменьшить интервал обновления статуса Tor - используйте, если у вас слабая машина."
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "Показывать уведомления"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show Tor notifications launch."
+msgstr "Показывать уведомления запуска Tor."
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr ""
+
+#. tor-button@shatur->metadata.json->description
+msgid "Click on the applet to enable or disable Tor"
+msgstr "Нажмите на апплете, чтобы включить или выключить Tor"
