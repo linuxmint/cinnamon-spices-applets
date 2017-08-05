@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-05 19:50+0200\n"
+"PO-Revision-Date: 2017-08-05 19:54+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:110
+msgid "Unable to connect printer at port "
+msgstr "Kunne ikke tilslutte printer på port "
+
+#: applet.js:121
+msgid "Error reading data..."
+msgstr "Fejl ved læsning af data ..."
+
+#. ink-level-monitor@r0p01ach->metadata.json->description
+msgid "USB Printer Ink Level Monitor Applet"
+msgstr "Panelprogram til overvågning af blækniveauet i USB-printer"
+
+#. ink-level-monitor@r0p01ach->metadata.json->name
+msgid "Printer Ink Level Monitor Applet"
+msgstr "Blækniveausovervågning"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->description
+msgid "Printer Port Number"
+msgstr "Printerens portnummer"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->lpPort->units
+msgid "(lp# device)"
+msgstr "(lp# enhed)"
+
+#. ink-level-monitor@r0p01ach->settings-
+#. schema.json->updateInterval->description
+msgid "Update Interval"
+msgstr "Opdateringsinterval"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->updateInterval->units
+msgid "seconds"
+msgstr "sekunder"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->description
+msgid "Applet Width"
+msgstr "Panelprogrammets bredde"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->appletWidth->units
+msgid "px"
+msgstr "px"
+
+#. ink-level-monitor@r0p01ach->settings-schema.json->general->description
+msgid "General Settings"
+msgstr "Generelle indstillinger"
