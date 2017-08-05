@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-05 19:26+0200\n"
+"PO-Revision-Date: 2017-08-05 19:36+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:53
+msgid "Checking status"
+msgstr "Undersøger status"
+
+#: applet.js:65
+msgid "Error, could not extract status!"
+msgstr "Fejl. Kunne ikke udtrække status!"
+
+#: applet.js:73
+msgid "Entry is active"
+msgstr "Linjen er aktiv"
+
+#: applet.js:76
+msgid "Entry is inactive"
+msgstr "Linjen er inaktiv"
+
+#: applet.js:79
+msgid "Entry does not exist"
+msgstr "Linjen eksisterer ikke"
+
+#: applet.js:82
+msgid "Entry status is unknown"
+msgstr "Linjens status er ukendt"
+
+#: applet.js:85
+msgid "Error, trying to set unknown status!"
+msgstr "Fejl. Prøver at angive ukendt status!"
+
+#: applet.js:113
+msgid "Error, unknown status!"
+msgstr "Fejl. Ukendt status!"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->ip->description
+msgid "IP address"
+msgstr "IP-adresse"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->hosts->description
+msgid "hosts"
+msgstr "værter"
+
+#. host-entries@hoffis-eck.de->metadata.json->description
+msgid "Enables/Disables Entries in /etc/hosts"
+msgstr "Aktiverer/deaktiverer linjer i /etc/host"
+
+#. host-entries@hoffis-eck.de->metadata.json->name
+msgid "Host Entries"
+msgstr "Host-linjer"
