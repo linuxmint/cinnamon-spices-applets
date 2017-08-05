@@ -73,6 +73,12 @@ MyApplet.prototype = {
             this._brightnessSlider.connect('value-changed', Lang.bind(this, this.brightnessSliderChanged));
             this.menu.addMenuItem(this._brightnessSlider);
 
+
+			//redshift switch control
+            this.redshiftSwitch = new PopupMenu.PopupSwitchMenuItem(_("Redshift"));
+        	this.redshiftSwitch.connect('toggled', Lang.bind(this, this.doRedshiftSwitch));
+        	this.menu.addMenuItem(this.redshiftSwitch);
+
             //redshift colour slider
             this.c_MenuItem = new PopupMenu.PopupMenuItem("", { reactive: false });
             this.menu.addMenuItem(this.c_MenuItem);
@@ -88,7 +94,7 @@ MyApplet.prototype = {
             this.menu.addMenuItem(this.b_Slider);
 
 			//redshift change on night control
-            this.changeOnNightSwitch = new PopupMenu.PopupSwitchMenuItem(_("Change on night"));
+            this.changeOnNightSwitch = new PopupMenu.PopupSwitchMenuItem(_("Transition on night"));
         	this.changeOnNightSwitch.connect('toggled', Lang.bind(this, this.changeOnNightChanged));
         	this.menu.addMenuItem(this.changeOnNightSwitch);
 
@@ -106,11 +112,6 @@ MyApplet.prototype = {
             this.bn_Slider.connect('value-changed', Lang.bind(this, this.redshiftNightBrightnessSliderChanged));
             this.menu.addMenuItem(this.bn_Slider);
 
-
-            //redshift switch control
-            this.redshiftSwitch = new PopupMenu.PopupSwitchMenuItem(_("Redshift"));
-        	this.redshiftSwitch.connect('toggled', Lang.bind(this, this.doRedshiftSwitch));
-        	this.menu.addMenuItem(this.redshiftSwitch);
 
             // delay for UI to allow time to get system power level
             Mainloop.timeout_add(500, Lang.bind(this, this.do_UI_update_probe));
@@ -200,12 +201,12 @@ MyApplet.prototype = {
 
     do_UI_update_colortag: function() {
 		this.c_Slider.setValue((this.dayColor - this.minColor) / (this.maxColor - this.minColor));
-		let colorStr = _("Redshift colour") + ": " + this.dayColor + "K";
+		let colorStr = _("Redshift day colour") + ": " + this.dayColor + "K";
         this.c_MenuItem.label.text = colorStr; // GUI Label Colour:
     },
     do_UI_update_brightnesstag: function() {
 		this.b_Slider.setValue((this.redshiftDayBrightness - this.minBrightness) / (this.maxBrightness - this.minBrightness));
-		let brightnessStr = _("Redshift brightness") + ": " + Math.round(this.redshiftDayBrightness) + "%";
+		let brightnessStr = _("Redshift day brightness") + ": " + Math.round(this.redshiftDayBrightness) + "%";
         this.b_MenuItem.label.text = brightnessStr; // GUI Label Brightness:
     },
 	do_UI_update_nightColortag: function() {
@@ -295,7 +296,7 @@ MyApplet.prototype = {
 	doRedshiftSwitch: function() {
 		this.enabled = this.redshiftSwitch.state;
 		// Stop redshift before launch another instance
-		Util.spawnCommandLine('killall redshift');
+		Util.killall('redshift');
 		Util.spawnCommandLine('redshift -x');
 		if (this.enabled) {
 			// Icon on

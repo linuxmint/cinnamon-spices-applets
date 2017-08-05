@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-31 20:01+0200\n"
+"POT-Creation-Date: 2017-08-05 17:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,37 +18,49 @@ msgstr ""
 "Language: \n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
-#: applet.js:56 applet.js:221
+#: applet.js:59 applet.js:225
 msgid "Brightness"
 msgstr ""
 
-#: applet.js:88
-msgid "Change on night"
-msgstr ""
-
 #. redshift@marvel4u->metadata.json->name
-#: applet.js:108
+#: applet.js:78
 msgid "Redshift"
 msgstr ""
 
-#: applet.js:200
-msgid "Redshift colour"
+#: applet.js:97
+msgid "Transition on night"
 msgstr ""
 
-#: applet.js:205
-msgid "Redshift brightness"
+#: applet.js:204
+msgid "Redshift day colour"
 msgstr ""
 
-#: applet.js:210
+#: applet.js:209
+msgid "Redshift day brightness"
+msgstr ""
+
+#: applet.js:214
 msgid "Redshift night colour"
 msgstr ""
 
-#: applet.js:215
+#: applet.js:219
 msgid "Redshift night brightness"
 msgstr ""
 
-#. redshift@marvel4u->settings-schema.json->head->description
-msgid "Settings for Redshift applet"
+#. redshift@marvel4u->settings-schema.json->brightness-section->title
+msgid "Brightness level"
+msgstr ""
+
+#. redshift@marvel4u->settings-schema.json->redshift-transition-section->title
+msgid "Transition between day and night configuration"
+msgstr ""
+
+#. redshift@marvel4u->settings-schema.json->redshift-section->title
+msgid "Redshift configuration"
+msgstr ""
+
+#. redshift@marvel4u->settings-schema.json->panel->title
+msgid "Redshift settings"
 msgstr ""
 
 #. redshift@marvel4u->settings-schema.json->brightness->units
@@ -98,7 +110,7 @@ msgid "Redshift Night Brightness"
 msgstr ""
 
 #. redshift@marvel4u->settings-schema.json->enabledOnStartup->description
-msgid "Enabled"
+msgid "Redshift Enabled"
 msgstr ""
 
 #. redshift@marvel4u->metadata.json->description
