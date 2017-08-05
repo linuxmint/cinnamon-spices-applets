@@ -159,7 +159,6 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-		global.log('on applet clicked');
 		// update brightness UI if values altered by system
         // todo: use watcher on dbus instead
 
@@ -294,10 +293,9 @@ MyApplet.prototype = {
 	},
 
 	doRedshiftSwitch: function() {
-		this.enabled = this.redshiftSwitch.state;
+        this.enabled = this.redshiftSwitch.state;
 		// Stop redshift before launch another instance
 		Util.killall('redshift');
-		Util.spawnCommandLine('redshift -x');
 		if (this.enabled) {
 			// Icon on
 			if (this.changeOnNight) {
@@ -317,6 +315,8 @@ MyApplet.prototype = {
     	} else {
 			// Icon off
 			this.set_applet_icon_symbolic_path(ICON_OFF);
+            // reset Redshift configuration
+    		Util.spawnCommandLine('redshift -x');
 		}
 	},
 
