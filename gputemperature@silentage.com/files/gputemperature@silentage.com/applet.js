@@ -22,6 +22,8 @@ function _(str) {
 var has_nvidia_smi=false;
 var has_nvidia_settings=false;
 var has_sensors=false;
+var has_optirun=false;
+var use_optirun=false;
 
 /*   The Popup Menu */
 function GPUMenu(launcher, orientation)
@@ -64,9 +66,16 @@ GPUTemp.prototype =
 			//has_nvidia_smi=this._hasCommand("which nvidia-smi", ".*/nvidia-smi");
 			has_nvidia_settings=this._hasCommand("which nvidia-settings", ".*/nvidia-settings");
 			has_sensors=this._hasCommand("which sensors", ".*/sensors");
+			has_optirun=this._hasCommand("which optirun", ".*/optirun");
 
 			if((has_nvidia_settings==true))
 			{
+				if(has_optirun==true)
+				{
+					this.switch_optirun = new PopupMenu.PopupSwitchMenuItem("Use optirun", false);
+					this._applet_context_menu.addMenuItem(this.switch_optirun);
+					this.switch_optirun.connect('toggled', Lang.bind(this, this._toggle_optirun));
+				}
 				this.set_applet_tooltip(_("Current Temperature of your NVidia based GPU"));
 				this._getNvidiaGpuTemperature();
 			}
@@ -86,6 +95,10 @@ GPUTemp.prototype =
 			global.logError("init error:");
 			global.logError(initerror);
 		}
+	},
+	_toggle_optirun: function()
+	{
+		use_optirun=!use_optirun;
 	},
 	_getAtiGpuTemperature: function()
 	{
@@ -191,13 +204,33 @@ GPUTemp.prototype =
 			try
 			{
 				{
-					let [res, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(null, ['nvidia-settings','-n','-t','-d','-q','all'], null, GLib.SpawnFlags.SEARCH_PATH, null);
+					var command=['']
+					if(use_optirun)
+					{
+						command=['optirun','nvidia-settings','-c',':8','-n','-t','-d','-q','all']
+					}
+					else
+					{
+						command=['nvidia-settings','-n','-t','-d','-q','all']
+					}
+					global.log(command)
+					let [res, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(null, command, null, GLib.SpawnFlags.SEARCH_PATH, null);
 					this._readOutput(stdout, plines);
 					//GLib.close_pid(pid);
-					//global.logError("pLines Read:" + linesRead);
+					global.logError("pLines Read:" + linesRead);
 				}
 				{
-					let [res, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(null, ['nvidia-settings','-n','-t','-d','-q','gpus'], null, GLib.SpawnFlags.SEARCH_PATH, null);
+					var command=['']
+					if(use_optirun)
+					{
+						command=['optirun','nvidia-settings','-c',':8','-n','-t','-d','-q','gpus']
+					}
+					else
+					{
+						command=['nvidia-settings','-n','-t','-d','-q','gpus']
+					}
+					global.log(command)
+					let [res, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(null, command, null, GLib.SpawnFlags.SEARCH_PATH, null);
 					this._readOutput(stdout, nlines);
 					//GLib.close_pid(pid);
 					//global.logError("nLines Read:" + linesRead);
@@ -233,10 +266,20 @@ GPUTemp.prototype =
 				//		b) didn't seem to get any output from the command.
 				//	So, in stead I arranged this clusterf*, er, jerry-rig that spawns a shell which then runs sh which runs the actual settings 
 				//	command but then redirects that output to a file (the first sh runst the second sh and redirects stdout to file). Had to do
-				//	it this way as the redirect is a feature fo the shell and not the spawn_async call. 
-				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q all" > /tmp/gputmp_prop.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
-				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q gpus" > /tmp/gputmp_name.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
-				GLib.spawn_async(null, ['sh', '-c', 'sh -c "nvidia-settings -n -t -d -q dpys" > /tmp/gputmp_dpys.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
+				//	it this way as the redirect is a feature fo the shell and not the spawn_async call.
+				command=''
+				if(use_optirun)
+				{
+					command='optirun nvidia-settings -c :8'
+				}
+				else
+				{
+					command='nvidia-settings'
+				}
+				global.log(command)
+				GLib.spawn_async(null, ['sh', '-c', 'sh -c "' + command + ' -n -t -d -q all" > /tmp/gputmp_prop.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
+				GLib.spawn_async(null, ['sh', '-c', 'sh -c "' + command + ' -n -t -d -q gpus" > /tmp/gputmp_name.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
+				GLib.spawn_async(null, ['sh', '-c', 'sh -c "' + command + ' -n -t -d -q dpys" > /tmp/gputmp_dpys.out'], null, GLib.SpawnFlags.SEARCH_PATH, null);
 			}
 			catch (e)
 			{
