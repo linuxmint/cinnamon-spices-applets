@@ -55,6 +55,14 @@ msgstr ""
 msgid "Show Tor notifications launch."
 msgstr ""
 
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as superuser"
+msgstr ""
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid "Launch Tor with gksu. Needed if you don't have permissions to launch Tor as normal user."
+msgstr ""
+
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
 msgstr ""

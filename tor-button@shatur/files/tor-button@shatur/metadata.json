@@ -1,6 +1,6 @@
 {
     "dangerous": false, 
     "description": "Click on the applet to enable or disable Tor", 
-    "uuid": "tor-button@shatur", 
-    "name": "Tor Button"
+    "name": "Tor Button", 
+    "uuid": "tor-button@shatur"
 }

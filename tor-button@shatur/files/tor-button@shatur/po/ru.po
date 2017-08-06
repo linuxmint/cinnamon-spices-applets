@@ -57,6 +57,14 @@ msgstr "Показывать уведомления"
 msgid "Show Tor notifications launch."
 msgstr "Показывать уведомления запуска Tor."
 
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as superuser"
+msgstr "Запускать Tor с правами суперпользователя"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid "Launch Tor with gksu. Needed if you don't have permissions to launch Tor as normal user."
+msgstr "Запускать Tor с gksu. Требутеся, если у вас нет прав для запуска Tor от обычного пользователя."
+
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
 msgstr ""
