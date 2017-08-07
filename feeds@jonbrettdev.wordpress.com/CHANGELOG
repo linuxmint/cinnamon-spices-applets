@@ -1,3 +1,7 @@
+0.29
+ ===
+ - Found bug where if data folder is not created the app fails to load.  
+
 0.28
  ===
  - Moved feeds.json file from config folder to data folder to resolve configure button issue.
