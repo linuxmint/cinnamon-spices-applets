@@ -1,0 +1,97 @@
+{
+    "layout" : {
+        "type" : "layout",
+        "pages" : ["panel"],
+        "panel" : {
+            "type" : "page",
+            "title" : "Redshift settings",
+            "sections" : ["brightness-section", "redshift-section", "redshift-transition-section"]
+        },
+        "brightness-section": {
+            "type": "section",
+            "title": "Brightness level",
+            "keys": ["brightness"]
+        },
+        "redshift-section": {
+            "type": "section",
+            "title": "Redshift configuration",
+            "keys": ["enabledOnStartup", "dayColour", "redshiftDayBrightness"]
+        },
+        "redshift-transition-section": {
+            "type": "section",
+            "title": "Transition between day and night configuration",
+            "keys": ["changeOnNight", "nightColour", "redshiftNightBrightness", "latitude", "longitude"]
+        }
+    },
+    "brightness": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 5,
+        "max": 100,
+        "units": "%",
+        "step": 5,
+        "description": "Brightness"
+    },
+    "enabledOnStartup": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Redshift Enabled"
+    },
+    "dayColour": {
+        "type": "spinbutton",
+        "default": 5500,
+        "min": 1000,
+        "max": 7000,
+        "units": "K",
+        "step": 50,
+        "description": "Redshift Day colour temperature"
+    },
+    "redshiftDayBrightness": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 5,
+        "max": 100,
+        "units": "%",
+        "step": 5,
+        "description": "Redshift Day Brightness"
+    },
+    "changeOnNight": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Change temperature colour and Redshift brightness between day and night"
+    },
+    "nightColour": {
+        "type": "spinbutton",
+        "dependency": "changeOnNight",
+        "default": 3500,
+        "min": 1000,
+        "max": 7000,
+        "units": "K",
+        "step": 50,
+        "description": "Redshift Night colour temperature"
+    },
+    "redshiftNightBrightness": {
+        "type": "spinbutton",
+        "dependency": "changeOnNight",
+        "default": 70,
+        "min": 5,
+        "max": 100,
+        "units": "%",
+        "step": 5,
+        "description": "Redshift Night Brightness"
+    },
+    "latitude": {
+        "type": "entry",
+        "dependency": "changeOnNight",
+        "default": "",
+        "description": "Latitude",
+        "tooltip": "If not entered Redshift would use GeoClue2 provider"
+    },
+    "longitude": {
+        "type": "entry",
+        "dependency": "changeOnNight",
+        "default": "",
+        "description": "Longitude",
+        "tooltip": "If not entered Redshift would use GeoClue2 provider"
+    }
+}

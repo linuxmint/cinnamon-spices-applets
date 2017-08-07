@@ -1,0 +1,6 @@
+Icons from Material Design Icons (https://materialdesignicons.com, https://github.com/Templarian/MaterialDesign) are used. Only necessary icons have been included in this project. For more information and a complete view of icon package, please visit the previous links.
+
+The following changes have been done on icons:
+
+- lightbulb-on-outline: Fill bulb and rays with #D40000 color instead transparency.
+- weather-sunset: Scale to 120%, fill sunset with #D40000 color instead transparency and change contour color to #D40000.
