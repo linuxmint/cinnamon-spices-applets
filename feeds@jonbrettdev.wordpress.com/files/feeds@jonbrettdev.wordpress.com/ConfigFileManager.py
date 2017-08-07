@@ -19,6 +19,7 @@
 '''
 from __future__ import unicode_literals
 import sys
+import os
 import uuid
 import json
 import csv
@@ -302,6 +303,11 @@ class ConfigFileManager:
                     for feed in instance['feeds']:
                         # This unique ID is the identifier for this feed for life
                         feed['id'] = ConfigFileManager.get_new_id()
+            # Create the UUID folder if it does not exist.
+            path = os.path.dirname(file_name)
+            if not os.path.exists(path):
+                os.makedirs(path)
+                
             ConfigFileManager.write(file_name, json_obj)
 
         return json_obj
