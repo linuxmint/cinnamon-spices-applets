@@ -781,7 +781,7 @@ msgstr "Indstillinger for tema"
 
 #. 3.0->settings-schema.json->panelLauncherClass->description
 msgid "Use the panel launcher class for pinned apps"
-msgstr "Anvend panelopstarterklassen for fastgjorte programmer"
+msgstr "Anvend panelprogramstarterklassen for fastgjorte programmer"
 
 #. 3.0->settings-schema.json->panelLauncherClass->tooltip
 msgid "Enabling this helps with certain themes."
