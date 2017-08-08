@@ -28,7 +28,7 @@ msgstr "Grafik"
 
 #: applet.js:304
 msgid "LAUNCHERS"
-msgstr "OPSTARTERE"
+msgstr "PROGRAMSTARTERE"
 
 #: applet.js:329
 msgid "PICTURES"
