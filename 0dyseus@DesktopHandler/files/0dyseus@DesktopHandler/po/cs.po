@@ -1,0 +1,569 @@
+# This is a template file for translating the 0dyseus@DesktopHandler package.
+# Copyright (C) 2016-2017
+# This file is distributed under the same license as the 0dyseus@DesktopHandler package.
+# Odyseus <EMAIL@ADDRESS>, 2016-2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 0dyseus@DesktopHandler 1.10\n"
+"Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
+"POT-Creation-Date: 2017-07-06 07:24+0200\n"
+"PO-Revision-Date: 2017-07-23 08:02+0200\n"
+"Last-Translator: Radek Otáhal <radek.otahal@email.cz>\n"
+"Language-Team: Czech\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Generated-By: make-xlet-pot.py 1.0.32\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: ../../create_localized_help.py:76
+msgid "Description"
+msgstr "Popis"
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:79
+msgid "This applet is based on [Smart Panel](https://cinnamon-spices.linuxmint.com/extensions/view/32) extension and [Show Desktop ++](https://cinnamon-spices.linuxmint.com/applets/view/165) applet, both authored by  **mohammad-sn**. I *mixed* both of them into an applet because there is not always room on the panel to perform the actions added by **Smart Panel**. The **Smart Panel** extension can still be installed and activated at the same time than this applet to have even more desktop actions."
+msgstr "Tento aplet je založen na rozšíření [Smart Panel](https://cinnamon-spices.linuxmint.com/extensions/view/32) a na [Show Desktop ++](https://cinnamon-spices.linuxmint.com/applets/View/165) apletu, oba od autora **mohammad-sn**. Já jsem *smíchal* oba z nich do jednoho apletu, protože na panelu není vždy prostor k provádění akcí přidaných ze **Smart Panel**. Rozšíření **Smart Panel** může být stále nainstalováno a aktivováno současně s tímto apletem, aby bylo možné provádět ještě další akce na ploše. "
+
+#: ../../create_localized_help.py:81
+msgid "Features"
+msgstr "Vlastnosti a funkce"
+
+#: ../../create_localized_help.py:83
+msgid "The applet icon, background color and width can be customized."
+msgstr "Ikonu apletu, barvu pozadí a šířku lze přizpůsobit."
+
+#: ../../create_localized_help.py:84
+msgid "Scroll over applet actions:"
+msgstr "Nastavitelné akce při rolování:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: ../../create_localized_help.py:85 applet.js:720
+msgid "Switch between workspaces"
+msgstr "Přepínání mezi pracovními plochami"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: ../../create_localized_help.py:86 applet.js:721
+msgid "Adjust opacity of windows"
+msgstr "Upravit průhlednost okna"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:87
+msgid "Toggle Show desktop"
+msgstr "Zobrazit pracovní plochu"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#: ../../create_localized_help.py:88 applet.js:723
+msgid "Switch between windows"
+msgstr "Přepínání mezi okny"
+
+#: ../../create_localized_help.py:89
+msgid "Posibility to perform different actions for scrolling up and down."
+msgstr "Možnost provádět různé akce pro posouvání nahoru a dolů."
+
+#: ../../create_localized_help.py:90
+msgid "Posibility to perform different actions on left and middle click."
+msgstr "Možnost provádět různé akce pro levé a střední kliknutí."
+
+#: ../../create_localized_help.py:91
+msgid "Actions for up/down scroll and/or left/middle clicks."
+msgstr "Akce pro rolovací tlačítka nahoru/dolů a/nebo kliknutí na levé/střední tlačítko."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:92 applet.js:422 applet.js:704
+msgid "Expo"
+msgstr "Expo"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:93 applet.js:705
+msgid "Overview"
+msgstr "Overview"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:94 applet.js:706
+msgid "Launch App Switcher"
+msgstr "Spustit přepínání aplikací"
+
+#: ../../create_localized_help.py:95
+msgid "Show Desktop"
+msgstr "Zobrazit pracovní plochu"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:96 applet.js:707
+msgid "Run 1st Custom Command"
+msgstr "Spustit 1. uživatelský příkaz"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:97 applet.js:708
+msgid "Run 2nd Custom Command"
+msgstr "Spustit 2. uživatelský příkaz"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:98 applet.js:709
+msgid "Run 3rd Custom Command"
+msgstr "Spustit 3. uživatelský příkaz"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:99 applet.js:710
+msgid "Run 4rd Custom Command"
+msgstr "Spustit 4. uživatelský příkaz"
+
+#: ../../create_localized_help.py:100
+msgid "Posibility to create a windows list menu."
+msgstr "Možnost vytvoření seznamu oken v menu."
+
+#: ../../create_localized_help.py:101
+msgid "Left/Middle/Right click on applet can be configured to open the windows list menu."
+msgstr "Levé/střední/pravé kliknutí na aplet lze nakonfigurovat tak, aby otevřelo nabídku se seznamem oken."
+
+#: ../../create_localized_help.py:102
+msgid "Desktop peek functionality with configurable levels of opacity."
+msgstr "Vylepšení funkčnosti s nastavitelnými úrovněmi průhlednosti plochy."
+
+#: ../../create_localized_help.py:182
+msgid "The following two sections are available only in English."
+msgstr "Následující dvě části jsou k dispozici pouze v angličtině."
+
+#: ../../create_localized_help.py:186
+msgid "Do not install on any other version of Cinnamon."
+msgstr "Neinstalujte v žádné jiné verzi Cinnamonu."
+
+#: ../../create_localized_help.py:192
+msgid "Compatibility"
+msgstr "Kompatibilita"
+
+#. Define them first before self.get_language_stats() is called so these
+#. strings are also counted.
+#: ../../create_localized_help.py:298 applet.js:486
+msgid "Help"
+msgstr "Nápověda"
+
+#: ../../create_localized_help.py:299
+msgid "Contributors"
+msgstr "Přispěvatelé"
+
+#: ../../create_localized_help.py:300
+msgid "Changelog"
+msgstr "Přehled změn"
+
+#. TO TRANSLATORS: Full sentence:
+#. "Help for <xlet_name>"
+#: ../../create_localized_help.py:301 ../../create_localized_help.py:320
+#, python-format
+msgid "Help for %s"
+msgstr "Nápověda pro %s"
+
+#: ../../create_localized_help.py:321
+msgid "IMPORTANT!!!"
+msgstr "DŮLEŽITÉ!!!"
+
+#: ../../create_localized_help.py:322
+msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
+msgstr "Nikdy neodstraňujte soubory ze složky tohoto xletu. Mohlo by to narušit funkčnost xletu. "
+
+#. 0dyseus@DesktopHandler->metadata.json->comments
+#: ../../create_localized_help.py:323
+msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
+msgstr "Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v repozitáři tohoto xletu, na který je odkaz dále."
+
+#: ../../create_localized_help.py:329
+msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
+msgstr "Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)"
+
+#: ../../create_localized_help.py:330
+msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
+msgstr "Pokud byl tento xlet nainstalován z nastavení systému v Cinnamonu, byly všechny tyto lokalizace xletu automaticky nainstalovány."
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:332
+msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
+msgstr "Pokud byl tento xlet nainstalován ručně a nikoliv pomocí nastavení systému v Cinnamonu, mohou být lokalizace instalovány spuštěním skriptu nazvaného ** localizations.sh ** z terminálu otevřeného uvnitř složky xletu."
+
+#: ../../create_localized_help.py:333
+msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
+msgstr "Pokud tento xlet nemá k dispozici překlad pro váš jazyk, můžete jej vytvořit podle následujících pokynů."
+
+#: applet.js:250 applet.js:363
+msgid "Close window"
+msgstr "Zavřít okno"
+
+#: applet.js:304
+msgid "Close all windows from this wrokspace"
+msgstr "Zavřít všechna okna na této ploše"
+
+#: applet.js:409
+msgid "No open windows"
+msgstr "Žádná otevřená okna"
+
+#: applet.js:430
+msgid "Close all windows from all workspaces"
+msgstr "Zavřít všechna okna na všech plochách"
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:497
+msgid "About..."
+msgstr "O aplikaci..."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:507
+msgid "Configure..."
+msgstr "Nastavit..."
+
+#. NOTE: This string could be left blank because it's a default string,
+#. so it's already translated by Cinnamon. It's up to the translators.
+#: applet.js:521
+#, javascript-format
+msgid "Remove '%s'"
+msgstr "Odebrat '%s'"
+
+#: applet.js:530
+#, javascript-format
+msgid "Are you sure that you want to remove '%s' from your panel?"
+msgstr "Jste si jisti, že chcete odstranit '%s' z panelu?"
+
+#: applet.js:532
+msgid "Cancel"
+msgstr "Zrušit"
+
+#: applet.js:532
+msgid "OK"
+msgstr "OK"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: applet.js:711
+msgid "None"
+msgstr "Žádná"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:712
+msgid "Icons only"
+msgstr "Pouze ikony"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:713
+msgid "Thumbnails only"
+msgstr "Pouze náhledy"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:714
+msgid "Icons and thumbnails"
+msgstr "Ikony a náhledy"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:715
+msgid "Icons and window preview"
+msgstr "Ikony a náhledy oken"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:716
+msgid "Window preview (no icons)"
+msgstr "Přehled oken (bez ikon)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:717
+msgid "Coverflow (3D)"
+msgstr "Coverflow (3D)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:718
+msgid "Timeline (3D)"
+msgstr "Časová osa (3D)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->options
+#: applet.js:719
+msgid "System default"
+msgstr "Výchozí nastavení"
+
+#: applet.js:722
+msgid "Toggle show desktop"
+msgstr "Zobrazit pracovní plochu"
+
+#: applet.js:724
+msgid "Open windows list menu"
+msgstr "Otevřít menu seznamu oken"
+
+#. 0dyseus@DesktopHandler->metadata.json->name
+#: applet.js:738
+msgid "Desktop Handler"
+msgstr "Desktop Handler"
+
+#: applet.js:741
+msgid "Scroll Up"
+msgstr "Posunování nahoru"
+
+#: applet.js:742
+msgid "Scroll Down"
+msgstr "Posunování dolů"
+
+#: applet.js:744
+msgid "Scroll"
+msgstr "Posunování"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:751
+msgid "Left click"
+msgstr "Kliknutí na levé tlačítko"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:757
+msgid "Middle click"
+msgstr "Kliknutí na prostřední tlačítko"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->options
+#: applet.js:761
+msgid "Right click"
+msgstr "Kliknutí na pravé tlačítko"
+
+#. 0dyseus@DesktopHandler->metadata.json->description
+msgid "Various shortcuts to handle desktop actions."
+msgstr "Různé pomůcky a klávesové zkratky pro provádění akcí na ploše."
+
+#. 0dyseus@DesktopHandler->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr "Viz soubor s nápovědou tohoto xletu."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd1_action->description
+msgid "1st Custom Command:"
+msgstr "1. uživatelský příkaz:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd2_action->description
+msgid "2nd Custom Command:"
+msgstr "2. uživatelský příkaz:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_all_buttons->description
+msgid "Show close all windows buttons for workspaces"
+msgstr "Zobrazit tlačítka pro zavření všech oken pro pracovní plochy"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head6->description
+msgid "App Switcher Settings: "
+msgstr "Nastavení přepínání aplikací:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr "Použít vlastní ikonu pro tento aplet."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->description
+msgid "Icon for Applet (Leave blank to remove icon):"
+msgstr "Ikona pro aplet (ponechat prázdné pro odstranění ikony):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->description
+msgid "Action on scrolling down: "
+msgstr "Akce při posunování dolů:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->description
+msgid "Action on scrolling: "
+msgstr "Akce při posunování:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_configure->description
+msgid "Show \"Configure...\""
+msgstr "Zobrazit \"Nastavit...\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->units
+msgid "pixels"
+msgstr "pixelů"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->description
+msgid "Applet custom width (Set to 0 (zero) to not set a width):"
+msgstr "Vlastní šířka apletu (nastavením na 0 (nula), nebude nastavena šířka):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desktop_icons->description
+msgid "Opacify the icons on the desktop"
+msgstr "Zprůhlednit ikony na ploše"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_default_items->description
+msgid "Show context menu default items on right click"
+msgstr "Zobrazit výchozí položky kontextového menu při kliknutí na pravé tlačítko"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->tooltip
+msgid "I mainly added this so it's easy to see the applet the first time is placed in a panel."
+msgstr "Přidal jsem to hlavně proto, aby byl aplet vidět při prvním umístění do panelu."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->description
+msgid "Background color for the applet:"
+msgstr "Barva pozadí pro aplet:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head3->description
+msgid "Windows menu options"
+msgstr "Volby pro menu oken"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head0->description
+msgid "Applet options: "
+msgstr "Volby apletu:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_prevent_fast_scroll->description
+msgid "Prevent accidental workspace/window switching on rapid scrolling"
+msgstr "Zabránit náhodnému přepnutí pracovní plochy/okna při rychlém posouvání"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_blur_effect_enabled->description
+msgid "Blur windows on hover"
+msgstr "Rozmazat okna při nahlédnutí na plochu"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head2->description
+msgid "Mouse click options: "
+msgstr "Volby pro kliknutí tlačítkem myši:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->units
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->units
+msgid "milliseconds"
+msgstr "milisekund"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->description
+msgid "Minimum delay between scrolls:"
+msgstr "Minimální zpoždění mezi posunováním:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current Application"
+msgstr "Aktuální aplikace"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "All workspaces"
+msgstr "Všechny plochy"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current workspace"
+msgstr "Aktuální plocha"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->description
+msgid "Switch between windows from: "
+msgstr "Přepnout mezi okny z:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->description
+msgid "Mouse button to open menu (It will override mouse click actions):"
+msgstr "Otevřít menu tlačítkem myši (Tímto způsobem se přepíší akce kliknutí myší):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_remove->description
+msgid "Show \"Remove this applet\""
+msgstr "Zobrazit \"Odebrat tento aplet\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_opacity->description
+msgid "Level of opacity:"
+msgstr "Stupeň průhlednosti:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_separated_scroll_action->description
+msgid "Independent actions for scrolling up and down"
+msgstr "Nezávislé akce pro posouvání nahoru a dolů."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head4->description
+msgid "Peek at desktop options:"
+msgstr "Volby pro nahlédnutí na plochu při najetí:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_help->description
+msgid "Show \"Help\""
+msgstr "Zobrazit \"Nápověda\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->description
+msgid "Peek desktop trigger delay:"
+msgstr "Prodleva před nahlédnutím na plochu:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd3_action->description
+msgid "3rd Custom Command:"
+msgstr "3. uživatelský příkaz:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->description
+msgid "Action on applet left click: "
+msgstr "Akce při kliknutí levým tlačítkem na aplet:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Shift"
+msgstr "Shift"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
+msgid "Ctrl"
+msgstr "Ctrl"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->description
+msgid "Modifier key: "
+msgstr "Modifikační klávesa:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->description
+msgid "When a modifier key is pressed, switch between windows from: "
+msgstr "Když je stisknuto modifikační klávesa, přepíná se mezi okny z:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_style->description
+msgid "App switcher style: "
+msgstr "Styl přepínání aplikací:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head1->description
+msgid "Mouse scroll options: "
+msgstr "Volby pro posunování kolečkem myši:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->description
+msgid "Action on scrolling up: "
+msgstr "Akce při posunování nahoru:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_windows_list_menu_enabled->description
+msgid "Enable Windows list menu"
+msgstr "Povolit menu seznamu oken"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_keep_menu_open->description
+msgid "Keep menu open while closing windows"
+msgstr "Ponechat menu otevřené při zavírání oken"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_buttons->description
+msgid "Show close buttons on windows list"
+msgstr "Zobrazit tlačítko pro ukončení v seznamu oken"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd4_action->description
+msgid "4rd Custom Command:"
+msgstr "4. uživatelský příkaz:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_about->description
+msgid "Show \"About...\""
+msgstr "Zobrazit \"O aplikaci...\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "Získat celkový náhled pracovní plochy a deskletů."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->description
+msgid "Opacify windows on hover (a.k.a. desktop peek)"
+msgstr "Zprůhlednit okna při najetí (a.k.a. desktop peek)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desklets->description
+msgid "Opacify desklets"
+msgstr "Zprůhlednit desklety"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->description
+msgid "Action on applet middle click: "
+msgstr "Akce při kliknutí prostředním tlačítkem na aplet"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head5->description
+msgid "Custom Commands: "
+msgstr "Uživatelské příkazy:"
