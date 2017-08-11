@@ -25,7 +25,7 @@
     "runAsRoot": {
         "type": "checkbox",
         "default": false,
-        "description": "Launch Tor as superuser",
-        "tooltip": "Launch Tor with gksu. Needed if you don't have permissions to launch Tor as normal user."
+        "description": "Launch Tor as Tor user",
+        "tooltip": "Launch Tor with gksu with '-u' parameter. Needed if you don't have permissions to launch Tor as normal user."
     }
 }
