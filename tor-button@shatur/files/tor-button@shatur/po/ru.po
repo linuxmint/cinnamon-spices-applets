@@ -26,19 +26,19 @@ msgstr "Tor отключён"
 msgid "Tor enabled"
 msgstr "Tor включён"
 
-#: applet.js:44
+#: applet.js:45
 msgid "Tor network"
 msgstr "Сеть Tor"
 
-#: applet.js:48
+#: applet.js:49
 msgid "Rebuild chain"
 msgstr "Перестроить цепочку"
 
-#: applet.js:105
+#: applet.js:106
 msgid "Tor closed."
 msgstr "Tor выключен."
 
-#: applet.js:113
+#: applet.js:114
 msgid "Tor launched."
 msgstr "Tor запущен."
 
@@ -71,8 +71,8 @@ msgid "Launch Tor as Tor user"
 msgstr "Запускать от пользователя Tor"
 
 #. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
-msgid "Launch Tor with gksu. Needed if you don't have permissions to launch Tor as normal user."
-msgstr "Запускать Tor с gksu. Требутеся, если у вас нет прав для запуска Tor от обычного пользователя."
+msgid "Launch Tor with gksu with '-u' parameter. Needed if you don't have permissions to launch Tor as normal user."
+msgstr "Запускать Tor с gksu с параметром '-u'. Требутеся, если у вас нет прав для запуска Tor от обычного пользователя."
 
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"

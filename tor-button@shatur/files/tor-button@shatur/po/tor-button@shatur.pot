@@ -23,19 +23,19 @@ msgstr ""
 msgid "Tor enabled"
 msgstr ""
 
-#: applet.js:44
+#: applet.js:45
 msgid "Tor network"
 msgstr ""
 
-#: applet.js:48
+#: applet.js:49
 msgid "Rebuild chain"
 msgstr ""
 
-#: applet.js:105
+#: applet.js:106
 msgid "Tor closed."
 msgstr ""
 
-#: applet.js:113
+#: applet.js:114
 msgid "Tor launched."
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid "Launch Tor as superuser"
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
-msgid "Launch Tor with gksu. Needed if you don't have permissions to launch Tor as normal user."
+msgid "Launch Tor with gksu with '-u' parameter. Needed if you don't have permissions to launch Tor as normal user."
 msgstr ""
 
 #. tor-button@shatur->metadata.json->name
