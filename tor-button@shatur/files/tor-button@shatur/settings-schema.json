@@ -14,7 +14,7 @@
         "step": 1,
         "units": "seconds",
         "description": "Refresh Interval for check Tor activity:",
-        "tooltip": "Increase or decrease this spinner value to change the refresh interval for check Tor status - use a slow refresh if you have a slow machine."
+        "tooltip": "Increase or decrease refresh interval for check Tor status."
      },
     "showNotifications": {
         "type": "checkbox",

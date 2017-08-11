@@ -15,19 +15,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:13
-msgid "Press to enable Tor"
-msgstr ""
-
 #: applet.js:14
-msgid "Press to disable Tor"
+msgid "Tor disabled"
 msgstr ""
 
-#: applet.js:80
+#: applet.js:15
+msgid "Tor enabled"
+msgstr ""
+
+#: applet.js:44
+msgid "Tor network"
+msgstr ""
+
+#: applet.js:48
+msgid "Rebuild chain"
+msgstr ""
+
+#: applet.js:105
 msgid "Tor closed."
 msgstr ""
 
-#: applet.js:86
+#: applet.js:113
 msgid "Tor launched."
 msgstr ""
 
@@ -44,7 +52,7 @@ msgid "Refresh Interval for check Tor activity:"
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
-msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine."
+msgid "Increase or decrease refresh interval for check Tor status."
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->showNotifications->description
@@ -68,5 +76,5 @@ msgid "Tor Button"
 msgstr ""
 
 #. tor-button@shatur->metadata.json->description
-msgid "Click on the applet to enable or disable Tor"
+msgid "Applet for Tor network management"
 msgstr ""

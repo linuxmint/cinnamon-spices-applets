@@ -1,7 +1,8 @@
 const Applet = imports.ui.applet; //Main
 const St = imports.gi.St; // Needed for translations
 const Gettext = imports.gettext; // Needed for translations
-const GLib = imports.gi.GLib; // Needed for starting programs and translations
+const GLib = imports.gi.GLib; // Needed for start programs, work with files and translations
+const PopupMenu = imports.ui.popupMenu; // Needed for main applet menu
 const Settings = imports.ui.settings; // Settings in applet
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const Lang = imports.lang; // Needed for menus
@@ -9,10 +10,9 @@ const UUID = "tor-button@shatur"; // Applet UUID
 
 var torAppletCheck = "OFF"; // Show information to applet from '/tmp/.torAppletCheck'
 var torEnable = "true,OFF\n"; // Show previous information from file (off by default)
-var applet_running = true; //** Allow applet to be fully stopped when removed from panel
-var gksu = "";
-const press_on = "Press to enable Tor";
-const press_off = "Press to disable Tor";
+var applet_running = true; // Allow applet to be fully stopped when removed from panel
+const tor_off = "Tor disabled";
+const press_off = "Tor enabled";
 
 
 // Needed for translations
@@ -34,6 +34,26 @@ MyApplet.prototype = {
     _init: function (metadata, orientation, panelHeight, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
         
+        
+        // Popup Menu
+        // Initialize      
+        this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.menu);
+        // Add items
+        this.tor_toggle = new PopupMenu.PopupSwitchIconMenuItem(_("Tor network"), false, "tor-off", St.IconType.SYMBOLIC);
+        this.tor_toggle.connect('toggled', Lang.bind(this, this.tor_launcher));
+        this.menu.addMenuItem(this.tor_toggle);
+
+        let rebuild_button = new PopupMenu.PopupIconMenuItem(_("Rebuild chain"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
+            rebuild_button.connect('activate', Lang.bind(this, function() {
+                GLib.spawn_command_line_async("pkill -1 tor");
+            }));
+            this.menu.addMenuItem(rebuild_button)
+        
+        
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Make applet works with any panel orientation
+        
         //Settings
         this.settings = new Settings.AppletSettings(this, UUID, instance_id); // Settings initialization
         this.settings.bindProperty(Settings.BindingDirection.IN, // Setting type
@@ -51,16 +71,15 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
         "runAsRoot",
         "runAsRoot",
-        this.gksu, // Change gksu value
-        null); // Optional callback data
+        function(){}); // Callback when value changes (empty function)
         
         // Part of l10n support;
         Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
         
         //Icon and tooltip
         this.set_applet_icon_symbolic_name('tor-off');
-        this.set_applet_tooltip(_(press_on));;
-
+        this.set_applet_tooltip(_(tor_off));;
+        
         // Make sure the temp file is created
         GLib.spawn_command_line_async('touch /tmp/.torAppletCheck');
         
@@ -68,11 +87,6 @@ MyApplet.prototype = {
         Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.updateLoop));
     },
     
-    // Change gksu value
-    gksu: function () {
-        gksu = (this.runAsRoot) ? "gksu " : "";
-    },
-
     // Inhibit the update timer when applet removed from panel
     on_applet_removed_from_panel: function () {
         applet_running = false;
@@ -88,14 +102,18 @@ MyApplet.prototype = {
             {
                 if (torAppletCheck.substr(5,3) == "OFF") { // Check information from file without 'true,' and '\n '
                                                            this.set_applet_icon_symbolic_name('tor-off'); // Change icon
-                                                           if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \'Tor closed.\' --icon=dialog-information'); // Show notification                 
-                                                           this.set_applet_tooltip(_(press_on)); // Change tooltip
+                                                           if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor closed.")+'\' --icon=dialog-information'); // Show notification
+                                                           this.set_applet_tooltip(_(tor_off)); // Change tooltip
+                                                           this.tor_toggle.setToggleState(false);
+                                                           this.tor_toggle.setIconSymbolicName("tor-off");                 
                                                            torEnable = torAppletCheck; // Set previous information for Tor status
                 }
                 else {
                     this.set_applet_icon_symbolic_name('tor-on');
-                    if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \'Tor launched.\' --icon=dialog-information');                   
+                    if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor launched.")+'\' --icon=dialog-information');                   
                     this.set_applet_tooltip(_(press_off));
+                    this.tor_toggle.setToggleState(true);
+                    this.tor_toggle.setIconSymbolicName("tor-on");                 
                     torEnable = torAppletCheck;
                 }
             }
@@ -104,12 +122,19 @@ MyApplet.prototype = {
     },
     
     on_applet_clicked: function() {
+        this.menu.toggle();
+    },
+    
+    tor_launcher: function() {
         if (torAppletCheck.substr(5,3) == "OFF") { // Check information from file without 'true,' and '\n '
-                                                   GLib.spawn_command_line_async(gksu+this.location); // Run tor from location settings        
+                                                   if (this.runAsRoot == true) pid = GLib.spawn_command_line_async('gksu '+this.location); // Run tor from location settings with gksu
+                                                   else GLib.spawn_command_line_async(this.location); // Run tor from location settings as normal user
         }
         else {
-            GLib.spawn_command_line_async(gksu+'pkill tor');  // Kill Tor                 
+            if (this.runAsRoot == true) GLib.spawn_command_line_async('gksu pkill tor');  // Kill Tor with gksu       
+            else GLib.spawn_command_line_async('pkill tor'); // Kill tor as normal user
         }
+    this.menu.toggle();
     }
 };
 
