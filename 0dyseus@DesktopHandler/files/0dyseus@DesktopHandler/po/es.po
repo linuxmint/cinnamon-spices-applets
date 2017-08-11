@@ -5,9 +5,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@DesktopHandler 1.09\n"
+"Project-Id-Version: 0dyseus@DesktopHandler 1.10\n"
 "Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
-"POT-Creation-Date: 2017-06-21 03:32-0300\n"
+"POT-Creation-Date: 2017-08-11 17:52-0300\n"
 "PO-Revision-Date: 2017-06-19 00:32-0300\n"
 "Last-Translator: Odyseus\n"
 "Language-Team: Spanish\n"
@@ -18,199 +18,195 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: ../../create_localized_help.py:72
+#: ../../create_localized_help.py:76
 msgid "Description"
 msgstr "Descripción"
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:75
+#: ../../create_localized_help.py:79
 msgid "This applet is based on [Smart Panel](https://cinnamon-spices.linuxmint.com/extensions/view/32) extension and [Show Desktop ++](https://cinnamon-spices.linuxmint.com/applets/view/165) applet, both authored by  **mohammad-sn**. I *mixed* both of them into an applet because there is not always room on the panel to perform the actions added by **Smart Panel**. The **Smart Panel** extension can still be installed and activated at the same time than this applet to have even more desktop actions."
 msgstr "Este applet está basado en la extensión [Smart Panel](https://cinnamon-spices.linuxmint.com/extensions/view/32) y en el applet [Show Desktop ++](https://cinnamon-spices.linuxmint.com/applets/view/165), ambos escritos por **mohammad-sn**. Yo *mezclé* ambos en un applet porque no siempre hay espacio en el panel para realizar las acciones agregadas por **Smart Panel**. La extensión **Smart Panel** se puede instalar y activar al mismo tiempo que este applet para tener aún más acciones de escritorio."
 
-#: ../../create_localized_help.py:77
+#: ../../create_localized_help.py:81
 msgid "Features"
 msgstr "Características"
 
-#: ../../create_localized_help.py:79
+#: ../../create_localized_help.py:83
 msgid "The applet icon, background color and width can be customized."
 msgstr "El icono, el color de fondo y el ancho del applet se pueden personalizar."
 
-#: ../../create_localized_help.py:80
+#: ../../create_localized_help.py:84
 msgid "Scroll over applet actions:"
 msgstr "Acciones al desplazarse sobre el applet:"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: ../../create_localized_help.py:81 applet.js:720
+#: ../../create_localized_help.py:85 applet.js:720
 msgid "Switch between workspaces"
 msgstr "Alternar entre espacios de trabajo"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: ../../create_localized_help.py:82 applet.js:721
+#: ../../create_localized_help.py:86 applet.js:721
 msgid "Adjust opacity of windows"
 msgstr "Ajustar opacidad de ventanas"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: ../../create_localized_help.py:83
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
+#: ../../create_localized_help.py:87
 msgid "Toggle Show desktop"
 msgstr "Activar Mostrar escritorio"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
-#: ../../create_localized_help.py:84 applet.js:723
+#: ../../create_localized_help.py:88 applet.js:723
 msgid "Switch between windows"
 msgstr "Cambiar entre ventanas"
 
-#: ../../create_localized_help.py:85
+#: ../../create_localized_help.py:89
 msgid "Posibility to perform different actions for scrolling up and down."
 msgstr "Posibilidad de realizar diferentes acciones al desplazarse hacia arriba y hacia abajo."
 
-#: ../../create_localized_help.py:86
+#: ../../create_localized_help.py:90
 msgid "Posibility to perform different actions on left and middle click."
 msgstr "Posibilidad de realizar diferentes acciones en el clic izquierdo y central."
 
-#: ../../create_localized_help.py:87
+#: ../../create_localized_help.py:91
 msgid "Actions for up/down scroll and/or left/middle clicks."
 msgstr "Acciones para los desplazamientos arriba/abajo y/o los clics izquierdo/central."
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:88 applet.js:422 applet.js:704
+#: ../../create_localized_help.py:92 applet.js:422 applet.js:704
 msgid "Expo"
 msgstr "Expo"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:89 applet.js:705
+#: ../../create_localized_help.py:93 applet.js:705
 msgid "Overview"
 msgstr "Visión general"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:90 applet.js:706
+#: ../../create_localized_help.py:94 applet.js:706
 msgid "Launch App Switcher"
 msgstr "Lanzar conmutador de aplicaciones"
 
-#: ../../create_localized_help.py:91
+#: ../../create_localized_help.py:95
 msgid "Show Desktop"
 msgstr "Mostrar Escritorio"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:92 applet.js:707
+#: ../../create_localized_help.py:96 applet.js:707
 msgid "Run 1st Custom Command"
 msgstr "Ejecutar 1.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:93 applet.js:708
+#: ../../create_localized_help.py:97 applet.js:708
 msgid "Run 2nd Custom Command"
 msgstr "Ejecutar 2.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:94 applet.js:709
+#: ../../create_localized_help.py:98 applet.js:709
 msgid "Run 3rd Custom Command"
 msgstr "Ejecutar 3.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
-#: ../../create_localized_help.py:95 applet.js:710
+#: ../../create_localized_help.py:99 applet.js:710
 msgid "Run 4rd Custom Command"
 msgstr "Ejecutar 4.º comando personalizado"
 
-#: ../../create_localized_help.py:96
+#: ../../create_localized_help.py:100
 msgid "Posibility to create a windows list menu."
 msgstr "Posibilidad de crear un menú de lista de ventanas."
 
-#: ../../create_localized_help.py:97
+#: ../../create_localized_help.py:101
 msgid "Left/Middle/Right click on applet can be configured to open the windows list menu."
 msgstr "Clic Izquierdo/Medio/Derecho en el applet se puede configurar para abrir el menú de la lista de ventanas."
 
-#: ../../create_localized_help.py:98
+#: ../../create_localized_help.py:102
 msgid "Desktop peek functionality with configurable levels of opacity."
 msgstr "Funcionalidad Desktop Peek con niveles configurables de opacidad."
 
-#. TO TRANSLATORS: This is a placeholder.
-#. Here goes your language name in your own language (a.k.a. endonym).
-#: ../../create_localized_help.py:171 ../../create_localized_help.py:262
-msgid "language-name"
-msgstr "Español"
-
-#: ../../create_localized_help.py:177
+#: ../../create_localized_help.py:182
 msgid "The following two sections are available only in English."
 msgstr "Las siguientes dos secciones están disponibles sólo en Inglés."
 
-#: ../../create_localized_help.py:181
+#: ../../create_localized_help.py:186
 msgid "Do not install on any other version of Cinnamon."
 msgstr "No instalar en ninguna otra versión de Cinnamon."
 
-#: ../../create_localized_help.py:187
+#: ../../create_localized_help.py:192
 msgid "Compatibility"
 msgstr "Copatibilidad"
 
-#: ../../create_localized_help.py:265 applet.js:486
+#. Define them first before self.get_language_stats() is called so these
+#. strings are also counted.
+#: ../../create_localized_help.py:298 applet.js:486
 msgid "Help"
 msgstr "Ayuda"
 
-#: ../../create_localized_help.py:266
+#: ../../create_localized_help.py:299
 msgid "Contributors"
 msgstr "Colaboradores"
 
-#: ../../create_localized_help.py:267
+#: ../../create_localized_help.py:300
 msgid "Changelog"
 msgstr "Registro de cambios"
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:268 ../../create_localized_help.py:275
+#: ../../create_localized_help.py:301 ../../create_localized_help.py:320
 #, python-format
 msgid "Help for %s"
 msgstr "Ayuda para %s"
 
-#: ../../create_localized_help.py:276
+#: ../../create_localized_help.py:321
 msgid "IMPORTANT!!!"
 msgstr "¡IMPORTANTE!"
 
-#: ../../create_localized_help.py:277
+#: ../../create_localized_help.py:322
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr "Jamás borrar ninguno de los archivos encontrados dentro de la carpeta de este xlet. Podría romper la funcionalidad del xlet."
 
 #. 0dyseus@DesktopHandler->metadata.json->comments
-#: ../../create_localized_help.py:278
+#: ../../create_localized_help.py:323
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr "Los reportes de fallos, peticiones de características y contribuciones deben hacerse en el repositorio de este xlet vinculado a continuación."
 
-#: ../../create_localized_help.py:284
+#: ../../create_localized_help.py:329
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr "Localización de applets/desklets/extensiones (también conocidos como xlets)"
 
-#: ../../create_localized_help.py:285
+#: ../../create_localized_help.py:330
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr "Si este xlet se instaló desde Configuración de Cinnamon, todas las localizaciones de este xlet se instalaron automáticamente."
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:287
+#: ../../create_localized_help.py:332
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr "Si este xlet se instaló manualmente y no a través de Configuración de Cinnamon, las localizaciones se pueden instalar ejecutando el archivo llamado **localizations.sh** desde una terminal abierta dentro de la carpeta del xlet."
 
-#: ../../create_localized_help.py:288
+#: ../../create_localized_help.py:333
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr "Si este xlet no está disponible en su idioma, la localización puede ser creada siguiendo las siguientes instrucciones."
 
@@ -262,11 +258,11 @@ msgstr "Cancelar"
 msgid "OK"
 msgstr "Aceptar"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->options
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->options
 #: applet.js:711
 msgid "None"
 msgstr "Ninguna"
@@ -351,36 +347,94 @@ msgstr "Botón central"
 msgid "Right click"
 msgstr "Botón derecho"
 
-#. 0dyseus@DesktopHandler->metadata.json->description
-msgid "Various shortcuts to handle desktop actions."
-msgstr "Varios atajos para manejar las acciones de escritorio."
-
 #. 0dyseus@DesktopHandler->metadata.json->contributors
 msgid "See this xlet help file."
 msgstr "Ver el archivo de ayuda de este xlet."
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
-msgid "Current workspace"
-msgstr "Espacio de trabajo actual"
+#. 0dyseus@DesktopHandler->metadata.json->description
+msgid "Various shortcuts to handle desktop actions."
+msgstr "Varios atajos para manejar las acciones de escritorio."
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
-msgid "Current Application"
-msgstr "Aplicación actual"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd4_action->description
+msgid "4rd Custom Command:"
+msgstr "4.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
-msgid "All workspaces"
-msgstr "Todos los espacios de trabajo"
+#. 0dyseus@DesktopHandler->settings-schema.json->head2->description
+msgid "Mouse click options: "
+msgstr "Opciones de ratón: "
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->description
-msgid "When a modifier key is pressed, switch between windows from: "
-msgstr "Cuando se pulsa una tecla de modificación, cambiar entre ventanas perteneciente a:"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->units
+msgid "pixels"
+msgstr "pixeles"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->description
-msgid "Switch between windows from: "
-msgstr "Cambiar entre ventanas pertenecientes a: "
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->description
+msgid "Applet custom width (Set to 0 (zero) to not set a width):"
+msgstr "Ancho personalizado para el applet (0 (cero) para no establecer un ancho):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->tooltip
+msgid "Set a custom icon for the applet."
+msgstr "Establecer un ícono personalizado para el applet."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->description
+msgid "Icon for Applet (Leave blank to remove icon):"
+msgstr "Ícono para el applet (Dejar en blanco para eliminar el ícono):"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->description
+msgid "Action on scrolling up: "
+msgstr "Acción al desplazar hacia arriba:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->description
+msgid "Action on scrolling down: "
+msgstr "Acción al desplazar hacia abajo: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->units
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->units
+msgid "milliseconds"
+msgstr "milisegundos"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->description
+msgid "Minimum delay between scrolls:"
+msgstr "Retardo mínimo entre desplazamientos de ratón:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desktop_icons->description
+msgid "Opacify the icons on the desktop"
+msgstr "Opacar los íconos en el escritorio"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->description
+msgid "Action on applet left click: "
+msgstr "Acción del botón izquierdo sobre el applet: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->tooltip
+msgid "Take a glance at your desktop and desklets."
+msgstr "Echar un vistazo al escritorio y desklets."
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->description
+msgid "Opacify windows on hover (a.k.a. desktop peek)"
+msgstr "Opacar ventanas al pasar el ratón (también conocido como Desktop peek)"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->description
+msgid "Action on scrolling: "
+msgstr "Acción al desplazar:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head6->description
+msgid "App Switcher Settings: "
+msgstr "Opciones del conmutador de aplicaciones:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_about->description
+msgid "Show \"About...\""
+msgstr "Mostrar \"Acerca de...\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_remove->description
+msgid "Show \"Remove this applet\""
+msgstr "Mostrar \"Remover applet\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_help->description
+msgid "Show \"Help\""
+msgstr "Mostrar \"Ayuda\""
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->description
+msgid "Peek desktop trigger delay:"
+msgstr "Retardo de disparo de Desktop peek:"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->head1->description
 msgid "Mouse scroll options: "
@@ -390,113 +444,96 @@ msgstr "Opciones de desplazamiento del ratón: "
 msgid "App switcher style: "
 msgstr "Estilo del conmutador de aplicaciones:"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_configure->description
-msgid "Show \"Configure...\""
-msgstr "Mostrar \"Configurar...\""
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_keep_menu_open->description
+msgid "Keep menu open while closing windows"
+msgstr "Mantener menú abierto mientras se cierran ventanas"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->description
-msgid "Applet custom width (Set to 0 (zero) to not set a width):"
-msgstr "Ancho personalizado para el applet (0 (cero) para no establecer un ancho):"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current Application"
+msgstr "Aplicación actual"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_with->units
-msgid "pixels"
-msgstr "pixeles"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "All workspaces"
+msgstr "Todos los espacios de trabajo"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->description
-msgid "Background color for the applet:"
-msgstr "Color de fondo para el applet:"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->options
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->options
+msgid "Current workspace"
+msgstr "Espacio de trabajo actual"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->tooltip
-msgid "I mainly added this so it's easy to see the applet the first time is placed in a panel."
-msgstr "He añadido esto para que sea fácil ver el applet la primera vez que se lo coloca en un panel."
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_scope->description
+msgid "Switch between windows from: "
+msgstr "Cambiar entre ventanas pertenecientes a: "
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_separated_scroll_action->description
-msgid "Independent actions for scrolling up and down"
-msgstr "Acciones independientes para desplazamiento hacia arriba y hacia abajo"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->head5->description
-msgid "Custom Commands: "
-msgstr "Comandos personalizados"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_prevent_fast_scroll->description
-msgid "Prevent accidental workspace/window switching on rapid scrolling"
-msgstr "Prevenir cambios accidentales de espacio de trabajo/ventanas al realizar desplazamiento rápido"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd3_action->description
-msgid "3rd Custom Command:"
-msgstr "3.º comando personalizado"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->head3->description
-msgid "Windows menu options"
-msgstr "Opciones del menú de ventanas"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desklets->description
-msgid "Opacify desklets"
-msgstr "Opacar desklets"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desktop_icons->description
-msgid "Opacify the icons on the desktop"
-msgstr "Opacar los íconos en el escritorio"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_buttons->description
-msgid "Show close buttons on windows list"
-msgstr "Mostrar botones de cierre en la lista de ventanas"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_about->description
-msgid "Show \"About...\""
-msgstr "Mostrar \"Acerca de...\""
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->description
-msgid "Icon for Applet (Leave blank to remove icon):"
-msgstr "Ícono para el applet (Dejar en blanco para eliminar el ícono):"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_icon->tooltip
-msgid "Set a custom icon for the applet."
-msgstr "Establecer un ícono personalizado para el applet."
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_down_action->description
-msgid "Action on scrolling down: "
-msgstr "Acción al desplazar hacia abajo: "
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd4_action->description
-msgid "4rd Custom Command:"
-msgstr "4.º comando personalizado"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_blur_effect_enabled->description
-msgid "Blur windows on hover"
-msgstr "Difuminar ventanas al pasar el ratón"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd1_action->description
+msgid "1st Custom Command:"
+msgstr "1.º comando personalizado"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_all_buttons->description
 msgid "Show close all windows buttons for workspaces"
 msgstr "Mostrar botones para cerrar todas las ventanas en los espacios de trabajo"
 
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_opacify_desklets->description
+msgid "Opacify desklets"
+msgstr "Opacar desklets"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->description
+msgid "Action on applet middle click: "
+msgstr "Acción del botón central sobre el applet: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modified->description
+msgid "When a modifier key is pressed, switch between windows from: "
+msgstr "Cuando se pulsa una tecla de modificación, cambiar entre ventanas perteneciente a:"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_blur_effect_enabled->description
+msgid "Blur windows on hover"
+msgstr "Difuminar ventanas al pasar el ratón"
+
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_opacity->description
 msgid "Level of opacity:"
 msgstr "Nivel de opacidad:"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_windows_list_menu_enabled->description
-msgid "Enable Windows list menu"
-msgstr "Habilitar menú de lista de ventanas"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd2_action->description
+msgid "2nd Custom Command:"
+msgstr "2.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_keep_menu_open->description
-msgid "Keep menu open while closing windows"
-msgstr "Mantener menú abierto mientras se cierran ventanas"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_up_action->description
-msgid "Action on scrolling up: "
-msgstr "Acción al desplazar hacia arriba:"
+#. 0dyseus@DesktopHandler->settings-schema.json->head3->description
+msgid "Windows menu options"
+msgstr "Opciones del menú de ventanas"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_button_to_open_menu->description
 msgid "Mouse button to open menu (It will override mouse click actions):"
 msgstr "Botón del ratón para abrir el menú (Se anularán acciones de clic del ratón):"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->description
-msgid "Opacify windows on hover (a.k.a. desktop peek)"
-msgstr "Opacar ventanas al pasar el ratón (también conocido como Desktop peek)"
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_configure->description
+msgid "Show \"Configure...\""
+msgstr "Mostrar \"Configurar...\""
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_enabled->tooltip
-msgid "Take a glance at your desktop and desklets."
-msgstr "Echar un vistazo al escritorio y desklets."
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_prevent_fast_scroll->description
+msgid "Prevent accidental workspace/window switching on rapid scrolling"
+msgstr "Prevenir cambios accidentales de espacio de trabajo/ventanas al realizar desplazamiento rápido"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_close_buttons->description
+msgid "Show close buttons on windows list"
+msgstr "Mostrar botones de cierre en la lista de ventanas"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_default_items->description
+msgid "Show context menu default items on right click"
+msgstr "Mostrar elementos predeterminados del menú contextual al hacer clic con el botón derecho"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head5->description
+msgid "Custom Commands: "
+msgstr "Comandos personalizados"
+
+#. 0dyseus@DesktopHandler->settings-schema.json->head0->description
+msgid "Applet options: "
+msgstr "Opciones del applet: "
+
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_windows_list_menu_enabled->description
+msgid "Enable Windows list menu"
+msgstr "Habilitar menú de lista de ventanas"
 
 #. 0dyseus@DesktopHandler->settings-schema.json->pref_switcher_modifier->options
 msgid "Shift"
@@ -510,66 +547,28 @@ msgstr "Ctrl"
 msgid "Modifier key: "
 msgstr "Tecla modificadora: "
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_default_items->description
-msgid "Show context menu default items on right click"
-msgstr "Mostrar elementos predeterminados del menú contextual al hacer clic con el botón derecho"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->description
-msgid "Minimum delay between scrolls:"
-msgstr "Retardo mínimo entre desplazamientos de ratón:"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_delay->units
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->units
-msgid "milliseconds"
-msgstr "milisegundos"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->head6->description
-msgid "App Switcher Settings: "
-msgstr "Opciones del conmutador de aplicaciones:"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd1_action->description
-msgid "1st Custom Command:"
-msgstr "1.º comando personalizado"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->head0->description
-msgid "Applet options: "
-msgstr "Opciones del applet: "
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd2_action->description
-msgid "2nd Custom Command:"
-msgstr "2.º comando personalizado"
-
 #. 0dyseus@DesktopHandler->settings-schema.json->head4->description
 msgid "Peek at desktop options:"
 msgstr "Opciones de Desktop peek:"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_remove->description
-msgid "Show \"Remove this applet\""
-msgstr "Mostrar \"Remover applet\""
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_custom_cmd3_action->description
+msgid "3rd Custom Command:"
+msgstr "3.º comando personalizado"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_show_context_menu_help->description
-msgid "Show \"Help\""
-msgstr "Mostrar \"Ayuda\""
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_separated_scroll_action->description
+msgid "Independent actions for scrolling up and down"
+msgstr "Acciones independientes para desplazamiento hacia arriba y hacia abajo"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_left_click_action->description
-msgid "Action on applet left click: "
-msgstr "Acción del botón izquierdo sobre el applet: "
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->tooltip
+msgid "I mainly added this so it's easy to see the applet the first time is placed in a panel."
+msgstr "He añadido esto para que sea fácil ver el applet la primera vez que se lo coloca en un panel."
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_middle_click_action->description
-msgid "Action on applet middle click: "
-msgstr "Acción del botón central sobre el applet: "
+#. 0dyseus@DesktopHandler->settings-schema.json->pref_applet_background_color->description
+msgid "Background color for the applet:"
+msgstr "Color de fondo para el applet:"
 
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_peek_desktop_delay->description
-msgid "Peek desktop trigger delay:"
-msgstr "Retardo de disparo de Desktop peek:"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->pref_scroll_action->description
-msgid "Action on scrolling: "
-msgstr "Acción al desplazar:"
-
-#. 0dyseus@DesktopHandler->settings-schema.json->head2->description
-msgid "Mouse click options: "
-msgstr "Opciones de ratón: "
+#~ msgid "language-name"
+#~ msgstr "Español"
 
 #~ msgid "Choose language"
 #~ msgstr "Elegir idioma"
