@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@QuickMenu 1.09\n"
+"Project-Id-Version: 0dyseus@QuickMenu 1.10\n"
 "Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:36+0800\n"
 "PO-Revision-Date: 2017-06-04 19:36+0800\n"
