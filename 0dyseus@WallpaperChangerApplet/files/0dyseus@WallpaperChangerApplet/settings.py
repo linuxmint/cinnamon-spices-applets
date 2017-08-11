@@ -786,12 +786,14 @@ class WallChangerPrefs(BaseGrid):
         dialog.add_button(_("No"), Gtk.ResponseType.NO)
         response = dialog.run()
 
-        # FIXME!!!
         if response == Gtk.ResponseType.YES:
             profiles = self._settings.get_value("profiles").unpack()
+
             # Original JavaScript code.
             # delete profiles[profile]
-            profiles.remove(profile)
+            if profile in profiles:
+                del profiles[profile]
+
             self._settings.set_value("profiles", GLib.Variant("a{sa(sb)}", profiles))
             self._load_profiles()
 

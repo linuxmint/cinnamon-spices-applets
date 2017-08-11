@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.01\n"
-"POT-Creation-Date: 2017-06-30 23:10-0300\n"
+"Project-Id-Version: 0dyseus@WallpaperChangerApplet 1.03\n"
+"POT-Creation-Date: 2017-08-11 17:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,66 +63,93 @@ msgstr ""
 msgid "Read the tooltips of each option on this applet settings window for more details."
 msgstr ""
 
-#: ../../create_localized_help.py:170
+#: ../../create_localized_help.py:97
+msgid "Xlet's settings window"
+msgstr ""
+
+#: ../../create_localized_help.py:98
+msgid "From this xlet settings window, all options can be imported, exported and/or reseted to their defaults."
+msgstr ""
+
+#: ../../create_localized_help.py:100
+msgid "To be able to perform any of these actions, the settings schema needs to be installed in the system. This is done automatically when the xlet is installed from the Cinnamon xlets manager. But if the xlet was installed manually, the settings schema also needs to be installed manually. This is achieved by simply going to the xlet folder and launch the following command:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:102
+msgid "Command to install the settings schema:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:105
+msgid "Command to uninstall the settings schema:"
+msgstr ""
+
+#. TO TRANSLATORS: MARKDOWN string. Respect formatting.
+#: ../../create_localized_help.py:108
+msgid "To import/export settings, the **dconf** command needs to be available on the system."
+msgstr ""
+
+#: ../../create_localized_help.py:177
 msgid "The following two sections are available only in English."
 msgstr ""
 
-#: ../../create_localized_help.py:174
+#: ../../create_localized_help.py:181
 msgid "Do not install on any other version of Cinnamon."
 msgstr ""
 
-#: ../../create_localized_help.py:180
+#: ../../create_localized_help.py:187
 msgid "Compatibility"
 msgstr ""
 
 #. Define them first before self.get_language_stats() is called so these
 #. strings are also counted.
-#: ../../create_localized_help.py:286 settings.py:1022
+#: ../../create_localized_help.py:293 settings.py:1024
 msgid "Help"
 msgstr ""
 
-#: ../../create_localized_help.py:287
+#: ../../create_localized_help.py:294
 msgid "Contributors"
 msgstr ""
 
-#: ../../create_localized_help.py:288
+#: ../../create_localized_help.py:295
 msgid "Changelog"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. "Help for <xlet_name>"
-#: ../../create_localized_help.py:289 ../../create_localized_help.py:308
+#: ../../create_localized_help.py:296 ../../create_localized_help.py:315
 #, python-format
 msgid "Help for %s"
 msgstr ""
 
-#: ../../create_localized_help.py:309
+#: ../../create_localized_help.py:316
 msgid "IMPORTANT!!!"
 msgstr ""
 
-#: ../../create_localized_help.py:310
+#: ../../create_localized_help.py:317
 msgid "Never delete any of the files found inside this xlet folder. It might break this xlet functionality."
 msgstr ""
 
 #. 0dyseus@WallpaperChangerApplet->metadata.json->comments
-#: ../../create_localized_help.py:311
+#: ../../create_localized_help.py:318
 msgid "Bug reports, feature requests and contributions should be done on this xlet's repository linked next."
 msgstr ""
 
-#: ../../create_localized_help.py:317
+#: ../../create_localized_help.py:324
 msgid "Applets/Desklets/Extensions (a.k.a. xlets) localization"
 msgstr ""
 
-#: ../../create_localized_help.py:318
+#: ../../create_localized_help.py:325
 msgid "If this xlet was installed from Cinnamon Settings, all of this xlet's localizations were automatically installed."
 msgstr ""
 
 #. TO TRANSLATORS: MARKDOWN string. Respect formatting.
-#: ../../create_localized_help.py:320
+#: ../../create_localized_help.py:327
 msgid "If this xlet was installed manually and not trough Cinnamon Settings, localizations can be installed by executing the script called **localizations.sh** from a terminal opened inside the xlet's folder."
 msgstr ""
 
-#: ../../create_localized_help.py:321
+#: ../../create_localized_help.py:328
 msgid "If this xlet has no locale available for your language, you could create it by following the following instructions."
 msgstr ""
 
@@ -137,12 +164,12 @@ msgid "Choose an Icon"
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:174 settings.py:814 settings.py:1099 settings.py:1105
+#: settings.py:174 settings.py:816 settings.py:1101 settings.py:1107
 msgid "_Cancel"
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:175 settings.py:1107
+#: settings.py:175 settings.py:1109
 msgid "_Open"
 msgstr ""
 
@@ -280,7 +307,7 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: settings.py:605 settings.py:804
+#: settings.py:605 settings.py:806
 msgid "Create a new profile"
 msgstr ""
 
@@ -337,110 +364,110 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: settings.py:807
+#: settings.py:809
 msgid "Profile Name"
 msgstr ""
 
-#: settings.py:813
+#: settings.py:815
 msgid "OK"
 msgstr ""
 
-#: settings.py:926
+#: settings.py:928
 msgid "Contributors/Mentions:"
 msgstr ""
 
 #. TO TRANSLATORS:
 #. Here goes the name/s of the author/s of the translations.
 #. Only e-mail addresses and links to GitHub accounts are allowed. NOTHING MORE.
-#: settings.py:934
+#: settings.py:936
 msgid "translator-credits"
 msgstr ""
 
-#: settings.py:1004
+#: settings.py:1006
 msgid "Reset settings to defaults"
 msgstr ""
 
-#: settings.py:1006
+#: settings.py:1008
 msgid "Import settings from a file"
 msgstr ""
 
-#: settings.py:1008
+#: settings.py:1010
 msgid "Export settings to a file"
 msgstr ""
 
-#: settings.py:1013
+#: settings.py:1015
 msgid "Remember window size"
 msgstr ""
 
-#: settings.py:1018
+#: settings.py:1020
 msgid "Restart Cinnamon"
 msgstr ""
 
-#: settings.py:1024
+#: settings.py:1026
 msgid "About"
 msgstr ""
 
-#: settings.py:1031
+#: settings.py:1033
 msgid "Manage settings"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. Warning: Trying to reset all AppletName settings!!!
-#: settings.py:1074
+#: settings.py:1076
 #, python-format
 msgid "Warning: Trying to reset all %s settings!!!"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. Reset all AppletName settings to default?
-#: settings.py:1078
+#: settings.py:1080
 #, python-format
 msgid "Reset all %s settings to default?"
 msgstr ""
 
-#: settings.py:1097
+#: settings.py:1099
 msgid "Select or enter file to export to"
 msgstr ""
 
-#: settings.py:1100
+#: settings.py:1102
 msgid "_Save"
 msgstr ""
 
-#: settings.py:1103
+#: settings.py:1105
 msgid "Select a file to import"
 msgstr ""
 
-#: settings.py:1119
+#: settings.py:1121
 msgid "DCONF files"
 msgstr ""
 
 #. TO TRANSLATORS: Full sentence:
 #. AppletName applet preferences
-#: settings.py:1188
+#: settings.py:1190
 #, python-format
 msgid "%s applet preferences"
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:1242
+#: settings.py:1244
 #, python-format
 msgid "Please enter your password to install the required settings schema for %s"
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:1253
+#: settings.py:1255
 #, python-format
 msgid "Could not install the settings schema for %s.  You will have to perform this step yourself."
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:1259
+#: settings.py:1261
 #, python-format
 msgid "Please enter your password to remove the settings schema for %s"
 msgstr ""
 
 #. TO TRANSLATORS: Could be left blank.
-#: settings.py:1270
+#: settings.py:1272
 #, python-format
 msgid "Could not remove the settings schema for %s.  You will have to perform this step yourself.  This is not a critical error."
 msgstr ""
