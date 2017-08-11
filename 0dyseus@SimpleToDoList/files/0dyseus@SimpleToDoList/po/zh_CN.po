@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@SimpleToDoList 1.02\n"
+"Project-Id-Version: 0dyseus@SimpleToDoList 1.03\n"
 "Report-Msgid-Bugs-To: https://github.com/Odyseus/CinnamonTools\n"
 "POT-Creation-Date: 2017-06-04 19:37+0800\n"
 "PO-Revision-Date: 2017-06-04 19:37+0800\n"
