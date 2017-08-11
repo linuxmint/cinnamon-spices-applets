@@ -231,12 +231,12 @@ Graph.prototype = {
         cr.fill();
 
         // Label
-		cr.setFontSize(7);
+		cr.setFontSize(7*global.ui_scale);
         cr.setSourceRGBA(0, 0, 0, 0.5);
-		cr.moveTo(2.5, 7.5);
+		cr.moveTo(2.5*global.ui_scale, 7.5*global.ui_scale);
 		cr.showText(this.provider.getName());
         cr.setSourceRGBA(1, 1, 1, 1);
-		cr.moveTo(2, 7);
+		cr.moveTo(2*global.ui_scale, 7*global.ui_scale);
 		cr.showText(this.provider.getName());
 
 },
