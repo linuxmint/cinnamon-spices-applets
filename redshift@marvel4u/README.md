@@ -16,6 +16,10 @@ A powerful applet that allows quick activation and configuration of the red filt
 
 ## Changelog
 
+* 2.1.0
+  - Tooltip improvements with more information about the state of Redshift.
+  - Translation fixes.
+
 * 2.0.0
   - Options for transition between day and night (oneshot option still available).
   - Applet configuration menu.
@@ -27,3 +31,5 @@ A powerful applet that allows quick activation and configuration of the red filt
   - stable release.
 
 > Forked from bightness@markbokil.com: https://cinnamon-spices.linuxmint.com/applets/view/64
+
+Thanks to [@Martin1887](https://github.com/Martin1887 "@Martin1887 on Github") for his work on versions 2.0.0 and 2.1.0.

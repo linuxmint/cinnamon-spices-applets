@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-12 12:05+0200\n"
-"PO-Revision-Date: 2017-08-12 12:19+0200\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2017-08-08 15:36+0300\n"
+"PO-Revision-Date: 2017-08-09 09:20+0300\n"
+"Language-Team: Linux Mint Türkiye\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
+"Language: tr\n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
-#: applet.js:59 applet.js:224
+#: applet.js:59 applet.js:225
 msgid "Brightness"
-msgstr "Brillo"
+msgstr "Parlaklık"
 
 #. redshift@marvel4u->metadata.json->name
 #: applet.js:78
@@ -30,39 +30,39 @@ msgstr "Redshift"
 
 #: applet.js:97
 msgid "Transition on night"
-msgstr "Transición entre día y noche"
+msgstr "Gece geçişi"
 
-#: applet.js:203
+#: applet.js:204
 msgid "Redshift day colour"
-msgstr "Color de Redshift de día"
+msgstr "Redshift gün rengi"
 
-#: applet.js:208
+#: applet.js:209
 msgid "Redshift day brightness"
-msgstr "Brillo de Redshift de día"
+msgstr "Redshift gün parlaklılığı"
 
-#: applet.js:213
+#: applet.js:214
 msgid "Redshift night colour"
-msgstr "Color de Redshift de noche"
+msgstr "Redshift gece rengi"
 
-#: applet.js:218
+#: applet.js:219
 msgid "Redshift night brightness"
-msgstr "Brillo de Redshift de noche"
+msgstr "Redshift gece parlaklığı"
 
 #. redshift@marvel4u->settings-schema.json->brightness-section->title
 msgid "Brightness level"
-msgstr "Nivel de brillo"
+msgstr "Parlaklık seviyesi"
 
 #. redshift@marvel4u->settings-schema.json->redshift-transition-section->title
 msgid "Transition between day and night configuration"
-msgstr "Configuración de la transición entre día y noche"
+msgstr "Gece ve gündüz arasında geçiş yapılandırması "
 
 #. redshift@marvel4u->settings-schema.json->redshift-section->title
 msgid "Redshift configuration"
-msgstr "Configuración de Redshift"
+msgstr "Redshift yapılandırması"
 
 #. redshift@marvel4u->settings-schema.json->panel->title
 msgid "Redshift settings"
-msgstr "Ajustes de Redshift"
+msgstr "Redhift ayarları"
 
 #. redshift@marvel4u->settings-schema.json->brightness->units
 #. redshift@marvel4u->settings-schema.json->redshiftDayBrightness->units
@@ -72,25 +72,25 @@ msgstr "%"
 
 #. redshift@marvel4u->settings-schema.json->redshiftDayBrightness->description
 msgid "Redshift Day Brightness"
-msgstr "Brillo de Redshift de día"
+msgstr "Redshift Gün Parlaklığı"
 
 #. redshift@marvel4u->settings-schema.json->longitude->description
 msgid "Longitude"
-msgstr "Longitud"
+msgstr "Boylam"
 
 #. redshift@marvel4u->settings-schema.json->longitude->tooltip
 #. redshift@marvel4u->settings-schema.json->latitude->tooltip
 msgid "If not entered Redshift would use GeoClue2 provider"
-msgstr "Si no se introduce Redshift usará el proveedor GeoGlue2"
+msgstr "Eğer giriş yapılmazsa, Redshift GeoClue2 sağlayıcısını kullanır."
 
 #. redshift@marvel4u->settings-schema.json->changeOnNight->description
 msgid "Change temperature colour and Redshift brightness between day and night"
 msgstr ""
-"Cambiar temperatura de color y brillo de Redshift entre el día y la noche"
+"Renk sıcaklığını ve Redshift gündüz ve gece arasındaki parlaklığı değiştirir"
 
 #. redshift@marvel4u->settings-schema.json->dayColour->description
 msgid "Redshift Day colour temperature"
-msgstr "Temperatura de color de Redshfit de día"
+msgstr "Redshift Gündüz renk sıcaklığı"
 
 #. redshift@marvel4u->settings-schema.json->dayColour->units
 #. redshift@marvel4u->settings-schema.json->nightColour->units
@@ -99,25 +99,25 @@ msgstr "K"
 
 #. redshift@marvel4u->settings-schema.json->nightColour->description
 msgid "Redshift Night colour temperature"
-msgstr "Temperatura de color de Redshift de noche"
+msgstr "Redshift Gece renk sıcaklığı"
 
 #. redshift@marvel4u->settings-schema.json->latitude->description
 msgid "Latitude"
-msgstr "Latitud"
+msgstr "Enlem"
 
 #. redshift@marvel4u->settings-
 #. schema.json->redshiftNightBrightness->description
 msgid "Redshift Night Brightness"
-msgstr "Brillo de Redshift de noche"
+msgstr "Redshift Gece Parlaklığı"
 
 #. redshift@marvel4u->settings-schema.json->enabledOnStartup->description
 msgid "Redshift Enabled"
-msgstr "Redshift activado"
+msgstr "Redshift Etkin"
 
 #. redshift@marvel4u->metadata.json->description
 msgid ""
 "An app to change the red filter level for late night screen time. Requires "
 "redshift: sudo apt-get install redshift"
 msgstr ""
-"Una aplicación para cambiar el nivel de filtro rojo durante la noche. "
-"Requiere Redshift: sudo apt-get install redshift"
+"Kırmızı filtre seviyesini ve gece geçiş zamanını değiştiren bir uygulamacık. "
+"Redshift gerektirir: sudo apt-get install redshift"
