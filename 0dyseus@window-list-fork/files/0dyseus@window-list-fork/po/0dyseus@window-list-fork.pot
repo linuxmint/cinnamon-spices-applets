@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0dyseus@window-list-fork 1.10\n"
-"POT-Creation-Date: 2017-06-30 23:10-0300\n"
+"Project-Id-Version: 0dyseus@window-list-fork 1.12\n"
+"POT-Creation-Date: 2017-08-11 17:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,10 +181,6 @@ msgstr ""
 msgid "Remove '%s'"
 msgstr ""
 
-#. 0dyseus@window-list-fork->metadata.json->contributors
-msgid "See this xlet help file."
-msgstr ""
-
 #. 0dyseus@window-list-fork->metadata.json->description
 msgid "Fork of the main Cinnamon Window list applet."
 msgstr ""
@@ -193,8 +189,16 @@ msgstr ""
 msgid "Window list (Fork By Odyseus)"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
-msgid "Where to display the \"Preferences\" sub-menu?"
+#. 0dyseus@window-list-fork->metadata.json->contributors
+msgid "See this xlet help file."
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
+msgid "Middle click to close window"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
+msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->options
@@ -209,12 +213,8 @@ msgstr ""
 msgid "Top of menu"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->tooltip
-msgid "If the option \"Invert context menu items order\" is enabled, the \"Top of menu\" will actually be the \"Bottom of menu\" and vice versa."
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
-msgid "Custom height for window thumbnails"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_sub_menu_placement->description
+msgid "Where to display the \"Preferences\" sub-menu?"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->units
@@ -222,20 +222,16 @@ msgstr ""
 msgid "pixels"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
-msgid "Show an alert in the window list when a window from another workspace requires attention"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_height->description
+msgid "Custom height for window thumbnails"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
-msgid "Hide labels in the window list buttons"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
+msgid "Custom width for window thumbnails"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_reverse_scrolling->description
 msgid "Reverse the direction of mouse-wheel scrolling in the window list"
-msgstr ""
-
-#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
-msgid "Enable mouse-wheel scrolling in the window list"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_invert_menu_items_order->description
@@ -246,18 +242,22 @@ msgstr ""
 msgid "Do not display tooltips"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_middle_click_close->description
-msgid "Middle click to close window"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_alerts->description
+msgid "Show an alert in the window list when a window from another workspace requires attention"
+msgstr ""
+
+#. 0dyseus@window-list-fork->settings-schema.json->pref_hide_labels->description
+msgid "Hide labels in the window list buttons"
 msgstr ""
 
 #. 0dyseus@window-list-fork->settings-schema.json->pref_buttons_use_entire_space->description
 msgid "Window buttons can have different sizes and use the entire space available"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
-msgid "Show window thumbnails on hover"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_enable_scrolling->description
+msgid "Enable mouse-wheel scrolling in the window list"
 msgstr ""
 
-#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview_custom_width->description
-msgid "Custom width for window thumbnails"
+#. 0dyseus@window-list-fork->settings-schema.json->pref_window_preview->description
+msgid "Show window thumbnails on hover"
 msgstr ""

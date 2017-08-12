@@ -92,6 +92,7 @@ GuiSpeed.prototype = {
         this.panel_height = panel_height;
         this.gui_speed_type = gui_speed_type;
         this.decimal_places = decimal_places;
+        this.text_spacing = 5;
 
         this.actor = new St.BoxLayout();
         this.iconlabel_received = new IconLabel();
@@ -166,8 +167,11 @@ GuiSpeed.prototype = {
     },
 
     _calculate_font_size: function() {
-        return this.gui_speed_type == AppletConstants.GuiSpeedType.COMPACT ?
-               (this.panel_height * 0.5) - 5 : (this.panel_height * 0.6) - 5;
+         let size = this.gui_speed_type == AppletConstants.GuiSpeedType.COMPACT ?
+                    this.panel_height * 0.5 : this.panel_height * 0.6;
+         size /= global.ui_scale;
+         size -= this.text_spacing;
+         return size;
     },
 
     _resize_gui_elements_to_match_text: function(css_style) {

@@ -1,0 +1,5 @@
+{
+    "description": "Applet for Tor network management", 
+    "name": "Tor Button", 
+    "uuid": "tor-button@shatur"
+}

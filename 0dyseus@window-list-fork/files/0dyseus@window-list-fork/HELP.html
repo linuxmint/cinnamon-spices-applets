@@ -613,7 +613,8 @@ body {
         <div class="form-group">
             <span class="standalone-glyphicon-globe-wrapper"><span class="standalone-glyphicon-globe"></span></span>
             <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-                <!-- English --><option selected data-title="Help for Window list (Fork By Odyseus)" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English (English)</option>
+                <!-- Česky --><option data-title="Nápověda pro Window list (Fork By Odyseus)" data-xlet-help="Nápověda" data-xlet-contributors="Přispěvatelé" data-xlet-changelog="Přehled změn" value="cs">Česky (Czech)</option>
+<!-- English --><option selected data-title="Help for Window list (Fork By Odyseus)" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English (English)</option>
 <!-- Español --><option data-title="Ayuda para Window list (Fork By Odyseus)" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español (Spanish)</option>
             </select>
         </div>
@@ -671,6 +672,57 @@ body {
 </ul>
 
 <div style="font-weight:bold;" class="alert alert-info">Las siguientes dos secciones están disponibles sólo en Inglés.</div>
+</div> <!-- .localization-content -->
+
+
+<div id="cs" class="localization-content hidden">
+
+<h1>Nápověda pro Window list (Fork By Odyseus)</h1>
+
+<div style="font-weight:bold;" class="alert alert-warning">
+<h2>DŮLEŽITÉ!!!</h2>
+
+<p>Nikdy neodstraňujte soubory ze složky tohoto xletu. Mohlo by to narušit funkčnost xletu.</p>
+
+<p>Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v repozitáři tohoto xletu, na který je odkaz dále. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
+
+</div>
+
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Kompatibilita</h3>
+    </div>
+    <div class="panel-body compatibility">
+        <span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-warning">2.8</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.0</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.2</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.4</span></span>
+
+<br/><p class="text-danger compatibility-disclaimer">Neinstalujte v žádné jiné verzi Cinnamonu.</p>
+    </div>
+</div>
+
+<h2>Popis</h2>
+<p>Tento aplet je upravenou verzí výchozího apletu Seznam oken, který je součástí prostředí Cinnamon.</p>
+<h2>Rozdíly proti původnímu apletu</h2>
+<ul>
+<li>Přidána možnost odstranit název z tlačítek se seznamem oken.</li>
+<li>Přidána možnost odstranit bublinovou nápovědu z tlačítek se seznamem oken.</li>
+<li>Přidány ikony do kontextového menu tlačítek se seznamem oken.</li>
+<li>Přidána možnost obrátit pořadí položek kontextového menu.</li>
+<li>Přidána možnost skrýt/přesunout sub-menu <strong>Nastavení</strong></li>
+</ul>
+
+
+<h2>Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)</h2>
+<ul>
+<li>Pokud byl tento xlet nainstalován z nastavení systému v Cinnamonu, byly všechny tyto lokalizace xletu automaticky nainstalovány.</li>
+<li>Pokud byl tento xlet nainstalován ručně a nikoliv pomocí nastavení systému v Cinnamonu, mohou být lokalizace instalovány spuštěním skriptu nazvaného <strong> localizations.sh </strong> z terminálu otevřeného uvnitř složky xletu.</li>
+<li>Pokud tento xlet nemá k dispozici překlad pro váš jazyk, můžete jej vytvořit podle následujících pokynů. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
+</ul>
+
+<div style="font-weight:bold;" class="alert alert-info">Následující dvě části jsou k dispozici pouze v angličtině.</div>
 </div> <!-- .localization-content -->
 
 
@@ -741,6 +793,15 @@ body {
 <div class="container boxed">
 <h2>Window list (Fork By Odyseus) changelog</h2>
 <h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 24 Jul 2017 01:10:49 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/172fcc3">172fcc3</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Window list (Fork By Odyseus) applet
+- Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
+</code></pre>
 <hr>
 <ul>
 <li><strong>Date:</strong> Sun, 11 Jun 2017 03:13:23 -0300</li>

@@ -21,8 +21,16 @@ msgstr ""
 msgid "just now"
 msgstr ""
 
+#: applet.js:169
+msgid "1 minute ago"
+msgstr ""
+
 #: applet.js:173
 msgid " minutes ago"
+msgstr ""
+
+#: applet.js:177
+msgid "1 hour ago"
 msgstr ""
 
 #: applet.js:181

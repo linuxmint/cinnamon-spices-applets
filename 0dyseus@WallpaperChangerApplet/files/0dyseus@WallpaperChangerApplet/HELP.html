@@ -666,6 +666,16 @@ body {
 <li>Lea las sugerencias de cada opción en la ventana de configuración de este applet para obtener más detalles.</li>
 </ul>
 
+<h2>Ventana de preferencias del xlet</h2>
+<p>Desde la ventana de preferencias de este xlet, todas las opciones pueden ser importadas, exportadas y/o restablecidas a sus valores por defecto.</p>
+<ul>
+<li>Para poder realizar cualquiera de estas tareas, el esquema de las preferencias necesita estar instalado en el sistema. Esto es realizado automáticamente cuando el xlet es instalado desde el administrador de xlets de Cinnamon. Pero si el xlet fue instalado manualmente, el esquema de las preferencias necesita ser instalado manualmente. Esto se logra simplemente con ir a la carpeta del xlet y ejecutar el siguiente comando:<ul>
+<li>Comando para instalar el esquema de preferencias: <code>./settings.py install-schema</code></li>
+<li>Comando para desinstalar el esquema de preferencias: <code>./settings.py remove-schema</code></li>
+</ul>
+</li>
+<li>Para importar/exportar preferencias, el comando <strong>dconf</strong> necesita estar disponible en el sistema.</li>
+</ul>
 
 <h2>Localización de applets/desklets/extensiones (también conocidos como xlets)</h2>
 <ul>
@@ -720,6 +730,16 @@ body {
 <li>Pro více podrobností si přečtěte popisy (bublinová nápověda) jednotlivých možností v okně nastavení tohoto apletu.</li>
 </ul>
 
+<h2>Xlet's settings window</h2>
+<p>From this xlet settings window, all options can be imported, exported and/or reseted to their defaults.</p>
+<ul>
+<li>To be able to perform any of these actions, the settings schema needs to be installed in the system. This is done automatically when the xlet is installed from the Cinnamon xlets manager. But if the xlet was installed manually, the settings schema also needs to be installed manually. This is achieved by simply going to the xlet folder and launch the following command:<ul>
+<li>Command to install the settings schema: <code>./settings.py install-schema</code></li>
+<li>Command to uninstall the settings schema: <code>./settings.py remove-schema</code></li>
+</ul>
+</li>
+<li>To import/export settings, the <strong>dconf</strong> command needs to be available on the system.</li>
+</ul>
 
 <h2>Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)</h2>
 <ul>
@@ -774,6 +794,16 @@ body {
 <li>Read the tooltips of each option on this applet settings window for more details.</li>
 </ul>
 
+<h2>Xlet's settings window</h2>
+<p>From this xlet settings window, all options can be imported, exported and/or reseted to their defaults.</p>
+<ul>
+<li>To be able to perform any of these actions, the settings schema needs to be installed in the system. This is done automatically when the xlet is installed from the Cinnamon xlets manager. But if the xlet was installed manually, the settings schema also needs to be installed manually. This is achieved by simply going to the xlet folder and launch the following command:<ul>
+<li>Command to install the settings schema: <code>./settings.py install-schema</code></li>
+<li>Command to uninstall the settings schema: <code>./settings.py remove-schema</code></li>
+</ul>
+</li>
+<li>To import/export settings, the <strong>dconf</strong> command needs to be available on the system.</li>
+</ul>
 
 <h2>Applets/Desklets/Extensions (a.k.a. xlets) localization</h2>
 <ul>
@@ -802,6 +832,17 @@ body {
 <div class="container boxed">
 <h2>Wallpaper Changer changelog</h2>
 <h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 7 Aug 2017 13:57:06 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/b96b78c">b96b78c</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Wallpaper Changer applet
+- Fixed impossibility to delete profiles. Fixes #135
+- Added settings handling instructions to the help file.
+- Updated localization template and Spanish localization.
+</code></pre>
 <hr>
 <ul>
 <li><strong>Date:</strong> Tue, 4 Jul 2017 19:18:19 -0300</li>

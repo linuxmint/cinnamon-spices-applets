@@ -10,6 +10,6 @@
     "contributors": "See this xlet help file.",
     "uuid": "0dyseus@SysmonitorByOrcus",
     "comments": "Bug reports, feature requests and contributions should be done on this xlet's repository linked next.",
-    "version": "1.15",
+    "version": "1.16",
     "description": "Displays CPU, memory, swap, network usage and load in graphs."
 }

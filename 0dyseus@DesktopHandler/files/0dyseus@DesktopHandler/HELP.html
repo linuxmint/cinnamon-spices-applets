@@ -613,7 +613,8 @@ body {
         <div class="form-group">
             <span class="standalone-glyphicon-globe-wrapper"><span class="standalone-glyphicon-globe"></span></span>
             <select class="form-control input-sm" id="localization-switch" onchange="self.toggleLocalizationVisibility(value, this);">
-                <!-- English --><option selected data-title="Help for Desktop Handler" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English (English)</option>
+                <!-- Česky --><option data-title="Nápověda pro Desktop Handler" data-xlet-help="Nápověda" data-xlet-contributors="Přispěvatelé" data-xlet-changelog="Přehled změn" value="cs">Česky (Czech)</option>
+<!-- English --><option selected data-title="Help for Desktop Handler" data-xlet-help="Help" data-xlet-contributors="Contributors" data-xlet-changelog="Changelog" value="en">English (English)</option>
 <!-- Español --><option data-title="Ayuda para Desktop Handler" data-xlet-help="Ayuda" data-xlet-contributors="Colaboradores" data-xlet-changelog="Registro de cambios" value="es">Español (Spanish)</option>
 <!-- Svenska --><option data-title="Hjälp för Desktop Handler" data-xlet-help="Hjälp" data-xlet-contributors="Medhjälpare" data-xlet-changelog="Ändringslogg" value="sv">Svenska (Swedish)</option>
 <!-- 简体中文 --><option data-title="Desktop Handler的帮助" data-xlet-help="帮助" data-xlet-contributors="贡献者" data-xlet-changelog="变更日志" value="zh_CN">简体中文 (Chinese Simplified)</option>
@@ -762,6 +763,76 @@ body {
 </ul>
 
 <div style="font-weight:bold;" class="alert alert-info">Las siguientes dos secciones están disponibles sólo en Inglés.</div>
+</div> <!-- .localization-content -->
+
+
+<div id="cs" class="localization-content hidden">
+
+<h1>Nápověda pro Desktop Handler</h1>
+
+<div style="font-weight:bold;" class="alert alert-warning">
+<h2>DŮLEŽITÉ!!!</h2>
+
+<p>Nikdy neodstraňujte soubory ze složky tohoto xletu. Mohlo by to narušit funkčnost xletu.</p>
+
+<p>Zprávy o chybách, požadavky na funkce a příspěvky by měly být prováděny v repozitáři tohoto xletu, na který je odkaz dále. <a href="https://github.com/Odyseus/CinnamonTools">GitHub</a></p>
+
+</div>
+
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Kompatibilita</h3>
+    </div>
+    <div class="panel-body compatibility">
+        <span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-warning">2.8</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.0</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.2</span></span>
+<span class="compatibility-badge"><span class="label label-primary">Cinnamon</span><span class="label label-success">3.4</span></span>
+
+<br/><p class="text-danger compatibility-disclaimer">Neinstalujte v žádné jiné verzi Cinnamonu.</p>
+    </div>
+</div>
+
+<h2>Popis</h2>
+<p>Tento aplet je založen na rozšíření <a href="https://cinnamon-spices.linuxmint.com/extensions/view/32">Smart Panel</a> a na <a href="https://cinnamon-spices.linuxmint.com/applets/View/165">Show Desktop ++</a> apletu, oba od autora <strong>mohammad-sn</strong>. Já jsem <em>smíchal</em> oba z nich do jednoho apletu, protože na panelu není vždy prostor k provádění akcí přidaných ze <strong>Smart Panel</strong>. Rozšíření <strong>Smart Panel</strong> může být stále nainstalováno a aktivováno současně s tímto apletem, aby bylo možné provádět ještě další akce na ploše.</p>
+<h2>Vlastnosti a funkce</h2>
+<ul>
+<li>Ikonu apletu, barvu pozadí a šířku lze přizpůsobit.</li>
+<li>Nastavitelné akce při rolování:<ul>
+<li>Přepínání mezi pracovními plochami</li>
+<li>Upravit průhlednost okna</li>
+<li>Zobrazit pracovní plochu</li>
+<li>Přepínání mezi okny</li>
+</ul>
+</li>
+<li>Možnost provádět různé akce pro posouvání nahoru a dolů.</li>
+<li>Možnost provádět různé akce pro levé a střední kliknutí.</li>
+<li>Akce pro rolovací tlačítka nahoru/dolů a/nebo kliknutí na levé/střední tlačítko.<ul>
+<li>Expo</li>
+<li>Overview</li>
+<li>Spustit přepínání aplikací</li>
+<li>Zobrazit pracovní plochu</li>
+<li>Spustit 1. uživatelský příkaz</li>
+<li>Spustit 2. uživatelský příkaz</li>
+<li>Spustit 3. uživatelský příkaz</li>
+<li>Spustit 4. uživatelský příkaz</li>
+</ul>
+</li>
+<li>Možnost vytvoření seznamu oken v menu.</li>
+<li>Levé/střední/pravé kliknutí na aplet lze nakonfigurovat tak, aby otevřelo nabídku se seznamem oken.</li>
+<li>Vylepšení funkčnosti s nastavitelnými úrovněmi průhlednosti plochy.</li>
+</ul>
+
+
+<h2>Lokalizace apletů/deskletů/rozšíření (a.k.a. xlety)</h2>
+<ul>
+<li>Pokud byl tento xlet nainstalován z nastavení systému v Cinnamonu, byly všechny tyto lokalizace xletu automaticky nainstalovány.</li>
+<li>Pokud byl tento xlet nainstalován ručně a nikoliv pomocí nastavení systému v Cinnamonu, mohou být lokalizace instalovány spuštěním skriptu nazvaného <strong> localizations.sh </strong> z terminálu otevřeného uvnitř složky xletu.</li>
+<li>Pokud tento xlet nemá k dispozici překlad pro váš jazyk, můžete jej vytvořit podle následujících pokynů. <a href="https://github.com/Odyseus/CinnamonTools/wiki/Xlet-localization">Wiki</a></li>
+</ul>
+
+<div style="font-weight:bold;" class="alert alert-info">Následující dvě části jsou k dispozici pouze v angličtině.</div>
 </div> <!-- .localization-content -->
 
 
@@ -920,6 +991,15 @@ body {
 <div class="container boxed">
 <h2>Desktop Handler changelog</h2>
 <h4>This change log is only valid for the version of the xlet hosted on <a href="https://github.com/Odyseus/CinnamonTools">its original repository</a></h4>
+<hr>
+<ul>
+<li><strong>Date:</strong> Mon, 24 Jul 2017 01:09:43 -0300</li>
+<li><strong>Commit:</strong> <a href="https://github.com/Odyseus/CinnamonTools/commit/377c2bf">377c2bf</a></li>
+<li><strong>Author:</strong> Odyseus</li>
+</ul>
+<pre><code>Desktop Handler applet
+- Added Czech localization. Thanks to [Radek71](https://github.com/Radek71).
+</code></pre>
 <hr>
 <ul>
 <li><strong>Date:</strong> Wed, 5 Jul 2017 17:40:41 -0300</li>

@@ -19,7 +19,7 @@ A powerful applet that allows quick activation and configuration of the red filt
 * 2.1.0
   - Tooltip improvements with more information about the state of Redshift.
   - Translation fixes.
-
+  
 * 2.0.0
   - Options for transition between day and night (oneshot option still available).
   - Applet configuration menu.

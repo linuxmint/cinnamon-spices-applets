@@ -10,6 +10,7 @@ const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
+const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
 const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
 const setTimeout = AppletDir.timers.setTimeout;
@@ -93,14 +94,12 @@ CategoryListButton.prototype = {
       hover: false,
       activate: false
     });
-
+    this.signals = new SignalManager.SignalManager(this);
     if (!selectorMethod) {
       selectorMethod = '_selectCategory';
     }
     this.selectorMethod = selectorMethod;
-
     this._parent = _parent;
-
     this.actor.set_style_class_name('menu-category-button');
     this.actor._delegate = this;
     let iconSize = _parent.categoryIconSize;
@@ -151,9 +150,9 @@ CategoryListButton.prototype = {
     this.label.realize();
 
     // Connect signals
-    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
-    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
-    this.actor.connect('button-release-event', Lang.bind(this, this.handleButtonRelease));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
+    this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this.handleButtonRelease));
   },
 
   handleEnter: function (actor, event) {
@@ -220,6 +219,7 @@ CategoryListButton.prototype = {
   },
 
   destroy: function(actor) {
+    this.signals.disconnectAllSignals();
     this._parent = null;
     this.actor._delegate = null;
     this.label.destroy();
@@ -228,6 +228,10 @@ CategoryListButton.prototype = {
     }
 
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    for (let i = 0, len = props.length; i < len; i++) {
+      this[props[i]] = undefined;
+    }
   },
 };
 
@@ -252,6 +256,7 @@ ApplicationContextMenuItem.prototype = {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
       focusOnHover: false,
     });
+    this.signals = new SignalManager.SignalManager(this);
     this.actor._delegate = this;
     this._appButton = appButton;
     this._action = action;
@@ -270,8 +275,8 @@ ApplicationContextMenuItem.prototype = {
       }
     }
     this.addActor(this.label);
-    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
-    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
   },
 
   handleEnter: function (actor, event) {
@@ -335,6 +340,15 @@ ApplicationContextMenuItem.prototype = {
         break;
     }
     return false;
+  },
+
+  destroy: function() {
+    this.signals.disconnectAllSignals();
+    let props = Object.keys(this);
+    for (let i = 0, len = props.length; i < len; i++) {
+      this[props[i]] = undefined;
+    }
+    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
 
@@ -362,16 +376,14 @@ AppListGridButton.prototype = {
       hover: false,
       activate: false
     });
-
+    this.signals = new SignalManager.SignalManager(this);
     this._parent = _parent;
     this.actor._delegate = this;
-
     this.app = app;
     this.appType = appType;
     this.appIndex = appIndex;
     this.appListLength = appListLength;
     this.isStrApp = typeof app === 'string';
-    this._stateChangedId = 0;
     this.column = null;
     let className = 'menu-application-button';
     this.entered = null;
@@ -541,17 +553,17 @@ AppListGridButton.prototype = {
 
     // Connect signals
     if (this.appType === ApplicationType._applications) {
-      this._stateChangedId = this.app.connect('notify::state', Lang.bind(this, this._onStateChanged));
+      this.signals.connect(this.app, 'notify::state', Lang.bind(this, this._onStateChanged));
     }
 
     // Check if running state
     this.dot.opacity = 0;
     this._onStateChanged();
 
-    this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
-    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
-    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
-    this.actor.connect('parent-set', Lang.bind(this, this.handleParentChange));
+    this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
+    this.signals.connect(this.actor, 'parent-set', Lang.bind(this, this.handleParentChange));
   },
 
   handleParentChange: function (actor) {
@@ -737,7 +749,9 @@ AppListGridButton.prototype = {
       this.activate(e);
     } else if (button === 3) {
       // Prevent the menu from clipping if this button is partially visible.
-      if (!this._parent.isListView && this._parent._isNotInScrollView(this)) {
+      if (!this._parent.isListView
+        && this._parent._isNotInScrollView(this)
+        && this.appType === ApplicationType._applications) {
         let y = this.menu.actor.get_position()[1];
         y = -100;
         this.menu.actor.set_position(this.x, y);
@@ -819,6 +833,9 @@ AppListGridButton.prototype = {
   },
 
   closeMenu: function () {
+    if (this.appType !== ApplicationType._applications) {
+      return;
+    }
     this.menu.close();
   },
 
@@ -881,6 +898,7 @@ AppListGridButton.prototype = {
   },
 
   destroy: function () {
+    this.signals.disconnectAllSignals();
     this.actor._delegate = null;
     this._parent = null;
     this.app = null;
@@ -901,6 +919,10 @@ AppListGridButton.prototype = {
     }
     this.buttonBox.destroy();
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    for (let i = 0, len = props.length; i < len; i++) {
+      this[props[i]] = undefined;
+    }
   }
 };
 
@@ -929,6 +951,7 @@ GroupButton.prototype = {
       hover: false,
       activate: false
     });
+    this.signals = new SignalManager.SignalManager(this);
     this._parent = _parent;
     this.name = name;
     this.description = description;
@@ -957,8 +980,8 @@ GroupButton.prototype = {
         iconObj.gicon = this.defaultAvatar;
         this.name = GLib.get_user_name();
         this._user = AccountsService.UserManager.get_default().get_user(this.name);
-        this._userLoadedId = this._user.connect('notify::is_loaded', Lang.bind(this, this._onUserChanged));
-        this._userChangedId = this._user.connect('changed', Lang.bind(this, this._onUserChanged));
+        this.signals.connect(this._user, 'notify::is_loaded', Lang.bind(this, this._onUserChanged));
+        this.signals.connect(this._user, 'changed', Lang.bind(this, this._onUserChanged));
         setTimeout(Lang.bind(this, this._onUserChanged), 0);
       } else {
         iconObj.icon_name = iconName;
@@ -968,9 +991,9 @@ GroupButton.prototype = {
       this.addActor(this.icon);
       this.icon.realize();
     }
-    this.actor.connect('enter-event', Lang.bind(this, this.handleEnter));
-    this.actor.connect('leave-event', Lang.bind(this, this.handleLeave));
-    this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
+    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
+    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
+    this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
   },
 
   _onUserChanged: function() {
@@ -1033,16 +1056,17 @@ GroupButton.prototype = {
   },
 
   destroy: function() {
+    this.signals.disconnectAllSignals();
     this.label.destroy();
     if (this.icon) {
       this.icon.destroy();
     }
-    if (this._user) {
-      this._user.disconnect(this._userLoadedId);
-      this._user.disconnect(this._userChangedId);
-    }
     this._parent.selectedAppTitle.set_text('');
     this._parent.selectedAppDescription.set_text('');
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    for (let i = 0, len = props.length; i < len; i++) {
+      this[props[i]] = undefined;
+    }
   },
 };

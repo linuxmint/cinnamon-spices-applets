@@ -2281,7 +2281,6 @@ function spawnWithCallback(aWorkingDirectory, aArgv, aEnvp, aFlags, aChildSetup,
         return;
 
     GLib.close(stdinFile);
-    GLib.close(stderrFile);
 
     let standardOutput = "";
 
@@ -2297,6 +2296,25 @@ function spawnWithCallback(aWorkingDirectory, aArgv, aEnvp, aFlags, aChildSetup,
             aCallback(standardOutput);
         } else {
             standardOutput += output;
+        }
+    });
+
+    let standardError = "";
+
+    let stderrStream = new Gio.DataInputStream({
+        base_stream: new Gio.UnixInputStream({
+            fd: stderrFile
+        })
+    });
+
+    readStream(stderrStream, function(error) {
+        if (error === null) {
+            stderrStream.close(null);
+
+            if (standardError)
+                global.logError(standardError);
+        } else {
+            standardError += error;
         }
     });
 }

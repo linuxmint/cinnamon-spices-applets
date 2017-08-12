@@ -36,7 +36,6 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.panel_height = panel_height;
         this.orientation = orientation;
         this.applet_directory = this._get_applet_directory();
         this.bytes_directory = this.applet_directory + "/bytes/";
@@ -169,10 +168,11 @@ MyApplet.prototype = {
 
     _connect_signals: function() {
         global.connect("shutdown", Lang.bind(this, this.on_shutdown));
+        global.connect("scale-changed", Lang.bind(this, this.on_panel_height_changed));
     },
 
     on_shutdown: function () {
-            this._write_bytes_total();
+        this._write_bytes_total();
     },
 
     on_list_connections_command_changed: function () {
@@ -295,6 +295,11 @@ MyApplet.prototype = {
         }
 
         this.close_hover_popup();
+    },
+
+    // Override
+    on_panel_height_changed: function() {
+        this._init_gui();
     },
 
     // Override
@@ -541,11 +546,6 @@ MyApplet.prototype = {
         this.hover_popup.close();
     },
 
-    on_panel_height_changed: function() {
-        this.panel_height = this.panel.actor.get_height();
-        this._init_gui();
-    },
-
     _init_hover_popup: function () {
         this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation);
         this.on_hover_popup_css_changed();
@@ -553,8 +553,8 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this.panel_height, this.gui_speed_type, this.decimal_places);
-        this.gui_data_limit = new AppletGui.GuiDataLimit(this.panel_height, this.gui_data_limit_type);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.decimal_places);
+        this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();
         this._add_gui_data_limit();
