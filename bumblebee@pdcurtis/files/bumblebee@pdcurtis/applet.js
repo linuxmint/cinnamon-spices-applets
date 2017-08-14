@@ -144,8 +144,8 @@ MyApplet.prototype = {
                this.textEd = "xed";
             }
 
-            // Check that Bumblebee Daemen is installed 
-            if (!GLib.find_program_in_path("bumblebeed")) {
+            // Check that Bumblebee is installed by presence of optirun
+            if (!GLib.find_program_in_path("optirun")) {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
@@ -466,4 +466,6 @@ v30_3.1.0  Changed help file from help.txt to README.md
 ### 3.2.2
  * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
  * Update bumblebee.pot to identify changes which need to be translated
+### 3.2.3
+ * Change to the check added in 3.2.1 that bumblebee is installed. This solves an issue reported when applet used with LMDE (issue #1136).
 */
