@@ -74,15 +74,12 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
         "runAsRoot",
         "runAsRoot",
-        function(){}); // Callback when value changes (empty function)
-
-        // Make sure the temp file is created
-        GLib.spawn_command_line_async('touch /tmp/.torAppletCheck');        
+        function(){}); // Callback when value changes (empty function)     
         
         // Generate file
-        GLib.spawn_command_line_async('sh ' + GLib.get_home_dir() + '/.local/share/cinnamon/applets/'+UUID+'/check.sh'); // Run check bash script to write Tor status in '/tmp/.torAppletCheck'
+        GLib.spawn_command_line_sync('sh ' + GLib.get_home_dir() + '/.local/share/cinnamon/applets/'+UUID+'/check.sh'); // Run check bash script to write Tor status in '/tmp/.torAppletCheck'
         torAppletCheck = GLib.file_get_contents("/tmp/.torAppletCheck").toString(); // Read information from file
-        torEnable = torAppletCheck; // Set variable first value
+        torEnable = torAppletCheck; // Set first value to variable
 
         //Icon and tooltip
         if (torAppletCheck.substr(5,2) == "ON") {            
@@ -111,13 +108,13 @@ MyApplet.prototype = {
     // Update loop timer and check status of Tor
     updateLoop: function () {
         if ( applet_running == true) {
-            GLib.spawn_command_line_async('sh ' + GLib.get_home_dir() + '/.local/share/cinnamon/applets/'+UUID+'/check.sh'); // Run check bash script to write Tor status in '/tmp/.torAppletCheck'
+            GLib.spawn_command_line_sync('sh ' + GLib.get_home_dir() + '/.local/share/cinnamon/applets/'+UUID+'/check.sh'); // Run check bash script to write Tor status in '/tmp/.torAppletCheck'
             torAppletCheck = GLib.file_get_contents("/tmp/.torAppletCheck").toString(); // Read information from file
             if ( torEnable != torAppletCheck ) // Check status change
             {
-                if (torAppletCheck.substr(5,3) == "OFF") { // Check information from file without 'true,' and '\n '
+                if (torAppletCheck.substr(5,3) == "OFF") { // Load information from file without 'true,' and '\n '
                                                            this.set_applet_icon_symbolic_name('tor-off'); // Change icon
-                                                           if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor closed.")+'\' --icon=dialog-information'); // Show notification
+                                                           if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor was closed.")+'\' --icon=dialog-information'); // Show notification
                                                            this.set_applet_tooltip(_(tor_off)); // Change tooltip
                                                            this.tor_toggle.setToggleState(false); // Toggle if Tor was killed not by applet
                                                            this.tor_toggle.setIconSymbolicName("tor-off"); // Change icon ip popup menu          
@@ -125,7 +122,7 @@ MyApplet.prototype = {
                 }
                 else {
                     this.set_applet_icon_symbolic_name('tor-on'); 
-                    if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor launched.")+'\' --icon=dialog-information'); // Show notification               
+                    if (this.showNotifications) GLib.spawn_command_line_async('notify-send \'Tor\' \''+_("Tor was launched.")+'\' --icon=dialog-information'); // Show notification               
                     this.set_applet_tooltip(_(tor_on)); 
                     this.tor_toggle.setToggleState(true); 
                     this.tor_toggle.setIconSymbolicName("tor-on");                 
@@ -142,7 +139,7 @@ MyApplet.prototype = {
     
     tor_launcher: function() {
         if (torAppletCheck.substr(5,3) == "OFF") { // Check information from file without 'true,' and '\n '
-                                                   if (this.runAsRoot == true) pid = GLib.spawn_command_line_async('gksu -u tor '+this.location); // Run tor from location settings with gksu
+                                                   if (this.runAsRoot == true) GLib.spawn_command_line_async('gksu -u tor '+this.location); // Run tor from location settings with gksu
                                                    else GLib.spawn_command_line_async(this.location); // Run tor from location settings as normal user
         }
         else {

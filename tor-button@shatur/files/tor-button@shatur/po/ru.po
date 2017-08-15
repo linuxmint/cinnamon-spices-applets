@@ -35,11 +35,11 @@ msgid "Rebuild chain"
 msgstr "Перестроить цепочку"
 
 #: applet.js:106
-msgid "Tor closed."
+msgid "Tor was closed."
 msgstr "Tor выключен."
 
 #: applet.js:114
-msgid "Tor launched."
+msgid "Tor was launched."
 msgstr "Tor запущен."
 
 #. tor-button@shatur->settings-schema.json->location->description
