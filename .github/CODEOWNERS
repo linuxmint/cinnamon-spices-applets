@@ -70,7 +70,6 @@ system-monitor@spacy01/**                          @spacy01
 text-to-speech-applet@cardsurf/**                  @cardsurf
 timeout@narutrey/**                                @narutrey
 tor-button@shatur/**                               @Goodevil95
-tracker@glebihan/**                                @glebihan
 turn-off-monitor@zablotski/**                      @zablotski
 vboxlauncher@mockturtl/**                          @mockturtl
 weather@mockturtl/**                               @mockturtl
@@ -168,6 +167,7 @@ workspace-name@willurd/**                          @willurd
 # titleBar@errt
 # todo@threefi
 # toggle_LookingGlass@kolle
+# tracker@glebihan
 # turbonote@iksws.com.br
 # uptime@vatanuki.kun
 # usertile@uszaty
