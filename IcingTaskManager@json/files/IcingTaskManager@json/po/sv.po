@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IcingTaskManager@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-08-15 07:05+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -19,12 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "Flytta till skärm"
+msgstr "Flytta till andra skärmen"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to monitor "
 msgstr "Flytta till skärm"
 
@@ -37,22 +35,20 @@ msgid "Visible on all workspaces"
 msgstr "Synlig på alla arbetsytor"
 
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
-#, fuzzy
 msgid "Move to another workspace"
-msgstr "Flytta till vänster arbetsyta"
+msgstr "Flytta till en annan arbetsyta"
 
 #: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
 msgid "Places"
-msgstr ""
+msgstr "Platser"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
-#, fuzzy
 msgid "Recent"
-msgstr "procent"
+msgstr "Tidigare"
 
 #: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
 msgid "Preferences"
-msgstr ""
+msgstr "Inställningar"
 
 #: 3.2/specialMenus.js:228
 msgid "About..."
@@ -64,7 +60,7 @@ msgstr "Konfigurera..."
 
 #: 3.2/specialMenus.js:238
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
 #: 3.2/specialMenus.js:272
 msgid "Unpin from Panel"
@@ -88,7 +84,7 @@ msgstr "Skapa genväg"
 
 #: 3.2/specialMenus.js:300
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Återställ full opacitet"
 
 #: 3.2/specialMenus.js:308
 msgid "Restore"
@@ -108,10 +104,9 @@ msgstr "Maximera"
 
 #: 3.2/specialMenus.js:335
 msgid "Close others"
-msgstr ""
+msgstr "Stäng alla andra"
 
 #: 3.2/specialMenus.js:345
-#, fuzzy
 msgid "Close all"
 msgstr "Stäng alla"
 
@@ -340,15 +335,14 @@ msgid "Non-symbolic icons"
 msgstr "Icke-symboliska ikoner"
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Använd systemets verktygsbeskrivningar för stängda program"
+msgstr "Använd systemets favoriter som fastnålade program"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
-msgstr "Avgör om fastnålade program visas i panelen när de inte är igång."
+msgstr ""
+"Avgör om fastnålade program består av systemets favoritlista, eller inte."
 
 #. 3.2->settings-schema.json->hover-peek-opacity->description
 #. 3.0->settings-schema.json->hover-peek-opacity->description
@@ -466,7 +460,7 @@ msgstr "Avgör om fastnålade program visas i panelen när de inte är igång."
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Aktivera dra och släpp för programknappar"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
@@ -559,13 +553,13 @@ msgstr "Justera ikonstorlek oberoende av Cinnamons panelskalning."
 
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "Lista endast fönster från den skärm som visar denna instans"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
-msgstr ""
+msgstr "Detta alternativ påverkar endast skärmar som visar en ITM-instans."
 
 #. 3.2->settings-schema.json->number-display->description
 #. 3.0->settings-schema.json->number-display->description
@@ -813,8 +807,17 @@ msgstr "Fönsterlista med programgruppering och miniatyrer"
 #~ msgid "number"
 #~ msgstr "antal"
 
+#~ msgid "Move to left workspace"
+#~ msgstr "Flytta till vänster arbetsyta"
+
 #~ msgid "Move to right workspace"
 #~ msgstr "Flytta till höger arbetsyta"
+
+#~ msgid "Move to monitor"
+#~ msgstr "Flytta till skärm"
+
+#~ msgid "Close All"
+#~ msgstr "Stäng alla"
 
 #~ msgid "Settings"
 #~ msgstr "Inställningar"
