@@ -76,6 +76,7 @@ weather@mockturtl/**                               @mockturtl
 website-notifier@cardsurf/**                       @cardsurf
 window-list@zeripath.sdf-eu.org/**                 @zeripath
 windowlist@cobinja.de/**                           @Cobinja
+workspace-grid@hernejj/**                          @hernejj
 workspace-name@willurd/**                          @willurd
 
 # The following xlets have no author assigned to them.
@@ -180,5 +181,4 @@ workspace-name@willurd/**                          @willurd
 # windowTitle2@hanspr
 # windowTitle@rymate1234
 # windows-quick-list-with-close-button@koutch
-# workspace-grid@hernejj
 # xampp-panel@backids99
