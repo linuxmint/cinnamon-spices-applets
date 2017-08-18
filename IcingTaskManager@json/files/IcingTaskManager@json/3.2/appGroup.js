@@ -82,6 +82,7 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this.isDraggableApp = true;
+    this._calcWindowNumber();
   },
 
   _onDragBegin: function() {
@@ -457,28 +458,27 @@ AppGroup.prototype = {
   },
 
   _calcWindowNumber: function () {
-    if (this.willUnmount || !this.metaWindows) {
+    if (this.willUnmount) {
       return false;
     }
 
-    let windowNum = this.metaWindows.length;
+    let windowNum = this.metaWindows ? this.metaWindows.length : 0;
 
-    let numDisplay = this._applet.settings.getValue('number-display');
     this._appButton._numLabel.text = windowNum.toString();
-    if (numDisplay === constants.NumberDisplay.Smart) {
+    if (this._applet.numDisplay === constants.NumberDisplay.Smart) {
       if (windowNum <= 1) {
         this._appButton._numLabel.hide();
       } else {
         this._appButton._numLabel.show();
       }
-    } else if (numDisplay === constants.NumberDisplay.Normal) {
+    } else if (this._applet.numDisplay === constants.NumberDisplay.Normal) {
       if (windowNum <= 0) {
         this._appButton._numLabel.hide();
       }
       else {
         this._appButton._numLabel.show();
       }
-    } else if (numDisplay === constants.NumberDisplay.All) {
+    } else if (this._applet.numDisplay === constants.NumberDisplay.All) {
       this._appButton._numLabel.show();
     } else {
       this._appButton._numLabel.hide();
