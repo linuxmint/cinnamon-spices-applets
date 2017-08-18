@@ -204,7 +204,6 @@ MyApplet.prototype = {
     this._animatingPlaceholdersCount = 0;
     this.homeDir = GLib.get_home_dir();
     this.appletEnabled = false;
-    this.closedFavoriteStyle = '';
     this.actor.set_track_hover(false);
     this._box = new St.Bin();
     this.actor.add(this._box);
@@ -274,7 +273,7 @@ MyApplet.prototype = {
     this.signals.connect(Main.overview, 'hiding', Lang.bind(this, this._onOverviewHide));
     this.signals.connect(Main.expo, 'showing', Lang.bind(this, this._onOverviewShow));
     this.signals.connect(Main.expo, 'hiding', Lang.bind(this, this._onOverviewHide));
-    this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this._onThemeChange));
+    this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this.refreshCurrentAppList));
     this.signals.connect(this.tracker, 'notify::focus-app', Lang.bind(this, this._updateFocusState));
 
     this.getAutostartApps();
@@ -282,7 +281,6 @@ MyApplet.prototype = {
     this.currentWs = global.screen.get_active_workspace_index();
     this._onSwitchWorkspace();
     this._bindAppKey();
-    this._onThemeChange(true);
   },
 
   on_applet_instances_changed: function() {
@@ -338,35 +336,6 @@ MyApplet.prototype = {
 
   on_applet_removed_from_panel: function() {
     this.signals.disconnectAllSignals();
-  },
-
-  _onThemeChange: function(init) {
-    // This introspects the theme so we can remove the window-list-item-box class, but keep its padding on closed favorite apps.
-    let error = true;
-    let style = Main.getThemeStylesheet();
-    if (style) {
-      let fd = Gio.File.new_for_path(style);
-      if (fd.query_exists(null)) {
-        let [success, css] = fd.load_contents(null);
-        let windowListItemBox = '';
-        if (success) {
-          windowListItemBox = ';' + css.toString().replace(/\n/g, '').replace(/\t/g, '').split('window-list-item-box')[1].split('}')[0].split('{')[1].trim();
-          let arr = windowListItemBox.split(';');
-          let rules = '';
-          each(arr, (str, i)=>{
-            if (str.length > 0 && str.indexOf('background') === -1 && str.indexOf('box') === -1 && str.indexOf('border') === -1) {
-              rules += str.trim() + ';';
-            }
-          });
-          this.closedFavoriteStyle = rules;
-          error = false;
-        }
-      }
-    }
-    if (error) {
-      this.closedFavoriteStyle = '';
-    }
-    this.refreshCurrentAppList();
   },
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.

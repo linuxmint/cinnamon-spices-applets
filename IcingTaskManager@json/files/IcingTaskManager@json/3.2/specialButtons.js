@@ -320,9 +320,6 @@ AppButton.prototype = {
     if (this._applet.panelEditMode) {
       return false;
     }
-    if (!this.actor.has_style_class_name('window-list-item-box')) {
-      this.actor.add_style_class_name('window-list-item-box');
-    }
     let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
     if (!this.actor.has_style_pseudo_class(hoverPseudoClass)) {
       this.actor.add_style_pseudo_class(hoverPseudoClass);
@@ -336,10 +333,8 @@ AppButton.prototype = {
     let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
     this.actor.remove_style_pseudo_class(hoverPseudoClass);
 
-    setTimeout(()=>{
-      this._onFocusChange();
-      this._setFavoriteAttributes();
-    }, 0);
+    this._onFocusChange();
+    this._setFavoriteAttributes();
   },
 
   setActiveStatus: function(windows){
@@ -415,13 +410,11 @@ AppButton.prototype = {
       setTimeout(() => this._setFavoriteAttributes(), 500);
       return;
     }
-    if (this._applet.closedFavoriteStyle
-      && this.app.state === 0
+    if (this.app.state === 0
       && this.isFavoriteApp) {
       let pseudoClass = _.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label;
       if (this.actor.has_style_class_name('window-list-item-box')) {
         this.actor.remove_style_class_name('window-list-item-box');
-        this.actor.set_style(this._applet.closedFavoriteStyle);
       }
       if (this.actor.has_style_pseudo_class(pseudoClass)) {
         this.actor.remove_style_pseudo_class(pseudoClass);
