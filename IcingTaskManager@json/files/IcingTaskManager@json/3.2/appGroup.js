@@ -336,7 +336,7 @@ AppGroup.prototype = {
     this.signals.disconnect('notify::wm-class', metaWindow);
 
     _.pullAt(this.metaWindows, refWindow);
-
+    this._calcWindowNumber();
     if (this.metaWindows.length > 0 && !this.willUnmount) {
       this.lastFocused = _.last(this.metaWindows);
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
@@ -352,7 +352,6 @@ AppGroup.prototype = {
       }
       this.hoverMenu.appSwitcherItem._refreshThumbnails();
       this._appButton.setMetaWindow(this.lastFocused, this.metaWindows);
-      this._calcWindowNumber();
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
