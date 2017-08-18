@@ -1,1 +1,0 @@
-../applet.js
