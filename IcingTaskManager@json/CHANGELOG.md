@@ -1,5 +1,11 @@
 Changelog
 
+### 5.3.3
+
+  * Fixed a regression causing pinned unopened icons to have the wrong aspect ratio, or become off-center.
+  * Fixed the number display still showing "1" after a pinned app is closed when number display is set to Normal or All.
+  * Fixed the number display not showing on unopened pinned apps when it is set to All.
+
 ### 5.3.2
 
   * Fixed an undefined reference error when opening LibreOffice documents from Nemo.
