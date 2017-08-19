@@ -302,6 +302,7 @@ MyApplet.prototype = {
 			// Icon on
 			if (this.changeOnNight) {
 				this.set_applet_icon_symbolic_path(ICON_SUNSET);
+                this._applet_icon.set_icon_size(24);
 				if (this.latitude && this.longitude) {
 					Util.spawnCommandLine('redshift -l ' + this.latitude + ':' + this.longitude
 						+ ' -t ' + this.dayColor + ':' + this.nightColor
@@ -312,11 +313,13 @@ MyApplet.prototype = {
 				}
 			} else {
 				this.set_applet_icon_symbolic_path(ICON_ON);
+                this._applet_icon.set_icon_size(24);
 				Util.spawnCommandLine('redshift -O ' + this.dayColor + ' -b ' + (this.redshiftDayBrightness / 100));
 			}
     	} else {
 			// Icon off
 			this.set_applet_icon_symbolic_path(ICON_OFF);
+            this._applet_icon.set_icon_size(24);
             // reset Redshift configuration
     		Util.spawnCommandLine('redshift -x');
 		}
