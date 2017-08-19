@@ -56,6 +56,7 @@ MyApplet.prototype = {
 
         try {
 			this.set_applet_icon_symbolic_path(ICON_OFF);
+            this._applet_icon.set_icon_size(24);
             this.set_applet_tooltip(_("Brightness")); // applet tooltip
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
