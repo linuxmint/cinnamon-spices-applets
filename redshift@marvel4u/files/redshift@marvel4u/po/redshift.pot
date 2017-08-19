@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-05 17:19+0200\n"
+"POT-Creation-Date: 2017-08-12 12:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Language: \n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
-#: applet.js:59 applet.js:225
+#: applet.js:59 applet.js:224
 msgid "Brightness"
 msgstr ""
 
@@ -31,19 +31,19 @@ msgstr ""
 msgid "Transition on night"
 msgstr ""
 
-#: applet.js:204
+#: applet.js:203
 msgid "Redshift day colour"
 msgstr ""
 
-#: applet.js:209
+#: applet.js:208
 msgid "Redshift day brightness"
 msgstr ""
 
-#: applet.js:214
+#: applet.js:213
 msgid "Redshift night colour"
 msgstr ""
 
-#: applet.js:219
+#: applet.js:218
 msgid "Redshift night brightness"
 msgstr ""
 

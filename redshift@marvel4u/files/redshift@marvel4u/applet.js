@@ -222,7 +222,7 @@ MyApplet.prototype = {
 
     do_UI_update_slider: function() {
         let brightnessStr = _("Brightness") + ": " + this.brightness + "%";
-        this.set_applet_tooltip(_(brightnessStr)); // applet tooltip
+        this.updateTooltip();
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness
 
 		try {
@@ -294,6 +294,7 @@ MyApplet.prototype = {
 
 	doRedshiftSwitch: function() {
         this.enabled = this.redshiftSwitch.state;
+        this.updateTooltip();
 		// Stop redshift before launch another instance
 		Util.killall('redshift');
 		if (this.enabled) {
@@ -320,7 +321,23 @@ MyApplet.prototype = {
 		}
 	},
 
-
+    updateTooltip: function() {
+        var tooltip = _('Brightness') + ': ' + this.brightness + '%\n';
+        tooltip += _('Redshift') + ': ' + (this.enabled ? 'On' : 'Off');
+        if (this.enabled) {
+            tooltip += '\n';
+            if (this.changeOnNight) {
+                tooltip += _('Day colour temperature') + ': ' + this.dayColor + 'K\n';
+                tooltip += _('Night colour temperature') + ': ' + this.nightColor + 'K\n';
+                tooltip += _('Day Redshift brightness') + ': ' + this.redshiftDayBrightness + '%\n';
+                tooltip += _('Night Redshift brightness') + ': ' + this.redshiftNightBrightness + '%';
+            } else {
+                tooltip += _('Colour temperature') + ': ' + this.dayColor + 'K\n';
+                tooltip += _('Redshift brightness') + ': ' + this.redshiftDayBrightness + '%';
+            }
+        }
+        this.set_applet_tooltip(tooltip);
+    },
 
     // todo: attach to St box using an icon obj
     _onScrollEvent: function(actor, event) {
