@@ -1,0 +1,501 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-17 19:40+0200\n"
+"PO-Revision-Date: 2017-08-19 20:21+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:38
+msgid "Show or capture desktop"
+msgstr "Vis eller indspil skrivebordet"
+
+#: applet.js:191
+msgid "Record Screen"
+msgstr "Optag skærmen"
+
+#: applet.js:197
+msgid "Stop Recording"
+msgstr "Stop optagelsen"
+
+#: applet.js:240
+msgid "Sorry, only one instance allowed!\n"
+msgstr "Beklager, kun en forekomst er tilladt!\n"
+
+#: applet.js:242
+msgid ""
+"Sorry, the record can't start,\n"
+" because you have incorrect crop settings!\n"
+msgstr ""
+"Beklager, optagelsen kan ikke startes,\n"
+" fordi du har forkerte indstillinger for beskæring!\n"
+
+#: applet.js:255
+msgid "Recording has finished"
+msgstr "Optagelsen er færdig"
+
+#: applet.js:258
+msgid "There is no active recording.\n"
+msgstr "Der er ingen igangværende optagelse.\n"
+
+#. montrer-le-bureau@cannelle.org->metadata.json->description
+msgid "Minimize all windows or record the desktop"
+msgstr "Minimér alle vinduer eller optag skrivebordet"
+
+#. montrer-le-bureau@cannelle.org->metadata.json->name
+msgid "Show or record desktop"
+msgstr "Vis eller optag skrivebordet"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-top->description
+msgid "Crop from the top:"
+msgstr "Beskær fra oven:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-top->tooltip
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-bottom->tooltip
+msgid "The value must be lower than your screen height"
+msgstr "Værdien skal være mindre end skærmens højde"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-top->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-bottom->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-left->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-x->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-y->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-right->units
+msgid "pixels"
+msgstr "pixler"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-settings-
+#. header->description
+msgid "AUDIO SETTINGS"
+msgstr "LYDINDSTILLINGER"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->output-settings-
+#. header->description
+msgid "OUTPUT SETTINGS"
+msgstr "OUTPUTINDSTILLINGER"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
+#. logo->description
+msgid "Add logo"
+msgstr "Tilføj logo"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
+#. logo->tooltip
+msgid "Use a local picture as logo on the video"
+msgstr "Anvend et lokalt billede som logo til videoen"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-
+#. bottom->description
+msgid "Crop from the bottom:"
+msgstr "Beskær fra neden:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. codec->description
+msgid "Audio codec:"
+msgstr "Lydcodec:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->tooltip
+msgid "Select an audio codec."
+msgstr "Vælg et lydcodec."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "SPEEX"
+msgstr "SPEEX"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "MPG"
+msgstr "MPG"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "AAC"
+msgstr "AAC"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "VORBIS"
+msgstr "VORBIS"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "AC3"
+msgstr "AC3"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "OPUS"
+msgstr "OPUS"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "MP3"
+msgstr "MP3"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "FLAC"
+msgstr "FLAC"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-codec->options
+msgid "WAV"
+msgstr "WAV"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-
+#. left->description
+msgid "Crop from the left:"
+msgstr "Beskær fra venstre:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-left->tooltip
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-right->tooltip
+msgid "The value must be lower than your screen width"
+msgstr "Værdien skal være mindre end skærmens bredde"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->increase-
+#. caching->description
+msgid "Check this to increase caching:"
+msgstr "Forøg caching:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->increase-
+#. caching->tooltip
+msgid "Checking this box allows you to increase caching"
+msgstr "Aktivér denne for at forøge caching"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. opacity->description
+msgid "Logo opacity:"
+msgstr "Logoets uigennemsigtighed:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-opacity->tooltip
+msgid ""
+"Logo opacity value (from 0 for full transparency to 255 for full opacity)."
+msgstr ""
+"Graden af logoets uigennemsigtighed (0 for fuld gennemsigtighed og 255 for "
+"fuld uigennemsigtighed)"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-opacity->units
+msgid "value"
+msgstr "værdi"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-
+#. framerate->description
+msgid "Video FPS:"
+msgstr "Videoens FPS:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-
+#. framerate->units
+msgid "fps"
+msgstr "fps"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-settings-
+#. header->description
+msgid "VIDEO SETTINGS"
+msgstr "VIDEOINDSTILLINGER"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->use-screen-
+#. shot->description
+msgid "Allow middle click action"
+msgstr "Tillad handling ved midterklik"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->use-screen-
+#. shot->tooltip
+msgid "Adding ability to take some action with mouse middle button"
+msgstr "Tillader visse handlinger med midterste musetast"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
+#. crop->description
+msgid "Check this to select a cropping area:"
+msgstr "Udvælg beskæringsområde:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-filter-
+#. crop->tooltip
+msgid ""
+"Checking this box allows you to set a custom area from the screen, that will "
+"be cropped. The cropped pixels will not be visible."
+msgstr ""
+"Aktivér denne for at udvælge et område på skærmen, som vil blive beskåret. "
+"De afskårne pixler vil ikke være synlige."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. file->description
+msgid "Logo sub source:"
+msgstr "Sti til logo:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-file->tooltip
+msgid "Full path of the image file to use."
+msgstr "Fuld sti til billedfilen."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->file-
+#. name->description
+msgid "Output file name:"
+msgstr "Navn på outputfil:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->file-name->tooltip
+msgid "Just a name. The time and extension will be added automatically."
+msgstr "Bare et navn. Tid og filendelse vil blive tilføjet automatisk."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. channels->description
+msgid "Audio channels:"
+msgstr "Lydkanaler:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-channels->units
+msgid "channels"
+msgstr "kanaler"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->ss-tool->description
+msgid "Middle button tool:"
+msgstr "Kommando til midtertasten:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->ss-tool->tooltip
+msgid ""
+"Select the full path to middle button tool. If you want to pass some "
+"arguments, you might create a simple shell script, then select it here."
+msgstr ""
+"Vælg den fulde sti til midtertastens kommando. Hvis du vil tilføje nogle "
+"argumenter, kan du oprette et enkelt skalskript og vælge det her."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-x->description
+msgid "X coordinate:"
+msgstr "X-koordinat:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-x->tooltip
+msgid "X coordinate of the logo."
+msgstr "Logoets x-koordinat."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-y->description
+msgid "Y coordinate:"
+msgstr "Y-koordinat:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-y->tooltip
+msgid "Y coordinate of the logo."
+msgstr "Logoets y-koordinat."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->screen-
+#. caching->description
+msgid "Caching:"
+msgstr "Caching:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->screen-caching->units
+msgid "ms"
+msgstr "ms"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->description
+msgid "Encapsulation:"
+msgstr "Indlejring:"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->tooltip
+msgid "Select a muxer."
+msgstr "Vælg en muxer."
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "MPEG-TS"
+msgstr "MPEG-TS"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "OGG/OGM"
+msgstr "OGG/OGM"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "MJPEG"
+msgstr "MJPEG"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "WEBM"
+msgstr "WEBM"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "MKV"
+msgstr "MKV"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "MP4"
+msgstr "MP4"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "AVI"
+msgstr "AVI"
+
+#. montrer-le-bureau@cannelle.org->settings-
+#. schema.json->encapsulation->options
+msgid "MPEG-PS"
+msgstr "MPEG-PS"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->description
+msgid "Logo position:"
+msgstr "Logoets placering:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->tooltip
+msgid "Enforce the logo position on the video."
+msgstr "Logoets placering i videoen."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Right"
+msgstr "Højre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Center"
+msgstr "Midten"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Bottom"
+msgstr "Nederst"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Top"
+msgstr "Øverst"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Bottom-Right"
+msgstr "Nederst til højre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Bottom-Left"
+msgstr "Nederst til venstre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Top-Right"
+msgstr "Øverst til højre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Top-Left"
+msgstr "Øverst til venstre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->logo-
+#. position->options
+msgid "Left"
+msgstr "Venstre"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-
+#. bitrate->description
+msgid "Video bitrate:"
+msgstr "Bithastighed for video:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-bitrate->units
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-bitrate->units
+msgid "kb/s"
+msgstr "kb/s"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->crop-
+#. right->description
+msgid "Crop from the right:"
+msgstr "Beskær fra højre:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->dir-name->description
+msgid "Output directory:"
+msgstr "Outputmappe:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->dir-name->tooltip
+msgid "Select a directory"
+msgstr "Vælg en mappe"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->description
+msgid "Audio samplerate:"
+msgstr "Samplingfrekvens for lyden:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->tooltip
+msgid "Select audio samplerate."
+msgstr "Vælg samplingfrekvens for lyden."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->options
+msgid "44100 Hz"
+msgstr "44100 Hz"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->options
+msgid "22050 Hz"
+msgstr "22050 Hz"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->options
+msgid "8000 Hz"
+msgstr "8000 Hz"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->options
+msgid "48000 Hz"
+msgstr "48000 Hz"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. samplerate->options
+msgid "11025 Hz"
+msgstr "11025 Hz"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. bitrate->description
+msgid "Audio bitrate:"
+msgstr "Bitfrekvens for lyden:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->audio-
+#. bitrate->tooltip
+msgid "Select audio bitrate."
+msgstr "Vælg bitfrekvens for lyden."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->misc-settings-
+#. header->description
+msgid "OTHER SETTINGS"
+msgstr "ANDRE INDSTILLINGER"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-
+#. codec->description
+msgid "Video codec:"
+msgstr "Videocodec:"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->tooltip
+msgid "Select a video codec."
+msgstr "Vælg et videocodec."
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "M-JPEG"
+msgstr "M-JPEG"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "HEVC"
+msgstr "HEVC"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "H264"
+msgstr "H264"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "VP8"
+msgstr "VP8"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "MPEG-4"
+msgstr "MPEG-4"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "MPEG-2"
+msgstr "MPEG-2"
+
+#. montrer-le-bureau@cannelle.org->settings-schema.json->video-codec->options
+msgid "THEORA"
+msgstr "THEORA"
