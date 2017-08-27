@@ -1,5 +1,8 @@
-const _ = imports.applet._;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Modules = applet.modules;
 
 const name = "swap";
 const settingsName = "mem";

@@ -2,10 +2,13 @@ const Cinnamon = imports.gi.Cinnamon;
 
 const Mainloop = imports.mainloop;
 
-const _ = imports.applet._;
-const Graph = imports.applet.graph;
-const bind = imports.applet.bind;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Graph = applet.graph;
+const bind = applet.bind;
+const Modules = applet.modules;
 
 const name = "disk";
 const display = _("Disk");

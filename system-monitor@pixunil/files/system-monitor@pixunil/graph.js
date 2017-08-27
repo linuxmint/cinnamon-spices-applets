@@ -2,7 +2,9 @@ const Cairo = imports.cairo;
 
 const GLib = imports.gi.GLib;
 
-const ModulePart = imports.applet.modules.ModulePart;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+const ModulePart = applet.modules.ModulePart;
 
 function process(number){
     return number > 0 && !isNaN(number) && isFinite(number);
@@ -99,7 +101,7 @@ Overview.prototype = {
 
         if(this.modules.mem.settings.enabled){
             this.next("mem", "mem");
-            this.normal(this.mem.data.usedup / this.mem.data.total, false);
+            this.normal(this.mem.data.used / this.mem.data.total, false);
             this.setAlpha(.75);
             this.normal(this.mem.data.cached / this.mem.data.total, false);
             this.setAlpha(.5);
@@ -209,13 +211,12 @@ PieOverview.prototype = {
     },
 
     center: function(radius){
-        this.centerSection++;
-
         if(!process(radius))
             return;
 
         let startAngle = this.centerSection * Math.PI * 2 / this.countCenter;
-        let endAngle = (this.centerSection + 1) * Math.PI * 2 / this.countCenter;
+        this.centerSection++;
+        let endAngle = startAngle + Math.PI * 2 / this.countCenter;
 
         this.ctx.arc(this.w / 2, this.h / 2, radius * this.dr, startAngle, endAngle);
         this.ctx.fill();
@@ -272,8 +273,9 @@ ArcOverview.prototype = {
             return;
 
         let startAngle = this.centerSection * Math.PI / this.countCenter - Math.PI;
-        let endAngle = (this.centerSection + 1) * Math.PI / this.countCenter - Math.PI;
+        let endAngle = startAngle + Math.PI / this.countCenter;
 
+        this.ctx.moveTo(this.w / 2, this.h);
         this.ctx.arc(this.w / 2, this.h, radius * this.dr, startAngle, endAngle);
         this.ctx.fill();
     }
@@ -328,8 +330,8 @@ History.prototype = {
         this.module = module;
     },
 
-    _line: {
-        line: function(history){
+    lineTypes: {
+        line: function(history, increment){
             this.ctx.translate(this.dw * this.tx, this.h);
             this.ctx.scale(this.dw, -this.h / (this.max - this.min));
             this.ctx.translate(0, -this.min);
@@ -339,13 +341,19 @@ History.prototype = {
             this.ctx.identityMatrix();
             this.ctx.stroke();
 
-            this.incrementLast(history);
+            if(increment)
+                this.incrementLast(history);
         },
 
-        area: function(history){
+        area: function(history, increment){
+            // lower the min if it is higher than zero, as small values are
+            // not visible which looks like a zero value
+            if(this.min > 0)
+                this.min -= 1;
+
             this.ctx.save();
             if(this.packDir === "vertical"){
-                this.ctx.translate(this.dw * this.tx, this.h - (this.h * this.section / this.numberSections));
+                this.ctx.translate(this.dw * this.tx, this.h * (this.section + 1) / this.numberSections);
                 this.ctx.scale(this.dw, -this.h / (this.max - this.min) / this.numberSections);
                 this.ctx.translate(0, -this.min);
             } else {
@@ -365,7 +373,8 @@ History.prototype = {
             this.ctx.fill();
             this.ctx.restore();
 
-            this.incrementLast(history);
+            if(increment)
+                this.incrementLast(history);
         },
 
         areaUpDown: function(history){
@@ -398,8 +407,6 @@ History.prototype = {
             this.ctx.lineTo(0, (this.last[0] || 0) + this.min);
             this.ctx.fill();
             this.ctx.restore();
-
-            this.incrementLast(history);
         },
 
         stack: function(history){
@@ -416,6 +423,7 @@ History.prototype = {
             this.ctx.fill();
             this.ctx.restore();
 
+            // always needs to increment
             this.incrementLast(history);
         },
 
@@ -435,7 +443,7 @@ History.prototype = {
         }
     },
 
-    _connection: {
+    connectionTypes: {
         line: function(history, i, back){
             for(var l = history.length; i < l; ++i)
                 this.ctx.lineTo(i, history[i] + (this.last[i] || 0));
@@ -495,17 +503,16 @@ History.prototype = {
         this.min = min || 0;
         this.max = max || 1;
 
-        this.line = this._line[this.settings.appearance];
-
+        this.line = this.lineTypes[this.settings.appearance];
         if(!this.line)
-            this.line = this._line.area;
+            this.line = this.lineTypes.area;
 
         if(this.settings.appearance === "line")
             this.ctx.setLineJoin(Cairo.LineJoin.ROUND);
 
-        this.connection = this._connection[this.settings.graphConnection];
+        this.connection = this.connectionTypes[this.settings.graphConnection];
         if(!this.connection)
-            this.connection = this._connection.line;
+            this.connection = this.connectionTypes.line;
 
         this.last = [];
     },
