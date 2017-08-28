@@ -579,10 +579,14 @@ function setToArray(set) {
   var index = -1,
       result = Array(set.size);
 
-  set.forEach(function(value) {
-    result[++index] = value;
-  });
-  return result;
+  try { // Changed for mozjs24
+    set.forEach(function(value) {
+      result[++index] = value;
+    });
+    return result;
+  } catch (e) {
+    return []
+  }
 }
 
 /**
