@@ -7,7 +7,6 @@ function ConfigSettings(confpath) {
 }
 
 ConfigSettings.prototype = {
-
   _init: function(confpath) {
     this.path = confpath;
     this.conffile = 'prefs.json';
@@ -85,16 +84,13 @@ ConfigSettings.prototype = {
       if (this.isDeviceEnabled(devtype, dname)) {
         colorlist = colorlist.concat(this._prefs[devtype].devices[dname].colors);
       } else {
-        colorlist = colorlist.concat([
-          [0, 0, 0, 0],
-          [0, 0, 0, 0]
-        ]); //its cheating but easiest way to turn the devices off while running
+        colorlist = colorlist.concat([[0, 0, 0, 0], [0, 0, 0, 0]]); //its cheating but easiest way to turn the devices off while running
       }
     }
     return colorlist;
   },
   getNETColorList: function() {
-    return this.getDeviceColorList("net");
+    return this.getDeviceColorList('net');
   },
 
   getNETWidth: function() {
@@ -123,16 +119,14 @@ ConfigSettings.prototype = {
     return disabledDeviceList;
   },
   getDiskColorList: function() {
-    return this.getDeviceColorList("disk");
+    return this.getDeviceColorList('disk');
   },
   adjustCPUcount: function(newcpucount) {
-    if (this._prefs.cpu.colors.length !== newcpucount) //only resize colors if necessary
-    {
+    if (this._prefs.cpu.colors.length !== newcpucount) {
+      //only resize colors if necessary
       //incase the config is screwed up fix it
       if (this._prefs.cpu.colors.length <= 0) {
-        this._prefs.cpu.colors = [
-          [1, 0, 0, 1]
-        ];
+        this._prefs.cpu.colors = [[1, 0, 0, 1]];
       }
 
       var oldcpucount = this._prefs.cpu.colors.length;
@@ -157,10 +151,7 @@ ConfigSettings.prototype = {
         newdevicesobj[newdevlist[i]] = {
           enabled: true,
           show: true,
-          colors: [
-            [1, 1, 1, 0.8],
-            [0, 0, 0, 0.6]
-          ]
+          colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
         };
         ischanged = true;
       } else {
@@ -184,92 +175,72 @@ ConfigSettings.prototype = {
     }
   },
   adjustNetInterfaces: function(newdevlist) {
-    this.adjustDevices("net", newdevlist);
+    this.adjustDevices('net', newdevlist);
   },
   adjustDiskDevices: function(newdevlist) {
-    this.adjustDevices("disk", newdevlist);
+    this.adjustDevices('disk', newdevlist);
   },
   updateSettings: function(newprefsContent) {
     try {
       this._prefs = JSON.parse(newprefsContent);
       this.saveSettings();
     } catch (e) {
-      global.logError("Error updating settings: " + e + " : " + newprefsContent);
+      global.logError('Error updating settings: ' + e + ' : ' + newprefsContent);
     }
   },
 
   saveSettings: function() {
-    let f = Gio.file_new_for_path(this.path + "/" + this.conffile);
-    let raw = f.replace(null, false,
-      Gio.FileCreateFlags.NONE,
-      null);
+    let f = Gio.file_new_for_path(this.path + '/' + this.conffile);
+    let raw = f.replace(null, false, Gio.FileCreateFlags.NONE, null);
     let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
-    Cinnamon.write_string_to_stream(out, JSON.stringify(this._prefs, null, " "));
+    Cinnamon.write_string_to_stream(out, JSON.stringify(this._prefs, null, ' '));
     out.close(null);
   },
 
   readSettings: function() {
     //Default Settings for preferences incase we cannot find ours
     this._prefs = {
-      "labelsOn": true,
-      "refreshRate": 500,
-      "height": 21,
-      "labelColor": [0.9333333333333333,0.9333333333333333,0.9254901960784314,1],
-      "backgroundColor": [1, 1, 1, 0.1],
-      "cpu": {
-        "enabled": true,
-        "width": 40,
-        "colors": [
-          [1, 1, 1, 1],
-          [1, 1, 1, 1],
-          [1, 1, 1, 1],
-          [1, 1, 1, 1]
-        ]
+      labelsOn: true,
+      refreshRate: 500,
+      height: 21,
+      labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
+      backgroundColor: [1, 1, 1, 0.1],
+      cpu: {
+        enabled: true,
+        width: 40,
+        colors: [[1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1], [1, 1, 1, 1]]
       },
-      "mem": {
-        "enabled": true,
-        "width": 40,
-        "colors": [
-          [1, 1, 1, 1],
-          [0.6, 0.6, 0.6, 0.8],
-          [0.8, 0.8, 0.8, 0.8],
-          [0.9, 0.9, 0.9, 0.1]
-        ],
-        "swapcolors": [
-          [1, 1, 1, 0.15]
-        ],
+      mem: {
+        enabled: true,
+        width: 40,
+        colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8], [0.8, 0.8, 0.8, 0.8], [0.9, 0.9, 0.9, 0.1]],
+        swapcolors: [[1, 1, 1, 0.15]]
       },
-      "net": {
-        "enabled": true,
-        "autoscale": true,
-        "logscale": true,
-        "width": 40,
-        "devices": {
-          "eth0": {
-            "enabled": true,
+      net: {
+        enabled: true,
+        autoscale: true,
+        logscale: true,
+        width: 40,
+        devices: {
+          eth0: {
+            enabled: true,
             show: true,
-            "colors": [
-              [1, 1, 1, 0.8],
-              [0, 0, 0, 0.6]
-            ]
-          },
-        },
+            colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
+          }
+        }
       },
-      "disk": {
-        "enabled": true,
-        "autoscale": true,
-        "logscale": true,
-        "width": 40,
-        "devices": {
-          "/": {
-            "enabled": true,
+      disk: {
+        enabled: true,
+        autoscale: true,
+        logscale: true,
+        width: 40,
+        devices: {
+          '/': {
+            enabled: true,
             show: true,
-            "colors": [
-              [1, 1, 1, 1],
-              [0.6, 0.6, 0.6, 0.8]
-            ]
-          },
-        },
+            colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8]]
+          }
+        }
       }
     };
 
@@ -277,17 +248,15 @@ ConfigSettings.prototype = {
     let prefsFile = dir.get_child(this.conffile);
     //let prefsFilePath = prefsFile.get_path();
     if (prefsFile.query_exists(null)) {
-
       let prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
       this._prefs = JSON.parse(prefsContent);
       if (typeof this._prefs.labelColor === 'undefined') {
-        this._prefs.labelColor = [0.9333333333333333,0.9333333333333333,0.9254901960784314,1];
+        this._prefs.labelColor = [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1];
       }
       return true;
     } else {
       this.saveSettings(); //We dont have a config file so we attempt to make one for next time
       return false;
     }
-
-  },
+  }
 };

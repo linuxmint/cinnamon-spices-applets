@@ -6,17 +6,15 @@ function GraphVBars(area, provider) {
 }
 
 GraphVBars.prototype = {
-
   _init: function(area, provider) {
     this.area = area;
     this.datalist = [];
     this.provider = provider;
-
   },
 
   paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
     if (!labelColor) {
-      labelColor = [1, 1, 1, 0.1]
+      labelColor = [1, 1, 1, 0.1];
     }
     let cr = area.get_context();
 
@@ -28,7 +26,7 @@ GraphVBars.prototype = {
     cr.fill();
 
     // Usage Data Bars
-    let vbarWidth = (width - 6) / (this.datalist.length);
+    let vbarWidth = (width - 6) / this.datalist.length;
     for (var i = 0; i < this.datalist.length; i++) {
       let vbarHeight = (height - 1) * this.datalist[i];
       let vbarOffset = i * vbarWidth + 3;
@@ -42,7 +40,7 @@ GraphVBars.prototype = {
       var a = colorslist[cpunum][3];
       cr.setSourceRGBA(r, g, b, a);
 
-      this.drawRoundedRectangle(cr, vbarOffset, height - vbarHeight, vbarWidth, vbarHeight, 1.50);
+      this.drawRoundedRectangle(cr, vbarOffset, height - vbarHeight, vbarWidth, vbarHeight, 1.5);
       cr.fill();
     }
 
@@ -53,8 +51,8 @@ GraphVBars.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      var fontsize_px = (1 / 3) * height;
-      var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
+      var fontsize_px = 1 / 3 * height;
+      var fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
@@ -62,7 +60,6 @@ GraphVBars.prototype = {
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
     }
-
   },
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
@@ -86,7 +83,6 @@ GraphVBars.prototype = {
   refreshData: function() {
     this.datalist = this.provider.getData();
   }
-
 };
 
 function GraphPieChart(area, provider) {
@@ -94,7 +90,6 @@ function GraphPieChart(area, provider) {
 }
 
 GraphPieChart.prototype = {
-
   _init: function(area, provider) {
     this.area = area;
     this.datalist = [];
@@ -102,7 +97,7 @@ GraphPieChart.prototype = {
   },
   paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
     if (!labelColor) {
-      labelColor = [1, 1, 1, 0.1]
+      labelColor = [1, 1, 1, 0.1];
     }
     let cr = area.get_context();
 
@@ -131,8 +126,8 @@ GraphPieChart.prototype = {
       var b = colorslist[datapointnum][2];
       var a = colorslist[datapointnum][3];
 
-      var startangle = (2 * 3.14159) * runningpercent;
-      var endangle = (2 * 3.14159) * (runningpercent + this.datalist[i])
+      var startangle = 2 * 3.14159 * runningpercent;
+      var endangle = 2 * 3.14159 * (runningpercent + this.datalist[i]);
       runningpercent += this.datalist[i]; //update running percent
 
       cr.setSourceRGBA(r, g, b, a);
@@ -153,8 +148,8 @@ GraphPieChart.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      var fontsize_px = (1 / 3) * height;
-      var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
+      var fontsize_px = 1 / 3 * height;
+      var fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
@@ -162,7 +157,6 @@ GraphPieChart.prototype = {
       PangoCairo.layout_path(cr, pangolayout);
       cr.fill();
     }
-
   },
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
@@ -187,7 +181,6 @@ GraphPieChart.prototype = {
   refreshData: function() {
     this.datalist = this.provider.getData();
   }
-
 };
 
 function GraphLineChart(area, provider, width) {
@@ -209,7 +202,6 @@ GraphLineChart.prototype = {
     this.maxvalue = 1.0;
     this.maxvalueloc = null;
     this.minMaxValue = 1.0;
-
   },
 
   refreshData: function() {
@@ -218,8 +210,8 @@ GraphLineChart.prototype = {
       return true;
     }
 
-    if (this.maxvalueloc == null) //initialize
-    {
+    if (this.maxvalueloc == null) {
+      //initialize
       this.resizeDataPointsList(this.dataPointsListSize, datapoints.length);
     }
 
@@ -236,8 +228,8 @@ GraphLineChart.prototype = {
       }
     }
 
-    if (this.autoScale && (this.maxvalueloc < 0)) //find a new max we lost the old one
-    {
+    if (this.autoScale && this.maxvalueloc < 0) {
+      //find a new max we lost the old one
       this.maxvalue = 1.0;
       for (let i = 0; i < this.dataPointsList.length; i++) {
         for (var j = 0; j < datapoints.length; j++) {
@@ -248,7 +240,6 @@ GraphLineChart.prototype = {
           }
         }
       }
-
     }
     if (this.logScale && this.maxvalue > 1.0) {
       this.scale = 1.0 / Math.log(this.maxvalue);
@@ -264,7 +255,7 @@ GraphLineChart.prototype = {
     this.dataPointsListSize = newsize;
     var newdatapointslist = [];
     for (var i = 0; i < newsize; i++) {
-      if (i < (this.dataPointsList.length)) {
+      if (i < this.dataPointsList.length) {
         newdatapointslist.push(this.dataPointsList[i]);
       } else {
         var emptypoints = [];
@@ -279,7 +270,7 @@ GraphLineChart.prototype = {
 
   paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
     if (!labelColor) {
-      labelColor = [1, 1, 1, 0.1]
+      labelColor = [1, 1, 1, 0.1];
     }
     let cr = area.get_context();
     if (this.dataPointsListSize != this.getDataPointsListSize(width)) {
@@ -309,9 +300,8 @@ GraphLineChart.prototype = {
 
       cr.setLineJoin(1); //rounded
       for (var j = 1; j < this.dataPointsList.length; j++) {
-
         var x1 = this.pixelsPerDataPoint * (j - 0.5) + this.pixelsPerDataPoint / 4;
-        var x2 = this.pixelsPerDataPoint * (j) + this.pixelsPerDataPoint / 4;
+        var x2 = this.pixelsPerDataPoint * j + this.pixelsPerDataPoint / 4;
 
         if (this.dataPointsList[j][i] === undefined || this.dataPointsList[j - 1][i] === undefined) {
           continue;
@@ -342,8 +332,8 @@ GraphLineChart.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      var fontsize_px = (1 / 3) * height;
-      var fontdesc = Pango.font_description_from_string("Sans Normal " + fontsize_px + "px");
+      var fontsize_px = 1 / 3 * height;
+      var fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
       cr.setSourceRGBA(labelColor[0], labelColor[1], labelColor[2], labelColor[3]);
@@ -386,5 +376,5 @@ GraphLineChart.prototype = {
 
       cr.closePath();
     }
-  },
+  }
 };
