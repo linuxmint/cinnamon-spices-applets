@@ -1,6 +1,9 @@
-const _ = imports.applet._;
-const Graph = imports.applet.graph;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Graph = applet.graph;
+const Modules = applet.modules;
 
 const name = "cpu";
 const display = _("CPU");
@@ -213,15 +216,28 @@ HistoryGraph.prototype = {
     draw: function(){
         this.begin(this.count, this.history.user[0].length);
 
-        for(let i = 0; i < this.count; ++i){
-            this.next("core" + (i % 4 + 1));
+        if(this.settings.appearance === "stack"){
+            for(let i = this.count; i--; ){
+                this.next("core" + (i % 4 + 1));
 
-            if(this.settings.cpuSplit === "user-system"){
-                this.line(this.history.user[i]);
-                this.setAlpha(.75);
-                this.line(this.history.system[i]);
-            } else
-                this.line(this.history.usage[i]);
+                if(this.settings.split === "user-system"){
+                    this.line(this.history.user[i]);
+                    this.setAlpha(.75);
+                    this.line(this.history.system[i]);
+                } else
+                    this.line(this.history.usage[i]);
+            }
+        } else {
+            for(let i = 0; i < this.count; ++i){
+                this.next("core" + (i % 4 + 1));
+
+                if(this.settings.split === "user-system"){
+                    this.line(this.history.user[i], true);
+                    this.setAlpha(.75);
+                    this.line(this.history.system[i]);
+                } else
+                    this.line(this.history.usage[i]);
+            }
         }
     }
 };

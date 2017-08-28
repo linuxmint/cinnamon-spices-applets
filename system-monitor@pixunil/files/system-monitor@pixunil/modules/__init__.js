@@ -8,14 +8,13 @@ const Settings = imports.ui.settings;
 
 const messageTray = Main.messageTray;
 
-const uuid = imports.applet.uuid;
-const iconName = imports.applet.iconName;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
 
-const _ = imports.applet._;
-const bind = imports.applet.bind;
-const dashToCamelCase = imports.applet.dashToCamelCase;
-
-const SettingsProvider = imports.applet.applet.SettingsProvider;
+const _ = applet._;
+const bind = applet.bind;
+const iconName = applet.iconName;
+const dashToCamelCase = applet.dashToCamelCase;
 
 // prefixes for byte sizes (kilo, mega, giga, …)
 const PREFIX = " KMGTEZY";
@@ -123,7 +122,12 @@ const ModulePartPrototype = {
     },
 
     formatThermal: function(celsius = 0){
-        let number = this.settings.thermalUnit? celsius : celsius * 1.8 + 32;
+        let number = celsius;
+
+        // convert value respecting the unit if needed
+        if(this.settings.thermalUnit === "fahrenheit")
+            number = celsius * 1.8 + 32;
+
         let unit;
         // use unicode to represent the unit, it combines both degree symbol and character
         if(this.settings.thermalUnit === "celsius")
@@ -139,16 +143,16 @@ const ModulePartPrototype = {
     },
 
     // shortcuts
-    get name(){
-        return this.module.name;
-    },
-
     get settings(){
         return this.module.settings;
     },
 
     get modules(){
         return this.module.modules;
+    },
+
+    get vertical(){
+        return this.module.container.vertical;
     },
 
     get time(){
@@ -189,55 +193,12 @@ function ModulePart(superClass){
     return proto;
 }
 
-function ModuleSettings(){
-    this.init.apply(this, arguments);
-}
-
-ModuleSettings.prototype = {
-    __proto__: SettingsProvider.prototype,
-
-    init: function(module, appletSettings, instanceId){
-        this.name = module.import.name;
-        // some settings of the applet settings object will be used,
-        // for that reason the module settings object has it as prototype
-        module.settings = {
-            __proto__: appletSettings
-        };
-
-        SettingsProvider.prototype.init.call(this, module.settings, instanceId);
-
-        let keys = ["enabled"];
-
-        if(module.import.additionalSettingKeys)
-            keys = keys.concat(module.import.additionalSettingKeys);
-
-        if(module.import.HistoryGraph)
-            keys.push("appearance", "panel-graph", "panel-width");
-
-        if(module.import.PanelLabel)
-            keys.push("panel-label");
-
-        if(module.import.colorSettingKeys)
-            keys = keys.concat(module.import.colorSettingKeys.map(key => "color-" + key));
-
-        this.bindProperties(keys, bind(module.onSettingsChanged, module));
-    },
-
-    bindProperty: function(key, callback){
-        let keyCamelCase = dashToCamelCase(key);
-        // prepend the module name and a dash
-        key = this.name + "-" + key;
-
-        Settings.AppletSettings.prototype.bindProperty.call(this, Settings.BindingDirection.IN, key, keyCamelCase, callback);
-    }
-};
-
 function Module(){
     this.init.apply(this, arguments);
 }
 
 Module.prototype = {
-    init: function(imports, container, sensorLines, instanceId){
+    init: function(imports, container, sensorLines){
         this.import = imports;
         this.display = imports.display;
 
@@ -245,14 +206,14 @@ Module.prototype = {
             // the swap module shares its settings with memory, for this reason only a simple reference is needed
             this.settings = container.modules[imports.settingsName].settings;
             // as changed values will only be reported to the owning module, connect to them
-            let settingsProvider = container.modules[imports.settingsName].settingsProvider;
+            let settingsProvider = container.settingsProvider;
             settingsProvider.connect("settings-changed", bind(this.onSettingsChanged, this));
         } else {
             if(imports.colorSettingKeys)
                 this.colorSettingKeys = imports.colorSettingKeys;
 
-            // for all other modules an own settings object and provider is created
-            this.settingsProvider = new ModuleSettings(this, container.settings, instanceId);
+            // for all other modules an own settings object is created
+            container.settingsProvider.bindModule(this);
         }
 
         this.container = container;
@@ -329,11 +290,6 @@ Module.prototype = {
             this.panelWidget.onSettingsChanged();
         if(this.graphMenuItem)
             this.graphMenuItem.onSettingsChanged(this.settings.enabled);
-    },
-
-    finalize: function(){
-        if(this.settingsProvider)
-            this.settingsProvider.finalize();
     }
 };
 
@@ -371,12 +327,12 @@ BaseDataProvider.prototype = {
         while(history.length > this.settings.graphSteps + 2)
             history.shift();
 
-        if(this.min !== undefined && (!this.min || this.min > value)){
+        if(this.min !== undefined && (this.min === null || this.min > value)){
             this.min = value;
             this.minIndex = history.length;
         }
 
-        if(this.max !== undefined && (!this.max || this.max < value)){
+        if(this.max !== undefined && (this.max === null || this.max < value)){
             this.max = value;
             this.maxIndex = history.length;
         }
@@ -534,19 +490,20 @@ BaseMenuItem.prototype = {
     },
 
     makeBox: function(labelWidths, margin, tooltip){
-        if(labelWidths === undefined)
-            labelWidths = this.labelWidths;
-
-        if(margin === undefined)
-            margin = this.margin || 0;
+        labelWidths = labelWidths || this.labelWidths;
+        margin = (margin || this.margin || 0) + "px";
 
         let box = new St.BoxLayout;
         let container = [];
 
-        if(tooltip)
-            box.add_actor(new St.Label({text: this.module.display, width: 85, margin_right: margin, style: "text-align: left"}));
-        else
-            box.margin_left = margin;
+        if(tooltip){
+            box.add_actor(new St.Label({
+                text: this.module.display, width: 85,
+                style: "text-align: left; margin-right: " + margin
+            }));
+        } else {
+            box.style = "margin-left: " + margin;
+        }
 
         for(let i = 0, l = labelWidths.length; i < l; ++i){
             let label = new St.Label({width: labelWidths[i], style: "text-align: right"});
@@ -616,16 +573,10 @@ BaseSubMenuMenuItem.prototype = {
     makeBox: BaseMenuItem.prototype.makeBox,
     makeTooltip: BaseMenuItem.prototype.makeTooltip,
 
-    addRow: function(label, labels, margin){
-        if(labels === undefined)
-            labels = this.labels;
-
-        if(margin === undefined)
-            margin = this.margin;
-
+    addRow: function(label, labelWidths, margin){
         let menuItem = new PopupMenu.PopupMenuItem(label, {reactive: false});
         this.menu.addMenuItem(menuItem);
-        let box = this.makeBox(labels, margin);
+        let box = this.makeBox(labelWidths, margin);
         menuItem.addActor(box);
     },
 
@@ -671,6 +622,9 @@ GraphMenuItem.prototype = {
     }
 };
 
+const newlineRegExp = /[%$\\]n/g;
+const panelLabelRegExp = /[%$](\w+(?:\(\d+\))?)(?:\.(\w+))?(?:#(\w+))?/g;
+
 function PanelWidget(){
     this.init.apply(this, arguments);
 }
@@ -685,8 +639,8 @@ PanelWidget.prototype = {
 
         if(module.import.PanelLabel){
             this.label = new St.Label({reactive: true, track_hover: true, style_class: "applet-label"});
-            this.label.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
-            this.box.add(this.label, {y_align: St.Align.MIDDLE, y_fill: false});
+            this.box.add(this.label, {x_align: St.Align.MIDDLE, x_fill: false,
+                y_align: St.Align.MIDDLE, y_fill: false});
 
             this.panelLabel = new module.import.PanelLabel(module);
         }
@@ -700,17 +654,17 @@ PanelWidget.prototype = {
                 new module.import.BarGraph(this.canvas, module),
                 new module.import.HistoryGraph(this.canvas, module)
             ];
-
-            // inform the history graph that a horizontal packing is now required
-            this.graphs[1].packDir = "horizontal";
         }
     },
 
     update: function(){
         if(this.settings.panelLabel && this.label){
-            let text = this.settings.panelLabel.replace(/[%$](\w+(?:\(\d+\))?)(?:\.(\w+))?(?:#(\w+))?/g, bind(this.panelLabelReplace, this));
-            this.label.set_text(text);
-            this.label.margin_left = text.length? 6 : 0;
+            // replace the %n placeholder with the matching whitespace
+            let whitespace = this.vertical? "\n" : " ";
+            let text = this.settings.panelLabel.replace(newlineRegExp, whitespace);
+            // replace the module placeholders
+            text = text.replace(panelLabelRegExp, bind(this.panelLabelReplace, this));
+            this.label.text = text;
         }
     },
 
@@ -732,14 +686,16 @@ PanelWidget.prototype = {
                 // in the case nothing applies, use the standard value
                 let subUsed = this.panelLabel.defaultSub;
 
-                for(let name in this.panelLabel.sub){
-                    // run the regEx against the matched sub part
-                    let result = sub.match(this.panelLabel.sub[name]);
+                if(sub){
+                    for(let name in this.panelLabel.sub){
+                        // run the regEx against the matched sub part
+                        let result = sub.match(this.panelLabel.sub[name]);
 
-                    // when it success, use it
-                    if(result){
-                        subUsed = name;
-                        break;
+                        // when it success, use it
+                        if(result){
+                            subUsed = name;
+                            break;
+                        }
                     }
                 }
 
@@ -789,20 +745,39 @@ PanelWidget.prototype = {
         let showBox = false;
 
         if(this.label){
+            if(this.vertical)
+                this.label.clutter_text.ellipsize = Pango.EllipsizeMode.MIDDLE;
+            else
+                this.label.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
+
             let show = this.settings.enabled && this.settings.panelLabel !== "";
             this.label.visible = show;
             showBox = show;
         }
 
         if(this.canvas){
-            this.canvas.width = this.settings.panelWidth;
+            // the graph size setting is used for the height or width, depending
+            // on the orientation, the respective other dimension is set
+            // to zero, so it will take the space it needs
+            // additionally, the history graph will set to use
+            // horizontal or vertical packing
+            if(this.vertical){
+                this.canvas.width = 0;
+                this.canvas.height = this.settings.panelSize;
+                this.graphs[1].packDir = "vertical";
+            } else {
+                this.canvas.width = this.settings.panelSize;
+                this.canvas.height = 0;
+                this.graphs[1].packDir = "horizontal";
+            }
+
             let show = this.settings.enabled && this.settings.panelGraph !== -1;
             this.canvas.visible = show;
-            this.canvas.margin_left = show? 6 : 0;
 
             showBox = showBox || show;
         }
 
+        this.box.vertical = this.vertical;
         this.box.visible = showBox;
     }
 };
@@ -810,7 +785,12 @@ PanelWidget.prototype = {
 const PanelLabelPrototype = {
     __proto__: ModulePartPrototype,
 
+    // add spaces to prevent a "jumping around" of the applet due to resizing
     addSpaces: function(number, spaces = 3){
+        // in vertical panels, no extra characters are needed
+        if(this.vertical)
+            return "";
+
         // calculate written digits and remove those spaces
         if(number > 0)
             spaces -= Math.floor(Math.log(number) / Math.log(10)) + 1;
@@ -859,17 +839,20 @@ const PanelLabelPrototype = {
 
     formatPercent: function(part, total = 1){
         let percent = 100 * part / total;
-        return this.addSpaces(percent) + percent.toFixed(2) + "%";
+        return this.addSpaces(percent) + percent.toFixed(1) + "%";
     },
 
     formatThermal: function(celsius = 0){
-        let number = this.settings.thermalUnit? celsius : celsius * 1.8 + 32;
-        let unit;
+        let number, unit;
+
         // use unicode to represent the unit, it combines both degree symbol and character
-        if(this.settings.thermalUnit === "celsius")
+        if(this.settings.thermalUnit === "celsius"){
+            number = celsius;
             unit = "℃";
-        else
+        } else {
+            number = celsius * 1.8 + 32;
             unit = "℉";
+        }
 
         return this.addSpaces(number) + number.toFixed(1) + unit;
     },
