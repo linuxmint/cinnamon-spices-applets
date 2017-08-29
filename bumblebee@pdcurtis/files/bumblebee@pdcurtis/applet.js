@@ -354,7 +354,8 @@ MyApplet.prototype = {
    try {
          if(this.bbst == "OFF") {
                this.set_applet_label(""); 
-               this.hide_applet_label(true);
+//               this.hide_applet_label(true);
+               if (!this.isHorizontal) { this.hide_applet_label(true) }; 
                this.set_applet_tooltip(_("NVidia based GPU is Off")); 
                this.set_applet_icon_path(this.intel_icon);
          }
@@ -367,9 +368,11 @@ MyApplet.prototype = {
 
                 if (!this.showGpuTemp ) {
 	                  this.set_applet_label("");
-                      this.hide_applet_label(true);
+//                      this.hide_applet_label(true);
+                      if (!this.isHorizontal) { this.hide_applet_label(true) }; 
                  } else { 
-                      this.hide_applet_label(false);
+//                      this.hide_applet_label(false);
+                      if (!this.isHorizontal) { this.hide_applet_label(false) }; 
                       if ( this.nvidiagputemp < 100 || this.isHorizontal )  { 
                            this.set_applet_label(this.nvidiagputemp + "\u1d3c" );
                       } else {
@@ -388,7 +391,8 @@ MyApplet.prototype = {
          if(this.bbst == "ERROR" || this.bumblebeeMissing) {
 	          this.set_applet_label(_("Err" )); 
               this.set_applet_tooltip(_("Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia drivers installed?")); 
-              this.hide_applet_label(false);       
+//              this.hide_applet_label(false);
+                 if (!this.isHorizontal) { this.hide_applet_label(false) };        
          }
       } catch (e) {
           global.logError(e);
@@ -468,4 +472,7 @@ v30_3.1.0  Changed help file from help.txt to README.md
  * Update bumblebee.pot to identify changes which need to be translated
 ### 3.2.3
  * Change to the check added in 3.2.1 that bumblebee is installed. This solves an issue reported when applet used with LMDE (issue #1136).
+### 3.2.4
+Fix to allow use with early versions of Cinnamon
+ * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
 */
