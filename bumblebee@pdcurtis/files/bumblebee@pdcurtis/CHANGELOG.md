@@ -1,5 +1,11 @@
 ## Changelog for recent versions
 
+### 3.2.4
+
+Fix to allow use with early versions of Cinnamon
+
+ * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
+
 ### 3.2.3
 
  * Change to the check added in 3.2.1 that bumblebee is installed. This solves an issue reported when applet used with LMDE (issue #1136).
