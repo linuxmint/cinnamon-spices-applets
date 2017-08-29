@@ -279,7 +279,7 @@ MyApplet.prototype = {
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Note: Alerts not enabled in Settings"), {
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Waiting for battery information"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo2);
@@ -424,16 +424,19 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
     this.batteryMessage = ""
              }
 
-             if ( this.displayType == "icon" ) {
-                 this.hide_applet_label(true); 
-             } else {
-                 this.hide_applet_label(false);
-             }
+
 
              if (this.batteryPercentage == 100 && !this.isHorizontal ) { 
                 this.set_applet_label(this.batteryMessage + this.batteryPercentage + "");
              } else {
                 this.set_applet_label(this.batteryMessage + this.batteryPercentage + "%");
+             }
+
+             if ( this.displayType == "icon" ) {
+                 this.set_applet_label("");
+                 if (!this.isHorizontal) { this.hide_applet_label(true) }; 
+             } else {
+                 if (!this.isHorizontal) { this.hide_applet_label(false) };
              }
 
             // Set left click menu item 'label' for slider 
@@ -540,5 +543,9 @@ Now includes support for Vertical Panels, Battery icons and 5 display modes
  * Code comments improved and some commented out code removed.
  * Update README.md, CHANGELOG.md and metadata.json
  * Recreate batterymonitor.pot to allow translation support to be updated.
+### 1.3.1
+Bug Fix for use with early versions of Cinnamon
+ * Inhibited use of hide_applet_label() to Cinnamon version 3.2 or higher in vertical panels.
+ * Corrected Icon Only display mode
 */
 
