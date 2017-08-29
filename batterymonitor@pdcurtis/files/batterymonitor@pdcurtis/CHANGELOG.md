@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.3.1
+
+Bug Fix for use with early versions of Cinnamon
+ * Inhibited use of hide_applet_label() to Cinnamon version 3.2 or higher in vertical panels.
+
 ### 1.3.0
 
 Major update - now includes support for Vertical Panels, Battery icons and 5 Display Modes
