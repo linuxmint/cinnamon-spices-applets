@@ -1,4 +1,5 @@
 // Multi-core System Monitor.
+// Copyright (C) 2017 Jason Hicks <jaszhix@gmail.com>.
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 //
 // Multi-core System Monitor is libre software: you can redistribute it and/or modify it
@@ -7,38 +8,25 @@
 //
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
-/*  Imports SearchPath
- * 0 /usr/share/cinnamon/js
- * 1 /usr/share/cinnamon/gjs-1.0
- * 2 /usr/share/gnome/gjs-1.0
- * 3 /usr/local/share/gjs-1.0
- * 4 /usr/share/gjs-1.0
- * 5 /usr/share/mdm/gjs-1.0
- * 6 /usr/lib/gjs-1.0
- * 7 /usr/share/gjs-1.0
- * 8 ~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23 (via metadata)
- * */
-var ImportError = false; //flag import error
-var ImportErrorMsg = '';
-// Todo: clean up this try-catch
+
+const Applet = imports.ui.applet;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const St = imports.gi.St;
+const Gtk = imports.gi.Gtk;
+const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
+const Gettext = imports.gettext;
+let GTop;
 try {
-  var Applet = imports.ui.applet;
-  var Lang = imports.lang;
-  var Mainloop = imports.mainloop;
-  var St = imports.gi.St;
-  var Gtk = imports.gi.Gtk;
-  var GLib = imports.gi.GLib;
-  var Gio = imports.gi.Gio;
-  var Cinnamon = imports.gi.Cinnamon;
-  var Gettext = imports.gettext;
-  var GTop = imports.gi.GTop; //psst this is really only to see if we can
-  var UUID = 'multicore-sys-monitor@ccadeptic23';
-  var Util = imports.misc.util;
-} catch (err) {
-  ImportError = true;
-  global.logError(err);
-  ImportErrorMsg = err.toString();
+  GTop = imports.gi.GTop;
+} catch (e) {
+  global.logError(e);
+  GTop = null;
 }
+const UUID = 'multicore-sys-monitor@ccadeptic23';
+const Util = imports.misc.util;
 
 const AppletDir = imports.ui.appletManager.applets[UUID];
 const ConfigSettings = AppletDir.ConfigSettings.ConfigSettings;
@@ -65,10 +53,10 @@ if (!Array.prototype.findIndex) {
         throw new TypeError('"this" is null or not defined');
       }
 
-      var o = Object(this);
+      let o = Object(this);
 
       // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
+      let len = o.length >>> 0;
 
       // 3. If IsCallable(predicate) is false, throw a TypeError exception.
       if (typeof predicate !== 'function') {
@@ -76,10 +64,10 @@ if (!Array.prototype.findIndex) {
       }
 
       // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      var thisArg = arguments[1];
+      let thisArg = arguments[1];
 
       // 5. Let k be 0.
-      var k = 0;
+      let k = 0;
 
       // 6. Repeat, while k < len
       while (k < len) {
@@ -87,7 +75,7 @@ if (!Array.prototype.findIndex) {
         // b. Let kValue be ? Get(O, Pk).
         // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
         // d. If testResult is true, return k.
-        var kValue = o[k];
+        let kValue = o[k];
         if (predicate.call(thisArg, kValue, k, o)) {
           return k;
         }
@@ -103,63 +91,70 @@ if (!Array.prototype.findIndex) {
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
 if (!String.prototype.padStart) {
-  String.prototype.padStart = function padStart(targetLength,padString) {
-      targetLength = targetLength>>0; //floor if number or convert non-number to 0;
-      padString = String(padString || ' ');
-      if (this.length > targetLength) {
-          return String(this);
+  String.prototype.padStart = function padStart(targetLength, padString) {
+    targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
+    padString = String(padString || ' ');
+    if (this.length > targetLength) {
+      return String(this);
+    } else {
+      targetLength = targetLength - this.length;
+      if (targetLength > padString.length) {
+        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
       }
-      else {
-          targetLength = targetLength-this.length;
-          if (targetLength > padString.length) {
-              padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
-          }
-          return padString.slice(0,targetLength) + String(this);
-      }
+      return padString.slice(0, targetLength) + String(this);
+    }
   };
 }
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
 if (!String.prototype.padEnd) {
-  String.prototype.padEnd = function padEnd(targetLength,padString) {
-      targetLength = targetLength>>0; //floor if number or convert non-number to 0;
-      padString = String(padString || ' ');
-      if (this.length > targetLength) {
-          return String(this);
+  String.prototype.padEnd = function padEnd(targetLength, padString) {
+    targetLength = targetLength >> 0; //floor if number or convert non-number to 0;
+    padString = String(padString || ' ');
+    if (this.length > targetLength) {
+      return String(this);
+    } else {
+      targetLength = targetLength - this.length;
+      if (targetLength > padString.length) {
+        padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
       }
-      else {
-          targetLength = targetLength-this.length;
-          if (targetLength > padString.length) {
-              padString += padString.repeat(targetLength/padString.length); //append to original to ensure we are longer than needed
-          }
-          return String(this) + padString.slice(0,targetLength);
-      }
+      return String(this) + padString.slice(0, targetLength);
+    }
   };
 }
 
-function MyApplet(metadata, orientation) {
-  this._init(metadata, orientation);
+const properties = [
+  {graph: 'multiCpuGraph', provider: 'multiCpuProvider', abbrev: 'CPU'},
+  {graph: 'memoryGraph', provider: 'memoryProvider', abbrev: 'MEM'},
+  {graph: 'swapGraph', provider: 'swapProvider', abbrev: 'Swap'},
+  {graph: 'networkGraph', provider: 'networkProvider', abbrev: 'NET'},
+  {graph: 'diskGraph', provider: 'diskProvider', abbrev: 'Disk'}
+];
+
+function MyApplet(metadata, orientation, panel_height) {
+  this._init(metadata, orientation, panel_height);
 }
 
 MyApplet.prototype = {
   __proto__: Applet.Applet.prototype,
 
-  _init: function(metadata, orientation) {
+  _init: function(metadata, orientation, panel_height) {
     Applet.Applet.prototype._init.call(this, orientation);
 
     this.childProcessHandler = null;
 
     this.metadata = metadata;
+    this._panelHeight = panel_height;
     this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
 
     let configFile = Gio.file_new_for_path(this.configFilePath);
 
     if (!configFile.query_exists(null)) {
       Util.spawnCommandLineAsync('mkdir ' + this.configFilePath, () => {
-        this.__init();
+        this.__init(panel_height);
       });
     } else {
-      this.__init();
+      this.__init(panel_height);
     }
   },
 
@@ -168,69 +163,71 @@ MyApplet.prototype = {
 
     this._initContextMenu();
 
-    //this.gtop = new GTop.glibtop_cpu();
-
     this.graphArea = new St.DrawingArea();
 
-    this.graphArea.width = this.getAppletWidth();
-    this.graphArea.height = this.configSettings.getHeight();
+    this.graphArea.width = 1;
+    this.graphArea.height = this._panelHeight * global.ui_scale;
+
     this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
 
     this.multiCpuProvider = new DataProviders.MultiCpuDataProvider();
-    //resize the cpucolorslist from the potential newcpucount
     this.configSettings.adjustCPUcount(this.multiCpuProvider.getCPUCount());
 
-    this.memProvider = new DataProviders.MemDataProvider();
+    this.memoryProvider = new DataProviders.MemDataProvider();
     this.swapProvider = new DataProviders.SwapDataProvider();
+    this.networkProvider = new DataProviders.NetDataProvider();
+    this.diskProvider = new DataProviders.DiskDataProvider();
 
-    // Defer the remaining initialization as netProvider and diskProvider classes have been
-    // isolated with causing GTop init errors on mozjs38.
-    // Better fix should be considered.
-    Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => {
-      this.netProvider = new DataProviders.NetDataProvider();
-      this.diskProvider = new DataProviders.DiskDataProvider();
-      this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
-      this.diskProvider.setDisabledDevices(this.configSettings.getDiskDisabledDevices());
+    this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
+    this.diskProvider.setDisabledDevices(this.configSettings.getDiskDisabledDevices());
 
-      this.configSettings.adjustNetInterfaces(Object.keys(this.netProvider.getNetDevices()));
-      this.netProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
+    this.configSettings.adjustNetInterfaces(Object.keys(this.networkProvider.getNetDevices()));
+    this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
 
-      this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this.multiCpuProvider);
-      this.memGraph = new Graphs.GraphPieChart(this.graphArea, this.memProvider);
-      this.swapGraph = new Graphs.GraphVBars(this.graphArea, this.swapProvider);
+    this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this.multiCpuProvider);
+    this.memoryGraph = new Graphs.GraphPieChart(this.graphArea, this.memoryProvider);
+    this.swapGraph = new Graphs.GraphVBars(this.graphArea, this.swapProvider);
 
-      this.netGraph = new Graphs.GraphLineChart(this.graphArea, this.netProvider, this.configSettings.getNETWidth());
-      this.netGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
-      this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
-      this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
+    this.networkGraph = new Graphs.GraphLineChart(this.graphArea, this.networkProvider, this.configSettings._prefs.net.width);
+    //For us this means the heighest point wont represent a valuelower than 1Kb/s
+    this.networkGraph.setMinScaleYvalue(1.0);
+    this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
+    this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
 
-      this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.diskProvider, this.configSettings.getDiskWidth());
-      this.diskGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
-      this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
-      this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
+    this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.diskProvider, this.configSettings._prefs.disk.width);
+    this.diskGraph.setMinScaleYvalue(1.0);
+    this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
+    this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
-      this.graphs = [];
-      this.graphs[0] = this.multiCpuGraph;
-      this.graphs[1] = this.memGraph;
-      this.graphs[2] = this.swapGraph;
-      this.graphs[3] = this.netGraph;
-      this.graphs[4] = this.diskGraph;
+    this.actor.add_actor(this.graphArea);
+    this._update();
+  },
 
-      this.actor.add_actor(this.graphArea);
-      this._update();
-    });
+  on_panel_height_changed: function() {
+    this.graphArea.set_height(this._panelHeight);
+  },
+
+  destroy: function() {
+    this.graphArea.destroy();
+    this.actor.destroy();
+    Applet.Applet.prototype.destroy.call(this);
+    let props = Object.keys(this);
+    for (let i = 0; i < props.length; i++) {
+      this[props[i]] = undefined;
+    }
   },
 
   _initContextMenu: function() {
+    // Todo - make this a submenu item
     let preferences_menu_item = new Applet.MenuItem(_('Preferences'), Gtk.STOCK_EDIT, Lang.bind(this, this.launchPreferences));
     this._applet_context_menu.addMenuItem(preferences_menu_item);
     this.out_reader = null;
   },
   launchPreferences: function() {
-    var currprefs = this.configSettings.getCurrentPreferencesString();
-    print(this.configFilePath, ['prefs.js', currprefs]);
+    let currentPreferences = JSON.stringify(this.configSettings._prefs);
     if (this.childProcessHandler == null) {
-      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.metadata.path, ['prefs.js', currprefs]);
+      // TBD
+      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.metadata.path, ['prefs.js', currentPreferences]);
     }
   },
   on_orientation_changed: function(orientation) {
@@ -238,9 +235,10 @@ MyApplet.prototype = {
   },
 
   _runSysMon: function() {
-    let _appSys = Cinnamon.AppSystem.get_default();
-    let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-    _gsmApp.activate();
+    let gnomeSystemMonitor = appSystem.lookup_app('gnome-system-monitor.desktop');
+    if (gnomeSystemMonitor) {
+      gnomeSystemMonitor.activate();
+    }
   },
 
   on_applet_clicked: function(event) {
@@ -249,13 +247,12 @@ MyApplet.prototype = {
 
   _update: function() {
     if (this.childProcessHandler != null) {
-      var currentmsg = this.childProcessHandler.getCurrentMessage();
+      let currentMessage = this.childProcessHandler.getCurrentMessage();
 
-      if (currentmsg === 'SAVE') {
+      if (currentMessage === 'SAVE') {
         this.configSettings.saveSettings();
-      } else if (currentmsg !== 'SAVE' && currentmsg !== '') {
-        //currentmsg is "" when we have not had time to read anything yet
-        this.configSettings.updateSettings(currentmsg);
+      } else if (currentMessage !== 'SAVE' && currentMessage !== '') {
+        this.configSettings.updateSettings(currentMessage);
       }
 
       if (this.childProcessHandler.isChildFinished()) {
@@ -263,161 +260,85 @@ MyApplet.prototype = {
         this.childProcessHandler = null;
       }
     }
-    //Do any required processing when configuration changes
-    this.netProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
-    this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
-    this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
-    //check for new drives that are mounted
+    // Do any required processing when configuration changes
+    this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
+    this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
+    this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+    // check for new drives that are mounted
     this.configSettings.adjustDiskDevices(Object.keys(this.diskProvider.getDiskDevices()));
-    this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
-    this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
+    this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
+    this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
-    //update data from providers.. a bit convoluted i may change later
+    // Set the Applet Tooltip
+    let appletTooltipString = '';
 
-    this.multiCpuProvider.isEnabled = this.configSettings.isCPUEnabled();
-    this.memProvider.isEnabled = this.configSettings.isMEMEnabled();
-    this.netProvider.isEnabled = this.configSettings.isNETEnabled();
-    this.diskProvider.isEnabled = this.configSettings.isDiskEnabled();
-
-    for (var i = 0; i < this.graphs.length; i++) {
-      this.graphs[i].refreshData();
+    for (let i = 0; i < properties.length; i++) {
+      if (properties[i].abbrev !== 'Swap') {
+        this[properties[i].provider].isEnabled = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].enabled;
+      }
+      this[properties[i].graph].refreshData();
+      appletTooltipString += this[properties[i].provider].getTooltipString();
     }
-
-    //global.logError(this.diskProvider.getData());
 
     this.graphArea.queue_repaint();
+    this.set_applet_tooltip(appletTooltipString);
 
-    //Set the Applet Tooltip
-    var appletTooltipstr = '';
-    appletTooltipstr += this.multiCpuProvider.getTooltipString();
-    appletTooltipstr += this.memProvider.getTooltipString();
-    appletTooltipstr += this.swapProvider.getTooltipString();
-    appletTooltipstr += this.netProvider.getTooltipString();
-    appletTooltipstr += this.diskProvider.getTooltipString();
-    this.set_applet_tooltip(appletTooltipstr.trim());
-
-    //set next refresh time
-    Mainloop.timeout_add(this.configSettings.getRefreshRate(), Lang.bind(this, this._update));
-  },
-  getAppletWidth: function() {
-    var appwidth = 0;
-
-    if (this.configSettings.isCPUEnabled()) {
-      appwidth += this.configSettings.getCPUWidth() + 1;
-    }
-    if (this.configSettings.isMEMEnabled()) {
-      appwidth += this.configSettings.getMEMWidth() + 1;
-    }
-    if (this.configSettings.isNETEnabled()) {
-      appwidth += this.configSettings.getNETWidth() + 1;
-    }
-    if (this.configSettings.isDiskEnabled()) {
-      appwidth += this.configSettings.getDiskWidth() + 1;
-    }
-
-    appwidth--; //last one doesnt need the pixel space between
-    //prevents error when all are disabled
-    if (appwidth <= 0) {
-      appwidth = 1;
-    }
-
-    return appwidth;
+    // set next refresh time
+    Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
   onGraphRepaint: function(area) {
-    try {
-      area.get_context().translate(0, 2);
-      var xoffset = 0;
-      if (this.configSettings.isCPUEnabled()) {
-        area.get_context().translate(xoffset, 0);
-        this.multiCpuGraph.paint(
-          area,
-          this.configSettings.getLabelsOn(),
-          this.configSettings.getCPUWidth(),
-          this.configSettings.getHeight(),
-          this.configSettings.getLabelColor(),
-          this.configSettings.getBackgroundColor(),
-          this.configSettings.getCPUColorList()
-        );
-
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
-        xoffset += this.configSettings.getCPUWidth() + 1; //update xoffset for next translation
+    let xOffset = 0;
+    let appletWidth = 0;
+    area.get_context().translate(xOffset, 2);
+    for (let i = 0; i < properties.length; i++) {
+      if (properties[i].abbrev === 'Swap') {
+        continue;
       }
-
-      if (this.configSettings.isMEMEnabled()) {
-        area.get_context().translate(xoffset, 0); //translate origin to the new location for the graph
-        //paint the "swap" backdrop
-        this.swapGraph.paint(
+      if (this[properties[i].provider].isEnabled) {
+        // translate origin to the new location for the graph
+        area.get_context().translate(xOffset, 0);
+        let width = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].width * global.ui_scale;
+        appletWidth += width;
+        if (properties[i].abbrev === 'MEM') {
+          // paint the "swap" backdrop
+          this.swapGraph.paint(
+            area,
+            // no label for the backdrop
+            false,
+            width,
+            this._panelHeight * global.ui_scale,
+            [0, 0, 0, 0],
+            // clear background so that it doesn't mess up the other one
+            [0, 0, 0, 0],
+            this.configSettings.getSwapColorList()
+          );
+        }
+        this[properties[i].graph].paint(
           area,
-          false, //never use labels for the backdrop
-          this.configSettings.getMEMWidth(),
-          this.configSettings.getHeight(),
-          [0, 0, 0, 0],
-          [0, 0, 0, 0], //want a clear background so that it doesnt mess up the other one
-          this.configSettings.getSwapColorList()
+          this.configSettings._prefs.labelsOn,
+          width,
+          this._panelHeight * global.ui_scale,
+          this.configSettings._prefs.labelColor,
+          this.configSettings._prefs.backgroundColor,
+          this.configSettings['get' + properties[i].abbrev + 'ColorList']()
         );
-
-        //paint the memory piechart over it
-        this.memGraph.paint(
-          area,
-          this.configSettings.getLabelsOn(),
-          this.configSettings.getMEMWidth(),
-          this.configSettings.getHeight(),
-          this.configSettings.getLabelColor(),
-          this.configSettings.getBackgroundColor(),
-          this.configSettings.getMEMColorList()
-        );
-
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
-        xoffset += this.configSettings.getMEMWidth() + 1; //update xoffset for next translation
+        // return translation to origin
+        area.get_context().translate(-1 * xOffset, 0);
+        // update xOffset for next translation
+        xOffset += width + 1;
       }
-      if (this.configSettings.isNETEnabled()) {
-        area.get_context().translate(xoffset, 0); //translate origin to the new location for the graph
-
-        //paint the memory piechart over it
-        this.netGraph.paint(
-          area,
-          this.configSettings.getLabelsOn(),
-          this.configSettings.getNETWidth(),
-          this.configSettings.getHeight(),
-          this.configSettings.getLabelColor(),
-          this.configSettings.getBackgroundColor(),
-          this.configSettings.getNETColorList()
-        );
-
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
-        xoffset += this.configSettings.getNETWidth() + 1; //update xoffset for next translation
-      }
-      if (this.configSettings.isDiskEnabled()) {
-        area.get_context().translate(xoffset, 0); //translate origin to the new location for the graph
-
-        //paint the memory piechart over it
-        this.diskGraph.paint(
-          area,
-          this.configSettings.getLabelsOn(),
-          this.configSettings.getDiskWidth(),
-          this.configSettings.getHeight(),
-          this.configSettings.getLabelColor(),
-          this.configSettings.getBackgroundColor(),
-          this.configSettings.getDiskColorList()
-        );
-
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
-        xoffset += this.configSettings.getDiskWidth() + 1; //update xoffset for next translation
-      }
-      area.set_width(this.getAppletWidth());
-    } catch (e) {
-      global.logError('in onGraphRepaint: ' + e.stack);
     }
+    appletWidth = appletWidth > 0 ? appletWidth : 1;
+    area.set_width(appletWidth);
+    area.set_height(this._panelHeight);
   }
 };
 
-function main(metadata, orientation) {
-  if (ImportError) {
-    if (typeof GTop === 'undefined') {
-      errmsg = _('Please install "gir1.2-gtop-2.0" package.');
-    }
-    return new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+function main(metadata, orientation, panel_height) {
+  if (!GTop) {
+    let errorMessage = _('Please install "gir1.2-gtop-2.0" package.');
+    return new ErrorApplet.ErrorImportApplet(orientation, errorMessage);
   } else {
-    return new MyApplet(metadata, orientation);
+    return new MyApplet(metadata, orientation, panel_height);
   }
 }
