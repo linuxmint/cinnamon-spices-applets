@@ -1,9 +1,10 @@
 const GTop = imports.gi.GTop;
+const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
-const UUID = 'multicore-sys-monitor@ccadeptic23';
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
 
+const Gettext = imports.gettext;
+const UUID = 'multicore-sys-monitor@ccadeptic23';
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
 
 function _(str) {
@@ -24,6 +25,10 @@ const formatBytes = (bytes, decimals)=>{
   let i = Math.floor(Math.log(bytes) / Math.log(k));
   return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
 };
+
+const indent = '    ';
+const rate = _('/s');
+const spaces = 12;
 
 function MultiCpuDataProvider() {
   this._init();
@@ -230,14 +235,30 @@ NetDataProvider.prototype = {
     this.disabledDevices = disabledDevicesList;
   },
   getNetDevices: function(init = false) {
-    const devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+    let nmClient = NMClient.Client.new();
+    let devices = nmClient.get_devices();
+    let removedDeviceIndexes = [];
+    if (!devices) {
+      nmClient = undefined;
+      devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+    }
     for (let i = 0, len = devices.length; i < len; i++) {
+      if (nmClient) {
+        devices[i] = devices[i].get_iface();
+      }
       GTop.glibtop_get_netload(this.gtop, devices[i]);
       devices[i] = {
         id: devices[i],
         up: init ? 0 : this.gtop.bytes_in,
         down: init ? 0 : this.gtop.bytes_out
       };
+      if (this.disabledDevices.indexOf(devices[i]) > -1) {
+        removedDeviceIndexes.push(i);
+      }
+    }
+    for (let i = 0, len = removedDeviceIndexes.length; i < len; i++) {
+      devices[removedDeviceIndexes[i]] = undefined;
+      devices.splice(removedDeviceIndexes[i], 1);
     }
     return devices;
   },
@@ -247,9 +268,6 @@ NetDataProvider.prototype = {
     }
     this.getData();
     let toolTipString = _('------- Networks -------\n');
-    let indent = '    ';
-    let rate = '/s';
-    let spaces = 12;
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       let down = formatBytes(this.currentReadings[i].tooltipUp, 2);
       let up = formatBytes(this.currentReadings[i].tooltipDown, 2);
@@ -290,8 +308,8 @@ DiskDataProvider.prototype = {
         continue;
       }
       const currentReading = this.currentReadings[refCurrentReading];
-      newReadings[i].tooltipRead = Math.round(((newReadings[i].read - currentReading.read) / 1048576 / secondsSinceLastUpdate));
-      newReadings[i].tooltipWrite = Math.round(((newReadings[i].write - currentReading.write) / 1048576 / secondsSinceLastUpdate));
+      newReadings[i].tooltipRead = Math.round(((newReadings[i].read - currentReading.read) / secondsSinceLastUpdate));
+      newReadings[i].tooltipWrite = Math.round(((newReadings[i].write - currentReading.write) / secondsSinceLastUpdate));
       readingRatesList.push(newReadings[i].tooltipRead, newReadings[i].tooltipWrite);
     }
 
@@ -317,11 +335,13 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Disk ------- \n');
-    for (let i = 0; i < this.currentReadings.length; i++) {
-      toolTipString += this.currentReadings[i].id
-        + _(': R: ')  + this.currentReadings[i].tooltipRead + ' '
-        + _(': W: ') + this.currentReadings[i].tooltipWrite + _(' (MiB/s)\n');
+    let toolTipString = _('------- Disks ------- \n');
+    for (let i = 0, len = this.currentReadings.length; i < len; i++) {
+      let read = formatBytes(this.currentReadings[i].tooltipRead, 2);
+      let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
+      toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
+      toolTipString += indent + _('Read') + ':' + read.padStart(spaces) + rate + '\n';
+      toolTipString += indent  + _('Write') + ':   ' + write.padStart(spaces) + rate + '\n';
     }
     return toolTipString;
   },
