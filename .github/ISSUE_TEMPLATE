@@ -1,6 +1,4 @@
-[Applet's UUID should be in the title]
-
-Notify author of applet @GithubAuthor (Can be found here: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CODEOWNERS)
+<!-- Applet's UUID should be in the title -->
 
 ```
  * Applet version/Build date (to be found in "About.." or in "metadata.json")
@@ -11,6 +9,11 @@ Notify author of applet @GithubAuthor (Can be found here: https://github.com/lin
  * Snippet or attachment of ~/.xsession-errors
 
  ```
+
+<!-- Author list: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CODEOWNERS) -->
+
+**Notify author of applet**
+@
 
 **Issue**
 
