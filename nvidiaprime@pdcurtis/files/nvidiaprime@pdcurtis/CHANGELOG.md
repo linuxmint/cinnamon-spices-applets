@@ -1,5 +1,10 @@
 ## Changelog for recent versions
 
+### 3.3.3
+
+Fix to allow use with early versions of Cinnamon
+ * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
+
 ### 3.3.2
 
  * Updates to some tooltips and README.md to reflect the latest changes better.
