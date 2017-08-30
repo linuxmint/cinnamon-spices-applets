@@ -203,10 +203,10 @@ MyApplet.prototype = {
     this._update();
   },
 
-  destroy: function() {
+  on_applet_removed_from_panel: function() {
+    this.willUnmount = true;
     this.graphArea.destroy();
     this.actor.destroy();
-    Applet.Applet.prototype.destroy.call(this);
     let props = Object.keys(this);
     for (let i = 0; i < props.length; i++) {
       this[props[i]] = undefined;
@@ -242,6 +242,14 @@ MyApplet.prototype = {
   },
 
   _update: function() {
+    // This loops on interval, we need to make sure it stops when the xlet is removed.
+    if (this.willUnmount || !this.networkProvider) {
+      this.loopId = 0;
+      return false;
+    }
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+    }
     if (this.childProcessHandler != null) {
       let currentMessage = this.childProcessHandler.getCurrentMessage();
 
@@ -280,7 +288,7 @@ MyApplet.prototype = {
     this.set_applet_tooltip(appletTooltipString);
 
     // set next refresh time
-    Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
+    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
   onGraphRepaint: function(area) {
     let xOffset = 0;
