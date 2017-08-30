@@ -203,10 +203,6 @@ MyApplet.prototype = {
     this._update();
   },
 
-  on_panel_height_changed: function() {
-    this.graphArea.set_height(this._panelHeight);
-  },
-
   destroy: function() {
     this.graphArea.destroy();
     this.actor.destroy();
