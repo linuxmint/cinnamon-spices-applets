@@ -23,8 +23,8 @@ ConfigSettings.prototype = {
   getNETColorList: function() {
     return this.getDeviceColorList('net');
   },
-  isDeviceEnabled: function(deviceType, devname) {
-    return this._prefs[deviceType].devices[devname].enabled;
+  isDeviceEnabled: function(deviceType, deviceName) {
+    return this._prefs[deviceType].devices[deviceName].enabled;
   },
   getNETDisabledDevices: function() {
     let disabledDeviceList = [];
@@ -61,8 +61,8 @@ ConfigSettings.prototype = {
   getDiskColorList: function() {
     return this.getDeviceColorList('disk');
   },
-  adjustCPUcount: function(newcpucount) {
-    if (this._prefs.cpu.colors.length !== newcpucount) {
+  adjustCPUcount: function(newCPUCount) {
+    if (this._prefs.cpu.colors.length !== newCPUCount) {
       // only resize colors if necessary
       // incase the config is screwed up fix it
       if (this._prefs.cpu.colors.length <= 0) {
@@ -71,7 +71,7 @@ ConfigSettings.prototype = {
 
       let oldcpucount = this._prefs.cpu.colors.length;
       let newColors = [];
-      for (let i = 0; i < newcpucount; i++) {
+      for (let i = 0; i < newCPUCount; i++) {
         newColors[i] = this._prefs.cpu.colors[i % oldcpucount];
       }
       this._prefs.cpu.colors = newColors;
@@ -79,42 +79,42 @@ ConfigSettings.prototype = {
       this.saveSettings();
     }
   },
-  adjustDevices: function(deviceType, newdevlist) {
-    let ifacekeys = Object.keys(this._prefs[deviceType].devices);
-    let newdevicesobj = {};
-    let ischanged = false;
-    for (let i = 0; i < newdevlist.length; i++) {
-      if (ifacekeys.indexOf(newdevlist[i]) === -1) {
+  adjustDevices: function(deviceType, newDeviceList) {
+    let interfaceKeys = Object.keys(this._prefs[deviceType].devices);
+    let newDevicesObject = {};
+    let isChanged = false;
+    for (let i = 0; i < newDeviceList.length; i++) {
+      if (interfaceKeys.indexOf(newDeviceList[i].id) === -1) {
         //add it with new made up values
-        newdevicesobj[newdevlist[i]] = {
+        newDevicesObject[newDeviceList[i].id] = {
           enabled: true,
           show: true,
           colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
         };
-        ischanged = true;
+        isChanged = true;
       } else {
         //reuse it and its values
-        newdevicesobj[newdevlist[i]] = this._prefs[deviceType].devices[newdevlist[i]];
-        newdevicesobj[newdevlist[i]].show = true; //make sure it is not ignored
-        delete this._prefs[deviceType].devices[newdevlist[i]];
+        newDevicesObject[newDeviceList[i].id] = this._prefs[deviceType].devices[newDeviceList[i].id];
+        newDevicesObject[newDeviceList[i].id].show = true; //make sure it is not ignored
+        delete this._prefs[deviceType].devices[newDeviceList[i].id];
       }
     }
     //add unused ones in config, we should keep them you never know what happened
-    for (let devname in this._prefs[deviceType].devices) {
-      newdevicesobj[devname] = this._prefs[deviceType].devices[devname];
-      newdevicesobj[devname].show = false;
+    for (let deviceName in this._prefs[deviceType].devices) {
+      newDevicesObject[deviceName] = this._prefs[deviceType].devices[deviceName];
+      newDevicesObject[deviceName].show = false;
     }
-    this._prefs[deviceType].devices = newdevicesobj;
-    //to save or not to save... only if the devices have changed
-    if (ischanged) {
-      this.saveSettings(); //to save
+    this._prefs[deviceType].devices = newDevicesObject;
+    // save only if the devices have changed
+    if (isChanged) {
+      this.saveSettings();
     }
   },
-  adjustNetInterfaces: function(newdevlist) {
-    this.adjustDevices('net', newdevlist);
+  adjustNetInterfaces: function(newDeviceList) {
+    this.adjustDevices('net', newDeviceList);
   },
-  adjustDiskDevices: function(newdevlist) {
-    this.adjustDevices('disk', newdevlist);
+  adjustDiskDevices: function(newDeviceList) {
+    this.adjustDevices('disk', newDeviceList);
   },
   updateSettings: function(newprefsContent) {
     try {

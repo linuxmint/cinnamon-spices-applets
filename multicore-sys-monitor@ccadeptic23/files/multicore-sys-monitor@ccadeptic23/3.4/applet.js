@@ -181,7 +181,7 @@ MyApplet.prototype = {
     this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
     this.diskProvider.setDisabledDevices(this.configSettings.getDiskDisabledDevices());
 
-    this.configSettings.adjustNetInterfaces(Object.keys(this.networkProvider.getNetDevices()));
+    this.configSettings.adjustNetInterfaces(this.networkProvider.getNetDevices());
     this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
 
     this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this.multiCpuProvider);
@@ -265,7 +265,7 @@ MyApplet.prototype = {
     this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
     this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
     // check for new drives that are mounted
-    this.configSettings.adjustDiskDevices(Object.keys(this.diskProvider.getDiskDevices()));
+    this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
     this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
     this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
