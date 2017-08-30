@@ -181,7 +181,7 @@ MyApplet.prototype = {
     this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
     this.diskProvider.setDisabledDevices(this.configSettings.getDiskDisabledDevices());
 
-    this.configSettings.adjustNetInterfaces(Object.keys(this.networkProvider.getNetDevices()));
+    this.configSettings.adjustNetInterfaces(this.networkProvider.getNetDevices());
     this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
 
     this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this.multiCpuProvider);
@@ -203,14 +203,10 @@ MyApplet.prototype = {
     this._update();
   },
 
-  on_panel_height_changed: function() {
-    this.graphArea.set_height(this._panelHeight);
-  },
-
-  destroy: function() {
+  on_applet_removed_from_panel: function() {
+    this.willUnmount = true;
     this.graphArea.destroy();
     this.actor.destroy();
-    Applet.Applet.prototype.destroy.call(this);
     let props = Object.keys(this);
     for (let i = 0; i < props.length; i++) {
       this[props[i]] = undefined;
@@ -246,6 +242,14 @@ MyApplet.prototype = {
   },
 
   _update: function() {
+    // This loops on interval, we need to make sure it stops when the xlet is removed.
+    if (this.willUnmount || !this.networkProvider) {
+      this.loopId = 0;
+      return false;
+    }
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+    }
     if (this.childProcessHandler != null) {
       let currentMessage = this.childProcessHandler.getCurrentMessage();
 
@@ -265,7 +269,7 @@ MyApplet.prototype = {
     this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
     this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
     // check for new drives that are mounted
-    this.configSettings.adjustDiskDevices(Object.keys(this.diskProvider.getDiskDevices()));
+    this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
     this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
     this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
@@ -284,7 +288,7 @@ MyApplet.prototype = {
     this.set_applet_tooltip(appletTooltipString);
 
     // set next refresh time
-    Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
+    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
   onGraphRepaint: function(area) {
     let xOffset = 0;

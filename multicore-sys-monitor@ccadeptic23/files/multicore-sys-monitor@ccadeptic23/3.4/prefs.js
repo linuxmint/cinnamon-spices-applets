@@ -82,7 +82,13 @@ Preferences.prototype = {
 
     this.builder = new Gtk.Builder();
     this.builder.set_translation_domain(UUID);
-    this.builder.add_from_file('prefsui.glade');
+    try {
+      this.builder.add_from_file('prefsui.glade');
+    } catch (e) {
+      // Applet was removed, return
+      return;
+    }
+
     this.win = this.builder.get_object('windowMain');
 
     this.win.connect('destroy', Gtk.main_quit); //quit program when titlebar's x is clicked

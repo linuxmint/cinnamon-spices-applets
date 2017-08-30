@@ -222,7 +222,7 @@ NetDataProvider.prototype = {
       const currentReading = this.currentReadings[refCurrentReading];
       newReadings[i].tooltipDown = Math.round(((newReadings[i].down - currentReading.down) / secondsSinceLastUpdate));
       newReadings[i].tooltipUp = Math.round(((newReadings[i].up - currentReading.up) / secondsSinceLastUpdate));
-      readingNetRatesList.push(newReadings[i].tooltipDown, newReadings[i].tooltipUp)
+      readingNetRatesList.push(newReadings[i].tooltipDown / 1024, newReadings[i].tooltipUp / 1024)
     }
 
     this.currentReadings = newReadings;
@@ -308,9 +308,15 @@ DiskDataProvider.prototype = {
         continue;
       }
       const currentReading = this.currentReadings[refCurrentReading];
-      newReadings[i].tooltipRead = Math.round(((newReadings[i].read - currentReading.read) / secondsSinceLastUpdate));
-      newReadings[i].tooltipWrite = Math.round(((newReadings[i].write - currentReading.write) / secondsSinceLastUpdate));
-      readingRatesList.push(newReadings[i].tooltipRead, newReadings[i].tooltipWrite);
+      const newRead = newReadings[i].read - currentReading.read;
+      const newWrite = newReadings[i].write - currentReading.write;
+      newReadings[i].tooltipRead = Math.round((newRead / secondsSinceLastUpdate));
+      newReadings[i].tooltipWrite = Math.round((newWrite / secondsSinceLastUpdate));
+      // Push it to the array read by the graphs as kilobytes.
+      readingRatesList.push(
+        Math.round((newRead / 1048576 / secondsSinceLastUpdate)),
+        Math.round((newWrite / 1048576 / secondsSinceLastUpdate))
+      );
     }
 
     this.currentReadings = newReadings;
