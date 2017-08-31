@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-07 10:23+0100\n"
+"POT-Creation-Date: 2017-08-31 15:17+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,48 +21,48 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: applet.js:165
+#: applet.js:173
 msgid "Waiting"
 msgstr ""
 
-#: applet.js:231
+#: applet.js:239
 msgid "Open Power Statistics"
 msgstr ""
 
-#: applet.js:237
+#: applet.js:245
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:246
+#: applet.js:254
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:249
+#: applet.js:257
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:255
+#: applet.js:263
 msgid "Open the Help file"
 msgstr ""
 
-#: applet.js:261
+#: applet.js:269
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr ""
 
 #. batterymonitor@pdcurtis->metadata.json->name
-#: applet.js:277
+#: applet.js:285
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
 msgstr ""
 
-#: applet.js:282
-msgid "Note: Alerts not enabled in Settings"
+#: applet.js:290
+msgid "Waiting for battery information"
 msgstr ""
 
-#: applet.js:345
+#: applet.js:353
 msgid "Battery Low - turn off or connect to mains"
 msgstr ""
 
-#: applet.js:350
+#: applet.js:358
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -70,31 +70,31 @@ msgid ""
 "or close down your work and suspend or shutdown the machine"
 msgstr ""
 
-#: applet.js:367
+#: applet.js:375
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 
-#: applet.js:385
+#: applet.js:393
 msgid "Charge:"
 msgstr ""
 
-#: applet.js:385
+#: applet.js:393
 msgid "Alert:"
 msgstr ""
 
-#: applet.js:385
+#: applet.js:393
 msgid "Suspend:"
 msgstr ""
 
-#: applet.js:440
+#: applet.js:451
 msgid "Percentage Charge:"
 msgstr ""
 
-#: applet.js:440
+#: applet.js:451
 msgid "Alert at:"
 msgstr ""
 
-#: applet.js:440
+#: applet.js:451
 msgid "Suspend at:"
 msgstr ""
 
