@@ -1,5 +1,4 @@
-const uuid = imports.applet.uuid;
-const _    = imports.applet._;
+const uuid = "gpaste-reloaded@feuerfuchs.eu";
 
 const Util          = imports.misc.util;
 const Lang          = imports.lang;
@@ -14,6 +13,7 @@ const SignalManager = imports.misc.signalManager;
 let GPaste; // Will be assigned in entry point
 
 const AppletDir                = imports.ui.appletManager.applets[uuid];
+const _                        = AppletDir.__init__._;
 const GPasteSearchItem         = AppletDir.GPasteSearchItem;
 const GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
 const GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
