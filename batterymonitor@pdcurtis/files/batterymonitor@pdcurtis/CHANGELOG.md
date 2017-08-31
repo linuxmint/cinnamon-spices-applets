@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.3.2
+
+ * Add checks that sox and zenity are installed and warn that full facilities are not available without them.
+ * Update batterymonitor.pot so translations can be updated.
+
 ### 1.3.1
 
 Bug Fix for use with early versions of Cinnamon
