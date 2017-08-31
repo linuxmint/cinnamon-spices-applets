@@ -1,5 +1,4 @@
 const Gio = imports.gi.Gio;
-const Util = imports.applet.util;
 
 function HomesteadYamlReader(yaml_file) {
 	this._init(yaml_file);
