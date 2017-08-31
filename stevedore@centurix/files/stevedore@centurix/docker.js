@@ -1,6 +1,5 @@
 /*jshint esversion: 6 */
 const Mainloop = imports.mainloop;
-const TerminalReader = imports.applet.terminal_reader;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
