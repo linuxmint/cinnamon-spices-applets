@@ -309,6 +309,12 @@ AppGroup.prototype = {
         this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
         this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
         this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
+        if (metaWindow.progress !== undefined) {
+          this._appButton._progress = metaWindow.progress;
+          this.signals.connect(metaWindow, 'notify::progress', () => this._appButton._onProgressChange(metaWindow));
+        } else {
+          this._appButton.progressOverlay.visible = false;
+        }
 
         // Set the initial button label as not all windows will get updated via signals initially.
         this._windowTitleChanged(metaWindow);
@@ -339,6 +345,10 @@ AppGroup.prototype = {
     _.pullAt(this.metaWindows, refWindow);
     this._calcWindowNumber();
     if (this.metaWindows.length > 0 && !this.willUnmount) {
+      if (this._appButton.progressOverlay.visible && metaWindow.progress > 0) {
+        this._appButton._progress = 0;
+        this._appButton.progressOverlay.visible = false;
+      }
       this.lastFocused = _.last(this.metaWindows);
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       this._windowTitleChanged(this.lastFocused);

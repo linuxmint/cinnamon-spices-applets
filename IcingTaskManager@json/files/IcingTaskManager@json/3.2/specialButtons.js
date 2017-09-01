@@ -37,7 +37,8 @@ AppButton.prototype = {
     this.settings = this._applet.settings;
     this.signals = new SignalManager.SignalManager(this);
     this.hasLabel = this._applet.titleDisplay !== constants.TitleDisplay.None;
-
+    this._progress = 0;
+    this.padding = 0;
     this.actor = new St.Bin({
       style_class: 'window-list-item-box',
       reactive: true,
@@ -46,6 +47,12 @@ AppButton.prototype = {
       y_fill: true,
       track_hover: true
     });
+    this.progressOverlay = new St.Widget({
+      style_class: 'window-list-item-box',
+      reactive: false,
+      important: true
+    });
+
     this.actor._delegate = null;
     if (this._applet.orientation === St.Side.TOP) {
       this.actor.add_style_class_name('top');
@@ -60,7 +67,7 @@ AppButton.prototype = {
       name: 'iconLabelButton'
     });
     this.actor.set_child(this._container);
-
+    this._container.add_actor(this.progressOverlay);
     // Create the app button icon, number label, and text label for titleDisplay
     this.setActorWidth();
     this._label = new St.Label({
@@ -108,8 +115,8 @@ AppButton.prototype = {
       return;
     }
     this.themeNode = this.actor.peek_theme_node();
-    let padding = this.hasLabel ? 0 : Math.floor((this.actor.width - this.iconSize));
-    this.actor.set_style('padding-left: ' + padding / 2 + 'px;padding-right: 0px;');
+    this.padding = this.hasLabel ? 0 : Math.floor((this.actor.width - this.iconSize)) / 2;
+    this.actor.set_style('padding-left: ' + this.padding + 'px;padding-right: 0px;');
     this.icon.align = St.Align.MIDDLE;
   },
 
@@ -274,6 +281,14 @@ AppButton.prototype = {
         }
       });
     }
+
+    if (this.progressOverlay.visible) {
+      childBox.x1 = -this.padding;
+      childBox.y1 = 0;
+      childBox.y2 = this._container.height;
+      childBox.x2 = Math.max(this._container.width * (this._progress / 100.0), 1.0);
+      this.progressOverlay.allocate(childBox, flags);
+    }
   },
   showLabel: function () {
     if (!this._label) {
@@ -349,6 +364,19 @@ AppButton.prototype = {
   setMetaWindow: function (metaWindow, metaWindows) {
     this.metaWindow = metaWindow;
     this.metaWindows = metaWindows;
+  },
+
+  _onProgressChange: function(metaWindow) {
+    if (metaWindow.progress !== this._progress) {
+      this._progress = metaWindow.progress;
+      if (this._progress > 0) {
+        this.progressOverlay.visible = true;
+        this.progressOverlay.add_style_pseudo_class('progress');
+      } else {
+        this.progressOverlay.remove_style_pseudo_class('progress');
+      }
+      this._container.queue_relayout();
+    }
   },
 
   _onFocusChange: function () {
