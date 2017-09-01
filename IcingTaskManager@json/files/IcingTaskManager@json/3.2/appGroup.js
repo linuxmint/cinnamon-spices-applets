@@ -4,18 +4,16 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
 const PopupMenu = imports.ui.popupMenu;
-const Signals = imports.signals;
 const DND = imports.ui.dnd;
 const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
-const _ = AppletDir.lodash._;
 const SpecialMenus = AppletDir.specialMenus;
 const SpecialButtons = AppletDir.specialButtons;
 const constants = AppletDir.constants.constants;
 const each = AppletDir.each.each;
-//const setTimeout = AppletDir.timers.setTimeout;
+const isEqual = AppletDir.isEqual.isEqual;
 
 function AppGroup () {
   this._init.apply(this, arguments);
@@ -33,7 +31,7 @@ AppGroup.prototype = {
     this.app = params.app;
     this.appId = params.appId;
     this.appName = this.app.get_name();
-    this.autostartIndex = _.findIndex(this._applet.autostartApps, {id: this.appId});
+    this.autostartIndex = this._applet.autostartApps.findIndex(app => app.id === this.appId);
     this.isFavoriteApp = params.isFavoriteApp;
     this.wasFavapp = false;
     this.orientation = this._applet.orientation;
@@ -82,7 +80,7 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this.isDraggableApp = true;
-    this._calcWindowNumber();
+    this._calcWindowNumber(this.metaWindows);
   },
 
   _onDragBegin: function() {
@@ -277,29 +275,28 @@ AppGroup.prototype = {
     }
   },
 
-  _getLastFocusedWindow: function () {
-    return this.lastFocused;
-  },
-
   _shouldWindowBeAdded: function(metaWindow) {
-    let windowAddArgs = !_.isNil(metaWindow) || !this._applet.groupApps;
+    let windowAddArgs = metaWindow != null || !this._applet.groupApps;
     if (!this._applet.includeAllWindows) {
       windowAddArgs = windowAddArgs && this._applet.tracker.is_window_interesting(metaWindow);
     }
     if (this._applet.panel && metaWindow && this._applet.listMonitorWindows) {
-      windowAddArgs = windowAddArgs && this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) > -1;
+      windowAddArgs = windowAddArgs && (this._applet._monitorWatchList.indexOf(metaWindow.get_monitor()) > -1 || this._applet._monitorWatchList.length === 0);
     }
     return windowAddArgs;
   },
 
   _windowAdded: function (metaWindow, metaWindows) {
     if (metaWindows) {
-      this.metaWindows = _.filter(metaWindows, (metaWindow)=>{
-        return this._shouldWindowBeAdded(metaWindow);
-      });
+      this.metaWindows = [];
+      for (var i = 0; i < metaWindows.length; i++) {
+        if (this._shouldWindowBeAdded(metaWindows[i])) {
+          this.metaWindows.push(metaWindows[i]);
+        }
+      }
     }
-    let refWindow = _.findIndex(this.metaWindows, (win)=>{
-      return _.isEqual(win, metaWindow);
+    let refWindow = this.metaWindows.findIndex(win => {
+      return isEqual(win, metaWindow);
     });
     let windowAddArgs = this._shouldWindowBeAdded(metaWindow);
     if (windowAddArgs) {
@@ -309,13 +306,22 @@ AppGroup.prototype = {
         this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
         this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
         this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
+        if (metaWindow.progress !== undefined) {
+          this._appButton._progress = metaWindow.progress;
+          if (this._appButton._progress > 0) {
+            this._appButton.progressOverlay.add_style_pseudo_class('progress');
+          }
+          this.signals.connect(metaWindow, 'notify::progress', () => this._appButton._onProgressChange(metaWindow));
+        } else {
+          this._appButton.progressOverlay.visible = false;
+        }
 
         // Set the initial button label as not all windows will get updated via signals initially.
         this._windowTitleChanged(metaWindow);
         if (refWindow === -1) {
           this.metaWindows.push(metaWindow);
         }
-        this._calcWindowNumber();
+        this._calcWindowNumber(this.metaWindows);
         this._appButton._onFocusChange();
       }
 
@@ -336,10 +342,14 @@ AppGroup.prototype = {
     this.signals.disconnect('notify::gtk-application-id', metaWindow);
     this.signals.disconnect('notify::wm-class', metaWindow);
 
-    _.pullAt(this.metaWindows, refWindow);
-    this._calcWindowNumber();
+    this.metaWindows.splice(refWindow, 1);
+    this._calcWindowNumber(this.metaWindows);
     if (this.metaWindows.length > 0 && !this.willUnmount) {
-      this.lastFocused = _.last(this.metaWindows);
+      if (this._appButton.progressOverlay.visible && metaWindow.progress > 0) {
+        this._appButton._progress = 0;
+        this._appButton.progressOverlay.visible = false;
+      }
+      this.lastFocused = this.metaWindows[this.metaWindows.length - 1];
       this.hoverMenu.setMetaWindow(this.lastFocused, this.metaWindows);
       this._windowTitleChanged(this.lastFocused);
       /*
@@ -380,7 +390,7 @@ AppGroup.prototype = {
     }
     let title = metaWindow.get_title();
     each(this.hoverMenu.appSwitcherItem.appThumbnails, (thumbnail)=>{
-      if (_.isEqual(thumbnail.metaWindow, metaWindow)) {
+      if (isEqual(thumbnail.metaWindow, metaWindow)) {
         thumbnail._label.set_text(title);
         return false;
       }
@@ -523,4 +533,3 @@ AppGroup.prototype = {
     }
   }
 };
-Signals.addSignalMethods(AppGroup.prototype);

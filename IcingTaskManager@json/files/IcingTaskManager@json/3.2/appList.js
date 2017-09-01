@@ -6,10 +6,9 @@ const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
-const _ = AppletDir.lodash._;
 const AppGroup = AppletDir.appGroup.AppGroup;
 const each = AppletDir.each.each;
-//const constants = AppletDir.constants.constants;
+const isEqual = AppletDir.isEqual.isEqual;
 const setTimeout = AppletDir.timers.setTimeout;
 
 // List of running apps
@@ -44,16 +43,11 @@ AppList.prototype = {
     // Connect all the signals
     this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
     this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
-    setTimeout(()=>this._refreshList(true), 0);
+    this._refreshList();
 
     this.signals.connect(this.actor, 'style-changed', Lang.bind(this, this._updateSpacing));
 
     this.on_orientation_changed(this._applet.orientation, true);
-  },
-
-  on_applet_added_to_panel: function() {
-    this._updateSpacing();
-    this._applet.appletEnabled = true;
   },
 
   on_orientation_changed: function(orientation, init) {
@@ -149,17 +143,13 @@ AppList.prototype = {
     for (let i = 0, len = this.appList.length; i < len; i++) {
       this.appList[i].showOrderLabel(i);
     }
-    setTimeout(() => {
-      for (let i = 0, len = this.appList.length; i < len; i++) {
-        this.appList[i]._calcWindowNumber();
-      }
-    }, this._applet.showAppsOrderTimeout);
+    setTimeout(() => this._calcAllWindowNumbers(), this._applet.showAppsOrderTimeout);
   },
 
   _cycleMenus: function(){
     let refApp = 0;
     if (!this.lastCycled && this.lastFocusedApp) {
-      refApp = _.findIndex(this.appList, {appId: this.lastFocusedApp});
+      refApp = this.appList.findIndex(app => app.appId === this.lastFocusedApp);
     }
     if (this.lastCycled) {
       this.appList[this.lastCycled].hoverMenu.close();
@@ -176,7 +166,7 @@ AppList.prototype = {
     if (this.appList[refApp].metaWindows.length > 0) {
       this.appList[refApp].hoverMenu.open();
     } else {
-      setTimeout(()=>this._cycleMenus(), 0);
+      this._cycleMenus();
     }
   },
 
@@ -219,11 +209,10 @@ AppList.prototype = {
     if (!this._applet.showPinned) {
       return;
     }
-    let launchers = _.map(this._applet.pinnedFavorites._favorites, 'id');
-    for (let i = 0, len = launchers.length; i < len; i++) {
-      let app = this._applet._appSystem.lookup_app(launchers[i]);
+    for (let i = 0; i < this._applet.pinnedFavorites._favorites.length; i++) {
+      let app = this._applet._appSystem.lookup_app(this._applet.pinnedFavorites._favorites[i].id);
       if (!app) {
-        app = this._applet._appSystem.lookup_settings_app(launchers[i]);
+        app = this._applet._appSystem.lookup_settings_app(this._applet.pinnedFavorites._favorites[i].id);
       }
       if (!app) {
         continue;
@@ -271,7 +260,7 @@ AppList.prototype = {
     // Check to see if the window that was added already has an app group.
     // If it does, then we don't need to do anything.  If not, we need to
     // create an app group.
-    if (_.isNil(app)) {
+    if (!app) {
       app = this._applet.getAppFromWMClass(this.specialApps, metaWindow);
     }
     if (!app) {
@@ -289,11 +278,11 @@ AppList.prototype = {
     let refApp = -1, refWindow = -1, transientFavorite = false;
     each(this.appList, (appGroup, i)=>{
       let shouldReturn = false;
-      if (_.isEqual(app, appGroup.app)) {
+      if (isEqual(app, appGroup.app)) {
         refApp = i;
       }
       each(appGroup.metaWindows, (win, z)=>{
-        if (_.isEqual(win, metaWindow)) {
+        if (isEqual(win, metaWindow)) {
           if (refApp === -1 || !this._applet.groupApps) {
             refApp = i;
           }
@@ -308,8 +297,8 @@ AppList.prototype = {
     });
 
     if (!this._applet.groupApps && !isFavoriteApp) {
-      let refFav = _.findIndex(this._applet.pinnedFavorites._favorites, (appGroup)=>{
-        return _.isEqual(appGroup.app, app);
+      let refFav = this._applet.pinnedFavorites._favorites.findIndex(favorite => {
+        return isEqual(favorite.app, app);
       });
       if (refFav > -1) {
         transientFavorite = true;
@@ -377,7 +366,7 @@ AppList.prototype = {
 
   _calcAllWindowNumbers: function () {
     for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i]._calcWindowNumber(this.metaWorkspace);
+      this.appList[i]._calcWindowNumber(this.appList[i].metaWindows);
     }
   },
 
@@ -395,8 +384,10 @@ AppList.prototype = {
   },
 
   _fixAppGroupIndexAfterDrag: function (appId) {
-    let originPos = _.findIndex(this.appList, {appId: appId}); // app object
-    let pos = _.findIndex(this.managerContainer.get_children(), this.appList[originPos].actor);
+    let originPos = this.appList.findIndex(app => app.appId === appId);
+    let pos = this.managerContainer.get_children().findIndex(actor => {
+      return isEqual(actor, this.appList[originPos].actor);
+    });
     if (originPos === pos
       || originPos < 0
       || pos < 0) {
@@ -408,7 +399,7 @@ AppList.prototype = {
     }
     // originPos -> pos
     let data = this.appList[originPos];
-    _.pullAt(this.appList, originPos);
+    this.appList.splice(originPos, 1);
     this.appList.splice(pos, 0, data);
   },
 
@@ -421,7 +412,7 @@ AppList.prototype = {
         if (win.get_wm_class() === wmClass) {
           ++windowCount;
         }
-        if (_.isEqual(win, metaWindow)) {
+        if (isEqual(win, metaWindow)) {
           ++windowCount;
           refApp = i;
           refWindow = z;
@@ -442,7 +433,7 @@ AppList.prototype = {
         }
         this.appList[refApp].destroy(true);
         this.appList[refApp] = undefined;
-        _.pullAt(this.appList, refApp);
+        this.appList.splice(refApp, 1);
       }, positionChange);
     }
   },

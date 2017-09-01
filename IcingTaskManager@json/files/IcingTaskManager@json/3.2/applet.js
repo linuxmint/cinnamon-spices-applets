@@ -29,10 +29,99 @@ const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
-const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
+const isEqual = AppletDir.isEqual.isEqual;
 const AppList = AppletDir.appList.AppList;
 const setTimeout = AppletDir.timers.setTimeout;
+
+if (!Array.prototype.findIndex) {
+  Object.defineProperty(Array.prototype, 'findIndex', {
+    value: function(predicate) {
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      let o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      let len = o.length >>> 0;
+
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      let thisArg = arguments[1];
+
+      // 5. Let k be 0.
+      let k = 0;
+
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
+        // d. If testResult is true, return k.
+        let kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return k;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
+
+      // 7. Return -1.
+      return -1;
+    }
+  });
+}
+
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function(predicate) {
+     // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      var thisArg = arguments[1];
+
+      // 5. Let k be 0.
+      var k = 0;
+
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+        // d. If testResult is true, return kValue.
+        var kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return kValue;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
+
+      // 7. Return undefined.
+      return undefined;
+    }
+  });
+}
 
 // Some functional programming tools
 const range = function (a, b) {
@@ -78,7 +167,8 @@ PinnedFavs.prototype = {
       ids = this._applet.settings.getValue('pinned-apps');
     }
     for (let i = 0, len = ids.length; i < len; i++) {
-      let refFav = _.findIndex(this._favorites, {id: ids[i]});
+
+      let refFav = this._favorites.findIndex(favorite => favorite.id === ids[i]);
       if (refFav === -1) {
         let app = this._applet._appSystem.lookup_app(ids[i]);
         this._favorites.push({
@@ -90,12 +180,12 @@ PinnedFavs.prototype = {
   },
 
   triggerUpdate: function (appId, pos, isFavoriteApp) {
-    let refApp = _.findIndex(this._applet.getCurrentAppList().appList, {appId: appId});
+    let refApp = this._applet.getCurrentAppList().appList.findIndex(app => app.appId === appId);
     if (refApp > -1) {
       let currentAppList = this._applet.getCurrentAppList();
       if (!isFavoriteApp && currentAppList.appList[refApp].metaWindows.length === 0) {
         currentAppList.appList[refApp].destroy();
-        _.pullAt(currentAppList.appList, refApp);
+        currentAppList.appList.splice(refApp, 1);
       } else {
         currentAppList.appList[refApp]._isFavorite(isFavoriteApp);
         currentAppList.managerContainer.set_child_at_index(currentAppList.appList[refApp].actor, pos);
@@ -104,8 +194,14 @@ PinnedFavs.prototype = {
   },
 
   _saveFavorites: function() {
-    this._favorites = _.uniqBy(this._favorites, 'id');
-    let ids = _.map(this._favorites, 'id');
+    let uniqueSet = new Set();
+    let ids = [];
+    for (let i = 0; i < this._favorites.length; i++) {
+      if (uniqueSet.has(this._favorites[i].id) === false) {
+        ids.push(this._favorites[i].id);
+        uniqueSet.add(this._favorites[i].id);
+      }
+    }
     if (this._applet.systemFavorites) {
       global.settings.set_strv(this.favoriteSettingKey, ids);
     } else {
@@ -114,15 +210,23 @@ PinnedFavs.prototype = {
   },
 
   _onFavoritesChange: function() {
-    const oldFavorites = this._favorites;
+    let oldFavoritesIds = [];
+    let newFavoritesIds = [];
+    for (let i = 0; i < this._favorites.length; i++) {
+      oldFavoritesIds.push(this._favorites[i].id);
+    }
     this._reload();
-    let removedFavorites = _.differenceBy(oldFavorites, this._favorites, 'id');
-    each(removedFavorites, (favorite)=>{
-      this.triggerUpdate(favorite.id, -1, false);
-    });
-    each(this._favorites, (favorite, i)=>{
-      this.triggerUpdate(favorite.id, i, true);
-    });
+    for (let i = 0; i < this._favorites.length; i++) {
+      newFavoritesIds.push(this._favorites[i].id);
+    }
+    for (let i = 0; i < oldFavoritesIds.length; i++) {
+      if (newFavoritesIds.indexOf(oldFavoritesIds[i]) < 0) {
+        this.triggerUpdate(oldFavoritesIds[i], -1, false);
+      }
+    }
+    for (let i = 0; i < this._favorites.length; i++) {
+      this.triggerUpdate(newFavoritesIds[i], i, true);
+    }
   },
 
   _addFavorite: function (opts={appId: null, app: null, pos: -1}) {
@@ -159,7 +263,7 @@ PinnedFavs.prototype = {
   },
 
   moveFavoriteToPos: function (appId, pos) {
-    let oldIndex = _.findIndex(this._favorites, {id: appId});
+    let oldIndex = this._favorites.findIndex(favorite => favorite.id === appId);
     if (oldIndex !== -1 && pos > oldIndex) {
       pos = pos - 1;
     }
@@ -168,9 +272,9 @@ PinnedFavs.prototype = {
   },
 
   removeFavorite: function (appId) {
-    let refFav = _.findIndex(this._favorites, {id: appId});
+    let refFav = this._favorites.findIndex(favorite => favorite.id === appId);
     this.triggerUpdate(appId, -1, false);
-    _.pullAt(this._favorites, refFav);
+    this._favorites.splice(refFav, 1);
     this._saveFavorites();
     return true;
   },
@@ -188,12 +292,6 @@ MyApplet.prototype = {
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
     this.orientation = orientation;
     this._uuid = metadata.uuid;
-    this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
-    this.signals = new SignalManager.SignalManager(this);
-    this.tracker = Cinnamon.WindowTracker.get_default();
-    this._appSystem = Cinnamon.AppSystem.get_default();
-    this.recentManager = Gtk.RecentManager.get_default();
-    this.sortRecentItems(this.recentManager.get_items());
     this._monitorWatchList = [];
     this.metaWorkspaces = [];
     this.autostartApps = [];
@@ -202,6 +300,12 @@ MyApplet.prototype = {
     this._dragPlaceholder = null;
     this._dragPlaceholderPos = -1;
     this._animatingPlaceholdersCount = 0;
+    this.tracker = Cinnamon.WindowTracker.get_default();
+    this._appSystem = Cinnamon.AppSystem.get_default();
+    this.recentManager = Gtk.RecentManager.get_default();
+    this.sortRecentItems(this.recentManager.get_items());
+    this.settings = new Settings.AppletSettings(this, this._uuid, instance_id);
+    this.signals = new SignalManager.SignalManager(this);
     this.homeDir = GLib.get_home_dir();
     this.appletEnabled = false;
     this.actor.set_track_hover(false);
@@ -300,10 +404,9 @@ MyApplet.prototype = {
        * and then add the monitors not present to the monitor watch list
        * */
       this._monitorWatchList = [this.panel.monitorIndex];
-
-      instances = _.map(instances, function(instance) {
-        return instance.panel.monitorIndex;
-      });
+      for (var i = 0; i < instances.length; i++) {
+        instances[i] = instances[i].panel.monitorIndex;
+      }
 
       for (let i = 0; i < numberOfMonitors; i++) {
         if (instances.indexOf(i) === -1) {
@@ -332,10 +435,6 @@ MyApplet.prototype = {
 
   on_orientation_changed: function(orientation) {
     this.metaWorkspaces[this.currentWs].appList.on_orientation_changed(orientation);
-  },
-
-  on_applet_removed_from_panel: function() {
-    this.signals.disconnectAllSignals();
   },
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
@@ -540,7 +639,7 @@ MyApplet.prototype = {
   },
 
   removeAutostartApp: function(autostartIndex){
-    _.pullAt(this.autostartApps, autostartIndex);
+    this.autostartApps.splice(autostartIndex, 1);
   },
 
   execInstallLanguage: function() {
@@ -648,8 +747,7 @@ MyApplet.prototype = {
       id = app.get_name().toLowerCase() + '.desktop';
     }
 
-    let favorites = this.pinnedFavorites._favorites;
-    let refFav = _.findIndex(favorites, {id: id});
+    let refFav = this.pinnedFavorites._favorites.findIndex(favorite => favorite.id === id);
     let favPos = this._dragPlaceholderPos;
 
     if (favPos === -1) {
@@ -695,17 +793,24 @@ MyApplet.prototype = {
   },
 
   _onWorkspaceCreatedOrDestroyed: function (i) {
-    let workspaces = _.filter(global.screen.get_workspace_by_index(i), (ws, key)=>{
-      return key in range(global.screen.n_workspaces);
-    });
-
-    // We'd like to know what workspaces in this.metaWorkspaces have been destroyed and
-    // so are no longer in the workspaces list.  For each of those, we should destroy them
-    for (let i = 0, len = this.metaWorkspaces.length; i < len; i++) {
-      if (workspaces.indexOf(this.metaWorkspaces[i].ws) === -1) {
-        this.metaWorkspaces[i].appList.destroy();
-        _.pullAt(this.metaWorkspaces, i);
+    let wsIndexes = Array(i);
+    let removedIndexes = [];
+    for (let i = 0; i < this.metaWorkspaces.length; i++) {
+      let hasMatch = false;
+      for (let i = 0; i < wsIndexes.length; i++) {
+        let workspace = global.screen.get_workspace_by_index(i);
+        if (isEqual(workspace, this.metaWorkspaces[i].ws)) {
+          hasMatch = true;
+        }
       }
+      if (!hasMatch) {
+        removedIndexes.push(i);
+      }
+    }
+    for (let i = 0; i < removedIndexes.length; i++) {
+      this.metaWorkspaces[removedIndexes[i]].appList.destroy();
+      this.metaWorkspaces[removedIndexes[i]].ws = undefined;
+      this.metaWorkspaces.splice(removedIndexes[i], 1);
     }
   },
 
@@ -715,7 +820,7 @@ MyApplet.prototype = {
 
     // If the workspace we switched to isn't in our list,
     // we need to create an AppList for it
-    let refWorkspace = _.findIndex(this.metaWorkspaces, {index: this.currentWs});
+    let refWorkspace = this.metaWorkspaces.findIndex(workspace => workspace.index === this.currentWs);
     let appList;
     if (refWorkspace === -1) {
       appList = new AppList(this, metaWorkspace);
@@ -761,6 +866,7 @@ MyApplet.prototype = {
     });
   }
 };
+Signals.addSignalMethods(MyApplet.prototype);
 
 function main(metadata, orientation, panel_height, instance_id) {
   return new MyApplet(metadata, orientation, panel_height, instance_id);
