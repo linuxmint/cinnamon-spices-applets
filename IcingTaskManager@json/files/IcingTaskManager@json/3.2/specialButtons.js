@@ -9,8 +9,8 @@ const SignalManager = imports.misc.signalManager;
 
 const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
 
-const _ = AppletDir.lodash._;
 const each = AppletDir.each.each;
+const isEqual = AppletDir.isEqual.isEqual;
 const constants = AppletDir.constants.constants;
 const setTimeout = AppletDir.timers.setTimeout;
 
@@ -20,6 +20,12 @@ const setTimeout = AppletDir.timers.setTimeout;
 // Button with icon and label.  Click events
 // need to be attached manually, but automatically
 // highlight when a window of app has focus.
+
+const getPseudoClass = function(pseudoClass) {
+  return constants.pseudoOptions.find(function(option) {
+    return option.id === pseudoClass;
+  }).label;
+};
 
 function AppButton () {
   this._init.apply(this, arguments);
@@ -48,6 +54,7 @@ AppButton.prototype = {
       track_hover: true
     });
     this.progressOverlay = new St.Widget({
+      name: 'progressOverlay',
       style_class: 'window-list-item-box',
       reactive: false,
       important: true
@@ -107,16 +114,10 @@ AppButton.prototype = {
   },
 
   setIconPadding: function () {
-    if (!this.actor) {
-      return;
-    }
-    if (!this.actor.get_stage()) {
-      setTimeout(()=>this.setIconPadding(true), 500);
-      return;
-    }
     this.themeNode = this.actor.peek_theme_node();
-    this.padding = this.hasLabel ? 0 : Math.floor((this.actor.width - this.iconSize)) / 2;
-    this.actor.set_style('padding-left: ' + this.padding + 'px;padding-right: 0px;');
+    this.padding = (this.hasLabel ? 0 : Math.floor((this.actor.width - this.iconSize)) / 2);
+    const rightPadding = 0;
+    this.actor.set_style('padding-left: ' + this.padding + 'px;padding-right: ' + rightPadding + 'px;');
     this.icon.align = St.Align.MIDDLE;
   },
 
@@ -176,8 +177,9 @@ AppButton.prototype = {
     if (!this._needsAttention || !this.actor) {
       return;
     }
+    const activePseudoClass = getPseudoClass(this._applet.activePseudoClass);
     if (this._applet.showActive) {
-      this.actor.remove_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+      this.actor.remove_style_pseudo_class(activePseudoClass);
     }
     this.actor.add_style_class_name('window-list-item-demands-attention');
     if (counter < 4) {
@@ -185,7 +187,7 @@ AppButton.prototype = {
         if (this.actor && this.actor.has_style_class_name('window-list-item-demands-attention')) {
           this.actor.remove_style_class_name('window-list-item-demands-attention');
           if (this._applet.showActive) {
-            this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+            this.actor.add_style_pseudo_class(activePseudoClass);
           }
         }
         setTimeout(()=>{
@@ -335,7 +337,7 @@ AppButton.prototype = {
     if (this._applet.panelEditMode) {
       return false;
     }
-    let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
+    let hoverPseudoClass = getPseudoClass(this._applet.hoverPseudoClass);
     if (!this.actor.has_style_pseudo_class(hoverPseudoClass)) {
       this.actor.add_style_pseudo_class(hoverPseudoClass);
     }
@@ -345,15 +347,12 @@ AppButton.prototype = {
     if (this._applet.panelEditMode) {
       return false;
     }
-    let hoverPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.hoverPseudoClass}).label;
-    this.actor.remove_style_pseudo_class(hoverPseudoClass);
-
-    this._onFocusChange();
+    this.actor.remove_style_pseudo_class(getPseudoClass(this._applet.hoverPseudoClass));
     this._setFavoriteAttributes();
   },
 
   setActiveStatus: function(windows){
-    let pseudoClass = _.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label;
+    let pseudoClass = getPseudoClass(this._applet.activePseudoClass);
     if (windows.length > 0 && !this.actor.has_style_pseudo_class(pseudoClass)) {
       this.actor.add_style_pseudo_class(pseudoClass);
     } else {
@@ -382,7 +381,7 @@ AppButton.prototype = {
   _onFocusChange: function () {
     // If any of the windows associated with our app have focus,
     // we should set ourselves to active
-    let focusPseudoClass = _.find(constants.pseudoOptions, {id: this._applet.focusPseudoClass}).label;
+    let focusPseudoClass = getPseudoClass(this._applet.focusPseudoClass);
     if (this._hasFocus()) {
       this.actor.add_style_pseudo_class(focusPseudoClass);
       if (this.actor.has_style_class_name('window-list-item-demands-attention')) {
@@ -396,7 +395,7 @@ AppButton.prototype = {
       this.actor.remove_style_pseudo_class(focusPseudoClass);
     }
     if (this._applet.showActive && this.metaWindows.length > 0) {
-      this.actor.add_style_pseudo_class(_.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label);
+      this.actor.add_style_pseudo_class(getPseudoClass(this._applet.activePseudoClass));
     }
   },
 
@@ -425,7 +424,7 @@ AppButton.prototype = {
   _onWindowDemandsAttention: function (window) {
     let windows = this.app.get_windows();
     for (let i = 0, len = windows.length; i < len; i++) {
-      if (_.isEqual(windows[i], window)) {
+      if (isEqual(windows[i], window)) {
         this.getAttention();
         return true;
       }
@@ -434,13 +433,11 @@ AppButton.prototype = {
   },
 
   _setFavoriteAttributes: function () {
-    if (!this.actor || !this.actor.get_stage()) {
-      setTimeout(() => this._setFavoriteAttributes(), 500);
+    if (!this.app) {
       return;
     }
-    if (this.app.state === 0
-      && this.isFavoriteApp) {
-      let pseudoClass = _.find(constants.pseudoOptions, {id: this._applet.activePseudoClass}).label;
+    if (this.app.state === 0 && this.isFavoriteApp) {
+      let pseudoClass = getPseudoClass(this._applet.activePseudoClass);
       if (this.actor.has_style_class_name('window-list-item-box')) {
         this.actor.remove_style_class_name('window-list-item-box');
       }
@@ -455,6 +452,7 @@ AppButton.prototype = {
   _isFavorite: function (isFav) {
     this.isFavoriteApp = isFav;
     this._setFavoriteAttributes();
+    this._onFocusChange();
   },
 
   destroy: function () {
