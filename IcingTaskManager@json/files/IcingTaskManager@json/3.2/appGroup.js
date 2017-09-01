@@ -308,6 +308,9 @@ AppGroup.prototype = {
         this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
         if (metaWindow.progress !== undefined) {
           this._appButton._progress = metaWindow.progress;
+          if (this._appButton._progress > 0) {
+            this._appButton.progressOverlay.add_style_pseudo_class('progress');
+          }
           this.signals.connect(metaWindow, 'notify::progress', () => this._appButton._onProgressChange(metaWindow));
         } else {
           this._appButton.progressOverlay.visible = false;
