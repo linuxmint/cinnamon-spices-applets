@@ -315,7 +315,7 @@ MyApplet.prototype = {
             this.batteryPercentage = this.batteryPercentage.trim().substr(5);
             this.batteryPercentage = Math.floor(this.batteryPercentage); 
              // now check we have a genuine number otherwise use last value
-            if ( ! ( this.batteryPercentage >= 0 && this.batteryPercentage <= 100 )) {             
+            if ( ! ( this.batteryPercentage > 0 && this.batteryPercentage <= 100 )) {             
                 this.batteryPercentage = this.lastBatteryPercentage;
             }
 //          Comment out following line when tests are complete
@@ -560,5 +560,7 @@ Bug Fix for use with early versions of Cinnamon
  * Improve handling of completely empty batteries.
  * Update README.md, CHANGELOG.md and metadata.json
  * Update batterymonitor.pot so translations can be updated.
+### 1.3.2.1
+ * Revert change on handling empty battery
 */
 

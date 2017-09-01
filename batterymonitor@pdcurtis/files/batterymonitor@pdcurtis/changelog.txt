@@ -77,4 +77,6 @@ Bug Fix for use with early versions of Cinnamon
  * Improve handling of completely empty batteries.
  * Update README.md, CHANGELOG.md and metadata.json
  * Update batterymonitor.pot so translations can be updated.
+### 1.3.2.1
+ * Revert change on handling empty battery
 
