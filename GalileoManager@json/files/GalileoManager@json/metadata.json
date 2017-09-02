@@ -1,0 +1,8 @@
+{
+  "uuid": "GalileoManager@json",
+  "name": "Galileo Manager",
+  "description": "Fitbit sync utility.",
+  "comments": "This applet uses the Galileo Python utility for syncing Fitbit trackers.\nClick the website link for more information.\n\nFitbit is a registered trademark and service mark of Fitbit, Inc. galileo is designed for use with the Fitbit platform. This product is not put out by Fitbit, and Fitbit does not service or warrant the functionality of this product.",
+  "website": "https://bitbucket.org/benallard/galileo",
+  "version": "1.0.0"
+}

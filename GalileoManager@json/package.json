@@ -1,0 +1,15 @@
+{
+  "name": "galileo-applet",
+  "version": "1.0.0",
+  "description": "Galileo Front-end for Cinnamon",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-2.0",
+  "devDependencies": {
+    "clear": "0.0.1",
+    "gulp": "^3.9.1"
+  }
+}
