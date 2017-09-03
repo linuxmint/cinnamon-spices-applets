@@ -43,15 +43,15 @@ const ICON_SUNSET = ICON_PATH + "Material_Design_Icons/weather-sunset.svg";
 //const GetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.GetPercentage';
 
 
-function MyApplet(orientation, instanceId) {
+function MyApplet(orientation, panelHeight, instanceId) {
     this.settings = new Settings.AppletSettings(this, UUID, instanceId);
-    this._init(orientation, instanceId);
+    this._init(orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation, panelHeight, instanceId) {
+    _init: function (orientation, panelHeight, instanceId) {
         Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
@@ -144,9 +144,9 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN,
             NIGHT_COLOUR, "nightColor", this.refreshRedshiftValues, null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            LATITUDE, "latitude",    this.doRedshiftSwitch, null);
+            LATITUDE, "latitude", this.doRedshiftSwitch, null);
         this.settings.bindProperty(Settings.BindingDirection.IN,
-            LONGITUDE, "longitude",    this.doRedshiftSwitch, null);
+            LONGITUDE, "longitude", this.doRedshiftSwitch, null);
 
 
         this.maxColor = 7000;
@@ -159,7 +159,7 @@ MyApplet.prototype = {
         this.refreshRedshiftValues();
     },
 
-    on_applet_clicked: function(event) {
+    on_applet_clicked: function (event) {
         // update brightness UI if values altered by system
         // todo: use watcher on dbus instead
 
@@ -167,7 +167,7 @@ MyApplet.prototype = {
         this.menu.toggle();
     },
 
-    getSystemBrightness: function() {
+    getSystemBrightness: function () {
         try {
             let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
             currentBright = currentBright.toString();
@@ -192,36 +192,36 @@ MyApplet.prototype = {
         }
     },
 
-    do_UI_update_probe: function() {
+    do_UI_update_probe: function () {
         let currentBrightness = this.getSystemBrightness();
         this._brightnessSlider.setValue(currentBrightness); // slider position
         this.brightness = currentBrightness * 100;
         this.do_UI_update_slider();
     },
 
-    do_UI_update_colortag: function() {
+    do_UI_update_colortag: function () {
         this.c_Slider.setValue((this.dayColor - this.minColor) / (this.maxColor - this.minColor));
         let colorStr = _("Redshift day colour") + ": " + this.dayColor + "K";
         this.c_MenuItem.label.text = colorStr; // GUI Label Colour:
     },
-    do_UI_update_brightnesstag: function() {
+    do_UI_update_brightnesstag: function () {
         this.b_Slider.setValue((this.redshiftDayBrightness - this.minBrightness) / (this.maxBrightness - this.minBrightness));
         let brightnessStr = _("Redshift day brightness") + ": " + Math.round(this.redshiftDayBrightness) + "%";
         this.b_MenuItem.label.text = brightnessStr; // GUI Label Brightness:
     },
-    do_UI_update_nightColortag: function() {
+    do_UI_update_nightColortag: function () {
         this.cn_Slider.setValue((this.nightColor - this.minColor) / (this.maxColor - this.minColor));
         let colorStr = _("Redshift night colour") + ": " + this.nightColor + "K";
         this.cn_MenuItem.label.text = colorStr; // GUI Label Colour:
     },
-    do_UI_update_nightBrightnesstag: function() {
+    do_UI_update_nightBrightnesstag: function () {
         this.bn_Slider.setValue((this.redshiftNightBrightness - this.minBrightness) / (this.maxBrightness - this.minBrightness));
         let brightnessStr = _("Redshift night brightness") + ": " + Math.round(this.redshiftNightBrightness) + "%";
         this.bn_MenuItem.label.text = brightnessStr; // GUI Label Brightness:
     },
 
 
-    do_UI_update_slider: function() {
+    do_UI_update_slider: function () {
         let brightnessStr = _("Brightness") + ": " + this.brightness + "%";
         this.updateTooltip();
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness
@@ -235,7 +235,7 @@ MyApplet.prototype = {
 
     },
 
-    brightnessSliderChanged: function(slider, value) {
+    brightnessSliderChanged: function (slider, value) {
         let brightness = parseFloat(value);
         brightness = Math.round(brightness * 100);
 
@@ -245,14 +245,14 @@ MyApplet.prototype = {
         this.do_UI_update_slider(); //update UI from slider value
     },
 
-    dayColorSliderChanged: function(slider, value) {
+    dayColorSliderChanged: function (slider, value) {
         this.enabled = true;
 
         this.dayColor = Math.round(parseFloat(value) * (this.maxColor - this.minColor) + this.minColor);
 
         this.refreshRedshiftValues();
     },
-    nightColorSliderChanged: function(slider, value) {
+    nightColorSliderChanged: function (slider, value) {
         this.enabled = true;
         this.changeOnNight = true;
 
@@ -260,14 +260,14 @@ MyApplet.prototype = {
 
         this.refreshRedshiftValues();
     },
-    redshiftDayBrightnessSliderChanged: function(slider, value) {
+    redshiftDayBrightnessSliderChanged: function (slider, value) {
         this.enabled = true;
 
         this.redshiftDayBrightness = Math.round(parseFloat(value) * (this.maxBrightness - this.minBrightness) + this.minBrightness);
 
         this.refreshRedshiftValues();
     },
-    redshiftNightBrightnessSliderChanged: function(slider, value) {
+    redshiftNightBrightnessSliderChanged: function (slider, value) {
         this.enabled = true;
         this.changeOnNight = true;
 
@@ -276,7 +276,7 @@ MyApplet.prototype = {
         this.refreshRedshiftValues();
     },
 
-    refreshRedshiftValues: function() {
+    refreshRedshiftValues: function () {
         this.do_UI_update_colortag(); //update UI from slider value
         this.do_UI_update_brightnesstag(); //update UI from slider value
         this.do_UI_update_nightColortag(); //update UI from slider value
@@ -287,13 +287,13 @@ MyApplet.prototype = {
         this.changeOnNightChanged();
     },
 
-    changeOnNightChanged: function() {
+    changeOnNightChanged: function () {
         this.changeOnNight = this.changeOnNightSwitch.state;
 
         this.doRedshiftSwitch();
     },
 
-    doRedshiftSwitch: function() {
+    doRedshiftSwitch: function () {
         this.enabled = this.redshiftSwitch.state;
         this.updateTooltip();
         // Stop redshift before launch another instance
@@ -325,7 +325,7 @@ MyApplet.prototype = {
         }
     },
 
-    updateTooltip: function() {
+    updateTooltip: function () {
         var tooltip = _('Brightness') + ': ' + this.brightness + '%\n';
         tooltip += _('Redshift') + ': ' + (this.enabled ? 'On' : 'Off');
         if (this.enabled) {
@@ -344,14 +344,14 @@ MyApplet.prototype = {
     },
 
     // todo: attach to St box using an icon obj
-    _onScrollEvent: function(actor, event) {
+    _onScrollEvent: function (actor, event) {
         let direction = event.get_scroll_direction();
 
         if (direction == Clutter.ScrollDirection.DOWN) {
             global.log('scrolling down');
         }
         else if (direction == Clutter.ScrollDirection.UP) {
-           global.log('scrolling up');
+            global.log('scrolling up');
         }
     },
 }
