@@ -6,12 +6,12 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
 ## Special Requirements:
 
-   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load. It can be installed by the synaptic package manager or with the terminal command:
+   * For the basic facilities the ```gir1.2-gtop-2.0``` library __must be installed__ or the applet will not load and a notification will be displayed. It can be installed by the synaptic package manager or with the terminal command:
                       ```sudo apt-get install gir1.2-gtop-2.0```
 
-   * For full facilities including notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
+   * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
             ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
-   * Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets.
+   * Cinnamon Version 2.2 or higher ie. It can be used with all supported versions of Mint.
 
 ## Features:
 
@@ -81,7 +81,7 @@ The system program vnstat which provides the option of a graphic history of data
 
 ## Status
 
-The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running Mint 15 with a variety of themes. It is designed to work with Cinammon 1.8 and higher. The current Version has been tested with Cinnamon 2.2 - 3.2 and Mint 16 - 18.1. 
+The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running under Mint 15 with a variety of themes. The current Version has been tested with Cinnamon 2.2 - 3.4 and Mint 17 - 18.2. 
 
 ## Translations and other Contributions
 
@@ -95,14 +95,14 @@ Thanks are given for the very useful contributions from @collinss and @Odyseus t
 
    * Download from Cinnamon Spices
    * Unzip and extract folder netusagemonitor@pdcurtis to ~/.local/share/cinnamon/applets/
-   * Install any additional programs required.
+   * Install the additional programs required.
    * Enable the applet in Cinnamon Settings -> Applets
    * You can also access the Settings Screen from Cinnamon Settings -> Applets
 
 
 ### Version information prior to the changes introduced by the new Cinnamon Spices Web site in January 2017
 
-There is a full change log in the applet folder called changelog.txt which can also be accessed  through the Context (Right Click) menu in the Housekeeping sub-menu. The initial  development was carried out on Github along with my other applets at [github.com/pdcurtis/cinnamon-applets](https://github.com/pdcurtis/cinnamon-applets)
+There is a change log in the applet folder called CHANGELOG.md which can also be accessed through the Context (Right Click) menu in the Housekeeping sub-menu. The initial  development was carried out on Github along with my other applets at [github.com/pdcurtis/cinnamon-applets](https://github.com/pdcurtis/cinnamon-applets)
 
 ### Contact
 

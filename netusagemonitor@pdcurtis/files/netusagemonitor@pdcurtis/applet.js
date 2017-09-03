@@ -1,7 +1,7 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const GLib = imports.gi.GLib;// ++ Needed for starting programs and translations
-const GTop = imports.gi.GTop;
+// const GTop = imports.gi.GTop; //Moved to be within try...catch below
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
@@ -15,16 +15,28 @@ const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in A
 const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls 
 const Gettext = imports.gettext; // ++ Needed for translations
 
-// ++ Always needed for localisation/translation support
-// l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
-// UUID is set in MyApplet _init: below and before function called
-
-var UUID;
+// Localisation/translation support - moved up and slightly non standard due to GTOP test which follows.
+var UUID = "netusagemonitor@pdcurtis";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans !== str && customTrans !== "")
         return customTrans;
     return Gettext.gettext(str);
+}
+
+// Check that GTOP library is installed as applet will not run without it
+// Based on method used in applet hwmonitor@sylfurd
+// All functions wusing GTop have an if (!GTopInstalled) {return}; added at start
+let GTopInstalled = true;
+try {
+  var GTop = imports.gi.GTop;
+} catch(e){
+                 let icon = new St.Icon({ icon_name: 'error',
+                 icon_type: St.IconType.FULLCOLOR,
+                 icon_size: 36 });
+                 Main.criticalNotify(_("Some Dependencies not Installed"), _("You appear to be missing some of the programs or libraries required for this applet to run.\n\nPlease read the help file on how to install them."), icon);
+  GTopInstalled = false;
 }
 
 // Alert response using a Modal Dialog - approach thanks to Mark Bolin 
@@ -61,7 +73,7 @@ MyApplet.prototype = {
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
         try {
-
+			if (!GTopInstalled) {return};
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "refreshInterval-spinner",
@@ -219,10 +231,10 @@ MyApplet.prototype = {
             this.helpfile = metadata.path + "/README.md";
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
-//            this.UUID = metadata.uuid;
-            // ++ Part of l10n support;
-            UUID = metadata.uuid;
-            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+
+//          Part of l10n support; Moved up because of GTop test
+//          UUID = metadata.uuid;
+//          Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
 
             this.applet_running = true; //** New
  
@@ -292,7 +304,7 @@ MyApplet.prototype = {
             this.downOldC2 = 0;
             this.upOldC3 = 0;
             this.downOldC3 = 0;
-
+            this.numa_style = 'numa-not-not-connected';
             this.last_numa_style = 'numa-not-not-connected'; 
 
             this.monitoredInterfaceName = null;
@@ -307,9 +319,9 @@ MyApplet.prototype = {
             }
             this.rebuildFlag = true;
             this.firstTimeFlag  = true;
-//            this.firstTimeFlag  = false;
 
             this.on_settings_changed();
+            
             this.update();
         } catch (e) {
             global.logError(e);
@@ -583,7 +595,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         if (this.monitoredInterfaceName == "ppp0") {
             displayname2 = "\u2714" + displayname2;
         }
-        let menuitem = new PopupMenu.PopupMenuItem(displayname2);
+        menuitem = new PopupMenu.PopupMenuItem(displayname2);
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("ppp0");
         }));
@@ -625,30 +637,30 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 1 (" + this.cumulativeInterface1 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
-        let d = new Date();
+        let d1 = new Date();
         this.cT1 = 0;
         this.cumulativeTotal1 = 0;
-        this.cumulativeComment1 = "from " + d.toLocaleString();
+        this.cumulativeComment1 = "from " + d1.toLocaleString();
         this.cumulativeOffset1 = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
         menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 2 (" + this.cumulativeInterface2 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
-        let d = new Date();
+        let d2 = new Date();
         this.cT2 = 0;
         this.cumulativeTotal2 = 0;
-        this.cumulativeComment2 = "from " + d.toLocaleString();
+        this.cumulativeComment2 = "from " + d2.toLocaleString();
         this.cumulativeOffset2 = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
         menuitem = new PopupMenu.PopupMenuItem(_("Reset Cumulative Data Usage") + " 3 (" + this.cumulativeInterface3 + ")");
         menuitem.connect('activate', Lang.bind(this, function (event) {
-        let d = new Date();
+        let d3 = new Date();
         this.cT3 = 0;
         this.cumulativeTotal3 = 0;
-        this.cumulativeComment3 = "from " + d.toLocaleString();
+        this.cumulativeComment3 = "from " + d3.toLocaleString();
         this.cumulativeOffset3 = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
@@ -721,6 +733,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
     },
 
     setMonitoredInterface: function (name) {
+		if (!GTopInstalled) {return};
         this.monitoredInterfaceName = name;
         this.rebuildFlag = true;
         // This is a convenient place to ensure upOld and downOld are reset after change of interface or start-up
@@ -801,6 +814,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
     // This is the main update run in a loop with a timer 
     // The displays are made fixed width of 15 characters using padstring()
     update: function () {
+		if (!GTopInstalled) {return};
         if (this.monitoredInterfaceName != null) {
             let timeNow = GLib.get_monotonic_time();
             let deltaTime = (timeNow - this.timeOld) / 1000000;
@@ -915,8 +929,8 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         if (this.update_ct3) {
             this.cumulativeTotal3 = this.cT3;
         }
-        let timer = this.refreshIntervalIn * 500;
-        Mainloop.timeout_add((timer), Lang.bind(this, this.update));         
+        let timer2 = this.refreshIntervalIn * 500;
+        Mainloop.timeout_add((timer2), Lang.bind(this, this.update));         
     },
 
 formatSpeed: function (value) {
@@ -1139,5 +1153,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Added CHANGELOG.md to applet folder and use it instead of changelog.txt in right click menu
           CHANGELOG.md based on recent entries to changelog.txt with last changes at the top. changelog.txt currently remains in applet folder but is not used.
           Use symbolic links for README.md and CHANGELOG.md instead of copies from the applet folder to UUID folder for the Cinnamon Web Site to pick up
-          
+## 3.2.3
+ * Add check that GTop library is installed using a try and catch(e) technique
+ * Remove some additional duplicate let declarations occurances which could give difficulties in Cinnamon 3.4
+ * Changes to l10n translation support to bring ahead of GTop test.
+ * Update CHANGELOG.md, README.md, settings-schema.json and metadata.json
+ * Update netusagemonitor.pot so translations can be updated.          
 */
