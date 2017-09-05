@@ -46,6 +46,7 @@ GalileoManager.prototype = {
     this.path = metadata.path;
     this.orientation = orientation
     this.defaultIconPath = this.path + '/icon.png';
+    this.initialized = false;
 
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this.set_applet_icon_path(this.defaultIconPath);
@@ -56,11 +57,23 @@ GalileoManager.prototype = {
     this.menuManager.addMenu(this.menu);
     this._contentSection = new PopupMenu.PopupMenuSection();
     this.menu.addMenuItem(this._contentSection);
+  },
 
-    exec('which galileo', success => this.buildMenu(success));
+  checkGalileoInstallation: function(cb) {
+    exec('which galileo', (success, stdout) => {
+      this.buildMenu(success && stdout.trim().length > 0);
+      if (typeof cb === 'function') {
+        cb(success);
+      }
+    });
   },
 
   buildMenu: function(galileoInstalled) {
+    if (!this.initialized) {
+      this.initialized = true;
+    } else {
+      this.menu.removeAll();
+    }
     let item;
     if (galileoInstalled) {
       item = new PopupMenu.PopupIconMenuItem(_('Sync Fitness Tracker'), 'view-refresh', St.IconType.SYMBOLIC);
@@ -98,15 +111,14 @@ GalileoManager.prototype = {
 
   setupGalileo: function() {
     this.notify(_('Setting up Galileo'), _('Please wait...'));
-    let scriptPath = this.path + '/resources/setup.sh';
-    let description = _('This script will install Galileo and its dependencies using PIP.') + '\n';
+    const scriptPath = this.path + '/resources/setup.sh';
+    const description = _('This script will install Galileo and its dependencies using PIP.') + '\n';
+    const errorMessage = _('An error occurred while installing Galileo.');
     exec('gnome-terminal -x sh -c \'echo "' + description + '"; sudo ' + scriptPath + '; exec bash\'', (success) => {
       if (!success) {
-        this.setErrorStatus(_('An error occurred while installing Galileo.'));
+        this.setErrorStatus(errorMessage);
         return;
       }
-      this.menu.removeAll();
-      this.buildMenu(true);
       this.notify(
         _('Setup Complete'),
         _('You must re-insert your Fitbit dongle to be able to use it as a non-root user.')
@@ -123,7 +135,6 @@ GalileoManager.prototype = {
         this.setErrorStatus(_('An error occurred while removing Galileo.'));
         return;
       }
-      this.menu.removeAll();
       this.buildMenu(false);
     });
   },
@@ -143,8 +154,12 @@ GalileoManager.prototype = {
     });
   },
 
-  on_applet_clicked(){
-    this.menu.toggle();
+  on_applet_clicked: function() {
+    if (!this.menu.isOpen) {
+      this.checkGalileoInstallation(() => this.menu.open());
+    } else {
+      this.menu.close();
+    }
   },
 };
 

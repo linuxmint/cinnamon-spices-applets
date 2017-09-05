@@ -11,11 +11,13 @@ gulp.task('install', (cb)=>{
 });
 
 gulp.task('reload', ['install'], (cb)=>{
-  exec(`dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'GalileoManager@json' string:'APPLET'`, function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  setTimeout(()=>{
+    exec(`dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'GalileoManager@json' string:'APPLET'`, function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+    });
+  }, 100);
 })
 
 gulp.task('watch', ()=> {
