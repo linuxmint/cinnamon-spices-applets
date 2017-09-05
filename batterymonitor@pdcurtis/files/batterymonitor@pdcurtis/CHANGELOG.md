@@ -3,6 +3,7 @@
 ### 1.3.2
 
  * Add checks that sox and zenity are installed and warn that full facilities are not available without them.
+ * Remove instance of depreciated code giving a harmless warning in .xsession-errors.
  * Update batterymonitor.pot so translations can be updated.
 
 ### 1.3.1

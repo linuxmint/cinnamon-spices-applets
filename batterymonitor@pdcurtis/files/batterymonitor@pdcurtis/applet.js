@@ -417,9 +417,9 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
              if (this.batteryPercentage < Math.floor(this.alertPercentage)  && this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5) && this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryCaution }
 
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5) && this.batteryPercentage >= 00 && !this.batteryState.indexOf("discharg") > -1) {
+             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5) && this.batteryPercentage >= 0 && !this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryChargingLow }
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5)  && this.batteryPercentage >= 00 && this.batteryState.indexOf("discharg") > -1) {
+             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5)  && this.batteryPercentage >= 0 && this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryLow };
 
              // Choose what to display based on Display Type from settings dropdown  
@@ -562,5 +562,7 @@ Bug Fix for use with early versions of Cinnamon
  * Update batterymonitor.pot so translations can be updated.
 ### 1.3.2.1
  * Revert change on handling empty battery
+### 1.3.2.2
+ * Remove instance of depreciated code giving a harmless warning in .xsession-errors.
 */
 
