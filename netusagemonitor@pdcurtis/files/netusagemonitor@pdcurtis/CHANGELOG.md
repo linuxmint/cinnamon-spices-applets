@@ -3,6 +3,7 @@
 ## 3.2.3
  * Add check that GTop library is installed using a try and catch(e) technique
  * Remove duplicate let declarations occurances missed in 3.2.0 which could give difficulties in Cinnamon 3.4
+ * Some changes in intialisation to remove CJS warnings 
 ## 3.2.2
 Support new facility on Cinnamon Spices Web Site to display a CHANGELOG.md
 
