@@ -7,4 +7,4 @@ Also you'll find a reference table of all of the licenses on choosealicense.com 
 
 # Short overview over popular Open Source Licenses
 
-![popular-licenses-overview](https://user-images.githubusercontent.com/8415124/29410036-2fe9f364-834f-11e7-9429-2f0da9987e04.png)
+![popular-licenses-overview](https://user-images.githubusercontent.com/8415124/30117556-d45b62da-9320-11e7-84f9-06122bf0a933.png)
