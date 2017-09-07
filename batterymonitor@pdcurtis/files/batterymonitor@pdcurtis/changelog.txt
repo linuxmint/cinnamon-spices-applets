@@ -79,4 +79,6 @@ Bug Fix for use with early versions of Cinnamon
  * Update batterymonitor.pot so translations can be updated.
 ### 1.3.2.1
  * Revert change on handling empty battery
+### 1.3.2.2
+ * Remove instance of depreciated code giving a harmless warning in .xsession-errors.
 
