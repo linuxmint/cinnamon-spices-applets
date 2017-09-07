@@ -291,9 +291,20 @@ MyApplet.prototype = {
             }); // Extra mainBox to enable hiding of vnstati output
             this.vnstatImage = metadata.path + "/vnstatImage.png"; // path to image file in applet's folder
 
-            this.makeMenu();
-
             // Initial conditions
+            this.monitoredInterfaceName = null;
+            let lastUsedInterface = this.monitoredIinterfaceBi;
+            if (this.dataUnit == 'gbytes') { 
+                this.totalLimit = this.totalLimit1 * 1024;
+                this.cumulativeOffset1 = this.cumulativeOffsetA * 1024;
+                this.cumulativeOffset2 = this.cumulativeOffsetB * 1024;
+                this.cumulativeOffset3 = this.cumulativeOffsetC * 1024;
+            } else {
+                this.totalLimit = this.totalLimit1;
+                this.cumulativeOffset1 = this.cumulativeOffsetA;
+                this.cumulativeOffset2 = this.cumulativeOffsetB;
+                this.cumulativeOffset3 = this.cumulativeOffsetC;
+            }
             this.gtop = new GTop.glibtop_netload();
             this.timeOld = GLib.get_monotonic_time();
             this.upOld = 0;
@@ -307,9 +318,6 @@ MyApplet.prototype = {
             this.numa_style = 'numa-not-not-connected';
             this.last_numa_style = 'numa-not-not-connected'; 
 
-            this.monitoredInterfaceName = null;
-            let lastUsedInterface = this.monitoredIinterfaceBi;
-
             this.set_applet_tooltip(_("No Interface being Monitored - right click to select"));
             if (this.useDefaultInterfaceIn) {
                 this.setMonitoredInterface(this.defaultInterfaceIn);
@@ -317,11 +325,10 @@ MyApplet.prototype = {
             if (this.isInterfaceAvailable(lastUsedInterface) || lastUsedInterface == "ppp0" || lastUsedInterface == "bnep0") {
                 this.setMonitoredInterface(lastUsedInterface);
             }
+
             this.rebuildFlag = true;
             this.firstTimeFlag  = true;
-
-            this.on_settings_changed();
-            
+            this.makeMenu();            
             this.update();
         } catch (e) {
             global.logError(e);
@@ -350,7 +357,6 @@ MyApplet.prototype = {
             this.cumulativeOffset2 = this.cumulativeOffsetB;
             this.cumulativeOffset3 = this.cumulativeOffsetC;
         }
-
         this.updateLeftMenu();
     },
 
@@ -416,6 +422,8 @@ MyApplet.prototype = {
         // fudge to remove display of vnstat by using Box and removing actor from it as removeAll does not work on it
         this.mainBox.add_actor(this.imageWidget);
         this.mainBox.remove_actor(this.imageWidget);
+        this.mainBox.add_actor(this.textWidget);
+        this.mainBox.remove_actor(this.textWidget);
         // Add code for vnstat display 
         if (this.useVnstat) {
             //			this.menu.addActor(this.imageWidget);      // Old way with actor added directly to menu
@@ -424,7 +432,9 @@ MyApplet.prototype = {
                 this.mainBox.add_actor(this.imageWidget); // and add actor in way that it can be removed
                 this.mainBox.add_actor(this.textWidget); // and text actor to handle case where vnstat not installed
 
-                GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+                if ( this.monitoredInterfaceName != null) {
+                    GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+                }
                 let l = new Clutter.BinLayout();
                 let b = new Clutter.Box();
                 let c = new Clutter.Texture({
@@ -516,6 +526,7 @@ MyApplet.prototype = {
     // Update left menu
     updateLeftMenu: function () {
 
+
         if (this.useTotalLimit) {
             this.menuitemInfo2.label.text = "    " + _("Alert level (Orange):") + " " + Math.round(this.alertPercentage) + _("% of Data Limit of") + " " + this.formatSentReceived((this.totalLimit* 1024 * 1024 )) ;
         }
@@ -579,12 +590,12 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
                 if (this.monitoredInterfaceName == name) {
                     displayname = "\u2714" + displayname;
                 }
-                let menuitem = new PopupMenu.PopupMenuItem(displayname);
-                menuitem.connect('activate', Lang.bind(this, function () {
+                let menuitemdisp = new PopupMenu.PopupMenuItem(displayname);
+                menuitemdisp.connect('activate', Lang.bind(this, function () {
                     this.setMonitoredInterface(name);
                 }));
-                this.myMenuSection.addMenuItem(menuitem);
-//                this._applet_context_menu.addMenuItem(menuitem);
+                this.myMenuSection.addMenuItem(menuitemdisp);
+//                this._applet_context_menu.addMenuItem(menuitemdisp);
             }
         } 
         this.myMenuSection.addMenuItem(new PopupMenu.PopupMenuItem(_("or Select an independent interface to be monitored:"), {
@@ -595,7 +606,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         if (this.monitoredInterfaceName == "ppp0") {
             displayname2 = "\u2714" + displayname2;
         }
-        menuitem = new PopupMenu.PopupMenuItem(displayname2);
+        let menuitem = new PopupMenu.PopupMenuItem(displayname2);
         menuitem.connect('activate', Lang.bind(this, function () {
             this.setMonitoredInterface("ppp0");
         }));
@@ -641,7 +652,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.cT1 = 0;
         this.cumulativeTotal1 = 0;
         this.cumulativeComment1 = "from " + d1.toLocaleString();
-        this.cumulativeOffset1 = 0;
+        this.cumulativeOffsetA = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
@@ -651,7 +662,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.cT2 = 0;
         this.cumulativeTotal2 = 0;
         this.cumulativeComment2 = "from " + d2.toLocaleString();
-        this.cumulativeOffset2 = 0;
+        this.cumulativeOffsetB = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
@@ -661,7 +672,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.cT3 = 0;
         this.cumulativeTotal3 = 0;
         this.cumulativeComment3 = "from " + d3.toLocaleString();
-        this.cumulativeOffset3 = 0;
+        this.cumulativeOffsetC = 0;
         }));
         this.myMenuSection.addMenuItem(menuitem);
 
@@ -1158,5 +1169,7 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
  * Remove some additional duplicate let declarations occurances which could give difficulties in Cinnamon 3.4
  * Changes to l10n translation support to bring ahead of GTop test.
  * Update CHANGELOG.md, README.md, settings-schema.json and metadata.json
- * Update netusagemonitor.pot so translations can be updated.          
+ * Update netusagemonitor.pot so translations can be updated.
+## 3.2.3.1
+ * Changes in intialisation to remove some CJS warnings           
 */
