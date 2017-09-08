@@ -60,15 +60,15 @@ function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
 }
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(orientation, panel_height, instance_id) {
+    this._init(orientation, panel_height, instance_id);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.TextIconApplet.prototype._init.call(this, orientation);
+    _init: function(orientation, panel_height, instance_id) {
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         try {
             //set properties from external config file
@@ -317,7 +317,7 @@ MyApplet.prototype = {
 
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panel_height, instance_id) {
+    let myApplet = new MyApplet(orientation, panel_height, instance_id);
     return myApplet;
 }
