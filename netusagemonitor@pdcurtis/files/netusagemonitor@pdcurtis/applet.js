@@ -232,10 +232,6 @@ MyApplet.prototype = {
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
 
-//          Part of l10n support; Moved up because of GTop test
-//          UUID = metadata.uuid;
-//          Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
-
             this.applet_running = true; //** New
  
             this._client = NMClient.Client.new(); //++
@@ -281,17 +277,18 @@ MyApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
 
-            // Add code for vnstat display
+            // Add code for vnstat display as per Clem's code
             this.imageWidget = new St.Bin({
                 x_align: St.Align.MIDDLE
-            }); // As per Clem's code
-            this.textWidget = new St.Label(); // Used to display error message if vnstat not loaded
-            this.mainBox = new St.BoxLayout({
-                vertical: true
-            }); // Extra mainBox to enable hiding of vnstati output
+            });
+            this.textWidget = new St.Label(); // Only used to display error message if vnstat not loaded
+			this.menu.addActor(this.imageWidget);     // Actor added directly to menu
+//			this.menu.addActor(this.textWidget);      // Actor added directly to menu
             this.vnstatImage = metadata.path + "/vnstatImage.png"; // path to image file in applet's folder
 
-            // Initial conditions
+            this.nullImage = metadata.path + "/transdot.gif"
+ 
+           // Initial conditions
             this.monitoredInterfaceName = null;
             let lastUsedInterface = this.monitoredIinterfaceBi;
             if (this.dataUnit == 'gbytes') { 
@@ -328,6 +325,7 @@ MyApplet.prototype = {
 
             this.rebuildFlag = true;
             this.firstTimeFlag  = true;
+
             this.makeMenu();            
             this.update();
         } catch (e) {
@@ -416,59 +414,66 @@ MyApplet.prototype = {
         return false;
     },
 
-    // Build left click menu - some menu items are placeholders which are updated on changes and some are conditional
+    // Build or rebuild left click menu - some menu items are placeholders which are updated on changes, some are conditional and some are Widgets.
     makeMenu: function () {
-        this.menu.removeAll();
-        // fudge to remove display of vnstat by using Box and removing actor from it as removeAll does not work on it
-        this.mainBox.add_actor(this.imageWidget);
-        this.mainBox.remove_actor(this.imageWidget);
-        this.mainBox.add_actor(this.textWidget);
-        this.mainBox.remove_actor(this.textWidget);
-        // Add code for vnstat display 
-        if (this.useVnstat) {
-            //			this.menu.addActor(this.imageWidget);      // Old way with actor added directly to menu
-            try {
-                this.menu.addActor(this.mainBox); // Now add mainbox
-                this.mainBox.add_actor(this.imageWidget); // and add actor in way that it can be removed
-                this.mainBox.add_actor(this.textWidget); // and text actor to handle case where vnstat not installed
-
-                if ( this.monitoredInterfaceName != null) {
-                    GLib.spawn_command_line_async('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+        this.isVnstatInstalled = true;
+        try {
+            this.menu.removeAll(); // NOTE: Does not remove the Widgets only PopupMenuItems.  
+            if (this.useVnstat) {
+               if ( this.monitoredInterfaceName != null) {
+                GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+                this.displayImage = this.vnstatImage
                 }
-                let l = new Clutter.BinLayout();
-                let b = new Clutter.Box();
-                let c = new Clutter.Texture({
-                    keep_aspect_ratio: true,
-                    filter_quality: 2,
-                    filename: this.vnstatImage
-                });
-                b.set_layout_manager(l);
-                b.add_actor(c);
-                this.imageWidget.set_child(b);
-            } catch (e) {
-                this.textWidget.set_text(_("ERROR: Please make sure vnstat and vnstati are installed and that the vnstat daemon is running!"));
-                global.logError(e);
-            }
-            this.menuitemHead0 = new PopupMenu.PopupMenuItem(_("NOTE: The last time the network traffic statistics were updated by vnStat is at the top right"), {
-                reactive: false
-            });
-            this.menu.addMenuItem(this.menuitemHead0);
-            this.menuitemHead1 = new PopupMenu.PopupMenuItem("          " + _("If no Interface is Active, the last available information has been displayed"), {
-                reactive: false
-            });
-            this.menu.addMenuItem(this.menuitemHead1);
+             } else {
+                 this.displayImage = this.nullImage // Use 1x1 image instead of vnstati generated image
+             }
 
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
+             let l = new Clutter.BinLayout();
+             let b = new Clutter.Box();
+             let c = new Clutter.Texture({
+                 keep_aspect_ratio: true,
+                 filter_quality: 2,
+                 filename: this.displayImage
+             });
+             b.set_layout_manager(l);
+             b.add_actor(c);
+             this.imageWidget.set_child(b);
+        } catch (e) {
+           this.isVnstatInstalled = false;
+           // NOTE: Do not write errors to global log as usual with global.logError(e) as it would fill up!
+        }
+        if (this.useVnstat) {
+           if (this.isVnstatInstalled) { 
+
+               this.menuitemHead0 = new PopupMenu.PopupMenuItem(_("NOTE: The last time the network traffic statistics were updated by vnStat is at the top right"), {
+               reactive: false
+               });
+               this.menu.addMenuItem(this.menuitemHead0);
+
+               this.menuitemHead1 = new PopupMenu.PopupMenuItem("          " + _("If no Interface is Active, the last available information has been displayed"), {
+               reactive: false
+               });
+               this.menu.addMenuItem(this.menuitemHead1)
+
+            } else { 
+
+               this.menuitemHead2 = new PopupMenu.PopupMenuItem(_("ERROR: Please make sure vnstat and vnstati are installed and that the vnstat daemon is running!"), {
+               reactive: false
+               });
+
+                  this.menu.addMenuItem(this.menuitemHead2);
+            }
+
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         }
 
-        // Now the Cumulative Usage monitors
-
-        // Inhibit header if no interface monitored. NOTE Separators inhibited automatically by cinnamon 2.0
+        // Now write the Cumulative Usage monitors
+        // Inhibit header if no interface monitored. 
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "" || this.cumulativeInterface2 != "null" && this.cumulativeInterface2 != ""  || this.cumulativeInterface3 != "null" && this.cumulativeInterface3 != "") {
-            this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Cumulative Data Usage Information:"), {
+            this.menuitemHead3 = new PopupMenu.PopupMenuItem(_("Cumulative Data Usage Information:"), {
             reactive: false
         });
-            this.menu.addMenuItem(this.menuitemHead1);
+            this.menu.addMenuItem(this.menuitemHead3);
         }
 
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "") {
@@ -492,10 +497,10 @@ MyApplet.prototype = {
         }
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
-        this.menuitemHead2 = new PopupMenu.PopupMenuItem(_("Current Connection and Interface Information"), {
+        this.menuitemHead4 = new PopupMenu.PopupMenuItem(_("Current Connection and Interface Information"), {
             reactive: false
         });
-        this.menu.addMenuItem(this.menuitemHead2);
+        this.menu.addMenuItem(this.menuitemHead4);
 
         if (this.monitoredInterfaceName != null) {
             this.menuitemInfo = new PopupMenu.PopupMenuItem("placeholder", {
@@ -1171,5 +1176,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
  * Update CHANGELOG.md, README.md, settings-schema.json and metadata.json
  * Update netusagemonitor.pot so translations can be updated.
 ## 3.2.3.1
- * Changes in intialisation to remove some CJS warnings           
+ * Changes in intialisation to remove some CJS warnings 
+## 3.2.4
+ * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox which led to CJS warnings.
+ * Improved notification when vnstat and vnstati not installed
+ * Tidy up code 
+ * Better formatting of CHANGELOG.md     
 */
