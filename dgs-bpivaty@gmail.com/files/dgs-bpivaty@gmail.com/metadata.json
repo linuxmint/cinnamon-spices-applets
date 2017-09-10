@@ -1,0 +1,8 @@
+{
+    "description": "Manage your DGS games", 
+    "max-instances": "1", 
+    "dangerous": false, 
+    "uuid": "dgs-bpivaty@gmail.com", 
+    "icon": "dgs-applet",
+    "name": "DGS Applet"
+}
