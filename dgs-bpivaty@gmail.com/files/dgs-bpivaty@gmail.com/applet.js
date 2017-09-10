@@ -42,6 +42,7 @@ MyApplet.prototype = {
             this.baseUrl = 'http://www.dragongoserver.net/';
             this.password = null;
             this.myId = 0;
+            this.cjs_path = '/usr/bin/cjs';
             applet_path = metadata.path;
             this.icon_path = metadata.path + "/icons";
             this.orientation = orientation;
@@ -79,7 +80,7 @@ MyApplet.prototype = {
     _identify_user() {
 
         if (this.connect) {
-            Util.spawn_async([applet_path + '/user.js', this.settings.getValue('user-cred-n')], Lang.bind(this, this._on_login_finished));
+            Util.spawn_async([this.cjs_path, applet_path + '/user.js', this.settings.getValue('user-cred-n')], Lang.bind(this, this._on_login_finished));
         } else {
             this.loggedIn = false;
             this.myUserName = '';
@@ -251,7 +252,7 @@ MyApplet.prototype = {
     notify_user_played: function(game) {
         if (this.notification_list.indexOf(game) < 0) {
             Main.soundManager.play('sonar');
-            Util.spawnCommandLine(applet_path + '/notifier.js ' + game);
+            Util.spawnCommandLine(this.cjs_path, applet_path + '/notifier.js ' + game);
             this.notification_list.push(game);
         }
     },
