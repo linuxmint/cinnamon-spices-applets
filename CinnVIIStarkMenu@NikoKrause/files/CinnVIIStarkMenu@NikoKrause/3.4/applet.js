@@ -2378,8 +2378,15 @@ MyApplet.prototype = {
 
             // Quicklauncher places label
             let quicklauncher_places_label = this.quicklauncher_places[i].label;
-            if (quicklauncher_places_label == "")
+            if (quicklauncher_places_label == "") {
                 quicklauncher_places_label = this.quicklauncher_places[i].directory.split("/").pop();
+                // root '/' directory
+                if (quicklauncher_places_label == "")
+                    quicklauncher_places_label = "File System"
+                else
+                    quicklauncher_places_label = decodeURIComponent(quicklauncher_places_label);
+            }
+
 
             // Quicklauncher places icon
             let quicklauncher_places_icon = this.quicklauncher_places[i].icon;
@@ -2391,15 +2398,15 @@ MyApplet.prototype = {
             if (quicklauncher_places_directory.charAt(0) == "~") {
                 let sliced_directory = quicklauncher_places_directory.slice(2)
                 if (sliced_directory == "Documents")
-                    quicklauncher_places_directory  = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
+                    quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
                 else if (sliced_directory == "Pictures")
-                    quicklauncher_places_directory  = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
+                    quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
                 else if (sliced_directory == "Music")
-                    quicklauncher_places_directory  = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
+                    quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_MUSIC);
                 else if (sliced_directory == "Videos")
-                    quicklauncher_places_directory  = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS);
+                    quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS);
                 else if (sliced_directory == "Downloads")
-                    quicklauncher_places_directory  = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD);
+                    quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD);
                 else
                     quicklauncher_places_directory = GLib.get_home_dir() + '/' + sliced_directory;
             }
