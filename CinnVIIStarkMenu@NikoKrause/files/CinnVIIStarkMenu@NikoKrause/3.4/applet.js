@@ -2376,26 +2376,11 @@ MyApplet.prototype = {
             // Quicklauncher places checkbox
             this.menu.quicklinksCheckboxes[nr_quicklinks] = this.quicklauncher_places[i].checkbox;
 
-            // Quicklauncher places label
-            let quicklauncher_places_label = this.quicklauncher_places[i].label;
-            if (quicklauncher_places_label == "") {
-                quicklauncher_places_label = this.quicklauncher_places[i].directory.split("/").pop();
-                // root '/' directory
-                if (quicklauncher_places_label == "")
-                    quicklauncher_places_label = "File System"
-                else
-                    quicklauncher_places_label = decodeURIComponent(quicklauncher_places_label);
-            }
-
-
-            // Quicklauncher places icon
-            let quicklauncher_places_icon = this.quicklauncher_places[i].icon;
-            if (quicklauncher_places_icon == "")
-                quicklauncher_places_icon = "folder";
-
             // Quicklauncher places directory
             let quicklauncher_places_directory = this.quicklauncher_places[i].directory;
-            if (quicklauncher_places_directory.charAt(0) == "~") {
+            if (quicklauncher_places_directory == null) {
+                quicklauncher_places_directory = "–";
+            } else if (quicklauncher_places_directory.charAt(0) == "~") {
                 let sliced_directory = quicklauncher_places_directory.slice(2)
                 if (sliced_directory == "Documents")
                     quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
@@ -2410,6 +2395,22 @@ MyApplet.prototype = {
                 else
                     quicklauncher_places_directory = GLib.get_home_dir() + '/' + sliced_directory;
             }
+
+            // Quicklauncher places label
+            let quicklauncher_places_label = this.quicklauncher_places[i].label;
+            if (quicklauncher_places_label == "") {
+                quicklauncher_places_label = quicklauncher_places_directory.split("/").pop();
+                // root '/' directory
+                if (quicklauncher_places_label == "")
+                    quicklauncher_places_label = "File System"
+                else
+                    quicklauncher_places_label = decodeURIComponent(quicklauncher_places_label);
+            }
+
+            // Quicklauncher places icon
+            let quicklauncher_places_icon = this.quicklauncher_places[i].icon;
+            if (quicklauncher_places_icon == "")
+                quicklauncher_places_icon = "folder";
 
             // Quicklauncher places button
             this.menu.quicklinks[nr_quicklinks] = quicklauncher_places_label + "," + quicklauncher_places_icon + "," + "xdg-open " + quicklauncher_places_directory;
