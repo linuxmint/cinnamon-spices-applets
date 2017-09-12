@@ -28,13 +28,14 @@ function MyApplet(orientation, metadata, instance_id) {
 }
 
 MyApplet.prototype = {
-    __proto__: Applet.IconApplet.prototype,
+    __proto__: Applet.TextIconApplet.prototype,
 
     _init: function(orientation, metadata, instance_id) {        
-        Applet.IconApplet.prototype._init.call(this, orientation, metadata, instance_id);
+        Applet.TextIconApplet.prototype._init.call(this, orientation, metadata, instance_id);
         
         try {  
-            this.set_applet_tooltip(_("Diplays DGS user games status"));  
+            this.set_applet_tooltip(_("Diplays DGS user games status")); 
+            this.set_applet_label('');
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
@@ -42,23 +43,24 @@ MyApplet.prototype = {
             this.baseUrl = 'http://www.dragongoserver.net/';
             this.password = null;
             this.myId = 0;
+            this.cjs_path = '/usr/bin/cjs';
             applet_path = metadata.path;
             this.icon_path = metadata.path + "/icons";
             this.orientation = orientation;
 
             this.notification_list = [];
 
-            this.settings.bind('check-every', 'check_every', Lang.bind(this, this.on_check_every_changed));
+            this.settings.bind('check-every', 'check_every', Lang.bind(this, this._reset_timer));
             this.settings.bind("connect", "connect", this._identify_user);
 
             this.myUserName = this.settings.getValue('user-cred-n');
 
             this.loopDelay = 1000 * 60 * this.check_every;
-            this._loopTimeoutId = Mainloop.timeout_add(this.loopDelay, Lang.bind(this, this.on_timeOut));
+            this._loopTimeoutId = Mainloop.timeout_add(this.loopDelay, Lang.bind(this, this._on_timeOut));
 
             this._set_applet_icon();
 
-            this.init_menu();
+            this._init_menu();
         
         }
         catch (e) {
@@ -66,11 +68,23 @@ MyApplet.prototype = {
         }
     },
 
-    on_check_every_changed() {
+    on_applet_added_to_panel: function(userEnabled) {
+        
+    },
+
+    set_label(games_to_play) {
+        if (games_to_play > 0) {
+            this.set_applet_label(games_to_play.toString());
+        } else {
+            this.set_applet_label('');
+        }
+    },
+
+    _reset_timer() {
         try {
             Mainloop.source_remove(this._loopTimeoutId);
             this.loopDelay = 1000 * 60 * this.check_every;
-            this._loopTimeoutId = Mainloop.timeout_add(this.loopDelay, Lang.bind(this, this.on_timeOut));
+            this._loopTimeoutId = Mainloop.timeout_add(this.loopDelay, Lang.bind(this, this._on_timeOut));
         } catch(err) {
             global.log(err.message);
         }
@@ -79,7 +93,7 @@ MyApplet.prototype = {
     _identify_user() {
 
         if (this.connect) {
-            Util.spawn_async([applet_path + '/user.js', this.settings.getValue('user-cred-n')], Lang.bind(this, this._on_login_finished));
+            Util.spawn_async([this.cjs_path, applet_path + '/user.js', this.settings.getValue('user-cred-n')], Lang.bind(this, this._on_login_finished));
         } else {
             this.loggedIn = false;
             this.myUserName = '';
@@ -103,13 +117,13 @@ MyApplet.prototype = {
                 data = cred.split(',');
 
                 if (data.length == 2) {
-                    if (this.check_user(data[0], data[1])) {
+                    if (this._check_user(data[0], data[1])) {
                         this.loggedIn = true;
                         this.myUserName = data[0];
                         this.password = data[1];
-                        this.myId = this.parseIdFromUser(this.myUserName);
+                        this.myId = this._parseIdFromUser(this.myUserName);
                         this._set_menu_title();
-                        this.store_passwd();
+                        this._store_passwd();
                         this.setting_user_id = this.myUserName;
                         this._recreate_all_menu();
                     } else {
@@ -117,7 +131,7 @@ MyApplet.prototype = {
                         this.settings.setValue('connect', false);
                         this.myUserName = '';
                         this.setting_user_id = '';
-                        this.clear_passwd();
+                        this._clear_passwd();
                         this.connect.setToggleState(false);
                         this._recreate_all_menu();
                     }
@@ -126,7 +140,7 @@ MyApplet.prototype = {
         }
     },
 
-    check_user: function(dgs_uid, passwd) {
+    _check_user: function(dgs_uid, passwd) {
         
         let login_url = this.baseUrl + 'login.php?quick_mode=1&userid=' + dgs_uid  + '&passwd=' + passwd;
         let urlcatch = Gio.file_new_for_uri(login_url);
@@ -147,7 +161,7 @@ MyApplet.prototype = {
         
     },
 
-    store_passwd: function() {
+    _store_passwd: function() {
         let secretSchema = {
             "org.bp.keyring.DGS.login": Secret.SchemaAttributeType.STRING
         };
@@ -184,17 +198,19 @@ MyApplet.prototype = {
         this.password = Secret.password_lookup_finish(result);
 
         if (this.password != null) {
-            if (this.check_user(this.myUserName, this.password)) {
+            if (this._check_user(this.myUserName, this.password)) {
+                this._reset_timer();
+                this.myId = this._parseIdFromUser(this.myUserName);
                 this._login();
             } else {
-                this.set_no_user_menu();
+                this._set_no_user_menu();
             }
         } else {
-            this.set_no_user_menu();
+            this._set_no_user_menu();
         }
     },
 
-    clear_passwd: function() {
+    _clear_passwd: function() {
         let secretSchema = {
             "org.bp.keyring.DGS.login": Secret.SchemaAttributeType.STRING
         };
@@ -219,12 +235,12 @@ MyApplet.prototype = {
         }
     },
 
-    on_timeOut() {
+    _on_timeOut() {
         this._recreate_all_menu();
         return true;
     },
 
-    set_no_user_menu() {
+    _set_no_user_menu() {
         let item = new PopupMenu.PopupMenuItem('DGS ( No user, please configure! )');
         item.actor.reactive = false;
         item.actor.can_focus = false;
@@ -248,24 +264,27 @@ MyApplet.prototype = {
     
     },
 
-    notify_user_played: function(game) {
+    _notify_user_played: function(game) {
         if (this.notification_list.indexOf(game) < 0) {
             Main.soundManager.play('sonar');
-            Util.spawnCommandLine(applet_path + '/notifier.js ' + game);
+            Util.spawn_async([this.cjs_path, applet_path + '/notifier.js', game]);
             this.notification_list.push(game);
         }
     },
 
-    add_game_item: function(item, move_uid) {
+    _add_game_item: function(item, move_uid) {
         let menu_item = new PopupMenu.PopupMenuItem(item.toString());
+        let result;
 
         if (this.myId === move_uid) {
             // it is my turn to play, notify me
             menu_item.label.add_style_class_name('display-subtitle');
-            this.notify_user_played(item);
+            this._notify_user_played(item);
+            result = 1;
 
         } else {
             // i already played in that game, remove from notified list if still in
+            result = 0;
             let index = this.notification_list.indexOf(item);
             if (index > 1) {
                 this.notification_list.splice(index);
@@ -273,13 +292,14 @@ MyApplet.prototype = {
         }
         this.menu.addMenuItem(menu_item);
         menu_item.connect("activate", Lang.bind(this, this.on_game_button_pressed));
+        return result;
     },
 
     on_applet_clicked: function(event) {
         this.menu.toggle();
     },
 
-    parseIdFromUser(user) {
+    _parseIdFromUser(user) {
         const req = 'quick_do.php?obj=user&cmd=info&user=' + user.toString();
         let urlcatch = Gio.file_new_for_uri(this.baseUrl + req);
 
@@ -293,7 +313,7 @@ MyApplet.prototype = {
         }
     },
 
-    parseUserNameFromId(userid) {
+    _parseUserNameFromId(userid) {
         const req = 'quick_do.php?obj=user&cmd=info&uid=' + userid.toString();
         let urlcatch = Gio.file_new_for_uri(this.baseUrl + req);
 
@@ -312,19 +332,21 @@ MyApplet.prototype = {
         this.set_applet_icon_path(iconFileName);
     },
 
-    parseGameList(jsonData) {
+    _parseGameList(jsonData) {
         let maxGames = jsonData.list_totals;
+        let maxToPlay = 0;
 
         for (let i = 0; i < maxGames; i++) {
             let move_uid = jsonData.list_result[i][25];
 
-            const p1 = this.parseUserNameFromId(jsonData.list_result[i][29]);
-            const p2 = this.parseUserNameFromId(jsonData.list_result[i][34]);
+            const p1 = this._parseUserNameFromId(jsonData.list_result[i][29]);
+            const p2 = this._parseUserNameFromId(jsonData.list_result[i][34]);
 
             const players = p1 + ' vs ' + p2;
 
-            this.add_game_item(jsonData.list_result[i][0]  + '  (' + players + ')', move_uid);
+            maxToPlay += this._add_game_item(jsonData.list_result[i][0]  + '  (' + players + ')', move_uid);
         }
+        this.set_label(maxToPlay);
     },
 
     on_game_button_pressed: function(actor, event) {
@@ -340,14 +362,14 @@ MyApplet.prototype = {
 
             if (this.loggedIn) {
                 this._set_menu_title();
-                this.parseGameList(JSON.parse(this.get_game_list()));
+                this._parseGameList(JSON.parse(this._get_game_list()));
                 this._add_refresh_menu_item();
 
                 if (was_opened) {
                     this.menu.toggle();
                 }
             } else {
-                this.set_no_user_menu();
+                this._set_no_user_menu();
             }
             
         } catch (err) {
@@ -355,7 +377,7 @@ MyApplet.prototype = {
         }
     },
 
-    get_game_list() {
+    _get_game_list() {
         let urlcatch = Gio.file_new_for_uri(this.baseUrl);
         const req = 'quick_do.php?obj=game&cmd=list&view=running&uid=' + this.myUserName;
 
@@ -372,7 +394,7 @@ MyApplet.prototype = {
     _login() {
         this.loggedIn = true;
         this._set_menu_title();
-        this.parseGameList(JSON.parse(this.get_game_list()));
+        this._parseGameList(JSON.parse(this._get_game_list()));
         this._add_refresh_menu_item();
     },
 
@@ -380,7 +402,7 @@ MyApplet.prototype = {
         Mainloop.source_remove(this._loopTimeoutId);
     },
 
-    init_menu() {
+    _init_menu() {
         this._control_password();
     },
 
