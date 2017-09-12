@@ -50,6 +50,13 @@ At the root level:
 - screenshot.png is a screenshot of the spice in action.
 - README.md is optional and can be used to show instructions and information about the spice. It appears both in Github and on the website.
 
+## Validation
+
+To check if a spice with UUID satifies those requirements run the `validate-spice` script in this repo:
+```
+./validate-spice UUID
+```
+
 # Rights and responsibility of the author
 
 The author is in charge of the development of the spice.
