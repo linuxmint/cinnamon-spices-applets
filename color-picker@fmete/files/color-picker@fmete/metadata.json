@@ -1,7 +1,5 @@
 {
-    "last-edited": "1451330921", 
-    "description": "Click on applet to pick color", 
-    "uuid": "color-picker@fmete", 
-    "name": "Color Picker", 
-    "icon": "color-picker"
+    "description": "Click on applet to pick color",
+    "uuid": "color-picker@fmete",
+    "name": "Color Picker"
 }
