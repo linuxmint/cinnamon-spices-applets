@@ -338,13 +338,13 @@ MyApplet.prototype = {
         this.refreshWeather(true)
       }))
 
+      this.orientation = orientation;
       try {
           this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+          this.update_label_visible();
       } catch(e) {
-          global.log(UUID + ": vertical panel support failed")
+          // vertical panel not supported
       }
-      this.orientation = orientation;
-      this.update_label_visible();
    }
 
 , update_label_visible: function () {
@@ -482,7 +482,13 @@ MyApplet.prototype = {
       } else {
         this.set_applet_label('')
       }
-      this.update_label_visible();
+
+      try {
+          this.update_label_visible();
+      } catch(e) {
+          // vertical panel not supported
+      }
+
 
       this._currentWeatherSummary.text = comment
       this._currentWeatherTemperature.text = temperature + ' ' + this.unitToUnicode()
