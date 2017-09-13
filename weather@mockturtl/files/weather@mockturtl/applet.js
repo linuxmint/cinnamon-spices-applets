@@ -337,7 +337,27 @@ MyApplet.prototype = {
       Mainloop.timeout_add_seconds(3, Lang.bind(this, function mainloopTimeout() {
         this.refreshWeather(true)
       }))
+
+      try {
+          this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+      } catch(e) {
+          global.log(UUID + ": vertical panel support failed")
+      }
+      this.orientation = orientation;
+      this.update_label_visible();
    }
+
+, update_label_visible: function () {
+    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+      this.hide_applet_label(true);
+    else
+      this.hide_applet_label(false);
+  }
+
+, on_orientation_changed: function (orientation) {
+      this.orientation = orientation;
+      this.refreshWeather()
+  }
 
   // Override Methods: Applet
 , _onKeySettingsUpdated: function _onKeySettingsUpdated() {
@@ -428,7 +448,7 @@ MyApplet.prototype = {
         location = this._locationLabelOverride
 
       this.set_applet_tooltip(_(location))
-      
+
       // Refresh current weather
       let comment = weather_c.text
       if (this._translateCondition)
@@ -462,6 +482,7 @@ MyApplet.prototype = {
       } else {
         this.set_applet_label('')
       }
+      this.update_label_visible();
 
       this._currentWeatherSummary.text = comment
       this._currentWeatherTemperature.text = temperature + ' ' + this.unitToUnicode()
@@ -604,7 +625,7 @@ MyApplet.prototype = {
         let code = forecastData.code
         let t_low = forecastData.low
         let t_high = forecastData.high
-        
+
         let first_temperature = this._temperatureHighFirst ? t_high : t_low
         let second_temperature = this._temperatureHighFirst ? t_low : t_high
 
