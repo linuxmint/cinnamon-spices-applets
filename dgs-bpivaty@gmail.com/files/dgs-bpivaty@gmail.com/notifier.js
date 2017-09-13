@@ -1,8 +1,6 @@
 #!/usr/bin/gjs
 
-// const System = imports.system;
 const Notify = imports.gi.Notify;
-const GSound = imports.gi.GSound;
 
 let text = '';
 
@@ -19,9 +17,3 @@ let notify = new Notify.Notification({
 });
 
 notify.show();
-
-let hello = new GSound.Context();
-hello.init(null);
-hello.play_simple({ "event.id" : "phone-incoming-call", 
-                    "event.description" : "hello world" }, null);
-GLib.usleep (2000000);
