@@ -1,7 +1,6 @@
 {
     "uuid": "dgs-bpivaty@gmail.com", 
     "max-instances": "1", 
-    "dangerous": false, 
     "description": "Manage your DGS games", 
     "name": "DGS Applet", 
     "last-edited": 1505342405, 
