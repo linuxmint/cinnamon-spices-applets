@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-03 22:17+0100\n"
+"POT-Creation-Date: 2017-09-08 22:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,133 +32,133 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
-#: applet.js:313
+#: applet.js:318
 msgid "No Interface being Monitored - right click to select"
 msgstr ""
 
-#: applet.js:439
-msgid ""
-"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat"
-" daemon is running!"
-msgstr ""
-
-#: applet.js:442
+#: applet.js:448
 msgid ""
 "NOTE: The last time the network traffic statistics were updated by vnStat is"
 " at the top right"
 msgstr ""
 
-#: applet.js:446
+#: applet.js:453
 msgid ""
 "If no Interface is Active, the last available information has been displayed"
 msgstr ""
 
-#: applet.js:458
+#: applet.js:460
+msgid ""
+"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat"
+" daemon is running!"
+msgstr ""
+
+#: applet.js:473
 msgid "Cumulative Data Usage Information:"
 msgstr ""
 
-#: applet.js:485
+#: applet.js:500
 msgid "Current Connection and Interface Information"
 msgstr ""
 
-#: applet.js:497
+#: applet.js:512
 msgid "No network monitored. Please select one right-clicking the applet."
 msgstr ""
 
-#: applet.js:504
+#: applet.js:519
 msgid "Note: Alerts not enabled in Settings"
 msgstr ""
 
-#: applet.js:520
+#: applet.js:536
 msgid "Alert level (Orange):"
 msgstr ""
 
-#: applet.js:520
+#: applet.js:536
 #, javascript-format
 msgid "% of Data Limit of"
 msgstr ""
 
-#: applet.js:525 applet.js:527 applet.js:533 applet.js:535 applet.js:541
+#: applet.js:541 applet.js:543 applet.js:549 applet.js:551 applet.js:557
 msgid "Cumulative Data Use"
 msgstr ""
 
-#: applet.js:525 applet.js:533 applet.js:541
+#: applet.js:541 applet.js:549 applet.js:557
 msgid "with offset of"
 msgstr ""
 
-#: applet.js:564
+#: applet.js:580
 msgid "Select a network manager interface to be monitored:"
 msgstr ""
 
-#: applet.js:577
+#: applet.js:593
 msgid "(Active)"
 msgstr ""
 
-#: applet.js:590
+#: applet.js:606
 msgid "or Select an independent interface to be monitored:"
 msgstr ""
 
-#: applet.js:594
+#: applet.js:610
 msgid "for most USB Mobile Internet Modems)"
 msgstr ""
 
-#: applet.js:606
+#: applet.js:622
 msgid "for Android Bluetooth PAN Connections)"
 msgstr ""
 
-#: applet.js:616
+#: applet.js:632
 msgid "Check for Changes in Devices and Display Options"
 msgstr ""
 
-#: applet.js:624
+#: applet.js:640
 msgid "Toggle Display from ↓ and ↑ to ⇵"
 msgstr ""
 
-#: applet.js:638 applet.js:648 applet.js:658
+#: applet.js:654 applet.js:664 applet.js:674
 msgid "Reset Cumulative Data Usage"
 msgstr ""
 
-#: applet.js:671
+#: applet.js:687
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:674
+#: applet.js:690
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:680
+#: applet.js:696
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:686
+#: applet.js:702
 msgid "View the Help File"
 msgstr ""
 
-#: applet.js:695
+#: applet.js:711
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr ""
 
-#: applet.js:701
+#: applet.js:717
 msgid "Open alertScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:707
+#: applet.js:723
 msgid "Open suspendScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:715
+#: applet.js:731
 msgid "Test alertScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:721
+#: applet.js:737
 msgid "Test suspendScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:727
+#: applet.js:743
 msgid "Test Crisis Management Function (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:797
+#: applet.js:813
 msgid ""
 "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
 "\n"
@@ -167,15 +167,15 @@ msgid ""
 "or disconnect using the Network Manager Applet"
 msgstr ""
 
-#: applet.js:870
+#: applet.js:886
 msgid "Interface:"
 msgstr ""
 
-#: applet.js:870 applet.js:873
+#: applet.js:886 applet.js:889
 msgid "Downloaded:"
 msgstr ""
 
-#: applet.js:870 applet.js:873
+#: applet.js:886 applet.js:889
 msgid "Uploaded:"
 msgstr ""
 
