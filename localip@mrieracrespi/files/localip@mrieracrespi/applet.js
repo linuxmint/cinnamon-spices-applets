@@ -52,9 +52,9 @@ MyApplet.prototype = {
     refreshLocation: function refreshLocation() {
         let [res, out] = GLib.spawn_command_line_sync(" hostname -I ")
 
-	let out = String(out).replace("\n", "");
-	let out = String(out).trim();
-	let out = String(out).replace(/ /g, " - ");
+        out = String(out).replace("\n", "");
+        out = String(out).trim();
+        out = String(out).replace(/ /g, " - ");
 
         this.set_applet_label('' + out + '');
 

@@ -129,7 +129,7 @@
  },
  "show-places" : {
     "type" : "switch",
-    "default" : true,
+    "default" : false,
     "description": "Show bookmarks and places",
     "tooltip": "Choose whether or not to show bookmarks and places in the menu."
  },
@@ -216,7 +216,7 @@
  },
  "user-box-layout" : {
     "type" : "combobox",
-    "default" : "userNameAndIcon",
+    "default" : "userIcon",
     "options" : {
         "User picture and user name": "userNameAndIcon",
         "User picture only": "userIcon",
@@ -269,7 +269,7 @@
  },
  "quicklauncher-separator1" : {
     "type" : "switch",
-    "default" : true,
+    "default" : false,
     "description" : "Separator below user account info box",
     "tooltip" : "Choose whether or not to show this separator."
  },
@@ -277,7 +277,7 @@
     "type" : "list",
     "description" : "Custom Quicklauncher Places",
     "columns" : [
-        {"id": "checkbox",  "title": "Visible",      "type": "boolean"},
+        {"id": "checkbox",  "title": "Visible",      "type": "boolean", "default": true},
         {"id": "directory", "title": "Directory",    "type": "file", "select-dir": true},
         {"id": "label",     "title": "Custom Label", "type": "string"},
         {"id": "icon",      "title": "Custom Icon",  "type": "icon"}
@@ -301,7 +301,7 @@
     "type" : "list",
     "description" : "Custom Quicklauncher Applications",
     "columns" : [
-        {"id": "checkbox",  "title": "Visible",  "type": "boolean"},
+        {"id": "checkbox",  "title": "Visible",  "type": "boolean", "default": true},
         {"id": "command",   "title": "Command", "type": "string"},
         {"id": "label",     "title": "Custom Label",   "type": "string"},
         {"id": "icon",      "title": "Custom Icon",    "type": "icon"}
