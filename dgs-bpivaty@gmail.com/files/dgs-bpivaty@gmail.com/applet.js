@@ -13,8 +13,8 @@ const Secret = imports.gi.Secret;
 const Settings = imports.ui.settings;
 const Main   = imports.ui.main;
 
-
-var applet_path;
+const LoginCancelled = -1;
+const UknownUser = '* unknown user *';
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
 
