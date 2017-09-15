@@ -27,7 +27,7 @@ const CMD_DIVIN = 'xmodmap "'+Meta.path+'/divin.map"'
 // cinnamon-json-makepot -j po/tfmKeyboard@alexpp.orig.pot
 // msguniq po/tfmKeyboard@alexpp.orig.pot > po/tfmKeyboard@alexpp.pot
 // msginit --locale=fr --input=tfmKeyboard@alexpp.pot
-// msgmerge -U fr.po tfmKeyboard@alexpp.pot 
+// msgmerge -U fr.po tfmKeyboard@alexpp.pot
 // cinnamon-json-makepot -i tfmKeyboard@alexpp
 // cinnamon-json-makepot -r tfmKeyboardt@alexpp
 
@@ -70,7 +70,7 @@ MyApplet.prototype = {
 	H_F10              : 'F10',
 	H_F11              : 'F11',
 	H_F12              : 'F12',
-	
+
 	D_F1               : '1',
 	D_F2               : '2',
 	D_F3               : '3',
@@ -83,7 +83,7 @@ MyApplet.prototype = {
 	D_F10              : 'F10',
 	D_F11              : 'F11',
 	D_F12              : 'F12',
-	
+
 	USE_TEXT           : true,
 	USE_ICON           : true,
 	USE_MENUPOPUP      : true,
@@ -115,7 +115,7 @@ MyApplet.prototype = {
 		Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instanceId)
 		if (this.USE_TEXT) this.set_applet_label(_("Loading...."))
 		this.set_applet_tooltip(_("Transformice keyboard configuration switch"))
-		
+
 		// Test de capacités
 		let [res, echoed, err, status] = GLib.spawn_command_line_sync("which xmodmap")
 		if (status != 0) throw UUID+': Error xmodmap not found.'
@@ -131,11 +131,11 @@ MyApplet.prototype = {
 		this._Reg_Setting("USE_MENUPOPUP")
 		this._Reg_Setting("USE_HOTKEYS", this.on_setting_change)
 		this._Reg_Setting("USE_RECORD", this.on_setting_change)
-		
+
 		this._Reg_Setting("CMD_SWITCH")
 		this._Reg_Setting("SWITCH_TIMEOUT")
 		this._Reg_Setting("RECORD_TIMEOUT")
-		
+
 		this._Reg_Setting("CMD_RECORD_PROGRAM", this.on_setting_change)
 		this._Reg_Setting("RECORD_FILENAME")
 		this._Reg_Setting("RECORD_DIRECTORY")
@@ -151,7 +151,7 @@ MyApplet.prototype = {
 		this._Reg_Setting("H_F10", this.on_diff_update)
 		this._Reg_Setting("H_F11", this.on_diff_update)
 		this._Reg_Setting("H_F12", this.on_diff_update)
-		
+
 		this._Reg_Setting("D_F1", this.on_divin_update)
 		this._Reg_Setting("D_F2", this.on_divin_update)
 		this._Reg_Setting("D_F3", this.on_divin_update)
@@ -164,7 +164,7 @@ MyApplet.prototype = {
 		this._Reg_Setting("D_F10", this.on_divin_update)
 		this._Reg_Setting("D_F11", this.on_divin_update)
 		this._Reg_Setting("D_F12", this.on_divin_update)
-		
+
 		this._Reg_Setting("RECORD_CROP_X")
 		this._Reg_Setting("RECORD_CROP_Y")
 		this._Reg_Setting("RECORD_CROP_W")
@@ -172,7 +172,7 @@ MyApplet.prototype = {
 		this._Reg_Setting("USE_FIXED_ZONE")
 		this._Reg_Setting("RECORD_FIXED_WIDTH")
 		this._Reg_Setting("RECORD_FIXED_HEIGHT")
-		
+
 		// Initialisation selon les paramètres
 		this.VIDEO_DIRECTORY = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_VIDEOS)
 		//global.screen.get_display().connect('notify::focus-window', Lang.bind(this, this._onFocusWindow));
@@ -245,13 +245,13 @@ MyApplet.prototype = {
 			return
 		}
 		//if (!this.currentwindow) return
-		
+
 		this.RECORD_DIRECTORY = this._filename_parse(this.RECORD_DIRECTORY)
 		let cmd = "{PRG} -video_size {WIDTH}x{HEIGHT} -r 25 -f x11grab -i :0.0+{X},{Y} \"{DIRECTORY}/{FILENAME}.mp4\""
-		
+
 		if (this.CMD_RECORD_PROGRAM == "vlc")
 			cmd = "{PRG} screen:// -I dummy --screen-left={X} --screen-top={Y} --screen-width={WIDTH} --screen-height={HEIGHT} --no-video :screen-fps=25 :screen-caching=300 --sout \"#transcode{vcodec=h264,vb=800,fps=25,scale=1,acodec=none}:duplicate{dst=std{access=file,mux=mp4,dst='{DIRECTORY}/{FILENAME}.mp4'}}\""
-		let cmd = this._filename_parse(cmd)
+		cmd = this._filename_parse(cmd)
 
 		if (this.record_time <=0 && cmd) {
 			//global.log(UUID+'::do_record() '+[cmd])
@@ -331,7 +331,7 @@ MyApplet.prototype = {
 	},
 
 	on_setting_change: function () {
-		
+
 		let [res, echoed, err, status] = GLib.spawn_command_line_sync(this._filename_parse("which {PRG}"))
 		this.can_record = (status == 0) && this.USE_RECORD
 		if (this.record_time != 0 && !this.FirstRun) this.stop_record()
@@ -348,7 +348,7 @@ MyApplet.prototype = {
 			Main.keybindingManager.removeHotKey('tfm-diff')
 			Main.keybindingManager.removeHotKey('tfm-divin')
 		}
-		
+
 		//if (this.can_record && this.USE_HOTKEYS) {
 			Main.keybindingManager.addHotKey('tfm-record', this.HOTKEY_RECORD, Lang.bind(this, this.do_record))
 			Main.keybindingManager.addHotKey('tfm-record-S', this.HOTKEY_RECORD_S, Lang.bind(this, function(){
@@ -359,13 +359,13 @@ MyApplet.prototype = {
 			Main.keybindingManager.removeHotKey('tfm-record')
 			Main.keybindingManager.removeHotKey('tfm-record-S')
 		}*/
-		
+
 		this.update_menu()
 	},
 
 	update_menu: function() {
 		this.menu.removeAll()
-		
+
 		this.menu.addAction(_("Switch normal / prefered mode"),	Lang.bind(this, this.on_switch))
 		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
 		this.menu.addAction(_("Normal"),				Lang.bind(this, this.on_normal))
@@ -379,22 +379,22 @@ MyApplet.prototype = {
 				this.menu.addAction(_("Start recording"),				Lang.bind(this, this.do_record))
 		}
 	},
-	
+
 	on_diff_update: function () {
 		let cmd ='"'+Meta.path+'/genmap.sh" diff '+this.H_F1+" "+this.H_F2+" "+this.H_F3+" "+this.H_F4+" "+this.H_F5+" "+this.H_F6+" "+this.H_F7+" "+this.H_F8+" "+this.H_F9+" "+this.H_F10+" "+this.H_F11+" "+this.H_F12
 		let [res, echoed, err, status] = GLib.spawn_command_line_sync(cmd)
 		global.log(UUID+'::on_diff_update'+[cmd, res, echoed, err, status])
-		
+
 		if (this.kb_original == "diff") GLib.spawn_command_line_async(CMD_DIFF)
 	},
 	on_divin_update: function () {
 		let cmd ='"'+Meta.path+'/genmap.sh" divin '+this.D_F1+" "+this.D_F2+" "+this.D_F3+" "+this.D_F4+" "+this.D_F5+" "+this.D_F6+" "+this.D_F7+" "+this.D_F8+" "+this.D_F9+" "+this.D_F10+" "+this.D_F11+" "+this.D_F12
 		let [res, echoed, err, status] = GLib.spawn_command_line_sync(cmd)
 		global.log(UUID+'::on_divin_update'+[cmd, res, echoed, err, status])
-		
+
 		if (this.kb_original == "divin") GLib.spawn_command_line_async(CMD_DIVIN)
 	},
-	
+
 	_Reg_Setting_O: function (key) {
 		this.settings.bindProperty(Settings.BindingDirection.OUT,// Setting type
 			key,				// The setting key
@@ -413,9 +413,9 @@ MyApplet.prototype = {
 	_padNum: function(num) { return (num < 10 ? '0' + num : num); },
 	_filename_parse: function( file ) {
 		let date = new Date();
-		//let width = 
+		//let width =
 		let monitor = Main.layoutManager.primaryMonitor
-		
+
 		let replacements = {
 			'%Y': date.getFullYear(),
 			'%M': this._padNum(date.getMonth() + 1),
@@ -433,7 +433,7 @@ MyApplet.prototype = {
 			'{FILENAME}': this._get_filename(),
 			'{PRG}': this.CMD_RECORD_PROGRAM,
 		};
-		
+
 		// FIX [libx264 @ 0xa1e6a0] height not divisible by 2 (1280x899)
 		// Error while opening encoder for output stream #0:0 - maybe incorrect parameters such as bit_rate, rate, width or height
 		if (replacements['{WIDTH}'] % 2 == 1) replacements['{WIDTH}']--
@@ -444,7 +444,7 @@ MyApplet.prototype = {
 		}
 		return file
 	},
-	
+
 	_get_filename: function () {
 		let filename = this.RECORD_FILENAME
 		let date = new Date();
@@ -456,7 +456,7 @@ MyApplet.prototype = {
 			'%I': this._padNum(date.getMinutes()),
 			'%S': this._padNum(date.getSeconds()),
 			'%m': this._padNum(date.getMilliseconds()),
-		};		
+		};
 
 		for (var k in replacements) {
 			filename = filename.replace(k, replacements[k])
@@ -488,7 +488,7 @@ MyApplet.prototype = {
 		this._notification.setTransient(true)
 		this._notification.connect('destroy', function() {this._notification = null;})
 		this._source.notify(this._notification)
-		
+
 		this.timeoutId = Mainloop.timeout_add(5500, Lang.bind(this, function() {
 			//global.log("tfm@keyboard::timeout")
 			if (this._notification)
@@ -519,7 +519,7 @@ avconv -video_size 1024x768 -framerate 15 -f x11grab -i :0.0+100,200 output.mp4
 		} catch (e) {
 			global.log([UUID, e])
 		}
-		
+
 		if (this.currentwindow) {
 			this.cw_X = this.currentwindow.get_position()[0]
 			this.cw_Y = this.currentwindow.get_position()[1]
