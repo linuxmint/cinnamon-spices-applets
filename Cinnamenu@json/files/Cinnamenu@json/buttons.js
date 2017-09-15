@@ -28,47 +28,12 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-const Chromium = AppletDir.webChromium;
-const Firefox = AppletDir.webFirefox;
-const GoogleChrome = AppletDir.webGoogleChrome;
-const Midori = AppletDir.webMidori;
-const Opera = AppletDir.webOpera;
-
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 
 const ApplicationType = {
   _applications: 0,
   _places: 1,
   _recent: 2
-};
-
-/**
- * @name SearchWebBookmarks
- * @description Class to consolodate search of web browser(s) bookmarks
- * @description Code borrowed from SearchBookmarks extension by bmh1980
- * @description at https://extensions.gnome.org/extension/557/search-bookmarks/
- */
-function SearchWebBookmarks() {
-  this._init.apply(this, arguments);
-}
-
-SearchWebBookmarks.prototype = {
-
-  _init: function () {
-    Chromium.init();
-    Firefox.init();
-    GoogleChrome.init();
-    Midori.init();
-    Opera.init();
-  },
-
-  destroy: function () {
-    Chromium.deinit();
-    Firefox.deinit();
-    GoogleChrome.deinit();
-    Midori.deinit();
-    Opera.deinit();
-  }
 };
 
 /**
@@ -294,6 +259,9 @@ ApplicationContextMenuItem.prototype = {
   },
 
   activate: function(event) {
+    if (!this._appButton) {
+      return false;
+    }
     switch (this._action) {
       case 'add_to_panel':
         if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
@@ -323,11 +291,9 @@ ApplicationContextMenuItem.prototype = {
         break;
       case 'add_to_favorites':
         this._appButton._parent.appFavorites.addFavorite(this._appButton.app.get_id());
-        this._appButton.menu.close();
         break;
       case 'remove_from_favorites':
         this._appButton._parent.appFavorites.removeFavorite(this._appButton.app.get_id());
-        this._appButton.menu.close();
         break;
       case 'uninstall':
         Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application')
@@ -344,11 +310,11 @@ ApplicationContextMenuItem.prototype = {
 
   destroy: function() {
     this.signals.disconnectAllSignals();
+    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
     let props = Object.keys(this);
     for (let i = 0, len = props.length; i < len; i++) {
       this[props[i]] = undefined;
     }
-    PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
   }
 };
 
@@ -534,7 +500,7 @@ AppListGridButton.prototype = {
         + '; border-radius: ' + this._parent.theme.borderRadius + 'px; padding-top: ' + this._parent.theme.padding + 'px; padding-bottom: ' + this._parent.theme.padding + 'px;');
       }
       this.menu.isOpen = false;
-      this.buttonBox.add_child(this.menu.actor);
+      this.buttonBox.add_actor(this.menu.actor);
     } else {
       this.menu = {
         isOpen: false

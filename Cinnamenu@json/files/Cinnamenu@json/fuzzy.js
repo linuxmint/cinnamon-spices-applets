@@ -24,8 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
-const _ = AppletDir.lodash._;
 const fuzzy = function (q, str, opts) {
   if (typeof q !== 'string' || typeof str !== 'string') {
     return {
@@ -51,7 +49,7 @@ const fuzzy = function (q, str, opts) {
   // Keep original str for case
   let originalStr = str;
 
-  opts = _.assign({
+  opts = Object.assign({
     caseSensitive: false,
     before: '',
     after: ''
