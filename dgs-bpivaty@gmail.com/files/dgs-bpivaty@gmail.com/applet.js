@@ -13,8 +13,8 @@ const Secret = imports.gi.Secret;
 const Settings = imports.ui.settings;
 const Main   = imports.ui.main;
 
-
-var applet_path;
+const LoginCancelled = -1;
+const UknownUser = '* unknown user *';
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
 
@@ -44,14 +44,14 @@ MyApplet.prototype = {
             this.password = null;
             this.myId = 0;
             this.cjs_path = '/usr/bin/cjs';
-            applet_path = metadata.path;
+            this.applet_path = metadata.path;
             this.icon_path = metadata.path + "/icons";
             this.orientation = orientation;
 
             this.notification_list = [];
 
             this.settings.bind('check-every', 'check_every', Lang.bind(this, this._reset_timer));
-            this.settings.bind("connect", "connect", this._identify_user);
+            this.settings.bind('beep-when-notify', 'beep_on_notify');
 
             this.myUserName = this.settings.getValue('user-cred-n');
 
@@ -72,7 +72,7 @@ MyApplet.prototype = {
         
     },
 
-    set_label(games_to_play) {
+    _set_label(games_to_play) {
         if (games_to_play > 0) {
             this.set_applet_label(games_to_play.toString());
         } else {
@@ -90,23 +90,21 @@ MyApplet.prototype = {
         }
     },
 
-    _identify_user() {
+    _launch_dgs_login_window() {
+        let current_user = this.settings.getValue('user-cred-n');
 
-        if (this.connect) {
-            Util.spawn_async([this.cjs_path, applet_path + '/user.js', this.settings.getValue('user-cred-n')], Lang.bind(this, this._on_login_finished));
-        } else {
-            this.loggedIn = false;
-            this.myUserName = '';
-            this.setting_user_id = '';
-            this._recreate_all_menu();
+        if (current_user == UknownUser) {
+            current_user = '';
         }
+
+        Util.spawn_async([this.cjs_path, this.applet_path + '/user.js', current_user], Lang.bind(this, this._on_login_finished));
     },
 
     _on_login_finished: function(result) {
 
-        if (result == -1) {
+        if (result == LoginCancelled) {
             if (!this.loggedIn) { 
-                this.settings.setValue('connect', false);
+                this.settings.setValue('user-cred-n', UknownUser);
             }
         }
 
@@ -124,15 +122,13 @@ MyApplet.prototype = {
                         this.myId = this._parseIdFromUser(this.myUserName);
                         this._set_menu_title();
                         this._store_passwd();
-                        this.setting_user_id = this.myUserName;
                         this._recreate_all_menu();
+                        this.settings.setValue('user-cred-n', this.myUserName);
                     } else {
                         this.loggedIn = false;
-                        this.settings.setValue('connect', false);
+                        this.settings.setValue('user-cred-n', UknownUser);
                         this.myUserName = '';
-                        this.setting_user_id = '';
                         this._clear_passwd();
-                        this.connect.setToggleState(false);
                         this._recreate_all_menu();
                     }
                 }
@@ -148,10 +144,10 @@ MyApplet.prototype = {
         try {
             loaded = urlcatch.load_contents(null);
 
-            if (loaded[1].toString().trim() === 'Ok') {
-                return true;
-            } else {
+            if (loaded[1].toString().trim().indexOf('#Error') > 0) {
                 return false;
+            } else {
+                return true;
             }
             
         }  catch (err) {
@@ -210,6 +206,10 @@ MyApplet.prototype = {
         }
     },
 
+    _beep () {
+        Util.spawn_async(['/usr/bin/aplay', this.applet_path + '/sounds/Blip.wav']);
+    },
+
     _clear_passwd: function() {
         let secretSchema = {
             "org.bp.keyring.DGS.login": Secret.SchemaAttributeType.STRING
@@ -245,6 +245,7 @@ MyApplet.prototype = {
         item.actor.reactive = false;
         item.actor.can_focus = false;
         this.menu.addMenuItem(item);
+        this._set_label('');
     },
 
     _set_menu_title() {
@@ -259,15 +260,16 @@ MyApplet.prototype = {
     _add_refresh_menu_item() {
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         let menu_item = new PopupMenu.PopupMenuItem('Refresh list');
-        menu_item.connect("activate", Lang.bind(this, this._recreate_all_menu));
         this.menu.addMenuItem(menu_item);
     
     },
 
     _notify_user_played: function(game) {
         if (this.notification_list.indexOf(game) < 0) {
-            Main.soundManager.play('sonar');
-            Util.spawn_async([this.cjs_path, applet_path + '/notifier.js', game]);
+            if (this.beep_on_notify) {
+                this._beep();
+            }
+            Util.spawn_async([this.cjs_path, this.applet_path + '/notifier.js', game]);
             this.notification_list.push(game);
         }
     },
@@ -286,12 +288,12 @@ MyApplet.prototype = {
             // i already played in that game, remove from notified list if still in
             result = 0;
             let index = this.notification_list.indexOf(item);
-            if (index > 1) {
+            if (index >= 0) {
                 this.notification_list.splice(index);
             }
         }
         this.menu.addMenuItem(menu_item);
-        menu_item.connect("activate", Lang.bind(this, this.on_game_button_pressed));
+        menu_item.connect("activate", Lang.bind(this, this._on_game_button_pressed));
         return result;
     },
 
@@ -346,10 +348,10 @@ MyApplet.prototype = {
 
             maxToPlay += this._add_game_item(jsonData.list_result[i][0]  + '  (' + players + ')', move_uid);
         }
-        this.set_label(maxToPlay);
+        this._set_label(maxToPlay);
     },
 
-    on_game_button_pressed: function(actor, event) {
+    _on_game_button_pressed: function(actor, event) {
         let game_id = actor.label.text.split(' ')[0];
         Util.spawnCommandLine("xdg-open " + this.baseUrl + '/game.php?gid=' + game_id.toString());
     },

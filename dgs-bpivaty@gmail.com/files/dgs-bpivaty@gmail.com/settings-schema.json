@@ -8,15 +8,16 @@
        "type" : "entry",
        "default" : "",
        "description": "DGS user id",
-       "tooltip": "Switch connection to ON to set up."
+       "tooltip": "Press 'Login to DGS' button to set up."
     },
 
-    "connect" : {
-        "type" : "switch",
-        "default" : false,
-        "description": "Connection"
+    "login-button" : {
+        "type" : "button",
+        "description" : "Login to DGS",
+        "callback" : "_launch_dgs_login_window",
+        "tooltip" : "Press this button to identify the DGS user."
      },
-
+    
     "check-every": {
         "type": "combobox",
         "default": "10",
@@ -27,6 +28,16 @@
             "15 minutes": "15"
         },
         "description": "Check games status every"
+    },
+
+    "beep-when-notify": {
+        "type": "combobox",
+        "default": true,
+        "options": {
+            "Yes": true,
+            "No": false
+        },
+        "description": "Beep on notification"
     }
 
 }
