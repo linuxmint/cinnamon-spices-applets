@@ -1,5 +1,15 @@
 Changelog
 
+### 2.1.0
+
+  * Improved the performance of web bookmarks loading.
+  * Fixed toggling web bookmarks not fully taking effect unless Cinnamon is restarted.
+  * Fixed the grid/list view toggle states.
+  * Fixed an error that can occur when reloading the applet.
+  * Fixed a regression with math expressions not working in the search bar.
+  * Fixed an issue with the score threshold being too high for app searches.
+  * Removed the Lodash dependency.
+
 ### 2.0.2
 
   * Fixed an error occurring when favorites change before the menu has been opened for the first time.

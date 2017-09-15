@@ -1,20 +1,125 @@
-window.log2 = function () {
-  let args = arguments;
-  let output = [];
-  for (let i = 0, len = args.length; i < len; i++) {
-    if (typeof args[i] === 'undefined') {
-      args[i] = typeof args[i];
+// ES2015 polyfills for mozjs24
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
+// https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
+if (!Array.prototype.findIndex) {
+  Object.defineProperty(Array.prototype, 'findIndex', {
+    value: function(predicate) {
+      // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      let o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, 'length')).
+      let len = o.length >>> 0;
+
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      let thisArg = arguments[1];
+
+      // 5. Let k be 0.
+      let k = 0;
+
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
+        // d. If testResult is true, return k.
+        let kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return k;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
+
+      // 7. Return -1.
+      return -1;
     }
-    if (typeof args[i] === 'object'
-      && args[i].toString().indexOf('[0x') === -1) {
-      args[i] = JSON.stringify(args[i]);
-    } else if (typeof args[i] !== 'string') {
-      args[i] = args[i].toString();
+  });
+}
+
+// https://tc39.github.io/ecma262/#sec-array.prototype.find
+if (!Array.prototype.find) {
+  Object.defineProperty(Array.prototype, 'find', {
+    value: function(predicate) {
+     // 1. Let O be ? ToObject(this value).
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, 'length')).
+      var len = o.length >>> 0;
+
+      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
+      if (typeof predicate !== 'function') {
+        throw new TypeError('predicate must be a function');
+      }
+
+      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
+      var thisArg = arguments[1];
+
+      // 5. Let k be 0.
+      var k = 0;
+
+      // 6. Repeat, while k < len
+      while (k < len) {
+        // a. Let Pk be ! ToString(k).
+        // b. Let kValue be ? Get(O, Pk).
+        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
+        // d. If testResult is true, return kValue.
+        var kValue = o[k];
+        if (predicate.call(thisArg, kValue, k, o)) {
+          return kValue;
+        }
+        // e. Increase k by 1.
+        k++;
+      }
+
+      // 7. Return undefined.
+      return undefined;
     }
-    output.push(args[i])
-  }
-  log(output.join(' '))
-};
+  });
+}
+
+if (typeof Object.assign != 'function') {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, 'assign', {
+    value: function assign(target, varArgs) { // .length of function is 2
+      'use strict';
+      if (target == null) { // TypeError if undefined or null
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource != null) { // Skip over if undefined or null
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
+
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -35,23 +140,41 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Tweener = imports.ui.tweener;
 const SignalManager = imports.misc.signalManager;
-/*const DT = imports.misc.timers.DebugTimer;
-const dt = new DT('1')*/
 
-const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
-const fuzzy = AppletDir.fuzzy.fuzzy
-const _ = AppletDir.lodash._;
-
-const Chromium = AppletDir.webChromium;
-const Firefox = AppletDir.webFirefox;
-const GoogleChrome = AppletDir.webGoogleChrome;
-const Midori = AppletDir.webMidori;
-const Opera = AppletDir.webOpera;
-const PlaceDisplay = AppletDir.placeDisplay;
-const SearchWebBookmarks = AppletDir.buttons.SearchWebBookmarks;
-const CategoryListButton = AppletDir.buttons.CategoryListButton;
-const AppListGridButton = AppletDir.buttons.AppListGridButton;
-const GroupButton = AppletDir.buttons.GroupButton;
+// Testing module imports for the extension refactor PR
+// https://github.com/linuxmint/Cinnamon/pull/6878
+let fuzzy, isEqual, sortBy, isString, Chromium, Firefox, GoogleChrome, Midori, Opera,
+  PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton;
+if (typeof require !== 'undefined') {
+  let utils = require('./utils');
+  let buttons = require('./buttons');
+  fuzzy = require('./fuzzy').fuzzy;
+  isEqual = utils.isEqual;
+  sortBy = utils.sortBy;
+  isString = utils.isString;
+  Chromium = require('./webChromium');
+  Firefox = require('./webFirefox');
+  GoogleChrome = require('./webGoogleChrome');
+  Opera = require('./webOpera');
+  PlaceDisplay = require('./placeDisplay');
+  CategoryListButton = buttons.CategoryListButton;
+  AppListGridButton = buttons.AppListGridButton;
+  GroupButton = buttons.GroupButton;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
+  fuzzy = AppletDir.fuzzy.fuzzy;
+  isEqual = AppletDir.utils.isEqual;
+  sortBy = AppletDir.utils.sortBy;
+  isString = AppletDir.utils.isString;
+  Chromium = AppletDir.webChromium;
+  Firefox = AppletDir.webFirefox;
+  GoogleChrome = AppletDir.webGoogleChrome;
+  Opera = AppletDir.webOpera;
+  PlaceDisplay = AppletDir.placeDisplay;
+  CategoryListButton = AppletDir.buttons.CategoryListButton;
+  AppListGridButton = AppletDir.buttons.AppListGridButton;
+  GroupButton = AppletDir.buttons.GroupButton;
+}
 
 // l10n
 const Gettext = imports.gettext;
@@ -84,6 +207,55 @@ const fuzzyOptions = {
   before: '<b><u>',
   after: '</u></b>'
 }
+
+const gridWidths = [0, 0, 0, 625, 700, 725, 900, 1025];
+
+/**
+ * @name bookmarksManager
+ * @description Class to consolodate search of web browser(s) bookmarks
+ * @description Code borrowed from SearchBookmarks extension by bmh1980
+ * @description at https://extensions.gnome.org/extension/557/search-bookmarks/
+ */
+function bookmarksManager() {
+  this._init.apply(this, arguments);
+}
+
+bookmarksManager.prototype = {
+
+  _init: function () {
+    let bookmarks = Chromium._readBookmarks()
+      .concat(Firefox._readProfiles())
+      .concat(GoogleChrome._readBookmarks())
+      .concat(Opera._readBookmarks())
+
+    for (let i = 0, len = bookmarks.length; i < len; i++) {
+      bookmarks[i] = {
+        app: bookmarks[i].appInfo,
+        name: bookmarks[i].name,
+        icon: bookmarks[i].appInfo.get_icon(),
+        mime: null,
+        uri: bookmarks[i].uri,
+        description: bookmarks[i].uri,
+        type: ApplicationType._places
+      };
+    }
+
+    // Create a unique list of bookmarks across all browsers.
+    this.state = {};
+    for (let i = 0, len = bookmarks.length; i < len; i++ ) {
+      this.state[bookmarks[i].uri] = bookmarks[i];
+    }
+    this.arrKeys = Object.keys(this.state);
+  },
+
+  destroy: function () {
+    Chromium._reset();
+    Firefox._reset();
+    GoogleChrome._reset();
+    Opera._reset();
+    this.state = null;
+  }
+};
 
 /**
  * @name CinnamenuApplet
@@ -137,7 +309,6 @@ CinnamenuApplet.prototype = {
     this.signals.connect(this.appFavorites, 'changed', Lang.bind(this, this._onFavoritesChanged));
     this.signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._onOpenStateToggled));
 
-    this._newInstance = true;
     this._knownApps = [];
     this.applicationsByCategory = {};
     this._currentCategory = null;
@@ -146,21 +317,22 @@ CinnamenuApplet.prototype = {
     this._searchTimeoutId = 0;
     this._activeContainer = null;
     this.menuIsOpen = null;
-    this._isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
-    this._recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
-
-    if (this.enableBookmarks) {
-      this.initWebBookmarks();
-    }
+    this._newInstance = true;
+    this.searchActive = false;
+    this.expressionActive = false;
     this._searchWebErrorsShown = false;
-    this._session = new GnomeSession.SessionManager();
-    this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
-    this.recentManager = Gtk.RecentManager.get_default();
     this.placesManager = null;
     this._displayed = false;
     this.menuHeight = 530;
-    this.gridWidths = [0, 0, 0, 625, 700, 725, 900, 1025];
     this.fallbackDescription = '';
+    this._isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
+    this._recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
+
+    this.onEnableBookmarksChange(this.enableBookmarks, true);
+    this._session = new GnomeSession.SessionManager();
+    this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
+    this.recentManager = Gtk.RecentManager.get_default();
+
     if (this.showAppDescriptionsOnButtons) {
       this.fallbackDescription = 'No description available';
     }
@@ -182,7 +354,8 @@ CinnamenuApplet.prototype = {
   },
 
   on_applet_removed_from_panel: function() {
-    Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id)
+    Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
+    this.destroy();
   },
 
   on_applet_clicked: function() {
@@ -255,7 +428,10 @@ CinnamenuApplet.prototype = {
       this.set_applet_label('');
     } else {
       if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
-        this.set_applet_label(this.menuLabel); // TBD
+        if (!this.menuLabel) {
+          this.menuLabel = 'Menu';
+        }
+        this.set_applet_label(this.menuLabel);
         this.set_applet_tooltip(this.menuLabel);
       } else {
         this.set_applet_label('');
@@ -388,7 +564,7 @@ CinnamenuApplet.prototype = {
       {
         key: 'enable-bookmarks',
         value: 'enableBookmarks',
-        cb: Lang.bind(this, this.refresh)
+        cb: Lang.bind(this, this.onEnableBookmarksChange)
       },
       {
         key: 'menu-label',
@@ -452,10 +628,6 @@ CinnamenuApplet.prototype = {
     }
   },
 
-  initWebBookmarks: function () {
-    this._searchWebBookmarks = new SearchWebBookmarks();
-  },
-
   introspectTheme: function(cb) {
     let appletMenuThemeNode = this.menu.actor.get_theme_node();
     let mainBoxThemeNode = this.mainBox.get_theme_node();
@@ -483,10 +655,10 @@ CinnamenuApplet.prototype = {
       if (!this._displayed) {
         this._display();
       }
+
       this.introspectTheme(()=>{
         // Load Startup Applications category
         this._switchApplicationsView(false);
-        this.appsGridColumnCount = this.appsGridColumnCount;
         // Set Category
         this.categoriesBox.show();
         // Display startup apps
@@ -508,13 +680,20 @@ CinnamenuApplet.prototype = {
       }
       this._clearEnteredActors();
       this._clearApplicationsBox();
-      // TBD - containers probably don't need to be destroyed. The more things Cinnamenu destroys over and over,
-      // the less effective the GC seems to be. Refresh can handle this instead.
-      //this._clearAll();
-      //this.destroyDisplayed();
-      //this._displayed = false;
     }
     return true;
+  },
+
+  onEnableBookmarksChange: function(enableBookmarks, fromInit = false) {
+    if (enableBookmarks) {
+      this.bookmarksManager = new bookmarksManager();
+    } else if (this.bookmarksManager) {
+      this.bookmarksManager.destroy();
+      this.bookmarksManager = null;
+    }
+    if (!fromInit) {
+      this.refresh();
+    }
   },
 
   refresh: function() {
@@ -596,11 +775,11 @@ CinnamenuApplet.prototype = {
     };
     // Load 'bookmarks' category
     if (this.enableBookmarks) {
-      this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', t("Bookmarks"), 'emblem-favorite', '_selectWebBookmarks');
+      this.webBookmarksCategory = new CategoryListButton(this, 'bookmarks', t('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks');
       this.categoriesBox.add_actor(this.webBookmarksCategory.actor);
     }
     // Load 'all applications' category
-    let allAppCategory = new CategoryListButton(this, 'all', t("All Applications"), 'computer');
+    let allAppCategory = new CategoryListButton(this, 'all', t('All Applications'), 'computer');
     this.categoriesBox.add_actor(allAppCategory.actor);
     let trees = [this.appSystem.get_tree()];
     for (let i = 0, len = trees.length; i < len; i++) {
@@ -631,23 +810,23 @@ CinnamenuApplet.prototype = {
     }
     // Load 'places' category
     if (this.showPlaces) {
-      this.placesCategory = new CategoryListButton(this, 'places', t("Places"), 'folder', '_selectAllPlaces');
+      this.placesCategory = new CategoryListButton(this, 'places', t('Places'), 'folder', '_selectAllPlaces');
       this.categoriesBox.add_actor(this.placesCategory.actor);
     }
     // Load 'recent' category
     if (this._recentEnabled) {
-      this.recentCategory = new CategoryListButton(this, 'recent', t("Recent Files"), 'folder-recent', '_selectRecent');
+      this.recentCategory = new CategoryListButton(this, 'recent', t('Recent Files'), 'folder-recent', '_selectRecent');
       this.categoriesBox.add_actor(this.recentCategory.actor);
     }
     // Load 'favorite applications' category
-    this.favAppCategory = new CategoryListButton(this, 'favorites', t("Favorite Apps"), 'address-book-new');
+    this.favAppCategory = new CategoryListButton(this, 'favorites', t('Favorite Apps'), 'address-book-new');
     this.categoriesBox.add_actor(this.favAppCategory.actor);
   },
 
   _selectCategory: function(button) {
     this._clearApplicationsBox();
-    let category = _.isString(button) ? button : button._dir;
-    if (typeof category === 'string') {
+    let category = isString(button) ? button : button._dir;
+    if (isString(category)) {
       this._displayApplications(this._listApplications(category));
     } else {
       this._displayApplications(this._listApplications(category.get_menu_id()));
@@ -656,10 +835,9 @@ CinnamenuApplet.prototype = {
 
   _selectAllPlaces: function() {
     this._clearApplicationsBox();
-    let places = _.chain(this._listPlaces())
+    let places = this._listPlaces()
       .concat(this._listBookmarks())
-      .concat(this._listDevices())
-      .value();
+      .concat(this._listDevices());
     this._displayApplications(places);
   },
 
@@ -691,12 +869,12 @@ CinnamenuApplet.prototype = {
       this.applicationsGridBox.hide();
       this.applicationsListBox.show();
     } else {
-      this.applicationsGridBox.width = this.gridWidths[this.appsGridColumnCount];
+      this.applicationsGridBox.width = gridWidths[this.appsGridColumnCount];
       this.applicationsListBox.hide();
       this.applicationsGridBox.show();
     }
     // switch activeContainer
-    if (_.isEqual(this._activeContainer, this.applicationsListBox) || _.isEqual(this._activeContainer, this.applicationsListBox)) {
+    if (isEqual(this._activeContainer, this.applicationsListBox) || isEqual(this._activeContainer, this.applicationsListBox)) {
       // reset active container
       this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
       // reset scroll to top
@@ -763,7 +941,7 @@ CinnamenuApplet.prototype = {
     this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
     let itemChildren = this._activeContainer.get_children();
-    let refItemIndex = _.findIndex(itemChildren, (actor) => {
+    let refItemIndex = itemChildren.findIndex(function(actor) {
       return (actor.has_style_class_name('menu-application-button-selected')
         || actor._delegate.entered != null
         || actor._delegate.menu.isOpen);
@@ -775,14 +953,14 @@ CinnamenuApplet.prototype = {
       itemChildren[refItemIndex]._delegate.handleLeave();
     }
     let categoryChildren = this.categoriesBox.get_children();
-    let refCategoryIndex = _.findIndex(categoryChildren, (actor) => {
+    let refCategoryIndex = categoryChildren.findIndex(function(actor) {
       return actor._delegate.entered != null;
     });
     if (refCategoryIndex > -1 && categoryChildren[refCategoryIndex]) {
       categoryChildren[refCategoryIndex]._delegate.handleLeave();
     }
     let powerGroupChildren = this.powerGroupBox.get_children();
-    let refPowerGroupItemIndex = _.findIndex(powerGroupChildren, (actor) => {
+    let refPowerGroupItemIndex = powerGroupChildren.findIndex(function(actor) {
       return actor._delegate.entered != null;
     });
     if (refPowerGroupItemIndex > -1 && powerGroupChildren[refPowerGroupItemIndex]) {
@@ -854,40 +1032,14 @@ CinnamenuApplet.prototype = {
       let notifyMessage = t('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.');
       this.answerText.set_text(notifyMessage);
       this.answerText.show();
-    } else if (this.answerText.is_visible()) {
+    } else if (this.answerText.is_visible() && !this.expressionActive) {
       this.answerText.hide();
     }
     this._searchWebErrorsShown = true;
 
-    let res = [];
-    let bookmarks = _.chain(Chromium.bookmarks)
-      .concat(GoogleChrome.bookmarks)
-      .concat(Firefox.bookmarks)
-      .concat(Midori.bookmarks)
-      .concat(Opera.bookmarks)
-      .value();
-
-    for (let i = 0, len = bookmarks.length; i < len; i++) {
-      res.push({
-        app: bookmarks[i].appInfo,
-        name: bookmarks[i].name,
-        icon: bookmarks[i].appInfo.get_icon(),
-        mime: null,
-        uri: bookmarks[i].uri,
-        description: bookmarks[i].uri,
-        type: ApplicationType._places
-      });
-    }
-
-    // Create a unique list of bookmarks across all browsers.
-    let arr = {};
-
-    for (let i = 0, len = res.length; i < len; i++ ) {
-      arr[res[i].uri] = res[i];
-    }
-
-    res = []
-    let arrKeys = Object.keys(arr);
+    let res = []
+    let arr = this.bookmarksManager.state;
+    let arrKeys = this.bookmarksManager.arrKeys;
 
     for (let i = 0, len = arrKeys.length; i < len; i++ ) {
       let bookmark = arr[arrKeys[i]];
@@ -1004,10 +1156,7 @@ CinnamenuApplet.prototype = {
         res = this.applicationsByCategory[categoryMenuId];
       } else {
         for (let directory in this.applicationsByCategory) {
-          res = _.chain(res)
-          .concat(this.applicationsByCategory[directory])
-          .uniq()
-          .value();
+          res = res.concat(this.applicationsByCategory[directory])
         }
       }
     }
@@ -1016,7 +1165,7 @@ CinnamenuApplet.prototype = {
       let _res = [];
       for (let i = 0, len = res.length; i < len; i++) {
         let app = res[i];
-        _.assignIn(app, {
+        Object.assign(app, {
           name: app.get_name(),
           keywords: app.get_name(),
           description:app.get_description(),
@@ -1028,7 +1177,7 @@ CinnamenuApplet.prototype = {
         let match = null;
         for (let z = 0, len = searchableProps.length; z < len; z++ ) {
           match = fuzzy(pattern, app[searchableProps[z]], fuzzyOptions)
-          if (app[searchableProps[z]] && match.score > 0.4) {
+          if (app[searchableProps[z]] && match.score > 0.3) {
             app.score = match.score;
             app[searchableProps[z]] = match.result;
             _res.push(app);
@@ -1054,7 +1203,17 @@ CinnamenuApplet.prototype = {
       }
     }
 
-    return res;
+    // Ensure unique elements
+    let uniqueSet = new Set();
+    let items = [];
+    for (let i = 0; i < res.length; i++) {
+      if (uniqueSet.has(res[i]) === false) {
+        items.push(res[i]);
+        uniqueSet.add(res[i]);
+      }
+    }
+    res = undefined;
+    return items;
   },
 
   _resetDisplayApplicationsToStartup: function() {
@@ -1075,6 +1234,7 @@ CinnamenuApplet.prototype = {
     let column = 0;
     let columnsCount = 0;
     let rownum = 0;
+    let lastApp = appList[appList.length - 1];
 
     this.isListView = this.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.isListView ? this.applicationsListBox : this.applicationsGridBox;
@@ -1084,7 +1244,7 @@ CinnamenuApplet.prototype = {
       let appButton;
       let refAppButton = -1;
       for (let i = 0, _len = this._allItems.length; i < _len; i++) {
-        if (_.isEqual(this._allItems[i].app, app)) {
+        if (isEqual(this._allItems[i].app, app)) {
           refAppButton = i;
           break;
         }
@@ -1119,8 +1279,8 @@ CinnamenuApplet.prototype = {
       }
     };
 
-    if (!this.searchActive && _.last(appList) && !_.last(appList).clearList) {
-      appList = _.orderBy(appList, 'name');
+    if (!this.searchActive && lastApp && !lastApp.clearList) {
+      sortBy(appList, 'name', 'asc');
     }
     for (let z = 0, len = appList.length; z < len; z++) {
       if (appList[z].type === undefined) {
@@ -1159,19 +1319,19 @@ CinnamenuApplet.prototype = {
 
     let itemChildren = this._activeContainer.get_children();
 
-    let refItemIndex = _.findIndex(itemChildren, (actor) => {
+    let refItemIndex = itemChildren.findIndex((actor) => {
       return (actor.has_style_class_name('menu-application-button-selected')
         || actor._delegate.entered != null
         || actor._delegate.menu.isOpen);
     });
 
     let categoryChildren = this.categoriesBox.get_children();
-    let refCategoryIndex = _.findIndex(categoryChildren, (actor) => {
+    let refCategoryIndex = categoryChildren.findIndex((actor) => {
       return actor._delegate.entered != null;
     });
 
     let powerGroupChildren = this.powerGroupBox.get_children();
-    let refPowerGroupItemIndex = _.findIndex(powerGroupChildren, (actor) => {
+    let refPowerGroupItemIndex = powerGroupChildren.findIndex((actor) => {
       return actor._delegate.entered != null;
     });
 
@@ -1187,7 +1347,7 @@ CinnamenuApplet.prototype = {
       if ((ctrlKey || itemChildren[refItemIndex]._delegate.menu.isOpen)
         && itemChildren[refItemIndex]._delegate.menu.box) {
         contextMenuChildren = itemChildren[refItemIndex]._delegate.menu.box.get_children();
-        refContextMenuItemIndex = _.findIndex(contextMenuChildren, (actor) => {
+        refContextMenuItemIndex = contextMenuChildren.findIndex((actor) => {
           return actor._delegate.entered != null;
         });
         enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
@@ -1210,7 +1370,7 @@ CinnamenuApplet.prototype = {
     /*log2('symbol', symbol)
     log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'refPowerGroupItemIndex', refPowerGroupItemIndex, 'refContextMenuItemIndex', refContextMenuItemIndex)
     log2('this.isListView', this.isListView)*/
-    let startingCategoryIndex = _.findIndex(categoryChildren, (actor) => {
+    let startingCategoryIndex = categoryChildren.findIndex((actor) => {
       return this._currentCategory === actor._delegate.categoryNameText;
     });
     startingCategoryIndex = this.enableBookmarks && startingCategoryIndex <= 0 ? 1 : startingCategoryIndex;
@@ -1225,7 +1385,7 @@ CinnamenuApplet.prototype = {
       if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
         contextMenuChildren[index]._delegate.handleEnter();
       } else if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
-        _.last(contextMenuChildren)._delegate.handleEnter();
+        contextMenuChildren[contextMenuChildren.length - 1]._delegate.handleEnter();
       } else if (up) {
         categoryChildren[startingCategoryIndex]._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
@@ -1247,9 +1407,9 @@ CinnamenuApplet.prototype = {
       if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
         contextMenuChildren[index]._delegate.handleEnter();
       } else if (enteredItemExists && itemChildren[refItemIndex]._delegate.menu.isOpen) {
-        _.first(contextMenuChildren)._delegate.handleEnter();
+        contextMenuChildren[0]._delegate.handleEnter();
       } else if (down) {
-        _.first(powerGroupChildren)._delegate.handleEnter();
+        powerGroupChildren[0]._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex + 1]._delegate.handleEnter();
       } else if (enteredCategoryExists) {
@@ -1271,7 +1431,7 @@ CinnamenuApplet.prototype = {
           if (typeof categoryChildren[startingCategoryIndex] !== 'undefined') {
             categoryChildren[startingCategoryIndex]._delegate.handleEnter();
           } else {
-            _.last(categoryChildren)._delegate.handleEnter();
+            categoryChildren[categoryChildren.length - 1]._delegate.handleEnter();
           }
         }
       } else if (!enteredCategoryExists) {
@@ -1281,7 +1441,7 @@ CinnamenuApplet.prototype = {
 
     const rightNavigation = () => {
       if (enteredItemExists && refItemIndex === itemChildren.length - 1) {
-        _.first(itemChildren)._delegate.handleEnter();
+        itemChildren[0]._delegate.handleEnter();
       } else if (this.isListView && enteredItemExists) {
         itemChildren[refItemIndex]._delegate.handleEnter();
       } else {
@@ -1304,11 +1464,11 @@ CinnamenuApplet.prototype = {
 
     const tabNavigation = () => {
       if (enteredItemExists) {
-        _.first(powerGroupChildren)._delegate.handleEnter();
+        powerGroupChildren[0]._delegate.handleEnter();
       } else if (enteredPowerGroupItemExists) {
         categoryChildren[startingCategoryIndex]._delegate.handleEnter();
       } else {
-        _.first(itemChildren)._delegate.handleEnter();
+        itemChildren[0]._delegate.handleEnter();
       }
     };
 
@@ -1336,7 +1496,7 @@ CinnamenuApplet.prototype = {
       } else if (enteredPowerGroupItemExists) {
         powerGroupChildren[refPowerGroupItemIndex]._delegate._onButtonReleaseEvent();
       } else if (this.searchActive && itemChildren.length > 0) {
-        _.first(itemChildren)._delegate.activate();
+        itemChildren[0]._delegate.activate();
       }
     };
 
@@ -1353,20 +1513,20 @@ CinnamenuApplet.prototype = {
         return true;
       case symbol === Clutter.KEY_Page_Up:
         if (enteredItemExists) {
-          _.first(itemChildren)._delegate.handleEnter();
+          itemChildren[0]._delegate.handleEnter();
         } else if (enteredCategoryExists) {
-          _.first(categoryChildren)._delegate.handleEnter();
+          categoryChildren[0]._delegate.handleEnter();
         } else if (enteredPowerGroupItemExists) {
-          _.first(powerGroupChildren)._delegate.handleEnter();
+          powerGroupChildren[0]._delegate.handleEnter();
         }
         return true
       case symbol === Clutter.KEY_Page_Down:
         if (enteredItemExists) {
-          _.last(itemChildren)._delegate.handleEnter();
+          itemChildren[itemChildren.length - 1]._delegate.handleEnter();
         } else if (enteredCategoryExists) {
-          _.last(categoryChildren)._delegate.handleEnter();
+          categoryChildren[categoryChildren.length - 1]._delegate.handleEnter();
         } else if (enteredPowerGroupItemExists) {
-          _.last(powerGroupChildren)._delegate.handleEnter();
+          powerGroupChildren[powerGroupChildren.length - 1]._delegate.handleEnter();
         }
         return true
       case symbol === Clutter.KEY_Right:
@@ -1455,6 +1615,7 @@ CinnamenuApplet.prototype = {
       this.searchEntry.set_text('');
     }
     this.searchActive = false;
+    this.expressionActive = false;
     if (this._activeContainer) {
       this._activeContainer.show();
     }
@@ -1488,8 +1649,6 @@ CinnamenuApplet.prototype = {
       this._resetDisplayApplicationsToStartup();
     }
 
-    /*this.selectedAppTitle.set_text('');
-    this.selectedAppDescription.set_text('');*/
     this.searchActive = searchText.length > 0;
 
     if (this.searchActive) {
@@ -1530,7 +1689,6 @@ CinnamenuApplet.prototype = {
     this._previousSearchPattern = pattern;
 
     let isMathExpression = pattern.search(/([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1;
-
     if (isMathExpression) {
       try {
         let answer = eval(pattern);
@@ -1538,7 +1696,10 @@ CinnamenuApplet.prototype = {
         this.answerText.set_text(answerText);
         this.answerText.show();
         this._activeContainer.hide();
-      } catch (e) {}
+        this.expressionActive = true;
+      } catch (e) {
+        this.expressionActive = false;
+      }
     }
 
     // _listApplications returns all the applications when the search
@@ -1572,12 +1733,12 @@ CinnamenuApplet.prototype = {
       acResults = this._getCompletions(text);
     }
 
-    let results = _.chain(appResults)
+    let results = appResults
       .concat(placesResults)
       .concat(recentResults)
-      .concat(acResults)
-      .orderBy('score', 'desc')
-      .value();
+      .concat(acResults);
+
+    sortBy(results, 'score', 'desc');
 
     this._clearApplicationsBox();
     this._displayApplications(results);
@@ -1668,7 +1829,7 @@ CinnamenuApplet.prototype = {
     });
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
-      hint_text: t("Type to search..."),
+      hint_text: t('Type to search...'),
       track_hover: true,
       can_focus: true
     });
@@ -1679,7 +1840,7 @@ CinnamenuApplet.prototype = {
       x_align: St.Align.START,
       y_align: St.Align.START
     });
-    this.searchActive = false;
+
     this.searchEntryText = this.searchEntry.clutter_text;
     this.displaySignals.connect(this.searchEntryText, 'text-changed', Lang.bind(this, this._onSearchTextChanged));
     this.displaySignals.connect(this.searchEntryText, 'key-press-event', Lang.bind(this, this._onMenuKeyPress));
@@ -1721,7 +1882,7 @@ CinnamenuApplet.prototype = {
       layout_manager: new Clutter.GridLayout(),
       reactive: true,
       style_class: '',
-      width: this.gridWidths[this.appsGridColumnCount]
+      width: gridWidths[this.appsGridColumnCount]
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
@@ -1782,23 +1943,23 @@ CinnamenuApplet.prototype = {
     let _t = this;
     let viewModeToggle = new GroupButton(
       this,
-      this.isListView ? 'view-list-symbolic' : 'view-grid-symbolic',
+      this.isListView ? 'view-grid-symbolic' : 'view-list-symbolic',
       16,
-      this.isListView ? t("Grid View") : t("List View"),
-      this.isListView ? t("Switch to grid view") : t("Switch to list view"),
+      this.isListView ? t('Grid View') : t('List View'),
+      this.isListView ? t('Switch to grid view') : t('Switch to list view'),
       function (actor) {
         //let parent = actor.get_parent();
         if (_t.isListView) {
           _t.isListView = false;
           this.setIcon('view-list-symbolic');
-          this.name = t("List View");
-          this.description = t("Switch to list view");
+          this.name = t('List View');
+          this.description = t('Switch to list view');
           _t.settings.setValue('startup-view-mode', 1);
         } else {
           _t.isListView = true;
           this.setIcon('view-grid-symbolic');
-          this.name = t("Grid View");
-          this.description = t("Switch to grid view");
+          this.name = t('Grid View');
+          this.description = t('Switch to grid view');
           _t.settings.setValue('startup-view-mode', 0);
         }
         _t._switchApplicationsView(true);
@@ -1808,8 +1969,8 @@ CinnamenuApplet.prototype = {
       this,
       'system-lock-screen',
       16,
-      t("Lock Screen"),
-      t("Lock the screen"),
+      t('Lock Screen'),
+      t('Lock the screen'),
       () => {
         let screensaver_settings = new Gio.Settings({
           schema_id: 'org.cinnamon.desktop.screensaver'
@@ -1830,16 +1991,16 @@ CinnamenuApplet.prototype = {
       this,
       'application-exit',
       16,
-      t("Logout"),
-      t("Leave the session"),
+      t('Logout'),
+      t('Leave the session'),
       () => this._session.LogoutRemote(0)
     );
     let systemShutdown = new GroupButton(
       this,
       'system-shutdown',
       16,
-      t("Quit"),
-      t("Shutdown the computer"),
+      t('Quit'),
+      t('Shutdown the computer'),
       () => this._session.ShutdownRemote()
     );
     let powerGroupBoxChildProperties = {
@@ -1964,7 +2125,7 @@ CinnamenuApplet.prototype = {
       if (this._allItems[i]) {
         this._allItems[i].destroy();
       }
-      _.pullAt(this._allItems, i);
+      this._allItems.splice(i, 1);
     }
     this._allItems = [];
   },
@@ -1972,20 +2133,17 @@ CinnamenuApplet.prototype = {
   destroy: function() {
     this.signals.disconnectAllSignals();
     this.destroyAppButtons();
+    if (!this._activeContainer) {
+      return;
+    }
     this._activeContainer.destroy();
     this.destroyDisplayed();
-    if (this._searchWebBookmarks) {
-      this._searchWebBookmarks.destroy();
+    if (this.bookmarksManager) {
+      this.bookmarksManager.destroy();
     }
 
     this.menu.destroy();
     this.actor.destroy();
-    this.emit('destroy');
-
-    let props = Object.keys(this);
-    for (let i = 0, len = props.length; i < len; i++) {
-      this[props[i]] = undefined;
-    }
   },
 };
 
