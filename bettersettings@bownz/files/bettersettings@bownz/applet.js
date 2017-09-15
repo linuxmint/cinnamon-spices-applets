@@ -47,7 +47,7 @@ ConfirmDialog.prototype = {
 		})
 	    }
 	]);
-    },	
+    },
 }
 
 function MyApplet(orientation) {
@@ -57,21 +57,21 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
-        try {        
+
+        try {
             this.set_applet_icon_symbolic_name("system-run");
             this.set_applet_tooltip(_("Settings"));
-            
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
-            this.menuManager.addMenu(this.menu);        
-                                                                
+            this.menuManager.addMenu(this.menu);
+
             this._contentSection = new PopupMenu.PopupMenuSection();
-            this.menu.addMenuItem(this._contentSection);                    
-                                                    
-            this.troubleshootItem = new PopupMenu.PopupSubMenuMenuItem(_("Troubleshoot"));            
+            this.menu.addMenuItem(this._contentSection);
+
+            this.troubleshootItem = new PopupMenu.PopupSubMenuMenuItem(_("Troubleshoot"));
             this.troubleshootItem.menu.addAction(_("Restart Cinnamon"), function(event) {
                 global.reexec_self();
             });
@@ -80,45 +80,45 @@ MyApplet.prototype = {
 		 this.troubleshootItem.menu.addAction(_("Reload Theme"), function(event) {
                 Main.loadTheme();
 		Util.spawnCommandLine("notify-send --icon=gtk-add Reloaded \"The theme has been reloaded.\"");
-            }); 
-            
+            });
+
             this.troubleshootItem.menu.addAction(_("Looking Glass"), function(event) {
                 Main.createLookingGlass().open();
-            }); 
-            
+            });
+
             this.troubleshootItem.menu.addAction(_("Restore all settings to Default"), function(event) {
                 this.confirm = new ConfirmDialog();
                 this.confirm.open();
-            });  
-	    
+            });
+
 	      this.troubleshootItem.menu.addAction(_("Force Quit Application"), function(event) {
                 Util.spawnCommandLine(AppletDir + "/xkill.py");
 		Util.spawnCommandLine("notify-send --icon=gtk-add XKILL \"Click on the window/process you want to force close.\"");
             });
-                       
-            this.menu.addMenuItem(this.troubleshootItem);  
-	
+
+            this.menu.addMenuItem(this.troubleshootItem);
+
   	    this.menu.addAction(_("Screenshot"), function(event) {
                 Util.spawnCommandLine("gnome-screenshot -a");
             });
 
 	     this.menu.addAction(_("Terminal"), function(event) {
-                Util.spawnCommandLine("gnome-terminal");
+                Util.spawnCommandLine("x-terminal-emulator");
             });
-                              
-         
+
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-                                                
+
             let editMode = global.settings.get_boolean("panel-edit-mode");
             let panelEditMode = new PopupMenu.PopupSwitchMenuItem(_("Panel Edit Mode"), editMode);
             panelEditMode.connect('toggled', function(item) {
                 global.settings.set_boolean("panel-edit-mode", item.state);
             });
-            this.menu.addMenuItem(panelEditMode);    
+            this.menu.addMenuItem(panelEditMode);
             global.settings.connect('changed::panel-edit-mode', function() {
-                panelEditMode.setToggleState(global.settings.get_boolean("panel-edit-mode"));                            
+                panelEditMode.setToggleState(global.settings.get_boolean("panel-edit-mode"));
             });
-	 
+
             this.menu.addAction(_("Add/Remove Applets"), function(event) {
                 Util.spawnCommandLine("cinnamon-settings applets");
             });
@@ -130,25 +130,25 @@ MyApplet.prototype = {
             this.menu.addAction(_("Cinnamon Settings"), function(event) {
                 Util.spawnCommandLine("cinnamon-settings");
             });
-	
+
 	     this.menu.addAction(_("System Settings"), function(event) {
-                Util.spawnCommandLine("gnome-control-center");
+                Util.spawnCommandLine("cinnamon-control-center");
             });
-                        
+
         }
         catch (e) {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
-        this.menu.toggle();        
+        this.menu.toggle();
     },
-        
-    
+
+
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    return myApplet;      
+    return myApplet;
 }
