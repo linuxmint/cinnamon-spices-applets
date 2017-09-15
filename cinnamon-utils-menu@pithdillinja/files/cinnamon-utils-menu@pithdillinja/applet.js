@@ -7,7 +7,7 @@
 //	last updated 3-14-2012
 //v0.1: 	Initial release									(3.14.12)
 //v0.2:		Added quick & dirty fix for 'gnome-screenshot -a'/'xkill' popup menu problems	(3.14.12)
-//v0.2.1:	Added "Reload Theme" functionality, updated icon to system-run as per user	
+//v0.2.1:	Added "Reload Theme" functionality, updated icon to system-run as per user
 //			billynick's suggestion, as well as generality				(3.14.12)
 
 const Lang = imports.lang;
@@ -48,11 +48,11 @@ MyMenu.prototype = {
 		__proto__: PopupMenu.PopupMenu.prototype,
 
 		_init: function(launcher, orientation) {
-			this._launcher = launcher;        
+			this._launcher = launcher;
 
 			PopupMenu.PopupMenu.prototype._init.call(this, launcher.actor, 0.0, orientation, 0);
 			Main.uiGroup.add_actor(this.actor);
-			this.actor.hide();            
+			this.actor.hide();
 		}
 };
 //---------------------------------------------------------------------
@@ -104,7 +104,7 @@ MyApplet.prototype = {
 		//Separator
 		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 		//Gnome-terminal
-		let icon = new St.Icon({icon_name: "gnome-terminal", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "gnome-terminal", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 		this._itemTerminal = new MyPopupMenuItem(icon, _("Launch gnome-terminal"));
 
 		this.menu.addMenuItem(this._itemTerminal);
@@ -112,7 +112,7 @@ MyApplet.prototype = {
 			GLib.spawn_command_line_async('gnome-terminal');
 		});
 		//Looking Glass
-		let icon = new St.Icon({icon_name: "search", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "search", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 		this._itemLookingGlass = new MyPopupMenuItem(icon, _("Looking Glass"));
 
 		this.menu.addMenuItem(this._itemLookingGlass);
@@ -120,7 +120,7 @@ MyApplet.prototype = {
 			Mainloop.idle_add(function() { Main.createLookingGlass().toggle(); });
 		});
 		//Cinnamon-settings
-		let icon = new St.Icon({icon_name: "system-run", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "system-run", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 		this._itemCinSettings = new MyPopupMenuItem(icon, _("Cinnamon Settings"));
 
 		this.menu.addMenuItem(this._itemCinSettings);
@@ -130,15 +130,15 @@ MyApplet.prototype = {
 		//Seperator
 		this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 		//Reload Theme
-		let icon = new St.Icon({icon_name: "gnome-settings-theme", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "gnome-settings-theme", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 		this._itemCinReloadTheme = new MyPopupMenuItem(icon, _("Reload Theme"));
 
 		this.menu.addMenuItem(this._itemCinReloadTheme);
 		this._itemCinReloadTheme.connect('activate', function(actor, event) {
 			Main.loadTheme();
-		});		
+		});
 		//Restart Cinnamon
-		let icon = new St.Icon({icon_name: "reload", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "reload", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 		this._itemCinRestart = new MyPopupMenuItem(icon, _("Restart Cinnamon"));
 
 		this.menu.addMenuItem(this._itemCinRestart);
