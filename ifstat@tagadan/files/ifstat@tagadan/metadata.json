@@ -1,6 +1,5 @@
 {
-    "last-edited": "1404290085", 
-    "description": "Show your internet usage in a smartphone style", 
-    "name": "Tight Network Usage Indicator", 
+    "description": "Show your internet usage in a smartphone style",
+    "name": "Tight Network Usage Indicator",
     "uuid": "ifstat@tagadan"
 }
