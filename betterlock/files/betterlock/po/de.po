@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-13 23:15+0100\n"
-"PO-Revision-Date: 2017-02-13 23:16+0100\n"
+"POT-Creation-Date: 2017-09-15 20:37+0200\n"
+"PO-Revision-Date: 2017-09-15 20:39+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,37 +18,45 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:70
+#: applet.js:104
 msgid "Num Lock"
 msgstr "Num-Lock-Taste"
 
-#: applet.js:74
+#: applet.js:110
 msgid "Caps Lock"
 msgstr "Feststelltaste"
 
-#: applet.js:79
+#: applet.js:116
 msgid "Notifications"
 msgstr "Benachrichtigungen"
 
-#: applet.js:114
+#: applet.js:171
 msgid "Lock Keys"
 msgstr "Lock-Tasten"
 
-#: applet.js:148
+#: applet.js:223
 msgid "Num lock on"
 msgstr "Num-Lock-Taste ein"
 
-#: applet.js:153
+#: applet.js:226
 msgid "Num lock off"
 msgstr "Num-Lock-Taste aus"
 
-#: applet.js:163
+#: applet.js:234
 msgid "Caps lock on"
 msgstr "Feststelltaste ein"
 
-#: applet.js:168
+#: applet.js:237
 msgid "Caps lock off"
 msgstr "Feststelltaste aus"
+
+#. betterlock->settings-schema.json->show-num-lock->description
+msgid "Show Num Lock indicator"
+msgstr "Symbol für Num-Lock-Taste anzeigen"
+
+#. betterlock->settings-schema.json->show-caps-lock->description
+msgid "Show Caps Lock indicator"
+msgstr "Symbol für Feststelltaste anzeigen"
 
 #. betterlock->metadata.json->description
 msgid ""

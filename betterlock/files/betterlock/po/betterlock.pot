@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-13 23:15+0100\n"
+"POT-Creation-Date: 2017-09-15 20:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,44 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:70
+#: applet.js:104
 msgid "Num Lock"
 msgstr ""
 
-#: applet.js:74
+#: applet.js:110
 msgid "Caps Lock"
 msgstr ""
 
-#: applet.js:79
+#: applet.js:116
 msgid "Notifications"
 msgstr ""
 
-#: applet.js:114
+#: applet.js:171
 msgid "Lock Keys"
 msgstr ""
 
-#: applet.js:148
+#: applet.js:223
 msgid "Num lock on"
 msgstr ""
 
-#: applet.js:153
+#: applet.js:226
 msgid "Num lock off"
 msgstr ""
 
-#: applet.js:163
+#: applet.js:234
 msgid "Caps lock on"
 msgstr ""
 
-#: applet.js:168
+#: applet.js:237
 msgid "Caps lock off"
+msgstr ""
+
+#. betterlock->settings-schema.json->show-num-lock->description
+msgid "Show Num Lock indicator"
+msgstr ""
+
+#. betterlock->settings-schema.json->show-caps-lock->description
+msgid "Show Caps Lock indicator"
 msgstr ""
 
 #. betterlock->metadata.json->description
