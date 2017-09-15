@@ -1,16 +1,17 @@
 {
-    "pref_show_notifications": {
-        "type": "generic",
-        "default": false
+    "show-notifications": {
+        "type": "switch",
+        "default": true,
+        "description" : "Show notifications"
     },
-    "show-caps-lock" : {
-       "type" : "switch",
-       "default" : true,
-       "description" : "Show Caps Lock indicator"
-   },
-   "show-num-lock" : {
-      "type" : "switch",
-      "default" : true,
-      "description" : "Show Num Lock indicator"
+   "indicator-type" : {
+      "type": "combobox",
+      "default": "both",
+      "options": {
+           "Num Lock and Caps Lock": "both",
+           "Num Lock only": "num-only",
+           "Caps Lock only": "caps-only"
+       },
+      "description": "Choose which indicator to show"
    }
 }
