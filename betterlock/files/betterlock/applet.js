@@ -47,25 +47,25 @@ MyApplet.prototype = {
 
         this.caps_on = new St.Icon({
             icon_name: "caps-on",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.caps_off = new St.Icon({
             icon_name: "caps-off",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.num_on = new St.Icon({
             icon_name: "num-on",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.num_off = new St.Icon({
             icon_name: "num-off",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
@@ -149,7 +149,7 @@ MyApplet.prototype = {
 
         let icon = new St.Icon({
             icon_name: iconName,
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: this._source.ICON_SIZE
         });
         this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
