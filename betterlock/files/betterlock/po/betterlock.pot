@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-15 20:37+0200\n"
+"POT-Creation-Date: 2017-09-15 21:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,44 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:104
+#: applet.js:97
 msgid "Num Lock"
 msgstr ""
 
-#: applet.js:110
+#: applet.js:103
 msgid "Caps Lock"
 msgstr ""
 
-#: applet.js:116
-msgid "Notifications"
-msgstr ""
-
-#: applet.js:171
+#: applet.js:142
 msgid "Lock Keys"
 msgstr ""
 
-#: applet.js:223
+#: applet.js:190
 msgid "Num lock on"
 msgstr ""
 
-#: applet.js:226
+#: applet.js:193
 msgid "Num lock off"
 msgstr ""
 
-#: applet.js:234
+#: applet.js:201
 msgid "Caps lock on"
 msgstr ""
 
-#: applet.js:237
+#: applet.js:204
 msgid "Caps lock off"
 msgstr ""
 
-#. betterlock->settings-schema.json->show-num-lock->description
-msgid "Show Num Lock indicator"
+#. betterlock->settings-schema.json->show-notifications->description
+msgid "Show notifications"
 msgstr ""
 
-#. betterlock->settings-schema.json->show-caps-lock->description
-msgid "Show Caps Lock indicator"
+#. betterlock->settings-schema.json->indicator-type->options
+msgid "Num Lock only"
+msgstr ""
+
+#. betterlock->settings-schema.json->indicator-type->options
+msgid "Caps Lock only"
+msgstr ""
+
+#. betterlock->settings-schema.json->indicator-type->options
+msgid "Num Lock and Caps Lock"
+msgstr ""
+
+#. betterlock->settings-schema.json->indicator-type->description
+msgid "Choose which indicator to show"
 msgstr ""
 
 #. betterlock->metadata.json->description

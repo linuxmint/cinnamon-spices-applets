@@ -36,16 +36,14 @@ MyApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this._bindSettings();
 
-        this.settings.bind("show-caps-lock", "showCapsLock", this._updateIconVisibility);
-        this.settings.bind("show-num-lock", "showNumLock", this._updateIconVisibility);
+        this.settings.bind("show-notifications", "showNotifications", null)
+        this.settings.bind("indicator-type", "indicatorType", this._updateIconVisibility);
 
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
         this.binEmpty = new St.Bin();
-        this.binEmpty.set_size(3, 3);
-        this.binIndOff = new St.Bin();
+        this.binEmpty.set_size(0, 0);
 
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
@@ -82,17 +80,12 @@ MyApplet.prototype = {
 
         this.binNum.child = this.num_off;
         this.binCaps.child = this.caps_off;
-        this.binIndOff.child = this.indicator_off;
         this.actor.add(this.binCaps, {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
         this.actor.add(this.binEmpty);
         this.actor.add(this.binNum, {
-            y_align: St.Align.MIDDLE,
-            y_fill: false
-        });
-        this.actor.add(this.binIndOff, {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
@@ -113,32 +106,10 @@ MyApplet.prototype = {
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
         this.menu.addMenuItem(this.capsMenuItem);
 
-        this.notificationsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Notifications"), this.pref_show_notifications, {
-            reactive: true
-        });
-        this.notificationsMenuItem.connect('activate', Lang.bind(this, this._onNotificationsChanged));
-        this.menu.addMenuItem(this.notificationsMenuItem);
-
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
         this._updateState();
         this._updateIconVisibility();
-    },
-
-    _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
-        let settingsArray = [
-            [bD.BIDIRECTIONAL, "pref_show_notifications", null],
-        ];
-        let newBinding = typeof this.settings.bind === "function";
-        for (let [binding, property_name, callback] of settingsArray) {
-            // Condition needed for retro-compatibility.
-            // Mark for deletion on EOL.
-            if (newBinding)
-                this.settings.bind(property_name, property_name, callback);
-            else
-                this.settings.bindProperty(binding, property_name, property_name, callback, null);
-        }
     },
 
     on_applet_removed_from_panel: function() {
@@ -180,22 +151,18 @@ MyApplet.prototype = {
     },
 
     _updateIconVisibility: function() {
-        if (this.showCapsLock)
+        if (this.indicatorType == "both" || this.indicatorType == "caps-only")
             this.binCaps.show();
         else
             this.binCaps.hide();
-        if (this.showNumLock)
+        if (this.indicatorType == "both" || this.indicatorType == "num-only")
             this.binNum.show();
         else
             this.binNum.hide();
-        if (this.showCapsLock && this.showNumLock)
+        if (this.indicatorType == "both")
             this.binEmpty.show();
         else
             this.binEmpty.hide();
-        if (!this.showCapsLock && !this.showNumLock)
-            this.binIndOff.show();
-        else
-            this.binIndOff.hide();
     },
 
     _updateState: function() {
@@ -218,7 +185,7 @@ MyApplet.prototype = {
 
         this.numMenuItem.setToggleState(this.numlock_state);
         this.capsMenuItem.setToggleState(this.capslock_state);
-        if (numlock_prev != this.binNum.child && !this._firstRun && this.showNumLock) {
+        if (numlock_prev != this.binNum.child && !this._firstRun) {
             if (this.binNum.child == this.num_on) {
                 msg = _("Num lock on");
                 icon_name = 'num-on';
@@ -226,10 +193,10 @@ MyApplet.prototype = {
                 msg = _("Num lock off");
                 icon_name = 'num-off';
             }
-            if (this.pref_show_notifications)
+            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "num-only"))
                 this._notifyMessage(icon_name, msg);
         }
-        if (capslock_prev != this.binCaps.child && !this._firstRun && this.showCapsLock) {
+        if (capslock_prev != this.binCaps.child && !this._firstRun) {
             if (this.binCaps.child == this.caps_on) {
                 msg = _("Caps lock on");
                 icon_name = 'caps-on';
@@ -237,7 +204,7 @@ MyApplet.prototype = {
                 msg = _("Caps lock off");
                 icon_name = 'caps-off';
             }
-            if (this.pref_show_notifications)
+            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "caps-only"))
                 this._notifyMessage(icon_name, msg);
         }
         this._firstRun = false;
@@ -252,7 +219,12 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        this.menu.toggle();
+        if (this.indicatorType == "both")
+            this.menu.toggle();
+        else if (this.indicatorType == "caps-only")
+            this._onCapsChanged();
+        else if (this.indicatorType == "num-only")
+            this._onNumChanged();
     },
 
     _onNumChanged: function(actor, event) {
@@ -279,11 +251,7 @@ MyApplet.prototype = {
             Caribou.DisplayAdapter.get_default().keyval_release(keyval);
         }
         this._updateState();
-    },
-
-    _onNotificationsChanged: function(actor, event) {
-        this.pref_show_notifications = !this.pref_show_notifications;
-    },
+    }
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
