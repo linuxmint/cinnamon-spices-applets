@@ -38,10 +38,14 @@ MyApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this._bindSettings();
 
+        this.settings.bind("show-caps-lock", "showCapsLock", this._updateIconVisibility);
+        this.settings.bind("show-num-lock", "showNumLock", this._updateIconVisibility);
+
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
         this.binEmpty = new St.Bin();
         this.binEmpty.set_size(3, 3);
+        this.binIndOff = new St.Bin();
 
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
@@ -69,15 +73,26 @@ MyApplet.prototype = {
             icon_size: 18,
             style_class: "applet-icon"
         });
+        this.indicator_off = new St.Icon({
+            icon_name: "indicator-off",
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 18,
+            style_class: "applet-icon"
+        });
 
         this.binNum.child = this.num_off;
         this.binCaps.child = this.caps_off;
+        this.binIndOff.child = this.indicator_off;
         this.actor.add(this.binCaps, {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
         this.actor.add(this.binEmpty);
         this.actor.add(this.binNum, {
+            y_align: St.Align.MIDDLE,
+            y_fill: false
+        });
+        this.actor.add(this.binIndOff, {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
@@ -107,6 +122,7 @@ MyApplet.prototype = {
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
         this._updateState();
+        this._updateIconVisibility();
     },
 
     _bindSettings: function() {
@@ -163,6 +179,25 @@ MyApplet.prototype = {
         this._source.notify(this._notification);
     },
 
+    _updateIconVisibility: function() {
+        if (this.showCapsLock)
+            this.binCaps.show();
+        else
+            this.binCaps.hide();
+        if (this.showNumLock)
+            this.binNum.show();
+        else
+            this.binNum.hide();
+        if (this.showCapsLock && this.showNumLock)
+            this.binEmpty.show();
+        else
+            this.binEmpty.hide();
+        if (!this.showCapsLock && !this.showNumLock)
+            this.binIndOff.show();
+        else
+            this.binIndOff.hide();
+    },
+
     _updateState: function() {
         this.numlock_state = this._getNumlockState();
         this.capslock_state = this._getCapslockState();
@@ -183,7 +218,7 @@ MyApplet.prototype = {
 
         this.numMenuItem.setToggleState(this.numlock_state);
         this.capsMenuItem.setToggleState(this.capslock_state);
-        if (numlock_prev != this.binNum.child && !this._firstRun) {
+        if (numlock_prev != this.binNum.child && !this._firstRun && this.showNumLock) {
             if (this.binNum.child == this.num_on) {
                 msg = _("Num lock on");
                 icon_name = 'num-on';
@@ -194,7 +229,7 @@ MyApplet.prototype = {
             if (this.pref_show_notifications)
                 this._notifyMessage(icon_name, msg);
         }
-        if (capslock_prev != this.binCaps.child && !this._firstRun) {
+        if (capslock_prev != this.binCaps.child && !this._firstRun && this.showCapsLock) {
             if (this.binCaps.child == this.caps_on) {
                 msg = _("Caps lock on");
                 icon_name = 'caps-on';

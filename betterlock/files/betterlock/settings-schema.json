@@ -2,5 +2,15 @@
     "pref_show_notifications": {
         "type": "generic",
         "default": false
-    }
+    },
+    "show-caps-lock" : {
+       "type" : "switch",
+       "default" : true,
+       "description" : "Show Caps Lock indicator"
+   },
+   "show-num-lock" : {
+      "type" : "switch",
+      "default" : true,
+      "description" : "Show Num Lock indicator"
+   }
 }
