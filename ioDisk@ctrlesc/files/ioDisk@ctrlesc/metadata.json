@@ -1,7 +1,6 @@
 {
-    "uuid": "ioDisk@ctrlesc", 
-    "name": "Disk Utilization", 
-    "version": "1.0.3", 
-    "icon": "ioDisk", 
+    "uuid": "ioDisk@ctrlesc",
+    "name": "Disk Utilization",
+    "version": "1.0.3",
     "description": "Shows the current max disk I/O utilization in the panel and per device utilization in a popup menu."
 }
