@@ -1,7 +1,0 @@
-{
- "uuid": "display@jtsagata",
- "name": "Display & Layouts",
- "description": "XRandR layout control applet",
- "icon": "gsd-xrandr",
- "localedir": "/usr/share/locale"
-}
