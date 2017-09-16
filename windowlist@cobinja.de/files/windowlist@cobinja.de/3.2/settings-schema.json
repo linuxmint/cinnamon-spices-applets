@@ -84,7 +84,7 @@
   },
   "show-windows-for-current-monitor": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Only show windows on the same monitor",
     "tooltip": "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
   },

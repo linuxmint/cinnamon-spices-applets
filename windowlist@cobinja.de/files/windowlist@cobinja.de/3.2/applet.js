@@ -1647,8 +1647,13 @@ CobiWorkspace.prototype = {
       if (!setting) {
         this._windowAdded(metaWindow);
       }
-      else if (metaWindow.get_monitor() != this._applet._monitor.index) {
-        this._windowRemoved(metaWindow);
+      else {
+        if (metaWindow.get_monitor() != this._applet._monitor.index) {
+          this._windowRemoved(metaWindow);
+        }
+        else {
+          this._windowAdded(metaWindow);
+        }
       }
     }
   },
@@ -2001,6 +2006,7 @@ CobiWindowList.prototype = {
   },
   
   on_applet_added_to_panel: function() {
+    this._updateMonitor();
     let nWorkspaces = global.screen.get_n_workspaces();
     
     // upgrade pinned-apps
@@ -2028,8 +2034,6 @@ CobiWindowList.prototype = {
     for (let i = 0; i < nWorkspaces; i++) {
       this._onWorkspaceAdded(global.screen, i);
     }
-    
-    this._updateMonitor();
     
     this.emit("connect-signals");
     this._signalManager.connect(global.window_manager, "switch-workspace", this._updateCurrentWorkspace);
