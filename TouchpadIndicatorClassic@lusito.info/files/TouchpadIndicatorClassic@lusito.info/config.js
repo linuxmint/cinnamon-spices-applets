@@ -1,1 +1,0 @@
-{"touchpad-enabled":true,"on-mouse-disable":true,"on-exit-enable":true,"on-exit-disable":false,"on-start-disable":false,"show-notifications":false,"fakeTrackpoints":[]}
