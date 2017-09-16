@@ -12,14 +12,23 @@ const Applet = imports.ui.applet;
 const Tooltips = imports.ui.tooltips;
 const SignalManager = imports.misc.signalManager;
 
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-
-const each = AppletDir.each.each;
-const isEqual = AppletDir.isEqual.isEqual;
-const getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
-const constants = AppletDir.constants.constants;
-const t = AppletDir.gettext.t;
-const setTimeout = AppletDir.timers.setTimeout;
+let each, isEqual, constants, getFirefoxHistory, setTimeout, t;
+if (typeof require !== 'undefined') {
+  each = require('./each').each;
+  isEqual = require('./isEqual').isEqual;
+  getFirefoxHistory = require('./firefox').getFirefoxHistory;
+  constants = require('./constants').constants;
+  t = require('./gettext').t;
+  setTimeout = require('./timers').setTimeout;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  each = AppletDir.each.each;
+  isEqual = AppletDir.isEqual.isEqual;
+  getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
+  constants = AppletDir.constants.constants;
+  t = AppletDir.gettext.t;
+  setTimeout = AppletDir.timers.setTimeout;
+}
 
 function AppMenuButtonRightClickMenu () {
   this._init.apply(this, arguments);

@@ -7,12 +7,19 @@ const DND = imports.ui.dnd;
 const Meta = imports.gi.Meta;
 const SignalManager = imports.misc.signalManager;
 
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-
-const each = AppletDir.each.each;
-const isEqual = AppletDir.isEqual.isEqual;
-const constants = AppletDir.constants.constants;
-const setTimeout = AppletDir.timers.setTimeout;
+let each, isEqual, constants, setTimeout;
+if (typeof require !== 'undefined') {
+  each = require('./each').each;
+  isEqual = require('./isEqual').isEqual;
+  constants = require('./constants').constants;
+  setTimeout = require('./timers').setTimeout;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  each = AppletDir.each.each;
+  isEqual = AppletDir.isEqual.isEqual;
+  constants = AppletDir.constants.constants;
+  setTimeout = AppletDir.timers.setTimeout;
+}
 
 // Creates a button with an icon and a label.
 // The label text must be set with setText

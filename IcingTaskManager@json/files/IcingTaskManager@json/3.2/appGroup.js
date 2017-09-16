@@ -7,13 +7,21 @@ const PopupMenu = imports.ui.popupMenu;
 const DND = imports.ui.dnd;
 const SignalManager = imports.misc.signalManager;
 
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-
-const SpecialMenus = AppletDir.specialMenus;
-const SpecialButtons = AppletDir.specialButtons;
-const constants = AppletDir.constants.constants;
-const each = AppletDir.each.each;
-const isEqual = AppletDir.isEqual.isEqual;
+let SpecialButtons, SpecialMenus, each, isEqual, constants;
+if (typeof require !== 'undefined') {
+  SpecialButtons = require('./specialButtons');
+  SpecialMenus = require('./specialMenus');
+  constants = require('./constants').constants;
+  each = require('./each').each;
+  isEqual = require('./isEqual').isEqual;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  SpecialMenus = AppletDir.specialMenus;
+  SpecialButtons = AppletDir.specialButtons;
+  constants = AppletDir.constants.constants;
+  each = AppletDir.each.each;
+  isEqual = AppletDir.isEqual.isEqual;
+}
 
 function AppGroup () {
   this._init.apply(this, arguments);

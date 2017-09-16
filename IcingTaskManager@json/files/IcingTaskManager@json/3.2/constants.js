@@ -39,3 +39,7 @@ const constants = {
     {id: 5, label: 'selected'},
   ]
 };
+
+if (typeof module !== 'undefined') {
+  module.exports.constants = constants;
+}
