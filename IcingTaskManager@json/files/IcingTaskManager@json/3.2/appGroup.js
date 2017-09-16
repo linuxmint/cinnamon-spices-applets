@@ -109,7 +109,8 @@ AppGroup.prototype = {
   handleDragOver: function (source, actor, x, y, time) {
     if (source instanceof AppGroup
       || source.isDraggableApp
-      || (DND.LauncherDraggable && source instanceof DND.LauncherDraggable)) {
+      || (DND.LauncherDraggable && source instanceof DND.LauncherDraggable)
+      || this._applet.panelEditMode) {
       return DND.DragMotionResult.CONTINUE;
     }
     if (this.metaWindows.length > 0 && this.lastFocused) {

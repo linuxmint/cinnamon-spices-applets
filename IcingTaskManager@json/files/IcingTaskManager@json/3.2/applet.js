@@ -652,7 +652,8 @@ MyApplet.prototype = {
 
   handleDragOver: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
-      || !this.enableDragging) {
+      || !this.enableDragging
+      || this.panelEditMode) {
       return DND.DragMotionResult.NO_DROP;
     }
 
