@@ -4,12 +4,19 @@ const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const SignalManager = imports.misc.signalManager;
 
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-
-const AppGroup = AppletDir.appGroup.AppGroup;
-const each = AppletDir.each.each;
-const isEqual = AppletDir.isEqual.isEqual;
-const setTimeout = AppletDir.timers.setTimeout;
+let each, isEqual, AppGroup, setTimeout;
+if (typeof require !== 'undefined') {
+  each = require('./each').each;
+  isEqual = require('./isEqual').isEqual;
+  AppGroup = require('./appGroup').AppGroup;
+  setTimeout = require('./timers').setTimeout;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  each = AppletDir.each.each;
+  isEqual = AppletDir.isEqual.isEqual;
+  AppGroup = AppletDir.appGroup.AppGroup;
+  setTimeout = AppletDir.timers.setTimeout;
+}
 
 // List of running apps
 function AppList () {

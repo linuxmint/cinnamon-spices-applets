@@ -27,12 +27,19 @@ const Gdk = imports.gi.Gdk;
 const Meta = imports.gi.Meta;
 const SignalManager = imports.misc.signalManager;
 
-const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-
-const each = AppletDir.each.each;
-const isEqual = AppletDir.isEqual.isEqual;
-const AppList = AppletDir.appList.AppList;
-const setTimeout = AppletDir.timers.setTimeout;
+let each, isEqual, AppList, setTimeout;
+if (typeof require !== 'undefined') {
+  each = require('./each').each;
+  isEqual = require('./isEqual').isEqual;
+  AppList = require('./appList').AppList;
+  setTimeout = require('./timers').setTimeout;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  each = AppletDir.each.each;
+  isEqual = AppletDir.isEqual.isEqual;
+  AppList = AppletDir.appList.AppList;
+  setTimeout = AppletDir.timers.setTimeout;
+}
 
 if (!Array.prototype.findIndex) {
   Object.defineProperty(Array.prototype, 'findIndex', {
@@ -652,7 +659,8 @@ MyApplet.prototype = {
 
   handleDragOver: function (source, actor, x, y) {
     if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
-      || !this.enableDragging) {
+      || !this.enableDragging
+      || this.panelEditMode) {
       return DND.DragMotionResult.NO_DROP;
     }
 
