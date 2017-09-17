@@ -1,6 +1,7 @@
-const GTop = imports.applet.GTop;
 const Gio = imports.gi.Gio;
-const _ = imports.applet._;
+const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
+const GTop = AppletDir.__init__.GTop;
+const _ = AppletDir.__init__._;
 
 function CpuData() {
     this._init();

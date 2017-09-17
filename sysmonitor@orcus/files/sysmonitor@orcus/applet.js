@@ -27,10 +27,11 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
-const _ = imports.applet._;
-const GTop = imports.applet.GTop;
-const Graph = imports.applet.graph.Graph;
-const Providers = imports.applet.providers;
+const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
+const _ = AppletDir.__init__._;
+const GTop = AppletDir.__init__.GTop;
+const Graph = AppletDir.graph.Graph;
+const Providers = AppletDir.providers;
 
 function colorToArray(c) {
     c = c.match(/\((.*)\)/)[1].split(",").map(Number);
