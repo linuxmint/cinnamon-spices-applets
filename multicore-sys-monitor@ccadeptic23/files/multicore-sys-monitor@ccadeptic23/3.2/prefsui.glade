@@ -46,7 +46,7 @@
   </object>
   <object class="GtkWindow" id="windowMain">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Multi-core System Monitor Preferences</property>
+    <property name="title" translatable="yes">Multi-Core System Monitor Preferences</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
@@ -1643,10 +1643,10 @@
             <property name="margin_bottom">10</property>
             <property name="label" translatable="yes">Auto Scaling:
 	This will scale the line graph by the largest reading within the
-	displayed area. Once the largest reading is no longer displayed 
+	displayed area. Once the largest reading is no longer displayed
 	the next largest becomes the new value by which the readings
 	are scaled. This lets the plot "zoom" to show details of the graph.
-	However, it also means that if there is a large reading small readings 
+	However, it also means that if there is a large reading small readings
 	may become indistinguishable from 0. And if there are only small readings
 	then slightly larger readings may appear larger than they should.
 	If not enabled the largest value used will be the largest reading since

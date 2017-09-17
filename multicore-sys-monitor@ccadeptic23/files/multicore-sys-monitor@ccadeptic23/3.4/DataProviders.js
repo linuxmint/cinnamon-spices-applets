@@ -113,13 +113,13 @@ MultiCpuDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- CPU ------- \n');
+    let toolTipString = _('------- CPU -------') + '\n';
     for (let i = 0; i < this.CPUCount; i++) {
       let percentage = Math.round(100 * this.CPUListUsage[i], 2);
       let spacer = (percentage < 10 ? '     ' : '   ');
       toolTipString += (_('Core') + ' ' + i + ':').padEnd(12) + percentage + '%\n';;
     }
-    return toolTipString + '\n';
+    return toolTipString;
   }
 };
 
@@ -153,10 +153,10 @@ MemDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Memory ------- \n');
-    let attributes = [_('Used'), _('Cached'), _('Buffer'), _('Free')];
+    let toolTipString = _('------- Memory -------') + '\n';
+    let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
     for (let i = 0; i < attributes.length; i++) {
-      toolTipString += attributes[i] + ':\t' + Math.round(100 * this.memInfo[i]) + '%\n';
+      toolTipString += attributes[i] + '\t' + Math.round(100 * this.memInfo[i]) + '%\n';
     }
     return toolTipString;
   }
@@ -189,8 +189,8 @@ SwapDataProvider.prototype = {
     if (!this.isEnabled || !this.swapInfo[0]) {
       return '';
     }
-    let toolTipString = _('------- Swap -------\n');
-    toolTipString += _('Swap:\t') + (Math.round(10000 * this.swapInfo[0]) / 100) + '%\n';
+    let toolTipString = _('------- Swap -------') + '\n';
+    toolTipString += _('Swap') + ':\t' + (Math.round(10000 * this.swapInfo[0]) / 100) + '%\n';
     return toolTipString;
   }
 };
@@ -267,13 +267,13 @@ NetDataProvider.prototype = {
       return '';
     }
     this.getData();
-    let toolTipString = _('------- Networks -------\n');
+    let toolTipString = _('------- Networks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       let down = formatBytes(this.currentReadings[i].tooltipUp, 2);
       let up = formatBytes(this.currentReadings[i].tooltipDown, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
-      toolTipString += indent + _('Down') + ':' + down.padStart(spaces) + rate + '\n';
-      toolTipString += indent  + _('Up') + ':   ' + up.padStart(spaces) + rate + '\n';
+      toolTipString += indent + _('Down:') + '' + down.padStart(spaces) + rate + '\n';
+      toolTipString += indent  + _('Up:') + '   ' + up.padStart(spaces) + rate + '\n';
     }
     return toolTipString;
   }
@@ -341,13 +341,13 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Disks ------- \n');
+    let toolTipString = _('------- Disks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       let read = formatBytes(this.currentReadings[i].tooltipRead, 2);
       let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
-      toolTipString += indent + _('Read') + ':' + read.padStart(spaces) + rate + '\n';
-      toolTipString += indent  + _('Write') + ':   ' + write.padStart(spaces) + rate + '\n';
+      toolTipString += indent + _('Read:') + read.padStart(spaces) + rate + '\n';
+      toolTipString += indent  + _('Write:') + write.padStart(spaces) + rate + '\n';
     }
     return toolTipString;
   },
