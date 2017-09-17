@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-12 16:17+0100\n"
+"POT-Creation-Date: 2017-09-18 00:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,178 +17,188 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:250
-msgid "Clear"
-msgstr ""
-
-#: applet.js:306
+#: applet.js:178
 msgid "Places"
 msgstr ""
 
-#: applet.js:403
+#: applet.js:291
 msgid "Search Home Folder"
 msgstr ""
 
-#: applet.js:417
+#: applet.js:305
 msgid "SYSTEM"
 msgstr ""
 
-#: applet.js:425
+#: applet.js:314
 msgid "Search File System"
 msgstr ""
 
-#: applet.js:440
+#: applet.js:330
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#: applet.js:489
+#: applet.js:344
+msgid "Clear"
+msgstr ""
+
+#: applet.js:388
 msgid "Computer"
 msgstr ""
 
-#: applet.js:495
+#: applet.js:394
 msgid "File System"
 msgstr ""
 
-#: applet.js:511
+#: applet.js:410
 msgid "Network"
 msgstr ""
 
-#: applet.js:607
+#: applet.js:513
 msgid "Trash"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->panelIcon->description
+#. placesCenter@scollins->settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->panelIcon->tooltip
+#. placesCenter@scollins->settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->showRoot->description
-msgid "Show file system"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->middleClickPath->description
-msgid "Open on middle click"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->middleClickPath->tooltip
-msgid "Leave blank to disable"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->general->description
-msgid "General Settings"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showComputer->description
+#. placesCenter@scollins->settings-schema.json->showComputer->description
 msgid "Show computer"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->onlyShowMounted->description
-msgid "Only show mounted drives"
+#. placesCenter@scollins->settings-schema.json->showRoot->description
+msgid "Show file system"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->keyOpen->description
-msgid "Menu shortcut key"
+#. placesCenter@scollins->settings-schema.json->recentSection->title
+#. placesCenter@scollins->settings-schema.json->recentPage->title
+msgid "Recent documents"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->userSection->title
-msgid "User section"
+#. placesCenter@scollins->settings-schema.json->generalPage->title
+msgid "General"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->showTrash->description
-msgid "Show trash"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showTrash->options
-msgid "Always"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showTrash->options
-msgid "Never"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showTrash->options
-msgid "When not empty"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showNetwork->description
-msgid "Show network"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->iconSize->description
-msgid "Icon size"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->iconSize->units
-msgid "px"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->showVolumes->description
-msgid "Show volumes"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->panelText->description
-msgid "Panel text"
-msgstr ""
-
-#. cinnamon-places-center->settings-
-#. schema.json->systemCustomPlaces->description
-#. cinnamon-places-center->settings-schema.json->userCustomPlaces->description
-msgid "Custom places"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->systemCustomPlaces->tooltip
-#. cinnamon-places-center->settings-schema.json->userCustomPlaces->tooltip
-msgid ""
-"List of uris/file paths to be included. Entries may be separated by either a"
-" comma(,) or by a new-line. You can set the name to be displayed by adding "
-":customName after the location."
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->recent->description
-msgid "Recent Documents"
-msgstr ""
-
-#. cinnamon-places-center->settings-schema.json->systemSection->title
+#. placesCenter@scollins->settings-schema.json->systemSection->title
 msgid "System section"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->showDesktop->description
-msgid "Show desktop"
+#. placesCenter@scollins->settings-schema.json->userPage->title
+msgid "User"
 msgstr ""
 
-#. cinnamon-places-center->settings-
+#. placesCenter@scollins->settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->userSection->title
+msgid "User section"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->systemPage->title
+msgid "System"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->description
+#. placesCenter@scollins->settings-
+#. schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->tooltip
+#. placesCenter@scollins->settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a"
+" comma(,) or by a new-line. You can set the name to be displayed by adding "
+":customName after the location. You can likewise set an icon name by adding "
+":iconName after the custom name."
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr ""
+
+#. placesCenter@scollins->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr ""
+
+#. placesCenter@scollins->settings-
 #. schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->userPage->title
-msgid "User"
+#. placesCenter@scollins->settings-schema.json->showDesktop->description
+msgid "Show desktop"
 msgstr ""
 
-#. cinnamon-places-center->settings-schema.json->iconSize->description
-msgid "Menu icon size"
-msgstr ""
-
-#. cinnamon-places-center->metadata.json->description
+#. placesCenter@scollins->metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
 msgstr ""
 
-#. cinnamon-places-center->metadata.json->contributors
+#. placesCenter@scollins->metadata.json->contributors
 msgid "Stephen Collins - Author"
 msgstr ""
 
-#. cinnamon-places-center->metadata.json->contributors
+#. placesCenter@scollins->metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
 msgstr ""
 
-#. cinnamon-places-center->metadata.json->comments
+#. placesCenter@scollins->metadata.json->comments
 msgid ""
 "Places Center is a feature-rich, cross-platform Cinnamon applet that "
 "provides easy access to all of your most-used places. Feel free to "
@@ -196,7 +206,6 @@ msgid ""
 "my github repo."
 msgstr ""
 
-#. cinnamon-places-center->metadata.json->name
+#. placesCenter@scollins->metadata.json->name
 msgid "Places Center"
 msgstr ""
-
