@@ -69,4 +69,7 @@ while read LANGUAGE; do
     msgmerge $poFileDir/$LANGUAGEID.po $potFile -o $poFileDir/$LANGUAGEID.po
     msgattrib --no-obsolete $poFileDir/$LANGUAGEID.po -o $poFileDir/$LANGUAGEID.po
 
+    # convert .po to .mo
+    msgfmt $poFileDir/$LANGUAGEID.po -o $poFileDir/mo/$LANGUAGEID.mo
+
 done <$poFileDir/LANGUAGES
