@@ -1,21 +1,18 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: windowlist@cobinja.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-05-13 14:32+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -23,39 +20,43 @@ msgstr ""
 
 #. a4techTool@mous->metadata.json->name
 msgid "A4Tech battery checker"
-msgstr ""
+msgstr "A4Tech provjera baterije"
 
 #. a4techTool@mous->metadata.json->description
 msgid "Shows Battery level of A4Tech mouse"
-msgstr ""
+msgstr "Prikazuje razinu energije baterije za A4Tech miš"
 
 #. acerhk-ctl@mcnielcho.org->metadata.json->name
 msgid "AcerHK Control"
-msgstr ""
+msgstr "AcerHK upravljanje"
 
 #. acerhk-ctl@mcnielcho.org->metadata.json->description
 msgid ""
 "Provides software interface to Acer hardware keys.  Requires installation of "
 "acerhk.ko."
 msgstr ""
+"Omogućuje softversko sučelje za Acer hardverske tipke.  Zahtijeva "
+"instalaciju acerhk.ko."
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "Automatsko pokretanje aplikacija"
 
 #. AutostartPrograms@spacy01->metadata.json->description
 msgid "Click here to add or remove programs to start with the session."
-msgstr ""
+msgstr "Kliknite ovdje za automatsko pokretanje aplikacija sa sesijom."
 
 #. axos88@countdown-timer->metadata.json->name
 msgid "Countdown timer with notifications"
-msgstr ""
+msgstr "Odbrojavanje s obavijestima"
 
 #. axos88@countdown-timer->metadata.json->description
 msgid ""
 "A countdown timer app with visual and auditory notifications based on "
 "markbokil's timer-notifications applet"
 msgstr ""
+"Aplikacija odbrojavanja s vizualnim i zvučnim obavijestima temeljena na "
+"markbokilovom timer-notifications apletu"
 
 #. back-up_state@natsakis.com->metadata.json->name
 msgid "Back-up State"
@@ -69,39 +70,43 @@ msgstr ""
 
 #. bash-sensors@pkkk->metadata.json->name
 msgid "Bash Sensors"
-msgstr ""
+msgstr "Bash senzori"
 
 #. bash-sensors@pkkk->metadata.json->description
 msgid ""
 "Write your Bash commands to specify applet output (temperature sensors and "
 "not only!)"
 msgstr ""
+"Napišite svoje Bash naredbe za određivanje izlaza apleta (i ne samo za "
+"senzore temperature)"
 
 #. batterymonitor@pdcurtis->metadata.json->name
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr ""
+msgstr "Aplet baterije s nadgledanjem i isključivanjem (BAMS)"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
-msgstr ""
+msgstr "Prikazuje napunjenost u postocima i omogućuje upozorenja i radnje"
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
+msgstr "Indikator velikih slova ili brojčane tipkovnice s obavijestima sustava"
 
 #. betterlock->metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock is on, and displays a notification when "
 "these change."
 msgstr ""
+"Prikazuje jesu li velika slova ili brojčana tipkovnica uključeni, i "
+"prikazuje obavijesti kada se to promijeni."
 
 #. bettersettings@bownz->metadata.json->name
 msgid "Better Cinnamon Settings"
-msgstr ""
+msgstr "Cinnamon izbornik postavki"
 
 #. bettersettings@bownz->metadata.json->description
 msgid "A Better Cinnamon Settings"
-msgstr ""
+msgstr "Opširniji izbornik postavki za Cinnamon"
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "BgRadio"
@@ -123,11 +128,11 @@ msgstr ""
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->name
 msgid "Brightness and gamma applet"
-msgstr ""
+msgstr "Aplet svjetline i game"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
-msgstr ""
+msgstr "Prilagodite razinu svjetline i game na svome zaslonu"
 
 #. bumblebee@pdcurtis->metadata.json->name
 msgid "Bumblebee Status with NVidia Temperature Display"
@@ -142,13 +147,14 @@ msgstr ""
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr ""
+msgstr "Kalendar svjetskog vremena"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
+"Aplet na temelju Cinnamon kalendara s podrškom prikaza više vremenskih zona"
 
 #. cheaty@centurix->metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
@@ -160,7 +166,7 @@ msgstr ""
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinna izbornik"
 
 #. Cinnamenu@json->metadata.json->description
 msgid ""
@@ -188,28 +194,28 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
+msgstr "CinnVIIStark izbornik"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr ""
+msgstr "Cinnamon izbornik izgleda poput Windows 7 ili Mate izbornika."
 
 #. clipboard-qr@wrouesnel->metadata.json->name
 msgid "Clipboard QR code applet"
-msgstr ""
+msgstr "QR kôd međuspremnika"
 
 #. clipboard-qr@wrouesnel->metadata.json->description
 msgid "Create QR codes from clipboard content"
-msgstr ""
+msgstr "Stvorite QR kôdove iz sadržaja međuspremnika"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr ""
+msgstr "Sklopivo obavijesno područje sustava"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
-msgstr ""
+msgstr "Zamjena za napušteni System Tray Collapsible Cinnamon aplet"
 
 #. color-picker@fmete->metadata.json->name
 msgid "Color Picker"
@@ -221,11 +227,12 @@ msgstr ""
 
 #. commandLauncher@scollins->metadata.json->name
 msgid "Command Launcher"
-msgstr ""
+msgstr "Pokretač naredbe"
 
 #. commandLauncher@scollins->metadata.json->description
 msgid "Lets you to run command-line commands with the click of a button"
 msgstr ""
+"Omogućuje vam pokretanje naredbi kao u naredbenom redku klikom na tipku"
 
 #. CommandRunner@appdevsw->metadata.json->name
 msgid "CommandRunner"
@@ -239,11 +246,11 @@ msgstr ""
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "Računalo"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
-msgstr ""
+msgstr "Prikaži datoteke na razini računala"
 
 #. cpufreq@mtwebster->metadata.json->name
 msgid "CPU Frequency Applet"
@@ -263,11 +270,11 @@ msgstr ""
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->name
 msgid "Docker Control"
-msgstr ""
+msgstr "Upravljanje Dockera"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->description
 msgid "Activates/Deactivates Docker Container"
-msgstr ""
+msgstr "Aktivira/Deaktivira spremnik Dockera"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->name
 msgid "Custom Applications Menu"
@@ -302,27 +309,27 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
 msgid "Download and upload speed"
-msgstr ""
+msgstr "Brzina preuzimanja i slanja"
 
 #. download-and-upload-speed@cardsurf->metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr ""
+msgstr "Prikazuje korištenje mrežnih sučelja"
 
 #. extensions@dalcde->metadata.json->name
 msgid "Extensions Manager"
-msgstr ""
+msgstr "Upravitelj proširenja"
 
 #. extensions@dalcde->metadata.json->description
 msgid "Allows enabling and disabling of extensions with one click"
-msgstr ""
+msgstr "Omogućite ili onemogućite proširenja jednim klikom"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->name
 msgid "Feeds Reader"
-msgstr ""
+msgstr "Čitač RSS kanala"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->description
 msgid "Displays RSS news feeds"
-msgstr ""
+msgstr "Prikazuje novosti RSS kanala"
 
 #. force-quit@cinnamon.org->metadata.json->name
 msgid "Force Quit"
@@ -335,54 +342,56 @@ msgstr ""
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr ""
+msgstr "GitHub preglednik"
 
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
-msgstr ""
+msgstr "Kliknite na aplet kako bi istražili svoje javne GitHub repozitorije"
 
 #. gmail@lauritsriple->metadata.json->name
 msgid "GmailNotifier"
-msgstr ""
+msgstr "Gmail obavijesti"
 
 #. gmail@lauritsriple->metadata.json->description
 msgid "Shows most recent mails, and how many unread messages you have."
-msgstr ""
+msgstr "Prikazuje najnovije poruke e-pošte i koliko nepročitanih poruka imate."
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
-msgstr ""
+msgstr "GPaste aplet"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-msgstr ""
+msgstr "Cjelokupno napisan GPaste aplet temeljen na Gnome proširenju"
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"
-msgstr ""
+msgstr "GPU temperatura"
 
 #. gputemperature@silentage.com->metadata.json->description
 msgid ""
 "Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
 "information in a popup menu."
 msgstr ""
+"Prikazuje temperaturu za NVidia/ATI grafičke kartice u panelu, i opširnije "
+"informacije u skočnom izborniku."
 
 #. graphicsCenter@scollins->metadata.json->name
 msgid "Graphics Center"
-msgstr ""
+msgstr "Grafičko središte"
 
 #. graphicsCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your picture needs"
-msgstr ""
+msgstr "Omogućuje lagan i brz pristup svim resursima za vaše slike"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->name
 msgid "Project Hamster Applet"
-msgstr ""
+msgstr "Aplet Hamster projekta"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->description
 msgid "Cinnamon applet for project hamster - the GNOME time tracker"
-msgstr ""
+msgstr "Cinnamon aplet za projekt Hamster - GNOME vremenski pratitelj"
 
 #. hideable-applets@cardsurf->metadata.json->name
 msgid "Hideable applets"
@@ -394,11 +403,11 @@ msgstr ""
 
 #. host-entries@hoffis-eck.de->metadata.json->name
 msgid "Host Entries"
-msgstr ""
+msgstr "Unosi računala"
 
 #. host-entries@hoffis-eck.de->metadata.json->description
 msgid "Enables/Disables Entries in /etc/hosts"
-msgstr ""
+msgstr "Omogućite/Onemogućite unose u datoteci /etc/hosts"
 
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
@@ -410,19 +419,20 @@ msgstr ""
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing upravitelj zadataka"
 
 #. IcingTaskManager@json->metadata.json->description
+#, fuzzy
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Popis prozora s grupiranjem aplikacija i minijaturama prozora"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
-msgstr ""
+msgstr "Icing spremanje prozora"
 
 #. IcingWindowSaver@json->metadata.json->description
 msgid "Window position save and restore utility."
-msgstr ""
+msgstr "Alat spremanja i vraćanja položaja prozora"
 
 #. ifstat@tagadan->metadata.json->name
 msgid "Tight Network Usage Indicator"
@@ -434,21 +444,23 @@ msgstr ""
 
 #. ink-level-monitor@r0p01ach->metadata.json->name
 msgid "Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Nadgledatelj razine tinte u pisaču"
 
 #. ink-level-monitor@r0p01ach->metadata.json->description
 msgid "USB Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Aplet za nadgledanje razine tinte u USB pisaču"
 
 #. ioDisk@ctrlesc->metadata.json->name
 msgid "Disk Utilization"
-msgstr ""
+msgstr "Upotreba diska"
 
 #. ioDisk@ctrlesc->metadata.json->description
 msgid ""
 "Shows the current max disk I/O utilization in the panel and per device "
 "utilization in a popup menu."
 msgstr ""
+"Prikazuje trenutnu najveću I/U upotrebu diska u panelu i pojedinačnu "
+"upotrebu po uređuju u skočnom izborniku."
 
 #. jalalicalendar@mohammad-sn->metadata.json->name
 msgid "Taghvim"
@@ -468,42 +480,44 @@ msgstr ""
 
 #. localip@mrieracrespi->metadata.json->name
 msgid "Local IPs"
-msgstr ""
+msgstr "Lokalne IP adrese"
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. localip@mrieracrespi->metadata.json->description
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. localipswithsettings@edaubert->metadata.json->description
 msgid "Shows local IP addresses."
-msgstr ""
+msgstr "Prikazuje lokalne IP adrese."
 
 #. localipswithsettings@edaubert->metadata.json->name
 msgid "Local IPs with settings"
-msgstr ""
+msgstr "Lokalne IP adrese s postavkama"
 
 #. location-detection@heimdall->metadata.json->name
 msgid "Location Detection + Flags"
-msgstr ""
+msgstr "Otkrivanje lokacije + Zastave"
 
 #. location-detection@heimdall->metadata.json->description
 msgid "Shows the geographic location of your public IP and country-flag."
-msgstr ""
+msgstr "Prikazuje zamljopisnu lokaciju vaše javne IP adrese i zastavu zemlje."
 
 #. logout@martin->metadata.json->name
 msgid "logout"
-msgstr ""
+msgstr "odjava"
 
 #. logout@martin->metadata.json->description
 msgid "2-clicks logout"
-msgstr ""
+msgstr "odjava sa 2 klika"
 
 #. lookingglass-restart@markbokil.com->metadata.json->name
 msgid "LookingGlass Restart"
-msgstr ""
+msgstr "Napredne kontorole i upravljanja, ponovno pokretanje"
 
 #. lookingglass-restart@markbokil.com->metadata.json->description
 msgid "Looking Glass debugger with Cinnamon restart."
 msgstr ""
+"Otklanjatelj grešaka naprednih kontrola i upravljanja s ponovnim pokretanjem "
+"Cinnamona."
 
 #. lorem@vxstorm->metadata.json->name
 msgid "Lorem Pastesum"
@@ -523,11 +537,11 @@ msgstr ""
 
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
-msgstr ""
+msgstr "Jednostavni nadgledatelj memorije"
 
 #. mem-monitor-text@datanom.net->metadata.json->description
 msgid "A simple applet that displays the memory usage."
-msgstr ""
+msgstr "Jednostavni aplet koji prikazuje korištenje memorije."
 
 #. menu@csknet.org->metadata.json->name
 msgid "CskMenu"
@@ -547,21 +561,22 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->metadata.json->name
 msgid "Show or record desktop"
-msgstr ""
+msgstr "Prikaži ili snimi radnu površinu"
 
 #. montrer-le-bureau@cannelle.org->metadata.json->description
 msgid "Minimize all windows or record the desktop"
-msgstr ""
+msgstr "Smanji sve prozore ili snimi radnu površinu"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->name
 msgid "Multi-Core System Monitor"
-msgstr ""
+msgstr "Višejezgreni nadgledatelj sustava"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
 msgstr ""
+"Prikazuje u stvarnom vremenu cpu upotrebu za svaku jezgru i ukupnu memoriju."
 
 #. mybookmarks@markbokil.com->metadata.json->name
 msgid "My Bookmarks"
@@ -581,7 +596,7 @@ msgstr ""
 
 #. netusagemonitor@pdcurtis->metadata.json->name
 msgid "Network Data Usage Monitor"
-msgstr ""
+msgstr "Mrežni nadgledatelj korištenja podataka"
 
 #. netusagemonitor@pdcurtis->metadata.json->description
 msgid ""
@@ -590,15 +605,15 @@ msgstr ""
 
 #. network@brownsr->metadata.json->name
 msgid "Network"
-msgstr ""
+msgstr "Mreža"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
-msgstr ""
+msgstr "Prikaži mrežu"
 
 #. nvidiaprime@pdcurtis->metadata.json->name
 msgid "nVidia Prime GPU Display"
-msgstr ""
+msgstr "nVidia Prime GPU prikaz"
 
 #. nvidiaprime@pdcurtis->metadata.json->description
 msgid ""
@@ -608,19 +623,19 @@ msgstr ""
 
 #. officeCenter@scollins->metadata.json->name
 msgid "Office Center"
-msgstr ""
+msgstr "Uredsko središte"
 
 #. officeCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your office needs"
-msgstr ""
+msgstr "Omogućuje lagan i brz pristup svim vašim uredskim resursima"
 
 #. pa-equalizer@jschug.com->metadata.json->name
 msgid "Equalizer"
-msgstr ""
+msgstr "Ekvalizator"
 
 #. pa-equalizer@jschug.com->metadata.json->description
 msgid "An applet to control sound equalization"
-msgstr ""
+msgstr "Aplet za upravljanje ekvalizatorom zvuka"
 
 #. panel-separator-icon@mordant23->metadata.json->name
 msgid "Panel Separator (Icon)"
@@ -640,15 +655,15 @@ msgstr ""
 
 #. PDFManager@cinnamon.org->metadata.json->name
 msgid "PDFManager"
-msgstr ""
+msgstr "PDF upravitelj"
 
 #. PDFManager@cinnamon.org->metadata.json->description
 msgid "Manager of PDF"
-msgstr ""
+msgstr "PDF upravitelj"
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "Lokacije"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
@@ -656,27 +671,28 @@ msgstr ""
 
 #. placesCenter@scollins->metadata.json->name
 msgid "Places Center"
-msgstr ""
+msgstr "Središte lokacija"
 
 #. placesCenter@scollins->metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr ""
+msgstr "Omogućuje lako čitljiv raspored za pristup vašim lokacijama"
 
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
-msgstr ""
+msgstr "Lokacije s pokretačem terminala"
 
 #. places-with-terminal@mtwebster->metadata.json->description
 msgid "Access your places and bookmarks, or launch a terminal at that location"
 msgstr ""
+"Pristupite svojim lokacijama i zabilješkama ili pokrenite terminal u lokaciji"
 
 #. pomodoro@gregfreeman.org->metadata.json->name
 msgid "Pomodoro Timer"
-msgstr ""
+msgstr "Pomodoro odbrojavanje"
 
 #. pomodoro@gregfreeman.org->metadata.json->description
 msgid "Great tool for boosted productivity!"
-msgstr ""
+msgstr "Sjajan alat za povećanje produktivnosti!"
 
 #. power-off@martin->metadata.json->name
 msgid "power-off"
@@ -688,11 +704,11 @@ msgstr ""
 
 #. printers@linux-man->metadata.json->name
 msgid "Printers"
-msgstr ""
+msgstr "Pisači"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr ""
+msgstr "Upravljajte pisačima i zadacima ispisa"
 
 #. profile-switcher@pixunil->metadata.json->name
 msgid "Profile switcher"
@@ -714,11 +730,11 @@ msgstr ""
 
 #. rancher@centurix->metadata.json->name
 msgid "Homestead manager"
-msgstr ""
+msgstr "Homestead upravitelj"
 
 #. rancher@centurix->metadata.json->description
 msgid "An applet to manage Homestead."
-msgstr ""
+msgstr "Aplet za upravljanje Homesteadom."
 
 #. redshift@marvel4u->metadata.json->name
 msgid "Redshift"
@@ -732,11 +748,11 @@ msgstr ""
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
-msgstr ""
+msgstr "Ponovno pokreni Cinnamon"
 
 #. restart-cinnamon@kolle->metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
-msgstr ""
+msgstr "Kliknite na aplet za ponovno pokretanje Cinnamona"
 
 #. rprego@rprego.com->metadata.json->name
 msgid "Display Switcher"
@@ -774,15 +790,15 @@ msgstr ""
 
 #. ScreenLocker@tuuxx->metadata.json->name
 msgid "Screen locker"
-msgstr ""
+msgstr "Zaključavanje zaslona"
 
 #. ScreenLocker@tuuxx->metadata.json->description
 msgid "Click to lock the screen immediately"
-msgstr ""
+msgstr "Kliknite kako bi zaključali zaslon"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr ""
+msgstr "Slikanje+Snimanje radne površine"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
 msgid ""
@@ -792,7 +808,7 @@ msgstr ""
 
 #. ScreenShot@tech71->metadata.json->name
 msgid "ScreenShot"
-msgstr ""
+msgstr "Slikanje zaslona"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
@@ -800,19 +816,19 @@ msgstr ""
 
 #. scripts@paucapo.com->metadata.json->name
 msgid "Scripts Menu"
-msgstr ""
+msgstr "Izbornik skripta"
 
 #. scripts@paucapo.com->metadata.json->description
 msgid "Menu applet for starting scripts"
-msgstr ""
+msgstr "Aplet izbornika za pokretanje skripta"
 
 #. search-box@mtwebster->metadata.json->name
 msgid "Internet Search Box"
-msgstr ""
+msgstr "Internet tražilica"
 
 #. search-box@mtwebster->metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr ""
+msgstr "Obavite internet pretragu, upotrebom omiljenog pretraživača"
 
 #. separator2@zyzz->metadata.json->name
 msgid "Separator2"
@@ -832,11 +848,11 @@ msgstr ""
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr ""
+msgstr "Upravitelj sesije"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
-msgstr ""
+msgstr "Omogućuje jednostavan pristup isključivanju, ponovnom pokretanju, itd."
 
 #. SettingsPlus@lusito.info->metadata.json->name
 msgid "Settings Plus"
@@ -931,13 +947,15 @@ msgstr ""
 
 #. sound-with-apps-volume@koutch->metadata.json->name
 msgid "Sound with apps volume"
-msgstr ""
+msgstr "Zvuk s glasnoćom zvuka aplikacija"
 
 #. sound-with-apps-volume@koutch->metadata.json->description
 msgid ""
 "Applications' volume, volume 150%, mute button, scrolling track time, custom "
 "launcher ..."
 msgstr ""
+"Glasnoća zvuka aplikacija, glasnoća zvuka do 150%, tipka utišavanja, "
+"premotavanje pjesme u vremenu, prilagođeni pokretač..."
 
 #. sports-update@pavanred->metadata.json->name
 msgid "sports-update"
@@ -949,21 +967,23 @@ msgstr ""
 
 #. sshlauncher@sumo->metadata.json->name
 msgid "SSH Launcher"
-msgstr ""
+msgstr "SSH pokretač"
 
 #. sshlauncher@sumo->metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
-msgstr ""
+msgstr "Aplet za povezivanje sa SSH računalima podešenim u ~/.ssh/config"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->name
 msgid "Stackoverflow Questions Notifier"
-msgstr ""
+msgstr "Stackoverflow obavjestitelj pitanja"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->description
 msgid ""
 "Checks stackoverflow site to see if new questions have been posted under a "
 "particular tag and generates a notification"
 msgstr ""
+"Provjerava stackoverflow stranicu da vidi jesu li nova pitanja objavljena "
+"pod određenom oznakom i stvara obavijest"
 
 #. stevedore@centurix->metadata.json->name
 msgid "Stevedor - Docker controller"
@@ -975,37 +995,39 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr ""
+msgstr "Ljepljive bilješke"
 
 #. sticky@scollins->metadata.json->description
 msgid "Applet that allows you to manage desktop notes"
-msgstr ""
+msgstr "Aplet koji vam omogućuje upravljanje bilješkama radne površine"
 
 #. stocks@adonut->metadata.json->name
 msgid "stocks"
-msgstr ""
+msgstr "Dionice"
 
 #. stocks@adonut->metadata.json->description
 msgid "a simple Stocks ticker for cinnamon"
-msgstr ""
+msgstr "Jednostavne burzovne obavijesti za Cinnamon"
 
 #. stopwatch@pdcurtis->metadata.json->name
 msgid "Stopwatch for Cinnamon 1.8+"
-msgstr ""
+msgstr "Štoperica za Cinnamon 1.8+"
 
 #. stopwatch@pdcurtis->metadata.json->description
 msgid ""
 "Allows one to time activities such as the time online with multiple "
 "instances possible"
 msgstr ""
+"Omogućuje odbrojavanje aktivnosti poput vremena provedenog na internetu s "
+"više pokrenutih primjeraka"
 
 #. suspend@janax->metadata.json->name
 msgid "Suspend computer"
-msgstr ""
+msgstr "Suspendiraj računalo"
 
 #. suspend@janax->metadata.json->description
 msgid "Immediately suspends the computer"
-msgstr ""
+msgstr "Odmah suspendirajte računalo."
 
 #. SW++@mohammad-sn->metadata.json->name
 msgid "Show desktop ++"
@@ -1027,20 +1049,22 @@ msgstr ""
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
-msgstr ""
+msgstr "Nadgledatelj sustava"
 
 #. sysmonitor@orcus->metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr ""
+msgstr "Prikazuje upotrebu CPU-a, memorije, swapa, mreže u grafovima."
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr ""
+msgstr "Nadgledatelj sustava s grafovima"
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
 "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
 msgstr ""
+"Prikazuje CPU, memoriju i swap upotrebu, upotrebu diska i mreže kao tekst i "
+"grafove"
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
@@ -1052,31 +1076,31 @@ msgstr ""
 
 #. systray-collapsible@koutch->metadata.json->name
 msgid "System Tray Collapsible"
-msgstr ""
+msgstr "Sklopivo obavijesno područje sustava"
 
 #. systray-collapsible@koutch->metadata.json->description
 msgid "Expandable/Collapsible System Tray Applet "
-msgstr ""
+msgstr "Proširivi/Sklopljivi aplet obavijesnog područja sustava"
 
 #. temperature@fevimu->metadata.json->name
 msgid "CPU Temperature Indicator"
-msgstr ""
+msgstr "CPU temperatura"
 
 #. temperature@fevimu->metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr ""
+msgstr "Aplet koji prikazuje CPU temperaturu"
 
 #. text-to-speech-applet@cardsurf->metadata.json->name
 msgid "Text to speech applet"
-msgstr ""
+msgstr "Tekst u govor"
 
 #. text-to-speech-applet@cardsurf->metadata.json->description
 msgid "A text reading applet"
-msgstr ""
+msgstr "Aplet čitanja teksta"
 
 #. tfmKeyboard@alexpp->metadata.json->name
 msgid "Transformice helper"
-msgstr ""
+msgstr "Transformice pomoćnik"
 
 #. tfmKeyboard@alexpp->metadata.json->description
 msgid "Touches d'invocations personalisées et capture vidéo du bureau en MP4"
@@ -1084,43 +1108,44 @@ msgstr ""
 
 #. ThemeRefresh@JosephM->metadata.json->name
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Ponovo učitaj temu"
 
 #. ThemeRefresh@JosephM->metadata.json->description
 msgid "A simple applet that allows you to refresh the current Cinnamon Theme"
-msgstr ""
+msgstr "Jednostavan aplet za osvježavanje trenutne Cinnamon teme"
 
 #. timeout@narutrey->metadata.json->name
 msgid "Time Out"
-msgstr ""
+msgstr "Odbrojavanje"
 
 #. timeout@narutrey->metadata.json->description
 msgid "Automatically controlled time outs and breaks"
-msgstr ""
+msgstr "Automatska upravljanja odbrojavanja i predah"
 
 #. timer-notifications@markbokil.com->metadata.json->name
 msgid "Timer with Notifications"
-msgstr ""
+msgstr "Odbrojavanje sa obavijestima"
 
 #. timer-notifications@markbokil.com->metadata.json->description
 msgid "A timer app with visual and auditory notifications."
-msgstr ""
+msgstr "Aplet odbrojavanja s vizualnim i zvučnim obavijestima."
 
 #. todo@threefi->metadata.json->name
 msgid "Todo"
-msgstr ""
+msgstr "Zadaci"
 
 #. todo@threefi->metadata.json->description
 msgid "a simple todo list ticker for cinammon"
-msgstr ""
+msgstr "Jednostavan popis zadataka za Cinnamon"
 
 #. toggle_LookingGlass@kolle->metadata.json->name
 msgid "Toggle LookingGlass"
-msgstr ""
+msgstr "Cinnamon napredne kontorole i upravljanja"
 
 #. toggle_LookingGlass@kolle->metadata.json->description
 msgid "Click on the applet to toggle LookingGlass"
 msgstr ""
+"Kliknite na aplet za omogućavanje Cinnamon napredne kontorole i upravljanja"
 
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
@@ -1148,11 +1173,11 @@ msgstr ""
 
 #. turn-off-monitor@zablotski->metadata.json->name
 msgid "Turn Off Monitor"
-msgstr ""
+msgstr "Isključi zaslon"
 
 #. turn-off-monitor@zablotski->metadata.json->description
 msgid "Click on the applet to turn off monitor"
-msgstr ""
+msgstr "Klikni na aplet za isključivanje zaslona"
 
 #. uptime@vatanuki.kun->metadata.json->name
 msgid "Up Time"
@@ -1174,27 +1199,27 @@ msgstr ""
 
 #. vboxlauncher@mockturtl->metadata.json->name
 msgid "Vbox Launcher"
-msgstr ""
+msgstr "Vbox pokretač"
 
 #. vboxlauncher@mockturtl->metadata.json->description
 msgid "An applet to launch virtual machines."
-msgstr ""
+msgstr "Aplet za pokretanje virtualnih strojeva."
 
 #. vnstat@linuxmint.com->metadata.json->name
 msgid "Network usage monitor"
-msgstr ""
+msgstr "Nadgledatelj upotrebe mreže"
 
 #. vnstat@linuxmint.com->metadata.json->description
 msgid "Network usage monitor using vnstat"
-msgstr ""
+msgstr "Nadgledatelj upotrebe mreže koristi vnstat"
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Vrijeme"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Pogledajte vašu lokalnu vremensku prognozu"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"
@@ -1218,7 +1243,7 @@ msgstr ""
 
 #. windowlist@cobinja.de->metadata.json->description
 msgid "A window list with app grouping and window previews"
-msgstr ""
+msgstr "Prikaz prozora s grupiranjem aplikacija i prozorima pregleda"
 
 #. WindowListGroup@jake.phy@gmail.com->metadata.json->name
 msgid "Window List With App Grouping"

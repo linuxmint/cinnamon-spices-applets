@@ -1,21 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
+# Swedish translation for xampp-panel@backids99.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Svenska Språkfiler <contactform@svenskasprakfiler.se>, 2017.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xampp-panel@backids99\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-05-26 07:09+0200\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -41,67 +42,74 @@ msgstr ""
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "Uppstartsprogram"
 
 #. AutostartPrograms@spacy01->metadata.json->description
 msgid "Click here to add or remove programs to start with the session."
 msgstr ""
+"Klicka hör för att lägga till eller ta bort program i Uppstartsprogram."
 
 #. axos88@countdown-timer->metadata.json->name
 msgid "Countdown timer with notifications"
-msgstr ""
+msgstr "Nedräkningsur med avisering"
 
 #. axos88@countdown-timer->metadata.json->description
 msgid ""
 "A countdown timer app with visual and auditory notifications based on "
 "markbokil's timer-notifications applet"
 msgstr ""
+"Ett nedräkningsur med visuell och auditiv avisering, baserad på markbokil's "
+"timer-notifications."
 
 #. back-up_state@natsakis.com->metadata.json->name
 msgid "Back-up State"
-msgstr ""
+msgstr "Säckerhetskopieringsstatus"
 
 #. back-up_state@natsakis.com->metadata.json->description
 msgid ""
 "Probes for the state of a certain rsync back-up by checking the exit status "
 "of the log file"
 msgstr ""
+"Övervakar status för en viss rsync säkerhetskopiering, genom att kontrollera "
+"exit-status i loggfilen"
 
 #. bash-sensors@pkkk->metadata.json->name
 msgid "Bash Sensors"
-msgstr ""
+msgstr "Bash-sensorer"
 
 #. bash-sensors@pkkk->metadata.json->description
 msgid ""
 "Write your Bash commands to specify applet output (temperature sensors and "
 "not only!)"
 msgstr ""
+"Skriv dina Bash-kommandon för att specificera utdata i panelen (inte bara "
+"temperatursensorer)"
 
 #. batterymonitor@pdcurtis->metadata.json->name
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr ""
+msgstr "Batteriprogram med övervakning och avstängning (BAMS)"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
-msgstr ""
+msgstr "Visar laddning som procentsats och aktiverar varningar och åtgärder"
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
+msgstr "Num Lock-/Caps Lock-indikator med avisering"
 
 #. betterlock->metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock is on, and displays a notification when "
 "these change."
-msgstr ""
+msgstr "Visar om Caps Lock/Num Lock är på och meddelar när det ändras."
 
 #. bettersettings@bownz->metadata.json->name
 msgid "Better Cinnamon Settings"
-msgstr ""
+msgstr "Bättre Cinnamon-inställningar"
 
 #. bettersettings@bownz->metadata.json->description
 msgid "A Better Cinnamon Settings"
-msgstr ""
+msgstr "En bättre Cinnamon-inställningar"
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "BgRadio"
@@ -115,19 +123,19 @@ msgstr ""
 
 #. binaryclock@entelechy->metadata.json->name
 msgid "Cinnamon Binary Clock"
-msgstr ""
+msgstr "Cinnamon binärklocka"
 
 #. binaryclock@entelechy->metadata.json->description
 msgid "The Cinnamon calendar applet, with the time displayed in binary"
-msgstr ""
+msgstr "Ett Cinnamon kalenderprogram som visar tiden binärt"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->name
 msgid "Brightness and gamma applet"
-msgstr ""
+msgstr "Ljus- och gammaprogram"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
-msgstr ""
+msgstr "Anger ljus- och gammanivåer för skärmen"
 
 #. bumblebee@pdcurtis->metadata.json->name
 msgid "Bumblebee Status with NVidia Temperature Display"
@@ -142,25 +150,28 @@ msgstr ""
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr ""
+msgstr "Världsklockekalender"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
+"Förgrening av Cinnamons kalenderprogram med stöd för visning av flera "
+"tidszoner"
 
 #. cheaty@centurix->metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
-msgstr ""
+msgstr "Cheaty - Lathundsarkiv"
 
 #. cheaty@centurix->metadata.json->description
 msgid "An applet to provide quick access to a variety of cheat sheets."
 msgstr ""
+"Ett panelprogram som tillhandahåller snabb åtkomst till diverse lathundar."
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #. Cinnamenu@json->metadata.json->description
 msgid ""
@@ -188,62 +199,64 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
+msgstr "CinnVIIStarkMenu"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr ""
+msgstr "Cinnamon-meny med utseende från Windows 7 startmeny, eller MATE-menyn"
 
 #. clipboard-qr@wrouesnel->metadata.json->name
 msgid "Clipboard QR code applet"
-msgstr ""
+msgstr "Urklipp till QR-kod"
 
 #. clipboard-qr@wrouesnel->metadata.json->description
 msgid "Create QR codes from clipboard content"
-msgstr ""
+msgstr "Skapa QR-koder från urklippsinnehåll"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr ""
+msgstr "Komprimerbart systemfält"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
-msgstr ""
+msgstr "En ersättare för det övergivna panelprogrammet System Tray Collapsible"
 
 #. color-picker@fmete->metadata.json->name
 msgid "Color Picker"
-msgstr ""
+msgstr "Färghämtare"
 
 #. color-picker@fmete->metadata.json->description
 msgid "Click on applet to pick color"
-msgstr ""
+msgstr "Klicka på panelikonen för att hämta en färg"
 
 #. commandLauncher@scollins->metadata.json->name
 msgid "Command Launcher"
-msgstr ""
+msgstr "Kommandostartare"
 
 #. commandLauncher@scollins->metadata.json->description
 msgid "Lets you to run command-line commands with the click of a button"
-msgstr ""
+msgstr "Låter dig köra kommandon med ett knappklick"
 
 #. CommandRunner@appdevsw->metadata.json->name
 msgid "CommandRunner"
-msgstr ""
+msgstr "CommandRunner"
 
 #. CommandRunner@appdevsw->metadata.json->description
 msgid ""
 "Applet runs script or application periodically and displays its output on "
 "the taskbar"
 msgstr ""
+"Panelprogrammet kör skript eller program periodiskt och visar utdata i "
+"panelen"
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "Dator"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
-msgstr ""
+msgstr "Visa filer på datornivå"
 
 #. cpufreq@mtwebster->metadata.json->name
 msgid "CPU Frequency Applet"
@@ -255,35 +268,35 @@ msgstr ""
 
 #. cpu-monitor-text@gnemonix->metadata.json->name
 msgid "Simple CPU Monitor"
-msgstr ""
+msgstr "Enkel CPU-övervakare"
 
 #. cpu-monitor-text@gnemonix->metadata.json->description
 msgid "A simple applet that displays the cpu usage."
-msgstr ""
+msgstr "Ett enkelt panelprogram som visar CPU-belastning."
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->name
 msgid "Docker Control"
-msgstr ""
+msgstr "Docker-kontroll"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->description
 msgid "Activates/Deactivates Docker Container"
-msgstr ""
+msgstr "Aktiverar/Avaktiverar Docker-behållare"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->name
 msgid "Custom Applications Menu"
-msgstr ""
+msgstr "Anpassad programmeny"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->description
 msgid "An applications drop-down list easily customisable"
-msgstr ""
+msgstr "En enkelt anpassad programlista"
 
 #. devutils@fogl->metadata.json->name
 msgid "Development Utils"
-msgstr ""
+msgstr "Utvecklarverktyg"
 
 #. devutils@fogl->metadata.json->description
 msgid "Development Utils Applet for Cinnamon"
-msgstr ""
+msgstr "Utvecklarverktyg för Cinnamon i panelen"
 
 #. dgs-bpivaty@gmail.com->metadata.json->name
 msgid "DGS Applet"
@@ -302,11 +315,11 @@ msgstr ""
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
 msgid "Download and upload speed"
-msgstr ""
+msgstr "Ner- och uppladdningshastighet"
 
 #. download-and-upload-speed@cardsurf->metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr ""
+msgstr "Visar användningen av ett nätverksgränssnitt"
 
 #. extensions@dalcde->metadata.json->name
 msgid "Extensions Manager"
@@ -318,71 +331,77 @@ msgstr ""
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->name
 msgid "Feeds Reader"
-msgstr ""
+msgstr "Flödesläsare"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->description
 msgid "Displays RSS news feeds"
-msgstr ""
+msgstr "Visar RSS nyhetsflöden"
 
 #. force-quit@cinnamon.org->metadata.json->name
 msgid "Force Quit"
-msgstr ""
+msgstr "Tvångsavsluta"
 
 #. force-quit@cinnamon.org->metadata.json->description
 msgid ""
 "Click on the applet to launch xkill and force any window to quit immediately"
 msgstr ""
+"Klicka på panelikonen för att starta xkill och tvinga valfritt fönster till "
+"omedelbart avslut"
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr ""
+msgstr "GitHub-utforskare"
 
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
-msgstr ""
+msgstr "Klicka på panelikonen för att utforska dina offentliga GitHub-förråd"
 
 #. gmail@lauritsriple->metadata.json->name
 msgid "GmailNotifier"
-msgstr ""
+msgstr "Gmail-avisering"
 
 #. gmail@lauritsriple->metadata.json->description
 msgid "Shows most recent mails, and how many unread messages you have."
-msgstr ""
+msgstr "Visar den senaste e-posten och hur många olästa meddelanden du har."
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
-msgstr ""
+msgstr "GPaste Reloaded"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
 msgstr ""
+"En fullständig omskrivning av GPaste applet, baserad på Gnome-insticket"
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"
-msgstr ""
+msgstr "GPU-temperatur"
 
 #. gputemperature@silentage.com->metadata.json->description
 msgid ""
 "Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
 "information in a popup menu."
 msgstr ""
+"Visar nVIDIA/ATI GPU-temperatur i panelen och detaljerad information i en "
+"popup-meny."
 
 #. graphicsCenter@scollins->metadata.json->name
 msgid "Graphics Center"
-msgstr ""
+msgstr "Grafikcenter"
 
 #. graphicsCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your picture needs"
-msgstr ""
+msgstr "Tillhandahåller en enkel och snabb resurs för dina bildbehov"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->name
 msgid "Project Hamster Applet"
-msgstr ""
+msgstr "Panelprogram för Hamster-projektet"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->description
 msgid "Cinnamon applet for project hamster - the GNOME time tracker"
 msgstr ""
+"Cinnamon panelprogram för Hamster-projektet - Tidsövervakaren för GNOME"
 
 #. hideable-applets@cardsurf->metadata.json->name
 msgid "Hideable applets"
@@ -394,35 +413,35 @@ msgstr ""
 
 #. host-entries@hoffis-eck.de->metadata.json->name
 msgid "Host Entries"
-msgstr ""
+msgstr "Värdposter"
 
 #. host-entries@hoffis-eck.de->metadata.json->description
 msgid "Enables/Disables Entries in /etc/hosts"
-msgstr ""
+msgstr "Aktiverar/Avaktiverar poster i /etc/hosts"
 
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
-msgstr ""
+msgstr "Grafisk hårdvaruövervakare"
 
 #. hwmonitor@sylfurd->metadata.json->description
 msgid "Displaying realtime CPU and memory load"
-msgstr ""
+msgstr "Visar CPU- och minnesbelastning i realtid"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Fönsterlista med programgruppering och miniatyrer"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
-msgstr ""
+msgstr "Icing Window Saver"
 
 #. IcingWindowSaver@json->metadata.json->description
 msgid "Window position save and restore utility."
-msgstr ""
+msgstr "Verktyg för att spara och återställa fönsterposition"
 
 #. ifstat@tagadan->metadata.json->name
 msgid "Tight Network Usage Indicator"
@@ -434,21 +453,23 @@ msgstr ""
 
 #. ink-level-monitor@r0p01ach->metadata.json->name
 msgid "Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Bläcknivåövervakare"
 
 #. ink-level-monitor@r0p01ach->metadata.json->description
 msgid "USB Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "Bläcknivåövervakare för USB-skrivare"
 
 #. ioDisk@ctrlesc->metadata.json->name
 msgid "Disk Utilization"
-msgstr ""
+msgstr "Diskanvändning"
 
 #. ioDisk@ctrlesc->metadata.json->description
 msgid ""
 "Shows the current max disk I/O utilization in the panel and per device "
 "utilization in a popup menu."
 msgstr ""
+"Visar aktuell I/O (diskanvändning) i panelen och användning per enhet i en "
+"popup-meny."
 
 #. jalalicalendar@mohammad-sn->metadata.json->name
 msgid "Taghvim"
@@ -483,27 +504,27 @@ msgstr ""
 
 #. location-detection@heimdall->metadata.json->name
 msgid "Location Detection + Flags"
-msgstr ""
+msgstr "Platsidentifiering + flaggor"
 
 #. location-detection@heimdall->metadata.json->description
 msgid "Shows the geographic location of your public IP and country-flag."
-msgstr ""
+msgstr "Visar geografisk plats för din publika IP-adress, med nationsflagga."
 
 #. logout@martin->metadata.json->name
 msgid "logout"
-msgstr ""
+msgstr "Logga ut"
 
 #. logout@martin->metadata.json->description
 msgid "2-clicks logout"
-msgstr ""
+msgstr "2-klicks utloggning"
 
 #. lookingglass-restart@markbokil.com->metadata.json->name
 msgid "LookingGlass Restart"
-msgstr ""
+msgstr "LookingGlass omstart"
 
 #. lookingglass-restart@markbokil.com->metadata.json->description
 msgid "Looking Glass debugger with Cinnamon restart."
-msgstr ""
+msgstr "LookingGlass felsökare med Cinnamon-omstart."
 
 #. lorem@vxstorm->metadata.json->name
 msgid "Lorem Pastesum"
@@ -515,19 +536,19 @@ msgstr ""
 
 #. mailnagapplet@ozderya.net->metadata.json->name
 msgid "Mailnag"
-msgstr ""
+msgstr "Mailnag"
 
 #. mailnagapplet@ozderya.net->metadata.json->description
 msgid "Mailnag mail notifier applet"
-msgstr ""
+msgstr "Mailnag e-postaviseringsprogram"
 
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
-msgstr ""
+msgstr "Enkel minnesövervakare"
 
 #. mem-monitor-text@datanom.net->metadata.json->description
 msgid "A simple applet that displays the memory usage."
-msgstr ""
+msgstr "Ett enkelt panelprogram som visar minnesanvändning."
 
 #. menu@csknet.org->metadata.json->name
 msgid "CskMenu"
@@ -547,72 +568,78 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->metadata.json->name
 msgid "Show or record desktop"
-msgstr ""
+msgstr "Visa eller spela in skrivbordet"
 
 #. montrer-le-bureau@cannelle.org->metadata.json->description
 msgid "Minimize all windows or record the desktop"
-msgstr ""
+msgstr "Minimera alla fönster eller spela in skrivbordet"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->name
 msgid "Multi-Core System Monitor"
-msgstr ""
+msgstr "Övervakare för flerkärniga system"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
 msgstr ""
+"Visar i realtid, processoranvändning för varje enskild kärna/cpu och "
+"sammanlagd minnesanvändning."
 
 #. mybookmarks@markbokil.com->metadata.json->name
 msgid "My Bookmarks"
-msgstr ""
+msgstr "Mina bokmärken"
 
 #. mybookmarks@markbokil.com->metadata.json->description
 msgid "Web apps launcher"
-msgstr ""
+msgstr "Web apps launcher"
 
 #. mylauncher@markbokil.com->metadata.json->name
 msgid "My Launcher"
-msgstr ""
+msgstr "Min startmeny"
 
 #. mylauncher@markbokil.com->metadata.json->description
 msgid "Personal app launcher."
-msgstr ""
+msgstr "Personlig programstartare"
 
 #. netusagemonitor@pdcurtis->metadata.json->name
 msgid "Network Data Usage Monitor"
-msgstr ""
+msgstr "Dataförbrukningsövervakare"
 
 #. netusagemonitor@pdcurtis->metadata.json->description
 msgid ""
 "A Comprehensive Data Usage Monitor with alerts and cumulative data functions"
 msgstr ""
+"En omfattande dataförbrukningsövervakare med varningar och kumulativa "
+"datafunktioner"
 
 #. network@brownsr->metadata.json->name
 msgid "Network"
-msgstr ""
+msgstr "Nätverk"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
-msgstr ""
+msgstr "Visa nätverk"
 
 #. nvidiaprime@pdcurtis->metadata.json->name
 msgid "nVidia Prime GPU Display"
-msgstr ""
+msgstr "nVIDIA Prime GPU-visare"
 
 #. nvidiaprime@pdcurtis->metadata.json->description
 msgid ""
 "Displays which Graphics processor is active and nVidia GPU Temperature when "
 "active and in a horizontal panel"
 msgstr ""
+"Visar vilken grafikprocessor som är aktiv och nVIDIA GPU-temperatur, om "
+"aktiv och i horisontell panel."
 
 #. officeCenter@scollins->metadata.json->name
 msgid "Office Center"
-msgstr ""
+msgstr "Kontorscentral"
 
 #. officeCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your office needs"
-msgstr ""
+msgstr "Erbjuder en enkel och snabb resurs för dina kontorsbehov"
 
 #. pa-equalizer@jschug.com->metadata.json->name
 msgid "Equalizer"
@@ -632,75 +659,76 @@ msgstr ""
 
 #. path-monitor@kamikaze->metadata.json->name
 msgid "Path Monitor"
-msgstr ""
+msgstr "Mappövervakare"
 
 #. path-monitor@kamikaze->metadata.json->description
 msgid "Quick access files in a directory"
-msgstr ""
+msgstr "Snabb åtkomst till filer i en mapp"
 
 #. PDFManager@cinnamon.org->metadata.json->name
 msgid "PDFManager"
-msgstr ""
+msgstr "PDF-hanterare"
 
 #. PDFManager@cinnamon.org->metadata.json->description
 msgid "Manager of PDF"
-msgstr ""
+msgstr "PDF-hanterare"
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "Platser"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
-msgstr ""
+msgstr "Åtkomst till dina platser och bokmärken"
 
 #. placesCenter@scollins->metadata.json->name
 msgid "Places Center"
-msgstr ""
+msgstr "Platscentral"
 
 #. placesCenter@scollins->metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr ""
+msgstr "Erbjuder en lättläst layout för att nå dina lagringsplatser"
 
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
-msgstr ""
+msgstr "Platser med termininalstartare"
 
 #. places-with-terminal@mtwebster->metadata.json->description
 msgid "Access your places and bookmarks, or launch a terminal at that location"
 msgstr ""
+"Öppna dina platser och bokmärken, eller starta en terminal i den mappen"
 
 #. pomodoro@gregfreeman.org->metadata.json->name
 msgid "Pomodoro Timer"
-msgstr ""
+msgstr "Pomodoro Tidur"
 
 #. pomodoro@gregfreeman.org->metadata.json->description
 msgid "Great tool for boosted productivity!"
-msgstr ""
+msgstr "Bra verktyg för förbättrad produktivitet!"
 
 #. power-off@martin->metadata.json->name
 msgid "power-off"
-msgstr ""
+msgstr "Stäng av"
 
 #. power-off@martin->metadata.json->description
 msgid "2-clicks power-off"
-msgstr ""
+msgstr "Stäng av med 2 klick"
 
 #. printers@linux-man->metadata.json->name
 msgid "Printers"
-msgstr ""
+msgstr "Skrivare"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr ""
+msgstr "Hantera utskriftsjobb och skrivare"
 
 #. profile-switcher@pixunil->metadata.json->name
 msgid "Profile switcher"
-msgstr ""
+msgstr "Profilväxlare"
 
 #. profile-switcher@pixunil->metadata.json->description
 msgid "Change your settings profile"
-msgstr ""
+msgstr "Ändra din inställningsprofil"
 
 #. radio@driglu4it->metadata.json->name
 msgid "Radio++"
@@ -732,11 +760,11 @@ msgstr ""
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
-msgstr ""
+msgstr "Starta om Cinnamon"
 
 #. restart-cinnamon@kolle->metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
-msgstr ""
+msgstr "Klicka på panelikonen för att starta om Cinnamon"
 
 #. rprego@rprego.com->metadata.json->name
 msgid "Display Switcher"
@@ -748,29 +776,31 @@ msgstr ""
 
 #. rwall@typicalfoobar->metadata.json->name
 msgid "rwall"
-msgstr ""
+msgstr "rwall"
 
 #. rwall@typicalfoobar->metadata.json->description
 msgid ""
 "Random Wallpaper Changer\n"
 "Version: 1.0.1"
 msgstr ""
+"Random Wallpaper Changer\n"
+"Version: 1.0.1"
 
 #. sane-menu@nooulaif->metadata.json->name
 msgid "Sane Menu"
-msgstr ""
+msgstr "Sane Menu"
 
 #. sane-menu@nooulaif->metadata.json->description
 msgid "Cinnamon stock menu applet with improved search."
-msgstr ""
+msgstr "Cinnamon standardmeny med förbättrat sök."
 
 #. screen-inhibit@mtwebster->metadata.json->name
 msgid "Screensaver Inhibitor"
-msgstr ""
+msgstr "Skärmsläckarblockering"
 
 #. screen-inhibit@mtwebster->metadata.json->description
 msgid "Click to inhibit the screensaver, click again to remove inhibition"
-msgstr ""
+msgstr "Klicka för att blockera skärmsläckaren, klicka igen för att avblockera"
 
 #. ScreenLocker@tuuxx->metadata.json->name
 msgid "Screen locker"
@@ -782,7 +812,7 @@ msgstr ""
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr ""
+msgstr "Skärmklipp+Skrivbordsinspelning"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
 msgid ""
@@ -792,51 +822,53 @@ msgstr ""
 
 #. ScreenShot@tech71->metadata.json->name
 msgid "ScreenShot"
-msgstr ""
+msgstr "Skärmklipp"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
-msgstr ""
+msgstr "Ta ett skärmklipp av skrivbordet eller individuella fönster"
 
 #. scripts@paucapo.com->metadata.json->name
 msgid "Scripts Menu"
-msgstr ""
+msgstr "Skriptmeny"
 
 #. scripts@paucapo.com->metadata.json->description
 msgid "Menu applet for starting scripts"
-msgstr ""
+msgstr "Menyprogram för att starta skript"
 
 #. search-box@mtwebster->metadata.json->name
 msgid "Internet Search Box"
-msgstr ""
+msgstr "Internet Search Box"
 
 #. search-box@mtwebster->metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr ""
+msgstr "Utför en internetsökning med din favoritsöktjänst"
 
 #. separator2@zyzz->metadata.json->name
 msgid "Separator2"
-msgstr ""
+msgstr "Separator2"
 
 #. separator2@zyzz->metadata.json->description
 msgid "Use this applet to create a separator between your applets"
 msgstr ""
+"Använd det här panelprogrammet för att skapa en avskiljare mellan dina andra "
+"panelprogram"
 
 #. serviceLauncher@hulygun->metadata.json->name
 msgid "Service Launcher"
-msgstr ""
+msgstr "Tjänststartare"
 
 #. serviceLauncher@hulygun->metadata.json->description
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr ""
+msgstr "Sessionshanterare"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
-msgstr ""
+msgstr "Tillhandahåller enkel åtkomst till Stäng av och Starta om etc."
 
 #. SettingsPlus@lusito.info->metadata.json->name
 msgid "Settings Plus"
@@ -856,24 +888,28 @@ msgstr ""
 
 #. show-hide-applets@mohammad-sn->metadata.json->name
 msgid "Drawer (show/hide applets)"
-msgstr ""
+msgstr "Drawer (visa/dölj panelprogram)"
 
 #. show-hide-applets@mohammad-sn->metadata.json->description
 msgid ""
 "hide a few applet to have a neater panel, and make them show up again by a "
 "click"
 msgstr ""
+"Dölj några panelprogram för att få en snyggare panel, och visa dem igen med "
+"ett klick"
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@DeathMD->metadata.json->name
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@shelley->metadata.json->name
 msgid "Shutdown Applet"
-msgstr ""
+msgstr "Avstängningsprogram"
 
 #. ShutdownApplet@DeathMD->metadata.json->description
 msgid "An applet to shutdown, restart and suspend your system."
 msgstr ""
+"Ett panelprogram för att stänga av, starta om och försätta ditt system i "
+"vänteläge."
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@shelley->metadata.json->description
@@ -883,10 +919,12 @@ msgid ""
 "An applet to help you shutdown, restart and suspend your system with single "
 "click"
 msgstr ""
+"Ett panelprogram som hjälper dig stänga av, starta om och försätta datorn i "
+"vänteläge med ett klick"
 
 #. ShutdownMenuWithIcons@LLOBERA->metadata.json->name
 msgid "Shutdown Menu With Icons"
-msgstr ""
+msgstr "Avstängningsmeny med ikoner"
 
 #. shutdown-timer@webum.by->metadata.json->name
 msgid "Shutdown timer"
@@ -898,20 +936,22 @@ msgstr ""
 
 #. slingshot@jfarthing84->metadata.json->name
 msgid "Slingshot"
-msgstr ""
+msgstr "Slingshot"
 
 #. slingshot@jfarthing84->metadata.json->description
 msgid ""
 "A clone of Pantheon's Slingshot launcher in the form of a Cinnamon applet."
 msgstr ""
+"En klon av Pantheons Slingshot launcher, i form av ett panelprogram för "
+"Cinnamon."
 
 #. smallcalc_applet@lerc.sds->metadata.json->name
 msgid "SmallCalc"
-msgstr ""
+msgstr "SmallCalc"
 
 #. smallcalc_applet@lerc.sds->metadata.json->description
 msgid "A nice compact popup calculator"
-msgstr ""
+msgstr "En liten kompakt popup-kalkylator"
 
 #. smogwawelski@pamsoft.pl->metadata.json->name
 msgid "Smog Wawelski"
@@ -931,13 +971,15 @@ msgstr ""
 
 #. sound-with-apps-volume@koutch->metadata.json->name
 msgid "Sound with apps volume"
-msgstr ""
+msgstr "Ljud med programvolym"
 
 #. sound-with-apps-volume@koutch->metadata.json->description
 msgid ""
 "Applications' volume, volume 150%, mute button, scrolling track time, custom "
 "launcher ..."
 msgstr ""
+"Programvolym, volym 150%, ljudavstängningsknapp, skrollbar "
+"spårtidsindikator, anpassad programstartare ..."
 
 #. sports-update@pavanred->metadata.json->name
 msgid "sports-update"
@@ -957,13 +999,15 @@ msgstr ""
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->name
 msgid "Stackoverflow Questions Notifier"
-msgstr ""
+msgstr "Stackoverflow frågeavisering"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->description
 msgid ""
 "Checks stackoverflow site to see if new questions have been posted under a "
 "particular tag and generates a notification"
 msgstr ""
+"Genomsöker Stackoverflow efter nya frågor under specifika taggar och "
+"genererar en avisering"
 
 #. stevedore@centurix->metadata.json->name
 msgid "Stevedor - Docker controller"
@@ -975,11 +1019,11 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr ""
+msgstr "Sticky Notes"
 
 #. sticky@scollins->metadata.json->description
 msgid "Applet that allows you to manage desktop notes"
-msgstr ""
+msgstr "Panelprogram som låter dig hantera skrivbordsanteckningar"
 
 #. stocks@adonut->metadata.json->name
 msgid "stocks"
@@ -991,31 +1035,35 @@ msgstr ""
 
 #. stopwatch@pdcurtis->metadata.json->name
 msgid "Stopwatch for Cinnamon 1.8+"
-msgstr ""
+msgstr "Stoppur för Cinnamon 1.8+"
 
 #. stopwatch@pdcurtis->metadata.json->description
 msgid ""
 "Allows one to time activities such as the time online with multiple "
 "instances possible"
 msgstr ""
+"Låter dig klocka aktiviteter såsom online-tid, med möjlighet till flera "
+"instanser"
 
 #. suspend@janax->metadata.json->name
 msgid "Suspend computer"
-msgstr ""
+msgstr "Försätt datorn i viloläge"
 
 #. suspend@janax->metadata.json->description
 msgid "Immediately suspends the computer"
-msgstr ""
+msgstr "Försätt datorn i omedelbart viloläge"
 
 #. SW++@mohammad-sn->metadata.json->name
 msgid "Show desktop ++"
-msgstr ""
+msgstr "Show desktop ++"
 
 #. SW++@mohammad-sn->metadata.json->description
 msgid ""
 "click to show/hide desktop, scroll to switch workspace and windows quick "
 "list by right click"
 msgstr ""
+"Klicka för att visa skrivbordet, skrolla för att växla arbetsyta och "
+"högerklicka för fönsterlista"
 
 #. sysmenu@tuxuls@gmail.com->metadata.json->name
 msgid "System menu"
@@ -1027,20 +1075,24 @@ msgstr ""
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
-msgstr ""
+msgstr "Systemövervakare"
 
 #. sysmonitor@orcus->metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
 msgstr ""
+"Visar CPU-, minnes-, växlings-, och nätverksanvändning samt belastning, i "
+"diagram."
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr ""
+msgstr "Systemövervakare med diagram"
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
 "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
 msgstr ""
+"Visa CPU-, minnes- och växlingsutrymmesanvändning, samt disk- och "
+"nätverkshastigheter i text och diagram"
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
@@ -1060,19 +1112,19 @@ msgstr ""
 
 #. temperature@fevimu->metadata.json->name
 msgid "CPU Temperature Indicator"
-msgstr ""
+msgstr "CPU-temperaturindikator"
 
 #. temperature@fevimu->metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr ""
+msgstr "Visar CPU-temperatur"
 
 #. text-to-speech-applet@cardsurf->metadata.json->name
 msgid "Text to speech applet"
-msgstr ""
+msgstr "Text-till-tal"
 
 #. text-to-speech-applet@cardsurf->metadata.json->description
 msgid "A text reading applet"
-msgstr ""
+msgstr "Ett textläsande program"
 
 #. tfmKeyboard@alexpp->metadata.json->name
 msgid "Transformice helper"
@@ -1084,43 +1136,43 @@ msgstr ""
 
 #. ThemeRefresh@JosephM->metadata.json->name
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "Uppdatera aktuellt tema"
 
 #. ThemeRefresh@JosephM->metadata.json->description
 msgid "A simple applet that allows you to refresh the current Cinnamon Theme"
-msgstr ""
+msgstr "Ett enkelt panelprogram för att uppdatera det aktuella Cinnamon-temat"
 
 #. timeout@narutrey->metadata.json->name
 msgid "Time Out"
-msgstr ""
+msgstr "Tidsgräns"
 
 #. timeout@narutrey->metadata.json->description
 msgid "Automatically controlled time outs and breaks"
-msgstr ""
+msgstr "Automatiskt kontrollerade tidsgränser och raster"
 
 #. timer-notifications@markbokil.com->metadata.json->name
 msgid "Timer with Notifications"
-msgstr ""
+msgstr "Tidur med avisering"
 
 #. timer-notifications@markbokil.com->metadata.json->description
 msgid "A timer app with visual and auditory notifications."
-msgstr ""
+msgstr "Ett tidur med visuell och auditiv avisering."
 
 #. todo@threefi->metadata.json->name
 msgid "Todo"
-msgstr ""
+msgstr "Att göra"
 
 #. todo@threefi->metadata.json->description
 msgid "a simple todo list ticker for cinammon"
-msgstr ""
+msgstr "En enkel att-göra-lista för Cinnamon"
 
 #. toggle_LookingGlass@kolle->metadata.json->name
 msgid "Toggle LookingGlass"
-msgstr ""
+msgstr "Öppna/Stäng LookingGlass"
 
 #. toggle_LookingGlass@kolle->metadata.json->description
 msgid "Click on the applet to toggle LookingGlass"
-msgstr ""
+msgstr "Klicka på panelprogrammet för att öppna/stänga LookingGlass"
 
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
@@ -1148,61 +1200,63 @@ msgstr ""
 
 #. turn-off-monitor@zablotski->metadata.json->name
 msgid "Turn Off Monitor"
-msgstr ""
+msgstr "Stäng av skärmen"
 
 #. turn-off-monitor@zablotski->metadata.json->description
 msgid "Click on the applet to turn off monitor"
-msgstr ""
+msgstr "Klicka på panelikonen för att stänga av skärmen"
 
 #. uptime@vatanuki.kun->metadata.json->name
 msgid "Up Time"
-msgstr ""
+msgstr "Upptid"
 
 #. uptime@vatanuki.kun->metadata.json->description
 msgid "A simple applet that displays uptime."
-msgstr ""
+msgstr "Ett enkelt panelprogram som visar upptid"
 
 #. usertile@uszaty->metadata.json->name
 msgid "UserTile Applet"
-msgstr ""
+msgstr "Användarpanel"
 
 #. usertile@uszaty->metadata.json->description
 msgid ""
 "An applet to access your account details and more. Design is based on "
 "UserTile applet from Windows."
 msgstr ""
+"Ett panelprogram för åtkomst till dina kontodetaljer och mer. Baserad på "
+"Användarpanel från Windows."
 
 #. vboxlauncher@mockturtl->metadata.json->name
 msgid "Vbox Launcher"
-msgstr ""
+msgstr "VBox-startare"
 
 #. vboxlauncher@mockturtl->metadata.json->description
 msgid "An applet to launch virtual machines."
-msgstr ""
+msgstr "Ett panelprogram för att starta virtuella maskiner."
 
 #. vnstat@linuxmint.com->metadata.json->name
 msgid "Network usage monitor"
-msgstr ""
+msgstr "Nätverksanvändningsövervakare"
 
 #. vnstat@linuxmint.com->metadata.json->description
 msgid "Network usage monitor using vnstat"
-msgstr ""
+msgstr "Övervakare för nätverksanvändning som använder vnstat"
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Väder"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Visa din lokala väderprognos"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"
-msgstr ""
+msgstr "Webbutvecklarmeny"
 
 #. web-developer-menu@infiniteshroom->metadata.json->description
 msgid "A Menu for PHP/MySQL Web Developers"
-msgstr ""
+msgstr "En meny för PHP/MySQL webbutvecklare"
 
 #. website-notifier@cardsurf->metadata.json->name
 msgid "Website notifier"
@@ -1218,7 +1272,7 @@ msgstr ""
 
 #. windowlist@cobinja.de->metadata.json->description
 msgid "A window list with app grouping and window previews"
-msgstr ""
+msgstr "En fönsterlista med programgruppering och förhandsgranskning"
 
 #. WindowListGroup@jake.phy@gmail.com->metadata.json->name
 msgid "Window List With App Grouping"
@@ -1238,33 +1292,35 @@ msgstr ""
 
 #. windows-quick-list-with-close-button@koutch->metadata.json->name
 msgid "Windows Quick List with close button"
-msgstr ""
+msgstr "Fönsterlista med stängknappar"
 
 #. windows-quick-list-with-close-button@koutch->metadata.json->description
 msgid ""
 "Quickly access windows from all workspaces with close buttons and settings"
 msgstr ""
+"Snabb åtkomst till fönster med stängknappar och inställningar, från alla "
+"arbetsytor"
 
 #. workspace-grid@hernejj->metadata.json->name
 msgid "Workspace grid (2D) and switcher"
-msgstr ""
+msgstr "Arbetsytor i rutnät (2D) med växlare"
 
 #. workspace-grid@hernejj->metadata.json->description
 msgid "2D workspace grid and switcher for Cinnamon"
-msgstr ""
+msgstr "Arbetsytor i 2D-rutor med växlare för Cinnamon"
 
 #. workspace-name@willurd->metadata.json->name
 msgid "Workspace Name"
-msgstr ""
+msgstr "Arbetsytenamn"
 
 #. workspace-name@willurd->metadata.json->description
 msgid "Show the current workspace name in the panel"
-msgstr ""
+msgstr "Visa aktuell arbetsyta i panelen"
 
 #. xampp-panel@backids99->metadata.json->name
 msgid "Xampp Panel Menu"
-msgstr ""
+msgstr "XAMPP panelmeny"
 
 #. xampp-panel@backids99->metadata.json->description
 msgid "A Panel Menu for XAMPP Web Developers"
-msgstr ""
+msgstr "En panelmeny för XAMPP webbutvecklare"

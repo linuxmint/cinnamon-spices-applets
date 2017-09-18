@@ -1,21 +1,15 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-01-25 19:47+0100\n"
+"Last-Translator: Lars Mueller <cobinja@mail.com>\n"
+"Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -41,21 +35,26 @@ msgstr ""
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "Autostart-Programme"
 
 #. AutostartPrograms@spacy01->metadata.json->description
 msgid "Click here to add or remove programs to start with the session."
 msgstr ""
+"Hier klicken, um Programme, welche mit der Sitzung starten, hinzuzufügen "
+"oder zu entfernen."
 
 #. axos88@countdown-timer->metadata.json->name
 msgid "Countdown timer with notifications"
-msgstr ""
+msgstr "Countdown-Timer mit Benachrichtigungen"
 
 #. axos88@countdown-timer->metadata.json->description
 msgid ""
 "A countdown timer app with visual and auditory notifications based on "
 "markbokil's timer-notifications applet"
 msgstr ""
+"Eine Countdown-Timer-Anwendung mit visuellen und auditiven "
+"Benachrichtigungen basierend auf dem Applet Timer mit Benachrichtigungen von "
+"markbokil"
 
 #. back-up_state@natsakis.com->metadata.json->name
 msgid "Back-up State"
@@ -79,21 +78,25 @@ msgstr ""
 
 #. batterymonitor@pdcurtis->metadata.json->name
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr ""
+msgstr "Akku-Applet mit Überwachung und Herunterfahren (BAMS)"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr ""
+"Zeigt Ladezustand in Prozent an und erlaubt Alarm und weitere Aktionen zu "
+"setzen"
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
+msgstr "Num-Lock-Taste/Feststelltaste-Anzeige mit Benachrichtigungen"
 
 #. betterlock->metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock is on, and displays a notification when "
 "these change."
 msgstr ""
+"Zeigt an, ob die Feststelltaste/Num-Lock-Taste aktiviert ist, und zeigt eine "
+"Benachrichtigung an, wenn diese betätigt werden."
 
 #. bettersettings@bownz->metadata.json->name
 msgid "Better Cinnamon Settings"
@@ -115,11 +118,11 @@ msgstr ""
 
 #. binaryclock@entelechy->metadata.json->name
 msgid "Cinnamon Binary Clock"
-msgstr ""
+msgstr "Cinnamon Binäre Uhr"
 
 #. binaryclock@entelechy->metadata.json->description
 msgid "The Cinnamon calendar applet, with the time displayed in binary"
-msgstr ""
+msgstr "Das Cinnamon-Kalender-Applet mit der Zeitanzeige in Binärdarstellung"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->name
 msgid "Brightness and gamma applet"
@@ -142,25 +145,28 @@ msgstr ""
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr ""
+msgstr "Weltzeituhr-Kalender"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
+"Fork des Kalender-Applets von Cinnamon mit der Möglichkeit mehrere Zeitzonen "
+"anzuzeigen"
 
 #. cheaty@centurix->metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
-msgstr ""
+msgstr "Cheaty - Spickzettel-Wächter"
 
 #. cheaty@centurix->metadata.json->description
 msgid "An applet to provide quick access to a variety of cheat sheets."
 msgstr ""
+"Ein Applet, das schnellen Zugang zu einer Vielzahl an Spickzetteln bietet"
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenü"
 
 #. Cinnamenu@json->metadata.json->description
 msgid ""
@@ -188,44 +194,48 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
+msgstr "CinnVIIStarkMenü"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
 msgstr ""
+"Cinnamon-Menü mit dem Aussehen des Windows 7 Start-Menüs oder des MATE-Menüs"
 
 #. clipboard-qr@wrouesnel->metadata.json->name
 msgid "Clipboard QR code applet"
-msgstr ""
+msgstr "Zwischenablage-QR-Code-Applet"
 
 #. clipboard-qr@wrouesnel->metadata.json->description
 msgid "Create QR codes from clipboard content"
-msgstr ""
+msgstr "QR-Codes aus Inhalt der Zwischenablage erstellen"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr ""
+msgstr "Collapsible Systray"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
 msgstr ""
+"Ein Nachfolger für das populäre System Tray Collapsible Cinnamon-Applet"
 
 #. color-picker@fmete->metadata.json->name
 msgid "Color Picker"
-msgstr ""
+msgstr "Farbenwähler"
 
 #. color-picker@fmete->metadata.json->description
 msgid "Click on applet to pick color"
-msgstr ""
+msgstr "Auf Applet klicken, um eine Farbe auszuwählen"
 
 #. commandLauncher@scollins->metadata.json->name
 msgid "Command Launcher"
-msgstr ""
+msgstr "Befehl-Sarter"
 
 #. commandLauncher@scollins->metadata.json->description
 msgid "Lets you to run command-line commands with the click of a button"
 msgstr ""
+"Ermöglicht das Ausführen von Befehlszeilenkommandos mit einem Klick auf "
+"einen Knopf"
 
 #. CommandRunner@appdevsw->metadata.json->name
 msgid "CommandRunner"
@@ -239,11 +249,11 @@ msgstr ""
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "Rechner"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
-msgstr ""
+msgstr "Dateien auf Ebene von Rechner anzeigen"
 
 #. cpufreq@mtwebster->metadata.json->name
 msgid "CPU Frequency Applet"
@@ -255,19 +265,19 @@ msgstr ""
 
 #. cpu-monitor-text@gnemonix->metadata.json->name
 msgid "Simple CPU Monitor"
-msgstr ""
+msgstr "Simpler CPU-Monitor"
 
 #. cpu-monitor-text@gnemonix->metadata.json->description
 msgid "A simple applet that displays the cpu usage."
-msgstr ""
+msgstr "Ein einfaches Applet, das die CPU-Auslastung anzeigt."
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->name
 msgid "Docker Control"
-msgstr ""
+msgstr "Dockerkontrolle"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->description
 msgid "Activates/Deactivates Docker Container"
-msgstr ""
+msgstr "Aktiviert/Deaktiviert Dockercontainer"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->name
 msgid "Custom Applications Menu"
@@ -298,7 +308,7 @@ msgstr ""
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. diaspora-notif@douze12->metadata.json->description
 msgid "Diaspora* notifications"
-msgstr ""
+msgstr "Diaspora* Benachrichtigungen"
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
 msgid "Download and upload speed"
@@ -310,11 +320,12 @@ msgstr ""
 
 #. extensions@dalcde->metadata.json->name
 msgid "Extensions Manager"
-msgstr ""
+msgstr "Erweiterungen-Manager"
 
 #. extensions@dalcde->metadata.json->description
 msgid "Allows enabling and disabling of extensions with one click"
 msgstr ""
+"Ermöglicht das Aktivieren und Deaktivieren von Erweiterungen mit einem Klick"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->name
 msgid "Feeds Reader"
@@ -335,11 +346,12 @@ msgstr ""
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr ""
+msgstr "Github Explorer"
 
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
 msgstr ""
+"Auf das Applet klicken, um Ihre öffentlichen Github-Repositories zu erkunden"
 
 #. gmail@lauritsriple->metadata.json->name
 msgid "GmailNotifier"
@@ -351,12 +363,14 @@ msgstr ""
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
-msgstr ""
+msgstr "GPaste Reloaded"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
 msgstr ""
+"Eine komplette Überarbeitung des GPaste-Applets basierend auf der Gnome "
+"Shell-Erweiterung"
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"
@@ -370,19 +384,20 @@ msgstr ""
 
 #. graphicsCenter@scollins->metadata.json->name
 msgid "Graphics Center"
-msgstr ""
+msgstr "Grafik-Zentrum"
 
 #. graphicsCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your picture needs"
 msgstr ""
+"Bietet einen einfachen und schnellen Zugang für alle Ihre Bilderbedürfnisse"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->name
 msgid "Project Hamster Applet"
-msgstr ""
+msgstr "Project Hamster Applet"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->description
 msgid "Cinnamon applet for project hamster - the GNOME time tracker"
-msgstr ""
+msgstr "Cinnamon-Applet für Project Hamster - die GNOME Zeiterfassung"
 
 #. hideable-applets@cardsurf->metadata.json->name
 msgid "Hideable applets"
@@ -394,35 +409,35 @@ msgstr ""
 
 #. host-entries@hoffis-eck.de->metadata.json->name
 msgid "Host Entries"
-msgstr ""
+msgstr "Host Einträge"
 
 #. host-entries@hoffis-eck.de->metadata.json->description
 msgid "Enables/Disables Entries in /etc/hosts"
-msgstr ""
+msgstr "Aktiviert/Deaktiviert Einträge in /etc/hosts"
 
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
-msgstr ""
+msgstr "Grafischer Hardwaremonitor"
 
 #. hwmonitor@sylfurd->metadata.json->description
 msgid "Displaying realtime CPU and memory load"
-msgstr ""
+msgstr "Anzeige von CPU- und Speicherauslastung in Echtzeit"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Fensterliste mit Anwendungsgruppierung und Fenstervorschau"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
-msgstr ""
+msgstr "Icing Fensterpositionsspeicher"
 
 #. IcingWindowSaver@json->metadata.json->description
 msgid "Window position save and restore utility."
-msgstr ""
+msgstr "Fensterpositionen speichern und wiederherstellen."
 
 #. ifstat@tagadan->metadata.json->name
 msgid "Tight Network Usage Indicator"
@@ -483,11 +498,13 @@ msgstr ""
 
 #. location-detection@heimdall->metadata.json->name
 msgid "Location Detection + Flags"
-msgstr ""
+msgstr "Standorterkennung + Flaggen"
 
 #. location-detection@heimdall->metadata.json->description
 msgid "Shows the geographic location of your public IP and country-flag."
 msgstr ""
+"Zeigt die geographische Lage Ihrer öffentlichen IP-Adresse und die "
+"entsprechende Länderflagge an."
 
 #. logout@martin->metadata.json->name
 msgid "logout"
@@ -590,11 +607,11 @@ msgstr ""
 
 #. network@brownsr->metadata.json->name
 msgid "Network"
-msgstr ""
+msgstr "Netzwerk"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
-msgstr ""
+msgstr "Netzwerk anzeigen"
 
 #. nvidiaprime@pdcurtis->metadata.json->name
 msgid "nVidia Prime GPU Display"
@@ -608,11 +625,12 @@ msgstr ""
 
 #. officeCenter@scollins->metadata.json->name
 msgid "Office Center"
-msgstr ""
+msgstr "Büro-Zentrum"
 
 #. officeCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your office needs"
 msgstr ""
+"Bietet einen einfachen und schnellen Zugang für alle Ihre Bürobedürfnisse"
 
 #. pa-equalizer@jschug.com->metadata.json->name
 msgid "Equalizer"
@@ -640,15 +658,15 @@ msgstr ""
 
 #. PDFManager@cinnamon.org->metadata.json->name
 msgid "PDFManager"
-msgstr ""
+msgstr "PDFManager"
 
 #. PDFManager@cinnamon.org->metadata.json->description
 msgid "Manager of PDF"
-msgstr ""
+msgstr "PDF-Dateien verwalten"
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "Orte"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
@@ -656,19 +674,20 @@ msgstr ""
 
 #. placesCenter@scollins->metadata.json->name
 msgid "Places Center"
-msgstr ""
+msgstr "Orte-Zentrum"
 
 #. placesCenter@scollins->metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr ""
+msgstr "Bietet eine leicht lesbare Anordnung für den Zugriff auf Ihre Orte"
 
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
-msgstr ""
+msgstr "Orte-mit-Terminal-Starter"
 
 #. places-with-terminal@mtwebster->metadata.json->description
 msgid "Access your places and bookmarks, or launch a terminal at that location"
 msgstr ""
+"Auf Orte und Lesezeichen zugreifen oder ein Terminal an dieser Stelle starten"
 
 #. pomodoro@gregfreeman.org->metadata.json->name
 msgid "Pomodoro Timer"
@@ -688,11 +707,11 @@ msgstr ""
 
 #. printers@linux-man->metadata.json->name
 msgid "Printers"
-msgstr ""
+msgstr "Drucker"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr ""
+msgstr "Druckaufträge und Drucker verwalten"
 
 #. profile-switcher@pixunil->metadata.json->name
 msgid "Profile switcher"
@@ -714,29 +733,31 @@ msgstr ""
 
 #. rancher@centurix->metadata.json->name
 msgid "Homestead manager"
-msgstr ""
+msgstr "Homestead-Manager"
 
 #. rancher@centurix->metadata.json->description
 msgid "An applet to manage Homestead."
-msgstr ""
+msgstr "Ein Applet zum Verwalten von Homestead."
 
 #. redshift@marvel4u->metadata.json->name
 msgid "Redshift"
-msgstr ""
+msgstr "Rotfilter"
 
 #. redshift@marvel4u->metadata.json->description
 msgid ""
 "An app to change the red filter level for late night screen time. Requires "
 "redshift: sudo apt-get install redshift"
 msgstr ""
+"Ein Applet zum schnellen Anpassen des Rotfilters für nächtliche Arbeiten. "
+"Nutzt redshift: sudo apt-get install redshift"
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
-msgstr ""
+msgstr "Cinnamon-Neustart"
 
 #. restart-cinnamon@kolle->metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
-msgstr ""
+msgstr "Auf das Applet klicken, um Cinnamon neu zu starten"
 
 #. rprego@rprego.com->metadata.json->name
 msgid "Display Switcher"
@@ -774,15 +795,15 @@ msgstr ""
 
 #. ScreenLocker@tuuxx->metadata.json->name
 msgid "Screen locker"
-msgstr ""
+msgstr "Bildschirm-Sperrer"
 
 #. ScreenLocker@tuuxx->metadata.json->description
 msgid "Click to lock the screen immediately"
-msgstr ""
+msgstr "Draufklicken, um den Bildschirm sofort zu sperren"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr ""
+msgstr "ScreenShot+Record Desktop"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
 msgid ""
@@ -792,7 +813,7 @@ msgstr ""
 
 #. ScreenShot@tech71->metadata.json->name
 msgid "ScreenShot"
-msgstr ""
+msgstr "Bildschirmfoto"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
@@ -800,19 +821,19 @@ msgstr ""
 
 #. scripts@paucapo.com->metadata.json->name
 msgid "Scripts Menu"
-msgstr ""
+msgstr "Skriptmenü"
 
 #. scripts@paucapo.com->metadata.json->description
 msgid "Menu applet for starting scripts"
-msgstr ""
+msgstr "Menü-Applet zum Starten von Skripten"
 
 #. search-box@mtwebster->metadata.json->name
 msgid "Internet Search Box"
-msgstr ""
+msgstr "Internet-Suchfeld"
 
 #. search-box@mtwebster->metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr ""
+msgstr "Eine Internetsuche mit Ihrer Lieblings-Suchmaschine durchführen"
 
 #. separator2@zyzz->metadata.json->name
 msgid "Separator2"
@@ -832,11 +853,11 @@ msgstr ""
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr ""
+msgstr "Sitzungsmanager"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
-msgstr ""
+msgstr "Bietet einfachen Zugriff zum Herunterfahren, Neustarten, usw."
 
 #. SettingsPlus@lusito.info->metadata.json->name
 msgid "Settings Plus"
@@ -975,11 +996,11 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr ""
+msgstr "Klebezettel"
 
 #. sticky@scollins->metadata.json->description
 msgid "Applet that allows you to manage desktop notes"
-msgstr ""
+msgstr "Applet, mit dem Sie Schreibtisch-Notizen verwalten können"
 
 #. stocks@adonut->metadata.json->name
 msgid "stocks"
@@ -991,13 +1012,15 @@ msgstr ""
 
 #. stopwatch@pdcurtis->metadata.json->name
 msgid "Stopwatch for Cinnamon 1.8+"
-msgstr ""
+msgstr "Stoppuhr für Cinnamon 1.8+"
 
 #. stopwatch@pdcurtis->metadata.json->description
 msgid ""
 "Allows one to time activities such as the time online with multiple "
 "instances possible"
 msgstr ""
+"Ermöglicht es die Zeit für Aktivitäten, wie z.B. die Zeit online, mit "
+"mehreren Instanzen zu messen"
 
 #. suspend@janax->metadata.json->name
 msgid "Suspend computer"
@@ -1009,13 +1032,15 @@ msgstr ""
 
 #. SW++@mohammad-sn->metadata.json->name
 msgid "Show desktop ++"
-msgstr ""
+msgstr "Schreibtisch anzeigen ++"
 
 #. SW++@mohammad-sn->metadata.json->description
 msgid ""
 "click to show/hide desktop, scroll to switch workspace and windows quick "
 "list by right click"
 msgstr ""
+"Klicken zum Anzeigen/Verbergen des Schreibtisches, scrollen zum Wechseln der "
+"Arbeitsfläche und Rechtsklick zum Anzeigen der Fensterschnellliste"
 
 #. sysmenu@tuxuls@gmail.com->metadata.json->name
 msgid "System menu"
@@ -1027,7 +1052,7 @@ msgstr ""
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
-msgstr ""
+msgstr "Systemüberwachung"
 
 #. sysmonitor@orcus->metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
@@ -1035,12 +1060,14 @@ msgstr ""
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr ""
+msgstr "Systemüberwachung mit Diagrammen"
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
 "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
 msgstr ""
+"Zeigt CPU, Arbeitsspeicher- und Auslagerungsauslastung, Festplatten- und "
+"Netzwerkraten als Text und in Diagrammen"
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
@@ -1116,11 +1143,11 @@ msgstr ""
 
 #. toggle_LookingGlass@kolle->metadata.json->name
 msgid "Toggle LookingGlass"
-msgstr ""
+msgstr "Ein-/Ausschalter für LookingGlass"
 
 #. toggle_LookingGlass@kolle->metadata.json->description
 msgid "Click on the applet to toggle LookingGlass"
-msgstr ""
+msgstr "Auf das Applet klicken, um LookingGlass zu öffnen oder zu schließen"
 
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
@@ -1182,19 +1209,19 @@ msgstr ""
 
 #. vnstat@linuxmint.com->metadata.json->name
 msgid "Network usage monitor"
-msgstr ""
+msgstr "Netzwerknutzung-Überwachung"
 
 #. vnstat@linuxmint.com->metadata.json->description
 msgid "Network usage monitor using vnstat"
-msgstr ""
+msgstr "Netzwerknutzung mit »vnstat« überwachen"
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Wetter"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Ermöglicht die Anzeige des örtlichen Wetters mitsamt Vorhersage"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"
@@ -1218,7 +1245,7 @@ msgstr ""
 
 #. windowlist@cobinja.de->metadata.json->description
 msgid "A window list with app grouping and window previews"
-msgstr ""
+msgstr "Eine Fensterleiste mit Programmgruppierung und Fenstervorschau"
 
 #. WindowListGroup@jake.phy@gmail.com->metadata.json->name
 msgid "Window List With App Grouping"

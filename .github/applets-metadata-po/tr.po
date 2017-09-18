@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-06-19 18:38+0300\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: Linux Mint Türkiye\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -123,11 +124,11 @@ msgstr ""
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->name
 msgid "Brightness and gamma applet"
-msgstr ""
+msgstr "Parlaklık ve gama uygulamacığı"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
-msgstr ""
+msgstr "Bir ekranın parlaklık ve gama seviyelerini ayarlar"
 
 #. bumblebee@pdcurtis->metadata.json->name
 msgid "Bumblebee Status with NVidia Temperature Display"
@@ -410,11 +411,11 @@ msgstr ""
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing Görev Yöneticisi"
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Uygulama gruplama ve pencere ön izleme destekli pencere listesi"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
@@ -608,11 +609,11 @@ msgstr ""
 
 #. officeCenter@scollins->metadata.json->name
 msgid "Office Center"
-msgstr ""
+msgstr "Ofis Merkezi"
 
 #. officeCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your office needs"
-msgstr ""
+msgstr "Tüm ofis gereksinimleriniz için kolay ve hızlı bir kaynak sağlar"
 
 #. pa-equalizer@jschug.com->metadata.json->name
 msgid "Equalizer"
@@ -722,13 +723,15 @@ msgstr ""
 
 #. redshift@marvel4u->metadata.json->name
 msgid "Redshift"
-msgstr ""
+msgstr "Redshift"
 
 #. redshift@marvel4u->metadata.json->description
 msgid ""
 "An app to change the red filter level for late night screen time. Requires "
 "redshift: sudo apt-get install redshift"
 msgstr ""
+"Kırmızı filtre seviyesini ve gece geçiş zamanını değiştiren bir uygulamacık. "
+"Redshift gerektirir: sudo apt-get install redshift"
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
@@ -1263,8 +1266,8 @@ msgstr ""
 
 #. xampp-panel@backids99->metadata.json->name
 msgid "Xampp Panel Menu"
-msgstr ""
+msgstr "Xampp Panel Menüsü"
 
 #. xampp-panel@backids99->metadata.json->description
 msgid "A Panel Menu for XAMPP Web Developers"
-msgstr ""
+msgstr "XAMPP Web Geliştiricileri İçin Bir Panel Menüsü"

@@ -1,21 +1,21 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# Italian translation for gnome-shell-extension-weather
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Imperato Gianluca <fimpen.veleno@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-04-04 15:20-0400\n"
+"Last-Translator: Luca Pedrazzi <luca@pedrazzi.eu>\n"
+"Language-Team: \n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Italian\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -239,7 +239,7 @@ msgstr ""
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "Computer"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
@@ -648,7 +648,7 @@ msgstr ""
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "Posizioni"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"

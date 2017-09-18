@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-04-20 23:17+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -23,85 +24,85 @@ msgstr ""
 
 #. a4techTool@mous->metadata.json->name
 msgid "A4Tech battery checker"
-msgstr ""
+msgstr "双飞燕电池检查工具"
 
 #. a4techTool@mous->metadata.json->description
 msgid "Shows Battery level of A4Tech mouse"
-msgstr ""
+msgstr "显示双飞燕鼠标的电池电量"
 
 #. acerhk-ctl@mcnielcho.org->metadata.json->name
 msgid "AcerHK Control"
-msgstr ""
+msgstr "宏基硬件按键控制"
 
 #. acerhk-ctl@mcnielcho.org->metadata.json->description
 msgid ""
 "Provides software interface to Acer hardware keys.  Requires installation of "
 "acerhk.ko."
-msgstr ""
+msgstr "提供软件界面给宏基硬件按键。需要安装acerhk.ko。"
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "自启动程序"
 
 #. AutostartPrograms@spacy01->metadata.json->description
 msgid "Click here to add or remove programs to start with the session."
-msgstr ""
+msgstr "点击这里开始使用会话添加或移除程序。"
 
 #. axos88@countdown-timer->metadata.json->name
 msgid "Countdown timer with notifications"
-msgstr ""
+msgstr "带通知的倒计时定时器"
 
 #. axos88@countdown-timer->metadata.json->description
 msgid ""
 "A countdown timer app with visual and auditory notifications based on "
 "markbokil's timer-notifications applet"
-msgstr ""
+msgstr "一个基于markbokil的定时器通知小程序，带有视觉和听觉通知的倒计时定时器"
 
 #. back-up_state@natsakis.com->metadata.json->name
 msgid "Back-up State"
-msgstr ""
+msgstr "备份状态"
 
 #. back-up_state@natsakis.com->metadata.json->description
 msgid ""
 "Probes for the state of a certain rsync back-up by checking the exit status "
 "of the log file"
-msgstr ""
+msgstr "通过检查日志文件的退出状态来检测某个rsync备份的状态"
 
 #. bash-sensors@pkkk->metadata.json->name
 msgid "Bash Sensors"
-msgstr ""
+msgstr "Bash传感器"
 
 #. bash-sensors@pkkk->metadata.json->description
 msgid ""
 "Write your Bash commands to specify applet output (temperature sensors and "
 "not only!)"
-msgstr ""
+msgstr "编写您的Bash命令以指定小程序输出（不仅限于温度传感器！）"
 
 #. batterymonitor@pdcurtis->metadata.json->name
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr ""
+msgstr "Battery  Applet with Monitoring and Shutdown (BAMS)"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
-msgstr ""
+msgstr "将充电显示为百分比，并允许警报和操作"
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
+msgstr "含消息托盘通知的数字锁定键/大写锁定键指示器"
 
 #. betterlock->metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock is on, and displays a notification when "
 "these change."
-msgstr ""
+msgstr "显示大写锁定键/数字锁定键是否启用，并在其更改时显示一个通知。"
 
 #. bettersettings@bownz->metadata.json->name
 msgid "Better Cinnamon Settings"
-msgstr ""
+msgstr "更好的Cinnamon设置"
 
 #. bettersettings@bownz->metadata.json->description
 msgid "A Better Cinnamon Settings"
-msgstr ""
+msgstr "一个更好的Cinnamon设置"
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "BgRadio"
@@ -115,23 +116,23 @@ msgstr ""
 
 #. binaryclock@entelechy->metadata.json->name
 msgid "Cinnamon Binary Clock"
-msgstr ""
+msgstr "Cinnamon二进制时钟"
 
 #. binaryclock@entelechy->metadata.json->description
 msgid "The Cinnamon calendar applet, with the time displayed in binary"
-msgstr ""
+msgstr "以二进制显示时间的Cinnamon日历小程序"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->name
 msgid "Brightness and gamma applet"
-msgstr ""
+msgstr "亮度和伽马小程序"
 
 #. brightness-and-gamma-applet@cardsurf->metadata.json->description
 msgid "Sets brightness and gamma levels of a screen"
-msgstr ""
+msgstr "设置屏幕的亮度和伽马级别"
 
 #. bumblebee@pdcurtis->metadata.json->name
 msgid "Bumblebee Status with NVidia Temperature Display"
-msgstr ""
+msgstr "Bumblebee状态和NVidia 温度显示"
 
 #. bumblebee@pdcurtis->metadata.json->description
 msgid ""
@@ -139,28 +140,30 @@ msgid ""
 "support functions including starting selected programs with optirun or "
 "primusrun"
 msgstr ""
+"显示Bumblebee的状态和nVidia GPU温度的相关支持功能，包括启动选择的程序和"
+"optirun或primusrun "
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr ""
+msgstr "世界时钟日历"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
-msgstr ""
+msgstr "支持显示多个时区的Cinnamon日历小程序的分支"
 
 #. cheaty@centurix->metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
-msgstr ""
+msgstr "Cheaty - 备忘单管理员"
 
 #. cheaty@centurix->metadata.json->description
 msgid "An applet to provide quick access to a variety of cheat sheets."
-msgstr ""
+msgstr "快速访问各种备忘单的小程序。"
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #. Cinnamenu@json->metadata.json->description
 msgid ""
@@ -188,102 +191,104 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
+msgstr "CinnVIIStarkMenu"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr ""
+msgstr "带有Windows7开始菜单或MATE菜单外观的Cinnamon Menu"
 
 #. clipboard-qr@wrouesnel->metadata.json->name
 msgid "Clipboard QR code applet"
-msgstr ""
+msgstr "剪贴板QR码小程序"
 
 #. clipboard-qr@wrouesnel->metadata.json->description
 msgid "Create QR codes from clipboard content"
-msgstr ""
+msgstr "从剪贴板内容创建QR码"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->name
 msgid "Collapsible Systray"
-msgstr ""
+msgstr "可折叠的系统托盘"
 
 #. collapsible-systray@feuerfuchs.eu->metadata.json->description
 msgid "A replacement for the abandoned System Tray Collapsible Cinnamon applet"
 msgstr ""
+"一个作为被遗弃的System Tray Collapsible（可折叠的的系统托盘）Cinnamon小程序的"
+"替代品"
 
 #. color-picker@fmete->metadata.json->name
 msgid "Color Picker"
-msgstr ""
+msgstr "颜色选择器"
 
 #. color-picker@fmete->metadata.json->description
 msgid "Click on applet to pick color"
-msgstr ""
+msgstr "点击小程序选择颜色"
 
 #. commandLauncher@scollins->metadata.json->name
 msgid "Command Launcher"
-msgstr ""
+msgstr "命令启动器"
 
 #. commandLauncher@scollins->metadata.json->description
 msgid "Lets you to run command-line commands with the click of a button"
-msgstr ""
+msgstr "让您点击按钮运行命令行命令"
 
 #. CommandRunner@appdevsw->metadata.json->name
 msgid "CommandRunner"
-msgstr ""
+msgstr "命令运行器"
 
 #. CommandRunner@appdevsw->metadata.json->description
 msgid ""
 "Applet runs script or application periodically and displays its output on "
 "the taskbar"
-msgstr ""
+msgstr "小程序定期运行脚本或应用程序并在任务栏上显示其输出"
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "计算机"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
-msgstr ""
+msgstr "在计算机级别显示文件"
 
 #. cpufreq@mtwebster->metadata.json->name
 msgid "CPU Frequency Applet"
-msgstr ""
+msgstr "CPU频率小程序"
 
 #. cpufreq@mtwebster->metadata.json->description
 msgid "Display and control cpu frequency"
-msgstr ""
+msgstr "显示和控制cpu频率"
 
 #. cpu-monitor-text@gnemonix->metadata.json->name
 msgid "Simple CPU Monitor"
-msgstr ""
+msgstr "简单的CPU监视器"
 
 #. cpu-monitor-text@gnemonix->metadata.json->description
 msgid "A simple applet that displays the cpu usage."
-msgstr ""
+msgstr "一个显示cpu使用率的简单的小程序。"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->name
 msgid "Docker Control"
-msgstr ""
+msgstr "Docker控制"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->description
 msgid "Activates/Deactivates Docker Container"
-msgstr ""
+msgstr "激活/停用Docker容器"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->name
 msgid "Custom Applications Menu"
-msgstr ""
+msgstr "自定义应用程序菜单"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->description
 msgid "An applications drop-down list easily customisable"
-msgstr ""
+msgstr "易于自定义的下拉式应用程序列表"
 
 #. devutils@fogl->metadata.json->name
 msgid "Development Utils"
-msgstr ""
+msgstr "开发工具"
 
 #. devutils@fogl->metadata.json->description
 msgid "Development Utils Applet for Cinnamon"
-msgstr ""
+msgstr "Cinnamon开发者工具小程序"
 
 #. dgs-bpivaty@gmail.com->metadata.json->name
 msgid "DGS Applet"
@@ -298,91 +303,91 @@ msgstr ""
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. diaspora-notif@douze12->metadata.json->description
 msgid "Diaspora* notifications"
-msgstr ""
+msgstr "Diaspora*通知"
 
 #. download-and-upload-speed@cardsurf->metadata.json->name
 msgid "Download and upload speed"
-msgstr ""
+msgstr "下载和上传速度"
 
 #. download-and-upload-speed@cardsurf->metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr ""
+msgstr "显示网络接口的使用情况"
 
 #. extensions@dalcde->metadata.json->name
 msgid "Extensions Manager"
-msgstr ""
+msgstr "扩展管理器"
 
 #. extensions@dalcde->metadata.json->description
 msgid "Allows enabling and disabling of extensions with one click"
-msgstr ""
+msgstr "使用单击允许扩展的启用或禁用"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->name
 msgid "Feeds Reader"
-msgstr ""
+msgstr "订阅阅读器"
 
 #. feeds@jonbrettdev.wordpress.com->metadata.json->description
 msgid "Displays RSS news feeds"
-msgstr ""
+msgstr "显示RSS新闻订阅"
 
 #. force-quit@cinnamon.org->metadata.json->name
 msgid "Force Quit"
-msgstr ""
+msgstr "强制退出"
 
 #. force-quit@cinnamon.org->metadata.json->description
 msgid ""
 "Click on the applet to launch xkill and force any window to quit immediately"
-msgstr ""
+msgstr "点击小程序启动xkill并强制任何窗口立即退出"
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr ""
+msgstr "Github资源管理器"
 
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
-msgstr ""
+msgstr "点击小程序浏览您的公共Github存储库"
 
 #. gmail@lauritsriple->metadata.json->name
 msgid "GmailNotifier"
-msgstr ""
+msgstr "Gmail通知"
 
 #. gmail@lauritsriple->metadata.json->description
 msgid "Shows most recent mails, and how many unread messages you have."
-msgstr ""
+msgstr "显示最近的邮件和未读邮件数量。"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
-msgstr ""
+msgstr "GPaste Reloaded"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-msgstr ""
+msgstr "一个基于Gnome Shell扩展完全重写的GPaste小程序"
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"
-msgstr ""
+msgstr "GPU温度"
 
 #. gputemperature@silentage.com->metadata.json->description
 msgid ""
 "Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu "
 "information in a popup menu."
-msgstr ""
+msgstr "在面板中显示NVidia/ATI GPU温度，并在弹出菜单中显示详细/多个gpu的信息。"
 
 #. graphicsCenter@scollins->metadata.json->name
 msgid "Graphics Center"
-msgstr ""
+msgstr "图形中心"
 
 #. graphicsCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your picture needs"
-msgstr ""
+msgstr "为所有您的图片需求提供轻松快速的资源"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->name
 msgid "Project Hamster Applet"
-msgstr ""
+msgstr "Hamster项目小程序"
 
 #. hamster@projecthamster.wordpress.com->metadata.json->description
 msgid "Cinnamon applet for project hamster - the GNOME time tracker"
-msgstr ""
+msgstr "用于hamster项目的Cinnamon小程序 - GNOME时间跟踪器"
 
 #. hideable-applets@cardsurf->metadata.json->name
 msgid "Hideable applets"
@@ -394,35 +399,35 @@ msgstr ""
 
 #. host-entries@hoffis-eck.de->metadata.json->name
 msgid "Host Entries"
-msgstr ""
+msgstr "主机条目"
 
 #. host-entries@hoffis-eck.de->metadata.json->description
 msgid "Enables/Disables Entries in /etc/hosts"
-msgstr ""
+msgstr "启用/禁用/etc/hosts中的条目"
 
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
-msgstr ""
+msgstr "图形硬件监视器"
 
 #. hwmonitor@sylfurd->metadata.json->description
 msgid "Displaying realtime CPU and memory load"
-msgstr ""
+msgstr "实时显示CPU和内存负载"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "带应用程序分组和缩略图的窗口列表"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
-msgstr ""
+msgstr "糖霜窗口保存程序"
 
 #. IcingWindowSaver@json->metadata.json->description
 msgid "Window position save and restore utility."
-msgstr ""
+msgstr "窗口位置保存和还原工具。"
 
 #. ifstat@tagadan->metadata.json->name
 msgid "Tight Network Usage Indicator"
@@ -434,21 +439,22 @@ msgstr ""
 
 #. ink-level-monitor@r0p01ach->metadata.json->name
 msgid "Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "打印机墨水量监视器小程序"
 
 #. ink-level-monitor@r0p01ach->metadata.json->description
 msgid "USB Printer Ink Level Monitor Applet"
-msgstr ""
+msgstr "USB打印机墨水量监视器小程序"
 
 #. ioDisk@ctrlesc->metadata.json->name
 msgid "Disk Utilization"
-msgstr ""
+msgstr "磁盘使用率"
 
 #. ioDisk@ctrlesc->metadata.json->description
 msgid ""
 "Shows the current max disk I/O utilization in the panel and per device "
 "utilization in a popup menu."
 msgstr ""
+"在面板中显示当前的最大磁盘I/O利用率，并在弹出的菜单中显示每个设备的利用率。"
 
 #. jalalicalendar@mohammad-sn->metadata.json->name
 msgid "Taghvim"
@@ -468,66 +474,66 @@ msgstr ""
 
 #. localip@mrieracrespi->metadata.json->name
 msgid "Local IPs"
-msgstr ""
+msgstr "本地IP"
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. localip@mrieracrespi->metadata.json->description
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. localipswithsettings@edaubert->metadata.json->description
 msgid "Shows local IP addresses."
-msgstr ""
+msgstr "显示本地IP地址。"
 
 #. localipswithsettings@edaubert->metadata.json->name
 msgid "Local IPs with settings"
-msgstr ""
+msgstr "本地IP和设置"
 
 #. location-detection@heimdall->metadata.json->name
 msgid "Location Detection + Flags"
-msgstr ""
+msgstr "位置检测 + 国旗"
 
 #. location-detection@heimdall->metadata.json->description
 msgid "Shows the geographic location of your public IP and country-flag."
-msgstr ""
+msgstr "显示您的公共IP的地理位置和国旗。"
 
 #. logout@martin->metadata.json->name
 msgid "logout"
-msgstr ""
+msgstr "注销"
 
 #. logout@martin->metadata.json->description
 msgid "2-clicks logout"
-msgstr ""
+msgstr "双击注销"
 
 #. lookingglass-restart@markbokil.com->metadata.json->name
 msgid "LookingGlass Restart"
-msgstr ""
+msgstr "重启LookingGlass"
 
 #. lookingglass-restart@markbokil.com->metadata.json->description
 msgid "Looking Glass debugger with Cinnamon restart."
-msgstr ""
+msgstr "带有Cinnamon重启功能的Looking Glass调试工具。"
 
 #. lorem@vxstorm->metadata.json->name
 msgid "Lorem Pastesum"
-msgstr ""
+msgstr "Lorem Pastesum"
 
 #. lorem@vxstorm->metadata.json->description
 msgid "Click to get a paragraph of Lorem Ipsum to your clipboard"
-msgstr ""
+msgstr "点击获取一段Lorem Ipsum到您的剪贴板"
 
 #. mailnagapplet@ozderya.net->metadata.json->name
 msgid "Mailnag"
-msgstr ""
+msgstr "Mailnag"
 
 #. mailnagapplet@ozderya.net->metadata.json->description
 msgid "Mailnag mail notifier applet"
-msgstr ""
+msgstr "Mailnag邮件通知小程序"
 
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
-msgstr ""
+msgstr "简单的内存监视器"
 
 #. mem-monitor-text@datanom.net->metadata.json->description
 msgid "A simple applet that displays the memory usage."
-msgstr ""
+msgstr "一个显示内存使用率的简单的小程序。"
 
 #. menu@csknet.org->metadata.json->name
 msgid "CskMenu"
@@ -547,80 +553,80 @@ msgstr ""
 
 #. montrer-le-bureau@cannelle.org->metadata.json->name
 msgid "Show or record desktop"
-msgstr ""
+msgstr "显示或录制桌面"
 
 #. montrer-le-bureau@cannelle.org->metadata.json->description
 msgid "Minimize all windows or record the desktop"
-msgstr ""
+msgstr "最小化所有窗口或录制桌面"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->name
 msgid "Multi-Core System Monitor"
-msgstr ""
+msgstr "多核心系统监视器"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
-msgstr ""
+msgstr "实时显示每个核心/cpu的cpu使用率和总体内存使用情况。"
 
 #. mybookmarks@markbokil.com->metadata.json->name
 msgid "My Bookmarks"
-msgstr ""
+msgstr "我的书签"
 
 #. mybookmarks@markbokil.com->metadata.json->description
 msgid "Web apps launcher"
-msgstr ""
+msgstr "网络应用程序启动器"
 
 #. mylauncher@markbokil.com->metadata.json->name
 msgid "My Launcher"
-msgstr ""
+msgstr "我的启动器"
 
 #. mylauncher@markbokil.com->metadata.json->description
 msgid "Personal app launcher."
-msgstr ""
+msgstr "个性应用程序启动器。"
 
 #. netusagemonitor@pdcurtis->metadata.json->name
 msgid "Network Data Usage Monitor"
-msgstr ""
+msgstr "网络数据使用量监视器"
 
 #. netusagemonitor@pdcurtis->metadata.json->description
 msgid ""
 "A Comprehensive Data Usage Monitor with alerts and cumulative data functions"
-msgstr ""
+msgstr "一个具有警报和累计数据功能的综合数据使用情况监视器"
 
 #. network@brownsr->metadata.json->name
 msgid "Network"
-msgstr ""
+msgstr "网络"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
-msgstr ""
+msgstr "显示网络"
 
 #. nvidiaprime@pdcurtis->metadata.json->name
 msgid "nVidia Prime GPU Display"
-msgstr ""
+msgstr "nVidia Prime GPU显示"
 
 #. nvidiaprime@pdcurtis->metadata.json->description
 msgid ""
 "Displays which Graphics processor is active and nVidia GPU Temperature when "
 "active and in a horizontal panel"
-msgstr ""
+msgstr "在水平面板中显示激活的图形显示器和nVidia GPU激活时的温度"
 
 #. officeCenter@scollins->metadata.json->name
 msgid "Office Center"
-msgstr ""
+msgstr "办公中心"
 
 #. officeCenter@scollins->metadata.json->description
 msgid "Provides an easy and fast resource for all your office needs"
-msgstr ""
+msgstr "为所有您的办公需求提供轻松快速的资源"
 
 #. pa-equalizer@jschug.com->metadata.json->name
 msgid "Equalizer"
-msgstr ""
+msgstr "均衡器"
 
 #. pa-equalizer@jschug.com->metadata.json->description
 msgid "An applet to control sound equalization"
-msgstr ""
+msgstr "一个控制声音均衡的小程序"
 
 #. panel-separator-icon@mordant23->metadata.json->name
 msgid "Panel Separator (Icon)"
@@ -632,75 +638,75 @@ msgstr ""
 
 #. path-monitor@kamikaze->metadata.json->name
 msgid "Path Monitor"
-msgstr ""
+msgstr "路径监视器"
 
 #. path-monitor@kamikaze->metadata.json->description
 msgid "Quick access files in a directory"
-msgstr ""
+msgstr "快速访问目录中的文件"
 
 #. PDFManager@cinnamon.org->metadata.json->name
 msgid "PDFManager"
-msgstr ""
+msgstr "PDF管理器"
 
 #. PDFManager@cinnamon.org->metadata.json->description
 msgid "Manager of PDF"
-msgstr ""
+msgstr "PDF管理器"
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "位置"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
-msgstr ""
+msgstr "访问您的位置和书签"
 
 #. placesCenter@scollins->metadata.json->name
 msgid "Places Center"
-msgstr ""
+msgstr "位置中心"
 
 #. placesCenter@scollins->metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr ""
+msgstr "提供一个易于阅读的布局以访问您的位置"
 
 #. places-with-terminal@mtwebster->metadata.json->name
 msgid "Places with Terminal Launcher"
-msgstr ""
+msgstr "位置和终端启动器"
 
 #. places-with-terminal@mtwebster->metadata.json->description
 msgid "Access your places and bookmarks, or launch a terminal at that location"
-msgstr ""
+msgstr "访问您的位置和书签，或者在该位置启动终端"
 
 #. pomodoro@gregfreeman.org->metadata.json->name
 msgid "Pomodoro Timer"
-msgstr ""
+msgstr "番茄钟定时器"
 
 #. pomodoro@gregfreeman.org->metadata.json->description
 msgid "Great tool for boosted productivity!"
-msgstr ""
+msgstr "提高生产力的好工具！"
 
 #. power-off@martin->metadata.json->name
 msgid "power-off"
-msgstr ""
+msgstr "关机"
 
 #. power-off@martin->metadata.json->description
 msgid "2-clicks power-off"
-msgstr ""
+msgstr "双击关闭电源"
 
 #. printers@linux-man->metadata.json->name
 msgid "Printers"
-msgstr ""
+msgstr "打印机"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr ""
+msgstr "管理作业和打印机"
 
 #. profile-switcher@pixunil->metadata.json->name
 msgid "Profile switcher"
-msgstr ""
+msgstr "配置文件切换器"
 
 #. profile-switcher@pixunil->metadata.json->description
 msgid "Change your settings profile"
-msgstr ""
+msgstr "更改您的设置配置文件"
 
 #. radio@driglu4it->metadata.json->name
 msgid "Radio++"
@@ -714,29 +720,31 @@ msgstr ""
 
 #. rancher@centurix->metadata.json->name
 msgid "Homestead manager"
-msgstr ""
+msgstr "Homestead管理器"
 
 #. rancher@centurix->metadata.json->description
 msgid "An applet to manage Homestead."
-msgstr ""
+msgstr "一个用来管理Homestead的小程序。"
 
 #. redshift@marvel4u->metadata.json->name
 msgid "Redshift"
-msgstr ""
+msgstr "Redshift"
 
 #. redshift@marvel4u->metadata.json->description
 msgid ""
 "An app to change the red filter level for late night screen time. Requires "
 "redshift: sudo apt-get install redshift"
 msgstr ""
+"用以更改深夜屏幕时间的红色过滤水平的应用程序。需要redshift：sudo apt-get "
+"install redshift"
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
-msgstr ""
+msgstr "重新启动Cinnamon"
 
 #. restart-cinnamon@kolle->metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
-msgstr ""
+msgstr "点击小程序重启Cinnamon"
 
 #. rprego@rprego.com->metadata.json->name
 msgid "Display Switcher"
@@ -748,41 +756,43 @@ msgstr ""
 
 #. rwall@typicalfoobar->metadata.json->name
 msgid "rwall"
-msgstr ""
+msgstr "随机壁纸"
 
 #. rwall@typicalfoobar->metadata.json->description
 msgid ""
 "Random Wallpaper Changer\n"
 "Version: 1.0.1"
 msgstr ""
+"随机壁纸更改程序\n"
+"版本：1.0.1"
 
 #. sane-menu@nooulaif->metadata.json->name
 msgid "Sane Menu"
-msgstr ""
+msgstr "Sane菜单"
 
 #. sane-menu@nooulaif->metadata.json->description
 msgid "Cinnamon stock menu applet with improved search."
-msgstr ""
+msgstr "具有改进的搜索的Cinnamon stock菜单。"
 
 #. screen-inhibit@mtwebster->metadata.json->name
 msgid "Screensaver Inhibitor"
-msgstr ""
+msgstr "屏保程序禁用工具"
 
 #. screen-inhibit@mtwebster->metadata.json->description
 msgid "Click to inhibit the screensaver, click again to remove inhibition"
-msgstr ""
+msgstr "点击禁止屏保程序，再次点击取消禁止"
 
 #. ScreenLocker@tuuxx->metadata.json->name
 msgid "Screen locker"
-msgstr ""
+msgstr "屏幕锁"
 
 #. ScreenLocker@tuuxx->metadata.json->description
 msgid "Click to lock the screen immediately"
-msgstr ""
+msgstr "点击立即锁定屏幕"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr ""
+msgstr "屏幕截图+桌面录像"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
 msgid ""
@@ -792,51 +802,51 @@ msgstr ""
 
 #. ScreenShot@tech71->metadata.json->name
 msgid "ScreenShot"
-msgstr ""
+msgstr "屏幕截图"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
-msgstr ""
+msgstr "对您的桌面或者个别窗口进行截图"
 
 #. scripts@paucapo.com->metadata.json->name
 msgid "Scripts Menu"
-msgstr ""
+msgstr "脚本菜单"
 
 #. scripts@paucapo.com->metadata.json->description
 msgid "Menu applet for starting scripts"
-msgstr ""
+msgstr "用于启动脚本的菜单小程序"
 
 #. search-box@mtwebster->metadata.json->name
 msgid "Internet Search Box"
-msgstr ""
+msgstr "互联网搜索框"
 
 #. search-box@mtwebster->metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr ""
+msgstr "使用您喜爱的引擎执行互联网搜索"
 
 #. separator2@zyzz->metadata.json->name
 msgid "Separator2"
-msgstr ""
+msgstr "分隔符2"
 
 #. separator2@zyzz->metadata.json->description
 msgid "Use this applet to create a separator between your applets"
-msgstr ""
+msgstr "使用此小程序在您的小程序之间创建一个分隔符"
 
 #. serviceLauncher@hulygun->metadata.json->name
 msgid "Service Launcher"
-msgstr ""
+msgstr "服务启动器"
 
 #. serviceLauncher@hulygun->metadata.json->description
 msgid "Description"
-msgstr ""
+msgstr "说明"
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr ""
+msgstr "会话管理器"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
-msgstr ""
+msgstr "提供对关机、重启等的轻松访问"
 
 #. SettingsPlus@lusito.info->metadata.json->name
 msgid "Settings Plus"
@@ -856,24 +866,24 @@ msgstr ""
 
 #. show-hide-applets@mohammad-sn->metadata.json->name
 msgid "Drawer (show/hide applets)"
-msgstr ""
+msgstr "抽屉（显示/隐藏小程序）"
 
 #. show-hide-applets@mohammad-sn->metadata.json->description
 msgid ""
 "hide a few applet to have a neater panel, and make them show up again by a "
 "click"
-msgstr ""
+msgstr "隐藏一些小程序以拥有更整洁的面板，并通过点击使它们重新显示"
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@DeathMD->metadata.json->name
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@shelley->metadata.json->name
 msgid "Shutdown Applet"
-msgstr ""
+msgstr "关机小程序"
 
 #. ShutdownApplet@DeathMD->metadata.json->description
 msgid "An applet to shutdown, restart and suspend your system."
-msgstr ""
+msgstr "一个关闭、重新启动和挂起您的系统的小程序。"
 
 #. #-#-#-#-#  applets-metadata.pot (PACKAGE VERSION)  #-#-#-#-#
 #. ShutdownApplet@shelley->metadata.json->description
@@ -882,11 +892,11 @@ msgstr ""
 msgid ""
 "An applet to help you shutdown, restart and suspend your system with single "
 "click"
-msgstr ""
+msgstr "一个使用单击帮助您关机、重启和挂起您的系统的小程序"
 
 #. ShutdownMenuWithIcons@LLOBERA->metadata.json->name
 msgid "Shutdown Menu With Icons"
-msgstr ""
+msgstr "带图标的关机菜单"
 
 #. shutdown-timer@webum.by->metadata.json->name
 msgid "Shutdown timer"
@@ -898,20 +908,20 @@ msgstr ""
 
 #. slingshot@jfarthing84->metadata.json->name
 msgid "Slingshot"
-msgstr ""
+msgstr "Slingshot"
 
 #. slingshot@jfarthing84->metadata.json->description
 msgid ""
 "A clone of Pantheon's Slingshot launcher in the form of a Cinnamon applet."
-msgstr ""
+msgstr "以Cinnamon小程序的形式克隆Pantheon的Slingshot启动器。"
 
 #. smallcalc_applet@lerc.sds->metadata.json->name
 msgid "SmallCalc"
-msgstr ""
+msgstr "袖珍计算器"
 
 #. smallcalc_applet@lerc.sds->metadata.json->description
 msgid "A nice compact popup calculator"
-msgstr ""
+msgstr "一个精美小巧的弹出式计算器"
 
 #. smogwawelski@pamsoft.pl->metadata.json->name
 msgid "Smog Wawelski"
@@ -923,21 +933,21 @@ msgstr ""
 
 #. softyubikey@yubiserver.include.gr->metadata.json->name
 msgid "SoftYubikey"
-msgstr ""
+msgstr "SoftYubikey"
 
 #. softyubikey@yubiserver.include.gr->metadata.json->description
 msgid "Click on the applet to create a OTP"
-msgstr ""
+msgstr "点击小程序创建一个OTP"
 
 #. sound-with-apps-volume@koutch->metadata.json->name
 msgid "Sound with apps volume"
-msgstr ""
+msgstr "声音和应用程序的音量"
 
 #. sound-with-apps-volume@koutch->metadata.json->description
 msgid ""
 "Applications' volume, volume 150%, mute button, scrolling track time, custom "
 "launcher ..."
-msgstr ""
+msgstr "应用程序的音量、音量150%、静音按钮、滚动音轨时间、自定义启动器 ..."
 
 #. sports-update@pavanred->metadata.json->name
 msgid "sports-update"
@@ -949,21 +959,21 @@ msgstr ""
 
 #. sshlauncher@sumo->metadata.json->name
 msgid "SSH Launcher"
-msgstr ""
+msgstr "SSH启动器"
 
 #. sshlauncher@sumo->metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
-msgstr ""
+msgstr "连接到~/.ssh/config中配置的SSH主机的小程序"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->name
 msgid "Stackoverflow Questions Notifier"
-msgstr ""
+msgstr "Stackoverflow问题通知"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->description
 msgid ""
 "Checks stackoverflow site to see if new questions have been posted under a "
 "particular tag and generates a notification"
-msgstr ""
+msgstr "检查stackoverflow网站查看在特定的标签下是否有发布的新问题并生成通知"
 
 #. stevedore@centurix->metadata.json->name
 msgid "Stevedor - Docker controller"
@@ -975,47 +985,47 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr ""
+msgstr "贴纸笔记"
 
 #. sticky@scollins->metadata.json->description
 msgid "Applet that allows you to manage desktop notes"
-msgstr ""
+msgstr "允许您管理桌面笔记的小程序"
 
 #. stocks@adonut->metadata.json->name
 msgid "stocks"
-msgstr ""
+msgstr "股票"
 
 #. stocks@adonut->metadata.json->description
 msgid "a simple Stocks ticker for cinnamon"
-msgstr ""
+msgstr "一个简单的Cinnamon股票行情自动记录收报机"
 
 #. stopwatch@pdcurtis->metadata.json->name
 msgid "Stopwatch for Cinnamon 1.8+"
-msgstr ""
+msgstr "Cinnamon 1.8+ 秒表"
 
 #. stopwatch@pdcurtis->metadata.json->description
 msgid ""
 "Allows one to time activities such as the time online with multiple "
 "instances possible"
-msgstr ""
+msgstr "允许用户进行诸如多个时间实例在线之类的计时活动"
 
 #. suspend@janax->metadata.json->name
 msgid "Suspend computer"
-msgstr ""
+msgstr "挂起计算机"
 
 #. suspend@janax->metadata.json->description
 msgid "Immediately suspends the computer"
-msgstr ""
+msgstr "立即挂起计算机"
 
 #. SW++@mohammad-sn->metadata.json->name
 msgid "Show desktop ++"
-msgstr ""
+msgstr "显示桌面++"
 
 #. SW++@mohammad-sn->metadata.json->description
 msgid ""
 "click to show/hide desktop, scroll to switch workspace and windows quick "
 "list by right click"
-msgstr ""
+msgstr "点击显示/隐藏桌面，右键点击滚动切换工作区和窗口快速列表"
 
 #. sysmenu@tuxuls@gmail.com->metadata.json->name
 msgid "System menu"
@@ -1027,56 +1037,57 @@ msgstr ""
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
-msgstr ""
+msgstr "系统监视器"
 
 #. sysmonitor@orcus->metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr ""
+msgstr "以图形显示CPU、内存、交换分区和网络使用情况以及负载"
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr ""
+msgstr "图表型系统监视器"
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
 "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
 msgstr ""
+"以文本和图表的形式显示CPU，内存和交换分区的使用率，以及磁盘和网络的速率"
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
-msgstr ""
+msgstr "系统监视器"
 
 #. system-monitor@spacy01->metadata.json->description
 msgid "Click here to see processes and etc."
-msgstr ""
+msgstr "点击这里查看进程等。"
 
 #. systray-collapsible@koutch->metadata.json->name
 msgid "System Tray Collapsible"
-msgstr ""
+msgstr "可折叠的系统托盘"
 
 #. systray-collapsible@koutch->metadata.json->description
 msgid "Expandable/Collapsible System Tray Applet "
-msgstr ""
+msgstr "可扩展/折叠的系统托盘小程序"
 
 #. temperature@fevimu->metadata.json->name
 msgid "CPU Temperature Indicator"
-msgstr ""
+msgstr "CPU温度指示器"
 
 #. temperature@fevimu->metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr ""
+msgstr "显示CPU温度"
 
 #. text-to-speech-applet@cardsurf->metadata.json->name
 msgid "Text to speech applet"
-msgstr ""
+msgstr "文本到语音小程序"
 
 #. text-to-speech-applet@cardsurf->metadata.json->description
 msgid "A text reading applet"
-msgstr ""
+msgstr "一个文本阅读小程序"
 
 #. tfmKeyboard@alexpp->metadata.json->name
 msgid "Transformice helper"
-msgstr ""
+msgstr "变形金鼠助手"
 
 #. tfmKeyboard@alexpp->metadata.json->description
 msgid "Touches d'invocations personalisées et capture vidéo du bureau en MP4"
@@ -1084,51 +1095,51 @@ msgstr ""
 
 #. ThemeRefresh@JosephM->metadata.json->name
 msgid "Reload Current Theme"
-msgstr ""
+msgstr "重新载入当前主题"
 
 #. ThemeRefresh@JosephM->metadata.json->description
 msgid "A simple applet that allows you to refresh the current Cinnamon Theme"
-msgstr ""
+msgstr "一个允许您刷新当前的Cinnamon主题的小程序"
 
 #. timeout@narutrey->metadata.json->name
 msgid "Time Out"
-msgstr ""
+msgstr "超时"
 
 #. timeout@narutrey->metadata.json->description
 msgid "Automatically controlled time outs and breaks"
-msgstr ""
+msgstr "自动控制超时和休息"
 
 #. timer-notifications@markbokil.com->metadata.json->name
 msgid "Timer with Notifications"
-msgstr ""
+msgstr "定时器和通知"
 
 #. timer-notifications@markbokil.com->metadata.json->description
 msgid "A timer app with visual and auditory notifications."
-msgstr ""
+msgstr "一个具有视觉和听觉通知的定时器应用程序。"
 
 #. todo@threefi->metadata.json->name
 msgid "Todo"
-msgstr ""
+msgstr "待办事项"
 
 #. todo@threefi->metadata.json->description
 msgid "a simple todo list ticker for cinammon"
-msgstr ""
+msgstr "一个简单的cinnamon待办事项列表断续器"
 
 #. toggle_LookingGlass@kolle->metadata.json->name
 msgid "Toggle LookingGlass"
-msgstr ""
+msgstr "切换LookingGlass"
 
 #. toggle_LookingGlass@kolle->metadata.json->description
 msgid "Click on the applet to toggle LookingGlass"
-msgstr ""
+msgstr "点击小程序切换LookingGlass"
 
 #. tor-button@shatur->metadata.json->name
 msgid "Tor Button"
-msgstr ""
+msgstr "Tor按钮"
 
 #. tor-button@shatur->metadata.json->description
 msgid "Applet for Tor network management"
-msgstr ""
+msgstr "Tor网络管理器小程序"
 
 #. tracker@glebihan->metadata.json->name
 msgid "Search using Tracker"
@@ -1148,61 +1159,62 @@ msgstr ""
 
 #. turn-off-monitor@zablotski->metadata.json->name
 msgid "Turn Off Monitor"
-msgstr ""
+msgstr "关闭显示器"
 
 #. turn-off-monitor@zablotski->metadata.json->description
 msgid "Click on the applet to turn off monitor"
-msgstr ""
+msgstr "点击小程序关闭显示器"
 
 #. uptime@vatanuki.kun->metadata.json->name
 msgid "Up Time"
-msgstr ""
+msgstr "运行时间"
 
 #. uptime@vatanuki.kun->metadata.json->description
 msgid "A simple applet that displays uptime."
-msgstr ""
+msgstr "一个显示运行时间的简单的小程序。"
 
 #. usertile@uszaty->metadata.json->name
 msgid "UserTile Applet"
-msgstr ""
+msgstr "UserTile小程序"
 
 #. usertile@uszaty->metadata.json->description
 msgid ""
 "An applet to access your account details and more. Design is based on "
 "UserTile applet from Windows."
 msgstr ""
+"一个可以访问您的帐户详情等等的小程序。设计基于Windows的UserTile小程序。"
 
 #. vboxlauncher@mockturtl->metadata.json->name
 msgid "Vbox Launcher"
-msgstr ""
+msgstr "Vbox启动器"
 
 #. vboxlauncher@mockturtl->metadata.json->description
 msgid "An applet to launch virtual machines."
-msgstr ""
+msgstr "一个用来启动虚拟机的小程序。"
 
 #. vnstat@linuxmint.com->metadata.json->name
 msgid "Network usage monitor"
-msgstr ""
+msgstr "网络流量监视器"
 
 #. vnstat@linuxmint.com->metadata.json->description
 msgid "Network usage monitor using vnstat"
-msgstr ""
+msgstr "使用vnstat的网络流量监视器"
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "天气"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "查看您当地的天气预报"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"
-msgstr ""
+msgstr "Web开发者菜单"
 
 #. web-developer-menu@infiniteshroom->metadata.json->description
 msgid "A Menu for PHP/MySQL Web Developers"
-msgstr ""
+msgstr "PHP/MySQL Web开发者菜单"
 
 #. website-notifier@cardsurf->metadata.json->name
 msgid "Website notifier"
@@ -1218,7 +1230,7 @@ msgstr ""
 
 #. windowlist@cobinja.de->metadata.json->description
 msgid "A window list with app grouping and window previews"
-msgstr ""
+msgstr "带应用程序分组和窗口预览的窗口列表"
 
 #. WindowListGroup@jake.phy@gmail.com->metadata.json->name
 msgid "Window List With App Grouping"
@@ -1238,33 +1250,33 @@ msgstr ""
 
 #. windows-quick-list-with-close-button@koutch->metadata.json->name
 msgid "Windows Quick List with close button"
-msgstr ""
+msgstr "带有关闭按钮的窗口快速列表"
 
 #. windows-quick-list-with-close-button@koutch->metadata.json->description
 msgid ""
 "Quickly access windows from all workspaces with close buttons and settings"
-msgstr ""
+msgstr "从所有工作区快速访问带有关闭按钮和设置的窗口"
 
 #. workspace-grid@hernejj->metadata.json->name
 msgid "Workspace grid (2D) and switcher"
-msgstr ""
+msgstr "工作区网格(2D)和切换器"
 
 #. workspace-grid@hernejj->metadata.json->description
 msgid "2D workspace grid and switcher for Cinnamon"
-msgstr ""
+msgstr "Cinnamon的2D工作区网格和切换器"
 
 #. workspace-name@willurd->metadata.json->name
 msgid "Workspace Name"
-msgstr ""
+msgstr "工作区名称"
 
 #. workspace-name@willurd->metadata.json->description
 msgid "Show the current workspace name in the panel"
-msgstr ""
+msgstr "在面板显示当前工作区的名称"
 
 #. xampp-panel@backids99->metadata.json->name
 msgid "Xampp Panel Menu"
-msgstr ""
+msgstr "Xampp面板菜单"
 
 #. xampp-panel@backids99->metadata.json->description
 msgid "A Panel Menu for XAMPP Web Developers"
-msgstr ""
+msgstr "Xampp Web开发者面板菜单"

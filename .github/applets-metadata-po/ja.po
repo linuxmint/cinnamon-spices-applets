@@ -1,21 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# gnome-shell-extension-weather ja.po.
+# Copyright (C) 2011,2012 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2011,2012.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: gnome-shell-extension-weather 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2012-06-11 12:26+0900\n"
+"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -239,7 +238,7 @@ msgstr ""
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "コンピューター"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
@@ -648,7 +647,7 @@ msgstr ""
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "場所"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
@@ -1190,11 +1189,11 @@ msgstr ""
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "天気"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "指定した場所の天気予報を表示"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"

@@ -1,21 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Russian translation for cinnamon-weather
+# Copyright (C) 2015
+# Gankov Andrey <gav@qsolution.ru>, 2011.
+# Timon <timosha@gmail.com>, 2014.
+# zluka <osam@tut.by>, 2015.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: cinnamon-weather 1.12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2017-05-06 23:07+0500\n"
+"Last-Translator: Matvey Vyalkov <cybertailor@gmail.com>\n"
+"Language-Team: русский <>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -79,21 +82,23 @@ msgstr ""
 
 #. batterymonitor@pdcurtis->metadata.json->name
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
-msgstr ""
+msgstr "Апплет батареи с контролем и выключением (BAMS)"
 
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
-msgstr ""
+msgstr "Показывает заряд в процентах и разрешенные предупреждения и действия"
 
 #. betterlock->metadata.json->name
 msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
-msgstr ""
+msgstr "Индикатор Num Lock/Caps Lock с уведомлениями в трее"
 
 #. betterlock->metadata.json->description
 msgid ""
 "Shows whether caps lock/num lock is on, and displays a notification when "
 "these change."
 msgstr ""
+"Апплет показывает включёны ли caps lock или num lock, и отображает "
+"уведомление в трее при их переключении."
 
 #. bettersettings@bownz->metadata.json->name
 msgid "Better Cinnamon Settings"
@@ -142,13 +147,15 @@ msgstr ""
 
 #. calendar@simonwiles.net->metadata.json->name
 msgid "World Clock Calendar"
-msgstr ""
+msgstr "World Clock Calendar"
 
 #. calendar@simonwiles.net->metadata.json->description
 msgid ""
 "Fork of the Cinnamon calendar applet with support for displaying multiple "
 "timezones"
 msgstr ""
+"Ответвление от апплета календаря Cinnamon с поддержкой отображения "
+"нескольких часовых поясов"
 
 #. cheaty@centurix->metadata.json->name
 msgid "Cheaty - Cheatsheet keeper"
@@ -160,7 +167,7 @@ msgstr ""
 
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #. Cinnamenu@json->metadata.json->description
 msgid ""
@@ -188,12 +195,12 @@ msgstr ""
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr ""
+msgstr "CinnVIIСтаркМеню"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr ""
+msgstr "Cinnamon Menu похожий на меню Пуск Windows 7 или MATE Menu"
 
 #. clipboard-qr@wrouesnel->metadata.json->name
 msgid "Clipboard QR code applet"
@@ -239,7 +246,7 @@ msgstr ""
 
 #. computer@brownsr->metadata.json->name
 msgid "Computer"
-msgstr ""
+msgstr "Компьютер"
 
 #. computer@brownsr->metadata.json->description
 msgid "Show files at computer level"
@@ -263,11 +270,11 @@ msgstr ""
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->name
 msgid "Docker Control"
-msgstr ""
+msgstr "Управление Docker"
 
 #. ctrl4docker@hoffis-eck.de->metadata.json->description
 msgid "Activates/Deactivates Docker Container"
-msgstr ""
+msgstr "Включение/Выключение Docker  контейнера"
 
 #. CustomApplicationsMenu@LLOBERA->metadata.json->name
 msgid "Custom Applications Menu"
@@ -335,11 +342,11 @@ msgstr ""
 
 #. github-projects@morgan-design.com->metadata.json->name
 msgid "Github Explorer"
-msgstr ""
+msgstr "Github Explorer"
 
 #. github-projects@morgan-design.com->metadata.json->description
 msgid "Click on the applet to explore your Public Github repositories"
-msgstr ""
+msgstr "Нажмите на апплет, чтобы изучить свои публичные репозитории на Github."
 
 #. gmail@lauritsriple->metadata.json->name
 msgid "GmailNotifier"
@@ -351,12 +358,13 @@ msgstr ""
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
-msgstr ""
+msgstr "GPaste Reloaded"
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
 msgstr ""
+"Полностью переработанный модуль GPaste, основанный на расширении Gnome Shell"
 
 #. gputemperature@silentage.com->metadata.json->name
 msgid "GPU Temperature"
@@ -402,19 +410,20 @@ msgstr ""
 
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
-msgstr ""
+msgstr "Графический монитор CPU/MEM"
 
 #. hwmonitor@sylfurd->metadata.json->description
 msgid "Displaying realtime CPU and memory load"
-msgstr ""
+msgstr "Отображает загрузку CPU и памяти в реальном времени"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
+#, fuzzy
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Список окон с группировкой и миниатюрами"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
@@ -442,13 +451,15 @@ msgstr ""
 
 #. ioDisk@ctrlesc->metadata.json->name
 msgid "Disk Utilization"
-msgstr ""
+msgstr "Использование диска"
 
 #. ioDisk@ctrlesc->metadata.json->description
 msgid ""
 "Shows the current max disk I/O utilization in the panel and per device "
 "utilization in a popup menu."
 msgstr ""
+"Показывает текущее максимальное использование дискового ввода-вывода на "
+"панели и на использование устройства во всплывающем меню."
 
 #. jalalicalendar@mohammad-sn->metadata.json->name
 msgid "Taghvim"
@@ -515,11 +526,11 @@ msgstr ""
 
 #. mailnagapplet@ozderya.net->metadata.json->name
 msgid "Mailnag"
-msgstr ""
+msgstr "Mailnag"
 
 #. mailnagapplet@ozderya.net->metadata.json->description
 msgid "Mailnag mail notifier applet"
-msgstr ""
+msgstr "Аппдет оповещений для Mailnag"
 
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
@@ -555,13 +566,15 @@ msgstr ""
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->name
 msgid "Multi-Core System Monitor"
-msgstr ""
+msgstr "Multi-Core System Monitor"
 
 #. multicore-sys-monitor@ccadeptic23->metadata.json->description
 msgid ""
 "Displays in realtime the cpu usage for each core/cpu and overall memory "
 "usage."
 msgstr ""
+"Показывает в реальном времени использование процессора для каждого "
+"процессора и ядра, а также общее использование памяти."
 
 #. mybookmarks@markbokil.com->metadata.json->name
 msgid "My Bookmarks"
@@ -590,7 +603,7 @@ msgstr ""
 
 #. network@brownsr->metadata.json->name
 msgid "Network"
-msgstr ""
+msgstr "Сеть"
 
 #. network@brownsr->metadata.json->description
 msgid "Show network"
@@ -688,19 +701,19 @@ msgstr ""
 
 #. printers@linux-man->metadata.json->name
 msgid "Printers"
-msgstr ""
+msgstr "Принтеры"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr ""
+msgstr "Управление заданиями и принтерами"
 
 #. profile-switcher@pixunil->metadata.json->name
 msgid "Profile switcher"
-msgstr ""
+msgstr "Переключатель профилей"
 
 #. profile-switcher@pixunil->metadata.json->description
 msgid "Change your settings profile"
-msgstr ""
+msgstr "Изменить настройки профиля"
 
 #. radio@driglu4it->metadata.json->name
 msgid "Radio++"
@@ -732,7 +745,7 @@ msgstr ""
 
 #. restart-cinnamon@kolle->metadata.json->name
 msgid "Restart Cinnamon"
-msgstr ""
+msgstr "Перезапустить Cinnamon"
 
 #. restart-cinnamon@kolle->metadata.json->description
 msgid "Click on the applet to restart Cinnamon"
@@ -782,7 +795,7 @@ msgstr ""
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
-msgstr ""
+msgstr "ScreenShot+Record Desktop"
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
 msgid ""
@@ -792,7 +805,7 @@ msgstr ""
 
 #. ScreenShot@tech71->metadata.json->name
 msgid "ScreenShot"
-msgstr ""
+msgstr "Скриншот"
 
 #. ScreenShot@tech71->metadata.json->description
 msgid "Take a snapshot of your desktop or individual windows"
@@ -808,11 +821,11 @@ msgstr ""
 
 #. search-box@mtwebster->metadata.json->name
 msgid "Internet Search Box"
-msgstr ""
+msgstr "Internet Search Box"
 
 #. search-box@mtwebster->metadata.json->description
 msgid "Perform an Internet search, using your favorite engine"
-msgstr ""
+msgstr "Выполняйте поиск в интернете, используя любимую поисковую систему"
 
 #. separator2@zyzz->metadata.json->name
 msgid "Separator2"
@@ -907,11 +920,11 @@ msgstr ""
 
 #. smallcalc_applet@lerc.sds->metadata.json->name
 msgid "SmallCalc"
-msgstr ""
+msgstr "SmallCalc"
 
 #. smallcalc_applet@lerc.sds->metadata.json->description
 msgid "A nice compact popup calculator"
-msgstr ""
+msgstr "Точный компактный всплывающий калькулятор"
 
 #. smogwawelski@pamsoft.pl->metadata.json->name
 msgid "Smog Wawelski"
@@ -931,13 +944,15 @@ msgstr ""
 
 #. sound-with-apps-volume@koutch->metadata.json->name
 msgid "Sound with apps volume"
-msgstr ""
+msgstr "Sound with apps volume"
 
 #. sound-with-apps-volume@koutch->metadata.json->description
 msgid ""
 "Applications' volume, volume 150%, mute button, scrolling track time, custom "
 "launcher ..."
 msgstr ""
+"Громкость отдельных приложений, громкость 150%, кнопка отключения звука, "
+"прокрутка времени песни, возможность отображения своих приложений..."
 
 #. sports-update@pavanred->metadata.json->name
 msgid "sports-update"
@@ -957,13 +972,15 @@ msgstr ""
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->name
 msgid "Stackoverflow Questions Notifier"
-msgstr ""
+msgstr "Уведомитель о вопросах на сайте Stackoverflow"
 
 #. stackoverflow-questions-notifier@higuaro->metadata.json->description
 msgid ""
 "Checks stackoverflow site to see if new questions have been posted under a "
 "particular tag and generates a notification"
 msgstr ""
+"Проверяет сайт stackoverflow, чтобы узнать, были ли новые вопросы размещены "
+"под определенным тегом и генерирует уведомление"
 
 #. stevedore@centurix->metadata.json->name
 msgid "Stevedor - Docker controller"
@@ -975,11 +992,11 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr ""
+msgstr "Стикеры"
 
 #. sticky@scollins->metadata.json->description
 msgid "Applet that allows you to manage desktop notes"
-msgstr ""
+msgstr "Аплет для создания заметок-стикеров на рабочем столе"
 
 #. stocks@adonut->metadata.json->name
 msgid "stocks"
@@ -1001,11 +1018,11 @@ msgstr ""
 
 #. suspend@janax->metadata.json->name
 msgid "Suspend computer"
-msgstr ""
+msgstr "Приостановить компьютер"
 
 #. suspend@janax->metadata.json->description
 msgid "Immediately suspends the computer"
-msgstr ""
+msgstr "Немедленно приостанавливает работу компьютера"
 
 #. SW++@mohammad-sn->metadata.json->name
 msgid "Show desktop ++"
@@ -1027,7 +1044,7 @@ msgstr ""
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
-msgstr ""
+msgstr "Системный монитор"
 
 #. sysmonitor@orcus->metadata.json->description
 msgid "Displays CPU, memory, swap and network usage and load in graphs"
@@ -1035,12 +1052,14 @@ msgstr ""
 
 #. system-monitor@pixunil->metadata.json->name
 msgid "System monitor with graphs"
-msgstr ""
+msgstr "Системный монитор с графиками"
 
 #. system-monitor@pixunil->metadata.json->description
 msgid ""
 "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs"
 msgstr ""
+"Отображение использования ЦП, памяти и swap, дисковых и сетевых тарифов в "
+"виде текста и графиков"
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
@@ -1060,11 +1079,11 @@ msgstr ""
 
 #. temperature@fevimu->metadata.json->name
 msgid "CPU Temperature Indicator"
-msgstr ""
+msgstr "Индикатор температуры процессора"
 
 #. temperature@fevimu->metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr ""
+msgstr "Показывает температуру процессора"
 
 #. text-to-speech-applet@cardsurf->metadata.json->name
 msgid "Text to speech applet"
@@ -1092,19 +1111,19 @@ msgstr ""
 
 #. timeout@narutrey->metadata.json->name
 msgid "Time Out"
-msgstr ""
+msgstr "Перерыв"
 
 #. timeout@narutrey->metadata.json->description
 msgid "Automatically controlled time outs and breaks"
-msgstr ""
+msgstr "Помощник по контролю за перерывами от компьютера"
 
 #. timer-notifications@markbokil.com->metadata.json->name
 msgid "Timer with Notifications"
-msgstr ""
+msgstr "Таймер с уведомлениями"
 
 #. timer-notifications@markbokil.com->metadata.json->description
 msgid "A timer app with visual and auditory notifications."
-msgstr ""
+msgstr "Приложение таймера с визуальными и звуковыми уведомлениями."
 
 #. todo@threefi->metadata.json->name
 msgid "Todo"
@@ -1128,7 +1147,7 @@ msgstr ""
 
 #. tor-button@shatur->metadata.json->description
 msgid "Applet for Tor network management"
-msgstr ""
+msgstr "Апплет для управления сетью Tor"
 
 #. tracker@glebihan->metadata.json->name
 msgid "Search using Tracker"
@@ -1182,19 +1201,19 @@ msgstr ""
 
 #. vnstat@linuxmint.com->metadata.json->name
 msgid "Network usage monitor"
-msgstr ""
+msgstr "Монитор использования сети"
 
 #. vnstat@linuxmint.com->metadata.json->description
 msgid "Network usage monitor using vnstat"
-msgstr ""
+msgstr "Мониторинг использования сети с помощью vnstat"
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Погода"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Просмотр местного прогноза погоды"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"

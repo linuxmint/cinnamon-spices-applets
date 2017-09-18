@@ -1,21 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Bulgarian translation for gnome-shell-extension-weather
+# Copyright (C) 2014
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# DuMuT6p, 2014.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-18 18:22+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2014-11-30 15:09+0200\n"
+"Last-Translator: DuMuT6p \n"
+"Language-Team: \n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #: applets-metadata.js:1
 msgid "Applets Metadata"
@@ -41,11 +40,11 @@ msgstr ""
 
 #. AutostartPrograms@spacy01->metadata.json->name
 msgid "Autostart programs"
-msgstr ""
+msgstr "Автоматично стартиращи програми"
 
 #. AutostartPrograms@spacy01->metadata.json->description
 msgid "Click here to add or remove programs to start with the session."
-msgstr ""
+msgstr "Натиснете тук, за да управлявате програмите, стартиращи със сесията."
 
 #. axos88@countdown-timer->metadata.json->name
 msgid "Countdown timer with notifications"
@@ -105,13 +104,15 @@ msgstr ""
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "BgRadio"
-msgstr ""
+msgstr "Бг радиа"
 
 #. BgRadio@spacy01->metadata.json->description
 msgid ""
 "The most famous Bulgarian radio stations. Some of the streams are available "
 "only from bulgaria. This applet requires moc player."
 msgstr ""
+"Най-известните български радиостанции. Някои от стриймовете са налични само "
+"от България. Този аплет изисква moc плеър."
 
 #. binaryclock@entelechy->metadata.json->name
 msgid "Cinnamon Binary Clock"
@@ -410,11 +411,11 @@ msgstr ""
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
-msgstr ""
+msgstr "Диспечер на задачите с глазура"
 
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
-msgstr ""
+msgstr "Списък с прозорци с групиране и миниатюри"
 
 #. IcingWindowSaver@json->metadata.json->name
 msgid "Icing Window Saver"
@@ -648,7 +649,7 @@ msgstr ""
 
 #. places-bookmarks@dmo60.de->metadata.json->name
 msgid "Places"
-msgstr ""
+msgstr "Места"
 
 #. places-bookmarks@dmo60.de->metadata.json->description
 msgid "Access your places and bookmarks"
@@ -1044,11 +1045,11 @@ msgstr ""
 
 #. system-monitor@spacy01->metadata.json->name
 msgid "System monitor"
-msgstr ""
+msgstr "Системен монитор"
 
 #. system-monitor@spacy01->metadata.json->description
 msgid "Click here to see processes and etc."
-msgstr ""
+msgstr "Натиснете тук, за да видите работещите процеси."
 
 #. systray-collapsible@koutch->metadata.json->name
 msgid "System Tray Collapsible"
@@ -1190,11 +1191,11 @@ msgstr ""
 
 #. weather@mockturtl->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Времето"
 
 #. weather@mockturtl->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Преглен да прогнозата на времето"
 
 #. web-developer-menu@infiniteshroom->metadata.json->name
 msgid "Web Developer Menu"
