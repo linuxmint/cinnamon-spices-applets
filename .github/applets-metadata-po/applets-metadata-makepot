@@ -1,0 +1,72 @@
+#!/bin/bash
+
+potFileName="applets-metadata"
+
+poFileDir=".github/$potFileName-po"
+potFile="$poFileDir/$potFileName.pot"
+
+
+# create dummy .pot with header
+cinnamon-json-makepot --js "$potFileName.pot"
+
+# use UTF-8 as charset
+sed -i 's/CHARSET/UTF-8/g' $potFileName.pot
+
+cd ../..
+
+for uuid in *; do
+    if [ -d $uuid ]; then
+        # get metadata["name"] and metadata["description"]
+        metadataName=$(grep '"name":' $uuid/files/$uuid/metadata.json | cut -d "\"" -f 4 )
+        metadataDesc=$(grep '"description":' $uuid/files/$uuid/metadata.json | cut -d "\"" -f 4 )
+        # write metadata["name"] and metadata["description"] to .pot file
+        #----------------------------------------------------------------
+        echo "" >> $potFile
+        echo "#. $uuid->metadata.json->name" >> $potFile
+        echo "msgid \"$metadataName\"" >> $potFile
+        echo "msgstr \"\"" >> $potFile
+        #----------------------------------------------------------------
+        echo "" >> $potFile
+        echo "#. $uuid->metadata.json->description" >> $potFile
+        echo "msgid \"$metadataDesc\"" >> $potFile
+        echo "msgstr \"\"" >> $potFile
+    fi
+done
+
+# merge duplicate msgids
+msguniq $potFile -o $potFile
+
+
+
+
+
+#------------------------------------------------------------------------------
+# translate po files
+#------------------------------------------------------------------------------
+LANGUAGEID="de"
+
+while read LANGUAGE; do
+
+    LANGUAGEID=$(echo "$LANGUAGE" | cut -d ":" -f 1)
+    echo "$LANGUAGEID"
+
+    # if .po file does not exists, create one
+    if [ ! -f $poFileDir/$LANGUAGEID.po ]; then
+        msginit --no-translator -l LANGUAGEID -o $poFileDir/$LANGUAGEID.po -i $potFile
+    fi
+
+    # update .po against .pot
+    msgmerge --silent $poFileDir/$LANGUAGEID.po $potFile -o $poFileDir/$LANGUAGEID.po
+
+    # get translations form spices .po files
+    for uuid in *; do
+        if [ -f $uuid/files/$uuid/po/$LANGUAGEID.po ]; then
+            msgmerge --silent --no-fuzzy-matching $uuid/files/$uuid/po/$LANGUAGEID.po $poFileDir/$LANGUAGEID.po -o $poFileDir/$LANGUAGEID.po
+        fi
+    done
+
+    # update .po against .pot to get rid of obsolete strings
+    msgmerge $poFileDir/$LANGUAGEID.po $potFile -o $poFileDir/$LANGUAGEID.po
+    msgattrib --no-obsolete $poFileDir/$LANGUAGEID.po -o $poFileDir/$LANGUAGEID.po
+
+done <$poFileDir/LANGUAGES
