@@ -118,3 +118,9 @@ msgstr "Wenn aktiviert, werden nur Fenster angezeigt,\ndie auf dem gleichen Bild
 
 msgid "Move to another monitor"
 msgstr "Auf anderen Bildschirm verschieben"
+
+msgid "Always"
+msgstr "Immer"
+
+msgid "2 or more windows"
+msgstr "2 oder mehr Fenster"
