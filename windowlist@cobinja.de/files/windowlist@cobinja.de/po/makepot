@@ -1,0 +1,37 @@
+#!/bin/bash
+
+potFile="po/windowlist@cobinja.de.pot"
+
+cd ..
+
+# create .pot file
+cinnamon-json-makepot --js $potFile
+
+# delete comments in .pot file, but not the header
+sed -i '/#\./,1d' $potFile
+sed -i '/#:/,1d' $potFile
+sed -i '/#,/,1d' $potFile
+
+# remove Strings from .pot file, which should not be translated
+excludeFromTranslation[0]="CobiWindowList"
+excludeFromTranslation[1]="Preferences"
+excludeFromTranslation[2]="About..."
+excludeFromTranslation[3]="Remove '%s'"
+excludeFromTranslation[4]="Only on this workspace"
+excludeFromTranslation[5]="Visible on all workspaces"
+excludeFromTranslation[6]="Move to another workspace"
+excludeFromTranslation[7]="Restore"
+excludeFromTranslation[8]="Minimize"
+excludeFromTranslation[9]="Close others"
+excludeFromTranslation[10]="Close all"
+excludeFromTranslation[11]="Close"
+excludeFromTranslation[12]="milliseconds"
+excludeFromTranslation[13]="pixels"
+excludeFromTranslation[14]="Icons"
+excludeFromTranslation[15]="Configure..."
+
+for msgid in "${excludeFromTranslation[@]}"
+do
+    # delete matching msgid and the following 2 lines (msgstr + newline)
+    sed -i "/\"$msgid\"/,+2d" $potFile
+done
