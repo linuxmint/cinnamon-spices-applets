@@ -118,3 +118,9 @@ msgstr ""
 
 msgid "Move to another monitor"
 msgstr ""
+
+msgid "Always"
+msgstr ""
+
+msgid "2 or more windows"
+msgstr ""
