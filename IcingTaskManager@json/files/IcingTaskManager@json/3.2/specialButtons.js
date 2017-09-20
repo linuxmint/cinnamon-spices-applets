@@ -40,16 +40,14 @@ function AppButton () {
 
 AppButton.prototype = {
 
-  _init: function (parent) {
+  _init: function (parent, state, groupState) {
+    this.state = state;
+    this.groupState = groupState;
     this.app = parent.app;
-    this._applet = parent._applet;
     this._parent = parent;
     this.isFavoriteApp = parent.isFavoriteApp;
-    this.metaWindow = null;
-    this.metaWindows = [];
-    this.settings = this._applet.settings;
     this.signals = new SignalManager.SignalManager(this);
-    this.hasLabel = this._applet.titleDisplay !== constants.TitleDisplay.None;
+    this.hasLabel = this.state.settings.titleDisplay !== constants.TitleDisplay.None;
     this._progress = 0;
     this.padding = 0;
     this.actor = new St.Bin({
@@ -68,15 +66,7 @@ AppButton.prototype = {
     });
 
     this.actor._delegate = null;
-    if (this._applet.orientation === St.Side.TOP) {
-      this.actor.add_style_class_name('top');
-    } else if (this._applet.orientation === St.Side.BOTTOM) {
-      this.actor.add_style_class_name('bottom');
-    } else if (this._applet.orientation === St.Side.LEFT) {
-      this.actor.add_style_class_name('left');
-    } else if (this._applet.orientation === St.Side.RIGHT) {
-      this.actor.add_style_class_name('right');
-    }
+    this.on_orientation_changed(this.state.orientation);
     this._container = new Cinnamon.GenericContainer({
       name: 'iconLabelButton'
     });
@@ -88,6 +78,9 @@ AppButton.prototype = {
       style_class: 'app-button-label',
       text: ''
     });
+    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
+      this.hideLabel(false);
+    }
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel',
     });
@@ -106,17 +99,29 @@ AppButton.prototype = {
     this._isFavorite(this.isFavoriteApp);
   },
 
+  on_orientation_changed: function() {
+    if (this.state.orientation === St.Side.TOP) {
+      this.actor.add_style_class_name('top');
+    } else if (this.state.orientation === St.Side.BOTTOM) {
+      this.actor.add_style_class_name('bottom');
+    } else if (this.state.orientation === St.Side.LEFT) {
+      this.actor.add_style_class_name('left');
+    } else if (this.state.orientation === St.Side.RIGHT) {
+      this.actor.add_style_class_name('right');
+    }
+  },
+
   setActorWidth: function() {
     if (!this.hasLabel) {
-      this.actor.width = this._applet.appButtonWidth;
+      this.actor.width = this.state.settings.appButtonWidth;
     }
     this.setIconSize();
     this.setIconPadding();
   },
 
   setActorHeight: function() {
-    if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM) {
-      this.actor.height = this._applet._panelHeight;
+    if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM) {
+      this.actor.height = this.state.trigger('getPanelHeight');
     }
   },
 
@@ -129,10 +134,11 @@ AppButton.prototype = {
   },
 
   setIconSize: function () {
-    if (this._applet.enableIconSize) {
-      this.iconSize = this._applet.iconSize;
-    } else if (this._applet._scaleMode) {
-      this.iconSize = Math.floor(this._applet._panelHeight * 0.8);
+    const panelHeight = this.state.trigger('getPanelHeight');
+    if (this.state.settings.enableIconSize) {
+      this.iconSize = this.state.settings.iconSize;
+    } else if (this.state.trigger('getScaleMode')) {
+      this.iconSize = Math.floor(panelHeight * 0.8);
     } else {
       this.iconSize = 24;
     }
@@ -140,9 +146,9 @@ AppButton.prototype = {
     if (this.icon) {
       // The icon scaling isn't working so well on horizontal panels, so we're going to dynamically cap
       // its max value in this situation for now.
-      if ((this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM)
-        && this.iconSize > this._applet._panelHeight) {
-        this._applet.settings.setValue('icon-size', this._applet._panelHeight);
+      if ((this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM)
+        && this.iconSize > panelHeight) {
+        this.state.trigger('setSettingsValue', 'icon-size', panelHeight);
         return false;
       }
       shouldInsert = true;
@@ -184,8 +190,8 @@ AppButton.prototype = {
     if (!this._needsAttention || !this.actor) {
       return;
     }
-    const activePseudoClass = getPseudoClass(this._applet.activePseudoClass);
-    if (this._applet.showActive) {
+    const activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
+    if (this.state.settings.showActive) {
       this.actor.remove_style_pseudo_class(activePseudoClass);
     }
     this.actor.add_style_class_name('window-list-item-demands-attention');
@@ -193,7 +199,7 @@ AppButton.prototype = {
       setTimeout(()=>{
         if (this.actor && this.actor.has_style_class_name('window-list-item-demands-attention')) {
           this.actor.remove_style_class_name('window-list-item-demands-attention');
-          if (this._applet.showActive) {
+          if (this.state.settings.showActive) {
             this.actor.add_style_pseudo_class(activePseudoClass);
           }
         }
@@ -210,14 +216,14 @@ AppButton.prototype = {
     // The label text starts in the center of the icon, so we should allocate the space
     // needed for the icon plus the space needed for(label - icon/2)
     alloc.min_size = iconMinSize;
-    if (this._applet.orientation === St.Side.TOP || this._applet.orientation === St.Side.BOTTOM ) {
-      if (this._applet.titleDisplay === 3 && !this._parent.isFavoriteApp) {
+    if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM ) {
+      if (this.state.settings.titleDisplay === 3 && !this._parent.isFavoriteApp) {
         alloc.natural_size = constants.MAX_BUTTON_WIDTH;
       } else {
         alloc.natural_size = Math.min(iconNaturalSize + Math.max(0, labelNaturalSize), constants.MAX_BUTTON_WIDTH);
       }
     } else {
-      alloc.natural_size = this._applet._panelHeight;
+      alloc.natural_size = this.state.trigger('getPanelHeight');
     }
   },
 
@@ -279,12 +285,12 @@ AppButton.prototype = {
     this._numLabel.allocate(childBox, flags);
 
     // Call set_icon_geometry for support of Cinnamon's minimize animation
-    if (this.metaWindows.length > 0 && this._container.get_stage()) {
+    if (this.groupState.metaWindows.length > 0 && this._container.realized) {
       let rect = new Meta.Rectangle();
       [rect.x, rect.y] = this._container.get_transformed_position();
       [rect.width, rect.height] = this._container.get_transformed_size();
 
-      each(this.metaWindows, (metaWindow)=>{
+      each(this.groupState.metaWindows, (metaWindow)=>{
         if (metaWindow) {
           metaWindow.set_icon_geometry(rect);
         }
@@ -341,35 +347,30 @@ AppButton.prototype = {
   },
 
   _onEnter: function(){
-    if (this._applet.panelEditMode) {
+    if (this.state.panelEditMode) {
       return false;
     }
-    let hoverPseudoClass = getPseudoClass(this._applet.hoverPseudoClass);
+    let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
     if (!this.actor.has_style_pseudo_class(hoverPseudoClass)) {
       this.actor.add_style_pseudo_class(hoverPseudoClass);
     }
   },
 
   _onLeave: function(){
-    if (this._applet.panelEditMode) {
+    if (this.state.panelEditMode) {
       return false;
     }
-    this.actor.remove_style_pseudo_class(getPseudoClass(this._applet.hoverPseudoClass));
+    this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
     this._setFavoriteAttributes();
   },
 
   setActiveStatus: function(windows){
-    let pseudoClass = getPseudoClass(this._applet.activePseudoClass);
+    let pseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
     if (windows.length > 0 && !this.actor.has_style_pseudo_class(pseudoClass)) {
       this.actor.add_style_pseudo_class(pseudoClass);
     } else {
       this.actor.remove_style_pseudo_class(pseudoClass);
     }
-  },
-
-  setMetaWindow: function (metaWindow, metaWindows) {
-    this.metaWindow = metaWindow;
-    this.metaWindows = metaWindows;
   },
 
   _onProgressChange: function(metaWindow) {
@@ -385,11 +386,11 @@ AppButton.prototype = {
     }
   },
 
-  _onFocusChange: function () {
+  _onFocusChange: function (hasFocus) {
     // If any of the windows associated with our app have focus,
     // we should set ourselves to active
-    let focusPseudoClass = getPseudoClass(this._applet.focusPseudoClass);
-    if (this._hasFocus()) {
+    let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
+    if (hasFocus) {
       this.actor.add_style_pseudo_class(focusPseudoClass);
       if (this.actor.has_style_class_name('window-list-item-demands-attention')) {
         this.actor.remove_style_class_name('window-list-item-demands-attention');
@@ -401,31 +402,9 @@ AppButton.prototype = {
     } else {
       this.actor.remove_style_pseudo_class(focusPseudoClass);
     }
-    if (this._applet.showActive && this.metaWindows.length > 0) {
-      this.actor.add_style_pseudo_class(getPseudoClass(this._applet.activePseudoClass));
+    if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
+      this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
     }
-  },
-
-  _hasFocus: function () {
-    let hasTransient = false;
-    let handleTransient = function(transient){
-      if (transient.has_focus()) {
-        hasTransient = true;
-        return false;
-      }
-      return true;
-    };
-    each(this.metaWindows, (win)=>{
-      if (win.minimized) {
-        return true;
-      }
-      if (win.has_focus()) {
-        hasTransient = true;
-        return false;
-      }
-      win.foreach_transient(handleTransient);
-    });
-    return hasTransient;
   },
 
   _onWindowDemandsAttention: function (window) {
@@ -444,7 +423,7 @@ AppButton.prototype = {
       return;
     }
     if (this.app.state === 0 && this.isFavoriteApp) {
-      let pseudoClass = getPseudoClass(this._applet.activePseudoClass);
+      let pseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
       if (this.actor.has_style_class_name('window-list-item-box')) {
         this.actor.remove_style_class_name('window-list-item-box');
       }
