@@ -114,3 +114,21 @@ The Cinnamon team can accept or reject the addition and should give justificatio
 
 See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
 
+# Translations
+
+The script `cinnamon-spices-makepot` in this repo was written to help authors to update their translation template (`.pot`) file and to help translators to test their translations.
+
+Updating a translation template `.pot`:
+```
+./cinnamon-spices-makepot UUID
+```
+
+Test your translations `.po` locally before uploading to Spices:"
+```
+./cinnamon-spices-makepot UUID --install
+```
+
+More info:
+```
+./cinnamon-spices-makepot --help
+```
