@@ -394,33 +394,39 @@ MyApplet.prototype = {
     this._bindAppKey();
   },
 
-  on_applet_instances_changed: function() {
+  on_applet_instances_changed: function(loaded) {
+    if (!loaded) {
+      return;
+    }
     let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
     let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
-    let instances = Main.AppletManager.getRunningInstancesForUuid(this._uuid);
-
+    let instances = Main.AppletManager.getRunningInstancesForUuid(this.state.uuid);
     /* Simple cases */
     if (numberOfMonitors === 1) {
-      this._monitorWatchList = [Main.layoutManager.primaryIndex];
+      this.state.monitorWatchList = [Main.layoutManager.primaryIndex];
     } else if (instances.length > 1 && !onPrimary) {
-      this._monitorWatchList = [this.panel.monitorIndex];
+      this.state.monitorWatchList = [this.panel.monitorIndex];
     } else {
       /* This is an instance on the primary monitor - it will be
        * responsible for any monitors not covered individually.  First
        * convert the instances list into a list of the monitor indices,
        * and then add the monitors not present to the monitor watch list
        * */
-      this._monitorWatchList = [this.panel.monitorIndex];
-      for (var i = 0; i < instances.length; i++) {
+      this.state.monitorWatchList = [this.panel.monitorIndex];
+      for (let i = 0; i < instances.length; i++) {
+        if (!instances[i]) {
+          continue;
+        }
         instances[i] = instances[i].panel.monitorIndex;
       }
 
       for (let i = 0; i < numberOfMonitors; i++) {
         if (instances.indexOf(i) === -1) {
-          this._monitorWatchList.push(i);
+          this.state.monitorWatchList.push(i);
         }
       }
     }
+    this.state.set({monitorWatchList: this.state.monitorWatchList});
     this.refreshCurrentAppList();
   },
 
