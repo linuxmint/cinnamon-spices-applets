@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-21 20:40+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -14,14 +14,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "Flyt til skærm"
+msgstr "Flyt til den anden skærm"
 
 #: 3.2/specialMenus.js:103
-#, fuzzy
 msgid "Move to monitor "
-msgstr "Flyt til skærm"
+msgstr "Flyt til skærm "
 
 #: 3.2/specialMenus.js:111
 msgid "Only on this workspace"
@@ -32,22 +30,20 @@ msgid "Visible on all workspaces"
 msgstr "Synlig på alle arbejdsområder"
 
 #: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
-#, fuzzy
 msgid "Move to another workspace"
-msgstr "Flyt til arbejdsområde til venstre"
+msgstr "Flyt til et andet arbejdsområde"
 
 #: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
 msgid "Places"
-msgstr ""
+msgstr "Steder"
 
 #: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
-#, fuzzy
 msgid "Recent"
-msgstr "procent"
+msgstr "Seneste"
 
 #: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
 msgid "Preferences"
-msgstr ""
+msgstr "Indstillinger"
 
 #: 3.2/specialMenus.js:228
 msgid "About..."
@@ -59,7 +55,7 @@ msgstr "Konfigurér..."
 
 #: 3.2/specialMenus.js:238
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: 3.2/specialMenus.js:272
 msgid "Unpin from Panel"
@@ -83,7 +79,7 @@ msgstr "Opret genvej"
 
 #: 3.2/specialMenus.js:300
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Gendan til fuld uigennemsigtighed"
 
 #: 3.2/specialMenus.js:308
 msgid "Restore"
@@ -103,10 +99,9 @@ msgstr "Maksimér"
 
 #: 3.2/specialMenus.js:335
 msgid "Close others"
-msgstr ""
+msgstr "Luk andre"
 
 #: 3.2/specialMenus.js:345
-#, fuzzy
 msgid "Close all"
 msgstr "Luk alle"
 
@@ -131,7 +126,7 @@ msgstr "Tilsidesætter pseudoklassen for programknappen ved fokus."
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -140,7 +135,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "outlined"
-msgstr ""
+msgstr "kontur"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -149,7 +144,7 @@ msgstr ""
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr ""
+msgstr "svæv"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -157,9 +152,8 @@ msgstr ""
 #. 3.0->settings-schema.json->focusPseudoClass->options
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
-#, fuzzy
 msgid "focus"
-msgstr "Fokuseret"
+msgstr "fokus"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -168,7 +162,7 @@ msgstr "Fokuseret"
 #. 3.0->settings-schema.json->hoverPseudoClass->options
 #. 3.0->settings-schema.json->activePseudoClass->options
 msgid "selected"
-msgstr ""
+msgstr "valgt"
 
 #. 3.2->settings-schema.json->icon-spacing->description
 #. 3.0->settings-schema.json->icon-spacing->description
@@ -336,17 +330,13 @@ msgid "Non-symbolic icons"
 msgstr "Ikke-symbolske ikoner"
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Anvend systemværktøjstip for lukkede programmer"
+msgstr "Anvend systemfavoritter til fastgjorte programmer"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
-msgstr ""
-"Kontrollerer om fastgjorte programmer vises i statusfeltet, hvis de ikke er "
-"åbne."
+msgstr "Kontrollerer om fastgjorte programmer består af systemfavoritlisten."
 
 #. 3.2->settings-schema.json->hover-peek-opacity->description
 #. 3.0->settings-schema.json->hover-peek-opacity->description
@@ -385,49 +375,44 @@ msgstr "Tilsidesætter pseudoklassen for programknapper, når de er aktive."
 
 #. 3.2->settings-schema.json->thumbnailsPage->title
 #. 3.2->settings-schema.json->thumbnailsSection->title
-#, fuzzy
 msgid "Thumbnails"
-msgstr "Miniaturestørrelse"
+msgstr "Miniaturer"
 
 #. 3.2->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "Programknapper"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
-#, fuzzy
 msgid "Hover Peek"
 msgstr "Markørsvævning for smugkig"
 
 #. 3.2->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #. 3.2->settings-schema.json->iconSection->title
-#, fuzzy
 msgid "Icons"
-msgstr "Ikonstørrelse"
+msgstr "Ikoner"
 
 #. 3.2->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "Anbefalede forudindstillinger"
 
 #. 3.2->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "Genvejstaster"
 
 #. 3.2->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "Stil"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
-#, fuzzy
 msgid "Context Menu"
-msgstr "Indstillinger for genvejsmenu"
+msgstr "Genvejsmenu"
 
 #. 3.2->settings-schema.json->themePage->title
-#, fuzzy
 msgid "Theming"
-msgstr "Indstillinger for tema"
+msgstr "Tema"
 
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 3.0->settings-schema.json->animate-thumbnails->description
@@ -442,7 +427,7 @@ msgstr "Når aktiveret vil miniaturer animeres, når de dukker op og forsvinder.
 #. 3.2->settings-schema.json->mintYPreset->description
 #. 3.2->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Mint Y og varianter"
 
 #. 3.2->settings-schema.json->autostart-menu-item->description
 #. 3.0->settings-schema.json->autostart-menu-item->description
@@ -472,16 +457,15 @@ msgstr ""
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Aktivér trækning af programknapper"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "Programknappens bredde"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid "Controls the width of the application button."
-msgstr "Kontrollerer størrelsen på miniaturer."
+msgstr "Kontrollerer programknappens bredde."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 3.0->settings-schema.json->show-recent->description
@@ -566,13 +550,15 @@ msgstr "Justér ikonstørrelse uafhængigt af Cinnamons panelskalering."
 
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "Oplist kun vinduer fra skærmen, som viser denne forekomst"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
 msgstr ""
+"Denne indstilling vil kun få effekt på skærme, som viser en forekomst af "
+"Icing."
 
 #. 3.2->settings-schema.json->number-display->description
 #. 3.0->settings-schema.json->number-display->description
