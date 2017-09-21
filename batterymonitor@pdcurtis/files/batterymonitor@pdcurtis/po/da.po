@@ -7,63 +7,63 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 20:21+0200\n"
-"PO-Revision-Date: 2017-07-07 18:59+0200\n"
+"POT-Creation-Date: 2017-09-21 20:01+0200\n"
+"PO-Revision-Date: 2017-09-21 20:03+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
 #: applet.js:55
 msgid "Ok"
 msgstr "OK"
 
-#: applet.js:165
+#: applet.js:173
 msgid "Waiting"
 msgstr "Venter"
 
-#: applet.js:231
+#: applet.js:239
 msgid "Open Power Statistics"
 msgstr "Åbn strømstatistik"
 
-#: applet.js:237
+#: applet.js:245
 msgid "Open System Monitor"
 msgstr "Åbn systemovervågning"
 
-#: applet.js:246
+#: applet.js:254
 msgid "Housekeeping and System Sub Menu"
 msgstr "Vedligehold og systemundermenu"
 
-#: applet.js:249
+#: applet.js:257
 msgid "View the Changelog"
 msgstr "Vis ændringsloggen"
 
-#: applet.js:255
+#: applet.js:263
 msgid "Open the Help file"
 msgstr "Åbn hjælpfilen"
 
-#: applet.js:261
+#: applet.js:269
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr "Åbn stylesheet.css  (Avanceret funktion)"
 
 #. batterymonitor@pdcurtis->metadata.json->name
-#: applet.js:277
+#: applet.js:285
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batteriovervågning og nedlukning"
 
-#: applet.js:282
-msgid "Note: Alerts not enabled in Settings"
-msgstr "Bemærk: advarsler ikke aktiverede i indstillinger"
+#: applet.js:290
+msgid "Waiting for battery information"
+msgstr "Venter på information om batteriet"
 
-#: applet.js:345
+#: applet.js:353
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
 
-#: applet.js:350
+#: applet.js:358
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -75,33 +75,33 @@ msgstr ""
 " tilslut strømmen eller stop dit arbejde\n"
 "og sluk computeren eller sæt den i hviletilstand"
 
-#: applet.js:367
+#: applet.js:375
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Ved kritisk batteriniveau aktiveres hviletilstand, med mindre strømforsyning "
 "er tilsluttet"
 
-#: applet.js:385
+#: applet.js:393
 msgid "Charge:"
 msgstr "Batteriniveau:"
 
-#: applet.js:385
+#: applet.js:393
 msgid "Alert:"
 msgstr "Advarsel:"
 
-#: applet.js:385
+#: applet.js:393
 msgid "Suspend:"
 msgstr "Hviletilstand:"
 
-#: applet.js:440
+#: applet.js:451
 msgid "Percentage Charge:"
 msgstr "Procent opladt:"
 
-#: applet.js:440
+#: applet.js:451
 msgid "Alert at:"
 msgstr "Advarsel ved:"
 
-#: applet.js:440
+#: applet.js:451
 msgid "Suspend at:"
 msgstr "Sæt i hviletilstand ved:"
 
@@ -183,3 +183,6 @@ msgstr ""
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr "Viser opladningsniveau som procent og tillader advarsler og handlinger"
+
+#~ msgid "Note: Alerts not enabled in Settings"
+#~ msgstr "Bemærk: advarsler ikke aktiverede i indstillinger"
