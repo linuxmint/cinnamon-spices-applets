@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-25 18:44+0200\n"
-"PO-Revision-Date: 2017-06-26 19:05+0200\n"
+"POT-Creation-Date: 2017-09-21 20:23+0200\n"
+"PO-Revision-Date: 2017-09-21 20:28+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
 #: buttons.js:269
 msgid "Please provide your password to uninstall this application"
@@ -46,29 +46,8 @@ msgstr "Fjern"
 msgid "Run with NVIDIA GPU"
 msgstr "Kør med NVIDIA GPU"
 
-#: panel.js:533
-msgid "Gno-Menu: Search Firefox bookmarks disabled"
-msgstr "Gno-Menu: Søgning i Firefox' bogmærker deaktiveret"
-
-#: panel.js:535
-msgid ""
-"If you want to search Firefox bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Hvis du vil søge i Firefox' bogmærker, skal du installere de krævede pakker: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
-
-#: panel.js:541
-msgid "Gno-Menu: Search Midori bookmarks disabled"
-msgstr "Gno-Menu: Søgning i Midoris bogmærker deaktiveret"
-
-#: panel.js:543
-msgid ""
-"If you want to search Midori bookmarks, you must install the required "
-"pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
-msgstr ""
-"Hvis du vil søge i Midoris bogmærker, skal du installere de krævede pakker: "
-"libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Pakken gir1.2-gda-5.0 er nødvendig til bogmærker i Firefox og Midori."
 
 #: panel.js:1578
 msgid "Grid View"
@@ -103,8 +82,8 @@ msgid "Places"
 msgstr "Steder"
 
 #: panel.js:1752
-msgid "Recent"
-msgstr "Seneste"
+msgid "Recent Files"
+msgstr "Seneste filer"
 
 #: panel.js:1757
 msgid "Bookmarks"
@@ -260,18 +239,6 @@ msgstr "Åbn menuen, når jeg flytter markøren hen over den"
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Aktivér åbning af menuen, når markøren føres hen over panelprogrammet"
 
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->description
-msgid "Scale grid icons by available space"
-msgstr "Skalér gitterikoner efter tilgængelig plads"
-
-#. Cinnamenu@json->settings-schema.json->apps-grid-icon-scale->tooltip
-msgid ""
-"This makes the grid icon size variable depending on how many apps are being "
-"shown. This overrides the grid icon size option."
-msgstr ""
-"Dette gør gitterikonstørrelsen variabel afhængig af, hvor mange programmer "
-"der vises. Dette tilsidesætter valget af ikonstørrelse for gitteret."
-
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivér automatisk rulning i programlisten"
@@ -313,3 +280,72 @@ msgstr "En fleksibel menu med formateringsmuligheder og bogmærker."
 #. Cinnamenu@json->metadata.json->name
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
+
+msgid "Show bookmarks and places"
+msgstr "Vis bogmærker og steder"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Vælg om bogmærker og steder skal vises i menuen."
+
+msgid "Show application icons"
+msgstr "Vis programikoner"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Vælg om programmer skal vises med ikoner."
+
+msgid "Show category icons"
+msgstr "Vis kategoriikoner"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Vælg om kategorier skal vises med ikoner."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Aktivér indtastning af filsystemstien i søgefeltet"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Tillader indtastning af stien i menuens søgefelt."
+
+msgid "Show application's description under their titles"
+msgstr "Vis beskrivelse af programmet under deres titler"
+
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr "Vælg om beskrivelse af programmet skal vises på programmets knap."
+
+msgid "Clear List"
+msgstr "Ryd listen"
+
+msgid "No recent documents"
+msgstr "Ingen seneste dokumenter"
+
+#~ msgid "Gno-Menu: Search Firefox bookmarks disabled"
+#~ msgstr "Gno-Menu: Søgning i Firefox' bogmærker deaktiveret"
+
+#~ msgid ""
+#~ "If you want to search Firefox bookmarks, you must install the required "
+#~ "pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+#~ msgstr ""
+#~ "Hvis du vil søge i Firefox' bogmærker, skal du installere de krævede "
+#~ "pakker: libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+
+#~ msgid "Gno-Menu: Search Midori bookmarks disabled"
+#~ msgstr "Gno-Menu: Søgning i Midoris bogmærker deaktiveret"
+
+#~ msgid ""
+#~ "If you want to search Midori bookmarks, you must install the required "
+#~ "pacakages: libgir1.2-gda-5.0 [Ubuntu] or libgda-sqlite [Fedora]"
+#~ msgstr ""
+#~ "Hvis du vil søge i Midoris bogmærker, skal du installere de krævede "
+#~ "pakker: libgir1.2-gda-5.0 [Ubuntu] eller libgda-sqlite [Fedora]"
+
+#~ msgid "Scale grid icons by available space"
+#~ msgstr "Skalér gitterikoner efter tilgængelig plads"
+
+#~ msgid ""
+#~ "This makes the grid icon size variable depending on how many apps are "
+#~ "being shown. This overrides the grid icon size option."
+#~ msgstr ""
+#~ "Dette gør gitterikonstørrelsen variabel afhængig af, hvor mange "
+#~ "programmer der vises. Dette tilsidesætter valget af ikonstørrelse for "
+#~ "gitteret."
