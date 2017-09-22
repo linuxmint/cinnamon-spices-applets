@@ -130,9 +130,9 @@ MyApplet.prototype = {
 			this.set_applet_tooltip(_("Something went wrong"));
 			this.set_applet_label("?");
 			this.set_applet_icon_symbolic_name('mail-read-symbolic');
-			let item = new MailItem(_("INFO: Install python libaries from terminal"),_("How To"),_("guide"),_("You need pip3, 'sudo apt-get install pip3'\nYou need python-feedparser, 'sudo pip3 install feedparser'\nYou need python keyring and python keyring-alt, 'sudo pip3 install keyring' and 'sudo pip3 install keyrings-alt'"));
+			let item = new MailItem(_("INFO: Install python libaries from terminal"),_("How To"),_("guide"),_("You need pip3:") + " 'sudo apt-get install pip3'\n" + _("You need python-feedparser:") + " 'sudo pip3 install feedparser'\n" + _("You need python keyring and python keyring-alt:") + " 'sudo pip3 install keyring' " + _("and") + " 'sudo pip3 install keyrings-alt'");
 			this.menu.addMenuItem(item,0);
-			item = new MailItem(_("INFO: Are you getting this message? You should not!"),_("ERROR"),_("ERROR"),_("Check internet conneciton\nInstall the needed python libaries\nConfigure password correctly"));
+			item = new MailItem(_("INFO: Are you getting this message? You should not!"),_("ERROR"),_("ERROR"),_("Check internet connection\nInstall the needed python libaries\nConfigure password correctly"));
 			this.menu.addMenuItem(item,0);
 			if ("error" in data){
 				item = new MailItem(_("ERROR: Error from json parser"),_(data.error),"https://github.com/linuxmint/cinnamon-spices-applets/tree/master/gmail%40lauritsriple",_(data.info),"https://github.com/linuxmint/cinnamon-spices-applets/tree/master/gmail%40lauritsriple");

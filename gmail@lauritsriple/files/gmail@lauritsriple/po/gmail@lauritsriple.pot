@@ -8,79 +8,84 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 09:41+0800\n"
+"POT-Creation-Date: 2017-09-22 03:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
-#: applet.js:90 applet.js:165
+#: applet.js:86 applet.js:170
 msgid "No new mail"
 msgstr ""
 
-#: applet.js:143
+#: applet.js:130
 msgid "Something went wrong"
 msgstr ""
 
-#: applet.js:146
-msgid "Install python libaries from terminal"
+#: applet.js:133
+msgid "INFO: Install python libaries from terminal"
 msgstr ""
 
-#: applet.js:146
+#: applet.js:133
 msgid "How To"
 msgstr ""
 
-#: applet.js:146
+#: applet.js:133
 msgid "guide"
 msgstr ""
 
-#: applet.js:146
-msgid ""
-"You need pip3, 'sudo apt-get install pip3'\n"
-"You need python-feedparser, 'sudo pip3 install feedparser'\n"
-"You need python keyring and python keyring-alt, 'sudo pip3 install keyrings' and 'sudo pip3 install keyrings-alt'"
+#: applet.js:133
+msgid "You need pip3:"
 msgstr ""
 
-#: applet.js:148
-msgid "Could not get json from python"
+#: applet.js:133
+msgid "You need python-feedparser:"
 msgstr ""
 
-#: applet.js:148
+#: applet.js:133
+msgid "You need python keyring and python keyring-alt:"
+msgstr ""
+
+#: applet.js:133
+msgid "and"
+msgstr ""
+
+#: applet.js:135
+msgid "INFO: Are you getting this message? You should not!"
+msgstr ""
+
+#: applet.js:135
 msgid "ERROR"
 msgstr ""
 
-#: applet.js:148
+#: applet.js:135
 msgid ""
-"Check internet conneciton\n"
+"Check internet connection\n"
 "Install the needed python libaries\n"
 "Configure password correctly"
 msgstr ""
 
-#: applet.js:156
+#: applet.js:138
+msgid "ERROR: Error from json parser"
+msgstr ""
+
+#: applet.js:161
 msgid "New mail"
 msgstr ""
 
-#: applet.js:158
+#: applet.js:163
 msgid "New mails"
 msgstr ""
 
-#: applet.js:167
+#: applet.js:172
 msgid "No new mails"
 msgstr ""
 
-#: applet.js:167
+#: applet.js:172
 msgid "Have a nice day"
-msgstr ""
-
-#. gmail@lauritsriple->metadata.json->description
-msgid "Shows most recent mails, and how many unread messages you have."
-msgstr ""
-
-#. gmail@lauritsriple->metadata.json->name
-msgid "GmailNotifier"
 msgstr ""
 
 #. gmail@lauritsriple->settings-schema.json->settings-username->description
@@ -116,4 +121,12 @@ msgstr ""
 
 #. gmail@lauritsriple->settings-schema.json->demo-button->tooltip
 msgid "Click to save username and password"
+msgstr ""
+
+#. gmail@lauritsriple->metadata.json->description
+msgid "Shows most recent mails, and how many unread messages you have."
+msgstr ""
+
+#. gmail@lauritsriple->metadata.json->name
+msgid "GmailNotifier"
 msgstr ""
