@@ -4,11 +4,7 @@ const Util = imports.misc.util;
 const Main = imports.ui.main;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-try {
-    const Settings = imports.ui.settings;
-} catch (e) {
-    // No settings available, use fallbacks
-}
+const Settings = imports.ui.settings;
 
 const UUID = 'screen-inhibit@mtwebster';
 const Gettext = imports.gettext;
@@ -132,7 +128,7 @@ MyApplet.prototype = {
 
     _screen_menu: function() {
         if (GLib.find_program_in_path("cinnamon-control-center")) {
-            Util.spawn(['cinnamon-settings', 'power']);
+            Util.spawn(['cinnamon-settings', 'screensaver']);
         }
     },
 
@@ -145,11 +141,11 @@ MyApplet.prototype = {
         } else {
             try {
                 this._sessionProxy.InhibitRemote("inhibitor-screen-inhibit@mtwebster",
-                                                 0, 
+                                                 0,
                                                  "inhibit mode",
                                                  9,
                                                  Lang.bind(this, this._onInhibit));
-                this.set_applet_tooltip(INHIBIT_TT); 
+                this.set_applet_tooltip(INHIBIT_TT);
                 this.inhibited = true;
             } catch(e) {
             }
