@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-25 11:02+0100\n"
+"POT-Creation-Date: 2017-09-22 04:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,33 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:92
+#: applet.js:109
 msgid "Places and bookmarks"
 msgstr ""
 
-#: applet.js:99
+#: applet.js:116
 msgid "Refresh bookmarks..."
 msgstr ""
 
-#: applet.js:102
+#: applet.js:119
 msgid "Change default programs..."
 msgstr ""
 
-#: applet.js:146
+#: applet.js:163
 msgid "Computer"
 msgstr ""
 
-#: applet.js:154
+#: applet.js:171
 msgid "File System"
-msgstr ""
-
-#. places-with-terminal@mtwebster->metadata.json->description
-msgid ""
-"Access your places and bookmarks, or launch a terminal at that location"
-msgstr ""
-
-#. places-with-terminal@mtwebster->metadata.json->name
-msgid "Places with Terminal Launcher"
 msgstr ""
 
 #. places-with-terminal@mtwebster->settings-schema.json->show-
@@ -53,4 +44,13 @@ msgstr ""
 
 #. places-with-terminal@mtwebster->settings-schema.json->icon->description
 msgid "icon"
+msgstr ""
+
+#. places-with-terminal@mtwebster->metadata.json->description
+msgid ""
+"Access your places and bookmarks, or launch a terminal at that location"
+msgstr ""
+
+#. places-with-terminal@mtwebster->metadata.json->name
+msgid "Places with Terminal Launcher"
 msgstr ""
