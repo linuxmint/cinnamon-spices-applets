@@ -521,7 +521,7 @@ AppThumbnailHoverMenu.prototype = {
         this.shouldClose = true;
         this.close();
       },
-      metaWindows: () => this.ready && !this.isOpen ? setTimeout(() => this._refresh(true), 0) : null,
+      metaWindows: () => this.ready ? setTimeout(() => this._refresh(true), 0) : null,
       unfocusOthers: (metaWindowString) => {
         if (this.willUnmount) {
           return;
@@ -932,6 +932,9 @@ WindowThumbnail.prototype = {
   },
 
   handleFavorite: function () {
+    if (!this.groupState) {
+      return;
+    }
     if (this.groupState.metaWindows.length > 0) {
       this._refresh(this.metaWindow, this.groupState.metaWindows);
     }

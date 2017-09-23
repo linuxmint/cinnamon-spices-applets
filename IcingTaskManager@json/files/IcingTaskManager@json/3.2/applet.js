@@ -4,7 +4,9 @@
 //   Kurt Rottmann <kurtrottmann@gmail.com>
 //   Jason Siefken
 //   Josh hess <jake.phy@gmail.com>
-// Taking code from
+// Partly based on code from the Cinnamon window list applet,
+// Window List with App Grouping applet, and:
+// Cinnamon window list applet, and
 // Copyright (C) 2011 R M Yorston
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
@@ -25,12 +27,13 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, isEqual, constants, AppList, setTimeout, store;
+let each, isEqual, constants, AppList, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
   isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
+  unref = utils.unref;
   constants = require('./constants').constants;
   AppList = require('./appList').AppList;
   store = require('./store');
@@ -39,6 +42,7 @@ if (typeof require !== 'undefined') {
   each = AppletDir.utils.each;
   isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
+  unref = AppletDir.utils.unref;
   constants = AppletDir.constants.constants;
   AppList = AppletDir.appList.AppList;
   store = AppletDir.store_mozjs24;
@@ -347,6 +351,9 @@ MyApplet.prototype = {
   },
 
   on_applet_added_to_panel: function() {
+    if (this.state.appletReady && this.state.panelEditMode) {
+      return;
+    }
     this.updateMonitorWatchlist(true);
     // Query apps for the current workspace
     this._onSwitchWorkspace();
@@ -400,10 +407,7 @@ MyApplet.prototype = {
 
     this.actor.destroy();
     this.state.destroy();
-    let props = Object.keys(this);
-    each(props, (propKey)=>{
-      this[propKey] = undefined;
-    });
+    unref(this);
   },
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.
