@@ -1,31 +1,31 @@
 {
   "layout": {
     "type" : "layout",
-    "pages" : ["panelPage", "thumbnailsPage", "contextMenuPage", "themePage"],
+    "pages": ["panelPage", "thumbnailsPage", "contextMenuPage", "themePage"],
     "panelPage": {
       "type" : "page",
       "title" : "Panel",
-      "sections" : ["appButtonsSection", "hotKeysSection"]
+      "sections": ["appButtonsSection", "hotKeysSection"]
     },
     "thumbnailsPage": {
       "type" : "page",
       "title" : "Thumbnails",
-      "sections" : ["thumbnailsSection", "hoverPeekSection"]
+      "sections": ["thumbnailsSection", "hoverPeekSection"]
     },
     "contextMenuPage": {
       "type" : "page",
       "title" : "Context Menu",
-      "sections" : ["contextMenuSection"]
+      "sections": ["contextMenuSection"]
     },
     "themePage": {
       "type" : "page",
       "title" : "Theming",
-      "sections" : ["stylingSection", "iconSection", "presetSection"]
+      "sections": ["stylingSection", "iconSection", "presetSection"]
     },
     "appButtonsSection": {
       "type" : "section",
       "title" : "App Buttons",
-      "keys" : [
+      "keys": [
         "app-button-width",
         "number-display",
         "title-display",
@@ -43,7 +43,7 @@
     "hotKeysSection": {
       "type" : "section",
       "title" : "Hot Keys",
-      "keys" : [
+      "keys": [
         "cycleMenusHotkey",
         "show-apps-order-hotkey",
         "show-apps-order-timeout"
@@ -52,9 +52,11 @@
     "thumbnailsSection": {
       "type" : "section",
       "title" : "Thumbnails",
-      "keys" : [
+      "keys": [
         "thumbnail-timeout",
         "thumbnail-size",
+        "thumbnail-close-button-size",
+        "thumbnail-padding",
         "show-thumbnails",
         "animate-thumbnails",
         "vertical-thumbnails",
@@ -66,7 +68,7 @@
     "hoverPeekSection": {
       "type" : "section",
       "title" : "Hover Peek",
-      "keys" : [
+      "keys": [
         "enable-hover-peek",
         "hover-peek-time",
         "hover-peek-opacity"
@@ -75,7 +77,7 @@
     "contextMenuSection": {
       "type" : "section",
       "title" : "",
-      "keys" : [
+      "keys": [
         "show-recent",
         "firefox-menu",
         "menuItemType",
@@ -86,7 +88,7 @@
     "stylingSection": {
       "type" : "section",
       "title" : "Styling",
-      "keys" : [
+      "keys": [
         "show-active",
         "close-button-style",
         "hoverPseudoClass",
@@ -97,7 +99,7 @@
     "iconSection": {
       "type" : "section",
       "title" : "Icons",
-      "keys" : [
+      "keys": [
         "icon-spacing",
         "enable-iconSize",
         "icon-size"
@@ -106,7 +108,7 @@
     "presetSection": {
       "type" : "section",
       "title" : "Recommended Presets",
-      "keys" : [
+      "keys": [
         "mintYPreset"
       ]
     }
@@ -211,7 +213,7 @@
   },
   "app-button-width": {
     "type": "spinbutton",
-    "default": 31,
+    "default": 33,
     "min": 1,
     "max": 250,
     "step": 2,
@@ -238,6 +240,26 @@
     "units": "size",
     "description": "Thumbnail size",
     "tooltip": "Controls the size of the thumbnails."
+  },
+  "thumbnail-close-button-size": {
+    "type": "spinbutton",
+    "default": 16,
+    "min": 8,
+    "max": 32,
+    "step": 1,
+    "units": "px",
+    "description": "Close button size",
+    "tooltip": "Controls how large the thumbnail close button is."
+  },
+  "thumbnail-padding": {
+    "type": "spinbutton",
+    "default": 1,
+    "min": 0,
+    "max": 12,
+    "step": 1,
+    "units": "milliseconds",
+    "description": "Thumbnail padding",
+    "tooltip": "Controls how much space will be around the window preview thumbnails."
   },
   "show-thumbnails": {
     "type": "checkbox",
@@ -271,7 +293,7 @@
   },
   "include-all-windows": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Include all app windows",
     "tooltip": "Controls whether or not thumbnails for smalller child windows, such as exit confirmations and file dialogues will be included in the thumbnail list."
   },
@@ -325,7 +347,7 @@
   "hover-peek-time": {
     "type": "spinbutton",
     "dependency": "enable-hover-peek",
-    "default": 150,
+    "default": 300,
     "min": 0,
     "max": 1000,
     "step": 5,

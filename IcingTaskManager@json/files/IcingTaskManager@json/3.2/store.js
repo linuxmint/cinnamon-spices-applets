@@ -1,29 +1,44 @@
 
-function queryCollection(collection, query, options = {
-  indexOnly: false,
-  filter: false,
-  findElementInArray: false
-}) {
-  let queryKeys = Object.keys(query);
+function queryCollection(
+  collection = [],
+  query = {},
+  options = {
+    indexOnly: false,
+    filter: false,
+    findElementInArray: false
+  }
+) {
+  let queryKeys = typeof query === 'object' ? Object.keys(query) : null;
   let filterResult = [];
-  for (let i = 0; i < collection.length; i++) {
-    let matches = 0;
-    for (let z = 0; z < queryKeys.length; z++) {
-      let argument;
-      if (options.findElementInArray && Array.isArray(collection[i][queryKeys[z]])) {
-        argument = collection[i][queryKeys[z]].indexOf(query[queryKeys[z]]) > -1;
+
+  function handleMatch(argument, i, matches) {
+    if (argument) {
+      if (options.filter) {
+        filterResult.push(collection[i]);
       } else {
-        argument = collection[i][queryKeys[z]] === query[queryKeys[z]];
-      }
-      if (argument) {
-          if (options.filter) {
-            filterResult.push(collection[i]);
-          } else {
-            matches += 1;
-          }
+        matches += 1;
       }
     }
-    if (!options.filter && matches === queryKeys.length) {
+    return matches;
+  }
+
+  for (let i = 0; i < collection.length; i++) {
+    let matches = 0;
+    if (!queryKeys) {
+      matches = handleMatch(query(collection[i]), i, matches);
+    } else {
+      for (let z = 0; z < queryKeys.length; z++) {
+        let argument;
+        if (options.findElementInArray && Array.isArray(collection[i][queryKeys[z]])) {
+          argument = collection[i][queryKeys[z]].indexOf(query[queryKeys[z]]) > -1;
+        } else {
+          argument = collection[i][queryKeys[z]] === query[queryKeys[z]];
+        }
+        matches = handleMatch(argument, i, matches);
+      }
+    }
+    if (!options.filter
+      && ((queryKeys && matches === queryKeys.length) || (matches > 0 && !queryKeys))) {
       return options.indexOnly ? i : collection[i];
     }
   }
@@ -36,8 +51,7 @@ function queryCollection(collection, query, options = {
 function intersect(array1, array2, difference = false) {
   let result = [];
   for (let i = 0; i < array1.length; i++) {
-    if ((!difference && array2.indexOf(array1[i]) > -1)
-      || (difference && array2.indexOf(array1[i]) === -1)) {
+    if ((!difference && array2.indexOf(array1[i]) > -1) || (difference && array2.indexOf(array1[i]) === -1)) {
       result.push(array1[i]);
     }
   }
@@ -50,10 +64,7 @@ function clone(object, refs = [], cache = null) {
   }
   let copy;
 
-  if (!object
-    || typeof object !== 'object'
-    || object.prototype
-    || object.toString().indexOf('[0x') > -1) {
+  if (!object || typeof object !== 'object' || object.prototype || object.toString().indexOf('[0x') > -1) {
     return object;
   }
 
@@ -64,11 +75,11 @@ function clone(object, refs = [], cache = null) {
   }
 
   if (Array.isArray(object) || object instanceof Array) {
-
     refs.push(object);
     copy = [];
     for (let i = 0; i < object.length; i++) {
-      if (refs.indexOf(object[i]) >= 0) { // circular
+      if (refs.indexOf(object[i]) >= 0) {
+        // circular
         return null;
       }
       copy[i] = clone(object[i], refs, cache);
@@ -103,7 +114,7 @@ function clone(object, refs = [], cache = null) {
 }
 
 function storeError(method, key, message) {
-  return new Error('[store -> '  + method + ' -> ' + key + '] ' + message);
+  return new Error('[store -> ' + method + ' -> ' + key + '] ' + message);
 }
 
 function getByPath(key, state) {
@@ -120,13 +131,13 @@ function getByPath(key, state) {
 
 function init(state = {}, listeners = []) {
   const publicAPI = Object.freeze({
-    get: get,
-    set: set,
-    exclude: exclude,
-    trigger: trigger,
-    connect: connect,
-    disconnect: disconnect,
-    destroy: destroy
+    get,
+    set,
+    exclude,
+    trigger,
+    connect,
+    disconnect,
+    destroy
   });
 
   function getAPIWithObject(object) {
@@ -142,7 +153,11 @@ function init(state = {}, listeners = []) {
         continue;
       }
       if (listeners[i].callback) {
-        listeners[i].callback(commonKeys);
+        let partialState = {};
+        for (let z = 0; z < listeners[i].keys.length; z++) {
+          partialState[listeners[i].keys[z]] = state[listeners[i].keys[z]];
+        }
+        listeners[i].callback(partialState);
       }
     }
   }
@@ -159,8 +174,19 @@ function init(state = {}, listeners = []) {
 
   function set(object) {
     let keys = Object.keys(object);
+    let changed = false;
     for (let i = 0; i < keys.length; i++) {
-      state[keys[i]] = object[keys[i]];
+      if (typeof state[keys[i]] === 'undefined') {
+        throw storeError('set', keys[i], 'Property not found.');
+      }
+      if (state[keys[i]] !== object[keys[i]]) {
+        changed = true;
+        state[keys[i]] = object[keys[i]];
+      }
+    }
+
+    if (!changed) {
+      return;
     }
 
     if (listeners.length > 0) {
@@ -182,10 +208,17 @@ function init(state = {}, listeners = []) {
 
   function trigger() {
     const [key, ...args] = Array.from(arguments);
-    let matchedListeners = queryCollection(listeners, {keys: key}, {
-      findElementInArray: true,
-      filter: true
-    });
+    let matchedListeners = queryCollection(
+      listeners,
+      {keys: key},
+      {
+        findElementInArray: true,
+        filter: true
+      }
+    );
+    if (matchedListeners.length === 0) {
+      throw storeError('trigger', key, 'Action not found.');
+    }
     for (let i = 0; i < matchedListeners.length; i++) {
       if (matchedListeners[i].callback) {
         return matchedListeners[i].callback(...args);
@@ -197,23 +230,25 @@ function init(state = {}, listeners = []) {
     let listener;
 
     if (callback) {
-      listener = queryCollection(listeners, {callback: callback});
+      listener = queryCollection(listeners, {callback});
     }
     if (listener) {
       let newKeys = intersect(keys, listener.keys, true);
       listener.keys.concat(newKeys);
     } else {
-      listeners.push({keys: keys, callback: callback});
+      listeners.push({keys, callback});
     }
   }
 
   function connect(actions, callback) {
-    if (Array.isArray(actions) || typeof actions === 'string') {
+    if (Array.isArray(actions)) {
       _connect(actions, callback);
+    } else if (typeof actions === 'string') {
+      _connect([actions], callback);
     } else if (typeof actions === 'object') {
       let keys = Object.keys(actions);
       for (let i = 0; i < keys.length; i++) {
-        _connect(keys[i], actions[keys[i]]);
+        _connect([keys[i]], actions[keys[i]]);
       }
     }
 
@@ -221,10 +256,14 @@ function init(state = {}, listeners = []) {
   }
 
   function disconnect(key) {
-    let listenerIndex = queryCollection(listeners, {keys: key}, {
-      findElementInArray: true,
-      indexOnly: true
-    });
+    let listenerIndex = queryCollection(
+      listeners,
+      {keys: key},
+      {
+        findElementInArray: true,
+        indexOnly: true
+      }
+    );
     if (listenerIndex === -1) {
       throw storeError('disconnect', key, 'Invalid disconnect key.');
     }
@@ -244,4 +283,3 @@ function init(state = {}, listeners = []) {
 
   return getAPIWithObject(state);
 }
-

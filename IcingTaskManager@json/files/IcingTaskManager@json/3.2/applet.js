@@ -9,144 +9,40 @@
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
 
-const Applet = imports.ui.applet;
-const Lang = imports.lang;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Main = imports.ui.main;
-const Util = imports.misc.util;
-const DND = imports.ui.dnd;
-const Settings = imports.ui.settings;
-const Gettext = imports.gettext;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gdk = imports.gi.Gdk;
 const Meta = imports.gi.Meta;
+const St = imports.gi.St;
+const Gettext = imports.gettext;
+const Lang = imports.lang;
+const Applet = imports.ui.applet;
+const Cinnamon = imports.gi.Cinnamon;
+const Main = imports.ui.main;
+const DND = imports.ui.dnd;
+const Settings = imports.ui.settings;
+const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, isEqual, constants, AppList, setTimeout, defer, store;
+let each, isEqual, constants, AppList, setTimeout, store;
 if (typeof require !== 'undefined') {
-  each = require('./each').each;
-  isEqual = require('./isEqual').isEqual;
+  const utils = require('./utils');
+  each = utils.each;
+  isEqual = utils.isEqual;
+  setTimeout = utils.setTimeout;
   constants = require('./constants').constants;
   AppList = require('./appList').AppList;
-  const timers = require('./timers');
-  setTimeout = timers.setTimeout;
-  defer = timers.defer;
   store = require('./store');
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-  each = AppletDir.each.each;
-  isEqual = AppletDir.isEqual.isEqual;
+  each = AppletDir.utils.each;
+  isEqual = AppletDir.utils.isEqual;
+  setTimeout = AppletDir.utils.setTimeout;
   constants = AppletDir.constants.constants;
   AppList = AppletDir.appList.AppList;
-  setTimeout = AppletDir.timers.setTimeout;
-  defer = AppletDir.timers.defer;
-  store = AppletDir.store;
+  store = AppletDir.store_mozjs24;
 }
-
-if (!Array.prototype.findIndex) {
-  Object.defineProperty(Array.prototype, 'findIndex', {
-    value: function(predicate) {
-      // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      let o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      let len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      let thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      let k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
-        // d. If testResult is true, return k.
-        let kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return k;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return -1.
-      return -1;
-    }
-  });
-}
-
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
-if (!Array.prototype.find) {
-  Object.defineProperty(Array.prototype, 'find', {
-    value: function(predicate) {
-     // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      var o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      var thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      var k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-        // d. If testResult is true, return kValue.
-        var kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return kValue;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return undefined.
-      return undefined;
-    }
-  });
-}
-
-// Some functional programming tools
-const range = function (a, b) {
-  let ret = [];
-  // if b is unset, we want a to be the upper bound on the range
-  if (b === null || b === undefined) { [a, b] = [0, a];
-  }
-
-  for (let i = a; i < b; i++) {
-    ret.push(i);
-  }
-  return ret;
-};
 
 function PinnedFavs () {
   this._init.apply(this, arguments);
@@ -160,7 +56,7 @@ PinnedFavs.prototype = {
   },
 
   _reload: function () {
-    const appSystem = this.params.trigger('getAppSystem');
+    const appSystem = this.params.state.trigger('getAppSystem');
     if (this.params.signals.isConnected('changed::favorite-apps', global.settings)) {
       this.params.signals.disconnect('changed::favorite-apps', global.settings);
     }
@@ -194,16 +90,17 @@ PinnedFavs.prototype = {
 
   triggerUpdate: function (appId, pos, isFavoriteApp) {
     let currentAppList = this.params.state.trigger('getCurrentAppList');
-    let refApp = currentAppList.appList.findIndex(appGroup => appGroup.appId === appId);
+    let refApp = currentAppList.appList.findIndex(appGroup => appGroup.groupState.appId === appId);
     if (refApp > -1) {
       // Destroy pinned app
-      if (!isFavoriteApp && currentAppList.appList[refApp].groupState.metaWindows.length === 0) {
-        currentAppList.appList[refApp].destroy();
+      if (!isFavoriteApp && currentAppList.appList[refApp] && currentAppList.appList[refApp].groupState.metaWindows.length === 0) {
+        currentAppList.appList[refApp].destroy(true);
+        currentAppList.appList[refApp] = undefined;
         currentAppList.appList.splice(refApp, 1);
       } else {
         // Move actor to index, trigger favorite state change
-        currentAppList.appList[refApp]._isFavorite(isFavoriteApp);
-        currentAppList.managerContainer.set_child_at_index(currentAppList.appList[refApp].actor, pos);
+        currentAppList.appList[refApp].groupState.set({isFavoriteApp: isFavoriteApp});
+        currentAppList.actor.set_child_at_index(currentAppList.appList[refApp].actor, pos);
       }
     }
   },
@@ -245,7 +142,7 @@ PinnedFavs.prototype = {
   },
 
   addFavorite: function (opts={appId: null, app: null, pos: -1}) {
-    const appSystem = this.params.trigger('appSystem');
+    const appSystem = this.params.state.trigger('getAppSystem');
     if (!opts.app) {
       opts.app = appSystem.lookup_app(opts.appId);
     }
@@ -302,15 +199,8 @@ MyApplet.prototype = {
   __proto__: Applet.Applet.prototype,
 
   _init: function (metadata, orientation, panel_height, instance_id) {
-
-
     Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
-    // Remove unnecessary reference for ITM
-    this.actor._delegate = {
-      acceptDrop: (s, a, x) => this.acceptDrop(s, a, x),
-      handleDragOver: (s, a, x, y) => this.handleDragOver(s, a, x, y),
-      _clearDragPlaceholder: () => this._clearDragPlaceholder()
-    };
+
     this.tracker = Cinnamon.WindowTracker.get_default();
     this.recentManager = Gtk.RecentManager.get_default();
     this.appLists = [];
@@ -318,6 +208,7 @@ MyApplet.prototype = {
     this.state = store.init({
       uuid: metadata.uuid,
       orientation: orientation,
+      isHorizontal: orientation === St.Side.TOP || orientation === St.Side.BOTTOM,
       panel_height: panel_height,
       instance_id: instance_id,
       monitorWatchList: [],
@@ -328,9 +219,12 @@ MyApplet.prototype = {
       dragPlaceholder: null,
       dragPlaceholderPos: -1,
       animatingPlaceholdersCount: 0,
+      appletReady: false,
+      willUnmount: false,
       settings: {},
       homeDir: GLib.get_home_dir(),
-      recentItems: this.recentManager.get_items().sort(function (a, b) { return a.get_modified() - b.get_modified(); }).reverse(),
+      overlayPreview: null,
+      lastCycled: null
     });
 
     // key-function pairs of actions that can be triggered from the store's callback queue. This allows ITM to avoid
@@ -348,38 +242,47 @@ MyApplet.prototype = {
       getCurrentAppList: () => this.getCurrentAppList(),
       _clearDragPlaceholder: () => this._clearDragPlaceholder(),
       getAutoStartApps: () => this.getAutoStartApps(),
-      setVertical: (add) => add ? this.actor.add_style_class_name('vertical') : this.actor.remove_style_class_name('vertical'),
+      getRecentItems: () => Gtk.RecentManager.get_default()
+        .get_items()
+        .sort(function (a, b) { return a.get_modified() - b.get_modified(); })
+        .reverse(),
       addFavorite: (obj) => this.pinnedFavorites.addFavorite(obj),
       removeFavorite: (id) => this.pinnedFavorites.removeFavorite(id),
       getFavorites: () => this.pinnedFavorites._favorites,
+      setThumbnailActorStyle: (actor) => actor.set_style('border-width:2px;padding:' + this.state.settings.thumbnailPadding + 'px;'),
+      setThumbnailCloseButtonStyle: (button) => {
+        let size = this.state.settings.thumbnailCloseButtonSize;
+        button.width = size;
+        button.height = size;
+        let left = global.ui_scale > 1 ? -10 : 0;
+        button.style = 'padding: 0px; width: ' + size + 'px; height: ' + size + 'px; max-width: ' + size + 'px; max-height: ' + size + 'px; '
+          + '-cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: ' + size + 'px ' + size + 'px;';
+          button.style_class = 'window-close';
+      },
       openAbout: () => this.openAbout(),
       configureApplet: () => this.configureApplet()
     });
 
     this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
+    this.bindSettings();
     this.signals = new SignalManager.SignalManager(this);
     this.appSystem = this.state.trigger('getAppSystem');
-
-    this.bindSettings();
     this.pinnedFavorites = new PinnedFavs({
       signals: this.signals,
       settings: this.settings,
       state: this.state,
-      trigger: this.state.trigger
     });
-    this.appletEnabled = false; // this is always false!
     this.actor.set_track_hover(false);
-    this._box = new St.Bin();
-    this.actor.add(this._box);
     // Declare vertical panel compatibility
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this.execInstallLanguage();
     Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + '/.local/share/locale');
 
+    this.getAutoStartApps();
     this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
     this.signals.connect(global.screen, 'notify::n-workspaces', Lang.bind(this, this._onWorkspaceCreatedOrDestroyed));
     this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
-    this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, defer(this.on_applet_instances_changed)));
+    this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, this.on_applet_instances_changed));
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.display, 'window-demands-attention', Lang.bind(this, this._updateAttentionState));
     this.signals.connect(global.settings, 'changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
@@ -388,11 +291,6 @@ MyApplet.prototype = {
     this.signals.connect(Main.expo, 'showing', Lang.bind(this, this._onOverviewShow));
     this.signals.connect(Main.expo, 'hiding', Lang.bind(this, this._onOverviewHide));
     this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this.refreshCurrentAppList));
-
-    this.getAutoStartApps();
-    // Query apps for the current workspace
-    this._onSwitchWorkspace();
-    this._bindAppKey();
   },
 
   bindSettings: function() {
@@ -417,23 +315,24 @@ MyApplet.prototype = {
       {key: 'hover-peek-time', value: 'peekTime', cb: null},
       {key: 'thumbnail-timeout', value: 'thumbTimeout', cb: null},
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
+      {key: 'thumbnail-close-button-size', value: 'thumbnailCloseButtonSize', cb: this._updateThumbnailCloseButtonSize},
+      {key: 'thumbnail-padding', value: 'thumbnailPadding', cb: this._updateThumbnailPadding},
       {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateThumbnailOrder},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
-      {key: 'close-button-style', value: 'thumbCloseBtnStyle', cb: this.refreshCurrentAppList},
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
-      {key: 'title-display', value: 'titleDisplay', cb: this.refreshCurrentAppList},
-      {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacingOnAllAppLists},
-      {key: 'enable-iconSize', value: 'enableIconSize', cb: this._updateIconSizes},
-      {key: 'icon-size', value: 'iconSize', cb: this._updateIconSizes},
+      {key: 'title-display', value: 'titleDisplay', cb: this._updateTitleDisplay},
+      {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacing},
+      {key: 'enable-iconSize', value: 'enableIconSize', cb: this._updateActorAttributes},
+      {key: 'icon-size', value: 'iconSize', cb: this._updateActorAttributes},
       {key: 'show-recent', value: 'showRecent', cb: null},
       {key: 'menuItemType', value: 'menuItemType', cb: null},
       {key: 'firefox-menu', value: 'firefoxMenu', cb: null},
       {key: 'autostart-menu-item', value: 'autoStart', cb: null},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: null},
-      {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateAppButtonWidths},
+      {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateActorAttributes},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
       {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
     ];
@@ -447,72 +346,55 @@ MyApplet.prototype = {
     }
   },
 
+  on_applet_added_to_panel: function() {
+    this.updateMonitorWatchlist(true);
+    // Query apps for the current workspace
+    this._onSwitchWorkspace();
+    this._bindAppKey();
+    this._updateSpacing();
+    this.state.set({appletReady: true});
+  },
+
   on_applet_instances_changed: function(loaded) {
     if (!loaded) {
       return;
     }
-    let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
-    let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
-    let instances = Main.AppletManager.getRunningInstancesForUuid(this.state.uuid);
-    /* Simple cases */
-    if (numberOfMonitors === 1) {
-      this.state.monitorWatchList = [Main.layoutManager.primaryIndex];
-    } else if (instances.length > 1 && !onPrimary) {
-      this.state.monitorWatchList = [this.panel.monitorIndex];
-    } else {
-      /* This is an instance on the primary monitor - it will be
-       * responsible for any monitors not covered individually.  First
-       * convert the instances list into a list of the monitor indices,
-       * and then add the monitors not present to the monitor watch list
-       * */
-      this.state.monitorWatchList = [this.panel.monitorIndex];
-      for (let i = 0; i < instances.length; i++) {
-        if (!instances[i]) {
-          continue;
-        }
-        instances[i] = instances[i].panel.monitorIndex;
-      }
-
-      for (let i = 0; i < numberOfMonitors; i++) {
-        if (instances.indexOf(i) === -1) {
-          this.state.monitorWatchList.push(i);
-        }
-      }
-    }
-    this.state.set({monitorWatchList: this.state.monitorWatchList});
-    this.refreshCurrentAppList();
+    this.updateMonitorWatchlist();
   },
 
   on_panel_edit_mode_changed: function () {
     this.state.set({panelEditMode: !this.state.panelEditMode});
-    global.log(this.state.get('panelEditMode'), this.state.panelEditMode);
     each(this.appLists, (workspace)=>{
       each(workspace.appList, (appGroup)=>{
         appGroup.hoverMenu.actor.reactive = !this.state.panelEditMode;
-        appGroup.hoverMenu.actor.reactive = !this.state.panelEditMode;
         appGroup.rightClickMenu.actor.reactive = !this.state.panelEditMode;
-        appGroup._appButton.actor.reactive = !this.state.panelEditMode;
+        appGroup.actor.reactive = !this.state.panelEditMode;
       });
     });
   },
 
   on_panel_height_changed: function() {
-    this.refreshCurrentAppList();
+    this._updateActorAttributes();
   },
 
   on_orientation_changed: function(orientation) {
-    this.state.set({orientation: orientation});
+    this.state.set({
+      orientation: orientation,
+      isHorizontal: orientation === St.Side.TOP || orientation === St.Side.BOTTOM
+    });
+    if (this.state.isHorizontal) {
+      this.actor.remove_style_class_name('vertical');
+    } else {
+      this.actor.add_style_class_name('vertical');
+      this.actor.set_important(true);
+    }
   },
 
   on_applet_removed_from_panel: function() {
+    this.state.set({willUnmount: true});
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
     for (let i = 0, len = this.appLists.length; i < len; i++) {
-      let children = this.appLists[i].managerContainer.get_children();
-      for (let z = 0, len = children.length; z < len; z++) {
-        this.appLists[i].managerContainer.remove_actor(children[z]);
-        children[z].destroy();
-      }
       this.appLists[i].destroy();
     }
 
@@ -575,6 +457,41 @@ MyApplet.prototype = {
     this.getCurrentAppList()._cycleMenus();
   },
 
+  updateMonitorWatchlist: function(init) {
+    let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
+    let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
+    let instances = Main.AppletManager.getRunningInstancesForUuid(this.state.uuid);
+    /* Simple cases */
+    if (numberOfMonitors === 1) {
+      this.state.monitorWatchList = [Main.layoutManager.primaryIndex];
+    } else if (instances.length > 1 && !onPrimary) {
+      this.state.monitorWatchList = [this.panel.monitorIndex];
+    } else {
+      /* This is an instance on the primary monitor - it will be
+       * responsible for any monitors not covered individually.  First
+       * convert the instances list into a list of the monitor indices,
+       * and then add the monitors not present to the monitor watch list
+       * */
+      this.state.monitorWatchList = [this.panel.monitorIndex];
+      for (let i = 0; i < instances.length; i++) {
+        if (!instances[i]) {
+          continue;
+        }
+        instances[i] = instances[i].panel.monitorIndex;
+      }
+
+      for (let i = 0; i < numberOfMonitors; i++) {
+        if (instances.indexOf(i) === -1) {
+          this.state.monitorWatchList.push(i);
+        }
+      }
+    }
+    this.state.set({monitorWatchList: this.state.monitorWatchList});
+    if (!init) {
+      this.refreshCurrentAppList();
+    }
+  },
+
   refreshCurrentAppList: function(){
     this.appLists[this.state.currentWs]._refreshList();
   },
@@ -600,34 +517,41 @@ MyApplet.prototype = {
     });
   },
 
+  _updateThumbnailPadding: function() {
+    each(this.appLists, (workspace)=>{
+      each(workspace.appList, (appGroup)=>{
+        appGroup.hoverMenu.updateThumbnailPadding();
+      });
+    });
+  },
+
+  _updateThumbnailCloseButtonSize: function() {
+    each(this.appLists, (workspace)=>{
+      each(workspace.appList, (appGroup)=>{
+        appGroup.hoverMenu.updateThumbnailCloseButtonSize();
+      });
+    });
+  },
+
   _updatePseudoClasses: function () {
     each(this.appLists, (workspace)=>{
       each(workspace.appList, (appGroup)=>{
-        appGroup._isFavorite(appGroup.isFavoriteApp);
-        appGroup._appButton.setActiveStatus(appGroup.groupState.metaWindows);
-        appGroup._appButton._onFocusChange();
+        appGroup.groupState.trigger('isFavoriteApp');
+        appGroup.setActiveStatus(appGroup.groupState.metaWindows);
+        appGroup._onFocusChange();
       });
     });
   },
 
-  _updateIconSizes: function () {
+  _updateActorAttributes: function() {
     each(this.appLists, (workspace)=>{
       each(workspace.appList, (appGroup)=>{
-        appGroup._appButton.setIconSize();
-        appGroup._appButton.setIconPadding();
+        appGroup.setActorAttributes();
       });
     });
   },
 
-  _updateAppButtonWidths: function() {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
-        appGroup._appButton.setActorWidth();
-      });
-    });
-  },
-
-  _updateSpacingOnAllAppLists: function() {
+  _updateSpacing: function() {
     each(this.appLists, (workspace)=>{
       workspace._updateSpacing();
     });
@@ -651,8 +575,28 @@ MyApplet.prototype = {
   _updateVerticalThumbnailState: function() {
     each(this.appLists, (workspace)=>{
       each(workspace.appList, (appGroup)=>{
-        appGroup.hoverMenu._setVerticalSetting();
+        if (appGroup && appGroup.hoverMenu) {
+          appGroup.hoverMenu._setVerticalSetting();
+        }
       });
+    });
+  },
+
+  _updateTitleDisplay: function(titleDisplay) {
+    each(this.getCurrentAppList().appList, (appGroup) => {
+      if (appGroup.actor.width === this.state.settings.appButtonWidth
+        || titleDisplay === constants.TitleDisplay.None) {
+        this.refreshCurrentAppList();
+        if (titleDisplay !== constants.TitleDisplay.None) {
+          this._updateTitleDisplay();
+        }
+        return false;
+      }
+      if (titleDisplay === constants.TitleDisplay.Focused) {
+        appGroup.hideLabel(false);
+      } else {
+        appGroup.handleTitleDisplayChange();
+      }
     });
   },
 
@@ -724,19 +668,18 @@ MyApplet.prototype = {
   },
 
   handleDragOver: function (source, actor, x, y) {
-    if (!(source.isDraggableApp || (source instanceof DND.LauncherDraggable))
-      || !this.state.settings.enableDragging
+    if (!this.state.settings.enableDragging
       || this.state.panelEditMode) {
       return DND.DragMotionResult.NO_DROP;
     }
 
-    let children = this.appLists[this.state.currentWs].managerContainer.get_children();
+    let children = this.appLists[this.state.currentWs].actor.get_children();
     let windowPos = children.indexOf(source.actor);
 
     let pos = 0;
 
-    let isVertical = this.appLists[this.state.currentWs].managerContainer.height > this.appLists[this.state.currentWs].managerContainer.width;
-    let axis = isVertical ? [y, 'y1'] : [x, 'x1'];
+    let isHorizontal = this.appLists[this.state.currentWs].actor.height > this.appLists[this.state.currentWs].actor.width;
+    let axis = isHorizontal ? [y, 'y1'] : [x, 'x1'];
     each(children, (child, i)=>{
       if (axis[0] > children[i].get_allocation_box()[axis[1]] + children[i].width / 2) {
         pos = i;
@@ -771,19 +714,12 @@ MyApplet.prototype = {
         fadeIn = true;
       }
 
-      let childWidth;
-      let childHeight;
-      if (source.isDraggableApp) {
-        childWidth = 30;
-        childHeight = 24;
-      } else {
-        childWidth = source.actor.width;
-        childHeight = source.actor.height;
-      }
+      let childWidth = source.actor.width;
+      let childHeight = source.actor.height;
       this.state.dragPlaceholder = new DND.GenericDragPlaceholderItem();
       this.state.dragPlaceholder.child.width = childWidth;
       this.state.dragPlaceholder.child.height = childHeight;
-      this.appLists[this.state.currentWs].managerContainer.insert_child_at_index(this.state.dragPlaceholder.actor, this.state.dragPlaceholderPos);
+      this.appLists[this.state.currentWs].actor.insert_child_at_index(this.state.dragPlaceholder.actor, this.state.dragPlaceholderPos);
 
       if (fadeIn) {
         this.state.dragPlaceholder.animateIn();
@@ -794,38 +730,36 @@ MyApplet.prototype = {
   },
 
   acceptDrop: function (source, actor, x) {
-    if (!(source.isDraggableApp
-      || (source instanceof DND.LauncherDraggable))
-      || this.state.panelEditMode
-      || !this.state.settings.enableDragging) {
+    if (!this.state.settings.enableDragging
+      || this.state.panelEditMode) {
       return false;
     }
-
-    if (!(source.isFavoriteApp || source.wasFavapp || source.isDraggableApp || (source instanceof DND.LauncherDraggable)) || source.isNotFavapp) {
+    if (typeof source.groupState === 'undefined') {
+      let appId = source.isDraggableApp ? source.get_app_id() : source.getId();
+      if (appId) {
+        this.acceptNewLauncher(appId);
+        return true;
+      }
+      return false;
+    }
+    if (!(source.groupState.isFavoriteApp)) {
       if (this.state.dragPlaceholderPos !== -1) {
-        this.appLists[this.state.currentWs].managerContainer.set_child_at_index(source.actor, this.state.dragPlaceholderPos);
+        this.appLists[this.state.currentWs].actor.set_child_at_index(source.actor, this.state.dragPlaceholderPos);
       }
       this._clearDragPlaceholder();
     }
-    this.appLists[this.state.currentWs].managerContainer.set_child_at_index(source.actor, this.state.dragPlaceholderPos);
-
-    let app = source.app;
+    this.appLists[this.state.currentWs].actor.set_child_at_index(source.actor, this.state.dragPlaceholderPos);
 
     // Don't allow favoriting of transient apps
-    if (!app || app.is_window_backed()) {
+    if (!source.groupState.app || source.groupState.app.is_window_backed()) {
       return false;
     }
 
-    let id = app.get_id();
-    if (app.is_window_backed()) {
-      id = app.get_name().toLowerCase() + '.desktop';
-    }
-
-    let refFav = this.pinnedFavorites._favorites.findIndex(favorite => favorite.id === id);
+    let refFav = this.pinnedFavorites._favorites.findIndex(favorite => favorite.id === source.groupState.appId);
     let favPos = this.state.dragPlaceholderPos;
 
     if (favPos === -1) {
-      let children = this.appLists[this.state.currentWs].managerContainer.get_children();
+      let children = this.appLists[this.state.currentWs].actor.get_children();
       let pos = 0;
       for (let i = 0, len = children.length; i < len; i++) {
         if (x > children[i].get_allocation_box().x1 + children[i].width / 2) {
@@ -839,9 +773,13 @@ MyApplet.prototype = {
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
       if (refFav !== -1) {
-        this.pinnedFavorites.moveFavoriteToPos(id, favPos);
+        this.pinnedFavorites.moveFavoriteToPos(source.groupState.appId, favPos);
       } else if (this.state.settings.pinOnDrag) {
-        this.pinnedFavorites.addFavorite({appId: id, app: app, pos: favPos});
+        this.pinnedFavorites.addFavorite({
+          appId: source.groupState.appId,
+          app: source.groupState.app,
+          pos: favPos
+        });
       }
       return false;
     });
@@ -859,6 +797,8 @@ MyApplet.prototype = {
 
   acceptNewLauncher: function (path) {
     this.pinnedFavorites.addFavorite({appId: path, pos: -1});
+    // Need to determine why the favorites setting signal doesn't emit outside the applet actions
+    this._updateFavorites();
   },
 
   _onWorkspaceCreatedOrDestroyed: function (i) {
@@ -905,9 +845,13 @@ MyApplet.prototype = {
     // this.actor can only have one child, so setting the child
     // will automatically unparent anything that was previously there, which
     // is exactly what we want.
-    let list = refWorkspace > -1 ? this.appLists[refWorkspace] : appList;
-    this._box.set_child(list.actor);
-    list._refreshList();
+    let list;
+    if (refWorkspace > -1) {
+      list = this.appLists[refWorkspace];
+    } else {
+      list = appList;
+    }
+    this.actor.add_child(list.actor);
   },
 
   _onOverviewShow: function () {

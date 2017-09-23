@@ -1,5 +1,19 @@
 Changelog
 
+### 6.0.0
+
+  * Reorganized and cleaned up a lot of code.
+  * Disabled listing windows by monitor on the default configuration.
+  * Fixed a couple performance bottlenecks during applet initialization, and cut down the start up time a lot.
+  * Fixed an issue with window titles getting updated too frequently.
+  * Reduced a lot of redundancy in the focused window state handling logic.
+  * Improved performance while switching between title display options.
+  * Improved scaling for thumbnails on vertical panels.
+  * Fixed the progress indicator being visible while inactive on some themes.
+  * Fixed launchers being added through menu applets not being reflected in ITM.
+  * Added support for pinning apps by dragging launchers from menu applets.
+  * Added new thumbnail options for adjusting padding and the close button size.
+
 ### 5.3.3
 
   * Fixed a regression causing pinned unopened icons to have the wrong aspect ratio, or become off-center.
