@@ -133,7 +133,7 @@ AppMenuButtonRightClickMenu.prototype = {
           if (i === this.groupState.lastFocused.get_monitor()) {
             continue;
           }
-          item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? t('Move to the other monitor') : t('Move to monitor ') + (i + 1).toString()});
+          item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? _('Move to the other monitor') : _('Move to monitor ') + (i + 1).toString()});
           connectMonitorEvent(item, i);
           this.addMenuItem(item);
         }
@@ -141,15 +141,15 @@ AppMenuButtonRightClickMenu.prototype = {
       // Workspace
       if ((length = global.screen.n_workspaces) > 1) {
         if (this.groupState.lastFocused.is_on_all_workspaces()) {
-          item = createMenuItem({label: t('Only on this workspace')});
+          item = createMenuItem({label: _('Only on this workspace')});
           this.signals.connect(item, 'activate', () => this.groupState.lastFocused.unstick());
           this.addMenuItem(item);
         } else {
-          item = createMenuItem({label: t('Visible on all workspaces')});
+          item = createMenuItem({label: _('Visible on all workspaces')});
           this.signals.connect(item, 'activate', () => this.groupState.lastFocused.stick());
           this.addMenuItem(item);
 
-          item = new PopupMenu.PopupSubMenuMenuItem(t('Move to another workspace'));
+          item = new PopupMenu.PopupSubMenuMenuItem(_('Move to another workspace'));
           this.addMenuItem(item);
 
           let connectWorkspaceEvent = (ws, j)=>{
@@ -178,7 +178,7 @@ AppMenuButtonRightClickMenu.prototype = {
 
       // Places
       if (this.groupState.appId === 'nemo.desktop' || this.groupState.appId === 'nemo-home.desktop') {
-        let subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Places'));
+        let subMenu = new PopupMenu.PopupSubMenuMenuItem(_('Places'));
         this.addMenuItem(subMenu);
 
         let defualtPlaces = this._listDefaultPlaces();
@@ -233,7 +233,7 @@ AppMenuButtonRightClickMenu.prototype = {
       let itemsLength = items.length;
 
       if (itemsLength > 0) {
-        let subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Recent'));
+        let subMenu = new PopupMenu.PopupSubMenuMenuItem(_('Recent'));
         this.addMenuItem(subMenu);
         let num = 10;
         if (itemsLength > num) {
@@ -253,18 +253,18 @@ AppMenuButtonRightClickMenu.prototype = {
     }
 
     // Preferences
-    let subMenu = new PopupMenu.PopupSubMenuMenuItem(t('Preferences'));
+    let subMenu = new PopupMenu.PopupSubMenuMenuItem(_('Preferences'));
     this.addMenuItem(subMenu);
 
-    item = createMenuItem({label: t('About...'), icon: 'dialog-question'});
+    item = createMenuItem({label: _('About...'), icon: 'dialog-question'});
     this.signals.connect(item, 'activate', () => this.state.trigger('openAbout'));
     subMenu.menu.addMenuItem(item);
 
-    item = createMenuItem({label: t('Configure...'), icon: 'system-run'});
+    item = createMenuItem({label: _('Configure...'), icon: 'system-run'});
     this.signals.connect(item, 'activate', () => this.state.trigger('configureApplet'));
     subMenu.menu.addMenuItem(item);
 
-    item = createMenuItem({label: t('Remove') + ' \'Icing Task Manager\'', icon: 'edit-delete'});
+    item = createMenuItem({label: _('Remove') + ' \'Icing Task Manager\'', icon: 'edit-delete'});
     this.signals.connect(item, 'activate', () => {
       AppletManager._removeAppletFromPanel(this.state.uuid, this.state.instance_id);
     });
@@ -299,19 +299,19 @@ AppMenuButtonRightClickMenu.prototype = {
     // Pin/unpin, shortcut handling
     if (!this.groupState.app.is_window_backed()) {
       if (this.state.settings.showPinned !== constants.FavType.none && !this.groupState.app.is_window_backed()) {
-        let label = this.groupState.isFavoriteApp ? t('Unpin from Panel') : t('Pin to Panel');
+        let label = this.groupState.isFavoriteApp ? _('Unpin from Panel') : _('Pin to Panel');
         this.pinToggleItem = createMenuItem({label: label, icon: 'bookmark-new'});
         this.signals.connect(this.pinToggleItem, 'activate', Lang.bind(this, this._toggleFav));
         this.addMenuItem(this.pinToggleItem);
       }
       if (this.state.settings.autoStart) {
-        let label = this.groupState.autoStartIndex !== -1 ? t('Remove from Autostart') : t('Add to Autostart');
+        let label = this.groupState.autoStartIndex !== -1 ? _('Remove from Autostart') : _('Add to Autostart');
         item = createMenuItem({label: label, icon: 'insert-object'});
         this.signals.connect(item, 'activate', Lang.bind(this, this._toggleAutostart));
         this.addMenuItem(item);
       }
     } else {
-      item = createMenuItem({label: t('Create Shortcut'), icon: 'list-add'});
+      item = createMenuItem({label: _('Create Shortcut'), icon: 'list-add'});
       this.signals.connect(item, 'activate', Lang.bind(this, this._createShortcut));
       this.addMenuItem(item);
     }
@@ -321,7 +321,7 @@ AppMenuButtonRightClickMenu.prototype = {
     if (hasWindows) {
       // Miscellaneous
       if (this.groupState.lastFocused.get_compositor_private().opacity !== 255) {
-        item = createMenuItem({label: t('Restore to full opacity')});
+        item = createMenuItem({label: _('Restore to full opacity')});
         this.signals.connect(item, 'activate', () => {
           this.groupState.lastFocused.get_compositor_private().set_opacity(255);
         });
@@ -329,12 +329,12 @@ AppMenuButtonRightClickMenu.prototype = {
       }
 
       if (this.groupState.lastFocused.minimized) {
-        item = createMenuItem({label: t('Restore'), icon: 'view-sort-descending'});
+        item = createMenuItem({label: _('Restore'), icon: 'view-sort-descending'});
         this.signals.connect(item, 'activate', () => {
           Main.activateWindow(this.groupState.lastFocused, global.get_current_time());
         });
       } else {
-        item = createMenuItem({label: t('Minimize'), icon: 'view-sort-ascending'});
+        item = createMenuItem({label: _('Minimize'), icon: 'view-sort-ascending'});
         this.signals.connect(item, 'activate', () => {
           this.groupState.lastFocused.minimize();
         });
@@ -342,12 +342,12 @@ AppMenuButtonRightClickMenu.prototype = {
       this.addMenuItem(item);
 
       if (this.groupState.lastFocused.get_maximized()) {
-        item = createMenuItem({label: t('Unmaximize'), icon: 'view-restore'});
+        item = createMenuItem({label: _('Unmaximize'), icon: 'view-restore'});
         this.signals.connect(item, 'activate', () => {
           this.groupState.lastFocused.unmaximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
         });
       } else {
-        item = createMenuItem({label: t('Maximize'), icon: 'view-fullscreen'});
+        item = createMenuItem({label: _('Maximize'), icon: 'view-fullscreen'});
         this.signals.connect(item, 'activate', () => {
           this.groupState.lastFocused.maximize(Meta.MaximizeFlags.HORIZONTAL | Meta.MaximizeFlags.VERTICAL);
         });
@@ -356,7 +356,7 @@ AppMenuButtonRightClickMenu.prototype = {
 
       if (this.groupState.metaWindows.length > 1) {
         // Close others
-        item = createMenuItem({label: t('Close others'), icon: 'window-close'});
+        item = createMenuItem({label: _('Close others'), icon: 'window-close'});
         this.signals.connect(item, 'activate', () => {
           each(this.groupState.metaWindows, (metaWindow) => {
             if (!isEqual(metaWindow, this.groupState.lastFocused) && !metaWindow._needsAttention) {
@@ -366,7 +366,7 @@ AppMenuButtonRightClickMenu.prototype = {
         });
         this.addMenuItem(item);
         // Close all
-        item = createMenuItem({label: t('Close all'), icon: 'application-exit'});
+        item = createMenuItem({label: _('Close all'), icon: 'application-exit'});
         this.signals.connect(item, 'activate', () => {
           if (!this.groupState.isFavoriteApp) {
             this.groupState.set({willUnmount: true});
@@ -376,7 +376,7 @@ AppMenuButtonRightClickMenu.prototype = {
         this.addMenuItem(item);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       } else {
-        item = createMenuItem({label: t('Close'), icon: 'edit-delete'});
+        item = createMenuItem({label: _('Close'), icon: 'edit-delete'});
         this.signals.connect(item, 'activate', () => {
           this.groupState.lastFocused.delete(global.get_current_time());
         });
@@ -521,7 +521,7 @@ AppThumbnailHoverMenu.prototype = {
         this.shouldClose = true;
         this.close();
       },
-      metaWindows: () => this.ready && !this.isOpen ? this._refresh(true) : null,
+      metaWindows: () => this.ready && !this.isOpen ? setTimeout(() => this._refresh(true), 0) : null,
       unfocusOthers: (metaWindowString) => {
         if (this.willUnmount) {
           return;
