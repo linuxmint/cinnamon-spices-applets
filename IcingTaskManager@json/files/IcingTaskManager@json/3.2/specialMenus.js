@@ -521,7 +521,7 @@ AppThumbnailHoverMenu.prototype = {
         this.shouldClose = true;
         this.close();
       },
-      metaWindows: () => this.ready ? setTimeout(() => this._refresh(true), 0) : null,
+      metaWindows: () => this.ready ? this._refresh(true) : null,
       unfocusOthers: (metaWindowString) => {
         if (this.willUnmount) {
           return;
@@ -740,6 +740,13 @@ AppThumbnailHoverMenu.prototype = {
     if (this.willUnmount || !this.box || this.state.panelEditMode) {
       return;
     }
+    // The styling cannot be set correctly unless the menu is closed. Fortunately this
+    // can be closed and reopened too quickly for the user to notice.
+    let wasOpen = false;
+    if (this.isOpen) {
+      wasOpen = true;
+      this.close(true);
+    }
     this.box.show();
     this.box.style = null;
     let thumbnailTheme = this.box.peek_theme_node();
@@ -757,6 +764,9 @@ AppThumbnailHoverMenu.prototype = {
       if (this.appThumbnails[i]) {
         this.appThumbnails[i].thumbnailIconSize();
       }
+    }
+    if (wasOpen) {
+      this.open();
     }
   },
 
@@ -949,7 +959,7 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _getThumbnail: function () {
+  _getThumbnail: function (deferredRetry) {
     // Create our own thumbnail if it doesn't exist
     let thumbnail = null;
     if (this.muffinWindow) {
@@ -967,6 +977,8 @@ WindowThumbnail.prototype = {
         width: width * scale,
         height: height * scale
       });
+    } else if (!deferredRetry){
+      setTimeout(() => this._getThumbnail(true), 0);
     }
 
     return thumbnail;

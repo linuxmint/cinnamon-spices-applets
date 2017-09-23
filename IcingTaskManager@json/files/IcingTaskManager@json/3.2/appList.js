@@ -56,7 +56,7 @@ AppList.prototype = {
 
     const managerOrientation = this.state.isHorizontal ? 'HORIZONTAL' : 'VERTICAL';
     this.manager = new Clutter.BoxLayout({orientation: Clutter.Orientation[managerOrientation]});
-    this.actor = new St.BoxLayout({layout_manager: this.manager});
+    this.actor = new Clutter.Actor({layout_manager: this.manager});
 
     this.appList = [];
     this.lastFocusedApp = null;
@@ -137,7 +137,8 @@ AppList.prototype = {
     if (!this.state.lastCycled && this.listState.lastFocusedApp) {
       refApp = store.queryCollection(this.appList, {appId: this.listState.lastFocusedApp}, {indexOnly: true});
     }
-    if (this.state.lastCycled) {
+    if (this.state.lastCycled
+      && this.appList[this.state.lastCycled]) {
       this.appList[this.state.lastCycled].hoverMenu.close();
       refApp = this.state.lastCycled + 1;
     }

@@ -265,16 +265,13 @@ AppGroup.prototype = {
     if (!this.state.isHorizontal) {
       this.actor.width = this.state.trigger('getPanelHeight');
     }
+    if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM) {
+      this.actor.height = this.state.trigger('getPanelHeight');
+    }
     this.setIcon();
     this._updateIconBoxClip();
     this.setIconPadding();
     this.setMargin();
-  },
-
-  setActorHeight: function() {
-    if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM) {
-      this.actor.height = this.state.trigger('getPanelHeight');
-    }
   },
 
   setIconPadding: function () {
