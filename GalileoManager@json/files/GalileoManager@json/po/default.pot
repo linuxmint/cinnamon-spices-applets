@@ -1,0 +1,93 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-02 12:22-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#. GalileoManager@json->metadata.json->name
+#: applet.js:20
+msgid "Galileo Manager"
+msgstr ""
+
+#: applet.js:66
+msgid "Sync Fitness Tracker"
+msgstr ""
+
+#: applet.js:70
+msgid "Uninstall Galileo"
+msgstr ""
+
+#: applet.js:74
+msgid "Install Galileo"
+msgstr ""
+
+#: applet.js:100
+msgid "Setting up Galileo"
+msgstr ""
+
+#: applet.js:100 applet.js:118
+msgid "Please wait..."
+msgstr ""
+
+#: applet.js:102
+msgid "This script will install Galileo and its dependencies using PIP."
+msgstr ""
+
+#: applet.js:105
+msgid "An error occurred while installing Galileo."
+msgstr ""
+
+#: applet.js:111
+msgid "Setup Complete"
+msgstr ""
+
+#: applet.js:112
+msgid ""
+"You must re-insert your Fitbit dongle to be able to use it as a non-root "
+"user."
+msgstr ""
+
+#: applet.js:118
+msgid "Removing Galileo"
+msgstr ""
+
+#: applet.js:120
+msgid "This script will remove Galileo."
+msgstr ""
+
+#: applet.js:123
+msgid "An error occurred while removing Galileo."
+msgstr ""
+
+#: applet.js:133
+msgid "Syncing fitness tracker..."
+msgstr ""
+
+#: applet.js:137
+msgid "An error occurred while syncing."
+msgstr ""
+
+#. GalileoManager@json->metadata.json->description
+msgid "Fitbit sync utility."
+msgstr ""
+
+#. GalileoManager@json->metadata.json->comments
+msgid ""
+"This applet uses the Galileo Python utility for syncing Fitbit trackers.\n"
+"Click the website link for more information.\n"
+"\n"
+"Fitbit is a registered trademark and service mark of Fitbit, Inc. galileo is designed for use with the Fitbit platform. This product is not put out by Fitbit, and Fitbit does not service or warrant the functionality of this product."
+msgstr ""

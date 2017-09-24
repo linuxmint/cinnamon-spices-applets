@@ -1,11 +1,9 @@
 var gulp = require('gulp');
-var zip = require('gulp-zip');
-var del = require('del');
 var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('install', (cb)=>{
-  exec('cp -arf ./files/IcingTaskManager@json/* ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
+  exec('cp -arf ./files/GalileoManager@json/* ~/.local/share/cinnamon/applets/GalileoManager@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
@@ -13,15 +11,17 @@ gulp.task('install', (cb)=>{
 });
 
 gulp.task('reload', ['install'], (cb)=>{
-  exec(`dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'IcingTaskManager@json' string:'APPLET'`, function (err, stdout, stderr) {
-    console.log(stdout);
-    console.log(stderr);
-    cb(err);
-  });
+  setTimeout(()=>{
+    exec(`dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'GalileoManager@json' string:'APPLET'`, function (err, stdout, stderr) {
+      console.log(stdout);
+      console.log(stderr);
+      cb(err);
+    });
+  }, 100);
 })
 
 gulp.task('watch', ()=> {
-  gulp.watch('./files/IcingTaskManager@json/3.2/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
+  gulp.watch('./files/GalileoManager@json/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
 });
 
 gulp.task('clear-terminal', ()=> {
