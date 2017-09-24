@@ -129,6 +129,16 @@ function getByPath(key, state) {
   return object;
 }
 
+/**
+ * init
+ * Initializes a store instance. It uses private scoping to prevent
+ * its context from leaking.
+ *
+ * @param {object} [state={}]
+ * @param {array} [listeners=[]] - Not intended to be set manually, but can be overriden.
+ * See _connect.
+ * @returns Initial state object with the public API.
+ */
 function init(state = {}, listeners = []) {
   const publicAPI = Object.freeze({
     get,
@@ -144,6 +154,12 @@ function init(state = {}, listeners = []) {
     return Object.assign(object, publicAPI);
   }
 
+  /**
+   * dispatch
+   * Responsible for triggering callbacks stored in the listeners queue from set.
+   *
+   * @param {object} object
+   */
   function dispatch(object) {
     let keys = Object.keys(object);
 
@@ -162,6 +178,13 @@ function init(state = {}, listeners = []) {
     }
   }
 
+  /**
+   * get
+   * Retrieves a cloned property from the state object.
+   *
+   * @param {string} [key=null]
+   * @returns {object}
+   */
   function get(key = null) {
     if (!key || key === '*') {
       return state;
@@ -172,6 +195,13 @@ function init(state = {}, listeners = []) {
     return clone(state[key]);
   }
 
+  /**
+   * set
+   * Copies a keyed object back into state, and
+   * calls dispatch to fire any connected callbacks.
+   *
+   * @param {object} object
+   */
   function set(object) {
     let keys = Object.keys(object);
     let changed = false;
@@ -194,6 +224,14 @@ function init(state = {}, listeners = []) {
     }
   }
 
+  /**
+   * exclude
+   * Excludes a string array of keys from the state object.
+   *
+   * @param {array} excludeKeys
+   * @returns Partial or full state object with keys in
+   * excludeKeys excluded, along with the public API for chaining.
+   */
   function exclude(excludeKeys) {
     let object = {};
     let keys = Object.keys(state);
@@ -206,6 +244,16 @@ function init(state = {}, listeners = []) {
     return getAPIWithObject(object);
   }
 
+  /**
+   * trigger
+   * Fires a callback event for any matching key in the listener queue.
+   * It supports passing through unlimited arguments to the callback.
+   * Useful for setting up actions.
+   *
+   * @param {string} key
+   * @param {any} args
+   * @returns {any} Return result of the callback.
+   */
   function trigger() {
     const [key, ...args] = Array.from(arguments);
     let matchedListeners = queryCollection(
@@ -240,6 +288,14 @@ function init(state = {}, listeners = []) {
     }
   }
 
+  /**
+   * connect
+   *
+   * @param {any} actions - can be a string, array, or an object.
+   * @param {function} callback - callback to be fired on either state
+   * property change, or through the trigger method.
+   * @returns Public API for chaining.
+   */
   function connect(actions, callback) {
     if (Array.isArray(actions)) {
       _connect(actions, callback);
@@ -255,6 +311,12 @@ function init(state = {}, listeners = []) {
     return publicAPI;
   }
 
+  /**
+   * disconnect
+   * Removes a callback listener from the queue.
+   *
+   * @param {string} key
+   */
   function disconnect(key) {
     let listenerIndex = queryCollection(
       listeners,
@@ -271,6 +333,12 @@ function init(state = {}, listeners = []) {
     listeners.splice(listenerIndex, 1);
   }
 
+  /**
+   * destroy
+   * Assigns undefined to all state properties and listeners. Intended
+   * to be used at the end of the application life cycle.
+   *
+   */
   function destroy() {
     let keys = Object.keys(state);
     for (let i = 0; i < keys.length; i++) {

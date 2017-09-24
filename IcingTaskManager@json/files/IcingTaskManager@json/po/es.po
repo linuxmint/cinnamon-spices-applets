@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-24 11:53-0500\n"
+"POT-Creation-Date: 2017-09-24 14:48-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -101,16 +101,16 @@ msgstr "No maximizada"
 msgid "Maximize"
 msgstr "Maximizar"
 
-#: 3.2/specialMenus.js:336
+#: 3.2/specialMenus.js:337
 msgid "Close others"
 msgstr ""
 
-#: 3.2/specialMenus.js:346
+#: 3.2/specialMenus.js:347
 #, fuzzy
 msgid "Close all"
 msgstr "Cerrar Todo"
 
-#: 3.2/specialMenus.js:356
+#: 3.2/specialMenus.js:357
 msgid "Close"
 msgstr "Cerrar"
 
@@ -556,6 +556,14 @@ msgid ""
 "Controls how quickly an app's set of window thumbnails will fade out when "
 "the mouse leaves the app button."
 msgstr "Tiempo de espera de las miniaturas"
+
+#. 3.2->settings-schema.json->enable-app-button-width->description
+msgid "Use a custom width for app buttons"
+msgstr ""
+
+#. 3.2->settings-schema.json->enable-app-button-width->tooltip
+msgid "When disabled, the app button width is determined by the panel height."
+msgstr ""
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description

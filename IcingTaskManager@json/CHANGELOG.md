@@ -15,6 +15,11 @@ Changelog
   * Added support for pinning apps by dragging launchers from menu applets.
   * Added new thumbnail options for adjusting padding and the close button size.
   * Added an option to toggle the last active window thumbnail indicator in the thumbnail menu.
+  * Known issues:
+    * When repositioning the applet in panel edit mode on Cinnamon 3.2, the app buttons will become duplicated.
+    * When label button modes are enabled, there isn't correct padding on pinned and inactive apps, or in focused mode, unfocused apps. Setting extra spacing in the options might help.
+    * Restarting the applet through Melange or the dbus is not supported or guarunteed to be bug-free, and is only used during development. If you need to restart the applet, please restart Cinnamon.
+
 
 ### 5.3.3
 

@@ -26,6 +26,7 @@
       "type" : "section",
       "title" : "App Buttons",
       "keys": [
+        "enable-app-button-width",
         "app-button-width",
         "number-display",
         "title-display",
@@ -211,9 +212,16 @@
     "description": "Duration of the apps order display on hotkey press",
     "tooltip": "Determines the duration the window count labels are replaced with the app's order number."
   },
+  "enable-app-button-width": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use a custom width for app buttons",
+    "tooltip": "When disabled, the app button width is determined by the panel height."
+  },
   "app-button-width": {
+    "dependency": "enable-app-button-width",
     "type": "spinbutton",
-    "default": 33,
+    "default": 31,
     "min": 1,
     "max": 250,
     "step": 2,

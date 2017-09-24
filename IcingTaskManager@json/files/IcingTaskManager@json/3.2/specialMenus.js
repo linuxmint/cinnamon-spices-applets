@@ -331,7 +331,8 @@ AppMenuButtonRightClickMenu.prototype = {
       }
       this.addMenuItem(item);
 
-      if (this.groupState.metaWindows.length > 1) {
+      if (this.groupState.metaWindows
+        && this.groupState.metaWindows.length > 1) {
         // Close others
         item = createMenuItem({label: _('Close others'), icon: 'window-close'});
         this.signals.connect(item, 'activate', () => {
@@ -685,7 +686,11 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   addWindowThumbnails: function () {
-    if (this.willUnmount || !this.box || !this.appThumbnails) {
+    if (this.willUnmount
+      || !this.box
+      || !this.appThumbnails
+      || !this.groupState
+      || !this.groupState.metaWindows) {
       return;
     }
 
@@ -695,7 +700,7 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   setStyleOptions: function(skipThumbnailIconResize) {
-    if (this.willUnmount || !this.box || this.state.panelEditMode) {
+    if (this.willUnmount || !this.box) {
       return;
     }
     // The styling cannot be set correctly unless the menu is closed. Fortunately this
@@ -786,7 +791,9 @@ WindowThumbnail.prototype = {
     this.groupState.connect({
       isFavoriteApp: () => this.handleFavorite(),
       lastFocused: () => {
-        if (this.willUnmount || this.groupState.metaWindows.length === 0) {
+        if (this.willUnmount
+          || !this.groupState.metaWindows
+          || this.groupState.metaWindows.length === 0) {
           return;
         }
         this.isFocused = isEqual(this.groupState.lastFocused, this.metaWindow);
@@ -906,7 +913,8 @@ WindowThumbnail.prototype = {
     if (!this.groupState) {
       return;
     }
-    if (this.groupState.metaWindows.length > 0) {
+    if (this.groupState.metaWindows
+      && this.groupState.metaWindows.length > 0) {
       this.refreshThumbnail(this.metaWindow, this.groupState.metaWindows);
     }
   },
@@ -927,7 +935,7 @@ WindowThumbnail.prototype = {
     this._hoverPeek(constants.OPACITY_OPAQUE);
 
     this.metaWindow.delete(global.get_current_time());
-    if (this.groupState.metaWindows.length <= 1) {
+    if (!this.groupState.metaWindows || this.groupState.metaWindows.length <= 1) {
       this.groupState.trigger('hoverMenuClose');
     }
   },
@@ -940,7 +948,7 @@ WindowThumbnail.prototype = {
   },
 
   _connectToWindow: function (actor, event) {
-    if (!this.metaWindow || this.groupState.metaWindows.length === 0) {
+    if (!this.metaWindow || !this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
       this.groupState.trigger('hoverMenuClose');
       return false;
     }
@@ -1007,11 +1015,13 @@ WindowThumbnail.prototype = {
       this.thumbnailWidth = Math.floor((monitor.width / divider) * this.state.settings.thumbSize) + offset;
       this.thumbnailHeight = Math.floor((monitor.height / divider) * this.state.settings.thumbSize) + offset;
 
-      let monitorSize, thumbnailSize;
+      let monitorSize, thumbnailSize, thumbMultiplier;
       if (!this.state.isHorizontal) {
+        thumbMultiplier = 1.5;
         monitorSize = monitor.height;
         thumbnailSize = this.thumbnailHeight;
       } else {
+        thumbMultiplier = 1;
         monitorSize = monitor.width;
         thumbnailSize = this.thumbnailWidth;
       }
@@ -1020,8 +1030,8 @@ WindowThumbnail.prototype = {
         metaWindows = this.groupState.app.get_windows();
       }
 
-      if ((thumbnailSize * metaWindows.length) + thumbnailSize > monitorSize) {
-        let divideMultiplier = !this.state.isHorizontal ? 5 : 1.1;
+      if (((thumbnailSize * thumbMultiplier) * metaWindows.length) + thumbnailSize > monitorSize) {
+        let divideMultiplier = !this.state.isHorizontal ? 4.5 : 1.1;
         setThumbSize(divider * divideMultiplier, 16);
         return;
       } else {

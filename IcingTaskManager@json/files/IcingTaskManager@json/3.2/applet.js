@@ -229,6 +229,8 @@ MyApplet.prototype = {
     this.recentManager = Gtk.RecentManager.get_default();
     this.appLists = [];
 
+    // Initialize the default state. Any values passed through store.set must be declared here
+    // first, or an error will be thrown.
     this.state = store.init({
       uuid: metadata.uuid,
       orientation: orientation,
@@ -252,7 +254,9 @@ MyApplet.prototype = {
     });
 
     // key-function pairs of actions that can be triggered from the store's callback queue. This allows ITM to avoid
-    // passing down the parent class down the constructor chain and creating circular references.
+    // passing down the parent class down the constructor chain and creating circular references. In addition to
+    // manual event emitting, store.js can emit updates on property changes when set through store.set. Any keys
+    // emitted through store.trigger that are not declared here first will throw an error.
     this.state.connect({
       setSettingsValue: (k, v) => this.settings.setValue(k, v),
       getPanel: () => this.panel ? this.panel : null,
@@ -290,6 +294,8 @@ MyApplet.prototype = {
 
     this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
     this.bindSettings();
+    // Passing an empty object instead of `this` because its only used by SignalManager to bind the callback, which
+    // we already do here. Otherwise, it creates more circular references.
     this.signals = new SignalManager.SignalManager({});
     this.appSystem = this.state.trigger('getAppSystem');
     this.pinnedFavorites = new PinnedFavs({
@@ -358,6 +364,7 @@ MyApplet.prototype = {
       {key: 'firefox-menu', value: 'firefoxMenu', cb: null},
       {key: 'autostart-menu-item', value: 'autoStart', cb: null},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: null},
+      {key: 'enable-app-button-width', value: 'enableAppButtonWidth', cb: this._updateActorAttributes},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateActorAttributes},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
       {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
@@ -372,6 +379,10 @@ MyApplet.prototype = {
     }
   },
 
+  // TODO: Determine if using this as a starting point for initializing applet loadding is a good idea.
+  // This method will get called when applets are still existing instances, such as during panel DND.
+  // Should be looked into more, and see if this should be a fix in a future Cinnamon PR. the on_applet_removed_from_panel
+  // method removes applets and calls this method, all while as far as the user knows, the applet state should remain the same.
   on_applet_added_to_panel: function() {
     if (this.state.appletReady && this.state.panelEditMode) {
       return;
@@ -647,6 +658,7 @@ MyApplet.prototype = {
     } else if (typeof this.appLists[0] !== 'undefined') {
       return this.appLists[0];
     } else {
+      // TODO: Necessary?
       global.logError('ITM Error: Could not retrieve the current app list.');
       return null;
     }
@@ -747,6 +759,9 @@ MyApplet.prototype = {
     return DND.DragMotionResult.MOVE_DROP;
   },
 
+  // TODO: Figure out exactly which properties on this applet constructor the Cinnamon APIs needs for all modes of
+  // DND, so we can kill the _delegate reference. Long term, a PR to Cinnamon should be opened fixing circular
+  // object reference structures for the applet and desklet classes.
   acceptDrop: function (source, actor, x) {
     if (!this.state.settings.enableDragging
       || this.state.panelEditMode) {

@@ -107,8 +107,8 @@ AppGroup.prototype = {
       appId: params.appId,
       appName: params.app.get_name(),
       appInfo: params.app.get_app_info(),
-      metaWindows: params.metaWindows,
-      lastFocused: params.metaWindow,
+      metaWindows: params.metaWindows || [],
+      lastFocused: params.metaWindow || null,
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
       autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
       willUnmount: false,
@@ -123,7 +123,8 @@ AppGroup.prototype = {
 
     this.signals = new SignalManager.SignalManager({});
 
-    this.labelVisible = this.state.settings.titleDisplay !== constants.TitleDisplay.None;
+    // TODO: This needs to be in state so it can be updated more reliably.
+    this.labelVisible = this.state.settings.titleDisplay !== constants.TitleDisplay.None && this.state.isHorizontal;
     this._progress = 0;
     this.padding = 0;
     this.wasFavapp = false;
@@ -241,13 +242,21 @@ AppGroup.prototype = {
 
   setActorAttributes: function() {
     this.actor.style = null;
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.None) {
-      this.actor.width = this.state.settings.appButtonWidth;
+
+    // TODO: Button width should be applied to buttons if they don't have a label set, not based on
+    // mode, but not currently sure how to unset the fixed width on the actor so it revert to a
+    // resizable state without destroying it. Otherwise, buttons with labels don't have enough padding set.
+    if (!this.state.isHorizontal
+      ||this.state.settings.titleDisplay === 1
+      || this.state.settings.titleDisplay === 3 && !this.labelVisible) {
+      if (this.state.settings.enableAppButtonWidth) {
+        this.actor.width = this.state.settings.appButtonWidth;
+      } else {
+        this.actor.width = this.state.trigger('getPanelHeight');
+      }
     }
-    if (!this.state.isHorizontal) {
-      this.actor.width = this.state.trigger('getPanelHeight');
-    }
-    if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM) {
+
+    if (this.state.isHorizontal) {
       this.actor.height = this.state.trigger('getPanelHeight');
     }
     this.setIcon();
@@ -330,9 +339,6 @@ AppGroup.prototype = {
       && text.length > 0
       && this._label) {
       this._label.set_text(text);
-      if (this._label.realized) {
-        this._label.set_style('padding-right: 4px;');
-      }
     }
   },
 
@@ -454,12 +460,16 @@ AppGroup.prototype = {
     }
   },
   showLabel: function () {
-    if (!this._label) {
+    if (!this._label
+      || !this.state.isHorizontal) {
       return false;
     }
+    this.labelVisible = true;
     if (!this._label.text) {
       this._label.set_text('');
     }
+    // TODO: This should be set by the theme.
+    this._label.set_style('padding-right: 4px;');
     this._label.show();
     Tweener.addTween(this._label, {
       width: constants.MAX_BUTTON_WIDTH, // Should probably check preferred width
@@ -473,6 +483,7 @@ AppGroup.prototype = {
     if (!this._label) {
       return false;
     }
+    this.labelVisible = false;
     if (!this._label.text) {
       this._label.set_text('');
     }
@@ -489,6 +500,7 @@ AppGroup.prototype = {
       onCompleteScope: this,
       onComplete: function () {
         this._label.hide();
+        this._label.set_style('padding-right: 0px;');
       }
     });
     return false;
@@ -877,7 +889,8 @@ AppGroup.prototype = {
     }
     if (!metaWindow
       || !metaWindow.title
-      || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)) {
+      || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)
+      || !this.state.isHorizontal) {
       this.hideLabel();
       return;
     }

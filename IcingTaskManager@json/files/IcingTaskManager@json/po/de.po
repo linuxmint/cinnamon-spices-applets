@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 14:48-0500\n"
 "PO-Revision-Date: 2017-07-27 12:54+0200\n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -14,99 +14,99 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to the other monitor"
 msgstr "Auf den anderen Monitor verschieben"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to monitor "
 msgstr "Verschieben auf Monitor "
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr "Nur auf dieser Arbeitsfläche"
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr "Auf allen Arbeitsflächen anzeigen"
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 msgid "Move to another workspace"
 msgstr "Auf andere Arbeitsfläche verschieben"
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr "Orte"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Kürzlich"
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr "Über …"
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr "Einrichten …"
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr "Entfernen"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Von Taskleiste lösen"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "An Taskleiste Anheften"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Aus Autostart entfernen"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Zum Autostart hinzufügen"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Verknüpfung erstellen"
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr "Volle Deckkraft wiederherstellen"
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Wiederherstellen"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Minimieren"
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Zurücksetzen"
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Maximieren"
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:337
 msgid "Close others"
 msgstr "Andere schließen"
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:347
 msgid "Close all"
 msgstr "Alle schließen"
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:357
 msgid "Close"
 msgstr "Schließen"
 
@@ -176,6 +176,7 @@ msgid "Controls how much space is between the icons."
 msgstr "Legt den Abstand zwischen den Icons der Anwendungs-Leiste fest."
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -198,15 +199,14 @@ msgstr ""
 "Zeigt Fenster-Vorschaubilder beim Hovern über einer Anwendungs-Schaltfläche "
 "an."
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Icongröße"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Icongröße anpassen"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -220,7 +220,6 @@ msgstr ""
 "Steuert die Geschwindigkeit mit der Fenster beim Hovern eingeblendet werden."
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -404,6 +403,16 @@ msgstr "Kontextmenü"
 msgid "Theming"
 msgstr "Themen einstellen"
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Icongröße"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Icongröße anpassen"
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -455,7 +464,10 @@ msgid "App button width"
 msgstr "Breite der Anwendungsknöpfe"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-msgid "Controls the width of the application button."
+#, fuzzy
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr "Steuert die Größe der Anwendungsknöpfe."
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -536,20 +548,13 @@ msgstr ""
 "Steuert, wie schnell die zu einer Anwendung gehörenden Vorschaubilder "
 "ausgeblendet werden, wenn die Maus die Anwendungs-Schaltfläche verlässt."
 
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
+#. 3.2->settings-schema.json->enable-app-button-width->description
+msgid "Use a custom width for app buttons"
 msgstr ""
-"Erlaube Themen die Schaltflächen zum beenden der Anwendungen zu steuern"
 
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
+#. 3.2->settings-schema.json->enable-app-button-width->tooltip
+msgid "When disabled, the app button width is determined by the panel height."
 msgstr ""
-"Steuert, ob das Thema die Schaltfläche zum Schließen der Fenster-"
-"Miniaturansicht steuert."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -779,6 +784,19 @@ msgstr ""
 "Steuert, ob die Reihenfolge der Anzeige von Fenstern durch zuletzt "
 "fokussierte Fenster oder durch die Reihenfolge in der sie geöffnet wurden "
 "bestimmt wird."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr ""
+"Erlaube Themen die Schaltflächen zum beenden der Anwendungen zu steuern"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr ""
+"Steuert, ob das Thema die Schaltfläche zum Schließen der Fenster-"
+"Miniaturansicht steuert."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"
