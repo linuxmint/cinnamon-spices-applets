@@ -37,7 +37,8 @@
         "enable-app-button-dragging",
         "pinOnDrag",
         "middle-click-action",
-        "list-monitor-windows"
+        "list-monitor-windows",
+        "include-all-windows"
       ]
     },
     "hotKeysSection": {
@@ -61,8 +62,8 @@
         "animate-thumbnails",
         "vertical-thumbnails",
         "sort-thumbnails",
-        "onclick-thumbnails",
-        "include-all-windows"
+        "highlight-last-focused-thumbnail",
+        "onclick-thumbnails"
       ]
     },
     "hoverPeekSection": {
@@ -90,7 +91,6 @@
       "title" : "Styling",
       "keys": [
         "show-active",
-        "close-button-style",
         "hoverPseudoClass",
         "focusPseudoClass",
         "activePseudoClass"
@@ -219,7 +219,7 @@
     "step": 2,
     "units": "px",
     "description": "App button width",
-    "tooltip": "Controls the width of the application button."
+    "tooltip": "Controls the width of the application button. This option only works for horizontal panels."
   },
   "thumbnail-timeout": {
     "type": "spinbutton",
@@ -284,6 +284,12 @@
     "default": false,
     "description": "Sort windows for each app by last focused",
     "tooltip": "Controls whether the order windows appear for an app is by last focused, or the order they were opened."
+  },
+  "highlight-last-focused-thumbnail": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Highlight the last focused window within an app group",
+    "tooltip": "When enabled, the last window that was interacted with will be indicated."
   },
   "onclick-thumbnails": {
     "type": "checkbox",
@@ -374,7 +380,7 @@
   },
   "icon-spacing": {
     "type": "spinbutton",
-    "default": 7,
+    "default": 3,
     "min": 0,
     "max": 15,
     "step": 1,
@@ -447,12 +453,6 @@
       "selected": 5
     },
     "tooltip": "Overrides the pseudo class for app buttons when they are active."
-  },
-  "close-button-style": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Allow themes to control the thumbnail close button",
-    "tooltip": "Controls whether or not the theme controls the window thumbnail's close button."
   },
   "mintYPreset": {
     "type" : "button",

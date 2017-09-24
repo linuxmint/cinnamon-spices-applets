@@ -1,5 +1,4 @@
 const Clutter = imports.gi.Clutter;
-const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const SignalManager = imports.misc.signalManager;
@@ -35,7 +34,8 @@ AppList.prototype = {
       orientation: () => this.on_orientation_changed(false),
     });
     this.listState = store.init({
-      lastFocusedApp: null
+      workspaceIndex: params.index,
+      lastFocusedApp: null,
     });
     this.listState.connect({
       updateAppGroupIndexes: (id) => this.updateAppGroupIndexes(id),
@@ -51,7 +51,7 @@ AppList.prototype = {
       }
     });
 
-    this.signals = new SignalManager.SignalManager(this);
+    this.signals = new SignalManager.SignalManager({});
     this.metaWorkspace = params.metaWorkspace;
 
     const managerOrientation = this.state.isHorizontal ? 'HORIZONTAL' : 'VERTICAL';
@@ -421,6 +421,7 @@ AppList.prototype = {
       this.appList[i].destroy();
     }
     this.listState.destroy();
+    this.manager = null;
     this.actor.destroy();
     unref(this);
   }

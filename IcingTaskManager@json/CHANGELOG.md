@@ -6,6 +6,7 @@ Changelog
   * Disabled listing windows by monitor on the default configuration.
   * Fixed a couple performance bottlenecks during applet initialization, and cut down the start up time a lot.
   * Fixed an issue with window titles getting updated too frequently.
+  * Fixed removing workspaces not having their corresponding objects in ITM removed.
   * Reduced a lot of redundancy in the focused window state handling logic.
   * Improved performance while switching between title display options.
   * Improved scaling for thumbnails on vertical panels.
@@ -13,6 +14,7 @@ Changelog
   * Fixed launchers being added through menu applets not being reflected in ITM.
   * Added support for pinning apps by dragging launchers from menu applets.
   * Added new thumbnail options for adjusting padding and the close button size.
+  * Added an option to toggle the last active window thumbnail indicator in the thumbnail menu.
 
 ### 5.3.3
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Icing Task Manager 4.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 11:53-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -14,104 +14,104 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 #, fuzzy
 msgid "Move to the other monitor"
 msgstr "Premjesti na zaslon"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 #, fuzzy
 msgid "Move to monitor "
 msgstr "Premjesti na zaslon"
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr "Samo na ovom radnom prostoru"
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr "Vidljivo na svim radnim prostorima"
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 #, fuzzy
 msgid "Move to another workspace"
 msgstr "Premjesti na lijevi radni prostor"
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr ""
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 #, fuzzy
 msgid "Recent"
 msgstr "postoci"
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr ""
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr ""
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr ""
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr ""
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Ukloni s panela"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "Pričvrsti na panel"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Ukloni iz automatskog pokretanja"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Dodaj u automatsko pokretanje"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Stvori prečac"
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Vrati"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Smanji"
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Prikaži u prozoru"
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Uvećaj"
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:336
 msgid "Close others"
 msgstr ""
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:346
 #, fuzzy
 msgid "Close all"
 msgstr "Zatvori sve"
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:356
 msgid "Close"
 msgstr "Zatvori"
 
@@ -182,6 +182,7 @@ msgid "Controls how much space is between the icons."
 msgstr "Upravlja razmakom između ikona."
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -202,15 +203,14 @@ msgstr "Prikaži minijature"
 msgid "Show window thumbnails when hovering over an app button."
 msgstr "Prikazuje minijature prozora pri prijelazu preko tipke aplikacije."
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Veličina ikone"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Postavi veličinu ikone"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -223,7 +223,6 @@ msgid "Controls how quickly a window will fade on hover."
 msgstr "Upravlja iščezavanjem prozora pri prijelazu pokazivačem miša."
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -413,6 +412,16 @@ msgstr "Postavke izbornika"
 msgid "Theming"
 msgstr "Postavke teme"
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Veličina ikone"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Postavi veličinu ikone"
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -464,7 +473,9 @@ msgstr ""
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
 #, fuzzy
-msgid "Controls the width of the application button."
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr "Upravlja veličinom minijatura."
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -543,18 +554,6 @@ msgid ""
 msgstr ""
 "Upravlja brzinom postavljanja iščezavanja minijature prozora aplikacije kada "
 "pokazivač miša napusti tipku aplikacije."
-
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr "Dopusti temi upravljanje tipkom zatvaranja minijature"
-
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
-msgstr "Tema upravlja tipkom zatvaranja minijature."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -774,6 +773,16 @@ msgid ""
 msgstr ""
 "Upravlja pojavljivanjem poredka prozora za aplikaciju prema posljednjem "
 "fokusu, ili poredkom prema kojem su otvoreni."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "Dopusti temi upravljanje tipkom zatvaranja minijature"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "Tema upravlja tipkom zatvaranja minijature."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"

@@ -121,7 +121,7 @@ AppGroup.prototype = {
       getActor: () => this.actor
     });
 
-    this.signals = new SignalManager.SignalManager(this);
+    this.signals = new SignalManager.SignalManager({});
 
     this.labelVisible = this.state.settings.titleDisplay !== constants.TitleDisplay.None;
     this._progress = 0;
@@ -286,8 +286,7 @@ AppGroup.prototype = {
         allocation.x2 - allocation.x1,
         allocation.y2 - allocation.y1 - this._iconBottomClip
       );
-    }
-    else {
+    } else {
       this._iconBox.remove_clip();
     }
   },
@@ -786,7 +785,7 @@ AppGroup.prototype = {
     if (!this.state.settings.includeAllWindows) {
       windowAddArgs = windowAddArgs && this.state.trigger('isWindowInteresting', metaWindow);
     }
-    if (this.state.trigger('getPanel') && metaWindow && this.state.settings.listMonitorWindows) {
+    if (this.state.appletReady && metaWindow && this.state.settings.listMonitorWindows) {
       windowAddArgs = windowAddArgs && (this.state.monitorWatchList.indexOf(metaWindow.get_monitor()) > -1 || this.state.monitorWatchList.length === 0);
     }
     return windowAddArgs;

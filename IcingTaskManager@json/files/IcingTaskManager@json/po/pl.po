@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 11:53-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mariachini\n"
 "Language-Team: \n"
@@ -13,104 +13,104 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 #, fuzzy
 msgid "Move to the other monitor"
 msgstr "Przesuń na monitor"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 #, fuzzy
 msgid "Move to monitor "
 msgstr "Przesuń na monitor"
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr "Tylko na tym obszarze roboczym"
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr "Widoczne na wszystkich obszarach roboczych"
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 #, fuzzy
 msgid "Move to another workspace"
 msgstr "Przesuń na lewy obszar roboczy"
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr ""
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 #, fuzzy
 msgid "Recent"
 msgstr "procent"
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr ""
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr ""
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr ""
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr ""
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Odepnij od panelu"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "Przypnij do panelu"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Usuń z autostartu"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Dodaj do autostartu"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Utwórz skrót"
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Przywróć"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Minimalizuj"
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Zmniejszenie"
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Maksymalizuj"
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:336
 msgid "Close others"
 msgstr ""
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:346
 #, fuzzy
 msgid "Close all"
 msgstr "Zamknij wszystkie"
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:356
 msgid "Close"
 msgstr "Zamknij"
 
@@ -182,6 +182,7 @@ msgid "Controls how much space is between the icons."
 msgstr "Kontroluje ile miejsca jest między ikonami."
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -202,15 +203,14 @@ msgstr "Pokaż miniaturki"
 msgid "Show window thumbnails when hovering over an app button."
 msgstr "Pokazuj miniaturki po najechaniu na przycisk aplikacji"
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Wielkość ikony"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Ustaw wielkość ikony"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -223,7 +223,6 @@ msgid "Controls how quickly a window will fade on hover."
 msgstr "Kontroluje jak szybko zaniknie okno po najechaniu na nie."
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -413,6 +412,16 @@ msgstr "Ustawienia menu kontekstowego"
 msgid "Theming"
 msgstr "Ustawienia stylu"
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Wielkość ikony"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Ustaw wielkość ikony"
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -465,7 +474,9 @@ msgstr ""
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
 #, fuzzy
-msgid "Controls the width of the application button."
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr "Kontroluje wielkość miniaturek"
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -544,19 +555,6 @@ msgid ""
 msgstr ""
 "Kontroluje jak szybko miniaturki okien aplikacji będą zanikać, gdy myszka "
 "opuści przycisk aplikacji."
-
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr "Pozwalaj motywom kontrolować przycisk zamykania miniaturek"
-
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
-msgstr ""
-"Kontroluje czy motywy będą mogły kontrolować przycisk zamykania miniaturek."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -779,6 +777,17 @@ msgid ""
 msgstr ""
 "Kontroluje czy kolejność pojawiania się okien aplikacji będzie zależeć od "
 "ostatniego aktywnego okna czy od kolejności jego otworzenia."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "Pozwalaj motywom kontrolować przycisk zamykania miniaturek"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr ""
+"Kontroluje czy motywy będą mogły kontrolować przycisk zamykania miniaturek."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"

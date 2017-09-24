@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 11:53-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,99 +17,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to the other monitor"
 msgstr ""
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to monitor "
 msgstr ""
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr ""
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr ""
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 msgid "Move to another workspace"
 msgstr ""
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr ""
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr ""
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr ""
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr ""
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr ""
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr ""
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr ""
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr ""
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr ""
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr ""
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr ""
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr ""
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr ""
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr ""
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr ""
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:336
 msgid "Close others"
 msgstr ""
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:346
 msgid "Close all"
 msgstr ""
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:356
 msgid "Close"
 msgstr ""
 
@@ -179,6 +179,7 @@ msgid "Controls how much space is between the icons."
 msgstr ""
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -199,14 +200,13 @@ msgstr ""
 msgid "Show window thumbnails when hovering over an app button."
 msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
 msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
 msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
@@ -220,7 +220,6 @@ msgid "Controls how quickly a window will fade on hover."
 msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -395,6 +394,16 @@ msgstr ""
 msgid "Theming"
 msgstr ""
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr ""
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr ""
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -442,7 +451,9 @@ msgid "App button width"
 msgstr ""
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-msgid "Controls the width of the application button."
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr ""
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -516,18 +527,6 @@ msgstr ""
 msgid ""
 "Controls how quickly an app's set of window thumbnails will fade out when "
 "the mouse leaves the app button."
-msgstr ""
-
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr ""
-
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
 msgstr ""
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
@@ -726,6 +725,16 @@ msgstr ""
 msgid ""
 "Controls whether the order windows appear for an app is by last focused, or "
 "the order they were opened."
+msgstr ""
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr ""
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
 msgstr ""
 
 #. 2.8->settings-schema.json->useSystemTooltips->description

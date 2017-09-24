@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 11:53-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -13,99 +13,99 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to the other monitor"
 msgstr "Преместване на другия монитор"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to monitor "
 msgstr "Преместване на монитор "
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr "Само на това работно място"
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr "Видимо на всички работни места"
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 msgid "Move to another workspace"
 msgstr "Преместване на друго работно място"
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr "Места"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Скорошни"
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr "Предпочитания"
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr "Относно"
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr "Настройване"
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr "Премахване"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Откачане от лентата"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "Закачане за лентата"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Премахване от автоматично пусканите"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Добавяне към автоматично пусканите"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Създаване на пряк път"
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr "Възстановяване на непрозрачността"
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Възстановяване"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Смаляване"
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Разуголемяване"
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Уголемяване"
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:336
 msgid "Close others"
 msgstr "Затваряне на другите"
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:346
 msgid "Close all"
 msgstr "Затваряне на всички"
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:356
 msgid "Close"
 msgstr "Затваряне"
 
@@ -175,6 +175,7 @@ msgid "Controls how much space is between the icons."
 msgstr "Регулира разстоянието между отделните иконки."
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -195,15 +196,14 @@ msgstr "Показване на миниатюри"
 msgid "Show window thumbnails when hovering over an app button."
 msgstr "Показване на миниатюри при посочване на програма."
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Размер на иконките"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Задаване на размера на иконките"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -216,7 +216,6 @@ msgid "Controls how quickly a window will fade on hover."
 msgstr "Регулира колко бързо избледнява прозорец при посочване."
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -398,6 +397,16 @@ msgstr "Контекстно меню"
 msgid "Theming"
 msgstr "Тема"
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Размер на иконките"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Задаване на размера на иконките"
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -445,7 +454,10 @@ msgid "App button width"
 msgstr "Ширина на копчето"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-msgid "Controls the width of the application button."
+#, fuzzy
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr "Регулира ширината на копчето на програма."
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -524,19 +536,6 @@ msgid ""
 msgstr ""
 "Регулира колко бързо миниатюрите на дадена програма ще избледнеят, когато "
 "мишката излезе извън копчето."
-
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr ""
-"Позволяване на темите да управляват копчето за затваряне на миниатюрите"
-
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
-msgstr "Регулира дали темата управлява копчето за затваряне на миниатюрите."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -758,6 +757,17 @@ msgid ""
 msgstr ""
 "Регулира дали реда на прозорците за дадена програма e последно фокусиране "
 "или ред на отваряне."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr ""
+"Позволяване на темите да управляват копчето за затваряне на миниатюрите"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "Регулира дали темата управлява копчето за затваряне на миниатюрите."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"

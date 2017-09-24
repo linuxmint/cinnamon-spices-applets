@@ -105,7 +105,7 @@ const unref = function(object) {
     let keys = Object.keys(object);
     for (var i = 0; i < keys.length; i++) {
       if (keys[i] !== 'willUnmount' || keys[i] === 'actor') {
-        object[keys[i]] = undefined;
+        object[keys[i]] = null;
       }
     }
   }, 0);

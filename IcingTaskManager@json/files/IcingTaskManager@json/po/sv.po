@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IcingTaskManager@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-23 11:08-0500\n"
+"POT-Creation-Date: 2017-09-24 11:53-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -18,99 +18,99 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to the other monitor"
 msgstr "Flytta till andra skärmen"
 
-#: 3.2/specialMenus.js:136
+#: 3.2/specialMenus.js:113
 msgid "Move to monitor "
 msgstr "Flytta till skärm"
 
-#: 3.2/specialMenus.js:144
+#: 3.2/specialMenus.js:121
 msgid "Only on this workspace"
 msgstr "Endast på denna arbetsyta"
 
-#: 3.2/specialMenus.js:148
+#: 3.2/specialMenus.js:125
 msgid "Visible on all workspaces"
 msgstr "Synlig på alla arbetsytor"
 
-#: 3.2/specialMenus.js:152
+#: 3.2/specialMenus.js:129
 msgid "Move to another workspace"
 msgstr "Flytta till en annan arbetsyta"
 
-#: 3.2/specialMenus.js:181
+#: 3.2/specialMenus.js:158
 msgid "Places"
 msgstr "Platser"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Tidigare"
 
-#: 3.2/specialMenus.js:256
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: 3.2/specialMenus.js:259
+#: 3.2/specialMenus.js:236
 msgid "About..."
 msgstr "Om..."
 
-#: 3.2/specialMenus.js:263
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
 msgstr "Konfigurera..."
 
-#: 3.2/specialMenus.js:267
+#: 3.2/specialMenus.js:244
 msgid "Remove"
 msgstr "Ta bort"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Ta bort från panelen"
 
-#: 3.2/specialMenus.js:302
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "Fäst på panelen"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Ta bort från autostart"
 
-#: 3.2/specialMenus.js:308
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Lägg till i autostart"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Skapa genväg"
 
-#: 3.2/specialMenus.js:324
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
 msgstr "Återställ full opacitet"
 
-#: 3.2/specialMenus.js:332
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Återställ"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Minimera"
 
-#: 3.2/specialMenus.js:345
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Avmaximera"
 
-#: 3.2/specialMenus.js:350
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Maximera"
 
-#: 3.2/specialMenus.js:359
+#: 3.2/specialMenus.js:336
 msgid "Close others"
 msgstr "Stäng alla andra"
 
-#: 3.2/specialMenus.js:369
+#: 3.2/specialMenus.js:346
 msgid "Close all"
 msgstr "Stäng alla"
 
-#: 3.2/specialMenus.js:379
+#: 3.2/specialMenus.js:356
 msgid "Close"
 msgstr "Stäng"
 
@@ -180,6 +180,7 @@ msgid "Controls how much space is between the icons."
 msgstr "Avgör avståndet mellan ikonerna."
 
 #. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->icon-size->units
 #. 3.2->settings-schema.json->app-button-width->units
 #. 3.2->settings-schema.json->thumbnail-close-button-size->units
@@ -200,15 +201,14 @@ msgstr "Visa miniatyrer"
 msgid "Show window thumbnails when hovering over an app button."
 msgstr "Visa fönsterminiatyr vid hovring över en programknapp."
 
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Ikonstorlek"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
 
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Ange ikonstorlek"
+#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -222,7 +222,6 @@ msgstr ""
 "Avgör hur fort ett fönster skall tonas in/ut vid hovring över miniatyren."
 
 #. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
 #. 3.2->settings-schema.json->thumbnail-timeout->units
 #. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
@@ -404,6 +403,16 @@ msgstr "Kontextmeny"
 msgid "Theming"
 msgstr "Temasättning"
 
+#. 3.2->settings-schema.json->icon-size->description
+#. 2.8->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Ikonstorlek"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 2.8->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Ange ikonstorlek"
+
 #. 3.2->settings-schema.json->animate-thumbnails->description
 #. 2.8->settings-schema.json->animate-thumbnails->description
 msgid "Animate thumbnails"
@@ -451,7 +460,10 @@ msgid "App button width"
 msgstr "Programknappsbredd"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-msgid "Controls the width of the application button."
+#, fuzzy
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
 msgstr "Kontrollerar bredden på programknappar."
 
 #. 3.2->settings-schema.json->show-recent->description
@@ -530,18 +542,6 @@ msgid ""
 msgstr ""
 "Avgör hur snabbt ett programs fönsterminiatyrer, tonas ut när muspekaren "
 "lämnar programknappen."
-
-#. 3.2->settings-schema.json->close-button-style->description
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr "Låt teman kontrollera miniatyrens stängknapp"
-
-#. 3.2->settings-schema.json->close-button-style->tooltip
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
-msgstr "avgör om temat kontrollerar fönsterminiatyrers stängningsknapp."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -757,6 +757,16 @@ msgid ""
 msgstr ""
 "Avgör om ordningen i vilken programfönster visas, är efter senast fokuserad "
 "eller efter den ordning de öppnades."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "Låt teman kontrollera miniatyrens stängknapp"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "avgör om temat kontrollerar fönsterminiatyrers stängningsknapp."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"

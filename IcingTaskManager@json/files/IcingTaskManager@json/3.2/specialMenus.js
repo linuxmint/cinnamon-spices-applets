@@ -58,10 +58,8 @@ AppMenuButtonRightClickMenu.prototype = {
     this.state = params.state;
     this.groupState = params.groupState;
 
-    this.signals = new SignalManager.SignalManager(this);
+    this.signals = new SignalManager.SignalManager({});
     this.signals.connect(this, 'open-state-changed', Lang.bind(this, this._onToggled));
-
-    //this.actor.style = 'width: 500px;';
   },
 
   monitorMoveWindows: function(arg1, arg2, arg3, i) {
@@ -554,7 +552,9 @@ AppThumbnailHoverMenu.prototype = {
   },
 
   close: function (force) {
-    if (!force && (!this.shouldClose || (!this.shouldClose && this.state.settings.onClickThumbs))) {
+    if (!force && (!this.shouldClose
+      || (!this.shouldClose && this.state.settings.onClickThumbs))
+      || !this.groupState) {
       return;
     }
     if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
@@ -644,10 +644,12 @@ AppThumbnailHoverMenu.prototype = {
     this.appThumbnails = [];
   },
 
-  updateThumbnail: function(index) {
-    this.appThumbnails[index].index = refThumb;
-    this.appThumbnails[index].metaWindow = metaWindow;
-    this.appThumbnails[index]._refresh();
+  updateThumbnails: function(exceptIndex) {
+    for (let i = 0; i < this.appThumbnails.length; i++) {
+      if (i !== exceptIndex) {
+        this.appThumbnails[i].refreshThumbnail();
+      }
+    }
   },
 
   addThumbnail: function(metaWindow) {
@@ -665,15 +667,18 @@ AppThumbnailHoverMenu.prototype = {
         state: this.state,
         groupState: this.groupState,
         metaWindow: metaWindow,
-        index: refThumb
+        index: this.appThumbnails.length // correct index before actual push
       });
       this.appThumbnails.push(thumbnail);
-      refThumb = this.appThumbnails.length - 1;
       this.box.insert_actor(thumbnail.actor, -1);
+      // TBD: Update the thumbnail scaling for the other thumbnails belonging to this group.
+      // Since the total window count determines the scaling used, this needs to be done
+      // each time a window is added.
+      this.updateThumbnails(thumbnail.index);
     } else if (this.appThumbnails[refThumb]) {
       this.appThumbnails[refThumb].index = refThumb;
       this.appThumbnails[refThumb].metaWindow = metaWindow;
-      this.appThumbnails[refThumb]._refresh();
+      this.appThumbnails[refThumb].refreshThumbnail();
       this.box.set_child_at_index(this.appThumbnails[refThumb].actor, refThumb);
     }
 
@@ -791,12 +796,14 @@ WindowThumbnail.prototype = {
 
     this.metaWindow = params.metaWindow;
     this.index = params.index;
+
+    this.metaWindowActor = null;
     this.thumbnailPadding = 16;
     this.willUnmount = false;
     this.stopClick = false;
     this.entered = false;
     this.isFocused = false;
-    this.signals = new SignalManager.SignalManager(this);
+    this.signals = new SignalManager.SignalManager({});
 
     // Inherit the theme from the alt-tab menu'
     this.actor = new St.BoxLayout({
@@ -857,7 +864,7 @@ WindowThumbnail.prototype = {
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
     if (!this.overlayPreview) {
-      this._hoverPeek(this.state.settings.peekOpacity, this.metaWindow);
+      this._hoverPeek(this.state.settings.peekOpacity);
     }
     this.actor.add_style_pseudo_class('outlined');
     this.actor.add_style_pseudo_class('selected');
@@ -887,7 +894,7 @@ WindowThumbnail.prototype = {
   },
 
   _focusWindowChange: function () {
-    if (this.isFocused) {
+    if (this.isFocused && this.state.settings.highlightLastFocusedThumbnail) {
       this.actor.add_style_pseudo_class('selected');
     } else {
       this.actor.remove_style_pseudo_class('outlined');
@@ -900,7 +907,7 @@ WindowThumbnail.prototype = {
       return;
     }
     if (this.groupState.metaWindows.length > 0) {
-      this._refresh(this.metaWindow, this.groupState.metaWindows);
+      this.refreshThumbnail(this.metaWindow, this.groupState.metaWindows);
     }
   },
 
@@ -913,34 +920,11 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _getThumbnail: function () {
-    // Create our own thumbnail if it doesn't exist
-    let thumbnail = null;
-    if (this.muffinWindow) {
-      this.signals.disconnect('size-changed', this.muffinWindow);
-    }
-    this.muffinWindow = this.metaWindow.get_compositor_private();
-    if (this.muffinWindow) {
-      let windowTexture = this.muffinWindow.get_texture();
-      let [width, height] = windowTexture.get_size();
-      this.signals.connect(this.muffinWindow, 'size-changed', Lang.bind(this, this._refresh));
-      let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
-      thumbnail = new Clutter.Clone({
-        source: windowTexture,
-        reactive: true,
-        width: width * scale,
-        height: height * scale
-      });
-    }
-
-    return thumbnail;
-  },
-
   handleCloseClick: function(){
     this.handleLeaveEvent();
     this.stopClick = true;
     this.destroy();
-    this._hoverPeek(constants.OPACITY_OPAQUE, this.metaWindow, false);
+    this._hoverPeek(constants.OPACITY_OPAQUE);
 
     this.metaWindow.delete(global.get_current_time());
     if (this.groupState.metaWindows.length <= 1) {
@@ -971,7 +955,40 @@ WindowThumbnail.prototype = {
     this.stopClick = false;
   },
 
-  _refresh: function (metaWindow, metaWindows) {
+  getThumbnail: function (deferredRetry = false) {
+    if (!this.state.settings.showThumbs) {
+      return null;
+    }
+    // Create our own thumbnail if it doesn't exist
+    let isUpdate = false;
+    if (this.metaWindowActor) {
+      isUpdate = true;
+      this.signals.disconnect('size-changed', this.metaWindowActor);
+    }
+    this.metaWindowActor = this.metaWindow.get_compositor_private();
+    if (this.metaWindowActor) {
+      let windowTexture = this.metaWindowActor.get_texture();
+      let [width, height] = windowTexture.get_size();
+      this.signals.connect(this.metaWindowActor, 'size-changed', Lang.bind(this, this.refreshThumbnail));
+      let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
+      if (isUpdate) {
+        this.thumbnailActor.child.source = windowTexture;
+        this.thumbnailActor.child.width = width * scale;
+        this.thumbnailActor.child.height = height * scale;
+      } else {
+        this.thumbnailActor.child = new Clutter.Clone({
+          source: windowTexture,
+          reactive: true,
+          width: width * scale,
+          height: height * scale
+        });
+      }
+    } else if (!deferredRetry) {
+      setTimeout(() => this.getThumbnail(true), 0);
+    }
+  },
+
+  refreshThumbnail: function (metaWindow, metaWindows) {
     if (this.willUnmount
       || !this.groupState
       || !this.groupState.app) {
@@ -979,11 +996,11 @@ WindowThumbnail.prototype = {
     }
     metaWindow = metaWindow ? metaWindow : this.metaWindow;
     metaWindows = metaWindows ? metaWindows : this.groupState.metaWindows;
+
     if (!this.metaWindow) {
       return false;
     }
 
-    // Turn favorite tooltip into a normal thumbnail
     let monitor = Main.layoutManager.primaryMonitor;
 
     let setThumbSize = (divider=70, offset=16)=>{
@@ -1018,34 +1035,27 @@ WindowThumbnail.prototype = {
 
         // Replace the old thumbnail
         this._label.text = this.metaWindow.title;
-        if (this.state.settings.showThumbs) {
-          this.thumbnail = this._getThumbnail();
-          this.thumbnailActor.child = this.thumbnail;
-        } else {
-          this.thumbnailActor.child = null;
-        }
+        this.getThumbnail();
       }
     };
 
     setThumbSize();
-    return false;
   },
 
-  _hoverPeek: function (opacity, metaWin) {
+  _hoverPeek: function (opacity) {
     if (!this.state.settings.enablePeek || this.state.overlayPreview) {
       return;
     }
-    let metaWindowActor = metaWin.get_compositor_private();
-    if (!metaWindowActor) {
+    if (!this.metaWindowActor) {
       return;
     }
     this.state.set({
       overlayPreview: new Clutter.Clone({
-        source: metaWindowActor.get_texture(),
+        source: this.metaWindowActor.get_texture(),
         opacity: 0
       })
     });
-    let [x, y] = metaWindowActor.get_position();
+    let [x, y] = this.metaWindowActor.get_position();
     this.state.overlayPreview.set_position(x, y);
     global.overlay_group.add_child(this.state.overlayPreview);
     global.overlay_group.set_child_above_sibling(this.state.overlayPreview, null);

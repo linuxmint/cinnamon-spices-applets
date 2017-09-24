@@ -290,7 +290,7 @@ MyApplet.prototype = {
 
     this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
     this.bindSettings();
-    this.signals = new SignalManager.SignalManager(this);
+    this.signals = new SignalManager.SignalManager({});
     this.appSystem = this.state.trigger('getAppSystem');
     this.pinnedFavorites = new PinnedFavs({
       signals: this.signals,
@@ -305,7 +305,7 @@ MyApplet.prototype = {
 
     this.getAutoStartApps();
     this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
-    this.signals.connect(global.screen, 'notify::n-workspaces', Lang.bind(this, this._onWorkspaceCreatedOrDestroyed));
+    this.signals.connect(global.screen, 'workspace-removed', Lang.bind(this, this.onWorkspaceRemoved));
     this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
     this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, this.on_applet_instances_changed));
     this.signals.connect(global.display, 'window-marked-urgent', Lang.bind(this, this._updateAttentionState));
@@ -343,6 +343,7 @@ MyApplet.prototype = {
       {key: 'thumbnail-close-button-size', value: 'thumbnailCloseButtonSize', cb: this._updateThumbnailCloseButtonSize},
       {key: 'thumbnail-padding', value: 'thumbnailPadding', cb: this._updateThumbnailPadding},
       {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateVerticalThumbnailState},
+      {key: 'highlight-last-focused-thumbnail', value: 'highlightLastFocusedThumbnail', cb: this._updateVerticalThumbnailState},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'show-thumbnails', value: 'showThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
@@ -423,10 +424,11 @@ MyApplet.prototype = {
     this._unbindAppKey();
     this.signals.disconnectAllSignals();
     for (let i = 0, len = this.appLists.length; i < len; i++) {
-      this.appLists[i].destroy();
+      if (this.appLists[i]) {
+        this.appLists[i].destroy();
+      }
     }
 
-    this.actor.destroy();
     this.state.destroy();
     unref(this);
   },
@@ -562,6 +564,9 @@ MyApplet.prototype = {
 
   _updateActorAttributes: function() {
     each(this.appLists, (workspace)=>{
+      if (!workspace) {
+        return;
+      }
       each(workspace.appList, (appGroup)=>{
         appGroup.setActorAttributes();
       });
@@ -755,7 +760,7 @@ MyApplet.prototype = {
       }
       return false;
     }
-    if (!(source.groupState.isFavoriteApp)) {
+    if (!source.groupState.isFavoriteApp) {
       if (this.state.dragPlaceholderPos !== -1) {
         this.appLists[this.state.currentWs].actor.set_child_at_index(source.actor, this.state.dragPlaceholderPos);
       }
@@ -814,30 +819,29 @@ MyApplet.prototype = {
     this._updateFavorites();
   },
 
-  _onWorkspaceCreatedOrDestroyed: function (i) {
-    let wsIndexes = Array(i);
-    let removedIndexes = [];
+  onWorkspaceRemoved: function (metaScreen, index) {
+    if (this.appLists.length <= index) {
+      return;
+    }
+    let removedLists = [];
     for (let i = 0; i < this.appLists.length; i++) {
-      let hasMatch = false;
-      for (let i = 0; i < wsIndexes.length; i++) {
-        let workspace = global.screen.get_workspace_by_index(i);
-        if (isEqual(workspace, this.appLists[i].metaWorkspace)) {
-          hasMatch = true;
-        }
-      }
-      if (!hasMatch) {
-        removedIndexes.push(i);
+      let workspaceIndex = this.appLists[i].metaWorkspace.index();
+      if (workspaceIndex === -1) {
+        this.appLists[i].destroy();
+        this.appLists[i] = null;
+        removedLists.push(i);
+      } else {
+        this.appLists[i].index = workspaceIndex;
       }
     }
-    for (let i = 0; i < removedIndexes.length; i++) {
-      this.appLists[removedIndexes[i]].destroy();
-      this.appLists[removedIndexes[i]] = undefined;
-      this.appLists.splice(removedIndexes[i], 1);
+    for (let i = 0; i < removedLists.length; i++) {
+      this.appLists.splice(removedLists[i], 1);
     }
+    this.state.set({currentWs: global.screen.get_active_workspace_index()});
   },
 
   _onSwitchWorkspace: function () {
-    this.state.currentWs = global.screen.get_active_workspace_index();
+    this.state.set({currentWs: global.screen.get_active_workspace_index()});
     let metaWorkspace = global.screen.get_workspace_by_index(this.state.currentWs);
 
     // If the workspace we switched to isn't in our list,
@@ -846,25 +850,20 @@ MyApplet.prototype = {
       indexOnly: true
     });
 
-    let appList;
     if (refWorkspace === -1) {
-      appList = new AppList({
+      this.appLists.push(new AppList({
         metaWorkspace: metaWorkspace,
-        state: this.state
-      });
-      this.appLists.push(appList);
+        state: this.state,
+        index: this.state.currentWs
+      }));
     }
 
-    // this.actor can only have one child, so setting the child
-    // will automatically unparent anything that was previously there, which
-    // is exactly what we want.
-    let list;
-    if (refWorkspace > -1) {
-      list = this.appLists[refWorkspace];
-    } else {
-      list = appList;
+    if (refWorkspace === -1) {
+      refWorkspace = this.appLists.length - 1;
     }
-    this.actor.add_child(list.actor);
+
+    this.actor.remove_all_children();
+    this.actor.add_child(this.appLists[refWorkspace].actor);
   },
 
   _onOverviewShow: function () {
