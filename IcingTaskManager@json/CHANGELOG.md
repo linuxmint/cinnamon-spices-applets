@@ -1,5 +1,26 @@
 Changelog
 
+### 6.0.0
+
+  * Reorganized and cleaned up a lot of code.
+  * Disabled listing windows by monitor on the default configuration.
+  * Fixed a couple performance bottlenecks during applet initialization, and cut down the start up time a lot.
+  * Fixed an issue with window titles getting updated too frequently.
+  * Fixed removing workspaces not having their corresponding objects in ITM removed.
+  * Reduced a lot of redundancy in the focused window state handling logic.
+  * Improved performance while switching between title display options.
+  * Improved scaling for thumbnails on vertical panels.
+  * Fixed the progress indicator being visible while inactive on some themes.
+  * Fixed launchers being added through menu applets not being reflected in ITM.
+  * Added support for pinning apps by dragging launchers from menu applets.
+  * Added new thumbnail options for adjusting padding and the close button size.
+  * Added an option to toggle the last active window thumbnail indicator in the thumbnail menu.
+  * Known issues:
+    * When repositioning the applet in panel edit mode on Cinnamon 3.2, the app buttons will become duplicated.
+    * When label button modes are enabled, there isn't correct padding on pinned and inactive apps, or in focused mode, unfocused apps. Setting extra spacing in the options might help.
+    * Restarting the applet through Melange or the dbus is not supported or guarunteed to be bug-free, and is only used during development. If you need to restart the applet, please restart Cinnamon.
+
+
 ### 5.3.3
 
   * Fixed a regression causing pinned unopened icons to have the wrong aspect ratio, or become off-center.
