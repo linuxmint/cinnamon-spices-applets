@@ -48,23 +48,6 @@ function center (length, naturalLength) {
   return [x1, x2];
 }
 
-const anyWindowInGroupHasFocus = function (metaWindows) {
-  for (let i = 0; i < metaWindows.length; i++) {
-    if (metaWindows[i].appears_focused) {
-      return true;
-    }
-    let transientHasFocus = false;
-    metaWindows[i].foreach_transient(function(transient) {
-      if (transient.appears_focused) {
-        transientHasFocus = true;
-        return false;
-      }
-      return true;
-    });
-    return transientHasFocus;
-  }
-};
-
 const getPseudoClass = function(pseudoClass) {
   return store.queryCollection(constants.pseudoOptions, {id: pseudoClass}).label;
 };
@@ -126,7 +109,6 @@ AppGroup.prototype = {
       appInfo: params.app.get_app_info(),
       metaWindows: params.metaWindows,
       lastFocused: params.metaWindow,
-      lastRemoved: '',
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
       autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
       willUnmount: false,
@@ -841,6 +823,7 @@ AppGroup.prototype = {
         this._windowTitleChanged(metaWindow);
         if (refWindow === -1) {
           this.groupState.metaWindows.push(metaWindow);
+          this.groupState.trigger('addThumbnailToMenu', metaWindow);
         }
         this._calcWindowNumber(this.groupState.metaWindows);
         this._onFocusChange();
@@ -872,9 +855,9 @@ AppGroup.prototype = {
       this._windowTitleChanged(this.groupState.lastFocused);
       this.groupState.set({
         metaWindows: this.groupState.metaWindows,
-        lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1],
-        lastRemoved: metaWindow.toString()
+        lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1]
       });
+      this.groupState.trigger('removeThumbnailFromMenu', metaWindow);
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
@@ -937,7 +920,7 @@ AppGroup.prototype = {
       return;
     }
 
-    let hasFocus = anyWindowInGroupHasFocus(this.groupState.metaWindows);
+    let hasFocus = this.state.trigger('getFocusState', metaWindow);
     if (hasFocus) {
       this.listState.set({lastFocusedApp: this.groupState.appId});
       this.groupState.set({lastFocused: metaWindow});
@@ -946,7 +929,9 @@ AppGroup.prototype = {
     if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
       this._updateFocusedStatus(hasFocus);
     }
-    this.hoverMenu._refresh(false);
+    if (this.state.settings.sortThumbs) {
+      this.hoverMenu.addThumbnail(metaWindow);
+    }
   },
 
   _updateFocusedStatus: function (hasFocus) {
@@ -987,7 +972,6 @@ AppGroup.prototype = {
     }
 
     let windowNum = this.groupState.metaWindows ? this.groupState.metaWindows.length : 0;
-
     this._numLabel.text = windowNum.toString();
     if (this.state.settings.numDisplay === constants.NumberDisplay.Smart) {
       if (windowNum <= 1) {

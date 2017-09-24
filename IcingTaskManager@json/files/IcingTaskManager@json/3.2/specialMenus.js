@@ -47,27 +47,6 @@ const setOpacity = (peekTime, window_actor, targetOpacity) => {
   });
 };
 
-const singleWindowHasFocus = function(metaWindow) {
-  if (!metaWindow
-    || metaWindow.minimized) {
-    return false;
-  }
-
-  if (metaWindow.appears_focused) {
-    return true;
-  }
-
-  let transientHasFocus = false;
-  metaWindow.foreach_transient(function (transient) {
-    if (transient && transient.appears_focused) {
-      transientHasFocus = true;
-      return false;
-    }
-    return true;
-  });
-  return transientHasFocus;
-};
-
 function AppMenuButtonRightClickMenu () {
   this._init.apply(this, arguments);
 }
@@ -505,44 +484,22 @@ AppThumbnailHoverMenu.prototype = {
     this.groupState = groupState;
 
     this.groupState.connect({
-      lastRemoved: (partialState) => {
-        if (!partialState.lastRemoved
-        || this.willUnmount) {
-          return;
-        }
-        let refThumb = store.queryCollection(this.appThumbnails, {metaWindow: partialState.lastRemoved}, {indexOnly: true});
-        if (refThumb > -1) {
-          this.appThumbnails[refThumb].destroy();
-          this.appThumbnails[refThumb] = undefined;
-          this.appThumbnails.splice(refThumb, 1);
-        }
-      },
       hoverMenuClose: () => {
         this.shouldClose = true;
         this.close();
       },
-      metaWindows: () => this.ready ? this._refresh(true) : null,
-      unfocusOthers: (metaWindowString) => {
-        if (this.willUnmount) {
-          return;
-        }
-        for (var i = 0; i < this.appThumbnails.length; i++) {
-          if (this.appThumbnails[i].metaWindow
-            && this.appThumbnails[i].metaWindow.toString() !== metaWindowString) {
-            this.appThumbnails[i].handleLeaveEvent();
-          }
-        }
-      },
+      addThumbnailToMenu: (win) => this.addThumbnail(win),
       removeThumbnailFromMenu: (win) => {
         let index = store.queryCollection(this.appThumbnails, {metaWindow: win}, {indexOnly: true});
         if (index > -1) {
+          this.appThumbnails[index].destroy();
+          this.appThumbnails[index] = undefined;
           this.appThumbnails.splice(index, 1);
         }
       }
     });
 
     this.appThumbnails = [];
-    this.ready = false;
   },
 
   _onButtonPress: function () {
@@ -588,14 +545,10 @@ AppThumbnailHoverMenu.prototype = {
       || (this.shouldClose && !this.state.settings.onClickThumbs)) {
       return;
     }
-    if (this.groupState.metaWindows.length === 0) {
+    if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
       this.groupState.tooltip.set_text(this.groupState.appName);
       this.groupState.tooltip.show();
     } else {
-      if (!this.ready) {
-        this.ready = true;
-        this._refresh(true);
-      }
       PopupMenu.PopupMenu.prototype.open.call(this, this.state.settings.animateThumbs);
     }
   },
@@ -604,7 +557,7 @@ AppThumbnailHoverMenu.prototype = {
     if (!force && (!this.shouldClose || (!this.shouldClose && this.state.settings.onClickThumbs))) {
       return;
     }
-    if (this.groupState.metaWindows.length === 0) {
+    if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
       this.groupState.tooltip.set_text('');
       this.groupState.tooltip.hide();
     }
@@ -617,11 +570,9 @@ AppThumbnailHoverMenu.prototype = {
     let symbol = e.get_key_symbol();
     let i = store.queryCollection(this.appThumbnails, {entered: true}, {indexOnly: true});
     let entered = i > -1;
-    if (entered) {
-      this.groupState.trigger('unfocusOthers');
-    } else {
+    if (!entered) {
       i = store.queryCollection(this.appThumbnails, function(thumbnail) {
-        return thumbnail.metaWindow.appears_focused;
+        return thumbnail.isFocused;
       }, {indexOnly: true});
       if (i === -1) {
         i = 0;
@@ -660,25 +611,28 @@ AppThumbnailHoverMenu.prototype = {
         index = this.appThumbnails.length - 1;
       }
     } else if (symbol === Clutter.KEY_Return && entered) {
-      Main.activateWindow(this.appThumbnails[i].metaWindow, global.get_current_time());
-      this.close(true);
+      this.appThumbnails[i]._connectToWindow(null, 1);
     } else if (symbol === closeArg) {
+      this.appThumbnails[i].handleLeaveEvent();
       this.close(true);
     } else {
       return;
     }
     if (this.appThumbnails[index] !== undefined) {
+      this.appThumbnails[i].handleLeaveEvent();
       this.appThumbnails[index].handleEnterEvent();
+      if (this.appThumbnails[i].isFocused) {
+        this.appThumbnails[i]._focusWindowChange();
+      }
     }
   },
 
-  _refresh: function (refreshThumbnails) {
-    // Update appThumbnails to include new programs
-    this.addWindowThumbnails(this.groupState.metaWindows, refreshThumbnails);
-    // used to make sure everything is on the stage
-    if (refreshThumbnails) {
-      this.setStyleOptions(false);
+  fullyRefreshThumbnails: function () {
+    if (this.appThumbnails.length > 0) {
+      this.destroyThumbnails();
     }
+    this.addWindowThumbnails(this.groupState.metaWindows);
+    this.setStyleOptions(false);
   },
 
   destroyThumbnails: function() {
@@ -688,40 +642,15 @@ AppThumbnailHoverMenu.prototype = {
       this.appThumbnails[i] = undefined;
     }
     this.appThumbnails = [];
-    this.ready = false;
   },
 
-  addWindowThumbnails: function (metaWindows, refreshThumbnails) {
-    if (this.willUnmount || !this.box) {
-      return;
-    }
-    if (!metaWindows) {
-      metaWindows = this.groupState.metaWindows;
-    }
-    if (metaWindows.length > 0) {
-      let children = this.box.get_children();
-      for (let w = 0, len = children.length; w < len; w++) {
-        this.box.remove_actor(children[w]);
-      }
-    }
+  updateThumbnail: function(index) {
+    this.appThumbnails[index].index = refThumb;
+    this.appThumbnails[index].metaWindow = metaWindow;
+    this.appThumbnails[index]._refresh();
+  },
 
-    if (refreshThumbnails) {
-      for (let i = 0, len = metaWindows.length; i < len; i++) {
-        let refThumb = store.queryCollection(this.appThumbnails, thumbnail => isEqual(thumbnail.metaWindow, metaWindows[i]), {indexOnly: true});
-        if (!this.appThumbnails[i] && refThumb === -1) {
-          let thumbnail = new WindowThumbnail({
-            state: this.state,
-            groupState: this.groupState,
-            metaWindow: metaWindows[i],
-            index: i
-          });
-          this.appThumbnails.push(thumbnail);
-        } else {
-          this.appThumbnails[i].index = i;
-          this.appThumbnails[i]._refresh();
-        }
-      }
-    }
+  addThumbnail: function(metaWindow) {
     if (this.state.settings.sortThumbs) {
       this.appThumbnails.sort(function (a, b) {
         if (!a.metaWindow || !b.metaWindow) {
@@ -730,12 +659,36 @@ AppThumbnailHoverMenu.prototype = {
         return b.metaWindow.user_time - a.metaWindow.user_time;
       });
     }
-    each(this.appThumbnails, (thumbnail, i) => {
-      if (thumbnail.actor) {
-        this.box.insert_actor(thumbnail.actor, i);
-      }
-    });
+    let refThumb = store.queryCollection(this.appThumbnails, thumbnail => isEqual(thumbnail.metaWindow, metaWindow), {indexOnly: true});
+    if (!this.appThumbnails[refThumb] && refThumb === -1) {
+      let thumbnail = new WindowThumbnail({
+        state: this.state,
+        groupState: this.groupState,
+        metaWindow: metaWindow,
+        index: refThumb
+      });
+      this.appThumbnails.push(thumbnail);
+      refThumb = this.appThumbnails.length - 1;
+      this.box.insert_actor(thumbnail.actor, -1);
+    } else if (this.appThumbnails[refThumb]) {
+      this.appThumbnails[refThumb].index = refThumb;
+      this.appThumbnails[refThumb].metaWindow = metaWindow;
+      this.appThumbnails[refThumb]._refresh();
+      this.box.set_child_at_index(this.appThumbnails[refThumb].actor, refThumb);
+    }
+
   },
+
+  addWindowThumbnails: function () {
+    if (this.willUnmount || !this.box || !this.appThumbnails) {
+      return;
+    }
+
+    for (let i = 0, len = this.groupState.metaWindows.length; i < len; i++) {
+      this.addThumbnail(this.groupState.metaWindows[i]);
+    }
+  },
+
   setStyleOptions: function(skipThumbnailIconResize) {
     if (this.willUnmount || !this.box || this.state.panelEditMode) {
       return;
@@ -776,7 +729,7 @@ AppThumbnailHoverMenu.prototype = {
     } else {
       this.box.vertical = true;
     }
-    this._refresh(true);
+    this.fullyRefreshThumbnails();
   },
 
   updateThumbnailPadding: function() {
@@ -828,11 +781,11 @@ WindowThumbnail.prototype = {
     this.groupState.connect({
       isFavoriteApp: () => this.handleFavorite(),
       lastFocused: () => {
-        if (this.willUnmount || this.groupState.metaWindows.length > 1) {
+        if (this.willUnmount || this.groupState.metaWindows.length === 0) {
           return;
         }
-        this.metaWindow = this.groupState.lastFocused;
-        this._refresh();
+        this.isFocused = isEqual(this.groupState.lastFocused, this.metaWindow);
+        this._focusWindowChange();
       }
     });
 
@@ -842,6 +795,7 @@ WindowThumbnail.prototype = {
     this.willUnmount = false;
     this.stopClick = false;
     this.entered = false;
+    this.isFocused = false;
     this.signals = new SignalManager.SignalManager(this);
 
     // Inherit the theme from the alt-tab menu'
@@ -891,7 +845,7 @@ WindowThumbnail.prototype = {
     setTimeout(() => this.handleFavorite(), 0);
 
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnterEvent));
-    this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeaveEvent));
+    this.signals.connect(this.actor, 'leave-event', () => this.handleLeaveEvent());
     this.signals.connect(this.button, 'button-release-event', Lang.bind(this, this._onCloseButtonRelease));
     this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._connectToWindow));
     //update focused style
@@ -899,9 +853,9 @@ WindowThumbnail.prototype = {
   },
 
   handleEnterEvent: function(){
+    this.entered = true;
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
-    this.entered = true;
     if (!this.overlayPreview) {
       this._hoverPeek(this.state.settings.peekOpacity, this.metaWindow);
     }
@@ -912,9 +866,10 @@ WindowThumbnail.prototype = {
 
   handleLeaveEvent: function(){
     this.entered = false;
-    this.actor.remove_style_pseudo_class('outlined');
-    this.actor.remove_style_pseudo_class('selected');
-    this._focusWindowChange();
+    if (!this.isFocused) {
+      this.actor.remove_style_pseudo_class('outlined');
+      this.actor.remove_style_pseudo_class('selected');
+    }
     this.button.set_opacity(0);
     this.destroyOverlayPreview();
   },
@@ -932,9 +887,8 @@ WindowThumbnail.prototype = {
   },
 
   _focusWindowChange: function () {
-    if (singleWindowHasFocus(this.metaWindow)) {
+    if (this.isFocused) {
       this.actor.add_style_pseudo_class('selected');
-      this.groupState.trigger('unfocusOthers', this.metaWindow.toString());
     } else {
       this.actor.remove_style_pseudo_class('outlined');
       this.actor.remove_style_pseudo_class('selected');
@@ -959,7 +913,7 @@ WindowThumbnail.prototype = {
     }
   },
 
-  _getThumbnail: function (deferredRetry) {
+  _getThumbnail: function () {
     // Create our own thumbnail if it doesn't exist
     let thumbnail = null;
     if (this.muffinWindow) {
@@ -977,8 +931,6 @@ WindowThumbnail.prototype = {
         width: width * scale,
         height: height * scale
       });
-    } else if (!deferredRetry){
-      setTimeout(() => this._getThumbnail(true), 0);
     }
 
     return thumbnail;
@@ -1008,7 +960,7 @@ WindowThumbnail.prototype = {
       this.groupState.trigger('hoverMenuClose');
       return false;
     }
-    let button = event.get_button();
+    let button = typeof event === 'number' ? event : event.get_button();
     if (button === 1 && !this.stopClick) {
       Main.activateWindow(this.metaWindow, global.get_current_time());
       this.groupState.trigger('hoverMenuClose');
@@ -1114,7 +1066,6 @@ WindowThumbnail.prototype = {
     if (!this.groupState) {
       return;
     }
-    this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
     this.signals.disconnectAllSignals();
     this._container.destroy();
     this.bin.destroy();

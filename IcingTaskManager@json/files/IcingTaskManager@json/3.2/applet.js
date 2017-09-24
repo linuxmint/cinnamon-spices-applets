@@ -6,7 +6,6 @@
 //   Josh hess <jake.phy@gmail.com>
 // Partly based on code from the Cinnamon window list applet,
 // Window List with App Grouping applet, and:
-// Cinnamon window list applet, and
 // Copyright (C) 2011 R M Yorston
 // Licence: GPLv2+
 // http://intgat.tigress.co.uk/rmy/extensions/gnome-Cinnamon-frippery-0.2.3.tgz
@@ -47,6 +46,27 @@ if (typeof require !== 'undefined') {
   AppList = AppletDir.appList.AppList;
   store = AppletDir.store_mozjs24;
 }
+
+const getFocusState = function (metaWindow) {
+  if (!metaWindow
+    || metaWindow.minimized) {
+    return false;
+  }
+
+  if (metaWindow.appears_focused) {
+    return true;
+  }
+
+  let transientHasFocus = false;
+  metaWindow.foreach_transient(function (transient) {
+    if (transient && transient.appears_focused) {
+      transientHasFocus = true;
+      return false;
+    }
+    return true;
+  });
+  return transientHasFocus;
+};
 
 function PinnedFavs () {
   this._init.apply(this, arguments);
@@ -241,6 +261,7 @@ MyApplet.prototype = {
       getAppSystem: () => Cinnamon.AppSystem.get_default(),
       getAppFromWMClass: (specialApps, metaWindow) => this.getAppFromWMClass(specialApps, metaWindow),
       getTracker: () => this.tracker,
+      getFocusState: (metaWindow) => getFocusState(metaWindow),
       isWindowInteresting: (metaWindow) => this.tracker.is_window_interesting(metaWindow),
       refreshCurrentAppList: () => this.refreshCurrentAppList(),
       getCurrentAppList: () => this.getCurrentAppList(),
@@ -321,9 +342,9 @@ MyApplet.prototype = {
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
       {key: 'thumbnail-close-button-size', value: 'thumbnailCloseButtonSize', cb: this._updateThumbnailCloseButtonSize},
       {key: 'thumbnail-padding', value: 'thumbnailPadding', cb: this._updateThumbnailPadding},
-      {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateThumbnailOrder},
+      {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
-      {key: 'show-thumbnails', value: 'showThumbs', cb: this.refreshThumbnailsFromCurrentAppList},
+      {key: 'show-thumbnails', value: 'showThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
@@ -513,14 +534,6 @@ MyApplet.prototype = {
     this.refreshCurrentAppList();
   },
 
-  _updateThumbnailOrder: function() {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
-        appGroup.hoverMenu.addWindowThumbnails();
-      });
-    });
-  },
-
   _updateThumbnailPadding: function() {
     each(this.appLists, (workspace)=>{
       each(workspace.appList, (appGroup)=>{
@@ -602,10 +615,6 @@ MyApplet.prototype = {
         appGroup.handleTitleDisplayChange();
       }
     });
-  },
-
-  refreshThumbnailsFromCurrentAppList: function(){
-    this.appLists[this.state.currentWs]._refreshAllThumbnails();
   },
 
   getAppFromWMClass: function(specialApps, metaWindow) {

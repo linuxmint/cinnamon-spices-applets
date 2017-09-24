@@ -105,12 +105,6 @@ AppList.prototype = {
     }
   },
 
-  _refreshAllThumbnails: function() {
-    for (let i = 0, len = this.appList.length; i < len; i++) {
-      this.appList[i].hoverMenu.destroyThumbnails();
-    }
-  },
-
   _onAppKeyPress: function(number){
     if (number > this.appList.length) {
       return;
@@ -230,6 +224,9 @@ AppList.prototype = {
   },
 
   _windowAdded: function (metaWorkspace, metaWindow, app, isFavoriteApp) {
+    if (!this.state) {
+      return;
+    }
     // Check to see if the window that was added already has an app group.
     // If it does, then we don't need to do anything.  If not, we need to
     // create an app group.
@@ -381,6 +378,9 @@ AppList.prototype = {
   },
 
   _windowRemoved: function (metaWorkspace, metaWindow, positionChange) {
+    if (!this.state) {
+      return;
+    }
     let refApp = -1, refWindow = -1, windowCount = 0;
     let wmClass = metaWindow.get_wm_class();
     each(this.appList, (appGroup, i)=>{

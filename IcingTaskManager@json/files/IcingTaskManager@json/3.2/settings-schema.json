@@ -257,7 +257,7 @@
     "min": 0,
     "max": 12,
     "step": 1,
-    "units": "milliseconds",
+    "units": "px",
     "description": "Thumbnail padding",
     "tooltip": "Controls how much space will be around the window preview thumbnails."
   },
