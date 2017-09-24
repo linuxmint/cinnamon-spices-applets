@@ -1,0 +1,53 @@
+# Untranslated Items
+[Applets](../../../README.md) &#187; [rancher@centurix](../README.md) &#187; **French (fr)**
+
+       1	Settings
+       2	Editing Homestead configuration...
+       3	Rancher: Bringing Homestead up, please wait...
+       4	Bringing Homestead up...
+       5	Rancher: Taking Homestead down, please wait...
+       6	Taking Homestead down...
+       7	Rancher: Provisioning Homestead, please wait...
+       8	Provisioning Homestead...
+       9	Rancher: Destroying Homestead, please wait...
+      10	Destroying Homestead...
+      11	Rancher: Suspending Homestead, please wait...
+      12	Suspending Homestead...
+      13	Homestead SSH Terminal opened
+      14	Rancher: Recompiling Kernel, please wait...
+      15	Recompiling Kernel...
+      16	Homestead missing or not configured.
+      17	Kernel Module not loaded. Needs recompilation.
+      18	Homestead up.
+      19	 (Running)
+      20	Rancher: Homestead suspended.
+      21	Homestead suspended.
+      22	 (Suspended)
+      23	Homestead down.
+      24	 (Down)
+      25	Rancher: Homestead not created.
+      26	Homestead not created
+      27	 (Not created/Destroyed)
+      28	Rancher: Homestead not installed.
+      29	Homestead not installed
+      30	Click here for installation instructions
+      31	Recompile Kernel Module.
+      32	SSH Terminal...
+      33	Configuration
+      34	IP: 
+      35	Memory: 
+      36	CPU: 
+      37	Provider: 
+      38	Edit Homestead configuration...
+      39	Hosted Sites
+      40	Edit hosts file...
+      41	Hosted Databases
+      42	Command not found.
+      43	Default text editor
+      44	Homestead project folder
+      45	Homestead config folder
+      46	Vagrant command
+      47	An applet to manage Homestead.
+      48	Homestead manager
+
+<sup>This translation status table was last updated on 2017-09-24, 02:30 UTC.</sup>

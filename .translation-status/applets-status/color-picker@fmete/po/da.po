@@ -1,0 +1,78 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 02:43+0800\n"
+"PO-Revision-Date: 2017-07-16 14:41+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:72
+msgid "click here to pick a color"
+msgstr "Klik her for at vælge en farve"
+
+#. color-picker@fmete->metadata.json->description
+msgid "Click on applet to pick color"
+msgstr "Klik på panelprogrammet for at vælge en farve"
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr "Farvevælger"
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr "Indstillinger for valg af farve"
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr "Indstillinger for panelprogram"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Please Select Color Pick Option:"
+msgstr "Valg af farveformat:"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid ""
+"A combo selection can select between int, boolean, float, and string values"
+msgstr ""
+"En kombinationsboks kan indeholde heltal, booleske, flydende og "
+"tekststrengværdier"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "00,00,00"
+msgstr "00,00,00"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#XXXXXX"
+msgstr "#XXXXXX"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "(00,00,00)"
+msgstr "(00,00,00)"
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#xxxxxx"
+msgstr "#xxxxxx"
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr "Ikonet der skal vises i panelet:"
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr "Vælg en ikonfil eller indtast et ikonnavn i indtastningsfeltet"
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Set the keybinding here to activate an action: "
+msgstr "Angiv tastegenvejen for at aktivere en handling: "

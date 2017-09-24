@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 2.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-28 23:32+0200\n"
+"PO-Revision-Date: 2017-03-28 23:32+0200\n"
+"Last-Translator: spacy01 <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: applet.js:30
+msgid "Bulgarian radio streams"
+msgstr "Български радиа"
+
+#: applet.js:41
+msgid "Bg Radio"
+msgstr "Бг радио"
+
+#: applet.js:43
+msgid "Listening Bg Radio"
+msgstr "Слушаме Бг радио"
+
+#: applet.js:47
+msgid "bTV Radio"
+msgstr "бТВ радио"
+
+#: applet.js:49
+msgid "Listening bTV Radio"
+msgstr "Слушаме бТВ радио"
+
+#: applet.js:53
+msgid "City Radio"
+msgstr "Сити радио"
+
+#: applet.js:55
+msgid "Listening Radio City"
+msgstr "Слушаме радио Сити"
+
+#: applet.js:59
+msgid "Classic FM"
+msgstr "Класик ФМ"
+
+#: applet.js:61
+msgid "Listening Radio Classic FM"
+msgstr "Слушаме радио Класик ФМ"
+
+#: applet.js:65
+msgid "Darik"
+msgstr "Дарик"
+
+#: applet.js:67
+msgid "Listening Darik Radio"
+msgstr "Слушаме Дарик радио"
+
+#: applet.js:71
+msgid "Energy"
+msgstr "Енерджи"
+
+#: applet.js:73
+msgid "Listening Radio Energy"
+msgstr "Слушаме радио Енерджи"
+
+#: applet.js:77
+msgid "FM+"
+msgstr "ФМ+"
+
+#: applet.js:79
+msgid "Listening Radio FM+"
+msgstr "Слушаме радио ФМ+"
+
+#: applet.js:83
+msgid "Fresh"
+msgstr "Фреш"
+
+#: applet.js:85
+msgid "Listening Radio Fresh"
+msgstr "Слушаме радио Фреш"
+
+#: applet.js:89
+msgid "Jazz FM"
+msgstr "Джаз ФМ"
+
+#: applet.js:91
+msgid "Listening Radio Jazz FM"
+msgstr "Слушаме радио Джаз ФМ"
+
+#: applet.js:95
+msgid "Melody"
+msgstr "Мелъди"
+
+#: applet.js:97
+msgid "Listening Radio Melody"
+msgstr "Слушаме радио Мелъди"
+
+#: applet.js:101
+msgid "N-Joy"
+msgstr "Н-Джой"
+
+#: applet.js:103
+msgid "Listening Radio N-Joy"
+msgstr "Слушаме радио Н-Джой"
+
+#: applet.js:107
+msgid "Nova"
+msgstr "Нова"
+
+#: applet.js:109
+msgid "Listening Radio Nova"
+msgstr "Слушаме радио Нова"
+
+#: applet.js:113
+msgid "Radio One"
+msgstr "Радио Едно"
+
+#: applet.js:115
+msgid "Listening Radio One"
+msgstr "Слушаме Радио Едно"
+
+#: applet.js:119
+msgid "Radio One Rock"
+msgstr "Радио Едно Рок"
+
+#: applet.js:121
+msgid "Listening Radio One Rock"
+msgstr "Слушаме Радио Едно Рок"
+
+#: applet.js:125
+msgid "Z-Rock"
+msgstr "Зи-Рок"
+
+#: applet.js:127
+msgid "Listening Radio Z-Rock"
+msgstr "Слушаме Зи-Рок"
+
+#: applet.js:134
+msgid "Stop Radio"
+msgstr "Спри радиото"
+
+#: applet.js:136
+msgid "Bye-bye"
+msgstr "Довиждане"
+
+#. BgRadio@spacy01->metadata.json->description
+msgid ""
+"The most famous Bulgarian radio stations. Some of the streams are available "
+"only from bulgaria. This applet requires moc player."
+msgstr "Най-известните български радиостанции. Някои от стриймовете са налични "
+"само от България. Този аплет изисква moc плеър."
+
+#. BgRadio@spacy01->metadata.json->name
+msgid "BgRadio"
+msgstr "Бг радиа"

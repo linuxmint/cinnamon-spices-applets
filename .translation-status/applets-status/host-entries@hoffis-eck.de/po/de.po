@@ -1,0 +1,67 @@
+# German translations for PACKAGE package
+# German translation for PACKAGE.
+# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Peter Hoffmann <Hoffmann.P@gmx.net>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-16 11:41+0100\n"
+"PO-Revision-Date: 2016-03-15 13:27+0100\n"
+"Last-Translator: Peter Hoffmann <Hoffmann.P@gmx.net>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:53
+msgid "Checking status"
+msgstr "Prüfe Status"
+
+#: applet.js:65
+msgid "Error, could not extract status!"
+msgstr "Fehler, konnte Status nicht extrahieren!"
+
+#: applet.js:73
+msgid "Entry is active"
+msgstr "Eintrag ist aktiv"
+
+#: applet.js:76
+msgid "Entry is inactive"
+msgstr "Eintrag ist inaktiv"
+
+#: applet.js:79
+msgid "Entry does not exist"
+msgstr "Eintrag existiert nicht"
+
+#: applet.js:82
+msgid "Entry status is unknown"
+msgstr "Status des Eintrags ist unbekannt"
+
+#: applet.js:85
+msgid "Error, trying to set unknown status!"
+msgstr "Fehler, es wird versucht einen unbekannten Status zu setzen!"
+
+#: applet.js:113
+msgid "Error, unknown status!"
+msgstr "Fehler, unbekannter Status!"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->ip->description
+msgid "IP address"
+msgstr "IP-Adresse"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->hosts->description
+msgid "hosts"
+msgstr "Hosts"
+
+#. host-entries@hoffis-eck.de->metadata.json->description
+msgid "Enables/Disables Entries in /etc/hosts"
+msgstr "Aktiviert/Deaktiviert Einträge in /etc/hosts"
+
+#. host-entries@hoffis-eck.de->metadata.json->name
+msgid "Host Entries"
+msgstr "Host Einträge"

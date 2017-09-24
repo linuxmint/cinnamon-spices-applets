@@ -1,0 +1,318 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-25 17:54+0200\n"
+"PO-Revision-Date: 2017-07-25 17:55+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr "Bitte Ihr Passwort eingeben, um diese Anwendung zu deinstallieren"
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr "Zur Leiste hinzufügen"
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr "Zum Schreibtisch hinzufügen"
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr "Aus den Favoriten entfernen"
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr "Zu den Favoriten hinzufügen"
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr "Deinstallieren"
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr "Mit NVIDIA-GPU ausführen"
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0 Paket für Firefox und Midori Lesezeichen erforderlich."
+
+#: panel.js:1578
+msgid "Grid View"
+msgstr "Rasteransicht"
+
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr "Zur Rasteransicht wechseln"
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Listenansicht"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr "Zur Listenansicht wechseln"
+
+#: panel.js:1638
+msgid "Type to search..."
+msgstr "Suchbegriff eingeben …"
+
+#: panel.js:1675
+msgid "All Applications"
+msgstr "Alle Anwendungen"
+
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr "Favoriten"
+
+#: panel.js:1747
+msgid "Places"
+msgstr "Orte"
+
+#: panel.js:1752
+msgid "Recent Files"
+msgstr "Zuletzt verwendete Dateien"
+
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+#: panel.js:1768
+msgid "Lock Screen"
+msgstr "Bildschirm sperren"
+
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr "Diesen Bildschirm sperren"
+
+#: panel.js:1799
+msgid "Logout"
+msgstr "Abmelden"
+
+#: panel.js:1800
+msgid "Leave the session"
+msgstr "Sitzung verlassen"
+
+#: panel.js:1822
+msgid "Quit"
+msgstr "Beenden"
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr "Den Rechner herunterfahren"
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr "Starten von »%s« schlug fehl"
+
+#: placeDisplay.js:147
+msgid "Home"
+msgstr "Persönlicher Ordner"
+
+#: placeDisplay.js:221
+msgid "Computer"
+msgstr "Rechner"
+
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr "Netzwerk durchsuchen"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr "Cinnamenu-Einstellungen"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Ein benutzerdefiniertes Symbol verwenden"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Durch Abwählen wird es dem Thema erlaubt, das Symbol einzustellen"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr "Breite der Anwendungsbeschriftung in der Rasteransicht"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Größe der Anwendungssymbole in der Rasteransicht"
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Größe der Kategoriesymbole"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Verzögerung beim Darüberbewegen über das Menü:"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Verzögerung beim Wechsel der Kategorien"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "Millisekunden"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Menüeditor öffnen"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Diesen Knopf drücken um die Menüeinträge anzupassen."
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastenkombinationen zum Öffnen und Schließen des Menüs"
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr "Menüeinträge"
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr "Erscheinungsbild"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Anzahl der Spalten im Anwendungsraster"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "Spalten"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr "Web-Lesezeichen aktivieren"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Auswählen, ob Lesezeichen im Menü indiziert werden sollen"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Ansichtsmodus der Anwendungen beim Start"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Raster"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Liste"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Den benutzerdefinierten Symbolnamen der Menütaste eingeben"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Das Menü öffnen, wenn die Maus darüber bewegt wird"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Öffnen des Menüs aktivieren, wenn sich die Maus auf das Applet bewegt"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Automatischen Bildlauf in der Anwendungsliste aktivieren"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Legt fest, ob weicher automatischer Bildlauf in der Anwendungsliste "
+"aktiviert wird."
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menüanimationen verwenden"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Dem Menü erlauben beim Öffnen und Schließen zu animieren"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Symbol"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Symbol auswählen, welches in der Leiste angezeigt wird."
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Größe der Anwendungssymbole in der Listenansicht"
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr "Verhalten"
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr "Ein flexibles Menü mit Formatierungsoptionen und Lesezeichen."
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenü"
+
+msgid "Show bookmarks and places"
+msgstr "Lesezeichen und Orte anzeigen"
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Legt fest, ob Lesezeichen und Orte im Menü angezeigt werden."
+
+msgid "Show application icons"
+msgstr "Anwendungssymbole anzeigen"
+
+msgid "Choose whether or not to show icons on applications."
+msgstr "Legt fest, ob Symbole an Anwendungen angezeigt werden."
+
+msgid "Show category icons"
+msgstr "Kategoriesymbole anzeigen"
+
+msgid "Choose whether or not to show icons on categories."
+msgstr "Legt fest, ob Symbole an Kategorien angezeigt werden."
+
+msgid "Enable filesystem path entry in search box"
+msgstr "Eingabe des Dateisystempfades im Suchfeld erlauben"
+
+msgid "Allows path entry in the menu search box."
+msgstr "Ermöglicht die Pfadeingabe im Suchfeld des Menüs."
+
+msgid "Show application's description under their titles"
+msgstr "Beschreibung der Anwendung unter Anwendungsnamen anzeigen"
+
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+"Legt fest, ob die Anwendungsbeschreibung auf den Anwendungsknöpfen angezeigt "
+"wird."
+
+msgid "Clear List"
+msgstr "Liste Leeren"
+
+msgid "No recent documents"
+msgstr "Keine kürzlich verwendeten Dokumente"

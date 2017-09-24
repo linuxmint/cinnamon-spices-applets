@@ -1,5 +1,73 @@
 #!/bin/bash
 
+# TABLE HEADER
+function create_table_header {
+_Spices=$1
+_README=$2
+cat > $_README << EOL
+<h1>Translation status by language</h1>
+<p><b>$_Spices</b></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a href="#" id="language">Language</a>
+      </th>
+      <th>
+        <a href="#" id="languageid">ID</a>
+      </th>
+      <th>
+        <a href="#" id="status">Status</a>
+      </th>
+      <th>
+        <a href="#" id="untranslated">Untranslated</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+EOL
+}
+
+# TABLE ENTRY
+function create_table_entry {
+_languageNAME=$1
+_languageID=$2
+_progress=$3
+_untranslated=$4
+_README=$5
+cat >> $_README << EOL
+    <tr>
+      <td class="language" data-value="$_languageNAME">
+        <a href="language-status/$_languageID.md">$_languageNAME</a>
+      </td>
+      <td class="languageid" data-value="$_languageID">
+        $_languageID
+      </td>
+      <td class="status" data-value="$_progress">
+        <img src="http://progressed.io/bar/$_progress" alt="$_progress%" />
+      </td>
+      <td class="untranslated" data-value="$_untranslated">
+        $_untranslated
+      </td>
+    </tr>
+EOL
+}
+
+# TABLE CLOSE
+function close_table {
+_lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
+_README=$1
+cat >> $_README << EOL
+  </tbody>
+</table>
+
+<p><sup>This translation status table was last updated on $_lastUpdateDate.</sup></p>
+EOL
+}
+
+#################### main (script starts here) ####################
+
 cd ..
 
 # Which spices? Get spices name
@@ -29,11 +97,7 @@ sort -t\: -k2 $knownLanguageIDs > $TMPsortedLanguageIDs
 README=README.md
 
 # create HEADER of markdown table
-echo "# Translation status by language" > $README
-echo "**$Spices**" >> $README
-echo "" >> $README
-echo "Language | ID | Status | Untranslated" >> $README
-echo "---------|:--:|:------:|:-----------:" >> $README
+create_table_header "$Spices" $README
 
 while read languageIDName
 do
@@ -41,29 +105,21 @@ do
     languageID=$(echo $languageIDName | cut -f1 -d ':')
     languageNAME=$(echo $languageIDName | cut -f2 -d ':')
 
-    languageStatistic=$(grep "Overall statistics:" $languageStatusDir/$languageID.md)
-    # remove stars *
-    languageStatistic=$(echo "${languageStatistic//\*}")
-    percentageAndUntranslatedStatistic=$(echo "$languageStatistic" | cut -f3,4 -d '|')
+    progress=$(grep -A8 "Overall statistics:" $languageStatusDir/$languageID.md | grep -o "\"status\" data-overall.*" | cut -d "\"" -f 4)
+    translated=$(grep -A8 "Overall statistics:" $languageStatusDir/$languageID.md | grep -o "\"length\" data-overall.*" | cut -d "\"" -f 4)
+    untranslated=$(grep -A8 "Overall statistics:" $languageStatusDir/$languageID.md | grep -o "\"untranslated\" data-overall.*" | cut -d "\"" -f 4)
 
-    # do not show languages, which haven't been translated at all
-    translatedNumber=$(echo "$languageStatistic" | cut -f2 -d '|')
-    untranslatedNumber=$(echo "$languageStatistic" | cut -f4 -d '|')
 
-    if [ $translatedNumber != $untranslatedNumber ]; then
-        echo "[$languageNAME]($languageStatusDir/$languageID.md) | $languageID | $percentageAndUntranslatedStatistic" >> $README
+    if [ $translated != $untranslated ]; then
+        create_table_entry "$languageNAME" "$languageID" "$progress" "$untranslated" $README
     fi
 
 done < $TMPsortedLanguageIDs
 
-# add 'last edited' date
-lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
-echo "" >> $README
-echo "<sup>This translation status table was last updated on $lastUpdateDate.</sup>" >> $README
+close_table $README
 
 # remove tmp files
 rm $TMPsortedLanguageIDs
 
 echo ""
 echo "THE END!"
-#read waiting
