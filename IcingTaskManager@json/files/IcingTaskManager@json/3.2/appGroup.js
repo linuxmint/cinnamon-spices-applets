@@ -34,7 +34,6 @@ if (typeof require !== 'undefined') {
   store = AppletDir.store_mozjs24;
 }
 
-const HORIZONTAL_ICON_SIZE = 16;
 const ICON_HEIGHT_FACTOR = 0.64;
 const VERTICAL_ICON_HEIGHT_FACTOR = 0.75;
 
@@ -301,12 +300,11 @@ AppGroup.prototype = {
   },
 
   setIcon: function () {
+    log(this.state.trigger('getScaleMode'))
     if (this.state.trigger('getScaleMode') && this.labelVisible) {
       this.iconSize = Math.round(this.state.settings.iconSize * ICON_HEIGHT_FACTOR / global.ui_scale);
-    } else if (!this.labelVisible) {
-      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     } else {
-      this.iconSize = HORIZONTAL_ICON_SIZE;
+      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     }
     let icon;
     if (this.groupState.app) {
