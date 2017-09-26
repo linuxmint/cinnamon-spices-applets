@@ -405,6 +405,7 @@ AppList.prototype = {
       this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavoriteApp)=>{
         if (isFavoriteApp || (isFavoriteApp && !this.state.settings.groupApps && windowCount === 0)) {
           this.appList[refApp].groupState.trigger('isFavoriteApp');
+          this.appList[refApp].hideLabel(true);
           this._refreshApps();
           return;
         }
