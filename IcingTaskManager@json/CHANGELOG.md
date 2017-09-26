@@ -1,5 +1,14 @@
 Changelog
 
+### 6.0.1
+
+  * Fixed cycling thumbnail menus via the hotkey not working.
+  * Fixed some apps indicating attention when they are first starting up.
+  * Fixed focused title display mode showing all button labels.
+  * Fixed app icon size preferences not being applied when labels are shown on buttons.
+  * Fixed empty thumbnails being added to the hover menu.
+  * Fixed labels not hiding when pinned apps are closed.
+
 ### 6.0.0
 
   * Reorganized and cleaned up a lot of code.

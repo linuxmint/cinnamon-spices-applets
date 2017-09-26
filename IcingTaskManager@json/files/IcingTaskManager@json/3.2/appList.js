@@ -145,7 +145,7 @@ AppList.prototype = {
       this.state.lastCycled = 0;
     }
     this.state.set({lastCycled: this.state.lastCycled});
-    if (this.appList[refApp].groupState.metaWindows.length > 0) {
+    if (refApp > -1 && this.appList[refApp].groupState.metaWindows.length > 0) {
       this.appList[refApp].hoverMenu.open();
     } else {
       this._cycleMenus();
@@ -276,7 +276,6 @@ AppList.prototype = {
     }
 
     let initApp = (metaWindows, window, index)=>{
-      let time = Date.now();
       let appGroup = new AppGroup({
         state: this.state,
         listState: this.listState,
@@ -285,8 +284,6 @@ AppList.prototype = {
         metaWorkspace: metaWorkspace,
         metaWindows: metaWindows,
         metaWindow: metaWindow,
-        timeStamp: time,
-        ungroupedIndex: index,
         appId: appId,
       });
       this.actor.add_actor(appGroup.actor);
@@ -405,8 +402,10 @@ AppList.prototype = {
       this.appList[refApp]._windowRemoved(metaWorkspace, metaWindow, refWindow, (appId, isFavoriteApp)=>{
         if (isFavoriteApp || (isFavoriteApp && !this.state.settings.groupApps && windowCount === 0)) {
           this.appList[refApp].groupState.trigger('isFavoriteApp');
-          this.appList[refApp].hideLabel(true);
-          this._refreshApps();
+          if (this.state.settings.titleDisplay > 1) {
+            this.appList[refApp].hideLabel(true);
+            this.appList[refApp].groupState.set({groupReady: false});
+          }
           return;
         }
         this.appList[refApp].destroy(true);
