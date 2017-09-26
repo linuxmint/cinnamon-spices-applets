@@ -34,7 +34,6 @@ if (typeof require !== 'undefined') {
   store = AppletDir.store_mozjs24;
 }
 
-const HORIZONTAL_ICON_SIZE = 16;
 const ICON_HEIGHT_FACTOR = 0.64;
 const VERTICAL_ICON_HEIGHT_FACTOR = 0.75;
 
@@ -95,6 +94,7 @@ function AppGroup () {
 }
 
 AppGroup.prototype = {
+  __proto__: DND.LauncherDraggable.prototype,
   _init: function (params) {
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this);
@@ -114,6 +114,7 @@ AppGroup.prototype = {
       willUnmount: false,
       hoverMenuEntered: false,
       tooltip: null,
+      groupReady: false
     });
 
     this.groupState.connect({
@@ -129,7 +130,6 @@ AppGroup.prototype = {
     this.padding = 0;
     this.wasFavapp = false;
     this.time = params.time;
-    this.ungroupedIndex = params.ungroupedIndex;
     this.focusedWindow = false;
     this.title = '';
     this.pseudoClassStash = [];
@@ -167,7 +167,8 @@ AppGroup.prototype = {
     this.setActorAttributes();
     this._label = new St.Label({
       style_class: 'app-button-label',
-      text: ''
+      text: '',
+      show_on_set_parent: false
     });
     if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
       this.hideLabel(false);
@@ -220,10 +221,11 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this._calcWindowNumber(this.groupState.metaWindows);
     this.handleFavorite();
-    this.on_orientation_changed(null, true);
+    this.on_orientation_changed(true);
+    setTimeout(() => this.groupState.set({groupReady: true}), 0);
   },
 
-  on_orientation_changed: function(orientation, fromInit) {
+  on_orientation_changed: function(fromInit) {
     this.actor.set_style_class_name('window-list-item-box');
     if (this.state.orientation === St.Side.TOP) {
       this.actor.add_style_class_name('top');
@@ -247,7 +249,7 @@ AppGroup.prototype = {
     // mode, but not currently sure how to unset the fixed width on the actor so it revert to a
     // resizable state without destroying it. Otherwise, buttons with labels don't have enough padding set.
     if (!this.state.isHorizontal
-      ||this.state.settings.titleDisplay === 1
+      || this.state.settings.titleDisplay === 1
       || this.state.settings.titleDisplay === 3 && !this.labelVisible) {
       if (this.state.settings.enableAppButtonWidth) {
         this.actor.width = this.state.settings.appButtonWidth;
@@ -274,7 +276,8 @@ AppGroup.prototype = {
 
   setMargin: function() {
     let direction = this.state.isHorizontal ? 'right' : 'bottom';
-    this.actor.style = this.actor.style + 'margin-' + direction + ': ' + this.state.settings.iconSpacing + 'px;';
+    let existingStyle = this.actor.style ? this.actor.style : '';
+    this.actor.style = existingStyle + 'margin-' + direction + ': ' + this.state.settings.iconSpacing + 'px;';
   },
 
   _onIconBoxStyleChanged: function() {
@@ -303,10 +306,8 @@ AppGroup.prototype = {
   setIcon: function () {
     if (this.state.trigger('getScaleMode') && this.labelVisible) {
       this.iconSize = Math.round(this.state.settings.iconSize * ICON_HEIGHT_FACTOR / global.ui_scale);
-    } else if (!this.labelVisible) {
-      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     } else {
-      this.iconSize = HORIZONTAL_ICON_SIZE;
+      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     }
     let icon;
     if (this.groupState.app) {
@@ -397,7 +398,6 @@ AppGroup.prototype = {
   },
 
   _allocate: function (actor, box, flags) {
-
     let allocWidth = box.x2 - box.x1;
     let allocHeight = box.y2 - box.y1;
     let childBox = new Clutter.ActorBox();
@@ -587,6 +587,12 @@ AppGroup.prototype = {
   },
 
   _onWindowDemandsAttention: function (window) {
+    // Prevent apps from indicating attention when they are starting up.
+    if (!this.groupState
+      || !this.groupState.groupReady
+      || this.groupState.willUnmount) {
+      return;
+    }
     let windows = this.groupState.app.get_windows();
     for (let i = 0, len = windows.length; i < len; i++) {
       if (isEqual(windows[i], window)) {
@@ -895,10 +901,6 @@ AppGroup.prototype = {
       return;
     }
 
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-      this.setText(metaWindow.title);
-      this.showLabel(true);
-    }
     if ((metaWindow.lastTitle && metaWindow.lastTitle === metaWindow.title)
       && !refresh) {
       return;
@@ -939,18 +941,15 @@ AppGroup.prototype = {
     }
     this._onFocusChange(hasFocus);
     if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-      this._updateFocusedStatus(hasFocus);
+      if (hasFocus) {
+        this.setText(metaWindow.title);
+        this.showLabel(true);
+      } else {
+        this.hideLabel(true);
+      }
     }
     if (this.state.settings.sortThumbs) {
       this.hoverMenu.addThumbnail(metaWindow);
-    }
-  },
-
-  _updateFocusedStatus: function (hasFocus) {
-    if (hasFocus) {
-      this.showLabel(true);
-    } else {
-      this.hideLabel(true);
     }
   },
 
@@ -1045,9 +1044,9 @@ AppGroup.prototype = {
     this.listState.trigger('removeChild', this.actor);
     this._container.destroy();
     this.actor.destroy();
-    this.groupState.destroy();
 
     if (!skipRefCleanup) {
+      this.groupState.destroy();
       unref(this);
     }
   }

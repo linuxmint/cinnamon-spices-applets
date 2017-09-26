@@ -682,7 +682,6 @@ AppThumbnailHoverMenu.prototype = {
       this.appThumbnails[refThumb].refreshThumbnail();
       this.box.set_child_at_index(this.appThumbnails[refThumb].actor, refThumb);
     }
-
   },
 
   addWindowThumbnails: function () {
@@ -963,7 +962,7 @@ WindowThumbnail.prototype = {
     this.stopClick = false;
   },
 
-  getThumbnail: function (deferredRetry = false) {
+  getThumbnail: function () {
     if (!this.state.settings.showThumbs) {
       return null;
     }
@@ -991,8 +990,8 @@ WindowThumbnail.prototype = {
           height: height * scale
         });
       }
-    } else if (!deferredRetry) {
-      setTimeout(() => this.getThumbnail(true), 0);
+    } else {
+      this.destroy();
     }
   },
 
