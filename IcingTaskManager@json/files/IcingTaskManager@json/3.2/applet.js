@@ -396,7 +396,7 @@ MyApplet.prototype = {
   },
 
   on_applet_instances_changed: function(loaded) {
-    if (!loaded) {
+    if (!loaded || !this.state.appletReady) {
       return;
     }
     this.updateMonitorWatchlist();
@@ -440,7 +440,6 @@ MyApplet.prototype = {
       }
     }
 
-    this.state.destroy();
     unref(this);
   },
 
