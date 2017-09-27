@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Last-Translator: Peter Moser <pitiz29a@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
+"Language: de\n"
 
 #: applet.js:51
 msgid "Panel Edit mode"
