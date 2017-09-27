@@ -1,0 +1,17 @@
+{
+    "max-instances": 1, 
+    "description": "Super window list for Cinnamon", 
+    "uuid": "super-window-list@bgstack15", 
+    "name": "Super window list",
+    "comments": "Adds a setting for show windows from all workspaces to the window list.",
+    "website": "https://bgstack15.wordpress.com",
+    "version": "3.4.6-0",
+    "multiversion": true,
+    "cinnamon-version": [
+        "2.8",
+        "3.0",
+        "3.2",
+        "3.4"
+    ],
+    "role": "panellauncher"
+}
