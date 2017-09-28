@@ -148,7 +148,7 @@ AppGroup.prototype = {
     this.actor.set_child(this._container);
     this.progressOverlay = new St.Widget({
       name: 'progressOverlay',
-      style_class: 'window-list-item-box',
+      style_class: 'progress',
       reactive: false,
       important: true,
       show_on_set_parent: false
@@ -554,10 +554,8 @@ AppGroup.prototype = {
     if (metaWindow.progress !== this._progress) {
       this._progress = metaWindow.progress;
       if (this._progress > 0) {
-        this.progressOverlay.add_style_pseudo_class('progress');
         this.progressOverlay.show();
       } else {
-        this.progressOverlay.remove_style_pseudo_class('progress');
         this.progressOverlay.hide();
       }
       this._container.queue_relayout();
@@ -830,9 +828,6 @@ AppGroup.prototype = {
         this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
         if (metaWindow.progress !== undefined) {
           this._progress = metaWindow.progress;
-          if (this._progress > 0) {
-            this.progressOverlay.add_style_pseudo_class('progress');
-          }
           this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
         }
 
