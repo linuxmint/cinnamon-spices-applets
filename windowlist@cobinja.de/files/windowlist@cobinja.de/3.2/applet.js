@@ -2170,6 +2170,17 @@ CobiWindowList.prototype = {
     else {
       this._windowRemoved(screen, window, monitor);
     }
+  },
+  
+  acceptNewLauncher: function(appId) {
+    let currentWs = global.screen.get_active_workspace_index();
+    for (let i = 0; i < this._workspaces.length; i++) {
+      let ws = this._workspaces[i];
+      if (ws._wsNum == currentWs) {
+        ws.pinAppId(appId);
+        break;
+      }
+    }
   }
 }
 

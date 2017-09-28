@@ -1,5 +1,12 @@
 Changelog
 
+2.1
+==
+
+New Feature
+--
+- add ability to receive launchers from the menu via their context menu
+
 2.0
 ==
 
