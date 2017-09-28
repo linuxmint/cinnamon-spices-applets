@@ -7,90 +7,90 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-30 16:30+0200\n"
-"PO-Revision-Date: 2017-07-30 16:54+0200\n"
+"POT-Creation-Date: 2017-09-28 19:57+0200\n"
+"PO-Revision-Date: 2017-09-28 20:01+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
-#: applet.js:90 applet.js:165
+#: applet.js:86 applet.js:170
 msgid "No new mail"
 msgstr "Ingen ny mail"
 
-#: applet.js:143
+#: applet.js:130
 msgid "Something went wrong"
 msgstr "Noget gik galt"
 
-#: applet.js:146
-msgid "Install python libaries from terminal"
-msgstr "Installér python-biblioteker fra terminalen"
+#: applet.js:133
+msgid "INFO: Install python libaries from terminal"
+msgstr "INFO: Installér python-biblioteker fra terminalen"
 
-#: applet.js:146
+#: applet.js:133
 msgid "How To"
 msgstr "Hvordan"
 
-#: applet.js:146
+#: applet.js:133
 msgid "guide"
 msgstr "guide"
 
-#: applet.js:146
-msgid ""
-"You need pip3, 'sudo apt-get install pip3'\n"
-"You need python-feedparser, 'sudo pip3 install feedparser'\n"
-"You need python keyring and python keyring-alt, 'sudo pip3 install keyrings' "
-"and 'sudo pip3 install keyrings-alt'"
-msgstr ""
-"Du har brug for pip3, \"sudo apt-get install pip3\"\n"
-"Du har brug for python-feedparser, \"sudo pip3 install feedparser\"\n"
-"Du har brug for python keyring og python keyring-alt, \"sudo pip3 install "
-"keyrings\" og \"sudo pip3 install keyrings-alt\""
+#: applet.js:133
+msgid "You need pip3:"
+msgstr "Du har brug for pip3:"
 
-#: applet.js:148
-msgid "Could not get json from python"
-msgstr "Kunne ikke hente json fra python"
+#: applet.js:133
+msgid "You need python-feedparser:"
+msgstr "Du har brug for python-feedparser:"
 
-#: applet.js:148
+#: applet.js:133
+msgid "You need python keyring and python keyring-alt:"
+msgstr "Du har brug for python keyring og python keyring-alt:"
+
+#: applet.js:133
+msgid "and"
+msgstr "og"
+
+#: applet.js:135
+msgid "INFO: Are you getting this message? You should not!"
+msgstr "INFO: Får du denne besked? Det burde du ikke!"
+
+#: applet.js:135
 msgid "ERROR"
 msgstr "FEJL"
 
-#: applet.js:148
+#: applet.js:135
 msgid ""
-"Check internet conneciton\n"
+"Check internet connection\n"
 "Install the needed python libaries\n"
 "Configure password correctly"
 msgstr ""
 "Tjek internetforbindelsen\n"
 "Installér de nødvendige python-biblioteker\n"
-"Angiv adgangskoden korrekt"
+"Konfigurér adgangskoden korrekt"
 
-#: applet.js:156
+#: applet.js:138
+msgid "ERROR: Error from json parser"
+msgstr "FEJL: Fejl fra json-fortolkeren"
+
+#: applet.js:161
 msgid "New mail"
 msgstr "Ny mail"
 
-#: applet.js:158
+#: applet.js:163
 msgid "New mails"
 msgstr "Nye mail"
 
-#: applet.js:167
+#: applet.js:172
 msgid "No new mails"
 msgstr "Ingen nye mail"
 
-#: applet.js:167
+#: applet.js:172
 msgid "Have a nice day"
 msgstr "Hav en fortsat god dag"
-
-#. gmail@lauritsriple->metadata.json->description
-msgid "Shows most recent mails, and how many unread messages you have."
-msgstr "Viser de seneste mail og hvor mange ulæste beskeder, du har."
-
-#. gmail@lauritsriple->metadata.json->name
-msgid "GmailNotifier"
-msgstr "GmailNotifier"
 
 #. gmail@lauritsriple->settings-schema.json->settings-username->description
 msgid "Username:"
@@ -137,3 +137,11 @@ msgstr "Gem brugernavn og adgangskode"
 #. gmail@lauritsriple->settings-schema.json->demo-button->tooltip
 msgid "Click to save username and password"
 msgstr "Klik for at gemme brugernavn og adgangskode"
+
+#. gmail@lauritsriple->metadata.json->description
+msgid "Shows most recent mails, and how many unread messages you have."
+msgstr "Viser de seneste mail og hvor mange ulæste beskeder, du har."
+
+#. gmail@lauritsriple->metadata.json->name
+msgid "GmailNotifier"
+msgstr "GmailNotifier"
