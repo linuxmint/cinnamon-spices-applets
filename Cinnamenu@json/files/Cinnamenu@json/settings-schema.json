@@ -1,7 +1,7 @@
 {
   "layout" : {
     "type" : "layout",
-    "pages" : ["panel", "menu"],
+    "pages" : ["panel", "menu", "providers"],
     "panel" : {
       "type" : "page",
       "title" : "Panel",
@@ -11,6 +11,21 @@
       "type" : "page",
       "title" : "Menu",
       "sections" : ["menu-layout", "menu-icons", "menu-behave"]
+    },
+    "providers": {
+      "type": "page",
+      "title": "Search Providers",
+      "sections": ["cinnamenuProvidersSection", "extensionProvidersSection"]
+    },
+    "cinnamenuProvidersSection": {
+      "type": "section",
+      "title": "Cinnamenu",
+      "keys": ["enable-bookmarks", "enable-windows", "enable-search-providers"]
+    },
+    "extensionProvidersSection": {
+      "type": "section",
+      "title": "No search provider extensions found",
+      "keys": []
     },
     "panel-appear" : {
       "type" : "section",
@@ -35,8 +50,7 @@
         "startup-view-mode",
         "show-apps-description-on-buttons",
         "apps-grid-column-count",
-        "show-places",
-        "enable-bookmarks"
+        "show-places"
       ]
     },
     "menu-icons" : {
@@ -158,6 +172,18 @@
     "default": false,
     "description": "Enable web bookmarks",
     "tooltip": "Choose whether or not bookmarks are indexed in the menu."
+  },
+  "enable-windows": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable window searching",
+    "tooltip": "Choose whether or not open windows are indexed in menu searches."
+  },
+  "enable-search-providers": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable search providers",
+    "tooltip": "Choose whether or not search provider results are indexed in menu searches."
   },
   "startup-view-mode": {
     "type": "combobox",

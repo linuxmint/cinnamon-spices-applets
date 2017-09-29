@@ -56,7 +56,7 @@ function _readBookmarks() {
         null, Gda.ConnectionOptions.READ_ONLY);
     } catch (e) {
       global.logError('ERROR: ' + e.message);
-      return;
+      return [];
     }
   }
 
@@ -68,7 +68,7 @@ function _readBookmarks() {
       'NULL AND moz_bookmarks.type = 1');
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   let nRows = result.get_n_rows();
@@ -87,7 +87,7 @@ function _readBookmarks() {
 
     bookmarks.push({
       appInfo: _appInfo,
-      name: name,
+      name: name.replace(/\//g, '|'),
       score: 0,
       uri: uri
     });

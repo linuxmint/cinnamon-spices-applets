@@ -1,5 +1,15 @@
 Changelog
 
+### 3.0.0
+
+  * Added an option to enable indexing of open windows in menu searches.
+  * Added search provider support along with provider toggling in the settings.
+  * Refactored state management.
+  * Fixed toggling the autoscroll option not working until a Cinnamon restart.
+  * Fixed some uncaught errors when enabling bookmarks while no sources are available.
+  * Known issues:
+    * On Cinnamon 3.5 (dev), the context menu no longer overlays over the buttons with fixed positioning.
+
 ### 2.1.0
 
   * Improved the performance of web bookmarks loading.

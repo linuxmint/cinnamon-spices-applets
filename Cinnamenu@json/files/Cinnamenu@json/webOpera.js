@@ -54,21 +54,21 @@ function _readBookmarks() {
   try {
     [success, content] = _bookmarksFile.load_contents(null);
   } catch (e) {
-    return;
+    return [];
   }
 
   if (!success) {
-    return;
+    return [];
   }
 
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
-    return;
+    return [];
   }
 
   if (!jsonResult.hasOwnProperty('roots')) {
-    return;
+    return [];
   }
 
   let recurseBookmarks = (children, cont)=>{
@@ -76,7 +76,7 @@ function _readBookmarks() {
       if (children[i].type === 'url') {
         bookmarks.push({
           appInfo: _appInfo,
-          name: children[i].name,
+          name: children[i].name.replace(/\//g, '|'),
           score: 0,
           uri: children[i].url
         });

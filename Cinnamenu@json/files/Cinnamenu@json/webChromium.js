@@ -38,7 +38,7 @@ function _readBookmarks() {
   if (!_foundApps || _foundApps.length === 0) {
     _foundApps = _appSystem.lookup_desktop_wmclass('chromium-browser');
     if (!_foundApps || _foundApps.length === 0) {
-      return false;
+      return [];
     }
   }
 
@@ -60,22 +60,22 @@ function _readBookmarks() {
     [success, content] = _bookmarksFile.load_contents(null);
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   if (!success) {
-    return;
+    return [];
   }
 
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   if (!jsonResult.hasOwnProperty('roots')) {
-    return;
+    return [];
   }
 
   let recurseBookmarks = (children, cont)=>{
@@ -83,7 +83,7 @@ function _readBookmarks() {
       if (children[i].type == 'url') {
         bookmarks.push({
           appInfo: _appInfo,
-          name: children[i].name,
+          name: children[i].name.replace(/\//g, '|'),
           score: 0,
           uri: children[i].url
         });
