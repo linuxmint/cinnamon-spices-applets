@@ -350,7 +350,6 @@ AppListGridButton.prototype = {
     this.column = null;
     let className = 'menu-application-button';
     this.entered = null;
-    this.onStage = null;
     if (this.state.isListView) {
       this._iconContainer = new St.BoxLayout({
         vertical: true
@@ -530,8 +529,6 @@ AppListGridButton.prototype = {
   },
 
   handleParentChange: function (actor) {
-    this.onStage = true;
-
     if (this.state.settings.showAppDescriptionsOnButtons
       || this.buttonState.app.shouldHighlight
       || this.state.searchActive) {

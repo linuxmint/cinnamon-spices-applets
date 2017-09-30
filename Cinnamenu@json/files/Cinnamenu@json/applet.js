@@ -241,6 +241,7 @@ CinnamenuApplet.prototype = {
         iconSize: 64,
         currentCategory: null,
         fallbackDescription: '',
+        appletReady: false,
         searchActive: false,
         menuIsOpen: false,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
@@ -473,6 +474,13 @@ CinnamenuApplet.prototype = {
     this._updateIconAndLabel();
   },
 
+  on_applet_added_to_panel: function() {
+    if (!this.state) {
+      return;
+    }
+    this.state.set({appletReady: true});
+  },
+
   on_applet_removed_from_panel: function() {
     Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
     this.settings.finalize();
@@ -640,18 +648,19 @@ CinnamenuApplet.prototype = {
 
   // handler for when icons change
   _onIconsChanged: function() {
-    // AppFavorites' changed signal gets called before the applet finishes initializing, so
-    // we need to defer it here for now.
-    Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, this.refresh));
+    if (!this.state || !this.state.appletReady) {
+      return;
+    }
+    this.refresh();
   },
 
   searchProviderChange: function(provider) {
     return function onProviderChange() {
       let enabledProviders = global.settings.get_strv('enabled-search-providers');
-      if (this.state.settings[provider] && enabledProviders.indexOf(provider) === -1) {
+      let providerIndex = enabledProviders.indexOf(provider);
+      if (this.state.settings[provider] && providerIndex === -1) {
         enabledProviders.push(provider);
       } else {
-        let providerIndex = enabledProviders.indexOf(provider);
         enabledProviders.splice(providerIndex, 1);
       }
       global.settings.set_strv('enabled-search-providers', enabledProviders);
@@ -665,6 +674,15 @@ CinnamenuApplet.prototype = {
     for (let i = 0; i < this.state.knownProviders.length; i++) {
       this.settings.setValue(this.state.knownProviders[i], enabledProviders.indexOf(this.state.knownProviders[i]) > -1);
     }
+  },
+
+  customMenuHeightChange: function() {
+    if (this.state.settings.enableCustomMenuHeight) {
+      this.groupCategoriesWorkspacesScrollBox.height = this.state.settings.customMenuHeight;
+    } else {
+      this.groupCategoriesWorkspacesScrollBox.height = this.menuHeight;
+    }
+    this.applicationsScrollBox.height = this.groupCategoriesWorkspacesScrollBox.height;
   },
 
   // function to bind preference setting changes
@@ -774,6 +792,16 @@ CinnamenuApplet.prototype = {
         value: 'showAppDescriptionsOnButtons',
         cb: this.refresh
       },
+      {
+        key: 'enable-custom-menu-height',
+        value: 'enableCustomMenuHeight',
+        cb: this.customMenuHeightChange
+      },
+      {
+        key: 'custom-menu-height',
+        value: 'customMenuHeight',
+        cb: this.customMenuHeightChange
+      },
     ]
 
     for (let i = 0; i < this.state.knownProviders.length; i++) {
@@ -829,11 +857,7 @@ CinnamenuApplet.prototype = {
         this.categoriesBox.show();
         // Display startup apps
         this._resetDisplayApplicationsToStartup();
-        // Set height (we also set constraints on scrollboxes
-        // Why does height need to be set when already set constraints? because of issue noted below
-        // ISSUE: If height isn't set, then popup menu height will expand when application buttons are added
-        let height = this.groupCategoriesWorkspacesScrollBox.height;
-        this.applicationsScrollBox.height = height;
+        this.customMenuHeightChange();
         this.mainBox.show();
       });
     } else {
@@ -2034,7 +2058,7 @@ CinnamenuApplet.prototype = {
     });
 
     // Allow the menu to be taller for high resolution displays.
-    this.menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height / 2.055))
+    this.menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55))
     this.menuHeight = this.menuHeight < 530 ? 530 : this.menuHeight;
 
     // groupCategoriesWorkspacesScrollBox allows categories or workspaces to scroll vertically

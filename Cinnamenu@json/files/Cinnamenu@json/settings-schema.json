@@ -49,6 +49,8 @@
         "menu-editor-button",
         "startup-view-mode",
         "show-apps-description-on-buttons",
+        "enable-custom-menu-height",
+        "custom-menu-height",
         "apps-grid-column-count",
         "show-places"
       ]
@@ -234,5 +236,22 @@
     "default" : false,
     "description" : "Show application's description under their titles",
     "tooltip" : "Choose whether or not to show the application description on the application buttons."
+  },
+  "enable-custom-menu-height": {
+    "type" : "switch",
+    "default" : false,
+    "description" : "Use a custom menu height",
+    "tooltip" : "Use a custom menu height"
+  },
+  "custom-menu-height": {
+    "type": "spinbutton",
+    "default": 530,
+    "min": 530,
+    "max": 9999,
+    "step": 1,
+    "units": "px",
+    "description": "Custom menu height",
+    "tooltip": "Custom menu height",
+    "dependency": "enable-custom-menu-height"
   }
 }
