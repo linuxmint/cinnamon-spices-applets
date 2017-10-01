@@ -1,0 +1,217 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-01 13:58+0200\n"
+"PO-Revision-Date: 2017-10-01 14:05+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:169
+msgid "Please provide your password to uninstall this application"
+msgstr "Indtast din adgangskode for at fjerne dette program"
+
+#: applet.js:242
+msgid "Add to panel"
+msgstr "Tilføj til panelet"
+
+#: applet.js:245
+msgid "Add to desktop"
+msgstr "Tilføj til skrivebordet"
+
+#: applet.js:249
+msgid "Remove from favorites"
+msgstr "Fjern fra favoritter"
+
+#: applet.js:252
+msgid "Add to favorites"
+msgstr "Tilføj til favoritter"
+
+#: applet.js:256
+msgid "Uninstall"
+msgstr "Afinstallér"
+
+#: applet.js:634
+msgid "Open with"
+msgstr "Åbn med"
+
+#: applet.js:680
+msgid "Other application..."
+msgstr "Andet program …"
+
+#: applet.js:747
+msgid "Clear list"
+msgstr "Ryd listen"
+
+#: applet.js:791
+msgid "All Applications"
+msgstr "Alle programmer"
+
+#: applet.js:819
+msgid "Places"
+msgstr "Steder"
+
+#: applet.js:843
+msgid "Recent Files"
+msgstr "Seneste filer"
+
+#: applet.js:1099
+msgid "Menu"
+msgstr "Menu"
+
+#: applet.js:1861
+msgid "No recent documents"
+msgstr "Ingen seneste dokumenter"
+
+#: applet.js:2073
+msgid "Lock screen"
+msgstr "Låseskærm"
+
+#: applet.js:2074
+msgid "Lock the screen"
+msgstr "Lås skærmen"
+
+#: applet.js:2101
+msgid "Logout"
+msgstr "Log ud"
+
+#: applet.js:2102
+msgid "Leave the session"
+msgstr "Forlad sessionen"
+
+#: applet.js:2116
+msgid "Quit"
+msgstr "Afslut"
+
+#: applet.js:2117
+msgid "Shutdown the computer"
+msgstr "Sluk computeren"
+
+#: applet.js:2241
+msgid "Type to search..."
+msgstr "Skriv for at søge …"
+
+#. sane-menu@nooulaif->metadata.json->description
+msgid "Cinnamon stock menu applet with improved search."
+msgstr "Cinnamon-menu med forbedret søgning."
+
+#. sane-menu@nooulaif->metadata.json->name
+msgid "Sane Menu"
+msgstr "Sane-menu"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Åbn redigering af menuen"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Tryk på denne knap for at tilpasse menupunkterne."
+
+#. sane-menu@nooulaif->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Anvend et selvvalgt ikon"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Hvis umarkeret vælger temaet ikonet"
+
+#. sane-menu@nooulaif->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Forsinkelse når markøren føres hen over:"
+
+#. sane-menu@nooulaif->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Forsinkelse ved skift mellem kategorier"
+
+#. sane-menu@nooulaif->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. sane-menu@nooulaif->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Aktivér indtastning af filsystemstien i søgefeltet"
+
+#. sane-menu@nooulaif->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Tillader indtastning af stien i menuens søgefelt."
+
+#. sane-menu@nooulaif->settings-schema.json->show-application-
+#. icons->description
+msgid "Show application icons"
+msgstr "Vis programikoner"
+
+#. sane-menu@nooulaif->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Vælg om programmer skal vises med ikoner."
+
+#. sane-menu@nooulaif->settings-schema.json->favbox-show->description
+msgid "Show favorites and quit options"
+msgstr "Vis favoritter og afslutningsmuligheder"
+
+#. sane-menu@nooulaif->settings-schema.json->favbox-show->tooltip
+msgid "Choose whether or not to show the left pane of the menu."
+msgstr "Vælg om menuens venstre rude skal vises."
+
+#. sane-menu@nooulaif->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Vælg et ikon som vises i panelet."
+
+#. sane-menu@nooulaif->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Tastaturgenvej til åbning og lukning af menuen"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-label->description
+msgid "Text"
+msgstr "Tekst"
+
+#. sane-menu@nooulaif->settings-schema.json->menu-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Indtast selvvalgt tekst som vises i panelet."
+
+#. sane-menu@nooulaif->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Åbn menuen, når jeg flytter markøren hen over den"
+
+#. sane-menu@nooulaif->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Aktivér åbning af menuen, når markøren føres hen over panelprogrammet"
+
+#. sane-menu@nooulaif->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Aktivér automatisk rulning i programlisten"
+
+#. sane-menu@nooulaif->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "Vælg om glidende automatisk rulning i programlisten skal aktiveres."
+
+#. sane-menu@nooulaif->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Vis kategoriikoner"
+
+#. sane-menu@nooulaif->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Vælg om kategorier skal vises med ikoner."
+
+#. sane-menu@nooulaif->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Vis bogmærker og steder"
+
+#. sane-menu@nooulaif->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Vælg om bogmærker og steder skal vises i menuen."
