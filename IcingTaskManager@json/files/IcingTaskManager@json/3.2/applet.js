@@ -702,6 +702,10 @@ MyApplet.prototype = {
       return DND.DragMotionResult.NO_DROP;
     }
 
+    if (!source.actor) {
+      return DND.DragMotionResult.CONTINUE;
+    };
+
     let children = this.appLists[this.state.currentWs].actor.get_children();
     let windowPos = children.indexOf(source.actor);
 

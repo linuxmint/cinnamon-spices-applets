@@ -94,7 +94,6 @@ function AppGroup () {
 }
 
 AppGroup.prototype = {
-  __proto__: DND.LauncherDraggable.prototype,
   _init: function (params) {
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this);
@@ -604,13 +603,14 @@ AppGroup.prototype = {
   },
 
   _onDragBegin: function() {
-    if (this.state.isHorizontal) {
+    // TBD - breaks dragging on Cinnamon 3.4
+    /*if (this.state.isHorizontal) {
       this._draggable._overrideY = this.actor.get_transformed_position()[1];
       this._draggable._overrideX = null;
     } else {
       this._draggable._overrideX = this.actor.get_transformed_position()[0];
       this._draggable._overrideY = null;
-    }
+    }*/
     this.groupState.trigger('hoverMenuClose');
   },
 
