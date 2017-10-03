@@ -1,0 +1,52 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-02 19:27+0200\n"
+"PO-Revision-Date: 2017-10-02 19:45+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#. sshlauncher@sumo->metadata.json->name
+#: applet.js:30 applet.js:43 applet.js:103
+msgid "SSH Launcher"
+msgstr "SSH-starter"
+
+#: applet.js:57
+msgid "Background (-fN)"
+msgstr "Baggrund (-fN)"
+
+#: applet.js:60
+msgid "Forward X11 (-X)"
+msgstr "Videresend X11 (-X)"
+
+#: applet.js:81
+msgid "ERROR. "
+msgstr "FEJL. "
+
+#: applet.js:84
+msgid "Edit SSH config"
+msgstr "Redigér SSH-konfigurationen"
+
+#: applet.js:88
+msgid "Force Update from SSH config"
+msgstr "Gennemtving opdatering fra SSH-konfigurationen"
+
+#: applet.js:103
+msgid "Connection opened to "
+msgstr "Forbindelse åbnet til "
+
+#. sshlauncher@sumo->metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "Tilslut til SSH-værter konfigurerede i ~/.ssh/config"
