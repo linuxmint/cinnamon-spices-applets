@@ -1,5 +1,10 @@
 Changelog
 
+### 6.0.2
+
+  * Fixed app button dragging not working correctly on Cinnamon 3.4.
+  * Fixed the styling not resetting sometimes when pinned apps are closed.
+
 ### 6.0.1
 
   * Fixed cycling thumbnail menus via the hotkey not working.
