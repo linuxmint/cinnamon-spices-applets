@@ -954,6 +954,7 @@ AppGroup.prototype = {
   },
 
   handleFavorite: function () {
+    this._setFavoriteAttributes();
     if (this.groupState.metaWindows.length === 0
       && this.state.appletReady) {
       this.hoverMenu.close();
@@ -961,19 +962,19 @@ AppGroup.prototype = {
       return;
     }
     this._windowTitleChanged(this.groupState.lastFocused);
-    this._setFavoriteAttributes();
     this._onFocusChange();
   },
 
   _setFavoriteAttributes: function () {
-    if (!this.groupState.app) {
-      return;
-    }
-    if (this.groupState.app.state === 0 && this.groupState.isFavoriteApp) {
-      let pseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
-      if (this.actor.has_style_pseudo_class(pseudoClass)) {
-        this.actor.remove_style_pseudo_class(pseudoClass);
-      }
+    let pseudoClasses = ['active', 'focus', 'hover'];
+    if ((!this.groupState.app || this.groupState.app.state === 0)
+      && this.groupState.isFavoriteApp) {
+      for (let i = 0; i < pseudoClasses.length; i++) {
+        let pseudoClass = getPseudoClass(this.state.settings[pseudoClasses[i] + 'PseudoClass']);
+        if (this.actor.has_style_pseudo_class(pseudoClass)) {
+          this.actor.remove_style_pseudo_class(pseudoClass);
+        }
+      };
     }
   },
 
