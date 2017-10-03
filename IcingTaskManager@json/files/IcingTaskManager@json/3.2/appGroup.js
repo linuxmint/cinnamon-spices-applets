@@ -94,7 +94,6 @@ function AppGroup () {
 }
 
 AppGroup.prototype = {
-  __proto__: DND.LauncherDraggable.prototype,
   _init: function (params) {
     if (DND.LauncherDraggable) {
       DND.LauncherDraggable.prototype._init.call(this);
@@ -149,7 +148,7 @@ AppGroup.prototype = {
     this.actor.set_child(this._container);
     this.progressOverlay = new St.Widget({
       name: 'progressOverlay',
-      style_class: 'window-list-item-box',
+      style_class: 'progress',
       reactive: false,
       important: true,
       show_on_set_parent: false
@@ -555,10 +554,8 @@ AppGroup.prototype = {
     if (metaWindow.progress !== this._progress) {
       this._progress = metaWindow.progress;
       if (this._progress > 0) {
-        this.progressOverlay.add_style_pseudo_class('progress');
         this.progressOverlay.show();
       } else {
-        this.progressOverlay.remove_style_pseudo_class('progress');
         this.progressOverlay.hide();
       }
       this._container.queue_relayout();
@@ -604,13 +601,14 @@ AppGroup.prototype = {
   },
 
   _onDragBegin: function() {
-    if (this.state.isHorizontal) {
+    // TBD - breaks dragging on Cinnamon 3.4
+    /*if (this.state.isHorizontal) {
       this._draggable._overrideY = this.actor.get_transformed_position()[1];
       this._draggable._overrideX = null;
     } else {
       this._draggable._overrideX = this.actor.get_transformed_position()[0];
       this._draggable._overrideY = null;
-    }
+    }*/
     this.groupState.trigger('hoverMenuClose');
   },
 
@@ -830,9 +828,6 @@ AppGroup.prototype = {
         this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
         if (metaWindow.progress !== undefined) {
           this._progress = metaWindow.progress;
-          if (this._progress > 0) {
-            this.progressOverlay.add_style_pseudo_class('progress');
-          }
           this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
         }
 
@@ -954,6 +949,7 @@ AppGroup.prototype = {
   },
 
   handleFavorite: function () {
+    this._setFavoriteAttributes();
     if (this.groupState.metaWindows.length === 0
       && this.state.appletReady) {
       this.hoverMenu.close();
@@ -961,19 +957,19 @@ AppGroup.prototype = {
       return;
     }
     this._windowTitleChanged(this.groupState.lastFocused);
-    this._setFavoriteAttributes();
     this._onFocusChange();
   },
 
   _setFavoriteAttributes: function () {
-    if (!this.groupState.app) {
-      return;
-    }
-    if (this.groupState.app.state === 0 && this.groupState.isFavoriteApp) {
-      let pseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
-      if (this.actor.has_style_pseudo_class(pseudoClass)) {
-        this.actor.remove_style_pseudo_class(pseudoClass);
-      }
+    let pseudoClasses = ['active', 'focus', 'hover'];
+    if ((!this.groupState.app || this.groupState.app.state === 0)
+      && this.groupState.isFavoriteApp) {
+      for (let i = 0; i < pseudoClasses.length; i++) {
+        let pseudoClass = getPseudoClass(this.state.settings[pseudoClasses[i] + 'PseudoClass']);
+        if (this.actor.has_style_pseudo_class(pseudoClass)) {
+          this.actor.remove_style_pseudo_class(pseudoClass);
+        }
+      };
     }
   },
 
