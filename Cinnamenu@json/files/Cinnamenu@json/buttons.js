@@ -879,7 +879,6 @@ AppListGridButton.prototype = {
  * @param {number} iconSize
  * @param {string} name
  * @param {string} description
- * @param {function} buttonReleaseCallback
  */
 
 function GroupButton() {
@@ -890,7 +889,7 @@ GroupButton.prototype = {
   __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
 
-  _init: function (state, iconName, iconSize, name, description, buttonReleaseCallback) {
+  _init: function (state, iconName, iconSize, name, description) {
     PopupMenu.PopupBaseMenuItem.prototype._init.call(this, {
       hover: false,
       activate: false
@@ -899,7 +898,6 @@ GroupButton.prototype = {
     this.signals = new SignalManager.SignalManager(null);
     this.name = name;
     this.description = description;
-    this.buttonReleaseCallback = buttonReleaseCallback;
 
     let monitorHeight = Main.layoutManager.primaryMonitor.height;
     let realSize = (0.7 * monitorHeight) / 4;
@@ -965,7 +963,9 @@ GroupButton.prototype = {
     if (this._user || this.icon.icon_name.indexOf('view') === -1) {
       this.state.trigger('closeMenu')
     }
-    this.buttonReleaseCallback();
+    if (this.icon.icon_name.indexOf('view') > -1) {
+      this.toggleViewMode();
+    }
     return true;
   },
 
@@ -996,6 +996,24 @@ GroupButton.prototype = {
     });
     this.addActor(this.icon);
     this.icon.realize();
+  },
+
+  toggleViewMode: function() {
+    if (this.state.isListView) {
+      this.state.set({isListView: false});
+      this.setIcon('view-list-symbolic');
+      this.name = _('List View');
+      this.description = _('Switch to list view');
+      this.state.trigger('setSettingsValue', 'startup-view-mode', 1);
+    } else {
+      this.state.set({isListView: true});
+      this.setIcon('view-grid-symbolic');
+      this.name = _('Grid View');
+      this.description = _('Switch to grid view');
+      this.state.trigger('setSettingsValue', 'startup-view-mode', 0);
+    }
+    this.state.trigger('switchApplicationsView', true);
+    this.handleEnter();
   },
 
   destroy: function() {

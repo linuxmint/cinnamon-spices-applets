@@ -266,6 +266,8 @@ CinnamenuApplet.prototype = {
         isFavorite: (id) => this.appFavorites.isFavorite(id),
         addFavorite: (id) => this.appFavorites.addFavorite(id),
         removeFavorite: (id) => this.appFavorites.removeFavorite(id),
+        switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
+        setSettingsValue: (k, v) => this.settings.setValue(k, v),
         setIsListView: () => {
           if (this.state.isListView) {
             this.state.set({iconSize: this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28});
@@ -642,7 +644,7 @@ CinnamenuApplet.prototype = {
     this.favorites = this.appFavorites.getFavorites();
     // Check if the menu has been rendered at least once
     if (this.applicationsGridBox && this.applicationsListBox) {
-      this._switchApplicationsView(true);
+      this.switchApplicationsView(true);
     }
   },
 
@@ -852,7 +854,7 @@ CinnamenuApplet.prototype = {
 
       this.introspectTheme(()=>{
         // Load Startup Applications category
-        this._switchApplicationsView(false);
+        this.switchApplicationsView(false);
         // Set Category
         this.categoriesBox.show();
         // Display startup apps
@@ -1043,7 +1045,7 @@ CinnamenuApplet.prototype = {
     this._displayApplications(this.listWebBookmarks());
   },
 
-  _switchApplicationsView: function(fromToggle) {
+  switchApplicationsView: function(fromToggle) {
     let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize;
     if (isListView) {
       iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
@@ -1129,7 +1131,6 @@ CinnamenuApplet.prototype = {
   },
 
   _clearEnteredActors: function () {
-    //this.state.isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
     let buttons = this.getActiveButtons();
     let refItemIndex = store.queryCollection(buttons, (button) => {
@@ -1492,7 +1493,6 @@ CinnamenuApplet.prototype = {
     let rownum = 0;
     let lastApp = appList[appList.length - 1];
 
-    //this.state.isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST;
     this._activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
     this.state.menuIsOpen = null;
 
@@ -1560,7 +1560,6 @@ CinnamenuApplet.prototype = {
   },
 
   _onMenuKeyPress: function(actor, event) {
-    //this.state.isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST;
     let symbol = event.get_key_symbol();
 
     let keyCode = event.get_key_code();
@@ -1623,9 +1622,6 @@ CinnamenuApplet.prototype = {
     if (enteredPowerGroupItemExists) {
       this.powerGroupButtons[refPowerGroupItemIndex].handleLeave();
     }
-    /*log2('symbol', symbol)
-    log2('refItemIndex', refItemIndex, 'refCategoryIndex', refCategoryIndex, 'refPowerGroupItemIndex', refPowerGroupItemIndex, 'refContextMenuItemIndex', refContextMenuItemIndex)
-    log2('this.state.isListView', this.state.isListView)*/
     let startingCategoryIndex = this.categoryButtons.findIndex((button) => {
       return this.state.currentCategory === button.categoryNameText;
     });
@@ -1944,7 +1940,7 @@ CinnamenuApplet.prototype = {
       return;
     }
 
-    this._searchTimeoutId = Mainloop.timeout_add(150, Lang.bind(this, this._doSearch));
+    this._searchTimeoutId = Mainloop.timeout_add(0, Lang.bind(this, this._doSearch));
   },
 
   _doSearch: function() {
@@ -2222,29 +2218,12 @@ CinnamenuApplet.prototype = {
       '',
       () => Util.spawnCommandLine('cinnamon-settings user')
     ));
-    let _t = this;
     this.powerGroupButtons.push(new GroupButton(
       this.state,
       this.state.isListView ? 'view-grid-symbolic' : 'view-list-symbolic',
       16,
       this.state.isListView ? _('Grid View') : _('List View'),
-      this.state.isListView ? _('Switch to grid view') : _('Switch to list view'),
-      function () {
-        if (_t.isListView) {
-          _t.isListView = false;
-          this.setIcon('view-list-symbolic');
-          this.name = _('List View');
-          this.description = _('Switch to list view');
-          _t.settings.setValue('startup-view-mode', 1);
-        } else {
-          _t.isListView = true;
-          this.setIcon('view-grid-symbolic');
-          this.name = _('Grid View');
-          this.description = _('Switch to grid view');
-          _t.settings.setValue('startup-view-mode', 0);
-        }
-        _t._switchApplicationsView(true);
-      }
+      this.state.isListView ? _('Switch to grid view') : _('Switch to list view')
     ));
     this.powerGroupButtons.push(new GroupButton(
       this.state,
