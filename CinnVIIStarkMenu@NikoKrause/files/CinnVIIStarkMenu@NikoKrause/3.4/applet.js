@@ -12,7 +12,6 @@ const AppFavorites = imports.ui.appFavorites;
 const Gtk = imports.gi.Gtk;
 const Atk = imports.gi.Atk;
 const Gio = imports.gi.Gio;
-const Signals = imports.signals;
 const GnomeSession = imports.misc.gnomeSession;
 const ScreenSaver = imports.misc.screenSaver;
 const FileUtils = imports.misc.fileUtils;
@@ -138,7 +137,7 @@ ApplicationContextMenuItem.prototype = {
 
     activate: function (event) {
         switch (this._action){
-            case "add_to_panel":
+            case "add_to_panel": {
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
                     let new_applet_id = global.settings.get_int("next-applet-id");
                     global.settings.set_int("next-applet-id", (new_applet_id + 1));
@@ -152,7 +151,7 @@ ApplicationContextMenuItem.prototype = {
 
                 this._appButton.toggleMenu();
                 break;
-            case "add_to_desktop":
+            } case "add_to_desktop": {
                 let file = Gio.file_new_for_path(this._appButton.app.get_app_info().get_filename());
                 let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH+"/"+this._appButton.app.get_id());
                 try{
@@ -163,22 +162,23 @@ ApplicationContextMenuItem.prototype = {
                 }
                 this._appButton.toggleMenu();
                 break;
-            case "add_to_favorites":
+            } case "add_to_favorites": {
                 AppFavorites.getAppFavorites().addFavorite(this._appButton.app.get_id());
                 this._appButton.toggleMenu();
                 break;
-            case "remove_from_favorites":
+            } case "remove_from_favorites": {
                 AppFavorites.getAppFavorites().removeFavorite(this._appButton.app.get_id());
                 this._appButton.toggleMenu();
                 break;
-            case "uninstall":
+            } case "uninstall": {
                 Util.spawnCommandLine("gksu -m '" + _("Please enter your password to uninstall this application") + "' /usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
                 this._appButton.appsMenuButton.menu.close();
                 break;
-            case "run_with_nvidia_gpu":
+            } case "run_with_nvidia_gpu": {
                 Util.spawnCommandLine("optirun gtk-launch " + this._appButton.app.get_id());
                 this._appButton.appsMenuButton.menu.close();
                 break;
+            }
         }
         return false;
     }
@@ -307,7 +307,7 @@ GenericApplicationButton.prototype = {
 
         PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
     }
-}
+};
 
 function TransientButton(appsMenuButton, pathOrCommand) {
     this._init(appsMenuButton, pathOrCommand);
@@ -358,14 +358,10 @@ TransientButton.prototype = {
         };
 
 
-
-        let iconBox = new St.Bin();
         this.file = Gio.file_new_for_path(this.pathOrCommand);
 
         try {
             this.handler = this.file.query_default_handler(null);
-            let icon_uri = this.file.get_uri();
-            let fileInfo = this.file.query_info(Gio.FILE_ATTRIBUTE_STANDARD_TYPE, Gio.FileQueryInfoFlags.NONE, null);
             let contentType = Gio.content_type_guess(this.pathOrCommand, null);
             let themedIcon = Gio.content_type_get_icon(contentType[0]);
             this.icon = new St.Icon({gicon: themedIcon, icon_size: APPLICATION_ICON_SIZE, icon_type: St.IconType.FULLCOLOR });
@@ -396,11 +392,11 @@ TransientButton.prototype = {
 
     activate: function(event) {
         if (this.handler != null) {
-            this.handler.launch([this.file], null)
+            this.handler.launch([this.file], null);
         } else {
             // Try anyway, even though we probably shouldn't.
             try {
-                Util.spawn(['gvfs-open', this.file.get_uri()])
+                Util.spawn(['gvfs-open', this.file.get_uri()]);
             } catch (e) {
                 global.logError("No handler available to open " + this.file.get_uri());
             }
@@ -409,11 +405,11 @@ TransientButton.prototype = {
 
         this.appsMenuButton.menu.close();
     }
-}
+};
 
 String.prototype.replaceAt=function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
-}
+};
 
 function TooltipCustom(actor, string, multiline) {
     this._init(actor, string, multiline);
@@ -455,11 +451,11 @@ ApplicationButton.prototype = {
 
     _init: function(appsMenuButton, app, showIcon, showContextIcon, showAppsDescription) {
         GenericApplicationButton.prototype._init.call(this, appsMenuButton, app, true);
-        this.category = new Array();
+        this.category = [];
         this.actor.set_style_class_name('menu-application-button');
 
         if (showIcon) {
-            this.icon = this.app.create_icon_texture(APPLICATION_ICON_SIZE)
+            this.icon = this.app.create_icon_texture(APPLICATION_ICON_SIZE);
             this.addActor(this.icon);
         }
         this.name = this.app.get_name();
@@ -588,7 +584,7 @@ SearchProviderResultButton.prototype = {
             global.logError(e);
         }
     }
-}
+};
 
 function PlaceButton(appsMenuButton, place, button_name, showIcon, showAppsDescription) {
     this._init(appsMenuButton, place, button_name, showIcon, showAppsDescription);
@@ -668,7 +664,7 @@ RecentContextMenuItem.prototype = {
     },
 
     activate: function (event) {
-        this._callback()
+        this._callback();
         return false;
     }
 };
@@ -807,7 +803,7 @@ RecentButton.prototype = {
                 menu.addMenuItem(menuItem);
             }
 
-            let infos = Gio.AppInfo.get_all_for_type(this.mimeType)
+            let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
 
             for (let i = 0; i < infos.length; i++) {
                 let info = infos[i];
@@ -895,7 +891,7 @@ NoRecentDocsButton.prototype = {
             this.callback();
         }
     }
-}
+};
 
 function RecentClearButton(appsMenuButton) {
     this._init(appsMenuButton);
@@ -1011,7 +1007,7 @@ RecentCategoryButton.prototype = {
         if (showIcon) {
             this.icon = new St.Icon({icon_name: "folder-recent", icon_size: CATEGORY_ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
             this.addActor(this.icon);
-            this.icon.realize()
+            this.icon.realize();
         } else {
             this.icon = null;
         }
@@ -1034,7 +1030,7 @@ FavoritesButton.prototype = {
         let icon_size = iconSize; //0.6*real_size;
         if (icon_size > MAX_FAV_ICON_SIZE)
             icon_size = MAX_FAV_ICON_SIZE;
-        this.actor.style = "padding-top: "+(icon_size / 3)+"px;padding-bottom: "+(icon_size / 3)+"px;"
+        this.actor.style = "padding-top: "+(icon_size / 3)+"px;padding-bottom: "+(icon_size / 3)+"px;";
 
         this.actor.add_style_class_name('menu-favorites-button');
 
@@ -1147,7 +1143,7 @@ AppPopupSubMenuMenuItem.prototype = {
 
     destroy: function() {
         this.menu.destroy();
-        PopupBaseMenuItem.prototype.destroy.call(this);
+        PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
     },
 
     activate: function(event) {
@@ -1188,7 +1184,7 @@ TextBoxItem.prototype = {
         this.label_text = label;
 
         if(this.label_text == "") {
-            this.label_text = "  "
+            this.label_text = "  ";
             this.leftLabel = new St.Label({ text: this.label_text, style_class: 'menu-category-button-label' });
             this.leftLabel.add_style_class_name('starkmenu-' + this.addStyleClassName + '-button-label');
             this.addActor(this.leftLabel);
@@ -1551,26 +1547,27 @@ ShutdownContextMenuItem.prototype = {
 
     activate: function(event) {
         switch (this._action) {
-        case "logout":
-            Session.LogoutRemote(0);
-            break;
-        case "lock":
-            let screensaver_settings = new Gio.Settings({
-                schema: "org.cinnamon.desktop.screensaver"
-            });
-            let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
-            if (screensaver_dialog.query_exists(null)) {
-                if (screensaver_settings.get_boolean("ask-for-away-message")) {
-                    Util.spawnCommandLine("cinnamon-screensaver-lock-dialog");
+            case "logout": {
+                Session.LogoutRemote(0);
+                break;
+            } case "lock": {
+                let screensaver_settings = new Gio.Settings({
+                    schema: "org.cinnamon.desktop.screensaver"
+                });
+                let screensaver_dialog = Gio.file_new_for_path("/usr/bin/cinnamon-screensaver-command");
+                if (screensaver_dialog.query_exists(null)) {
+                    if (screensaver_settings.get_boolean("ask-for-away-message")) {
+                        Util.spawnCommandLine("cinnamon-screensaver-lock-dialog");
+                    }
+                    else {
+                        Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                    }
                 }
                 else {
-                    Util.spawnCommandLine("cinnamon-screensaver-command --lock");
+                    this._screenSaverProxy.LockRemote("");
                 }
+                break;
             }
-            else {
-                this._screenSaverProxy.LockRemote("");
-            }
-            break;
         }
         this._appButton.toggle();
         this.parentMenu.toggle();
@@ -1922,10 +1919,9 @@ FavoritesBox.prototype = {
     handleDragOver : function(source, actor, x, y, time) {
         let app = source.app;
 
-        let favorites = AppFavorites.getAppFavorites().getFavorites();
+        /*let favorites = AppFavorites.getAppFavorites().getFavorites();
         let numFavorites = favorites.length;
-
-        let favPos = favorites.indexOf(app);
+        let favPos = favorites.indexOf(app);*/
 
         let children = this.actor.get_children();
         let numChildren = children.length;
@@ -2034,11 +2030,11 @@ FavoritesBox.prototype = {
 
         return true;
     }
-}
+};
 
 const Gettext = imports.gettext;
 const UUID = "CinnVIIStarkMenu@NikoKrause";
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     let customTranslation = Gettext.dgettext(UUID, str);
@@ -2047,13 +2043,6 @@ function _(str) {
     }
     return Gettext.gettext(str);
 }
-
-const L10NDUMMY = _("All Programs") + _("Favorites")
-                + _("Documents") + _("nemo Documents")
-                + _("Pictures") + _("nemo Pictures")
-                + _("Music") + _("nemo Music")
-                + _("Videos") + _("nemo Videos")
-                + _("Downloads") + _("nemo Downloads");
 
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
@@ -2122,15 +2111,15 @@ MyApplet.prototype = {
             icon_name: 'edit-clear',
             icon_type: St.IconType.SYMBOLIC });
         this._searchIconClickedId = 0;
-        this._applicationsButtons = new Array();
-        this._applicationsButtonFromApp = new Object();
-        this._favoritesButtons = new Array();
-        this._placesButtons = new Array();
-        this._transientButtons = new Array();
+        this._applicationsButtons = [];
+        this._applicationsButtonFromApp = {};
+        this._favoritesButtons = [];
+        this._placesButtons = [];
+        this._transientButtons = [];
         this.recentButton = null;
-        this._recentButtons = new Array();
-        this._categoryButtons = new Array();
-        this._searchProviderButtons = new Array();
+        this._recentButtons = [];
+        this._categoryButtons = [];
+        this._searchProviderButtons = [];
         this._selectedItemIndex = null;
         this._previousSelectedActor = null;
         this._previousVisibleIndex = null;
@@ -2138,7 +2127,7 @@ MyApplet.prototype = {
         this._activeContainer = null;
         this._activeActor = null;
         this.menuIsOpening = false;
-        this._knownApps = new Array(); // Used to keep track of apps that are already installed, so we can highlight newly installed ones
+        this._knownApps = []; // Used to keep track of apps that are already installed, so we can highlight newly installed ones
         this._appsWereRefreshed = false;
         this._canUninstallApps = GLib.file_test("/usr/bin/cinnamon-remove-application", GLib.FileTest.EXISTS);
         this._isBumblebeeInstalled = GLib.file_test("/usr/bin/optirun", GLib.FileTest.EXISTS);
@@ -2167,7 +2156,7 @@ MyApplet.prototype = {
         this._fileFolderAccessActive = false;
         this._pathCompleter = new Gio.FilenameCompleter();
         this._pathCompleter.set_dirs_only(false);
-        this.lastAcResults = new Array();
+        this.lastAcResults = [];
         this.settings.bind("search-filesystem", "searchFilesystem");
         this.refreshing = false; // used as a flag to know if we're currently refreshing (so we don't do it more than once concurrently)
 
@@ -2381,7 +2370,7 @@ MyApplet.prototype = {
             if (quicklauncher_places_directory == null) {
                 quicklauncher_places_directory = "–";
             } else if (quicklauncher_places_directory.charAt(0) == "~") {
-                let sliced_directory = quicklauncher_places_directory.slice(2)
+                let sliced_directory = quicklauncher_places_directory.slice(2);
                 if (sliced_directory == "Documents")
                     quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
                 else if (sliced_directory == "Pictures")
@@ -2402,7 +2391,7 @@ MyApplet.prototype = {
                 quicklauncher_places_label = quicklauncher_places_directory.split("/").pop();
                 // root '/' directory
                 if (quicklauncher_places_label == "")
-                    quicklauncher_places_label = "File System"
+                    quicklauncher_places_label = "File System";
                 else
                     quicklauncher_places_label = decodeURIComponent(quicklauncher_places_label);
             }
@@ -2497,7 +2486,7 @@ MyApplet.prototype = {
     },
 
     on_applet_removed_from_panel: function () {
-        Main.keybindingManager.removeHotKey("overlay-key-" + this.instance_id)
+        Main.keybindingManager.removeHotKey("overlay-key-" + this.instance_id);
     },
 
     _launch_editor: function() {
@@ -3240,8 +3229,7 @@ MyApplet.prototype = {
                 this._previousSelectedActor._delegate instanceof RecentClearButton ||
                 this._previousSelectedActor._delegate instanceof TransientButton)
                 this._previousSelectedActor.style_class = "menu-application-button";
-            else if (this._previousSelectedActor._delegate instanceof FavoritesButton ||
-                     this._previousSelectedActor._delegate instanceof SystemButton)
+            else if (this._previousSelectedActor._delegate instanceof FavoritesButton)
                 this._previousSelectedActor.remove_style_pseudo_class("hover");
         }
     },
@@ -3270,8 +3258,6 @@ MyApplet.prototype = {
         let [mx, my, mask] = global.get_pointer();
         let [bx, by] = this.categoriesApplicationsBox.actor.get_transformed_position();
         let [bw, bh] = this.categoriesApplicationsBox.actor.get_transformed_size();
-        let [aw, ah] = actor.get_transformed_size();
-        let [ax, ay] = actor.get_transformed_position();
         let [appbox_x, appbox_y] = this.applicationsBox.get_transformed_position();
 
         let right_x = appbox_x - bx;
@@ -3495,7 +3481,7 @@ MyApplet.prototype = {
                         this.selectedAppTitle.set_text("");
                         this.selectedAppDescription.set_text("");
                     });
-                }
+                };
 
                 let handleNewButton = (id) => {
                     let uri = this.RecentManager._infosByTimestamp[id].uri;
@@ -3514,7 +3500,7 @@ MyApplet.prototype = {
                         handleEnterEvent(button);
                         handleLeaveEvent(button);
 
-                        new_button = button
+                        new_button = button;
                     }
 
                     new_recents.push(new_button);
@@ -3654,13 +3640,13 @@ MyApplet.prototype = {
 
         this._applicationsButtons.forEach(Lang.bind(this, function(button) {
             button.destroy();
-        }))
+        }));
 
-        this._applicationsButtons = new Array();
+        this._applicationsButtons = [];
         // this.applicationsBox.destroy_all_children();
 
-        this._transientButtons = new Array();
-        this._applicationsButtonFromApp = new Object();
+        this._transientButtons = [];
+        this._applicationsButtonFromApp = {};
 
         this._allAppsCategoryButton = new CategoryButton(null);
         this._addEnterEvent(this._allAppsCategoryButton, Lang.bind(this, function() {
@@ -3811,10 +3797,9 @@ MyApplet.prototype = {
         this.favoritesBox.destroy_all_children();
 
         //Load favorites again
-        this._favoritesButtons = new Array();
+        this._favoritesButtons = [];
         let launchers = global.settings.get_strv('favorite-apps');
         let appSys = Cinnamon.AppSystem.get_default();
-        let j = 0;
         for ( let i = 0; i < launchers.length; ++i ) {
             let app = appSys.lookup_app(launchers[i]);
             if (app) {
@@ -3825,8 +3810,6 @@ MyApplet.prototype = {
 
                 this._addEnterEvent(button, Lang.bind(this, this._favEnterEvent, button));
                 button.actor.connect('leave-event', Lang.bind(this, this._favLeaveEvent, button));
-
-                ++j;
             }
         }
     },
@@ -3844,7 +3827,7 @@ MyApplet.prototype = {
                     var app = appsys.lookup_app_by_tree_entry(entry);
                     if (!app)
                         app = appsys.lookup_settings_app_by_tree_entry(entry);
-                    var app_key = app.get_id()
+                    var app_key = app.get_id();
                     if (app_key == null) {
                         app_key = app.get_name() + ":" +
                             app.get_description();
@@ -4390,7 +4373,7 @@ MyApplet.prototype = {
 
     _listBookmarks: function(pattern){
        let bookmarks = Main.placesManager.getBookmarks();
-       var res = new Array();
+       var res = [];
        for (let id = 0; id < bookmarks.length; id++) {
           if (!pattern || bookmarks[id].name.toLowerCase().indexOf(pattern)!=-1) res.push(bookmarks[id]);
        }
@@ -4399,7 +4382,7 @@ MyApplet.prototype = {
 
     _listDevices: function(pattern){
        let devices = Main.placesManager.getMounts();
-       var res = new Array();
+       var res = [];
        for (let id = 0; id < devices.length; id++) {
           if (!pattern || devices[id].name.toLowerCase().indexOf(pattern)!=-1) res.push(devices[id]);
        }
@@ -4407,7 +4390,7 @@ MyApplet.prototype = {
     },
 
     _listApplications: function(category_menu_id, pattern){
-        var applist = new Array();
+        var applist = [];
         if (category_menu_id) {
             applist = category_menu_id;
         } else {
@@ -4415,7 +4398,7 @@ MyApplet.prototype = {
         }
         let res;
         if (pattern){
-            res = new Array();
+            res = [];
             for (var i in this._applicationsButtons) {
                 let app = this._applicationsButtons[i].app;
                 if (Util.latinise(app.get_name().toLowerCase()).indexOf(pattern)!=-1 ||
@@ -4449,20 +4432,20 @@ MyApplet.prototype = {
         }
 
         var appResults = this._listApplications(null, pattern);
-        var placesResults = new Array();
+        var placesResults = [];
         var bookmarks = this._listBookmarks(pattern);
-        for (var i in bookmarks)
+        for (let i in bookmarks)
             placesResults.push(bookmarks[i].name);
         var devices = this._listDevices(pattern);
-        for (var i in devices)
+        for (let i in devices)
             placesResults.push(devices[i].name);
-        var recentResults = new Array();
+        var recentResults = [];
         for (let i = 0; i < this._recentButtons.length; i++) {
             if (!(this._recentButtons[i] instanceof RecentClearButton) && this._recentButtons[i].button_name.toLowerCase().indexOf(pattern) != -1)
                 recentResults.push(this._recentButtons[i].button_name);
         }
 
-        var acResults = new Array(); // search box autocompletion results
+        var acResults = []; // search box autocompletion results
         if (this.searchFilesystem) {
             // Don't use the pattern here, as filesystem is case sensitive
             acResults = this._getCompletions(this.searchEntryText.get_text());
@@ -4524,13 +4507,11 @@ MyApplet.prototype = {
         if (text.indexOf('/') != -1) {
             return this._pathCompleter.get_completions(text);
         } else {
-            return new Array();
+            return [];
         }
     },
 
     _run : function(input) {
-        let command = input;
-
         this._commandError = false;
         if (input) {
             let path = null;
