@@ -334,9 +334,9 @@ MyApplet.prototype = {
       {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
       {key: 'middle-click-action', value: 'middleClickAction', cb: null},
-      {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKey},
+      {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKeys},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
-      {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKey},
+      {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKeys},
       {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this._updatePseudoClasses},
       {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this._updatePseudoClasses},
       {key: 'activePseudoClass', value: 'activePseudoClass', cb: this._updatePseudoClasses},
@@ -390,7 +390,7 @@ MyApplet.prototype = {
     this.updateMonitorWatchlist(true);
     // Query apps for the current workspace
     this._onSwitchWorkspace();
-    this._bindAppKey();
+    this._bindAppKeys();
     this._updateSpacing();
     this.state.set({appletReady: true});
   },
@@ -432,7 +432,7 @@ MyApplet.prototype = {
 
   on_applet_removed_from_panel: function() {
     this.state.set({willUnmount: true});
-    this._unbindAppKey();
+    this._unbindAppKeys();
     this.signals.disconnectAllSignals();
     for (let i = 0, len = this.appLists.length; i < len; i++) {
       if (this.appLists[i]) {
@@ -458,24 +458,28 @@ MyApplet.prototype = {
     }
   },
 
-  _bindAppKey: function(){
-    this._unbindAppKey();
+  _bindAppKeys: function(){
+    this._unbindAppKeys();
 
     for (let i = 1; i < 10; i++) {
-      Main.keybindingManager.addHotKey('launch-app-key-' + i, '<Super>' + i, () => this._onAppKeyPress(i));
-      Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, () => this._onNewAppKeyPress(i));
+      this._bindAppKey(i);
     }
-    Main.keybindingManager.addHotKey('launch-show-apps-order', this.state.settings.showAppsOrderHotkey, ()=>this._showAppsOrder());
-    Main.keybindingManager.addHotKey('launch-cycle-menus', this.state.settings.cycleMenusHotkey, ()=>this._cycleMenus());
+    Main.keybindingManager.addHotKey('launch-show-apps-order', this.state.settings.showAppsOrderHotkey, () => this._showAppsOrder());
+    Main.keybindingManager.addHotKey('launch-cycle-menus', this.state.settings.cycleMenusHotkey, () => this._cycleMenus());
   },
 
-  _unbindAppKey: function(){
+  _unbindAppKeys: function(){
     for (let i = 1; i < 10; i++) {
       Main.keybindingManager.removeHotKey('launch-app-key-' + i);
       Main.keybindingManager.removeHotKey('launch-new-app-key-' + i);
     }
     Main.keybindingManager.removeHotKey('launch-show-apps-order');
     Main.keybindingManager.removeHotKey('launch-cycle-menus');
+  },
+
+  _bindAppKey: function(i) {
+    Main.keybindingManager.addHotKey('launch-app-key-' + i, '<Super>' + i, () => this._onAppKeyPress(i));
+    Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, () => this._onNewAppKeyPress(i));
   },
 
   _onAppKeyPress: function(number){

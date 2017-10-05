@@ -482,7 +482,7 @@ AppThumbnailHoverMenu.prototype = {
     this.state = state;
     this.groupState = groupState;
 
-    this.groupState.connect({
+    this.connectId = this.groupState.connect({
       hoverMenuClose: () => {
         this.shouldClose = true;
         this.close();
@@ -531,17 +531,16 @@ AppThumbnailHoverMenu.prototype = {
     let symbol = event.get_key_symbol();
     if (this.isOpen && (symbol === Clutter.KEY_Super_L || symbol === Clutter.KEY_Super_R)) {
       // close this menu, if opened by super+#
-      this.close();
-      this.state.set({lastCycled: null});
+      this.close(true);
     }
     return true;
   },
 
-  open: function () {
-    if (!this.actor
+  open: function (force) {
+    if (!force && (!this.actor
       || this.willUnmount
       || this.isOpen
-      || (this.shouldClose && !this.state.settings.onClickThumbs)) {
+      || (this.shouldClose && !this.state.settings.onClickThumbs))) {
       return;
     }
     if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
@@ -676,7 +675,8 @@ AppThumbnailHoverMenu.prototype = {
       // Since the total window count determines the scaling used, this needs to be done
       // each time a window is added.
       this.updateThumbnails(thumbnail.index);
-    } else if (this.appThumbnails[refThumb]) {
+    } else if (this.appThumbnails[refThumb]
+      && !this.appThumbnails[refThumb].willUnmount) {
       this.appThumbnails[refThumb].index = refThumb;
       this.appThumbnails[refThumb].metaWindow = metaWindow;
       this.appThumbnails[refThumb].refreshThumbnail();
@@ -775,6 +775,7 @@ AppThumbnailHoverMenu.prototype = {
     }
     this.removeAll();
     PopupMenu.PopupMenu.prototype.destroy.call(this);
+    this.groupState.disconnect(this.connectId);
     unref(this);
   },
 };
@@ -787,10 +788,10 @@ WindowThumbnail.prototype = {
   _init: function (params) {
     this.state = params.state;
     this.groupState = params.groupState;
-    this.groupState.connect({
+    this.connectId = this.groupState.connect({
       isFavoriteApp: () => this.handleFavorite(),
       lastFocused: () => {
-        if (this.willUnmount
+        if (!this.groupState
           || !this.groupState.metaWindows
           || this.groupState.metaWindows.length === 0) {
           return;
@@ -872,17 +873,14 @@ WindowThumbnail.prototype = {
     if (!this.overlayPreview) {
       this._hoverPeek(this.state.settings.peekOpacity);
     }
-    this.actor.add_style_pseudo_class('outlined');
     this.actor.add_style_pseudo_class('selected');
     this.button.set_opacity(255);
   },
 
   handleLeaveEvent: function(){
     this.entered = false;
-    if (!this.isFocused) {
-      this.actor.remove_style_pseudo_class('outlined');
-      this.actor.remove_style_pseudo_class('selected');
-    }
+    this.actor.remove_style_pseudo_class('selected');
+    this._focusWindowChange();
     this.button.set_opacity(0);
     this.destroyOverlayPreview();
   },
@@ -900,11 +898,12 @@ WindowThumbnail.prototype = {
   },
 
   _focusWindowChange: function () {
-    if (this.isFocused && this.state.settings.highlightLastFocusedThumbnail) {
-      this.actor.add_style_pseudo_class('selected');
+    if (this.isFocused
+      && this.state.settings.highlightLastFocusedThumbnail
+      && this.groupState.metaWindows.length > 1) {
+      this.actor.add_style_pseudo_class('outlined');
     } else {
       this.actor.remove_style_pseudo_class('outlined');
-      this.actor.remove_style_pseudo_class('selected');
     }
   },
 
@@ -930,7 +929,7 @@ WindowThumbnail.prototype = {
   handleCloseClick: function(){
     this.handleLeaveEvent();
     this.stopClick = true;
-    this.destroy();
+    this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
     this._hoverPeek(constants.OPACITY_OPAQUE);
 
     this.metaWindow.delete(global.get_current_time());
@@ -1085,9 +1084,11 @@ WindowThumbnail.prototype = {
     if (!this.groupState) {
       return;
     }
+    this.groupState.disconnect(this.connectId);
     this.signals.disconnectAllSignals();
     this._container.destroy();
     this.bin.destroy();
     this.actor.destroy();
+    unref(this);
   }
 };

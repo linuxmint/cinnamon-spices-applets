@@ -103,8 +103,8 @@ const unref = function(object) {
   // so it is safest to wait for the next 'tick' before removing references.
   setTimeout(() => {
     let keys = Object.keys(object);
-    for (var i = 0; i < keys.length; i++) {
-      if (keys[i] !== 'willUnmount' || keys[i] === 'actor') {
+    for (let i = 0; i < keys.length; i++) {
+      if (keys[i] !== 'willUnmount') {
         object[keys[i]] = null;
       }
     }

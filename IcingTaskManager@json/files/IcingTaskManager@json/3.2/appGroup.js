@@ -111,13 +111,12 @@ AppGroup.prototype = {
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
       autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
       willUnmount: false,
-      hoverMenuEntered: false,
       tooltip: null,
       groupReady: false
     });
 
     this.groupState.connect({
-      isFavoriteApp: () => this.handleFavorite(),
+      isFavoriteApp: () => this.handleFavorite(true),
       getActor: () => this.actor
     });
 
@@ -753,20 +752,8 @@ AppGroup.prototype = {
     this._animate();
   },
 
-  _windowHandle: function (fromDrag) {
-    let has_focus = this.groupState.lastFocused.has_focus();
-    if (!this.groupState.lastFocused.minimized && !has_focus) {
-      this.groupState.lastFocused.foreach_transient(function (child) {
-        if (!child.minimized && child.has_focus()) {
-          has_focus = true;
-        }
-      });
-    }
-
-    if (has_focus) {
-      if (fromDrag) {
-        return;
-      }
+  _windowHandle: function () {
+    if (this.groupState.lastFocused.appears_focused) {
       if (this.groupState.metaWindows.length > 1) {
         let nextWindow = null;
         for (let i = 0, max = this.groupState.metaWindows.length - 1; i < max; i++) {
@@ -868,7 +855,7 @@ AppGroup.prototype = {
       this.groupState.set({
         metaWindows: this.groupState.metaWindows,
         lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1]
-      });
+      }, true);
       this.groupState.trigger('removeThumbnailFromMenu', metaWindow);
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
@@ -948,7 +935,10 @@ AppGroup.prototype = {
     }
   },
 
-  handleFavorite: function () {
+  handleFavorite: function (changed) {
+    if (changed) {
+      setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
+    }
     this._setFavoriteAttributes();
     if (this.groupState.metaWindows.length === 0
       && this.state.appletReady) {

@@ -1,5 +1,12 @@
 Changelog
 
+### 6.0.3
+
+  * Fixed a regression causing the Super + Number hotkey behavior to stop working.
+  * Fixed a potential memory leak when closing thumbnails.
+  * Fixed the app order number not updating correctly when pinning an app.
+  * Focused thumbnails now use the outlined pseudo class, and are only indicated if more than one window from an app is open.
+
 ### 6.0.2
 
   * Fixed app button dragging not working correctly on Cinnamon 3.4.
