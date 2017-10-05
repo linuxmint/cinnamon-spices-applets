@@ -4,5 +4,6 @@
     "name": "System Monitor", 
     "version": "1.6.1", 
     "icon": "utilities-system-monitor",
-    "max-instances": -1
+    "max-instances": -1,
+    "multiversion": true
 }
