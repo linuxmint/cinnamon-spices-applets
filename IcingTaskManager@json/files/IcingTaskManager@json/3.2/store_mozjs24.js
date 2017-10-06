@@ -404,7 +404,7 @@ function init() {
     } else if (typeof key === 'number') {
       var indexes = [];
       for (var _i2 = 0; _i2 < listeners.length; _i2++) {
-        if (listeners[_i2].id !== key) {
+        if (!listeners[_i2] || listeners[_i2].id !== key) {
           continue;
         }
         indexes.push(_i2);

@@ -648,6 +648,7 @@ AppThumbnailHoverMenu.prototype = {
     for (let i = 0; i < this.appThumbnails.length; i++) {
       if (i !== exceptIndex) {
         this.appThumbnails[i].refreshThumbnail();
+        this.box.set_child_at_index(this.appThumbnails[i].actor, i);
       }
     }
   },
@@ -902,6 +903,7 @@ WindowThumbnail.prototype = {
       && this.groupState.metaWindows.length > 1) {
       this.actor.add_style_pseudo_class('outlined');
     } else {
+      this.isFocused = false;
       this.actor.remove_style_pseudo_class('outlined');
     }
   },
@@ -989,21 +991,17 @@ WindowThumbnail.prototype = {
         });
       }
     } else {
-      this.destroy();
+      this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
     }
   },
 
-  refreshThumbnail: function (metaWindow, metaWindows) {
+  refreshThumbnail: function () {
     if (this.willUnmount
       || !this.groupState
-      || !this.groupState.app) {
-      return false;
-    }
-    metaWindow = metaWindow ? metaWindow : this.metaWindow;
-    metaWindows = metaWindows ? metaWindows : this.groupState.metaWindows;
-
-    if (!this.metaWindow) {
-      return false;
+      || !this.groupState.app
+      || !this.groupState.metaWindows
+      || !this.metaWindow) {
+      return;
     }
 
     let monitor = Main.layoutManager.primaryMonitor;
@@ -1023,11 +1021,7 @@ WindowThumbnail.prototype = {
         thumbnailSize = this.thumbnailWidth;
       }
 
-      if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
-        metaWindows = this.groupState.app.get_windows();
-      }
-
-      if (((thumbnailSize * thumbMultiplier) * metaWindows.length) + thumbnailSize > monitorSize) {
+      if (((thumbnailSize * thumbMultiplier) * this.groupState.metaWindows.length) + thumbnailSize > monitorSize) {
         let divideMultiplier = !this.state.isHorizontal ? 4.5 : 1.1;
         setThumbSize(divider * divideMultiplier, 16);
         return;

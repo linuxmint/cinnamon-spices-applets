@@ -343,7 +343,7 @@ function init(state = {}, listeners = [], connections = 0) {
     } else if (typeof key === 'number') {
       let indexes = [];
       for (let i = 0; i < listeners.length; i++) {
-        if (listeners[i].id !== key) {
+        if (!listeners[i] || listeners[i].id !== key) {
           continue;
         }
         indexes.push(i);

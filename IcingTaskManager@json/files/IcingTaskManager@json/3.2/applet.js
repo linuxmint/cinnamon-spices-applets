@@ -439,7 +439,7 @@ MyApplet.prototype = {
         this.appLists[i].destroy();
       }
     }
-
+    this.settings.finalize();
     unref(this);
   },
 
