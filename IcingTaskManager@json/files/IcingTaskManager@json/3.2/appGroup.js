@@ -268,6 +268,9 @@ AppGroup.prototype = {
   setIconPadding: function () {
     this.themeNode = this.actor.peek_theme_node();
     this.padding = (this.labelVisible ? 0 : Math.floor((this.actor.width - this.iconSize)) / 2);
+    if (global.ui_scale > 1) {
+      this.padding = this.padding / global.ui_scale - (Math.ceil(this.padding / 4));
+    }
     const rightPadding = 0;
     this.actor.style = 'padding-left: ' + this.padding + 'px;padding-right: ' + rightPadding + 'px;';
   },
@@ -302,10 +305,13 @@ AppGroup.prototype = {
   },
 
   setIcon: function () {
+    let panelHeight = this.state.trigger('getPanelHeight');
+    panelHeight = panelHeight % 2 > 0 ? panelHeight + 1 : panelHeight;
+    let height = this.state.settings.enableIconSize ? this.state.settings.iconSize : panelHeight;
     if (this.state.trigger('getScaleMode') && this.labelVisible) {
-      this.iconSize = Math.round(this.state.settings.iconSize * ICON_HEIGHT_FACTOR / global.ui_scale);
+      this.iconSize = Math.round(height * ICON_HEIGHT_FACTOR / global.ui_scale);
     } else {
-      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
+      this.iconSize = Math.round(height * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     }
     let icon;
     if (this.groupState.app) {
@@ -424,7 +430,7 @@ AppGroup.prototype = {
     }
     this._label.allocate(childBox, flags);
     if (direction === Clutter.TextDirection.LTR) {
-      childBox.x1 = -3;
+      childBox.x1 = -3 * global.ui_scale;
       childBox.x2 = childBox.x1 + this._numLabel.width;
       childBox.y1 = box.y1 - 2;
       childBox.y2 = box.y2 - 1;

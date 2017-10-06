@@ -675,8 +675,7 @@ AppThumbnailHoverMenu.prototype = {
       // Since the total window count determines the scaling used, this needs to be done
       // each time a window is added.
       this.updateThumbnails(thumbnail.index);
-    } else if (this.appThumbnails[refThumb]
-      && !this.appThumbnails[refThumb].willUnmount) {
+    } else if (this.appThumbnails[refThumb]) {
       this.appThumbnails[refThumb].index = refThumb;
       this.appThumbnails[refThumb].metaWindow = metaWindow;
       this.appThumbnails[refThumb].refreshThumbnail();
