@@ -38,7 +38,7 @@ AppList.prototype = {
       lastFocusedApp: null,
     });
     this.listState.connect({
-      updateAppGroupIndexes: (id) => this.updateAppGroupIndexes(id),
+      updateAppGroupIndexes: () => this.updateAppGroupIndexes(),
       _closeAllRightClickMenus: (cb) => this._closeAllRightClickMenus(cb),
       _closeAllHoverMenus: (cb) => this._closeAllHoverMenus(cb),
       _windowAdded: (win) => this._windowAdded(this.metaWorkspace, win),
@@ -69,7 +69,7 @@ AppList.prototype = {
 
   },
 
-  on_orientation_changed: function(o, init) {
+  on_orientation_changed: function() {
     if (this.manager === undefined) {
       return;
     }
@@ -106,7 +106,7 @@ AppList.prototype = {
   },
 
   _onAppKeyPress: function(number){
-    if (number > this.appList.length) {
+    if (!this.appList[number - 1]) {
       return;
     }
     this.appList[number - 1]._onAppKeyPress(number);
@@ -129,7 +129,7 @@ AppList.prototype = {
   _cycleMenus: function(){
     let refApp = 0;
     if (!this.state.lastCycled && this.listState.lastFocusedApp) {
-      refApp = store.queryCollection(this.appList, {appId: this.listState.lastFocusedApp}, {indexOnly: true});
+      refApp = store.queryCollection(this.appList, (app) => app.groupState.appId === this.listState.lastFocusedApp, {indexOnly: true});
     }
     if (this.state.lastCycled
       && this.appList[this.state.lastCycled]) {
@@ -275,7 +275,7 @@ AppList.prototype = {
       }
     }
 
-    let initApp = (metaWindows, window, index)=>{
+    let initApp = (metaWindows, window)=>{
       let appGroup = new AppGroup({
         state: this.state,
         listState: this.listState,
@@ -352,26 +352,16 @@ AppList.prototype = {
     return result;
   },
 
-  updateAppGroupIndexes: function (appId) {
-
-    let originPos = store.queryCollection(this.appList, appGroup => appGroup.groupState.appId === appId, {indexOnly: true});
-    let pos = store.queryCollection(this.actor.get_children(), actor => {
-      return isEqual(actor, this.appList[originPos].actor);
-    }, {indexOnly: true});
-    if (originPos === pos
-      || originPos < 0
-      || pos < 0) {
-      return;
+  updateAppGroupIndexes: function () {
+    const newAppList = [];
+    let children = this.actor.get_children();
+    for (let i = 0; i < children.length; i++) {
+      let appGroup = store.queryCollection(this.appList, (appGroup) => isEqual(appGroup.actor, children[i]));
+      if (appGroup) {
+        newAppList.push(appGroup);
+      }
     }
-    if (pos > originPos) {
-      // TBD: if drag to a right position, exclude postion hold by origin
-      pos -= 1;
-    }
-    // originPos -> pos
-    let data = this.appList[originPos];
-    this.appList.splice(originPos, 1);
-    this.appList.splice(pos, 0, data);
-    data = undefined;
+    this.appList = newAppList;
   },
 
   _windowRemoved: function (metaWorkspace, metaWindow, positionChange) {

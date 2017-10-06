@@ -111,13 +111,12 @@ AppGroup.prototype = {
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
       autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
       willUnmount: false,
-      hoverMenuEntered: false,
       tooltip: null,
       groupReady: false
     });
 
     this.groupState.connect({
-      isFavoriteApp: () => this.handleFavorite(),
+      isFavoriteApp: () => this.handleFavorite(true),
       getActor: () => this.actor
     });
 
@@ -269,6 +268,9 @@ AppGroup.prototype = {
   setIconPadding: function () {
     this.themeNode = this.actor.peek_theme_node();
     this.padding = (this.labelVisible ? 0 : Math.floor((this.actor.width - this.iconSize)) / 2);
+    if (global.ui_scale > 1) {
+      this.padding = this.padding / global.ui_scale - (Math.ceil(this.padding / 4));
+    }
     const rightPadding = 0;
     this.actor.style = 'padding-left: ' + this.padding + 'px;padding-right: ' + rightPadding + 'px;';
   },
@@ -303,10 +305,13 @@ AppGroup.prototype = {
   },
 
   setIcon: function () {
+    let panelHeight = this.state.trigger('getPanelHeight');
+    panelHeight = panelHeight % 2 > 0 ? panelHeight + 1 : panelHeight;
+    let height = this.state.settings.enableIconSize ? this.state.settings.iconSize : panelHeight;
     if (this.state.trigger('getScaleMode') && this.labelVisible) {
-      this.iconSize = Math.round(this.state.settings.iconSize * ICON_HEIGHT_FACTOR / global.ui_scale);
+      this.iconSize = Math.round(height * ICON_HEIGHT_FACTOR / global.ui_scale);
     } else {
-      this.iconSize = Math.round(this.state.settings.iconSize * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
+      this.iconSize = Math.round(height * VERTICAL_ICON_HEIGHT_FACTOR / global.ui_scale);
     }
     let icon;
     if (this.groupState.app) {
@@ -425,7 +430,7 @@ AppGroup.prototype = {
     }
     this._label.allocate(childBox, flags);
     if (direction === Clutter.TextDirection.LTR) {
-      childBox.x1 = -3;
+      childBox.x1 = -3 * global.ui_scale;
       childBox.x2 = childBox.x1 + this._numLabel.width;
       childBox.y1 = box.y1 - 2;
       childBox.y2 = box.y2 - 1;
@@ -753,20 +758,8 @@ AppGroup.prototype = {
     this._animate();
   },
 
-  _windowHandle: function (fromDrag) {
-    let has_focus = this.groupState.lastFocused.has_focus();
-    if (!this.groupState.lastFocused.minimized && !has_focus) {
-      this.groupState.lastFocused.foreach_transient(function (child) {
-        if (!child.minimized && child.has_focus()) {
-          has_focus = true;
-        }
-      });
-    }
-
-    if (has_focus) {
-      if (fromDrag) {
-        return;
-      }
+  _windowHandle: function () {
+    if (this.groupState.lastFocused.appears_focused) {
       if (this.groupState.metaWindows.length > 1) {
         let nextWindow = null;
         for (let i = 0, max = this.groupState.metaWindows.length - 1; i < max; i++) {
@@ -868,7 +861,7 @@ AppGroup.prototype = {
       this.groupState.set({
         metaWindows: this.groupState.metaWindows,
         lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1]
-      });
+      }, true);
       this.groupState.trigger('removeThumbnailFromMenu', metaWindow);
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
@@ -948,7 +941,10 @@ AppGroup.prototype = {
     }
   },
 
-  handleFavorite: function () {
+  handleFavorite: function (changed) {
+    if (changed) {
+      setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
+    }
     this._setFavoriteAttributes();
     if (this.groupState.metaWindows.length === 0
       && this.state.appletReady) {

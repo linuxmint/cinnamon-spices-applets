@@ -139,7 +139,7 @@ function getByPath(key, state) {
  * See _connect.
  * @returns Initial state object with the public API.
  */
-function init(state = {}, listeners = []) {
+function init(state = {}, listeners = [], connections = 0) {
   const publicAPI = Object.freeze({
     get,
     set,
@@ -201,8 +201,9 @@ function init(state = {}, listeners = []) {
    * calls dispatch to fire any connected callbacks.
    *
    * @param {object} object
+   * @param {boolean} forceDispatch
    */
-  function set(object) {
+  function set(object, forceDispatch) {
     let keys = Object.keys(object);
     let changed = false;
     for (let i = 0; i < keys.length; i++) {
@@ -215,13 +216,11 @@ function init(state = {}, listeners = []) {
       }
     }
 
-    if (!changed) {
-      return;
-    }
-
-    if (listeners.length > 0) {
+    if ((changed || forceDispatch) && listeners.length > 0) {
       dispatch(object);
     }
+
+    return publicAPI;
   }
 
   /**
@@ -274,7 +273,7 @@ function init(state = {}, listeners = []) {
     }
   }
 
-  function _connect(keys, callback) {
+  function _connect(keys, callback, id) {
     let listener;
 
     if (callback) {
@@ -284,7 +283,7 @@ function init(state = {}, listeners = []) {
       let newKeys = intersect(keys, listener.keys, true);
       listener.keys.concat(newKeys);
     } else {
-      listeners.push({keys, callback});
+      listeners.push({keys, callback, id});
     }
   }
 
@@ -297,27 +296,22 @@ function init(state = {}, listeners = []) {
    * @returns Public API for chaining.
    */
   function connect(actions, callback) {
+    const id = connections++;
     if (Array.isArray(actions)) {
-      _connect(actions, callback);
+      _connect(actions, callback, id);
     } else if (typeof actions === 'string') {
-      _connect([actions], callback);
+      _connect([actions], callback, id);
     } else if (typeof actions === 'object') {
       let keys = Object.keys(actions);
       for (let i = 0; i < keys.length; i++) {
-        _connect([keys[i]], actions[keys[i]]);
+        _connect([keys[i]], actions[keys[i]], id);
       }
     }
 
-    return publicAPI;
+    return id;
   }
 
-  /**
-   * disconnect
-   * Removes a callback listener from the queue.
-   *
-   * @param {string} key
-   */
-  function disconnect(key) {
+  function disconnectByKey(key) {
     let listenerIndex = queryCollection(
       listeners,
       {keys: key},
@@ -331,6 +325,34 @@ function init(state = {}, listeners = []) {
     }
     listeners[listenerIndex] = undefined;
     listeners.splice(listenerIndex, 1);
+  }
+
+  /**
+   * disconnect
+   * Removes a callback listener from the queue.
+   *
+   * @param {string} key
+   */
+  function disconnect(key) {
+    if (typeof key === 'string') {
+      disconnectByKey(key);
+    } else if (Array.isArray(key)) {
+      for (let i = 0; i < key.length; i++) {
+        disconnectByKey(key[i]);
+      }
+    } else if (typeof key === 'number') {
+      let indexes = [];
+      for (let i = 0; i < listeners.length; i++) {
+        if (!listeners[i] || listeners[i].id !== key) {
+          continue;
+        }
+        indexes.push(i);
+      }
+      for (let i = 0; i < indexes.length; i++) {
+        listeners[indexes[i]] = undefined;
+        listeners.splice(indexes[i], 1);
+      }
+    }
   }
 
   /**

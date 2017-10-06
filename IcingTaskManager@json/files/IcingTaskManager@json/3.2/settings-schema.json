@@ -415,7 +415,7 @@
   "icon-size": {
     "type": "spinbutton",
     "dependency": "enable-iconSize",
-    "default": 24,
+    "default": 28,
     "min": 16,
     "max": 128,
     "step": 2,
