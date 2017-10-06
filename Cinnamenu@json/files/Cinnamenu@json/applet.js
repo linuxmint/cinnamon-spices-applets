@@ -1,95 +1,3 @@
-// ES2015 polyfills for mozjs24
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
-// https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
-if (!Array.prototype.findIndex) {
-  Object.defineProperty(Array.prototype, 'findIndex', {
-    value: function(predicate) {
-      // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      let o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, 'length')).
-      let len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      let thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      let k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
-        // d. If testResult is true, return k.
-        let kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return k;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return -1.
-      return -1;
-    }
-  });
-}
-
-// https://tc39.github.io/ecma262/#sec-array.prototype.find
-if (!Array.prototype.find) {
-  Object.defineProperty(Array.prototype, 'find', {
-    value: function(predicate) {
-     // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      var o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, 'length')).
-      var len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      var thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      var k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, « kValue, k, O »)).
-        // d. If testResult is true, return kValue.
-        var kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return kValue;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return undefined.
-      return undefined;
-    }
-  });
-}
-
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -254,7 +162,6 @@ CinnamenuApplet.prototype = {
         setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
         getSelectedTitleClutterText: () => this.selectedAppTitle.get_clutter_text(),
         getSelectedDescriptionClutterText: () => this.selectedAppDescription.get_clutter_text(),
-        toggleSelectedTitleText: (bool) => bool ? this.selectedAppTitle.show() : this.selectedAppTitle.hide(),
         selectorMethod: (method, id) => this[method](id),
         openMenu: () => this.menu.open(),
         closeMenu: () => this.menu.close(),
@@ -519,7 +426,7 @@ CinnamenuApplet.prototype = {
   _updateKeybinding: function() {
     Main.keybindingManager.addHotKey('overlay-key-' + this.instance_id, this.state.settings.overlayKey, Lang.bind(this, function() {
       if (!Main.overview.visible && !Main.expo.visible) {
-        this.menu.toggle_with_options(this.state.enableAnimation);
+        this.menu.toggle_with_options(this.state.settings.enableAnimation);
       }
     }));
   },
@@ -1144,15 +1051,15 @@ CinnamenuApplet.prototype = {
       }
       buttons[refItemIndex].handleLeave();
     }
-    let refCategoryIndex = this.categoryButtons.findIndex(function(button) {
+    let refCategoryIndex = store.queryCollection(this.categoryButtons, function(button) {
       return button.entered != null;
-    });
+    }, {indexOnly: true});
     if (refCategoryIndex > -1 && this.categoriesBox[refCategoryIndex]) {
       this.categoriesBox[refCategoryIndex].handleLeave();
     }
-    let refPowerGroupItemIndex = this.powerGroupButtons.findIndex(function(button) {
+    let refPowerGroupItemIndex = store.queryCollection(this.powerGroupButtons, function(button) {
       return button.entered != null;
-    });
+    }, {indexOnly: true});
     if (refPowerGroupItemIndex > -1 && this.powerGroupButtons[refPowerGroupItemIndex]) {
       this.powerGroupButtons[refPowerGroupItemIndex].handleLeave();
     }
@@ -1202,15 +1109,19 @@ CinnamenuApplet.prototype = {
       if (!app || !app.name) {
         continue;
       }
+      let appObject = {
+        description: app.name
+      };
       windows[i].description = app.name;
       for (let z = 0; z < searchableProps.length; z++) {
         match = fuzzy(pattern, windows[i][searchableProps[z]], fuzzyOptions)
         if (match.score > 0.2) {
-          windows[i]._icon = app.create_icon_texture(this.state.iconSize);
-          windows[i].type = ApplicationType._windows;
-          windows[i].name = windows[i].title;
-          windows[i].score = match.score;
-          res.push(windows[i]);
+          appObject._icon = app.create_icon_texture(this.state.iconSize);
+          appObject.type = ApplicationType._windows;
+          appObject.name = windows[i].title;
+          appObject.score = match.score;
+          appObject.window = windows[i];
+          res.push(appObject);
           break;
         }
       }
@@ -1519,7 +1430,7 @@ CinnamenuApplet.prototype = {
       }
 
       if (this.state.isListView) {
-        this.applicationsListBox.add_child(appButton.actor);
+        this.applicationsListBox.add_actor(appButton.actor);
       } else {
         let gridLayout = this.applicationsGridBox.layout_manager;
         if (!gridLayout) {
@@ -1582,13 +1493,13 @@ CinnamenuApplet.prototype = {
           || button.menu.isOpen);
     }, {indexOnly: true});
 
-    let refCategoryIndex = this.categoryButtons.findIndex((button) => {
+    let refCategoryIndex = store.queryCollection(this.categoryButtons, (button) => {
       return button.entered != null;
-    });
+    }, {indexOnly: true});
 
-    let refPowerGroupItemIndex = this.powerGroupButtons.findIndex((button) => {
+    let refPowerGroupItemIndex = store.queryCollection(this.powerGroupButtons, (button) => {
       return button.entered != null;
-    });
+    }, {indexOnly: true});
 
     let contextMenuChildren = [];
     let refContextMenuItemIndex = -1;
@@ -1602,9 +1513,9 @@ CinnamenuApplet.prototype = {
       if ((ctrlKey || buttons[refItemIndex].menu.isOpen)
         && buttons[refItemIndex].menu.box) {
         contextMenuChildren = buttons[refItemIndex].contextMenuButtons;
-        refContextMenuItemIndex = contextMenuChildren.findIndex((button) => {
+        refContextMenuItemIndex = store.queryCollection(contextMenuChildren, (button) => {
           return button.entered != null;
-        });
+        }, {indexOnly: true});
         enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
         if (enteredContextMenuItemExists) {
           contextMenuChildren[refContextMenuItemIndex].handleLeave();
@@ -1622,9 +1533,9 @@ CinnamenuApplet.prototype = {
     if (enteredPowerGroupItemExists) {
       this.powerGroupButtons[refPowerGroupItemIndex].handleLeave();
     }
-    let startingCategoryIndex = this.categoryButtons.findIndex((button) => {
+    let startingCategoryIndex = store.queryCollection(this.categoryButtons, (button) => {
       return this.state.currentCategory === button.categoryNameText;
-    });
+    }, {indexOnly: true});
     startingCategoryIndex = this.state.settings.enableBookmarks && startingCategoryIndex <= 0 ? 1 : startingCategoryIndex;
 
     const previousItemNavigation = (index) => {
@@ -1822,14 +1733,11 @@ CinnamenuApplet.prototype = {
       if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
         let file = Gio.file_new_for_path(path);
         try {
-          Gio.app_info_launch_default_for_uri(file.get_uri(),
-            global.create_app_launch_context());
+          Gio.app_info_launch_default_for_uri(file.get_uri(), global.create_app_launch_context());
         } catch (e) {
           // The exception from gjs contains an error string like:
           //     Error invoking Gio.app_info_launch_default_for_uri: No application
           //     is registered as handling this file
-          // We are only interested in the part after the first colon.
-          //let message = e.message.replace(/[^:]*: *(.+)/, '$1');
           return false;
         }
       } else {
@@ -1885,7 +1793,7 @@ CinnamenuApplet.prototype = {
       }
       if (this.state.settings.enableWindows && this._allItems[i].buttonState.appType === ApplicationType._windows
         || this.state.settings.enableSearchProviders && this._allItems[i].buttonState.appType === ApplicationType._providers) {
-        this._allItems[i].destroy();
+        this._allItems[i].destroy(true);
         this._allItems[i] = undefined;
       } else {
         this._allItems[i].clearSearchFormatting();
@@ -2014,6 +1922,10 @@ CinnamenuApplet.prototype = {
       && this.state.enabledProviders.length > 0
       && pattern.length > 2) {
       this.listSearchProviders(pattern, (providerResults) => {
+        // Since the provider results are asynchronous, the search state may have ended by the time they return.
+        if (!this.state.searchActive) {
+          return;
+        }
         results = results.concat(providerResults);
         finish();
       });
@@ -2413,7 +2325,6 @@ CinnamenuApplet.prototype = {
     }
 
     this.menu.destroy();
-    this.actor.destroy();
   },
 };
 

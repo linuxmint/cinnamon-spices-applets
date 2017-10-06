@@ -22,6 +22,7 @@ const _ = AppletDir.constants._;
 const ApplicationType = AppletDir.constants.ApplicationType;
 
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
+const stripMarkupRegex = /(<([^>]+)>)/ig;
 
 /**
  * @name CategoryListButton
@@ -528,7 +529,7 @@ AppListGridButton.prototype = {
     this.signals.connect(this.actor, 'parent-set', Lang.bind(this, this.handleParentChange));
   },
 
-  handleParentChange: function (actor) {
+  handleParentChange: function () {
     if (this.state.settings.showAppDescriptionsOnButtons
       || this.buttonState.app.shouldHighlight
       || this.state.searchActive) {
@@ -547,9 +548,11 @@ AppListGridButton.prototype = {
       description = description + diff;
     }
 
-    if (opts.removeFormatting && this.buttonState.app.description) {
-      this.buttonState.app.name = this.buttonState.app.name.replace(/<[^>]*>/g, '');
-      this.buttonState.app.description = this.buttonState.app.description.replace(/<[^>]*>/g, '');
+    if (opts.removeFormatting) {
+      this.buttonState.app.name = this.buttonState.app.name.replace(stripMarkupRegex, '');
+      if (this.buttonState.app.description) {
+        this.buttonState.app.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
+      }
     }
 
     let markup = '<span>' + this.buttonState.app.name.replace(/&/g, '&amp;') + '</span>';
@@ -571,8 +574,8 @@ AppListGridButton.prototype = {
           descriptionClutterText.set_markup(description.replace(/&/g, '&amp;'));
         }
       } else {
-        this.state.trigger('setSelectedTitleText', this.buttonState.app.name.replace(/<[^>]*>/g, ''));
-        this.state.trigger('setSelectedDescriptionText', description.replace(/<[^>]*>/g, ''));
+        this.state.trigger('setSelectedTitleText', this.buttonState.app.name);
+        this.state.trigger('setSelectedDescriptionText', description.replace(stripMarkupRegex, ''));
       }
     }
 
@@ -591,11 +594,11 @@ AppListGridButton.prototype = {
   },
 
   handleMarquee: function (opts) {
+    if (this.marqueeTimer) {
+      clearTimeout(this.marqueeTimer);
+    }
     // TODO - Figure out how to do this in RTL locales
-    if (!this.buttonState || !this.buttonState.app || !this.description || this.state.searchActive) {
-      if (this.marqueeTimer) {
-        clearTimeout(this.marqueeTimer);
-      }
+    if (!this.buttonState || !this.buttonState.app || !this.description) {
       return false;
     }
     if (opts.reset === 2) {
@@ -606,8 +609,6 @@ AppListGridButton.prototype = {
       opts.firstRecursion = false;
       opts.limit = opts.end;
     }
-
-    //log([opts.start, opts.end, opts.limit, this.buttonState.app.description.length, this.description.length])
 
     if (opts.reset === 1) {
       opts.start = 0;
@@ -650,7 +651,6 @@ AppListGridButton.prototype = {
 
     // Check marquee conditions, and set it up
     let labelWidth, actorWidth, allocatedTextLength;
-    this.state.trigger('toggleSelectedTitleText', this.buttonState.appType !== ApplicationType._windows);
     if (this.state.settings.showAppDescriptionsOnButtons) {
       labelWidth = this.label.get_size()[0];
       actorWidth = this.actor.get_size()[0];
@@ -661,8 +661,8 @@ AppListGridButton.prototype = {
       actorWidth = 16;
       allocatedTextLength = 16;
     }
-    if (labelWidth > actorWidth && !this.searchActive) {
-      this.description = this.buttonState.app.description;
+    if (labelWidth > actorWidth && !this.marqueeTimer) {
+      this.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
       this.marqueeTimer = setTimeout(()=>this.handleMarquee({
         start: 0,
         end: allocatedTextLength,
@@ -685,7 +685,7 @@ AppListGridButton.prototype = {
     if (this.description) {
       this.buttonState.app.description = this.description;
       this.formatLabel({});
-      if (!this.state.menuIsOpen && !this.state.searchActive && this.marqueeTimer) {
+      if (!this.state.menuIsOpen && this.marqueeTimer) {
         clearTimeout(this.marqueeTimer);
         this.marqueeTimer = null;
       }
@@ -748,7 +748,7 @@ AppListGridButton.prototype = {
         Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
       }
     } else if (this.buttonState.appType === ApplicationType._windows) {
-      Main.activateWindow(this.buttonState.app, global.get_current_time());
+      Main.activateWindow(this.buttonState.app.window, global.get_current_time());
     } else if (this.buttonState.appType === ApplicationType._providers) {
       this.buttonState.app.activate(this.buttonState.app);
     }
@@ -850,21 +850,23 @@ AppListGridButton.prototype = {
     });
   },
 
-  destroy: function () {
+  destroy: function (skipDestroy) {
     this.signals.disconnectAllSignals();
 
-    if (this.menu.box) {
-      this.menu.destroy();
+    if (!skipDestroy) {
+      if (this.menu.box) {
+        this.menu.destroy();
+      }
+      this.dot.destroy();
+      this.label.destroy();
+      if (this.icon) {
+        this.icon.destroy();
+      }
+      if (this._iconContainer) {
+        this._iconContainer.destroy();
+      }
+      this.buttonBox.destroy();
     }
-    this.dot.destroy();
-    this.label.destroy();
-    if (this.icon) {
-      this.icon.destroy();
-    }
-    if (this._iconContainer) {
-      this._iconContainer.destroy();
-    }
-    this.buttonBox.destroy();
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
     unref(this);
   }
