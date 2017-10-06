@@ -147,11 +147,12 @@ CinnamenuApplet.prototype = {
         theme: null,
         isListView: false,
         iconSize: 64,
-        currentCategory: null,
+        currentCategory: 'favorites',
         fallbackDescription: '',
         appletReady: false,
         searchActive: false,
         menuIsOpen: false,
+        dragIndex: -1,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
 
@@ -172,6 +173,12 @@ CinnamenuApplet.prototype = {
         getActiveButtons: () => this.getActiveButtons(),
         isFavorite: (id) => this.appFavorites.isFavorite(id),
         addFavorite: (id) => this.appFavorites.addFavorite(id),
+        moveFavoriteToPos: (id, index) => {
+          Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
+            this.appFavorites.moveFavoriteToPos(id, index);
+            return false;
+          });
+        },
         removeFavorite: (id) => this.appFavorites.removeFavorite(id),
         switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
         setSettingsValue: (k, v) => this.settings.setValue(k, v),
@@ -186,7 +193,6 @@ CinnamenuApplet.prototype = {
 
       this.setAllowedLayout(Applet.AllowedLayout.BOTH);
       this.createMenu(orientation);
-      this.actor.connect('key-press-event', Lang.bind(this, this._onSourceKeyPress));
 
       this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
       this._bindSettingsChanges();
@@ -400,25 +406,6 @@ CinnamenuApplet.prototype = {
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
   },
 
-  _onSourceKeyPress: function(actor, event) {
-    let symbol = event.get_key_symbol();
-    if (symbol === Clutter.KEY_space || symbol === Clutter.KEY_Return) {
-      this.menu.toggle();
-      return true;
-    } else if (symbol === Clutter.KEY_Escape && this.menu.isOpen && this.state.menuIsOpen == null) {
-      this.menu.close();
-      return true;
-    } else if (symbol === Clutter.KEY_Down) {
-      if (!this.menu.isOpen) {
-        this.menu.toggle();
-      }
-      this.menu.actor.navigate_focus(this.actor, Gtk.DirectionType.DOWN, false);
-      return true;
-    } else {
-      return false;
-    }
-  },
-
   _launch_editor: function () {
     Util.spawnCommandLine('cinnamon-menu-editor');
   },
@@ -553,6 +540,16 @@ CinnamenuApplet.prototype = {
     if (this.applicationsGridBox && this.applicationsListBox) {
       this.switchApplicationsView(true);
     }
+
+    Mainloop.idle_add_full(150, () => {
+      if (this.state.dragIndex > -1) {
+        let button = store.queryCollection(this._allItems, (item) => item.buttonState.appIndex === this.state.dragIndex);
+        if (button) {
+          this._scrollToButton(button);
+        }
+        this.state.set({dragIndex: -1});
+      }
+    });
   },
 
   // handler for when icons change
@@ -961,7 +958,8 @@ CinnamenuApplet.prototype = {
     }
     this.state.set({
       isListView: isListView,
-      iconSize: iconSize
+      iconSize: iconSize,
+      currentCategory: 'favorites'
     });
     if (isListView) {
       this._lastGridWidth = this.applicationsGridBox.width
@@ -1445,11 +1443,14 @@ CinnamenuApplet.prototype = {
           column = 0;
           rownum++;
         }
-        appButton.setColumn(column);
       }
     };
 
-    if (!this.state.searchActive && lastApp && !lastApp.clearList) {
+    if (!this.state.searchActive
+      && lastApp
+      && !lastApp.clearList
+      && this.state.currentCategory
+      && this.state.currentCategory !== 'favorites') {
       sortBy(appList, 'name', 'asc');
     }
     let index = -1;
@@ -1534,7 +1535,7 @@ CinnamenuApplet.prototype = {
       this.powerGroupButtons[refPowerGroupItemIndex].handleLeave();
     }
     let startingCategoryIndex = store.queryCollection(this.categoryButtons, (button) => {
-      return this.state.currentCategory === button.categoryNameText;
+      return this.state.currentCategory === button.id;
     }, {indexOnly: true});
     startingCategoryIndex = this.state.settings.enableBookmarks && startingCategoryIndex <= 0 ? 1 : startingCategoryIndex;
 
@@ -1854,8 +1855,10 @@ CinnamenuApplet.prototype = {
   _doSearch: function() {
     this._searchTimeoutId = 0;
     let text = this.searchEntryText.get_text();
-    let pattern = text.replace(/^\s+/g, '').replace(/\s+$/g, '').toLowerCase();
-    pattern = Util.latinise(pattern);
+    if (text.length === 0) {
+      return;
+    }
+    let pattern = Util.latinise(text.trim().toLowerCase());
     if (pattern === this._previousSearchPattern) {
       return false;
     }
@@ -1875,12 +1878,6 @@ CinnamenuApplet.prototype = {
       }
     }
 
-    // listApplications returns all the applications when the search
-    // string is zero length. This will happend if you type a space
-    // in the search entry.
-    if (pattern.length === 0) {
-      return false;
-    }
 
     let appResults = this.listApplications(null, pattern);
 
@@ -2068,10 +2065,9 @@ CinnamenuApplet.prototype = {
       x_expand: true
     });
 
-    this.applicationsGridBox = new St.Widget({
+    this.applicationsGridBox = new Clutter.Actor({
       layout_manager: new Clutter.GridLayout(),
       reactive: true,
-      style_class: '',
       width: gridWidths[this.state.settings.appsGridColumnCount]
     });
     this.applicationsBoxWrapper = new St.BoxLayout({

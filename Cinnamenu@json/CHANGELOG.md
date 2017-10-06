@@ -5,11 +5,10 @@ Changelog
   * Added an option to enable indexing of open windows in menu searches.
   * Added search provider support along with provider toggling in the settings.
   * Added an option to adjust the menu height.
+  * Added drag and drop reordering for favorite apps.
   * Refactored state management.
   * Fixed toggling the autoscroll option not working until a Cinnamon restart.
   * Fixed some uncaught errors when enabling bookmarks while no sources are available.
-  * Known issues:
-    * On Cinnamon 3.5 (dev), the context menu no longer overlays over the buttons with fixed positioning.
 
 ### 2.1.0
 

@@ -252,6 +252,7 @@ function getByPath(key, state) {
 function init() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var listeners = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+  var connections = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
   var publicAPI = Object.freeze({
     get: get,
@@ -297,7 +298,7 @@ function init() {
     return clone(state[key]);
   }
 
-  function set(object) {
+  function set(object, forceDispatch) {
     var keys = Object.keys(object);
     var changed = false;
     for (var i = 0; i < keys.length; i++) {
@@ -310,13 +311,11 @@ function init() {
       }
     }
 
-    if (!changed) {
-      return;
-    }
-
-    if (listeners.length > 0) {
+    if ((changed || forceDispatch) && listeners.length > 0) {
       dispatch(object);
     }
+
+    return publicAPI;
   }
 
   function exclude(excludeKeys) {
@@ -353,7 +352,7 @@ function init() {
     }
   }
 
-  function _connect(keys, callback) {
+  function _connect(keys, callback, id) {
     var listener = void 0;
 
     if (callback) {
@@ -363,26 +362,27 @@ function init() {
       var newKeys = intersect(keys, listener.keys, true);
       listener.keys.concat(newKeys);
     } else {
-      listeners.push({ keys: keys, callback: callback });
+      listeners.push({ keys: keys, callback: callback, id: id });
     }
   }
 
   function connect(actions, callback) {
+    var id = connections++;
     if (Array.isArray(actions)) {
-      _connect(actions, callback);
+      _connect(actions, callback, id);
     } else if (typeof actions === 'string') {
-      _connect([actions], callback);
+      _connect([actions], callback, id);
     } else if ((typeof actions === 'undefined' ? 'undefined' : _typeof(actions)) === 'object') {
       var keys = Object.keys(actions);
       for (var i = 0; i < keys.length; i++) {
-        _connect([keys[i]], actions[keys[i]]);
+        _connect([keys[i]], actions[keys[i]], id);
       }
     }
 
-    return publicAPI;
+    return id;
   }
 
-  function disconnect(key) {
+  function disconnectByKey(key) {
     var listenerIndex = queryCollection(listeners, { keys: key }, {
       findElementInArray: true,
       indexOnly: true
@@ -394,13 +394,35 @@ function init() {
     listeners.splice(listenerIndex, 1);
   }
 
+  function disconnect(key) {
+    if (typeof key === 'string') {
+      disconnectByKey(key);
+    } else if (Array.isArray(key)) {
+      for (var i = 0; i < key.length; i++) {
+        disconnectByKey(key[i]);
+      }
+    } else if (typeof key === 'number') {
+      var indexes = [];
+      for (var _i2 = 0; _i2 < listeners.length; _i2++) {
+        if (!listeners[_i2] || listeners[_i2].id !== key) {
+          continue;
+        }
+        indexes.push(_i2);
+      }
+      for (var _i3 = 0; _i3 < indexes.length; _i3++) {
+        listeners[indexes[_i3]] = undefined;
+        listeners.splice(indexes[_i3], 1);
+      }
+    }
+  }
+
   function destroy() {
     var keys = Object.keys(state);
     for (var i = 0; i < keys.length; i++) {
       state[keys[i]] = undefined;
     }
-    for (var _i2 = 0; _i2 < listeners.length; _i2++) {
-      listeners[_i2] = undefined;
+    for (var _i4 = 0; _i4 < listeners.length; _i4++) {
+      listeners[_i4] = undefined;
     }
   }
 
