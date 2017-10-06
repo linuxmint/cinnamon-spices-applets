@@ -2,7 +2,8 @@
     "description": "Displays CPU, memory, swap and network usage and load in graphs", 
     "uuid": "sysmonitor@orcus", 
     "name": "System Monitor", 
-    "version": "1.6.1", 
+    "version": "1.6.2", 
     "icon": "utilities-system-monitor",
-    "max-instances": -1
+    "max-instances": -1,
+    "multiversion": true
 }
