@@ -19,7 +19,7 @@ var defaultTooltip = _("trying to fetch IP information");
 var noConnectionIcon = "nm-no-connection";
 var homeIcon = "gtk-home";
 
-Debugger = {
+const Debugger = {
     logLevel: 0,
     setLogLevel: function(level) {
         this.log("Setting new log level: "+level, 1);
@@ -36,7 +36,7 @@ Debugger = {
 	}
 }
 
-IpGateway = {
+const IpGateway = {
 	init: function() {
 		this._services = [];
 		this._ispServices = [];
