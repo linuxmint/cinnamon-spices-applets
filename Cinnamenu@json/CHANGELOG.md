@@ -9,6 +9,7 @@ Changelog
   * Refactored state management.
   * Fixed toggling the autoscroll option not working until a Cinnamon restart.
   * Fixed some uncaught errors when enabling bookmarks while no sources are available.
+  * Fixed opening the menu on hover only working once.
 
 ### 2.1.0
 

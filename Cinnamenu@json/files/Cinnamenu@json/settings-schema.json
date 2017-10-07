@@ -149,7 +149,7 @@
     "indent": true,
     "dependency": "activate-on-hover",
     "type": "spinbutton",
-    "default": 0,
+    "default": 50,
     "min": 0,
     "max": 1000,
     "step": 50,

@@ -494,37 +494,21 @@ CinnamenuApplet.prototype = {
     }
   },
 
-  _clearDelayCallbacks: function() {
-    if (this._appletHoverDelayId > 0) {
-      Mainloop.source_remove(this._appletHoverDelayId);
-      this._appletHoverDelayId = 0;
-    }
-    if (this._appletLeaveEventId > 0) {
-      this.actor.disconnect(this._appletLeaveEventId);
-      this._appletLeaveEventId = 0;
-    }
-    return false;
-  },
-
-  _updateActivateOnHover: function() {
-    if (this._appletEnterEventId > 0) {
-      this.actor.disconnect(this._appletEnterEventId);
-      this._appletEnterEventId = 0;
-    }
-    this._clearDelayCallbacks();
-    if (this.state.settings.activateOnHover) {
-      this._appletEnterEventId = this.actor.connect('enter-event', Lang.bind(this, function() {
-        if (this.state.settings.hover_delay_ms > 0) {
-          this._appletLeaveEventId = this.actor.connect('leave-event', Lang.bind(this, this._clearDelayCallbacks));
-          this._appletHoverDelayId = Mainloop.timeout_add(this.state.settings.hover_delay_ms,
-            Lang.bind(this, function() {
-              this.openMenu();
-              this._clearDelayCallbacks();
-            }));
-        } else {
-          this.openMenu();
-        }
-      }));
+  _updateActivateOnHover: function(activate = true) {
+    if (this.state.settings.activateOnHover && activate) {
+      this.signals.connect(this.actor, 'enter-event', () => {
+        Mainloop.idle_add_full(this.state.settings.hoverDelayMs, () => this.openMenu());
+      });
+      this.signals.connect(this.actor, 'leave-event', () => {
+        Mainloop.idle_add_full(this.state.settings.hoverDelayMs, () => this.menu.close());
+      });
+    } else {
+      if (this.signals.isConnected('enter-event', this.actor)) {
+        this.signals.disconnect('enter-event', this.actor)
+      }
+      if (this.signals.isConnected('leave-event', this.actor)) {
+        this.signals.disconnect('leave-event', this.actor)
+      }
     }
   },
 
@@ -610,8 +594,11 @@ CinnamenuApplet.prototype = {
       },
       {
         key: 'hover-delay',
-        value: 'hover_delay_ms',
-        cb: this._updateActivateOnHover
+        value: 'hoverDelayMs',
+        cb: () => {
+          this._updateActivateOnHover(false);
+          this._updateActivateOnHover(true);
+        }
       },
       {
         key: 'overlay-key',

@@ -532,7 +532,7 @@ AppListGridButton.prototype = {
       this.menu = new PopupMenu.PopupSubMenu(this.actor);
       this.menu.actor.set_style_class_name('menu-context-menu');
       if (this.state.theme) {
-        this.menu.box.set_style('width: 300px; background-color: ' + this.state.theme.backgroundColor + '; border: 1px solid' + this.state.theme.borderColor
+        this.menu.box.set_style('background-color: ' + this.state.theme.backgroundColor + '; border: 1px solid' + this.state.theme.borderColor
         + '; border-radius: ' + this.state.theme.borderRadius + 'px; padding-top: ' + this.state.theme.padding + 'px; padding-bottom: ' + this.state.theme.padding + 'px;');
       }
       this.menu.isOpen = false;
