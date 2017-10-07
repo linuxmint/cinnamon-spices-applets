@@ -1,0 +1,43 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-07 16:30+0200\n"
+"PO-Revision-Date: 2017-10-07 16:32+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:81
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: applet.js:127
+msgid "ERROR. No compatible virtual machine programs found."
+msgstr "FEJL. Der kunne ikke findes nogen kompatible virtuelle maskiner."
+
+#: applet.js:197
+msgid "Update list"
+msgstr "Opdatér listen"
+
+#. vboxlauncher@mockturtl->settings-schema.json->autoUpdate->description
+msgid "Auto update (slow)"
+msgstr "Automatisk opdatering (langsom)"
+
+#. vboxlauncher@mockturtl->metadata.json->name
+msgid "Vbox Launcher"
+msgstr "Vbox-programstarter"
+
+#. vboxlauncher@mockturtl->metadata.json->description
+msgid "An applet to launch virtual machines."
+msgstr "Start virtuelle maskiner."
