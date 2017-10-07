@@ -6,8 +6,6 @@ const Mainloop = imports.mainloop;
 const Lang = imports.lang;
 const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
-const Cairo = imports.cairo;
-const Clutter = imports.gi.Clutter;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
 const AppletDirectory = imports.ui.appletManager.applets[uuid];

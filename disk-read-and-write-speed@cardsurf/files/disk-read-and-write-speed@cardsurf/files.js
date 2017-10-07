@@ -1,11 +1,8 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const Gettext = imports.gettext;
 
-function _(str) {
-    return Gettext.dgettext(uuid, str);
-}
+
 
 
 

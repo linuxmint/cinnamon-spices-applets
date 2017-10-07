@@ -1,11 +1,8 @@
 
 const Applet = imports.ui.applet;
-const ModalDialog = imports.ui.modalDialog;
 const Lang = imports.lang;
 const St = imports.gi.St;
-const Clutter = imports.gi.Clutter;
 const Settings = imports.ui.settings;
-const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
