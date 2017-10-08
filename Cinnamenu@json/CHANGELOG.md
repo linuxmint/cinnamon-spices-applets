@@ -1,5 +1,20 @@
 Changelog
 
+### 3.0.0
+
+  * Added an option to enable indexing of open windows in menu searches.
+  * Added search provider support along with provider toggling in the settings.
+  * Added an option to adjust the menu height.
+  * Added drag and drop reordering for favorite apps.
+  * Added optional tooltips.
+  * Added an option to activate categories on click instead of hover.
+  * Refactored state management.
+  * Fixed toggling the autoscroll option not working until a Cinnamon restart.
+  * Fixed some uncaught errors when enabling bookmarks while no sources are available.
+  * Fixed opening the menu on hover only working once.
+  * Known issues:
+    * Icons will move to the right a bit when activating the context menu on a menu item in the grid view. This is due to working around API changes that completely break the context menu positioning in Cinnamon git, and the issue shouldn't occur when Cinnamon 3.6 releases.
+
 ### 2.1.0
 
   * Improved the performance of web bookmarks loading.
