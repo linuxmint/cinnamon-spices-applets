@@ -54,7 +54,8 @@ if (typeof require !== 'undefined') {
   gridWidths = constants.gridWidths;
 } else {
   const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
-  store = AppletDir.store;
+  let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
+  store = AppletDir[storeVersion];
   fuzzy = AppletDir.fuzzy.fuzzy;
   isEqual = AppletDir.utils.isEqual;
   sortBy = AppletDir.utils.sortBy;
@@ -142,12 +143,13 @@ CinnamenuApplet.prototype = {
 
   _init: function(metadata, orientation, panel_height, instance_id) {
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+    this.set_applet_label(_('Initializing'));
     this.setSchema(metadata.path, (knownProviders, enabledProviders) => {
-      this.tooltip = new Tooltips.Tooltip(this.actor, '')
-      this.tooltip._tooltip.set_style('text-align: left;');
       this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
       this.appFavorites = AppFavorites.getAppFavorites();
       this.state = store.init({
+        cinnamon36: typeof this._newPanelId !== 'undefined',
+        orientation: orientation,
         recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
         settings: {},
         favorites: this.appFavorites.getFavorites(),
@@ -161,7 +163,7 @@ CinnamenuApplet.prototype = {
         appletReady: false,
         searchActive: false,
         itemEntered: false,
-        menuIsOpen: false,
+        contextMenuIsOpen: false,
         menuHeight: 530,
         expressionActive: false,
         searchWebErrorsShown: false,
@@ -170,8 +172,16 @@ CinnamenuApplet.prototype = {
         dragIndex: -1,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
-
       this.state.connect({
+        currentCategory: () => {
+          for (let i = 0; i < this.categoryButtons.length; i++) {
+            if (this.categoryButtons[i].id === this.state.currentCategory) {
+              this.categoryButtons[i].actor.set_style_class_name('menu-category-button-selected');
+            } else {
+              this.categoryButtons[i].actor.set_style_class_name('menu-category-button');
+            }
+          }
+        },
         clearEnteredActors: () => this._clearEnteredActors(),
         setTooltip: (coords, height, text) => {
           if (!text) {
@@ -232,7 +242,7 @@ CinnamenuApplet.prototype = {
       this._bindSettingsChanges();
       this.state.set({
         isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
-        fallbackDescription: this.state.settings.showAppDescriptionsOnButtons ? 'No description available' : ''
+        fallbackDescription: this.state.settings.showAppDescriptionsOnButtons || this.state.settings.showTooltips ? _('No description available') : ''
       });
       global.settings.connect('changed::enabled-search-providers', Lang.bind(this, this.onEnabledSearchProvidersChange));
       this.onEnabledSearchProvidersChange();
@@ -256,7 +266,6 @@ CinnamenuApplet.prototype = {
       this._pathCompleter = new Gio.FilenameCompleter();
       this._pathCompleter.set_dirs_only(false);
 
-      this._updateActivateOnHover();
       this._updateKeybinding();
       this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this._updateIconAndLabel));
       this._updateIconAndLabel();
@@ -280,6 +289,7 @@ CinnamenuApplet.prototype = {
       this._session = new GnomeSession.SessionManager();
       this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
       this.recentManager = Gtk.RecentManager.get_default();
+      this._updateActivateOnHover();
     });
   },
 
@@ -521,18 +531,10 @@ CinnamenuApplet.prototype = {
   _updateActivateOnHover: function(activate = true) {
     if (this.state.settings.activateOnHover && activate) {
       this.signals.connect(this.actor, 'enter-event', () => {
-        Mainloop.idle_add_full(this.state.settings.hoverDelayMs, () => this.openMenu());
+        setTimeout(() => this.openMenu(), this.state.settings.hoverDelayMs);
       });
-      this.signals.connect(this.actor, 'leave-event', () => {
-        Mainloop.idle_add_full(this.state.settings.hoverDelayMs, () => this.menu.close());
-      });
-    } else {
-      if (this.signals.isConnected('enter-event', this.actor)) {
-        this.signals.disconnect('enter-event', this.actor)
-      }
-      if (this.signals.isConnected('leave-event', this.actor)) {
-        this.signals.disconnect('leave-event', this.actor)
-      }
+    } else if (this.signals.isConnected('enter-event', this.actor)) {
+      this.signals.disconnect('enter-event', this.actor)
     }
   },
 
@@ -599,6 +601,10 @@ CinnamenuApplet.prototype = {
     this.applicationsScrollBox.height = this.groupCategoriesWorkspacesScrollBox.height;
   },
 
+  getExampleSearchProviders: function() {
+    Util.spawnCommandLine('xdg-open https://github.com/linuxmint/Cinnamon/tree/master/docs/search-providers-examples');
+  },
+
   // function to bind preference setting changes
   _bindSettingsChanges: function() {
     let settingsProps = [{
@@ -632,6 +638,11 @@ CinnamenuApplet.prototype = {
     {
       key: 'enable-animation',
       value: 'enableAnimation',
+      cb: null
+    },
+    {
+      key: 'category-click',
+      value: 'categoryClick',
       cb: null
     },
     {
@@ -760,7 +771,8 @@ CinnamenuApplet.prototype = {
       padding: mainBoxThemeNode.get_padding(St.Side.TOP),
     }});
     if (typeof cb === 'function') {
-      Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, cb);
+      cb();
+      //Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, cb);
     }
   },
 
@@ -777,13 +789,14 @@ CinnamenuApplet.prototype = {
       }
 
       this.introspectTheme(()=>{
-        // Load Startup Applications category
-        this.switchApplicationsView(false);
         // Set Category
         this.categoriesBox.show();
+        // Load Startup Applications category
+        this.switchApplicationsView(false);
         // Display startup apps
         this._resetDisplayApplicationsToStartup();
         this.customMenuHeightChange();
+        this.state.trigger('menuOpened');
         this.mainBox.show();
       });
     } else {
@@ -1068,12 +1081,6 @@ CinnamenuApplet.prototype = {
         buttons[refItemIndex].closeMenu();
       }
       buttons[refItemIndex].handleLeave();
-    }
-    let refCategoryIndex = store.queryCollection(this.categoryButtons, function(button) {
-      return button.entered != null;
-    }, {indexOnly: true});
-    if (refCategoryIndex > -1 && this.categoriesBox[refCategoryIndex]) {
-      this.categoriesBox[refCategoryIndex].handleLeave();
     }
     let refPowerGroupItemIndex = store.queryCollection(this.powerGroupButtons, function(button) {
       return button.entered != null;
@@ -1407,90 +1414,6 @@ CinnamenuApplet.prototype = {
     this._selectCategory('favorites');
   },
 
-  _displayApplications: function(appList) {
-    //dt.start();
-    if (!appList) {
-      return false;
-    }
-    if (this.mainBox && !this.state.theme) {
-      this.introspectTheme(() => this._displayApplications(appList));
-      return false;
-    }
-
-    let column = 0;
-    let columnsCount = 0;
-    let rownum = 0;
-    let lastApp = appList[appList.length - 1];
-
-    this._activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
-    this.state.menuIsOpen = null;
-
-    let createAppButton = (app, appType, len, appIndex)=>{
-      let appButton;
-      let refAppButton = -1;
-      for (let i = 0, _len = this._allItems.length; i < _len; i++) {
-        if (this._allItems[i] && isEqual(this._allItems[i].buttonState.app, app)) {
-          refAppButton = i;
-          break;
-        }
-      }
-      if (refAppButton > -1 && this._allItems[refAppButton]) {
-        appButton = this._allItems[refAppButton];
-        appButton.buttonState.set({
-          app: app,
-          appType: appType,
-          appListLength: len,
-          appIndex: appIndex
-        });
-      } else {
-        appButton = new AppListGridButton(this.state, app, appType, appIndex, len);
-        this._allItems.push(appButton);
-      }
-
-      if (this.state.isListView) {
-        this.applicationsListBox.add_actor(appButton.actor);
-      } else {
-        let gridLayout = this.applicationsGridBox.layout_manager;
-        if (!gridLayout) {
-          return false;
-        }
-        gridLayout.attach(appButton.actor, column, rownum, 1, 1);
-        column++;
-        if (column > columnsCount) {
-          columnsCount = column;
-        }
-        if (column > this.state.settings.appsGridColumnCount - 1) {
-          column = 0;
-          rownum++;
-        }
-      }
-    };
-
-    if (!this.state.searchActive
-      && lastApp
-      && !lastApp.clearList
-      && this.state.currentCategory
-      && this.state.currentCategory !== 'favorites') {
-      sortBy(appList, 'name', 'asc');
-    }
-    let index = -1;
-    for (let z = 0, len = appList.length; z < len; z++) {
-      if (appList[z].type === undefined) {
-        appList[z].type = ApplicationType._applications;
-      }
-
-      for (let y = 0, len = AppTypes.length; y < len; y++) {
-        if (ApplicationType[AppTypes[y]] !== appList[z].type) {
-          continue;
-        }
-        index += 1;
-        createAppButton(appList[z], appList[z].type, len, index);
-      }
-    }
-    this.columnsCount = columnsCount;
-    //dt.stop();
-  },
-
   _onMenuKeyPress: function(actor, event) {
     let symbol = event.get_key_symbol();
 
@@ -1535,7 +1458,7 @@ CinnamenuApplet.prototype = {
         && buttons[refItemIndex].menu.box) {
         contextMenuChildren = buttons[refItemIndex].contextMenuButtons;
         refContextMenuItemIndex = store.queryCollection(contextMenuChildren, (button) => {
-          return button.entered != null;
+          return !button.entered;
         }, {indexOnly: true});
         enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
         if (enteredContextMenuItemExists) {
@@ -1673,12 +1596,18 @@ CinnamenuApplet.prototype = {
         contextMenuChildren[refContextMenuItemIndex].activate();
       } else if (enteredItemExists) {
         if (ctrlKey) {
-          buttons[refItemIndex].toggleMenu();
+          if (buttons[refItemIndex].menu.isOpen) {
+            buttons[refItemIndex].toggleMenu();
+          } else {
+            buttons[refItemIndex].handleButtonRelease();
+          }
         } else {
           buttons[refItemIndex].activate();
         }
+      } else if (enteredCategoryExists) {
+        this.categoryButtons[refCategoryIndex].handleButtonRelease();
       } else if (enteredPowerGroupItemExists) {
-        this.powerGroupButtons[refPowerGroupItemIndex]._onButtonReleaseEvent();
+        this.powerGroupButtons[refPowerGroupItemIndex].handleButtonRelease();
       } else if (this.state.searchActive && buttons.length > 0) {
         buttons[0].activate();
       }
@@ -1848,6 +1777,7 @@ CinnamenuApplet.prototype = {
     this.state.set({searchActive: searchText.length > 0});
 
     if (this.state.searchActive) {
+      this._clearEnteredActors();
       this.searchEntry.set_secondary_icon(this._searchActiveIcon);
 
       if (!this.signals.isConnected('secondary-icon-clicked', this.searchEntry)) {
@@ -1953,6 +1883,89 @@ CinnamenuApplet.prototype = {
     }
 
     return false;
+  },
+
+  _displayApplications: function(appList) {
+    if (!appList) {
+      return false;
+    }
+    if (this.mainBox && !this.state.theme) {
+      this.introspectTheme(() => this._displayApplications(appList));
+      return false;
+    }
+
+    let column = 0;
+    let columnsCount = 0;
+    let rownum = 0;
+    let lastApp = appList[appList.length - 1];
+
+    this._activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
+    this.state.contextMenuIsOpen = null;
+
+    let createAppButton = (app, appType, len, appIndex)=>{
+      let appButton;
+      let refAppButton = -1;
+      for (let i = 0, _len = this._allItems.length; i < _len; i++) {
+        if (this._allItems[i] && isEqual(this._allItems[i].buttonState.app, app)) {
+          refAppButton = i;
+          break;
+        }
+      }
+      if (refAppButton > -1 && this._allItems[refAppButton]) {
+        appButton = this._allItems[refAppButton];
+        appButton.buttonState.set({
+          app: app,
+          appType: appType,
+          appListLength: len,
+          appIndex: appIndex
+        });
+      } else {
+        appButton = new AppListGridButton(this.state, app, appType, appIndex, len);
+        this._allItems.push(appButton);
+      }
+
+      if (this.state.isListView) {
+        this.applicationsListBox.add_actor(appButton.actor);
+      } else {
+        let gridLayout = this.applicationsGridBox.layout_manager;
+        if (!gridLayout) {
+          return false;
+        }
+        appButton.buttonState.set({column: column});
+        gridLayout.attach(appButton.actor, column, rownum, 1, 1);
+        column++;
+        if (column > columnsCount) {
+          columnsCount = column;
+        }
+        if (column > this.state.settings.appsGridColumnCount - 1) {
+          column = 0;
+          rownum++;
+        }
+      }
+    };
+
+    if (!this.state.searchActive
+      && lastApp
+      && !lastApp.clearList
+      && this.state.currentCategory
+      && this.state.currentCategory !== 'favorites') {
+      sortBy(appList, 'name', 'asc');
+    }
+    let index = -1;
+    for (let z = 0, len = appList.length; z < len; z++) {
+      if (appList[z].type === undefined) {
+        appList[z].type = ApplicationType._applications;
+      }
+
+      for (let y = 0, len = AppTypes.length; y < len; y++) {
+        if (ApplicationType[AppTypes[y]] !== appList[z].type) {
+          continue;
+        }
+        index += 1;
+        createAppButton(appList[z], appList[z].type, len, index);
+      }
+    }
+    this.columnsCount = columnsCount;
   },
 
   _display: function() {
@@ -2268,6 +2281,8 @@ CinnamenuApplet.prototype = {
 
     if (this.state.isNewInstance) {
       this.state.set({isNewInstance: false});
+      this.tooltip = new Tooltips.Tooltip(this.mainBox, '')
+      this.tooltip._tooltip.set_style('text-align: left;');
     }
   },
 

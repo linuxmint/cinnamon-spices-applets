@@ -7,6 +7,7 @@ Changelog
   * Added an option to adjust the menu height.
   * Added drag and drop reordering for favorite apps.
   * Added optional tooltips.
+  * Added an option to activate categories on click instead of hover.
   * Refactored state management.
   * Fixed toggling the autoscroll option not working until a Cinnamon restart.
   * Fixed some uncaught errors when enabling bookmarks while no sources are available.
