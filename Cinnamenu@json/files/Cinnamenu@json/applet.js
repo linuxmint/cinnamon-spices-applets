@@ -17,13 +17,14 @@ const AppFavorites = imports.ui.appFavorites;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Tweener = imports.ui.tweener;
+const Tooltips = imports.ui.tooltips;
 const SignalManager = imports.misc.signalManager;
 const SearchProviderManager = imports.ui.searchProviderManager;
 const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, isEqual, sortBy, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, isEqual, sortBy, setTimeout, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -35,6 +36,7 @@ if (typeof require !== 'undefined') {
   fuzzy = require('./fuzzy').fuzzy;
   isEqual = utils.isEqual;
   sortBy = utils.sortBy;
+  setTimeout = utils.setTimeout;
   Chromium = require('./webChromium');
   Firefox = require('./webFirefox');
   GoogleChrome = require('./webGoogleChrome');
@@ -56,6 +58,7 @@ if (typeof require !== 'undefined') {
   fuzzy = AppletDir.fuzzy.fuzzy;
   isEqual = AppletDir.utils.isEqual;
   sortBy = AppletDir.utils.sortBy;
+  setTimeout = AppletDir.utils.setTimeout;
   Chromium = AppletDir.webChromium;
   Firefox = AppletDir.webFirefox;
   GoogleChrome = AppletDir.webGoogleChrome;
@@ -140,8 +143,14 @@ CinnamenuApplet.prototype = {
   _init: function(metadata, orientation, panel_height, instance_id) {
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
     this.setSchema(metadata.path, (knownProviders, enabledProviders) => {
+      this.tooltip = new Tooltips.Tooltip(this.actor, '')
+      this.tooltip._tooltip.set_style('text-align: left;');
+      this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
+      this.appFavorites = AppFavorites.getAppFavorites();
       this.state = store.init({
+        recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
         settings: {},
+        favorites: this.appFavorites.getFavorites(),
         knownProviders: knownProviders,
         enabledProviders: enabledProviders,
         theme: null,
@@ -151,13 +160,38 @@ CinnamenuApplet.prototype = {
         fallbackDescription: '',
         appletReady: false,
         searchActive: false,
+        itemEntered: false,
         menuIsOpen: false,
+        menuHeight: 530,
+        expressionActive: false,
+        searchWebErrorsShown: false,
+        displayed: false,
+        isNewInstance: true,
         dragIndex: -1,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
 
       this.state.connect({
         clearEnteredActors: () => this._clearEnteredActors(),
+        setTooltip: (coords, height, text) => {
+          if (!text) {
+            this.tooltip.hide();
+            return;
+          }
+          this.tooltip._tooltip.get_clutter_text().set_markup(text)
+          coords[1] = coords[1] + height;
+          this.tooltip.mousePosition = coords;
+          if (!this.state.settings.tooltipDelay) {
+            this.tooltip.show();
+            return;
+          }
+          setTimeout(() => {
+            if (!this.state.itemEntered) {
+              return;
+            }
+            this.tooltip.show();
+          }, this.state.settings.tooltipDelay);
+        },
         setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
         setSelectedTitleText: (text) => this.selectedAppTitle.set_text(text),
         setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
@@ -211,11 +245,11 @@ CinnamenuApplet.prototype = {
 
       this.tracker = Cinnamon.WindowTracker.get_default();
       this.appSystem = Cinnamon.AppSystem.get_default();
-      this.appFavorites = AppFavorites.getAppFavorites();
-      this.privacy_settings = new Gio.Settings({
-        schema_id: 'org.cinnamon.desktop.privacy'
+
+      this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => {
+        this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
+        this.refresh();
       });
-      this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, Lang.bind(this, this.refresh));
 
       // FS search
       this._fileFolderAccessActive = false;
@@ -227,12 +261,9 @@ CinnamenuApplet.prototype = {
       this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this._updateIconAndLabel));
       this._updateIconAndLabel();
 
-      // Connect gtk icontheme for when icons change
       this._iconTheme = Gtk.IconTheme.get_default();
       this.signals.connect(this._iconTheme, 'changed', Lang.bind(this, this._onIconsChanged));
-      // Connect to AppSys for when new application installed
       this.signals.connect(this.appSystem, 'installed-changed', Lang.bind(this, this._onAppInstalledChanged));
-      // Connect to AppFavorites for when favorites change
       this.signals.connect(this.appFavorites, 'changed', Lang.bind(this, this._onFavoritesChanged));
       this.signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._onOpenStateToggled));
 
@@ -240,17 +271,10 @@ CinnamenuApplet.prototype = {
       this.powerGroupButtons = [];
       this._knownApps = [];
       this.applicationsByCategory = {};
-      this.favorites = [];
       this._allItems = [];
       this._searchTimeoutId = 0;
       this._activeContainer = null;
-      this._newInstance = true;
-      this.expressionActive = false;
-      this._searchWebErrorsShown = false;
       this.placesManager = null;
-      this._displayed = false;
-      this.menuHeight = 530;
-      this._recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
 
       this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
       this._session = new GnomeSession.SessionManager();
@@ -519,7 +543,7 @@ CinnamenuApplet.prototype = {
 
   // handler for when favorites change
   _onFavoritesChanged: function() {
-    this.favorites = this.appFavorites.getFavorites();
+    this.state.set({favorites: this.appFavorites.getFavorites()});
     // Check if the menu has been rendered at least once
     if (this.applicationsGridBox && this.applicationsListBox) {
       this.switchApplicationsView(true);
@@ -570,7 +594,7 @@ CinnamenuApplet.prototype = {
     if (this.state.settings.enableCustomMenuHeight) {
       this.groupCategoriesWorkspacesScrollBox.height = this.state.settings.customMenuHeight;
     } else {
-      this.groupCategoriesWorkspacesScrollBox.height = this.menuHeight;
+      this.groupCategoriesWorkspacesScrollBox.height = this.state.menuHeight;
     }
     this.applicationsScrollBox.height = this.groupCategoriesWorkspacesScrollBox.height;
   },
@@ -578,124 +602,133 @@ CinnamenuApplet.prototype = {
   // function to bind preference setting changes
   _bindSettingsChanges: function() {
     let settingsProps = [{
-        key: 'menu-icon-custom',
-        value: 'menuIconCustom',
-        cb: this._updateIconAndLabel
-      },
-      {
-        key: 'menu-icon',
-        value: 'menuIcon',
-        cb: this._updateIconAndLabel
-      },
-      {
-        key: 'activate-on-hover',
-        value: 'activateOnHover',
-        cb: this._updateActivateOnHover
-      },
-      {
-        key: 'hover-delay',
-        value: 'hoverDelayMs',
-        cb: () => {
-          this._updateActivateOnHover(false);
-          this._updateActivateOnHover(true);
-        }
-      },
-      {
-        key: 'overlay-key',
-        value: 'overlayKey',
-        cb: this._updateKeybinding
-      },
-      {
-        key: 'enable-animation',
-        value: 'enableAnimation',
-        cb: null
-      },
-      {
-        key: 'enable-autoscroll',
-        value: 'enableAutoScroll',
-        cb: this.refresh
-      },
-      {
-        key: 'enable-bookmarks',
-        value: 'enableBookmarks',
-        cb: this.onEnableBookmarksChange
-      },
-      {
-        key: 'enable-windows',
-        value: 'enableWindows',
-        cb: null
-      },
-      {
-        key: 'enable-search-providers',
-        value: 'enableSearchProviders',
-        cb: null
-      },
-      {
-        key: 'menu-label',
-        value: 'menuLabel',
-        cb: this._updateIconAndLabel
-      },
-      {
-        key: 'startup-view-mode',
-        value: 'startupViewMode',
-        cb: this.refresh
-      },
-      {
-        key: 'apps-grid-column-count',
-        value: 'appsGridColumnCount',
-        cb: this.refresh
-      },
-      {
-        key: 'category-icon-size',
-        value: 'categoryIconSize',
-        cb: this.refresh
-      },
-      {
-        key: 'apps-list-icon-size',
-        value: 'appsListIconSize',
-        cb: this.refresh
-      },
-      {
-        key: 'apps-grid-icon-size',
-        value: 'appsGridIconSize',
-        cb: this.refresh
-      },
-      {
-        key: 'show-places',
-        value: 'showPlaces',
-        cb: this.refresh
-      },
-      {
-        key: 'show-application-icons',
-        value: 'showApplicationIcons',
-        cb: this.refresh
-      },
-      {
-        key: 'show-category-icons',
-        value: 'showCategoryIcons',
-        cb: this.refresh
-      },
-      {
-        key: 'search-filesystem',
-        value: 'searchFilesystem',
-        cb: this.refresh
-      },
-      {
-        key: 'show-apps-description-on-buttons',
-        value: 'showAppDescriptionsOnButtons',
-        cb: this.refresh
-      },
-      {
-        key: 'enable-custom-menu-height',
-        value: 'enableCustomMenuHeight',
-        cb: this.customMenuHeightChange
-      },
-      {
-        key: 'custom-menu-height',
-        value: 'customMenuHeight',
-        cb: this.customMenuHeightChange
-      },
-    ]
+      key: 'menu-icon-custom',
+      value: 'menuIconCustom',
+      cb: this._updateIconAndLabel
+    },
+    {
+      key: 'menu-icon',
+      value: 'menuIcon',
+      cb: this._updateIconAndLabel
+    },
+    {
+      key: 'activate-on-hover',
+      value: 'activateOnHover',
+      cb: this._updateActivateOnHover
+    },
+    {
+      key: 'hover-delay',
+      value: 'hoverDelayMs',
+      cb: () => {
+        this._updateActivateOnHover(false);
+        this._updateActivateOnHover(true);
+      }
+    },
+    {
+      key: 'overlay-key',
+      value: 'overlayKey',
+      cb: this._updateKeybinding
+    },
+    {
+      key: 'enable-animation',
+      value: 'enableAnimation',
+      cb: null
+    },
+    {
+      key: 'enable-autoscroll',
+      value: 'enableAutoScroll',
+      cb: this.refresh
+    },
+    {
+      key: 'enable-bookmarks',
+      value: 'enableBookmarks',
+      cb: this.onEnableBookmarksChange
+    },
+    {
+      key: 'enable-windows',
+      value: 'enableWindows',
+      cb: null
+    },
+    {
+      key: 'enable-search-providers',
+      value: 'enableSearchProviders',
+      cb: null
+    },
+    {
+      key: 'menu-label',
+      value: 'menuLabel',
+      cb: this._updateIconAndLabel
+    },
+    {
+      key: 'startup-view-mode',
+      value: 'startupViewMode',
+      cb: this.refresh
+    },
+    {
+      key: 'apps-grid-column-count',
+      value: 'appsGridColumnCount',
+      cb: this.refresh
+    },
+    {
+      key: 'category-icon-size',
+      value: 'categoryIconSize',
+      cb: this.refresh
+    },
+    {
+      key: 'apps-list-icon-size',
+      value: 'appsListIconSize',
+      cb: this.refresh
+    },
+    {
+      key: 'apps-grid-icon-size',
+      value: 'appsGridIconSize',
+      cb: this.refresh
+    },
+    {
+      key: 'show-places',
+      value: 'showPlaces',
+      cb: this.refresh
+    },
+    {
+      key: 'show-application-icons',
+      value: 'showApplicationIcons',
+      cb: this.refresh
+    },
+    {
+      key: 'show-category-icons',
+      value: 'showCategoryIcons',
+      cb: this.refresh
+    },
+    {
+      key: 'search-filesystem',
+      value: 'searchFilesystem',
+      cb: this.refresh
+    },
+    {
+      key: 'show-apps-description-on-buttons',
+      value: 'showAppDescriptionsOnButtons',
+      cb: this.refresh
+    },
+    {
+      key: 'show-tooltips',
+      value: 'showTooltips',
+      cb: null
+    },
+    {
+      key: 'tooltip-delay',
+      value: 'tooltipDelay',
+      cb: null
+    },
+    {
+      key: 'enable-custom-menu-height',
+      value: 'enableCustomMenuHeight',
+      cb: this.customMenuHeightChange
+    },
+    {
+      key: 'custom-menu-height',
+      value: 'customMenuHeight',
+      cb: this.customMenuHeightChange
+    }]
 
     for (let i = 0; i < this.state.knownProviders.length; i++) {
       let provider = this.state.knownProviders[i];
@@ -739,7 +772,7 @@ CinnamenuApplet.prototype = {
       this.actor.handler_block(this._appletEnterEventId);
     }
     if (open) {
-      if (!this._displayed) {
+      if (!this.state.displayed) {
         this._display();
       }
 
@@ -782,7 +815,7 @@ CinnamenuApplet.prototype = {
   refresh: function() {
     this._clearAll();
     this.destroyDisplayed();
-    this._displayed = false;
+    this.state.set({displayed: false});
     this._display();
     this._clearEnteredActors();
     this.destroyAppButtons();
@@ -824,7 +857,7 @@ CinnamenuApplet.prototype = {
           }
           let appIsKnown = this._knownApps.indexOf(id) > -1;
           if (!appIsKnown) {
-            if (!this._newInstance) {
+            if (!this.state.isNewInstance) {
               app.shouldHighlight = true;
             } else {
               this._knownApps.push(id);
@@ -906,7 +939,7 @@ CinnamenuApplet.prototype = {
       addTo(new CategoryListButton(this.state, 'places', _('Places'), 'folder', '_selectAllPlaces'), this.categoriesBox, this.categoryButtons)
     }
     // Load 'recent' category
-    if (this._recentEnabled) {
+    if (this.state.recentEnabled) {
       addTo(new CategoryListButton(this.state, 'recent', _('Recent Files'), 'folder-recent', '_selectRecent'), this.categoriesBox, this.categoryButtons)
     }
     // Load 'favorite applications' category
@@ -1174,14 +1207,14 @@ CinnamenuApplet.prototype = {
     if (!this.state.settings.enableBookmarks) {
       return [];
     }
-    if (!this._searchWebErrorsShown && !Firefox.Gda) {
+    if (!this.state.searchWebErrorsShown && !Firefox.Gda) {
       let notifyMessage = _('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.');
       this.answerText.set_text(notifyMessage);
       this.answerText.show();
-    } else if (this.answerText.is_visible() && !this.expressionActive) {
+    } else if (this.answerText.is_visible() && !this.state.expressionActive) {
       this.answerText.hide();
     }
-    this._searchWebErrorsShown = true;
+    this.state.set({searchWebErrorsShown: true});
 
     let res = []
     let arr = this.bookmarksManager.state;
@@ -1215,7 +1248,7 @@ CinnamenuApplet.prototype = {
 
   listDevices: function(pattern) {
     if (!this.placesManager) {
-      return null;
+      return [];
     }
     let devices = this.placesManager.getMounts();
     let res = [];
@@ -1230,7 +1263,7 @@ CinnamenuApplet.prototype = {
   },
 
   listRecent: function(pattern) {
-    if (!this._recentEnabled) {
+    if (!this.state.recentEnabled) {
       return [];
     }
 
@@ -1299,7 +1332,7 @@ CinnamenuApplet.prototype = {
     let res = [];
 
     if (categoryMenuId === 'favorites') {
-      res = this.favorites;
+      res = this.state.favorites;
     } else {
       if (categoryMenuId && categoryMenuId !== 'all') {
         res = this.applicationsByCategory[categoryMenuId];
@@ -1762,8 +1795,10 @@ CinnamenuApplet.prototype = {
     if (this.searchEntry) {
       this.searchEntry.set_text('');
     }
-    this.state.set({searchActive: false});
-    this.expressionActive = false;
+    this.state.set({
+      searchActive: false,
+      expressionActive: false
+    });
     if (this._activeContainer) {
       this._activeContainer.show();
     }
@@ -1859,9 +1894,9 @@ CinnamenuApplet.prototype = {
         this.answerText.set_text(answerText);
         this.answerText.show();
         this._activeContainer.hide();
-        this.expressionActive = true;
+        this.state.set({expressionActive: true});
       } catch (e) {
-        this.expressionActive = false;
+        this.state.set({expressionActive: false});
       }
     }
 
@@ -1921,8 +1956,13 @@ CinnamenuApplet.prototype = {
   },
 
   _display: function() {
-    this.state.set({isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST});
-    this._displayed = true;
+    // Allow the menu to be taller for high resolution displays.
+    let menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55))
+    this.state.set({
+      isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
+      displayed: true,
+      menuHeight: menuHeight < 530 ? 530 : menuHeight
+    });
 
     let section = new PopupMenu.PopupMenuSection();
 
@@ -1949,15 +1989,11 @@ CinnamenuApplet.prototype = {
       vertical: true
     });
 
-    // Allow the menu to be taller for high resolution displays.
-    this.menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55))
-    this.menuHeight = this.menuHeight < 530 ? 530 : this.menuHeight;
-
     // groupCategoriesWorkspacesScrollBox allows categories or workspaces to scroll vertically
     this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({
       x_fill: true,
       y_fill: false,
-      height: this.menuHeight,
+      height: this.state.menuHeight,
       y_align: St.Align.START,
       style_class: 'vfade menu-applications-scrollbox'
     });
@@ -2020,9 +2056,6 @@ CinnamenuApplet.prototype = {
     this.displaySignals.connect(this.searchEntryText, 'key-press-event', Lang.bind(this, this._onMenuKeyPress));
     this._previousSearchPattern = '';
 
-    // Load Favorites
-    this.favorites = this.appFavorites.getFavorites();
-
     // Load Places
     if (PlaceDisplay && this.state.settings.showPlaces) {
       this.placesManager = new PlaceDisplay.PlacesManager(false);
@@ -2035,7 +2068,7 @@ CinnamenuApplet.prototype = {
       x_fill: true,
       y_fill: false,
       y_align: St.Align.START,
-      height: this.menuHeight,
+      height: this.state.menuHeight,
       style_class: 'vfade menu-applications-scrollbox'
     });
     let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
@@ -2110,7 +2143,7 @@ CinnamenuApplet.prototype = {
       'user',
       16,
       '',
-      '',
+      _('Account details'),
       () => Util.spawnCommandLine('cinnamon-settings user')
     ));
     this.powerGroupButtons.push(new GroupButton(
@@ -2233,8 +2266,8 @@ CinnamenuApplet.prototype = {
       offset: 0
     }));
 
-    if (this._newInstance) {
-      this._newInstance = false;
+    if (this.state.isNewInstance) {
+      this.state.set({isNewInstance: false});
     }
   },
 

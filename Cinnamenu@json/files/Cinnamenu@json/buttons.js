@@ -25,6 +25,11 @@ const ApplicationType = AppletDir.constants.ApplicationType;
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 const stripMarkupRegex = /(<([^>]+)>)/ig;
 
+const wordWrap = function(text, limit) {
+  let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
+  return text.match(RegExp(regex, 'g')).join('\n');
+};
+
 /**
  * @name CategoryListButton
  * @description A button with an icon that holds category info
@@ -109,6 +114,9 @@ CategoryListButton.prototype = {
   },
 
   selectCategory: function() {
+    if (this.disabled) {
+      return false;
+    }
     this.state.trigger('selectorMethod', this.selectorMethod, this.id);
   },
 
@@ -125,11 +133,6 @@ CategoryListButton.prototype = {
     this.state.set({currentCategory: this.id});
     this.actor.set_style_class_name('menu-category-button-selected');
 
-    if (!this.state.settings.showAppDescriptionsOnButtons) {
-      this.state.trigger('setSelectedTitleText', this.categoryNameText);
-      this.state.trigger('setSelectedDescriptionText', '');
-    }
-
     Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, Lang.bind(this, function() {
       this.selectCategory();
     }));
@@ -142,17 +145,9 @@ CategoryListButton.prototype = {
     }
     this.entered = null;
     this.actor.set_style_class_name('menu-category-button');
-    this.state.trigger('setSelectedTitleText', '');
-    this.state.trigger('setSelectedDescriptionText', '');
   },
 
   handleButtonRelease: function () {
-    if (this.disabled) {
-      return false;
-    }
-
-    this.state.trigger('setSelectedTitleText', this.categoryNameText);
-    this.state.trigger('setSelectedDescriptionText', '');
     this.selectCategory();
   },
 
@@ -181,7 +176,6 @@ CategoryListButton.prototype = {
     if (this.icon) {
       this.icon.destroy();
     }
-
     PopupMenu.PopupBaseMenuItem.prototype.destroy.call(this);
     unref(this);
   },
@@ -603,7 +597,8 @@ AppListGridButton.prototype = {
   },
 
   formatLabel: function (opts) {
-    let description = this.buttonState.app.description ? this.buttonState.app.description : '';
+    let name = this.buttonState.app.name.replace(/&/g, '&amp;');
+    let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
     if (this.description) {
       let diff = this.description.length - description.length;
       diff = Array(Math.abs(Math.ceil(diff))).join(' ');
@@ -615,35 +610,50 @@ AppListGridButton.prototype = {
       if (this.buttonState.app.description) {
         this.buttonState.app.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
       }
+      description = description.replace(stripMarkupRegex, '');
     }
 
-    let markup = '<span>' + this.buttonState.app.name.replace(/&/g, '&amp;') + '</span>';
-
-    if (this.state.settings.showAppDescriptionsOnButtons) {
-      markup += '\n<span size="small">' + description.replace(/&/g, '&amp;') + '</span>';
+    let markup = '<span>' + name + '</span>';
+    let tooltipMarkup;
+    if (this.state.settings.showTooltips && opts.tooltipFormat) {
+      let tooltipName = name;
+      if (tooltipName.length > 80) {
+        tooltipName = wordWrap(name, 80);
+      }
+      tooltipMarkup = '<span>' + tooltipName + '</span>';
+      if (description.length > 0) {
+        let tooltipDescription = description;
+        if (description.length > 80) {
+          tooltipDescription = wordWrap(description, 80);
+        }
+        tooltipMarkup += '\n<span size="small">' + tooltipDescription + '</span>';
+      }
+    } else if (this.state.settings.showAppDescriptionsOnButtons) {
       if (!this.state.isListView) {
-        let width = this.description ? this.description.length : this.buttonState.app.description ? this.buttonState.app.description.length : 0;
+        let width = this.description ? this.description.length : description ? description.length : 0;
         this.label.set_style('text-align: center;min-width: ' + width.toString() + 'px;');
       }
-    } else {
+      markup += '\n<span size="small">' + description + '</span>';
+    } else if (!this.state.settings.showTooltips) {
       if (this.state.searchActive) {
         let nameClutterText = this.state.trigger('getSelectedTitleClutterText');
         if (nameClutterText) {
-          nameClutterText.set_markup(this.buttonState.app.name.replace(/&/g, '&amp;'));
+          nameClutterText.set_markup(name);
         }
         let descriptionClutterText = this.state.trigger('getSelectedDescriptionClutterText');
         if (descriptionClutterText) {
-          descriptionClutterText.set_markup(description.replace(/&/g, '&amp;'));
+          descriptionClutterText.set_markup(description);
         }
       } else {
-        this.state.trigger('setSelectedTitleText', this.buttonState.app.name);
-        this.state.trigger('setSelectedDescriptionText', description.replace(stripMarkupRegex, ''));
+        this.state.trigger('setSelectedTitleText', name);
+        this.state.trigger('setSelectedDescriptionText', description);
       }
     }
 
     if (this.buttonState.app.shouldHighlight) {
       markup = '<b>' + markup + '</b>';
     }
+    this.tooltipMarkup = tooltipMarkup;
     let clutterText = this.label.get_clutter_text();
     if (clutterText
       && (this.state.settings.showAppDescriptionsOnButtons
@@ -717,7 +727,7 @@ AppListGridButton.prototype = {
     }
 
     this.entered = true;
-
+    this.state.set({itemEntered: true});
     this.actor.set_style_class_name('menu-application-button-selected');
 
     // Check marquee conditions, and set it up
@@ -732,7 +742,7 @@ AppListGridButton.prototype = {
       actorWidth = 16;
       allocatedTextLength = 16;
     }
-    if (labelWidth > actorWidth && !this.marqueeTimer) {
+    if (labelWidth > actorWidth && !this.marqueeTimer && !this.state.settings.showTooltips) {
       this.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
       this.marqueeTimer = setTimeout(()=>this.handleMarquee({
         start: 0,
@@ -741,7 +751,10 @@ AppListGridButton.prototype = {
         reset: 0
       }), 1000);
     } else {
-      this.formatLabel({});
+      this.formatLabel({tooltipFormat: true});
+      if (this.state.settings.showTooltips) {
+        this.state.trigger('setTooltip', this.actor.get_transformed_position(), this.actor.height, this.tooltipMarkup);
+      }
     }
     return false;
   },
@@ -752,6 +765,7 @@ AppListGridButton.prototype = {
     }
 
     this.entered = null;
+    this.state.set({itemEntered: false});
     this.actor.set_style_class_name('menu-application-button');
     if (this.description) {
       this.buttonState.app.description = this.description;
@@ -760,7 +774,9 @@ AppListGridButton.prototype = {
         this.clearMarqueeTimer();
       }
     }
-    if (!this.state.settings.showAppDescriptionsOnButtons) {
+    if (this.state.settings.showTooltips) {
+      this.state.trigger('setTooltip');
+    } else if (!this.state.settings.showAppDescriptionsOnButtons) {
       this.state.trigger('setSelectedTitleText', '');
       this.state.trigger('setSelectedDescriptionText', '');
     }
@@ -1059,15 +1075,32 @@ GroupButton.prototype = {
     }
     this.entered = true;
     this.actor.add_style_pseudo_class('hover');
-    this.state.trigger('setSelectedTitleText', this.name);
-    this.state.trigger('setSelectedDescriptionText', this.description);
+    if (this.state.settings.showTooltips) {
+      this.state.trigger(
+        'setTooltip',
+        this.actor.get_transformed_position(),
+        -this.actor.height - 20,
+        this.name + (this.description ? '\n<span size="small">' + this.description + '</span>' : '')
+      );
+    } else {
+      this.state.trigger('setSelectedTitleText', this.name);
+      if (this.description) {
+        this.state.trigger('setSelectedDescriptionText', this.description);
+      }
+    }
   },
 
   handleLeave: function () {
     this.entered = null;
     this.actor.remove_style_pseudo_class('hover');
-    this.state.trigger('setSelectedTitleText', '');
-    this.state.trigger('setSelectedDescriptionText', '');
+    if (this.state.settings.showTooltips) {
+      this.state.trigger('setTooltip');
+    } else {
+      this.state.trigger('setSelectedTitleText', '');
+      if (this.description) {
+        this.state.trigger('setSelectedDescriptionText', '');
+      }
+    }
   },
 
   setIcon: function(iconName) {
