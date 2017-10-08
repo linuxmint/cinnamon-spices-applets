@@ -440,7 +440,11 @@ CinnamenuApplet.prototype = {
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
   },
 
-  _launch_editor: function () {
+  launchPrivacySettings: function() {
+    Util.spawnCommandLine('cinnamon-settings privacy');
+  },
+
+  launchEditor: function () {
     Util.spawnCommandLine('cinnamon-menu-editor');
   },
 
