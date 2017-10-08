@@ -28,7 +28,7 @@ msgstr "MySQL-server"
 
 #: applet.js:61
 msgid "Open Web Dir"
-msgstr "Open Web Dir"
+msgstr "Åbn Web Dir"
 
 #: applet.js:66
 msgid "Launch Web Dir"
