@@ -52,7 +52,6 @@ MyApplet.prototype = {
         this.is_running = true;
 
         this.screen_outputs = {};
-        this.xrandr_process = null;
         this.menu_item_screen_position = 0;
         this.menu_item_output_position = 1;
         this.menu_item_screen = null;
@@ -96,6 +95,7 @@ MyApplet.prototype = {
         this.options_type = AppletConstants.OptionsType.ALL;
         this.gui_icon_filepath = "";
         this.apply_startup = true;
+        this.apply_every = 0;
 
         this._init_dependencies_satisfied();
     },
@@ -200,7 +200,6 @@ MyApplet.prototype = {
         this._init_layout();
         this._bind_settings();
         this._connect_signals();
-        this._init_xrandr_process();
         this._init_filepaths();
         this._init_files();
         this._init_values();
@@ -249,6 +248,7 @@ MyApplet.prototype = {
     _bind_settings: function () {
         for(let [binding, property_name, callback] of [
                         [Settings.BindingDirection.IN, "apply_startup", null],
+                        [Settings.BindingDirection.IN, "apply_every", null],
                         [Settings.BindingDirection.IN, "save_every", null],
                         [Settings.BindingDirection.IN, "update_scroll", null],
                         [Settings.BindingDirection.IN, "scroll_step", null],
@@ -524,10 +524,6 @@ MyApplet.prototype = {
         return false;
     },
 
-    _init_xrandr_process: function () {
-        this.xrandr_process = new ShellUtils.ShellOutputProcess([this.xrandr_name]);
-    },
-
     _init_filepaths: function () {
         this.filepath_last_values = this.values_directory + 'last_values.csv';
     },
@@ -546,13 +542,15 @@ MyApplet.prototype = {
     load_last_values: function() {
         try {
             let rows = this.file_last_values.get_last_value_rows();
-            let row = rows[0];
-            this.screen_name = row.screen_name;
-            this.output_index = row.output_index;
-            this.brightness = row.brightness;
-            this.gamma_red = row.gamma_red;
-            this.gamma_green = row.gamma_green;
-            this.gamma_blue = row.gamma_blue;
+            if(rows.length > 0) {
+                let row = rows[0];
+                this.screen_name = row.screen_name;
+                this.output_index = row.output_index;
+                this.brightness = row.brightness;
+                this.gamma_red = row.gamma_red;
+                this.gamma_green = row.gamma_green;
+                this.gamma_blue = row.gamma_blue;
+            }
         }
         catch(e) {
             global.log("Error while loading last values from a file: " + e);
@@ -736,8 +734,8 @@ MyApplet.prototype = {
     },
 
     spawn_xrandr_process: function (argv) {
-        this.xrandr_process.command_argv = argv;
-        let output = this.xrandr_process.spawn_sync_and_get_error();
+        let xrandr_process = new ShellUtils.ShellOutputProcess(argv);
+        let output = xrandr_process.spawn_sync_and_get_error();
         if(output > 0) {
             global.log("Error while updating brightness and gamma: " + output + ". Command line arguments: " + argv);
         }
@@ -749,7 +747,24 @@ MyApplet.prototype = {
 
 
     run: function () {
+        this._run_apply_values_running();
         this._run_save_last_values_running();
+    },
+
+    _run_apply_values_running: function () {
+        if(this.is_running) {
+            this._apply_values();
+        }
+    },
+
+    _apply_values: function () {
+        if(this.apply_every > 0) {
+            this.update_xrandr();
+            Mainloop.timeout_add(1000 * this.apply_every, Lang.bind(this, this._run_apply_values_running));
+        }
+        else {
+            Mainloop.timeout_add(1000, Lang.bind(this, this._run_apply_values_running));
+        }
     },
 
     _run_save_last_values_running: function () {
