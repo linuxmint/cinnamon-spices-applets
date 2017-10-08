@@ -629,7 +629,7 @@ MyApplet.prototype = {
     },
 
     get_table: function (lines) {
-        table = lines.map(this.split_lines_whitespaces, this);
+        let table = lines.map(this.split_lines_whitespaces, this);
         return table;
     },
 
@@ -848,7 +848,7 @@ MyApplet.prototype = {
             return [number, unit];
         }
         else {
-            bits = this.convert_to_bits(bytes);
+            let bits = this.convert_to_bits(bytes);
             let [number, unit] = this.convert_bits_to_readable_unit(bits);
             return [number, unit];
         }
@@ -938,7 +938,7 @@ MyApplet.prototype = {
     },
 
     join_table: function (table) {
-        lines = table.map(this.join_row_values, this);
+        let lines = table.map(this.join_row_values, this);
         return lines;
     },
 
