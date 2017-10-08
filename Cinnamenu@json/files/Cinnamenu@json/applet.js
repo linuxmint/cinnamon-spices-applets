@@ -188,7 +188,12 @@ CinnamenuApplet.prototype = {
             this.tooltip.hide();
             return;
           }
-          this.tooltip._tooltip.get_clutter_text().set_markup(text)
+          let clutterText = this.tooltip._tooltip.get_clutter_text();
+          if (clutterText) {
+            clutterText.set_markup(text);
+          } else {
+            this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
+          }
           coords[1] = coords[1] + height;
           this.tooltip.mousePosition = coords;
           if (!this.state.settings.tooltipDelay) {
@@ -2283,10 +2288,11 @@ CinnamenuApplet.prototype = {
       offset: 0
     }));
 
+    this.tooltip = new Tooltips.Tooltip(this.mainBox, '')
+    this.tooltip._tooltip.set_style('text-align: left;');
+
     if (this.state.isNewInstance) {
       this.state.set({isNewInstance: false});
-      this.tooltip = new Tooltips.Tooltip(this.mainBox, '')
-      this.tooltip._tooltip.set_style('text-align: left;');
     }
   },
 
@@ -2335,6 +2341,9 @@ CinnamenuApplet.prototype = {
         this.destroyContainer(this[containers[i]]);
       }
     }
+
+    this.tooltip.destroy();
+    this.tooltip = null;
   },
 
   destroyAppButtons: function() {

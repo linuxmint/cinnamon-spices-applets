@@ -12,6 +12,8 @@ Changelog
   * Fixed toggling the autoscroll option not working until a Cinnamon restart.
   * Fixed some uncaught errors when enabling bookmarks while no sources are available.
   * Fixed opening the menu on hover only working once.
+  * Known issues:
+    * Icons will move to the right a bit when activating the context menu on a menu item in the grid view. This is due to working around API changes that completely break the context menu positioning in Cinnamon git, and the issue shouldn't occur when Cinnamon 3.6 releases.
 
 ### 2.1.0
 
