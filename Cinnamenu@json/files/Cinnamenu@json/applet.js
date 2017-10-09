@@ -143,7 +143,10 @@ CinnamenuApplet.prototype = {
 
   _init: function(metadata, orientation, panel_height, instance_id) {
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-    this.set_applet_label(_('Initializing'));
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    if (orientation === St.Side.BOTTOM || orientation === St.Side.TOP) {
+      this.set_applet_label(_('Initializing'));
+    }
     this.setSchema(metadata.path, (knownProviders, enabledProviders) => {
       this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
       this.appFavorites = AppFavorites.getAppFavorites();
@@ -240,7 +243,6 @@ CinnamenuApplet.prototype = {
         }
       });
 
-      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
       this.createMenu(orientation);
 
       this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
@@ -437,6 +439,9 @@ CinnamenuApplet.prototype = {
 
   on_applet_removed_from_panel: function() {
     Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
+    if (!this.settings) {
+      return;
+    }
     this.settings.finalize();
     this.destroy();
   },
@@ -1467,7 +1472,7 @@ CinnamenuApplet.prototype = {
         && buttons[refItemIndex].menu.box) {
         contextMenuChildren = buttons[refItemIndex].contextMenuButtons;
         refContextMenuItemIndex = store.queryCollection(contextMenuChildren, (button) => {
-          return !button.entered;
+          return button.actor.has_style_pseudo_class('active');
         }, {indexOnly: true});
         enteredContextMenuItemExists = refContextMenuItemIndex > -1 && contextMenuChildren[refContextMenuItemIndex] != null;
         if (enteredContextMenuItemExists) {
@@ -1499,7 +1504,7 @@ CinnamenuApplet.prototype = {
         index = 0;
       }
       if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
-        contextMenuChildren[index]._delegate.handleEnter();
+        contextMenuChildren[index].handleEnter();
       } else if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
         contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
       } else if (up) {
@@ -2342,8 +2347,10 @@ CinnamenuApplet.prototype = {
       }
     }
 
-    this.tooltip.destroy();
-    this.tooltip = null;
+    if (this.tooltip) {
+      this.tooltip.destroy();
+      this.tooltip = null;
+    }
   },
 
   destroyAppButtons: function() {

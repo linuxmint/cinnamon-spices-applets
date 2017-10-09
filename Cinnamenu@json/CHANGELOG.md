@@ -1,5 +1,10 @@
 Changelog
 
+### 3.0.1
+
+  * Fixed a regression preventing the applet from working on vertical panels on Cinnamon <= 3.4.
+  * Fixed a context menu item key navigation bug.
+
 ### 3.0.0
 
   * Added an option to enable indexing of open windows in menu searches.
