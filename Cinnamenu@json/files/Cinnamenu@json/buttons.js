@@ -172,7 +172,9 @@ CategoryListButton.prototype = {
   },
 
   handleButtonRelease: function (actor, event) {
-    if (this.disabled || event.get_button() > 1 || !this.state.settings.categoryClick) {
+    if (this.disabled
+      || (event && event.get_button() > 1)
+      || !this.state.settings.categoryClick) {
       return;
     }
     this.selectCategory();
@@ -1095,7 +1097,7 @@ GroupButton.prototype = {
   },
 
   handleButtonRelease: function (actor, event) {
-    if (event.get_button() > 1) {
+    if (event && event.get_button() > 1) {
       return;
     }
     if (this._user || this.icon.icon_name.indexOf('view') === -1) {
