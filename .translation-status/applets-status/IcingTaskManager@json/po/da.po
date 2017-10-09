@@ -1,0 +1,855 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 20:40+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 3.2/specialMenus.js:103
+msgid "Move to the other monitor"
+msgstr "Flyt til den anden skærm"
+
+#: 3.2/specialMenus.js:103
+msgid "Move to monitor "
+msgstr "Flyt til skærm "
+
+#: 3.2/specialMenus.js:111
+msgid "Only on this workspace"
+msgstr "Kun på dette arbejdsområde"
+
+#: 3.2/specialMenus.js:117
+msgid "Visible on all workspaces"
+msgstr "Synlig på alle arbejdsområder"
+
+#: 3.2/specialMenus.js:123 3.0/specialMenus.js:133
+msgid "Move to another workspace"
+msgstr "Flyt til et andet arbejdsområde"
+
+#: 3.2/specialMenus.js:156 3.0/specialMenus.js:169
+msgid "Places"
+msgstr "Steder"
+
+#: 3.2/specialMenus.js:207 3.0/specialMenus.js:226
+msgid "Recent"
+msgstr "Seneste"
+
+#: 3.2/specialMenus.js:225 3.0/specialMenus.js:247
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#: 3.2/specialMenus.js:228
+msgid "About..."
+msgstr "Om..."
+
+#: 3.2/specialMenus.js:233
+msgid "Configure..."
+msgstr "Konfigurér..."
+
+#: 3.2/specialMenus.js:238
+msgid "Remove"
+msgstr "Fjern"
+
+#: 3.2/specialMenus.js:272
+msgid "Unpin from Panel"
+msgstr "Frigør fra panel"
+
+#: 3.2/specialMenus.js:274
+msgid "Pin to Panel"
+msgstr "Fastgør til panel"
+
+#: 3.2/specialMenus.js:281
+msgid "Remove from Autostart"
+msgstr "Fjern fra automatisk opstart"
+
+#: 3.2/specialMenus.js:284
+msgid "Add to Autostart"
+msgstr "Tilføj til automatisk opstart"
+
+#: 3.2/specialMenus.js:290
+msgid "Create Shortcut"
+msgstr "Opret genvej"
+
+#: 3.2/specialMenus.js:300
+msgid "Restore to full opacity"
+msgstr "Gendan til fuld uigennemsigtighed"
+
+#: 3.2/specialMenus.js:308
+msgid "Restore"
+msgstr "Gendan"
+
+#: 3.2/specialMenus.js:313
+msgid "Minimize"
+msgstr "Minimér"
+
+#: 3.2/specialMenus.js:321
+msgid "Unmaximize"
+msgstr "Gendan"
+
+#: 3.2/specialMenus.js:326
+msgid "Maximize"
+msgstr "Maksimér"
+
+#: 3.2/specialMenus.js:335
+msgid "Close others"
+msgstr "Luk andre"
+
+#: 3.2/specialMenus.js:345
+msgid "Close all"
+msgstr "Luk alle"
+
+#: 3.2/specialMenus.js:359
+msgid "Close"
+msgstr "Luk"
+
+#. 3.2->settings-schema.json->focusPseudoClass->description
+#. 3.0->settings-schema.json->focusPseudoClass->description
+msgid "App button focus pseudo class"
+msgstr "Pseudoklasse for programknapsfokus"
+
+#. 3.2->settings-schema.json->focusPseudoClass->tooltip
+#. 3.0->settings-schema.json->focusPseudoClass->tooltip
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "Tilsidesætter pseudoklassen for programknappen ved fokus."
+
+#. 3.2->settings-schema.json->focusPseudoClass->options
+#. 3.2->settings-schema.json->hoverPseudoClass->options
+#. 3.2->settings-schema.json->activePseudoClass->options
+#. 3.0->settings-schema.json->focusPseudoClass->options
+#. 3.0->settings-schema.json->hoverPseudoClass->options
+#. 3.0->settings-schema.json->activePseudoClass->options
+msgid "active"
+msgstr "aktiv"
+
+#. 3.2->settings-schema.json->focusPseudoClass->options
+#. 3.2->settings-schema.json->hoverPseudoClass->options
+#. 3.2->settings-schema.json->activePseudoClass->options
+#. 3.0->settings-schema.json->focusPseudoClass->options
+#. 3.0->settings-schema.json->hoverPseudoClass->options
+#. 3.0->settings-schema.json->activePseudoClass->options
+msgid "outlined"
+msgstr "kontur"
+
+#. 3.2->settings-schema.json->focusPseudoClass->options
+#. 3.2->settings-schema.json->hoverPseudoClass->options
+#. 3.2->settings-schema.json->activePseudoClass->options
+#. 3.0->settings-schema.json->focusPseudoClass->options
+#. 3.0->settings-schema.json->hoverPseudoClass->options
+#. 3.0->settings-schema.json->activePseudoClass->options
+msgid "hover"
+msgstr "svæv"
+
+#. 3.2->settings-schema.json->focusPseudoClass->options
+#. 3.2->settings-schema.json->hoverPseudoClass->options
+#. 3.2->settings-schema.json->activePseudoClass->options
+#. 3.0->settings-schema.json->focusPseudoClass->options
+#. 3.0->settings-schema.json->hoverPseudoClass->options
+#. 3.0->settings-schema.json->activePseudoClass->options
+msgid "focus"
+msgstr "fokus"
+
+#. 3.2->settings-schema.json->focusPseudoClass->options
+#. 3.2->settings-schema.json->hoverPseudoClass->options
+#. 3.2->settings-schema.json->activePseudoClass->options
+#. 3.0->settings-schema.json->focusPseudoClass->options
+#. 3.0->settings-schema.json->hoverPseudoClass->options
+#. 3.0->settings-schema.json->activePseudoClass->options
+msgid "selected"
+msgstr "valgt"
+
+#. 3.2->settings-schema.json->icon-spacing->description
+#. 3.0->settings-schema.json->icon-spacing->description
+msgid "Icon spacing"
+msgstr "Ikonmellemrum"
+
+#. 3.2->settings-schema.json->icon-spacing->tooltip
+#. 3.0->settings-schema.json->icon-spacing->tooltip
+msgid "Controls how much space is between the icons."
+msgstr "Kontrollerer mellemrummet mellem ikoner."
+
+#. 3.2->settings-schema.json->icon-spacing->units
+#. 3.2->settings-schema.json->icon-size->units
+#. 3.2->settings-schema.json->app-button-width->units
+#. 3.2->settings-schema.json->icon-padding->units
+#. 3.0->settings-schema.json->icon-spacing->units
+#. 3.0->settings-schema.json->icon-size->units
+#. 3.0->settings-schema.json->icon-padding->units
+msgid "px"
+msgstr "px"
+
+#. 3.2->settings-schema.json->show-thumbnails->description
+#. 3.0->settings-schema.json->show-thumbnails->description
+msgid "Show thumbnails"
+msgstr "Vis miniaturer"
+
+#. 3.2->settings-schema.json->show-thumbnails->tooltip
+#. 3.0->settings-schema.json->show-thumbnails->tooltip
+msgid "Show window thumbnails when hovering over an app button."
+msgstr "Vis vinduesminiaturer, når markøren føres hen over en programknap."
+
+#. 3.2->settings-schema.json->icon-size->description
+#. 3.0->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Ikonstørrelse"
+
+#. 3.2->settings-schema.json->icon-size->tooltip
+#. 3.0->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Angiv ikonstørrelse"
+
+#. 3.2->settings-schema.json->hover-peek-time->description
+#. 3.0->settings-schema.json->hover-peek-time->description
+msgid "Window fade time"
+msgstr "Udtoningstid for vindue"
+
+#. 3.2->settings-schema.json->hover-peek-time->tooltip
+#. 3.0->settings-schema.json->hover-peek-time->tooltip
+msgid "Controls how quickly a window will fade on hover."
+msgstr ""
+"Kontrollerer hvor hurtigt et vindue vil tone ud, når markøren føres hen over."
+
+#. 3.2->settings-schema.json->hover-peek-time->units
+#. 3.2->settings-schema.json->thumbnail-timeout->units
+#. 3.2->settings-schema.json->show-apps-order-timeout->units
+#. 3.0->settings-schema.json->hover-peek-time->units
+#. 3.0->settings-schema.json->thumbnail-timeout->units
+#. 3.0->settings-schema.json->show-apps-order-timeout->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. 3.2->settings-schema.json->title-display->description
+#. 3.0->settings-schema.json->title-display->description
+msgid "Title display"
+msgstr "Titelvisning"
+
+#. 3.2->settings-schema.json->title-display->tooltip
+#. 3.0->settings-schema.json->title-display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+"Fokuseret: vis fokuseret vindues titel, Titel: vis vinduestitlen, Program: "
+"vis programnavnet, Ingen: vis ikke noget"
+
+#. 3.2->settings-schema.json->title-display->options
+#. 3.2->settings-schema.json->number-display->options
+#. 3.0->settings-schema.json->title-display->options
+#. 3.0->settings-schema.json->number-display->options
+msgid "None"
+msgstr "Ingen"
+
+#. 3.2->settings-schema.json->title-display->options
+#. 3.0->settings-schema.json->title-display->options
+msgid "Focused"
+msgstr "Fokuseret"
+
+#. 3.2->settings-schema.json->title-display->options
+#. 3.0->settings-schema.json->title-display->options
+msgid "App"
+msgstr "Program"
+
+#. 3.2->settings-schema.json->title-display->options
+#. 3.0->settings-schema.json->title-display->options
+msgid "Title"
+msgstr "Titel"
+
+#. 3.2->settings-schema.json->hoverPseudoClass->description
+#. 3.0->settings-schema.json->hoverPseudoClass->description
+msgid "App button hover pseudo class"
+msgstr "Pseudoklasse for programknapsvævning"
+
+#. 3.2->settings-schema.json->hoverPseudoClass->tooltip
+#. 3.0->settings-schema.json->hoverPseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr ""
+"Tilsidesætter pseudoklassen for programknapper, når markøren føres hen over."
+
+#. 3.2->settings-schema.json->show-alerts->description
+#. 3.0->settings-schema.json->show-alerts->description
+msgid "Show app alerts and notifications"
+msgstr "Vis beskeder og advarsler fra programmer"
+
+#. 3.2->settings-schema.json->show-alerts->tooltip
+#. 3.0->settings-schema.json->show-alerts->tooltip
+msgid "If enabled, notifications and alerts will appear."
+msgstr "Når aktiveret vil beskeder og advarsler optræde."
+
+#. 3.2->settings-schema.json->pinOnDrag->description
+#. 3.2->settings-schema.json->pinOnDrag->tooltip
+#. 3.0->settings-schema.json->pinOnDrag->description
+#. 3.0->settings-schema.json->pinOnDrag->tooltip
+msgid "Pin apps when dragged to a new position"
+msgstr "Fastgør programmer, når de trækkes til en ny placering"
+
+#. 3.2->settings-schema.json->show-apps-order-hotkey->description
+#. 3.0->settings-schema.json->show-apps-order-hotkey->description
+msgid "Global hotkey to show the order of apps"
+msgstr "Global genvejstast til at vise programrækkefølgen"
+
+#. 3.2->settings-schema.json->show-apps-order-hotkey->tooltip
+#. 3.0->settings-schema.json->show-apps-order-hotkey->tooltip
+msgid ""
+"When triggered, the window count label will be replaced with its order in "
+"the app list temporarily."
+msgstr ""
+"Når genvejstasten trykkes, vil vinduestælleren midlertidigt blive erstattet "
+"med rækkefølgen i programlisten."
+
+#. 3.2->settings-schema.json->menuItemType->description
+#. 3.0->settings-schema.json->menuItemType->description
+msgid "Menu item type"
+msgstr "Menuelementtype"
+
+#. 3.2->settings-schema.json->menuItemType->tooltip
+#. 3.0->settings-schema.json->menuItemType->tooltip
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Bestemmer om menuelementikoner er symbolske, ikke-symbolske eller ikke vises."
+
+#. 3.2->settings-schema.json->menuItemType->options
+#. 3.0->settings-schema.json->menuItemType->options
+msgid "Symbolic icons"
+msgstr "Symbolske ikoner"
+
+#. 3.2->settings-schema.json->menuItemType->options
+#. 3.0->settings-schema.json->menuItemType->options
+msgid "No icons"
+msgstr "Ingen ikoner"
+
+#. 3.2->settings-schema.json->menuItemType->options
+#. 3.0->settings-schema.json->menuItemType->options
+msgid "Non-symbolic icons"
+msgstr "Ikke-symbolske ikoner"
+
+#. 3.2->settings-schema.json->system-favorites->description
+msgid "Use system favorites for pinned apps"
+msgstr "Anvend systemfavoritter til fastgjorte programmer"
+
+#. 3.2->settings-schema.json->system-favorites->tooltip
+msgid ""
+"Controls whether or not pinned apps consist of the system favorites list."
+msgstr "Kontrollerer om fastgjorte programmer består af systemfavoritlisten."
+
+#. 3.2->settings-schema.json->hover-peek-opacity->description
+#. 3.0->settings-schema.json->hover-peek-opacity->description
+msgid "Window opacity"
+msgstr "Vinduesuigennemsigtighed"
+
+#. 3.2->settings-schema.json->hover-peek-opacity->tooltip
+#. 3.0->settings-schema.json->hover-peek-opacity->tooltip
+msgid "Opacity of the windows on hover."
+msgstr "Vinduernes uigennemsigtighed når markøren føres hen over miniaturen."
+
+#. 3.2->settings-schema.json->hover-peek-opacity->units
+#. 3.0->settings-schema.json->hover-peek-opacity->units
+msgid "percent"
+msgstr "procent"
+
+#. 3.2->settings-schema.json->enable-hover-peek->description
+#. 3.0->settings-schema.json->enable-hover-peek->description
+msgid "Show windows when hovered over"
+msgstr "Vis vinduer, når markøren føres hen over miniaturen"
+
+#. 3.2->settings-schema.json->enable-hover-peek->tooltip
+#. 3.0->settings-schema.json->enable-hover-peek->tooltip
+msgid "Controls whether or not windows display when hovered over."
+msgstr "Kontrollerer om vinduer vises, når markøren føres hen over miniaturen."
+
+#. 3.2->settings-schema.json->activePseudoClass->description
+#. 3.0->settings-schema.json->activePseudoClass->description
+msgid "App button active pseudo class"
+msgstr "Pseudoklasse for aktiv programknap"
+
+#. 3.2->settings-schema.json->activePseudoClass->tooltip
+#. 3.0->settings-schema.json->activePseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "Tilsidesætter pseudoklassen for programknapper, når de er aktive."
+
+#. 3.2->settings-schema.json->thumbnailsPage->title
+#. 3.2->settings-schema.json->thumbnailsSection->title
+msgid "Thumbnails"
+msgstr "Miniaturer"
+
+#. 3.2->settings-schema.json->appButtonsSection->title
+msgid "App Buttons"
+msgstr "Programknapper"
+
+#. 3.2->settings-schema.json->hoverPeekSection->title
+msgid "Hover Peek"
+msgstr "Markørsvævning for smugkig"
+
+#. 3.2->settings-schema.json->panelPage->title
+msgid "Panel"
+msgstr "Panel"
+
+#. 3.2->settings-schema.json->iconSection->title
+msgid "Icons"
+msgstr "Ikoner"
+
+#. 3.2->settings-schema.json->presetSection->title
+msgid "Recommended Presets"
+msgstr "Anbefalede forudindstillinger"
+
+#. 3.2->settings-schema.json->hotKeysSection->title
+msgid "Hot Keys"
+msgstr "Genvejstaster"
+
+#. 3.2->settings-schema.json->stylingSection->title
+msgid "Styling"
+msgstr "Stil"
+
+#. 3.2->settings-schema.json->contextMenuPage->title
+msgid "Context Menu"
+msgstr "Genvejsmenu"
+
+#. 3.2->settings-schema.json->themePage->title
+msgid "Theming"
+msgstr "Tema"
+
+#. 3.2->settings-schema.json->animate-thumbnails->description
+#. 3.0->settings-schema.json->animate-thumbnails->description
+msgid "Animate thumbnails"
+msgstr "Animér miniaturer"
+
+#. 3.2->settings-schema.json->animate-thumbnails->tooltip
+#. 3.0->settings-schema.json->animate-thumbnails->tooltip
+msgid "If enabled, thumbnails will animate when appearing and disappearing."
+msgstr "Når aktiveret vil miniaturer animeres, når de dukker op og forsvinder."
+
+#. 3.2->settings-schema.json->mintYPreset->description
+#. 3.2->settings-schema.json->mintYPreset->tooltip
+msgid "Mint Y and Variants"
+msgstr "Mint Y og varianter"
+
+#. 3.2->settings-schema.json->autostart-menu-item->description
+#. 3.0->settings-schema.json->autostart-menu-item->description
+msgid "Show autostart option"
+msgstr "Vis til-/fravalg af automatisk opstart"
+
+#. 3.2->settings-schema.json->autostart-menu-item->tooltip
+#. 3.0->settings-schema.json->autostart-menu-item->tooltip
+msgid "Shows the autostart toggle option in an app's context menu."
+msgstr ""
+"Viser tilføj til/fjern fra automatisk opstart i et programs genvejsmenu"
+
+#. 3.2->settings-schema.json->show-pinned->description
+#. 3.0->settings-schema.json->show-pinned->description
+msgid "Show pinned apps"
+msgstr "Vis fastgjorte programmer"
+
+#. 3.2->settings-schema.json->show-pinned->tooltip
+#. 3.0->settings-schema.json->show-pinned->tooltip
+msgid ""
+"Controls whether or not the pinned apps appear in the panel if they are not "
+"open."
+msgstr ""
+"Kontrollerer om fastgjorte programmer vises i statusfeltet, hvis de ikke er "
+"åbne."
+
+#. 3.2->settings-schema.json->enable-app-button-dragging->description
+#. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
+msgid "Enable app button dragging"
+msgstr "Aktivér trækning af programknapper"
+
+#. 3.2->settings-schema.json->app-button-width->description
+msgid "App button width"
+msgstr "Programknappens bredde"
+
+#. 3.2->settings-schema.json->app-button-width->tooltip
+msgid "Controls the width of the application button."
+msgstr "Kontrollerer programknappens bredde."
+
+#. 3.2->settings-schema.json->show-recent->description
+#. 3.0->settings-schema.json->show-recent->description
+msgid "Show recent items"
+msgstr "Vis seneste elementer"
+
+#. 3.2->settings-schema.json->show-recent->tooltip
+#. 3.0->settings-schema.json->show-recent->tooltip
+msgid "Controls whether recent items will appear in the context menu."
+msgstr "Kontrollerer om seneste elementer optræder i genvejsmenuen."
+
+#. 3.2->settings-schema.json->vertical-thumbnails->description
+#. 3.0->settings-schema.json->vertical-thumbnails->description
+msgid "Enable vertical thumbnails"
+msgstr "Aktivér lodrette miniaturer"
+
+#. 3.2->settings-schema.json->vertical-thumbnails->tooltip
+#. 3.0->settings-schema.json->vertical-thumbnails->tooltip
+msgid "If enabled, thumbnails will stack vertically."
+msgstr "Når aktiveret vil miniaturer vises i en kolonne."
+
+#. 3.2->settings-schema.json->thumbnail-size->description
+#. 3.0->settings-schema.json->thumbnail-size->description
+msgid "Thumbnail size"
+msgstr "Miniaturestørrelse"
+
+#. 3.2->settings-schema.json->thumbnail-size->tooltip
+#. 3.0->settings-schema.json->thumbnail-size->tooltip
+msgid "Controls the size of the thumbnails."
+msgstr "Kontrollerer størrelsen på miniaturer."
+
+#. 3.2->settings-schema.json->thumbnail-size->units
+#. 3.0->settings-schema.json->thumbnail-size->units
+msgid "size"
+msgstr "størrelse"
+
+#. 3.2->settings-schema.json->thumbnail-timeout->description
+#. 3.0->settings-schema.json->thumbnail-timeout->description
+msgid "Thumbnail timeout"
+msgstr "Miniaturetimeout"
+
+#. 3.2->settings-schema.json->thumbnail-timeout->tooltip
+#. 3.0->settings-schema.json->thumbnail-timeout->tooltip
+msgid ""
+"Controls how quickly an app's set of window thumbnails will fade out when "
+"the mouse leaves the app button."
+msgstr ""
+"Kontrollerer hvor hurtigt et programs miniaturer vil tone ud, når markøren "
+"fjernes fra programknappen."
+
+#. 3.2->settings-schema.json->close-button-style->description
+#. 3.0->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "Tillad at temaet kontrollerer lukkeknappen i miniaturen"
+
+#. 3.2->settings-schema.json->close-button-style->tooltip
+#. 3.0->settings-schema.json->close-button-style->tooltip
+msgid ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "Kontrollerer om temaet bestemmer udseendet på miniaturens lukkeknap."
+
+#. 3.2->settings-schema.json->cycleMenusHotkey->description
+#. 3.0->settings-schema.json->cycleMenusHotkey->description
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Global genvejstast for at bladre gennem miniaturemenuer"
+
+#. 3.2->settings-schema.json->cycleMenusHotkey->tooltip
+#. 3.0->settings-schema.json->cycleMenusHotkey->tooltip
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "Dette lader dig bladre gennem menuer uden at aktivere et vindue."
+
+#. 3.2->settings-schema.json->enable-iconSize->description
+#. 3.0->settings-schema.json->enable-iconSize->description
+msgid "Adjust icon size"
+msgstr "Justér ikonstørrelse"
+
+#. 3.2->settings-schema.json->enable-iconSize->tooltip
+#. 3.0->settings-schema.json->enable-iconSize->tooltip
+msgid "Adjust icon size independent of Cinnamon's panel scaling."
+msgstr "Justér ikonstørrelse uafhængigt af Cinnamons panelskalering."
+
+#. 3.2->settings-schema.json->list-monitor-windows->description
+msgid "Only list windows from the monitor displaying this instance"
+msgstr "Oplist kun vinduer fra skærmen, som viser denne forekomst"
+
+#. 3.2->settings-schema.json->list-monitor-windows->tooltip
+msgid ""
+"This option will only come into effect for monitors displaying an ITM "
+"instance."
+msgstr ""
+"Denne indstilling vil kun få effekt på skærme, som viser en forekomst af "
+"Icing."
+
+#. 3.2->settings-schema.json->number-display->description
+#. 3.0->settings-schema.json->number-display->description
+msgid "Number display"
+msgstr "Antalvisning"
+
+#. 3.2->settings-schema.json->number-display->tooltip
+#. 3.0->settings-schema.json->number-display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+"Normal: vis antal vinduer, Smart: vis antal vinduer hvis mere end ét, Ingen: "
+"vis ikke antal vinduer, Alle: vis også antal for favoritter"
+
+#. 3.2->settings-schema.json->number-display->options
+#. 3.0->settings-schema.json->number-display->options
+msgid "All"
+msgstr "Alle"
+
+#. 3.2->settings-schema.json->number-display->options
+#. 3.0->settings-schema.json->number-display->options
+msgid "Smart"
+msgstr "Smart"
+
+#. 3.2->settings-schema.json->number-display->options
+#. 3.0->settings-schema.json->number-display->options
+msgid "Normal"
+msgstr "Normal"
+
+#. 3.2->settings-schema.json->onclick-thumbnails->description
+#. 3.0->settings-schema.json->onclick-thumbnails->description
+msgid "Open thumbnails on click"
+msgstr "Åbn miniaturer ved klik"
+
+#. 3.2->settings-schema.json->onclick-thumbnails->tooltip
+#. 3.0->settings-schema.json->onclick-thumbnails->tooltip
+msgid "Open the thumbnails on click if there is more than one window open."
+msgstr "Åbn miniaturerne ved klik, hvis der er mere et vindue åbent."
+
+#. 3.2->settings-schema.json->icon-padding->description
+#. 3.0->settings-schema.json->icon-padding->description
+msgid "Icon padding"
+msgstr "Ikonudfyldning"
+
+#. 3.2->settings-schema.json->icon-padding->tooltip
+#. 3.0->settings-schema.json->icon-padding->tooltip
+msgid ""
+"Controls how much horizontal padding is inside the app buttons. Padding is "
+"only applied to instances of this applet on horizontal panels."
+msgstr ""
+"Kontrollerer hvor meget horisontal udfyldning der er inden i "
+"programknapperne. Udfyldning anvendes kun på vandrette paneler."
+
+#. 3.2->settings-schema.json->middle-click-action->description
+#. 3.0->settings-schema.json->middle-click-action->description
+msgid "Middle clicking app buttons creates new app instances"
+msgstr ""
+"Klik med midterste knap på programknapper åbner nye forekomster af programmet"
+
+#. 3.2->settings-schema.json->middle-click-action->tooltip
+#. 3.0->settings-schema.json->middle-click-action->tooltip
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. "
+"Setting this to false will close the last focused window from the app group "
+"on middle click."
+msgstr ""
+"Bestemmer opførslen ved klik med midterste musetast på programknapper. Hvis "
+"sat til falsk, vil det sidst fokuserede vindue i programgruppen blive lukket "
+"ved klik med midterste tast."
+
+#. 3.2->settings-schema.json->firefox-menu->description
+#. 3.0->settings-schema.json->firefox-menu->description
+msgid "Firefox context menu"
+msgstr "Firefox' genvejsmenu"
+
+#. 3.2->settings-schema.json->firefox-menu->tooltip
+#. 3.0->settings-schema.json->firefox-menu->tooltip
+msgid ""
+"Most Visited: show the sites you visit most, Recent History: display the the "
+"last pages you visited, Bookmarks: show your favorite bookmarks."
+msgstr ""
+"Mest besøgte: vis de steder du besøger mest, Seneste: vis de sider du sidst "
+"besøgte. Bogmærker: vis dine favoritbogmærker."
+
+#. 3.2->settings-schema.json->firefox-menu->options
+#. 3.0->settings-schema.json->firefox-menu->options
+msgid "Bookmarks"
+msgstr "Bogmærker"
+
+#. 3.2->settings-schema.json->firefox-menu->options
+#. 3.0->settings-schema.json->firefox-menu->options
+msgid "Most Visited"
+msgstr "Mest besøgte"
+
+#. 3.2->settings-schema.json->firefox-menu->options
+#. 3.0->settings-schema.json->firefox-menu->options
+msgid "Recent History"
+msgstr "Seneste"
+
+#. 3.2->settings-schema.json->group-apps->description
+#. 3.0->settings-schema.json->group-apps->description
+msgid "Group apps"
+msgstr "Gruppér programmer"
+
+#. 3.2->settings-schema.json->group-apps->tooltip
+#. 3.0->settings-schema.json->group-apps->tooltip
+msgid "Group each app's set of windows."
+msgstr "Gruppér hvert programs vinduer."
+
+#. 3.2->settings-schema.json->show-active->description
+#. 3.0->settings-schema.json->show-active->description
+msgid "Show active app indicators"
+msgstr "Vis indikator for aktive programmer"
+
+#. 3.2->settings-schema.json->show-active->tooltip
+#. 3.0->settings-schema.json->show-active->tooltip
+msgid "Active app styling will indicate if an app is active."
+msgstr "Aktive programmer fremhæves."
+
+#. 3.2->settings-schema.json->show-apps-order-timeout->description
+#. 3.0->settings-schema.json->show-apps-order-timeout->description
+msgid "Duration of the apps order display on hotkey press"
+msgstr "Varigheden af visning af programrækkefølgen når genvejstasten trykkes"
+
+#. 3.2->settings-schema.json->show-apps-order-timeout->tooltip
+#. 3.0->settings-schema.json->show-apps-order-timeout->tooltip
+msgid ""
+"Determines the duration the window count labels are replaced with the app's "
+"order number."
+msgstr ""
+"Bestemmer varigheden af visningen af vinduestælleren, når genvejstasten "
+"trykkes."
+
+#. 3.2->settings-schema.json->include-all-windows->description
+#. 3.0->settings-schema.json->include-all-windows->description
+msgid "Include all app windows"
+msgstr "Inkludér alle programmets vinduer"
+
+#. 3.2->settings-schema.json->include-all-windows->tooltip
+#. 3.0->settings-schema.json->include-all-windows->tooltip
+msgid ""
+"Controls whether or not thumbnails for smalller child windows, such as exit "
+"confirmations and file dialogues will be included in the thumbnail list."
+msgstr ""
+"Kontrollerer om miniaturer af mindre vinduer, f.eks. afslutbekræftelse og "
+"fildialoger, inkluderes i miniaturelisten."
+
+#. 3.2->settings-schema.json->monitor-move-all-windows->description
+#. 3.0->settings-schema.json->monitor-move-all-windows->description
+msgid "Apply the monitor move option to all windows"
+msgstr "Anvend \"Flyt til skærm\"-valgmuligheden på alle vinduer"
+
+#. 3.2->settings-schema.json->monitor-move-all-windows->tooltip
+#. 3.0->settings-schema.json->monitor-move-all-windows->tooltip
+msgid ""
+"When clicking \"Move to monitor\" in the context menu, this option will move "
+"all of an app's windows instead of just the last focused window from the app."
+msgstr ""
+"Når der klikkes på \"Flyt til skærm\" i genvejsmenuen, vil denne indstilling "
+"tillade flytning af alle et programs vinduer i stedet for det sidst "
+"fokuserede."
+
+#. 3.2->settings-schema.json->sort-thumbnails->description
+#. 3.0->settings-schema.json->sort-thumbnails->description
+msgid "Sort windows for each app by last focused"
+msgstr "Sortér hvert programs vinduer efter sidst fokuseret"
+
+#. 3.2->settings-schema.json->sort-thumbnails->tooltip
+#. 3.0->settings-schema.json->sort-thumbnails->tooltip
+msgid ""
+"Controls whether the order windows appear for an app is by last focused, or "
+"the order they were opened."
+msgstr ""
+"Kontrollerer om rækkefølgen, et programs vinduer vises i, er efter sidst "
+"fokuseret eller rækkefølgen, de blev åbnet i."
+
+#. 3.0->settings-schema.json->useSystemTooltips->description
+msgid "Use system tooltips for closed apps"
+msgstr "Anvend systemværktøjstip for lukkede programmer"
+
+#. 3.0->settings-schema.json->useSystemTooltips->tooltip
+msgid ""
+"Controls whether or not system tooltips are in use when hovering over closed "
+"pinned apps."
+msgstr ""
+"Kontrollerer om systemværktøjstip anvendes, når markøren føres hen over "
+"lukkede, fastgjorte programmer."
+
+#. 3.0->settings-schema.json->WindowList->description
+msgid "Window List Settings"
+msgstr "Indstillinger for vinduesliste"
+
+#. 3.0->settings-schema.json->AppMenu->description
+msgid "Context Menu Settings"
+msgstr "Indstillinger for genvejsmenu"
+
+#. 3.0->settings-schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr "Indstillinger for miniaturer"
+
+#. 3.0->settings-schema.json->ThemeSettings->description
+msgid "Theme Settings"
+msgstr "Indstillinger for tema"
+
+#. 3.0->settings-schema.json->panelLauncherClass->description
+msgid "Use the panel launcher class for pinned apps"
+msgstr "Anvend panelprogramstarterklassen for fastgjorte programmer"
+
+#. 3.0->settings-schema.json->panelLauncherClass->tooltip
+msgid "Enabling this helps with certain themes."
+msgstr "Aktivering af denne kan hjælpe med visse temaer."
+
+#. 3.0->settings-schema.json->ITM->description
+msgid "ITM Settings"
+msgstr "Indstillinger for Icing"
+
+#. 3.0->settings-schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr "Indstillinger for markørsvævning"
+
+#. 3.0->settings-schema.json->themePadding->description
+msgid "Use theme padding to center button icons"
+msgstr "Anvend temaudfyldning til at centrere knapikoner"
+
+#. 3.0->settings-schema.json->themePadding->tooltip
+msgid "If button icons look off-centered, toggling this may help."
+msgstr "Hvis knapikoner ser ucentrerede ud, kan det hjælpe at slå denne til."
+
+#. 3.0->settings-schema.json->arrange-pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr "Arrangér fastgjorte programmer"
+
+#. 3.0->settings-schema.json->arrange-pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order."
+msgstr "Arrangér fastgjorte programmer i en anden rækkefølge."
+
+#. IcingTaskManager@json->metadata.json->name
+msgid "Icing Task Manager"
+msgstr "Icing programhåndtering"
+
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
+msgstr "Vinduesliste med miniaturer og gruppering af programmer"
+
+#~ msgid "number"
+#~ msgstr "antal"
+
+#~ msgid "Move to right workspace"
+#~ msgstr "Flyt til arbejdsområde til højre"
+
+#~ msgid "Settings"
+#~ msgstr "Indstillinger"
+
+#~ msgid "ReArrange"
+#~ msgstr "Omarrangér"
+
+#~ msgid "Show Pinned"
+#~ msgstr "Vis fastgjorte"
+
+#~ msgid "Show Thumbs"
+#~ msgstr "Vis miniaturer"
+
+#~ msgid "Stack Thumbs"
+#~ msgstr "Stabl miniaturer"
+
+#~ msgid "Show Recent"
+#~ msgstr "Vis seneste"
+
+#~ msgid "Vertical Thumbs"
+#~ msgstr "Lodrette miniaturer"
+
+#~ msgid "     Go to Settings"
+#~ msgstr "     Gå til indstillinger"
+
+#~ msgid "Group apps into single icon"
+#~ msgstr "Saml programmer i et enkelt ikon"
+
+#~ msgid "Group the open app instances into single icon"
+#~ msgstr "Saml forekomster af åbne programmer i et enkelt ikon"
+
+#~ msgid "Update this applet automatically"
+#~ msgstr "Opdatér automatisk dette panelprogram"
+
+#~ msgid ""
+#~ "When enabled, ITM will check the Github releases on init, and will start "
+#~ "to upgrade if it finds a newer version."
+#~ msgstr ""
+#~ "Når aktiveret vil Icing tjekke Github-udgivelser ved init og vil begynde "
+#~ "at opgradere, hvis den finder en nyere version."
+
+#~ msgid "Remove 'Icing Task Manager'"
+#~ msgstr "Fjern \"Icing programhåndtering\""

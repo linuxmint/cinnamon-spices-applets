@@ -1,0 +1,50 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 11:15+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:45
+msgid "Dependence missing"
+msgstr ""
+
+#: applet.js:45
+msgid "Please install the GTop package\n"
+msgstr ""
+
+#: applet.js:49
+msgid "to use the applet %s"
+msgstr ""
+
+#: applet.js:72
+msgid "Open System Monitor"
+msgstr ""
+
+#: applet.js:283
+msgid "CPU"
+msgstr ""
+
+#: applet.js:306
+msgid "MEM"
+msgstr ""
+
+#. hwmonitor@sylfurd->metadata.json->description
+msgid "Displaying realtime CPU and memory load"
+msgstr ""
+
+#. hwmonitor@sylfurd->metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr ""

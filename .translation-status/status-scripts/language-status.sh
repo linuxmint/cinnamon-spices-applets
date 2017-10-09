@@ -1,5 +1,102 @@
 #!/bin/bash
 
+# TABLE HEADER
+function create_table_header {
+_Spices=$1
+_languageNAME=$2
+_languageID=$3
+_numberOfTranslatableSpices=$4
+_file=$5
+cat > $_file << EOL
+<h1>Translatable templates</h1>
+<p>
+  <a href="../README.md">$_Spices</a> &#187; <b>$_languageNAME ($_languageID)</b>
+  </br><b><sub>1 &#8594; $_numberOfTranslatableSpices templates</sub></b>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a href="#" id="uuid">UUID</a>
+      </th>
+      <th>
+        <a href="#" id="length">Length</a>
+      </th>
+      <th>
+        <a href="#" id="status">Status</a>
+      </th>
+      <th>
+        <a href="#" id="untranslated">Untranslated</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+EOL
+}
+
+# TABLE ENTRY
+function create_table_entry {
+_spicesStatusREADME=$1
+_spicesUUID=$2
+_translatableLength=$3
+_printLength=$4
+_progress=$5
+_untranslated=$6
+_printUntranslated=$7
+_file=$8
+cat >> $_file << EOL
+    <tr>
+      <td class="uuid" data-value="$_spicesUUID">
+        <a href="$_spicesStatusREADME">$_spicesUUID</a>
+      </td>
+      <td class="length" data-value="$_translatableLength">
+        $_printLength
+      </td>
+      <td class="status" data-value="$_progress">
+        <img src="http://progressed.io/bar/$_progress" alt="$_progress%" />
+      </td>
+      <td class="untranslated" data-value="$_untranslated">
+        $_printUntranslated
+      </td>
+    </tr>
+EOL
+}
+
+# TABLE OVERALL
+function create_overall_entry {
+_lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
+_overall=$1
+_translatableSum=$2
+_progress=$3
+_untranslatedSum=$4
+_file=$5
+cat >> $_file << EOL
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="uuid" data-overall="$_overall">
+        <b>$_overall</b>
+      </td>
+      <td class="length" data-overall="$_translatableSum">
+        <b>$_translatableSum</b>
+      </td>
+      <td class="status" data-overall="$_progress">
+        <img src="http://progressed.io/bar/$_progress" alt="$_progress%" />
+      </td>
+      <td class="untranslated" data-overall="$_untranslatedSum">
+        <b>$_untranslatedSum</b>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<p><sup>This translation status table was last updated on $_lastUpdateDate.</sup></p>
+EOL
+}
+
+#################### main (script starts here) ####################
+
 cd ..
 
 # Which spices? Get spices name
@@ -41,20 +138,17 @@ do
     languageNAME=$(echo $languageIDName | cut -f2 -d ':')
 
     echo "...$languageNAME ($languageID)"
-    # create HEADER in markdown table for each language
-    echo "# Translatable templates" > $languageStatusDir/$languageID.md
-    echo "[$Spices](../README.md) &#187; **$languageNAME ($languageID)**" >> $languageStatusDir/$languageID.md
-    echo "<br><sub>**1 &#8594; $numberOfTranslatableSpices templates**</sub>" >> $languageStatusDir/$languageID.md
-    echo "" >> $languageStatusDir/$languageID.md
-    echo "$Spices UUID | Length | Status | Untranslated" >> $languageStatusDir/$languageID.md
-    echo "------------|:------:|:------:|:-----------:" >> $languageStatusDir/$languageID.md
+
+    # create table HEADER for each language
+    create_table_header "$Spices" "$languageNAME" "$languageID" "$numberOfTranslatableSpices" $languageStatusDir/$languageID.md
 
     untranslatedSum=0
     translatableSum=0
     while read spicesUUID
     do
         # look in spicesStatusREADME file for number of untranslated Strings
-        untranslated=$(grep "$languageID.po" $spicesStatusDir/$spicesUUID/$spicesStatusREADME | cut -f4 -d '|' | cut -f2 -d '[' | cut -f1 -d ']')
+        untranslated=$(grep -A5 "$languageID.po" $spicesStatusDir/$spicesUUID/$spicesStatusREADME | grep -o "\"untranslated\" data-value.*" | cut -d "\"" -f 4)
+
         # count number of translatable Strings
         translatableLength=$(grep "^msgid " $spicesStatusDir/$spicesUUID/po/*.pot | wc -l)
         translatableLength=$[$translatableLength-1]
@@ -75,7 +169,7 @@ do
         # link length to po file if exists
         poFile=$spicesStatusDir/$spicesUUID/po/$languageID.po
         if [ -f $poFile ]; then
-            printLength="[$translatableLength](../$poFile)"
+            printLength="<a href=\"../$poFile\">$translatableLength</a>"
         else
             printLength="$translatableLength"
         fi
@@ -83,32 +177,23 @@ do
         # link untranslated to untranslated-po file if exists
         poUntranslatedFile=$spicesStatusDir/$spicesUUID/untranslated-po/$languageID.md
         if [ -f $poUntranslatedFile ]; then
-            printUntranslated="[$untranslated](../$poUntranslatedFile)"
+            printUntranslated="<a href=\"../$poUntranslatedFile\">$untranslated</a>"
         else
             printUntranslated="$untranslated"
         fi
 
         # write calculated infos in markdown table
-        echo "[$spicesUUID](../$spicesStatusDir/$spicesUUID/$spicesStatusREADME) | $printLength | ![$percentageTranslated%](http://progressed.io/bar/$percentageTranslated) | $printUntranslated" >> $languageStatusDir/$languageID.md
+        create_table_entry "../$spicesStatusDir/$spicesUUID/$spicesStatusREADME" "$spicesUUID" "$translatableLength" "$printLength" "$percentageTranslated" "$untranslated" "$printUntranslated" $languageStatusDir/$languageID.md
     done < $TMPuuidOfTranslatableSpices
 
     # calculate percentage translated
     percentageTranslatedSum=`echo "scale=2; ($translatableSum - $untranslatedSum) * 100 / $translatableSum" | bc`
     percentageTranslatedSum=$(python -c "zahl=round($percentageTranslatedSum); print zahl" | cut -f1 -d '.')
 
-    # Overall Statistics at the end of markdown table
-    echo "**Overall statistics:** | **$translatableSum** | ![$percentageTranslatedSum%](http://progressed.io/bar/$percentageTranslatedSum) | **$untranslatedSum**" >> $languageStatusDir/$languageID.md
-
-    # 'Last updated' date at the bottom of the table
-    lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
-    echo "" >> $languageStatusDir/$languageID.md
-    echo "<sup>This translation status table was last updated on $lastUpdateDate.</sup>" >> $languageStatusDir/$languageID.md
+    # Overall Statistics and closing table
+    create_overall_entry "Overall statistics:" "$translatableSum" "$percentageTranslatedSum" "$untranslatedSum" $languageStatusDir/$languageID.md
 
 done < $knownLanguageIDs
 
 
 rm $TMPuuidOfTranslatableSpices
-
-#echo ""
-#echo "THE END: Please press any button!"
-#read waiting

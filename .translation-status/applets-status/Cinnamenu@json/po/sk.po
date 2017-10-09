@@ -1,0 +1,315 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-22 11:02+0100\n"
+"PO-Revision-Date: 2017-03-22 11:11+0100\n"
+"Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
+"Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: buttons.js:269
+msgid "Please provide your password to uninstall this application"
+msgstr ""
+
+#: buttons.js:609
+msgid "Add to panel"
+msgstr ""
+
+#: buttons.js:612
+msgid "Add to desktop"
+msgstr ""
+
+#: buttons.js:616
+msgid "Remove from favorites"
+msgstr ""
+
+#: buttons.js:620
+msgid "Add to favorites"
+msgstr ""
+
+#: buttons.js:623
+msgid "Uninstall"
+msgstr ""
+
+#: buttons.js:626
+msgid "Run with NVIDIA GPU"
+msgstr ""
+
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Balík gir1.2-gda-5.0 je potrebný pre záložky Firefox a Midori."
+
+#: panel.js:1578
+msgid "Grid View"
+msgstr "Zobrazenie mriežky"
+
+#: panel.js:1579
+msgid "Switch to grid view"
+msgstr ""
+
+#: panel.js:1581
+msgid "List View"
+msgstr "Zobrazenie zoznamu"
+
+#: panel.js:1582
+msgid "Switch to list view"
+msgstr ""
+
+#: panel.js:1638
+msgid "Type to search..."
+msgstr "Hľadanie začnete písaním…"
+
+#: panel.js:1675
+msgid "All Applications"
+msgstr "Všetky aplikácie"
+
+#: panel.js:1680
+msgid "Favorite Apps"
+msgstr "Obľúbené aplikácie"
+
+#: panel.js:1747
+msgid "Places"
+msgstr "Miesta"
+
+#: panel.js:1752
+msgid "Recent Files"
+msgstr "Nedávne"
+
+#: panel.js:1757
+msgid "Bookmarks"
+msgstr ""
+
+#: panel.js:1768
+msgid "Lock Screen"
+msgstr "Uzamknúť obrazovku"
+
+#: panel.js:1769
+msgid "Lock the screen"
+msgstr ""
+
+#: panel.js:1799
+msgid "Logout"
+msgstr ""
+
+#: panel.js:1800
+msgid "Leave the session"
+msgstr ""
+
+#: panel.js:1822
+msgid "Quit"
+msgstr ""
+
+#: panel.js:1823
+msgid "Shutdown the computer"
+msgstr ""
+
+#: placeDisplay.js:58
+#, c-format
+msgid "Failed to launch '%s'"
+msgstr ""
+
+#: placeDisplay.js:147
+msgid "Home"
+msgstr "Domov"
+
+#: placeDisplay.js:221
+msgid "Computer"
+msgstr "Počítač"
+
+#: placeDisplay.js:225
+msgid "Browse network"
+msgstr "Prehliadať sieť"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenu->description
+msgid "Cinnamenu Settings"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->tooltip
+msgid "Applications grid label width"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-label-width->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+msgid "pixels"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header0->description
+msgid "Menu Entries"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header1->description
+msgid "Appearance"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+msgid "Enable web bookmarks"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Mriežka"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Zoznam"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->header2->description
+msgid "Behavior"
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->description
+msgid "A flexible menu providing formatting options and bookmarks."
+msgstr ""
+
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr ""
+
+msgid "Show bookmarks and places"
+msgstr ""
+
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr ""
+
+msgid "Show application icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on applications."
+msgstr ""
+
+msgid "Show category icons"
+msgstr ""
+
+msgid "Choose whether or not to show icons on categories."
+msgstr ""
+
+msgid "Enable filesystem path entry in search box"
+msgstr ""
+
+msgid "Allows path entry in the menu search box."
+msgstr ""
+
+msgid "Show application's description under their titles"
+msgstr ""
+
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+
+msgid "Clear List"
+msgstr ""
+
+msgid "No recent documents"
+msgstr ""

@@ -1,0 +1,143 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-25 19:47+0100\n"
+"PO-Revision-Date: 2017-01-25 19:47+0100\n"
+"Last-Translator: Lars Mueller <cobinja@gmail.com>\n"
+"Language-Team: \n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "Lista aplikacji z grupowaniem i podglądem okien"
+
+msgid "Remove this applet"
+msgstr "Usuń ten aplet"
+
+msgid "Open new window"
+msgstr "Otwórz nowe okno"
+
+msgid "Captions"
+msgstr "Etykiety"
+
+msgid "Caption type"
+msgstr "Typ etykiety"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Title"
+msgstr "Tytuł"
+
+msgid "Display Caption For"
+msgstr "Wyświetlanie etykiety"
+
+msgid "None"
+msgstr "Brak"
+
+msgid "All"
+msgstr "Wszystkie"
+
+msgid "Running"
+msgstr "Uruchomione"
+
+msgid "Focused"
+msgstr "Aktywne"
+
+msgid "Label width"
+msgstr "Szerokość etykiety"
+
+msgid "Animate label"
+msgstr "Animacja etykiety"
+
+msgid "Label animation time"
+msgstr "Czas trwania animacji etykiety"
+
+msgid "Display Number"
+msgstr "Wyświetl ilość"
+
+msgid "Smart"
+msgstr "Inteligentnie"
+
+msgid "Group Windows"
+msgstr "Grupuj okna"
+
+msgid "Display Favorites"
+msgstr "Wyświetl ulubione"
+
+msgid "Animation Time"
+msgstr "Czas animacji"
+
+msgid "Previews"
+msgstr "Podglądy"
+
+msgid "Show on Hover"
+msgstr "Pokazuj dymki z podglądem"
+
+msgid "Timeout Show"
+msgstr "Opóźnienie podglądu"
+
+msgid "Timeout Hide"
+msgstr "Opóźnienie ukrycia podglądu"
+
+msgid "Pin to this workspace"
+msgstr ""
+
+msgid "Pin to other workspaces"
+msgstr ""
+
+msgid "Unmaximize"
+msgstr "Cofnij maksymalizację"
+
+msgid "Close window on mouse-wheel click"
+msgstr "Zamykanie okna środkowym przyciskiem myszy"
+
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+
+msgid "The flashing time when a new window is opened via a button"
+msgstr ""
+
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+msgid "Only show windows on the current monitor"
+msgstr ""
+
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+
+msgid "Move to another monitor"
+msgstr ""
+
+msgid "Always"
+msgstr ""
+
+msgid "2 or more windows"
+msgstr ""
+
+#~ msgid "Pin app to window list"
+#~ msgstr "Dodaj do ulubionych"
+
+#~ msgid "Unpin app from window list"
+#~ msgstr "Usuń z ulubionych"

@@ -1,0 +1,563 @@
+# Hungarian translations for Neroth-gnome-shell-extension-weather package.
+# Copyright (C) 2013 THE Neroth-gnome-shell-extension-weather'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Neroth-gnome-shell-extension-weather package.
+# Bojtos PÃ©ter <ptr@ulx.hu>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2013-01-18 15:07+0100\n"
+"Last-Translator: Bojtos Péter <ptr@ulx.hu>\n"
+"Language-Team: Hungarian\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "Megnyitás"
+
+#: applet.js:289
+#, fuzzy
+msgid "Settings"
+msgstr "Meteorológiai beállítások"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "Napfelkelte"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "Napnyugta"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Aktuális időjárás betöltése"
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Időjárás előrejelzés betöltése ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Betöltés ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+#, fuzzy
+msgid "Temperature:"
+msgstr "Hőmérsékleti egység"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Páratartalom:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Légnyomás:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Szél:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Szélérzet:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Tornádó"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Trópusi vihar"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Hurrikán"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Erős zivatar"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Zivatar"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Havas eső"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Ónos eső"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Ónos eső és dara"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Fagyos, szitáló eső"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Szitáló eső"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Fagyos eső"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Zápor"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Hózápor"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Enyhe, havas zápor"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Hófúvás"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Havazás"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Zápor"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Ónos eső"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Por"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Ködös"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Pára"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Párás"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Enyhén szeles"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Szeles"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "Fagy"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Felhős"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Jobbára felhős"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Részben felhős"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Tiszta"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Napos"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Derült"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Eső és jégeső"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Forró"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Helyi viharok"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Szórványos viharok"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Szórványos zápor"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Erős hóesés"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Szórványos hózápor"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Felhőszakadás"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "Hózápor"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Helyi felhőszakadás"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Nem elérhető"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Hétfő"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Kedd"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Szerda"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Csütörtök"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Péntek"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Szombat"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Vasárnap"
+
+#: applet.js:1056
+msgid "N"
+msgstr "É"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "ÉK"
+
+#: applet.js:1056
+msgid "E"
+msgstr "K"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "DK"
+
+#: applet.js:1056
+msgid "S"
+msgstr "D"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "DNY"
+
+#: applet.js:1056
+msgid "W"
+msgstr "NY"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "ÉNY"
+
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr ""
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "WOEID beszerzése"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+#, fuzzy
+msgid "Display current temperature in panel"
+msgstr "Hőmérséklet kijelzése panelen"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+#, fuzzy
+msgid "WOEID"
+msgstr "WOEID beszerzése"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr "Helyazonosító (WOEID)"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#, fuzzy
+msgid "Temperature unit"
+msgstr "Hőmérséklet egysége"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "Fahrenheit"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "Celsius"
+
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+#, fuzzy
+msgid "Translate condition"
+msgstr "Fordítási feltételek"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Hely megjelenített neve"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Idő 24 órás formátumban"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Napfelkelte/-nyugta kijelzése"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+#, fuzzy
+msgid "Wind speed unit"
+msgstr "Szélerősség egység"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "csomó"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Időjárási körülmények (pl.: 'Szeles', 'Tiszta') kijelzése panelen"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Légköri nyomás egysége"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "perc"
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+#, fuzzy
+msgid "Symbolic icons"
+msgstr "Jelképes ikonok"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "5 napos előrejelzés kijelzése"
+
+#~ msgid "Please wait"
+#~ msgstr "Kérem várjon"
+
+#~ msgid "Today"
+#~ msgstr "Ma"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Holnap"
+
+#~ msgid "Schema \"%s\" not found."
+#~ msgstr "\"%s\" minta nem található."
+
+#~ msgid "Locations"
+#~ msgstr "Helyek"
+
+#~ msgid "Reload Weather Information"
+#~ msgstr "Meteorológiai információ újratöltése"
+
+#~ msgid "Invalid city"
+#~ msgstr "Érvénytelen város"
+
+#~ msgid "Calm"
+#~ msgstr "Szélcsend"
+
+#~ msgid "Light air"
+#~ msgstr "Tiszta levegő"
+
+#~ msgid "Light breeze"
+#~ msgstr "Könnyű szellő"
+
+#~ msgid "Gentle breeze"
+#~ msgstr "Gyenge fuvallat"
+
+#~ msgid "Moderate breeze"
+#~ msgstr "Mérsékelt szellő"
+
+#~ msgid "Fresh breeze"
+#~ msgstr "Frissítő szellő"
+
+#~ msgid "Strong breeze"
+#~ msgstr "Erős szél"
+
+#~ msgid "Moderate gale"
+#~ msgstr "Mérsékelt, viharos szél"
+
+#~ msgid "Fresh gale"
+#~ msgstr "Frissítő, viharos szél"
+
+#~ msgid "Strong gale"
+#~ msgstr "Erős viharos szél"
+
+#~ msgid "Storm"
+#~ msgstr "Vihar"
+
+#~ msgid "Violent storm"
+#~ msgstr "Heves vihar"
+
+#~ msgid "Yesterday"
+#~ msgstr "Tegnap"
+
+#~ msgid "%s days ago"
+#~ msgstr "%s nappal ezelőtt"
+
+#~ msgid "In %s days"
+#~ msgstr "%s napban"
+
+#, fuzzy
+#~ msgid "Feels like:"
+#~ msgstr "Hőérzet:"
+
+#~ msgid "Pressure Unit"
+#~ msgstr "Nyomás egysége"
+
+#~ msgid "Position in Panel"
+#~ msgstr "Helyzete a panelen"
+
+#~ msgid "Center"
+#~ msgstr "Középen"
+
+#~ msgid "Right"
+#~ msgstr "Jobb"
+
+#~ msgid "Left"
+#~ msgstr "Bal"
+
+#~ msgid "Wind Direction by Arrows"
+#~ msgstr "Szélirány nyilakkal"
+
+#~ msgid "Conditions in Panel"
+#~ msgstr "Körülmények a panelen"
+
+#~ msgid "Name of the city"
+#~ msgstr "Város neve"
+
+#~ msgid "Remove %s ?"
+#~ msgstr "%s eltávolítása?"

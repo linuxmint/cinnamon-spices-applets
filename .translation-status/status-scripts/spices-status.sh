@@ -1,5 +1,86 @@
 #!/bin/bash
 
+# TABLE HEADER
+function create_table_header {
+_Spices=$1
+_spicesUUID=$2
+_README=$3
+cat > $_README << EOL
+<h1>Translation status</h1>
+<p><a href="../../README.md">$_Spices</a> &#187; <b>$_spicesUUID</b></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>
+        <a href="#" id="language">Language</a>
+      </th>
+      <th>
+        <a href="#" id="idpo">ID.po</a>
+      </th>
+      <th>
+        <a href="#" id="status">Status</a>
+      </th>
+      <th>
+        <a href="#" id="untranslated">Untranslated</a>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+EOL
+}
+
+# TABLE ENTRY
+function create_table_entry {
+_languageNAME=$1
+_languageID=$2
+_progress=$3
+_untranslatedNumber=$4
+_README=$5
+cat >> $_README << EOL
+    <tr>
+      <td class="language" data-value="$_languageNAME">
+        <a href="../../language-status/$_languageID.md">$_languageNAME</a>
+      </td>
+      <td class="idpo" data-value="$_languageID">
+        <a href="po/$_languageID.po">$_languageID.po</a>
+      </td>
+      <td class="status" data-value="$_progress">
+        <img src="http://progressed.io/bar/$_progress" alt="$_progress%" />
+      </td>
+EOL
+if [ $_untranslatedNumber == "0" ]; then
+cat >> $_README << EOL
+      <td class="untranslated" data-value="0">
+        0
+      </td>
+    </tr>
+EOL
+else
+cat >> $_README << EOL
+      <td class="untranslated" data-value="$_untranslatedNumber">
+        <a href="untranslated-po/$_languageID.md">$_untranslatedNumber</a>
+      </td>
+    </tr>
+EOL
+fi
+}
+
+# TABLE CLOSE
+function close_table {
+_lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
+_README=$1
+cat >> $_README << EOL
+  </tbody>
+</table>
+
+<p><sup>This translation status table was last updated on $_lastUpdateDate.</sup></p>
+EOL
+}
+
+
+#################### main (script starts here) ####################
+
 cd ..
 
 # Which spices? Get spices name
@@ -46,10 +127,6 @@ do
 done < $spicesStatusDir/$TMPpoDirectories 3<$spicesStatusDir/$TMPuuidOfTranslatableSpices
 
 
-
-##### variable to store UNKOWN language IDs
-#unknownLanguageIDs=""
-
 # create README file with translation status table for every spices
 cd $spicesStatusDir
 
@@ -68,12 +145,7 @@ do
     mkdir -p $unfuzzyPO
 
     # create HEADER in README file: title and markdown table
-    echo "# Translation status" > $README
-    echo "[$Spices](../../README.md) &#187; **$spicesUUID**" >> $README
-    echo "" >> $README
-    echo "Language | ID.po | Status | Untranslated" >> $README
-    echo "---------|:--:|:------:|:-----------:" >> $README
-    numberOfLinesInHEADER=$(wc -l README.md | cut -f1 -d " ")
+    create_table_header "$Spices" "$spicesUUID" $README
 
     echo "Updating $spicesUUID.........."
 
@@ -84,20 +156,16 @@ do
         msgmerge --silent --no-fuzzy-matching --update --backup=off po/$languagePoFile po/*.pot
 
         # remove fuzzy Strings (i.e. count fuzzy translated strings as untranslated) (NOTE: fails in LM <= 17.3)
-        #!msgattrib --clear-fuzzy --empty po/$languagePoFile -o $unfuzzyPO/$languagePoFile
+        msgattrib --clear-fuzzy --empty po/$languagePoFile -o $unfuzzyPO/$languagePoFile
 
         # extract untranslated Strings
-        if [ "$(ls -A $unfuzzyPO)" ]; then # check if last command failed, i.e. if $unfuzzyPO is empty
-            msgattrib --untranslated $unfuzzyPO/$languagePoFile -o $untranslatedPO/$languagePoFile
-        else # this is a backup if this script is used with LM <= 17.3 (fuzzy strings count as translated)
-            msgattrib --untranslated po/$languagePoFile -o $untranslatedPO/$languagePoFile
-        fi
+        msgattrib --untranslated $unfuzzyPO/$languagePoFile -o $untranslatedPO/$languagePoFile
 
         # get language name from ID
         languageID=$(echo $languagePoFile | cut -f1 -d '.')
         languageNAME=$(grep "$languageID:" ../../$knownLanguageIDs | cut -f2 -d ':')
 
-        ##### Check for UNKOWN language IDs
+        ##### Check for UNKNOWN language IDs
         if [ "$languageNAME" == "" ]
         then
             languageNAME="UNKNOWN"
@@ -106,7 +174,7 @@ do
 
         # if no untranslated String exist
         if [ ! -f $untranslatedPO/$languagePoFile ]; then
-            echo "[$languageNAME](../../language-status/$languageID.md) | [$languageID.po](po/$languageID.po) | ![100%](http://progressed.io/bar/100) | 0" >> $README
+            create_table_entry "$languageNAME" "$languageID" "100" "0" $README
         else
             # count untranslated Strings
             untranslatedNumber=$(grep "^msgid " $untranslatedPO/$languagePoFile | wc -l)
@@ -118,20 +186,11 @@ do
             percentage=`echo "scale=2; ($translatedNumber - $untranslatedNumber) * 100 / $translatedNumber" | bc`
             percentage=$(python -c "zahl=round($percentage); print zahl" | cut -f1 -d '.')
             # fill table with calculated infos
-            echo "[$languageNAME](../../language-status/$languageID.md) | [$languageID.po](po/$languageID.po) | ![$percentage%](http://progressed.io/bar/$percentage) | [$untranslatedNumber]($untranslatedPO/$languageID.md)" >> $README
+            create_table_entry "$languageNAME" "$languageID" "$percentage" "$untranslatedNumber" $README
         fi
     done < $TMPpoFiles
 
-
-    # sort README but not the HEADER of the README
-    numberOfLinesInHEADERplus1=$[$numberOfLinesInHEADER+1]
-    (head -n $numberOfLinesInHEADER $README && tail -n +$numberOfLinesInHEADERplus1 $README | sort) > $READMEtmp
-    mv $READMEtmp $README
-
-    # add 'last edited' date
-    lastUpdateDate=$(date -u +"%Y-%m-%d, %H:%M UTC")
-    echo "" >> $README
-    echo "<sup>This translation status table was last updated on $lastUpdateDate.</sup>" >> $README
+    close_table $README
 
     # remove tmp files and directories
     rm -r $unfuzzyPO
@@ -153,7 +212,3 @@ fi
 
 # remove tmp files
 rm *.tmp
-
-#echo ""
-#echo "THE END: Please press any button!"
-#read waiting

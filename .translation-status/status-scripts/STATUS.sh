@@ -6,9 +6,15 @@ parentDirName=$(basename -- "$(dirname -- "$(pwd)")")
 spices=$(echo "$parentDirName" | cut -f3 -d '-')
 cd status-scripts
 
-rm -r ../$spices-status
-rm -r ../language-status
-rm ../README.md
+if [ -d ../$spices-status ]; then
+    rm -r ../$spices-status
+fi
+if [ -d ../language-status ]; then
+    rm -r ../language-status
+fi
+if [ -f ../README.md ]; then
+    rm ../README.md
+fi
 
 # first execute applet-status script
 ./spices-status.sh

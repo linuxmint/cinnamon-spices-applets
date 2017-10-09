@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 15:32+0800\n"
+"PO-Revision-Date: 2017-07-06 19:57+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:61
+msgid "Has never run succesfully!"
+msgstr "Er aldrig gennemført!"
+
+#: applet.js:77
+msgid "Last successful back-up completed on"
+msgstr "Sidste sikkerhedskopi taget den"
+
+#: applet.js:100
+msgid "Has never run successfully!"
+msgstr "Er aldrig gennemført!"
+
+#. back-up_state@natsakis.com->metadata.json->description
+msgid ""
+"Probes for the state of a certain rsync back-up by checking the exit status "
+"of the log file"
+msgstr ""
+"Undersøger tilstanden af en rsync-sikkerhedskopi ved at tjekke logfilens "
+"exitstatus"
+
+#. back-up_state@natsakis.com->metadata.json->name
+msgid "Back-up State"
+msgstr "Tilstand for sikkerhedskopi"
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->description
+msgid "String to be searched for "
+msgstr "Streng der skal søges efter "
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->tooltip
+msgid ""
+"Set the string that will be searched for in your log file, to determine the "
+"last good back-up"
+msgstr ""
+"Angiv strengen der skal søges efter i din logfil for at bestemme seneste "
+"sikkerhedskopiering"
+
+#. back-up_state@natsakis.com->settings-schema.json->log_file->description
+msgid "Log file "
+msgstr "Logfil "
+
+#. back-up_state@natsakis.com->settings-schema.json->refresh_int->description
+msgid "Refresh interval (min):  "
+msgstr "Opdateringsinterval (min):  "
+
+#. back-up_state@natsakis.com->settings-schema.json->error_days->description
+msgid "Error after days:  "
+msgstr "Fejl efter dage:  "
+
+#. back-up_state@natsakis.com->settings-schema.json->warning_days->description
+msgid "Warning after days:  "
+msgstr "Advarsel efter dage:  "

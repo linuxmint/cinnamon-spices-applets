@@ -1,0 +1,157 @@
+# Main translation file for text-to-speech-applet@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: text-to-speech-applet@cardsurf\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:44+0800\n"
+"PO-Revision-Date: 2017-05-02 15:06+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:405
+msgid "Error parsing command parameters"
+msgstr "Greška obrade parametara naredbe"
+
+#: applet.js:406
+msgid "Try to use less parameters to determine which one is causing the error"
+msgstr ""
+"Pokušajte koristiti manje parametara kako bi otkrili koji uzrokuje grešku"
+
+#. text-to-speech-applet@cardsurf->metadata.json->name
+msgid "Text to speech applet"
+msgstr "Tekst u govor"
+
+#. text-to-speech-applet@cardsurf->metadata.json->description
+msgid "A text reading applet"
+msgstr "Aplet čitanja teksta"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->configuration->description
+msgid "Configuration"
+msgstr "Podešavanje"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->description
+msgid "Clipboard"
+msgstr "Međuspremnika"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->tooltip
+msgid ""
+"The clipboard that contains the text to read. \n"
+"The primary selection stores highlighted text. \n"
+"The clipboard selection stores text copied with Ctrl+C."
+msgstr ""
+"Međuspremnik koji sadrži tekst za čitanje. \n"
+"Glavni odabir sprema naglašeni tekst. \n"
+"Odabir međuspremnika sprema tekst kopiran sa Ctrl+C."
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Primary selection"
+msgstr "Glavni odabir"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Clipboard selection"
+msgstr "Odabir međuspremnika"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->description
+msgid "Voice command"
+msgstr "Glasovna naredba"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->tooltip
+msgid "A command used to read the text"
+msgstr "Naredba korištena za čitanje teksta"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->reading_start->description
+msgid "Reading"
+msgstr "Čitanje"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->description
+msgid "Read lines and stop"
+msgstr "Čitaj redke i zaustavi se"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->tooltip
+msgid ""
+"If checked reading is stopped after the specified number of lines. Reading "
+"is resumed from the line it was stopped."
+msgstr ""
+"Ako je odabrano, čitanje se zaustavi nakon određenog broja redaka. Čitanje "
+"se nastavi od redka na kojemu je stalo."
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->description
+msgid "Read"
+msgstr "Čitaj"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->tooltip
+msgid "The number of lines to read"
+msgstr "Broj redaka za čitanje"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->units
+msgid "lines and stop"
+msgstr "redke i zaustavi"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->description
+msgid "Line separator"
+msgstr "Razdjelnik redaka"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->tooltip
+msgid "A regular expression separating lines of text"
+msgstr "Uobičajeni izraz za razdvajanje redaka teksta"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_start->description
+msgid "Gui"
+msgstr "Grafičko sučelje"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->description
+msgid "Idle icon"
+msgstr "Ikona mirovanja"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->tooltip
+msgid "An icon displayed when idle"
+msgstr "Ikona prikazana pri mirovanju"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->description
+msgid "Pause icon"
+msgstr "Ikona pauze"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->tooltip
+msgid "An icon displayed when paused"
+msgstr "Ikona prikazana pri pauzi"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->description
+msgid "Reading icon"
+msgstr "Ikona čitanja"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->tooltip
+msgid "An icon displayed when reading"
+msgstr "Ikona prikazana pri čitanju"
