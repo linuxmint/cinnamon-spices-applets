@@ -110,7 +110,7 @@ msgstr ""
 msgid "The waiting time for the popup menu to hide, when leaving a button\n(Not used when moving directly to a different button in the list)"
 msgstr ""
 
-msgid "Only show windows on the current monitor"
+msgid "Only show windows on the same monitor"
 msgstr ""
 
 msgid "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
