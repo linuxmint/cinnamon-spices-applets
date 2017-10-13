@@ -51,20 +51,6 @@ def terminal_progressbar_update(count, total):
         sys.stdout.write('[%s] %s%s\n' % (terminal_bar, percents, '%'))
         sys.stdout.flush()
 
-def get_table_title(title, subtitle="", subsubtitle=""):
-    """ Creates HTML table title. """
-    table_title = '<h1>' + title + '</h1>\n'
-    table_title += '<p>\n'
-    if subtitle == "":
-        table_title += '  <b>' + SPICES_TYPE + '</b>\n'
-    else:
-        table_title += ('  <a href="README.md">' + SPICES_TYPE
-                        + '</a> &#187; <b>' + subtitle + '</b>\n')
-    if subsubtitle != "":
-        table_title += '</br><b><sub>' + subsubtitle + '</sub></b>\n'
-    table_title += '</p>\n\n'
-    return table_title
-
 def get_table_head(class2name):
     """ Opens HTML table tag, adds table head and opens table body tag. """
     table_head = '<table>\n'
@@ -145,7 +131,7 @@ def populate_translation_matrix():
     prog_total = len([uuid for uuid in os.listdir(REPO_FOLDER)])
     prog_iter = 0
 
-        #% for UUID
+    #% for UUID
     for uuid in os.listdir(REPO_FOLDER):
         #% show progressbar in terminal
         prog_iter += 1
@@ -224,8 +210,6 @@ def create_uuid_tables():
     #% TABLE: UUID.md
     for uuid in TRANSLATION_LANG_MATRIX["length"]:
         with open(os.path.join(TABLES_DIR, uuid + '.md'), "w") as uuid_table_file:
-            #% TABLE TITLE
-            uuid_table_file.write(get_table_title("Translation status", uuid))
             #% TABLE HEAD
             thead_class2name = collections.OrderedDict()
             thead_class2name["language"] = "Language"
@@ -275,8 +259,6 @@ def create_readme_locale_tables():
     """ CREATE README.md AND LOCALE.md TRANSLATION TABLES """
     #% README TABLE: README.md
     with open(os.path.join(TABLES_DIR, 'README.md'), "w") as language_table_file:
-        #% README TABLE TITLE
-        language_table_file.write(get_table_title("Translation status by language"))
         #% README TABLE HEAD
         reamde_thead_class2name = collections.OrderedDict()
         reamde_thead_class2name["language"] = "Language"
@@ -285,19 +267,12 @@ def create_readme_locale_tables():
         reamde_thead_class2name["untranslated"] = "Untranslated"
         language_table_file.write(get_table_head(reamde_thead_class2name))
 
-
         #% LOCALE TABLE: LOCALE.md
-        num_of_templates = str(len(TRANSLATION_LANG_MATRIX["length"]))
         for locale in sorted(ID2NAME):
             length_sum = 0
             untranslated_sum = 0
             locale_table_file_path = os.path.join(TABLES_DIR, locale + '.md')
             with open(locale_table_file_path, "w") as locale_table_file:
-                #% LOCALE TABLE TITLE
-                templ_num_title = '1 &#8594; ' + num_of_templates + ' templates'
-                locale_table_file.write(get_table_title("Translatable templates",
-                                                        ID2NAME[locale] + '(' + locale + ')',
-                                                        templ_num_title))
                 #% LOCALE TABLE HEAD
                 thead_class2name = collections.OrderedDict()
                 thead_class2name["uuid"] = "UUID"
@@ -389,8 +364,6 @@ def create_readme_locale_tables():
                     pass
             else:
                 language_table_file.write(get_table_content(readme_tdata_class2value))
-
-            #TERMINAL_PROGRESS_BAR.render()
 
         #% README TABLE close
         language_table_file.write(get_table_body_close())
