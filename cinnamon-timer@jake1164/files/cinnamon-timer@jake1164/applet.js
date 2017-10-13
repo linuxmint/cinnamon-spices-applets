@@ -3,18 +3,15 @@ const APPLET_PATH = imports.ui.appletManager.appletMeta[UUID].path;
 imports.searchPath.push(APPLET_PATH);
 const Lang = imports.lang;
 const St = imports.gi.St;
-const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
 const ModalDialog = imports.ui.modalDialog;
 const Gettext = imports.gettext;
-const AppletMeta = imports.ui.appletManager.applets[UUID];
 const Settings = imports.ui.settings;
 const MessageTray = imports.ui.messageTray;
 
@@ -42,8 +39,7 @@ const Presets = [
     3 * 60,
     2 * 60,
     1 * 60,
-    30,
-    10,
+    30,    
     0];
 
 function _(str) {
@@ -54,10 +50,6 @@ Number.prototype.pad = function(size) {
   var s = String(this);
   while (s.length < (size || 2)) {s = "0" + s;}
   return s;
-}
-
-function PopupMenuItem(label, icon, callback) {
-    this._init(label, icon, callback);
 }
 
 function main(metadata, orientation, panel_height, instance_id) {
