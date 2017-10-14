@@ -1,0 +1,7 @@
+{
+    "use-fahrenheit": {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Show temperature in Fahrenheit"
+    }
+}

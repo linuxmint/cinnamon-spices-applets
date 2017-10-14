@@ -427,6 +427,8 @@ MyApplet.prototype = {
       if (this.nonempty(this._locationLabelOverride))
         location = this._locationLabelOverride
 
+      this.set_applet_tooltip(_(location))
+      
       // Refresh current weather
       let comment = weather_c.text
       if (this._translateCondition)

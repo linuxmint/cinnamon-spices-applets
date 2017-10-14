@@ -1,116 +1,42 @@
 You must install the **gir1.2-gtop-2.0** package to use this applet.
 
-// Multi-core System Monitor Readme
-// Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
+**Instructions for upgrading to Cinnamon 3.4**
 
-How to Configure Colors (in prefs.json)
-======================================
-Edit config file its called prefs.json. Also backup the file, and only do it if you feel comfortable.
-There are 3 values that control the color of the applet all use arrays of the format:
-[r,b,g,a]
-r-red from 0 to 1.0
-g-green from 0 to 1.0
-b-blue from 0 to 1.0
-a-alpha from 0 to 1.0
+Uninstall the applet from Applet Settings, delete ```~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23``` and ```~/.cinnamon/configs/multicore-sys-monitor@ccadeptic23```. Then reinstall from Applet Settings, so it re-downloads it.
 
-These 3 are: BackgroundColor, ColorsMem, and ColorsCPUs
+The below instructions are outdated. You can customize the color scheme in the applet's settings app.
 
-ColorsCPUs requires a little more explaination. It is an array of arrays the first level is the cpu number that will use that color. For example,
-if I had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
-"ColorsCPUs":[[1,0,0,1],[0,1,0,1]]
+**How to Configure Colors (in prefs.json)**
 
-The ColorsMem is also a matrix like this but instead of the cpunumber each of the sub arrays are for different parts of the memory utilization.
-The first row is the memory that is "used up" meaning it is not available for a program to use. (This is the value gnome's system monitor shows as mem %)
-The second is the buffered memory.
-The third is the cached memory.
-The fourth is the free memory.
+Edit config file in called prefs.json. Also backup the file, and only do it if you feel comfortable.
+There are three values that control the color of the applet that all use arrays in the settings format:
 
-For Example,
-If I wanted the used up memory to be red, the buffered memory to be green, the cached to be blue, and the free to be white my entry ColorsMem would be:
-"ColorsMem": [[1,0,0,1],[0,1,0,1],[0,0,1,1],[1,1,1,1]]
+[r, b, g, a]
+r (red): 0-1.0
+g (green): 0-1.0
+b (blue): 0-1.0
+a (alpha): 0-1.0
 
-In general, I prefer the free memory to be see thru but others maynot. if you want a see thru free make the fourth entry all 0.
+The three propteries using these values are ```BackgroundColor```, ```ColorsMem```, and ```ColorsCPUs```.
 
-Note1: that if you have more cpu's than colors defined in the config file. 
-Then the colors will repeat until you run out of cpus. This behavour happens with the memory colors also.
-Add more arrays if you want to specify them.
+ColorsCPUs requires a little more explanation. It is an array of arrays. The first level is the CPU number that will use that color. For example,
+if you have two CPUs where the first one is red, and the second one is green, your ColorsCPUs entry would be:
 
-Changelog
-=========
+```
+"ColorsCPUs": [[1, 0, 0, 1], [0, 1, 0, 1]]
+```
 
-New changelog info is available in the commit history.
+The ```ColorsMem``` property is also a matrix like this, but instead of the CPU number, each of the sub arrays are for different parts of the memory utilization.
+The first row is the memory that is "used up", meaning it is not available for a program to use. This is the value the system monitor shows as the memory percentage. The second value is buffered memory, the third is cached memory, and the fourth is free memory.
 
-Version 1.5
------------
-Disk IO monitoring is now no longer in beta
-Applet no longer attempts to read from disabled devices.
-Added Logarithmic scaling option. And description of scaling options to prefs window.
-Also prefs window will no longer show devices it dected in the past. But settings will be retained. 
-	(ie wont show all flash drives ever put into machine, but will remember colors set for them)
-Several bug fixes.
+For example, If you wanted the used up memory to be red, the buffered memory to be green, the cached memory to be blue, and the free memory to be white, the ```ColorsMem``` property's value would be:
 
-Version 1.45
------------
-Fixed gjs shebang to cjs this was why the preferences werent working
-Lots of small changes, some code clean up, and "/" mountpoint monitoring
-Changed code so that all versions of ubuntu can use the same applet
-Added the use of an error icon when the applet fails due to gtop not being installed. 
-Network line graph now has auto scaling disabled. Its too hard to see what is going on when the axis keeps changing.
+```
+"ColorsMem": [[1, 0, 0, 1], [0, 1, 0, 1], [0, 0, 1, 1], [1, 1, 1, 1]]
+```
 
-Version 1.4
------------
-added ability to seperate code into different files
-changed line chart scaling so that the max does not jump around.
-added a beta version for disk performance.
-Shows error icon applet and message when gtop is not installed.
+If you want free memory to be transparent, make the fourth entry all ```0``` values.
 
-Version 1.32
------------
-Fixed issue where systems with older version of the glib gir would crash when closing preferences menu.
+If you have more CPUs than colors defined in the config file, then the colors will repeat over the remaining CPU cores. This behavior happens with the memory colors as well. Add more arrays if you want to specify them.
 
-Version 1.31
------------
-added the color selection choice for swap.
-
-Version 1.3
------------
-New improved customization menu
-Added Network Usage Monitoring 
-    
-Version 1.2
-------------
-* Memory Visualization expanded and is now a Pie Chart.
-* Vertical Bars Graph minor visuals improvement. When the height of vertical bars was 0, it would display annoying little line fragments. Now nice and clean.
-* Moved the configuration menu to open on Right click. Left click now opens the system monitor.
-* Changed the default color scheme to be monochromatic. I have been using it and think it looks much better. Especially on default Cinnamon.
-
-Version 1.1
------------
-Added the use of a config file, and a menu system to change a few of the parameters. It is called prefs.json.
-At the moment the only way to change the colors is to modify this file. I am hoping to add a color selector soon, but documentation is very thin.
-If you have seen a cinnamon or gnome-shell extension/applet that uses one I would be very grateful to hear about it.
-Also backup the file, and only do it if you feel comfortable.
-There are 3 values that control the color of the applet all use arrays of the format:
-[r,b,g,a]
-r-red from 0 to 1.0
-g-green from 0 to 1.0
-b-blue from 0 to 1.0
-a-alpha from 0 to 1.0
-
-These 3 are: BackgroundColor, ColorsMem, and ColorsCPUs
-
-ColorsCPUs requires a little more explaination. It is an array of arrays the first level is the cpu number that will use that color. For example,
-if I had 2 cpus and the first one was red and the second on was green my ColorsCPUs entry would be:
-"ColorsCPUs":[[1,0,0,1],[0,1,0,1]]
-
-The ColorsMem is also a matrix but it will always have one row.(For now)
-
-Note 1: that if you have more cpu's than colors defined in the config file. 
-Then the colors will repeat until you run out of cpus. Add more arrays if you want to specify them.
-
-Note 2: A couple people wanted a monochromatic theme so I will put an extra config file called monoprefs.json. 
-backup the original prefs.json and rename this one to prefs.json to use it. Then restart cinnamon, before changing the settings again.
-
-Version 1
----------
-Initial drop. Psst..When tha bars heights are the same as the applet this is 100%.
+[View the original author's changelog](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/multicore-sys-monitor%40ccadeptic23/CHANGELOG_OLD.md).

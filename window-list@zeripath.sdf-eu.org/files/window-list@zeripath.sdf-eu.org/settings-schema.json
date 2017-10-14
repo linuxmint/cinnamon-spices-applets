@@ -1,0 +1,41 @@
+{
+  "section1": {
+    "type": "section",
+    "description": "Behavior"
+  },
+  "enable-alerts" : {
+      "type" : "switch",
+      "default" : true,
+      "description" : "Show an alert in the window list when a window from another workspace requires attention"
+  },
+  "enable-scrolling" : {
+      "type" : "switch",
+      "default" : false,
+      "description" : "Enable mouse-wheel scrolling in the window list"
+  },
+  "reverse-scrolling" : {
+      "type" : "switch",
+      "default" : false,
+      "description" : "Reverse the direction of mouse-wheel scrolling in the window list",
+      "dependency" : "enable-scrolling"
+  },
+  "middle-click-close": {
+      "type": "switch",
+      "default": true,
+      "description": "Middle click to close window"
+  },
+  "section2": {
+    "type": "section",
+    "description": "Display"
+  },
+  "buttons-use-entire-space": {
+      "type": "switch",
+      "default": false,
+      "description": "Window buttons can have different sizes and use the entire space available"
+  },
+  "window-preview": {
+      "type": "switch",
+      "default": true,
+      "description": "Show window thumbnails on hover"
+  }
+}

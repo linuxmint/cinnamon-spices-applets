@@ -36,7 +36,6 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.panel_height = panel_height;
         this.orientation = orientation;
         this.applet_directory = this._get_applet_directory();
         this.bytes_directory = this.applet_directory + "/bytes/";
@@ -93,13 +92,11 @@ MyApplet.prototype = {
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
 
-        this.menu_item_update_network_position = 4;
         this.gui_speed = null;
         this.gui_data_limit = null;
         this.menu_item_gui = null;
         this.menu_item_network = null;
         this.menu_item_byte_start_times = null;
-        this.menu_item_update_network = null;
         this.hover_popup = null;
 
         this._init_translations();
@@ -169,10 +166,11 @@ MyApplet.prototype = {
 
     _connect_signals: function() {
         global.connect("shutdown", Lang.bind(this, this.on_shutdown));
+        global.connect("scale-changed", Lang.bind(this, this.on_panel_height_changed));
     },
 
     on_shutdown: function () {
-            this._write_bytes_total();
+        this._write_bytes_total();
     },
 
     on_list_connections_command_changed: function () {
@@ -298,55 +296,13 @@ MyApplet.prototype = {
     },
 
     // Override
-    on_applet_removed_from_panel: function() {
-        this.is_running = false;
+    on_panel_height_changed: function() {
+        this._init_gui();
     },
 
     // Override
-    on_applet_added_to_panel: function(userEnabled) {
-        this._init_menu_item_update_network_interfaces();
-    },
-
-    _init_menu_item_update_network_interfaces: function () {
-        this.menu_item_update_network = new PopupMenu.PopupIconMenuItem("Update network interfaces", "view-refresh",
-                                                                        St.IconType.SYMBOLIC);
-        this.menu_item_update_network.connect('activate', Lang.bind(this, this.update_network_interfaces));
-        this._applet_context_menu.addMenuItem(this.menu_item_update_network, this.menu_item_update_network_position);
-    },
-
-    update_network_interfaces: function () {
-         let updated = this.is_network_interface_updated();
-         if(updated) {
-             this._update_network_properties();
-             this._reload_menu_item_network();
-         }
-    },
-
-    is_network_interface_updated: function () {
-         let network_interfaces = this._init_network_interfaces();
-         let updated = !this.arrays_equal(this.network_interfaces, network_interfaces);
-         return updated;
-    },
-
-    arrays_equal: function (array1, array2) {
-        return array1.length == array2.length &&
-               array1.every(function(value, index) { return value === array2[index]; });
-    },
-
-    _update_network_properties: function () {
-         this.network_interfaces = this._init_network_interfaces();
-         let network_interface = this._init_network_interface();
-         this.on_menu_item_network_clicked(network_interface, -1);
-    },
-
-    _reload_menu_item_network: function () {
-        this.menu_item_network.reload_options(this.network_interfaces);
-        this._set_menu_item_network_active_option();
-    },
-
-    _set_menu_item_network_active_option: function () {
-        let index = this.network_interfaces.indexOf(this.network_interface);
-        this.menu_item_network.set_active_option(index);
+    on_applet_removed_from_panel: function() {
+        this.is_running = false;
     },
 
     _init_network_properties: function () {
@@ -533,17 +489,51 @@ MyApplet.prototype = {
         }
     },
 
-    on_context_menu_state_changed: function () {
+    on_context_menu_state_changed: function (actor, event) {
         this.close_hover_popup();
+        let opened = event;
+        if(opened) {
+            this.update_network_interfaces();
+        }
     },
 
     close_hover_popup: function () {
         this.hover_popup.close();
     },
 
-    on_panel_height_changed: function() {
-        this.panel_height = this.panel.actor.get_height();
-        this._init_gui();
+    update_network_interfaces: function () {
+         let updated = this.is_network_interface_updated();
+         if(updated) {
+             this._update_network_properties();
+             this._reload_menu_item_network();
+         }
+    },
+
+    is_network_interface_updated: function () {
+         let network_interfaces = this._init_network_interfaces();
+         let updated = !this.arrays_equal(this.network_interfaces, network_interfaces);
+         return updated;
+    },
+
+    arrays_equal: function (array1, array2) {
+        return array1.length == array2.length &&
+               array1.every(function(value, index) { return value === array2[index]; });
+    },
+
+    _update_network_properties: function () {
+         this.network_interfaces = this._init_network_interfaces();
+         let network_interface = this._init_network_interface();
+         this.on_menu_item_network_clicked(network_interface, -1);
+    },
+
+    _reload_menu_item_network: function () {
+        this.menu_item_network.reload_options(this.network_interfaces);
+        this._set_menu_item_network_active_option();
+    },
+
+    _set_menu_item_network_active_option: function () {
+        let index = this.network_interfaces.indexOf(this.network_interface);
+        this.menu_item_network.set_active_option(index);
     },
 
     _init_hover_popup: function () {
@@ -553,8 +543,8 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this.panel_height, this.gui_speed_type, this.decimal_places);
-        this.gui_data_limit = new AppletGui.GuiDataLimit(this.panel_height, this.gui_data_limit_type);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.decimal_places);
+        this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();
         this._add_gui_data_limit();

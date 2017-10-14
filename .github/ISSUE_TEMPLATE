@@ -1,7 +1,30 @@
-[Have you read the guidelines for contributing?]: <> (Before opening an issue, please read the guidelines for contributing linked above. Else the issue will be closed. Also don't forget to notify the author.)
+<!-- Applet's UUID should be in the title -->
 
-[Notify author of applet]: <> (You should mention the author on GitHub by typing @ plus his/her username to trigger a notification and bring his/her attention to an issue or pull request. You find the username of the author on the cinnamon spices website: https://cinnamon-spices.linuxmint.com/)
-@AuthorName
+```
+ * Applet version/Build date (to be found in "About.." or in "metadata.json")
+ * Cinnamon version (cinnamon --version)
+ * Distribution - (Mint 17.2, Arch, Fedora 25, etc...)
+ * Graphics hardware *and* driver used
+ * Snippet or attachment of ~/.cinnamon/glass.log
+ * Snippet or attachment of ~/.xsession-errors
 
-[Issue]: <> (Describe your issue below.)
+ ```
 
+<!-- Author list: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CODEOWNERS -->
+
+**Notify author of applet**
+@
+
+**Issue**
+
+
+
+**Steps to reproduce**
+
+
+
+**Expected behaviour**
+
+
+
+**Other information**

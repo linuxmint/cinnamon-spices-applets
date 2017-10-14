@@ -1,0 +1,6 @@
+{
+    "description": "Shows usage of a disk",
+    "version": "1.0.0",
+    "uuid": "disk-read-and-write-speed@cardsurf",
+    "name": "Disk read and write speed"
+}

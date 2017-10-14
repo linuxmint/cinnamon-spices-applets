@@ -1,6 +1,17 @@
 {
-    "pref_show_notifications": {
-        "type": "generic",
-        "default": true
-    }
+    "show-notifications": {
+        "type": "switch",
+        "default": true,
+        "description" : "Show notifications"
+    },
+   "indicator-type" : {
+      "type": "combobox",
+      "default": "both",
+      "options": {
+           "Num Lock and Caps Lock": "both",
+           "Num Lock only": "num-only",
+           "Caps Lock only": "caps-only"
+       },
+      "description": "Choose which indicator to show"
+   }
 }

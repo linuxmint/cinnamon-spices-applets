@@ -5,7 +5,7 @@ var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('install', (cb)=>{
-  exec('cp -arf ./files/IcingTaskManager@json/* ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/metadata.json ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/icon.png ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
+  exec('cp -arf ./files/IcingTaskManager@json/ ~/.local/share/cinnamon/applets/ && cp -af ./files/IcingTaskManager@json/metadata.json ~/.local/share/cinnamon/applets/IcingTaskManager@json && cp -af ./files/IcingTaskManager@json/icon.png ~/.local/share/cinnamon/applets/IcingTaskManager@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);

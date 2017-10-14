@@ -7,65 +7,247 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 11:46+0800\n"
-"PO-Revision-Date: 2017-04-19 11:48+0800\n"
+"POT-Creation-Date: 2017-07-28 18:23+0800\n"
+"PO-Revision-Date: 2017-07-28 18:32+0800\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
 
-#: applet.js:128
-msgid "Settings"
-msgstr "设置"
-
-#: applet.js:322
-msgid "CPU: "
+#: providers.js:46
+msgid "CPU:"
 msgstr "CPU："
 
-#: applet.js:348
-msgid "Memory: "
-msgstr "内存："
-
-#: applet.js:349 applet.js:375
+#: providers.js:68 providers.js:94
 msgid " MB"
 msgstr " MB"
 
-#: applet.js:374
-msgid "Swap: "
+#: providers.js:73
+msgid "Memory:"
+msgstr "内存："
+
+#: providers.js:99
+msgid "Swap:"
 msgstr "交换分区："
 
-#: applet.js:409
-msgid "Network D/U: "
-msgstr "网络 下行/上行："
-
-#: applet.js:409
+#: providers.js:135
 msgid " KB/s"
 msgstr " KB/s"
 
-#: applet.js:446
-msgid "Load average: "
+#: providers.js:140
+msgid "Network D/U:"
+msgstr "网络 下行/上行："
+
+#: providers.js:179
+msgid "Load average:"
 msgstr "负载平均："
 
-#: settings.js:99
-msgid ""
-"Cinnamon should be restarted for changes to take effect.\n"
-"Restart now?"
-msgstr ""
-"应当重新启动Cinnamon以使更改生效。\n"
-"现在重新启动吗？"
+#. sysmonitor@orcus->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "绘制边框"
 
-#: settings.js:192
-msgid "Error while saving file: "
-msgstr "保存文件时出错："
+#. sysmonitor@orcus->settings-
+#. schema.json->mem_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->load_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->swap_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->net_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->cpu_override_graph_width->description
+msgid "Override graph width"
+msgstr "覆盖图表宽度"
+
+#. sysmonitor@orcus->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "平滑图表"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->description
+msgid "Graph width"
+msgstr "图表宽度"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->graph_width->units
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
+msgid "pixels"
+msgstr "像素"
+
+#. sysmonitor@orcus->settings-schema.json->load_enabled->description
+#. sysmonitor@orcus->settings-schema.json->mem_enabled->description
+#. sysmonitor@orcus->settings-schema.json->swap_enabled->description
+#. sysmonitor@orcus->settings-schema.json->cpu_enabled->description
+#. sysmonitor@orcus->settings-schema.json->net_enabled->description
+msgid "Enable"
+msgstr "启用"
+
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "左/右侧边距："
+
+#. sysmonitor@orcus->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "点击时启动的程序"
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "使用自定义的小程序边距"
+
+#. sysmonitor@orcus->settings-schema.json->load->title
+msgid "Load"
+msgstr "负载"
+
+#. sysmonitor@orcus->settings-schema.json->swap_c->title
+#. sysmonitor@orcus->settings-schema.json->cpu_c->title
+#. sysmonitor@orcus->settings-schema.json->load_c->title
+#. sysmonitor@orcus->settings-schema.json->net_c->title
+#. sysmonitor@orcus->settings-schema.json->common_c->title
+#. sysmonitor@orcus->settings-schema.json->mem_c->title
+msgid "Colors"
+msgstr "颜色"
+
+#. sysmonitor@orcus->settings-schema.json->swap_g->title
+#. sysmonitor@orcus->settings-schema.json->cpu_g->title
+#. sysmonitor@orcus->settings-schema.json->load_g->title
+#. sysmonitor@orcus->settings-schema.json->mem_g->title
+#. sysmonitor@orcus->settings-schema.json->common_g->title
+#. sysmonitor@orcus->settings-schema.json->net_g->title
+msgid "General"
+msgstr "常规"
+
+#. sysmonitor@orcus->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "内存"
+
+#. sysmonitor@orcus->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. sysmonitor@orcus->settings-schema.json->common->title
+msgid "Common"
+msgstr "常用"
+
+#. sysmonitor@orcus->settings-schema.json->net->title
+msgid "Network"
+msgstr "网络"
+
+#. sysmonitor@orcus->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "交换分区"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "刷新频率"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "毫秒"
+
+#. sysmonitor@orcus->settings-schema.json->swap_color_0->description
+#. sysmonitor@orcus->settings-schema.json->mem_color_0->description
+msgid "Used color"
+msgstr "已使用颜色"
+
+#. sysmonitor@orcus->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "颜色"
+
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "顶/底部边距"
+
+#. sysmonitor@orcus->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "边框颜色"
+
+#. sysmonitor@orcus->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "背景颜色"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "用户颜色"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Nice颜色"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "内核颜色"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait颜色"
+
+#. sysmonitor@orcus->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "已缓存颜色"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "常用图表宽度"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"如果小程序位于垂直面板中，该项可以设置图表高度。图表高度为面板高度减去边距"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "上传颜色"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "下载颜色"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr "以图形显示CPU、内存、交换分区和网络使用情况以及负载"
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
 msgstr "系统监视器"
 
-#. sysmonitor@orcus->metadata.json->description
-msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr "以图形显示CPU、内存、交换分区和网络使用情况以及负载"
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgid "CPU: "
+#~ msgstr "CPU："
+
+#~ msgid "Memory: "
+#~ msgstr "内存："
+
+#~ msgid "Swap: "
+#~ msgstr "交换分区："
+
+#~ msgid "Network D/U: "
+#~ msgstr "网络 下行/上行："
+
+#~ msgid "Load average: "
+#~ msgstr "负载平均："
+
+#~ msgid ""
+#~ "Cinnamon should be restarted for changes to take effect.\n"
+#~ "Restart now?"
+#~ msgstr ""
+#~ "应当重新启动Cinnamon以使更改生效。\n"
+#~ "现在重新启动吗？"
+
+#~ msgid "Error while saving file: "
+#~ msgstr "保存文件时出错："

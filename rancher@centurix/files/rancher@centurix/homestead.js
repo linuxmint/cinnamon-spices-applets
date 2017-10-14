@@ -1,9 +1,10 @@
-const TerminalReader = imports.applet.terminal_reader;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
-const Util = imports.applet.util;
-const HomesteadYamlReader = imports.applet.homestead_yaml_reader;
+const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
+const Util = AppletDir.util;
+const HomesteadYamlReader = AppletDir.homestead_yaml_reader;
+const TerminalReader = AppletDir.terminal_reader;
 
 const STATUS_RUNNING = 0;
 const STATUS_SAVED = 1;

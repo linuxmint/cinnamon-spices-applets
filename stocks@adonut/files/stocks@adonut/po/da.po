@@ -1,0 +1,35 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-02 21:22+0200\n"
+"PO-Revision-Date: 2017-10-03 18:32+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:51
+msgid "Stocks"
+msgstr "Aktier"
+
+#: applet.js:90
+msgid "Invalid Stock?:"
+msgstr "Ugyldig aktie?:"
+
+#. stocks@adonut->metadata.json->description
+msgid "a simple Stocks ticker for cinnamon"
+msgstr "En enkel aktie-ticker til Cinnamon"
+
+#. stocks@adonut->metadata.json->name
+msgid "stocks"
+msgstr "Aktier"

@@ -1,0 +1,210 @@
+{
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "display_mode" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Show",
+        "options" : {
+            "Average speed per second" : 0,
+            "Amount of data transferred" : 1
+        },
+        "tooltip" : "Values shown in the panel"
+    },
+    "unit_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit",
+        "options" : {
+            "Bytes" : 0,
+            "Bits" : 1
+        },
+        "tooltip" : "Base data unit shown in the panel"
+    },
+    "update_every": {
+        "type": "spinbutton",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 60.0,
+        "step": 0.1,
+        "units": "seconds",
+        "description": "Calculate every",
+        "tooltip" : "How often to calculate disk read and write speed"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+    "gui_speed_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Type",
+        "options" : {
+            "Compact" : 0,
+            "Large" : 1
+        },
+        "tooltip" : "Applet Gui"
+    },
+    "gui_decimal_places" : {
+        "type": "combobox",
+        "default" : -1,
+        "description" : "Decimal places",
+        "options" : {
+            "Auto" : -1,
+            "0 " : 0,
+        	"1 " : 1,
+        	"2 " : 2,
+        	"3 " : 3
+        },
+        "tooltip" : "Decimal places of disk read and write speed shown in the panel"
+    },
+    "gui_text_css": {
+        "type": "entry",
+        "default": "font-weight: bold;",
+        "description": "Text CSS",
+        "tooltip": "A CSS style applied to the text in the panel"
+    },
+    "gui_read_icon_filename" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/disk-read-and-write-speed@cardsurf/icons/read.svg",
+        "description" : "Read icon",
+        "tooltip": "An icon displayed next to disk read speed in the panel"
+    },
+    "gui_written_icon_filename" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/disk-read-and-write-speed@cardsurf/icons/write.svg",
+        "description" : "Write icon",
+        "tooltip": "An icon displayed next to disk write speed in the panel"
+    },
+    "hover_popup_headers_css": {
+        "type": "entry",
+        "default": "font-size: 15px; padding: 5px 5px 3px 5px; font-weight: bold; font-family: monospace;",
+        "description": "Popup headers CSS",
+        "tooltip": "A CSS style applied to headers in the hover popup"
+    },
+    "hover_popup_rows_css": {
+        "type": "entry",
+        "default": "font-size: 15px; padding: 0px 5px 5px 5px; font-weight: normal; font-family: monospace;",
+        "description": "Popup rows CSS",
+        "tooltip": "A CSS style applied to rows in the hover popup"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    },
+
+
+    "total_data_start": {
+        "type": "header",
+        "description": "Total data"
+    },
+    "show_hover" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Show total read and write on hover",
+        "tooltip": "Show the hover popup with total amount of data read and written"
+     },
+    "devices_regex_string": {
+        "type": "entry",
+        "default": "sd",
+        "description": "Disks",
+        "tooltip": "A regular expression that matches disk names to show in the hover popup"
+    },
+    "device_aliases_string": {
+        "type": "entry",
+        "default": "sdX:root,sdY:home",
+        "description": "Aliases",
+        "tooltip": "A comma separated list of \"disk:alias\" pairs that replace disk names in the hover popup"
+    },
+    "column_names_string" : {
+        "type": "entry",
+        "default": "Major number,Minor number,Disk,Reads completed,Reads merged,Sectors read,Reads ms,Writes completed,Writes merged,Sectors written,Writes ms,IO progress,IO ms,Weighted IO ms,Read,Written",
+        "description": "Headers",
+        "tooltip": "A comma separated list of column headers to show in the hover popup"
+    },
+    "column_indexes_string" : {
+        "type": "entry",
+        "default": "2,14,15",
+        "description": "Columns",
+        "tooltip": "A comma separated list of column indexes to show in the hover popup"
+    },
+    "column_spaces": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "units": "",
+        "description": "Spaces",
+        "tooltip" : "A number of spaces between columns in the hover popup"
+    },
+    "column_index_sort": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 15,
+        "step": 1,
+        "units": "",
+        "description": "Sort",
+        "tooltip" : "An index of a column that is used to sort rows in the hover popup"
+    },
+    "column_sort_order": {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Order",
+        "options" : {
+            "Ascending" : 0,
+            "Descending" : 1
+        },
+        "tooltip" : "An order used to sort rows in the hover popup"
+    },
+    "hover_popup_decimal_places" : {
+        "type": "combobox",
+        "default" : -1,
+        "description" : "Decimal places",
+        "options" : {
+            "Auto" : -1,
+            "0 " : 0,
+        	"1 " : 1,
+        	"2 " : 2,
+        	"3 " : 3
+        },
+        "tooltip" : "Decimal places of total amount of data read and written shown in the hover popup"
+    },
+    "total_data_end" : {
+        "type" : "separator"
+    },
+
+
+    "processes_start": {
+        "type": "header",
+        "description": "Processes"
+    },
+    "launch_terminal" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "List input and output information per process",
+        "tooltip": "Open a terminal with a list of input and output informations per process on a left mouse click. The next click closes the terminal."
+    },
+    "terminal_command": {
+        "type": "entry",
+        "default": "watch -n 1 \\\" find /proc/ -mindepth 2 -maxdepth 2 -type f -name stat -exec cut -d' ' -f 1,2,42 {} \\+ | sort -r -n -k 3,3 | head -n 40 | sed '1 i pid executable iodelay' | column -t \\\"",
+        "description": "Command",
+        "tooltip": "A command used to show input and output information per process"
+    },
+    "processes_end": {
+        "type" : "separator"
+    },
+
+
+    "disk_name" : {
+        "type": "generic",
+        "default" : "sda"
+    }
+}

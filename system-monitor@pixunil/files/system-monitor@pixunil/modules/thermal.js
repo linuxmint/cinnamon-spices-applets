@@ -1,6 +1,9 @@
-const _ = imports.applet._;
-const Graph = imports.applet.graph;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Graph = applet.graph;
+const Modules = applet.modules;
 
 const name = "thermal";
 const display = _("Thermal");
@@ -48,8 +51,10 @@ DataProvider.prototype = {
     onSettingsChanged: function(){
         if(this.settings.thermalWarning){
             this.notifications = this.settings.thermalWarningTime;
-            if(!this.settings.thermalUnit)
-                this.settings.thermalWarningValue = (this.settings.thermalWarningValue - 32) * 5 / 9; // Fahrenheit => Celsius
+
+            // Fahrenheit => Celsius
+            if(this.settings.thermalUnit === "fahrenheit")
+                this.settings.thermalWarningValue = (this.settings.thermalWarningValue - 32) * 5 / 9;
         }
     }
 };

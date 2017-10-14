@@ -33,35 +33,35 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
-    
+
     _init: function(metadata, orientation, panelHeight, instanceId) {
         try {
-            
+
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
-            
+
             Applet.IconApplet.prototype._init.call(this, this.orientation, panelHeight);
 
             // l10n/translation
             UUID = metadata.uuid;
             Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-            
+
             this._bindSettings();
-            
+
             //set up panel
             this.setPanelIcon();
             this.setTooltip();
-            
+
         } catch(e) {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         this.launch();
     },
-    
+
     _bindSettings: function () {
         this.settings = new Settings.AppletSettings(this, this.metadata["uuid"], this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
@@ -74,14 +74,14 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "altEnv", "altEnv");
         this.setKeybinding();
     },
-    
+
     setKeybinding: function() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         if ( this.keyLaunch == "" ) return;
         this.keyId = "commandLauncher-" + this.instanceId;
         Main.keybindingManager.addHotKey(this.keyId, this.keyLaunch, Lang.bind(this, this.launch));
     },
-    
+
     launch: function() {
         this._applet_icon.scale_gravity = Clutter.Gravity.CENTER;
         this._animate(NUMBER_OF_BOUNCES);
@@ -89,30 +89,30 @@ MyApplet.prototype = {
         else {
             let basePath = null;
             if ( this.useAltEnv && Gio.file_new_for_path(this.altEnv).query_exists(null) ) basePath = this.altEnv;
-            
+
             let input = this.command.replace("~/", GLib.get_home_dir() + "/"); //replace all ~/ with path to home directory
             if ( this.useRoot ) input = "pkexec " + input;
             let [success, argv] = GLib.shell_parse_argv(input);
-            
+
             if ( !success ) {
                 Main.notify("Unable to parse \"" + this.command + "\"");
                 return;
             }
-            
+
             try {
                 let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
                 let [result, pid] = GLib.spawn_async(basePath, argv, null, flags, null);
                 if ( this.showNotifications )
                     Main.notify(_("Command Launcher") + ": " + _("Process started"), _("Command") + ": "
                                 + this.command + "\n" + _("Process Id") + ": "+ pid);
-                GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.onClosed), null);
+                GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.onClosed));
             } catch(e) {
                 Main.notify(_("Error while trying to run \"%s\"").format(this.command), e.message);
                 return;
             }
         }
     },
-    
+
     _animate:function(count) {
         if ( count < 1 ) return;
         Tweener.addTween(this._applet_icon, {
@@ -135,7 +135,7 @@ MyApplet.prototype = {
             onCompleteScope: this
         });
     },
-    
+
     setPanelIcon: function() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
@@ -149,11 +149,11 @@ MyApplet.prototype = {
         }
         else this.set_applet_icon_name("go-next");
     },
-    
+
     setTooltip: function() {
         this.set_applet_tooltip(this.tooltipText);
     },
-    
+
     onClosed: function(pid, status) {
         if ( this.showNotifications )
             Main.notify(_("Command Launcher") + ": " + _("Process ended"), _("Command") + ": "

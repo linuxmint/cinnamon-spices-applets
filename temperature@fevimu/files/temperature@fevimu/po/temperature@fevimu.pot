@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
 
 #: applet.js:51
 msgid "Error"
@@ -55,4 +55,8 @@ msgstr ""
 
 #. temperature@fevimu->metadata.json->name
 msgid "CPU Temperature Indicator"
+msgstr ""
+
+#. temperature@fevimu->settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
 msgstr ""

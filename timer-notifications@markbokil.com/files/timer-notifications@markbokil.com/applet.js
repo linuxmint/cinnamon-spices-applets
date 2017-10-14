@@ -81,6 +81,8 @@ MyApplet.prototype = {
             this.MessageStr = AppOptions.MessageStr;
             this.SoundPath = AppOptions.SoundPath; 
             this.LabelOn = AppOptions.LabelOn; 
+		
+            this.Timers = AppOptions.Timers;
 
             this.set_applet_icon_path(AppletDir + "/" + AppOptions.AppIcon);
             this.set_applet_label("");
@@ -136,130 +138,30 @@ MyApplet.prototype = {
     },
 
     buildTimePresetMenu: function() {
-            this.presetTimeMenu = new PopupMenu.PopupSubMenuMenuItem(_("Time Presets"));   
-
-            this.timerPresetItem240 = new PopupMenu.PopupMenuItem(_("240 Minutes - 4 hrs."));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem240);
-            this.timerPresetItem240.connect('activate', Lang.bind(this, this.doTimePreset240, '_output'));
-            
-            this.timerPresetItem180 = new PopupMenu.PopupMenuItem(_("180 Minutes - 3 hrs."));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem180);
-            this.timerPresetItem180.connect('activate', Lang.bind(this, this.doTimePreset180, '_output'));
-            
-            this.timerPresetItem120 = new PopupMenu.PopupMenuItem(_("120 Minutes - 2 hrs."));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem120);
-            this.timerPresetItem120.connect('activate', Lang.bind(this, this.doTimePreset120, '_output'));
-            
-            this.timerPresetItem90 = new PopupMenu.PopupMenuItem(_("90 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem90);
-            this.timerPresetItem90.connect('activate', Lang.bind(this, this.doTimePreset90, '_output'));
-                  
-            this.timerPresetItem60 = new PopupMenu.PopupMenuItem(_("60 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem60);
-            this.timerPresetItem60.connect('activate', Lang.bind(this, this.doTimePreset60, '_output'));
-            
-            this.timerPresetItem45 = new PopupMenu.PopupMenuItem(_("45 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem45);
-            this.timerPresetItem45.connect('activate', Lang.bind(this, this.doTimePreset45, '_output'));
-            
-            this.timerPresetItem30 = new PopupMenu.PopupMenuItem(_("30 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem30);
-            this.timerPresetItem30.connect('activate', Lang.bind(this, this.doTimePreset30, '_output'));
-            
-            this.timerPresetItem20 = new PopupMenu.PopupMenuItem(_("20 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem20);
-            this.timerPresetItem20.connect('activate', Lang.bind(this, this.doTimePreset20, '_output'));
-            
-            this.timerPresetItem15 = new PopupMenu.PopupMenuItem(_("15 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem15);
-            this.timerPresetItem15.connect('activate', Lang.bind(this, this.doTimePreset15, '_output'));
-            
-            this.timerPresetItem10 = new PopupMenu.PopupMenuItem(_("10 Minutes"));
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem10);
-            this.timerPresetItem10.connect('activate', Lang.bind(this, this.doTimePreset10, '_output'));
-      
-            this.timerPresetItem5 = new PopupMenu.PopupMenuItem(_("5 Minutes")); // 5 minutes
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem5);
-            this.timerPresetItem5.connect('activate', Lang.bind(this, this.doTimePreset5));
-            
-            this.timerPresetItem3 = new PopupMenu.PopupMenuItem(_("3 Minutes")); // 1 minutes
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem3);
-            this.timerPresetItem3.connect('activate', Lang.bind(this, this.doTimePreset3));
-            
-            this.timerPresetItem1 = new PopupMenu.PopupMenuItem(_("1 Minute")); // 1 minutes
-            this.presetTimeMenu.menu.addMenuItem(this.timerPresetItem1);
-            this.timerPresetItem1.connect('activate', Lang.bind(this, this.doTimePreset1));
+            this.presetTimeMenu = new PopupMenu.PopupSubMenuMenuItem(_("Time Presets"));
+	    
+	    this.Timers.forEach( (timerOpt) => {
+                
+                var timerMinutes, timerLabel;
+                if( timerOpt !== null && typeof timerOpt === 'object'){
+                    timerMinutes = timerOpt.minutes;
+                    timerLabel = timerOpt.label;
+                }else{
+                    timerMinutes = timerOpt;
+                    timerLabel = timerOpt + " Minutes";
+                }
+                
+                var timerPresetItem = new PopupMenu.PopupMenuItem(_(timerLabel));
+                this.presetTimeMenu.menu.addMenuItem(timerPresetItem);
+                timerPresetItem.connect('activate', Lang.bind(this, () => {
+                    this.timerDuration = timerMinutes;
+                    this.doStartTimer();
+                }, '_output')); 
+            });
             
             this.menu.addMenuItem(this.presetTimeMenu);  
     },
     
-    
-    doTimePreset240: function() {
-                this.timerDuration = 240;
-                this.doStartTimer();
-    },
-    
-    doTimePreset180: function() {
-                this.timerDuration = 180;
-                this.doStartTimer();
-    },
-    
-    doTimePreset120: function() {
-                this.timerDuration = 120;
-                this.doStartTimer();
-    },
-    
-    doTimePreset90: function() {
-                this.timerDuration = 90;
-                this.doStartTimer();
-    },
-    
-    doTimePreset60: function() {
-                this.timerDuration = 60;
-                this.doStartTimer();
-    },
-    
-    doTimePreset45: function() {
-                this.timerDuration = 45;
-                this.doStartTimer();
-    },
-    
-    doTimePreset30: function() {
-                this.timerDuration = 30;
-                this.doStartTimer();
-    },
-    
-    doTimePreset20: function() {
-                this.timerDuration = 20;
-                this.doStartTimer();
-    },
-    
-    doTimePreset15: function() {
-                this.timerDuration = 15;
-                this.doStartTimer();
-    },
-    
-    doTimePreset10: function() {
-                this.timerDuration = 10;
-                this.doStartTimer();
-    },
-    
-    doTimePreset5: function() {
-                this.timerDuration = 5;
-                this.doStartTimer();
-    },
-    
-    doTimePreset3: function() {
-                this.timerDuration = 3;
-                this.doStartTimer();
-    },
-    
-    doTimePreset1: function() {
-                this.timerDuration = 1;
-                this.doStartTimer();
-    },
-    
-
     
     doTimerSwitch: function(item) {
         if (item.state) {

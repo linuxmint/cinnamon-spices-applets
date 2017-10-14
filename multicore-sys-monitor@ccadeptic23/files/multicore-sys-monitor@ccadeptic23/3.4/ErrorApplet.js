@@ -1,12 +1,12 @@
 //#!/usr/bin/gjs
-const UUID = "multicore-sys-monitor@ccadeptic23";
+const UUID = 'multicore-sys-monitor@ccadeptic23';
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
@@ -22,14 +22,14 @@ ErrorImportApplet.prototype = {
   _init: function(orientation, msg) {
     Applet.IconApplet.prototype._init.call(this, orientation);
 
-    this.set_applet_icon_name("error");
-    this.set_applet_tooltip(_("Multi-core System Monitor Error."));
+    this.set_applet_icon_name('error');
+    this.set_applet_tooltip(_('Multi-Core System Monitor Error.'));
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    this.menu_title = new PopupMenu.PopupMenuItem(_("Multi-core System Monitor Error."));
+    this.menu_title = new PopupMenu.PopupMenuItem(_('Multi-Core System Monitor Error.'));
     this.menu.addMenuItem(this.menu_title);
 
     this.menu_msg = new PopupMenu.PopupMenuItem(msg);
@@ -38,6 +38,5 @@ ErrorImportApplet.prototype = {
 
   on_applet_clicked: function(event) {
     this.menu.toggle();
-  },
-
+  }
 };

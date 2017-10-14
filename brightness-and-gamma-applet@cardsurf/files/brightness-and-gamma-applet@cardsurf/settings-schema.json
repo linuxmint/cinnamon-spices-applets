@@ -1,13 +1,53 @@
 {
-    "values_start": {
+    "configuration_start": {
         "type": "header",
-        "description": "Values"
+        "description": "Configuration"
     },
     "apply_startup" : {
         "type" : "checkbox",
         "default" : true,
         "description": "Apply at startup",
         "tooltip": "Apply values at applet startup"
+    },
+    "apply_every": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 604800,
+        "step": 1,
+        "units": "seconds",
+        "description": "Apply every",
+        "tooltip" : "How often to apply values. 0 means that values are not applied periodically."
+    },
+    "apply_asynchronously" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Apply asynchronously",
+        "tooltip": "Apply values in a background process"
+    },
+    "update_scroll" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Adjust brightness scroll",
+        "tooltip": "Allows to adjust a brightness value on a mouse scroll"
+    },
+    "scroll_step": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Scroll step",
+        "tooltip" : "A percentage of a brightness value to adjust on a mouse scroll"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+    "values_start": {
+        "type": "header",
+        "description": "Values"
     },
     "minimum_brightness": {
         "type": "spinbutton",
@@ -58,22 +98,6 @@
         "units": "seconds",
         "description": "Save every",
         "tooltip" : "How often to save last used values"
-    },
-    "update_scroll" : {
-        "type" : "checkbox",
-        "default" : true,
-        "description": "Adjust brightness scroll",
-        "tooltip": "Allows to adjust a brightness value on a mouse scroll"
-    },
-    "scroll_step": {
-        "type": "spinbutton",
-        "default": 5,
-        "min": 0,
-        "max": 200,
-        "step": 1,
-        "units": "%",
-        "description": "Scroll step",
-        "tooltip" : "A percentage of a brightness value to adjust on a mouse scroll"
     },
     "values_end": {
         "type" : "separator"

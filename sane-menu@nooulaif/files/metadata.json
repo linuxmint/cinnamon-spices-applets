@@ -1,6 +1,0 @@
-{
-    "uuid": "sane-menu@nooulaif",
-    "name": "Sane Menu",
-    "description": "Cinnamon stock menu applet with improved search.",
-    "cinnamon-version": ["3.0", "3.2"]
-}

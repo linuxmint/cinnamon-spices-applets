@@ -17,19 +17,19 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
-        try {        
+
+        try {
             this.set_applet_icon_name("window-close");
-            this.set_applet_tooltip(_("Click here to kill a window"));                                                
+            this.set_applet_tooltip(_("Click here to kill a window"));
             this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
         }
         catch (e) {
             global.logError(e);
         }
     },
-    
+
     _onButtonReleaseEvent: function(actor, event) {
         if (this._applet_enabled) {
             if (event.get_button() == 1) {
@@ -42,10 +42,10 @@ MyApplet.prototype = {
         }
         return true;
     }
-   
+
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    return myApplet;      
+    return myApplet;
 }

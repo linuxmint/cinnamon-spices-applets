@@ -26,46 +26,56 @@ const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
 
-// Gjs imports
-const Lang = imports.lang;
-
 const _appSystem = Cinnamon.AppSystem.get_default();
 //const _foundApps = _appSystem.initial_search(['chromium']);
 let _foundApps = _appSystem.lookup_desktop_wmclass('chromium');
 
 var _appInfo = null;
 var _bookmarksFile = null;
-var _bookmarksMonitor = null;
-var _callbackId = null;
 var bookmarks = [];
 
 function _readBookmarks() {
+  if (!_foundApps || _foundApps.length === 0) {
+    _foundApps = _appSystem.lookup_desktop_wmclass('chromium-browser');
+    if (!_foundApps || _foundApps.length === 0) {
+      return [];
+    }
+  }
+
+  _appInfo = _foundApps.get_app_info();
+
+  _bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
+    [GLib.get_user_config_dir(), 'chromium', 'Default', 'Bookmarks']));
+
+  if (!_bookmarksFile.query_exists(null)) {
+    return [];
+  }
+
   bookmarks = [];
 
   let content;
   let jsonResult;
-  let size;
   let success;
   try {
-    [success, content, size] = _bookmarksFile.load_contents(null);
+    [success, content] = _bookmarksFile.load_contents(null);
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   if (!success) {
-    return;
+    return [];
   }
 
   try {
     jsonResult = JSON.parse(content);
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   if (!jsonResult.hasOwnProperty('roots')) {
-    return;
+    return [];
   }
 
   let recurseBookmarks = (children, cont)=>{
@@ -73,7 +83,7 @@ function _readBookmarks() {
       if (children[i].type == 'url') {
         bookmarks.push({
           appInfo: _appInfo,
-          name: children[i].name,
+          name: children[i].name.replace(/\//g, '|'),
           score: 0,
           uri: children[i].url
         });
@@ -90,53 +100,12 @@ function _readBookmarks() {
     }
     recurseBookmarks(children);
   }
+
+  return bookmarks;
 }
 
 function _reset() {
   _appInfo = null;
   _bookmarksFile = null;
-  _bookmarksMonitor = null;
-  _callbackId = null;
   bookmarks = [];
-}
-
-function init() {
-
-  if (!_foundApps || _foundApps.length === 0) {
-    _foundApps = _appSystem.lookup_desktop_wmclass('chromium-browser');
-    if (!_foundApps || _foundApps.length === 0) {
-      return false;
-    }
-  }
-
-  // _appInfo = _foundApps[0].get_app_info();
-  _appInfo = _foundApps.get_app_info();
-
-  _bookmarksFile = Gio.File.new_for_path(GLib.build_filenamev(
-    [GLib.get_user_config_dir(), 'chromium', 'Default', 'Bookmarks']));
-
-  if (!_bookmarksFile.query_exists(null)) {
-    _reset();
-    return false;
-  }
-
-  _bookmarksMonitor = _bookmarksFile.monitor_file(
-    Gio.FileMonitorFlags.NONE, null);
-  _callbackId = _bookmarksMonitor.connect(
-    'changed', Lang.bind(this, _readBookmarks));
-
-  _readBookmarks();
-  return true;
-}
-
-function deinit() {
-  if (_bookmarksMonitor) {
-    if (_callbackId) {
-      _bookmarksMonitor.disconnect(_callbackId);
-    }
-
-    _bookmarksMonitor.cancel();
-  }
-
-  _reset();
 }

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-21 09:31+0800\n"
+"POT-Creation-Date: 2017-07-28 17:30+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,16 +11,25 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:45 applet.js:46
+msgid "GitHub Explorer"
+msgstr "Github资源管理器"
 
 #: applet.js:45
 msgid "Attempting to Load your GitHub Repos"
 msgstr "尝试加载您的Github存储库"
 
 #: applet.js:46
-msgid "Successfully Loaded GitHub Repos for user"
-msgstr "成功加载用户的Github存储库"
+#, c-format
+msgid "Successfully Loaded GitHub Repos for user %s"
+msgstr "成功加载用户%s的Github存储库"
+
+#: applet.js:47
+msgid "ERROR:: GitHub Explorer ::ERROR"
+msgstr "错误:: GitHub资源管理器 ::错误"
 
 #: applet.js:47
 msgid "Failed to load GitHub Repositories! Check applet Configuration"
@@ -30,17 +39,13 @@ msgstr "加载Github存储库失败！请检查小程序配置"
 msgid "Settings"
 msgstr "设置"
 
-#: applet.js:177
+#: applet.js:177 applet.js:270
 msgid "Check Applet Configuration"
 msgstr "检查小程序配置"
 
 #: applet.js:266
 msgid "API Rate Exceeded will try again once we are allowed"
 msgstr "超出API频率，允许的时候将会重新尝试"
-
-#: applet.js:270
-msgid "Check applet Configuration"
-msgstr "检查小程序配置"
 
 #: applet.js:281
 msgid "Click here to open GitHub"
@@ -79,14 +84,6 @@ msgstr "打开GitHub主页"
 #: applet.js:401
 msgid "Create A Gist"
 msgstr "创建Gist"
-
-#. github-projects@morgan-design.com->metadata.json->description
-msgid "Click on the applet to explore your Public Github repositories"
-msgstr "点击小程序浏览您的公共Github存储库"
-
-#. github-projects@morgan-design.com->metadata.json->name
-msgid "Github Explorer"
-msgstr "Github资源管理器"
 
 #. github-projects@morgan-design.com->settings-
 #. schema.json->username->description
@@ -199,3 +196,17 @@ msgstr "选项此项显示每个仓库旁问题的数量"
 #. homepage-button->tooltip
 msgid "Open github.com - fork the code or add features"
 msgstr "打开github.com - 创建代码分支或添加功能"
+
+#. github-projects@morgan-design.com->metadata.json->description
+msgid "Click on the applet to explore your Public Github repositories"
+msgstr "点击小程序浏览您的公共Github存储库"
+
+#. github-projects@morgan-design.com->metadata.json->name
+msgid "Github Explorer"
+msgstr "Github资源管理器"
+
+#~ msgid "Successfully Loaded GitHub Repos for user"
+#~ msgstr "成功加载用户的Github存储库"
+
+#~ msgid "Check applet Configuration"
+#~ msgstr "检查小程序配置"

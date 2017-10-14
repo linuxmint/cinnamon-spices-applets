@@ -38,11 +38,11 @@ MyMenu.prototype = {
 		__proto__: PopupMenu.PopupMenu.prototype,
 
 		_init: function(launcher, orientation) {
-			this._launcher = launcher;        
+			this._launcher = launcher;
 
 			PopupMenu.PopupMenu.prototype._init.call(this, launcher.actor, 0.0, orientation, 0);
 			Main.uiGroup.add_actor(this.actor);
-			this.actor.hide();            
+			this.actor.hide();
 		}
 };
 
@@ -56,10 +56,10 @@ MyApplet.prototype = {
 		_init: function(orientation) {
 			Applet.IconApplet.prototype._init.call(this, orientation);
 
-			try {        
+			try {
 				this.set_applet_tooltip(_("System menu"));
-				this.set_applet_icon_name("stock_person");
-				
+				this.set_applet_icon_name("avatar-default");
+
 				this.menuManager = new PopupMenu.PopupMenuManager(this);
 				this.menu = new MyMenu(this, orientation);
 				this.menuManager.addMenu(this.menu);
@@ -72,7 +72,7 @@ MyApplet.prototype = {
 		},
 
 		on_applet_clicked: function(event) {
-			this.menu.toggle();        
+			this.menu.toggle();
 		},
 
 		_detect_user_name: function() {
@@ -92,7 +92,7 @@ MyApplet.prototype = {
 			let _session = new GnomeSession.SessionManager();
 			let _screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
 			this.defaultPlaces = Main.placesManager.getDefaultPlaces();
-			this.bookmarks     = Main.placesManager.getBookmarks();				
+			this.bookmarks     = Main.placesManager.getBookmarks();
 //Gnome-terminal
 		let icon = new St.Icon({icon_name: "gnome-terminal", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this._itemCinSettings = new MyPopupMenuItem(icon, _("Launch gnome-terminal"));
@@ -102,7 +102,7 @@ MyApplet.prototype = {
 				GLib.spawn_command_line_async('gnome-terminal');
 			});
 //System Settings
-		let icon = new St.Icon({icon_name: "preferences-system", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "preferences-system", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this._itemCinSettings = new MyPopupMenuItem(icon, _("System Settings"));
 
 			this.menu.addMenuItem(this._itemCinSettings);
@@ -112,15 +112,15 @@ MyApplet.prototype = {
 //Separator
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 //Restart Cinnamon
-		let icon = new St.Icon({icon_name: "reload", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "reload", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this._itemCinRestart = new MyPopupMenuItem(icon, _("Restart Cinnamon"));
 
 			this.menu.addMenuItem(this._itemCinRestart);
 			this._itemCinRestart.connect('activate', function(actor, event) {
 				global.reexec_self();
-			});					
+			});
 //Cinnamon-settings
-		let icon = new St.Icon({icon_name: "system-run", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "system-run", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this._itemCinSettings = new MyPopupMenuItem(icon, _("Cinnamon Settings"));
 
 			this.menu.addMenuItem(this._itemCinSettings);
@@ -130,25 +130,25 @@ MyApplet.prototype = {
 //Separator
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 //Lock screen
-		let icon = new St.Icon({icon_name: "gnome-lockscreen", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "gnome-lockscreen", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this.filesystemItem = new MyPopupMenuItem(icon, _("Lock screen"));
-			
+
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
                 _screenSaverProxy.LockRemote();
-			});  
+			});
 // Logout session
-		let icon = new St.Icon({icon_name: "gnome-logout", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "gnome-logout", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this.filesystemItem = new MyPopupMenuItem(icon, _("Logout"));
-			
+
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
                 _session.LogoutRemote(0);
 			});
 // Shutdown computer
-		let icon = new St.Icon({icon_name: "gnome-shutdown", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
+		icon = new St.Icon({icon_name: "gnome-shutdown", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR});
 			this.filesystemItem = new MyPopupMenuItem(icon, _("Shutdown the computer"));
-			
+
 			this.menu.addMenuItem(this.filesystemItem);
 			this.filesystemItem.connect('activate', function(actor, event) {
                 _session.ShutdownRemote();
@@ -157,7 +157,7 @@ MyApplet.prototype = {
 		}
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
 	let myApplet = new MyApplet(orientation);
-	return myApplet;      
+	return myApplet;
 };

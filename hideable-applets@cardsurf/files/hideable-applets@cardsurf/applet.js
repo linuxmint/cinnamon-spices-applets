@@ -28,6 +28,10 @@ AppletInfo.prototype = {
     _init: function(applet, is_visible) {
         this.applet = applet;
         this.is_visible = is_visible;
+
+        this.default_handler_id = 0;
+        this.show_handler_id = this.default_handler_id;
+        this.removed_children = [];
     },
 
     get actor() {
@@ -50,6 +54,14 @@ AppletInfo.prototype = {
         return this.applet._meta["icon"];
     },
 
+    get cache_icon() {
+        return GLib.get_home_dir() + "/.cinnamon/spices.cache/applet/" + this.uuid + ".png";
+    },
+
+    get usr_icon() {
+        return "/usr/share/cinnamon/applets/" + this.uuid + "/icon.png";
+    },
+
     get local_icon() {
         return GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + this.uuid + "/icon.png";
     },
@@ -62,12 +74,55 @@ AppletInfo.prototype = {
         return "icon" in this.applet._meta;
     },
 
+    has_cache_icon: function () {
+        return this.file_exists(this.cache_icon);
+    },
+
+    has_usr_icon: function () {
+        return this.file_exists(this.usr_icon);
+    },
+
     has_local_icon: function () {
         return this.file_exists(this.local_icon);
     },
 
     file_exists: function (path) {
         return GLib.file_test(path, GLib.FileTest.EXISTS);
+    },
+
+    add_show_handler: function (handler_id) {
+        this.show_handler_id = handler_id;
+    },
+
+    remove_show_handler: function () {
+        this.show_handler_id = this.default_handler_id;
+    },
+
+    has_show_handler: function () {
+        return this.show_handler_id != this.default_handler_id;
+    },
+
+    remove_children: function () {
+        let removed = this.has_removed_children();
+        if(!removed) {
+            this.removed_children = this.actor.get_children();
+            this.actor.remove_all_children();
+        }
+    },
+
+    has_removed_children: function () {
+        return this.removed_children.length > 0;
+    },
+
+    add_removed_children: function () {
+        let removed = this.has_removed_children();
+        if(removed) {
+            for(let i = 0; i < this.removed_children.length; ++i) {
+                let child = this.removed_children[i];
+                this.actor.add_child(child);
+            }
+            this.removed_children = [];
+        }
     },
 
 }
@@ -90,12 +145,15 @@ MyApplet.prototype = {
         this.file_schema = "file://";
         this.home_shortcut = "~";
         this.applet_popup_gap = 10;
+        this.restore_hidden_separator = new RegExp("\\s*,\\s*");
         this.is_running = true;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.action_type = AppletConstants.ActionType.TOGGLE_POPUP;
         this.action_trigger_type = AppletConstants.ActionTriggerType.CLICK;
         this.side_type = St.Side.LEFT;
+        this.restore_hidden_string = "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org";
+        this.restore_hidden_array = ["network@cinnamon.org", "sound@cinnamon.org", "removable-drives@cinnamon.org"];
         this.save_every = 60;
         this.gui_sort_type = AppletConstants.GuiSortType.ALPHABETICALLY;
         this.applet_popup_close_leave = true;
@@ -103,8 +161,13 @@ MyApplet.prototype = {
         this.applet_popup_icons_size = 40;
         this.applet_popup_icons_css = "";
         this.applet_popup_table_css = "";
+        this.match_panel_icons_size = false;
         this.show_icon_tooltips = false;
+        this.show_grayscale_icons = false;
+        this.grayscale_brightness = 80;
+        this.gui_icon_type = AppletConstants.GuiIconType.FILEPATH;
         this.gui_icon_filepath = "";
+        this.gui_icon_symbolic_name = "";
 
         this.applet_infos = [];
         this.filepath_last_values = "";
@@ -117,6 +180,7 @@ MyApplet.prototype = {
         this._connect_signals();
         this._init_filepaths();
         this._init_files();
+        this._init_restore_hidden();
         this._init_menu_item_visibility();
         this._init_applet_popup();
         this._init_gui();
@@ -166,15 +230,27 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "side_type", null],
                 [Settings.BindingDirection.IN, "save_every", null],
                 [Settings.BindingDirection.IN, "applet_popup_close_leave", null],
+                [Settings.BindingDirection.IN, "restore_hidden_string", this.on_restore_hidden_string_changed],
                 [Settings.BindingDirection.IN, "gui_sort_type", this.on_gui_sort_type_changed],
                 [Settings.BindingDirection.IN, "applet_popup_columns", this.on_applet_popup_columns_changed],
                 [Settings.BindingDirection.IN, "applet_popup_icons_size", this.on_applet_popup_icons_size_changed],
                 [Settings.BindingDirection.IN, "applet_popup_icons_css", this.on_applet_popup_icons_css_changed],
                 [Settings.BindingDirection.IN, "applet_popup_table_css", this.on_applet_popup_table_css_changed],
+                [Settings.BindingDirection.IN, "match_panel_icons_size", this.on_match_panel_icons_size_changed],
                 [Settings.BindingDirection.IN, "show_icon_tooltips", this.on_show_icon_tooltips_changed],
-                [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_changed] ]){
+                [Settings.BindingDirection.IN, "show_grayscale_icons", this.on_show_grayscale_icons_changed],
+                [Settings.BindingDirection.IN, "grayscale_brightness", this.on_grayscale_brightness_changed],
+                [Settings.BindingDirection.IN, "gui_icon_type", this.on_gui_icon_type_changed],
+                [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_filepath_changed],
+                [Settings.BindingDirection.IN, "gui_icon_symbolic_name", this.on_gui_icon_symbolic_name_changed] ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
+    },
+
+    on_restore_hidden_string_changed: function () {
+        this.update_gui();
+        this.update_restore_hidden_array();
+        this.update_restore_hidden_signals();
     },
 
     on_gui_sort_type_changed: function () {
@@ -186,6 +262,12 @@ MyApplet.prototype = {
     },
 
     on_applet_popup_icons_size_changed: function () {
+        if(!this.match_panel_icons_size) {
+            this.set_applet_popup_icons_custom_size();
+        }
+    },
+
+    set_applet_popup_icons_custom_size: function () {
         this.applet_popup.set_icons_size(this.applet_popup_icons_size);
     },
 
@@ -197,16 +279,51 @@ MyApplet.prototype = {
         this.applet_popup.set_table_style(this.applet_popup_table_css);
     },
 
+    on_match_panel_icons_size_changed: function () {
+        if(this.match_panel_icons_size) {
+            this.set_applet_popup_icons_panel_size();
+        }
+        else {
+            this.set_applet_popup_icons_custom_size();
+        }
+    },
+
+    set_applet_popup_icons_panel_size: function () {
+        this.applet_popup.set_icons_size(this._panelHeight);
+    },
+
     on_show_icon_tooltips_changed: function () {
         this.update_gui();
         this.set_applet_popup_tooltip_texts();
     },
 
-    on_gui_icon_changed: function () {
-        this.set_gui_icon();
+    on_show_grayscale_icons_changed: function () {
+        this.update_gui();
+        this.set_applet_popup_icons_grayscale();
     },
 
-    set_gui_icon: function () {
+    on_grayscale_brightness_changed: function () {
+        this.reload_gui();
+    },
+
+    on_gui_icon_type_changed: function () {
+        switch(this.gui_icon_type) {
+            case AppletConstants.GuiIconType.FILEPATH: {
+                 this.on_gui_icon_filepath_changed();
+                 break;
+            }
+            case AppletConstants.GuiIconType.SYMBOLIC: {
+                 this.on_gui_icon_symbolic_name_changed();
+                 break;
+            }
+        }
+    },
+
+    on_gui_icon_filepath_changed: function () {
+        this.set_gui_icon_filepath();
+    },
+
+    set_gui_icon_filepath: function () {
         let path = this.format_path(this.gui_icon_filepath);
         let exists = this.file_exists(path);
         if (exists) {
@@ -233,6 +350,14 @@ MyApplet.prototype = {
 
     file_exists: function (path) {
         return GLib.file_test(path, GLib.FileTest.EXISTS);
+    },
+
+    on_gui_icon_symbolic_name_changed: function () {
+        this.set_gui_icon_symbolic();
+    },
+
+    set_gui_icon_symbolic: function () {
+        this.set_applet_icon_name(this.gui_icon_symbolic_name);
     },
 
     _connect_signals: function() {
@@ -340,6 +465,7 @@ MyApplet.prototype = {
 
     perform_action_show_applet_popup: function() {
         this.update_gui();
+        this.set_applet_popup_icons_grayscale();
         this.applet_popup.open();
     },
 
@@ -434,18 +560,70 @@ MyApplet.prototype = {
     create_applet_info: function (applet) {
         let is_visible = true;
         let applet_info = new AppletInfo(applet, is_visible);
+        this.update_restore_hidden_signal(applet_info);
         return applet_info;
+    },
+
+    update_restore_hidden_signal: function (applet_info) {
+        let connect = this.is_restore_hidden_applet(applet_info);
+        if(connect) {
+             this.connect_show_signal(applet_info);
+        }
+        else {
+             this.disconnect_show_signal(applet_info);
+        }
+    },
+
+    is_restore_hidden_applet: function(applet_info) {
+        return this.array_contains(this.restore_hidden_array, applet_info.uuid);
+    },
+
+    array_contains: function (array, element) {
+        return array.indexOf(element) > -1;
+    },
+
+    connect_show_signal: function (applet_info) {
+        let is_connected = applet_info.has_show_handler();
+        if(!is_connected) {
+             let handler_id = applet_info.actor.connect("show", Lang.bind(this, this.on_actor_show));
+             applet_info.add_show_handler(handler_id);
+        }
+    },
+
+    on_actor_show: function(actor, event) {
+        let index = this.find_applet_info_index(actor._applet);
+        if(index >= 0) {
+            let applet_info = this.applet_infos[index];
+            let is_visible = applet_info.is_visible;
+            this.set_visibility_changed(actor, is_visible);
+        }
+    },
+
+    set_visibility_changed: function(actor, is_visible) {
+        if(actor.visible != is_visible) {
+            this.set_visibility(actor, is_visible);
+        }
+    },
+
+    disconnect_show_signal: function (applet_info) {
+        let is_connected = applet_info.has_show_handler();
+        if(is_connected) {
+             applet_info.actor.disconnect(applet_info.show_handler_id);
+             applet_info.remove_show_handler();
+        }
     },
 
     reload_applet_popup: function () {
         this.applet_popup.set_columns(this.applet_popup_columns);
+        this.applet_popup.set_grayscale_brightness(this.grayscale_brightness)
         let icon_paths = this.get_applet_icon_paths();
         let icon_names = this.get_applet_names();
         this.applet_popup.reload_icons(icon_paths, icon_names);
-        this.on_applet_popup_icons_size_changed();
+        this.on_match_panel_icons_size_changed();
         this.on_applet_popup_icons_css_changed();
         this.on_applet_popup_table_css_changed();
         this.set_applet_popup_tooltip_texts();
+        this.set_applet_popup_icons_grayscale();
     },
 
     get_applet_icon_paths: function () {
@@ -454,11 +632,17 @@ MyApplet.prototype = {
     },
 
     get_applet_icon: function (applet_info) {
-        if(applet_info.has_system_icon()) {
-            return applet_info.system_icon;
+        if(applet_info.has_cache_icon()) {
+            return applet_info.cache_icon;
+        }
+        if(applet_info.has_usr_icon()) {
+            return applet_info.usr_icon;
         }
         if(applet_info.has_local_icon()) {
             return applet_info.local_icon;
+        }
+        if(applet_info.has_system_icon()) {
+            return applet_info.system_icon;
         }
         return this.icon_unknown;
     },
@@ -476,6 +660,31 @@ MyApplet.prototype = {
             });
         }
         return applet_names;
+    },
+
+    set_applet_popup_icons_grayscale: function () {
+        let is_grayscale_on_array = this.get_is_grayscale_on_array();
+        this.applet_popup.set_grayscales(is_grayscale_on_array);
+    },
+
+    get_is_grayscale_on_array: function () {
+        let is_grayscale_on_array = this.show_grayscale_icons ?
+                                    this.get_applet_visibilities_reversed() : this.get_grayscale_off_array();
+        return is_grayscale_on_array;
+    },
+
+    get_applet_visibilities_reversed: function () {
+        let visibilities_reversed = this.applet_infos.map(function(info) {
+              return !info.is_visible;
+        });
+        return visibilities_reversed;
+    },
+
+    get_grayscale_off_array: function () {
+        let grayscale_off_array = this.applet_infos.map(function(info) {
+              return false;
+        });
+        return grayscale_off_array;
     },
 
     get_applet_names: function () {
@@ -569,11 +778,56 @@ MyApplet.prototype = {
 
     set_visibility: function (actor, is_visible) {
         if(is_visible) {
-            actor.show();
+            this.show_actor(actor);
         }
         else {
-            actor.hide();
+            this.hide_actor(actor);
         }
+    },
+
+    show_actor: function (actor) {
+        actor.show();
+        this.toggle_removed_children_actor(actor, false);
+    },
+
+    toggle_removed_children_actor: function (actor, remove) {
+        let index = this.find_applet_info_index(actor._applet);
+        if(index >= 0) {
+            let applet_info = this.applet_infos[index];
+            this.toggle_removed_children_applet(applet_info, remove);
+        }
+    },
+
+    toggle_removed_children_applet: function (applet_info, remove) {
+        if(remove) {
+            this.remove_children(applet_info);
+        }
+        else {
+            this.add_removed_children(applet_info);
+        }
+    },
+
+    remove_children: function (applet_info) {
+        let remove = this.is_click_registered_when_hidden_applet(applet_info);
+        if(remove) {
+            applet_info.remove_children();
+        }
+    },
+
+    is_click_registered_when_hidden_applet: function(applet_info) {
+        return applet_info.uuid == "systray@cinnamon.org";
+    },
+
+    add_removed_children: function (applet_info) {
+        let add = this.is_click_registered_when_hidden_applet(applet_info);
+        if(add) {
+            applet_info.add_removed_children();
+        }
+    },
+
+    hide_actor: function (actor) {
+        actor.hide();
+        this.toggle_removed_children_actor(actor, true);
     },
 
     get_actors_panel_vertical: function() {
@@ -621,6 +875,14 @@ MyApplet.prototype = {
         if(!this.file_last_values.exists()) {
             this.file_last_values.create();
         }
+    },
+
+    _init_restore_hidden: function () {
+        this.update_restore_hidden_array();
+    },
+
+    update_restore_hidden_array: function () {
+        this.restore_hidden_array = this.restore_hidden_string.split(this.restore_hidden_separator);
     },
 
     _init_menu_item_visibility: function () {
@@ -679,7 +941,7 @@ MyApplet.prototype = {
     },
 
     _init_gui: function () {
-        this.set_gui_icon();
+        this.on_gui_icon_type_changed();
     },
 
     _init_applet_popup: function () {
@@ -689,6 +951,7 @@ MyApplet.prototype = {
 
     on_applet_popup_icon_clicked: function (icon_index) {
         this.toggle_visibility(icon_index);
+        this.toggle_grayscale_enabled(icon_index);
     },
 
     toggle_visibility: function (index) {
@@ -699,6 +962,29 @@ MyApplet.prototype = {
         }
         catch(e) {
             global.log("Error while toggling applet visibility: " + e);
+        }
+    },
+
+    toggle_grayscale_enabled: function (index) {
+        if(this.show_grayscale_icons) {
+            this.toggle_grayscale(index);
+        }
+    },
+
+    toggle_grayscale: function (index) {
+        try{
+            let applet_info = this.applet_infos[index];
+            let is_grayscale_on = !applet_info.is_visible;
+            this.applet_popup.set_grayscale(index, is_grayscale_on);
+        }
+        catch(e) {
+            global.log("Error while toggling applet icon grayscale: " + e);
+        }
+    },
+
+    update_restore_hidden_signals: function () {
+        for(let applet_info of this.applet_infos) {
+           this.update_restore_hidden_signal(applet_info);
         }
     },
 
@@ -762,6 +1048,13 @@ MyApplet.prototype = {
     },
 
     // Override
+    on_panel_height_changed: function() {
+        if(this.match_panel_icons_size) {
+            this.set_applet_popup_icons_panel_size();
+        }
+    },
+
+    // Override
     on_applet_added_to_panel: function(userEnabled) {
         this.run();
     },
@@ -819,7 +1112,6 @@ MyApplet.prototype = {
         this.set_visibilities();
         this.reload_menu_item_visibility();
         this.reload_applet_popup();
-        this.connect_show_signals();
         this._run_save_last_values_running();
     },
 
@@ -845,38 +1137,6 @@ MyApplet.prototype = {
              }
         }
         return rows;
-    },
-
-    connect_show_signals: function () {
-        for(let applet_info of this.applet_infos) {
-           this.connect_show_signal(applet_info);
-        }
-    },
-
-    connect_show_signal: function (applet_info) {
-        let connect = this.is_initialized_lately(applet_info);
-        if(connect) {
-             applet_info.actor.connect("show", Lang.bind(this, this.on_actor_show));
-        }
-    },
-
-    is_initialized_lately: function(applet_info) {
-        return applet_info.uuid == "network@cinnamon.org" || applet_info.uuid == "sound@cinnamon.org";
-    },
-
-    on_actor_show: function(actor, event) {
-        let index = this.find_applet_info_index(actor._applet);
-        if(index >= 0) {
-            let applet_info = this.applet_infos[index];
-            let is_visible = applet_info.is_visible;
-            this.set_visibility_changed(actor, is_visible);
-        }
-    },
-
-    set_visibility_changed: function(actor, is_visible) {
-        if(actor.visible != is_visible) {
-            this.set_visibility(actor, is_visible);
-        }
     },
 
     _run_save_last_values_running: function () {

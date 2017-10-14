@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-14 01:13+0100\n"
+"POT-Creation-Date: 2017-09-20 23:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,20 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
+
+#: applet.js:152
+msgid "Bumblebee program not installed"
+msgstr ""
+
+#: applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+
+#: applet.js:152
+msgid "Please read the help file."
+msgstr ""
 
 #: applet.js:172
 msgid "Waiting for Bumblebee"
@@ -49,19 +63,19 @@ msgstr ""
 msgid "Launch programs using the nVidia Graphics Processor"
 msgstr ""
 
-#: applet.js:358
+#: applet.js:359
 msgid "NVidia based GPU is Off"
 msgstr ""
 
-#: applet.js:381
+#: applet.js:384
 msgid "NVidia based GPU is On and Core Temperature is"
 msgstr ""
 
-#: applet.js:389
+#: applet.js:392
 msgid "Err"
 msgstr ""
 
-#: applet.js:390
+#: applet.js:393
 msgid ""
 "Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
 "drivers installed?"

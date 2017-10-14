@@ -50,6 +50,16 @@ MyApplet.prototype = {
             logError(error);
         }
     },
+    log: function (message) {
+        if (this.debug) {
+            log(message);
+        }
+    },
+    logError: function (message) {
+        if (this.debug) {
+            logError(message);
+        }
+    },
     bindProperties: function () {
         this.refreshInterval = this.settings.getValue("refreshInterval");
         this.IPv4 = this.settings.getValue("IPv4");
@@ -83,15 +93,23 @@ MyApplet.prototype = {
             this.refreshLocation,
             null
         );
+       this.settings.bindProperty(
+            Settings.BindingDirection.IN,
+            "debug",
+            "debug",
+            function () {},
+            null
+        );
     },
     unbindProperties: function () {
         this.settings.unbindProperty("refreshInterval");
         this.settings.unbindProperty("IPv4");
         this.settings.unbindProperty("IPv6");
         this.settings.unbindProperty("inet");
+        this.settings.unbindProperty("debug");
     },
     refreshLocation: function refreshLocation () {
-        log("Run refreshLocation");
+        this.log("Run refreshLocation");
         let command = ["ip", "-o"];
         if (this.IPv4 && !this.IPv6) {
             command.push("-4");
@@ -100,7 +118,7 @@ MyApplet.prototype = {
         }
         command.push("addr");
 
-        log(command);
+        this.log(command);
 
         Util.spawn_async(
             command,
@@ -120,7 +138,7 @@ MyApplet.prototype = {
     processIps: function (out) {
         const INET_REGEX = new RegExp("[0-9]+: (" + this.inet.replace(/,/g, "|") +") +inet[46]? +(.*)");
 
-        log(INET_REGEX);
+        this.log(INET_REGEX);
 
         var ipsSplitted = String(out).split("\n");
         ips = "";
@@ -132,13 +150,13 @@ MyApplet.prototype = {
                 }
                 first = false;
 
-                log(ipsSplitted[i]);
-                log(ipsSplitted[i].replace(IP_REGEX, "$1"));
+                this.log(ipsSplitted[i]);
+                this.log(ipsSplitted[i].replace(IP_REGEX, "$1"));
 
                 ips = ips + ipsSplitted[i].replace(IP_REGEX, "$1");
             }
         }
-        log(ips);
+        this.log(ips);
 
         ips = String(ips).trim();
 

@@ -52,11 +52,10 @@ MyApplet.prototype = {
         this.is_running = true;
 
         this.screen_outputs = {};
-        this.xrandr_process = null;
         this.menu_item_screen_position = 0;
-        this.menu_item_output_position = 1;
+        this.menu_item_outputs_position = 1;
         this.menu_item_screen = null;
-        this.menu_item_output = null;
+        this.menu_item_outputs = null;
         this.menu_sliders = null;
         this.file_schema = "file://";
         this.home_shortcut = "~";
@@ -73,19 +72,20 @@ MyApplet.prototype = {
         this.output_connected = "connected";
         this.output_disconnected = "disconnected";
         this.gamma_separator = ":";
+        this.output_indexes_separator = "^";
         this.filepath_last_values = "";
         this.file_last_values = null;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.default_screen_name = "";
-        this.default_output_index = -1;
+        this.default_output_indexes = [];
         this.minimum_brightness = 10;
         this.maximum_brightness = 100;
         this.minimum_gamma = 10;
         this.maximum_gamma = 100;
         this.default_save_every = 60;
         this.screen_name = this.default_screen_name;
-        this.output_index = this.default_output_index;
+        this.output_indexes = this.default_output_indexes;
         this.brightness = this.maximum_brightness;
         this.gamma_red = this.maximum_gamma;
         this.gamma_green = this.maximum_gamma;
@@ -96,6 +96,8 @@ MyApplet.prototype = {
         this.options_type = AppletConstants.OptionsType.ALL;
         this.gui_icon_filepath = "";
         this.apply_startup = true;
+        this.apply_every = 0;
+        this.apply_asynchronously = true;
 
         this._init_dependencies_satisfied();
     },
@@ -200,7 +202,6 @@ MyApplet.prototype = {
         this._init_layout();
         this._bind_settings();
         this._connect_signals();
-        this._init_xrandr_process();
         this._init_filepaths();
         this._init_files();
         this._init_values();
@@ -248,7 +249,9 @@ MyApplet.prototype = {
 
     _bind_settings: function () {
         for(let [binding, property_name, callback] of [
+                        [Settings.BindingDirection.IN, "apply_asynchronously", null],
                         [Settings.BindingDirection.IN, "apply_startup", null],
+                        [Settings.BindingDirection.IN, "apply_every", null],
                         [Settings.BindingDirection.IN, "save_every", null],
                         [Settings.BindingDirection.IN, "update_scroll", null],
                         [Settings.BindingDirection.IN, "scroll_step", null],
@@ -499,13 +502,13 @@ MyApplet.prototype = {
     },
 
     is_screen_output_default: function () {
-        return this.screen_name == this.default_screen_name && this.output_index == this.default_output_index;
+        return this.screen_name == this.default_screen_name && this.output_indexes == this.default_output_indexes;
     },
 
     set_connected_screen: function () {
         for(let screen_name in this.screen_outputs) {
             let outputs = this.screen_outputs[screen_name];
-            if(this.set_connected_output(outputs)) {
+            if(this.set_connected_outputs(outputs)) {
                 this.screen_name = screen_name;
                 return true;
             }
@@ -513,19 +516,16 @@ MyApplet.prototype = {
         return false;
     },
 
-    set_connected_output: function (outputs) {
+    set_connected_outputs: function (outputs) {
+        let found = false;
         for(let i = 0; i < outputs.length; ++i) {
             let output = outputs[i];
             if(output.is_connected) {
-                this.output_index = i;
-                return true;
+                this.output_indexes.push(i);
+                found = true;
             }
         }
-        return false;
-    },
-
-    _init_xrandr_process: function () {
-        this.xrandr_process = new ShellUtils.ShellOutputProcess([this.xrandr_name]);
+        return found;
     },
 
     _init_filepaths: function () {
@@ -546,13 +546,16 @@ MyApplet.prototype = {
     load_last_values: function() {
         try {
             let rows = this.file_last_values.get_last_value_rows();
-            let row = rows[0];
-            this.screen_name = row.screen_name;
-            this.output_index = row.output_index;
-            this.brightness = row.brightness;
-            this.gamma_red = row.gamma_red;
-            this.gamma_green = row.gamma_green;
-            this.gamma_blue = row.gamma_blue;
+            if(rows.length > 0) {
+                let row = rows[0];
+                this.screen_name = row.screen_name;
+                let output_indexes = row.output_indexes_string.split(this.output_indexes_separator);
+                this.output_indexes = output_indexes.map(function(output_index) { return parseInt(output_index); });
+                this.brightness = row.brightness;
+                this.gamma_red = row.gamma_red;
+                this.gamma_green = row.gamma_green;
+                this.gamma_blue = row.gamma_blue;
+            }
         }
         catch(e) {
             global.log("Error while loading last values from a file: " + e);
@@ -561,7 +564,7 @@ MyApplet.prototype = {
 
     _init_context_menu: function () {
         this._init_menu_item_screen();
-        this._init_menu_item_output();
+        this._init_menu_item_outputs();
     },
 
     _init_menu_item_screen: function () {
@@ -583,7 +586,8 @@ MyApplet.prototype = {
     on_menu_item_screen_clicked: function (option_name, option_index) {
         if(this.screen_name != option_name) {
             this.screen_name = option_name;
-            this._update_menu_item_output();
+            this.reload_outputs();
+            this.reload_menu_item_outputs();
             this.update_xrandr();
         }
     },
@@ -603,17 +607,16 @@ MyApplet.prototype = {
         return key in dictionary;
     },
 
-    _update_menu_item_output: function (screen_name) {
-        this.menu_item_output.destroy();
-        this._init_menu_item_output();
+    reload_outputs: function () {
+        let outputs = this.screen_outputs[this.screen_name];
+        this.output_indexes = [];
+        this.set_connected_outputs(outputs);
     },
 
-    _init_menu_item_output: function () {
-        let output_names = this.get_output_names();
-        this.menu_item_output = new AppletGui.RadioMenuItem(_("Output"), output_names);
-        this.menu_item_output.set_callback_option_clicked(this, this.on_menu_item_output_clicked);
-        this.set_menu_item_output_option();
-        this._applet_context_menu.addMenuItem(this.menu_item_output, this.menu_item_output_position);
+    reload_menu_item_outputs: function () {
+        let names = this.get_output_names();
+        let checked = this.get_output_checked();
+        this.menu_item_outputs.reload_options(names, checked);
     },
 
     get_output_names: function () {
@@ -625,26 +628,72 @@ MyApplet.prototype = {
         return [];
     },
 
-    on_menu_item_output_clicked: function (option_name, option_index) {
-        if(this.output_index != option_index) {
-            this.output_index = option_index;
+    get_output_checked: function () {
+        let valid = this.is_screen_valid();
+        if(valid) {
+            let result = this.get_output_checked_valid();
+            return result;
+        }
+        return [];
+    },
+
+    get_output_checked_valid: function () {
+        let checked = [];
+        let outputs = this.screen_outputs[this.screen_name];
+        let index = 0;
+        for(let i = 0; i < outputs.length; ++i) {
+            let output_checked = index < this.output_indexes.length && i == this.output_indexes[index];
+            checked[i] = index < this.output_indexes.length && i == this.output_indexes[index];
+            if(output_checked) {
+                ++index;
+            }
+        }
+        return checked;
+    },
+
+    _init_menu_item_outputs: function () {
+        this.menu_item_outputs = new AppletGui.CheckboxMenuItem(_("Outputs"));
+        this.menu_item_outputs.set_callback_option_toggled(this, this.on_menu_item_outputs_toggled);
+        this.reload_menu_item_outputs();
+        this._applet_context_menu.addMenuItem(this.menu_item_outputs, this.menu_item_outputs_position);
+    },
+
+    on_menu_item_outputs_toggled: function (option_index, option_name, checked) {
+        let array_index = this.output_indexes.indexOf(option_index);
+        let contains = array_index > -1;
+        if(contains) {
+            this.array_remove(this.output_indexes, array_index);
+        }
+        else {
+            this.array_insert(this.output_indexes, option_index);
             this.update_xrandr();
         }
     },
 
-    set_menu_item_output_option: function () {
-        let valid = this.is_screen_output_valid();
-        if(valid) {
-            this.menu_item_output.set_active_option_index(this.output_index);
-        }
+    array_remove: function (array, index) {
+        array.splice(index, 1);
     },
 
-    is_screen_output_valid: function () {
-        return this.is_screen_valid() && this.is_output_valid();
+    array_insert: function (array, number) {
+        let index = this.find_insert_index(array, number);
+        array.splice(index, 0, number);
     },
 
-    is_output_valid: function () {
-        return this.output_index >= 0 && this.output_index < this.screen_outputs[this.screen_name].length;
+    find_insert_index: function (array, number) {
+          let middle = 0;
+          let lower = 0;
+          let upper = array.length - 1;
+          while (lower <= upper) {
+              middle = Math.floor((lower + upper) / 2);
+              if (number < array[middle]) {
+                  upper = middle - 1;
+              } else if (number > array[middle]) {
+                  lower = middle + 1;
+              } else {
+                  return middle;
+              }
+          }
+          return lower == array.length ? array.length : middle;
     },
 
     _init_menu_sliders: function () {
@@ -678,16 +727,30 @@ MyApplet.prototype = {
     },
 
     update_xrandr: function () {
-        let valid = this.is_screen_output_valid();
-        if(valid) {
-            let argv = this.get_xrandr_argv();
-            this.spawn_xrandr_process(argv);
+        for(let output_index of this.output_indexes) {
+            let valid = this.is_screen_output_valid(output_index);
+            if(valid) {
+                this.update_xrandr_output(output_index);
+            }
         }
     },
 
-    get_xrandr_argv: function () {
+    is_screen_output_valid: function (output_index) {
+        return this.is_screen_valid() && this.is_output_valid(output_index);
+    },
+
+    is_output_valid: function (output_index) {
+        return output_index >= 0 && output_index < this.screen_outputs[this.screen_name].length;
+    },
+
+    update_xrandr_output: function (output_index) {
+        let argv = this.get_xrandr_argv(output_index);
+        this.spawn_xrandr_process(argv);
+    },
+
+    get_xrandr_argv: function (output_index) {
         let screen_parameter = this._get_screen_parameter();
-        let output_parameter = this._get_output_parameter();
+        let output_parameter = this._get_output_parameter(output_index);
         let brightness_parameter = this._get_brightness_parameter();
         let gamma_parameter = this._get_gamma_parameter();
 
@@ -705,15 +768,15 @@ MyApplet.prototype = {
         return parameter;
     },
 
-    _get_output_parameter: function() {
-        let output = this.get_active_output();
+    _get_output_parameter: function(output_index) {
+        let output = this.get_active_output(output_index);
         let parameter = output.output_name;
         return parameter;
     },
 
-    get_active_output: function () {
+    get_active_output: function (output_index) {
         let outputs = this.screen_outputs[this.screen_name];
-        let output = outputs[this.output_index];
+        let output = outputs[output_index];
         return output;
     },
 
@@ -736,10 +799,44 @@ MyApplet.prototype = {
     },
 
     spawn_xrandr_process: function (argv) {
-        this.xrandr_process.command_argv = argv;
-        let output = this.xrandr_process.spawn_sync_and_get_error();
-        if(output > 0) {
-            global.log("Error while updating brightness and gamma: " + output + ". Command line arguments: " + argv);
+        if(this.apply_asynchronously) {
+            this.spawn_xrandr_process_async(argv);
+        }
+        else {
+            this.spawn_xrandr_process_sync(argv);
+        }
+    },
+
+    spawn_xrandr_process_async: function (argv) {
+        try {
+            let xrandr_process = new ShellUtils.BackgroundProcess(argv, true);
+            xrandr_process.set_callback_process_finished(this, this.on_xrandr_async_finished);
+            xrandr_process.spawn_async();
+        }
+        catch(e) {
+            global.log("Error while spawning asynchronously xrandr process: " + e.message);
+        }
+    },
+
+    on_xrandr_async_finished: function (xrandr_process, pid, status) {
+        let error = xrandr_process.get_standard_error_content();
+        if(error.length > 0) {
+            let error_message = "Error while updating brightness and gamma asynchronously: " + error;
+            this.log_process_error(error_message, xrandr_process.command_argv);
+        }
+    },
+
+    log_process_error: function(error_message, argv) {
+        let text = error_message + ". Command line arguments: " + argv;
+        global.log(text);
+    },
+
+    spawn_xrandr_process_sync: function (argv) {
+        let xrandr_process = new ShellUtils.ShellOutputProcess(argv);
+        let error = xrandr_process.spawn_sync_and_get_error();
+        if(error.length > 0) {
+            let error_message = "Error while updating brightness and gamma synchronously: " + error;
+            this.log_process_error(error_message, xrandr_process.command_argv);
         }
     },
 
@@ -749,7 +846,24 @@ MyApplet.prototype = {
 
 
     run: function () {
+        this._run_apply_values_running();
         this._run_save_last_values_running();
+    },
+
+    _run_apply_values_running: function () {
+        if(this.is_running) {
+            this._apply_values();
+        }
+    },
+
+    _apply_values: function () {
+        if(this.apply_every > 0) {
+            this.update_xrandr();
+            Mainloop.timeout_add(1000 * this.apply_every, Lang.bind(this, this._run_apply_values_running));
+        }
+        else {
+            Mainloop.timeout_add(1000, Lang.bind(this, this._run_apply_values_running));
+        }
     },
 
     _run_save_last_values_running: function () {
@@ -768,7 +882,8 @@ MyApplet.prototype = {
     // Save last values to a CSV file instead of using Settings.bind function to prevent high CPU usage in Cinnamon 3.2+
     save_last_values: function() {
         try {
-            let rows = [ new FilesCsv.LastValuesRowCsv(this.screen_name, this.output_index, this.brightness,
+            let output_indexes_string = this.output_indexes.join(this.output_indexes_separator);
+            let rows = [ new FilesCsv.LastValuesRowCsv(this.screen_name, output_indexes_string, this.brightness,
                                                        this.gamma_red, this.gamma_green, this.gamma_blue)   ];
             this.file_last_values.overwrite(rows);
         }

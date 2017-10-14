@@ -1,7 +1,0 @@
-{
-    "last-edited": "1412520226", 
-    "description": "Main Cinnamon window list with hotkey (SUPER + NUMBER).", 
-    "icon": "gnome-panel-window-list", 
-    "uuid": "Window-List-Hotkey@HenryNugraha", 
-    "name": "Window list with hotkey"
-}

@@ -8,7 +8,7 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
-const Calendar = imports.applet.calendar;
+const Calendar = imports.ui.appletManager.applets['binaryclock@entelechy'].calendar;
 const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const Cairo = imports.cairo;
 

@@ -19,7 +19,7 @@ const GLib = imports.gi.GLib; // ++ Needed for starting programs and translation
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
-
+const Main = imports.ui.main; // ++ Needed for criticalNotify()
 
 // ++ Always needed if you want localisation/translation support
 // New l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
@@ -142,8 +142,16 @@ MyApplet.prototype = {
                 this.textEd = "xed";
             }
 
-            // Set up Modal Alert Box - Now moved below 
- //          alertModalDataWarning = new AlertDialog("The Battery Level has fallen to your alert level\n\n either reconnect to a power source\n\or close down your work and suspend or shutdown the machine");
+            // Check that all Dependencies Met by presence of sox and zenity 
+            if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") ) {
+                 this.dependenciesMet = true;
+            } else {
+                 let icon = new St.Icon({ icon_name: 'error',
+                 icon_type: St.IconType.FULLCOLOR,
+                 icon_size: 36 });
+                 Main.criticalNotify("Some Dependencies not Installed", "You appear to be missing some of the programs required for this applet to have all it's facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them.", icon);
+                 this.dependenciesMet = false;
+            }
 
             // ++ Set up left click menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -279,7 +287,7 @@ MyApplet.prototype = {
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Note: Alerts not enabled in Settings"), {
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Waiting for battery information"), {
                 reactive: false
             });
             this.menu.addMenuItem(this.menuitemInfo2);
@@ -409,9 +417,9 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
              if (this.batteryPercentage < Math.floor(this.alertPercentage)  && this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5) && this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryCaution }
 
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5) && this.batteryPercentage >= 00 && !this.batteryState.indexOf("discharg") > -1) {
+             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5) && this.batteryPercentage >= 0 && !this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryChargingLow }
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5)  && this.batteryPercentage >= 00 && this.batteryState.indexOf("discharg") > -1) {
+             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5)  && this.batteryPercentage >= 0 && this.batteryState.indexOf("discharg") > -1) {
                   this.batteryIcon = this.batteryLow };
 
              // Choose what to display based on Display Type from settings dropdown  
@@ -424,16 +432,19 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
     this.batteryMessage = ""
              }
 
-             if ( this.displayType == "icon" ) {
-                 this.hide_applet_label(true); 
-             } else {
-                 this.hide_applet_label(false);
-             }
+
 
              if (this.batteryPercentage == 100 && !this.isHorizontal ) { 
                 this.set_applet_label(this.batteryMessage + this.batteryPercentage + "");
              } else {
                 this.set_applet_label(this.batteryMessage + this.batteryPercentage + "%");
+             }
+
+             if ( this.displayType == "icon" ) {
+                 this.set_applet_label("");
+                 if (!this.isHorizontal) { this.hide_applet_label(true) }; 
+             } else {
+                 if (!this.isHorizontal) { this.hide_applet_label(false) };
              }
 
             // Set left click menu item 'label' for slider 
@@ -540,5 +551,18 @@ Now includes support for Vertical Panels, Battery icons and 5 display modes
  * Code comments improved and some commented out code removed.
  * Update README.md, CHANGELOG.md and metadata.json
  * Recreate batterymonitor.pot to allow translation support to be updated.
+### 1.3.1
+Bug Fix for use with early versions of Cinnamon
+ * Inhibited use of hide_applet_label() to Cinnamon version 3.2 or higher in vertical panels.
+ * Corrected Icon Only display mode
+### 1.3.2
+ * Add checks that sox and zenity are installed and warn that full facilities are not available without them.
+ * Improve handling of completely empty batteries.
+ * Update README.md, CHANGELOG.md and metadata.json
+ * Update batterymonitor.pot so translations can be updated.
+### 1.3.2.1
+ * Revert change on handling empty battery
+### 1.3.2.2
+ * Remove instance of depreciated code giving a harmless warning in .xsession-errors.
 */
 

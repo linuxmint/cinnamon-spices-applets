@@ -242,7 +242,7 @@
         "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
         "dependency": "useAlertSound",
         "description": "Full path and filename of alert sound file",
-        "tooltip": "Only for built in alerts - hard code into scripts. Must have Sox installed. Most sound file types supported"
+        "tooltip": "Must have Sox installed. Most sound file types supported"
     },
     "displayExtraHousekeeping": {
         "type": "checkbox",

@@ -91,7 +91,7 @@ ErrorCommandDialog.prototype = {
 	    {
 		label: _("Open Applet Source"),
 		action: Lang.bind(this, function(){
-                    Util.spawnCommandLine("gedit .local/share/cinnamon/applets/" + UUID + "/applet.js" );
+                    Util.spawnCommandLine("xdg-open .local/share/cinnamon/applets/" + UUID + "/applet.js" );
                     this.close();
 		})
 	    },
@@ -102,7 +102,7 @@ ErrorCommandDialog.prototype = {
 		})
 	    }
 	]);
-    },	
+    },
 }
 
 function devUtils(metadata, orientation, panelHeight, instanceId) {
@@ -115,20 +115,20 @@ devUtils.prototype = {
 
 ,	_init: function(orientation, panelHeight, instanceId) {
 		Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
-        
+
         try {
-			
+
 			for (var i in SettingsKeys) {
 				this.settings.bindProperty(Settings.BindingDirection.IN, SettingsKeys[i][0], SettingsKeys[i][0], function () {this["property_changed"](SettingsKeys[i][0])}, null);
 			}
-			
+
             this.set_applet_icon_symbolic_name(ICON);
             this.set_applet_tooltip(_("Development Utils"));
-            
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
-            this.menuManager.addMenu(this.menu);        
-            
+            this.menuManager.addMenu(this.menu);
+
             //Context menu
 			let settingsMenuItemAppletSettings = new Applet.MenuItem(_("Settings"), Gtk.STOCK_EDIT, Lang.bind(this, function() {
 				Util.spawnCommandLine(CMD_SETTINGS);
@@ -139,48 +139,47 @@ devUtils.prototype = {
 				Main.createLookingGlass().open();
 			}));
 			this._applet_context_menu.addMenuItem(settingsMenuItemLookingGlass);
-			
+
 			this.buildMenu();
         }
         catch (e) {
             global.logError(e);
         }
     },
-    
+
     buildMenu: function() {
 		this.menu.removeAll();
 		try {
-			
 			//Begin Switch Buttons
-			if((this.services.actor == true || this.services == true) && this.services_type == "buttons") {
-				
+			if(typeof this.services.actor !== 'undefinded' && (this.services.actor == true || this.services == true) && this.services_type == "buttons") {
+
 				for (var i in ServiceKeys) {
 					this[ServiceKeys[i][0] + "EnabledSwitch"] = new PopupMenu.PopupSwitchMenuItem(_(ServiceKeys[i][1]), checkService(ServiceKeys[i][2]));
 					this.menu.addMenuItem(this[ServiceKeys[i][0] + "EnabledSwitch"]);
-					
+
 				}
 				this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 			}
 			//End Switch Buttons
-													
+
             this._contentSection = new PopupMenu.PopupMenuSection();
-            this.menu.addMenuItem(this._contentSection);                    
-            
+            this.menu.addMenuItem(this._contentSection);
+
             //Begin Subemnu Control Items
             if((this.services.actor == true || this.services == true) && this.services_type == "submenu") {
-				
+
 				for (var i in ServiceKeys) {
 					this[ServiceKeys[i][0] + "Item"] = new PopupMenu.PopupSubMenuMenuItem(_("Control " + ServiceKeys[i][1]));
 					this[ServiceKeys[i][0] + "Item"].menu.addAction(checkService(ServiceKeys[i][0]) == true ? _("  Service is up") : _("  Start service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " start') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
 					this[ServiceKeys[i][0] + "Item"].menu.addAction(checkService(ServiceKeys[i][0]) == false ? _("  Service is down") : _("  Stop service"), eval("function(event) { try {Util.trySpawnCommandLine('gksu service " + ServiceKeys[i][0] + " stop') } catch (e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
-					this.menu.addMenuItem(this[ServiceKeys[i][0] + "Item"]); 
+					this.menu.addMenuItem(this[ServiceKeys[i][0] + "Item"]);
 				}
-				
+
 				this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-				
+
 			}
             //End Subemnu Control Items
-            
+
             //BEGIN DYNAMIC MENU
             for (var i in SettingsKeys) {
 				if(this[SettingsKeys[i][0]] == true || SettingsKeys[i][2].length == 0) {
@@ -195,7 +194,7 @@ devUtils.prototype = {
 						var command = SettingsKeys[i][0];
 					}
 					if(SettingsKeys[i][2].length > 0) {
-						this.menu.addAction(_(SettingsKeys[i][2]), eval("function(event) { try { Util.trySpawnCommandLine('" + command + "'); } catch(e) { this.error = new ErrorCommandDialog(); this.error.open(); } }"));
+						this.menu.addAction(_(SettingsKeys[i][2]), eval("(function(event) { try { Util.trySpawnCommandLine('" + command + "'); } catch(e) { this.error = new ErrorCommandDialog(); this.error.open(); } })"));
 					}
 					else {
 						void(0);
@@ -204,7 +203,7 @@ devUtils.prototype = {
 			}
              this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
             //END DYNAMIC MENU
-            
+
             //BEGIN STATIC MENU
             if(this.config.actor == true || this.config == true) {
 				var open_dir = this.open_project_dir;
@@ -228,10 +227,10 @@ devUtils.prototype = {
 				//this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 			}
 			//END STATIC MENU
-			
+
 			if((this.services.actor == true || this.services == true) && this.services_type == "buttons") {
 				for (var j in ServiceKeys) {
-					this[ServiceKeys[j][0] + "EnabledSwitch"].connect("toggled", Lang.bind(this, eval("function(item) { if(item.state) { Util.spawnCommandLine('gksu service " + ServiceKeys[j][0] + " start'); } else { Util.spawnCommandLine('gksu service " + ServiceKeys[j][0] + " stop'); } }")));
+					this[ServiceKeys[j][0] + "EnabledSwitch"].connect("toggled", Lang.bind(this, eval("(function(item) { if(item.state) { Util.spawnCommandLine('gksu service " + ServiceKeys[j][0] + " start'); } else { Util.spawnCommandLine('gksu service " + ServiceKeys[j][0] + " stop'); } })")));
 				}
 			}
 		}
@@ -239,17 +238,17 @@ devUtils.prototype = {
 			global.logError(e);
 		}
 	},
-	
+
 	property_changed: function(key) {
         this.actor.key = this.key;
         this.updateMenu();
     },
-    
+
     on_applet_clicked: function(event) {
         this.menu.toggle();
-        this.updateMenu();       
+        this.updateMenu();
     },
-    
+
     updateMenu: function() {
 		this.buildMenu();
 	},
@@ -261,14 +260,14 @@ function main(metadata, orientation, panelHeight, instanceId) {
 
 function checkService(service) {
 
-	s=GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH,null)
-	c=GLib.IOChannel.unix_new(s[3])
-	       
+	let s=GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH,null)
+	let c=GLib.IOChannel.unix_new(s[3])
+
 	let [res, pid, in_fd, out_fd, err_fd] =
 	  GLib.spawn_async_with_pipes(
 	    null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH, null);
-	out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: out_fd}) });
-	       
+	let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: out_fd}) });
+
 	let [out, size] = out_reader.read_line(null);
 
 	var result = false;

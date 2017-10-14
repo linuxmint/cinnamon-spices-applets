@@ -1,6 +1,0 @@
-{
-  "uuid": "netctlstatus@prmurthy",  
-  "name": "Netctl Status",
-  "description": "Netctl Status displays netctl status in the system tray",
-  "icon": "network-idle"
-}

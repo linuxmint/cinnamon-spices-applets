@@ -36,36 +36,44 @@ MyApplet.prototype = {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this._bindSettings();
+
+        this.settings.bind("show-notifications", "showNotifications", null)
+        this.settings.bind("indicator-type", "indicatorType", this._updateIconVisibility);
 
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
         this.binEmpty = new St.Bin();
-        this.binEmpty.set_size(3, 3);
+        this.binEmpty.set_size(0, 0);
 
         Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
         this.caps_on = new St.Icon({
             icon_name: "caps-on",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.caps_off = new St.Icon({
             icon_name: "caps-off",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.num_on = new St.Icon({
             icon_name: "num-on",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
         this.num_off = new St.Icon({
             icon_name: "num-off",
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 18,
+            style_class: "applet-icon"
+        });
+        this.indicator_off = new St.Icon({
+            icon_name: "indicator-off",
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: 18,
             style_class: "applet-icon"
         });
@@ -98,31 +106,10 @@ MyApplet.prototype = {
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
         this.menu.addMenuItem(this.capsMenuItem);
 
-        this.notificationsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Notifications"), this.pref_show_notifications, {
-            reactive: true
-        });
-        this.notificationsMenuItem.connect('activate', Lang.bind(this, this._onNotificationsChanged));
-        this.menu.addMenuItem(this.notificationsMenuItem);
-
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
         this._updateState();
-    },
-
-    _bindSettings: function() {
-        let bD = Settings.BindingDirection || null;
-        let settingsArray = [
-            [bD.BIDIRECTIONAL, "pref_show_notifications", null],
-        ];
-        let newBinding = typeof this.settings.bind === "function";
-        for (let [binding, property_name, callback] of settingsArray) {
-            // Condition needed for retro-compatibility.
-            // Mark for deletion on EOL.
-            if (newBinding)
-                this.settings.bind(property_name, property_name, callback);
-            else
-                this.settings.bindProperty(binding, property_name, property_name, callback, null);
-        }
+        this._updateIconVisibility();
     },
 
     on_applet_removed_from_panel: function() {
@@ -149,7 +136,7 @@ MyApplet.prototype = {
 
         let icon = new St.Icon({
             icon_name: iconName,
-            icon_type: St.IconType.FULLCOLOR,
+            icon_type: St.IconType.SYMBOLIC,
             icon_size: this._source.ICON_SIZE
         });
         this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
@@ -161,6 +148,21 @@ MyApplet.prototype = {
             this._notification = null;
         });
         this._source.notify(this._notification);
+    },
+
+    _updateIconVisibility: function() {
+        if (this.indicatorType == "both" || this.indicatorType == "caps-only")
+            this.binCaps.show();
+        else
+            this.binCaps.hide();
+        if (this.indicatorType == "both" || this.indicatorType == "num-only")
+            this.binNum.show();
+        else
+            this.binNum.hide();
+        if (this.indicatorType == "both")
+            this.binEmpty.show();
+        else
+            this.binEmpty.hide();
     },
 
     _updateState: function() {
@@ -191,7 +193,7 @@ MyApplet.prototype = {
                 msg = _("Num lock off");
                 icon_name = 'num-off';
             }
-            if (this.pref_show_notifications)
+            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "num-only"))
                 this._notifyMessage(icon_name, msg);
         }
         if (capslock_prev != this.binCaps.child && !this._firstRun) {
@@ -202,7 +204,7 @@ MyApplet.prototype = {
                 msg = _("Caps lock off");
                 icon_name = 'caps-off';
             }
-            if (this.pref_show_notifications)
+            if (this.showNotifications && (this.indicatorType == "both" || this.indicatorType == "caps-only"))
                 this._notifyMessage(icon_name, msg);
         }
         this._firstRun = false;
@@ -217,7 +219,12 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        this.menu.toggle();
+        if (this.indicatorType == "both")
+            this.menu.toggle();
+        else if (this.indicatorType == "caps-only")
+            this._onCapsChanged();
+        else if (this.indicatorType == "num-only")
+            this._onNumChanged();
     },
 
     _onNumChanged: function(actor, event) {
@@ -244,11 +251,7 @@ MyApplet.prototype = {
             Caribou.DisplayAdapter.get_default().keyval_release(keyval);
         }
         this._updateState();
-    },
-
-    _onNotificationsChanged: function(actor, event) {
-        this.pref_show_notifications = !this.pref_show_notifications;
-    },
+    }
 };
 
 function main(metadata, orientation, panel_height, instance_id) {

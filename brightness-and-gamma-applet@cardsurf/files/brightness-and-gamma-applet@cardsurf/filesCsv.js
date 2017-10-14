@@ -9,15 +9,15 @@ const Files = AppletDirectory.files;
 
 
 
-function LastValuesRowCsv(screen_name, output_index, brightness, gamma_red, gamma_green, gamma_blue) {
-    this._init(screen_name, output_index, brightness, gamma_red, gamma_green, gamma_blue);
+function LastValuesRowCsv(screen_name, output_indexes_string, brightness, gamma_red, gamma_green, gamma_blue) {
+    this._init(screen_name, output_indexes_string, brightness, gamma_red, gamma_green, gamma_blue);
 };
 
 LastValuesRowCsv.prototype = {
 
-    _init: function(screen_name, output_index, brightness, gamma_red, gamma_green, gamma_blue) {
+    _init: function(screen_name, output_indexes_string, brightness, gamma_red, gamma_green, gamma_blue) {
         this.screen_name = screen_name;
-        this.output_index = output_index;
+        this.output_indexes_string = output_indexes_string;
         this.brightness = brightness;
         this.gamma_red = gamma_red;
         this.gamma_green = gamma_green;
@@ -30,14 +30,14 @@ LastValuesRowCsv.prototype = {
 
 
 LastValuesFileCsv.ScreenNameColumnName = "Screen name";
-LastValuesFileCsv.OutputIndexColumnName = "Output index";
+LastValuesFileCsv.OutputIndexesStringColumnName = "Output indexes";
 LastValuesFileCsv.BrightnessColumnName = "Brightness";
 LastValuesFileCsv.GammaRedColumnName = "Gamma red";
 LastValuesFileCsv.GammaGreenColumnName = "Gamma green";
 LastValuesFileCsv.GammaBlueColumnName = "Gamma blue";
 
 LastValuesFileCsv.ScreenNameColumnIndex = 0;
-LastValuesFileCsv.OutputIndexColumnIndex = 1;
+LastValuesFileCsv.OutputIndexesStringColumnIndex = 1;
 LastValuesFileCsv.BrightnessColumnIndex = 2;
 LastValuesFileCsv.GammaRedColumnIndex = 3;
 LastValuesFileCsv.GammaGreenColumnIndex = 4;
@@ -74,12 +74,13 @@ LastValuesFileCsv.prototype = {
     to_last_value_row: function(string) {
         let values = string.split(this.csv_separator);
         let screen_name = values[LastValuesFileCsv.ScreenNameColumnIndex];
-        let output_index = parseInt(values[LastValuesFileCsv.OutputIndexColumnIndex]);
+        let output_indexes_string = values[LastValuesFileCsv.OutputIndexesStringColumnIndex];
         let brightness = parseInt(values[LastValuesFileCsv.BrightnessColumnIndex]);
         let gamma_red = parseInt(values[LastValuesFileCsv.GammaRedColumnIndex]);
         let gamma_green = parseInt(values[LastValuesFileCsv.GammaGreenColumnIndex]);
         let gamma_blue = parseInt(values[LastValuesFileCsv.GammaBlueColumnIndex]);
-        let row = new LastValuesRowCsv(screen_name, output_index, brightness, gamma_red, gamma_green, gamma_blue);
+        let row = new LastValuesRowCsv(screen_name, output_indexes_string, brightness, gamma_red, gamma_green,
+                                       gamma_blue);
         return row;
     },
 
@@ -106,7 +107,7 @@ LastValuesFileCsv.prototype = {
 
     to_csv_string: function(row) {
         let string_csv = row.screen_name + this.csv_separator;
-        string_csv += row.output_index + this.csv_separator;
+        string_csv += row.output_indexes_string + this.csv_separator;
         string_csv += row.brightness + this.csv_separator;
         string_csv += row.gamma_red + this.csv_separator;
         string_csv += row.gamma_green + this.csv_separator;
@@ -122,7 +123,7 @@ LastValuesFileCsv.prototype = {
 
     get_headers: function() {
         let headers = LastValuesFileCsv.ScreenNameColumnName + this.csv_separator;
-        headers += LastValuesFileCsv.OutputIndexColumnName + this.csv_separator;
+        headers += LastValuesFileCsv.OutputIndexesStringColumnName + this.csv_separator;
         headers += LastValuesFileCsv.BrightnessColumnName + this.csv_separator;
         headers += LastValuesFileCsv.GammaRedColumnName + this.csv_separator;
         headers += LastValuesFileCsv.GammaGreenColumnName + this.csv_separator;

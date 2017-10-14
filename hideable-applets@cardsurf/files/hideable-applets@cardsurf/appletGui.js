@@ -132,13 +132,17 @@ HoverMenuIcons.prototype={
         this.leave_handler_id = this.default_handler_id;
         this.callback_object = null;
         this.callback_icon_clicked = null;
+        this.grayscale_effect_name = "grayscale";
+        this.grayscale_color = new Clutter.Color({ red: 204, green: 204, blue: 204, alpha: 1 });
 
         this.menu = new Applet.AppletPopupMenu(applet, this.orientation);
         this.actor = new St.Table({style_class: "switcher-list"});
         this.icons = [];
         this.tooltips = [];
+        this.grayscale_effects = [];
 
         this._init_menu();
+
         this._add_menu_to_applet();
         this.enable();
     },
@@ -159,6 +163,7 @@ HoverMenuIcons.prototype={
         this.remove_icons();
         this.create_icons(icon_paths);
         this.create_tooltips(icon_names);
+        this.create_grayscale_effects();
         this.add_icons(icon_names);
     },
 
@@ -166,6 +171,7 @@ HoverMenuIcons.prototype={
          this.actor.destroy_all_children();
          this.icons = [];
          this.tooltips = [];
+         this.grayscale_effects = [];
     },
 
     create_icons: function(icon_paths) {
@@ -230,7 +236,7 @@ HoverMenuIcons.prototype={
             let icon = this.icons[i];
             let icon_name = icon_names[i];
             let tooltip = this.create_tooltip(icon, icon_name);
-            this.tooltips[i] = tooltip;
+            this.tooltips.push(tooltip);
         }
     },
 
@@ -241,6 +247,19 @@ HoverMenuIcons.prototype={
             tooltip._tooltip.set_width(this.max_tooltip_width);
         }
         return tooltip;
+    },
+
+    create_grayscale_effects: function(){
+        for(let i = 0; i < this.icons.length; ++i) {
+            let effect = this.create_grayscale_effect();
+            this.grayscale_effects.push(effect);
+        }
+    },
+
+    create_grayscale_effect: function(){
+        let effect = new Clutter.ColorizeEffect(this.grayscale_color);
+        effect.set_tint(this.grayscale_color);
+        return effect;
     },
 
     add_icons: function(icon_names) {
@@ -316,6 +335,62 @@ HoverMenuIcons.prototype={
             let tooltip_text = tooltip_texts[i];
             let tooltip = this.tooltips[i];
             tooltip.set_text(tooltip_text);
+        }
+    },
+
+    set_grayscale_brightness: function(brightness_zero_hundred) {
+        let brightness_rgb = this.get_brightness_rgb(brightness_zero_hundred);
+        this.grayscale_color = new Clutter.Color({ red: brightness_rgb, green: brightness_rgb,
+                                                   blue: brightness_rgb, alpha: 1 });
+    },
+
+    get_brightness_rgb: function(brightness_zero_hundred) {
+        let brightness_zero_one = brightness_zero_hundred / 100;
+        let brightness_rgb = this.get_scaled_value(0, 255, brightness_zero_one);
+        return brightness_rgb;
+    },
+
+    get_scaled_value: function(min_value, max_value, zero_one_range_value) {
+        let offset = min_value;
+        let multiplier = max_value - min_value;
+        let mapped_value = Math.round(offset + zero_one_range_value * multiplier);
+        return mapped_value;
+    },
+
+    set_grayscales: function(is_grayscale_on_array) {
+        for(let icon_index = 0; icon_index < is_grayscale_on_array.length; ++icon_index) {
+             let is_grayscale_on = is_grayscale_on_array[icon_index];
+             this.set_grayscale(icon_index, is_grayscale_on);
+        }
+    },
+
+    set_grayscale: function(icon_index, is_grayscale_on) {
+        let icon = this.icons[icon_index];
+        if(is_grayscale_on) {
+            let effect = this.grayscale_effects[icon_index];
+            this.add_grayscale(icon, effect);
+        }
+        else {
+            this.remove_grayscale(icon);
+        }
+    },
+
+    add_grayscale: function(icon, effect) {
+        let enabled = this.has_grayscale(icon);
+        if(!enabled) {
+            icon.add_effect_with_name(this.grayscale_effect_name, effect);
+        }
+    },
+
+    has_grayscale: function(icon) {
+        let effect = icon.get_effect(this.grayscale_effect_name);
+        return effect != null;
+    },
+
+    remove_grayscale: function(icon) {
+        let enabled = this.has_grayscale(icon);
+        if(enabled) {
+            icon.remove_effect_by_name(this.grayscale_effect_name);
         }
     },
 

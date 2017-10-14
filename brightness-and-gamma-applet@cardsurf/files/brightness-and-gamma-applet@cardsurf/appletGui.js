@@ -141,6 +141,73 @@ RadioMenuItem.prototype = {
 
 
 
+function CheckboxMenuItem( title) {
+    this._init(title);
+};
+
+CheckboxMenuItem.prototype = {
+    __proto__: PopupMenu.PopupSubMenuMenuItem.prototype,
+
+    _init: function(title) {
+        PopupMenu.PopupSubMenuMenuItem.prototype._init.call(this, title, false);
+
+        this.options = [];
+        this.callback_object = null;
+        this.callback_option_toggled = null;
+    },
+
+    reload_options: function(option_names, options_checked) {
+        this.remove_options();
+        this.create_options(option_names, options_checked);
+        this.add_options(option_names);
+    },
+
+    remove_options: function() {
+         this.menu.removeAll()
+         this.options = [];
+    },
+
+    create_options: function(option_names, options_checked) {
+        for(let i = 0; i < option_names.length; ++i) {
+             let option_name = option_names[i];
+             let option_checked = options_checked[i];
+             let option = new PopupMenu.PopupSwitchMenuItem(option_name, option_checked);
+             option.connect('toggled', Lang.bind(this, this._on_option_toggled));
+             this.options.push(option);
+        }
+    },
+
+    _on_option_toggled: function (option, checked) {
+        this._invoke_callback_option_toggled(option, checked);
+    },
+
+    _invoke_callback_option_toggled: function(option, checked) {
+        if(this.callback_option_toggled != null) {
+            let option_index = this.options.indexOf(option);
+            let option_name = this.get_option_name(option);
+            this.callback_option_toggled.call(this.callback_object, option_index, option_name, checked);
+        }
+    },
+
+    get_option_name: function(option) {
+        return option.label.get_text();
+    },
+
+    add_options: function(option_names) {
+        for(let option of this.options) {
+            this.menu.addMenuItem(option);
+        }
+    },
+
+    set_callback_option_toggled: function(callback_object, callback_option_toggled) {
+        this.callback_object = callback_object;
+        this.callback_option_toggled = callback_option_toggled;
+    },
+
+};
+
+
+
 
 
 

@@ -26,4 +26,9 @@
   , "default": "eth0,wlan0"
   , "description": "List all interfaces we want to display.\nSeparated by comma.\nRegex is accepted (usefull to list all docker interfaces for example)"
   }
+, "debug": 
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Activate/Deactivate the logs"
+  }
 }

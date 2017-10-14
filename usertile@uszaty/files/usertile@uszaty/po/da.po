@@ -1,0 +1,62 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-07 16:18+0200\n"
+"PO-Revision-Date: 2017-10-07 16:28+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:100
+msgid "Account Details"
+msgstr "Kontodetaljer"
+
+#: applet.js:104
+msgid "System Settings"
+msgstr "Systemindstillinger"
+
+#: applet.js:108
+msgid "Notifications"
+msgstr "Meddelelser"
+
+#: applet.js:120
+msgid "Power..."
+msgstr "Afslut …"
+
+#: applet.js:123
+msgid "Lock Screen"
+msgstr "Lås skærmen"
+
+#: applet.js:143 applet.js:152 applet.js:160
+msgid "Switch User"
+msgstr "Skift bruger"
+
+#: applet.js:167
+msgid "Log Out..."
+msgstr "Log ud …"
+
+#: applet.js:173
+msgid "Power off..."
+msgstr "Sluk …"
+
+#. usertile@uszaty->metadata.json->description
+msgid ""
+"An applet to access your account details and more. Design is based on "
+"UserTile applet from Windows."
+msgstr ""
+"Tilgå dine kontodetaljer m.m. Baseret på det tilsvarende Windows-program."
+
+#. usertile@uszaty->metadata.json->name
+msgid "UserTile Applet"
+msgstr "Brugerflise"

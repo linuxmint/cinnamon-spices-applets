@@ -167,7 +167,7 @@ MyApplet.prototype = {
                             Main.Util.spawnCommandLine("xdg-open computer://");
 			});
 
-			let icon = new St.Icon({icon_name: "harddrive", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon'});
+			icon = new St.Icon({icon_name: "harddrive", icon_size: ICON_SIZE, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon'});
 			this.filesystemItem = new MyPopupMenuItem(this.show_terminal, icon, _("File System"), "root", this.menu.actor);
 
 			this.menu.addMenuItem(this.filesystemItem);

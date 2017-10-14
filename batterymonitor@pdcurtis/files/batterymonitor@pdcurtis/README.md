@@ -56,7 +56,7 @@ Although comments and suggestions are always welcome any contributions which are
 
 ## Requirements:
 
-Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. It has been tested up to Cinnamon 3.2 and Mint 18.1. 
+Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions been tested from Mint 17 with Cinnamon 2.4 up to Cinnamon 3.4 and Mint 18.2. 
     
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
  

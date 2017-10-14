@@ -1,0 +1,10 @@
+[
+    ["Terminal", "gnome-terminal"],
+    ["-"],
+    ["!~DSFO~~echo -n "SFO: " ; TZ=US/Pacific date +'%a %b %-d, %I:%M %P'~"],
+    ["!~DBOS~~echo -n "BOS: " ; TZ=US/Eastern date +'%a %b %-d, %I:%M %P'~"],
+    ["!~DLON~~echo -n "LON: " ; TZ=Europe/London date +'%a %b %-d, %I:%M %P'~"],
+    ["-"],
+    [ "Edit Tools", "~EDIT~~echo gnome-open ${TOOLSFILE_IN}~"],
+]
+

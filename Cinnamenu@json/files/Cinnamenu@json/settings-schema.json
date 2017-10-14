@@ -1,21 +1,107 @@
 {
-  "cinnamenu": {
-    "type": "header",
-    "description": "Cinnamenu Settings"
+  "layout": {
+    "type": "layout",
+    "pages": ["menu", "panel", "appearance", "providers"],
+    "panel": {
+      "type": "page",
+      "title": "Behavior",
+      "sections": ["panel-behave", "menu-behave"]
+    },
+    "appearance": {
+      "type": "page",
+      "title": "Appearance",
+      "sections": ["panel-appear", "menu-icons"]
+    },
+    "menu": {
+      "type": "page",
+      "title": "Layout and Content",
+      "sections": ["menu-layout", "menu-content"]
+    },
+    "providers": {
+      "type": "page",
+      "title": "Search Providers",
+      "sections": ["cinnamenuProvidersSection", "extensionProvidersSection"]
+    },
+    "cinnamenuProvidersSection": {
+      "type": "section",
+      "title": "Cinnamenu",
+      "keys": ["enable-windows", "enable-search-providers", "get-providers"]
+    },
+    "extensionProvidersSection": {
+      "type": "section",
+      "title": "No search provider extensions found",
+      "keys": []
+    },
+    "panel-appear": {
+      "type": "section",
+      "title": "Panel",
+      "keys": ["menu-icon-custom", "menu-icon", "menu-label"]
+    },
+    "panel-behave": {
+      "type": "section",
+      "title": "Panel",
+      "keys": [
+        "overlay-key",
+        "activate-on-hover",
+        "hover-delay",
+        "enable-animation"
+      ]
+    },
+    "menu-behave": {
+      "type": "section",
+      "title": "Menu",
+      "keys": [
+        "show-tooltips",
+        "tooltip-delay",
+        "category-click",
+        "enable-autoscroll",
+        "search-filesystem"
+      ]
+    },
+    "menu-layout": {
+      "type": "section",
+      "title": "Layout",
+      "keys": [
+        "startup-view-mode",
+        "show-apps-description-on-buttons",
+        "enable-custom-menu-height",
+        "custom-menu-height",
+        "apps-grid-column-count"
+      ]
+    },
+    "menu-content": {
+      "type": "section",
+      "title": "Content",
+      "keys": [
+        "show-places",
+        "enable-bookmarks",
+        "privacy-settings-button",
+        "menu-editor-button"
+      ]
+    },
+    "menu-icons": {
+      "type": "section",
+      "title": "Menu",
+      "keys": [
+        "show-category-icons",
+        "category-icon-size",
+        "show-application-icons",
+        "apps-list-icon-size",
+        "apps-grid-icon-size"
+      ]
+    }
   },
-  "header0": {
-    "type": "header",
-    "description": "Menu Entries"
+  "privacy-settings-button": {
+    "type": "button",
+    "description": "Toggle recent files",
+    "callback": "launchPrivacySettings",
+    "tooltip": "Press this button to customize your privacy settings."
   },
   "menu-editor-button": {
     "type": "button",
     "description": "Open the menu editor",
-    "callback": "_launch_editor",
+    "callback": "launchEditor",
     "tooltip": "Press this button to customize your menu entries."
-  },
-  "header1": {
-    "type": "header",
-    "description": "Appearance"
   },
   "menu-icon-custom": {
     "type": "checkbox",
@@ -38,8 +124,10 @@
     "tooltip": "Set the custom menu button icon name"
   },
   "category-icon-size": {
+    "indent": true,
+    "dependency": "show-category-icons",
     "type": "spinbutton",
-    "default": 24,
+    "default": 18,
     "min": 16,
     "max": 256,
     "step": 1,
@@ -48,8 +136,10 @@
     "tooltip": "Category icon size"
   },
   "apps-list-icon-size": {
+    "indent": true,
+    "dependency": "show-application-icons",
     "type": "spinbutton",
-    "default": 24,
+    "default": 18,
     "min": 16,
     "max": 256,
     "step": 1,
@@ -58,34 +148,16 @@
     "tooltip": "Applications list icon size"
   },
   "apps-grid-icon-size": {
+    "indent": true,
+    "dependency": "show-application-icons",
     "type": "spinbutton",
-    "default": 48,
+    "default": 64,
     "min": 16,
     "max": 256,
     "step": 1,
     "units": "pixels",
     "description": "Applications grid icon size",
     "tooltip": "Applications grid icon size"
-  },
-  "apps-grid-icon-scale": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Scale grid icons by available space",
-    "tooltip": "This makes the grid icon size variable depending on how many apps are being shown. This overrides the grid icon size option."
-  },
-  "apps-grid-label-width": {
-    "type": "spinbutton",
-    "default": 96,
-    "min": 16,
-    "max": 256,
-    "step": 1,
-    "units": "pixels",
-    "description": "Applications grid label width",
-    "tooltip": "Applications grid label width"
-  },
-  "header2": {
-    "type": "header",
-    "description": "Behavior"
   },
   "overlay-key": {
     "type": "keybinding",
@@ -99,8 +171,10 @@
     "tooltip": "Enable opening the menu when the mouse enters the applet"
   },
   "hover-delay": {
+    "indent": true,
+    "dependency": "activate-on-hover",
     "type": "spinbutton",
-    "default": 0,
+    "default": 50,
     "min": 0,
     "max": 1000,
     "step": 50,
@@ -114,6 +188,12 @@
     "description": "Use menu animations",
     "tooltip": "Allow the menu to animate on open and close"
   },
+  "category-click": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Activate categories on click",
+    "tooltip": "When enabled, category views are activated on click instead of on hover."
+  },
   "enable-autoscroll": {
     "type": "checkbox",
     "default": true,
@@ -123,8 +203,25 @@
   "enable-bookmarks": {
     "type": "checkbox",
     "default": false,
-    "description": "Enable web bookmarks",
+    "description": "Show web bookmarks",
     "tooltip": "Choose whether or not bookmarks are indexed in the menu."
+  },
+  "enable-windows": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable searching of open windows",
+    "tooltip": "Choose whether or not open windows are indexed in menu searches."
+  },
+  "enable-search-providers": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable search providers",
+    "tooltip": "Choose whether or not search provider results are indexed in menu searches."
+  },
+  "get-providers": {
+    "type": "button",
+    "description": "Example Search Providers",
+    "callback": "getExampleSearchProviders"
   },
   "startup-view-mode": {
     "type": "combobox",
@@ -138,12 +235,77 @@
   },
   "apps-grid-column-count": {
     "type": "spinbutton",
-    "default": 5,
+    "default": 4,
     "min": 3,
     "max": 7,
     "step": 1,
     "units": "columns",
     "description": "Number of columns in apps grid",
     "tooltip": "Number of columns in apps grid"
+  },
+  "show-places": {
+    "type": "switch",
+    "default": true,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu."
+  },
+  "show-application-icons": {
+    "type": "switch",
+    "default": true,
+    "description": "Show application icons",
+    "tooltip": "Choose whether or not to show icons on applications."
+  },
+  "show-category-icons": {
+    "type": "switch",
+    "default": true,
+    "description": "Show category icons",
+    "tooltip": "Choose whether or not to show icons on categories."
+  },
+  "search-filesystem": {
+    "type": "switch",
+    "default": false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box."
+  },
+  "show-apps-description-on-buttons": {
+    "type": "switch",
+    "default": false,
+    "description": "Show application descriptions under titles",
+    "tooltip": "Choose whether or not to show the application description on the application buttons."
+  },
+  "show-tooltips": {
+    "type": "switch",
+    "default": true,
+    "description": "Show tooltips",
+    "tooltip": "When enabled, tooltips containing the item's name or description is shown when hovered over."
+  },
+  "tooltip-delay": {
+    "indent": true,
+    "dependency": "show-tooltips",
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 2000,
+    "step": 50,
+    "units": "milliseconds",
+    "description": "Tooltip delay",
+    "tooltip": "The delay time in milliseconds for tooltips when hovering over a menu item."
+  },
+  "enable-custom-menu-height": {
+    "type": "switch",
+    "default": false,
+    "description": "Use a custom menu height",
+    "tooltip": "Use a custom menu height"
+  },
+  "custom-menu-height": {
+    "type": "spinbutton",
+    "default": 530,
+    "min": 530,
+    "max": 9999,
+    "step": 1,
+    "units": "px",
+    "description": "Custom menu height",
+    "tooltip": "Custom menu height",
+    "dependency": "enable-custom-menu-height"
   }
 }

@@ -1,5 +1,69 @@
 Changelog
 
+### 3.0.1
+
+  * Fixed a regression preventing the applet from working on vertical panels on Cinnamon <= 3.4.
+  * Fixed a context menu item key navigation bug.
+
+### 3.0.0
+
+  * Added an option to enable indexing of open windows in menu searches.
+  * Added search provider support along with provider toggling in the settings.
+  * Added an option to adjust the menu height.
+  * Added drag and drop reordering for favorite apps.
+  * Added optional tooltips.
+  * Added an option to activate categories on click instead of hover.
+  * Refactored state management.
+  * Fixed toggling the autoscroll option not working until a Cinnamon restart.
+  * Fixed some uncaught errors when enabling bookmarks while no sources are available.
+  * Fixed opening the menu on hover only working once.
+  * Known issues:
+    * Icons will move to the right a bit when activating the context menu on a menu item in the grid view. This is due to working around API changes that completely break the context menu positioning in Cinnamon git, and the issue shouldn't occur when Cinnamon 3.6 releases.
+
+### 2.1.0
+
+  * Improved the performance of web bookmarks loading.
+  * Fixed toggling web bookmarks not fully taking effect unless Cinnamon is restarted.
+  * Fixed the grid/list view toggle states.
+  * Fixed an error that can occur when reloading the applet.
+  * Fixed a regression with math expressions not working in the search bar.
+  * Fixed an issue with the score threshold being too high for app searches.
+  * Removed the Lodash dependency.
+
+### 2.0.2
+
+  * Fixed an error occurring when favorites change before the menu has been opened for the first time.
+  * Improved signal management.
+
+### 2.0.1
+
+  * Changed the default column count to 4.
+  * Improved the context menu positioning.
+
+### 2.0.0
+
+  * Reorganized the layout for more efficient use of space.
+    * Search box has been moved to the bottom right corner.
+    * Selected app box has been moved to bottom left column.
+  * Added settings from the default menu that were missing.
+    * Translations for these were added from CinnVIIStarkMenu's PO files.
+  * Added an option to display the description on each app button.
+  * Added a user account button showing the current user's avatar.
+  * Added key navigation.
+  * Added a "Clear List" button for recent files.
+  * Renamed the Recent category to Recent Files.
+  * Descriptions now scroll horizontally if they are truncated.
+  * Faster fuzzy searching.
+    * Searches now highlight the matching characters in item names and descriptions.
+  * Added filesystem path entry autocompletion based on the Cinnamon menu's code.
+  * Added highlighting for newly installed apps.
+  * Formatted the settings using the layout API.
+  * Removed a lot of stale/dead code from the Gno-menu project, and refactored a lot of the button handling.
+  * Removed automatic icon scaling.
+  *  Fixed Opera bookmarks.
+  * Fixed the missing gda library error message.
+  * Improved performance. (YMMV)
+
 ### 1.3.1
 
   * Removed extra tooling causing performance issues.
