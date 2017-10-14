@@ -31,7 +31,7 @@ msgid "Screen"
 msgstr "Skärm"
 
 #: applet.js:568
-msgid "Output"
+msgid "Outputs"
 msgstr "Utdata"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
