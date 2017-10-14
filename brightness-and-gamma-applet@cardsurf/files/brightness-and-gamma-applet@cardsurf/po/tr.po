@@ -31,7 +31,7 @@ msgid "Screen"
 msgstr "Ekran"
 
 #: applet.js:568
-msgid "Output"
+msgid "Outputs"
 msgstr "Çıkış"
 
 #. brightness-and-gamma-applet@cardsurf->settings-

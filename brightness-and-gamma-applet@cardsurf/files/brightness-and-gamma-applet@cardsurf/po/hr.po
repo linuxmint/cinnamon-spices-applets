@@ -31,7 +31,7 @@ msgid "Screen"
 msgstr "Zaslon"
 
 #: applet.js:568
-msgid "Output"
+msgid "Outputs"
 msgstr "Izlaz"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
