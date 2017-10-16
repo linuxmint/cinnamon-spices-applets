@@ -132,7 +132,7 @@ msgstr ""
 "(anvendes ikke, når der flyttes til en anden knap i listen)"
 
 msgid "Only show windows on the current monitor"
-msgstr "Vis kun vinduer på den aktuelle skærm"
+msgstr "Vis kun vinduer på den samme skærm"
 
 msgid ""
 "If enabled, this applet instance only manages windows\n"
