@@ -171,7 +171,7 @@ ApplicationContextMenuItem.prototype = {
                 this._appButton.toggleMenu();
                 break;
             } case "uninstall": {
-                Util.spawnCommandLine("gksu -m '" + _("Please enter your password to uninstall this application") + "' /usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
+                Util.spawnCommandLine("gksu -m '" + _("Please provide your password to uninstall this application") + "' /usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
                 this._appButton.appsMenuButton.menu.close();
                 break;
             } case "run_with_nvidia_gpu": {
@@ -356,6 +356,7 @@ TransientButton.prototype = {
                 return '';
             }
         };
+
 
 
         this.file = Gio.file_new_for_path(this.pathOrCommand);
@@ -2182,7 +2183,7 @@ MyApplet.prototype = {
         // In that particular case we get no signal at all.
         this._refreshAll();
 
-        this.update_label_visible();
+        this.set_show_label_in_vertical_panels(false);
     },
 
     _updateKeybinding: function() {
@@ -2283,13 +2284,6 @@ MyApplet.prototype = {
         this.applicationsScrollBox.set_width(min_width + scrollWidth + borders);
     },
 
-    update_label_visible: function () {
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
-            this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
-    },
-
     _updateQuickLinksView: function() {
         this.menu.showSidebar = this.showSidebar;
         if (this.menu.showSidebar) {
@@ -2368,7 +2362,7 @@ MyApplet.prototype = {
             // Quicklauncher places directory
             let quicklauncher_places_directory = this.quicklauncher_places[i].directory;
             if (quicklauncher_places_directory == null) {
-                quicklauncher_places_directory = "–";
+                quicklauncher_places_directory = "---";
             } else if (quicklauncher_places_directory.charAt(0) == "~") {
                 let sliced_directory = quicklauncher_places_directory.slice(2);
                 if (sliced_directory == "Documents")
@@ -2383,6 +2377,9 @@ MyApplet.prototype = {
                     quicklauncher_places_directory = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOWNLOAD);
                 else
                     quicklauncher_places_directory = GLib.get_home_dir() + '/' + sliced_directory;
+
+                if (quicklauncher_places_directory == null)
+                    continue;
             }
 
             // Quicklauncher places label
@@ -2459,8 +2456,6 @@ MyApplet.prototype = {
 
     on_orientation_changed: function (orientation) {
         this.orientation = orientation;
-
-        this.update_label_visible();
 
         this.menu.destroy();
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -3274,7 +3269,7 @@ MyApplet.prototype = {
                                           urc_x: w, urc_y: 0,
                                           lrc_x: w, lrc_y: bh });
 
-        this.categoriesApplicationsBox.actor.add_actor(this.vectorBox);
+        this.categoriesOverlayBox.add_actor(this.vectorBox);
         this.vectorBox.set_position(xformed_mouse_x, 0);
 
         this.vectorBox.show();
@@ -3937,9 +3932,10 @@ MyApplet.prototype = {
         this.searchEntryText.connect('key-press-event', Lang.bind(this, this._onMenuKeyPress));
         this._previousSearchPattern = "";
 
-
+        this.categoriesOverlayBox = new Clutter.Actor();
         this.categoriesApplicationsBox = new CategoriesApplicationsBox();
-
+        this.categoriesOverlayBox.add_actor(this.categoriesApplicationsBox.actor);
+        this.appsBox.add_actor(this.categoriesOverlayBox);
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box',
                                                 vertical: true,
                                                 accessible_role: Atk.Role.LIST });
@@ -4031,7 +4027,6 @@ MyApplet.prototype = {
         this.selectedAppBox.add_actor(this.selectedAppDescription);
         this.selectedAppBox._delegate = null;
         //this.appsBox.add_actor(this.selectedAppBox);
-        this.appsBox.add_actor(this.categoriesApplicationsBox.actor);
         this.searchBox.add_actor(this.searchEntry);
         this.leftPaneBox.add_actor(this.leftPane);
         this.leftPaneBox.add(this.favExpandBin, { expand: true });
@@ -4163,7 +4158,7 @@ MyApplet.prototype = {
             this._displayButtons(null, null, -1);
         } else
         if (name == null) {
-             this._displayButtons(this._listApplications(null));
+            this._displayButtons(this._listApplications(null));
         } else
         {
             this._displayButtons(this._listApplications(name));
@@ -4283,7 +4278,7 @@ MyApplet.prototype = {
             this._transientButtons.forEach( function (item, index) {
                 item.actor.destroy();
             });
-            this._transientButtons = new Array();
+            this._transientButtons = [];
 
             for (let i = 0; i < autocompletes.length; i++) {
                 let button = new TransientButton(this, autocompletes[i]);
