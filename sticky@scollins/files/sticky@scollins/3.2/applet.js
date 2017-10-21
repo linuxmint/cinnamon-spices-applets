@@ -126,6 +126,7 @@ NoteBase.prototype = {
         this._dragOffset = [0, 0];
         this.hasBottom = false;
         this.hasSide = false;
+        this.updateId = -1;
 
         settings.bindWithObject(this, "theme", "defaultTheme");
         settings.bindWithObject(this, "height", "height");
@@ -459,10 +460,13 @@ NoteBase.prototype = {
     },
 
     triggerUpdate: function() {
-        if ( !this.updateId ) Mainloop.idle_add(Lang.bind(this, function() {
+        if (this.updateId != -1) {
+            Mainloop.source_remove(this.updateId);
+        }
+        this.updateId = Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
+            this.updateId = -1;
             this.emit("changed");
-            this.updateId = undefined;
-        }))
+        }));
     }
 }
 Signals.addSignalMethods(NoteBase.prototype);
@@ -507,7 +511,7 @@ Note.prototype = {
         this.textWrapper.connect("get-preferred-width", Lang.bind(this, this.getPreferedWidth));
         this.text.connect("button-release-event", Lang.bind(this, this.onButtonRelease));
         this.text.connect("button-press-event", Lang.bind(this, this.onButtonPress));
-        this.text.connect("text-changed", Lang.bind(this, function() { this.emit("changed"); }));
+        this.text.connect("text-changed", Lang.bind(this, this.triggerUpdate));
         this.text.connect("cursor-event", Lang.bind(this, this.handleScrollPosition));
         this.text.connect("key-focus-in", Lang.bind(this, this.onTextFocused));
 
