@@ -1,0 +1,6 @@
+{
+    "description": "Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, xdotool, xdpyinfo)",
+    "icon": "applets-screenshooter",
+    "uuid": "ScreenShot+RecordDesktop@tech71",
+    "name": "ScreenShot+Record Desktop"
+}

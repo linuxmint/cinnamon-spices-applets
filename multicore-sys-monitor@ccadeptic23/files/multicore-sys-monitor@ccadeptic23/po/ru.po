@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-28 05:05-0500\n"
+"PO-Revision-Date: 2017-05-03 21:10+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: po\n"
+
+#: 3.4/DataProviders.js:104 3.4/prefs.js:187 3.2/DataProviders.js:97
+#: 3.2/prefs.js:187 3.0/DataProviders.js:97 3.0/prefs.js:183
+msgid "CPU"
+msgstr "ЦП"
+
+#: 3.4/DataProviders.js:111
+#, fuzzy
+msgid "------- CPU ------- \n"
+msgstr "-------ЦП------- \n"
+
+#: 3.4/DataProviders.js:115
+msgid "Core"
+msgstr ""
+
+#: 3.4/DataProviders.js:145 3.2/DataProviders.js:144 3.0/DataProviders.js:144
+msgid "MEM"
+msgstr "Память"
+
+#: 3.4/DataProviders.js:151
+#, fuzzy
+msgid "------- Memory ------- \n"
+msgstr "----Память---- \n"
+
+#: 3.4/DataProviders.js:152
+#, fuzzy
+msgid "Used"
+msgstr "Использовано"
+
+#: 3.4/DataProviders.js:152
+msgid "Cached"
+msgstr "Кешировано"
+
+#: 3.4/DataProviders.js:152
+msgid "Buffer"
+msgstr "Буферы"
+
+#: 3.4/DataProviders.js:152
+msgid "Free"
+msgstr "Свободно"
+
+#: 3.4/DataProviders.js:181 3.2/DataProviders.js:181 3.0/DataProviders.js:181
+msgid "SWAP"
+msgstr "Подкачка"
+
+#: 3.4/DataProviders.js:187
+#, fuzzy
+msgid "------- Swap -------\n"
+msgstr "---Подкачка--- \n"
+
+#: 3.4/DataProviders.js:188
+#, fuzzy
+msgid "Swap:\t"
+msgstr "подкачка:\t"
+
+#: 3.4/DataProviders.js:227 3.2/DataProviders.js:251 3.0/DataProviders.js:251
+msgid "NET"
+msgstr "Сеть"
+
+#: 3.4/DataProviders.js:249
+#, fuzzy
+msgid "------- Networks -------\n"
+msgstr "------Сеть------ \n"
+
+#: 3.4/DataProviders.js:257 3.4/prefs.js:294 3.2/prefs.js:294 3.0/prefs.js:290
+msgid "Down"
+msgstr "Получено"
+
+#: 3.4/DataProviders.js:258 3.4/prefs.js:302 3.2/prefs.js:302 3.0/prefs.js:298
+msgid "Up"
+msgstr "Отправлено"
+
+#: 3.4/DataProviders.js:302 3.2/DataProviders.js:368 3.0/DataProviders.js:368
+msgid "DISK"
+msgstr "Диск"
+
+#: 3.4/DataProviders.js:320
+#, fuzzy
+msgid "------- Disk ------- \n"
+msgstr "------Диск------- \n"
+
+#: 3.4/DataProviders.js:323 3.2/DataProviders.js:396 3.0/DataProviders.js:396
+msgid ": R: "
+msgstr ": чт.: "
+
+#: 3.4/DataProviders.js:324 3.2/DataProviders.js:396 3.0/DataProviders.js:396
+msgid ": W: "
+msgstr ": зап.: "
+
+#: 3.4/DataProviders.js:324 3.2/DataProviders.js:397 3.0/DataProviders.js:397
+msgid " (MiB/s)\n"
+msgstr " (МиБ/с)\n"
+
+#: 3.4/applet.js:258 3.2/applet.js:129 3.0/applet.js:132
+msgid "Preferences"
+msgstr "Параметры"
+
+#: 3.4/applet.js:450 3.2/applet.js:324 3.0/applet.js:313
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Для работы модуля установите пакет «gir1.2-gtop-2.0»."
+
+#: 3.4/prefs.js:283 3.4/prefs.js:398 3.2/prefs.js:283 3.2/prefs.js:398
+#: 3.0/prefs.js:279 3.0/prefs.js:393
+msgid "Enable"
+msgstr "Включить"
+
+#: 3.4/prefs.js:414 3.2/prefs.js:414 3.0/prefs.js:406
+msgid "Read"
+msgstr "Чтение"
+
+#: 3.4/prefs.js:423 3.2/prefs.js:423 3.0/prefs.js:414
+msgid "Write"
+msgstr "Запись"
+
+#: 3.4/prefs.js:540 3.2/prefs.js:540 3.0/prefs.js:530
+msgid "Error while saving file: "
+msgstr "Ошибка сохранения файла: "
+
+#: 3.4/ErrorApplet.js:26 3.4/ErrorApplet.js:32 3.2/ErrorApplet.js:28
+#: 3.2/ErrorApplet.js:34 3.0/ErrorApplet.js:28 3.0/ErrorApplet.js:34
+msgid "Multi-core System Monitor Error."
+msgstr "Ошибка Multi-core System Monitor."
+
+#: 3.2/DataProviders.js:103 3.0/DataProviders.js:103
+msgid "------CPU------- \n"
+msgstr "-------ЦП------- \n"
+
+#: 3.2/DataProviders.js:104 3.0/DataProviders.js:104
+msgid "cpu: "
+msgstr "проц.: "
+
+#: 3.2/DataProviders.js:150 3.0/DataProviders.js:150
+msgid "------mem------- \n"
+msgstr "----Память---- \n"
+
+#: 3.2/DataProviders.js:151 3.0/DataProviders.js:151
+msgid "usedup:\t"
+msgstr "использовано:\t"
+
+#: 3.2/DataProviders.js:152 3.0/DataProviders.js:152
+msgid "cached:\t"
+msgstr "кешировано:\t"
+
+#: 3.2/DataProviders.js:153 3.0/DataProviders.js:153
+msgid "buffer:\t"
+msgstr "буферы:\t"
+
+#: 3.2/DataProviders.js:154 3.0/DataProviders.js:154
+msgid "free:\t\t"
+msgstr "свободно:\t"
+
+#: 3.2/DataProviders.js:186 3.0/DataProviders.js:186
+msgid "------swap------- \n"
+msgstr "---Подкачка--- \n"
+
+#: 3.2/DataProviders.js:187 3.0/DataProviders.js:187
+msgid "swap:\t"
+msgstr "подкачка:\t"
+
+#: 3.2/DataProviders.js:292 3.0/DataProviders.js:292
+msgid "-------net-------\n"
+msgstr "------Сеть------ \n"
+
+#: 3.2/DataProviders.js:294 3.0/DataProviders.js:294
+msgid ": D: "
+msgstr ": пол.: "
+
+#: 3.2/DataProviders.js:294 3.0/DataProviders.js:294
+msgid " U: "
+msgstr " отп.: "
+
+#: 3.2/DataProviders.js:295 3.0/DataProviders.js:295
+msgid " (KiB/s)\n"
+msgstr "(КиБ/с)\n"
+
+#: 3.2/DataProviders.js:394 3.0/DataProviders.js:394
+msgid "------disk------- \n"
+msgstr "------Диск------- \n"
+
+#. multicore-sys-monitor@ccadeptic23->metadata.json->description
+msgid ""
+"Displays in realtime the cpu usage for each core/cpu and overall memory "
+"usage."
+msgstr ""
+"Показывает в реальном времени использование процессора для каждого "
+"процессора и ядра, а также общее использование памяти."
+
+#. multicore-sys-monitor@ccadeptic23->metadata.json->name
+msgid "Multi-Core System Monitor"
+msgstr "Multi-Core System Monitor"
+
+#~ msgid "Multi-core System Monitor Preferences"
+#~ msgstr "Параметры Multi-core System Monitor"
+
+#~ msgid "Labels"
+#~ msgstr "Метки"
+
+#~ msgid "Resfresh Rate (ms)"
+#~ msgstr "Частота обновления (мс)"
+
+#~ msgid "Height"
+#~ msgstr "Высота"
+
+#~ msgid "Background Color"
+#~ msgstr "Цвет фона"
+
+#~ msgid "General"
+#~ msgstr "Общие"
+
+#~ msgid "Width"
+#~ msgstr "Ширина"
+
+#~ msgid "Colors"
+#~ msgstr "Цвета"
+
+#~ msgid "Swap"
+#~ msgstr "Подкачка"
+
+#~ msgid "Memory"
+#~ msgstr "Память"
+
+#~ msgid "Scaling"
+#~ msgstr "Масштабирование"
+
+#~ msgid "Auto Scale"
+#~ msgstr "Автоматическое"
+
+#~ msgid "Logarithmic"
+#~ msgstr "Логарифмическое"
+
+#~ msgid "Devices"
+#~ msgstr "Устройства"
+
+#~ msgid "Network"
+#~ msgstr "Сеть"
+
+#~ msgid "Disk IO"
+#~ msgstr "Дисковый ввод-вывод"
+
+#~ msgid "Scaling Description"
+#~ msgstr "Виды масштабирования"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"
+
+#~ msgid ""
+#~ "Auto Scaling:\n"
+#~ "\tThis will scale the line graph by the largest reading within the\n"
+#~ "\tdisplayed area. Once the largest reading is no longer displayed \n"
+#~ "\tthe next largest becomes the new value by which the readings\n"
+#~ "\tare scaled. This lets the plot \"zoom\" to show details of the graph.\n"
+#~ "\tHowever, it also means that if there is a large reading small "
+#~ "readings \n"
+#~ "\tmay become indistinguishable from 0. And if there are only small "
+#~ "readings\n"
+#~ "\tthen slightly larger readings may appear larger than they should.\n"
+#~ "\tIf not enabled the largest value used will be the largest reading "
+#~ "since\n"
+#~ "\tcinnamon was started.\n"
+#~ "\n"
+#~ "Logarithmic Scaling:\n"
+#~ "\tThis transforms the readings so that they are displayed using a\n"
+#~ "\tlogarithmic scale. If you are not familiar basically, it reduces the\n"
+#~ "\tlarge values so that they dont dominate the smaller readings."
+#~ msgstr ""
+#~ "Автоматически:\n"
+#~ "\tМасштаб будет зависеть от наибольшего значения за последний \n"
+#~ "\tпериод. Как только максимальное значение пропадёт, будет выбрано \n"
+#~ "\tновое максимальное значение и масштаб графика будет пересчитан \n"
+#~ "\tотносительно нового максимального значения. Это позволяет увидеть \n"
+#~ "\tдетальные изменения при любых значениях. Однако в этом способе \n"
+#~ "\tтруднее отследить абсолютные значения. Если автоматическое \n"
+#~ "\tмасштабирование отключено, то график перестраивается относительно \n"
+#~ "\tмаксимального значения с момента запуска Cinnamon.\n"
+#~ "\n"
+#~ "Логарифмически:\n"
+#~ "\tЭтот способ меняет представление данных на логарифмическое \n"
+#~ "\tпредставление. Если вам незнакома логарифмическая шкала, то можно \n"
+#~ "\tпредставить, что большие значения отображаются больше, но не такими \n"
+#~ "\tбольшими, как на самом деле, и тогда они не будут мешать видеть в "
+#~ "деталях \n"
+#~ "\tизменение небольших значений."

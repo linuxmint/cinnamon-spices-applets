@@ -1,0 +1,149 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-21 09:15+0800\n"
+"PO-Revision-Date: 2017-05-21 09:15+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:52
+msgid "Ok"
+msgstr "确定"
+
+#: applet.js:100
+msgid "invalid"
+msgstr "无效"
+
+#: applet.js:132
+msgid "Wait"
+msgstr "等待"
+
+#: applet.js:144
+msgid "Waiting"
+msgstr "等待中"
+
+#: applet.js:195
+msgid "Open Power Statistics"
+msgstr "打开电源统计"
+
+#: applet.js:201
+msgid "Open System Monitor"
+msgstr "打开系统监视器"
+
+#: applet.js:210
+msgid "Housekeeping and System Sub Menu"
+msgstr "内务处理和系统子菜单"
+
+#: applet.js:213
+msgid "View the Changelog"
+msgstr "查看变更日志"
+
+#: applet.js:219
+msgid "Open the Help file"
+msgstr "打开帮助文件"
+
+#: applet.js:225
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "打开stylesheet.css（高级功能）"
+
+#. batterymonitor@pdcurtis->metadata.json->name
+#: applet.js:241
+msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Battery  Applet with Monitoring and Shutdown (BAMS)"
+
+#: applet.js:246
+msgid "Note: Alerts not enabled in Settings"
+msgstr "注意：未在设置中启用警报"
+
+#: applet.js:310
+msgid "Battery Low - turn off or connect to mains"
+msgstr "电量低 - 关机或连接到电源"
+
+#: applet.js:315
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source\n"
+"or close down your work and suspend or shutdown the machine"
+msgstr ""
+"电池电量已经下降到您的警报级别\n"
+"\n"
+"重新连接到电源\n"
+"或停止您的工作并挂起或关闭机器"
+
+#: applet.js:333
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr "电量不足将会挂起，除非连接到电源"
+
+#: applet.js:356
+msgid "Charge:"
+msgstr "充电："
+
+#: applet.js:356
+msgid "Alert:"
+msgstr "警报："
+
+#: applet.js:356
+msgid "Suspend:"
+msgstr "挂起："
+
+#: applet.js:358
+msgid "Percentage Charge:"
+msgstr "充电百分比："
+
+#: applet.js:358
+msgid "Alert at:"
+msgstr "警报于："
+
+#: applet.js:358
+msgid "Suspend at:"
+msgstr "挂起于："
+
+#. batterymonitor@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Battery  Applet with Monitoring and Shutdown (BAMS)的常规设置"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "刷新显示的间隔："
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine"
+msgstr ""
+"增大或减小这个微调器的值来更改刷新间隔 - 如果您有一台较慢的机器请使用慢速刷新"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->units
+msgid "seconds"
+msgstr "秒"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "显示警报的电池充电百分比"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"显示橙色警报背景的电池充电百分比 - 也可以在小程序中左键点击菜单进行调整和显示"
+
+#. batterymonitor@pdcurtis->metadata.json->description
+msgid "Displays Charge as Percentage and allows Alerts and Actions"
+msgstr "将充电显示为百分比，并允许警报和操作"

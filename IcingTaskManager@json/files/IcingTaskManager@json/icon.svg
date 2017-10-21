@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <filter id="d">
+   <feGaussianBlur in="SourceGraphic" stdDeviation="1.1"/>
+  </filter>
+  <linearGradient id="e" x1=".46875" x2=".47266" y1=".86523" y2=".041016" spreadMethod="reflect">
+   <stop stop-color="#f4278a" stop-opacity=".992" offset="0"/>
+   <stop stop-color="#ffe5f0" stop-opacity=".98" offset="1"/>
+  </linearGradient>
+  <radialGradient id="f" cx=".29297" cy=".11914" r=".2261" gradientTransform="rotate(50.276 .29297 .11914) translate(.47168) scale(-.61 1)">
+   <stop stop-color="#f9f4f4" stop-opacity=".996" offset="0"/>
+   <stop stop-color="#ff113d" stop-opacity=".996" offset="1"/>
+  </radialGradient>
+ </defs>
+ <path d="m110.76 277.96l60.719 154.74 160.82 1.098 57.437-154.74-278.98-1.098h8e-6z" fill="#ffd4aa" fill-rule="evenodd" stroke-width="0"/>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <g fill="#fff" stroke-dasharray="null" stroke-width="99">
+   <rect transform="rotate(-14.546 167.25 352.94)" x="166.02" y="271.23" width="2.4609" height="163.42"/>
+   <rect transform="rotate(-7.684 208.5 350.62)" x="207.27" y="268.91" width="2.4609" height="163.42"/>
+   <rect transform="rotate(-1.302 251.62 350)" x="250.39" y="268.29" width="2.4609" height="163.42"/>
+   <rect transform="rotate(4.0856 293.5 350.62)" x="292.27" y="268.91" width="2.4609" height="163.42"/>
+   <rect transform="rotate(14.518 333.12 353.75)" x="331.89" y="272.04" width="2.4609" height="163.42"/>
+  </g>
+  <g stroke-width="5.798">
+   <g fill-rule="evenodd">
+    <path d="m165.96 250.7c0 21.697-19.187 39.286-42.857 39.286-23.669 0-42.857-17.589-42.857-39.286 0-21.696 19.188-39.285 42.857-39.285 23.67 0 42.857 17.589 42.857 39.285z" fill="#7f0000"/>
+    <path d="m216.39 254.41c0 21.697-19.188 39.285-42.857 39.285-23.67 0-42.857-17.588-42.857-39.285s19.187-39.286 42.857-39.286c23.669 0 42.857 17.589 42.857 39.286z" fill="#ff007f"/>
+    <path d="m258.11 257.48c0 21.697-19.188 39.286-42.857 39.286s-42.857-17.589-42.857-39.286 19.188-39.286 42.857-39.286 42.857 17.589 42.857 39.286z" fill="#7f0000"/>
+    <path d="m323.54 254.2c0 21.697-19.188 39.286-42.857 39.286-23.67 0-42.858-17.589-42.858-39.286 0-21.696 19.188-39.285 42.858-39.285 23.669 0 42.857 17.589 42.857 39.285z" fill="#ff007f"/>
+    <path d="m367.82 253.34c0 21.697-19.187 39.286-42.857 39.286-23.669 0-42.857-17.589-42.857-39.286s19.188-39.285 42.857-39.285c23.67 0 42.857 17.588 42.857 39.285z" fill="#7f0000"/>
+    <path d="m417.75 253.55c0 21.696-19.188 39.285-42.857 39.285s-42.857-17.589-42.857-39.285c0-21.697 19.188-39.286 42.857-39.286s42.857 17.589 42.857 39.286z" fill="#ff007f"/>
+    <path d="m209.98 125.54c-31.847 3.452-46.892 12.731-56.97 32.234s-40.568 23.184-48.344 31.432c-7.7755 8.248-17.742 39.266-5.062 47.98s1.609 22.179 28.789 32.143 38.851-42.618 67.488-15.196 35.737 15.76 42.969 14.486 14.48-27.776 29.9-11.601 33.464 11.094 50.029-8.743 56.943 43.483 84.903 1.197l3.078-13.715c11.772-23.393-13.401-59.635-43.224-64.653-29.822-5.019-4.294-33.656-54.119-38.845-49.825-5.188-68.352-42.651-57.657-35.673l-2-5.9817 3-5.9817c-14.284 17.945-19.933 37.466-51.78 40.917 37.496-22.972 31.847-3.451 0 0 37.496-22.972 31.847-3.451 0 0l47.78-33.938m152.24 134.4" fill="url(#e)" filter="url(#d)"/>
+   </g>
+   <ellipse cx="245" cy="110" rx="35" ry="36" fill="url(#f)"/>
+   <g fill="#f9409a">
+    <path d="m159 156c-26 34 71 26 36 31s-10-65-36-31z"/>
+    <path d="m219 194c36 8 61-10 61-10s67 9 67 9"/>
+   </g>
+   <g fill="#7f0000" stroke="#7f0000">
+    <ellipse transform="rotate(-58.671 196.74 159.14)" cx="196.74" cy="159.14" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(227.55 295 177)" cx="295" cy="177" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(213.92 216 211)" cx="216" cy="211" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(213.92 153 185)" cx="153" cy="185" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(200.39 292 135)" cx="292" cy="135" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(142.44 128 203)" cx="128" cy="203" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(126.03 229 256)" cx="229" cy="256" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(112.94 258.6 168.26)" cx="258.6" cy="168.26" rx="5.6575" ry=".34465"/>
+    <ellipse transform="rotate(106.16 369 202)" cx="369" cy="202" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(132.32 142.5 233.5)" cx="143.44" cy="228.59" rx="5.6244" ry="1.7063"/>
+    <ellipse transform="rotate(213.92 335 218)" cx="335" cy="218" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(213.92 392 218)" cx="392" cy="218" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(136.79 275 215)" cx="275" cy="215" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(213.92 221 151)" cx="221" cy="151" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(149.53 171 220)" cx="171" cy="220" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(86.644 331 172)" cx="331" cy="172" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(159.51 170 149) translate(164.34 148) scale(1 .82496) translate(-164.34 -148)" cx="170" cy="149" rx="5.6575" ry="1"/>
+    <ellipse transform="rotate(213.92 286.3 248.03)" cx="286.31" cy="248.03" rx="5.6575" ry=".24473"/>
+    <ellipse transform="rotate(128.94 283 150)" cx="283" cy="150" rx="5.6575" ry="1"/>
+   </g>
+  </g>
+ </g>
+</svg>

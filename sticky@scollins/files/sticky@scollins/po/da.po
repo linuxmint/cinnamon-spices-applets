@@ -1,0 +1,240 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-02 20:42+0200\n"
+"PO-Revision-Date: 2017-10-02 21:20+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:206
+msgid "Change theme"
+msgstr "Skift tema"
+
+#: applet.js:215
+msgid "Edit title"
+msgstr "Redigér titel"
+
+#: applet.js:215
+msgid "Add title"
+msgstr "Tilføj titel"
+
+#: applet.js:221
+msgid "Copy"
+msgstr "Kopiér"
+
+#: applet.js:225
+msgid "Paste"
+msgstr "Indsæt"
+
+#: applet.js:231
+msgid "About..."
+msgstr "Om …"
+
+#: applet.js:235
+msgid "Configure..."
+msgstr "Konfigurér …"
+
+#: applet.js:241
+msgid "Remove this note"
+msgstr "Fjern denne note"
+
+#: applet.js:407
+msgid "Title"
+msgstr "Titel"
+
+#: applet.js:503
+msgid "Switch to check list"
+msgstr "Lav om til tjekliste"
+
+#: applet.js:711
+msgid "Switch to regular note"
+msgstr "Lav om til almindelig note"
+
+#: applet.js:715
+msgid "Remove completed items"
+msgstr "Fjern fuldførte punkter"
+
+#: applet.js:1604
+msgid "New note"
+msgstr "Ny note"
+
+#: applet.js:1608
+msgid "New check-list"
+msgstr "Ny tjekliste"
+
+#: applet.js:1614
+msgid "Pin notes (keep on top)"
+msgstr "Fastgør noter (bevar dem øverst)"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+#: applet.js:1621
+msgid "Hide notes"
+msgstr "Skjul noter"
+
+#: applet.js:1626
+msgid "Back up notes"
+msgstr "Sikkerhedskopiér noter"
+
+#: applet.js:1630
+msgid "Restore from backup"
+msgstr "Gendan fra sikkerhedskopi"
+
+#: applet.js:1651
+msgid ""
+"This will permanently remove all existing notes. Are you sure you want to "
+"continue?"
+msgstr ""
+"Dette vil fjerne alle eksisterende noter. Er du sikker på, du vil fortsætte?"
+
+#. 3.2->settings-schema.json->behavior->description
+#. sticky@scollins->settings-schema.json->behaviorHeader->description
+msgid "Behavior"
+msgstr "Opførsel"
+
+#. 3.2->settings-schema.json->startState->description
+#. sticky@scollins->settings-schema.json->startState->description
+msgid "When Cinnamon starts"
+msgstr "Når Cinnamon starter"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes above windows"
+msgstr "Vis noter over vinduerne"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Restore previous state"
+msgstr "Gendan forrige tilstand"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes on Desktop"
+msgstr "Vis noter på skrivebordet"
+
+#. 3.2->settings-schema.json->appearance->description
+#. sticky@scollins->settings-schema.json->appearanceHeader->description
+msgid "Appearance"
+msgstr "Udseende"
+
+#. 3.2->settings-schema.json->height->description
+#. sticky@scollins->settings-schema.json->height->description
+msgid "Default height"
+msgstr "Standardhøjde"
+
+#. 3.2->settings-schema.json->width->description
+#. sticky@scollins->settings-schema.json->width->description
+msgid "Default width"
+msgstr "Standardbredde"
+
+#. 3.2->settings-schema.json->theme->description
+#. sticky@scollins->settings-schema.json->theme->description
+msgid "Default theme"
+msgstr "Standardtema"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Blue"
+msgstr "Blå"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Pink"
+msgstr "Lyserød"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Brown"
+msgstr "Brun"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Purple"
+msgstr "Lilla"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Random"
+msgstr "Tilfældig"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Aqua"
+msgstr "Blågrøn"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Sand"
+msgstr "Sand"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Green"
+msgstr "Grøn"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Teal"
+msgstr "Opal"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Orange"
+msgstr "Orange"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Red"
+msgstr "Rød"
+
+#. 3.2->settings-schema.json->boxShadow->description
+#. sticky@scollins->settings-schema.json->boxShadow->description
+msgid "Show shadow behind notes"
+msgstr "Vis skygge bag noterne"
+
+#. 3.2->settings-schema.json->boxShadow->tooltip
+#. sticky@scollins->settings-schema.json->boxShadow->tooltip
+msgid ""
+"Warning: this has been known to slow down some computers - not recommended "
+"on older hardware"
+msgstr ""
+"Advarsel: Vides at gøre nogle computere langsomme - anbefales ikke på ældre "
+"hardware"
+
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
+msgstr "Skrifttype"
+
+#. sticky@scollins->metadata.json->description
+msgid "Applet that allows you to manage desktop notes"
+msgstr "Håndtér skrivebordsnoter"
+
+#. sticky@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - forfatter"
+
+#. sticky@scollins->metadata.json->comments
+msgid ""
+"This applet is designed to be a simple, quick, and easy-to-use note utility. "
+"While there is some customization available, the emphasis is on making it "
+"feel as smooth and easy to use as possible."
+msgstr ""
+"Dette panelprogram er designet til at være et enkelt og hurtigt noteredskab, "
+"som er let at bruge. Tilpasning er mulig, men fokus er på at give en "
+"oplevelse af et program, der er nemt at bruge."
+
+#. sticky@scollins->metadata.json->name
+msgid "Sticky Notes"
+msgstr "Sticky Notes"

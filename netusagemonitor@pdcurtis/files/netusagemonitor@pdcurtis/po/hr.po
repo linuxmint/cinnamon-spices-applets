@@ -1,0 +1,593 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: netusagemonitor@pdcurtis 3.1.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-29 15:41+0200\n"
+"PO-Revision-Date: 2017-04-29 18:40+0200\n"
+"Language-Team: Croatian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: hr\n"
+
+#: applet.js:43
+msgid "Ok"
+msgstr "U redu"
+
+#: applet.js:294
+msgid "No Interface being Monitored - right click to select"
+msgstr "Trenutno nema nadgledanih sučelja - desno kliknite za odabir"
+
+#: applet.js:420
+msgid ""
+"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat "
+"daemon is running!"
+msgstr ""
+"GREŠKA: Pobrinite se da su vnstat i vnstati instalirani i da je vnstat "
+"pozadinski program pokrenut!"
+
+#: applet.js:423
+msgid ""
+"NOTE: The last time the network traffic statistics were updated by vnStat is "
+"at the top right"
+msgstr ""
+"NAPOMENA: Vrijeme nadopune statistike mrežnog prometa vnStatom se nalazi "
+"gore desno"
+
+#: applet.js:434
+msgid "Cumulative Data Usage Information:"
+msgstr "Informacije ukupne upotrebe podataka"
+
+#: applet.js:461
+msgid "Current Connection and Interface Information"
+msgstr "Trenutne informacije povezivanja i sučelja"
+
+#: applet.js:473
+msgid "No network monitored. Please select one right-clicking the applet."
+msgstr "Nema nadgledanih mreža. Odaberite jednu lijevim klikom na aplet."
+
+#: applet.js:480
+msgid "Note: Alerts not enabled in Settings"
+msgstr "Napomena: Upozorenja nisu omogućena u postavkama"
+
+#: applet.js:496
+msgid "Alert level (Orange):"
+msgstr "Razina upozorenja (narančasta):"
+
+#: applet.js:496
+#, c-format
+msgid "% of Data Limit of"
+msgstr "% ograničenja podataka od"
+
+#: applet.js:501 applet.js:503 applet.js:509 applet.js:511 applet.js:517
+msgid "Cumulative Data Use"
+msgstr "Ukupna upotreba podataka"
+
+#: applet.js:501 applet.js:509 applet.js:517
+msgid "with offset of"
+msgstr "s pomakom od"
+
+#: applet.js:564
+msgid "Select a network manager interface to be monitored:"
+msgstr "Odaberite sučelje mrežnog upravitelja za nadgledanje:"
+
+#: applet.js:577
+msgid "(Active)"
+msgstr "(Aktivno)"
+
+#: applet.js:590
+msgid "or Select an independent interface to be monitored:"
+msgstr "ili odaberite nezavisno sučelje za nadgledanje:"
+
+#: applet.js:594
+msgid "for most USB Mobile Internet Modems)"
+msgstr "za većinu USB modema mobilnog interneta)"
+
+#: applet.js:606
+msgid "for Android Bluetooth PAN Connections)"
+msgstr "za Android Bluetooth PAN povezivanja)"
+
+#: applet.js:616
+msgid "Check for Changes in Devices and Display Options"
+msgstr "Provjerite promjene u mogućnostima uređaja i prikaza"
+
+#: applet.js:624
+msgid "Toggle Display from ↓ and ↑ to ⇵"
+msgstr "Prebaci prikaz sa ↓ i ↑ u ⇵"
+
+#: applet.js:638 applet.js:648 applet.js:658
+msgid "Reset Cumulative Data Usage"
+msgstr "Poništi ukupnu upotrebu podataka"
+
+#: applet.js:671
+msgid "Housekeeping and System Sub Menu"
+msgstr "Upravljanje i podizbornici sustava"
+
+#: applet.js:674
+msgid "Open System Monitor"
+msgstr "Otvori nadgledatelja sustava"
+
+#: applet.js:680
+msgid "View the Changelog"
+msgstr "Pogledaj zapis promjena"
+
+#: applet.js:686
+msgid "View the Help File"
+msgstr "Pogledaj datoteku pomoći"
+
+#: applet.js:695
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Otvori stylesheet.css  (Napredne funkcije)"
+
+#: applet.js:701
+msgid "Open alertScript  (Advanced Function)"
+msgstr "Otvori alertScript  (Napredne funkcije)"
+
+#: applet.js:707
+msgid "Open suspendScript  (Advanced Function)"
+msgstr "Otvori suspendScript  (Napredne funkcije)"
+
+#: applet.js:715
+msgid "Test alertScript  (Advanced Test Function)"
+msgstr "Testiraj alertScript  (Napredne funkcije testiranja)"
+
+#: applet.js:721
+msgid "Test suspendScript  (Advanced Test Function)"
+msgstr "Testiraj suspendScript  (Napredne funkcije testiranja)"
+
+#: applet.js:727
+msgid "Test Crisis Management Function (Advanced Test Function)"
+msgstr "Testiraj funkciju kriznog upravljanja  (Napredne funkcije testiranja)"
+
+#: applet.js:807
+msgid ""
+"THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
+"\n"
+" Either set a new limit using right click -> Settings \n"
+"\n"
+"or disconnect using the Network Manager Applet"
+msgstr ""
+"OGRANIČENJE KORIŠTENJA PODATAKA JE DOSEGNUTO\t\n"
+"\n"
+" Ili postavite novo ograničenje koristeći lijevi klik -> Postavke \n"
+"\n"
+"ili prekinite povezivanje pomoću apleta Mrežnog upravitelja"
+
+#: applet.js:879
+msgid "Interface:"
+msgstr "Sučelje:"
+
+#: applet.js:879 applet.js:882
+msgid "Downloaded:"
+msgstr "Preuzeto:"
+
+#: applet.js:879 applet.js:882
+msgid "Uploaded:"
+msgstr "Poslano:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->decimalsToShow-
+#. spinner->description
+msgid "Display Resolution:"
+msgstr "Prikaz znamenki:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->decimalsToShow-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to make the change the number of "
+"decimal places displayed"
+msgstr ""
+"Povećajte ili smanjite ovu vrijednost kako bi promijenili broj prikazanih "
+"decimalnih mjesta"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->decimalsToShow-
+#. spinner->units
+msgid "decimal places"
+msgstr "decimalna mjesta"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->defaultInterface->description
+msgid "Default Interface (usually ppp0 or wlan0):"
+msgstr "Zadano sučelje (uobičajeno ppp0 ili wlan0):"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->defaultInterface->tooltip
+msgid ""
+"The Default  interface to use for connections which are not always active at "
+"start up such as Mobile Broadband or Wifi - usually set to ppp0 or wlan0"
+msgstr ""
+"Zadano sučelje za korištenje povezivanja koje nije uvijek aktivno pri "
+"pokretanju poput mobilnog širokopojasnog interneta ili bežičnog povezivanja "
+"- uobičajeno je postavljeno na ppp0 ili wlan0"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->disconnectDelay->description
+msgid "Delay before Disabling Networking managed by NMClient"
+msgstr "Odgoda prije onemogućavanja umrežavanja upravljanim od strane NMClient"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->disconnectDelay->tooltip
+msgid ""
+"This is the delay during which you can click the Applet to abort automatic "
+"disconnection of the machine when the Data Usage Limit is exceeded."
+msgstr ""
+"Ovo je odgoda tijekom koje možete kliknuti na aplet kako bi prekinuli "
+"automatsko prekidanje povezivanja kada je dosegnuto ograničenje korištenja "
+"podataka."
+
+#. netusagemonitor@pdcurtis->settings-schema.json->disconnectDelay->units
+msgid "Seconds"
+msgstr "sekunde"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->alertPercentage->description
+msgid "Percentage of Data Limit at which Orange Warning Displayed"
+msgstr ""
+"Postotak korištenja podataka pri kojemu će biti prikazano narančasto "
+"upozorenje"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Data Limit at which Orange Warning Background is displayed - "
+"It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Postotak korištenja podataka pri kojemu će biti prikazano narančasto "
+"upozorenje - Još je prikazano i može se prilagoditi u izborniku lijevog "
+"klika apleta"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useTotalLimit->description
+msgid "Check this box to use the Alert function"
+msgstr "Odaberi za prikaz obavijesti"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useTotalLimit->tooltip
+msgid ""
+"This is useful for mobile broadband or where you may be paying for data on a "
+"Wifi link"
+msgstr ""
+"Ovo je korisno za mobilni širokopojasni internet ili tamo gdje morate "
+"plaćati podatke za bežično povezivanje"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Razdoblje osvježavanja prikaza:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid "Increase or decrease this spinner value to change the Refresh Interval"
+msgstr ""
+"Povećajte ili smanjite ovu vrijednost kako bi promijenili razdoblje "
+"osvježavanja"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->units
+msgid "seconds"
+msgstr "sekunde"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeOffset1->description
+msgid "Offset applied to Cumulative Data Usage 1"
+msgstr "Pomak primijenjen za ukupno korištenje podataka 1"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset1->tooltip
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset3->tooltip
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset2->tooltip
+msgid ""
+"This can be used to offset the data usage to take into account usage on "
+"other machines or correct for other causes"
+msgstr ""
+"Ovo se može koristiti za pomak upotrebe podataka kako bi se uzela upotreba "
+"na drugim računalima ili za ispravak drugih slučajeva"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset1->units
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset3->units
+#. netusagemonitor@pdcurtis->settings-schema.json->cumulativeOffset2->units
+#. netusagemonitor@pdcurtis->settings-schema.json->totalLimit->units
+msgid "Mbytes or Gbytes as set above"
+msgstr "Mbajti ili Gbajti kako je postavljeno iznad"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeOffset3->description
+msgid "Offset applied to Cumulative Data Usage 3"
+msgstr "Pomak primijenjen za ukupno korištenje podataka 3"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeOffset2->description
+msgid "Offset applied to Cumulative Data Usage 2"
+msgstr "Pomak primijenjen za ukupno korištenje podataka 2"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->useCrisisManagement->description
+msgid "Take action when the current data usage limit is exceed"
+msgstr "Pokreni radnju kada je dosegnuto ograničenje korištenja podataka"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->useCrisisManagement->tooltip
+msgid ""
+"This is useful for mobile broadband or where you may be paying for data on a "
+"Wifi link as it can, for example, suspend the machine after the limit has "
+"been exceeded"
+msgstr ""
+"Ovo je korisno za mobilni širokopojasni internet ili tamo gdje morate "
+"plaćati podatke za bežično povezivanje, na primjer, suspenzija računala "
+"nakon što je dosegnuto ograničenje korištenja podataka"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Network Usage Monitor Applet"
+msgstr "Opće postavke za aplet nadgledanja mrežnog krištenja"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->crisisManagement->description
+msgid "Action to take when Data Usage Limit exceeded:"
+msgstr ""
+"Radnja koja će se pokrenuti kada je dosegnuto ograničenje korištenja "
+"podataka:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->tooltip
+msgid ""
+"These are a mixture of preset options and scripts which can be changed by "
+"the user (Note: changes in scripts may not survive an update and should be "
+"backed up)"
+msgstr ""
+"Ovo je mješavina predložaka mogućnosti i skripta koje može promijeniti "
+"korisnik (Napomena: promjene u skriptama možda neće preživjeti nadopunu "
+"apleta i treba ih sigurnosno kopirati)"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Put up a full screen 'modal dialog' warning"
+msgstr "Pokreni modalni dijalog upozorenja preko cijelog zaslona"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Display a high priority notification"
+msgstr "Prikaži obavijest visokog prioriteta"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Suspend Machine after a brief opportunity to abort (via suspendScript)"
+msgstr ""
+"Suspendiraj računalo nakon kratke prilike za prekid (putem suspendScript)"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Display a notification"
+msgstr "Prikaži obavijest"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Disable All Networking managed by NMClient after opportunity to abort"
+msgstr ""
+"Onemogući sva upravljanja umrežavanja putem NMClienta nakon prilike za prekid"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->crisisManagement->options
+msgid "Run a user configurable Script (alertScript)"
+msgstr "Pokreni korisnički prilagodljivu skriptu (alertScript)"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->compactDisplay->description
+msgid "Use a Compact Display with total traffic only"
+msgstr "Koristi kompaktni prikaz sa ukupnim prometom samo"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->compactDisplay->tooltip
+msgid "This just displays the total of upload and download rate in the applet"
+msgstr "Ovo samo prikazuje ukupnu brzinu slanja i preuzimanja u apletu"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->useDefaultInterface->description
+msgid ""
+"Use the following Interface as default to monitor when no other Interface is "
+"Active at start up :"
+msgstr ""
+"Koristi sljedeće sučelje kao zadano za nadgledanje kada nema drugih aktivnih "
+"sučelja pri pokretanju:"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->useDefaultInterface->tooltip
+msgid ""
+"Checking this box allows you to set up to use an interface for connections "
+"which is not always active at start up such as Wifi or Mobile Broadband - "
+"usually wlan0 or ppp0. If not checked the first active interface know to the "
+"Network Monitor will be used or PPP0 if that was the last connection."
+msgstr ""
+"Ovaj odabir omogućuje vam postavljanje korištenja sučelja za povezivanja "
+"koja nisu uvijek aktivna pri pokretanju poput bežičnog povezivanja ili "
+"mobilnog širokopojasnog interneta - uobičajeno wlan0 ili ppp0. Ako nije "
+"odabrano prvo aktivno sučelje poznato Mrežnom nadgledatelju biti će "
+"korišteno ili PPP0 ako je to bilo posljednje povezivanje."
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->displayExtraHousekeeping->description
+msgid "Add development and test functions to Context Menu"
+msgstr "Dodaj razvojne i testne funkcije u izbornik:"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->displayExtraHousekeeping->tooltip
+msgid ""
+"Very useful for development of scripts and testing without actually "
+"exceeding a limit"
+msgstr "Vrlo korisno za razvoj skripti i testiranje bez prelaženja ograničenja"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->appletWidthSetting->description
+msgid ""
+"Applet Width Adjustment (Only for fine tuning - normally leave alone at 180:"
+msgstr ""
+"Prilagodba širine apleta (Samo za preciznu prilagodbu - uobičajeno ostavite "
+"samo na 180:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->appletWidthSetting->tooltip
+msgid ""
+"Fine tuning of applet width for changes in theme and decimal places "
+"displayed - needs to be used in conjuction with changes in stylesheet.css. "
+"Value is halved when Compact Display selected"
+msgstr ""
+"Precizna prilagodba širine apleta za promjenu prikaza u temi i decimalnih "
+"mjesta - treba se koristiti u kombinaciji s promjenama u stylesheet.css. "
+"Vrijednost je prepolovljena kada je odabran kompaktni prikaz"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->appletWidthSetting->units
+msgid "pixels"
+msgstr "pikseli"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->head3->description
+msgid "Settings specific to Long Term Traffic Statistics"
+msgstr "Postavke specifične za dugoročnu statistiku prometa"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->head4->description
+msgid "Settings for response to exceeding the current data usage limits"
+msgstr ""
+"Postavke za odgovor na prekoračenje trenutačnih ograničenja korištenja "
+"podataka"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->monitored-
+#. interface->description
+msgid "Last Interface Monitored - no need to change as set by Applet:"
+msgstr ""
+"Posljednje nadgledano sučelje - nema potrebe za promjenom jer je postavljeno "
+"apletom:"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->monitored-
+#. interface->tooltip
+msgid ""
+"This is normally set by the Applet and should not be changed here except for "
+"experimental or diagnostic use"
+msgstr ""
+"Ovo je uobičajeno postavljeno apletom i ne bi se trebalo mijenjati ovdje "
+"osim u eksperimentalne i dijagnostičke svrhe"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->head2->description
+msgid "Settings specific to Cumulative Data Usage functions"
+msgstr "Postavke specifične za ukupnu upotrebu podataka"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->head1->description
+msgid ""
+"Settings specific to Data Usage and Alert functions for Current Connection"
+msgstr ""
+"Postavke specifične za korištenje podataka i funkciju obavijesti za trenutno "
+"povezivanje"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useVnstat->description
+msgid ""
+"Display long term traffic statistics (vnstat and vnstati Must be installed). "
+msgstr ""
+"Prikaži dugoročnu statistiku prometa (vnstat i vnstati moraju biti "
+"instalirani)"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useVnstat->tooltip
+msgid ""
+"This requires vnstat and vnstati to be installed prior to being enabled."
+msgstr ""
+"Ovo zahtijeva da vnstat i vnstati budu instalirani prije nego što se omoguće."
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useAlertSound->description
+msgid "Sound an audible alert when Data Usage Limit Exceeded"
+msgstr ""
+"Zvuk za zvučno upozorenje kada se ograničenje korištenja podataka dosegne"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->useAlertSound->tooltip
+msgid ""
+"Only for built in alerts - hard code into scripts. Must have Sox installed"
+msgstr ""
+"Samo za ugrađena upozorenja - čvrsto ugrađeno u skripte. Mora imati Sox "
+"instaliran"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface2->description
+msgid ""
+"Interface 2 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Sučelje 2 za nadgledanje ukupnog korištenja podataka- nula će onemogućiti "
+"prikaz"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface2->tooltip
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface3->tooltip
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface1->tooltip
+msgid ""
+"This is normally set to ppp0 or wlan0 to allow monitoring data usage during "
+"a period by mobile internet or Wifi charged by the Mbyte"
+msgstr ""
+"Ovo je uobičajeno postavljeno za ppp0 i wlan0 kako bi se dopustilo "
+"nadgledanje korištenja podataka tijekom razdoblja upotrebe mobilnog "
+"interneta ili bežičnog povezivanja obračunatih u Mbajtima"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface3->description
+msgid ""
+"Interface 3 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Sučelje 3 za nadgledanje ukupnog korištenja podataka- nula će onemogućiti "
+"prikaz"
+
+#. netusagemonitor@pdcurtis->settings-
+#. schema.json->cumulativeInterface1->description
+msgid ""
+"Interface 1 for monitoring Cumulative Data Usage - null will inhibit display"
+msgstr ""
+"Sučelje 1 za nadgledanje ukupnog korištenja podataka- nula će onemogućiti "
+"prikaz"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->totalLimit->description
+msgid "Data Limit before a Red Warning background is displayed in the Applet"
+msgstr ""
+"Ograničenje podataka prije prikaza pozadine crvenog upozorenja u apletu"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->totalLimit->tooltip
+msgid ""
+"This is the Total Data which can be uploaded and downloaded before the "
+"background of the applet goes red - by default it goes orange at 80% of this "
+"- reset by disconnection, reboot and/or suspend depending on system"
+msgstr ""
+"Ovo su ukupni podaci koji se mogu poslati i preuzeti prije nego pozadina "
+"apleta pocrveni - po zadanome pojavljuje se narančasto pri 80% ove "
+"vrijednosti - poništava se prekidanjem povezivanja, ponovnim pokretanjem i/"
+"ili suspendiranjem ovisno o sustavu"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->dataUnit->options
+msgid "Mbytes"
+msgstr "Mbajti"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->dataUnit->options
+msgid "Gbytes"
+msgstr "Gbajti"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->dataUnit->tooltip
+msgid ""
+"These are the units which will be used for setting the alert limit and "
+"cumulative offsets."
+msgstr ""
+"Ovo su jedinice koje će se koristiti za postavljanje ograničenja upozorenja "
+"i ukupnog pomaka."
+
+#. netusagemonitor@pdcurtis->settings-schema.json->dataUnit->description
+msgid "Data Unit used to set Alert Levels and Cumulative Offsets"
+msgstr ""
+"Jedinice podataka korištene za postavljanje razina obavijesti i ukupnog "
+"pomaka"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->alertSound->description
+msgid "Full path and filename of alert sound file"
+msgstr "Puna putanja i naziv datoteke do zvučne datoteke upozorenja"
+
+#. netusagemonitor@pdcurtis->settings-schema.json->alertSound->tooltip
+msgid ""
+"Only for built in alerts - hard code into scripts. Must have Sox installed. "
+"Most sound file types supported"
+msgstr ""
+"Samo za ugrađena upozorenja - čvrsto ugrađeno u skripte. Mora imati Sox "
+"instaliran. Većina zvučnih vrsta datoteka su podržane"
+
+#. netusagemonitor@pdcurtis->metadata.json->description
+msgid ""
+"A Comprehensive Data Usage Monitor with alerts and cumulative data functions "
+"for Cinnamon"
+msgstr ""
+"Sveobuhvatni nadgledatelj korištenja podataka sa upozorenjima i ukupnim "
+"funkcijama podataka za Cinnamon"
+
+#. netusagemonitor@pdcurtis->metadata.json->name
+msgid "Network Data Usage Monitor"
+msgstr "Mrežni nadgledatelj korištenja podataka"

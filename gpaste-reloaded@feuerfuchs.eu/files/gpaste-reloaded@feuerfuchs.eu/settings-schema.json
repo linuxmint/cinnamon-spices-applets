@@ -1,0 +1,36 @@
+{
+    "general": {
+        "type":        "header",
+        "description": "Shown entries"
+    },
+    "display-track-switch": {
+        "default":     true,
+        "type":        "checkbox",
+        "description": "Display 'Track clipboard changes'"
+    },
+    "display-new-item": {
+        "default":     true,
+        "type":        "checkbox",
+        "description": "Display 'New item'"
+    },
+    "display-searchbar": {
+        "default":     true,
+        "type":        "checkbox",
+        "description": "Display search bar"
+    },
+    "display-gpaste-ui": {
+        "default":     false,
+        "type":        "checkbox",
+        "description": "Display 'GPaste Main Program'"
+    },
+    "display-empty-history": {
+        "default":     true,
+        "type":        "checkbox",
+        "description": "Display 'Empty history'"
+    },
+    "gpaste-settings": {
+        "type":        "button",
+        "description": "GPaste Main Program",
+        "callback":    "openUI"
+    }
+}

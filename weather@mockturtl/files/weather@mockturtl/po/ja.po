@@ -1,0 +1,438 @@
+# gnome-shell-extension-weather ja.po.
+# Copyright (C) 2011,2012 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Takeshi AIHANA <takeshi.aihana@gmail.com>, 2011,2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-weather 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2012-06-11 12:26+0900\n"
+"Last-Translator: Takeshi AIHANA <takeshi.aihana@gmail.com>\n"
+"Language-Team: Japanese <takeshi.aihana@gmail.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "開く"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "設定"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "日の出"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "日の入"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "現在の天気を読み込んでいます ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "天気予報を読み込んでいます ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "読み込み中 ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr "更新"
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "気温:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "湿度:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "気圧:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "風速:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "体感温度:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "竜巻"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "熱帯暴風雨"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "ハリケーン"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "非常に激しい雷雨"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "激しい雷雨"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "雨と雪"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "雨とみぞれ"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "雪とみぞれ"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "着氷性の霧雨"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "霧雨"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "着氷性の雨"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "にわか雨"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "にわか雪"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "弱いにわか雪"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "吹雪"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "雪"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "雹"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "みぞれ"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "砂塵"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "霧"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "もや"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "けむり"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "大荒れ"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "強風"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "寒冷"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "曇り"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "おおむね曇り"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "ところにより曇り"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "快晴"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "晴れ"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "晴れ"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "雨と雹"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "温暖"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "局地的な激しい雷雨"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "ところにより激しい雷雨"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "ところによりにわか雨"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "大雪"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "ところによりにわか雪"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "雷雨"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "にわか雪"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "局地的雷雨"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "データなし"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "月曜日"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "火曜日"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "水曜日"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "木曜日"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "金曜日"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "土曜日"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "日曜日"
+
+#: applet.js:1056
+msgid "N"
+msgstr "北"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "北東"
+
+#: applet.js:1056
+msgid "E"
+msgstr "東"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "南東"
+
+#: applet.js:1056
+msgid "S"
+msgstr "南"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "南西"
+
+#: applet.js:1056
+msgid "W"
+msgstr "西"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "北西"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "WOEID を取得"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "縦に配置"
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "パネルに気温を表示する"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr "WOEID"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "気温の単位"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "華氏"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "摂氏"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "状態を日本語で表示"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "場所ラベルの書換"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "24時間表示"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "天気予報の表示日数"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "日"
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "日の出と日の入の時刻"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "風速の単位"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "k/h"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "ノット"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "m/h"
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "パネルに天気の状態(例：\"強風\", \"晴れ\")を表示"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "気圧の単位"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "気圧"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr "kPa"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr "hPa"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "in Hg"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "更新間隔"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "分"
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "シンボリック・アイコンにする"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr "指定した場所の天気予報を表示"
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr "天気"
+

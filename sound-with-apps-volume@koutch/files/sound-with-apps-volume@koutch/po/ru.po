@@ -1,0 +1,324 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-02 19:23+0300\n"
+"PO-Revision-Date: 2017-04-04 22:16+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
+
+#: applet.js:583 applet.js:810
+msgid "Unknown Artist"
+msgstr "Неизвестный исполнитель"
+
+#: applet.js:584 applet.js:814
+msgid "Unknown Album"
+msgstr "Неизвестный альбом"
+
+#: applet.js:585 applet.js:818
+msgid "Unknown Title"
+msgstr "Неизвестная композиция"
+
+#: applet.js:596
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: applet.js:599
+msgid "Play"
+msgstr "Воспроизведение"
+
+#: applet.js:602
+msgid "Stop"
+msgstr "Стоп"
+
+#: applet.js:605
+msgid "Next"
+msgstr "Следующий"
+
+#: applet.js:653
+msgid "Open Player"
+msgstr "Открыть проигрыватель"
+
+#: applet.js:661
+msgid "Quit Player"
+msgstr "Закрыть проигрыватель"
+
+#: applet.js:1235
+msgid "Mute output"
+msgstr "Отключить звук"
+
+#: applet.js:1236
+msgid "Mute input"
+msgstr "Отключить микрофон"
+
+#: applet.js:1619
+msgid "Launch player..."
+msgstr "Запустить проигрыватель..."
+
+#: applet.js:1632 applet.js:1779 applet.js:1781 applet.js:1786 applet.js:1787
+#: applet.js:1806 applet.js:1807
+msgid "Volume"
+msgstr "Громкость"
+
+#: applet.js:1648
+msgid "  Applications..."
+msgstr "  Приложения..."
+
+#: applet.js:1653
+msgid "Microphone"
+msgstr "Микрофон"
+
+#: applet.js:1711
+msgid "Sound Settings"
+msgstr "Настройки звука"
+
+#: applet.js:1713
+msgid "Output device..."
+msgstr "Устройство вывода..."
+
+#: applet.js:1779 applet.js:1781 applet.js:1938 applet.js:1964 applet.js:1995
+#: applet.js:2022
+msgid "mute"
+msgstr "без звука"
+
+#. sound-with-apps-volume@koutch->metadata.json->name
+msgid "Sound with apps volume"
+msgstr "Sound with apps volume"
+
+#. sound-with-apps-volume@koutch->metadata.json->description
+msgid ""
+"Applications' volume, volume 150%, mute button, scrolling track time, custom "
+"launcher ..."
+msgstr ""
+"Громкость отдельных приложений, громкость 150%, кнопка отключения звука, "
+"прокрутка времени песни, возможность отображения своих приложений..."
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->description
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->description
+msgid "Volume arrow key step : "
+msgstr "Шаг прокрутки громкости клавишей направления (стрелкой):"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->tooltip
+msgid "from 0 to 3600 (0 to disable)"
+msgstr "от 0 до 3600 (0 для отключения)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->units
+msgid "sec"
+msgstr "секунды"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. icon->description
+msgid "Icon :"
+msgstr "Иконка:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showtrack->description
+msgid "Show song information on the panel"
+msgstr "Отображать на панели сведения о композиции"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->description
+msgid "Time up/down scroll step : "
+msgstr "Шаг прокрутки времени вверх/вниз:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->mute-middle-
+#. click->description
+msgid "Mute with middle click on applet and slider"
+msgstr ""
+"Выключить звук нажатием средней кнопки мыши по апплету или ползунку громкости"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-custom-
+#. launcher->description
+msgid "Show Custom Launcher"
+msgstr "Показывать своё приложение"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->hideSystray->description
+msgid "Hide system tray icons for compatible players"
+msgstr "Скрывать иконки в трее для совместимых проигрывателей"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-player-
+#. list->description
+msgid "Launch player list always shown"
+msgstr "Список проигрывателей для запуска виден всегда"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->description
+msgid "Time left/right scroll step : "
+msgstr "Шаг прокрутки времени влево/вправо:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-
+#. player->description
+msgid "Show Player"
+msgstr "Показывать проигрыватель"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-player->tooltip
+msgid "Show/hide Player "
+msgstr "Показать/скрыть проигрыватель"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-
+#. max->description
+msgid "Volume : 150%"
+msgstr "Громкость: 150%"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->truncatetext->description
+msgid "- Limit song information to"
+msgstr "Ограничение информации о композиции"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->truncatetext->units
+msgid "characters"
+msgstr "символы"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->description
+msgid "Show Applications' volume"
+msgstr "Показывать громкость для отдельных приложений"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->tooltip
+msgid ""
+"show/hide Applications' volume (automatically hide if no program is playing "
+"sound)"
+msgstr ""
+"Показать/скрыть громкость приложений (автоматически скрывать, если нет "
+"запущенных программ проигрывающих звук)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->description
+msgid "Mute button"
+msgstr "Кнопка отключения звука"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->tooltip
+msgid "enable/disable mute button"
+msgstr "Включить/отключить кнопку отключения звука"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->description
+msgid "Show Launch player"
+msgstr "Показать запущенный проигрыватель"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->tooltip
+msgid ""
+"show/hide Launch Player (automatically hide if applet's player is displayed)"
+msgstr ""
+"Показать/скрыть запущенный проигрыватель (скрывать автоматически, если "
+"отображается проигрыватель апплета)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-
+#. option->description
+msgid "Override the slider's theme"
+msgstr "Переопределить тему оформления ползунков времени и громкости"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-option->tooltip
+msgid "Keep mark on the 150% slider & may fix right margin too short"
+msgstr ""
+"Оставьте отметку на ползунке на 150%, это может помочь если поле справа "
+"слишком короткое"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. list->description
+msgid "Applications list always shown"
+msgstr "Список приложений виден всегда"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->description
+msgid "Volume up/down scroll step : "
+msgstr "Шаг прокрутки громкости вверх/вниз:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->tooltip
+msgid "from 0 to 100 (0 to disable)"
+msgstr "от 0 до 100 (0 для отключения)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->units
+msgid "%"
+msgstr "проценты"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-in-
+#. terminal->description
+msgid "Launch in Terminal"
+msgstr "Запустить в терминале"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. name->description
+msgid "Name :"
+msgstr "Имя:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. command->description
+msgid "Command :"
+msgstr "Команда:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head2->description
+msgid "Sliders settings"
+msgstr "Настройки ползунков времени и громкости"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head1->description
+msgid "You'll need to restart players supported by applet's player"
+msgstr ""
+"Для применения настроек необходимо перезапустить поддерживаемые проигрыватели"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showalbum->description
+msgid "Show album art as icon"
+msgstr "Показывать обложку альбома как иконку"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->description
+msgid "Show Output device"
+msgstr "Показывать устройство вывода"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->tooltip
+msgid "show/hide Output device"
+msgstr "Показать/скрыть устройство вывода"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->description
+msgid "Volume left/right scroll step : "
+msgstr "Шаг прокрутки громкости влево/вправо:"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->description
+msgid "Album art size"
+msgstr "Размер обложки альбома"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->tooltip
+msgid "from 0 to 210 (0 to disable)"
+msgstr "от 0 до 210 (0 для отключения)"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-size->units
+msgid "px"
+msgstr "пиксели"

@@ -1,0 +1,40 @@
+{
+	"head": {
+		"type": "header",
+		"description": "Settings - Bash Sensors (write commands in Bash!)"
+	},
+	"refreshInterval": {
+		"type": "spinbutton",
+		"default": 10,
+		"min": 1,
+		"max": 60,
+		"step": 1,
+		"units": "seconds",
+		"description": "Refresh interval"
+	},
+	"script1": {
+		"type": "entry",
+		"default": "echo 'hello, cinnamon!'",
+		"description": "Command 1",
+		"tooltip": "first line of output"
+	},
+	"enableScript2": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Two-line mode (command 2 enabled)"
+	},
+
+	"script2": {
+		"type": "entry",
+		"default": "echo 'configuration required'",
+		"description": "Command 2",
+		"tooltip": "second line of output (optional)",
+        "dependency": "enableScript2"
+	},
+	"menuScript": {
+		"type": "entry",
+		"default": "sensors",
+		"description": "Menu command (on applet left-click)",
+		"tooltip": "allows to display lots of information in popup menu"
+	}
+}

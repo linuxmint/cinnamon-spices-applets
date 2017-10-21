@@ -1,0 +1,12 @@
+{
+  "header" : {
+    "type" : "header",
+    "description": "Set avaible services"
+  },
+  "services" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Set services",
+    "tooltip" : "use pattern Human Name:service.name;HumanName 2:service2.name"
+  }
+}

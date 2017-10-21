@@ -1,0 +1,7 @@
+{
+ "uuid": "calendar@simonwiles.net",
+ "name": "World Clock Calendar",
+ "description": "Fork of the Cinnamon calendar applet with support for displaying multiple timezones",
+ "icon": "stock_calendar",
+ "max-instances": -1
+}

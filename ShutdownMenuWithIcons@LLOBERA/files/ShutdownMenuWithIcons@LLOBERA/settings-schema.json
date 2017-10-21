@@ -1,0 +1,177 @@
+{
+    "quit_label": {
+        "type": "header",
+        "description": "Quit: shut down and power-off the system"
+    },
+    "quit": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add quit to the menu"
+    },
+    "quit_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-shutdown",
+        "description" : "The quit icon ",
+        "dependency" : "quit"
+    },
+    "quit_cmd": {
+        "type" : "entry",
+        "default" : "systemctl poweroff",
+        "description" : "The quit command ",
+        "dependency" : "quit"
+    },
+    
+    "suspend_label": {
+        "type": "header",
+        "description": "Suspend: suspend the system"
+    },
+    "suspend": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add suspend to the menu"
+    },
+    "suspend_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-suspend",
+        "description" : "The suspend icon ",
+        "dependency" : "suspend"
+    },
+    "suspend_cmd": {
+        "type" : "entry",
+        "default" : "systemctl suspend",
+        "description" : "The suspend command ",
+        "dependency" : "suspend"
+    },
+        
+    "hibernate_label": {
+        "type": "header",
+        "description": "Hibernate: hibernate the system"
+    },
+    "hibernate": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add hibernate to the menu"
+    },
+    "hibernate_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-suspend-hibernate",
+        "description" : "The hibernate icon ",
+        "dependency" : "hibernate"
+    },
+    "hibernate_cmd": {
+        "type" : "entry",
+        "default" : "systemctl hibernate",
+        "description" : "The hibernate command ",
+        "dependency" : "hibernate"
+    },
+   
+    "hybrid_sleep_label": {
+        "type": "header",
+        "description": "Hybrid sleep: hibernate and suspend the system"
+    },
+    "hybrid_sleep": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Add hybrid sleep to the menu"
+    },
+    "hybrid_sleep_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-suspend-hibernate",
+        "description" : "The hybrid sleep icon ",
+        "dependency" : "hybrid_sleep"
+    },
+    "hybrid_sleep_cmd": {
+        "type" : "entry",
+        "default" : "systemctl hybrid-sleep",
+        "description" : "The hybrid sleep command ",
+        "dependency" : "hybrid_sleep"
+    },
+        
+    "restart_label": {
+        "type": "header",
+        "description": "Restart: shut down and reboot the system"
+    },
+    "restart": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add restart to the menu"
+    },
+    "restart_icon": {
+        "type" : "iconfilechooser",
+        "default" : "view-refresh",
+        "description" : "The restart icon ",
+        "dependency" : "restart"
+    },
+    "restart_cmd": {
+        "type" : "entry",
+        "default" : "systemctl reboot",
+        "description" : "The restart command ",
+        "dependency" : "restart"
+    },
+    
+    "switch_users_label": {
+        "type": "header",
+        "description": "Switch users"
+    },
+    "switch_users": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Add switch users to the menu"
+    },
+    "switch_users_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-switch-user",
+        "description" : "The switch users icon",
+        "dependency" : "switch_users"
+    },
+    "switch_users_cmd": {
+        "type" : "entry",
+        "default" : "gdmflexiserver",
+        "description" : "The switch users command",
+        "dependency" : "switch_users"
+    },
+    
+    "log_out_label": {
+        "type": "header",
+        "description": "Log out"
+    },
+    "log_out": {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Add log out to the menu"
+    },
+    "log_out_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-log-out",
+        "description" : "The log out icon ",
+        "dependency" : "log_out"
+    },
+    "log_out_cmd": {
+        "type" : "entry",
+        "default" : "dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1",
+        "description" : "The log out command ",
+        "dependency" : "log_out"
+    },
+        
+    "screen_lock_label": {
+        "type": "header",
+        "description": "Screen lock: lock the screen"
+    },
+    "screen_lock": {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Add screen lock to the menu"
+    },
+    "screen_lock_icon": {
+        "type" : "iconfilechooser",
+        "default" : "system-lock-screen",
+        "description" : "The screen lock icon ",
+        "dependency" : "screen_lock"
+    },
+    "screen_lock_cmd": {
+        "type" : "entry",
+        "default" : "dbus-send --session --type=method_call --print-reply --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock",
+        "description" : "The screen lock command ",
+        "dependency" : "screen_lock"
+    }
+}

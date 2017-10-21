@@ -1,0 +1,114 @@
+# Swedish translation for stackoverflow-questions-notifier@higuaro.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: stackoverflow-questions-notifier@higuaro\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-04 21:32+0200\n"
+"PO-Revision-Date: 2017-06-05 07:51+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:166
+msgid ""
+"Click here to turn \n"
+"question notifications on"
+msgstr ""
+"Klicka hör för att \n"
+"aktivera avisering"
+
+#: applet.js:171
+msgid ""
+"Click here to turn\n"
+"question notifications off"
+msgstr ""
+"Klicka hör för att \n"
+"inaktivera avisering"
+
+#: applet.js:202
+msgid "An error ocurred, click to start checking questions again"
+msgstr "Ett fel inträffade, klicka för att börja söka nya frågor igen"
+
+#: applet.js:219
+msgid "Max # of API calls reached, service will be back after"
+msgstr "Max # API-anrop har uppnåtts, tjänsten återaktiveras efter"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->description
+msgid ""
+"Checks stackoverflow site to see if new questions have been posted under a "
+"particular tag and generates a notification"
+msgstr ""
+"Genomsöker Stackoverflow efter nya frågor under specifika taggar och "
+"genererar en avisering"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->name
+msgid "Stackoverflow Questions Notifier"
+msgstr "Stackoverflow frågeavisering"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Besök programmets Cinnamon Applet-sida"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->tooltip
+msgid "Open cinnamon.com - rate the applet"
+msgstr "Öppna cinnamon.com - Betygsätt panelprogrammet"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->description
+msgid "Tags of interest for new questions (max 10 tags): "
+msgstr "Intressanta taggar, för nya frågor (max 10 taggar): "
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->tooltip
+msgid ""
+"Comma-separated list of tags for new questions that you are interested in "
+"(tags beyond the 10th are ignored)"
+msgstr ""
+"Kommaseparerad lista över taggar för nya frågor som intresserar dig "
+"(taggar utöver de 10, ignoreras)"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->general->description
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->description
+msgid "Query interval (minutes): "
+msgstr "Anropsintervall (minuter): "
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->tooltip
+msgid "Change the amount of time between every check for new questions"
+msgstr "Ändra tiden mellan varje sökning efter nya frågor"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->description
+msgid "Visit Developer Page"
+msgstr "Besök utvecklarens sida"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->tooltip
+msgid "Open geekofficedog.blogspot.com"
+msgstr "Öppna geekofficedog.blogspot.com"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->description
+msgid "Visit Stackoverflow"
+msgstr "Besök Stackoverflow"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->tooltip
+msgid "Open stackoverflow.com"
+msgstr "Öppna stackoverflow.com"

@@ -1,0 +1,458 @@
+# Greek translation for gnome-shell-extension-weather
+# Copyright (C) 2012
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# George Pantsis <gpantsis@gmail.com>, 2012.
+# George Boumis <developer.george.boumis@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 3.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2014-08-30 17:21+0100\n"
+"Last-Translator: George Boumis <developer.george.boumis@gmail.com>\n"
+"Language-Team: Ελληνικά <>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: applet.js:249
+msgid "..."
+msgstr ""
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "Κάντε κλικ για να ανοίξει"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "Ανατολή"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "Δύση"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Φόρτωση τρέχοντος καιρού ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Φόρτωση μελλοντικού καιρού ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Φόρτωση ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "Θερμοκρασία:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Υγρασία:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Πίεση:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Άνεμος:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Αισθητή θερμοκρασία:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Σίφωνας / Νεφοστρόβιλος"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Τροπική καταιγίδα"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Τυφώνας"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Σοβαρές καταιγίδες"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Καταιγίδες"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Μικτή βροχή και χιόνι"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Μικτή βροχή και χιονόνερο"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Μικτό χιόνι και χιονόνερο"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Παγωμένο ψιλόβροχο"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Ψεκάδες / Ψιλόβροχο"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Παγωμένη βροχή"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Όμβροι / Βροχοπτώσεις"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Νυφάδες χιονιού"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Ελαφριά χιονόπτωση"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Χιονοθύελλες"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Χιόνι"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Χαλάζι"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Χιονόνερο"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Σκόνη"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Ομιχλώδης"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Ομίχλη"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Καπνώδης"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Θορυβώδης"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Ανεμώδης"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "Κρύο"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Συννεφιασμένος"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Κυρίως νεφελώδης"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Πυκνή συννεφιά"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Αίθριος"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Ηλιόλουστος"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Αίθριος"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Μικτή βροχή και χαλάζι"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Καυτός"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Μεμονωμένες καταιγίδες"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Διάσπαρτες καταιγίδες"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Διάσπαρτες βροχοπτώσεις"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Ισχυρή χιονόπτωση"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Διάσπαρτες χιονοπτώσεις"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Βροχοπτώσεις με κεραυνούς"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "Χιονοπτώσεις"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Μεμονωμένες βροχοπτώσεις με κεραυνούς"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Μη διαθέσιμο"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Δευτέρα"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Τρίτη"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Τετάρτη"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Πέμπτη"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Παρασκευή"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Σάββατο"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Κυριακή"
+
+#: applet.js:1056
+msgid "N"
+msgstr "Β"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "ΒΑ"
+
+#: applet.js:1056
+msgid "E"
+msgstr "Α"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "ΝΑ"
+
+#: applet.js:1056
+msgid "S"
+msgstr "Ν"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "ΝΔ"
+
+#: applet.js:1056
+msgid "W"
+msgstr "Δ"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "ΒΔ"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "Εύρεση WOEID"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Εμφάνιση της τρέχουσας θερμοκρασίας στο πάνελ"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+#, fuzzy
+msgid "WOEID"
+msgstr "Εύρεση WOEID"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "Μονάδα θερμοκρασίας:"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "κλίμακα Φαρενάιτ"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "κλίμακα Κελσίου"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Μετάφραση καιρικών συνθηκών"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Παράκαμψη ετικέτας τοποθεσίας"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Εμφάνιση ώρας ανατολής / δύσης"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Μονάδα ταχύτητας ανέμου"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "χλμ/ώρα"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "μ./δεύτ"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "κόμβοι"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "μιλ./ώρα"
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr ""
+"Εμφάνιση των καιρικών συνθηκών (π.χ.  \"Ανεμώδης\", \"Αίθριος\") στο πάνελ"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+#, fuzzy
+msgid "Update interval"
+msgstr "Διάστημα ενημέρωσης (λεπτά)"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Συμβολικά εικονίδια"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "Εμφάνιση 5-ήμερης πρόβλεψης"
+
+#~ msgid "Please wait"
+#~ msgstr "Παρακαλώ περιμένετε"
+
+#~ msgid "Today"
+#~ msgstr "Σήμερα"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Αύριο"
+
+#~ msgid "Schema \"%s\" not found."
+#~ msgstr "Δεν βρέθηκε το σχήμα \"%s\"."

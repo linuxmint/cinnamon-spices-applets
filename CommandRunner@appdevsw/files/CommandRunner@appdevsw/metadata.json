@@ -1,0 +1,6 @@
+{
+	"description": "Applet runs script or application periodically and displays its output on the taskbar",
+	"uuid": "CommandRunner@appdevsw",
+	"name": "CommandRunner",
+	"max-instances": "9"
+}

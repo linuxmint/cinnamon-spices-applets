@@ -1,0 +1,103 @@
+{
+    "head": {
+        "type": "header",
+        "description": "General"
+    },
+    "display-style": {
+        "type": "combobox",
+        "default": 2,
+        "description": "Display style:",
+        "options": {
+            "Graph": 0,
+            "Digit": 1,
+            "Both": 2
+        },
+        "indent": true,
+        "tooltip": "Select to show graphs only, values only, or both."
+    },
+    "cpus-to-monitor": {
+        "type": "combobox",
+        "default": 0,
+        "description": "CPUs to display:",
+        "options": {
+            "Summary and individual": 0,
+            "Individual only": 1,
+            "Summary only": 2
+        },
+        "indent": true,
+        "tooltip": "Select to show individual CPUs and a summary, only individuals, or only a summary"
+    },
+    "digit-type": {
+        "type": "combobox",
+        "default": 0,
+        "description": "Show clock speed or percentage:",
+        "options": {
+            "Clock speed": 0,
+            "Percentage": 1
+        },
+        "indent": true,
+        "tooltip": "Display the clock speed or a percentage of the maximum clock speed."
+    },
+    "graph-width": {
+        "type": "scale",
+        "default": 4,
+        "min": 0,
+        "max": 40,
+        "step": 1,
+        "description": "Width of individual bars:",
+        "tooltip": "Move the slider to adjust the width of individual CPU graph bars",
+        "indent": true
+    },
+    "refresh-rate": {
+        "type": "scale",
+        "default": 2000,
+        "min": 200,
+        "max": 10000,
+        "step": 10,
+        "description": "Refresh rate:",
+        "tooltip": "Move the slider to adjust how often the applet updates.  Note: this can have a large impact on system performance if you set it too low",
+        "indent": true
+    },
+    "div": {
+        "type": "separator"
+    },
+    "colors-head": {
+        "type": "header",
+        "description": "Colors"
+    },
+    "background": {
+        "type": "colorchooser",
+        "default": "white",
+        "description": "The background color for each graph bar:",
+        "tooltip": "Click the button to select a new bar background color",
+        "indent": true
+    },
+    "low-color": {
+        "type": "colorchooser",
+        "default": "green",
+        "description": "The low level color for each graph bar:",
+        "tooltip": "Click the button to select a new low level status color",
+        "indent": true
+    },
+    "med-color": {
+        "type": "colorchooser",
+        "default": "orange",
+        "description": "The medium level color for each graph bar:",
+        "tooltip": "Click the button to select a new medium level status color",
+        "indent": true
+    },
+    "high-color": {
+        "type": "colorchooser",
+        "default": "red",
+        "description": "The high level color for each graph bar:",
+        "tooltip": "Click the button to select a new high level status color",
+        "indent": true
+    },
+    "text-color": {
+        "type": "colorchooser",
+        "default": "white",
+        "description": "The text color for the applet:",
+        "tooltip": "Click the button to select a text color",
+        "indent": true
+    }
+}

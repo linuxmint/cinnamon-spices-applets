@@ -1,0 +1,7 @@
+{
+  "autoUpdate":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Auto update (slow)"
+  }
+}

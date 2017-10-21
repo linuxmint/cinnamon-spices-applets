@@ -1,0 +1,49 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:34+0800\n"
+"PO-Revision-Date: 2017-04-20 21:36+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:54
+msgid "Acer Hardware Control"
+msgstr "宏基硬件控制"
+
+#: applet.js:62
+msgid "Activate Wireless Hardware"
+msgstr "激活无线硬件"
+
+#: applet.js:63
+msgid "Deactivate Wireless Hardware"
+msgstr "停用无线硬件"
+
+#: applet.js:65
+msgid "Activate Bluetooth Hardware"
+msgstr "激活蓝牙硬件"
+
+#: applet.js:66
+msgid "Deactivate Bluetooth Hardware"
+msgstr "停用蓝牙硬件"
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->description
+msgid ""
+"Provides software interface to Acer hardware keys.  Requires installation of "
+"acerhk.ko."
+msgstr "提供软件界面给宏基硬件按键。需要安装acerhk.ko。"
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->name
+msgid "AcerHK Control"
+msgstr "宏基硬件按键控制"

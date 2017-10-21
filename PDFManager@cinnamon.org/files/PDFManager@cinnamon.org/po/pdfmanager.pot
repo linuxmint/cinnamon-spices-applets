@@ -1,0 +1,89 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-19 16:17+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:51
+msgid "Click here to manage your PDF"
+msgstr ""
+
+#: applet.js:71
+msgid "Merge PDF"
+msgstr ""
+
+#: applet.js:76
+msgid "Extract PDF"
+msgstr ""
+
+#: applet.js:83
+msgid "Reduce size of PDF"
+msgstr ""
+
+#: applet.js:90
+msgid "Rotate left PDF"
+msgstr ""
+
+#: applet.js:95
+msgid "Rotate right PDF"
+msgstr ""
+
+#: applet.js:100
+msgid "Flip vertically PDF"
+msgstr ""
+
+#: applet.js:105
+msgid "Install PDFManager's tools"
+msgstr ""
+
+#: applet.js:115
+msgid "Open Document Viewer"
+msgstr ""
+
+#: applet.js:122
+msgid "Open PDF Mod"
+msgstr ""
+
+#: applet.js:129
+msgid "Open PDF Editor"
+msgstr ""
+
+#. PDFManager@cinnamon.org->metadata.json->description
+msgid "Manager of PDF"
+msgstr ""
+
+#. PDFManager@cinnamon.org->metadata.json->name
+msgid "PDFManager"
+msgstr ""
+
+
+##########################################
+
+msgid "Select your PDF..."
+msgstr ""
+
+msgid "Save as..."
+msgstr ""
+
+msgid "Pages to extract"
+msgstr ""
+
+msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+msgstr ""
+
+msgid "PDF Files"
+msgstr ""
+

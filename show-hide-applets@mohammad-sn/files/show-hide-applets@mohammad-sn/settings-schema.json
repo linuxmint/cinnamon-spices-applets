@@ -1,0 +1,71 @@
+{
+  "head":
+  { "type": "header"
+  , "description": "Settings for show-hide-applets@mohammad-sn"
+  }, 
+ "autohide" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Autohide",
+    "tooltip": "check if you want to hide applets automatically, unless you should click on applet to do so"
+ },
+ "disablestarttimeautohide" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Disable start time autohide",
+    "tooltip": "if not in autohide mode"
+ },
+ "hidetime": {
+    "type": "spinbutton",
+    "default" : 2,
+    "min" : 0.25,
+    "max" : 10,
+    "step" : 0.25,
+    "units" : "seconds",
+    "dependency" : "autohide",
+    "description" : "Autohide after ",
+    "tooltip" : ""
+ },
+ "hoveractivates" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Activate on hover",
+    "tooltip": "show applets on mouse hover"
+ },
+ "hoveractivateshide" : {
+    "type" : "checkbox",
+    "default" : false,
+    "dependency" : "hoveractivates",
+    "description": "Hide on hovering again",
+    "tooltip": "toggle visibility of applets on mouse hover"
+ },
+ "hovertime": {
+    "type": "spinbutton",
+    "default" : 75,
+    "min" : 10,
+    "max" : 500,
+    "step" : 5,
+    "units" : "miliseconds",
+    "dependency" : "hoveractivates",
+    "description" : "Hover activates/hides after ",
+    "tooltip" : ""
+ },
+ "autohiders" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Autohide reshowing applets",
+    "tooltip": ""
+ },
+ "autohiderstime": {
+    "type": "spinbutton",
+    "default" : 1.25,
+    "min" : 0,
+    "max" : 5,
+    "step" : 0.25,
+    "units" : "seconds",
+    "dependency" : "autohiders",
+    "description" : "Reshowers' autohide delay: ",
+    "tooltip" : ""
+ }
+}
+

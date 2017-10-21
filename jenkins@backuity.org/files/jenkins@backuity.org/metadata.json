@@ -1,0 +1,7 @@
+{
+    "uuid": "jenkins@backuity.org",
+    "name": "Jenkins Builds",
+    "description": "View jenkins builds",
+    "max-instances": "1",
+    "version":"1.3.0"
+}

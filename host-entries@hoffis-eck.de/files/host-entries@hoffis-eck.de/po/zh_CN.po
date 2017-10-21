@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-03-12 22:41+0800\n"
+"PO-Revision-Date: 2017-03-12 22:43+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:53
+msgid "Checking status"
+msgstr "正在检查状态"
+
+#: applet.js:65
+msgid "Error, could not extract status!"
+msgstr "错误，无法提取状态！"
+
+#: applet.js:73
+msgid "Entry is active"
+msgstr "条目已激活"
+
+#: applet.js:76
+msgid "Entry is inactive"
+msgstr "条目未激活"
+
+#: applet.js:79
+msgid "Entry does not exist"
+msgstr "条目不存在"
+
+#: applet.js:82
+msgid "Entry status is unknown"
+msgstr "条目状态未知"
+
+#: applet.js:85
+msgid "Error, trying to set unknown status!"
+msgstr "错误，尝试设置未知状态！"
+
+#: applet.js:113
+msgid "Error, unknown status!"
+msgstr "错误，未知的状态！"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->ip->description
+msgid "IP address"
+msgstr "IP地址"
+
+#. host-entries@hoffis-eck.de->settings-schema.json->hosts->description
+msgid "hosts"
+msgstr "主机"
+
+#. host-entries@hoffis-eck.de->metadata.json->description
+msgid "Enables/Disables Entries in /etc/hosts"
+msgstr "启用/禁用/etc/hosts中的条目"
+
+#. host-entries@hoffis-eck.de->metadata.json->name
+msgid "Host Entries"
+msgstr "主机条目"

@@ -1,0 +1,458 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-08 11:14-0500\n"
+"PO-Revision-Date: 2017-04-17 23:50+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: buttons.js:313
+msgid "Please provide your password to uninstall this application"
+msgstr "请提供您的密码以卸载此应用程序"
+
+#: buttons.js:955
+msgid "Add to panel"
+msgstr "添加到面板"
+
+#: buttons.js:957
+msgid "Add to desktop"
+msgstr "添加到桌面"
+
+#: buttons.js:960
+msgid "Remove from favorites"
+msgstr "从收藏夹移除"
+
+#: buttons.js:962
+msgid "Add to favorites"
+msgstr "添加到收藏夹"
+
+#: buttons.js:964
+msgid "Uninstall"
+msgstr "卸载"
+
+#: buttons.js:966
+msgid "Run with NVIDIA GPU"
+msgstr "使用NVIDIA GPU运行"
+
+#: buttons.js:1162 applet.js:2175
+msgid "List View"
+msgstr "列表视图"
+
+#: buttons.js:1163 applet.js:2176
+msgid "Switch to list view"
+msgstr "切换到列表视图"
+
+#: buttons.js:1168 applet.js:2175
+msgid "Grid View"
+msgstr "网格视图"
+
+#: buttons.js:1169 applet.js:2176
+msgid "Switch to grid view"
+msgstr "切换到网格视图"
+
+#: applet.js:146
+msgid "Initializing"
+msgstr ""
+
+#: applet.js:250
+msgid "No description available"
+msgstr ""
+
+#: applet.js:927
+msgid "Bookmarks"
+msgstr "书签"
+
+#: applet.js:930
+msgid "All Applications"
+msgstr "所有应用程序"
+
+#: applet.js:961
+msgid "Places"
+msgstr "位置"
+
+#: applet.js:965
+msgid "Recent Files"
+msgstr "最近的文件"
+
+#: applet.js:968
+msgid "Favorite Apps"
+msgstr "收藏夹应用程序"
+
+#: applet.js:1227
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox和Midori书签所需的gir1.2-gda-5.0包。"
+
+#: applet.js:1307
+msgid "Clear List"
+msgstr "清除列表"
+
+#: applet.js:1318
+msgid "No recent documents"
+msgstr "没有最近的文档"
+
+#: applet.js:2064
+msgid "Type to search..."
+msgstr "键入以搜索..."
+
+#: applet.js:2168
+msgid "Account details"
+msgstr ""
+
+#: applet.js:2182
+msgid "Lock Screen"
+msgstr "锁定屏幕"
+
+#: applet.js:2183
+msgid "Lock the screen"
+msgstr "锁定屏幕"
+
+#: applet.js:2204
+msgid "Logout"
+msgstr "注销"
+
+#: applet.js:2205
+msgid "Leave the session"
+msgstr "离开会话"
+
+#: applet.js:2212
+msgid "Quit"
+msgstr "退出"
+
+#: applet.js:2213
+msgid "Shutdown the computer"
+msgstr "关闭计算机"
+
+#: placeDisplay.js:57
+#, fuzzy, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "启动'%s'失败"
+
+#: placeDisplay.js:146
+msgid "Home"
+msgstr "主目录"
+
+#: placeDisplay.js:220
+msgid "Computer"
+msgstr "计算机"
+
+#: placeDisplay.js:224
+msgid "Browse network"
+msgstr "浏览网络"
+
+#. Cinnamenu@json->settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->category-click->tooltip
+msgid ""
+"When enabled, category views are activated on click instead of on hover."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->description
+#. Cinnamenu@json->settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "类别图标大小："
+
+#. Cinnamenu@json->settings-schema.json->category-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->units
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->units
+msgid "pixels"
+msgstr "像素"
+
+#. Cinnamenu@json->settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "在搜索框中启用文件系统路径条目"
+
+#. Cinnamenu@json->settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "在菜单搜索框中允许路径条目。"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "打开菜单编辑器"
+
+#. Cinnamenu@json->settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "按此按钮自定义您的菜单条目。"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "当我移动鼠标到菜单上时打开菜单"
+
+#. Cinnamenu@json->settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "启用当鼠标进入小程序时打开菜单"
+
+#. Cinnamenu@json->settings-schema.json->privacy-settings-button->description
+#, fuzzy
+msgid "Toggle recent files"
+msgstr "最近的文件"
+
+#. Cinnamenu@json->settings-schema.json->privacy-settings-button->tooltip
+#, fuzzy
+msgid "Press this button to customize your privacy settings."
+msgstr "按此按钮自定义您的菜单条目。"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->description
+#, fuzzy
+msgid "Show web bookmarks"
+msgstr "启用网络书签"
+
+#. Cinnamenu@json->settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "选择是否在菜单中索引书签。"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->description
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "启动应用程序视图模式"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "网格"
+
+#. Cinnamenu@json->settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "列表"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "使用自定义图标"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "不选中此项允许主题设置图标"
+
+#. Cinnamenu@json->settings-schema.json->cinnamenuProvidersSection->title
+#. Cinnamenu@json->metadata.json->name
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. Cinnamenu@json->settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu->title
+msgid "Layout and Content"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "外观"
+
+#. Cinnamenu@json->settings-schema.json->menu-behave->title
+#. Cinnamenu@json->settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->panel-appear->title
+#. Cinnamenu@json->settings-schema.json->panel-behave->title
+msgid "Panel"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->menu-content->title
+msgid "Content"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->panel->title
+msgid "Behavior"
+msgstr "行为"
+
+#. Cinnamenu@json->settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-windows->tooltip
+#, fuzzy
+msgid "Choose whether or not open windows are indexed in menu searches."
+msgstr "选择是否在菜单中索引书签。"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "使用菜单动画"
+
+#. Cinnamenu@json->settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "允许打开和关闭菜单的动画"
+
+#. Cinnamenu@json->settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "显示应用程序图标"
+
+#. Cinnamenu@json->settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "选择是否显示应用程序的图标。"
+
+#. Cinnamenu@json->settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "打开和关闭菜单的键盘快捷键"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "应用程序网格中列的数量"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "列"
+
+#. Cinnamenu@json->settings-schema.json->show-tooltips->description
+msgid "Show tooltips"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->show-tooltips->tooltip
+msgid ""
+"When enabled, tooltips containing the item's name or description is shown "
+"when hovered over."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->tooltip-delay->description
+msgid "Tooltip delay"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->tooltip-delay->tooltip
+msgid ""
+"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->tooltip-delay->units
+#. Cinnamenu@json->settings-schema.json->hover-delay->units
+msgid "milliseconds"
+msgstr "毫秒"
+
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "应用程序列表图标大小"
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "菜单悬停延迟："
+
+#. Cinnamenu@json->settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "切换类别间的延迟"
+
+#. Cinnamenu@json->settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-custom-menu-
+#. height->description
+#. Cinnamenu@json->settings-schema.json->enable-custom-menu-height->tooltip
+#, fuzzy
+msgid "Use a custom menu height"
+msgstr "使用自定义图标"
+
+#. Cinnamenu@json->settings-schema.json->custom-menu-height->description
+#. Cinnamenu@json->settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->custom-menu-height->units
+msgid "px"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->show-apps-description-on-
+#. buttons->description
+#, fuzzy
+msgid "Show application descriptions under titles"
+msgstr "在应用程序的标题下方显示其描述"
+
+#. Cinnamenu@json->settings-schema.json->show-apps-description-on-
+#. buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr "选择是否在应用程序按钮上显示应用程序说明。"
+
+#. Cinnamenu@json->settings-schema.json->menu-label->description
+#. Cinnamenu@json->settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "设置自定义菜单按钮图标名称"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "在应用程序列表中启用自动滚动"
+
+#. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "选择是否在应用程序列表中启用平滑滚动。"
+
+#. Cinnamenu@json->settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr ""
+
+#. Cinnamenu@json->settings-schema.json->enable-search-providers->tooltip
+#, fuzzy
+msgid ""
+"Choose whether or not search provider results are indexed in menu searches."
+msgstr "选择是否在菜单中索引书签。"
+
+#. Cinnamenu@json->settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "显示书签和位置"
+
+#. Cinnamenu@json->settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "选择是否在菜单中显示书签和位置。"
+
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->description
+#. Cinnamenu@json->settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "应用程序网格图标大小"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "图标"
+
+#. Cinnamenu@json->settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "选择要显示在面板中的图标。"
+
+#. Cinnamenu@json->settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "显示类别图标"
+
+#. Cinnamenu@json->settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "选择是否显示类别图标。"
+
+#. Cinnamenu@json->metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, open window "
+"lookup, and search provider support with fuzzy searching."
+msgstr ""
+
+#~ msgid "Cinnamenu Settings"
+#~ msgstr "Cinnamenu设置"
+
+#~ msgid "Applications grid label width"
+#~ msgstr "应用程序网格图标宽度"
+
+#~ msgid "Menu Entries"
+#~ msgstr "菜单条目"
+
+#~ msgid "A flexible menu providing formatting options and bookmarks."
+#~ msgstr "一个提供格式选项和书签的灵活菜单。"

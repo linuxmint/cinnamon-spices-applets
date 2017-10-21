@@ -1,0 +1,6 @@
+{
+    "uuid": "cpu-monitor-text@gnemonix",
+    "name": "Simple CPU Monitor",
+    "description": "A simple applet that displays the cpu usage.",
+    "icon": "utilities-system-monitor"
+}

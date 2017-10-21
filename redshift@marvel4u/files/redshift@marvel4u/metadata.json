@@ -1,0 +1,6 @@
+{
+    "uuid": "redshift@marvel4u", 
+    "max-instances": "-1",
+    "description": "An app to change the red filter level for late night screen time. Requires redshift: sudo apt-get install redshift", 
+    "name": "Redshift"
+}

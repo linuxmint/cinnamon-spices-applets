@@ -1,0 +1,6 @@
+{
+"uuid": "softyubikey@yubiserver.include.gr",
+"name": "SoftYubikey",
+"description": "Click on the applet to create a OTP",
+"icon": "softyubikey"
+}

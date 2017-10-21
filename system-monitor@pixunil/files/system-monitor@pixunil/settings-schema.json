@@ -1,0 +1,762 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["general", "cpu", "mem", "disk", "network", "thermal", "fan"],
+
+        "general": {
+            "type": "page",
+            "title": "General",
+            "sections": ["settings", "units", "graphs"]
+        },
+        "settings": {
+            "type": "section",
+            "title": "General",
+            "keys": ["show-icon", "interval", "order"]
+        },
+        "units": {
+            "type": "section",
+            "title": "Units",
+            "keys": ["byte-unit", "rate-unit", "thermal-unit"]
+        },
+        "graphs": {
+            "type": "section",
+            "title": "Graphs",
+            "keys": ["graph-type", "graph-size", "graph-steps", "graph-overview",
+                "graph-connection"]
+        },
+
+        "cpu": {
+            "type": "page",
+            "title": "CPU",
+            "sections": ["loadavg", "cpu-section", "cpu-panel-section", "cpu-warning-section"]
+        },
+        "loadavg": {
+            "type": "section",
+            "title": "Load averages",
+            "keys": ["loadavg-enabled", "loadavg-panel-label"]
+        },
+        "cpu-section": {
+            "type": "section",
+            "title": "CPU",
+            "keys": ["cpu-enabled", "cpu-color-core1", "cpu-color-core2", "cpu-color-core3",
+                "cpu-color-core4", "cpu-appearance", "cpu-split"]
+        },
+        "cpu-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["cpu-panel-label", "cpu-panel-graph", "cpu-panel-size"]
+        },
+        "cpu-warning-section": {
+            "type": "section",
+            "title": "Warning",
+            "keys": ["cpu-warning", "cpu-warning-value", "cpu-warning-time", "cpu-warning-mode"]
+        },
+
+        "mem": {
+            "type": "page",
+            "title": "Memory",
+            "sections": ["mem-section", "mem-panel-section"]
+        },
+        "mem-section": {
+            "type": "section",
+            "title": "Memory and Swap",
+            "keys": ["mem-enabled", "mem-color-mem", "mem-color-swap", "mem-appearance"]
+        },
+        "mem-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["mem-panel-label", "mem-panel-graph", "mem-panel-mode", "mem-panel-size"]
+        },
+
+        "disk": {
+            "type": "page",
+            "title": "Disk",
+            "sections": ["disk-section", "disk-panel-section"]
+        },
+        "disk-section": {
+            "type": "section",
+            "title": "Disk",
+            "keys": ["disk-enabled", "disk-color-write", "disk-color-read", "disk-appearance"]
+        },
+        "disk-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["disk-panel-label", "disk-panel-graph", "disk-panel-size"]
+        },
+
+        "network": {
+            "type": "page",
+            "title": "Network",
+            "sections": ["network-section", "network-panel-section"]
+        },
+        "network-section": {
+            "type": "section",
+            "title": "Network",
+            "keys": ["network-enabled", "network-color-up", "network-color-down",
+                "network-appearance"]
+        },
+        "network-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["network-panel-label", "network-panel-graph", "network-panel-size"]
+        },
+
+        "thermal": {
+            "type": "page",
+            "title": "Thermal",
+            "sections": ["thermal-section", "thermal-panel-section", "thermal-warning-section"]
+        },
+        "thermal-section": {
+            "type": "section",
+            "title": "Thermal",
+            "keys": ["thermal-enabled", "thermal-color-thermal", "thermal-mode",
+                "thermal-appearance"]
+        },
+        "thermal-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["thermal-panel-label", "thermal-panel-graph", "thermal-panel-size"]
+        },
+        "thermal-warning-section": {
+            "type": "section",
+            "title": "Warning",
+            "keys": ["thermal-warning", "thermal-warning-value", "thermal-warning-time"]
+        },
+
+        "fan": {
+            "type": "page",
+            "title": "Fan",
+            "sections": ["fan-section", "fan-panel-section", "fan-warning-section"]
+        },
+        "fan-section": {
+            "type": "section",
+            "title": "Fan",
+            "keys": ["fan-enabled", "fan-color-fan", "fan-mode", "fan-appearance"]
+        },
+        "fan-panel-section": {
+            "type": "section",
+            "title": "Panel widgets",
+            "keys": ["fan-panel-label", "fan-panel-graph", "fan-panel-size"]
+        },
+        "fan-warning-section": {
+            "type": "section",
+            "title": "Warning",
+            "keys": ["fan-warning", "fan-warning-value", "fan-warning-time"]
+        }
+    },
+
+    "show-icon": {
+        "type": "switch",
+        "default": true,
+        "description": "Show icon"
+    },
+    "interval": {
+        "type": "spinbutton",
+        "default": 1000,
+        "min": 720,
+        "max": 5000,
+        "step": 20,
+        "units": "ms",
+        "description": "Interval",
+        "tooltip": "Interval in which the applet refreshes data"
+    },
+    "order": {
+        "type": "combobox",
+        "default": "up-down",
+        "options": {
+            "Write - Read / Up - Down": "up-down",
+            "Read - Write / Down - Up": "down-up"
+        },
+        "description": "Order of Disk and Network items"
+    },
+
+    "byte-unit": {
+        "type": "combobox",
+        "default": "binary",
+        "options": {
+            "B, KiB, MiB": "binary",
+            "B, KB, MB": "decimal"
+        },
+        "description": "Bytes unit",
+        "tooltip": "Unit for memory, swap, disk space and total network usage"
+    },
+    "rate-unit": {
+        "type": "combobox",
+        "default": "binary-byte",
+        "options": {
+            "B/s, KiB/s, MiB/s": "binary-byte",
+            "B/s, KB/s, MB/s": "decimal-byte",
+            "bit/s, Kibit/s, Mibit/s": "binary-bit",
+            "bit/s, Kbit/s, Mbit/s": "decimal-bit"
+        },
+        "description": "Rates unit",
+        "tooltip": "Unit for disk and network usage"
+    },
+    "thermal-unit": {
+        "type": "combobox",
+        "default": "celsius",
+        "options": {
+            "℃": "celsius",
+            "℉": "fahrenheit"
+        },
+        "description": "Thermal unit"
+    },
+
+    "graph-type": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "None": -1,
+            "Overview": 0,
+            "CPU History": 1,
+            "Memory and Swap History": 2,
+            "Disk History": 3,
+            "Network History": 4,
+            "Thermal History": 5,
+            "Fan History": 6
+        },
+        "description": "Type of graph",
+        "tooltip": "The graph shown in the menu"
+    },
+    "graph-size": {
+        "type": "spinbutton",
+        "default": 200,
+        "min": 100,
+        "max": 400,
+        "step": 10,
+        "units": "px",
+        "description": "Height of graph"
+    },
+    "graph-steps": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 5,
+        "max": 200,
+        "step": 5,
+        "units": "",
+        "description": "Number of history steps",
+        "tooltip": "How many steps will be saved for history graphs"
+    },
+    "graph-overview": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "Pie": 0,
+            "Arc": 1
+        },
+        "description": "Appearance of Overview graph"
+    },
+    "graph-connection": {
+        "type": "combobox",
+        "default": "line",
+        "options": {
+            "Line": "line",
+            "Straight": "straight",
+            "Curve": "curve"
+        },
+        "description": "Connection type for History graphs"
+    },
+
+
+    "loadavg-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "loadavg-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "loadavg-enabled",
+        "tooltip": "Common placeholders: \n %load0 \t load average for the last minute \n %load1 \t load average for the last 5 minutes \n %load2 \t load average for the last 15 minutes"
+    },
+
+    "cpu-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "cpu-color-core1": {
+        "type": "colorchooser",
+        "default": "rgba(255, 110, 0, 1)",
+        "description": "CPU1",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-color-core2": {
+        "type": "colorchooser",
+        "default": "rgba(203, 12, 41, 1)",
+        "description": "CPU2",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-color-core3": {
+        "type": "colorchooser",
+        "default": "rgba(73, 168, 53, 1)",
+        "description": "CPU3",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-color-core4": {
+        "type": "colorchooser",
+        "default": "rgba(45, 125, 179, 1)",
+        "description": "CPU4",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-appearance": {
+        "type": "combobox",
+        "default": "area",
+        "options": {
+            "Line": "line",
+            "Area": "area",
+            "Stack": "stack",
+            "Bar": "bar"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-split": {
+        "type": "combobox",
+        "default": "total",
+        "options": {
+            "Total usage": "total",
+            "User and System usage": "user-system"
+        },
+        "description": "Show which information in history graphs",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "cpu-enabled",
+        "tooltip": "Common placeholders: \n %core(digit) \t usage of a core \n %avg \t average usage"
+    },
+    "cpu-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "cpu-enabled"
+    },
+    "cpu-warning": {
+        "type": "switch",
+        "default": false,
+        "description": "Enabled",
+        "dependency": "cpu-enabled"
+    },
+    "cpu-warning-value": {
+        "type": "spinbutton",
+        "min": 50,
+        "max": 100,
+        "default": 100,
+        "step": 0.5,
+        "units": "%",
+        "description": "Trigger value",
+        "indent": true,
+        "dependency": "cpu-warning"
+    },
+    "cpu-warning-time": {
+        "type": "spinbutton",
+        "min": 1,
+        "max": 40,
+        "default": 5,
+        "step": 1,
+        "units": "sec",
+        "description": "Time",
+        "indent": true,
+        "dependency": "cpu-warning"
+    },
+    "cpu-warning-mode": {
+        "type": "combobox",
+        "default": "avg",
+        "options": {
+            "Cores": "cores",
+            "Average": "avg"
+        },
+        "description": "Mode",
+        "indent": true,
+        "dependency": "cpu-warning"
+    },
+
+
+    "mem-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "mem-color-mem": {
+        "type": "colorchooser",
+        "default": "rgba(171, 24, 82, 1)",
+        "description": "Memory",
+        "dependency": "mem-enabled"
+    },
+    "mem-color-swap": {
+        "type": "colorchooser",
+        "default": "rgba(73, 168, 53, 1)",
+        "description": "Swap",
+        "dependency": "mem-enabled"
+    },
+    "mem-appearance": {
+        "type": "combobox",
+        "default": "area",
+        "options": {
+            "Line": "line",
+            "Area": "area"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "mem-enabled"
+    },
+    "mem-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "mem-enabled",
+        "tooltip": "Common placeholders: \n %mem#size \t memory usage in bytes \n %mem \t memory usage in percent \n %swap#size \t swap usage in bytes \n %swap \t swap usage in percent"
+    },
+    "mem-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "mem-enabled"
+    },
+    "mem-panel-mode": {
+        "type": "combobox",
+        "default": 0,
+        "options": {
+            "only Memory": "mem",
+            "Memory and Swap": "mem-swap"
+        },
+        "description": "Mode of graph",
+        "indent": true,
+        "dependency": "mem-enabled"
+    },
+    "mem-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "mem-enabled"
+    },
+
+
+    "disk-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "disk-color-write": {
+        "type": "colorchooser",
+        "default": "rgba(238, 29, 0, 1)",
+        "description": "Write",
+        "dependency": "disk-enabled"
+    },
+    "disk-color-read": {
+        "type": "colorchooser",
+        "default": "rgba(45, 125, 179, 1)",
+        "description": "Read",
+        "dependency": "disk-enabled"
+    },
+    "disk-appearance": {
+        "type": "combobox",
+        "default": "areaUpDown",
+        "options": {
+            "Line": "line",
+            "Area": "areaUpDown",
+            "Bar": "bar"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "disk-enabled"
+    },
+    "disk-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "disk-enabled",
+        "tooltip": "Common placeholders: \n %write \t write usage \n %read \t read usage"
+    },
+    "disk-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "disk-enabled"
+    },
+    "disk-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "disk-enabled"
+    },
+
+
+    "network-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "network-color-up": {
+        "type": "colorchooser",
+        "default": "rgba(238, 29, 0, 1)",
+        "description": "Up",
+        "dependency": "network-enabled"
+    },
+    "network-color-down": {
+        "type": "colorchooser",
+        "default": "rgba(45, 125, 179, 1)",
+        "description": "Down",
+        "dependency": "network-enabled"
+    },
+    "network-appearance": {
+        "type": "combobox",
+        "default": "areaUpDown",
+        "options": {
+            "Line": "line",
+            "Area": "areaUpDown",
+            "Bar": "bar"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "network-enabled"
+    },
+    "network-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "network-enabled",
+        "tooltip": "Common placeholders: \n %up \t up usage \n %down \t down usage"
+    },
+    "network-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "network-enabled"
+    },
+    "network-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "network-enabled"
+    },
+
+
+    "thermal-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "thermal-color-thermal": {
+        "type": "colorchooser",
+        "default": "rgba(238, 80, 29, 1)",
+        "description": "Thermal",
+        "dependency": "thermal-enabled"
+    },
+    "thermal-mode": {
+        "type": "combobox",
+        "default": "avg",
+        "options": {
+            "Minimum": "min",
+            "Average": "avg",
+            "Maximum": "max"
+        },
+        "description": "General temperature",
+        "dependency": "thermal-enabled"
+    },
+    "thermal-appearance": {
+        "type": "combobox",
+        "default": "area",
+        "options": {
+            "Line": "line",
+            "Area": "area"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "thermal-enabled"
+    },
+    "thermal-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "thermal-enabled",
+        "tooltip": "Common placeholders: \n %value \t general temperature \n %sensor(digit) \t specific temperature of one sensor"
+    },
+    "thermal-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "thermal-enabled"
+    },
+    "thermal-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "thermal-enabled"
+    },
+    "thermal-warning": {
+        "type": "switch",
+        "default": false,
+        "description": "Enabled",
+        "dependency": "thermal-enabled"
+    },
+    "thermal-warning-value": {
+        "type": "spinbutton",
+        "min": 25,
+        "max": 200,
+        "default": 50,
+        "step": 0.5,
+        "units": "℃ / ℉",
+        "description": "Trigger temperature",
+        "indent": true,
+        "dependency": "thermal-warning"
+    },
+    "thermal-warning-time": {
+        "type": "spinbutton",
+        "min": 1,
+        "max": 40,
+        "default": 5,
+        "step": 1,
+        "units": "sec",
+        "description": "Time",
+        "indent": true,
+        "dependency": "thermal-warning"
+    },
+
+
+    "fan-enabled": {
+        "type": "switch",
+        "default": true,
+        "description": "Enabled"
+    },
+    "fan-color-fan": {
+        "type": "colorchooser",
+        "default": "rgba(29, 186, 238, 1)",
+        "description": "Fan",
+        "dependency": "fan-enabled"
+    },
+    "fan-mode": {
+        "type": "combobox",
+        "default": "avg",
+        "options": {
+            "Minimum": "min",
+            "Average": "avg",
+            "Maximum": "max"
+        },
+        "description": "General fan value",
+        "dependency": "fan-enabled"
+    },
+    "fan-appearance": {
+        "type": "combobox",
+        "default": "area",
+        "options": {
+            "Line": "line",
+            "Area": "area"
+        },
+        "description": "Appearance of history graphs",
+        "dependency": "fan-enabled"
+    },
+    "fan-panel-label": {
+        "type": "entry",
+        "default": "",
+        "description": "Label",
+        "dependency": "fan-enabled",
+        "tooltip": "Common placeholders: \n %value \t general fan value \n %sensor(digit) \t specific rotations of one fan"
+    },
+    "fan-panel-graph": {
+        "type": "combobox",
+        "default": -1,
+        "options": {
+            "None": -1,
+            "Bar": 0,
+            "History": 1
+        },
+        "description": "Graph",
+        "dependency": "fan-enabled"
+    },
+    "fan-panel-size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 5,
+        "max": 400,
+        "step": 5,
+        "units": "",
+        "description": "Size of graph",
+        "indent": true,
+        "dependency": "fan-enabled"
+    },
+    "fan-warning": {
+        "type": "switch",
+        "default": false,
+        "description": "Enabled",
+        "dependency": "fan-enabled"
+    },
+    "fan-warning-value": {
+        "type": "spinbutton",
+        "min": 200,
+        "max": 4000,
+        "default": 500,
+        "step": 10,
+        "units": "RPM",
+        "description": "Trigger rotations",
+        "indent": true,
+        "dependency": "fan-warning"
+    },
+    "fan-warning-time": {
+        "type": "spinbutton",
+        "min": 1,
+        "max": 40,
+        "default": 5,
+        "step": 1,
+        "units": "sec",
+        "description": "Time",
+        "indent": true,
+        "dependency": "fan-warning"
+    }
+}

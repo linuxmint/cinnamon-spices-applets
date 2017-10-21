@@ -1,0 +1,455 @@
+# translation of weather@mockturtl.po to Icelandic
+# Copyright (C) 2012 Free Software Foundation
+# This file is distributed under the same license as the Cinnamon package.
+#
+# Sveinn í Felli <sv1@fellsnet.is>, 2012, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2014-04-07 08:34+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.5\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "Smelltu til að opna"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "Stillingar"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "Sólarupprás"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "Sólsetur"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Hleð inn veðurlýsingu ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Hleð inn veðurspá ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Hleð inn ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "Hiti:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Raki:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Þrýstingur:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Vindur:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Vindkæling:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Hvirfilbylur"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Hitabeltisstormur"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Fellibylur"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Hvasst þrumuveður"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Þrumuveður"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Ýmist rigning eða snjókoma"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Ýmist rigning eða slydda"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Ýmist snjókoma eða slydda"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Frostsúld"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Súld"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Frostrigning"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Skúrir"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Snjóhryðjur"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Dálítil snjóél"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Snjóbylur"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Snjókoma"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Haglél"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Slydda"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Ryk"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Þokuveður"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Mistur"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Reykjarkóf"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Vindhviður"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Vindasamt"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "Kalt"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Skýjað"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Alskýjað"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Hálfskýjað"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Heiðskírt"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Sólskin"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Bjartviðri"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Ýmist rigning eða haglél"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Heitt"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Skúraveður á köflum"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Skúrir/él á dreif"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Skúrir á dreif"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Mikil snjókoma"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Snjóél á dreif"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Þrumuskúrir"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "Snjóél"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Skúrir/él á stöku stað"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Ekki tiltækt"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Mánudagur"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Þriðjudagur"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Miðvikudagur"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Fimmtudagur"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Föstudagur"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Laugardagur"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Sunnudagur"
+
+#: applet.js:1056
+msgid "N"
+msgstr "N"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "NA"
+
+#: applet.js:1056
+msgid "E"
+msgstr "A"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "SA"
+
+#: applet.js:1056
+msgid "S"
+msgstr "S"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "SV"
+
+#: applet.js:1056
+msgid "W"
+msgstr "V"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "NV"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "Sækja WOEID"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Birta núverandi hitastig á spjaldi"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr "WOEID"
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr "Staðstetningarauðkenni"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "Eining fyrir hitastig"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "fahrenheit"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "selsíus"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Þýða veðurskilyrði"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Yfirskrifa staðsetningarmerki"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Birta tíma fyrir sólarupprás / sólarlag"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "Eining fyrir vindhraða"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr "hn/klst"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/sek"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "hnútar"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mi/klst"
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Birta veðurlýsingu (t.d. \"Hvasst\", \"Heiðskírt\") á spjaldi"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+#, fuzzy
+msgid "Update interval"
+msgstr "Uppfærslutíðni (mínútur)"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Táknrænar táknmyndir"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Show 5-day forecast"
+#~ msgstr "Birta 5-daga spá"
+
+#~ msgid "Please wait"
+#~ msgstr "Hinkraðu aðeins"
+
+#~ msgid "Today"
+#~ msgstr "Í dag"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Á morgun"
+
+#~ msgid "Schema \"%s\" not found."
+#~ msgstr "Skemað \"%s\" fannst ekki."

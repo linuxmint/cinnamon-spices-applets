@@ -1,0 +1,7 @@
+{
+    "last-edited": "1328097600", 
+    "description": "a simple Stocks ticker for cinnamon", 
+    "icon": "emblem-sales", 
+    "uuid": "stocks@adonut", 
+    "name": "stocks"
+}

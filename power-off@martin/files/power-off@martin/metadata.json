@@ -1,0 +1,6 @@
+{
+ "uuid": "power-off@martin",
+ "name": "power-off",
+ "description": "2-clicks power-off",
+ "icon": "gtk-quit"
+}

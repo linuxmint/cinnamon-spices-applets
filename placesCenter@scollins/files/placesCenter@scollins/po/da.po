@@ -1,0 +1,220 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-24 19:52+0200\n"
+"PO-Revision-Date: 2017-09-26 21:01+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:178
+msgid "Places"
+msgstr "Steder"
+
+#: applet.js:291
+msgid "Search Home Folder"
+msgstr "Søg i mappen Hjem"
+
+#: applet.js:305
+msgid "SYSTEM"
+msgstr "SYSTEM"
+
+#: applet.js:314
+msgid "Search File System"
+msgstr "Søg i Filsystem"
+
+#: applet.js:330
+msgid "RECENT DOCUMENTS"
+msgstr "SENESTE DOKUMENTER"
+
+#: applet.js:344
+msgid "Clear"
+msgstr "Ryd"
+
+#: applet.js:388
+msgid "Computer"
+msgstr "Computer"
+
+#: applet.js:394
+msgid "File System"
+msgstr "Filsystem"
+
+#: applet.js:410
+msgid "Network"
+msgstr "Netværk"
+
+#: applet.js:513
+msgid "Trash"
+msgstr "Papirkurven"
+
+#. placesCenter@scollins->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Panelikon"
+
+#. placesCenter@scollins->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Godtager ikonnavn eller direkte sti (understøtter symbolske ikoner)"
+
+#. placesCenter@scollins->settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Vis computer"
+
+#. placesCenter@scollins->settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Vis filsystem"
+
+#. placesCenter@scollins->settings-schema.json->recentSection->title
+#. placesCenter@scollins->settings-schema.json->recentPage->title
+msgid "Recent documents"
+msgstr "Seneste dokumenter"
+
+#. placesCenter@scollins->settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Generelt"
+
+#. placesCenter@scollins->settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Systemsektion"
+
+#. placesCenter@scollins->settings-schema.json->userPage->title
+msgid "User"
+msgstr "Bruger"
+
+#. placesCenter@scollins->settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Menuindstillinger"
+
+#. placesCenter@scollins->settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Brugersektion"
+
+#. placesCenter@scollins->settings-schema.json->systemPage->title
+msgid "System"
+msgstr "System"
+
+#. placesCenter@scollins->settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Panelindstillinger"
+
+#. placesCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Genvejstast til åbning af menuen"
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Åbn ved klik på midterste museknap"
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Efterlad tom for at deaktivere"
+
+#. placesCenter@scollins->settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Menuens ikonstørrelse"
+
+#. placesCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "px"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Vis papirkurven"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Altid"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Aldrig"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Når den ikke er tom"
+
+#. placesCenter@scollins->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Vis diskenheder"
+
+#. placesCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Antal der skal vises"
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->description
+#. placesCenter@scollins->settings-
+#. schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr "Brugerdefinederede steder"
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->tooltip
+#. placesCenter@scollins->settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location. You can likewise set an icon name by adding :"
+"iconName after the custom name."
+msgstr ""
+"Liste over URI'er/filstier som skal inkluderes. Poster kan adskilles med "
+"enten et komma (,) eller en ny linje. Du kan angive navnet, der skal vises, "
+"ved at tilføje :tilpassetNavn efter placeringen. Du kan også angive et "
+"ikonnavn ved at tilføje :ikonNavn efter det tilpassede navn."
+
+#. placesCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Paneltekst"
+
+#. placesCenter@scollins->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Vis netværk"
+
+#. placesCenter@scollins->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Vis kun monterede drev"
+
+#. placesCenter@scollins->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Vis seneste dokumenter"
+
+#. placesCenter@scollins->settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Vis skrivebord"
+
+#. placesCenter@scollins->metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Letlæseligt layout med adgang til dine steder"
+
+#. placesCenter@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - forfatter"
+
+#. placesCenter@scollins->metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Tilføjede konfigurering af midterklik"
+
+#. placesCenter@scollins->metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Stedercenter er et Cinnamon-panelprogram med mange funktioner, som giver nem "
+"adgang til alle dine hyppigst brugte steder. Du er velkommen til at bidrage "
+"ved at indsende pull-anmodninger, fejlrapporter og ønsker til nye funktioner "
+"til mit github-arkiv."
+
+#. placesCenter@scollins->metadata.json->name
+msgid "Places Center"
+msgstr "Stedercenter"

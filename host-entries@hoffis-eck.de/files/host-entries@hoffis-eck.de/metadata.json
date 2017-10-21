@@ -1,0 +1,6 @@
+{
+    "uuid": "host-entries@hoffis-eck.de",
+    "name": "Host Entries",
+    "description": "Enables/Disables Entries in /etc/hosts",
+    "max-instances": "-1"
+}
