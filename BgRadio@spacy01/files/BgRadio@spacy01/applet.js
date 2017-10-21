@@ -104,7 +104,7 @@ MyApplet.prototype = {
 		
 		//Melody
 		this.menu.addAction(_("Melody"), function(event) {
-                Main.Util.spawnCommandLine("mocp -c -a -p http://live.btvradio.bg/melody.mp3");
+                Main.Util.spawnCommandLine("mocp -c -a -p http://193.108.24.6:8000/melody");
                  Main.notify(_("Listening Radio Melody"));
 		}); 
 		
