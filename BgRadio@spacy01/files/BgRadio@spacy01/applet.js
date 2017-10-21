@@ -3,15 +3,27 @@ const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const Lang = imports.lang;
+const Gettext = imports.gettext;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const Cinnamon = imports.gi.Cinnamon;
 
-const Gettext = imports.gettext.domain('bgradio');
-const _ = Gettext.gettext;
+const UUID = "BgRadio@spacy01";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(text) {
+  let locText = Gettext.dgettext(UUID, text);
+  if (locText == text) {
+    locText = window._(text);
+  }
+  return locText;
+}
 
 function ConfirmDialog(){
     this._init();
 }
+
 
 
 function MyApplet(orientation) {
