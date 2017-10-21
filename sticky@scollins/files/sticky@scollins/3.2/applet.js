@@ -733,6 +733,10 @@ CheckList.prototype = {
         let removeCompleteMenuItem = new PopupMenu.PopupMenuItem(_("Remove completed items"));
         this.contentMenuSection.addMenuItem(removeCompleteMenuItem);
         removeCompleteMenuItem.connect("activate", Lang.bind(this, this.removeComplete));
+
+        let unselectAllMenuItem = new PopupMenu.PopupMenuItem(_("Unselect all items"));
+        this.contentMenuSection.addMenuItem(unselectAllMenuItem);
+        unselectAllMenuItem.connect("activate", Lang.bind(this, this.unselectAll));
     },
 
     addItem: function(itemInfo, insertAfter) {
@@ -779,6 +783,13 @@ CheckList.prototype = {
         }
 
         if ( this.items.length == 0 ) this.newItem();
+        this.emit("changed");
+    },
+
+    unselectAll: function() {
+        for ( let i = 0; i < this.items.length; i++ ) {
+            this.items[i].completed = false;
+        }
         this.emit("changed");
     },
 
@@ -1143,6 +1154,11 @@ CheckListItem.prototype = {
 
     get completed() {
         return this.checkBox.actor.checked;
+    },
+
+    set completed(checked) {
+        this.checkBox.actor.checked = checked;
+        this.updateCheckedState();
     },
 
     get text() {
