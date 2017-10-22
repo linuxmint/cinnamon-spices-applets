@@ -25,7 +25,7 @@ msgstr "Направи снимка"
 #. ScreenShot@tech71->metadata.json->name
 #: applet.js:45
 msgid "ScreenShot"
-msgstr "ScreenShot"
+msgstr "Снимка на екрана"
 
 #: applet.js:50
 msgid "Whole Screen"
