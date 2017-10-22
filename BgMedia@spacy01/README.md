@@ -1,10 +1,10 @@
-Applet for streaming some of the most famous bulgarian radio and tv streams. This applet is complette rewriten the previous applet BgRadio@spacy01.
+Applet for streaming some of the most famous bulgarian radio and tv streams. This applet is completely rewritten previous applet BgRadio@spacy01.
 
 Changes:
 
  - moc player is replaced with vlc player
  - it's been added some tv streams
- - radio streams are updated
+ - radio streams have been updated
  - more compact menu
  - updated localization
  - new icons
