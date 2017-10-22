@@ -1,0 +1,116 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-02 19:48+0200\n"
+"PO-Revision-Date: 2017-10-02 20:38+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:166
+msgid ""
+"Click here to turn \n"
+"question notifications on"
+msgstr ""
+"Klik her for at slå meddelelser\n"
+"ved nye spørgsmål til"
+
+#: applet.js:171
+msgid ""
+"Click here to turn\n"
+"question notifications off"
+msgstr ""
+"Klik her for at slå meddelelser\n"
+"ved nye spørgsmål fra"
+
+#: applet.js:202
+msgid "An error ocurred, click to start checking questions again"
+msgstr ""
+"Der opstod en fejl. Klik for at begynde at tjekke, om der er nye spørgsmål, "
+"igen"
+
+#: applet.js:219
+msgid "Max # of API calls reached, service will be back after"
+msgstr "Maksimalt antal API-kald er nået. Tjenesten vil være tilbage om"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->description
+msgid ""
+"Checks stackoverflow site to see if new questions have been posted under a "
+"particular tag and generates a notification"
+msgstr ""
+"Tjekker stackoverflow-sitet for at se, om nye spørgsmål er slået op med et "
+"bestemt mærke, og genererer en meddelelse"
+
+#. stackoverflow-questions-notifier@higuaro->metadata.json->name
+msgid "Stackoverflow Questions Notifier"
+msgstr "Stackoverflow"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->description
+msgid "Visit Cinnamon Applet Home"
+msgstr "Besøg Cinnamon-panelprogrammers hjemmeside"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenCinnamon->tooltip
+msgid "Open cinnamon.com - rate the applet"
+msgstr "Åbn cinnamon.com - bedøm panelprogrammet"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->description
+msgid "Tags of interest for new questions (max 10 tags): "
+msgstr "Mærker af interesse for nye spørgsmål (maks. 10): "
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->txtTagList->tooltip
+msgid ""
+"Comma-separated list of tags for new questions that you are interested in "
+"(tags beyond the 10th are ignored)"
+msgstr ""
+"Kommasepareret liste over mærker for nye spørgsmål du er interesseret i "
+"(mærker ud over den 10. ignoreres)"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->general->description
+msgid "General Settings"
+msgstr "Generelle indstillinger"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->description
+msgid "Query interval (minutes): "
+msgstr "Forespørgselsinterval (minutter): "
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->scaQueryFrecuency->tooltip
+msgid "Change the amount of time between every check for new questions"
+msgstr "Ændr tiden mellem hvert tjek for nye spørgsmål"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->description
+msgid "Visit Developer Page"
+msgstr "Besøg udviklerens side"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenDevPage->tooltip
+msgid "Open geekofficedog.blogspot.com"
+msgstr "Åbn geekofficedog.blogspot.com"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->description
+msgid "Visit Stackoverflow"
+msgstr "Besøg Stackoverflow"
+
+#. stackoverflow-questions-notifier@higuaro->settings-
+#. schema.json->btnOpenStackoverflow->tooltip
+msgid "Open stackoverflow.com"
+msgstr "Åbn stackoverflow.com"

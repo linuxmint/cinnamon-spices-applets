@@ -1,0 +1,36 @@
+{
+ "head" : {
+    "type" : "header",
+    "description" : "Color Pick Settings"
+ },
+ "combo-selection" : {
+    "type": "combobox",
+    "default" : "1",
+    "description" : "Please Select Color Pick Option:",
+    "options" : {
+        "#xxxxxx" : "1",
+        "#XXXXXX" : "2",
+        "00,00,00" : "3",
+        "(00,00,00)" : "4"
+    },
+    "tooltip" : "A combo selection can select between int, boolean, float, and string values"
+ },
+ "div1" : {
+    "type" : "separator"
+ },
+ "head1" : {
+    "type" : "header",
+    "description" : "Applet Settings"
+ },
+ "icon-name": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "The icon to use in the panel:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },
+  "keybinding-test" : {
+    "type" : "keybinding",
+    "description" : "Set the keybinding here to activate an action: ",
+    "default" : "<Primary>p"
+ }
+}

@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmonitor@orcus\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-08 14:07+0200\n"
+"PO-Revision-Date: 2017-05-08 14:10+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: hr\n"
+
+#: applet.js:128
+msgid "Settings"
+msgstr "Postavke"
+
+#: applet.js:322
+msgid "CPU: "
+msgstr "CPU: "
+
+#: applet.js:348
+msgid "Memory: "
+msgstr "Memorija: "
+
+#: applet.js:349 applet.js:375
+msgid " MB"
+msgstr " MB"
+
+#: applet.js:374
+msgid "Swap: "
+msgstr "Swap: "
+
+#: applet.js:409
+msgid "Network D/U: "
+msgstr "Mreža P/S: "
+
+#: applet.js:409
+msgid " KB/s"
+msgstr " KB/s"
+
+#: applet.js:446
+msgid "Load average: "
+msgstr "Prosječno opterećenje: "
+
+#: settings.js:99
+msgid ""
+"Cinnamon should be restarted for changes to take effect.\n"
+"Restart now?"
+msgstr ""
+"Cinnamon se treba ponovno pokrenuti kako bi se promjene primijenile.\n"
+"Odmah ponovno pokreni?"
+
+#: settings.js:192
+msgid "Error while saving file: "
+msgstr "Greška spremanja datoteke: "
+
+#. sysmonitor@orcus->metadata.json->name
+msgid "System Monitor"
+msgstr "Nadgledatelj sustava"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr "Prikazuje upotrebu CPU-a, memorije, swapa, mreže u grafovima."

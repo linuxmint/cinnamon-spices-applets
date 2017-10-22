@@ -1,0 +1,28 @@
+{
+ "cpu-label" : {
+	"type" : "entry",
+	"default" : "cpu:",
+	"description" : "Text:",
+	"tooltip" : "Enter custom text to show in the panel."
+ },
+ "max-percentage" : {
+    "type": "spinbutton",
+    "default" : 100,
+    "min" : 1,
+    "max" : 10000,
+    "step" : 1,
+    "units" : "",
+    "description" : "Max Percentage:",
+    "tooltip" : "Change the max percentage.\n\nIf not 100% than typically a multiple corresponding to the number of cores.\n\nExample: 4 cores (100 x 4) = 400%"
+ },
+ "update-interval" : {
+	"type" : "spinbutton",
+	"default" : 2000,
+	"min" : 0,
+	"max" : 60000,
+	"step" : 100,
+	"units" : "milliseconds",
+	"description" : "Update Interval:",
+	"tooltip" : "Enter the interval in milliseconds between updates."
+ }
+}

@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-11 10:48+0800\n"
+"PO-Revision-Date: 2017-04-11 11:06+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:583 applet.js:810
+msgid "Unknown Artist"
+msgstr "未知艺术家"
+
+#: applet.js:584 applet.js:814
+msgid "Unknown Album"
+msgstr "未知专辑"
+
+#: applet.js:585 applet.js:818
+msgid "Unknown Title"
+msgstr "未知标题"
+
+#: applet.js:596
+msgid "Previous"
+msgstr "上一首"
+
+#: applet.js:599
+msgid "Play"
+msgstr "播放"
+
+#: applet.js:602
+msgid "Stop"
+msgstr "停止"
+
+#: applet.js:605
+msgid "Next"
+msgstr "下一首"
+
+#: applet.js:653
+msgid "Open Player"
+msgstr "打开播放器"
+
+#: applet.js:661
+msgid "Quit Player"
+msgstr "退出播放器"
+
+#: applet.js:1235
+msgid "Mute output"
+msgstr "输出静音"
+
+#: applet.js:1236
+msgid "Mute input"
+msgstr "输入静音"
+
+#: applet.js:1619
+msgid "Launch player..."
+msgstr "启动播放器..."
+
+#: applet.js:1632 applet.js:1779 applet.js:1781 applet.js:1786 applet.js:1787
+#: applet.js:1806 applet.js:1807
+msgid "Volume"
+msgstr "音量"
+
+#: applet.js:1648
+msgid "  Applications..."
+msgstr "  应用程序..."
+
+#: applet.js:1653
+msgid "Microphone"
+msgstr "麦克风"
+
+#: applet.js:1711
+msgid "Sound Settings"
+msgstr "声音设置"
+
+#: applet.js:1713
+msgid "Output device..."
+msgstr "输出设备..."
+
+#: applet.js:1779 applet.js:1781 applet.js:1938 applet.js:1964 applet.js:1995
+#: applet.js:2022
+msgid "mute"
+msgstr "静音"
+
+#. sound-with-apps-volume@koutch->metadata.json->name
+msgid "Sound with apps volume"
+msgstr "声音和应用程序的音量"
+
+#. sound-with-apps-volume@koutch->metadata.json->description
+msgid ""
+"Applications' volume, volume 150%, mute button, scrolling track time, custom "
+"launcher ..."
+msgstr "应用程序的音量、音量150%、静音按钮、滚动音轨时间、自定义启动器 ..."
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->description
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->description
+msgid "Volume arrow key step : "
+msgstr "音量方向键步长："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->tooltip
+msgid "from 0 to 3600 (0 to disable)"
+msgstr "从0到3600（0禁用）"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-arrow-step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->units
+msgid "sec"
+msgstr "秒"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. icon->description
+msgid "Icon :"
+msgstr "图标："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showtrack->description
+msgid "Show song information on the panel"
+msgstr "在面板显示歌曲信息"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-vertical-
+#. step->description
+msgid "Time up/down scroll step : "
+msgstr "时间向上/下滚动步长："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->mute-middle-
+#. click->description
+msgid "Mute with middle click on applet and slider"
+msgstr "中键点击小程序和滑动条时静音"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-custom-
+#. launcher->description
+msgid "Show Custom Launcher"
+msgstr "显示自定义启动器"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->hideSystray->description
+msgid "Hide system tray icons for compatible players"
+msgstr "隐藏兼容播放器的系统托盘图标"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-player-
+#. list->description
+msgid "Launch player list always shown"
+msgstr "总是显示启动播放器列表"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->time-horizontal-
+#. step->description
+msgid "Time left/right scroll step : "
+msgstr "时间向左/右滚动步长："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-
+#. player->description
+msgid "Show Player"
+msgstr "显示播放器"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-player->tooltip
+msgid "Show/hide Player "
+msgstr "显示/隐藏播放器"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-
+#. max->description
+msgid "Volume : 150%"
+msgstr "音量：150%"
+
+#. sound-with-apps-volume@koutch->settings-
+#. schema.json->truncatetext->description
+msgid "- Limit song information to"
+msgstr "- 限制歌曲信息为"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->truncatetext->units
+msgid "characters"
+msgstr "个字符"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->description
+msgid "Show Applications' volume"
+msgstr "显示应用程序的音量"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app->tooltip
+msgid ""
+"show/hide Applications' volume (automatically hide if no program is playing "
+"sound)"
+msgstr "显示/隐藏应用程序的音量（如果没有程序播放声音则自动隐藏）"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->description
+msgid "Mute button"
+msgstr "静音按钮"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. mutebutton->tooltip
+msgid "enable/disable mute button"
+msgstr "启用/禁用静音按钮"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->description
+msgid "Show Launch player"
+msgstr "显示启动播放器"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-launch-
+#. player->tooltip
+msgid ""
+"show/hide Launch Player (automatically hide if applet's player is displayed)"
+msgstr "显示/隐藏启动播放器（如果显示小程序的播放器则自动隐藏）"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-
+#. option->description
+msgid "Override the slider's theme"
+msgstr "覆盖滑动条的主题"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->theme-option->tooltip
+msgid "Keep mark on the 150% slider & may fix right margin too short"
+msgstr "保持将滑动条标记在150%可能会使右侧边距过短"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-app-
+#. list->description
+msgid "Applications list always shown"
+msgstr "总是显示应用程序列表"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->description
+msgid "Volume up/down scroll step : "
+msgstr "音量向上/下滚动步长："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->tooltip
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->tooltip
+msgid "from 0 to 100 (0 to disable)"
+msgstr "从0到100（0禁用）"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-vertical-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-arrow-
+#. step->units
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->units
+msgid "%"
+msgstr "%"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-in-
+#. terminal->description
+msgid "Launch in Terminal"
+msgstr "在终端中启动"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. name->description
+msgid "Name :"
+msgstr "名称："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->launch-
+#. command->description
+msgid "Command :"
+msgstr "命令："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head2->description
+msgid "Sliders settings"
+msgstr "滑动条设置"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->head1->description
+msgid "You'll need to restart players supported by applet's player"
+msgstr "您需要重新启动小程序播放器支持的播放器"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->showalbum->description
+msgid "Show album art as icon"
+msgstr "以图标显示专辑"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->description
+msgid "Show Output device"
+msgstr "显示输出设备"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->show-output-
+#. device->tooltip
+msgid "show/hide Output device"
+msgstr "显示/隐藏输出设备"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->volume-horizontal-
+#. step->description
+msgid "Volume left/right scroll step : "
+msgstr "音量向左/右滚动步长："
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->description
+msgid "Album art size"
+msgstr "专辑封面大小"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-
+#. size->tooltip
+msgid "from 0 to 210 (0 to disable)"
+msgstr "从0到210（0禁用）"
+
+#. sound-with-apps-volume@koutch->settings-schema.json->album-art-size->units
+msgid "px"
+msgstr "px"

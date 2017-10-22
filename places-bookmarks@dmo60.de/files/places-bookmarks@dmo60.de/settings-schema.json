@@ -1,0 +1,27 @@
+{
+   "head": {
+        "type": "header",
+        "description": "Settings for places-bookmarks@dmo60.de"
+    },
+    "pref_applet_label": {
+        "type": "entry",
+        "default": "Places",
+        "description": "Applet label",
+        "tooltip": "Leave blank to remove."
+    },
+    "pref_applet_icon": {
+        "type": "iconfilechooser",
+        "default": "user-home",
+        "description": "Applet icon",
+        "tooltip": "Leave blank to remove."
+    },
+    "pref_icon_size": {
+        "type": "spinbutton",
+        "default": 22,
+        "min": 16,
+        "max": 512,
+        "step": 1,
+        "units": "pixels",
+        "description": "Menu items icon size"
+    }
+}

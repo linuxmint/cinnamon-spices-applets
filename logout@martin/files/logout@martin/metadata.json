@@ -1,0 +1,6 @@
+{
+ "uuid": "logout@martin",
+ "name": "logout",
+ "description": "2-clicks logout",
+ "icon": "gnome-logout"
+}

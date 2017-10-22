@@ -1,0 +1,71 @@
+# Swedish translation for sysmonitor@orcus.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sysmonitor@orcus\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-01 16:59+0200\n"
+"PO-Revision-Date: 2017-06-01 17:04+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:128
+msgid "Settings"
+msgstr "Inställningar"
+
+#: applet.js:322
+msgid "CPU: "
+msgstr "CPU: "
+
+#: applet.js:348
+msgid "Memory: "
+msgstr "Minne: "
+
+#: applet.js:349 applet.js:375
+msgid " MB"
+msgstr " MB"
+
+#: applet.js:374
+msgid "Swap: "
+msgstr "Växlingsutrymme: "
+
+#: applet.js:409
+msgid "Network D/U: "
+msgstr "Nätverk U/N: "
+
+#: applet.js:409
+msgid " KB/s"
+msgstr " KB/s"
+
+#: applet.js:446
+msgid "Load average: "
+msgstr "Medelbelastning: "
+
+#: settings.js:99
+msgid ""
+"Cinnamon should be restarted for changes to take effect.\n"
+"Restart now?"
+msgstr ""
+"Cinnamon måste startas om för att tillämpa ändringar.\n"
+"Vill du starta om nu?"
+
+#: settings.js:192
+msgid "Error while saving file: "
+msgstr "Kunde inte spara filen: "
+
+#. sysmonitor@orcus->metadata.json->name
+msgid "System Monitor"
+msgstr "Systemövervakare"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr "Visar CPU-, minnes-, växlings-, och nätverksanvändning samt belastning, i diagram."

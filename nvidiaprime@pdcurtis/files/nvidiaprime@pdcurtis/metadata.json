@@ -1,0 +1,8 @@
+{
+    "max-instances": "1", 
+    "description": "Displays which Graphics processor is active and nVidia GPU Temperature when active and in a horizontal panel", 
+    "name": "nVidia Prime GPU Display", 
+    "uuid": "nvidiaprime@pdcurtis",
+    "version": "3.3.3"
+}
+

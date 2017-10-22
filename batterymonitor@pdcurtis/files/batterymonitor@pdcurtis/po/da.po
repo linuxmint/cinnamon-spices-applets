@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-21 20:01+0200\n"
+"PO-Revision-Date: 2017-09-21 20:03+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:55
+msgid "Ok"
+msgstr "OK"
+
+#: applet.js:173
+msgid "Waiting"
+msgstr "Venter"
+
+#: applet.js:239
+msgid "Open Power Statistics"
+msgstr "Åbn strømstatistik"
+
+#: applet.js:245
+msgid "Open System Monitor"
+msgstr "Åbn systemovervågning"
+
+#: applet.js:254
+msgid "Housekeeping and System Sub Menu"
+msgstr "Vedligehold og systemundermenu"
+
+#: applet.js:257
+msgid "View the Changelog"
+msgstr "Vis ændringsloggen"
+
+#: applet.js:263
+msgid "Open the Help file"
+msgstr "Åbn hjælpfilen"
+
+#: applet.js:269
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Åbn stylesheet.css  (Avanceret funktion)"
+
+#. batterymonitor@pdcurtis->metadata.json->name
+#: applet.js:285
+msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Batteriovervågning og nedlukning"
+
+#: applet.js:290
+msgid "Waiting for battery information"
+msgstr "Venter på information om batteriet"
+
+#: applet.js:353
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Lavt batteriniveau - sluk eller sæt strømstikket i"
+
+#: applet.js:358
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source\n"
+"or close down your work and suspend or shutdown the machine"
+msgstr ""
+"Batteriniveauet er faldet til dit advarselsniveau\n"
+"\n"
+" tilslut strømmen eller stop dit arbejde\n"
+"og sluk computeren eller sæt den i hviletilstand"
+
+#: applet.js:375
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr ""
+"Ved kritisk batteriniveau aktiveres hviletilstand, med mindre strømforsyning "
+"er tilsluttet"
+
+#: applet.js:393
+msgid "Charge:"
+msgstr "Batteriniveau:"
+
+#: applet.js:393
+msgid "Alert:"
+msgstr "Advarsel:"
+
+#: applet.js:393
+msgid "Suspend:"
+msgstr "Hviletilstand:"
+
+#: applet.js:451
+msgid "Percentage Charge:"
+msgstr "Procent opladt:"
+
+#: applet.js:451
+msgid "Alert at:"
+msgstr "Advarsel ved:"
+
+#: applet.js:451
+msgid "Suspend at:"
+msgstr "Sæt i hviletilstand ved:"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr "Klassisk - Batteriprocent med udvidede beskeder til vandret panel"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klassisk plus - Klassisk med batteriikon"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgstr "Kompakt plus - Kompakt med batteriikon"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Kompakt - Batteriprocent uden udvidede beskeder"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Kun ikon på farvet baggrund som indikerer status"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Denne funktion tilbyder den Klassiske (originale) visning med valgfrit "
+"batteriikon og nogle mere kompakte visninger egnede til et lodret panel "
+"(Kompact, Kompakt plus og Kun ikon)"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Visningstype"
+
+#. batterymonitor@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Generelle indstillinger for Batteriovervågning og nedlukning"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Opdateringsinterval for visning:"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr ""
+"Forøg eller formindsk denne værdi for at ændre opdateringsintervallet - brug "
+"et langt interval, hvis din maskine er langsom. Dette styrer også "
+"blinkhastigheden."
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->units
+msgid "seconds"
+msgstr "sekunder"
+
+#. batterymonitor@pdcurtis->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Visningstilstand"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "Procent batteriniveau ved hvilken advarsler vises"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Procent batteriniveau ved hvilken den orange advarselsbaggrund vises. Den "
+"vises også og kan ændres i panelprogrammets genvejsmenu"
+
+#. batterymonitor@pdcurtis->metadata.json->description
+msgid "Displays Charge as Percentage and allows Alerts and Actions"
+msgstr "Viser opladningsniveau som procent og tillader advarsler og handlinger"
+
+#~ msgid "Note: Alerts not enabled in Settings"
+#~ msgstr "Bemærk: advarsler ikke aktiverede i indstillinger"

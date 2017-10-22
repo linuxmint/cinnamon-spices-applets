@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-21 12:47+0800\n"
+"PO-Revision-Date: 2017-04-21 12:51+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:94
+msgid "Remaining battery: N/A%, Profile: N/A"
+msgstr "剩余电量：N/A%，配置文件：不适用"
+
+#: applet.js:104
+msgid "Sleep Time:"
+msgstr "睡眠时间："
+
+#: applet.js:125
+msgid "Signal:"
+msgstr "信号："
+
+#: applet.js:133
+msgid "Dump memory to file"
+msgstr "转储内存到文件"
+
+#: applet.js:155
+msgid "Move to wake"
+msgstr "移动以唤醒"
+
+#: applet.js:196 applet.js:219
+msgid "%, Profile: "
+msgstr "%，不适用："
+
+#: applet.js:196 applet.js:219
+msgid "Remaining mouse battery: "
+msgstr "剩余鼠标电量："
+
+#: applet.js:201 applet.js:224
+msgid "Remaining battery: N/A%"
+msgstr "剩余电量：N/A%"
+
+#: applet.js:253
+msgid "Sleep time"
+msgstr "睡眠时间"
+
+#: applet.js:253
+msgid "min"
+msgstr "分"
+
+#. a4techTool@mous->metadata.json->description
+msgid "Shows Battery level of A4Tech mouse"
+msgstr "显示双飞燕鼠标的电池电量"
+
+#. a4techTool@mous->metadata.json->name
+msgid "A4Tech battery checker"
+msgstr "双飞燕电池检查工具"

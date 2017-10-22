@@ -1,0 +1,49 @@
+{
+    "locationName":"Krak\u00f3w - Aleja Krasi\u0144skiego",
+    "measurements":{
+        "CO":{
+            "hour":12,
+            "maxVal":"",
+            "unit":"mg/m3",
+            "value":"0.89"
+        },
+        "NO":{
+            "hour":12,
+            "maxVal":"",
+            "unit":"\u00b5g/m3",
+            "value":"49"
+        },
+        "NO2":{
+            "hour":12,
+            "maxVal":"200",
+            "unit":"\u00b5g/m3",
+            "value":"41"
+        },
+        "NOx":{
+            "hour":12,
+            "maxVal":"",
+            "unit":"\u00b5g/m3",
+            "value":"116"
+        },
+        "PM10":{
+            "hour":12,
+            "maxVal":"",
+            "unit":"\u00b5g/m3",
+            "value":"24"
+        },
+        "PM2.5":{
+            "hour":12,
+            "maxVal":"",
+            "unit":"\u00b5g/m3",
+            "value":"16"
+        },
+        "SO2":{
+            "hour":12,
+            "maxVal":"350",
+            "unit":"\u00b5g/m3",
+            "value":"10"
+        }
+    },
+    "stationId":"005",
+    "updatedAt":"2014-12-20 12:28:58"
+}

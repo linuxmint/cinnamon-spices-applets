@@ -1,0 +1,357 @@
+{
+  "ITM": {
+    "type": "header",
+    "description": "ITM Settings"
+  },
+  "seperator0": {
+    "type": "separator"
+  },
+  "WindowList": {
+    "type": "header",
+    "description": "Window List Settings"
+  },
+  "seperator1": {
+    "type": "separator"
+  },
+  "number-display": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Number display",
+    "options": {
+      "Smart": 1,
+      "Normal": 2,
+      "None": 3,
+      "All": 4
+    },
+    "tooltip": "normal: display window number, smart: display window number if more than one window, none: don't display number, all: display window number for favorites too"
+  },
+  "title-display": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Title display",
+    "options": {
+      "None": 1,
+      "App": 2,
+      "Title": 3,
+      "Focused": 4
+    },
+    "tooltip": "focused: show focused window title, title: display the window title, app: diplay app name, none: don't display anything"
+  },
+  "pinned-apps": {
+    "type": "generic",
+    "default": []
+  },
+  "group-apps": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Group apps",
+    "tooltip": "Group each app's set of windows."
+  },
+  "show-alerts": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show app alerts and notifications",
+    "tooltip": "If enabled, notifications and alerts will appear."
+  },
+  "show-pinned": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show pinned apps",
+    "tooltip": "Controls whether or not the pinned apps appear in the panel if they are not open."
+  },
+  "arrange-pinnedApps": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Arrange pinned apps",
+    "tooltip": "Arrange pinned apps into a different order."
+  },
+  "pinOnDrag": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Pin apps when dragged to a new position",
+    "tooltip": "Pin apps when dragged to a new position"
+  },
+  "middle-click-action": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Middle clicking app buttons creates new app instances",
+    "tooltip": "Determines the behavior of middle mouse button clicks on app buttons. Setting this to false will close the last focused window from the app group on middle click."
+  },
+  "cycleMenusHotkey": {
+    "type": "keybinding",
+    "default": "<Super>space",
+    "description": "Global hotkey for cycling through thumbnail menus",
+    "tooltip": "This allows you to cycle through the menus without activating a window."
+  },
+  "show-apps-order-hotkey": {
+    "type": "keybinding",
+    "default": "<Super>grave",
+    "description": "Global hotkey to show the order of apps",
+    "tooltip": "When triggered, the window count label will be replaced with its order in the app list temporarily."
+  },
+  "show-apps-order-timeout": {
+    "type": "spinbutton",
+    "default": 2500,
+    "min": 100,
+    "max": 10000,
+    "step": 10,
+    "units": "milliseconds",
+    "description": "Duration of the apps order display on hotkey press",
+    "tooltip": "Determines the duration the window count labels are replaced with the app's order number."
+  },
+  "Thumbnails": {
+    "type": "header",
+    "description": "Thumbnail Settings"
+  },
+  "seperator4": {
+    "type": "separator"
+  },
+  "thumbnail-timeout": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 0,
+    "max": 5000,
+    "step": 5,
+    "units": "milliseconds",
+    "description": "Thumbnail timeout",
+    "tooltip": "Controls how quickly an app's set of window thumbnails will fade out when the mouse leaves the app button."
+  },
+  "thumbnail-size": {
+    "type": "spinbutton",
+    "default": 6,
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "units": "size",
+    "description": "Thumbnail size",
+    "tooltip": "Controls the size of the thumbnails."
+  },
+  "show-thumbnails": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show thumbnails",
+    "tooltip": "Show window thumbnails when hovering over an app button."
+  },
+  "animate-thumbnails": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Animate thumbnails",
+    "tooltip": "If enabled, thumbnails will animate when appearing and disappearing."
+  },
+  "vertical-thumbnails": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Enable vertical thumbnails",
+    "tooltip": "If enabled, thumbnails will stack vertically."
+  },
+  "sort-thumbnails": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Sort windows for each app by last focused",
+    "tooltip": "Controls whether the order windows appear for an app is by last focused, or the order they were opened."
+  },
+  "onclick-thumbnails": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Open thumbnails on click",
+    "tooltip": "Open the thumbnails on click if there is more than one window open."
+  },
+  "include-all-windows": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Include all app windows",
+    "tooltip": "Controls whether or not thumbnails for smalller child windows, such as exit confirmations and file dialogues will be included in the thumbnail list."
+  },
+  "AppMenu": {
+    "type": "header",
+    "description": "Context Menu Settings"
+  },
+  "seperator5": {
+    "type": "separator"
+  },
+  "show-recent": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show recent items",
+    "tooltip": "Controls whether recent items will appear in the context menu."
+  },
+  "menuItemType": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Menu item type",
+    "options": {
+      "Symbolic icons": 1,
+      "Non-symbolic icons": 2,
+      "No icons": 3
+    },
+    "tooltip": "Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+  },
+  "firefox-menu": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Firefox context menu",
+    "options": {
+      "Most Visited": 1,
+      "Recent History": 2,
+      "Bookmarks": 3
+    },
+    "tooltip": "Most Visited: show the sites you visit most, Recent History: display the the last pages you visited, Bookmarks: show your favorite bookmarks."
+  },
+  "autostart-menu-item": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show autostart option",
+    "tooltip": "Shows the autostart toggle option in an app's context menu."
+  },
+  "monitor-move-all-windows": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Apply the monitor move option to all windows",
+    "tooltip": "When clicking \"Move to monitor\" in the context menu, this option will move all of an app's windows instead of just the last focused window from the app."
+  },
+  "HoverPeek": {
+    "type": "header",
+    "description": "Hover Peek Settings"
+  },
+  "seperator3": {
+    "type": "separator"
+  },
+  "enable-hover-peek": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show windows when hovered over",
+    "tooltip": "Controls whether or not windows display when hovered over."
+  },
+  "hover-peek-time": {
+    "type": "spinbutton",
+    "default": 150,
+    "min": 0,
+    "max": 1000,
+    "step": 5,
+    "units": "milliseconds",
+    "description": "Window fade time",
+    "tooltip": "Controls how quickly a window will fade on hover."
+  },
+  "hover-peek-opacity": {
+    "type": "spinbutton",
+    "default": 10,
+    "min": 0,
+    "max": 100,
+    "step": 2,
+    "units": "percent",
+    "description": "Window opacity",
+    "tooltip": "Opacity of the windows on hover."
+  },
+  "ThemeSettings": {
+    "type": "header",
+    "description": "Theme Settings"
+  },
+  "seperator2": {
+    "type": "separator"
+  },
+  "show-active": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show active app indicators",
+    "tooltip": "Active app styling will indicate if an app is active."
+  },
+  "icon-spacing": {
+    "type": "spinbutton",
+    "default": 7,
+    "min": 0,
+    "max": 15,
+    "step": 1,
+    "units": "px",
+    "description": "Icon spacing",
+    "tooltip": "Controls how much space is between the icons."
+  },
+  "icon-padding": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 15,
+    "step": 1,
+    "units": "px",
+    "description": "Icon padding",
+    "tooltip": "Controls how much horizontal padding is inside the app buttons. Padding is only applied to instances of this applet on horizontal panels."
+  },
+  "themePadding": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Use theme padding to center button icons",
+    "tooltip": "If button icons look off-centered, toggling this may help."
+  },
+  "enable-iconSize": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Adjust icon size",
+    "tooltip": "Adjust icon size independent of Cinnamon's panel scaling."
+  },
+  "icon-size": {
+    "type": "spinbutton",
+    "default": 16,
+    "min": 0,
+    "max": 150,
+    "step": 1,
+    "units": "px",
+    "description": "Icon size",
+    "tooltip": "Set icon size"
+  },
+  "hoverPseudoClass": {
+    "type": "combobox",
+    "default": 1,
+    "description": "App button hover pseudo class",
+    "options": {
+      "hover": 1,
+      "focus": 2,
+      "active": 3,
+      "outlined": 4,
+      "selected": 5
+    },
+    "tooltip": "Overrides the pseudo class for app buttons on hover."
+  },
+  "focusPseudoClass": {
+    "type": "combobox",
+    "default": 2,
+    "description": "App button focus pseudo class",
+    "options": {
+      "hover": 1,
+      "focus": 2,
+      "active": 3,
+      "outlined": 4,
+      "selected": 5
+    },
+    "tooltip": "Overrides the pseudo class for app button on focus."
+  },
+  "activePseudoClass": {
+    "type": "combobox",
+    "default": 3,
+    "description": "App button active pseudo class",
+    "options": {
+      "hover": 1,
+      "focus": 2,
+      "active": 3,
+      "outlined": 4,
+      "selected": 5
+    },
+    "tooltip": "Overrides the pseudo class for app buttons when they are active."
+  },
+  "panelLauncherClass": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use the panel launcher class for pinned apps",
+    "tooltip": "Enabling this helps with certain themes."
+  },
+  "close-button-style": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Allow themes to control the thumbnail close button",
+    "tooltip": "Controls whether or not the theme controls the window thumbnail's close button."
+  },
+  "useSystemTooltips": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use system tooltips for closed apps",
+    "tooltip": "Controls whether or not system tooltips are in use when hovering over closed pinned apps."
+  }
+}

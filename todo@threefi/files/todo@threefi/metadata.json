@@ -1,0 +1,6 @@
+{
+    "description": "a simple todo list ticker for cinammon", 
+    "icon": "emblem-sales", 
+    "uuid": "todo@threefi", 
+    "name": "Todo"
+}

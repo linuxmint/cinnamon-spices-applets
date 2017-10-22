@@ -1,0 +1,5 @@
+Custom Applications Menu Cinnamon Applet
+Developed by Nicolas LLOBERA - nllobera@gmail.com
+version: 2.0 (12-09-2013)
+License: GPLv3
+Copyright © 2012 Nicolas LLOBERA

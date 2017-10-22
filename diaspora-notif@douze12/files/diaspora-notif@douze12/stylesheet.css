@@ -1,0 +1,17 @@
+
+.notifArea{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.noNotifLabel .errorLabel{
+	font-style: italic;
+}
+
+.labelButton{
+	height:30px;
+}
+
+.labelButton:hover{
+	background-color: #AAAAAA;
+}

@@ -1,0 +1,84 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 03:56+0800\n"
+"PO-Revision-Date: 2017-09-03 23:51+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.3\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:14
+msgid "Tor disabled"
+msgstr "Tor已禁用"
+
+#: applet.js:15
+msgid "Tor enabled"
+msgstr "Tor已启用"
+
+#: applet.js:45
+msgid "Tor network"
+msgstr "Tor网络"
+
+#: applet.js:49
+msgid "Rebuild chain"
+msgstr "重建链"
+
+#: applet.js:106
+msgid "Tor was closed."
+msgstr "Tor已关闭。"
+
+#: applet.js:114
+msgid "Tor was launched."
+msgstr "Tor已启动。"
+
+#. tor-button@shatur->settings-schema.json->location->description
+msgid "Tor location path"
+msgstr "Tor位置路径"
+
+#. tor-button@shatur->settings-schema.json->location->tooltip
+msgid "Enter the command to launch Tor."
+msgstr "输入启动Tor的命令。"
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for check Tor activity:"
+msgstr "检查Tor活动的刷新间隔："
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
+msgid "Increase or decrease refresh interval for check Tor status."
+msgstr "增大或减小检查Tor状态的刷新间隔。"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "显示通知"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show Tor notifications launch."
+msgstr "显示Tor通知启动。"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as superuser"
+msgstr "以超级用户启动Tor"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with gksu with '-u' parameter. Needed if you don't have "
+"permissions to launch Tor as normal user."
+msgstr ""
+"使用gksu和'-u'参数启动Tor。如果您没有运行Tor的普通用户权限时才需要。"
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor按钮"
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "Tor网络管理器小程序"

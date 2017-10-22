@@ -1,0 +1,529 @@
+# Lithuanian translation for gnome-shell-extension-weather
+# Copyright (c) Mantas Kriaučiūnas <mantas@akl.lt> 2012
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Mantas Kriaučiūnas <mantas@akl.lt>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-weather\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2012-12-21 12:43+0000\n"
+"Last-Translator: Mantas Kriaučiūnas <mantas@akl.lt>\n"
+"Language-Team: Lithuanian <lt@li.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-12-24 04:00+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
+
+#: applet.js:249
+msgid "..."
+msgstr ""
+
+#: applet.js:250
+msgid "Click to open"
+msgstr ""
+
+#: applet.js:289
+#, fuzzy
+msgid "Settings"
+msgstr "Nustatymai (vietovė ir kt.)"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr ""
+
+#: applet.js:556
+msgid "Sunset"
+msgstr ""
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "Įkeliami dabartiniai orai..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "Įkeliama orų prognozė..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "Įkeliama..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr ""
+
+#: applet.js:740
+#, fuzzy
+msgid "Temperature:"
+msgstr "Temperatūros vienetai:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "Drėgnumas:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "Slėgis:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "Vėjas:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "Vėjas:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "Viesulas (tornadas)"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "Tropinė audra"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "Uraganas"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "Smarki audra su perkūnija"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "Perkūnija (audringa)"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "Šlapdriba (lietus ir sniegas)"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "Lietus bei šlapdriba"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "Sniegas bei šlapdriba"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "Šąlanti dulksna"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "Dulksna"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "Lijundra"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "Trumpi lietūs"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "Sniego šuorai"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "Protarpiais pasnigs"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "Pustomas sniegas"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "Sniegas"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "Kruša"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "Šlapdriba"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "Dulkės"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "Ūkanota"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "Miglelė"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "Dūmuotas oras"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "Audringa"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "Vėjuota"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr ""
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "Debesuota"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "Daugiau debesuota"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "Debesuota su pragiedruliais"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "Giedra"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "Saulėta"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "Gražus oras"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "Lietus su kruša"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "Karšta"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "Vietomis perkūnija"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "Vietomis perkūnija"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "Vietomis trumpi lietūs"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "Stipriai sninga"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "Vietomis pasnigs"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "Trumpi lietūs su perkūnija"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr ""
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "Pavienės liūtys su perkūnija"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "Neprieinama"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "Pirmadienis"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "Antradienis"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "Trečiadienis"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "Ketvirtadienis"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "Penktadienis"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "Šeštadienis"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "Sekmadienis"
+
+#: applet.js:1056
+msgid "N"
+msgstr "Š"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "ŠR"
+
+#: applet.js:1056
+msgid "E"
+msgstr "R"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "PR"
+
+#: applet.js:1056
+msgid "S"
+msgstr "P"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "PV"
+
+#: applet.js:1056
+msgid "W"
+msgstr "V"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "ŠV"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+#, fuzzy
+msgid "Display current temperature in panel"
+msgstr "Rodyti temperatūrą skydelyje"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#, fuzzy
+msgid "Temperature unit"
+msgstr "Temperatūros vienetai:"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+#, fuzzy
+msgid "Translate condition"
+msgstr "Versti oro sąlygas"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+#, fuzzy
+msgid "Wind speed unit"
+msgstr "Vėjo greičio vienetai"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr ""
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr ""
+
+#~ msgid "Please wait"
+#~ msgstr "Palaukite"
+
+#~ msgid "Today"
+#~ msgstr "Šiandien"
+
+#~ msgid "Tomorrow"
+#~ msgstr "Rytoj"
+
+#~ msgid "Locations"
+#~ msgstr "Vietovės"
+
+#~ msgid "Reload Weather Information"
+#~ msgstr "Atnaujinti orų informaciją"
+
+#~ msgid "Invalid city"
+#~ msgstr "Netinkama vietovė"
+
+#~ msgid "Calm"
+#~ msgstr "Ramu"
+
+#~ msgid "Light breeze"
+#~ msgstr "Lengvas vėjelis"
+
+#~ msgid "Gentle breeze"
+#~ msgstr "Švelnus vėjelis"
+
+#~ msgid "Moderate breeze"
+#~ msgstr "Vidutinis vėjelis"
+
+#~ msgid "Fresh breeze"
+#~ msgstr "Stiprėjantis vėjelis"
+
+#~ msgid "Moderate gale"
+#~ msgstr "Vidutinis štormas"
+
+#~ msgid "Fresh gale"
+#~ msgstr "Stiprėjantis štormas"
+
+#~ msgid "Strong gale"
+#~ msgstr "Smarkus štormas"
+
+#~ msgid "Storm"
+#~ msgstr "Audra"
+
+#~ msgid "Violent storm"
+#~ msgstr "Smarki audra"
+
+#~ msgid "Yesterday"
+#~ msgstr "Vakar"
+
+#~ msgid "%s days ago"
+#~ msgstr "Prieš %s dienas"
+
+#~ msgid "Feel like:"
+#~ msgstr "Jaučiama kaip:"
+
+#~ msgid "Name of the city"
+#~ msgstr "Vietovės pavadinimas"
+
+#~ msgid "Remove %s ?"
+#~ msgstr "Pašalinti %s ?"
+
+#~ msgid "Pressure Unit"
+#~ msgstr "Slėgio vienetai"
+
+#~ msgid "Position in Panel"
+#~ msgstr "Padėtis skydelyje"
+
+#~ msgid "Center"
+#~ msgstr "Centre"
+
+#~ msgid "Right"
+#~ msgstr "Dešinėje"
+
+#~ msgid "Left"
+#~ msgstr "Kairėje"
+
+#~ msgid "Wind Direction by Arrows"
+#~ msgstr "Vėjo krypčiai naudoti rodykles"
+
+#~ msgid "Conditions in Panel"
+#~ msgstr "Rodyti oro sąlygas skydelyje"

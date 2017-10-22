@@ -1,0 +1,5 @@
+{
+"uuid": "temperature@fevimu",
+"name": "CPU Temperature Indicator",
+"description": "Shows CPU Temperature"
+}

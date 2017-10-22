@@ -1,0 +1,6 @@
+{
+ "uuid": "ShutdownApplet@shelley",
+ "name": "Shutdown Applet",
+ "description": "An applet to help you shutdown, restart and suspend your system with single click",
+ "icon": "emblem-personal"
+}

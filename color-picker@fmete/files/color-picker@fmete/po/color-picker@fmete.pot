@@ -1,0 +1,75 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 02:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js:72
+msgid "click here to pick a color"
+msgstr ""
+
+#. color-picker@fmete->metadata.json->description
+msgid "Click on applet to pick color"
+msgstr ""
+
+#. color-picker@fmete->metadata.json->name
+msgid "Color Picker"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->head->description
+msgid "Color Pick Settings"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->head1->description
+msgid "Applet Settings"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->description
+msgid "Please Select Color Pick Option:"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->tooltip
+msgid ""
+"A combo selection can select between int, boolean, float, and string values"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "00,00,00"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#XXXXXX"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "(00,00,00)"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->combo-selection->options
+msgid "#xxxxxx"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->icon-name->description
+msgid "The icon to use in the panel:"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->icon-name->tooltip
+msgid "Select an icon file, or you can type an icon name into the entry box"
+msgstr ""
+
+#. color-picker@fmete->settings-schema.json->keybinding-test->description
+msgid "Set the keybinding here to activate an action: "
+msgstr ""

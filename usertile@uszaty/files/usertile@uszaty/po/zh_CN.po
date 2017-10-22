@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-25 13:30+0800\n"
+"PO-Revision-Date: 2017-04-25 13:38+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:100
+msgid "Account Details"
+msgstr "帐户详情"
+
+#: applet.js:104
+msgid "System Settings"
+msgstr "系统设置"
+
+#: applet.js:108
+msgid "Notifications"
+msgstr "通知"
+
+#: applet.js:120
+msgid "Power..."
+msgstr "电源..."
+
+#: applet.js:123
+msgid "Lock Screen"
+msgstr "锁定屏幕"
+
+#: applet.js:143 applet.js:152 applet.js:160
+msgid "Switch User"
+msgstr "切换用户"
+
+#: applet.js:167
+msgid "Log Out..."
+msgstr "注销..."
+
+#: applet.js:173
+msgid "Power off..."
+msgstr "关机..."
+
+#. usertile@uszaty->metadata.json->description
+msgid ""
+"An applet to access your account details and more. Design is based on "
+"UserTile applet from Windows."
+msgstr ""
+"一个可以访问您的帐户详情等等的小程序。设计基于Windows的UserTile小程"
+"序。"
+
+#. usertile@uszaty->metadata.json->name
+msgid "UserTile Applet"
+msgstr "UserTile小程序"

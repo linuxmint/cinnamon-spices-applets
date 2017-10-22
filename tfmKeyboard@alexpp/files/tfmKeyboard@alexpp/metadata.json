@@ -1,0 +1,6 @@
+{ 
+    "version": "1.2", 
+    "description": "Touches d'invocations personalisées et capture vidéo du bureau en MP4",
+    "name": "Transformice helper",
+    "uuid": "tfmKeyboard@alexpp"
+}

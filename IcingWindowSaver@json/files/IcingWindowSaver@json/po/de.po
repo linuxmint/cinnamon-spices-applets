@@ -1,0 +1,39 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-02 14:43+0200\n"
+"PO-Revision-Date: 2017-05-02 14:49+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: applet.js:43
+msgid "Window Saver"
+msgstr "Fensterpositionsspeicher"
+
+#: applet.js:51
+msgid "Save"
+msgstr "Speichern"
+
+#: applet.js:59
+msgid "Restore"
+msgstr "Wiederherstellen"
+
+#. IcingWindowSaver@json->metadata.json->description
+msgid "Window position save and restore utility."
+msgstr "Fensterpositionen speichern und wiederherstellen."
+
+#. IcingWindowSaver@json->metadata.json->name
+msgid "Icing Window Saver"
+msgstr "Icing Fensterpositionsspeicher"

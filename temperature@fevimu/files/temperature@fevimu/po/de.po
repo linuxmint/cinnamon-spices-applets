@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-09-17 20:00+0200\n"
+"PO-Revision-Date: 2017-09-17 20:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:51
+msgid "Error"
+msgstr "Fehler"
+
+#: applet.js:52
+msgid ""
+"Run sensors-detect as root. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"»sensors-detect« als Systemverwalter ausführen. Wenn dies nicht hilft, hier "
+"klicken um einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
+
+#: applet.js:55
+msgid "Warning"
+msgstr "Warnung"
+
+#: applet.js:56
+msgid ""
+"Please install lm_sensors. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"Bitte »lm-sensors« installieren. Wenn dies nicht hilft, hier klicken um "
+"einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
+
+#: applet.js:60 applet.js:140 applet.js:171
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: applet.js:129
+msgid "Current Temperature : "
+msgstr "Aktuelle Temperatur: "
+
+#: applet.js:131
+msgid "Critical Temperature : "
+msgstr "Kritische Temperatur: "
+
+#. temperature@fevimu->metadata.json->description
+msgid "Shows CPU Temperature"
+msgstr "Zeigt die CPU-Temperatur an"
+
+#. temperature@fevimu->metadata.json->name
+msgid "CPU Temperature Indicator"
+msgstr "CPU-Temperaturanzeige"
+
+#. temperature@fevimu->settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Temperatur in Fahrenheit anzeigen"

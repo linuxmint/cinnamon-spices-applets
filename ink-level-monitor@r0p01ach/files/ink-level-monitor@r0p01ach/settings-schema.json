@@ -1,0 +1,36 @@
+{
+    "general": {
+        "type": "header",
+        "description": "General Settings"
+    },
+    
+    "appletWidth": {
+        "type": "spinbutton",
+        "default": 24,
+        "min": 10,
+        "max": 99,
+        "units": "px",
+        "step": 2,
+        "description": "Applet Width"
+    },
+    
+    "lpPort": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 99,
+        "units": "(lp# device)",
+        "step": 1,
+        "description": "Printer Port Number"
+    },
+    
+    "updateInterval": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 1,
+        "max": 1800,
+        "units": "seconds",
+        "step": 1,
+        "description": "Update Interval"
+    }
+}

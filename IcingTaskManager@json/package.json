@@ -1,0 +1,31 @@
+{
+  "name": "icingtaskmanager",
+  "version": "4.3.4",
+  "description": "Icing Task Manager",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp copy && gulp transpile && npm run installApp",
+    "installApp": "cp -avrf  IcingTaskManager@json ~/.local/share/cinnamon/applets/ && ./locale.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaszhix/icingtaskmanager.git"
+  },
+  "author": "",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jaszhix/icingtaskmanager/issues"
+  },
+  "homepage": "https://github.com/jaszhix/icingtaskmanager#readme",
+  "devDependencies": {
+    "clear": "0.0.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-zip": "^3.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.16.6"
+  }
+}
