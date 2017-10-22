@@ -58,6 +58,56 @@ function focusText(actor) {
     }
 }
 
+function PromptDialog(message, acceptCallback, cancelCallback) {
+    this._init(message, acceptCallback, cancelCallback);
+}
+
+PromptDialog.prototype = {
+    __proto__: ModalDialog.ModalDialog.prototype,
+
+    _init: function(message, acceptCallback, cancelCallback) {
+        ModalDialog.ModalDialog.prototype._init.call(this);
+        global.logWarning(typeof acceptCallback)
+
+        this.acceptCallback = acceptCallback;
+        this.cancelCallback = cancelCallback;
+
+        this.contentLayout.set_style("spacing: 15px;");
+
+        this.contentLayout.add_actor(new St.Label({text: message}));
+        this.entry = new St.Entry({ style_class: "run-dialog-entry"});
+        this.contentLayout.add_actor(this.entry);
+
+        this.setButtons([
+            {
+                label: _("Cancel"),
+                action: Lang.bind(this, this.onCancel),
+                key: Clutter.Escape
+            },
+            {
+                label: _("Ok"),
+                action: Lang.bind(this, this.onOk),
+                key: Clutter.Return
+            }
+        ]);
+
+        this.open();
+    },
+
+    onOk: function() {
+        let response = this.entry.text;
+        this.close();
+        this.acceptCallback(response);
+    },
+
+    onCancel: function() {
+        this.close();
+        if (this.cancelCallback) {
+            this.cancelCallback();
+        }
+    }
+}
+
 
 function Menu(applet, orientation) {
     this._init(applet, orientation);
@@ -196,6 +246,12 @@ NoteBase.prototype = {
         this.titleMenuItem = new PopupMenu.PopupMenuItem(this.title ? _("Edit title") : _("Add title"));
         this.contentMenuSection.addMenuItem(this.titleMenuItem);
         this.titleMenuItem.connect("activate", Lang.bind(this, this.editTitle));
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let saveTemplate = new PopupMenu.PopupMenuItem(_("Save as template"));
+        this.menu.addMenuItem(saveTemplate);
+        saveTemplate.connect("activate", Lang.bind(this, this.promptSaveTemplateName));
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -467,6 +523,25 @@ NoteBase.prototype = {
             this.updateId = -1;
             this.emit("changed");
         }));
+    },
+
+    promptSaveTemplateName: function() {
+        new PromptDialog(_("Enter a name for the template."), Lang.bind(this, this.saveAsTemplate));
+    },
+
+    saveAsTemplate: function(name) {
+        global.logWarning(name)
+        if (name == "") return;
+
+        let info = this.getInfo();
+        info.name = name;
+        delete info.x;
+        delete info.y;
+        delete info.theme;
+
+        let templates = settings.getValue("templates");
+        templates.push(info);
+        settings.setValue("templates", templates);
     }
 }
 Signals.addSignalMethods(NoteBase.prototype);
@@ -1229,7 +1304,7 @@ NoteBox.prototype = {
         }
 
         let x, y;
-        if ( info ) {
+        if ( info && info.x && info.y ) {
             x = info.x;
             y = info.y;
         }
@@ -1607,6 +1682,7 @@ MyApplet.prototype = {
         settings = new Settings.AppletSettings(this, uuid, instanceId);
         settings.bind("storedNotes", "storedNotes");
         settings.bind("raisedState", "raisedState");
+        settings.bind("templates", "templates");
 
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
 
@@ -1616,6 +1692,7 @@ MyApplet.prototype = {
         noteBox.connect("pin-changed", Lang.bind(this, this.stateChanged));
 
         this.buildMenus();
+        this.buildTemplateMenu();
     },
 
     on_applet_clicked: function() {
@@ -1639,6 +1716,10 @@ MyApplet.prototype = {
         this.menu.addMenuItem(newCheckListMenuItem);
         newCheckListMenuItem.connect("activate", Lang.bind(noteBox, noteBox.newCheckList));
 
+        this.templateMenuItem = new PopupMenu.PopupSubMenuMenuItem(_("New from template"));
+        this.menu.addMenuItem(this.templateMenuItem);
+        this.templateMenu = this.templateMenuItem.menu;
+
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         this.pinMenuItem = new PopupMenu.PopupIconMenuItem(_("Pin notes (keep on top)"), "pin-symbolic", St.IconType.SYMBOLIC);
@@ -1660,6 +1741,36 @@ MyApplet.prototype = {
         let restoreBackupItem = new PopupMenu.PopupMenuItem(_("Restore from backup"));
         this._applet_context_menu.addMenuItem(restoreBackupItem);
         restoreBackupItem.connect("activate", Lang.bind(this, this.loadBackup));
+    },
+
+    buildTemplateMenu: function() {
+        if ( this.templates.length == 0 ) {
+            this.templateMenuItem.actor.hide();
+            return;
+        }
+        else {
+            this.templateMenuItem.actor.show();
+        }
+
+        for ( let i = 0; i < this.templates.length; i++ ) {
+            let info = this.templates[i];
+            let menuItem = new PopupMenu.PopupMenuItem(info.name);
+            menuItem.templateInfo = info;
+            this.templateMenu.addMenuItem(menuItem);
+            menuItem.connect("activate", Lang.bind(this, this.newFromTemplate));
+        }
+    },
+
+    newFromTemplate: function(menuItem) {
+        let info = menuItem.templateInfo;
+        noteBox.addNote(info.type, info);
+        noteBox.update();
+        // if ( info.type == "checklist" ) {
+        //     noteBox.newCheckList(info);
+        // }
+        // else {
+        //     noteBox.newNote(info);
+        // }
     },
 
     stateChanged: function() {
