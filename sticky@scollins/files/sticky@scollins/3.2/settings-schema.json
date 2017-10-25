@@ -67,7 +67,7 @@
             "Show notes on Desktop": 0,
             "Show notes above windows": 1,
             "Hide notes": 2,
-            "Restore previous state": 3
+            "Restore previous state": -1
         }
     },
 
@@ -76,14 +76,9 @@
         "default": []
     },
 
-    "raisedState": {
+    "displayState": {
         "type": "generic",
-        "default": false
-    },
-
-    "hideState": {
-        "type": "generic",
-        "default": false
+        "default": 0
     },
 
     "templates": {

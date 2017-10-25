@@ -31,6 +31,12 @@ const EDGE_WIDTH = 10;
 const MIN_HEIGHT = 75;
 const MIN_WIDTH = 125;
 
+const DisplayState = {
+    DESKTOP: 0,
+    RAISED: 1,
+    HIDDEN: 2,
+    PINNED: 3
+}
 
 let applet, noteBox, settings, uuid;
 
@@ -53,7 +59,7 @@ function focusText(actor) {
     }
 
     actor.grab_key_focus();
-    if ( settings.getValue("raisedState") ) {
+    if ( settings.getValue("displayState") == DisplayState.RAISED ) {
         global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
     }
 }
@@ -1255,11 +1261,7 @@ NoteBox.prototype = {
         this.mouseTrackEnabled = false;
         this.isModal = false;
         this.stageEventIds = [];
-
-        settings.bindWithObject(this, "storedNotes", "storedNotes");
-        settings.bindWithObject(this, "raisedState", "raisedState");
-        settings.bindWithObject(this, "hideState", "hideState");
-        settings.bindWithObject(this, "startState", "startState");
+        this.mouseTrackTimoutId = -1;
 
         this.actor = new Clutter.Group();
         Main.uiGroup.add_actor(this.actor);
@@ -1268,15 +1270,17 @@ NoteBox.prototype = {
         this.actor.add_actor(menu.actor);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
 
-        if ( this.startState == 2 || ( this.startState == 3 && this.hideState ) ) {
+        let startState = settings.getValue("startState");
+        startState = ( startState >= 0 ) ? startState : settings.displayState;
+
+        if ( startState == DisplayState.HIDDEN ) {
             this.hideNotes();
-            this.actor.hide();
-            this.hideState = true;
+        }
+        else if ( startState == DisplayState.RAISED ) {
+            this.raiseNotes();
         }
         else {
-            if ( this.startState == 0 ) this.hideState = false;
-            if ( this.startState == 1 || ( this.startState == 3 && this.raisedState ) ) this.raiseNotes();
-            else this.lowerNotes();
+            this.lowerNotes();
         }
 
         this.dragPlaceholder = new St.Bin({ style_class: "desklet-drag-placeholder" });
@@ -1350,7 +1354,7 @@ NoteBox.prototype = {
                 break;
             }
         }
-        if ( this.notes.length == 0 && this.raisedState ) {
+        if ( this.notes.length == 0 && settings.displayState == DisplayState.RAISED ) {
             this.lowerNotes();
         }
         this.update();
@@ -1365,13 +1369,13 @@ NoteBox.prototype = {
         let notesData = [];
         for ( let i = 0; i < this.notes.length; i++ )
             notesData.push(this.notes[i].getInfo());
-        this.storedNotes = notesData;
+        settings.setValue("storedNotes", notesData);
         if ( refresh ) this.initializeNotes();
     },
 
     initializeNotes: function() {
         this.removeAll();
-        for ( let noteInfo of this.storedNotes ) {
+        for ( let noteInfo of settings.getValue("storedNotes") ) {
             let type;
             //make sure it doesn't break anything on upgrade from older version
             if ( !noteInfo.type ) type = "note";
@@ -1399,13 +1403,9 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.open();
         this.actor.raise_top();
-        if ( this.hideState ) {
-            this.actor.show();
-            this.hideState = false;
-        }
-
-        this.raisedState = true;
-        this.enableMouseTracking(false);
+        this.actor.show();
+        settings.displayState = DisplayState.RAISED;
+        this.disableMouseTrackingCheck(true);
         this.setModal();
     },
 
@@ -1413,24 +1413,19 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.close();
         this.actor.lower(global.window_group);
-        if ( this.hideState ) {
-            this.actor.show();
-            this.hideState = false;
-        }
-
-        this.raisedState = false;
+        this.actor.show();
+        settings.displayState = DisplayState.DESKTOP;
         this.unsetModal();
-        this.enableMouseTracking(true);
+        this.enableMouseTrackingCheck();
     },
 
     hideNotes: function() {
         this.unpinNotes();
         this.menu.close();
         this.actor.hide();
-        this.raisedState = false;
-        this.hideState = true;
+        settings.displayState = DisplayState.HIDDEN;
         this.unsetModal();
-        this.enableMouseTracking(false);
+        this.disableMouseTrackingCheck(false);
     },
 
     pinNotes: function() {
@@ -1442,8 +1437,9 @@ NoteBox.prototype = {
         // with it's own menu manager
         this.menuManager.addMenu(this.menu);
 
+        settings.displayState = DisplayState.PINNED;
         this.unsetModal();
-        this.enableMouseTracking(true);
+        this.disableMouseTrackingCheck(true);
         this.pinned = true;
         this.emit("pin-changed");
     },
@@ -1586,32 +1582,37 @@ NoteBox.prototype = {
     },
 
     checkMouseTracking: function() {
-        let enable = false;
-        if ( this.pinned ) enable = true;
-        else if ( !this.hideState && !this.raisedState ) {
-            let window = global.screen.get_mouse_window(null);
-            let hasMouseWindow = window && window.window_type != Meta.WindowType.DESKTOP;
-            enable = !hasMouseWindow;
-        }
+        let window = global.screen.get_mouse_window(null);
+        let windowHasMouse = window && window.window_type != Meta.WindowType.DESKTOP;
 
-        if ( enable ) for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].trackMouse();
+        if ( !windowHasMouse ) for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].trackMouse();
         else for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].untrackMouse();
 
         return true;
     },
 
-    enableMouseTracking: function(enable) {
-        if( enable && !this.mouseTrackTimoutId )
+    enableMouseTrackingCheck: function() {
+        if ( this.mouseTrackTimoutId < 0 ) {
             this.mouseTrackTimoutId = Mainloop.timeout_add(500, Lang.bind(this, this.checkMouseTracking));
-        else if ( !enable && this.mouseTrackTimoutId ) {
-            Mainloop.source_remove(this.mouseTrackTimoutId);
-            this.mouseTrackTimoutId = null;
-            for ( let i = 0; i < this.notes.length; i++ ) {
-                this.notes[i].untrackMouse();
-            }
         }
 
         this.checkMouseTracking();
+    },
+
+    disableMouseTrackingCheck: function(track) {
+        if ( this.mouseTrackTimoutId > 0 ) {
+            Mainloop.source_remove(this.mouseTrackTimoutId);
+            this.mouseTrackTimoutId = -1;
+        }
+
+        for ( let i = 0; i < this.notes.length; i++ ) {
+            if ( track ) {
+                this.notes[i].trackMouse();
+            }
+            else {
+                this.notes[i].untrackMouse();
+            }
+        }
     },
 
     getAvailableCoordinates: function() {
@@ -1680,8 +1681,7 @@ MyApplet.prototype = {
         Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
 
         settings = new Settings.AppletSettings(this, uuid, instanceId);
-        settings.bind("storedNotes", "storedNotes");
-        settings.bind("raisedState", "raisedState");
+        settings.bindWithObject(settings, "displayState", "displayState");
         settings.bind("templates", "templates");
 
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
@@ -1696,13 +1696,21 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function() {
-        if ( noteBox.pinned ) this.menu.toggle();
-        else if ( this.raisedState ) noteBox.lowerNotes();
-        else noteBox.raiseNotes();
+        if ( settings.displayState == DisplayState.PINNED ) {
+            this.menu.toggle();
+        }
+        else if ( settings.displayState == DisplayState.RAISED ) {
+            noteBox.lowerNotes();
+        }
+        else {
+            noteBox.raiseNotes();
+        }
     },
 
     on_applet_removed_from_panel: function() {
-        if ( this.raisedState ) noteBox.lowerNotes();
+        if ( settings.displayState == DisplayState.RAISED || settings.displayState == DisplayState.PINNED ) {
+            noteBox.lowerNotes();
+        }
         noteBox.destroy();
     },
 
@@ -1765,12 +1773,6 @@ MyApplet.prototype = {
         let info = menuItem.templateInfo;
         noteBox.addNote(info.type, info);
         noteBox.update();
-        // if ( info.type == "checklist" ) {
-        //     noteBox.newCheckList(info);
-        // }
-        // else {
-        //     noteBox.newNote(info);
-        // }
     },
 
     stateChanged: function() {
@@ -1783,7 +1785,7 @@ MyApplet.prototype = {
         FileDialog.save(Lang.bind(this, function(path) {
             let file = Gio.file_new_for_path(path.slice(0,-1));
             if ( !file.query_exists(null) ) file.create(Gio.FileCreateFlags.NONE, null);
-            file.replace_contents(JSON.stringify(this.storedNotes), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+            file.replace_contents(JSON.stringify(settings.getValue("storedNotes")), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
         }), params);
     },
 
@@ -1794,7 +1796,7 @@ MyApplet.prototype = {
                 let file = Gio.file_new_for_path(path.slice(0,-1));
                 if ( !file.query_exists(null) ) return;
                 let [a, contents, b] = file.load_contents(null);
-                this.storedNotes = JSON.parse(contents);
+                settings.setValue("storedNotes", JSON.parse(contents));
                 noteBox.initializeNotes();
             }), params);
         })).open();
