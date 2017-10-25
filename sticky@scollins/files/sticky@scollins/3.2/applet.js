@@ -59,9 +59,6 @@ function focusText(actor) {
     }
 
     actor.grab_key_focus();
-    if ( settings.getValue("displayState") == DisplayState.RAISED ) {
-        global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
-    }
 }
 
 function PromptDialog(message, acceptCallback, cancelCallback) {
