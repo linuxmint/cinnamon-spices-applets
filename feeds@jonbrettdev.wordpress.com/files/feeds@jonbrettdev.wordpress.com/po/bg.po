@@ -309,7 +309,7 @@ msgstr "файла е импортиран"
 
 #. manage_feeds.py:386
 msgid "Imported %d feeds"
-msgstr "Импортирани са %d фийда"
+msgstr "Импортирани са %d източника"
 
 #. manage_feeds.py:394
 msgid "Failed to import file"
