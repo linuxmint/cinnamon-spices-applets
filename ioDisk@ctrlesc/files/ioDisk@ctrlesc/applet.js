@@ -21,24 +21,6 @@ function _(str) {
 
 var hasDataSource=false;
 
-/*   The Popup Menu */
-function ioDiskMenu(launcher, orientation)
-{
-    this._init(launcher, orientation);
-}
-
-ioDiskMenu.prototype = 
-{
-    __proto__: PopupMenu.PopupMenu.prototype,
-    _init: function(launcher, orientation)
-    {
-        this._launcher=launcher;
-        PopupMenu.PopupMenu.prototype._init.call(this, launcher.actor, 0.0, orientation, 0);
-        Main.uiGroup.add_actor(this.actor);
-        this.actor.hide();
-    }
-}
-
 /* The Applet */
 function ioDisk(orientation) 
 {
@@ -53,13 +35,10 @@ ioDisk.prototype =
         Applet.TextApplet.prototype._init.call(this, orientation);
         try 
         {
-			this._applet_label.set_style('text-align: left');
-			this.actor.style = "width: " + 4 + "em";
+            this._applet_label.set_style('text-align: left');
+            this.actor.style = "width: " + 4.75 + "em";
             this._setLabel(-1);
-            
-            this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.menu = new ioDiskMenu(this, orientation);
-            this.menuManager.addMenu(this.menu); 
+            this.menu = new Applet.AppletPopupMenu(this, orientation);
             this._getioDiskEntry();           
         }
         catch (e) 
@@ -133,9 +112,10 @@ ioDisk.prototype =
         {
             try
             {
+                var menuText;
                 for(var n = 0; n < StatsObject.drives.length; n++)
                 {
-                    var menuText = StatsObject.drives[n] + ":\t" + StatsObject.metrics[n] + "%";
+                    menuText = StatsObject.drives[n] + ((StatsObject.drives[n].length < 4) ? ":\t\t" : ":\t") + StatsObject.metrics[n] + "%";
                     this.menu.addMenuItem(new PopupMenu.PopupMenuItem(menuText, {reactive:false}));
                 }
             }
@@ -166,12 +146,12 @@ ioDisk.prototype =
                 for(let i = 0; i < ioDisk_lines.length; i++) 
                 {
                     //print("i: " + i + " " + ioDisk_lines[i]);
-                    if (!bDeviceBoot && !bDeviceCurr && this._regexTest(ioDisk_lines[i], "^Device:"))
+                    if (!bDeviceBoot && !bDeviceCurr && this._regexTest(ioDisk_lines[i], "^Device"))
                     {
                         //print("DeviceBoot");
                         bDeviceBoot = true;
                     }
-                    else if (bDeviceBoot && this._regexTest(ioDisk_lines[i], "^Device:"))
+                    else if (bDeviceBoot && this._regexTest(ioDisk_lines[i], "^Device"))
                     {
                         //print("DeviceCurr");
                         bDeviceCurr = true;
@@ -181,13 +161,13 @@ ioDisk.prototype =
                     {
                         Stats.drives[devIndex] = ioDisk_lines[i].trim();
                         //print("Dev=" + Stats.drives[devIndex]);
-                        var ioRegExp = new RegExp("[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*");
+                        var ioRegExp = new RegExp("([0-9]{1,3}[,.]?[0-9]{0,2})[%]?$");
                         var iostats = new Array();
                         iostats = ioRegExp.exec(ioDisk_lines[i + 1]);
 
-                        if (iostats != null && iostats[13] != null)
+                        if (iostats != null && iostats[1] != null)
                         {
-                            Stats.metrics[devIndex] = ~~parseFloat(iostats[13]);
+                            Stats.metrics[devIndex] = ~~parseFloat(iostats[1]);
                         }
                         else
                         {
