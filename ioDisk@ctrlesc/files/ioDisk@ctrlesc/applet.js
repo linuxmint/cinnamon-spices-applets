@@ -1,13 +1,8 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
-const Clutter = imports.gi.Clutter;
-const St = imports.gi.St;
-const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
-const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const UUID = "ioDisk@ctrlesc";
 
@@ -22,26 +17,26 @@ function _(str) {
 var hasDataSource=false;
 
 /* The Applet */
-function ioDisk(orientation) 
+function ioDisk(orientation)
 {
     this._init(orientation);
 }
 
-ioDisk.prototype = 
+ioDisk.prototype =
 {
     __proto__: Applet.TextApplet.prototype,
-    _init: function(orientation) 
+    _init: function(orientation)
     {
         Applet.TextApplet.prototype._init.call(this, orientation);
-        try 
+        try
         {
             this._applet_label.set_style('text-align: left');
             this.actor.style = "width: " + 4.75 + "em";
             this._setLabel(-1);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
-            this._getioDiskEntry();           
+            this._getioDiskEntry();
         }
-        catch (e) 
+        catch (e)
         {
             print("ioDisk: init - " + e.toString());
         }
@@ -78,12 +73,12 @@ ioDisk.prototype =
                     this.set_applet_tooltip(_("Command [iostat] not found."));
                     this._noDataSource();
                 }
-            }           
+            }
             catch (e)
             {
                 print("ioDisk: DataSource error - " + e.toString());
             }
-            Mainloop.timeout_add(2000, Lang.bind(this, this._getioDiskEntry));                 
+            Mainloop.timeout_add(2000, Lang.bind(this, this._getioDiskEntry));
         }
     },
     _continuegetioDiskData: function()
@@ -143,7 +138,7 @@ ioDisk.prototype =
                 var bDeviceCurr = false;
                 var devIndex = 0;
                 //print("length: " + ioDisk_lines.length);
-                for(let i = 0; i < ioDisk_lines.length; i++) 
+                for(let i = 0; i < ioDisk_lines.length; i++)
                 {
                     //print("i: " + i + " " + ioDisk_lines[i]);
                     if (!bDeviceBoot && !bDeviceCurr && this._regexTest(ioDisk_lines[i], "^Device"))
@@ -224,13 +219,13 @@ ioDisk.prototype =
         }
         return false;
     },
-    on_applet_clicked: function(event) 
+    on_applet_clicked: function(event)
     {
         this.menu.toggle();
     }
 };
 
-function main(metadata, orientation) 
+function main(metadata, orientation)
 {
     let iosDisk = new ioDisk(orientation);
     return iosDisk;
