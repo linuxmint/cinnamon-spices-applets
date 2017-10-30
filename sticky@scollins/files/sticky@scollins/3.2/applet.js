@@ -12,6 +12,7 @@ const CheckBox = imports.ui.checkBox;
 const DND = imports.ui.dnd;
 const Main = imports.ui.main;
 const ModalDialog = imports.ui.modalDialog;
+const Panel = imports.ui.panel;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
@@ -446,7 +447,7 @@ NoteBase.prototype = {
             time: DESTROY_TIME,
             onComplete: Lang.bind(this, function() {
                 let parent = this.actor.get_parent();
-                this.parent.remove_child(this.actor);
+                parent.remove_child(this.actor);
                 this.actor.destroy();
             })
         });
@@ -1615,12 +1616,30 @@ NoteBox.prototype = {
     getAvailableCoordinates: function() {
         //determine boundaries
         let monitor = Main.layoutManager.primaryMonitor;
+        let panels = Main.panelManager.getPanelsInMonitor(Main.layoutManager.primaryIndex);
+
         let startX = PADDING + monitor.x;
         let startY = PADDING + monitor.y;
-        if ( Main.desktop_layout != Main.LAYOUT_TRADITIONAL ) startY += Main.panel.actor.height;
-        let width = monitor.width - PADDING;
-        let height = monitor.height - Main.panel.actor.height - PADDING;
-        if ( Main.desktop_layout == Main.LAYOUT_CLASSIC ) height -= Main.panel2.actor.height;
+        let width = monitor.width - (PADDING * 2);
+        let height = monitor.height - (PADDING * 2);
+
+        for ( let i = 0; i < panels.length; i++ ) {
+            let panel = panels[i];
+            // if ( panel.monitorIndex != Main.layoutManager.primaryIndex ) continue;
+            if ( panel.panelPosition == Panel.PanelLoc.top ) {
+                startY += panel.actor.height;
+            }
+            else if ( panel.panelPosition == Panel.PanelLoc.left ) {
+                startX += panel.actor.width;
+            }
+
+            if ( panel.is_vertical ) {
+                width -= panel.actor.width;
+            }
+            else {
+                height -= panel.actor.height;
+            }
+        }
 
         //calculate number of squares
         let rowHeight = settings.getValue("height") + PADDING;
