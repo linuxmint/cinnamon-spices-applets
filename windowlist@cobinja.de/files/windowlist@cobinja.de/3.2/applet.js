@@ -579,7 +579,6 @@ CobiMenuManager.prototype = {
   
   _init: function(owner) {
     PopupMenu.PopupMenuManager.prototype._init.call(this, owner);
-    global.log("this._menuStack.length: " + this._menuStack.length);
   },
   
   addMenu: function(menu, position) {
@@ -608,7 +607,6 @@ CobiMenuManager.prototype = {
   },
   
   _onMenuSourceEnter: function(menu, checkPointer) {
-    global.log("this._menuStack: " + this._menuStack);
     if (!this.grabbed || menu == this._activeMenu) {
       return false;
     }
