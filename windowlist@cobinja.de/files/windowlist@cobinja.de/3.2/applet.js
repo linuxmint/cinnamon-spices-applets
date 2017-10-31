@@ -198,7 +198,7 @@ CobiPopupMenuItem.prototype = {
     this._menu = menu;
     this._appButton = appButton;
     this._metaWindow = metaWindow;
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
     this._settings = this._menu._settings;
     
     this._box = new St.BoxLayout({vertical: true, reactive: true});
@@ -260,10 +260,10 @@ CobiPopupMenuItem.prototype = {
       this._cloneBin.add_actor(this._cloneBox);
       //this.doSize();
     }
-    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
-    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
+    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
+    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
     //this._signalManager.connect(this.actor, "button-release-event", this._onButtonReleaseEvent);
-    this._signalManager.connect(this, "activate", this._onActivate);
+    this._signalManager.connect(this, "activate", this._onActivate, this);
   },
   
   doSize: function(availWidth, availHeight) {
@@ -339,9 +339,9 @@ CobiPopupMenuItem.prototype = {
       this._closeIcon = icon;
       this._closeIcon.set_reactive(true);
       this._closeBin.set_child(this._closeIcon);
-      this._signalManager.connect(this._closeIcon, "button-release-event", this._onClose);
-      this._signalManager.connect(this._closeBin, "enter-event", this._onCloseIconEnterEvent);
-      this._signalManager.connect(this._closeBin, "leave-event", this._onCloseIconLeaveEvent);
+      this._signalManager.connect(this._closeIcon, "button-release-event", this._onClose, this);
+      this._signalManager.connect(this._closeBin, "enter-event", this._onCloseIconEnterEvent, this);
+      this._signalManager.connect(this._closeBin, "leave-event", this._onCloseIconLeaveEvent, this);
     }
     this._closeIcon.show();
   },
@@ -425,7 +425,7 @@ CobiPopupMenu.prototype = {
     PopupMenu.PopupMenu.prototype._init.call(this, appButton.actor, appButton._applet.orientation);
     this._appButton = appButton;
     this._settings = this._appButton._settings;
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
     
     global.focus_manager.add_group(this.actor);
     this.actor.reactive = true;
@@ -434,8 +434,8 @@ CobiPopupMenu.prototype = {
     
     this._updateOrientation();
     
-    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
-    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
+    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
+    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
   },
   
   _updateOrientation: function() {
@@ -579,23 +579,24 @@ CobiMenuManager.prototype = {
   
   _init: function(owner) {
     PopupMenu.PopupMenuManager.prototype._init.call(this, owner);
+    global.log("this._menuStack.length: " + this._menuStack.length);
   },
   
   addMenu: function(menu, position) {
-    this._signals.connect(menu, 'open-state-changed', this._onMenuOpenState);
-    this._signals.connect(menu, 'child-menu-added', this._onChildMenuAdded);
-    this._signals.connect(menu, 'child-menu-removed', this._onChildMenuRemoved);
-    this._signals.connect(menu, 'destroy', this._onMenuDestroy);
+    this._signals.connect(menu, 'open-state-changed', this._onMenuOpenState, this);
+    this._signals.connect(menu, 'child-menu-added', this._onChildMenuAdded, this);
+    this._signals.connect(menu, 'child-menu-removed', this._onChildMenuRemoved, this);
+    this._signals.connect(menu, 'destroy', this._onMenuDestroy, this);
 
     let source = menu.sourceActor;
 
     if (source) {
       this._signals.connect(source, 'enter-event', function() {
         this._onMenuSourceEnter(menu, true);
-      });
+      }, this);
       this._signals.connect(source, 'key-focus-in', function() {
         this._onMenuSourceEnter(menu, false);
-      });
+      }, this);
     }
 
     if (position == undefined) {
@@ -607,6 +608,7 @@ CobiMenuManager.prototype = {
   },
   
   _onMenuSourceEnter: function(menu, checkPointer) {
+    global.log("this._menuStack: " + this._menuStack);
     if (!this.grabbed || menu == this._activeMenu) {
       return false;
     }
@@ -696,7 +698,7 @@ CobiAppButton.prototype = {
     this._applet = applet;
     this._app = app;
     this._settings = this._applet._settings;
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
     
     this._pinned = false;
     
@@ -741,21 +743,21 @@ CobiAppButton.prototype = {
     this._contextMenu = new Applet.AppletPopupMenu(this, this._applet.orientation);
     this._contextMenuManager.addMenu(this._contextMenu);
     
-    this._signalManager.connect(this.actor, "button-release-event", this._onButtonRelease);
-    this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel);
-    this._signalManager.connect(this._settings, "changed::display-caption-for", this._updateLabelVisibility);
-    this._signalManager.connect(this._settings, "changed::display-number", this._updateNumber);
-    this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel);
-    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent);
-    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent);
-    this._signalManager.connect(this.actor, "motion-event", this._onMotionEvent);
-    this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState);
+    this._signalManager.connect(this.actor, "button-release-event", this._onButtonRelease, this);
+    this._signalManager.connect(this._settings, "changed::caption-type", this._updateLabel, this);
+    this._signalManager.connect(this._settings, "changed::display-caption-for", this._updateLabelVisibility, this);
+    this._signalManager.connect(this._settings, "changed::display-number", this._updateNumber, this);
+    this._signalManager.connect(this._settings, "changed::label-width", this._updateLabel, this);
+    this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
+    this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
+    this._signalManager.connect(this.actor, "motion-event", this._onMotionEvent, this);
+    this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
     
     this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
       this.actor.remove_style_pseudo_class("neutral");
       this.updateView();
-    }));
-    this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon);
+    }), this);
+    this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon, this);
     
     this._draggable = DND.makeDraggable(this.actor);
     this._draggable.inhibit = global.settings.get_boolean(PANEL_EDIT_MODE_KEY);
@@ -844,13 +846,13 @@ CobiAppButton.prototype = {
     this._updateNumber();
     this._updateLabel();
     
-    this._signalManager.connect(metaWindow, "notify::title", this._updateLabel);
-    this._signalManager.connect(metaWindow, "notify::minimized", this._onMinimized);
-    this._signalManager.connect(metaWindow, "notify::urgent", this._updateUrgentState);
-    this._signalManager.connect(metaWindow, "notify::demands-attention", this._updateUrgentState);
-    this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged);
-    this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged);
-    this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged);
+    this._signalManager.connect(metaWindow, "notify::title", this._updateLabel, this);
+    this._signalManager.connect(metaWindow, "notify::minimized", this._onMinimized, this);
+    this._signalManager.connect(metaWindow, "notify::urgent", this._updateUrgentState, this);
+    this._signalManager.connect(metaWindow, "notify::demands-attention", this._updateUrgentState, this);
+    this._signalManager.connect(metaWindow, "notify::gtk-application-id", this._onGtkApplicationChanged, this);
+    this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
+    this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
     
     this.actor.remove_style_pseudo_class("neutral");
     this._updateTooltip();
@@ -1448,7 +1450,7 @@ CobiWorkspace.prototype = {
     this._applet = applet;
     this._wsNum = wsNum;
     this._settings = this._applet._settings;
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
     
     this.actor = new St.BoxLayout();
     this.actor._delegate = this;
@@ -1473,7 +1475,7 @@ CobiWorkspace.prototype = {
       this._settings.setValue("pinned-apps", newSetting);
     }
     
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
   },
   
   onAddedToPanel: function() {
@@ -1485,10 +1487,10 @@ CobiWorkspace.prototype = {
     
     this.onOrientationChanged(this._applet.orientation);
     
-    this._signalManager.connect(this._windowTracker, "notify::focus-app", this._updateFocus);
-    this._signalManager.connect(global.settings, "changed::panel-edit-mode", this._onPanelEditModeChanged);
-    this._signalManager.connect(this._settings, "changed::pinned-apps", this._updatePinnedApps);
-    this._signalManager.connect(this._settings, "changed::show-windows-for-current-monitor", this._updateAllWindowsForMonitor);
+    this._signalManager.connect(this._windowTracker, "notify::focus-app", this._updateFocus, this);
+    this._signalManager.connect(global.settings, "changed::panel-edit-mode", this._onPanelEditModeChanged, this);
+    this._signalManager.connect(this._settings, "changed::pinned-apps", this._updatePinnedApps, this);
+    this._signalManager.connect(this._settings, "changed::show-windows-for-current-monitor", this._updateAllWindowsForMonitor, this);
   },
   
   onOrientationChanged: function(orientation) {
@@ -1979,7 +1981,7 @@ CobiWindowList.prototype = {
     this.orientation = orientation;
     
     this._settings = new CobiWindowListSettings(instanceId);
-    this._signalManager = new SignalManager.SignalManager(this);
+    this._signalManager = new SignalManager.SignalManager(null);
     
     this._workspaces = [];
     
@@ -2036,13 +2038,13 @@ CobiWindowList.prototype = {
     }
     
     this.emit("connect-signals");
-    this._signalManager.connect(global.window_manager, "switch-workspace", this._updateCurrentWorkspace);
-    this._signalManager.connect(global.screen, "workspace-added", this._onWorkspaceAdded);
-    this._signalManager.connect(global.screen, "workspace-removed", this._onWorkspaceRemoved);
-    this._signalManager.connect(global.screen, "window-added", this._windowAdded);
-    this._signalManager.connect(global.screen, "window-removed", this._windowRemoved);
-    this._signalManager.connect(global.screen, "window-monitor-changed", this.windowMonitorChanged);
-    this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor);
+    this._signalManager.connect(global.window_manager, "switch-workspace", this._updateCurrentWorkspace, this);
+    this._signalManager.connect(global.screen, "workspace-added", this._onWorkspaceAdded, this);
+    this._signalManager.connect(global.screen, "workspace-removed", this._onWorkspaceRemoved, this);
+    this._signalManager.connect(global.screen, "window-added", this._windowAdded, this);
+    this._signalManager.connect(global.screen, "window-removed", this._windowRemoved, this);
+    this._signalManager.connect(global.screen, "window-monitor-changed", this.windowMonitorChanged, this);
+    this._signalManager.connect(Main.layoutManager, "monitors-changed", this._updateMonitor, this);
   },
   
   on_applet_removed_from_panel: function() {
