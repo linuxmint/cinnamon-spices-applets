@@ -157,3 +157,19 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Tidy up comments in applet.js
           Update README.md to remove a couple of references to Ubuntu from early days.
           Usual updates to new version in applet.js, changelog and metadata.json
+3.2.2     Removed unused this.UUID = metadata.uuid 
+          Improved l10n translation support.
+          Added CHANGELOG.md to applet folder and use it instead of changelog.txt in right click menu
+          CHANGELOG.md based on recent entries to changelog.txt with last changes at the top. changelog.txt currently remains in applet folder but is not used.
+          Use symbolic links for README.md and CHANGELOG.md instead of copies from the applet folder to UUID folder for the Cinnamon Web Site to pick up
+## 3.2.3
+ * Add check that GTop library is installed using a try and catch(e) technique
+ * Remove some additional duplicate let declarations occurances which could give difficulties in Cinnamon 3.4
+ * Changes to l10n translation support to bring ahead of GTop test.
+ * Update CHANGELOG.md, README.md, settings-schema.json and metadata.json
+ * Update netusagemonitor.pot so translations can be updated. 
+## 3.2.4
+ * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox which led to CJS warnings.
+ * Improved notification when vnstat and vnstati not installed
+ * Tidy up code 
+ * Better formatting of CHANGELOG.md

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 04:19+0100\n"
+"POT-Creation-Date: 2017-09-08 22:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,137 +17,148 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:43
+#: applet.js:38
+msgid "Some Dependencies not Installed"
+msgstr ""
+
+#: applet.js:38
+msgid ""
+"You appear to be missing some of the programs or libraries required for this applet to run.\n"
+"\n"
+"Please read the help file on how to install them."
+msgstr ""
+
+#: applet.js:59
 msgid "Ok"
 msgstr ""
 
-#: applet.js:294
+#: applet.js:318
 msgid "No Interface being Monitored - right click to select"
 msgstr ""
 
-#: applet.js:420
-msgid ""
-"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat"
-" daemon is running!"
-msgstr ""
-
-#: applet.js:423
+#: applet.js:448
 msgid ""
 "NOTE: The last time the network traffic statistics were updated by vnStat is"
 " at the top right"
 msgstr ""
 
-#: applet.js:427
+#: applet.js:453
 msgid ""
 "If no Interface is Active, the last available information has been displayed"
 msgstr ""
 
-#: applet.js:439
+#: applet.js:460
+msgid ""
+"ERROR: Please make sure vnstat and vnstati are installed and that the vnstat"
+" daemon is running!"
+msgstr ""
+
+#: applet.js:473
 msgid "Cumulative Data Usage Information:"
 msgstr ""
 
-#: applet.js:466
+#: applet.js:500
 msgid "Current Connection and Interface Information"
 msgstr ""
 
-#: applet.js:478
+#: applet.js:512
 msgid "No network monitored. Please select one right-clicking the applet."
 msgstr ""
 
-#: applet.js:485
+#: applet.js:519
 msgid "Note: Alerts not enabled in Settings"
 msgstr ""
 
-#: applet.js:501
+#: applet.js:536
 msgid "Alert level (Orange):"
 msgstr ""
 
-#: applet.js:501
-#, c-format
+#: applet.js:536
+#, javascript-format
 msgid "% of Data Limit of"
 msgstr ""
 
-#: applet.js:506 applet.js:508 applet.js:514 applet.js:516 applet.js:522
+#: applet.js:541 applet.js:543 applet.js:549 applet.js:551 applet.js:557
 msgid "Cumulative Data Use"
 msgstr ""
 
-#: applet.js:506 applet.js:514 applet.js:522
+#: applet.js:541 applet.js:549 applet.js:557
 msgid "with offset of"
 msgstr ""
 
-#: applet.js:545
+#: applet.js:580
 msgid "Select a network manager interface to be monitored:"
 msgstr ""
 
-#: applet.js:558
+#: applet.js:593
 msgid "(Active)"
 msgstr ""
 
-#: applet.js:571
+#: applet.js:606
 msgid "or Select an independent interface to be monitored:"
 msgstr ""
 
-#: applet.js:575
+#: applet.js:610
 msgid "for most USB Mobile Internet Modems)"
 msgstr ""
 
-#: applet.js:587
+#: applet.js:622
 msgid "for Android Bluetooth PAN Connections)"
 msgstr ""
 
-#: applet.js:597
+#: applet.js:632
 msgid "Check for Changes in Devices and Display Options"
 msgstr ""
 
-#: applet.js:605
+#: applet.js:640
 msgid "Toggle Display from ↓ and ↑ to ⇵"
 msgstr ""
 
-#: applet.js:619 applet.js:629 applet.js:639
+#: applet.js:654 applet.js:664 applet.js:674
 msgid "Reset Cumulative Data Usage"
 msgstr ""
 
-#: applet.js:652
+#: applet.js:687
 msgid "Housekeeping and System Sub Menu"
 msgstr ""
 
-#: applet.js:655
+#: applet.js:690
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:661
+#: applet.js:696
 msgid "View the Changelog"
 msgstr ""
 
-#: applet.js:667
+#: applet.js:702
 msgid "View the Help File"
 msgstr ""
 
-#: applet.js:676
+#: applet.js:711
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr ""
 
-#: applet.js:682
+#: applet.js:717
 msgid "Open alertScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:688
+#: applet.js:723
 msgid "Open suspendScript  (Advanced Function)"
 msgstr ""
 
-#: applet.js:696
+#: applet.js:731
 msgid "Test alertScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:702
+#: applet.js:737
 msgid "Test suspendScript  (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:708
+#: applet.js:743
 msgid "Test Crisis Management Function (Advanced Test Function)"
 msgstr ""
 
-#: applet.js:777
+#: applet.js:813
 msgid ""
 "THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n"
 "\n"
@@ -156,15 +167,15 @@ msgid ""
 "or disconnect using the Network Manager Applet"
 msgstr ""
 
-#: applet.js:849
+#: applet.js:886
 msgid "Interface:"
 msgstr ""
 
-#: applet.js:849 applet.js:852
+#: applet.js:886 applet.js:889
 msgid "Downloaded:"
 msgstr ""
 
-#: applet.js:849 applet.js:852
+#: applet.js:886 applet.js:889
 msgid "Uploaded:"
 msgstr ""
 
@@ -495,9 +506,7 @@ msgid "Full path and filename of alert sound file"
 msgstr ""
 
 #. netusagemonitor@pdcurtis->settings-schema.json->alertSound->tooltip
-msgid ""
-"Only for built in alerts - hard code into scripts. Must have Sox installed. "
-"Most sound file types supported"
+msgid "Must have Sox installed. Most sound file types supported"
 msgstr ""
 
 #. netusagemonitor@pdcurtis->metadata.json->description

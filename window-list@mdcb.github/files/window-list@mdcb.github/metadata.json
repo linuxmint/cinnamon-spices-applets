@@ -1,7 +1,0 @@
-{
- "uuid": "window-list@mdcb.github",
- "name": "Window list and opacity",
- "description": "Main Cinnamon window list allowing to control the opacity level of a window with Ctr+scroll.",
- "icon": "gnome-panel-window-list",
- "role": "windowlist"
-}

@@ -43,7 +43,7 @@ PlaceInfo.prototype = {
 
   launch: function(timestamp) {
     //let time = global.get_current_time();
-    let launchContext = global.create_app_launch_context(0, -1);
+    let launchContext = global.create_app_launch_context();
     launchContext.set_timestamp(timestamp);
 
     try {

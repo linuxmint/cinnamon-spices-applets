@@ -204,7 +204,7 @@ HttpSocket.prototype = {
         } else {
             body = this._readUntilClosed(input);
         }
-        let body = String.fromCharCode.apply(null, body);
+        body = String.fromCharCode.apply(null, body);
         this._response.response.push(body);
         this._response.body = body
     },

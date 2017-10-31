@@ -1,8 +1,11 @@
 const Cinnamon = imports.gi.Cinnamon;
 
-const _ = imports.applet._;
-const Graph = imports.applet.graph;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Graph = applet.graph;
+const Modules = applet.modules;
 
 const name = "network";
 const display = _("Network");

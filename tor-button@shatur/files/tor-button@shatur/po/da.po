@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-07 14:04+0200\n"
+"PO-Revision-Date: 2017-10-07 15:53+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:14
+msgid "Tor disabled"
+msgstr "Tor er deaktiveret"
+
+#: applet.js:15
+msgid "Tor enabled"
+msgstr "Tor er aktiveret"
+
+#: applet.js:45
+msgid "Tor network"
+msgstr "Tor-netværk"
+
+#: applet.js:49
+msgid "Rebuild chain"
+msgstr "Genbyg kæde"
+
+#: applet.js:106
+msgid "Tor was closed."
+msgstr "Tor blev lukket."
+
+#: applet.js:114
+msgid "Tor was launched."
+msgstr "Tor blev opstartet."
+
+#. tor-button@shatur->settings-schema.json->location->description
+msgid "Tor location path"
+msgstr "Sti til Tors placering"
+
+#. tor-button@shatur->settings-schema.json->location->tooltip
+msgid "Enter the command to launch Tor."
+msgstr "Indtast kommandoen til at starte Tor."
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->description
+msgid "Refresh Interval for check Tor activity:"
+msgstr "Opdateringsinterval for tjek af Tor-aktivitet:"
+
+#. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
+msgid "Increase or decrease refresh interval for check Tor status."
+msgstr "Forøg eller formindsk opdateringsintervallet for tjek af Tors status."
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "Vis meddelelser"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show Tor notifications launch."
+msgstr "Vis meddelelser om opstart af Tor."
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as superuser"
+msgstr "Kør Tor som superbruger"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with gksu with '-u' parameter. Needed if you don't have "
+"permissions to launch Tor as normal user."
+msgstr ""
+"Kør Tor med gksu med parameteren \"-u\". Nødvendigt hvis du ikke har "
+"rettigheder til at køre Tor som normal bruger."
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor-knap"
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "Håndtering af Tor-netværk"

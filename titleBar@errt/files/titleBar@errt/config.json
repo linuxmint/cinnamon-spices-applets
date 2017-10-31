@@ -1,9 +1,0 @@
-{
-    "SHOW_ICON": true, 
-    "ICON_SIZE": 16,
-	"ONLY_MAX": true,
-	"HIDE_ON_NO_MAX": true,
-	"TEXT": "TITLE",
-	"TOOLTIP": "NONE",
-	"CLICK_ACTION": "MENU"
-}

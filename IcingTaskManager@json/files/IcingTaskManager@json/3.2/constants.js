@@ -37,5 +37,10 @@ const constants = {
     {id: 3, label: 'active'},
     {id: 4, label: 'outlined'},
     {id: 5, label: 'selected'},
-  ]
+  ],
+  autoStartStrDir: './.config/autostart'
 };
+
+if (typeof module !== 'undefined') {
+  module.exports.constants = constants;
+}

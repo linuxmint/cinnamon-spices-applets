@@ -1,0 +1,6 @@
+{
+    "uuid": "cinnamon-timer@jake1164",
+    "version": "1.0.0",
+    "name": "Timer with notifications",
+    "description": "A timer app with visual and auditory notifications."    
+}

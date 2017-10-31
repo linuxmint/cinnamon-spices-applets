@@ -13,16 +13,16 @@ const Tooltips = imports.ui.tooltips;
 
 const Mainloop = imports.mainloop;
 
-const _ = imports.applet._;
-const bind = imports.applet.bind;
-const dashToCamelCase = imports.applet.dashToCamelCase;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
 
-const uuid = imports.applet.uuid;
-const iconName = imports.applet.iconName;
+const _ = applet._;
+const bind = applet.bind;
+const dashToCamelCase = applet.dashToCamelCase;
+const iconName = applet.iconName;
 
-const Graph = imports.applet.graph;
-const Modules = imports.applet.modules;
-const Terminal = imports.applet.terminal;
+const Graph = applet.graph;
+const Modules = applet.modules;
 
 try {
     Modules.GTop = imports.gi.GTop;
@@ -36,14 +36,14 @@ try {
 }
 
 const ModuleImports = {
-    loadAvg: imports.applet.modules.loadAvg,
-    cpu: imports.applet.modules.cpu,
-    mem: imports.applet.modules.mem,
-    swap: imports.applet.modules.swap,
-    disk: imports.applet.modules.disk,
-    network: imports.applet.modules.network,
-    thermal: imports.applet.modules.thermal,
-    fan: imports.applet.modules.fan
+    loadavg: applet.modules.loadavg,
+    cpu: applet.modules.cpu,
+    mem: applet.modules.mem,
+    swap: applet.modules.swap,
+    disk: applet.modules.disk,
+    network: applet.modules.network,
+    thermal: applet.modules.thermal,
+    fan: applet.modules.fan
 };
 
 function SystemMonitorTooltip(){
@@ -81,14 +81,44 @@ SettingsProvider.prototype = {
         Settings.AppletSettings.prototype._init.call(this, bindObject, uuid, instanceId);
     },
 
-    bindProperty: function(key, callback, bindingDirection = Settings.BindingDirection.IN){
+    bindProperty: function(key, callback){
         let keyCamelCase = dashToCamelCase(key);
-
-        Settings.AppletSettings.prototype.bindProperty.call(this, bindingDirection, key, keyCamelCase, callback);
+        this.bind(key, keyCamelCase, callback);
     },
 
     bindProperties: function(keys, callback){
         keys.forEach(key => this.bindProperty(key, callback));
+    },
+
+    bindModule: function(module){
+        // some settings of the applet settings object will be used,
+        // for that reason the module settings object has it as prototype
+        module.settings = {
+            __proto__: this.bindObject
+        };
+
+        let keys = ["enabled"];
+
+        if(module.import.additionalSettingKeys)
+            keys = keys.concat(module.import.additionalSettingKeys);
+
+        if(module.import.HistoryGraph)
+            keys.push("appearance", "panel-graph", "panel-size");
+
+        if(module.import.PanelLabel)
+            keys.push("panel-label");
+
+        if(module.import.colorSettingKeys)
+            keys = keys.concat(module.import.colorSettingKeys.map(key => "color-" + key));
+
+        let callback = bind(module.onSettingsChanged, module);
+
+        keys.forEach(key => {
+            let keyCamelCase = dashToCamelCase(key);
+            // prepend the module name and a dash
+            key = module.import.name + "-" + key;
+            this.bindWithObject(module.settings, key, keyCamelCase, callback);
+        });
     }
 };
 
@@ -106,24 +136,26 @@ SystemMonitorApplet.prototype = {
 
         this._applet_tooltip = new SystemMonitorTooltip(this, orientation);
         this._applet_tooltip.addActor(new St.Label({text: _("System Monitor")}));
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
         this.set_applet_icon_symbolic_name(iconName);
 
         this.modules = {};
 
         this.settings = {};
-        this.settingProvider = new SettingsProvider(this.settings, instanceId);
+        this.settingsProvider = new SettingsProvider(this.settings, instanceId);
 
         // applet settings keys
-        this.settingProvider.bindProperties([
+        this.settingsProvider.bindProperties([
             "show-icon", "interval", "byte-unit", "rate-unit", "thermal-unit", "order",
             "graph-size", "graph-steps", "graph-overview", "graph-connection"
         ], bind(this.onSettingsChanged, this));
-        this.settingProvider.bindProperty("graph-type", bind(this.onGraphTypeChanged, this), Settings.BindingDirection.BIDIRECTIONAL);
+        this.settingsProvider.bindProperty("graph-type", bind(this.onGraphTypeChanged, this));
 
         // a little wrapper object to access values
         this.container = {
+            vertical: orientation == St.Side.LEFT || orientation == St.Side.RIGHT,
             modules: this.modules,
-            settings: this.settings,
+            settingsProvider: this.settingsProvider,
             time: GLib.get_monotonic_time() / 1e6
         };
 
@@ -165,7 +197,7 @@ SystemMonitorApplet.prototype = {
         let index = 1;
         for(let module in ModuleImports){
             // create the module
-            this.modules[module] = new Modules.Module(ModuleImports[module], this.container, sensorLines, instanceId);
+            this.modules[module] = new Modules.Module(ModuleImports[module], this.container, sensorLines);
             module = this.modules[module];
 
             if(module.unavailable)
@@ -205,27 +237,26 @@ SystemMonitorApplet.prototype = {
             gsmApp.activate();
         });
 
-        this.onSettingsChanged();
-        this.onGraphTypeChanged();
-
-        this.getDataLoop();
-
         this.paintTimeline = new Clutter.Timeline({duration: 100, repeat_count: -1});
         this.paintTimeline.connect("new-frame", bind(this.paint, this));
         this.paintTimeline.start();
+
+        this.getData(sensorLines);
+        this.onSettingsChanged();
+        this.onGraphTypeChanged();
     },
 
     getDataLoop: function(){
         // if a sensor module is active, first request the results of the sensor output
         if(this.modules.thermal.settings.enabled || this.modules.fan.settings.enabled)
-            Terminal.call(this.sensorPath, bind(this.getData, this));
+            Util.spawn_async(this.sensorPath, bind(this.getData, this));
         // if none is active, skip the request
         else
             this.getData();
     },
 
     getData: function(result){
-        if(result)
+        if(typeof result == "string")
             result = result.split("\n");
 
         // calculate the time (in seconds) since the last update and save the time
@@ -299,13 +330,22 @@ SystemMonitorApplet.prototype = {
         if(this.menu.isOpen) this.updateText();
     },
 
+    on_orientation_changed: function(orientation) {
+        let vertical = orientation == St.Side.LEFT || orientation == St.Side.RIGHT;
+        this.container.vertical = vertical;
+
+        for(let module in this.modules){
+            let panelWidget = this.modules[module].panelWidget;
+
+            if(panelWidget)
+                panelWidget.onSettingsChanged();
+        }
+    },
+
     on_applet_removed_from_panel: function(){
         Mainloop.source_remove(this.timeout);
         this.paintTimeline.run_dispose();
-        this.settingProvider.finalize();
-
-        for(let module in this.modules)
-            this.modules[module].finalize();
+        this.settingsProvider.finalize();
     },
 
     onSettingsChanged: function(){

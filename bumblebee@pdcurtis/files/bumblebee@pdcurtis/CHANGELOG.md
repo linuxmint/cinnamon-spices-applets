@@ -1,5 +1,15 @@
 ## Changelog for recent versions
 
+### 3.2.4
+
+Fix to allow use with early versions of Cinnamon
+
+ * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
+
+### 3.2.3
+
+ * Change to the check added in 3.2.1 that bumblebee is installed. This solves an issue reported when applet used with LMDE (issue #1136).
+
 ### 3.2.2
 
  * Allow GPU temperature to be displayed in vertical panels but shorten (by removing the degree symbol) if over 100 degrees on vertical panels.
@@ -9,7 +19,7 @@
 
  * Use CHANGELOG.md instead of changelog.txt in context menu
  * Add symbolic link from UUID folder to applet folder so it is displayed on latest spices web site.
- * Add check that bumblebee daemon is installed.
+ * Add initial check that bumblebee daemon is installed.
 
 ### 3.2.0
 

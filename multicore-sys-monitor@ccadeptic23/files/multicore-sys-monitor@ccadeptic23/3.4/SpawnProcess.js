@@ -8,17 +8,17 @@ function ProcessSpawnHandler(workingdir, childargs) {
   this._init(workingdir, childargs);
 }
 ProcessSpawnHandler.prototype = {
-
   _init: function(workingdir, childargs) {
-
     this.workingdir = workingdir;
     this.childargs = childargs;
-    this.currentMessage = "";
-    let [success, pid, stdin, stdout, stderr] =
-    GLib.spawn_async_with_pipes(this.workingdir, this.childargs,
-      null, /* envp */
+    this.currentMessage = '';
+    let [success, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
+      this.workingdir,
+      this.childargs,
+      null,
       GLib.SpawnFlags.DO_NOT_REAP_CHILD,
-      null /* child_setup */ );
+      null
+    );
 
     this._childPid = pid;
     this._stdin = new Gio.UnixOutputStream({
@@ -44,8 +44,11 @@ ProcessSpawnHandler.prototype = {
 
     this._readChildStdout();
 
-    this._childWatch = GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid,
-      Lang.bind(this, this._childFinished));
+    this._childWatch = GLib.child_watch_add(
+      GLib.PRIORITY_DEFAULT,
+      pid,
+      Lang.bind(this, this._childFinished)
+    );
 
     this.isFinished = false;
     this.debugmode = false;
@@ -95,22 +98,24 @@ ProcessSpawnHandler.prototype = {
   },
 
   _readChildStdout: function() {
-
-    this._dataStdout.read_line_async(GLib.PRIORITY_DEFAULT, null, Lang.bind(this, function(stream, result) {
-
-      let [line, len] = this._dataStdout.read_line_finish(result);
-      if (line == null) {
-        // end of file
-        this._stdout.close(null);
-        return;
-      }
-      this._childProcessLine(line.toString());
-      if (this.debugmode) {
-        print(this.currentMessage);
-      }
-      // try to read more!
-      this._readChildStdout();
-    }));
+    this._dataStdout.read_line_async(
+      GLib.PRIORITY_DEFAULT,
+      null,
+      Lang.bind(this, function(stream, result) {
+        let [line, len] = this._dataStdout.read_line_finish(result);
+        if (line == null) {
+          // end of file
+          this._stdout.close(null);
+          return;
+        }
+        this._childProcessLine(line.toString());
+        if (this.debugmode) {
+          print(this.currentMessage);
+        }
+        // try to read more!
+        this._readChildStdout();
+      })
+    );
   },
   getCurrentMessage: function() {
     return this.currentMessage;
@@ -118,4 +123,4 @@ ProcessSpawnHandler.prototype = {
   isChildFinished: function() {
     return this.isFinished;
   }
-}
+};

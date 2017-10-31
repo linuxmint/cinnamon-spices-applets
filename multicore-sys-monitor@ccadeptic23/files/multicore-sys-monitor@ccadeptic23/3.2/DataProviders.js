@@ -100,8 +100,8 @@ MultiCpuDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------CPU------- \n");
-    tooltipstr += _("cpu: ");
+    var tooltipstr = _("------- CPU -------") + "\n";
+    tooltipstr += _("CPU"); + ": "
     for (var i = 0; i < this.cpucount; i++)
       tooltipstr += Math.round(100 * this.cpulist_usage[i], 2).toString() + "% ";
     return tooltipstr + "\n";
@@ -147,11 +147,11 @@ MemDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------mem------- \n");
-    tooltipstr += _("usedup:\t") + Math.round(100 * this.memInfo[0]).toString() + "%\n";
-    tooltipstr += _("cached:\t") + Math.round(100 * this.memInfo[1]).toString() + "%\n";
-    tooltipstr += _("buffer:\t") + Math.round(100 * this.memInfo[2]).toString() + "%\n";
-    tooltipstr += _("free:\t\t") + Math.round(100 * this.memInfo[3]).toString() + "%\n";
+    var tooltipstr = _("------- Memory -------") + "\n";
+    tooltipstr += _("Usedup:") + "\t" + Math.round(100 * this.memInfo[0]).toString() + "%\n";
+    tooltipstr += _("Cached:") + "\t" + Math.round(100 * this.memInfo[1]).toString() + "%\n";
+    tooltipstr += _("Buffer:") + "\t" + Math.round(100 * this.memInfo[2]).toString() + "%\n";
+    tooltipstr += _("Free:") + "\t\t" + Math.round(100 * this.memInfo[3]).toString() + "%\n";
     return tooltipstr;
   }
 };
@@ -183,8 +183,8 @@ SwapDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------swap------- \n");
-    tooltipstr += _("swap:\t") + (Math.round(10000 * this.swapInfo[0]) / 100).toString() + "%\n";
+    var tooltipstr = _("------- Swap -------") + "\n";
+    tooltipstr += _("Swap") + ":\t" + (Math.round(10000 * this.swapInfo[0]) / 100).toString() + "%\n";
     return tooltipstr;
   }
 };
@@ -289,10 +289,10 @@ NetDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("-------net-------\n");
+    var tooltipstr = _("------- Networks -------") + "\n";
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + _(": D: ") + this.currentReadingRates[dname]["down"] + _(" U: ") + this.currentReadingRates[
-        dname]["up"] + _(" (KiB/s)\n");
+      tooltipstr += dname + ": " + _("Down:") + " " + this.currentReadingRates[dname]["down"] + " " + _("Up:") + " " + this.currentReadingRates[
+        dname]["up"] + " " + _("(KiB/s)") + "\n";
     }
     return tooltipstr;
   }
@@ -391,10 +391,10 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("------disk------- \n");
+    var tooltipstr = _("------- Disks -------") + "\n";
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + _(": R: ") + this.currentReadingRates[dname]["read"] + " " + _(": W: ") + this.currentReadingRates[
-        dname]["write"] + _(" (MiB/s)\n");
+      tooltipstr += dname + ": " + _("Read:") + " " + this.currentReadingRates[dname]["read"] + " " + ": " +_("Write:") + " " + this.currentReadingRates[
+        dname]["write"] + " " + _("(MiB/s)") + "\n";
     }
     return tooltipstr;
   },

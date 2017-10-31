@@ -83,14 +83,44 @@ msgstr ""
 msgid "Timeout Hide"
 msgstr ""
 
-msgid "Pin app to window list"
+msgid "Pin to this workspace"
 msgstr ""
 
-msgid "Unpin app from window list"
+msgid "Pin to other workspaces"
 msgstr ""
 
 msgid "Unmaximize"
 msgstr ""
 
 msgid "Close window on mouse-wheel click"
+msgstr ""
+
+msgid "If windows are grouped, all windows from an application are managed by the same button,\nif not grouped, all windows get an own button"
+msgstr ""
+
+msgid "The flashing time when a new window is opened via a button"
+msgstr ""
+
+msgid "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+
+msgid "The waiting time for the popup menu to show, when hovering a button\n(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+msgid "The waiting time for the popup menu to hide, when leaving a button\n(Not used when moving directly to a different button in the list)"
+msgstr ""
+
+msgid "Only show windows on the same monitor"
+msgstr ""
+
+msgid "If enabled, this applet instance only manages windows\nthat are displayed on the same monitor"
+msgstr ""
+
+msgid "Move to another monitor"
+msgstr ""
+
+msgid "Always"
+msgstr ""
+
+msgid "2 or more windows"
 msgstr ""

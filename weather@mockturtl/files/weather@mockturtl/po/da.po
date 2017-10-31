@@ -2,26 +2,26 @@
 # Copyright (C) 2112
 # This file is distributed under the same license as the cinnamon-weather package.
 # Michael Rasmussen <mir@datanom.net>, 2012.
-# Alan Mortensen <alanmortensen.am@gmail.com>, 2015.
+# Alan Mortensen <alanmortensen.am@gmail.com>, 2015, 2017.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.4.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2015-01-20 20:55+0100\n"
+"POT-Creation-Date: 2017-10-07 16:41+0200\n"
+"PO-Revision-Date: 2017-10-07 16:46+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: dansk <dansk@dansk-gruppen.dk>\n"
-"Language: Danish\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: applet.js:249
 msgid "..."
-msgstr "..."
+msgstr "…"
 
 #: applet.js:250
 msgid "Click to open"
@@ -53,7 +53,7 @@ msgstr "Henter ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Opdatér"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -303,13 +303,25 @@ msgstr "V"
 msgid "NW"
 msgstr "NV"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Indstillinger"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Angiv tastegenvejen til at åbne menuen"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Hent WOEID"
 
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
+
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Lodret orientering"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
@@ -335,6 +347,10 @@ msgstr "Fahrenheit"
 msgid "celsius"
 msgstr "Celsius"
 
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Vis den høje temperatur først i udsigten"
+
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
 msgstr "Oversæt"
@@ -349,11 +365,11 @@ msgstr "Vis tid i 24-timers format"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Udsigtslængde"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "dage"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
@@ -396,9 +412,8 @@ msgid "atm"
 msgstr "atm"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
-#, fuzzy
 msgid "kPa"
-msgstr "Pa"
+msgstr "kPa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "Pa"
@@ -434,23 +449,8 @@ msgstr "Symbolske ikoner"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Se din lokale vejrudsigt"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
-
-#~ msgid "Show 5-day forecast"
-#~ msgstr "Vis 5-døgnsudsigt"
-
-#~ msgid "Please wait"
-#~ msgstr "Vent venligst"
-
-#~ msgid "Today"
-#~ msgstr "I dag"
-
-#~ msgid "Tomorrow"
-#~ msgstr "I morgen"
-
-#~ msgid "Schema \"%s\" not found."
-#~ msgstr "Schema \"%s\" blev ikke fundet."
+msgstr "Vejret"

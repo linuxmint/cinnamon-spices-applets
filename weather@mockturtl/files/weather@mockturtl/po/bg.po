@@ -7,14 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2014-11-30 15:09+0200\n"
-"Last-Translator: DuMuT6p \n"
+"POT-Creation-Date: 2017-10-21 08:27+0300\n"
+"PO-Revision-Date: 2017-10-21 08:32+0300\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #: applet.js:249
 msgid "..."
@@ -42,11 +43,11 @@ msgstr "Зареждане на текущата прогноза..."
 
 #: applet.js:649
 msgid "Loading future weather ..."
-msgstr "Зареждане на прогноза ..."
+msgstr "Зареждане на прогноза..."
 
 #: applet.js:671
 msgid "Loading ..."
-msgstr "Зареждане ..."
+msgstr "Зареждане..."
 
 #: applet.js:677
 msgid "Refresh"
@@ -186,7 +187,7 @@ msgstr "Разкъсана облачност"
 
 #: applet.js:1013
 msgid "Clear"
-msgstr "Безоблачно"
+msgstr "Ясно"
 
 #: applet.js:1015
 msgid "Sunny"
@@ -238,7 +239,7 @@ msgstr "Изолирани грамотевични бури"
 
 #: applet.js:1046
 msgid "Not available"
-msgstr "Няма данни"
+msgstr "Не е налично"
 
 #: applet.js:1051
 msgid "Monday"
@@ -300,9 +301,21 @@ msgstr "З"
 msgid "NW"
 msgstr "CЗ"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Настройки на weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Задаване на клавиши за отваряне на менюто"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Получаване на идентификатор"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -321,9 +334,8 @@ msgid "Where On Earth ID"
 msgstr "Картографски идентификатор"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->description
-#, fuzzy
 msgid "Temperature unit"
-msgstr "Температурна единица:"
+msgstr "Единици за температурата"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
@@ -333,13 +345,17 @@ msgstr "Фаренхайт"
 msgid "celsius"
 msgstr "Целзий"
 
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Показвай първо максималната температура"
+
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
 msgstr "Преведи състояние"
 
 #. cinnamon-weather->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Заглавие на локацията"
+msgstr "Име на локацията"
 
 #. cinnamon-weather->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
@@ -379,17 +395,15 @@ msgstr "м/с"
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
-"Покажи състоянието на времето (например \"Вятър\", \"Безоблачно\") в панела"
+msgstr "Покажи състоянието на времето (например \"Вятър\", \"Безоблачно\") в панела"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
-#, fuzzy
 msgid "Atmospheric pressure unit"
-msgstr "Единица за атмосферно налягане"
+msgstr "Единица за атм. налягане"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
-msgstr "psi"
+msgstr "пси"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "atm"
@@ -420,7 +434,6 @@ msgid "in Hg"
 msgstr "ин Hg"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
-#, fuzzy
 msgid "Update interval"
 msgstr "Интервал на обновяване"
 

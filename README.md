@@ -50,6 +50,13 @@ At the root level:
 - screenshot.png is a screenshot of the spice in action.
 - README.md is optional and can be used to show instructions and information about the spice. It appears both in Github and on the website.
 
+## Validation
+
+To check if a spice with UUID satifies those requirements run the `validate-spice` script in this repo:
+```
+./validate-spice UUID
+```
+
 # Rights and responsibility of the author
 
 The author is in charge of the development of the spice.
@@ -107,3 +114,21 @@ The Cinnamon team can accept or reject the addition and should give justificatio
 
 See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
 
+# Translations
+
+The script `cinnamon-spices-makepot` in this repo was written to help authors to update their translation template (`.pot`) file and to help translators to test their translations.
+
+Updating a translation template `.pot`:
+```
+./cinnamon-spices-makepot UUID
+```
+
+Test your translations `.po` locally before uploading to Spices:"
+```
+./cinnamon-spices-makepot UUID --install
+```
+
+More info:
+```
+./cinnamon-spices-makepot --help
+```

@@ -21,19 +21,15 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
  * USA.
  */
+let Gda = null;
 try {
-  var Gda = imports.gi.Gda;
-} catch (e) {
-  var Gda = null;
-}
+  Gda = imports.gi.Gda;
+} catch (e) {}
 
 // External imports
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
-
-// Gjs imports
-const Lang = imports.lang;
 
 const _appSystem = Cinnamon.AppSystem.get_default();
 const _foundApps = _appSystem.lookup_desktop_wmclass('firefox');
@@ -43,13 +39,9 @@ const _firefoxDir = GLib.build_filenamev([GLib.get_home_dir(), '.mozilla',
 
 var _appInfo = null;
 var _bookmarksFile = null;
-var _bookmarksMonitor = null;
-var _callbackId1 = null;
-var _callbackId2 = null;
 var _connection = null;
 var _profileDir = null;
 var _profilesFile = null;
-var _profilesMonitor = null;
 var bookmarks = [];
 
 function _readBookmarks() {
@@ -64,7 +56,7 @@ function _readBookmarks() {
         null, Gda.ConnectionOptions.READ_ONLY);
     } catch (e) {
       global.logError('ERROR: ' + e.message);
-      return;
+      return [];
     }
   }
 
@@ -76,7 +68,7 @@ function _readBookmarks() {
       'NULL AND moz_bookmarks.type = 1');
   } catch (e) {
     global.logError('ERROR: ' + e.message);
-    return;
+    return [];
   }
 
   let nRows = result.get_n_rows();
@@ -95,14 +87,27 @@ function _readBookmarks() {
 
     bookmarks.push({
       appInfo: _appInfo,
-      name: name,
+      name: name.replace(/\//g, '|'),
       score: 0,
       uri: uri
     });
   }
+  return bookmarks;
 }
 
 function _readProfiles() {
+  if (!_foundApps || _foundApps.length === 0 || !Gda) {
+    return [];
+  }
+
+  _appInfo = _foundApps.get_app_info();
+
+  _profilesFile = Gio.File.new_for_path(GLib.build_filenamev(
+    [_firefoxDir, 'profiles.ini']));
+
+  if (!_profilesFile.query_exists(null)) {
+    return [];
+  }
   let groups;
   let nGroups;
 
@@ -125,102 +130,29 @@ function _readProfiles() {
       continue;
     }
 
-    if (profileName == 'default') {
+    if (profileName === 'default') {
       if (relative) {
         _profileDir = GLib.build_filenamev([_firefoxDir, path]);
       } else {
         _profileDir = path;
       }
 
-      if (_bookmarksMonitor) {
-        _bookmarksMonitor.cancel();
-        _bookmarksMonitor = null;
-      }
-
-      if (_connection) {
-        _connection.close();
-        _connection = null;
-      }
-
       _bookmarksFile = Gio.File.new_for_path(
         GLib.build_filenamev([_profileDir, 'places.sqlite']));
 
       if (_bookmarksFile.query_exists(null)) {
-        _bookmarksMonitor = _bookmarksFile.monitor_file(
-          Gio.FileMonitorFlags.NONE, null);
-        _callbackId2 = _bookmarksMonitor.connect(
-          'changed', Lang.bind(this, _readBookmarks));
-        _readBookmarks();
-        return;
+        return _readBookmarks();
       }
     }
   }
-
-  // If we reached this line, no default profile was found.
-  deinit();
+  return [];
 }
 
 function _reset() {
-  if (_connection) {
-    _connection.close();
-  }
-
   _appInfo = null;
   _bookmarksFile = null;
-  _bookmarksMonitor = null;
-  _callbackId1 = null;
-  _callbackId2 = null;
   _connection = null;
   _profileDir = null;
   _profilesFile = null;
-  _profilesMonitor = null;
   bookmarks = [];
-}
-
-function init() {
-  if (!Gda) {
-    return;
-  }
-
-  if (!_foundApps || _foundApps.length === 0) {
-    return;
-  }
-
-  // _appInfo = _foundApps[0].get_app_info();
-  _appInfo = _foundApps.get_app_info();
-
-  _profilesFile = Gio.File.new_for_path(GLib.build_filenamev(
-    [_firefoxDir, 'profiles.ini']));
-
-  if (!_profilesFile.query_exists(null)) {
-    _reset();
-    return;
-  }
-
-  _profilesMonitor = _profilesFile.monitor_file(
-    Gio.FileMonitorFlags.NONE, null);
-  _callbackId1 = _profilesMonitor.connect(
-    'changed', Lang.bind(this, _readProfiles));
-
-  _readProfiles();
-}
-
-function deinit() {
-  if (_bookmarksMonitor) {
-    if (_callbackId2) {
-      _bookmarksMonitor.disconnect(_callbackId2);
-    }
-
-    _bookmarksMonitor.cancel();
-  }
-
-  if (_profilesMonitor) {
-    if (_callbackId1) {
-      _profilesMonitor.disconnect(_callbackId1);
-    }
-
-    _profilesMonitor.cancel();
-  }
-
-  _reset();
 }

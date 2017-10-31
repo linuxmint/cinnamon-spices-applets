@@ -1,0 +1,57 @@
+{
+    "confirm-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Check this to place a prompt on the window when time has elapsed.",
+        "tooltip" : "Check this to place a prompt on the window when time has elapsed"
+    },
+    "message-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display a notification when time has elapsed",
+        "tooltip" : "Display a notification when time has elapsed"
+    },
+    "display-message" : {
+        "type": "entry",
+        "default": "Time up!",
+        "description": "Message displayed in notification windows",
+        "tooltip": "Message displayed in notification windows"
+    },
+    "sound-prompt-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Play a sound when time is elapsed",
+        "tooltip" : "Play a sound when time is elapsed"
+    },
+    "sound-file": {
+        "type": "entry",
+        "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
+        "dependency": "sound-prompt-enable",
+        "description": "Full path and filename of alert sound file",
+        "tooltip": "Must have Sox installed. Most sound file types supported"
+    },
+    "display-menu-enable" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Show the timer menu when time is elapsed",
+        "tooltip" : "Show the timer menu when time is elapsed"
+    },
+    "time_display_enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display remaining time in panel",
+        "tooltip" : "Display remaining time in panel"
+    },
+    "alarm_end" : {
+        "type" : "generic",
+        "default" : "",
+        "description" : "Do not change, the time the alarm is set to expire",
+        "tooltip" : "Do not change, the time the alarm is set to expire"
+    },
+    "alarm_start" : {
+        "type" : "generic",
+        "default" : "",
+        "description" : "Do not change, the time the alarm is set to expire",
+        "tooltip" : "Do not change, the time the alarm is set to expire"
+    }
+}

@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: scripts@paucapo.com\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-01 14:19+0200\n"
+"PO-Revision-Date: 2017-10-01 14:25+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:89
+msgid "Scripts"
+msgstr "Scripter"
+
+#: applet.js:124
+msgid "Open scripts folder"
+msgstr "Åbn scriptmappe"
+
+#: applet.js:129
+msgid "Update menu"
+msgstr "Opdatér menuen"
+
+#. scripts@paucapo.com->settings-schema.json->paneltitle->description
+#. scripts@paucapo.com->settings-schema.json->head_title->description
+msgid "Title"
+msgstr "Titel"
+
+#. scripts@paucapo.com->settings-schema.json->directory->description
+msgid "Scripts directory"
+msgstr "Scriptmappe"
+
+#. scripts@paucapo.com->settings-schema.json->customicon->description
+msgid "Custom icon"
+msgstr "Tilpasset ikon"
+
+#. scripts@paucapo.com->settings-schema.json->autoupdate->description
+msgid "Autoupdate. Update scripts list when the applet is opened."
+msgstr ""
+"Opdatér automatisk. Opdatér liste over scripter, når panelprogrammet åbnes."
+
+#. scripts@paucapo.com->settings-schema.json->head_icon->description
+msgid "Icon"
+msgstr "Ikon"
+
+#. scripts@paucapo.com->settings-schema.json->showtitle->description
+msgid "Show title"
+msgstr "Vis titel"
+
+#. scripts@paucapo.com->settings-schema.json->icon->description
+msgid "Icon (empty to hide the icon)"
+msgstr "Ikon (tom for ikke at vise ikonet)"
+
+#. scripts@paucapo.com->metadata.json->name
+msgid "Scripts Menu"
+msgstr "Scriptmenu"
+
+#. scripts@paucapo.com->metadata.json->description
+msgid "Menu applet for starting scripts"
+msgstr "Kør scripter fra statusfeltet"

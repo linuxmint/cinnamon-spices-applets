@@ -1,6 +1,9 @@
-const _ = imports.applet._;
-const Graph = imports.applet.graph;
-const Modules = imports.applet.modules;
+const uuid = "system-monitor@pixunil";
+const applet = imports.ui.appletManager.applets[uuid];
+
+const _ = applet._;
+const Graph = applet.graph;
+const Modules = applet.modules;
 
 const name = "mem";
 const display = _("Memory");
@@ -166,10 +169,10 @@ HistoryGraph.prototype = {
         this.begin(num, this.history.used.length, this.data.total);
 
         this.next("mem");
-        this.line(this.history.used);
+        this.line(this.history.used, true);
 
         this.setAlpha(.75);
-        this.line(this.history.cached);
+        this.line(this.history.cached, true);
 
         this.setAlpha(.5);
         this.line(this.history.buffer);

@@ -4,6 +4,6 @@
     "description": "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs",
     "website": "https://github.com/pixunil/cinnamon-applet-system-monitor",
     "icon": "utilities-system-monitor",
-    "version": "3.10",
+    "version": "3.11",
     "max-instances": 10
 }

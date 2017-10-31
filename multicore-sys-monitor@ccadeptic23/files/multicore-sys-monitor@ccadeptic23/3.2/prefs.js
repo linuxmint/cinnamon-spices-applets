@@ -537,7 +537,7 @@ Preferences.prototype = {
 
       print(JSON.stringify(this.config));
     } catch (e) {
-      print(_("Error while saving file: ") + e);
+      print(_("Error while saving file:") + " " + e);
     }
   },
 

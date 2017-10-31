@@ -1,5 +1,35 @@
 Changelog
 
+### 3.0.1
+
+  * Fixed a regression preventing the applet from working on vertical panels on Cinnamon <= 3.4.
+  * Fixed a context menu item key navigation bug.
+
+### 3.0.0
+
+  * Added an option to enable indexing of open windows in menu searches.
+  * Added search provider support along with provider toggling in the settings.
+  * Added an option to adjust the menu height.
+  * Added drag and drop reordering for favorite apps.
+  * Added optional tooltips.
+  * Added an option to activate categories on click instead of hover.
+  * Refactored state management.
+  * Fixed toggling the autoscroll option not working until a Cinnamon restart.
+  * Fixed some uncaught errors when enabling bookmarks while no sources are available.
+  * Fixed opening the menu on hover only working once.
+  * Known issues:
+    * Icons will move to the right a bit when activating the context menu on a menu item in the grid view. This is due to working around API changes that completely break the context menu positioning in Cinnamon git, and the issue shouldn't occur when Cinnamon 3.6 releases.
+
+### 2.1.0
+
+  * Improved the performance of web bookmarks loading.
+  * Fixed toggling web bookmarks not fully taking effect unless Cinnamon is restarted.
+  * Fixed the grid/list view toggle states.
+  * Fixed an error that can occur when reloading the applet.
+  * Fixed a regression with math expressions not working in the search bar.
+  * Fixed an issue with the score threshold being too high for app searches.
+  * Removed the Lodash dependency.
+
 ### 2.0.2
 
   * Fixed an error occurring when favorites change before the menu has been opened for the first time.

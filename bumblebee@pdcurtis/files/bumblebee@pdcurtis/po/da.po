@@ -7,16 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-11 19:25+0200\n"
-"PO-Revision-Date: 2017-07-11 20:24+0200\n"
+"POT-Creation-Date: 2017-09-21 20:16+0200\n"
+"PO-Revision-Date: 2017-09-21 20:19+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
+
+#: applet.js:152
+msgid "Bumblebee program not installed"
+msgstr "Programmet Bumblebee er ikke installeret"
+
+#: applet.js:152
+msgid ""
+"You appear to be missing some of the required programs for 'bumblebee' to "
+"switch graphics processors using NVIDIA Optimus."
+msgstr ""
+"Det lader til, du mangler nogle af de krævede programmer for, at \"bumblebee"
+"\" kan skifte grafikprocessor med brug af NVIDIA Optimus."
+
+#: applet.js:152
+msgid "Please read the help file."
+msgstr "Læs venligst hjælpfilen."
 
 #: applet.js:172
 msgid "Waiting for Bumblebee"
@@ -50,19 +66,19 @@ msgstr "Åbn hjælpfilen"
 msgid "Launch programs using the nVidia Graphics Processor"
 msgstr "Start programmer med brug af nVidia-grafikprocessoren"
 
-#: applet.js:358
+#: applet.js:359
 msgid "NVidia based GPU is Off"
 msgstr "nVidia-baseret GPU er slukket"
 
-#: applet.js:381
+#: applet.js:384
 msgid "NVidia based GPU is On and Core Temperature is"
 msgstr "nVidia-baseret GPU er tændt og kernetemperaturen er"
 
-#: applet.js:389
+#: applet.js:392
 msgid "Err"
 msgstr "Fejl"
 
-#: applet.js:390
+#: applet.js:393
 msgid ""
 "Bumblebee is not set up correctly - are bbswitch, bumblebee and nvidia "
 "drivers installed?"

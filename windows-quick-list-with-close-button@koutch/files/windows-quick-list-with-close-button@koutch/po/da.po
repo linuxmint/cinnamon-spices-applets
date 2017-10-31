@@ -1,0 +1,145 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-07 18:25+0200\n"
+"PO-Revision-Date: 2017-10-08 15:09+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: applet.js:57
+msgid "Yes"
+msgstr "Ja"
+
+#: applet.js:68
+msgid "No"
+msgstr "Nej"
+
+#: applet.js:167
+msgid "All windows"
+msgstr "Alle vinduer"
+
+#: applet.js:373
+msgid "Settings"
+msgstr "Indstillinger"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->description
+msgid ""
+"Quickly access windows from all workspaces with close buttons and settings"
+msgstr ""
+"Hurtig adgang til vinduer fra alle arbejdsområder (med luk-knapper og "
+"indstillinger)"
+
+#. windows-quick-list-with-close-button@koutch->metadata.json->name
+msgid "Windows Quick List with close button"
+msgstr "Vindueshurtigliste med luk-knap"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->description
+msgid "Menu icon size:"
+msgstr "Menuens ikonstørrelse:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->tooltip
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->tooltip
+msgid "From 12 to 48"
+msgstr "Fra 12 til 48"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. SIZE->units
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->units
+msgid "Pixels"
+msgstr "pixler"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->description
+msgid "Workspace's name clickable"
+msgstr "Arbejdsområdes navn er klikbart"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ACTIV-
+#. WKS-BUTTON->tooltip
+msgid "Switch between workspaces"
+msgstr "Skift mellem arbejdsområder"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-1->description
+msgid "msg1 : "
+msgstr "med1: "
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->description
+msgid "Windows group"
+msgstr "Vinduesgruppe"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP->tooltip
+msgid "Group windows by applications"
+msgstr "Gruppér vinduer efter programmer"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. WKS-CLOSE-BUTTON->description
+msgid "Display workspaces close button"
+msgstr "Vis arbejdsområders luk-knap"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->description
+msgid "Keep open"
+msgstr "Hold åben"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. MENU-ON-CLOSE->tooltip
+msgid "Stay open while closing windows "
+msgstr "Hold åben, mens vinduer lukkes "
+
+#. windows-quick-list-with-close-button@koutch->settings-
+#. schema.json->head1->description
+msgid "Set confirm message (msg1 'number of windows' msg2)"
+msgstr "Angiv bekræftelsesmeddelelse (med1 \"antal vinduer\" med2)"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. APP-GROUP-CLOSE-BUTTON->description
+msgid "Display window groups close button"
+msgstr "Vis vinduesgruppers luk-knap"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->DIALOG-
+#. MSG-2->description
+msgid "msg2 : "
+msgstr "med2: "
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->ICON-
+#. GROUP-SIZE->description
+msgid "Submenu icon size:"
+msgstr "Undermenuens ikonstørrelse:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->SHOW-
+#. CLOSE-BUTTON->description
+msgid "Display close buttons"
+msgstr "Vis luk-knapper"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->description
+msgid "Window title length:"
+msgstr "Vinduestitels længde:"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->tooltip
+msgid "From 10 to 100"
+msgstr "Fra 10 til 100"
+
+#. windows-quick-list-with-close-button@koutch->settings-schema.json->TITLE-
+#. LENGTH->units
+msgid "Characters"
+msgstr "Tegn"

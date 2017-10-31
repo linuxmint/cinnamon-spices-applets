@@ -18,7 +18,7 @@ const CinnamonSystray           = AppletDir.CinnamonSystray;
 const CSCollapseBtn             = AppletDir.CSCollapseBtn;
 const CSRemovableSwitchMenuItem = AppletDir.CSRemovableSwitchMenuItem;
 
-const _                         = imports.applet._;
+const _                         = AppletDir.__init__._;
 
 const ICON_SCALE_FACTOR         = CinnamonSystray.ICON_SCALE_FACTOR;
 const DEFAULT_ICON_SIZE         = CinnamonSystray.DEFAULT_ICON_SIZE;

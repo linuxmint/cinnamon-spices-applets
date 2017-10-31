@@ -1,6 +1,0 @@
-{
-"uuid":"acerhk-ctl@mcnielcho.org",
-"name":"AcerHK Control",
-"description":"Provides software interface to Acer hardware keys.  Requires installation of acerhk.ko.",
-"icon":"acerhk-applet"
-}

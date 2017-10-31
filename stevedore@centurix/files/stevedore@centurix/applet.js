@@ -6,7 +6,6 @@ const Settings = imports.ui.settings;
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
-const Docker = imports.applet.docker;
 const St = imports.gi.St;
 const Lang = imports.lang;
 const ModalDialog = imports.ui.modalDialog;
@@ -16,6 +15,7 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
 const UUID = "stevedore@centurix";
+const Docker = imports.ui.appletManager.applets[UUID].docker;
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 const ICON = APPLET_PATH + "/icons/icon.png";
 const ICON_MISSING = APPLET_PATH + "/icons/missing.png";

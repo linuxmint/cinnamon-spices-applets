@@ -105,7 +105,7 @@ MyApplet.prototype = {
                 if ( this.showNotifications )
                     Main.notify(_("Command Launcher") + ": " + _("Process started"), _("Command") + ": "
                                 + this.command + "\n" + _("Process Id") + ": "+ pid);
-                GLib.child_watch_add(pid, Lang.bind(this, this.onClosed), null);
+                GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, this.onClosed));
             } catch(e) {
                 Main.notify(_("Error while trying to run \"%s\"").format(this.command), e.message);
                 return;

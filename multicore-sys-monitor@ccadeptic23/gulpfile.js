@@ -5,7 +5,7 @@ var clear = require('clear');
 var exec = require('child_process').exec;
 
 gulp.task('install', (cb)=>{
-  exec('cp -arf ./files/multicore-sys-monitor@ccadeptic23/3.4/* ~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23 && cp -af ./files/multicore-sys-monitor@ccadeptic23/metadata.json ~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23 && cp -af ./icon.png ~/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23', function (err, stdout, stderr) {
+  exec('cp -arf ./files/multicore-sys-monitor@ccadeptic23/ ~/.local/share/cinnamon/applets', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
