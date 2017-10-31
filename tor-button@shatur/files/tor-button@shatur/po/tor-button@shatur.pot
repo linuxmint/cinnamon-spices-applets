@@ -15,28 +15,36 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:14
-msgid "Tor disabled"
-msgstr ""
-
-#: applet.js:15
-msgid "Tor enabled"
-msgstr ""
-
-#: applet.js:45
+#: applet.js:46
 msgid "Tor network"
 msgstr ""
 
-#: applet.js:49
+#: applet.js:50
 msgid "Rebuild chain"
 msgstr ""
 
-#: applet.js:106
-msgid "Tor was closed."
+#: applet.js:75
+msgid "Tor disabled"
 msgstr ""
 
-#: applet.js:114
-msgid "Tor was launched."
+#: applet.js:93
+msgid "Unable to parse "
+msgstr ""
+
+#: applet.js:101
+msgid "Process launched."
+msgstr ""
+
+#: applet.js:102
+msgid "Tor enabled"
+msgstr ""
+
+#: applet.js:106
+msgid "Cant start Tor."
+msgstr ""
+
+#: applet.js:126
+msgid "Process closed."
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->location->description
@@ -47,28 +55,20 @@ msgstr ""
 msgid "Enter the command to launch Tor."
 msgstr ""
 
-#. tor-button@shatur->settings-schema.json->refreshInterval->description
-msgid "Refresh Interval for check Tor activity:"
-msgstr ""
-
-#. tor-button@shatur->settings-schema.json->refreshInterval->tooltip
-msgid "Increase or decrease refresh interval for check Tor status."
-msgstr ""
-
 #. tor-button@shatur->settings-schema.json->showNotifications->description
 msgid "Show notifications"
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->showNotifications->tooltip
-msgid "Show Tor notifications launch."
+msgid "Show notifications when the Tor network is turned on/off."
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->runAsRoot->description
-msgid "Launch Tor as superuser"
+msgid "Launch Tor as tor user"
 msgstr ""
 
 #. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
-msgid "Launch Tor with gksu with '-u' parameter. Needed if you don't have permissions to launch Tor as normal user."
+msgid "Launch Tor with polkit as tor user. Needed if you don't have permissions to launch Tor as normal user."
 msgstr ""
 
 #. tor-button@shatur->metadata.json->name
