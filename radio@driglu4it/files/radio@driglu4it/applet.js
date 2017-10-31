@@ -44,6 +44,8 @@ MyApplet.prototype = {
     });
   },
   startCM: function(id) {
+    //Make sure that the MOC-Server is running before playing a stream
+    Main.Util.spawnCommandLine("mocp -S")
     Main.Util.spawnCommandLine('mocp -c -a -p ' + id);
   },
   on_applet_clicked: function(event) {
