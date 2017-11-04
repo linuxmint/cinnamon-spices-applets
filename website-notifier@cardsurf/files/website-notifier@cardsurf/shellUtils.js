@@ -138,6 +138,8 @@ BackgroundProcess.prototype = {
         this.standard_error_file_descriptor = -1;
         this.standard_output_characters = 0;
         this.standard_error_characters = 0;
+        this.standard_input_unix_stream = new Gio.UnixOutputStream({ fd: this.standard_input_file_descriptor,
+                                                                     close_fd: true });
         this.standard_output_unix_stream = new Gio.UnixInputStream({ fd: this.standard_output_file_descriptor,
                                                                      close_fd: true });
         this.standard_error_unix_stream = new Gio.UnixInputStream({ fd: this.standard_error_file_descriptor,
@@ -189,6 +191,8 @@ BackgroundProcess.prototype = {
     _init_streams: function() {
         this.standard_output_characters = 0;
         this.standard_error_characters = 0;
+        this.standard_input_unix_stream = new Gio.UnixOutputStream({ fd: this.standard_input_file_descriptor,
+                                                                     close_fd: true });
         this.standard_output_unix_stream = new Gio.UnixInputStream({ fd: this.standard_output_file_descriptor,
                                                                      close_fd: true });
         this.standard_error_unix_stream = new Gio.UnixInputStream({ fd: this.standard_error_file_descriptor,
@@ -201,10 +205,10 @@ BackgroundProcess.prototype = {
 
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
-                			 this.pid,
-                			 Lang.bind(this, this._on_exit),
-                			 null,
-                			 null);
+                        	 this.pid,
+                        	 Lang.bind(this, this._on_exit),
+                        	 null,
+                        	 null);
     },
 
     _on_exit: function(pid, status) {
@@ -305,12 +309,22 @@ BackgroundProcess.prototype = {
     },
 
     _close_streams: function(){
+        this._close_standard_input_stream();
         this._close_standard_output_streams();
         this._close_standard_error_streams();
     },
 
+    _close_standard_input_stream: function() {
+         try {
+             this.standard_input_unix_stream.close(null);
+         } catch(e) {
+             global.log("Error while closing standard input stream: " + e);
+         }
+    },
+
     _close_standard_output_streams: function() {
          try {
+             this.standard_output_cancellable.cancel();
              this.standard_output_data_stream.close(this.standard_output_cancellable);
              this.standard_output_unix_stream.close(this.standard_output_cancellable);
          } catch(e) {
@@ -320,6 +334,7 @@ BackgroundProcess.prototype = {
 
     _close_standard_error_streams: function() {
          try {
+             this.standard_error_cancellable.cancel();
              this.standard_error_data_stream.close(this.standard_error_cancellable);
              this.standard_error_unix_stream.close(this.standard_error_cancellable);
          } catch(e) {
@@ -449,14 +464,17 @@ TerminalProcess.prototype = {
     },
 
     spawn_async: function() {
-        this.spawn_async_calls++;
-        if(this.spawn_async_calls == 1 && !this.spawned_async) {
-            this.tmp_filepath = this.generate_tmp_filename();
-            let command_argv = this.get_command_argv();
-            [this.success]  = GLib.spawn_async(null, command_argv, null, this.flags, null, null);
-            this.spawned_async = true;
+        try {
+            this.spawn_async_calls++;
+            if(this.spawn_async_calls == 1 && !this.spawned_async) {
+                this.tmp_filepath = this.generate_tmp_filename();
+                let command_argv = this.get_command_argv();
+                [this.success]  = GLib.spawn_async(null, command_argv, null, this.flags, null, null);
+                this.spawned_async = true;
+            }
+        } finally {
+            this.spawn_async_calls--;
         }
-        this.spawn_async_calls--;
     },
 
     generate_tmp_filename: function() {
