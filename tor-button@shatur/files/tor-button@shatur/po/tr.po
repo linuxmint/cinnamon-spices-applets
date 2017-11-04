@@ -1,0 +1,85 @@
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-05 00:32+0300\n"
+"PO-Revision-Date: 2017-11-05 00:37+0300\n"
+"Language-Team: Linux Mint Türkiye\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:46
+msgid "Tor network"
+msgstr "Tor ağı"
+
+#: applet.js:50
+msgid "Rebuild chain"
+msgstr "Zinciri yenile"
+
+#: applet.js:75
+msgid "Tor disabled"
+msgstr "Tor pasif"
+
+#: applet.js:93
+msgid "Unable to parse "
+msgstr "Ayrıştırılamadı"
+
+#: applet.js:101
+msgid "Process launched."
+msgstr "Süreç başlatıldı."
+
+#: applet.js:102
+msgid "Tor enabled"
+msgstr "Tor etkin"
+
+#: applet.js:106
+msgid "Cant start Tor."
+msgstr "Tor başlatılamaz."
+
+#: applet.js:126
+msgid "Process closed."
+msgstr "Süreç kapatıldı."
+
+#. tor-button@shatur->settings-schema.json->location->description
+msgid "Tor location path"
+msgstr "Tor konum yolu"
+
+#. tor-button@shatur->settings-schema.json->location->tooltip
+msgid "Enter the command to launch Tor."
+msgstr "Tor başlatılması için komut girin."
+
+#. tor-button@shatur->settings-schema.json->showNotifications->description
+msgid "Show notifications"
+msgstr "Bildirimleri göster"
+
+#. tor-button@shatur->settings-schema.json->showNotifications->tooltip
+msgid "Show notifications when the Tor network is turned on/off."
+msgstr "Tor ağı açılıp/kapandığında bildirim göster."
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->description
+msgid "Launch Tor as tor user"
+msgstr "Tor'u kullanıcı olarak başlat"
+
+#. tor-button@shatur->settings-schema.json->runAsRoot->tooltip
+msgid ""
+"Launch Tor with polkit as tor user. Needed if you don't have permissions to "
+"launch Tor as normal user."
+msgstr ""
+"Tor'u kullanıcı olarak polkit ile başlat. Tor'u normal kullanıcı olarak "
+"başlatma izniniz yoksa gerekir."
+
+#. tor-button@shatur->metadata.json->name
+msgid "Tor Button"
+msgstr "Tor Düğmesi"
+
+#. tor-button@shatur->metadata.json->description
+msgid "Applet for Tor network management"
+msgstr "Tor ağ yönetimi için uygulamacık"
