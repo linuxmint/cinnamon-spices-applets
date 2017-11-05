@@ -110,3 +110,24 @@ const unref = function(object) {
     }
   }, 0);
 };
+
+const getFocusState = function (metaWindow) {
+  if (!metaWindow
+    || metaWindow.minimized) {
+    return false;
+  }
+
+  if (metaWindow.appears_focused) {
+    return true;
+  }
+
+  let transientHasFocus = false;
+  metaWindow.foreach_transient(function (transient) {
+    if (transient && transient.appears_focused) {
+      transientHasFocus = true;
+      return false;
+    }
+    return true;
+  });
+  return transientHasFocus;
+};

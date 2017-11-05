@@ -11,7 +11,7 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-let SpecialMenus, each, isEqual, setTimeout, throttle, constants, unref, store;
+let SpecialMenus, each, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   SpecialMenus = require('./specialMenus');
@@ -20,6 +20,7 @@ if (typeof require !== 'undefined') {
   isEqual = utils.isEqual;
   throttle = utils.throttle;
   setTimeout = utils.setTimeout;
+  getFocusState = utils.getFocusState;
   unref = utils.unref;
   store = require('./store');
 } else {
@@ -30,6 +31,7 @@ if (typeof require !== 'undefined') {
   isEqual = AppletDir.utils.isEqual;
   throttle = AppletDir.utils.throttle;
   setTimeout = AppletDir.utils.setTimeout;
+  getFocusState = AppletDir.utils.getFocusState;
   unref = AppletDir.utils.unref;
   store = AppletDir.store_mozjs24;
 }
@@ -335,9 +337,6 @@ AppGroup.prototype = {
       && text.length > 0
       && this._label) {
       this._label.set_text(text);
-      this.labelVisible = true;
-    } else {
-      this.labelVisible = false;
     }
   },
 
@@ -459,16 +458,19 @@ AppGroup.prototype = {
   },
   _showLabel: function () {
     this.labelVisible = true;
-    if (!this._label.text) {
+    if (this._label.text == null) {
       this._label.set_text('');
     }
     // TODO: This should be set by the theme.
     this._label.set_style('padding-right: 4px;');
-    this._label.show();
+
     Tweener.addTween(this._label, {
       width: constants.MAX_BUTTON_WIDTH, // Should probably check preferred width
       time: constants.BUTTON_BOX_ANIMATION_TIME,
-      transition: 'easeOutQuad'
+      transition: 'easeOutQuad',
+      onComplete: () => {
+        this._label.show();
+      }
     });
     return false;
   },
@@ -491,10 +493,11 @@ AppGroup.prototype = {
     if (!this._label) {
       return false;
     }
-    this.labelVisible = false;
-    if (!this._label.text) {
+
+    if (this._label.text == null) {
       this._label.set_text('');
     }
+    this.labelVisible = false;
     if (!animate) {
       this._label.width = 1;
       this._label.hide();
@@ -885,10 +888,10 @@ AppGroup.prototype = {
     if (this.groupState.willUnmount || !this.state.settings) {
       return;
     }
-    if (!metaWindow
+    if (!refresh && (!metaWindow
       || !metaWindow.title
       || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)
-      || !this.state.isHorizontal) {
+      || !this.state.isHorizontal)) {
       this.hideLabel();
       return;
     }
@@ -926,7 +929,7 @@ AppGroup.prototype = {
       return;
     }
 
-    let hasFocus = this.state.trigger('getFocusState', metaWindow);
+    let hasFocus = getFocusState(metaWindow);
     if (hasFocus) {
       this.listState.set({lastFocusedApp: this.groupState.appId});
       this.groupState.set({lastFocused: metaWindow});
@@ -1003,8 +1006,9 @@ AppGroup.prototype = {
   handleTitleDisplayChange: function() {
     each(this.groupState.metaWindows, (win) => {
       this._windowTitleChanged(win, true);
-      if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-        this._focusWindowChange(win);
+      if (this.state.settings.titleDisplay !== constants.TitleDisplay.Focused
+        || getFocusState(win)) {
+        this.showLabel();
       }
     });
   },

@@ -26,11 +26,10 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, isEqual, constants, AppList, setTimeout, unref, store;
+let each, constants, AppList, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
-  isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
   constants = require('./constants').constants;
@@ -39,34 +38,12 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
-  isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
   constants = AppletDir.constants.constants;
   AppList = AppletDir.appList.AppList;
   store = AppletDir.store_mozjs24;
 }
-
-const getFocusState = function (metaWindow) {
-  if (!metaWindow
-    || metaWindow.minimized) {
-    return false;
-  }
-
-  if (metaWindow.appears_focused) {
-    return true;
-  }
-
-  let transientHasFocus = false;
-  metaWindow.foreach_transient(function (transient) {
-    if (transient && transient.appears_focused) {
-      transientHasFocus = true;
-      return false;
-    }
-    return true;
-  });
-  return transientHasFocus;
-};
 
 function PinnedFavs () {
   this._init.apply(this, arguments);
@@ -250,7 +227,8 @@ MyApplet.prototype = {
       settings: {},
       homeDir: GLib.get_home_dir(),
       overlayPreview: null,
-      lastCycled: null
+      lastCycled: null,
+      lastTitleDisplay: null
     });
 
     // key-function pairs of actions that can be triggered from the store's callback queue. This allows ITM to avoid
@@ -265,7 +243,6 @@ MyApplet.prototype = {
       getAppSystem: () => Cinnamon.AppSystem.get_default(),
       getAppFromWMClass: (specialApps, metaWindow) => this.getAppFromWMClass(specialApps, metaWindow),
       getTracker: () => this.tracker,
-      getFocusState: (metaWindow) => getFocusState(metaWindow),
       isWindowInteresting: (metaWindow) => this.tracker.is_window_interesting(metaWindow),
       refreshCurrentAppList: () => this.refreshCurrentAppList(),
       getCurrentAppList: () => this.getCurrentAppList(),
@@ -377,6 +354,8 @@ MyApplet.prototype = {
         settingsProps[i].cb ? Lang.bind(this, settingsProps[i].cb) : null
       );
     }
+
+    this.state.set({lastTitleDisplay: this.state.settings.titleDisplay});
   },
 
   // TODO: Determine if using this as a starting point for initializing applet loadding is a good idea.
@@ -619,21 +598,18 @@ MyApplet.prototype = {
   },
 
   _updateTitleDisplay: function(titleDisplay) {
-    each(this.getCurrentAppList().appList, (appGroup) => {
-      if (appGroup.actor.width === this.state.settings.appButtonWidth
-        || titleDisplay === constants.TitleDisplay.None) {
-        this.refreshCurrentAppList();
-        if (titleDisplay !== constants.TitleDisplay.None) {
-          this._updateTitleDisplay();
-        }
-        return false;
-      }
-      if (titleDisplay === constants.TitleDisplay.Focused) {
+    if (titleDisplay === constants.TitleDisplay.None
+      || this.state.lastTitleDisplay === constants.TitleDisplay.None) {
+      this.refreshCurrentAppList();
+    }
+    let appList = this.getCurrentAppList().appList;
+    each(appList, (appGroup) => {
+      if (titleDisplay === constants.TitleDisplay.Focused)  {
         appGroup.hideLabel(false);
-      } else {
-        appGroup.handleTitleDisplayChange();
       }
+      appGroup.handleTitleDisplayChange();
     });
+    this.state.set({lastTitleDisplay: titleDisplay});
   },
 
   getAppFromWMClass: function(specialApps, metaWindow) {
