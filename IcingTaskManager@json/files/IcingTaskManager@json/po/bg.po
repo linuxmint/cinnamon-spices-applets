@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-02 21:47+0200\n"
+"POT-Creation-Date: 2017-11-05 03:29-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -33,79 +33,83 @@ msgstr "Видимо на всички работни места"
 msgid "Move to another workspace"
 msgstr "Преместване на друго работно място"
 
-#: 3.2/specialMenus.js:158
+#: 3.2/specialMenus.js:157
 msgid "Places"
 msgstr "Места"
+
+#: 3.2/specialMenus.js:193
+msgid "Bookmarks/History requires gir1.2-gda-5.0"
+msgstr ""
 
 #: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Скорошни"
 
-#: 3.2/specialMenus.js:233
+#: 3.2/specialMenus.js:232
 msgid "Preferences"
 msgstr "Предпочитания"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:235
 msgid "About..."
 msgstr "Относно..."
 
-#: 3.2/specialMenus.js:240
+#: 3.2/specialMenus.js:239
 msgid "Configure..."
 msgstr "Настройване..."
 
-#: 3.2/specialMenus.js:244
+#: 3.2/specialMenus.js:243
 msgid "Remove"
 msgstr "Премахване"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Unpin from Panel"
 msgstr "Откачане от панела"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Pin to Panel"
 msgstr "Закачи на панела"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Remove from Autostart"
 msgstr "Премахване от автоматично пусканите"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Add to Autostart"
 msgstr "Добавяне към автоматично стартиране"
 
-#: 3.2/specialMenus.js:291
+#: 3.2/specialMenus.js:289
 msgid "Create Shortcut"
 msgstr "Създаване на пряк път"
 
-#: 3.2/specialMenus.js:301
+#: 3.2/specialMenus.js:299
 msgid "Restore to full opacity"
 msgstr "Възстановяване до непрозрачно"
 
-#: 3.2/specialMenus.js:309
+#: 3.2/specialMenus.js:307
 msgid "Restore"
 msgstr "Възстановяване"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:312
 msgid "Minimize"
 msgstr "Минимизиране"
 
-#: 3.2/specialMenus.js:322
+#: 3.2/specialMenus.js:320
 msgid "Unmaximize"
 msgstr "Демаксимизиране"
 
-#: 3.2/specialMenus.js:327
+#: 3.2/specialMenus.js:325
 msgid "Maximize"
 msgstr "Максимизиране"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:335
 msgid "Close others"
 msgstr "Затвори другите"
 
-#: 3.2/specialMenus.js:347
+#: 3.2/specialMenus.js:345
 msgid "Close all"
 msgstr "Затвори всички"
 
-#: 3.2/specialMenus.js:357
+#: 3.2/specialMenus.js:355
 msgid "Close"
 msgstr "Затвори"
 
