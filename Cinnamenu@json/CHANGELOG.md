@@ -1,5 +1,9 @@
 Changelog
 
+### 3.0.2
+
+  * Fixed being unable to clear the Menu button text.
+
 ### 3.0.1
 
   * Fixed a regression preventing the applet from working on vertical panels on Cinnamon <= 3.4.
