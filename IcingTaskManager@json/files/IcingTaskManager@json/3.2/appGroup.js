@@ -166,11 +166,8 @@ AppGroup.prototype = {
     this._label = new St.Label({
       style_class: 'app-button-label',
       text: '',
-      show_on_set_parent: false
+      show_on_set_parent: this.state.settings.titleDisplay !== 1 && this.state.settings.titleDisplay !== 4
     });
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-      this.hideLabel(false);
-    }
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel',
     });
@@ -333,17 +330,14 @@ AppGroup.prototype = {
   },
 
   setText: function (text) {
-    if (text) {
-      this.labelVisible = true;
-    } else {
-      text = '';
-      this.labelVisible = false;
-    }
-    if (text && text.length > 0
-      && text.indexOf('null') === -1
+    if (text
+      && (typeof text === 'string' || text instanceof String)
       && text.length > 0
       && this._label) {
       this._label.set_text(text);
+      this.labelVisible = true;
+    } else {
+      this.labelVisible = false;
     }
   },
 
@@ -463,11 +457,7 @@ AppGroup.prototype = {
       this.progressOverlay.allocate(childBox, flags);
     }
   },
-  showLabel: function () {
-    if (!this._label
-      || !this.state.isHorizontal) {
-      return false;
-    }
+  _showLabel: function () {
     this.labelVisible = true;
     if (!this._label.text) {
       this._label.set_text('');
@@ -481,6 +471,20 @@ AppGroup.prototype = {
       transition: 'easeOutQuad'
     });
     return false;
+  },
+
+  showLabel: function() {
+    if (!this._label
+      || !this.state.isHorizontal) {
+      return false;
+    }
+
+    // Fixes 'st_widget_get_theme_node called on the widget which is not in the stage' warnings
+    if (!this._label.realized) {
+      setTimeout(() => this._showLabel(), 0);
+    } else {
+      this._showLabel();
+    }
   },
 
   hideLabel: function (animate) {
@@ -928,11 +932,11 @@ AppGroup.prototype = {
       this.groupState.set({lastFocused: metaWindow});
     }
     this._onFocusChange(hasFocus);
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
+    if (this.state.settings.titleDisplay > 1) {
       if (hasFocus) {
         this.setText(metaWindow.title);
         this.showLabel(true);
-      } else {
+      } else if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
         this.hideLabel(true);
       }
     }
