@@ -1,5 +1,12 @@
 Changelog
 
+### 6.0.4
+
+  * Added info to the Firefox context menu when gir1.2-gda-5.0 isn't installed.
+  * Fixed switching between title display settings not working properly.
+  * Fixed text flicker occurring in the "Focused" title display mode.
+  * Fixed window titles not updating when windows from a group are closed while button labels are enabled.
+
 ### 6.0.3
 
   * Fixed a regression causing the Super + Number hotkey behavior to stop working.
