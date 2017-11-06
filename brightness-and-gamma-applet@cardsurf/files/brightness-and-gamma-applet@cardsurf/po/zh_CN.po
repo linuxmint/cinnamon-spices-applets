@@ -31,7 +31,7 @@ msgid "Screen"
 msgstr "屏幕"
 
 #: applet.js:568
-msgid "Output"
+msgid "Outputs"
 msgstr "输出"
 
 #. brightness-and-gamma-applet@cardsurf->settings-

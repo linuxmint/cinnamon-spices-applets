@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IcingTaskManager@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-24 14:48-0500\n"
-"PO-Revision-Date: \n"
+"POT-Creation-Date: 2017-11-05 03:29-0600\n"
+"PO-Revision-Date: 2017-10-16 14:48-0500\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -38,79 +38,83 @@ msgstr "Synlig på alla arbetsytor"
 msgid "Move to another workspace"
 msgstr "Flytta till en annan arbetsyta"
 
-#: 3.2/specialMenus.js:158
+#: 3.2/specialMenus.js:157
 msgid "Places"
 msgstr "Platser"
+
+#: 3.2/specialMenus.js:193
+msgid "Bookmarks/History requires gir1.2-gda-5.0"
+msgstr ""
 
 #: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Tidigare"
 
-#: 3.2/specialMenus.js:233
+#: 3.2/specialMenus.js:232
 msgid "Preferences"
 msgstr "Inställningar"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:235
 msgid "About..."
 msgstr "Om..."
 
-#: 3.2/specialMenus.js:240
+#: 3.2/specialMenus.js:239
 msgid "Configure..."
 msgstr "Konfigurera..."
 
-#: 3.2/specialMenus.js:244
+#: 3.2/specialMenus.js:243
 msgid "Remove"
 msgstr "Ta bort"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Unpin from Panel"
 msgstr "Ta bort från panelen"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Pin to Panel"
 msgstr "Fäst på panelen"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Remove from Autostart"
 msgstr "Ta bort från autostart"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Add to Autostart"
 msgstr "Lägg till i autostart"
 
-#: 3.2/specialMenus.js:291
+#: 3.2/specialMenus.js:289
 msgid "Create Shortcut"
 msgstr "Skapa genväg"
 
-#: 3.2/specialMenus.js:301
+#: 3.2/specialMenus.js:299
 msgid "Restore to full opacity"
 msgstr "Återställ full opacitet"
 
-#: 3.2/specialMenus.js:309
+#: 3.2/specialMenus.js:307
 msgid "Restore"
 msgstr "Återställ"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:312
 msgid "Minimize"
 msgstr "Minimera"
 
-#: 3.2/specialMenus.js:322
+#: 3.2/specialMenus.js:320
 msgid "Unmaximize"
 msgstr "Avmaximera"
 
-#: 3.2/specialMenus.js:327
+#: 3.2/specialMenus.js:325
 msgid "Maximize"
 msgstr "Maximera"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:335
 msgid "Close others"
 msgstr "Stäng alla andra"
 
-#: 3.2/specialMenus.js:347
+#: 3.2/specialMenus.js:345
 msgid "Close all"
 msgstr "Stäng alla"
 
-#: 3.2/specialMenus.js:357
+#: 3.2/specialMenus.js:355
 msgid "Close"
 msgstr "Stäng"
 
@@ -203,12 +207,12 @@ msgstr "Visa fönsterminiatyr vid hovring över en programknapp."
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
-msgstr ""
+msgstr "Färgmarkera det senast fokuserade fönstret i en programgrupp"
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
-msgstr ""
+msgstr "Vid aktivering, indikeras det senast använda fönstret."
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -308,14 +312,14 @@ msgstr ""
 "programmets ordningsnummer."
 
 #. 3.2->settings-schema.json->thumbnail-padding->description
-#, fuzzy
 msgid "Thumbnail padding"
-msgstr "Miniatyrinställningar"
+msgstr "Miniatyrutfyllnad"
 
 #. 3.2->settings-schema.json->thumbnail-padding->tooltip
-#, fuzzy
 msgid "Controls how much space will be around the window preview thumbnails."
-msgstr "Avgör avståndet mellan ikonerna."
+msgstr ""
+"Kontrollerar hur mycket tomt utrymme som skall finnas runt "
+"fönsterminiatyrerna."
 
 #. 3.2->settings-schema.json->system-favorites->description
 msgid "Use system favorites for pinned apps"
@@ -460,11 +464,11 @@ msgid "App button width"
 msgstr "Programknappsbredd"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid ""
 "Controls the width of the application button. This option only works for "
 "horizontal panels."
-msgstr "Kontrollerar bredden på programknappar."
+msgstr ""
+"Kontrollerar bredden på programknappen. Berör endast horisontella paneler."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 2.8->settings-schema.json->show-recent->description
@@ -545,11 +549,11 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
-msgstr ""
+msgstr "Använd anpassad bredd på programknappar"
 
 #. 3.2->settings-schema.json->enable-app-button-width->tooltip
 msgid "When disabled, the app button width is determined by the panel height."
-msgstr ""
+msgstr "Vid inaktivering, avgörs knappbredden av panelens höjd."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -623,19 +627,17 @@ msgid "Open the thumbnails on click if there is more than one window open."
 msgstr "Öppna miniatyrerna vid klick, om det finns fler än ett öppet fönster."
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->description
-#, fuzzy
 msgid "Close button size"
-msgstr "Ange ikonstorlek"
+msgstr "Storlek på stängningsknappen"
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->tooltip
-#, fuzzy
 msgid "Controls how large the thumbnail close button is."
-msgstr "Låt teman kontrollera miniatyrens stängknapp"
+msgstr "Kontrollerar storleken på miniatyrens stängningsknapp."
 
 #. 3.2->settings-schema.json->icon-padding->description
 #. 2.8->settings-schema.json->icon-padding->description
 msgid "Icon padding"
-msgstr "Ikoninramning"
+msgstr "Ikonutfyllnad"
 
 #. 3.2->settings-schema.json->icon-padding->tooltip
 #. 2.8->settings-schema.json->icon-padding->tooltip
@@ -643,7 +645,7 @@ msgid ""
 "Controls how much horizontal padding is inside the app buttons. Padding is "
 "only applied to instances of this applet on horizontal panels."
 msgstr ""
-"Avgör hur mycket horisontell inramning som skall visas i programknappar. "
+"Avgör hur mycket horisontell utfyllnad som skall visas i programknappar. "
 "Inramning tillämpas bara på detta panelprogram i horisontella paneler."
 
 #. 3.2->settings-schema.json->middle-click-action->description
@@ -822,7 +824,7 @@ msgstr "Hovringsinställningar"
 
 #. 2.8->settings-schema.json->themePadding->description
 msgid "Use theme padding to center button icons"
-msgstr "Använd temats inramning för att centrera knappikoner"
+msgstr "Använd temats utfyllnad för att centrera knappikoner"
 
 #. 2.8->settings-schema.json->themePadding->tooltip
 msgid "If button icons look off-centered, toggling this may help."

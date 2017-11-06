@@ -37,6 +37,7 @@
             "Red": "red",
             "Sand": "sand",
             "Teal": "teal",
+            "Yellow": "yellow",
             "Random": "random"
         }
     },
@@ -67,7 +68,7 @@
             "Show notes on Desktop": 0,
             "Show notes above windows": 1,
             "Hide notes": 2,
-            "Restore previous state": 3
+            "Restore previous state": -1
         }
     },
 
@@ -76,13 +77,13 @@
         "default": []
     },
 
-    "raisedState": {
+    "displayState": {
         "type": "generic",
-        "default": false
+        "default": 0
     },
 
-    "hideState": {
+    "templates": {
         "type": "generic",
-        "default": false
+        "default": []
     }
 }

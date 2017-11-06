@@ -11,7 +11,7 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-let SpecialMenus, each, isEqual, setTimeout, throttle, constants, unref, store;
+let SpecialMenus, each, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   SpecialMenus = require('./specialMenus');
@@ -20,6 +20,7 @@ if (typeof require !== 'undefined') {
   isEqual = utils.isEqual;
   throttle = utils.throttle;
   setTimeout = utils.setTimeout;
+  getFocusState = utils.getFocusState;
   unref = utils.unref;
   store = require('./store');
 } else {
@@ -30,6 +31,7 @@ if (typeof require !== 'undefined') {
   isEqual = AppletDir.utils.isEqual;
   throttle = AppletDir.utils.throttle;
   setTimeout = AppletDir.utils.setTimeout;
+  getFocusState = AppletDir.utils.getFocusState;
   unref = AppletDir.utils.unref;
   store = AppletDir.store_mozjs24;
 }
@@ -166,11 +168,8 @@ AppGroup.prototype = {
     this._label = new St.Label({
       style_class: 'app-button-label',
       text: '',
-      show_on_set_parent: false
+      show_on_set_parent: this.state.settings.titleDisplay !== 1 && this.state.settings.titleDisplay !== 4
     });
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-      this.hideLabel(false);
-    }
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel',
     });
@@ -333,14 +332,8 @@ AppGroup.prototype = {
   },
 
   setText: function (text) {
-    if (text) {
-      this.labelVisible = true;
-    } else {
-      text = '';
-      this.labelVisible = false;
-    }
-    if (text && text.length > 0
-      && text.indexOf('null') === -1
+    if (text
+      && (typeof text === 'string' || text instanceof String)
       && text.length > 0
       && this._label) {
       this._label.set_text(text);
@@ -463,34 +456,48 @@ AppGroup.prototype = {
       this.progressOverlay.allocate(childBox, flags);
     }
   },
-  showLabel: function () {
-    if (!this._label
-      || !this.state.isHorizontal) {
-      return false;
-    }
+  _showLabel: function () {
     this.labelVisible = true;
-    if (!this._label.text) {
+    if (this._label.text == null) {
       this._label.set_text('');
     }
     // TODO: This should be set by the theme.
     this._label.set_style('padding-right: 4px;');
-    this._label.show();
+
     Tweener.addTween(this._label, {
       width: constants.MAX_BUTTON_WIDTH, // Should probably check preferred width
       time: constants.BUTTON_BOX_ANIMATION_TIME,
-      transition: 'easeOutQuad'
+      transition: 'easeOutQuad',
+      onComplete: () => {
+        this._label.show();
+      }
     });
     return false;
+  },
+
+  showLabel: function() {
+    if (!this._label
+      || !this.state.isHorizontal) {
+      return false;
+    }
+
+    // Fixes 'st_widget_get_theme_node called on the widget which is not in the stage' warnings
+    if (!this._label.realized) {
+      setTimeout(() => this._showLabel(), 0);
+    } else {
+      this._showLabel();
+    }
   },
 
   hideLabel: function (animate) {
     if (!this._label) {
       return false;
     }
-    this.labelVisible = false;
-    if (!this._label.text) {
+
+    if (this._label.text == null) {
       this._label.set_text('');
     }
+    this.labelVisible = false;
     if (!animate) {
       this._label.width = 1;
       this._label.hide();
@@ -881,10 +888,10 @@ AppGroup.prototype = {
     if (this.groupState.willUnmount || !this.state.settings) {
       return;
     }
-    if (!metaWindow
+    if (!refresh && (!metaWindow
       || !metaWindow.title
       || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)
-      || !this.state.isHorizontal) {
+      || !this.state.isHorizontal)) {
       this.hideLabel();
       return;
     }
@@ -922,17 +929,17 @@ AppGroup.prototype = {
       return;
     }
 
-    let hasFocus = this.state.trigger('getFocusState', metaWindow);
+    let hasFocus = getFocusState(metaWindow);
     if (hasFocus) {
       this.listState.set({lastFocusedApp: this.groupState.appId});
       this.groupState.set({lastFocused: metaWindow});
     }
     this._onFocusChange(hasFocus);
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
+    if (this.state.settings.titleDisplay > 1) {
       if (hasFocus) {
         this.setText(metaWindow.title);
         this.showLabel(true);
-      } else {
+      } else if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
         this.hideLabel(true);
       }
     }
@@ -999,8 +1006,9 @@ AppGroup.prototype = {
   handleTitleDisplayChange: function() {
     each(this.groupState.metaWindows, (win) => {
       this._windowTitleChanged(win, true);
-      if (this.state.settings.titleDisplay === constants.TitleDisplay.Focused) {
-        this._focusWindowChange(win);
+      if (this.state.settings.titleDisplay !== constants.TitleDisplay.Focused
+        || getFocusState(win)) {
+        this.showLabel();
       }
     });
   },

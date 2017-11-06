@@ -16,7 +16,7 @@ ProcessSpawnHandler.prototype = {
       this.workingdir,
       this.childargs,
       null,
-      GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+      GLib.SpawnFlags.DO_NOT_REAP_CHILD | GLib.SpawnFlags.SEARCH_PATH,
       null
     );
 
