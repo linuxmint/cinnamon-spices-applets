@@ -1,0 +1,41 @@
+{
+    "deploy" : {
+        "packages": [
+            {
+                "name": "countdown-timer",
+                "description": "deploy to applets folder",
+                "files": [
+                    "files/cinnamon-timer@jake1164/*.js",
+                    "files/cinnamon-timer@jake1164/*.json",
+                    "files/cinnamon-timer@jake1164/*.css",
+                    "files/cinnamon-timer@jake1164/*.png",
+                    "files/cinnamon-timer@jake1164/po/*.po",
+                    "files/cinnamon-timer@jake1164/po/*.pot"                    
+                ],
+                "deployOnSave": true
+            }
+        ],
+        "targets": [
+            {
+                "type":"local",
+                "name": "countdown-timer",
+                "dir": "/home/jjackson/.local/share/cinnamon/applets/cinnamon-timer@jake1164",
+                "mappings": [
+                    {
+                        "source": "files/cinnamon-timer@jake1164",
+                        "target": ""
+                    }
+                ]
+            }
+        ],
+        "openOutputOnDeploy": false,
+        "showPopupOnSuccess": false,
+        "button": {
+            "enabled": true,
+            "text": "Deploy To Folder."   ,
+            "packages": [
+                "countdown-timer"
+            ]
+        }
+    }
+}
