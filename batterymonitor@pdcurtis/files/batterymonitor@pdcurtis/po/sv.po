@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: batterymonitor@pdcurtis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-18 13:16+0200\n"
-"PO-Revision-Date: 2017-05-18 13:16+0200\n"
+"POT-Creation-Date: 2017-11-08 07:55+0100\n"
+"PO-Revision-Date: 2017-11-08 08:10+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -18,60 +18,52 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:52
+#: applet.js:55
 msgid "Ok"
 msgstr "OK"
 
-#: applet.js:100
-msgid "invalid"
-msgstr "ogiltig"
-
-#: applet.js:132
-msgid "Wait"
-msgstr "Vänta"
-
-#: applet.js:144
+#: applet.js:173
 msgid "Waiting"
 msgstr "Väntar"
 
-#: applet.js:195
+#: applet.js:239
 msgid "Open Power Statistics"
 msgstr "Öppna Strömstatistik"
 
-#: applet.js:201
+#: applet.js:245
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
-#: applet.js:210
+#: applet.js:254
 msgid "Housekeeping and System Sub Menu"
 msgstr "Underhåll och systemundermeny"
 
-#: applet.js:213
+#: applet.js:257
 msgid "View the Changelog"
 msgstr "Visa ändringslogg"
 
-#: applet.js:219
+#: applet.js:263
 msgid "Open the Help file"
 msgstr "Öppna hjälpfilen"
 
-#: applet.js:225
+#: applet.js:269
 msgid "Open stylesheet.css  (Advanced Function)"
 msgstr "Öppna stylesheet.css  (Avancerad funktion)"
 
 #. batterymonitor@pdcurtis->metadata.json->name
-#: applet.js:241
+#: applet.js:285
 msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
 msgstr "Batteriprogram med övervakning och avstängning (BAMS)"
 
-#: applet.js:246
-msgid "Note: Alerts not enabled in Settings"
-msgstr "OBS! Varningar är inte aktiverat i inställningarna"
+#: applet.js:290
+msgid "Waiting for battery information"
+msgstr "Väntar på batteriinformation"
 
-#: applet.js:310
+#: applet.js:353
 msgid "Battery Low - turn off or connect to mains"
 msgstr "Låg batterinivå - Stäng av eller anslut laddkabel"
 
-#: applet.js:315
+#: applet.js:358
 msgid ""
 "The Battery Level has fallen to your alert level\n"
 "\n"
@@ -83,35 +75,71 @@ msgstr ""
 "Anslut en strömkälla, eller avsluta ditt\n"
 "arbete och pausa eller stäng av datorn."
 
-#: applet.js:333
+#: applet.js:375
 msgid "Battery Critical will Suspend unless connected to mains"
 msgstr ""
 "Batterinivån kritisk! Datorn kommer att pausas om den inte ansluts till "
 "strömkälla."
 
-#: applet.js:356
+#: applet.js:393
 msgid "Charge:"
 msgstr "Laddning:"
 
-#: applet.js:356
+#: applet.js:393
 msgid "Alert:"
 msgstr "Varning:"
 
-#: applet.js:356
+#: applet.js:393
 msgid "Suspend:"
 msgstr "Pausa:"
 
-#: applet.js:358
+#: applet.js:451
 msgid "Percentage Charge:"
 msgstr "Laddning:"
 
-#: applet.js:358
+#: applet.js:451
 msgid "Alert at:"
 msgstr "Varna vid:"
 
-#: applet.js:358
+#: applet.js:451
 msgid "Suspend at:"
 msgstr "Pausa vid:"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr ""
+"Klassisk - Batteriprocentsats med utökade meddelanden för horisontell panel"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klassisk Plus - Klassisk med batteriikon som tillägg"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgstr "Kompakt Plus - Kompakt med batteriikon som tillägg"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Kompakt - Batteriprocentsats utan utökade meddelanden"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Endast ikon på färgad bakgrund som statusindikation"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Denna funktion erbjuder klassisk (ursprunglig) visning med valfri "
+"batteriikon och några mer kompakta visningslägen, lämpliga för vertikal "
+"panel (Kompakt, Kompakt Plus och Endast ikon)"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Visningstyp"
 
 #. batterymonitor@pdcurtis->settings-schema.json->head->description
 msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
@@ -127,15 +155,20 @@ msgstr "Uppdateringsintervall för panelvisning:"
 #. spinner->tooltip
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
-"a slow refresh if you have a slow machine"
+"a slow refresh if you have a slow machine. This also governs the flash speed."
 msgstr ""
-"Öka eller minska värdet för att ändra uppdateringsintervall. Långt intervall "
-"för långsamma maskiner."
+"Öka eller minska detta värde för uppdateringsintervallet. Använd långt "
+"uppdateringsintervall om du har en långsam maskin. Detta reglerar även "
+"visningshastigheten."
 
 #. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
 #. spinner->units
 msgid "seconds"
 msgstr "sekunder"
+
+#. batterymonitor@pdcurtis->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Visningsläge"
 
 #. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
 msgid "Percentage Battery Charge at which Alert Displayed"
@@ -152,3 +185,19 @@ msgstr ""
 #. batterymonitor@pdcurtis->metadata.json->description
 msgid "Displays Charge as Percentage and allows Alerts and Actions"
 msgstr "Visar laddning som procentsats och aktiverar varningar och åtgärder"
+
+#~ msgid "invalid"
+#~ msgstr "ogiltig"
+
+#~ msgid "Wait"
+#~ msgstr "Vänta"
+
+#~ msgid "Note: Alerts not enabled in Settings"
+#~ msgstr "OBS! Varningar är inte aktiverat i inställningarna"
+
+#~ msgid ""
+#~ "Increase or decrease this spinner value to change the refresh interval - "
+#~ "use a slow refresh if you have a slow machine"
+#~ msgstr ""
+#~ "Öka eller minska värdet för att ändra uppdateringsintervall. Långt "
+#~ "intervall för långsamma maskiner."
