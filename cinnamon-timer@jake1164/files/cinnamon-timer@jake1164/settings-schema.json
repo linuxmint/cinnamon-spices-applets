@@ -129,28 +129,29 @@
         "type" : "list",
         "description" : "Preset Times",
         "columns" : [
-            {"id": "time", "title": "Time", "type": "integer", "min": 0, "max":86400, "default": 1},
-            {"id": "unit", "title": "Unit (MUST BE 'seconds', 'minutes', 'hours')", "type" : "string", "default": "seconds"},
+            {"id": "hours", "title": "Hours", "type": "integer", "min": 0, "max":500, "default": 0},
+            {"id": "minutes", "title": "Minutes", "type": "integer", "min": 0, "max":59, "default": 0},
+            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":59, "default": 0},                        
             {"id": "label", "title": "Label", "type": "string"},
             {"id": "message", "title": "Custom Message (overrides global message)", "type": "string"}
         ],
         "default": [
-            {"time": 5, "unit": "hours"},           
-            {"time": 4, "unit": "hours"},
-            {"time": 2, "unit": "hours"},            
-            {"time": 3, "unit": "hours"},             
-            {"time": 90, "unit": "minutes"},
-            {"time": 1, "unit": "hours"},
-            {"time": 45, "unit": "minutes"},
-            {"time": 30, "unit": "minutes"},
-            {"time": 20, "unit": "minutes"},
-            {"time": 15, "unit": "minutes"},
-            {"time": 10, "unit": "minutes"},
-            {"time": 5, "unit": "minutes"},
-            {"time": 3, "unit": "minutes"},
-            {"time": 2, "unit": "minutes"},
-            {"time": 1, "unit": "minutes"},
-            {"time": 30, "unit": "seconds"}
+            {"seconds": 0, "minutes": 0, "hours": 5},           
+            {"seconds": 0, "minutes": 0, "hours": 4},
+            {"seconds": 0, "minutes": 0, "hours": 2},            
+            {"seconds": 0, "minutes": 0, "hours": 3},             
+            {"seconds": 0, "hours":1, "minutes": 30},
+            {"seconds": 0, "minutes": 0, "hours": 1},
+            {"seconds": 0, "minutes": 45, "hours": 0},
+            {"seconds": 0, "minutes": 30, "hours": 0},
+            {"seconds": 0, "minutes": 20, "hours": 0},
+            {"seconds": 0, "minutes": 15, "hours": 0},
+            {"seconds": 0, "minutes": 10, "hours": 0},
+            {"seconds": 0, "minutes": 5, "hours": 0},
+            {"seconds": 0, "minutes": 3, "hours": 0},
+            {"seconds": 0, "minutes": 2, "hours": 0},
+            {"seconds": 0, "minutes": 1, "hours": 0},
+            {"seconds": 30, "minutes": 0, "hours": 0}
         ]        
     }
 }

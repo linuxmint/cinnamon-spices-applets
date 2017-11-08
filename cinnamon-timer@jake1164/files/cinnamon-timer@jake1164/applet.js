@@ -217,20 +217,14 @@ MyApplet.prototype = {
             let preset_times = this.settings.getValue("preset_time");
             for (let i = 0; i < preset_times.length; i++) {
                 let preset = 0; // Sum up the inputs so we can find the actual hr/min/sec breakdown.
-                if (preset_times[i].unit == "seconds") {
-                    preset += preset_times[i].time;
-                } else if (preset_times[i].unit == "minutes") {
-                    preset += preset_times[i].time * 60;
-                } else if (preset_times[i].unit == "hours") {
-                    preset += preset_times[i].time * 3600;
-                } else {
-                    global.logError("Invalid unit provided: " + preset_times[i].unit);
-                }
+                preset += preset_times[i].seconds;
+                preset += preset_times[i].minutes * 60;
+                preset += preset_times[i].hours * 3600;
 
                 if (preset < 1)
                     continue;
                 let label = "";
-                if (preset_times[i].label) {
+                if (preset_times[i].label) {                    
                     label = preset_times[i].label;
                 } else {
                     let hr = Math.floor(preset / 3600);
