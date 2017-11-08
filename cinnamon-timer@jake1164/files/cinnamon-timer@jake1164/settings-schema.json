@@ -129,9 +129,9 @@
         "type" : "list",
         "description" : "Preset Times",
         "columns" : [
-            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":86400, "default": 0},
-            {"id": "minutes", "title": "Minutes", "type": "integer", "min": 0, "max":86400, "default": 0},
-            {"id": "hours", "title": "Hours", "type": "integer", "min": 0, "max":86400, "default": 0},
+            {"id": "hours", "title": "Hours", "type": "integer", "min": 0, "max":500, "default": 0},
+            {"id": "minutes", "title": "Minutes", "type": "integer", "min": 0, "max":59, "default": 0},
+            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":59, "default": 0},                        
             {"id": "label", "title": "Label", "type": "string"},
             {"id": "message", "title": "Custom Message (overrides global message)", "type": "string"}
         ],
