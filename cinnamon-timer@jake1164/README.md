@@ -15,7 +15,9 @@ All settings can be changed by right clicking on the icon and selecting configur
 ## TODO:
 
 ## Changelog
-
+* 1.1.1
+  - Changed Preset Times to include separate time spinners for hours, minutes and seconds.
+  
 * 1.1.0
   - Moved slider intervals into cinnamon-settings. 
   - Moved Preset Times into cinnamon-settings
