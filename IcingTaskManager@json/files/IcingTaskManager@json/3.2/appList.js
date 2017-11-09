@@ -234,7 +234,10 @@ AppList.prototype = {
       app = this.state.trigger('getAppFromWMClass', this.specialApps, metaWindow);
     }
     if (!app) {
-      app = this.state.trigger('getTracker').get_window_app(metaWindow);
+      let tracker = this.state.trigger('getTracker');
+      if (tracker) {
+        app = tracker.get_window_app(metaWindow);
+      }
     }
     if (!app
       || (!isFavoriteApp

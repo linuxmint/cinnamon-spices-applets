@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-24 14:48-0500\n"
+"POT-Creation-Date: 2017-11-05 03:29-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: zqq90 <zqq_90@163.com>\n"
 "Language-Team: \n"
@@ -34,79 +34,83 @@ msgstr "在所有工作区可见"
 msgid "Move to another workspace"
 msgstr "移动到另一个工作区"
 
-#: 3.2/specialMenus.js:158
+#: 3.2/specialMenus.js:157
 msgid "Places"
 msgstr "位置"
+
+#: 3.2/specialMenus.js:193
+msgid "Bookmarks/History requires gir1.2-gda-5.0"
+msgstr ""
 
 #: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "最近"
 
-#: 3.2/specialMenus.js:233
+#: 3.2/specialMenus.js:232
 msgid "Preferences"
 msgstr "首选项"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:235
 msgid "About..."
 msgstr "关于..."
 
-#: 3.2/specialMenus.js:240
+#: 3.2/specialMenus.js:239
 msgid "Configure..."
 msgstr "配置..."
 
-#: 3.2/specialMenus.js:244
+#: 3.2/specialMenus.js:243
 msgid "Remove"
 msgstr "移除"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Unpin from Panel"
 msgstr "取消固定"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Pin to Panel"
 msgstr "固定到面板"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Remove from Autostart"
 msgstr "移出自动启动"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Add to Autostart"
 msgstr "添加到自动启动"
 
-#: 3.2/specialMenus.js:291
+#: 3.2/specialMenus.js:289
 msgid "Create Shortcut"
 msgstr "创建快捷方式"
 
-#: 3.2/specialMenus.js:301
+#: 3.2/specialMenus.js:299
 msgid "Restore to full opacity"
 msgstr "恢复到完全不透明"
 
-#: 3.2/specialMenus.js:309
+#: 3.2/specialMenus.js:307
 msgid "Restore"
 msgstr "恢复"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:312
 msgid "Minimize"
 msgstr "最小化"
 
-#: 3.2/specialMenus.js:322
+#: 3.2/specialMenus.js:320
 msgid "Unmaximize"
 msgstr "取消最大化"
 
-#: 3.2/specialMenus.js:327
+#: 3.2/specialMenus.js:325
 msgid "Maximize"
 msgstr "最大化"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:335
 msgid "Close others"
 msgstr "关闭其他"
 
-#: 3.2/specialMenus.js:347
+#: 3.2/specialMenus.js:345
 msgid "Close all"
 msgstr "关闭全部"
 
-#: 3.2/specialMenus.js:357
+#: 3.2/specialMenus.js:355
 msgid "Close"
 msgstr "关闭"
 

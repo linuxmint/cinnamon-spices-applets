@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Icing Task Manager 4.3.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-24 14:48-0500\n"
+"POT-Creation-Date: 2017-11-05 03:29-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
@@ -37,8 +37,12 @@ msgstr "Vidljivo na svim radnim prostorima"
 msgid "Move to another workspace"
 msgstr "Premjesti na lijevi radni prostor"
 
-#: 3.2/specialMenus.js:158
+#: 3.2/specialMenus.js:157
 msgid "Places"
+msgstr ""
+
+#: 3.2/specialMenus.js:193
+msgid "Bookmarks/History requires gir1.2-gda-5.0"
 msgstr ""
 
 #: 3.2/specialMenus.js:213
@@ -46,72 +50,72 @@ msgstr ""
 msgid "Recent"
 msgstr "postoci"
 
-#: 3.2/specialMenus.js:233
+#: 3.2/specialMenus.js:232
 msgid "Preferences"
 msgstr ""
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:235
 msgid "About..."
 msgstr ""
 
-#: 3.2/specialMenus.js:240
+#: 3.2/specialMenus.js:239
 msgid "Configure..."
 msgstr ""
 
-#: 3.2/specialMenus.js:244
+#: 3.2/specialMenus.js:243
 msgid "Remove"
 msgstr ""
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Unpin from Panel"
 msgstr "Ukloni s panela"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Pin to Panel"
 msgstr "Pričvrsti na panel"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Remove from Autostart"
 msgstr "Ukloni iz automatskog pokretanja"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Add to Autostart"
 msgstr "Dodaj u automatsko pokretanje"
 
-#: 3.2/specialMenus.js:291
+#: 3.2/specialMenus.js:289
 msgid "Create Shortcut"
 msgstr "Stvori prečac"
 
-#: 3.2/specialMenus.js:301
+#: 3.2/specialMenus.js:299
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.2/specialMenus.js:309
+#: 3.2/specialMenus.js:307
 msgid "Restore"
 msgstr "Vrati"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:312
 msgid "Minimize"
 msgstr "Smanji"
 
-#: 3.2/specialMenus.js:322
+#: 3.2/specialMenus.js:320
 msgid "Unmaximize"
 msgstr "Prikaži u prozoru"
 
-#: 3.2/specialMenus.js:327
+#: 3.2/specialMenus.js:325
 msgid "Maximize"
 msgstr "Uvećaj"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:335
 msgid "Close others"
 msgstr ""
 
-#: 3.2/specialMenus.js:347
+#: 3.2/specialMenus.js:345
 #, fuzzy
 msgid "Close all"
 msgstr "Zatvori sve"
 
-#: 3.2/specialMenus.js:357
+#: 3.2/specialMenus.js:355
 msgid "Close"
 msgstr "Zatvori"
 

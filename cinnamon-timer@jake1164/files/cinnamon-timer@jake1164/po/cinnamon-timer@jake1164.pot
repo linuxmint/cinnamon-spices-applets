@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-13 07:52-0400\n"
+"POT-Creation-Date: 2017-11-08 12:22-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,36 +17,49 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:89 applet.js:304
+#: applet.js:189 applet.js:328
 msgid "Timer"
 msgstr ""
 
-#: applet.js:95 applet.js:222 applet.js:302
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:195 applet.js:235 applet.js:326
 msgid "Minutes"
 msgstr ""
 
-#: applet.js:221 applet.js:302
-msgid "Hours"
-msgstr ""
-
-#: applet.js:223 applet.js:302
-msgid "Seconds"
-msgstr ""
-
-#: applet.js:225
+#: applet.js:212
 msgid "Reset"
 msgstr ""
 
-#: applet.js:302
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:234 applet.js:326
+msgid "Hours"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:236 applet.js:326
+msgid "Seconds"
+msgstr ""
+
+#: applet.js:326
 msgid "and"
 msgstr ""
 
-#: applet.js:451
+#: applet.js:473
 msgid "Okay"
 msgstr ""
 
-#: applet.js:469
+#: applet.js:491
 msgid "Cinnamon Timer"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
 msgstr ""
 
 #. cinnamon-timer@jake1164->settings-
@@ -77,14 +90,41 @@ msgstr ""
 msgid "Must have Sox installed. Most sound file types supported"
 msgstr ""
 
-#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
-#. enable->description
-msgid "Check this to place a prompt on the window when time has elapsed."
+#. cinnamon-timer@jake1164->settings-schema.json->section2->title
+msgid "Sound Settings"
 msgstr ""
 
-#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
-#. enable->tooltip
-msgid "Check this to place a prompt on the window when time has elapsed"
+#. cinnamon-timer@jake1164->settings-schema.json->section3->title
+#. cinnamon-timer@jake1164->settings-schema.json->page3->title
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->page4->title
+#. cinnamon-timer@jake1164->settings-schema.json->section4->title
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->page1->title
+msgid "General"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
 msgstr ""
 
 #. cinnamon-timer@jake1164->settings-schema.json->display-menu-
@@ -99,9 +139,31 @@ msgstr ""
 msgid "Play a sound when time is elapsed"
 msgstr ""
 
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr ""
+
+#. cinnamon-timer@jake1164->settings-schema.json->message->description
+#. cinnamon-timer@jake1164->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr ""
+
 #. cinnamon-timer@jake1164->settings-schema.json->display-message->description
 #. cinnamon-timer@jake1164->settings-schema.json->display-message->tooltip
-msgid "Message displayed in notification windows"
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
 msgstr ""
 
 #. cinnamon-timer@jake1164->metadata.json->description
