@@ -215,7 +215,7 @@ MyApplet.prototype = {
 		//nova
 		this.TvItem.menu.addAction(_("Nova"), function(event) {
 		Main.Util.spawnCommandLine("killall -9 vlc");
-		Main.Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://edge1.evolink.net:2010/fls' -a 'fls/_definst_' -y 'ntv_2.stream' -p 'http://i.cdn.bg/live/' -T 'N0v4TV6#2' -b '0' - | vlc --meta-title 'NOVA' -\"");
+		Main.Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://e1.cdn.bg:2060/fls' -T 'N0v4TV6#2' -a 'fls' -f 'WIN 18,0,0,232' -W 'http://i.cdn.bg/eflash/jwNTV/player.swf' -p 'http://i.cdn.bg/live/0OmMKJ4SgY' -y 'ntv_1.stream' | vlc --meta-title 'NOVA' -\"");
 		Main.notify(_("Watching Nova"));
 		});
 		
