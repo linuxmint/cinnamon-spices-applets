@@ -1676,6 +1676,7 @@ CinnamenuApplet.prototype = {
           buttons[refItemIndex].toggleMenu();
           return true;
         }
+        this.menu.close();
       case ctrlKey:
         if (enteredItemExists) {
           buttons[refItemIndex].handleEnter();
