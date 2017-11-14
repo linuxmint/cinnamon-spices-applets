@@ -24,7 +24,7 @@ const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, isEqual, sortBy, setTimeout, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, isEqual, sortBy, setTimeout, tryFn, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -37,6 +37,7 @@ if (typeof require !== 'undefined') {
   isEqual = utils.isEqual;
   sortBy = utils.sortBy;
   setTimeout = utils.setTimeout;
+  tryFn = utils.tryFn;
   Chromium = require('./webChromium');
   Firefox = require('./webFirefox');
   GoogleChrome = require('./webGoogleChrome');
@@ -60,6 +61,7 @@ if (typeof require !== 'undefined') {
   isEqual = AppletDir.utils.isEqual;
   sortBy = AppletDir.utils.sortBy;
   setTimeout = AppletDir.utils.setTimeout;
+  tryFn = AppletDir.utils.tryFn;
   Chromium = AppletDir.webChromium;
   Firefox = AppletDir.webFirefox;
   GoogleChrome = AppletDir.webGoogleChrome;
@@ -301,7 +303,7 @@ CinnamenuApplet.prototype = {
   },
 
   setSchema: function(path, cb) {
-    let schema;
+    let schema, shouldReturn;
     let knownProviders = [];
     let enabledProviders = global.settings.get_strv('enabled-search-providers');
     let schemaFile = Gio.File.new_for_path(path + '/' + 'settings-schema.json');
@@ -309,9 +311,13 @@ CinnamenuApplet.prototype = {
     let next = () => cb(knownProviders, enabledProviders);
     let [success, json] = schemaFile.load_contents(null);
     if (!success) return next();
-    try {
+
+    tryFn(function() {
       schema = JSON.parse(json);
-    } catch (e) {
+    }, () => {
+      shouldReturn = true;
+    });
+    if (shouldReturn) {
       return next();
     }
     // Back up the schema file if it doesn't have any modifications generated from this function.
@@ -331,9 +337,13 @@ CinnamenuApplet.prototype = {
       if (!success) {
         return null;
       }
-      try {
+
+      tryFn(function() {
         file = JSON.parse(json);
-      } catch (e) {
+      }, function() {
+        shouldReturn = true;
+      });
+      if (shouldReturn) {
         return null;
       }
 
@@ -373,13 +383,16 @@ CinnamenuApplet.prototype = {
       }
       // The default title for the extensions section tells the user no extensions are found.
       schema.layout.extensionProvidersSection.title = 'Extensions';
-      try {
+      tryFn(function() {
         json = JSON.stringify(schema);
         let raw = schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
         let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
         Cinnamon.write_string_to_stream(out, json);
         out.close(null);
-      } catch (e) {
+      }, () => {
+        shouldReturn = true;
+      });
+      if (shouldReturn) {
         // Restore from the backup schema if it exists
         if (backupSchemaFile.query_exists(null)) {
           backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
@@ -471,7 +484,7 @@ CinnamenuApplet.prototype = {
   },
 
   _updateIconAndLabel: function() {
-    try {
+    tryFn(() => {
       if (this.state.settings.menuIconCustom) {
         if (this.state.settings.menuIcon === '') {
           this.set_applet_icon_name('');
@@ -491,9 +504,9 @@ CinnamenuApplet.prototype = {
       } else {
         this._set_default_menu_icon();
       }
-    } catch (e) {
+    }, () => {
       global.logWarning('Could not load icon file ' + this.state.settings.menuIcon + ' for menu button');
-    }
+    });
 
     if (this.state.settings.menuIconCustom && this.state.settings.menuIcon === '') {
       this._applet_icon_box.hide();
@@ -1702,14 +1715,14 @@ CinnamenuApplet.prototype = {
 
       if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
         let file = Gio.file_new_for_path(path);
-        try {
+        return tryFn(function() {
           Gio.app_info_launch_default_for_uri(file.get_uri(), global.create_app_launch_context());
-        } catch (e) {
+        }, function() {
           // The exception from gjs contains an error string like:
           //     Error invoking Gio.app_info_launch_default_for_uri: No application
           //     is registered as handling this file
           return false;
-        }
+        });
       } else {
         return false;
       }
@@ -1837,16 +1850,14 @@ CinnamenuApplet.prototype = {
 
     let isMathExpression = pattern.search(/([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1;
     if (isMathExpression) {
-      try {
+      tryFn(() => {
         let answer = eval(pattern);
         let answerText = pattern + ' = ' + answer;
         this.answerText.set_text(answerText);
         this.answerText.show();
         this._activeContainer.hide();
         this.state.set({expressionActive: true});
-      } catch (e) {
-        this.state.set({expressionActive: false});
-      }
+      }, () => this.state.set({expressionActive: false}));
     }
 
 

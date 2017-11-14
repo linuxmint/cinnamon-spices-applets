@@ -73,3 +73,13 @@ const unref = function(object) {
     }
   }
 };
+
+const tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      errCb(e);
+    }
+  }
+};

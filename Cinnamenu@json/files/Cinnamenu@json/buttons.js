@@ -13,7 +13,7 @@ const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
-let store, setTimeout, clearTimeout, isString, unref, _, ApplicationType;
+let store, setTimeout, clearTimeout, isString, unref, tryFn, _, ApplicationType;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   const constants = require('./constants');
@@ -22,6 +22,7 @@ if (typeof require !== 'undefined') {
   clearTimeout = utils.clearTimeout;
   isString = utils.isString;
   unref = utils.unref;
+  tryFn = utils.tryFn;
   _ = constants._;
   ApplicationType = constants.ApplicationType;
 } else {
@@ -32,6 +33,7 @@ if (typeof require !== 'undefined') {
   clearTimeout = AppletDir.utils.clearTimeout;
   isString = AppletDir.utils.isString;
   unref = AppletDir.utils.unref;
+  tryFn = AppletDir.utils.tryFn;
   _ = AppletDir.constants._;
   ApplicationType = AppletDir.constants.ApplicationType;
 }
@@ -297,12 +299,12 @@ ApplicationContextMenuItem.prototype = {
       case 'add_to_desktop':
         let file = Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename());
         let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
-        try {
+        tryFn(function() {
           file.copy(destFile, 0, null, function() {});
           FileUtils.changeModeGFile(destFile, 755);
-        } catch (e) {
+        }, function(e) {
           global.log(e);
-        }
+        });
         this.buttonState.trigger('toggleMenu');
         break;
       case 'add_to_favorites':
@@ -443,11 +445,10 @@ AppListGridButton.prototype = {
       };
       this.buttonState.appType = ApplicationType._places;
       this.file = Gio.file_new_for_path(this.buttonState.app.name);
-      try {
-        this.handler = this.file.query_default_handler(null);
-      } catch (e) {
-        this.handler = null;
-      }
+      tryFn(
+        () => this.handler = this.file.query_default_handler(null),
+        () => this.handler = null
+      );
     }
     // Don't show protocol handlers
     if (this.buttonState.app.description) {
@@ -850,11 +851,10 @@ AppListGridButton.prototype = {
       if (this.handler) {
         this.handler.launch([this.file], null);
       } else {
-        try {
-          Util.spawn(['gvfs-open', this.buttonState.app.uri])
-        } catch (e) {
-          global.logError('No handler available to open ' + this.buttonState.app.uri);
-        }
+        tryFn(
+          () => Util.spawn(['gvfs-open', this.buttonState.app.uri]),
+          () => global.logError('No handler available to open ' + this.buttonState.app.uri)
+        );
       }
     } else if (this.buttonState.appType === ApplicationType._applications) {
       this.buttonState.app.open_new_window(-1);
