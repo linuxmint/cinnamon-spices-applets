@@ -519,7 +519,7 @@ AppListGridButton.prototype = {
 
     this.buttonBox = new St.BoxLayout({
       vertical: !this.state.isListView,
-      width: 240,
+      width: 240 * global.ui_scale,
       y_expand: false
     });
     let iconDotContainer = this.state.isListView ? '_iconContainer' : 'buttonBox';

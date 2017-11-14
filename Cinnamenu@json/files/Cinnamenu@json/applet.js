@@ -1989,7 +1989,7 @@ CinnamenuApplet.prototype = {
 
   _display: function() {
     // Allow the menu to be taller for high resolution displays.
-    let menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55))
+    let menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55));
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       displayed: true,
@@ -1999,7 +1999,7 @@ CinnamenuApplet.prototype = {
     let section = new PopupMenu.PopupMenuSection();
 
     this.mainBox = new St.BoxLayout({
-      style_class: 'menu-applications-outer-box',
+      //style_class: 'menu-applications-outer-box',
       vertical: true,
       show_on_set_parent: false
     }); // menu
@@ -2017,7 +2017,7 @@ CinnamenuApplet.prototype = {
     // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
     this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({
       style_class: 'cinnamenu-categories-workspaces-wrapper',
-      style: 'max-width: 185px;',
+      //style: 'max-width: 185px;',
       vertical: true
     });
 
@@ -2067,7 +2067,8 @@ CinnamenuApplet.prototype = {
     });
     this.searchBox = new St.BoxLayout({
       style_class: 'menu-search-box',
-      height: 30
+      style: 'padding-right: 8px;',
+      height: 30 * global.ui_scale,
     });
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
@@ -2113,8 +2114,7 @@ CinnamenuApplet.prototype = {
 
     this.applicationsListBox = new St.BoxLayout({
       style_class: '',
-      vertical: true,
-      x_expand: true
+      vertical: true
     });
 
     this.applicationsGridBox = new Clutter.Actor({
@@ -2148,8 +2148,7 @@ CinnamenuApplet.prototype = {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
-      y_align: St.Align.START,
-      expand: false
+      y_align: St.Align.START
     });
     this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
     this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
@@ -2167,7 +2166,8 @@ CinnamenuApplet.prototype = {
 
     // PowerGroupBox
     this.powerGroupBox = new St.BoxLayout({
-      style_class: ''
+      style_class: '',
+      style: 'padding-left: 12px'
     });
 
     this.powerGroupButtons.push(new GroupButton(
