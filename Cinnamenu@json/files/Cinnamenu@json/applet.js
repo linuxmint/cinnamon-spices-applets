@@ -450,6 +450,10 @@ CinnamenuApplet.prototype = {
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
   },
 
+  on_panel_height_changed: function() {
+    this.refresh();
+  },
+
   launchPrivacySettings: function() {
     Util.spawnCommandLine('cinnamon-settings privacy');
   },
