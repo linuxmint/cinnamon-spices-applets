@@ -1077,22 +1077,23 @@ GroupButton.prototype = {
   },
 
   _onUserChanged: function() {
-    if (this._user.is_loaded) {
-      this.name = this._user.get_real_name();
-      if (this.icon) {
-        let iconFileName = this._user.get_icon_file();
-        let iconFile = Gio.file_new_for_path(iconFileName);
-        let icon;
-        if (iconFile.query_exists(null)) {
-          icon = new Gio.FileIcon({
-            file: iconFile
-          });
-        } else {
-          icon = this.defaultAvatar;
-        }
-        this.icon.set_gicon(icon);
-        this.icon.realize();
+    if (!this._user || !this._user.is_loaded) {
+      return;
+    }
+    this.name = this._user.get_real_name();
+    if (this.icon) {
+      let iconFileName = this._user.get_icon_file();
+      let iconFile = Gio.file_new_for_path(iconFileName);
+      let icon;
+      if (iconFile.query_exists(null)) {
+        icon = new Gio.FileIcon({
+          file: iconFile
+        });
+      } else {
+        icon = this.defaultAvatar;
       }
+      this.icon.set_gicon(icon);
+      this.icon.realize();
     }
   },
 
