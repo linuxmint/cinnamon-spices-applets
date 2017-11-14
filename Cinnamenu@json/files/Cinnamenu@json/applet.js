@@ -1778,7 +1778,7 @@ CinnamenuApplet.prototype = {
   },
 
   _onSearchTextChanged: function() {
-    let searchText = this.searchEntry.get_text();
+    let searchText = this.searchEntryText.get_text();
 
     for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
       if (searchText.length > 0) {
@@ -1820,12 +1820,11 @@ CinnamenuApplet.prototype = {
       return;
     }
 
-    this._searchTimeoutId = Mainloop.timeout_add(0, Lang.bind(this, this._doSearch));
+    this._searchTimeoutId = Mainloop.timeout_add(0, Lang.bind(this, this._doSearch, searchText));
   },
 
-  _doSearch: function() {
+  _doSearch: function(text) {
     this._searchTimeoutId = 0;
-    let text = this.searchEntryText.get_text();
     if (text.length === 0) {
       return;
     }
@@ -1884,6 +1883,15 @@ CinnamenuApplet.prototype = {
       sortBy(results, 'score', 'desc');
       this._clearApplicationsBox();
       this._displayApplications(results);
+
+      // Highlight the first search result
+      setTimeout(() => {
+        let buttons = this.getActiveButtons();
+        if (buttons.length === 0) {
+          return;
+        }
+        buttons[0].handleEnter();
+      }, 0);
     };
 
     if (this.state.settings.enableSearchProviders
