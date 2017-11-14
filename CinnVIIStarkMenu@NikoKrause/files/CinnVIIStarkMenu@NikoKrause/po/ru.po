@@ -22,7 +22,7 @@ msgstr ""
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
-msgstr "Пожалуйста, укажите ваш пароль для удаление этого приложения"
+msgstr "Пожалуйста, укажите ваш пароль для удаления этого приложения"
 
 #: 3.2/applet.js:258 2.6/applet.js:259
 msgid "Add to panel"
@@ -46,7 +46,7 @@ msgstr "Удалить"
 
 #: 3.2/applet.js:276 2.6/applet.js:277
 msgid "Run with NVIDIA GPU"
-msgstr "Запустить вместе с графическим процессором NVIDIA"
+msgstr "Запустить используя NVIDIA GPU"
 
 #: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
 msgid "No description available"
@@ -419,7 +419,7 @@ msgstr "Открывает меню, когда указатель мышки н
 #. 2.6->settings-schema.json->quicklauncher-3-command->description
 #. 2.6->settings-schema.json->quicklauncher-18-command->description
 msgid "Command to launch"
-msgstr "Команда запуска"
+msgstr "Выполнить команду"
 
 #. 3.2->settings-schema.json->quicklauncher-6-command->tooltip
 #. 3.2->settings-schema.json->quicklauncher-10-command->tooltip
@@ -442,12 +442,12 @@ msgstr "Команда запуска"
 #. 2.6->settings-schema.json->quicklauncher-1-command->tooltip
 #. 2.6->settings-schema.json->quicklauncher-3-command->tooltip
 msgid "Enter command for the quicklauncher"
-msgstr "Введите команду запуска"
+msgstr "Введите команду для быстрого запуска"
 
 #. 3.2->settings-schema.json->all-programs-label->description
 #. 2.6->settings-schema.json->all-programs-label->description
 msgid "'All Programs'-Button label"
-msgstr "»Все программы« текст"
+msgstr "Текст кнопки «Все программы»"
 
 #. 3.2->settings-schema.json->all-programs-label->tooltip
 #. 2.6->settings-schema.json->all-programs-label->tooltip
@@ -461,7 +461,7 @@ msgstr "Структура и содержание"
 #. 3.2->settings-schema.json->sidebar-layout->title
 #. 2.6->settings-schema.json->head-sidebar-layout->description
 msgid "Sidebar Layout"
-msgstr "Расположение боковой панели"
+msgstr "Структура боковой панели"
 
 #. 3.2->settings-schema.json->quicklauncher->title
 msgid "Quicklauncher"
@@ -479,7 +479,7 @@ msgstr "Произвольная панель быстрого запуска"
 
 #. 3.2->settings-schema.json->quitmenu-layout->title
 msgid "Quit Menu Layout"
-msgstr "Расположение меню выхода из системы"
+msgstr "Структура меню выхода из системы"
 
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
@@ -540,7 +540,7 @@ msgstr "Панель"
 #. 2.6->settings-schema.json->quicklauncher-9-icon->description
 #. 2.6->settings-schema.json->quicklauncher-10-icon->description
 msgid "Quicklauncher icon"
-msgstr "Пиктограмма панели быстрого запуска"
+msgstr "Значок панели быстрого запуска"
 
 #. 3.2->settings-schema.json->quicklauncher-17-icon->tooltip
 #. 3.2->settings-schema.json->quicklauncher-15-icon->tooltip
@@ -586,7 +586,7 @@ msgid ""
 "Select an icon file or type an icon name into the entry box for the "
 "quicklauncher"
 msgstr ""
-"Выберите файл пиктограммы для панели быстрого запуска или введите ее имя в "
+"Выберите файл значка для панели быстрого запуска или введите его имя в "
 "поле ввода."
 
 #. 3.2->settings-schema.json->search-filesystem->description
@@ -607,12 +607,12 @@ msgstr "Показать кнопки закрытия"
 #. 3.2->settings-schema.json->show-shutdown-menu->tooltip
 #. 2.6->settings-schema.json->show-shutdown-menu->tooltip
 msgid "Choose whether or not to show the quit buttons."
-msgstr "Выберите, будут ли показаны кнопки закрытия"
+msgstr "Выберите, будут ли показываться кнопки закрытия"
 
 #. 3.2->settings-schema.json->menu-layout->options
 #. 2.6->settings-schema.json->menu-layout->options
 msgid "Stark-Menu"
-msgstr "Старк-Меню"
+msgstr "Stark-Меню"
 
 #. 3.2->settings-schema.json->menu-layout->options
 #. 2.6->settings-schema.json->menu-layout->options
@@ -622,12 +622,12 @@ msgstr "MATE-Меню"
 #. 3.2->settings-schema.json->menu-layout->tooltip
 #. 2.6->settings-schema.json->menu-layout->tooltip
 msgid "Choose between Stark-Menu and MATE-Menu layout"
-msgstr "Выберите способ расположения: Stark-Menu или MATE-Menu"
+msgstr "Выберите стиль: Stark-Меню или MATE-Меню"
 
 #. 3.2->settings-schema.json->menu-layout->description
 #. 2.6->settings-schema.json->menu-layout->description
 msgid "Menu layout"
-msgstr "Расположение меню"
+msgstr "Стиль меню"
 
 #. 3.2->settings-schema.json->quicklauncher-7-command->tooltip
 #. 3.2->settings-schema.json->quicklauncher-16-command->tooltip
@@ -650,17 +650,17 @@ msgstr "Расположение меню"
 #. 2.6->settings-schema.json->quicklauncher-0-command->tooltip
 #. 2.6->settings-schema.json->quicklauncher-18-command->tooltip
 msgid "Enter command to start the quicklauncher"
-msgstr "Введите команду для запуска панели управления"
+msgstr "Введите команду для быстрого запуска"
 
 #. 3.2->settings-schema.json->show-favorite-icons->description
 #. 2.6->settings-schema.json->show-favorite-icons->description
 msgid "Show favorite icons"
-msgstr "Показать пиктограммы избранных"
+msgstr "Показываать значки избранного"
 
 #. 3.2->settings-schema.json->show-favorite-icons->tooltip
 #. 2.6->settings-schema.json->show-favorite-icons->tooltip
 msgid "Choose whether or not to show icons on favorites."
-msgstr "Выберите, будут ли показаны пиктограммы избранных"
+msgstr "Выберите, будут ли показываться значки избранного"
 
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
@@ -670,12 +670,12 @@ msgstr "Показывать значки контекстного меню"
 #. 3.2->settings-schema.json->show-context-menu-icons->tooltip
 #. 2.6->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
-msgstr "Выберите, будут ли показаны пиктограммы контекстного меню"
+msgstr "Выберите, будут ли показываться значки контекстного меню"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application's description under their titles"
-msgstr "Показать примечания к программам под их заголовком"
+msgstr "Показывать примечания к программам под их заголовком"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
@@ -688,7 +688,7 @@ msgstr ""
 #. 3.2->settings-schema.json->menu-label->description
 #. 2.6->settings-schema.json->menu-label->description
 msgid "'Menu'-Button label"
-msgstr "»Меню« текст"
+msgstr "Текст кнопки «Меню»"
 
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 2.6->settings-schema.json->menu-label->tooltip
@@ -703,7 +703,7 @@ msgstr "Значок"
 #. 3.2->settings-schema.json->menu-icon->tooltip
 #. 2.6->settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
-msgstr "Выберите отображаемый на панели значок."
+msgstr "Выберите значок для отображения на панели."
 
 #. 3.2->settings-schema.json->quicklauncher-layout->description
 #. 2.6->settings-schema.json->quicklauncher-layout->description
@@ -715,8 +715,8 @@ msgstr "Стиль кнопок панели быстрого запуска"
 msgid ""
 "Choose whether to show icons and/or labels on the quicklauncher buttons."
 msgstr ""
-"Выберите, будут ли показаны пиктограммы и/или заголовки кнопок панели "
-"быстрого запуска"
+"Выберите, показывать ли значки и/или заголовки кнопок в "
+"панели быстрого запуска"
 
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
@@ -736,7 +736,7 @@ msgstr "Стиль блока информации о пользователе"
 #. 3.2->settings-schema.json->user-box-layout->tooltip
 #. 2.6->settings-schema.json->user-box-layout->tooltip
 msgid "Choose whether to show the user name and/or user picture."
-msgstr "Выберите, будут ли показаны имя пользователя и/или его аватар"
+msgstr "Выберите, показывать ли имя пользователя и/или его аватар"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
@@ -761,17 +761,17 @@ msgstr "Расположение кнопок закрытия"
 #. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
 #. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
 msgid "Choose the layout of the quit options."
-msgstr "Выберите расположение пунктов опций закрытия"
+msgstr "Выберите расположение кнопок закрытия"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
 msgid "Horizontal"
-msgstr "Горизонтальный"
+msgstr "Горизонтальное"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
 msgid "Vertical"
-msgstr "Вертикальный"
+msgstr "Вертикальное"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
@@ -786,7 +786,7 @@ msgstr "Показывать значки приложений"
 #. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 2.6->settings-schema.json->show-application-icons->tooltip
 msgid "Choose whether or not to show icons on applications."
-msgstr "Выбрать показывать или нет иконки в приложениях."
+msgstr "Выберите, показывать ли значки приложений."
 
 #. 3.2->settings-schema.json->overlay-key->description
 #. 2.6->settings-schema.json->overlay-key->description
@@ -802,7 +802,7 @@ msgstr "Включить автопрокрутку в списке прилож
 #. 2.6->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Выберите,  включить ли плавную автопрокрутку в списке приложений."
+msgstr "Выберите, включить ли плавную автопрокрутку в списке приложений."
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 2.6->settings-schema.json->enable-animation->description
@@ -827,12 +827,12 @@ msgstr "Выберите, следует ли показывать заклад�
 #. 3.2->settings-schema.json->shutdown-label->description
 #. 2.6->settings-schema.json->shutdown-label->description
 msgid "'Quit'-Button label"
-msgstr "»Выход« текст"
+msgstr "Текст кнопки «Выключить»"
 
 #. 3.2->settings-schema.json->shutdown-label->tooltip
 #. 2.6->settings-schema.json->shutdown-label->tooltip
 msgid "Enter custom text for the 'Quit' button."
-msgstr "Введите произвольный текст для кнопки 'Закрыть'"
+msgstr "Введите свой текст для кнопки 'Выключить'"
 
 #. 3.2->settings-schema.json->show-category-icons->description
 #. 2.6->settings-schema.json->show-category-icons->description
@@ -842,7 +842,7 @@ msgstr "Показывать значки категорий"
 #. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 2.6->settings-schema.json->show-category-icons->tooltip
 msgid "Choose whether or not to show icons on categories."
-msgstr "Выбрать показывать или нет иконки в категориях."
+msgstr "Выберите показывать ли значки в категориях."
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 2.6->settings-schema.json->menu-editor-button->description
@@ -866,7 +866,7 @@ msgstr "Если флажок снят, значок определяется т
 
 #. 3.2->settings-schema.json->hover-delay->description
 msgid "Menu hover delay"
-msgstr "Задержка  при наведении на меню"
+msgstr "Задержка при наведении на меню"
 
 #. 3.2->settings-schema.json->hover-delay->tooltip
 msgid "Delay before the menu opens when hovered"
@@ -880,26 +880,26 @@ msgstr "миллисекунд"
 #. 3.2->settings-schema.json->show-sidebar->description
 #. 2.6->settings-schema.json->show-sidebar->description
 msgid "Show sidebar on menu"
-msgstr "Показать боковую панель меню"
+msgstr "Показать в меню боковую панель"
 
 #. 3.2->settings-schema.json->show-sidebar->tooltip
 #. 2.6->settings-schema.json->show-sidebar->tooltip
 msgid "Choose whether or not to show the sidebar."
-msgstr "Выберите, будет ли отображена боковая панель"
+msgstr "Выберите, показывать ли боковую панель"
 
 #. 3.2->settings-schema.json->favorites-label->description
 #. 2.6->settings-schema.json->favorites-label->description
 msgid "'Favorites'-Button label"
-msgstr "»Избранное« текст"
+msgstr "Текст кнопки «Избранное»"
 
 #. 3.2->settings-schema.json->favorites-label->tooltip
 #. 2.6->settings-schema.json->favorites-label->tooltip
 msgid "Enter custom text for the 'Favorites' button."
-msgstr "Введите произвольный текст для кнопки 'Избранное'"
+msgstr "Введите свой текст для кнопки 'Избранное'"
 
 #. 2.6->settings-schema.json->head-menu-layout->description
 msgid "Stark-Menu/MATE-Menu"
-msgstr "Старк-Меню/MATE-Меню"
+msgstr "Stark-Меню/MATE-Меню"
 
 #. 2.6->settings-schema.json->head-settings->description
 msgid "General Settings"
@@ -911,17 +911,78 @@ msgstr "Значки"
 
 #. 2.6->settings-schema.json->hover-delay->description
 msgid "Category hover delay"
-msgstr "Задержка перед раскрытием категории"
+msgstr "Задержка при наведении на категории"
 
 #. 2.6->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
-msgstr "Задержка между переключением между категориями"
+msgstr "Задержка между переключением категорий"
+
+#. 3.4->settings-schema.json->custom-quicklauncher-places->title
+msgid "Quicklauncher Places"
+msgstr "Места на панели быстрого запуска"
+
+#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
+msgid "Quicklauncher Applications"
+msgstr "Приложения на панели быстрого запуска"
+
+#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
+msgid "Quicklauncher Separators"
+msgstr "Разделители на панели быстрого запуска"
+
+#. 3.4->settings-schema.json->quicklauncher-separator1->description
+msgid "Separator below user account info box"
+msgstr "Разделитель под информацией о пользователе"
+
+#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
+msgid "Choose whether or not to show this separator."
+msgstr "Выберите, показывать ли этот разделитель."
+
+#. 3.4->settings-schema.json->quicklauncher-separator3->description
+msgid "Separator above quit buttons"
+msgstr "Разделитель над кнопками выключения"
+
+#. 3.4->settings-schema.json->quicklauncher-separator2->description
+msgid "Separator below quicklauncher places"
+msgstr "Разделитель под местами"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->description
+msgid "Custom Quicklauncher Applications"
+msgstr "Приложения на панели быстрого запуска"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Visible"
+msgstr "Видимый"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Command"
+msgstr "Комманда"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Custom Label"
+msgstr "Название"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Custom Icon"
+msgstr "Значок"
+
+#. 3.4->settings-schema.json->quicklauncher-places->description
+msgid "Custom Quicklauncher Places"
+msgstr "Места на панели быстрого запуска"
+
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Directory"
+msgstr "Каталог"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr "Cinnamon Menu похожий на меню Пуск Windows 7 или MATE Menu"
+msgstr "Меню Cinnamon похожее на меню Пуск Windows 7 или MATE Menu"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"
-msgstr "CinnVIIСтаркМеню"
+msgstr "CinnVIIStark Меню"

@@ -49,6 +49,10 @@ msgstr ""
 msgid "Remove this note"
 msgstr ""
 
+#: applet.js:255
+msgid "Save as template"
+msgstr ""
+
 #: applet.js:407
 msgid "Title"
 msgstr ""

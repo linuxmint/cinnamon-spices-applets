@@ -315,3 +315,29 @@
 #NoteBox.teal StButton#vhandle:hover {
     background-color: #9ed8c7;
 }
+
+
+/*Yellow*/
+#NoteBox.yellow {
+    background-color: #dfdf00;
+    color: #000000;
+    selected-color: #ffffff;
+    selection-background-color: #aa44aa;
+    caret-color: #000000;
+}
+
+#NoteBox.yellow:focus StScrollView {
+    background-color: #ffff33;
+}
+
+#NoteBox.yellow StBin#trough {
+    background-color: #dfdf00;
+}
+
+#NoteBox.yellow StButton#vhandle {
+    background-color: #99a544;
+}
+
+#NoteBox.yellow StButton#vhandle:hover {
+    background-color: #ffff33;
+}

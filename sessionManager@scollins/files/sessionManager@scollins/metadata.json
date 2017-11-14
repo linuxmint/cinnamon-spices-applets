@@ -5,5 +5,6 @@
     "comments": "Session Manager is an applet that provides easy access to session controls such as shut down, restart, log off, switch user, etc. It has been tested in Arch, Fedora and Linux Mint, and supports a wide variety of software configurations. If your particular configuration is not supported, please submit a feature request on github, and I will add it at my earliest convenience.",
     "website": "https://github.com/collinss/Session-Manager",
     "version": "1.1",
-    "contributors": "Stephen Collins - Author"
+    "contributors": "Stephen Collins - Author",
+    "max-instances": -1
 }

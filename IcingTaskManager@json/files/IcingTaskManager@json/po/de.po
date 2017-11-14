@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-24 14:48-0500\n"
+"POT-Creation-Date: 2017-11-05 03:29-0600\n"
 "PO-Revision-Date: 2017-07-27 12:54+0200\n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -34,79 +34,83 @@ msgstr "Auf allen Arbeitsflächen anzeigen"
 msgid "Move to another workspace"
 msgstr "Auf andere Arbeitsfläche verschieben"
 
-#: 3.2/specialMenus.js:158
+#: 3.2/specialMenus.js:157
 msgid "Places"
 msgstr "Orte"
+
+#: 3.2/specialMenus.js:193
+msgid "Bookmarks/History requires gir1.2-gda-5.0"
+msgstr ""
 
 #: 3.2/specialMenus.js:213
 msgid "Recent"
 msgstr "Kürzlich"
 
-#: 3.2/specialMenus.js:233
+#: 3.2/specialMenus.js:232
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: 3.2/specialMenus.js:236
+#: 3.2/specialMenus.js:235
 msgid "About..."
 msgstr "Über …"
 
-#: 3.2/specialMenus.js:240
+#: 3.2/specialMenus.js:239
 msgid "Configure..."
 msgstr "Einrichten …"
 
-#: 3.2/specialMenus.js:244
+#: 3.2/specialMenus.js:243
 msgid "Remove"
 msgstr "Entfernen"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Unpin from Panel"
 msgstr "Von Taskleiste lösen"
 
-#: 3.2/specialMenus.js:279
+#: 3.2/specialMenus.js:277
 msgid "Pin to Panel"
 msgstr "An Taskleiste Anheften"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Remove from Autostart"
 msgstr "Aus Autostart entfernen"
 
-#: 3.2/specialMenus.js:285
+#: 3.2/specialMenus.js:283
 msgid "Add to Autostart"
 msgstr "Zum Autostart hinzufügen"
 
-#: 3.2/specialMenus.js:291
+#: 3.2/specialMenus.js:289
 msgid "Create Shortcut"
 msgstr "Verknüpfung erstellen"
 
-#: 3.2/specialMenus.js:301
+#: 3.2/specialMenus.js:299
 msgid "Restore to full opacity"
 msgstr "Volle Deckkraft wiederherstellen"
 
-#: 3.2/specialMenus.js:309
+#: 3.2/specialMenus.js:307
 msgid "Restore"
 msgstr "Wiederherstellen"
 
-#: 3.2/specialMenus.js:314
+#: 3.2/specialMenus.js:312
 msgid "Minimize"
 msgstr "Minimieren"
 
-#: 3.2/specialMenus.js:322
+#: 3.2/specialMenus.js:320
 msgid "Unmaximize"
 msgstr "Zurücksetzen"
 
-#: 3.2/specialMenus.js:327
+#: 3.2/specialMenus.js:325
 msgid "Maximize"
 msgstr "Maximieren"
 
-#: 3.2/specialMenus.js:337
+#: 3.2/specialMenus.js:335
 msgid "Close others"
 msgstr "Andere schließen"
 
-#: 3.2/specialMenus.js:347
+#: 3.2/specialMenus.js:345
 msgid "Close all"
 msgstr "Alle schließen"
 
-#: 3.2/specialMenus.js:357
+#: 3.2/specialMenus.js:355
 msgid "Close"
 msgstr "Schließen"
 

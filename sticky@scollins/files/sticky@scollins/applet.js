@@ -39,7 +39,8 @@ const THEMES = {
     "purple":   "Purple",
     "red":      "Red",
     "sand":     "Sand",
-    "teal":     "Teal"
+    "teal":     "Teal",
+    "yellow":   "Yellow"
 }
 
 

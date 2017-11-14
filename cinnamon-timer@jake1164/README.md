@@ -2,7 +2,7 @@
 
 A simple countdown timer app, modeled after a kitchen timer. I wanted something easy to remind myself to get up every hour and stretch. To jazz it up a little the timer can play a sound, flash a message, open the applet menu, or display a confirmation dialog on the screen. You can display several notifications at once, such as displaying the confirmation dialog while playing an alarm sound. 
 
-All settings can be changed by right clicking on the icon and selecting configure. Changes are imediate and you dont need to restart cinnamon for them to take effect.
+All settings can be changed by right clicking on the icon and selecting configure. Changes are immediate and you dont need to restart cinnamon for them to take effect.
 
 ## Installing
 
@@ -15,6 +15,15 @@ All settings can be changed by right clicking on the icon and selecting configur
 ## TODO:
 
 ## Changelog
+* 1.1.1
+  - Changed Preset Times to include separate time spinners for hours, minutes and seconds.
+  
+* 1.1.0
+  - Moved slider intervals into cinnamon-settings. 
+  - Moved Preset Times into cinnamon-settings
+    - Added a Label that will override the default label and be displayed in the selection menu.
+    - Added a custom message per preset that will override the global message and display when complete.
+  - Changed the sound selector to use the built in cinnamon-settings sound selection dialog.
 
 * 1.0.0
   - Took over applet from @axos88.

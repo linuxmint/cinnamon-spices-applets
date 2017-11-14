@@ -8,7 +8,7 @@
         "default" : 0,
         "description" : "Action",
         "options" : {
-            "Open or close tray" : 0,
+            "Open or close popup" : 0,
             "Toggle visibility applets" : 1
         },
         "tooltip" : "An action to perform on trigger"
@@ -58,7 +58,7 @@
 
     "tray_start": {
         "type": "header",
-        "description": "Tray"
+        "description": "Popup"
     },
     "applet_popup_columns": {
         "type": "spinbutton",
@@ -68,7 +68,7 @@
         "step": 1,
         "units": "",
         "description": "Columns",
-        "tooltip" : "A number of columns in the applet tray"
+        "tooltip" : "A number of columns in the applet popup"
     },
     "applet_popup_icons_size": {
         "type": "spinbutton",
@@ -78,37 +78,37 @@
         "step": 1,
         "units": "pixels",
         "description": "Icon size",
-        "tooltip" : "A size of an icon in the applet tray"
+        "tooltip" : "A size of an icon in the applet popup"
     },
     "applet_popup_icons_css": {
         "type": "entry",
         "default": "padding: 10px;",
         "description": "Icon CSS",
-        "tooltip": "A CSS style applied to the icons in the applet tray"
+        "tooltip": "A CSS style applied to the icons in the applet popup"
     },
     "applet_popup_table_css": {
         "type": "entry",
         "default": "padding: 15px;",
         "description": "Table CSS",
-        "tooltip": "A CSS style applied to a table in the applet tray"
+        "tooltip": "A CSS style applied to a table in the applet popup"
     },
     "applet_popup_close_leave" : {
         "type" : "checkbox",
         "default" : true,
         "description": "Auto close",
-        "tooltip": "Close the applet tray when a mouse leaves the user interface"
+        "tooltip": "Close the applet popup when a mouse leaves the user interface"
     },
     "match_panel_icons_size": {
         "type" : "checkbox",
         "default" : false,
         "description": "Match panel size",
-        "tooltip": "Match a size of an icon in the applet tray to a size of the panel"
+        "tooltip": "Match a size of an icon in the applet popup to a size of the panel"
     },
     "show_icon_tooltips" : {
         "type" : "checkbox",
         "default" : false,
         "description": "Show tooltips",
-        "tooltip": "Show icon tooltips in the applet tray"
+        "tooltip": "Show icon tooltips in the applet popup"
     },
     "show_grayscale_icons" : {
         "type" : "checkbox",

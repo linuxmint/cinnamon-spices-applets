@@ -1,5 +1,22 @@
 Changelog
 
+### 3.1.0
+
+  * Fixed icon sizes not updating when transitioning from high DPI mode.
+  * Fixed the menu not rendering on orientation change.
+  * Moved the web bookmarks category to the second to last position.
+  * Fixed the escape key not closing the menu.
+  * Fixed the list view container not expanding to full width in high DPI mode.
+  * Increased the default category/list view icon sizes from 18px to 24px.
+  * The first search result is now highlighted.
+  * Fixed the searchbox stretching across the entire app container width in grid view mode.
+  * Improved theme compatibility.
+  * Minor performance optimization.
+
+### 3.0.2
+
+  * Fixed being unable to clear the Menu button text.
+
 ### 3.0.1
 
   * Fixed a regression preventing the applet from working on vertical panels on Cinnamon <= 3.4.

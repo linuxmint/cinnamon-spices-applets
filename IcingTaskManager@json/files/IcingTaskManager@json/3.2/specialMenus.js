@@ -150,7 +150,6 @@ AppMenuButtonRightClickMenu.prototype = {
       this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
     }
 
-    this.recentMenuItems = [];
     if (this.state.settings.showRecent) {
 
       // Places
@@ -168,7 +167,6 @@ AppMenuButtonRightClickMenu.prototype = {
         for (let i = 0, len = places.length; i < len; i++) {
           item = createMenuItem({label: _(places[i].name), icon: 'folder'});
           handlePlaceLaunch(item, i);
-          this.recentMenuItems.push(item);
           subMenu.menu.addMenuItem(item);
         }
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -176,11 +174,11 @@ AppMenuButtonRightClickMenu.prototype = {
 
       // History
       if (this.groupState.appId === 'firefox.desktop' || this.groupState.appId === 'firefox web browser.desktop') {
-        let subMenu = new PopupMenu.PopupSubMenuMenuItem(_(constants.ffOptions.find(ffOption => ffOption.id === this.state.settings.firefoxMenu).label));
-        this.addMenuItem(subMenu);
-
         let histories = getFirefoxHistory(this.state.settings);
+        let subMenu;
+
         if (histories) {
+          subMenu = new PopupMenu.PopupSubMenuMenuItem(_(constants.ffOptions.find(ffOption => ffOption.id === this.state.settings.firefoxMenu).label));
           try {
             let handleHistoryLaunch = (item, i) => {
               this.signals.connect(item, 'activate', () => Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
@@ -188,11 +186,13 @@ AppMenuButtonRightClickMenu.prototype = {
             for (let i = 0, len = histories.length; i < len; i++) {
               item = createMenuItem({label: _(histories[i].title), icon: 'go-next'});
               handleHistoryLaunch(item, i);
-              this.recentMenuItems.push(item);
               subMenu.menu.addMenuItem(item);
             }
           } catch (e) {}
+        } else {
+          subMenu = createMenuItem({label: _('Bookmarks/History requires gir1.2-gda-5.0'), icon: 'help-about'});
         }
+        this.addMenuItem(subMenu);
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
 
@@ -222,7 +222,6 @@ AppMenuButtonRightClickMenu.prototype = {
         for (let i = 0; i < itemsLength; i++) {
           item = createMenuItem({label: _(items[i].get_short_name()), icon: 'list-add'});
           handleRecentLaunch(item, i);
-          this.recentMenuItems.push(item);
           subMenu.menu.addMenuItem(item);
         }
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -258,7 +257,6 @@ AppMenuButtonRightClickMenu.prototype = {
           this.signals.connect(item, 'activate', () => {
             this.groupState.appInfo.launch_action(action, global.create_app_launch_context());
           });
-          this.recentMenuItems.push(item);
         };
 
         for (let i = 0, len = actions.length; i < len; i++) {
