@@ -506,7 +506,7 @@ CinnamenuApplet.prototype = {
     } else {
       if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
         if (!this.state.settings.menuLabel) {
-          this.state.settings.menuLabel = '';
+          this.state.settings.menuLabel = 'Menu';
         }
         this.set_applet_label(this.state.settings.menuLabel);
         this.set_applet_tooltip(this.state.settings.menuLabel);
@@ -931,10 +931,6 @@ CinnamenuApplet.prototype = {
       });
       return dirs;
     };
-    // Load 'bookmarks' category
-    if (this.state.settings.enableBookmarks) {
-      addTo(new CategoryListButton(this.state, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'), this.categoriesBox, this.categoryButtons)
-    }
     // Load 'all applications' category
     addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
 
@@ -972,6 +968,10 @@ CinnamenuApplet.prototype = {
     // Load 'recent' category
     if (this.state.recentEnabled) {
       addTo(new CategoryListButton(this.state, 'recent', _('Recent Files'), 'folder-recent', '_selectRecent'), this.categoriesBox, this.categoryButtons)
+    }
+    // Load 'bookmarks' category
+    if (this.state.settings.enableBookmarks) {
+      addTo(new CategoryListButton(this.state, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'), this.categoriesBox, this.categoryButtons)
     }
     // Load 'favorite applications' category
     addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons)
