@@ -1400,7 +1400,7 @@ CinnamenuApplet.prototype = {
             continue;
           }
           match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
-          if (res[i][searchableProps[z]] && match.score > 0.2) {
+          if (res[i][searchableProps[z]] && match.score > 0.1) {
             res[i].score = match.score;
             res[i][searchableProps[z]] = match.result;
             _res.push(res[i]);
