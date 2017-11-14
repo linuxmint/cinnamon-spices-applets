@@ -2276,14 +2276,15 @@ CinnamenuApplet.prototype = {
     });
 
     this.bottomPane.add(this.powerGroupBox, {
+      expand: true,
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
-      y_align: St.Align.START
+      y_align: St.Align.MIDDLE
     });
 
     this.bottomPane.add(this.searchBox, {
-      expand: true,
+      expand: false,
       x_align: St.Align.END,
       y_align: St.Align.MIDDLE
     });
