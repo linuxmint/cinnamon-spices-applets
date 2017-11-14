@@ -1,5 +1,5 @@
 const AppletDir = imports.ui.appletManager.applets['collapsible-systray@feuerfuchs.eu'];
-const _ = AppletDir.__init__._;
+const _         = AppletDir.Util._;
 
 const Gio                                = imports.gi.Gio;
 const St                                 = imports.gi.St;

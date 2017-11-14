@@ -8,7 +8,7 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const SignalManager = imports.misc.signalManager;
 
-const ICON_SCALE_FACTOR = .8; // for custom panel heights, 20 (default icon size) / 25 (default panel height)
+const ICON_SCALE_FACTOR = 0.8; // for custom panel heights, 20 (default icon size) / 25 (default panel height)
 
 const DEFAULT_ICON_SIZE = 20;
 
@@ -58,16 +58,16 @@ MyApplet.prototype = {
         this.actor.set_style_class_name('systray');
         this.actor.set_important(true);  // ensure we get class details from the default theme if not present
 
-        this._signalManager = new SignalManager.SignalManager(this);
+        this._signalManager = new SignalManager.SignalManager(null);
         let manager;
 
         this.orientation = orientation;
 
         if (this.orientation == St.Side.TOP || this.orientation == St.Side.BOTTOM) {
-            manager = new Clutter.BoxLayout( { spacing: 2 * global.ui_scale,
+            manager = new Clutter.BoxLayout( { spacing: 2,
                                                orientation: Clutter.Orientation.HORIZONTAL });
         } else {
-            manager = new Clutter.BoxLayout( { spacing: 2 * global.ui_scale,
+            manager = new Clutter.BoxLayout( { spacing: 2,
                                                orientation: Clutter.Orientation.VERTICAL });
         }
         this.manager = manager;
@@ -127,16 +127,15 @@ MyApplet.prototype = {
     _onIndicatorAdded: function(manager, appIndicator) {
         if (!(appIndicator.id in this._shellIndicators)) {
             let size = null;
-            if (this._scaleMode)
-                size = this._getIconSize();
+            size = this._getIconSize(this._panelHeight/global.ui_scale);
 
             let indicatorActor = appIndicator.getActor(size);
             indicatorActor._applet = this;
 
             this._shellIndicators[appIndicator.id] = indicatorActor;
-            this._signalManager.connect(indicatorActor.actor, 'destroy', this._onIndicatorIconDestroy);
-            this._signalManager.connect(indicatorActor.actor, 'enter-event', this._onEnterEvent);
-            this._signalManager.connect(indicatorActor.actor, 'leave-event', this._onLeaveEvent);
+            this._signalManager.connect(indicatorActor.actor, 'destroy', this._onIndicatorIconDestroy, this);
+            this._signalManager.connect(indicatorActor.actor, 'enter-event', this._onEnterEvent, this);
+            this._signalManager.connect(indicatorActor.actor, 'leave-event', this._onLeaveEvent, this);
 
             this.manager_container.add_actor(indicatorActor.actor);
 
@@ -170,15 +169,22 @@ MyApplet.prototype = {
         }
     },
 
-    _getIconSize: function() {
+    _getIconSize: function(ht) {
         let size;
-        let disp_size = this._panelHeight * ICON_SCALE_FACTOR;
+        let disp_size = ht * ICON_SCALE_FACTOR;  // hidpi with largest panel, gets up to 80
+
         if (disp_size < 22) {
             size = 16;
         } else if (disp_size < 32) {
             size = 22;
         } else if (disp_size < 48) {
             size = 32;
+        } else if (disp_size < 64) {
+            size = 48;
+        } else if (disp_size < 96) {
+            size = 64;
+        } else if (disp_size < 128) {
+            size = 96;
         } else {
             size = 48;
         }
@@ -212,9 +218,9 @@ MyApplet.prototype = {
     on_applet_added_to_panel: function() {
         Main.statusIconDispatcher.start(this.actor.get_parent().get_parent());
 
-        this._signalManager.connect(Main.statusIconDispatcher, 'status-icon-added', this._onTrayIconAdded);
-        this._signalManager.connect(Main.statusIconDispatcher, 'status-icon-removed', this._onTrayIconRemoved);
-        this._signalManager.connect(Main.statusIconDispatcher, 'before-redisplay', this._onBeforeRedisplay);
+        this._signalManager.connect(Main.statusIconDispatcher, 'status-icon-added', this._onTrayIconAdded, this);
+        this._signalManager.connect(Main.statusIconDispatcher, 'status-icon-removed', this._onTrayIconRemoved, this);
+        this._signalManager.connect(Main.statusIconDispatcher, 'before-redisplay', this._onBeforeRedisplay, this);
         this._signalManager.connect(Main.systrayManager, "changed", Main.statusIconDispatcher.redisplay, Main.statusIconDispatcher);
         this._addIndicatorSupport();
     },
@@ -222,8 +228,7 @@ MyApplet.prototype = {
     on_panel_height_changed: function() {
         Main.statusIconDispatcher.redisplay();
         let size = null;
-        if (this._scaleMode)
-            size = this._getIconSize();
+        size = this._getIconSize(this._panelHeight/global.ui_scale);
         for (let id in this._shellIndicators) {
             let indicator = Main.indicatorManager.getIndicatorById(id);
             if (indicator) {
@@ -246,7 +251,7 @@ MyApplet.prototype = {
             // child instanceof CinnamonTrayIcon.
             return (child.toString().indexOf("CinnamonTrayIcon") != -1);
         });
-        for (var i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i++) {
             children[i].destroy();
         }
     },
@@ -312,7 +317,11 @@ MyApplet.prototype = {
                 this._statusItems.splice(i, 1);
             }
         }
-        this.manager_container.remove_child(icon);
+
+        if (icon.get_parent() == this.manager_container) {
+            this.manager_container.remove_child(icon);
+        }
+
         icon.destroy();
     },
 
@@ -359,7 +368,7 @@ MyApplet.prototype = {
         if (["shutter", "filezilla"].indexOf(role) != -1) {
             global.log("Not resizing " + role + " as it's known to be buggy (" + icon.get_width() + "x" + icon.get_height() + "px)");
         } else {
-            let size = this._getIconSize();
+            let size = this._getIconSize(this._panelHeight);
             icon.set_size(size, size);
             global.log("Resized " + role + " with normalized size (" + icon.get_width() + "x" + icon.get_height() + "px)");
             //Note: dropbox doesn't scale, even though we resize it...
