@@ -510,7 +510,7 @@ AppListGridButton.prototype = {
     });
 
     this.dot = new St.Widget({
-      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.mainBoxBorderColor + '; margin-bottom: 2px; border-radius: 128px;',
+      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.foregroundColor + '; margin-bottom: 2px; border-radius: 128px;',
       layout_manager: new Clutter.BinLayout(),
       x_expand: true,
       y_expand: false,

@@ -2087,14 +2087,14 @@ CinnamenuApplet.prototype = {
     });
     this.searchBox = new St.BoxLayout({
       style_class: 'menu-search-box',
-      style: 'padding-right: 8px;',
-      height: 30 * global.ui_scale,
+      style: 'padding-right: 7px;'
     });
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
       hint_text: _('Type to search...'),
       track_hover: true,
-      can_focus: true
+      can_focus: true,
+      height: 30 * global.ui_scale,
     });
 
     this.searchEntry.set_primary_icon(this._searchInactiveIcon);
@@ -2187,7 +2187,7 @@ CinnamenuApplet.prototype = {
     // PowerGroupBox
     this.powerGroupBox = new St.BoxLayout({
       style_class: '',
-      style: 'padding-left: 12px'
+      style: 'padding-left: 13px'
     });
 
     this.powerGroupButtons.push(new GroupButton(
