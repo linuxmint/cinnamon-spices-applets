@@ -424,10 +424,10 @@ CinnamenuApplet.prototype = {
   },
 
   on_orientation_changed: function(orientation) {
-    this.createMenu(orientation);
+    this.orientation = orientation;
     this.update_label_visible();
-    this.refresh();
     this._updateIconAndLabel();
+    this.refresh();
   },
 
   on_applet_added_to_panel: function() {
