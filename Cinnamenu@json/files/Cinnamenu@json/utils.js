@@ -43,7 +43,7 @@ const isEqual = function(a, b) {
   if (!b) {
     b = 'null';
   }*/
-  return a=== b;
+  return a === b;
 };
 
 const sortBy = function(array = [], property = '', direction = 'asc') {

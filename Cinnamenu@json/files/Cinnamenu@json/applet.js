@@ -506,7 +506,7 @@ CinnamenuApplet.prototype = {
     } else {
       if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
         if (!this.state.settings.menuLabel) {
-          this.state.settings.menuLabel = 'Menu';
+          this.state.settings.menuLabel = '';
         }
         this.set_applet_label(this.state.settings.menuLabel);
         this.set_applet_tooltip(this.state.settings.menuLabel);
@@ -1677,6 +1677,7 @@ CinnamenuApplet.prototype = {
           return true;
         }
         this.menu.close();
+        return true;
       case ctrlKey:
         if (enteredItemExists) {
           buttons[refItemIndex].handleEnter();
