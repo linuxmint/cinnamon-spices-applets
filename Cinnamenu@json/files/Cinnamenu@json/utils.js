@@ -43,7 +43,7 @@ const isEqual = function(a, b) {
   if (!b) {
     b = 'null';
   }*/
-  return a=== b;
+  return a === b;
 };
 
 const sortBy = function(array = [], property = '', direction = 'asc') {
@@ -70,6 +70,16 @@ const unref = function(object) {
   for (var i = 0; i < keys.length; i++) {
     if (keys[i] !== 'buttonState' && keys[i] !== 'state') {
       object[keys[i]] = null;
+    }
+  }
+};
+
+const tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      errCb(e);
     }
   }
 };
