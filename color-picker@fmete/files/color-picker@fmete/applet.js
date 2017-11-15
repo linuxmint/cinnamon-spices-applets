@@ -126,6 +126,16 @@ MyApplet.prototype = {
         writeFile.close(null);
     },
 
+    notify_send: function(notification, iconPath) {
+        if (iconPath == null)
+            iconPath = this.appletPath + '/icon.png';
+        Util.spawnCommandLine('notify-send "' + notification + '" -i ' + iconPath);
+    },
+
+    notify_installation: function(packageName) {
+        this.notify_send(_("Please install the '%s' package.").format(packageName), null);
+    },
+
     on_applet_clicked: function(event) {
         if(Gio.file_new_for_path("/usr/bin/xsel").query_exists(null)) {
             global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
@@ -134,15 +144,23 @@ MyApplet.prototype = {
                 global.unset_cursor();
                 global.set_stage_input_mode(Cinnamon.StageInputMode.NORMAL);
 
-                if (this.pick_notification) {
-                    output = output.replace(/\n$/, "");
-                    this.createColorCircleSVG(output);
-                    this.on_settings_changed();
-                    Util.spawnCommandLine("notify-send '" + _("Color code %s copied to clipboard.").format(output) + "' -i " + this.svgPath);
+                output = output.replace(/\n$/, "");
+                if (output == "ImportError Xlib") {
+                    Util.spawnCommandLine("apturl apt://python-xlib");
+                    this.notify_installation('python-xlib');
+                } else if (output == "ImportError numpy") {
+                    this.notify_installation('python-numpy');
+                    Util.spawnCommandLine("apturl apt://python-numpy");
+                } else {
+                    if (this.pick_notification) {
+                        this.createColorCircleSVG(output);
+                        this.on_settings_changed();
+                        this.notify_send(_("Color code '%s' copied to clipboard.").format(output), this.svgPath);
+                    }
                 }
             }));
         } else {
-            Util.spawnCommandLine("notify-send '" + _("Please install the package xsel.") + "' -i " + this.appletPath + "/icon.png");
+            this.notify_installation('xsel');
             Util.spawnCommandLine("apturl apt://xsel");
         }
     }
