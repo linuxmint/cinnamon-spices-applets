@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 02:39+0100\n"
-"PO-Revision-Date: 2017-11-15 02:39+0100\n"
+"POT-Creation-Date: 2017-11-15 14:50+0100\n"
+"PO-Revision-Date: 2017-11-15 14:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -22,14 +22,15 @@ msgstr ""
 msgid "Click here to pick a color"
 msgstr "Hier klicken, um eine Farbe auszuwählen"
 
-#: applet.js:141
+#: applet.js:136
 #, javascript-format
-msgid "Color code %s copied to clipboard."
-msgstr "Farbcode %s in Zwischenablage kopiert."
+msgid "Please install the '%s' package."
+msgstr "Bitte das Paket »%s« installieren."
 
-#: applet.js:145
-msgid "Please install the package xsel."
-msgstr "Bitte das Paket »xsel« installieren."
+#: applet.js:158
+#, javascript-format
+msgid "Color code '%s' copied to clipboard."
+msgstr "Farbcode »%s« in Zwischenablage kopiert."
 
 #. color-picker@fmete->settings-schema.json->pick-notification->description
 msgid "Show picked color code in a popup notification"
@@ -103,6 +104,12 @@ msgstr ""
 #. color-picker@fmete->metadata.json->name
 msgid "Color Picker"
 msgstr "Farbpipette"
+
+#~ msgid "Color code %s copied to clipboard."
+#~ msgstr "Farbcode %s in Zwischenablage kopiert."
+
+#~ msgid "Please install the package xsel."
+#~ msgstr "Bitte das Paket »xsel« installieren."
 
 #~ msgid "Please Select Color Pick Option:"
 #~ msgstr "Bitte eine Farbwahloption auswählen"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-15 02:39+0100\n"
+"POT-Creation-Date: 2017-11-15 14:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,13 +21,14 @@ msgstr ""
 msgid "Click here to pick a color"
 msgstr ""
 
-#: applet.js:141
+#: applet.js:136
 #, javascript-format
-msgid "Color code %s copied to clipboard."
+msgid "Please install the '%s' package."
 msgstr ""
 
-#: applet.js:145
-msgid "Please install the package xsel."
+#: applet.js:158
+#, javascript-format
+msgid "Color code '%s' copied to clipboard."
 msgstr ""
 
 #. color-picker@fmete->settings-schema.json->pick-notification->description

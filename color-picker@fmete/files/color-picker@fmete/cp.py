@@ -23,9 +23,18 @@
 import sys
 import subprocess
 import gtk.gdk
-import Xlib
-from Xlib import X
-from Xlib import display
+try:
+    import Xlib
+    from Xlib import X
+    from Xlib import display
+except ImportError:
+    print "ImportError Xlib"
+    sys.exit()
+try:
+    import numpy
+except ImportError:
+    print "ImportError numpy"
+    sys.exit()
 
 
 def getPixelColor(x, y):
