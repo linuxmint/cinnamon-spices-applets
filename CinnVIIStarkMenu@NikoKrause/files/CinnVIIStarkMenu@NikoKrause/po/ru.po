@@ -655,7 +655,7 @@ msgstr "Введите команду для быстрого запуска"
 #. 3.2->settings-schema.json->show-favorite-icons->description
 #. 2.6->settings-schema.json->show-favorite-icons->description
 msgid "Show favorite icons"
-msgstr "Показываать значки избранного"
+msgstr "Показывать значки избранного"
 
 #. 3.2->settings-schema.json->show-favorite-icons->tooltip
 #. 2.6->settings-schema.json->show-favorite-icons->tooltip
