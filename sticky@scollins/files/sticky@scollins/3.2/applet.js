@@ -12,6 +12,7 @@ const CheckBox = imports.ui.checkBox;
 const DND = imports.ui.dnd;
 const Main = imports.ui.main;
 const ModalDialog = imports.ui.modalDialog;
+const Panel = imports.ui.panel;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
@@ -31,6 +32,12 @@ const EDGE_WIDTH = 10;
 const MIN_HEIGHT = 75;
 const MIN_WIDTH = 125;
 
+const DisplayState = {
+    DESKTOP: 0,
+    RAISED: 1,
+    HIDDEN: 2,
+    PINNED: 3
+}
 
 let applet, noteBox, settings, uuid;
 
@@ -53,8 +60,55 @@ function focusText(actor) {
     }
 
     actor.grab_key_focus();
-    if ( settings.getValue("raisedState") ) {
-        global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
+}
+
+function PromptDialog(message, acceptCallback, cancelCallback) {
+    this._init(message, acceptCallback, cancelCallback);
+}
+
+PromptDialog.prototype = {
+    __proto__: ModalDialog.ModalDialog.prototype,
+
+    _init: function(message, acceptCallback, cancelCallback) {
+        ModalDialog.ModalDialog.prototype._init.call(this);
+        global.logWarning(typeof acceptCallback)
+
+        this.acceptCallback = acceptCallback;
+        this.cancelCallback = cancelCallback;
+
+        this.contentLayout.set_style("spacing: 15px;");
+
+        this.contentLayout.add_actor(new St.Label({text: message}));
+        this.entry = new St.Entry({ style_class: "run-dialog-entry"});
+        this.contentLayout.add_actor(this.entry);
+
+        this.setButtons([
+            {
+                label: _("Cancel"),
+                action: Lang.bind(this, this.onCancel),
+                key: Clutter.Escape
+            },
+            {
+                label: _("Ok"),
+                action: Lang.bind(this, this.onOk),
+                key: Clutter.Return
+            }
+        ]);
+
+        this.open();
+    },
+
+    onOk: function() {
+        let response = this.entry.text;
+        this.close();
+        this.acceptCallback(response);
+    },
+
+    onCancel: function() {
+        this.close();
+        if (this.cancelCallback) {
+            this.cancelCallback();
+        }
     }
 }
 
@@ -126,6 +180,7 @@ NoteBase.prototype = {
         this._dragOffset = [0, 0];
         this.hasBottom = false;
         this.hasSide = false;
+        this.updateId = -1;
 
         settings.bindWithObject(this, "theme", "defaultTheme");
         settings.bindWithObject(this, "height", "height");
@@ -195,6 +250,12 @@ NoteBase.prototype = {
         this.titleMenuItem = new PopupMenu.PopupMenuItem(this.title ? _("Edit title") : _("Add title"));
         this.contentMenuSection.addMenuItem(this.titleMenuItem);
         this.titleMenuItem.connect("activate", Lang.bind(this, this.editTitle));
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+        let saveTemplate = new PopupMenu.PopupMenuItem(_("Save as template"));
+        this.menu.addMenuItem(saveTemplate);
+        saveTemplate.connect("activate", Lang.bind(this, this.promptSaveTemplateName));
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -386,7 +447,7 @@ NoteBase.prototype = {
             time: DESTROY_TIME,
             onComplete: Lang.bind(this, function() {
                 let parent = this.actor.get_parent();
-                this.parent.remove_child(this.actor);
+                parent.remove_child(this.actor);
                 this.actor.destroy();
             })
         });
@@ -459,10 +520,32 @@ NoteBase.prototype = {
     },
 
     triggerUpdate: function() {
-        if ( !this.updateId ) Mainloop.idle_add(Lang.bind(this, function() {
+        if (this.updateId != -1) {
+            Mainloop.source_remove(this.updateId);
+        }
+        this.updateId = Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
+            this.updateId = -1;
             this.emit("changed");
-            this.updateId = undefined;
-        }))
+        }));
+    },
+
+    promptSaveTemplateName: function() {
+        new PromptDialog(_("Enter a name for the template."), Lang.bind(this, this.saveAsTemplate));
+    },
+
+    saveAsTemplate: function(name) {
+        global.logWarning(name)
+        if (name == "") return;
+
+        let info = this.getInfo();
+        info.name = name;
+        delete info.x;
+        delete info.y;
+        delete info.theme;
+
+        let templates = settings.getValue("templates");
+        templates.push(info);
+        settings.setValue("templates", templates);
     }
 }
 Signals.addSignalMethods(NoteBase.prototype);
@@ -507,7 +590,7 @@ Note.prototype = {
         this.textWrapper.connect("get-preferred-width", Lang.bind(this, this.getPreferedWidth));
         this.text.connect("button-release-event", Lang.bind(this, this.onButtonRelease));
         this.text.connect("button-press-event", Lang.bind(this, this.onButtonPress));
-        this.text.connect("text-changed", Lang.bind(this, function() { this.emit("changed"); }));
+        this.text.connect("text-changed", Lang.bind(this, this.triggerUpdate));
         this.text.connect("cursor-event", Lang.bind(this, this.handleScrollPosition));
         this.text.connect("key-focus-in", Lang.bind(this, this.onTextFocused));
 
@@ -729,6 +812,10 @@ CheckList.prototype = {
         let removeCompleteMenuItem = new PopupMenu.PopupMenuItem(_("Remove completed items"));
         this.contentMenuSection.addMenuItem(removeCompleteMenuItem);
         removeCompleteMenuItem.connect("activate", Lang.bind(this, this.removeComplete));
+
+        let unselectAllMenuItem = new PopupMenu.PopupMenuItem(_("Unselect all items"));
+        this.contentMenuSection.addMenuItem(unselectAllMenuItem);
+        unselectAllMenuItem.connect("activate", Lang.bind(this, this.unselectAll));
     },
 
     addItem: function(itemInfo, insertAfter) {
@@ -775,6 +862,13 @@ CheckList.prototype = {
         }
 
         if ( this.items.length == 0 ) this.newItem();
+        this.emit("changed");
+    },
+
+    unselectAll: function() {
+        for ( let i = 0; i < this.items.length; i++ ) {
+            this.items[i].completed = false;
+        }
         this.emit("changed");
     },
 
@@ -1141,6 +1235,11 @@ CheckListItem.prototype = {
         return this.checkBox.actor.checked;
     },
 
+    set completed(checked) {
+        this.checkBox.actor.checked = checked;
+        this.updateCheckedState();
+    },
+
     get text() {
         return this.entry.text;
     }
@@ -1160,11 +1259,7 @@ NoteBox.prototype = {
         this.mouseTrackEnabled = false;
         this.isModal = false;
         this.stageEventIds = [];
-
-        settings.bindWithObject(this, "storedNotes", "storedNotes");
-        settings.bindWithObject(this, "raisedState", "raisedState");
-        settings.bindWithObject(this, "hideState", "hideState");
-        settings.bindWithObject(this, "startState", "startState");
+        this.mouseTrackTimoutId = -1;
 
         this.actor = new Clutter.Group();
         Main.uiGroup.add_actor(this.actor);
@@ -1173,15 +1268,17 @@ NoteBox.prototype = {
         this.actor.add_actor(menu.actor);
         this.menuManager = new PopupMenu.PopupMenuManager(this);
 
-        if ( this.startState == 2 || ( this.startState == 3 && this.hideState ) ) {
+        let startState = settings.getValue("startState");
+        startState = ( startState >= 0 ) ? startState : settings.displayState;
+
+        if ( startState == DisplayState.HIDDEN ) {
             this.hideNotes();
-            this.actor.hide();
-            this.hideState = true;
+        }
+        else if ( startState == DisplayState.RAISED ) {
+            this.raiseNotes();
         }
         else {
-            if ( this.startState == 0 ) this.hideState = false;
-            if ( this.startState == 1 || ( this.startState == 3 && this.raisedState ) ) this.raiseNotes();
-            else this.lowerNotes();
+            this.lowerNotes();
         }
 
         this.dragPlaceholder = new St.Bin({ style_class: "desklet-drag-placeholder" });
@@ -1209,7 +1306,7 @@ NoteBox.prototype = {
         }
 
         let x, y;
-        if ( info ) {
+        if ( info && info.x && info.y ) {
             x = info.x;
             y = info.y;
         }
@@ -1255,7 +1352,7 @@ NoteBox.prototype = {
                 break;
             }
         }
-        if ( this.notes.length == 0 && this.raisedState ) {
+        if ( this.notes.length == 0 && settings.displayState == DisplayState.RAISED ) {
             this.lowerNotes();
         }
         this.update();
@@ -1270,13 +1367,13 @@ NoteBox.prototype = {
         let notesData = [];
         for ( let i = 0; i < this.notes.length; i++ )
             notesData.push(this.notes[i].getInfo());
-        this.storedNotes = notesData;
+        settings.setValue("storedNotes", notesData);
         if ( refresh ) this.initializeNotes();
     },
 
     initializeNotes: function() {
         this.removeAll();
-        for ( let noteInfo of this.storedNotes ) {
+        for ( let noteInfo of settings.getValue("storedNotes") ) {
             let type;
             //make sure it doesn't break anything on upgrade from older version
             if ( !noteInfo.type ) type = "note";
@@ -1304,13 +1401,9 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.open();
         this.actor.raise_top();
-        if ( this.hideState ) {
-            this.actor.show();
-            this.hideState = false;
-        }
-
-        this.raisedState = true;
-        this.enableMouseTracking(false);
+        this.actor.show();
+        settings.displayState = DisplayState.RAISED;
+        this.disableMouseTrackingCheck(true);
         this.setModal();
     },
 
@@ -1318,24 +1411,19 @@ NoteBox.prototype = {
         this.unpinNotes();
         this.menu.close();
         this.actor.lower(global.window_group);
-        if ( this.hideState ) {
-            this.actor.show();
-            this.hideState = false;
-        }
-
-        this.raisedState = false;
+        this.actor.show();
+        settings.displayState = DisplayState.DESKTOP;
         this.unsetModal();
-        this.enableMouseTracking(true);
+        this.enableMouseTrackingCheck();
     },
 
     hideNotes: function() {
         this.unpinNotes();
         this.menu.close();
         this.actor.hide();
-        this.raisedState = false;
-        this.hideState = true;
+        settings.displayState = DisplayState.HIDDEN;
         this.unsetModal();
-        this.enableMouseTracking(false);
+        this.disableMouseTrackingCheck(false);
     },
 
     pinNotes: function() {
@@ -1347,8 +1435,9 @@ NoteBox.prototype = {
         // with it's own menu manager
         this.menuManager.addMenu(this.menu);
 
+        settings.displayState = DisplayState.PINNED;
         this.unsetModal();
-        this.enableMouseTracking(true);
+        this.disableMouseTrackingCheck(true);
         this.pinned = true;
         this.emit("pin-changed");
     },
@@ -1491,43 +1580,66 @@ NoteBox.prototype = {
     },
 
     checkMouseTracking: function() {
-        let enable = false;
-        if ( this.pinned ) enable = true;
-        else if ( !this.hideState && !this.raisedState ) {
-            let window = global.screen.get_mouse_window(null);
-            let hasMouseWindow = window && window.window_type != Meta.WindowType.DESKTOP;
-            enable = !hasMouseWindow;
-        }
+        let window = global.screen.get_mouse_window(null);
+        let windowHasMouse = window && window.window_type != Meta.WindowType.DESKTOP;
 
-        if ( enable ) for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].trackMouse();
+        if ( !windowHasMouse ) for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].trackMouse();
         else for ( let i = 0; i < this.notes.length; i++ ) this.notes[i].untrackMouse();
 
         return true;
     },
 
-    enableMouseTracking: function(enable) {
-        if( enable && !this.mouseTrackTimoutId )
+    enableMouseTrackingCheck: function() {
+        if ( this.mouseTrackTimoutId < 0 ) {
             this.mouseTrackTimoutId = Mainloop.timeout_add(500, Lang.bind(this, this.checkMouseTracking));
-        else if ( !enable && this.mouseTrackTimoutId ) {
-            Mainloop.source_remove(this.mouseTrackTimoutId);
-            this.mouseTrackTimoutId = null;
-            for ( let i = 0; i < this.notes.length; i++ ) {
-                this.notes[i].untrackMouse();
-            }
         }
 
         this.checkMouseTracking();
     },
 
+    disableMouseTrackingCheck: function(track) {
+        if ( this.mouseTrackTimoutId > 0 ) {
+            Mainloop.source_remove(this.mouseTrackTimoutId);
+            this.mouseTrackTimoutId = -1;
+        }
+
+        for ( let i = 0; i < this.notes.length; i++ ) {
+            if ( track ) {
+                this.notes[i].trackMouse();
+            }
+            else {
+                this.notes[i].untrackMouse();
+            }
+        }
+    },
+
     getAvailableCoordinates: function() {
         //determine boundaries
         let monitor = Main.layoutManager.primaryMonitor;
+        let panels = Main.panelManager.getPanelsInMonitor(Main.layoutManager.primaryIndex);
+
         let startX = PADDING + monitor.x;
         let startY = PADDING + monitor.y;
-        if ( Main.desktop_layout != Main.LAYOUT_TRADITIONAL ) startY += Main.panel.actor.height;
-        let width = monitor.width - PADDING;
-        let height = monitor.height - Main.panel.actor.height - PADDING;
-        if ( Main.desktop_layout == Main.LAYOUT_CLASSIC ) height -= Main.panel2.actor.height;
+        let width = monitor.width - (PADDING * 2);
+        let height = monitor.height - (PADDING * 2);
+
+        for ( let i = 0; i < panels.length; i++ ) {
+            let panel = panels[i];
+            // if ( panel.monitorIndex != Main.layoutManager.primaryIndex ) continue;
+            if ( panel.panelPosition == Panel.PanelLoc.top ) {
+                startY += panel.actor.height;
+            }
+            else if ( panel.panelPosition == Panel.PanelLoc.left ) {
+                startX += panel.actor.width;
+            }
+
+            if ( panel.is_vertical ) {
+                width -= panel.actor.width;
+            }
+            else {
+                height -= panel.actor.height;
+            }
+        }
 
         //calculate number of squares
         let rowHeight = settings.getValue("height") + PADDING;
@@ -1585,8 +1697,8 @@ MyApplet.prototype = {
         Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale");
 
         settings = new Settings.AppletSettings(this, uuid, instanceId);
-        settings.bind("storedNotes", "storedNotes");
-        settings.bind("raisedState", "raisedState");
+        settings.bindWithObject(settings, "displayState", "displayState");
+        settings.bind("templates", "templates");
 
         this.set_applet_icon_symbolic_path(this.metadata.path+"/icons/sticky-symbolic.svg");
 
@@ -1596,16 +1708,25 @@ MyApplet.prototype = {
         noteBox.connect("pin-changed", Lang.bind(this, this.stateChanged));
 
         this.buildMenus();
+        this.buildTemplateMenu();
     },
 
     on_applet_clicked: function() {
-        if ( noteBox.pinned ) this.menu.toggle();
-        else if ( this.raisedState ) noteBox.lowerNotes();
-        else noteBox.raiseNotes();
+        if ( settings.displayState == DisplayState.PINNED ) {
+            this.menu.toggle();
+        }
+        else if ( settings.displayState == DisplayState.RAISED ) {
+            noteBox.lowerNotes();
+        }
+        else {
+            noteBox.raiseNotes();
+        }
     },
 
     on_applet_removed_from_panel: function() {
-        if ( this.raisedState ) noteBox.lowerNotes();
+        if ( settings.displayState == DisplayState.RAISED || settings.displayState == DisplayState.PINNED ) {
+            noteBox.lowerNotes();
+        }
         noteBox.destroy();
     },
 
@@ -1618,6 +1739,10 @@ MyApplet.prototype = {
         let newCheckListMenuItem = new PopupMenu.PopupIconMenuItem(_("New check-list"), "add-checklist-symbolic", St.IconType.SYMBOLIC);
         this.menu.addMenuItem(newCheckListMenuItem);
         newCheckListMenuItem.connect("activate", Lang.bind(noteBox, noteBox.newCheckList));
+
+        this.templateMenuItem = new PopupMenu.PopupSubMenuMenuItem(_("New from template"));
+        this.menu.addMenuItem(this.templateMenuItem);
+        this.templateMenu = this.templateMenuItem.menu;
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1642,6 +1767,30 @@ MyApplet.prototype = {
         restoreBackupItem.connect("activate", Lang.bind(this, this.loadBackup));
     },
 
+    buildTemplateMenu: function() {
+        if ( this.templates.length == 0 ) {
+            this.templateMenuItem.actor.hide();
+            return;
+        }
+        else {
+            this.templateMenuItem.actor.show();
+        }
+
+        for ( let i = 0; i < this.templates.length; i++ ) {
+            let info = this.templates[i];
+            let menuItem = new PopupMenu.PopupMenuItem(info.name);
+            menuItem.templateInfo = info;
+            this.templateMenu.addMenuItem(menuItem);
+            menuItem.connect("activate", Lang.bind(this, this.newFromTemplate));
+        }
+    },
+
+    newFromTemplate: function(menuItem) {
+        let info = menuItem.templateInfo;
+        noteBox.addNote(info.type, info);
+        noteBox.update();
+    },
+
     stateChanged: function() {
         if ( noteBox.pinned ) this.pinMenuItem.label.text = "Unpin notes (lower on click)";
         else this.pinMenuItem.label.text = "Pin notes (keep on top)";
@@ -1652,7 +1801,7 @@ MyApplet.prototype = {
         FileDialog.save(Lang.bind(this, function(path) {
             let file = Gio.file_new_for_path(path.slice(0,-1));
             if ( !file.query_exists(null) ) file.create(Gio.FileCreateFlags.NONE, null);
-            file.replace_contents(JSON.stringify(this.storedNotes), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
+            file.replace_contents(JSON.stringify(settings.getValue("storedNotes")), null, false, Gio.FileCreateFlags.REPLACE_DESTINATION, null);
         }), params);
     },
 
@@ -1663,7 +1812,7 @@ MyApplet.prototype = {
                 let file = Gio.file_new_for_path(path.slice(0,-1));
                 if ( !file.query_exists(null) ) return;
                 let [a, contents, b] = file.load_contents(null);
-                this.storedNotes = JSON.parse(contents);
+                settings.setValue("storedNotes", JSON.parse(contents));
                 noteBox.initializeNotes();
             }), params);
         })).open();

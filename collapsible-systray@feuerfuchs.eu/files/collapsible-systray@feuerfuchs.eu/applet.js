@@ -1,4 +1,4 @@
-const uuid                      = imports.applet.uuid;
+const uuid = "collapsible-systray@feuerfuchs.eu";
 
 const Util                      = imports.misc.util;
 const Lang                      = imports.lang;
@@ -18,7 +18,7 @@ const CinnamonSystray           = AppletDir.CinnamonSystray;
 const CSCollapseBtn             = AppletDir.CSCollapseBtn;
 const CSRemovableSwitchMenuItem = AppletDir.CSRemovableSwitchMenuItem;
 
-const _                         = AppletDir.__init__._;
+const _                         = AppletDir.Util._;
 
 const ICON_SCALE_FACTOR         = CinnamonSystray.ICON_SCALE_FACTOR;
 const DEFAULT_ICON_SIZE         = CinnamonSystray.DEFAULT_ICON_SIZE;
@@ -765,6 +765,14 @@ CollapsibleSystrayApplet.prototype = {
 
         CinnamonSystray.MyApplet.prototype._onIndicatorAdded.call(this, manager, appIndicator);
 
+        let id = appIndicator.id;
+        
+        if (appIndicator.id.trim() == "")
+        {
+            global.logError("[" + uuid + "] Indicator ID is empty. It's probably Dropbox being \"special\" once again.");
+            id = "[empty name]";
+        }
+
         if (appIndicator.id in this._shellIndicators) {
             const iconActor = this._shellIndicators[appIndicator.id];
 
@@ -779,10 +787,10 @@ CollapsibleSystrayApplet.prototype = {
             }
             iconActor.actor.csEnableAfter = function() { }
             iconActor.actor.connect('destroy', Lang.bind(this, function() {
-                this._unregisterAppIcon(appIndicator.id, iconActor.actor);
+                this._unregisterAppIcon(id, iconActor.actor);
             }));
 
-            this._registerAppIcon(appIndicator.id, iconActor.actor);
+            this._registerAppIcon(id, iconActor.actor);
         }
     },
 

@@ -223,7 +223,7 @@ MyApplet.prototype = {
     let currentPreferences = JSON.stringify(this.configSettings._prefs);
     if (this.childProcessHandler == null) {
       // TBD
-      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.metadata.path, ['prefs.js', currentPreferences]);
+      this.childProcessHandler = new SpawnProcess.ProcessSpawnHandler(this.metadata.path, ['cjs', 'prefs.js', currentPreferences]);
     }
   },
   on_orientation_changed: function(orientation) {

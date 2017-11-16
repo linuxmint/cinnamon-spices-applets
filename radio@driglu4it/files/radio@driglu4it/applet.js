@@ -5,6 +5,19 @@ const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
 
+// l10n support
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+const UUID = "radio@driglu4it";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+function _(str) {
+    let customTranslation = Gettext.dgettext(UUID, str);
+    if(customTranslation != str) {
+        return customTranslation;
+    }
+    return Gettext.gettext(str);
+}
+
 function MyApplet(orientation, panel_height, instance_id) {
   this._init(orientation, panel_height, instance_id);
 }
@@ -18,6 +31,7 @@ MyApplet.prototype = {
     this.menuManager.addMenu(this.menu);
     this.settings = new Settings.AppletSettings(this, "radio@driglu4it", instance_id);
     this.settings.bind("tree", "name", this.on_settings_changed);
+    this.currentMenuItem = null;
     this.on_settings_changed();
   },
   on_settings_changed: function() {
@@ -30,20 +44,40 @@ MyApplet.prototype = {
     for (i = 0; i < j; i++) {
       let title = this.name[i].name;
       let id = this.name[i].url;
-      let menuitem = new PopupMenu.PopupMenuItem(title);
+      let menuitem = new PopupMenu.PopupMenuItem(title, false);
       menuitem.connect('activate', Lang.bind(this, function() {
-        this.startCM(id);
-        Main.notify(_("Playing") + ' ' + title);
+        if (this.currentMenuItem != menuitem) {
+            this.set_applet_tooltip(title);
+            this.startCM(id);
+            Main.notify(_("Playing %s").format(title));
+            this.activeMenuItemChanged(menuitem);
+        }
       }));
       this.menu.addMenuItem(menuitem);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-    this.menu.addAction(_("Stop"), function(event) {
+    let stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
+    stopitem.connect('activate', Lang.bind(this, function() {
+      this.set_applet_tooltip(_("Radio++"));
+      this.activeMenuItemChanged(stopitem);
       Main.Util.spawnCommandLine("mocp -s");
       Main.notify(_("Stop") + ' Radio++');
-    });
+    }));
+    this.menu.addMenuItem(stopitem);
+    this.activeMenuItemChanged(stopitem);
+  },
+  activeMenuItemChanged: function(activatedMenuItem) {
+    if(this.currentMenuItem == null) {
+        this.currentMenuItem = activatedMenuItem;
+    } else {
+        this.currentMenuItem.setShowDot(false);
+        this.currentMenuItem = activatedMenuItem;
+    }
+    this.currentMenuItem.setShowDot(true);
   },
   startCM: function(id) {
+    //Make sure that the MOC-Server is running before playing a stream
+    Main.Util.spawnCommandLine("mocp -S")
     Main.Util.spawnCommandLine('mocp -c -a -p ' + id);
   },
   on_applet_clicked: function(event) {

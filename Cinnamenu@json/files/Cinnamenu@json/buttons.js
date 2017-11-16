@@ -13,7 +13,7 @@ const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
-let store, setTimeout, clearTimeout, isString, unref, _, ApplicationType;
+let store, setTimeout, clearTimeout, isString, unref, tryFn, _, ApplicationType;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   const constants = require('./constants');
@@ -22,6 +22,7 @@ if (typeof require !== 'undefined') {
   clearTimeout = utils.clearTimeout;
   isString = utils.isString;
   unref = utils.unref;
+  tryFn = utils.tryFn;
   _ = constants._;
   ApplicationType = constants.ApplicationType;
 } else {
@@ -32,6 +33,7 @@ if (typeof require !== 'undefined') {
   clearTimeout = AppletDir.utils.clearTimeout;
   isString = AppletDir.utils.isString;
   unref = AppletDir.utils.unref;
+  tryFn = AppletDir.utils.tryFn;
   _ = AppletDir.constants._;
   ApplicationType = AppletDir.constants.ApplicationType;
 }
@@ -297,12 +299,12 @@ ApplicationContextMenuItem.prototype = {
       case 'add_to_desktop':
         let file = Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename());
         let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
-        try {
+        tryFn(function() {
           file.copy(destFile, 0, null, function() {});
           FileUtils.changeModeGFile(destFile, 755);
-        } catch (e) {
+        }, function(e) {
           global.log(e);
-        }
+        });
         this.buttonState.trigger('toggleMenu');
         break;
       case 'add_to_favorites':
@@ -443,11 +445,10 @@ AppListGridButton.prototype = {
       };
       this.buttonState.appType = ApplicationType._places;
       this.file = Gio.file_new_for_path(this.buttonState.app.name);
-      try {
-        this.handler = this.file.query_default_handler(null);
-      } catch (e) {
-        this.handler = null;
-      }
+      tryFn(
+        () => this.handler = this.file.query_default_handler(null),
+        () => this.handler = null
+      );
     }
     // Don't show protocol handlers
     if (this.buttonState.app.description) {
@@ -509,7 +510,7 @@ AppListGridButton.prototype = {
     });
 
     this.dot = new St.Widget({
-      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.mainBoxBorderColor + '; margin-bottom: 2px; border-radius: 128px;',
+      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.foregroundColor + '; margin-bottom: 2px; border-radius: 128px;',
       layout_manager: new Clutter.BinLayout(),
       x_expand: true,
       y_expand: false,
@@ -519,7 +520,7 @@ AppListGridButton.prototype = {
 
     this.buttonBox = new St.BoxLayout({
       vertical: !this.state.isListView,
-      width: 240,
+      width: 240 * global.ui_scale,
       y_expand: false
     });
     let iconDotContainer = this.state.isListView ? '_iconContainer' : 'buttonBox';
@@ -850,11 +851,10 @@ AppListGridButton.prototype = {
       if (this.handler) {
         this.handler.launch([this.file], null);
       } else {
-        try {
-          Util.spawn(['gvfs-open', this.buttonState.app.uri])
-        } catch (e) {
-          global.logError('No handler available to open ' + this.buttonState.app.uri);
-        }
+        tryFn(
+          () => Util.spawn(['gvfs-open', this.buttonState.app.uri]),
+          () => global.logError('No handler available to open ' + this.buttonState.app.uri)
+        );
       }
     } else if (this.buttonState.appType === ApplicationType._applications) {
       this.buttonState.app.open_new_window(-1);
@@ -1077,22 +1077,23 @@ GroupButton.prototype = {
   },
 
   _onUserChanged: function() {
-    if (this._user.is_loaded) {
-      this.name = this._user.get_real_name();
-      if (this.icon) {
-        let iconFileName = this._user.get_icon_file();
-        let iconFile = Gio.file_new_for_path(iconFileName);
-        let icon;
-        if (iconFile.query_exists(null)) {
-          icon = new Gio.FileIcon({
-            file: iconFile
-          });
-        } else {
-          icon = this.defaultAvatar;
-        }
-        this.icon.set_gicon(icon);
-        this.icon.realize();
+    if (!this._user || !this._user.is_loaded) {
+      return;
+    }
+    this.name = this._user.get_real_name();
+    if (this.icon) {
+      let iconFileName = this._user.get_icon_file();
+      let iconFile = Gio.file_new_for_path(iconFileName);
+      let icon;
+      if (iconFile.query_exists(null)) {
+        icon = new Gio.FileIcon({
+          file: iconFile
+        });
+      } else {
+        icon = this.defaultAvatar;
       }
+      this.icon.set_gicon(icon);
+      this.icon.realize();
     }
   },
 

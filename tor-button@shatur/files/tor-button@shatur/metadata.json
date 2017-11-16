@@ -1,6 +1,6 @@
 {
-    "description": "Applet for Tor network management", 
-    "last-edited": 1502496607, 
-    "name": "Tor Button", 
-    "uuid": "tor-button@shatur"
+    "description": "Applet for Tor network management",
+    "version": 1.2,
+    "uuid": "tor-button@shatur",
+    "name": "Tor Button"
 }
