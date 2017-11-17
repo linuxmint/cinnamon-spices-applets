@@ -225,6 +225,14 @@ msgid "Watching Nova"
 msgstr ""
 
 #: applet.js
+msgid "Kanal 3"
+msgstr ""
+
+#: applet.js
+msgid "Watching Kanal 3"
+msgstr ""
+
+#: applet.js
 msgid "On Air"
 msgstr ""
 
