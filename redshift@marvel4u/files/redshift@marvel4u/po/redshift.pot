@@ -47,6 +47,30 @@ msgstr ""
 msgid "Redshift night brightness"
 msgstr ""
 
+#: applet.js:330
+msgid "On"
+msgstr ""
+
+#: applet.js:330
+msgid "Off"
+msgstr ""
+
+#: applet.js:334
+msgid "Day colour temperature"
+msgstr ""
+
+#: applet.js:335
+msgid "Night colour temperature"
+msgstr ""
+
+#: applet.js:336
+msgid "Day Redshift brightness"
+msgstr ""
+
+#: applet.js:337
+msgid "Night Redshift brightness"
+msgstr ""
+
 #. redshift@marvel4u->settings-schema.json->brightness-section->title
 msgid "Brightness level"
 msgstr ""
