@@ -1,6 +1,6 @@
 {
     "description": "Sets brightness and gamma levels of a screen",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "uuid": "brightness-and-gamma-applet@cardsurf",
     "name": "Brightness and gamma applet"
 }
