@@ -1,7 +1,8 @@
 {
-    "description": "Manager of PDF", 
     "uuid": "PDFManager@cinnamon.org", 
+    "dangerous": false, 
     "name": "PDFManager", 
-    "last-edited": "1456619186", 
-    "icon": "gnome-mime-application-pdf"
+    "last-edited": 1498912506, 
+    "icon": "gnome-mime-application-pdf", 
+    "description": "Manager of PDF"
 }
