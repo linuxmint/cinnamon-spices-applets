@@ -48,7 +48,7 @@ MyApplet.prototype = {
     _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation)
         try {
-            this.set_applet_tooltip(_("Click here to manage your PDF"))
+            this.set_applet_tooltip(_("Manage your PDF"))
             this.set_applet_icon_name("gnome-mime-application-pdf")
 
             this.menuManager = new PopupMenu.PopupMenuManager(this)
@@ -66,53 +66,52 @@ MyApplet.prototype = {
     },
     _display: function() {
 
-		if(Gio.file_new_for_path("/usr/bin/pdftk").query_exists(null)) {
-			let icon = new St.Icon({ icon_name: 'list-add', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			let menuItem = new MyPopupMenuItem(icon, _("Merge PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._merge, {}))
+		let icon = new St.Icon({ icon_name: 'list-add', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		let menuItem = new MyPopupMenuItem(icon, _("Merge PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._merge, {}))
 
-	        icon = new St.Icon({ icon_name: 'list-remove', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			menuItem = new MyPopupMenuItem(icon, _("Extract PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._extract, {}))
-
-	        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
-
-	        icon = new St.Icon({ icon_name: 'view-refresh', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			menuItem = new MyPopupMenuItem(icon, _("Reduce size of PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._reduce, {}))
-
-	        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
-
-	        icon = new St.Icon({ icon_name: 'object-rotate-left', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			menuItem = new MyPopupMenuItem(icon, _("Rotate left PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._rotate_left, {}))
-
-	        icon = new St.Icon({ icon_name: 'object-rotate-right', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			menuItem = new MyPopupMenuItem(icon, _("Rotate right PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._rotate_right, {}))
-
-	        icon = new St.Icon({ icon_name: 'object-flip-vertical', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			menuItem = new MyPopupMenuItem(icon, _("Flip vertically PDF"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._flip_v, {}))
-		} else {
-			let icon = new St.Icon({ icon_name: 'list-add', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
- 			let menuItem = new MyPopupMenuItem(icon, _("Install PDFManager's tools"), {})
-			this.menu.addMenuItem(menuItem)
-			menuItem.connect('activate', Lang.bind(this, this._run, "apturl apt://pdftk"))
-		}
-
+        icon = new St.Icon({ icon_name: 'list-remove', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		menuItem = new MyPopupMenuItem(icon, _("Extract PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._extract, {}))
 
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
-        if (Gio.file_new_for_path("/usr/bin/evince").query_exists(null)) {
+
+        icon = new St.Icon({ icon_name: 'view-refresh', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		menuItem = new MyPopupMenuItem(icon, _("Reduce size of PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._reduce, {}))
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
+
+        icon = new St.Icon({ icon_name: 'object-rotate-left', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		menuItem = new MyPopupMenuItem(icon, _("Rotate left PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._rotate_left, {}))
+
+        icon = new St.Icon({ icon_name: 'object-rotate-right', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		menuItem = new MyPopupMenuItem(icon, _("Rotate right PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._rotate_right, {}))
+
+        icon = new St.Icon({ icon_name: 'object-flip-vertical', icon_type: St.IconType.SYMBOLIC, icon_size: 16 })
+		menuItem = new MyPopupMenuItem(icon, _("Flip vertically PDF"), {})
+		this.menu.addMenuItem(menuItem)
+		menuItem.connect('activate', Lang.bind(this, this._flip_v, {}))
+
+        this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem())
+        if (Gio.file_new_for_path("/usr/bin/xreader").query_exists(null)) {
 
 			icon = new St.Icon({ gicon: Gio.icon_new_for_string("/usr/share/icons/Mint-X/apps/16/evince.png"), icon_size: 16})
  			menuItem = new MyPopupMenuItem(icon, _("Open Document Viewer"), {})
+			this.menu.addMenuItem(menuItem)
+			menuItem.connect('activate', Lang.bind(this, this._run, "xreader"))
+        }
+        if (Gio.file_new_for_path("/usr/bin/evince").query_exists(null)) {
+
+			icon = new St.Icon({ gicon: Gio.icon_new_for_string("/usr/share/icons/Mint-X/apps/16/evince.png"), icon_size: 16})
+ 			menuItem = new MyPopupMenuItem(icon, _("Open Evince"), {})
 			this.menu.addMenuItem(menuItem)
 			menuItem.connect('activate', Lang.bind(this, this._run, "evince"))
         }
@@ -141,22 +140,22 @@ MyApplet.prototype = {
         Util.spawnCommandLine(d)
     },
     _merge: function(a, b, c, d) {
-        Util.spawnCommandLine(AppletDirectory + "/merge.py")
+        Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -m")
     },
     _extract: function(a, b, c, d) {
-        Util.spawnCommandLine(AppletDirectory + "/extract.py")
+        Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -e")
     },
     _rotate_left: function(a, b, c, d) {
-        Util.spawnCommandLine(AppletDirectory + "/rotate-left.py")
+        Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -rl")
     },
     _rotate_right: function(a, b, c, d) {
-        Util.spawnCommandLine(AppletDirectory + "/rotate-right.py")
+        Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -rr")
     },
     _flip_v: function(a, b, c, d) {
-        Util.spawnCommandLine(AppletDirectory + "/flip-v.py")
+        Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -f")
     },
     _reduce: function(a, b, c, d) {
-    	Util.spawnCommandLine(AppletDirectory + "/reduce.py")
+    	Util.spawnCommandLine(AppletDirectory + "/pdf-manager.py -r")
     },
 
     destroy: function() {
