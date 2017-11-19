@@ -194,3 +194,23 @@ msgstr ""
 #. schema.json->apply_startup->tooltip
 msgid "Apply values at applet startup"
 msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->description
+msgid "Apply every"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->tooltip
+msgid "How often to apply values. 0 means that values are not applied periodically."
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr ""
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr ""
