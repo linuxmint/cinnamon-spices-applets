@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ScreenShot+RecordDesktop@tech71\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 16:14+0200\n"
-"PO-Revision-Date: 2017-05-16 16:22+0200\n"
+"POT-Creation-Date: 2017-11-19 15:05+0100\n"
+"PO-Revision-Date: 2017-11-19 15:05+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -52,16 +52,24 @@ msgid "Selected Area"
 msgstr "Uslikaj odabrano područje"
 
 #: applet.js:79
-msgid "Record Desktop"
-msgstr "Snimi radnu površinu"
+msgid "Record Screencast"
+msgstr "Snimanje zaslona"
 
 #: applet.js:81
-msgid "Start With Audio"
-msgstr "Snimi sa zvukom"
+msgid "Record Desktop With Audio"
+msgstr "Snimi radnu površinu sa zvukom"
+
+#: applet.js:81
+msgid "Record Desktop Without Audio"
+msgstr "Snimi radnu površinu bez zvuka"
 
 #: applet.js:83 applet.js:88
-msgid "Recording"
-msgstr "Snimanje"
+msgid "Recording Current Window with Audio"
+msgstr "Snimi trenutni prozor sa zvukom"
+
+#: applet.js:83 applet.js:88
+msgid "Recording Current Window without Audio"
+msgstr "Snimi trenutni prozor bez zvuka"
 
 #: applet.js:83
 msgid "With-Audio"
@@ -102,3 +110,28 @@ msgstr "Uslikajte ili snimite svoju radnu površinu"
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
 msgid "ScreenShot+Record Desktop"
 msgstr "Slikanje+Snimanje radne površine"
+
+#~ msgid "Recording"
+#~ msgstr "Snimanje"
+
+#~ msgid "Record Current Window With Audio"
+#~ msgstr "Snimi trenutni prozor sa zvukom"
+
+#~ msgid "Record Current Window Without Audio"
+#~ msgstr "Snimi trenutni prozor bez zvuka"
+
+#~ msgid "Stop Recording"
+#~ msgstr "Zaustavi snimanje"
+
+#~ msgid ""
+#~ "Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, "
+#~ "xdotool, xdpyinfo)"
+#~ msgstr ""
+#~ "Uslikajte ili snimite svoju radnu površinu (potrebni su ffmpeg, xwininfo, "
+#~ "xdotool, xdpyinfo)"
+
+#~ msgid "Record Desktop"
+#~ msgstr "Snimi radnu površinu"
+
+#~ msgid "Start With Audio"
+#~ msgstr "Snimi sa zvukom"
