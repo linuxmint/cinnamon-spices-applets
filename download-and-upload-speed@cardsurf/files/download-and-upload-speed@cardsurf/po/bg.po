@@ -102,7 +102,7 @@ msgstr "Компактен"
 #. schema.json->gui_speed_type->options
 #: applet.js:444
 msgid "Large"
-msgstr "Голя"
+msgstr "Голям"
 
 #: appletGui.js:362
 msgid "Total download:"
