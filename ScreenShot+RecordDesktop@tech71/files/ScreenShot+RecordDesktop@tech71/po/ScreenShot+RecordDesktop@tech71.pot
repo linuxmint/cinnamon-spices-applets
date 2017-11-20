@@ -62,11 +62,11 @@ msgid "Record Desktop Without Audio"
 msgstr ""
 
 #: applet.js:83 applet.js:88
-msgid "Recording Current Window with Audio"
+msgid "Record Current Window With Audio"
 msgstr ""
 
 #: applet.js:83 applet.js:88
-msgid "Recording Current Window without Audio"
+msgid "Record Current Window Without Audio"
 msgstr ""
 
 #: applet.js:83
@@ -82,7 +82,7 @@ msgid "No-Audio"
 msgstr ""
 
 #: applet.js:91
-msgid "Stop"
+msgid "Stop Recording"
 msgstr ""
 
 #: applet.js:95
@@ -102,7 +102,7 @@ msgid "Videos Folder"
 msgstr ""
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->description
-msgid "Take A Snapshot Or Record Your Desktop"
+msgid "Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, xdotool, xdpyinfo)"
 msgstr ""
 
 #. ScreenShot+RecordDesktop@tech71->metadata.json->name
