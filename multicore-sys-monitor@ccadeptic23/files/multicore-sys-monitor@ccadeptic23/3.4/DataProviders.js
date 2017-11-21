@@ -2,6 +2,7 @@ const GTop = imports.gi.GTop;
 const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const NetworkManager = imports.gi.NetworkManager;
 
 const Gettext = imports.gettext;
 const UUID = 'multicore-sys-monitor@ccadeptic23';
@@ -235,22 +236,28 @@ NetDataProvider.prototype = {
     this.disabledDevices = disabledDevicesList;
   },
   getNetDevices: function(init = false) {
-    let nmClient = NMClient.Client.new();
-    let devices = nmClient.get_devices();
+    let nmClient;
+    let devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
     let removedDeviceIndexes = [];
     if (!devices) {
-      nmClient = undefined;
-      devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+      nmClient = NMClient.Client.new();
+      devices = nmClient.get_devices();
     }
     for (let i = 0, len = devices.length; i < len; i++) {
+      let deviceConnected = true;
       if (nmClient) {
+        if (devices[i].state !== NetworkManager.DeviceState.CONNECTED) {
+          deviceConnected = false;
+        }
         devices[i] = devices[i].get_iface();
       }
-      GTop.glibtop_get_netload(this.gtop, devices[i]);
+      if (deviceConnected) {
+        GTop.glibtop_get_netload(this.gtop, devices[i]);
+      }
       devices[i] = {
         id: devices[i],
-        up: init ? 0 : this.gtop.bytes_in,
-        down: init ? 0 : this.gtop.bytes_out
+        up: init ? 0 : (deviceConnected ? this.gtop.bytes_in : 0),
+        down: init ? 0 : (deviceConnected ? this.gtop.bytes_out : 0)
       };
       if (this.disabledDevices.indexOf(devices[i]) > -1) {
         removedDeviceIndexes.push(i);
@@ -269,8 +276,14 @@ NetDataProvider.prototype = {
     this.getData();
     let toolTipString = _('------- Networks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
-      let down = formatBytes(this.currentReadings[i].tooltipUp, 2);
-      let up = formatBytes(this.currentReadings[i].tooltipDown, 2);
+      if (!this.currentReadings[i].tooltipDown) {
+        this.currentReadings[i].tooltipDown = 0;
+      }
+      if (!this.currentReadings[i].tooltipUp) {
+        this.currentReadings[i].tooltipUp = 0;
+      }
+      let down = formatBytes(this.currentReadings[i].tooltipDown, 2);
+      let up = formatBytes(this.currentReadings[i].tooltipUp, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
       toolTipString += indent + _('Down:') + '' + down.padStart(spaces) + rate + '\n';
       toolTipString += indent  + _('Up:') + '   ' + up.padStart(spaces) + rate + '\n';
