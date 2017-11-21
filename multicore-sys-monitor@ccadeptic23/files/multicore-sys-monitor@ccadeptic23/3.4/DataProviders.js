@@ -276,8 +276,14 @@ NetDataProvider.prototype = {
     this.getData();
     let toolTipString = _('------- Networks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
-      let down = formatBytes(this.currentReadings[i].tooltipUp, 2);
-      let up = formatBytes(this.currentReadings[i].tooltipDown, 2);
+      if (!this.currentReadings[i].tooltipDown) {
+        this.currentReadings[i].tooltipDown = 0;
+      }
+      if (!this.currentReadings[i].tooltipUp) {
+        this.currentReadings[i].tooltipUp = 0;
+      }
+      let down = formatBytes(this.currentReadings[i].tooltipDown, 2);
+      let up = formatBytes(this.currentReadings[i].tooltipUp, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
       toolTipString += indent + _('Down:') + '' + down.padStart(spaces) + rate + '\n';
       toolTipString += indent  + _('Up:') + '   ' + up.padStart(spaces) + rate + '\n';

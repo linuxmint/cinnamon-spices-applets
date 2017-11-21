@@ -245,6 +245,9 @@ GraphLineChart.prototype = {
       this.maxvalue = 1.0;
       for (let i = 0; i < this.dataPointsList.length; i++) {
         for (let j = 0; j < datapoints.length; j++) {
+          if (!this.dataPointsList[i][j]) {
+            continue;
+          }
           if (this.dataPointsList[i][j] >= this.maxvalue && this.dataPointsList[i][j] > this.minMaxValue) {
             this.maxvalue = this.dataPointsList[i][j];
             this.maxvalueloc = i;
