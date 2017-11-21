@@ -236,12 +236,12 @@ NetDataProvider.prototype = {
     this.disabledDevices = disabledDevicesList;
   },
   getNetDevices: function(init = false) {
-    let nmClient = NMClient.Client.new();
-    let devices = nmClient.get_devices();
+    let nmClient;
+    let devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
     let removedDeviceIndexes = [];
     if (!devices) {
-      nmClient = undefined;
-      devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
+      nmClient = NMClient.Client.new();
+      devices = nmClient.get_devices();
     }
     for (let i = 0, len = devices.length; i < len; i++) {
       let deviceConnected = true;
