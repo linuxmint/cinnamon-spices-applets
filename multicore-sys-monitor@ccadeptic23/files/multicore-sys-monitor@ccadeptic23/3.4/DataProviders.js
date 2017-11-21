@@ -2,6 +2,7 @@ const GTop = imports.gi.GTop;
 const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const NetworkManager = imports.gi.NetworkManager;
 
 const Gettext = imports.gettext;
 const UUID = 'multicore-sys-monitor@ccadeptic23';
@@ -243,14 +244,20 @@ NetDataProvider.prototype = {
       devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
     }
     for (let i = 0, len = devices.length; i < len; i++) {
+      let deviceConnected = true;
       if (nmClient) {
+        if (devices[i].state !== NetworkManager.DeviceState.CONNECTED) {
+          deviceConnected = false;
+        }
         devices[i] = devices[i].get_iface();
       }
-      GTop.glibtop_get_netload(this.gtop, devices[i]);
+      if (deviceConnected) {
+        GTop.glibtop_get_netload(this.gtop, devices[i]);
+      }
       devices[i] = {
         id: devices[i],
-        up: init ? 0 : this.gtop.bytes_in,
-        down: init ? 0 : this.gtop.bytes_out
+        up: init ? 0 : (deviceConnected ? this.gtop.bytes_in : 0),
+        down: init ? 0 : (deviceConnected ? this.gtop.bytes_out : 0)
       };
       if (this.disabledDevices.indexOf(devices[i]) > -1) {
         removedDeviceIndexes.push(i);
