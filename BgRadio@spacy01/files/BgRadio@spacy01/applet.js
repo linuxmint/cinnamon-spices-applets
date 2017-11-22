@@ -205,6 +205,13 @@ MyApplet.prototype = {
 		Main.notify(_("Watching bTV"));
 		});
 		
+		//bit
+		this.TvItem.menu.addAction(_("BIT"), function(event) {
+		Main.Util.spawnCommandLine("killall -9 vlc");
+		Main.Util.spawnCommandLine("vlc 'http://hls.cdn.bg:2103/fls/bit_2.stream/playlist.m3u8' --meta-title 'BIT'");
+		Main.notify(_("Watching BIT"));
+		});
+		
 		//city
 		this.TvItem.menu.addAction(_("City"), function(event) {
 		Main.Util.spawnCommandLine("killall -9 vlc");
