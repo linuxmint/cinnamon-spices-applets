@@ -209,6 +209,14 @@ msgid "Watching bTV"
 msgstr ""
 
 #: applet.js
+msgid "BIT"
+msgstr ""
+
+#: applet.js
+msgid "Watching BIT"
+msgstr ""
+
+#: applet.js
 msgid "City"
 msgstr ""
 
