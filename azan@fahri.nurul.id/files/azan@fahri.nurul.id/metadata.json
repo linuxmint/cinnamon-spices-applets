@@ -1,0 +1,9 @@
+{
+    "description": "Azan is an Islamic prayer times application", 
+    "max-instances": "-1", 
+    "dangerous": false, 
+    "uuid": "azan@fahri.nurul.id", 
+    "name": "Azan", 
+    "version": "0.1", 
+    "icon": "force-exit"
+}
