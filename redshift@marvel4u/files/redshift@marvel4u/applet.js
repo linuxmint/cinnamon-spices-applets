@@ -8,9 +8,6 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const Mainloop = imports.mainloop; //timer stuff
-const Gettext = imports.gettext.domain('cinnamon');
-const _ = Gettext.gettext;
-
 const Settings = imports.ui.settings;
 
 //----------------------------------------------------------------------
@@ -37,6 +34,14 @@ const ICON_PATH = GLib.get_home_dir() + '/.local/share/cinnamon/applets/redshift
 const ICON_OFF = ICON_PATH + "Material_Design_Icons/lightbulb.svg";
 const ICON_ON = ICON_PATH + "Material_Design_Icons/lightbulb-on-outline.svg";
 const ICON_SUNSET = ICON_PATH + "Material_Design_Icons/weather-sunset.svg";
+
+const Gettext = imports.gettext;
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(text) {
+  let locText = Gettext.dgettext(UUID, text);
+  return locText;
+}
 
 
 //const SetBrightnessCmd = 'gdbus call --session --dest org.gnome.SettingsDaemon --object-path /org/gnome/SettingsDaemon/Power --method org.gnome.SettingsDaemon.Power.Screen.SetPercentage ';
@@ -327,7 +332,7 @@ MyApplet.prototype = {
 
     updateTooltip: function () {
         var tooltip = _('Brightness') + ': ' + this.brightness + '%\n';
-        tooltip += _('Redshift') + ': ' + (this.enabled ? 'On' : 'Off');
+        tooltip += _('Redshift') + ': ' + _(this.enabled ? 'On' : 'Off');
         if (this.enabled) {
             tooltip += '\n';
             if (this.changeOnNight) {

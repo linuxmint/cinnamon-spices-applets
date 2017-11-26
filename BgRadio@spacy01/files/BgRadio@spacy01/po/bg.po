@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-22 17:44+0300\n"
-"PO-Revision-Date: 2017-10-22 20:58+0300\n"
+"POT-Creation-Date: 2017-11-18 00:44+0200\n"
+"PO-Revision-Date: 2017-11-18 00:45+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
 "Language: bg\n"
@@ -207,6 +207,14 @@ msgid "Watching bTV"
 msgstr "Гледате bTV"
 
 #: applet.js
+msgid "BIT"
+msgstr "БИТ"
+
+#: applet.js
+msgid "Watching BIT"
+msgstr "Гледате БИТ"
+
+#: applet.js
 msgid "City"
 msgstr "Сити"
 
@@ -221,6 +229,14 @@ msgstr "Нова"
 #: applet.js
 msgid "Watching Nova"
 msgstr "Гледате Нова"
+
+#: applet.js
+msgid "Kanal 3"
+msgstr "Канал 3"
+
+#: applet.js
+msgid "Watching Kanal 3"
+msgstr "Гледате Канал 3"
 
 #: applet.js
 msgid "On Air"

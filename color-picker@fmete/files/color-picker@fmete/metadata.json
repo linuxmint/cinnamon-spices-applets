@@ -1,5 +1,5 @@
 {
-    "description": "Click on applet to pick color",
+    "description": "Use the color picker to select a color on the screen. The color value (HEX or RGB) will be copied to the clipboard.",
     "uuid": "color-picker@fmete",
     "name": "Color Picker"
 }

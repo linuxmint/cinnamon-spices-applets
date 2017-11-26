@@ -2,9 +2,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDFManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 16:48+0100\n"
+"POT-Creation-Date: 2017-10-30 21:18+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Last-Translator: Mickael Albertus <mickael.albertus@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -15,14 +15,14 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: applet.js:51
-msgid "Click here to manage your PDF"
-msgstr "Kliknite ovdje za upravljanje svojim PDF datotekama"
+msgid "Manage your PDF"
+msgstr ""
 
 #: applet.js:71
 msgid "Merge PDF"
 msgstr "Spoji PDF"
 
-#: applet.js:76
+#: applet.js:76 pdf-manager.py:153
 msgid "Extract PDF"
 msgstr "Izdvoji PDF"
 
@@ -51,34 +51,80 @@ msgid "Open Document Viewer"
 msgstr "Otvori preglednika dokumenata"
 
 #: applet.js:122
+msgid "Open Evince"
+msgstr ""
+
+#: applet.js:129
 msgid "Open PDF Mod"
 msgstr "Otvori PDF promjenu"
 
-#: applet.js:129
+#: applet.js:136
 msgid "Open PDF Editor"
 msgstr "Otvori PDF uređivač"
 
-#. PDFManager@cinnamon.org->metadata.json->description
-msgid "Manager of PDF"
-msgstr "PDF upravitelj"
+#: pdf-manager.py:28
+msgid "Installation of PDF Toolkit necessary"
+msgstr ""
 
-#. PDFManager@cinnamon.org->metadata.json->name
-msgid "PDFManager"
-msgstr "PDF upravitelj"
+#: pdf-manager.py:30
+msgid ""
+"Do you want to install PDF toolkit? Your operations will be performed after "
+"the installation."
+msgstr ""
 
+#: pdf-manager.py:32
+msgid ""
+"Installation failed. Do you want to try again? Your operations will be "
+"performed after the installation."
+msgstr ""
+
+#: pdf-manager.py:42 pdf-manager.py:84 pdf-manager.py:137 pdf-manager.py:198
+#: pdf-manager.py:218 pdf-manager.py:239
 msgid "Select your PDF..."
 msgstr "Odaberi svoj PDF..."
 
+#: pdf-manager.py:51 pdf-manager.py:93 pdf-manager.py:145 pdf-manager.py:207
+#: pdf-manager.py:227 pdf-manager.py:248
+msgid "PDF Files"
+msgstr "PDF datoteke"
+
+#: pdf-manager.py:63
+msgid "Reducing PDF"
+msgstr ""
+
+#: pdf-manager.py:65
+msgid "Your PDF are reducing... Don't manipulate selected files!"
+msgstr ""
+
+#: pdf-manager.py:103 pdf-manager.py:176
 msgid "Save as..."
 msgstr "Spremi kao..."
 
-msgid "Pages to extract"
-msgstr "Stranica za izdvojiti"
-
-msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+#: pdf-manager.py:158
+msgid "Extract following pages (example: 1-10 15-17):"
 msgstr ""
-"Ulazne stranice za izdvojiti (npr. : 1-5 7-9 ili 3-kraj ili parne ili "
-"neparne) :"
 
-msgid "PDF Files"
-msgstr "PDF datoteke"
+#: pdf-manager.py:159
+msgid "Extract even pages"
+msgstr ""
+
+#: pdf-manager.py:160
+msgid "Extract odd pages"
+msgstr ""
+
+#~ msgid "Click here to manage your PDF"
+#~ msgstr "Kliknite ovdje za upravljanje svojim PDF datotekama"
+
+#~ msgid "Manager of PDF"
+#~ msgstr "PDF upravitelj"
+
+#~ msgid "PDFManager"
+#~ msgstr "PDF upravitelj"
+
+#~ msgid "Pages to extract"
+#~ msgstr "Stranica za izdvojiti"
+
+#~ msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
+#~ msgstr ""
+#~ "Ulazne stranice za izdvojiti (npr. : 1-5 7-9 ili 3-kraj ili parne ili "
+#~ "neparne) :"
