@@ -7,6 +7,6 @@
     "only-integer-part": {
         "type" : "switch",
         "default" : false,
-        "description" : "Show only integer part of temperature"
+        "description" : "Use integer values for temperature"
     }
 }

@@ -45,7 +45,9 @@ MyApplet.prototype = {
 		try {
 
 			// Create the popup menu
-			this.menu = new Applet.AppletPopupMenu(this, orientation);
+			this.menuManager = new PopupMenu.PopupMenuManager(this);
+ 			this.menu = new Applet.AppletPopupMenu(this, orientation);
+			this.menuManager.addMenu(this.menu);
 
         	this.sensorsPath = this._detectSensors();
 
