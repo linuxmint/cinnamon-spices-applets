@@ -205,11 +205,25 @@ MyApplet.prototype = {
 		Main.notify(_("Watching bTV"));
 		});
 		
+		//bit
+		this.TvItem.menu.addAction(_("BIT"), function(event) {
+		Main.Util.spawnCommandLine("killall -9 vlc");
+		Main.Util.spawnCommandLine("vlc 'http://hls.cdn.bg:2103/fls/bit_2.stream/playlist.m3u8' --meta-title 'BIT'");
+		Main.notify(_("Watching BIT"));
+		});
+		
 		//city
 		this.TvItem.menu.addAction(_("City"), function(event) {
 		Main.Util.spawnCommandLine("killall -9 vlc");
 		Main.Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://nodeb.gocaster.net:1935/CGL/_definst_/' -W 'http://iphone.fmstreams.com/jwplayer/player.swf' -p 'http://city.bg/live/' -y 'mp4:TODAYFM_TEST2' -b '0' | vlc --meta-title 'City' -\"");
 		Main.notify(_("Watching City"));
+		});
+		
+		//kanal3
+		this.TvItem.menu.addAction(_("Kanal 3"), function(event) {
+		Main.Util.spawnCommandLine("killall -9 vlc");
+		Main.Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://edge4.cdn.bg:2017/fls' -a 'fls/' -W 'http://i.cdn.bg/flash/jwplayer510/player.swf' -f 'WIN 18,0,0,232' -p 'http://i.cdn.bg/live/Atki7GnEae' -y 'kanal3.stream?at=b0d1270b39e08ad9c78dc53f43a1ba5c' | vlc --meta-title 'Kanal 3' -\"");
+		Main.notify(_("Watching Kanal 3"));
 		});
 		
 		//nova

@@ -28,6 +28,10 @@ const Gettext = imports.gettext;
 const UUID = "color-picker@fmete";
 const Settings = imports.ui.settings;  // Needed for settings API
 const Main = imports.ui.main;
+const Cinnamon = imports.gi.Cinnamon;
+const Util = imports.misc.util;
+const Gtk = imports.gi.Gtk;
+const Gio = imports.gi.Gio;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -66,10 +70,14 @@ MyApplet.prototype = {
                                  "icon_name",
                                  this.on_settings_changed,
                                  null);
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                                 "pick-notification",
+                                 "pick_notification",
+                                 null,
+                                 null);
 
-            //this.set_applet_icon_name(this.icon_name);
-
-            this.set_applet_tooltip(_("click here to pick a color"));
+            this.svgPath = this.appletPath + "/color-circle.svg";
+            this.set_applet_tooltip(_("Click here to pick a color"));
             this.on_keybinding_changed();
             this.on_settings_changed();
         }
@@ -81,13 +89,12 @@ MyApplet.prototype = {
      },
 
      on_settings_changed: function() {
-
-
-        if (this.icon_name=="") {
-            this.set_applet_icon_path(this.appletPath + "/icon.png")
-        } else {
-            this.set_applet_icon_path(this.icon_name)
-        }
+        if (GLib.path_is_absolute(this.icon_name) && GLib.file_test(this.icon_name, GLib.FileTest.EXISTS))
+            this.set_applet_icon_path(this.icon_name);
+        else if (Gtk.IconTheme.get_default().has_icon(this.icon_name))
+            this.set_applet_icon_name(this.icon_name);
+        else
+            this.set_applet_icon_path(this.appletPath + "/icon.png");
      },
 
      on_keybinding_changed: function() {
@@ -96,15 +103,66 @@ MyApplet.prototype = {
 
      on_hotkey_triggered: function() {
         this.on_applet_clicked();
+    },
 
-        let timeoutId = Mainloop.timeout_add(3000, Lang.bind(this, function() {
-            this.on_settings_changed();
-        }));
+    createColorCircleSVG: function(color) {
+        if (this.combo_choice == "3")
+            color = 'rgb(' + color + ')';
+        else if (this.combo_choice == "4")
+            color = 'rgb' + color;
+
+        let svgFile = Gio.File.new_for_path(this.svgPath)
+        if (svgFile.query_exists(null))
+            svgFile.delete(null);
+        let readwrite = svgFile.create_readwrite(Gio.FileCreateFlags.NONE, null);
+        let writeFile = readwrite.get_output_stream();
+
+        let svgLine_1 = '<svg height="24" width="24" xmlns="http://www.w3.org/2000/svg">';
+        let svgLine_2 = '  <circle cx="50%" cy="50%" r="50%" fill="' + color + '" />';
+        let svgLine_3 = '</svg>';
+        let svgContent = svgLine_1 + '\n' + svgLine_2 + '\n' + svgLine_3;
+
+        writeFile.write(svgContent, null);
+        writeFile.close(null);
+    },
+
+    notify_send: function(notification, iconPath) {
+        if (iconPath == null)
+            iconPath = this.appletPath + '/icon.png';
+        Util.spawnCommandLine('notify-send "' + notification + '" -i ' + iconPath);
+    },
+
+    notify_installation: function(packageName) {
+        this.notify_send(_("Please install the '%s' package.").format(packageName), null);
     },
 
     on_applet_clicked: function(event) {
-        homeDir=GLib.get_home_dir();
-        GLib.spawn_command_line_async("python2 " + this.appletPath + "/cp.py "+this.combo_choice);
+        if(Gio.file_new_for_path("/usr/bin/xsel").query_exists(null)) {
+            global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
+            global.set_cursor(Cinnamon.Cursor.CROSSHAIR);
+            Util.spawn_async(["python2", this.appletPath + "/cp.py", this.combo_choice], Lang.bind(this, function(output) {
+                global.unset_cursor();
+                global.set_stage_input_mode(Cinnamon.StageInputMode.NORMAL);
+
+                output = output.replace(/\n$/, "");
+                if (output == "ImportError Xlib") {
+                    Util.spawnCommandLine("apturl apt://python-xlib");
+                    this.notify_installation('python-xlib');
+                } else if (output == "ImportError numpy") {
+                    this.notify_installation('python-numpy');
+                    Util.spawnCommandLine("apturl apt://python-numpy");
+                } else {
+                    if (this.pick_notification) {
+                        this.createColorCircleSVG(output);
+                        this.on_settings_changed();
+                        this.notify_send(_("Color code '%s' copied to clipboard.").format(output), this.svgPath);
+                    }
+                }
+            }));
+        } else {
+            this.notify_installation('xsel');
+            Util.spawnCommandLine("apturl apt://xsel");
+        }
     }
 
 };

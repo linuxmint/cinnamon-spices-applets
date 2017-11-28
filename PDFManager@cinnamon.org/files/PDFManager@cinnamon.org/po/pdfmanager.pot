@@ -3,29 +3,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-19 16:17+0100\n"
+"POT-Creation-Date: 2017-10-30 21:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: applet.js\n"
+"X-Poedit-SearchPath-1: pdf-manager.py\n"
 
 #: applet.js:51
-msgid "Click here to manage your PDF"
+msgid "Manage your PDF"
 msgstr ""
 
 #: applet.js:71
 msgid "Merge PDF"
 msgstr ""
 
-#: applet.js:76
+#: applet.js:76 pdf-manager.py:153
 msgid "Extract PDF"
 msgstr ""
 
@@ -54,36 +57,59 @@ msgid "Open Document Viewer"
 msgstr ""
 
 #: applet.js:122
-msgid "Open PDF Mod"
+msgid "Open Evince"
 msgstr ""
 
 #: applet.js:129
+msgid "Open PDF Mod"
+msgstr ""
+
+#: applet.js:136
 msgid "Open PDF Editor"
 msgstr ""
 
-#. PDFManager@cinnamon.org->metadata.json->description
-msgid "Manager of PDF"
+#: pdf-manager.py:28
+msgid "Installation of PDF Toolkit necessary"
 msgstr ""
 
-#. PDFManager@cinnamon.org->metadata.json->name
-msgid "PDFManager"
+#: pdf-manager.py:30
+msgid "Do you want to install PDF toolkit? Your operations will be performed after the installation."
 msgstr ""
 
+#: pdf-manager.py:32
+msgid "Installation failed. Do you want to try again? Your operations will be performed after the installation."
+msgstr ""
 
-##########################################
-
+#: pdf-manager.py:42 pdf-manager.py:84 pdf-manager.py:137 pdf-manager.py:198
+#: pdf-manager.py:218 pdf-manager.py:239
 msgid "Select your PDF..."
 msgstr ""
 
-msgid "Save as..."
-msgstr ""
-
-msgid "Pages to extract"
-msgstr ""
-
-msgid "Input pages to extract (e.g. : 1-5 7-9 or 3-end or even or odd) :"
-msgstr ""
-
+#: pdf-manager.py:51 pdf-manager.py:93 pdf-manager.py:145 pdf-manager.py:207
+#: pdf-manager.py:227 pdf-manager.py:248
 msgid "PDF Files"
 msgstr ""
 
+#: pdf-manager.py:63
+msgid "Reducing PDF"
+msgstr ""
+
+#: pdf-manager.py:65
+msgid "Your PDF are reducing... Don't manipulate selected files!"
+msgstr ""
+
+#: pdf-manager.py:103 pdf-manager.py:176
+msgid "Save as..."
+msgstr ""
+
+#: pdf-manager.py:158
+msgid "Extract following pages (example: 1-10 15-17):"
+msgstr ""
+
+#: pdf-manager.py:159
+msgid "Extract even pages"
+msgstr ""
+
+#: pdf-manager.py:160
+msgid "Extract odd pages"
+msgstr ""

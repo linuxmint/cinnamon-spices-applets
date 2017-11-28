@@ -15,6 +15,9 @@ All settings can be changed by right clicking on the icon and selecting configur
 ## TODO:
 
 ## Changelog
+* 1.1.2
+  - Added legacy support for Cinnamon 2.6 - 3.2 (No dropdown or slider settings in settings window)
+  
 * 1.1.1
   - Changed Preset Times to include separate time spinners for hours, minutes and seconds.
   
