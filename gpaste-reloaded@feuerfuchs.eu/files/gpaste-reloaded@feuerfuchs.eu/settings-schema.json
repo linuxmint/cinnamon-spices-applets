@@ -1,5 +1,5 @@
 {
-    "general": {
+    "shown-entries": {
         "type":        "header",
         "description": "Shown entries"
     },
@@ -27,6 +27,21 @@
         "default":     true,
         "type":        "checkbox",
         "description": "Display 'Empty history'"
+    },
+
+    "key-bindings": {
+        "type":        "header",
+        "description": "Key bindings"
+    },
+    "kb-show-history" : {
+       "type" :        "keybinding",
+       "description" : "Show history",
+       "default" :     "<Super>h"
+    },
+
+    "other": {
+        "type":        "header",
+        "description": "Other"
     },
     "gpaste-settings": {
         "type":        "button",

@@ -149,11 +149,14 @@ GPasteApplet.prototype = {
 
             this._appletSettings = new Settings.AppletSettings(this, uuid, instance_id);
 
-            this._appletSettings.bindProperty(Settings.BindingDirection.IN, "display-track-switch",  "displayTrackSwitch",  this._onDisplaySettingsUpdated, null);
-            this._appletSettings.bindProperty(Settings.BindingDirection.IN, "display-new-item",      "displayNewItem",      this._onDisplaySettingsUpdated, null);
-            this._appletSettings.bindProperty(Settings.BindingDirection.IN, "display-searchbar",     "displaySearchBar",    this._onDisplaySettingsUpdated, null);
-            this._appletSettings.bindProperty(Settings.BindingDirection.IN, "display-gpaste-ui",     "displayGPasteUI",     this._onDisplaySettingsUpdated, null);
-            this._appletSettings.bindProperty(Settings.BindingDirection.IN, "display-empty-history", "displayEmptyHistory", this._onDisplaySettingsUpdated, null);
+            this._appletSettings.bind("display-track-switch",  "displayTrackSwitch",  this._onDisplaySettingsUpdated);
+            this._appletSettings.bind("display-new-item",      "displayNewItem",      this._onDisplaySettingsUpdated);
+            this._appletSettings.bind("display-searchbar",     "displaySearchBar",    this._onDisplaySettingsUpdated);
+            this._appletSettings.bind("display-gpaste-ui",     "displayGPasteUI",     this._onDisplaySettingsUpdated);
+            this._appletSettings.bind("display-empty-history", "displayEmptyHistory", this._onDisplaySettingsUpdated);
+            
+            this._appletSettings.bind("kb-show-history", "kbShowHistory", this._onKeybindingUpdated);
+            this._onKeybindingUpdated();
 
             //
             // Create GPaste Client
@@ -323,6 +326,14 @@ GPasteApplet.prototype = {
         // Hide disabled menu items
 
         this._onDisplaySettingsUpdated();
+    },
+    
+    _onKeybindingUpdated: function() {
+        Main.keybindingManager.addHotKey("show-history-" + this.instance_id, this.kbShowHistory, Lang.bind(this, function() {
+            if (!Main.overview.visible && !Main.expo.visible) {
+                this.menu.toggle();
+            }
+        }));
     },
 
     /*
