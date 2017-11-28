@@ -29,6 +29,7 @@ MyApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
         this.settings.bind("use-fahrenheit", "use_fahrenheit", this._update_temp);
+        this.settings.bind("only-integer-part", "only_integer_part", this._update_temp);
 
         this.lang = {
             'acpi' : 'ACPI Adapter',
@@ -369,7 +370,7 @@ MyApplet.prototype = {
 
 
     _toFahrenheit: function(c){
-        return ((9/5)*c+32).toFixed(1);
+        return ((9/5)*c+32);
     },
 
     _getContent: function(c){
@@ -377,10 +378,12 @@ MyApplet.prototype = {
     },
 
     _formatTemp: function(t) {
+        let precisionDigits;
+        precisionDigits = this.only_integer_part ? 0 : 1;
         if (this.use_fahrenheit)
-            return this._toFahrenheit(t).toString()+" °F";
+            return this._toFahrenheit(t).toFixed(precisionDigits).toString()+" °F";
         else
-            return (Math.round(t*10)/10).toFixed(1).toString()+" °C";
+            return (Math.round(t*10)/10).toFixed(precisionDigits).toString()+" °C";
     }
 
 

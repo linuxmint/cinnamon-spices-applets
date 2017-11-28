@@ -3,5 +3,10 @@
         "type" : "switch",
         "default" : false,
         "description" : "Show temperature in Fahrenheit"
+    },
+    "only-integer-part": {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Show only integer part of temperature"
     }
 }
