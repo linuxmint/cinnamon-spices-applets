@@ -256,8 +256,8 @@ NetDataProvider.prototype = {
       }
       devices[i] = {
         id: devices[i],
-        up: init ? 0 : (deviceConnected ? this.gtop.bytes_in : 0),
-        down: init ? 0 : (deviceConnected ? this.gtop.bytes_out : 0)
+        up: init ? 0 : (deviceConnected ? this.gtop.bytes_out : 0),
+        down: init ? 0 : (deviceConnected ? this.gtop.bytes_in : 0)
       };
       if (this.disabledDevices.indexOf(devices[i]) > -1) {
         removedDeviceIndexes.push(i);
