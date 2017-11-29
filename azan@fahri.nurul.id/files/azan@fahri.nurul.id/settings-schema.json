@@ -1,0 +1,82 @@
+{
+    "head_calculations": {
+        "type": "header",
+        "description": "Calculations"
+    },
+
+    "calculation_method": {
+        "type": "combobox",
+        "default": "MWL",
+        "description": "Calculation method",
+        "options": {
+            "Muslim World League": "MWL",
+            "Islamic Society of North America (ISNA)": "ISNA",
+            "Egyptian General Authority of Survey": "Egypt",
+            "Umm Al-Qura University, Makkah": "Makkah"
+        }
+    },
+
+    "separator": {
+        "type": "separator"
+    },
+
+    "head_location": {
+        "type": "header",
+        "description": "Your Location"
+    },
+
+    "latitude": {
+        "type": "spinbutton",
+        "default": -6.3292,
+        "min": -90.0000,
+        "max": 90.0000,
+        "step": 0.0001,
+        "units": "",
+        "description": "Latitude"
+    },
+
+    "longitude": {
+        "type": "spinbutton",
+        "default": 106.8567,
+        "min": -180.0000,
+        "max": 180.0000,
+        "step": 0.0001,
+        "units": "",
+        "description": "Longitude"
+    },
+
+    "timezone": {
+        "type": "combobox",
+        "default": "auto",
+        "description": "Timezone",
+        "options": {
+            "Auto": "auto",
+            "GMT -12:00": "-12",
+            "GMT -11:00": "-11",
+            "GMT -10:00": "-10",
+            "GMT -09:00": "-9",
+            "GMT -08:00": "-8",
+            "GMT -07:00": "-7",
+            "GMT -06:00": "-6",
+            "GMT -05:00": "-5",
+            "GMT -04:00": "-4",
+            "GMT -03:00": "-3",
+            "GMT -02:00": "-2",
+            "GMT -01:00": "-1",
+            "GMT +00:00": "0",
+            "GMT +01:00": "1",
+            "GMT +02:00": "2",
+            "GMT +03:00": "3",
+            "GMT +04:00": "4",
+            "GMT +05:00": "5",
+            "GMT +06:00": "6",
+            "GMT +07:00": "7",
+            "GMT +08:00": "8",
+            "GMT +09:00": "9",
+            "GMT +10:00": "10",
+            "GMT +11:00": "11",
+            "GMT +12:00": "12",
+            "GMT +13:00": "13"
+        }
+    }
+}
