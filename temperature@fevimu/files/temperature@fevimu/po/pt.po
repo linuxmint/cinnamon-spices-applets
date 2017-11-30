@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Last-Translator: André Silva <asilva_sc@hotmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt_PT\n"
+"Language: pt\n"
 
 #: applet.js:51
 msgid "Error"
