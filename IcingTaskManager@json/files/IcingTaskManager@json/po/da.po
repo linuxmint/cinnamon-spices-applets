@@ -39,7 +39,7 @@ msgstr "Steder"
 
 #: 3.2/specialMenus.js:193
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Bogmærker/historik kræver gir1.2-gda-5.0"
 
 #: 3.2/specialMenus.js:213
 msgid "Recent"
@@ -202,12 +202,14 @@ msgstr "Vis vinduesminiaturer, når markøren føres hen over en programknap."
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
-msgstr ""
+msgstr "Fremhæv det seneste vindue med fokus i en programgruppe"
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
 msgstr ""
+"Når aktiveret vil det seneste vindue, der blev interageret med, blive "
+"fremhævet."
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -308,14 +310,14 @@ msgstr ""
 "med rækkefølgen i programlisten."
 
 #. 3.2->settings-schema.json->thumbnail-padding->description
-#, fuzzy
 msgid "Thumbnail padding"
-msgstr "Indstillinger for miniaturer"
+msgstr "Udfyldning for miniaturer"
 
 #. 3.2->settings-schema.json->thumbnail-padding->tooltip
-#, fuzzy
 msgid "Controls how much space will be around the window preview thumbnails."
-msgstr "Kontrollerer mellemrummet mellem ikoner."
+msgstr ""
+"Kontrollerer hvor meget plads der vil være rundt om vinduet med "
+"forhåndsvisning af miniaturer."
 
 #. 3.2->settings-schema.json->system-favorites->description
 msgid "Use system favorites for pinned apps"
@@ -462,11 +464,12 @@ msgid "App button width"
 msgstr "Programknappens bredde"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid ""
 "Controls the width of the application button. This option only works for "
 "horizontal panels."
-msgstr "Kontrollerer programknappens bredde."
+msgstr ""
+"Kontrollerer programknappens bredde. Denne indstilling virker kun på "
+"vandrette paneler."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 2.8->settings-schema.json->show-recent->description
@@ -546,11 +549,11 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
-msgstr ""
+msgstr "Anvend en tilpasset bredde til programknapper"
 
 #. 3.2->settings-schema.json->enable-app-button-width->tooltip
 msgid "When disabled, the app button width is determined by the panel height."
-msgstr ""
+msgstr "Når deaktiveret bestemmes programknappens bredde af panelhøjden."
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -625,14 +628,12 @@ msgid "Open the thumbnails on click if there is more than one window open."
 msgstr "Åbn miniaturerne ved klik, hvis der er mere et vindue åbent."
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->description
-#, fuzzy
 msgid "Close button size"
-msgstr "Angiv ikonstørrelse"
+msgstr "Luk-knappens størrelse"
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->tooltip
-#, fuzzy
 msgid "Controls how large the thumbnail close button is."
-msgstr "Tillad at temaet kontrollerer lukkeknappen i miniaturen"
+msgstr "Kontrollerer lukkeknappens størrelse i miniaturen."
 
 #. 3.2->settings-schema.json->icon-padding->description
 #. 2.8->settings-schema.json->icon-padding->description
@@ -848,52 +849,3 @@ msgstr "Icing programhåndtering"
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
 msgstr "Vinduesliste med miniaturer og gruppering af programmer"
-
-#~ msgid "number"
-#~ msgstr "antal"
-
-#~ msgid "Move to right workspace"
-#~ msgstr "Flyt til arbejdsområde til højre"
-
-#~ msgid "Settings"
-#~ msgstr "Indstillinger"
-
-#~ msgid "ReArrange"
-#~ msgstr "Omarrangér"
-
-#~ msgid "Show Pinned"
-#~ msgstr "Vis fastgjorte"
-
-#~ msgid "Show Thumbs"
-#~ msgstr "Vis miniaturer"
-
-#~ msgid "Stack Thumbs"
-#~ msgstr "Stabl miniaturer"
-
-#~ msgid "Show Recent"
-#~ msgstr "Vis seneste"
-
-#~ msgid "Vertical Thumbs"
-#~ msgstr "Lodrette miniaturer"
-
-#~ msgid "     Go to Settings"
-#~ msgstr "     Gå til indstillinger"
-
-#~ msgid "Group apps into single icon"
-#~ msgstr "Saml programmer i et enkelt ikon"
-
-#~ msgid "Group the open app instances into single icon"
-#~ msgstr "Saml forekomster af åbne programmer i et enkelt ikon"
-
-#~ msgid "Update this applet automatically"
-#~ msgstr "Opdatér automatisk dette panelprogram"
-
-#~ msgid ""
-#~ "When enabled, ITM will check the Github releases on init, and will start "
-#~ "to upgrade if it finds a newer version."
-#~ msgstr ""
-#~ "Når aktiveret vil Icing tjekke Github-udgivelser ved init og vil begynde "
-#~ "at opgradere, hvis den finder en nyere version."
-
-#~ msgid "Remove 'Icing Task Manager'"
-#~ msgstr "Fjern \"Icing programhåndtering\""
