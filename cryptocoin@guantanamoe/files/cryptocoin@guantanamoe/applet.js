@@ -85,14 +85,18 @@ MyApplet.prototype = {
 
     _parseJSON: function (data) {
         const response = Json.json_parse(data, null);
-        if (response.Response === 'Error') {
+        if (response.hasOwnProperty('Response') && response['Response'] === 'Error') {
             this.set_applet_label('Error loading prices...');
             global.logError(response.Message);
         } else {
             let message = [];
             TrackerDefinition.filter((tracker) => tracker.enabled).forEach((tracker) => {
-                const price = response[tracker.tracker][this.currency];
-                message.push(`${tracker.tracker}:${price}`);
+                if (response.hasOwnProperty(tracker.tracker)) {
+                    const trackerInfo = response[tracker.tracker];
+                    if (trackerInfo.hasOwnProperty(this.currency)) {
+                        message.push(`${tracker.tracker}:${trackerInfo[this.currency]}`);
+                    }
+                }
             });
 
             this.set_applet_label(message.join(" | "));
