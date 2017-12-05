@@ -9,7 +9,6 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 
-const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
@@ -17,77 +16,27 @@ const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
-const Gettext = imports.gettext;
-let GTop;
-try {
-  GTop = imports.gi.GTop;
-} catch (e) {
-  global.logError(e);
-  GTop = null;
-}
-const UUID = 'multicore-sys-monitor@ccadeptic23';
 const Util = imports.misc.util;
+const Applet = imports.ui.applet;
 
+const UUID = 'multicore-sys-monitor@ccadeptic23';
 const AppletDir = imports.ui.appletManager.applets[UUID];
+const _ = AppletDir.utils._;
+const tryFn = AppletDir.utils.tryFn;
 const ConfigSettings = AppletDir.ConfigSettings.ConfigSettings;
 const SpawnProcess = AppletDir.SpawnProcess;
 const Graphs = AppletDir.Graphs;
 const DataProviders = AppletDir.DataProviders;
 const ErrorApplet = AppletDir.ErrorApplet;
 
-// Translation support
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
+let GTop;
+tryFn(function() {
+  GTop = imports.gi.GTop;
+}, function(e) {
+  global.logError(e);
+  GTop = null;
+});
 
-function _(str) {
-  return Gettext.dgettext(UUID, str);
-}
-
-// findIndex polyfill for mozjs24
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex
-// https://tc39.github.io/ecma262/#sec-array.prototype.findIndex
-if (!Array.prototype.findIndex) {
-  Object.defineProperty(Array.prototype, 'findIndex', {
-    value: function(predicate) {
-      // 1. Let O be ? ToObject(this value).
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      let o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      let len = o.length >>> 0;
-
-      // 3. If IsCallable(predicate) is false, throw a TypeError exception.
-      if (typeof predicate !== 'function') {
-        throw new TypeError('predicate must be a function');
-      }
-
-      // 4. If thisArg was supplied, let T be thisArg; else let T be undefined.
-      let thisArg = arguments[1];
-
-      // 5. Let k be 0.
-      let k = 0;
-
-      // 6. Repeat, while k < len
-      while (k < len) {
-        // a. Let Pk be ! ToString(k).
-        // b. Let kValue be ? Get(O, Pk).
-        // c. Let testResult be ToBoolean(? Call(predicate, T, kValue, k, O)).
-        // d. If testResult is true, return k.
-        let kValue = o[k];
-        if (predicate.call(thisArg, kValue, k, o)) {
-          return k;
-        }
-        // e. Increase k by 1.
-        k++;
-      }
-
-      // 7. Return -1.
-      return -1;
-    }
-  });
-}
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
 if (!String.prototype.padStart) {
@@ -178,23 +127,23 @@ MyApplet.prototype = {
     this.networkProvider = new DataProviders.NetDataProvider();
     this.diskProvider = new DataProviders.DiskDataProvider();
 
-    this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
-    this.diskProvider.setDisabledDevices(this.configSettings.getDiskDisabledDevices());
+    this.configSettings.adjustDevices('disk', this.diskProvider.currentReadings);
+    this.diskProvider.setDisabledDevices(this.configSettings.getDisabledDevices('disk'));
 
-    this.configSettings.adjustNetInterfaces(this.networkProvider.getNetDevices());
-    this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
+    this.configSettings.adjustDevices('net', this.networkProvider.currentReadings);
+    this.networkProvider.setDisabledInterfaces(this.configSettings.getDisabledDevices('net'));
 
-    this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea, this.multiCpuProvider);
-    this.memoryGraph = new Graphs.GraphPieChart(this.graphArea, this.memoryProvider);
-    this.swapGraph = new Graphs.GraphVBars(this.graphArea, this.swapProvider);
+    this.multiCpuGraph = new Graphs.GraphVBars(this.graphArea);
+    this.memoryGraph = new Graphs.GraphPieChart(this.graphArea);
+    this.swapGraph = new Graphs.GraphVBars(this.graphArea);
 
-    this.networkGraph = new Graphs.GraphLineChart(this.graphArea, this.networkProvider, this.configSettings._prefs.net.width);
+    this.networkGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.net.width);
     //For us this means the heighest point wont represent a valuelower than 1Kb/s
     this.networkGraph.setMinScaleYvalue(1.0);
     this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
     this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
 
-    this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.diskProvider, this.configSettings._prefs.disk.width);
+    this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.disk.width);
     this.diskGraph.setMinScaleYvalue(1.0);
     this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
     this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
@@ -207,6 +156,8 @@ MyApplet.prototype = {
     this.willUnmount = true;
     this.graphArea.destroy();
     this.actor.destroy();
+    this.networkProvider.destroy();
+    this.diskProvider.destroy();
     let props = Object.keys(this);
     for (let i = 0; i < props.length; i++) {
       this[props[i]] = undefined;
@@ -258,20 +209,21 @@ MyApplet.prototype = {
       } else if (currentMessage !== 'SAVE' && currentMessage !== '') {
         this.configSettings.updateSettings(currentMessage);
       }
+      // Do any required processing when configuration changes
+      this.networkProvider.setDisabledInterfaces(this.configSettings.getDisabledDevices('net'));
+      this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
+      this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+      // check for new drives that are mounted
+      this.configSettings.adjustDevices('net', this.networkProvider.currentReadings);
+      this.diskProvider.setDisabledDevices(this.configSettings.getDisabledDevices('disk'));
+      this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
+      this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
       if (this.childProcessHandler.isChildFinished()) {
         this.childProcessHandler.destroy();
         this.childProcessHandler = null;
       }
     }
-    // Do any required processing when configuration changes
-    this.networkProvider.setDisabledInterfaces(this.configSettings.getNETDisabledDevices());
-    this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
-    this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
-    // check for new drives that are mounted
-    this.configSettings.adjustDiskDevices(this.diskProvider.getDiskDevices());
-    this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
-    this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
     // Set the Applet Tooltip
     let appletTooltipString = '';
@@ -280,7 +232,7 @@ MyApplet.prototype = {
       if (properties[i].abbrev !== 'Swap') {
         this[properties[i].provider].isEnabled = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].enabled;
       }
-      this[properties[i].graph].refreshData();
+      this[properties[i].provider].getData();
       appletTooltipString += this[properties[i].provider].getTooltipString();
     }
 
@@ -306,6 +258,8 @@ MyApplet.prototype = {
         if (properties[i].abbrev === 'MEM') {
           // paint the "swap" backdrop
           this.swapGraph.paint(
+            this[properties[i].provider].name,
+            this[properties[i].provider].currentReadings,
             area,
             // no label for the backdrop
             false,
@@ -318,6 +272,8 @@ MyApplet.prototype = {
           );
         }
         this[properties[i].graph].paint(
+          this[properties[i].provider].name,
+          this[properties[i].provider].currentReadings,
           area,
           this.configSettings._prefs.labelsOn,
           width,
