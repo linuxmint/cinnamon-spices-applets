@@ -23,7 +23,7 @@ gulp.task('reload', ['install'], (cb)=>{
 })
 
 gulp.task('watch', ()=> {
-  gulp.watch('./files/multicore-sys-monitor@ccadeptic23/3.4/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
+  gulp.watch('./files/multicore-sys-monitor@ccadeptic23/3.4/**/**/**/**/*.{js,json,py,css,md,po,glade}', ['reload']);
 });
 
 gulp.task('clear-terminal', ()=> {

@@ -14,12 +14,14 @@ const UUID = 'multicore-sys-monitor@ccadeptic23';
 const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Gdk = imports.gi.Gdk;
-const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
+
+imports.searchPath.unshift('.');
+const tryFn = imports.utils.tryFn;
+const _ = imports.utils._;
+
 const DEFAULT_CONFIG = {
   labelsOn: true,
   refreshRate: 500,
-  height: 21,
   labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
   backgroundColor: [1, 1, 1, 0.1],
   cpu: {
@@ -38,34 +40,23 @@ const DEFAULT_CONFIG = {
     autoscale: true,
     logscale: true,
     width: 40,
-    devices: {
-      eth0: {
-        enabled: true,
-        show: true,
-        colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8]]
-      }
-    }
+    devices: []
   },
   disk: {
     enabled: true,
     autoscale: true,
     logscale: true,
     width: 40,
-    devices: {
-      '/': {
+    devices: [
+      {
+        id: '/',
         enabled: true,
         show: true,
         colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8]]
       }
-    }
+    ]
   }
 };
-
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
-
-function _(str) {
-  return Gettext.dgettext(UUID, str);
-}
 
 function Preferences() {
   this._init();
@@ -73,31 +64,28 @@ function Preferences() {
 
 Preferences.prototype = {
   _init: function() {
-    try {
+    tryFn(() => {
       this.config = JSON.parse(ARGV[0]);
-    } catch (e) {
-      //print("Error: "+e+"\targv[0]="+ARGV[0]);
+    }, () => {
       this.config = DEFAULT_CONFIG;
-    }
+    });
 
     this.builder = new Gtk.Builder();
     this.builder.set_translation_domain(UUID);
-    try {
+
+    tryFn(() => {
       this.builder.add_from_file('prefsui.glade');
-    } catch (e) {
-      // Applet was removed, return
-      return;
-    }
+    });
 
     this.win = this.builder.get_object('windowMain');
-
-    this.win.connect('destroy', Gtk.main_quit); //quit program when titlebar's x is clicked
-
+    this.win.set_resizable(true);
+    this.win.set_icon_from_file('./icon.png');
+    this.win.connect('destroy', Gtk.main_quit); // quit program when titlebar's x is clicked
     this.builder.get_object('applyButton').connect(
       'clicked',
       Lang.bind(this, function() {
         this.save();
-        print('SAVE'); //Send the last message to the parent process, Tell it to save these preferences
+        print('SAVE'); // Send the last message to the parent process, Tell it to save these preferences
         this.win.destroy();
       })
     );
@@ -135,12 +123,6 @@ Preferences.prototype = {
   },
 
   load: function() {
-    /*try {
-    	this.config = JSON.parse(ARGV[0]);
-    } catch (e) {
-    	this.config = DEFAULT_CONFIG;
-    }*/
-
     this.setColor('labelColorButton', this.config.labelColor);
     this.builder.get_object('labelColorButton').connect(
       'color-set',
@@ -162,13 +144,6 @@ Preferences.prototype = {
         this.save();
       })
     );
-    this.builder.get_object('heightScale').set_value(this.config.height);
-    this.builder.get_object('heightScale').connect(
-      'value-changed',
-      Lang.bind(this, function() {
-        this.save();
-      })
-    );
     this.builder.get_object('labelsSwitch').set_active(this.config.labelsOn);
     this.builder.get_object('labelsSwitch').connect(
       'notify::active',
@@ -182,7 +157,7 @@ Preferences.prototype = {
     this.builder.get_object('cpuEnableSwitch').connect(
       'notify::active',
       Lang.bind(this, function() {
-        var isEnabled = this.builder.get_object('cpuEnableSwitch').get_active();
+        let isEnabled = this.builder.get_object('cpuEnableSwitch').get_active();
         this.builder.get_object('cpuSettingsBox').set_sensitive(isEnabled);
         this.save();
       })
@@ -198,11 +173,11 @@ Preferences.prototype = {
     //build the CPU color selection area (depends on number of CPU's)
     this.cpuColorSelectionBox = this.builder.get_object('cpuColorChoicesBox');
     this.cpuButtonList = [];
-    for (var i = 0; i < this.config.cpu.colors.length; i++) {
-      var currentcpuvbox = new Gtk.VBox();
+    for (let i = 0; i < this.config.cpu.colors.length; i++) {
+      let currentcpuvbox = new Gtk.VBox();
 
-      var cpuButton = new Gtk.ColorButton();
-      var cpuLabel = new Gtk.Label({
+      let cpuButton = new Gtk.ColorButton();
+      let cpuLabel = new Gtk.Label({
         label: _('CPU') + (i + 1)
       });
       //currentcpuvbox.set_hexpand(false);
@@ -211,7 +186,7 @@ Preferences.prototype = {
       currentcpuvbox.add(cpuLabel);
       currentcpuvbox.add(cpuButton);
       this.cpuColorSelectionBox.add(currentcpuvbox);
-      var color = new Gdk.RGBA({
+      let color = new Gdk.RGBA({
         red: this.config.cpu.colors[i][0],
         green: this.config.cpu.colors[i][1],
         blue: this.config.cpu.colors[i][2],
@@ -231,7 +206,7 @@ Preferences.prototype = {
     this.builder.get_object('memEnableSwitch').connect(
       'notify::active',
       Lang.bind(this, function() {
-        var isEnabled = this.builder.get_object('memEnableSwitch').get_active();
+        let isEnabled = this.builder.get_object('memEnableSwitch').get_active();
         this.builder.get_object('memSettingsBox').set_sensitive(isEnabled);
         this.save();
       })
@@ -290,7 +265,7 @@ Preferences.prototype = {
     this.builder.get_object('netEnableSwitch').connect(
       'notify::active',
       Lang.bind(this, function() {
-        var isEnabled = this.builder.get_object('netEnableSwitch').get_active();
+        let isEnabled = this.builder.get_object('netEnableSwitch').get_active();
         this.builder.get_object('netSettingsBox').set_sensitive(isEnabled);
         this.save();
       })
@@ -324,35 +299,35 @@ Preferences.prototype = {
     this.netDownButtonList = [];
     this.netUpButtonList = [];
     this.netEnableSwitchList = [];
-    var counter = 0;
-    for (var devname in this.config.net.devices) {
+
+    for (let i = 0; i < this.config.net.devices.length; i++) {
       //build the device sections
-      var currentdev_vbox = new Gtk.VBox();
-      var currentdev_hbox = new Gtk.HBox();
-      var devLabel = new Gtk.Label({
-        label: devname
+      let currentdev_vbox = new Gtk.VBox();
+      let currentdev_hbox = new Gtk.HBox();
+      let devLabel = new Gtk.Label({
+        label: this.config.net.devices[i].id
       });
       devLabel.set_halign(Gtk.Align.START); //start
-      var devEnableLabel = new Gtk.Label({
+      let devEnableLabel = new Gtk.Label({
         label: _('Enable')
       });
       devEnableLabel.set_halign(Gtk.Align.END); //end
-      var devEnableSwitch = new Gtk.Switch();
+      let devEnableSwitch = new Gtk.Switch();
       devEnableSwitch.set_halign(Gtk.Align.START); //start
       devEnableSwitch.set_valign(Gtk.Align.CENTER);
       devEnableSwitch.set_margin_left(10);
-      var devDownColorButton = new Gtk.ColorButton();
+      let devDownColorButton = new Gtk.ColorButton();
       devDownColorButton.set_halign(Gtk.Align.START);
       devDownColorButton.set_use_alpha(true);
-      var devDownLabel = new Gtk.Label({
+      let devDownLabel = new Gtk.Label({
         label: _('Down')
       });
       devDownLabel.set_halign(2);
 
-      var devUpColorButton = new Gtk.ColorButton();
+      let devUpColorButton = new Gtk.ColorButton();
       devUpColorButton.set_halign(1);
       devUpColorButton.set_use_alpha(true);
-      var devUpLabel = new Gtk.Label({
+      let devUpLabel = new Gtk.Label({
         label: _('Up')
       });
       devUpLabel.set_halign(2);
@@ -373,18 +348,20 @@ Preferences.prototype = {
       );
 
       //show the device only if the config oks it
-      if (this.config.net.devices[devname].show) this.netDevicesChoicesBox.add(currentdev_vbox);
+      if (this.config.net.devices[i].show) {
+        this.netDevicesChoicesBox.add(currentdev_vbox);
+      }
 
       //Configure the Widgets initial values
-      this.setColorByObject(devDownColorButton, this.config.net.devices[devname].colors[0]);
-      this.setColorByObject(devUpColorButton, this.config.net.devices[devname].colors[1]);
+      this.setColorByObject(devDownColorButton, this.config.net.devices[i].colors[0]);
+      this.setColorByObject(devUpColorButton, this.config.net.devices[i].colors[1]);
 
-      devEnableSwitch.set_active(this.config.net.devices[devname].enabled);
-      if (!this.config.net.devices[devname].enabled) {
-        devDownLabel.set_sensitive(this.config.net.devices[devname].enabled);
-        devDownColorButton.set_sensitive(this.config.net.devices[devname].enabled);
-        devUpLabel.set_sensitive(this.config.net.devices[devname].enabled);
-        devUpColorButton.set_sensitive(this.config.net.devices[devname].enabled);
+      devEnableSwitch.set_active(this.config.net.devices[i].enabled);
+      if (!this.config.net.devices[i].enabled) {
+        devDownLabel.set_sensitive(this.config.net.devices[i].enabled);
+        devDownColorButton.set_sensitive(this.config.net.devices[i].enabled);
+        devUpLabel.set_sensitive(this.config.net.devices[i].enabled);
+        devUpColorButton.set_sensitive(this.config.net.devices[i].enabled);
       }
 
       //connect the widgets callbacks
@@ -402,30 +379,29 @@ Preferences.prototype = {
       );
       devEnableSwitch.connect(
         'notify::active',
-        Lang.bind(this, function(myswitch) {
-          var isEnabled = myswitch.get_active();
-          var childrens = myswitch.get_parent().get_children();
+        (myswitch) => {
+          let isEnabled = myswitch.get_active();
+          let children = myswitch.get_parent().get_children();
 
-          var startloc = childrens.indexOf(myswitch);
+          let startloc = children.indexOf(myswitch);
           if (startloc >= 0) {
-            for (var i = childrens.indexOf(myswitch) + 1; i < childrens.length; i++) {
-              childrens[i].set_sensitive(isEnabled);
+            for (let i = children.indexOf(myswitch) + 1; i < children.length; i++) {
+              children[i].set_sensitive(isEnabled);
             }
           }
           this.save();
-        })
+        }
       );
-      this.netDownButtonList[counter] = devDownColorButton;
-      this.netUpButtonList[counter] = devUpColorButton;
-      this.netEnableSwitchList[counter] = devEnableSwitch;
-      counter++;
+      this.netDownButtonList[i] = devDownColorButton;
+      this.netUpButtonList[i] = devUpColorButton;
+      this.netEnableSwitchList[i] = devEnableSwitch;
     }
     //Disk Stuff
     this.builder.get_object('diskEnableSwitch').set_active(this.config.disk.enabled);
     this.builder.get_object('diskEnableSwitch').connect(
       'notify::active',
       Lang.bind(this, function() {
-        var isEnabled = this.builder.get_object('diskEnableSwitch').get_active();
+        let isEnabled = this.builder.get_object('diskEnableSwitch').get_active();
         this.builder.get_object('diskSettingsBox').set_sensitive(isEnabled);
         this.save();
       })
@@ -458,14 +434,13 @@ Preferences.prototype = {
     this.diskDownButtonList = [];
     this.diskUpButtonList = [];
     this.diskEnableSwitchList = [];
-    counter = 0;
 
-    for (devname in this.config.disk.devices) {
+    for (let i = 0; i < this.config.disk.devices.length; i++) {
       //build the device sections
       currentdev_vbox = new Gtk.VBox();
       currentdev_hbox = new Gtk.HBox();
       devLabel = new Gtk.Label({
-        label: devname
+        label: this.config.disk.devices[i].id
       });
       devLabel.set_halign(1); //start
 
@@ -514,20 +489,20 @@ Preferences.prototype = {
         })
       );
       //show the device only if the config oks it
-      if (this.config.disk.devices[devname].show) {
+      if (this.config.disk.devices[i].show) {
         this.diskDevicesChoicesBox.add(currentdev_vbox);
       }
 
       //Configure the Widgets initial values
-      this.setColorByObject(devDownColorButton, this.config.disk.devices[devname].colors[0]);
-      this.setColorByObject(devUpColorButton, this.config.disk.devices[devname].colors[1]);
+      this.setColorByObject(devDownColorButton, this.config.disk.devices[i].colors[0]);
+      this.setColorByObject(devUpColorButton, this.config.disk.devices[i].colors[1]);
 
-      devEnableSwitch.set_active(this.config.disk.devices[devname].enabled);
-      if (!this.config.disk.devices[devname].enabled) {
-        devDownLabel.set_sensitive(this.config.disk.devices[devname].enabled);
-        devDownColorButton.set_sensitive(this.config.disk.devices[devname].enabled);
-        devUpLabel.set_sensitive(this.config.disk.devices[devname].enabled);
-        devUpColorButton.set_sensitive(this.config.disk.devices[devname].enabled);
+      devEnableSwitch.set_active(this.config.disk.devices[i].enabled);
+      if (!this.config.disk.devices[i].enabled) {
+        devDownLabel.set_sensitive(this.config.disk.devices[i].enabled);
+        devDownColorButton.set_sensitive(this.config.disk.devices[i].enabled);
+        devUpLabel.set_sensitive(this.config.disk.devices[i].enabled);
+        devUpColorButton.set_sensitive(this.config.disk.devices[i].enabled);
       }
 
       //connect the widgets callbacks
@@ -545,93 +520,81 @@ Preferences.prototype = {
       );
       devEnableSwitch.connect(
         'notify::active',
-        Lang.bind(this, function(myswitch) {
-          var isEnabled = myswitch.get_active();
-          var childrens = myswitch.get_parent().get_children();
+        (myswitch) => {
+          let isEnabled = myswitch.get_active();
+          let children = myswitch.get_parent().get_children();
 
-          var startloc = childrens.indexOf(myswitch);
+          let startloc = children.indexOf(myswitch);
           if (startloc >= 0) {
-            for (var i = childrens.indexOf(myswitch) + 1; i < childrens.length; i++) {
-              childrens[i].set_sensitive(isEnabled);
+            for (let i = children.indexOf(myswitch) + 1; i < children.length; i++) {
+              children[i].set_sensitive(isEnabled);
             }
           }
           this.save();
-        })
+        }
       );
-      this.diskDownButtonList[counter] = devDownColorButton;
-      this.diskUpButtonList[counter] = devUpColorButton;
-      this.diskEnableSwitchList[counter] = devEnableSwitch;
-      counter++;
+      this.diskDownButtonList[i] = devDownColorButton;
+      this.diskUpButtonList[i] = devUpColorButton;
+      this.diskEnableSwitchList[i] = devEnableSwitch;
     }
   },
 
   save: function() {
-    //print("saving...");
+    this.config.refreshRate = this.builder.get_object('refreshRateScale').get_value();
+    this.config.labelColor = this.getColorByName('labelColorButton');
+    this.config.backgroundColor = this.getColorByName('backgroundColorButton');
+    this.config.labelsOn = this.builder.get_object('labelsSwitch').get_active();
 
-    try {
-      this.config.refreshRate = this.builder.get_object('refreshRateScale').get_value();
-      this.config.labelColor = this.getColorByName('labelColorButton');
-      this.config.backgroundColor = this.getColorByName('backgroundColorButton');
-      this.config.labelsOn = this.builder.get_object('labelsSwitch').get_active();
-      this.config.height = this.builder.get_object('heightScale').get_value();
-
-      //CPU Settings
-      this.config.cpu.enabled = this.builder.get_object('cpuEnableSwitch').get_active();
-      this.config.cpu.width = this.builder.get_object('cpuWidthScale').get_value();
-      for (var i = 0; i < this.config.cpu.colors.length; i++) {
-        this.config.cpu.colors[i] = this.getColorByObject(this.cpuButtonList[i]);
-      }
-
-      //MEM Settings
-      this.config.mem.enabled = this.builder.get_object('memEnableSwitch').get_active();
-      this.config.mem.width = this.builder.get_object('memWidthScale').get_value();
-
-      this.config.mem.colors[0] = this.getColorByName('usedupColorButton');
-      this.config.mem.colors[1] = this.getColorByName('cachedColorButton');
-      this.config.mem.colors[2] = this.getColorByName('bufferColorButton');
-      this.config.mem.colors[3] = this.getColorByName('freeColorButton');
-
-      //SWAP Settings
-      this.config.mem.swapcolors[0] = this.getColorByName('swapColorButton');
-
-      //NET Settings
-      this.config.net.enabled = this.builder.get_object('netEnableSwitch').get_active();
-      this.config.net.autoscale = this.builder.get_object('netAutoScaleSwitch').get_active();
-      this.config.net.logscale = this.builder.get_object('netLogScaleSwitch').get_active();
-      this.config.net.width = this.builder.get_object('netWidthScale').get_value();
-      var devnum = 0;
-      for (var devname in this.config.net.devices) {
-        this.config.net.devices[devname].enabled = this.netEnableSwitchList[devnum].get_active();
-        this.config.net.devices[devname].colors[0] = this.getColorByObject(this.netDownButtonList[devnum]);
-        this.config.net.devices[devname].colors[1] = this.getColorByObject(this.netUpButtonList[devnum]);
-
-        devnum++;
-      }
-      //Disk Settings
-      this.config.disk.enabled = this.builder.get_object('diskEnableSwitch').get_active();
-      this.config.disk.autoscale = this.builder.get_object('diskAutoScaleSwitch').get_active();
-      this.config.disk.logscale = this.builder.get_object('diskLogScaleSwitch').get_active();
-      this.config.disk.width = this.builder.get_object('diskWidthScale').get_value();
-      devnum = 0;
-      for (devname in this.config.disk.devices) {
-        this.config.disk.devices[devname].enabled = this.diskEnableSwitchList[devnum].get_active();
-        this.config.disk.devices[devname].colors[0] = this.getColorByObject(this.diskDownButtonList[devnum]);
-        this.config.disk.devices[devname].colors[1] = this.getColorByObject(this.diskUpButtonList[devnum]);
-
-        devnum++;
-      }
-
-      print(JSON.stringify(this.config));
-    } catch (e) {
-      print(_('Error while saving file:') + ' ' + e);
+    //CPU Settings
+    this.config.cpu.enabled = this.builder.get_object('cpuEnableSwitch').get_active();
+    this.config.cpu.width = this.builder.get_object('cpuWidthScale').get_value();
+    for (let i = 0; i < this.config.cpu.colors.length; i++) {
+      this.config.cpu.colors[i] = this.getColorByObject(this.cpuButtonList[i]);
     }
+
+    //MEM Settings
+    this.config.mem.enabled = this.builder.get_object('memEnableSwitch').get_active();
+    this.config.mem.width = this.builder.get_object('memWidthScale').get_value();
+
+    this.config.mem.colors[0] = this.getColorByName('usedupColorButton');
+    this.config.mem.colors[1] = this.getColorByName('cachedColorButton');
+    this.config.mem.colors[2] = this.getColorByName('bufferColorButton');
+    this.config.mem.colors[3] = this.getColorByName('freeColorButton');
+
+    //SWAP Settings
+    this.config.mem.swapcolors[0] = this.getColorByName('swapColorButton');
+
+    //NET Settings
+    this.config.net.enabled = this.builder.get_object('netEnableSwitch').get_active();
+    this.config.net.autoscale = this.builder.get_object('netAutoScaleSwitch').get_active();
+    this.config.net.logscale = this.builder.get_object('netLogScaleSwitch').get_active();
+    this.config.net.width = this.builder.get_object('netWidthScale').get_value();
+
+    for (let i = 0; i < this.config.net.devices.length; i++) {
+      this.config.net.devices[i].enabled = this.netEnableSwitchList[i].get_active();
+      this.config.net.devices[i].colors[0] = this.getColorByObject(this.netDownButtonList[i]);
+      this.config.net.devices[i].colors[1] = this.getColorByObject(this.netUpButtonList[i]);
+    }
+
+    //Disk Settings
+    this.config.disk.enabled = this.builder.get_object('diskEnableSwitch').get_active();
+    this.config.disk.autoscale = this.builder.get_object('diskAutoScaleSwitch').get_active();
+    this.config.disk.logscale = this.builder.get_object('diskLogScaleSwitch').get_active();
+    this.config.disk.width = this.builder.get_object('diskWidthScale').get_value();
+
+    for (let i = 0; i < this.config.disk.devices.length; i++) {
+      this.config.disk.devices[i].enabled = this.diskEnableSwitchList[i].get_active();
+      this.config.disk.devices[i].colors[0] = this.getColorByObject(this.diskDownButtonList[i]);
+      this.config.disk.devices[i].colors[1] = this.getColorByObject(this.diskUpButtonList[i]);
+    }
+    print(JSON.stringify(this.config));
   },
 
   getColorByName: function(widgetname) {
-    var c = new Gdk.RGBA();
+    let c = new Gdk.RGBA();
 
     //check the parameters since ubuntu wants a reference instead of a returned value
-    var params = getParamNames(this.builder.get_object(widgetname).get_rgba);
+    let params = getParamNames(this.builder.get_object(widgetname).get_rgba);
 
     if (params === null) {
       c = this.builder.get_object(widgetname).get_rgba();
@@ -642,10 +605,10 @@ Preferences.prototype = {
     return [c.red, c.green, c.blue, c.alpha];
   },
   getColorByObject: function(widget) {
-    var c = new Gdk.RGBA();
+    let c = new Gdk.RGBA();
 
     //check the parameters since ubuntu wants a reference instead of a returned value
-    var params = getParamNames(widget.get_rgba);
+    let params = getParamNames(widget.get_rgba);
 
     if (params === null) {
       c = widget.get_rgba();
@@ -685,10 +648,14 @@ Preferences.prototype = {
 };
 
 function getParamNames(func) {
-  var funStr = func.toString();
+  let funStr = func.toString();
   return funStr.slice(funStr.indexOf('(') + 1, funStr.indexOf(')')).match(/([^\s,]+)/g);
 }
-
-Gtk.init(null);
+try {
+  Gtk.init(null);
 let prefui = new Preferences();
 Gtk.main();
+} catch (e) {
+  print(e)
+}
+

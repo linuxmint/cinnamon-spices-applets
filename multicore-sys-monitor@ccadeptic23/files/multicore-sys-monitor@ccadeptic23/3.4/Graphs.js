@@ -1,18 +1,16 @@
 const Pango = imports.gi.Pango;
 const PangoCairo = imports.gi.PangoCairo;
-// Todo - clean up this file
-function GraphVBars(area, provider) {
-  this._init(area, provider);
+
+function GraphVBars(area) {
+  this._init(area);
 }
 
 GraphVBars.prototype = {
-  _init: function(area, provider) {
+  _init: function(area) {
     this.area = area;
-    this.datalist = [];
-    this.provider = provider;
   },
 
-  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+  paint: function(providerName, currentReadings, area, labelson, width, height, labelColor, bgcolor, colorslist) {
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
     }
@@ -26,9 +24,9 @@ GraphVBars.prototype = {
     cr.fill();
 
     // Usage Data Bars
-    let vbarWidth = (width - 6) / this.datalist.length;
-    for (let i = 0; i < this.datalist.length; i++) {
-      let vbarHeight = (height - 1) * this.datalist[i];
+    let vbarWidth = (width - 6) / currentReadings.length;
+    for (let i = 0; i < currentReadings.length; i++) {
+      let vbarHeight = (height - 1) * currentReadings[i];
       let vbarOffset = i * vbarWidth + 3;
 
       //use this to select cpu from our colorlist, its incase we have more cpus than colors
@@ -46,8 +44,7 @@ GraphVBars.prototype = {
 
     // Label
     if (labelson) {
-      let labelstr = this.provider.getName();
-      let pangolayout = this.area.create_pango_layout(labelstr);
+      let pangolayout = this.area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
@@ -64,7 +61,6 @@ GraphVBars.prototype = {
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      //let degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A
@@ -80,9 +76,6 @@ GraphVBars.prototype = {
       cr.closePath();
     }
   },
-  refreshData: function() {
-    this.datalist = this.provider.getData();
-  },
   destroy: function() {
     let props = Object.keys(this);
     for (let i = 0; i < props.length; i++) {
@@ -91,17 +84,15 @@ GraphVBars.prototype = {
   },
 };
 
-function GraphPieChart(area, provider) {
-  this._init(area, provider);
+function GraphPieChart(area) {
+  this._init(area);
 }
 
 GraphPieChart.prototype = {
-  _init: function(area, provider) {
+  _init: function(area) {
     this.area = area;
-    this.datalist = [];
-    this.provider = provider;
   },
-  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+  paint: function(providerName, currentReadings, area, labelson, width, height, labelColor, bgcolor, colorslist) {
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
     }
@@ -114,16 +105,17 @@ GraphPieChart.prototype = {
 
     //Draw Pie Chart
     let xcenter = width / 2;
-    let ycenter = height / 2;
+    let ycenter = (height / 2) / global.ui_scale;
     let radius = width / 2 - 1;
     if (height < width) {
       radius = height / 2 - 1;
     }
+    radius = radius / global.ui_scale;
 
     let runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 
     cr.moveTo(xcenter, ycenter);
-    for (let i = 0; i < this.datalist.length; i++) {
+    for (let i = 0; i < currentReadings.length; i++) {
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
       //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
       let datapointnum = i % colorslist.length;
@@ -133,8 +125,8 @@ GraphPieChart.prototype = {
       let a = colorslist[datapointnum][3];
 
       let startangle = 2 * 3.14159 * runningpercent;
-      let endangle = 2 * 3.14159 * (runningpercent + this.datalist[i]);
-      runningpercent += this.datalist[i]; //update running percent
+      let endangle = 2 * 3.14159 * (runningpercent + currentReadings[i]);
+      runningpercent += currentReadings[i]; //update running percent
 
       cr.setSourceRGBA(r, g, b, a);
       cr.newPath();
@@ -149,8 +141,7 @@ GraphPieChart.prototype = {
 
     // Label
     if (labelson) {
-      let labelstr = this.provider.getName();
-      let pangolayout = this.area.create_pango_layout(labelstr);
+      let pangolayout = this.area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
@@ -167,7 +158,6 @@ GraphPieChart.prototype = {
 
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      //let degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A
@@ -183,10 +173,6 @@ GraphPieChart.prototype = {
       cr.closePath();
     }
   },
-
-  refreshData: function() {
-    this.datalist = this.provider.getData();
-  },
   destroy: function() {
     let props = Object.keys(this);
     for (let i = 0; i < props.length; i++) {
@@ -195,14 +181,13 @@ GraphPieChart.prototype = {
   },
 };
 
-function GraphLineChart(area, provider, width) {
-  this._init(area, provider, width);
+function GraphLineChart(area, width) {
+  this._init(area, width);
 }
 
 GraphLineChart.prototype = {
-  _init: function(area, provider, width) {
+  _init: function(area, width) {
     this.area = area;
-    this.provider = provider;
 
     this.pixelsPerDataPoint = 5;
     this.dataPointsListSize = this.getDataPointsListSize(width);
@@ -211,53 +196,57 @@ GraphLineChart.prototype = {
     this.autoScale = false;
     this.logScale = false;
     this.scale = 1.0;
-    this.maxvalue = 1.0;
-    this.maxvalueloc = null;
+    this.maxValue = 1.0;
+    this.maxValueLoc = null;
     this.minMaxValue = 1.0;
   },
 
-  refreshData: function() {
-    let datapoints = this.provider.getData();
-    if (datapoints.length === 0) {
+  refreshData: function(currentReadings, providerName) {
+    let dataPoints = [];
+    for (let i = 0; i < currentReadings.length; i++) {
+      dataPoints = dataPoints.concat(currentReadings[i].readingRatesList);
+    }
+    if (dataPoints.length === 0) {
       return true;
     }
 
-    if (this.maxvalueloc == null) {
+
+    if (this.maxValueLoc == null) {
       //initialize
-      this.resizeDataPointsList(this.dataPointsListSize, datapoints.length);
+      this.resizeDataPointsList(this.dataPointsListSize, dataPoints.length);
     }
 
-    this.dataPointsList.push(datapoints);
+    this.dataPointsList.push(dataPoints);
     this.dataPointsList.shift();
-    this.maxvalueloc--;
+    this.maxValueLoc--;
 
     //double check what we just added isnt greater than our max (for all lines)
-    for (let i = 0; i < datapoints.length; i++) {
-      if (datapoints[i] > this.maxvalue && datapoints[i] > this.minMaxValue) {
-        this.maxvalue = datapoints[i];
-        this.maxvalueloc = this.dataPointsListSize - 1;
-        this.scale = 1.0 / this.maxvalue;
+    for (let i = 0; i < dataPoints.length; i++) {
+      if (dataPoints[i] > this.maxValue && dataPoints[i] > this.minMaxValue) {
+        this.maxValue = dataPoints[i];
+        this.maxValueLoc = this.dataPointsListSize - 1;
+        this.scale = 1.0 / this.maxValue;
       }
     }
 
-    if (this.autoScale && this.maxvalueloc < 0) {
+    if (this.autoScale && this.maxValueLoc < 0) {
       //find a new max we lost the old one
-      this.maxvalue = 1.0;
+      this.maxValue = 1.0;
       for (let i = 0; i < this.dataPointsList.length; i++) {
-        for (let j = 0; j < datapoints.length; j++) {
-          if (!this.dataPointsList[i][j]) {
+        for (let j = 0; j < dataPoints.length; j++) {
+          if (this.dataPointsList[i][j] == null) {
             continue;
           }
-          if (this.dataPointsList[i][j] >= this.maxvalue && this.dataPointsList[i][j] > this.minMaxValue) {
-            this.maxvalue = this.dataPointsList[i][j];
-            this.maxvalueloc = i;
-            this.scale = 1.0 / this.maxvalue;
+          if (this.dataPointsList[i][j] >= this.maxValue && this.dataPointsList[i][j] > this.minMaxValue) {
+            this.maxValue = this.dataPointsList[i][j];
+            this.maxValueLoc = i;
+            this.scale = 1.0 / this.maxValue;
           }
         }
       }
     }
-    if (this.logScale && this.maxvalue > 1.0) {
-      this.scale = 1.0 / Math.log(this.maxvalue);
+    if (this.logScale && this.maxValue > 1.0) {
+      this.scale = 1.0 / Math.log(this.maxValue);
     }
 
     return true;
@@ -283,12 +272,14 @@ GraphLineChart.prototype = {
     this.dataPointsList = newdatapointslist;
   },
 
-  paint: function(area, labelson, width, height, labelColor, bgcolor, colorslist) {
+  paint: function(providerName, currentReadings, area, labelson, width, height, labelColor, bgcolor, colorslist) {
+
+    this.refreshData(currentReadings, providerName);
     if (!labelColor) {
       labelColor = [1, 1, 1, 0.1];
     }
     let cr = area.get_context();
-    if (this.dataPointsListSize != this.getDataPointsListSize(width)) {
+    if (this.dataPointsListSize !== this.getDataPointsListSize(width)) {
       this.resizeDataPointsList(this.getDataPointsListSize(width), colorslist.length);
     }
 
@@ -302,6 +293,7 @@ GraphLineChart.prototype = {
     if (this.dataPointsList.length > 0) {
       numLinesOnChart = this.dataPointsList[0].length; //cheesy but it works
     }
+
     for (let i = 0; i < numLinesOnChart; i++) {
       //use this to select datapointnum from our colorlist, its incase we have more datapointnums than colors
       //This shouldnt happen but just incase, essentially we reuse colors from the beginning if we run out
@@ -342,8 +334,7 @@ GraphLineChart.prototype = {
 
     // Label
     if (labelson) {
-      let labelstr = this.provider.getName();
-      let pangolayout = this.area.create_pango_layout(labelstr);
+      let pangolayout = this.area.create_pango_layout(providerName);
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
@@ -376,7 +367,6 @@ GraphLineChart.prototype = {
   },
   drawRoundedRectangle: function(cr, x, y, width, height, radius) {
     if (height > 0) {
-      //let degrees = 3.14159 / 180.0;
       cr.newSubPath();
 
       cr.moveTo(x + radius, y); // Move to A
