@@ -582,7 +582,8 @@ MyApplet.prototype = {
       this._currentWeatherPressure.text = pressure + ' ' + _(this._pressureUnit)
 
       // location is a button
-      this._currentWeatherLocation.url = weather.link
+      let tmp = weather.link.split('*')
+      this._currentWeatherLocation.url = tmp.length > 1 ? tmp[1] : tmp[0]
       this._currentWeatherLocation.label = _(location)
 
       // gettext can't see these inline

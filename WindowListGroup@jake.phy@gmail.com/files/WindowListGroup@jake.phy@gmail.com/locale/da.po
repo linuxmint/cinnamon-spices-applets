@@ -1,0 +1,346 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-03 19:49+0100\n"
+"PO-Revision-Date: 2017-12-04 17:06+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: da\n"
+
+#: specialMenus.js:63
+msgid "Close"
+msgstr "Luk"
+
+#: specialMenus.js:66 specialMenus.js:198
+msgid "Minimize"
+msgstr "Minimér"
+
+#: specialMenus.js:69 specialMenus.js:195
+msgid "Maximize"
+msgstr "Maksimér"
+
+#: specialMenus.js:72
+msgid "Move to left workspace"
+msgstr "Flyt til arbejdsområde til venstre"
+
+#: specialMenus.js:75
+msgid "Move to right workspace"
+msgstr "Flyt til arbejdsområde til højre"
+
+#: specialMenus.js:78 specialMenus.js:185
+msgid "Visible on all workspaces"
+msgstr "Synlig på alle arbejdsområder"
+
+#: specialMenus.js:81
+msgid "New Window"
+msgstr "Nyt vindue"
+
+#: specialMenus.js:84
+msgid "Go to Settings"
+msgstr "Gå til indstillinger"
+
+#: specialMenus.js:87
+msgid "ReArrange"
+msgstr "Omarrangér"
+
+#: specialMenus.js:90
+msgid "Show Pinned"
+msgstr "Vis fastgjorte"
+
+#: specialMenus.js:93
+msgid "Group Apps"
+msgstr "Gruppér programmer"
+
+#: specialMenus.js:96
+msgid "Show Thumbs"
+msgstr "Vis miniaturer"
+
+#: specialMenus.js:99
+msgid "Vertical Thumbs"
+msgstr "Lodrette miniaturer"
+
+#: specialMenus.js:102
+msgid "Stack Thumbs"
+msgstr "Stabl miniaturer"
+
+#: specialMenus.js:105
+msgid "Hover to Peek"
+msgstr "Markørsvævning for smugkig"
+
+#: specialMenus.js:111 specialMenus.js:256
+msgid "Unpin App"
+msgstr "Frigør program"
+
+#: specialMenus.js:114 specialMenus.js:252
+msgid "Pin App"
+msgstr "Fastgør program"
+
+#: specialMenus.js:181
+msgid "Only on this workspace"
+msgstr "Kun på dette arbejdsområde"
+
+#: specialMenus.js:193
+msgid "Unmaximize"
+msgstr "Gendan"
+
+#: specialMenus.js:197
+msgid "Restore"
+msgstr "Gendan"
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->description
+msgid "Window List with App Grouping an Window Thumbnails"
+msgstr ""
+"Vinduesliste med gruppering af programmer og forhåndsvisning af vinduer"
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->name
+msgid "Window List With App Grouping"
+msgstr "Vinduesliste med gruppering af programmer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->description
+msgid "Thumbnail Size:"
+msgstr "Miniaturestørrelse"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->tooltip
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->tooltip
+msgid "Opacity of the windows on peek."
+msgstr "Vinduernes uigennemsigtighed når markøren føres hen over miniaturen."
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->units
+msgid "size"
+msgstr "størrelse"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. thumbnails->description
+msgid "Show Thumbnails"
+msgstr "Vis miniaturer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. thumbnails->tooltip
+msgid "Show the Thumbnail Windows"
+msgstr "Vis miniaturevinduerne"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->description
+msgid "Window fade time:"
+msgstr "Udtoningstid for vindue"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->tooltip
+msgid "The animation time for the windows on hover peek"
+msgstr "Vinduernes animationstid når markøren føres hen over"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->units
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->units
+msgid "milliseconds"
+msgstr "millisekunder"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->description
+msgid "Title Display:"
+msgstr "Titelvisning:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+"fokuseret: vis fokuseret vindues titel, titel: vis vinduestitlen, program: "
+"vis programnavnet, ingen: vis ikke noget"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "none"
+msgstr "ingen"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "focused"
+msgstr "fokuseret"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "app"
+msgstr "program"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "title"
+msgstr "titel"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->description
+msgid "Window opacity:"
+msgstr "Vinduesuigennemsigtighed:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->units
+msgid "percent"
+msgstr "procent"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->enable-hover-
+#. peek->description
+msgid "Enable hover peek"
+msgstr "Aktivér smugkig når markøren føres hen over"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->enable-hover-
+#. peek->tooltip
+msgid "Enable Hover peek when mouse is over thumbnail"
+msgstr "Aktivér smugkig når markøren er over miniaturen"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->description
+msgid "Icon Padding:"
+msgstr "Ikonudfyldning:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->tooltip
+msgid "How much Padding is between the icons"
+msgstr "Hvor meget mellemrum der er mellem ikoner."
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->units
+msgid "padding"
+msgstr "udfyldning"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. pinned->description
+msgid "Show pinned apps"
+msgstr "Vis fastgjorte programmer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. pinned->tooltip
+msgid "Show the pinned apps or just show the open windows"
+msgstr "Vis fastgjorte programmer eller vis bare de åbne vinduer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Space2->description
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Space1->description
+msgid " "
+msgstr " "
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->WindowList->description
+msgid "Window List Settings"
+msgstr "Indstillinger for vinduesliste"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr "Indstillinger for miniaturer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->vertical-
+#. thumbnails->description
+msgid "Vertical Thumbnails"
+msgstr "Lodrette miniaturer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->vertical-
+#. thumbnails->tooltip
+msgid "Arrange thumbnails vertically or horizontally"
+msgstr "Arrangér miniaturer lodret eller vandret"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->description
+msgid "Thumbnail timeout:"
+msgstr "Miniaturetimeout:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->tooltip
+msgid "Thumbnail timeout"
+msgstr "Miniaturetimeout"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->stack-
+#. thumbnails->description
+msgid "Stack Thumbnails"
+msgstr "Stabl miniaturer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->stack-
+#. thumbnails->tooltip
+msgid ""
+"Stack the Thumbnail Windows if there are to many thumbnails for the screen"
+msgstr "Stabl miniaturevinduerne hvis der er for mange miniaturer til skærmen"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->description
+msgid "Number Display:"
+msgstr "Antalvisning:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+"normal: vis antal vinduer, smart: vis antal vinduer hvis mere end ét, ingen: "
+"vis ikke antal vinduer, alle: vis også antal for favoritter"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "all"
+msgstr "alle"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "Smart"
+msgstr "smart"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "normal"
+msgstr "normal"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->onclick-
+#. thumbnails->description
+msgid "Open Thumbnails OnClick"
+msgstr "Åbn miniaturer ved klik"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->onclick-
+#. thumbnails->tooltip
+msgid "Open the thumbnails on click, if there is more than 1 windows open."
+msgstr "Åbn miniaturerne ved klik, hvis der er mere et vindue åbent."
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr "Indstillinger for markørsvævning"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->group-
+#. apps->description
+msgid "Group apps into single icon"
+msgstr "Saml programmer i et enkelt ikon"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->group-
+#. apps->tooltip
+msgid "Group the open app instances into single icon"
+msgstr "Saml forekomster af åbne programmer i et enkelt ikon"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->arrange-
+#. pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr "Arrangér fastgjorte programmer"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->arrange-
+#. pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order"
+msgstr "Arrangér fastgjorte programmer i en anden rækkefølge"

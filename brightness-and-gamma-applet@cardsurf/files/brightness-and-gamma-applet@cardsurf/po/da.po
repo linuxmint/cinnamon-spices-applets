@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 17:37+0200\n"
-"PO-Revision-Date: 2017-07-10 17:51+0200\n"
+"POT-Creation-Date: 2017-05-01 14:00+0800\n"
+"PO-Revision-Date: 2017-12-04 17:17+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
 #: applet.js:168
 msgid "The following packages were not found:"
@@ -196,3 +196,26 @@ msgstr "Anvend ved opstart"
 #. schema.json->apply_startup->tooltip
 msgid "Apply values at applet startup"
 msgstr "Anvend værdier ved opstart af panelprogrammet"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->description
+msgid "Apply every"
+msgstr "Anvend efter"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_every->tooltip
+msgid ""
+"How often to apply values. 0 means that values are not applied periodically."
+msgstr ""
+"Hvor ofte værdier skal anvendes. 0 betyder, at værdier ikke anvendes "
+"periodisk."
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->description
+msgid "Apply asynchronously"
+msgstr "Anvend asynkront"
+
+#. brightness-and-gamma-applet@cardsurf->settings-
+#. schema.json->apply_asynchronously->tooltip
+msgid "Apply values in a background process"
+msgstr "Anvend værdier i en baggrundsproces"
