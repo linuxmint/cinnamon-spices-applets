@@ -289,7 +289,7 @@ AppList.prototype = {
         metaWindow: metaWindow,
         appId: appId,
       });
-      this.actor.add_actor(appGroup.actor);
+      this.actor.add_child(appGroup.actor);
       this.appList.push(appGroup);
 
       if (this.state.settings.groupApps && metaWindows.length > 0) {

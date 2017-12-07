@@ -98,6 +98,15 @@ const each = function(obj, cb) {
   }
 };
 
+const findIndex = function(arr, cb) {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    if (cb(arr[i], i, arr)) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 const unref = function(object) {
   // Some actors being destroyed have a cascading effect (e.g. PopupMenu items),
   // so it is safest to wait for the next 'tick' before removing references.

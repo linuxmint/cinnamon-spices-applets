@@ -26,10 +26,11 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, constants, AppList, setTimeout, unref, store;
+let each, findIndex, constants, AppList, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
+  findIndex = utils.findIndex;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
   constants = require('./constants').constants;
@@ -38,6 +39,7 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
   constants = AppletDir.constants.constants;
@@ -101,6 +103,7 @@ PinnedFavs.prototype = {
       } else {
         // Move actor to index, trigger favorite state change
         currentAppList.appList[refApp].groupState.set({isFavoriteApp: isFavoriteApp});
+        // Some favorite apps may be present from a previous installation, but not rendered and added to the app list because they're uninstalled.
         currentAppList.actor.set_child_at_index(currentAppList.appList[refApp].actor, pos);
       }
     }
@@ -144,6 +147,7 @@ PinnedFavs.prototype = {
 
   addFavorite: function (opts={appId: null, app: null, pos: -1}) {
     const appSystem = this.params.state.trigger('getAppSystem');
+    let oldIndex = -1;
     if (!opts.app) {
       opts.app = appSystem.lookup_app(opts.appId);
     }
@@ -163,10 +167,16 @@ PinnedFavs.prototype = {
       id: opts.appId,
       app: opts.app
     };
-    this._favorites.push(newFav);
-
-    if (opts.pos !== -1) {
-      this.moveFavoriteToPos(opts.appId, opts.pos);
+    let refFavorite = findIndex(this._favorites, function(favorite) {
+      return favorite.id === opts.appId;
+    });
+    if (refFavorite === -1) {
+      this._favorites.push(newFav);
+    } else {
+      oldIndex = refFavorite;
+    }
+    if (opts.pos > -1) {
+      this.moveFavoriteToPos(opts, oldIndex);
       return true;
     }
 
@@ -174,12 +184,32 @@ PinnedFavs.prototype = {
     return true;
   },
 
-  moveFavoriteToPos: function (appId, pos) {
-    let oldIndex = this._favorites.findIndex(favorite => favorite.id === appId);
-    if (oldIndex !== -1 && pos > oldIndex) {
-      pos = pos - 1;
+  moveFavoriteToPos: function (opts, oldIndex) {
+    if (!oldIndex) {
+      oldIndex = findIndex(this._favorites, function(favorite) {
+        return favorite.id === opts.appId;
+      });
     }
-    this._favorites.splice(pos, 0, this._favorites.splice(oldIndex, 1)[0]);
+    let currentAppList = this.params.state.trigger('getCurrentAppList');
+    let favoriteIds = this._favorites.map(function(favorite) {
+      return favorite.id;
+    });
+    let renderedFavoriteApps = currentAppList.appList.map(function(appGroup) {
+      return {
+        id: appGroup.groupState.appId,
+        app: appGroup.groupState.app
+      };
+    }).filter(function(renderedFavorite) {
+      return favoriteIds.indexOf(renderedFavorite.id) > -1
+    });
+    let refApp = findIndex(renderedFavoriteApps, function(favorite) {
+      return favorite.id === opts.appId;
+    })
+    renderedFavoriteApps = renderedFavoriteApps
+      .slice(0, opts.pos)
+      .concat([{id:  opts.appId, app: opts.app}])
+      .concat(renderedFavoriteApps.slice(opts.pos + 1, renderedFavoriteApps.length))
+    this._favorites = renderedFavoriteApps;
     this._saveFavorites();
   },
 
@@ -788,14 +818,15 @@ MyApplet.prototype = {
     }
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
+      let opts = {
+        appId: source.groupState.appId,
+        app: source.groupState.app,
+        pos: favPos
+      };
       if (refFav !== -1) {
-        this.pinnedFavorites.moveFavoriteToPos(source.groupState.appId, favPos);
+        this.pinnedFavorites.moveFavoriteToPos(opts);
       } else if (this.state.settings.pinOnDrag) {
-        this.pinnedFavorites.addFavorite({
-          appId: source.groupState.appId,
-          app: source.groupState.app,
-          pos: favPos
-        });
+        this.pinnedFavorites.addFavorite(opts);
       }
       return false;
     });
