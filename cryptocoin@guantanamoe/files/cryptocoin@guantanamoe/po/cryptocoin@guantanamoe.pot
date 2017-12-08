@@ -18,7 +18,7 @@ msgstr ""
 "Language: \n"
 
 #. cryptocoin@guantanamoe->metadata.json->description
-msgid "Shows CPU Temperature"
+msgid "Monitor current price and trends of cryptocurrencies"
 msgstr ""
 
 #. cryptocoin@guantanamoe->metadata.json->name
@@ -26,7 +26,7 @@ msgid "Cryptocoin"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->main-settings->description
-msgid "Monitor current price and trends of cryptocurrencies"
+msgid "Cryptocoin Settings"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->currency->description
