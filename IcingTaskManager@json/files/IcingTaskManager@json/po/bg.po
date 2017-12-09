@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-09 03:01-0600\n"
+"POT-Creation-Date: 2017-12-09 18:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr "Места"
 
 #: 3.4/specialMenus.js:202
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Отметките/Историята изискват gir1.2-gda-5.0"
 
 #: 3.4/specialMenus.js:222
 msgid "Recent"
@@ -816,9 +816,8 @@ msgstr ""
 
 #. 3.4->settings-schema.json->mintXPreset->description
 #. 3.4->settings-schema.json->mintXPreset->tooltip
-#, fuzzy
 msgid "Mint X, Linux Mint, and Variants"
-msgstr "Минт Y и вариантите"
+msgstr "Минт X, Линукс Минт и вариантите"
 
 #. 3.4->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
@@ -851,45 +850,45 @@ msgstr "Контролира каква е широчината на бутон�
 #. 3.4->settings-schema.json->middle-click-action->description
 #. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid "Middle click action"
-msgstr ""
+msgstr "Действие при натискане на колелцето"
 
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Launch new app instance"
-msgstr ""
+msgstr "Стартирай нова инстанция на приложението"
 
 #. 3.4->settings-schema.json->middle-click-action->options
-#, fuzzy
 msgid "Close last focused window in group"
-msgstr "Освети последния прозорец на фокус в групата с приложения"
+msgstr "Затвори последно фокусирания прозорец в групата с приложения"
 
 #. 3.4->settings-schema.json->scroll-behavior->description
 msgid "Mouse wheel scroll behavior"
-msgstr ""
+msgstr "Поведение на скрола на мишката"
 
 #. 3.4->settings-schema.json->scroll-behavior->tooltip
 msgid ""
 "Choose if scrolling the mouse wheel cycles running apps, an app button's "
 "windows on hover, or is disabled."
 msgstr ""
+"Изберете дали да включите превъртането на работещите приложения с колелцето "
+"на мишката."
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 msgid "Cycle apps"
-msgstr ""
+msgstr "Превъртане на приложенията"
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 #. 3.4->settings-schema.json->left-click-action->options
-#, fuzzy
 msgid "Cycle windows"
-msgstr "Включване на всички прозорци"
+msgstr "Превъртане на прозорците"
 
 #. 3.4->settings-schema.json->left-click-action->description
 #. 3.4->settings-schema.json->left-click-action->tooltip
 msgid "Left click action"
-msgstr ""
+msgstr "Действие при натискане на ляв бутон"
 
 #. 3.4->settings-schema.json->left-click-action->options
 msgid "Toggle activation of last focused window"
-msgstr ""
+msgstr "Превключва активността към последно посочения прозорец"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
