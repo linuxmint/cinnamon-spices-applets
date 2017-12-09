@@ -92,6 +92,7 @@
       "title" : "Styling",
       "keys": [
         "show-active",
+        "closed-pinned-app-style-workaround",
         "hoverPseudoClass",
         "focusPseudoClass",
         "activePseudoClass"
@@ -385,6 +386,12 @@
     "default": false,
     "description": "Show active app indicators",
     "tooltip": "Active app styling will indicate if an app is active."
+  },
+  "closed-pinned-app-style-workaround": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use a workaround for closed pinned app styling",
+    "tooltip": "This forces the removal of styling on closed pinned apps except on hover. Only enable this for themes that style closed and opened pinned apps the same way."
   },
   "icon-spacing": {
     "type": "spinbutton",

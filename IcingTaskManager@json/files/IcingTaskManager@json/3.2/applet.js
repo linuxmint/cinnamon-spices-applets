@@ -343,6 +343,7 @@ MyApplet.prototype = {
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKeys},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKeys},
+      {key: 'closed-pinned-app-style-workaround', value: 'closedPinnedAppStyleWorkaround', cb: this.refreshCurrentAppList},
       {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this._updatePseudoClasses},
       {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this._updatePseudoClasses},
       {key: 'activePseudoClass', value: 'activePseudoClass', cb: this._updatePseudoClasses},
@@ -551,6 +552,7 @@ MyApplet.prototype = {
     this.settings.setValue('activePseudoClass', 3);
     this.settings.setValue('number-display', 1);
     this.settings.setValue('show-active', true);
+    this.refreshCurrentAppList();
   },
 
   _updateFavorites: function() {

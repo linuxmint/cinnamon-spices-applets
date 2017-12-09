@@ -119,7 +119,7 @@ AppGroup.prototype = {
       metaWindows: params.metaWindows || [],
       lastFocused: params.metaWindow || null,
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
-      autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
+      autoStartIndex: findIndex(this.state.autoStartApps, app => app.id === params.appId),
       willUnmount: false,
       tooltip: null,
       groupReady: false
@@ -148,7 +148,7 @@ AppGroup.prototype = {
       can_focus: true,
       x_fill: true,
       y_fill: true,
-      track_hover: true
+      track_hover: false
     });
     this.actor._delegate = this;
     this._container = new Cinnamon.GenericContainer({
@@ -224,10 +224,16 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
     this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
+    if (this.state.settings.closedPinnedAppStyleWorkaround) {
+      this.signals.connect(this.groupState.app, 'notify::state', () => this.handleFavorite(false, true));
+    }
     this._calcWindowNumber(this.groupState.metaWindows);
-    this.handleFavorite();
+
     this.on_orientation_changed(true);
-    setTimeout(() => this.groupState.set({groupReady: true}), 0);
+    setTimeout(() => {
+      this.groupState.set({groupReady: true});
+      this.handleFavorite();
+    }, 0);
   },
 
   on_orientation_changed: function(fromInit) {
@@ -540,9 +546,15 @@ AppGroup.prototype = {
     if (this.actor.has_style_pseudo_class(activePseudoClass)) {
       this.pseudoClassStash.push(activePseudoClass);
     }
-    if (this.actor.has_style_pseudo_class(hoverPseudoClass)) {
-      this.actor.add_style_pseudo_class(hoverPseudoClass);
+
+    if (this.state.settings.closedPinnedAppStyleWorkaround
+      && this.groupState.metaWindows.length === 0
+      && this.state.appletReady) {
+      this.actor.add_style_class_name('window-list-item-box');
     }
+
+    this.actor.add_style_pseudo_class(hoverPseudoClass);
+
     this.hoverMenu._onMenuEnter();
   },
 
@@ -550,15 +562,27 @@ AppGroup.prototype = {
     if (this.state.panelEditMode) {
       return false;
     }
+
     this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+    this.popPseudoClassStash();
+    this._setFavoriteAttributes();
+
+    if (this.state.settings.closedPinnedAppStyleWorkaround
+      && this.groupState.metaWindows.length === 0
+      && this.state.appletReady) {
+      this.actor.remove_style_class_name('window-list-item-box');
+    }
+
+    this.hoverMenu._onMenuLeave();
+  },
+
+  popPseudoClassStash: function() {
     if (this.pseudoClassStash.length > 0) {
       for (let i = 0; i < this.pseudoClassStash.length; i++) {
         this.actor.add_style_pseudo_class(this.pseudoClassStash[i]);
       }
       this.pseudoClassStash = [];
     }
-    this._setFavoriteAttributes();
-    this.hoverMenu._onMenuLeave();
   },
 
   setActiveStatus: function(windows){
@@ -956,7 +980,7 @@ AppGroup.prototype = {
     }
   },
 
-  handleFavorite: function (changed) {
+  handleFavorite: function (changed, fromAppStateChange) {
     if (changed) {
       setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
     }
@@ -965,7 +989,12 @@ AppGroup.prototype = {
       && this.state.appletReady) {
       this.hoverMenu.close();
       this._onLeave();
+      if (this.state.settings.closedPinnedAppStyleWorkaround) {
+        this.actor.remove_style_class_name('window-list-item-box');
+      }
       return;
+    } else if (fromAppStateChange && this.state.settings.closedPinnedAppStyleWorkaround) {
+      this.actor.add_style_class_name('window-list-item-box');
     }
     this._windowTitleChanged(this.groupState.lastFocused);
     this._onFocusChange();
