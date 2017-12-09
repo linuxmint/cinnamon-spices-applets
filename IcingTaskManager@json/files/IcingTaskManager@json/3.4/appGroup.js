@@ -11,12 +11,14 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-let SpecialMenus, each, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
+let SpecialMenus, each, find, findIndex, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   SpecialMenus = require('./specialMenus');
   constants = require('./constants').constants;
   each = utils.each;
+  findIndex = utils.findIndex;
+  find = utils.find;
   isEqual = utils.isEqual;
   throttle = utils.throttle;
   setTimeout = utils.setTimeout;
@@ -28,6 +30,8 @@ if (typeof require !== 'undefined') {
   SpecialMenus = AppletDir.specialMenus;
   constants = AppletDir.constants.constants;
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
+  find = AppletDir.utils.find;
   isEqual = AppletDir.utils.isEqual;
   throttle = AppletDir.utils.throttle;
   setTimeout = AppletDir.utils.setTimeout;
@@ -50,7 +54,11 @@ function center (length, naturalLength) {
 }
 
 const getPseudoClass = function(pseudoClass) {
-  return store.queryCollection(constants.pseudoOptions, {id: pseudoClass}).label;
+  let item = find(constants.pseudoOptions, (item) => item.id === pseudoClass);
+  if (item) {
+    return item.label;
+  }
+  return 'outlined';
 };
 
 function _Draggable (actor, params) {
@@ -111,7 +119,7 @@ AppGroup.prototype = {
       metaWindows: params.metaWindows || [],
       lastFocused: params.metaWindow || null,
       isFavoriteApp: !params.metaWindow ? true : params.isFavoriteApp === true,
-      autoStartIndex: store.queryCollection(this.state.autoStartApps, app => app.id === params.appId, {indexOnly: true}),
+      autoStartIndex: findIndex(this.state.autoStartApps, app => app.id === params.appId),
       willUnmount: false,
       tooltip: null,
       groupReady: false
@@ -140,7 +148,7 @@ AppGroup.prototype = {
       can_focus: true,
       x_fill: true,
       y_fill: true,
-      track_hover: true
+      track_hover: false
     });
     this.actor._delegate = this;
     this._container = new Cinnamon.GenericContainer({
@@ -217,9 +225,12 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this._calcWindowNumber(this.groupState.metaWindows);
-    this.handleFavorite();
+
     this.on_orientation_changed(true);
-    setTimeout(() => this.groupState.set({groupReady: true}), 0);
+    setTimeout(() => {
+      this.groupState.set({groupReady: true});
+      this.handleFavorite();
+    }, 0);
   },
 
   on_orientation_changed: function(fromInit) {
@@ -532,9 +543,13 @@ AppGroup.prototype = {
     if (this.actor.has_style_pseudo_class(activePseudoClass)) {
       this.pseudoClassStash.push(activePseudoClass);
     }
-    if (this.actor.has_style_pseudo_class(hoverPseudoClass)) {
-      this.actor.add_style_pseudo_class(hoverPseudoClass);
+    if (this.actor.has_style_pseudo_class('closed')) {
+      this.pseudoClassStash.push('closed');
+      this.actor.remove_style_pseudo_class('closed');
     }
+
+    this.actor.add_style_pseudo_class(hoverPseudoClass);
+
     this.hoverMenu._onMenuEnter();
   },
 
@@ -542,15 +557,23 @@ AppGroup.prototype = {
     if (this.state.panelEditMode) {
       return false;
     }
-    this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+    if (this.listState.lastFocusedApp !== this.groupState.appId) {
+      this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+    }
+
+    this._setFavoriteAttributes();
+    this.popPseudoClassStash();
+
+    this.hoverMenu._onMenuLeave();
+  },
+
+  popPseudoClassStash: function() {
     if (this.pseudoClassStash.length > 0) {
       for (let i = 0; i < this.pseudoClassStash.length; i++) {
         this.actor.add_style_pseudo_class(this.pseudoClassStash[i]);
       }
       this.pseudoClassStash = [];
     }
-    this._setFavoriteAttributes();
-    this.hoverMenu._onMenuLeave();
   },
 
   setActiveStatus: function(windows){
@@ -579,6 +602,7 @@ AppGroup.prototype = {
     // we should set ourselves to active
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     if (hasFocus) {
+      this.listState.trigger('updateFocusState', this.groupState.appId)
       this.actor.add_style_pseudo_class(focusPseudoClass);
       if (this.actor.has_style_class_name('window-list-item-demands-attention')) {
         this.actor.remove_style_class_name('window-list-item-demands-attention');
@@ -589,6 +613,10 @@ AppGroup.prototype = {
       this._needsAttention = false;
     } else {
       this.actor.remove_style_pseudo_class(focusPseudoClass);
+      // If hover pseudo class is substituted with the active pseudo class, make sure it gets removed.
+      if (this.state.settings.hoverPseudoClass === 3) {
+        this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+      }
     }
     if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
       this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
@@ -669,10 +697,10 @@ AppGroup.prototype = {
     this.state.trigger('_clearDragPlaceholder');
     let button = event.get_button();
 
-    let shouldStartInstance = (button === 1 && this.groupState.isFavoriteApp && this.groupState.metaWindows.length === 0
-      || (button === 2 && this.state.settings.middleClickAction));
+    let shouldStartInstance = ((button === 1 && this.groupState.isFavoriteApp && this.groupState.metaWindows.length === 0 && this.state.settings.leftClickAction === 2)
+      || (button === 2 && this.state.settings.middleClickAction === 2));
 
-    let shouldEndInstance = button === 2 && !this.state.settings.middleClickAction && this.groupState.lastFocused;
+    let shouldEndInstance = button === 2 && this.state.settings.middleClickAction === 3 && this.groupState.lastFocused;
 
     if (shouldStartInstance) {
       this.groupState.app.open_new_window(-1);
@@ -705,6 +733,13 @@ AppGroup.prototype = {
     };
 
     if (button === 1) {
+      if (this.state.settings.leftClickAction === 1) {
+        return;
+      }
+      if (this.state.settings.leftClickAction === 3) {
+        this.state.trigger('cycleWindows', this.actor._delegate);
+        return;
+      }
       this.hoverMenu.shouldOpen = false;
       if (this.rightClickMenu.isOpen) {
         this.rightClickMenu.toggle();
@@ -816,9 +851,9 @@ AppGroup.prototype = {
         }
       }
     }
-    let refWindow = store.queryCollection(this.groupState.metaWindows, win => {
+    let refWindow = findIndex(this.groupState.metaWindows, win => {
       return isEqual(win, metaWindow);
-    }, {indexOnly: true});
+    });
     let windowAddArgs = this._shouldWindowBeAdded(metaWindow);
     if (windowAddArgs) {
       if (metaWindow) {
@@ -957,7 +992,10 @@ AppGroup.prototype = {
       && this.state.appletReady) {
       this.hoverMenu.close();
       this._onLeave();
+      this.actor.add_style_pseudo_class('closed');
       return;
+    } else if (this.actor.has_style_pseudo_class('closed')) {
+      this.actor.remove_style_pseudo_class('closed');
     }
     this._windowTitleChanged(this.groupState.lastFocused);
     this._onFocusChange();

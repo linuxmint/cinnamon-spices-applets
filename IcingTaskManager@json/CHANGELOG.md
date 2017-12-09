@@ -1,5 +1,16 @@
 Changelog
 
+### 6.1.0
+
+  * Fixed dragging pinned apps not working correctly when uninstalled apps are in the list.
+  * Fixed the focused styling on app buttons getting reset when hovered over.
+  * Fixed being unable to distinguish between open and closed apps in some themes.
+  * Added options to scroll apps or windows with the mouse wheel, and cycle windows with left click.
+    - The middle click action option was converted to a drop down list. As a result you will need to re-set your preference for that option. New installs should receive the proper default.
+  * Added a recommended preset for Mint X based themes.
+  * The legacy version of ITM is now being loaded for Cinnamon 3.2 users due to a compatibility issue. Please update Cinnamon to version 3.4+ to continue using the newest version of ITM.
+  * Minor optimizations.
+
 ### 6.0.4
 
   * Added info to the Firefox context menu when gir1.2-gda-5.0 isn't installed.

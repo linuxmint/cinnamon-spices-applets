@@ -26,10 +26,11 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, constants, AppList, setTimeout, unref, store;
+let each, findIndex, constants, AppList, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
+  findIndex = utils.findIndex;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
   constants = require('./constants').constants;
@@ -38,6 +39,7 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
   constants = AppletDir.constants.constants;
@@ -77,8 +79,7 @@ PinnedFavs.prototype = {
       ids = this.params.settings.getValue('pinned-apps');
     }
     for (let i = 0, len = ids.length; i < len; i++) {
-
-      let refFav = store.queryCollection(this._favorites, {id: ids[i]}, {indexOnly: true});
+      let refFav = findIndex(this._favorites, (item) => item.id === ids[i]);
       if (refFav === -1) {
         let app = appSystem.lookup_app(ids[i]);
         this._favorites.push({
@@ -101,6 +102,7 @@ PinnedFavs.prototype = {
       } else {
         // Move actor to index, trigger favorite state change
         currentAppList.appList[refApp].groupState.set({isFavoriteApp: isFavoriteApp});
+        // Some favorite apps may be present from a previous installation, but not rendered and added to the app list because they're uninstalled.
         currentAppList.actor.set_child_at_index(currentAppList.appList[refApp].actor, pos);
       }
     }
@@ -144,6 +146,7 @@ PinnedFavs.prototype = {
 
   addFavorite: function (opts={appId: null, app: null, pos: -1}) {
     const appSystem = this.params.state.trigger('getAppSystem');
+    let oldIndex = -1;
     if (!opts.app) {
       opts.app = appSystem.lookup_app(opts.appId);
     }
@@ -163,10 +166,16 @@ PinnedFavs.prototype = {
       id: opts.appId,
       app: opts.app
     };
-    this._favorites.push(newFav);
-
-    if (opts.pos !== -1) {
-      this.moveFavoriteToPos(opts.appId, opts.pos);
+    let refFavorite = findIndex(this._favorites, function(favorite) {
+      return favorite.id === opts.appId;
+    });
+    if (refFavorite === -1) {
+      this._favorites.push(newFav);
+    } else {
+      oldIndex = refFavorite;
+    }
+    if (opts.pos > -1) {
+      this.moveFavoriteToPos(opts, oldIndex);
       return true;
     }
 
@@ -174,12 +183,32 @@ PinnedFavs.prototype = {
     return true;
   },
 
-  moveFavoriteToPos: function (appId, pos) {
-    let oldIndex = this._favorites.findIndex(favorite => favorite.id === appId);
-    if (oldIndex !== -1 && pos > oldIndex) {
-      pos = pos - 1;
+  moveFavoriteToPos: function (opts, oldIndex) {
+    if (!oldIndex) {
+      oldIndex = findIndex(this._favorites, function(favorite) {
+        return favorite.id === opts.appId;
+      });
     }
-    this._favorites.splice(pos, 0, this._favorites.splice(oldIndex, 1)[0]);
+    let currentAppList = this.params.state.trigger('getCurrentAppList');
+    let favoriteIds = this._favorites.map(function(favorite) {
+      return favorite.id;
+    });
+    let renderedFavoriteApps = currentAppList.appList.map(function(appGroup) {
+      return {
+        id: appGroup.groupState.appId,
+        app: appGroup.groupState.app
+      };
+    }).filter(function(renderedFavorite) {
+      return favoriteIds.indexOf(renderedFavorite.id) > -1
+    });
+    let refApp = findIndex(renderedFavoriteApps, function(favorite) {
+      return favorite.id === opts.appId;
+    })
+    renderedFavoriteApps = renderedFavoriteApps
+      .slice(0, opts.pos)
+      .concat([{id:  opts.appId, app: opts.app}])
+      .concat(renderedFavoriteApps.slice(opts.pos + 1, renderedFavoriteApps.length))
+    this._favorites = renderedFavoriteApps;
     this._saveFavorites();
   },
 
@@ -265,6 +294,7 @@ MyApplet.prototype = {
           + '-cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: ' + size + 'px ' + size + 'px;';
           button.style_class = 'window-close';
       },
+      cycleWindows: (source) => this.handleScroll(null, source),
       openAbout: () => this.openAbout(),
       configureApplet: () => this.configureApplet()
     });
@@ -281,6 +311,7 @@ MyApplet.prototype = {
       state: this.state,
     });
     this.actor.set_track_hover(false);
+    this.signals.connect(this.actor, 'scroll-event', (c, e) => this.handleScroll(e));
     // Declare vertical panel compatibility
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this.execInstallLanguage();
@@ -311,6 +342,7 @@ MyApplet.prototype = {
       {key: 'pinOnDrag', value: 'pinOnDrag', cb: null},
       {key: 'pinned-apps', value: 'pinnedApps', cb: null},
       {key: 'middle-click-action', value: 'middleClickAction', cb: null},
+      {key: 'left-click-action', value: 'leftClickAction', cb: null},
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKeys},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKeys},
@@ -333,6 +365,7 @@ MyApplet.prototype = {
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},
       {key: 'title-display', value: 'titleDisplay', cb: this._updateTitleDisplay},
+      {key: 'scroll-behavior', value: 'scrollBehavior', cb: null},
       {key: 'icon-spacing', value: 'iconSpacing', cb: this._updateSpacing},
       {key: 'enable-iconSize', value: 'enableIconSize', cb: this._updateActorAttributes},
       {key: 'icon-size', value: 'iconSize', cb: this._updateActorAttributes},
@@ -383,8 +416,8 @@ MyApplet.prototype = {
 
   on_panel_edit_mode_changed: function () {
     this.state.set({panelEditMode: !this.state.panelEditMode});
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         appGroup.hoverMenu.actor.reactive = !this.state.panelEditMode;
         appGroup.rightClickMenu.actor.reactive = !this.state.panelEditMode;
         appGroup.actor.reactive = !this.state.panelEditMode;
@@ -522,6 +555,16 @@ MyApplet.prototype = {
     this.settings.setValue('activePseudoClass', 3);
     this.settings.setValue('number-display', 1);
     this.settings.setValue('show-active', true);
+    this.refreshCurrentAppList();
+  },
+
+  handleMintXThemePreset: function() {
+    this.settings.setValue('hoverPseudoClass', 3);
+    this.settings.setValue('focusPseudoClass', 2);
+    this.settings.setValue('activePseudoClass', 4);
+    this.settings.setValue('number-display', 1);
+    this.settings.setValue('show-active', false);
+    this.refreshCurrentAppList();
   },
 
   _updateFavorites: function() {
@@ -530,24 +573,24 @@ MyApplet.prototype = {
   },
 
   _updateThumbnailPadding: function() {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         appGroup.hoverMenu.updateThumbnailPadding();
       });
     });
   },
 
   _updateThumbnailCloseButtonSize: function() {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         appGroup.hoverMenu.updateThumbnailCloseButtonSize();
       });
     });
   },
 
   _updatePseudoClasses: function () {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         appGroup.groupState.trigger('isFavoriteApp');
         appGroup.setActiveStatus(appGroup.groupState.metaWindows);
         appGroup._onFocusChange();
@@ -556,24 +599,24 @@ MyApplet.prototype = {
   },
 
   _updateActorAttributes: function() {
-    each(this.appLists, (workspace)=>{
+    each(this.appLists, (workspace) => {
       if (!workspace) {
         return;
       }
-      each(workspace.appList, (appGroup)=>{
+      each(workspace.appList, (appGroup) => {
         appGroup.setActorAttributes();
       });
     });
   },
 
   _updateSpacing: function() {
-    each(this.appLists, (workspace)=>{
+    each(this.appLists, (workspace) => {
       workspace._updateSpacing();
     });
   },
 
   _updateWindowNumberState: function() {
-    each(this.appLists, (workspace)=>{
+    each(this.appLists, (workspace) => {
       workspace._calcAllWindowNumbers();
     });
   },
@@ -582,14 +625,14 @@ MyApplet.prototype = {
     if (!this.state.settings.showAlerts) {
       return false;
     }
-    each(this.appLists, (workspace)=>{
+    each(this.appLists, (workspace) => {
       workspace._updateAttentionState(display, window);
     });
   },
 
   _updateVerticalThumbnailState: function() {
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         if (appGroup && appGroup.hoverMenu) {
           appGroup.hoverMenu._setVerticalSetting();
         }
@@ -646,7 +689,7 @@ MyApplet.prototype = {
   getAutoStartApps: function(){
     let info, autoStartDir;
 
-    let getChildren = ()=>{
+    let getChildren = () => {
       let children = autoStartDir.enumerate_children('standard::name,standard::type,time::modified', Gio.FileQueryInfoFlags.NONE, null);
       while ((info = children.next_file(null)) !== null) {
         if (info.get_file_type() === Gio.FileType.REGULAR) {
@@ -675,6 +718,65 @@ MyApplet.prototype = {
       Util.trySpawnCommandLine('bash -c "' + moPath + '"');
     }
   },
+  handleScroll: function(e, sourceFromLeftClick) {
+    if (this.state.settings.scrollBehavior === 1) {
+      return;
+    }
+    let isAppScroll = this.state.settings.scrollBehavior === 2;
+    let direction, source;
+    if (sourceFromLeftClick) {
+      direction = 1;
+      source = sourceFromLeftClick;
+    } else {
+      direction = e.get_scroll_direction();
+      source = e.get_source()._delegate;
+    }
+    let lastFocusedApp, z, count, arg;
+
+    if (isAppScroll) {
+      lastFocusedApp = this.appLists[this.state.currentWs].listState.lastFocusedApp;
+      if (!lastFocusedApp) {
+        lastFocusedApp = this.appLists[this.state.currentWs].appList[0].groupState.appId
+      }
+      let focusedIndex = findIndex(this.appLists[this.state.currentWs].appList, function(appGroup) {
+        return appGroup.groupState.metaWindows.length > 0 && appGroup.groupState.appId === lastFocusedApp;
+      });
+      z = direction === 0 ? focusedIndex - 1 : focusedIndex + 1;
+      arg = !this.appLists[this.state.currentWs].appList[z] || !this.appLists[this.state.currentWs].appList[z].groupState.lastFocused;
+      count = this.appLists[this.state.currentWs].appList.length - 1;
+    } else {
+      if (!source.groupState || source.groupState.metaWindows.length < 2) {
+        return;
+      }
+      let focusedIndex = findIndex(source.groupState.metaWindows, function(metaWindow) {
+        return metaWindow === source.groupState.lastFocused;
+      });
+      z = direction === 0 ? focusedIndex - 1 : focusedIndex + 1;
+      arg = !source.groupState.metaWindows[z] || source.groupState.metaWindows[z] === source.groupState.lastFocused;
+      count = source.groupState.metaWindows.length - 1;
+    }
+
+    let limit = count * 2;
+
+    while ((isAppScroll && (!this.appLists[this.state.currentWs].appList[z] || !this.appLists[this.state.currentWs].appList[z].groupState.lastFocused))
+      || (!isAppScroll && (!source.groupState.metaWindows[z] || source.groupState.metaWindows[z] === source.groupState.lastFocused))) {
+      limit--;
+      if (direction === 0) {
+        z -= 1;
+      } else {
+        z += 1;
+      }
+      if (limit < 0) {
+        break;
+      } else if (z < 0) {
+        z = count;
+      } else if (z > count) {
+        z = 0;
+      }
+    }
+    let _window = isAppScroll ? this.appLists[this.state.currentWs].appList[z].groupState.lastFocused : source.groupState.metaWindows[z];
+    Main.activateWindow(_window, global.get_current_time());
+  },
 
   handleDragOver: function (source, actor, x, y) {
     if (!this.state.settings.enableDragging
@@ -693,7 +795,7 @@ MyApplet.prototype = {
 
     let isHorizontal = this.appLists[this.state.currentWs].actor.height > this.appLists[this.state.currentWs].actor.width;
     let axis = isHorizontal ? [y, 'y1'] : [x, 'x1'];
-    each(children, (child, i)=>{
+    each(children, (child, i) => {
       if (axis[0] > children[i].get_allocation_box()[axis[1]] + children[i].width / 2) {
         pos = i;
       }
@@ -788,14 +890,15 @@ MyApplet.prototype = {
     }
 
     Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
+      let opts = {
+        appId: source.groupState.appId,
+        app: source.groupState.app,
+        pos: favPos
+      };
       if (refFav !== -1) {
-        this.pinnedFavorites.moveFavoriteToPos(source.groupState.appId, favPos);
+        this.pinnedFavorites.moveFavoriteToPos(opts);
       } else if (this.state.settings.pinOnDrag) {
-        this.pinnedFavorites.addFavorite({
-          appId: source.groupState.appId,
-          app: source.groupState.app,
-          pos: favPos
-        });
+        this.pinnedFavorites.addFavorite(opts);
       }
       return false;
     });
@@ -844,9 +947,7 @@ MyApplet.prototype = {
 
     // If the workspace we switched to isn't in our list,
     // we need to create an AppList for it
-    let refWorkspace = store.queryCollection(this.appLists, {index: this.state.currentWs}, {
-      indexOnly: true
-    });
+    let refWorkspace = findIndex(this.appLists, (item) => item.index === this.state.currentWs);
 
     if (refWorkspace === -1) {
       this.appLists.push(new AppList({

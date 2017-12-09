@@ -3,10 +3,12 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const SignalManager = imports.misc.signalManager;
 
-let each, isEqual, AppGroup, setTimeout, unref, store;
+let each, findIndex, find, isEqual, AppGroup, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
+  findIndex = utils.findIndex;
+  find = utils.find;
   isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
@@ -15,6 +17,8 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
+  find = AppletDir.utils.find;
   isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
@@ -48,6 +52,14 @@ AppList.prototype = {
           return;
         }
         this.actor.remove_child(actor);
+      },
+      updateFocusState: (focusedAppId) => {
+        each(this.appList, (appGroup) => {
+          if (focusedAppId === appGroup.groupState.appId) {
+            return;
+          }
+          appGroup._onFocusChange(false);
+        });
       }
     });
 
@@ -62,6 +74,7 @@ AppList.prototype = {
     this.lastFocusedApp = null;
 
     // Connect all the signals
+
     this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
     this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
 
@@ -129,7 +142,7 @@ AppList.prototype = {
   _cycleMenus: function(){
     let refApp = 0;
     if (!this.state.lastCycled && this.listState.lastFocusedApp) {
-      refApp = store.queryCollection(this.appList, (app) => app.groupState.appId === this.listState.lastFocusedApp, {indexOnly: true});
+      refApp = findIndex(this.appList, (app) => app.groupState.appId === this.listState.lastFocusedApp);
     }
     if (this.state.lastCycled
       && this.appList[this.state.lastCycled]) {
@@ -270,9 +283,9 @@ AppList.prototype = {
     });
 
     if (!this.state.settings.groupApps && !isFavoriteApp) {
-      let refFav = store.queryCollection(this.state.trigger('getFavorites'), favorite => {
+      let refFav = findIndex(this.state.trigger('getFavorites'), (favorite) => {
         return isEqual(favorite.app, app);
-      }, {indexOnly: true});
+      });
       if (refFav > -1) {
         transientFavorite = true;
       }
@@ -289,7 +302,7 @@ AppList.prototype = {
         metaWindow: metaWindow,
         appId: appId,
       });
-      this.actor.add_actor(appGroup.actor);
+      this.actor.add_child(appGroup.actor);
       this.appList.push(appGroup);
 
       if (this.state.settings.groupApps && metaWindows.length > 0) {
@@ -359,7 +372,7 @@ AppList.prototype = {
     const newAppList = [];
     let children = this.actor.get_children();
     for (let i = 0; i < children.length; i++) {
-      let appGroup = store.queryCollection(this.appList, (appGroup) => isEqual(appGroup.actor, children[i]));
+      let appGroup = find(this.appList, (appGroup) => isEqual(appGroup.actor, children[i]));
       if (appGroup) {
         newAppList.push(appGroup);
       }

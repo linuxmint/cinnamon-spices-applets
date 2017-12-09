@@ -30,6 +30,9 @@
         "app-button-width",
         "number-display",
         "title-display",
+        "scroll-behavior",
+        "left-click-action",
+        "middle-click-action",
         "pinned-apps",
         "group-apps",
         "show-alerts",
@@ -37,7 +40,6 @@
         "system-favorites",
         "enable-app-button-dragging",
         "pinOnDrag",
-        "middle-click-action",
         "list-monitor-windows",
         "include-all-windows"
       ]
@@ -110,7 +112,8 @@
       "type" : "section",
       "title" : "Recommended Presets",
       "keys": [
-        "mintYPreset"
+        "mintYPreset",
+        "mintXPreset"
       ]
     }
   },
@@ -137,6 +140,39 @@
       "Focused": 4
     },
     "tooltip": "focused: show focused window title, title: display the window title, app: diplay app name, none: don't display anything"
+  },
+  "scroll-behavior": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Mouse wheel scroll behavior",
+    "options": {
+      "None": 1,
+      "Cycle apps": 2,
+      "Cycle windows": 3
+    },
+    "tooltip": "Choose if scrolling the mouse wheel cycles running apps, an app button's windows on hover, or is disabled."
+  },
+  "left-click-action": {
+    "type": "combobox",
+    "default": 2,
+    "description": "Left click action",
+    "options": {
+      "None": 1,
+      "Toggle activation of last focused window": 2,
+      "Cycle windows": 3
+    },
+    "tooltip": "Left click action"
+  },
+  "middle-click-action": {
+    "type": "combobox",
+    "default": 2,
+    "description": "Middle click action",
+    "options": {
+      "None": 1,
+      "Launch new app instance": 2,
+      "Close last focused window in group": 3
+    },
+    "tooltip": "Middle click action"
   },
   "pinned-apps": {
     "type": "generic",
@@ -177,12 +213,6 @@
     "default": true,
     "description": "Pin apps when dragged to a new position",
     "tooltip": "Pin apps when dragged to a new position"
-  },
-  "middle-click-action": {
-    "type": "checkbox",
-    "default": true,
-    "description": "Middle clicking app buttons creates new app instances",
-    "tooltip": "Determines the behavior of middle mouse button clicks on app buttons. Setting this to false will close the last focused window from the app group on middle click."
   },
   "list-monitor-windows": {
     "type": "checkbox",
@@ -467,5 +497,11 @@
     "description" : "Mint Y and Variants",
     "callback" : "handleMintYThemePreset",
     "tooltip" : "Mint Y and Variants"
+  },
+  "mintXPreset": {
+    "type" : "button",
+    "description" : "Mint X, Linux Mint, and Variants",
+    "callback" : "handleMintXThemePreset",
+    "tooltip" : "Mint X, Linux Mint, and Variants"
   }
 }
