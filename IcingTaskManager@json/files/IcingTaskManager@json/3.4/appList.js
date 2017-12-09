@@ -52,6 +52,14 @@ AppList.prototype = {
           return;
         }
         this.actor.remove_child(actor);
+      },
+      updateFocusState: (focusedAppId) => {
+        each(this.appList, (appGroup) => {
+          if (focusedAppId === appGroup.groupState.appId) {
+            return;
+          }
+          appGroup._onFocusChange(false);
+        });
       }
     });
 
@@ -66,6 +74,7 @@ AppList.prototype = {
     this.lastFocusedApp = null;
 
     // Connect all the signals
+
     this.signals.connect(this.metaWorkspace, 'window-added', Lang.bind(this, this._windowAdded));
     this.signals.connect(this.metaWorkspace, 'window-removed', Lang.bind(this, this._windowRemoved));
 

@@ -36,6 +36,12 @@ use to override window-list-item-box */
 .window-icon-list-buttonbox {
   spacing: 2px;
 }
+.window-list-item-box:closed {
+  background-gradient-direction: vertical;
+  background-gradient-start: rgba(100,100,100,0.0) !important;
+  background-gradient-end: rgba(50,50,50,0.0) !important;
+  box-shadow: inset 0px 0px 0px 1px rgba(80,80,80,0.0) !important;
+}
 .window-list-item-demands-attention {
 }
 .app-button-label {

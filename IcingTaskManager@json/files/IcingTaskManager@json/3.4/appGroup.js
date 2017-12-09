@@ -58,7 +58,7 @@ const getPseudoClass = function(pseudoClass) {
   if (item) {
     return item.label;
   }
-  return 'focus';
+  return 'outlined';
 };
 
 function _Draggable (actor, params) {
@@ -224,9 +224,6 @@ AppGroup.prototype = {
     this.signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
     this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
     this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
-    if (this.state.settings.closedPinnedAppStyleWorkaround) {
-      this.signals.connect(this.groupState.app, 'notify::state', () => this.handleFavorite(false, true));
-    }
     this._calcWindowNumber(this.groupState.metaWindows);
 
     this.on_orientation_changed(true);
@@ -546,11 +543,9 @@ AppGroup.prototype = {
     if (this.actor.has_style_pseudo_class(activePseudoClass)) {
       this.pseudoClassStash.push(activePseudoClass);
     }
-
-    if (this.state.settings.closedPinnedAppStyleWorkaround
-      && this.groupState.metaWindows.length === 0
-      && this.state.appletReady) {
-      this.actor.add_style_class_name('window-list-item-box');
+    if (this.actor.has_style_pseudo_class('closed')) {
+      this.pseudoClassStash.push('closed');
+      this.actor.remove_style_pseudo_class('closed');
     }
 
     this.actor.add_style_pseudo_class(hoverPseudoClass);
@@ -562,19 +557,11 @@ AppGroup.prototype = {
     if (this.state.panelEditMode) {
       return false;
     }
-
     if (this.listState.lastFocusedApp !== this.groupState.appId) {
       this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
     }
 
-    if (this.state.settings.closedPinnedAppStyleWorkaround
-      && this.groupState.metaWindows.length === 0
-      && this.state.appletReady) {
-      this.actor.remove_style_class_name('window-list-item-box');
-    } else {
-      this._setFavoriteAttributes();
-    }
-
+    this._setFavoriteAttributes();
     this.popPseudoClassStash();
 
     this.hoverMenu._onMenuLeave();
@@ -615,6 +602,7 @@ AppGroup.prototype = {
     // we should set ourselves to active
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     if (hasFocus) {
+      this.listState.trigger('updateFocusState', this.groupState.appId)
       this.actor.add_style_pseudo_class(focusPseudoClass);
       if (this.actor.has_style_class_name('window-list-item-demands-attention')) {
         this.actor.remove_style_class_name('window-list-item-demands-attention');
@@ -625,6 +613,10 @@ AppGroup.prototype = {
       this._needsAttention = false;
     } else {
       this.actor.remove_style_pseudo_class(focusPseudoClass);
+      // If hover pseudo class is substituted with the active pseudo class, make sure it gets removed.
+      if (this.state.settings.hoverPseudoClass === 3) {
+        this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+      }
     }
     if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
       this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
@@ -984,7 +976,7 @@ AppGroup.prototype = {
     }
   },
 
-  handleFavorite: function (changed, fromAppStateChange) {
+  handleFavorite: function (changed) {
     if (changed) {
       setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
     }
@@ -993,12 +985,10 @@ AppGroup.prototype = {
       && this.state.appletReady) {
       this.hoverMenu.close();
       this._onLeave();
-      if (this.state.settings.closedPinnedAppStyleWorkaround) {
-        this.actor.remove_style_class_name('window-list-item-box');
-      }
+      this.actor.add_style_pseudo_class('closed');
       return;
-    } else if (fromAppStateChange && this.state.settings.closedPinnedAppStyleWorkaround) {
-      this.actor.add_style_class_name('window-list-item-box');
+    } else if (this.actor.has_style_pseudo_class('closed')) {
+      this.actor.remove_style_pseudo_class('closed');
     }
     this._windowTitleChanged(this.groupState.lastFocused);
     this._onFocusChange();

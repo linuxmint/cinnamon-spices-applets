@@ -343,7 +343,6 @@ MyApplet.prototype = {
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKeys},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKeys},
-      {key: 'closed-pinned-app-style-workaround', value: 'closedPinnedAppStyleWorkaround', cb: this.refreshCurrentAppList},
       {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this._updatePseudoClasses},
       {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this._updatePseudoClasses},
       {key: 'activePseudoClass', value: 'activePseudoClass', cb: this._updatePseudoClasses},
@@ -413,8 +412,8 @@ MyApplet.prototype = {
 
   on_panel_edit_mode_changed: function () {
     this.state.set({panelEditMode: !this.state.panelEditMode});
-    each(this.appLists, (workspace)=>{
-      each(workspace.appList, (appGroup)=>{
+    each(this.appLists, (workspace) => {
+      each(workspace.appList, (appGroup) => {
         appGroup.hoverMenu.actor.reactive = !this.state.panelEditMode;
         appGroup.rightClickMenu.actor.reactive = !this.state.panelEditMode;
         appGroup.actor.reactive = !this.state.panelEditMode;
@@ -552,7 +551,15 @@ MyApplet.prototype = {
     this.settings.setValue('activePseudoClass', 3);
     this.settings.setValue('number-display', 1);
     this.settings.setValue('show-active', true);
-    this.settings.setValue('closed-pinned-app-style-workaround', false);
+    this.refreshCurrentAppList();
+  },
+
+  handleMintXThemePreset: function() {
+    this.settings.setValue('hoverPseudoClass', 3);
+    this.settings.setValue('focusPseudoClass', 2);
+    this.settings.setValue('activePseudoClass', 4);
+    this.settings.setValue('number-display', 1);
+    this.settings.setValue('show-active', false);
     this.refreshCurrentAppList();
   },
 

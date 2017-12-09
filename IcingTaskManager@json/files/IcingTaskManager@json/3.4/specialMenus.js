@@ -258,7 +258,6 @@ AppMenuButtonRightClickMenu.prototype = {
     // Actions
     let actions = null;
     tryFn(() => {
-      histories = getFirefoxHistory(this.state.settings);
       actions = this.groupState.appInfo.list_actions();
       if (this.groupState.appInfo && actions) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());

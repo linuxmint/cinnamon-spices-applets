@@ -92,7 +92,6 @@
       "title" : "Styling",
       "keys": [
         "show-active",
-        "closed-pinned-app-style-workaround",
         "hoverPseudoClass",
         "focusPseudoClass",
         "activePseudoClass"
@@ -111,7 +110,8 @@
       "type" : "section",
       "title" : "Recommended Presets",
       "keys": [
-        "mintYPreset"
+        "mintYPreset",
+        "mintXPreset"
       ]
     }
   },
@@ -474,5 +474,11 @@
     "description" : "Mint Y and Variants",
     "callback" : "handleMintYThemePreset",
     "tooltip" : "Mint Y and Variants"
+  },
+  "mintXPreset": {
+    "type" : "button",
+    "description" : "Mint X, Linux Mint, and Variants",
+    "callback" : "handleMintXThemePreset",
+    "tooltip" : "Mint X, Linux Mint, and Variants"
   }
 }
