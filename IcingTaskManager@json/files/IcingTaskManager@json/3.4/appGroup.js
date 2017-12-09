@@ -563,15 +563,19 @@ AppGroup.prototype = {
       return false;
     }
 
-    this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
-    this.popPseudoClassStash();
-    this._setFavoriteAttributes();
+    if (this.listState.lastFocusedApp !== this.groupState.appId) {
+      this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+    }
 
     if (this.state.settings.closedPinnedAppStyleWorkaround
       && this.groupState.metaWindows.length === 0
       && this.state.appletReady) {
       this.actor.remove_style_class_name('window-list-item-box');
+    } else {
+      this._setFavoriteAttributes();
     }
+
+    this.popPseudoClassStash();
 
     this.hoverMenu._onMenuLeave();
   },

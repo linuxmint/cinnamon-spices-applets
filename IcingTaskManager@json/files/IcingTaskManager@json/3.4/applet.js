@@ -552,6 +552,7 @@ MyApplet.prototype = {
     this.settings.setValue('activePseudoClass', 3);
     this.settings.setValue('number-display', 1);
     this.settings.setValue('show-active', true);
+    this.settings.setValue('closed-pinned-app-style-workaround', false);
     this.refreshCurrentAppList();
   },
 
