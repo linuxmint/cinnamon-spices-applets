@@ -2,9 +2,18 @@
 let Gda;
 const GLib = imports.gi.GLib;
 
-try {
+let tryFn;
+if (typeof require !== 'undefined') {
+  const utils = require('./utils');
+  tryFn = utils.tryFn;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  tryFn = AppletDir.utils.tryFn;
+}
+
+tryFn(function() {
   Gda = imports.gi.Gda;
-} catch (e) {}
+});
 
 function getFirefoxHistory(applet) {
   let history = [];
@@ -31,11 +40,15 @@ function getFirefoxHistory(applet) {
     for (let i = 0; i < nGroups; i++) {
       let isRelative, profileName, profileDir;
 
-      try {
+      let hadException = tryFn(function() {
         isRelative = iniFile.get_integer(groups[i], 'IsRelative');
         profileName = iniFile.get_string(groups[i], 'Name');
         profileDir = iniFile.get_string(groups[i], 'Path');
-      } catch (e) {
+      }, function() {
+        return true;
+      });
+
+      if (hadException === true) {
         continue;
       }
 
@@ -62,15 +75,19 @@ function getFirefoxHistory(applet) {
 
   var con, result;
 
-  try {
+  let hadException = tryFn(function() {
     con = Gda.Connection.open_from_string(
       'SQLite', 'DB_DIR=' + profilePath + ';DB_NAME=places.sqlite',
       null, Gda.ConnectionOptions.READ_ONLY);
-  } catch (e) {
+  }, function() {
     return history;
+  });
+
+  if (hadException != null) {
+    return hadException;
   }
 
-  try {
+  hadException = tryFn(function() {
     if (applet.firefoxMenu === 1) {
       result = con.execute_select_command('SELECT title,url FROM moz_places WHERE title IS NOT NULL ORDER BY visit_count DESC');
     }
@@ -79,9 +96,13 @@ function getFirefoxHistory(applet) {
     } else {
       result = con.execute_select_command('SELECT moz_bookmarks.title,moz_places.url FROM (moz_bookmarks INNER JOIN moz_places ON moz_bookmarks.fk=moz_places.id) WHERE moz_bookmarks.parent IS NOT 1 AND moz_bookmarks.parent IS NOT 2 AND moz_bookmarks.title IS NOT NULL ORDER BY moz_bookmarks.lastModified DESC');
     }
-  } catch (e) {
+  }, function() {
     con.close();
     return history;
+  });
+
+  if (hadException != null) {
+    return hadException;
   }
 
   let nRows = result.get_n_rows();

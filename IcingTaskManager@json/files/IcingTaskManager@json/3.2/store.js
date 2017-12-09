@@ -1,51 +1,12 @@
-
-function queryCollection(
-  collection = [],
-  query = {},
-  options = {
-    indexOnly: false,
-    filter: false,
-    findElementInArray: false
-  }
-) {
-  let queryKeys = typeof query === 'object' ? Object.keys(query) : null;
-  let filterResult = [];
-
-  function handleMatch(argument, i, matches) {
-    if (argument) {
-      if (options.filter) {
-        filterResult.push(collection[i]);
-      } else {
-        matches += 1;
-      }
-    }
-    return matches;
-  }
-
-  for (let i = 0; i < collection.length; i++) {
-    let matches = 0;
-    if (!queryKeys) {
-      matches = handleMatch(query(collection[i]), i, matches);
-    } else {
-      for (let z = 0; z < queryKeys.length; z++) {
-        let argument;
-        if (options.findElementInArray && Array.isArray(collection[i][queryKeys[z]])) {
-          argument = collection[i][queryKeys[z]].indexOf(query[queryKeys[z]]) > -1;
-        } else {
-          argument = collection[i][queryKeys[z]] === query[queryKeys[z]];
-        }
-        matches = handleMatch(argument, i, matches);
-      }
-    }
-    if (!options.filter
-      && ((queryKeys && matches === queryKeys.length) || (matches > 0 && !queryKeys))) {
-      return options.indexOnly ? i : collection[i];
-    }
-  }
-  if (options.filter) {
-    return filterResult;
-  }
-  return options.indexOnly ? -1 : null;
+let find, filter;
+if (typeof require !== 'undefined') {
+  const utils = require('./utils');
+  filter = utils.filter;
+  find = utils.find;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  filter = AppletDir.utils.filter;
+  find = AppletDir.utils.find;
 }
 
 function intersect(array1, array2, difference = false) {
@@ -255,14 +216,9 @@ function init(state = {}, listeners = [], connections = 0) {
    */
   function trigger() {
     const [key, ...args] = Array.from(arguments);
-    let matchedListeners = queryCollection(
-      listeners,
-      {keys: key},
-      {
-        findElementInArray: true,
-        filter: true
-      }
-    );
+    let matchedListeners = filter(listeners, function(listener) {
+      return listener.keys.indexOf(key) > -1;
+    });
     if (matchedListeners.length === 0) {
       throw storeError('trigger', key, 'Action not found.');
     }
@@ -277,7 +233,9 @@ function init(state = {}, listeners = [], connections = 0) {
     let listener;
 
     if (callback) {
-      listener = queryCollection(listeners, {callback});
+      listener = find(listeners, function(listener) {
+        return listener.callback === callback;
+      });
     }
     if (listener) {
       let newKeys = intersect(keys, listener.keys, true);
@@ -312,14 +270,10 @@ function init(state = {}, listeners = [], connections = 0) {
   }
 
   function disconnectByKey(key) {
-    let listenerIndex = queryCollection(
-      listeners,
-      {keys: key},
-      {
-        findElementInArray: true,
-        indexOnly: true
-      }
-    );
+    let listener = filter(listeners, function(listener) {
+      return listener.keys.indexOf(key) > -1;
+    });
+    let listenerIndex = listeners.indexOf(listener);
     if (listenerIndex === -1) {
       throw storeError('disconnect', key, 'Invalid disconnect key.');
     }

@@ -11,10 +11,13 @@ const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, isEqual, constants, getFirefoxHistory, setTimeout, unref, _, store;
+let each, find, findIndex, tryFn, isEqual, constants, getFirefoxHistory, setTimeout, unref, _, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
+  findIndex = utils.findIndex;
+  find = utils.find;
+  tryFn = utils.tryFn;
   isEqual = utils.isEqual;
   constants = require('./constants').constants;
   _ = utils.t;
@@ -25,6 +28,9 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
+  find = AppletDir.utils.find;
+  tryFn = AppletDir.utils.tryFn;
   isEqual = AppletDir.utils.isEqual;
   constants = AppletDir.constants.constants;
   _ = AppletDir.utils.t;
@@ -93,7 +99,7 @@ AppMenuButtonRightClickMenu.prototype = {
 
     let createMenuItem = (opts={label: '', icon: null}) => {
       if (this.state.settings.menuItemType < 3 && opts.icon) {
-        let refMenuType = store.queryCollection(constants.menuItemTypeOptions, {id: this.state.settings.menuItemType});
+        let refMenuType = find(constants.menuItemTypeOptions, (item) => item.id === this.state.settings.menuItemType);
         return new PopupMenu.PopupIconMenuItem(opts.label, opts.icon, St.IconType[refMenuType.label]);
       } else {
         return new PopupMenu.PopupMenuItem(opts.label);
@@ -174,12 +180,15 @@ AppMenuButtonRightClickMenu.prototype = {
 
       // History
       if (this.groupState.appId === 'firefox.desktop' || this.groupState.appId === 'firefox web browser.desktop') {
-        let histories = getFirefoxHistory(this.state.settings);
+        let histories = null;
+        tryFn(() => {
+          histories = getFirefoxHistory(this.state.settings);
+        });
         let subMenu;
 
         if (histories) {
           subMenu = new PopupMenu.PopupSubMenuMenuItem(_(constants.ffOptions.find(ffOption => ffOption.id === this.state.settings.firefoxMenu).label));
-          try {
+          tryFn(() => {
             let handleHistoryLaunch = (item, i) => {
               this.signals.connect(item, 'activate', () => Gio.app_info_launch_default_for_uri(histories[i].uri, global.create_app_launch_context()));
             };
@@ -188,7 +197,7 @@ AppMenuButtonRightClickMenu.prototype = {
               handleHistoryLaunch(item, i);
               subMenu.menu.addMenuItem(item);
             }
-          } catch (e) {}
+          });
         } else {
           subMenu = createMenuItem({label: _('Bookmarks/History requires gir1.2-gda-5.0'), icon: 'help-about'});
         }
@@ -248,7 +257,8 @@ AppMenuButtonRightClickMenu.prototype = {
 
     // Actions
     let actions = null;
-    try {
+    tryFn(() => {
+      histories = getFirefoxHistory(this.state.settings);
       actions = this.groupState.appInfo.list_actions();
       if (this.groupState.appInfo && actions) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -265,11 +275,11 @@ AppMenuButtonRightClickMenu.prototype = {
         }
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
-    } catch (e) {
+    }, () => {
       if (this.groupState.app.is_window_backed()) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
-    }
+    });
 
     // Pin/unpin, shortcut handling
     if (!this.groupState.app.is_window_backed()) {
@@ -487,7 +497,7 @@ AppThumbnailHoverMenu.prototype = {
       },
       addThumbnailToMenu: (win) => this.addThumbnail(win),
       removeThumbnailFromMenu: (win) => {
-        let index = store.queryCollection(this.appThumbnails, {metaWindow: win}, {indexOnly: true});
+        let index = findIndex(this.appThumbnails, (item) => item.metaWindow === win);
         if (index > -1) {
           this.appThumbnails[index].destroy();
           this.appThumbnails[index] = undefined;
@@ -566,12 +576,12 @@ AppThumbnailHoverMenu.prototype = {
 
   _onKeyPress: function(actor, e){
     let symbol = e.get_key_symbol();
-    let i = store.queryCollection(this.appThumbnails, {entered: true}, {indexOnly: true});
+    let i = findIndex(this.appThumbnails, (item) => item.entered === true);
     let entered = i > -1;
     if (!entered) {
-      i = store.queryCollection(this.appThumbnails, function(thumbnail) {
+      i = findIndex(this.appThumbnails, function(thumbnail) {
         return thumbnail.isFocused;
-      }, {indexOnly: true});
+      });
       if (i === -1) {
         i = 0;
       }
@@ -660,7 +670,7 @@ AppThumbnailHoverMenu.prototype = {
         return b.metaWindow.user_time - a.metaWindow.user_time;
       });
     }
-    let refThumb = store.queryCollection(this.appThumbnails, thumbnail => isEqual(thumbnail.metaWindow, metaWindow), {indexOnly: true});
+    let refThumb = findIndex(this.appThumbnails, (thumbnail) => isEqual(thumbnail.metaWindow, metaWindow));
     if (!this.appThumbnails[refThumb] && refThumb === -1) {
       let thumbnail = new WindowThumbnail({
         state: this.state,

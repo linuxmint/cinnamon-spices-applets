@@ -109,58 +109,24 @@ if (typeof Object.assign != 'function') {
   });
 }
 
+'use strict';
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
-function queryCollection() {
-  var collection = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var query = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
-    indexOnly: false,
-    filter: false,
-    findElementInArray: false
-  };
-
-  var queryKeys = (typeof query === 'undefined' ? 'undefined' : _typeof(query)) === 'object' ? Object.keys(query) : null;
-  var filterResult = [];
-
-  function handleMatch(argument, i, matches) {
-    if (argument) {
-      if (options.filter) {
-        filterResult.push(collection[i]);
-      } else {
-        matches += 1;
-      }
-    }
-    return matches;
-  }
-
-  for (var i = 0; i < collection.length; i++) {
-    var matches = 0;
-    if (!queryKeys) {
-      matches = handleMatch(query(collection[i]), i, matches);
-    } else {
-      for (var z = 0; z < queryKeys.length; z++) {
-        var argument = void 0;
-        if (options.findElementInArray && Array.isArray(collection[i][queryKeys[z]])) {
-          argument = collection[i][queryKeys[z]].indexOf(query[queryKeys[z]]) > -1;
-        } else {
-          argument = collection[i][queryKeys[z]] === query[queryKeys[z]];
-        }
-        matches = handleMatch(argument, i, matches);
-      }
-    }
-    if (!options.filter && (queryKeys && matches === queryKeys.length || matches > 0 && !queryKeys)) {
-      return options.indexOnly ? i : collection[i];
-    }
-  }
-  if (options.filter) {
-    return filterResult;
-  }
-  return options.indexOnly ? -1 : null;
+var find = void 0,
+    filter = void 0;
+if (typeof require !== 'undefined') {
+  var utils = require('./utils');
+  filter = utils.filter;
+  find = utils.find;
+} else {
+  var AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
+  filter = AppletDir.utils.filter;
+  find = AppletDir.utils.find;
 }
 
 function intersect(array1, array2) {
@@ -249,6 +215,16 @@ function getByPath(key, state) {
   return object;
 }
 
+/**
+ * init
+ * Initializes a store instance. It uses private scoping to prevent
+ * its context from leaking.
+ *
+ * @param {object} [state={}]
+ * @param {array} [listeners=[]] - Not intended to be set manually, but can be overriden.
+ * See _connect.
+ * @returns Initial state object with the public API.
+ */
 function init() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var listeners = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
@@ -268,6 +244,12 @@ function init() {
     return Object.assign(object, publicAPI);
   }
 
+  /**
+   * dispatch
+   * Responsible for triggering callbacks stored in the listeners queue from set.
+   *
+   * @param {object} object
+   */
   function dispatch(object) {
     var keys = Object.keys(object);
 
@@ -286,6 +268,13 @@ function init() {
     }
   }
 
+  /**
+   * get
+   * Retrieves a cloned property from the state object.
+   *
+   * @param {string} [key=null]
+   * @returns {object}
+   */
   function get() {
     var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -298,6 +287,14 @@ function init() {
     return clone(state[key]);
   }
 
+  /**
+   * set
+   * Copies a keyed object back into state, and
+   * calls dispatch to fire any connected callbacks.
+   *
+   * @param {object} object
+   * @param {boolean} forceDispatch
+   */
   function set(object, forceDispatch) {
     var keys = Object.keys(object);
     var changed = false;
@@ -318,6 +315,14 @@ function init() {
     return publicAPI;
   }
 
+  /**
+   * exclude
+   * Excludes a string array of keys from the state object.
+   *
+   * @param {array} excludeKeys
+   * @returns Partial or full state object with keys in
+   * excludeKeys excluded, along with the public API for chaining.
+   */
   function exclude(excludeKeys) {
     var object = {};
     var keys = Object.keys(state);
@@ -330,15 +335,24 @@ function init() {
     return getAPIWithObject(object);
   }
 
+  /**
+   * trigger
+   * Fires a callback event for any matching key in the listener queue.
+   * It supports passing through unlimited arguments to the callback.
+   * Useful for setting up actions.
+   *
+   * @param {string} key
+   * @param {any} args
+   * @returns {any} Return result of the callback.
+   */
   function trigger() {
     var _Array$from = Array.from(arguments),
         _Array$from2 = _toArray(_Array$from),
         key = _Array$from2[0],
         args = _Array$from2.slice(1);
 
-    var matchedListeners = queryCollection(listeners, { keys: key }, {
-      findElementInArray: true,
-      filter: true
+    var matchedListeners = filter(listeners, function (listener) {
+      return listener.keys.indexOf(key) > -1;
     });
     if (matchedListeners.length === 0) {
       throw storeError('trigger', key, 'Action not found.');
@@ -356,7 +370,9 @@ function init() {
     var listener = void 0;
 
     if (callback) {
-      listener = queryCollection(listeners, { callback: callback });
+      listener = find(listeners, function (listener) {
+        return listener.callback === callback;
+      });
     }
     if (listener) {
       var newKeys = intersect(keys, listener.keys, true);
@@ -366,6 +382,14 @@ function init() {
     }
   }
 
+  /**
+   * connect
+   *
+   * @param {any} actions - can be a string, array, or an object.
+   * @param {function} callback - callback to be fired on either state
+   * property change, or through the trigger method.
+   * @returns Public API for chaining.
+   */
   function connect(actions, callback) {
     var id = connections++;
     if (Array.isArray(actions)) {
@@ -383,10 +407,10 @@ function init() {
   }
 
   function disconnectByKey(key) {
-    var listenerIndex = queryCollection(listeners, { keys: key }, {
-      findElementInArray: true,
-      indexOnly: true
+    var listener = filter(listeners, function (listener) {
+      return listener.keys.indexOf(key) > -1;
     });
+    var listenerIndex = listeners.indexOf(listener);
     if (listenerIndex === -1) {
       throw storeError('disconnect', key, 'Invalid disconnect key.');
     }
@@ -394,6 +418,12 @@ function init() {
     listeners.splice(listenerIndex, 1);
   }
 
+  /**
+   * disconnect
+   * Removes a callback listener from the queue.
+   *
+   * @param {string} key
+   */
   function disconnect(key) {
     if (typeof key === 'string') {
       disconnectByKey(key);
@@ -416,6 +446,12 @@ function init() {
     }
   }
 
+  /**
+   * destroy
+   * Assigns undefined to all state properties and listeners. Intended
+   * to be used at the end of the application life cycle.
+   *
+   */
   function destroy() {
     var keys = Object.keys(state);
     for (var i = 0; i < keys.length; i++) {

@@ -11,12 +11,14 @@ const PopupMenu = imports.ui.popupMenu;
 const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-let SpecialMenus, each, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
+let SpecialMenus, each, find, findIndex, isEqual, setTimeout, throttle, getFocusState, constants, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   SpecialMenus = require('./specialMenus');
   constants = require('./constants').constants;
   each = utils.each;
+  findIndex = utils.findIndex;
+  find = utils.find;
   isEqual = utils.isEqual;
   throttle = utils.throttle;
   setTimeout = utils.setTimeout;
@@ -28,6 +30,8 @@ if (typeof require !== 'undefined') {
   SpecialMenus = AppletDir.specialMenus;
   constants = AppletDir.constants.constants;
   each = AppletDir.utils.each;
+  findIndex = AppletDir.utils.findIndex;
+  find = AppletDir.utils.find;
   isEqual = AppletDir.utils.isEqual;
   throttle = AppletDir.utils.throttle;
   setTimeout = AppletDir.utils.setTimeout;
@@ -50,7 +54,11 @@ function center (length, naturalLength) {
 }
 
 const getPseudoClass = function(pseudoClass) {
-  return store.queryCollection(constants.pseudoOptions, {id: pseudoClass}).label;
+  let item = find(constants.pseudoOptions, (item) => item.id === pseudoClass);
+  if (item) {
+    return item.label;
+  }
+  return 'focus';
 };
 
 function _Draggable (actor, params) {
@@ -816,9 +824,9 @@ AppGroup.prototype = {
         }
       }
     }
-    let refWindow = store.queryCollection(this.groupState.metaWindows, win => {
+    let refWindow = findIndex(this.groupState.metaWindows, win => {
       return isEqual(win, metaWindow);
-    }, {indexOnly: true});
+    });
     let windowAddArgs = this._shouldWindowBeAdded(metaWindow);
     if (windowAddArgs) {
       if (metaWindow) {

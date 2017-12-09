@@ -107,6 +107,35 @@ const findIndex = function(arr, cb) {
   return -1;
 }
 
+const find = function(arr, cb) {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    if (cb(arr[i], i, arr)) {
+      return arr[i];
+    }
+  }
+  return null;
+}
+
+const filter = function (arr, cb) {
+  let result = [];
+  for (let i = 0, len = arr.length; i < len; i++) {
+    if (cb(arr[i], i, arr)) {
+      result.push(arr[i]);
+    }
+  }
+  return result;
+};
+
+const tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      return errCb(e);
+    }
+  }
+};
+
 const unref = function(object) {
   // Some actors being destroyed have a cascading effect (e.g. PopupMenu items),
   // so it is safest to wait for the next 'tick' before removing references.

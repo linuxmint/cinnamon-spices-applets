@@ -79,8 +79,7 @@ PinnedFavs.prototype = {
       ids = this.params.settings.getValue('pinned-apps');
     }
     for (let i = 0, len = ids.length; i < len; i++) {
-
-      let refFav = store.queryCollection(this._favorites, {id: ids[i]}, {indexOnly: true});
+      let refFav = findIndex(this._favorites, (item) => item.id === ids[i]);
       if (refFav === -1) {
         let app = appSystem.lookup_app(ids[i]);
         this._favorites.push({
@@ -875,9 +874,7 @@ MyApplet.prototype = {
 
     // If the workspace we switched to isn't in our list,
     // we need to create an AppList for it
-    let refWorkspace = store.queryCollection(this.appLists, {index: this.state.currentWs}, {
-      indexOnly: true
-    });
+    let refWorkspace = findIndex(this.appLists, (item) => item.index === this.state.currentWs);
 
     if (refWorkspace === -1) {
       this.appLists.push(new AppList({
