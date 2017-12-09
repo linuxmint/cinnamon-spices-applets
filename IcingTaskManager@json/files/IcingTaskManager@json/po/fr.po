@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 21:28-0600\n"
+"POT-Creation-Date: 2017-12-09 03:01-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -65,56 +65,56 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: 3.4/specialMenus.js:287
+#: 3.4/specialMenus.js:286
 msgid "Unpin from Panel"
 msgstr "Retirer du panneau"
 
-#: 3.4/specialMenus.js:287
+#: 3.4/specialMenus.js:286
 msgid "Pin to Panel"
 msgstr "Epingler au panneau"
 
-#: 3.4/specialMenus.js:293
+#: 3.4/specialMenus.js:292
 msgid "Remove from Autostart"
 msgstr "Supprimer de l'auto-démarrage"
 
-#: 3.4/specialMenus.js:293
+#: 3.4/specialMenus.js:292
 msgid "Add to Autostart"
 msgstr "Ajouter à Autostart"
 
-#: 3.4/specialMenus.js:299
+#: 3.4/specialMenus.js:298
 msgid "Create Shortcut"
 msgstr "Créer un raccourci"
 
-#: 3.4/specialMenus.js:309
+#: 3.4/specialMenus.js:308
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.4/specialMenus.js:317
+#: 3.4/specialMenus.js:316
 msgid "Restore"
 msgstr "Recharger"
 
-#: 3.4/specialMenus.js:322
+#: 3.4/specialMenus.js:321
 msgid "Minimize"
 msgstr "Minimiser"
 
-#: 3.4/specialMenus.js:330
+#: 3.4/specialMenus.js:329
 msgid "Unmaximize"
 msgstr "Restaurer"
 
-#: 3.4/specialMenus.js:335
+#: 3.4/specialMenus.js:334
 msgid "Maximize"
 msgstr "Maximiser"
 
-#: 3.4/specialMenus.js:345
+#: 3.4/specialMenus.js:344
 msgid "Close others"
 msgstr ""
 
-#: 3.4/specialMenus.js:355
+#: 3.4/specialMenus.js:354
 #, fuzzy
 msgid "Close all"
 msgstr "Tout fermer"
 
-#: 3.4/specialMenus.js:365
+#: 3.4/specialMenus.js:364
 msgid "Close"
 msgstr "Fermer"
 
@@ -287,6 +287,9 @@ msgstr ""
 #. 2.8->settings-schema.json->number-display->options
 #. 3.4->settings-schema.json->title-display->options
 #. 3.4->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->middle-click-action->options
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
 msgid "None"
 msgstr "Désactivé"
 
@@ -628,14 +631,12 @@ msgstr ""
 "applet sur des panneaux horizontaux."
 
 #. 2.8->settings-schema.json->middle-click-action->description
-#. 3.4->settings-schema.json->middle-click-action->description
 msgid "Middle clicking app buttons creates new app instances"
 msgstr ""
 "Un clic central sur les boutons d'application crée de nouvelles instances "
 "d'application"
 
 #. 2.8->settings-schema.json->middle-click-action->tooltip
-#. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid ""
 "Determines the behavior of middle mouse button clicks on app buttons. "
 "Setting this to false will close the last focused window from the app group "
@@ -768,17 +769,6 @@ msgid ""
 "When enabled, the last window that was interacted with will be indicated."
 msgstr ""
 
-#. 3.4->settings-schema.json->closed-pinned-app-style-workaround->description
-msgid "Use a workaround for closed pinned app styling"
-msgstr ""
-
-#. 3.4->settings-schema.json->closed-pinned-app-style-workaround->tooltip
-msgid ""
-"This forces the removal of styling on closed pinned apps except on hover. "
-"Only enable this for themes that style closed and opened pinned apps the "
-"same way."
-msgstr ""
-
 #. 3.4->settings-schema.json->thumbnail-padding->description
 #, fuzzy
 msgid "Thumbnail padding"
@@ -869,6 +859,11 @@ msgid ""
 "horizontal panels."
 msgstr "Contrôle la taille des vignettes."
 
+#. 3.4->settings-schema.json->mintXPreset->description
+#. 3.4->settings-schema.json->mintXPreset->tooltip
+msgid "Mint X, Linux Mint, and Variants"
+msgstr ""
+
 #. 3.4->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
 msgstr ""
@@ -898,6 +893,48 @@ msgstr ""
 #, fuzzy
 msgid "Controls how large the thumbnail close button is."
 msgstr "Autoriser les thèmes à contrôler le bouton de fermeture des vignettes"
+
+#. 3.4->settings-schema.json->middle-click-action->description
+#. 3.4->settings-schema.json->middle-click-action->tooltip
+msgid "Middle click action"
+msgstr ""
+
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Launch new app instance"
+msgstr ""
+
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Close last focused window in group"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->description
+msgid "Mouse wheel scroll behavior"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->tooltip
+msgid ""
+"Choose if scrolling the mouse wheel cycles running apps, an app button's "
+"windows on hover, or is disabled."
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->options
+msgid "Cycle apps"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
+#, fuzzy
+msgid "Cycle windows"
+msgstr "Inclure toutes les fenêtres de l'application"
+
+#. 3.4->settings-schema.json->left-click-action->description
+#. 3.4->settings-schema.json->left-click-action->tooltip
+msgid "Left click action"
+msgstr ""
+
+#. 3.4->settings-schema.json->left-click-action->options
+msgid "Toggle activation of last focused window"
+msgstr ""
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"

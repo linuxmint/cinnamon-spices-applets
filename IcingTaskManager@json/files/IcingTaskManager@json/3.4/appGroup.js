@@ -697,10 +697,10 @@ AppGroup.prototype = {
     this.state.trigger('_clearDragPlaceholder');
     let button = event.get_button();
 
-    let shouldStartInstance = (button === 1 && this.groupState.isFavoriteApp && this.groupState.metaWindows.length === 0
-      || (button === 2 && this.state.settings.middleClickAction));
+    let shouldStartInstance = ((button === 1 && this.groupState.isFavoriteApp && this.groupState.metaWindows.length === 0 && this.state.settings.leftClickAction === 2)
+      || (button === 2 && this.state.settings.middleClickAction === 2));
 
-    let shouldEndInstance = button === 2 && !this.state.settings.middleClickAction && this.groupState.lastFocused;
+    let shouldEndInstance = button === 2 && this.state.settings.middleClickAction === 3 && this.groupState.lastFocused;
 
     if (shouldStartInstance) {
       this.groupState.app.open_new_window(-1);
@@ -733,6 +733,13 @@ AppGroup.prototype = {
     };
 
     if (button === 1) {
+      if (this.state.settings.leftClickAction === 1) {
+        return;
+      }
+      if (this.state.settings.leftClickAction === 3) {
+        this.state.trigger('cycleWindows', this.actor._delegate);
+        return;
+      }
       this.hoverMenu.shouldOpen = false;
       if (this.rightClickMenu.isOpen) {
         this.rightClickMenu.toggle();
