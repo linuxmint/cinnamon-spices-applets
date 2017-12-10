@@ -794,6 +794,13 @@ function WindowThumbnail () {
 WindowThumbnail.prototype = {
   _init: function (params) {
     this.state = params.state;
+    this.stateConnectId = this.state.connect({
+      scrollActive: () => {
+        if (this.state.overlayPreview) {
+          this.destroyOverlayPreview();
+        }
+      }
+    })
     this.groupState = params.groupState;
     this.connectId = this.groupState.connect({
       isFavoriteApp: () => this.handleFavorite(),
@@ -1051,7 +1058,7 @@ WindowThumbnail.prototype = {
   },
 
   _hoverPeek: function (opacity) {
-    if (!this.state.settings.enablePeek || this.state.overlayPreview) {
+    if (!this.state.settings.enablePeek || this.state.overlayPreview || this.state.scrollActive) {
       return;
     }
     if (!this.metaWindowActor) {
@@ -1084,6 +1091,7 @@ WindowThumbnail.prototype = {
     if (!this.groupState) {
       return;
     }
+    this.state.disconnect(this.stateConnectId);
     this.groupState.disconnect(this.connectId);
     this.signals.disconnectAllSignals();
     this._container.destroy();

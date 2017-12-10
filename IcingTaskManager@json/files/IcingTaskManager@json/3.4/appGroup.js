@@ -213,6 +213,7 @@ AppGroup.prototype = {
     this.signals.connect(this.hoverMenu.actor, 'enter-event', Lang.bind(this.hoverMenu, this.hoverMenu._onMenuEnter));
     this.signals.connect(this.hoverMenu.actor, 'leave-event', Lang.bind(this.hoverMenu, this.hoverMenu._onMenuLeave));
     this.signals.connect(this.hoverMenu.actor, 'key-release-event', Lang.bind(this.hoverMenu, this.hoverMenu._onKeyRelease));
+    this.signals.connect(this.hoverMenu.actor, 'scroll-event', (c, e) => this.state.trigger('cycleWindows', e, this.actor._delegate));
     this.signals.connect(this.hoverMenu.box, 'key-press-event', Lang.bind(this.hoverMenu, this.hoverMenu._onKeyPress));
     this.signals.connect(this._container, 'get-preferred-width', Lang.bind(this, this._getPreferredWidth));
     this.signals.connect(this._container, 'get-preferred-height', Lang.bind(this, this._getPreferredHeight));
@@ -734,7 +735,7 @@ AppGroup.prototype = {
         return;
       }
       if (this.state.settings.leftClickAction === 3) {
-        this.state.trigger('cycleWindows', this.actor._delegate);
+        this.state.trigger('cycleWindows', null, this.actor._delegate);
         return;
       }
       this.hoverMenu.shouldOpen = false;

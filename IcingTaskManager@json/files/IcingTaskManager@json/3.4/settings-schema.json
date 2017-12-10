@@ -61,6 +61,7 @@
         "thumbnail-size",
         "thumbnail-close-button-size",
         "thumbnail-padding",
+        "thumbnail-scroll-behavior",
         "show-thumbnails",
         "animate-thumbnails",
         "vertical-thumbnails",
@@ -299,6 +300,12 @@
     "units": "px",
     "description": "Thumbnail padding",
     "tooltip": "Controls how much space will be around the window preview thumbnails."
+  },
+  "thumbnail-scroll-behavior": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Cycle windows on mouse wheel scroll",
+    "tooltip": "Choose whether or not scrolling the mouse wheel cycles windows when hovering over a thumbnail menu."
   },
   "show-thumbnails": {
     "type": "checkbox",

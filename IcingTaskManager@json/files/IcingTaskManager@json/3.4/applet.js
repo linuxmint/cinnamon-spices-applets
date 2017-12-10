@@ -257,7 +257,8 @@ MyApplet.prototype = {
       homeDir: GLib.get_home_dir(),
       overlayPreview: null,
       lastCycled: null,
-      lastTitleDisplay: null
+      lastTitleDisplay: null,
+      scrollActive: false
     });
 
     // key-function pairs of actions that can be triggered from the store's callback queue. This allows ITM to avoid
@@ -294,7 +295,7 @@ MyApplet.prototype = {
           + '-cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: ' + size + 'px ' + size + 'px;';
           button.style_class = 'window-close';
       },
-      cycleWindows: (source) => this.handleScroll(null, source),
+      cycleWindows: (e, source) => this.handleScroll(e, source),
       openAbout: () => this.openAbout(),
       configureApplet: () => this.configureApplet()
     });
@@ -358,6 +359,7 @@ MyApplet.prototype = {
       {key: 'thumbnail-size', value: 'thumbSize', cb: null},
       {key: 'thumbnail-close-button-size', value: 'thumbnailCloseButtonSize', cb: this._updateThumbnailCloseButtonSize},
       {key: 'thumbnail-padding', value: 'thumbnailPadding', cb: this._updateThumbnailPadding},
+      {key: 'thumbnail-scroll-behavior', value: 'thumbnailScrollBehavior', cb: null},
       {key: 'sort-thumbnails', value: 'sortThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'highlight-last-focused-thumbnail', value: 'highlightLastFocusedThumbnail', cb: this._updateVerticalThumbnailState},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
@@ -709,20 +711,23 @@ MyApplet.prototype = {
       Util.trySpawnCommandLine('bash -c "' + moPath + '"');
     }
   },
-  handleScroll: function(e, sourceFromLeftClick) {
-    if (this.state.settings.scrollBehavior === 1) {
+  handleScroll: function(e, sourceFromAppGroup) {
+    if (this.state.settings.scrollBehavior === 1
+      || e && sourceFromAppGroup && !this.state.settings.thumbnailScrollBehavior) {
       return;
     }
+    this.state.set({scrollActive: true});
     let isAppScroll = this.state.settings.scrollBehavior === 2;
     let direction, source;
-    if (sourceFromLeftClick) {
-      direction = 1;
-      source = sourceFromLeftClick;
+    if (sourceFromAppGroup) {
+      isAppScroll = false;
+      direction = e ? e.get_scroll_direction() : 1;
+      source = sourceFromAppGroup;
     } else {
       direction = e.get_scroll_direction();
       source = e.get_source()._delegate;
     }
-    let lastFocusedApp, z, count, arg;
+    let lastFocusedApp, z, count
 
     if (isAppScroll) {
       lastFocusedApp = this.appLists[this.state.currentWs].listState.lastFocusedApp;
@@ -733,7 +738,6 @@ MyApplet.prototype = {
         return appGroup.groupState.metaWindows.length > 0 && appGroup.groupState.appId === lastFocusedApp;
       });
       z = direction === 0 ? focusedIndex - 1 : focusedIndex + 1;
-      arg = !this.appLists[this.state.currentWs].appList[z] || !this.appLists[this.state.currentWs].appList[z].groupState.lastFocused;
       count = this.appLists[this.state.currentWs].appList.length - 1;
     } else {
       if (!source.groupState || source.groupState.metaWindows.length < 2) {
@@ -743,7 +747,6 @@ MyApplet.prototype = {
         return metaWindow === source.groupState.lastFocused;
       });
       z = direction === 0 ? focusedIndex - 1 : focusedIndex + 1;
-      arg = !source.groupState.metaWindows[z] || source.groupState.metaWindows[z] === source.groupState.lastFocused;
       count = source.groupState.metaWindows.length - 1;
     }
 
@@ -767,6 +770,7 @@ MyApplet.prototype = {
     }
     let _window = isAppScroll ? this.appLists[this.state.currentWs].appList[z].groupState.lastFocused : source.groupState.metaWindows[z];
     Main.activateWindow(_window, global.get_current_time());
+    setTimeout(() => this.state.set({scrollActive: false}, 4000));
   },
 
   handleDragOver: function (source, actor, x, y) {
