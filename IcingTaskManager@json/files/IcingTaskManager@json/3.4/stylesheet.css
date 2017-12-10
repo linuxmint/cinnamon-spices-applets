@@ -1,46 +1,34 @@
-/* the pseudo are not being overidden so I can't do a hover. that will need to be added to themes */
 .thumbnail-row .thumbnail-alerts {
-	background: rgba(255,52,52,0.3);
-}
-.hide-arrow {
-	-arrow-background-color: rgba(80,80,80,0.0);
-	-arrow-border-color: rgba(150,150,150,0.0);
+  background: rgba(255,52,52,0.3);
 }
 .thumbnail-icon {
-	/* thumbnail icon size */
-	width: 16px;
-	height: 16px;
+  width: 16px;
+  height: 16px;
 }
 .thumbnail-label {
-	padding-left: 4px;
+  padding-left: 4px;
 }
-/*  Careful with the calculation of background position or you will have to much dead space.*/
-.thumbnail-close {
-  background-image: url("close-window.png");
-	background-size: 16px 16px;
-	background-position: 0px -2px;
-	width: 16px;
- 	height: 16px;
+.app-list-item-box {
+  z-index: -9;
 }
-/*App List Padding is set in the the applet settings
-use to override window-list-item-box */
-.app-list-item-box{
-	z-index: -9;
-}
-/* NumLabel */
 .window-icon-list-numlabel {
-	z-index: 99;
+  z-index: 99;
   text-shadow: black 1px 0px 2px
 }
-/* Non grouped container */
 .window-icon-list-buttonbox {
   spacing: 2px;
 }
-.window-list-item-box:closed {
-  background-gradient-direction: vertical;
-  background-gradient-start: rgba(100,100,100,0.0) !important;
-  background-gradient-end: rgba(50,50,50,0.0) !important;
-  box-shadow: inset 0px 0px 0px 1px rgba(80,80,80,0.0) !important;
+.panel-top .window-list-item-box:closed,
+.panel-bottom .window-list-item-box:closed,
+.panel-left .window-list-item-box:closed,
+.panel-right .window-list-item-box:closed {
+  background-gradient-direction: vertical !important;
+  background-gradient-start: rgba(0,0,0,0.0) !important;
+  background-gradient-end: rgba(0,0,0,0.0) !important;
+  border-radius: 0px 0px 0px 0px !important;
+  border-image: none !important;
+  border-color: rgba(0,0,0,0.0) !important;
+  box-shadow: inset 0px 0px 0px 0px rgba(0,0,0,0.0) !important;
 }
 .window-list-item-demands-attention {
 }
