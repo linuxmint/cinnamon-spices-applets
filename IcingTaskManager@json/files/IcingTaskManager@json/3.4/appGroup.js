@@ -273,6 +273,7 @@ AppGroup.prototype = {
     this._updateIconBoxClip();
     this.setIconPadding();
     this.setMargin();
+    this.setTransitionDuration();
   },
 
   setIconPadding: function () {
@@ -289,6 +290,14 @@ AppGroup.prototype = {
     let direction = this.state.isHorizontal ? 'right' : 'bottom';
     let existingStyle = this.actor.style ? this.actor.style : '';
     this.actor.style = existingStyle + 'margin-' + direction + ': ' + this.state.settings.iconSpacing + 'px;';
+  },
+
+  setTransitionDuration: function() {
+    if (!this.state.settings.appButtonTransitionDuration) {
+      return;
+    }
+    let existingStyle = this.actor.style ? this.actor.style : '';
+    this.actor.style = existingStyle + 'transition-duration: ' + this.state.settings.appButtonTransitionDuration + ';';
   },
 
   _onIconBoxStyleChanged: function() {

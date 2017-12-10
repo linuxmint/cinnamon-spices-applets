@@ -96,7 +96,8 @@
         "show-active",
         "hoverPseudoClass",
         "focusPseudoClass",
-        "activePseudoClass"
+        "activePseudoClass",
+        "app-button-transition-duration"
       ]
     },
     "iconSection": {
@@ -462,7 +463,8 @@
       "focus": 2,
       "active": 3,
       "outlined": 4,
-      "selected": 5
+      "selected": 5,
+      "checked": 6
     },
     "tooltip": "Overrides the pseudo class for app buttons on hover."
   },
@@ -475,7 +477,8 @@
       "focus": 2,
       "active": 3,
       "outlined": 4,
-      "selected": 5
+      "selected": 5,
+      "checked": 6
     },
     "tooltip": "Overrides the pseudo class for app button on focus."
   },
@@ -488,9 +491,20 @@
       "focus": 2,
       "active": 3,
       "outlined": 4,
-      "selected": 5
+      "selected": 5,
+      "checked": 6
     },
     "tooltip": "Overrides the pseudo class for app buttons when they are active."
+  },
+  "app-button-transition-duration": {
+    "type": "spinbutton",
+    "default": 0,
+    "min": 0,
+    "max": 4000,
+    "step": 1,
+    "units": "ms",
+    "description": "App button transition duration",
+    "tooltip": "Overrides the theme's animation time for app buttons. If set to zero, the theme's transition duration will be used."
   },
   "mintYPreset": {
     "type" : "button",

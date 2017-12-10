@@ -6,15 +6,15 @@
         "node": true
     },
     "extends": "eslint:recommended",
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
+            "classes": true,
             "ecmaVersion": "2017",
-            "experimentalObjectRestSpread": true
+            "experimentalObjectRestSpread": true,
+            "jsx": true
         },
         "sourceType": "module"
-    },
-    "global": {
-        "window": 0
     },
     "rules": {
         "comma-dangle": 0,
@@ -27,7 +27,7 @@
         "no-dupe-keys": 2,
         "no-duplicate-case": 1,
         "no-empty-character-class": 0,
-        "no-empty": 2,
+        "no-empty": 0,
         "no-ex-assign": 0,
         "no-extra-boolean-cast": 1,
         "no-extra-parens": 0,
@@ -110,7 +110,7 @@
         "no-undef": 0,
         "no-undefined": 0,
         "no-unused-vars": 1,
-        "no-use-before-define": [1,"nofunc"],
+        "no-use-before-define": [1, "nofunc"],
         "callback-return": 0,
         "handle-callback-err": 0,
         "no-mixed-requires": 0,
@@ -150,7 +150,7 @@
         "no-ternary": 0,
         "no-trailing-spaces": 0,
         "no-underscore-dangle": 0,
-        "no-unneeded-ternary": 0,
+        "no-unneeded-ternary": 1,
         "object-curly-spacing": 0,
         "one-var": 0,
         "operator-assignment": 0,
@@ -160,7 +160,7 @@
         "quotes": 0,
         "id-match": 0,
         "semi-spacing": 0,
-        "semi": 1,
+        "semi": 0,
         "sort-vars": 0,
         "space-after-keywords": 0,
         "space-before-blocks": 0,
@@ -190,6 +190,11 @@
         "max-params": 0,
         "max-statements": 0,
         "no-bitwise": 0,
-        "no-plusplus": 0
+        "no-plusplus": 0,
+        "multiline-ternary": 0,
+        "keyword-spacing": 1,
+        "jsx-quotes": [2, "prefer-double"],
+        "block-spacing": [1, "never"],
+        "func-call-spacing": [1, "never"]
     }
 }

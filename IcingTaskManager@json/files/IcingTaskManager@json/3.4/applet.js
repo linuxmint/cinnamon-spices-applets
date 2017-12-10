@@ -335,7 +335,7 @@ MyApplet.prototype = {
   bindSettings: function() {
     let settingsProps = [
       {key: 'show-pinned', value: 'showPinned', cb: this.refreshCurrentAppList},
-      {key: 'show-active', value: 'showActive', cb: this._updatePseudoClasses},
+      {key: 'show-active', value: 'showActive', cb: this.refreshCurrentAppList},
       {key: 'show-alerts', value: 'showAlerts', cb: this._updateAttentionState},
       {key: 'group-apps', value: 'groupApps', cb: this.refreshCurrentAppList},
       {key: 'enable-app-button-dragging', value: 'enableDragging', cb: null},
@@ -346,9 +346,10 @@ MyApplet.prototype = {
       {key: 'show-apps-order-hotkey', value: 'showAppsOrderHotkey', cb: this._bindAppKeys},
       {key: 'show-apps-order-timeout', value: 'showAppsOrderTimeout', cb: null},
       {key: 'cycleMenusHotkey', value: 'cycleMenusHotkey', cb: this._bindAppKeys},
-      {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this._updatePseudoClasses},
-      {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this._updatePseudoClasses},
-      {key: 'activePseudoClass', value: 'activePseudoClass', cb: this._updatePseudoClasses},
+      {key: 'hoverPseudoClass', value: 'hoverPseudoClass', cb: this.refreshCurrentAppList},
+      {key: 'focusPseudoClass', value: 'focusPseudoClass', cb: this.refreshCurrentAppList},
+      {key: 'activePseudoClass', value: 'activePseudoClass', cb: this.refreshCurrentAppList},
+      {key: 'app-button-transition-duration', value: 'appButtonTransitionDuration', cb: this.refreshCurrentAppList},
       {key: 'enable-hover-peek', value: 'enablePeek', cb: null},
       {key: 'onclick-thumbnails', value: 'onClickThumbs', cb: null},
       {key: 'hover-peek-opacity', value: 'peekOpacity', cb: null},
@@ -584,16 +585,6 @@ MyApplet.prototype = {
     each(this.appLists, (workspace) => {
       each(workspace.appList, (appGroup) => {
         appGroup.hoverMenu.updateThumbnailCloseButtonSize();
-      });
-    });
-  },
-
-  _updatePseudoClasses: function () {
-    each(this.appLists, (workspace) => {
-      each(workspace.appList, (appGroup) => {
-        appGroup.groupState.trigger('isFavoriteApp');
-        appGroup.setActiveStatus(appGroup.groupState.metaWindows);
-        appGroup._onFocusChange();
       });
     });
   },

@@ -37,6 +37,7 @@ const constants = {
     {id: 3, label: 'active'},
     {id: 4, label: 'outlined'},
     {id: 5, label: 'selected'},
+    {id: 6, label: 'checked'},
   ],
   autoStartStrDir: './.config/autostart'
 };
