@@ -542,22 +542,15 @@ AppGroup.prototype = {
       return false;
     }
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
-    let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
-    let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
 
-    this.pseudoClassStash = [];
-    if (this.actor.has_style_pseudo_class(focusPseudoClass)) {
-      this.pseudoClassStash.push(focusPseudoClass);
-    }
-    if (this.actor.has_style_pseudo_class(activePseudoClass)) {
-      this.pseudoClassStash.push(activePseudoClass);
-    }
     if (this.actor.has_style_pseudo_class('closed')) {
-      this.pseudoClassStash.push('closed');
+      this.hadClosedPseudoClass = true;
       this.actor.remove_style_pseudo_class('closed');
     }
 
-    this.actor.add_style_pseudo_class(hoverPseudoClass);
+    if (!this.actor.has_style_pseudo_class(hoverPseudoClass)) {
+      this.actor.add_style_pseudo_class(hoverPseudoClass);
+    }
 
     this.hoverMenu._onMenuEnter();
   },
@@ -566,23 +559,18 @@ AppGroup.prototype = {
     if (this.state.panelEditMode) {
       return false;
     }
+    let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
+
     if (this.listState.lastFocusedApp !== this.groupState.appId) {
-      this.actor.remove_style_pseudo_class(getPseudoClass(this.state.settings.hoverPseudoClass));
+      this.actor.remove_style_pseudo_class(hoverPseudoClass);
+    }
+    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
+      this.hadClosedPseudoClass = false;
+      this.actor.add_style_pseudo_class('closed');
     }
 
     this._setFavoriteAttributes();
-    this.popPseudoClassStash();
-
     this.hoverMenu._onMenuLeave();
-  },
-
-  popPseudoClassStash: function() {
-    if (this.pseudoClassStash.length > 0) {
-      for (let i = 0; i < this.pseudoClassStash.length; i++) {
-        this.actor.add_style_pseudo_class(this.pseudoClassStash[i]);
-      }
-      this.pseudoClassStash = [];
-    }
   },
 
   setActiveStatus: function(windows){
