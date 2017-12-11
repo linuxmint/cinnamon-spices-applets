@@ -201,7 +201,7 @@ MyApplet.prototype = {
 		//btv
 		this.TvItem.menu.addAction(_("bTV"), function(event) {
 		Main.Util.spawnCommandLine("killall -9 vlc");
-		Main.Util.spawnCommandLine("bash -c \"rtmpdump -r 'rtmp://46.10.150.113:80/alpha' -a 'alpha' -f 'WIN 11,5,502,149' -W 'http://www.btv.bg/static/bg/shared/app/flowplayer/flowplayer.rtmp-3.2.13.swf' -p 'http://www.btv.bg/live/' -y 'alpha' --quiet | vlc --meta-title 'bTV' -\"");
+		Main.Util.spawnCommandLine("vlc 'http://46.10.150.111/alpha/alpha/playlist.m3u8' --meta-title 'bTV'");
 		Main.notify(_("Watching bTV"));
 		});
 		
