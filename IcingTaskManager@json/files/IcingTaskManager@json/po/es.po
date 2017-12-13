@@ -922,6 +922,70 @@ msgid "Window list with app grouping and thumbnails"
 msgstr ""
 "Lista de ventanas con agrupación de aplicaciones y miniaturas de ventanas"
 
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "checked"
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->description
+msgid "App button transition duration"
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
+msgid ""
+"Overrides the theme's animation time for app buttons. If set to zero, the "
+"theme's transition duration will be used."
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->units
+msgid "ms"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalSection->title
+msgid "Behavior"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
+
+#. 3.4->settings-schema.json->show-icons->description
+#, fuzzy
+msgid "Show icons"
+msgstr "Sin iconos"
+
+#. 3.4->settings-schema.json->show-icons->tooltip
+msgid "Show the window's icon next to the title."
+msgstr ""
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
+#, fuzzy
+msgid "Show new window option"
+msgstr "Mostrar la opción de inicio automático"
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
+msgid ""
+"Shows the \"New Window\" option in an app's context menu if it doesn't "
+"already have one from the app's own action menu items."
+msgstr ""
+
+#. 3.4->settings-schema.json->show-all-workspaces->description
+#. 3.4->settings-schema.json->show-all-workspaces->tooltip
+#, fuzzy
+msgid "Show windows from all workspaces"
+msgstr "Mostrar en todas las áreas de trabajo"
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
+msgid "Cycle windows on mouse wheel scroll"
+msgstr ""
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
+msgid ""
+"Choose whether or not scrolling the mouse wheel cycles windows when hovering "
+"over a thumbnail menu."
+msgstr ""
+
 # Should not be set, just leave it blank by setting one white-space character
 #~ msgid "number"
 #~ msgstr " "

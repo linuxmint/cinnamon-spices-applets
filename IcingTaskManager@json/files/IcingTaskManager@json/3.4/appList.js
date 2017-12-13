@@ -3,12 +3,13 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const SignalManager = imports.misc.signalManager;
 
-let each, findIndex, find, isEqual, AppGroup, setTimeout, unref, store;
+let each, findIndex, find, filter, isEqual, AppGroup, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
   findIndex = utils.findIndex;
   find = utils.find;
+  filter = utils.filter;
   isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
@@ -19,6 +20,7 @@ if (typeof require !== 'undefined') {
   each = AppletDir.utils.each;
   findIndex = AppletDir.utils.findIndex;
   find = AppletDir.utils.find;
+  filter = AppletDir.utils.filter;
   isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
@@ -42,6 +44,7 @@ AppList.prototype = {
       lastFocusedApp: null,
     });
     this.listState.connect({
+      getWorkspace: () => this.metaWorkspace,
       updateAppGroupIndexes: () => this.updateAppGroupIndexes(),
       _closeAllRightClickMenus: (cb) => this._closeAllRightClickMenus(cb),
       _closeAllHoverMenus: (cb) => this._closeAllHoverMenus(cb),
@@ -129,7 +132,7 @@ AppList.prototype = {
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number - 1]._onNewAppKeyPress(number);
+    this.appList[number - 1].launchNewInstance();
   },
 
   _showAppsOrder: function(){
@@ -215,7 +218,12 @@ AppList.prototype = {
   },
 
   _refreshApps: function () {
-    let windows = this.metaWorkspace.list_windows();
+    let windows;
+    if (this.state.settings.showAllWorkspaces) {
+      windows = global.display.list_windows(0)
+    } else {
+      windows = this.metaWorkspace.list_windows();
+    }
 
     for (let i = 0, len = windows.length; i < len; i++) {
       this._windowAdded(this.metaWorkspace, windows[i]);
@@ -239,6 +247,13 @@ AppList.prototype = {
   _windowAdded: function (metaWorkspace, metaWindow, app, isFavoriteApp) {
     if (!this.state) {
       return;
+    }
+    if (this.state.appletReady
+      && this.state.settings.showAllWorkspaces
+      && metaWindow
+      && !metaWindow.__itmInit__) {
+      metaWindow.__itmInit__ = true;
+      this.state.trigger('addWindowToAllWorkspaces', metaWindow, app, isFavoriteApp);
     }
     // Check to see if the window that was added already has an app group.
     // If it does, then we don't need to do anything.  If not, we need to
@@ -315,7 +330,17 @@ AppList.prototype = {
     };
 
     if (refApp === -1) {
-      let appWindows = app.get_windows();
+      let _appWindows = app.get_windows();
+      let appWindows = [];
+
+      for (var i = 0; i < _appWindows.length; i++) {
+        if ((this.state.settings.showAllWorkspaces || _appWindows[i].is_on_all_workspaces() || isEqual(_appWindows[i].get_workspace(), this.metaWorkspace))
+          && (this.state.settings.includeAllWindows || this.state.trigger('isWindowInteresting', _appWindows[i]))
+          && (!this.state.settings.listMonitorWindows || this.state.monitorWatchList.indexOf(_appWindows[i].get_monitor()) > -1 )) {
+          appWindows.push(_appWindows[i]);
+        }
+      }
+
       if (this.state.settings.groupApps) {
         initApp(appWindows);
       } else {
@@ -380,8 +405,13 @@ AppList.prototype = {
     this.appList = newAppList;
   },
 
-  _windowRemoved: function (metaWorkspace, metaWindow, positionChange) {
+  _windowRemoved: function (metaWorkspace, metaWindow) {
     if (!this.state) {
+      return;
+    }
+    if ((metaWindow.is_on_all_workspaces() || this.state.settings.showAllWorkspaces) && !metaWindow.__itmFinalize__) {
+      metaWindow.__itmFinalize__ = true;
+      this.state.trigger('removeWindowFromAllWorkspaces', metaWindow);
       return;
     }
     let refApp = -1, refWindow = -1, windowCount = 0;
@@ -417,7 +447,7 @@ AppList.prototype = {
         this.appList[refApp].destroy(true);
         this.appList[refApp] = undefined;
         this.appList.splice(refApp, 1);
-      }, positionChange);
+      });
     }
   },
 
