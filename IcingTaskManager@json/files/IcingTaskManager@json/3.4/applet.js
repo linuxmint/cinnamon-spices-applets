@@ -410,7 +410,7 @@ MyApplet.prototype = {
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateActorAttributes},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
       {key: 'show-all-workspaces', value: 'showAllWorkspaces', cb: this.refreshAllAppLists},
-      {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
+      {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.handleMonitorWindowsPrefsChange},
     ];
 
     for (let i = 0, len = settingsProps.length; i < len; i++) {
@@ -432,19 +432,18 @@ MyApplet.prototype = {
     if (this.state.appletReady && this.state.panelEditMode) {
       return;
     }
-    this.updateMonitorWatchlist(true);
     // Query apps for the current workspace
     this._onSwitchWorkspace();
     this._bindAppKeys();
     this._updateSpacing();
     this.state.set({appletReady: true});
+    setTimeout(() => this.updateMonitorWatchlist(), 0);
   },
 
   on_applet_instances_changed: function(loaded) {
-    if (!loaded || !this.state.appletReady) {
-      return;
+    if (this.state.appletReady) {
+      this.updateMonitorWatchlist();
     }
-    this.updateMonitorWatchlist();
   },
 
   on_panel_edit_mode_changed: function () {
@@ -543,7 +542,21 @@ MyApplet.prototype = {
     this.getCurrentAppList()._cycleMenus();
   },
 
-  updateMonitorWatchlist: function(init) {
+  handleMonitorWindowsPrefsChange: function(value) {
+    let instances = Main.AppletManager.getRunningInstancesForUuid(this.state.uuid);
+    for (let i = 0; i < instances.length; i++) {
+      if (!instances[i]) {
+        continue;
+      }
+      instances[i].updateMonitorWatchlist();
+      if (instances[i].panel.monitorIndex !== this.panel.monitorIndex) {
+        instances[i].state.settings.listMonitorWindows = this.state.settings.listMonitorWindows;
+      }
+      instances[i].refreshCurrentAppList();
+    }
+  },
+
+  updateMonitorWatchlist: function() {
     let numberOfMonitors = Gdk.Screen.get_default().get_n_monitors();
     let onPrimary = this.panel.monitorIndex === Main.layoutManager.primaryIndex;
     let instances = Main.AppletManager.getRunningInstancesForUuid(this.state.uuid);
@@ -572,10 +585,8 @@ MyApplet.prototype = {
         }
       }
     }
+
     this.state.set({monitorWatchList: this.state.monitorWatchList});
-    if (!init) {
-      this.refreshCurrentAppList();
-    }
   },
 
   refreshCurrentAppList: function() {
@@ -709,8 +720,6 @@ MyApplet.prototype = {
     } else if (typeof this.appLists[0] !== 'undefined') {
       return this.appLists[0];
     } else {
-      // TODO: Necessary?
-      global.logError('ITM Error: Could not retrieve the current app list.');
       return null;
     }
   },

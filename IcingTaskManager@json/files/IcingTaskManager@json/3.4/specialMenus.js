@@ -11,7 +11,7 @@ const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, find, findIndex, tryFn, isEqual, constants, getFirefoxHistory, setTimeout, unref, _, store;
+let each, find, findIndex, tryFn, isEqual, constants, getFirefoxHistory, setTimeout, unref, _;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
@@ -24,7 +24,6 @@ if (typeof require !== 'undefined') {
   setTimeout = utils.setTimeout;
   unref = utils.unref;
   getFirefoxHistory = require('./firefox').getFirefoxHistory;
-  store = require('./store');
 } else {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
@@ -37,7 +36,6 @@ if (typeof require !== 'undefined') {
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
   getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
-  store = AppletDir.store_mozjs24;
 }
 
 const convertRange = function(value, r1, r2) {
@@ -316,6 +314,7 @@ AppMenuButtonRightClickMenu.prototype = {
         this.addMenuItem(item);
       }
     } else {
+      this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       item = createMenuItem({label: _('Create Shortcut'), icon: 'list-add'});
       this.signals.connect(item, 'activate', Lang.bind(this, this._createShortcut));
       this.addMenuItem(item);
@@ -803,6 +802,8 @@ AppThumbnailHoverMenu.prototype = {
           this.appThumbnails[w].handleLeaveEvent();
         }
         this.appThumbnails[w].destroy(true);
+        this.appThumbnails[w] = null;
+        this.appThumbnails.splice(w, 1)
       }
     }
     this.removeAll();

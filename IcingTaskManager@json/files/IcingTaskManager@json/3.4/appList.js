@@ -3,12 +3,13 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const SignalManager = imports.misc.signalManager;
 
-let each, findIndex, find, isEqual, AppGroup, setTimeout, unref, store;
+let each, findIndex, find, filter, isEqual, AppGroup, setTimeout, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
   findIndex = utils.findIndex;
   find = utils.find;
+  filter = utils.filter;
   isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
   unref = utils.unref;
@@ -19,6 +20,7 @@ if (typeof require !== 'undefined') {
   each = AppletDir.utils.each;
   findIndex = AppletDir.utils.findIndex;
   find = AppletDir.utils.find;
+  filter = AppletDir.utils.filter;
   isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
   unref = AppletDir.utils.unref;
@@ -330,16 +332,15 @@ AppList.prototype = {
     if (refApp === -1) {
       let _appWindows = app.get_windows();
       let appWindows = [];
-      if (this.state.settings.showAllWorkspaces) {
-        appWindows = _appWindows;
-      } else {
-        for (var i = 0; i < _appWindows.length; i++) {
-          if (_appWindows[i].is_on_all_workspaces()
-            || isEqual(_appWindows[i].get_workspace(), this.metaWorkspace)) {
-            appWindows.push(_appWindows[i]);
-          }
+
+      for (var i = 0; i < _appWindows.length; i++) {
+        if ((this.state.settings.showAllWorkspaces || _appWindows[i].is_on_all_workspaces() || isEqual(_appWindows[i].get_workspace(), this.metaWorkspace))
+          && (this.state.settings.includeAllWindows || this.state.trigger('isWindowInteresting', _appWindows[i]))
+          && (!this.state.settings.listMonitorWindows || this.state.monitorWatchList.indexOf(_appWindows[i].get_monitor()) > -1 )) {
+          appWindows.push(_appWindows[i]);
         }
       }
+
       if (this.state.settings.groupApps) {
         initApp(appWindows);
       } else {

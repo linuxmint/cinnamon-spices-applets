@@ -230,6 +230,9 @@ AppGroup.prototype = {
 
     this.on_orientation_changed(true);
     setTimeout(() => {
+      if (!this.groupState.set) {
+        return;
+      }
       this.groupState.set({groupReady: true});
       this.handleFavorite();
     }, 0);
@@ -563,7 +566,8 @@ AppGroup.prototype = {
     }
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
 
-    if (this.listState.lastFocusedApp !== this.groupState.appId) {
+    if (this.listState.lastFocusedApp !== this.groupState.appId
+      || (!this.state.settings.groupApps && this.groupState.metaWindows.length > 0 && !getFocusState(this.groupState.metaWindows[0]))) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
     if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
@@ -825,62 +829,40 @@ AppGroup.prototype = {
     }
   },
 
-  _shouldWindowBeAdded: function(metaWindow) {
-    let windowAddArgs = metaWindow != null || !this.state.settings.groupApps;
-    if (!this.state.settings.includeAllWindows) {
-      windowAddArgs = windowAddArgs && this.state.trigger('isWindowInteresting', metaWindow);
-    }
-    if (this.state.appletReady && metaWindow && this.state.settings.listMonitorWindows) {
-      windowAddArgs = windowAddArgs
-        && (this.state.monitorWatchList.indexOf(metaWindow.get_monitor()) > -1
-          || this.state.monitorWatchList.length === 0);
-    }
-    if (!this.state.settings.showAllWorkspaces) {
-      windowAddArgs = windowAddArgs && (metaWindow.is_on_all_workspaces()
-        || isEqual(metaWindow.get_workspace(), this.listState.trigger('getWorkspace')));
-    }
-    return windowAddArgs;
-  },
-
   _windowAdded: function (metaWindow, metaWindows) {
     if (metaWindows) {
       this.groupState.metaWindows = [];
       for (var i = 0; i < metaWindows.length; i++) {
-        if (this._shouldWindowBeAdded(metaWindows[i])) {
-          this.groupState.metaWindows.push(metaWindows[i]);
-        }
+        this.groupState.metaWindows.push(metaWindows[i]);
       }
     }
     let refWindow = findIndex(this.groupState.metaWindows, win => {
       return isEqual(win, metaWindow);
     });
-    let windowAddArgs = this._shouldWindowBeAdded(metaWindow);
-    if (windowAddArgs) {
-      if (metaWindow) {
-        this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, throttle(this._windowTitleChanged, 100, true)));
-        this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
-        this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
-        this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
-        if (metaWindow.progress !== undefined) {
-          this._progress = metaWindow.progress;
-          this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
-        }
-
-        // Set the initial button label as not all windows will get updated via signals initially.
-        this._windowTitleChanged(metaWindow);
-        if (refWindow === -1) {
-          this.groupState.metaWindows.push(metaWindow);
-          this.groupState.trigger('addThumbnailToMenu', metaWindow);
-        }
-        this._calcWindowNumber(this.groupState.metaWindows);
-        this._onFocusChange();
+    if (metaWindow) {
+      this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, throttle(this._windowTitleChanged, 100, true)));
+      this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
+      this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
+      this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
+      if (metaWindow.progress !== undefined) {
+        this._progress = metaWindow.progress;
+        this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
       }
-      this.groupState.set({
-        metaWindows: this.groupState.metaWindows,
-        lastFocused: metaWindow,
-      });
-      this.handleFavorite();
+
+      // Set the initial button label as not all windows will get updated via signals initially.
+      this._windowTitleChanged(metaWindow);
+      if (refWindow === -1) {
+        this.groupState.metaWindows.push(metaWindow);
+        this.groupState.trigger('addThumbnailToMenu', metaWindow);
+      }
+      this._calcWindowNumber(this.groupState.metaWindows);
+      this._onFocusChange();
     }
+    this.groupState.set({
+      metaWindows: this.groupState.metaWindows,
+      lastFocused: metaWindow,
+    });
+    this.handleFavorite();
   },
 
   _windowRemoved: function (metaWorkspace, metaWindow, refWindow, cb) {
@@ -968,7 +950,7 @@ AppGroup.prototype = {
     }
 
     let hasFocus = getFocusState(metaWindow);
-    if (hasFocus) {
+    if (hasFocus && this.groupState.hasOwnProperty('lastFocused')) {
       this.listState.set({lastFocusedApp: this.groupState.appId});
       this.groupState.set({lastFocused: metaWindow});
     }
