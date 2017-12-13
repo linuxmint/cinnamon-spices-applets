@@ -364,6 +364,7 @@ MyApplet.prototype = {
       {key: 'highlight-last-focused-thumbnail', value: 'highlightLastFocusedThumbnail', cb: this._updateVerticalThumbnailState},
       {key: 'vertical-thumbnails', value: 'verticalThumbs', cb: this._updateVerticalThumbnailState},
       {key: 'show-thumbnails', value: 'showThumbs', cb: this._updateVerticalThumbnailState},
+      {key: 'show-icons', value: 'showIcons', cb: this._updateVerticalThumbnailState},
       {key: 'animate-thumbnails', value: 'animateThumbs', cb: null},
       {key: 'include-all-windows', value: 'includeAllWindows', cb: this.refreshCurrentAppList},
       {key: 'number-display', value: 'numDisplay', cb: this._updateWindowNumberState},

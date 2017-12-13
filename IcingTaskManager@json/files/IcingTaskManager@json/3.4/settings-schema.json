@@ -63,6 +63,7 @@
         "thumbnail-padding",
         "thumbnail-scroll-behavior",
         "show-thumbnails",
+        "show-icons",
         "animate-thumbnails",
         "vertical-thumbnails",
         "sort-thumbnails",
@@ -312,6 +313,12 @@
     "default": true,
     "description": "Show thumbnails",
     "tooltip": "Show window thumbnails when hovering over an app button."
+  },
+  "show-icons": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show icons",
+    "tooltip": "Show the window's icon next to the title."
   },
   "animate-thumbnails": {
     "type": "checkbox",

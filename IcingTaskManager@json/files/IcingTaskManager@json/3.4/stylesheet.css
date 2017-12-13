@@ -8,6 +8,9 @@
 .thumbnail-label {
   padding-left: 4px;
 }
+.thumbnail-label-no-icon {
+  padding-left: 4px;
+}
 .app-list-item-box {
   z-index: -9;
 }

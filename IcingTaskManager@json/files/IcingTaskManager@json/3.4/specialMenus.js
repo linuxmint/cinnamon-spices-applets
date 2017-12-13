@@ -729,9 +729,11 @@ AppThumbnailHoverMenu.prototype = {
     if (skipThumbnailIconResize) {
       return;
     }
-    for (let i = 0; i < this.appThumbnails.length; i++) {
-      if (this.appThumbnails[i]) {
-        this.appThumbnails[i].thumbnailIconSize();
+    if (this.state.settings.showIcons) {
+      for (let i = 0; i < this.appThumbnails.length; i++) {
+        if (this.appThumbnails[i]) {
+          this.appThumbnails[i].thumbnailIconSize();
+        }
       }
     }
     if (wasOpen) {
@@ -848,16 +850,26 @@ WindowThumbnail.prototype = {
       y_expand: false
     });
 
-    this.icon = this.groupState.app.create_icon_texture(16);
-    this.themeIcon = new St.BoxLayout({
-      style_class: 'thumbnail-icon'
-    });
-    this.themeIcon.add_actor(this.icon);
-    this._container.add_actor(this.themeIcon);
     this._label = new St.Label({
-      style_class: 'thumbnail-label'
+      style_class: this.icon ? 'thumbnail-label' : 'thumbnail-label-no-icon'
     });
-    this._container.add_actor(this._label);
+
+    if (this.state.settings.showIcons) {
+      this.icon = this.groupState.app.create_icon_texture(16);
+      this.themeIcon = new St.BoxLayout({
+        style_class: 'thumbnail-icon'
+      });
+      this.themeIcon.add_actor(this.icon);
+      this._container.add_actor(this.themeIcon);
+      this._container.add_actor(this._label);
+    } else {
+      this.labelContainer = new St.Bin({
+        y_align: this.icon ? St.Align.START : St.Align.MIDDLE
+      });
+      this.labelContainer.add_actor(this._label);
+      this._container.add_actor(this.labelContainer);
+    }
+
     this.button = new St.BoxLayout({
       reactive: true
     });
@@ -1049,6 +1061,9 @@ WindowThumbnail.prototype = {
         }
 
         // Replace the old thumbnail
+        if (this.labelContainer) {
+          this.labelContainer.set_width(this.thumbnailWidth);
+        }
         this._label.text = this.metaWindow.title;
         this.getThumbnail();
       }
