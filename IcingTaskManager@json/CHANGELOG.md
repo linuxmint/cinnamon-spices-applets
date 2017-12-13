@@ -1,5 +1,19 @@
 Changelog
 
+### 6.2.0
+
+  * Fixed windows from all workspaces showing, and added an option to show all workspaces.
+    - Also properly handles sticky windows that are marked as visible on all workspaces.
+  * Fixed per-monitor window mode not working correctly on the primary monitor.
+    - When toggling this setting, it will now take effect on all ITM instances.
+  * Fixed  pinning/unpinning apps in ungrouped app mode.
+  * Added an option to disable icons in the thumbnail menu.
+  * Added an option to scroll windows while hovering over an app's thumbnail menu.
+  * Added a transition duration override option for app buttons, and the option to a assign the checked pseudo class as an override.
+  * Added an option to show a "New Window" context menu item.
+  * Improved theme compatibility for the closed pinned app styling.
+  * Fixed multiple app buttons receiving focus styling in some scenarios (6.1 regression).
+
 ### 6.1.0
 
   * Fixed dragging pinned apps not working correctly when uninstalled apps are in the list.
