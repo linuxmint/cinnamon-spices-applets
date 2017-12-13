@@ -205,6 +205,12 @@
     "description": "Use system favorites for pinned apps",
     "tooltip": "Controls whether or not pinned apps consist of the system favorites list."
   },
+  "show-all-workspaces": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Show windows from all workspaces",
+    "tooltip": "Show windows from all workspaces"
+  },
   "enable-app-button-dragging": {
     "type": "checkbox",
     "default": true,

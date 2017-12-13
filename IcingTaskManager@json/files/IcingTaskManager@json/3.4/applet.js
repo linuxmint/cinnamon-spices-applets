@@ -26,12 +26,15 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, findIndex, constants, AppList, setTimeout, unref, store;
+let each, findIndex, map, constants, AppList, isEqual, setTimeout, throttle, unref, store;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   each = utils.each;
   findIndex = utils.findIndex;
+  map = utils.map;
+  isEqual = utils.isEqual;
   setTimeout = utils.setTimeout;
+  throttle = utils.throttle;
   unref = utils.unref;
   constants = require('./constants').constants;
   AppList = require('./appList').AppList;
@@ -40,7 +43,10 @@ if (typeof require !== 'undefined') {
   const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
   each = AppletDir.utils.each;
   findIndex = AppletDir.utils.findIndex;
+  map = AppletDir.utils.map;
+  isEqual = AppletDir.utils.isEqual;
   setTimeout = AppletDir.utils.setTimeout;
+  throttle = AppletDir.utils.throttle;
   unref = AppletDir.utils.unref;
   constants = AppletDir.constants.constants;
   AppList = AppletDir.appList.AppList;
@@ -91,6 +97,9 @@ PinnedFavs.prototype = {
   },
 
   triggerUpdate: function (appId, pos, isFavoriteApp) {
+    if (!this.params.state.settings.groupApps) {
+      return;
+    }
     let currentAppList = this.params.state.trigger('getCurrentAppList');
     let refApp = currentAppList.appList.findIndex(appGroup => appGroup.groupState.appId === appId);
     if (refApp > -1) {
@@ -190,10 +199,10 @@ PinnedFavs.prototype = {
       });
     }
     let currentAppList = this.params.state.trigger('getCurrentAppList');
-    let favoriteIds = this._favorites.map(function(favorite) {
+    let favoriteIds = map(this._favorites, function(favorite) {
       return favorite.id;
     });
-    let renderedFavoriteApps = currentAppList.appList.map(function(appGroup) {
+    let renderedFavoriteApps = map(currentAppList.appList, function(appGroup) {
       return {
         id: appGroup.groupState.appId,
         app: appGroup.groupState.app
@@ -201,9 +210,6 @@ PinnedFavs.prototype = {
     }).filter(function(renderedFavorite) {
       return favoriteIds.indexOf(renderedFavorite.id) > -1
     });
-    let refApp = findIndex(renderedFavoriteApps, function(favorite) {
-      return favorite.id === opts.appId;
-    })
     renderedFavoriteApps = renderedFavoriteApps
       .slice(0, opts.pos)
       .concat([{id:  opts.appId, app: opts.app}])
@@ -274,13 +280,33 @@ MyApplet.prototype = {
       getAppFromWMClass: (specialApps, metaWindow) => this.getAppFromWMClass(specialApps, metaWindow),
       getTracker: () => this.tracker,
       isWindowInteresting: (metaWindow) => this.tracker.is_window_interesting(metaWindow),
+      addWindowToAllWorkspaces: (win, app, isFavoriteApp) => {
+        each(this.appLists, function(appList) {
+          appList._windowAdded(appList.metaWorkspace, win, app, isFavoriteApp);
+        });
+      },
+      removeWindowFromAllWorkspaces: (win) => {
+        each(this.appLists, function(appList) {
+          appList._windowRemoved(appList.metaWorkspace, win);
+        });
+      },
+      removeWindowFromOtherWorkspaces: (win) => {
+        each(this.appLists, (appList) => {
+          if (appList.listState.workspaceIndex === this.state.currentWs) {
+            return;
+          }
+          appList._windowRemoved(appList.metaWorkspace, win);
+        });
+      },
       refreshCurrentAppList: () => this.refreshCurrentAppList(),
       getCurrentAppList: () => this.getCurrentAppList(),
       _clearDragPlaceholder: () => this._clearDragPlaceholder(),
       getAutoStartApps: () => this.getAutoStartApps(),
       getRecentItems: () => Gtk.RecentManager.get_default()
         .get_items()
-        .sort(function (a, b) { return a.get_modified() - b.get_modified(); })
+        .sort(function (a, b) {
+          return a.get_modified() - b.get_modified();
+        })
         .reverse(),
       addFavorite: (obj) => this.pinnedFavorites.addFavorite(obj),
       removeFavorite: (id) => this.pinnedFavorites.removeFavorite(id),
@@ -312,13 +338,14 @@ MyApplet.prototype = {
       state: this.state,
     });
     this.actor.set_track_hover(false);
-    this.signals.connect(this.actor, 'scroll-event', (c, e) => this.handleScroll(e));
     // Declare vertical panel compatibility
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
     this.execInstallLanguage();
     Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + '/.local/share/locale');
 
     this.getAutoStartApps();
+    this._onSwitchWorkspace = throttle(this._onSwitchWorkspace, 100, true);
+    this.signals.connect(this.actor, 'scroll-event', (c, e) => this.handleScroll(e));
     this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
     this.signals.connect(global.screen, 'workspace-removed', Lang.bind(this, this.onWorkspaceRemoved));
     this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
@@ -381,6 +408,7 @@ MyApplet.prototype = {
       {key: 'enable-app-button-width', value: 'enableAppButtonWidth', cb: this._updateActorAttributes},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateActorAttributes},
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
+      {key: 'show-all-workspaces', value: 'showAllWorkspaces', cb: this.refreshAllAppLists},
       {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.refreshCurrentAppList},
     ];
 
@@ -474,7 +502,7 @@ MyApplet.prototype = {
     }
   },
 
-  _bindAppKeys: function(){
+  _bindAppKeys: function() {
     this._unbindAppKeys();
 
     for (let i = 1; i < 10; i++) {
@@ -484,7 +512,7 @@ MyApplet.prototype = {
     Main.keybindingManager.addHotKey('launch-cycle-menus', this.state.settings.cycleMenusHotkey, () => this._cycleMenus());
   },
 
-  _unbindAppKeys: function(){
+  _unbindAppKeys: function() {
     for (let i = 1; i < 10; i++) {
       Main.keybindingManager.removeHotKey('launch-app-key-' + i);
       Main.keybindingManager.removeHotKey('launch-new-app-key-' + i);
@@ -498,19 +526,19 @@ MyApplet.prototype = {
     Main.keybindingManager.addHotKey('launch-new-app-key-' + i, '<Super><Shift>' + i, () => this._onNewAppKeyPress(i));
   },
 
-  _onAppKeyPress: function(number){
+  _onAppKeyPress: function(number) {
     this.getCurrentAppList()._onAppKeyPress(number);
   },
 
-  _onNewAppKeyPress: function(number){
+  _onNewAppKeyPress: function(number) {
     this.getCurrentAppList()._onNewAppKeyPress(number);
   },
 
-  _showAppsOrder: function(){
+  _showAppsOrder: function() {
     this.getCurrentAppList()._showAppsOrder();
   },
 
-  _cycleMenus: function(){
+  _cycleMenus: function() {
     this.getCurrentAppList()._cycleMenus();
   },
 
@@ -549,8 +577,14 @@ MyApplet.prototype = {
     }
   },
 
-  refreshCurrentAppList: function(){
+  refreshCurrentAppList: function() {
     this.appLists[this.state.currentWs]._refreshList();
+  },
+
+  refreshAllAppLists: function() {
+    each(this.appLists, function(appList) {
+      appList._refreshList();
+    });
   },
 
   handleMintYThemePreset: function() {
@@ -668,7 +702,7 @@ MyApplet.prototype = {
     return app;
   },
 
-  getCurrentAppList: function(){
+  getCurrentAppList: function() {
     if (typeof this.appLists[this.state.currentWs] !== 'undefined') {
       return this.appLists[this.state.currentWs];
     } else if (typeof this.appLists[0] !== 'undefined') {
@@ -680,7 +714,7 @@ MyApplet.prototype = {
     }
   },
 
-  getAutoStartApps: function(){
+  getAutoStartApps: function() {
     let info, autoStartDir;
 
     let getChildren = () => {
@@ -938,27 +972,26 @@ MyApplet.prototype = {
   },
 
   _onSwitchWorkspace: function () {
-    this.state.set({currentWs: global.screen.get_active_workspace_index()});
-    let metaWorkspace = global.screen.get_workspace_by_index(this.state.currentWs);
+    setTimeout(() => {
+      this.state.set({currentWs: global.screen.get_active_workspace_index()});
+      let metaWorkspace = global.screen.get_workspace_by_index(this.state.currentWs);
 
-    // If the workspace we switched to isn't in our list,
-    // we need to create an AppList for it
-    let refWorkspace = findIndex(this.appLists, (item) => item.index === this.state.currentWs);
+      // If the workspace we switched to isn't in our list,
+      // we need to create an AppList for it
+      let refWorkspace = findIndex(this.appLists, (item) => item.metaWorkspace && isEqual(item.metaWorkspace, metaWorkspace));
 
-    if (refWorkspace === -1) {
-      this.appLists.push(new AppList({
-        metaWorkspace: metaWorkspace,
-        state: this.state,
-        index: this.state.currentWs
-      }));
-    }
+      if (refWorkspace === -1) {
+        this.appLists.push(new AppList({
+          metaWorkspace: metaWorkspace,
+          state: this.state,
+          index: this.state.currentWs
+        }));
+        refWorkspace = this.appLists.length - 1;
+      }
 
-    if (refWorkspace === -1) {
-      refWorkspace = this.appLists.length - 1;
-    }
-
-    this.actor.remove_all_children();
-    this.actor.add_child(this.appLists[refWorkspace].actor);
+      this.actor.remove_all_children();
+      this.actor.add_child(this.appLists[refWorkspace].actor);
+    }, 0);
   },
 
   _onOverviewShow: function () {

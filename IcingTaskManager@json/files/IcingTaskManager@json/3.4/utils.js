@@ -126,6 +126,21 @@ const filter = function (arr, cb) {
   return result;
 };
 
+const map = function (arr, fn) {
+  if (arr == null) {
+    return [];
+  }
+
+  let len = arr.length;
+  let out = Array(len);
+
+  for (let i = 0; i < len; i++) {
+    out[i] = fn(arr[i], i, arr);
+  }
+
+  return out;
+}
+
 const tryFn = function(fn, errCb) {
   try {
     return fn();

@@ -628,7 +628,7 @@ AppGroup.prototype = {
       || this.groupState.willUnmount) {
       return;
     }
-    let windows = this.groupState.app.get_windows();
+    let windows = this.groupState.metaWindows;
     for (let i = 0, len = windows.length; i < len; i++) {
       if (isEqual(windows[i], window)) {
         this.getAttention();
@@ -711,11 +711,8 @@ AppGroup.prototype = {
       return;
     }
 
-    let appWindows = this.state.settings.groupApps ? this.groupState.app.get_windows() : [this.groupState.metaWindows[0]];
-    let appWindowsLen = appWindows.length;
-
     let handleMinimizeToggle = (win)=>{
-      if (this.state.settings.onClickThumbs && appWindowsLen > 1) {
+      if (this.state.settings.onClickThumbs && this.groupState.metaWindows.length > 1) {
         if (this.hoverMenu.isOpen) {
           this.hoverMenu.close();
         } else {
@@ -742,19 +739,19 @@ AppGroup.prototype = {
       if (this.rightClickMenu.isOpen) {
         this.rightClickMenu.toggle();
       }
-      if (appWindows.length === 1) {
-        handleMinimizeToggle(appWindows[0]);
+      if (this.groupState.metaWindows.length === 1) {
+        handleMinimizeToggle(this.groupState.metaWindows[0]);
       } else {
         let actionTaken = false;
-        for (let i = 0, len = appWindows.length; i < len; i++) {
-          if (this.groupState.lastFocused && isEqual(appWindows[i], this.groupState.lastFocused)) {
-            handleMinimizeToggle(appWindows[i]);
+        for (let i = 0, len = this.groupState.metaWindows.length; i < len; i++) {
+          if (this.groupState.lastFocused && isEqual(this.groupState.metaWindows[i], this.groupState.lastFocused)) {
+            handleMinimizeToggle(this.groupState.metaWindows[i]);
             actionTaken = true;
             break;
           }
         }
         if (!actionTaken) {
-          handleMinimizeToggle(appWindows[0]);
+          handleMinimizeToggle(this.groupState.metaWindows[0]);
         }
       }
     } else if (button === 3) {
@@ -835,7 +832,13 @@ AppGroup.prototype = {
       windowAddArgs = windowAddArgs && this.state.trigger('isWindowInteresting', metaWindow);
     }
     if (this.state.appletReady && metaWindow && this.state.settings.listMonitorWindows) {
-      windowAddArgs = windowAddArgs && (this.state.monitorWatchList.indexOf(metaWindow.get_monitor()) > -1 || this.state.monitorWatchList.length === 0);
+      windowAddArgs = windowAddArgs
+        && (this.state.monitorWatchList.indexOf(metaWindow.get_monitor()) > -1
+          || this.state.monitorWatchList.length === 0);
+    }
+    if (!this.state.settings.showAllWorkspaces) {
+      windowAddArgs = windowAddArgs && (metaWindow.is_on_all_workspaces()
+        || isEqual(metaWindow.get_workspace(), this.listState.trigger('getWorkspace')));
     }
     return windowAddArgs;
   },
@@ -913,6 +916,9 @@ AppGroup.prototype = {
   },
 
   _onAppChange: function(metaWindow) {
+    if (!this.listState) {
+      return;
+    }
     this.listState.trigger('_windowRemoved', metaWindow);
     this.listState.trigger('_windowAdded', metaWindow);
   },

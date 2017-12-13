@@ -125,11 +125,17 @@ AppMenuButtonRightClickMenu.prototype = {
       if ((length = global.screen.n_workspaces) > 1) {
         if (this.groupState.lastFocused.is_on_all_workspaces()) {
           item = createMenuItem({label: _('Only on this workspace')});
-          this.signals.connect(item, 'activate', () => this.groupState.lastFocused.unstick());
+          this.signals.connect(item, 'activate', () => {
+            this.groupState.lastFocused.unstick();
+            this.state.trigger('removeWindowFromOtherWorkspaces', this.groupState.lastFocused);
+          });
           this.addMenuItem(item);
         } else {
           item = createMenuItem({label: _('Visible on all workspaces')});
-          this.signals.connect(item, 'activate', () => this.groupState.lastFocused.stick());
+          this.signals.connect(item, 'activate', () => {
+            this.groupState.lastFocused.stick();
+            this.state.trigger('addWindowToAllWorkspaces', this.groupState.lastFocused);
+          });
           this.addMenuItem(item);
 
           item = new PopupMenu.PopupSubMenuMenuItem(_('Move to another workspace'));
@@ -561,7 +567,8 @@ AppThumbnailHoverMenu.prototype = {
   close: function (force) {
     if (!force && (!this.shouldClose
       || (!this.shouldClose && this.state.settings.onClickThumbs))
-      || !this.groupState) {
+      || !this.groupState
+      || !this.groupState.tooltip) {
       return;
     }
     if (!this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
