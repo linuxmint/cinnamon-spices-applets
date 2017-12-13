@@ -112,7 +112,7 @@ AppMenuButtonRightClickMenu.prototype = {
           this.signals.connect(item, 'activate', Lang.bind(this, this.monitorMoveWindows, i));
         };
         for (let i = 0, len = Main.layoutManager.monitors.length; i < len; i++) {
-          if (i === this.groupState.lastFocused.get_monitor()) {
+          if (!this.groupState.lastFocused || i === this.groupState.lastFocused.get_monitor()) {
             continue;
           }
           item = createMenuItem({label: Main.layoutManager.monitors.length === 2 ? _('Move to the other monitor') : _('Move to monitor ') + (i + 1).toString()});

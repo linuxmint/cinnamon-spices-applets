@@ -133,7 +133,7 @@ PinnedFavs.prototype = {
   _onFavoritesChange: function() {
     if (!this.params.state.settings.groupApps) {
       let currentAppList = this.params.state.trigger('getCurrentAppList');
-      currentAppList._refreshList();
+      setTimeout(() => currentAppList._refreshList(), 0);
       return;
     }
     let oldFavoritesIds = [];
