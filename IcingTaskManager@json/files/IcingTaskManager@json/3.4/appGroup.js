@@ -127,7 +127,8 @@ AppGroup.prototype = {
 
     this.groupState.connect({
       isFavoriteApp: () => this.handleFavorite(true),
-      getActor: () => this.actor
+      getActor: () => this.actor,
+      launchNewInstance: () => this.launchNewInstance()
     });
 
     this.signals = new SignalManager.SignalManager({});
@@ -686,9 +687,14 @@ AppGroup.prototype = {
     return this.actor;
   },
 
-  showOrderLabel: function (number){
+  showOrderLabel: function (number) {
     this._numLabel.text = (number + 1).toString();
     this._numLabel.show();
+  },
+
+  launchNewInstance: function() {
+    this.groupState.app.open_new_window(-1);
+    this._animate();
   },
 
   _onAppButtonRelease: function(actor, event) {
@@ -701,8 +707,7 @@ AppGroup.prototype = {
     let shouldEndInstance = button === 2 && this.state.settings.middleClickAction === 3 && this.groupState.lastFocused;
 
     if (shouldStartInstance) {
-      this.groupState.app.open_new_window(-1);
-      this._animate();
+      this.launchNewInstance();
       return;
     }
 
@@ -778,8 +783,7 @@ AppGroup.prototype = {
 
   _onAppKeyPress: function () {
     if (this.groupState.isFavoriteApp && this.groupState.metaWindows.length === 0) {
-      this.groupState.app.open_new_window(-1);
-      this._animate();
+      this.launchNewInstance();
     } else {
       if (this.groupState.metaWindows.length > 1) {
         this.hoverMenu.open(true);
@@ -788,11 +792,6 @@ AppGroup.prototype = {
       }
       this._windowHandle(false);
     }
-  },
-
-  _onNewAppKeyPress: function () {
-    this.groupState.app.open_new_window(-1);
-    this._animate();
   },
 
   _windowHandle: function () {

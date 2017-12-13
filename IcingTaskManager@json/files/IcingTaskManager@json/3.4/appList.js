@@ -130,7 +130,7 @@ AppList.prototype = {
     if (number > this.appList.length) {
       return;
     }
-    this.appList[number - 1]._onNewAppKeyPress(number);
+    this.appList[number - 1].launchNewInstance();
   },
 
   _showAppsOrder: function(){

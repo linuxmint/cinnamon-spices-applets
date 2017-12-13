@@ -404,6 +404,7 @@ MyApplet.prototype = {
       {key: 'menuItemType', value: 'menuItemType', cb: null},
       {key: 'firefox-menu', value: 'firefoxMenu', cb: null},
       {key: 'autostart-menu-item', value: 'autoStart', cb: null},
+      {key: 'launch-new-instance-menu-item', value: 'launchNewInstance', cb: null},
       {key: 'monitor-move-all-windows', value: 'monitorMoveAllWindows', cb: null},
       {key: 'enable-app-button-width', value: 'enableAppButtonWidth', cb: this._updateActorAttributes},
       {key: 'app-button-width', value: 'appButtonWidth', cb: this._updateActorAttributes},

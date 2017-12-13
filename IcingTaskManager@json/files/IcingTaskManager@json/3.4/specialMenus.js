@@ -96,6 +96,7 @@ AppMenuButtonRightClickMenu.prototype = {
     let item;
     let length;
     let hasWindows = this.groupState.metaWindows.length > 0;
+    let isWindowBacked = this.groupState.app.is_window_backed();
 
     let createMenuItem = (opts={label: '', icon: null}) => {
       if (this.state.settings.menuItemType < 3 && opts.icon) {
@@ -262,10 +263,12 @@ AppMenuButtonRightClickMenu.prototype = {
     subMenu.menu.addMenuItem(item);
 
     // Actions
-    let actions = null;
     tryFn(() => {
-      actions = this.groupState.appInfo.list_actions();
-      if (this.groupState.appInfo && actions) {
+      if (!this.groupState.appInfo) {
+        return;
+      }
+      let actions = this.groupState.appInfo.list_actions();
+      if (actions) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         let handleAction = (action)=>{
           item = createMenuItem({label: _(this.groupState.appInfo.get_action_name(action)), icon: 'document-new'});
@@ -280,15 +283,27 @@ AppMenuButtonRightClickMenu.prototype = {
         }
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
+      if (this.state.settings.launchNewInstance
+        && (!actions || actions.length === 0)
+        && !isWindowBacked) {
+        item = createMenuItem({label: _('New Window'), icon: 'document-new'});
+        this.signals.connect(item, 'activate', () => {
+          this.groupState.trigger('launchNewInstance');
+        });
+        this.addMenuItem(item);
+        if (!actions || actions.length === 0) {
+          this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        }
+      }
     }, () => {
-      if (this.groupState.app.is_window_backed()) {
+      if (isWindowBacked) {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
     });
 
     // Pin/unpin, shortcut handling
-    if (!this.groupState.app.is_window_backed()) {
-      if (this.state.settings.showPinned !== constants.FavType.none && !this.groupState.app.is_window_backed()) {
+    if (!isWindowBacked) {
+      if (this.state.settings.showPinned !== constants.FavType.none) {
         let label = this.groupState.isFavoriteApp ? _('Unpin from Panel') : _('Pin to Panel');
         this.pinToggleItem = createMenuItem({label: label, icon: 'bookmark-new'});
         this.signals.connect(this.pinToggleItem, 'activate', Lang.bind(this, this._toggleFav));
@@ -309,11 +324,12 @@ AppMenuButtonRightClickMenu.prototype = {
 
     // Window controls
     if (hasWindows) {
+      let metaWindowActor = this.groupState.lastFocused.get_compositor_private();
       // Miscellaneous
-      if (this.groupState.lastFocused.get_compositor_private().opacity !== 255) {
+      if (metaWindowActor.opacity !== 255) {
         item = createMenuItem({label: _('Restore to full opacity')});
         this.signals.connect(item, 'activate', () => {
-          this.groupState.lastFocused.get_compositor_private().set_opacity(255);
+          metaWindowActor.set_opacity(255);
         });
         this.addMenuItem(item);
       }
