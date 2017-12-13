@@ -1,11 +1,16 @@
 {
   "layout": {
     "type" : "layout",
-    "pages": ["panelPage", "thumbnailsPage", "contextMenuPage", "themePage"],
+    "pages": ["generalPage", "panelPage", "thumbnailsPage", "contextMenuPage", "themePage"],
+    "generalPage": {
+      "type" : "page",
+      "title" : "General",
+      "sections": ["generalSection", "hotKeysSection"]
+    },
     "panelPage": {
       "type" : "page",
       "title" : "Panel",
-      "sections": ["appButtonsSection", "hotKeysSection"]
+      "sections": ["appButtonsSection"]
     },
     "thumbnailsPage": {
       "type" : "page",
@@ -22,6 +27,20 @@
       "title" : "Theming",
       "sections": ["stylingSection", "iconSection", "presetSection"]
     },
+    "generalSection": {
+      "type" : "section",
+      "title" : "Behavior",
+      "keys": [
+        "group-apps",
+        "scroll-behavior",
+        "left-click-action",
+        "middle-click-action",
+        "system-favorites",
+        "list-monitor-windows",
+        "show-all-workspaces",
+        "include-all-windows"
+      ]
+    },
     "appButtonsSection": {
       "type" : "section",
       "title" : "App Buttons",
@@ -30,18 +49,11 @@
         "app-button-width",
         "number-display",
         "title-display",
-        "scroll-behavior",
-        "left-click-action",
-        "middle-click-action",
         "pinned-apps",
-        "group-apps",
         "show-alerts",
         "show-pinned",
-        "system-favorites",
         "enable-app-button-dragging",
-        "pinOnDrag",
-        "list-monitor-windows",
-        "include-all-windows"
+        "pinOnDrag"
       ]
     },
     "hotKeysSection": {
@@ -400,7 +412,7 @@
   },
   "launch-new-instance-menu-item": {
     "type": "checkbox",
-    "default": true,
+    "default": false,
     "description": "Show new window option",
     "tooltip": "Shows the \"New Window\" option in an app's context menu if it doesn't already have one from the app's own action menu items."
   },
