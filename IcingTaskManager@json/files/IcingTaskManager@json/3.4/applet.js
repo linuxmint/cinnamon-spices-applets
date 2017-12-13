@@ -97,9 +97,6 @@ PinnedFavs.prototype = {
   },
 
   triggerUpdate: function (appId, pos, isFavoriteApp) {
-    if (!this.params.state.settings.groupApps) {
-      return;
-    }
     let currentAppList = this.params.state.trigger('getCurrentAppList');
     let refApp = currentAppList.appList.findIndex(appGroup => appGroup.groupState.appId === appId);
     if (refApp > -1) {
@@ -134,6 +131,11 @@ PinnedFavs.prototype = {
   },
 
   _onFavoritesChange: function() {
+    if (!this.params.state.settings.groupApps) {
+      let currentAppList = this.params.state.trigger('getCurrentAppList');
+      currentAppList._refreshList();
+      return;
+    }
     let oldFavoritesIds = [];
     let newFavoritesIds = [];
     for (let i = 0; i < this._favorites.length; i++) {
@@ -193,7 +195,7 @@ PinnedFavs.prototype = {
   },
 
   moveFavoriteToPos: function (opts, oldIndex) {
-    if (!oldIndex) {
+    if (!oldIndex || !this.params.state.settings.groupApps) {
       oldIndex = findIndex(this._favorites, function(favorite) {
         return favorite.id === opts.appId;
       });
@@ -210,6 +212,19 @@ PinnedFavs.prototype = {
     }).filter(function(renderedFavorite) {
       return favoriteIds.indexOf(renderedFavorite.id) > -1
     });
+    if (!this.params.state.settings.groupApps) {
+      let matched = [];
+      each(renderedFavoriteApps, function(favorite) {
+        let refFavorite = findIndex(matched, function(match) {
+          return match.id === favorite.id;
+        });
+        if (refFavorite > -1) {
+          return;
+        }
+        matched.push(favorite);
+      });
+      renderedFavoriteApps = matched;
+    }
     renderedFavoriteApps = renderedFavoriteApps
       .slice(0, opts.pos)
       .concat([{id:  opts.appId, app: opts.app}])
