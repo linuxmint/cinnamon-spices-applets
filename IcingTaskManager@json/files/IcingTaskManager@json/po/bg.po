@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-09 03:01-0600\n"
+"POT-Creation-Date: 2017-12-13 19:04+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
@@ -902,69 +902,68 @@ msgstr "Списък с прозорци с групиране на прилож
 #. 3.4->settings-schema.json->hoverPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
 msgid "checked"
-msgstr ""
+msgstr "маркирано"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->description
-#, fuzzy
 msgid "App button transition duration"
-msgstr "Ширина на бутона"
+msgstr "Продължителност на прехода на бутона на приложението"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->tooltip
 msgid ""
 "Overrides the theme's animation time for app buttons. If set to zero, the "
 "theme's transition duration will be used."
 msgstr ""
+"Презаписва времето за анимация на темата за бутоните. Ако е нула, ще се "
+"използва времето за преход на темата."
 
 #. 3.4->settings-schema.json->app-button-transition-duration->units
 msgid "ms"
-msgstr ""
+msgstr "мс"
 
 #. 3.4->settings-schema.json->generalSection->title
 msgid "Behavior"
-msgstr ""
+msgstr "Поведение"
 
 #. 3.4->settings-schema.json->generalPage->title
 msgid "General"
-msgstr ""
+msgstr "Общи"
 
 #. 3.4->settings-schema.json->show-icons->description
-#, fuzzy
 msgid "Show icons"
-msgstr "Без иконки"
+msgstr "Показва иконки"
 
 #. 3.4->settings-schema.json->show-icons->tooltip
 msgid "Show the window's icon next to the title."
-msgstr ""
+msgstr "Покажи иконката на прозореца до заглавието."
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->description
-#, fuzzy
 msgid "Show new window option"
-msgstr "Показване на опцията за автоматично пускане"
+msgstr "Показване на опцията за нов прозорец"
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
 msgid ""
 "Shows the \"New Window\" option in an app's context menu if it doesn't "
 "already have one from the app's own action menu items."
 msgstr ""
+"Показва \"Нов прозорец\" опцията в контекстното меню на приложението, ако "
+"приложението няма такава в менюто си."
 
 #. 3.4->settings-schema.json->show-all-workspaces->description
 #. 3.4->settings-schema.json->show-all-workspaces->tooltip
-#, fuzzy
 msgid "Show windows from all workspaces"
-msgstr "Видимо на всички работни места"
+msgstr "Показва прозорците от всички работни места"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
 msgid "Cycle windows on mouse wheel scroll"
-msgstr ""
+msgstr "Превключване на прозорци със скрола на мишката"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
-#, fuzzy
 msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
-"Изберете дали да включите превъртането на работещите приложения с колелцето "
-"на мишката."
+"Изберете дали скрол с колелцето на мишката ще превключва прозорците, при "
+"посочване на менюто на миниатюрата."
 
 #~ msgid "number"
 #~ msgstr "число"
