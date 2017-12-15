@@ -1,0 +1,63 @@
+# VPN Look-Out Applet
+
+## Summary
+
+This is a simple applet that I wrote because I often saw too late that my VPN was shut down.
+
+This applet shows the state of the VPN (connected or disconnected) using colored icons. It can be used on horizontal or vertical panel.
+
+But also, it can try to reconnect when VPN shuts down incidentally, and it can close the Transmission program when VPN shuts down and restart it when VPN restarts.
+
+## Status
+
+Fully supported by Author, under continuing development and in continuous use on several machines. 
+
+## Features
+
+The VPN Look-Out Applet normally shows an icon that changes color depending on the state of the VPN connection :
+
+  * Green: the VPN is connected.
+  * Red: the VPN is disconnected.
+  * Grey: waiting for VPN status (only when the applet starts, for a few seconds, or if it's misconfigured).
+
+When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection. By example: 
+
+  VPN: Connected (Amsterdam)
+
+The most important settings are accessible by the menu (by left or right click on applet icon). For all of them, see Settings in the Right Click Menu.
+
+Settings :
+  * VPN Network Interface (default: tun0).
+  * VPN Name (name of the connection, automatically filled in, you can change for other existing connection name).
+  * ***Try (or don't try) to reconnect to VPN when it shuts down incidentally.***
+  * Refresh Interval for Display (from 1 to 60 seconds).
+  * Type of Display : Icon, with or without text 'VPN'.
+  * Emit (or don't emit) a sound alert when VPN shuts down.
+  * Emit (or don't emit) this sound alert when this Applet starts, if VPN is down.
+  * Shut down (or not) properly Transmission as soon as VPN falls.
+  * Try (or don't try) to restart Transmission as soon as VPN restarts.
+
+## Translations and other Contributions
+
+The internal changes required in the applet to allow translations are implemented and several translations are available. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I will rarely be able to take responsibility for the accuracy of translations!
+
+Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+
+The installation of the available languages are automatically made, but the messages will only be translated at the next Cinnamon startup.
+
+## Requirements:
+
+Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions been tested on Cinnamon 3.4.6 and Mint 18.2. 
+    
+For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
+ 
+        sudo apt-get install zenity sox libsox-fmt-mp3
+
+## Manual Installation:
+  
+   * Install the additional programs required.
+   * Download the VPN Look-Out Applet from the Spices Web Site
+   * Unzip and extract folder ```vpnLookOut@claudiux``` to ```~/.local/share/cinnamon/applets/```
+   * Enable the applet in System Settings -> Applets
+   * You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
+
