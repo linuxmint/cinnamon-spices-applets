@@ -1,0 +1,26 @@
+/* 
+Style sheet for the VPN Look-Out Applet.
+This can be edited at your own risk to harmonise with your chosen style.
+NOTE: It will be overwritten when the applet is updated so save your modifications somewhere else before updating then replace them.
+*/
+
+.vsa-normal {
+
+background-color: rgba(0,255,0,0.3);
+border-radius: 10px;
+border: 2px;
+border-color: rgba(0,255,0,0.3);
+font-size: 95%;
+}
+
+.vsa-alert {
+background-color: red;
+border-radius: 10px;
+border: 2px;
+border-color: red;
+font-size: 95%;
+}
+
+/*
+Last Modified 24 Nov 2017
+*/
