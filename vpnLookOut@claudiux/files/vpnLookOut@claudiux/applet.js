@@ -27,8 +27,8 @@ const Main = imports.ui.main; // ++ Needed for criticalNotify()
 
 var UUID;
 function _(str) {
-	 let customTrans = Gettext.dgettext(UUID, str);
-	 if (customTrans !== str && customTrans !== "")
+	let customTrans = Gettext.dgettext(UUID, str);
+	if (customTrans !== str && customTrans !== "")
 		return customTrans;
 	return Gettext.gettext(str);
 }
@@ -74,7 +74,7 @@ MyApplet.prototype = {
 
 	_init: function (metadata, orientation, panelHeight, instance_id) {
 		Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
-		try {
+		//try {
 			this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
 
 			if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
@@ -217,9 +217,9 @@ MyApplet.prototype = {
 			this.set_applet_tooltip(_("Waiting"));
 			this.on_settings_changed()   // This starts the MainLoop timer loop
 
-		} catch (e) {
-			global.logError(e);
-		}
+		//} catch (e) {
+		//	global.logError(e);
+		//}
 	},
 
 	execInstallLanguage: function() {
@@ -303,6 +303,13 @@ MyApplet.prototype = {
 	
 	on_checkbox_reconnect_changed: function() {
 		this.reconnect = !this.reconnect ; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
+		if (this.reconnect) {
+			this.button_connect.actor.hide();
+			this.button_connect2.actor.hide()
+		} else {
+			this.button_connect.actor.show();
+			this.button_connect2.actor.show()
+		}
 	},
 	
 	on_checkbox_stopTransmission_changed: function() {
@@ -321,7 +328,7 @@ MyApplet.prototype = {
 		this.vpnStatus == "waiting";
 		this.vpnIcon = this.vpnwait ;
 		this.set_applet_icon_path(this.vpnIcon) ;
-		if ( this.vpnName != "" ) {
+		if (this.vpnInterface != "" && this.vpnName != "") {
 			if (this.vpnStatus != "on") {
 				GLib.spawn_command_line_async('bash -c "/usr/bin/nmcli connection up ' + this.vpnName + '"')
 			} else {
@@ -332,7 +339,7 @@ MyApplet.prototype = {
 
 	// ++ Build the Right Click Context Menu
 	buildContextMenu: function() {
-		try {
+		//try {
 			this._applet_context_menu.removeAll();
 
 			this.contextmenuitemHead1 = new PopupMenu.PopupMenuItem(_("VPN Look-Out Applet"), {
@@ -361,14 +368,24 @@ MyApplet.prototype = {
 			this.checkbox_restartTransmission2.connect("toggled", Lang.bind(this, this.on_checkbox_restartTransmission_changed));
 			this._applet_context_menu.addMenuItem(this.checkbox_restartTransmission2);
 			
-		} catch (e) {
-			global.logError(e);
-		}
+			this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+			
+			// button connect/disconnect
+			this.button_connect2 = new PopupMenu.PopupSwitchMenuItem(_("Connection ON/OFF"), false);
+			this.button_connect2.connect("toggled", Lang.bind(this, this.on_button_connect));
+			this._applet_context_menu.addMenuItem(this.button_connect2);
+			// this button must appear only if auto-reconnect is inactive
+			if (this.vpnInterface != "" && this.vpnName != "" && this.reconnect) {
+				this.button_connect2.actor.hide()
+			}
+		//} catch (e) {
+		//	global.logError(e);
+		//}
 	},
 
 	//++ Build the Left Click Menu 
 	makeMenu: function() {
-		try {
+		//try {
 			this.menu.removeAll();
 
 			this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("VPN Look-Out Applet"), {
@@ -380,15 +397,6 @@ MyApplet.prototype = {
 				reactive: false
 			});
 			this.menu.addMenuItem(this.menuitemInfo2);
-			
-			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-			
-			// this button must appear only if VPN is disconnected and auto-reconnect is inactive
-			if (this.vpnInterface != "" && this.vpnName != "") {
-				this.button_connect = new PopupMenu.PopupSwitchMenuItem(_("Connection ON/OFF"), false);
-				this.button_connect.connect("toggled", Lang.bind(this, this.on_button_connect));
-				this.menu.addMenuItem(this.button_connect);
-			}
 			
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 			
@@ -405,10 +413,21 @@ MyApplet.prototype = {
 			this.checkbox_restartTransmission = new PopupMenu.PopupSwitchMenuItem(_("Try to restart Transmission as soon as VPN restarts."), this.restartTransmission);
 			this.checkbox_restartTransmission.connect("toggled", Lang.bind(this, this.on_checkbox_restartTransmission_changed));
 			this.menu.addMenuItem(this.checkbox_restartTransmission);
+			
+			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+			
+			// button connect/disconnect
+			this.button_connect = new PopupMenu.PopupSwitchMenuItem(_("Connection ON/OFF"), false);
+			this.button_connect.connect("toggled", Lang.bind(this, this.on_button_connect));
+			this.menu.addMenuItem(this.button_connect);
+			// this button must appear only if auto-reconnect is inactive
+			if (this.vpnInterface != "" && this.vpnName != "" && this.reconnect) {
+				this.button_connect.actor.hide()
+			}
 
-		} catch (e) {
-			global.logError(e);
-		}
+		//} catch (e) {
+		//	global.logError(e);
+		//}
 	},
 
 	//++ Handler for when the applet is clicked. 
@@ -420,7 +439,7 @@ MyApplet.prototype = {
 	// This updates the numerical display in the applet and in the tooltip
 	updateUI: function() {
 
-		try {
+		//try {
 			this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
 			if ( this.vpnStatus.trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
 				 this.vpnStatus = this.vpnStatus.trim().substr(5); // removing 'true,'
@@ -435,12 +454,14 @@ MyApplet.prototype = {
 			// Now select icon to display
 			if (this.vpnStatus == "on") {
 				this.vpnIcon = this.vpnon ;
-				if (this.vpnName != "") {
+				if (this.vpnInterface != "" && this.vpnName != "") {
 					this.button_connect.setStatus(_("Click to disconnect from VPN")+' '+this.vpnName);
-					this.button_connect.setToggleState(true)
+					this.button_connect.setToggleState(true);
+					this.button_connect2.setStatus(_("Click to disconnect from VPN")+' '+this.vpnName);
+					this.button_connect2.setToggleState(true)
 				}
 				this.alertFlag = false ;
-				vpnName = GLib.file_get_contents("/tmp/.vpn_name").toString().trim().substr(5);
+				let vpnName = GLib.file_get_contents("/tmp/.vpn_name").toString().trim().substr(5);
 				if (vpnName != "") {
 					this.vpnName = vpnName
 				} ;
@@ -452,9 +473,11 @@ MyApplet.prototype = {
 			} else if (this.vpnStatus == "off") {
 				this.vpnIcon = this.vpnoff ;
 				this.vpnMessage = _("Disconnected") ;
-				if (this.vpnName != "") {
+				if (this.vpnInterface != "" && this.vpnName != "") {
 					this.button_connect.setStatus(_("Click to connect to VPN")+' '+this.vpnName);
-					this.button_connect.setToggleState(false)
+					this.button_connect.setToggleState(false);
+					this.button_connect2.setStatus(_("Click to connect to VPN")+' '+this.vpnName);
+					this.button_connect2.setToggleState(false)
 				}
 				if ( !this.alertFlag ) {
 					if ( this.useSoundAlert ) { // Sound alert
@@ -483,9 +506,9 @@ MyApplet.prototype = {
 			// Get VPN Status via asyncronous script ready for next cycle
 			GLib.spawn_command_line_async('sh ' + this.vpnscript + ' ' + this.vpnInterface);
 
-		} catch (e) {
-			global.logError(e);
-		}
+		//} catch (e) {
+		//	global.logError(e);
+		//}
 	},
 
 	// This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
