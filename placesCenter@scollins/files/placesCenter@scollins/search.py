@@ -104,7 +104,7 @@ class SearchWindow(Gtk.Window):
 
         # location selector
         leftPane.pack_start(Gtk.Label(_("Start in"), halign=Gtk.Align.START), False, False, 5)
-        self.location = Gtk.FileChooserButton.new("Select a folder", Gtk.FileChooserAction.SELECT_FOLDER)
+        self.location = Gtk.FileChooserButton.new(_("Select a folder"), Gtk.FileChooserAction.SELECT_FOLDER)
         leftPane.add(self.location)
         if not basePath is None:
             self.location.set_filename(basePath)
@@ -181,7 +181,7 @@ class SearchWindow(Gtk.Window):
             return
 
         self.results.clear()
-        self.setStatusText(("Searching..."))
+        self.setStatusText(_("Searching..."))
 
         self.searching = True
         self.dirs = []
@@ -256,7 +256,7 @@ class SearchWindow(Gtk.Window):
             return False
         else:
             if os.path.realpath(path) in self.dirs:
-                GObject.idle_add(_(self.setStatusText, "Skipping ") + path + (_(" - direcotry already searched")))
+                GObject.idle_add(self.setStatusText, _("Skipping") + ' ' + path + (_(" - direcotry already searched")))
                 return True
 
     def isMatch(self, key, child):
