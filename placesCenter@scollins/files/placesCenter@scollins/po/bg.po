@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-19 22:51+0200\n"
-"PO-Revision-Date: 2017-11-19 22:54+0200\n"
+"POT-Creation-Date: 2017-12-20 20:18+0200\n"
+"PO-Revision-Date: 2017-12-20 20:20+0200\n"
 "Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
 "Language: bg\n"
@@ -58,108 +58,155 @@ msgstr "Мрежа"
 msgid "Trash"
 msgstr "Кошче"
 
-#. placesCenter@scollins->settings-schema.json->panelIcon->description
+#: search.py:43
+msgid "Open..."
+msgstr "Отваряне..."
+
+#: search.py:48
+msgid "Open Containing Folder..."
+msgstr "Отваряне на съдържащата папка..."
+
+#: search.py:85
+msgid "Search"
+msgstr "Търсене"
+
+#: search.py:106
+msgid "Start in"
+msgstr "Стартирай в"
+
+#: search.py:107
+msgid "Select a folder"
+msgstr "Избор на папка"
+
+#: search.py:113
+msgid "Follow symlinks"
+msgstr "Следвай символните връзки"
+
+#: search.py:117
+msgid "Search hidden"
+msgstr "Търси в скритите"
+
+#: search.py:121
+msgid "Use regular expressions"
+msgstr "Използване на регулярни изрази"
+
+#: search.py:125
+msgid "Stop"
+msgstr "Спри"
+
+#: search.py:140
+msgid "File"
+msgstr "Файл"
+
+#: search.py:156
+msgid "Path"
+msgstr "Път"
+
+#: search.py:184
+msgid "Searching..."
+msgstr "Търсене..."
+
+#: search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr "Търсенето е спряно"
+
+#: search.py:215
+msgid "Searching: "
+msgstr "Търсене: "
+
+#: search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Грешка: недостатъчно права за прочитане на папката"
+
+#: search.py:252
+msgid "Search Completed"
+msgstr "Търсенето завърши"
+
+#: search.py:259
+msgid "Skipping"
+msgstr "Пропускане"
+
+#: search.py:259
+msgid " - direcotry already searched"
+msgstr " - директорията е вече претърсена"
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Общи"
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr "Потребител"
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Система"
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr "Последни документи"
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Настройки на панела"
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Настройки на менюто"
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Секция потребител"
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Секция система"
+
+#. settings-schema.json->panelIcon->description
 msgid "Panel icon"
 msgstr "Иконка в панела"
 
-#. placesCenter@scollins->settings-schema.json->panelIcon->tooltip
+#. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
 msgstr ""
 "Приемат се имена на иконки или директен път (поддържат се символни иконки)"
 
-#. placesCenter@scollins->settings-schema.json->showComputer->description
-msgid "Show computer"
-msgstr "Покажи компютър"
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Текст в панела"
 
-#. placesCenter@scollins->settings-schema.json->showRoot->description
-msgid "Show file system"
-msgstr "Покажи фаловата система"
-
-#. placesCenter@scollins->settings-schema.json->recentSection->title
-#. placesCenter@scollins->settings-schema.json->recentPage->title
-msgid "Recent documents"
-msgstr "Последни документи"
-
-#. placesCenter@scollins->settings-schema.json->generalPage->title
-msgid "General"
-msgstr "Общи"
-
-#. placesCenter@scollins->settings-schema.json->systemSection->title
-msgid "System section"
-msgstr "Секция система"
-
-#. placesCenter@scollins->settings-schema.json->userPage->title
-msgid "User"
-msgstr "Потребител"
-
-#. placesCenter@scollins->settings-schema.json->menu->title
-msgid "Menu settings"
-msgstr "Настройки на менюто"
-
-#. placesCenter@scollins->settings-schema.json->userSection->title
-msgid "User section"
-msgstr "Секция потребител"
-
-#. placesCenter@scollins->settings-schema.json->systemPage->title
-msgid "System"
-msgstr "Система"
-
-#. placesCenter@scollins->settings-schema.json->panel->title
-msgid "Panel settings"
-msgstr "Настройки на панела"
-
-#. placesCenter@scollins->settings-schema.json->keyOpen->description
+#. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
 msgstr "Пряк път за меню"
 
-#. placesCenter@scollins->settings-schema.json->middleClickPath->description
-msgid "Open on middle click"
-msgstr "Отвори при клик с колелцето"
-
-#. placesCenter@scollins->settings-schema.json->middleClickPath->tooltip
-msgid "Leave blank to disable"
-msgstr "Остави празно за изключване"
-
-#. placesCenter@scollins->settings-schema.json->iconSize->description
-msgid "Menu icon size"
-msgstr "Размер на иконките в менюто"
-
-#. placesCenter@scollins->settings-schema.json->iconSize->units
+#. settings-schema.json->iconSize->units
 msgid "px"
 msgstr "пкс"
 
-#. placesCenter@scollins->settings-schema.json->showTrash->description
-msgid "Show trash"
-msgstr "Показване на кошчето"
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Размер на иконките в менюто"
 
-#. placesCenter@scollins->settings-schema.json->showTrash->options
-msgid "Always"
-msgstr "Винаги"
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Отвори при клик с колелцето"
 
-#. placesCenter@scollins->settings-schema.json->showTrash->options
-msgid "Never"
-msgstr "Никога"
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Остави празно за изключване"
 
-#. placesCenter@scollins->settings-schema.json->showTrash->options
-msgid "When not empty"
-msgstr "Когато не е празно"
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Показване на работния плот"
 
-#. placesCenter@scollins->settings-schema.json->showVolumes->description
-msgid "Show volumes"
-msgstr "Показвай устройства"
-
-#. placesCenter@scollins->settings-schema.json->recentSizeLimit->description
-msgid "Number to show"
-msgstr "Брой за показване"
-
-#. placesCenter@scollins->settings-schema.json->userCustomPlaces->description
-#. placesCenter@scollins->settings-
-#. schema.json->systemCustomPlaces->description
+#. settings-schema.json->userCustomPlaces->description
+#. settings-schema.json->systemCustomPlaces->description
 msgid "Custom places"
 msgstr "Допълнителни места"
 
-#. placesCenter@scollins->settings-schema.json->userCustomPlaces->tooltip
-#. placesCenter@scollins->settings-schema.json->systemCustomPlaces->tooltip
+#. settings-schema.json->userCustomPlaces->tooltip
+#. settings-schema.json->systemCustomPlaces->tooltip
 msgid ""
 "List of uris/file paths to be included. Entries may be separated by either a "
 "comma(,) or by a new-line. You can set the name to be displayed by adding :"
@@ -171,40 +218,59 @@ msgstr ""
 "добавите :вашеИме след локацията. Също може да зададете иконка като "
 "добавите :имеНаИконка след зададеното име."
 
-#. placesCenter@scollins->settings-schema.json->panelText->description
-msgid "Panel text"
-msgstr "Текст в панела"
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Показване на кошчето"
 
-#. placesCenter@scollins->settings-schema.json->showNetwork->description
-msgid "Show network"
-msgstr "Показвай мрежа"
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Никога"
 
-#. placesCenter@scollins->settings-schema.json->onlyShowMounted->description
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Винаги"
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Когато не е празно"
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Покажи компютър"
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Покажи фаловата система"
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Показвай устройства"
+
+#. settings-schema.json->onlyShowMounted->description
 msgid "Only show mounted drives"
 msgstr "Показвай само монтираните устройства"
 
-#. placesCenter@scollins->settings-
-#. schema.json->showRecentDocuments->description
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Показвай мрежа"
+
+#. settings-schema.json->showRecentDocuments->description
 msgid "Show recent documents"
 msgstr "Показване на последните документи"
 
-#. placesCenter@scollins->settings-schema.json->showDesktop->description
-msgid "Show desktop"
-msgstr "Показване на работния плот"
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Брой за показване"
 
-#. placesCenter@scollins->metadata.json->description
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Централни места"
+
+#. metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
 msgstr "Доставя лесна за ползване подредба за достъп до вашите места"
 
-#. placesCenter@scollins->metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Автор: Стивън Колинс"
-
-#. placesCenter@scollins->metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
-msgstr "Добавка на конфигурация при клик с колелцето: kehugter"
-
-#. placesCenter@scollins->metadata.json->comments
+#. metadata.json->comments
 msgid ""
 "Places Center is a feature-rich, cross-platform Cinnamon applet that "
 "provides easy access to all of your most-used places. Feel free to "
@@ -216,74 +282,10 @@ msgstr ""
 "се поканени да допринесете с pull request, искане за функции и отчет за "
 "грешки в моето github хранилище."
 
-#. placesCenter@scollins->metadata.json->name
-msgid "Places Center"
-msgstr "Централни места"
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Автор: Стивън Колинс"
 
-#: search.py:41
-msgid "Open..."
-msgstr "Отваряне..."
-
-#: search.py:46
-msgid "Open Containing Folder..."
-msgstr "Отваряне на съдържащата папка..."
-
-#: search.py:83
-msgid "Search"
-msgstr "Търсене"
-
-#: search.py:104
-msgid "Start in"
-msgstr "Стартирай в"
-
-#: search.py:105
-msgid "Select a folder"
-msgstr "Избор на папка"
-
-#: search.py:111
-msgid "Follow symlinks"
-msgstr "Следвай символните връзки"
-
-#: search.py:115
-msgid "Search hidden"
-msgstr "Търси в скритите"
-
-#: search.py:119
-msgid "Stop"
-msgstr "Спри"
-
-#: search.py:134
-msgid "File"
-msgstr "Файл"
-
-#: search.py:150
-msgid "Path"
-msgstr "Път"
-
-#: search.py:178
-msgid "Searching..."
-msgstr "Търсене..."
-
-#: search.py:192 search.py:193
-msgid "Search Stopped"
-msgstr "Търсенето е спряно"
-
-#: search.py:209
-msgid "Searching: "
-msgstr "Търсене: "
-
-#: search.py:214
-msgid "Error: insufficient permissions to read folder "
-msgstr "Грешка: недостатъчно права за прочитане на папката"
-
-#: search.py:246
-msgid "Search Completed"
-msgstr "Търсенето завърши"
-
-#: search.py:253
-msgid "Skipping"
-msgstr "Пропускане"
-
-#: search.py:253
-msgid " - direcotry already searched"
-msgstr " - директорията е вече претърсена"
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "Добавка на конфигурация при клик с колелцето: kehugter"
