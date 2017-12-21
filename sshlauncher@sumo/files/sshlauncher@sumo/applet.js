@@ -10,6 +10,7 @@ const MessageTray = imports.ui.messageTray;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 const UUID = "sshlauncher@sumo";
+const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -17,8 +18,8 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(metadata, orientation) {
-  this._init(metadata, orientation);
+function MyApplet(metadata, orientation, panel_height, instance_id) {
+  this._init(metadata, orientation, panel_height, instance_id);
 };
 
 MyApplet.prototype = {
@@ -30,7 +31,7 @@ MyApplet.prototype = {
     this.set_applet_tooltip(_("SSH Launcher"));
 
     try {
-      this.set_applet_icon_name("network");
+      this.set_applet_icon_path(AppletDir + "/icon.png");
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menu = new Applet.AppletPopupMenu(this, orientation);
       this.menuManager.addMenu(this.menu);
@@ -100,7 +101,7 @@ MyApplet.prototype = {
     }
     let terminal = this.gsettings.get_string("exec");
     Main.Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
-    let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname);
+    let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname + " using " + terminal);
     notification.setTransient(true);
     this.msgSource.notify(notification);
   },
