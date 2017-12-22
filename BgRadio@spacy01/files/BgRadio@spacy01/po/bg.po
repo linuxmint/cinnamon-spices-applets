@@ -71,6 +71,14 @@ msgid "Listening Darik"
 msgstr "Слушате Дарик"
 
 #: applet.js
+msgid "Darik Nostalgie"
+msgstr "Дарик Носталжи"
+
+#: applet.js
+msgid "Listening Darik Nostalgie"
+msgstr "Слушате Дарик Носталжи"
+
+#: applet.js
 msgid "Energy"
 msgstr "Енерджи"
 
