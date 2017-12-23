@@ -78,6 +78,13 @@ MyApplet.prototype = {
 		Main.Util.spawnCommandLine("cvlc http://darikradio.by.host.bg:8000/S2-128");
 		Main.notify(_("Listening Darik"));
 		});
+
+		//darik nostalgie
+		this.RadioItem.menu.addAction(_("Darik Nostalgie"), function(event) {
+		Main.Util.spawnCommandLine("killall -9 vlc");
+		Main.Util.spawnCommandLine("cvlc http://darikradio.by.host.bg:8000/Nostalgie");
+		Main.notify(_("Listening Darik Nostalgie"));
+		});
 		
 		//energy radio
 		this.RadioItem.menu.addAction(_("Energy"), function(event) {
