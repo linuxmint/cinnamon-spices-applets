@@ -265,13 +265,21 @@ msgid "Watching The Voice"
 msgstr ""
 
 #: applet.js
+msgid "Magic TV"
+msgstr ""
+
+#: applet.js
+msgid "Watching Magic TV"
+msgstr ""
+
+#: applet.js
 msgid "All Stop"
 msgstr ""
 
 #. BgRadio@spacy01->metadata.json->description
 msgid ""
 "The most famous bulgarian radio and TV streams. Some of the streams are available "
-"only from bulgaria. To watch a TVs, you'll need to install rtmpdump package."
+"only from bulgaria. To watch a TVs, you'll need to install rtmpdump and mpv packages."
 msgstr ""
 ""
 ""
