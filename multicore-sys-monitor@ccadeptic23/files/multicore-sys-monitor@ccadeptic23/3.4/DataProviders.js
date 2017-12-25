@@ -374,12 +374,9 @@ DiskDataProvider.prototype = {
       if (!this.mounts[i]) {
         continue;
       }
-      let isDisk = true;
       let deviceName = this.mounts[i].get_name();
       let drive = this.mounts[i].get_drive();
-      if (drive != null) {
-        isDisk = !drive.is_media_removable();
-      }
+      let isDisk =  drive && !drive.is_media_removable()
       let mountRoot = this.mounts[i].get_root();
       // device is enabled, and is a disk
       if (isDisk && this.disabledDevices.indexOf(deviceName) === -1) {
