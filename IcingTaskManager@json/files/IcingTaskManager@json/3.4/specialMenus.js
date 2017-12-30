@@ -122,7 +122,7 @@ AppMenuButtonRightClickMenu.prototype = {
       }
       // Workspace
       if ((length = global.screen.n_workspaces) > 1) {
-        if (this.groupState.lastFocused.is_on_all_workspaces()) {
+        if (this.groupState.lastFocused && this.groupState.lastFocused.is_on_all_workspaces()) {
           item = createMenuItem({label: _('Only on this workspace')});
           this.signals.connect(item, 'activate', () => {
             this.groupState.lastFocused.unstick();
