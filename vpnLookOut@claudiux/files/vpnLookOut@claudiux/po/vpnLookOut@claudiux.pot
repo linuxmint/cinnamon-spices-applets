@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v1.0.0\n"
+"Project-Id-Version: vpnLookOut@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2017-12-09 17:31+0100\n"
+"PO-Revision-Date: 2017-12-30 15:20+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,151 +17,199 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: metadata.json:3
-msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
+#: metadata.json:2
+msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
 msgstr ""
 
-#: metadata.json:5
+#: metadata.json:7
 msgid "VPN Look-Out Applet"
 msgstr ""
 
-#: settings-schema.json:4
-msgid "General Settings for the VPN Look-Out Applet"
+#: settings-schema.json:7
+msgid "Notifications"
 msgstr ""
 
-#: settings-schema.json:8
+#: settings-schema.json:12
 msgid "VPN"
 msgstr ""
 
-#: settings-schema.json:13
-msgid "VPN Network Interface"
-msgstr ""
-
-#: settings-schema.json:14
-msgid "You can compare contents of /proc/net/dev with and without VPN connection established to know the VPN interface name."
-msgstr ""
-
-#: settings-schema.json:19
-msgid "VPN Name"
-msgstr ""
-
-#: settings-schema.json:20
-msgid "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
-msgstr ""
-
-#: settings-schema.json:26
-msgid "Try to reconnect to VPN when it shuts down incidentally."
-msgstr ""
-
-#: settings-schema.json:27
-msgid "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
-msgstr ""
-
-#: settings-schema.json:31
+#: settings-schema.json:22
 msgid "Display"
 msgstr ""
 
-#: settings-schema.json:39
-msgid "seconds"
-msgstr ""
-
-#: settings-schema.json:40
-msgid "Refresh Interval for Display:"
-msgstr ""
-
-#: settings-schema.json:41
-msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
-msgstr ""
-
-#: settings-schema.json:48
-msgid "Classic - Icon and Text"
-msgstr ""
-
-#: settings-schema.json:49
-msgid "Compact - Icon Only"
-msgstr ""
-
-#: settings-schema.json:51
-msgid "Type of Display"
-msgstr ""
-
-#: settings-schema.json:52
-msgid "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
-msgstr ""
-
-#: settings-schema.json:56
+#: settings-schema.json:27
 msgid "Sound Alert"
 msgstr ""
 
-#: settings-schema.json:62
-msgid "Emit a sound alert when VPN shuts down."
-msgstr ""
-
-#: settings-schema.json:63
-msgid "Checking this allows this applet to emit a sound alert when VPN shuts down."
-msgstr ""
-
-#: settings-schema.json:69
-msgid "Emit this sound alert when this Applet starts, if VPN is down."
-msgstr ""
-
-#: settings-schema.json:70
-msgid "Check this if you want to emit this sound alert when this Applet starts, if VPN is down."
-msgstr ""
-
-#: settings-schema.json:75
+#: settings-schema.json:33
 msgid "Transmission"
 msgstr ""
 
-#: settings-schema.json:81
-msgid "Shut down properly Transmission as soon as VPN falls."
+#: settings-schema.json:41
+msgid "VPN Network Interface"
+msgstr ""
+
+#: settings-schema.json:42
+msgid "You should be able to leave this field empty. This applet will try to detect this."
+msgstr ""
+
+#: settings-schema.json:47
+msgid "VPN Name"
+msgstr ""
+
+#: settings-schema.json:48
+msgid "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
+msgstr ""
+
+#: settings-schema.json:54
+msgid "Connect to VPN as this applet starts."
+msgstr ""
+
+#: settings-schema.json:55
+msgid "Checking this allows this applet to try to connect to the last VPN at start-up."
+msgstr ""
+
+#: settings-schema.json:61
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr ""
+
+#: settings-schema.json:62
+msgid "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
+msgstr ""
+
+#: settings-schema.json:70
+msgid "seconds"
+msgstr ""
+
+#: settings-schema.json:71
+msgid "Refresh Interval for Display:"
+msgstr ""
+
+#: settings-schema.json:72
+msgid "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
+msgstr ""
+
+#: settings-schema.json:79
+msgid "Classic - Icon and Text"
+msgstr ""
+
+#: settings-schema.json:80
+msgid "Compact - Icon Only"
 msgstr ""
 
 #: settings-schema.json:82
-msgid "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
+msgid "Type of Display"
 msgstr ""
 
-#: settings-schema.json:88
-msgid "Try to restart Transmission as soon as VPN restarts."
+#: settings-schema.json:83
+msgid "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
 msgstr ""
 
 #: settings-schema.json:89
+msgid "Emit a sound alert when VPN shuts down."
+msgstr ""
+
+#: settings-schema.json:90
+msgid "Checking this allows this applet to emit a sound alert when VPN shuts down."
+msgstr ""
+
+#: settings-schema.json:96
+msgid "Emit this sound alert when this Applet starts, if VPN is down."
+msgstr ""
+
+#: settings-schema.json:97
+msgid "Check this if you want to emit this sound alert when this Applet starts, if VPN is down."
+msgstr ""
+
+#: settings-schema.json:104
+msgid "Shut down properly Transmission as soon as VPN falls."
+msgstr ""
+
+#: settings-schema.json:105
+msgid "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
+msgstr ""
+
+#: settings-schema.json:111
+msgid "Try to restart Transmission as soon as VPN restarts."
+msgstr ""
+
+#: settings-schema.json:112
 msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
 msgstr ""
 
-#: applet.js:56
+#: applet.js:72
 msgid "Ok"
 msgstr ""
 
-#: applet.js:217
+#: applet.js:222
+msgid "You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts."
+msgstr ""
+
+#: applet.js:222
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr ""
+
+#: applet.js:223
+msgid "Some dependencies are not installed!"
+msgstr ""
+
+#: applet.js:248
 msgid "Waiting"
 msgstr ""
 
-#: applet.js:337
+#: applet.js:508
 msgid "Waiting for VPN interface information"
 msgstr ""
 
-#: applet.js:382
+#: applet.js:538
 msgid "Connection ON/OFF"
 msgstr ""
 
-#: applet.js:433
+#: applet.js:551
+msgid "Help..."
+msgstr ""
+
+#: applet.js:583
+msgid "Network Settings"
+msgstr ""
+
+#: applet.js:584
+msgid "Connection Info"
+msgstr ""
+
+#: applet.js:587
+msgid "Network Connections"
+msgstr ""
+
+#: applet.js:630
+msgid "Connections"
+msgstr ""
+
+#: applet.js:688
 msgid "Click to disconnect from VPN"
 msgstr ""
 
-#: applet.js:441
+#: applet.js:710
 msgid "Connected"
 msgstr ""
 
-#: applet.js:448
+#: applet.js:717
 msgid "Disconnected"
 msgstr ""
 
-#: applet.js:450
+#: applet.js:719
 msgid "Click to connect to VPN"
 msgstr ""
 
-#: applet.js:471
+#: applet.js:748
 msgid "VPN:"
+msgstr ""
+
+#: applet.js:776
+msgid "is fully functional."
+msgstr ""
+
+#: applet.js:777
+msgid "All dependencies are installed"
 msgstr ""
 
