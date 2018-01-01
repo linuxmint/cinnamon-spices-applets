@@ -127,3 +127,9 @@ msgstr "2 oder mehr Fenster"
 
 msgid "Number of unshrunk previews"
 msgstr "Anzahl der unverkleinerten Vorschaubilder"
+
+msgid "Show on click"
+msgstr "Beim Klicken anzeigen"
+
+msgid "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
+msgstr "Wenn aktiviert, wird beim Klicken das Vorschau-Menü gezeigt\nWenn nicht aktiviert, wird das zuletzt genutzte Fenster fokussiert oder minimiert"

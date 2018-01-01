@@ -92,6 +92,12 @@
     "type": "section",
     "description" : "Previews"
   },
+  "click-preview": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on click",
+    "tooltip": "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
+  },
   "hover-preview": {
     "type": "switch",
     "default": true,

@@ -1173,7 +1173,7 @@ CobiAppButton.prototype = {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
         if (this._windows.length > 0) {
-          if (this._windows.length == 1) {
+          if (this._windows.length == 1 || !this._settings.getValue("click-preview")) {
             if (_hasFocus(this._currentWindow)) {
               this._currentWindow.minimize();
             }
