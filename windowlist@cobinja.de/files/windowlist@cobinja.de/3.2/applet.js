@@ -231,10 +231,11 @@ CobiPopupMenuItem.prototype = {
     this._settings = this._menu._settings;
     
     this._box = new St.BoxLayout({vertical: true, reactive: true});
+    this.actor.set_style("padding: 0.5em;");
     this.addActor(this._box);
     
     this._iconSize = 20 * global.ui_scale;
-    this.descSize = 30 * global.ui_scale;
+    this.descSize = 24 * global.ui_scale;
     this._icon = this._appButton._app ?
                   this._appButton._app.create_icon_texture(this._iconSize) :
                   new St.Icon({ icon_name: "application-default-icon",
@@ -320,7 +321,7 @@ CobiPopupMenuItem.prototype = {
       this._cloneBin.natural_width = width;
     }
     
-    //this._descBox.natural_width = width * global.ui_scale;
+    this._descBox.natural_width = width * global.ui_scale;
     
     let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, true, true);
     for (let i = 0; i < clones.length; i++) {
