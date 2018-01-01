@@ -249,13 +249,13 @@ CobiPopupMenuItem.prototype = {
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
-    height = Math.round(height / 10);
+    height = Math.round(height / 10) * global.ui_scale;
     width = Math.round(height * aspectRatio);
     
     this._descBox = new St.BoxLayout({natural_width: width});
     this._box.add_actor(this._descBox);
     
-    this._iconBin = new St.Bin({natural_width: this.descSize, natural_height: this.descSize});
+    this._iconBin = new St.Bin({min_width: 0, min_height: 0, natural_width: this.descSize, natural_height: this.descSize});
     this._descBox.add_actor(this._iconBin);
     this._iconBin.set_child(this._icon);
     
@@ -276,27 +276,24 @@ CobiPopupMenuItem.prototype = {
     this._spacer = new St.Widget();
     this._descBox.add(this._spacer, {expand: true});
     
-    this._closeBin = new St.Bin({natural_width: this.descSize, natural_height: this.descSize, reactive: true});
+    this._closeBin = new St.Bin({min_width: 0, min_height: 0, natural_width: this.descSize, natural_height: this.descSize, reactive: true});
     this._closeIcon = new St.Bin({style_class: "window-close", natural_width: this._iconSize, height: this._iconSize});
     this._descBox.add_actor(this._closeBin);
     this._closeBin.set_child(this._closeIcon);
     this._closeIcon.hide();
     
     if (!Main.software_rendering && this._settings.getValue("hover-preview")) {
-      this._cloneBin = new St.Bin({natural_width: width, height: height});
+      this._cloneBin = new St.Bin({min_width: 0, min_height: 0});
       this._box.add_actor(this._cloneBin);
       this._cloneBox = new St.Widget();
       this._cloneBin.add_actor(this._cloneBox);
-      //this.doSize();
     }
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
-    //this._signalManager.connect(this.actor, "button-release-event", this._onButtonReleaseEvent);
     this._signalManager.connect(this, "activate", this._onActivate, this);
   },
   
   doSize: function(availWidth, availHeight) {
-    global.log("availWidth, availHeight: " + availWidth + ", " + availHeight);
     if (Main.software_rendering || !this._settings.getValue("hover-preview")) {
       return;
     }
@@ -307,28 +304,23 @@ CobiPopupMenuItem.prototype = {
     
     let numItems = this._menu.numMenuItems;
     
-    let overheadWidth;
-    let overheadHeight;
-    [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
+    let [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
     overheadHeight += this.descSize;
     
-    let spacing = Math.round(this._menu.box.get_theme_node().get_length("spacing"));
+    this._cloneBox.remove_all_children();
     
     if (this._menu.box.get_vertical()) {
-      height = (availHeight / (Math.max(numItems, 8))) - ((numItems - 1) * spacing) - overheadHeight;
-      
+      height = (availHeight - overheadHeight) * global.ui_scale;
       width = Math.floor(height * aspectRatio);
+      this._cloneBin.natural_height = height;
     }
     else {
-      width = (availWidth / (Math.max(numItems, 8))) - ((numItems - 1) * spacing) - overheadWidth;
-      
+      width = (availWidth - overheadWidth) * global.ui_scale;
       height = Math.floor(width / aspectRatio);
+      this._cloneBin.natural_width = width;
     }
     
-    this._descBox.natural_width = width;
-    
-    this._cloneBox.remove_all_children();
-    this._cloneBin.natural_width = width;
+    //this._descBox.natural_width = width * global.ui_scale;
     
     let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, true, true);
     for (let i = 0; i < clones.length; i++) {
@@ -544,9 +536,10 @@ CobiPopupMenu.prototype = {
   },
   
   recalcItemSizes: function() {
-    let overheadWidth;
-    let overheadHeight;
-    [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
+    let [overheadWidthActor, overheadHeightActor] = getOverheadSize(this.actor);
+    let [overheadWidth, overheadHeight] = getOverheadSize(this.box);
+    overheadWidth += overheadWidthActor;
+    overheadHeight += overheadHeightActor;
     
     let monitor = Main.layoutManager.findMonitorForActor(this.actor);
     let panels = Main.panelManager.getPanelsInMonitor(monitor.index);
@@ -558,12 +551,27 @@ CobiPopupMenu.prototype = {
         overheadWidth += panels[i].actor.width;
       }
     }
+    
     let availWidth = monitor.width - overheadWidth;
     let availHeight = monitor.height - overheadHeight;
     
+    let spacing = Math.round(this.box.get_theme_node().get_length("spacing"));
+    
     let items = this._getMenuItems();
-    for (let i = 0; i < items.length; i++) {
-      items[i].doSize(availWidth, availHeight);
+    let numItems = items.length;
+    
+    let itemWidth = availWidth;
+    let itemHeight = availHeight;
+    
+    if (this.box.get_vertical()) {
+      itemHeight = (availHeight / (Math.max(numItems, 8))) - ((numItems - 1) * spacing);
+    }
+    else {
+      itemWidth = (availWidth / (Math.max(numItems, 8))) - ((numItems - 1) * spacing);
+    }
+    
+    for (let i = 0; i < numItems; i++) {
+      items[i].doSize(itemWidth, itemHeight);
     }
   },
   
