@@ -1,5 +1,18 @@
 Changelog
 
+2.2
+==
+
+New Features
+--
+- improve preview size management
+- add option for click-opening the preview menu
+
+Bugfixes
+--
+- Fix for height of preview menu in vertical panels
+- Fix size issues in HiDPI-mode
+
 2.1
 ==
 

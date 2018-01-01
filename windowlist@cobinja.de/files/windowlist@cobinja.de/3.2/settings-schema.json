@@ -92,11 +92,26 @@
     "type": "section",
     "description" : "Previews"
   },
+  "click-preview": {
+    "type": "switch",
+    "default": true,
+    "description": "Show on click",
+    "tooltip": "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
+  },
   "hover-preview": {
     "type": "switch",
     "default": true,
     "description": "Show on Hover",
     "tooltip": "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
+  },
+  "number-of-unshrunk-previews": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 5,
+    "max": 20,
+    "units": "Windows",
+    "step": 1,
+    "description": "Number of unshrunk previews"
   },
   "preview-timeout-show": {
     "type": "spinbutton",
