@@ -124,3 +124,6 @@ msgstr "Immer"
 
 msgid "2 or more windows"
 msgstr "2 oder mehr Fenster"
+
+msgid "Number of unshrunk previews"
+msgstr "Anzahl der unverkleinerten Vorschaubilder"

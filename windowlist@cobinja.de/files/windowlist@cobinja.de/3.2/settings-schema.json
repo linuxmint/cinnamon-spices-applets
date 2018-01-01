@@ -98,6 +98,15 @@
     "description": "Show on Hover",
     "tooltip": "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
   },
+  "number-of-unshrunk-previews": {
+    "type": "spinbutton",
+    "default": 8,
+    "min": 5,
+    "max": 20,
+    "units": "Windows",
+    "step": 1,
+    "description": "Number of unshrunk previews"
+  },
   "preview-timeout-show": {
     "type": "spinbutton",
     "default": 1000,

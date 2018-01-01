@@ -124,3 +124,6 @@ msgstr ""
 
 msgid "2 or more windows"
 msgstr ""
+
+msgid "Number of unshrunk previews"
+msgstr ""

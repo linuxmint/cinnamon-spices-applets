@@ -564,11 +564,13 @@ CobiPopupMenu.prototype = {
     let itemWidth = availWidth;
     let itemHeight = availHeight;
     
+    let numThumbs = this._settings.getValue("number-of-unshrunk-previews");
+    
     if (this.box.get_vertical()) {
-      itemHeight = (availHeight / (Math.max(numItems, 8))) - ((numItems - 1) * spacing);
+      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
     }
     else {
-      itemWidth = (availWidth / (Math.max(numItems, 8))) - ((numItems - 1) * spacing);
+      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
     }
     
     for (let i = 0; i < numItems; i++) {
