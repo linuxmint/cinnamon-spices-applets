@@ -27,6 +27,7 @@ const Tweener = imports.ui.tweener;
 const Signals = imports.signals;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
+const Panel = imports.ui.panel;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
 const BoxPointer = imports.ui.boxpointer;
@@ -149,6 +150,34 @@ function resizeActor(actor, time, toWidth) {
   });
 }
 
+function getOverheadSize(actor) {
+  if (actor == null) {
+    return null;
+  }
+  let height = 0;
+  let width = 0;
+  let themeNode = actor.get_theme_node();
+  
+  width = themeNode.get_padding(St.Side.LEFT);
+  width += themeNode.get_padding(St.Side.RIGHT);
+  width += themeNode.get_border_width(St.Side.LEFT);
+  width += themeNode.get_border_width(St.Side.RIGHT);
+  
+  height = themeNode.get_padding(St.Side.TOP);
+  height += themeNode.get_padding(St.Side.BOTTOM);
+  height += themeNode.get_border_width(St.Side.TOP);
+  height += themeNode.get_border_width(St.Side.BOTTOM);
+  
+  // margin is only supported since Cinnamon 3.4
+  if (themeNode.get_margin !== undefined) {
+    width += themeNode.get_margin(St.Side.LEFT);
+    width += themeNode.get_margin(St.Side.RIGHT);
+    height += themeNode.get_margin(St.Side.TOP);
+    height += themeNode.get_margin(St.Side.BOTTOM);
+  }
+  return [width, height];
+}
+
 function CobiWindowListSettings(instanceId) {
   this._init(instanceId);
 }
@@ -216,7 +245,7 @@ CobiPopupMenuItem.prototype = {
     this._icon.set_width(-1);
     this._icon.set_height(-1);
     let windowActor = metaWindow.get_compositor_private();
-    let monitor = this._appButton._applet._monitor;
+    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
@@ -267,53 +296,34 @@ CobiPopupMenuItem.prototype = {
   },
   
   doSize: function(availWidth, availHeight) {
+    global.log("availWidth, availHeight: " + availWidth + ", " + availHeight);
     if (Main.software_rendering || !this._settings.getValue("hover-preview")) {
       return;
     }
-    let monitor = this._appButton._applet._monitor;
+    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
     
     let numItems = this._menu.numMenuItems;
-    let themeNode = this.actor.get_theme_node();
     
-    let overheadWidth = themeNode.get_padding(St.Side.LEFT);
-    overheadWidth += themeNode.get_padding(St.Side.RIGHT);
-    overheadWidth += themeNode.get_border_width(St.Side.LEFT);
-    overheadWidth += themeNode.get_border_width(St.Side.RIGHT);
-    
-    let overheadHeight = themeNode.get_padding(St.Side.TOP);
-    overheadHeight += themeNode.get_padding(St.Side.BOTTOM);
-    overheadHeight += themeNode.get_border_width(St.Side.TOP);
-    overheadHeight += themeNode.get_border_width(St.Side.BOTTOM);
+    let overheadWidth;
+    let overheadHeight;
+    [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
     overheadHeight += this.descSize;
-    
-    // margin is only supported since Cinnamon 3.4
-    if (themeNode.get_margin !== undefined) {
-      overheadWidth += themeNode.get_margin(St.Side.LEFT);
-      overheadWidth += themeNode.get_margin(St.Side.RIGHT);
-      overheadHeight += themeNode.get_margin(St.Side.TOP);
-      overheadHeight += themeNode.get_margin(St.Side.BOTTOM);
-    }
     
     let spacing = Math.round(this._menu.box.get_theme_node().get_length("spacing"));
     
     if (this._menu.box.get_vertical()) {
-      height = (availHeight / (Math.max(numItems, 8))) - overheadHeight;
-      //height = Math.round(height / (Math.max(numItems, 10)));
+      height = (availHeight / (Math.max(numItems, 8))) - ((numItems - 1) * spacing) - overheadHeight;
       
-      width = Math.round(height * aspectRatio);
+      width = Math.floor(height * aspectRatio);
     }
     else {
-      width = (availWidth / (Math.max(numItems, 8))) - overheadWidth;
-      //width = Math.round(width / (Math.max(numItems, 10)));
+      width = (availWidth / (Math.max(numItems, 8))) - ((numItems - 1) * spacing) - overheadWidth;
       
-      height = Math.round(width / aspectRatio);
+      height = Math.floor(width / aspectRatio);
     }
-    
-    //height = Math.round(height / 10);
-    //width = Math.round(height * aspectRatio);
     
     this._descBox.natural_width = width;
     
@@ -534,27 +544,20 @@ CobiPopupMenu.prototype = {
   },
   
   recalcItemSizes: function() {
-    let themeNode = this.actor.get_theme_node();
+    let overheadWidth;
+    let overheadHeight;
+    [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
     
-    let overheadWidth = themeNode.get_padding(St.Side.LEFT);
-    overheadWidth += themeNode.get_padding(St.Side.RIGHT);
-    overheadWidth += themeNode.get_border_width(St.Side.LEFT);
-    overheadWidth += themeNode.get_border_width(St.Side.RIGHT);
-    
-    let overheadHeight = themeNode.get_padding(St.Side.TOP);
-    overheadHeight += themeNode.get_padding(St.Side.BOTTOM);
-    overheadHeight += themeNode.get_border_width(St.Side.TOP);
-    overheadHeight += themeNode.get_border_width(St.Side.BOTTOM);
-    
-    // margin is only supported since Cinnamon 3.4
-    if (themeNode.get_margin !== undefined) {
-      overheadWidth += themeNode.get_margin(St.Side.LEFT);
-      overheadWidth += themeNode.get_margin(St.Side.RIGHT);
-      overheadHeight += themeNode.get_margin(St.Side.TOP);
-      overheadHeight += themeNode.get_margin(St.Side.BOTTOM);
+    let monitor = Main.layoutManager.findMonitorForActor(this.actor);
+    let panels = Main.panelManager.getPanelsInMonitor(monitor.index);
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i].panelPosition == Panel.PanelLoc.top || panels[i].panelPosition == Panel.PanelLoc.bottom) {
+        overheadHeight += panels[i].actor.height;
+      }
+      else {
+        overheadWidth += panels[i].actor.width;
+      }
     }
-    
-    let monitor = this._appButton._applet._monitor;
     let availWidth = monitor.width - overheadWidth;
     let availHeight = monitor.height - overheadHeight;
     
@@ -1374,9 +1377,9 @@ CobiAppButton.prototype = {
       if (nMonitors > 1) {
         item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another monitor"));
         this._contextMenu.addMenuItem(item);
-        
+        let monitor = this._currentWindow.get_monitor();
         for (let i = 0; i < nMonitors; i++) {
-          if (i == this._applet._monitor.index) {
+          if (i == monitor) {
             continue;
           }
           let j = i;
@@ -1579,7 +1582,7 @@ CobiWorkspace.prototype = {
   
   _windowAdded: function(metaWindow) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        this._applet._monitor.index != metaWindow.get_monitor()) {
+        Main.layoutManager.findMonitorForActor(this.actor).index != metaWindow.get_monitor()) {
       return;
     }
     
@@ -1652,7 +1655,7 @@ CobiWorkspace.prototype = {
         this._windowAdded(metaWindow);
       }
       else {
-        if (metaWindow.get_monitor() != this._applet._monitor.index) {
+        if (metaWindow.get_monitor() != Main.layoutManager.findMonitorForActor(this.actor).index) {
           this._windowRemoved(metaWindow);
         }
         else {
@@ -2127,7 +2130,7 @@ CobiWindowList.prototype = {
   
   _windowAdded: function(screen, metaWindow, monitor) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        monitor != this._monitor.index) {
+        monitor != Main.layoutManager.findMonitorForActor(this.actor).index) {
       return;
     }
     for (let i = 0; i < this._workspaces.length; i++) {
@@ -2168,7 +2171,7 @@ CobiWindowList.prototype = {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
       return;
     }
-    if (monitor == this._monitor.index) {
+    if (monitor == Main.layoutManager.findMonitorForActor(this.actor)) {
       this._windowAdded(screen, window, monitor);
     }
     else {
