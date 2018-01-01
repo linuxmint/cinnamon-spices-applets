@@ -321,7 +321,7 @@ CobiPopupMenuItem.prototype = {
       this._cloneBin.natural_width = width;
     }
     
-    this._descBox.natural_width = width * global.ui_scale;
+    this._descBox.natural_width = width;
     
     let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, true, true);
     for (let i = 0; i < clones.length; i++) {
