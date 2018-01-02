@@ -93,7 +93,7 @@ while i < len(lines):
     line = lines[i]
     i+=1
     li=line.strip()
-    if li.startswith('"description"') or li.startswith('"tooltip"') or li.startswith('"units"'):
+    if li.startswith('"description"') or li.startswith('"tooltip"') or li.startswith('"units"') or li.startswith('"title"'):
         #print(li)
         l = li.split(":",1)[1].strip()
         l = l[:l.rfind('"')+1]
