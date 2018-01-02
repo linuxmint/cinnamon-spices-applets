@@ -20,38 +20,59 @@ The VPN Look-Out Applet normally shows an icon that changes color depending on t
   * Red: the VPN is disconnected.
   * Grey: waiting for VPN status (only when the applet starts, for a few seconds, or if it's misconfigured).
 
-When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection. By example: 
+When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection and the network interface used. By example: 
 
-  VPN: Connected (Amsterdam)
+  VPN: Connected (Amsterdam / tun0)
 
-The most important settings are accessible by the menu (by left or right click on applet icon). For all of them, see Settings in the Right Click Menu.
+The most important settings are accessible by the menu (by left or right click on applet icon) ; they are shown in bold in the list below. For all of them, see Settings in the Right Click Menu.
 
 Settings :
   * VPN Network Interface (default: tun0).
   * VPN Name (name of the connection, automatically filled in, you can change for other existing connection name).
+  * ***Try (or don't try) to connect to VPN when this applet starts.***
   * ***Try (or don't try) to reconnect to VPN when it shuts down incidentally.***
   * Refresh Interval for Display (from 1 to 60 seconds).
   * Type of Display : Icon, with or without text 'VPN'.
   * Emit (or don't emit) a sound alert when VPN shuts down.
   * Emit (or don't emit) this sound alert when this Applet starts, if VPN is down.
-  * Shut down (or not) properly Transmission as soon as VPN falls.
-  * Try (or don't try) to restart Transmission as soon as VPN restarts.
+  * ***Shut down (or not) properly Transmission as soon as VPN falls.***
+  * ***Try (or don't try) to restart Transmission as soon as VPN restarts.***
+
+The left click menu also contains:
+  * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
+  * A list of all VPN connections available. Click on one of them to change of VPN connection ; it disconnects from actual (if any) and connects to new.
 
 ## Translations and other Contributions
 
-The internal changes required in the applet to allow translations are implemented and several translations are available. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I will rarely be able to take responsibility for the accuracy of translations!
+The internal changes required in the applet to allow translations are implemented and several translations are available. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users, please note that I will rarely be able to take responsibility for the accuracy of translations!
 
-Although comments and suggestions are always welcome any contributions which are contemplated must follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+Although comments and suggestions are always welcome, any contributions which are contemplated have to be discussed. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
 
 The installation of the available languages are automatically made, but the messages will only be translated at the next Cinnamon startup.
 
+Languages already available (v2.0.0 and following): English, French, Spanish, Italian.
+
 ## Requirements:
 
-Cinnamon Version 1.8 or higher as it make comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions been tested on Cinnamon 3.4.6 and Mint 18.2. 
+Cinnamon Version 1.8 or higher as it makes comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions have been tested on Cinnamon 3.4.6 and Mint 18.2. 
     
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
  
-        sudo apt-get install zenity sox libsox-fmt-mp3
+        apt install zenity sox libsox-fmt-mp3
+
+**Note that this applet helps you to install these dependencies, if any.**
+
+## Preconization:
+It is recommended to transfere the /tmp directory into memory, for two reasons:
+  * Make applet execution faster.
+  * Reduce hard disk wear (especially if it's a SSD).
+
+To do this, add this line at the end of the file /etc/fstab; then, restart the computer:
+        tmpfs /tmp tmpfs defaults,size=500M 0 0
+(Beware to put the final character 's' at the 'defaults' word. In the `size` parameter, 'M' is for MB, 'G' is for GB; be careful, the memory allocated for /tmp is no longer available for the rest.)
+
+You can install Transmission:
+        apt install transmission transmission-gtk
 
 ## Manual Installation:
   
@@ -61,3 +82,9 @@ For full facilities including notifications and audible alerts the ```zenity sox
    * Enable the applet in System Settings -> Applets
    * You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
 
+## TO DO in next versions (following v2.0.0):
+
+If required by users, I project to:
+  * Add an option to start Transmission at startup of this applet.
+  * Add an option to log VPN connections/disconnections for statistics.
+  * Add a tool to append VPN connections from a .ovpn config file containing settings and certificates, for personal use only (not for system-wide use, which requires root privileges).

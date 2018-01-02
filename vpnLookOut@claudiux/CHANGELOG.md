@@ -1,12 +1,25 @@
 ## Changelog
 
+### 2.0.0
+ * New features:
+  * When installing this applet, it helps the user to install dependencies, if any.
+  * Can connect to the last VPN used, as the applet starts (i.e at user login).
+  * Left and right menus : The 'Connect ON/OFF' button disappears when the option 'Try to reconnect to VPN when it shuts down incidentally' is checked.
+  * Left menu: If there is more than one VPN connection, a submenu displays all these connections and allows you to connect to the selected one.
+  * Icons are adapted to some themes. (To be continued...)
+ * Some code optimizations have been made.
+ * Some bugs were fixed, especially:
+  * If your VPN connection name included spaces, connect/disconnect was not possible in version 1.0.0. This bug was fixed.
+ * Available languages  : English, French, Spanish, Italian.
+ * Tested on Mint 18.1, 18.2, 18.3 with Cinnamon 3.2, 3.4.
+
 ### 1.0.0
  * Detects and displays correctly the status (connected/disconnected) of the VPN (the color of the icon changes).
  * Can emit a sound alert when the VPN disconnect.
  * Can try to reconnect to VPN when it has fallen.
- * Can stop/restart Transmission when VPN disconnect/reconnect.
+ * Can stop/restart Transmission when VPN disconnects/reconnects.
  * A switch-button (into the menu) lets you manually connect/disconnect the VPN.
  * Internationalization: There is a .pot file (in the 'po' subdirectory) to use with poedit to translate messages. The .po files created are automatically converted in .mo files, which are put into the right directories. The translated messages will appear after the next Cinnamon startup.
  * Available languages  : English, French.
  * Works with Mint 18.2 and Cinnamon 3.2. It can be used on horizontal or vertical panel.
- * Fully fonctional.
+ * Fully functional.
