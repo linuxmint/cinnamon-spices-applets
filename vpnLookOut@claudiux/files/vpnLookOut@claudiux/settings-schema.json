@@ -1,23 +1,58 @@
 {
-    "head": {
-        "type": "header",
-        "description": "General Settings for the VPN Look-Out Applet"
+    "layout": {
+        "type": "layout",
+        "pages": ["Alerts", "VPNpolicy"],
+        "Alerts": {
+            "type": "page",
+            "title": "Notifications",
+            "sections": ["section2", "section3"]
+        },
+        "VPNpolicy": {
+            "type": "page",
+            "title": "VPN",
+            "sections": ["section1", "section4"]
+        },
+        "section1": {
+            "type": "section",
+            "title": "VPN",
+            "keys": ["vpnInterface", "vpnName", "connectAtStartup", "reconnect"]
+        },
+        "section2": {
+            "type": "section",
+            "title": "Display",
+            "keys": ["refreshInterval-spinner", "displayType"]
+        },
+        "section3": {
+            "type": "section",
+            "title": "Sound Alert",
+            "keys": ["useSoundAlert", "useSoundAlertAtBeginning"]
+        },
+        
+        "section4": {
+            "type": "section",
+            "title": "Transmission",
+            "keys": ["stopTransmission", "restartTransmission"]
+        }
     },
-    "section1": {
-        "type": "section",
-        "description" : "VPN"
-    },
+    
     "vpnInterface": {
         "type": "entry",
-        "default": "tun0",
+        "default": "",
         "description": "VPN Network Interface",
-        "tooltip": "You can compare contents of /proc/net/dev with and without VPN connection established to know the VPN interface name."
+        "tooltip": "You should be able to leave this field empty. This applet will try to detect this."
     },
     "vpnName": {
         "type": "entry",
         "default": "",
         "description": "VPN Name",
         "tooltip": "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
+    },
+    "connectAtStartup": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Connect to VPN as this applet starts.",
+        "tooltip": "Checking this allows this applet to try to connect to the last VPN at start-up."
     },
     "reconnect": {
         "type": "checkbox",
@@ -26,20 +61,16 @@
         "description": "Try to reconnect to VPN when it shuts down incidentally.",
         "tooltip": "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
     },
-    "section2": {
-        "type": "section",
-        "description" : "Display"
-    },
     "refreshInterval-spinner": {
         "type": "spinbutton",
-        "default": 10,
+        "default": 5,
         "min": 1,
         "max": 60,
         "step": 1,
         "units": "seconds",
         "description": "Refresh Interval for Display:",
         "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
-     },
+    },
 
     "displayType" : {
         "type": "combobox",
@@ -50,10 +81,6 @@
          },
         "description" : "Type of Display",
         "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
-   },
-   "section3": {
-        "type": "section",
-        "description": "Sound Alert"
     },
     "useSoundAlert": {
         "type": "checkbox",
@@ -69,10 +96,6 @@
         "description": "Emit this sound alert when this Applet starts, if VPN is down.",
         "tooltip": "Check this if you want to emit this sound alert when this Applet starts, if VPN is down.",
         "dependency": "useSoundAlert"
-    },
-   "section5": {
-        "type": "section",
-        "description": "Transmission"
     },
     "stopTransmission": {
         "type": "checkbox",
