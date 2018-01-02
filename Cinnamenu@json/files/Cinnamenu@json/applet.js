@@ -2053,6 +2053,10 @@ CinnamenuApplet.prototype = {
       style_class: 'vfade menu-applications-scrollbox'
     });
 
+    if (!this.state.settings.showAppDescriptionsOnButtons && !this.state.settings.showTooltips) {
+      this.groupCategoriesWorkspacesScrollBox.width = 250;
+    }
+
     let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
     this.displaySignals.connect(vscrollCategories, 'scroll-start', () => {
       this.menu.passEvents = true;
