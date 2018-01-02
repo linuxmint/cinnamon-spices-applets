@@ -24,10 +24,10 @@ KeyBind.prototype = {
         this.keys = keys;
         let is_defined = this.is_defined();
         if(is_defined){
-        	this.update();
+            this.update();
         }
         else {
-        	this.remove();
+            this.remove();
         }
     },
 
@@ -43,16 +43,16 @@ KeyBind.prototype = {
 
     remove: function() {
         if(this.is_binded) {
-        	Main.keybindingManager.removeHotKey(this.id);
-        	this.is_binded = false;
+            Main.keybindingManager.removeHotKey(this.id);
+            this.is_binded = false;
         }
     },
 
     add: function() {
         if(!this.is_binded) {
-        	Main.keybindingManager.addHotKey(this.id, this.keys,
-        							  		 Lang.bind(this, this._invoke_key_pressed_function));
-        	this.is_binded = true;
+            Main.keybindingManager.addHotKey(this.id, this.keys,
+                                             Lang.bind(this, this._invoke_key_pressed_function));
+            this.is_binded = true;
         }
     },
 
@@ -63,7 +63,7 @@ KeyBind.prototype = {
 
     _invoke_key_pressed_function: function() {
         if(this.callback_key_pressed != null) {
-        	this.callback_key_pressed.call(this.callback_object);
+            this.callback_key_pressed.call(this.callback_object);
         }
     },
 

@@ -86,23 +86,23 @@
     },
 
     "shortcuts_start": {
-    	"type": "header",
-    	"description": "Shortcuts"
+        "type": "header",
+        "description": "Shortcuts"
     },
     "start_stop_keys": {
         "type": "keybinding",
         "default": "",
         "description": "Reading shortcut",
-    	"tooltip": "A keyboard shortcut to start or stop reading the text"
+        "tooltip": "A keyboard shortcut to start or stop reading the text"
     },
     "pause_resume_keys": {
         "type": "keybinding",
         "default": "",
         "description": "Pause shortcut",
-    	"tooltip": "A keyboard shortcut to pause or resume reading the text"
+        "tooltip": "A keyboard shortcut to pause or resume reading the text"
     },
     "shortcuts_end" : {
-    	"type" : "separator"
+        "type" : "separator"
     }
 
 

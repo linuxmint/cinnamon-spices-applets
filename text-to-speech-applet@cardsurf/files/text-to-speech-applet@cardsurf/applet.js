@@ -47,8 +47,8 @@ MyApplet.prototype = {
         this.hover_popup = null;
         this.file_schema = "file://";
         this.home_shortcut = "~";
-    	this.start_stop_keybind = null;
-    	this.pause_resume_keybind = null;
+        this.start_stop_keybind = null;
+        this.pause_resume_keybind = null;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.clipboard_type = 0;
@@ -122,11 +122,11 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "number_lines_to_read", null],
                 [Settings.BindingDirection.IN, "voice_command", null],
                 [Settings.BindingDirection.IN, "line_separator", this.on_line_separator_changed],
-        		[Settings.BindingDirection.IN, "gui_idle_icon_filename", this.on_gui_idle_icon_changed],
-        		[Settings.BindingDirection.IN, "gui_pause_icon_filename", this.on_gui_pause_icon_changed],
-        		[Settings.BindingDirection.IN, "gui_reading_icon_filename", this.on_gui_reading_icon_changed],
-        		[Settings.BindingDirection.IN, "start_stop_keys", this.on_start_stop_keys_changed],
-        		[Settings.BindingDirection.IN, "pause_resume_keys", this.on_pause_resume_keys_changed] ]){
+                [Settings.BindingDirection.IN, "gui_idle_icon_filename", this.on_gui_idle_icon_changed],
+                [Settings.BindingDirection.IN, "gui_pause_icon_filename", this.on_gui_pause_icon_changed],
+                [Settings.BindingDirection.IN, "gui_reading_icon_filename", this.on_gui_reading_icon_changed],
+                [Settings.BindingDirection.IN, "start_stop_keys", this.on_start_stop_keys_changed],
+                [Settings.BindingDirection.IN, "pause_resume_keys", this.on_pause_resume_keys_changed] ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -246,12 +246,12 @@ MyApplet.prototype = {
 
     // Override
     on_applet_removed_from_panel: function() {
-    	this.remove_keybinds();
+        this.remove_keybinds();
     },
 
     remove_keybinds: function () {
-    	this.start_stop_keybind.remove();
-    	this.pause_resume_keybind.remove();
+        this.start_stop_keybind.remove();
+        this.pause_resume_keybind.remove();
     },
 
     // Override
