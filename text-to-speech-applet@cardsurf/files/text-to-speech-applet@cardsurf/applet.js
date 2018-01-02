@@ -14,6 +14,7 @@ const AppletGui = AppletDirectory.appletGui;
 const Clipboard = AppletDirectory.clipboard;
 const ShellUtils = AppletDirectory.shellUtils;
 const Translation = AppletDirectory.translation;
+const Keyboard = AppletDirectory.keyboard;
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
@@ -34,6 +35,8 @@ MyApplet.prototype = {
 
         this.panel_height = panel_height;
         this.orientation = orientation;
+        this.start_stop_keybind_id = uuid + instance_id + "start-stop";
+        this.pause_resume_keybind_id = uuid + instance_id + "pause-resume";
 
         this.clipboard_reader = new Clipboard.ClipboardReader();
         this.voice_process = null;
@@ -44,6 +47,8 @@ MyApplet.prototype = {
         this.hover_popup = null;
         this.file_schema = "file://";
         this.home_shortcut = "~";
+        this.start_stop_keybind = null;
+        this.pause_resume_keybind = null;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.clipboard_type = 0;
@@ -54,10 +59,13 @@ MyApplet.prototype = {
         this.gui_idle_icon_filename = "";
         this.gui_pause_icon_filename = "";
         this.gui_reading_icon_filename = "";
+        this.start_stop_keys = "";
+        this.pause_resume_keys = "";
 
         this._init_layout();
         this._init_translations();
         this._bind_settings();
+        this._init_keybinds();
         this._init_voice_process();
         this._init_line_separator_regex();
         this._init_hover_popup();
@@ -109,15 +117,17 @@ MyApplet.prototype = {
 
     _bind_settings: function () {
         for(let [binding, property_name, callback] of [
-        		[Settings.BindingDirection.IN, "clipboard_type", null],
-        		[Settings.BindingDirection.IN, "read_lines_and_stop", null],
-        		[Settings.BindingDirection.IN, "number_lines_to_read", null],
-        		[Settings.BindingDirection.IN, "voice_command", null],
-        		[Settings.BindingDirection.IN, "line_separator", this.on_line_separator_changed],
-        		[Settings.BindingDirection.IN, "gui_idle_icon_filename", this.on_gui_idle_icon_changed],
-        		[Settings.BindingDirection.IN, "gui_pause_icon_filename", this.on_gui_pause_icon_changed],
-        		[Settings.BindingDirection.IN, "gui_reading_icon_filename", this.on_gui_reading_icon_changed] ]){
-        	    this.settings.bindProperty(binding, property_name, property_name, callback, null);
+                [Settings.BindingDirection.IN, "clipboard_type", null],
+                [Settings.BindingDirection.IN, "read_lines_and_stop", null],
+                [Settings.BindingDirection.IN, "number_lines_to_read", null],
+                [Settings.BindingDirection.IN, "voice_command", null],
+                [Settings.BindingDirection.IN, "line_separator", this.on_line_separator_changed],
+                [Settings.BindingDirection.IN, "gui_idle_icon_filename", this.on_gui_idle_icon_changed],
+                [Settings.BindingDirection.IN, "gui_pause_icon_filename", this.on_gui_pause_icon_changed],
+                [Settings.BindingDirection.IN, "gui_reading_icon_filename", this.on_gui_reading_icon_changed],
+                [Settings.BindingDirection.IN, "start_stop_keys", this.on_start_stop_keys_changed],
+                [Settings.BindingDirection.IN, "pause_resume_keys", this.on_pause_resume_keys_changed] ]){
+                this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
 
@@ -128,21 +138,21 @@ MyApplet.prototype = {
     on_gui_idle_icon_changed: function () {
         let is_running = this.is_voice_process_running();
         if(!is_running){
-        	this.set_gui_idle();
+            this.set_gui_idle();
         }
     },
 
     on_gui_pause_icon_changed: function () {
         let is_paused = this.is_voice_process_paused();
         if(is_paused){
-        	this.set_gui_paused();
+            this.set_gui_paused();
         }
     },
 
     on_gui_reading_icon_changed: function () {
         let is_running = this.is_voice_process_running();
         if(is_running){
-        	this.set_gui_reading();
+            this.set_gui_reading();
         }
     },
 
@@ -192,13 +202,30 @@ MyApplet.prototype = {
         return GLib.file_test(path, GLib.FileTest.EXISTS);
     },
 
-    _init_line_separator_regex: function () {
-        this.on_line_separator_changed();
+    on_start_stop_keys_changed: function() {
+        this.start_stop_keybind.update_binding(this.start_stop_keys);
+    },
+
+    on_pause_resume_keys_changed: function() {
+        this.pause_resume_keybind.update_binding(this.pause_resume_keys);
+    },
+
+    _init_keybinds: function () {
+        this.start_stop_keybind = new Keyboard.KeyBind(this.start_stop_keybind_id, this.start_stop_keys);
+        this.pause_resume_keybind = new Keyboard.KeyBind(this.pause_resume_keybind_id, this.pause_resume_keys);
+        this.start_stop_keybind.set_callback_key_pressed(this, this.start_or_stop_reading);
+        this.pause_resume_keybind.set_callback_key_pressed(this, this.pause_or_resume_reading);
+        this.on_start_stop_keys_changed();
+        this.on_pause_resume_keys_changed();
     },
 
     _init_voice_process: function () {
         this.voice_process = new ShellUtils.BackgroundProcess();
         this.voice_process.set_callback_process_finished(this, this.on_voice_process_finished);
+    },
+
+    _init_line_separator_regex: function () {
+        this.on_line_separator_changed();
     },
 
     _init_hover_popup: function () {
@@ -213,6 +240,20 @@ MyApplet.prototype = {
         this.set_gui_idle();
     },
 
+
+
+
+
+    // Override
+    on_applet_removed_from_panel: function() {
+        this.remove_keybinds();
+    },
+
+    remove_keybinds: function () {
+        this.start_stop_keybind.remove();
+        this.pause_resume_keybind.remove();
+    },
+
     // Override
     _onButtonPressEvent: function (actor, event) {
         let handled = false;
@@ -221,7 +262,7 @@ MyApplet.prototype = {
             handled = this.on_middle_mouse_button_clicked(actor, event);
         }
         else {
-        	handled = Applet.TextApplet.prototype._onButtonPressEvent.call(this, actor, event);
+            handled = Applet.TextApplet.prototype._onButtonPressEvent.call(this, actor, event);
         }
         return handled;
     },
@@ -229,7 +270,7 @@ MyApplet.prototype = {
     on_middle_mouse_button_clicked: function (actor, event) {
         let is_running = this.is_voice_process_running();
         if (is_running && this._applet_enabled) {
-        	this.pause_or_resume_reading();
+            this.pause_or_resume_reading();
         }
         return true;
     },
@@ -237,10 +278,10 @@ MyApplet.prototype = {
     pause_or_resume_reading: function () {
         let is_paused = this.is_voice_process_paused();
         if(is_paused){
-        	this.resume_reading();
+            this.resume_reading();
         }
         else {
-        	this.pause_reading();
+            this.pause_reading();
         }
     },
 
@@ -255,16 +296,16 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        this.start_or_stop_reading_text();
+        this.start_or_stop_reading();
     },
 
-    start_or_stop_reading_text: function () {
+    start_or_stop_reading: function () {
         let is_running = this.is_voice_process_running();
         if(is_running){
-        	this.stop_reading();
+            this.stop_reading();
         }
         else {
-        	this.start_reading();
+            this.start_reading();
         }
     },
 
@@ -275,19 +316,19 @@ MyApplet.prototype = {
     start_reading: function () {
         let argv = this.get_voice_command_argv();
         if(argv != null) {
-        	this.update_text();
-        	this.spawn_voice_process(argv);
+            this.update_text();
+            this.spawn_voice_process(argv);
         }
         else {
-        	this.notify_parse_error();
+            this.notify_parse_error();
         }
     },
 
     get_voice_command_argv: function () {
         let [success, argv] = this.parse_command_to_argv();
         if(success) {
-        	argv = this.append_text_to_read(argv);
-        	return argv;
+            argv = this.append_text_to_read(argv);
+            return argv;
         }
         return null;
     },
@@ -295,7 +336,7 @@ MyApplet.prototype = {
     parse_command_to_argv: function () {
         let [success, argv] = [true, []];
         if(this.voice_command.length > 0) {
-        	[success, argv] = GLib.shell_parse_argv(this.voice_command);
+            [success, argv] = GLib.shell_parse_argv(this.voice_command);
         }
         return [success, argv];
     },
@@ -321,9 +362,9 @@ MyApplet.prototype = {
     get_lines_to_read: function () {
         text = this.current_text;
         if(this.read_lines_and_stop) {
-        	let start = this.get_start_line();
-        	let stop = this.get_stop_line(start);
-        	text = this.get_lines(start, stop);
+            let start = this.get_start_line();
+            let stop = this.get_stop_line(start);
+            text = this.get_lines(start, stop);
         }
         return text;
     },
@@ -352,7 +393,7 @@ MyApplet.prototype = {
         let last_index = array_lines.length - 1;
         let last_line = array_lines[last_index];
         if(array_lines.length > 1 && this.is_whitespace_string(last_line)) {
-        	array_lines.pop();
+            array_lines.pop();
         }
         return array_lines;
     },
@@ -381,19 +422,19 @@ MyApplet.prototype = {
 
     update_line_resume: function () {
         if(this.read_lines_and_stop) {
-        	let start = this.get_start_line();
-        	let stop = this.get_stop_line(start);
-        	let array_lines = this.split_lines();
-        	this.update_line_resume_reading(array_lines, stop);
+            let start = this.get_start_line();
+            let stop = this.get_stop_line(start);
+            let array_lines = this.split_lines();
+            this.update_line_resume_reading(array_lines, stop);
         }
     },
 
     update_line_resume_reading: function (array_lines, stop) {
         if(stop < array_lines.length) {
-        	this.line_resume_reading = stop;
+            this.line_resume_reading = stop;
         }
         else {
-        	this.line_resume_reading = 0;
+            this.line_resume_reading = 0;
         }
     },
 
