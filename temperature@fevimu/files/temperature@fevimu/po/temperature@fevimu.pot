@@ -60,3 +60,7 @@ msgstr ""
 #. temperature@fevimu->settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
 msgstr ""
+
+#. temperature@fevimu->settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr ""

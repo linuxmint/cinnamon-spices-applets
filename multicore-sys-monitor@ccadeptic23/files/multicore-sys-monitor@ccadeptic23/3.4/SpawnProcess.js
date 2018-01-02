@@ -2,7 +2,9 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
-const Gtk = imports.gi.Gtk;
+
+const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+const tryFn = AppletDir.utils.tryFn;
 
 function ProcessSpawnHandler(workingdir, childargs) {
   this._init(workingdir, childargs);
@@ -84,9 +86,9 @@ ProcessSpawnHandler.prototype = {
       // (the actual newlines are eaten by Gio.DataInputStream)
       // Send a termination message
       if (line === '' && this._previousLine === '') {
-        try {
+        tryFn(() => {
           this._stdin.write('QUIT\n\n', null);
-        } catch (e) {} /* ignore broken pipe errors */
+        }); /* ignore broken pipe errors */
       } else {
         this._previousLine = line;
         this.currentMessage = line.trim();

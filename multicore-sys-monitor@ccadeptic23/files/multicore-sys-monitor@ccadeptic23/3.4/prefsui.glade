@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.20.1 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
   <object class="GtkAdjustment" id="cpuWidthAdjustment">
@@ -47,10 +47,10 @@
   <object class="GtkWindow" id="windowMain">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Multi-Core System Monitor Preferences</property>
-    <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">preferences-system</property>
+    <property name="has_resize_grip">True</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
@@ -77,8 +77,8 @@
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Labels</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -128,8 +128,8 @@
                         <property name="halign">start</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Resfresh Rate (ms)</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">True</property>
@@ -175,61 +175,10 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="box16">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkLabel" id="heightLabel1">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="halign">start</property>
-                        <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
-                        <property name="ypad">3</property>
-                        <property name="label" translatable="yes">Height</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkScale" id="heightScale">
-                        <property name="width_request">283</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="halign">end</property>
-                        <property name="margin_right">17</property>
-                        <property name="adjustment">heightAdjustment</property>
-                        <property name="round_digits">1</property>
-                        <property name="digits">0</property>
-                        <property name="value_pos">right</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">6</property>
-                    <property name="position">4</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="separator7">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">5</property>
-                  </packing>
+                  <placeholder/>
                 </child>
                 <child>
                   <object class="GtkBox" id="box17">
@@ -241,8 +190,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Label Color</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -293,8 +242,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Background Color</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -352,8 +301,8 @@
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Enable</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -408,8 +357,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -459,8 +408,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Colors</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -524,8 +473,8 @@
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Enable</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -581,8 +530,8 @@
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
                             <property name="margin_right">20</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -632,8 +581,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Colors</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -833,8 +782,8 @@
                             <property name="halign">start</property>
                             <property name="margin_left">10</property>
                             <property name="margin_right">10</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Swap</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -904,8 +853,8 @@
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Enable</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -960,8 +909,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1158,8 +1107,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Devices</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1226,8 +1175,8 @@
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Enable</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1293,8 +1242,8 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_left">10</property>
-                            <property name="xalign">0</property>
                             <property name="label" translatable="yes">Width</property>
+                            <property name="xalign">0</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1491,8 +1440,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="margin_left">10</property>
-                        <property name="xalign">0</property>
                         <property name="label" translatable="yes">Devices</property>
+                        <property name="xalign">0</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1546,7 +1495,7 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -1555,7 +1504,7 @@
           <object class="GtkButtonBox" id="buttonbox1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="layout_style">spread</property>
+            <property name="layout_style">expand</property>
             <child>
               <object class="GtkButton" id="applyButton">
                 <property name="label">gtk-save</property>
@@ -1594,6 +1543,9 @@
           </packing>
         </child>
       </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
     </child>
   </object>
   <object class="GtkMessageDialog" id="scalingAboutDialog">
@@ -1666,6 +1618,9 @@ Logarithmic Scaling:
           </packing>
         </child>
       </object>
+    </child>
+    <child>
+      <placeholder/>
     </child>
   </object>
 </interface>

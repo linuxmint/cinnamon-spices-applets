@@ -1,6 +1,11 @@
 const Gio = imports.gi.Gio;
 const Cinnamon = imports.gi.Cinnamon;
 
+const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+const tryFn = AppletDir.utils.tryFn;
+const map = AppletDir.utils.map;
+const findIndex = AppletDir.utils.findIndex;
+
 function ConfigSettings(confpath) {
   this._init(confpath);
 }
@@ -23,24 +28,14 @@ ConfigSettings.prototype = {
   getNETColorList: function() {
     return this.getDeviceColorList('net');
   },
-  isDeviceEnabled: function(deviceType, deviceName) {
-    return this._prefs[deviceType].devices[deviceName].enabled;
-  },
-  getNETDisabledDevices: function() {
-    let disabledDeviceList = [];
-    for (let ifacename in this._prefs.net.devices) {
-      if (!this._prefs.net.devices[ifacename].enabled) {
-        disabledDeviceList.push(ifacename);
-      }
-    }
-    return disabledDeviceList;
+  getDiskColorList: function() {
+    return this.getDeviceColorList('disk');
   },
   getDeviceColorList: function(deviceType) {
     let colorList = [];
-    // Todo, don't iterate this way
-    for (let deviceName in this._prefs[deviceType].devices) {
-      if (this.isDeviceEnabled(deviceType, deviceName)) {
-        colorList = colorList.concat(this._prefs[deviceType].devices[deviceName].colors);
+    for (let i = 0; i < this._prefs[deviceType].devices.length; i++) {
+      if (this._prefs[deviceType].devices[i].enabled) {
+        colorList = colorList.concat(this._prefs[deviceType].devices[i].colors);
       } else {
         // its cheating but easiest way to turn the devices off while running
         // Todo - remove disabled devices from colorList
@@ -49,17 +44,14 @@ ConfigSettings.prototype = {
     }
     return colorList;
   },
-  getDiskDisabledDevices: function() {
+  getDisabledDevices: function(type) {
     let disabledDeviceList = [];
-    for (let deviceName in this._prefs.disk.devices) {
-      if (!this._prefs.disk.devices[deviceName].enabled) {
-        disabledDeviceList.push(deviceName);
+    for (let i = 0; i < this._prefs[type].devices.length; i++) {
+      if (!this._prefs[type].devices[i].enabled) {
+        disabledDeviceList.push(this._prefs[type].devices[i].id);
       }
     }
     return disabledDeviceList;
-  },
-  getDiskColorList: function() {
-    return this.getDeviceColorList('disk');
   },
   adjustCPUcount: function(newCPUCount) {
     if (this._prefs.cpu.colors.length !== newCPUCount) {
@@ -80,49 +72,56 @@ ConfigSettings.prototype = {
     }
   },
   adjustDevices: function(deviceType, newDeviceList) {
-    let interfaceKeys = Object.keys(this._prefs[deviceType].devices);
-    let newDevicesObject = {};
     let isChanged = false;
+    // Do a migration for the switch from storing devices in objects to arrays
+    if (this._prefs[deviceType].devices != null
+      && !Array.isArray(this._prefs[deviceType].devices)) {
+      let keys = Object.keys(this._prefs[deviceType].devices);
+      let devices = [];
+      for (let i = 0; i < keys.length; i++) {
+        this._prefs[deviceType].devices[keys[i]].id = keys[i];
+        devices.push(this._prefs[deviceType].devices[keys[i]]);
+      }
+      this._prefs[deviceType].devices = devices;
+      isChanged = true;
+    }
+
+    let interfaceKeys = map(this._prefs[deviceType].devices, function(device) {
+      return device.id;
+    });
+
     for (let i = 0; i < newDeviceList.length; i++) {
       if (interfaceKeys.indexOf(newDeviceList[i].id) === -1) {
-        //add it with new made up values
-        newDevicesObject[newDeviceList[i].id] = {
+        // Use default values
+        this._prefs[deviceType].devices.push({
+          id: newDeviceList[i].id,
           enabled: true,
           show: true,
           colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
-        };
+        });
         isChanged = true;
       } else {
-        //reuse it and its values
-        newDevicesObject[newDeviceList[i].id] = this._prefs[deviceType].devices[newDeviceList[i].id];
-        newDevicesObject[newDeviceList[i].id].show = true; //make sure it is not ignored
-        delete this._prefs[deviceType].devices[newDeviceList[i].id];
+        // reuse it and its values
+        let refIndex = findIndex(this._prefs[deviceType].devices, function(device) {
+          return device.id === newDeviceList[i].id;
+        });
+        Object.assign(this._prefs[deviceType].devices[refIndex], newDeviceList[i]);
+        this._prefs[deviceType].devices[refIndex].show = 4;
       }
     }
-    //add unused ones in config, we should keep them you never know what happened
-    for (let deviceName in this._prefs[deviceType].devices) {
-      newDevicesObject[deviceName] = this._prefs[deviceType].devices[deviceName];
-      newDevicesObject[deviceName].show = false;
-    }
-    this._prefs[deviceType].devices = newDevicesObject;
+
     // save only if the devices have changed
     if (isChanged) {
       this.saveSettings();
     }
   },
-  adjustNetInterfaces: function(newDeviceList) {
-    this.adjustDevices('net', newDeviceList);
-  },
-  adjustDiskDevices: function(newDeviceList) {
-    this.adjustDevices('disk', newDeviceList);
-  },
   updateSettings: function(newprefsContent) {
-    try {
+    tryFn(() => {
       this._prefs = JSON.parse(newprefsContent);
       this.saveSettings();
-    } catch (e) {
+    }, (e) => {
       global.logError('Error updating settings: ' + e + ' : ' + newprefsContent);
-    }
+    });
   },
   saveSettings: function() {
     let f = Gio.file_new_for_path(this.path + '/' + this.configFile);
@@ -136,7 +135,6 @@ ConfigSettings.prototype = {
     this._prefs = {
       labelsOn: true,
       refreshRate: 500,
-      height: 21,
       labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
       backgroundColor: [1, 1, 1, 0.1],
       cpu: {
@@ -155,31 +153,25 @@ ConfigSettings.prototype = {
         autoscale: true,
         logscale: true,
         width: 40,
-        devices: {
-          eth0: {
-            enabled: true,
-            show: true,
-            colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
-          }
-        }
+        devices: []
       },
       disk: {
         enabled: true,
         autoscale: true,
         logscale: true,
         width: 40,
-        devices: {
-          '/': {
+        devices: [
+          {
+            id: '/',
             enabled: true,
             show: true,
             colors: [[1, 1, 1, 1], [0.6, 0.6, 0.6, 0.8]]
           }
-        }
+        ]
       }
     };
     let dir = Gio.file_new_for_path(this.path);
     let prefsFile = dir.get_child(this.configFile);
-    //let prefsFilePath = prefsFile.get_path();
     if (prefsFile.query_exists(null)) {
       let prefsContent = Cinnamon.get_file_contents_utf8_sync(prefsFile.get_path());
       this._prefs = JSON.parse(prefsContent);

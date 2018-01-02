@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-05 03:29-0600\n"
+"POT-Creation-Date: 2017-12-09 03:01-0600\n"
 "PO-Revision-Date: 2017-07-27 12:54+0200\n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -14,780 +14,239 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.2/specialMenus.js:113
+#: 3.4/specialMenus.js:119
 msgid "Move to the other monitor"
 msgstr "Auf den anderen Monitor verschieben"
 
-#: 3.2/specialMenus.js:113
+#: 3.4/specialMenus.js:119
 msgid "Move to monitor "
 msgstr "Verschieben auf Monitor "
 
-#: 3.2/specialMenus.js:121
+#: 3.4/specialMenus.js:127
 msgid "Only on this workspace"
 msgstr "Nur auf dieser Arbeitsfläche"
 
-#: 3.2/specialMenus.js:125
+#: 3.4/specialMenus.js:131
 msgid "Visible on all workspaces"
 msgstr "Auf allen Arbeitsflächen anzeigen"
 
-#: 3.2/specialMenus.js:129
+#: 3.4/specialMenus.js:135
 msgid "Move to another workspace"
 msgstr "Auf andere Arbeitsfläche verschieben"
 
-#: 3.2/specialMenus.js:157
+#: 3.4/specialMenus.js:163
 msgid "Places"
 msgstr "Orte"
 
-#: 3.2/specialMenus.js:193
+#: 3.4/specialMenus.js:202
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
 msgstr ""
 
-#: 3.2/specialMenus.js:213
+#: 3.4/specialMenus.js:222
 msgid "Recent"
 msgstr "Kürzlich"
 
-#: 3.2/specialMenus.js:232
+#: 3.4/specialMenus.js:241
 msgid "Preferences"
 msgstr "Einstellungen"
 
-#: 3.2/specialMenus.js:235
+#: 3.4/specialMenus.js:244
 msgid "About..."
 msgstr "Über …"
 
-#: 3.2/specialMenus.js:239
+#: 3.4/specialMenus.js:248
 msgid "Configure..."
 msgstr "Einrichten …"
 
-#: 3.2/specialMenus.js:243
+#: 3.4/specialMenus.js:252
 msgid "Remove"
 msgstr "Entfernen"
 
-#: 3.2/specialMenus.js:277
+#: 3.4/specialMenus.js:286
 msgid "Unpin from Panel"
 msgstr "Von Taskleiste lösen"
 
-#: 3.2/specialMenus.js:277
+#: 3.4/specialMenus.js:286
 msgid "Pin to Panel"
 msgstr "An Taskleiste Anheften"
 
-#: 3.2/specialMenus.js:283
+#: 3.4/specialMenus.js:292
 msgid "Remove from Autostart"
 msgstr "Aus Autostart entfernen"
 
-#: 3.2/specialMenus.js:283
+#: 3.4/specialMenus.js:292
 msgid "Add to Autostart"
 msgstr "Zum Autostart hinzufügen"
 
-#: 3.2/specialMenus.js:289
+#: 3.4/specialMenus.js:298
 msgid "Create Shortcut"
 msgstr "Verknüpfung erstellen"
 
-#: 3.2/specialMenus.js:299
+#: 3.4/specialMenus.js:308
 msgid "Restore to full opacity"
 msgstr "Volle Deckkraft wiederherstellen"
 
-#: 3.2/specialMenus.js:307
+#: 3.4/specialMenus.js:316
 msgid "Restore"
 msgstr "Wiederherstellen"
 
-#: 3.2/specialMenus.js:312
+#: 3.4/specialMenus.js:321
 msgid "Minimize"
 msgstr "Minimieren"
 
-#: 3.2/specialMenus.js:320
+#: 3.4/specialMenus.js:329
 msgid "Unmaximize"
 msgstr "Zurücksetzen"
 
-#: 3.2/specialMenus.js:325
+#: 3.4/specialMenus.js:334
 msgid "Maximize"
 msgstr "Maximieren"
 
-#: 3.2/specialMenus.js:335
+#: 3.4/specialMenus.js:344
 msgid "Close others"
 msgstr "Andere schließen"
 
-#: 3.2/specialMenus.js:345
+#: 3.4/specialMenus.js:354
 msgid "Close all"
 msgstr "Alle schließen"
 
-#: 3.2/specialMenus.js:355
+#: 3.4/specialMenus.js:364
 msgid "Close"
 msgstr "Schließen"
 
-#. 3.2->settings-schema.json->focusPseudoClass->description
+#. 2.8->settings-schema.json->thumbnail-size->description
+#. 3.4->settings-schema.json->thumbnail-size->description
+msgid "Thumbnail size"
+msgstr "Vorschaubild-Größe"
+
+#. 2.8->settings-schema.json->thumbnail-size->tooltip
+#. 3.4->settings-schema.json->thumbnail-size->tooltip
+msgid "Controls the size of the thumbnails."
+msgstr "Steuert die Größe der Vorschaubilder."
+
+#. 2.8->settings-schema.json->thumbnail-size->units
+#. 3.4->settings-schema.json->thumbnail-size->units
+msgid "size"
+msgstr "Größe"
+
 #. 2.8->settings-schema.json->focusPseudoClass->description
+#. 3.4->settings-schema.json->focusPseudoClass->description
 msgid "App button focus pseudo class"
 msgstr "App-Schaltfläche Fokus Pseudo-Klasse"
 
-#. 3.2->settings-schema.json->focusPseudoClass->tooltip
 #. 2.8->settings-schema.json->focusPseudoClass->tooltip
+#. 3.4->settings-schema.json->focusPseudoClass->tooltip
 msgid "Overrides the pseudo class for app button on focus."
 msgstr "Überschreibt die Pseudoklasse für App-Schaltfläche auf Fokus."
 
-#. 3.2->settings-schema.json->focusPseudoClass->options
-#. 3.2->settings-schema.json->hoverPseudoClass->options
-#. 3.2->settings-schema.json->activePseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
 msgid "active"
 msgstr "aktiv"
 
-#. 3.2->settings-schema.json->focusPseudoClass->options
-#. 3.2->settings-schema.json->hoverPseudoClass->options
-#. 3.2->settings-schema.json->activePseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
 msgid "outlined"
 msgstr "eingerahmt"
 
-#. 3.2->settings-schema.json->focusPseudoClass->options
-#. 3.2->settings-schema.json->hoverPseudoClass->options
-#. 3.2->settings-schema.json->activePseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
 msgid "hover"
 msgstr "schweben"
 
-#. 3.2->settings-schema.json->focusPseudoClass->options
-#. 3.2->settings-schema.json->hoverPseudoClass->options
-#. 3.2->settings-schema.json->activePseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
 msgid "focus"
 msgstr "fokussieren"
 
-#. 3.2->settings-schema.json->focusPseudoClass->options
-#. 3.2->settings-schema.json->hoverPseudoClass->options
-#. 3.2->settings-schema.json->activePseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
 msgid "selected"
 msgstr "ausgewählt"
 
-#. 3.2->settings-schema.json->icon-spacing->description
 #. 2.8->settings-schema.json->icon-spacing->description
+#. 3.4->settings-schema.json->icon-spacing->description
 msgid "Icon spacing"
 msgstr "Icon-Abstand"
 
-#. 3.2->settings-schema.json->icon-spacing->tooltip
 #. 2.8->settings-schema.json->icon-spacing->tooltip
+#. 3.4->settings-schema.json->icon-spacing->tooltip
 msgid "Controls how much space is between the icons."
 msgstr "Legt den Abstand zwischen den Icons der Anwendungs-Leiste fest."
 
-#. 3.2->settings-schema.json->icon-spacing->units
-#. 3.2->settings-schema.json->thumbnail-padding->units
-#. 3.2->settings-schema.json->icon-size->units
-#. 3.2->settings-schema.json->app-button-width->units
-#. 3.2->settings-schema.json->thumbnail-close-button-size->units
-#. 3.2->settings-schema.json->icon-padding->units
 #. 2.8->settings-schema.json->icon-spacing->units
 #. 2.8->settings-schema.json->icon-size->units
 #. 2.8->settings-schema.json->icon-padding->units
+#. 3.4->settings-schema.json->icon-spacing->units
+#. 3.4->settings-schema.json->thumbnail-padding->units
+#. 3.4->settings-schema.json->icon-size->units
+#. 3.4->settings-schema.json->app-button-width->units
+#. 3.4->settings-schema.json->thumbnail-close-button-size->units
+#. 3.4->settings-schema.json->icon-padding->units
 msgid "px"
 msgstr "Pixel"
 
-#. 3.2->settings-schema.json->show-thumbnails->description
 #. 2.8->settings-schema.json->show-thumbnails->description
+#. 3.4->settings-schema.json->show-thumbnails->description
 msgid "Show thumbnails"
 msgstr "Zeige Vorschaubilder"
 
-#. 3.2->settings-schema.json->show-thumbnails->tooltip
 #. 2.8->settings-schema.json->show-thumbnails->tooltip
+#. 3.4->settings-schema.json->show-thumbnails->tooltip
 msgid "Show window thumbnails when hovering over an app button."
 msgstr ""
 "Zeigt Fenster-Vorschaubilder beim Hovern über einer Anwendungs-Schaltfläche "
 "an."
 
-#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
-msgid "Highlight the last focused window within an app group"
-msgstr ""
+#. 2.8->settings-schema.json->icon-size->description
+#. 3.4->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "Icongröße"
 
-#. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
-msgid ""
-"When enabled, the last window that was interacted with will be indicated."
-msgstr ""
+#. 2.8->settings-schema.json->icon-size->tooltip
+#. 3.4->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "Icongröße anpassen"
 
-#. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
+#. 3.4->settings-schema.json->hover-peek-time->description
 msgid "Window fade time"
 msgstr "Fenster-Einblendungszeit"
 
-#. 3.2->settings-schema.json->hover-peek-time->tooltip
 #. 2.8->settings-schema.json->hover-peek-time->tooltip
+#. 3.4->settings-schema.json->hover-peek-time->tooltip
 msgid "Controls how quickly a window will fade on hover."
 msgstr ""
 "Steuert die Geschwindigkeit mit der Fenster beim Hovern eingeblendet werden."
 
-#. 3.2->settings-schema.json->hover-peek-time->units
-#. 3.2->settings-schema.json->thumbnail-timeout->units
-#. 3.2->settings-schema.json->show-apps-order-timeout->units
 #. 2.8->settings-schema.json->hover-peek-time->units
 #. 2.8->settings-schema.json->thumbnail-timeout->units
 #. 2.8->settings-schema.json->show-apps-order-timeout->units
+#. 3.4->settings-schema.json->hover-peek-time->units
+#. 3.4->settings-schema.json->thumbnail-timeout->units
+#. 3.4->settings-schema.json->show-apps-order-timeout->units
 msgid "milliseconds"
 msgstr "Millisekunden"
-
-#. 3.2->settings-schema.json->title-display->description
-#. 2.8->settings-schema.json->title-display->description
-msgid "Title display"
-msgstr "Titel-Anzeige"
-
-#. 3.2->settings-schema.json->title-display->tooltip
-#. 2.8->settings-schema.json->title-display->tooltip
-msgid ""
-"focused: show focused window title, title: display the window title, app: "
-"diplay app name, none: don't display anything"
-msgstr ""
-"Fokussiert: Zeigt fokussierten Fenstertitel, Titel: Zeigt Fenstertitel, "
-"Anwendung: Zeigt Name der Anwendung, keine: Zeigt nichts an"
-
-#. 3.2->settings-schema.json->title-display->options
-#. 3.2->settings-schema.json->number-display->options
-#. 2.8->settings-schema.json->title-display->options
-#. 2.8->settings-schema.json->number-display->options
-msgid "None"
-msgstr "Keine"
-
-#. 3.2->settings-schema.json->title-display->options
-#. 2.8->settings-schema.json->title-display->options
-msgid "Focused"
-msgstr "Fokussiert"
-
-#. 3.2->settings-schema.json->title-display->options
-#. 2.8->settings-schema.json->title-display->options
-msgid "App"
-msgstr "Anwendung"
-
-#. 3.2->settings-schema.json->title-display->options
-#. 2.8->settings-schema.json->title-display->options
-msgid "Title"
-msgstr "Titel"
-
-#. 3.2->settings-schema.json->hoverPseudoClass->description
-#. 2.8->settings-schema.json->hoverPseudoClass->description
-msgid "App button hover pseudo class"
-msgstr "App-Taste Hover-Pseudoklasse"
-
-#. 3.2->settings-schema.json->hoverPseudoClass->tooltip
-#. 2.8->settings-schema.json->hoverPseudoClass->tooltip
-msgid "Overrides the pseudo class for app buttons on hover."
-msgstr "Überschreibt die Pseudoklasse für App-Schaltflächen beim Hovern."
-
-#. 3.2->settings-schema.json->show-alerts->description
-#. 2.8->settings-schema.json->show-alerts->description
-msgid "Show app alerts and notifications"
-msgstr "Zeige Benachrichtigungen und Warnmeldungen von Anwendungen"
-
-#. 3.2->settings-schema.json->show-alerts->tooltip
-#. 2.8->settings-schema.json->show-alerts->tooltip
-msgid "If enabled, notifications and alerts will appear."
-msgstr "Wenn aktiviert, werden Benachrichtigungen und Warnmeldungen angezeigt."
-
-#. 3.2->settings-schema.json->pinOnDrag->description
-#. 3.2->settings-schema.json->pinOnDrag->tooltip
-#. 2.8->settings-schema.json->pinOnDrag->description
-#. 2.8->settings-schema.json->pinOnDrag->tooltip
-msgid "Pin apps when dragged to a new position"
-msgstr "Pin apps, wenn auf eine neue Position gezogen"
-
-#. 3.2->settings-schema.json->show-apps-order-hotkey->description
-#. 2.8->settings-schema.json->show-apps-order-hotkey->description
-msgid "Global hotkey to show the order of apps"
-msgstr "Globales Tastaturkürzel, um die Reihenfolge der Apps anzuzeigen"
-
-#. 3.2->settings-schema.json->show-apps-order-hotkey->tooltip
-#. 2.8->settings-schema.json->show-apps-order-hotkey->tooltip
-msgid ""
-"When triggered, the window count label will be replaced with its order in "
-"the app list temporarily."
-msgstr ""
-"Wenn es ausgelöst wird, wird das Fensterzähler-Label durch seine Reihenfolge "
-"in der Anwendungs-Liste vorübergehend ersetzt."
-
-#. 3.2->settings-schema.json->thumbnail-padding->description
-#, fuzzy
-msgid "Thumbnail padding"
-msgstr "Vorschaubild-Einstellungen"
-
-#. 3.2->settings-schema.json->thumbnail-padding->tooltip
-#, fuzzy
-msgid "Controls how much space will be around the window preview thumbnails."
-msgstr "Legt den Abstand zwischen den Icons der Anwendungs-Leiste fest."
-
-#. 3.2->settings-schema.json->system-favorites->description
-msgid "Use system favorites for pinned apps"
-msgstr "Verwende Systemfavoriten für angeheftete Anwendungen"
-
-#. 3.2->settings-schema.json->system-favorites->tooltip
-msgid ""
-"Controls whether or not pinned apps consist of the system favorites list."
-msgstr ""
-"Steuert, ob angeheftete Anwendungen aus den Systemfavoriten angezeigt werden "
-"sollen."
-
-#. 3.2->settings-schema.json->hover-peek-opacity->description
-#. 2.8->settings-schema.json->hover-peek-opacity->description
-msgid "Window opacity"
-msgstr "Fenster-Transparenz"
-
-#. 3.2->settings-schema.json->hover-peek-opacity->tooltip
-#. 2.8->settings-schema.json->hover-peek-opacity->tooltip
-msgid "Opacity of the windows on hover."
-msgstr "Steuert die Transparenz der Vorschaubilder."
-
-#. 3.2->settings-schema.json->hover-peek-opacity->units
-#. 2.8->settings-schema.json->hover-peek-opacity->units
-msgid "percent"
-msgstr "Prozent"
-
-#. 3.2->settings-schema.json->enable-hover-peek->description
-#. 2.8->settings-schema.json->enable-hover-peek->description
-msgid "Show windows when hovered over"
-msgstr "Zeige Fenster beim Hovern"
-
-#. 3.2->settings-schema.json->enable-hover-peek->tooltip
-#. 2.8->settings-schema.json->enable-hover-peek->tooltip
-msgid "Controls whether or not windows display when hovered over."
-msgstr "Steuert, ob Fenster-Vorschaubilder beim Hovern angezeigt werden."
-
-#. 3.2->settings-schema.json->activePseudoClass->description
-#. 2.8->settings-schema.json->activePseudoClass->description
-msgid "App button active pseudo class"
-msgstr "App-Taste aktive Pseudoklasse"
-
-#. 3.2->settings-schema.json->activePseudoClass->tooltip
-#. 2.8->settings-schema.json->activePseudoClass->tooltip
-msgid "Overrides the pseudo class for app buttons when they are active."
-msgstr ""
-"Überschreibt die Pseudoklasse für App-Schaltflächen, wenn sie aktiv sind."
-
-#. 3.2->settings-schema.json->thumbnailsPage->title
-#. 3.2->settings-schema.json->thumbnailsSection->title
-msgid "Thumbnails"
-msgstr "Fenstervorschau"
-
-#. 3.2->settings-schema.json->appButtonsSection->title
-msgid "App Buttons"
-msgstr "Anwendungsknöpfe"
-
-#. 3.2->settings-schema.json->hoverPeekSection->title
-msgid "Hover Peek"
-msgstr "Vorschau, wenn Maus"
-
-#. 3.2->settings-schema.json->panelPage->title
-msgid "Panel"
-msgstr "Leiste"
-
-#. 3.2->settings-schema.json->iconSection->title
-msgid "Icons"
-msgstr "Icons"
-
-#. 3.2->settings-schema.json->presetSection->title
-msgid "Recommended Presets"
-msgstr "Empfohlene Voreinstellungen"
-
-#. 3.2->settings-schema.json->hotKeysSection->title
-msgid "Hot Keys"
-msgstr "Tastenkürzel"
-
-#. 3.2->settings-schema.json->stylingSection->title
-msgid "Styling"
-msgstr "Design"
-
-#. 3.2->settings-schema.json->contextMenuPage->title
-msgid "Context Menu"
-msgstr "Kontextmenü"
-
-#. 3.2->settings-schema.json->themePage->title
-msgid "Theming"
-msgstr "Themen einstellen"
-
-#. 3.2->settings-schema.json->icon-size->description
-#. 2.8->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "Icongröße"
-
-#. 3.2->settings-schema.json->icon-size->tooltip
-#. 2.8->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "Icongröße anpassen"
-
-#. 3.2->settings-schema.json->animate-thumbnails->description
-#. 2.8->settings-schema.json->animate-thumbnails->description
-msgid "Animate thumbnails"
-msgstr "Animierte Miniaturansichten"
-
-#. 3.2->settings-schema.json->animate-thumbnails->tooltip
-#. 2.8->settings-schema.json->animate-thumbnails->tooltip
-msgid "If enabled, thumbnails will animate when appearing and disappearing."
-msgstr ""
-"Wenn aktiviert, werden Miniaturansichten animiert, wenn sie angezeigt werden "
-"oder verschwinden."
-
-#. 3.2->settings-schema.json->mintYPreset->description
-#. 3.2->settings-schema.json->mintYPreset->tooltip
-msgid "Mint Y and Variants"
-msgstr "Mint-Y und Varianten"
-
-#. 3.2->settings-schema.json->autostart-menu-item->description
-#. 2.8->settings-schema.json->autostart-menu-item->description
-msgid "Show autostart option"
-msgstr "Autostart-Option anzeigen"
-
-#. 3.2->settings-schema.json->autostart-menu-item->tooltip
-#. 2.8->settings-schema.json->autostart-menu-item->tooltip
-msgid "Shows the autostart toggle option in an app's context menu."
-msgstr "Zeigt die Autostart-Umschaltoption im Kontextmenü einer App an."
-
-#. 3.2->settings-schema.json->show-pinned->description
-#. 2.8->settings-schema.json->show-pinned->description
-msgid "Show pinned apps"
-msgstr "Zeige angeheftete Anwendungen"
-
-#. 3.2->settings-schema.json->show-pinned->tooltip
-#. 2.8->settings-schema.json->show-pinned->tooltip
-msgid ""
-"Controls whether or not the pinned apps appear in the panel if they are not "
-"open."
-msgstr ""
-"Steuert, ob angeheftete Anwendungen angezeigt werden, wenn sie nicht "
-"geöffnet sind."
-
-#. 3.2->settings-schema.json->enable-app-button-dragging->description
-#. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
-msgid "Enable app button dragging"
-msgstr "Ziehen von Anwendungsknöpfen erlauben"
-
-#. 3.2->settings-schema.json->app-button-width->description
-msgid "App button width"
-msgstr "Breite der Anwendungsknöpfe"
-
-#. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
-msgid ""
-"Controls the width of the application button. This option only works for "
-"horizontal panels."
-msgstr "Steuert die Größe der Anwendungsknöpfe."
-
-#. 3.2->settings-schema.json->show-recent->description
-#. 2.8->settings-schema.json->show-recent->description
-msgid "Show recent items"
-msgstr "Zeige kürzlich verwendete Elemente"
-
-#. 3.2->settings-schema.json->show-recent->tooltip
-#. 2.8->settings-schema.json->show-recent->tooltip
-msgid "Controls whether recent items will appear in the context menu."
-msgstr ""
-"Steuert, ob kürzlich verwendete Elemente im Kontextmenü angezeigt werden."
-
-#. 3.2->settings-schema.json->vertical-thumbnails->description
-#. 2.8->settings-schema.json->vertical-thumbnails->description
-msgid "Enable vertical thumbnails"
-msgstr "Aktiviere vertikale Vorschaubilder"
-
-#. 3.2->settings-schema.json->vertical-thumbnails->tooltip
-#. 2.8->settings-schema.json->vertical-thumbnails->tooltip
-msgid "If enabled, thumbnails will stack vertically."
-msgstr "Wenn aktiviert, werden Vorschaubilder vertikal gestapelt."
-
-#. 3.2->settings-schema.json->thumbnail-size->description
-#. 2.8->settings-schema.json->thumbnail-size->description
-msgid "Thumbnail size"
-msgstr "Vorschaubild-Größe"
-
-#. 3.2->settings-schema.json->thumbnail-size->tooltip
-#. 2.8->settings-schema.json->thumbnail-size->tooltip
-msgid "Controls the size of the thumbnails."
-msgstr "Steuert die Größe der Vorschaubilder."
-
-#. 3.2->settings-schema.json->thumbnail-size->units
-#. 2.8->settings-schema.json->thumbnail-size->units
-msgid "size"
-msgstr "Größe"
-
-#. 3.2->settings-schema.json->menuItemType->description
-#. 2.8->settings-schema.json->menuItemType->description
-msgid "Menu item type"
-msgstr "Menüpunkttyp"
-
-#. 3.2->settings-schema.json->menuItemType->tooltip
-#. 2.8->settings-schema.json->menuItemType->tooltip
-msgid ""
-"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
-msgstr ""
-"Legt fest, ob Icons für das Menüelement symbolisch, nicht symbolisch oder "
-"nicht dargestellt sind."
-
-#. 3.2->settings-schema.json->menuItemType->options
-#. 2.8->settings-schema.json->menuItemType->options
-msgid "Symbolic icons"
-msgstr "Symbolische Icons"
-
-#. 3.2->settings-schema.json->menuItemType->options
-#. 2.8->settings-schema.json->menuItemType->options
-msgid "No icons"
-msgstr "Keine Icons"
-
-#. 3.2->settings-schema.json->menuItemType->options
-#. 2.8->settings-schema.json->menuItemType->options
-msgid "Non-symbolic icons"
-msgstr "Nicht-symbolische Icons"
-
-#. 3.2->settings-schema.json->thumbnail-timeout->description
-#. 2.8->settings-schema.json->thumbnail-timeout->description
-msgid "Thumbnail timeout"
-msgstr "Vorschaubild-Ausblendungsverzögerung"
-
-#. 3.2->settings-schema.json->thumbnail-timeout->tooltip
-#. 2.8->settings-schema.json->thumbnail-timeout->tooltip
-msgid ""
-"Controls how quickly an app's set of window thumbnails will fade out when "
-"the mouse leaves the app button."
-msgstr ""
-"Steuert, wie schnell die zu einer Anwendung gehörenden Vorschaubilder "
-"ausgeblendet werden, wenn die Maus die Anwendungs-Schaltfläche verlässt."
-
-#. 3.2->settings-schema.json->enable-app-button-width->description
-msgid "Use a custom width for app buttons"
-msgstr ""
-
-#. 3.2->settings-schema.json->enable-app-button-width->tooltip
-msgid "When disabled, the app button width is determined by the panel height."
-msgstr ""
-
-#. 3.2->settings-schema.json->cycleMenusHotkey->description
-#. 2.8->settings-schema.json->cycleMenusHotkey->description
-msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "Globales Tastaturkürzel zum Durchlaufen von Vorschaubildern-Menüs"
-
-#. 3.2->settings-schema.json->cycleMenusHotkey->tooltip
-#. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
-msgid "This allows you to cycle through the menus without activating a window."
-msgstr ""
-"Dadurch können Sie durch die Menüs navigieren, ohne ein Fenster zu "
-"aktivieren."
-
-#. 3.2->settings-schema.json->enable-iconSize->description
-#. 2.8->settings-schema.json->enable-iconSize->description
-msgid "Adjust icon size"
-msgstr "Icongröße anpassen"
-
-#. 3.2->settings-schema.json->enable-iconSize->tooltip
-#. 2.8->settings-schema.json->enable-iconSize->tooltip
-msgid "Adjust icon size independent of Cinnamon's panel scaling."
-msgstr "Icongröße unabhängig von der Cinnamon-Leiste anpassen."
-
-#. 3.2->settings-schema.json->list-monitor-windows->description
-msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
-"Nur Fenster von dem Monitor auflisten, auf dem diese Instanz angezeigt wird"
-
-#. 3.2->settings-schema.json->list-monitor-windows->tooltip
-msgid ""
-"This option will only come into effect for monitors displaying an ITM "
-"instance."
-msgstr ""
-"Diese Option wird nur für Monitore, die eine ITM-Instanz anzeigen, in Kraft "
-"treten."
-
-#. 3.2->settings-schema.json->number-display->description
-#. 2.8->settings-schema.json->number-display->description
-msgid "Number display"
-msgstr "Fensteranzahl anzeigen"
-
-#. 3.2->settings-schema.json->number-display->tooltip
-#. 2.8->settings-schema.json->number-display->tooltip
-msgid ""
-"normal: display window number, smart: display window number if more than one "
-"window, none: don't display number, all: display window number for favorites "
-"too"
-msgstr ""
-"Normal: Zeige Fensteranzahl, Smart: Zeige Fensteranzahl, wenn mehr als ein "
-"Fenster vorhanden ist, Keine: Verberge die Fensteranzahl, Alle: Zeige die "
-"Fensteranzahl auch bei angehefteten Fenstern an"
-
-#. 3.2->settings-schema.json->number-display->options
-#. 2.8->settings-schema.json->number-display->options
-msgid "All"
-msgstr "Alle"
-
-#. 3.2->settings-schema.json->number-display->options
-#. 2.8->settings-schema.json->number-display->options
-msgid "Smart"
-msgstr "Smart"
-
-#. 3.2->settings-schema.json->number-display->options
-#. 2.8->settings-schema.json->number-display->options
-msgid "Normal"
-msgstr "Normal"
-
-#. 3.2->settings-schema.json->onclick-thumbnails->description
-#. 2.8->settings-schema.json->onclick-thumbnails->description
-msgid "Open thumbnails on click"
-msgstr "Öffnen der Vorschaubilder durch Klicken"
-
-#. 3.2->settings-schema.json->onclick-thumbnails->tooltip
-#. 2.8->settings-schema.json->onclick-thumbnails->tooltip
-msgid "Open the thumbnails on click if there is more than one window open."
-msgstr ""
-"Öffnen der Vorschaubilder durch Klicken, wenn bereits mehr als ein Fenster "
-"geöffnet ist."
-
-#. 3.2->settings-schema.json->thumbnail-close-button-size->description
-#, fuzzy
-msgid "Close button size"
-msgstr "Icongröße anpassen"
-
-#. 3.2->settings-schema.json->thumbnail-close-button-size->tooltip
-#, fuzzy
-msgid "Controls how large the thumbnail close button is."
-msgstr ""
-"Erlaube Themen die Schaltflächen zum beenden der Anwendungen zu steuern"
-
-#. 3.2->settings-schema.json->icon-padding->description
-#. 2.8->settings-schema.json->icon-padding->description
-msgid "Icon padding"
-msgstr "Icon-Polsterung"
-
-#. 3.2->settings-schema.json->icon-padding->tooltip
-#. 2.8->settings-schema.json->icon-padding->tooltip
-msgid ""
-"Controls how much horizontal padding is inside the app buttons. Padding is "
-"only applied to instances of this applet on horizontal panels."
-msgstr ""
-"Steuert, wie viel horizontale Polsterung innerhalb der App-Schaltflächen "
-"ist. Polsterung wird nur auf Instanzen dieses Applets auf horizontalen "
-"Leisten angewendet."
-
-#. 3.2->settings-schema.json->middle-click-action->description
-#. 2.8->settings-schema.json->middle-click-action->description
-msgid "Middle clicking app buttons creates new app instances"
-msgstr ""
-"Mit der mittleren Klick-App-Schaltfläche werden neue App-Instanzen erstellt"
-
-#. 3.2->settings-schema.json->middle-click-action->tooltip
-#. 2.8->settings-schema.json->middle-click-action->tooltip
-msgid ""
-"Determines the behavior of middle mouse button clicks on app buttons. "
-"Setting this to false will close the last focused window from the app group "
-"on middle click."
-msgstr ""
-"Bestimmt das Verhalten der mittleren Maustaste Klicks auf App-Schaltflächen. "
-"Wenn Sie dies auf false setzen, wird das letzte fokussierte Fenster aus der "
-"App-Gruppe beim mittleren Klick geschlossen."
-
-#. 3.2->settings-schema.json->firefox-menu->description
-#. 2.8->settings-schema.json->firefox-menu->description
-msgid "Firefox context menu"
-msgstr "Firefox-Kontextmenü"
-
-#. 3.2->settings-schema.json->firefox-menu->tooltip
-#. 2.8->settings-schema.json->firefox-menu->tooltip
-msgid ""
-"Most Visited: show the sites you visit most, Recent History: display the the "
-"last pages you visited, Bookmarks: show your favorite bookmarks."
-msgstr ""
-"Häufige Aufrufe: Zeigt Seiten die du oft besucht hast, Kürzliche Aufrufe: "
-"Zeigt Seiten die du kürzlich besucht hast, Lesezeichen: Zeigt nur deine "
-"Lesezeichen."
-
-#. 3.2->settings-schema.json->firefox-menu->options
-#. 2.8->settings-schema.json->firefox-menu->options
-msgid "Bookmarks"
-msgstr "Lesezeichen"
-
-#. 3.2->settings-schema.json->firefox-menu->options
-#. 2.8->settings-schema.json->firefox-menu->options
-msgid "Most Visited"
-msgstr "Häufige Aufrufe"
-
-#. 3.2->settings-schema.json->firefox-menu->options
-#. 2.8->settings-schema.json->firefox-menu->options
-msgid "Recent History"
-msgstr "Kürzliche Aufrufe"
-
-#. 3.2->settings-schema.json->group-apps->description
-#. 2.8->settings-schema.json->group-apps->description
-msgid "Group apps"
-msgstr "Gruppiere Anwendungen"
-
-#. 3.2->settings-schema.json->group-apps->tooltip
-#. 2.8->settings-schema.json->group-apps->tooltip
-msgid "Group each app's set of windows."
-msgstr "Gruppiere die Fenster jeder Anwendung."
-
-#. 3.2->settings-schema.json->show-active->description
-#. 2.8->settings-schema.json->show-active->description
-msgid "Show active app indicators"
-msgstr "Geöffnete Anwendungen hervorheben"
-
-#. 3.2->settings-schema.json->show-active->tooltip
-#. 2.8->settings-schema.json->show-active->tooltip
-msgid "Active app styling will indicate if an app is active."
-msgstr "Geöffnete Anwendungen werden besonders hervorgehoben."
-
-#. 3.2->settings-schema.json->show-apps-order-timeout->description
-#. 2.8->settings-schema.json->show-apps-order-timeout->description
-msgid "Duration of the apps order display on hotkey press"
-msgstr "Dauer der Anwendungsauflistung beim Verwenden des Tastaturkürzels"
-
-#. 3.2->settings-schema.json->show-apps-order-timeout->tooltip
-#. 2.8->settings-schema.json->show-apps-order-timeout->tooltip
-msgid ""
-"Determines the duration the window count labels are replaced with the app's "
-"order number."
-msgstr ""
-"Legt die Dauer fest, die das Fensterzähler-Label durch die Reihenfolge der "
-"Anwendung ersetzt werden."
-
-#. 3.2->settings-schema.json->include-all-windows->description
-#. 2.8->settings-schema.json->include-all-windows->description
-msgid "Include all app windows"
-msgstr "Zeige alle Anwendungs-Fenster an"
-
-#. 3.2->settings-schema.json->include-all-windows->tooltip
-#. 2.8->settings-schema.json->include-all-windows->tooltip
-msgid ""
-"Controls whether or not thumbnails for smalller child windows, such as exit "
-"confirmations and file dialogues will be included in the thumbnail list."
-msgstr ""
-"Steuert, ob Vorschaubilder für kleine untergeordnete Fenster, z. B. Exit-"
-"Bestätigungen und Dateidialoge, in die Vorschaubild-Liste aufgenommen werden."
-
-#. 3.2->settings-schema.json->monitor-move-all-windows->description
-#. 2.8->settings-schema.json->monitor-move-all-windows->description
-msgid "Apply the monitor move option to all windows"
-msgstr "Wenden Sie die Monitorbewegungsoption auf alle Fenster an"
-
-#. 3.2->settings-schema.json->monitor-move-all-windows->tooltip
-#. 2.8->settings-schema.json->monitor-move-all-windows->tooltip
-msgid ""
-"When clicking \"Move to monitor\" in the context menu, this option will move "
-"all of an app's windows instead of just the last focused window from the app."
-msgstr ""
-"Wenn Sie im Kontextmenü auf \"Verschieben auf Monitor\" klicken, wird diese "
-"Option alle Fenster einer Anwendung statt nur das zuletzt fokussiert Fenster "
-"verschieben."
-
-#. 3.2->settings-schema.json->sort-thumbnails->description
-#. 2.8->settings-schema.json->sort-thumbnails->description
-msgid "Sort windows for each app by last focused"
-msgstr "Sortiert Fenster anhand zuletzt fokussierter Fenster."
-
-#. 3.2->settings-schema.json->sort-thumbnails->tooltip
-#. 2.8->settings-schema.json->sort-thumbnails->tooltip
-msgid ""
-"Controls whether the order windows appear for an app is by last focused, or "
-"the order they were opened."
-msgstr ""
-"Steuert, ob die Reihenfolge der Anzeige von Fenstern durch zuletzt "
-"fokussierte Fenster oder durch die Reihenfolge in der sie geöffnet wurden "
-"bestimmt wird."
 
 #. 2.8->settings-schema.json->close-button-style->description
 msgid "Allow themes to control the thumbnail close button"
@@ -801,6 +260,186 @@ msgid ""
 msgstr ""
 "Steuert, ob das Thema die Schaltfläche zum Schließen der Fenster-"
 "Miniaturansicht steuert."
+
+#. 2.8->settings-schema.json->title-display->description
+#. 3.4->settings-schema.json->title-display->description
+msgid "Title display"
+msgstr "Titel-Anzeige"
+
+#. 2.8->settings-schema.json->title-display->tooltip
+#. 3.4->settings-schema.json->title-display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+"Fokussiert: Zeigt fokussierten Fenstertitel, Titel: Zeigt Fenstertitel, "
+"Anwendung: Zeigt Name der Anwendung, keine: Zeigt nichts an"
+
+#. 2.8->settings-schema.json->title-display->options
+#. 2.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->middle-click-action->options
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
+msgid "None"
+msgstr "Keine"
+
+#. 2.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "Focused"
+msgstr "Fokussiert"
+
+#. 2.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "App"
+msgstr "Anwendung"
+
+#. 2.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "Title"
+msgstr "Titel"
+
+#. 2.8->settings-schema.json->hoverPseudoClass->description
+#. 3.4->settings-schema.json->hoverPseudoClass->description
+msgid "App button hover pseudo class"
+msgstr "App-Taste Hover-Pseudoklasse"
+
+#. 2.8->settings-schema.json->hoverPseudoClass->tooltip
+#. 3.4->settings-schema.json->hoverPseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "Überschreibt die Pseudoklasse für App-Schaltflächen beim Hovern."
+
+#. 2.8->settings-schema.json->show-alerts->description
+#. 3.4->settings-schema.json->show-alerts->description
+msgid "Show app alerts and notifications"
+msgstr "Zeige Benachrichtigungen und Warnmeldungen von Anwendungen"
+
+#. 2.8->settings-schema.json->show-alerts->tooltip
+#. 3.4->settings-schema.json->show-alerts->tooltip
+msgid "If enabled, notifications and alerts will appear."
+msgstr "Wenn aktiviert, werden Benachrichtigungen und Warnmeldungen angezeigt."
+
+#. 2.8->settings-schema.json->pinOnDrag->description
+#. 2.8->settings-schema.json->pinOnDrag->tooltip
+#. 3.4->settings-schema.json->pinOnDrag->description
+#. 3.4->settings-schema.json->pinOnDrag->tooltip
+msgid "Pin apps when dragged to a new position"
+msgstr "Pin apps, wenn auf eine neue Position gezogen"
+
+#. 2.8->settings-schema.json->show-apps-order-hotkey->description
+#. 3.4->settings-schema.json->show-apps-order-hotkey->description
+msgid "Global hotkey to show the order of apps"
+msgstr "Globales Tastaturkürzel, um die Reihenfolge der Apps anzuzeigen"
+
+#. 2.8->settings-schema.json->show-apps-order-hotkey->tooltip
+#. 3.4->settings-schema.json->show-apps-order-hotkey->tooltip
+msgid ""
+"When triggered, the window count label will be replaced with its order in "
+"the app list temporarily."
+msgstr ""
+"Wenn es ausgelöst wird, wird das Fensterzähler-Label durch seine Reihenfolge "
+"in der Anwendungs-Liste vorübergehend ersetzt."
+
+#. 2.8->settings-schema.json->menuItemType->description
+#. 3.4->settings-schema.json->menuItemType->description
+msgid "Menu item type"
+msgstr "Menüpunkttyp"
+
+#. 2.8->settings-schema.json->menuItemType->tooltip
+#. 3.4->settings-schema.json->menuItemType->tooltip
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr ""
+"Legt fest, ob Icons für das Menüelement symbolisch, nicht symbolisch oder "
+"nicht dargestellt sind."
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "Symbolic icons"
+msgstr "Symbolische Icons"
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "No icons"
+msgstr "Keine Icons"
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "Non-symbolic icons"
+msgstr "Nicht-symbolische Icons"
+
+#. 2.8->settings-schema.json->hover-peek-opacity->description
+#. 3.4->settings-schema.json->hover-peek-opacity->description
+msgid "Window opacity"
+msgstr "Fenster-Transparenz"
+
+#. 2.8->settings-schema.json->hover-peek-opacity->tooltip
+#. 3.4->settings-schema.json->hover-peek-opacity->tooltip
+msgid "Opacity of the windows on hover."
+msgstr "Steuert die Transparenz der Vorschaubilder."
+
+#. 2.8->settings-schema.json->hover-peek-opacity->units
+#. 3.4->settings-schema.json->hover-peek-opacity->units
+msgid "percent"
+msgstr "Prozent"
+
+#. 2.8->settings-schema.json->enable-hover-peek->description
+#. 3.4->settings-schema.json->enable-hover-peek->description
+msgid "Show windows when hovered over"
+msgstr "Zeige Fenster beim Hovern"
+
+#. 2.8->settings-schema.json->enable-hover-peek->tooltip
+#. 3.4->settings-schema.json->enable-hover-peek->tooltip
+msgid "Controls whether or not windows display when hovered over."
+msgstr "Steuert, ob Fenster-Vorschaubilder beim Hovern angezeigt werden."
+
+#. 2.8->settings-schema.json->activePseudoClass->description
+#. 3.4->settings-schema.json->activePseudoClass->description
+msgid "App button active pseudo class"
+msgstr "App-Taste aktive Pseudoklasse"
+
+#. 2.8->settings-schema.json->activePseudoClass->tooltip
+#. 3.4->settings-schema.json->activePseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr ""
+"Überschreibt die Pseudoklasse für App-Schaltflächen, wenn sie aktiv sind."
+
+#. 2.8->settings-schema.json->animate-thumbnails->description
+#. 3.4->settings-schema.json->animate-thumbnails->description
+msgid "Animate thumbnails"
+msgstr "Animierte Miniaturansichten"
+
+#. 2.8->settings-schema.json->animate-thumbnails->tooltip
+#. 3.4->settings-schema.json->animate-thumbnails->tooltip
+msgid "If enabled, thumbnails will animate when appearing and disappearing."
+msgstr ""
+"Wenn aktiviert, werden Miniaturansichten animiert, wenn sie angezeigt werden "
+"oder verschwinden."
+
+#. 2.8->settings-schema.json->autostart-menu-item->description
+#. 3.4->settings-schema.json->autostart-menu-item->description
+msgid "Show autostart option"
+msgstr "Autostart-Option anzeigen"
+
+#. 2.8->settings-schema.json->autostart-menu-item->tooltip
+#. 3.4->settings-schema.json->autostart-menu-item->tooltip
+msgid "Shows the autostart toggle option in an app's context menu."
+msgstr "Zeigt die Autostart-Umschaltoption im Kontextmenü einer App an."
+
+#. 2.8->settings-schema.json->show-pinned->description
+#. 3.4->settings-schema.json->show-pinned->description
+msgid "Show pinned apps"
+msgstr "Zeige angeheftete Anwendungen"
+
+#. 2.8->settings-schema.json->show-pinned->tooltip
+#. 3.4->settings-schema.json->show-pinned->tooltip
+msgid ""
+"Controls whether or not the pinned apps appear in the panel if they are not "
+"open."
+msgstr ""
+"Steuert, ob angeheftete Anwendungen angezeigt werden, wenn sie nicht "
+"geöffnet sind."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"
@@ -826,9 +465,56 @@ msgstr "Kontextmenü-Einstellungen"
 msgid "Thumbnail Settings"
 msgstr "Vorschaubild-Einstellungen"
 
+#. 2.8->settings-schema.json->show-recent->description
+#. 3.4->settings-schema.json->show-recent->description
+msgid "Show recent items"
+msgstr "Zeige kürzlich verwendete Elemente"
+
+#. 2.8->settings-schema.json->show-recent->tooltip
+#. 3.4->settings-schema.json->show-recent->tooltip
+msgid "Controls whether recent items will appear in the context menu."
+msgstr ""
+"Steuert, ob kürzlich verwendete Elemente im Kontextmenü angezeigt werden."
+
+#. 2.8->settings-schema.json->vertical-thumbnails->description
+#. 3.4->settings-schema.json->vertical-thumbnails->description
+msgid "Enable vertical thumbnails"
+msgstr "Aktiviere vertikale Vorschaubilder"
+
+#. 2.8->settings-schema.json->vertical-thumbnails->tooltip
+#. 3.4->settings-schema.json->vertical-thumbnails->tooltip
+msgid "If enabled, thumbnails will stack vertically."
+msgstr "Wenn aktiviert, werden Vorschaubilder vertikal gestapelt."
+
+#. 2.8->settings-schema.json->thumbnail-timeout->description
+#. 3.4->settings-schema.json->thumbnail-timeout->description
+msgid "Thumbnail timeout"
+msgstr "Vorschaubild-Ausblendungsverzögerung"
+
+#. 2.8->settings-schema.json->thumbnail-timeout->tooltip
+#. 3.4->settings-schema.json->thumbnail-timeout->tooltip
+msgid ""
+"Controls how quickly an app's set of window thumbnails will fade out when "
+"the mouse leaves the app button."
+msgstr ""
+"Steuert, wie schnell die zu einer Anwendung gehörenden Vorschaubilder "
+"ausgeblendet werden, wenn die Maus die Anwendungs-Schaltfläche verlässt."
+
 #. 2.8->settings-schema.json->ThemeSettings->description
 msgid "Theme Settings"
 msgstr "Themen-Einstellungen"
+
+#. 2.8->settings-schema.json->onclick-thumbnails->description
+#. 3.4->settings-schema.json->onclick-thumbnails->description
+msgid "Open thumbnails on click"
+msgstr "Öffnen der Vorschaubilder durch Klicken"
+
+#. 2.8->settings-schema.json->onclick-thumbnails->tooltip
+#. 3.4->settings-schema.json->onclick-thumbnails->tooltip
+msgid "Open the thumbnails on click if there is more than one window open."
+msgstr ""
+"Öffnen der Vorschaubilder durch Klicken, wenn bereits mehr als ein Fenster "
+"geöffnet ist."
 
 #. 2.8->settings-schema.json->panelLauncherClass->description
 msgid "Use the panel launcher class for pinned apps"
@@ -838,6 +524,73 @@ msgstr "Verwenden Sie die Panel-Launcher-Klasse für angeheftete Aanwendungen"
 msgid "Enabling this helps with certain themes."
 msgstr "Dies hilft bei bestimmten Themen."
 
+#. 2.8->settings-schema.json->include-all-windows->description
+#. 3.4->settings-schema.json->include-all-windows->description
+msgid "Include all app windows"
+msgstr "Zeige alle Anwendungs-Fenster an"
+
+#. 2.8->settings-schema.json->include-all-windows->tooltip
+#. 3.4->settings-schema.json->include-all-windows->tooltip
+msgid ""
+"Controls whether or not thumbnails for smalller child windows, such as exit "
+"confirmations and file dialogues will be included in the thumbnail list."
+msgstr ""
+"Steuert, ob Vorschaubilder für kleine untergeordnete Fenster, z. B. Exit-"
+"Bestätigungen und Dateidialoge, in die Vorschaubild-Liste aufgenommen werden."
+
+#. 2.8->settings-schema.json->cycleMenusHotkey->description
+#. 3.4->settings-schema.json->cycleMenusHotkey->description
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "Globales Tastaturkürzel zum Durchlaufen von Vorschaubildern-Menüs"
+
+#. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
+#. 3.4->settings-schema.json->cycleMenusHotkey->tooltip
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr ""
+"Dadurch können Sie durch die Menüs navigieren, ohne ein Fenster zu "
+"aktivieren."
+
+#. 2.8->settings-schema.json->enable-iconSize->description
+#. 3.4->settings-schema.json->enable-iconSize->description
+msgid "Adjust icon size"
+msgstr "Icongröße anpassen"
+
+#. 2.8->settings-schema.json->enable-iconSize->tooltip
+#. 3.4->settings-schema.json->enable-iconSize->tooltip
+msgid "Adjust icon size independent of Cinnamon's panel scaling."
+msgstr "Icongröße unabhängig von der Cinnamon-Leiste anpassen."
+
+#. 2.8->settings-schema.json->number-display->description
+#. 3.4->settings-schema.json->number-display->description
+msgid "Number display"
+msgstr "Fensteranzahl anzeigen"
+
+#. 2.8->settings-schema.json->number-display->tooltip
+#. 3.4->settings-schema.json->number-display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+"Normal: Zeige Fensteranzahl, Smart: Zeige Fensteranzahl, wenn mehr als ein "
+"Fenster vorhanden ist, Keine: Verberge die Fensteranzahl, Alle: Zeige die "
+"Fensteranzahl auch bei angehefteten Fenstern an"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "All"
+msgstr "Alle"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "Smart"
+msgstr "Smart"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "Normal"
+msgstr "Normal"
+
 #. 2.8->settings-schema.json->ITM->description
 msgid "ITM Settings"
 msgstr "ITM-Einstellungen"
@@ -845,6 +598,66 @@ msgstr "ITM-Einstellungen"
 #. 2.8->settings-schema.json->HoverPeek->description
 msgid "Hover Peek Settings"
 msgstr "Hovern für Vorschau-Einstellungen"
+
+#. 2.8->settings-schema.json->icon-padding->description
+#. 3.4->settings-schema.json->icon-padding->description
+msgid "Icon padding"
+msgstr "Icon-Polsterung"
+
+#. 2.8->settings-schema.json->icon-padding->tooltip
+#. 3.4->settings-schema.json->icon-padding->tooltip
+msgid ""
+"Controls how much horizontal padding is inside the app buttons. Padding is "
+"only applied to instances of this applet on horizontal panels."
+msgstr ""
+"Steuert, wie viel horizontale Polsterung innerhalb der App-Schaltflächen "
+"ist. Polsterung wird nur auf Instanzen dieses Applets auf horizontalen "
+"Leisten angewendet."
+
+#. 2.8->settings-schema.json->middle-click-action->description
+msgid "Middle clicking app buttons creates new app instances"
+msgstr ""
+"Mit der mittleren Klick-App-Schaltfläche werden neue App-Instanzen erstellt"
+
+#. 2.8->settings-schema.json->middle-click-action->tooltip
+msgid ""
+"Determines the behavior of middle mouse button clicks on app buttons. "
+"Setting this to false will close the last focused window from the app group "
+"on middle click."
+msgstr ""
+"Bestimmt das Verhalten der mittleren Maustaste Klicks auf App-Schaltflächen. "
+"Wenn Sie dies auf false setzen, wird das letzte fokussierte Fenster aus der "
+"App-Gruppe beim mittleren Klick geschlossen."
+
+#. 2.8->settings-schema.json->firefox-menu->description
+#. 3.4->settings-schema.json->firefox-menu->description
+msgid "Firefox context menu"
+msgstr "Firefox-Kontextmenü"
+
+#. 2.8->settings-schema.json->firefox-menu->tooltip
+#. 3.4->settings-schema.json->firefox-menu->tooltip
+msgid ""
+"Most Visited: show the sites you visit most, Recent History: display the the "
+"last pages you visited, Bookmarks: show your favorite bookmarks."
+msgstr ""
+"Häufige Aufrufe: Zeigt Seiten die du oft besucht hast, Kürzliche Aufrufe: "
+"Zeigt Seiten die du kürzlich besucht hast, Lesezeichen: Zeigt nur deine "
+"Lesezeichen."
+
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Bookmarks"
+msgstr "Lesezeichen"
+
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Most Visited"
+msgstr "Häufige Aufrufe"
+
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Recent History"
+msgstr "Kürzliche Aufrufe"
 
 #. 2.8->settings-schema.json->themePadding->description
 msgid "Use theme padding to center button icons"
@@ -857,6 +670,40 @@ msgstr ""
 "Wenn die Schaltflächenicons nicht zentriert aussehen, kann das Umschalten "
 "hilfreich sein."
 
+#. 2.8->settings-schema.json->group-apps->description
+#. 3.4->settings-schema.json->group-apps->description
+msgid "Group apps"
+msgstr "Gruppiere Anwendungen"
+
+#. 2.8->settings-schema.json->group-apps->tooltip
+#. 3.4->settings-schema.json->group-apps->tooltip
+msgid "Group each app's set of windows."
+msgstr "Gruppiere die Fenster jeder Anwendung."
+
+#. 2.8->settings-schema.json->show-active->description
+#. 3.4->settings-schema.json->show-active->description
+msgid "Show active app indicators"
+msgstr "Geöffnete Anwendungen hervorheben"
+
+#. 2.8->settings-schema.json->show-active->tooltip
+#. 3.4->settings-schema.json->show-active->tooltip
+msgid "Active app styling will indicate if an app is active."
+msgstr "Geöffnete Anwendungen werden besonders hervorgehoben."
+
+#. 2.8->settings-schema.json->show-apps-order-timeout->description
+#. 3.4->settings-schema.json->show-apps-order-timeout->description
+msgid "Duration of the apps order display on hotkey press"
+msgstr "Dauer der Anwendungsauflistung beim Verwenden des Tastaturkürzels"
+
+#. 2.8->settings-schema.json->show-apps-order-timeout->tooltip
+#. 3.4->settings-schema.json->show-apps-order-timeout->tooltip
+msgid ""
+"Determines the duration the window count labels are replaced with the app's "
+"order number."
+msgstr ""
+"Legt die Dauer fest, die das Fensterzähler-Label durch die Reihenfolge der "
+"Anwendung ersetzt werden."
+
 #. 2.8->settings-schema.json->arrange-pinnedApps->description
 msgid "Arrange pinned apps"
 msgstr "Angeheftete Anwendungen anordnen"
@@ -865,6 +712,208 @@ msgstr "Angeheftete Anwendungen anordnen"
 msgid "Arrange pinned apps into a different order."
 msgstr "Angeheftete Anwendungen neu anordnen"
 
+#. 2.8->settings-schema.json->monitor-move-all-windows->description
+#. 3.4->settings-schema.json->monitor-move-all-windows->description
+msgid "Apply the monitor move option to all windows"
+msgstr "Wenden Sie die Monitorbewegungsoption auf alle Fenster an"
+
+#. 2.8->settings-schema.json->monitor-move-all-windows->tooltip
+#. 3.4->settings-schema.json->monitor-move-all-windows->tooltip
+msgid ""
+"When clicking \"Move to monitor\" in the context menu, this option will move "
+"all of an app's windows instead of just the last focused window from the app."
+msgstr ""
+"Wenn Sie im Kontextmenü auf \"Verschieben auf Monitor\" klicken, wird diese "
+"Option alle Fenster einer Anwendung statt nur das zuletzt fokussiert Fenster "
+"verschieben."
+
+#. 2.8->settings-schema.json->sort-thumbnails->description
+#. 3.4->settings-schema.json->sort-thumbnails->description
+msgid "Sort windows for each app by last focused"
+msgstr "Sortiert Fenster anhand zuletzt fokussierter Fenster."
+
+#. 2.8->settings-schema.json->sort-thumbnails->tooltip
+#. 3.4->settings-schema.json->sort-thumbnails->tooltip
+msgid ""
+"Controls whether the order windows appear for an app is by last focused, or "
+"the order they were opened."
+msgstr ""
+"Steuert, ob die Reihenfolge der Anzeige von Fenstern durch zuletzt "
+"fokussierte Fenster oder durch die Reihenfolge in der sie geöffnet wurden "
+"bestimmt wird."
+
+#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
+
+#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
+
+#. 3.4->settings-schema.json->thumbnail-padding->description
+#, fuzzy
+msgid "Thumbnail padding"
+msgstr "Vorschaubild-Einstellungen"
+
+#. 3.4->settings-schema.json->thumbnail-padding->tooltip
+#, fuzzy
+msgid "Controls how much space will be around the window preview thumbnails."
+msgstr "Legt den Abstand zwischen den Icons der Anwendungs-Leiste fest."
+
+#. 3.4->settings-schema.json->system-favorites->description
+msgid "Use system favorites for pinned apps"
+msgstr "Verwende Systemfavoriten für angeheftete Anwendungen"
+
+#. 3.4->settings-schema.json->system-favorites->tooltip
+msgid ""
+"Controls whether or not pinned apps consist of the system favorites list."
+msgstr ""
+"Steuert, ob angeheftete Anwendungen aus den Systemfavoriten angezeigt werden "
+"sollen."
+
+#. 3.4->settings-schema.json->thumbnailsPage->title
+#. 3.4->settings-schema.json->thumbnailsSection->title
+msgid "Thumbnails"
+msgstr "Fenstervorschau"
+
+#. 3.4->settings-schema.json->appButtonsSection->title
+msgid "App Buttons"
+msgstr "Anwendungsknöpfe"
+
+#. 3.4->settings-schema.json->hoverPeekSection->title
+msgid "Hover Peek"
+msgstr "Vorschau, wenn Maus"
+
+#. 3.4->settings-schema.json->panelPage->title
+msgid "Panel"
+msgstr "Leiste"
+
+#. 3.4->settings-schema.json->iconSection->title
+msgid "Icons"
+msgstr "Icons"
+
+#. 3.4->settings-schema.json->presetSection->title
+msgid "Recommended Presets"
+msgstr "Empfohlene Voreinstellungen"
+
+#. 3.4->settings-schema.json->hotKeysSection->title
+msgid "Hot Keys"
+msgstr "Tastenkürzel"
+
+#. 3.4->settings-schema.json->stylingSection->title
+msgid "Styling"
+msgstr "Design"
+
+#. 3.4->settings-schema.json->contextMenuPage->title
+msgid "Context Menu"
+msgstr "Kontextmenü"
+
+#. 3.4->settings-schema.json->themePage->title
+msgid "Theming"
+msgstr "Themen einstellen"
+
+#. 3.4->settings-schema.json->mintYPreset->description
+#. 3.4->settings-schema.json->mintYPreset->tooltip
+msgid "Mint Y and Variants"
+msgstr "Mint-Y und Varianten"
+
+#. 3.4->settings-schema.json->enable-app-button-dragging->description
+#. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
+msgid "Enable app button dragging"
+msgstr "Ziehen von Anwendungsknöpfen erlauben"
+
+#. 3.4->settings-schema.json->app-button-width->description
+msgid "App button width"
+msgstr "Breite der Anwendungsknöpfe"
+
+#. 3.4->settings-schema.json->app-button-width->tooltip
+#, fuzzy
+msgid ""
+"Controls the width of the application button. This option only works for "
+"horizontal panels."
+msgstr "Steuert die Größe der Anwendungsknöpfe."
+
+#. 3.4->settings-schema.json->mintXPreset->description
+#. 3.4->settings-schema.json->mintXPreset->tooltip
+#, fuzzy
+msgid "Mint X, Linux Mint, and Variants"
+msgstr "Mint-Y und Varianten"
+
+#. 3.4->settings-schema.json->enable-app-button-width->description
+msgid "Use a custom width for app buttons"
+msgstr ""
+
+#. 3.4->settings-schema.json->enable-app-button-width->tooltip
+msgid "When disabled, the app button width is determined by the panel height."
+msgstr ""
+
+#. 3.4->settings-schema.json->list-monitor-windows->description
+msgid "Only list windows from the monitor displaying this instance"
+msgstr ""
+"Nur Fenster von dem Monitor auflisten, auf dem diese Instanz angezeigt wird"
+
+#. 3.4->settings-schema.json->list-monitor-windows->tooltip
+msgid ""
+"This option will only come into effect for monitors displaying an ITM "
+"instance."
+msgstr ""
+"Diese Option wird nur für Monitore, die eine ITM-Instanz anzeigen, in Kraft "
+"treten."
+
+#. 3.4->settings-schema.json->thumbnail-close-button-size->description
+#, fuzzy
+msgid "Close button size"
+msgstr "Icongröße anpassen"
+
+#. 3.4->settings-schema.json->thumbnail-close-button-size->tooltip
+#, fuzzy
+msgid "Controls how large the thumbnail close button is."
+msgstr ""
+"Erlaube Themen die Schaltflächen zum beenden der Anwendungen zu steuern"
+
+#. 3.4->settings-schema.json->middle-click-action->description
+#. 3.4->settings-schema.json->middle-click-action->tooltip
+msgid "Middle click action"
+msgstr ""
+
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Launch new app instance"
+msgstr ""
+
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Close last focused window in group"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->description
+msgid "Mouse wheel scroll behavior"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->tooltip
+msgid ""
+"Choose if scrolling the mouse wheel cycles running apps, an app button's "
+"windows on hover, or is disabled."
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->options
+msgid "Cycle apps"
+msgstr ""
+
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
+#, fuzzy
+msgid "Cycle windows"
+msgstr "Zeige alle Anwendungs-Fenster an"
+
+#. 3.4->settings-schema.json->left-click-action->description
+#. 3.4->settings-schema.json->left-click-action->tooltip
+msgid "Left click action"
+msgstr ""
+
+#. 3.4->settings-schema.json->left-click-action->options
+msgid "Toggle activation of last focused window"
+msgstr ""
+
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
 msgstr "Icing Task Manager"
@@ -872,6 +921,71 @@ msgstr "Icing Task Manager"
 #. IcingTaskManager@json->metadata.json->description
 msgid "Window list with app grouping and thumbnails"
 msgstr "Fensterliste mit Anwendungsgruppierung und Fenstervorschau"
+
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "checked"
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->description
+#, fuzzy
+msgid "App button transition duration"
+msgstr "Breite der Anwendungsknöpfe"
+
+#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
+msgid ""
+"Overrides the theme's animation time for app buttons. If set to zero, the "
+"theme's transition duration will be used."
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->units
+msgid "ms"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalSection->title
+msgid "Behavior"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
+
+#. 3.4->settings-schema.json->show-icons->description
+#, fuzzy
+msgid "Show icons"
+msgstr "Keine Icons"
+
+#. 3.4->settings-schema.json->show-icons->tooltip
+msgid "Show the window's icon next to the title."
+msgstr ""
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
+#, fuzzy
+msgid "Show new window option"
+msgstr "Autostart-Option anzeigen"
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
+msgid ""
+"Shows the \"New Window\" option in an app's context menu if it doesn't "
+"already have one from the app's own action menu items."
+msgstr ""
+
+#. 3.4->settings-schema.json->show-all-workspaces->description
+#. 3.4->settings-schema.json->show-all-workspaces->tooltip
+#, fuzzy
+msgid "Show windows from all workspaces"
+msgstr "Auf allen Arbeitsflächen anzeigen"
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
+msgid "Cycle windows on mouse wheel scroll"
+msgstr ""
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
+msgid ""
+"Choose whether or not scrolling the mouse wheel cycles windows when hovering "
+"over a thumbnail menu."
+msgstr ""
 
 #~ msgid "number"
 #~ msgstr "Anzahl"

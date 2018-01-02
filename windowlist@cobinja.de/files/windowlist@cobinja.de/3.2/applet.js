@@ -27,6 +27,7 @@ const Tweener = imports.ui.tweener;
 const Signals = imports.signals;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
+const Panel = imports.ui.panel;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
 const BoxPointer = imports.ui.boxpointer;
@@ -149,6 +150,34 @@ function resizeActor(actor, time, toWidth) {
   });
 }
 
+function getOverheadSize(actor) {
+  if (actor == null) {
+    return null;
+  }
+  let height = 0;
+  let width = 0;
+  let themeNode = actor.get_theme_node();
+  
+  width = themeNode.get_padding(St.Side.LEFT);
+  width += themeNode.get_padding(St.Side.RIGHT);
+  width += themeNode.get_border_width(St.Side.LEFT);
+  width += themeNode.get_border_width(St.Side.RIGHT);
+  
+  height = themeNode.get_padding(St.Side.TOP);
+  height += themeNode.get_padding(St.Side.BOTTOM);
+  height += themeNode.get_border_width(St.Side.TOP);
+  height += themeNode.get_border_width(St.Side.BOTTOM);
+  
+  // margin is only supported since Cinnamon 3.4
+  if (themeNode.get_margin !== undefined) {
+    width += themeNode.get_margin(St.Side.LEFT);
+    width += themeNode.get_margin(St.Side.RIGHT);
+    height += themeNode.get_margin(St.Side.TOP);
+    height += themeNode.get_margin(St.Side.BOTTOM);
+  }
+  return [width, height];
+}
+
 function CobiWindowListSettings(instanceId) {
   this._init(instanceId);
 }
@@ -202,10 +231,11 @@ CobiPopupMenuItem.prototype = {
     this._settings = this._menu._settings;
     
     this._box = new St.BoxLayout({vertical: true, reactive: true});
+    this.actor.set_style("padding: 0.5em;");
     this.addActor(this._box);
     
     this._iconSize = 20 * global.ui_scale;
-    this.descSize = 30 * global.ui_scale;
+    this.descSize = 24 * global.ui_scale;
     this._icon = this._appButton._app ?
                   this._appButton._app.create_icon_texture(this._iconSize) :
                   new St.Icon({ icon_name: "application-default-icon",
@@ -216,17 +246,17 @@ CobiPopupMenuItem.prototype = {
     this._icon.set_width(-1);
     this._icon.set_height(-1);
     let windowActor = metaWindow.get_compositor_private();
-    let monitor = this._appButton._applet._monitor;
+    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
-    height = Math.round(height / 10);
+    height = Math.round(height / 10) * global.ui_scale;
     width = Math.round(height * aspectRatio);
     
     this._descBox = new St.BoxLayout({natural_width: width});
     this._box.add_actor(this._descBox);
     
-    this._iconBin = new St.Bin({natural_width: this.descSize, natural_height: this.descSize});
+    this._iconBin = new St.Bin({min_width: 0, min_height: 0, natural_width: this.descSize, natural_height: this.descSize});
     this._descBox.add_actor(this._iconBin);
     this._iconBin.set_child(this._icon);
     
@@ -247,22 +277,20 @@ CobiPopupMenuItem.prototype = {
     this._spacer = new St.Widget();
     this._descBox.add(this._spacer, {expand: true});
     
-    this._closeBin = new St.Bin({natural_width: this.descSize, natural_height: this.descSize, reactive: true});
+    this._closeBin = new St.Bin({min_width: 0, min_height: 0, natural_width: this.descSize, natural_height: this.descSize, reactive: true});
     this._closeIcon = new St.Bin({style_class: "window-close", natural_width: this._iconSize, height: this._iconSize});
     this._descBox.add_actor(this._closeBin);
     this._closeBin.set_child(this._closeIcon);
     this._closeIcon.hide();
     
     if (!Main.software_rendering && this._settings.getValue("hover-preview")) {
-      this._cloneBin = new St.Bin({natural_width: width, height: height});
+      this._cloneBin = new St.Bin({min_width: 0, min_height: 0});
       this._box.add_actor(this._cloneBin);
       this._cloneBox = new St.Widget();
       this._cloneBin.add_actor(this._cloneBox);
-      //this.doSize();
     }
     this._signalManager.connect(this.actor, "enter-event", this._onEnterEvent, this);
     this._signalManager.connect(this.actor, "leave-event", this._onLeaveEvent, this);
-    //this._signalManager.connect(this.actor, "button-release-event", this._onButtonReleaseEvent);
     this._signalManager.connect(this, "activate", this._onActivate, this);
   },
   
@@ -270,55 +298,30 @@ CobiPopupMenuItem.prototype = {
     if (Main.software_rendering || !this._settings.getValue("hover-preview")) {
       return;
     }
-    let monitor = this._appButton._applet._monitor;
+    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
     
     let numItems = this._menu.numMenuItems;
-    let themeNode = this.actor.get_theme_node();
     
-    let overheadWidth = themeNode.get_padding(St.Side.LEFT);
-    overheadWidth += themeNode.get_padding(St.Side.RIGHT);
-    overheadWidth += themeNode.get_border_width(St.Side.LEFT);
-    overheadWidth += themeNode.get_border_width(St.Side.RIGHT);
-    
-    let overheadHeight = themeNode.get_padding(St.Side.TOP);
-    overheadHeight += themeNode.get_padding(St.Side.BOTTOM);
-    overheadHeight += themeNode.get_border_width(St.Side.TOP);
-    overheadHeight += themeNode.get_border_width(St.Side.BOTTOM);
+    let [overheadWidth, overheadHeight] = getOverheadSize(this.actor);
     overheadHeight += this.descSize;
     
-    // margin is only supported since Cinnamon 3.4
-    if (themeNode.get_margin !== undefined) {
-      overheadWidth += themeNode.get_margin(St.Side.LEFT);
-      overheadWidth += themeNode.get_margin(St.Side.RIGHT);
-      overheadHeight += themeNode.get_margin(St.Side.TOP);
-      overheadHeight += themeNode.get_margin(St.Side.BOTTOM);
-    }
-    
-    let spacing = Math.round(this._menu.box.get_theme_node().get_length("spacing"));
+    this._cloneBox.remove_all_children();
     
     if (this._menu.box.get_vertical()) {
-      height = (availHeight / (Math.max(numItems, 8))) - overheadHeight;
-      //height = Math.round(height / (Math.max(numItems, 10)));
-      
-      width = Math.round(height * aspectRatio);
+      height = (availHeight - overheadHeight) * global.ui_scale;
+      width = Math.floor(height * aspectRatio);
+      this._cloneBin.natural_height = height;
     }
     else {
-      width = (availWidth / (Math.max(numItems, 8))) - overheadWidth;
-      //width = Math.round(width / (Math.max(numItems, 10)));
-      
-      height = Math.round(width / aspectRatio);
+      width = (availWidth - overheadWidth) * global.ui_scale;
+      height = Math.floor(width / aspectRatio);
+      this._cloneBin.natural_width = width;
     }
     
-    //height = Math.round(height / 10);
-    //width = Math.round(height * aspectRatio);
-    
     this._descBox.natural_width = width;
-    
-    this._cloneBox.remove_all_children();
-    this._cloneBin.natural_width = width;
     
     let clones = WindowUtils.createWindowClone(this._metaWindow, width, height, true, true);
     for (let i = 0; i < clones.length; i++) {
@@ -534,33 +537,44 @@ CobiPopupMenu.prototype = {
   },
   
   recalcItemSizes: function() {
-    let themeNode = this.actor.get_theme_node();
+    let [overheadWidthActor, overheadHeightActor] = getOverheadSize(this.actor);
+    let [overheadWidth, overheadHeight] = getOverheadSize(this.box);
+    overheadWidth += overheadWidthActor;
+    overheadHeight += overheadHeightActor;
     
-    let overheadWidth = themeNode.get_padding(St.Side.LEFT);
-    overheadWidth += themeNode.get_padding(St.Side.RIGHT);
-    overheadWidth += themeNode.get_border_width(St.Side.LEFT);
-    overheadWidth += themeNode.get_border_width(St.Side.RIGHT);
-    
-    let overheadHeight = themeNode.get_padding(St.Side.TOP);
-    overheadHeight += themeNode.get_padding(St.Side.BOTTOM);
-    overheadHeight += themeNode.get_border_width(St.Side.TOP);
-    overheadHeight += themeNode.get_border_width(St.Side.BOTTOM);
-    
-    // margin is only supported since Cinnamon 3.4
-    if (themeNode.get_margin !== undefined) {
-      overheadWidth += themeNode.get_margin(St.Side.LEFT);
-      overheadWidth += themeNode.get_margin(St.Side.RIGHT);
-      overheadHeight += themeNode.get_margin(St.Side.TOP);
-      overheadHeight += themeNode.get_margin(St.Side.BOTTOM);
+    let monitor = Main.layoutManager.findMonitorForActor(this.actor);
+    let panels = Main.panelManager.getPanelsInMonitor(monitor.index);
+    for (let i = 0; i < panels.length; i++) {
+      if (panels[i].panelPosition == Panel.PanelLoc.top || panels[i].panelPosition == Panel.PanelLoc.bottom) {
+        overheadHeight += panels[i].actor.height;
+      }
+      else {
+        overheadWidth += panels[i].actor.width;
+      }
     }
     
-    let monitor = this._appButton._applet._monitor;
     let availWidth = monitor.width - overheadWidth;
     let availHeight = monitor.height - overheadHeight;
     
+    let spacing = Math.round(this.box.get_theme_node().get_length("spacing"));
+    
     let items = this._getMenuItems();
-    for (let i = 0; i < items.length; i++) {
-      items[i].doSize(availWidth, availHeight);
+    let numItems = items.length;
+    
+    let itemWidth = availWidth;
+    let itemHeight = availHeight;
+    
+    let numThumbs = this._settings.getValue("number-of-unshrunk-previews");
+    
+    if (this.box.get_vertical()) {
+      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+    }
+    else {
+      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+    }
+    
+    for (let i = 0; i < numItems; i++) {
+      items[i].doSize(itemWidth, itemHeight);
     }
   },
   
@@ -1159,7 +1173,7 @@ CobiAppButton.prototype = {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
         if (this._windows.length > 0) {
-          if (this._windows.length == 1) {
+          if (this._windows.length == 1 || !this._settings.getValue("click-preview")) {
             if (_hasFocus(this._currentWindow)) {
               this._currentWindow.minimize();
             }
@@ -1374,9 +1388,9 @@ CobiAppButton.prototype = {
       if (nMonitors > 1) {
         item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another monitor"));
         this._contextMenu.addMenuItem(item);
-        
+        let monitor = this._currentWindow.get_monitor();
         for (let i = 0; i < nMonitors; i++) {
-          if (i == this._applet._monitor.index) {
+          if (i == monitor) {
             continue;
           }
           let j = i;
@@ -1579,7 +1593,7 @@ CobiWorkspace.prototype = {
   
   _windowAdded: function(metaWindow) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        this._applet._monitor.index != metaWindow.get_monitor()) {
+        Main.layoutManager.findMonitorForActor(this.actor).index != metaWindow.get_monitor()) {
       return;
     }
     
@@ -1598,6 +1612,9 @@ CobiWorkspace.prototype = {
     let app = this._windowTracker.get_window_app(metaWindow);
     if (!app) {
       app = this._windowTracker.get_app_from_pid(metaWindow.get_pid());
+    }
+    if (!app) {
+      return false;
     }
     let appButton;
     if (this._settings.getValue("group-windows")) {
@@ -1621,6 +1638,7 @@ CobiWorkspace.prototype = {
     }
     appButton.addWindow(metaWindow);
     this._updateAppButtonVisibility();
+    return false;
   },
   
   _windowRemoved: function(metaWindow) {
@@ -1648,7 +1666,7 @@ CobiWorkspace.prototype = {
         this._windowAdded(metaWindow);
       }
       else {
-        if (metaWindow.get_monitor() != this._applet._monitor.index) {
+        if (metaWindow.get_monitor() != Main.layoutManager.findMonitorForActor(this.actor).index) {
           this._windowRemoved(metaWindow);
         }
         else {
@@ -2123,7 +2141,7 @@ CobiWindowList.prototype = {
   
   _windowAdded: function(screen, metaWindow, monitor) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        monitor != this._monitor.index) {
+        monitor != Main.layoutManager.findMonitorForActor(this.actor).index) {
       return;
     }
     for (let i = 0; i < this._workspaces.length; i++) {
@@ -2164,7 +2182,7 @@ CobiWindowList.prototype = {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
       return;
     }
-    if (monitor == this._monitor.index) {
+    if (monitor == Main.layoutManager.findMonitorForActor(this.actor)) {
       this._windowAdded(screen, window, monitor);
     }
     else {

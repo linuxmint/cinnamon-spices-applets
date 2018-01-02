@@ -923,7 +923,7 @@ msgstr "Délai d'affichage sur sélection de catégorie"
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
 msgstr ""
-"Menu 'Cinnamon' (Cannelle) avec l'apparence du menu Démarrer de Windows 7 ou "
+"Menu Cinnamon avec l'apparence du menu Démarrer de Windows 7 ou "
 "du menu MATE"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name

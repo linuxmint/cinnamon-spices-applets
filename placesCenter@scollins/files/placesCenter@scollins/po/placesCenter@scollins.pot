@@ -1,0 +1,281 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-19 21:13-0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:178
+msgid "Places"
+msgstr ""
+
+#: applet.js:291
+msgid "Search Home Folder"
+msgstr ""
+
+#: applet.js:305
+msgid "SYSTEM"
+msgstr ""
+
+#: applet.js:314
+msgid "Search File System"
+msgstr ""
+
+#: applet.js:330
+msgid "RECENT DOCUMENTS"
+msgstr ""
+
+#: applet.js:344
+msgid "Clear"
+msgstr ""
+
+#: applet.js:388
+msgid "Computer"
+msgstr ""
+
+#: applet.js:394
+msgid "File System"
+msgstr ""
+
+#: applet.js:410
+msgid "Network"
+msgstr ""
+
+#: applet.js:513
+msgid "Trash"
+msgstr ""
+
+#: search.py:43
+msgid "Open..."
+msgstr ""
+
+#: search.py:48
+msgid "Open Containing Folder..."
+msgstr ""
+
+#: search.py:85
+msgid "Search"
+msgstr ""
+
+#: search.py:106
+msgid "Start in"
+msgstr ""
+
+#: search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: search.py:117
+msgid "Search hidden"
+msgstr ""
+
+#: search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: search.py:125
+msgid "Stop"
+msgstr ""
+
+#: search.py:140
+msgid "File"
+msgstr ""
+
+#: search.py:156
+msgid "Path"
+msgstr ""
+
+#: search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: search.py:198 search.py:199
+msgid "Search Stopped"
+msgstr ""
+
+#: search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: search.py:259
+msgid " - direcotry already searched"
+msgstr ""
+
+#. settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
+
+#. settings-schema.json->userPage->title
+msgid "User"
+msgstr ""
+
+#. settings-schema.json->systemPage->title
+msgid "System"
+msgstr ""
+
+#. settings-schema.json->recentPage->title
+#. settings-schema.json->recentSection->title
+msgid "Recent documents"
+msgstr ""
+
+#. settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr ""
+
+#. settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr ""
+
+#. settings-schema.json->userSection->title
+msgid "User section"
+msgstr ""
+
+#. settings-schema.json->systemSection->title
+msgid "System section"
+msgstr ""
+
+#. settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr ""
+
+#. settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr ""
+
+#. settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr ""
+
+#. settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr ""
+
+#. settings-schema.json->iconSize->units
+msgid "px"
+msgstr ""
+
+#. settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr ""
+
+#. settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr ""
+
+#. settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr ""
+
+#. settings-schema.json->userCustomPlaces->description
+#. settings-schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr ""
+
+#. settings-schema.json->userCustomPlaces->tooltip
+#. settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a"
+" comma(,) or by a new-line. You can set the name to be displayed by adding "
+":customName after the location. You can likewise set an icon name by adding "
+":iconName after the custom name."
+msgstr ""
+
+#. settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr ""
+
+#. settings-schema.json->showTrash->options
+msgid "Never"
+msgstr ""
+
+#. settings-schema.json->showTrash->options
+msgid "Always"
+msgstr ""
+
+#. settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr ""
+
+#. settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr ""
+
+#. settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr ""
+
+#. settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr ""
+
+#. settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr ""
+
+#. settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr ""
+
+#. settings-schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr ""
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr ""
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr ""

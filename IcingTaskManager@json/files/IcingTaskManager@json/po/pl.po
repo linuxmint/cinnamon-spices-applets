@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-05 03:29-0600\n"
+"POT-Creation-Date: 2017-09-24 14:48-0500\n"
 "PO-Revision-Date: \n"
 "Last-Translator: mariachini\n"
 "Language-Team: \n"
@@ -14,12 +14,10 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: 3.2/specialMenus.js:113
-#, fuzzy
 msgid "Move to the other monitor"
-msgstr "Przesuń na monitor"
+msgstr "Przesuń na inny monitor"
 
 #: 3.2/specialMenus.js:113
-#, fuzzy
 msgid "Move to monitor "
 msgstr "Przesuń na monitor"
 
@@ -32,89 +30,82 @@ msgid "Visible on all workspaces"
 msgstr "Widoczne na wszystkich obszarach roboczych"
 
 #: 3.2/specialMenus.js:129
-#, fuzzy
 msgid "Move to another workspace"
-msgstr "Przesuń na lewy obszar roboczy"
+msgstr "Przesuń na inny obszar roboczy"
 
-#: 3.2/specialMenus.js:157
+#: 3.2/specialMenus.js:158
 msgid "Places"
-msgstr ""
-
-#: 3.2/specialMenus.js:193
-msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Miejsca"
 
 #: 3.2/specialMenus.js:213
-#, fuzzy
 msgid "Recent"
-msgstr "procent"
+msgstr "Ostatnie"
 
-#: 3.2/specialMenus.js:232
+#: 3.2/specialMenus.js:233
 msgid "Preferences"
-msgstr ""
+msgstr "Ustawienia"
 
-#: 3.2/specialMenus.js:235
+#: 3.2/specialMenus.js:236
 msgid "About..."
-msgstr ""
+msgstr "O..."
 
-#: 3.2/specialMenus.js:239
+#: 3.2/specialMenus.js:240
 msgid "Configure..."
-msgstr ""
+msgstr "Konfiguruj..."
 
-#: 3.2/specialMenus.js:243
+#: 3.2/specialMenus.js:244
 msgid "Remove"
-msgstr ""
+msgstr "Usuń"
 
-#: 3.2/specialMenus.js:277
+#: 3.2/specialMenus.js:279
 msgid "Unpin from Panel"
 msgstr "Odepnij od panelu"
 
-#: 3.2/specialMenus.js:277
+#: 3.2/specialMenus.js:279
 msgid "Pin to Panel"
 msgstr "Przypnij do panelu"
 
-#: 3.2/specialMenus.js:283
+#: 3.2/specialMenus.js:285
 msgid "Remove from Autostart"
 msgstr "Usuń z autostartu"
 
-#: 3.2/specialMenus.js:283
+#: 3.2/specialMenus.js:285
 msgid "Add to Autostart"
 msgstr "Dodaj do autostartu"
 
-#: 3.2/specialMenus.js:289
+#: 3.2/specialMenus.js:291
 msgid "Create Shortcut"
 msgstr "Utwórz skrót"
 
-#: 3.2/specialMenus.js:299
+#: 3.2/specialMenus.js:301
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Przywróć pełną nieprzezroczystość"
 
-#: 3.2/specialMenus.js:307
+#: 3.2/specialMenus.js:309
 msgid "Restore"
 msgstr "Przywróć"
 
-#: 3.2/specialMenus.js:312
+#: 3.2/specialMenus.js:314
 msgid "Minimize"
 msgstr "Minimalizuj"
 
-#: 3.2/specialMenus.js:320
+#: 3.2/specialMenus.js:322
 msgid "Unmaximize"
 msgstr "Zmniejszenie"
 
-#: 3.2/specialMenus.js:325
+#: 3.2/specialMenus.js:327
 msgid "Maximize"
 msgstr "Maksymalizuj"
 
-#: 3.2/specialMenus.js:335
+#: 3.2/specialMenus.js:337
 msgid "Close others"
-msgstr ""
+msgstr "Zamknij pozostałe"
 
-#: 3.2/specialMenus.js:345
-#, fuzzy
+#: 3.2/specialMenus.js:347
 msgid "Close all"
 msgstr "Zamknij wszystkie"
 
-#: 3.2/specialMenus.js:355
+#: 3.2/specialMenus.js:357
 msgid "Close"
 msgstr "Zamknij"
 
@@ -136,7 +127,7 @@ msgstr ""
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
 msgid "active"
-msgstr ""
+msgstr "aktywne"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -145,7 +136,7 @@ msgstr ""
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
 msgid "outlined"
-msgstr ""
+msgstr "opisane"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -154,7 +145,7 @@ msgstr ""
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr ""
+msgstr "najedź"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -162,9 +153,8 @@ msgstr ""
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
-#, fuzzy
 msgid "focus"
-msgstr "Aktywne okno"
+msgstr "skup"
 
 #. 3.2->settings-schema.json->focusPseudoClass->options
 #. 3.2->settings-schema.json->hoverPseudoClass->options
@@ -173,7 +163,7 @@ msgstr "Aktywne okno"
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->activePseudoClass->options
 msgid "selected"
-msgstr ""
+msgstr "zaznaczone"
 
 #. 3.2->settings-schema.json->icon-spacing->description
 #. 2.8->settings-schema.json->icon-spacing->description
@@ -209,12 +199,12 @@ msgstr "Pokazuj miniaturki po najechaniu na przycisk aplikacji"
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
-msgstr ""
+msgstr "Podświetl ostatnio aktywne okno z grupy aplikacji"
 
 #. 3.2->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
-msgstr ""
+msgstr "Jeśli aktywne, ostatnio użyte okno będzie wskazane"
 
 #. 3.2->settings-schema.json->hover-peek-time->description
 #. 2.8->settings-schema.json->hover-peek-time->description
@@ -313,22 +303,18 @@ msgstr ""
 "kolejnością na liście aplikacji."
 
 #. 3.2->settings-schema.json->thumbnail-padding->description
-#, fuzzy
 msgid "Thumbnail padding"
-msgstr "Ustawienia miniaturek"
+msgstr "Margines miniaturek"
 
 #. 3.2->settings-schema.json->thumbnail-padding->tooltip
-#, fuzzy
 msgid "Controls how much space will be around the window preview thumbnails."
 msgstr "Kontroluje ile miejsca jest między ikonami."
 
 #. 3.2->settings-schema.json->system-favorites->description
-#, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Użyj systemowych podpowiedzi dla zamkniętych aplikacji"
+msgstr "Użyj systemowych ulubionych dla przypiętych aplikacji"
 
 #. 3.2->settings-schema.json->system-favorites->tooltip
-#, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
 msgstr ""
@@ -372,47 +358,42 @@ msgstr "Nadpisuje pseudo klasę dla przycisków aplikacji kiedy są aktywne."
 
 #. 3.2->settings-schema.json->thumbnailsPage->title
 #. 3.2->settings-schema.json->thumbnailsSection->title
-#, fuzzy
 msgid "Thumbnails"
-msgstr "Wielkość miniaturki"
+msgstr "Miniaturki"
 
 #. 3.2->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "Przyciski aplikacji"
 
 #. 3.2->settings-schema.json->hoverPeekSection->title
-#, fuzzy
 msgid "Hover Peek"
 msgstr "Najedź w celu podglądu"
 
 #. 3.2->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #. 3.2->settings-schema.json->iconSection->title
-#, fuzzy
 msgid "Icons"
-msgstr "Wielkość ikony"
+msgstr "Ikony"
 
 #. 3.2->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "Rekomendowane ustawienia"
 
 #. 3.2->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "Skróty klawiszowe"
 
 #. 3.2->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "Styl"
 
 #. 3.2->settings-schema.json->contextMenuPage->title
-#, fuzzy
 msgid "Context Menu"
-msgstr "Ustawienia menu kontekstowego"
+msgstr "Menu kontekstowe"
 
 #. 3.2->settings-schema.json->themePage->title
-#, fuzzy
 msgid "Theming"
 msgstr "Ustawienia stylu"
 
@@ -441,7 +422,7 @@ msgstr ""
 #. 3.2->settings-schema.json->mintYPreset->description
 #. 3.2->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Mint Y i warianty"
 
 #. 3.2->settings-schema.json->autostart-menu-item->description
 #. 2.8->settings-schema.json->autostart-menu-item->description
@@ -470,18 +451,19 @@ msgstr ""
 #. 3.2->settings-schema.json->enable-app-button-dragging->description
 #. 3.2->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Włącz przeciąganie przycisków aplikacji"
 
 #. 3.2->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "Szerokość przycisków aplikacji"
 
 #. 3.2->settings-schema.json->app-button-width->tooltip
-#, fuzzy
 msgid ""
 "Controls the width of the application button. This option only works for "
 "horizontal panels."
-msgstr "Kontroluje wielkość miniaturek"
+msgstr ""
+"Kontroluje szerokość przycisków aplikacji. To ustawienie działa tylko z "
+"panelami poziomymi."
 
 #. 3.2->settings-schema.json->show-recent->description
 #. 2.8->settings-schema.json->show-recent->description
@@ -562,11 +544,13 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
-msgstr ""
+msgstr "Użyj własnej szerokości przycisków aplikacji"
 
 #. 3.2->settings-schema.json->enable-app-button-width->tooltip
 msgid "When disabled, the app button width is determined by the panel height."
 msgstr ""
+"Jeśli nieaktywne, szerokość przycisków aplikacji będzie ustalana poprzez "
+"wysokość panelu"
 
 #. 3.2->settings-schema.json->cycleMenusHotkey->description
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
@@ -590,13 +574,13 @@ msgstr "Dostosuj rozmiar ikon niezależnie od skalowania panelu przez Cinnamona"
 
 #. 3.2->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "Tylko lista okien z monitora wyświetlającego tę instancję"
 
 #. 3.2->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
-msgstr ""
+msgstr "Ta opcja będzie aktywna dla monitorów wyświetlających instancję ITM."
 
 #. 3.2->settings-schema.json->number-display->description
 #. 2.8->settings-schema.json->number-display->description
@@ -641,12 +625,10 @@ msgstr ""
 "Otwórz miniaturkę klikając w nią jeśli jest więcej niż jedno otwarte okno."
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->description
-#, fuzzy
 msgid "Close button size"
-msgstr "Ustaw wielkość ikony"
+msgstr "Wielkość ikony zamykania"
 
 #. 3.2->settings-schema.json->thumbnail-close-button-size->tooltip
-#, fuzzy
 msgid "Controls how large the thumbnail close button is."
 msgstr "Pozwalaj motywom kontrolować przycisk zamykania miniaturek"
 
@@ -868,9 +850,72 @@ msgid "Icing Task Manager"
 msgstr "Icing Task Manager"
 
 #. IcingTaskManager@json->metadata.json->description
-#, fuzzy
 msgid "Window list with app grouping and thumbnails"
 msgstr "Lista okien z grupowaniem aplikacji i miniaturkami"
+
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "checked"
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->description
+msgid "App button transition duration"
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
+msgid ""
+"Overrides the theme's animation time for app buttons. If set to zero, the "
+"theme's transition duration will be used."
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->units
+msgid "ms"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalSection->title
+msgid "Behavior"
+msgstr ""
+
+#. 3.4->settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
+
+#. 3.4->settings-schema.json->show-icons->description
+#, fuzzy
+msgid "Show icons"
+msgstr "Bez ikon"
+
+#. 3.4->settings-schema.json->show-icons->tooltip
+msgid "Show the window's icon next to the title."
+msgstr ""
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
+#, fuzzy
+msgid "Show new window option"
+msgstr "Pokazuj opcję autostartu"
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
+msgid ""
+"Shows the \"New Window\" option in an app's context menu if it doesn't "
+"already have one from the app's own action menu items."
+msgstr ""
+
+#. 3.4->settings-schema.json->show-all-workspaces->description
+#. 3.4->settings-schema.json->show-all-workspaces->tooltip
+#, fuzzy
+msgid "Show windows from all workspaces"
+msgstr "Widoczne na wszystkich obszarach roboczych"
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
+msgid "Cycle windows on mouse wheel scroll"
+msgstr ""
+
+#. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
+msgid ""
+"Choose whether or not scrolling the mouse wheel cycles windows when hovering "
+"over a thumbnail menu."
+msgstr ""
 
 #~ msgid "number"
 #~ msgstr "numer"

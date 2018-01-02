@@ -1,0 +1,8 @@
+{
+    "last-edited": 1513397600, 
+    "max-instances": "1", 
+    "uuid": "vpnLookOut@claudiux", 
+    "name": "VPN Look-Out Applet", 
+    "version": "1.0.1", 
+    "description": "A Cinnamon applet that watches over the VPN link, displays its status, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
+}

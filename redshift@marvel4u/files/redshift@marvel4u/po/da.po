@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-28 20:06+0200\n"
-"PO-Revision-Date: 2017-09-29 19:15+0200\n"
+"POT-Creation-Date: 2017-08-12 12:05+0200\n"
+"PO-Revision-Date: 2017-12-05 19:18+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
 #. redshift@marvel4u->settings-schema.json->brightness->description
 #: applet.js:59 applet.js:224
@@ -47,6 +47,30 @@ msgstr "Natfarve"
 #: applet.js:218
 msgid "Redshift night brightness"
 msgstr "Natlysstyrke"
+
+#: applet.js:330
+msgid "On"
+msgstr "Tændt"
+
+#: applet.js:330
+msgid "Off"
+msgstr "Slukket"
+
+#: applet.js:334
+msgid "Day colour temperature"
+msgstr "Dagsfarvetemperature"
+
+#: applet.js:335
+msgid "Night colour temperature"
+msgstr "Nattefarvetemperature"
+
+#: applet.js:336
+msgid "Day Redshift brightness"
+msgstr "Redshifts dagslysstyrke"
+
+#: applet.js:337
+msgid "Night Redshift brightness"
+msgstr "Redshifts nattelysstyrke"
 
 #. redshift@marvel4u->settings-schema.json->brightness-section->title
 msgid "Brightness level"

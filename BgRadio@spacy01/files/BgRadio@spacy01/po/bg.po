@@ -71,6 +71,14 @@ msgid "Listening Darik"
 msgstr "Слушате Дарик"
 
 #: applet.js
+msgid "Darik Nostalgie"
+msgstr "Дарик Носталжи"
+
+#: applet.js
+msgid "Listening Darik Nostalgie"
+msgstr "Слушате Дарик Носталжи"
+
+#: applet.js
 msgid "Energy"
 msgstr "Енерджи"
 
@@ -255,6 +263,14 @@ msgid "Watching The Voice"
 msgstr "Гледате The Voice"
 
 #: applet.js
+msgid "Magic TV"
+msgstr "Magic TV"
+
+#: applet.js
+msgid "Watching Magic TV"
+msgstr "Гледате Magic TV"
+
+#: applet.js
 msgid "All Stop"
 msgstr "Всичко е спряно"
 
@@ -262,10 +278,10 @@ msgstr "Всичко е спряно"
 msgid ""
 "The most famous bulgarian radio and TV streams. Some of the streams are "
 "available only from bulgaria. To watch a TVs, you'll need to install "
-"rtmpdump package."
+"rtmpdump and mpv packages."
 msgstr ""
 "Най-известните български радиа и телевизии. Някои от тях са налични само от "
-"България. За да гледате телевизия, ще имате нужда от пакета rtmpdump."
+"България. За да гледате телевизия, ще имате нужда от пакетите rtmpdump и mpv."
 
 #. BgRadio@spacy01->metadata.json->name
 msgid "Bulgarian Radio and TV Streams"

@@ -1,5 +1,30 @@
 Changelog
 
+### 6.2.0
+
+  * Fixed windows from all workspaces showing, and added an option to show all workspaces.
+    - Also properly handles sticky windows that are marked as visible on all workspaces.
+  * Fixed per-monitor window mode not working correctly on the primary monitor.
+    - When toggling this setting, it will now take effect on all ITM instances.
+  * Fixed  pinning/unpinning apps in ungrouped app mode.
+  * Added an option to disable icons in the thumbnail menu.
+  * Added an option to scroll windows while hovering over an app's thumbnail menu.
+  * Added a transition duration override option for app buttons, and the option to a assign the checked pseudo class as an override.
+  * Added an option to show a "New Window" context menu item.
+  * Improved theme compatibility for the closed pinned app styling.
+  * Fixed multiple app buttons receiving focus styling in some scenarios (6.1 regression).
+
+### 6.1.0
+
+  * Fixed dragging pinned apps not working correctly when uninstalled apps are in the list.
+  * Fixed the focused styling on app buttons getting reset when hovered over.
+  * Fixed being unable to distinguish between open and closed apps in some themes.
+  * Added options to scroll apps or windows with the mouse wheel, and cycle windows with left click.
+    - The middle click action option was converted to a drop down list. As a result you will need to re-set your preference for that option. New installs should receive the proper default.
+  * Added a recommended preset for Mint X based themes.
+  * The legacy version of ITM is now being loaded for Cinnamon 3.2 users due to a compatibility issue. Please update Cinnamon to version 3.4+ to continue using the newest version of ITM.
+  * Minor optimizations.
+
 ### 6.0.4
 
   * Added info to the Firefox context menu when gir1.2-gda-5.0 isn't installed.

@@ -1,0 +1,214 @@
+# vpnLookOut@claudiux Applet POT File.
+# Copyright (C) 2017 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vpnLookOut@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2017-12-09 17:31+0100\n"
+"PO-Revision-Date: 2017-12-09 17:37+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: metadata.json:3
+msgid ""
+"A Cinnamon applet that watches over the VPN link, displays its status, "
+"allows to reconnect the VPN link if it incidentally drops, and can stop or "
+"restart Transmission according to the state of the VPN."
+msgstr ""
+"Une applet Cinnamon qui veille sur la liaison VPN, affiche son état, permet "
+"de reconnecter la liaison VPN si elle est tombe incidemment, et peut arrêter "
+"ou redémarrer Transmission selon l'état du VPN."
+
+#: metadata.json:5
+msgid "VPN Look-Out Applet"
+msgstr "VPN Guetteur"
+
+#: settings-schema.json:4
+msgid "General Settings for the VPN Look-Out Applet"
+msgstr "Paramètres généraux de l'Applet VPN Guetteur"
+
+#: settings-schema.json:8
+msgid "VPN"
+msgstr "VPN"
+
+#: settings-schema.json:13
+msgid "VPN Network Interface"
+msgstr "Interface réseau du VPN"
+
+#: settings-schema.json:14
+msgid ""
+"You can compare contents of /proc/net/dev with and without VPN connection "
+"established to know the VPN interface name."
+msgstr ""
+"Vous pouvez comparer les contenus de /proc/net/dev avec puis sans connexion "
+"VPN établie, afin de connaître le nom de l'interface du VPN."
+
+#: settings-schema.json:19
+msgid "VPN Name"
+msgstr "Nom du VPN"
+
+#: settings-schema.json:20
+msgid ""
+"This information is automatically changed when connecting to a VPN.\n"
+"It therefore contains the name of the last VPN to which you connected."
+msgstr ""
+"Cette information est automatiquement modifiée lors de la connexion à un "
+"VPN.\n"
+"Il contient donc le nom du dernier VPN auquel vous vous êtes connecté."
+
+#: settings-schema.json:26
+msgid "Try to reconnect to VPN when it shuts down incidentally."
+msgstr "Essayer de se reconnecter au VPN lorsqu'il tombe incidemment."
+
+#: settings-schema.json:27
+msgid ""
+"Checking this allows this applet to try to reconnect to VPN when it shuts "
+"down incidentally."
+msgstr ""
+"En cochant cette case, l'applet peut essayer de se reconnecter au VPN "
+"lorsqu'il tombe incidemment."
+
+#: settings-schema.json:31
+msgid "Display"
+msgstr "Affichage"
+
+#: settings-schema.json:39
+msgid "seconds"
+msgstr "secondes"
+
+#: settings-schema.json:40
+msgid "Refresh Interval for Display:"
+msgstr "Intervalle de rafraîchissement de l'affichage :"
+
+#: settings-schema.json:41
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh (ie high value) if you have a slow machine."
+msgstr ""
+"Augmenter ou diminuer cette valeur pour modifier l'intervalle de "
+"rafraîchissement - utilisez un rafraîchissement peu fréquent (c'est-à-dire "
+"une grande valeur) si votre machine est lente."
+
+#: settings-schema.json:48
+msgid "Classic - Icon and Text"
+msgstr "Classique - Icône et texte"
+
+#: settings-schema.json:49
+msgid "Compact - Icon Only"
+msgstr "Compact - Icône seule"
+
+#: settings-schema.json:51
+msgid "Type of Display"
+msgstr "Type d'affichage"
+
+#: settings-schema.json:52
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Vous avez le choix entre un affichage classique (par défaut) avec icône et "
+"texte, et un affichage compact où seule l'icône s'affiche."
+
+#: settings-schema.json:56
+msgid "Sound Alert"
+msgstr "Alerte Sonore"
+
+#: settings-schema.json:62
+msgid "Emit a sound alert when VPN shuts down."
+msgstr "Émettre une alerte sonore quand le VPN tombe."
+
+#: settings-schema.json:63
+msgid ""
+"Checking this allows this applet to emit a sound alert when VPN shuts down."
+msgstr ""
+"Cocher cette option permet à cette applet d'émettre un son quand le VPN est "
+"tombé."
+
+#: settings-schema.json:69
+msgid "Emit this sound alert when this Applet starts, if VPN is down."
+msgstr ""
+"Émettre cette alerte sonore au démarrage de cette applet, si la liaison VPN "
+"n'est pas active."
+
+#: settings-schema.json:70
+msgid ""
+"Check this if you want to emit this sound alert when this Applet starts, if "
+"VPN is down."
+msgstr ""
+"Cochez cette case si vous voulez émettre cette alerte sonore dès le "
+"démarrage de cette applet, si la connexion VPN n'est pas active."
+
+#: settings-schema.json:75
+msgid "Transmission"
+msgstr "Transmission"
+
+#: settings-schema.json:81
+msgid "Shut down properly Transmission as soon as VPN falls."
+msgstr "Arrêter correctement Transmission dès que le VPN tombe."
+
+#: settings-schema.json:82
+msgid ""
+"Checking this allows this applet to shut down Transmission (if it's running) "
+"as soon as VPN falls."
+msgstr ""
+"Cocher cette case pour permettre à cette applet de fermer Transmission (s'il "
+"est en cours d'exécution) dès que le VPN tombe."
+
+#: settings-schema.json:88
+msgid "Try to restart Transmission as soon as VPN restarts."
+msgstr ""
+"Essayer de redémarrer Transmission dès que la liaison VPN est de nouveau "
+"active."
+
+#: settings-schema.json:89
+msgid ""
+"Checking this allows this applet to restart Transmission (if it was stopped "
+"by this applet) as soon as VPN restarts."
+msgstr ""
+"Cocher cette case autorise cette applet à essayer de redémarrer Transmission "
+"dès que la liaison VPN est de nouveau active."
+
+#: applet.js:56
+msgid "Ok"
+msgstr "Ok"
+
+#: applet.js:217
+msgid "Waiting"
+msgstr "Patience"
+
+#: applet.js:337
+msgid "Waiting for VPN interface information"
+msgstr "En attente d'informations sur l'interface du VPN"
+
+#: applet.js:382
+msgid "Connection ON/OFF"
+msgstr "Connexion MARCHE/ARRÊT"
+
+#: applet.js:433
+msgid "Click to disconnect from VPN"
+msgstr "Cliquer pour se déconnecter du VPN"
+
+#: applet.js:441
+msgid "Connected"
+msgstr "Connecté"
+
+#: applet.js:448
+msgid "Disconnected"
+msgstr "Déconnecté"
+
+#: applet.js:450
+msgid "Click to connect to VPN"
+msgstr "Cliquer pour se connecter au VPN"
+
+#: applet.js:471
+msgid "VPN:"
+msgstr "VPN :"

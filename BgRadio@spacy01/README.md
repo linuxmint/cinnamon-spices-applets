@@ -1,13 +1,14 @@
-Applet for streaming some of the most famous bulgarian radio and tv streams. This applet is completely rewritten previous applet BgRadio@spacy01.
 
-Changes:
 
- - moc player is replaced with vlc player
- - it's been added some tv streams
- - radio streams have been updated
- - more compact menu
- - updated localization
- - new icons
- 
-In order to make tv strems to work, you'll need to install rtmpdump. 
-Some of the streams are avaivable only from Bulgaria.
+Applet for streaming some of the most famous bulgarian radio and tv streams.
+
+Changes 23.12.2017:
+
+ - vlc player is replaced with mpv
+ - radio and tv streams was updated
+ - Add new tv and radio streams
+ - Some tv streams was fixed
+ - mpv and rtmpdump packages check
+ - Updated localization
+
+In order to make tv and radio streams to work, you'll need to install rtmpdump and mpv. Some of the streams are avaivable only from Bulgaria.

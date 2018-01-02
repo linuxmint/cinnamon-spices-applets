@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-04 19:19+0200\n"
-"PO-Revision-Date: 2017-10-04 19:26+0200\n"
+"POT-Creation-Date: 2017-04-19 12:09+0800\n"
+"PO-Revision-Date: 2017-12-05 19:29+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
 #: applet.js:51
 msgid "Error"
@@ -65,3 +65,7 @@ msgstr "CPU-temperaturindikator"
 #. temperature@fevimu->settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
 msgstr "Vis temperaturen i Fahrenheit"
+
+#. temperature@fevimu->settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr "Anvend heltalsværdier for temperaturen"

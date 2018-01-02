@@ -7,61 +7,172 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-04 20:04+0200\n"
-"PO-Revision-Date: 2017-07-04 20:10+0200\n"
+"POT-Creation-Date: 2017-11-08 12:22-0500\n"
+"PO-Revision-Date: 2017-12-04 18:39+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
-#: applet.js:51
-msgid "Okay"
-msgstr "Okay"
-
-#: applet.js:97 applet.js:226
+#: applet.js:189 applet.js:328
 msgid "Timer"
-msgstr "Timer"
+msgstr "Nedtælling"
 
-#: applet.js:103 applet.js:144 applet.js:224
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:195 applet.js:235 applet.js:326
 msgid "Minutes"
 msgstr "Minutter"
 
-#: applet.js:143 applet.js:224
-msgid "Hours"
-msgstr "Timer"
-
-#: applet.js:145 applet.js:224
-msgid "Seconds"
-msgstr "Sekunder"
-
-#: applet.js:147
+#: applet.js:212
 msgid "Reset"
 msgstr "Nulstil"
 
-#: applet.js:224
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:234 applet.js:326
+msgid "Hours"
+msgstr "Timer"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:236 applet.js:326
+msgid "Seconds"
+msgstr "Sekunder"
+
+#: applet.js:326
 msgid "and"
 msgstr "og"
 
-#: applet.js:302
-msgid "Edit Options"
-msgstr "Indstillinger"
+#: applet.js:473
+msgid "Okay"
+msgstr "Okay"
 
-#: applet.js:304
-msgid "Restart Cinnamon"
-msgstr "Genstart Cinnamon"
+#: applet.js:491
+msgid "Cinnamon Timer"
+msgstr "Cinnamon-timer"
 
-#. axos88@countdown-timer->metadata.json->description
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr "Aktivér denne for at vise et vindue, når tiden er gået."
+
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr "Aktivér denne for at vise et vindue, når tiden er gået"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->time_display_enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->time_display_enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Vis resterende tid i panelet"
+
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_end->description
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_end->tooltip
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_start->description
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Ændr ikke tiden, som alarmen er sat til"
+
+#. cinnamon-timer@jake1164->settings-schema.json->message-prompt-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->message-prompt-
+#. enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Vis en meddelelse, når tiden er udløbet"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Fuld sti og filnavn til lydfilen"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr "Sox skal være installeret. De fleste lydfiltyper er understøttet"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Lydindstillinger"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section3->title
+#. cinnamon-timer@jake1164->settings-schema.json->page3->title
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Forudindstillede tider"
+
+#. cinnamon-timer@jake1164->settings-schema.json->page4->title
+#. cinnamon-timer@jake1164->settings-schema.json->section4->title
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Skyderintervaller"
+
+#. cinnamon-timer@jake1164->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Lyde"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Generelle indstillinger"
+
+#. cinnamon-timer@jake1164->settings-schema.json->page1->title
+msgid "General"
+msgstr "Generelt"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Etiket"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Selvvalgt besked (tilsidesætter global besked)"
+
+#. cinnamon-timer@jake1164->settings-schema.json->display-menu-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Vis timermenuen, når tiden er gået"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-prompt-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Afspil en lyd, når tiden er gået"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Minimum"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Maksimum"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Trin"
+
+#. cinnamon-timer@jake1164->settings-schema.json->message->description
+#. cinnamon-timer@jake1164->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr "Ændr ikke beskeden, der vises, når tiden er udløbet"
+
+#. cinnamon-timer@jake1164->settings-schema.json->display-message->description
+#. cinnamon-timer@jake1164->settings-schema.json->display-message->tooltip
 msgid ""
-"A countdown timer app with visual and auditory notifications based on "
-"markbokil's timer-notifications applet"
+"Global message displayed in notification windows unless defined in preset "
+"time."
 msgstr ""
-"Et panelprogrammer der tæller ned. Visuel og lydlig påmindelse (baseret på "
-"markbokil's timer-notifications)"
+"Global besked vist i meddelelsesvinduet, med mindre andet er angivet under "
+"forudindstillede tider."
 
-#. axos88@countdown-timer->metadata.json->name
-msgid "Countdown timer with notifications"
+#. cinnamon-timer@jake1164->metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "Et panelprogrammer der tæller ned. Visuel og lydlig påmindelse."
+
+#. cinnamon-timer@jake1164->metadata.json->name
+msgid "Timer with notifications"
 msgstr "Nedtælling med påmindelser"

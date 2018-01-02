@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-21 05:53+0300\n"
-"PO-Revision-Date: 2017-10-21 06:01+0300\n"
+"POT-Creation-Date: 2017-11-28 14:57+0200\n"
+"PO-Revision-Date: 2017-11-28 14:58+0200\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Language-Team: \n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: bg\n"
 
 #: applet.js:55
 msgid "[GPaste is not installed]"
@@ -56,33 +56,33 @@ msgstr "Нов запис"
 msgid "Empty history"
 msgstr "Изчистване на историята"
 
-#: applet.js:436
+#: applet.js:447
 msgid "Do you really want to empty the current history?"
 msgstr "Наистина ли искате да изчистите историята?"
 
-#: GPasteNewItemDialog.js:47
+#: GPasteNewItemDialog.js:48
 msgid "Please enter the text you want to add to the current history:"
 msgstr "Моля въведете текста, който искате да добавите в историята:"
 
-#: GPasteNewItemDialog.js:53 GPasteNotInstalledDialog.js:26
+#: GPasteNewItemDialog.js:54 GPasteNotInstalledDialog.js:27
 msgid "OK"
 msgstr "Ок"
 
-#: GPasteNewItemDialog.js:57
+#: GPasteNewItemDialog.js:58
 msgid "Cancel"
 msgstr "Отказ"
 
-#: GPasteNotInstalledDialog.js:21
+#: GPasteSearchItem.js:29
+msgid "Type to search..."
+msgstr "Пишете за да търсите..."
+
+#: GPasteNotInstalledDialog.js:22
 msgid ""
 "GPaste is not installed. Please install the necessary packages and then "
 "restart Cinnamon for this applet to start working."
 msgstr ""
 "GPaste не е инсталиран. Моля инсталирайте нужните пакети и рестартирайте "
 "Cinnamon, за да може аплета да работи."
-
-#: GPasteSearchItem.js:28
-msgid "Type to search..."
-msgstr "Пишете за да търсите..."
 
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->name
 msgid "GPaste Reloaded"
@@ -91,15 +91,29 @@ msgstr "GPaste Reloaded"
 #. gpaste-reloaded@feuerfuchs.eu->metadata.json->description
 msgid ""
 "A complete rewrite of the GPaste applet based on the Gnome Shell extension"
-msgstr ""
-"Напълно пренаписан GPaste аплет, базиран не Gnome Shell разширението"
+msgstr "Напълно пренаписан GPaste аплет, базиран не Gnome Shell разширението"
 
 #. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-gpaste-
 #. ui->description
 msgid "Display 'GPaste Main Program'"
 msgstr "Покажи основната програма на GPaste"
 
-#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->general->description
+#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->kb-show-
+#. history->description
+msgid "Show history"
+msgstr "Покажи историята"
+
+#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->other->description
+msgid "Other"
+msgstr "Друго"
+
+#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->key-
+#. bindings->description
+msgid "Key bindings"
+msgstr "Клавишни кобинации"
+
+#. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->shown-
+#. entries->description
 msgid "Shown entries"
 msgstr "Покажи записите"
 

@@ -1,20 +1,10 @@
 const GTop = imports.gi.GTop;
 const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
 const NetworkManager = imports.gi.NetworkManager;
 
-const Gettext = imports.gettext;
-const UUID = 'multicore-sys-monitor@ccadeptic23';
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
-
-function _(str) {
-  return Gettext.dgettext(UUID, str);
-}
-
-const findDeviceById = function(deviceIdToFind, collection) {
-  return collection.findIndex(device => device.id === deviceIdToFind);
-};
+const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+const _ = AppletDir.utils._;
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
@@ -37,6 +27,7 @@ function MultiCpuDataProvider() {
 MultiCpuDataProvider.prototype = {
 
   _init: function() {
+    this.name = _('CPU');
     this.isEnabled = true;
     this.gtop = new GTop.glibtop_cpu();
     this.CPUCount = 0;
@@ -54,7 +45,7 @@ MultiCpuDataProvider.prototype = {
     this.CPUListSys = [];
     this.CPUListUser = [];
 
-    this.CPUListUsage = [];
+    this.currentReadings = [];
 
     this.getData(); //initialize the values from the first readding
   },
@@ -73,7 +64,7 @@ MultiCpuDataProvider.prototype = {
           this.CPUListSys[this.CPUCount] = 0;
           this.CPUListUser[this.CPUCount] = 0;
 
-          this.CPUListUsage[this.CPUCount] = 0;
+          this.currentReadings[this.CPUCount] = 0;
           this.CPUCount++;
         }
       }
@@ -97,17 +88,11 @@ MultiCpuDataProvider.prototype = {
       this.CPUListUser[i] = this.gtop.xcpu_user[i];
 
       //Same way from gnome system monitor
-      this.CPUListUsage[i] = (duser + dnice + dsys) / dtotal;
+      this.currentReadings[i] = (duser + dnice + dsys) / dtotal;
     }
-
-    return this.CPUListUsage;
   },
   getCPUCount: function() {
     return this.CPUCount;
-  },
-
-  getName: function() {
-    return _('CPU');
   },
 
   getTooltipString: function() {
@@ -116,8 +101,7 @@ MultiCpuDataProvider.prototype = {
     }
     let toolTipString = _('------- CPU -------') + '\n';
     for (let i = 0; i < this.CPUCount; i++) {
-      let percentage = Math.round(100 * this.CPUListUsage[i], 2);
-      let spacer = (percentage < 10 ? '     ' : '   ');
+      let percentage = Math.round(100 * this.currentReadings[i], 2);
       toolTipString += (_('Core') + ' ' + i + ':').padEnd(12) + percentage + '%\n';;
     }
     return toolTipString;
@@ -130,10 +114,11 @@ function MemDataProvider() {
 MemDataProvider.prototype = {
 
   _init: function() {
+    this.name = _('MEM');
     this.isEnabled = true;
     this.gtopMem = new GTop.glibtop_mem();
     this.memusage = 0;
-    this.memInfo = [0, 0, 0, 0];
+    this.currentReadings = [0, 0, 0, 0];
   },
   getData: function() {
     GTop.glibtop_get_mem(this.gtopMem);
@@ -143,12 +128,7 @@ MemDataProvider.prototype = {
     let buffer = this.gtopMem.buffer / this.gtopMem.total;
     let free = this.gtopMem.free / this.gtopMem.total;
 
-    this.memInfo = [unavailableForUse, cached, buffer, free]; //should add up to 1
-
-    return this.memInfo;
-  },
-  getName: function() {
-    return _('MEM');
+    this.currentReadings = [unavailableForUse, cached, buffer, free]; //should add up to 1
   },
   getTooltipString: function() {
     if (!this.isEnabled) {
@@ -157,7 +137,7 @@ MemDataProvider.prototype = {
     let toolTipString = _('------- Memory -------') + '\n';
     let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
     for (let i = 0; i < attributes.length; i++) {
-      toolTipString += attributes[i] + '\t' + Math.round(100 * this.memInfo[i]) + '%\n';
+      toolTipString += attributes[i] + '\t' + Math.round(100 * this.currentReadings[i]) + '%\n';
     }
     return toolTipString;
   }
@@ -169,29 +149,26 @@ function SwapDataProvider() {
 SwapDataProvider.prototype = {
 
   _init: function() {
+    this.name = _('SWAP');
     this.isEnabled = true;
     this.gtopSwap = new GTop.glibtop_swap();
     this.swapusage = 0;
-    this.swapInfo = [0];
+    this.currentReadings = [0];
   },
   getData: function() {
     GTop.glibtop_get_swap(this.gtopSwap);
-    this.swapInfo = [this.gtopSwap.used / this.gtopSwap.total];
+    this.currentReadings = [this.gtopSwap.used / this.gtopSwap.total];
     // Check if swap is actually present
-    if (isNaN(this.swapInfo)) {
-      return [0];
+    if (isNaN(this.currentReadings)) {
+      this.currentReadings = [0];
     }
-    return this.swapInfo;
-  },
-  getName: function() {
-    return _('SWAP');
   },
   getTooltipString: function() {
-    if (!this.isEnabled || !this.swapInfo[0]) {
+    if (!this.isEnabled || !this.currentReadings[0]) {
       return '';
     }
     let toolTipString = _('------- Swap -------') + '\n';
-    toolTipString += _('Swap') + ':\t' + (Math.round(10000 * this.swapInfo[0]) / 100) + '%\n';
+    toolTipString += _('Swap') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100) + '%\n';
     return toolTipString;
   }
 };
@@ -201,79 +178,87 @@ function NetDataProvider() {
 }
 NetDataProvider.prototype = {
   _init: function() {
+    this.name = _('NET');
     this.isEnabled = true;
     this.gtop = new GTop.glibtop_netload();
+    this.nmClient = NMClient.Client.new();
+    this.signals = [
+      this.nmClient.connect('device-added', () => this.getNetDevices()),
+      this.nmClient.connect('device-removed', () => this.getNetDevices())
+    ];
     this.disabledDevices = [];
+    this.currentReadings = [];
     this.lastUpdatedTime = Date.now();
-    this.currentReadings = this.getNetDevices(true);
+    this.getNetDevices(true);
+    this.getNetActivity();
   },
   getData: function() {
-    const newReadings = this.getNetDevices();
-    let readingNetRatesList = [];
+    this.getNetActivity();
 
     const newUpdateTime = Date.now();
     const secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000;
-    this.lastUpdatedTime = newUpdateTime;
 
-    for (let i = 0, len = newReadings.length; i < len; i++) {
-      const refCurrentReading = findDeviceById(newReadings[i].id, this.currentReadings);
-      if (refCurrentReading === -1) {
-        continue;
-      }
-      const currentReading = this.currentReadings[refCurrentReading];
-      newReadings[i].tooltipDown = Math.round(((newReadings[i].down - currentReading.down) / secondsSinceLastUpdate));
-      newReadings[i].tooltipUp = Math.round(((newReadings[i].up - currentReading.up) / secondsSinceLastUpdate));
-      readingNetRatesList.push(newReadings[i].tooltipDown / 1024, newReadings[i].tooltipUp / 1024)
+    for (let i = 0, len = this.currentReadings.length; i < len; i++) {
+      this.currentReadings[i].tooltipDown = Math.round(
+        ((this.currentReadings[i].down - this.currentReadings[i].lastReading[0]) / secondsSinceLastUpdate)
+      );
+      this.currentReadings[i].tooltipUp = Math.round(
+        ((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
+      );
+
+      this.currentReadings[i].lastReading = [this.currentReadings[i].down, this.currentReadings[i].up];
+
+      this.currentReadings[i].readingRatesList = [
+        Math.round(this.currentReadings[i].tooltipDown / 1024),
+        Math.round(this.currentReadings[i].tooltipUp / 1024)
+      ];
     }
 
-    this.currentReadings = newReadings;
-    return readingNetRatesList;
-  },
-  getName: function() {
-    return _('NET');
+    this.lastUpdatedTime = newUpdateTime;
+
   },
   setDisabledInterfaces: function(disabledDevicesList) {
     this.disabledDevices = disabledDevicesList;
+    this.getNetDevices();
+  },
+  getNetActivity: function() {
+    for (let i = 0; i < this.currentReadings.length; i++) {
+      GTop.glibtop_get_netload(this.gtop, this.currentReadings[i].id);
+      this.currentReadings[i].up = this.gtop.bytes_out;
+      this.currentReadings[i].down = this.gtop.bytes_in;
+    }
   },
   getNetDevices: function(init = false) {
-    let nmClient;
+    this.currentReadings = [];
+
     let devices = GTop.glibtop_get_netlist(new GTop.glibtop_netlist());
-    let removedDeviceIndexes = [];
-    if (!devices) {
-      nmClient = NMClient.Client.new();
-      devices = nmClient.get_devices();
+    let altMethod = devices == null;
+    if (altMethod) {
+      devices = this.nmClient.get_devices();
     }
     for (let i = 0, len = devices.length; i < len; i++) {
-      let deviceConnected = true;
-      if (nmClient) {
+      if (altMethod) {
         if (devices[i].state !== NetworkManager.DeviceState.CONNECTED) {
-          deviceConnected = false;
+          continue;
         }
         devices[i] = devices[i].get_iface();
       }
-      if (deviceConnected) {
+      if (this.disabledDevices.indexOf(devices[i]) === -1) {
         GTop.glibtop_get_netload(this.gtop, devices[i]);
-      }
-      devices[i] = {
-        id: devices[i],
-        up: init ? 0 : (deviceConnected ? this.gtop.bytes_in : 0),
-        down: init ? 0 : (deviceConnected ? this.gtop.bytes_out : 0)
-      };
-      if (this.disabledDevices.indexOf(devices[i]) > -1) {
-        removedDeviceIndexes.push(i);
+        this.currentReadings.push({
+          id: devices[i],
+          up: init ? 0 : this.gtop.bytes_out,
+          down: init ? 0 : this.gtop.bytes_in,
+          lastReading: [0, 0]
+        });
       }
     }
-    for (let i = 0, len = removedDeviceIndexes.length; i < len; i++) {
-      devices[removedDeviceIndexes[i]] = undefined;
-      devices.splice(removedDeviceIndexes[i], 1);
-    }
-    return devices;
+    devices = null;
   },
   getTooltipString: function() {
     if (!this.isEnabled) {
       return '';
     }
-    this.getData();
     let toolTipString = _('------- Networks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       if (!this.currentReadings[i].tooltipDown) {
@@ -289,6 +274,11 @@ NetDataProvider.prototype = {
       toolTipString += indent  + _('Up:') + '   ' + up.padStart(spaces) + rate + '\n';
     }
     return toolTipString;
+  },
+  destroy: function() {
+    for (let i = 0; i < this.signals.length; i++) {
+      this.nmClient.disconnect(this.signals[i]);
+    }
   }
 };
 
@@ -297,58 +287,62 @@ function DiskDataProvider() {
 }
 DiskDataProvider.prototype = {
   _init: function() {
+    this.name = _('DISK');
     this.isEnabled = true;
     this.disabledDevices = [];
-    this.gtopFSUsage = new GTop.glibtop_fsusage();
+    this.currentReadings = [];
     this.lastUpdatedTime = Date.now();
-    this.currentReadings = this.getDiskRW();
+    this.gtopFSUsage = new GTop.glibtop_fsusage();
+    this.volumeMonitor = Gio.VolumeMonitor.get();
+    this.signals = [
+      this.volumeMonitor.connect('drive-changed', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('drive-connected', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('drive-disconnected', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('mount-added', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('mount-changed', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('mount-removed', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('volume-added', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('volume-changed', () => this.getDiskDevices()),
+      this.volumeMonitor.connect('volume-removed', () => this.getDiskDevices())
+    ];
+    this.mounts = this.volumeMonitor.get_mounts();
+    this.getDiskDevices();
+    this.getDiskRW();
   },
   getData: function() {
     if (!this.isEnabled) {
       return [];
     }
 
-    let newReadings = this.getDiskRW();
-    let readingRatesList = [];
+    this.getDiskRW();
 
     let newUpdateTime = Date.now();
     let secondsSinceLastUpdate = (newUpdateTime - this.lastUpdatedTime) / 1000.0;
     this.lastUpdatedTime = newUpdateTime;
 
-    for (let i = 0, len = newReadings.length; i < len; i++) {
-      const refCurrentReading = findDeviceById(newReadings[i].id, this.currentReadings);
-      if (refCurrentReading === -1) {
-        continue;
-      }
-      const currentReading = this.currentReadings[refCurrentReading];
-      const newRead = newReadings[i].read - currentReading.read;
-      const newWrite = newReadings[i].write - currentReading.write;
-      newReadings[i].tooltipRead = Math.round((newRead / secondsSinceLastUpdate));
-      newReadings[i].tooltipWrite = Math.round((newWrite / secondsSinceLastUpdate));
+    for (let i = 0, len = this.currentReadings.length; i < len; i++) {
+      const newRead = this.currentReadings[i].read - this.currentReadings[i].lastReading[0];
+      const newWrite = this.currentReadings[i].write - this.currentReadings[i].lastReading[1];
+      this.currentReadings[i].lastReading = [this.currentReadings[i].read, this.currentReadings[i].write];
+      this.currentReadings[i].tooltipRead = Math.round((newRead / secondsSinceLastUpdate));
+      this.currentReadings[i].tooltipWrite = Math.round((newWrite / secondsSinceLastUpdate));
       // Push it to the array read by the graphs as kilobytes.
-      readingRatesList.push(
+      this.currentReadings[i].readingRatesList = [
         Math.round((newRead / 1048576 / secondsSinceLastUpdate)),
         Math.round((newWrite / 1048576 / secondsSinceLastUpdate))
-      );
+      ];
     }
-
-    this.currentReadings = newReadings;
-    return readingRatesList;
-  },
-  getName: function() {
-    return _('DISK');
   },
   getDiskRW: function() {
-    let mountedDisks = this.getDiskDevices();
-    for (let i = 0; i < mountedDisks.length; i++) {
-      GTop.glibtop_get_fsusage(this.gtopFSUsage, mountedDisks[i].path);
-      mountedDisks[i].read = this.gtopFSUsage.read * this.gtopFSUsage.block_size;
-      mountedDisks[i].write = this.gtopFSUsage.write * this.gtopFSUsage.block_size;
+    for (let i = 0; i < this.currentReadings.length; i++) {
+      GTop.glibtop_get_fsusage(this.gtopFSUsage, this.currentReadings[i].path);
+      this.currentReadings[i].read = this.gtopFSUsage.read * this.gtopFSUsage.block_size;
+      this.currentReadings[i].write = this.gtopFSUsage.write * this.gtopFSUsage.block_size;
     }
-    return mountedDisks;
   },
   setDisabledDevices: function(disabledDevicesList) {
     this.disabledDevices = disabledDevicesList;
+    this.getDiskDevices();
   },
   getTooltipString: function() {
     if (!this.isEnabled) {
@@ -356,6 +350,9 @@ DiskDataProvider.prototype = {
     }
     let toolTipString = _('------- Disks -------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
+      if (!this.currentReadings[i]) {
+        continue;
+      }
       let read = formatBytes(this.currentReadings[i].tooltipRead, 2);
       let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
@@ -365,38 +362,38 @@ DiskDataProvider.prototype = {
     return toolTipString;
   },
   getDiskDevices: function() {
-    let volumeMonitor = Gio.VolumeMonitor.get();
-    let volumes = volumeMonitor.get_volumes();
-    let mountedDisks = [{
+    this.currentReadings = [{
       id: '/',
       path: '/',
       read: 0,
-      write: 0
+      write: 0,
+      lastReading: [0, 0]
     }];
 
-    for (let i = 0; i < volumes.length; i++) {
-      let isDisk = true;
-      let deviceName = volumes[i].get_name();
-      let mount = volumes[i].get_mount();
-
-      if (mount != null) {
-        let drive = mount.get_drive();
-        if (drive != null) {
-          isDisk = !drive.is_media_removable();
-        }
-        let mountRoot = mount.get_root();
-        // device is enabled, and is a disk
-        if (isDisk && this.disabledDevices.indexOf(deviceName) === -1) {
-          mountedDisks.push({
-            id: deviceName,
-            path: mountRoot.get_path(),
-            read: 0,
-            write: 0
-          });
-        }
+    for (let i = 0; i < this.mounts.length; i++) {
+      if (!this.mounts[i]) {
+        continue;
       }
-    }
+      let deviceName = this.mounts[i].get_name();
+      let drive = this.mounts[i].get_drive();
+      let isDisk =  drive && !drive.is_media_removable()
+      let mountRoot = this.mounts[i].get_root();
+      // device is enabled, and is a disk
+      if (isDisk && this.disabledDevices.indexOf(deviceName) === -1) {
+        this.currentReadings.push({
+          id: deviceName,
+          path: mountRoot.get_path(),
+          read: 0,
+          write: 0,
+          lastReading: [0, 0]
+        });
+      }
 
-    return mountedDisks;
+    }
+  },
+  destroy: function() {
+    for (let i = 0; i < this.signals.length; i++) {
+      this.volumeMonitor.disconnect(this.signals[i]);
+    }
   }
 };

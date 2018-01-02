@@ -84,6 +84,8 @@ const addTo = function(instance, container, array) {
   container.add_actor(instance.actor);
 };
 
+const hintText = _('Type to search...');
+
 /**
  * @name bookmarksManager
  * @description Class to consolodate search of web browser(s) bookmarks
@@ -1794,6 +1796,10 @@ CinnamenuApplet.prototype = {
   _onSearchTextChanged: function() {
     let searchText = this.searchEntryText.get_text();
 
+    if (searchText === hintText) {
+      return;
+    }
+
     for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
       if (searchText.length > 0) {
         this.categoryButtons[i].disable();
@@ -1833,8 +1839,7 @@ CinnamenuApplet.prototype = {
     if (this._searchTimeoutId > 0) {
       return;
     }
-
-    this._searchTimeoutId = Mainloop.timeout_add(0, Lang.bind(this, this._doSearch, searchText));
+    this._searchTimeoutId = Mainloop.timeout_add(0, () => this._doSearch(searchText));
   },
 
   _doSearch: function(text) {
@@ -1896,22 +1901,20 @@ CinnamenuApplet.prototype = {
       this._clearApplicationsBox();
       this._displayApplications(results);
 
-      // Highlight the first search result
-      setTimeout(() => {
-        let buttons = this.getActiveButtons();
-        if (buttons.length === 0) {
-          return;
-        }
-        buttons[0].handleEnter();
-      }, 0);
+      let buttons = this.getActiveButtons();
+      if (buttons.length === 0) {
+        return;
+      }
+      buttons[0].handleEnter();
     };
-
     if (this.state.settings.enableSearchProviders
       && this.state.enabledProviders.length > 0
       && pattern.length > 2) {
       this.listSearchProviders(pattern, (providerResults) => {
         // Since the provider results are asynchronous, the search state may have ended by the time they return.
-        if (!this.state.searchActive) {
+        if (!this.state.searchActive
+          || !providerResults
+          || providerResults.length === 0) {
           return;
         }
         results = results.concat(providerResults);
@@ -2050,6 +2053,10 @@ CinnamenuApplet.prototype = {
       style_class: 'vfade menu-applications-scrollbox'
     });
 
+    if (!this.state.settings.showAppDescriptionsOnButtons && !this.state.settings.showTooltips) {
+      this.groupCategoriesWorkspacesScrollBox.width = 250;
+    }
+
     let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
     this.displaySignals.connect(vscrollCategories, 'scroll-start', () => {
       this.menu.passEvents = true;
@@ -2091,7 +2098,7 @@ CinnamenuApplet.prototype = {
     });
     this.searchEntry = new St.Entry({
       name: 'menu-search-entry',
-      hint_text: _('Type to search...'),
+      hint_text: hintText,
       track_hover: true,
       can_focus: true,
       height: 30 * global.ui_scale,
