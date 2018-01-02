@@ -1,5 +1,9 @@
 Changelog
 
+### 3.1.2
+
+  * Fixed the menu width changing when left positioned descriptions are used.
+
 ### 3.1.1
 
   * Fixed the tooltip text persisting after the menu is closed while search providers are enabled.
