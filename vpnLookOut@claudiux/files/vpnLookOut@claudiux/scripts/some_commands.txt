@@ -1,0 +1,13 @@
+# Liste des connexions VPN disponibles
+nmcli connection show | grep vpn | awk '{print$1}' # -> Bug: n'imprime que le premier mot du nom de la connexion
+nmcli -t -f NAME,TYPE connection show | grep vpn | sed -e "s/:vpn$//" | tr "\n" ";" | sed s/";$"/""/
+
+# LA connection VPN active :
+nmcli connection show --active | grep vpn | awk '{print$1}' # Même bug
+nmcli -t -f NAME,TYPE connection show --active | grep vpn | sed -e "s/:vpn$//" | tr "\n" ";" | sed s/";$"/""/
+
+# Connecter le VPN Luxembourg :
+nmcli connection up Luxembourg
+
+# Stopper proprement Transmission :
+[[ `pidof transmission-gtk` != "" ]] && kill -15 `pidof transmission-gtk`

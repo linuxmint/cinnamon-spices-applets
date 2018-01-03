@@ -82,9 +82,3 @@ You can install Transmission:
    * Enable the applet in System Settings -> Applets
    * You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
 
-## TO DO in next versions (following v2.0.0):
-
-If required by users, I project to:
-  * Add an option to start Transmission at startup of this applet.
-  * Add an option to log VPN connections/disconnections for statistics.
-  * Add a tool to append VPN connections from a .ovpn config file containing settings and certificates, for personal use only (not for system-wide use, which requires root privileges).
