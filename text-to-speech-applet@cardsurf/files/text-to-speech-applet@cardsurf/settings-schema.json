@@ -1,88 +1,108 @@
 {
 
     "settings_start" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
     "configuration": {
-    	"type": "header",
-    	"description": "Configuration"
+        "type": "header",
+        "description": "Configuration"
     },
     "clipboard_type" : {
-    	"type": "combobox",
-    	"default" : 0,
-    	"description" : "Clipboard",
-    	"options" : {
-    	    "Primary selection" : 0,
-    	    "Clipboard selection" : 1
-    	},
-    	"tooltip" : "The clipboard that contains the text to read. \nThe primary selection stores highlighted text. \nThe clipboard selection stores text copied with Ctrl+C."
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Clipboard",
+        "options" : {
+            "Primary selection" : 0,
+            "Clipboard selection" : 1
+        },
+        "tooltip" : "The clipboard that contains the text to read. \nThe primary selection stores highlighted text. \nThe clipboard selection stores text copied with Ctrl+C."
     },
     "voice_command": {
-    	"type": "entry",
-    	"default": "espeak -ven+m5 -a 100 -p 50 -s 175",
-    	"description": "Voice command",
-    	"tooltip": "A command used to read the text"
+        "type": "entry",
+        "default": "espeak -ven+m5 -a 100 -p 50 -s 175",
+        "description": "Voice command",
+        "tooltip": "A command used to read the text"
     },
     "configuration_end" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
     "reading_start": {
-    	"type": "header",
-    	"description": "Reading"
+        "type": "header",
+        "description": "Reading"
     },
     "read_lines_and_stop" : {
-    	"type" : "checkbox",
-    	"default" : false,
-    	"description": "Read lines and stop",
-    	"tooltip": "If checked reading is stopped after the specified number of lines. Reading is resumed from the line it was stopped."
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Read lines and stop",
+        "tooltip": "If checked reading is stopped after the specified number of lines. Reading is resumed from the line it was stopped."
     },
     "number_lines_to_read": {
-    	"type": "spinbutton",
-    	"default": 1,
-    	"min": 1,
-    	"max": 1000000,
-    	"step": 1,
-    	"units": "lines and stop",
-    	"description": "Read",
-    	"tooltip": "The number of lines to read",
-    	"dependency": "read_lines_and_stop"
+        "type": "spinbutton",
+        "default": 1,
+        "min": 1,
+        "max": 1000000,
+        "step": 1,
+        "units": "lines and stop",
+        "description": "Read",
+        "tooltip": "The number of lines to read",
+        "dependency": "read_lines_and_stop"
     },
     "line_separator": {
-    	"type": "entry",
-    	"default": "\\s*[\\n\\r]+[\\n\\r\\s]*",
-    	"description": "Line separator",
-    	"tooltip": "A regular expression separating lines of text",
-    	"dependency": "read_lines_and_stop"
+        "type": "entry",
+        "default": "\\s*[\\n\\r]+[\\n\\r\\s]*",
+        "description": "Line separator",
+        "tooltip": "A regular expression separating lines of text",
+        "dependency": "read_lines_and_stop"
     },
     "reading_end": {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
     "gui_start": {
-    	"type": "header",
-    	"description": "Gui"
+        "type": "header",
+        "description": "Gui"
     },
     "gui_idle_icon_filename" : {
-    	"type" : "filechooser",
-    	"default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-off.png",
-    	"description" : "Idle icon",
-    	"tooltip": "An icon displayed when idle"
-    },
-    "gui_pause_icon_filename" : {
-    	"type" : "filechooser",
-    	"default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-paused.png",
-    	"description" : "Pause icon",
-    	"tooltip": "An icon displayed when paused"
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-off.png",
+        "description" : "Idle icon",
+        "tooltip": "An icon displayed when idle"
     },
     "gui_reading_icon_filename" : {
-    	"type" : "filechooser",
-    	"default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-on.png",
-    	"description" : "Reading icon",
-    	"tooltip": "An icon displayed when reading"
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-on.png",
+        "description" : "Reading icon",
+        "tooltip": "An icon displayed when reading"
+    },
+    "gui_pause_icon_filename" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/text-to-speech-applet@cardsurf/icons/book-paused.png",
+        "description" : "Pause icon",
+        "tooltip": "An icon displayed when paused"
     },
     "gui_end" : {
-    	"type" : "separator"
+        "type" : "separator"
+    },
+
+    "shortcuts_start": {
+        "type": "header",
+        "description": "Shortcuts"
+    },
+    "start_stop_keys": {
+        "type": "keybinding",
+        "default": "",
+        "description": "Reading shortcut",
+        "tooltip": "A keyboard shortcut to start or stop reading the text"
+    },
+    "pause_resume_keys": {
+        "type": "keybinding",
+        "default": "",
+        "description": "Pause shortcut",
+        "tooltip": "A keyboard shortcut to pause or resume reading the text"
+    },
+    "shortcuts_end" : {
+        "type" : "separator"
     }
 
 
