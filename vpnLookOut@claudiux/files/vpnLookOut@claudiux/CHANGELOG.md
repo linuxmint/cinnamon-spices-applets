@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.0.1
+ * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
+
 ### 2.0.0
  * New features:
   * When installing this applet, it helps the user to install dependencies, if any.

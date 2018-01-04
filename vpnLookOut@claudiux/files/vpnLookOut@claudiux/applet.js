@@ -166,7 +166,7 @@ MyApplet.prototype = {
 			this.vpnifacedetect = metadata.path + "/scripts/vpn_iface_detect.sh";
 
 			this.set_icons();
-			
+
 			this.stoptransmissionscript = metadata.path + "/scripts/stop_transmission.sh";
 			this.starttransmissionscript = metadata.path + "/scripts/start_transmission.sh";
 			this.transmissionstoppedbyapplet = false ;
@@ -630,7 +630,7 @@ MyApplet.prototype = {
 			// ++ Set up sub menu for Connections Items
 			this.subMenuConnections = new PopupMenu.PopupSubMenuMenuItem(_("Connections"));
 			this.menu.addMenuItem(this.subMenuConnections);
-			
+
 			this.vpnNames = this.get_vpn_names();
 			this.SMCItems = []; // Items of subMenuConnections (SMC)
 			let l=this.vpnNames.length;
@@ -774,11 +774,11 @@ MyApplet.prototype = {
 			// Notification (temporary)
 			let notifyMessage = _(this.appletName) + " " + _("is fully functional.");
 			Main.notify(_("All dependencies are installed"), notifyMessage);
-				 
+
+			// Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
+			this.on_applet_removed_from_panel();
 			// Reload this applet with dependencies installed
-			GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh');
-			// Stop the loop to avoid errors
-			this.applet_running = false
+			GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
 		}
 
 		// Inhibits also after the applet has been removed from the panel
@@ -810,6 +810,9 @@ function main(metadata, orientation, panelHeight, instance_id) {
 }
 /*
 ## Changelog
+
+### 2.0.1
+ * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
 
 ### 2.0.0
  * New features:
