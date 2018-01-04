@@ -825,7 +825,7 @@ AppListGridButton.prototype = {
   handleButtonRelease: function(actor, e){
     let button = !e ? 3 : e.get_button();
     if (button === 1) {
-      if (this.state.contextMenuIsOpen) {
+      if (this.state.contextMenuIsOpen != null) {
         if (this.menu.isOpen && this.menu._activeMenuItem) {
           this.menu._activeMenuItem.activate();
         } else {

@@ -1526,12 +1526,16 @@ CinnamenuApplet.prototype = {
         contextMenuChildren[index].handleEnter();
       } else if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
         contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
-      } else if (up) {
+      } else if (up && !enteredItemExists) {
         this.categoryButtons[startingCategoryIndex].handleEnter();
       } else if (enteredPowerGroupItemExists) {
         this.powerGroupButtons[refPowerGroupItemIndex - 1].handleEnter();
       } else if (enteredItemExists) {
-        buttons[index].handleEnter();
+        if (up && !this.state.isListView && refItemIndex <= this.state.settings.appsGridColumnCount - 1) {
+          buttons[refItemIndex].handleEnter();
+        } else {
+          buttons[index].handleEnter();
+        }
       } else if (enteredCategoryExists) {
         this.categoryButtons[refCategoryIndex - 1].handleEnter();
       }
@@ -1567,13 +1571,19 @@ CinnamenuApplet.prototype = {
         || (!enteredItemExists
           && !enteredCategoryExists
           && !enteredPowerGroupItemExists)) {
-        if (!enteredCategoryExists && !this.state.searchActive) {
+        if (this.state.searchActive) {
+          buttons[refItemIndex].handleEnter();
+          return;
+        }
+        if (!enteredCategoryExists) {
           if (typeof this.categoryButtons[startingCategoryIndex] !== 'undefined') {
             this.categoryButtons[startingCategoryIndex].handleEnter();
           } else {
             this.categoryButtons[this.categoryButtons.length - 1].handleEnter();
           }
         }
+      } else if (this.state.searchActive && enteredPowerGroupItemExists && refPowerGroupItemIndex === 0) {
+        this.powerGroupButtons[this.powerGroupButtons.length - 1].handleEnter();
       } else if (!enteredCategoryExists) {
         previousItemNavigation(refItemIndex - 1);
       }
@@ -1605,7 +1615,7 @@ CinnamenuApplet.prototype = {
     const tabNavigation = () => {
       if (enteredItemExists) {
         this.powerGroupButtons[0].handleEnter();
-      } else if (enteredPowerGroupItemExists) {
+      } else if (enteredPowerGroupItemExists && !this.state.searchActive) {
         this.categoryButtons[startingCategoryIndex].handleEnter();
       } else {
         buttons[0].handleEnter();
@@ -1617,7 +1627,7 @@ CinnamenuApplet.prototype = {
         previousItemNavigation(refContextMenuItemIndex - 1);
       } else if (enteredPowerGroupItemExists) {
         tabNavigation();
-      } else if (this.state.isListView || enteredContextMenuItemExists) {
+      } else if (this.state.isListView) {
         previousItemNavigation(refItemIndex - 1);
       } else {
         previousItemNavigation((refItemIndex - 1) - (this.state.settings.appsGridColumnCount - 1));
@@ -1828,6 +1838,7 @@ CinnamenuApplet.prototype = {
       }
 
       this.searchEntry.set_secondary_icon(null);
+      this.state.trigger('menuOpened');
     }
     if (!this.state.searchActive) {
       if (this._searchTimeoutId > 0) {
