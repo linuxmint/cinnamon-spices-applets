@@ -1,5 +1,12 @@
 Changelog
 
+### 6.2.1
+
+  * Fixed regressions occurring in some situations:
+    * Context menus not opening
+    * Thumbnails not displaying correctly
+  * Fixed ITM not completing its initial load while system favorites are enabled during a Cinnamon restart.
+
 ### 6.2.0
 
   * Fixed windows from all workspaces showing, and added an option to show all workspaces.
