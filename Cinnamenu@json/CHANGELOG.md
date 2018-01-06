@@ -1,5 +1,11 @@
 Changelog
 
+### 3.1.3
+
+  * Fixed clicking context menu items from the first app in a list not working.
+  * Fixed category entries being invisbly entered when using key navigation in search mode.
+  * Fixed the category selection not resetting after a search.
+
 ### 3.1.2
 
   * Fixed the menu width changing when left positioned descriptions are used.
