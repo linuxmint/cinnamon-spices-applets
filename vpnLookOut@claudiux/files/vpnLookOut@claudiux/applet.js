@@ -48,36 +48,6 @@ function criticalNotify(msg, details, icon) {
 	return notification
 }
 
-
-/*
-Function to provide a Modal Dialog. This approach is thanks to Mark Bolin
-It works, even if I do not fully understand it, and has done for years in NUMA!
-*/
-/*
-function AlertDialog(value) {
-	this._init(value);
-};
-
-AlertDialog.prototype = {
-	__proto__: ModalDialog.ModalDialog.prototype,
-	_init: function (value) {
-		ModalDialog.ModalDialog.prototype._init.call(this);
-		let label = new St.Label({
-			text: value ,
-			style_class: "centered"
-		});
-		this.contentLayout.add(label);
-		this.setButtons([{
-			style_class: "centered",
-			label: _("Ok"),
-			action: Lang.bind(this, function () {
-				this.close();
-			})
-		}]);
-	}
-};
-*/
-
 // ++ Always needed
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
 	this._init(metadata, orientation, panelHeight, instance_id);
@@ -166,7 +136,7 @@ MyApplet.prototype = {
 			this.vpnifacedetect = metadata.path + "/scripts/vpn_iface_detect.sh";
 
 			this.set_icons();
-			
+
 			this.stoptransmissionscript = metadata.path + "/scripts/stop_transmission.sh";
 			this.starttransmissionscript = metadata.path + "/scripts/start_transmission.sh";
 			this.transmissionstoppedbyapplet = false ;
@@ -185,6 +155,8 @@ MyApplet.prototype = {
 				this.vpn_interface_detect();
 			}
 
+			this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
+
 			// Install Languages (from .po files)
 			this.execInstallLanguage();
 
@@ -200,9 +172,7 @@ MyApplet.prototype = {
 			this.alertFlag = !this.useSoundAlertAtBeginning; // Flag says alert has been tripped to avoid repeat notifications
 
 
-			this.on_orientation_changed(orientation); // Initialise for panel orientation
-
-			this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
+			this.on_orientation_changed(orientation); // Initializes for panel orientation
 
 			// Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
 			if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.0") <= 0) {
@@ -281,28 +251,53 @@ MyApplet.prototype = {
 	}, // End of are_dependencies_installed
 
 	execInstallLanguage: function() {
-		//let poPath = "~/.local/share/cinnamon/applets/vpnLookOut@claudiux/po";
-		//let poDir = Gio.file_new_for_path(poPath);
-		//let poList = poDir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
-		//GLib.spawn_command_line_async('sh -c echo "'+ poList + '" >> /tmp/poList.txt');
+		let poPath = this.appletPath + "/po";
+		let poDir = Gio.file_new_for_path(poPath);
+		let poEnum;
+		try {
+			poEnum = poDir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null)
+		} catch(e) {
+			poEnum = null
+		}
 
-		let generatemoPath = this.appletPath + '/scripts/generate_mo.sh'; // script to generate .mo files
-		let moFrPath = this.localePath + '/fr/LC_MESSAGES/vpnLookOut@claudiux.mo'
-		let moFile = Gio.file_new_for_path(moFrPath);
-
-		let potFrPath = this.appletPath + '/po/vpnLookOut@claudiux.pot';
-		let potFile = Gio.file_new_for_path(potFrPath);
-
-		if (potFile.query_exists(null)) { // .pot file exists
-			if (!moFile.query_exists(null)) { // .mo file doesn't exist
-				GLib.spawn_command_line_async('bash -c "' + generatemoPath + '"'); // generate all .mo files
-			} else { // .mo file exists
-				let potModified = potFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-				let moModified = moFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-				if (potModified > moModified) { // .pot file is most recent than .mo file
-					GLib.spawn_command_line_async('bash -c "' + generatemoPath + '"'); // generate all .mo files
+		let moExists = true;
+		if (poEnum != null) {
+			let info;
+			let poFile;
+			let language;
+			let moPath, moFile;
+			while (moExists && (info = poEnum.next_file(null)) != null) {
+				let type = info.get_file_type();
+				if (type == Gio.FileType.REGULAR) {
+					let name = info.get_name().toString();
+					poFile = poDir.get_child(name);
+					if (name.endsWith('.po')) {
+						language = name.substring(0, name.length - 3);
+						moPath = this.localePath + '/' + language + '/LC_MESSAGES/vpnLookOut@claudiux.mo';
+						moFile = Gio.file_new_for_path(moPath);
+						if (!moFile.query_exists(null)) { // .mo file doesn't exist
+							moExists = false
+						} else { // .mo file exists
+							// modification times
+							let poModified = poFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+							let moModified = moFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+							if (poModified > moModified) { // .po file is most recent than .mo file
+								moExists = false; // .mo file must be replaced.
+							}
+						}
+					}
 				}
 			}
+		}
+
+		if (!moExists) { // at least one .mo file is missing or is too old
+			let generatemoPath = this.appletPath + '/scripts/generate_mo.sh'; // script to generate .mo files
+			GLib.spawn_command_line_async('bash -c "' + generatemoPath + '"'); // generate all .mo files
+			// Reload this applet for changes to .mo files to take effect.
+			// Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
+			this.on_applet_removed_from_panel();
+			// Reload this applet with new .mo files installed
+			GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
 		}
 	}, // End of execInstallLanguage
 
@@ -630,7 +625,7 @@ MyApplet.prototype = {
 			// ++ Set up sub menu for Connections Items
 			this.subMenuConnections = new PopupMenu.PopupSubMenuMenuItem(_("Connections"));
 			this.menu.addMenuItem(this.subMenuConnections);
-			
+
 			this.vpnNames = this.get_vpn_names();
 			this.SMCItems = []; // Items of subMenuConnections (SMC)
 			let l=this.vpnNames.length;
@@ -774,11 +769,11 @@ MyApplet.prototype = {
 			// Notification (temporary)
 			let notifyMessage = _(this.appletName) + " " + _("is fully functional.");
 			Main.notify(_("All dependencies are installed"), notifyMessage);
-				 
+
+			// Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
+			this.on_applet_removed_from_panel();
 			// Reload this applet with dependencies installed
-			GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh');
-			// Stop the loop to avoid errors
-			this.applet_running = false
+			GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
 		}
 
 		// Inhibits also after the applet has been removed from the panel
@@ -810,6 +805,10 @@ function main(metadata, orientation, panelHeight, instance_id) {
 }
 /*
 ## Changelog
+
+### 2.0.1
+ * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
+ * Improved installation of translation files.
 
 ### 2.0.0
  * New features:
