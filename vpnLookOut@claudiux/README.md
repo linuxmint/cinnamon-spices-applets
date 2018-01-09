@@ -42,15 +42,18 @@ The left click menu also contains:
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
   * A list of all VPN connections available. Click on one of them to change of VPN connection ; it disconnects from actual (if any) and connects to new.
 
-## Translations and other Contributions
-
-The internal changes required in the applet to allow translations are implemented and several translations are available. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users, please note that I will rarely be able to take responsibility for the accuracy of translations!
-
-Although comments and suggestions are always welcome, any contributions which are contemplated have to be discussed. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
-
-The installation of the available languages are automatically made, but the messages will only be translated at the next Cinnamon startup.
+## Translations 
+The vpnLookOut applet is designed to allow translations of messages (initially in English). A vpnLookOut.pot template file is available, you can use it with software such as poedit to translate these messages.
 
 Languages already available (v2.0.0 and following): English, French, Spanish, Italian.
+
+The installation of the available languages is done automatically.
+
+Translations are usually provided by people who are fluent in the language. Any new translation will be very appreciated. Users, please note that I will not be able to take responsibility for the accuracy of translations that I would not have done myself!
+
+## Contributions
+
+While comments and suggestions are always welcome, any contributions considered should be discussed. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited pull requests will never be allowed with the exception of urgent and critical bug fixes from the Cinnamon team.
 
 ## Requirements:
 
@@ -85,6 +88,6 @@ You can install Transmission:
 ## TO DO in next versions (following v2.0.0):
 
 If required by users, I project to:
-  * Add an option to start Transmission at startup of this applet.
+  * Add an option to start Transmission when this applet starts, as soon as the VPN is connected.
   * Add an option to log VPN connections/disconnections for statistics.
   * Add a tool to append VPN connections from a .ovpn config file containing settings and certificates, for personal use only (not for system-wide use, which requires root privileges).
