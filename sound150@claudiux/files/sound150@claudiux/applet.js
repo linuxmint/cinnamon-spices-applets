@@ -167,12 +167,18 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
         let percentage = Math.round(value * 100) + "%";
-
+        
         this.tooltip.set_text(this.tooltipText + percentage);
         let iconName = this._volumeToIcon(value);
         if (this.app_icon == null) {
             this.icon.icon_name = iconName;
         }
+        let _icon_and_slider_style_class = this._volumeToStyleClass(value);
+        //if (this.applet.actor.realized)
+        if (!iconName.startsWith('microphone'))
+            this.applet.actor.style_class = _icon_and_slider_style_class;
+        //if (this.actor.realized)
+            this.actor.style_class = _icon_and_slider_style_class;
         this.setValue(value/this.applet.pcMaxVolume);
 
         // send data to applet
@@ -218,7 +224,7 @@ VolumeSlider.prototype = {
         else
             newvalue = (relX - handleRadius) / (width - 2 * handleRadius);
         this._value = newvalue;
-        
+
         this._slider.queue_repaint();
         this.emit('value-changed', this._value);
     },
@@ -252,32 +258,21 @@ VolumeSlider.prototype = {
         else
             icon = "high";
 
-        if (this.applet.percentMaxVolume > 100) {
-            let realValue = value * 100;
-            if (realValue <= 100) {
-                this.applet.actor.style_class = 'sound-normal';
-                this.actor.style_class = 'sound-normal';
-                if (realValue <= 33)
-                    icon = "low";
-                else if (realValue <= 67)
-                    icon = "medium";
-                else
-                    icon = "high";
-            } else if (realValue <= 115) {
-                this.applet.actor.style_class = 'sound-veryhigh';
-                this.actor.style_class = 'sound-veryhigh'
-            } else if (realValue <= 130) {
-                this.applet.actor.style_class = 'sound-superhigh';
-                this.actor.style_class = 'sound-superhigh'
-            } else {
-                this.applet.actor.style_class = 'sound-extrahigh';
-                this.actor.style_class = 'sound-extrahigh'
-            }
-        } else {
-            this.applet.actor.style_class = 'sound-normal';
-            this.actor.style_class = 'sound-normal';
-        }
         return this.isMic? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
+    },
+    
+    _volumeToStyleClass: function(value){
+        let _icon_and_slider_style_class = 'sound-normal';
+        if (value > 1) {
+            if (value <= 1.15) {
+                _icon_and_slider_style_class = 'sound-veryhigh'
+            } else if (value <= 1.3) {
+                _icon_and_slider_style_class = 'sound-superhigh'
+            } else {
+                _icon_and_slider_style_class = 'sound-extrahigh'
+            }
+        }
+        return _icon_and_slider_style_class
     }
 };
 
@@ -935,10 +930,10 @@ MyApplet.prototype = {
             this.appletPath = metadata.path;
 
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
-            
+
             UUID = metadata.uuid;
             Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
-            
+
             this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
             this.settings.bind("middleClickAction", "middleClickAction");
             this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
@@ -1083,19 +1078,13 @@ MyApplet.prototype = {
 
             let appsys = Cinnamon.AppSystem.get_default();
             appsys.connect("installed-changed", Lang.bind(this, this._updateLaunchPlayer));
-            
+
             let AppletDirectory = imports.ui.appletManager.applets[UUID];
-            try {
             if (AppletDirectory.InstallLanguages.execInstallLanguages(UUID)) {
-                // Reload this applet for changes to .mo files to take effect.
-                // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
-                this.on_applet_removed_from_panel();
-                // Reload this applet with new .mo files installed
-                GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
-            } } catch(e) {
-                global.logError(e)
+                // New .mo files have been installed.
+                // Reloads this applet for changes to .mo files to take effect:
+                imports.ui.appletManager.applets.reloadExtension(UUID, 'APPLET')
             }
-            
         }
         catch (e) {
             global.logError(e);
@@ -1120,6 +1109,7 @@ MyApplet.prototype = {
 
     on_applet_removed_from_panel : function() {
         this.applet_running = false;
+        this.settings.finalize();
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
@@ -1131,8 +1121,7 @@ MyApplet.prototype = {
 
         for(let i in this._players)
             this._players[i].destroy();
-        
-        this.settings.finalize();
+
     },
 
     on_applet_clicked: function(event) {
