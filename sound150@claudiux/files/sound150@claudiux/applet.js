@@ -94,9 +94,11 @@ function VolumeSlider(){
 VolumeSlider.prototype = {
     __proto__: PopupMenu.PopupSliderMenuItem.prototype,
 
-    _init: function(applet, stream, tooltip, app_icon){
+    _init: function(applet, stream, tooltip, app_icon, is_master){
         PopupMenu.PopupSliderMenuItem.prototype._init.call(this, 0);
         this.applet = applet;
+        
+        this.is_master = is_master;
 
         if(tooltip)
             this.tooltipText = tooltip + ": ";
@@ -175,10 +177,11 @@ VolumeSlider.prototype = {
         }
         let _icon_and_slider_style_class = this._volumeToStyleClass(value);
         //if (this.applet.actor.realized)
-        if (!iconName.startsWith('microphone'))
+        //if (!iconName.startsWith('microphone'))
+        if (this.is_master)
             this.applet.actor.style_class = _icon_and_slider_style_class;
         //if (this.actor.realized)
-            this.actor.style_class = _icon_and_slider_style_class;
+        this.actor.style_class = _icon_and_slider_style_class;
         this.setValue(value/this.applet.pcMaxVolume);
 
         // send data to applet
@@ -314,7 +317,7 @@ StreamMenuSection.prototype = {
             iconName = "audio-x-generic";
         }
 
-        let slider = new VolumeSlider(applet, stream, name, iconName);
+        let slider = new VolumeSlider(applet, stream, name, iconName, false);
         this.addMenuItem(slider);
     }
 };
@@ -1053,7 +1056,7 @@ MyApplet.prototype = {
             this._selectOutputDeviceItem.actor.hide();
 
             this._inputSection = new PopupMenu.PopupMenuSection();
-            this._inputVolumeSection = new VolumeSlider(this, null, _("Microphone"), null);
+            this._inputVolumeSection = new VolumeSlider(this, null, _("Microphone"), null, false);
             this._inputVolumeSection.connect("values-changed", Lang.bind(this, this._inputValuesChanged));
             this._selectInputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Input device"));
             this._inputSection.addMenuItem(this._inputVolumeSection);
@@ -1387,7 +1390,7 @@ MyApplet.prototype = {
 
         //between these two separators will be the player MenuSection (position 3)
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
+        this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null, true);
         this._outputVolumeSection.connect("values-changed", Lang.bind(this, this._outputValuesChanged));
 
         this.menu.addMenuItem(this._outputVolumeSection);
