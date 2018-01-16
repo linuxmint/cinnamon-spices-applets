@@ -1588,6 +1588,11 @@ MyApplet.prototype = {
             if (this._recordingAppsNum++ === 0)
                 this._inputSection.actor.show();
         }
+        
+        if (this._outputVolumeSection != null) {
+            this.actor.style_class = this._outputVolumeSection.actor.style_class;
+        }
+
     },
 
     _onStreamRemoved: function(control, id){
