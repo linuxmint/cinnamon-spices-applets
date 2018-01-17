@@ -94,12 +94,10 @@ function VolumeSlider(){
 VolumeSlider.prototype = {
     __proto__: PopupMenu.PopupSliderMenuItem.prototype,
 
-    _init: function(applet, stream, tooltip, app_icon, is_master){
+    _init: function(applet, stream, tooltip, app_icon){
         PopupMenu.PopupSliderMenuItem.prototype._init.call(this, 0);
         this.applet = applet;
         
-        this.is_master = is_master;
-
         if(tooltip)
             this.tooltipText = tooltip + ": ";
         else
@@ -123,6 +121,10 @@ VolumeSlider.prototype = {
         this.addActor(this._slider, {span: -1, expand: true});
 
         this.connectWithStream(stream);
+    },
+    
+    set_master: function(is_master) {
+        this.is_master = is_master
     },
 
     connectWithStream: function(stream){
@@ -210,32 +212,6 @@ VolumeSlider.prototype = {
         this.emit('value-changed', this._value);
     },
 
-    _moveHandle: function(absX, absY) {
-        let relX, relY, sliderX, sliderY;
-        [sliderX, sliderY] = this._slider.get_transformed_position();
-        relX = absX - sliderX;
-        relY = absY - sliderY;
-
-        let width = this._slider.width;
-        let handleRadius = this._slider.get_theme_node().get_length('-slider-handle-radius');
-
-        let newvalue;
-        if (relX < handleRadius)
-            newvalue = 0;
-        else if (relX > width - handleRadius)
-            newvalue = 1;
-        else
-            newvalue = (relX - handleRadius) / (width - 2 * handleRadius);
-        this._value = newvalue;
-
-        this._slider.queue_repaint();
-        this.emit('value-changed', this._value);
-    },
-
-    get value() {
-        return this._value;
-    },
-
     _onKeyPressEvent: function (actor, event) {
         let key = event.get_key_symbol();
         if (key == Clutter.KEY_Right || key == Clutter.KEY_Left) {
@@ -317,7 +293,8 @@ StreamMenuSection.prototype = {
             iconName = "audio-x-generic";
         }
 
-        let slider = new VolumeSlider(applet, stream, name, iconName, false);
+        let slider = new VolumeSlider(applet, stream, name, iconName);
+        slider.set_master(false);
         this.addMenuItem(slider);
     }
 };
@@ -1056,7 +1033,8 @@ MyApplet.prototype = {
             this._selectOutputDeviceItem.actor.hide();
 
             this._inputSection = new PopupMenu.PopupMenuSection();
-            this._inputVolumeSection = new VolumeSlider(this, null, _("Microphone"), null, false);
+            this._inputVolumeSection = new VolumeSlider(this, null, _("Microphone"), null);
+            this._inputVolumeSection.set_master(false);
             this._inputVolumeSection.connect("values-changed", Lang.bind(this, this._inputValuesChanged));
             this._selectInputDeviceItem = new PopupMenu.PopupSubMenuMenuItem(_("Input device"));
             this._inputSection.addMenuItem(this._inputVolumeSection);
@@ -1390,7 +1368,8 @@ MyApplet.prototype = {
 
         //between these two separators will be the player MenuSection (position 3)
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-        this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null, true);
+        this._outputVolumeSection = new VolumeSlider(this, null, _("Volume"), null);
+        this._outputVolumeSection.set_master(true);
         this._outputVolumeSection.connect("values-changed", Lang.bind(this, this._outputValuesChanged));
 
         this.menu.addMenuItem(this._outputVolumeSection);
