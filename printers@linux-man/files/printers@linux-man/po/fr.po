@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-26 23:33+0100\n"
 "PO-Revision-Date: 2016-04-26 23:55+0100\n"
-"Last-Translator: João Lopes <joao.caldas.lopes@gmail.com>\n"
+"Last-Translator: Christophe Hortemel\n"
 "Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "Toujours"
 
 #: ../settings-schema.json:6
 msgid "When printers exist"
-msgstr "Quand les imprimantes existent"
+msgstr "Quand les imprimantes sont présentes"
 
 #: ../settings-schema.json:6
 msgid "When printing"
@@ -51,7 +51,7 @@ msgstr "Documents comptent"
 
 #: ../settings-schema.json:19
 msgid "Show documents count next to icon"
-msgstr "Afficher les documents comptent à côté de l'icône"
+msgstr "Afficher le compteur de documents à côté de l'icône"
 
 #: ../settings-schema.json:24
 msgid "Document number"
@@ -59,7 +59,7 @@ msgstr "Numéro du document"
 
 #: ../settings-schema.json:25
 msgid "Show each document number on print list"
-msgstr "Montrez à chaque numéro de document sur la liste d'impression"
+msgstr "Montrez les numéros de document sur la liste d'impression"
 
 #: ../settings-schema.json:30 ../applet.js:192
 msgid "Send to front"
