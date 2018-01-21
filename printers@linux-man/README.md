@@ -8,30 +8,38 @@ German translation by NikoKrause(<https://github.com/NikoKrause>)
 
 Russian translation by Andreevlex(<https://github.com/Andreevlex>)
 
-###Changelog
+Swedish translation by [eson57](https://github.com/eson57)
 
-###0.7
+Chinese translation by [giwhub](https://github.com/giwhub)
+
+Croatian translation by [muzena](https://github.com/muzena)
+
+French corrections by Christophe Hortemel
+
+### Changelog
+
+### 0.7
     Applet only updates when receives a Cups signal - faster Menu toggle
     3s timeout between updates
     More error conditions
     Code cleanup
 
-###0.6
+### 0.6
     Get rid of the loop - applet updates when clicked or receive a Cups signal
 
-###0.5
+### 0.5
     Compatibility with Cinnamon 3.2
     Vertical panels (setAllowedLayout)
     Allow multiple instances
 
-###0.4
+### 0.4
     Using async calls (spawn_async)
 
-###0.3
+### 0.3
     Correctly show unicode chars
 
-###0.2
+### 0.2
     Minor changes
 
-###0.1
+### 0.1
     Initial release
