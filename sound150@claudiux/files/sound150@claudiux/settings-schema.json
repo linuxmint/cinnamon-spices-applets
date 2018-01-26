@@ -73,5 +73,14 @@
         "step": 5,
         "description": "Maximum volume control",
         "tooltip": "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
+    },
+    "stepVolume": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 10,
+        "units": "% of nominal volume",
+        "step": 1,
+        "description": "+/-"
     }
 }

@@ -39,7 +39,7 @@ let x = _("Playing");
 x = _("Paused");
 x = _("Stopped");
 
-const VOLUME_ADJUSTMENT_STEP = 0.05; /* Volume adjustment step in % */
+var VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
 
 const ICON_SIZE = 28;
 
@@ -97,7 +97,7 @@ VolumeSlider.prototype = {
     _init: function(applet, stream, tooltip, app_icon){
         PopupMenu.PopupSliderMenuItem.prototype._init.call(this, 0);
         this.applet = applet;
-        
+
         if(tooltip)
             this.tooltipText = tooltip + ": ";
         else
@@ -122,7 +122,7 @@ VolumeSlider.prototype = {
 
         this.connectWithStream(stream);
     },
-    
+
     set_master: function(is_master) {
         this.is_master = is_master
     },
@@ -170,8 +170,13 @@ VolumeSlider.prototype = {
 
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
+
+        global.log("[sound150]: value=" + value)
+        if (value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2)
+            value = 1; // 100% is magnetic
+
         let percentage = Math.round(value * 100) + "%";
-        
+
         this.tooltip.set_text(this.tooltipText + percentage);
         let iconName = this._volumeToIcon(value);
         if (this.app_icon == null) {
@@ -239,7 +244,7 @@ VolumeSlider.prototype = {
 
         return this.isMic? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
     },
-    
+
     _volumeToStyleClass: function(value){
         let _icon_and_slider_style_class = 'sound-normal';
         if (value > 1) {
@@ -923,6 +928,9 @@ MyApplet.prototype = {
             this.pcMaxVolume = this.percentMaxVolume/100;
             this.old_pcMaxVolume = this.pcMaxVolume;
 
+            this.settings.bind("stepVolume", "stepVolume", this.on_settings_changed);
+            VOLUME_ADJUSTMENT_STEP = this.stepVolume/100;
+
             this.settings.bind("hideSystray", "hideSystray", function() {
                 if (this.hideSystray) this.registerSystrayIcons();
                 else this.unregisterSystrayIcons();
@@ -1080,6 +1088,7 @@ MyApplet.prototype = {
 
         this._changeActivePlayer(this._activePlayer);
 
+        VOLUME_ADJUSTMENT_STEP = this.stepVolume/100;
         this.pcMaxVolume = this.percentMaxVolume/100;
         this._volumeMax = this.pcMaxVolume * this._volumeNominal;
         this._outputVolumeSection.setValue(Math.min(this._outputVolumeSection._value/this.pcMaxVolume*this.old_pcMaxVolume, 1));
@@ -1140,14 +1149,23 @@ MyApplet.prototype = {
                 this._output.volume = 0;
                 if (!prev_muted)
                     this._output.change_is_muted(true);
+            } else {
+                let quotient = this._output.volume/this._volumeNominal;
+                if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+                    this._output.volume = this._volumeNominal; // 100% is magnetic
             }
             this._output.push_volume();
         }
         else if (direction == Clutter.ScrollDirection.UP) {
             this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNominal * VOLUME_ADJUSTMENT_STEP);
+            let quotient = this._output.volume/this._volumeNominal;
+            if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+                this._output.volume = this._volumeNominal; // 100% is magnetic
             this._output.push_volume();
             this._output.change_is_muted(false);
         }
+
+        global.log("[sound150]: this._output.volume = " + this._output.volume);
 
         this._notifyVolumeChange(this._output);
     },
@@ -1570,7 +1588,7 @@ MyApplet.prototype = {
             if (this._recordingAppsNum++ === 0)
                 this._inputSection.actor.show();
         }
-        
+
         if (this._outputVolumeSection != null) {
             this.actor.style_class = this._outputVolumeSection.actor.style_class;
         }

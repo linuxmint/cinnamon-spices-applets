@@ -1,7 +1,8 @@
 ## CHANGELOG
 
-### v1.0.1
- * Changing of icon. Uses new icon.png instead of 'audio-volume-high'.
+### v1.1.0
+ * Possibility of choosing, in settings, the value of incrementation/decrementation of the volume (in % of nominal volume).
+ * The "100%" value is magnetic.
 
 ### v1.0.0
  * Allows to set maximum volume up to 150% of the nominal volume of the sound card.

@@ -28,7 +28,7 @@ Note that the icons are those of the system. (Their color is obtained via a css 
 
 ## Usage
 
-In the settings (accessed by right-clicking on the icon), the ***Maximum volume control*** option sets the percentage of
+ * In the settings (accessed by right-clicking on the icon), the ***Maximum volume control*** option sets the percentage of
 nominal volume you want to limit the maximum volume. Possible values are between 30% and 150%.
 
 ![sound-settings](https://user-images.githubusercontent.com/33965039/34783927-24a98d06-f62d-11e7-9dda-3871916e5faa.png)
@@ -39,7 +39,10 @@ In a meeting room or classroom, it is often useful to be able to increase the vo
 
 On the computer of a child, reduce the maximum volume possible to take care of his hearing... and yours!
 
-## Translations 
+
+ * You can also choose the value of incrementation/decrementation of the volume (in % of nominal volume).
+
+## Translations
 The Sound150 applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
 
 The installation of the available languages is done automatically.
