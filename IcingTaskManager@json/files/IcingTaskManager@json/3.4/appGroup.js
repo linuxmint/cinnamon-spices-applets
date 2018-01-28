@@ -564,12 +564,24 @@ AppGroup.prototype = {
     if (this.state.panelEditMode) {
       return false;
     }
-    let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
 
-    if (this.listState.lastFocusedApp !== this.groupState.appId
-      || (!this.state.settings.groupApps && this.groupState.metaWindows.length > 0 && !getFocusState(this.groupState.metaWindows[0]))) {
+    let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
+    let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
+    let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
+    let focused = false;
+
+    each(this.groupState.metaWindows, function(metaWindow) {
+      if (getFocusState(metaWindow)) {
+        focused = true;
+        return false;
+      }
+    });
+
+    if (!focused
+      && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
+
     if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
       this.hadClosedPseudoClass = false;
       this.actor.add_style_pseudo_class('closed');
@@ -908,6 +920,13 @@ AppGroup.prototype = {
     if (this.groupState.willUnmount || !this.state.settings) {
       return;
     }
+
+    let shouldHideLabel = this.state.settings.titleDisplay === constants.TitleDisplay.None || !this.state.isHorizontal;
+
+    if (shouldHideLabel) {
+      this.setText('');
+    }
+
     if (!refresh && (!metaWindow
       || !metaWindow.title
       || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)
@@ -917,7 +936,7 @@ AppGroup.prototype = {
     }
 
     if ((metaWindow.lastTitle && metaWindow.lastTitle === metaWindow.title)
-      && !refresh) {
+      && !refresh && shouldHideLabel) {
       return;
     }
     metaWindow.lastTitle = metaWindow.title;
@@ -930,10 +949,7 @@ AppGroup.prototype = {
     });
 
     this.groupState.set({appName: this.groupState.app.get_name()});
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.None
-      || !this.state.isHorizontal) {
-      this.setText('');
-    } else if (this.state.settings.titleDisplay === constants.TitleDisplay.Title) {
+    if (this.state.settings.titleDisplay === constants.TitleDisplay.Title) {
       this.setText(metaWindow.title);
       this.showLabel(true);
     } else if (this.state.settings.titleDisplay === constants.TitleDisplay.App) {
