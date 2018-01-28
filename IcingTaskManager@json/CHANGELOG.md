@@ -1,5 +1,10 @@
 Changelog
 
+### 6.2.2
+
+  * Fixed focused window indication not being preserved when hovering over a button, and focused window indication being added when no windows are focused in some theme cofigurations.
+  * Fixed button labels not being preserved.
+
 ### 6.2.1
 
   * Fixed regressions occurring in some situations:
