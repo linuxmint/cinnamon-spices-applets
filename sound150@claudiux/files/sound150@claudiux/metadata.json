@@ -1,9 +1,9 @@
 {
     "description": "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music",
-    "uuid": "sound150@claudiux",
-    "name": "Sound 150%",
     "max-instances": "1",
+    "uuid": "sound150@claudiux",
     "hide-configuration": false,
-    "version": "1.1.0",
-    "last-edited": 1516935900
+    "version": "1.2.0",
+    "last-edited": 1517000600,
+    "name": "Sound 150%"
 }
