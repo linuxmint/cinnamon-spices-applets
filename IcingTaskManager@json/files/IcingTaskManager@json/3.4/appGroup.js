@@ -908,6 +908,13 @@ AppGroup.prototype = {
     if (this.groupState.willUnmount || !this.state.settings) {
       return;
     }
+
+    let shouldHideLabel = this.state.settings.titleDisplay === constants.TitleDisplay.None || !this.state.isHorizontal;
+
+    if (shouldHideLabel) {
+      this.setText('');
+    }
+
     if (!refresh && (!metaWindow
       || !metaWindow.title
       || (this.groupState.metaWindows.length === 0 && this.groupState.isFavoriteApp)
@@ -917,7 +924,7 @@ AppGroup.prototype = {
     }
 
     if ((metaWindow.lastTitle && metaWindow.lastTitle === metaWindow.title)
-      && !refresh) {
+      && !refresh && shouldHideLabel) {
       return;
     }
     metaWindow.lastTitle = metaWindow.title;
@@ -930,10 +937,7 @@ AppGroup.prototype = {
     });
 
     this.groupState.set({appName: this.groupState.app.get_name()});
-    if (this.state.settings.titleDisplay === constants.TitleDisplay.None
-      || !this.state.isHorizontal) {
-      this.setText('');
-    } else if (this.state.settings.titleDisplay === constants.TitleDisplay.Title) {
+    if (this.state.settings.titleDisplay === constants.TitleDisplay.Title) {
       this.setText(metaWindow.title);
       this.showLabel(true);
     } else if (this.state.settings.titleDisplay === constants.TitleDisplay.App) {
