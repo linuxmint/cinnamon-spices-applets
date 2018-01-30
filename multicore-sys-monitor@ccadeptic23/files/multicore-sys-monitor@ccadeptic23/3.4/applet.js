@@ -258,8 +258,8 @@ MyApplet.prototype = {
         if (properties[i].abbrev === 'MEM') {
           // paint the "swap" backdrop
           this.swapGraph.paint(
-            this[properties[i].provider].name,
-            this[properties[i].provider].currentReadings,
+            this.swapProvider.name,
+            this.swapProvider.currentReadings,
             area,
             // no label for the backdrop
             false,
