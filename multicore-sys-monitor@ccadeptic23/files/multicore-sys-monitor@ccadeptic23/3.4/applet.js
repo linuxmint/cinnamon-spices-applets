@@ -20,14 +20,27 @@ const Util = imports.misc.util;
 const Applet = imports.ui.applet;
 
 const UUID = 'multicore-sys-monitor@ccadeptic23';
-const AppletDir = imports.ui.appletManager.applets[UUID];
-const _ = AppletDir.utils._;
-const tryFn = AppletDir.utils.tryFn;
-const ConfigSettings = AppletDir.ConfigSettings.ConfigSettings;
-const SpawnProcess = AppletDir.SpawnProcess;
-const Graphs = AppletDir.Graphs;
-const DataProviders = AppletDir.DataProviders;
-const ErrorApplet = AppletDir.ErrorApplet;
+
+let _, tryFn, ConfigSettings, SpawnProcess, Graphs, DataProviders, ErrorApplet;
+if (typeof require !== 'undefined') {
+  const utils = require('./utils');
+  _ = utils._;
+  tryFn = utils.tryFn;
+  ConfigSettings = require('./ConfigSettings').ConfigSettings;
+  SpawnProcess = require('./SpawnProcess');
+  Graphs = require('./Graphs');
+  DataProviders = require('./DataProviders');
+  ErrorApplet = require('./ErrorApplet');
+} else {
+  const AppletDir = imports.ui.appletManager.applets[UUID];
+  _ = AppletDir.utils._;
+  tryFn = AppletDir.utils.tryFn;
+  ConfigSettings = AppletDir.ConfigSettings.ConfigSettings;
+  SpawnProcess = AppletDir.SpawnProcess;
+  Graphs = AppletDir.Graphs;
+  DataProviders = AppletDir.DataProviders;
+  ErrorApplet = AppletDir.ErrorApplet;
+}
 
 let GTop;
 tryFn(function() {
