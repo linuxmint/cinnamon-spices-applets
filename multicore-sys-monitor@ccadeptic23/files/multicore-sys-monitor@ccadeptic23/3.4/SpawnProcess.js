@@ -3,8 +3,14 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 
-const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
-const tryFn = AppletDir.utils.tryFn;
+let tryFn;
+if (typeof require !== 'undefined') {
+  tryFn = require('./utils').tryFn;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+  tryFn = AppletDir.utils.tryFn;
+
+}
 
 function ProcessSpawnHandler(workingdir, childargs) {
   this._init(workingdir, childargs);
@@ -55,13 +61,10 @@ ProcessSpawnHandler.prototype = {
     this.isFinished = false;
     this.debugmode = false;
   },
+
   setDebugMode: function(dbgmode) {
     this.debugmode = dbgmode;
   },
-
-  //spawnChild: function()
-  //{
-  //},
 
   destroy: function() {
     if (this._destroyed) {

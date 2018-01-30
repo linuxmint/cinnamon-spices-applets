@@ -1,6 +1,5 @@
 //#!/usr/bin/gjs
 const UUID = 'multicore-sys-monitor@ccadeptic23';
-const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
 const PopupMenu = imports.ui.popupMenu;
@@ -8,8 +7,12 @@ const Gettext = imports.gettext;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
-function _(str) {
-  return Gettext.dgettext(UUID, str);
+let _;
+if (typeof require !== 'undefined') {
+  _ = require('./utils')._;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+  _ = AppletDir.utils._;
 }
 
 function ErrorImportApplet(orientation, msg) {
