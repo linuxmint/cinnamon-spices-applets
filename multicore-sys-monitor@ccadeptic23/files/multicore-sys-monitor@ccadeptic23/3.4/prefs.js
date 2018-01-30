@@ -1,5 +1,3 @@
-#!/usr/bin/cjs
-
 // Multi-core System Monitor Scroller.
 // Copyright (C) 2011-2012 Chace Clark <ccdevelop23@gmail.com>.
 //
@@ -9,15 +7,15 @@
 //
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
-
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 const Gtk = imports.gi.Gtk;
+imports.gi.versions.Gtk = '3.0';
 const Lang = imports.lang;
 const Gdk = imports.gi.Gdk;
 
 imports.searchPath.unshift('.');
-const tryFn = imports.utils.tryFn;
-const _ = imports.utils._;
+var tryFn = imports.utils.tryFn;
+var _ = imports.utils._;
 
 const DEFAULT_CONFIG = {
   labelsOn: true,
@@ -80,7 +78,7 @@ Preferences.prototype = {
     this.win = this.builder.get_object('windowMain');
     this.win.set_resizable(true);
     this.win.set_icon_from_file('./icon.png');
-    this.win.connect('destroy', Gtk.main_quit); // quit program when titlebar's x is clicked
+    this.win.connect('destroy', () => Gtk.main_quit()); // quit program when titlebar's x is clicked
     this.builder.get_object('applyButton').connect(
       'clicked',
       Lang.bind(this, function() {
@@ -116,7 +114,6 @@ Preferences.prototype = {
       })
     );
     this.load();
-
     print(JSON.stringify(this.config)); //print default settings again for the monitoring process
 
     this.win.show_all();
@@ -299,35 +296,36 @@ Preferences.prototype = {
     this.netDownButtonList = [];
     this.netUpButtonList = [];
     this.netEnableSwitchList = [];
+    let currentdev_vbox, currentdev_hbox, devLabel, devEnableLabel, devEnableSwitch, devDownColorButton, devDownLabel, devUpColorButton, devUpLabel;
 
     for (let i = 0; i < this.config.net.devices.length; i++) {
       //build the device sections
-      let currentdev_vbox = new Gtk.VBox();
-      let currentdev_hbox = new Gtk.HBox();
-      let devLabel = new Gtk.Label({
+      currentdev_vbox = new Gtk.VBox();
+      currentdev_hbox = new Gtk.HBox();
+      devLabel = new Gtk.Label({
         label: this.config.net.devices[i].id
       });
       devLabel.set_halign(Gtk.Align.START); //start
-      let devEnableLabel = new Gtk.Label({
+      devEnableLabel = new Gtk.Label({
         label: _('Enable')
       });
       devEnableLabel.set_halign(Gtk.Align.END); //end
-      let devEnableSwitch = new Gtk.Switch();
+      devEnableSwitch = new Gtk.Switch();
       devEnableSwitch.set_halign(Gtk.Align.START); //start
       devEnableSwitch.set_valign(Gtk.Align.CENTER);
       devEnableSwitch.set_margin_left(10);
-      let devDownColorButton = new Gtk.ColorButton();
+      devDownColorButton = new Gtk.ColorButton();
       devDownColorButton.set_halign(Gtk.Align.START);
       devDownColorButton.set_use_alpha(true);
-      let devDownLabel = new Gtk.Label({
+      devDownLabel = new Gtk.Label({
         label: _('Down')
       });
       devDownLabel.set_halign(2);
 
-      let devUpColorButton = new Gtk.ColorButton();
+      devUpColorButton = new Gtk.ColorButton();
       devUpColorButton.set_halign(1);
       devUpColorButton.set_use_alpha(true);
-      let devUpLabel = new Gtk.Label({
+      devUpLabel = new Gtk.Label({
         label: _('Up')
       });
       devUpLabel.set_halign(2);
@@ -653,8 +651,8 @@ function getParamNames(func) {
 }
 try {
   Gtk.init(null);
-let prefui = new Preferences();
-Gtk.main();
+  let prefui = new Preferences();
+  Gtk.main();
 } catch (e) {
   print(e)
 }

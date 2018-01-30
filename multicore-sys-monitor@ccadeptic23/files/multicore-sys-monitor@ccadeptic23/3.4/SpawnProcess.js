@@ -39,7 +39,7 @@ ProcessSpawnHandler.prototype = {
       fd: stderr,
       close_fd: true
     });
-    stderrStream.close(null);
+
     this._dataStdout = new Gio.DataInputStream({
       base_stream: this._stdout
     });
