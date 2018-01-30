@@ -1,10 +1,19 @@
 const Gio = imports.gi.Gio;
 const Cinnamon = imports.gi.Cinnamon;
 
-const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
-const tryFn = AppletDir.utils.tryFn;
-const map = AppletDir.utils.map;
-const findIndex = AppletDir.utils.findIndex;
+let tryFn, map, findIndex;
+
+if (typeof require !== 'undefined') {
+  const utils = require('./utils');
+  tryFn = utils.tryFn;
+  map = utils.map;
+  findIndex = utils.findIndex;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+  tryFn = AppletDir.utils.tryFn;
+  map = AppletDir.utils.map;
+  findIndex = AppletDir.utils.findIndex;
+}
 
 function ConfigSettings(confpath) {
   this._init(confpath);
