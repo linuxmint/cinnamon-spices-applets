@@ -1010,6 +1010,8 @@ MyApplet.prototype = {
             //this.cssfile = metadata.path + "/stylesheet.css";
             this.appletPath = metadata.path;
 
+            this.applet_running = true;
+
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
 
             UUID = metadata.uuid;
@@ -1189,7 +1191,10 @@ MyApplet.prototype = {
             if (AppletDirectory.InstallLanguages.execInstallLanguages(UUID)) {
                 // New .mo files have been installed.
                 // Reloads this applet for changes to .mo files to take effect:
-                Extension.reloadExtension(UUID, Extension.Type['APPLET'])
+                //this.applet_running = false;
+                //Extension.reloadExtension(UUID, Extension.Type.APPLET)
+                // FIXME: Unable to reload properly this applet, without error.
+                // Is there another way to reload contents of new .mo files?
             }
         }
         catch (e) {
@@ -1211,7 +1216,8 @@ MyApplet.prototype = {
     _onIconThemeChanged : function(actor, event) {
         //log('_onIconThemeChanged');
         //imports.ui.appletManager.applets.reloadExtension(UUID, 'APPLET');
-        Extension.reloadExtension(UUID, Extension.Type['APPLET']);
+        imports.ui.appletManager.applets.reloadExtension(UUID, Extension.Type.APPLET);
+        //Extension.reloadExtension(UUID, Extension.Type.APPLET);
         //let themeNode = this.mute_out_switch.actor.get_theme_node();
         //this.icon_color = themeNode.get_foreground_color();
         //this.defaultColor = "rgba("+this.icon_color.red+","+this.icon_color.green+","+this.icon_color.blue+","+this.icon_color.alpha+")";

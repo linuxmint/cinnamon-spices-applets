@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v1.3.1
+ * Does'n reload this applet after installing .mo files, as this creates errors.
+
 ### v1.3.0
  * No more stylesheet.css; uses theme's style sheet for better look.
  * Colors become optionnal.
