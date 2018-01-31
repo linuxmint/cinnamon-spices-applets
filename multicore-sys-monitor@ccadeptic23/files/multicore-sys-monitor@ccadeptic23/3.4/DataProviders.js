@@ -3,8 +3,13 @@ const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
 const NetworkManager = imports.gi.NetworkManager;
 
-const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
-const _ = AppletDir.utils._;
+let _;
+if (typeof require !== 'undefined') {
+  _ = require('./utils')._;
+} else {
+  const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
+  _ = AppletDir.utils._;
+}
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
