@@ -87,15 +87,91 @@ ControlButton.prototype = {
     }
 };
 
+function MyPopupSliderMenuItem() {
+    this._init.apply(this, arguments);
+}
+
+MyPopupSliderMenuItem.prototype = {
+    __proto__: PopupMenu.PopupSliderMenuItem.prototype,
+
+    _init: function(applet, value) {
+        this.applet = applet;
+        PopupMenu.PopupSliderMenuItem.prototype._init.call(this, value);
+    },
+
+    _sliderRepaint: function(area) {
+        let cr = area.get_context();
+        let themeNode = area.get_theme_node();
+        let [width, height] = area.get_surface_size();
+
+        let handleRadius = themeNode.get_length('-slider-handle-radius');
+
+        let sliderWidth = width - 2 * handleRadius;
+        let sliderHeight = themeNode.get_length('-slider-height');
+
+        let sliderBorderWidth = themeNode.get_length('-slider-border-width');
+        let sliderBorderRadius = Math.min(width, sliderHeight) / 2;
+
+        let sliderBorderColor = themeNode.get_color('-slider-border-color');
+        let sliderColor = themeNode.get_color('-slider-background-color');
+
+        let sliderActiveBorderColor = themeNode.get_color('-slider-active-border-color');
+        let sliderActiveColor = themeNode.get_color('-slider-active-background-color');
+
+        const TAU = Math.PI * 2;
+
+        let handleX = handleRadius + (width - 2 * handleRadius) * this._value;
+
+        cr.arc(sliderBorderRadius + sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 1/4, TAU * 3/4);
+        cr.lineTo(handleX, (height - sliderHeight) / 2);
+        cr.lineTo(handleX, (height + sliderHeight) / 2);
+        cr.lineTo(sliderBorderRadius + sliderBorderWidth, (height + sliderHeight) / 2);
+        Clutter.cairo_set_source_color(cr, sliderActiveColor);
+        cr.fillPreserve();
+        Clutter.cairo_set_source_color(cr, sliderActiveBorderColor);
+        cr.setLineWidth(sliderBorderWidth);
+        cr.stroke();
+
+        cr.arc(width - sliderBorderRadius - sliderBorderWidth, height / 2, sliderBorderRadius, TAU * 3/4, TAU * 1/4);
+        cr.lineTo(handleX, (height + sliderHeight) / 2);
+        cr.lineTo(handleX, (height - sliderHeight) / 2);
+        cr.lineTo(width - sliderBorderRadius - sliderBorderWidth, (height - sliderHeight) / 2);
+        Clutter.cairo_set_source_color(cr, sliderColor);
+        cr.fillPreserve();
+        Clutter.cairo_set_source_color(cr, sliderBorderColor);
+        cr.setLineWidth(sliderBorderWidth);
+        cr.stroke();
+
+        let handleY = height / 2;
+
+        let color = themeNode.get_foreground_color();
+        Clutter.cairo_set_source_color(cr, color);
+        cr.arc(handleX, handleY, handleRadius, 0, 2 * Math.PI);
+        cr.fill();
+
+        // Mark of 100%
+        let xMark = handleRadius + sliderWidth * 100 / this.applet.percentMaxVolume;
+        let yMark = handleY - sliderHeight;
+        cr.rectangle(xMark-handleRadius/4, yMark-handleRadius/2, handleRadius/2, handleRadius);
+        cr.fill();
+        cr.arc(xMark, yMark-handleRadius/2, handleRadius/4 , Math.PI, 2*Math.PI);
+        cr.fill();
+        cr.arc(xMark, yMark+handleRadius/2, handleRadius/4 , 0, Math.PI);
+        cr.fill();
+
+        cr.$dispose();
+    }
+}
+
 function VolumeSlider(){
     this._init.apply(this, arguments);
 }
 
 VolumeSlider.prototype = {
-    __proto__: PopupMenu.PopupSliderMenuItem.prototype,
+    __proto__: MyPopupSliderMenuItem.prototype,
 
     _init: function(applet, stream, tooltip, app_icon){
-        PopupMenu.PopupSliderMenuItem.prototype._init.call(this, 0);
+        MyPopupSliderMenuItem.prototype._init.call(this, applet, 0);
         this.applet = applet;
 
         if(tooltip)
@@ -171,7 +247,6 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
 
-        global.log("[sound150]: value=" + value)
         if (value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2)
             value = 1; // 100% is magnetic
 
@@ -183,11 +258,8 @@ VolumeSlider.prototype = {
             this.icon.icon_name = iconName;
         }
         let _icon_and_slider_style_class = this._volumeToStyleClass(value);
-        //if (this.applet.actor.realized)
-        //if (!iconName.startsWith('microphone'))
         if (this.is_master)
             this.applet.actor.style_class = _icon_and_slider_style_class;
-        //if (this.actor.realized)
         this.actor.style_class = _icon_and_slider_style_class;
         this.setValue(value/this.applet.pcMaxVolume);
 
@@ -1005,7 +1077,7 @@ MyApplet.prototype = {
             this._control.connect('stream-added', Lang.bind(this, this._onStreamAdded));
             this._control.connect('stream-removed', Lang.bind(this, this._onStreamRemoved));
 
-            // The problem described below is corrected by this version, with colorful icons.
+            // The problem described below is corrected by this version, with colorful icons, and mark at 100%.
             //this._volumeMax = 1*this._control.get_vol_max_norm(); // previously was 1.5*this._control.get_vol_max_norm();, but we'd need a little mark on the slider to make it obvious to the user we're going over 100%..
             this._volumeNominal = 1*this._control.get_vol_max_norm();
             this._volumeMax = this.pcMaxVolume * this._volumeNominal;
@@ -1164,8 +1236,6 @@ MyApplet.prototype = {
             this._output.push_volume();
             this._output.change_is_muted(false);
         }
-
-        global.log("[sound150]: this._output.volume = " + this._output.volume);
 
         this._notifyVolumeChange(this._output);
     },

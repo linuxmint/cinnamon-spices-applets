@@ -1,7 +1,7 @@
 # Polish translation for vboxlauncher@mockturtl.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# xearonet , 2017.
+# xearonet xearonet@o2.pl, 2017.
 #
 msgid ""
 msgstr ""

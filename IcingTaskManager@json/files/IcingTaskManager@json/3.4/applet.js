@@ -359,9 +359,9 @@ MyApplet.prototype = {
     Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + '/.local/share/locale');
 
     this.getAutoStartApps();
-    this._onSwitchWorkspace = throttle(this._onSwitchWorkspace, 100, true);
+    this.onSwitchWorkspace = throttle(this.onSwitchWorkspace, 100, true);
     this.signals.connect(this.actor, 'scroll-event', (c, e) => this.handleScroll(e));
-    this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this._onSwitchWorkspace));
+    this.signals.connect(global.window_manager, 'switch-workspace', Lang.bind(this, this.onSwitchWorkspace));
     this.signals.connect(global.screen, 'workspace-removed', Lang.bind(this, this.onWorkspaceRemoved));
     this.signals.connect(global.screen, 'window-monitor-changed', Lang.bind(this, this._onWindowMonitorChanged));
     this.signals.connect(global.screen, 'monitors-changed', Lang.bind(this, this.on_applet_instances_changed));
@@ -448,7 +448,7 @@ MyApplet.prototype = {
       return;
     }
     // Query apps for the current workspace
-    this._onSwitchWorkspace();
+    this.onSwitchWorkspace();
     this._bindAppKeys();
     this._updateSpacing();
     this.state.set({appletReady: true});
