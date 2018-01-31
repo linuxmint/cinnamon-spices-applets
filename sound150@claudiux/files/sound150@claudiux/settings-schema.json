@@ -64,23 +64,49 @@
         "type": "section",
         "description" : "Sound Settings"
     },
-    "percentMaxVolume": {
-        "type": "spinbutton",
-        "default": 100,
-        "min": 30,
-        "max": 150,
-        "units": "% of nominal volume",
-        "step": 5,
+    "percentMaxVol": {
+        "type": "combobox",
+        "default": 150,
+        "options": {
+            "150%": 150,
+            "140%": 140,
+            "130%": 130,
+            "120%": 120,
+            "110%": 110,
+            "100%": 100,
+            "90%": 90,
+            "80%": 80,
+            "70%": 70,
+            "60%": 60,
+            "50%": 50,
+            "40%": 40,
+            "30%": 30
+        },
         "description": "Maximum volume control",
         "tooltip": "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
     },
     "stepVolume": {
-        "type": "spinbutton",
-        "default": 5,
-        "min": 1,
-        "max": 10,
-        "units": "% of nominal volume",
-        "step": 1,
+        "type": "combobox",
+        "default": 1,
+        "options": {
+            "10%": 10,
+            "9%": 9,
+            "8%": 8,
+            "7%": 7,
+            "6%": 6,
+            "5%": 5,
+            "4%": 4,
+            "3%": 3,
+            "2%": 2,
+            "1%": 1
+        },
+        "tooltip": "% of nominal volume",
         "description": "+/-"
+    },
+    "adaptColor": {
+        "type": "switch",
+        "description": "Adjust the color of the icon to the volume",
+        "tooltip": "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red.",
+        "default": true
     }
 }

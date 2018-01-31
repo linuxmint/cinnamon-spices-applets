@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+### v1.3.0
+ * No more stylesheet.css; uses theme's style sheet for better look.
+ * Colors become optionnal.
+ * Applet is now able to increase the volume up to maximum of capabilities of the sound card. But to let a security margin, this option is not proposed to user.
+ * Set scripts/generate_mo.sh executable.
+ * Set default max volume to 150%.
+
 ### v1.2.0
  * Added a mark on the sliders to signal the '100%' position of the volume.
 
