@@ -15,10 +15,15 @@ const Gettext = imports.gettext; // ++ Needed for translations
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
 const Slider = imports.ui.slider;
+const Extension = imports.ui.extension;
 
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
+
+const MAX_RECOMMENDED = 150;
+
+const DEBUG = false;
 
 var UUID="sound150@claudiux";
 function _(str) {
@@ -26,6 +31,16 @@ function _(str) {
     if (customTrans !== str && customTrans !== "")
         return customTrans;
     return Gettext.gettext(str);
+}
+
+// Logging
+function log(message) {
+    if (DEBUG)
+        global.log("[" + UUID + "]: " + message);
+}
+
+function logError(error) {
+    global.logError("[" + UUID + "]: " + error)
 }
 
 /* global values */
@@ -40,6 +55,8 @@ x = _("Paused");
 x = _("Stopped");
 
 var VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
+
+//var APPLET_BOX_STYLE_CLASS = 'applet-box';
 
 const ICON_SIZE = 28;
 
@@ -149,15 +166,17 @@ MyPopupSliderMenuItem.prototype = {
         cr.arc(handleX, handleY, handleRadius, 0, 2 * Math.PI);
         cr.fill();
 
-        // Mark of 100%
-        let xMark = handleRadius + sliderWidth * 100 / this.applet.percentMaxVolume;
-        let yMark = handleY - sliderHeight;
-        cr.rectangle(xMark-handleRadius/4, yMark-handleRadius/2, handleRadius/2, handleRadius);
-        cr.fill();
-        cr.arc(xMark, yMark-handleRadius/2, handleRadius/4 , Math.PI, 2*Math.PI);
-        cr.fill();
-        cr.arc(xMark, yMark+handleRadius/2, handleRadius/4 , 0, Math.PI);
-        cr.fill();
+        if (this.applet.percentMaxVolume > 100) {
+            // Mark of 100%
+            let xMark = handleRadius + sliderWidth * 100 / this.applet.percentMaxVolume;
+            let yMark = handleY - sliderHeight;
+            cr.rectangle(xMark-handleRadius/4, yMark-handleRadius/2, handleRadius/2, handleRadius);
+            cr.fill();
+            cr.arc(xMark, yMark-handleRadius/2, handleRadius/4 , Math.PI, 2*Math.PI);
+            cr.fill();
+            cr.arc(xMark, yMark+handleRadius/2, handleRadius/4 , 0, Math.PI);
+            cr.fill();
+        }
 
         cr.$dispose();
     }
@@ -257,10 +276,14 @@ VolumeSlider.prototype = {
         if (this.app_icon == null) {
             this.icon.icon_name = iconName;
         }
-        let _icon_and_slider_style_class = this._volumeToStyleClass(value);
-        if (this.is_master)
-            this.applet.actor.style_class = _icon_and_slider_style_class;
-        this.actor.style_class = _icon_and_slider_style_class;
+
+        let color = this._volumeToColor(value);
+        if (this.is_master) {
+            this.applet.actor.style = "color: "+color
+        }
+        this.actor.style = "color: "+color;
+        this.icon.style = "color: "+color;
+        this._slider.style = "color: "+color;
         this.setValue(value/this.applet.pcMaxVolume);
 
         // send data to applet
@@ -317,18 +340,18 @@ VolumeSlider.prototype = {
         return this.isMic? "microphone-sensitivity-" + icon : "audio-volume-" + icon;
     },
 
-    _volumeToStyleClass: function(value){
-        let _icon_and_slider_style_class = 'sound-normal';
-        if (value > 1) {
+    _volumeToColor: function(value){
+        let _color = this.applet.defaultColor;
+        if (this.applet.adaptColor && value > 1) {
             if (value <= 1.15) {
-                _icon_and_slider_style_class = 'sound-veryhigh'
+                _color = 'yellow'
             } else if (value <= 1.3) {
-                _icon_and_slider_style_class = 'sound-superhigh'
+                _color = 'orange'
             } else {
-                _icon_and_slider_style_class = 'sound-extrahigh'
+                _color = 'red';
             }
         }
-        return _icon_and_slider_style_class
+        return _color
     }
 };
 
@@ -982,8 +1005,9 @@ MyApplet.prototype = {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         try {
+            //APPLET_BOX_STYLE_CLASS = this.actor.style_class;
             this.metadata = metadata;
-            this.cssfile = metadata.path + "/stylesheet.css";
+            //this.cssfile = metadata.path + "/stylesheet.css";
             this.appletPath = metadata.path;
 
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
@@ -996,12 +1020,13 @@ MyApplet.prototype = {
             this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
             this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
 
-            this.settings.bind("percentMaxVolume", "percentMaxVolume", this.on_settings_changed);
-            this.pcMaxVolume = this.percentMaxVolume/100;
-            this.old_pcMaxVolume = this.pcMaxVolume;
-
+            this.settings.bind("percentMaxVol", "percentMaxVol", this.on_settings_changed);
+            log('_init: percentMaxVol=' + this.percentMaxVol);
             this.settings.bind("stepVolume", "stepVolume", this.on_settings_changed);
-            VOLUME_ADJUSTMENT_STEP = this.stepVolume/100;
+            log('_init: stepVolume=' + this.stepVolume);
+            VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+
+            this.settings.bind("adaptColor", "adaptColor", this.on_settings_changed);
 
             this.settings.bind("hideSystray", "hideSystray", function() {
                 if (this.hideSystray) this.registerSystrayIcons();
@@ -1022,6 +1047,7 @@ MyApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this.set_applet_icon_symbolic_name('audio-x-generic');
+            this._defaultColorIsSet = false;
 
             this._players = {};
             this._playerItems = [];
@@ -1080,7 +1106,23 @@ MyApplet.prototype = {
             // The problem described below is corrected by this version, with colorful icons, and mark at 100%.
             //this._volumeMax = 1*this._control.get_vol_max_norm(); // previously was 1.5*this._control.get_vol_max_norm();, but we'd need a little mark on the slider to make it obvious to the user we're going over 100%..
             this._volumeNominal = 1*this._control.get_vol_max_norm();
-            this._volumeMax = this.pcMaxVolume * this._volumeNominal;
+            log('vol_max_norm='+this._control.get_vol_max_norm());
+            log('vol_max_amplified='+this._control.get_vol_max_amplified());
+            log('ratio='+(1/this._control.get_vol_max_norm()*this._control.get_vol_max_amplified()));
+            log('_init: _volumeNominal=' + this._volumeNominal);
+
+            this.volumeMaxAmplified = 1*this._control.get_vol_max_amplified();
+            if (Math.round(this.percentMaxVol) <= MAX_RECOMMENDED) {
+                this.percentMaxVolume = Math.round(this.percentMaxVol)
+            } else {
+                this.percentMaxVolume = Math.round(100*this.volumeMaxAmplified/this._volumeNominal)
+            }
+            log('_init: percentMaxVolume=' + this.percentMaxVolume);
+            this.pcMaxVolume = 1*this.percentMaxVolume/100;
+            log('_init: pcMaxVolume=' + this.pcMaxVolume);
+            this._volumeMax = 1*this.pcMaxVolume * this._volumeNominal;
+            this.old_pcMaxVolume = this.pcMaxVolume;
+
             this._streams = [];
             this._devices = [];
             this._recordingAppsNum = 0;
@@ -1140,16 +1182,40 @@ MyApplet.prototype = {
             let appsys = Cinnamon.AppSystem.get_default();
             appsys.connect("installed-changed", Lang.bind(this, this._updateLaunchPlayer));
 
+            this.connect('style-changed', Lang.bind(this, this._onStyleChanged));
+            this.connect('icon-theme-changed', Lang.bind(this, this._onIconThemeChanged));
+
             let AppletDirectory = imports.ui.appletManager.applets[UUID];
             if (AppletDirectory.InstallLanguages.execInstallLanguages(UUID)) {
                 // New .mo files have been installed.
                 // Reloads this applet for changes to .mo files to take effect:
-                imports.ui.appletManager.applets.reloadExtension(UUID, 'APPLET')
+                Extension.reloadExtension(UUID, Extension.Type['APPLET'])
             }
         }
         catch (e) {
             global.logError(e);
         }
+    },
+
+    _onStyleChanged : function(actor, event) {
+        //log('_onStyleChanged');
+        if (!this._defaultColorIsSet) {
+            let themeNode = this.actor.get_theme_node();
+            this.icon_color = themeNode.get_foreground_color();
+            this.defaultColor = "rgba("+this.icon_color.red+","+this.icon_color.green+","+this.icon_color.blue+","+this.icon_color.alpha+")";
+            this._defaultColorIsSet = true;
+        }
+        //Applet.TextIconApplet._onStyleChanged(actor, event)
+    },
+
+    _onIconThemeChanged : function(actor, event) {
+        //log('_onIconThemeChanged');
+        //imports.ui.appletManager.applets.reloadExtension(UUID, 'APPLET');
+        Extension.reloadExtension(UUID, Extension.Type['APPLET']);
+        //let themeNode = this.mute_out_switch.actor.get_theme_node();
+        //this.icon_color = themeNode.get_foreground_color();
+        //this.defaultColor = "rgba("+this.icon_color.red+","+this.icon_color.green+","+this.icon_color.blue+","+this.icon_color.alpha+")";
+        //Applet.TextIconApplet._onStyleChanged(actor, event)
     },
 
     on_settings_changed : function() {
@@ -1160,9 +1226,15 @@ MyApplet.prototype = {
 
         this._changeActivePlayer(this._activePlayer);
 
-        VOLUME_ADJUSTMENT_STEP = this.stepVolume/100;
-        this.pcMaxVolume = this.percentMaxVolume/100;
-        this._volumeMax = this.pcMaxVolume * this._volumeNominal;
+        VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+        if (Math.round(this.percentMaxVol) <= MAX_RECOMMENDED) {
+            this.percentMaxVolume = Math.round(1*this.percentMaxVol)
+        } else {
+            this.percentMaxVolume = Math.round(100*this.volumeMaxAmplified/this._volumeNominal)
+        }
+        log('on_settings_changed: percentMaxVolume='+this.percentMaxVolume);
+        this.pcMaxVolume = 1*this.percentMaxVolume/100;
+        this._volumeMax = 1*this.pcMaxVolume * this._volumeNominal;
         this._outputVolumeSection.setValue(Math.min(this._outputVolumeSection._value/this.pcMaxVolume*this.old_pcMaxVolume, 1));
         this.old_pcMaxVolume = this.pcMaxVolume;
         this._outputVolumeSection._onValueChanged();
@@ -1660,7 +1732,7 @@ MyApplet.prototype = {
         }
 
         if (this._outputVolumeSection != null) {
-            this.actor.style_class = this._outputVolumeSection.actor.style_class;
+            //this.actor.style_class = this._outputVolumeSection.actor.style_class;
         }
 
     },

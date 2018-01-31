@@ -26,14 +26,22 @@ msgstr "Un applet, basado en el de Cinnamon, para controlar el sonido (hasta el 
 msgid "Sound 150%"
 msgstr "Sonido 150%"
 
-#: settings-schema.json:72
+#: settings-schema.json:101
 msgid "% of nominal volume"
 msgstr "% del volumen nominal"
 
-#: settings-schema.json:74
+#: settings-schema.json:83
 msgid "Maximum volume control"
 msgstr "Control de volumen máximo"
 
-#: settings-schema.json:75
+#: settings-schema.json:84
 msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
 msgstr "Puede intentar aumentar el volumen de su tarjeta de sonido hasta un 150% de su valor nominal. Usar con precaución. También puede establecer un valor inferior al 100%, por ejemplo, en la computadora de un niño."
+
+#: settings-schema.json:106
+msgid "Adjust the color of the icon to the volume"
+msgstr "Ajustar el color del icono al volumen"
+
+#: settings-schema.json:107
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "Del 101% al 115%: amarillo; de 116% a 130%: naranja; más allá del 130%: rojo."

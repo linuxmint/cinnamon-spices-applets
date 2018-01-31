@@ -26,7 +26,9 @@ From 131 to 150%: red icon.
 
 ![sound_150_150](https://github.com/claudiux/docs/raw/master/sound150/images/sound_150.png)
 
-Note that the icons are those of the system. (Their color is obtained via a css file.)
+Note that the icons are those of the system.
+
+An option in settings allows you to don't display colors.
 
 ## Usage
 
@@ -42,10 +44,29 @@ In a meeting room or classroom, it is often useful to be able to increase the vo
 On the computer of a child, reduce the maximum volume possible to take care of his hearing... and yours!
 
 
- * You can also choose the value of incrementation/decrementation of the volume (in % of nominal volume).
+ * You can also choose the value of incrementation/decrementation (+/-) of the volume (in % of nominal volume).
+
+ * If you don't want colors, an option allows you to keep the standard color.
+
+## Themes
+
+Tested on themes :
+
+ * Cinnamon
+ * Carta
+ * CBlack
+ * Linux Mint
+ * Mint-X (all themes)
+ * Mint-Y and Mint-Y-Dark
+ * Modern-Mint-2017
+ * New-Minty (my favorite)
+ * Numix-Cinnamon and Numix-Cinnamon-Transparent
+ * Spider-Void
+ * Void
+ * Zukitwo-Cinnamon
 
 ## Translations
-The Sound150 applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
+The **Sound 150%** applet is designed to allow translations of some messages (initially in English). A .pot template file is available, you can use it with software such as poedit to translate these messages.
 
 The installation of the available languages is done automatically.
 
