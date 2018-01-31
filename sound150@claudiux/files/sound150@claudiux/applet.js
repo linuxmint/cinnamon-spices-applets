@@ -1189,7 +1189,7 @@ MyApplet.prototype = {
             if (AppletDirectory.InstallLanguages.execInstallLanguages(UUID)) {
                 // New .mo files have been installed.
                 // Reloads this applet for changes to .mo files to take effect:
-                Extension.reloadExtension(UUID, 'APPLET')
+                Extension.reloadExtension(UUID, Extension.Type['APPLET'])
             }
         }
         catch (e) {
