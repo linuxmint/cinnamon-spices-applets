@@ -37,3 +37,11 @@ msgstr "Contrôle du volume maximum"
 #: settings-schema.json:75
 msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
 msgstr "Vous pouvez essayer d'augmenter le volume de votre carte audio jusqu'à 150% de son volume nominal. Utiliser avec précaution. Vous pouvez aussi fixer une valeur inférieure à 100%, par exemple sur l'ordinateur d'un enfant."
+
+#: settings-schema.json:106
+msgid "Adjust the color of the icon to the volume"
+msgstr "Ajuster la couleur de l'icone au volume"
+
+#: settings-schema.json:107
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "De 101% a 115%: jaune; de 116% à 130%: orange; au-delà de 130%: rouge."
