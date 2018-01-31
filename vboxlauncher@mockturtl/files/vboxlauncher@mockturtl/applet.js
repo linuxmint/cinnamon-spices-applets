@@ -13,6 +13,8 @@ const ICON = "virtualbox"
 const CMD_VBOX = "virtualbox"
 const CMD_VBOX_VM = CMD_VBOX + " --startvm "
 const CMD_VBOX_LIST = "vboxmanage list vms"
+const CMD_VBOX_LIST_RUN = "vboxmanage list runningvms"
+var VBOX_ISRUNNING = "0"
 
 const CMD_VMPLAYER = "vmplayer"
 const VMWARE_DIR = GLib.get_home_dir() + "/vmware"
@@ -141,12 +143,24 @@ MyApplet.prototype = {
       return
 
     let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_LIST)
+    let [resrun, listrun, errrun, statusrun] = GLib.spawn_command_line_sync(CMD_VBOX_LIST_RUN)
     if (list.length != 0) {
       let machines = list.toString().split("\n")
+      let machinesrun = listrun.toString().split("\n")
+      //global.log(machines);
+      //global.log(machinesrun);
       for (let i = 0; i < machines.length; i++) {
         let machine = machines[i]
         if (machine == "") continue
-        this.addVboxImage(machine)
+        for (let j = 0; j < machinesrun.length; j++) {
+            let machinerun = machinesrun[j]
+            if (machinerun == "") continue
+            if (machine == machinerun) {
+                VBOX_ISRUNNING = "1";
+            }
+        }
+        this.addVboxImage(machine);
+        VBOX_ISRUNNING = "0"
       }
     }
   }
@@ -154,6 +168,11 @@ MyApplet.prototype = {
 , addVboxImage: function(instance) {
     let info = instance.split('" {')
     let name = info[0].replace('"', '')
+    if (VBOX_ISRUNNING == "1") {
+      //diffrent indicators
+      //25C9,25C6,E226,2B22,2B24
+      name = (name+"   \uE226");
+    }
     let id = info[1].replace('}', '')
     this.addLauncher(name, Lang.bind(this, function() { this.startVboxImage(id) }))
   }
