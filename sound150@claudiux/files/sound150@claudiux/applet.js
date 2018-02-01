@@ -26,6 +26,18 @@ const MAX_RECOMMENDED = 150;
 const DEBUG = false;
 
 var UUID="sound150@claudiux";
+
+let execInstallLanguages;
+if (typeof require !== 'undefined') {
+    // For Cinnamon >= 3.8:
+    const InstallLanguages = require('./InstallLanguages');
+    execInstallLanguages = InstallLanguages.execInstallLanguages;
+} else {
+    // For Cinnamon < 3.8:
+    const AppletDirectory = imports.ui.appletManager.applets[UUID];
+    execInstallLanguages = AppletDirectory.InstallLanguages.execInstallLanguages;
+}
+
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans !== str && customTrans !== "")
@@ -1010,6 +1022,8 @@ MyApplet.prototype = {
             //this.cssfile = metadata.path + "/stylesheet.css";
             this.appletPath = metadata.path;
 
+            this.applet_running = true;
+
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
 
             UUID = metadata.uuid;
@@ -1185,11 +1199,16 @@ MyApplet.prototype = {
             this.connect('style-changed', Lang.bind(this, this._onStyleChanged));
             this.connect('icon-theme-changed', Lang.bind(this, this._onIconThemeChanged));
 
-            let AppletDirectory = imports.ui.appletManager.applets[UUID];
-            if (AppletDirectory.InstallLanguages.execInstallLanguages(UUID)) {
+            if (execInstallLanguages(UUID)) {
                 // New .mo files have been installed.
-                // Reloads this applet for changes to .mo files to take effect:
-                Extension.reloadExtension(UUID, Extension.Type['APPLET'])
+                // Reloads this applet later (to make sure it's initialized properly) for changes
+                // to .mo files take effect:
+                this._languagesTimeoutId = Mainloop.timeout_add(5000, Lang.bind(this, function() {
+                    this._languagesTimeoutId = null; //execute it only one time
+                    log('New .mo files installed!');
+                    this.applet_running = false;
+                    Extension.reloadExtension(UUID, Extension.Type.APPLET)
+                }));
             }
         }
         catch (e) {
@@ -1198,7 +1217,7 @@ MyApplet.prototype = {
     },
 
     _onStyleChanged : function(actor, event) {
-        //log('_onStyleChanged');
+        log('_onStyleChanged');
         if (!this._defaultColorIsSet) {
             let themeNode = this.actor.get_theme_node();
             this.icon_color = themeNode.get_foreground_color();
@@ -1209,13 +1228,8 @@ MyApplet.prototype = {
     },
 
     _onIconThemeChanged : function(actor, event) {
-        //log('_onIconThemeChanged');
-        //imports.ui.appletManager.applets.reloadExtension(UUID, 'APPLET');
-        Extension.reloadExtension(UUID, Extension.Type['APPLET']);
-        //let themeNode = this.mute_out_switch.actor.get_theme_node();
-        //this.icon_color = themeNode.get_foreground_color();
-        //this.defaultColor = "rgba("+this.icon_color.red+","+this.icon_color.green+","+this.icon_color.blue+","+this.icon_color.alpha+")";
-        //Applet.TextIconApplet._onStyleChanged(actor, event)
+        log('_onIconThemeChanged');
+        Extension.reloadExtension(UUID, Extension.Type.APPLET);
     },
 
     on_settings_changed : function() {
