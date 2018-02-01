@@ -1,7 +1,8 @@
 ## CHANGELOG
 
 ### v1.3.1
- * Does'n reload this applet after installing .mo files, as this creates errors.
+ * Fixes a bug : Now, the reloading of this applet after installing new .mo files (for translations) takes place a few seconds after it is initialized, to avoid a crash of the applet or even Cinnamon.
+ * Code modified to suit the import methods of .js files in Cinnamon 3.8. Thanks to @jaszhix!
 
 ### v1.3.0
  * No more stylesheet.css; uses theme's style sheet for better look.
