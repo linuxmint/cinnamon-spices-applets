@@ -1,0 +1,47 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux-ru.po\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2018-01-12 15:47+0100\n"
+"PO-Revision-Date: 2018-02-02 09:34+0300\n"
+"Last-Translator: GNOU <bitmask1980@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: metadata.json:2
+msgid "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music"
+msgstr "Апплет, основанный на Cinnamon one, для управления звуком (до 150% от номинальной громкости) и музыкой"
+
+#: metadata.json:5
+msgid "Sound 150%"
+msgstr "Звук 150%"
+
+#: settings-schema.json:101
+msgid "% of nominal volume"
+msgstr "% от номинального объема"
+
+#: settings-schema.json:83
+msgid "Maximum volume control"
+msgstr "Максимальный регулятор громкости"
+
+#: settings-schema.json:84
+msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
+msgstr "Вы можете попробовать увеличить громкость вашей звуковой карты до 150% от ее номинала. Используйте с осторожностью. Можно также задать значение менее 100%, например на дочернем компьютере."
+
+#: settings-schema.json:106
+msgid "Adjust the color of the icon to the volume"
+msgstr "Изменить цвет значка громкости"
+
+#: settings-schema.json:107
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "От 101% до 115%: желтый; от 116% до 130%: оранжевый; более 130%: красный."
