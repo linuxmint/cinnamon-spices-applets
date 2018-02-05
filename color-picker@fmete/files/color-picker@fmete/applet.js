@@ -94,7 +94,7 @@ MyApplet.prototype = {
         else if (Gtk.IconTheme.get_default().has_icon(this.icon_name))
             this.set_applet_icon_name(this.icon_name);
         else
-            this.set_applet_icon_path(this.appletPath + "/icon.png");
+            this.set_applet_icon_symbolic_name("color-select");
      },
 
      on_keybinding_changed: function() {
