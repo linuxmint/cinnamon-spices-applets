@@ -37,6 +37,6 @@
   "keybinding-test" : {
     "type" : "keybinding",
     "description" : "Keybinding, which activates the color picker",
-    "default" : "<Primary>p"
+    "default" : "<Primary><Alt>p"
  }
 }
