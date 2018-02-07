@@ -110,7 +110,7 @@ msgstr "Mailnag"
 
 #. mailnagapplet@ozderya.net->metadata.json->description
 msgid "Mailnag mail notifier applet"
-msgstr "Аппдет оповещений для Mailnag"
+msgstr "Апплет оповещений для Mailnag"
 
 #. mailnagapplet@ozderya.net->settings-schema.json->notifications->description
 msgid "Show notifications"
@@ -121,7 +121,7 @@ msgid ""
 "Enables display of mail arrived notifications by applet. Make sure you "
 "disable mailnag notification plugin, otherwise you will have duplicates."
 msgstr ""
-"Включает уведомления о письмах через аппллет. Убедитесь, что вы отключили "
+"Включает уведомления о письмах через апплет. Убедитесь, что вы отключили "
 "плагин уведомлений Mailnag, иначе уведомления будут дублироваться."
 
 #. mailnagapplet@ozderya.net->settings-schema.json->client->description
