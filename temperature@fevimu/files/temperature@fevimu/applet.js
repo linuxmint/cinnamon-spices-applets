@@ -254,15 +254,16 @@ MyApplet.prototype = {
                             //continue only if line exists and isn't adapter
                             if(senses_lines[j] && !this._isAdapter(senses_lines[j])){
                                 if(senses_lines[j].substr(0,4)=='Core'){
-                                    senses_lines[j]=senses_lines[j].replace(/\s/g, "");
+                                    senses_lines[j]=senses_lines[j].replace(/\s+/g, " ").split(" ");
                                     //get the core number
-                                    let k = senses_lines[j].substr(0,5);
+                                    let k = senses_lines[j][0] + " " +  senses_lines[j][1].replace(/:/, "");
                                     //test if it's the first match for this adapter, if yes, initialize array
                                     if (!f++){
                                         s['isa'][++n]=new Array();
                                     }
                                     s['isa'][n][k]=new Array();
-                                    s['isa'][n][k]['temp']=parseFloat(senses_lines[j].substr(7,4));
+                                    s['isa'][n][k]['temp']=parseFloat(senses_lines[j][2]);
+                                    senses_lines[j] = senses_lines[j].join("");
                                     s['isa'][n][k]['high']=this._getHigh(senses_lines[j]);
                                     s['isa'][n][k]['crit']=this._getCrit(senses_lines[j]);
                                     s['isa'][n][k]['hyst']=this._getHyst(senses_lines[j]);
