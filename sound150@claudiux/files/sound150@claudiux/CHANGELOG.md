@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.3.2
+ * Translations:
+   * Available languages: English, French, Spanish, Italian, and now **Russian** (thanks to @sem5959!).
+
 ### v1.3.1
  * Fixes a bug : Now, the reloading of this applet after installing new .mo files (for translations) takes place a few seconds after it is initialized, to avoid a crash of the applet or even Cinnamon.
  * Code modified to suit the import methods of .js files in Cinnamon 3.8. Thanks to @jaszhix!

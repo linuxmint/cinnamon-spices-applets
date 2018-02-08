@@ -55,6 +55,7 @@ Tested on themes :
  * Cinnamon
  * Carta
  * CBlack
+ * Graphite-Zero
  * Linux Mint
  * Mint-X (all themes)
  * Mint-Y and Mint-Y-Dark
@@ -70,6 +71,6 @@ The **Sound 150%** applet is designed to allow translations of some messages (in
 
 The installation of the available languages is done automatically.
 
-Languages already available: English, French, Spanish, Italian.
+Languages already available: English, French, Spanish, Italian, Russian (thanks to @sem5959!).
 
 Any new translation will be very appreciated.
