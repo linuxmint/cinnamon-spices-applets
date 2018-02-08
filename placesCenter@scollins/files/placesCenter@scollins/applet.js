@@ -290,8 +290,18 @@ MyApplet.prototype = {
             userSearchButton.connect("clicked", Lang.bind(this, this.search, GLib.get_home_dir()));
             new Tooltips.Tooltip(userSearchButton, _("Search Home Folder"));
 
+            // create a scrollbox for large user section, if any
+            let userScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+            userPane.actor.add_actor(userScrollBox);
+            userScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+            let userVscroll = userScrollBox.get_vscroll_bar();
+            userVscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+            userVscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+
             this.userSection = new PopupMenu.PopupMenuSection();
-            userPane.addMenuItem(this.userSection);
+            userScrollBox.add_actor(this.userSection.actor); // (user section scrollbox)
+            userPane._connectSubMenuSignals(this.userSection, this.userSection); // (user section scrollbox)
+            //userPane.addMenuItem(this.userSection); // no more needed  (user section scrollbox)
 
             mainBox.add_actor(userPaneBox);
             this.buildUserSection();
