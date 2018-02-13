@@ -28,8 +28,8 @@ MyApplet.prototype = {
 
         this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
-        this.settings.bind("use-fahrenheit", "use_fahrenheit", this._update_temp);
-        this.settings.bind("only-integer-part", "only_integer_part", this._update_temp);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "use-fahrenheit", "use_fahrenheit", this._update_temp, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "only-integer-part", "only_integer_part", this._update_temp, null);
 
         this.lang = {
             'acpi' : 'ACPI Adapter',
