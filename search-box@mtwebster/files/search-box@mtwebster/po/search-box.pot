@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-26 16:15+0100\n"
+"POT-Creation-Date: 2018-02-13 12:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:74 3.2/applet.js:72
+#: 3.2/applet.js:73 applet.js:73
 msgid "Type to search..."
 msgstr ""
 
-#: applet.js:85
+#: applet.js:84
 msgid "Change default programs..."
 msgstr ""
 
-#: applet.js:87
+#: applet.js:86
 msgid "Edit providers"
 msgstr ""
 
@@ -69,6 +69,10 @@ msgstr ""
 msgid "Search Provider Settings"
 msgstr ""
 
+#. 3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr ""
+
 #. 3.2->settings-schema.json->custom-provider-url->description
 msgid "URL of custom provider"
 msgstr ""
@@ -83,6 +87,10 @@ msgstr ""
 
 #. 3.2->settings-schema.json->use-custom-provider->tooltip
 msgid "Use your own search provider"
+msgstr ""
+
+#. 3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
 msgstr ""
 
 #. 3.2->settings-schema.json->show-provider->description

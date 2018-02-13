@@ -1,8 +1,8 @@
 {
-     "header-provider" : {
+    "header-provider" : {
         "type" : "header",
         "description" : "Search Provider Settings"
-     },
+    },
     "show-provider" : {
         "type" : "switch",
         "default" : true,
@@ -28,18 +28,27 @@
         "description": "Use custom provider",
         "tooltip": "Use your own search provider"
     },
-     "custom-provider-label" : {
+    "custom-provider-label" : {
         "type" : "entry",
         "default" : "Google",
         "description" : "Name of custom provider",
         "tooltip" : "Enter label of the custom provider to show in the panel.",
         "dependency" : "use-custom-provider"
-     },
+    },
      "custom-provider-url" : {
         "type" : "entry",
         "default" : "http://google.com/search?q=",
         "description" : "URL of custom provider",
         "tooltip" : "Enter the URL of the custom search provider",
         "dependency" : "use-custom-provider"
-     }
+    },
+    "header-keybinding" : {
+        "type" : "header",
+        "description" : "Keybinding"
+    },
+    "custom-keybinding" : {
+        "type" : "keybinding",
+        "description" : "Keybinding, which opens the search box",
+        "default" : "<Primary><Alt>f"
+    }
 }
