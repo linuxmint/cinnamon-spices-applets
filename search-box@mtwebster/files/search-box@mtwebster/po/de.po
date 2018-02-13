@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-26 16:16+0100\n"
-"PO-Revision-Date: 2017-01-26 16:20+0100\n"
+"POT-Creation-Date: 2018-02-13 12:52+0100\n"
+"PO-Revision-Date: 2018-02-13 12:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,15 +18,15 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:74 3.2/applet.js:72
+#: 3.2/applet.js:73 applet.js:73
 msgid "Type to search..."
 msgstr "Suchbegriff eingeben …"
 
-#: applet.js:85
+#: applet.js:84
 msgid "Change default programs..."
 msgstr "Bevorzugte Anwendungen ändern …"
 
-#: applet.js:87
+#: applet.js:86
 msgid "Edit providers"
 msgstr "Anbieter bearbeiten"
 
@@ -36,7 +36,9 @@ msgstr "Name des eigenen Anbieters"
 
 #. 3.2->settings-schema.json->custom-provider-label->tooltip
 msgid "Enter label of the custom provider to show in the panel."
-msgstr "Den Namen des eigenen Anbieters eingeben, der in der Leiste angezeigt werden soll."
+msgstr ""
+"Den Namen des eigenen Anbieters eingeben, der in der Leiste angezeigt werden "
+"soll."
 
 #. 3.2->settings-schema.json->selected-provider->description
 msgid "Select provider"
@@ -70,6 +72,10 @@ msgstr "Ask"
 msgid "Search Provider Settings"
 msgstr "Suchanbieter-Einstellungen"
 
+#. 3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Tastenkombination, um das Suchfeld zu öffnen"
+
 #. 3.2->settings-schema.json->custom-provider-url->description
 msgid "URL of custom provider"
 msgstr "URL des eigenen Anbieters"
@@ -85,6 +91,10 @@ msgstr "Eigenen Anbieter verwenden"
 #. 3.2->settings-schema.json->use-custom-provider->tooltip
 msgid "Use your own search provider"
 msgstr "Ihren eigenen Suchanbieter verwenden"
+
+#. 3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Tastenkombination"
 
 #. 3.2->settings-schema.json->show-provider->description
 msgid "Show provider"

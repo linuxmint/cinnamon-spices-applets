@@ -3,7 +3,6 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
-const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
@@ -30,7 +29,7 @@ MyApplet.prototype = {
 
     _init: function(orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-        
+
         try {
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
@@ -43,13 +42,13 @@ MyApplet.prototype = {
                                              icon_type: St.IconType.SYMBOLIC });
             this.searchIcon = new St.Icon({icon_name: "edit-find", icon_size: 24, icon_type: St.IconType.FULLCOLOR});
             this._searchIconClickedId = 0;
-            
+
             this.settings.bind("show-provider", "show_provider", this._reload);
             this.settings.bind("selected-provider", "selected_provider", this._reload);
             this.settings.bind("use-custom-provider", "use_custom_provider", this._reload);
             this.settings.bind("custom-provider-label", "custom_provider_label", this._reload);
             this.settings.bind("custom-provider-url", "custom_provider_url", this._reload);
-            this._reload();
+            this.settings.bind("custom-keybinding", "custom_keybinding", this.on_keybinding_changed);
 
             this.set_applet_icon_symbolic_name("edit-find-symbolic");
             this._orientation = orientation;
@@ -82,7 +81,9 @@ MyApplet.prototype = {
             this.searchEntryText.connect('key-press-event', Lang.bind(this, this._onMenuKeyPress));
             this._previousSearchPattern = "";
 
+            this.on_keybinding_changed();
             this.update_label_visible();
+            this._reload();
         }
         catch (e) {
             global.logError(e);
@@ -115,13 +116,16 @@ MyApplet.prototype = {
                     prov_label = 'DuckDuckGo'
                     prov_url = 'https://duckduckgo.com/?q='
                     break;
-            } 
+            }
         }
 
-        if (this.show_provider)
+        if (this.show_provider) {
             this.set_applet_label(prov_label);
-        else
-            this.set_applet_label('');
+            this.hide_applet_label(false);
+        }
+        else {
+            this.hide_applet_label(true);
+        }
     },
 
     _onMenuKeyPress: function(actor, event) {
@@ -165,15 +169,14 @@ MyApplet.prototype = {
             this.searchEntry.set_secondary_icon(this._searchInactiveIcon);
 
         }
-        if (!this.searchActive) {
-            if (this._searchTimeoutId > 0) {
-                Mainloop.source_remove(this._searchTimeoutId);
-                this._searchTimeoutId = 0;
-            }
-            return;
-        }
-        if (this._searchTimeoutId > 0)
-            return;
+    },
+
+    on_keybinding_changed: function() {
+        Main.keybindingManager.addHotKey("must-be-unique-id", this.custom_keybinding, Lang.bind(this, this.on_hotkey_triggered));
+    },
+
+    on_hotkey_triggered: function() {
+        this.on_applet_clicked();
     },
 
     on_applet_clicked: function(event) {
@@ -198,5 +201,5 @@ MyApplet.prototype = {
 
 function main(metadata, orientation, panel_height, instance_id) {
     let myApplet = new MyApplet(orientation, panel_height, instance_id);
-    return myApplet;      
+    return myApplet;
 }
