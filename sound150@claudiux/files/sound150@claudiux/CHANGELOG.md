@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### v1.3.3
+ * This sound150@claudiux applet becomes multiversion:
+   * Cinnamon 3.6 (Linux Mint 18 to 18.3)
+   * Cinnamon 2.8 (Linux Mint 17.3) (**NEW**)
+
 ### v1.3.2
  * Translations:
    * Available languages: English, French, Spanish, Italian, and now **Russian** (thanks to @sem5959!).
