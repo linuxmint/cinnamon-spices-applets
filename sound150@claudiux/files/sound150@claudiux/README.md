@@ -48,6 +48,10 @@ On the computer of a child, reduce the maximum volume possible to take care of h
 
  * If you don't want colors, an option allows you to keep the standard color.
 
+## Cinnamon versions
+
+Tested on Cinnamon v2.8 to v3.6 (Linux Mint 17.3 to 18.3).
+
 ## Themes
 
 Tested on themes :
@@ -73,4 +77,4 @@ The installation of the available languages is done automatically.
 
 Languages already available: English, French, Spanish, Italian, Russian (thanks to @sem5959!).
 
-Any new translation will be very appreciated.
+Any new translation will be wellcomed.
