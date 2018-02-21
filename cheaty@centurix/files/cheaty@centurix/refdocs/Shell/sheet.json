@@ -1,0 +1,107 @@
+{
+	"name": "Shell",
+	"description": "Shell Cheatsheet",
+	"author": "Perette Barella",
+	"email": "perette@deviousfish.com",
+	"repository": "http://deviousfish.com/Downloads/Scripts",
+	"version": "1.1",
+	"sections": {
+		"Parameter (Variable) Expansion": {
+			"Quoting rules": {
+				"description": "An unquoted parameter subsequently undergoes word splitting when expanded.  If is value is null, it is omitted entirely; otherwise, it is broken into whitespace-separated words.  When quoted, the expanded value is retained as-is.",
+				"code": ""
+			},
+			"Unset (op) vs. Null-or-unset (:op)": {
+				"description": "Shells delineate between null and unset values.  A parameter/variable that has never been assigned is unset.  Once assigned, it has a value, even if that value or a subsequent assignment is null.  When expanding variables, several forms operate on unset values.  Adding a colon (:) modifies this to operate on null or unset values.",
+				"code": "${name-default} applies default if name is not set\n${name:-default} applies default is name is either unset or null"
+			},
+			"Portability": {
+				"description": "All forms are supported by Korn, Bourne-Again, and probably other modern shells.  Only the basic form is supported by some older abominations and their ill-conceived backward-combatible clones.",
+				"code": ""
+			},
+			"${name}: Basic form": {
+				"description": "Expand a variable to its value.  Curly braces are optional in the basic form, but are useful to isolate the name.    If the variable is unset or null: quoted, it expands to the empty string; unquoted, it is dropped.",
+				"code": "x=fish swim\n${x} --> { 'fish', 'swim'}\n\"${x}\" --> {'fish swim'}\necho I like $x. --> I like fish swim.\necho \"I like fish ${x}ming.\" --> 'I like fish swimming.'"
+			},
+			"${name:start:length}: Extract substring": {
+				"description": "Expands to a substring of the named variable.  Start is zero-based.  If length is omitted, the remainder of the string is used.",
+				"code": "x=Fudgie\n${x:3:1} --> 'd'\n${x:3} --> 'gie'"
+			},
+			"${name-default}: Expansion with default": {
+				"description": "Expand a variable to its value.  If it is unset (unset or null if :- is used), substitute a default value.",
+				"code": "x=fish; y=\n${x-whale} --> 'fish'\n${y-whale} --> empty\n${y:-whale} --> 'whale'\n${z-whale} --> 'whale'"
+			},
+			"${name=value}: Expand and assign default": {
+				"description": "Expands a variable to its value.  If it is unset (unset or null if := is used), substitute a default and assign that default to the variable.",
+				"code": "x=\n${x=whale} --> empty, x left as null\n${x:=whale} --> 'whale'\n${x:=fish} --> 'whale'${y=whale} --> 'whale'"
+			},
+			"${name?message}: Expand or error": {
+				"description": "Expands a variable to its value.  If the value is unset (unset or null if :? is used), display message and, if part of a script or function, abort with an error status.  If message is omitted, a reasonable default is provided.",
+				"code": "x=fish; y=\n${x?} --> 'fish'\n${y?} --> empty\n${y:?} --> Error message that Y is null.\n${z?} --> Error message that z is not set.\n${z:?} --> Error message that z is null.\n${z:?I love raisins} --> Nonsequitur message about raisins."
+			},
+			"${name+alternate}: Expand with specified value": {
+				"description": "${name+alternate}: If the variable is set (set or null if :+ is used), expand to alternate value.  If it is unset (unset or null for :+), it expands as in the basic form.",
+				"code": "x=fish; y=\n${x+whale} --> 'whale'\n${y+whale} --> empty\n${y:+whale} --> 'whale'\n${z} --> empty"
+			},
+			"${name#chopper}: Expand with chopped front": {
+				"description": "Expands to the variable's value with the minimal (maximal for ##) pattern removed from the front of the string.  Patterns obey rules for filename globbing.  If the pattern doesn't match, the value is not truncated during expansion.  The variable's value is unaltered.",
+				"code": "x='/usr/lib/whale/fish'\n${x#/usr/bin/} --> 'whale/fish'\n${x#*/} --> 'usr/lib/whale/fish'\n${x#?*/} --> 'bin/whale/fish'\n${x##*/} --> 'fish'"
+			},
+			"${name%chopper}: Expand with chopped back": {
+				"description": "Expands to the variable's value with the minimal (maximal for %%) pattern removed from the end of the string.  Patterns obey rules for filename globbing.  If the pattern doesn't match, the value is not truncated during expansion.  The variable's value is unaltered.",
+				"code": "x='/usr/lib/whale/fish'\n${x%sh} --> '/usr/bin/whale/fi'\n${x%/*} --> '/usr/lib/whale'\n${x%%/*} --> ''"
+			},
+			"${name/pattern/replacement}: Expand and substitute": {
+				"description": "Expands the variable's value, replacing the first (all for //) occurence(s) of pattern with the replacement.  Patterns obey rules for filename globbing.  If the pattern doesn't match, the value is substituted unaltered.  The variable's value is unaltered.",
+				"code": "mac='ab:cd:ef'\n${mac/:/} --> 'abcd:de'\n${mac//:/} -->> 'abcdef'\n${mac//:/-} --> 'ab-cd-ef'"
+			}
+		},
+		"Comparisions and tests": {
+			"String equality": {
+				"description": "String equality and inequality are well supported via = and != operators.  No wildcards are applied in the single-brace tests.",
+				"code" : "x='abc def'\n[ \"$x\" = \"abc def\" ] --> true\n[ \"$x\" != \"abc def\" ] --> false\n"
+			},
+			"Numeric comparisons": {
+				"description": "The commonplace numeric comparisons are made with two-letter flags: -eq (equal), -ne (not equal), -lt (less than), -le (less or equal), -gt (greater than), -ge (greater or equal).\n\nPortability: Korn shell will handle decimals; most others, including Bourne-Again, are  limited to integers.",
+				"code" : "x=7\n[ $x -ge 7 ] --> true\n[ $x -lt 5 ] --> false\n"
+			},
+			"Variable tests": {
+				"description": "-n string : True if string is not null.\n-z string : True if string is zero length.\n-v variable : True if variable is set, whether it is null or not.",
+				"code": "x=fish swim\n[ -n \"$x\" ] && echo x has a value\n[ -v x ] && echo x is a variable ]"
+			},
+			"Single-brace ands and ors": {
+				"description": "Inside single-brace tests, use -a for and and -o for or.  These may be grouped with parenthesis, which require quoting to override their interpretation as command grouping.  Negation may be done with !, which also requires quoting. ",
+				"code": "x=3; y=7\n[ $x -eq 3 -a $y -eq 3 ] --> false\n[ $x -eq 3 -o $y -eq 3 ] --> true\n[ \\( $x -eq 3 -o $y -eq 3 \\) -a ${z:-0} -eq 3 ] --> false"
+			},
+			"Extended: Collating comparisions": {
+				"description": "Collating comparisons are supported in the modern shells via the double-brace tests.  These operators are not confused with redirection inside double-braces.",
+				"code" : "x='abc def'\n[[ $x < def ]] --> true\n[[ \"$x\" >= \"def\" ]] --> false\n"
+			},
+			"Extended: String matching": {
+				"description": "Strings may be equality/inequality compared using wildcards inside double braces on modern shells.  Matching follows the rules for filename globbing.  Quote wildcards to force literal comparision.",
+				"code" : "PATH=/usr/bin:/bin:/usr/local/bin\naddpath=/opt/local/bin\n[[ :$PATH: == *:$addpath:* ]] && PATH=$PATH:$addpath\necho $PATH --> /usr/bin:/bin:/usr/local/bin:/opt/local/bin\n[[ :$PATH: == *:$addpath:* ]] && PATH=$PATH:$addpath\necho $PATH --> /usr/bin:/bin:/usr/local/bin:/opt/local/bin"
+			},
+			"Double-brace ands and ors": {
+				"description": "Inside double-brace tests, use the C-style && for and, and || for or.  These may be grouped with parenthesis, or negated with !, no quoting required.",
+				"code": "x=3; y=7\n[[ $x -eq 3 && $y -eq 3 ]] --> false\n[[ $x -eq 3 || $y -eq 3 ]] --> true\n[[ ( $x -eq 3 || $y -eq 3 ) && ${z:-0} -eq 3 ]] --> false"
+			},
+			"Common file checks": {
+				"description": "-a : Check if file exists.  Korn shell lists this as deprecated (it offers -e instead), but given its use in other shells it is unlikely to be removed.\n-s : Check if file has size > 0\n-d : Check if a file is a directory\n-f : Check if the file is an ordinary file.\n-L : Check if a file is a symbolic link\n-r : Check if file is readable.\n-w : Check if file is writable.\n-x : Check if file is executable (for directories, this indicates searchable).\n\nA type check on a non-existent file is always false.  A check on a symbolic link will be done on the target of the link, instead of the link itself (except when checking for a symbolic link).",
+				"code": "[ -a myfile ] && echo myfile exists\n[ -d myfile ] && echo myfile is a directory\n[ -f myfile -a -s myfile ] && echo myfile is an ordinary file with data in it"
+			},
+			"Obscure file type checks": {
+				"description": "-b : Check if file is a block device.\n-c : Check if file is a character device\n-p : Check if a file is a named pipe.\n-P : Check if a file is pornographic\n-S : Check if file is a named socket.\n-t : Check if a an open file descriptor (not a file) is a terminal.",
+				"code": "[ -c /dev/tty] && echo /dev/tty is a character device"
+			},
+			"Permissions checks": {
+				"description": "-g : Check if file's setgid bit is set.\n-u : Check if file's setuid bit is set.\n-k : Check if file's sticky bit is set.\n-G : Check if file is owned by effective group.\n-O : Check if file is owned by effective user.",
+				"code": "[ -O this ] && echo this is mine\n[ -G that ] && echo that is ours"
+			},
+			"File comparisions": {
+				"description": "There are three file operators, all infix:\n-nt : newer than: checks if the first file was last modified before the second file.\n-ot : older than: checks if the first file is older than the second file.\n-ef : equal file: checks if the first and second file are the same file (i.e., they share the same inode, not just the same contents).\n\nIn Korn and Bourne-Again shells, an existent file is considered newer than a non-existent file by both -nt and -ot .  However, some older shells will return false when either file does not exist.",
+				"code": "# This is sufficent in ksh/bash:\n[ prog.c -nt prog ] && cc -o prog prog.c\n# In older crap:\n[ ! -f prog -o prog.c -nt prog ] && prog prog.c"
+			}
+		}
+	}
+}
+
