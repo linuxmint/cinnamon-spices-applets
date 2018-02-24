@@ -1,5 +1,11 @@
 Changelog
 
+### 6.3.0
+
+  * Fixed an issue with hovering over the thumbnail close button causing the window preview to flicker.
+  * Addressed an issue with JavaEmbeddedFrame appearing in the window list.
+  * Added launcher animation effect options.
+
 ### 6.2.2
 
   * Fixed focused window indication not being preserved when hovering over a button, and focused window indication being added when no windows are focused in some theme cofigurations.

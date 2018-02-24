@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-09 03:01-0600\n"
+"POT-Creation-Date: 2018-02-23 21:32-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: zqq90 <zqq_90@163.com>\n"
 "Language-Team: \n"
@@ -14,103 +14,108 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: 3.4/specialMenus.js:119
+#: 3.4/specialMenus.js:118
 msgid "Move to the other monitor"
 msgstr "移到其他显示器"
 
-#: 3.4/specialMenus.js:119
+#: 3.4/specialMenus.js:118
 msgid "Move to monitor "
 msgstr "移到显示器"
 
-#: 3.4/specialMenus.js:127
+#: 3.4/specialMenus.js:126
 msgid "Only on this workspace"
 msgstr "仅在此工作区"
 
-#: 3.4/specialMenus.js:131
+#: 3.4/specialMenus.js:133
 msgid "Visible on all workspaces"
 msgstr "在所有工作区可见"
 
-#: 3.4/specialMenus.js:135
+#: 3.4/specialMenus.js:140
 msgid "Move to another workspace"
 msgstr "移动到另一个工作区"
 
-#: 3.4/specialMenus.js:163
+#: 3.4/specialMenus.js:168
 msgid "Places"
 msgstr "位置"
 
-#: 3.4/specialMenus.js:202
+#: 3.4/specialMenus.js:207
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
 msgstr ""
 
-#: 3.4/specialMenus.js:222
+#: 3.4/specialMenus.js:227
 msgid "Recent"
 msgstr "最近"
 
-#: 3.4/specialMenus.js:241
+#: 3.4/specialMenus.js:246
 msgid "Preferences"
 msgstr "首选项"
 
-#: 3.4/specialMenus.js:244
+#: 3.4/specialMenus.js:249
 msgid "About..."
 msgstr "关于..."
 
-#: 3.4/specialMenus.js:248
+#: 3.4/specialMenus.js:253
 msgid "Configure..."
 msgstr "配置..."
 
-#: 3.4/specialMenus.js:252
+#: 3.4/specialMenus.js:257
 msgid "Remove"
 msgstr "移除"
 
-#: 3.4/specialMenus.js:286
+#: 3.4/specialMenus.js:287
+#, fuzzy
+msgid "New Window"
+msgstr "包含所有应用窗口"
+
+#: 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
 msgstr "取消固定"
 
-#: 3.4/specialMenus.js:286
+#: 3.4/specialMenus.js:305
 msgid "Pin to Panel"
 msgstr "固定到面板"
 
-#: 3.4/specialMenus.js:292
+#: 3.4/specialMenus.js:311
 msgid "Remove from Autostart"
 msgstr "移出自动启动"
 
-#: 3.4/specialMenus.js:292
+#: 3.4/specialMenus.js:311
 msgid "Add to Autostart"
 msgstr "添加到自动启动"
 
-#: 3.4/specialMenus.js:298
+#: 3.4/specialMenus.js:318
 msgid "Create Shortcut"
 msgstr "创建快捷方式"
 
-#: 3.4/specialMenus.js:308
+#: 3.4/specialMenus.js:329
 msgid "Restore to full opacity"
 msgstr "恢复到完全不透明"
 
-#: 3.4/specialMenus.js:316
+#: 3.4/specialMenus.js:337
 msgid "Restore"
 msgstr "恢复"
 
-#: 3.4/specialMenus.js:321
+#: 3.4/specialMenus.js:342
 msgid "Minimize"
 msgstr "最小化"
 
-#: 3.4/specialMenus.js:329
+#: 3.4/specialMenus.js:350
 msgid "Unmaximize"
 msgstr "取消最大化"
 
-#: 3.4/specialMenus.js:334
+#: 3.4/specialMenus.js:355
 msgid "Maximize"
 msgstr "最大化"
 
-#: 3.4/specialMenus.js:344
+#: 3.4/specialMenus.js:365
 msgid "Close others"
 msgstr "关闭其他"
 
-#: 3.4/specialMenus.js:354
+#: 3.4/specialMenus.js:375
 msgid "Close all"
 msgstr "关闭全部"
 
-#: 3.4/specialMenus.js:364
+#: 3.4/specialMenus.js:385
 msgid "Close"
 msgstr "关闭"
 
@@ -272,6 +277,7 @@ msgstr ""
 #. 2.8->settings-schema.json->title-display->options
 #. 2.8->settings-schema.json->number-display->options
 #. 3.4->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->launcher-animation-effect->options
 #. 3.4->settings-schema.json->number-display->options
 #. 3.4->settings-schema.json->middle-click-action->options
 #. 3.4->settings-schema.json->scroll-behavior->options
@@ -699,6 +705,12 @@ msgid ""
 "the order they were opened."
 msgstr "是否根据最后的激活时间排列窗口， 否则按照打开时间排列"
 
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "checked"
+msgstr ""
+
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
 msgstr ""
@@ -706,6 +718,21 @@ msgstr ""
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->description
+#, fuzzy
+msgid "App button transition duration"
+msgstr "应用程序按钮宽度"
+
+#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
+msgid ""
+"Overrides the theme's animation time for app buttons. If set to zero, the "
+"theme's transition duration will be used."
+msgstr ""
+
+#. 3.4->settings-schema.json->app-button-transition-duration->units
+msgid "ms"
 msgstr ""
 
 #. 3.4->settings-schema.json->thumbnail-padding->description
@@ -727,14 +754,26 @@ msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
 msgstr "控制是否固定包含在系统收藏列表的应用程序。"
 
+#. 3.4->settings-schema.json->generalSection->title
+msgid "Behavior"
+msgstr ""
+
 #. 3.4->settings-schema.json->thumbnailsPage->title
 #. 3.4->settings-schema.json->thumbnailsSection->title
 msgid "Thumbnails"
 msgstr "缩略图"
 
+#. 3.4->settings-schema.json->presetSection->title
+msgid "Recommended Presets"
+msgstr "推荐预设值"
+
 #. 3.4->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
 msgstr "应用程序按钮"
+
+#. 3.4->settings-schema.json->generalPage->title
+msgid "General"
+msgstr ""
 
 #. 3.4->settings-schema.json->hoverPeekSection->title
 msgid "Hover Peek"
@@ -747,10 +786,6 @@ msgstr "面板"
 #. 3.4->settings-schema.json->iconSection->title
 msgid "Icons"
 msgstr "图标"
-
-#. 3.4->settings-schema.json->presetSection->title
-msgid "Recommended Presets"
-msgstr "推荐预设值"
 
 #. 3.4->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
@@ -773,10 +808,30 @@ msgstr "主题"
 msgid "Mint Y and Variants"
 msgstr "Mint Y 及其变种"
 
+#. 3.4->settings-schema.json->show-icons->description
+#, fuzzy
+msgid "Show icons"
+msgstr "没有图标"
+
+#. 3.4->settings-schema.json->show-icons->tooltip
+msgid "Show the window's icon next to the title."
+msgstr ""
+
 #. 3.4->settings-schema.json->enable-app-button-dragging->description
 #. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
 msgstr "启用应用程序按钮拖动"
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
+#, fuzzy
+msgid "Show new window option"
+msgstr "显示自动启动开关"
+
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
+msgid ""
+"Shows the \"New Window\" option in an app's context menu if it doesn't "
+"already have one from the app's own action menu items."
+msgstr ""
 
 #. 3.4->settings-schema.json->app-button-width->description
 msgid "App button width"
@@ -794,6 +849,24 @@ msgstr "控制应用程序按钮的宽度。"
 #, fuzzy
 msgid "Mint X, Linux Mint, and Variants"
 msgstr "Mint Y 及其变种"
+
+#. 3.4->settings-schema.json->launcher-animation-effect->description
+msgid "Launcher animation effect"
+msgstr ""
+
+#. 3.4->settings-schema.json->launcher-animation-effect->tooltip
+#. 3.4->settings-schema.json->left-click-action->description
+#. 3.4->settings-schema.json->left-click-action->tooltip
+msgid "Left click action"
+msgstr ""
+
+#. 3.4->settings-schema.json->launcher-animation-effect->options
+msgid "Scale"
+msgstr ""
+
+#. 3.4->settings-schema.json->launcher-animation-effect->options
+msgid "Fade"
+msgstr ""
 
 #. 3.4->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
@@ -856,72 +929,6 @@ msgstr ""
 msgid "Cycle windows"
 msgstr "包含所有应用窗口"
 
-#. 3.4->settings-schema.json->left-click-action->description
-#. 3.4->settings-schema.json->left-click-action->tooltip
-msgid "Left click action"
-msgstr ""
-
-#. 3.4->settings-schema.json->left-click-action->options
-msgid "Toggle activation of last focused window"
-msgstr ""
-
-#. IcingTaskManager@json->metadata.json->name
-msgid "Icing Task Manager"
-msgstr "Icing Task Manager"
-
-#. IcingTaskManager@json->metadata.json->description
-msgid "Window list with app grouping and thumbnails"
-msgstr "带应用程序分组和缩略图的窗口列表"
-
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
-msgid "checked"
-msgstr ""
-
-#. 3.4->settings-schema.json->app-button-transition-duration->description
-#, fuzzy
-msgid "App button transition duration"
-msgstr "应用程序按钮宽度"
-
-#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
-msgid ""
-"Overrides the theme's animation time for app buttons. If set to zero, the "
-"theme's transition duration will be used."
-msgstr ""
-
-#. 3.4->settings-schema.json->app-button-transition-duration->units
-msgid "ms"
-msgstr ""
-
-#. 3.4->settings-schema.json->generalSection->title
-msgid "Behavior"
-msgstr ""
-
-#. 3.4->settings-schema.json->generalPage->title
-msgid "General"
-msgstr ""
-
-#. 3.4->settings-schema.json->show-icons->description
-#, fuzzy
-msgid "Show icons"
-msgstr "没有图标"
-
-#. 3.4->settings-schema.json->show-icons->tooltip
-msgid "Show the window's icon next to the title."
-msgstr ""
-
-#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
-#, fuzzy
-msgid "Show new window option"
-msgstr "显示自动启动开关"
-
-#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
-msgid ""
-"Shows the \"New Window\" option in an app's context menu if it doesn't "
-"already have one from the app's own action menu items."
-msgstr ""
-
 #. 3.4->settings-schema.json->show-all-workspaces->description
 #. 3.4->settings-schema.json->show-all-workspaces->tooltip
 #, fuzzy
@@ -937,6 +944,18 @@ msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
+
+#. 3.4->settings-schema.json->left-click-action->options
+msgid "Toggle activation of last focused window"
+msgstr ""
+
+#. IcingTaskManager@json->metadata.json->name
+msgid "Icing Task Manager"
+msgstr "Icing Task Manager"
+
+#. IcingTaskManager@json->metadata.json->description
+msgid "Window list with app grouping and thumbnails"
+msgstr "带应用程序分组和缩略图的窗口列表"
 
 #~ msgid "number"
 #~ msgstr "个数"

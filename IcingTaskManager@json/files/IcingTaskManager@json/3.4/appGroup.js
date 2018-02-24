@@ -739,6 +739,10 @@ AppGroup.prototype = {
         } else {
           this.hoverMenu.open();
         }
+        if (this.state.overlayPreview) {
+          this.hoverMenu.appThumbnails[0].destroyOverlayPreview();
+          this.hoverMenu.close(true);
+        }
         return;
       }
       if (win.appears_focused) {
@@ -1052,21 +1056,50 @@ AppGroup.prototype = {
     });
   },
 
-  _animate: function () {
-    this.actor.set_z_rotation_from_gravity(0.0, Clutter.Gravity.CENTER);
-    Tweener.addTween(this.actor, {
-      opacity: 70,
-      time: 1.0,
-      transition: 'linear',
-      onCompleteScope: this,
-      onComplete: function () {
-        Tweener.addTween(this.actor, {
-          opacity: 255,
-          time: 0.5,
-          transition: 'linear'
-        });
+  _animate: function (step = 0) {
+    let effect = this.state.settings.launcherAnimationEffect;
+    if (effect === 1) {
+      return;
+    } else if (effect === 2) {
+      this._iconBox.set_z_rotation_from_gravity(0.0, Clutter.Gravity.CENTER);
+      Tweener.addTween(this._iconBox, {
+        opacity: 70,
+        time: 1.0,
+        transition: 'linear',
+        onCompleteScope: this,
+        onComplete: function () {
+          Tweener.addTween(this._iconBox, {
+            opacity: 255,
+            time: 0.5,
+            transition: 'linear'
+          });
+        }
+      });
+    } else if (effect === 3) {
+      // Based on https://github.com/linuxmint/Cinnamon/blob/44b70147be6d68278ef88b758a740ccce92195d0/files/usr/share/cinnamon/applets/panel-launchers%40cinnamon.org/applet.js#L217
+      if (step >= 3) {
+        return;
       }
-    });
+      this._iconBox.set_pivot_point(0.5, 0.5);
+      Tweener.addTween(this._iconBox, {
+        scale_x: 0.7,
+        scale_y: 0.7,
+        time: 0.2,
+        transition: 'easeOutQuad',
+        onComplete: () => {
+          Tweener.addTween(this._iconBox, {
+            scale_x: 1.0,
+            scale_y: 1.0,
+            time: 0.2,
+            transition: 'easeOutQuad',
+            onComplete: () => {
+              this._animate(step + 1);
+            },
+          });
+        },
+      });
+    }
+
   },
 
   destroy: function (skipRefCleanup) {
