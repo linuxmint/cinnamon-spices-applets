@@ -739,6 +739,10 @@ AppGroup.prototype = {
         } else {
           this.hoverMenu.open();
         }
+        if (this.state.overlayPreview) {
+          this.hoverMenu.appThumbnails[0].destroyOverlayPreview();
+          this.hoverMenu.close(true);
+        }
         return;
       }
       if (win.appears_focused) {

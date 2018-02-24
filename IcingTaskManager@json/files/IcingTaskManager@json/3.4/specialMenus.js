@@ -593,6 +593,9 @@ AppThumbnailHoverMenu.prototype = {
     if (this.isOpen) {
       PopupMenu.PopupMenu.prototype.close.call(this, this.state.settings.animateThumbs);
     }
+    for (let i = 0; i < this.appThumbnails.length; i++) {
+      this.appThumbnails[i].destroyOverlayPreview();
+    }
   },
 
   _onKeyPress: function(actor, e){
@@ -854,6 +857,7 @@ WindowThumbnail.prototype = {
 
     // Inherit the theme from the alt-tab menu'
     this.actor = new St.BoxLayout({
+      name: 'this.actor',
       style_class: 'item-box',
       reactive: true,
       track_hover: true,
@@ -894,7 +898,7 @@ WindowThumbnail.prototype = {
       this._container.add_actor(this.labelContainer);
     }
 
-    this.button = new St.BoxLayout({
+    this.button = new St.Button({
       reactive: true
     });
 
@@ -908,7 +912,7 @@ WindowThumbnail.prototype = {
 
     setTimeout(() => this.handleFavorite(), 0);
 
-    this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnterEvent));
+    this.signals.connect(this.actor, 'enter-event', (a, e) => this.handleEnterEvent(a, e));
     this.signals.connect(this.actor, 'leave-event', () => this.handleLeaveEvent());
     this.signals.connect(this.button, 'button-release-event', Lang.bind(this, this._onCloseButtonRelease));
     this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._connectToWindow));
@@ -916,13 +920,24 @@ WindowThumbnail.prototype = {
     this._focusWindowChange();
   },
 
-  handleEnterEvent: function(){
+  handleEnterEvent: function(a, e){
     this.entered = true;
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
-    if (!this.overlayPreview) {
+
+    // Cluter.CrossingEvent will always fire on every child actor of the actor connected to the signal, so we have
+    // to filter the bogus child hover events so the hoverpeek effect only occurs once while inside this.actor.
+    let actorString = e.get_source().toString();
+    if (actorString.indexOf('this.actor') > -1
+      && (!this.lastEnterActor
+        || (this.lastEnterActor.indexOf('StButton') === -1) && this.lastEnterActor.indexOf('ClutterClone') === -1)) {
+      if (this.state.overlayPreview) {
+        this.destroyOverlayPreview();
+      }
       this._hoverPeek(this.state.settings.peekOpacity);
     }
+    this.lastEnterActor = actorString;
+
     this.actor.add_style_pseudo_class('selected');
     this.button.set_opacity(255);
   },
@@ -932,7 +947,6 @@ WindowThumbnail.prototype = {
     this.actor.remove_style_pseudo_class('selected');
     this._focusWindowChange();
     this.button.set_opacity(0);
-    this.destroyOverlayPreview();
   },
 
   _onWindowDemandsAttention: function (window) {

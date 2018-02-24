@@ -334,7 +334,7 @@ MyApplet.prototype = {
         let left = global.ui_scale > 1 ? -10 : 0;
         button.style = 'padding: 0px; width: ' + size + 'px; height: ' + size + 'px; max-width: ' + size + 'px; max-height: ' + size + 'px; '
           + '-cinnamon-close-overlap: 0px; postion: ' + left + 'px -2px;background-size: ' + size + 'px ' + size + 'px;';
-          button.style_class = 'window-close';
+        button.style_class = 'window-close';
       },
       cycleWindows: (e, source) => this.handleScroll(e, source),
       openAbout: () => this.openAbout(),
