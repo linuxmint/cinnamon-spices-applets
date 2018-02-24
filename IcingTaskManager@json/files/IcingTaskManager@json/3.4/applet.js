@@ -294,7 +294,7 @@ MyApplet.prototype = {
       getAppSystem: () => Cinnamon.AppSystem.get_default(),
       getAppFromWMClass: (specialApps, metaWindow) => this.getAppFromWMClass(specialApps, metaWindow),
       getTracker: () => this.tracker,
-      isWindowInteresting: (metaWindow) => this.tracker.is_window_interesting(metaWindow),
+      isWindowInteresting: (metaWindow) => Main.isInteresting(metaWindow),
       addWindowToAllWorkspaces: (win, app, isFavoriteApp) => {
         each(this.appLists, function(appList) {
           appList._windowAdded(appList.metaWorkspace, win, app, isFavoriteApp);
