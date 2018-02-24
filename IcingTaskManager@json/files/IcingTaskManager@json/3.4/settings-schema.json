@@ -49,6 +49,7 @@
         "app-button-width",
         "number-display",
         "title-display",
+        "launcher-animation-effect",
         "pinned-apps",
         "show-alerts",
         "show-pinned",
@@ -235,6 +236,17 @@
     "default": true,
     "description": "Pin apps when dragged to a new position",
     "tooltip": "Pin apps when dragged to a new position"
+  },
+  "launcher-animation-effect": {
+    "type": "combobox",
+    "default": 2,
+    "description": "Launcher animation effect",
+    "options": {
+      "None": 1,
+      "Fade": 2,
+      "Scale": 3
+    },
+    "tooltip": "Left click action"
   },
   "list-monitor-windows": {
     "type": "checkbox",
