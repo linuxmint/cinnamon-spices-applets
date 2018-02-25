@@ -100,6 +100,7 @@ MyApplet.prototype = {
         this.hover_popup = null;
 
         this._init_translations();
+        this._init_scripts();
         this._bind_settings();
         this._connect_signals();
         this._init_network_properties();
@@ -134,6 +135,31 @@ MyApplet.prototype = {
         catch(exception) {
             global.log(uuid + " error while initializing translations: " + exception);
         }
+    },
+
+    _init_scripts: function() {
+        try {
+            let path = this._get_scripts_path();
+            let error = this._grant_executable_permission(path);
+            if(error.length > 0) {
+                global.log(uuid + " error while granting executable permission to scripts: " + error);
+            }
+        }
+        catch(exception) {
+            global.log(uuid + " error while initializing scripts: " + exception);
+        }
+    },
+
+    _get_scripts_path: function() {
+        let path = this._get_applet_directory();
+        path += "scripts"
+        return path;
+    },
+
+    _grant_executable_permission: function(directory_path) {
+        let process = new ShellUtils.ShellOutputProcess(['chmod', '-R', '755', directory_path]);
+        let error = process.spawn_sync_and_get_error();
+        return error;
     },
 
     _bind_settings: function () {
