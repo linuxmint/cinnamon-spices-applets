@@ -11,9 +11,18 @@ const GLib = imports.gi.GLib;
 
 const uuid = "hideable-applets@cardsurf";
 const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletGui = AppletDirectory.appletGui;
-const AppletConstants = AppletDirectory.appletConstants;
-const FilesCsv = AppletDirectory.filesCsv;
+
+let AppletGui, AppletConstants, FilesCsv;
+
+if (typeof require !== 'undefined') {
+    AppletGui = require('./appletGui');
+    AppletConstants = require('./appletConstants');
+    FilesCsv = require('./filesCsv');
+} else {
+    AppletGui = AppletDirectory.appletGui;
+    AppletConstants = AppletDirectory.appletConstants;
+    FilesCsv = AppletDirectory.filesCsv;
+}
 
 
 
@@ -989,7 +998,7 @@ MyApplet.prototype = {
     },
 
     get_sorted_indexes: function(array) {
-        indexes = [];
+        let indexes = [];
 
         for(let i = 0; i < array.length; ++i) {
             let item = array[i];

@@ -318,8 +318,8 @@ HoverMenuIcons.prototype={
 
     _append_semicolon: function(css_style){
         css_style = css_style.trim();
-        last_char = css_style.slice(-1);
-        semicolon = ';';
+        let last_char = css_style.slice(-1);
+        let semicolon = ';';
         if (last_char != semicolon) {
             css_style += semicolon;
         }
