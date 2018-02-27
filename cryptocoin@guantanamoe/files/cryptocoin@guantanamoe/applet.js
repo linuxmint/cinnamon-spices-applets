@@ -11,39 +11,22 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Soup = imports.gi.Soup;
-
-imports.searchPath.push( imports.ui.appletManager.appletMeta[UUID].path );
-const Json = imports.json_parse;
-
+const Json = imports.ui.appletManager.applets[UUID].json_parse;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-const TrackerDefinition = [
-    {
-        "tracker":"BTC",
-        "enabled":false
-    },
-    {
-        "tracker":"ETH",
-        "enabled":false
-    },
-    {
-        "tracker":"XRP",
-        "enabled":false
-    }
-];
 
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(orientation, instance_id) {
-    this._init(orientation, instance_id);
+function MyApplet(metadata, orientation, instance_id) {
+    this._init(metadata, orientation, instance_id);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.TextApplet.prototype,
 
-    _init: function(orientation, instance_id) {
+    _init: function(metadata, orientation, instance_id) {
         Applet.TextApplet.prototype._init.call(this, orientation, instance_id);
 
         try {
@@ -53,23 +36,17 @@ MyApplet.prototype = {
             Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
         } catch (e){ throw 'LiveScore: Adding ProxyResolverDefault failed: ' + e; }
 
-        this.settings = new Settings.AppletSettings(this, UUID, instance_id);
-        this.settings.bind("currency", "currency", this._update_value);
-        this.settings.bind("track-bitcoin", "trackBTC", this._update_value);
-        this.settings.bind("track-ethereal", "trackETH", this._update_value);
-        this.settings.bind("track-ripple", "trackXRP", this._update_value);
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "currency", "currency", this._update_value, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "ticker", "ticker", this._update_value, null);
 
         this._update_value();
     },
 
     _update_value: function () {
-        TrackerDefinition[0].enabled = this.trackBTC;
-        TrackerDefinition[1].enabled = this.trackETH;
-        TrackerDefinition[2].enabled = this.trackXRP;
-
-        const enabledTrackers = [];
-        TrackerDefinition.filter((tracker) => tracker.enabled).forEach((tracker) => enabledTrackers.push(tracker.tracker));
-        this._loadTrackers(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${enabledTrackers.join()}&tsyms=${this.currency}`);
+        let tickers = [];
+        this.ticker.split(",").forEach((t) => { tickers.push(t.trim()) });
+        this._loadTrackers(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${tickers.join()}&tsyms=${this.currency}`);
 
         Mainloop.timeout_add(5000, Lang.bind(this, this._update_value));
     },
@@ -90,14 +67,12 @@ MyApplet.prototype = {
             global.logError(response.Message);
         } else {
             let message = [];
-            TrackerDefinition.filter((tracker) => tracker.enabled).forEach((tracker) => {
-                if (response.hasOwnProperty(tracker.tracker)) {
-                    const trackerInfo = response[tracker.tracker];
-                    if (trackerInfo.hasOwnProperty(this.currency)) {
-                        message.push(`${tracker.tracker}:${trackerInfo[this.currency]}`);
-                    }
+            for (let tracker in response) {
+                const trackerInfo = response[tracker];
+                if (trackerInfo.hasOwnProperty(this.currency)) {
+                    message.push(`${tracker}:${trackerInfo[this.currency]}`);
                 }
-            });
+            }
 
             this.set_applet_label(message.join(" | "));
         }
@@ -107,9 +82,13 @@ MyApplet.prototype = {
         let this_ = this;
         let message = Soup.Message.new('GET', url);
         this.httpSession.queue_message(message, function(session,message){this_._onHandleResponse(session,message)});
+    },
+
+    on_applet_removed_from_panel: function() {
+      this.settings.finalize();
     }
 };
 
-function main(metadata, orientation, instance_id) {
-    return new MyApplet(orientation, instance_id);
+function main(metadata, orientation, panel_height, instance_id) {
+    return new MyApplet(metadata, orientation, instance_id);
 }
