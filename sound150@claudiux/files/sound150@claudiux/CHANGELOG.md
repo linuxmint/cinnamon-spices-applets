@@ -1,5 +1,11 @@
 ## CHANGELOG
 
+### v1.3.4
+ * This sound150@claudiux applet becomes multiversion:
+   * Cinnamon **3.4** & **3.6** (Linux Mint **18.2** & **18.3**)
+   * Cinnamon **2.8**, **3.0** & **3.2** (Linux Mint **17.3**, **18** & **18.1**)
+ * Seems to be ready for Cinnamon **3.8** (Linux Mint **19**). Thanks to @jaszhix !
+
 ### v1.3.3
  * This sound150@claudiux applet becomes multiversion:
    * Cinnamon 3.6 (Linux Mint 18 to 18.3)

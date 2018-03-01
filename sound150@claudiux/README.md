@@ -50,7 +50,11 @@ On the computer of a child, reduce the maximum volume possible to take care of h
 
 ## Cinnamon versions
 
-Tested on Cinnamon v2.8 to v3.6 (Linux Mint 17.3 to 18.3).
+Tested successfully on Cinnamon v2.8 to v3.6 (Linux Mint 17.3 to 18.3).
+
+Seems to be ready for Cinnamon 3.8 (LinuxMint 19). Thanks to @jaszhix !
+
+Does not work on Cinnamon prior to v2.8 (Linux Mint 17 to 17.2).
 
 ## Themes
 
@@ -64,7 +68,7 @@ Tested on themes :
  * Mint-X (all themes)
  * Mint-Y and Mint-Y-Dark
  * Modern-Mint-2017
- * New-Minty (my favorite)
+ * New-Minty
  * Numix-Cinnamon and Numix-Cinnamon-Transparent
  * Spider-Void
  * Void
