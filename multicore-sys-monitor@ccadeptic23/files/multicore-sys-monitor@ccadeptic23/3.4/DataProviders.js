@@ -1,6 +1,6 @@
-const GLib = imports.gi.GLib;
 const GTop = imports.gi.GTop;
 const Gio = imports.gi.Gio;
+const GIRepository = imports.gi.GIRepository;
 
 let _;
 if (typeof require !== 'undefined') {
@@ -11,12 +11,14 @@ if (typeof require !== 'undefined') {
 }
 
 let CONNECTED_STATE, NMClient_new;
-let [_res, _out, _err, exit_code] = GLib.spawn_sync(null, [imports.ui.appletManager.appletMeta['multicore-sys-monitor@ccadeptic23'].path+"/use_old_nm.sh"], null, 0, null);
-if (exit_code != 0) {
+let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
+if (nm_index == -1) {
+  // The NetworkManager repository is not currently loaded so load the NM repo
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.Activated;
   NMClient_new = () => { return NM.Client.new(null); }
 } else {
+  // The NetworkManager repository is current loaded so load it and the NMClient repos
   const NMClient = imports.gi.NMClient;
   const NetworkManager = imports.gi.NetworkManager;
   CONNECTED_STATE = NetworkManager.DeviceState.CONNECTED;
