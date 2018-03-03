@@ -1,7 +1,6 @@
 const GTop = imports.gi.GTop;
-const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
-const NetworkManager = imports.gi.NetworkManager;
+const GIRepository = imports.gi.GIRepository;
 
 let _;
 if (typeof require !== 'undefined') {
@@ -9,6 +8,21 @@ if (typeof require !== 'undefined') {
 } else {
   const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
   _ = AppletDir.utils._;
+}
+
+let CONNECTED_STATE, NMClient_new;
+let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
+if (nm_index == -1) {
+  // The NetworkManager repository is not currently loaded so load the NM repo
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.Activated;
+  NMClient_new = () => { return NM.Client.new(null); }
+} else {
+  // The NetworkManager repository is current loaded so load it and the NMClient repos
+  const NMClient = imports.gi.NMClient;
+  const NetworkManager = imports.gi.NetworkManager;
+  CONNECTED_STATE = NetworkManager.DeviceState.CONNECTED;
+  NMClient_new = () => { return NMClient.Client.new(); }
 }
 
 const formatBytes = (bytes, decimals)=>{
@@ -186,7 +200,7 @@ NetDataProvider.prototype = {
     this.name = _('NET');
     this.isEnabled = true;
     this.gtop = new GTop.glibtop_netload();
-    this.nmClient = NMClient.Client.new();
+    this.nmClient = NMClient_new();
     this.signals = [
       this.nmClient.connect('device-added', () => this.getNetDevices()),
       this.nmClient.connect('device-removed', () => this.getNetDevices())
@@ -243,7 +257,7 @@ NetDataProvider.prototype = {
     }
     for (let i = 0, len = devices.length; i < len; i++) {
       if (altMethod) {
-        if (devices[i].state !== NetworkManager.DeviceState.CONNECTED) {
+        if (devices[i].state !== CONNECTED_STATE) {
           continue;
         }
         devices[i] = devices[i].get_iface();
