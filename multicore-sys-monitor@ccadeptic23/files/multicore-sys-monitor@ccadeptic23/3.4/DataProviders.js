@@ -1,28 +1,27 @@
+const GLib = imports.gi.GLib;
 const GTop = imports.gi.GTop;
 const Gio = imports.gi.Gio;
 
-let _, tryFn;
+let _;
 if (typeof require !== 'undefined') {
-  const utils = require('./utils');
-  _ = utils._;
-  tryFn = utils.tryFn;
+  _ = require('./utils')._;
 } else {
   const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
   _ = AppletDir.utils._;
-  tryFn = AppletDir.utils.tryFn;
 }
 
 let CONNECTED_STATE, NMClient_new;
-tryFn(function() {
+let [_res, _out, _err, exit_code] = GLib.spawn_sync(null, [imports.ui.appletManager.appletMeta['multicore-sys-monitor@ccadeptic23'].path+"/use_old_nm.sh"], null, 0, null);
+if (exit_code != 0) {
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.Activated;
   NMClient_new = () => { return NM.Client.new(null); }
-}, function(e) {
+} else {
   const NMClient = imports.gi.NMClient;
   const NetworkManager = imports.gi.NetworkManager;
   CONNECTED_STATE = NetworkManager.DeviceState.CONNECTED;
   NMClient_new = () => { return NMClient.Client.new(); }
-});
+}
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
