@@ -57,7 +57,7 @@ MyApplet.prototype = {
             this.menu = new Applet.AppletPopupMenu(this, orientation);
             this.menuManager.addMenu(this.menu);
             this.set_applet_tooltip(_("Create QR code from clipboard"));
-            this.set_applet_icon_symbolic_name('edit-paste-symbolic');
+            this.set_applet_icon_symbolic_name('qr-symbolic');
 
             // The QR code error string
             this._errorString = new PopupMenu.PopupMenuItem('', { reactive: false });
