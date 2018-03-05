@@ -102,7 +102,14 @@ MyApplet.prototype = {
                 streamOut.read_bytes_async(MAX_BYTES, 0, null, Lang.bind(this, function (o,result) {
                     let data = o.read_bytes_finish(result);
                     let clipboard = St.Clipboard.get_default();
-                    clipboard.set_text(data.get_data().toString());
+                    // Check Cinnamon version
+                    let cinn_ver = GLib.getenv('CINNAMON_VERSION');
+                    cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
+                    if (parseFloat(cinn_ver) <= 3.4) {
+                        clipboard.set_text(data.get_data().toString());
+                    } else {
+                        clipboard.set_text(St.ClipboardType.CLIPBOARD, data.get_data().toString());
+                    }
                 }));
 
                 this._qrprocess.wait_async(null, Lang.bind(this, function(o,result) {
@@ -141,17 +148,35 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        let clipboard = St.Clipboard.get_default()
+        let clipboard = St.Clipboard.get_default();
+
+        // Check Cinnamon version
+        let cinn_ver = GLib.getenv('CINNAMON_VERSION');
+        cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
+        if (parseFloat(cinn_ver) <= 3.4) {
             clipboard.get_text(Lang.bind(this,
-                function(clipboard, text) {
-                    this._qr.set_text(text);
-                    try {
-                        this._errorString.label.text = this._qr.error;
-                    } catch (e) {
-                        this._errorString.label.text = _("No QR code scanned.");
-                    }
-                    this.menu.toggle();
-                }));
+            function(clipboard, text) {
+                this._qr.set_text(text);
+                try {
+                    this._errorString.label.text = this._qr.error;
+                } catch (e) {
+                    this._errorString.label.text = _("No QR code scanned.");
+                }
+                this.menu.toggle();
+            }));
+        } else {
+            clipboard.get_text(St.ClipboardType.CLIPBOARD, Lang.bind(this,
+            function(clipboard, text) {
+                this._qr.set_text(text);
+                try {
+                    this._errorString.label.text = this._qr.error;
+                } catch (e) {
+                    this._errorString.label.text = _("No QR code scanned.");
+                }
+                this.menu.toggle();
+            }));
+        }
+
     }
 };
 
