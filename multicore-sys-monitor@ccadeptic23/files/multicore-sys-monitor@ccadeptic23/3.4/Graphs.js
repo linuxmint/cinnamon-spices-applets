@@ -105,12 +105,8 @@ GraphPieChart.prototype = {
 
     //Draw Pie Chart
     let xcenter = width / 2;
-    let ycenter = (height / 2) / global.ui_scale;
-    let radius = width / 2 - 1;
-    if (height < width) {
-      radius = height / 2 - 1;
-    }
-    radius = radius / global.ui_scale;
+    let ycenter = height / 2;
+    let radius = Math.min(xcenter, ycenter) - 1;
 
     let runningpercent = 0; //to make the arcs larger so that they becomes 1 after the next loop
 

@@ -257,8 +257,6 @@ MyApplet.prototype = {
   },
   onGraphRepaint: function(area) {
     let xOffset = 0;
-    let appletWidth = 0;
-    area.get_context().translate(xOffset, 2);
     for (let i = 0; i < properties.length; i++) {
       if (properties[i].abbrev === 'Swap') {
         continue;
@@ -267,7 +265,6 @@ MyApplet.prototype = {
         // translate origin to the new location for the graph
         area.get_context().translate(xOffset, 0);
         let width = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].width * global.ui_scale;
-        appletWidth += width;
         if (properties[i].abbrev === 'MEM') {
           // paint the "swap" backdrop
           this.swapGraph.paint(
@@ -277,7 +274,7 @@ MyApplet.prototype = {
             // no label for the backdrop
             false,
             width,
-            this._panelHeight * global.ui_scale,
+            this._panelHeight - 2 * global.ui_scale,
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
             [0, 0, 0, 0],
@@ -290,19 +287,18 @@ MyApplet.prototype = {
           area,
           this.configSettings._prefs.labelsOn,
           width,
-          this._panelHeight * global.ui_scale,
+          this._panelHeight - 2 * global.ui_scale,
           this.configSettings._prefs.labelColor,
           this.configSettings._prefs.backgroundColor,
           this.configSettings['get' + properties[i].abbrev + 'ColorList']()
         );
         // return translation to origin
-        area.get_context().translate(-1 * xOffset, 0);
+        area.get_context().translate(-xOffset, 0);
         // update xOffset for next translation
         xOffset += width + 1;
       }
     }
-    appletWidth = appletWidth > 0 ? appletWidth : 1;
-    area.set_width(appletWidth);
+    area.set_width(xOffset > 1 ? xOffset - 1 : 1);
     area.set_height(this._panelHeight);
   }
 };
