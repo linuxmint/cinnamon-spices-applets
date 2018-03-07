@@ -1,5 +1,9 @@
 Changelog
 
+### 6.3.1
+
+  * Fixed an issue that could impact users of Cinnamon on CJS 3.2.
+
 ### 6.3.0
 
   * Fixed an issue with hovering over the thumbnail close button causing the window preview to flicker.

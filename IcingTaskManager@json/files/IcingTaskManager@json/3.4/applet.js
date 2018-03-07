@@ -98,7 +98,7 @@ PinnedFavs.prototype = {
 
   triggerUpdate: function (appId, pos, isFavoriteApp) {
     let currentAppList = this.params.state.trigger('getCurrentAppList');
-    let refApp = currentAppList.appList.findIndex(appGroup => appGroup.groupState.appId === appId);
+    let refApp = findIndex(currentAppList.appList, appGroup => appGroup.groupState.appId === appId);
     if (refApp > -1) {
       // Destroy pinned app
       if (!isFavoriteApp && currentAppList.appList[refApp] && currentAppList.appList[refApp].groupState.metaWindows.length === 0) {
@@ -234,7 +234,7 @@ PinnedFavs.prototype = {
   },
 
   removeFavorite: function (appId) {
-    let refFav = this._favorites.findIndex(favorite => favorite.id === appId);
+    let refFav = findIndex(this._favorites, favorite => favorite.id === appId);
     this.triggerUpdate(appId, -1, false);
     this._favorites.splice(refFav, 1);
     this._saveFavorites();
@@ -929,7 +929,7 @@ MyApplet.prototype = {
       return false;
     }
 
-    let refFav = this.pinnedFavorites._favorites.findIndex(favorite => favorite.id === source.groupState.appId);
+    let refFav = findIndex(this.pinnedFavorites._favorites, favorite => favorite.id === source.groupState.appId);
     let favPos = this.state.dragPlaceholderPos;
 
     if (favPos === -1) {
