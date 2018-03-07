@@ -48,7 +48,7 @@ GraphVBars.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      let fontsize_px = (1 / 3 * height) / global.ui_scale;
+      let fontsize_px = 1 / 3 * height;
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
@@ -141,7 +141,7 @@ GraphPieChart.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      let fontsize_px = (1 / 3 * height) / global.ui_scale;
+      let fontsize_px = 1 / 3 * height;
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
@@ -185,7 +185,7 @@ GraphLineChart.prototype = {
   _init: function(area, width) {
     this.area = area;
 
-    this.pixelsPerDataPoint = 5;
+    this.pixelsPerDataPoint = 5 * global.ui_scale;
     this.dataPointsListSize = this.getDataPointsListSize(width);
     this.dataPointsList = [];
 
@@ -334,7 +334,7 @@ GraphLineChart.prototype = {
 
       pangolayout.set_alignment(Pango.Alignment.CENTER);
       pangolayout.set_width(width);
-      let fontsize_px = (1 / 3 * height) / global.ui_scale;
+      let fontsize_px = 1 / 3 * height;
       let fontdesc = Pango.font_description_from_string('Sans Normal ' + fontsize_px + 'px');
       pangolayout.set_font_description(fontdesc);
 
