@@ -55,7 +55,6 @@ MyApplet.prototype = {
     this.printError = false;
     this.printWarning = false;
     this.updating = false;
-    this.outdated = false;
     this.printers = [];
     this.setIcon('printer-printing');
     this.onSettingsChanged();
@@ -87,7 +86,7 @@ MyApplet.prototype = {
   },
 
   onMenuToggled: function() {
-    if(!this.menu.isOpen && this.outdated && !this.printWarning) this.update();
+    if(!this.printWarning) this.update();
   },
 
   onSettingsChanged: function() {
@@ -119,13 +118,8 @@ MyApplet.prototype = {
   },
 
   update: function() {
-    if(this.updating) return;
-    if(this.menu.isOpen) {
-      this.outdated = true;
-      return;
-    }
+    if(this.updating || this.menu.isOpen) return;
     this.updating = true;
-    this.outdated = false;
     this.jobsCount = 0;
     this.printersCount = 0;
     this.menu.removeAll();
