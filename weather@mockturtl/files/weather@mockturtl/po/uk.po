@@ -3,20 +3,23 @@
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Kyrylo Mikos <kiril.mik.os@gmail.com>, 2011.
 # Kondrashyn Artem <judgedredad@meta.ua>, 2013.
-# Volodymyr Bodenchuk <Bodenchuk@bigmir.net>, 2015.
+# Volodymyr Bodenchuk <Bodenchuk@bigmir.net>, 2015, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2015-05-30 16:57+0300\n"
+"PO-Revision-Date: 2018-03-09 00:50+0200\n"
 "Last-Translator: Volodymyr Bodenchuk <Bodenchuk@bigmir.net>\n"
-"Language-Team: українська <>\n"
+"Language-Team: Ukrainian <>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #: applet.js:249
 msgid "..."
@@ -52,7 +55,7 @@ msgstr "Завантаження ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Оновити"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -308,7 +311,7 @@ msgstr "Отримати WOEID"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Вертикальна орієнтація"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
@@ -320,7 +323,7 @@ msgstr "WOEID"
 
 #. cinnamon-weather->settings-schema.json->woeid->tooltip
 msgid "Where On Earth ID"
-msgstr ""
+msgstr "Ідентифікатор розміщення (Where On Earth ID)"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
@@ -348,11 +351,11 @@ msgstr "Відображати час у 24-годинному форматі"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Величина прогнозу"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "днів"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
@@ -388,7 +391,7 @@ msgstr "Одиниці атмосферного тиску"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
-msgstr ""
+msgstr "фунтів на кв. дюйм"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "atm"
@@ -416,7 +419,7 @@ msgstr "бар"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr ""
+msgstr "дюймів рт.ст."
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
 msgid "Update interval"
@@ -432,11 +435,11 @@ msgstr "Символічні значки"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Дивіться прогноз погоди у вашій місцевості"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Погода"
 
 #~ msgid "Show 5-day forecast"
 #~ msgstr "Показувати 5-денний прогноз"
