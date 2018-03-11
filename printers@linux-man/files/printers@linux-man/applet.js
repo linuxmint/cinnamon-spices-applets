@@ -60,6 +60,14 @@ MyApplet.prototype = {
     this.onSettingsChanged();
   },
 
+  on_reload_button: function() {
+    Util.spawnCommandLine("dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'printers@linux-man' string:'APPLET'");
+  },
+
+  on_cups_button: function() {
+    Util.spawnCommandLine("gksudo 'systemctl restart cups.service'");
+  },
+
   on_applet_clicked: function() {
     this.menu.toggle();
   },

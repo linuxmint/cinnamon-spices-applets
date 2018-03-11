@@ -1,16 +1,15 @@
-# Portuguese translations for PACKAGE package
-# Traduções portuguesas para o pacote PACKAGE.
-# Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# João Lopes <joao.caldas.lopes@gmail.com>, 2016.
+# Portuguese translations for cinnamon-printers package.
+# Copyright (C) 2018 Caldas Lopes
+# This file is distributed under the same license as the cinnamon-printers package.
+# João Lopes <joao.caldas.lopes@gmail.com>>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 23:33+0100\n"
-"PO-Revision-Date: 2016-04-26 23:46+0100\n"
-"Last-Translator: João Lopes <joao.caldas.lopes@gmail.com>\n"
+"POT-Creation-Date: 2018-03-08 21:52+0000\n"
+"PO-Revision-Date: 2018-03-08 21:52+0000\n"
+"Last-Translator: João Lopes <joao.caldas.lopes@gmail.com\n"
 "Language-Team: Portuguese\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +61,7 @@ msgstr "Número do documento"
 msgid "Show each document number on print list"
 msgstr "Mostra o número de cada documento na lista de impressão"
 
-#: ../settings-schema.json:30 ../applet.js:192
+#: ../settings-schema.json:30 ../applet.js:195
 msgid "Send to front"
 msgstr "Enviar para a frente"
 
@@ -78,15 +77,23 @@ msgstr "Ícones simbólicos"
 msgid "Use symbolic icons"
 msgstr "Usar ícones simbólicos"
 
-#: ../applet.js:37 ../applet.js:131
+#: ../settings-schema.json:43
+msgid "Reload Applet"
+msgstr "Recarregar Applet"
+
+#: ../settings-schema.json:49
+msgid "Restart CUPS"
+msgstr "Reiniciar CUPS"
+
+#: ../metadata.json:10 ../applet.js:37 ../applet.js:134
 msgid "Printers"
 msgstr "Impressoras"
 
-#: ../applet.js:156
+#: ../applet.js:159
 msgid "Cancel all jobs"
 msgstr "Cancelar todos os trabalhos"
 
-#: ../applet.js:178
+#: ../applet.js:181
 msgid "at"
 msgstr "em"
 
