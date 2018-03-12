@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2018-03-09 00:50+0200\n"
+"PO-Revision-Date: 2018-03-11 23:20+0200\n"
 "Last-Translator: Volodymyr Bodenchuk <Bodenchuk@bigmir.net>\n"
 "Language-Team: Ukrainian <>\n"
 "Language: uk\n"
@@ -305,9 +305,21 @@ msgstr "Зх"
 msgid "NW"
 msgstr "ПнЗх"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Налаштування для weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Задати комбінацію клавіш виклику меню"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Отримати WOEID"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -336,6 +348,10 @@ msgstr "фаренгейт"
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "цельсій"
+
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Показувати спочатку високу температуру у прогнозі"
 
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
