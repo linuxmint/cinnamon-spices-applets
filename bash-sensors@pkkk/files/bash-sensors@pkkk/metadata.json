@@ -1,7 +1,8 @@
 {
 "uuid": "bash-sensors@pkkk",
 "name": "Bash Sensors",
-"version": "0.6",
+"version": "0.7",
 "description": "Write your Bash commands to specify applet output (temperature sensors and not only!)",
-"icon": "emblem-generic"
+"icon": "emblem-generic",
+"max-instances": -1
 }
