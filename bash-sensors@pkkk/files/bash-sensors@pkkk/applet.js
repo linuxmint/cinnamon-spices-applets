@@ -15,8 +15,8 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(metadata, orientation) {
-    this._init(metadata, orientation);
+function MyApplet(metadata, orientation, panelHeight, instance_id) {
+    this._init(metadata, orientation, panelHeight, instance_id);
 };
 
 MyApplet.prototype = {
@@ -26,7 +26,7 @@ MyApplet.prototype = {
         Applet.TextApplet.prototype._init.call(this, orientation);
         this.path = metadata.path;
         this.set_applet_tooltip(_("Bash Sensors!"));
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -92,7 +92,7 @@ MyApplet.prototype = {
     }
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(metadata, orientation);
+function main(metadata, orientation, panelHeight, instance_id) {
+    let myApplet = new MyApplet(metadata, orientation, panelHeight, instance_id);
     return myApplet;
 }
