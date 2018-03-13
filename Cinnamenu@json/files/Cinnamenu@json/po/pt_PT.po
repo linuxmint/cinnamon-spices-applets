@@ -392,12 +392,12 @@ msgstr "Definir o nome do ícone do botão de menu personalizado"
 
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
-msgstr "Ativar rolamento automático na lista de aplicações"
+msgstr "Ativar deslocamento automático na lista de aplicações"
 
 #. Cinnamenu@json->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Escolher ativar ou não o rolamento automático suave na lista de aplicações."
+msgstr "Escolher ativar ou não o deslocamento automático na lista de aplicações."
 
 #. Cinnamenu@json->settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
