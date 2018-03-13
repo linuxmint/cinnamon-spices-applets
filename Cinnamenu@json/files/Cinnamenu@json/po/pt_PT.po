@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2015, 2016.
+# Caldas Lopes <joao.caldas.lopes@gmail.com>, 2018.
 #
 msgid ""
 msgstr ""
