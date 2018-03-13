@@ -1,0 +1,231 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-13 15:41+0100\n"
+"PO-Revision-Date: 2018-03-13 16:09+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: applet.js:206
+msgid "Change theme"
+msgstr "Changer de thème"
+
+#: applet.js:215
+msgid "Edit title"
+msgstr "Modifier le titre"
+
+#: applet.js:215
+msgid "Add title"
+msgstr "Ajouter un titre"
+
+#: applet.js:221
+msgid "Copy"
+msgstr "Copier"
+
+#: applet.js:225
+msgid "Paste"
+msgstr "Coller"
+
+#: applet.js:231
+msgid "About..."
+msgstr "À propos..."
+
+#: applet.js:235
+msgid "Configure..."
+msgstr "Configurer..."
+
+#: applet.js:241
+msgid "Remove this note"
+msgstr "Supprimer cette note"
+
+#: applet.js:255
+msgid "Save as template"
+msgstr "Enregistrer comme modèle"
+
+#: applet.js:407
+msgid "Title"
+msgstr "Titre"
+
+#: applet.js:503
+msgid "Switch to check list"
+msgstr "Transformer en liste à cocher"
+
+#: applet.js:711
+msgid "Switch to regular note"
+msgstr "Transformer en simple note"
+
+#: applet.js:715
+msgid "Remove completed items"
+msgstr "Supprimer les éléments cochés"
+
+#: applet.js:1604
+msgid "New note"
+msgstr "Nouvelle note"
+
+#: applet.js:1608
+msgid "New check-list"
+msgstr "Nouvelle liste à cocher"
+
+#: applet.js:1614
+msgid "Pin notes (keep on top)"
+msgstr "Épingler les notes (les rendre toujours visibles)"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+#: applet.js:1621
+msgid "Hide notes"
+msgstr "Cacher les notes"
+
+#: applet.js:1626
+msgid "Back up notes"
+msgstr "Sauvegarder les notes"
+
+#: applet.js:1630
+msgid "Restore from backup"
+msgstr "Restaurer les notes sauvegardées"
+
+#: applet.js:1651
+msgid "This will permanently remove all existing notes. Are you sure you want to continue?"
+msgstr "Cela supprimera définitivement toutes les notes existantes. Le voulez-vous vraiment ?"
+
+#. 3.2->settings-schema.json->behavior->description
+#. sticky@scollins->settings-schema.json->behaviorHeader->description
+msgid "Behavior"
+msgstr "Comportement"
+
+#. 3.2->settings-schema.json->startState->description
+#. sticky@scollins->settings-schema.json->startState->description
+msgid "When Cinnamon starts"
+msgstr "Au démarrage de Cinnamon"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes above windows"
+msgstr "Afficher les notes au-dessus des fenêtres"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Restore previous state"
+msgstr "Retrouver l'état précédent"
+
+#. 3.2->settings-schema.json->startState->options
+#. sticky@scollins->settings-schema.json->startState->options
+msgid "Show notes on Desktop"
+msgstr "Montrer les notes sur le Bureau"
+
+#. 3.2->settings-schema.json->appearance->description
+#. sticky@scollins->settings-schema.json->appearanceHeader->description
+msgid "Appearance"
+msgstr "Apparence"
+
+#. 3.2->settings-schema.json->height->description
+#. sticky@scollins->settings-schema.json->height->description
+msgid "Default height"
+msgstr "Hauteur par défaut"
+
+#. 3.2->settings-schema.json->width->description
+#. sticky@scollins->settings-schema.json->width->description
+msgid "Default width"
+msgstr "Largeur par défaut"
+
+#. 3.2->settings-schema.json->theme->description
+#. sticky@scollins->settings-schema.json->theme->description
+msgid "Default theme"
+msgstr "Thème par défaut"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Blue"
+msgstr "Bleu"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Pink"
+msgstr "Rose"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Brown"
+msgstr "Marron"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Purple"
+msgstr "Pourpre"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Random"
+msgstr "Aléatoire"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Aqua"
+msgstr "Vert d'eau"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Sand"
+msgstr "Sable"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Green"
+msgstr "Vert"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Teal"
+msgstr "Bleu canard"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Orange"
+msgstr "Orange"
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Red"
+msgstr "Rouge"
+
+#. 3.2->settings-schema.json->boxShadow->description
+#. sticky@scollins->settings-schema.json->boxShadow->description
+msgid "Show shadow behind notes"
+msgstr "Afficher une ombre sous les notes"
+
+#. 3.2->settings-schema.json->boxShadow->tooltip
+#. sticky@scollins->settings-schema.json->boxShadow->tooltip
+msgid "Warning: this has been known to slow down some computers - not recommended on older hardware"
+msgstr "Attention : cela est connu pour ralentir certains ordinateurs - peu recommandé sur du matériel obsolète"
+
+#. 3.2->settings-schema.json->font->description
+msgid "Font"
+msgstr "Police"
+
+#. sticky@scollins->metadata.json->description
+msgid "Applet that allows you to manage desktop notes"
+msgstr "L'applet qui vous permet de gérer des notes affichées sur votre Bureau"
+
+#. sticky@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Auteur"
+
+#. sticky@scollins->metadata.json->comments
+msgid "This applet is designed to be a simple, quick, and easy-to-use note utility. While there is some customization available, the emphasis is on making it feel as smooth and easy to use as possible."
+msgstr "Cette applet est conçue pour être un utilitaire de notes simple, rapide et facile à utiliser. Bien qu'il y ait une certaine personnalisation disponible, l'accent est mis sur le fait de le rendre aussi fluide et facile à utiliser que possible."
+
+#. sticky@scollins->metadata.json->name
+msgid "Sticky Notes"
+msgstr "Sticky Notes"
