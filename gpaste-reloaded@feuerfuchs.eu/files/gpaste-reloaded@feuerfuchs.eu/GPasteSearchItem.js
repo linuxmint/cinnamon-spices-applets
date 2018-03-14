@@ -2,9 +2,6 @@ const Lang      = imports.lang;
 const St        = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 
-const AppletDir = imports.ui.appletManager.applets["gpaste-reloaded@feuerfuchs.eu"];
-const _         = AppletDir.__init__._;
-
 // ------------------------------------------------------------------------------------------------------
 
 function GPasteSearchItem() {
