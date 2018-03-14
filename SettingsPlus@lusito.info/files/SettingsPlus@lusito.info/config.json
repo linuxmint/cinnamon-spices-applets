@@ -1,8 +1,3 @@
-/*
-Take this file as example for a menu, the format should be straight forward enough.
-When I get some spare time I will write a menu editor.
-If you don't want icons or tooltips ("hint"), just remove the line.
-*/
 [
     {
         text: "Troubleshoot",
@@ -93,7 +88,7 @@ If you don't want icons or tooltips ("hint"), just remove the line.
             },
         ]
     },
-    
+
     "separator",
 
     {
@@ -122,11 +117,10 @@ If you don't want icons or tooltips ("hint"), just remove the line.
     },
 
     "separator",
-    
+
     {
         text: "Panel Edit Mode",
         hint: "Toggle Panel Edit Mode",
         toggle: "panel-edit-mode",
     },
 ]
-
