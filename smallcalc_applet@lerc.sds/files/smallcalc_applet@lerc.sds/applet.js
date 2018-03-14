@@ -25,10 +25,12 @@ function _(str) {
 
 const AppletManager = imports.ui.appletManager;
 
-const appletDirectory= imports.ui.appletManager.applets[uuid];
-
-const MathJS_module=appletDirectory.math;
-const MathJS=MathJS_module.math;
+let MathJS;
+if (typeof require !== 'undefined') {
+  MathJS = require('./math').math;
+} else {
+  MathJS = imports.ui.appletManager.applets[uuid].math.math;
+}
 
 MathJS.import({"Pi" : Math.PI});
 
