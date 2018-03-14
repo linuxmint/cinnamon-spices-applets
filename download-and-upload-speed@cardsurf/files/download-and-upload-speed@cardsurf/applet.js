@@ -9,14 +9,25 @@ const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 
 const uuid = 'download-and-upload-speed@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletGui = AppletDirectory.appletGui;
-const AppletConstants = AppletDirectory.appletConstants
-const ShellUtils = AppletDirectory.shellUtils;
-const Files = AppletDirectory.files;
-const FilesCsv = AppletDirectory.filesCsv;
-const Dates = AppletDirectory.dates;
-const Translation = AppletDirectory.translation;
+let AppletGui, AppletConstants, ShellUtils, Files, FilesCsv, Dates, Translation;
+if (typeof require !== 'undefined') {
+    AppletGui = require('./appletGui');
+    AppletConstants = require('./appletConstants')
+    ShellUtils = require('./shellUtils');
+    Files = require('./files');
+    FilesCsv = require('./filesCsv');
+    Dates = require('./dates');
+    Translation = require('./translation');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletGui = AppletDirectory.appletGui;
+    AppletConstants = AppletDirectory.appletConstants
+    ShellUtils = AppletDirectory.shellUtils;
+    Files = AppletDirectory.files;
+    FilesCsv = AppletDirectory.filesCsv;
+    Dates = AppletDirectory.dates;
+    Translation = AppletDirectory.translation;
+}
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
