@@ -9,12 +9,21 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const uuid = "brightness-and-gamma-applet@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletGui = AppletDirectory.appletGui;
-const AppletConstants = AppletDirectory.appletConstants
-const ShellUtils = AppletDirectory.shellUtils;
-const Files = AppletDirectory.files;
-const FilesCsv = AppletDirectory.filesCsv;
+let AppletGui, AppletConstants, ShellUtils, Files, FilesCsv;
+if (typeof require !== 'undefined') {
+    AppletGui = require('./appletGui');
+    AppletConstants = require('./appletConstants');
+    ShellUtils = require('./shellUtils');
+    Files = require('./files');
+    FilesCsv = require('./filesCsv');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletGui = AppletDirectory.appletGui;
+    AppletConstants = AppletDirectory.appletConstants
+    ShellUtils = AppletDirectory.shellUtils;
+    Files = AppletDirectory.files;
+    FilesCsv = AppletDirectory.filesCsv;
+}
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
 

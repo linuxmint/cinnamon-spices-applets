@@ -1,7 +1,13 @@
 
 const uuid = "brightness-and-gamma-applet@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const Files = AppletDirectory.files;
+
+let Files;
+if (typeof require !== 'undefined') {
+    Files = require('./files');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    Files = AppletDirectory.files
+}
 
 
 
