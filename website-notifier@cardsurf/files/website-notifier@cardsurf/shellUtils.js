@@ -92,7 +92,6 @@ ShellOutputProcess.prototype = {
              this.command_argv,
              null,
              this.flags,
-             null,
              null);
 
         this.success = success;
@@ -174,7 +173,6 @@ BackgroundProcess.prototype = {
              this.command_argv,
              null,
              this.flags,
-             null,
              null);
 
         this.success = success;
@@ -206,9 +204,7 @@ BackgroundProcess.prototype = {
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
                         	 this.pid,
-                        	 Lang.bind(this, this._on_exit),
-                        	 null,
-                        	 null);
+                        	 Lang.bind(this, this._on_exit));
     },
 
     _on_exit: function(pid, status) {
@@ -235,8 +231,7 @@ BackgroundProcess.prototype = {
         this.standard_output_data_stream.fill_async(this.fill_all_characters_buffer,
                                                     GLib.PRIORITY_DEFAULT,
                                                     this.standard_output_cancellable,
-                                                    Lang.bind(this, this._on_fill_async_standard_output),
-                                                    null);
+                                                    Lang.bind(this, this._on_fill_async_standard_output));
    },
 
    _on_fill_async_standard_output: function(stream, fill_async_result) {
@@ -276,8 +271,7 @@ BackgroundProcess.prototype = {
         this.standard_error_data_stream.fill_async(this.fill_all_characters_buffer,
                                                    GLib.PRIORITY_DEFAULT,
                                                    this.standard_error_cancellable,
-                                                   Lang.bind(this, this._on_fill_async_standard_error),
-                                                   null);
+                                                   Lang.bind(this, this._on_fill_async_standard_error));
    },
 
    _on_fill_async_standard_error: function(stream, fill_async_result) {

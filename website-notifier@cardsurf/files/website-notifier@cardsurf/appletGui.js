@@ -9,9 +9,15 @@ const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 
 const uuid = "website-notifier@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
-const CssStylization = AppletDirectory.cssStylization;
+let AppletConstants, CssStylization;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+    CssStylization = require('./cssStylization');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+    CssStylization = AppletDirectory.cssStylization;
+}
 
 
 
