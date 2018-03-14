@@ -10,7 +10,6 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 
 const uuid = "hideable-applets@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
 
 let AppletGui, AppletConstants, FilesCsv;
 
@@ -19,6 +18,7 @@ if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants');
     FilesCsv = require('./filesCsv');
 } else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletGui = AppletDirectory.appletGui;
     AppletConstants = AppletDirectory.appletConstants;
     FilesCsv = AppletDirectory.filesCsv;

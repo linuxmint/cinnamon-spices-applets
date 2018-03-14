@@ -11,8 +11,13 @@ const Clutter = imports.gi.Clutter;
 const Tooltips = imports.ui.tooltips;
 
 const uuid = "hideable-applets@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
+let AppletConstants;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+}
 
 
 
