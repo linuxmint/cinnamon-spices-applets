@@ -26,8 +26,6 @@ function _(str) {
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Settings = imports.ui.settings;
-const AppletMeta = imports.ui.appletManager.applets[UUID];
-const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
 var SettingsKeys = [
 	["geany", "geany", "Geany"],
