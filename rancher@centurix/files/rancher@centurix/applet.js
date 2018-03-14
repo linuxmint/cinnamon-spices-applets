@@ -3,9 +3,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Lang = imports.lang;
 const Settings = imports.ui.settings;
 const Gtk = imports.gi.Gtk;
-const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
-const Homestead = AppletDir.homestead;
-const Util = AppletDir.util;
+let Homestead, Util;
+if (typeof require !== 'undefined') {
+	Homestead = require('./homestead');
+	Util = require('./util');
+} else {
+	const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
+	Homestead = AppletDir.homestead;
+	Util = AppletDir.util;
+}
 const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const St = imports.gi.St;
