@@ -1,20 +1,20 @@
 
-const DisplayMode = {
+var DisplayMode = {
     SPEED: 0,
     DATA: 1
 }
 
-const UnitType = {
+var UnitType = {
     BYTES: 0,
     BITS: 1
 }
 
-const GuiSpeedType = {
+var GuiSpeedType = {
     COMPACT: 0,
     LARGE: 1
 }
 
-const DecimalPlaces = {
+var DecimalPlaces = {
     AUTO: -1,
     ZERO: 0,
     ONE: 1,
@@ -22,7 +22,7 @@ const DecimalPlaces = {
     THREE: 3
 }
 
-const SortOrder = {
+var SortOrder = {
     ASCENDING: 0,
     DESCENDING: 1,
 }

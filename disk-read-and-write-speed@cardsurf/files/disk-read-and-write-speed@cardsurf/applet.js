@@ -6,11 +6,19 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
-const ShellUtils = AppletDirectory.shellUtils;
-const Files = AppletDirectory.files;
-const AppletGui = AppletDirectory.appletGui;
+let AppletConstants, ShellUtils, Files, AppletGui;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+    ShellUtils = require('./shellUtils');
+    Files = require('./files');
+    AppletGui = require('./appletGui');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+    ShellUtils = AppletDirectory.shellUtils;
+    Files = AppletDirectory.files;
+    AppletGui = AppletDirectory.appletGui;
+}
 
 
 
