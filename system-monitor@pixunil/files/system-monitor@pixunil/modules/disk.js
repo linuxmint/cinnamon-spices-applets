@@ -3,12 +3,19 @@ const Cinnamon = imports.gi.Cinnamon;
 const Mainloop = imports.mainloop;
 
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Graph = applet.graph;
-const bind = applet.bind;
-const Modules = applet.modules;
+let _, bind, Graph, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    bind = require('../init').bind;
+    Graph = require('../graph');
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    bind = applet.bind;
+    Graph = applet.graph;
+    Modules = applet.modules;
+}
 
 const name = "disk";
 const display = _("Disk");
@@ -19,16 +26,16 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.BaseDataProvider.prototype,
+    __proto__: Modules.init.BaseDataProvider.prototype,
 
     max: 1,
     maxIndex: 0,
 
     init: function(){
-        Modules.BaseDataProvider.prototype.init.apply(this, arguments);
+        Modules.init.BaseDataProvider.prototype.init.apply(this, arguments);
 
         try {
-            this.gtop = new Modules.GTop.glibtop_fsusage;
+            this.gtop = new Modules.init.GTop.glibtop_fsusage;
         } catch(e){
             this.unavailable = true;
             return;
@@ -60,7 +67,7 @@ DataProvider.prototype = {
             let mount = mountFile[mountLine].split(" ");
 
             if(mount[0].indexOf("/dev/") === 0){
-                Modules.GTop.glibtop_get_fsusage(this.gtop, mount[1]);
+                Modules.init.GTop.glibtop_get_fsusage(this.gtop, mount[1]);
 
                 this.dev.push({
                     path: mount[1],
@@ -81,7 +88,7 @@ DataProvider.prototype = {
         let write = 0, read = 0;
 
         for(var i = 0; i < this.dev.length; ++i){
-            Modules.GTop.glibtop_get_fsusage(this.gtop, this.dev[i].path);
+            Modules.init.GTop.glibtop_get_fsusage(this.gtop, this.dev[i].path);
 
             this.dev[i].size = this.gtop.block_size;
             this.dev[i].free = this.gtop.bfree;
@@ -108,12 +115,12 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseSubMenuMenuItem.prototype,
+    __proto__: Modules.init.BaseSubMenuMenuItem.prototype,
 
     labelWidths: [130, 130],
 
     init: function(){
-        Modules.BaseSubMenuMenuItem.prototype.init.apply(this, arguments);
+        Modules.init.BaseSubMenuMenuItem.prototype.init.apply(this, arguments);
 
         this.updateDevices();
     },
@@ -144,7 +151,7 @@ function PanelLabel(){
 }
 
 PanelLabel.prototype = {
-    __proto__: Modules.PanelLabelPrototype,
+    __proto__: Modules.init.PanelLabelPrototype,
 
     main: {
         write: /^(?:write|w)$/i,

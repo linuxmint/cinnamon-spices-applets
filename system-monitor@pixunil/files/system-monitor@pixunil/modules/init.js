@@ -9,12 +9,18 @@ const Settings = imports.ui.settings;
 const messageTray = Main.messageTray;
 
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const bind = applet.bind;
-const iconName = applet.iconName;
-const dashToCamelCase = applet.dashToCamelCase;
+let _, Graph, Modules;
+if (typeof require !== 'undefined') {
+    const init = require('../init');
+    _ = init._;
+    bind = init.bind;
+    dashToCamelCase = init.dashToCamelCase;
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    bind = applet.init.bind;
+    dashToCamelCase = applet.init.dashToCamelCase;
+}
 
 // prefixes for byte sizes (kilo, mega, giga, …)
 const PREFIX = " KMGTEZY";

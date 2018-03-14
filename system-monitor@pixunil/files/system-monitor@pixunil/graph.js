@@ -3,8 +3,14 @@ const Cairo = imports.cairo;
 const GLib = imports.gi.GLib;
 
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-const ModulePart = applet.modules.ModulePart;
+let modules;
+if (typeof require !== 'undefined') {
+    modules = require('./modules');
+} else {
+    modules = imports.ui.appletManager.applets[uuid].modules;
+}
+
+const ModulePart = modules.init.ModulePart;
 
 function process(number){
     return number > 0 && !isNaN(number) && isFinite(number);

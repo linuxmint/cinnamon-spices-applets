@@ -1,8 +1,14 @@
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Modules = applet.modules;
+let _, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    Modules = applet.modules;
+}
+global.log('------------------>', Object.keys(Modules))
 
 const name = "loadavg";
 const display = _("Load averages");
@@ -12,13 +18,13 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.BaseDataProvider.prototype,
+    __proto__: Modules.init.BaseDataProvider.prototype,
 
     init: function(){
-        Modules.BaseDataProvider.prototype.init.apply(this, arguments);
+        Modules.init.BaseDataProvider.prototype.init.apply(this, arguments);
 
         try {
-            this.gtop = new Modules.GTop.glibtop_loadavg;
+            this.gtop = new Modules.init.GTop.glibtop_loadavg;
         } catch(e){
             this.unavailable = true;
             return;
@@ -28,7 +34,7 @@ DataProvider.prototype = {
     },
 
     getData: function(){
-        Modules.GTop.glibtop_get_loadavg(this.gtop);
+        Modules.init.GTop.glibtop_get_loadavg(this.gtop);
 
         this.data = this.gtop.loadavg;
     }
@@ -39,7 +45,7 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseMenuItem.prototype,
+    __proto__: Modules.init.BaseMenuItem.prototype,
 
     labelWidths: [90, 90, 80],
 
@@ -55,7 +61,7 @@ function PanelLabel(){
 }
 
 PanelLabel.prototype = {
-    __proto__: Modules.PanelLabelPrototype,
+    __proto__: Modules.init.PanelLabelPrototype,
 
     main: {
         load: /(?:load|l)([0-2])/i

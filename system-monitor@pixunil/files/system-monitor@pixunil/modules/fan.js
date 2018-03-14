@@ -1,9 +1,15 @@
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Graph = applet.graph;
-const Modules = applet.modules;
+let _, Graph, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    Graph = require('../graph');
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    Graph = applet.graph;
+    Modules = applet.modules;
+}
 
 const name = "fan";
 const display = _("Fan");
@@ -15,7 +21,7 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.SensorDataProvider.prototype,
+    __proto__: Modules.init.SensorDataProvider.prototype,
 
     notificationFormat: "rpm",
 
@@ -31,7 +37,7 @@ DataProvider.prototype = {
     },
 
     getData: function(result){
-        Modules.SensorDataProvider.prototype.getData.call(this, result);
+        Modules.init.SensorDataProvider.prototype.getData.call(this, result);
 
         if(this.settings.fanWarning)
             this.checkWarning(this.data[0], _("Fan rotation was over %s for %fsec"));
@@ -48,13 +54,13 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseSubMenuMenuItem.prototype,
+    __proto__: Modules.init.BaseSubMenuMenuItem.prototype,
 
     labelWidths: [80],
     margin: 180,
 
     init: function(module){
-        Modules.BaseSubMenuMenuItem.prototype.init.call(this, module);
+        Modules.init.BaseSubMenuMenuItem.prototype.init.call(this, module);
 
         for(let i = 0, l = module.dataProvider.sensorNames.length; i < l; ++i)
             this.addRow(module.dataProvider.sensorNames[i]);
@@ -73,7 +79,7 @@ function PanelLabel(){
 }
 
 PanelLabel.prototype = {
-    __proto__: Modules.PanelLabelPrototype,
+    __proto__: Modules.init.PanelLabelPrototype,
 
     main: {
         value: /^(?:value|v|min|max|m|average|avg|a)$/i,

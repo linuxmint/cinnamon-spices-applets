@@ -1,11 +1,17 @@
 const Cinnamon = imports.gi.Cinnamon;
 
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Graph = applet.graph;
-const Modules = applet.modules;
+let _, Graph, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    Graph = require('../graph');
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    Graph = applet.graph;
+    Modules = applet.modules;
+}
 
 const name = "network";
 const display = _("Network");
@@ -16,16 +22,16 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.BaseDataProvider.prototype,
+    __proto__: Modules.init.BaseDataProvider.prototype,
 
     max: 1,
     maxIndex: 0,
 
     init: function(){
-        Modules.BaseDataProvider.prototype.init.apply(this, arguments);
+        Modules.init.BaseDataProvider.prototype.init.apply(this, arguments);
 
         try {
-            this.gtop = new Modules.GTop.glibtop_netload;
+            this.gtop = new Modules.init.GTop.glibtop_netload;
         } catch(e){
             this.unavailable = true;
             return;
@@ -63,7 +69,7 @@ DataProvider.prototype = {
         let up = 0, down = 0;
 
         for(var i = 0, l = this.dev.length; i < l; ++i){
-            Modules.GTop.glibtop_get_netload(this.gtop, this.dev[i]);
+            Modules.init.GTop.glibtop_get_netload(this.gtop, this.dev[i]);
             up += this.gtop.bytes_out;
             down += this.gtop.bytes_in;
         }
@@ -85,12 +91,12 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseSubMenuMenuItem.prototype,
+    __proto__: Modules.init.BaseSubMenuMenuItem.prototype,
 
     labelWidths: [130, 130],
 
     init: function(module){
-        Modules.BaseSubMenuMenuItem.prototype.init.call(this, module);
+        Modules.init.BaseSubMenuMenuItem.prototype.init.call(this, module);
 
         this.addRow(_("Total"));
     },
@@ -109,7 +115,7 @@ function PanelLabel(){
 }
 
 PanelLabel.prototype = {
-    __proto__: Modules.PanelLabelPrototype,
+    __proto__: Modules.init.PanelLabelPrototype,
 
     main: {
         up: /^(?:up|u)$/i,
