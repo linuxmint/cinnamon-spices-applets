@@ -4,7 +4,7 @@
 // any symbolic icon will work if you want something different
 // restart Cinnamon after changing options
 
- const Options = {
+ var Options = {
     AppIconType : "starred-symbolic",
     DebugMode: false,
     OpenFileCmd: "xdg-open",
