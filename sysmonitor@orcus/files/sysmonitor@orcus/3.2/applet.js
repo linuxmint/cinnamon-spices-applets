@@ -27,11 +27,20 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
-const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
-const _ = AppletDir.__init__._;
-const GTop = AppletDir.__init__.GTop;
-const Graph = AppletDir.graph.Graph;
-const Providers = AppletDir.providers;
+let _, GTop, Graph, Providers;
+if (typeof require !== 'undefined') {
+    Graph = require('./graph').Graph;
+    Providers = require('./providers');
+    let init = require('./init');
+    _ = init._;
+    GTop = init.GTop;
+} else {
+    const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
+    _ = AppletDir.__init__._;
+    GTop = AppletDir.__init__.GTop;
+    Graph = AppletDir.graph.Graph;
+    Providers = AppletDir.providers;
+}
 
 function colorToArray(c) {
     c = c.match(/\((.*)\)/)[1].split(",").map(Number);
