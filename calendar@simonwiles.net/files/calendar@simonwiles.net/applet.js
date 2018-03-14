@@ -20,8 +20,13 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
-const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
-const Calendar = AppletDir.calendar;
+let Calendar;
+if (typeof require !== 'undefined') {
+    Calendar = require('./calendar');
+} else {
+    const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+    Calendar = AppletDir.calendar;
+}
 const GLib = imports.gi.GLib;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
