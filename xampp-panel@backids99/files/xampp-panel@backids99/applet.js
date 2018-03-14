@@ -3,10 +3,9 @@ const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 const UUID = "xampp-panel@backids99";
 const Util = imports.misc.util;
-const Lang = imports.lang; 
+const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const AppletMeta = imports.ui.appletManager.applets['xampp-panel@backids99'];
 const AppletDir = imports.ui.appletManager.appletMeta['xampp-panel@backids99'].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -40,7 +39,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
         this.set_applet_icon_path( AppletDir + "/" + "xampp.png");
         this.set_applet_tooltip(_("Xampp Panel"));
-        
+
         //setup a new menuManager and add the main context main to the manager
 
 		this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -88,7 +87,7 @@ MyApplet.prototype = {
 	on_applet_clicked: function(){
 		this.menu.toggle();
     },
-    
+
 }
 
 
