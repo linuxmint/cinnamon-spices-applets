@@ -1,0 +1,6 @@
+{
+    "uuid": "composectrl@kenit.cc",
+    "name": "Docker-compose control",
+    "description": "Control docker-compose services and show its status",
+    "max-instances": "-1"
+}

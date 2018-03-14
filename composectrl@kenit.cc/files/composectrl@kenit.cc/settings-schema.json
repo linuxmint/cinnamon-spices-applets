@@ -1,0 +1,26 @@
+{
+    "composeCmd": {
+        "type": "entry",
+        "default": "docker-compose",
+        "description": "Docker compose executable"
+    },
+    "composeProjectName": {
+        "type": "entry",
+        "default": "some_project",
+        "description": "Project name of docker-compose.yaml"
+    },
+    "composeFilePath": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path of docker-compose.yaml",
+        "select-dir" : false
+    },
+    "refreshInteval": {
+        "type": "scale",
+        "default": 5,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "description": "Refresh interval (min)"
+    }
+}
