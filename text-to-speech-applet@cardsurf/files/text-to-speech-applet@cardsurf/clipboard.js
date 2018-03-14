@@ -2,9 +2,16 @@
 const GLib = imports.gi.GLib;
 
 const uuid = 'text-to-speech-applet@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
-const ShellUtils = AppletDirectory.shellUtils;
+let AppletConstants, ShellUtils;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+    ShellUtils = require('./shellUtils');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+    ShellUtils = AppletDirectory.shellUtils;
+}
+
 
 
 

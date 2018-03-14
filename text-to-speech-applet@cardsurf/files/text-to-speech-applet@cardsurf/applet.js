@@ -9,12 +9,21 @@ const Main = imports.ui.main;
 const Gettext = imports.gettext;
 
 const uuid = 'text-to-speech-applet@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletGui = AppletDirectory.appletGui;
-const Clipboard = AppletDirectory.clipboard;
-const ShellUtils = AppletDirectory.shellUtils;
-const Translation = AppletDirectory.translation;
-const Keyboard = AppletDirectory.keyboard;
+let AppletGui, Clipboard, ShellUtils, Translation, Keyboard;
+if (typeof require !== 'undefined') {
+    AppletGui = require('./appletGui');
+    Clipboard = require('./clipboard');
+    ShellUtils = require('./shellUtils');
+    Translation = require('./translation');
+    Keyboard = require('./keyboard');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletGui = AppletDirectory.appletGui;
+    Clipboard = AppletDirectory.clipboard;
+    ShellUtils = AppletDirectory.shellUtils;
+    Translation = AppletDirectory.translation;
+    Keyboard = AppletDirectory.keyboard;
+}
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
