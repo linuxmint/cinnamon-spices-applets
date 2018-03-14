@@ -31,9 +31,14 @@ function convertMinutesToSeconds(minutes) {
 }
 
 function main(metadata, orientation, panelHeight, instanceId) {
-    let myModule = imports.ui.appletManager.applets[metadata.uuid];
-    TimerModule = myModule.timer;
-    SoundModule = myModule.sound;
+    if (typeof require !== 'undefined') {
+        TimerModule = require('./timer');
+        SoundModule = require('./sound');
+    } else {
+        let myModule = imports.ui.appletManager.applets[metadata.uuid];
+        TimerModule = myModule.timer;
+        SoundModule = myModule.sound;
+    }
 
     let myApplet = new PomodoroApplet(metadata, orientation, panelHeight, instanceId);
 
