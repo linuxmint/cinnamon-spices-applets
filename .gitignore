@@ -1,3 +1,4 @@
 *.mo
 *.pyc
 */gschemas.compiled
+!.github/applets-metadata-po/mo/*.mo
