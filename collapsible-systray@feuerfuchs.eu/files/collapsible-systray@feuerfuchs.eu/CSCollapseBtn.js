@@ -1,5 +1,11 @@
-const AppletDir = imports.ui.appletManager.applets['collapsible-systray@feuerfuchs.eu'];
-const _         = AppletDir.Util._;
+
+let _;
+if (typeof require !== 'undefined') {
+    _               = require('./Util')._;
+} else {
+    const AppletDir = imports.ui.appletManager.applets['collapsible-systray@feuerfuchs.eu'];
+    _               = AppletDir.Util._;
+}
 
 const Gio                                = imports.gi.Gio;
 const St                                 = imports.gi.St;

@@ -13,12 +13,19 @@ const Tweener                   = imports.ui.tweener;
 const Applet                    = imports.ui.applet;
 const PopupMenu                 = imports.ui.popupMenu;
 
-const AppletDir                 = imports.ui.appletManager.applets[uuid];
-const CinnamonSystray           = AppletDir.CinnamonSystray;
-const CSCollapseBtn             = AppletDir.CSCollapseBtn;
-const CSRemovableSwitchMenuItem = AppletDir.CSRemovableSwitchMenuItem;
-
-const _                         = AppletDir.Util._;
+let CinnamonSystray, CSCollapseBtn, CSRemovableSwitchMenuItem, _;
+if (typeof require !== 'undefined') {
+    CinnamonSystray             = require('./CinnamonSystray');
+    CSCollapseBtn               = require('./CSCollapseBtn');
+    CSRemovableSwitchMenuItem   = require('./CSRemovableSwitchMenuItem');
+    _                           = require('./Util')._;
+} else {
+    const AppletDir             = imports.ui.appletManager.applets[uuid];
+    CinnamonSystray             = AppletDir.CinnamonSystray;
+    CSCollapseBtn               = AppletDir.CSCollapseBtn;
+    CSRemovableSwitchMenuItem   = AppletDir.CSRemovableSwitchMenuItem;
+    _                           = AppletDir.Util._;
+}
 
 const ICON_SCALE_FACTOR         = CinnamonSystray.ICON_SCALE_FACTOR;
 const DEFAULT_ICON_SIZE         = CinnamonSystray.DEFAULT_ICON_SIZE;
@@ -44,7 +51,7 @@ CollapsibleSystrayApplet.prototype = {
 
     _init: function(orientation, panel_height, instance_id) {
         this._orientation = orientation;
-        
+
         //
         // Expand/collapse button
 
@@ -158,7 +165,7 @@ CollapsibleSystrayApplet.prototype = {
         this._settings.bindProperty(Settings.BindingDirection.IN,            "collapse-on-leave-delay",       "collapseOnLeaveDelay",       this._onSettingsUpdated,         "collapseOnLeaveDelay");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "no-hover-for-tray-icons",       "noHoverForTrayIcons",        this._onSettingsUpdated,         "noHoverForTrayIcons");
         this._settings.bindProperty(Settings.BindingDirection.IN,            "sort-icons",                    "sortIcons",                  this._onSettingsUpdated,         "sortIcons");
-        
+
         this._loadAppIconVisibilityList();
         this.collapseBtn.setVertical(this._direction == this.Direction.VERTICAL);
         this.collapseBtn.refreshReactive();
@@ -202,7 +209,7 @@ CollapsibleSystrayApplet.prototype = {
 
         if (collapsible) {
             this.collapseBtn.setState(this._iconsAreHidden ? this.collapseBtn.State.COLLAPSED : this.collapseBtn.State.EXPANDED);
-        } else {    
+        } else {
             this.collapseBtn.setState(this.collapseBtn.State.UNAVAILABLE);
         }
     },
@@ -766,7 +773,7 @@ CollapsibleSystrayApplet.prototype = {
         CinnamonSystray.MyApplet.prototype._onIndicatorAdded.call(this, manager, appIndicator);
 
         let id = appIndicator.id;
-        
+
         if (appIndicator.id.trim() == "")
         {
             global.logError("[" + uuid + "] Indicator ID is empty. It's probably Dropbox being \"special\" once again.");
