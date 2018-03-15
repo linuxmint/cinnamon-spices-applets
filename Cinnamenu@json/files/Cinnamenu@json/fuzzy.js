@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const fuzzy = function (q, str, opts) {
+var fuzzy = function (q, str, opts) {
   if (typeof q !== 'string' || typeof str !== 'string') {
     return {
       score: 0,

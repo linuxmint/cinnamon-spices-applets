@@ -1,6 +1,6 @@
 const Mainloop = imports.mainloop;
 
-const setTimeout = function(func, ms) {
+var setTimeout = function(func, ms) {
   let args = [];
   if (arguments.length > 2) {
     args = args.slice.call(arguments, 2);
@@ -14,11 +14,11 @@ const setTimeout = function(func, ms) {
   return id;
 };
 
-const clearTimeout = function(id) {
+var clearTimeout = function(id) {
   Mainloop.source_remove(id);
 };
 
-const setInterval = function(func, ms) {
+var setInterval = function(func, ms) {
   let args = [];
   if (arguments.length > 2) {
     args = args.slice.call(arguments, 2);
@@ -32,11 +32,11 @@ const setInterval = function(func, ms) {
   return id;
 };
 
-const clearInterval = function(id) {
+var clearInterval = function(id) {
   Mainloop.source_remove(id);
 };
 // Native objects such as CinnamonApps and MetaWindows stringify with a unique identifier.
-const isEqual = function(a, b) {
+var isEqual = function(a, b) {
  /* if (!a) {
     a = 'null';
   }
@@ -46,7 +46,7 @@ const isEqual = function(a, b) {
   return a === b;
 };
 
-const sortBy = function(array = [], property = '', direction = 'asc') {
+var sortBy = function(array = [], property = '', direction = 'asc') {
   let arg;
   array.sort(function(a, b) {
     if (!a || !b || !a[property] || !b[property]) {
@@ -61,11 +61,11 @@ const sortBy = function(array = [], property = '', direction = 'asc') {
   });
 }
 
-const isString = function(string) {
+var isString = function(string) {
   return typeof string === 'string' || string instanceof String;
 }
 
-const unref = function(object) {
+var unref = function(object) {
   let keys = Object.keys(object);
   for (var i = 0; i < keys.length; i++) {
     if (keys[i] !== 'buttonState' && keys[i] !== 'state') {
@@ -74,7 +74,7 @@ const unref = function(object) {
   }
 };
 
-const tryFn = function(fn, errCb) {
+var tryFn = function(fn, errCb) {
   try {
     return fn();
   } catch (e) {
