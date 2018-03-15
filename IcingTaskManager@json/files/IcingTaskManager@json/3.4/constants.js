@@ -1,4 +1,4 @@
-const constants = {
+var constants = {
   THUMBNAIL_ICON_SIZE: 16,
   OPACITY_OPAQUE: 255,
   BUTTON_BOX_ANIMATION_TIME: 0.15,
@@ -41,7 +41,3 @@ const constants = {
   ],
   autoStartStrDir: './.config/autostart'
 };
-
-if (typeof module !== 'undefined') {
-  module.exports.constants = constants;
-}
