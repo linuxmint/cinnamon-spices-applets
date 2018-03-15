@@ -1503,6 +1503,7 @@ CobiWorkspace.prototype = {
     this._signalManager.connect(global.settings, "changed::panel-edit-mode", this._onPanelEditModeChanged, this);
     this._signalManager.connect(this._settings, "changed::pinned-apps", this._updatePinnedApps, this);
     this._signalManager.connect(this._settings, "changed::show-windows-for-current-monitor", this._updateAllWindowsForMonitor, this);
+    this._signalManager.connect(this._settings, "changed::group-windows", this._onGroupingChanged, this);
   },
   
   onOrientationChanged: function(orientation) {
