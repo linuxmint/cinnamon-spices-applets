@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2011-06-07 18:21+0100\n"
-"Last-Translator: ElStellino <luca@pedrazzi.eu>\n"
+"PO-Revision-Date: 2018-03-17 12:58+0100\n"
+"Last-Translator: Germán Franco <dev.germanfr@gmail.com>\n"
 "Language-Team: Español; Castellano <zodiac_es@yahoo.es>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bits\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: applet.js:249
 msgid "..."
@@ -23,7 +24,7 @@ msgstr "..."
 
 #: applet.js:250
 msgid "Click to open"
-msgstr "Haga clic para abrir"
+msgstr "Click para abrir"
 
 #: applet.js:289
 msgid "Settings"
@@ -39,11 +40,11 @@ msgstr "Puesta del sol"
 
 #: applet.js:648
 msgid "Loading current weather ..."
-msgstr "Cargando la meteorología actual..."
+msgstr "Cargando el tiempo actual..."
 
 #: applet.js:649
 msgid "Loading future weather ..."
-msgstr "Cargando la meteorología futura..."
+msgstr "Cargando pronóstico del tiempo..."
 
 #: applet.js:671
 msgid "Loading ..."
@@ -51,7 +52,7 @@ msgstr "Cargando..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr "Refrescar"
+msgstr "Recargar"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -59,7 +60,7 @@ msgstr "Temperatura:"
 
 #: applet.js:742
 msgid "Humidity:"
-msgstr "Humedad"
+msgstr "Humedad:"
 
 #: applet.js:744
 msgid "Pressure:"
@@ -107,7 +108,7 @@ msgstr "Granizo y nieve"
 
 #: applet.js:969
 msgid "Freezing drizzle"
-msgstr "Lluvia con heladas"
+msgstr "Llovizna con heladas"
 
 #: applet.js:971
 msgid "Drizzle"
@@ -127,7 +128,7 @@ msgstr "Nieve"
 
 #: applet.js:981
 msgid "Light snow showers"
-msgstr "Nieve"
+msgstr "Nieve ligera"
 
 #: applet.js:983
 msgid "Blowing snow"
@@ -301,9 +302,21 @@ msgstr "O"
 msgid "NW"
 msgstr "NO"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Ajustes de weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Elige una atajo de teclado para abrir el menú"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "Obtener WOEID"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr ""
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -311,7 +324,7 @@ msgstr "Orientación vertical"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
-msgstr "Muestra la temperatura actual en el panel"
+msgstr "Mostrar temperatura actual en el panel"
 
 #. cinnamon-weather->settings-schema.json->woeid->description
 msgid "WOEID"
@@ -319,10 +332,9 @@ msgstr "WOEID"
 
 #. cinnamon-weather->settings-schema.json->woeid->tooltip
 msgid "Where On Earth ID"
-msgstr "ID Dónde En La Tierra (Where On Earth ID)"
+msgstr "Identificador de lugares en La Tierra (Where On Earth ID)"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->description
-#, fuzzy
 msgid "Temperature unit"
 msgstr "Unidad de temperatura"
 
@@ -334,13 +346,17 @@ msgstr "Fahrenheit"
 msgid "celsius"
 msgstr "Celsius"
 
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Mostrar primero la temperatura máxima"
+
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
-msgstr "Traducir condición"
+msgstr "Traducir condición climática"
 
 #. cinnamon-weather->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Forzar nombre de ubicación"
+msgstr "Sobreescribir nombre de ubicación"
 
 #. cinnamon-weather->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
@@ -356,7 +372,7 @@ msgstr "días"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Mostrar horas amanecer / puesta del sol"
+msgstr "Mostrar horas amanecer/puesta del sol"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
@@ -381,8 +397,8 @@ msgstr "mph"
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr ""
-"Mostrar las condiciones climáticas (ejemplo, \"Vientoso\", \"Despejado\") en "
-"el panel"
+"Mostrar condición climática (por ejemplo \"ventoso\", \"despejado\") en el "
+"panel"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
@@ -390,38 +406,37 @@ msgstr "Unidad de presión atmosférica"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "atm"
-msgstr ""
+msgstr "atm"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "kPa"
-msgstr ""
+msgstr "kPa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "Pa"
-msgstr ""
+msgstr "Pa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
-msgstr ""
+msgstr "mmHg"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "at"
-msgstr ""
+msgstr "at"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "mbar"
-msgstr ""
+msgstr "mbar"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr ""
+msgstr "inHg"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
-#, fuzzy
 msgid "Update interval"
 msgstr "Intervalo de actualización"
 
@@ -435,7 +450,7 @@ msgstr "Iconos simbólicos"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr "Ver su pronóstico del tiempo local"
+msgstr "Ver el pronóstico del tiempo local"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
