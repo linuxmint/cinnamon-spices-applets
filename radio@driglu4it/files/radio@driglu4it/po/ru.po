@@ -47,7 +47,7 @@ msgstr "Название"
 
 #. radio@driglu4it->settings-schema.json->tree->columns->title
 msgid "URL"
-msgstr "URL"
+msgstr "URL" 
 
 #. radio@driglu4it->metadata.json->description
 msgid ""
