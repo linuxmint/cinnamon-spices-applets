@@ -7,34 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-16 16:22+0200\n"
-"PO-Revision-Date: 2017-09-16 16:23+0200\n"
-"Last-Translator: \n"
+"POT-Creation-Date: 2018-03-07 14:25+0300\n"
+"PO-Revision-Date: 2018-03-07 14:28+0300\n"
 "Language-Team: \n"
-"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru\n"
 
 #. radio@driglu4it->metadata.json->name
-#: applet.js:25 applet.js:48
+#: applet.js:38 applet.js:62
 msgid "Radio++"
 msgstr "Radio++"
 
-#: applet.js:39
+#: applet.js:53
 #, javascript-format
 msgid "Playing %s"
 msgstr "Играет %s"
 
-#: applet.js:46 applet.js:51
+#: applet.js:60 applet.js:65
 msgid "Stop"
 msgstr "Стоп"
 
 #. radio@driglu4it->settings-schema.json->section1->title
 msgid "Radio"
-msgstr "Radio"
+msgstr "Радио"
 
 #. radio@driglu4it->settings-schema.json->page1->title
 #. radio@driglu4it->settings-schema.json->tree->description
@@ -49,9 +50,14 @@ msgstr "Название"
 msgid "URL"
 msgstr "URL"
 
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "Include of list"
+msgstr "Включить в список"
+
 #. radio@driglu4it->metadata.json->description
 msgid ""
 "This simple radio for Cinnamon. Require moc player. In setting you may add, "
 "edit and remove stations."
 msgstr ""
-"Простое радио для Cinnamon. Требует moc player. В настройках вы можете добавлять, редактировать и удалять станции."
+"Простое радио для Cinnamon. Требует moc player. В настройках вы можете "
+"добавлять, редактировать и удалять станции."
