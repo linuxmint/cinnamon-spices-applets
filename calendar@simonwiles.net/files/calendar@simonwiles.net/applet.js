@@ -13,6 +13,7 @@ const APPLET_DIR = imports.ui.appletManager.appletMeta[EXTENSION_UUID].path;
 const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
+const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
@@ -138,6 +139,8 @@ MyApplet.prototype = {
 
             this.settings.bindProperty(Settings.BindingDirection.IN, "use-custom-format", "use_custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+            Main.keybindingManager.addHotKey(EXTENSION_UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
             // Track changes to world-clock settings
             this.settings.bindProperty(Settings.BindingDirection.IN, "worldclocks", "worldclocks", addWorldClocks, null);
@@ -163,7 +166,14 @@ MyApplet.prototype = {
         }
     },
 
-    on_applet_clicked: function(event) {
+    _onKeySettingsUpdated: function() {
+        if (this.keybinding != null)
+            Main.keybindingManager.addHotKey(EXTENSION_UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+
+        this.on_applet_clicked;
+    },
+
+    on_applet_clicked: function() {
         this.menu.toggle();
     },
 
