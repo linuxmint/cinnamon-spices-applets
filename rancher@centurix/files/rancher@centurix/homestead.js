@@ -1,18 +1,25 @@
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
-const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
-const Util = AppletDir.util;
-const HomesteadYamlReader = AppletDir.homestead_yaml_reader;
-const TerminalReader = AppletDir.terminal_reader;
+let Util, HomesteadYamlReader, TerminalReader;
+if (typeof require !== 'undefined') {
+	Util = require('./util');
+	HomesteadYamlReader = require('./homestead_yaml_reader');
+	TerminalReader = require('./terminal_reader');
+} else {
+	const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
+	Util = AppletDir.util;
+	HomesteadYamlReader = AppletDir.homestead_yaml_reader;
+	TerminalReader = AppletDir.terminal_reader;
+}
 
-const STATUS_RUNNING = 0;
-const STATUS_SAVED = 1;
-const STATUS_POWER_OFF = 2;
-const STATUS_NOT_CREATED = 3;
-const STATUS_HOMESTEAD_MISSING = 4;
-const STATUS_KERNAL_NOT_LOADED = 5;
-const STATUS_VAGRANT_OUT_OF_DATE = 6;
+var STATUS_RUNNING = 0;
+var STATUS_SAVED = 1;
+var STATUS_POWER_OFF = 2;
+var STATUS_NOT_CREATED = 3;
+var STATUS_HOMESTEAD_MISSING = 4;
+var STATUS_KERNAL_NOT_LOADED = 5;
+var STATUS_VAGRANT_OUT_OF_DATE = 6;
 
 /**
  * Homestead/Vagrant manager
