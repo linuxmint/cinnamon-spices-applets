@@ -1,7 +1,7 @@
 const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
 
-var setTimeout = function(func, ms) {
+const setTimeout = function(func, ms) {
   let args = [];
   if (arguments.length > 2) {
     args = args.slice.call(arguments, 2);
@@ -15,11 +15,11 @@ var setTimeout = function(func, ms) {
   return id;
 };
 
-var clearTimeout = function(id) {
+const clearTimeout = function(id) {
   Mainloop.source_remove(id);
 };
 
-var setInterval = function(func, ms) {
+const setInterval = function(func, ms) {
   let args = [];
   if (arguments.length > 2) {
     args = args.slice.call(arguments, 2);
@@ -33,7 +33,7 @@ var setInterval = function(func, ms) {
   return id;
 };
 
-var clearInterval = function(id) {
+const clearInterval = function(id) {
   Mainloop.source_remove(id);
 };
 
@@ -60,7 +60,7 @@ function throttle(fn, interval, callFirst) {
   };
 }
 
-var t  = function(str) {
+const t  = function(str) {
   var resultConf = Gettext.dgettext('IcingTaskManager@json', str);
   if (resultConf != str) {
     return resultConf;
@@ -69,7 +69,7 @@ var t  = function(str) {
 };
 
 // Native objects such as CinnamonApps and MetaWindows stringify with a unique identifier.
-var isEqual = function(a, b) {
+const isEqual = function(a, b) {
   if (!a) {
     a = 'null';
   }
@@ -79,7 +79,7 @@ var isEqual = function(a, b) {
   return a.toString() === b.toString();
 };
 
-var each = function(obj, cb) {
+const each = function(obj, cb) {
   if (Array.isArray(obj)) {
     for (let i = 0, len = obj.length; i < len; i++) {
       let returnValue = cb(obj[i], i);
@@ -98,7 +98,7 @@ var each = function(obj, cb) {
   }
 };
 
-var findIndex = function(arr, cb) {
+const findIndex = function(arr, cb) {
   for (let i = 0, len = arr.length; i < len; i++) {
     if (cb(arr[i], i, arr)) {
       return i;
@@ -107,7 +107,7 @@ var findIndex = function(arr, cb) {
   return -1;
 }
 
-var find = function(arr, cb) {
+const find = function(arr, cb) {
   for (let i = 0, len = arr.length; i < len; i++) {
     if (cb(arr[i], i, arr)) {
       return arr[i];
@@ -116,7 +116,7 @@ var find = function(arr, cb) {
   return null;
 }
 
-var filter = function (arr, cb) {
+const filter = function (arr, cb) {
   let result = [];
   for (let i = 0, len = arr.length; i < len; i++) {
     if (cb(arr[i], i, arr)) {
@@ -126,7 +126,7 @@ var filter = function (arr, cb) {
   return result;
 };
 
-var map = function (arr, fn) {
+const map = function (arr, fn) {
   if (arr == null) {
     return [];
   }
@@ -141,7 +141,7 @@ var map = function (arr, fn) {
   return out;
 }
 
-var tryFn = function(fn, errCb) {
+const tryFn = function(fn, errCb) {
   try {
     return fn();
   } catch (e) {
@@ -151,7 +151,7 @@ var tryFn = function(fn, errCb) {
   }
 };
 
-var unref = function(object) {
+const unref = function(object) {
   // Some actors being destroyed have a cascading effect (e.g. PopupMenu items),
   // so it is safest to wait for the next 'tick' before removing references.
   setTimeout(() => {
@@ -164,7 +164,7 @@ var unref = function(object) {
   }, 0);
 };
 
-var getFocusState = function (metaWindow) {
+const getFocusState = function (metaWindow) {
   if (!metaWindow
     || metaWindow.minimized) {
     return false;
