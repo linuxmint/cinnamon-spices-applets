@@ -12,8 +12,9 @@ const SignalManager = imports.misc.signalManager;
 
 let GPaste; // Will be assigned in entry point
 
-let GPasteSearchItem, GPasteHistoryItem, GPasteHistoryListItem, GPasteNewItemDialog, GPasteNotInstalledDialog;
+let _, GPasteSearchItem, GPasteHistoryItem, GPasteHistoryListItem, GPasteNewItemDialog, GPasteNotInstalledDialog;
 if (typeof require !== 'undefined') {
+    _                        = require('./__init__')._;
     GPasteSearchItem         = require('./GPasteSearchItem');
     GPasteHistoryItem        = require('./GPasteHistoryItem');
     GPasteHistoryListItem    = require('./GPasteHistoryListItem');
@@ -21,6 +22,7 @@ if (typeof require !== 'undefined') {
     GPasteNotInstalledDialog = require('./GPasteNotInstalledDialog');
 } else {
     const AppletDir          = imports.ui.appletManager.applets[uuid];
+    _                        = AppletDir.__init__._;
     GPasteSearchItem         = AppletDir.GPasteSearchItem;
     GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
     GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
