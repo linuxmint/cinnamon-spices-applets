@@ -12,13 +12,23 @@ const SignalManager = imports.misc.signalManager;
 
 let GPaste; // Will be assigned in entry point
 
-const AppletDir                = imports.ui.appletManager.applets[uuid];
-const _                        = AppletDir.__init__._;
-const GPasteSearchItem         = AppletDir.GPasteSearchItem;
-const GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
-const GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
-const GPasteNewItemDialog      = AppletDir.GPasteNewItemDialog;
-const GPasteNotInstalledDialog = AppletDir.GPasteNotInstalledDialog;
+let _, GPasteSearchItem, GPasteHistoryItem, GPasteHistoryListItem, GPasteNewItemDialog, GPasteNotInstalledDialog;
+if (typeof require !== 'undefined') {
+    _                        = require('./__init__')._;
+    GPasteSearchItem         = require('./GPasteSearchItem');
+    GPasteHistoryItem        = require('./GPasteHistoryItem');
+    GPasteHistoryListItem    = require('./GPasteHistoryListItem');
+    GPasteNewItemDialog      = require('./GPasteNewItemDialog');
+    GPasteNotInstalledDialog = require('./GPasteNotInstalledDialog');
+} else {
+    const AppletDir          = imports.ui.appletManager.applets[uuid];
+    _                        = AppletDir.__init__._;
+    GPasteSearchItem         = AppletDir.GPasteSearchItem;
+    GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
+    GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
+    GPasteNewItemDialog      = AppletDir.GPasteNewItemDialog;
+    GPasteNotInstalledDialog = AppletDir.GPasteNotInstalledDialog;
+}
 
 //
 // Entry point
