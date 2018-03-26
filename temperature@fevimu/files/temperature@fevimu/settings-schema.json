@@ -8,5 +8,14 @@
         "type" : "switch",
         "default" : false,
         "description" : "Use integer values for temperature"
+    },
+    "interval": {
+        "type": "spinbutton",
+        "default": 5000,
+        "min": 2000,
+        "max": 30000,
+        "step": 1,
+        "units": "ms",
+        "description": "Update interval"
     }
 }
