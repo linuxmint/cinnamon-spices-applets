@@ -10,9 +10,15 @@ const Cairo = imports.cairo;
 const Gettext = imports.gettext;
 
 const uuid = 'download-and-upload-speed@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
-const CssStylization = AppletDirectory.cssStylization;
+let AppletConstants, CssStylization;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+    CssStylization = require('./cssStylization');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+    CssStylization = AppletDirectory.cssStylization;
+}
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
