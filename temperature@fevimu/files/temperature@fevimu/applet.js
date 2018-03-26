@@ -27,6 +27,7 @@ CPUTemperatureApplet.prototype = {
   _init: function(metadata, orientation, instance_id) {
     Applet.TextApplet.prototype._init.call(this, orientation, instance_id);
 
+    this.isLooping = true;
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
@@ -62,15 +63,18 @@ CPUTemperatureApplet.prototype = {
     this.set_applet_tooltip(_('Temperature'));
 
     this.updateTemperature();
+    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
 
   on_applet_clicked: function() {
+    Mainloop.source_remove(this.loopId);
+    this.loopId = 0;
     this.buildMenu(this.menuItems);
     this.menu.toggle();
   },
 
   on_applet_removed_from_panel: function() {
-    this.willUnmount = true;
+    this.isLooping = false;
     this.settings.finalize();
   },
 
@@ -105,11 +109,9 @@ CPUTemperatureApplet.prototype = {
   },
 
   updateTemperature: function() {
-    if (this.willUnmount) {
-      this.loopId = 0;
+    if (!this.isLooping) {
       return false;
     }
-
     let items = [];
     let tempInfo = null;
     if (this.sensorsPath) {
@@ -169,7 +171,8 @@ CPUTemperatureApplet.prototype = {
     } else {
       this.menuItems = items;
     }
-    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+
+    return true;
   },
 
   _findTemperatureFromFiles: function() {
