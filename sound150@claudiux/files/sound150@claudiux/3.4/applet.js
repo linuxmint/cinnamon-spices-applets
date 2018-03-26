@@ -264,6 +264,9 @@ VolumeSlider.prototype = {
             muted = true;
         } else {
             muted = false;
+            if (volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
+                volume = this.applet._volumeNominal;
+            }
         }
         this.stream.volume = volume;
         this.stream.push_volume();
@@ -278,8 +281,11 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
 
-        if (value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2)
+        if (value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
             value = 1; // 100% is magnetic
+            this.applet._output.volume = this.applet._volumeNominal;
+            this.applet._output.push_volume()
+        }
 
         let percentage = Math.round(value * 100) + "%";
 
@@ -1309,7 +1315,7 @@ MyApplet.prototype = {
                     this._output.change_is_muted(true);
             } else {
                 let quotient = this._output.volume/this._volumeNominal;
-                if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+                if (quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                     this._output.volume = this._volumeNominal; // 100% is magnetic
             }
             this._output.push_volume();
@@ -1317,7 +1323,7 @@ MyApplet.prototype = {
         else if (direction == Clutter.ScrollDirection.UP) {
             this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNominal * VOLUME_ADJUSTMENT_STEP);
             let quotient = this._output.volume/this._volumeNominal;
-            if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+            if (quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                 this._output.volume = this._volumeNominal; // 100% is magnetic
             this._output.push_volume();
             this._output.change_is_muted(false);

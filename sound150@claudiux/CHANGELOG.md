@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v1.4.0
+ * The 100% mark in sound settings becomes magnetic.
+ * The applet and sound settings sliders become synchronized.
+
 ### v1.3.4
  * This sound150@claudiux applet becomes multiversion:
    * Cinnamon **3.4** & **3.6** (Linux Mint **18.2** & **18.3**)
