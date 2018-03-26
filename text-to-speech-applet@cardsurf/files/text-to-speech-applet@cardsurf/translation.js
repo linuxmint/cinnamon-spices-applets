@@ -4,8 +4,13 @@ const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 
 const uuid = 'text-to-speech-applet@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const ShellUtils = AppletDirectory.shellUtils;
+let ShellUtils;
+if (typeof require !== 'undefined') {
+    ShellUtils = require('./shellUtils');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    ShellUtils = AppletDirectory.shellUtils;
+}
 
 
 

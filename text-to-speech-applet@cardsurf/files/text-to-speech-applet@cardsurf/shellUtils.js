@@ -138,8 +138,7 @@ BackgroundProcess.prototype = {
         	 this.command_argv,
         	 null,
         	 this.flags,
-             null,
-        	 null);
+             null);
 
         this.success = success;
         this.pid = pid;
