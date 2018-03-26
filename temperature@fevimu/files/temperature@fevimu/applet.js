@@ -160,7 +160,9 @@ CPUTemperatureApplet.prototype = {
       }
     }
 
-    this.set_applet_label(this.title);
+    if (this._applet_label.text !== this.title) {
+      this.set_applet_label(this.title);
+    }
 
     if (this.menu.isOpen) {
       this.buildMenu(items);
