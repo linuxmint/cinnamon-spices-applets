@@ -67,13 +67,13 @@ CPUTemperatureApplet.prototype = {
   },
 
   on_applet_clicked: function() {
-    Mainloop.source_remove(this.loopId);
-    this.loopId = 0;
     this.buildMenu(this.menuItems);
     this.menu.toggle();
   },
 
   on_applet_removed_from_panel: function() {
+    Mainloop.source_remove(this.loopId);
+    this.loopId = 0;
     this.isLooping = false;
     this.settings.finalize();
   },
