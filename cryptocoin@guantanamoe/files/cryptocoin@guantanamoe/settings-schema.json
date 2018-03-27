@@ -25,9 +25,14 @@
         "default" : true,
         "description" : "Ticker Name"
     },
-    "show-currency-name" : {
-        "type" : "checkbox",
-        "default" : false,
-        "description" : "Show Currency"
+    "show-currency" : {
+        "type" : "radiogroup",
+        "default" : "symbol",
+        "description" : "Show Currency",
+        "options": {
+            "Name": "name",
+            "Symbol": "symbol",
+            "None": null
+        }
     }
 }

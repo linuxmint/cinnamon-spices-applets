@@ -13,6 +13,9 @@ const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 const Soup = imports.gi.Soup;
 const Json = imports.ui.appletManager.applets[UUID].json_parse;
+const Accounting = imports.ui.appletManager.applets[UUID].accounting.accounting;
+
+const AppletDirectory = imports.ui.appletManager.appletMeta[UUID].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -42,8 +45,9 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "ticker", "ticker", this._update_settings, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-icon", "show_ticker_icon", this._update_settings, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-name", "show_ticker_name", this._update_settings, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "show-currency-name", "show_currency_name", this._update_settings, null);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "show-currency", "show_currency", this._update_settings, null);
 
+        this._loadCurrencies();
         this._update_settings();
     },
 
@@ -72,10 +76,22 @@ MyApplet.prototype = {
             this.set_applet_label('Error loading prices...');
             global.logError(response.Message);
         } else {
-            let name = this.show_ticker_name ? `${this.ticker}:` : '';
-            let currency_name = this.show_currency_name ? ` ${this.currency}` : '';
-            let message = `${name}${response[this.ticker][this.currency]}${currency_name}`;
-            this.set_applet_label(message);
+            let ticker_name = this.show_ticker_name ? `${this.ticker}:` : '';
+            var value = response[this.ticker][this.currency];
+            switch (this.show_currency) {
+                case 'symbol':
+                    let currency_config = Object.assign({
+                        symbol: '\u00A4',
+                        precision: 2
+                    }, this.currencies[this.currency]);
+                    value = Accounting.formatMoney(value, currency_config.symbol,
+                                                          currency_config.precision);
+                    break;
+                case 'name':
+                    value = `${value} ${this.currency}`;
+                    break;
+            }
+            this.set_applet_label(`${ticker_name}${value}`);
         }
     },
 
@@ -125,6 +141,12 @@ MyApplet.prototype = {
                 global.logWarning('Missing icon URL');
             }
         }
+    },
+
+    _loadCurrencies: function() {
+        let currenciesFile = Gio.file_new_for_path(`${AppletDirectory}/currencies.json`);
+        let contents = currenciesFile.load_contents(null)[1].toString();
+        this.currencies = JSON.parse(contents);
     },
 
     on_applet_removed_from_panel: function() {
