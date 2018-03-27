@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-17 20:00+0200\n"
+"POT-Creation-Date: 2018-03-26 04:16-0500\n"
 "PO-Revision-Date: 2017-09-17 20:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,11 +18,11 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:51
+#: applet.js:55
 msgid "Error"
 msgstr "Fehler"
 
-#: applet.js:52
+#: applet.js:56
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -30,11 +30,11 @@ msgstr ""
 "»sensors-detect« als Systemverwalter ausführen. Wenn dies nicht hilft, hier "
 "klicken um einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
 
-#: applet.js:55
+#: applet.js:58
 msgid "Warning"
 msgstr "Warnung"
 
-#: applet.js:56
+#: applet.js:59
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -42,26 +42,46 @@ msgstr ""
 "Bitte »lm-sensors« installieren. Wenn dies nicht hilft, hier klicken um "
 "einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
 
-#: applet.js:60 applet.js:140 applet.js:171
+#: applet.js:62 applet.js:89
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: applet.js:129
-msgid "Current Temperature : "
-msgstr "Aktuelle Temperatur: "
+#: applet.js:144
+msgid "Critical"
+msgstr ""
 
-#: applet.js:131
-msgid "Critical Temperature : "
-msgstr "Kritische Temperatur: "
+#: applet.js:146
+msgid "High"
+msgstr ""
 
-#. temperature@fevimu->metadata.json->description
-msgid "Shows CPU Temperature"
-msgstr "Zeigt die CPU-Temperatur an"
+#: applet.js:156
+msgid "Current Temperature"
+msgstr "Aktuelle Temperatur"
 
-#. temperature@fevimu->metadata.json->name
+#: applet.js:158
+msgid "Critical Temperature"
+msgstr "Kritische Temperatur"
+
+#. metadata.json->name
 msgid "CPU Temperature Indicator"
 msgstr "CPU-Temperaturanzeige"
 
-#. temperature@fevimu->settings-schema.json->use-fahrenheit->description
+#. metadata.json->description
+msgid "Shows CPU Temperature"
+msgstr "Zeigt die CPU-Temperatur an"
+
+#. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
 msgstr "Temperatur in Fahrenheit anzeigen"
+
+#. settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr ""
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr ""
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr ""
