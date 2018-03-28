@@ -946,9 +946,12 @@ CinnamenuApplet.prototype = {
       });
       return dirs;
     };
-    // Load 'all applications' category
-    addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
-
+    if (this.state.orientation !== St.Side.BOTTOM) {
+        // Load 'favorite applications' category
+        addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons);
+        // Load 'all applications' category
+        addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
+    }
     let trees = [this.appSystem.get_tree()];
     for (let i = 0, len = trees.length; i < len; i++) {
       let tree = trees[i];
@@ -976,6 +979,12 @@ CinnamenuApplet.prototype = {
         }
       }
     }
+    if (this.state.orientation === St.Side.BOTTOM) {
+        // Load 'all applications' category
+        addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
+        // Load 'favorite applications' category
+        addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons);
+    }
     // Load 'places' category
     if (this.state.settings.showPlaces) {
       addTo(new CategoryListButton(this.state, 'places', _('Places'), 'folder', '_selectAllPlaces'), this.categoriesBox, this.categoryButtons)
@@ -988,8 +997,6 @@ CinnamenuApplet.prototype = {
     if (this.state.settings.enableBookmarks) {
       addTo(new CategoryListButton(this.state, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'), this.categoriesBox, this.categoryButtons)
     }
-    // Load 'favorite applications' category
-    addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons)
   },
 
   _selectCategory: function(categoryId) {
