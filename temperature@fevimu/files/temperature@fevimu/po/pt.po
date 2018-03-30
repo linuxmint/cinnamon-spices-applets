@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-26 04:16-0500\n"
-"PO-Revision-Date: 2017-11-29 22:58+0200\n"
+"PO-Revision-Date: 2018-03-30 12:11+0100\n"
 "Last-Translator: André Silva <asilva_sc@hotmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -47,11 +47,11 @@ msgstr "Temperatura"
 
 #: applet.js:144
 msgid "Critical"
-msgstr ""
+msgstr "Crítica"
 
 #: applet.js:146
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: applet.js:156
 msgid "Current Temperature"
@@ -79,8 +79,8 @@ msgstr "Usar valores inteiros para a temperatura"
 
 #. settings-schema.json->interval->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. settings-schema.json->interval->description
 msgid "Update interval"
-msgstr ""
+msgstr "Intervalo de atualização"
