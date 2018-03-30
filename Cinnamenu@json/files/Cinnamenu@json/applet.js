@@ -272,6 +272,14 @@ CinnamenuApplet.prototype = {
         this.refresh();
       });
 
+      this.panelEditModeChangedId = global.settings.connect('changed::panel-edit-mode', Lang.bind(this, function() {
+         if (!global.settings.get_boolean('panel-edit-mode')) {
+            this.state.orientation = this._orientation;
+            let list_of_enabled_applets = global.settings.get_strv("enabled-applets");
+            this.refresh();
+         }
+      }));
+
       // FS search
       this._fileFolderAccessActive = false;
       this._pathCompleter = new Gio.FilenameCompleter();
@@ -454,6 +462,7 @@ CinnamenuApplet.prototype = {
 
   on_applet_removed_from_panel: function() {
     Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
+    global.settings.disconnect(this.panelEditModeChangedId);
     if (!this.settings) {
       return;
     }
@@ -704,6 +713,11 @@ CinnamenuApplet.prototype = {
       cb: this._updateIconAndLabel
     },
     {
+      key: 'fav_and_all_apps_pos',
+      value: 'favAndAllAppsPos',
+      cb: this.refresh
+    },
+    {
       key: 'startup-view-mode',
       value: 'startupViewMode',
       cb: this.refresh
@@ -946,9 +960,12 @@ CinnamenuApplet.prototype = {
       });
       return dirs;
     };
-    // Load 'all applications' category
-    addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
-
+    if (this.state.settings["favAndAllAppsPos"] === 0 || this.state.orientation !== St.Side.BOTTOM) {
+        // Load 'favorite applications' category
+        addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons);
+        // Load 'all applications' category
+        addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
+    }
     let trees = [this.appSystem.get_tree()];
     for (let i = 0, len = trees.length; i < len; i++) {
       let tree = trees[i];
@@ -976,6 +993,12 @@ CinnamenuApplet.prototype = {
         }
       }
     }
+    if (this.state.settings["favAndAllAppsPos"] === 1 && this.state.orientation === St.Side.BOTTOM) {
+        // Load 'all applications' category
+        addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
+        // Load 'favorite applications' category
+        addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons);
+    }
     // Load 'places' category
     if (this.state.settings.showPlaces) {
       addTo(new CategoryListButton(this.state, 'places', _('Places'), 'folder', '_selectAllPlaces'), this.categoriesBox, this.categoryButtons)
@@ -988,8 +1011,6 @@ CinnamenuApplet.prototype = {
     if (this.state.settings.enableBookmarks) {
       addTo(new CategoryListButton(this.state, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'), this.categoriesBox, this.categoryButtons)
     }
-    // Load 'favorite applications' category
-    addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons)
   },
 
   _selectCategory: function(categoryId) {
