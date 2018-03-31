@@ -24,7 +24,7 @@ const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, sortBy, setTimeout, tryFn, map, find, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, sortBy, setTimeout, tryFn, find, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -37,7 +37,6 @@ if (typeof require !== 'undefined') {
   sortBy = utils.sortBy;
   setTimeout = utils.setTimeout;
   tryFn = utils.tryFn;
-  map = utils.map;
   find = utils.find;
   sortDirs = utils.sortDirs;
   Chromium = require('./webChromium');
@@ -63,7 +62,6 @@ if (typeof require !== 'undefined') {
   sortBy = AppletDir.utils.sortBy;
   setTimeout = AppletDir.utils.setTimeout;
   tryFn = AppletDir.utils.tryFn;
-  map = AppletDir.utils.map;
   find = AppletDir.utils.find;
   sortDirs = AppletDir.utils.sortDirs;
   Chromium = AppletDir.webChromium;
@@ -821,15 +819,9 @@ CinnamenuApplet.prototype = {
 
   introspectTheme: function(cb) {
     let appletMenuThemeNode = this.menu.actor.get_theme_node();
-    let mainBoxThemeNode = this.mainBox.get_theme_node();
     this.state.set({
-      theme: {
-        backgroundColor: appletMenuThemeNode.get_background_color().to_string().substring(0, 7),
+      theme: { // TODO: Find a proper class for button app state dots
         foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7),
-        borderColor: appletMenuThemeNode.get_border_color(St.Side.TOP).to_string().substring(0, 7),
-        mainBoxBorderColor: mainBoxThemeNode.get_foreground_color().to_string().substring(0, 7),
-        borderRadius: appletMenuThemeNode.get_border_radius(St.Corner.TOPRIGHT),
-        padding: mainBoxThemeNode.get_padding(St.Side.TOP),
       }
     });
     if (typeof cb === 'function') {

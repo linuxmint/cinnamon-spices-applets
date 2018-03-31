@@ -123,7 +123,6 @@ CategoryListButton.prototype = {
       } else {
         this.icon_name = altIconName;
         icon = altIconName;
-        global.log(dir, altNameText, altIconName, selectorMethod)
         this.icon = new St.Icon({
           icon_name: icon,
           icon_size: this.state.settings.categoryIconSize,
@@ -621,12 +620,8 @@ AppListGridButton.prototype = {
     // Context menu
     if (this.buttonState.appType === ApplicationType._applications) {
       this.menu = new PopupMenu.PopupSubMenu(this.actor);
-      this.menu.actor.set_style_class_name('menu-context-menu');
-      this.menu.actor.set_opacity(240)
-      if (this.state.theme) {
-        this.menu.box.set_style('background-color: ' + this.state.theme.backgroundColor + '; border: 1px solid' + this.state.theme.borderColor
-        + '; border-radius: ' + this.state.theme.borderRadius + 'px; padding-top: ' + this.state.theme.padding + 'px; padding-bottom: ' + this.state.theme.padding + 'px;');
-      }
+      this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
+      this.menu.actor.set_opacity(245)
       this.menu.isOpen = false;
       this.buttonBox.add_actor(this.menu.actor);
     } else {
