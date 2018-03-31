@@ -24,7 +24,7 @@ const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, sortBy, setTimeout, tryFn, find, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, sortBy, setTimeout, tryFn, find, map, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -38,6 +38,7 @@ if (typeof require !== 'undefined') {
   setTimeout = utils.setTimeout;
   tryFn = utils.tryFn;
   find = utils.find;
+  map = utils.map;
   sortDirs = utils.sortDirs;
   Chromium = require('./webChromium');
   Firefox = require('./webFirefox');
@@ -63,6 +64,7 @@ if (typeof require !== 'undefined') {
   setTimeout = AppletDir.utils.setTimeout;
   tryFn = AppletDir.utils.tryFn;
   find = AppletDir.utils.find;
+  map = AppletDir.utils.map;
   sortDirs = AppletDir.utils.sortDirs;
   Chromium = AppletDir.webChromium;
   Firefox = AppletDir.webFirefox;
@@ -941,6 +943,9 @@ CinnamenuApplet.prototype = {
   },
 
   resetCategoryOrder: function() {
+    if (!this.categoriesBox) {
+      return;
+    }
     this.categoriesBox.remove_all_children();
     this.settings.setValue('categories', []);
     this._buildCategories();
@@ -1009,6 +1014,9 @@ CinnamenuApplet.prototype = {
       } else { // TODO: Use spread operator after versioning for 3.8
         buttons.push(new CategoryListButton(this.state, params[i][1], params[i][2], params[i][3], params[i][4]));
       }
+    }
+    if (this.state.settings.categories.length === 0) {
+      this.settings.setValue('categories', map(buttons, (button) => button.id));
     }
     this.categoryButtons = [];
     for (let i = 0; i < this.state.settings.categories.length; i++) {
