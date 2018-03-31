@@ -1019,6 +1019,15 @@ CinnamenuApplet.prototype = {
       this.settings.setValue('categories', map(buttons, (button) => button.id));
     }
     this.categoryButtons = [];
+    // If a category option is enabled after the settings are set, or an application is installed
+    // using a new category, we need to update the category order settings so it will render.
+    if (buttons.length !== this.state.settings.categories.length) {
+      for (let i = 0; i < buttons.length; i++) {
+        if (this.state.settings.categories.indexOf(buttons[i].id) === -1) {
+          this.state.settings.categories.push(buttons[i].id);
+        }
+      }
+    }
     for (let i = 0; i < this.state.settings.categories.length; i++) {
       let button = find(buttons, (button) => button.id === this.state.settings.categories[i]);
       if (!button) {

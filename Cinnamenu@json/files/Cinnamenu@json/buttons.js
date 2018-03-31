@@ -97,7 +97,7 @@ CategoryListButton.prototype = {
     this._dir = dir;
     let isStrDir = typeof dir === 'string';
     let dirName = !isStrDir ? dir.get_name() : null;
-    this.id = isString(this._dir) ? this._dir : this._dir.get_menu_id(); // <-
+    this.id = isString(this._dir) ? this._dir : altNameText;
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
     this.entered = null;
