@@ -142,7 +142,8 @@ CategoryListButton.prototype = {
 
     this.actor._delegate = {
       handleDragOver: (source, actor, x, y, time) => {
-        if (source.index === this.index) {
+        if (!source.index
+          || source.index === this.index) {
           return DND.DragMotionResult.NO_DROP;
         }
         this.state.set({dragIndex: this.index});
@@ -150,7 +151,8 @@ CategoryListButton.prototype = {
         return DND.DragMotionResult.MOVE_DROP;
       },
       acceptDrop: (source, actor, x, y, time) => {
-        if (source.index === this.index) {
+        if (!source.index
+          || source.index === this.index) {
           this.state.set({dragIndex: -1});
           return DND.DragMotionResult.NO_DROP;
         }
