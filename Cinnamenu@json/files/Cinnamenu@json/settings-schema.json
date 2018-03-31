@@ -76,7 +76,9 @@
         "show-places",
         "enable-bookmarks",
         "privacy-settings-button",
-        "menu-editor-button"
+        "menu-editor-button",
+        "resetCategoryOrder-button",
+        "categories"
       ]
     },
     "menu-icons": {
@@ -91,6 +93,10 @@
       ]
     }
   },
+  "categories": {
+    "type": "generic",
+    "default": []
+  },
   "privacy-settings-button": {
     "type": "button",
     "description": "Toggle recent files",
@@ -102,6 +108,11 @@
     "description": "Open the menu editor",
     "callback": "launchEditor",
     "tooltip": "Press this button to customize your menu entries."
+  },
+  "resetCategoryOrder-button": {
+    "type": "button",
+    "description": "Reset category order",
+    "callback": "resetCategoryOrder"
   },
   "menu-icon-custom": {
     "type": "checkbox",

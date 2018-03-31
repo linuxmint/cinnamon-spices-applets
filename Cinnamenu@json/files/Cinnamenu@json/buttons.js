@@ -70,23 +70,34 @@ CategoryListButton.prototype = {
       activate: false
     });
     this.state = state;
-    this.connectId = this.state.connect({
-      menuOpened: () => {
-        if (this.id === 'favorites') {
-          this.actor.set_style_class_name('menu-category-button-selected')
+    this.connectIds = [
+      this.state.connect({
+        menuOpened: () => {
+          if (this.id === 'favorites') {
+            this.actor.set_style_class_name('menu-category-button-selected')
+          }
         }
-      }
-    });
+      }),
+      this.state.connect({
+        dragIndex: () => {
+          if (this.state.dragIndex !== this.index
+            && this.actor.opacity === 50) {
+            this.actor.set_opacity(255);
+          }
+        }
+      })
+    ];
     this.signals = new SignalManager.SignalManager(null);
     if (!selectorMethod) {
       selectorMethod = '_selectCategory';
     }
     this.selectorMethod = selectorMethod;
 
+    this.index = -1;
     this._dir = dir;
     let isStrDir = typeof dir === 'string';
     let dirName = !isStrDir ? dir.get_name() : null;
-    this.id = isString(this._dir) ? this._dir : this._dir.get_menu_id();
+    this.id = isString(this._dir) ? this._dir : this._dir.get_menu_id(); // <-
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
     this.entered = null;
@@ -112,6 +123,7 @@ CategoryListButton.prototype = {
       } else {
         this.icon_name = altIconName;
         icon = altIconName;
+        global.log(dir, altNameText, altIconName, selectorMethod)
         this.icon = new St.Icon({
           icon_name: icon,
           icon_size: this.state.settings.categoryIconSize,
@@ -129,10 +141,59 @@ CategoryListButton.prototype = {
     this.addActor(this.label);
     this.label.realize();
 
+    this.actor._delegate = {
+      handleDragOver: (source, actor, x, y, time) => {
+        if (source.index === this.index) {
+          return DND.DragMotionResult.NO_DROP;
+        }
+        this.state.set({dragIndex: this.index});
+        this.actor.set_opacity(50);
+        return DND.DragMotionResult.MOVE_DROP;
+      },
+      acceptDrop: (source, actor, x, y, time) => {
+        if (source.index === this.index) {
+          this.state.set({dragIndex: -1});
+          return DND.DragMotionResult.NO_DROP;
+        }
+        this.state.trigger('moveCategoryToPos', source.id, this.id);
+        return true;
+      },
+      getDragActorSource: () => this.actor,
+      _getDragActor: () => new Clutter.Clone({source: this.actor}),
+      getDragActor: () => new Clutter.Clone({source: this.icon}),
+      isDraggableApp: false,
+      index: this.index,
+      id: this.id
+    };
+
+    this._draggable = DND.makeDraggable(this.actor);
+
     // Connect signals
+    this.signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
+    this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
+    this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
     this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this.handleButtonRelease));
+  },
+
+  _onDragBegin: function() {
+    this.actor.set_opacity(51);
+  },
+
+  _onDragCancelled: function () {
+    this.actor.set_opacity(255);
+  },
+
+  _onDragEnd: function() {
+    this.actor.set_opacity(255);
+  },
+
+  _clearDragPlaceholder: function () {
+    if (this.state.dragPlaceholder) {
+      this.state.dragPlaceholder.destroy();
+      this.state.dragPlaceholder = null;
+    }
   },
 
   selectCategory: function() {
@@ -202,6 +263,9 @@ CategoryListButton.prototype = {
   },
 
   destroy: function() {
+    for (let i = 0; i < this.connectIds.length; i++) {
+      this.state.disconnect(this.connectIds[i]);
+    }
     this.signals.disconnectAllSignals();
     this.label.destroy();
     if (this.icon) {
@@ -390,7 +454,8 @@ AppListGridButton.prototype = {
     }
     this.actor._delegate = {
       handleDragOver: (source, actor, x, y, time) => {
-        if (source.appIndex === this.buttonState.appIndex
+        if (!source.appIndex
+          || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
           return DND.DragMotionResult.NO_DROP;
         }
@@ -401,7 +466,8 @@ AppListGridButton.prototype = {
         return DND.DragMotionResult.MOVE_DROP;
       },
       acceptDrop: (source, actor, x, y, time) => {
-        if (source.appIndex === this.buttonState.appIndex
+        if (!source.appIndex
+          || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
           this.state.set({dragIndex: -1});
           return DND.DragMotionResult.NO_DROP;

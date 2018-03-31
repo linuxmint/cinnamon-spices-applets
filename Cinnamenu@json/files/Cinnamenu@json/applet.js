@@ -24,7 +24,7 @@ const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, isEqual, sortBy, setTimeout, tryFn, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, sortBy, setTimeout, tryFn, map, find, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -34,10 +34,12 @@ if (typeof require !== 'undefined') {
   let constants = require('./constants');
   store = require('./store');
   fuzzy = require('./fuzzy').fuzzy;
-  isEqual = utils.isEqual;
   sortBy = utils.sortBy;
   setTimeout = utils.setTimeout;
   tryFn = utils.tryFn;
+  map = utils.map;
+  find = utils.find;
+  sortDirs = utils.sortDirs;
   Chromium = require('./webChromium');
   Firefox = require('./webFirefox');
   GoogleChrome = require('./webGoogleChrome');
@@ -58,10 +60,12 @@ if (typeof require !== 'undefined') {
   let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
   store = AppletDir[storeVersion];
   fuzzy = AppletDir.fuzzy.fuzzy;
-  isEqual = AppletDir.utils.isEqual;
   sortBy = AppletDir.utils.sortBy;
   setTimeout = AppletDir.utils.setTimeout;
   tryFn = AppletDir.utils.tryFn;
+  map = AppletDir.utils.map;
+  find = AppletDir.utils.find;
+  sortDirs = AppletDir.utils.sortDirs;
   Chromium = AppletDir.webChromium;
   Firefox = AppletDir.webFirefox;
   GoogleChrome = AppletDir.webGoogleChrome;
@@ -79,11 +83,6 @@ if (typeof require !== 'undefined') {
   gridWidths = AppletDir.constants.gridWidths;
 }
 
-const addTo = function(instance, container, array) {
-  array.push(instance);
-  container.add_actor(instance.actor);
-};
-
 const hintText = _('Type to search...');
 
 /**
@@ -98,7 +97,7 @@ function bookmarksManager() {
 
 bookmarksManager.prototype = {
 
-  _init: function () {
+  _init: function() {
     let bookmarks = Chromium._readBookmarks()
       .concat(Firefox._readProfiles())
       .concat(GoogleChrome._readBookmarks())
@@ -124,7 +123,7 @@ bookmarksManager.prototype = {
     this.arrKeys = Object.keys(this.state);
   },
 
-  destroy: function () {
+  destroy: function() {
     Chromium._reset();
     Firefox._reset();
     GoogleChrome._reset();
@@ -235,6 +234,28 @@ CinnamenuApplet.prototype = {
             return false;
           });
         },
+        moveCategoryToPos: (id1, id2) => {
+          let categories = this.state.settings.categories.slice();
+          let oldIndex = categories.indexOf(id1);
+          let newIndex = categories.indexOf(id2);
+          categories.splice(oldIndex, 1);
+          let categories1 = categories.slice(0, newIndex);
+          let categories2 = categories.slice(newIndex, categories.length);
+          categories = categories1.concat([id1]).concat(categories2);
+          this.settings.setValue(
+            'categories',
+            categories
+          );
+          this.state.set({dragIndex: -1});
+          this._buildCategories();
+          for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
+            if (this.categoryButtons[i].id === id2) {
+              this.categoryButtons[i].handleEnter();
+            } else if (this.categoryButtons[i].entered) {
+              this.categoryButtons[i].handleLeave();
+            }
+          }
+        },
         removeFavorite: (id) => this.appFavorites.removeFavorite(id),
         switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
         setSettingsValue: (k, v) => this.settings.setValue(k, v),
@@ -283,7 +304,7 @@ CinnamenuApplet.prototype = {
 
       this._iconTheme = Gtk.IconTheme.get_default();
       this.signals.connect(this._iconTheme, 'changed', Lang.bind(this, this._onIconsChanged));
-      this.signals.connect(this.appSystem, 'installed-changed', Lang.bind(this, this._onAppInstalledChanged));
+      this.signals.connect(this.appSystem, 'installed-changed', Lang.bind(this, this.refresh));
       this.signals.connect(this.appFavorites, 'changed', Lang.bind(this, this._onFavoritesChanged));
       this.signals.connect(this.menu, 'open-state-changed', Lang.bind(this, this._onOpenStateToggled));
 
@@ -473,16 +494,20 @@ CinnamenuApplet.prototype = {
     Util.spawnCommandLine('cinnamon-settings privacy');
   },
 
-  launchEditor: function () {
+  launchEditor: function() {
     Util.spawnCommandLine('cinnamon-menu-editor');
   },
 
   _updateKeybinding: function() {
-    Main.keybindingManager.addHotKey('overlay-key-' + this.instance_id, this.state.settings.overlayKey, Lang.bind(this, function() {
-      if (!Main.overview.visible && !Main.expo.visible) {
-        this.menu.toggle_with_options(this.state.settings.enableAnimation);
+    Main.keybindingManager.addHotKey(
+      'overlay-key-' + this.instance_id,
+      this.state.settings.overlayKey,
+      () => {
+        if (!Main.overview.visible && !Main.expo.visible) {
+          this.menu.toggle_with_options(this.state.settings.enableAnimation);
+        }
       }
-    }));
+    );
   },
 
   _updateIconAndLabel: function() {
@@ -571,11 +596,6 @@ CinnamenuApplet.prototype = {
     }
   },
 
-  // handler for when new application installed
-  _onAppInstalledChanged: function() {
-    this.refresh();
-  },
-
   // handler for when favorites change
   _onFavoritesChanged: function() {
     this.state.set({favorites: this.appFavorites.getFavorites()});
@@ -640,139 +660,146 @@ CinnamenuApplet.prototype = {
 
   // function to bind preference setting changes
   _bindSettingsChanges: function() {
-    let settingsProps = [{
-      key: 'menu-icon-custom',
-      value: 'menuIconCustom',
-      cb: this._updateIconAndLabel
-    },
-    {
-      key: 'menu-icon',
-      value: 'menuIcon',
-      cb: this._updateIconAndLabel
-    },
-    {
-      key: 'activate-on-hover',
-      value: 'activateOnHover',
-      cb: this._updateActivateOnHover
-    },
-    {
-      key: 'hover-delay',
-      value: 'hoverDelayMs',
-      cb: () => {
-        this._updateActivateOnHover(false);
-        this._updateActivateOnHover(true);
+    let settingsProps = [
+      {
+        key: 'categories',
+        value: 'categories',
+        cb: null
+      },
+      {
+        key: 'menu-icon-custom',
+        value: 'menuIconCustom',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'menu-icon',
+        value: 'menuIcon',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'activate-on-hover',
+        value: 'activateOnHover',
+        cb: this._updateActivateOnHover
+      },
+      {
+        key: 'hover-delay',
+        value: 'hoverDelayMs',
+        cb: () => {
+          this._updateActivateOnHover(false);
+          this._updateActivateOnHover(true);
+        }
+      },
+      {
+        key: 'overlay-key',
+        value: 'overlayKey',
+        cb: this._updateKeybinding
+      },
+      {
+        key: 'enable-animation',
+        value: 'enableAnimation',
+        cb: null
+      },
+      {
+        key: 'category-click',
+        value: 'categoryClick',
+        cb: null
+      },
+      {
+        key: 'enable-autoscroll',
+        value: 'enableAutoScroll',
+        cb: this.refresh
+      },
+      {
+        key: 'enable-bookmarks',
+        value: 'enableBookmarks',
+        cb: this.onEnableBookmarksChange
+      },
+      {
+        key: 'enable-windows',
+        value: 'enableWindows',
+        cb: null
+      },
+      {
+        key: 'enable-search-providers',
+        value: 'enableSearchProviders',
+        cb: null
+      },
+      {
+        key: 'menu-label',
+        value: 'menuLabel',
+        cb: this._updateIconAndLabel
+      },
+      {
+        key: 'startup-view-mode',
+        value: 'startupViewMode',
+        cb: this.refresh
+      },
+      {
+        key: 'apps-grid-column-count',
+        value: 'appsGridColumnCount',
+        cb: this.refresh
+      },
+      {
+        key: 'category-icon-size',
+        value: 'categoryIconSize',
+        cb: this.refresh
+      },
+      {
+        key: 'apps-list-icon-size',
+        value: 'appsListIconSize',
+        cb: this.refresh
+      },
+      {
+        key: 'apps-grid-icon-size',
+        value: 'appsGridIconSize',
+        cb: this.refresh
+      },
+      {
+        key: 'show-places',
+        value: 'showPlaces',
+        cb: this.refresh
+      },
+      {
+        key: 'show-application-icons',
+        value: 'showApplicationIcons',
+        cb: this.refresh
+      },
+      {
+        key: 'show-category-icons',
+        value: 'showCategoryIcons',
+        cb: this.refresh
+      },
+      {
+        key: 'search-filesystem',
+        value: 'searchFilesystem',
+        cb: this.refresh
+      },
+      {
+        key: 'show-apps-description-on-buttons',
+        value: 'showAppDescriptionsOnButtons',
+        cb: this.refresh
+      },
+      {
+        key: 'show-tooltips',
+        value: 'showTooltips',
+        cb: null
+      },
+      {
+        key: 'tooltip-delay',
+        value: 'tooltipDelay',
+        cb: null
+      },
+      {
+        key: 'enable-custom-menu-height',
+        value: 'enableCustomMenuHeight',
+        cb: this.customMenuHeightChange
+      },
+      {
+        key: 'custom-menu-height',
+        value: 'customMenuHeight',
+        cb: this.customMenuHeightChange
       }
-    },
-    {
-      key: 'overlay-key',
-      value: 'overlayKey',
-      cb: this._updateKeybinding
-    },
-    {
-      key: 'enable-animation',
-      value: 'enableAnimation',
-      cb: null
-    },
-    {
-      key: 'category-click',
-      value: 'categoryClick',
-      cb: null
-    },
-    {
-      key: 'enable-autoscroll',
-      value: 'enableAutoScroll',
-      cb: this.refresh
-    },
-    {
-      key: 'enable-bookmarks',
-      value: 'enableBookmarks',
-      cb: this.onEnableBookmarksChange
-    },
-    {
-      key: 'enable-windows',
-      value: 'enableWindows',
-      cb: null
-    },
-    {
-      key: 'enable-search-providers',
-      value: 'enableSearchProviders',
-      cb: null
-    },
-    {
-      key: 'menu-label',
-      value: 'menuLabel',
-      cb: this._updateIconAndLabel
-    },
-    {
-      key: 'startup-view-mode',
-      value: 'startupViewMode',
-      cb: this.refresh
-    },
-    {
-      key: 'apps-grid-column-count',
-      value: 'appsGridColumnCount',
-      cb: this.refresh
-    },
-    {
-      key: 'category-icon-size',
-      value: 'categoryIconSize',
-      cb: this.refresh
-    },
-    {
-      key: 'apps-list-icon-size',
-      value: 'appsListIconSize',
-      cb: this.refresh
-    },
-    {
-      key: 'apps-grid-icon-size',
-      value: 'appsGridIconSize',
-      cb: this.refresh
-    },
-    {
-      key: 'show-places',
-      value: 'showPlaces',
-      cb: this.refresh
-    },
-    {
-      key: 'show-application-icons',
-      value: 'showApplicationIcons',
-      cb: this.refresh
-    },
-    {
-      key: 'show-category-icons',
-      value: 'showCategoryIcons',
-      cb: this.refresh
-    },
-    {
-      key: 'search-filesystem',
-      value: 'searchFilesystem',
-      cb: this.refresh
-    },
-    {
-      key: 'show-apps-description-on-buttons',
-      value: 'showAppDescriptionsOnButtons',
-      cb: this.refresh
-    },
-    {
-      key: 'show-tooltips',
-      value: 'showTooltips',
-      cb: null
-    },
-    {
-      key: 'tooltip-delay',
-      value: 'tooltipDelay',
-      cb: null
-    },
-    {
-      key: 'enable-custom-menu-height',
-      value: 'enableCustomMenuHeight',
-      cb: this.customMenuHeightChange
-    },
-    {
-      key: 'custom-menu-height',
-      value: 'customMenuHeight',
-      cb: this.customMenuHeightChange
-    }]
+    ];
 
     for (let i = 0; i < this.state.knownProviders.length; i++) {
       let provider = this.state.knownProviders[i];
@@ -795,17 +822,18 @@ CinnamenuApplet.prototype = {
   introspectTheme: function(cb) {
     let appletMenuThemeNode = this.menu.actor.get_theme_node();
     let mainBoxThemeNode = this.mainBox.get_theme_node();
-    this.state.set({theme: {
-      backgroundColor: appletMenuThemeNode.get_background_color().to_string().substring(0, 7),
-      foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7),
-      borderColor: appletMenuThemeNode.get_border_color(St.Side.TOP).to_string().substring(0, 7),
-      mainBoxBorderColor: mainBoxThemeNode.get_foreground_color().to_string().substring(0, 7),
-      borderRadius: appletMenuThemeNode.get_border_radius(St.Corner.TOPRIGHT),
-      padding: mainBoxThemeNode.get_padding(St.Side.TOP),
-    }});
+    this.state.set({
+      theme: {
+        backgroundColor: appletMenuThemeNode.get_background_color().to_string().substring(0, 7),
+        foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7),
+        borderColor: appletMenuThemeNode.get_border_color(St.Side.TOP).to_string().substring(0, 7),
+        mainBoxBorderColor: mainBoxThemeNode.get_foreground_color().to_string().substring(0, 7),
+        borderRadius: appletMenuThemeNode.get_border_radius(St.Corner.TOPRIGHT),
+        padding: mainBoxThemeNode.get_padding(St.Side.TOP),
+      }
+    });
     if (typeof cb === 'function') {
       cb();
-      //Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, cb);
     }
   },
 
@@ -876,7 +904,7 @@ CinnamenuApplet.prototype = {
     let children = this._activeContainer.get_children();
     for (let i = 0; i < children.length; i++) {
       buttons.push(store.queryCollection(this._allItems, function(button) {
-        return button && isEqual(button.actor, children[i])
+        return button && button.actor === children[i];
       }));
     }
     return buttons;
@@ -920,34 +948,21 @@ CinnamenuApplet.prototype = {
     }
   },
 
-  _buildCategories: function () {
-    let sortDirs = (dirs) => {
-      dirs.sort(function(a, b) {
-        let prefCats = ['administration', 'preferences'];
-        let menuIdA = a.get_menu_id().toLowerCase();
-        let menuIdB = b.get_menu_id().toLowerCase();
-        let prefIdA = prefCats.indexOf(menuIdA);
-        let prefIdB = prefCats.indexOf(menuIdB);
-        if (prefIdA < 0 && prefIdB >= 0) {
-          return -1;
-        }
-        if (prefIdA >= 0 && prefIdB < 0) {
-          return 1;
-        }
-        let nameA = a.get_name().toLowerCase();
-        let nameB = b.get_name().toLowerCase();
-        if (nameA > nameB) {
-          return 1;
-        }
-        if (nameA < nameB) {
-          return -1;
-        }
-        return 0;
-      });
-      return dirs;
-    };
-    // Load 'all applications' category
-    addTo(new CategoryListButton(this.state, 'all', _('All Applications'), 'computer'), this.categoriesBox, this.categoryButtons)
+  resetCategoryOrder: function() {
+    this.categoriesBox.remove_all_children();
+    this.settings.setValue('categories', []);
+    this._buildCategories();
+  },
+
+  _buildCategories: function() {
+    let isReRender = this.categoryButtons.length > 0;
+    let buttons = [];
+    if (isReRender) {
+      this.categoriesBox.remove_all_children();
+      buttons.push(find(this.categoryButtons, button => button.id === 'all'));
+    } else {
+      buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
+    }
 
     let trees = [this.appSystem.get_tree()];
     for (let i = 0, len = trees.length; i < len; i++) {
@@ -971,25 +986,49 @@ CinnamenuApplet.prototype = {
         this.applicationsByCategory[dirId] = [];
         this._loadAppCategories(dir, null, dirId);
         if (this.applicationsByCategory[dirId].length > 0) {
-          this.categoryButtons.push(new CategoryListButton(this.state, dir, dirId));
-          this.categoriesBox.add_actor(this.categoryButtons[this.categoryButtons.length - 1].actor);
+          if (isReRender) {
+            let button = find(this.categoryButtons, button => button.id === dirId);
+            if (!button) {
+              continue;
+            }
+            buttons.push(button);
+          } else {
+            buttons.push(new CategoryListButton(this.state, dir, dirId));
+          }
         }
       }
     }
-    // Load 'places' category
-    if (this.state.settings.showPlaces) {
-      addTo(new CategoryListButton(this.state, 'places', _('Places'), 'folder', '_selectAllPlaces'), this.categoriesBox, this.categoryButtons)
+    let params = [
+      [this.state.settings.showPlaces, 'places', _('Places'), 'folder', '_selectAllPlaces'],
+      [this.state.recentEnabled, 'recent', _('Recent Files'), 'folder-recent', '_selectRecent'],
+      [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'],
+      [true, 'favorites', _('Favorite Apps'), 'address-book-new', '_selectCategory']
+    ];
+    for (let i = 0; i < params.length; i++) {
+      if (!params[i][0]) {
+        continue;
+      }
+      if (isReRender) {
+        let button = find(this.categoryButtons, button => button.id === params[i][1]);
+        if (!button) {
+          continue;
+        }
+        buttons.push(button);
+      } else { // TODO: Use spread operator after versioning for 3.8
+        buttons.push(new CategoryListButton(this.state, params[i][1], params[i][2], params[i][3], params[i][4]));
+      }
     }
-    // Load 'recent' category
-    if (this.state.recentEnabled) {
-      addTo(new CategoryListButton(this.state, 'recent', _('Recent Files'), 'folder-recent', '_selectRecent'), this.categoriesBox, this.categoryButtons)
+    this.categoryButtons = [];
+    for (let i = 0; i < this.state.settings.categories.length; i++) {
+      let button = find(buttons, (button) => button.id === this.state.settings.categories[i]);
+      if (!button) {
+        continue;
+      }
+      button.index = i;
+      this.categoryButtons.push(button);
+      this.categoriesBox.add_actor(button.actor);
     }
-    // Load 'bookmarks' category
-    if (this.state.settings.enableBookmarks) {
-      addTo(new CategoryListButton(this.state, 'bookmarks', _('Bookmarks'), 'emblem-favorite', '_selectWebBookmarks'), this.categoriesBox, this.categoryButtons)
-    }
-    // Load 'favorite applications' category
-    addTo(new CategoryListButton(this.state, 'favorites', _('Favorite Apps'), 'address-book-new'), this.categoriesBox, this.categoryButtons)
+    buttons = undefined;
   },
 
   _selectCategory: function(categoryId) {
@@ -1038,7 +1077,7 @@ CinnamenuApplet.prototype = {
       this.applicationsGridBox.show();
     }
     // switch activeContainer
-    if (isEqual(this._activeContainer, this.applicationsListBox) || isEqual(this._activeContainer, this.applicationsListBox)) {
+    if (this._activeContainer === this.applicationsListBox || this._activeContainer === this.applicationsListBox) {
       // reset active container
       this._activeContainer = isListView ? this.applicationsListBox : this.applicationsGridBox;
       // reset scroll to top
@@ -1101,7 +1140,7 @@ CinnamenuApplet.prototype = {
     }
   },
 
-  _clearEnteredActors: function () {
+  _clearEnteredActors: function() {
     this._activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
     let buttons = this.getActiveButtons();
     let refItemIndex = store.queryCollection(buttons, (button) => {
@@ -1815,7 +1854,6 @@ CinnamenuApplet.prototype = {
         this.categoryButtons[i].disable();
       } else {
         this.categoryButtons[i].enable();
-
       }
     }
 
@@ -1864,7 +1902,7 @@ CinnamenuApplet.prototype = {
     }
     this._previousSearchPattern = pattern;
 
-    let isMathExpression = pattern.search(/([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1;
+    let isMathExpression = pattern.search(/([-+]?[0-9]*\.?[0-9]+[/+\-*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1;
     if (isMathExpression) {
       tryFn(() => {
         let answer = eval(pattern);
@@ -1959,7 +1997,7 @@ CinnamenuApplet.prototype = {
       let appButton;
       let refAppButton = -1;
       for (let i = 0, _len = this._allItems.length; i < _len; i++) {
-        if (this._allItems[i] && isEqual(this._allItems[i].buttonState.app, app)) {
+        if (this._allItems[i] && this._allItems[i].buttonState.app === app) {
           refAppButton = i;
           break;
         }
