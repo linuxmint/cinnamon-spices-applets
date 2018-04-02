@@ -1,4 +1,4 @@
-//SchreenShot+Record Applet By Infektedpc
+//ScreenShot+Record Applet By Infektedpc
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
 const PopupMenu = imports.ui.popupMenu;
@@ -17,8 +17,8 @@ function ConfirmDialog(){
 }
 
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(orientation, panelHeight, instanceId) {
+    this._init(orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
@@ -99,8 +99,8 @@ MyApplet.prototype = {
         
         this.menu.addMenuItem(this.recordItem);
     },
-    _init: function(orientation) {        
-        Applet.IconApplet.prototype._init.call(this, orientation);
+    _init: function(orientation, panelHeight, instanceId) {        
+        Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
         
         try {        
             this.set_applet_icon_symbolic_name("camera-photo-symbolic");
@@ -145,7 +145,7 @@ MyApplet.prototype = {
     
 };
 
-function main(metadata, orientation) {  
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {  
+    let myApplet = new MyApplet(orientation, panelHeight, instanceId);
     return myApplet;      
 }
