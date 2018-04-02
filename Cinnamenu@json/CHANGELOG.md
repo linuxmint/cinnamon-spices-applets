@@ -1,5 +1,10 @@
 Changelog
 
+### 3.2.0
+
+  * Added drag and drop category re-ordering.
+  * Fixed a styling issue with context menus.
+
 ### 3.1.3
 
   * Fixed clicking context menu items from the first app in a list not working.
