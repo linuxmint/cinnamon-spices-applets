@@ -37,7 +37,7 @@ msgstr "Uzyskaj dostęp do swoich miejsc i zakładek"
 #. places-bookmarks@dmo60.de->settings-
 #. schema.json->pref_icon_size->description
 msgid "Menu items icon size"
-msgstr "Rozmiar ikon w menu miejsc"
+msgstr "Rozmiar ikon w menu"
 
 #. places-bookmarks@dmo60.de->settings-schema.json->pref_icon_size->units
 msgid "pixels"
