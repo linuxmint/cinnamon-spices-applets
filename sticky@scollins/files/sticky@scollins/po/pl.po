@@ -111,7 +111,7 @@ msgstr "Zachowanie"
 #. 3.2->settings-schema.json->startState->description
 #. sticky@scollins->settings-schema.json->startState->description
 msgid "When Cinnamon starts"
-msgstr "Kiedy staruje Cinnamon..."
+msgstr "Kiedy startuje Cinnamon..."
 
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
@@ -241,4 +241,4 @@ msgstr ""
 
 #. sticky@scollins->metadata.json->name
 msgid "Sticky Notes"
-msgstr "Notatki"
+msgstr "Sticky Notes"
