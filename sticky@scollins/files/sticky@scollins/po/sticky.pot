@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-12 21:29-0500\n"
+"POT-Creation-Date: 2018-04-07 18:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,88 +17,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 
-#: applet.js:206
+#: applet.js:207 3.2/applet.js:239
 msgid "Change theme"
 msgstr ""
 
-#: applet.js:215
+#: applet.js:216 3.2/applet.js:250
 msgid "Edit title"
 msgstr ""
 
-#: applet.js:215
+#: applet.js:216 3.2/applet.js:250
 msgid "Add title"
 msgstr ""
 
-#: applet.js:221
+#: applet.js:222 3.2/applet.js:262
 msgid "Copy"
 msgstr ""
 
-#: applet.js:225
+#: applet.js:226 3.2/applet.js:266
 msgid "Paste"
 msgstr ""
 
-#: applet.js:231
+#: applet.js:232 3.2/applet.js:272
 msgid "About..."
 msgstr ""
 
-#: applet.js:235
+#: applet.js:236 3.2/applet.js:276
 msgid "Configure..."
 msgstr ""
 
-#: applet.js:241
+#: applet.js:242 3.2/applet.js:282
 msgid "Remove this note"
 msgstr ""
 
-#: applet.js:255
-msgid "Save as template"
-msgstr ""
-
-#: applet.js:407
+#: applet.js:408 3.2/applet.js:482
 msgid "Title"
 msgstr ""
 
-#: applet.js:503
+#: applet.js:504 3.2/applet.js:600
 msgid "Switch to check list"
 msgstr ""
 
-#: applet.js:711
+#: applet.js:712 3.2/applet.js:808
 msgid "Switch to regular note"
 msgstr ""
 
-#: applet.js:715
+#: applet.js:716 3.2/applet.js:812
 msgid "Remove completed items"
 msgstr ""
 
-#: applet.js:1604
+#: applet.js:1605 3.2/applet.js:1735
 msgid "New note"
 msgstr ""
 
-#: applet.js:1608
+#: applet.js:1609 3.2/applet.js:1739
 msgid "New check-list"
 msgstr ""
 
-#: applet.js:1614
+#: applet.js:1615 3.2/applet.js:1749
 msgid "Pin notes (keep on top)"
 msgstr ""
 
 #. 3.2->settings-schema.json->startState->options
 #. sticky@scollins->settings-schema.json->startState->options
-#: applet.js:1621
+#: applet.js:1622 3.2/applet.js:1756
 msgid "Hide notes"
 msgstr ""
 
-#: applet.js:1626
+#: applet.js:1627 3.2/applet.js:1761
 msgid "Back up notes"
 msgstr ""
 
-#: applet.js:1630
+#: applet.js:1631 3.2/applet.js:1765
 msgid "Restore from backup"
 msgstr ""
 
-#: applet.js:1651
+#: applet.js:1652 3.2/applet.js:1810
 msgid ""
 "This will permanently remove all existing notes. Are you sure you want to "
 "continue?"
+msgstr ""
+
+#: 3.2/applet.js:87
+msgid "Cancel"
+msgstr ""
+
+#: 3.2/applet.js:92
+msgid "Ok"
+msgstr ""
+
+#: 3.2/applet.js:256
+msgid "Save as template"
+msgstr ""
+
+#: 3.2/applet.js:533
+msgid "Enter a name for the template."
+msgstr ""
+
+#: 3.2/applet.js:816
+msgid "Unselect all items"
+msgstr ""
+
+#: 3.2/applet.js:1743
+msgid "New from template"
 msgstr ""
 
 #. 3.2->settings-schema.json->behavior->description
@@ -174,6 +194,11 @@ msgstr ""
 #. 3.2->settings-schema.json->theme->options
 #. sticky@scollins->settings-schema.json->theme->options
 msgid "Aqua"
+msgstr ""
+
+#. 3.2->settings-schema.json->theme->options
+#. sticky@scollins->settings-schema.json->theme->options
+msgid "Yellow"
 msgstr ""
 
 #. 3.2->settings-schema.json->theme->options
