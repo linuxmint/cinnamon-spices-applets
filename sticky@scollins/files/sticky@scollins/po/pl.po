@@ -113,7 +113,7 @@ msgstr "Zapisz jako szablon"
 
 #: 3.2/applet.js:533
 msgid "Enter a name for the template."
-msgstr "Wprowadź nazwę dla szablonu"
+msgstr "Wprowadź nazwę szablonu"
 
 #: 3.2/applet.js:816
 msgid "Unselect all items"
