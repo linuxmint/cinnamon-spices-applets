@@ -7,10 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-21 20:31+0200\n"
-"PO-Revision-Date: 2017-09-21 20:37+0200\n"
+"POT-Creation-Date: 2017-10-21 20:34+0200\n"
+"PO-Revision-Date: 2018-04-08 18:56+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: 3.2/applet.js:175 2.6/applet.js:176 3.4/applet.js:175
+#: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
 msgstr "Indtast din adgangskode for at fjerne dette program"
 
@@ -47,141 +47,145 @@ msgid "Run with NVIDIA GPU"
 msgstr "Kør med NVIDIA GPU"
 
 #: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
-#: 3.4/applet.js:439 3.4/applet.js:473
+#: 3.4/applet.js:436 3.4/applet.js:470
 msgid "No description available"
 msgstr "Ingen beskrivelse tilgængelig"
 
-#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:740
+#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737
 msgid "This file is no longer available"
 msgstr "Filen er ikke længere tilgængelig"
 
-#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:790
+#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787
 msgid "Open with"
 msgstr "Åbn med"
 
-#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:836
+#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833
 msgid "Other application..."
 msgstr "Andet program ..."
 
-#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:911
+#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908
 msgid "Clear list"
 msgstr "Ryd listen"
 
-#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:957
+#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954
 msgid "All Applications"
 msgstr "Alle programmer"
 
-#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:986
+#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983
 msgid "Places"
 msgstr "Steder"
 
-#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1010
+#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007
 msgid "Recent Files"
 msgstr "Seneste filer"
 
 #: 3.2/applet.js:1637 3.2/applet.js:1831 2.6/applet.js:1611 2.6/applet.js:1798
-#: 3.4/applet.js:1637 3.4/applet.js:1831
+#: 3.4/applet.js:1635 3.4/applet.js:1829
 msgid "Logout"
 msgstr "Log ud"
 
-#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1639
+#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1637
 msgid "Lock Screen"
 msgstr "Låseskærm"
 
-#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1824
+#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1822
 msgid "Shutdown the computer"
 msgstr "Sluk computeren"
 
-#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1825
+#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1823
 msgid "Leave the session"
 msgstr "Forlad sessionen"
 
-#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1826
+#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1824
 msgid "Lock the screen"
 msgstr "Lås skærmen"
 
 #: 3.2/applet.js:1828 3.2/applet.js:1829 2.6/applet.js:1795 2.6/applet.js:1796
-#: 3.4/applet.js:1828 3.4/applet.js:1829
+#: 3.4/applet.js:1826 3.4/applet.js:1827
 msgid "Quit"
 msgstr "Afslut"
 
 #: 3.2/applet.js:1840 3.2/applet.js:1844 2.6/applet.js:1807 2.6/applet.js:1811
-#: 3.4/applet.js:1840 3.4/applet.js:1844
+#: 3.4/applet.js:1838 3.4/applet.js:1842
 msgid "Lock screen"
 msgstr "Lås skærmen"
 
-#: 3.2/applet.js:2051 3.4/applet.js:2051
+#: 3.2/applet.js:2051
 msgid "All Programs"
 msgstr "Alle programmer"
 
-#: 3.2/applet.js:2051 3.4/applet.js:2051
+#: 3.2/applet.js:2051
 msgid "Favorites"
 msgstr "Favoritter"
 
-#: 3.2/applet.js:2052 3.4/applet.js:2052
+#: 3.2/applet.js:2052
 msgid "Documents"
 msgstr "Dokumenter"
 
-#: 3.2/applet.js:2052 3.4/applet.js:2052
+#: 3.2/applet.js:2052
 msgid "nemo Documents"
 msgstr "nemo-dokumenter"
 
-#: 3.2/applet.js:2053 3.4/applet.js:2053
+#: 3.2/applet.js:2053
 msgid "Pictures"
 msgstr "Billeder"
 
-#: 3.2/applet.js:2053 3.4/applet.js:2053
+#: 3.2/applet.js:2053
 msgid "nemo Pictures"
 msgstr "nemo-billeder"
 
-#: 3.2/applet.js:2054 3.4/applet.js:2054
+#: 3.2/applet.js:2054
 msgid "Music"
 msgstr "Musik"
 
-#: 3.2/applet.js:2054 3.4/applet.js:2054
+#: 3.2/applet.js:2054
 msgid "nemo Music"
 msgstr "nemo-musik"
 
-#: 3.2/applet.js:2055 3.4/applet.js:2055
+#: 3.2/applet.js:2055
 msgid "Videos"
 msgstr "Videoer"
 
-#: 3.2/applet.js:2055 3.4/applet.js:2055
+#: 3.2/applet.js:2055
 msgid "nemo Videos"
 msgstr "nemo-videoer"
 
-#: 3.2/applet.js:2056 3.4/applet.js:2056
+#: 3.2/applet.js:2056
 msgid "Downloads"
 msgstr "Hentet"
 
-#: 3.2/applet.js:2056 3.4/applet.js:2056
+#: 3.2/applet.js:2056
 msgid "nemo Downloads"
 msgstr "nemo-hentet"
 
 #. 3.2->settings-schema.json->menu->title
 #. 3.4->settings-schema.json->menu->title
-#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:2072
+#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:2062
 msgid "Menu"
 msgstr "Menu"
 
-#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3551
+#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3540
 msgid "No recent documents"
 msgstr "Ingen seneste dokumenter"
 
-#: 3.2/applet.js:3901 2.6/applet.js:3672 3.4/applet.js:3939
+#: 3.2/applet.js:3901 2.6/applet.js:3672 3.4/applet.js:3925
 msgid "Type to search..."
 msgstr "Skriv for at søge …"
 
-#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4467
+#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4453
 msgid "No results found"
 msgstr "Fandt ingen resultater"
 
-#: 3.2/applet.js:4431 2.6/applet.js:4176 3.4/applet.js:4469
+#: 3.2/applet.js:4431 2.6/applet.js:4176 3.4/applet.js:4455
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
 msgstr[0] "Fandt %d resultat"
 msgstr[1] "Fandt %d resultater"
+
+#: 3.4/applet.js:174
+msgid "Please provide your password to uninstall this application"
+msgstr "Indtast din adgangskode for at fjerne dette program"
 
 #. 3.2->settings-schema.json->quicklauncher-9-checkbox->description
 #. 3.2->settings-schema.json->quicklauncher-3-checkbox->description
@@ -1051,11 +1055,11 @@ msgstr "Tilpassede Hurtigstarter-steder"
 msgid "Directory"
 msgstr "Mappe"
 
-#. CinnVIIStarkMenu@NikoKrause->metadata.json->name
-msgid "CinnVIIStarkMenu"
-msgstr "CinnVIIStarkMenu"
-
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""
 "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
 msgstr "Cinnamon-menuen med Windows 7 startmenuens eller MATE-menuens udseende"
+
+#. CinnVIIStarkMenu@NikoKrause->metadata.json->name
+msgid "CinnVIIStarkMenu"
+msgstr "CinnVIIStarkMenu"
