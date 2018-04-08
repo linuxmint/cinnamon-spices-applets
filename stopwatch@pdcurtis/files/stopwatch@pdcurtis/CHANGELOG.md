@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.1.1
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+
 ### 2.1.0
 
  * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
