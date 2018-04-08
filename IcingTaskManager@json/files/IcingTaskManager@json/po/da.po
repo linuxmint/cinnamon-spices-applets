@@ -5,7 +5,7 @@ msgstr ""
 "POT-Creation-Date: 2018-02-23 21:32-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: Dansk <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -62,9 +62,8 @@ msgid "Remove"
 msgstr "Fjern"
 
 #: 3.4/specialMenus.js:287
-#, fuzzy
 msgid "New Window"
-msgstr "Inkludér alle programmets vinduer"
+msgstr "Nyt vindue"
 
 #: 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
@@ -732,7 +731,7 @@ msgstr ""
 #. 3.4->settings-schema.json->hoverPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
 msgid "checked"
-msgstr ""
+msgstr "tjekket"
 
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
@@ -746,19 +745,20 @@ msgstr ""
 "fremhævet."
 
 #. 3.4->settings-schema.json->app-button-transition-duration->description
-#, fuzzy
 msgid "App button transition duration"
-msgstr "Programknappens bredde"
+msgstr "Varighed af overgang for programknappen"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->tooltip
 msgid ""
 "Overrides the theme's animation time for app buttons. If set to zero, the "
 "theme's transition duration will be used."
 msgstr ""
+"Tilsidesætter temaets animationstid for programknapper. Hvis sat til nul vil "
+"temaets overgangsvarighed bliv brugt."
 
 #. 3.4->settings-schema.json->app-button-transition-duration->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 3.4->settings-schema.json->thumbnail-padding->description
 msgid "Thumbnail padding"
@@ -781,7 +781,7 @@ msgstr "Kontrollerer om fastgjorte programmer består af systemfavoritlisten."
 
 #. 3.4->settings-schema.json->generalSection->title
 msgid "Behavior"
-msgstr ""
+msgstr "Opførsel"
 
 #. 3.4->settings-schema.json->thumbnailsPage->title
 #. 3.4->settings-schema.json->thumbnailsSection->title
@@ -798,7 +798,7 @@ msgstr "Programknapper"
 
 #. 3.4->settings-schema.json->generalPage->title
 msgid "General"
-msgstr ""
+msgstr "Generel"
 
 #. 3.4->settings-schema.json->hoverPeekSection->title
 msgid "Hover Peek"
@@ -834,13 +834,12 @@ msgid "Mint Y and Variants"
 msgstr "Mint Y og varianter"
 
 #. 3.4->settings-schema.json->show-icons->description
-#, fuzzy
 msgid "Show icons"
-msgstr "Ingen ikoner"
+msgstr "Vis ikoner"
 
 #. 3.4->settings-schema.json->show-icons->tooltip
 msgid "Show the window's icon next to the title."
-msgstr ""
+msgstr "Vis vinduets ikoner ved siden af titlen."
 
 #. 3.4->settings-schema.json->enable-app-button-dragging->description
 #. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
@@ -848,15 +847,16 @@ msgid "Enable app button dragging"
 msgstr "Aktivér trækning af programknapper"
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->description
-#, fuzzy
 msgid "Show new window option"
-msgstr "Vis til-/fravalg af automatisk opstart"
+msgstr "Vis indstillinger for nyt vindue"
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
 msgid ""
 "Shows the \"New Window\" option in an app's context menu if it doesn't "
 "already have one from the app's own action menu items."
 msgstr ""
+"Viser indstillinger for \"Nyt vindue\" i et programs genvejsmenu, hvis der "
+"ikke allerede er en fra programmets egen menu."
 
 #. 3.4->settings-schema.json->app-button-width->description
 msgid "App button width"
@@ -872,27 +872,26 @@ msgstr ""
 
 #. 3.4->settings-schema.json->mintXPreset->description
 #. 3.4->settings-schema.json->mintXPreset->tooltip
-#, fuzzy
 msgid "Mint X, Linux Mint, and Variants"
-msgstr "Mint Y og varianter"
+msgstr "Mint X, Linux Mint, og varianter"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->description
 msgid "Launcher animation effect"
-msgstr ""
+msgstr "Animationseffekter til programstarter"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->tooltip
 #. 3.4->settings-schema.json->left-click-action->description
 #. 3.4->settings-schema.json->left-click-action->tooltip
 msgid "Left click action"
-msgstr ""
+msgstr "Handling ved venstreklik"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Scale"
-msgstr ""
+msgstr "Skalér"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Fade"
-msgstr ""
+msgstr "Udton"
 
 #. 3.4->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
@@ -925,56 +924,57 @@ msgstr "Kontrollerer lukkeknappens størrelse i miniaturen."
 #. 3.4->settings-schema.json->middle-click-action->description
 #. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid "Middle click action"
-msgstr ""
+msgstr "Handling ved midterklik"
 
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Launch new app instance"
-msgstr ""
+msgstr "Start ny forekomst af programmet"
 
 #. 3.4->settings-schema.json->middle-click-action->options
-#, fuzzy
 msgid "Close last focused window in group"
-msgstr "Fremhæv det seneste vindue med fokus i en programgruppe"
+msgstr "Luk det seneste vindue med fokus i en programgruppe"
 
 #. 3.4->settings-schema.json->scroll-behavior->description
 msgid "Mouse wheel scroll behavior"
-msgstr ""
+msgstr "Opførsel af musens rullehjul"
 
 #. 3.4->settings-schema.json->scroll-behavior->tooltip
 msgid ""
 "Choose if scrolling the mouse wheel cycles running apps, an app button's "
 "windows on hover, or is disabled."
 msgstr ""
+"Vælg om rulning med musehjulet løber gennem kørende programmer eller gennem "
+"et programs vinduer ved svævning over programknapperne."
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 msgid "Cycle apps"
-msgstr ""
+msgstr "Gennemløb programmer"
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 #. 3.4->settings-schema.json->left-click-action->options
-#, fuzzy
 msgid "Cycle windows"
-msgstr "Inkludér alle programmets vinduer"
+msgstr "Gennemløb vinduer"
 
 #. 3.4->settings-schema.json->show-all-workspaces->description
 #. 3.4->settings-schema.json->show-all-workspaces->tooltip
-#, fuzzy
 msgid "Show windows from all workspaces"
-msgstr "Synlig på alle arbejdsområder"
+msgstr "Vis vinduer fra alle arbejdsområder"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
 msgid "Cycle windows on mouse wheel scroll"
-msgstr ""
+msgstr "Genemløb vinduer ved rulning med musehjulet"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
 msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
+"Vælg om rulning med musehjulet medfører, at vinduer gennemløbes, når "
+"markøren er over en miniaturemenu."
 
 #. 3.4->settings-schema.json->left-click-action->options
 msgid "Toggle activation of last focused window"
-msgstr ""
+msgstr "Skift til det seneste fokuserede vindue"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
