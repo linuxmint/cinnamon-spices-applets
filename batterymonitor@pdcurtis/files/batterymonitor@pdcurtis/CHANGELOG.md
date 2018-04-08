@@ -1,5 +1,8 @@
 ## Changelog
 
+### 1.3.3
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+
 ### 1.3.2
 
  * Add checks that sox and zenity are installed and warn that full facilities are not available without them.
