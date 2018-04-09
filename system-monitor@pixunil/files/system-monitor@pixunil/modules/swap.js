@@ -1,8 +1,13 @@
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Modules = applet.modules;
+let _, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    Modules = applet.modules;
+}
 
 const name = "swap";
 const settingsName = "mem";
@@ -13,13 +18,13 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.BaseDataProvider.prototype,
+    __proto__: Modules.init.BaseDataProvider.prototype,
 
     init: function(){
-        Modules.BaseDataProvider.prototype.init.apply(this, arguments);
+        Modules.init.BaseDataProvider.prototype.init.apply(this, arguments);
 
         try {
-            this.gtop = new Modules.GTop.glibtop_swap;
+            this.gtop = new Modules.init.GTop.glibtop_swap;
         } catch(e){
             this.unavailable = true;
             return;
@@ -36,7 +41,7 @@ DataProvider.prototype = {
     },
 
     getData: function(){
-        Modules.GTop.glibtop_get_swap(this.gtop);
+        Modules.init.GTop.glibtop_get_swap(this.gtop);
 
         this.saveData("total", this.gtop.total);
         this.saveData("used", this.gtop.used);
@@ -51,7 +56,7 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseMenuItem.prototype,
+    __proto__: Modules.init.BaseMenuItem.prototype,
 
     labelWidths: [100, 100, 60],
 

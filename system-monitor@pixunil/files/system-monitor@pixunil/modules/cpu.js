@@ -1,9 +1,15 @@
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
-
-const _ = applet._;
-const Graph = applet.graph;
-const Modules = applet.modules;
+let _, Graph, Modules;
+if (typeof require !== 'undefined') {
+    _ = require('../init')._;
+    Graph = require('../graph');
+    Modules = require('../modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    Graph = applet.graph;
+    Modules = applet.modules;
+}
 
 const name = "cpu";
 const display = _("CPU");
@@ -15,18 +21,18 @@ function DataProvider(){
 }
 
 DataProvider.prototype = {
-    __proto__: Modules.BaseDataProvider.prototype,
+    __proto__: Modules.init.BaseDataProvider.prototype,
 
     notificationFormat: "percent",
 
     count: 0,
 
     init: function(){
-        Modules.BaseDataProvider.prototype.init.apply(this, arguments);
+        Modules.init.BaseDataProvider.prototype.init.apply(this, arguments);
 
         try {
-            this.gtop = new Modules.GTop.glibtop_cpu;
-            this.count = Modules.GTop.glibtop_get_sysinfo().ncpu;
+            this.gtop = new Modules.init.GTop.glibtop_cpu;
+            this.count = Modules.init.GTop.glibtop_get_sysinfo().ncpu;
         } catch(e){
             this.unavailable = true;
             return;
@@ -50,7 +56,7 @@ DataProvider.prototype = {
             system: []
         };
 
-        Modules.GTop.glibtop_get_cpu(this.gtop);
+        Modules.init.GTop.glibtop_get_cpu(this.gtop);
 
         for(let i = 0; i < this.count; ++i){
             this.history.usage.push([]);
@@ -80,7 +86,7 @@ DataProvider.prototype = {
     },
 
     getData: function(){
-        Modules.GTop.glibtop_get_cpu(this.gtop);
+        Modules.init.GTop.glibtop_get_cpu(this.gtop);
 
         var dtotal, duser, dsystem, r = 0;
         for(var i = 0; i < this.count; ++i){
@@ -124,7 +130,7 @@ function MenuItem(){
 }
 
 MenuItem.prototype = {
-    __proto__: Modules.BaseSubMenuMenuItem.prototype,
+    __proto__: Modules.init.BaseSubMenuMenuItem.prototype,
 
     init: function(module){
         this.labelWidths = [];
@@ -133,7 +139,7 @@ MenuItem.prototype = {
         for(let i = 0; i < module.dataProvider.count; ++i)
             this.labelWidths.push(60);
 
-        Modules.BaseSubMenuMenuItem.prototype.init.call(this, module);
+        Modules.init.BaseSubMenuMenuItem.prototype.init.call(this, module);
 
         this.addRow(_("User"));
         this.addRow(_("System"));
@@ -153,7 +159,7 @@ function PanelLabel(){
 }
 
 PanelLabel.prototype = {
-    __proto__: Modules.PanelLabelPrototype,
+    __proto__: Modules.init.PanelLabelPrototype,
 
     main: {
         core: /^(?:core|c)(\d+)$/i,

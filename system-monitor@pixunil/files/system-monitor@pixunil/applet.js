@@ -14,18 +14,27 @@ const Tooltips = imports.ui.tooltips;
 const Mainloop = imports.mainloop;
 
 const uuid = "system-monitor@pixunil";
-const applet = imports.ui.appletManager.applets[uuid];
 
-const _ = applet._;
-const bind = applet.bind;
-const dashToCamelCase = applet.dashToCamelCase;
-const iconName = applet.iconName;
-
-const Graph = applet.graph;
-const Modules = applet.modules;
+let _, dashToCamelCase, iconName, bind, Graph, Modules;
+if (typeof require !== 'undefined') {
+    const init = require('./init');
+    _ = init._;
+    dashToCamelCase = init.dashToCamelCase;
+    iconName = init.iconName;
+    bind = init.bind;
+    Graph = require('./graph');
+    Modules = require('./modules');
+} else {
+    const applet = imports.ui.appletManager.applets[uuid];
+    _ = applet.init._;
+    dashToCamelCase = applet.init.dashToCamelCase;
+    iconName = applet.init.iconName;
+    bind = applet.init.bind;
+    Modules = applet.modules;
+}
 
 try {
-    Modules.GTop = imports.gi.GTop;
+    Modules.init.GTop = imports.gi.GTop;
 } catch(e){
     let icon = new St.Icon({icon_name: iconName, icon_type: St.IconType.FULLCOLOR, icon_size: 24});
     Main.criticalNotify(_("Dependence missing"), _("Please install the GTop package\n" +
@@ -36,14 +45,14 @@ try {
 }
 
 const ModuleImports = {
-    loadavg: applet.modules.loadavg,
-    cpu: applet.modules.cpu,
-    mem: applet.modules.mem,
-    swap: applet.modules.swap,
-    disk: applet.modules.disk,
-    network: applet.modules.network,
-    thermal: applet.modules.thermal,
-    fan: applet.modules.fan
+    loadavg: Modules.loadavg,
+    cpu: Modules.cpu,
+    mem: Modules.mem,
+    swap: Modules.swap,
+    disk: Modules.disk,
+    network: Modules.network,
+    thermal: Modules.thermal,
+    fan: Modules.fan
 };
 
 function SystemMonitorTooltip(){
@@ -177,7 +186,7 @@ SystemMonitorApplet.prototype = {
         this.graphSubMenu.getColumnWidths = () => [0];
 
         this.graphMenuItems = [
-            new Modules.GraphMenuItem(this, _("Overview"), 0)
+            new Modules.init.GraphMenuItem(this, _("Overview"), 0)
         ];
 
         this.graphSubMenu.menu.addMenuItem(this.graphMenuItems[0]);
@@ -197,7 +206,7 @@ SystemMonitorApplet.prototype = {
         let index = 1;
         for(let module in ModuleImports){
             // create the module
-            this.modules[module] = new Modules.Module(ModuleImports[module], this.container, sensorLines);
+            this.modules[module] = new Modules.init.Module(ModuleImports[module], this.container, sensorLines);
             module = this.modules[module];
 
             if(module.unavailable)
@@ -276,7 +285,7 @@ SystemMonitorApplet.prototype = {
             let dataProvider = this.modules[module].dataProvider;
 
             // if it is a sensor module, pass the output of the sensor command to it
-            if(dataProvider instanceof Modules.SensorDataProvider)
+            if(dataProvider instanceof Modules.init.SensorDataProvider)
                 dataProvider.getData(result);
             // for all other modules, pass the difference of the time since last data generating (used only by disk and network, but for other it is no harm)
             else
