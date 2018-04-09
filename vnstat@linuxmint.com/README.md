@@ -13,21 +13,23 @@ The applet detects which device you're currently using, and simply exports a gra
 ## What you need for it to work:
 
 You need:
-* To install vnstat
-* To install vnstati
-* To have the vnstat daemon running
-* To have vnstat configured for the devices you are using.
+
+  * To install vnstat
+  * To install vnstati
+  * To have the vnstat daemon running
+  * To have vnstat configured for the devices you are using.
 
 Notes: In Linux Mint, you can simply run `apt install vnstati` and that will take care of everything for the built in devices. In other distributions it might depend on the way things are packaged but it's likely to be similar.
 
 It is possible to add additional devices, for example a USB Mobile Internet stick. Running `man vnstat` will give some information on how to proceed but beware it is not trivial.
 
 
-## Warning about use on Distributions other than Mint:
+## Use on Distributions other than Mint:
 
-   * This Applet currently assumes the NMClient and NetworkManager libraries are available and in use as is the case in Mint versions up to 18.3 and most other current distro versions.
-   * It  cannot be loaded on Fedora 27 (and possibly future versions of Linux Mint or other distros) due to the move from NMClient and NetworkManager libraries to NM.
-   * Attempting to add this applet on Fedora 27 may cause Cinnamon to continually crash (issue #1647).
+  * It currently assumes the NMClient and NetworkManager libraries are in use as is the case in Mint versions up to 18.3 and most other current distro versions.
+  * The latest versions can also switch to the more recent NM library if the NetworkManager Library is not available on your distribution.
+  * It is possible that you may have to set up vnstati on other distributions - running `man vnstat` will providee information on how to proceed if that is the case.
+  * Feedback on your experiences on other distributions would be welcome.
 
 ### Support
 

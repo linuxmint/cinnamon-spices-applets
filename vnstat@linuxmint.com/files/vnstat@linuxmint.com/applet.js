@@ -8,8 +8,25 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const GLib = imports.gi.GLib;
-const NMClient = imports.gi.NMClient;
-const NetworkManager = imports.gi.NetworkManager;
+// const NMClient = imports.gi.NMClient;
+// const NetworkManager = imports.gi.NetworkManager;
+
+// Code for selecting network manager thanks to Jeffrey Bush
+const GIRepository = imports.gi.GIRepository;
+let CONNECTED_STATE, NMClient_new;
+let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
+if (nm_index == -1) {
+  // The NetworkManager repository is not currently loaded so load the NM repo
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.Activated;
+  NMClient_new = () => { return NM.Client.new(null); }
+} else {
+  // The NetworkManager repository is current loaded so load it and the NMClient repos
+  const NMClient = imports.gi.NMClient;
+  const NetworkManager = imports.gi.NetworkManager;
+  CONNECTED_STATE = NetworkManager.DeviceState.ACTIVATED;
+  NMClient_new = () => { return NMClient.Client.new(); }
+}
 
 // l10n/translation
 const Gettext = imports.gettext;
@@ -47,7 +64,8 @@ MyApplet.prototype = {
             
             this._device = "null";
             this.vnstatImage = GLib.get_home_dir() + "/vnstatlmapplet.png";
-            this._client = NMClient.Client.new();
+//            this._client = NMClient.Client.new();
+            this._client = NMClient_new();
             
         }
         catch (e) {
@@ -64,7 +82,7 @@ MyApplet.prototype = {
     
     _update: function() {
         this._updateDevice();
-        this._updateGraph();
+        this._updateGraph(); // Comment this out to test without vnstat installed
     },
 
     getInterfaces: function () {
@@ -76,7 +94,9 @@ MyApplet.prototype = {
         if (interfaces != null) {
            for (let i = 0; i < interfaces.length; i++) {
                 let iname = interfaces[i].get_iface();
-                if (iname == name && interfaces[i].state == NetworkManager.DeviceState.ACTIVATED) {
+//                if (iname == name && interfaces[i].state ==  NetworkManager.DeviceState.ACTIVATED) {
+                if (iname == name && interfaces[i].state == CONNECTED_STATE) {
+
                    return true;
                  }
              }
@@ -93,7 +113,7 @@ MyApplet.prototype = {
                     let iname = interfaces[i].get_iface();
                     if (this.isInterfaceAvailable(iname)) {
                         this._device = iname; 
-//                        global.logError("Test output - vnstat using device: " + this._device);   
+//                        global.logError("Test output - vnstat@linuxmin.com detected device: " + this._device);   // Comment out unless testing
                     }
                 }
             }
