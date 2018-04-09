@@ -7,26 +7,26 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-01 14:27+0200\n"
-"PO-Revision-Date: 2017-10-01 14:52+0200\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2018-02-13 12:52+0100\n"
+"PO-Revision-Date: 2018-04-09 18:44+0200\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
-#: applet.js:74 3.2/applet.js:72
+#: 3.2/applet.js:73 applet.js:73
 msgid "Type to search..."
 msgstr "Skriv for at søge …"
 
-#: applet.js:85
+#: applet.js:84
 msgid "Change default programs..."
 msgstr "Ændr standardprogrammer …"
 
-#: applet.js:87
+#: applet.js:86
 msgid "Edit providers"
 msgstr "Redigér udbydere"
 
@@ -71,6 +71,10 @@ msgstr "Ask "
 msgid "Search Provider Settings"
 msgstr "Indstillinger for søgeudbyder"
 
+#. 3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Genvejstast som åbner søgefeltet"
+
 #. 3.2->settings-schema.json->custom-provider-url->description
 msgid "URL of custom provider"
 msgstr "URL til selvvalgt udbyder"
@@ -86,6 +90,10 @@ msgstr "Anvend selvvalgt udbyder"
 #. 3.2->settings-schema.json->use-custom-provider->tooltip
 msgid "Use your own search provider"
 msgstr "Anvend din egen søgeudbyder"
+
+#. 3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Genvejstast"
 
 #. 3.2->settings-schema.json->show-provider->description
 msgid "Show provider"
