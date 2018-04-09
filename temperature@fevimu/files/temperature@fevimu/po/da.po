@@ -48,11 +48,11 @@ msgstr "Temperatur"
 
 #: applet.js:144
 msgid "Critical"
-msgstr ""
+msgstr "Kritisk"
 
 #: applet.js:146
 msgid "High"
-msgstr ""
+msgstr "Høj"
 
 #: applet.js:156
 msgid "Current Temperature"
@@ -68,7 +68,7 @@ msgstr "CPU-temperaturindikator"
 
 #. metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr "Viser CPU'en temperatur"
+msgstr "Viser CPU'ens temperatur"
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
@@ -80,8 +80,8 @@ msgstr "Anvend heltalsværdier for temperaturen"
 
 #. settings-schema.json->interval->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. settings-schema.json->interval->description
 msgid "Update interval"
-msgstr ""
+msgstr "Opdateringsinterval"
