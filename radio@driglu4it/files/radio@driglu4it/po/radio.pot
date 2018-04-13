@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-16 16:22+0200\n"
+"POT-Creation-Date: 2018-03-07 14:22+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Driglu4it <dr@i-glu4it.ru>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Language: \n"
 
 #. radio@driglu4it->metadata.json->name
-#: applet.js:25 applet.js:48
+#: applet.js:38 applet.js:62
 msgid "Radio++"
 msgstr ""
 
-#: applet.js:39
+#: applet.js:53
 #, javascript-format
 msgid "Playing %s"
 msgstr ""
 
-#: applet.js:46 applet.js:51
+#: applet.js:60 applet.js:65
 msgid "Stop"
 msgstr ""
 
@@ -46,6 +46,10 @@ msgstr ""
 
 #. radio@driglu4it->settings-schema.json->tree->columns->title
 msgid "URL"
+msgstr ""
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "Include of list"
 msgstr ""
 
 #. radio@driglu4it->metadata.json->description
