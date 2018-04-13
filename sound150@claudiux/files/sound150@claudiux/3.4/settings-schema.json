@@ -101,8 +101,7 @@
             "1%": 1
         },
         "tooltip": "% of nominal volume",
-        "description": "+/-",
-        "tooltip": "Step"
+        "description": "+/-"
     },
     "magnetic_on": {
         "type": "switch",
