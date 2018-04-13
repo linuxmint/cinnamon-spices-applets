@@ -101,7 +101,14 @@
             "1%": 1
         },
         "tooltip": "% of nominal volume",
-        "description": "+/-"
+        "description": "+/-",
+        "tooltip": "Step"
+    },
+    "magnetic_on": {
+        "type": "switch",
+        "description": "Magnetize the 'Volume 100%' mark",
+        "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
+        "default": true
     },
     "adaptColor": {
         "type": "switch",

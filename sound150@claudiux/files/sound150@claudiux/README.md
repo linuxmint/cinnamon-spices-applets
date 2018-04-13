@@ -79,6 +79,6 @@ The **Sound 150%** applet is designed to allow translations of some messages (in
 
 The installation of the available languages is done automatically.
 
-Languages already available: English, French, Spanish, Italian, Russian (thanks to @sem5959!).
+Languages already available: English, French, Spanish, Italian, Russian (thanks to @sem5959!) and Danish (thanks to @Alan01!).
 
-Any new translation will be wellcomed.
+Any new translation is welcome.

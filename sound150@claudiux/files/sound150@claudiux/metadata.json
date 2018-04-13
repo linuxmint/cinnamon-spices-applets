@@ -5,7 +5,7 @@
     "max-instances": "1",
     "description": "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music",
     "hide-configuration": false,
-    "version": "1.4.0",
+    "version": "1.4.1",
     "cinnamon-version": [
         "2.8",
         "3.0",
@@ -14,5 +14,5 @@
         "3.6",
         "3.8"
     ],
-    "last-edited": 1522090890
+    "last-edited": 1523640550
 }

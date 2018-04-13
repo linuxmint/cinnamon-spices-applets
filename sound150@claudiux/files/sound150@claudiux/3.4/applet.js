@@ -264,8 +264,8 @@ VolumeSlider.prototype = {
             muted = true;
         } else {
             muted = false;
-            if (volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
-                volume = this.applet._volumeNominal;
+            if (this.applet.magnetic_on===true && volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
+                volume = this.applet._volumeNominal; // 100% is magnetic
             }
         }
         this.stream.volume = volume;
@@ -281,7 +281,7 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
 
-        if (value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
+        if (this.applet.magnetic_on===true && value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
             value = 1; // 100% is magnetic
             this.applet._output.volume = this.applet._volumeNominal;
             this.applet._output.push_volume()
@@ -1046,6 +1046,8 @@ MyApplet.prototype = {
             log('_init: stepVolume=' + this.stepVolume);
             VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
 
+            this.settings.bind("magnetic_on", "magnetic_on", this.on_settings_changed);
+
             this.settings.bind("adaptColor", "adaptColor", this.on_settings_changed);
 
             this.settings.bind("hideSystray", "hideSystray", function() {
@@ -1315,7 +1317,7 @@ MyApplet.prototype = {
                     this._output.change_is_muted(true);
             } else {
                 let quotient = this._output.volume/this._volumeNominal;
-                if (quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+                if (this.magnetic_on===true && quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                     this._output.volume = this._volumeNominal; // 100% is magnetic
             }
             this._output.push_volume();
@@ -1323,7 +1325,7 @@ MyApplet.prototype = {
         else if (direction == Clutter.ScrollDirection.UP) {
             this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNominal * VOLUME_ADJUSTMENT_STEP);
             let quotient = this._output.volume/this._volumeNominal;
-            if (quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+            if (this.magnetic_on===true && quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                 this._output.volume = this._volumeNominal; // 100% is magnetic
             this._output.push_volume();
             this._output.change_is_muted(false);
