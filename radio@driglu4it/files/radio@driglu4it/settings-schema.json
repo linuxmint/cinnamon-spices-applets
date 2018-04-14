@@ -26,23 +26,31 @@
         "id": "url",
         "title": "URL",
         "type": "string"
+    },
+    {"id": "inc",
+         "title": "Include of list",
+          "type": "boolean"
       }
     ],
     "default": [{
         "name": "Akustika",
-        "url": "http://ic3.101.ru:8000/c16_34"
+        "url": "http://ic3.101.ru:8000/c16_34",
+        "inc": true
       },
       {
         "name": "Rock Hits",
-        "url": "http://icecast.radiomaximum.cdnvideo.ru/st25.mp3"
+        "url": "http://icecast.radiomaximum.cdnvideo.ru/st25.mp3",
+        "inc": true
       },
       {
         "name": "Hit FM",
-        "url": "http://icecast.radiohitfm.cdnvideo.ru/hit.mp3"
+        "url": "http://icecast.radiohitfm.cdnvideo.ru/hit.mp3",
+        "inc": true
       },
       {
         "name": "Chillout",
-        "url": "http://ic7.101.ru:8000/c15_3"
+        "url": "http://ic7.101.ru:8000/c15_3",
+        "inc": false
       }
     ]
   }
