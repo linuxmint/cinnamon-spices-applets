@@ -98,7 +98,7 @@ msgstr ""
 #. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->display-gpaste-
 #. ui->description
 msgid "Display 'GPaste Main Program'"
-msgstr "Wyświetl 'Program główny GPaste'"
+msgstr "Pokaż 'Program główny GPaste'"
 
 #. gpaste-reloaded@feuerfuchs.eu->settings-schema.json->kb-show-
 #. history->description
