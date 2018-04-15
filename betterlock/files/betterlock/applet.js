@@ -10,8 +10,8 @@ const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
 const Settings = imports.ui.settings;
 
-let UUID = "betterlock";
-const Meta = imports.ui.appletManager.appletMeta[UUID];
+const UUID = "betterlock";
+const ICON_SIZE = 18;
 
 // l10n/translation
 const GLib = imports.gi.GLib;
@@ -42,39 +42,29 @@ MyApplet.prototype = {
 
         this.binNum = new St.Bin();
         this.binCaps = new St.Bin();
-        this.binEmpty = new St.Bin();
-        this.binEmpty.set_size(0, 0);
-
-        Gtk.IconTheme.get_default().append_search_path(Meta.path);
 
         this.caps_on = new St.Icon({
             icon_name: "caps-on",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: 18,
+            icon_size: ICON_SIZE,
             style_class: "applet-icon"
         });
         this.caps_off = new St.Icon({
             icon_name: "caps-off",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: 18,
+            icon_size: ICON_SIZE,
             style_class: "applet-icon"
         });
         this.num_on = new St.Icon({
             icon_name: "num-on",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: 18,
+            icon_size: ICON_SIZE,
             style_class: "applet-icon"
         });
         this.num_off = new St.Icon({
             icon_name: "num-off",
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: 18,
-            style_class: "applet-icon"
-        });
-        this.indicator_off = new St.Icon({
-            icon_name: "indicator-off",
-            icon_type: St.IconType.SYMBOLIC,
-            icon_size: 18,
+            icon_size: ICON_SIZE,
             style_class: "applet-icon"
         });
 
@@ -84,11 +74,11 @@ MyApplet.prototype = {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
-        this.actor.add(this.binEmpty);
         this.actor.add(this.binNum, {
             y_align: St.Align.MIDDLE,
             y_fill: false
         });
+        this.actor.style = 'spacing: 2px';
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -119,9 +109,7 @@ MyApplet.prototype = {
     _ensureSource: function() {
         if (!this._source) {
             this._source = new MessageTray.Source();
-            this._source.connect('destroy', Lang.bind(this, function() {
-                this._source = null;
-            }));
+            this._source.connect('destroy', () => this._source = null );
             if (Main.messageTray) Main.messageTray.add(this._source);
         }
     },
@@ -137,7 +125,7 @@ MyApplet.prototype = {
         let icon = new St.Icon({
             icon_name: iconName,
             icon_type: St.IconType.SYMBOLIC,
-            icon_size: this._source.ICON_SIZE
+            icon_size: ICON_SIZE
         });
         this._notification = new MessageTray.Notification(this._source, _("Lock Keys"), text, {
             icon: icon
@@ -159,10 +147,6 @@ MyApplet.prototype = {
             this.binNum.show();
         else
             this.binNum.hide();
-        if (this.indicatorType == "both")
-            this.binEmpty.show();
-        else
-            this.binEmpty.hide();
     },
 
     _updateState: function() {
