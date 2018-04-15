@@ -40,8 +40,8 @@ MyApplet.prototype = {
         this.settings.bind("show-notifications", "showNotifications", null)
         this.settings.bind("indicator-type", "indicatorType", this._updateIconVisibility);
 
-        this.binNum = new St.Bin();
-        this.binCaps = new St.Bin();
+        this.binNum = new St.Bin({ reactive: true });
+        this.binCaps = new St.Bin({ reactive: true });
 
         this.caps_on = new St.Icon({
             icon_name: "caps-on",
@@ -80,21 +80,14 @@ MyApplet.prototype = {
         });
         this.actor.style = 'spacing: 2px';
 
-        this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
-        this.menuManager.addMenu(this.menu);
 
-        this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false, {
-            reactive: true
-        });
+        this.numMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Num Lock"), false);
         this.numMenuItem.connect('activate', Lang.bind(this, this._onNumChanged));
-        this.menu.addMenuItem(this.numMenuItem);
+        this._applet_context_menu.addMenuItem(this.numMenuItem);
 
-        this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false, {
-            reactive: true
-        });
+        this.capsMenuItem = new PopupMenu.PopupSwitchMenuItem(_("Caps Lock"), false);
         this.capsMenuItem.connect('activate', Lang.bind(this, this._onCapsChanged));
-        this.menu.addMenuItem(this.capsMenuItem);
+        this._applet_context_menu.addMenuItem(this.capsMenuItem);
 
         this._keyboardStateChangedId = Keymap.connect('state-changed', Lang.bind(this, this._updateState));
         this._firstRun = true;
@@ -203,11 +196,9 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        if (this.indicatorType == "both")
-            this.menu.toggle();
-        else if (this.indicatorType == "caps-only")
+        if (this.indicatorType === "caps-only" || event.get_source() === this.binCaps)
             this._onCapsChanged();
-        else if (this.indicatorType == "num-only")
+        else if (this.indicatorType === "num-only" || event.get_source() === this.binNum)
             this._onNumChanged();
     },
 
