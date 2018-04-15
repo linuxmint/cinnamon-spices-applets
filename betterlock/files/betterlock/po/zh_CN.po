@@ -57,5 +57,5 @@ msgid ""
 msgstr "显示大写锁定键/数字锁定键是否启用，并在其更改时显示一个通知。"
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr "含消息托盘通知的数字锁定键/大写锁定键指示器"

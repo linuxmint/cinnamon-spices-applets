@@ -72,5 +72,5 @@ msgid ""
 msgstr ""
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr ""

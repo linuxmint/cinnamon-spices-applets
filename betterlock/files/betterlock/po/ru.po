@@ -76,5 +76,5 @@ msgstr ""
 "уведомление в трее при их переключении."
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr "Индикатор Num Lock/Caps Lock с уведомлениями в трее"
