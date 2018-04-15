@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### v1.4.1
+ * The magnetic property of the 100% mark becomes optionnal.
+ * Translations:
+   * Available languages: English, French, Spanish, Italian, Russian and now **Danish** (thanks to @Alan01!).
+
 ### v1.4.0
  * The 100% mark in sound settings becomes magnetic.
  * The applet and sound settings sliders become synchronized.

@@ -25,22 +25,34 @@ msgstr ""
 msgid "Sound 150%"
 msgstr ""
 
-#: settings-schema.json:101
+#: settings-schema.json:103
 msgid "% of nominal volume"
 msgstr ""
 
-#: settings-schema.json:83
+#: settings-schema.json:85
 msgid "Maximum volume control"
 msgstr ""
 
-#: settings-schema.json:84
+#: settings-schema.json:86
 msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
 msgstr ""
 
-#: settings-schema.json:106
+#: settings-schema.json:105
+msgid "Step"
+msgstr ""
+
+#: settings-schema.json:109
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr ""
+
+#: settings-schema.json:110
+msgid "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step."
+msgstr ""
+
+#: settings-schema.json:115
 msgid "Adjust the color of the icon to the volume"
 msgstr ""
 
-#: settings-schema.json:107
+#: settings-schema.json:116
 msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
 msgstr ""

@@ -103,6 +103,12 @@
         "tooltip": "% of nominal volume",
         "description": "+/-"
     },
+    "magneticOn": {
+        "type": "switch",
+        "description": "Magnetize the 'Volume 100%' mark",
+        "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
+        "default": true
+    },
     "adaptColor": {
         "type": "switch",
         "description": "Adjust the color of the icon to the volume",
