@@ -57,5 +57,5 @@ msgid ""
 msgstr "Visar om Caps Lock/Num Lock är på och meddelar när det ändras."
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr "Num Lock-/Caps Lock-indikator med avisering"

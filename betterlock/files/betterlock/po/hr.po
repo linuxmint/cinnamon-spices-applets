@@ -76,7 +76,7 @@ msgstr ""
 "prikazuje obavijesti kada se to promijeni."
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr "Indikator velikih slova ili brojčane tipkovnice s obavijestima sustava"
 
 #~ msgid "Notifications"
