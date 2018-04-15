@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 21:32-0600\n"
+"POT-Creation-Date: 2018-04-14 21:32-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: ArionWT <arionwhiteac@gmail.com>\n"
 "Language-Team: \n"
@@ -17,12 +17,12 @@ msgstr ""
 #: 3.4/specialMenus.js:118
 #, fuzzy
 msgid "Move to the other monitor"
-msgstr "Переместить на экран %d"
+msgstr "Переместить на другой экран"
 
 #: 3.4/specialMenus.js:118
 #, fuzzy
 msgid "Move to monitor "
-msgstr "Переместить на экран %d"
+msgstr "Переместить на экран "
 
 #: 3.4/specialMenus.js:126
 msgid "Only on this workspace"
@@ -39,11 +39,11 @@ msgstr "На рабочий стол слева"
 
 #: 3.4/specialMenus.js:168
 msgid "Places"
-msgstr ""
+msgstr "Места"
 
 #: 3.4/specialMenus.js:207
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Для Закладок и Истории требуется gir1.2-gda-5.0"
 
 #: 3.4/specialMenus.js:227
 #, fuzzy
@@ -52,24 +52,24 @@ msgstr "проценты"
 
 #: 3.4/specialMenus.js:246
 msgid "Preferences"
-msgstr ""
+msgstr "Параметры"
 
 #: 3.4/specialMenus.js:249
 msgid "About..."
-msgstr ""
+msgstr "О модуле..."
 
 #: 3.4/specialMenus.js:253
 msgid "Configure..."
-msgstr ""
+msgstr "Настройка..."
 
 #: 3.4/specialMenus.js:257
 msgid "Remove"
-msgstr ""
+msgstr "Удалить"
 
 #: 3.4/specialMenus.js:287
 #, fuzzy
 msgid "New Window"
-msgstr "Отображение всех окон приложения"
+msgstr "Новое окно"
 
 #: 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
@@ -93,7 +93,7 @@ msgstr "Создать ярлык"
 
 #: 3.4/specialMenus.js:329
 msgid "Restore to full opacity"
-msgstr ""
+msgstr "Восстановить непрозрачность"
 
 #: 3.4/specialMenus.js:337
 msgid "Restore"
@@ -113,7 +113,7 @@ msgstr "Развернуть"
 
 #: 3.4/specialMenus.js:365
 msgid "Close others"
-msgstr ""
+msgstr "Закрыть остальные"
 
 #: 3.4/specialMenus.js:375
 #, fuzzy
@@ -148,7 +148,7 @@ msgstr "Вид кнопки в фокусе"
 #. 2.8->settings-schema.json->focusPseudoClass->tooltip
 #. 3.4->settings-schema.json->focusPseudoClass->tooltip
 msgid "Overrides the pseudo class for app button on focus."
-msgstr "Перезаписывает псевдокласс focus для кнопки приложения."
+msgstr "Перезаписывает псевдокласс focus для кнопки."
 
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
@@ -185,7 +185,7 @@ msgstr ""
 #. 3.4->settings-schema.json->activePseudoClass->options
 #, fuzzy
 msgid "focus"
-msgstr "Активное"
+msgstr ""
 
 #. 2.8->settings-schema.json->focusPseudoClass->options
 #. 2.8->settings-schema.json->hoverPseudoClass->options
@@ -226,7 +226,7 @@ msgstr "Показывать миниатюры"
 #. 2.8->settings-schema.json->show-thumbnails->tooltip
 #. 3.4->settings-schema.json->show-thumbnails->tooltip
 msgid "Show window thumbnails when hovering over an app button."
-msgstr "Показывать миниатюры открытых окон при наведении на кнопку приложения."
+msgstr "Показывать миниатюры открытых окон при наведении на кнопку."
 
 #. 2.8->settings-schema.json->icon-size->description
 #. 3.4->settings-schema.json->icon-size->description
@@ -316,7 +316,7 @@ msgstr "Вид кнопки при наведении"
 #. 2.8->settings-schema.json->hoverPseudoClass->tooltip
 #. 3.4->settings-schema.json->hoverPseudoClass->tooltip
 msgid "Overrides the pseudo class for app buttons on hover."
-msgstr "Перезаписывает псевдокласс hover для кнопок приложений."
+msgstr "Перезаписывает псевдокласс hover для кнопок."
 
 #. 2.8->settings-schema.json->show-alerts->description
 #. 3.4->settings-schema.json->show-alerts->description
@@ -333,7 +333,7 @@ msgstr "Если включено, будут появляться уведом�
 #. 3.4->settings-schema.json->pinOnDrag->description
 #. 3.4->settings-schema.json->pinOnDrag->tooltip
 msgid "Pin apps when dragged to a new position"
-msgstr "Pin приложений При перетаскивании в новую позицию"
+msgstr "Прикрепить приложение при перетаскивании в новую позицию"
 
 #. 2.8->settings-schema.json->show-apps-order-hotkey->description
 #. 3.4->settings-schema.json->show-apps-order-hotkey->description
@@ -359,7 +359,7 @@ msgstr "Тип пункта меню"
 msgid ""
 "Determines whether menu item icons are symbolic, non-symbolic, or not shown."
 msgstr ""
-"Определяет, будут ли иконки в меню: символическими, несимволический или "
+"Определяет, будут ли иконки в меню: символьными, несимвольными или "
 "вовсе не будут отображаться."
 
 #. 2.8->settings-schema.json->menuItemType->options
@@ -410,7 +410,7 @@ msgstr "Вид активной кнопки"
 #. 2.8->settings-schema.json->activePseudoClass->tooltip
 #. 3.4->settings-schema.json->activePseudoClass->tooltip
 msgid "Overrides the pseudo class for app buttons when they are active."
-msgstr "Перезаписывает псевдокласс active для кнопок приложений."
+msgstr "Перезаписывает псевдокласс active для кнопок."
 
 #. 2.8->settings-schema.json->animate-thumbnails->description
 #. 3.4->settings-schema.json->animate-thumbnails->description
@@ -446,7 +446,7 @@ msgstr "Показывать иконки прикрепленных прило�
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"
-msgstr "Использование системных подсказок для закрытых приложений"
+msgstr "Системные подсказки для закрытых приложений"
 
 #. 2.8->settings-schema.json->useSystemTooltips->tooltip
 msgid ""
@@ -498,7 +498,9 @@ msgstr "Таймаут миниатюр"
 msgid ""
 "Controls how quickly an app's set of window thumbnails will fade out when "
 "the mouse leaves the app button."
-msgstr "Установить время, через которое появится миниатюра, в миллисекундах."
+msgstr ""
+"Установить время, через которое появится миниатюра, "
+"в миллисекундах."
 
 #. 2.8->settings-schema.json->ThemeSettings->description
 msgid "Theme Settings"
@@ -539,7 +541,7 @@ msgstr ""
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
 #. 3.4->settings-schema.json->cycleMenusHotkey->description
 msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "Глобальная горячая клавиша переключения миниатюр"
+msgstr "Глобальные горячие клавиши переключения миниатюр"
 
 #. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
 #. 3.4->settings-schema.json->cycleMenusHotkey->tooltip
@@ -607,12 +609,12 @@ msgid ""
 "Controls how much horizontal padding is inside the app buttons. Padding is "
 "only applied to instances of this applet on horizontal panels."
 msgstr ""
-"Устанавливает размер горизонтальной рамки внутри кнопки приложения. Рамка "
+"Устанавливает размер горизонтальной рамки внутри кнопки. Рамка "
 "применяется только к этому апплету на горизонтальных панелях."
 
 #. 2.8->settings-schema.json->middle-click-action->description
 msgid "Middle clicking app buttons creates new app instances"
-msgstr "Средние кнопки кнопок приложения создают новые экземпляры приложений"
+msgstr "Клик средней конпки создаёт новые окна приложений"
 
 #. 2.8->settings-schema.json->middle-click-action->tooltip
 msgid ""
@@ -620,7 +622,7 @@ msgid ""
 "Setting this to false will close the last focused window from the app group "
 "on middle click."
 msgstr ""
-"Определяет поведение средних кнопок мыши на кнопках приложений. При "
+"Определяет поведение средней кнопки мыши на кнопках приложений. При "
 "установке этого значения в false будет закрыто последнее сфокусированное "
 "окно из группы приложений при среднем клике."
 
@@ -692,7 +694,8 @@ msgid ""
 "Determines the duration the window count labels are replaced with the app's "
 "order number."
 msgstr ""
-"Определяет длительность замены счетчика окон на порядковые номера приложений."
+"Определяет длительность замены счетчика окон на "
+"порядковые номера приложений."
 
 #. 2.8->settings-schema.json->arrange-pinnedApps->description
 msgid "Arrange pinned apps"
@@ -736,69 +739,72 @@ msgstr ""
 
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
-msgstr ""
+msgstr "Выделить последнее активное окно в группе приложений"
 
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
-msgstr ""
+msgstr "Выделяет последнее окно, с которым взаимодействовали."
 
 #. 3.4->settings-schema.json->app-button-transition-duration->description
 msgid "App button transition duration"
-msgstr ""
+msgstr "Скорость анимации перехода стиля"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->tooltip
 msgid ""
 "Overrides the theme's animation time for app buttons. If set to zero, the "
 "theme's transition duration will be used."
 msgstr ""
+"Перезаписывает скорость анимации кнопки, установленной темой. "
+"Если выбран ноль, то скорость управляется темой."
 
 #. 3.4->settings-schema.json->app-button-transition-duration->units
 msgid "ms"
-msgstr ""
+msgstr "мс"
 
 #. 3.4->settings-schema.json->thumbnail-padding->description
 #, fuzzy
 msgid "Thumbnail padding"
-msgstr "Настройки миниатюр"
+msgstr "Отступы миниатюр"
 
 #. 3.4->settings-schema.json->thumbnail-padding->tooltip
 #, fuzzy
 msgid "Controls how much space will be around the window preview thumbnails."
-msgstr "Устанавливает расстояние между иконками в пикселях."
+msgstr "Устанавливает размер отступов вокруг миниатюр с предпросмотром окон."
 
 #. 3.4->settings-schema.json->system-favorites->description
 #, fuzzy
 msgid "Use system favorites for pinned apps"
-msgstr "Использование системных подсказок для закрытых приложений"
+msgstr "Системное избранное как прикрепленные приложения"
 
 #. 3.4->settings-schema.json->system-favorites->tooltip
 #, fuzzy
 msgid ""
 "Controls whether or not pinned apps consist of the system favorites list."
-msgstr "Показывать иконки прикрепленных приложений."
+msgstr ""
+"Прикрепленные приложения добавляются в список избранного в системе."
 
 #. 3.4->settings-schema.json->generalSection->title
 msgid "Behavior"
-msgstr ""
+msgstr "Поведение"
 
 #. 3.4->settings-schema.json->thumbnailsPage->title
 #. 3.4->settings-schema.json->thumbnailsSection->title
 #, fuzzy
 msgid "Thumbnails"
-msgstr "Размер миниатюры"
+msgstr "Миниатюры"
 
 #. 3.4->settings-schema.json->presetSection->title
 msgid "Recommended Presets"
-msgstr ""
+msgstr "Рекомендуемые настройки"
 
 #. 3.4->settings-schema.json->appButtonsSection->title
 msgid "App Buttons"
-msgstr ""
+msgstr "Кнопки приложений"
 
 #. 3.4->settings-schema.json->generalPage->title
 msgid "General"
-msgstr ""
+msgstr "Общие"
 
 #. 3.4->settings-schema.json->hoverPeekSection->title
 #, fuzzy
@@ -807,7 +813,7 @@ msgstr "Настройки наведения"
 
 #. 3.4->settings-schema.json->panelPage->title
 msgid "Panel"
-msgstr ""
+msgstr "Панель"
 
 #. 3.4->settings-schema.json->iconSection->title
 #, fuzzy
@@ -816,166 +822,176 @@ msgstr "Размер иконки"
 
 #. 3.4->settings-schema.json->hotKeysSection->title
 msgid "Hot Keys"
-msgstr ""
+msgstr "Горячие клавиши"
 
 #. 3.4->settings-schema.json->stylingSection->title
 msgid "Styling"
-msgstr ""
+msgstr "Стиль"
 
 #. 3.4->settings-schema.json->contextMenuPage->title
 #, fuzzy
 msgid "Context Menu"
-msgstr "Настройки контекстного меню"
+msgstr "Контекстное меню"
 
 #. 3.4->settings-schema.json->themePage->title
 #, fuzzy
 msgid "Theming"
-msgstr "Настройки темы"
+msgstr "Тема"
 
 #. 3.4->settings-schema.json->mintYPreset->description
 #. 3.4->settings-schema.json->mintYPreset->tooltip
 msgid "Mint Y and Variants"
-msgstr ""
+msgstr "Mint Y и другие"
 
 #. 3.4->settings-schema.json->show-icons->description
 #, fuzzy
 msgid "Show icons"
-msgstr "Нет иконок"
+msgstr "Показывать иконки"
 
 #. 3.4->settings-schema.json->show-icons->tooltip
 msgid "Show the window's icon next to the title."
-msgstr ""
+msgstr "Показывает иконки перед заголовком."
 
 #. 3.4->settings-schema.json->enable-app-button-dragging->description
 #. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
-msgstr ""
+msgstr "Перетаскивание кнопок"
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->description
 #, fuzzy
 msgid "Show new window option"
-msgstr "Отображать параметры автозагрузки"
+msgstr "Показывает опцию Новое окно"
 
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
 msgid ""
 "Shows the \"New Window\" option in an app's context menu if it doesn't "
 "already have one from the app's own action menu items."
 msgstr ""
+"Показывает опцию \"Новое окно\" в контекстном меню приложения, если "
+"в приложении такая возможность в меню отсутсвует."
 
 #. 3.4->settings-schema.json->app-button-width->description
 msgid "App button width"
-msgstr ""
+msgstr "Ширина кнопки"
 
 #. 3.4->settings-schema.json->app-button-width->tooltip
 #, fuzzy
 msgid ""
 "Controls the width of the application button. This option only works for "
 "horizontal panels."
-msgstr "Управляет размером миниатюры."
+msgstr ""
+"Управляет размером миниатюры. Работает только "
+"на горизонтальных панелях."
 
 #. 3.4->settings-schema.json->mintXPreset->description
 #. 3.4->settings-schema.json->mintXPreset->tooltip
 msgid "Mint X, Linux Mint, and Variants"
-msgstr ""
+msgstr "Mint X, Linux Mint и другие"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->description
 msgid "Launcher animation effect"
-msgstr ""
+msgstr "Анимация запуска"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->tooltip
 #. 3.4->settings-schema.json->left-click-action->description
 #. 3.4->settings-schema.json->left-click-action->tooltip
 msgid "Left click action"
-msgstr ""
+msgstr "Действие левого клика"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Scale"
-msgstr ""
+msgstr "Масштабирование"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Fade"
-msgstr ""
+msgstr "Затухание"
 
 #. 3.4->settings-schema.json->enable-app-button-width->description
 msgid "Use a custom width for app buttons"
-msgstr ""
+msgstr "Ширину кнопок задаёт пользователь"
 
 #. 3.4->settings-schema.json->enable-app-button-width->tooltip
 msgid "When disabled, the app button width is determined by the panel height."
-msgstr ""
+msgstr "Когда отключено, ширина кнопок задается высотой панели."
 
 #. 3.4->settings-schema.json->list-monitor-windows->description
 msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
+msgstr "Отображать список окон только для активного монитора"
 
 #. 3.4->settings-schema.json->list-monitor-windows->tooltip
 msgid ""
 "This option will only come into effect for monitors displaying an ITM "
 "instance."
 msgstr ""
+"Этот параметр будет работать только на мониторах с "
+"установленным ITM."
 
 #. 3.4->settings-schema.json->thumbnail-close-button-size->description
 #, fuzzy
 msgid "Close button size"
-msgstr "Установить размер иконки"
+msgstr "Размер кнопки закрытия"
 
 #. 3.4->settings-schema.json->thumbnail-close-button-size->tooltip
 #, fuzzy
 msgid "Controls how large the thumbnail close button is."
-msgstr "Разрешить теме установить кнопку закрытия миниатюр"
+msgstr "Устанавлиает размеры кнопки закрытия на миниатюре."
 
 #. 3.4->settings-schema.json->middle-click-action->description
 #. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid "Middle click action"
-msgstr ""
+msgstr "Действие среднего клика"
 
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Launch new app instance"
-msgstr ""
+msgstr "Открыть новое окно"
 
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Close last focused window in group"
-msgstr ""
+msgstr "Закрыть последнее активное окно в группе"
 
 #. 3.4->settings-schema.json->scroll-behavior->description
 msgid "Mouse wheel scroll behavior"
-msgstr ""
+msgstr "Поведение колёсика"
 
 #. 3.4->settings-schema.json->scroll-behavior->tooltip
 msgid ""
 "Choose if scrolling the mouse wheel cycles running apps, an app button's "
 "windows on hover, or is disabled."
 msgstr ""
+"Поведение скролла колёсиком мыши при "
+"наведении на кнопки приложений."
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 msgid "Cycle apps"
-msgstr ""
+msgstr "Переключение приложений"
 
 #. 3.4->settings-schema.json->scroll-behavior->options
 #. 3.4->settings-schema.json->left-click-action->options
 #, fuzzy
 msgid "Cycle windows"
-msgstr "Отображение всех окон приложения"
+msgstr "Переключение окон"
 
 #. 3.4->settings-schema.json->show-all-workspaces->description
 #. 3.4->settings-schema.json->show-all-workspaces->tooltip
 #, fuzzy
 msgid "Show windows from all workspaces"
-msgstr "На всех рабочих столах"
+msgstr "Показать окна со всех рабочих столов"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
 msgid "Cycle windows on mouse wheel scroll"
-msgstr ""
+msgstr "Переключение окон при скролле колёсиком мыши"
 
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
 msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
+"Поведение скролла колёсиком мыши при "
+"наведении на миниатюры окон."
 
 #. 3.4->settings-schema.json->left-click-action->options
 msgid "Toggle activation of last focused window"
-msgstr ""
+msgstr "Открыть последнее активное окно"
 
 #. IcingTaskManager@json->metadata.json->name
 msgid "Icing Task Manager"
@@ -985,64 +1001,3 @@ msgstr "Icing Task Manager"
 #, fuzzy
 msgid "Window list with app grouping and thumbnails"
 msgstr "Список окон с группировкой и миниатюрами"
-
-# Should not be set, just leave it blank by setting one white-space character
-#~ msgid "number"
-#~ msgstr " "
-
-#~ msgid "Show option to close all windows"
-#~ msgstr "Параметр 'Закрыть все'"
-
-#~ msgid ""
-#~ "Show a \"Close All\" context menu item to close all windows for an app."
-#~ msgstr "Показать параметр 'Закрыть все' для закрытия всех окон приложения."
-
-#~ msgid "Install Gda"
-#~ msgstr "Установить GDA"
-
-#~ msgid "Move to right workspace"
-#~ msgstr "На рабочий стол справа"
-
-#~ msgid "Settings"
-#~ msgstr "Настройки"
-
-#~ msgid "Rearrange"
-#~ msgstr "Перемещение"
-
-#~ msgid "Show Pinned"
-#~ msgstr "Прикрепленные"
-
-#~ msgid "Show Thumbs"
-#~ msgstr "Миниатюры"
-
-#~ msgid "Stack Thumbs"
-#~ msgstr "Стек миниатюр"
-
-#~ msgid "Peek on Hover"
-#~ msgstr "При наведении"
-
-#~ msgid "Show Recent"
-#~ msgstr "Недавние"
-
-#~ msgid "Vertical Thumbs"
-#~ msgstr "Вертикальные миниатюры"
-
-# 5 spaces in front of it
-#~ msgid "     Go to Settings"
-#~ msgstr "     Открыть настройки"
-
-#~ msgid "Group apps into single icon"
-#~ msgstr "Группировать окна приложения"
-
-#~ msgid "Group the open app instances into single icon"
-#~ msgstr "Группировать все открытые окна приложения в одну иконку."
-
-#~ msgid "Update this applet automatically"
-#~ msgstr "Автоматически обновлять апплет"
-
-#~ msgid ""
-#~ "When enabled, ITM will check the Github releases on init, and will start "
-#~ "to upgrade if it finds a newer version."
-#~ msgstr ""
-#~ "Если эта функция включена, ITM будет проверять релизы на Github и начнет "
-#~ "обновление, если он находит более новую версию."
