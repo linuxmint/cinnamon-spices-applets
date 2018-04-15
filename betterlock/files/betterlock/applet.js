@@ -47,25 +47,25 @@ MyApplet.prototype = {
             icon_name: "caps-on",
             icon_type: St.IconType.SYMBOLIC,
             icon_size: ICON_SIZE,
-            style_class: "applet-icon"
+            style_class: "system-status-icon"
         });
         this.caps_off = new St.Icon({
             icon_name: "caps-off",
             icon_type: St.IconType.SYMBOLIC,
             icon_size: ICON_SIZE,
-            style_class: "applet-icon"
+            style_class: "system-status-icon"
         });
         this.num_on = new St.Icon({
             icon_name: "num-on",
             icon_type: St.IconType.SYMBOLIC,
             icon_size: ICON_SIZE,
-            style_class: "applet-icon"
+            style_class: "system-status-icon"
         });
         this.num_off = new St.Icon({
             icon_name: "num-off",
             icon_type: St.IconType.SYMBOLIC,
             icon_size: ICON_SIZE,
-            style_class: "applet-icon"
+            style_class: "system-status-icon"
         });
 
         this.binNum.child = this.num_off;
