@@ -2,28 +2,31 @@ const GTop = imports.gi.GTop;
 const Gio = imports.gi.Gio;
 const GIRepository = imports.gi.GIRepository;
 
-let _;
+let _, tryFn;
 if (typeof require !== 'undefined') {
-  _ = require('./utils')._;
+  let utils = require('./utils');
+  _ = utils._;
+  tryFn = utils.tryFn;
 } else {
   const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
   _ = AppletDir.utils._;
+  tryFn = AppletDir.utils.tryFn;
 }
 
-let CONNECTED_STATE, NMClient_new;
-let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
-if (nm_index == -1) {
-  // The NetworkManager repository is not currently loaded so load the NM repo
-  const NM = imports.gi.NM;
-  CONNECTED_STATE = NM.DeviceState.Activated;
-  NMClient_new = () => { return NM.Client.new(null); }
-} else {
-  // The NetworkManager repository is current loaded so load it and the NMClient repos
+let CONNECTED_STATE, NMClient_new, newNM;
+// Fallback to the new version.
+tryFn(function() {
   const NMClient = imports.gi.NMClient;
   const NetworkManager = imports.gi.NetworkManager;
-  CONNECTED_STATE = NetworkManager.DeviceState.CONNECTED;
-  NMClient_new = () => { return NMClient.Client.new(); }
-}
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.ACTIVATED;
+  NMClient_new = NM.Client.new;
+  newNM = true;
+});
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
@@ -200,7 +203,8 @@ NetDataProvider.prototype = {
     this.name = _('NET');
     this.isEnabled = true;
     this.gtop = new GTop.glibtop_netload();
-    this.nmClient = NMClient_new();
+    let args = newNM ? [null] : [];
+    this.nmClient = NMClient_new.apply(this, args);
     this.signals = [
       this.nmClient.connect('device-added', () => this.getNetDevices()),
       this.nmClient.connect('device-removed', () => this.getNetDevices())
