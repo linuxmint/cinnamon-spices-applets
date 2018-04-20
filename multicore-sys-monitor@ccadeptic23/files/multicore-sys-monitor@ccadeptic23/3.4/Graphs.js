@@ -200,6 +200,9 @@ GraphLineChart.prototype = {
   refreshData: function(currentReadings, providerName) {
     let dataPoints = [];
     for (let i = 0; i < currentReadings.length; i++) {
+      if (!currentReadings[i].readingRatesList) {
+        continue;
+      }
       dataPoints = dataPoints.concat(currentReadings[i].readingRatesList);
     }
     if (dataPoints.length === 0) {

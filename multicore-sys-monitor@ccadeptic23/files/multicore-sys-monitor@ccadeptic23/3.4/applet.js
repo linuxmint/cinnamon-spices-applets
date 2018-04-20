@@ -9,6 +9,36 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 
+if (typeof Object.assign !== 'function') {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, "assign", {
+    value: function assign(target, varArgs) { // .length of function is 2
+      'use strict';
+      if (target == null) { // TypeError if undefined or null
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource != null) { // Skip over if undefined or null
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
+
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
@@ -108,6 +138,7 @@ MyApplet.prototype = {
     this.metadata = metadata;
     this._panelHeight = panel_height;
     this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+    this.shouldUpdate = true;
 
     let configFile = Gio.file_new_for_path(this.configFilePath);
 
@@ -124,6 +155,9 @@ MyApplet.prototype = {
     this.configSettings = new ConfigSettings(this.configFilePath);
 
     this._initContextMenu();
+
+    this.actor.connect('enter-event', () => this.hovered = true)
+    this.actor.connect('leave-event', () => this.hovered = false)
 
     this.graphArea = new St.DrawingArea();
 
@@ -162,11 +196,14 @@ MyApplet.prototype = {
     this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
 
     this.actor.add_actor(this.graphArea);
-    this._update();
+    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
 
   on_applet_removed_from_panel: function() {
-    this.willUnmount = true;
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.shouldUpdate = false;
     this.graphArea.destroy();
     this.actor.destroy();
     this.networkProvider.destroy();
@@ -207,12 +244,9 @@ MyApplet.prototype = {
 
   _update: function() {
     // This loops on interval, we need to make sure it stops when the xlet is removed.
-    if (this.willUnmount || !this.networkProvider) {
+    if (!this.networkProvider) {
       this.loopId = 0;
       return false;
-    }
-    if (this.loopId) {
-      Mainloop.source_remove(this.loopId);
     }
     if (this.childProcessHandler != null) {
       let currentMessage = this.childProcessHandler.getCurrentMessage();
@@ -250,10 +284,12 @@ MyApplet.prototype = {
     }
 
     this.graphArea.queue_repaint();
-    this.set_applet_tooltip(appletTooltipString);
+    if (this.hovered) {
+      this.set_applet_tooltip(appletTooltipString);
+    }
 
     // set next refresh time
-    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
+    return this.shouldUpdate;
   },
   onGraphRepaint: function(area) {
     let xOffset = 0;
