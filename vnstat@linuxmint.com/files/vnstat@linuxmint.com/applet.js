@@ -8,25 +8,32 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const GLib = imports.gi.GLib;
-// const NMClient = imports.gi.NMClient;
-// const NetworkManager = imports.gi.NetworkManager;
 
-// Code for selecting network manager thanks to Jeffrey Bush
-const GIRepository = imports.gi.GIRepository;
-let CONNECTED_STATE, NMClient_new;
-let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
-if (nm_index == -1) {
-  // The NetworkManager repository is not currently loaded so load the NM repo
-  const NM = imports.gi.NM;
-  CONNECTED_STATE = NM.DeviceState.Activated;
-  NMClient_new = () => { return NM.Client.new(null); }
-} else {
-  // The NetworkManager repository is current loaded so load it and the NMClient repos
+// Code for selecting network manager thanks to Jason Hicks
+let tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      errCb(e);
+    }
+  }
+}
+
+let CONNECTED_STATE, NMClient_new, newNM;
+// Fallback to the new version.
+tryFn(function() {
   const NMClient = imports.gi.NMClient;
   const NetworkManager = imports.gi.NetworkManager;
-  CONNECTED_STATE = NetworkManager.DeviceState.ACTIVATED;
-  NMClient_new = () => { return NMClient.Client.new(); }
-}
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.ACTIVATED;
+  NMClient_new = NM.Client.new;
+  newNM = true;
+});
 
 // l10n/translation
 const Gettext = imports.gettext;
