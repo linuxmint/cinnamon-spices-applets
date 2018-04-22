@@ -72,7 +72,8 @@ MyApplet.prototype = {
             this._device = "null";
             this.vnstatImage = GLib.get_home_dir() + "/vnstatlmapplet.png";
 //            this._client = NMClient.Client.new();
-            this._client = NMClient_new();
+            let args = newNM ? [null] : [];
+            this._client = NMClient_new.apply(this, args);
             
         }
         catch (e) {
