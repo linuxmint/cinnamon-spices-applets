@@ -7,30 +7,37 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-// const NetworkManager = imports.gi.NetworkManager;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings; // Needed for settings API
 const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
-// const NMClient = imports.gi.NMClient; 
 const Gettext = imports.gettext; // ++ Needed for translations
 
-// Code for selecting network manager thanks to Jeffrey Bush
-const GIRepository = imports.gi.GIRepository;
-let CONNECTED_STATE, NMClient_new;
-let nm_index = GIRepository.Repository.get_default().get_loaded_namespaces().indexOf('NetworkManager')
-if (nm_index == -1) {
-  // The NetworkManager repository is not currently loaded so load the NM repo
-  const NM = imports.gi.NM;
-  CONNECTED_STATE = NM.DeviceState.Activated;
-  NMClient_new = () => { return NM.Client.new(null); }
-} else {
-  // The NetworkManager repository is current loaded so load it and the NMClient repos
+// Code for selecting network manager thanks to Jason Hicks
+let tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      errCb(e);
+    }
+  }
+}
+
+let CONNECTED_STATE, NMClient_new, newNM;
+// Fallback to the new version.
+tryFn(function() {
   const NMClient = imports.gi.NMClient;
   const NetworkManager = imports.gi.NetworkManager;
-  CONNECTED_STATE = NetworkManager.DeviceState.ACTIVATED;
-  NMClient_new = () => { return NMClient.Client.new(); }
-}
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.ACTIVATED;
+  NMClient_new = NM.Client.new;
+  newNM = true;
+});
 
 // Localisation/translation support - moved up and slightly non standard due to GTOP test which follows.
 var UUID = "netusagemonitor@pdcurtis";
@@ -251,8 +258,9 @@ MyApplet.prototype = {
 
             this.applet_running = true; //** New
  
-//            this._client = NMClient.Client.new();
-            this._client = NMClient_new();
+//          More code for selecting network manager thanks to Jason Hicks
+            let args = newNM ? [null] : [];
+            this._client = NMClient_new.apply(this, args);
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
