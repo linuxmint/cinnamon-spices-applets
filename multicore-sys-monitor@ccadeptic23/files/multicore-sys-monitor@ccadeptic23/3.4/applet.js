@@ -9,36 +9,6 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 
-if (typeof Object.assign !== 'function') {
-  // Must be writable: true, enumerable: false, configurable: true
-  Object.defineProperty(Object, "assign", {
-    value: function assign(target, varArgs) { // .length of function is 2
-      'use strict';
-      if (target == null) { // TypeError if undefined or null
-        throw new TypeError('Cannot convert undefined or null to object');
-      }
-
-      var to = Object(target);
-
-      for (var index = 1; index < arguments.length; index++) {
-        var nextSource = arguments[index];
-
-        if (nextSource != null) { // Skip over if undefined or null
-          for (var nextKey in nextSource) {
-            // Avoid bugs when hasOwnProperty is shadowed
-            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
-              to[nextKey] = nextSource[nextKey];
-            }
-          }
-        }
-      }
-      return to;
-    },
-    writable: true,
-    configurable: true
-  });
-}
-
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const St = imports.gi.St;
@@ -79,6 +49,36 @@ tryFn(function() {
   global.logError(e);
   GTop = null;
 });
+
+if (typeof Object.assign !== 'function') {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, "assign", {
+    value: function assign(target, varArgs) { // .length of function is 2
+      'use strict';
+      if (target == null) { // TypeError if undefined or null
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource != null) { // Skip over if undefined or null
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
 
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
@@ -186,14 +186,12 @@ MyApplet.prototype = {
 
     this.networkGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.net.width);
     //For us this means the heighest point wont represent a valuelower than 1Kb/s
-    this.networkGraph.setMinScaleYvalue(1.0);
-    this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
-    this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+    this.networkGraph.autoScale = this.configSettings._prefs.net.autoscale;
+    this.networkGraph.logScale = this.configSettings._prefs.net.logscale;
 
     this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.disk.width);
-    this.diskGraph.setMinScaleYvalue(1.0);
-    this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
-    this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
+    this.diskGraph.autoScale = this.configSettings._prefs.disk.autoscale;
+    this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
     this.actor.add_actor(this.graphArea);
     this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
@@ -205,13 +203,8 @@ MyApplet.prototype = {
     }
     this.shouldUpdate = false;
     this.graphArea.destroy();
-    this.actor.destroy();
     this.networkProvider.destroy();
     this.diskProvider.destroy();
-    let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
-    }
   },
 
   _initContextMenu: function() {
@@ -258,13 +251,14 @@ MyApplet.prototype = {
       }
       // Do any required processing when configuration changes
       this.networkProvider.setDisabledInterfaces(this.configSettings.getDisabledDevices('net'));
-      this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
-      this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+      this.networkGraph.autoScale = this.configSettings._prefs.net.autoscale;
+      this.networkGraph.logScale = this.configSettings._prefs.net.logscale;
+
       // check for new drives that are mounted
       this.configSettings.adjustDevices('net', this.networkProvider.currentReadings);
       this.diskProvider.setDisabledDevices(this.configSettings.getDisabledDevices('disk'));
-      this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
-      this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
+      this.diskGraph.autoScale = this.configSettings._prefs.disk.autoscale;
+      this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
       if (this.childProcessHandler.isChildFinished()) {
         this.childProcessHandler.destroy();
@@ -299,7 +293,8 @@ MyApplet.prototype = {
       }
       if (this[properties[i].provider].isEnabled) {
         // translate origin to the new location for the graph
-        area.get_context().translate(xOffset, 0);
+        let areaContext = area.get_context();
+        areaContext.translate(xOffset, 0);
         let width = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].width * global.ui_scale;
         if (properties[i].abbrev === 'MEM') {
           // paint the "swap" backdrop
@@ -307,6 +302,7 @@ MyApplet.prototype = {
             this.swapProvider.name,
             this.swapProvider.currentReadings,
             area,
+            areaContext,
             // no label for the backdrop
             false,
             width,
@@ -314,13 +310,14 @@ MyApplet.prototype = {
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
             [0, 0, 0, 0],
-            this.configSettings.getSwapColorList()
+            this.configSettings._prefs.mem.swapcolors
           );
         }
         this[properties[i].graph].paint(
           this[properties[i].provider].name,
           this[properties[i].provider].currentReadings,
           area,
+          areaContext,
           this.configSettings._prefs.labelsOn,
           width,
           this._panelHeight - 2 * global.ui_scale,
@@ -329,7 +326,7 @@ MyApplet.prototype = {
           this.configSettings['get' + properties[i].abbrev + 'ColorList']()
         );
         // return translation to origin
-        area.get_context().translate(-xOffset, 0);
+        areaContext.translate(-xOffset, 0);
         // update xOffset for next translation
         xOffset += width + 1;
       }

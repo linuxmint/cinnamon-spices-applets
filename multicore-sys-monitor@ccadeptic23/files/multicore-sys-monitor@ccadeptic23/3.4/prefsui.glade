@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.1 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
+  <requires lib="gtk+" version="3.18"/>
   <object class="GtkAdjustment" id="cpuWidthAdjustment">
     <property name="lower">10</property>
     <property name="upper">100</property>
@@ -44,13 +44,16 @@
     <property name="step_increment">1</property>
     <property name="page_increment">100</property>
   </object>
-  <object class="GtkWindow" id="windowMain">
+  <object class="GtkApplicationWindow" id="windowMain">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Multi-Core System Monitor Preferences</property>
     <property name="window_position">center</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon_name">preferences-system</property>
     <property name="has_resize_grip">True</property>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
@@ -88,7 +91,6 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="labelsSwitch">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                       </object>
@@ -201,7 +203,6 @@
                     </child>
                     <child>
                       <object class="GtkColorButton" id="labelColorButton">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -253,7 +254,6 @@
                     </child>
                     <child>
                       <object class="GtkColorButton" id="backgroundColorButton">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
@@ -312,7 +312,6 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="cpuEnableSwitch">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="valign">center</property>
@@ -484,7 +483,6 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="memEnableSwitch">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="halign">center</property>
@@ -614,7 +612,6 @@
                             </child>
                             <child>
                               <object class="GtkColorButton" id="usedupColorButton">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -653,7 +650,6 @@
                             </child>
                             <child>
                               <object class="GtkColorButton" id="cachedColorButton">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -692,7 +688,6 @@
                             </child>
                             <child>
                               <object class="GtkColorButton" id="bufferColorButton">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -731,7 +726,6 @@
                             </child>
                             <child>
                               <object class="GtkColorButton" id="freeColorButton">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="receives_default">True</property>
@@ -793,7 +787,6 @@
                         </child>
                         <child>
                           <object class="GtkColorButton" id="swapColorButton">
-                            <property name="use_action_appearance">False</property>
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="receives_default">True</property>
@@ -864,7 +857,6 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="netEnableSwitch">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="valign">center</property>
@@ -985,7 +977,6 @@
                                 <property name="receives_default">True</property>
                                 <property name="halign">start</property>
                                 <property name="relief">none</property>
-                                <property name="xalign">0</property>
                                 <child>
                                   <object class="GtkImage" id="image1">
                                     <property name="visible">True</property>
@@ -1027,7 +1018,6 @@
                             </child>
                             <child>
                               <object class="GtkSwitch" id="netAutoScaleSwitch">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
@@ -1117,21 +1107,37 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="netDevicesChoicesBox">
+                      <object class="GtkScrolledWindow" id="netDevicesScrollWindow">
+                        <property name="width_request">725</property>
+                        <property name="height_request">400</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">25</property>
-                        <property name="margin_right">25</property>
-                        <property name="orientation">vertical</property>
-                        <property name="homogeneous">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="shadow_type">in</property>
                         <child>
-                          <placeholder/>
+                          <object class="GtkBox" id="netDevicesChoicesBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">25</property>
+                            <property name="margin_right">25</property>
+                            <property name="resize_mode">immediate</property>
+                            <property name="orientation">vertical</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="padding">10</property>
+                            <property name="position">6</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="padding">10</property>
                         <property name="position">6</property>
                       </packing>
                     </child>
@@ -1186,7 +1192,6 @@
                     </child>
                     <child>
                       <object class="GtkSwitch" id="diskEnableSwitch">
-                        <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="valign">center</property>
@@ -1318,7 +1323,6 @@
                                 <property name="receives_default">True</property>
                                 <property name="halign">start</property>
                                 <property name="relief">none</property>
-                                <property name="xalign">0</property>
                                 <child>
                                   <object class="GtkImage" id="image2">
                                     <property name="visible">True</property>
@@ -1360,7 +1364,6 @@
                             </child>
                             <child>
                               <object class="GtkSwitch" id="diskAutoScaleSwitch">
-                                <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="valign">center</property>
@@ -1450,21 +1453,36 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox" id="diskDevicesChoicesBox">
+                      <object class="GtkScrolledWindow" id="diskDevicesScrollWindow">
+                        <property name="width_request">725</property>
+                        <property name="height_request">400</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin_left">25</property>
-                        <property name="margin_right">25</property>
-                        <property name="orientation">vertical</property>
-                        <property name="homogeneous">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="vexpand">True</property>
+                        <property name="shadow_type">in</property>
                         <child>
-                          <placeholder/>
+                          <object class="GtkBox" id="diskDevicesChoicesBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="margin_left">25</property>
+                            <property name="margin_right">25</property>
+                            <property name="orientation">vertical</property>
+                            <property name="homogeneous">True</property>
+                            <child>
+                              <placeholder/>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="padding">10</property>
+                            <property name="position">6</property>
+                          </packing>
                         </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="padding">10</property>
                         <property name="position">6</property>
                       </packing>
                     </child>
@@ -1508,7 +1526,6 @@
             <child>
               <object class="GtkButton" id="applyButton">
                 <property name="label">gtk-save</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1523,7 +1540,6 @@
             <child>
               <object class="GtkButton" id="cancelButton">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1544,14 +1560,14 @@
         </child>
       </object>
     </child>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
   </object>
   <object class="GtkMessageDialog" id="scalingAboutDialog">
     <property name="can_focus">False</property>
     <property name="type_hint">dialog</property>
     <property name="text" translatable="yes">Scaling Description</property>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox">
         <property name="can_focus">False</property>
@@ -1618,9 +1634,6 @@ Logarithmic Scaling:
           </packing>
         </child>
       </object>
-    </child>
-    <child>
-      <placeholder/>
     </child>
   </object>
 </interface>
