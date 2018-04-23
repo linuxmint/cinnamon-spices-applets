@@ -205,7 +205,6 @@ MyApplet.prototype = {
     }
     this.shouldUpdate = false;
     this.graphArea.destroy();
-    this.actor.destroy();
     this.networkProvider.destroy();
     this.diskProvider.destroy();
     let props = Object.keys(this);
