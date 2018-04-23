@@ -205,10 +205,6 @@ MyApplet.prototype = {
     this.graphArea.destroy();
     this.networkProvider.destroy();
     this.diskProvider.destroy();
-    let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
-    }
   },
 
   _initContextMenu: function() {
