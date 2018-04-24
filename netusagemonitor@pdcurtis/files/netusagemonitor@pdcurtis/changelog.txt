@@ -173,3 +173,9 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
  * Improved notification when vnstat and vnstati not installed
  * Tidy up code 
  * Better formatting of CHANGELOG.md
+## 3.2.4.1
+  * Changes to README.md to alert users to problems on Fedora 27 with changes in network manager libraries - issue #1647
+## 3.2.5
+  * Changes to check which network manager libraries are in use and choose which to use - addresses/solves issue #1647 with Fedora versions 27 and higher.
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+  * Note that there may be problems with option of disconnecting the network manager when data usage limit is exceeded so checks are needed under NM before the issue can be marked as closed.

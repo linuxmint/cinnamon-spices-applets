@@ -7,13 +7,37 @@ const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
-const NetworkManager = imports.gi.NetworkManager;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings; // Needed for settings API
 const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
-const NMClient = imports.gi.NMClient; // Needed for modifications to NM calls 
 const Gettext = imports.gettext; // ++ Needed for translations
+
+// Code for selecting network manager thanks to Jason Hicks
+let tryFn = function(fn, errCb) {
+  try {
+    return fn();
+  } catch (e) {
+    if (typeof errCb === 'function') {
+      errCb(e);
+    }
+  }
+}
+
+let CONNECTED_STATE, NMClient_new, newNM;
+// Fallback to the new version.
+tryFn(function() {
+  const NMClient = imports.gi.NMClient;
+  const NetworkManager = imports.gi.NetworkManager;
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.ACTIVATED;
+  NMClient_new = NM.Client.new;
+  newNM = true;
+});
 
 // Localisation/translation support - moved up and slightly non standard due to GTOP test which follows.
 var UUID = "netusagemonitor@pdcurtis";
@@ -234,12 +258,15 @@ MyApplet.prototype = {
 
             this.applet_running = true; //** New
  
-            this._client = NMClient.Client.new(); //++
+//          More code for selecting network manager thanks to Jason Hicks
+            let args = newNM ? [null] : [];
+            this._client = NMClient_new.apply(this, args);
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else { 
-               this.textEd = "xed";
+//               this.textEd = "xed";
+               this.textEd = "xdg-open";
             }
 
             this.abortFlag = true;
@@ -406,7 +433,7 @@ MyApplet.prototype = {
         if (interfaces != null) {
             for (let i = 0; i < interfaces.length; i++) {
                 let iname = interfaces[i].get_iface();
-                if (iname == name && interfaces[i].state == NetworkManager.DeviceState.ACTIVATED) {
+                if (iname == name && interfaces[i].state == CONNECTED_STATE) {
                     return true;
                 }
             }
@@ -792,7 +819,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
      networkingDisable: function () {
           if(!this.abortFlag) {
-               this._client.networking_enabled = false; // Call to NMClient
+               this._client.networking_enabled = false; // Need to check with NM library
                alertModalNetworkingDisabled = new AlertDialog_(("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll Network connections managed by the Network Manager have been Disabled\n\nYou will need to use the Network Manager Applet to Re-enable them\nwhen the data usage problem has been resolved\n\n Some connections using ppp0 may not have been disabled or may need to be restarted manually"));
               alertModalNetworkingDisabled.open();
           } else {
@@ -1181,5 +1208,11 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
  * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox which led to CJS warnings.
  * Improved notification when vnstat and vnstati not installed
  * Tidy up code 
- * Better formatting of CHANGELOG.md     
+ * Better formatting of CHANGELOG.md
+## 3.2.4.1
+  * Changes to README.md to alert users to problems on Fedora 27 with changes in network manager libraries - issue #1647
+## 3.2.5
+  * Changes to check which network manager libraries are in use and choose which to use - addresses/solves issue #1647 with Fedora versions 27 and higher.
+  * Note that there may be problems with option of disconnecting the network manager when data usage limit is exceeded so checks are needed under NM before the issue can be marked as closed.
+  * Use xdg-open in place of gedit or xed to allow use on more distros 
 */

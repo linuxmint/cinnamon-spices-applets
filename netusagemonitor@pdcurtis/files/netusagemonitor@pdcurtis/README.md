@@ -12,13 +12,8 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
             ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
    * Cinnamon Version 2.2 or higher ie. It can be used with all supported versions of Mint.
-
-## Warning about use on Distributions other than Mint:
-
-   * This Applet was originally designed to be used with Cinnamon running under Mint and has largely been tested under Mint.
-   * It currently assumes the NMClient and NetworkManager libraries are available and in use as is the case in Mint versions up to 18.3 and most other current distro versions.
-   * It  cannot be loaded on Fedora 27 (and possibly future versions of Linux Mint or other distros) due to the move from NMClient and NetworkManager libraries to NM.
-   * Attempting to add this applet on Fedora 27 may cause Cinnamon to continually crash (issue #1647).
+   * It currently assumes the NMClient and NetworkManager libraries are in use as is the case in Mint versions up to 18.3 and most other current distro versions.
+   * The latest versions can also switch to the more recent NM library if the NetworkManager Library is not available.
 
 ## Features:
 

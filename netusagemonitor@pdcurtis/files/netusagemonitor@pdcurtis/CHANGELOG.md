@@ -1,5 +1,12 @@
 ### Changelog covering recent significant changes
 
+## 3.2.5
+
+  * Changes to check which network manager libraries are in use and choose which to use - addresses/solves issue #1647 with Fedora versions 27 and higher.
+  * Note that there may be problems with option of disconnecting the network manager when data usage limit is exceeded so checks are needed under NM before the issue can be marked as closed.
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+  * Update README.md
+
 ## 3.2.4
 
  * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox.
@@ -25,7 +32,7 @@ Support new facility on Cinnamon Spices Web Site to display a CHANGELOG.md
 
  * Harmonise with code writen by author for vnstat@cinnamon.org
 
-##3.2.0
+## 3.2.0
 
  * Remove duplicate let declarations occurances in common coding for Cinnamon 3.4 thanks to @NikoKraus  [#604]
 
