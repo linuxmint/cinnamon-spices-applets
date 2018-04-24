@@ -1,10 +1,13 @@
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+
+var GTop;
 try {
-    var GTop = imports.gi.GTop;
+    GTop = imports.gi.GTop;
 }
 catch (e) {
-    var GTop = null;
+    global.log(e)
+    GTop = null;
 }
 
 const UUID = "sysmonitor@orcus";
