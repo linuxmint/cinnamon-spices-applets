@@ -165,8 +165,8 @@ MyApplet.prototype =
         try
         {
             Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instanceId);
-        
-            menuItem = new Applet.MenuItem(_("Indexing Preferences"), null, Lang.bind(this, function(actor, event)
+
+            let menuItem = new Applet.MenuItem(_("Indexing Preferences"), null, Lang.bind(this, function(actor, event)
             {
                 Util.spawnCommandLine('tracker-preferences');
             }));
