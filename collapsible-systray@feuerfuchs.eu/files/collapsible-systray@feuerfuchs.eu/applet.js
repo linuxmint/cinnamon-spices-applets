@@ -761,40 +761,40 @@ CollapsibleSystrayApplet.prototype = {
         iconWrap.setVertical(this._direction == this.Direction.VERTICAL);
 
         if (["livestreamer-twitch-gui", "chromium", "swt"].indexOf(role) != -1) {
-            iconWrap.csDisable = function() {
+            iconWrap.csDisable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     iconWrapContent.set_child(null);
                 }
-            }
-            iconWrap.csEnable = function() {
+            });
+            iconWrap.csEnable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     iconWrapContent.set_child(icon);
                 }
-            }
+            });
             iconWrap.csEnableAfter = function() { }
         } else if (["pidgin"].indexOf(role) != -1) {
-            iconWrap.csDisable = function() {
+            iconWrap.csDisable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     icon.window.hide();
                 }
-            }
+            });
             iconWrap.csEnable = function() { }
-            iconWrap.csEnableAfter = function() {
+            iconWrap.csEnableAfter = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     icon.window.show();
                 }
-            }
+            });
         } else {
-            iconWrap.csDisable = function() {
+            iconWrap.csDisable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     icon.window.hide();
                 }
-            }
-            iconWrap.csEnable = function() {
+            });
+            iconWrap.csEnable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     icon.window.show();
                 }
-            }
+            });
             iconWrap.csEnableAfter = function() { }
         }
 
@@ -827,16 +827,16 @@ CollapsibleSystrayApplet.prototype = {
             this.manager_container.remove_actor(iconActor.actor);
 
             iconActor.actor.isIndicator = true;
-            iconActor.actor.csDisable = function() {
+            iconActor.actor.csDisable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     iconActor.actor.set_reactive(false);
                 }
-            }
-            iconActor.actor.csEnable = function() {
+            });
+            iconActor.actor.csEnable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     iconActor.actor.set_reactive(true);
                 }
-            }
+            });
             iconActor.actor.csEnableAfter = function() { }
             iconActor.actor.connect('destroy', Lang.bind(this, function() {
                 this._unregisterAppIcon(id, iconActor.actor);
