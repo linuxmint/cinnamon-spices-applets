@@ -1,7 +1,52 @@
 {
-    "behavior-header": {
-        "type":        "header",
-        "description": "Behavior"
+    "layout": {
+        "type":  "layout",
+        "pages": [ "behavior", "appearance" ],
+
+        "behavior": {
+            "type":     "page",
+            "title":    "Behavior",
+            "sections": [ "behavior-section" ]
+        },
+        "behavior-section": {
+            "type":  "section",
+            "title": "Behavior",
+            "keys":  [
+                "animation-support",
+                "animation-duration",
+                "expand-on-hover",
+                "expand-on-hover-delay",
+                "collapse-on-leave",
+                "collapse-on-leave-delay",
+                "init-delay"
+            ]
+        },
+
+        "appearance": {
+            "type":     "page",
+            "title":    "Appearance",
+            "sections": [ "appearance-section" ]
+        },
+        "appearance-section": {
+            "type":  "section",
+            "title": "Appearance",
+            "keys":  [
+                "sort-icons",
+                "no-hover-for-tray-icons",
+                "horizontal-expand-icon-name",
+                "horizontal-collapse-icon-name",
+                "vertical-expand-icon-name",
+                "vertical-collapse-icon-name",
+                "tray-icon-padding"
+            ]
+        }
+    },
+
+    "animation-support": {
+        "type":        "checkbox",
+        "default":     true,
+        "description": "Animation support (disable if icons stop updating)",
+        "tooltip":     "Disable if you have issues with icons not updating themselves."
     },
 
     "animation-duration": {
@@ -11,7 +56,8 @@
         "max":         2000,
         "step":        50,
         "units":       "milliseconds",
-        "description": "Animation duration: "
+        "description": "Animation duration",
+        "dependency":  "animation-support"
     },
 
     "expand-on-hover": {
@@ -28,7 +74,8 @@
         "step":        100,
         "dependency":  "expand-on-hover",
         "units":       "milliseconds",
-        "description": "Expand on hover delay: "
+        "description": "Expand on hover delay",
+        "indent":      true
     },
 
     "collapse-on-leave": {
@@ -45,7 +92,8 @@
         "step":        100,
         "dependency":  "collapse-on-leave",
         "units":       "milliseconds",
-        "description": "Collapse on un-hover delay: "
+        "description": "Collapse on un-hover delay",
+        "indent":      true
     },
 
     "init-delay": {
@@ -55,17 +103,8 @@
         "max":         30,
         "step":        1,
         "units":       "seconds",
-        "description": "Startup collapse delay: ",
+        "description": "Startup collapse delay",
         "tooltip" :    "The delay until the applet automatically collapses upon startup"
-    },
-
-    "sep-1": {
-        "type": "separator"
-    },
-
-    "appearance-header": {
-        "type":        "header",
-        "description": "Appearance"
     },
 
     "sort-icons": {
@@ -85,28 +124,28 @@
     "horizontal-expand-icon-name": {
         "type":         "iconfilechooser",
         "default" :     "pan-start",
-        "description" : "Horizontal expand icon: ",
+        "description" : "Horizontal expand icon",
         "tooltip" :     "Enter either the icon's qualified name or it's full path"
     },
 
     "horizontal-collapse-icon-name": {
         "type":         "iconfilechooser",
         "default" :     "pan-end",
-        "description" : "Horizontal collapse icon: ",
+        "description" : "Horizontal collapse icon",
         "tooltip" :     "Enter either the icon's qualified name or it's full path"
     },
 
     "vertical-expand-icon-name": {
         "type":         "iconfilechooser",
         "default" :     "pan-up",
-        "description" : "Vertical expand icon: ",
+        "description" : "Vertical expand icon",
         "tooltip" :     "Enter either the icon's qualified name or it's full path"
     },
 
     "vertical-collapse-icon-name": {
         "type":         "iconfilechooser",
         "default" :     "pan-down",
-        "description" : "Vertical collapse icon: ",
+        "description" : "Vertical collapse icon",
         "tooltip" :     "Enter either the icon's qualified name or it's full path"
     },
 
@@ -117,7 +156,7 @@
         "max":         20,
         "step":        1,
         "units":       "px",
-        "description": "Padding of tray icons: "
+        "description": "Padding of tray icons"
     },
 
     "icon-visibility-list": {
