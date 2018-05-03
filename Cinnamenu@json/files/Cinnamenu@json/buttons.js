@@ -303,7 +303,8 @@ ApplicationContextMenuItem.prototype = {
     this.signals = new SignalManager.SignalManager(null);
     this._action = action;
     this.label = new St.Label({
-      text: label
+      text: label,
+      style: 'font-size: 11px;'
     });
     if (iconName !== null) {
       this.icon = new St.Icon({
@@ -319,6 +320,11 @@ ApplicationContextMenuItem.prototype = {
     this.addActor(this.label);
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
+    // Override padding to help prevent label truncation, the menu container width is restricted to the column width,
+    // so unless we turn the context menu into a modal somehow (not likely since it will fight for input with the parent),
+    // this is the most practical solution for the grid.
+    this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important; width: 215px !important;');
+    this.setColumnWidths([8, 132])
   },
 
   handleEnter: function (actor, event) {
@@ -448,6 +454,7 @@ AppListGridButton.prototype = {
       activate: false
     });
     this.actor.set_style_class_name('menu-application-button');
+    this.actor.set_style('padding-left: 0px; padding-right: 0px;')
     this.actor.x_align = this.state.isListView ? St.Align.START : St.Align.MIDDLE;
     this.actor.y_align = St.Align.MIDDLE;
     if (!this.state.isListView) {
@@ -623,6 +630,7 @@ AppListGridButton.prototype = {
     if (this.buttonState.appType === ApplicationType._applications) {
       this.menu = new PopupMenu.PopupSubMenu(this.actor);
       this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
+      this.menu.actor.set_style('width: 225px !important;')
       this.menu.actor.set_opacity(245)
       this.menu.isOpen = false;
       this.buttonBox.add_actor(this.menu.actor);

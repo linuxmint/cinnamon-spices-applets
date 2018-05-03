@@ -1,5 +1,10 @@
 Changelog
 
+### 3.2.1
+
+  * Addressed an issue with the context menu labels being truncated.
+  * Fixed search text clipping.
+
 ### 3.2.0
 
   * Added drag and drop category re-ordering.
