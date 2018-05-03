@@ -298,7 +298,6 @@ CollapsibleSystrayApplet.prototype = {
         if (instanceArray.length == 0) {
             global.log("[" + uuid + "] No more instances left");
 
-            delete instanceArray;
             delete this._registeredAppIcons[id];
             this._addApplicationMenuItem(id, this.Menu.INACTIVE_APPLICATIONS);
             this._refreshCollapseBtnState();
