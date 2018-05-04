@@ -27,15 +27,15 @@ if (typeof require !== 'undefined') {
 function registerKeyBindings(registerUpDownKeyBindings) {
     try {
         if (registerUpDownKeyBindings) {
-            Meta.keybindings_set_custom_handler('switch-to-workspace-up', Lang.bind(this, switchWorkspace));
-            Meta.keybindings_set_custom_handler('switch-to-workspace-down', Lang.bind(this, switchWorkspace));
+            Meta.keybindings_set_custom_handler('switch-to-workspace-up', switchWorkspace);
+            Meta.keybindings_set_custom_handler('switch-to-workspace-down', switchWorkspace);
         }
         else {
             Meta.keybindings_set_custom_handler('switch-to-workspace-up', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
             Meta.keybindings_set_custom_handler('switch-to-workspace-down', Lang.bind(Main.wm, Main.wm._showWorkspaceSwitcher));
         }
-        Meta.keybindings_set_custom_handler('switch-to-workspace-left', Lang.bind(this, switchWorkspace));
-        Meta.keybindings_set_custom_handler('switch-to-workspace-right', Lang.bind(this, switchWorkspace));
+        Meta.keybindings_set_custom_handler('switch-to-workspace-left', switchWorkspace);
+        Meta.keybindings_set_custom_handler('switch-to-workspace-right', switchWorkspace);
     }
     catch (e) {
         global.log("workspace-grid@hernejj: Registering keybindings failed!");
