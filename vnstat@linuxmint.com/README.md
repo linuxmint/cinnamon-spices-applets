@@ -26,12 +26,13 @@ It is possible to add additional devices, for example a USB Mobile Internet stic
 
 ## Use on Distributions other than Mint:
 
-  * It currently assumes the NMClient and NetworkManager libraries are in use as is the case in Mint versions up to 18.3 and most other current distro versions.
-  * The latest versions can also switch to the more recent NM library if the NetworkManager Library is not available on your distribution.
-  * It is possible that you may have to set up vnstati on other distributions - running `man vnstat` will providee information on how to proceed if that is the case.
+  * The original versions assumed the NMClient and NetworkManager libraries are in use as is the case in Mint versions up to 18.3 and most other current distro versions.
+  * The latest versions can also switch to the more recent NM library used on some recent distributions such as Fedora 27 and higher.
+  * It is possible that you may have to set up vnstati on other distributions - running `man vnstat` will provide information on how to proceed if that is the case.
   * Feedback on your experiences on other distributions would be welcome.
 
 ### Support
 
-The original author of this Applet was Clem. More recently it has been supported by @pdcurtis who occasionally checks the comments on the [Cinnamon Spices Web Site](http://cinnamon-spices.linuxmint.com/applets/view/31), however that does not automatically notify him so if you want a rapid response please also note that mentioning @pdcurtis in any conversation on github will cause it to be emailed to him.
+The original author of this Applet was Clem. More recently it has been supported by @pdcurtis who occasionally checks the comments on the [Cinnamon Spices Web Site](http://cinnamon-spices.linuxmint.com/applets/view/31), however that does not automatically notify him so if you want a rapid response please also alert him via the [Form at www.pcurtis.com](http://www.pcurtis.com/contact_form.htm?applets). On github, mentioning @pdcurtis in any conversation will cause it to be emailed to me.
+.
 
