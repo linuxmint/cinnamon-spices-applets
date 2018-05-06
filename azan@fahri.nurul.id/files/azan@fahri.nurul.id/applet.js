@@ -9,9 +9,15 @@ const Util = imports.misc.util;
 const St = imports.gi.St;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
-const AppletDir = imports.ui.appletManager.applets['azan@fahri.nurul.id'];
-const PrayTimes = AppletDir.PrayTimes;
-const HijriCalendarKuwaiti = AppletDir.HijriCalendarKuwaiti;
+let PrayTimes, HijriCalendarKuwaiti;
+if (typeof require !== 'undefined') {
+    PrayTimes = require('./PrayTimes');
+    HijriCalendarKuwaiti = require('./HijriCalendarKuwaiti');
+} else {
+    const AppletDir = imports.ui.appletManager.applets['azan@fahri.nurul.id'];
+    PrayTimes = AppletDir.PrayTimes;
+    HijriCalendarKuwaiti = AppletDir.HijriCalendarKuwaiti;
+}
 
 // const moment = AppletDir.moment;
 // const MomentHijri = AppletDir.momenthijri;
