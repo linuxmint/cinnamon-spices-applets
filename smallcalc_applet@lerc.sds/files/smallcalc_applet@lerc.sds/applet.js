@@ -23,11 +23,9 @@ function _(str) {
   return Gettext.dgettext(uuid, str);
 }
 
-const AppletManager = imports.ui.appletManager;
-
 let MathJS;
 if (typeof require !== 'undefined') {
-  MathJS = require('./math').math;
+  MathJS = require('./math');
 } else {
   MathJS = imports.ui.appletManager.applets[uuid].math.math;
 }
