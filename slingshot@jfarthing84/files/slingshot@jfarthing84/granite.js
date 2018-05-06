@@ -12,7 +12,7 @@ const St = imports.gi.St;
 const Signals = imports.signals;
 const Tooltips = imports.ui.tooltips;
 
-const Widgets = {
+var Widgets = {
 
     HintedEntry: function(hintString) {
         this._init(hintString);
