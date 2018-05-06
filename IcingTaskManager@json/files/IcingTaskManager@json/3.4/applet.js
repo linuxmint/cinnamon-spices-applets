@@ -200,36 +200,11 @@ PinnedFavs.prototype = {
         return favorite.id === opts.appId;
       });
     }
-    let currentAppList = this.params.state.trigger('getCurrentAppList');
-    let favoriteIds = map(this._favorites, function(favorite) {
-      return favorite.id;
-    });
-    let renderedFavoriteApps = map(currentAppList.appList, function(appGroup) {
-      return {
-        id: appGroup.groupState.appId,
-        app: appGroup.groupState.app
-      };
-    }).filter(function(renderedFavorite) {
-      return favoriteIds.indexOf(renderedFavorite.id) > -1
-    });
-    if (!this.params.state.settings.groupApps) {
-      let matched = [];
-      each(renderedFavoriteApps, function(favorite) {
-        let refFavorite = findIndex(matched, function(match) {
-          return match.id === favorite.id;
-        });
-        if (refFavorite > -1) {
-          return;
-        }
-        matched.push(favorite);
-      });
-      renderedFavoriteApps = matched;
+    let newIndex = opts.pos;
+    if (oldIndex > -1 && newIndex > oldIndex) {
+      newIndex = newIndex - 1;
     }
-    renderedFavoriteApps = renderedFavoriteApps
-      .slice(0, opts.pos)
-      .concat([{id:  opts.appId, app: opts.app}])
-      .concat(renderedFavoriteApps.slice(opts.pos + 1, renderedFavoriteApps.length))
-    this._favorites = renderedFavoriteApps;
+    this._favorites.splice(newIndex, 0, this._favorites.splice(oldIndex, 1)[0]);
     this._saveFavorites();
   },
 
