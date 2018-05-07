@@ -6,8 +6,8 @@ if (typeof require !== 'undefined') {
     GTop = init.GTop;
 } else {
     const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
-    _ = AppletDir.__init__._;
-    GTop = AppletDir.__init__.GTop;
+    _ = AppletDir.init._;
+    GTop = AppletDir.init.GTop;
 }
 
 function CpuData() {
