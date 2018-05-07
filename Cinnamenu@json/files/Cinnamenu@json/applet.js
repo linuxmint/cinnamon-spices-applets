@@ -2159,7 +2159,6 @@ CinnamenuApplet.prototype = {
       hint_text: hintText,
       track_hover: true,
       can_focus: true,
-      height: 32 * global.ui_scale,
     });
 
     this.searchEntry.set_primary_icon(this._searchInactiveIcon);
