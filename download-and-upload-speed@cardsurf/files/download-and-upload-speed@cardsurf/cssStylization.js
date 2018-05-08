@@ -18,7 +18,7 @@ CssStyle.prototype = {
     add_or_modify_from_list: function(attributes) {
         for (var i = 0; i < attributes.length; i++) {
             let attribute = attributes[i];
-            [attribute_name, attribute_value] = this._get_name_and_value(attribute);
+            let [attribute_name, attribute_value] = this._get_name_and_value(attribute);
             this.set_value(attribute_name, attribute_value);
         }
     },
