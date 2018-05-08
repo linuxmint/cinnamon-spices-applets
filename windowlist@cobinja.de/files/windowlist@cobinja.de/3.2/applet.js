@@ -964,9 +964,9 @@ CobiAppButton.prototype = {
     if ((panelHeight - this.iconSize) & 1) {
       panelHeight--;
     }
-    this._iconBin.width = panelHeight;
-    this._iconBin.height = panelHeight;
-    this._labelNumberBox.width = panelHeight;
+    this._iconBin.natural_width = panelHeight;
+    this._iconBin.natural_height = panelHeight;
+    this._labelNumberBox.natural_width = panelHeight;
   },
   
   updateCaption: function() {
