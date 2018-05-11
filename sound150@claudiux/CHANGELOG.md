@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v1.4.2
+ * Change the appearance of the applet icon when colors are not in use, to better alert the user when the sound is greater than 100%.
+
 ### v1.4.1
  * The magnetic property of the 100% mark becomes optionnal.
  * Translations:
