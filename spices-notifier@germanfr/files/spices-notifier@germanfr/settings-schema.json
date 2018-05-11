@@ -1,0 +1,27 @@
+{
+	"username": {
+		"type": "entry",
+		"description": "GitHub user name",
+		"default": ""
+	},
+
+	"update-interval": {
+		"type": "spinbutton",
+		"description": "Update interval",
+		"units": "min",
+		"default": 240,
+		"min": 15,
+		"max": 2880,
+		"step": 5
+	},
+
+	"xlets-cache": {
+		"type": "generic",
+		"default": { "applets": {}, "desklets": {}, "extensions": {}, "themes": {}, "timestamp": 0 }
+	},
+
+	"comment-cache": {
+		"type": "generic",
+		"default": { "timestamp": 0 }
+	}
+}
