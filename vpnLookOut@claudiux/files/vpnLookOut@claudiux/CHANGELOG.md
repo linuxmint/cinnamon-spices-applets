@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.1.0
+ * Now compatible with Fedora 27.
+
 ### 2.0.1
  * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
  * Improved installation of translation files.
