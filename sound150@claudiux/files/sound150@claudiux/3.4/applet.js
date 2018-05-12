@@ -46,8 +46,8 @@ function _(str) {
 }
 
 // Logging
-function log(message) {
-    if (DEBUG)
+function log(message, always=false) {
+    if (DEBUG || always)
         global.log("[" + UUID + "]: " + message);
 }
 
@@ -352,7 +352,14 @@ VolumeSlider.prototype = {
         if(value < 0.005)
             return this.isMic? "microphone-sensitivity-none" : "audio-volume-muted";
 
-        let n = Math.floor(3 * value), icon;
+        // Adaptation with or without colors.
+        // With colors:
+        //  - the interval [0%,100%] (or [0%,max] if max<100%) is divided into 3 subintervals with different icons;
+        //  - colors are used only into the interval [100%,150%].
+        // Without colors:
+        //  - the interval [0%,max] is divided into 3 subintervals with different icons.
+        let _div = this.applet.adaptColor? 1 : this.applet.pcMaxVolume;
+        let n = Math.floor(3 / _div * value), icon;
         if(n < 1)
             icon = "low";
         else if(n < 2)
