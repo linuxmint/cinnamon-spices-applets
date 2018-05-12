@@ -39,7 +39,7 @@ msgstr "Miejsca"
 
 #: 3.4/specialMenus.js:207
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Zakładki/Historia wymagają gir1.2-gda-5.0"
 
 #: 3.4/specialMenus.js:227
 msgid "Recent"
@@ -51,7 +51,7 @@ msgstr "Ustawienia"
 
 #: 3.4/specialMenus.js:249
 msgid "About..."
-msgstr "O..."
+msgstr "O programie..."
 
 #: 3.4/specialMenus.js:253
 msgid "Configure..."
@@ -63,7 +63,7 @@ msgstr "Usuń"
 
 #: 3.4/specialMenus.js:287
 msgid "New Window"
-msgstr ""
+msgstr "Nowe okno"
 
 #: 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
@@ -325,12 +325,12 @@ msgstr "Jeśli aktywne, powiadomienia i alerty będą się pojawiać."
 #. 3.4->settings-schema.json->pinOnDrag->description
 #. 3.4->settings-schema.json->pinOnDrag->tooltip
 msgid "Pin apps when dragged to a new position"
-msgstr "Pin aplikacje Kiedy przeciągnięty do nowej pozycji"
+msgstr "Przypnij aplikacje gdy przeciągnięte są do nowej pozycji"
 
 #. 2.8->settings-schema.json->show-apps-order-hotkey->description
 #. 3.4->settings-schema.json->show-apps-order-hotkey->description
 msgid "Global hotkey to show the order of apps"
-msgstr "Globalny skrót klawiatury do pokazania posortowanych aplikacji"
+msgstr "Globalny skrót klawiszowy do pokazania posortowanych aplikacji"
 
 #. 2.8->settings-schema.json->show-apps-order-hotkey->tooltip
 #. 3.4->settings-schema.json->show-apps-order-hotkey->tooltip
@@ -538,7 +538,7 @@ msgstr ""
 #. 2.8->settings-schema.json->cycleMenusHotkey->description
 #. 3.4->settings-schema.json->cycleMenusHotkey->description
 msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "Globalny skrót klawiatury do przechodzenia pomiędzy miniaturkami menu"
+msgstr "Globalny skrót klawiszowy do przechodzenia pomiędzy miniaturkami menu"
 
 #. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
 #. 3.4->settings-schema.json->cycleMenusHotkey->tooltip
@@ -740,7 +740,7 @@ msgstr ""
 #. 3.4->settings-schema.json->hoverPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
 msgid "checked"
-msgstr ""
+msgstr "zaznaczone"
 
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
 msgid "Highlight the last focused window within an app group"
@@ -753,7 +753,7 @@ msgstr "Jeśli aktywne, ostatnio użyte okno będzie wskazane"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->description
 msgid "App button transition duration"
-msgstr ""
+msgstr "Czas trwania przejścia na przycisku aplikacji"
 
 #. 3.4->settings-schema.json->app-button-transition-duration->tooltip
 msgid ""
@@ -763,7 +763,7 @@ msgstr ""
 
 #. 3.4->settings-schema.json->app-button-transition-duration->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 3.4->settings-schema.json->thumbnail-padding->description
 msgid "Thumbnail padding"
@@ -786,7 +786,7 @@ msgstr ""
 
 #. 3.4->settings-schema.json->generalSection->title
 msgid "Behavior"
-msgstr ""
+msgstr "Zachowanie"
 
 #. 3.4->settings-schema.json->thumbnailsPage->title
 #. 3.4->settings-schema.json->thumbnailsSection->title
@@ -803,7 +803,7 @@ msgstr "Przyciski aplikacji"
 
 #. 3.4->settings-schema.json->generalPage->title
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #. 3.4->settings-schema.json->hoverPeekSection->title
 msgid "Hover Peek"
@@ -845,7 +845,7 @@ msgstr "Bez ikon"
 
 #. 3.4->settings-schema.json->show-icons->tooltip
 msgid "Show the window's icon next to the title."
-msgstr ""
+msgstr "Pokaż ikonę obok okna tytułu"
 
 #. 3.4->settings-schema.json->enable-app-button-dragging->description
 #. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
@@ -889,11 +889,11 @@ msgstr ""
 #. 3.4->settings-schema.json->left-click-action->description
 #. 3.4->settings-schema.json->left-click-action->tooltip
 msgid "Left click action"
-msgstr ""
+msgstr "Akcja lewego przycisku"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Scale"
-msgstr ""
+msgstr "Skala"
 
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Fade"
@@ -930,7 +930,7 @@ msgstr "Pozwalaj motywom kontrolować przycisk zamykania miniaturek"
 #. 3.4->settings-schema.json->middle-click-action->description
 #. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid "Middle click action"
-msgstr ""
+msgstr "Akcja środkowego przycisku"
 
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Launch new app instance"
@@ -943,7 +943,7 @@ msgstr "Podświetl ostatnio aktywne okno z grupy aplikacji"
 
 #. 3.4->settings-schema.json->scroll-behavior->description
 msgid "Mouse wheel scroll behavior"
-msgstr ""
+msgstr "Akcja rolki myszy"
 
 #. 3.4->settings-schema.json->scroll-behavior->tooltip
 msgid ""
