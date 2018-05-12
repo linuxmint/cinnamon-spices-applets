@@ -15,7 +15,7 @@ if (typeof require !== 'undefined') {
     ShellUtils = require('./shellUtils');
     Dates = require('./dates');
 } else {
-    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletGui = AppletDirectory.appletGui;
     AppletConstants = AppletDirectory.appletConstants;
     ShellUtils = AppletDirectory.shellUtils;
