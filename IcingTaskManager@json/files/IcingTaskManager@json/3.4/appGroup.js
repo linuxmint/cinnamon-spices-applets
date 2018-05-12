@@ -858,8 +858,8 @@ AppGroup.prototype = {
     if (metaWindow) {
       this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, throttle(this._windowTitleChanged, 100, true)));
       this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
-      this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
-      this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
+      this.signals.connect(metaWindow, 'notify::gtk-application-id', Lang.bind(this, this._onAppChange));
+      this.signals.connect(metaWindow, 'notify::wm-class', Lang.bind(this, this._onAppChange));
       if (metaWindow.progress !== undefined) {
         this._progress = metaWindow.progress;
         this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
