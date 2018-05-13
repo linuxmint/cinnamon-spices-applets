@@ -32,7 +32,7 @@
         "options": {
             "Name": "name",
             "Symbol": "symbol",
-            "None": null
+            "None": "none"
         }
     }
 }
