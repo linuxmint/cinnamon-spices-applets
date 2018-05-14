@@ -1,5 +1,11 @@
 Changelog
 
+### 6.3.4
+
+  * Fixed the window title label not switching to a window when it sets the urgent hint. Windows that set themselves as urgent will be the next window to be focused when their app button is clicked.
+  * Made the default launcher animation none, since apps seems to launch a bit faster with the effect disabled.
+  * Forked the current tree into a version compatible with only Cinnamon 3.8. Bug fixes will continue for Cinnamon 3.4-3.6 users until Mint 19 is released.
+
 ### 6.3.3
 
   * Fixed thumbnail key navigation.
