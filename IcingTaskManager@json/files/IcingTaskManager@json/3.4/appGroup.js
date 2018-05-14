@@ -638,7 +638,7 @@ AppGroup.prototype = {
     }
   },
 
-  _onWindowDemandsAttention: function (window) {
+  _onWindowDemandsAttention: function (metaWindow) {
     // Prevent apps from indicating attention when they are starting up.
     if (!this.groupState
       || !this.groupState.groupReady
@@ -647,7 +647,11 @@ AppGroup.prototype = {
     }
     let windows = this.groupState.metaWindows;
     for (let i = 0, len = windows.length; i < len; i++) {
-      if (isEqual(windows[i], window)) {
+      if (isEqual(windows[i], metaWindow)) {
+        // Even though this may not be the last focused window, we want it to be
+        // the window that gets focused when a user responds to an alert.
+        this.groupState.set({lastFocused: metaWindow});
+        this.setText(metaWindow.get_title());
         this.getAttention();
         return true;
       }
@@ -858,8 +862,8 @@ AppGroup.prototype = {
     if (metaWindow) {
       this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, throttle(this._windowTitleChanged, 100, true)));
       this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
-      this.signals.connect(metaWindow, 'notify::gtk-application-id', Lang.bind(this, this._onAppChange));
-      this.signals.connect(metaWindow, 'notify::wm-class', Lang.bind(this, this._onAppChange));
+      this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
+      this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
       if (metaWindow.progress !== undefined) {
         this._progress = metaWindow.progress;
         this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
