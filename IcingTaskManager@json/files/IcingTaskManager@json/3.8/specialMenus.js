@@ -407,7 +407,7 @@ class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
     let cmd = [
       'bash',
       '-c',
-      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.2/utils.py get_process ' + proc.toString()
+      'python3 ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.8/utils.py get_process ' + proc.toString()
     ];
     Util.spawn_async(cmd, (stdout) => {
       if (stdout) {

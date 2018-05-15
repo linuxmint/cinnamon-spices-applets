@@ -435,7 +435,7 @@ AppMenuButtonRightClickMenu.prototype = {
     let cmd = [
       'bash',
       '-c',
-      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.2/utils.py get_process ' + proc.toString()
+      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.4/utils.py get_process ' + proc.toString()
     ];
     Util.spawn_async(cmd, (stdout) => {
       if (stdout) {

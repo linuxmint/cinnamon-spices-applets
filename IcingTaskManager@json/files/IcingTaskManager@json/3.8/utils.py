@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import subprocess
 import os
 import json
@@ -6,17 +8,28 @@ import random
 
 cli = sys.argv
 
+def parseArgs(command):
+    return command.split(' ')
+
+def spawn(command):
+    try:
+        process = subprocess.run(
+            parseArgs(command),
+            stdout=subprocess.PIPE,
+            check=True
+        )
+    except Exception:
+        raise subprocess.CalledProcessError(1, command)
+    out = process.stdout.decode('utf-8')
+    return out
+
 """
 Utility script that creates GDesktop files for Wine and other window backed applications.
 """
 def handleCli():
 
     if cli[1] == 'get_process':
-        try:
-            process = subprocess.check_output('cat /proc/{}/cmdline'.format(cli[2]), shell=True)
-        except OSError:
-            print('')
-            return
+        process = spawn('cat /proc/{}/cmdline'.format(cli[2]))
 
         if '.exe' in process:
             if 'Z:' in process:
@@ -27,10 +40,8 @@ def handleCli():
             process = 'wine '+process.replace(' ', '\ ')
 
         process = json.dumps(process)
-
-        if '\u0000' in process:
-            process = process.replace('\u0000', ' ')
-
+        if '\\u0000' in process:
+            process = process.replace('\\u0000', ' ')
         process = json.loads(process)
 
         if not '.exe' in process:
@@ -48,8 +59,8 @@ def handleCli():
 
             iconsDir = '{}/.local/share/icons/hicolor/48x48/apps/'.format(os.getenv('HOME'))
 
-            if '\ ' in processName:
-                processName = processName.replace('\ ', ' ')
+            if '\\ ' in processName:
+                processName = processName.replace('\\ ', ' ')
 
             if '.Exe' in processName:
                 processName = processName.replace('.Exe', '')
@@ -63,20 +74,20 @@ def handleCli():
 
             try:
                 try:
-                    subprocess.check_output('gnome-exe-thumbnailer {} {}'.format(process.split('wine ')[1], icon), shell=True)
+                    spawn('gnome-exe-thumbnailer {} {}'.format(process.split('wine ')[1], icon))
                 except IndexError:
-                    subprocess.check_output('gnome-exe-thumbnailer {} {}'.format(process, icon), shell=True)
+                    spawn('gnome-exe-thumbnailer {} {}'.format(process, icon))
             except subprocess.CalledProcessError:
                 icon = None
 
             gMenu = '[Desktop Entry]\n' \
                     'Type=Application\n' \
                     'Encoding=UTF-8\n' \
-                    'Name='+processName+'\n' \
-                    'Comment='+processName+'\n' \
-                    'Exec='+process+'\n' \
+                    'Name={}\n' \
+                    'Comment={}\n' \
+                    'Exec={}\n' \
                     'Terminal=false\n' \
-                    'StartupNotify=true\n' \
+                    'StartupNotify=true\n'.format(processName, processName, process)
 
             if icon:
                 gMenu += 'Icon={}\n'.format(icon)
@@ -90,17 +101,14 @@ def handleCli():
             desktopFile = 'icing_{}.desktop'.format(str(random.random()).split('.')[1])
             desktopPath = '{}/.local/share/applications/{}'.format(os.getenv('HOME'), desktopFile)
 
-            with open(desktopPath, 'w') as desktop:
+            with open(desktopPath, 'w', encoding='utf-8') as desktop:
+                print(gMenu)
                 desktop.write(gMenu)
-                subprocess.check_output('chmod +x {}'.format(desktopPath), shell=True)
+                spawn('chmod +x {}'.format(desktopPath))
                 print(desktopFile)
 
         except KeyError as e:
-            print('')
+            print(e)
             return
 
-    else:
-        subprocess.call('gnome-terminal', shell=True)
-
 handleCli()
-
