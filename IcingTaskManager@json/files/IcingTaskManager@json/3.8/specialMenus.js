@@ -2,7 +2,6 @@ const Clutter = imports.gi.Clutter;
 const Meta = imports.gi.Meta;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
-const Lang = imports.lang;
 const AppletManager = imports.ui.appletManager;
 const Main = imports.ui.main;
 const Tweener = imports.ui.tweener;
@@ -11,32 +10,10 @@ const Applet = imports.ui.applet;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-let each, find, findIndex, tryFn, isEqual, constants, getFirefoxHistory, setTimeout, unref, _;
-if (typeof require !== 'undefined') {
-  const utils = require('./utils');
-  each = utils.each;
-  findIndex = utils.findIndex;
-  find = utils.find;
-  tryFn = utils.tryFn;
-  isEqual = utils.isEqual;
-  constants = require('./constants').constants;
-  _ = utils.t;
-  setTimeout = utils.setTimeout;
-  unref = utils.unref;
-  getFirefoxHistory = require('./firefox').getFirefoxHistory;
-} else {
-  const AppletDir = imports.ui.appletManager.applets['IcingTaskManager@json'];
-  each = AppletDir.utils.each;
-  findIndex = AppletDir.utils.findIndex;
-  find = AppletDir.utils.find;
-  tryFn = AppletDir.utils.tryFn;
-  isEqual = AppletDir.utils.isEqual;
-  constants = AppletDir.constants.constants;
-  _ = AppletDir.utils.t;
-  setTimeout = AppletDir.utils.setTimeout;
-  unref = AppletDir.utils.unref;
-  getFirefoxHistory = AppletDir.firefox.getFirefoxHistory;
-}
+const {each, find, findIndex, tryFn, isEqual, setTimeout, unref} = require('./utils');
+const constants = require('./constants');
+const getFirefoxHistory = require('./firefox');
+const _ = require('./gettext');
 
 const convertRange = function(value, r1, r2) {
   return (value - r1[0]) * (r2[1] - r2[0]) / (r1[1] - r1[0]) + r2[0];
@@ -51,22 +28,17 @@ const setOpacity = (peekTime, window_actor, targetOpacity) => {
   });
 };
 
-function AppMenuButtonRightClickMenu () {
-  this._init.apply(this, arguments);
-}
-
-AppMenuButtonRightClickMenu.prototype = {
-  __proto__: Applet.AppletPopupMenu.prototype,
-
-  _init: function(params) {
+class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
+  constructor(params) {
+    super(params);
     this.state = params.state;
     this.groupState = params.groupState;
 
     this.signals = new SignalManager.SignalManager({});
-    this.signals.connect(this, 'open-state-changed', Lang.bind(this, this._onToggled));
-  },
+    this.signals.connect(this, 'open-state-changed', (...args) => this._onToggled(...args));
+  }
 
-  monitorMoveWindows: function(arg1, arg2, arg3, i) {
+  monitorMoveWindows(i) {
     if (this.state.settings.monitorMoveAllWindows) {
       for (let z = 0, len = this.groupState.metaWindows.length; z < len; z++) {
         if (!this.groupState.metaWindows[z]) {
@@ -85,11 +57,11 @@ AppMenuButtonRightClickMenu.prototype = {
       this.groupState.lastFocused.move_to_monitor(i);
       Main.activateWindow(this.groupState.lastFocused, global.get_current_time());
     }
-  },
+  }
 
-  _populateMenu: function() {
+  _populateMenu() {
     this.signals.disconnectAllSignals();
-    this.signals.connect(this, 'open-state-changed', Lang.bind(this, this._onToggled));
+    this.signals.connect(this, 'open-state-changed', (...args) => this._onToggled(...args));
 
     let item;
     let length;
@@ -109,7 +81,7 @@ AppMenuButtonRightClickMenu.prototype = {
       // Monitors
       if (Main.layoutManager.monitors.length > 1) {
         let connectMonitorEvent = (item, i) => {
-          this.signals.connect(item, 'activate', Lang.bind(this, this.monitorMoveWindows, i));
+          this.signals.connect(item, 'activate', () => this.monitorMoveWindows(i));
         };
         for (let i = 0, len = Main.layoutManager.monitors.length; i < len; i++) {
           if (!this.groupState.lastFocused || i === this.groupState.lastFocused.get_monitor()) {
@@ -304,19 +276,19 @@ AppMenuButtonRightClickMenu.prototype = {
       if (this.state.settings.showPinned !== constants.FavType.none) {
         let label = this.groupState.isFavoriteApp ? _('Unpin from Panel') : _('Pin to Panel');
         this.pinToggleItem = createMenuItem({label: label, icon: 'bookmark-new'});
-        this.signals.connect(this.pinToggleItem, 'activate', Lang.bind(this, this._toggleFav));
+        this.signals.connect(this.pinToggleItem, 'activate', (...args) => this._toggleFav(...args));
         this.addMenuItem(this.pinToggleItem);
       }
       if (this.state.settings.autoStart) {
         let label = this.groupState.autoStartIndex !== -1 ? _('Remove from Autostart') : _('Add to Autostart');
         item = createMenuItem({label: label, icon: 'insert-object'});
-        this.signals.connect(item, 'activate', Lang.bind(this, this._toggleAutostart));
+        this.signals.connect(item, 'activate', (...args) => this._toggleAutostart(...args));
         this.addMenuItem(item);
       }
     } else {
       this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       item = createMenuItem({label: _('Create Shortcut'), icon: 'list-add'});
-      this.signals.connect(item, 'activate', Lang.bind(this, this._createShortcut));
+      this.signals.connect(item, 'activate', (...args) => this._createShortcut(...args));
       this.addMenuItem(item);
     }
     this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -390,9 +362,9 @@ AppMenuButtonRightClickMenu.prototype = {
         this.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       }
     }
-  },
+  }
 
-  _onToggled: function(actor, isOpening) {
+  _onToggled(actor, isOpening) {
     this.state.set({menuOpen: this.isOpen});
 
     if (!isOpening) {
@@ -400,9 +372,9 @@ AppMenuButtonRightClickMenu.prototype = {
     }
     this.removeAll();
     this._populateMenu();
-  },
+  }
 
-  _toggleAutostart: function(){
+  _toggleAutostart() {
     if (this.groupState.autoStartIndex !== -1) {
       this.state.autoStartApps[this.groupState.autoStartIndex].file.delete(null);
       this.state.autoStartApps[this.groupState.autoStartIndex] = undefined;
@@ -416,9 +388,9 @@ AppMenuButtonRightClickMenu.prototype = {
         this.groupState.set({autoStartIndex: this.state.autoStartApps.length - 1});
       }, 500);
     }
-  },
+  }
 
-  _toggleFav: function () {
+  _toggleFav () {
     if (this.groupState.isFavoriteApp) {
       this.state.trigger('removeFavorite', this.groupState.appId);
     } else if (!this.groupState.app.is_window_backed()) {
@@ -428,14 +400,14 @@ AppMenuButtonRightClickMenu.prototype = {
         pos: -1
       });
     }
-  },
+  }
 
-  _createShortcut: function () {
+  _createShortcut () {
     let proc = this.groupState.lastFocused.get_pid();
     let cmd = [
       'bash',
       '-c',
-      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.4/utils.py get_process ' + proc.toString()
+      'python3 ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.8/utils.py get_process ' + proc.toString()
     ];
     Util.spawn_async(cmd, (stdout) => {
       if (stdout) {
@@ -445,9 +417,9 @@ AppMenuButtonRightClickMenu.prototype = {
         }, 2000);
       }
     });
-  },
+  }
 
-  _listDefaultPlaces: function (pattern) {
+  _listDefaultPlaces (pattern) {
     let defaultPlaces = Main.placesManager.getDefaultPlaces();
     let res = [];
     for (let i = 0, len = defaultPlaces.length; i < len; i++) {
@@ -456,9 +428,9 @@ AppMenuButtonRightClickMenu.prototype = {
       }
     }
     return res;
-  },
+  }
 
-  _listBookmarks: function (pattern) {
+  _listBookmarks (pattern) {
     let bookmarks = Main.placesManager.getBookmarks();
     let res = [];
     for (let i = 0, len = bookmarks.length; i < len; i++) {
@@ -467,9 +439,9 @@ AppMenuButtonRightClickMenu.prototype = {
       }
     }
     return res;
-  },
+  }
 
-  _listDevices: function (pattern) {
+  _listDevices (pattern) {
     let devices = Main.placesManager.getMounts();
     let res = [];
     for (let i = 0, len = devices.length; i < len; i++) {
@@ -478,35 +450,24 @@ AppMenuButtonRightClickMenu.prototype = {
       }
     }
     return res;
-  },
+  }
 
-  destroy: function() {
+  destroy() {
     this.signals.disconnectAllSignals();
     Applet.AppletPopupMenu.prototype.destroy.call(this);
     unref(this);
-  },
-};
-
-function HoverMenuController (owner) {
-  this._init(owner);
-}
-
-HoverMenuController.prototype = {
-  __proto__: PopupMenu.PopupMenuManager.prototype,
-
-  _onEventCapture: function () {
-    return false;
   }
 };
 
-function AppThumbnailHoverMenu () {
-  this._init.apply(this, arguments);
+class HoverMenuController extends PopupMenu.PopupMenuManager {
+  _onEventCapture() {
+    return false;
+  }
 }
 
-AppThumbnailHoverMenu.prototype = {
-  __proto__: PopupMenu.PopupMenu.prototype,
-
-  _init: function (state, groupState) {
+class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
+  _init(state, groupState) {
+    super._init.call(this, groupState.trigger('getActor'), state.orientation, 0.5)
     this.state = state;
     this.groupState = groupState;
 
@@ -527,17 +488,17 @@ AppThumbnailHoverMenu.prototype = {
     });
 
     this.appThumbnails = [];
-  },
+  }
 
-  _onButtonPress: function () {
+  _onButtonPress () {
     if (this.state.settings.onClickThumbs && this.box.get_children().length > 1) {
       return;
     }
     this.shouldClose = true;
     setTimeout(()=>this.close(), this.state.settings.thumbTimeout);
-  },
+  }
 
-  _onMenuEnter: function () {
+  _onMenuEnter () {
     if (this.state.panelEditMode
       || (!this.isOpen && this.state.settings.onClickThumbs)
       || this.state.menuOpen) {
@@ -545,26 +506,26 @@ AppThumbnailHoverMenu.prototype = {
     }
     this.shouldClose = false;
     setTimeout(()=>this.open(), this.state.settings.thumbTimeout);
-  },
+  }
 
-  _onMenuLeave: function () {
+  _onMenuLeave () {
     if (this.state.menuOpen || this.state.panelEditMode) {
       return false;
     }
     this.shouldClose = true;
     setTimeout(()=>this.close(), this.state.settings.thumbTimeout);
-  },
+  }
 
-  _onKeyRelease: function(actor, event) {
+  _onKeyRelease(actor, event) {
     let symbol = event.get_key_symbol();
     if (this.isOpen && (symbol === Clutter.KEY_Super_L || symbol === Clutter.KEY_Super_R)) {
       // close this menu, if opened by super+#
       this.close(true);
     }
     return true;
-  },
+  }
 
-  open: function (force) {
+  open (force) {
     if (!force && (!this.actor
       || this.willUnmount
       || this.isOpen
@@ -577,9 +538,9 @@ AppThumbnailHoverMenu.prototype = {
     } else {
       PopupMenu.PopupMenu.prototype.open.call(this, this.state.settings.animateThumbs);
     }
-  },
+  }
 
-  close: function (force) {
+  close (force) {
     if (!force && (!this.shouldClose
       || (!this.shouldClose && this.state.settings.onClickThumbs))
       || !this.groupState
@@ -596,9 +557,9 @@ AppThumbnailHoverMenu.prototype = {
     for (let i = 0; i < this.appThumbnails.length; i++) {
       this.appThumbnails[i].destroyOverlayPreview();
     }
-  },
+  }
 
-  _onKeyPress: function(actor, e){
+  _onKeyPress(actor, e){
     let symbol = e.get_key_symbol();
     let i = findIndex(this.appThumbnails, (item) => item.entered === true);
     let entered = i > -1;
@@ -657,35 +618,35 @@ AppThumbnailHoverMenu.prototype = {
         this.appThumbnails[i]._focusWindowChange();
       }
     }
-  },
+  }
 
-  fullyRefreshThumbnails: function () {
+  fullyRefreshThumbnails () {
     if (this.appThumbnails.length > 0) {
       this.destroyThumbnails();
     }
     this.addWindowThumbnails(this.groupState.metaWindows);
     this.setStyleOptions(false);
-  },
+  }
 
-  destroyThumbnails: function() {
+  destroyThumbnails() {
     this.box.destroy_children();
     for (let i = 0; i < this.appThumbnails.length; i++) {
       this.appThumbnails[i].destroy();
       this.appThumbnails[i] = undefined;
     }
     this.appThumbnails = [];
-  },
+  }
 
-  updateThumbnails: function(exceptIndex) {
+  updateThumbnails(exceptIndex) {
     for (let i = 0; i < this.appThumbnails.length; i++) {
       if (i !== exceptIndex) {
         this.appThumbnails[i].refreshThumbnail();
         this.box.set_child_at_index(this.appThumbnails[i].actor, i);
       }
     }
-  },
+  }
 
-  addThumbnail: function(metaWindow) {
+  addThumbnail(metaWindow) {
     if (this.state.settings.sortThumbs) {
       this.appThumbnails.sort(function (a, b) {
         if (!a.metaWindow || !b.metaWindow) {
@@ -714,9 +675,9 @@ AppThumbnailHoverMenu.prototype = {
       this.appThumbnails[refThumb].refreshThumbnail();
       this.box.set_child_at_index(this.appThumbnails[refThumb].actor, refThumb);
     }
-  },
+  }
 
-  addWindowThumbnails: function () {
+  addWindowThumbnails () {
     if (this.willUnmount
       || !this.box
       || !this.appThumbnails
@@ -728,9 +689,9 @@ AppThumbnailHoverMenu.prototype = {
     for (let i = 0, len = this.groupState.metaWindows.length; i < len; i++) {
       this.addThumbnail(this.groupState.metaWindows[i]);
     }
-  },
+  }
 
-  setStyleOptions: function(skipThumbnailIconResize) {
+  setStyleOptions(skipThumbnailIconResize) {
     if (this.willUnmount || !this.box) {
       return;
     }
@@ -764,34 +725,34 @@ AppThumbnailHoverMenu.prototype = {
     if (wasOpen) {
       this.open();
     }
-  },
+  }
 
-  _setVerticalSetting: function() {
+  _setVerticalSetting() {
     if (this.state.orientation === St.Side.TOP || this.state.orientation === St.Side.BOTTOM) {
       this.box.vertical = this.state.settings.verticalThumbs;
     } else {
       this.box.vertical = true;
     }
     this.fullyRefreshThumbnails();
-  },
+  }
 
-  updateThumbnailPadding: function() {
+  updateThumbnailPadding() {
     for (let i = 0; i < this.appThumbnails.length; i++) {
       if (this.appThumbnails[i]) {
         this.state.trigger('setThumbnailActorStyle', this.appThumbnails[i].actor);
       }
     }
-  },
+  }
 
-  updateThumbnailCloseButtonSize: function() {
+  updateThumbnailCloseButtonSize() {
     for (let i = 0; i < this.appThumbnails.length; i++) {
       if (this.appThumbnails[i]) {
         this.state.trigger('setThumbnailCloseButtonStyle', this.appThumbnails[i].button);
       }
     }
-  },
+  }
 
-  destroy: function () {
+  destroy () {
     this.willUnmount = true;
     if (!this.box) {
       return;
@@ -813,15 +774,11 @@ AppThumbnailHoverMenu.prototype = {
     PopupMenu.PopupMenu.prototype.destroy.call(this);
     this.groupState.disconnect(this.connectId);
     unref(this);
-  },
-};
-
-function WindowThumbnail () {
-  this._init.apply(this, arguments);
+  }
 }
 
-WindowThumbnail.prototype = {
-  _init: function (params) {
+class WindowThumbnail {
+  constructor(params) {
     this.state = params.state;
     this.stateConnectId = this.state.connect({
       scrollActive: () => {
@@ -914,13 +871,13 @@ WindowThumbnail.prototype = {
 
     this.signals.connect(this.actor, 'enter-event', (a, e) => this.handleEnterEvent(a, e));
     this.signals.connect(this.actor, 'leave-event', () => this.handleLeaveEvent());
-    this.signals.connect(this.button, 'button-release-event', Lang.bind(this, this._onCloseButtonRelease));
-    this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this._connectToWindow));
+    this.signals.connect(this.button, 'button-release-event', (...args) => this._onCloseButtonRelease(...args));
+    this.signals.connect(this.actor, 'button-release-event', (...args) => this._connectToWindow(...args));
     //update focused style
     this._focusWindowChange();
-  },
+  }
 
-  handleEnterEvent: function(a, e){
+  handleEnterEvent(a, e){
     this.entered = true;
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
@@ -943,16 +900,16 @@ WindowThumbnail.prototype = {
       this._hoverPeek(this.state.settings.peekOpacity);
     }
     this.lastEnterActor = actorString;
-  },
+  }
 
-  handleLeaveEvent: function(){
+  handleLeaveEvent() {
     this.entered = false;
     this.actor.remove_style_pseudo_class('selected');
     this._focusWindowChange();
     this.button.set_opacity(0);
-  },
+  }
 
-  _onWindowDemandsAttention: function (window) {
+  _onWindowDemandsAttention(window) {
     if (this._needsAttention) {
       return false;
     }
@@ -962,9 +919,9 @@ WindowThumbnail.prototype = {
       return true;
     }
     return false;
-  },
+  }
 
-  _focusWindowChange: function () {
+  _focusWindowChange() {
     if (this.isFocused
       && this.state.settings.highlightLastFocusedThumbnail
       && this.groupState.metaWindows.length > 1) {
@@ -973,9 +930,9 @@ WindowThumbnail.prototype = {
       this.isFocused = false;
       this.actor.remove_style_pseudo_class('outlined');
     }
-  },
+  }
 
-  handleFavorite: function () {
+  handleFavorite() {
     if (!this.groupState) {
       return;
     }
@@ -983,18 +940,18 @@ WindowThumbnail.prototype = {
       && this.groupState.metaWindows.length > 0) {
       this.refreshThumbnail(this.metaWindow, this.groupState.metaWindows);
     }
-  },
+  }
 
-  thumbnailIconSize: function () {
+  thumbnailIconSize() {
     let thumbnailTheme = this.themeIcon.peek_theme_node();
     if (thumbnailTheme) {
       let width = thumbnailTheme.get_width();
       let height = thumbnailTheme.get_height();
       this.icon.set_size(width, height);
     }
-  },
+  }
 
-  handleCloseClick: function(){
+  handleCloseClick() {
     this.handleLeaveEvent();
     this.stopClick = true;
     this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
@@ -1004,16 +961,16 @@ WindowThumbnail.prototype = {
     if (!this.groupState.metaWindows || this.groupState.metaWindows.length <= 1) {
       this.groupState.trigger('hoverMenuClose');
     }
-  },
+  }
 
-  _onCloseButtonRelease: function (actor, event) {
+  _onCloseButtonRelease(actor, event) {
     let button = event.get_button();
     if (button === 1 && isEqual(actor, this.button)) {
       this.handleCloseClick();
     }
-  },
+  }
 
-  _connectToWindow: function (actor, event) {
+  _connectToWindow(actor, event) {
     if (!this.metaWindow || !this.groupState.metaWindows || this.groupState.metaWindows.length === 0) {
       this.groupState.trigger('hoverMenuClose');
       return false;
@@ -1027,9 +984,9 @@ WindowThumbnail.prototype = {
       this.handleCloseClick();
     }
     this.stopClick = false;
-  },
+  }
 
-  getThumbnail: function () {
+  getThumbnail() {
     if (!this.state.settings.showThumbs) {
       return null;
     }
@@ -1043,7 +1000,7 @@ WindowThumbnail.prototype = {
     if (this.metaWindowActor) {
       let windowTexture = this.metaWindowActor.get_texture();
       let [width, height] = windowTexture.get_size();
-      this.signals.connect(this.metaWindowActor, 'size-changed', Lang.bind(this, this.refreshThumbnail));
+      this.signals.connect(this.metaWindowActor, 'size-changed', (...args) => this.refreshThumbnail(...args));
       let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       if (isUpdate) {
         this.thumbnailActor.child.source = windowTexture;
@@ -1060,9 +1017,9 @@ WindowThumbnail.prototype = {
     } else {
       this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
     }
-  },
+  }
 
-  refreshThumbnail: function () {
+  refreshThumbnail () {
     if (this.willUnmount
       || !this.groupState
       || !this.groupState.app
@@ -1111,9 +1068,9 @@ WindowThumbnail.prototype = {
     };
 
     setThumbSize();
-  },
+  }
 
-  _hoverPeek: function (opacity) {
+  _hoverPeek(opacity) {
     if (!this.state.settings.enablePeek || this.state.overlayPreview || this.state.scrollActive) {
       return;
     }
@@ -1131,18 +1088,18 @@ WindowThumbnail.prototype = {
     global.overlay_group.add_child(this.state.overlayPreview);
     global.overlay_group.set_child_above_sibling(this.state.overlayPreview, null);
     setOpacity(this.state.settings.peekTime, this.state.overlayPreview, opacity);
-  },
+  }
 
-  destroyOverlayPreview: function() {
+  destroyOverlayPreview() {
     if (!this.state.overlayPreview) {
       return;
     }
     global.overlay_group.remove_child(this.state.overlayPreview);
     this.state.overlayPreview.destroy();
     this.state.set({overlayPreview: null});
-  },
+  }
 
-  destroy: function(){
+  destroy() {
     this.willUnmount = true;
     if (!this.groupState) {
       return;
@@ -1155,4 +1112,4 @@ WindowThumbnail.prototype = {
     this.actor.destroy();
     unref(this);
   }
-};
+}
