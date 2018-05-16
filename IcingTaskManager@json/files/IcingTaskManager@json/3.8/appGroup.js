@@ -821,7 +821,7 @@ class AppGroup {
       return isEqual(win, metaWindow);
     });
     if (metaWindow) {
-      this.signals.connect(metaWindow, 'notify::title', () => throttle(this._windowTitleChanged, 100, true));
+      this.signals.connect(metaWindow, 'notify::title', (...args) => this._windowTitleChanged(...args));
       this.signals.connect(metaWindow, 'notify::appears-focused', (...args) => this._focusWindowChange(...args));
       this.signals.connect(metaWindow, 'notify::gtk-application-id', (w) => this._onAppChange(w));
       this.signals.connect(metaWindow, 'notify::wm-class', (w) => this._onAppChange(w));
