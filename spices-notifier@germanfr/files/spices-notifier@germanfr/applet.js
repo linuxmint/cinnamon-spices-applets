@@ -37,12 +37,12 @@ class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
 		stars.add_actor(star_count);
 		this.addActor(stars);
 
-		this.comments = new St.BoxLayout({ style: 'spacing: .25em' });
-		let comment_icon = new St.Icon({ icon_name: 'user-available', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
-		this.count = new St.Label({ text: '0' });
-		this.comments.add_actor(comment_icon);
-		this.comments.add_actor(this.count);
-		this.addActor(this.comments);
+		this.comments_box = new St.BoxLayout({ style: 'spacing: .25em' });
+		let comments_icon = new St.Icon({ icon_name: 'user-available', icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+		this.comments_label = new St.Label({ text: '0' });
+		this.comments_box.add_actor(comments_icon);
+		this.comments_box.add_actor(this.comments_label);
+		this.addActor(this.comments_box);
 	}
 
 	activate() {
@@ -52,21 +52,22 @@ class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
 	}
 
 	update_comment_count(count) {
-		if (!this.count)
+		if (!this.comments_label)
 			return;
 
-		this.count.set_text(count.toString());
+		this.comments_label.set_text(count.toString());
 		if (count > 0) {
-			this.comments.opacity = 255;
+			this.comments_box.opacity = 255;
 			this.parent.add_unread(count);
 		} else {
-			this.comments.opacity = 128;
+			this.comments_box.opacity = 128;
 			this.parent.mark_as_read(this.xlet);
 		}
 	}
 
 	destroy() {
-		this.count = null;
+		this.comments_label = null;
+		this.comments_box = null;
 		super.destroy();
 	}
 };
@@ -123,10 +124,10 @@ class SpicesNotifier extends Applet.TextIconApplet {
 
 		// We need this to avoid duplicates on consecutive loads, because it's async
 		this.iteration++;
+		this.get_xlets('themes');
 		this.get_xlets('applets');
 		this.get_xlets('desklets');
 		this.get_xlets('extensions');
-		this.get_xlets('themes');
 
 		let ms = this.update_interval * 60 * 1000;
 		this.updateId = Mainloop.timeout_add(ms, this.reload.bind(this));
@@ -230,9 +231,8 @@ class SpicesNotifier extends Applet.TextIconApplet {
 	}
 
 	fetch_comments(menuItems) {
-		for(let item of menuItems) {
+		for(let item of menuItems)
 			this.get_comment_count(item.xlet, item);
-		}
 	}
 
 	add_unread(count) {
@@ -242,9 +242,13 @@ class SpicesNotifier extends Applet.TextIconApplet {
 
 	mark_as_read(xlet) {
 		let [count, read] = this.get_comments_cache(xlet);
-		this.set_comments_cache(xlet, count, count);
-		this.unread -= count;
-		this.update_label();
+
+		// Update only if there was any unread comment
+		if (count > read) {
+			this.set_comments_cache(xlet, count, count);
+			this.unread -= (count - read);
+			this.update_label();
+		}
 	}
 
 	mark_all_as_read() {
