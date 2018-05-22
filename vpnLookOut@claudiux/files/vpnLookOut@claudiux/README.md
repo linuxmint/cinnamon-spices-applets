@@ -10,7 +10,7 @@ But also, it can try to reconnect when VPN shuts down incidentally, and it can c
 
 ## Status
 
-Fully supported by Author, under continuing development and in continuous use on several machines. 
+Fully supported by Author, under continuing development and in continuous use on several machines, running with **LinuxMint**, **Fedora** or **Archlinux**.
 
 ## Features
 
@@ -20,7 +20,7 @@ The VPN Look-Out Applet normally shows an icon that changes color depending on t
   * Red: the VPN is disconnected.
   * Grey: waiting for VPN status (only when the applet starts, for a few seconds, or if it's misconfigured).
 
-When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection and the network interface used. By example: 
+When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection and the network interface used. By example:
 
   VPN: Connected (Amsterdam / tun0)
 
@@ -42,7 +42,7 @@ The left click menu also contains:
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
   * A list of all VPN connections available. Click on one of them to change of VPN connection ; it disconnects from actual (if any) and connects to new.
 
-## Translations 
+## Translations
 The vpnLookOut applet is designed to allow translations of messages (initially in English). A vpnLookOut.pot template file is available, you can use it with software such as poedit to translate these messages.
 
 Languages already available (v2.0.0 and following): English, French, Spanish, Italian.
@@ -57,11 +57,15 @@ While comments and suggestions are always welcome, any contributions considered 
 
 ## Requirements:
 
-Cinnamon Version 1.8 or higher as it makes comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions have been tested on Cinnamon 3.4.6 and Mint 18.2. 
-    
+Cinnamon Version 1.8 or higher as it makes comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions have been tested on Cinnamon 3.4.6 and Mint 18.2.
+
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
- 
-        apt install zenity sox libsox-fmt-mp3
+ * LinuxMint:
+        apt update && apt install zenity sox libsox-fmt-mp3
+ * Fedora:
+        sudo dnf update && sudo dnf install zenity sox
+ * Archlinux:
+        sudo pacman -Syu zenity sox
 
 **Note that this applet helps you to install these dependencies, if any.**
 
@@ -78,9 +82,9 @@ You can install Transmission:
         apt install transmission transmission-gtk
 
 ## Manual Installation:
-  
+
    * Install the additional programs required.
-   * Download the VPN Look-Out Applet from the Spices Web Site
+   * Download the VPN Look-Out Applet from the Spices Web Site.
    * Unzip and extract folder ```vpnLookOut@claudiux``` to ```~/.local/share/cinnamon/applets/```
-   * Enable the applet in System Settings -> Applets
-   * You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
+   * Enable the applet in System Settings -> Applets.
+   * You can also access the Settings Screen from System Settings -> Applets, or from the Applets Context menu.

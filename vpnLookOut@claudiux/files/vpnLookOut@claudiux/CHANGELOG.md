@@ -1,5 +1,9 @@
 ## Changelog
 
+### 2.2.0
+ * Now compatible with Arch Linux.
+ * Improved compatibility with Fedora 27.
+
 ### 2.1.0
  * Now compatible with Fedora 27.
 

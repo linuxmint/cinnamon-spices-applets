@@ -181,7 +181,10 @@ MyApplet.prototype = {
                 this.textEd = "xed";
             }
 
-            // Check that all Dependencies Met by presence of sox and zenity
+            // get a terminal used on this system
+            this.terminal = this.get_terminal();
+
+            // Check that all dependencies are installed (by presence of sox and zenity)
 
             if (this.are_dependencies_installed()) {
                  this.dependenciesMet = true;
@@ -190,12 +193,17 @@ MyApplet.prototype = {
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
                  let _isFedora = GLib.find_program_in_path("dnf");
-                 let _apt = _isFedora ? "dnf" : "apt";
-                 let _libsox = _isFedora ? "" : "libsox-fmt-mp3";
-                 let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\nsudo "+ _apt +" update\nsudo "+ _apt +" install zenity sox "+ _libsox +"\n\n";
+                 let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
+                 let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
+                 let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
+                 let _and = _isFedora ? " \\\\&\\\\& " : _isArchlinux ? "" : " \\\\&\\\\& ";
+                 var _apt_install = _isFedora ? "sudo dnf install zenity sox" : _isArchlinux ? "sudo pacman -Syu zenity sox" : "sudo apt install zenity sox libsox-fmt-mp3";
+                 let _libsox = (_isFedora || _isArchlinux) ? "" : "libsox-fmt-mp3";
+                 let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
                  this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
                  // Translators: The next message should not be translated.
-                 GLib.spawn_command_line_async("gnome-terminal -e 'sh -c \"echo vpnLookOut Applet message: Some packages needed!\\\\\\\\nTo complete the installation, please enter and execute the command: \\\\\\\\nsudo "+ _apt +" update \\\\&\\\\& sudo "+ _apt +" install zenity sox "+ _libsox+ "; sleep 1; exec bash\"'");
+                 if (this.terminal  != "")
+                    GLib.spawn_command_line_async(this.terminal + " -e 'sh -c \"echo vpnLookOut Applet message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
                  this.dependenciesMet = false;
             }
 
@@ -220,7 +228,7 @@ MyApplet.prototype = {
             if (this.dependenciesMet) {
                 this.set_applet_tooltip(_("Waiting"));
             } else {
-                this.set_applet_tooltip(_apt+" install zenity sox libsox-fmt-mp3");
+                this.set_applet_tooltip(_apt_install);
             }
 
             // If required, connect on last VPN
@@ -253,6 +261,12 @@ MyApplet.prototype = {
         if (!soxmp3Installed) {
             // for Fedora
             soxmp3WitnessPath = "/usr/lib64/sox/libsox_fmt_mp3.so";
+            soxmp3WitnessFile = Gio.file_new_for_path(soxmp3WitnessPath);
+            soxmp3Installed = soxmp3WitnessFile.query_exists(null);
+        }
+        if (!soxmp3Installed) {
+            // for ArchLinux
+            soxmp3WitnessPath = "/usr/lib/sox/libsox_fmt_mp3.so";
             soxmp3WitnessFile = Gio.file_new_for_path(soxmp3WitnessPath);
             soxmp3Installed = soxmp3WitnessFile.query_exists(null);
         }
@@ -347,6 +361,30 @@ MyApplet.prototype = {
             this.vpnInterface=out.toString(); // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
         }
     }, // End of vpn_interface_detect
+
+    _witness: function( path) {
+        let witnessFile = Gio.file_new_for_path(path);
+        return witnessFile.query_exists(null);
+    }, //End of _witness
+
+    get_distrib: function() {
+        if (this._witness("/etc/arch-release")) return "Arch";
+        if (this._witness("/etc/fedora-release")) return "Fedora";
+        return "Mint"
+    }, // End of get_distrib
+
+    get_terminal: function() {
+        var term_found = "";
+        var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
+        var t;
+        for (t=0; t < _terminals.length ; t++) {
+            if (GLib.find_program_in_path(_terminals[t])) {
+                term_found = _terminals[t];
+                break
+            }
+        }
+        return term_found
+    }, // End of get_terminal
 
     get_vpn_names: function() {
         let [res, out, err, status] = GLib.spawn_command_line_sync('sh -c ' + this.appletPath + "/scripts/vpn_names.sh");
