@@ -5,5 +5,5 @@
     "description": "A timer app with visual and auditory notifications.",
     "website": "https://cinnamon-spices.linuxmint.com/applets/view/302",
     "multiversion": true,
-    "cinnamon-version": ["2.6", "2.8", "3.0", "3.2", "3.4", "3.6"]
+    "cinnamon-version": ["2.6", "2.8", "3.0", "3.2", "3.4", "3.6", "3.8"]
 }
