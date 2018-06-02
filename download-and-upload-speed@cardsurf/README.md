@@ -27,7 +27,7 @@ An applet that shows usage of a network interface for Linux Mint Cinnamon
 To specify a network interface:  
   
 1. Right click on the applet
-2. From "Network interface" submenu click on a network interface
+2. From "Network interfaces" submenu check a network interface
 
 ## Source code
 Browse the source of the applet in the [original repository](https://github.com/cardsurf/download-and-upload-speed).  
