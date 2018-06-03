@@ -797,6 +797,11 @@ CollapsibleSystrayApplet.prototype = {
             iconWrap.csEnableAfter = function() { }
         }
 
+        iconWrap.connect('button-press-event', Lang.bind(this, function(actor, e) { return true; }));
+        iconWrap.connect('button-release-event', Lang.bind(this, function(actor, e) {
+            icon.click(e);
+        }));
+
         icon.connect('destroy', Lang.bind(this, function() {
             this._unregisterAppIcon(role, iconWrap);
         }));
