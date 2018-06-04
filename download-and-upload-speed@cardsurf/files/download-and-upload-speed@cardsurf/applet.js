@@ -432,7 +432,7 @@ MyApplet.prototype = {
     },
 
     array_remove: function (array, element) {
-        index = array.indexOf(element);
+        let index = array.indexOf(element);
         array.splice(index, 1);
     },
 
