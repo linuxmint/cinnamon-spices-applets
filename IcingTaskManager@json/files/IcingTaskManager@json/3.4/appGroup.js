@@ -565,6 +565,18 @@ AppGroup.prototype = {
       return false;
     }
 
+    this.resetHoverStatus();
+
+    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
+      this.hadClosedPseudoClass = false;
+      this.actor.add_style_pseudo_class('closed');
+    }
+
+    this._setFavoriteAttributes();
+    this.hoverMenu._onMenuLeave();
+  },
+
+  resetHoverStatus: function() {
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
@@ -581,14 +593,6 @@ AppGroup.prototype = {
       && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
-
-    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
-      this.hadClosedPseudoClass = false;
-      this.actor.add_style_pseudo_class('closed');
-    }
-
-    this._setFavoriteAttributes();
-    this.hoverMenu._onMenuLeave();
   },
 
   setActiveStatus: function(windows){
@@ -636,6 +640,7 @@ AppGroup.prototype = {
     if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
       this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
     }
+    this.resetHoverStatus();
   },
 
   _onWindowDemandsAttention: function (metaWindow) {
