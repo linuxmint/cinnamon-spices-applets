@@ -1,5 +1,8 @@
 ## CHANGELOG
 
+### v1.5.0
+ * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
+
 ### v1.4.2
  * Change the appearance of the applet icon when colors are not in use, to better alert the user when the sound is greater than 100%.
 
