@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.3.0
+ * A middle click on the icon of this applet is now a quick way to:
+   * connect to the last VPN used if it is off;
+   * disconnect from the VPN if it is on.
+
 ### 2.2.0
  * Now compatible with Arch Linux.
  * Improved compatibility with Fedora 27.
