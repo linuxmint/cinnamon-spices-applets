@@ -332,6 +332,19 @@ MyApplet.prototype = {
         return _icon_theme
     }, // End of get_system_icon_theme
 
+    _onButtonPressEvent: function (actor, event) {
+        let buttonId = event.get_button();
+
+        // On middle click: Connect to last VPN used / Disconnect from VPN.
+        if (buttonId === 2) {
+            if (this.vpnStatus !== "waiting") {
+                this.on_button_connect(false)
+            }
+        }
+
+        return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
+    }, // End of _onButtonPressEvent
+
     set_icons: function() {
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
@@ -483,11 +496,7 @@ MyApplet.prototype = {
         this.checkbox_restartTransmission2.setToggleState(this.restartTransmission);// update Right Click Context Menu
     }, // End of on_checkbox_restartTransmission_changed
 
-    on_button_connect: function() {
-        this.vpnStatus == "waiting";
-        this.vpnIcon = this.vpnwait ;
-        this.set_applet_icon_path(this.vpnIcon) ;
-
+    on_button_connect: function(toggleMenu=true) {
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
             this.SMCItems[i].setSensitive(false)
@@ -495,6 +504,10 @@ MyApplet.prototype = {
 
         if (this.vpnInterface != "" && this.vpnName != "") {
             if (this.vpnStatus != "on") {
+                this.vpnIcon = this.vpnwait;
+                this.set_applet_icon_path(this.vpnIcon);
+                this.vpnStatusOld = this.vpnStatus;
+                this.vpnStatus = "waiting";
                 GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'')
             } else {
                 GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'')
@@ -506,20 +519,21 @@ MyApplet.prototype = {
                 this.SMCItems[i].setSensitive(true)
             }
         }
-
+        if (toggleMenu) this.menu.toggle(); // closes the opened menu
     }, // End of on_button_connect
 
     change_connection: function(new_co) {
-        this.vpnStatus == "waiting";
-        this.vpnIcon = this.vpnwait ;
-        this.set_applet_icon_path(this.vpnIcon) ;
-
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
             this.SMCItems[i].setSensitive(false)
         }
 
         if (this.vpnStatus == "on") {
+            this.vpnIcon = this.vpnwait;
+            this.set_applet_icon_path(this.vpnIcon);
+            this.vpnStatusOld = "on";
+            this.vpnStatus = "waiting";
+
             let [res, out, err, status] = GLib.spawn_command_line_sync('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'')
         }
 
