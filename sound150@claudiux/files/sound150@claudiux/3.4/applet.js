@@ -1034,6 +1034,9 @@ MyApplet.prototype = {
 
         this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
+        // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
+        GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/scripts && chmod 755 *.sh *.py'");
+
         try {
             //APPLET_BOX_STYLE_CLASS = this.actor.style_class;
             this.metadata = metadata;
