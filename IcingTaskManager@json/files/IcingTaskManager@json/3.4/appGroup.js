@@ -590,7 +590,7 @@ AppGroup.prototype = {
     });
 
     if (!focused
-      && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
+      || (hoverPseudoClass !== focusPseudoClass && hoverPseudoClass !== activePseudoClass)) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
   },
