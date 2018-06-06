@@ -60,6 +60,10 @@ MyApplet.prototype = {
     _init: function (metadata, orientation, panelHeight, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
         //try {
+            // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
+            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/scripts && chmod 755 *.sh *.py'");
+
+            // ++ Settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){

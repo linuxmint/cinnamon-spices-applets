@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.4.0
+ * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files.
+
 ### 2.3.0
  * A middle click on the icon of this applet is now a quick way to:
    * connect to the last VPN used if it is off;
