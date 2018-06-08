@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/jaszhix/icingtaskmanager#readme",
   "devDependencies": {
-    "clear": "0.0.1",
+    "clear": "0.1.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2"
   },
