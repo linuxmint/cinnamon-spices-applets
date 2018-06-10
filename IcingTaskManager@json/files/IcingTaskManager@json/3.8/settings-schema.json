@@ -507,7 +507,7 @@
   },
   "hoverPseudoClass": {
     "type": "combobox",
-    "default": 1,
+    "default": 3,
     "description": "App button hover pseudo class",
     "options": {
       "hover": 1,
@@ -535,7 +535,7 @@
   },
   "activePseudoClass": {
     "type": "combobox",
-    "default": 3,
+    "default": 4,
     "description": "App button active pseudo class",
     "options": {
       "hover": 1,
