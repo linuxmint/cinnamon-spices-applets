@@ -1,5 +1,10 @@
 Changelog
 
+### 6.3.7
+
+  * Addressed an issue with the focus pseudo class styling reverting on hover.
+  * Made the Mint X theme preset the default.
+
 ### 6.3.4
 
   * Fixed the window title label not switching to a window when it sets the urgent hint. Windows that set themselves as urgent will be the next window to be focused when their app button is clicked.
