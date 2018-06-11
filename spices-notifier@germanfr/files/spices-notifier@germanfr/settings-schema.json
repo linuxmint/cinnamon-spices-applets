@@ -8,11 +8,17 @@
 	"update-interval": {
 		"type": "spinbutton",
 		"description": "Update interval",
-		"units": "min",
+		"units": "minutes",
 		"default": 240,
 		"min": 15,
 		"max": 2880,
 		"step": 5
+	},
+
+	"show-nonzero-only": {
+		"type": "switch",
+		"description": "Hide panel icon when there are no unread comments",
+		"default": false
 	},
 
 	"xlets-cache": {
