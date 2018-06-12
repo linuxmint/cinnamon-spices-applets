@@ -182,7 +182,7 @@ MyApplet.prototype = {
         graph.setDrawBorder(this.cfg_draw_border);
         graph.bg_color = this.bg_color;
         graph.border_color = this.border_color;
-        tooltip_decimals = this.getGraphTooltipDecimals(graph_idx);
+        let tooltip_decimals = this.getGraphTooltipDecimals(graph_idx);
         if (typeof tooltip_decimals !== "undefined")
             provider.setTextDecimals(tooltip_decimals);
         
@@ -377,9 +377,9 @@ MyApplet.prototype = {
         else
             for (let i = 0; i < this.graphs.length; i++)
                 if (this.graphs[i]) {
-                    let provider = this.graphs[graph_idx].provider;
+                    let provider = this.graphs[i].provider;
                     if ("setTextDecimals" in provider)
-                        provider.setTextDecimals(this.getGraphTooltipDecimals(graph_idx));
+                        provider.setTextDecimals(this.getGraphTooltipDecimals(i));
                 }
     },
 
