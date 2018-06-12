@@ -1,5 +1,6 @@
 ## CHANGELOG
-
+### v1.5.1
+ * Fixes a typo.
 ### v1.5.0
  * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
 
