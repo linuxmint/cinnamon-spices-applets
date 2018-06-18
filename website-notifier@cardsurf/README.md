@@ -24,4 +24,4 @@ To write a script that refreshes a website:
 2. Modify the `refresh` function
 
 ## Source code
-Browse the source of the applet in the [original repository](https://github.com/cardsurf/website-notifier).  
+Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/website-notifier).  

@@ -21,4 +21,4 @@ To specify a screen and outputs:
 3. From "Outputs" submenu click on an output
 
 ## Source code
-Browse the source of the applet in the [original repository](https://github.com/cardsurf/brightness-and-gamma-applet).
+Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/brightness-and-gamma-applet).
