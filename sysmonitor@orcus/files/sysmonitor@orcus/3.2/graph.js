@@ -113,6 +113,7 @@ Graph.prototype = {
         let border_width = this.draw_border ? 1 : 0;
         let graph_width = width - 2 * border_width;
         let graph_height = height - 2 * border_width;
+        cr.setLineWidth(1);
         //background
         cr.setSourceRGBA(this.bg_color[0], this.bg_color[1], this.bg_color[2], this.bg_color[3]);
         cr.rectangle(border_width, border_width, graph_width, graph_height);
@@ -121,11 +122,16 @@ Graph.prototype = {
         if (this.smooth)
         {
             for (let j = this.dim - 1; j >= 0; --j) {
-                cr.moveTo(border_width, graph_height + border_width);
                 this._setColor(cr, j);
+                cr.moveTo(border_width, graph_height + border_width);
                 for (let i = 0; i < this.data.length; ++i) {
                     let v = Math.round(graph_height * Math.min(1, this.scale * this.dataSum(i, j)));
-                    cr.lineTo(i + border_width, graph_height + border_width - v);
+                    v = graph_height + border_width - v;
+                    if (i == 0)
+                        cr.lineTo(i + border_width, v);
+                    cr.lineTo(i + border_width + 0.5, v);
+                    if (i == this.data.length - 1)
+                        cr.lineTo(i + border_width + 1, v);
                 }
                 cr.lineTo(graph_width + border_width, graph_height + border_width);
                 cr.lineTo(border_width, graph_height + border_width);
@@ -137,7 +143,7 @@ Graph.prototype = {
             for (let i = 0; i < this.data.length; ++i) {
                 for (let j = this.dim - 1; j >= 0; --j) {
                     this._setColor(cr, j);
-                    cr.moveTo(i + border_width, graph_height + border_width);
+                    cr.moveTo(i + border_width + 0.5, graph_height + border_width);
                     let v = Math.round(graph_height * Math.min(1, this.scale * this.dataSum(i, j)));
                     cr.relLineTo(0, -v);
                     cr.stroke();
@@ -147,7 +153,7 @@ Graph.prototype = {
         //border
         if (this.draw_border) {
             cr.setSourceRGBA(this.border_color[0], this.border_color[1], this.border_color[2], this.border_color[3]);
-            cr.rectangle(0, 0, width, height);
+            cr.rectangle(0.5, 0.5, width - 1, height - 1);
             cr.stroke();
         }
     },
