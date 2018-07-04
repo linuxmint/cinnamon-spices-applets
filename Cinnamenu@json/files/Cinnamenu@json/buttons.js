@@ -40,6 +40,7 @@ if (typeof require !== 'undefined') {
 
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 const stripMarkupRegex = /(<([^>]+)>)/ig;
+const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 const wordWrap = function(text, limit) {
   let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
@@ -385,8 +386,7 @@ ApplicationContextMenuItem.prototype = {
         this.state.trigger('removeFavorite', this.buttonState.app.get_id());
         break;
       case 'uninstall':
-        Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application')
-          + '\' /usr/bin/cinnamon-remove-application \'' + this.buttonState.app.get_app_info().get_filename() + '\'');
+        Util.spawnCommandLine('/usr/bin/cinnamon-remove-application \'' + this.buttonState.app.get_app_info().get_filename() + '\'');
         this.state.trigger('closeMenu');
         break;
       case 'run_with_nvidia_gpu':
@@ -1034,7 +1034,9 @@ AppListGridButton.prototype = {
       } else {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to favorites'), 'add_to_favorites', 'non-starred'));
       }
-      addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
+      if (canUninstall) {
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
+      }
       if (this.state.isBumblebeeInstalled) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
       }
