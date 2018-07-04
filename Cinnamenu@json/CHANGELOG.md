@@ -1,5 +1,9 @@
 Changelog
 
+### 3.2.2
+
+  * Fixed inability to uninstall applications due to gksu deprecation.
+
 ### 3.2.1
 
   * Addressed an issue with the context menu labels being truncated.
