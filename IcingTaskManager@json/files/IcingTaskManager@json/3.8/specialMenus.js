@@ -1075,7 +1075,7 @@ class WindowThumbnail {
       return;
     }
     if (!this.metaWindowActor) {
-      return;
+      this.metaWindowActor = this.metaWindow.get_compositor_private();
     }
     this.state.set({
       overlayPreview: new Clutter.Clone({
