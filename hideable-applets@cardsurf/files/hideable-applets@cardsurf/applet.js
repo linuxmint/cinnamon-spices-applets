@@ -494,7 +494,7 @@ MyApplet.prototype = {
     get_other_applets: function () {
         let applets = this.get_applets();
         applets = applets.filter(function(applet) {
-            return applet._uuid != uuid;
+            return applet != null && applet._uuid != uuid;
         });
         return applets;
     },
@@ -861,7 +861,11 @@ MyApplet.prototype = {
 
     on_panel_edit_mode_changed: function() {
         let edit_mode = this.panel._panelEditMode;
-        if(!edit_mode) {
+        if(edit_mode) {
+            this.update_applet_infos();
+            this.save_last_values();
+        }
+        else {
             this.update_gui();
             this.set_visibilities();
         }
@@ -1071,8 +1075,11 @@ MyApplet.prototype = {
     // Override
     on_applet_removed_from_panel: function() {
         this.is_running = false;
-        this.update_applet_infos();
-        this.save_last_values();
+        let edit_mode = this.panel._panelEditMode;
+        if(!edit_mode) {
+            this.update_applet_infos();
+            this.save_last_values();
+        }
     },
 
     save_last_values: function() {
