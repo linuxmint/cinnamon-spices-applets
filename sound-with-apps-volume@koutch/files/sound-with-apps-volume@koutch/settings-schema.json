@@ -99,6 +99,11 @@
     "description": "Show Output device",
     "tooltip": "show/hide Output device"
  },
+ "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding to call up a menu of the sound details",
+    "default": "<Super>v"
+ },
   "div3" : {
     "type" : "separator"
  },
