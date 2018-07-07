@@ -1062,7 +1062,7 @@ class WindowThumbnail {
         if (this.labelContainer) {
           this.labelContainer.set_width(this.thumbnailWidth);
         }
-        this._label.text = this.metaWindow.title;
+        this._label.text = this.metaWindow.title || '';
         this.getThumbnail();
       }
     };

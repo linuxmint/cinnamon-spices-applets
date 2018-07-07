@@ -143,6 +143,7 @@ class AppGroup {
     });
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel',
+      text: ''
     });
     this._numLabel.clutter_text.ellipsize = false;
 
