@@ -1062,7 +1062,7 @@ class WindowThumbnail {
         if (this.labelContainer) {
           this.labelContainer.set_width(this.thumbnailWidth);
         }
-        this._label.text = this.metaWindow.title;
+        this._label.text = this.metaWindow.title || '';
         this.getThumbnail();
       }
     };
@@ -1075,7 +1075,7 @@ class WindowThumbnail {
       return;
     }
     if (!this.metaWindowActor) {
-      return;
+      this.metaWindowActor = this.metaWindow.get_compositor_private();
     }
     this.state.set({
       overlayPreview: new Clutter.Clone({
