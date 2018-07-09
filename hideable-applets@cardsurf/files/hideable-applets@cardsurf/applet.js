@@ -161,8 +161,8 @@ MyApplet.prototype = {
         this.action_type = AppletConstants.ActionType.TOGGLE_POPUP;
         this.action_trigger_type = AppletConstants.ActionTriggerType.CLICK;
         this.side_type = St.Side.LEFT;
-        this.restore_hidden_string = "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org";
-        this.restore_hidden_array = ["network@cinnamon.org", "sound@cinnamon.org", "removable-drives@cinnamon.org"];
+        this.restore_hidden_string = "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org, keyboard@cinnamon.org";
+        this.restore_hidden_array = ["network@cinnamon.org", "sound@cinnamon.org", "removable-drives@cinnamon.org, keyboard@cinnamon.org"];
         this.save_every = 60;
         this.gui_sort_type = AppletConstants.GuiSortType.ALPHABETICALLY;
         this.applet_popup_close_leave = true;
@@ -171,7 +171,7 @@ MyApplet.prototype = {
         this.applet_popup_icons_css = "";
         this.applet_popup_table_css = "";
         this.match_panel_icons_size = false;
-        this.show_icon_tooltips = false;
+        this.show_icon_tooltips = true;
         this.show_grayscale_icons = false;
         this.grayscale_brightness = 80;
         this.gui_icon_type = AppletConstants.GuiIconType.FILEPATH;
@@ -1075,11 +1075,6 @@ MyApplet.prototype = {
     // Override
     on_applet_removed_from_panel: function() {
         this.is_running = false;
-        let edit_mode = this.panel._panelEditMode;
-        if(!edit_mode) {
-            this.update_applet_infos();
-            this.save_last_values();
-        }
     },
 
     save_last_values: function() {
