@@ -767,7 +767,7 @@ class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
         }
         this.appThumbnails[w].destroy(true);
         this.appThumbnails[w] = null;
-        this.appThumbnails.splice(w, 1)
+        this.appThumbnails.splice(w, 1);
       }
     }
     this.removeAll();
@@ -798,7 +798,8 @@ class WindowThumbnail {
         }
         this.isFocused = isEqual(this.groupState.lastFocused, this.metaWindow);
         this._focusWindowChange();
-      }
+      },
+      refreshThumbnails: () => this.refreshThumbnail()
     });
 
     this.metaWindow = params.metaWindow;
@@ -877,7 +878,7 @@ class WindowThumbnail {
     this._focusWindowChange();
   }
 
-  handleEnterEvent(a, e){
+  handleEnterEvent(a, e) {
     this.entered = true;
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
@@ -938,7 +939,7 @@ class WindowThumbnail {
     }
     if (this.groupState.metaWindows
       && this.groupState.metaWindows.length > 0) {
-      this.refreshThumbnail(this.metaWindow, this.groupState.metaWindows);
+      this.refreshThumbnail();
     }
   }
 
@@ -1000,7 +1001,7 @@ class WindowThumbnail {
     if (this.metaWindowActor) {
       let windowTexture = this.metaWindowActor.get_texture();
       let [width, height] = windowTexture.get_size();
-      this.signals.connect(this.metaWindowActor, 'size-changed', (...args) => this.refreshThumbnail(...args));
+      this.signals.connect(this.metaWindowActor, 'size-changed', () => this.refreshThumbnail());
       let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       if (isUpdate) {
         this.thumbnailActor.child.source = windowTexture;

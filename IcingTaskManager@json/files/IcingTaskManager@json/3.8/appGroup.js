@@ -863,6 +863,7 @@ class AppGroup {
 
     this.groupState.metaWindows.splice(refWindow, 1);
     this._calcWindowNumber(this.groupState.metaWindows);
+
     if (this.groupState.metaWindows.length > 0 && !this.groupState.willUnmount) {
       if (this.progressOverlay.visible && metaWindow.progress > 0) {
         this._progress = 0;
@@ -874,6 +875,7 @@ class AppGroup {
         lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1]
       }, true);
       this.groupState.trigger('removeThumbnailFromMenu', metaWindow);
+      this.groupState.trigger('refreshThumbnails');
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
