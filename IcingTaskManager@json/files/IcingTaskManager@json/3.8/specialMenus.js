@@ -470,6 +470,7 @@ class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
     super._init.call(this, groupState.trigger('getActor'), state.orientation, 0.5)
     this.state = state;
     this.groupState = groupState;
+    this._isReloadNeeded = false;
 
     this.connectId = this.groupState.connect({
       hoverMenuClose: () => {
@@ -483,6 +484,7 @@ class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
           this.appThumbnails[index].destroy();
           this.appThumbnails[index] = undefined;
           this.appThumbnails.splice(index, 1);
+          this._isReloadNeeded = true;
         }
       }
     });
@@ -553,9 +555,17 @@ class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
     }
     if (this.isOpen) {
       PopupMenu.PopupMenu.prototype.close.call(this, this.state.settings.animateThumbs);
+      this._reloadNeeded();
     }
     for (let i = 0; i < this.appThumbnails.length; i++) {
       this.appThumbnails[i].destroyOverlayPreview();
+    }
+  }
+
+  _reloadNeeded () {
+    if (this._isReloadNeeded) {
+        this.fullyRefreshThumbnails();
+        this._isReloadNeeded = false;
     }
   }
 
