@@ -1,5 +1,10 @@
 Changelog
 
+### 6.3.9
+
+  * Fixed scaling of thumbnails when removing windows.
+  * Updated readme.
+
 ### 6.3.8
 
   * Fixed inability to see hover previews when thumbnails are disabled.
