@@ -306,7 +306,7 @@ MyApplet.prototype = {
     },
 
     _init_voice_process: function () {
-        this.voice_process = new ShellUtils.BackgroundProcess();
+        this.voice_process = new ShellUtils.BackgroundProcess([], false);
         this.voice_process.set_callback_process_finished(this, this.on_voice_process_finished);
     },
 
