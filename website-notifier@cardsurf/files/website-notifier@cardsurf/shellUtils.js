@@ -318,9 +318,8 @@ BackgroundProcess.prototype = {
 
     _close_standard_output_streams: function() {
          try {
-             this.standard_output_cancellable.cancel();
-             this.standard_output_data_stream.close(this.standard_output_cancellable);
-             this.standard_output_unix_stream.close(this.standard_output_cancellable);
+             this.standard_output_data_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_output_cancellable, null);
+             this.standard_output_unix_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_output_cancellable, null);
          } catch(e) {
              global.log("Error while closing standard output streams: " + e);
          }
@@ -328,9 +327,8 @@ BackgroundProcess.prototype = {
 
     _close_standard_error_streams: function() {
          try {
-             this.standard_error_cancellable.cancel();
-             this.standard_error_data_stream.close(this.standard_error_cancellable);
-             this.standard_error_unix_stream.close(this.standard_error_cancellable);
+             this.standard_error_data_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_error_cancellable, null);
+             this.standard_error_unix_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_error_cancellable, null);
          } catch(e) {
              global.log("Error while closing standard error streams: " + e);
          }
