@@ -25,7 +25,7 @@ const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 
-const {each, findIndex, isEqual, setTimeout, throttle, unref} = require('./utils');
+const {each, findIndex, filter, isEqual, setTimeout, throttle, unref} = require('./utils');
 const constants = require('./constants');
 const AppList = require('./appList');
 const store = require('./store');
@@ -180,6 +180,9 @@ class PinnedFavs {
       newIndex = newIndex - 1;
     }
     this._favorites.splice(newIndex, 0, this._favorites.splice(oldIndex, 1)[0]);
+    this._favorites = filter(this._favorites, function(favorite) {
+      return favorite.app != null;
+    });
     this._saveFavorites();
   }
 
