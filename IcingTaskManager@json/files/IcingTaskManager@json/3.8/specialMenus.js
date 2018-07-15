@@ -29,8 +29,8 @@ const setOpacity = (peekTime, window_actor, targetOpacity) => {
 };
 
 class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
-  constructor(params) {
-    super(params);
+  constructor(params, orientation) {
+    super(params, orientation);
     this.state = params.state;
     this.groupState = params.groupState;
 
