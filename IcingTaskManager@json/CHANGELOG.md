@@ -1,5 +1,10 @@
 Changelog
 
+### 6.3.10
+
+  * Fixed an issue with pinned applications becoming ordered incorrectly when uninstalled applications are present.
+  * Corrected a warning occurring during context menu initialization.
+
 ### 6.3.9
 
   * Fixed scaling of thumbnails when removing windows.

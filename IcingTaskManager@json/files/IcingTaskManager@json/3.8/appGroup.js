@@ -155,9 +155,9 @@ class AppGroup {
 
     this.rightClickMenu = new AppMenuButtonRightClickMenu({
       state: this.state,
-      groupState: this.groupState
-    });
-    Applet.AppletPopupMenu.prototype._init.call(this.rightClickMenu, {actor: this.actor}, this.state.orientation);
+      groupState: this.groupState,
+      actor: this.actor
+    }, this.state.orientation);
 
     // Set up the hover menu
     this.hoverMenuManager = new HoverMenuController({actor: this.actor});
