@@ -690,7 +690,7 @@ MyApplet.prototype = {
             return [number, unit];
         }
         else {
-            bits = this.convert_to_bits(bytes);
+            let bits = this.convert_to_bits(bytes);
             let [number, unit] = this.convert_bits_to_readable_unit(bits);
             return [number, unit];
         }
