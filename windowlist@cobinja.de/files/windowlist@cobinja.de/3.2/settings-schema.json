@@ -90,18 +90,24 @@
   },
   "section3": {
     "type": "section",
-    "description" : "Previews"
+    "description" : "Preview menu"
   },
-  "click-preview": {
+  "menu-show-on-click": {
     "type": "switch",
     "default": true,
     "description": "Show on click",
-    "tooltip": "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
+    "tooltip": "If enabled, a popup menu with a list of current windows will show when clicking\n(Only with 2 or more windows)"
   },
-  "hover-preview": {
+  "menu-show-on-hover": {
     "type": "switch",
     "default": true,
-    "description": "Show on Hover",
+    "description": "Show on hover",
+    "tooltip": "If enabled, a popup menu with a list of current windows will show when hovering"
+  },
+  "show-previews": {
+    "type": "switch",
+    "default": true,
+    "description": "Show previews",
     "tooltip": "If enabled, the popup menu will show window previews\n(Always disabled when running Cinnamon in Software Rendering Mode)"
   },
   "number-of-unshrunk-previews": {
