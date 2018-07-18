@@ -1,5 +1,17 @@
 Changelog
 
+2.3
+==
+New Feature
+--
+- add setting to enable/disable opening of the preview menu
+
+Bugfixes
+--
+- Fix grouping/ungrouping not taking effect
+- Fix for the setting "Only on this monitor"
+- Fix non-showing borders at certain panel heights
+
 2.2
 ==
 
