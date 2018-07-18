@@ -77,7 +77,7 @@ msgstr "Animationsvarighed"
 msgid "Previews"
 msgstr "Forhåndsvisninger"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "Vis, når markøren føres hen over"
 
 msgid "Timeout Show"

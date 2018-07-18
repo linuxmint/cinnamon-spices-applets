@@ -283,7 +283,7 @@ CobiPopupMenuItem.prototype = {
     this._closeBin.set_child(this._closeIcon);
     this._closeIcon.hide();
     
-    if (!Main.software_rendering && this._settings.getValue("hover-preview")) {
+    if (!Main.software_rendering && this._settings.getValue("show-previews")) {
       this._cloneBin = new St.Bin({min_width: 0, min_height: 0});
       this._box.add_actor(this._cloneBin);
       this._cloneBox = new St.Widget();
@@ -295,7 +295,7 @@ CobiPopupMenuItem.prototype = {
   },
   
   doSize: function(availWidth, availHeight) {
-    if (Main.software_rendering || !this._settings.getValue("hover-preview")) {
+    if (Main.software_rendering || !this._settings.getValue("show-previews")) {
       return;
     }
     let monitor = this._appButton._applet.panel.monitor;
@@ -448,7 +448,7 @@ CobiPopupMenu.prototype = {
     
     if (this._appButton._applet.orientation == St.Side.LEFT ||
         this._appButton._applet.orientation == St.Side.RIGHT ||
-        !this._settings.getValue("hover-preview")) {
+        !this._settings.getValue("show-previews")) {
       this.box.set_vertical(true);
     }
   },
@@ -1172,21 +1172,16 @@ CobiAppButton.prototype = {
     // left mouse button
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
-        if (this._windows.length > 0) {
-          if (this._windows.length == 1 || !this._settings.getValue("click-preview")) {
-            if (_hasFocus(this._currentWindow)) {
-              this._currentWindow.minimize();
-            }
-            else {
-              Main.activateWindow(this._currentWindow);
-            }
+        if (this._windows.length == 1 || !(this._settings.getValue("menu-show-on-click"))) {
+          if (_hasFocus(this._currentWindow)) {
+            this._currentWindow.minimize();
           }
           else {
-            this.menu.open();
+            Main.activateWindow(this._currentWindow);
           }
         }
-        else {
-          this._startApp();
+        else if (this._settings.getValue("menu-show-on-click")) {
+          this.menu.open();
         }
       }
       else {
@@ -1236,7 +1231,7 @@ CobiAppButton.prototype = {
       this.actor.set_track_hover(false);
       this.actor.set_hover(false);
     }
-    if (this._windows.length > 0) {
+    if (this._windows.length > 0 && this._settings.getValue("menu-show-on-hover")) {
       this.menu.openDelay();
     }
   },

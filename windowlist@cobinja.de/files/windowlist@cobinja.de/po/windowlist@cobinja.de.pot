@@ -71,10 +71,10 @@ msgstr ""
 msgid "Animation Time"
 msgstr ""
 
-msgid "Previews"
+msgid "Preview menu"
 msgstr ""
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr ""
 
 msgid "Timeout Show"
@@ -131,5 +131,11 @@ msgstr ""
 msgid "Show on click"
 msgstr ""
 
-msgid "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
+msgid "If enabled, a popup menu with a list of current windows will show when clicking\n(Only with 2 or more windows)"
+msgstr ""
+
+msgid "If enabled, a popup menu with a list of current windows will show when hovering"
+msgstr ""
+
+msgid "Show previews"
 msgstr ""
