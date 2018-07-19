@@ -261,7 +261,7 @@ Cheaty.prototype = {
 }
 
 function resolveHome(path) {
-	home = GLib.get_home_dir();
+	let home = GLib.get_home_dir();
 	return path.replace('~', home);
 }
 
