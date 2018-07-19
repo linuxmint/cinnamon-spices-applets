@@ -126,7 +126,7 @@ DescriptionMenuItem.prototype =
 		code_box.add(code_label);
 
 		if (item.alternatives) {
-			for (alternative in item.alternatives) {
+			for (var alternative in item.alternatives) {
 				let alt_label = new St.Label({ text: 'Alt: ' + item.alternatives[alternative].code, style_class: 'sheet-item-code-alternative'});
 				code_box.add(alt_label);
 			}
@@ -193,7 +193,7 @@ Cheaty.prototype = {
 
 					let [ok, data, etag] = sheet.load_contents(null);
 					if (ok) {
-						contents = JSON.parse(data);
+						let contents = JSON.parse(data);
 
 						let iconPath = resolveHome(this.cheatsheetFolder) + '/' + sheetName + '/icon.svg';
 
@@ -206,7 +206,7 @@ Cheaty.prototype = {
 							for (var item in contents.sections[section]) {
 								this._sheets[sheetName]._sections[section]._items[item] = new PopupMenu.PopupSubMenuMenuItem('\t\t' + item);
 
-								code = new DescriptionMenuItem(contents.sections[section][item]);
+								let code = new DescriptionMenuItem(contents.sections[section][item]);
 								code.connect("activate", Lang.bind(this, this.copyToClipboard));
 
 								this._sheets[sheetName]._sections[section]._items[item].menu.addMenuItem(code);
