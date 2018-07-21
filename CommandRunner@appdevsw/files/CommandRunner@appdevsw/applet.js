@@ -119,7 +119,7 @@ MyApplet.prototype =
     {
         this.debug.level = 0;
         var cmd = command;
-        for ( i = 0; i <= 3; i++)
+        for (let i = 0; i <= 3; i++)
         {
             var c = cmd.replace(">debug" + i, "");
             if (c != cmd)
