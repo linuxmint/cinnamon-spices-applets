@@ -1121,7 +1121,7 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.IN, "launch-in-terminal", "launch_in_terminal", this._applySettings, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
 
-            Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+            Main.keybindingManager.addHotKey(this.metadata.uuid, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
             this.slider_volumeMax = 1;
             this.stop_scroll = false;/// to make a short pause when volume reach 100% while scrolling the applet
@@ -1294,6 +1294,8 @@ MyApplet.prototype = {
         ///@koucth Settings
         this.settings.finalize();    // This is called when a user removes the applet from the panel..
 
+        Main.keybindingManager.removeHotKey(this.metadata.uuid);
+
         if (this.hideSystray)
             this.unregisterSystrayIcons();
         if (this._iconTimeoutId) {
@@ -1320,7 +1322,7 @@ MyApplet.prototype = {
     },
     _onKeySettingsUpdated: function _onKeySettingsUpdated() {
         if (this.keybinding != null) {
-            Main.keybindingManager.addHotKey(UUID,
+            Main.keybindingManager.addHotKey(this.metadata.uuid,
                                              this.keybinding,
                                              Lang.bind(this,
                                                        this.on_applet_clicked));
