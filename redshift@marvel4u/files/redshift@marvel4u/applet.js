@@ -175,7 +175,7 @@ MyApplet.prototype = {
 
     getSystemBrightness: function () {
         try {
-            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
+            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon.Power --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
             currentBright = currentBright.toString();
 
             // (uint32 53,) std output of getbrightnesscmd, just want 53 value on end
@@ -237,7 +237,7 @@ MyApplet.prototype = {
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness
 
         try {
-            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + this.brightness); //crashes if not hard coded
+            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon.Power --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + this.brightness); //crashes if not hard coded
         }
         catch (e) {
             global.logError(e);
