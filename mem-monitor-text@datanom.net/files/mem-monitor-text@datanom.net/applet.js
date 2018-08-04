@@ -32,7 +32,7 @@ MyApplet.prototype = {
 
 			this.gtop = new GTop.glibtop_mem();
 
-			this._applet_label.set_style('min-width: 6.5em; text-align: left');
+			this._applet_label.set_style('min-width: 2.5em; text-align: left');
 
 			this.usage = 0;
 			this.maxmem = 0;
@@ -64,7 +64,7 @@ MyApplet.prototype = {
 		
 			this.realuse = this.usage - this.buffer - this.cached;
 			let percent = Math.round((this.realuse * 100) / this.maxmem);
-			this.set_applet_label(_("  Mem: ") + ("   " + percent.toString()).slice(-3) + "%");
+			this.set_applet_label(_("   " + percent.toString()).slice(-3) + "%");
 			this.set_applet_tooltip(_("Click to open Gnome system monitor"));
 		}
 		catch (e) {
