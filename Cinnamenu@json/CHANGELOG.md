@@ -1,5 +1,9 @@
 Changelog
 
+### 3.2.3
+
+  * Fixed a bug that can prevent being able to open applications after exiting the context menu.
+
 ### 3.2.2
 
   * Fixed inability to uninstall applications due to gksu deprecation.
