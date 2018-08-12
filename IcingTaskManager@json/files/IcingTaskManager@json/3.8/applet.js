@@ -657,22 +657,22 @@ class ITMApplet extends Applet.Applet {
   }
 
   getAppFromWMClass(specialApps, metaWindow) {
-    let startupClass = (wmclass)=> {
-      let app_final = null;
+    let startupClass = (wmClass)=> {
+      let app = null;
       for (let i = 0, len = specialApps.length; i < len; i++) {
-        if (specialApps[i].wmClass === wmclass) {
-          app_final = this.appSystem.lookup_app(specialApps[i].id);
-          if (!app_final) {
-            app_final = this.appSystem.lookup_settings_app(specialApps[i].id);
+        if (specialApps[i].wmClass === wmClass) {
+          app = this.appSystem.lookup_app(specialApps[i].id);
+          if (!app) {
+            app = this.appSystem.lookup_settings_app(specialApps[i].id);
           }
-          app_final.wmClass = wmclass;
+          if (app) {
+            app.wmClass = wmClass;
+          }
         }
       }
-      return app_final;
+      return app;
     };
-    let wmClassInstance = metaWindow.get_wm_class_instance();
-    let app = startupClass(wmClassInstance);
-    return app;
+    return startupClass(metaWindow.get_wm_class_instance());
   }
 
   getCurrentAppList() {
