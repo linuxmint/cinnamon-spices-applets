@@ -149,7 +149,7 @@ MyApplet.prototype = {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
-                 Main.criticalNotify("Some Dependencies not Installed", "Both 'sox' and 'zenity' required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them.", icon);
+                 Main.criticalNotify("Some Dependencies not Installed", "Both 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them.", icon);
                  this.dependenciesMet = false;
             }
 
