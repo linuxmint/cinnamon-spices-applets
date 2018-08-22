@@ -9,25 +9,25 @@ function _(str) {
   return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-var REMEMBER_RECENT_KEY = 'remember-recent-files';
+const REMEMBER_RECENT_KEY = 'remember-recent-files';
 
-var ApplicationType = {
+const ApplicationType = {
   _applications: 0,
   _places: 1,
   _recent: 2,
   _windows: 3,
   _providers: 4
 };
-var AppTypes = Object.keys(ApplicationType);
+const AppTypes = Object.keys(ApplicationType);
 
-var ApplicationsViewMode = {
+const ApplicationsViewMode = {
   LIST: 0,
   GRID: 1
 };
 
-var fuzzyOptions = {
+const fuzzyOptions = {
   before: '<b><u>',
   after: '</u></b>'
 }
 
-var gridWidths = [0, 0, 0, 625, 700, 725, 900, 1025];
+const gridWidths = [0, 240, 340, 498, 644, 725, 840, 980];

@@ -247,7 +247,7 @@
   "apps-grid-column-count": {
     "type": "spinbutton",
     "default": 4,
-    "min": 3,
+    "min": 2,
     "max": 7,
     "step": 1,
     "units": "columns",
