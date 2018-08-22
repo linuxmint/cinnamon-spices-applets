@@ -2074,7 +2074,7 @@ CinnamenuApplet.prototype = {
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
       displayed: true,
-      menuHeight: menuHeight < 530 ? 530 : menuHeight
+      menuHeight: menuHeight < 360 ? 360 : menuHeight
     });
 
     let section = new PopupMenu.PopupMenuSection();

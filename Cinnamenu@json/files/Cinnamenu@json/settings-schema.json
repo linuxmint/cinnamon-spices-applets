@@ -247,7 +247,7 @@
   "apps-grid-column-count": {
     "type": "spinbutton",
     "default": 4,
-    "min": 3,
+    "min": 2,
     "max": 7,
     "step": 1,
     "units": "columns",
@@ -311,7 +311,7 @@
   "custom-menu-height": {
     "type": "spinbutton",
     "default": 530,
-    "min": 530,
+    "min": 360,
     "max": 9999,
     "step": 1,
     "units": "px",

@@ -1,5 +1,11 @@
 Changelog
 
+### 3.2.4
+
+  * Lowered the minimum possible custom height to 360px.
+  * Lowered the minimum possible number of columns to 2.
+  * Reduced the widths of the columns so the menu is more compact.
+
 ### 3.2.3
 
   * Fixed a bug that can prevent being able to open applications after exiting the context menu.
