@@ -6,10 +6,11 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
+const Settings = imports.ui.settings;
 const UUID = "mem-monitor-text@datanom.net";
 const GLib = imports.gi.GLib;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
@@ -26,6 +27,9 @@ MyApplet.prototype = {
         Applet.TextApplet.prototype._init.call(this, orientation);
 
 		try {
+            this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "mem-label", "mem_label", this._update, null);
+
 			this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
@@ -61,10 +65,10 @@ MyApplet.prototype = {
 			this.buffer = this.gtop.buffer;
 			this.cached = this.gtop.cached;
 			this.maxmem = this.gtop.total;
-		
+
 			this.realuse = this.usage - this.buffer - this.cached;
 			let percent = Math.round((this.realuse * 100) / this.maxmem);
-			this.set_applet_label(_("   " + percent.toString()).slice(-3) + "%");
+			this.set_applet_label(this.mem_label + " " + percent.toString().slice(-3) + "%");
 			this.set_applet_tooltip(_("Click to open Gnome system monitor"));
 		}
 		catch (e) {
@@ -82,6 +86,5 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation) {
-	let myApplet = new MyApplet(orientation);
-	return myApplet;
+	return new MyApplet(orientation);
 }
