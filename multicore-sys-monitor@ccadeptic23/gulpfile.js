@@ -1,6 +1,4 @@
 var gulp = require('gulp');
-var zip = require('gulp-zip');
-var del = require('del');
 var clear = require('clear');
 var exec = require('child_process').exec;
 
