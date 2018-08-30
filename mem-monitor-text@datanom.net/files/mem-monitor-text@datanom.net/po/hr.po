@@ -18,15 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Language: hr\n"
 
-#: applet.js:29
+#: applet.js:33
 msgid "Open System Monitor"
 msgstr "Otvori nadgledatelja sustava"
 
-#: applet.js:67
-msgid "  Mem: "
-msgstr "  Mem: "
-
-#: applet.js:68
+#: applet.js:72
 msgid "Click to open Gnome system monitor"
 msgstr "Kliknite za otvaranje Nadgledatelja sustava"
 
