@@ -167,6 +167,7 @@ MyApplet.prototype = {
     this.actor.connect('leave-event', () => {
       this.hovered = false;
       if (this.originalAutoHideSetting) {
+        this.originalAutoHideSetting = null;
         this.panel._autohideSettings = this.originalAutoHideSetting;
       }
     });
