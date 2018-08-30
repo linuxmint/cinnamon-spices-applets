@@ -158,7 +158,8 @@ MyApplet.prototype = {
 
     this.actor.connect('enter-event', () => {
       this.hovered = true;
-      if (this.panel._autohideSettings !== 'true') {
+      // Work around hovering over a PangoCairo canvas instance triggering a false positive panel leave event
+      if (this.panel._autohideSettings !== 'false') {
         this.originalAutoHideSetting = this.panel._autohideSettings;
         this.panel._autohideSettings = 'true';
         this.panel._updatePanelVisibility();
