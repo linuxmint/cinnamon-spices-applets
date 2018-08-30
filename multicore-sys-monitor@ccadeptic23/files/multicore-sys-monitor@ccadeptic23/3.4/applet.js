@@ -156,8 +156,20 @@ MyApplet.prototype = {
 
     this._initContextMenu();
 
-    this.actor.connect('enter-event', () => this.hovered = true)
-    this.actor.connect('leave-event', () => this.hovered = false)
+    this.actor.connect('enter-event', () => {
+      this.hovered = true;
+      if (this.panel._autohideSettings !== 'true') {
+        this.originalAutoHideSetting = this.panel._autohideSettings;
+        this.panel._autohideSettings = 'true';
+        this.panel._updatePanelVisibility();
+      }
+    });
+    this.actor.connect('leave-event', () => {
+      this.hovered = false;
+      if (this.originalAutoHideSetting) {
+        this.panel._autohideSettings = this.originalAutoHideSetting;
+      }
+    });
 
     this.graphArea = new St.DrawingArea();
 
