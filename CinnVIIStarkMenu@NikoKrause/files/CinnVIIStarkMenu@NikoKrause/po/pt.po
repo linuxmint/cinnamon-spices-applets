@@ -715,7 +715,7 @@ msgstr "Escolha se deseja ou não mostrar ícones nos menus de contexto."
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
 #. 3.4->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application's description under their titles"
-msgstr "Mostrar a descrição das aplicações por baixo dos seus título"
+msgstr "Mostrar a descrição das aplicações por baixo dos seus títulos"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
