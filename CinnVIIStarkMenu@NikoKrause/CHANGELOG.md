@@ -19,7 +19,7 @@ Czech (cs)                   | [Radek Otáhal](https://launchpad.net/~radek-otah
 French (fr)                  | [bluedxca93](https://launchpad.net/~bluedxca93), [Christian Medel](https://launchpad.net/~cmedelahumada)
 German (de)                  | [Niko Krause](https://launchpad.net/~nikokrause)
 Kurdish (ku)                 | [Rokar ✌](https://launchpad.net/~rokarali)
-Portuguese (pt)              | [Hugo Gonçalves](https://launchpad.net/~hugo-goncalves-q)
+Portuguese (pt)              | [Hugo Meireles Gonçalves](https://github.com/hugogoncalves77)
 Russian (ru)                 | [Niko Krause](https://launchpad.net/~nikokrause), [Pavel Ivanov](https://launchpad.net/~ipasoft)
 Serbian (sr)                 | [Мирослав Николић](https://launchpad.net/~lipek)
 Spanish (es)                 | [Bob](https://launchpad.net/~basura1-p), [Germán](https://launchpad.net/~germanfr)
