@@ -193,7 +193,7 @@ NoteBase.prototype = {
             if ( this.defaultTheme == "random" ) {
                 let options = settings.getOptions("theme")
                 let keys = Object.keys(options);
-                key = keys[Math.floor(Math.random()*(keys.length-1))];
+                let key = keys[Math.floor(Math.random()*(keys.length-1))];
                 this.theme = options[key];
             }
             else this.theme = this.defaultTheme;
