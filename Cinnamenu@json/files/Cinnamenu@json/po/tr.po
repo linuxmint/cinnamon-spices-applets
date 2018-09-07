@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"POT-Creation-Date: 2018-09-05 01:03-0500\n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Serdar <teknomobil@yandex.com>\n"
 "Language: tr\n"
@@ -25,7 +25,7 @@ msgstr "Masaüstüne ekle"
 
 #: buttons.js:1025
 msgid "Remove from favorites"
-msgstr "Fovorilerden kaldır"
+msgstr "Favorilerden kaldır"
 
 #: buttons.js:1027
 msgid "Add to favorites"
@@ -154,8 +154,8 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, open window "
 "lookup, and search provider support with fuzzy searching."
 msgstr ""
-"Biçimlendirme seçenekleri, yer imleri ve açık pencere sağlayan esnek bir "
-"menü Arama ve arama sağlayıcıları, bulanık arama ile destekleniyor."
+"Özelleştirilebilir menü, simge boyutları kategori boyutları ayarlanabilir"
+"Arama motorları ve yer imleri eklenebilir, şeffaf arkaplan desteklidir"
 
 #. settings-schema.json->panel->title
 msgid "Behavior"
@@ -277,7 +277,7 @@ msgstr "milisaniye"
 
 #. settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
-msgstr ""
+msgstr "Menü bekleme gecikmesi:"
 
 #. settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
@@ -317,11 +317,11 @@ msgstr "Tarayıcı yer imlerini göster"
 
 #. settings-schema.json->enable-bookmarks->tooltip
 msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Bilgisayar yer imlerini göster"
+msgstr "Bilgisayar menüsünde bulunan yer imlerini göster"
 
 #. settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
-msgstr "Açık pencerelerin aranmasını etkinleştir"
+msgstr "Açık pencerelerde aramayı etkinleştir"
 
 #. settings-schema.json->enable-windows->tooltip
 msgid "Choose whether or not open windows are indexed in menu searches."
