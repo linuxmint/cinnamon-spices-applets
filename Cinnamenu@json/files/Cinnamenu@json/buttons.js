@@ -790,7 +790,7 @@ AppListGridButton.prototype = {
       || !this.buttonState.app
       || !this.description
       || this.state.dragIndex > -1
-      || this.state.contextMenuIsOpen) {
+      || this.state.contextMenuIsOpen != null) {
       return false;
     }
     if (opts.reset === 2) {
@@ -827,7 +827,7 @@ AppListGridButton.prototype = {
   },
 
   handleEnter: function (actor, event) {
-    if (this.state.contextMenuIsOpen || this.menu.isOpen || this.state.dragIndex > -1) {
+    if (this.state.contextMenuIsOpen != null || this.menu.isOpen || this.state.dragIndex > -1) {
       return false;
     }
 
@@ -881,7 +881,7 @@ AppListGridButton.prototype = {
     if (this.description) {
       this.buttonState.app.description = this.description;
       this.formatLabel({});
-      if (!this.state.contextMenuIsOpen && this.marqueeTimer) {
+      if (this.state.contextMenuIsOpen == null && this.marqueeTimer) {
         this.clearMarqueeTimer();
       }
     }
@@ -893,21 +893,20 @@ AppListGridButton.prototype = {
     }
   },
 
-  handleButtonRelease: function(actor, e){
+  handleButtonRelease: function(actor, e) {
     let button = !e ? 3 : e.get_button();
     if (button === 1) {
-      if (this.state.contextMenuIsOpen) {
+      if (this.state.contextMenuIsOpen != null) {
         if (this.menu.isOpen && this.menu._activeMenuItem) {
           this.menu._activeMenuItem.activate();
         } else {
           this.activateContextMenus(e, true);
-          this.state.set({contextMenuIsOpen: false});
+          this.state.set({contextMenuIsOpen: null});
         }
         return false;
       }
       this.activate(e);
     } else if (button === 3) {
-      // Prevent the menu from clipping if this button is partially visible.
       if (!this.state.isListView
         && this.buttonState.appType === ApplicationType._applications) {
         this.toggleActors(true);
@@ -1043,12 +1042,12 @@ AppListGridButton.prototype = {
 
       // In grid mode we will ensure our menu isn't overlapped by any other actors.
       if (!this.state.isListView) {
-        this.actor.raise_top();
+        this.actor.get_parent().set_child_above_sibling(this.actor, null);
       }
     } else {
       this.toggleActors(false);
       // Allow other buttons hover functions to take effect.
-      this.state.set({contextMenuIsOpen: false});
+      this.state.set({contextMenuIsOpen: null});
     }
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
     return true
