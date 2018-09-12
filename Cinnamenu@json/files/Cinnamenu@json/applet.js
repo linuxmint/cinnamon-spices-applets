@@ -169,7 +169,7 @@ CinnamenuApplet.prototype = {
         appletReady: false,
         searchActive: false,
         itemEntered: false,
-        contextMenuIsOpen: false,
+        contextMenuIsOpen: null,
         menuHeight: 530,
         expressionActive: false,
         searchWebErrorsShown: false,

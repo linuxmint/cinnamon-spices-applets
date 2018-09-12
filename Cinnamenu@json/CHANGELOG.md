@@ -1,5 +1,9 @@
 Changelog
 
+### 3.2.5
+
+  * Fixed being unable to select a context menu option from the first app button in a category group.
+
 ### 3.2.4
 
   * Lowered the minimum possible custom height to 360px.
