@@ -8,7 +8,7 @@ const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
-const cpuIdentifiers = ['Tctl', 'CPU'];
+const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
 
 const _ = function(str) {
   let translation = Gettext.gettext(str);
