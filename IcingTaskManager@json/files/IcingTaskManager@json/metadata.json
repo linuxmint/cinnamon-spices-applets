@@ -2,7 +2,7 @@
     "description": "Window list with app grouping and thumbnails",
     "max-instances": -1,
     "name": "Icing Task Manager",
-    "version": "6.3.11",
+    "version": "6.3.12",
     "role": "panellauncher",
     "uuid": "IcingTaskManager@json",
     "multiversion": true,
