@@ -1004,6 +1004,7 @@ class WindowThumbnail {
       let [width, height] = windowTexture.get_size();
       this.signals.connect(this.metaWindowActor, 'size-changed', () => this.refreshThumbnail());
       this.signals.connect(this.metaWindowActor, 'destroy', () => {
+        if (this.willUnmount) return;
         this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
         this.metaWindowActor = null;
       });
