@@ -94,7 +94,7 @@ CollapsibleSystrayApplet.prototype = {
         // Variables
 
         this._direction          = (orientation == St.Side.TOP || orientation == St.Side.BOTTOM) ? this.Direction.HORIZONTAL : this.Direction.VERTICAL;
-        this._signalManager      = new SignalManager.SignalManager(this);
+        this._signalManager      = new SignalManager.SignalManager(null);
         this._hovering           = false;
         this._hoverTimerID       = null;
         this._registeredAppIcons = {};
