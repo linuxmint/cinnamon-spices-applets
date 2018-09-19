@@ -291,7 +291,7 @@ class ITMApplet extends Applet.Applet {
     this.bindSettings();
     // Passing an empty object instead of `this` because its only used by SignalManager to bind the callback, which
     // we already do here. Otherwise, it creates more circular references.
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
     this.appSystem = this.state.trigger('getAppSystem');
     this.pinnedFavorites = new PinnedFavs({
       signals: this.signals,

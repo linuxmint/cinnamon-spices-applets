@@ -95,7 +95,7 @@ class AppGroup {
       launchNewInstance: () => this.launchNewInstance()
     });
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
 
     // TODO: This needs to be in state so it can be updated more reliably.
     this.labelVisible = this.state.settings.titleDisplay !== constants.TitleDisplay.None && this.state.isHorizontal;

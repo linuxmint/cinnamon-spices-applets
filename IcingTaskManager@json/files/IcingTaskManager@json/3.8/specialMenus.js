@@ -34,7 +34,7 @@ class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
     this.state = params.state;
     this.groupState = params.groupState;
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
     this.signals.connect(this, 'open-state-changed', (...args) => this._onToggled(...args));
   }
 
@@ -811,7 +811,7 @@ class WindowThumbnail {
     this.stopClick = false;
     this.entered = false;
     this.isFocused = false;
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
 
     // Inherit the theme from the alt-tab menu'
     this.actor = new St.BoxLayout({
@@ -923,6 +923,7 @@ class WindowThumbnail {
   }
 
   _focusWindowChange() {
+    if (this.willUnmount) return;
     if (this.isFocused
       && this.state.settings.highlightLastFocusedThumbnail
       && this.groupState.metaWindows.length > 1) {
@@ -1002,6 +1003,11 @@ class WindowThumbnail {
       let windowTexture = this.metaWindowActor.get_texture();
       let [width, height] = windowTexture.get_size();
       this.signals.connect(this.metaWindowActor, 'size-changed', () => this.refreshThumbnail());
+      this.signals.connect(this.metaWindowActor, 'destroy', () => {
+        if (this.willUnmount) return;
+        this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
+        this.metaWindowActor = null;
+      });
       let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       if (isUpdate) {
         this.thumbnailActor.child.source = windowTexture;
