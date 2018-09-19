@@ -8,11 +8,12 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 
-const session = new Soup.SessionAsync();
+const session = new Soup.Session();
 const UUID = 'spices-notifier@germanfr';
 
 const SPICES_URL = 'https://cinnamon-spices.linuxmint.com';
 const HTML_COUNT_ID = 'count';
+const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -151,7 +152,9 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		}
 
 		let iteration = this.iteration;
-		let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json`);
+		/* The question mark at the end is a hack to force the server to not
+		   send us a very old cached version of the json file. */
+		let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json?`);
 		session.queue_message(msg, (session, message) => {
 			if (message.status_code === 200 && iteration === this.iteration) {
 				let xlets = JSON.parse(message.response_body.data);
@@ -190,11 +193,18 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		let msg = Soup.Message.new('GET', xlet.page);
 		session.queue_message(msg, (session, message) => {
 			if (message.status_code === 200) {
-				let regex = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
-				let result = regex.exec(message.response_body.data);
-				let count = result[1] ? parseInt(result[1]) : 0;
-				this.set_comments_cache(xlet, count, read);
-				item.update_comment_count(count - read);
+				let result = COMMENTS_REGEX.exec(message.response_body.data);
+				if (result && result[1]) {
+					let count = parseInt(result[1]);
+					this.set_comments_cache(xlet, count, read);
+					item.update_comment_count(count - read);
+				} else {
+					item.actor.hide();
+					global.logWarning(xlet.name + ": This xlet is cached in the "
+							+ "xlet.json file but doesn't actually exist in the "
+							+ "Spices now OR the Cinnamon Spices changed the ID "
+							+ "(please report if there are 0 items)");
+				}
 			}
 		});
 	}
