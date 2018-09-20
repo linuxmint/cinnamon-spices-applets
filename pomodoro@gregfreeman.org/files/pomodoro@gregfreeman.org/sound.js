@@ -19,6 +19,10 @@ function spawnCommandAndGetPid(command) {
 }
 
 function addPathIfRelative(soundPath, basePath) {
+    if (soundPath.indexOf('file://') === 0) {
+        soundPath = soundPath.substring(7);
+    }
+
     // user set a custom absolute path, so lets use that
     if (soundPath.substring(0, 1) == '/') {
         return soundPath;
@@ -55,6 +59,7 @@ SoundEffect.prototype = {
 
         if (!GLib.file_test(soundPath, GLib.FileTest.EXISTS)) {
             isPlayable = false;
+            global.logError(soundPath + " is not playable");
         }
 
         this._isPlayable = isPlayable;
