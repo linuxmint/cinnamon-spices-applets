@@ -53,6 +53,7 @@ MyApplet.prototype = {
 
     on_applet_clicked: function (event) {
         if (!this.menu.isOpen) {
+            this.menu.setCustomStyleClass("click")
             let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
             let cmd_output = this.spawn_sync(cmd);
             let cmd_stdout = cmd_output[0] ? cmd_output[1].toString() : _("script error");
