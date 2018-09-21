@@ -99,6 +99,11 @@
     "description": "Show Output device",
     "tooltip": "show/hide Output device"
  },
+ "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding to call up the applet",
+    "default": "<Super>v"
+ },
   "div3" : {
     "type" : "separator"
  },
