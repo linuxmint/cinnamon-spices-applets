@@ -13,13 +13,14 @@ const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
-let store, setTimeout, clearTimeout, isString, unref, tryFn, _, ApplicationType;
+let store, setTimeout, clearTimeout, isFinalized, isString, unref, tryFn, _, ApplicationType;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   const constants = require('./constants');
   store = require('./store');
   setTimeout = utils.setTimeout;
   clearTimeout = utils.clearTimeout;
+  isFinalized = utils.isFinalized;
   isString = utils.isString;
   unref = utils.unref;
   tryFn = utils.tryFn;
@@ -31,6 +32,7 @@ if (typeof require !== 'undefined') {
   store = AppletDir[storeVersion];
   setTimeout = AppletDir.utils.setTimeout;
   clearTimeout = AppletDir.utils.clearTimeout;
+  isFinalized = AppletDir.utils.isFinalized;
   isString = AppletDir.utils.isString;
   unref = AppletDir.utils.unref;
   tryFn = AppletDir.utils.tryFn;
@@ -965,7 +967,7 @@ AppListGridButton.prototype = {
   },
 
   _onStateChanged: function () {
-    if (!this.buttonState.app) {
+    if (!this.buttonState.app || isFinalized(this.dot)) {
       return false;
     }
     if (this.buttonState.appType === ApplicationType._applications) {
