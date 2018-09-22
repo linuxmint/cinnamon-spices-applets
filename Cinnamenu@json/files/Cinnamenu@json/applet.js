@@ -2210,6 +2210,7 @@ CinnamenuApplet.prototype = {
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
+      style: 'min-width: 275px',
       vertical: true
     });
     this.answerText = new St.Label({
@@ -2231,7 +2232,7 @@ CinnamenuApplet.prototype = {
       y_align: St.Align.START
     });
     this.applicationsBoxWrapper.add(this.applicationsListBox, {
-      x_fill: false,
+      x_fill: true,
       y_fill: false,
       x_align: St.Align.START,
       y_align: St.Align.START
