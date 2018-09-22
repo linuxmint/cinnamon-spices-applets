@@ -1,5 +1,12 @@
 Changelog
 
+### 3.2.6
+
+  * Fixed issues with invalid access of C objects occurring with CJS git master.
+  * Fixed the list view container width not filling the parent scroll container width, and the button widths not filling their parent container's width.
+  * Fixed the dot offsetting the vertical alignment of labels in the list view.
+  * Made the positioning of the running app indicator dot consistent between list and grid views.
+
 ### 3.2.5
 
   * Fixed being unable to select a context menu option from the first app button in a category group.
