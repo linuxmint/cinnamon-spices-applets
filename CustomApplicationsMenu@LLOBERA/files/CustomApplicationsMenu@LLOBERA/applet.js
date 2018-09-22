@@ -159,7 +159,10 @@ MyApplet.prototype = {
                 if (icon instanceof(Gio.FileIcon))
                     application.iconName = icon.get_file().get_path();
                 else
-                    application.iconName = icon.get_names().toString();
+                    application.iconName = icon.get_names()[0];
+            }
+            else {
+                global.logError("appInfo.get_icon() returns null.");
             }
         }
     },
