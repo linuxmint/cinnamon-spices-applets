@@ -1,3 +1,4 @@
+const GObject = imports.gi.GObject;
 const Mainloop = imports.mainloop;
 
 const setTimeout = function(func, ms) {
@@ -136,4 +137,8 @@ const findIndex = function(arr, cb) {
     }
   }
   return -1;
+}
+
+const isFinalized = function(obj) {
+  return obj && GObject.Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
 }

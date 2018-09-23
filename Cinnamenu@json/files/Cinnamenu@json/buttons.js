@@ -13,13 +13,14 @@ const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
-let store, setTimeout, clearTimeout, isString, unref, tryFn, _, ApplicationType;
+let store, setTimeout, clearTimeout, isFinalized, isString, unref, tryFn, _, ApplicationType;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   const constants = require('./constants');
   store = require('./store');
   setTimeout = utils.setTimeout;
   clearTimeout = utils.clearTimeout;
+  isFinalized = utils.isFinalized;
   isString = utils.isString;
   unref = utils.unref;
   tryFn = utils.tryFn;
@@ -31,6 +32,7 @@ if (typeof require !== 'undefined') {
   store = AppletDir[storeVersion];
   setTimeout = AppletDir.utils.setTimeout;
   clearTimeout = AppletDir.utils.clearTimeout;
+  isFinalized = AppletDir.utils.isFinalized;
   isString = AppletDir.utils.isString;
   unref = AppletDir.utils.unref;
   tryFn = AppletDir.utils.tryFn;
@@ -453,13 +455,17 @@ AppListGridButton.prototype = {
       hover: false,
       activate: false
     });
+
     this.actor.set_style_class_name('menu-application-button');
     this.actor.set_style('padding-left: 0px; padding-right: 0px;')
     this.actor.x_align = this.state.isListView ? St.Align.START : St.Align.MIDDLE;
     this.actor.y_align = St.Align.MIDDLE;
+
     if (!this.state.isListView) {
       this.actor.width = this.state.trigger('getAppsGridBoxWidth') / this.state.settings.appsGridColumnCount;
     }
+
+    // DND
     this.actor._delegate = {
       handleDragOver: (source, actor, x, y, time) => {
         if (!source.appIndex
@@ -493,17 +499,13 @@ AppListGridButton.prototype = {
     this.signals = new SignalManager.SignalManager(null);
     this.contextMenuButtons = [];
     this.description = '';
-    this.isStrApp = typeof app === 'string';
     this.entered = null;
-    if (this.state.isListView) {
-      this._iconContainer = new St.BoxLayout({
-        vertical: true
-      });
-    }
+
+    this._iconContainer = new St.BoxLayout();
 
     // appType 0 = application, appType 1 = place, appType 2 = recent
     // Filesystem autocompletion
-    if (this.isStrApp) {
+    if (typeof app === 'string') {
       if (app.charAt(0) === '~') {
         app = app.slice(1);
         app = GLib.get_home_dir() + app;
@@ -524,6 +526,7 @@ AppListGridButton.prototype = {
         () => this.handler = null
       );
     }
+
     // Don't show protocol handlers
     if (this.buttonState.app.description) {
       let slice = this.buttonState.app.description.slice(0, 7);
@@ -536,6 +539,7 @@ AppListGridButton.prototype = {
     } else if (this.buttonState.appType === ApplicationType._applications) {
       this.buttonState.app.description = this.state.fallbackDescription;
     }
+
     // Icons
     if (this.state.settings.showApplicationIcons) {
       if (this.buttonState.appType === ApplicationType._applications) {
@@ -584,7 +588,9 @@ AppListGridButton.prototype = {
     });
 
     this.dot = new St.Widget({
-      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.foregroundColor + '; margin-bottom: 2px; border-radius: 128px;',
+      style: 'width: 4px; height: 4px; background-color: '
+        + this.state.theme.foregroundColor
+        + '; margin-bottom: 2px; border-radius: 128px;',
       layout_manager: new Clutter.BinLayout(),
       x_expand: true,
       y_expand: false,
@@ -597,35 +603,45 @@ AppListGridButton.prototype = {
       width: 240 * global.ui_scale,
       y_expand: false
     });
-    let iconDotContainer = this.state.isListView ? '_iconContainer' : 'buttonBox';
+
     if (this.icon) {
-      this[iconDotContainer].add(this.icon, {
+      this._iconContainer.add(this.icon, {
         x_fill: false,
         y_fill: false,
         x_align: this.state.isListView ? St.Align.END : St.Align.MIDDLE,
         y_align: this.state.isListView ? St.Align.END : St.Align.START
       });
     }
-    if (this.state.isListView) {
-      this.buttonBox.add(this._iconContainer, {
-        x_fill: false,
-        y_fill: false,
-        x_align: St.Align.START,
-        y_align: St.Align.MIDDLE
-      });
-    }
+
+    this.buttonBox.add(this._iconContainer, {
+      x_fill: false,
+      y_fill: false,
+      x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
+      y_align: St.Align.MIDDLE
+    });
     this.buttonBox.add(this.label, {
       x_fill: false,
       y_fill: false,
       x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
     });
-    this[iconDotContainer].add(this.dot, {
+    this._iconContainer.add(this.dot, {
       x_fill: false,
       y_fill: true,
       x_align: this.state.isListView ? St.Align.END : St.Align.MIDDLE,
       y_align: this.state.isListView ? St.Align.END : St.Align.START
     });
+
+    if (this.state.isListView) {
+      // Position the dot diagonally to the bottom right corner of the icon
+      this.dot.anchor_y = -4;
+      this.dot.anchor_x = 2;
+      this.label.set_style('min-width: 230px;');
+    } else {
+      this.dot.anchor_y = -2;
+      this.dot.anchor_x = 4;
+    }
+
     // Context menu
     if (this.buttonState.appType === ApplicationType._applications) {
       this.menu = new PopupMenu.PopupSubMenu(this.actor);
@@ -965,7 +981,7 @@ AppListGridButton.prototype = {
   },
 
   _onStateChanged: function () {
-    if (!this.buttonState.app) {
+    if (!this.buttonState.app || isFinalized(this.dot)) {
       return false;
     }
     if (this.buttonState.appType === ApplicationType._applications) {

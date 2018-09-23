@@ -24,7 +24,7 @@ const FileUtils = imports.misc.fileUtils;
 
 // Testing module imports for the extension refactor PR
 // https://github.com/linuxmint/Cinnamon/pull/6878
-let store, fuzzy, sortBy, setTimeout, tryFn, find, map, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
+let store, fuzzy, sortBy, setTimeout, tryFn, find, map, isFinalized, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
   fuzzyOptions, gridWidths;
@@ -39,6 +39,7 @@ if (typeof require !== 'undefined') {
   tryFn = utils.tryFn;
   find = utils.find;
   map = utils.map;
+  isFinalized = utils.isFinalized;
   sortDirs = utils.sortDirs;
   Chromium = require('./webChromium');
   Firefox = require('./webFirefox');
@@ -65,6 +66,7 @@ if (typeof require !== 'undefined') {
   tryFn = AppletDir.utils.tryFn;
   find = AppletDir.utils.find;
   map = AppletDir.utils.map;
+  isFinalized = AppletDir.utils.isFinalized;
   sortDirs = AppletDir.utils.sortDirs;
   Chromium = AppletDir.webChromium;
   Firefox = AppletDir.webFirefox;
@@ -2208,6 +2210,7 @@ CinnamenuApplet.prototype = {
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
+      style: 'min-width: 275px',
       vertical: true
     });
     this.answerText = new St.Label({
@@ -2229,7 +2232,7 @@ CinnamenuApplet.prototype = {
       y_align: St.Align.START
     });
     this.applicationsBoxWrapper.add(this.applicationsListBox, {
-      x_fill: false,
+      x_fill: true,
       y_fill: false,
       x_align: St.Align.START,
       y_align: St.Align.START
@@ -2392,7 +2395,7 @@ CinnamenuApplet.prototype = {
   },
 
   destroyContainer: function(container) {
-    if (!container) {
+    if (!container || isFinalized(container)) {
       return false;
     }
     let children = container.get_children();
