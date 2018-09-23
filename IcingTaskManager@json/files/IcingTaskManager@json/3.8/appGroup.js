@@ -7,10 +7,9 @@ const Tweener = imports.ui.tweener;
 const DND = imports.ui.dnd;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
-const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-const {each, find, findIndex, isEqual, setTimeout, throttle, getFocusState, unref} = require('./utils');
+const {each, find, findIndex, isEqual, isFinalized, setTimeout, getFocusState, unref} = require('./utils');
 const {AppMenuButtonRightClickMenu, HoverMenuController, AppThumbnailHoverMenu} = require('./specialMenus');
 const constants = require('./constants');
 const store = require('./store');
@@ -539,6 +538,8 @@ class AppGroup {
   }
 
   resetHoverStatus() {
+    if (isFinalized(this.actor)) return;
+
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
@@ -962,6 +963,8 @@ class AppGroup {
   }
 
   handleFavorite (changed) {
+    if (isFinalized(this.actor)) return;
+
     if (changed) {
       setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
     }
