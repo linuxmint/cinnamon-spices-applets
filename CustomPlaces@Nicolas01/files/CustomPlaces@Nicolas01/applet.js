@@ -16,7 +16,7 @@ const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Util = imports.misc.util;
 
-const appletUUID = 'customplaces@llobera';
+const appletUUID = 'CustomPlaces@Nicolas01';
 const AppletDirectory = imports.ui.appletManager.appletMeta[appletUUID].path;
 const SettingsFile = AppletDirectory + "/places.json";
 imports.searchPath.push(AppletDirectory);
