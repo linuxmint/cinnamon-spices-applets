@@ -11,7 +11,7 @@
     ], 
     "max-instances": 1, 
     "description": "A replacement for the abandoned System Tray Collapsible Cinnamon applet", 
-    "version": "1.13", 
+    "version": "1.14", 
     "icon": "indicator-applet", 
     "name": "Collapsible Systray"
 }

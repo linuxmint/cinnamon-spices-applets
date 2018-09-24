@@ -759,7 +759,7 @@ CollapsibleSystrayApplet.prototype = {
         }
         iconWrap.setVertical(this._direction == this.Direction.VERTICAL);
 
-        if (["livestreamer-twitch-gui", "chromium", "swt"].indexOf(role) != -1) {
+        if (["livestreamer-twitch-gui", "chromium", "swt", "skypeforlinux"].indexOf(role) != -1) {
             iconWrap.csDisable = Lang.bind(this, function() {
                 if (this.animationSupport) {
                     iconWrapContent.set_child(null);
