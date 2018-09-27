@@ -154,7 +154,6 @@ MyApplet.prototype = {
     Applet[appletClass].prototype._init.call(this, orientation);
 
     if (gtopFailed) {
-      global.log(metadata.path + '/icon.png')
       this.set_applet_icon_path(metadata.path + '/icon.png');
       this.set_applet_tooltip(metadata.description);
       return;
@@ -162,7 +161,6 @@ MyApplet.prototype = {
 
     this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
     this.childProcessHandler = null;
-
     this.metadata = metadata;
     this._panelHeight = panel_height;
     this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
