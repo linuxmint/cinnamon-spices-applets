@@ -157,6 +157,7 @@ MyApplet.prototype = {
       return;
     }
 
+    this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
     this.childProcessHandler = null;
 
     this.metadata = metadata;
