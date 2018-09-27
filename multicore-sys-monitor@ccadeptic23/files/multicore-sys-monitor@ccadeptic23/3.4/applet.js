@@ -50,7 +50,10 @@ tryFn(function() {
     icon_type: St.IconType.FULLCOLOR,
     icon_size: 24 * global.ui_scale,
     gicon: new Gio.FileIcon({
-      file: Gio.file_new_for_path(GLib.get_home_dir() + '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/3.4/icon.png')
+      file: Gio.file_new_for_path(
+        GLib.get_home_dir() +
+        '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/3.4/icon.png'
+      )
     })
   });
   Main.criticalNotify(
