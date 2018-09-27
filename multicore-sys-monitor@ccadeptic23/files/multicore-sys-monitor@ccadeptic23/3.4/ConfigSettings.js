@@ -140,10 +140,10 @@ ConfigSettings.prototype = {
     out.close(null);
   },
   readSettings: function() {
-    //Default Settings for preferences incase we cannot find ours
+    // Default Settings for preferences in case we cannot find ours
     this._prefs = {
       labelsOn: true,
-      refreshRate: 500,
+      refreshRate: 1000,
       labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
       backgroundColor: [1, 1, 1, 0.1],
       cpu: {
