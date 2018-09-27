@@ -1187,7 +1187,7 @@ CinnamenuApplet.prototype = {
       }
     }
 
-    if (this.applicationsGridBox) {
+    if (this.applicationsGridBox && !isFinalized(this.applicationsGridBox)) {
       let gridActors = this.applicationsGridBox.get_children();
       if (gridActors) {
         for (let i = 0, len = gridActors.length; i < len; i++) {
