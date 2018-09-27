@@ -11,17 +11,19 @@
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
+const Main = imports.ui.main;
 const Applet = imports.ui.applet;
 
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 
-let _, tryFn, ConfigSettings, SpawnProcess, Graphs, DataProviders, ErrorApplet;
+let _, tryFn, ConfigSettings, SpawnProcess, Graphs, DataProviders;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   _ = utils._;
@@ -30,7 +32,6 @@ if (typeof require !== 'undefined') {
   SpawnProcess = require('./SpawnProcess');
   Graphs = require('./Graphs');
   DataProviders = require('./DataProviders');
-  ErrorApplet = require('./ErrorApplet');
 } else {
   const AppletDir = imports.ui.appletManager.applets[UUID];
   _ = AppletDir.utils._;
@@ -39,15 +40,29 @@ if (typeof require !== 'undefined') {
   SpawnProcess = AppletDir.SpawnProcess;
   Graphs = AppletDir.Graphs;
   DataProviders = AppletDir.DataProviders;
-  ErrorApplet = AppletDir.ErrorApplet;
 }
 
-let GTop;
+let GTop, gtopFailed;
 tryFn(function() {
   GTop = imports.gi.GTop;
 }, function(e) {
-  global.logError(e);
-  GTop = null;
+  let icon = new St.Icon({
+    icon_type: St.IconType.FULLCOLOR,
+    icon_size: 24 * global.ui_scale,
+    gicon: new Gio.FileIcon({
+      file: Gio.file_new_for_path(GLib.get_home_dir() + '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/3.4/icon.png')
+    })
+  });
+  Main.criticalNotify(
+    _('Dependency missing'),
+    _(
+      'Please install the GTop package\n' +
+      '\tUbuntu / Mint: gir1.2-gtop-2.0\n' +
+      '\tFedora: libgtop2-devel\n' +
+      '\tArch: libgtop\n' +
+      'to use ' + UUID
+    ), icon);
+  gtopFailed = true;
 });
 
 if (typeof Object.assign !== 'function') {
@@ -127,11 +142,20 @@ function MyApplet(metadata, orientation, panel_height) {
   this._init(metadata, orientation, panel_height);
 }
 
+let appletClass = gtopFailed ? 'IconApplet' : 'Applet';
+
 MyApplet.prototype = {
-  __proto__: Applet.Applet.prototype,
+  __proto__: Applet[appletClass].prototype,
 
   _init: function(metadata, orientation, panel_height) {
-    Applet.Applet.prototype._init.call(this, orientation);
+    Applet[appletClass].prototype._init.call(this, orientation);
+
+    if (gtopFailed) {
+      global.log(metadata.path + '/icon.png')
+      this.set_applet_icon_path(metadata.path + '/icon.png');
+      this.set_applet_tooltip(metadata.description);
+      return;
+    }
 
     this.childProcessHandler = null;
 
@@ -212,6 +236,7 @@ MyApplet.prototype = {
   },
 
   on_applet_removed_from_panel: function() {
+    if (gtopFailed) return;
     if (this.loopId) {
       Mainloop.source_remove(this.loopId);
     }
@@ -351,10 +376,5 @@ MyApplet.prototype = {
 };
 
 function main(metadata, orientation, panel_height) {
-  if (!GTop) {
-    let errorMessage = _('Please install "gir1.2-gtop-2.0" package.');
-    return new ErrorApplet.ErrorImportApplet(orientation, errorMessage);
-  } else {
-    return new MyApplet(metadata, orientation, panel_height);
-  }
+  return new MyApplet(metadata, orientation, panel_height);
 }
