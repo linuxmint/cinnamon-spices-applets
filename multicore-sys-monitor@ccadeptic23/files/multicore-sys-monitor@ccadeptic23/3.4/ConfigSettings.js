@@ -1,18 +1,20 @@
 const Gio = imports.gi.Gio;
 const Cinnamon = imports.gi.Cinnamon;
 
-let tryFn, map, findIndex;
+let tryFn, map, findIndex, filter;
 
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   tryFn = utils.tryFn;
   map = utils.map;
   findIndex = utils.findIndex;
+  filter = utils.filter;
 } else {
   const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
   tryFn = AppletDir.utils.tryFn;
   map = AppletDir.utils.map;
   findIndex = AppletDir.utils.findIndex;
+  filter = AppletDir.utils.filter;
 }
 
 function ConfigSettings(confpath) {
@@ -98,6 +100,26 @@ ConfigSettings.prototype = {
     let interfaceKeys = map(this._prefs[deviceType].devices, function(device) {
       return device.id;
     });
+    let newDeviceKeys = map(newDeviceList, function(device) {
+      return device.id;
+    });
+    let removedIds = [];
+
+    for (let i = 0; i < interfaceKeys.length; i++) {
+      if (newDeviceKeys.indexOf(interfaceKeys[i]) === -1) {
+        removedIds.push(interfaceKeys[i]);
+        isChanged = true;
+      }
+    }
+
+    if (isChanged) {
+      this._prefs[deviceType].devices = filter(this._prefs[deviceType].devices, function(device) {
+        return removedIds.indexOf(device.id) === -1;
+      })
+      interfaceKeys = map(this._prefs[deviceType].devices, function(device) {
+        return device.id;
+      });
+    }
 
     for (let i = 0; i < newDeviceList.length; i++) {
       if (interfaceKeys.indexOf(newDeviceList[i].id) === -1) {
@@ -114,8 +136,11 @@ ConfigSettings.prototype = {
         let refIndex = findIndex(this._prefs[deviceType].devices, function(device) {
           return device.id === newDeviceList[i].id;
         });
-        Object.assign(this._prefs[deviceType].devices[refIndex], newDeviceList[i]);
-        this._prefs[deviceType].devices[refIndex].show = 4;
+
+        if (refIndex > -1) {
+          Object.assign(this._prefs[deviceType].devices[refIndex], newDeviceList[i]);
+          this._prefs[deviceType].devices[refIndex].show = 4;
+        }
       }
     }
 
@@ -140,10 +165,10 @@ ConfigSettings.prototype = {
     out.close(null);
   },
   readSettings: function() {
-    //Default Settings for preferences incase we cannot find ours
+    // Default Settings for preferences in case we cannot find ours
     this._prefs = {
       labelsOn: true,
-      refreshRate: 500,
+      refreshRate: 1000,
       labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
       backgroundColor: [1, 1, 1, 0.1],
       cpu: {

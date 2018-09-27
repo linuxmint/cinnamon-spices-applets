@@ -19,7 +19,7 @@ var _ = imports.utils._;
 
 const DEFAULT_CONFIG = {
   labelsOn: true,
-  refreshRate: 500,
+  refreshRate: 1000,
   labelColor: [0.9333333333333333, 0.9333333333333333, 0.9254901960784314, 1],
   backgroundColor: [1, 1, 1, 0.1],
   cpu: {
@@ -113,6 +113,23 @@ Preferences.prototype = {
         this.aboutScalingwin.run();
       })
     );
+    this.refreshRateScale = Gtk.Scale.new_with_range(
+      Gtk.Orientation.HORIZONTAL,
+      500,
+      2000,
+      1
+    );
+    this.refreshRateScale.set_value_pos(Gtk.PositionType.RIGHT);
+    this.refreshRateScale.width_request = 300;
+    let box3 = this.builder.get_object('box3');
+    box3.add(this.refreshRateScale);
+    box3.set_child_packing(
+      this.refreshRateScale, // child
+      false, // expand
+      true, // fill
+      1, // padding
+      Gtk.PackType.START // pack_type
+    );
     this.load();
     print(JSON.stringify(this.config)); //print default settings again for the monitoring process
 
@@ -134,8 +151,8 @@ Preferences.prototype = {
         this.save();
       })
     );
-    this.builder.get_object('refreshRateScale').set_value(this.config.refreshRate);
-    this.builder.get_object('refreshRateScale').connect(
+    this.refreshRateScale.set_value(this.config.refreshRate);
+    this.refreshRateScale.connect(
       'value-changed',
       Lang.bind(this, function() {
         this.save();
@@ -538,7 +555,7 @@ Preferences.prototype = {
   },
 
   save: function() {
-    this.config.refreshRate = this.builder.get_object('refreshRateScale').get_value();
+    this.config.refreshRate = this.refreshRateScale.get_value();
     this.config.labelColor = this.getColorByName('labelColorButton');
     this.config.backgroundColor = this.getColorByName('backgroundColorButton');
     this.config.labelsOn = this.builder.get_object('labelsSwitch').get_active();

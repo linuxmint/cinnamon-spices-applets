@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-23 19:29+0200\n"
+"POT-Creation-Date: 2018-09-27 11:20-0500\n"
 "PO-Revision-Date: 2017-09-23 19:36+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -33,113 +33,113 @@ msgstr "Etiketter"
 msgid "Resfresh Rate (ms)"
 msgstr "Opdateringsinterval (ms)"
 
-#: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4 ../3.4/prefsui.glade.h:4
+#: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4
 msgid "Height"
 msgstr "Højde"
 
-#: ../3.0/prefsui.glade.h:5 ../3.2/prefsui.glade.h:6 ../3.4/prefsui.glade.h:6
+#: ../3.0/prefsui.glade.h:5 ../3.2/prefsui.glade.h:6 ../3.4/prefsui.glade.h:5
 msgid "Background Color"
 msgstr "Baggrundsfarve"
 
-#: ../3.0/prefsui.glade.h:6 ../3.2/prefsui.glade.h:7 ../3.4/prefsui.glade.h:7
+#: ../3.0/prefsui.glade.h:6 ../3.2/prefsui.glade.h:7 ../3.4/prefsui.glade.h:6
 msgid "General"
 msgstr "Generelt"
 
-#: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:8
+#: ../3.0/prefsui.glade.h:7 ../3.2/prefsui.glade.h:8 ../3.4/prefsui.glade.h:7
 #: ../3.0/prefs.js:279 ../3.0/prefs.js:393 ../3.2/prefs.js:283
-#: ../3.2/prefs.js:398 ../3.4/prefs.js:337 ../3.4/prefs.js:473
+#: ../3.2/prefs.js:398 ../3.4/prefs.js:327 ../3.4/prefs.js:463
 msgid "Enable"
 msgstr "Aktivér"
 
-#: ../3.0/prefsui.glade.h:8 ../3.2/prefsui.glade.h:9 ../3.4/prefsui.glade.h:9
+#: ../3.0/prefsui.glade.h:8 ../3.2/prefsui.glade.h:9 ../3.4/prefsui.glade.h:8
 msgid "Width"
 msgstr "Bredde"
 
-#: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:10
+#: ../3.0/prefsui.glade.h:9 ../3.2/prefsui.glade.h:10 ../3.4/prefsui.glade.h:9
 msgid "Colors"
 msgstr "Farver"
 
 #: ../3.0/prefsui.glade.h:10 ../3.2/prefsui.glade.h:11
-#: ../3.4/prefsui.glade.h:11 ../3.0/DataProviders.js:97
+#: ../3.4/prefsui.glade.h:10 ../3.0/DataProviders.js:97
 #: ../3.0/DataProviders.js:104 ../3.0/prefs.js:183 ../3.2/DataProviders.js:97
-#: ../3.2/DataProviders.js:104 ../3.2/prefs.js:187 ../3.4/DataProviders.js:109
-#: ../3.4/prefs.js:206
+#: ../3.2/DataProviders.js:104 ../3.2/prefs.js:187 ../3.4/DataProviders.js:55
+#: ../3.4/prefs.js:195
 msgid "CPU"
 msgstr "CPU"
 
 #: ../3.0/prefsui.glade.h:11 ../3.2/prefsui.glade.h:12
-#: ../3.4/prefsui.glade.h:12
+#: ../3.4/prefsui.glade.h:11
 msgid "Usedup"
 msgstr "Brugt"
 
 #: ../3.0/prefsui.glade.h:12 ../3.2/prefsui.glade.h:13
-#: ../3.4/prefsui.glade.h:13
+#: ../3.4/prefsui.glade.h:12
 msgid "Cached"
 msgstr "Cached"
 
 #: ../3.0/prefsui.glade.h:13 ../3.2/prefsui.glade.h:14
-#: ../3.4/prefsui.glade.h:14
+#: ../3.4/prefsui.glade.h:13
 msgid "Buffer"
 msgstr "Buffer"
 
 #: ../3.0/prefsui.glade.h:14 ../3.2/prefsui.glade.h:15
-#: ../3.4/prefsui.glade.h:15
+#: ../3.4/prefsui.glade.h:14
 msgid "Free"
 msgstr "Ledig"
 
 #: ../3.0/prefsui.glade.h:15 ../3.2/prefsui.glade.h:16
-#: ../3.4/prefsui.glade.h:16 ../3.0/DataProviders.js:187
-#: ../3.2/DataProviders.js:187 ../3.4/DataProviders.js:193
+#: ../3.4/prefsui.glade.h:15 ../3.0/DataProviders.js:187
+#: ../3.2/DataProviders.js:187 ../3.4/DataProviders.js:192
 msgid "Swap"
 msgstr "Swap"
 
 #: ../3.0/prefsui.glade.h:16 ../3.2/prefsui.glade.h:17
-#: ../3.4/prefsui.glade.h:17
+#: ../3.4/prefsui.glade.h:16
 msgid "Memory"
 msgstr "Hukommelse"
 
 #: ../3.0/prefsui.glade.h:17 ../3.2/prefsui.glade.h:18
-#: ../3.4/prefsui.glade.h:18
+#: ../3.4/prefsui.glade.h:17
 msgid "Scaling"
 msgstr "Skalering"
 
 #: ../3.0/prefsui.glade.h:18 ../3.2/prefsui.glade.h:19
-#: ../3.4/prefsui.glade.h:19
+#: ../3.4/prefsui.glade.h:18
 msgid "Auto Scale"
 msgstr "Automatisk skalering"
 
 #: ../3.0/prefsui.glade.h:19 ../3.2/prefsui.glade.h:20
-#: ../3.4/prefsui.glade.h:20
+#: ../3.4/prefsui.glade.h:19
 msgid "Logarithmic"
 msgstr "Logaritmisk"
 
 #: ../3.0/prefsui.glade.h:20 ../3.2/prefsui.glade.h:21
-#: ../3.4/prefsui.glade.h:21
+#: ../3.4/prefsui.glade.h:20
 msgid "Devices"
 msgstr "Enheder"
 
 #: ../3.0/prefsui.glade.h:21 ../3.2/prefsui.glade.h:22
-#: ../3.4/prefsui.glade.h:22
+#: ../3.4/prefsui.glade.h:21
 msgid "Network"
 msgstr "Netværk"
 
 #: ../3.0/prefsui.glade.h:22 ../3.2/prefsui.glade.h:23
-#: ../3.4/prefsui.glade.h:23
+#: ../3.4/prefsui.glade.h:22
 msgid "Disk IO"
 msgstr "Disk IO"
 
 #: ../3.0/prefsui.glade.h:23 ../3.2/prefsui.glade.h:24
-#: ../3.4/prefsui.glade.h:24
+#: ../3.4/prefsui.glade.h:23
 msgid "Scaling Description"
 msgstr "Skaleringsbeskrivelse"
 
 #: ../3.0/prefsui.glade.h:24 ../3.2/prefsui.glade.h:25
-#: ../3.4/prefsui.glade.h:25
+#: ../3.4/prefsui.glade.h:24
 msgid "Close"
 msgstr "Luk"
 
 #: ../3.0/prefsui.glade.h:25 ../3.2/prefsui.glade.h:26
-#: ../3.4/prefsui.glade.h:26
+#: ../3.4/prefsui.glade.h:25
 msgid ""
 "Auto Scaling:\n"
 "\tThis will scale the line graph by the largest reading within the\n"
@@ -173,30 +173,22 @@ msgstr ""
 "\tlogaritmisk skala. Det reducerer de største værdier,\n"
 "\tså de ikke overskygger de mindre værdier."
 
-#: ../3.2/prefsui.glade.h:5 ../3.4/prefsui.glade.h:5
+#: ../3.2/prefsui.glade.h:5 ../3.4/prefsui.glade.h:4
 msgid "Label Color"
 msgstr "Etiketfarve"
 
-#: ../3.0/applet.js:132 ../3.2/applet.js:129 ../3.4/applet.js:218
-msgid "Preferences"
-msgstr "Indstillinger"
-
-#: ../3.0/applet.js:313 ../3.2/applet.js:324 ../3.4/applet.js:343
-msgid "Please install \"gir1.2-gtop-2.0\" package."
-msgstr "Installér pakken \"gir1.2-gtop-2.0\"."
-
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
-#: ../3.4/DataProviders.js:116
+#: ../3.4/DataProviders.js:123
 msgid "------- CPU -------"
 msgstr "------- CPU -------"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
-#: ../3.4/DataProviders.js:150
+#: ../3.4/DataProviders.js:138
 msgid "MEM"
 msgstr "HUK"
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
-#: ../3.4/DataProviders.js:156
+#: ../3.4/DataProviders.js:158
 msgid "------- Memory -------"
 msgstr "------ Hukommelse -------"
 
@@ -205,47 +197,47 @@ msgid "Usedup:"
 msgstr "Brugt:"
 
 #: ../3.0/DataProviders.js:152 ../3.2/DataProviders.js:152
-#: ../3.4/DataProviders.js:157
+#: ../3.4/DataProviders.js:159
 msgid "Cached:"
 msgstr "Cached:"
 
 #: ../3.0/DataProviders.js:153 ../3.2/DataProviders.js:153
-#: ../3.4/DataProviders.js:157
+#: ../3.4/DataProviders.js:159
 msgid "Buffer:"
 msgstr "Buffer:"
 
 #: ../3.0/DataProviders.js:154 ../3.2/DataProviders.js:154
-#: ../3.4/DataProviders.js:157
+#: ../3.4/DataProviders.js:159
 msgid "Free:"
 msgstr "Ledig:"
 
 #: ../3.0/DataProviders.js:181 ../3.2/DataProviders.js:181
-#: ../3.4/DataProviders.js:186
+#: ../3.4/DataProviders.js:173
 msgid "SWAP"
 msgstr "SWAP"
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
-#: ../3.4/DataProviders.js:192
+#: ../3.4/DataProviders.js:191
 msgid "------- Swap -------"
 msgstr "------ Swap -------"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
-#: ../3.4/DataProviders.js:232
+#: ../3.4/DataProviders.js:202
 msgid "NET"
 msgstr "NET"
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
-#: ../3.4/DataProviders.js:270
+#: ../3.4/DataProviders.js:286
 msgid "------- Networks -------"
 msgstr "------- Netværk -------"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
-#: ../3.4/DataProviders.js:275
+#: ../3.4/DataProviders.js:297
 msgid "Down:"
 msgstr "Ned:"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
-#: ../3.4/DataProviders.js:276
+#: ../3.4/DataProviders.js:298
 msgid "Up:"
 msgstr "Op:"
 
@@ -254,22 +246,22 @@ msgid "(KiB/s)"
 msgstr " (KiB/s)"
 
 #: ../3.0/DataProviders.js:368 ../3.2/DataProviders.js:368
-#: ../3.4/DataProviders.js:326
+#: ../3.4/DataProviders.js:314
 msgid "DISK"
 msgstr "DISK"
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
-#: ../3.4/DataProviders.js:344
+#: ../3.4/DataProviders.js:375
 msgid "------- Disks -------"
 msgstr "------ Diske -------"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
-#: ../3.4/DataProviders.js:349
+#: ../3.4/DataProviders.js:383
 msgid "Read:"
 msgstr "Læs:"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
-#: ../3.4/DataProviders.js:350
+#: ../3.4/DataProviders.js:384
 msgid "Write:"
 msgstr "Skriv:"
 
@@ -278,50 +270,69 @@ msgid "(MiB/s)"
 msgstr " (MiB/s)"
 
 #: ../3.0/ErrorApplet.js:28 ../3.0/ErrorApplet.js:34 ../3.2/ErrorApplet.js:28
-#: ../3.2/ErrorApplet.js:34 ../3.4/ErrorApplet.js:26 ../3.4/ErrorApplet.js:32
+#: ../3.2/ErrorApplet.js:34
 msgid "Multi-Core System Monitor Error."
 msgstr "Fejl i Flerkernet systemovervågning."
 
-#: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:348
+#: ../3.0/applet.js:132 ../3.2/applet.js:129 ../3.4/applet.js:254
+msgid "Preferences"
+msgstr "Indstillinger"
+
+#: ../3.0/applet.js:313 ../3.2/applet.js:324
+msgid "Please install \"gir1.2-gtop-2.0\" package."
+msgstr "Installér pakken \"gir1.2-gtop-2.0\"."
+
+#: ../3.0/prefs.js:290 ../3.2/prefs.js:294 ../3.4/prefs.js:338
 msgid "Down"
 msgstr "Ned"
 
-#: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:356
+#: ../3.0/prefs.js:298 ../3.2/prefs.js:302 ../3.4/prefs.js:346
 msgid "Up"
 msgstr "Op"
 
-#: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:489
+#: ../3.0/prefs.js:406 ../3.2/prefs.js:414 ../3.4/prefs.js:479
 msgid "Read"
 msgstr "Læs"
 
-#: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:498
+#: ../3.0/prefs.js:414 ../3.2/prefs.js:423 ../3.4/prefs.js:488
 msgid "Write"
 msgstr "Skriv"
 
-#: ../3.0/prefs.js:530 ../3.2/prefs.js:540 ../3.4/prefs.js:626
+#: ../3.0/prefs.js:530 ../3.2/prefs.js:540
 msgid "Error while saving file:"
 msgstr "Der opstod en fejl, da filen skulle gemmes:"
 
-#: ../3.4/DataProviders.js:30
+#: ../3.4/DataProviders.js:46
 msgid "/s"
 msgstr "/s"
 
-#: ../3.4/DataProviders.js:120
+#: ../3.4/DataProviders.js:126
 msgid "Core"
 msgstr "Kerne"
 
-#: ../3.4/DataProviders.js:157
+#: ../3.4/DataProviders.js:159
 msgid "Used:"
 msgstr "Brugt:"
 
-#. multicore-sys-monitor@ccadeptic23->metadata.json->description
-msgid ""
-"Displays in realtime the cpu usage for each core/cpu and overall memory "
-"usage."
+#: ../3.4/applet.js:60
+msgid "Dependency missing"
 msgstr ""
-"Viser i realtid cpu-forbruget for hver kerne/cpu og det totale forbrug af "
-"hukommelse."
 
-#. multicore-sys-monitor@ccadeptic23->metadata.json->name
-msgid "Multi-Core System Monitor"
-msgstr "Flerkernet systemovervågning"
+#: ../3.4/applet.js:62
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+"to use "
+msgstr ""
+
+#~ msgid "Multi-Core System Monitor"
+#~ msgstr "Flerkernet systemovervågning"
+
+#~ msgid ""
+#~ "Displays in realtime the cpu usage for each core/cpu and overall memory "
+#~ "usage."
+#~ msgstr ""
+#~ "Viser i realtid cpu-forbruget for hver kerne/cpu og det totale forbrug af "
+#~ "hukommelse."
