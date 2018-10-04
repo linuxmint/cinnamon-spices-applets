@@ -262,47 +262,47 @@ function CpuDataProvider() {
 
 CpuDataProvider.prototype = {
 
-	_init: function(){
-		this.gtop = new GTop.glibtop_cpu();
-		this.current = 0;
-		this.last = 0;
-		this.usage = 0;
+    _init: function(){
+        this.gtop = new GTop.glibtop_cpu();
+        this.current = 0;
+        this.last = 0;
+        this.usage = 0;
         this.last_total = 0;
         this.name = _("CPU");
-	},
+    },
 
-	getData: function() {
-		GTop.glibtop_get_cpu(this.gtop);
+    getData: function() {
+        GTop.glibtop_get_cpu(this.gtop);
 
-		this.current = this.gtop.idle;
+        this.current = this.gtop.idle;
 
-		let delta = this.gtop.total - this.last_total;
-		if (delta > 0) {
-			this.usage = (this.current - this.last) / delta;
-			this.last = this.current;
-			this.last_total = this.gtop.total;
-		}
+        let delta = this.gtop.total - this.last_total;
+        if (delta > 0) {
+            this.usage = (this.current - this.last) / delta;
+            this.last = this.current;
+            this.last_total = this.gtop.total;
+        }
 
-		return this.usage - 1;
-	}
+        return this.usage - 1;
+    }
 };
 
 function MemDataProvider() {
-	this._init();
+    this._init();
 }
 
 MemDataProvider.prototype = {
 
-	_init: function() {
+    _init: function() {
         this.gtopMem = new GTop.glibtop_mem();
         this.name = _("MEM");
-	},
+    },
 
-	getData: function() {
-		GTop.glibtop_get_mem(this.gtopMem);
+    getData: function() {
+        GTop.glibtop_get_mem(this.gtopMem);
 
-		return 1 - (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free) / this.gtopMem.total;
-	},
+        return 1 - (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free) / this.gtopMem.total;
+    },
 };
 
 
