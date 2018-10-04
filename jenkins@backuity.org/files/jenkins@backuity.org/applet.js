@@ -91,9 +91,9 @@ MyApplet.prototype = {
 
         let applet = this;
         _httpSession.connect("authenticate",function(session,message,auth,retrying) {
-            log("Authenticating with " + applet._jenkinsUsername);
+            global.log("Authenticating with " + applet._jenkinsUsername);
             auth.authenticate(applet._jenkinsUsername, applet._jenkinsPassword);
-        });        
+        });
 
         // PopupMenu
         //----------------------------------
@@ -102,7 +102,8 @@ MyApplet.prototype = {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_('Loading jobs...')));
+        this.initialMenuItem = new PopupMenu.PopupMenuItem(_('Loading jobs...'));
+        this.menu.addMenuItem(this.initialMenuItem);
       }
 
     , assignMessageSource: function() {
@@ -148,16 +149,15 @@ MyApplet.prototype = {
             return;
         }
 
-        log("Loading " + this.jenkinsUrl());
         let applet = this;
-        this.loadJsonAsync(this.jenkinsUrl(), function(json) {  
-            applet.destroyMenu();          
+        this.loadJsonAsync(this.jenkinsUrl(), function(json) {
+            applet.destroyMenu();
             try {
                 let maxJobs = applet._maxNumberOfJobs;
                 let jobs = json.get_array_member('jobs').get_elements();
                 let displayedJobs = 0;
-                
-                let filteredJobs = [];            
+
+                let filteredJobs = [];
                 for (let i = 0; i < jobs.length && displayedJobs < maxJobs; i++) {
                     let job = jobs[i].get_object();
 
@@ -177,7 +177,7 @@ MyApplet.prototype = {
 
                     let jobName = job.get_string_member('name');
                     let url = job.get_string_member('url');
-                    
+
                     var regex = RegExp(this._jenkinsFilter);
                     if(regex.exec(jobName)) {
                         filteredJobs.push(jobs[i]);
@@ -195,14 +195,14 @@ MyApplet.prototype = {
                 } else {
                     applet.set_applet_icon_name('jenkins-green');
                 }
-                
+
 
                 applet.displayNewlyFailedJobs(filteredJobs);
-                
+
             } catch(error) {
                 applet.set_applet_icon_name('jenkins-grey');
-                applet.set_applet_label('!');                                
-                logError(error.message)
+                applet.set_applet_label('!');
+                global.logError(error.message)
                 applet.menu.addMenuItem(new PopupMenu.PopupMenuItem(error.message));
             }
         })
@@ -278,7 +278,7 @@ MyApplet.prototype = {
         this.menu.removeAll();
     }
 
-    , jenkinsUrl: function() {        
+    , jenkinsUrl: function() {
         let output =  this._jenkinsUrl + '/api/json';
         return output;
     }
@@ -291,11 +291,16 @@ MyApplet.prototype = {
           message.request_headers.append('Authorization', 'Basic ' + encoded);
         }
         _httpSession.ssl_strict = this._sslStrict;
+        if (!message) {
+            if (this.initialMenuItem) this.initialMenuItem.label.set_text(_('No jobs'));
+            return;
+        }
         _httpSession.queue_message(message, function soupQueue(session, message) {
-          
+
             if( message.status_code != 200 ) {
-                logError("Got status " + message.status_code + " " + message.response_body.data);
+                global.logError("Got status " + message.status_code + " " + message.response_body.data);
                 applet.destroyMenu();
+                this.initialMenuItem = null;
                 applet.set_applet_label('!');
                 applet.set_applet_icon_name('jenkins-grey');
 
@@ -340,7 +345,7 @@ JobMenuItem.prototype = {
         this.connect('activate', Lang.bind(this, function (menuItem, event) {
             Util.spawnCommandLine("xdg-open " + url);
         }));
-    }    
+    }
 };
 
 
@@ -378,19 +383,6 @@ Helpers.prototype = {
     }
 
 }
-
-
-// Logging
-//----------------------------------------------------------------------
-
-function log(message) {
-  global.log(UUID + "#" + log.caller.name + ": " + message)
-}
-
-function logError(error) {
-  global.logError(UUID + "#" + logError.caller.name + ": " + error)
-}
-
 
 // Entry point
 //----------------------------------------------------------------------
