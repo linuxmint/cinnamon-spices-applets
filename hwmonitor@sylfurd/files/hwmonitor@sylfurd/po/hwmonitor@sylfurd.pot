@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: applet.js:45
-msgid "Dependence missing"
+msgid "Dependency missing"
 msgstr ""
 
 #: applet.js:45
