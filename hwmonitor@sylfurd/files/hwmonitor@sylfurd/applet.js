@@ -39,18 +39,19 @@ function _(str) {
   return Gettext.dgettext(UUID, str)
 }
 
+let GTop;
 try {
-  var GTop = imports.gi.GTop;
+    GTop = imports.gi.GTop;
 } catch (e) {
-  let icon = new St.Icon({ icon_name: 'utilities-system-monitor',
+    let icon = new St.Icon({ icon_name: 'utilities-system-monitor',
                            icon_type: St.IconType.FULLCOLOR,
                            icon_size: 24 });
-  Main.criticalNotify(_("Dependency missing"), _("Please install the GTop package\n" +
+    Main.criticalNotify(_("Dependency missing"), _("Please install the GTop package\n" +
       "\tUbuntu / Mint: gir1.2-gtop-2.0\n" +
       "\tFedora: libgtop2-devel\n" +
       "\tArch: libgtop\n" +_(
 			"to use the applet %s")).format(UUID), icon);
-  gtopFailed = true;
+    gtopFailed = true;
 }
 
 function GraphicalHWMonitorApplet(metadata, orientation, panel_height) {
@@ -58,14 +59,14 @@ function GraphicalHWMonitorApplet(metadata, orientation, panel_height) {
 }
 
 GraphicalHWMonitorApplet.prototype = {
-	__proto__: Applet.IconApplet.prototype,
+    __proto__: Applet.IconApplet.prototype,
 
     _init: function (metadata, orientation, panel_height) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height);
 
         this.graphs = [];
 
-		if (gtopFailed) {
+        if (gtopFailed) {
             this.set_applet_icon_path(metadata.path + "/icon.png");
             this.set_applet_tooltip(metadata.description);
             return;
@@ -94,10 +95,10 @@ GraphicalHWMonitorApplet.prototype = {
         this.shouldUpdate = true;
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.loopId = Mainloop.timeout_add(1000, Lang.bind(this, this.update));
-	},
+    },
 
-	on_applet_clicked: function(event) {
-		this._runSysMon();
+    on_applet_clicked: function(event) {
+        this._runSysMon();
     },
 
     on_applet_removed_from_panel: function() {
@@ -108,8 +109,8 @@ GraphicalHWMonitorApplet.prototype = {
         this.shouldUpdate = false;
     },
 
-	_runSysMonActivate: function() {
-		this._runSysMon();
+    _runSysMonActivate: function() {
+        this._runSysMon();
     },
 
     update: function() {
@@ -117,18 +118,18 @@ GraphicalHWMonitorApplet.prototype = {
         return this.shouldUpdate;
     },
 
-	_update: function() {
-		for (let i = 0; i < this.graphs.length; i++) {
-			this.graphs[i].refreshData();
-		}
-		this.graphArea.queue_repaint();
-	},
+    _update: function() {
+    	for (let i = 0; i < this.graphs.length; i++) {
+            this.graphs[i].refreshData();
+        }
+        this.graphArea.queue_repaint();
+    },
 
-	_runSysMon: function() {
-		let _appSys = Cinnamon.AppSystem.get_default();
-		let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-		_gsmApp.activate();
-	},
+    _runSysMon: function() {
+    	let _appSys = Cinnamon.AppSystem.get_default();
+    	let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
+    	_gsmApp.activate();
+    },
 
     onGraphRepaint: function (area) {
         this.graphArea.height = this._panelHeight;
@@ -246,14 +247,13 @@ Graph.prototype = {
 
     },
 
-	refreshData: function() {
-		let data = this.provider.getData() * (this.height - 1);
+    refreshData: function() {
+        let data = this.provider.getData() * (this.height - 1);
 
-		if (this.datas.push(data) > this.width - 2) {
-			this.datas.shift();
-		}
-	}
-
+        if (this.datas.push(data) > this.width - 2) {
+            this.datas.shift();
+        }
+    }
 };
 
 function CpuDataProvider() {
