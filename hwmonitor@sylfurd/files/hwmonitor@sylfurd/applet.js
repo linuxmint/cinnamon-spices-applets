@@ -283,7 +283,7 @@ CpuDataProvider.prototype = {
             this.last_total = this.gtop.total;
         }
 
-        return this.usage - 1;
+        return 1 - this.usage;
     }
 };
 
