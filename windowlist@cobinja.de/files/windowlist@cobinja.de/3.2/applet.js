@@ -311,12 +311,12 @@ CobiPopupMenuItem.prototype = {
     this._cloneBox.remove_all_children();
     
     if (this._menu.box.get_vertical()) {
-      height = (availHeight - overheadHeight) * global.ui_scale;
+      height = (availHeight - overheadHeight);
       width = Math.floor(height * aspectRatio);
       this._cloneBin.natural_height = height;
     }
     else {
-      width = (availWidth - overheadWidth) * global.ui_scale;
+      width = (availWidth - overheadWidth);
       height = Math.floor(width / aspectRatio);
       this._cloneBin.natural_width = width;
     }
@@ -567,10 +567,10 @@ CobiPopupMenu.prototype = {
     let numThumbs = this._settings.getValue("number-of-unshrunk-previews");
     
     if (this.box.get_vertical()) {
-      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing * global.ui_scale);
     }
     else {
-      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing * global.ui_scale);
     }
     
     for (let i = 0; i < numItems; i++) {
