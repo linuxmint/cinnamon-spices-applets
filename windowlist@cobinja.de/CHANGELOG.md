@@ -1,5 +1,11 @@
 Changelog
 
+2.3.1
+==
+Bugfix
+--
+- Fix preview sizes for HighDPI mode
+
 2.3
 ==
 New Feature
