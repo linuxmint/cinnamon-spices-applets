@@ -1079,61 +1079,17 @@ function AppPopupSubMenuMenuItem() {
 AppPopupSubMenuMenuItem.prototype = {
     __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
-    _init: function(text, hide_expander) {
+    _init: function(text) {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
 
         this.actor.add_style_class_name('popup-submenu-menu-item');
 
-        let table = new St.Table({
-            homogeneous: false,
-            reactive: true
+        this.label = new St.Label({
+            text: text
         });
-
-        if (!hide_expander) {
-            this._triangle = new St.Icon({
-                icon_name: "media-playback-start",
-                icon_type: St.IconType.SYMBOLIC,
-                style_class: 'popup-menu-icon'
-            });
-
-            table.add(this._triangle, {
-                row: 0,
-                col: 0,
-                col_span: 1,
-                x_expand: false,
-                x_align: St.Align.START
-            });
-
-            this.label = new St.Label({
-                text: text
-            });
-            this.label.set_margin_left(6.0);
-            table.add(this.label, {
-                row: 0,
-                col: 1,
-                col_span: 1,
-                x_align: St.Align.START
-            });
-        }
-        else {
-            this.label = new St.Label({
-                text: text
-            });
-            table.add(this.label, {
-                row: 0,
-                col: 0,
-                col_span: 1,
-                x_align: St.Align.START
-            });
-        }
         this.actor.label_actor = this.label;
-        this.addActor(table, {
-            expand: true,
-            span: 1,
-            align: St.Align.START
-        });
 
-        this.menu = new PopupMenu.PopupSubMenu(this.actor, this._triangle);
+        this.menu = new PopupMenu.PopupSubMenu(this.actor, null);
         this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
     },
 
@@ -1178,9 +1134,6 @@ TextBoxItem.prototype = {
         this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
         //this.removeActor(this.label);
         this.label.destroy();
-        //this.removeActor(this._triangle);
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label_text = label;
 
         if(this.label_text == "") {
@@ -1325,8 +1278,6 @@ AllProgramsItem.prototype = {
         });
         this.parent = parent;
         this.label.destroy();
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label = new St.Label({ text: label, style: "padding-left: 20px" });
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -1374,8 +1325,6 @@ ResultsFoundItem.prototype = {
         });
         this.parent = parent;
         this.label.destroy();
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label = new St.Label({ text: label, style: "padding-left: 5px" });
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -1614,9 +1563,6 @@ ShutdownMenu.prototype = {
         this.actor.add_style_class_name('starkmenu-arrow-dropdown-button');
         //this.removeActor(this.label);
         this.label.destroy();
-        //this.removeActor(this._triangle);
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
             icon_type: St.IconType.FULLCOLOR,
