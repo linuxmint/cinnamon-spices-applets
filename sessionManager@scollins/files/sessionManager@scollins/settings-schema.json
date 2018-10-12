@@ -3,19 +3,19 @@
         "type": "header",
         "description": "General Settings"
     },
-    
+
     "panelIcon": {
         "type": "iconfilechooser",
         "description": "Panel Icon",
         "default": "system-shutdown-symbolic"
     },
-    
+
     "panelText": {
         "type": "entry",
         "description": "Panel Text",
         "default": ""
     },
-    
+
     "iconSize": {
         "type": "spinbutton",
         "default": 20,
@@ -25,10 +25,69 @@
         "step": 2,
         "description": "Icon Size"
     },
-    
+
     "symbolicMenuIcons": {
         "type": "checkbox",
         "description": "Symbolic icons in menu",
+        "default": true
+    },
+    "Menu": {
+        "type": "header",
+        "description": "Menu"
+    },
+
+    "menuLockScreen": {
+        "type": "checkbox",
+        "description": "Lock Screen",
+        "default": true
+    },
+
+    "menuSwitchUser": {
+        "type": "checkbox",
+        "description": "Switch User",
+        "default": true
+    },
+
+    "menuGuestSession": {
+        "type": "checkbox",
+        "description": "Guest Session",
+        "default": true,
+        "tooltip": "(Only for the Lighdm display manager)"
+    },
+
+    "menuLogOff": {
+        "type": "checkbox",
+        "description": "Log Off",
+        "default": true
+    },
+
+    "menuSuspend": {
+        "type": "checkbox",
+        "description": "Suspend",
+        "default": true
+    },
+
+    "menuSleep": {
+        "type": "checkbox",
+        "description": "Sleep",
+        "default": true
+    },
+
+    "menuHibernate": {
+        "type": "checkbox",
+        "description": "Hibernate",
+        "default": true
+    },
+
+    "menuRestart": {
+        "type": "checkbox",
+        "description": "Restart",
+        "default": true
+    },
+
+    "menuShutDown": {
+        "type": "checkbox",
+        "description": "Shut Down",
         "default": true
     }
 }

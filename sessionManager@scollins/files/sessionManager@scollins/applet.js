@@ -224,7 +224,7 @@ MyApplet.prototype = {
                         }));
                     }
                 }
-                if ( found ) global.log("Unable to determine display manager");
+                if ( !found ) global.log("Unable to determine display manager");
             }
         }
     },
@@ -235,6 +235,15 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
         this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "symbolicMenuIcons", "symbolicMenuIcons", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuLockScreen", "menuLockScreen", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuSwitchUser", "menuSwitchUser", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuGuestSession", "menuGuestSession", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuLogOff", "menuLogOff", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuSuspend", "menuSuspend", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuSleep", "menuSleep", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuHibernate", "menuHibernate", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuRestart", "menuRestart", this.buildMenu);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "menuShutDown", "menuShutDown", this.buildMenu);
     },
 
     buildMenu: function() {
@@ -245,49 +254,74 @@ MyApplet.prototype = {
             menu_item_icon_size = this.iconSize;
             use_symbolic_icons = this.symbolicMenuIcons;
 
+            let _count = 0;
+
             //lock
-            let lock = new CommandItem("lock", _("Lock Screen"));
-            this.menu.addMenuItem(lock);
+            if ( this.menuLockScreen ) {
+                let lock = new CommandItem("lock", _("Lock Screen"));
+                this.menu.addMenuItem(lock);
+                _count += 1;
+            }
 
             //switch user
-            let uSwitch = new CommandItem("uSwitch", _("Switch User"));
-            this.menu.addMenuItem(uSwitch);
+            if ( this.menuSwitchUser ) {
+                let uSwitch = new CommandItem("uSwitch", _("Switch User"));
+                this.menu.addMenuItem(uSwitch);
+                _count += 1;
+            }
 
             //guest
-            if ( display_manager == "lightdm" ) {
+            if ( display_manager == "lightdm" && this.menuGuestSession ) {
                 let guest = new CommandItem("guest", _("Guest Session"));
                 this.menu.addMenuItem(guest);
+                _count += 1;
             }
 
             //log off
-            let logOff = new CommandItem("logOff", _("Log Off"));
-            this.menu.addMenuItem(logOff);
+            if ( this.menuLogOff ) {
+                let logOff = new CommandItem("logOff", _("Log Off"));
+                this.menu.addMenuItem(logOff);
+                _count += 1;
+            }
 
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            if ( _count > 0 ) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+            _count = 0;
 
             //suspend
-            let suspend = new CommandItem("suspend", _("Suspend"));
-            this.menu.addMenuItem(suspend);
+            if ( this.menuSuspend ) {
+                let suspend = new CommandItem("suspend", _("Suspend"));
+                this.menu.addMenuItem(suspend);
+                _count += 1;
+            }
 
             //sleep
-            if ( has_systemd ) {
+            if ( has_systemd && this.menuSleep ) {
                 let sleep = new CommandItem("sleep", _("Sleep"));
                 this.menu.addMenuItem(sleep);
+                _count += 1;
             }
 
             //hibernate
-            let hibernate = new CommandItem("hibernate", _("Hibernate"));
-            this.menu.addMenuItem(hibernate);
+            if (this.menuHibernate) {
+                let hibernate = new CommandItem("hibernate", _("Hibernate"));
+                this.menu.addMenuItem(hibernate);
+                _count += 1;
+            }
 
-            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            if ( _count > 0 ) this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             //restart
-            let restart = new CommandItem("restart", _("Restart"));
-            this.menu.addMenuItem(restart);
+            if ( this.menuRestart ) {
+                let restart = new CommandItem("restart", _("Restart"));
+                this.menu.addMenuItem(restart);
+            }
 
             //shut down
-            let shutDown = new CommandItem("shutDown", _("Shut Down"));
-            this.menu.addMenuItem(shutDown);
+            if ( this.menuShutDown ) {
+                let shutDown = new CommandItem("shutDown", _("Shut Down"));
+                this.menu.addMenuItem(shutDown);
+            }
 
         } catch(e) {
             global.logError(e);

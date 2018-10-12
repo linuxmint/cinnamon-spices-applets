@@ -82,6 +82,10 @@ msgstr ""
 msgid "General Settings"
 msgstr ""
 
+#. sessionManager@scollins->settings-schema.json->menuGuestSession->tooltip
+msgid "(Only for the Lighdm display manager)"
+msgstr ""
+
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
 msgstr ""
