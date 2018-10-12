@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.5.0
+ * Becomes multi-version. For Cinnamon 3.8 (LM 19), the code has been changed to use classes instead of prototypes.
+ * Some scripts have been modified for more efficiency.
+ * Available languages: English, French, Spanish, Italian, Danish, Swedish.
+
 ### 2.4.0
  * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files.
 

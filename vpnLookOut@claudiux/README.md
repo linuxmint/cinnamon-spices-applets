@@ -10,7 +10,7 @@ But also, it can try to reconnect when VPN shuts down incidentally, and it can c
 
 ## Status
 
-Fully supported by Author, under continuing development and in continuous use on several machines, running with **LinuxMint**, **Fedora** or **Archlinux**.
+Fully supported by Author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora** or **Archlinux**.
 
 ## Features
 
@@ -18,7 +18,7 @@ The VPN Look-Out Applet normally shows an icon that changes color depending on t
 
   * Green: the VPN is connected.
   * Red: the VPN is disconnected.
-  * Grey: waiting for VPN status (only when the applet starts, for a few seconds, or if it's misconfigured).
+  * Grey: waiting for VPN status (only when the applet starts, for a few seconds, or if it is misconfigured).
 
 When hovering over or click on the icon, the status of the VPN is displayed with, in parentheses, the name of the connection and the network interface used. By example:
 
@@ -49,7 +49,7 @@ A middle click on the icon of this applet is a quick way to:
 ## Translations
 The vpnLookOut applet is designed to allow translations of messages (initially in English). A vpnLookOut.pot template file is available, you can use it with software such as poedit to translate these messages.
 
-Languages already available (v2.0.0 and following): English, French, Spanish, Italian.
+Languages already available: English, French, Spanish, Italian, Danish, Swedish.
 
 The installation of the available languages is done automatically.
 
@@ -60,8 +60,6 @@ Translations are usually provided by people who are fluent in the language. Any 
 While comments and suggestions are always welcome, any contributions considered should be discussed. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited pull requests will never be allowed with the exception of urgent and critical bug fixes from the Cinnamon team.
 
 ## Requirements:
-
-Cinnamon Version 1.8 or higher as it makes comprehensive use of the new Cinnamon Settings Interface for Applets and Desklets. The latest versions have been tested on Cinnamon 3.4.6 and Mint 18.2.
 
 For full facilities including notifications and audible alerts the ```zenity sox``` and ```libsox-fmt-mp3``` libraries must be installed. They can be installed wih the Synaptic Package Manager or using the following terminal command:
  * LinuxMint:
@@ -74,16 +72,20 @@ For full facilities including notifications and audible alerts the ```zenity sox
 **Note that this applet helps you to install these dependencies, if any.**
 
 ## Preconization:
-It is recommended to transfere the /tmp directory into memory, for two reasons:
+
+(Useless for Arch) It is recommended to transfere the /tmp directory into memory, for two reasons:
   * Make applet execution faster.
   * Reduce hard disk wear (especially if it's a SSD).
 
-To do this, add this line at the end of the file /etc/fstab; then, restart the computer:
-        tmpfs /tmp tmpfs defaults,size=500M 0 0
-(Beware to put the final character 's' at the 'defaults' word. In the `size` parameter, 'M' is for MB, 'G' is for GB; be careful, the memory allocated for /tmp is no longer available for the rest.)
+  To do this, add this line at the end of the file /etc/fstab; then, restart the computer:
+        ```tmpfs /tmp tmpfs defaults,size=500M 0 0```
+  (Beware to put the final character 's' at the 'defaults' word. In the `size` parameter, 'M' is for MB, 'G' is for GB; be careful, the memory allocated for /tmp is no longer available for the rest.)
 
-You can install Transmission:
-        apt install transmission transmission-gtk
+You can install Transmission (torrent client):
+        ```apt install transmission transmission-gtk```
+
+## Automatic Installation
+Use the **Applets** menu in Settings of Cinnamon, or the **Add Applets to Panel** context menu of your panel.
 
 ## Manual Installation:
 
