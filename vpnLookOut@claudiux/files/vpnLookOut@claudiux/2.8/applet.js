@@ -61,7 +61,7 @@ MyApplet.prototype = {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
         //try {
             // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
-            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/scripts && chmod 755 *.sh *.py'");
+            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/../scripts && chmod 755 *.sh *.py'");
 
             // ++ Settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
@@ -134,15 +134,15 @@ MyApplet.prototype = {
             this.appletName = metadata.name;
             this.appletPath = metadata.path;
             //this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
-            this.changelog = metadata.path + "/CHANGELOG.md";
-            this.helpfile = metadata.path + "/README.md";
-            this.vpnscript = metadata.path + "/scripts/vpn_status.sh";
-            this.vpnifacedetect = metadata.path + "/scripts/vpn_iface_detect.sh";
+            this.changelog = metadata.path + "/../CHANGELOG.md";
+            this.helpfile = metadata.path + "/../README.md";
+            this.vpnscript = metadata.path + "/../scripts/vpn_status.sh";
+            this.vpnifacedetect = metadata.path + "/../scripts/vpn_iface_detect.sh";
 
             this.set_icons();
 
-            this.stoptransmissionscript = metadata.path + "/scripts/stop_transmission.sh";
-            this.starttransmissionscript = metadata.path + "/scripts/start_transmission.sh";
+            this.stoptransmissionscript = metadata.path + "/../scripts/stop_transmission.sh";
+            this.starttransmissionscript = metadata.path + "/../scripts/start_transmission.sh";
             this.transmissionstoppedbyapplet = false ;
 
             this.homedir = GLib.get_home_dir() ;
@@ -278,7 +278,7 @@ MyApplet.prototype = {
     }, // End of are_dependencies_installed
 
     execInstallLanguage: function() {
-        let poPath = this.appletPath + "/po";
+        let poPath = this.appletPath + "/../po";
         let poDir = Gio.file_new_for_path(poPath);
         let poEnum;
         try {
@@ -318,13 +318,13 @@ MyApplet.prototype = {
         }
 
         if (!moExists) { // at least one .mo file is missing or is too old
-            let generatemoPath = this.appletPath + '/scripts/generate_mo.sh'; // script to generate .mo files
+            let generatemoPath = this.appletPath + '/../scripts/generate_mo.sh'; // script to generate .mo files
             GLib.spawn_command_line_async('bash -c "' + generatemoPath + '"'); // generate all .mo files
             // Reload this applet for changes to .mo files to take effect.
             // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
             this.on_applet_removed_from_panel();
             // Reload this applet with new .mo files installed
-            GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
+            GLib.spawn_command_line_async('sh ' + this.appletPath + '/../scripts/reload_ext.sh')
         }
     }, // End of execInstallLanguage
 
@@ -355,11 +355,11 @@ MyApplet.prototype = {
             this.system_icon_theme = 'Mint-X';
         if (this.old_system_icon_theme == null || this.system_icon_theme != this.old_system_icon_theme) {
             this.old_system_icon_theme = this.system_icon_theme;
-            this.icon_theme_path = this.appletPath + '/icons/byTheme/' + this.system_icon_theme;
+            this.icon_theme_path = this.appletPath + '/../icons/byTheme/' + this.system_icon_theme;
             let icon_theme_dir = Gio.file_new_for_path(this.icon_theme_path);
             let icon_theme_exists = icon_theme_dir.query_exists(null);
             if (!icon_theme_exists) {
-                this.icon_theme_path = this.appletPath + '/icons/default';
+                this.icon_theme_path = this.appletPath + '/../icons/default';
             }
             this.vpnon = this.icon_theme_path + "/vpn-on.png";
             this.vpnoff = this.icon_theme_path + "/vpn-off.png";
@@ -404,7 +404,7 @@ MyApplet.prototype = {
     }, // End of get_terminal
 
     get_vpn_names: function() {
-        let [res, out, err, status] = GLib.spawn_command_line_sync('sh -c ' + this.appletPath + "/scripts/vpn_names.sh");
+        let [res, out, err, status] = GLib.spawn_command_line_sync('sh -c ' + this.appletPath + "/../scripts/vpn_names.sh");
         let list_vpn_names=[];
         if (res && status == 0) {
             list_vpn_names=out.toString().split(';');
@@ -768,7 +768,7 @@ MyApplet.prototype = {
 
                 this.vpnMessage = _("Connected") + ' (' + this.vpnName + vpnMessage2 + ')' ;
                 if (this.restartTransmission && this.transmissionstoppedbyapplet) {
-                    command = 'sh ' + this.starttransmissionscript ;
+                    let command = 'sh ' + this.starttransmissionscript ;
                     GLib.spawn_command_line_async(command)
                 }
             } else if (this.vpnStatus == "off") { // VPN is disconnected
@@ -790,6 +790,7 @@ MyApplet.prototype = {
                     if ( this.useSoundAlert ) { // Sound alert
                         GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/phone-outgoing-busy.oga"') ;
                     } ;
+                    let command;
                     if ( this.reconnect ) {
                         command = 'nmcli connection up "' + this.vpnName +'" > /dev/null ';
                         GLib.spawn_command_line_async(command)
@@ -838,7 +839,7 @@ MyApplet.prototype = {
             // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
             this.on_applet_removed_from_panel();
             // Reload this applet with dependencies installed
-            GLib.spawn_command_line_async('sh ' + this.appletPath + '/scripts/reload_ext.sh')
+            GLib.spawn_command_line_async('sh ' + this.appletPath + '/../scripts/reload_ext.sh')
         }
 
         // Inhibits also after the applet has been removed from the panel
