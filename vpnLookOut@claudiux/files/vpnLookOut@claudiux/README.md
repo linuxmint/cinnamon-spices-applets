@@ -42,9 +42,9 @@ The left click menu also contains:
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
   * A list of all VPN connections available. Click on one of them to change of VPN connection ; it disconnects from actual (if any) and connects to new.
 
-A middle click on the icon of this applet is a quick way to:
-   * connect to the last VPN used if it is off;
-   * disconnect from the VPN if it is on.
+A middle click on the icon of this applet, or the keyboard shortcut <Super>v (which you can personalize), is a quick way to:
+   * connect to the last VPN used if it is "off";
+   * disconnect from the VPN if it is "on".
 
 ## Translations
 The vpnLookOut applet is designed to allow translations of messages (initially in English). A vpnLookOut.pot template file is available, you can use it with software such as poedit to translate these messages.

@@ -1,7 +1,7 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["Alerts", "VPNpolicy"],
+        "pages": ["Alerts", "VPNpolicy", "Shortcut"],
         "Alerts": {
             "type": "page",
             "title": "Notifications",
@@ -11,6 +11,11 @@
             "type": "page",
             "title": "VPN",
             "sections": ["section1", "section4"]
+        },
+        "Shortcut": {
+            "type": "page",
+            "title": "Keyboard shortcuts",
+            "sections": ["section5"]
         },
         "section1": {
             "type": "section",
@@ -27,14 +32,20 @@
             "title": "Sound Alert",
             "keys": ["useSoundAlert", "useSoundAlertAtBeginning"]
         },
-        
+
         "section4": {
             "type": "section",
             "title": "Transmission",
             "keys": ["stopTransmission", "restartTransmission"]
+        },
+
+        "section5": {
+            "type": "section",
+            "title": "Shortcuts",
+            "keys": ["keybinding"]
         }
     },
-    
+
     "vpnInterface": {
         "type": "entry",
         "default": "",
@@ -110,5 +121,10 @@
         "default": false,
         "description": "Try to restart Transmission as soon as VPN restarts.",
         "tooltip": "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
+    },
+    "keybinding" : {
+        "type" : "keybinding",
+        "description" : "Set the keybinding here to activate/deactivate the last used VPN",
+        "default" : "<Super>v"
     }
 }
