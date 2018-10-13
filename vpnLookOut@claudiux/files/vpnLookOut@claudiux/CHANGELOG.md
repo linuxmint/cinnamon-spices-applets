@@ -1,5 +1,8 @@
 ## Changelog
 
+### 2.5.1
+  * Adds a keyboard shortcut option to enable / disable the last VPN used.
+
 ### 2.5.0
  * Becomes multi-version. For Cinnamon 3.8 (LM 19), the code has been changed to use classes instead of prototypes.
  * Some scripts have been modified for more efficiency.

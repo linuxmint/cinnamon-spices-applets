@@ -122,6 +122,14 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.on_settings_changed,
                 null);
 
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "keybinding",
+                "keybinding",
+                this.on_shortcut_changed,
+                null);
+
+            Main.keybindingManager.addHotKey(metadata.uuid, this.keybinding, Lang.bind(this, this.on_shortcut_used));
+
             this.instance_id = instance_id;
             // ++ Make metadata values available within applet for context menu.
             this.appletName = metadata.name;
@@ -455,6 +463,22 @@ class vpnLookOut extends Applet.TextIconApplet {
 
         this.updateLoop();
     } // End of on_settings_changed
+
+    // Keybinding
+    on_shortcut_changed() {
+        try{
+            Main.keybindingManager.removeHotKey(UUID);
+        } catch(e) {}
+        if (this.keybinding != null) {
+            Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_shortcut_used))
+        }
+    } // End of on_shortcut_changed
+
+    on_shortcut_used() {
+        if (this.vpnStatus !== "waiting") {
+            this.on_button_connect(false)
+        }
+    } // End of on_shortcut_used
 
     // ++ Null function called when Generic (internal) Setting changed
     on_generic_changed() {}
@@ -854,6 +878,7 @@ class vpnLookOut extends Applet.TextIconApplet {
         // inhibit the update timer when applet removed from panel
         this.applet_running = false;
         this.settings.finalize();
+        Main.keybindingManager.removeHotKey(UUID);
     }
 
 }
@@ -863,35 +888,5 @@ function main(metadata, orientation, panelHeight, instance_id) {
 }
 /*
 ## Changelog
-
-### 2.0.1
- * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
- * Improved installation of translation files.
-
-### 2.0.0
- * New features:
-  * When installing this applet, it helps the user to install dependencies, if any.
-  * Can connect to the last VPN used, as the applet starts (i.e at user login).
-  * Left and right menus : Connection ON/OFF button appears only if reconnect button is unchecked.
-  * Left menu: If there is more than one VPN connection, a submenu displays all these connections and allows you to connect to the selected one.
-  * The 'Connect ON/OFF' button disappears when the option 'Try to reconnect to VPN when it shuts down incidentally' is checked.
-  * Icons adapted to certain themes. (To be continued...)
- * Some code optimizations have been made.
- * Some bugs were fixed, especially:
-  * If your VPN connection name included spaces, connect/disconnect was not possible in version 1.0.0. This bug was fixed.
- * Available languages  : English, French, Spanish, Italian.
- * Tested on Mint 18.1, 18.2, 18.3 with Cinnamon 3.2, 3.4.
-
-### 1.0.0
- * Developed using code from BAMS, NUMA, Bumblebee and Timer Applets (Many thanks to the authors of these applets!)
- * Detects and displays correctly the status (connected/disconnected) of the VPN (the color of the icon changes).
- * Can emit a sound alert when the VPN disconnect.
- * Can try to reconnect to VPN when it has fallen.
- * Can stop/restart Transmission when VPN disconnects/reconnects.
- * A switch-button (into the menu) lets you manually connect/disconnect the VPN.
- * Internationalization: There is a .pot file (in the 'po' subdirectory) to use with poedit to translate messages. The .po files created are automatically converted in .mo files, which are put into the right directories. The translated messages will appear after the next Cinnamon startup.
- * Available languages  : English, French.
- * Works with Mint 18.2 and Cinnamon 3.2. It can be used on horizontal or vertical panel.
- * Fully functional.
-
+Cf. ../CHANGELOG.md
 */
