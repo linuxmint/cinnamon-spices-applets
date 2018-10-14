@@ -1,7 +1,8 @@
 {
   "uuid": "IcingWindowSaver@json",
-  "name": "Icing Window Saver",
+  "name": "Window Saver",
   "description": "Window position save and restore utility.",
   "max-instances": 1,
-  "version": "1.0.0"
+  "version": "1.0.1",
+  "cinnamon-version": ["3.6", "3.8", "4.0"]
 }

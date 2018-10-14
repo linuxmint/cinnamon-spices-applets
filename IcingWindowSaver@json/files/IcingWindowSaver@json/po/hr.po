@@ -7,33 +7,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IcingWindowSaver@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-04 18:32+0200\n"
+"POT-Creation-Date: 2018-10-14 02:27-0500\n"
 "PO-Revision-Date: 2017-05-04 18:36+0200\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: applet.js:43
+#: applet.js:44
+msgid "Dependency missing"
+msgstr ""
+
+#: applet.js:45
+msgid "package"
+msgstr ""
+
+#: applet.js:47
+msgid "Dependencies missing"
+msgstr ""
+
+#: applet.js:48
+msgid "packages"
+msgstr ""
+
+#: applet.js:52
+msgid "Please install the "
+msgstr ""
+
+#: applet.js:52
+#, fuzzy
+msgid " to use Window Saver."
+msgstr "Spremanje prozora"
+
+#. metadata.json->name
+#: applet.js:90
 msgid "Window Saver"
 msgstr "Spremanje prozora"
 
-#: applet.js:51
+#: applet.js:98
 msgid "Save"
 msgstr "Spremi"
 
-#: applet.js:59
+#: applet.js:104
 msgid "Restore"
 msgstr "Vrati"
 
-#. IcingWindowSaver@json->metadata.json->description
+#. metadata.json->description
 msgid "Window position save and restore utility."
 msgstr "Alat spremanja i vraćanja položaja prozora"
 
-#. IcingWindowSaver@json->metadata.json->name
-msgid "Icing Window Saver"
-msgstr "Icing spremanje prozora"
+#~ msgid "Icing Window Saver"
+#~ msgstr "Icing spremanje prozora"
