@@ -142,6 +142,10 @@ msgstr "Essayer de redémarrer Transmission dès que la liaison VPN est de nouve
 msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
 msgstr "Cocher cette case autorise cette applet à essayer de redémarrer Transmission dès que la liaison VPN est de nouveau active."
 
+#: settings-schema.json:127
+msgid """Set the keybinding here to activate/deactivate the last used VPN."""
+msgstr "Indiquer ici le raccourci-clavier pour activer/désactiver le dernier VPN utilisé."
+
 #: applet.js:72
 msgid "Ok"
 msgstr "Ok"

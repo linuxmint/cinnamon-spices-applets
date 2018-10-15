@@ -124,7 +124,7 @@
     },
     "keybinding" : {
         "type" : "keybinding",
-        "description" : "Set the keybinding here to activate/deactivate the last used VPN",
+        "description" : "Set the keybinding here to activate/deactivate the last used VPN.",
         "default" : "<Super>v"
     }
 }

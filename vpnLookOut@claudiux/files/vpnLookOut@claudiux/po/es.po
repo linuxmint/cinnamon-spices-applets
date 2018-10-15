@@ -20,11 +20,11 @@ msgstr ""
 
 #: metadata.json:2
 msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
-msgstr "Un applet Cinnamon que vigila el VPN, muestra su estado, permite conectarse desde el inicio hasta la última VPN utilizada, permite volver a conectar el VPN si por casualidad cae, y puede detener o reiniciar la transmisión de acuerdo con el estado del VPN."
+msgstr "Un applet Cinnamon que supervisa la VPN, muestra su estado, permite conectarse desde el inicio hasta la última VPN utilizada, permite volver a conectar la VPN si por casualidad cae, y puede detener o reiniciar Transmission de acuerdo con el estado de la VPN."
 
 #: metadata.json:7
 msgid "VPN Look-Out Applet"
-msgstr "VPN Atalaya Applet"
+msgstr "VPN Atalaya"
 
 #: settings-schema.json:7
 msgid "Notifications"
@@ -56,7 +56,7 @@ msgstr "Deberías poder dejar este campo vacío. Este applet intentará detectar
 
 #: settings-schema.json:47
 msgid "VPN Name"
-msgstr "Nombre del VPN"
+msgstr "Nombre de la VPN"
 
 #: settings-schema.json:48
 msgid ""
@@ -76,11 +76,11 @@ msgstr "Marcar esta casilla permite a este applet de intentar de conectarse a la
 
 #: settings-schema.json:61
 msgid "Try to reconnect to VPN when it shuts down incidentally."
-msgstr "Intenta reconectarte a VPN cuando se apaga de manera incidental."
+msgstr "Intenta reconectarte a la VPN cuando se apaga de manera incidental."
 
 #: settings-schema.json:62
 msgid "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
-msgstr "Marcar esta casilla permite que este applet intente reconectarse a VPN cuando se apaga de manera incidental."
+msgstr "Marcar esta casilla permite que este applet intente reconectarse a la VPN cuando se apaga de manera incidental."
 
 #: settings-schema.json:70
 msgid "seconds"
@@ -112,35 +112,39 @@ msgstr "Esta característica ofrece la visualización clásica (predeterminada) 
 
 #: settings-schema.json:89
 msgid "Emit a sound alert when VPN shuts down."
-msgstr "Emite un señal sonoro cuando VPN se apaga."
+msgstr "Emite un señal sonoro cuando la VPN se apaga."
 
 #: settings-schema.json:90
 msgid "Checking this allows this applet to emit a sound alert when VPN shuts down."
-msgstr "Marcar este casilla permite que este applet emita una alerta sonora cuando VPN se apaga."
+msgstr "Marcar este casilla permite que este applet emita una alerta sonora cuando la VPN se apaga."
 
 #: settings-schema.json:96
 msgid "Emit this sound alert when this Applet starts, if VPN is down."
-msgstr "Emite esta alerta sonora cuando se inicia este Applet, si VPN está inactivo."
+msgstr "Emite esta alerta sonora cuando se inicia este Applet, si la VPN está inactivo."
 
 #: settings-schema.json:97
 msgid "Check this if you want to emit this sound alert when this Applet starts, if VPN is down."
-msgstr "Marque esto si desea emitir esta alerta sonora cuando se inicia este Applet, si VPN está inactivo."
+msgstr "Marque esto si desea emitir esta alerta sonora cuando se inicia este Applet, si la VPN está inactivo."
 
 #: settings-schema.json:104
 msgid "Shut down properly Transmission as soon as VPN falls."
-msgstr "Apagar correctamente Transmission tan pronto como caiga VPN."
+msgstr "Apagar correctamente Transmission tan pronto como caiga la VPN."
 
 #: settings-schema.json:105
 msgid "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
-msgstr "Marcar esto permite que este applet cierre la transmisión (si se está ejecutando) tan pronto como caiga VPN."
+msgstr "Marcar esto permite que este applet cierre la transmisión (si se está ejecutando) tan pronto como caiga la VPN."
 
 #: settings-schema.json:111
 msgid "Try to restart Transmission as soon as VPN restarts."
-msgstr "Intente reiniciar Transmission tan pronto como reinicie VPN."
+msgstr "Intente reiniciar Transmission tan pronto como reinicie la VPN."
 
 #: settings-schema.json:112
 msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
-msgstr "Al marcar esto, permite que este applet reinicie la transmisión (si fue detenido por este applet) tan pronto como reinicie VPN."
+msgstr "Al marcar esto, permite que este applet reinicie Transmission (si fue detenido por este applet) tan pronto como reinicie la VPN."
+
+#: settings-schema.json:127
+msgid """Set the keybinding here to activate/deactivate the last used VPN."""
+msgstr "Configure aquí el enlace de teclas para activar/desactivar la última VPN utilizada."
 
 #: applet.js:72
 msgid "Ok"
@@ -192,7 +196,7 @@ msgstr "Conexiones"
 
 #: applet.js:688
 msgid "Click to disconnect from VPN"
-msgstr "Haga clic para desconectarse de VPN"
+msgstr "Haga clic para desconectarse de la VPN"
 
 #: applet.js:710
 msgid "Connected"
@@ -204,7 +208,7 @@ msgstr "Desconectado"
 
 #: applet.js:719
 msgid "Click to connect to VPN"
-msgstr "Haga clic para conectarse a VPN"
+msgstr "Haga clic para conectarse a la VPN"
 
 #: applet.js:748
 msgid "VPN:"

@@ -137,6 +137,10 @@ msgstr ""
 msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
 msgstr ""
 
+#: settings-schema.json:127
+msgid """Set the keybinding here to activate/deactivate the last used VPN."""
+msgstr ""
+
 #: applet.js:72
 msgid "Ok"
 msgstr ""
@@ -212,4 +216,3 @@ msgstr ""
 #: applet.js:777
 msgid "All dependencies are installed"
 msgstr ""
-

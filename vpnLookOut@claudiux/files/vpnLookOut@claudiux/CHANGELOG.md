@@ -1,5 +1,10 @@
 ## Changelog
 
+### 2.5.2
+  * Translations:
+   * Update of vpnLookOut@claudiux.pot
+   * Update of es.po, fr.po, it.po
+
 ### 2.5.1
   * Adds a keyboard shortcut option to enable / disable the last VPN used.
 
