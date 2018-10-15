@@ -61,7 +61,7 @@ const EN_DASH = '\u2013'
 const QUERY_PARAMS = '?format=json&q=select '
 const QUERY_TABLE = 'weather.forecast'
 const QUERY_VIEW = '*'
-const QUERY_URL = 'http://query.yahooapis.com/v1/public/yql' + QUERY_PARAMS + QUERY_VIEW + ' from ' + QUERY_TABLE
+const QUERY_URL = 'https://query.yahooapis.com/v1/public/yql' + QUERY_PARAMS + QUERY_VIEW + ' from ' + QUERY_TABLE
 
 
 // Schema keys
