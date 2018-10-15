@@ -1000,6 +1000,7 @@ AppListGridButton.prototype = {
     }
     this.menu.close();
     this.clearMarqueeTimer();
+    if (this.state.isListView) this.label.show();
   },
 
   prepareContextMenu: function() {
