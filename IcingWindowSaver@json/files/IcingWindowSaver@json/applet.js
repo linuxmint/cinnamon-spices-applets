@@ -49,7 +49,7 @@ const notifyDependencies = function(missing) {
   }
   Main.criticalNotify(
     header,
-    _('Please install the ') + missing.join(', ') + ' ' + pkg + _(' to use Window Saver.'),
+    _('Please install the ') + missing.join(', ') + ' ' + pkg + _(' to use Window Position Saver.'),
     icon
   );
 }
@@ -87,7 +87,7 @@ WindowSaverApplet.prototype = {
       this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
       this.set_applet_icon_symbolic_name('view-restore');
-      this.set_applet_tooltip(_('Window Saver'));
+      this.set_applet_tooltip(_('Window Position Saver'));
 
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -113,14 +113,6 @@ WindowSaverApplet.prototype = {
       Main.keybindingManager.addHotKey('restore-windows-positions', '<Shift><Ctrl>R', () => {
         this.restoreWindows();
       });
-    });
-  },
-
-  checkDependencies: function(cb) {
-    exec('which wmctrl', (success, stdout) => {
-      if (typeof cb === 'function') {
-        cb(success);
-      }
     });
   },
 

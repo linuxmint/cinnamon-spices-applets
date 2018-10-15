@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IcingWindowSaver@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 02:27-0500\n"
+"POT-Creation-Date: 2018-10-15 08:23-0500\n"
 "PO-Revision-Date: 2017-06-02 07:08+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
@@ -40,12 +40,13 @@ msgstr ""
 
 #: applet.js:52
 #, fuzzy
-msgid " to use Window Saver."
+msgid " to use Window Position Saver."
 msgstr "Fönstersparare"
 
 #. metadata.json->name
 #: applet.js:90
-msgid "Window Saver"
+#, fuzzy
+msgid "Window Position Saver"
 msgstr "Fönstersparare"
 
 #: applet.js:98
@@ -59,6 +60,9 @@ msgstr "Återställ"
 #. metadata.json->description
 msgid "Window position save and restore utility."
 msgstr "Verktyg för att spara och återställa fönsterposition"
+
+#~ msgid "Window Saver"
+#~ msgstr "Fönstersparare"
 
 #~ msgid "Icing Window Saver"
 #~ msgstr "Icing Window Saver"

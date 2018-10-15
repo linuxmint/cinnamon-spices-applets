@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 02:27-0500\n"
+"POT-Creation-Date: 2018-10-15 08:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,12 +38,12 @@ msgid "Please install the "
 msgstr ""
 
 #: applet.js:52
-msgid " to use Window Saver."
+msgid " to use Window Position Saver."
 msgstr ""
 
 #. metadata.json->name
 #: applet.js:90
-msgid "Window Saver"
+msgid "Window Position Saver"
 msgstr ""
 
 #: applet.js:98

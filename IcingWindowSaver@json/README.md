@@ -1,4 +1,4 @@
-Window Saver
+Window Position Saver
 =============
 
 This applet allows you to save and restore all of your windows' positions through a menu, or using hot keys.

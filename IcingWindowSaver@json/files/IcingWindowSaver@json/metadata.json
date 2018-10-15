@@ -1,6 +1,6 @@
 {
   "uuid": "IcingWindowSaver@json",
-  "name": "Window Saver",
+  "name": "Window Position Saver",
   "description": "Window position save and restore utility.",
   "max-instances": 1,
   "version": "1.0.1",

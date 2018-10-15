@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-14 02:27-0500\n"
+"POT-Creation-Date: 2018-10-15 08:23-0500\n"
 "PO-Revision-Date: 2017-04-23 10:29+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -40,12 +40,13 @@ msgstr ""
 
 #: applet.js:52
 #, fuzzy
-msgid " to use Window Saver."
+msgid " to use Window Position Saver."
 msgstr "窗口保存程序"
 
 #. metadata.json->name
 #: applet.js:90
-msgid "Window Saver"
+#, fuzzy
+msgid "Window Position Saver"
 msgstr "窗口保存程序"
 
 #: applet.js:98
@@ -59,6 +60,9 @@ msgstr "还原"
 #. metadata.json->description
 msgid "Window position save and restore utility."
 msgstr "窗口位置保存和还原工具。"
+
+#~ msgid "Window Saver"
+#~ msgstr "窗口保存程序"
 
 #~ msgid "Icing Window Saver"
 #~ msgstr "糖霜窗口保存程序"
