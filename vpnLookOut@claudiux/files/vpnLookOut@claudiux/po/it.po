@@ -20,11 +20,11 @@ msgstr ""
 
 #: metadata.json:2
 msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
-msgstr "Un'applet Cinnamon che sorveglia il collegamento VPN, visualizza il suo stato, consente di connettersi all'avvio fino all'ultimo VPN utilizzato, consente di ricollegare il collegamento VPN se cade incidentalmente e può interrompere o riavviare Transmission in base allo stato del VPN."
+msgstr "Un'applet Cinnamon che sorveglia la connessione VPN, visualizza il suo stato, consente di connettersi all'avvio fino all'ultima VPN utilizzata, consente di ricollegare il collegamento VPN se cade incidentalmente e può interrompere o riavviare Transmission in base allo stato della VPN."
 
 #: metadata.json:7
 msgid "VPN Look-Out Applet"
-msgstr "VPN Vedetta Applet"
+msgstr "VPN Vedetta"
 
 #: settings-schema.json:7
 msgid "Notifications"
@@ -142,6 +142,10 @@ msgstr "Prova a riavviare Transmission non appena si riavvia la VPN."
 msgid "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
 msgstr "Selezionando questa opzione, questa applet riavvia Transmission (se è stata arrestata da questa applet) non appena si riavvia la VPN."
 
+#: settings-schema.json:127
+msgid """Set the keybinding here to activate/deactivate the last used VPN."""
+msgstr "Impostare qui la combinazione di tasti per attivare/disattivare l'ultima VPN utilizzata."
+
 #: applet.js:72
 msgid "Ok"
 msgstr ""
@@ -192,7 +196,7 @@ msgstr "Connessioni"
 
 #: applet.js:688
 msgid "Click to disconnect from VPN"
-msgstr "Fare clic per disconnettersi da VPN"
+msgstr "Fare clic per disconnettersi dalla VPN"
 
 #: applet.js:710
 msgid "Connected"
@@ -204,7 +208,7 @@ msgstr "Sconnesso"
 
 #: applet.js:719
 msgid "Click to connect to VPN"
-msgstr "Fare clic per connettersi a VPN"
+msgstr "Fare clic per connettersi alla VPN"
 
 #: applet.js:748
 msgid "VPN:"
