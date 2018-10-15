@@ -925,7 +925,7 @@ AppListGridButton.prototype = {
     } else if (button === 3) {
       if (!this.state.isListView
         && this.buttonState.appType === ApplicationType._applications) {
-        this.toggleActors(true);
+        this.prepareContextMenu();
       }
       this.activateContextMenus(e);
     }
@@ -999,31 +999,29 @@ AppListGridButton.prototype = {
       return;
     }
     this.menu.close();
-    this.toggleActors(false);
+    this.clearMarqueeTimer();
   },
 
-  toggleActors: function(menuOpen) {
+  prepareContextMenu: function() {
     this.clearMarqueeTimer();
-    if (menuOpen) {
-      this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
-      let x = -20, y = 20;
-      if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
-        x = 20;
-      }
-      // Due to changes to St in Cinnamon 3.6, the context menu lost its fixed positioning over other actors in the grid view.
-      // Using anchor_x/y properties restores it without issue on 3.6, but causes the icon positioning to shift to the right
-      // on Cinnamon <= 3.4. Minor workaround here until a better fix is implemented. anchor_x/y is deprecated, but the
-      // pivot_point property doesn't seem to do anything in this situation.
-      if (!this.state.cinnamon36) {
-        this.icon.anchor_x = 0;
-        this.icon.anchor_y = 0;
-      }
-      if (this.state.trigger('isNotInScrollView', this)) {
-        y = Math.round(this.actor.height * 1.9);
-      }
-      this.menu.actor.anchor_x = x;
-      this.menu.actor.anchor_y = y;
+    this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
+    let x = -20, y = 20;
+    if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
+      x = 20;
     }
+    // Due to changes to St in Cinnamon 3.6, the context menu lost its fixed positioning over other actors in the grid view.
+    // Using anchor_x/y properties restores it without issue on 3.6, but causes the icon positioning to shift to the right
+    // on Cinnamon <= 3.4. Minor workaround here until a better fix is implemented. anchor_x/y is deprecated, but the
+    // pivot_point property doesn't seem to do anything in this situation.
+    if (!this.state.cinnamon36) {
+      this.icon.anchor_x = 0;
+      this.icon.anchor_y = 0;
+    }
+    if (this.state.trigger('isNotInScrollView', this)) {
+      y = Math.round(this.actor.height * 1.9);
+    }
+    this.menu.actor.anchor_x = x;
+    this.menu.actor.anchor_y = y;
   },
 
   toggleMenu: function () {
@@ -1031,7 +1029,12 @@ AppListGridButton.prototype = {
       return false;
     }
 
-    if (!this.menu.isOpen) {
+    if (this.menu.isOpen) {
+      this.clearMarqueeTimer();
+      // Allow other buttons hover functions to take effect.
+      this.state.set({contextMenuIsOpen: null});
+      if (this.state.isListView) this.label.show();
+    } else {
       for (let i = 0; i < this.contextMenuButtons.length; i++) {
         this.contextMenuButtons[i].destroy();
         this.contextMenuButtons[i] = null;
@@ -1056,14 +1059,12 @@ AppListGridButton.prototype = {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
       }
 
-      // In grid mode we will ensure our menu isn't overlapped by any other actors.
-      if (!this.state.isListView) {
+      if (this.state.isListView) {
+        this.label.hide();
+      } else {
+        // In grid mode we will ensure our menu isn't overlapped by any other actors.
         this.actor.get_parent().set_child_above_sibling(this.actor, null);
       }
-    } else {
-      this.toggleActors(false);
-      // Allow other buttons hover functions to take effect.
-      this.state.set({contextMenuIsOpen: null});
     }
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
     return true
