@@ -1,7 +1,12 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["Alerts", "VPNpolicy", "Shortcut"],
+        "pages": ["Torrentpolicy", "Alerts", "VPNpolicy", "Shortcut"],
+        "Torrentpolicy": {
+            "type": "page",
+            "title": "VPN-related Apps Manager",
+            "sections": ["section6", "section7"]
+        },
         "Alerts": {
             "type": "page",
             "title": "Notifications",
@@ -10,7 +15,7 @@
         "VPNpolicy": {
             "type": "page",
             "title": "VPN",
-            "sections": ["section1", "section4"]
+            "sections": ["section1"]
         },
         "Shortcut": {
             "type": "page",
@@ -33,16 +38,21 @@
             "keys": ["useSoundAlert", "useSoundAlertAtBeginning"]
         },
 
-        "section4": {
-            "type": "section",
-            "title": "Transmission",
-            "keys": ["stopTransmission", "restartTransmission"]
-        },
-
         "section5": {
             "type": "section",
             "title": "Shortcuts",
             "keys": ["keybinding"]
+        },
+
+        "section6": {
+            "type": "section",
+            "title": "Settings",
+            "keys": ["manageClients"]
+        },
+        "section7": {
+            "type": "section",
+            "title": "Managed Apps",
+            "keys": ["clientsList"]
         }
     },
 
@@ -79,8 +89,8 @@
         "max": 60,
         "step": 1,
         "units": "seconds",
-        "description": "Refresh Interval for Display:",
-        "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
+        "description": "Refresh interval:",
+        "tooltip": "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
     },
 
     "displayType" : {
@@ -97,34 +107,63 @@
         "type": "checkbox",
         "indent": true,
         "default": false,
-        "description": "Emit a sound alert when VPN shuts down.",
-        "tooltip": "Checking this allows this applet to emit a sound alert when VPN shuts down."
+        "description": "Emit an audible alert when VPN shuts down.",
+        "tooltip": "Checking this allows this applet to emit an audible alert when VPN shuts down."
     },
     "useSoundAlertAtBeginning": {
         "type": "checkbox",
         "indent": true,
         "default": false,
-        "description": "Emit this sound alert when this Applet starts, if VPN is down.",
-        "tooltip": "Check this if you want to emit this sound alert when this Applet starts, if VPN is down.",
+        "description": "Emit this audible alert when this Applet starts, if VPN is down.",
+        "tooltip": "Check this if you want to emit this audible alert when this Applet starts, if VPN is down.",
         "dependency": "useSoundAlert"
-    },
-    "stopTransmission": {
-        "type": "checkbox",
-        "indent": true,
-        "default": false,
-        "description": "Shut down properly Transmission as soon as VPN falls.",
-        "tooltip": "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
-    },
-    "restartTransmission": {
-        "type": "checkbox",
-        "indent": true,
-        "default": false,
-        "description": "Try to restart Transmission as soon as VPN restarts.",
-        "tooltip": "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
     },
     "keybinding" : {
         "type" : "keybinding",
         "description" : "Set the keybinding here to activate/deactivate the last used VPN.",
         "default" : "<Super>v"
+    },
+    "manageClients": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Manage VPN-related Apps",
+        "tooltip": "This option allows this applet to manage the VPN-related applications you listed above."
+    },
+    "clientsList": {
+        "type": "list",
+        "description": "Managed applications",
+        "tooltip": "Name: What you want.\nCommand: The command to run the application, without its path.\nRestart: TRUE if you want to restart this application as soon as the VPN link becomes active again.\nShutdown: TRUE if you want to close the application as soon as the VPN link is stopped.",
+        "columns": [
+            {
+                "id": "name",
+                "title": "Name",
+                "type": "string"
+            },
+            {
+                "id": "command",
+                "title": "Command",
+                "type": "string"
+            },
+            {
+                "id": "restart",
+                "title": "Restart",
+                "type": "boolean"
+            },
+            {
+                "id": "shutdown",
+                "title": "Shut down",
+                "type": "boolean"
+            }
+        ],
+        "default": [
+            {
+                "name": "Transmission",
+                "command": "transmission-gtk",
+                "restart": false,
+                "shutdown": true
+            }
+        ],
+        "dependency": "manageClients"
     }
 }
