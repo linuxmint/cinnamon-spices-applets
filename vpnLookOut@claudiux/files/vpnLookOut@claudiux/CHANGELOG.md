@@ -4,6 +4,11 @@
   * VPN-related Apps Management : You can now manage all applications (for example, torrent clients) that you have registered in the list. (Cf. Settings)
   * Many changes in code and messages. Please, help me by translating these messages into your language, using poedit and the .pot file.
 
+### 2.5.2
+  * Translations:
+   * Update of vpnLookOut@claudiux.pot
+   * Update of es.po, fr.po, it.po
+
 ### 2.5.1
   * Adds a keyboard shortcut option to enable / disable the last VPN used.
 
