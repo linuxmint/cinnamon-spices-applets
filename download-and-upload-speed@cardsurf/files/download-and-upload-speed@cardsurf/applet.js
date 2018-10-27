@@ -6,21 +6,31 @@ const St = imports.gi.St;
 const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
-const PopupMenu = imports.ui.popupMenu;
 
 const uuid = 'download-and-upload-speed@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletGui = AppletDirectory.appletGui;
-const AppletConstants = AppletDirectory.appletConstants
-const ShellUtils = AppletDirectory.shellUtils;
-const Files = AppletDirectory.files;
-const FilesCsv = AppletDirectory.filesCsv;
-const Dates = AppletDirectory.dates;
-const Translation = AppletDirectory.translation;
+let AppletGui, AppletConstants, ShellUtils, Dates, Translation, Infos;
+if (typeof require !== 'undefined') {
+    AppletGui = require('./appletGui');
+    AppletConstants = require('./appletConstants')
+    ShellUtils = require('./shellUtils');
+    Dates = require('./dates');
+    Translation = require('./translation');
+    Infos = require('./infos');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletGui = AppletDirectory.appletGui;
+    AppletConstants = AppletDirectory.appletConstants
+    ShellUtils = AppletDirectory.shellUtils;
+    Dates = AppletDirectory.dates;
+    Translation = AppletDirectory.translation;
+    Infos = AppletDirectory.infos;
+}
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
 }
+
+
 
 
 
@@ -37,31 +47,14 @@ MyApplet.prototype = {
         Applet.Applet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this.orientation = orientation;
-        this.applet_directory = this._get_applet_directory();
-        this.bytes_directory = this.applet_directory + "/bytes/";
         this.is_running = true;
 
-        this.bytes_received_previous = 0;
-        this.bytes_received_iteration = 0;
-        this.bytes_received_interface_session = 0;
-        this.bytes_received_last_write_before_midnight = 0;
-        this.bytes_received_last_write_after_midnight = 0;
-        this.bytes_received_total = 0;
-        this.bytes_sent_previous = 0;
-        this.bytes_sent_iteration = 0;
-        this.bytes_sent_interface_session = 0;
-        this.bytes_sent_last_write_before_midnight = 0;
-        this.bytes_sent_last_write_after_midnight = 0;
-        this.bytes_sent_total = 0;
-        this.bytes_total = 0;
-        this.dictionary_interface_bytes_received_user_session = {};
-        this.dictionary_interface_bytes_sent_user_session = {};
-        this.byte_start_times = [];
-        this.date_midnight = null;
-
         this.network_directory = "/sys/class/net/";
+        this.byte_start_times = [];
+        this.dictionary_interface_to_info = {};
         this.network_interfaces = [];
-        this.network_interface = "";
+        this.checked_interfaces = [];
+        this.checked_interfaces_string = "";
         this.filepath_bytes_received = "";
         this.filepath_bytes_sent = "";
         this.filepath_bytes_total = "";
@@ -73,6 +66,7 @@ MyApplet.prototype = {
         this.data_limit_command_invoked = false;
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings_separator = ",";
 
         this.display_mode = AppletConstants.DisplayMode.SPEED;
         this.unit_type = AppletConstants.UnitType.BYTES;
@@ -91,23 +85,23 @@ MyApplet.prototype = {
         this.gui_sent_icon_filename = "";
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
+        this.bytes_start_time = AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION;
 
         this.gui_speed = null;
         this.gui_data_limit = null;
         this.menu_item_gui = null;
         this.menu_item_network = null;
+        this.menu_item_network = null;
         this.menu_item_byte_start_times = null;
         this.hover_popup = null;
 
         this._init_translations();
+        this._init_scripts();
         this._bind_settings();
         this._connect_signals();
         this._init_network_properties();
         this._init_dictionaries();
-        this._init_filename_properties();
-        this._init_files();
         this._init_byte_start_times();
-        this._init_dates();
         this._init_custom_start_date();
         this._init_list_connections_process();
         this._init_menu_item_gui();
@@ -120,11 +114,6 @@ MyApplet.prototype = {
         this.run();
     },
 
-    _get_applet_directory: function() {
-        let directory = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/";
-        return directory;
-    },
-
     _init_translations: function() {
         try {
             let translator = new Translation.Translator();
@@ -134,6 +123,36 @@ MyApplet.prototype = {
         catch(exception) {
             global.log(uuid + " error while initializing translations: " + exception);
         }
+    },
+
+    _init_scripts: function() {
+        try {
+            let path = this._get_scripts_path();
+            let error = this._grant_executable_permission(path);
+            if(error.length > 0) {
+                global.log(uuid + " error while granting executable permission to scripts: " + error);
+            }
+        }
+        catch(exception) {
+            global.log(uuid + " error while initializing scripts: " + exception);
+        }
+    },
+
+    _get_scripts_path: function() {
+        let path = this._get_applet_directory();
+        path += "scripts"
+        return path;
+    },
+
+    _get_applet_directory: function() {
+        let directory = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + uuid + "/";
+        return directory;
+    },
+
+    _grant_executable_permission: function(directory_path) {
+        let process = new ShellUtils.ShellOutputProcess(['chmod', '-R', '755', directory_path]);
+        let error = process.spawn_sync_and_get_error();
+        return error;
     },
 
     _bind_settings: function () {
@@ -159,7 +178,7 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "hover_popup_numbers_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "gui_speed_type", this.on_gui_speed_type_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "bytes_start_time", this.on_bytes_start_time_changed],
-                        [Settings.BindingDirection.BIDIRECTIONAL, "network_interface", null] ]){
+                        [Settings.BindingDirection.BIDIRECTIONAL, "checked_interfaces_string", null] ]){
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -179,6 +198,7 @@ MyApplet.prototype = {
 
     on_bytes_start_time_changed: function () {
         this._update_menu_item_byte_start_times_option();
+        this._update_bytes_start_times();
         if(this.bytes_start_time == AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION) {
             this._set_bytes_total_to_user_session();
         }
@@ -187,40 +207,25 @@ MyApplet.prototype = {
         }
     },
 
-    _set_bytes_total_to_user_session: function () {
-        this.bytes_received_total = this.network_interface in this.dictionary_interface_bytes_received_user_session ?
-        this.dictionary_interface_bytes_received_user_session[this.network_interface] +
-        this.bytes_received_interface_session : this.bytes_received_interface_session;
-
-        this.bytes_sent_total = this.network_interface in this.dictionary_interface_bytes_sent_user_session ?
-        this.dictionary_interface_bytes_sent_user_session[this.network_interface] +
-        this.bytes_sent_interface_session : this.bytes_sent_interface_session;
-
-        this.update_bytes_total();
-    },
-
-    on_custom_start_date_changed: function () {
-        this._read_bytes_total();
-    },
-
-    _init_custom_start_date: function () {
-        if(this.custom_start_date.length == 0) {
-            let today = new Dates.ConvertableDate();
-            this.custom_start_date = today.to_year_month_day_string("-");
+    _update_bytes_start_times: function () {
+        for (let network_interface in this.dictionary_interface_to_info) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            info.bytes_start_time = this.bytes_start_time;
         }
     },
 
-    _init_byte_start_times: function () {
-         this.byte_start_times = [ AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION,
-                                   AppletConstants.BytesStartTime.TODAY,
-                                   AppletConstants.BytesStartTime.YESTERDAY,
-                                   AppletConstants.BytesStartTime.THREE_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.FIVE_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.SEVEN_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.TEN_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.FOURTEEN_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.THIRTY_DAYS_AGO,
-                                   AppletConstants.BytesStartTime.CUSTOM_DATE ];
+    _set_bytes_total_to_user_session: function () {
+        for (let network_interface in this.dictionary_interface_to_info) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            info.set_bytes_total_to_user_session();
+        }
+    },
+
+    _read_bytes_total: function () {
+        for (let network_interface in this.dictionary_interface_to_info) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            info.read_bytes_total();
+        }
     },
 
     on_data_limit_changed: function () {
@@ -231,9 +236,19 @@ MyApplet.prototype = {
         let enabled = this.is_data_limit_enabled();
         if(enabled) {
             let data_limit_bytes = this.convert_data_limit_bytes();
-            return this.bytes_total > data_limit_bytes;
+            let bytes_total = this.get_bytes_totals();
+            return bytes_total > data_limit_bytes;
         }
         return false;
+    },
+
+    get_bytes_totals: function () {
+        let bytes = 0;
+        for (let network_interface of this.checked_interfaces) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            bytes += info.bytes_total;
+        }
+        return bytes;
     },
 
     is_data_limit_enabled: function () {
@@ -280,6 +295,19 @@ MyApplet.prototype = {
         this._init_gui();
     },
 
+    on_custom_start_date_changed: function () {
+        this._update_custom_start_dates();
+        this._read_bytes_total();
+    },
+
+    _update_custom_start_dates: function () {
+        for (let network_interface in this.dictionary_interface_to_info) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            info.custom_start_date = this.custom_start_date;
+            info.read_bytes_total();
+        }
+    },
+
     // Override
     on_applet_clicked: function(event) {
         if(this.launch_terminal) {
@@ -307,7 +335,7 @@ MyApplet.prototype = {
 
     _init_network_properties: function () {
         this.network_interfaces = this._init_network_interfaces();
-        this.network_interface = this._init_network_interface();
+        this.checked_interfaces = this._init_checked_interfaces();
     },
 
     _init_network_interfaces: function () {
@@ -323,13 +351,17 @@ MyApplet.prototype = {
         return output;
     },
 
-    _init_network_interface: function () {
-        let network_interface = this.settings.getValue("network_interface");
-        let is_valid = this.array_contains(this.network_interfaces, network_interface);
-        if(!is_valid && this.network_interfaces.length > 0) {
-            network_interface = this.network_interfaces[0];
+    _init_checked_interfaces: function () {
+        let checked_interfaces = [];
+        let checked_interfaces_string = this.settings.getValue("checked_interfaces_string");
+        let network_interfaces = checked_interfaces_string.split(this.settings_separator);
+        for(let network_interface of network_interfaces) {
+            let is_valid = this.array_contains(this.network_interfaces, network_interface);
+            if(is_valid) {
+                checked_interfaces.push(network_interface);
+            }
         }
-        return network_interface;
+        return checked_interfaces;
     },
 
     array_contains: function (array, element) {
@@ -337,17 +369,21 @@ MyApplet.prototype = {
     },
 
     _init_dictionaries: function () {
-        for (let i = 0; i < this.network_interfaces.length; i++) {
-            let network_interface = this.network_interfaces[i];
-            this.dictionary_interface_bytes_received_user_session[network_interface] = 0;
-            this.dictionary_interface_bytes_sent_user_session[network_interface] = 0;
+        for (let network_interface of this.network_interfaces) {
+            let exists = (network_interface in this.dictionary_interface_to_info);
+            if(!exists) {
+                this.dictionary_interface_to_info[network_interface] =
+                                                                this._create_network_interface_info(network_interface);
+            }
         }
     },
 
-    _init_filename_properties: function () {
-        this.filepath_bytes_received = this.network_directory + this.network_interface + '/statistics/rx_bytes';
-        this.filepath_bytes_sent = this.network_directory + this.network_interface + '/statistics/tx_bytes';
-        this.filepath_bytes_total = this.bytes_directory + this.network_interface + '.csv';
+    _create_network_interface_info: function (network_interface) {
+        let info = new Infos.NetworkInterfaceInfo(network_interface);
+        info.bytes_start_time = this.bytes_start_time;
+        info.custom_start_date = this.custom_start_date;
+        info.read_bytes_total();
+        return info;
     },
 
     _init_list_connections_process: function () {
@@ -356,22 +392,67 @@ MyApplet.prototype = {
     },
 
     _init_menu_item_network: function () {
-        this.menu_item_network = new AppletGui.RadioMenuItem(_("Network interface"), this.network_interfaces);
-        this.menu_item_network.set_callback_option_clicked(this, this.on_menu_item_network_clicked);
+        this.menu_item_network = new AppletGui.CheckboxMenuItem(_("Network interfaces"));
+        this.menu_item_network.set_callback_option_toggled(this, this.on_menu_item_network_toggled);
+        this._reload_menu_item_network();
         this._applet_context_menu.addMenuItem(this.menu_item_network);
-        this._set_menu_item_network_active_option();
     },
 
-    on_menu_item_network_clicked: function (option_name, option_index) {
-        if(this.network_interface != option_name) {
-            this._update_bytes_user_session();
-            this.network_interface = option_name;
-            this._write_bytes_total();
-            this._init_filename_properties();
-            this._init_files();
-            this._reset_bytes();
-            this.on_bytes_start_time_changed();
+    on_menu_item_network_toggled: function (option_index, option_name, is_checked) {
+        if(is_checked) {
+            this.check_network_interface(option_name);
         }
+        else {
+            this.uncheck_network_interface(option_name);
+        }
+        this.on_data_limit_changed();
+        this.update_checked_interfaces_string();
+    },
+
+    check_network_interface: function (network_interface) {
+        let exists = this.array_contains(this.checked_interfaces, network_interface);
+        if(!exists) {
+            this.checked_interfaces.push(network_interface);
+        }
+    },
+
+    uncheck_network_interface: function (network_interface) {
+        let exists = this.array_contains(this.checked_interfaces, network_interface);
+        if(exists) {
+            this._reset_network_interface(network_interface);
+            this.array_remove(this.checked_interfaces, network_interface);
+        }
+    },
+
+    _reset_network_interface: function (network_interface) {
+        let info = this.dictionary_interface_to_info[network_interface];
+        info.update_bytes_user_session();
+        info.write_bytes_total();
+        info.reset_bytes();
+    },
+
+    array_remove: function (array, element) {
+        let index = array.indexOf(element);
+        array.splice(index, 1);
+    },
+
+    update_checked_interfaces_string: function () {
+        this.checked_interfaces_string = this.checked_interfaces.join(this.settings_separator);
+    },
+
+    _reload_menu_item_network: function () {
+        let names = this.network_interfaces;
+        let checked = this.get_is_checked();
+        this.menu_item_network.reload_options(names, checked);
+    },
+
+    get_is_checked: function () {
+        let checked = []
+        for(let network_interface of this.network_interfaces) {
+            let exists = this.array_contains(this.checked_interfaces, network_interface);
+            checked.push(exists);
+        }
+        return checked;
     },
 
     _init_menu_item_byte_start_times: function () {
@@ -408,70 +489,24 @@ MyApplet.prototype = {
         }
     },
 
-    _update_bytes_user_session: function () {
-        this.dictionary_interface_bytes_received_user_session[this.network_interface] =
-            this.network_interface in this.dictionary_interface_bytes_received_user_session ?
-            this.dictionary_interface_bytes_received_user_session[this.network_interface] +
-            this.bytes_received_interface_session : this.bytes_received_interface_session;
-
-        this.dictionary_interface_bytes_sent_user_session[this.network_interface] =
-            this.network_interface in this.dictionary_interface_bytes_sent_user_session ?
-            this.dictionary_interface_bytes_sent_user_session[this.network_interface] +
-            this.bytes_sent_interface_session : this.bytes_sent_interface_session;
-    },
-
-    _init_files: function () {
-        this.file_bytes_received = new Files.File(this.filepath_bytes_received);
-        this.file_bytes_sent = new Files.File(this.filepath_bytes_sent);
-        this.file_bytes_total = new FilesCsv.BytesFileCsv(this.filepath_bytes_total);
-        if(!this.file_bytes_total.exists()) {
-            this.file_bytes_total.create();
+    _init_custom_start_date: function () {
+        if(this.custom_start_date.length == 0) {
+            let today = new Dates.ConvertableDate();
+            this.custom_start_date = today.to_year_month_day_string("-");
         }
     },
 
-    _init_dates: function () {
-        this.date_midnight = new Dates.ConvertableDate();
-        this.date_midnight.add_days(1);
-        this.date_midnight.set_hour(0);
-        this.date_midnight.set_minute(0);
-        this.date_midnight.set_second(0);
-        this.date_midnight.set_millisecond(0);
-    },
-
-    _reset_bytes: function () {
-        this._reset_bytes_previous();
-        this._reset_bytes_iteration();
-        this._reset_bytes_session();
-        this._reset_bytes_last_write();
-        this._read_bytes_total();
-    },
-
-    _reset_bytes_previous: function () {
-        this.bytes_received_previous = 0;
-        this.bytes_sent_previous = 0;
-    },
-
-    _reset_bytes_iteration: function () {
-        this.bytes_received_iteration = 0;
-        this.bytes_sent_iteration = 0;
-    },
-
-    _reset_bytes_session: function () {
-        this.bytes_received_interface_session = 0;
-        this.bytes_sent_interface_session = 0;
-    },
-
-    _reset_bytes_last_write: function () {
-        this.bytes_received_last_write_before_midnight = 0;
-        this.bytes_received_last_write_after_midnight = 0;
-        this.bytes_sent_last_write_after_midnight = 0;
-        this.bytes_sent_last_write_before_midnight = 0;
-    },
-
-    _reset_bytes_total: function () {
-        this.bytes_received_total = 0;
-        this.bytes_sent_total = 0;
-        this.bytes_total = 0;
+    _init_byte_start_times: function () {
+         this.byte_start_times = [ AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION,
+                                   AppletConstants.BytesStartTime.TODAY,
+                                   AppletConstants.BytesStartTime.YESTERDAY,
+                                   AppletConstants.BytesStartTime.THREE_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.FIVE_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.SEVEN_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.TEN_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.FOURTEEN_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.THIRTY_DAYS_AGO,
+                                   AppletConstants.BytesStartTime.CUSTOM_DATE ];
     },
 
     _init_menu_item_gui: function () {
@@ -522,18 +557,23 @@ MyApplet.prototype = {
 
     _update_network_properties: function () {
          this.network_interfaces = this._init_network_interfaces();
-         let network_interface = this._init_network_interface();
-         this.on_menu_item_network_clicked(network_interface, -1);
+         this._init_dictionaries();
+         this.checked_interfaces = this._reset_network_interfaces();
+         this.update_checked_interfaces_string();
     },
 
-    _reload_menu_item_network: function () {
-        this.menu_item_network.reload_options(this.network_interfaces);
-        this._set_menu_item_network_active_option();
-    },
-
-    _set_menu_item_network_active_option: function () {
-        let index = this.network_interfaces.indexOf(this.network_interface);
-        this.menu_item_network.set_active_option(index);
+    _reset_network_interfaces: function () {
+        let checked_interfaces = []
+        for(let network_interface of this.checked_interfaces) {
+            let exists = this.array_contains(this.network_interfaces, network_interface);
+            if(exists) {
+                checked_interfaces.push(network_interface);
+            }
+            else {
+                this._reset_network_interface(network_interface);
+            }
+        }
+        return checked_interfaces;
     },
 
     _init_hover_popup: function () {
@@ -566,6 +606,7 @@ MyApplet.prototype = {
 
 
 
+
     run: function () {
         this._run_calculate_speed_running();
         this._run_write_bytes_running();
@@ -588,47 +629,37 @@ MyApplet.prototype = {
     },
 
     _calculate_speed: function () {
-        this.update_bytes_received();
-        this.update_bytes_sent();
-        this.update_bytes_last_write();
-        this.update_bytes_total();
-
-        let received = this.scale(this.bytes_received_iteration);
-        received = this.convert_to_readable_string(received);
-        let sent = this.scale(this.bytes_sent_iteration);
-        sent = this.convert_to_readable_string(sent);
-        let received_total = this.convert_to_two_decimals_string(this.bytes_received_total);
-        let sent_total = this.convert_to_two_decimals_string(this.bytes_sent_total);
-
-        this.gui_speed.set_received_text(received);
-        this.gui_speed.set_sent_text(sent);
-        this.update_gui_data_limit();
-        this.hover_popup.set_text(received_total, sent_total);
-        this.invoke_data_limit_command_if_exceeded();
-    },
-
-    update_bytes_received: function () {;
-        let bytes_received = this.read_number(this.file_bytes_received, this.bytes_received_previous);
-        this.bytes_received_iteration = this.calculate_bytes_difference(bytes_received, this.bytes_received_previous);
-        this.bytes_received_previous = bytes_received;
-        this.bytes_received_interface_session += this.bytes_received_iteration;
-        this.bytes_received_total += this.bytes_received_iteration;
-    },
-
-    read_number: function (file, default_number) {
         try {
-            let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
-            let number = parseInt(string);
-            return number;
-        }
-        catch(exception) {
-            return default_number;
-        }
-    },
+            let bytes_received_iteration = 0;
+            let bytes_sent_iteration = 0;
+            let bytes_received_total = 0;
+            let bytes_sent_total = 0;
 
-    scale: function (bytes) {
-        return this.display_mode == AppletConstants.DisplayMode.SPEED ? Math.round(bytes / this.update_every) : bytes;
+            for(let network_interface of this.checked_interfaces) {
+                let info = this.dictionary_interface_to_info[network_interface];
+                info.calculate_speed();
+                bytes_received_iteration += info.bytes_received_iteration;
+                bytes_sent_iteration += info.bytes_sent_iteration;
+                bytes_received_total += info.bytes_received_total;
+                bytes_sent_total += info.bytes_sent_total;
+            }
+
+            let received = this.scale(bytes_received_iteration);
+            received = this.convert_to_readable_string(received);
+            let sent = this.scale(bytes_sent_iteration);
+            sent = this.convert_to_readable_string(sent);
+            let received_total = this.convert_to_two_decimals_string(bytes_received_total);
+            let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
+
+            this.gui_speed.set_received_text(received);
+            this.gui_speed.set_sent_text(sent);
+            this.update_gui_data_limit(bytes_received_total, bytes_sent_total);
+            this.hover_popup.set_text(received_total, sent_total);
+            this.invoke_data_limit_command_if_exceeded();
+        }
+        catch(e) {
+             global.logError(uuid + " error while calculating download and upload speed: " + e);
+        }
     },
 
     calculate_bytes_difference: function (bytes, previous_bytes) {
@@ -637,6 +668,10 @@ MyApplet.prototype = {
             difference = 0;
         }
         return difference;
+    },
+
+    scale: function (bytes) {
+        return this.display_mode == AppletConstants.DisplayMode.SPEED ? Math.round(bytes / this.update_every) : bytes;
     },
 
     convert_to_readable_string: function (bytes) {
@@ -655,7 +690,7 @@ MyApplet.prototype = {
             return [number, unit];
         }
         else {
-            bits = this.convert_to_bits(bytes);
+            let bits = this.convert_to_bits(bytes);
             let [number, unit] = this.convert_bits_to_readable_unit(bits);
             return [number, unit];
         }
@@ -723,32 +758,9 @@ MyApplet.prototype = {
         return output;
     },
 
-    update_bytes_sent: function () {
-        let bytes_sent = this.read_number(this.file_bytes_sent, this.bytes_sent_previous);
-        this.bytes_sent_iteration = this.calculate_bytes_difference(bytes_sent, this.bytes_sent_previous);
-        this.bytes_sent_previous = bytes_sent;
-        this.bytes_sent_interface_session += this.bytes_sent_iteration;
-        this.bytes_sent_total += this.bytes_sent_iteration;
-    },
-
-    update_bytes_last_write: function () {
-        let date_now = new Dates.ConvertableDate();
-        if(date_now.is_earlier(this.date_midnight)) {
-            this.bytes_received_last_write_before_midnight += this.bytes_received_iteration;
-            this.bytes_sent_last_write_before_midnight += this.bytes_sent_iteration;
-        }
-        else {
-            this.bytes_received_last_write_after_midnight += this.bytes_received_iteration;
-            this.bytes_sent_last_write_after_midnight += this.bytes_sent_iteration;
-        }
-    },
-
-    update_bytes_total: function () {
-        this.bytes_total = this.bytes_received_total + this.bytes_sent_total;
-    },
-
-    update_gui_data_limit: function () {
-        let percentage = this.is_zero(this.data_limit) ? 0 : this.bytes_total / this.convert_data_limit_bytes();
+    update_gui_data_limit: function (bytes_received_total, bytes_sent_total) {
+        let bytes_total = bytes_received_total + bytes_sent_total;
+        let percentage = this.is_zero(this.data_limit) ? 0 : bytes_total / this.convert_data_limit_bytes();
         percentage = percentage * 100;
         this.gui_data_limit.set_percentage(percentage);
     },
@@ -791,155 +803,11 @@ MyApplet.prototype = {
         }
     },
 
-    _read_bytes_total: function() {
-        try {
-            this._read_bytes_total_file();
-            this.add_last_write_bytes_to_total();
+    _write_bytes_total: function () {
+        for(let network_interface of this.checked_interfaces) {
+            let info = this.dictionary_interface_to_info[network_interface];
+            info.write_bytes_total();
         }
-        catch (exception) {
-        }
-    },
-
-    _read_bytes_total_file: function() {
-        let date_from = this._get_bytes_start_date_int();
-        let rows = this.file_bytes_total.get_byte_rows();
-        this._reset_bytes_total();
-
-        for (let i = 0; i < rows.length; ++i) {
-           let row = rows[i];
-           if(row.date >= date_from) {
-                this.bytes_received_total += row.bytes_received;
-                this.bytes_sent_total += row.bytes_sent;
-           }
-           else {
-               break;
-           }
-        }
-    },
-
-    _get_bytes_start_date_int: function () {
-        if(this.bytes_start_time == AppletConstants.BytesStartTime.CUSTOM_DATE) {
-            return this._get_custom_start_date_int();
-        }
-
-        let today = new Dates.ConvertableDate();
-        let days = this.bytes_start_time;
-        today.add_days(-1 * days);
-        return today.to_year_month_day_int();
-    },
-
-    _get_custom_start_date_int : function () {
-        let date_string = this.custom_start_date.trim().replace(/-/g, "");
-        let date_int =  parseInt(date_string);
-        if(!isNaN(date_int)){
-            return date_int;
-        }
-        throw("Failed to parse custom start date to integer");
-    },
-
-    add_last_write_bytes_to_total: function () {
-        this.bytes_received_total += this.bytes_received_last_write_before_midnight;
-        this.bytes_received_total += this.bytes_received_last_write_after_midnight;
-        this.bytes_sent_total += this.bytes_sent_last_write_before_midnight;
-        this.bytes_sent_total += this.bytes_sent_last_write_after_midnight;
-        this.bytes_total = this.bytes_received_total + this.bytes_sent_total;
-    },
-
-    _write_bytes_total: function() {
-        try {
-            if(this.write_every > 0) {
-                this._write_bytes_total_file();
-                 this._reset_bytes_last_write();
-                 this._init_dates();
-            }
-        }
-        catch(exception) {
-        }
-    },
-
-    _write_bytes_total_file: function() {
-        let rows = this.file_bytes_total.get_byte_rows();
-        rows = this._update_or_prepend_row_before_midnight(rows);
-        rows = this._update_or_prepend_row_after_midnight(rows);
-        this.file_bytes_total.overwrite(rows);
-    },
-
-    _update_or_prepend_row_before_midnight: function(rows) {
-        let date = this._get_date_before_midnight();
-        let index = this._get_index(rows, date);
-        return index >= 0 ? this._update_row_before_midnight(rows, index) :
-                            this._prepend_row_before_midnight(rows, date);
-    },
-
-    _get_date_before_midnight: function() {
-        let date = this.date_midnight.get_deep_copy();
-        date.add_days(-1);
-        return date;
-    },
-
-    _get_index: function(rows, convertable_date) {
-        let date_int = convertable_date.to_year_month_day_int();
-        for(let i = 0; i < rows.length; ++i) {
-            let row = rows[i];
-            if(row.date == date_int) {
-                return i;
-            }
-        }
-        return -1;
-    },
-
-    _update_row_before_midnight: function(rows, index) {
-        let row = rows[index];
-        row.bytes_received += this.bytes_received_last_write_before_midnight;
-        row.bytes_sent += this.bytes_sent_last_write_before_midnight;
-        rows[index] = row;
-        return rows;
-    },
-
-    _prepend_row_before_midnight: function(rows, convertable_date) {
-        let transferred = this._bytes_transferred_before_midnight();
-        if(transferred) {
-            let date_int = convertable_date.to_year_month_day_int();
-            let row = new FilesCsv.BytesRowCsv(date_int,
-                                               this.bytes_received_last_write_before_midnight,
-                                               this.bytes_sent_last_write_before_midnight);
-            rows.unshift(row);
-        }
-        return rows;
-    },
-
-    _bytes_transferred_before_midnight: function() {
-       return this.bytes_received_last_write_before_midnight > 0 || this.bytes_sent_last_write_before_midnight > 0;
-    },
-
-    _update_or_prepend_row_after_midnight: function(rows) {
-        let date = this.date_midnight;
-        let index = this._get_index(rows, date);
-        return index >= 0 ? this._update_row_after_midnight(rows, index) : this._prepend_row_after_midnight(rows, date);
-    },
-
-    _update_row_after_midnight: function(rows, index) {
-        let row = rows[index];
-        row.bytes_received += this.bytes_received_last_write_after_midnight;
-        row.bytes_sent += this.bytes_sent_last_write_after_midnight;
-        rows[index] = row;
-        return rows;
-    },
-
-    _prepend_row_after_midnight: function(rows, convertable_date) {
-        let transferred = this._bytes_transferred_after_midnight();
-        if(transferred) {
-            let date_int = convertable_date.to_year_month_day_int();
-            let row = new FilesCsv.BytesRowCsv(date_int,
-                                               this.bytes_received_last_write_after_midnight,
-                                               this.bytes_sent_last_write_after_midnight);
-            rows.unshift(row);
-        }
-        return rows;
-    },
-
-    _bytes_transferred_after_midnight: function() {
-       return this.bytes_received_last_write_after_midnight > 0 || this.bytes_sent_last_write_after_midnight > 0;
     },
 
 };

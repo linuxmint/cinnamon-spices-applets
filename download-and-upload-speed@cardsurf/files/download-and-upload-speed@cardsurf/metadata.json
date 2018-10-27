@@ -1,6 +1,6 @@
 {
     "description": "Shows usage of a network interface",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "uuid": "download-and-upload-speed@cardsurf",
     "name": "Download and upload speed"
 }

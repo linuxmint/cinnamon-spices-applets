@@ -11,7 +11,6 @@ const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
 const Gettext = imports.gettext;
-const AppletMeta = imports.ui.appletManager.applets["bettersettings@bownz"];
 const AppletDir = imports.ui.appletManager.appletMeta["bettersettings@bownz"].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")

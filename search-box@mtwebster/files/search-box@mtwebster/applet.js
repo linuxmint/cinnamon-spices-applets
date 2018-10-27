@@ -11,9 +11,15 @@ const Main = imports.ui.main;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
-const AppletDir = imports.ui.appletManager.applets['search-box@mtwebster'];
-const AppletSettings = AppletDir.appletSettings;
-const AppletSettingsUI = AppletDir.appletSettingsUI;
+let AppletSettings, AppletSettingsUI;
+if (typeof require !== 'undefined') {
+    AppletSettings = require('./appletSettings');
+    AppletSettingsUI = require('./appletSettingsUI');
+} else {
+    const AppletDir = imports.ui.appletManager.applets['search-box@mtwebster'];
+    AppletSettings = AppletDir.appletSettings;
+    AppletSettingsUI = AppletDir.appletSettingsUI;
+}
 
 
 const APPLET_DIR = imports.ui.appletManager._find_applet('search-box@mtwebster');
@@ -190,7 +196,7 @@ MyApplet.prototype = {
 
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
     return myApplet;
 }

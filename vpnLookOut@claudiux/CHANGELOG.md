@@ -1,5 +1,37 @@
 ## Changelog
 
+### 3.0.0 (Only for Cinnamon 3.8 and over)
+  * VPN-related Apps Management : You can now manage all applications (for example, torrent clients) that you have registered in the list. (Cf. Settings)
+  * Many changes in code and messages. Please, help me by translating these messages into your language, using poedit and the .pot file.
+
+### 2.5.2
+  * Translations:
+   * Update of vpnLookOut@claudiux.pot
+   * Update of es.po, fr.po, it.po
+
+### 2.5.1
+  * Adds a keyboard shortcut option to enable / disable the last VPN used.
+
+### 2.5.0
+ * Becomes multi-version. For Cinnamon 3.8 (LM 19), the code has been changed to use classes instead of prototypes.
+ * Some scripts have been modified for more efficiency.
+ * Available languages: English, French, Spanish, Italian, Danish, Swedish.
+
+### 2.4.0
+ * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files.
+
+### 2.3.0
+ * A middle click on the icon of this applet is now a quick way to:
+   * connect to the last VPN used if it is off;
+   * disconnect from the VPN if it is on.
+
+### 2.2.0
+ * Now compatible with Arch Linux.
+ * Improved compatibility with Fedora 27.
+
+### 2.1.0
+ * Now compatible with Fedora 27.
+
 ### 2.0.1
  * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
  * Improved installation of translation files.

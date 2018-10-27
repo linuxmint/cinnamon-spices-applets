@@ -1,5 +1,40 @@
 Changelog
 
+### 3.2.6
+
+  * Fixed issues with invalid access of C objects occurring with CJS git master.
+  * Fixed the list view container width not filling the parent scroll container width, and the button widths not filling their parent container's width.
+  * Fixed the dot offsetting the vertical alignment of labels in the list view.
+  * Made the positioning of the running app indicator dot consistent between list and grid views.
+
+### 3.2.5
+
+  * Fixed being unable to select a context menu option from the first app button in a category group.
+
+### 3.2.4
+
+  * Lowered the minimum possible custom height to 360px.
+  * Lowered the minimum possible number of columns to 2.
+  * Reduced the widths of the columns so the menu is more compact.
+
+### 3.2.3
+
+  * Fixed a bug that can prevent being able to open applications after exiting the context menu.
+
+### 3.2.2
+
+  * Fixed inability to uninstall applications due to gksu deprecation.
+
+### 3.2.1
+
+  * Addressed an issue with the context menu labels being truncated.
+  * Fixed search text clipping.
+
+### 3.2.0
+
+  * Added drag and drop category re-ordering.
+  * Fixed a styling issue with context menus.
+
 ### 3.1.3
 
   * Fixed clicking context menu items from the first app in a list not working.

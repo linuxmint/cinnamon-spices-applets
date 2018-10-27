@@ -565,6 +565,18 @@ AppGroup.prototype = {
       return false;
     }
 
+    this.resetHoverStatus();
+
+    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
+      this.hadClosedPseudoClass = false;
+      this.actor.add_style_pseudo_class('closed');
+    }
+
+    this._setFavoriteAttributes();
+    this.hoverMenu._onMenuLeave();
+  },
+
+  resetHoverStatus: function() {
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
@@ -581,14 +593,6 @@ AppGroup.prototype = {
       && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
-
-    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
-      this.hadClosedPseudoClass = false;
-      this.actor.add_style_pseudo_class('closed');
-    }
-
-    this._setFavoriteAttributes();
-    this.hoverMenu._onMenuLeave();
   },
 
   setActiveStatus: function(windows){
@@ -636,9 +640,10 @@ AppGroup.prototype = {
     if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
       this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
     }
+    this.resetHoverStatus();
   },
 
-  _onWindowDemandsAttention: function (window) {
+  _onWindowDemandsAttention: function (metaWindow) {
     // Prevent apps from indicating attention when they are starting up.
     if (!this.groupState
       || !this.groupState.groupReady
@@ -647,7 +652,11 @@ AppGroup.prototype = {
     }
     let windows = this.groupState.metaWindows;
     for (let i = 0, len = windows.length; i < len; i++) {
-      if (isEqual(windows[i], window)) {
+      if (isEqual(windows[i], metaWindow)) {
+        // Even though this may not be the last focused window, we want it to be
+        // the window that gets focused when a user responds to an alert.
+        this.groupState.set({lastFocused: metaWindow});
+        this.setText(metaWindow.get_title());
         this.getAttention();
         return true;
       }
@@ -738,6 +747,10 @@ AppGroup.prototype = {
           this.hoverMenu.close();
         } else {
           this.hoverMenu.open();
+        }
+        if (this.state.overlayPreview) {
+          this.hoverMenu.appThumbnails[0].destroyOverlayPreview();
+          this.hoverMenu.close(true);
         }
         return;
       }
@@ -854,8 +867,8 @@ AppGroup.prototype = {
     if (metaWindow) {
       this.signals.connect(metaWindow, 'notify::title', Lang.bind(this, throttle(this._windowTitleChanged, 100, true)));
       this.signals.connect(metaWindow, 'notify::appears-focused', Lang.bind(this, this._focusWindowChange));
-      this.signals.connect(metaWindow, 'notify::gtk-application-id', this._onAppChange);
-      this.signals.connect(metaWindow, 'notify::wm-class', this._onAppChange);
+      this.signals.connect(metaWindow, 'notify::gtk-application-id', Lang.bind(this, this._onAppChange));
+      this.signals.connect(metaWindow, 'notify::wm-class', Lang.bind(this, this._onAppChange));
       if (metaWindow.progress !== undefined) {
         this._progress = metaWindow.progress;
         this.signals.connect(metaWindow, 'notify::progress', () => this._onProgressChange(metaWindow));
@@ -1052,21 +1065,50 @@ AppGroup.prototype = {
     });
   },
 
-  _animate: function () {
-    this.actor.set_z_rotation_from_gravity(0.0, Clutter.Gravity.CENTER);
-    Tweener.addTween(this.actor, {
-      opacity: 70,
-      time: 1.0,
-      transition: 'linear',
-      onCompleteScope: this,
-      onComplete: function () {
-        Tweener.addTween(this.actor, {
-          opacity: 255,
-          time: 0.5,
-          transition: 'linear'
-        });
+  _animate: function (step = 0) {
+    let effect = this.state.settings.launcherAnimationEffect;
+    if (effect === 1) {
+      return;
+    } else if (effect === 2) {
+      this._iconBox.set_z_rotation_from_gravity(0.0, Clutter.Gravity.CENTER);
+      Tweener.addTween(this._iconBox, {
+        opacity: 70,
+        time: 1.0,
+        transition: 'linear',
+        onCompleteScope: this,
+        onComplete: function () {
+          Tweener.addTween(this._iconBox, {
+            opacity: 255,
+            time: 0.5,
+            transition: 'linear'
+          });
+        }
+      });
+    } else if (effect === 3) {
+      // Based on https://github.com/linuxmint/Cinnamon/blob/44b70147be6d68278ef88b758a740ccce92195d0/files/usr/share/cinnamon/applets/panel-launchers%40cinnamon.org/applet.js#L217
+      if (step >= 3) {
+        return;
       }
-    });
+      this._iconBox.set_pivot_point(0.5, 0.5);
+      Tweener.addTween(this._iconBox, {
+        scale_x: 0.7,
+        scale_y: 0.7,
+        time: 0.2,
+        transition: 'easeOutQuad',
+        onComplete: () => {
+          Tweener.addTween(this._iconBox, {
+            scale_x: 1.0,
+            scale_y: 1.0,
+            time: 0.2,
+            transition: 'easeOutQuad',
+            onComplete: () => {
+              this._animate(step + 1);
+            },
+          });
+        },
+      });
+    }
+
   },
 
   destroy: function (skipRefCleanup) {

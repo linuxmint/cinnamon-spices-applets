@@ -310,7 +310,7 @@
         {"checkbox": true, "command": "xdg-open computer:///",  "label": "Computer", "icon": "computer"},
         {"checkbox": true, "command": "cinnamon-settings",      "label": "System Settings", "icon": "preferences-system"},
         {"checkbox": true, "command": "system-config-printer",  "label": "Printers", "icon": "printer"},
-        {"checkbox": true, "command": "gnome-terminal",         "label": "Terminal", "icon": "terminal"},
+        {"checkbox": true, "command": "gnome-terminal",         "label": "Terminal", "icon": "utilities-terminal"},
         {"checkbox": true, "command": "cinnamon-settings info", "label": "System Info", "icon": "cs-details"}
     ]
  },

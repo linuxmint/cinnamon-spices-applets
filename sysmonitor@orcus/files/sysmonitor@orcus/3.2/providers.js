@@ -1,7 +1,14 @@
 const Gio = imports.gi.Gio;
-const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
-const GTop = AppletDir.__init__.GTop;
-const _ = AppletDir.__init__._;
+let _, GTop;
+if (typeof require !== 'undefined') {
+    let init = require('./init');
+    _ = init._;
+    GTop = init.GTop;
+} else {
+    const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
+    _ = AppletDir.init._;
+    GTop = AppletDir.init.GTop;
+}
 
 function CpuData() {
     this._init();
@@ -15,6 +22,7 @@ CpuData.prototype = {
         this.sys_last = 0;
         this.iowait_last = 0;
         this.total_last = 0;
+        this.text_decimals = 0;
     },
     
     getDim: function() {
@@ -40,12 +48,16 @@ CpuData.prototype = {
         this.iowait_last = this.gtop.iowait;
         this.total_last = this.gtop.total;
         let used = 1-idle-nice-sys-iowait;
-        this.text = Math.round(100 * used) + " %";
+        this.text = (100 * used).toFixed(this.text_decimals) + " %";
         return [used, nice, sys, iowait];
     },
     
     getText: function() {
         return [_("CPU:"), this.text];
+    },
+
+    setTextDecimals: function(decimals) {
+        this.text_decimals = Math.max(0, decimals);
     }
 };
 

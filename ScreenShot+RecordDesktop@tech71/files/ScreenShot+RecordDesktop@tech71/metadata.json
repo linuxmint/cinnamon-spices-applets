@@ -1,6 +1,7 @@
 {
-    "description": "Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, xdotool, xdpyinfo)",
-    "icon": "applets-screenshooter",
-    "uuid": "ScreenShot+RecordDesktop@tech71",
-    "name": "ScreenShot+Record Desktop"
+    "max-instances": -1,
+    "uuid": "ScreenShot+RecordDesktop@tech71", 
+    "description": "Take A Snapshot Or Record Your Desktop (recording requires the packages ffmpeg, xdotool & x11-utils to be installed)", 
+    "name": "ScreenShot+Record Desktop", 
+    "icon": "applets-screenshooter"
 }

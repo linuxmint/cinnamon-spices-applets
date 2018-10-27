@@ -13,13 +13,14 @@ const FileUtils = imports.misc.fileUtils;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
 const Mainloop = imports.mainloop;
-let store, setTimeout, clearTimeout, isString, unref, tryFn, _, ApplicationType;
+let store, setTimeout, clearTimeout, isFinalized, isString, unref, tryFn, _, ApplicationType;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   const constants = require('./constants');
   store = require('./store');
   setTimeout = utils.setTimeout;
   clearTimeout = utils.clearTimeout;
+  isFinalized = utils.isFinalized;
   isString = utils.isString;
   unref = utils.unref;
   tryFn = utils.tryFn;
@@ -31,6 +32,7 @@ if (typeof require !== 'undefined') {
   store = AppletDir[storeVersion];
   setTimeout = AppletDir.utils.setTimeout;
   clearTimeout = AppletDir.utils.clearTimeout;
+  isFinalized = AppletDir.utils.isFinalized;
   isString = AppletDir.utils.isString;
   unref = AppletDir.utils.unref;
   tryFn = AppletDir.utils.tryFn;
@@ -40,6 +42,7 @@ if (typeof require !== 'undefined') {
 
 const USER_DESKTOP_PATH = FileUtils.getUserDesktopDir();
 const stripMarkupRegex = /(<([^>]+)>)/ig;
+const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 const wordWrap = function(text, limit) {
   let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
@@ -70,23 +73,34 @@ CategoryListButton.prototype = {
       activate: false
     });
     this.state = state;
-    this.connectId = this.state.connect({
-      menuOpened: () => {
-        if (this.id === 'favorites') {
-          this.actor.set_style_class_name('menu-category-button-selected')
+    this.connectIds = [
+      this.state.connect({
+        menuOpened: () => {
+          if (this.id === 'favorites') {
+            this.actor.set_style_class_name('menu-category-button-selected')
+          }
         }
-      }
-    });
+      }),
+      this.state.connect({
+        dragIndex: () => {
+          if (this.state.dragIndex !== this.index
+            && this.actor.opacity === 50) {
+            this.actor.set_opacity(255);
+          }
+        }
+      })
+    ];
     this.signals = new SignalManager.SignalManager(null);
     if (!selectorMethod) {
       selectorMethod = '_selectCategory';
     }
     this.selectorMethod = selectorMethod;
 
+    this.index = -1;
     this._dir = dir;
     let isStrDir = typeof dir === 'string';
     let dirName = !isStrDir ? dir.get_name() : null;
-    this.id = isString(this._dir) ? this._dir : this._dir.get_menu_id();
+    this.id = isString(this._dir) ? this._dir : altNameText;
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
     this.entered = null;
@@ -129,10 +143,61 @@ CategoryListButton.prototype = {
     this.addActor(this.label);
     this.label.realize();
 
+    this.actor._delegate = {
+      handleDragOver: (source, actor, x, y, time) => {
+        if (!source.index
+          || source.index === this.index) {
+          return DND.DragMotionResult.NO_DROP;
+        }
+        this.state.set({dragIndex: this.index});
+        this.actor.set_opacity(50);
+        return DND.DragMotionResult.MOVE_DROP;
+      },
+      acceptDrop: (source, actor, x, y, time) => {
+        if (!source.index
+          || source.index === this.index) {
+          this.state.set({dragIndex: -1});
+          return DND.DragMotionResult.NO_DROP;
+        }
+        this.state.trigger('moveCategoryToPos', source.id, this.id);
+        return true;
+      },
+      getDragActorSource: () => this.actor,
+      _getDragActor: () => new Clutter.Clone({source: this.actor}),
+      getDragActor: () => new Clutter.Clone({source: this.icon}),
+      isDraggableApp: false,
+      index: this.index,
+      id: this.id
+    };
+
+    this._draggable = DND.makeDraggable(this.actor);
+
     // Connect signals
+    this.signals.connect(this._draggable, 'drag-begin', Lang.bind(this, this._onDragBegin));
+    this.signals.connect(this._draggable, 'drag-cancelled', Lang.bind(this, this._onDragCancelled));
+    this.signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
     this.signals.connect(this.actor, 'button-release-event', Lang.bind(this, this.handleButtonRelease));
+  },
+
+  _onDragBegin: function() {
+    this.actor.set_opacity(51);
+  },
+
+  _onDragCancelled: function () {
+    this.actor.set_opacity(255);
+  },
+
+  _onDragEnd: function() {
+    this.actor.set_opacity(255);
+  },
+
+  _clearDragPlaceholder: function () {
+    if (this.state.dragPlaceholder) {
+      this.state.dragPlaceholder.destroy();
+      this.state.dragPlaceholder = null;
+    }
   },
 
   selectCategory: function() {
@@ -202,6 +267,9 @@ CategoryListButton.prototype = {
   },
 
   destroy: function() {
+    for (let i = 0; i < this.connectIds.length; i++) {
+      this.state.disconnect(this.connectIds[i]);
+    }
     this.signals.disconnectAllSignals();
     this.label.destroy();
     if (this.icon) {
@@ -238,7 +306,8 @@ ApplicationContextMenuItem.prototype = {
     this.signals = new SignalManager.SignalManager(null);
     this._action = action;
     this.label = new St.Label({
-      text: label
+      text: label,
+      style: 'font-size: 11px;'
     });
     if (iconName !== null) {
       this.icon = new St.Icon({
@@ -254,6 +323,11 @@ ApplicationContextMenuItem.prototype = {
     this.addActor(this.label);
     this.signals.connect(this.actor, 'enter-event', Lang.bind(this, this.handleEnter));
     this.signals.connect(this.actor, 'leave-event', Lang.bind(this, this.handleLeave));
+    // Override padding to help prevent label truncation, the menu container width is restricted to the column width,
+    // so unless we turn the context menu into a modal somehow (not likely since it will fight for input with the parent),
+    // this is the most practical solution for the grid.
+    this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important; width: 215px !important;');
+    this.setColumnWidths([8, 132])
   },
 
   handleEnter: function (actor, event) {
@@ -314,8 +388,7 @@ ApplicationContextMenuItem.prototype = {
         this.state.trigger('removeFavorite', this.buttonState.app.get_id());
         break;
       case 'uninstall':
-        Util.spawnCommandLine('gksu -m \'' + _('Please provide your password to uninstall this application')
-          + '\' /usr/bin/cinnamon-remove-application \'' + this.buttonState.app.get_app_info().get_filename() + '\'');
+        Util.spawnCommandLine('/usr/bin/cinnamon-remove-application \'' + this.buttonState.app.get_app_info().get_filename() + '\'');
         this.state.trigger('closeMenu');
         break;
       case 'run_with_nvidia_gpu':
@@ -382,15 +455,21 @@ AppListGridButton.prototype = {
       hover: false,
       activate: false
     });
+
     this.actor.set_style_class_name('menu-application-button');
+    this.actor.set_style('padding-left: 0px; padding-right: 0px;')
     this.actor.x_align = this.state.isListView ? St.Align.START : St.Align.MIDDLE;
     this.actor.y_align = St.Align.MIDDLE;
+
     if (!this.state.isListView) {
       this.actor.width = this.state.trigger('getAppsGridBoxWidth') / this.state.settings.appsGridColumnCount;
     }
+
+    // DND
     this.actor._delegate = {
       handleDragOver: (source, actor, x, y, time) => {
-        if (source.appIndex === this.buttonState.appIndex
+        if (!source.appIndex
+          || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
           return DND.DragMotionResult.NO_DROP;
         }
@@ -401,7 +480,8 @@ AppListGridButton.prototype = {
         return DND.DragMotionResult.MOVE_DROP;
       },
       acceptDrop: (source, actor, x, y, time) => {
-        if (source.appIndex === this.buttonState.appIndex
+        if (!source.appIndex
+          || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
           this.state.set({dragIndex: -1});
           return DND.DragMotionResult.NO_DROP;
@@ -419,17 +499,13 @@ AppListGridButton.prototype = {
     this.signals = new SignalManager.SignalManager(null);
     this.contextMenuButtons = [];
     this.description = '';
-    this.isStrApp = typeof app === 'string';
     this.entered = null;
-    if (this.state.isListView) {
-      this._iconContainer = new St.BoxLayout({
-        vertical: true
-      });
-    }
+
+    this._iconContainer = new St.BoxLayout();
 
     // appType 0 = application, appType 1 = place, appType 2 = recent
     // Filesystem autocompletion
-    if (this.isStrApp) {
+    if (typeof app === 'string') {
       if (app.charAt(0) === '~') {
         app = app.slice(1);
         app = GLib.get_home_dir() + app;
@@ -450,6 +526,7 @@ AppListGridButton.prototype = {
         () => this.handler = null
       );
     }
+
     // Don't show protocol handlers
     if (this.buttonState.app.description) {
       let slice = this.buttonState.app.description.slice(0, 7);
@@ -462,6 +539,7 @@ AppListGridButton.prototype = {
     } else if (this.buttonState.appType === ApplicationType._applications) {
       this.buttonState.app.description = this.state.fallbackDescription;
     }
+
     // Icons
     if (this.state.settings.showApplicationIcons) {
       if (this.buttonState.appType === ApplicationType._applications) {
@@ -510,7 +588,9 @@ AppListGridButton.prototype = {
     });
 
     this.dot = new St.Widget({
-      style: 'width: 5px; height: 5px; background-color: ' + this.state.theme.foregroundColor + '; margin-bottom: 2px; border-radius: 128px;',
+      style: 'width: 4px; height: 4px; background-color: '
+        + this.state.theme.foregroundColor
+        + '; margin-bottom: 2px; border-radius: 128px;',
       layout_manager: new Clutter.BinLayout(),
       x_expand: true,
       y_expand: false,
@@ -523,44 +603,51 @@ AppListGridButton.prototype = {
       width: 240 * global.ui_scale,
       y_expand: false
     });
-    let iconDotContainer = this.state.isListView ? '_iconContainer' : 'buttonBox';
+
     if (this.icon) {
-      this[iconDotContainer].add(this.icon, {
+      this._iconContainer.add(this.icon, {
         x_fill: false,
         y_fill: false,
         x_align: this.state.isListView ? St.Align.END : St.Align.MIDDLE,
         y_align: this.state.isListView ? St.Align.END : St.Align.START
       });
     }
-    if (this.state.isListView) {
-      this.buttonBox.add(this._iconContainer, {
-        x_fill: false,
-        y_fill: false,
-        x_align: St.Align.START,
-        y_align: St.Align.MIDDLE
-      });
-    }
+
+    this.buttonBox.add(this._iconContainer, {
+      x_fill: false,
+      y_fill: false,
+      x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
+      y_align: St.Align.MIDDLE
+    });
     this.buttonBox.add(this.label, {
       x_fill: false,
       y_fill: false,
       x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
       y_align: St.Align.MIDDLE
     });
-    this[iconDotContainer].add(this.dot, {
+    this._iconContainer.add(this.dot, {
       x_fill: false,
       y_fill: true,
       x_align: this.state.isListView ? St.Align.END : St.Align.MIDDLE,
       y_align: this.state.isListView ? St.Align.END : St.Align.START
     });
+
+    if (this.state.isListView) {
+      // Position the dot diagonally to the bottom right corner of the icon
+      this.dot.anchor_y = -4;
+      this.dot.anchor_x = 2;
+      this.label.set_style('min-width: 230px;');
+    } else {
+      this.dot.anchor_y = -2;
+      this.dot.anchor_x = 4;
+    }
+
     // Context menu
     if (this.buttonState.appType === ApplicationType._applications) {
       this.menu = new PopupMenu.PopupSubMenu(this.actor);
-      this.menu.actor.set_style_class_name('menu-context-menu');
-      this.menu.actor.set_opacity(240)
-      if (this.state.theme) {
-        this.menu.box.set_style('background-color: ' + this.state.theme.backgroundColor + '; border: 1px solid' + this.state.theme.borderColor
-        + '; border-radius: ' + this.state.theme.borderRadius + 'px; padding-top: ' + this.state.theme.padding + 'px; padding-bottom: ' + this.state.theme.padding + 'px;');
-      }
+      this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
+      this.menu.actor.set_style('width: 225px !important;')
+      this.menu.actor.set_opacity(245)
       this.menu.isOpen = false;
       this.buttonBox.add_actor(this.menu.actor);
     } else {
@@ -719,7 +806,7 @@ AppListGridButton.prototype = {
       || !this.buttonState.app
       || !this.description
       || this.state.dragIndex > -1
-      || this.state.contextMenuIsOpen) {
+      || this.state.contextMenuIsOpen != null) {
       return false;
     }
     if (opts.reset === 2) {
@@ -756,7 +843,7 @@ AppListGridButton.prototype = {
   },
 
   handleEnter: function (actor, event) {
-    if (this.state.contextMenuIsOpen || this.menu.isOpen || this.state.dragIndex > -1) {
+    if (this.state.contextMenuIsOpen != null || this.menu.isOpen || this.state.dragIndex > -1) {
       return false;
     }
 
@@ -810,7 +897,7 @@ AppListGridButton.prototype = {
     if (this.description) {
       this.buttonState.app.description = this.description;
       this.formatLabel({});
-      if (!this.state.contextMenuIsOpen && this.marqueeTimer) {
+      if (this.state.contextMenuIsOpen == null && this.marqueeTimer) {
         this.clearMarqueeTimer();
       }
     }
@@ -822,7 +909,7 @@ AppListGridButton.prototype = {
     }
   },
 
-  handleButtonRelease: function(actor, e){
+  handleButtonRelease: function(actor, e) {
     let button = !e ? 3 : e.get_button();
     if (button === 1) {
       if (this.state.contextMenuIsOpen != null) {
@@ -830,16 +917,15 @@ AppListGridButton.prototype = {
           this.menu._activeMenuItem.activate();
         } else {
           this.activateContextMenus(e, true);
-          this.state.set({contextMenuIsOpen: false});
+          this.state.set({contextMenuIsOpen: null});
         }
         return false;
       }
       this.activate(e);
     } else if (button === 3) {
-      // Prevent the menu from clipping if this button is partially visible.
       if (!this.state.isListView
         && this.buttonState.appType === ApplicationType._applications) {
-        this.toggleActors(true);
+        this.prepareContextMenu();
       }
       this.activateContextMenus(e);
     }
@@ -895,7 +981,7 @@ AppListGridButton.prototype = {
   },
 
   _onStateChanged: function () {
-    if (!this.buttonState.app) {
+    if (!this.buttonState.app || isFinalized(this.dot)) {
       return false;
     }
     if (this.buttonState.appType === ApplicationType._applications) {
@@ -913,31 +999,30 @@ AppListGridButton.prototype = {
       return;
     }
     this.menu.close();
-    this.toggleActors(false);
+    this.clearMarqueeTimer();
+    if (this.state.isListView) this.label.show();
   },
 
-  toggleActors: function(menuOpen) {
+  prepareContextMenu: function() {
     this.clearMarqueeTimer();
-    if (menuOpen) {
-      this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
-      let x = -20, y = 20;
-      if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
-        x = 20;
-      }
-      // Due to changes to St in Cinnamon 3.6, the context menu lost its fixed positioning over other actors in the grid view.
-      // Using anchor_x/y properties restores it without issue on 3.6, but causes the icon positioning to shift to the right
-      // on Cinnamon <= 3.4. Minor workaround here until a better fix is implemented. anchor_x/y is deprecated, but the
-      // pivot_point property doesn't seem to do anything in this situation.
-      if (!this.state.cinnamon36) {
-        this.icon.anchor_x = 0;
-        this.icon.anchor_y = 0;
-      }
-      if (this.state.trigger('isNotInScrollView', this)) {
-        y = Math.round(this.actor.height * 1.9);
-      }
-      this.menu.actor.anchor_x = x;
-      this.menu.actor.anchor_y = y;
+    this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
+    let x = -20, y = 20;
+    if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
+      x = 20;
     }
+    // Due to changes to St in Cinnamon 3.6, the context menu lost its fixed positioning over other actors in the grid view.
+    // Using anchor_x/y properties restores it without issue on 3.6, but causes the icon positioning to shift to the right
+    // on Cinnamon <= 3.4. Minor workaround here until a better fix is implemented. anchor_x/y is deprecated, but the
+    // pivot_point property doesn't seem to do anything in this situation.
+    if (!this.state.cinnamon36) {
+      this.icon.anchor_x = 0;
+      this.icon.anchor_y = 0;
+    }
+    if (this.state.trigger('isNotInScrollView', this)) {
+      y = Math.round(this.actor.height * 1.9);
+    }
+    this.menu.actor.anchor_x = x;
+    this.menu.actor.anchor_y = y;
   },
 
   toggleMenu: function () {
@@ -945,7 +1030,12 @@ AppListGridButton.prototype = {
       return false;
     }
 
-    if (!this.menu.isOpen) {
+    if (this.menu.isOpen) {
+      this.clearMarqueeTimer();
+      // Allow other buttons hover functions to take effect.
+      this.state.set({contextMenuIsOpen: null});
+      if (this.state.isListView) this.label.show();
+    } else {
       for (let i = 0; i < this.contextMenuButtons.length; i++) {
         this.contextMenuButtons[i].destroy();
         this.contextMenuButtons[i] = null;
@@ -963,19 +1053,19 @@ AppListGridButton.prototype = {
       } else {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to favorites'), 'add_to_favorites', 'non-starred'));
       }
-      addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
+      if (canUninstall) {
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
+      }
       if (this.state.isBumblebeeInstalled) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
       }
 
-      // In grid mode we will ensure our menu isn't overlapped by any other actors.
-      if (!this.state.isListView) {
-        this.actor.raise_top();
+      if (this.state.isListView) {
+        this.label.hide();
+      } else {
+        // In grid mode we will ensure our menu isn't overlapped by any other actors.
+        this.actor.get_parent().set_child_above_sibling(this.actor, null);
       }
-    } else {
-      this.toggleActors(false);
-      // Allow other buttons hover functions to take effect.
-      this.state.set({contextMenuIsOpen: false});
     }
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
     return true

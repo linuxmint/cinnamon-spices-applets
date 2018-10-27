@@ -4,14 +4,15 @@
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Simon Claessens <gagalago@gmail.com>, 2011.
 # ecyrbe <ecyrbe@gmail.com>, 2011.
+# Serdar Sağlam <teknomobil@yandex.com>, 2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"POT-Creation-Date: 2018-08-05 12:27-0400\n"
 "PO-Revision-Date: 2012-11-12 01:51+0200\n"
-"Last-Translator: f <fatihmete@live.com>\n"
+"Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Turkish <fatihmete@live.com>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -25,11 +26,11 @@ msgstr "..."
 
 #: applet.js:250
 msgid "Click to open"
-msgstr ""
+msgstr "Açmak için tıklayın"
 
 #: applet.js:289
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: applet.js:555
 msgid "Sunrise"
@@ -53,7 +54,7 @@ msgstr "Yükleniyor ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Yenile"
 
 #: applet.js:740
 msgid "Temperature:"
@@ -89,7 +90,7 @@ msgstr "Kasırga"
 
 #: applet.js:959
 msgid "Severe thunderstorms"
-msgstr "Şiddetli Gökgürültülü"
+msgstr "Şiddetli Gök Gürültülü"
 
 #: applet.js:961
 msgid "Thunderstorms"
@@ -97,23 +98,23 @@ msgstr "Gök Gürültülü"
 
 #: applet.js:963
 msgid "Mixed rain and snow"
-msgstr "Karla karışık yağmur"
+msgstr "Yağmu ve Kar"
 
 #: applet.js:965
 msgid "Mixed rain and sleet"
-msgstr "Sulusepken Yağmur"
+msgstr "Karla Karışık Yağmur"
 
 #: applet.js:967
 msgid "Mixed snow and sleet"
-msgstr "Suluspken kar"
+msgstr "Sulu Kar Kar Yağışı"
 
 #: applet.js:969
 msgid "Freezing drizzle"
-msgstr "Donduran çiseleme"
+msgstr "Donduran Çiseleme"
 
 #: applet.js:971
 msgid "Drizzle"
-msgstr "Çişeleme"
+msgstr "Çiseleme"
 
 #: applet.js:973
 msgid "Freezing rain"
@@ -121,15 +122,15 @@ msgstr "Donduran Yağmur"
 
 #: applet.js:975 applet.js:977
 msgid "Showers"
-msgstr "Kısa süreli yağmur"
+msgstr "Kısa Yağmur"
 
 #: applet.js:979
 msgid "Snow flurries"
-msgstr "Neige"
+msgstr "Kar Yağışı"
 
 #: applet.js:981
 msgid "Light snow showers"
-msgstr "Neige"
+msgstr "Hafif Kar Yağışı"
 
 #: applet.js:983
 msgid "Blowing snow"
@@ -181,11 +182,11 @@ msgstr "Bulutlu"
 
 #: applet.js:1008
 msgid "Mostly cloudy"
-msgstr "Tamamen bulutlu"
+msgstr "Tamamen Bulutlu"
 
 #: applet.js:1011 applet.js:1037
 msgid "Partly cloudy"
-msgstr "Parçalı bulutlu"
+msgstr "Parçalı Bulutlu"
 
 #: applet.js:1013
 msgid "Clear"
@@ -201,7 +202,7 @@ msgstr "Açık"
 
 #: applet.js:1020
 msgid "Mixed rain and hail"
-msgstr "Yağmurla karışık dolu"
+msgstr "Yağmurla Karışık Dolu"
 
 #: applet.js:1022
 msgid "Hot"
@@ -209,19 +210,19 @@ msgstr "Sıcak"
 
 #: applet.js:1024
 msgid "Isolated thunderstorms"
-msgstr "Orageux"
+msgstr "İzole Fırtına"
 
 #: applet.js:1027
 msgid "Scattered thunderstorms"
-msgstr "Seyrek Gökgürültüsü"
+msgstr "Seyrek Gök Gürültüsü"
 
 #: applet.js:1029
 msgid "Scattered showers"
-msgstr "Seyrek yağış"
+msgstr "Seyrek Yağış"
 
 #: applet.js:1031 applet.js:1035
 msgid "Heavy snow"
-msgstr "Ağır kar"
+msgstr "Ağır Kar"
 
 #: applet.js:1033
 msgid "Scattered snow showers"
@@ -229,19 +230,19 @@ msgstr "Seyrek kar sağanağı"
 
 #: applet.js:1039
 msgid "Thundershowers"
-msgstr "Şimşekli ve yağmurlu fırtına"
+msgstr "Şimşekli Yağmurlu Fırtına"
 
 #: applet.js:1041
 msgid "Snow showers"
-msgstr "Sağanak kar"
+msgstr "Sağanak Kar"
 
 #: applet.js:1043
 msgid "Isolated thundershowers"
-msgstr "Orageux"
+msgstr "İzole Gök Gürültüsü"
 
 #: applet.js:1046
 msgid "Not available"
-msgstr "Mevcut değil"
+msgstr "Mevcut Değil"
 
 #: applet.js:1051
 msgid "Monday"
@@ -303,66 +304,81 @@ msgstr "B"
 msgid "NW"
 msgstr "KB"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Ayarlar weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Menüyü çağırmak için kısayol tuşları"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
+msgstr "WOEID'i Al"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
 msgstr ""
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Dikey yönelim"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
-msgstr ""
+msgstr "Mevcut sıcaklığı panelde görüntüle"
 
 #. cinnamon-weather->settings-schema.json->woeid->description
 msgid "WOEID"
-msgstr ""
+msgstr "WOEID"
 
 #. cinnamon-weather->settings-schema.json->woeid->tooltip
 msgid "Where On Earth ID"
-msgstr ""
+msgstr "Şehrinizin Hava Kodu (WOEID'i Al bulabilirsiniz)"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->description
-#, fuzzy
 msgid "Temperature unit"
-msgstr "Sıcaklık :"
+msgstr "Sıcaklık göstergesi"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
-msgstr ""
+msgstr "fahrenhayt"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "celsius"
-msgstr ""
+msgstr "derece"
+
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Yüksek hava sıcaklığını öncelikle göster"
 
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"
-msgstr ""
+msgstr "Durumu tercüme et"
 
 #. cinnamon-weather->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr ""
+msgstr "Konum etiketini geçersiz kıl"
 
 #. cinnamon-weather->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr ""
+msgstr "24 saat biçiminde görüntüle"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Tahmin uzunluğu"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "günler"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr ""
+msgstr "Gün doğumu / gün batımı saatlerini göster "
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr ""
+msgstr "Rüzgar hızı görünümü"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "kph"
@@ -382,11 +398,11 @@ msgstr ""
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
+msgstr "Paneldeki hava durumunu (örnek \"Rüzgarlı\", \"Yağışlı\") gibi panelde göster"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr ""
+msgstr "Atmosferik basınç ünitesi"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
@@ -422,32 +438,20 @@ msgstr ""
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
 msgid "Update interval"
-msgstr ""
+msgstr "Güncelleme aralığı"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->units
 msgid "minutes"
-msgstr ""
+msgstr "dakika"
 
 #. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
-msgstr ""
+msgstr "Sembolik simge"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Yerel hava tahmini görüntüle"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
-
-#~ msgid "Please wait"
-#~ msgstr "Lütfen bekleyiniz"
-
-#~ msgid "Today"
-#~ msgstr "Bugün"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Yarın"
-
-#~ msgid "Schema \"%s\" not found."
-#~ msgstr "\"%s\" şeması bulunamadı."
+msgstr "Hava Durumu"

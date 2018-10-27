@@ -11,8 +11,13 @@ const Clutter = imports.gi.Clutter;
 const Tooltips = imports.ui.tooltips;
 
 const uuid = "hideable-applets@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
+let AppletConstants;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+}
 
 
 
@@ -318,8 +323,8 @@ HoverMenuIcons.prototype={
 
     _append_semicolon: function(css_style){
         css_style = css_style.trim();
-        last_char = css_style.slice(-1);
-        semicolon = ';';
+        let last_char = css_style.slice(-1);
+        let semicolon = ';';
         if (last_char != semicolon) {
             css_style += semicolon;
         }

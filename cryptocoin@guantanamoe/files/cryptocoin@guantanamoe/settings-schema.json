@@ -7,29 +7,32 @@
         "type" : "entry",
         "default" : "USD",
         "description" : "Currency",
-        "indent": true,
-        "tooltip" : "Set the currency you want coin value to be set in. (See more: ISO-4217)"
+        "tooltip" : "Set the currency you want coin value to be set in"
     },
-    "div1" : {
-        "type" : "separator"
+    "ticker" : {
+        "type" : "entry",
+        "default" : "BTC",
+        "description" : "Ticker",
+        "tooltip" : "Set the crypto currency ticker"
     },
-    "tracker-settings" : {
-        "type" : "header",
-        "description" : "Trackers"
-    },
-    "track-bitcoin": {
-        "type" : "switch",
+    "show-ticker-icon" : {
+        "type" : "checkbox",
         "default" : true,
-        "description" : "BTC - Bitcoin"
+        "description" : "Ticker Icon"
     },
-    "track-ethereal": {
-        "type" : "switch",
+    "show-ticker-name" : {
+        "type" : "checkbox",
         "default" : true,
-        "description" : "ETH - Ethereum"
+        "description" : "Ticker Name"
     },
-    "track-ripple": {
-        "type" : "switch",
-        "default" : true,
-        "description" : "XRP - Ripple"
+    "show-currency" : {
+        "type" : "radiogroup",
+        "default" : "symbol",
+        "description" : "Show Currency",
+        "options": {
+            "Name": "name",
+            "Symbol": "symbol",
+            "None": "none"
+        }
     }
 }

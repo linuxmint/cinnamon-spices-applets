@@ -38,7 +38,7 @@
     },
     "restore_hidden_string": {
         "type" : "entry",
-        "default" : "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org",
+        "default" : "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org, keyboard@cinnamon.org",
         "description" : "Restore as hidden",
         "tooltip": "A comma-separated list of applet UUIDs.\nAn applet from this list will be hidden if the applet is configured as hidden and the applet shows up."
     },
@@ -106,7 +106,7 @@
     },
     "show_icon_tooltips" : {
         "type" : "checkbox",
-        "default" : false,
+        "default" : true,
         "description": "Show tooltips",
         "tooltip": "Show icon tooltips in the applet popup"
     },

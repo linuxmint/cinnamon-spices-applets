@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 10:25+0800\n"
+"POT-Creation-Date: 2018-10-15 08:23-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,43 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:43
-msgid "Window Saver"
+#: applet.js:44
+msgid "Dependency missing"
 msgstr ""
 
-#: applet.js:51
+#: applet.js:45
+msgid "package"
+msgstr ""
+
+#: applet.js:47
+msgid "Dependencies missing"
+msgstr ""
+
+#: applet.js:48
+msgid "packages"
+msgstr ""
+
+#: applet.js:52
+msgid "Please install the "
+msgstr ""
+
+#: applet.js:52
+msgid " to use Window Position Saver."
+msgstr ""
+
+#. metadata.json->name
+#: applet.js:90
+msgid "Window Position Saver"
+msgstr ""
+
+#: applet.js:98
 msgid "Save"
 msgstr ""
 
-#: applet.js:59
+#: applet.js:104
 msgid "Restore"
 msgstr ""
 
-#. IcingWindowSaver@json->metadata.json->description
+#. metadata.json->description
 msgid "Window position save and restore utility."
-msgstr ""
-
-#. IcingWindowSaver@json->metadata.json->name
-msgid "Icing Window Saver"
 msgstr ""

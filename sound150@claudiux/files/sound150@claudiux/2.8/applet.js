@@ -264,6 +264,9 @@ VolumeSlider.prototype = {
             muted = true;
         } else {
             muted = false;
+            if (volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
+                volume = this.applet._volumeNominal;
+            }
         }
         this.stream.volume = volume;
         this.stream.push_volume();
@@ -278,8 +281,11 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
 
-        if (value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2)
+        if (value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
             value = 1; // 100% is magnetic
+            this.applet._output.volume = this.applet._volumeNominal;
+            this.applet._output.push_volume()
+        }
 
         let percentage = Math.round(value * 100) + "%";
 
@@ -341,7 +347,14 @@ VolumeSlider.prototype = {
         if(value < 0.005)
             return this.isMic? "microphone-sensitivity-none" : "audio-volume-muted";
 
-        let n = Math.floor(3 * value), icon;
+        // Adaptation with or without colors.
+        // With colors:
+        //  - the interval [0%,100%] (or [0%,max] if max<100%) is divided into 3 subintervals with different icons;
+        //  - colors are used only into the interval [100%,150%].
+        // Without colors:
+        //  - the interval [0%,max] is divided into 3 subintervals with different icons.
+        let _div = this.applet.adaptColor? 1 : this.applet.pcMaxVolume;
+        let n = Math.floor(3 / _div * value), icon;
         if(n < 1)
             icon = "low";
         else if(n < 2)

@@ -14,7 +14,6 @@ const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio; // file monitor
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
-const AppletMeta = imports.ui.appletManager.applets['mybookmarks@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mybookmarks@markbokil.com'].path;
 const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mybookmarks@markbokil.com/mybookmarks.properties']);
 const HelpURL = "http://markbokil.com/downloads/mybookmarks/help.php?appname=mybookmarks&version=" + Version;
@@ -22,11 +21,22 @@ const AboutURL = "http://markbokil.com/downloads/mybookmarks/about.php?appname=m
 const AppIcon = 'mybookmarks.svg';
 
 // external JS library options
-const AppOptions = AppletMeta.config.Options;
-const DebugMode = AppletMeta.config.Options.DebugMode; 
-const OpenFileCmd = AppletMeta.config.Options.OpenFileCmd;
-const OpenFTPCmd = AppletMeta.config.Options.OpenFTPCmd;
-const AppIconType = AppletMeta.config.Options.AppIconType;
+let AppOptions, DebugMode, OpenFileCmd, OpenFTPCmd, AppIconType;
+if (typeof require !== 'undefined') {
+    let config = require('./config');
+    AppOptions = config.Options;
+    DebugMode = config.Options.DebugMode;
+    OpenFileCmd = config.Options.OpenFileCmd;
+    OpenFTPCmd = config.Options.OpenFTPCmd;
+    AppIconType = config.Options.AppIconType;
+} else {
+    const AppletMeta = imports.ui.appletManager.applets['mybookmarks@markbokil.com'];
+    AppOptions = AppletMeta.config.Options;
+    DebugMode = AppletMeta.config.Options.DebugMode;
+    OpenFileCmd = AppletMeta.config.Options.OpenFileCmd;
+    OpenFTPCmd = AppletMeta.config.Options.OpenFTPCmd;
+    AppIconType = AppletMeta.config.Options.AppIconType;
+}
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -45,10 +55,10 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
-        try {   
+
+        try {
             // set app icon svg or symbolic
             this.console(AppletDir + "/" + AppIcon);
             if (AppOptions.AppIconType == "SVG") {
@@ -56,22 +66,22 @@ MyApplet.prototype = {
             } else {
                 this.set_applet_icon_symbolic_name(AppOptions.AppIconType);
             }
-            
+
             this.set_applet_tooltip(_("My Bookmarks"));
-            
+
              // watch props file for changes
             let file = Gio.file_new_for_path(PropertiesFile);
             this._monitor = file.monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect('changed', Lang.bind(this, this._on_file_changed));
-            
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this._orientation = orientation;
             this.menu = new Applet.AppletPopupMenu(this, this._orientation);
-            this.menuManager.addMenu(this.menu);       
-                                                                
+            this.menuManager.addMenu(this.menu);
+
             this._contentSection = new PopupMenu.PopupMenuSection();
-            this.menu.addMenuItem(this._contentSection);                    
- 
+            this.menu.addMenuItem(this._contentSection);
+
             this.createMenu();
             this.createContextMenu();
         }
@@ -80,11 +90,11 @@ MyApplet.prototype = {
         }
     },
 
-    
+
     on_applet_clicked: function(event) {
-        this.menu.toggle();        
+        this.menu.toggle();
     },
-    
+
     _on_file_changed: function() {
         this.doRefresh();
     },
@@ -96,7 +106,7 @@ MyApplet.prototype = {
 
     // build dynamic menu items
     createMenu: function () {
-        let propLines = this.getProperties();  
+        let propLines = this.getProperties();
 
         for (let i = 0; i < propLines.length; i++) {
             let line = propLines[i];
@@ -107,54 +117,54 @@ MyApplet.prototype = {
             if (line.indexOf('---') != -1 || line.indexOf('[MS]') != -1) { // --- is legacy support
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); // draw seperator
                 continue;
-            }  
-                   
+            }
+
             let prop = line.split(/=(.*)/);
             if (prop.length < 2) continue;
-                   
+
             let propName = prop[0].trim(' ');
             let propVal = prop[1].trim(' ');
-            
-            if (propVal.indexOf('ftp://') != -1 || propVal.indexOf('ftps://') != -1) {   
+
+            if (propVal.indexOf('ftp://') != -1 || propVal.indexOf('ftps://') != -1) {
                 propVal = OpenFTPCmd + " " + propVal;
             } else {
                 propVal = OpenFileCmd + " " + propVal;
             }
-            
+
             if (propVal.indexOf('[EE]') != -1) { // ?
                 propVal = "xdg-open http://markbokil.com/downloads/mylauncher/mycat.jpg";
-            }        
-                    
+            }
+
             this.console(propName + ", " + propVal); //debug
             this.menu.addAction(_(propName), function(event) {
-                Util.spawnCommandLine(propVal);      
+                Util.spawnCommandLine(propVal);
             });
         }
     },
-   
- 
+
+
     createContextMenu: function () {
         // reload
-        //this.refresh_menu_item = new Applet.MenuItem(_('Reload'), Gtk.STOCK_REFRESH, 
-           // Lang.bind(this, this.doRefresh));     
-       // this._applet_context_menu.addMenuItem(this.refresh_menu_item); 
-        //edit 
-        this.edit_menu_item = new Applet.MenuItem(_("Edit bookmarks menu"), Gtk.STOCK_EDIT, 
-            Lang.bind(this, this.editProperties));     
+        //this.refresh_menu_item = new Applet.MenuItem(_('Reload'), Gtk.STOCK_REFRESH,
+           // Lang.bind(this, this.doRefresh));
+       // this._applet_context_menu.addMenuItem(this.refresh_menu_item);
+        //edit
+        this.edit_menu_item = new Applet.MenuItem(_("Edit bookmarks menu"), Gtk.STOCK_EDIT,
+            Lang.bind(this, this.editProperties));
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
-        
+
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
-          
+
         //help
-        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, 
-            Lang.bind(this, this.doHelp));     
+        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP,
+            Lang.bind(this, this.doHelp));
         this._applet_context_menu.addMenuItem(this.help_menu_item);
         //about
-        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT, 
-            Lang.bind(this, this.doAbout));     
-        this._applet_context_menu.addMenuItem(this.about_menu_item);  
+        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT,
+            Lang.bind(this, this.doAbout));
+        this._applet_context_menu.addMenuItem(this.about_menu_item);
     },
-    
+
     getProperties: function () {
         let prop = Cinnamon.get_file_contents_utf8_sync(PropertiesFile);
         let lines = prop.split('\n');
@@ -165,16 +175,16 @@ MyApplet.prototype = {
     editProperties: function () {
         Main.Util.spawnCommandLine(OpenFileCmd + " " + PropertiesFile);
     },
-        
+
     doRefresh: function () {
         this.menu.removeAll();
         this.createMenu();
     },
-    
+
     doHelp: function () {
         Main.Util.spawnCommandLine(OpenFileCmd + " " + HelpURL);
     },
-    
+
     doAbout: function () {
         Main.Util.spawnCommandLine(OpenFileCmd + " " + AboutURL);
     },
@@ -186,8 +196,8 @@ MyApplet.prototype = {
     }
 }
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    
-    return myApplet;      
+
+    return myApplet;
 }

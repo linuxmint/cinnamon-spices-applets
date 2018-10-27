@@ -1,5 +1,55 @@
 Changelog
 
+### 6.3.11
+
+  * Fixed an issue with the applet not initializing when an open app can't be resolved by wm_class.
+
+### 6.3.10
+
+  * Fixed an issue with pinned applications becoming ordered incorrectly when uninstalled applications are present.
+  * Corrected a warning occurring during context menu initialization.
+
+### 6.3.9
+
+  * Fixed scaling of thumbnails when removing windows.
+  * Updated readme.
+
+### 6.3.8
+
+  * Fixed inability to see hover previews when thumbnails are disabled.
+  * Addressed an issue affecting apps that defer passing window metadata to Muffin, such as Spotify.
+
+### 6.3.7
+
+  * Addressed an issue with the focus pseudo class styling reverting on hover.
+  * Made the Mint X theme preset the default.
+
+### 6.3.4
+
+  * Fixed the window title label not switching to a window when it sets the urgent hint. Windows that set themselves as urgent will be the next window to be focused when their app button is clicked.
+  * Made the default launcher animation none, since apps seems to launch a bit faster with the effect disabled.
+  * Fixed shortcut creation.
+  * Forked the current tree into a version compatible with only Cinnamon 3.8. Bug fixes will continue for Cinnamon 3.4-3.6 users until Mint 19 is released.
+
+### 6.3.3
+
+  * Fixed thumbnail key navigation.
+  * Fixed LibreOffice apps being grouped incorrectly.
+
+### 6.3.2
+
+  * Fixed a DND regression from 6.1.0.
+
+### 6.3.1
+
+  * Fixed an issue that could impact users of Cinnamon on CJS 3.2.
+
+### 6.3.0
+
+  * Fixed an issue with hovering over the thumbnail close button causing the window preview to flicker.
+  * Addressed an issue with JavaEmbeddedFrame appearing in the window list.
+  * Added launcher animation effect options.
+
 ### 6.2.2
 
   * Fixed focused window indication not being preserved when hovering over a button, and focused window indication being added when no windows are focused in some theme cofigurations.

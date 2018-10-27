@@ -171,7 +171,7 @@ ApplicationContextMenuItem.prototype = {
                 this._appButton.toggleMenu();
                 break;
             } case "uninstall": {
-                Util.spawnCommandLine("gksu -m '" + _("Please provide your password to uninstall this application") + "' /usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
+                Util.spawnCommandLine("/usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
                 this._appButton.appsMenuButton.menu.close();
                 break;
             } case "run_with_nvidia_gpu": {
@@ -1031,7 +1031,6 @@ FavoritesButton.prototype = {
         let icon_size = iconSize; //0.6*real_size;
         if (icon_size > MAX_FAV_ICON_SIZE)
             icon_size = MAX_FAV_ICON_SIZE;
-        this.actor.style = "padding-top: "+(icon_size / 3)+"px;padding-bottom: "+(icon_size / 3)+"px;";
 
         this.actor.add_style_class_name('menu-favorites-button');
 
@@ -1080,61 +1079,17 @@ function AppPopupSubMenuMenuItem() {
 AppPopupSubMenuMenuItem.prototype = {
     __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
-    _init: function(text, hide_expander) {
+    _init: function(text) {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
 
         this.actor.add_style_class_name('popup-submenu-menu-item');
 
-        let table = new St.Table({
-            homogeneous: false,
-            reactive: true
+        this.label = new St.Label({
+            text: text
         });
-
-        if (!hide_expander) {
-            this._triangle = new St.Icon({
-                icon_name: "media-playback-start",
-                icon_type: St.IconType.SYMBOLIC,
-                style_class: 'popup-menu-icon'
-            });
-
-            table.add(this._triangle, {
-                row: 0,
-                col: 0,
-                col_span: 1,
-                x_expand: false,
-                x_align: St.Align.START
-            });
-
-            this.label = new St.Label({
-                text: text
-            });
-            this.label.set_margin_left(6.0);
-            table.add(this.label, {
-                row: 0,
-                col: 1,
-                col_span: 1,
-                x_align: St.Align.START
-            });
-        }
-        else {
-            this.label = new St.Label({
-                text: text
-            });
-            table.add(this.label, {
-                row: 0,
-                col: 0,
-                col_span: 1,
-                x_align: St.Align.START
-            });
-        }
         this.actor.label_actor = this.label;
-        this.addActor(table, {
-            expand: true,
-            span: 1,
-            align: St.Align.START
-        });
 
-        this.menu = new PopupMenu.PopupSubMenu(this.actor, this._triangle);
+        this.menu = new PopupMenu.PopupSubMenu(this.actor, null);
         this.menu.connect('open-state-changed', Lang.bind(this, this._subMenuOpenStateChanged));
     },
 
@@ -1179,9 +1134,6 @@ TextBoxItem.prototype = {
         this.actor.connect('leave-event', Lang.bind(this, this._onLeaveEvent));
         //this.removeActor(this.label);
         this.label.destroy();
-        //this.removeActor(this._triangle);
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label_text = label;
 
         if(this.label_text == "") {
@@ -1326,8 +1278,6 @@ AllProgramsItem.prototype = {
         });
         this.parent = parent;
         this.label.destroy();
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label = new St.Label({ text: label, style: "padding-left: 20px" });
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -1375,8 +1325,6 @@ ResultsFoundItem.prototype = {
         });
         this.parent = parent;
         this.label.destroy();
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.label = new St.Label({ text: label, style: "padding-left: 5px" });
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
@@ -1615,9 +1563,6 @@ ShutdownMenu.prototype = {
         this.actor.add_style_class_name('starkmenu-arrow-dropdown-button');
         //this.removeActor(this.label);
         this.label.destroy();
-        //this.removeActor(this._triangle);
-        this._triangle.destroy();
-        this._triangle = new St.Label();
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
             icon_type: St.IconType.FULLCOLOR,
@@ -1781,17 +1726,8 @@ RightButtonsBox.prototype = {
             if (this.menu.quicklinks[i] != ',Dr Who,' && this.menu.quicklinks[i] != ',,') {
                 let split = this.menu.quicklinks[i].split(',');
                 if (split[0] == 'separator') {
-                    this.separator = new PopupMenu.PopupSeparatorMenuItem();
-
-                    if (this.menu.quicklauncherLayout == 'labels') {
-                        this.separator.actor.set_style("padding: 0em 1.0em; min-width: 1px;");
-                    } else if (this.menu.quicklauncherLayout == 'both') {
-                        this.separator.actor.set_style("padding: 0em 2.25em; min-width: 1px;");
-                    } else {
-                        this.separator.actor.set_style("padding: 0em 1em; min-width: 1px;");
-                    }
-
-                    this.itemsBox.add_actor(this.separator.actor);
+                    let separator = new PopupMenu.PopupSeparatorMenuItem();
+                    this.itemsBox.add_actor(separator.actor);
                 }
                 else {
                     let split = this.menu.quicklinks[i].split(',');
@@ -3990,7 +3926,6 @@ MyApplet.prototype = {
         this.favsBox.add(this.favoritesBox, { y_align: St.Align.END, y_fill: false });
 
         this.separator = new PopupMenu.PopupSeparatorMenuItem();
-        this.separator.actor.set_style("padding: 0em 1em;");
 
         this.appsButton = new AllProgramsItem("", "go-next", this);
         this.resultsFoundButton = new ResultsFoundItem("5 results found", "edit-find", this, false);

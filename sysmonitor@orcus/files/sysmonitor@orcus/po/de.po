@@ -1,0 +1,222 @@
+# German translation of Cinnamon applet sysmonitor@orcus
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-30 20:10+0200\n"
+"PO-Revision-Date: 2018-02-23 17:20+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: swingnjazz <a.p@posteo.net>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de\n"
+
+#: providers.js:46
+msgid "CPU:"
+msgstr "CPU:"
+
+#: providers.js:68 providers.js:94
+msgid " MB"
+msgstr " MB"
+
+#: providers.js:73
+msgid "Memory:"
+msgstr "Arbeitsspeicher:"
+
+#: providers.js:99
+msgid "Swap:"
+msgstr "Swap:"
+
+#: providers.js:135
+msgid " KB/s"
+msgstr " KB/s"
+
+#: providers.js:140
+msgid "Network D/U:"
+msgstr "Netzwerk D/U:"
+
+#: providers.js:179
+msgid "Load average:"
+msgstr "Durchschnittliche Last:"
+
+#. sysmonitor@orcus->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Rahmen anzeigen"
+
+#. sysmonitor@orcus->settings-
+#. schema.json->mem_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->load_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->swap_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->net_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->cpu_override_graph_width->description
+msgid "Override graph width"
+msgstr "Breite der Anzeige anpassen"
+
+#. sysmonitor@orcus->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Geglättete Anzeige"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->description
+msgid "Graph width"
+msgstr "Breite der Anzeige"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->graph_width->units
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
+msgid "pixels"
+msgstr "Pixel"
+
+#. sysmonitor@orcus->settings-schema.json->load_enabled->description
+#. sysmonitor@orcus->settings-schema.json->mem_enabled->description
+#. sysmonitor@orcus->settings-schema.json->swap_enabled->description
+#. sysmonitor@orcus->settings-schema.json->cpu_enabled->description
+#. sysmonitor@orcus->settings-schema.json->net_enabled->description
+msgid "Enable"
+msgstr "Aktivieren"
+
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Linker/rechter Abstand"
+
+#. sysmonitor@orcus->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Auf Klick zu startendes Programm"
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Benutzerdefinierten Abstand des Applets verwenden"
+
+#. sysmonitor@orcus->settings-schema.json->load->title
+msgid "Load"
+msgstr "Systemlast"
+
+#. sysmonitor@orcus->settings-schema.json->swap_c->title
+#. sysmonitor@orcus->settings-schema.json->cpu_c->title
+#. sysmonitor@orcus->settings-schema.json->load_c->title
+#. sysmonitor@orcus->settings-schema.json->net_c->title
+#. sysmonitor@orcus->settings-schema.json->common_c->title
+#. sysmonitor@orcus->settings-schema.json->mem_c->title
+msgid "Colors"
+msgstr "Farben"
+
+#. sysmonitor@orcus->settings-schema.json->swap_g->title
+#. sysmonitor@orcus->settings-schema.json->cpu_g->title
+#. sysmonitor@orcus->settings-schema.json->load_g->title
+#. sysmonitor@orcus->settings-schema.json->mem_g->title
+#. sysmonitor@orcus->settings-schema.json->common_g->title
+#. sysmonitor@orcus->settings-schema.json->net_g->title
+msgid "General"
+msgstr "Allgemein"
+
+#. sysmonitor@orcus->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "Arbeitsspeicher"
+
+#. sysmonitor@orcus->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. sysmonitor@orcus->settings-schema.json->common->title
+msgid "Common"
+msgstr "Gemeinsam"
+
+#. sysmonitor@orcus->settings-schema.json->net->title
+msgid "Network"
+msgstr "Netzwerk"
+
+#. sysmonitor@orcus->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "Swap"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Wiederholungsrate"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. sysmonitor@orcus->settings-schema.json->swap_color_0->description
+#. sysmonitor@orcus->settings-schema.json->mem_color_0->description
+msgid "Used color"
+msgstr "Farbe Used"
+
+#. sysmonitor@orcus->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Farbe"
+
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Abstand Oben/Unten"
+
+#. sysmonitor@orcus->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Rahmenfarbe"
+
+#. sysmonitor@orcus->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Hintergrundfarbe"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Farbe User"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Farbe Nice"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Farbe Kernel"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "Farbe IOWait"
+
+#. sysmonitor@orcus->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Farbe Cached"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Standardbreite der Anzeige"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
+msgid "If the applet is in a vertical panel, this sets the graph height. The graph width is then the panel width minus padding"
+msgstr "Wenn das Applet in einer vertikalen Leiste liegt, bestimmt dies die Höhe der Anzeige. Die Breite der Anzeige ergibt sich dann aus Leistenbreite minus Abstand"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Farbe Upload"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Farbe Download"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr "Zeigt CPU-, Arbeitsspeicher-, Swap- und Netzwerkauslastung grafisch an"
+
+#. sysmonitor@orcus->metadata.json->name
+msgid "System Monitor"
+msgstr "Systemüberwachung"

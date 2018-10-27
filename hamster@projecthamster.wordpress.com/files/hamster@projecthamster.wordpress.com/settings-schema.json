@@ -1,0 +1,21 @@
+{
+  "head" : {
+    "type" : "header",
+    "description" : "Settings"
+  },
+  "panel-appearance" : {
+    "type": "radiogroup",
+    "default" : 0,
+    "description" : "Appearance in the panel",
+    "options" : {
+        "Label only" : 0,
+        "Icon only" : 1,
+        "Label and icon" : 2
+    }
+  },
+  "show-hamster-dropdown" : {
+    "type" : "keybinding",
+    "description" : "Shortcut to show the menu",
+    "default" : "<Super>h"
+  }
+}

@@ -35,8 +35,13 @@ const Signals = imports.signals;
 const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
-const AppletDir = imports.ui.appletManager.applets['cpufreq@mtwebster'];
-const PanelMenu = AppletDir.panelMenu;
+let PanelMenu;
+if (typeof require !== 'undefined') {
+    PanelMenu = require('./panelMenu');
+} else {
+    const AppletDir = imports.ui.appletManager.applets['cpufreq@mtwebster'];
+    PanelMenu = AppletDir.panelMenu;
+}
 
 let start = GLib.get_monotonic_time();
 
@@ -62,7 +67,7 @@ let cpus_to_monitor = DEFAULT_CPUS;
 let text_color = '#FFFF80';
 let low_color = '#00FF00'; // green
 let mid_color = '#FFFF00'; // yellow
-let hi_color = '#FF0000'; // 
+let hi_color = '#FF0000'; //
 
 const cpu_path = '/sys/devices/system/cpu/';
 const cpu_dir = Gio.file_new_for_path(cpu_path);
@@ -520,7 +525,7 @@ MyApplet.prototype = {
             mid_color = this.med_color;
             hi_color = this.high_color;
 
-            if (atomic)
+            if (atomic || !this.myactor)
                 return;
             atomic = true; // hackity hack - make sure only one rebuild is happening at a time,
             try { //                         else we get lots more from setting changes

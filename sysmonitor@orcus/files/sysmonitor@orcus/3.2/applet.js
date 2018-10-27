@@ -27,11 +27,20 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 
-const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
-const _ = AppletDir.__init__._;
-const GTop = AppletDir.__init__.GTop;
-const Graph = AppletDir.graph.Graph;
-const Providers = AppletDir.providers;
+let _, GTop, Graph, Providers;
+if (typeof require !== 'undefined') {
+    Graph = require('./graph').Graph;
+    Providers = require('./providers');
+    let init = require('./init');
+    _ = init._;
+    GTop = init.GTop;
+} else {
+    const AppletDir = imports.ui.appletManager.applets['sysmonitor@orcus'];
+    _ = AppletDir.init._;
+    GTop = AppletDir.init.GTop;
+    Graph = AppletDir.graph.Graph;
+    Providers = AppletDir.providers;
+}
 
 function colorToArray(c) {
     c = c.match(/\((.*)\)/)[1].split(",").map(Number);
@@ -97,6 +106,7 @@ MyApplet.prototype = {
                 ["cpu_enabled", this.on_cfg_changed_graph_enabled, 0],
                 ["cpu_override_graph_width", this.on_cfg_changed_graph_width, 0],
                 ["cpu_graph_width", this.on_cfg_changed_graph_width, 0],
+                ["cpu_tooltip_decimals", this.on_cfg_changed_tooltip_decimals, 0],
                 ["cpu_color_0", this.on_cfg_changed_color, 0],
                 ["cpu_color_1", this.on_cfg_changed_color, 0],
                 ["cpu_color_2", this.on_cfg_changed_color, 0],
@@ -172,6 +182,9 @@ MyApplet.prototype = {
         graph.setDrawBorder(this.cfg_draw_border);
         graph.bg_color = this.bg_color;
         graph.border_color = this.border_color;
+        let tooltip_decimals = this.getGraphTooltipDecimals(graph_idx);
+        if (typeof tooltip_decimals !== "undefined")
+            provider.setTextDecimals(tooltip_decimals);
         
         return graph;
     },
@@ -225,6 +238,13 @@ MyApplet.prototype = {
                 break;
         }
         return c;
+    },
+
+    getGraphTooltipDecimals: function(graph_idx) {
+        let graph_id = this.graph_ids[graph_idx];
+        let prop = "cfg_" + graph_id + "_tooltip_decimals";
+        if (this.hasOwnProperty(prop))
+            return this[prop];
     },
     
     //Cinnamon callbacks
@@ -346,6 +366,21 @@ MyApplet.prototype = {
             for (let i = 0; i < this.graphs.length; i++)
                 if (this.graphs[i])
                     this.graphs[i].setWidth(this.getGraphWidth(i), this.vertical);
+    },
+
+    on_cfg_changed_tooltip_decimals: function(decimals, graph_idx) {
+        if (graph_idx) {
+            let provider = this.graphs[graph_idx].provider;
+            if ("setTextDecimals" in provider)
+                provider.setTextDecimals(this.getGraphTooltipDecimals(graph_idx));
+        }
+        else
+            for (let i = 0; i < this.graphs.length; i++)
+                if (this.graphs[i]) {
+                    let provider = this.graphs[i].provider;
+                    if ("setTextDecimals" in provider)
+                        provider.setTextDecimals(this.getGraphTooltipDecimals(i));
+                }
     },
 
     on_cfg_changed_color: function(width, graph_idx) {

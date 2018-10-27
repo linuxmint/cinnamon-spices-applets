@@ -30,4 +30,4 @@ const fuzzyOptions = {
   after: '</u></b>'
 }
 
-const gridWidths = [0, 0, 0, 625, 700, 725, 900, 1025];
+const gridWidths = [0, 240, 340, 498, 644, 725, 840, 980];

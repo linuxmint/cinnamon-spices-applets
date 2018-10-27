@@ -13,6 +13,7 @@ const APPLET_DIR = imports.ui.appletManager.appletMeta[EXTENSION_UUID].path;
 const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const Lang = imports.lang;
+const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
@@ -20,8 +21,13 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
-const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
-const Calendar = AppletDir.calendar;
+let Calendar;
+if (typeof require !== 'undefined') {
+    Calendar = require('./calendar');
+} else {
+    const AppletDir = imports.ui.appletManager.applets[EXTENSION_UUID];
+    Calendar = AppletDir.calendar;
+}
 const GLib = imports.gi.GLib;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
@@ -118,9 +124,9 @@ MyApplet.prototype = {
                     this._worldclocks[i][1] = GLib.TimeZone.new(this._worldclocks[i][1]);
 
                     let tz = new St.BoxLayout({vertical: false});
-                    let tz_label = new St.Label({ style_class: "datemenu-date-label", text: _(this._worldclocks[i][0]) });
+                    let tz_label = new St.Label({ style_class: "calendar", text: _(this._worldclocks[i][0]) });
                     tz.add(tz_label, {x_align: St.Align.START, expand: true, x_fill: false});
-                    this._worldclock_labels[i] = new St.Label({ style_class: "datemenu-date-label" });
+                    this._worldclock_labels[i] = new St.Label({ style_class: "calendar" });
                     tz.add(this._worldclock_labels[i], {x_align: St.Align.END, expand: true, x_fill: false});
                     this._worldclocks_box.add(tz);
                 }
@@ -133,6 +139,8 @@ MyApplet.prototype = {
 
             this.settings.bindProperty(Settings.BindingDirection.IN, "use-custom-format", "use_custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+            Main.keybindingManager.addHotKey(EXTENSION_UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
             // Track changes to world-clock settings
             this.settings.bindProperty(Settings.BindingDirection.IN, "worldclocks", "worldclocks", addWorldClocks, null);
@@ -158,7 +166,14 @@ MyApplet.prototype = {
         }
     },
 
-    on_applet_clicked: function(event) {
+    _onKeySettingsUpdated: function() {
+        if (this.keybinding != null)
+            Main.keybindingManager.addHotKey(EXTENSION_UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+
+        this.on_applet_clicked;
+    },
+
+    on_applet_clicked: function() {
         this.menu.toggle();
     },
 

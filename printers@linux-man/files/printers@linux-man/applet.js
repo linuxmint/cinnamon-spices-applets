@@ -4,6 +4,7 @@ const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
+const Config = imports.misc.config;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
@@ -55,10 +56,22 @@ MyApplet.prototype = {
     this.printError = false;
     this.printWarning = false;
     this.updating = false;
-    this.outdated = false;
     this.printers = [];
     this.setIcon('printer-printing');
     this.onSettingsChanged();
+    let cinnamonVersion = Config.PACKAGE_VERSION.split('.');
+    let majorVersion = parseInt(cinnamonVersion[0]);
+    let minorVersion = parseInt(cinnamonVersion[1]);
+    this.pkexec = majorVersion > 3 || (majorVersion == 3 && minorVersion > 7);
+  },
+
+  on_reload_button: function() {
+    Util.spawnCommandLine("dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'printers@linux-man' string:'APPLET'");
+  },
+
+  on_cups_button: function() {
+    if(this.pkexec) Util.spawnCommandLine("sh -c 'pkexec systemctl restart cups.service'");
+    else Util.spawnCommandLine("gksudo 'systemctl restart cups.service'");
   },
 
   on_applet_clicked: function() {
@@ -87,7 +100,7 @@ MyApplet.prototype = {
   },
 
   onMenuToggled: function() {
-    if(!this.menu.isOpen && this.outdated && !this.printWarning) this.update();
+    if(!this.printWarning) this.update();
   },
 
   onSettingsChanged: function() {
@@ -119,13 +132,8 @@ MyApplet.prototype = {
   },
 
   update: function() {
-    if(this.updating) return;
-    if(this.menu.isOpen) {
-      this.outdated = true;
-      return;
-    }
+    if(this.updating || this.menu.isOpen) return;
     this.updating = true;
-    this.outdated = false;
     this.jobsCount = 0;
     this.printersCount = 0;
     this.menu.removeAll();

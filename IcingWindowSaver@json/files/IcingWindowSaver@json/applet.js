@@ -1,86 +1,135 @@
-'use strict';
-const Gettext = imports.gettext;
-const UUID = "IcingWindowSaver@json";
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
+const St = imports.gi.St;
+const Gettext = imports.gettext;
+const Applet = imports.ui.applet;
+const PopupMenu = imports.ui.popupMenu;
+const Util = imports.misc.util;
+const Main = imports.ui.main;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+const UUID = 'IcingWindowSaver@json';
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-var Applet = imports.ui.applet;
-var St = imports.gi.St;
-var PopupMenu = imports.ui.popupMenu;
-var Util = imports.misc.util;
-var Main = imports.ui.main;
+const appletPath = '~/.local/share/cinnamon/applets/IcingWindowSaver@json/';
 
-var appletPath = '~/.local/share/cinnamon/applets/IcingWindowSaver@json/';
+const exec = function(command, cb) {
+  let subprocess = new Gio.Subprocess({
+    argv: ['bash', '-c', command],
+    flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_MERGE,
+  });
+  subprocess.init(null);
+  subprocess.communicate_utf8_async(null, null, (obj, res) => {
+    let [success, out] = obj.communicate_utf8_finish(res);
+    if (typeof cb === 'function') {
+      cb(success, out);
+    }
+  });
+};
 
-var MyApplet = function MyApplet(metadata, orientation, panel_height, instance_id) {
+const notifyDependencies = function(missing) {
+  let icon = new St.Icon({
+    icon_type: St.IconType.FULLCOLOR,
+    icon_size: 24 * global.ui_scale,
+    gicon: new Gio.FileIcon({
+      file: Gio.file_new_for_path(
+        GLib.get_home_dir() + '/.local/share/cinnamon/applets/' + UUID + '/icon.png'
+      )
+    })
+  });
+  let header = _('Dependency missing');
+  let pkg = _('package');
+  if (missing.length > 1) {
+    header = _('Dependencies missing');
+    pkg = _('packages');
+  }
+  Main.criticalNotify(
+    header,
+    _('Please install the ') + missing.join(', ') + ' ' + pkg + _(' to use Window Position Saver.'),
+    icon
+  );
+}
+
+const checkDependencies = function(cb) {
+  let missing = [];
+  exec('which wmctrl', (success, stdout) => {
+    if (!stdout) missing.push('wmctrl');
+    exec('which xwininfo', (success, stdout) => {
+      if (!stdout) missing.push('xwininfo');
+      cb(missing)
+    });
+  });
+}
+
+const WindowSaverApplet = function(metadata, orientation, panel_height, instance_id) {
   this._init(metadata, orientation, panel_height, instance_id);
 };
 
-MyApplet.prototype = {
+WindowSaverApplet.prototype = {
   __proto__: Applet.IconApplet.prototype,
 
-  _init: function _init(metadata, orientation, panelHeight, instance_id) {
-    var _this = this;
-
+  _init: function(metadata, orientation, panelHeight, instance_id) {
     Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
 
-    this.orientation = orientation;
+    checkDependencies((missing) => {
+      if (missing.length > 0) {
+        notifyDependencies(missing);
+        this.set_applet_icon_path(metadata.path + '/icon.png');
+        this.set_applet_tooltip(metadata.description);
+        return;
+      }
+      this.orientation = orientation;
 
-    this.c32 = true;
-
-    try {
       this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-    } catch (e) {
-      this.c32 = null;
-    }
 
-    this.set_applet_icon_symbolic_name('video-display');
-    this.set_applet_tooltip(_("Window Saver"));
+      this.set_applet_icon_symbolic_name('view-restore');
+      this.set_applet_tooltip(_('Window Position Saver'));
 
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
-    this.menuManager.addMenu(this.menu);
-    this._contentSection = new PopupMenu.PopupMenuSection();
-    this.menu.addMenuItem(this._contentSection);
+      this.menuManager = new PopupMenu.PopupMenuManager(this);
+      this.menu = new Applet.AppletPopupMenu(this, orientation);
+      this.menuManager.addMenu(this.menu);
+      this._contentSection = new PopupMenu.PopupMenuSection();
+      this.menu.addMenuItem(this._contentSection);
 
-    var item = new PopupMenu.PopupIconMenuItem(_("Save"), 'media-floppy', St.IconType.SYMBOLIC);
-    item.connect('activate', function () {
-      _this._saveWindows();
-    });
-    this.menu.addMenuItem(item);
+      var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
+      item.connect('activate', () => {
+        this.saveWindows();
+      });
+      this.menu.addMenuItem(item);
 
-    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+      item = new PopupMenu.PopupIconMenuItem(_('Restore'), 'view-restore', St.IconType.SYMBOLIC);
+      item.connect('activate', () => {
+        this.restoreWindows();
+      });
+      this.menu.addMenuItem(item);
 
-    item = new PopupMenu.PopupIconMenuItem(_("Restore"), 'view-restore', St.IconType.SYMBOLIC);
-    item.connect('activate', function () {
-      _this._restoreWindows();
-    });
-    this.menu.addMenuItem(item);
-
-    Main.keybindingManager.addHotKey('save-windows-positions', '<Shift><Ctrl>S', function () {
-      return _this._saveWindows();
-    });
-    Main.keybindingManager.addHotKey('restore-windows-positions', '<Shift><Ctrl>R', function () {
-      return _this._restoreWindows();
+      Main.keybindingManager.addHotKey('save-windows-positions', '<Shift><Ctrl>S', () => {
+        this.saveWindows();
+      });
+      Main.keybindingManager.addHotKey('restore-windows-positions', '<Shift><Ctrl>R', () => {
+        this.restoreWindows();
+      });
     });
   },
-  _saveWindows: function _saveWindows() {
-    Util.trySpawnCommandLine('bash -c "' + appletPath + 'savewindows.sh"');
+
+  saveWindows: function() {
+    Util.trySpawnCommandLine(`bash -c '${appletPath}savewindows.sh'`);
   },
-  _restoreWindows: function _restoreWindows() {
-    Util.trySpawnCommandLine('bash -c "' + appletPath + 'restorewindows.sh"');
+
+  restoreWindows: function() {
+    Util.trySpawnCommandLine(`bash -c '${appletPath}restorewindows.sh'`);
   },
-  on_applet_clicked: function on_applet_clicked(event) {
+
+  on_applet_clicked: function(event) {
+    if (!this.menu) return;
     this.menu.toggle();
   }
 };
 
-var main = function main(metadata, orientation, panel_height, instance_id) {
-  var myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
-  return myApplet;
+const main = function main(metadata, orientation, panel_height, instance_id) {
+  return new WindowSaverApplet(metadata, orientation, panel_height, instance_id);
 };

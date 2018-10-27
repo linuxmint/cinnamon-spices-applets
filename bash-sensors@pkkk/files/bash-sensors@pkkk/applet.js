@@ -15,8 +15,8 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(metadata, orientation) {
-    this._init(metadata, orientation);
+function MyApplet(metadata, orientation, panelHeight, instance_id) {
+    this._init(metadata, orientation, panelHeight, instance_id);
 };
 
 MyApplet.prototype = {
@@ -25,8 +25,7 @@ MyApplet.prototype = {
     _init: function (metadata, orientation, panelHeight, instance_id) {
         Applet.TextApplet.prototype._init.call(this, orientation);
         this.path = metadata.path;
-        this.set_applet_tooltip(_("Bash Sensors!"));
-        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -35,7 +34,7 @@ MyApplet.prototype = {
         this.menuLabel = new St.Label({text: '<init>'});
 
         this.bind_settings();
-        this.update();
+        this.autoupdate();
 
         item.addActor(this.menuLabel);
         section.addMenuItem(item);
@@ -54,16 +53,31 @@ MyApplet.prototype = {
 
     on_applet_clicked: function (event) {
         if (!this.menu.isOpen) {
+            if(this.menu.setCustomStyleClass) {
+                this.menu.setCustomStyleClass("click");
+            }
+            else if(this.menu.actor.add_style_class_name) {
+                this.menu.actor.add_style_class_name("click");
+            }
             let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
             let cmd_output = this.spawn_sync(cmd);
             let cmd_stdout = cmd_output[0] ? cmd_output[1].toString() : _("script error");
-            this.menuLabel.set_text(cmd_stdout);
+            this.menuLabel.set_text(cmd_stdout.trimRight());
         }
 
+        this.update();
         this.menu.toggle();
     },
-
     update: function () {
+        if (this.dynamicTooltip) {
+            let cmd = (this.tooltipScript && this.tooltipScript.trim()) ? this.tooltipScript : this.script1;
+            let cmd_output = this.spawn_sync(cmd);
+            let cmd_stdout = cmd_output[0] ? cmd_output[1].toString() : _("script error");
+            this.set_applet_tooltip(cmd_stdout.trim());
+        } else {
+            this.set_applet_tooltip(this.tooltipScript.trim());
+        }
+
         let full = '';
         let scripts = this.script2 && this.script2.trim() && this.enableScript2 ?
             [this.script1, this.script2] : [this.script1];
@@ -78,11 +92,17 @@ MyApplet.prototype = {
             full += cmd_stdout + '\n';
         }
         this.set_applet_label(full.trimRight());
-        Mainloop.timeout_add(this.refreshInterval * 1000, Lang.bind(this, this.update));
+    },
+
+    autoupdate: function () {
+        this.update();
+        if (this.refreshInterval) {
+            Mainloop.timeout_add(this.refreshInterval * 1000, Lang.bind(this, this.autoupdate));
+        }
     },
 
     bind_settings: function () {
-        for (let str of ["refreshInterval", "script1", "script2", "enableScript2", "menuScript"]) {
+        for (let str of ["refreshInterval", "script1", "script2", "tooltipScript", "enableScript2", "dynamicTooltip", "menuScript"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,
@@ -92,7 +112,7 @@ MyApplet.prototype = {
     }
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(metadata, orientation);
+function main(metadata, orientation, panelHeight, instance_id) {
+    let myApplet = new MyApplet(metadata, orientation, panelHeight, instance_id);
     return myApplet;
 }

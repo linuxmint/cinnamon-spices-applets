@@ -36,5 +36,4 @@ To customize the voice command:
 2. In the "Configuration" section customize the voice command
 
 ## Source code
-Browse the source of the applet in the [original repository](https://github.com/cardsurf/text-to-speech-applet).  
-Browse the source of the applet in the [Linux Mint Cinnamon applets repository](https://github.com/linuxmint/cinnamon-spices-applets/tree/master/text-to-speech-applet%40cardsurf).
+Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/text-to-speech-applet).

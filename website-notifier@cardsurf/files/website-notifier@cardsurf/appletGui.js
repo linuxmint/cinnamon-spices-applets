@@ -9,9 +9,15 @@ const Applet = imports.ui.applet;
 const Cairo = imports.cairo;
 
 const uuid = "website-notifier@cardsurf";
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
-const CssStylization = AppletDirectory.cssStylization;
+let AppletConstants, CssStylization;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+    CssStylization = require('./cssStylization');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+    CssStylization = AppletDirectory.cssStylization;
+}
 
 
 
@@ -133,8 +139,8 @@ AppletMenuNotification.prototype={
 
     _append_semicolon: function(css_style){
         css_style = css_style.trim();
-        last_char = css_style.slice(-1);
-        semicolon = ';';
+        let last_char = css_style.slice(-1);
+        let semicolon = ';';
         if (last_char != semicolon) {
             css_style += semicolon;
         }

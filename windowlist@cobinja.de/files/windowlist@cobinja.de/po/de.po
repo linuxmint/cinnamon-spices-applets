@@ -71,10 +71,10 @@ msgstr "Favoriten anzeigen"
 msgid "Animation Time"
 msgstr "Animationsdauer"
 
-msgid "Previews"
-msgstr "Vorschau"
+msgid "Preview menu"
+msgstr "Vorschau-Menü"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "Beim Darüberfahren anzeigen"
 
 msgid "Timeout Show"
@@ -131,5 +131,11 @@ msgstr "Anzahl der unverkleinerten Vorschaubilder"
 msgid "Show on click"
 msgstr "Beim Klicken anzeigen"
 
-msgid "If enabled, the popup menu with window previews will show when clicking\nIf disabled, the most currently used window will be focussed or minimized"
-msgstr "Wenn aktiviert, wird beim Klicken das Vorschau-Menü gezeigt\nWenn nicht aktiviert, wird das zuletzt genutzte Fenster fokussiert oder minimiert"
+msgid "If enabled, a popup menu with a list of current windows will show when clicking\n(Only with 2 or more windows)"
+msgstr "Wenn aktiviert, wird beim Klicken ein Menü mit einer Liste der Fenster angezeigt\n(Nur bei 2 oder mehr Fenstern)"
+
+msgid "If enabled, a popup menu with a list of current windows will show when hovering"
+msgstr "Wenn aktiviert, wird beim Darüberfahren ein Menü mit einer Liste der Fenster angezeigt"
+
+msgid "Show previews"
+msgstr "Vorschaubilder anzeigen"

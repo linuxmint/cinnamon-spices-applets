@@ -1,15 +1,35 @@
-const GTop = imports.gi.GTop;
-const NMClient = imports.gi.NMClient;
 const Gio = imports.gi.Gio;
-const NetworkManager = imports.gi.NetworkManager;
+const GIRepository = imports.gi.GIRepository;
 
-let _;
+let _, tryFn, GTop;
 if (typeof require !== 'undefined') {
-  _ = require('./utils')._;
+  let utils = require('./utils');
+  _ = utils._;
+  tryFn = utils.tryFn;
 } else {
   const AppletDir = imports.ui.appletManager.applets['multicore-sys-monitor@ccadeptic23'];
   _ = AppletDir.utils._;
+  tryFn = AppletDir.utils.tryFn;
 }
+
+let CONNECTED_STATE, NMClient_new, newNM;
+// Fallback to the new version.
+tryFn(function() {
+  const NMClient = imports.gi.NMClient;
+  const NetworkManager = imports.gi.NetworkManager;
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
+  const NM = imports.gi.NM;
+  CONNECTED_STATE = NM.DeviceState.ACTIVATED;
+  NMClient_new = NM.Client.new;
+  newNM = true;
+});
+
+tryFn(function() {
+  GTop = imports.gi.GTop;
+});
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
@@ -44,8 +64,6 @@ MultiCpuDataProvider.prototype = {
 
     this.CPUListTotal = [];
     this.CPUListNice = [];
-    this.CPUListIdle = [];
-    this.cpulist_iowait = [];
 
     this.CPUListSys = [];
     this.CPUListUser = [];
@@ -63,8 +81,6 @@ MultiCpuDataProvider.prototype = {
         if (this.gtop.xcpu_total[i] > 0) {
           this.CPUListTotal[this.CPUCount] = 0;
           this.CPUListNice[this.CPUCount] = 0;
-          this.CPUListIdle[this.CPUCount] = 0;
-          this.cpulist_iowait[this.CPUCount] = 0;
 
           this.CPUListSys[this.CPUCount] = 0;
           this.CPUListUser[this.CPUCount] = 0;
@@ -75,26 +91,26 @@ MultiCpuDataProvider.prototype = {
       }
     }
 
+    // Copy gtop arrays, for some reason accessing them causes a continuous memory leak.
+    let xcpu_total = this.gtop.xcpu_total.slice();
+    let xcpu_nice = this.gtop.xcpu_nice.slice();
+    let xcpu_sys = this.gtop.xcpu_sys.slice()
+    let xcpu_user = this.gtop.xcpu_user.slice()
     // calculate ticks since last call
     for (let i = 0; i < this.CPUCount; i++) {
-      let dtotal = this.gtop.xcpu_total[i] - this.CPUListTotal[i];
-      let dnice = this.gtop.xcpu_nice[i] - this.CPUListNice[i];
+      let dtotal = xcpu_total[i] - this.CPUListTotal[i];
+      let dnice = xcpu_nice[i] - this.CPUListNice[i];
 
-      let dsys = this.gtop.xcpu_sys[i] - this.CPUListSys[i];
-      let duser = this.gtop.xcpu_user[i] - this.CPUListUser[i];
-
-      // and save the new values
-      this.CPUListTotal[i] = this.gtop.xcpu_total[i];
-      this.CPUListNice[i] = this.gtop.xcpu_nice[i];
-      this.CPUListIdle[i] = this.gtop.xcpu_idle[i];
-      this.cpulist_iowait[i] = this.gtop.xcpu_iowait[i];
-
-      this.CPUListSys[i] = this.gtop.xcpu_sys[i];
-      this.CPUListUser[i] = this.gtop.xcpu_user[i];
+      let dsys = xcpu_sys[i] - this.CPUListSys[i];
+      let duser = xcpu_user[i] - this.CPUListUser[i];
 
       //Same way from gnome system monitor
       this.currentReadings[i] = (duser + dnice + dsys) / dtotal;
     }
+    this.CPUListTotal = xcpu_total;
+    this.CPUListNice = xcpu_nice;
+    this.CPUListSys = xcpu_sys;
+    this.CPUListUser = xcpu_user;
   },
   getCPUCount: function() {
     return this.CPUCount;
@@ -162,7 +178,7 @@ SwapDataProvider.prototype = {
   },
   getData: function() {
     GTop.glibtop_get_swap(this.gtopSwap);
-    this.currentReadings = [this.gtopSwap.used / this.gtopSwap.total];
+    this.currentReadings[0] = this.gtopSwap.used / this.gtopSwap.total;
     // Check if swap is actually present
     if (isNaN(this.currentReadings)) {
       this.currentReadings = [0];
@@ -186,7 +202,8 @@ NetDataProvider.prototype = {
     this.name = _('NET');
     this.isEnabled = true;
     this.gtop = new GTop.glibtop_netload();
-    this.nmClient = NMClient.Client.new();
+    let args = newNM ? [null] : [];
+    this.nmClient = NMClient_new.apply(this, args);
     this.signals = [
       this.nmClient.connect('device-added', () => this.getNetDevices()),
       this.nmClient.connect('device-removed', () => this.getNetDevices())
@@ -211,12 +228,11 @@ NetDataProvider.prototype = {
         ((this.currentReadings[i].up - this.currentReadings[i].lastReading[1]) / secondsSinceLastUpdate)
       );
 
-      this.currentReadings[i].lastReading = [this.currentReadings[i].down, this.currentReadings[i].up];
+      this.currentReadings[i].lastReading[0] = this.currentReadings[i].down;
+      this.currentReadings[i].lastReading[1] = this.currentReadings[i].up;
 
-      this.currentReadings[i].readingRatesList = [
-        Math.round(this.currentReadings[i].tooltipDown / 1024),
-        Math.round(this.currentReadings[i].tooltipUp / 1024)
-      ];
+      this.currentReadings[i].readingRatesList[0] = Math.round(this.currentReadings[i].tooltipDown / 1024);
+      this.currentReadings[i].readingRatesList[1] = Math.round(this.currentReadings[i].tooltipUp / 1024);
     }
 
     this.lastUpdatedTime = newUpdateTime;
@@ -243,7 +259,7 @@ NetDataProvider.prototype = {
     }
     for (let i = 0, len = devices.length; i < len; i++) {
       if (altMethod) {
-        if (devices[i].state !== NetworkManager.DeviceState.CONNECTED) {
+        if (devices[i].state !== CONNECTED_STATE) {
           continue;
         }
         devices[i] = devices[i].get_iface();
@@ -254,7 +270,10 @@ NetDataProvider.prototype = {
           id: devices[i],
           up: init ? 0 : this.gtop.bytes_out,
           down: init ? 0 : this.gtop.bytes_in,
-          lastReading: [0, 0]
+          tooltipUp: 0,
+          tooltipDown: 0,
+          lastReading: [0, 0],
+          readingRatesList: []
         });
       }
     }
@@ -328,14 +347,14 @@ DiskDataProvider.prototype = {
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       const newRead = this.currentReadings[i].read - this.currentReadings[i].lastReading[0];
       const newWrite = this.currentReadings[i].write - this.currentReadings[i].lastReading[1];
-      this.currentReadings[i].lastReading = [this.currentReadings[i].read, this.currentReadings[i].write];
+      this.currentReadings[i].lastReading[0] = this.currentReadings[i].read;
+      this.currentReadings[i].lastReading[1] = this.currentReadings[i].write;
+
       this.currentReadings[i].tooltipRead = Math.round((newRead / secondsSinceLastUpdate));
       this.currentReadings[i].tooltipWrite = Math.round((newWrite / secondsSinceLastUpdate));
       // Push it to the array read by the graphs as kilobytes.
-      this.currentReadings[i].readingRatesList = [
-        Math.round((newRead / 1048576 / secondsSinceLastUpdate)),
-        Math.round((newWrite / 1048576 / secondsSinceLastUpdate))
-      ];
+      this.currentReadings[i].readingRatesList[0] = Math.round((newRead / 1048576 / secondsSinceLastUpdate));
+      this.currentReadings[i].readingRatesList[1] = Math.round((newWrite / 1048576 / secondsSinceLastUpdate));
     }
   },
   getDiskRW: function() {
@@ -372,7 +391,8 @@ DiskDataProvider.prototype = {
       path: '/',
       read: 0,
       write: 0,
-      lastReading: [0, 0]
+      lastReading: [0, 0],
+      readingRatesList: []
     }];
 
     for (let i = 0; i < this.mounts.length; i++) {
@@ -390,7 +410,8 @@ DiskDataProvider.prototype = {
           path: mountRoot.get_path(),
           read: 0,
           write: 0,
-          lastReading: [0, 0]
+          lastReading: [0, 0],
+          readingRatesList: []
         });
       }
 

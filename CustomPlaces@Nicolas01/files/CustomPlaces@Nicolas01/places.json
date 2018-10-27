@@ -1,0 +1,16 @@
+[
+    { "path":"$HOME", "iconName":"user-home" },
+    { "path":"$DOWNLOAD", "iconName":"folder-download" },
+    { "path":"$PICTURES", "iconName":"folder-image" },
+    { "path":"$VIDEOS", "iconName":"folder-videos" },
+    { "path":"$MUSIC", "iconName":"folder-music" },
+    { "path":"S" },
+    { "path":"/", "iconName":"harddrive" },
+    { "path":"S" },
+    { "path":"$HOME/.local/share/cinnamon/applets", "displayName":"cinnamon applets" },
+    { "path":"/usr/share/icons" },
+    { "path":"$HOME/.local/share/applications", "displayName":"local desktop files" },
+    { "path":"/usr/share/applications", "displayName":"desktop files" },
+    { "path":"$HOME/.local/share/mime/packages", "displayName":"MIME types" },
+    { "path":"$HOME/.local/share/nemo/actions", "displayName":"nemo actions" }
+]

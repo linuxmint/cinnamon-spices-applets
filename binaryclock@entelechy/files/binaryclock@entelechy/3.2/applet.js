@@ -8,7 +8,12 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
-const Calendar = imports.ui.appletManager.applets['binaryclock@entelechy'].calendar;
+let Calendar;
+if (typeof require !== 'undefined') {
+    Calendar = require('./calendar');
+} else {
+    Calendar = imports.ui.appletManager.applets['binaryclock@entelechy'].calendar;
+}
 const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const Cairo = imports.cairo;
 

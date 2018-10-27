@@ -15,7 +15,12 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
 const UUID = "stevedore@centurix";
-const Docker = imports.ui.appletManager.applets[UUID].docker;
+let Docker;
+if (typeof require !== 'undefined') {
+    Docker = require('./docker');
+} else {
+    Docker = imports.ui.appletManager.applets[UUID].docker;
+}
 const APPLET_PATH = global.userdatadir + "/applets/" + UUID;
 const ICON = APPLET_PATH + "/icons/icon.png";
 const ICON_MISSING = APPLET_PATH + "/icons/missing.png";

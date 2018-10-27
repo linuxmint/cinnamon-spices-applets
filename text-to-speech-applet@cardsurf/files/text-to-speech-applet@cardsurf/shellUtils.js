@@ -1,18 +1,39 @@
 
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 
 
 
-function IconLabel() {
-    this._init();
-};
+const SignalType = {
+    SIGHUP:    1,
+    SIGINT:    2,
+    SIGQUIT: 3,
+    SIGILL:    4,
+    SIGTRAP: 5,
+    SIGIOT:    6,
+    SIGBUS:    7,
+    SIGFPE:    8,
+    SIGKILL: 9,
+    SIGUSR1: 10,
+    SIGSEGV: 11,
+    SIGUSR2: 12,
+    SIGPIPE: 13,
+    SIGALRM: 14,
+    SIGTERM: 15,
+    SIGSTKFLT: 16,
+    SIGCHLD: 17,
+    SIGCONT: 18,
+    SIGSTOP: 19,
+    SIGTSTP: 20,
+    SIGTTIN: 21,
+    SIGTTOU: 22,
+}
 
-IconLabel.prototype = {
-    _init: function() {
-    },
 
-};
+
+
+
 
 function ShellOutputProcess(command_argv) {
     this._init(command_argv);
@@ -22,7 +43,7 @@ ShellOutputProcess.prototype = {
 
     _init: function(command_argv) {
         this.command_argv = command_argv;
-        this.flags = GLib.SpawnFlags.SEARCH_PATH ;
+        this.flags = GLib.SpawnFlags.SEARCH_PATH;
         this.success = false;
         this.standard_output_content = "";
         this.standard_error_content = "";
@@ -40,11 +61,11 @@ ShellOutputProcess.prototype = {
 
     spawn_sync: function() {
         let [success, standard_output_content, standard_error_content] = GLib.spawn_sync(
-        	null,
-        	this.command_argv,
-        	null,
-        	this.flags,
-        	null);
+            null,
+            this.command_argv,
+            null,
+            this.flags,
+            null);
         this.success = success;
         this.standard_output_content = standard_output_content;
         this.standard_error_content = standard_error_content;
@@ -67,12 +88,11 @@ ShellOutputProcess.prototype = {
     spawn_async: function() {
         let [success, pid, standard_input_file_descriptor,
              standard_output_file_descriptor, standard_error_file_descriptor] = GLib.spawn_async_with_pipes(
-        	 null,
-        	 this.command_argv,
-        	 null,
-        	 this.flags,
              null,
-        	 null);
+             this.command_argv,
+             null,
+             this.flags,
+             null);
 
         this.success = success;
         this.pid = pid;
@@ -90,15 +110,16 @@ ShellOutputProcess.prototype = {
 
 
 
-function BackgroundProcess(command_argv) {
-    this._init(command_argv);
-};
+function BackgroundProcess(command_argv, streams_on){
+    this._init(command_argv, streams_on);
+}
 
 BackgroundProcess.prototype = {
-
-    _init: function(command_argv) {
+    _init: function(command_argv, streams_on){
         this.command_argv = command_argv;
+        this.streams_on = streams_on;
         this.flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD;
+        this.fill_all_characters_buffer = -1;
         this.default_pid = -1;
         this.pid = this.default_pid;
         this.spawn_async_calls = 0;
@@ -109,22 +130,36 @@ BackgroundProcess.prototype = {
         this.callback_process_finished = null;
 
         this.success = false;
+        this.standard_output_content = "";
+        this.standard_error_content = "";
         this.standard_input_file_descriptor = -1;
         this.standard_output_file_descriptor = -1;
         this.standard_error_file_descriptor = -1;
+        this.standard_output_characters = 0;
+        this.standard_error_characters = 0;
+        this.standard_input_unix_stream = new Gio.UnixOutputStream({ fd: this.standard_input_file_descriptor,
+                                                                     close_fd: true });
+        this.standard_output_unix_stream = new Gio.UnixInputStream({ fd: this.standard_output_file_descriptor,
+                                                                     close_fd: true });
+        this.standard_error_unix_stream = new Gio.UnixInputStream({ fd: this.standard_error_file_descriptor,
+                                                                    close_fd: true });
+        this.standard_output_data_stream = new Gio.DataInputStream({ base_stream: this.standard_output_unix_stream });
+        this.standard_error_data_stream = new Gio.DataInputStream({ base_stream: this.standard_error_unix_stream });
+        this.standard_error_cancellable = new Gio.Cancellable();
+        this.standard_output_cancellable = new Gio.Cancellable();
     },
 
-    set_callback_process_finished: function(callback_object, callback_process_finished) {
+    set_callback_process_finished: function(callback_object, callback_function) {
         this.callback_object = callback_object;
-        this.callback_process_finished = callback_process_finished;
+        this.callback_process_finished = callback_function;
     },
 
     spawn_async: function() {
         try {
             this.spawn_async_calls++;
             if(this.spawn_async_calls == 1 && !this.spawned_async) {
-        	    this._spawn_async_with_pipes();
-        	    this.spawned_async = true;
+                this._spawn_async_with_pipes();
+                this.spawned_async = true;
             }
         } finally {
             this.spawn_async_calls--;
@@ -134,45 +169,183 @@ BackgroundProcess.prototype = {
     _spawn_async_with_pipes: function() {
         let [success, pid, standard_input_file_descriptor,
              standard_output_file_descriptor, standard_error_file_descriptor] = GLib.spawn_async_with_pipes(
-        	 null,
-        	 this.command_argv,
-        	 null,
-        	 this.flags,
              null,
-        	 null);
+             this.command_argv,
+             null,
+             this.flags,
+             null);
 
         this.success = success;
         this.pid = pid;
         this.standard_input_file_descriptor = standard_input_file_descriptor;
         this.standard_output_file_descriptor = standard_output_file_descriptor;
         this.standard_error_file_descriptor = standard_error_file_descriptor;
-        this.add_exit_callback();
+        this._init_streams();
+        this._add_exit_callback();
+
+        this._read_streams();
     },
 
-    add_exit_callback: function() {
+    _init_streams: function() {
+        this.standard_output_characters = 0;
+        this.standard_error_characters = 0;
+        this.standard_input_unix_stream = new Gio.UnixOutputStream({ fd: this.standard_input_file_descriptor,
+                                                                     close_fd: true });
+        this.standard_output_unix_stream = new Gio.UnixInputStream({ fd: this.standard_output_file_descriptor,
+                                                                     close_fd: true });
+        this.standard_error_unix_stream = new Gio.UnixInputStream({ fd: this.standard_error_file_descriptor,
+                                                                    close_fd: true });
+        this.standard_error_data_stream = new Gio.DataInputStream({ base_stream: this.standard_error_unix_stream });
+        this.standard_output_data_stream = new Gio.DataInputStream({ base_stream: this.standard_output_unix_stream });
+        this.standard_error_cancellable = new Gio.Cancellable();
+        this.standard_output_cancellable = new Gio.Cancellable();
+    },
+
+    _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
-        					 this.pid,
-        					 Lang.bind(this, this.on_exit),
-        					 null,
-        					 null);
+                        	 this.pid,
+                        	 Lang.bind(this, this._on_exit));
     },
 
-    on_exit: function(pid, status) {
+    _on_exit: function(pid, status) {
         GLib.spawn_close_pid(pid);
-        this.set_not_running();
+        this._close_streams();
+        this._set_not_running();
         this._invoke_callback_process_finished(pid, status);
     },
 
-    set_not_running: function() {
+    _invoke_callback_process_finished: function(pid, status) {
+        if(this.callback_process_finished != null) {
+            this.callback_process_finished.call(this.callback_object, this, pid, status);
+        }
+    },
+
+    _read_streams: function() {
+        if(this.streams_on) {
+            this._read_standard_output_descriptor();
+            this._read_standard_error_descriptor();
+        }
+    },
+
+   _read_standard_output_descriptor: function() {
+        this.standard_output_data_stream.fill_async(this.fill_all_characters_buffer,
+                                                    GLib.PRIORITY_DEFAULT,
+                                                    this.standard_output_cancellable,
+                                                    Lang.bind(this, this._on_fill_async_standard_output));
+   },
+
+   _on_fill_async_standard_output: function(stream, fill_async_result) {
+         try {
+            let closed = stream.is_closed();
+            if(!closed) {
+                this.standard_output_characters = stream.fill_finish(fill_async_result);
+                if(this.standard_output_characters >= 0) {
+                    this._read_increase_standard_output_buffer(stream);
+                }
+            }
+         } catch(e) {
+             global.log("Error while filling standard output buffer: " + e);
+         }
+    },
+
+    _read_increase_standard_output_buffer: function(stream) {
+        if(this.standard_output_characters == 0) {
+            this._read_standard_output_buffer(stream);
+        }
+        else {
+            this.increase_buffer_size(stream);
+            this._read_standard_output_descriptor();
+        }
+   },
+
+   _read_standard_output_buffer: function(stream) {
+       this.standard_output_content = stream.peek_buffer().toString();
+   },
+
+   increase_buffer_size: function(stream) {
+        let size =  2 * stream.get_buffer_size();
+        stream.set_buffer_size(size);
+   },
+
+   _read_standard_error_descriptor: function() {
+        this.standard_error_data_stream.fill_async(this.fill_all_characters_buffer,
+                                                   GLib.PRIORITY_DEFAULT,
+                                                   this.standard_error_cancellable,
+                                                   Lang.bind(this, this._on_fill_async_standard_error));
+   },
+
+   _on_fill_async_standard_error: function(stream, fill_async_result) {
+         try {
+            let closed = stream.is_closed();
+            if(!closed) {
+                this.standard_error_characters = stream.fill_finish(fill_async_result);
+                if(this.standard_error_characters >= 0) {
+                    this._read_increase_standard_error_buffer(stream);
+                }
+            }
+         } catch(e) {
+             global.log("Error while filling standard error buffer: " + e);
+         }
+    },
+
+    _read_increase_standard_error_buffer: function(stream) {
+        if(this.standard_error_characters == 0) {
+            this._read_standard_error_buffer(stream);
+        }
+        else {
+            this.increase_buffer_size(stream);
+            this._read_standard_error_descriptor();
+        }
+    },
+
+    _read_standard_error_buffer: function(stream) {
+       this.standard_error_content = stream.peek_buffer().toString();
+    },
+
+    _close_streams: function(){
+        this._close_standard_input_stream();
+        this._close_standard_output_streams();
+        this._close_standard_error_streams();
+    },
+
+    _close_standard_input_stream: function() {
+         try {
+             this.standard_input_unix_stream.close(null);
+         } catch(e) {
+             global.log("Error while closing standard input stream: " + e);
+         }
+    },
+
+    _close_standard_output_streams: function() {
+         try {
+             this.standard_output_data_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_output_cancellable, null);
+             this.standard_output_unix_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_output_cancellable, null);
+         } catch(e) {
+             global.log("Error while closing standard output streams: " + e);
+         }
+    },
+
+    _close_standard_error_streams: function() {
+         try {
+             this.standard_error_data_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_error_cancellable, null);
+             this.standard_error_unix_stream.close_async(GLib.PRIORITY_DEFAULT, this.standard_error_cancellable, null);
+         } catch(e) {
+             global.log("Error while closing standard error streams: " + e);
+         }
+    },
+
+    _set_not_running: function() {
         this.pid = this.default_pid;
         this.spawned_async = false;
         this.paused = false;
     },
 
-    _invoke_callback_process_finished: function(pid, status) {
-        if(this.callback_process_finished != null) {
-        	this.callback_process_finished.call(this.callback_object, pid, status);
-        }
+    get_standard_output_content: function() {
+        return this.standard_output_content;
+    },
+
+    get_standard_error_content: function() {
+        return this.standard_error_content;
     },
 
     kill: function() {
@@ -181,8 +354,8 @@ BackgroundProcess.prototype = {
 
     send_kill_signal: function() {
         if(this.is_running()) {
-        	let process = new ShellOutputProcess(['kill', '-9', this.pid.toString()]);
-        	let output = process.spawn_sync_and_get_error();
+            let process = new ShellOutputProcess(['kill', '-9', this.pid.toString()]);
+            let output = process.spawn_sync_and_get_error();
         }
     },
 
@@ -194,7 +367,7 @@ BackgroundProcess.prototype = {
         try {
             this.pause_resume_async_calls++;
             if(this.pause_resume_async_calls == 1 && !this.paused) {
-        	    this.send_stop_signal();
+                this.send_stop_signal();
             }
         } finally {
             this.pause_resume_async_calls--;
@@ -203,9 +376,9 @@ BackgroundProcess.prototype = {
 
     send_stop_signal: function() {
         if(this.is_running()) {
-        	let process = new ShellOutputProcess(['kill', '-STOP', this.pid.toString()]);
-        	let output = process.spawn_sync_and_get_error();
-        	this.paused = true;
+            let process = new ShellOutputProcess(['kill', '-STOP', this.pid.toString()]);
+            let output = process.spawn_sync_and_get_error();
+            this.paused = true;
         }
     },
 
@@ -213,7 +386,7 @@ BackgroundProcess.prototype = {
         try {
             this.pause_resume_async_calls++;
             if(this.pause_resume_async_calls == 1 && this.paused) {
-        	    this.send_cont_signal();
+                this.send_cont_signal();
             }
         } finally {
             this.pause_resume_async_calls--;
@@ -222,9 +395,9 @@ BackgroundProcess.prototype = {
 
     send_cont_signal: function() {
         if(this.is_running()) {
-        	let process = new ShellOutputProcess(['kill', '-CONT', this.pid.toString()]);
-        	let output = process.spawn_sync_and_get_error();
-        	this.paused = false;
+            let process = new ShellOutputProcess(['kill', '-CONT', this.pid.toString()]);
+            let output = process.spawn_sync_and_get_error();
+            this.paused = false;
         }
     },
 
@@ -233,7 +406,6 @@ BackgroundProcess.prototype = {
     },
 
 };
-
 
 
 
@@ -278,7 +450,7 @@ TerminalProcess.prototype = {
         let last_char = command.slice(-1);
         let semicolon = ";";
         if(last_char != semicolon) {
-        	command = command + semicolon;
+            command = command + semicolon;
         }
         return command;
     },
@@ -287,10 +459,10 @@ TerminalProcess.prototype = {
         try {
             this.spawn_async_calls++;
             if(this.spawn_async_calls == 1 && !this.spawned_async) {
-        	    this.tmp_filepath = this.generate_tmp_filename();
-        	    let command_argv = this.get_command_argv();
+                this.tmp_filepath = this.generate_tmp_filename();
+                let command_argv = this.get_command_argv();
                 [this.success]  = GLib.spawn_async(null, command_argv, null, this.flags, null, null);
-        	    this.spawned_async = true;
+                this.spawned_async = true;
             }
         } finally {
             this.spawn_async_calls--;
@@ -307,7 +479,7 @@ TerminalProcess.prototype = {
     get_command_argv: function() {
         let argv = ['gnome-terminal']
         if(this.maximized) {
-        	argv.push('--maximize');
+            argv.push('--maximize');
         }
         argv.push('-e');
 
@@ -326,7 +498,7 @@ TerminalProcess.prototype = {
 
     is_running: function() {
         if(this.spawned_async && this.pid == this.default_pid) {
-        	this.read_pid_and_delete_tmp_file_on_success();
+            this.read_pid_and_delete_tmp_file_on_success();
         }
         return this.pid != this.default_pid;
     },
@@ -335,7 +507,7 @@ TerminalProcess.prototype = {
         this.pid = this.read_pid();
 
         if(this.pid != this.default_pid) {
-        	this.delete_tmp_file();
+            this.delete_tmp_file();
         }
     },
 
@@ -343,7 +515,7 @@ TerminalProcess.prototype = {
         let process = new ShellOutputProcess(['cat', this.tmp_filepath]);
         let output = process.spawn_sync_and_get_output();
         if(output.length > 0) {
-        	return Number(output);
+            return Number(output);
         }
         return this.default_pid;
     },
@@ -355,10 +527,10 @@ TerminalProcess.prototype = {
 
     kill: function() {
         if(this.is_running()) {
-        	let process = new ShellOutputProcess(['kill', '-9', this.pid.toString()]);
-        	let output = process.spawn_sync_and_get_error();
-        	this.pid = this.default_pid;
-        	this.spawned_async = false;
+            let process = new ShellOutputProcess(['kill', '-9', this.pid.toString()]);
+            let output = process.spawn_sync_and_get_error();
+            this.pid = this.default_pid;
+            this.spawned_async = false;
         }
     },
 

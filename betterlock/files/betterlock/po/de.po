@@ -75,7 +75,7 @@ msgstr ""
 "Benachrichtigung an, wenn diese betätigt werden."
 
 #. betterlock->metadata.json->name
-msgid "Num Lock/Caps Lock indicator with MessageTray notifications"
+msgid "Num Lock/Caps Lock indicator with notifications"
 msgstr "Num-Lock-Taste/Feststelltaste-Anzeige mit Benachrichtigungen"
 
 #~ msgid "Notifications"

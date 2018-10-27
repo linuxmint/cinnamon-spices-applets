@@ -12,13 +12,23 @@ const SignalManager = imports.misc.signalManager;
 
 let GPaste; // Will be assigned in entry point
 
-const AppletDir                = imports.ui.appletManager.applets[uuid];
-const _                        = AppletDir.__init__._;
-const GPasteSearchItem         = AppletDir.GPasteSearchItem;
-const GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
-const GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
-const GPasteNewItemDialog      = AppletDir.GPasteNewItemDialog;
-const GPasteNotInstalledDialog = AppletDir.GPasteNotInstalledDialog;
+let _, GPasteSearchItem, GPasteHistoryItem, GPasteHistoryListItem, GPasteNewItemDialog, GPasteNotInstalledDialog;
+if (typeof require !== 'undefined') {
+    _                        = require('./__init__')._;
+    GPasteSearchItem         = require('./GPasteSearchItem');
+    GPasteHistoryItem        = require('./GPasteHistoryItem');
+    GPasteHistoryListItem    = require('./GPasteHistoryListItem');
+    GPasteNewItemDialog      = require('./GPasteNewItemDialog');
+    GPasteNotInstalledDialog = require('./GPasteNotInstalledDialog');
+} else {
+    const AppletDir          = imports.ui.appletManager.applets[uuid];
+    _                        = AppletDir.__init__._;
+    GPasteSearchItem         = AppletDir.GPasteSearchItem;
+    GPasteHistoryItem        = AppletDir.GPasteHistoryItem;
+    GPasteHistoryListItem    = AppletDir.GPasteHistoryListItem;
+    GPasteNewItemDialog      = AppletDir.GPasteNewItemDialog;
+    GPasteNotInstalledDialog = AppletDir.GPasteNotInstalledDialog;
+}
 
 //
 // Entry point
@@ -166,7 +176,7 @@ GPasteApplet.prototype = {
             this._historyName      = "";
             this._historyItems     = [];
             this._historyListItems = [];
-            this._signalManager    = new SignalManager.SignalManager(this);
+            this._signalManager    = new SignalManager.SignalManager(null);
 
             GPaste.Client.new(Lang.bind(this, function (obj, result) {
                 this._client = GPaste.Client.new_finish(result);
@@ -175,14 +185,14 @@ GPasteApplet.prototype = {
                 // Watch client signals
 
                 // Client
-                this._signalManager.connect(this._client, 'update',         this._onClientUpdate);
-                this._signalManager.connect(this._client, 'show-history',   this._onClientShowHistory);
-                this._signalManager.connect(this._client, 'switch-history', this._onClientSwitchHistory);
-                this._signalManager.connect(this._client, 'tracking',       this._onClientTracking);
-                this._signalManager.connect(this._client, 'delete-history', this._onClientDeleteHistory);
+                this._signalManager.connect(this._client, 'update',         Lang.bind(this, this._onClientUpdate));
+                this._signalManager.connect(this._client, 'show-history',   Lang.bind(this, this._onClientShowHistory));
+                this._signalManager.connect(this._client, 'switch-history', Lang.bind(this, this._onClientSwitchHistory));
+                this._signalManager.connect(this._client, 'tracking',       Lang.bind(this, this._onClientTracking));
+                this._signalManager.connect(this._client, 'delete-history', Lang.bind(this, this._onClientDeleteHistory));
 
                 // Client settings
-                this._signalManager.connect(this._clientSettings, 'changed::max-displayed-history-size', this._createHistoryItems);
+                this._signalManager.connect(this._clientSettings, 'changed::max-displayed-history-size', Lang.bind(this, this._createHistoryItems));
 
                 //
                 // Init

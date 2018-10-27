@@ -1,0 +1,118 @@
+{
+    "section1": {
+        "type": "section",
+        "description" : "Menu"
+    },
+    "playerControl": {
+        "type": "switch",
+        "default": true,
+        "description": "Control Players"
+    },
+    "extendedPlayerControl": {
+        "type": "switch",
+        "default": false,
+        "description": "Show Loop and Shuffle controls",
+        "dependency": "playerControl",
+        "indent": true
+    },
+    "_knownPlayers": {
+        "type": "generic",
+        "default": ["banshee", "vlc", "rhythmbox"]
+    },
+    "section2": {
+        "type": "section",
+        "description" : "Panel"
+    },
+    "showtrack": {
+        "type": "switch",
+        "default": false,
+        "description": "Show song information on the panel",
+        "dependency": "playerControl"
+    },
+    "truncatetext": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 5,
+        "max": 512,
+        "units": "characters",
+        "step": 1,
+        "description": "Limit song information to",
+        "dependency": "showtrack",
+        "indent": true
+    },
+    "middleClickAction": {
+        "type": "combobox",
+        "default": "mute",
+        "options": {
+            "Toggle Mute": "mute",
+            "Toggle Play / Pause": "player"
+        },
+        "description": "Action on middle click"
+    },
+    "showalbum": {
+        "type": "switch",
+        "default": false,
+        "description": "Show album art as icon",
+        "dependency": "playerControl"
+    },
+    "hideSystray" : {
+        "type" : "switch",
+        "description" : "Hide system tray icons for compatible players",
+        "default": true
+    },
+    "section3": {
+        "type": "section",
+        "description" : "Sound Settings"
+    },
+    "percentMaxVol": {
+        "type": "combobox",
+        "default": 150,
+        "options": {
+            "150%": 150,
+            "140%": 140,
+            "130%": 130,
+            "120%": 120,
+            "110%": 110,
+            "100%": 100,
+            "90%": 90,
+            "80%": 80,
+            "70%": 70,
+            "60%": 60,
+            "50%": 50,
+            "40%": 40,
+            "30%": 30
+        },
+        "description": "Maximum volume control",
+        "tooltip": "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
+    },
+    "stepVolume": {
+        "type": "combobox",
+        "default": 1,
+        "options": {
+            "10%": 10,
+            "9%": 9,
+            "8%": 8,
+            "7%": 7,
+            "6%": 6,
+            "5%": 5,
+            "4%": 4,
+            "3%": 3,
+            "2%": 2,
+            "1%": 1
+        },
+        "tooltip": "% of nominal volume",
+        "description": "+/-"
+    },
+    "magneticOn": {
+        "type": "switch",
+        "description": "Magnetize the 'Volume 100%' mark",
+        "tooltip": "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step.",
+        "default": true
+    },
+    "adaptColor": {
+        "type": "switch",
+        "description": "Adjust the color of the icon to the volume",
+        "tooltip": "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red.",
+        "default": true
+    }
+}

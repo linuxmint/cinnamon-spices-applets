@@ -12,18 +12,20 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
             ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
    * Cinnamon Version 2.2 or higher ie. It can be used with all supported versions of Mint.
+   * It currently assumes the NMClient and NetworkManager libraries are in use as is the case in Mint versions up to 18.3 and most other current distro versions.
+   * The latest versions can also switch to the more recent NM library if the NetworkManager Library is not available.
 
 ## Features:
 
   * **The Applet:**
-       + Continuosusly displays Upload and Download rate in a fixed width 'steady' display
+       + Continuously displays Upload and Download rate in a fixed width 'steady' display
        + The Applet Background colour is:
           - Black when Current Interface not active
           - Green when Current connection and interface has provided data
           - Orange when the Alert level (as percentage of the Data Limit) has been exceeded
           - Red when the Data Limit for the current connection has been exceeded
    * **Hover over Applet:**
-       + Displays continuously updated Upload and Downoaded data usage for the current connection
+       + Displays continuously updated Upload and Downloaded data usage for the current connection
    * **The Context Menu (Right Click):**
        + Displays all the interfaces managed by the Network Manager Applet
        + Identifies any Active interfaces within Network Manager
@@ -81,13 +83,13 @@ The system program vnstat which provides the option of a graphic history of data
 
 ## Status
 
-The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running under Mint 15 with a variety of themes. The current Version has been tested with Cinnamon 2.2 - 3.4 and Mint 17 - 18.2. 
+The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running under Mint 15 with a variety of themes. The current Version has been tested with Cinnamon 2.2 - 3.6 under Mint 17 - 18.3. But see Warnings above about use under Fedora 27 which have yet to be addressed.
 
 ## Translations and other Contributions
 
 The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I am unable to take responsibility for the accuracy of translations!
 
-Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes from the Cinnamon Team. 
+Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes or from the Cinnamon Team. 
 
 Thanks are given for the very useful contributions from @collinss and @Odyseus to help harmonise the menus with other applets.
 

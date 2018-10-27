@@ -11,17 +11,19 @@
 
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
+const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const appSystem = imports.gi.Cinnamon.AppSystem.get_default();
 const Util = imports.misc.util;
+const Main = imports.ui.main;
 const Applet = imports.ui.applet;
 
 const UUID = 'multicore-sys-monitor@ccadeptic23';
 
-let _, tryFn, ConfigSettings, SpawnProcess, Graphs, DataProviders, ErrorApplet;
+let _, tryFn, ConfigSettings, SpawnProcess, Graphs, DataProviders;
 if (typeof require !== 'undefined') {
   const utils = require('./utils');
   _ = utils._;
@@ -30,7 +32,6 @@ if (typeof require !== 'undefined') {
   SpawnProcess = require('./SpawnProcess');
   Graphs = require('./Graphs');
   DataProviders = require('./DataProviders');
-  ErrorApplet = require('./ErrorApplet');
 } else {
   const AppletDir = imports.ui.appletManager.applets[UUID];
   _ = AppletDir.utils._;
@@ -39,16 +40,63 @@ if (typeof require !== 'undefined') {
   SpawnProcess = AppletDir.SpawnProcess;
   Graphs = AppletDir.Graphs;
   DataProviders = AppletDir.DataProviders;
-  ErrorApplet = AppletDir.ErrorApplet;
 }
 
-let GTop;
+let GTop, gtopFailed;
 tryFn(function() {
   GTop = imports.gi.GTop;
 }, function(e) {
-  global.logError(e);
-  GTop = null;
+  let icon = new St.Icon({
+    icon_type: St.IconType.FULLCOLOR,
+    icon_size: 24 * global.ui_scale,
+    gicon: new Gio.FileIcon({
+      file: Gio.file_new_for_path(
+        GLib.get_home_dir() +
+        '/.local/share/cinnamon/applets/multicore-sys-monitor@ccadeptic23/3.4/icon.png'
+      )
+    })
+  });
+  Main.criticalNotify(
+    _('Dependency missing'),
+    _(
+      'Please install the GTop package\n' +
+      '\tUbuntu / Mint: gir1.2-gtop-2.0\n' +
+      '\tFedora: libgtop2-devel\n' +
+      '\tArch: libgtop\n' +
+      'to use ' + UUID
+    ), icon);
+  gtopFailed = true;
 });
+
+if (typeof Object.assign !== 'function') {
+  // Must be writable: true, enumerable: false, configurable: true
+  Object.defineProperty(Object, "assign", {
+    value: function assign(target, varArgs) { // .length of function is 2
+      'use strict';
+      if (target == null) { // TypeError if undefined or null
+        throw new TypeError('Cannot convert undefined or null to object');
+      }
+
+      var to = Object(target);
+
+      for (var index = 1; index < arguments.length; index++) {
+        var nextSource = arguments[index];
+
+        if (nextSource != null) { // Skip over if undefined or null
+          for (var nextKey in nextSource) {
+            // Avoid bugs when hasOwnProperty is shadowed
+            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+              to[nextKey] = nextSource[nextKey];
+            }
+          }
+        }
+      }
+      return to;
+    },
+    writable: true,
+    configurable: true
+  });
+}
 
 // https://github.com/uxitten/polyfill/blob/master/string.polyfill.js
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
@@ -97,17 +145,26 @@ function MyApplet(metadata, orientation, panel_height) {
   this._init(metadata, orientation, panel_height);
 }
 
+let appletClass = gtopFailed ? 'IconApplet' : 'Applet';
+
 MyApplet.prototype = {
-  __proto__: Applet.Applet.prototype,
+  __proto__: Applet[appletClass].prototype,
 
   _init: function(metadata, orientation, panel_height) {
-    Applet.Applet.prototype._init.call(this, orientation);
+    Applet[appletClass].prototype._init.call(this, orientation);
 
+    if (gtopFailed) {
+      this.set_applet_icon_path(metadata.path + '/icon.png');
+      this.set_applet_tooltip(metadata.description);
+      return;
+    }
+
+    this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
     this.childProcessHandler = null;
-
     this.metadata = metadata;
     this._panelHeight = panel_height;
     this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+    this.shouldUpdate = true;
 
     let configFile = Gio.file_new_for_path(this.configFilePath);
 
@@ -124,6 +181,23 @@ MyApplet.prototype = {
     this.configSettings = new ConfigSettings(this.configFilePath);
 
     this._initContextMenu();
+
+    this.actor.connect('enter-event', () => {
+      this.hovered = true;
+      // Work around hovering over a PangoCairo canvas instance triggering a false positive panel leave event
+      if (this.panel._autohideSettings !== 'false') {
+        this.originalAutoHideSetting = this.panel._autohideSettings;
+        this.panel._autohideSettings = 'true';
+        this.panel._updatePanelVisibility();
+      }
+    });
+    this.actor.connect('leave-event', () => {
+      this.hovered = false;
+      if (this.originalAutoHideSetting) {
+        this.originalAutoHideSetting = null;
+        this.panel._autohideSettings = this.originalAutoHideSetting;
+      }
+    });
 
     this.graphArea = new St.DrawingArea();
 
@@ -152,29 +226,26 @@ MyApplet.prototype = {
 
     this.networkGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.net.width);
     //For us this means the heighest point wont represent a valuelower than 1Kb/s
-    this.networkGraph.setMinScaleYvalue(1.0);
-    this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
-    this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+    this.networkGraph.autoScale = this.configSettings._prefs.net.autoscale;
+    this.networkGraph.logScale = this.configSettings._prefs.net.logscale;
 
     this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.configSettings._prefs.disk.width);
-    this.diskGraph.setMinScaleYvalue(1.0);
-    this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
-    this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
+    this.diskGraph.autoScale = this.configSettings._prefs.disk.autoscale;
+    this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
     this.actor.add_actor(this.graphArea);
-    this._update();
+    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
 
   on_applet_removed_from_panel: function() {
-    this.willUnmount = true;
+    if (gtopFailed) return;
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.shouldUpdate = false;
     this.graphArea.destroy();
-    this.actor.destroy();
     this.networkProvider.destroy();
     this.diskProvider.destroy();
-    let props = Object.keys(this);
-    for (let i = 0; i < props.length; i++) {
-      this[props[i]] = undefined;
-    }
   },
 
   _initContextMenu: function() {
@@ -207,12 +278,9 @@ MyApplet.prototype = {
 
   _update: function() {
     // This loops on interval, we need to make sure it stops when the xlet is removed.
-    if (this.willUnmount || !this.networkProvider) {
+    if (!this.networkProvider) {
       this.loopId = 0;
       return false;
-    }
-    if (this.loopId) {
-      Mainloop.source_remove(this.loopId);
     }
     if (this.childProcessHandler != null) {
       let currentMessage = this.childProcessHandler.getCurrentMessage();
@@ -224,13 +292,14 @@ MyApplet.prototype = {
       }
       // Do any required processing when configuration changes
       this.networkProvider.setDisabledInterfaces(this.configSettings.getDisabledDevices('net'));
-      this.networkGraph.setAutoScale(this.configSettings._prefs.net.autoscale);
-      this.networkGraph.setLogScale(this.configSettings._prefs.net.logscale);
+      this.networkGraph.autoScale = this.configSettings._prefs.net.autoscale;
+      this.networkGraph.logScale = this.configSettings._prefs.net.logscale;
+
       // check for new drives that are mounted
       this.configSettings.adjustDevices('net', this.networkProvider.currentReadings);
       this.diskProvider.setDisabledDevices(this.configSettings.getDisabledDevices('disk'));
-      this.diskGraph.setAutoScale(this.configSettings._prefs.disk.autoscale);
-      this.diskGraph.setLogScale(this.configSettings._prefs.disk.logscale);
+      this.diskGraph.autoScale = this.configSettings._prefs.disk.autoscale;
+      this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
       if (this.childProcessHandler.isChildFinished()) {
         this.childProcessHandler.destroy();
@@ -250,68 +319,64 @@ MyApplet.prototype = {
     }
 
     this.graphArea.queue_repaint();
-    this.set_applet_tooltip(appletTooltipString);
+    if (this.hovered) {
+      this.set_applet_tooltip(appletTooltipString);
+    }
 
     // set next refresh time
-    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
+    return this.shouldUpdate;
   },
   onGraphRepaint: function(area) {
     let xOffset = 0;
-    let appletWidth = 0;
-    area.get_context().translate(xOffset, 2);
     for (let i = 0; i < properties.length; i++) {
       if (properties[i].abbrev === 'Swap') {
         continue;
       }
       if (this[properties[i].provider].isEnabled) {
         // translate origin to the new location for the graph
-        area.get_context().translate(xOffset, 0);
+        let areaContext = area.get_context();
+        areaContext.translate(xOffset, 0);
         let width = this.configSettings._prefs[properties[i].abbrev.toLowerCase()].width * global.ui_scale;
-        appletWidth += width;
         if (properties[i].abbrev === 'MEM') {
           // paint the "swap" backdrop
           this.swapGraph.paint(
             this.swapProvider.name,
             this.swapProvider.currentReadings,
             area,
+            areaContext,
             // no label for the backdrop
             false,
             width,
-            this._panelHeight * global.ui_scale,
+            this._panelHeight - 2 * global.ui_scale,
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
             [0, 0, 0, 0],
-            this.configSettings.getSwapColorList()
+            this.configSettings._prefs.mem.swapcolors
           );
         }
         this[properties[i].graph].paint(
           this[properties[i].provider].name,
           this[properties[i].provider].currentReadings,
           area,
+          areaContext,
           this.configSettings._prefs.labelsOn,
           width,
-          this._panelHeight * global.ui_scale,
+          this._panelHeight - 2 * global.ui_scale,
           this.configSettings._prefs.labelColor,
           this.configSettings._prefs.backgroundColor,
           this.configSettings['get' + properties[i].abbrev + 'ColorList']()
         );
         // return translation to origin
-        area.get_context().translate(-1 * xOffset, 0);
+        areaContext.translate(-xOffset, 0);
         // update xOffset for next translation
         xOffset += width + 1;
       }
     }
-    appletWidth = appletWidth > 0 ? appletWidth : 1;
-    area.set_width(appletWidth);
+    area.set_width(xOffset > 1 ? xOffset - 1 : 1);
     area.set_height(this._panelHeight);
   }
 };
 
 function main(metadata, orientation, panel_height) {
-  if (!GTop) {
-    let errorMessage = _('Please install "gir1.2-gtop-2.0" package.');
-    return new ErrorApplet.ErrorImportApplet(orientation, errorMessage);
-  } else {
-    return new MyApplet(metadata, orientation, panel_height);
-  }
+  return new MyApplet(metadata, orientation, panel_height);
 }

@@ -7,8 +7,14 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
 const uuid = 'brightness-and-gamma-applet@cardsurf';
-const AppletDirectory = imports.ui.appletManager.applets[uuid];
-const AppletConstants = AppletDirectory.appletConstants;
+
+let AppletConstants;
+if (typeof require !== 'undefined') {
+    AppletConstants = require('./appletConstants');
+} else {
+    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletConstants = AppletDirectory.appletConstants;
+}
 
 // Translation support
 Gettext.bindtextdomain(uuid, GLib.get_home_dir() + "/.local/share/locale")

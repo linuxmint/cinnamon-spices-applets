@@ -1,7 +1,7 @@
 # Polish translation for vboxlauncher@mockturtl.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# xearonet xearonet@o2.pl, 2017.
+# xearonet , 2017.
 #
 msgid ""
 msgstr ""
@@ -31,7 +31,7 @@ msgstr "Odśwież listę"
 
 #. vboxlauncher@mockturtl->settings-schema.json->autoUpdate->description
 msgid "Auto update (slow)"
-msgstr "Auto-odświeżanie (wolne)"
+msgstr "Autoodświeżanie (wolne)"
 
 #. vboxlauncher@mockturtl->metadata.json->name
 msgid "Vbox Launcher"

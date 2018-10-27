@@ -25,7 +25,7 @@
         "cpu_g": {
             "type": "section",
             "title": "General",
-            "keys": ["cpu_enabled", "cpu_override_graph_width", "cpu_graph_width"]
+            "keys": ["cpu_enabled", "cpu_override_graph_width", "cpu_graph_width", "cpu_tooltip_decimals"]
         },
         "cpu_c": {
             "type": "section",
@@ -181,6 +181,15 @@
         "description": "Graph width",
         "units": "pixels",
         "dependency": "cpu_override_graph_width"
+    },
+    "cpu_tooltip_decimals": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Show this many decimals in the tooltip",
+        "units": "decimals"
     },
     "cpu_color_0": {
         "type": "colorchooser",

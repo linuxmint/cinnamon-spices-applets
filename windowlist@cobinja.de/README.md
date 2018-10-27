@@ -11,7 +11,7 @@ This is a window list applet that is aimed at resembling the Windows 7 taskbar (
 Some of the key features are:
 
  - App grouping: this groups window of each program into one button
- - Previews: When hovering over a button, a menu will show previews of all windows managed by that button
+ - Previews: When hovering over a button, a menu can show previews of all windows managed by that button
  - Pinning programs: You can pin your favorite programs to workspaces
  - Drag'n'Drop: You can reorder your programs
  - Drop from menu and panel launchers: You can drag menu items from Cinnamon's menu and panel launcher applet to this applet, the program will then be pinned
