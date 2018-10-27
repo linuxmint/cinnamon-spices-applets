@@ -251,7 +251,7 @@ Rancher.prototype = {
 	},
 
 	openBrowser: function(url) {
-		matches = (new RegExp('\\("(.*?)"\\)')).exec(url);
+		let matches = (new RegExp('\\("(.*?)"\\)')).exec(url);
 		if (matches && matches.length > 0) {
 			Main.Util.spawnCommandLine("xdg-open http://" + matches[1]);
 		}
@@ -271,7 +271,7 @@ Rancher.prototype = {
 
 	updateApplet: function(exists, status) {
 		try {
-			text_status = "";
+			let text_status = "";
 			if (!exists) {
 				this.set_applet_icon_path(ICON_MISSING);
 				this.set_applet_tooltip(_("Rancher: Homestead missing or not configured."));
@@ -359,7 +359,7 @@ Rancher.prototype = {
 
 			if (exists) {
 				this.menu.addMenuItem(this.newSeparator());
-				config = this.homestead.parseConfig();
+				let config = this.homestead.parseConfig();
 
 				this.subMenuConfig = new PopupMenu.PopupSubMenuMenuItem(_('Configuration'));
 				this.subMenuConfig.menu.addMenuItem(this.newIconMenuItem('package_network', _('IP: ') + config.ip, null, {reactive: false}));
