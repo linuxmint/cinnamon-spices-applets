@@ -162,7 +162,7 @@ MyApplet.prototype = {
     this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
     this.childProcessHandler = null;
     this.metadata = metadata;
-    this._panelHeight = panel_height;
+    this.panelHeight = panel_height;
     this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
     this.shouldUpdate = true;
 
@@ -202,7 +202,7 @@ MyApplet.prototype = {
     this.graphArea = new St.DrawingArea();
 
     this.graphArea.width = 1;
-    this.graphArea.height = this._panelHeight * global.ui_scale;
+    this.graphArea.height = this.panelHeight * global.ui_scale;
 
     this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
 
@@ -246,6 +246,10 @@ MyApplet.prototype = {
     this.graphArea.destroy();
     this.networkProvider.destroy();
     this.diskProvider.destroy();
+  },
+
+  on_panel_height_changed: function() {
+    this.panelHeight = this._panelHeight;
   },
 
   _initContextMenu: function() {
@@ -347,7 +351,7 @@ MyApplet.prototype = {
             // no label for the backdrop
             false,
             width,
-            this._panelHeight - 2 * global.ui_scale,
+            this.panelHeight - 2 * global.ui_scale,
             [0, 0, 0, 0],
             // clear background so that it doesn't mess up the other one
             [0, 0, 0, 0],
@@ -361,7 +365,7 @@ MyApplet.prototype = {
           areaContext,
           this.configSettings._prefs.labelsOn,
           width,
-          this._panelHeight - 2 * global.ui_scale,
+          this.panelHeight - 2 * global.ui_scale,
           this.configSettings._prefs.labelColor,
           this.configSettings._prefs.backgroundColor,
           this.configSettings['get' + properties[i].abbrev + 'ColorList']()
@@ -373,7 +377,7 @@ MyApplet.prototype = {
       }
     }
     area.set_width(xOffset > 1 ? xOffset - 1 : 1);
-    area.set_height(this._panelHeight);
+    area.set_height(this.panelHeight);
   }
 };
 
