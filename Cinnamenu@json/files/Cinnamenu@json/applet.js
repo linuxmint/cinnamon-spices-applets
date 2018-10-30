@@ -1444,7 +1444,7 @@ CinnamenuApplet.prototype = {
         let name = res[i].get_name();
         let keywords = res[i].get_keywords();
         Object.assign(res[i], {
-          name,
+          name: name,
           keywords: keywords || name,
           description:res[i].get_description(),
           id: res[i].get_id().replace(/\.desktop$/, ''),
