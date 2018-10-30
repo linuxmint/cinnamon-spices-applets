@@ -1,5 +1,11 @@
 Changelog
 
+### 3.2.8
+
+  * Improved search accuracy - keywords and application IDs are now considered in the results scoring.
+  * Fixed window titles not being fuzzy highlighted during search when they are matched by title and "Enable searching of open windows" is enabled.
+  * Fixed an issue with the fuzzy highlighting markup not resetting when ending a search.
+
 ### 3.2.6
 
   * Fixed issues with invalid access of C objects occurring with CJS git master.

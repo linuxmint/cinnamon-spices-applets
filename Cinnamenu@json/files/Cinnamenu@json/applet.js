@@ -27,7 +27,7 @@ const FileUtils = imports.misc.fileUtils;
 let store, fuzzy, sortBy, setTimeout, tryFn, find, map, isFinalized, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
-  fuzzyOptions, gridWidths;
+  fuzzyOptions, gridWidths, searchThresholds;
 if (typeof require !== 'undefined') {
   let utils = require('./utils');
   let buttons = require('./buttons');
@@ -56,6 +56,7 @@ if (typeof require !== 'undefined') {
   ApplicationsViewMode = constants.ApplicationsViewMode;
   fuzzyOptions = constants.fuzzyOptions;
   gridWidths = constants.gridWidths;
+  searchThresholds = constants.searchThresholds;
 } else {
   const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
   let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
@@ -83,6 +84,7 @@ if (typeof require !== 'undefined') {
   ApplicationsViewMode = AppletDir.constants.ApplicationsViewMode;
   fuzzyOptions = AppletDir.constants.fuzzyOptions;
   gridWidths = AppletDir.constants.gridWidths;
+  searchThresholds = AppletDir.constants.searchThresholds;
 }
 
 const hintText = _('Type to search...');
@@ -1223,10 +1225,10 @@ CinnamenuApplet.prototype = {
       windows[i].description = app.name;
       for (let z = 0; z < searchableProps.length; z++) {
         match = fuzzy(pattern, windows[i][searchableProps[z]], fuzzyOptions)
-        if (match.score > 0.2) {
+        if (match.score > searchThresholds[searchableProps[z]]) {
           appObject._icon = app.create_icon_texture(this.state.iconSize);
           appObject.type = ApplicationType._windows;
-          appObject.name = windows[i].title;
+          appObject.name = !z ? match.result : windows[i].title;
           appObject.score = match.score;
           appObject.window = windows[i];
           res.push(appObject);
@@ -1427,22 +1429,25 @@ CinnamenuApplet.prototype = {
       if (categoryMenuId && categoryMenuId !== 'all') {
         res = this.applicationsByCategory[categoryMenuId];
       } else {
-        for (let directory in this.applicationsByCategory) {
-          res = res.concat(this.applicationsByCategory[directory])
+        let keys = Object.keys(this.applicationsByCategory);
+        for (let i = 0; i < keys.length; i++) {
+          res = res.concat(this.applicationsByCategory[keys[i]])
         }
       }
     }
 
     if (pattern) {
       let _res = [];
-      let searchableProps = ['name', 'keywords', 'description'];
+      let searchableProps = ['name', 'description', 'keywords', 'id'];
 
       for (let i = 0, len = res.length; i < len; i++) {
+        let name = res[i].get_name();
+        let keywords = res[i].get_keywords();
         Object.assign(res[i], {
-          name: res[i].get_name(),
-          keywords: res[i].get_name(),
+          name,
+          keywords: keywords || name,
           description:res[i].get_description(),
-          id: res[i].get_id(),
+          id: res[i].get_id().replace(/\.desktop$/, ''),
           type: ApplicationType._applications
         });
 
@@ -1452,7 +1457,7 @@ CinnamenuApplet.prototype = {
             continue;
           }
           match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
-          if (res[i][searchableProps[z]] && match.score > 0.1) {
+          if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
             res[i].score = match.score;
             res[i][searchableProps[z]] = match.result;
             _res.push(res[i]);

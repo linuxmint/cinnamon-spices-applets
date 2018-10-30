@@ -31,3 +31,12 @@ const fuzzyOptions = {
 }
 
 const gridWidths = [0, 240, 340, 498, 644, 725, 840, 980];
+
+const searchThresholds = {
+  id: 0.2,
+  name: 0.1,
+  description: 0.1,
+  keywords: 0.3,
+  title: 0.2,
+  description: 0.1
+};

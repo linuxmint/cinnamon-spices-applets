@@ -438,6 +438,15 @@ AppListGridButton.prototype = {
           && this.actor.opacity === 50) {
           this.actor.set_opacity(255);
         }
+      },
+      searchActive: () => {
+        // Ensure the reset view is markup-free
+        if (this.state.searchActive) {
+          this.nameUnformatted = this.buttonState.app.name;
+        } else if (this.nameUnformatted) {
+          this.buttonState.app.name = this.nameUnformatted;
+          this.nameUnformatted = undefined;
+        }
       }
     });
     this.buttonState = store.init({
