@@ -37,6 +37,5 @@ const searchThresholds = {
   name: 0.1,
   description: 0.1,
   keywords: 0.3,
-  title: 0.2,
-  description: 0.1
+  title: 0.2
 };
