@@ -84,18 +84,6 @@ ConfigSettings.prototype = {
   },
   adjustDevices: function(deviceType, newDeviceList) {
     let isChanged = false;
-    // Do a migration for the switch from storing devices in objects to arrays
-    if (this._prefs[deviceType].devices != null
-      && !Array.isArray(this._prefs[deviceType].devices)) {
-      let keys = Object.keys(this._prefs[deviceType].devices);
-      let devices = [];
-      for (let i = 0; i < keys.length; i++) {
-        this._prefs[deviceType].devices[keys[i]].id = keys[i];
-        devices.push(this._prefs[deviceType].devices[keys[i]]);
-      }
-      this._prefs[deviceType].devices = devices;
-      isChanged = true;
-    }
 
     let interfaceKeys = map(this._prefs[deviceType].devices, function(device) {
       return device.id;
@@ -122,21 +110,20 @@ ConfigSettings.prototype = {
     }
 
     for (let i = 0; i < newDeviceList.length; i++) {
+      let refIndex = findIndex(this._prefs[deviceType].devices, function(device) {
+        return device.id === newDeviceList[i].id;
+      });
       if (interfaceKeys.indexOf(newDeviceList[i].id) === -1) {
         // Use default values
         this._prefs[deviceType].devices.push({
           id: newDeviceList[i].id,
-          enabled: true,
+          enabled: refIndex > -1,
           show: true,
           colors: [[1, 1, 1, 0.8], [0, 0, 0, 0.6]]
         });
         isChanged = true;
       } else {
         // reuse it and its values
-        let refIndex = findIndex(this._prefs[deviceType].devices, function(device) {
-          return device.id === newDeviceList[i].id;
-        });
-
         if (refIndex > -1) {
           Object.assign(this._prefs[deviceType].devices[refIndex], newDeviceList[i]);
           this._prefs[deviceType].devices[refIndex].show = 4;
