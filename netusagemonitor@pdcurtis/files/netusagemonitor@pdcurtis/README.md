@@ -19,7 +19,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
   * **The Applet:**
        + Continuously displays Upload and Download rate in a fixed width 'steady' display
-       + The Applet Background colour is:
+       + The Applet Background color is:
           - Black when Current Interface not active
           - Green when Current connection and interface has provided data
           - Orange when the Alert level (as percentage of the Data Limit) has been exceeded
@@ -32,7 +32,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
        + Allows the selection of the interface to be monitored from those manged by Network Manager.
        + Allows the selection of an interfaces not managed by properly by Network Manager and/or interfaces  for a connection initiated outside Network manager (ppp0 and bnep0). (bnep0 needs v20_2.6.0 or higher)
        + Identifies the interface which has been selected for monitoring.
-       + Allows updating of the list of Network Manager Interfaces (eg after a dongle has been inserted or a bluetooth connection made)
+       + Allows updating of the list of Network Manager Interfaces (e.g. after a dongle has been inserted or a bluetooth connection made)
        + Enables the Cumulative Usage Monitors to be reset and the date and time of reset displayed.
        + Provides links to:
           - The NUMA Settings screen.
@@ -41,7 +41,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
        + Displays continuously updated Uploaded and Downloaded Data for the Monitored Interface.
        + If Alerts are enabled:
           - A slider to adjust the Alert level as a percentage of the Data Limit
-          - A display of the exact Alert level percentage and tthe Data Limit
+          - A display of the exact Alert level percentage and the Data Limit
        + For each Interface where cumulative monitoring is enabled:
            + The interface and Cumulative Usage
            + A comment (entered in Settings) to remind one of when it was set/reset and the value when set/reset.
@@ -71,9 +71,9 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
 ### Styling
 
-The display width, justification and font details are set using an external Cascading Style Sheet (.css) file which is in the main folder (usualy ```~/.local/share/cinnamon/netusagemonitor@pdcurtis/stylesheet.css```).
+The display width, justification and font details are set using an external Cascading Style Sheet (.css) file which is in the main folder (usually ```~/.local/share/cinnamon/netusagemonitor@pdcurtis/stylesheet.css```).
 
-The settings in this css file govern the width of the Applet and the font. Changes may be required with some themes to avoid the display width being exceeded which leads to jitter with high network speeds and resolutions or to allow a reduced size width to save panel space. The latest version also allow the backgrounds to be configured using this css file to optimise to a particular theme although the defaults work well on most popular themes.
+The settings in this css file govern the width of the Applet and the font. Changes may be required with some themes to avoid the display width being exceeded which leads to jitter with high network speeds and resolutions or to allow a reduced size width to save panel space. The latest version also allow the backgrounds to be configured using this css file to optimize to a particular theme although the defaults work well on most popular themes.
 
 Note: These settings will be overwritten if the applet is reloaded.
 
