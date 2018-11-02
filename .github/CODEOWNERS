@@ -5,12 +5,15 @@ AutostartPrograms@spacy01/**                       @spacy01
 BgRadio@spacy01/**                                 @spacy01
 CinnVIIStarkMenu@NikoKrause/**                     @NikoKrause
 Cinnamenu@json/**                                  @jaszhix
+CustomApplicationsMenu@LLOBERA/**                  @Nicolas01
+CustomPlaces@Nicolas01/**                          @Nicolas01
 IcingTaskManager@json/**                           @jaszhix
 IcingWindowSaver@json/**                           @jaszhix
 SW++@mohammad-sn/**                                @mohammad-sn
 ScreenLocker@tuuxx/**                              @tuuxx
 ScreenShot+RecordDesktop@tech71/**                 @icarter09
 ShellTools@abgoyal/**                              @jaszhix
+ShutdownMenuWithIcons@LLOBERA/**                   @Nicolas01
 azan@fahri.nurul.id/**                             @fahrinh
 batterymonitor@pdcurtis/**                         @pdcurtis
 brightness-and-gamma-applet@cardsurf/**            @cardsurf
@@ -57,7 +60,6 @@ restart-cinnamon@kolle/**                          @icarter09
 serviceLauncher@hulygun/**                         @hulygun
 sessionManager@scollins/**                         @collinss
 show-hide-applets@mohammad-sn/**                   @mohammad-sn
-slingshot@jfarthing84/**                           @jfarthing84
 smallcalc_applet@lerc.sds/**                       @lerc
 sound150@claudiux/**                               @claudiux
 spices-notifier@germanfr/**                        @germanfr
@@ -66,7 +68,6 @@ stevedore@centurix/**                              @centurix
 sticky@scollins/**                                 @collinss
 stopwatch@pdcurtis/**                              @pdcurtis
 sysmonitor@orcus/**                                @orcuscz
-system-monitor@pixunil/**                          @pixunil
 system-monitor@spacy01/**                          @spacy01
 temperature@fevimu/**                              @jaszhix
 text-to-speech-applet@cardsurf/**                  @cardsurf
@@ -85,14 +86,12 @@ workspace-name@willurd/**                          @willurd
 
 # The following xlets have no author assigned to them.
 # CommandRunner@appdevsw
-# CustomApplicationsMenu@LLOBERA
 # MessagingMenuV3@blub
 # PDFManager@cinnamon.org
 # ScreenShot@tech71
 # SettingsPlus@lusito.info
 # ShutdownApplet@DeathMD
 # ShutdownApplet@shelley
-# ShutdownMenuWithIcons@LLOBERA
 # ThemeRefresh@JosephM
 # WindowListGroup@jake.phy@gmail.com
 # a4techTool@mous
@@ -131,7 +130,6 @@ workspace-name@willurd/**                          @willurd
 # power-off@martin
 # rprego@rprego.com
 # rwall@typicalfoobar
-# sane-menu@nooulaif
 # screen-inhibit@mtwebster
 # scripts@paucapo.com
 # search-box@mtwebster
@@ -139,7 +137,6 @@ workspace-name@willurd/**                          @willurd
 # shutdown-timer@webum.by
 # smogwawelski@pamsoft.pl
 # softyubikey@yubiserver.include.gr
-# sound-with-apps-volume@koutch
 # stackoverflow-questions-notifier@higuaro
 # stocks@adonut
 # suspend@janax
