@@ -1410,6 +1410,9 @@ CinnamenuApplet.prototype = {
         description: '',
         type: ApplicationType._recent
       });
+    } else if (!pattern) {
+      this.answerText.set_text(_('No recent documents'));
+      this.answerText.show();
     }
 
     if (pattern) {
@@ -1433,9 +1436,6 @@ CinnamenuApplet.prototype = {
       }
 
       res = _res;
-    } else {
-      this.answerText.set_text(_('No recent documents'));
-      this.answerText.show();
     }
     return res;
   },
