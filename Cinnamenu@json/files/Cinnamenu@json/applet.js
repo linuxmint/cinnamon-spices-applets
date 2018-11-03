@@ -1519,6 +1519,7 @@ CinnamenuApplet.prototype = {
 
   _resetDisplayApplicationsToStartup: function() {
     this.resetSearch();
+    this.state.set({currentCategory: 'favorites'});
     this._selectCategory('favorites');
   },
 
