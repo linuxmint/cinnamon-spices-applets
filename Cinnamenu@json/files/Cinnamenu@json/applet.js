@@ -1209,7 +1209,7 @@ CinnamenuApplet.prototype = {
       windows = windows.concat(global.screen.get_workspace_by_index(i).list_windows())
     }
     let res = [];
-    let searchableProps = ['title', 'description'];
+    let searchableProps = ['title', 'description', 'id'];
     for (let i = 0, len = windows.length; i < len; i++) {
       if (!windows[i] || !windows[i].title) {
         continue;
@@ -1223,6 +1223,7 @@ CinnamenuApplet.prototype = {
         description: app.name
       };
       windows[i].description = app.name;
+      windows[i].id = windows[i].get_wm_class().toLowerCase();
       for (let z = 0; z < searchableProps.length; z++) {
         match = fuzzy(pattern, windows[i][searchableProps[z]], fuzzyOptions)
         if (match.score > searchThresholds[searchableProps[z]]) {
