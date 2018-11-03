@@ -1220,7 +1220,7 @@ CinnamenuApplet.prototype = {
         continue;
       }
       let appObject = {
-        description: app.name
+        description: app.name,
       };
       windows[i].description = app.name;
       windows[i].id = windows[i].get_wm_class().toLowerCase();
@@ -1249,6 +1249,7 @@ CinnamenuApplet.prototype = {
         results[i].type = ApplicationType._providers;
         results[i].name = results[i].label.replace(/ : /g, ': ');
         results[i].activate = provider.on_result_selected;
+        results[i].score = 0.1;
         if (results[i].icon) {
           results[i].icon.icon_size = this.state.iconSize;
         } else if (results[i].icon_app){
@@ -1270,10 +1271,16 @@ CinnamenuApplet.prototype = {
     }
     let places = this.placesManager.getDefaultPlaces();
     let res = [];
+    let match = null;
     for (let i = 0, len = places.length; i < len; i++) {
-      if (!pattern || places[i].name.toLowerCase().indexOf(pattern) !== -1) {
+      if (pattern) match = fuzzy(pattern, places[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
         places[i].type = ApplicationType._places;
         places[i].description = places[i].file.get_path();
+        if (match) {
+          places[i].name = match.result;
+          places[i].score = match.score;
+        }
         res.push(places[i]);
       }
     }
@@ -1286,11 +1293,39 @@ CinnamenuApplet.prototype = {
     }
     let bookmarks = this.placesManager.getBookmarks();
     let res = [];
+    let match = null;
     for (let i = 0, len = bookmarks.length; i < len; i++) {
-      if (!pattern || bookmarks[i].name.toLowerCase().indexOf(pattern) !== -1) {
+      if (pattern) match = fuzzy(pattern, bookmarks[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
         bookmarks[i].type = ApplicationType._places;
         bookmarks[i].description = bookmarks[i].file.get_path();
+        if (match) {
+          bookmarks[i].name = match.result;
+          bookmarks[i].score = match.score;
+        }
         res.push(bookmarks[i]);
+      }
+    }
+    return res;
+  },
+
+  listDevices: function(pattern) {
+    if (!this.placesManager) {
+      return [];
+    }
+    let devices = this.placesManager.getMounts();
+    let res = [];
+    let match = null;
+    for (let i = 0, len = devices.length; i < len; i++) {
+      if (pattern) match = fuzzy(pattern, devices[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
+        devices[i].type = ApplicationType._places;
+        devices[i].description = devices[i].file.get_path();
+        if (match) {
+          devices[i].name = match.result;
+          devices[i].score = match.score;
+        }
+        res.push(devices[i]);
       }
     }
     return res;
@@ -1339,22 +1374,6 @@ CinnamenuApplet.prototype = {
     return res;
   },
 
-  listDevices: function(pattern) {
-    if (!this.placesManager) {
-      return [];
-    }
-    let devices = this.placesManager.getMounts();
-    let res = [];
-    for (let i = 0, len = devices.length; i < len; i++) {
-      if (!pattern || devices[i].name.toLowerCase().indexOf(pattern) !== -1) {
-        devices[i].type = ApplicationType._places;
-        devices[i].description = devices[i].file.get_path();
-        res.push(devices[i]);
-      }
-    }
-    return res;
-  },
-
   listRecent: function(pattern) {
     if (!this.state.recentEnabled) {
       return [];
@@ -1391,9 +1410,6 @@ CinnamenuApplet.prototype = {
         description: '',
         type: ApplicationType._recent
       });
-    } else if (!pattern) {
-      this.answerText.set_text(_('No recent documents'));
-      this.answerText.show();
     }
 
     if (pattern) {
@@ -1417,6 +1433,9 @@ CinnamenuApplet.prototype = {
       }
 
       res = _res;
+    } else {
+      this.answerText.set_text(_('No recent documents'));
+      this.answerText.show();
     }
     return res;
   },
