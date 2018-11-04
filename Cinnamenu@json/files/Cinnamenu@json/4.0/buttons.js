@@ -23,7 +23,6 @@ const {spawnCommandLine, spawn, unref, tryFn} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
 const {_, ApplicationType} = require('./constants');
-const {isString} = require('./utils');
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const stripMarkupRegex = /(<([^>]+)>)/ig;
@@ -68,7 +67,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     this._dir = dir;
     let isStrDir = typeof dir === 'string';
     let dirName = !isStrDir ? dir.get_name() : null;
-    this.id = isString(this._dir) ? this._dir : altNameText;
+    this.id = typeof this._dir === 'string' || this._dir instanceof String ? this._dir : altNameText;
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
     this.entered = null;
