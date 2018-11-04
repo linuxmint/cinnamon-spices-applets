@@ -34,16 +34,16 @@ class PlaceInfo {
     let launchContext = global.create_app_launch_context();
     launchContext.set_timestamp(timestamp);
 
-    try {
-      Gio.AppInfo.launch_default_for_uri(this.file.get_uri(),
-        launchContext);
-    } catch (e) {
-      this.file.mount_enclosing_volume(0, null, null, function(file, result) {
-        file.mount_enclosing_volume_finish(result);
-        Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
-      });
-      Main.notifyError(_("Failed to launch \"%s\"").format(this.name), e.message);
-    }
+    tryFn(
+      () => Gio.AppInfo.launch_default_for_uri(this.file.get_uri(), launchContext),
+      (e) => {
+        this.file.mount_enclosing_volume(0, null, null, function(file, result) {
+          file.mount_enclosing_volume_finish(result);
+          Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
+        });
+        Main.notifyError(_('Failed to launch "%s"').format(this.name), e.message);
+      }
+    );
   }
 
   getIcon() {
@@ -82,12 +82,13 @@ class PlaceInfo {
   }
 
   getFileName() {
-    try {
-      let info = this.file.query_info('standard::display-name', 0, null);
-      return info.get_display_name();
-    } catch (e) {
-      return this.file.get_basename();
-    }
+    tryFn(
+      () => {
+        return this.file.query_info('standard::display-name', 0, null)
+          .get_display_name()
+      },
+      () => this.file.get_basename(),
+    );
   }
 };
 
