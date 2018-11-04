@@ -63,7 +63,7 @@ var fuzzy = function (q, str, opts) {
   if (q === str) {
     return {
       score: 1,
-      result: str
+      result: opts.before + originalStr + opts.after
     };
   }
 
