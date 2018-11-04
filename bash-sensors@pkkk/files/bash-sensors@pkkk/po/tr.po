@@ -1,0 +1,88 @@
+# Turkish translations for PACKAGE package.
+# Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# hidayetkurnaz <hidayetkurnaz@debianhido>, 2018.
+# Hidayet Kurnaz <hidayetkurnaz@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-16 18:34+0200\n"
+"PO-Revision-Date: 2018-11-04 19:08+0300\n"
+"Last-Translator: Hidayet Kurnaz <hidayetkurnaz@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: applet.js:58 applet.js:70 applet.js:80
+msgid "script error"
+msgstr "betik hatası"
+
+#. bash-sensors@pkkk->metadata.json->description
+msgid ""
+"Write your Bash commands to specify applet output (temperature sensors and "
+"not only!)"
+msgstr ""
+"Uygulama çıktısını belirtmek için Bash komutlarınızı yazın (sıcaklık "
+"sensörleri ve dahası da var!)"
+
+#. bash-sensors@pkkk->metadata.json->name
+msgid "Bash Sensors"
+msgstr "Bash Sensörleri"
+
+#. bash-sensors@pkkk->settings-schema.json->head->description
+msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr "Ayarlar - Bash Sensörleri (Bash ile komutuları yazınız!)"
+
+#. bash-sensors@pkkk->settings-schema.json->enableScript2->description
+msgid "Two-line mode (command 2 enabled)"
+msgstr "İki satırlı kip (komut 2 etkin)"
+
+#. bash-sensors@pkkk->settings-schema.json->tooltipScript->description
+msgid "Tooltip command or static tooltip text"
+msgstr "İpucu komutu yada durağan ipucu metni"
+
+#. bash-sensors@pkkk->settings-schema.json->tooltipScript->tooltip
+msgid "tooltip (static or dynamic)"
+msgstr "ipucu (durağan yada dinamik)"
+
+#. bash-sensors@pkkk->settings-schema.json->dynamicTooltip->description
+msgid "Dynamic tooltip (use output of tooltip command as tooltip)"
+msgstr "Dinamik ipucu (ipucu komutunun çıktısını ipucu gibi kullan)"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->description
+msgid "Command 1"
+msgstr "Komut 1"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->tooltip
+msgid "first line of output"
+msgstr "ilk çıktı satırı"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->description
+msgid "Command 2"
+msgstr "Komut 2"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->tooltip
+msgid "second line of output (optional)"
+msgstr "ikinci çıktı satırı (isteğe bağlı)"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->description
+msgid "Refresh interval [0 for no refresh]"
+msgstr "Yenileme süresi [yenileme yapmaması için 0]"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "saniye"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->description
+msgid "Menu command (on applet left-click)"
+msgstr "Menü komutu (uygulamada sol tıklama)"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->tooltip
+msgid "allows to display lots of information in popup menu"
+msgstr "açılır menüde birçok bilgi gösterilmesini sağlar"
