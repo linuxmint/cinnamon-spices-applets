@@ -54,7 +54,7 @@
         "show-tooltips",
         "tooltip-delay",
         "category-click",
-        "enable-autoscroll",
+        "enable-autoscroll"
       ]
     },
     "menu-layout": {
