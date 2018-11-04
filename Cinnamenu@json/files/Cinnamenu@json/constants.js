@@ -39,3 +39,5 @@ const searchThresholds = {
   keywords: 0.2,
   title: 0.2
 };
+
+const markdownProps = ['name', 'description'];

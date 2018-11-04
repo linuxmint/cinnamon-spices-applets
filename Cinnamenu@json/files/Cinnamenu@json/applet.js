@@ -27,7 +27,7 @@ const FileUtils = imports.misc.fileUtils;
 let store, fuzzy, sortBy, setTimeout, tryFn, find, map, isFinalized, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
-  fuzzyOptions, gridWidths, searchThresholds;
+  fuzzyOptions, gridWidths, searchThresholds, markdownProps;
 if (typeof require !== 'undefined') {
   let utils = require('./utils');
   let buttons = require('./buttons');
@@ -57,6 +57,7 @@ if (typeof require !== 'undefined') {
   fuzzyOptions = constants.fuzzyOptions;
   gridWidths = constants.gridWidths;
   searchThresholds = constants.searchThresholds;
+  markdownProps = constants.markdownProps;
 } else {
   const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
   let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
@@ -85,6 +86,7 @@ if (typeof require !== 'undefined') {
   fuzzyOptions = AppletDir.constants.fuzzyOptions;
   gridWidths = AppletDir.constants.gridWidths;
   searchThresholds = AppletDir.constants.searchThresholds;
+  markdownProps = AppletDir.constants.markdownProps;
 }
 
 const hintText = _('Type to search...');
@@ -1466,7 +1468,7 @@ CinnamenuApplet.prototype = {
         Object.assign(res[i], {
           name: name,
           keywords: keywords || name,
-          description:res[i].get_description(),
+          description: res[i].get_description(),
           id: res[i].get_id().replace(/\.desktop$/, ''),
           type: ApplicationType._applications
         });
@@ -1479,7 +1481,9 @@ CinnamenuApplet.prototype = {
           match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
           if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
             res[i].score = match.score;
-            res[i][searchableProps[z]] = match.result;
+            if (markdownProps.indexOf(searchableProps[z]) > -1) {
+              res[i][searchableProps[z]] = match.result;
+            }
             _res.push(res[i]);
             break;
           }
