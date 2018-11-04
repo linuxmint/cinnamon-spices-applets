@@ -512,30 +512,6 @@ AppListGridButton.prototype = {
 
     this._iconContainer = new St.BoxLayout();
 
-    // appType 0 = application, appType 1 = place, appType 2 = recent
-    // Filesystem autocompletion
-    if (typeof app === 'string') {
-      if (app.charAt(0) === '~') {
-        app = app.slice(1);
-        app = GLib.get_home_dir() + app;
-      }
-      const name = app;
-      let contentType = Gio.content_type_guess(name, null);
-      this.isPath = app[0] === '/';
-      this.buttonState.app = {
-        name: name,
-        description: name,
-        uri: name,
-        icon: Gio.content_type_get_icon(contentType[0])
-      };
-      this.buttonState.appType = ApplicationType._places;
-      this.file = Gio.file_new_for_path(this.buttonState.app.name);
-      tryFn(
-        () => this.handler = this.file.query_default_handler(null),
-        () => this.handler = null
-      );
-    }
-
     // Don't show protocol handlers
     if (this.buttonState.app.description) {
       let slice = this.buttonState.app.description.slice(0, 7);

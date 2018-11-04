@@ -297,8 +297,9 @@ PlacesManager.prototype = {
   _reloadBookmarks: function() {
     this._bookmarks = [];
 
-    let content = Cinnamon.get_file_contents_utf8_sync(this._bookmarksFile.get_path());
-    let lines = content.split('\n');
+    let [success, content] = this._bookmarksFile.load_contents(null);
+    if (!success) return;
+    let lines = content.toString().split('\n');
 
     let bookmarks = [];
     for (let i = 0, len = lines.length; i < len; i++) {

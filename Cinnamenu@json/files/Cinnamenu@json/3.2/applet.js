@@ -776,11 +776,6 @@ CinnamenuApplet.prototype = {
         cb: this.refresh
       },
       {
-        key: 'search-filesystem',
-        value: 'searchFilesystem',
-        cb: this.refresh
-      },
-      {
         key: 'show-apps-description-on-buttons',
         value: 'showAppDescriptionsOnButtons',
         cb: this.refresh
@@ -1822,26 +1817,6 @@ CinnamenuApplet.prototype = {
     return true;
   },
 
-  _getCompletion: function(text) {
-    if (text.indexOf('/') !== -1) {
-      if (text.substr(text.length - 1) === '/') {
-        return '';
-      } else {
-        return this._pathCompleter.get_completion_suffix(text);
-      }
-    } else {
-      return false;
-    }
-  },
-
-  _getCompletions: function(text) {
-    if (text.indexOf('/') !== -1) {
-      return this._pathCompleter.get_completions(text);
-    } else {
-      return [];
-    }
-  },
-
   resetSearch: function() {
     if (this.answerText) {
       this.answerText.set_text('');
@@ -1974,16 +1949,9 @@ CinnamenuApplet.prototype = {
 
     let recentResults = this.listRecent(pattern);
 
-    let acResults = []; // search box autocompletion results
-    if (this.state.settings.searchFilesystem) {
-      // Don't use the pattern here, as filesystem is case sensitive
-      acResults = this._getCompletions(text);
-    }
-
     let results = appResults
       .concat(placesResults)
       .concat(recentResults)
-      .concat(acResults)
       .concat(this.listWindows(pattern));
 
     const finish = () => {

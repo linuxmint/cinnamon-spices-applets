@@ -4,5 +4,6 @@
   "description": "A flexible menu providing formatting options, web bookmarks, open window lookup, and search provider support with fuzzy searching.",
   "max-instances": 1,
   "version": "3.2.8",
+  "multiversion": true,
   "cinnamon-version": ["3.2", "3.4", "3.6", "3.8", "4.0"]
 }
