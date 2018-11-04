@@ -796,6 +796,10 @@ AppListGridButton.prototype = {
         || this.state.searchActive
         || this.buttonState.app.shouldHighlight)
         || opts.removeFormatting) {
+
+      // TODO: Determine source cause of this markup occurring.
+      if (markup.indexOf('</<') > -1) return;
+
       clutterText.set_markup(markup);
       clutterText.ellipsize = Pango.EllipsizeMode.END;
     }
