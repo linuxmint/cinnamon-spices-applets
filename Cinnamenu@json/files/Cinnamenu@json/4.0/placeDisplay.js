@@ -82,7 +82,7 @@ class PlaceInfo {
   }
 
   getFileName() {
-    tryFn(
+    return tryFn(
       () => {
         return this.file.query_info('standard::display-name', 0, null)
           .get_display_name()
