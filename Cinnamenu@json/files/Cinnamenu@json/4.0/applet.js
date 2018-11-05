@@ -48,14 +48,6 @@ const PlaceDisplay = require('./placeDisplay');
 
 const hintText = _('Type to search...');
 
-/*
-
-/!\ WIP pre-tag
-
-imports.misc.config.PACKAGE_VERSION === '4.0.0'
-
-*/
-
 class bookmarksManager {
   constructor() {
     let bookmarks = Chromium._readBookmarks()
@@ -596,12 +588,24 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   customMenuHeightChange() {
+    let height;
+    let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
+
     if (this.state.settings.enableCustomMenuHeight) {
-      this.groupCategoriesWorkspacesScrollBox.height = this.state.settings.customMenuHeight;
+      height = this.state.settings.customMenuHeight;
     } else {
-      this.groupCategoriesWorkspacesScrollBox.height = this.state.menuHeight;
+      height = this.mainBox.height - (this.bottomPane.height / 2);
     }
-    this.applicationsScrollBox.height = this.groupCategoriesWorkspacesScrollBox.height;
+
+    if (height >= monitorHeight - this.panel.height) {
+      height = Math.round(Math.abs(monitorHeight * 0.55));
+    }
+
+    if (height === this.state.menuHeight) return;
+
+    this.groupCategoriesWorkspacesScrollBox.height = height;
+    this.applicationsScrollBox.height = height;
+    this.state.set({menuHeight: height});
   }
 
   getExampleSearchProviders() {
@@ -2037,12 +2041,9 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   display() {
-    // Allow the menu to be taller for high resolution displays.
-    let menuHeight = Math.round(Math.abs(Main.layoutManager.primaryMonitor.height * 0.55));
     this.state.set({
       isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
-      displayed: true,
-      menuHeight: menuHeight < 360 ? 360 : menuHeight
+      displayed: true
     });
 
     let section = new PopupMenuSection();
@@ -2074,7 +2075,6 @@ class CinnamenuApplet extends TextIconApplet {
     this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({
       x_fill: true,
       y_fill: false,
-      height: this.state.menuHeight,
       y_align: St.Align.START,
       style_class: 'vfade menu-applications-scrollbox'
     });
@@ -2153,7 +2153,6 @@ class CinnamenuApplet extends TextIconApplet {
       x_fill: true,
       y_fill: false,
       y_align: St.Align.START,
-      height: this.state.menuHeight,
       style_class: 'vfade menu-applications-scrollbox'
     });
     let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
