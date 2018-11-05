@@ -164,7 +164,7 @@ class CinnamenuApplet extends TextIconApplet {
         openMenu: () => this.menu.open(),
         closeMenu: () => this.menu.close(),
         getAppsGridBoxWidth: () => this.applicationsGridBox.width,
-        scrollToButton: (button) => this.scrollToButton(button),
+        scrollToButton: (...args) => this.scrollToButton(...args),
         isNotInScrollView: (button) => this.isNotInScrollView(button),
         purgeRecentItems: () => this.recentManager.purge_items(),
         getActiveButtons: () => this.getActiveButtons(),
@@ -1058,34 +1058,55 @@ class CinnamenuApplet extends TextIconApplet {
     return boxHeight + currentScrollValue < allocationBox.y2 + 100;
   }
 
-  scrollToButton(button) {
-    // Based on https://github.com/GNOME/gnome-shell/blob/817ff52414d18eb11cb97141c594e79d3e0c0512/js/misc/js#L403
-    let adjustment = this.applicationsScrollBox.vscroll.adjustment;
-    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
-    let offset = 0;
-    let vfade = this.applicationsScrollBox.get_effect('fade');
-    if (vfade) {
-      offset = vfade.vfade_offset;
+  scrollToButton(button, fullyScrollFirstAndLast = false) {
+    let container = button.actor.get_parent();
+    let scrollBox = container;
+    let children;
+    let i = 0;
+    while (!(scrollBox instanceof St.ScrollView)) {
+      i++;
+      if (i > 10) {
+        global.logWarning('Cinnamenu: Unable to find scrollbox for', button.actor.toString())
+        return false
+      };
+      scrollBox = scrollBox.get_parent();
     }
-    let box = button.actor.get_allocation_box();
-    let y1 = box.y1, y2 = box.y2;
-    let parent = button.actor.get_parent();
-    while (parent !== this.applicationsScrollBox) {
-      if (!parent) {
+
+    let adjustment = scrollBox.vscroll.adjustment;
+    let [value, lower, upper, stepIncrement, pageIncrement, pageSize] = adjustment.get_values();
+
+    if (fullyScrollFirstAndLast) children = container.get_children();
+    if (fullyScrollFirstAndLast && button.actor === children[0]) {
+      value = 0;
+    } else if (fullyScrollFirstAndLast && button.actor === children[children.length - 1]) {
+      value = scrollBox.height;
+    } else {
+      let offset = 0;
+      let vfade = scrollBox.get_effect('fade');
+      if (vfade) {
+        offset = vfade.vfade_offset;
+      }
+      let box = button.actor.get_allocation_box();
+      let y1 = box.y1, y2 = box.y2;
+      let parent = button.actor.get_parent();
+      while (parent !== scrollBox) {
+        if (!parent) {
+          return false;
+        }
+        let box = parent.get_allocation_box();
+        y1 += box.y1;
+        y2 += box.y1;
+        parent = parent.get_parent();
+      }
+      if (y1 < value + offset) {
+        value = Math.max(0, y1 - offset);
+      } else if (y2 > value + pageSize - offset) {
+        value = Math.min(upper, y2 + offset - pageSize);
+      } else {
         return false;
       }
-      let box = parent.get_allocation_box();
-      y1 += box.y1;
-      y2 += box.y1;
-      parent = parent.get_parent();
     }
-    if (y1 < value + offset) {
-      value = Math.max(0, y1 - offset);
-    } else if (y2 > value + pageSize - offset) {
-      value = Math.min(upper, y2 + offset - pageSize);
-    } else {
-      return false;
-    }
+
     if (this.state.settings.enableAnimation) {
       addTween(adjustment, {
         value: value,

@@ -184,6 +184,8 @@ class CategoryListButton extends PopupBaseMenuItem {
 
     if (event) {
       this.state.trigger('clearEnteredActors');
+    } else {
+      this.state.trigger('scrollToButton', this, true);
     }
 
     this.entered = true;
