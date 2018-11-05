@@ -131,6 +131,7 @@ class CinnamenuApplet extends TextIconApplet {
           }
         },
         clearEnteredActors: () => this.clearEnteredActors(),
+        makeVectorBox: (actor) => this.makeVectorBox(actor),
         setTooltip: (coords, height, text) => {
           if (!text) {
             this.tooltip.hide();
@@ -586,7 +587,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (this.state.settings.enableCustomMenuHeight) {
       height = this.state.settings.customMenuHeight;
     } else {
-      height = this.mainBox.height - (this.bottomPane.height / 2);
+      height = this.categoriesBox.height + this.bottomPane.height;
     }
 
     if (height >= monitorHeight - this.panel.height) {
@@ -594,6 +595,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     this.groupCategoriesWorkspacesScrollBox.height = height;
+    this.categoriesOverlayBox.height = height;
     this.applicationsScrollBox.height = height;
     this.state.set({menuHeight: height});
   }
@@ -849,6 +851,82 @@ class CinnamenuApplet extends TextIconApplet {
       }));
     }
     return buttons;
+  }
+
+ /*
+  * The vectorBox overlays the the categoriesBox to aid in navigation from categories to apps
+  * by preventing misselections. It is set to the same size as the categoriesOverlayBox and
+  * categoriesBox.
+  *
+  * The actor is a quadrilateral that we turn into a triangle by setting the A and B vertices to
+  * the same position. The size and origin of the vectorBox are calculated in getVectorInfo().
+  * Using those properties, the bounding box is sized as (w, h) and the triangle is defined as
+  * follows:
+  *   _____
+  *  |    /|D
+  *  |   / |     AB: (mx, my)
+  *  | A/  |      C: (w, h)
+  *  | B\  |      D: (w, 0)
+  *  |   \ |
+  *  |____\|C
+  */
+  getVectorInfo() {
+    let [mx, my, mask] = global.get_pointer();
+    let bw, bh, bx, by;
+    if (!this.categoriesScrollBoxTransformedSize) {
+      this.categoriesScrollBoxTransformedSize = this.groupCategoriesWorkspacesScrollBox.get_transformed_size();
+    }
+    if (!this.categoriesScrollBoxTransformedPosition) {
+      this.categoriesScrollBoxTransformedPosition = this.groupCategoriesWorkspacesScrollBox.get_transformed_position();
+    }
+    [bw, bh] = this.categoriesScrollBoxTransformedSize;
+    [bx, by] = this.categoriesScrollBoxTransformedPosition;
+    let xformed_mx = mx - bx;
+    let xformed_my = my - by;
+    if (xformed_mx < 0 || xformed_mx > bw || xformed_my < 0 || xformed_my > bh) {
+      return null;
+    }
+    return {
+      mx: xformed_mx,
+      my: xformed_my,
+      w: bw,
+      h: bh
+    };
+  }
+
+  makeVectorBox(actor) {
+    let vi = this.getVectorInfo();
+    if (!vi) return;
+    let config = {
+      debug: false,
+      width: vi.w - 1,
+      height: vi.h,
+      ulc_x: vi.mx,
+      ulc_y: vi.my,
+      llc_x: vi.mx,
+      llc_y: vi.my,
+      urc_x: vi.w,
+      urc_y: 0,
+      lrc_x: vi.w,
+      lrc_y: vi.h
+    };
+    if (!this.vectorBox) {
+      this.vectorBox = new St.Polygon(config);
+      this.categoriesOverlayBox.add_actor(this.vectorBox);
+      this.vectorBox.set_reactive(true);
+    } else {
+      let keys = Object.keys(config);
+      for (let i = 0; i < keys.length; i++) {
+        this.vectorBox[keys[i]] = config[keys[i]]
+      }
+    }
+  }
+
+  destroyVectorBox() {
+    if (this.vectorBox != null) {
+      this.vectorBox.destroy();
+      this.vectorBox = null;
+    }
   }
 
   loadAppCategories(dir, rootDir, dirId) {
@@ -2224,11 +2302,14 @@ class CinnamenuApplet extends TextIconApplet {
     this.applicationsScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
     this.applicationsScrollBox.set_mouse_scrolling(true);
 
+    this.categoriesOverlayBox = new Clutter.Actor();
+
     // CategoriesBox
     this.categoriesBox = new St.BoxLayout({
       style_class: 'menu-categories-box',
       vertical: true
     });
+    this.categoriesOverlayBox.add_actor(this.categoriesBox);
 
     // Build categories
     this.buildCategories();
@@ -2303,7 +2384,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     // Place boxes in proper containers. The order added determines position
-    this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, {
+    this.groupCategoriesWorkspacesWrapper.add(this.categoriesOverlayBox, {
       x_fill: false,
       y_fill: true,
       x_align: St.Align.START,
