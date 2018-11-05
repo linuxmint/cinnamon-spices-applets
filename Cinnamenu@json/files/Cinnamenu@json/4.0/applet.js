@@ -914,9 +914,9 @@ class CinnamenuApplet extends TextIconApplet {
       this.vectorBox = new St.Polygon(config);
       this.categoriesOverlayBox.add_actor(this.vectorBox);
       this.vectorBox.set_reactive(true);
-      this.categoriesOverlayBox.connect('enter-event', () => this.vectorBox.set_reactive(true));
-      this.categoriesOverlayBox.connect('leave-event', () => this.vectorBox.set_reactive(false));
+      this.applicationsBoxWrapper.connect('enter-event', () => this.vectorBox.set_reactive(false));
     } else {
+      this.vectorBox.set_reactive(true);
       let keys = Object.keys(config);
       for (let i = 0; i < keys.length; i++) {
         this.vectorBox[keys[i]] = config[keys[i]]
@@ -2266,7 +2266,8 @@ class CinnamenuApplet extends TextIconApplet {
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
       style: 'min-width: 275px',
-      vertical: true
+      vertical: true,
+      reactive: true
     });
     this.answerText = new St.Label({
       style_class: 'menu-selected-app-title',
