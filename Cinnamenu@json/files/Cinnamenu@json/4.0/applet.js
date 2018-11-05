@@ -914,18 +914,13 @@ class CinnamenuApplet extends TextIconApplet {
       this.vectorBox = new St.Polygon(config);
       this.categoriesOverlayBox.add_actor(this.vectorBox);
       this.vectorBox.set_reactive(true);
+      this.categoriesOverlayBox.connect('enter-event', () => this.vectorBox.set_reactive(true));
+      this.categoriesOverlayBox.connect('leave-event', () => this.vectorBox.set_reactive(false));
     } else {
       let keys = Object.keys(config);
       for (let i = 0; i < keys.length; i++) {
         this.vectorBox[keys[i]] = config[keys[i]]
       }
-    }
-  }
-
-  destroyVectorBox() {
-    if (this.vectorBox != null) {
-      this.vectorBox.destroy();
-      this.vectorBox = null;
     }
   }
 
