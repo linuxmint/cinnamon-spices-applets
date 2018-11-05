@@ -736,7 +736,7 @@ class CinnamenuApplet extends TextIconApplet {
       {
         key: 'enable-custom-menu-height',
         value: 'enableCustomMenuHeight',
-        cb: this.customMenuHeightChange
+        cb: this.refresh
       },
       {
         key: 'custom-menu-height',
