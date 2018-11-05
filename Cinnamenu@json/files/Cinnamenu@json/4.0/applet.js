@@ -825,10 +825,12 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   refresh() {
-    this.state.set({menuHeight: 0});
     this.clearAll();
     this.destroyDisplayed();
-    this.state.set({displayed: false});
+    this.state.set({
+      displayed: false,
+      menuHeight: 0
+    });
     this.display();
     this.clearEnteredActors();
     this.destroyAppButtons();
