@@ -271,8 +271,7 @@ msgstr "Kenar çubuğunda hızlı başlatıcı göster"
 #. 2.6->settings-schema.json->quicklauncher-6-checkbox->tooltip
 #. 2.6->settings-schema.json->quicklauncher-17-checkbox->tooltip
 msgid "Choose whether or not to show this quicklauncher in the sidebar."
-msgstr ""
-"Hızlı başlatıcının kenar çubuğunda gösterilip gösterilmeyeceğini belirleyin."
+msgstr "Hızlı başlatıcının kenar çubuğunda gösterilip gösterilmeyeceğini belirleyin."
 
 #. 3.2->settings-schema.json->quicklauncher-19-label->description
 #. 3.2->settings-schema.json->quicklauncher-2-label->description
@@ -707,8 +706,7 @@ msgstr "İçerik menüsü düğmelerini göster"
 #. 2.6->settings-schema.json->show-context-menu-icons->tooltip
 #. 3.4->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
-msgstr ""
-"İçerik menüleri üzerinde simgelerin gösterilip gösterilmeyeceğini seçin."
+msgstr "İçerik menüleri üzerinde simgelerin gösterilip gösterilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
@@ -787,8 +785,7 @@ msgstr "Kullanıcı hesabı bilgi kutusu tipi"
 #. 2.6->settings-schema.json->user-box-layout->tooltip
 #. 3.4->settings-schema.json->user-box-layout->tooltip
 msgid "Choose whether to show the user name and/or user picture."
-msgstr ""
-"Kullanıcı adı ve/veya kullanıcı resmi gösterilip gösterilmeyeceğini seçin."
+msgstr "Kullanıcı adı ve/veya kullanıcı resmi gösterilip gösterilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
@@ -868,8 +865,7 @@ msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
 msgstr ""
-"Uygulama listesinde yumuşak otomatik kaydırmanın etkinleştirilip "
-"etkinleştirilmeyeceğini seçin."
+"Uygulama listesinde yumuşak otomatik kaydırmanın etkinleştirilip etkinleştirilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 2.6->settings-schema.json->enable-animation->description
@@ -893,8 +889,7 @@ msgstr "Sık kullanılanlar ve konumları göster"
 #. 2.6->settings-schema.json->show-places->tooltip
 #. 3.4->settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
-"Menüde sık kullanılanların ve konumların gösterilip gösterilmeyeceğini seçin."
+msgstr "Menüde sık kullanılanların ve konumların gösterilip gösterilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->shutdown-label->description
 #. 2.6->settings-schema.json->shutdown-label->description
@@ -942,8 +937,7 @@ msgstr "Özel bir simge kullan"
 #. 2.6->settings-schema.json->menu-icon-custom->tooltip
 #. 3.4->settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
-msgstr ""
-"Bu seçeneğin işaretini kaldırmak, simgeyi temanın ayarlamasına olanak tanır"
+msgstr "Bu seçeneğin işaretini kaldırmak, simgeyi temanın ayarlamasına olanak tanır"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 3.4->settings-schema.json->hover-delay->description
@@ -977,7 +971,7 @@ msgstr "Kenar çubuğunun gösterilip gösterilmeyeceğini seçin."
 #. 2.6->settings-schema.json->favorites-label->description
 #. 3.4->settings-schema.json->favorites-label->description
 msgid "'Favorites'-Button label"
-msgstr "'Sık Kullanılanlar'-Düğme etiketil"
+msgstr "'Sık Kullanılanlar'-Düğme etiketi"
 
 #. 3.2->settings-schema.json->favorites-label->tooltip
 #. 2.6->settings-schema.json->favorites-label->tooltip
