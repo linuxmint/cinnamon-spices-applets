@@ -169,8 +169,7 @@ msgstr "Panel simgesi"
 
 #. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
-msgstr ""
-"Simge adını veya doğrudan hedefini kabul eder (sembolik simgeleri destekler)"
+msgstr "Simge adını veya doğrudan hedefini kabul eder (sembolik simgeleri destekler)"
 
 #. settings-schema.json->panelText->description
 msgid "Panel text"
