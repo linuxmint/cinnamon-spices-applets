@@ -49,7 +49,7 @@
     },
     "menu-behave": {
       "type": "section",
-      "title": "Menu",
+      "title": "",
       "keys": [
         "show-tooltips",
         "tooltip-delay",
