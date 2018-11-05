@@ -112,7 +112,7 @@ class CinnamenuApplet extends TextIconApplet {
         searchActive: false,
         itemEntered: false,
         contextMenuIsOpen: null,
-        menuHeight: 530,
+        menuHeight: 0,
         expressionActive: false,
         searchWebErrorsShown: false,
         displayed: false,
@@ -249,6 +249,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
       this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
       this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
+      this.signals.connect(global, 'scale-changed', (...args) => this.state.set({menuHeight: 0}));
 
       this.categoryButtons = [];
       this.powerGroupButtons = [];
@@ -577,6 +578,8 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   customMenuHeightChange() {
+    if (this.state.menuHeight) return;
+
     let height;
     let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
 
@@ -589,8 +592,6 @@ class CinnamenuApplet extends TextIconApplet {
     if (height >= monitorHeight - this.panel.height) {
       height = Math.round(Math.abs(monitorHeight * 0.55));
     }
-
-    if (height === this.state.menuHeight) return;
 
     this.groupCategoriesWorkspacesScrollBox.height = height;
     this.applicationsScrollBox.height = height;
@@ -824,6 +825,7 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   refresh() {
+    this.state.set({menuHeight: 0});
     this.clearAll();
     this.destroyDisplayed();
     this.state.set({displayed: false});
@@ -850,6 +852,7 @@ class CinnamenuApplet extends TextIconApplet {
   loadAppCategories(dir, rootDir, dirId) {
     let iter = dir.iter();
     let nextType;
+    let shouldResetMenuHeight = false;
     while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
       if (nextType === CMenu.TreeItemType.ENTRY) {
         let entry = iter.get_entry();
@@ -870,6 +873,7 @@ class CinnamenuApplet extends TextIconApplet {
           if (!appIsKnown) {
             if (!this.state.isNewInstance) {
               app.shouldHighlight = true;
+              shouldResetMenuHeight = true;
             } else {
               this._knownApps.push(id);
             }
@@ -883,6 +887,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
       }
     }
+    if (shouldResetMenuHeight) this.state.set({menuHeight: 0});
   }
 
   resetCategoryOrder() {
