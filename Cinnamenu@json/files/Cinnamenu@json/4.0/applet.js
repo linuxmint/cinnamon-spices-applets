@@ -458,20 +458,25 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.state.settings.menuIcon === '') {
           this.set_applet_icon_name('');
         } else if (GLib.path_is_absolute(this.state.settings.menuIcon) && GLib.file_test(this.state.settings.menuIcon, GLib.FileTest.EXISTS)) {
-          if (this.state.settings.menuIcon.search('-symbolic') !== -1) {
+          if (this.state.settings.menuIcon.includes('-symbolic')) {
             this.set_applet_icon_symbolic_path(this.state.settings.menuIcon);
           } else {
             this.set_applet_icon_path(this.state.settings.menuIcon);
           }
         } else if (this._iconTheme.has_icon(this.state.settings.menuIcon)) {
-          if (this.state.settings.menuIcon.search('-symbolic') !== -1) {
+          if (this.state.settings.menuIcon.includes('-symbolic')) {
             this.set_applet_icon_symbolic_name(this.state.settings.menuIcon);
           } else {
             this.set_applet_icon_name(this.state.settings.menuIcon);
           }
         }
       } else {
-        this.set_default_menu_icon();
+        let iconName = global.settings.get_string('app-menu-icon-name');
+        if (iconName.includes('-symbolic')) {
+          this.set_applet_icon_symbolic_name(iconName);
+        } else {
+          this.set_applet_icon_name(iconName);
+        }
       }
     }, () => {
       global.logWarning('Could not load icon file ' + this.state.settings.menuIcon + ' for menu button');
@@ -496,22 +501,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.set_applet_label('');
       }
     }
-  }
-
-  set_default_menu_icon() {
-    let path = global.datadir + '/theme/menu.svg';
-    if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
-      this.set_applet_icon_path(path);
-      return;
-    }
-
-    path = global.datadir + '/theme/menu-symbolic.svg';
-    if (GLib.file_test(path, GLib.FileTest.EXISTS)) {
-      this.set_applet_icon_symbolic_path(path);
-      return;
-    }
-    // If all else fails, this will yield no icon
-    this.set_applet_icon_path('');
   }
 
   createMenu(orientation) {
