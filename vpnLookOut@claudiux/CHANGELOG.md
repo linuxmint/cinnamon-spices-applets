@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.0.1
+  * Now compatible with Cinnamon 4.0.
+
 ### 3.0.0 (Only for Cinnamon 3.8 and over)
   * VPN-related Apps Management : You can now manage all applications (for example, torrent clients) that you have registered in the list. (Cf. Settings)
   * Many changes in code and messages. Please, help me by translating these messages into your language, using poedit and the .pot file.
