@@ -416,6 +416,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.update_label_visible();
     this.updateIconAndLabel();
     this.refresh();
+    this.vectorBox = null;
   }
 
   on_applet_added_to_panel() {
@@ -918,7 +919,7 @@ class CinnamenuApplet extends TextIconApplet {
       lrc_x: vi.w,
       lrc_y: vi.h
     };
-    if (!this.vectorBox) {
+    if (!this.vectorBox || this.vectorBox.is_finalized()) {
       this.vectorBox = new St.Polygon(config);
       this.vectorBox._delegate = actor._delegate;
       this.draggableVectorBox = makeDraggable(this.vectorBox);
