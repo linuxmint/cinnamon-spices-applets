@@ -91,6 +91,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     this.setAllowedLayout(AllowedLayout.BOTH);
     if (orientation === St.Side.BOTTOM || orientation === St.Side.TOP) {
+      this.init = false;
       this.set_applet_label(_('Initializing'));
     }
     this.setSchema(metadata.path, (knownProviders, enabledProviders) => {
@@ -175,6 +176,17 @@ class CinnamenuApplet extends TextIconApplet {
         setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
         getSelectedTitleClutterText: () => this.selectedAppTitle.get_clutter_text(),
         getSelectedDescriptionClutterText: () => this.selectedAppDescription.get_clutter_text(),
+        toggleSearchVisibility: (bool) => {
+          if (bool) {
+            this.selectedAppBox.hide();
+            this.searchBox.show();
+            global.stage.set_key_focus(this.searchEntry)
+          } else {
+            global.stage.set_key_focus(this.actor)
+            this.searchBox.hide();
+            this.selectedAppBox.show();
+          }
+        },
         selectorMethod: (method, id) => this[method](id),
         openMenu: () => this.menu.open(),
         closeMenu: () => this.menu.close(),
@@ -231,7 +243,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.bindSettingsChanges();
       this.state.set({
         isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
-        fallbackDescription: this.state.settings.showAppDescriptionsOnButtons || this.state.settings.showTooltips ? _('No description available') : ''
+        fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
       });
       global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
       this.onEnabledSearchProvidersChange();
@@ -280,6 +292,7 @@ class CinnamenuApplet extends TextIconApplet {
       this._screenSaverProxy = new ScreenSaverProxy();
       this.recentManager = Gtk.RecentManager.get_default();
       this.updateActivateOnHover();
+      this.init = true;
     });
   }
 
@@ -442,6 +455,10 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   on_applet_clicked() {
+    if (!this.init) {
+      this.set_applet_label(_('Please wait...'));
+      return;
+    }
     this.menu.toggle_with_options(this.state.settings.enableAnimation);
   }
 
@@ -593,8 +610,12 @@ class CinnamenuApplet extends TextIconApplet {
     }
   }
 
-  customMenuHeightChange() {
-    if (this.state.menuHeight) return;
+  updateCustomHeight() {
+    this.customMenuHeightChange(true);
+  }
+
+  customMenuHeightChange(force = false) {
+    if (this.state.menuHeight && !force) return;
 
     let height;
     let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
@@ -612,7 +633,26 @@ class CinnamenuApplet extends TextIconApplet {
     this.groupCategoriesWorkspacesScrollBox.height = height;
     this.categoriesOverlayBox.height = height;
     this.applicationsScrollBox.height = height;
+    this.actor.style += `max-height: ${height}px`;
     this.state.set({menuHeight: height});
+    this.applyConstraints();
+  }
+
+  applyConstraints() {
+    if (this.state.settings.descriptionPlacement === 3 && (this.state.isListView || this.state.settings.appsGridColumnCount === 2)) {
+      let node = this.searchBox.peek_theme_node();
+      if (node) {
+        let padding = node.get_length('padding');
+        this.bottomPane.style = `min-height: ${this.bottomPane.height - padding}px;`;
+        this.searchEntry.width = this.selectedAppBox.width;
+      }
+    } else {
+      let searchWidth = this.searchBox.width - this.categoriesBox.width;
+      this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
+    }
+
+    this.actor.style += `max-width: ${this.mainBox.width}px;max-height: ${this.mainBox.height}px;`;
+    this.bottomPane.width = this.middlePane.width;
   }
 
   getExampleSearchProviders() {
@@ -736,14 +776,9 @@ class CinnamenuApplet extends TextIconApplet {
         cb: this.refresh
       },
       {
-        key: 'show-apps-description-on-buttons',
-        value: 'showAppDescriptionsOnButtons',
+        key: 'description-placement',
+        value: 'descriptionPlacement',
         cb: this.refresh
-      },
-      {
-        key: 'show-tooltips',
-        value: 'showTooltips',
-        cb: null
       },
       {
         key: 'tooltip-delay',
@@ -753,12 +788,12 @@ class CinnamenuApplet extends TextIconApplet {
       {
         key: 'enable-custom-menu-height',
         value: 'enableCustomMenuHeight',
-        cb: this.refresh
+        cb: this.updateCustomHeight
       },
       {
         key: 'custom-menu-height',
         value: 'customMenuHeight',
-        cb: this.customMenuHeightChange
+        cb: this.updateCustomHeight
       }
     ];
 
@@ -811,9 +846,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.switchApplicationsView(false);
         // Display startup apps
         this.resetDisplayState();
-        this.customMenuHeightChange();
         this.state.trigger('menuOpened');
         this.mainBox.show();
+        // Do height/constraint adjustments after actors are rendered and on the stage.
+        this.customMenuHeightChange(true);
       });
     } else {
       // Clear 'entered' actor
@@ -1115,6 +1151,14 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   switchApplicationsView(fromToggle) {
+    // In the case of the descriptionPlacement in the bottom pane, we need to toggle insertion
+    // of selectedAppBox in between powerGroupBox and searchBox - much simpler to do a full refresh.
+    if (fromToggle && this.state.settings.descriptionPlacement === 3) {
+      this.menu.close();
+      this.refresh();
+      this.menu.open();
+      return;
+    }
     let isListView = this.state.settings.startupViewMode === ApplicationsViewMode.LIST, iconSize;
     if (isListView) {
       iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
@@ -1150,6 +1194,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (fromToggle) {
       this.destroyAppButtons();
       this.resetDisplayState();
+      this.applyConstraints();
     }
   }
 
@@ -2197,10 +2242,6 @@ class CinnamenuApplet extends TextIconApplet {
       style_class: 'vfade menu-applications-scrollbox'
     });
 
-    if (!this.state.settings.showAppDescriptionsOnButtons && !this.state.settings.showTooltips) {
-      this.groupCategoriesWorkspacesScrollBox.width = 250;
-    }
-
     let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
     this.displaySignals.connect(vscrollCategories, 'scroll-start', () => {
       this.menu.passEvents = true;
@@ -2215,7 +2256,7 @@ class CinnamenuApplet extends TextIconApplet {
     // selectedAppBox
     this.selectedAppBox = new St.BoxLayout({
       style_class: 'menu-selected-app-box',
-      style: 'text-align: left;',
+      style: 'text-align: left;width:100px;',
       vertical: true
     });
     this.selectedAppTitle = new St.Label({
@@ -2343,7 +2384,7 @@ class CinnamenuApplet extends TextIconApplet {
     // PowerGroupBox
     this.powerGroupBox = new St.BoxLayout({
       style_class: '',
-      style: 'padding-left: 13px'
+      style: 'padding-left: 13px;'
     });
 
     this.powerGroupButtons.push(new GroupButton(
@@ -2418,16 +2459,6 @@ class CinnamenuApplet extends TextIconApplet {
       y_expand: true,
       expand: false
     });
-    if (!this.state.settings.showAppDescriptionsOnButtons) {
-      this.groupCategoriesWorkspacesWrapper.add(this.selectedAppBox, {
-        x_fill: false,
-        y_fill: false,
-        x_align: St.Align.START,
-        y_align: St.Align.END,
-        expand: true,
-        align_end: true
-      });
-    }
     this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
 
     this.middlePane.add(this.groupCategoriesWorkspacesScrollBox, {
@@ -2440,21 +2471,41 @@ class CinnamenuApplet extends TextIconApplet {
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
-      y_align: St.Align.START
+      y_align: St.Align.START,
+      expand: true
     });
 
     this.bottomPane.add(this.powerGroupBox, {
-      expand: true,
+      expand: false,
       x_fill: false,
       y_fill: false,
       x_align: St.Align.START,
       y_align: St.Align.MIDDLE
     });
 
+    if (this.state.settings.descriptionPlacement === 3) {
+      this.bottomPane.add(this.selectedAppBox, {
+        x_fill: true,
+        y_fill: false,
+        x_align: St.Align.START,
+        y_align: St.Align.MIDDLE,
+        expand: true,
+        align_end: false,
+        show_on_set_parent: false
+      });
+      if (this.state.isListView || this.state.settings.appsGridColumnCount < 3) {
+        this.selectedAppBox.hide();
+        this.selectedAppBox.style += 'text-align: right;';
+      }
+    }
+
     this.bottomPane.add(this.searchBox, {
-      expand: false,
+      expand: true,
+      x_fill: true,
+      y_fill: false,
       x_align: St.Align.END,
-      y_align: St.Align.MIDDLE
+      y_align: St.Align.MIDDLE,
+      align_end: true
     });
 
     // mainbox packs vertically
@@ -2467,7 +2518,7 @@ class CinnamenuApplet extends TextIconApplet {
     // add section as menu item
     this.menu.addMenuItem(section);
 
-    // Set height constraints on scrollboxes (we also set height when menu toggle)
+    // Set height constraints on scrollboxes
     this.applicationsScrollBox.add_constraint(new Clutter.BindConstraint({
       name: 'appScrollBoxConstraint',
       source: this.groupCategoriesWorkspacesScrollBox,

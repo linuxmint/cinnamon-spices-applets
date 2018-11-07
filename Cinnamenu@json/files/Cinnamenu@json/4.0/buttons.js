@@ -594,7 +594,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     if (this.icon) {
       this.icon.realize();
     }
-    if (this.state.settings.showAppDescriptionsOnButtons
+    if (this.state.settings.descriptionPlacement === 2
       || this.buttonState.app.shouldHighlight) {
       this.formatLabel({});
     }
@@ -640,7 +640,7 @@ class AppListGridButton extends PopupBaseMenuItem {
   }
 
   handleParentChange() {
-    if (this.state.settings.showAppDescriptionsOnButtons
+    if (this.state.settings.descriptionPlacement === 2
       || this.buttonState.app.shouldHighlight
       || this.state.searchActive) {
       this.formatLabel({});
@@ -651,6 +651,7 @@ class AppListGridButton extends PopupBaseMenuItem {
   }
 
   formatLabel(opts) {
+    let limit = this.state.isListView ? 80 : 300;
     let name = this.buttonState.app.name.replace(/&/g, '&amp;');
     let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
     if (this.description) {
@@ -668,7 +669,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     let markup = '<span>' + name + '</span>';
-    if (this.state.settings.showAppDescriptionsOnButtons) {
+    if (this.state.settings.descriptionPlacement === 2) {
       if (!this.state.isListView) {
         let width = this.description ? this.description.length : description ? description.length : 0;
         this.label.set_style('text-align: center;min-width: ' + width.toString() + 'px;');
@@ -677,18 +678,18 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
     let tooltipMarkup;
     let tooltipShouldShowName = this.buttonState.appType !== ApplicationType._applications;
-    if (this.state.settings.showTooltips && opts.tooltipFormat) {
+    if (this.state.settings.descriptionPlacement === 1 && opts.tooltipFormat) {
       if (tooltipShouldShowName) {
         let tooltipName = name;
-        if (tooltipName.length > 80) {
-          tooltipName = wordWrap(name, 80);
+        if (tooltipName.length > limit) {
+          tooltipName = wordWrap(name, limit);
         }
         tooltipMarkup = '<span>' + tooltipName + '</span>';
       }
       if (description.length > 0) {
         let tooltipDescription = description;
-        if (description.length > 80) {
-          tooltipDescription = wordWrap(description, 80);
+        if (description.length > limit) {
+          tooltipDescription = wordWrap(description, limit);
         }
         if (tooltipShouldShowName) {
           tooltipMarkup += '\n<span size="small">' + tooltipDescription + '</span>';
@@ -696,7 +697,7 @@ class AppListGridButton extends PopupBaseMenuItem {
           tooltipMarkup = tooltipDescription;
         }
       }
-    } else if (!this.state.settings.showTooltips) {
+    } else if (this.state.settings.descriptionPlacement > 1) {
       if (this.state.searchActive) {
         let nameClutterText = this.state.trigger('getSelectedTitleClutterText');
         if (nameClutterText) {
@@ -718,7 +719,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     this.tooltipMarkup = tooltipMarkup;
     let clutterText = this.label.get_clutter_text();
     if (clutterText
-      && (this.state.settings.showAppDescriptionsOnButtons
+      && (this.state.settings.descriptionPlacement === 2
         || this.state.searchActive
         || this.buttonState.app.shouldHighlight)
         || opts.removeFormatting) {
@@ -788,6 +789,9 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     if (event) {
       this.state.trigger('clearEnteredActors');
+      if (this.state.settings.descriptionPlacement === 3 && (this.state.isListView || this.state.settings.appsGridColumnCount < 3)) {
+        this.state.trigger('toggleSearchVisibility', false);
+      }
     } else {
       this.state.trigger('scrollToButton', this);
     }
@@ -798,17 +802,19 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     // Check marquee conditions, and set it up
     let labelWidth, actorWidth, allocatedTextLength;
-    if (this.state.settings.showAppDescriptionsOnButtons) {
+    if (this.state.settings.descriptionPlacement === 2) {
       labelWidth = this.label.get_size()[0];
       actorWidth = this.actor.get_size()[0];
-      allocatedTextLength = this.state.isListView ? 41 : actorWidth / (this.state.settings.appsGridColumnCount * 2);
+      allocatedTextLength = this.state.isListView ? 80 : (this.state.settings.appsGridColumnCount * 8);
     } else {
       this.formatLabel({});
-      labelWidth = this.buttonState.app.description ? this.buttonState.app.description.length : 16;
+      labelWidth = this.buttonState.app.description ? this.buttonState.app.description.length
+        : this.buttonState.app.name ? this.buttonState.app.name
+        : 16;
       actorWidth = 16;
       allocatedTextLength = 16;
     }
-    if (labelWidth > actorWidth && !this.marqueeTimer && !this.state.settings.showTooltips) {
+    if (labelWidth > actorWidth && !this.marqueeTimer && this.state.settings.descriptionPlacement > 1) {
       this.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
       this.marqueeTimer = setTimeout(()=>this.handleMarquee({
         start: 0,
@@ -818,7 +824,7 @@ class AppListGridButton extends PopupBaseMenuItem {
       }), 1000);
     } else {
       this.formatLabel({tooltipFormat: true});
-      if (this.state.settings.showTooltips) {
+      if (this.state.settings.descriptionPlacement === 1) {
         let {width, height} = this.actor;
         this.state.trigger('setTooltip', this.actor.get_transformed_position(), width, height, this.tooltipMarkup);
       }
@@ -826,9 +832,13 @@ class AppListGridButton extends PopupBaseMenuItem {
     return false;
   }
 
-  handleLeave() {
+  handleLeave(actor, event) {
     if (this.state.contextMenuIsOpen === this.buttonState.appIndex && this.menu.isOpen || this.state.dragIndex > -1) {
       return false;
+    }
+
+    if (event && this.state.settings.descriptionPlacement === 3 && (this.state.isListView || this.state.settings.appsGridColumnCount < 3)) {
+      this.state.trigger('toggleSearchVisibility', true);
     }
 
     this.entered = null;
@@ -841,9 +851,9 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.clearMarqueeTimer();
       }
     }
-    if (this.state.settings.showTooltips) {
+    if (this.state.settings.descriptionPlacement === 1) {
       this.state.trigger('setTooltip');
-    } else if (!this.state.settings.showAppDescriptionsOnButtons) {
+    } else if (this.state.settings.descriptionPlacement !== 2) {
       this.state.trigger('setSelectedTitleText', '');
       this.state.trigger('setSelectedDescriptionText', '');
     }
@@ -1136,8 +1146,9 @@ class GroupButton extends PopupBaseMenuItem {
       this.state.trigger('clearEnteredActors');
     }
     this.entered = true;
+    if (!this.actor) return;
     this.actor.add_style_pseudo_class('hover');
-    if (this.state.settings.showTooltips) {
+    if (this.state.settings.descriptionPlacement === 1) {
       this.state.trigger(
         'setTooltip',
         this.actor.get_transformed_position(),
@@ -1155,7 +1166,7 @@ class GroupButton extends PopupBaseMenuItem {
   handleLeave() {
     this.entered = null;
     this.actor.remove_style_pseudo_class('hover');
-    if (this.state.settings.showTooltips) {
+    if (this.state.settings.descriptionPlacement === 1) {
       this.state.trigger('setTooltip');
     } else {
       this.state.trigger('setSelectedTitleText', '');
