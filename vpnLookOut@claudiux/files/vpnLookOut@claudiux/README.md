@@ -8,7 +8,8 @@ This applet shows the state of the VPN (connected or disconnected) using colored
 
 But also, it can:
   * try to restart the VPN link when it shuts down incidentally,
-  * close the torrent clients (like Transmission, qBittorrent, Deluge...) when your VPN shuts down, and restart them when your VPN link becomes active again.
+  * close the VPN-related apps (like Transmission, qBittorrent, Deluge...) when your VPN shuts down, and restart them when your VPN link becomes active again,
+  * quickly close a VPN-related app if it is started when the VPN is idle.
 
 ## Status
 
@@ -39,7 +40,7 @@ Settings :
   * Emit (or don't emit) this sound alert when this Applet starts, if VPN is down.
   * Shut down (or not) properly Transmission as soon as VPN falls. (Cinnamon 2.8 to 3.6.)
   * Try (or don't try) to restart Transmission as soon as VPN restarts. (Cinnamon 2.8 to 3.6.)
-  * Manage Torrent Clients. (Cinnamon 3.8 and over.)
+  * Manage VPN-related Apps. (Cinnamon 3.8 and over.)
 
 The left click menu also contains:
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
@@ -56,7 +57,11 @@ Languages already available: English, French, Spanish, Italian, Danish, Swedish.
 
 The installation of the available languages is done automatically.
 
-Translations are usually provided by people who are fluent in the language. Any new translation will be very appreciated. Users, please note that I will not be able to take responsibility for the accuracy of translations that I would not have done myself!
+Translations are usually provided by people who are fluent in the language.
+
+**Any new translation will be welcome.**
+
+Users, please note that I will not be able to take responsibility for the accuracy of translations that I would not have done myself!
 
 ## Contributions
 

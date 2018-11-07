@@ -794,7 +794,7 @@ class vpnLookOut extends Applet.TextIconApplet {
 
     // This updates the numerical display in the applet and in the tooltip
     updateUI() {
-
+        let command;
         //try {
             // Get the VPN Status ('on', 'off' or 'waiting')
             this.vpnStatusOld = this.vpnStatus;
@@ -807,12 +807,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                  this.vpnStatus = "waiting"
             }
 
-
             this.vpnMessage = " " ; // let it with space character ; not empty.
 
             // Now select icon and message to display, also determine VPN Name and Transmission policy
             if (this.vpnStatus == "on") { // VPN is connected
                 this.vpnIcon = this.vpnon ;
+                this.set_applet_icon_path(this.vpnIcon);
                 if (this.vpnInterface != "" && this.vpnName != "") {
                     //this.button_connect.setStatus(_("Click to disconnect from VPN")+' '+this.vpnName);
                     this.button_connect.setStatus(this.vpnName);
@@ -852,7 +852,22 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
             } else if (this.vpnStatus == "off") { // VPN is disconnected
                 this.vpnIcon = this.vpnoff ;
+                this.set_applet_icon_path(this.vpnIcon);
                 this.vpnMessage = _("Disconnected") ;
+
+                // Stop all VPN-related apps that are declared 'VPN only':
+                if (this.manageClients===true) {
+                    let client;
+                    for(var i=0; i < this.clientsList.length; i++) {
+                        client = this.clientsList[i];
+                        if (client["vpnOnly"]===true) {
+                            command = 'sh ' + this.stopClientScript + ' ' + client["command"] ;
+                            this.clientStoppedByApplet[client["command"]] = GLib.spawn_command_line_async(command)
+                        }
+                    }
+                    //global.log(this.clientStoppedByApplet)
+                };
+
                 if (this.vpnInterface != "" && this.vpnName != "") {
                     //this.button_connect.setStatus(_("Click to connect to VPN")+' '+this.vpnName);
                     this.button_connect.setStatus("(" + this.vpnName + ")");
@@ -867,11 +882,11 @@ class vpnLookOut extends Applet.TextIconApplet {
                         this.button_connect.actor.show()
                     }
                 }
+
                 if ( !this.alertFlag ) {
                     if ( this.useSoundAlert ) { // Sound alert
                         GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/phone-outgoing-busy.oga"') ;
                     } ;
-                    let command;
                     if ( this.reconnect ) {
                         command = 'bash -c \'/usr/bin/nmcli connection up "' + this.vpnName +'" > /dev/null \'';
                         GLib.spawn_command_line_async(command)
@@ -891,11 +906,10 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
             } else { // Waiting about VPN status
                 this.vpnIcon = this.vpnwait ;
+                this.set_applet_icon_path(this.vpnIcon);
             }
             // set Tooltip
             this.set_applet_tooltip(_("VPN:") + " " + this.vpnMessage ) ;
-            // set Icon
-            this.set_applet_icon_path(this.vpnIcon) ;
             // set Menu Item Info
             this.menuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;
             this.contextmenuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;
