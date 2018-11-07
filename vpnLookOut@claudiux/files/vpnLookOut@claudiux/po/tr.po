@@ -5,18 +5,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.0.0\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.1.0~20181107\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-07 19:21+0300\n"
+"PO-Revision-Date: 2018-11-07 13:30+0100\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
 #: metadata.json:4
 msgid "VPN Look-Out Applet"
@@ -26,13 +26,13 @@ msgstr "VPN Gözcü Uygulamacığı"
 msgid ""
 "A Cinnamon applet that watches over the VPN link, displays its status, "
 "allows to connect at start-up to the last VPN used, allows to reconnect the "
-"VPN link if it incidentally drops, and can stop or restart Transmission "
+"VPN link if it incidentally drops, and can stop or restart VPN-related apps "
 "according to the state of the VPN."
 msgstr ""
 "VPN bağlantısını izleyen bir Cinnamon uygulaması, durumu gösterir, "
 "başlangıçta kullanılan son VPN'ye bağlanmaya izin verir, bağlantı hata "
-"sonucu düşerse VPN bağlantısının yeniden bağlanmasına izin verir ve "
-"Aktarıcının durumuna göre VPN iletimini durdurabilir veya yeniden "
+"sonucu düşerse VPN bağlantısının yeniden bağlanmasına izin verir ve VPN ile "
+"ilişkili uygulamanın durumuna göre VPN iletimini durdurabilir veya yeniden "
 "başlatabilir."
 
 #: 2.8/settings-schema.json:7
@@ -161,7 +161,8 @@ msgstr ""
 
 #: 2.8/settings-schema.json:107
 msgid "Emit this sound alert when this Applet starts, if VPN is down."
-msgstr "Eğer VPN kapalıysa, bu uygulamacık başlatıldığında bu sesli uyarıyı çıkartır."
+msgstr ""
+"Eğer VPN kapalıysa, bu uygulamacık başlatıldığında bu sesli uyarı çıkartır."
 
 #: 2.8/settings-schema.json:108
 msgid ""
@@ -198,7 +199,8 @@ msgstr ""
 
 #: 2.8/settings-schema.json:127
 msgid "Set the keybinding here to activate/deactivate the last used VPN."
-msgstr "Son kullanılan VPN'yi etkinleştirip/devre dışı bırakmak için buradan kısayol "
+msgstr ""
+"Son kullanılan VPN'yi etkinleştirip/devre dışı bırakmak için buradan kısayol "
 "tuşunu ayarlayın."
 
 #: 2.8/applet.js:214
@@ -317,7 +319,8 @@ msgstr ""
 
 #: 3.8/settings-schema.json:117
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
-msgstr "VPN kapalıysa, bu uygulamacık başlatıldığında bu ses uyarısını çıkarır."
+msgstr ""
+"VPN kapalıysa, bu uygulamacık başlatıldığında bu ses uyarısını çıkarır."
 
 #: 3.8/settings-schema.json:118
 msgid ""
@@ -347,16 +350,21 @@ msgstr "Yönetilen uygulamalar"
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
-"Restart: TRUE if you want to restart this application as soon as the VPN "
-"link becomes active again.\n"
-"Shutdown: TRUE if you want to close the application as soon as the VPN link "
-"is stopped."
+"Restart: Set to TRUE if you want to restart this application as soon as the "
+"VPN link becomes active again.\n"
+"Shutdown: Set to TRUE if you want to close the application as soon as the "
+"VPN link is stopped.\n"
+"VPN only: Set to TRUE if you want to quickly stop this application if it is "
+"started while the VPN is idle."
 msgstr ""
 "İsim: İstediğiniz bir tane seçebilirsiniz.\n"
 "Komut: Uygulamayı yolu olmadan çalıştırmak için komut.\n"
-"Yeniden başlat: TRUE eğer VPN bağlantısı tekrar aktif hale gelir gelmez bu "
-"uygulamayı yeniden başlatmak isterseniz.\n"
-"Kapatma: TRUE eğer VPN bağlantısı durduğunda uygulamayı kapatmak isterseniz."
+"Yeniden başlat: Eğer VPN bağlantısı tekrar aktif hale gelir gelmez bu "
+"uygulamayı yeniden başlatmak isterseniz, TRUE olarak yarlayın.\n"
+"Kapatma: Eğer VPN bağlantısı durduğunda uygulamayı kapatmak isterseniz, TRUE "
+"olarak ayarlayın.\n"
+"Sadece VPN: Uygulama VPN boştayken başlatıldığında bu uygulamayı hızlıca "
+"durdurmak isterseniz, TRUE olarak ayarlayın."
 
 #: 3.8/settings-schema.json:140
 msgid "Name"
@@ -373,3 +381,7 @@ msgstr "Yeniden Başlat"
 #: 3.8/settings-schema.json:155
 msgid "Shut down"
 msgstr "Kapat"
+
+#: 3.8/settings-schema.json:160
+msgid "VPN only"
+msgstr "Sadece VPN"
