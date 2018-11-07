@@ -906,7 +906,7 @@ class CinnamenuApplet extends TextIconApplet {
     let vi = this.getVectorInfo();
     if (!vi) return;
     let config = {
-      debug: true,
+      debug: false,
       width: vi.w - 1,
       height: vi.h,
       ulc_x: vi.mx,
