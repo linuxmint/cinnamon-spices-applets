@@ -186,6 +186,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchBox.hide();
             this.selectedAppBox.show();
           }
+          this.state.trigger('currentCategory');
         },
         selectorMethod: (method, id) => this[method](id),
         openMenu: () => this.menu.open(),
