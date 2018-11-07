@@ -2277,7 +2277,8 @@ class CinnamenuApplet extends TextIconApplet {
     });
 
     this.applicationsListBox = new St.BoxLayout({
-      style_class: '',
+      style_class: 'cinnamenu-applications-list-box',
+      style: 'min-width: 300px;',
       vertical: true
     });
 
