@@ -133,7 +133,7 @@
     "clientsList": {
         "type": "list",
         "description": "Managed applications",
-        "tooltip": "Name: What you want.\nCommand: The command to run the application, without its path.\nRestart: TRUE if you want to restart this application as soon as the VPN link becomes active again.\nShutdown: TRUE if you want to close the application as soon as the VPN link is stopped.",
+        "tooltip": "Name: What you want.\nCommand: The command to run the application, without its path.\nRestart: Set to TRUE if you want to restart this application as soon as the VPN link becomes active again.\nShutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\nVPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle.",
         "columns": [
             {
                 "id": "name",
@@ -154,6 +154,11 @@
                 "id": "shutdown",
                 "title": "Shut down",
                 "type": "boolean"
+            },
+            {
+                "id": "vpnOnly",
+                "title": "VPN only",
+                "type": "boolean"
             }
         ],
         "default": [
@@ -161,7 +166,8 @@
                 "name": "Transmission",
                 "command": "transmission-gtk",
                 "restart": false,
-                "shutdown": true
+                "shutdown": true,
+                "vpnOnly": false
             }
         ],
         "dependency": "manageClients"

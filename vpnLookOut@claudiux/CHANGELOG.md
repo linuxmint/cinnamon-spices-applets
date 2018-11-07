@@ -1,5 +1,10 @@
 ## Changelog
 
+### 3.1.0~20181107
+  * VPN-related Apps Management:
+   * New `VPN Only` option for each managed app: you can require that an application be shut down quickly if it is started while the VPN is idle.
+  * Improved translations into French, Spanish and Italian.
+
 ### 3.0.1
   * Now compatible with Cinnamon 4.0.
 

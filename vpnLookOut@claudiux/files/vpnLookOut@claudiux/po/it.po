@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.0.0\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.1.0~20181107\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-10-28 00:15+0200\n"
+"PO-Revision-Date: 2018-11-07 14:13+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,8 +23,8 @@ msgid "VPN Look-Out Applet"
 msgstr "VPN Vedetta Applet"
 
 #: metadata.json:7
-msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN."
-msgstr "Un'applet Cinnamon che sorveglia il collegamento VPN, visualizza il suo stato, consente di connettersi all'avvio fino all'ultimo VPN utilizzato, consente di ricollegare il collegamento VPN se cade incidentalmente e può interrompere o riavviare Transmission in base allo stato del VPN."
+msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart VPN-related apps according to the state of the VPN."
+msgstr "Un'applet Cinnamon che sorveglia il collegamento VPN, visualizza il suo stato, consente di connettersi all'avvio fino all'ultima VPN utilizzata, consente di ricollegare il collegamento VPN se incidentalmente cade e può interrompere o riavviare le applicazioni relative alla VPN in base al stato della VPN."
 
 #: 2.8/settings-schema.json:7
 msgid "Notifications"
@@ -80,7 +80,7 @@ msgstr "Connettersi a VPN all'avvio di questa applet."
 
 #: 2.8/settings-schema.json:66
 msgid "Checking this allows this applet to try to connect to the last VPN at start-up."
-msgstr "Selezionando questa opzione, questa applet tenta di connettersi all'ultimo VPN all'avvio."
+msgstr "Selezionando questa opzione, questa applet tenta di connettersi all'ultima VPN all'avvio."
 
 #: 2.8/settings-schema.json:72
 msgid "Try to reconnect to VPN when it shuts down incidentally."
@@ -278,13 +278,15 @@ msgstr "Applicazioni gestite"
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
-"Restart: TRUE if you want to restart this application as soon as the VPN link becomes active again.\n"
-"Shutdown: TRUE if you want to close the application as soon as the VPN link is stopped."
+"Restart: Set to TRUE if you want to restart this application as soon as the VPN link becomes active again.\n"
+"Shutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\n"
+"VPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle."
 msgstr ""
-"Nome: cosa vuoi\n"
+"Nome: Nome dell'applicazione.\n"
 "Comando: il comando per eseguire l'applicazione, senza il suo percorso.\n"
 "Riavviare: TRUE se si desidera riavviare questa applicazione non appena il collegamento VPN diventa di nuovo attivo.\n"
-"Chiudere: TRUE se si desidera chiudere l'applicazione non appena viene interrotto il collegamento VPN."
+"Chiudere: TRUE se si desidera chiudere l'applicazione non appena viene interrotto il collegamento VPN.\n"
+"Solo con VPN: TRUE se si desidera interrompere rapidamente questa applicazione se viene avviata mentre la VPN è inattiva."
 
 #: 3.8/settings-schema.json:140
 msgid "Name"
@@ -301,3 +303,7 @@ msgstr "Riavviare"
 #: 3.8/settings-schema.json:155
 msgid "Shut down"
 msgstr "Chiudere"
+
+#: 3.8/settings-schema.json:160
+msgid "VPN only"
+msgstr "Solo con VPN"

@@ -108,7 +108,8 @@ _Managed Apps_: The line about Transmission (a torrent client installed by defau
   * _Name_: What you want.
   * _Command_: The command to run the application, as you write in a terminal, without its path. For example: `transmission-gtk` and not `/usr/bin/transmission-gtk`.
   * _Restart_: If set to TRUE, this application restarts when the VPN link becomes active again.
-  * _Shut down_: If set to TRUE, this application is stopped as soon as the VPN link is broken.
+  * _Shut down_: If set to TRUE, this application is stopped as soon as the VPN link is broken, but you can start this application while the VPN is idle.
+  * _VPN Only_: If set to TRUE, this application is quickly stopped if it is started while the VPN is idle.
 
 Some known commands (Linux Mint):
   * Transmission: `transmission-gtk`

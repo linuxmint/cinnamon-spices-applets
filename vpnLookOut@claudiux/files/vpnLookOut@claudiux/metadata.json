@@ -2,9 +2,9 @@
     "uuid": "vpnLookOut@claudiux",
     "max-instances": "1",
     "name": "VPN Look-Out Applet",
-    "version": "3.0.0",
+    "version": "3.1.0~20181107",
     "hide-configuration": false,
-    "description": "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart Transmission according to the state of the VPN.",
+    "description": "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart VPN-related apps according to the state of the VPN.",
     "multiversion": true,
     "cinnamon-version": [
         "2.8",

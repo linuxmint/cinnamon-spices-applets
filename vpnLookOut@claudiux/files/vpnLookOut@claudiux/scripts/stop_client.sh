@@ -5,9 +5,15 @@ if [ "$CLIENT" = "" ]; then {
     # CLIENT is empty
     exit 2
 } fi
+
+if [ "$(pidof $CLIENT)" = "" ]; then { # Nothing to do.
+    exit 0
+}; fi
+
 PID=$(pidof $CLIENT)
 RET=0
 i=0
+
 # Trying three times max to gently stop CLIENT :
 while [ "$(pidof $CLIENT)" != "" ] && [ "$(pidof $CLIENT)" -eq "$PID" ] && [ "$i" -lt "3" ]; do {
     i=$((i+1))
