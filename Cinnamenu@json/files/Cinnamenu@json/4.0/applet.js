@@ -2202,6 +2202,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.menu.passEvents = false;
     });
     this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+    this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
     this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
 
     // selectedAppBox
