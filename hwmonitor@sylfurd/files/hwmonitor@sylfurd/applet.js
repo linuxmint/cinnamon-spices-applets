@@ -54,15 +54,15 @@ try {
     gtopFailed = true;
 }
 
-function GraphicalHWMonitorApplet(metadata, orientation, panel_height) {
-    this._init(metadata, orientation, panel_height);
+function GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id) {
+    this._init(metadata, orientation, panel_height, instance_id);
 }
 
 GraphicalHWMonitorApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function (metadata, orientation, panel_height) {
-        Applet.IconApplet.prototype._init.call(this, orientation, panel_height);
+    _init: function (metadata, orientation, panel_height, instance_id) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this.graphs = [];
 
@@ -306,6 +306,6 @@ MemDataProvider.prototype = {
 };
 
 
-function main(metadata, orientation, panel_height) {
-    return new GraphicalHWMonitorApplet(metadata, orientation, panel_height);
+function main(metadata, orientation, panel_height, instance_id) {
+    return new GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id);
 }
