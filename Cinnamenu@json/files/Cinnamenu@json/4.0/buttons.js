@@ -819,7 +819,8 @@ class AppListGridButton extends PopupBaseMenuItem {
     } else {
       this.formatLabel({tooltipFormat: true});
       if (this.state.settings.showTooltips) {
-        this.state.trigger('setTooltip', this.actor.get_transformed_position(), this.actor.height, this.tooltipMarkup);
+        let {width, height} = this.actor;
+        this.state.trigger('setTooltip', this.actor.get_transformed_position(), width, height, this.tooltipMarkup);
       }
     }
     return false;

@@ -140,7 +140,7 @@ class CinnamenuApplet extends TextIconApplet {
         },
         clearEnteredActors: () => this.clearEnteredActors(),
         makeVectorBox: (actor) => this.makeVectorBox(actor),
-        setTooltip: (coords, height, text) => {
+        setTooltip: (coords, width, height, text) => {
           if (!text) {
             this.tooltip.hide();
             return;
@@ -151,7 +151,13 @@ class CinnamenuApplet extends TextIconApplet {
           } else {
             this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
           }
-          coords[1] = coords[1] + height;
+          if (this.state.isListView) {
+            coords[0] = coords[0] + width + 80;
+            coords[1] -= 14;
+          } else {
+            coords[1] = coords[1] + height;
+          }
+
           this.tooltip.mousePosition = coords;
           if (!this.state.settings.tooltipDelay) {
             this.tooltip.show();
