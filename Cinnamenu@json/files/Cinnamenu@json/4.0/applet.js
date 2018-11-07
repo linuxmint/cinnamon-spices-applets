@@ -18,6 +18,7 @@ const {addTween} = imports.ui.tweener;
 const {Tooltip} = imports.ui.tooltips;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
+const {makeDraggable} = imports.ui.dnd;
 const {listDirAsync} = imports.misc.fileUtils;
 const {spawnCommandLine, latinise, find, findIndex, map, tryFn} = imports.misc.util;
 const {createStore} = imports.misc.state;
@@ -107,6 +108,7 @@ class CinnamenuApplet extends TextIconApplet {
         isListView: false,
         iconSize: 64,
         currentCategory: 'favorites',
+        categoryDragged: false,
         fallbackDescription: '',
         appletReady: false,
         searchActive: false,
@@ -128,6 +130,12 @@ class CinnamenuApplet extends TextIconApplet {
             } else {
               this.categoryButtons[i].actor.set_style_class_name('menu-category-button');
             }
+          }
+        },
+        categoryDragged: ({categoryDragged}) => {
+          if (categoryDragged && this.vectorBox) {
+            this.vectorBox.set_reactive(false);
+            this.vectorBox.hide();
           }
         },
         clearEnteredActors: () => this.clearEnteredActors(),
@@ -898,7 +906,7 @@ class CinnamenuApplet extends TextIconApplet {
     let vi = this.getVectorInfo();
     if (!vi) return;
     let config = {
-      debug: false,
+      debug: true,
       width: vi.w - 1,
       height: vi.h,
       ulc_x: vi.mx,
@@ -912,11 +920,24 @@ class CinnamenuApplet extends TextIconApplet {
     };
     if (!this.vectorBox) {
       this.vectorBox = new St.Polygon(config);
+      this.vectorBox._delegate = actor._delegate;
+      this.draggableVectorBox = makeDraggable(this.vectorBox);
       this.categoriesOverlayBox.add_actor(this.vectorBox);
       this.vectorBox.set_reactive(true);
-      this.applicationsBoxWrapper.connect('enter-event', () => this.vectorBox.set_reactive(false));
+      this.vectorBox.show();
+      this.applicationsBoxWrapper.connect('enter-event', () => {
+        if (!this.vectorBox) return;
+        this.vectorBox.set_reactive(false);
+      });
+      this.draggableVectorBoxId = this.draggableVectorBox.connect('drag-begin', () => {
+        if (!this.vectorBox) return;
+        this.vectorBox.set_reactive(false);
+        this.vectorBox.hide();
+      });
     } else {
-      this.vectorBox.set_reactive(true);
+      this.vectorBox._delegate = actor._delegate;
+      if (!this.vectorBox.reactive) this.vectorBox.set_reactive(true);
+      if (!this.vectorBox.visible) this.vectorBox.show();
       let keys = Object.keys(config);
       for (let i = 0; i < keys.length; i++) {
         this.vectorBox[keys[i]] = config[keys[i]]

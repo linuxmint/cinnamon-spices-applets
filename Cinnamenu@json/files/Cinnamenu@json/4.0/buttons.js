@@ -150,14 +150,17 @@ class CategoryListButton extends PopupBaseMenuItem {
 
   onDragBegin() {
     this.actor.set_opacity(51);
+    this.state.set({categoryDragged: true});
   }
 
   onDragCancelled() {
     this.actor.set_opacity(255);
+    this.state.set({categoryDragged: false});
   }
 
   onDragEnd() {
     this.actor.set_opacity(255);
+    setTimeout(() => this.state.set({categoryDragged: false}), 0);
   }
 
   _clearDragPlaceholder() {
@@ -610,6 +613,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     this.dot.opacity = 0;
     this.onStateChanged();
 
+    this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
     this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
     this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
     this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
@@ -842,6 +846,10 @@ class AppListGridButton extends PopupBaseMenuItem {
       this.state.trigger('setSelectedTitleText', '');
       this.state.trigger('setSelectedDescriptionText', '');
     }
+  }
+
+  handleButtonPress() {
+    this.state.set({categoryDragged: true});
   }
 
   handleButtonRelease(actor, e) {
