@@ -9,6 +9,7 @@ Changelog
   * 4.0: Made the height of the menu based on natural height, while constraining to the monitor height.
   * 4.0: Fixed an issue causing duplicate filesystem completion entries populating the menu on search.
   * 4.0: Added a vector box for preventing misselections when moving the cursor from the categories list to an app item.
+  * 4.0: Description placement options have been consolidated into a simple drop-down setting.
 
 ### 3.2.6
 

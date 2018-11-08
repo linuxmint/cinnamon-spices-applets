@@ -269,7 +269,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.pathCompleter.set_dirs_only(false);
 
       this.updateKeybinding();
-      this.signals.connect(Main.themeManager, 'theme-set', (...args) => this.updateIconAndLabel(...args));
+      this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
       this.updateIconAndLabel();
 
       this._iconTheme = Gtk.IconTheme.get_default();
@@ -589,6 +589,11 @@ class CinnamenuApplet extends TextIconApplet {
     this.refresh();
   }
 
+  onThemeChanged() {
+    this.updateIconAndLabel();
+    setTimeout(() => this.refresh(), 0);
+  }
+
   searchProviderChange(provider) {
     return function onProviderChange() {
       let enabledProviders = global.settings.get_strv('enabled-search-providers');
@@ -653,6 +658,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     this.actor.style += `max-width: ${this.mainBox.width}px;max-height: ${this.mainBox.height}px;`;
+    this.groupCategoriesWorkspacesScrollBox.style += `max-width: ${this.categoriesBox.width}px;`;
+    this.categoriesOverlayBox.style += `max-width: ${this.categoriesBox.width}px;`;
+    this.categoriesBox.style += `max-width: ${this.categoriesBox.width}px;`;
     this.bottomPane.width = this.middlePane.width;
   }
 
@@ -2370,7 +2378,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.applicationsScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
     this.applicationsScrollBox.set_mouse_scrolling(true);
 
-    this.categoriesOverlayBox = new Clutter.Actor();
+    this.categoriesOverlayBox = new St.Widget();
 
     // CategoriesBox
     this.categoriesBox = new St.BoxLayout({
