@@ -64,10 +64,9 @@ class CategoryListButton extends PopupBaseMenuItem {
     this.selectorMethod = selectorMethod;
 
     this.index = -1;
-    this._dir = dir;
     let isStrDir = typeof dir === 'string';
     let dirName = !isStrDir ? dir.get_name() : null;
-    this.id = typeof this._dir === 'string' || this._dir instanceof String ? this._dir : altNameText;
+    this.id = typeof dir === 'string' || dir instanceof String ? dir : altNameText;
     let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
     this.disabled = false;
     this.entered = null;
@@ -137,12 +136,12 @@ class CategoryListButton extends PopupBaseMenuItem {
       id: this.id
     };
 
-    this._draggable = makeDraggable(this.actor);
+    this.draggable = makeDraggable(this.actor);
 
     // Connect signals
-    this.signals.connect(this._draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-    this.signals.connect(this._draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-    this.signals.connect(this._draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+    this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
+    this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
+    this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
     this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
     this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
@@ -262,7 +261,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
     this.state = state;
     this.buttonState = buttonState;
     this.signals = new SignalManager(null);
-    this._action = action;
+    this.action = action;
     this.label = new Label({
       text: label,
       style: 'font-size: 11px;'
@@ -310,7 +309,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
       this.buttonState.trigger('toggleMenu');
       return false;
     }
-    switch (this._action) {
+    switch (this.action) {
       case 'add_to_panel':
         if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
           let new_applet_id = global.settings.get_int('next-applet-id');
@@ -450,7 +449,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     this.description = '';
     this.entered = null;
 
-    this._iconContainer = new BoxLayout();
+    this.iconContainer = new BoxLayout();
 
     // appType 0 = application, appType 1 = place, appType 2 = recent
     // Filesystem autocompletion
@@ -541,7 +540,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     });
 
     if (this.icon) {
-      this._iconContainer.add(this.icon, {
+      this.iconContainer.add(this.icon, {
         x_fill: false,
         y_fill: false,
         x_align: this.state.isListView ? Align.END : Align.MIDDLE,
@@ -549,7 +548,7 @@ class AppListGridButton extends PopupBaseMenuItem {
       });
     }
 
-    this.buttonBox.add(this._iconContainer, {
+    this.buttonBox.add(this.iconContainer, {
       x_fill: false,
       y_fill: false,
       x_align: this.state.isListView ? Align.START : Align.MIDDLE,
@@ -561,7 +560,7 @@ class AppListGridButton extends PopupBaseMenuItem {
       x_align: this.state.isListView ? Align.START : Align.MIDDLE,
       y_align: Align.MIDDLE
     });
-    this._iconContainer.add(this.dot, {
+    this.iconContainer.add(this.dot, {
       x_fill: false,
       y_fill: true,
       x_align: this.state.isListView ? Align.END : Align.MIDDLE,
@@ -604,11 +603,11 @@ class AppListGridButton extends PopupBaseMenuItem {
     // Connect signals
     if (this.buttonState.appType === ApplicationType._applications) {
       this.actor._delegate.isDraggableApp = true;
-      this._draggable = makeDraggable(this.actor);
+      this.draggable = makeDraggable(this.actor);
       this.signals.connect(this.buttonState.app, 'notify::state', (...args) => this.onStateChanged(...args));
-      this.signals.connect(this._draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-      this.signals.connect(this._draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-      this.signals.connect(this._draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+      this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
+      this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
+      this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
     }
 
     // Check if running state
@@ -1047,8 +1046,8 @@ class AppListGridButton extends PopupBaseMenuItem {
       if (this.icon) {
         this.icon.destroy();
       }
-      if (this._iconContainer) {
-        this._iconContainer.destroy();
+      if (this.iconContainer) {
+        this.iconContainer.destroy();
       }
       this.buttonBox.destroy();
     }
@@ -1090,9 +1089,9 @@ class GroupButton extends PopupBaseMenuItem {
         });
         iconObj.gicon = this.defaultAvatar;
         this.name = GLib.get_user_name();
-        this._user = UserManager.get_default().get_user(this.name);
-        this.signals.connect(this._user, 'notify::is_loaded', (...args) => this.onUserChanged(...args));
-        this.signals.connect(this._user, 'changed', (...args) => this.onUserChanged(...args));
+        this.user = UserManager.get_default().get_user(this.name);
+        this.signals.connect(this.user, 'notify::is_loaded', (...args) => this.onUserChanged(...args));
+        this.signals.connect(this.user, 'changed', (...args) => this.onUserChanged(...args));
         setTimeout(() => this.onUserChanged(), 0);
       } else {
         iconObj.icon_name = iconName;
@@ -1108,12 +1107,12 @@ class GroupButton extends PopupBaseMenuItem {
   }
 
   onUserChanged() {
-    if (!this._user || !this._user.is_loaded || this.icon.is_finalized()) {
+    if (!this.user || !this.user.is_loaded || this.icon.is_finalized()) {
       return;
     }
-    this.name = this._user.get_real_name();
+    this.name = this.user.get_real_name();
     if (this.icon) {
-      let iconFileName = this._user.get_icon_file();
+      let iconFileName = this.user.get_icon_file();
       let iconFile = Gio.file_new_for_path(iconFileName);
       let icon;
       if (iconFile.query_exists(null)) {
@@ -1132,7 +1131,7 @@ class GroupButton extends PopupBaseMenuItem {
     if (event && event.get_button() > 1) {
       return;
     }
-    if (this._user || this.icon.icon_name.indexOf('view') === -1) {
+    if (this.user || this.icon.icon_name.indexOf('view') === -1) {
       this.state.trigger('closeMenu');
     }
     if (this.icon.icon_name && this.icon.icon_name.indexOf('view') > -1) {

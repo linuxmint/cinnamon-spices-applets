@@ -1,6 +1,6 @@
 Changelog
 
-### 3.2.8
+### 4.0.0
 
   * Improved search accuracy - keywords and application IDs are now considered in the results scoring.
   * Fixed window titles not being fuzzy highlighted during search when they are matched by title and "Enable searching of open windows" is enabled.
