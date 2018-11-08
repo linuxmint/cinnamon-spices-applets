@@ -490,7 +490,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.state.settings.overlayKey,
       () => {
         if (Main.overview.visible || Main.expo.visible) return;
-        if (global.screen.get_current_monitor() === this.panel.monitorIndex) {
+        if (!this.getOtherInstance || global.screen.get_current_monitor() === this.panel.monitorIndex) {
           this.menu.toggle_with_options(this.state.settings.enableAnimation);
         } else if (typeof this.getOtherInstance === 'function') {
           let instance = this.getOtherInstance();
