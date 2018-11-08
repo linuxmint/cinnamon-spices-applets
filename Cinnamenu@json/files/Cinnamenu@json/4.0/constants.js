@@ -16,7 +16,8 @@ const ApplicationType = {
   _places: 1,
   _recent: 2,
   _windows: 3,
-  _providers: 4
+  _providers: 4,
+  _completions: 5,
 };
 const AppTypes = Object.keys(ApplicationType);
 
@@ -31,3 +32,13 @@ const fuzzyOptions = {
 }
 
 const gridWidths = [0, 240, 340, 498, 644, 725, 840, 980];
+
+const searchThresholds = {
+  id: 0.2,
+  name: 0.1,
+  description: 0.1,
+  keywords: 0.2,
+  title: 0.2
+};
+
+const markdownProps = ['name', 'description'];

@@ -60,6 +60,13 @@ var fuzzy = function (q, str, opts) {
     str = str.toLowerCase();
   }
 
+  if (q === str) {
+    return {
+      score: 1,
+      result: opts.before + originalStr + opts.after
+    };
+  }
+
   // String with surrounded results
   let result = '';
 

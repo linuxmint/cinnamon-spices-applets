@@ -49,9 +49,8 @@
     },
     "menu-behave": {
       "type": "section",
-      "title": "Menu",
+      "title": "",
       "keys": [
-        "show-tooltips",
         "tooltip-delay",
         "category-click",
         "enable-autoscroll",
@@ -63,7 +62,7 @@
       "title": "Layout",
       "keys": [
         "startup-view-mode",
-        "show-apps-description-on-buttons",
+        "description-placement",
         "enable-custom-menu-height",
         "custom-menu-height",
         "apps-grid-column-count"
@@ -130,7 +129,7 @@
   },
   "menu-label": {
     "type": "entry",
-    "default": "Menu",
+    "default": "",
     "description": "Set the custom menu button icon name",
     "tooltip": "Set the custom menu button icon name"
   },
@@ -278,21 +277,20 @@
     "description": "Enable filesystem path entry in search box",
     "tooltip": "Allows path entry in the menu search box."
   },
-  "show-apps-description-on-buttons": {
-    "type": "switch",
-    "default": false,
-    "description": "Show application descriptions under titles",
-    "tooltip": "Choose whether or not to show the application description on the application buttons."
-  },
-  "show-tooltips": {
-    "type": "switch",
-    "default": true,
-    "description": "Show tooltips",
-    "tooltip": "When enabled, tooltips containing the item's name or description is shown when hovered over."
+  "description-placement": {
+    "type": "combobox",
+    "default": 1,
+    "description": "Application description placement",
+    "options": {
+      "Tooltips": 1,
+      "Under titles": 2,
+      "Bottom pane": 3,
+      "None": 4
+    },
+    "tooltip": "Choose where application descriptions will be placed, or select \"None\" to disable."
   },
   "tooltip-delay": {
     "indent": true,
-    "dependency": "show-tooltips",
     "type": "spinbutton",
     "default": 0,
     "min": 0,

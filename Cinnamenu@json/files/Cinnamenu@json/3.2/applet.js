@@ -27,7 +27,7 @@ const FileUtils = imports.misc.fileUtils;
 let store, fuzzy, sortBy, setTimeout, tryFn, find, map, isFinalized, sortDirs, Chromium, Firefox, GoogleChrome, Opera,
   PlaceDisplay, CategoryListButton, AppListGridButton, GroupButton, _,
   REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode,
-  fuzzyOptions, gridWidths;
+  fuzzyOptions, gridWidths, searchThresholds, markdownProps;
 if (typeof require !== 'undefined') {
   let utils = require('./utils');
   let buttons = require('./buttons');
@@ -56,6 +56,8 @@ if (typeof require !== 'undefined') {
   ApplicationsViewMode = constants.ApplicationsViewMode;
   fuzzyOptions = constants.fuzzyOptions;
   gridWidths = constants.gridWidths;
+  searchThresholds = constants.searchThresholds;
+  markdownProps = constants.markdownProps;
 } else {
   const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
   let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
@@ -83,6 +85,8 @@ if (typeof require !== 'undefined') {
   ApplicationsViewMode = AppletDir.constants.ApplicationsViewMode;
   fuzzyOptions = AppletDir.constants.fuzzyOptions;
   gridWidths = AppletDir.constants.gridWidths;
+  searchThresholds = AppletDir.constants.searchThresholds;
+  markdownProps = AppletDir.constants.markdownProps;
 }
 
 const hintText = _('Type to search...');
@@ -772,11 +776,6 @@ CinnamenuApplet.prototype = {
         cb: this.refresh
       },
       {
-        key: 'search-filesystem',
-        value: 'searchFilesystem',
-        cb: this.refresh
-      },
-      {
         key: 'show-apps-description-on-buttons',
         value: 'showAppDescriptionsOnButtons',
         cb: this.refresh
@@ -1207,7 +1206,7 @@ CinnamenuApplet.prototype = {
       windows = windows.concat(global.screen.get_workspace_by_index(i).list_windows())
     }
     let res = [];
-    let searchableProps = ['title', 'description'];
+    let searchableProps = ['title', 'description', 'id'];
     for (let i = 0, len = windows.length; i < len; i++) {
       if (!windows[i] || !windows[i].title) {
         continue;
@@ -1218,15 +1217,16 @@ CinnamenuApplet.prototype = {
         continue;
       }
       let appObject = {
-        description: app.name
+        description: app.name,
       };
       windows[i].description = app.name;
+      windows[i].id = windows[i].get_wm_class().toLowerCase();
       for (let z = 0; z < searchableProps.length; z++) {
         match = fuzzy(pattern, windows[i][searchableProps[z]], fuzzyOptions)
-        if (match.score > 0.2) {
+        if (match.score > searchThresholds[searchableProps[z]]) {
           appObject._icon = app.create_icon_texture(this.state.iconSize);
           appObject.type = ApplicationType._windows;
-          appObject.name = windows[i].title;
+          appObject.name = !z ? match.result : windows[i].title;
           appObject.score = match.score;
           appObject.window = windows[i];
           res.push(appObject);
@@ -1246,6 +1246,7 @@ CinnamenuApplet.prototype = {
         results[i].type = ApplicationType._providers;
         results[i].name = results[i].label.replace(/ : /g, ': ');
         results[i].activate = provider.on_result_selected;
+        results[i].score = 0.1;
         if (results[i].icon) {
           results[i].icon.icon_size = this.state.iconSize;
         } else if (results[i].icon_app){
@@ -1267,10 +1268,16 @@ CinnamenuApplet.prototype = {
     }
     let places = this.placesManager.getDefaultPlaces();
     let res = [];
+    let match = null;
     for (let i = 0, len = places.length; i < len; i++) {
-      if (!pattern || places[i].name.toLowerCase().indexOf(pattern) !== -1) {
+      if (pattern) match = fuzzy(pattern, places[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
         places[i].type = ApplicationType._places;
         places[i].description = places[i].file.get_path();
+        if (match) {
+          places[i].name = match.result;
+          places[i].score = match.score;
+        }
         res.push(places[i]);
       }
     }
@@ -1283,11 +1290,39 @@ CinnamenuApplet.prototype = {
     }
     let bookmarks = this.placesManager.getBookmarks();
     let res = [];
+    let match = null;
     for (let i = 0, len = bookmarks.length; i < len; i++) {
-      if (!pattern || bookmarks[i].name.toLowerCase().indexOf(pattern) !== -1) {
+      if (pattern) match = fuzzy(pattern, bookmarks[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
         bookmarks[i].type = ApplicationType._places;
         bookmarks[i].description = bookmarks[i].file.get_path();
+        if (match) {
+          bookmarks[i].name = match.result;
+          bookmarks[i].score = match.score;
+        }
         res.push(bookmarks[i]);
+      }
+    }
+    return res;
+  },
+
+  listDevices: function(pattern) {
+    if (!this.placesManager) {
+      return [];
+    }
+    let devices = this.placesManager.getMounts();
+    let res = [];
+    let match = null;
+    for (let i = 0, len = devices.length; i < len; i++) {
+      if (pattern) match = fuzzy(pattern, devices[i].name, fuzzyOptions);
+      if (!pattern || match.score > searchThresholds.name) {
+        devices[i].type = ApplicationType._places;
+        devices[i].description = devices[i].file.get_path();
+        if (match) {
+          devices[i].name = match.result;
+          devices[i].score = match.score;
+        }
+        res.push(devices[i]);
       }
     }
     return res;
@@ -1333,22 +1368,6 @@ CinnamenuApplet.prototype = {
       }
     }
 
-    return res;
-  },
-
-  listDevices: function(pattern) {
-    if (!this.placesManager) {
-      return [];
-    }
-    let devices = this.placesManager.getMounts();
-    let res = [];
-    for (let i = 0, len = devices.length; i < len; i++) {
-      if (!pattern || devices[i].name.toLowerCase().indexOf(pattern) !== -1) {
-        devices[i].type = ApplicationType._places;
-        devices[i].description = devices[i].file.get_path();
-        res.push(devices[i]);
-      }
-    }
     return res;
   },
 
@@ -1427,22 +1446,25 @@ CinnamenuApplet.prototype = {
       if (categoryMenuId && categoryMenuId !== 'all') {
         res = this.applicationsByCategory[categoryMenuId];
       } else {
-        for (let directory in this.applicationsByCategory) {
-          res = res.concat(this.applicationsByCategory[directory])
+        let keys = Object.keys(this.applicationsByCategory);
+        for (let i = 0; i < keys.length; i++) {
+          res = res.concat(this.applicationsByCategory[keys[i]])
         }
       }
     }
 
     if (pattern) {
       let _res = [];
-      let searchableProps = ['name', 'keywords', 'description'];
+      let searchableProps = ['name', 'description', 'keywords', 'id'];
 
       for (let i = 0, len = res.length; i < len; i++) {
+        let name = res[i].get_name();
+        let keywords = res[i].get_keywords();
         Object.assign(res[i], {
-          name: res[i].get_name(),
-          keywords: res[i].get_name(),
-          description:res[i].get_description(),
-          id: res[i].get_id(),
+          name: name,
+          keywords: keywords || name,
+          description: res[i].get_description(),
+          id: res[i].get_id().replace(/\.desktop$/, ''),
           type: ApplicationType._applications
         });
 
@@ -1452,9 +1474,11 @@ CinnamenuApplet.prototype = {
             continue;
           }
           match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
-          if (res[i][searchableProps[z]] && match.score > 0.1) {
+          if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
             res[i].score = match.score;
-            res[i][searchableProps[z]] = match.result;
+            if (markdownProps.indexOf(searchableProps[z]) > -1) {
+              res[i][searchableProps[z]] = match.result;
+            }
             _res.push(res[i]);
             break;
           }
@@ -1494,6 +1518,7 @@ CinnamenuApplet.prototype = {
 
   _resetDisplayApplicationsToStartup: function() {
     this.resetSearch();
+    this.state.set({currentCategory: 'favorites'});
     this._selectCategory('favorites');
   },
 
@@ -1792,26 +1817,6 @@ CinnamenuApplet.prototype = {
     return true;
   },
 
-  _getCompletion: function(text) {
-    if (text.indexOf('/') !== -1) {
-      if (text.substr(text.length - 1) === '/') {
-        return '';
-      } else {
-        return this._pathCompleter.get_completion_suffix(text);
-      }
-    } else {
-      return false;
-    }
-  },
-
-  _getCompletions: function(text) {
-    if (text.indexOf('/') !== -1) {
-      return this._pathCompleter.get_completions(text);
-    } else {
-      return [];
-    }
-  },
-
   resetSearch: function() {
     if (this.answerText) {
       this.answerText.set_text('');
@@ -1944,16 +1949,9 @@ CinnamenuApplet.prototype = {
 
     let recentResults = this.listRecent(pattern);
 
-    let acResults = []; // search box autocompletion results
-    if (this.state.settings.searchFilesystem) {
-      // Don't use the pattern here, as filesystem is case sensitive
-      acResults = this._getCompletions(text);
-    }
-
     let results = appResults
       .concat(placesResults)
       .concat(recentResults)
-      .concat(acResults)
       .concat(this.listWindows(pattern));
 
     const finish = () => {
