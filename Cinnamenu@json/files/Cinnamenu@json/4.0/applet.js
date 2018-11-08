@@ -893,6 +893,7 @@ class CinnamenuApplet extends TextIconApplet {
       displayed: false,
       menuHeight: 0
     });
+    this.mxOffset = null;
     this.display();
     this.clearEnteredActors();
     this.destroyAppButtons();
@@ -930,10 +931,15 @@ class CinnamenuApplet extends TextIconApplet {
   *  |   \ |
   *  |____\|C
   */
-  getVectorInfo() {
+  getVectorInfo(buttonHeight) {
     let [mx, my, mask] = global.get_pointer();
     // Slightly distance the polygon from the cursor so categories update quickly.
-    mx += 1;
+    if (!this.mxOffset) {
+      let mxOffset = Math.floor(buttonHeight / 38);
+      mxOffset = mxOffset < 0 ? 0 : mxOffset;
+      this.mxOffset = mxOffset;
+    }
+    mx += this.mxOffset;
     let bw, bh, bx, by;
     if (!this.categoriesScrollBoxTransformedSize) {
       this.categoriesScrollBoxTransformedSize = this.groupCategoriesWorkspacesScrollBox.get_transformed_size();
@@ -957,7 +963,7 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   makeVectorBox(actor) {
-    let vi = this.getVectorInfo();
+    let vi = this.getVectorInfo(actor.height);
     if (!vi) return;
     let config = {
       debug: false,
