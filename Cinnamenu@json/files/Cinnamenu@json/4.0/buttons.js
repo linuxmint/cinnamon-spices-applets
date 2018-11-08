@@ -187,7 +187,9 @@ class CategoryListButton extends PopupBaseMenuItem {
 
     if (event) {
       this.state.trigger('clearEnteredActors');
-      setTimeout(() => this.state.trigger('makeVectorBox', this.actor), 0);
+      if (!this.state.settings.categoryClick) {
+        setTimeout(() => this.state.trigger('makeVectorBox', this.actor), 0);
+      }
     } else {
       this.state.trigger('scrollToButton', this, true);
     }
