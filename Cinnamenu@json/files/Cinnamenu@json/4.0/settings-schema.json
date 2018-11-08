@@ -129,7 +129,7 @@
   },
   "menu-label": {
     "type": "entry",
-    "default": "Menu",
+    "default": "",
     "description": "Set the custom menu button icon name",
     "tooltip": "Set the custom menu button icon name"
   },

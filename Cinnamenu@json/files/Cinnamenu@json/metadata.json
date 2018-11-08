@@ -5,5 +5,7 @@
   "max-instances": 2,
   "version": "4.0.0",
   "multiversion": true,
+  "website": "https://github.com/linuxmint/cinnamon-spices-applets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+Cinnamenu%40json",
+  "comments": "Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and the contributors to projects they derived from.",
   "cinnamon-version": ["3.2", "3.4", "3.6", "3.8", "4.0"]
 }
