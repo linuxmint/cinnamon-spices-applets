@@ -447,6 +447,7 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   on_applet_removed_from_panel() {
+    this.willUnmount = true;
     Main.keybindingManager.removeHotKey('overlay-key-' + this.instance_id);
     if (!this.settings) {
       return;
@@ -467,6 +468,15 @@ class CinnamenuApplet extends TextIconApplet {
     this.refresh();
   }
 
+  on_applet_instances_changed(instance) {
+    if (instance && instance.instance_id !== this.instance_id) {
+      this.getOtherInstance = () => instance;
+      instance.getOtherInstance = () => this;
+    } else if (!instance && !this.willUnmount) {
+      this.getOtherInstance = null;
+    }
+  }
+
   launchPrivacySettings() {
     spawnCommandLine('cinnamon-settings privacy');
   }
@@ -480,8 +490,12 @@ class CinnamenuApplet extends TextIconApplet {
       'overlay-key-' + this.instance_id,
       this.state.settings.overlayKey,
       () => {
-        if (!Main.overview.visible && !Main.expo.visible) {
+        if (Main.overview.visible || Main.expo.visible) return;
+        if (global.screen.get_current_monitor() === this.panel.monitorIndex) {
           this.menu.toggle_with_options(this.state.settings.enableAnimation);
+        } else if (typeof this.getOtherInstance === 'function') {
+          let instance = this.getOtherInstance();
+          instance.menu.toggle_with_options.call(instance.menu, instance.state.settings.enableAnimation);
         }
       }
     );
