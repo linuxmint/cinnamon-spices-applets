@@ -932,6 +932,8 @@ class CinnamenuApplet extends TextIconApplet {
   */
   getVectorInfo() {
     let [mx, my, mask] = global.get_pointer();
+    // Slightly distance the polygon from the cursor so categories update quickly.
+    mx += 1;
     let bw, bh, bx, by;
     if (!this.categoriesScrollBoxTransformedSize) {
       this.categoriesScrollBoxTransformedSize = this.groupCategoriesWorkspacesScrollBox.get_transformed_size();
