@@ -1108,7 +1108,7 @@ class GroupButton extends PopupBaseMenuItem {
   }
 
   onUserChanged() {
-    if (!this._user || !this._user.is_loaded) {
+    if (!this._user || !this._user.is_loaded || this.icon.is_finalized()) {
       return;
     }
     this.name = this._user.get_real_name();

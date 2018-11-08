@@ -637,7 +637,6 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     this.groupCategoriesWorkspacesScrollBox.height = height;
-    this.categoriesOverlayBox.height = height;
     this.applicationsScrollBox.height = height;
     this.actor.style += `max-height: ${height}px`;
     this.state.set({menuHeight: height});
