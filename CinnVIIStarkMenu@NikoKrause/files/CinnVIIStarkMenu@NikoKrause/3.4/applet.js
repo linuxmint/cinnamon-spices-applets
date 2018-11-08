@@ -3851,7 +3851,7 @@ MyApplet.prototype = {
         this.leftPane = new St.Bin();
 
         this.favsBox = new St.BoxLayout({ vertical: true });
-        this.favsBox.style = "min-height: 415px;min-width: 235px;";
+        this.favsBox.style = "min-height: 300px;min-width: 235px;";
 
         this.appsBox = new St.BoxLayout({ vertical: true });
 
