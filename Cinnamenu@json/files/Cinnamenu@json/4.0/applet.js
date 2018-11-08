@@ -99,12 +99,12 @@ class CinnamenuApplet extends TextIconApplet {
       this.appFavorites = getAppFavorites();
       this.state = createStore({
         cinnamon36: typeof this._newPanelId !== 'undefined',
-        orientation: orientation,
+        orientation,
         recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
         settings: {},
         favorites: this.appFavorites.getFavorites(),
-        knownProviders: knownProviders,
-        enabledProviders: enabledProviders,
+        knownProviders,
+        enabledProviders,
         theme: null,
         isListView: false,
         iconSize: 64,
@@ -284,7 +284,6 @@ class CinnamenuApplet extends TextIconApplet {
       this._knownApps = [];
       this.applicationsByCategory = {};
       this._allItems = [];
-      this.searchTimeoutId = 0;
       this._activeContainer = null;
       this.placesManager = null;
 
@@ -623,7 +622,8 @@ class CinnamenuApplet extends TextIconApplet {
 
   onEnabledSearchProvidersChange() {
     let enabledProviders = global.settings.get_strv('enabled-search-providers');
-    this.state.set({enabledProviders: enabledProviders});
+    if (enabledProviders.length === 0) return;
+    this.state.set({enabledProviders});
     // Synchronize search provider settings
     for (let i = 0; i < this.state.knownProviders.length; i++) {
       this.settings.setValue(this.state.knownProviders[i], enabledProviders.indexOf(this.state.knownProviders[i]) > -1);
@@ -2043,24 +2043,11 @@ class CinnamenuApplet extends TextIconApplet {
       this.searchEntry.set_secondary_icon(null);
       this.state.trigger('menuOpened');
     }
-    if (!this.state.searchActive) {
-      if (this.searchTimeoutId > 0) {
-        Mainloop.source_remove(this.searchTimeoutId);
-        this.searchTimeoutId = 0;
-      }
-      return;
-    }
-    if (this.searchTimeoutId > 0) {
-      return;
-    }
-    this.searchTimeoutId = Mainloop.timeout_add(0, () => this.doSearch(searchText));
+    setTimeout(() => this.doSearch(searchText), 0);
   }
 
   doSearch(text) {
-    this.searchTimeoutId = 0;
-    if (text.length === 0) {
-      return;
-    }
+    if (!text || !text.trim()) return;
     let pattern = latinise(text.trim().toLowerCase());
     if (pattern === this._previousSearchPattern) {
       return false;
