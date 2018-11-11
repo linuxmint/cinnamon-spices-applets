@@ -62,9 +62,9 @@ msgstr ""
 
 ''' % (applet_name, author_mail, author_mail, applet_name, applet_version, author_mail, strftime("%Y-%m-%d %H:%M%z")) )
 
-def isfloat(str):
+def isfloat(s):
     try:
-        float(str)
+        float(s)
     except ValueError:
         return False
     return True
