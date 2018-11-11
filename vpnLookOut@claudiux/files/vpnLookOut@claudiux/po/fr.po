@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.1.0~20181107\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.2.0~20181111\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-07 01:20+0100\n"
+"PO-Revision-Date: 2018-11-11 22:54+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -238,43 +238,47 @@ msgstr "Paramètres"
 msgid "Managed Apps"
 msgstr "Applications gérées"
 
-#: 3.8/settings-schema.json:92
+#: 3.8/settings-schema.json:59
+msgid "Activity Logs"
+msgstr "Journal d'activité"
+
+#: 3.8/settings-schema.json:97
 msgid "Refresh interval:"
 msgstr "Intervalle de rafraîchissement :"
 
-#: 3.8/settings-schema.json:93
+#: 3.8/settings-schema.json:98
 msgid "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
 msgstr "Intervalle de temps, en secondes, entre deux vérifications de l’état de la liaison VPN. Une valeur faible augmente la sécurité mais génère plus d'activité. Choisissez une valeur d'autant plus grande que votre ordinateur est lent."
 
-#: 3.8/settings-schema.json:110
+#: 3.8/settings-schema.json:115
 msgid "Emit an audible alert when VPN shuts down."
 msgstr "Émettre une alerte sonore quand le VPN tombe."
 
-#: 3.8/settings-schema.json:111
+#: 3.8/settings-schema.json:116
 msgid "Checking this allows this applet to emit an audible alert when VPN shuts down."
 msgstr "Cocher cette option permet à cette applet d'émettre un son quand le VPN est tombé."
 
-#: 3.8/settings-schema.json:117
+#: 3.8/settings-schema.json:122
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
 msgstr "Émettre cette alerte sonore au démarrage de cette applet, si la liaison VPN n'est pas active."
 
-#: 3.8/settings-schema.json:118
+#: 3.8/settings-schema.json:123
 msgid "Check this if you want to emit this audible alert when this Applet starts, if VPN is down."
 msgstr "Cochez cette case si vous voulez émettre cette alerte sonore dès le démarrage de cette applet, si la connexion VPN n'est pas active."
 
-#: 3.8/settings-schema.json:130
+#: 3.8/settings-schema.json:135
 msgid "Manage VPN-related Apps"
 msgstr "Gérer les applications liées au VPN"
 
-#: 3.8/settings-schema.json:131
+#: 3.8/settings-schema.json:136
 msgid "This option allows this applet to manage the VPN-related applications you listed above."
 msgstr "Cette option permet à cette applet de gérer les applications liées au VPN que vous aurez énumérées ci-dessus."
 
-#: 3.8/settings-schema.json:135
+#: 3.8/settings-schema.json:140
 msgid "Managed applications"
 msgstr "Applications gérées"
 
-#: 3.8/settings-schema.json:136
+#: 3.8/settings-schema.json:141
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
@@ -282,28 +286,72 @@ msgid ""
 "Shutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\n"
 "VPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle."
 msgstr ""
-"Nom : Nom de l'application.\n"
+"Nom : Ce que vous voulez.\n"
 "Commande : La commande permettant de lancer l'application, sans son chemin.\n"
 "Redémarrer : TRUE si vous voulez redémarrer cette application dès que le lien VPN redevient actif.\n"
 "Fermer : TRUE si vous voulez que cette application soit fermée dès que le lien VPN est perdu.\n"
 "VPN seulement : TRUE si vous voulez fermer rapidement cette application, si elle est lancée pendant que le VPN est inactif."
 
-#: 3.8/settings-schema.json:140
+#: 3.8/settings-schema.json:145
 msgid "Name"
 msgstr "Nom"
 
-#: 3.8/settings-schema.json:145
+#: 3.8/settings-schema.json:150
 msgid "Command"
 msgstr "Commande"
 
-#: 3.8/settings-schema.json:150
+#: 3.8/settings-schema.json:155
 msgid "Restart"
 msgstr "Redémarrer"
 
-#: 3.8/settings-schema.json:155
+#: 3.8/settings-schema.json:160
 msgid "Shut down"
 msgstr "Fermer"
 
-#: 3.8/settings-schema.json:160
+#: 3.8/settings-schema.json:165
 msgid "VPN only"
 msgstr "VPN seulement"
+
+#: 3.8/settings-schema.json:184
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr "Consigner les changements d'état du VPN et les changements d'état des applications liées au VPN"
+
+#: 3.8/settings-schema.json:185
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Cette option permet à cette applet de consigner les changements d'état du VPN et les changements d'état des applications liées au VPN.\n"
+"Vous pourrez afficher le fichier journal pour effectuer des diagnostics."
+
+#: 3.8/settings-schema.json:208
+msgid "Lifetime (days)"
+msgstr "Durée de vie (en jours)"
+
+#: 3.8/settings-schema.json:209
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Durée de vie, en jours, d'un événement enregistré dans le journal."
+
+#: 3.8/applet.js:311
+msgid "TRUE"
+msgstr "OUI"
+
+#: 3.8/applet.js:312
+msgid "FALSE"
+msgstr "NON"
+
+#: 3.8/applet.js:890
+msgid "View Activity Logs"
+msgstr "Journal d'activité"
+
+#: 3.8/applet.js:991
+msgid "Started by vpnLookOut: "
+msgstr "Démarré par vpnLookOut: "
+
+#: 3.8/applet.js:1017
+msgid "Blocked by vpnLookOut: "
+msgstr "Bloqué par vpnLookOut: "
+
+#: 3.8/applet.js:1061
+msgid "Stopped by vpnLookOut: "
+msgstr "Fermé par vpnLookOut: "
