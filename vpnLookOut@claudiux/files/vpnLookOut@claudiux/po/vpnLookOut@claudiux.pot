@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.2.0~20181111\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-11 22:51+0100\n"
+"PO-Revision-Date: 2018-11-12 10:18+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -221,95 +221,95 @@ msgstr ""
 msgid "All dependencies are installed"
 msgstr ""
 
-#: 3.8/settings-schema.json:7
+#: 3.8/settings-schema.json:12
 msgid "VPN-related Apps Manager"
 msgstr ""
 
-#: 3.8/settings-schema.json:49
+#: 3.8/settings-schema.json:76
 msgid "Settings"
 msgstr ""
 
-#: 3.8/settings-schema.json:54
+#: 3.8/settings-schema.json:83
 msgid "Managed Apps"
 msgstr ""
 
-#: 3.8/settings-schema.json:59
+#: 3.8/settings-schema.json:90
 msgid "Activity Logs"
 msgstr ""
 
-#: 3.8/settings-schema.json:97
+#: 3.8/settings-schema.json:130
 msgid "Refresh interval:"
 msgstr ""
 
-#: 3.8/settings-schema.json:98
+#: 3.8/settings-schema.json:131
 msgid "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
 msgstr ""
 
-#: 3.8/settings-schema.json:115
+#: 3.8/settings-schema.json:147
 msgid "Emit an audible alert when VPN shuts down."
 msgstr ""
 
-#: 3.8/settings-schema.json:116
+#: 3.8/settings-schema.json:148
 msgid "Checking this allows this applet to emit an audible alert when VPN shuts down."
 msgstr ""
 
-#: 3.8/settings-schema.json:122
+#: 3.8/settings-schema.json:154
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
 msgstr ""
 
-#: 3.8/settings-schema.json:123
+#: 3.8/settings-schema.json:155
 msgid "Check this if you want to emit this audible alert when this Applet starts, if VPN is down."
 msgstr ""
 
-#: 3.8/settings-schema.json:135
+#: 3.8/settings-schema.json:167
 msgid "Manage VPN-related Apps"
 msgstr ""
 
-#: 3.8/settings-schema.json:136
+#: 3.8/settings-schema.json:168
 msgid "This option allows this applet to manage the VPN-related applications you listed above."
 msgstr ""
 
-#: 3.8/settings-schema.json:140
+#: 3.8/settings-schema.json:172
 msgid "Managed applications"
 msgstr ""
 
-#: 3.8/settings-schema.json:141
+#: 3.8/settings-schema.json:173
 msgid "Name: What you want.\nCommand: The command to run the application, without its path.\nRestart: Set to TRUE if you want to restart this application as soon as the VPN link becomes active again.\nShutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\nVPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle."
 msgstr ""
 
-#: 3.8/settings-schema.json:145
+#: 3.8/settings-schema.json:177
 msgid "Name"
 msgstr ""
 
-#: 3.8/settings-schema.json:150
+#: 3.8/settings-schema.json:182
 msgid "Command"
 msgstr ""
 
-#: 3.8/settings-schema.json:155
+#: 3.8/settings-schema.json:187
 msgid "Restart"
 msgstr ""
 
-#: 3.8/settings-schema.json:160
+#: 3.8/settings-schema.json:192
 msgid "Shut down"
 msgstr ""
 
-#: 3.8/settings-schema.json:165
+#: 3.8/settings-schema.json:197
 msgid "VPN only"
 msgstr ""
 
-#: 3.8/settings-schema.json:184
+#: 3.8/settings-schema.json:216
 msgid "Log the VPN status changes and the VPN-related Apps status changes"
 msgstr ""
 
-#: 3.8/settings-schema.json:185
+#: 3.8/settings-schema.json:217
 msgid "This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\nYou will can display the log file to make diagnostics."
 msgstr ""
 
-#: 3.8/settings-schema.json:208
+#: 3.8/settings-schema.json:240
 msgid "Lifetime (days)"
 msgstr ""
 
-#: 3.8/settings-schema.json:209
+#: 3.8/settings-schema.json:241
 msgid "Lifetime of a record in the log file, in days."
 msgstr ""
 
