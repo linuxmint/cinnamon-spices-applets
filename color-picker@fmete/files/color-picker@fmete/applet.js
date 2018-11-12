@@ -36,7 +36,7 @@ const Gio = imports.gi.Gio;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 function MyApplet(orientation,metadata, panelHeight, instance_id) {
@@ -137,20 +137,20 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        if(Gio.file_new_for_path("/usr/bin/xsel").query_exists(null)) {
+        if(Gio.file_new_for_path("/usr/bin/xclip").query_exists(null)) {
             global.set_stage_input_mode(Cinnamon.StageInputMode.FULLSCREEN);
             global.set_cursor(Cinnamon.Cursor.CROSSHAIR);
-            Util.spawn_async(["python2", this.appletPath + "/cp.py", this.combo_choice], Lang.bind(this, function(output) {
+            Util.spawn_async(["python3", this.appletPath + "/cp.py", this.combo_choice], Lang.bind(this, function(output) {
                 global.unset_cursor();
                 global.set_stage_input_mode(Cinnamon.StageInputMode.NORMAL);
 
                 output = output.replace(/\n$/, "");
                 if (output == "ImportError Xlib") {
-                    Util.spawnCommandLine("apturl apt://python-xlib");
-                    this.notify_installation('python-xlib');
+                    Util.spawnCommandLine("apturl apt://python3-xlib");
+                    this.notify_installation('python3-xlib');
                 } else if (output == "ImportError numpy") {
-                    this.notify_installation('python-numpy');
-                    Util.spawnCommandLine("apturl apt://python-numpy");
+                    this.notify_installation('python3-numpy');
+                    Util.spawnCommandLine("apturl apt://python3-numpy");
                 } else {
                     if (this.pick_notification) {
                         this.createColorCircleSVG(output);
@@ -160,8 +160,8 @@ MyApplet.prototype = {
                 }
             }));
         } else {
-            this.notify_installation('xsel');
-            Util.spawnCommandLine("apturl apt://xsel");
+            this.notify_installation('xclip');
+            Util.spawnCommandLine("apturl apt://xclip");
         }
     }
 
