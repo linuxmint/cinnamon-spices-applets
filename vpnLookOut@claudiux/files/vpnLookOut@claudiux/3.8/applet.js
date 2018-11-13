@@ -56,7 +56,6 @@ class ActivityLogging {
         this.uuid = metadata.uuid;
         this.set_active(active);
         this.set_lifetime(nbdays); // to cut logfile
-        let etc_timezone = GLib.file_get_contents("/etc/timezone").toString().trim().substr(5);
         this.time_options = {year: "numeric", month: "numeric", day: "numeric",
            hour: "numeric", minute: "numeric", second: "numeric",
            hour12: !this._get_system_use24h(), timeZone: this._get_timezone(), timeZoneName: "short"};
@@ -82,7 +81,12 @@ class ActivityLogging {
     } // End of get_system_icon_theme
 
     _get_timezone() {
-        return GLib.file_get_contents("/etc/timezone").toString().trim().substr(5)
+        let [res, out, err, status] = GLib.spawn_command_line_sync("timedatectl show -p Timezone");
+            // res is a boolean : true if command line has been correctly executed
+            // out is the return of the script (as that is sent by 'echo' command in a bash script)
+            // err is the error message, if an error occured
+            // status is the status code (as that is sent by an 'exit' command in a bash script)
+        return out.toString().trim().split("=")[1];
     } // End of _get_timezone
 
     _get_user_language() {
@@ -127,8 +131,15 @@ class ActivityLogging {
     } // End of truncate_log_file
 
     display_logs() {
-        let command = "gnome-system-log-pkexec " + this.log_file_path();
-        global.log(command);
+        let command;
+        /*
+        if (GLib.find_program_in_path("gnome-system-log-pkexec")) {
+            command = "gnome-system-log-pkexec " + this.log_file_path();
+        } else {
+            command = "bash -c 'gnome-system-log " + this.log_file_path() + "'";
+        }
+        */
+        command = this.metadata.path + '/egSpawn.js';
         GLib.spawn_command_line_async(command);
     } // End of display_logs
 
@@ -152,6 +163,7 @@ class vpnLookOut extends Applet.TextIconApplet {
         //try {
             // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
             GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/../scripts && chmod 755 *.sh *.py'");
+            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + " && chmod 755 egSpawn.js'");
 
             // ++ Settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
@@ -345,7 +357,8 @@ class vpnLookOut extends Applet.TextIconApplet {
                  let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
                  let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
                  let _and = _isFedora ? " \\\\&\\\\& " : _isArchlinux ? "" : " \\\\&\\\\& ";
-                 var _apt_install = _isFedora ? "sudo dnf install zenity sox xdg-utils gnome-system-log" : _isArchlinux ? "sudo pacman -Syu zenity sox xdg-utils gnome-system-log" : "sudo apt install zenity sox libsox-fmt-mp3 xdg-utils gnome-system-log";
+                 //var _apt_install = _isFedora ? "sudo dnf install zenity sox xdg-utils gnome-system-log" : _isArchlinux ? "sudo pacman -Syu zenity sox xdg-utils gnome-system-log" : "sudo apt install zenity sox libsox-fmt-mp3 xdg-utils gnome-system-log";
+                 var _apt_install = _isFedora ? "sudo dnf install zenity sox xdg-utils" : _isArchlinux ? "sudo pacman -Syu zenity sox xdg-utils" : "sudo apt install zenity sox libsox-fmt-mp3 xdg-utils";
                  let _libsox = (_isFedora || _isArchlinux) ? "" : "libsox-fmt-mp3";
                  let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
                  this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
@@ -419,7 +432,8 @@ class vpnLookOut extends Applet.TextIconApplet {
             soxmp3WitnessFile = Gio.file_new_for_path(soxmp3WitnessPath);
             soxmp3Installed = soxmp3WitnessFile.query_exists(null);
         }
-        return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") && GLib.find_program_in_path("xdg-open") && GLib.find_program_in_path("gnome-system-log-pkexec"))
+        //return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") && GLib.find_program_in_path("xdg-open") && (GLib.find_program_in_path("gnome-system-log-pkexec") || GLib.find_program_in_path("gnome-system-log")))
+        return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") && GLib.find_program_in_path("xdg-open"))
     }; // End of are_dependencies_installed
 
     execInstallLanguage() {
@@ -600,7 +614,9 @@ class vpnLookOut extends Applet.TextIconApplet {
     on_settings_changed() {
         this.activityLog.set_active(this.doLogActivity);
         if (this.doLogActivity === true) {
-            this.activityLog.set_lifetime(this.logLifetime)
+            this.activityLog.set_lifetime(this.logLifetime);
+            this.activityLog.truncate_log_file();
+            this.next_truncation = 86400; // 86400 seconds = 1 day
         }
 
         if (this.displayType === "compact") {
