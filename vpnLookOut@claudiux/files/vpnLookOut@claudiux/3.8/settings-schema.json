@@ -1,61 +1,99 @@
 {
     "layout": {
         "type": "layout",
-        "pages": ["Torrentpolicy", "Alerts", "VPNpolicy", "Shortcut"],
+        "pages": [
+            "Torrentpolicy",
+            "Alerts",
+            "VPNpolicy",
+            "Shortcut"
+        ],
         "Torrentpolicy": {
             "type": "page",
             "title": "VPN-related Apps Manager",
-            "sections": ["section6", "section7"]
+            "sections": [
+                "section6",
+                "section7"
+            ]
         },
         "Alerts": {
             "type": "page",
             "title": "Notifications",
-            "sections": ["section2", "section3"]
+            "sections": [
+                "section2",
+                "section3"
+            ]
         },
         "VPNpolicy": {
             "type": "page",
             "title": "VPN",
-            "sections": ["section1"]
+            "sections": [
+                "section1",
+                "section8"
+            ]
         },
         "Shortcut": {
             "type": "page",
             "title": "Keyboard shortcuts",
-            "sections": ["section5"]
+            "sections": [
+                "section5"
+            ]
         },
         "section1": {
             "type": "section",
             "title": "VPN",
-            "keys": ["vpnInterface", "vpnName", "connectAtStartup", "reconnect"]
+            "keys": [
+                "vpnInterface",
+                "vpnName",
+                "connectAtStartup",
+                "reconnect"
+            ]
         },
         "section2": {
             "type": "section",
             "title": "Display",
-            "keys": ["refreshInterval-spinner", "displayType"]
+            "keys": [
+                "refreshInterval-spinner",
+                "displayType"
+            ]
         },
         "section3": {
             "type": "section",
             "title": "Sound Alert",
-            "keys": ["useSoundAlert", "useSoundAlertAtBeginning"]
+            "keys": [
+                "useSoundAlert",
+                "useSoundAlertAtBeginning"
+            ]
         },
-
         "section5": {
             "type": "section",
             "title": "Shortcuts",
-            "keys": ["keybinding"]
+            "keys": [
+                "keybinding"
+            ]
         },
-
         "section6": {
             "type": "section",
             "title": "Settings",
-            "keys": ["manageClients"]
+            "keys": [
+                "manageClients"
+            ]
         },
         "section7": {
             "type": "section",
             "title": "Managed Apps",
-            "keys": ["clientsList"]
+            "keys": [
+                "clientsList"
+            ]
+        },
+        "section8": {
+            "type": "section",
+            "title": "Activity Logs",
+            "keys": [
+                "doLogActivity",
+                "logLifetime"
+            ]
         }
     },
-
     "vpnInterface": {
         "type": "entry",
         "default": "",
@@ -92,15 +130,14 @@
         "description": "Refresh interval:",
         "tooltip": "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
     },
-
-    "displayType" : {
+    "displayType": {
         "type": "combobox",
-        "default" : "classic",
-        "options" : {
-            "Classic - Icon and Text" : "classic",
-            "Compact - Icon Only" : "compact"
-         },
-        "description" : "Type of Display",
+        "default": "classic",
+        "options": {
+            "Classic - Icon and Text": "classic",
+            "Compact - Icon Only": "compact"
+        },
+        "description": "Type of Display",
         "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
     },
     "useSoundAlert": {
@@ -118,10 +155,10 @@
         "tooltip": "Check this if you want to emit this audible alert when this Applet starts, if VPN is down.",
         "dependency": "useSoundAlert"
     },
-    "keybinding" : {
-        "type" : "keybinding",
-        "description" : "Set the keybinding here to activate/deactivate the last used VPN.",
-        "default" : "<Super>v"
+    "keybinding": {
+        "type": "keybinding",
+        "description": "Set the keybinding here to activate/deactivate the last used VPN.",
+        "default": "<Super>v"
     },
     "manageClients": {
         "type": "checkbox",
@@ -171,5 +208,37 @@
             }
         ],
         "dependency": "manageClients"
+    },
+    "doLogActivity": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Log the VPN status changes and the VPN-related Apps status changes",
+        "tooltip": "This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\nYou will can display the log file to make diagnostics."
+    },
+    "logLifetime": {
+        "type": "combobox",
+        "default": 30,
+        "options": {
+            "1": 1,
+            "2": 2,
+            "3": 3,
+            "4": 4,
+            "5": 5,
+            "6": 6,
+            "7": 7,
+            "8": 8,
+            "9": 9,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "30": 30,
+            "45": 45,
+            "60": 60,
+            "90": 90
+        },
+        "description": "Lifetime (days)",
+        "tooltip": "Lifetime of a record in the log file, in days.",
+        "dependency": "doLogActivity"
     }
 }

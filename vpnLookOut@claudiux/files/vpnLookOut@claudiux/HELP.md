@@ -132,6 +132,8 @@ _Sound Alert_:
 
 #### VPN panel
 
+**VPN**
+
 _VPN Network Interface_: You should be able to leave this field empty. This applet will try to detect this.
 
 _VPN Name_: This information is automatically changed when connecting to a VPN. It therefore contains the name of the last VPN to which you connected.
@@ -139,6 +141,12 @@ _VPN Name_: This information is automatically changed when connecting to a VPN. 
 _Connect to VPN as this applet starts_: Useful if you want to be connected to your VPN at startup of Cinnamon, immediatly after you log in.
 
 _Try to reconnect to VPN when it shuts down incidentally_: Useful if being connected to your VPN is paramount.
+
+**Activity Logs**
+
+_Log the VPN status changes and the VPN-related Apps status changes_: This option allows this applet to log the VPN status changes and the VPN-related applications status changes. You will can display the log file to make diagnostics.
+
+_Lifetime (days)_: Lifetime of a record in the log file, in days. When this applet starts, then once a day, the too old records are deleted from the log file.
 
 #### Keyboard shortcuts panel
 
@@ -169,7 +177,7 @@ Please, mention me with *@claudiux* _in your message_ and mention this applet wi
 
 If you like this applet, please write a message on this page [https://cinnamon-spices.linuxmint.com/applets/view/305], connecting you with your github (or G+ or FB) account.
 
-You can also increase the score of this applet, clicking on the start at the top of this same page.
+You can also increase the score of this applet, clicking on the star at the top of this same page.
 
 Many thanks.
 

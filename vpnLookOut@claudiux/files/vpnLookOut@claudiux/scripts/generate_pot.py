@@ -62,6 +62,13 @@ msgstr ""
 
 ''' % (applet_name, author_mail, author_mail, applet_name, applet_version, author_mail, strftime("%Y-%m-%d %H:%M%z")) )
 
+def isfloat(s):
+    try:
+        float(s)
+    except ValueError:
+        return False
+    return True
+# // End of isfloat
 
 ids = []
 
@@ -112,7 +119,7 @@ for subdir in subdirs:
                 i+=1
                 l = li.split(":",1)[0].strip()
                 l = l[:l.rfind('"')+1]
-                if not l in ids:
+                if not l in ids and not isfloat(l[1:-1]):
                     ids.append(l)
                     pot_file.write(r'#: ' + subdir + '/settings-schema.json:'+str(i)+'\n')
                     pot_file.write(r'msgid '+ l + '\n')

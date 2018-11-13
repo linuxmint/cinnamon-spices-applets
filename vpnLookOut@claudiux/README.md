@@ -41,6 +41,7 @@ Settings :
   * Shut down (or not) properly Transmission as soon as VPN falls. (Cinnamon 2.8 to 3.6.)
   * Try (or don't try) to restart Transmission as soon as VPN restarts. (Cinnamon 2.8 to 3.6.)
   * Manage VPN-related Apps. (Cinnamon 3.8 and over.)
+  * Log the status of the VPN link, and the status of the VPN-related Apps.
 
 The left click menu also contains:
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.

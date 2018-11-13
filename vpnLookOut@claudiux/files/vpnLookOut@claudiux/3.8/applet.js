@@ -19,6 +19,7 @@ const Gettext = imports.gettext; // ++ Needed for translations
 const Main = imports.ui.main; // ++ Needed for notify()
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
 const Util = imports.misc.util; // Needed for spawnCommandLine()
+const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
 // ++ Always needed if you want localization/translation support
 // New l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
@@ -49,6 +50,112 @@ function criticalNotify(msg, details, icon) {
     return notification
 };
 
+class ActivityLogging {
+    constructor(metadata, nbdays=30, active=true) {
+        this.metadata = metadata;
+        this.uuid = metadata.uuid;
+        this.set_active(active);
+        this.set_lifetime(nbdays); // to cut logfile
+        this.time_options = {year: "numeric", month: "numeric", day: "numeric",
+           hour: "numeric", minute: "numeric", second: "numeric",
+           hour12: !this._get_system_use24h(), timeZone: this._get_timezone(), timeZoneName: "short"};
+
+        GLib.spawn_command_line_async("bash -c 'touch "+ this.log_file_path() +"'");
+    } // End of constructor
+
+    log_file_path() {
+        let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + this.uuid + "/vpn_activity.log";
+        return ret
+    } // End of log_file_path
+
+    _get_epoch(d) {
+        return Math.round(Date.parse(d)/1000);
+    } // End of _get_epoch
+
+    _get_system_use24h() {
+        let _SETTINGS_SCHEMA='org.cinnamon.desktop.interface';
+        let _SETTINGS_KEY = 'clock-use-24h';
+        let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+        let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
+        return ret
+    } // End of get_system_icon_theme
+
+    _get_timezone() {
+        let [res, out, err, status] = GLib.spawn_command_line_sync("timedatectl show -p Timezone");
+            // res is a boolean : true if command line has been correctly executed
+            // out is the return of the script (as that is sent by 'echo' command in a bash script)
+            // err is the error message, if an error occured
+            // status is the status code (as that is sent by an 'exit' command in a bash script)
+        return out.toString().trim().split("=")[1];
+    } // End of _get_timezone
+
+    _get_user_language() {
+        return GLib.getenv("LANG").split(".")[0].replace("_","-")
+    } // End of get_user_language
+
+    set_active(active) {
+        this.is_active = active
+    } // End of set_active
+
+    set_lifetime(days) {
+        this.lifetime = 86400 * days; // 1 day = 84600 seconds
+    } // End of set_lifetime
+
+    truncate_log_file() {
+        if (this.is_active) {
+            let date = new Date();
+            let limit = this._get_epoch(date)-this.lifetime;
+            // Read file contents:
+            let contents = Cinnamon.get_file_contents_utf8_sync(this.log_file_path()).split("\n");
+            var line;
+            var epoch_date, new_contents = [];
+            // keep recent lines:
+            for (line of contents) {
+                if (line != '') {
+                    epoch_date = eval(line.split(" - ")[0].valueOf());
+                    if (epoch_date > limit) new_contents.push(line.trim());
+                }
+            }
+            // Write new contents in log file
+            if (new_contents.length !== contents.length) {
+                let file = Gio.file_new_for_path(this.log_file_path());
+                let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+                let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
+                for (line of new_contents) {
+                    Cinnamon.write_string_to_stream(out, line + "\n")
+                }
+                out.close(null);
+            }
+            contents = []; new_contents = [];
+        }
+    } // End of truncate_log_file
+
+    display_logs() {
+        let command;
+        /*
+        if (GLib.find_program_in_path("gnome-system-log-pkexec")) {
+            command = "gnome-system-log-pkexec " + this.log_file_path();
+        } else {
+            command = "bash -c 'gnome-system-log " + this.log_file_path() + "'";
+        }
+        */
+        command = this.metadata.path + '/egSpawn.js';
+        GLib.spawn_command_line_async(command);
+    } // End of display_logs
+
+    log(s) {
+        if (this.is_active) {
+            let d = new Date();
+            //global.log("d.toTimeString()="+d.toTimeString());
+            //let date_string = d.toISOString();
+            let date_string = new Intl.DateTimeFormat(this._get_user_language(), this.time_options).format(d);
+            let command = "\"echo '"+ this._get_epoch(d).toString() + " - " + date_string + " - " + s + "' >> " + this.log_file_path() + "\"";
+            //global.log("command=" + command);
+            GLib.spawn_command_line_async("bash -c " + command);
+        }
+    } // End of log
+}; //End of class ActivityLogging
+
 // ++ Always needed
 class vpnLookOut extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instance_id) {
@@ -56,6 +163,7 @@ class vpnLookOut extends Applet.TextIconApplet {
         //try {
             // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
             GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/../scripts && chmod 755 *.sh *.py'");
+            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + " && chmod 755 egSpawn.js'");
 
             // ++ Settings
             this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
@@ -71,6 +179,23 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "refreshInterval", // The property to manage (this.refreshInterval)
                 this.on_settings_changed, // Callback when value changes
                 null); // Optional callback data
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "doLogActivity",
+                "doLogActivity",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "logLifetime",
+                "logLifetime",
+                this.on_settings_changed,
+                null);
+
+            // Logging activity:
+            this.activityLog = new ActivityLogging(metadata, this.logLifetime, this.doLogActivity);
+            this.activityLog.truncate_log_file();
+            this.next_truncation = 86400;
 
             this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "vpnInterface",
@@ -152,6 +277,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
             }
 
+            // Keybinding:
             Main.keybindingManager.addHotKey(metadata.uuid, this.keybinding, () => this.on_shortcut_used());
 
             this.instance_id = instance_id;
@@ -169,7 +295,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.stopClientScript = metadata.path + "/../scripts/stop_client.sh";
             this.startClientScript = metadata.path + "/../scripts/start_client.sh";
 
-            this.homedir = GLib.get_home_dir() ;
+            this.homedir = GLib.get_home_dir();
             this.localePath = this.homedir + '/.local/share/locale';
 
             // Set initial value
@@ -192,6 +318,10 @@ class vpnLookOut extends Applet.TextIconApplet {
             UUID = metadata.uuid;
             this.uuid = metadata.uuid;
             Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+
+            /* dummy vars for translation */
+            let x = _("TRUE"); // in settings-schema
+            x = _("FALSE");    // in settings-schema
 
             this.flashFlag = true; // flag for flashing background
             this.flashFlag2 = true; // flag for second flashing background
@@ -227,6 +357,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                  let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
                  let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
                  let _and = _isFedora ? " \\\\&\\\\& " : _isArchlinux ? "" : " \\\\&\\\\& ";
+                 //var _apt_install = _isFedora ? "sudo dnf install zenity sox xdg-utils gnome-system-log" : _isArchlinux ? "sudo pacman -Syu zenity sox xdg-utils gnome-system-log" : "sudo apt install zenity sox libsox-fmt-mp3 xdg-utils gnome-system-log";
                  var _apt_install = _isFedora ? "sudo dnf install zenity sox xdg-utils" : _isArchlinux ? "sudo pacman -Syu zenity sox xdg-utils" : "sudo apt install zenity sox libsox-fmt-mp3 xdg-utils";
                  let _libsox = (_isFedora || _isArchlinux) ? "" : "libsox-fmt-mp3";
                  let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features including notifications and audible alerts.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
@@ -301,6 +432,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             soxmp3WitnessFile = Gio.file_new_for_path(soxmp3WitnessPath);
             soxmp3Installed = soxmp3WitnessFile.query_exists(null);
         }
+        //return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") && GLib.find_program_in_path("xdg-open") && (GLib.find_program_in_path("gnome-system-log-pkexec") || GLib.find_program_in_path("gnome-system-log")))
         return (soxmp3Installed && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") && GLib.find_program_in_path("xdg-open"))
     }; // End of are_dependencies_installed
 
@@ -480,8 +612,14 @@ class vpnLookOut extends Applet.TextIconApplet {
 
     // ++ Function called when settings are changed
     on_settings_changed() {
-        //this.slider_demo.setValue((this.alertPercentage - 10) / 30);
-        if (this.displayType == "compact") {
+        this.activityLog.set_active(this.doLogActivity);
+        if (this.doLogActivity === true) {
+            this.activityLog.set_lifetime(this.logLifetime);
+            this.activityLog.truncate_log_file();
+            this.next_truncation = 86400; // 86400 seconds = 1 day
+        }
+
+        if (this.displayType === "compact") {
             this.set_applet_label("");
         } else {
             this.set_applet_label("VPN");
@@ -763,6 +901,17 @@ class vpnLookOut extends Applet.TextIconApplet {
                     Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
                 });
                 this.menu.addMenuItem(configure);
+
+                // view log file
+                this.view_log = new PopupMenu.PopupIconMenuItem(_("View Activity Logs"), "folder-documents-symbolic", St.IconType.SYMBOLIC);
+                this.view_log.connect('activate', (event) => {
+                    this.activityLog.display_logs();
+                    //GLib.spawn_command_line_async('xdg-open ' + this.activityLog.log_file_path());
+                    // GLib.spawn_command_line_async(this.textEd + ' ' + this.helpfile + ' &');
+                    // if (this.textEd === "grip -b") GLib.spawn_command_line_async("bash -c 'sleep 60 && killall -15 grip'");
+                });
+
+                this.menu.addMenuItem(this.view_log);
             }
 
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -839,21 +988,32 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
 
                 this.vpnMessage = _("Connected") + ' (' + this.vpnName + vpnMessage2 + ')' ;
+                if (this.vpnStatusOld === "off") this.activityLog.log(this.vpnMessage);
 
                 if (this.manageClients===true) {
                     let client;
                     for (var i=0; i < this.clientsList.length; i++) {
                         client = this.clientsList[i];
                         if (client["restart"]===true && this.clientStoppedByApplet[client["command"]]===true) {
-                            let command = 'sh ' + this.startClientScript + ' ' + client["command"];
-                            GLib.spawn_command_line_async(command)
+                            let [res, out, err, status] = GLib.spawn_command_line_sync('pidof ' + client["command"]);
+                            // res is a boolean : true if command line has been correctly executed
+                            // out is the return of the script (as that is sent by 'echo' command in a bash script)
+                            // err is the error message, if an error occured
+                            // status is the status code (as that is sent by an 'exit' command in a bash script)
+                            //log("res="+res+"\nout=\""+out+"\"\nerr="+err+"\nstatus="+status);
+                            if (status !== 0) {
+                                let command = 'sh ' + this.startClientScript + ' ' + client["command"];
+                                GLib.spawn_command_line_async(command);
+                                this.activityLog.log(_("Started by vpnLookOut: ") + client["name"])
+                            }
                         }
                     }
                 }
             } else if (this.vpnStatus == "off") { // VPN is disconnected
-                this.vpnIcon = this.vpnoff ;
+                this.vpnIcon = this.vpnoff;
                 this.set_applet_icon_path(this.vpnIcon);
-                this.vpnMessage = _("Disconnected") ;
+                this.vpnMessage = _("Disconnected");
+                if (this.vpnStatusOld === "on") this.activityLog.log(this.vpnMessage);
 
                 // Stop all VPN-related apps that are declared 'VPN only':
                 if (this.manageClients===true) {
@@ -861,8 +1021,17 @@ class vpnLookOut extends Applet.TextIconApplet {
                     for(var i=0; i < this.clientsList.length; i++) {
                         client = this.clientsList[i];
                         if (client["vpnOnly"]===true) {
-                            command = 'sh ' + this.stopClientScript + ' ' + client["command"] ;
-                            this.clientStoppedByApplet[client["command"]] = GLib.spawn_command_line_async(command)
+                            let [res, out, err, status] = GLib.spawn_command_line_sync('pidof ' + client["command"]);
+                            // res is a boolean : true if command line has been correctly executed
+                            // out is the return of the script (as that is sent by 'echo' command in a bash script)
+                            // err is the error message, if an error occured
+                            // status is the status code (as that is sent by an 'exit' command in a bash script)
+                            //log("res="+res+"\nout=\""+out+"\"\nerr="+err+"\nstatus="+status);
+                            if (status === 0) {
+                                command = 'sh ' + this.stopClientScript + ' ' + client["command"] ;
+                                this.clientStoppedByApplet[client["command"]] = GLib.spawn_command_line_async(command);
+                                this.activityLog.log(_("Blocked by vpnLookOut: ") + client["name"])
+                            }
                         }
                     }
                     //global.log(this.clientStoppedByApplet)
@@ -896,8 +1065,17 @@ class vpnLookOut extends Applet.TextIconApplet {
                         for(var i=0; i < this.clientsList.length; i++) {
                             client = this.clientsList[i];
                             if (client["shutdown"]===true) {
-                                command = 'sh ' + this.stopClientScript + ' ' + client["command"] ;
-                                this.clientStoppedByApplet[client["command"]] = GLib.spawn_command_line_async(command)
+                                let [res, out, err, status] = GLib.spawn_command_line_sync('pidof ' + client["command"]);
+                                // res is a boolean : true if command line has been correctly executed
+                                // out is the return of the script (as that is sent by 'echo' command in a bash script)
+                                // err is the error message, if an error occured
+                                // status is the status code (as that is sent by an 'exit' command in a bash script)
+                                //log("res="+res+"\nout=\""+out+"\"\nerr="+err+"\nstatus="+status);
+                                if (status === 0) {
+                                    command = 'sh ' + this.stopClientScript + ' ' + client["command"] ;
+                                    this.clientStoppedByApplet[client["command"]] = GLib.spawn_command_line_async(command);
+                                    this.activityLog.log(_("Stopped by vpnLookOut: ") + client["name"])
+                                }
                             }
                         }
                         //global.log(this.clientStoppedByApplet)
@@ -952,6 +1130,13 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             this.updateUI(); // update icon and tooltip
+
+            // Force truncation of the log file, once a day:
+            this.next_truncation -= this.refreshInterval;
+            if (this.next_truncation < 0) {
+                this.next_truncation = 86400; // 86400 seconds = 1 day
+                this.activityLog.truncate_log_file();
+            }
 
             // One more loop !
             Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());

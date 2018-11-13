@@ -1,5 +1,14 @@
 ## Changelog
 
+### 3.2.0~20181111
+  * Capability of logging:
+   * the status of the VPN link,
+   * the status of the VPN-related Apps.
+  * New entry in the menu to view the log file.
+  * Settings - New options in the VPN panel to:
+   * set logging on/off,
+   * set the lifetime of a record in the log file.
+
 ### 3.1.0~20181107
   * VPN-related Apps Management:
    * New `VPN Only` option for each managed app: you can require that an application be shut down quickly if it is started while the VPN is idle.
