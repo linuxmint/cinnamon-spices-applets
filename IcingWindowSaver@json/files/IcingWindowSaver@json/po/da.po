@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-10-15 08:23-0500\n"
-"PO-Revision-Date: 2017-07-01 13:34+0200\n"
+"PO-Revision-Date: 2018-11-13 13:34+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -20,34 +20,32 @@ msgstr ""
 
 #: applet.js:44
 msgid "Dependency missing"
-msgstr ""
+msgstr "Manglende afhængighed"
 
 #: applet.js:45
 msgid "package"
-msgstr ""
+msgstr "pakke"
 
 #: applet.js:47
 msgid "Dependencies missing"
-msgstr ""
+msgstr "Manglende afhængigheder"
 
 #: applet.js:48
 msgid "packages"
-msgstr ""
+msgstr "pakker"
 
 #: applet.js:52
 msgid "Please install the "
-msgstr ""
+msgstr "Installér venligst"
 
 #: applet.js:52
-#, fuzzy
 msgid " to use Window Position Saver."
-msgstr "Vinduesplacering"
+msgstr " for at bruge Vinduesplaceringgemmer"
 
 #. metadata.json->name
 #: applet.js:90
-#, fuzzy
 msgid "Window Position Saver"
-msgstr "Vinduesplacering"
+msgstr "Vinduesplaceringgemmer"
 
 #: applet.js:98
 msgid "Save"
