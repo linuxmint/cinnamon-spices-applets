@@ -132,3 +132,12 @@ More info:
 ```
 ./cinnamon-spices-makepot --help
 ```
+
+# Auto-reloading applets
+
+A utility script using Gulp is provided that can automatically reload applets on code change. To use, install the [latest NodeJS LTS release](https://github.com/nodesource/distributions).
+- Run `npm install -g gulp@^4.0.0`
+- In the root of this repo's directory run `npm install`.
+- To use the script, run ```gulp watch --uuid="<applet uuid>"```
+
+For more info run ```gulp help```.
