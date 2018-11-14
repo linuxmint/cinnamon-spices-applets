@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.2.1~20181115
+  * Improves display and management of Activity Log.
+
 ### 3.2.0~20181111
   * Capability of logging:
    * the status of the VPN link,
