@@ -122,7 +122,6 @@ gulp.task('help', gulp.series('clear-terminal', (done) => {
             --uuid                 UUID of the xlet to watch.
         `
     );
-    process.exit(0);
     done();
 }));
 
