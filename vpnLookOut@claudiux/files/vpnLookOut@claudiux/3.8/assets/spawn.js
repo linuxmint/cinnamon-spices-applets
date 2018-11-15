@@ -11,6 +11,8 @@ SpawnReader.prototype.spawn = function (path, command, func) {
     [res, pid, stdin, stdout, stderr] = GLib.spawn_async_with_pipes(
         path, command, null, GLib.SpawnFlags.SEARCH_PATH, null);
 
+    this.pid = pid;
+
     stream = new Gio.DataInputStream({ base_stream : new Gio.UnixInputStream({ fd : stdout }) });
 
     this.read(stream, func);
