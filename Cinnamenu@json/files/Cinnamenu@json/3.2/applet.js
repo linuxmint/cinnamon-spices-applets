@@ -652,12 +652,26 @@ CinnamenuApplet.prototype = {
   },
 
   customMenuHeightChange: function() {
+    let height;
+    let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
+    let customHeightLimit = monitorHeight - 120;
+
     if (this.state.settings.enableCustomMenuHeight) {
-      this.groupCategoriesWorkspacesScrollBox.height = this.state.settings.customMenuHeight;
+      height = this.state.settings.customMenuHeight;
     } else {
-      this.groupCategoriesWorkspacesScrollBox.height = this.state.menuHeight;
+      height = this.state.menuHeight;
     }
-    this.applicationsScrollBox.height = this.groupCategoriesWorkspacesScrollBox.height;
+
+    if (height >= customHeightLimit) {
+      if (this.state.settings.enableCustomMenuHeight) {
+        height = customHeightLimit;
+      } else {
+        height = Math.round(Math.abs(monitorHeight * 0.55));
+      }
+    }
+
+    this.groupCategoriesWorkspacesScrollBox.height = height;
+    this.applicationsScrollBox.height = height;
   },
 
   getExampleSearchProviders: function() {

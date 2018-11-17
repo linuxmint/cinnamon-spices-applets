@@ -1,5 +1,9 @@
 Changelog
 
+### 4.0.1
+
+  * Fixed an issue with the context menu not rendering when the menu expands near the monitor's height.
+
 ### 4.0.0
 
   * Improved search accuracy - keywords and application IDs are now considered in the results scoring.
