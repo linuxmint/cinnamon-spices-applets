@@ -3,7 +3,7 @@
   "name": "Cinnamenu",
   "description": "A flexible menu providing formatting options, web bookmarks, open window lookup, and search provider support with fuzzy searching.",
   "max-instances": 2,
-  "version": "4.0.0",
+  "version": "4.0.1",
   "multiversion": true,
   "website": "https://github.com/linuxmint/cinnamon-spices-applets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+Cinnamenu%40json",
   "comments": "Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and the contributors to projects they derived from.",

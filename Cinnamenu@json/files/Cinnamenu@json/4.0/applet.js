@@ -639,15 +639,21 @@ class CinnamenuApplet extends TextIconApplet {
 
     let height;
     let monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
+    let customHeightLimit = monitorHeight - 120;
+    let {enableCustomMenuHeight} = this.state.settings;
 
-    if (this.state.settings.enableCustomMenuHeight) {
+    if (enableCustomMenuHeight) {
       height = this.state.settings.customMenuHeight;
     } else {
       height = this.categoriesBox.height + this.bottomPane.height;
     }
 
-    if (height >= monitorHeight - this.panel.height) {
-      height = Math.round(Math.abs(monitorHeight * 0.55));
+    if (height >= customHeightLimit) {
+      if (enableCustomMenuHeight) {
+        height = customHeightLimit;
+      } else {
+        height = Math.round(Math.abs(monitorHeight * 0.55));
+      }
     }
 
     this.groupCategoriesWorkspacesScrollBox.height = height;
