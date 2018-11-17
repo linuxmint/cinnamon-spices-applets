@@ -2,7 +2,7 @@ const fs = require('fs');
 const os = require('os');
 const gulp = require('gulp');
 const clear = require('clear');
-const {exec} = require('child_process');
+const {exec, execSync} = require('child_process');
 
 const getArgs = function() {
     const argv = require('yargs')
@@ -27,17 +27,21 @@ gulp.task('install', (done) => {
     const localXletDir = `./${UUID}/files/${UUID}/`;
     const systemDirExists = fs.existsSync(systemXletDir);
     const localDirExists = fs.existsSync(localXletDir);
-
-    const {uid, gid} = fs.statSync(systemXletDir);
     const userInfo = os.userInfo();
 
     if (!systemDirExists) {
-        throw new Error('Xlet does not exist in the system directory.');
+        console.log(
+            'Xlet does not exist in the system directory. Attempting to create the directory:\n' +
+            systemXletDir
+        );
+        execSync(`mkdir ${systemXletDir}`);
     }
 
     if (!localDirExists) {
         throw new Error('Xlet does not exist in the local directory.');
     }
+
+    const {uid, gid} = fs.statSync(systemXletDir);
 
     if (uid !== userInfo.uid || gid !== userInfo.gid) {
         throw new Error(`Incorrect permission are set for the applets directory. Please run 'gulp help'.`);
