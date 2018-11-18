@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-10 20:26+0100\n"
+"PO-Revision-Date: 2018-11-18 07:40+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -272,23 +272,27 @@ msgstr "är fullt fungerande."
 msgid "All dependencies are installed"
 msgstr "Alla beroenden är installerade"
 
-#: 3.8/settings-schema.json:7
+#: 3.8/settings-schema.json:12
 msgid "VPN-related Apps Manager"
 msgstr "VPN-relaterad programhanterare"
 
-#: 3.8/settings-schema.json:49
+#: 3.8/settings-schema.json:76
 msgid "Settings"
 msgstr "Inställningar"
 
-#: 3.8/settings-schema.json:54
+#: 3.8/settings-schema.json:83
 msgid "Managed Apps"
 msgstr "Hanterade program"
 
-#: 3.8/settings-schema.json:92
+#: 3.8/settings-schema.json:90
+msgid "Activity Logs"
+msgstr "Aktivitetslogg"
+
+#: 3.8/settings-schema.json:130
 msgid "Refresh interval:"
 msgstr "Uppdateringsintervall:"
 
-#: 3.8/settings-schema.json:93
+#: 3.8/settings-schema.json:131
 msgid ""
 "Time interval, in seconds, between two verifications of VPN link status. A "
 "low value increases security but causes more activity. Choose a value that "
@@ -298,21 +302,21 @@ msgstr ""
 "status. Ett lågt värde ökar säkerheten, men orsakar mer aktivitet. Välj ett "
 "värde som är högre om din dator är långsam."
 
-#: 3.8/settings-schema.json:110
+#: 3.8/settings-schema.json:147
 msgid "Emit an audible alert when VPN shuts down."
 msgstr "Avge en ljudsignal när VPN stängs av."
 
-#: 3.8/settings-schema.json:111
+#: 3.8/settings-schema.json:148
 msgid ""
 "Checking this allows this applet to emit an audible alert when VPN shuts "
 "down."
 msgstr "Aktivering låter detta panelprogram ljudvarna när VPN stängs av."
 
-#: 3.8/settings-schema.json:117
+#: 3.8/settings-schema.json:154
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
 msgstr "Avge en ljudsignal när detta panelprogram startar, om VPN är nere."
 
-#: 3.8/settings-schema.json:118
+#: 3.8/settings-schema.json:155
 msgid ""
 "Check this if you want to emit this audible alert when this Applet starts, "
 "if VPN is down."
@@ -320,11 +324,11 @@ msgstr ""
 "Aktivera detta om du vill ha en ljudvarning om VPN-anslutningen är nere, när "
 "detta panelprogram startas."
 
-#: 3.8/settings-schema.json:130
+#: 3.8/settings-schema.json:167
 msgid "Manage VPN-related Apps"
 msgstr "Hantera VPN-relaterade program"
 
-#: 3.8/settings-schema.json:131
+#: 3.8/settings-schema.json:168
 msgid ""
 "This option allows this applet to manage the VPN-related applications you "
 "listed above."
@@ -332,11 +336,11 @@ msgstr ""
 "Detta alternativ låter panelprogrammet hantera de VPN-relaterade program som "
 "du listat ovan."
 
-#: 3.8/settings-schema.json:135
+#: 3.8/settings-schema.json:172
 msgid "Managed applications"
 msgstr "Hanterade program"
 
-#: 3.8/settings-schema.json:136
+#: 3.8/settings-schema.json:173
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
@@ -349,32 +353,78 @@ msgid ""
 msgstr ""
 "Namn: Vad du vill.\n"
 "Kommando: Kommando för att starta programmet, utan sökväg.\n"
-"Starta om: Anges som TRUE om du vill återstarta programmet så fort VPN-"
+"Starta om: Anges som SANT om du vill återstarta programmet så fort VPN-"
 "anslutningen är aktiv igen.\n"
-"Stäng av: Anges som TRUE om du vill avsluta programmet så fort VPN-"
+"Stäng av: Anges som SANT om du vill avsluta programmet så fort VPN-"
 "anslutningen stoppas.\n"
-"Endast VPN: Anges som TRUE om du snabbt vill stoppa programmet om det "
+"Endast VPN: Anges som SANT om du snabbt vill stoppa programmet om det "
 "startas när VPN-anslutningen inte är aktiv."
 
-#: 3.8/settings-schema.json:140
+#: 3.8/settings-schema.json:177
 msgid "Name"
 msgstr "Namn"
 
-#: 3.8/settings-schema.json:145
+#: 3.8/settings-schema.json:182
 msgid "Command"
 msgstr "Kommando"
 
-#: 3.8/settings-schema.json:150
+#: 3.8/settings-schema.json:187
 msgid "Restart"
 msgstr "Starta om"
 
-#: 3.8/settings-schema.json:155
+#: 3.8/settings-schema.json:192
 msgid "Shut down"
 msgstr "Stäng av"
 
-#: 3.8/settings-schema.json:160
+#: 3.8/settings-schema.json:197
 msgid "VPN only"
 msgstr "Endast VPN"
+
+#: 3.8/settings-schema.json:216
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr "Logga VPN-statusändringar och relaterade programs statusändringar"
+
+#: 3.8/settings-schema.json:217
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-"
+"related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Detta alternativ låter panelprogrammet logga statusändringar i VPN-"
+"uppkopplingen och relaterade program.\n"
+"Du kan visa loggfilen för att utföra diagnostik."
+
+#: 3.8/settings-schema.json:240
+msgid "Lifetime (days)"
+msgstr "Livstid (dagar)"
+
+#: 3.8/settings-schema.json:241
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Livstid för en post i loggfilen, i dagar."
+
+#: 3.8/applet.js:311
+msgid "TRUE"
+msgstr "SANT"
+
+#: 3.8/applet.js:312
+msgid "FALSE"
+msgstr "FALSKT"
+
+#: 3.8/applet.js:890
+msgid "View Activity Logs"
+msgstr "Visa aktivitetsloggen"
+
+#: 3.8/applet.js:991
+msgid "Started by vpnLookOut: "
+msgstr "Startad av vpnLookOut: "
+
+#: 3.8/applet.js:1017
+msgid "Blocked by vpnLookOut: "
+msgstr "Blockerad av vpnLookOut: "
+
+#: 3.8/applet.js:1061
+msgid "Stopped by vpnLookOut: "
+msgstr "Stoppad av vpnLookOut: "
 
 #~ msgid ""
 #~ "A Cinnamon applet that watches over the VPN link, displays its status, "
