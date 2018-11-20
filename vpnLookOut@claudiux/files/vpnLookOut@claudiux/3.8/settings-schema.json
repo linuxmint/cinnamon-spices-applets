@@ -45,7 +45,8 @@
                 "vpnInterface",
                 "vpnName",
                 "connectAtStartup",
-                "reconnect"
+                "reconnect",
+                "respectUserRequest"
             ]
         },
         "section2": {
@@ -120,6 +121,14 @@
         "description": "Try to reconnect to VPN when it shuts down incidentally.",
         "tooltip": "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
     },
+    "respectUserRequest": {
+		"type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Do not try to reconnect automatically if the VPN has been disconnected by the user.",
+        "tooltip": "If, by this applet only, the user disconnects the VPN, then no automatic reconnection will be tried.",
+        "dependency": "reconnect"
+	},
     "refreshInterval-spinner": {
         "type": "spinbutton",
         "default": 5,

@@ -1,5 +1,10 @@
 ## Changelog
 
+### 3.3.0~20181120
+  * New option in Settings (VPN layout):
+   * "Do not try to reconnect automatically if the VPN has been disconnected by the user"
+   * This option appears only when the option "Try to reconnect to VPN when it shuts down incidentally" is checked.
+
 ### 3.2.1~20181115
   * Improves display and management of Activity Log.
 

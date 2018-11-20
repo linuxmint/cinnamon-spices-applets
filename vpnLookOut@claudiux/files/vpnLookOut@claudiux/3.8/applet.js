@@ -231,6 +231,14 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "reconnect",
                 this.on_settings_changed,
                 null);
+            
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "respectUserRequest",
+                "respectUserRequest",
+                this.on_settings_changed,
+                null);
+                
+            this.disconnectedByUser = false;
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "useSoundAlertAtBeginning",
@@ -312,7 +320,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
 
             // Install Languages (from .po files)
-            this.execInstallLanguage();
+            //this.execInstallLanguage(); // Removed to avoid Cinnamon crashes
 
             // ++ Part of new l10n support
             UUID = metadata.uuid;
@@ -656,9 +664,15 @@ class vpnLookOut extends Applet.TextIconApplet {
     on_checkbox_reconnect_changed() {
         this.reconnect = !this.reconnect ; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
         if (this.reconnect) {
-            // The Connect button is then useless.
-            this.button_connect.actor.hide();
-            this.button_connect2.actor.hide();
+			if (this.respectUserRequest) {
+				// The Connect button is then useful.
+				this.button_connect.actor.show();
+				this.button_connect2.actor.show()
+			} else {
+	            // The Connect button is then useless.
+	            this.button_connect.actor.hide();
+	            this.button_connect2.actor.hide();
+			}
         } else {
             // The Connect button is then useful.
             this.button_connect.actor.show();
@@ -693,9 +707,11 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.set_applet_icon_path(this.vpnIcon);
                 this.vpnStatusOld = this.vpnStatus;
                 this.vpnStatus = "waiting";
-                GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'')
+                GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'');
+                this.disconnectedByUser = false
             } else {
-                GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'')
+                GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'');
+                this.disconnectedByUser = true
             }
         }
 
@@ -762,7 +778,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.button_connect2.connect("toggled", () => this.on_button_connect());
                 this._applet_context_menu.addMenuItem(this.button_connect2);
                 // this button must appear only if auto-reconnect is inactive
-                if (this.vpnInterface == "" || this.vpnName == "" || this.reconnect) {
+                if (this.vpnInterface == "" || this.vpnName == "" || (this.reconnect && !this.respectUserRequest)) {
                     this.button_connect2.actor.hide()
                 } else {
                     this.button_connect2.actor.show()
@@ -837,7 +853,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.button_connect.connect("toggled", () => this.on_button_connect());
                 this.menu.addMenuItem(this.button_connect);
                 // this button must appear only if auto-reconnect is inactive
-                if (this.vpnInterface == "" || this.vpnName == "" || this.reconnect) {
+                if (this.vpnInterface == "" || this.vpnName == "" || (this.reconnect && !this.respectUserRequest)) {
                     this.button_connect.actor.hide()
                 } else {
                     this.button_connect.actor.show()
@@ -970,7 +986,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.button_connect2.setStatus(this.vpnName);
                     this.button_connect2.setToggleState(true)
 
-                    if (this.reconnect) {
+                    if (this.reconnect && !this.respectUserRequest) {
                         this.button_connect.actor.hide()
                     } else {
                         this.button_connect.actor.show()
@@ -1046,7 +1062,11 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.button_connect2.setToggleState(false)
 
                     if (this.reconnect) {
-                        this.button_connect.actor.hide()
+						if (this.respectUserRequest || this.vpnStatus !== "on") {
+							this.button_connect.actor.show()
+						} else {
+							this.button_connect.actor.hide()
+						}
                     } else {
                         this.button_connect.actor.show()
                     }
@@ -1056,7 +1076,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                     if ( this.useSoundAlert ) { // Sound alert
                         GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/phone-outgoing-busy.oga"') ;
                     } ;
-                    if ( this.reconnect ) {
+                    if ( this.reconnect && !(this.respectUserRequest && this.disconnectedByUser) ) {
                         command = 'bash -c \'/usr/bin/nmcli connection up "' + this.vpnName +'" > /dev/null \'';
                         GLib.spawn_command_line_async(command)
                     };
