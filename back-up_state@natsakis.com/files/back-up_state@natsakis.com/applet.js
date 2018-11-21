@@ -50,8 +50,8 @@ BackupStateApplet.prototype = {
         this.set_applet_tooltip(_("Has never run succesfully!"));
       }
       else {
-        shortDate = new Date(this._findDate());
-        longDate = new Date(this._findDate());
+        let shortDate = new Date(this._findDate());
+        let longDate = new Date(this._findDate());
         shortDate.setDate(shortDate.getDate() + this._opt_warningDays);
         longDate.setDate(longDate.getDate() + this._opt_errorDays);
         if (longDate < new Date()) {
