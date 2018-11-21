@@ -78,7 +78,9 @@ BackupStateApplet.prototype = {
     },
 
     _findDate: function () {
-      this._opt_logFile = this._opt_logFile.replace(/~/g, GLib.getenv('HOME'));
+      this._opt_logFile = this._opt_logFile
+        .replace(/file\:\/\//, '')
+        .replace(/~/g, GLib.getenv('HOME'));
       let file = Gio.File.new_for_path(this._opt_logFile);
 
       if (!file.query_exists(null)) {
