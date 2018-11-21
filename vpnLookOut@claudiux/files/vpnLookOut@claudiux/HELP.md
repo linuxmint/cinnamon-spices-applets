@@ -142,6 +142,8 @@ _Connect to VPN as this applet starts_: Useful if you want to be connected to yo
 
 _Try to reconnect to VPN when it shuts down incidentally_: Useful if being connected to your VPN is paramount.
 
+_Do not try to reconnect automatically if the VPN has been disconnected by the user_ : If, by this applet _only_, the user disconnects the VPN, then no automatic reconnection will be tried.
+
 **Activity Logs**
 
 _Log the VPN status changes and the VPN-related Apps status changes_: This option allows this applet to log the VPN status changes and the VPN-related applications status changes. You will can display the log file to make diagnostics.
