@@ -13,6 +13,7 @@ SW++@mohammad-sn/**                                @mohammad-sn
 ScreenLocker@tuuxx/**                              @tuuxx
 ScreenShot+RecordDesktop@tech71/**                 @icarter09
 ShellTools@abgoyal/**                              @jaszhix
+ShutdownApplet@DeathMD/**                          @icarter09
 ShutdownMenuWithIcons@LLOBERA/**                   @Nicolas01
 azan@fahri.nurul.id/**                             @fahrinh
 batterymonitor@pdcurtis/**                         @pdcurtis
@@ -90,7 +91,6 @@ workspace-name@willurd/**                          @willurd
 # PDFManager@cinnamon.org
 # ScreenShot@tech71
 # SettingsPlus@lusito.info
-# ShutdownApplet@DeathMD
 # ShutdownApplet@shelley
 # ThemeRefresh@JosephM
 # WindowListGroup@jake.phy@gmail.com
@@ -146,7 +146,6 @@ workspace-name@willurd/**                          @willurd
 # todo@threefi
 # toggle_LookingGlass@kolle
 # tracker@glebihan
-# turbonote@iksws.com.br
 # uptime@vatanuki.kun
 # usertile@uszaty
 # web-developer-menu@infiniteshroom
