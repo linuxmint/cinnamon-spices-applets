@@ -65,15 +65,9 @@ const checkDependencies = function(cb) {
   });
 }
 
-const WindowSaverApplet = function(metadata, orientation, panel_height, instance_id) {
-  this._init(metadata, orientation, panel_height, instance_id);
-};
-
-WindowSaverApplet.prototype = {
-  __proto__: Applet.IconApplet.prototype,
-
-  _init: function(metadata, orientation, panelHeight, instance_id) {
-    Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
+class WindowSaverApplet extends Applet.IconApplet {
+  constructor(metadata, orientation, panelHeight, instance_id) {
+    super(orientation, panelHeight, instance_id);
 
     checkDependencies((missing) => {
       if (missing.length > 0) {
@@ -114,17 +108,17 @@ WindowSaverApplet.prototype = {
         this.restoreWindows();
       });
     });
-  },
+  }
 
-  saveWindows: function() {
+  saveWindows() {
     Util.trySpawnCommandLine(`bash -c '${appletPath}savewindows.sh'`);
-  },
+  }
 
-  restoreWindows: function() {
+  restoreWindows() {
     Util.trySpawnCommandLine(`bash -c '${appletPath}restorewindows.sh'`);
-  },
+  }
 
-  on_applet_clicked: function(event) {
+  on_applet_clicked(event) {
     if (!this.menu) return;
     this.menu.toggle();
   }
