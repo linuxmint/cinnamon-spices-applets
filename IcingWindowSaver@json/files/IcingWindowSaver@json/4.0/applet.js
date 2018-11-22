@@ -121,7 +121,7 @@ class WindowSaverApplet extends Applet.IconApplet {
     let windows = global.display.list_windows(0);
     each(windows, (metaWindow) => {
       let windowState = find(this.windowStates, function(window) {
-        return metaWindow.toString() === window.id;
+        return metaWindow.get_xwindow() === window.id;
       });
 
       let metaWindowActor = metaWindow.get_compositor_private();
