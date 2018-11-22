@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file=$HOME/.local/share/cinnamon/applets/IcingWindowSaver@json/.windows.txt
+file=$HOME/.local/share/cinnamon/applets/IcingWindowSaver@json/3.6/.windows.txt
 declare -a mywinid
 declare -a x
 declare -a y

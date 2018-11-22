@@ -1,10 +1,11 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
+const {MaximizeFlags} = imports.gi.Meta;
 const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-const Util = imports.misc.util;
+const {each, find} = imports.misc.util;
 const Main = imports.ui.main;
 
 const UUID = 'IcingWindowSaver@json';
@@ -14,8 +15,6 @@ Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
 function _(str) {
   return Gettext.dgettext(UUID, str);
 }
-
-const appletPath = '~/.local/share/cinnamon/applets/IcingWindowSaver@json/';
 
 const exec = function(command, cb) {
   let subprocess = new Gio.Subprocess({
@@ -83,11 +82,15 @@ class WindowSaverApplet extends Applet.IconApplet {
       this.set_applet_icon_symbolic_name('view-restore');
       this.set_applet_tooltip(_('Window Position Saver'));
 
+      this.windowStates = [];
+
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menu = new Applet.AppletPopupMenu(this, orientation);
       this.menuManager.addMenu(this.menu);
       this._contentSection = new PopupMenu.PopupMenuSection();
       this.menu.addMenuItem(this._contentSection);
+
+      this.monitorsChangedId = global.screen.connect_after('monitors-changed', () => this.onMonitorsChanged());
 
       var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
       item.connect('activate', () => {
@@ -110,12 +113,62 @@ class WindowSaverApplet extends Applet.IconApplet {
     });
   }
 
+  onMonitorsChanged() {
+    setTimeout(() => this.restoreWindows(), 2000);
+  }
+
   saveWindows() {
-    Util.trySpawnCommandLine(`bash -c '${appletPath}savewindows.sh'`);
+    let windows = global.display.list_windows(0);
+    each(windows, (metaWindow) => {
+      let windowState = find(this.windowStates, function(window) {
+        return metaWindow.toString() === window.id;
+      });
+
+      let metaWindowActor = metaWindow.get_compositor_private();
+      let [x, y] = metaWindowActor.get_position();
+      let [width, height] = metaWindowActor.get_size();
+      if (windowState) {
+        windowState.x = x;
+        windowState.y = y;
+        windowState.width = width;
+        windowState.height = height;
+        windowState.maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
+        windowState.matched = false;
+      } else {
+        this.windowStates.push({
+          x,
+          y,
+          width,
+          height,
+          maximized: metaWindow.maximized_horizontally && metaWindow.maximized_vertically,
+          id: metaWindow.get_xwindow(),
+          matched: false
+        });
+      }
+    });
   }
 
   restoreWindows() {
-    Util.trySpawnCommandLine(`bash -c '${appletPath}restorewindows.sh'`);
+    let windows = global.display.list_windows(0);
+    each(windows, (metaWindow) => {
+      let windowState = find(this.windowStates, function(window) {
+        return metaWindow.get_xwindow() === window.id;
+      });
+      if (!windowState) return;
+      metaWindow.matched = true;
+
+      let {x, y, width, height, maximized} = windowState;
+
+      metaWindow.move(true, x, y);
+      metaWindow.resize(true, width, height);
+
+      if (maximized) metaWindow.maximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
+      else metaWindow.unmaximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
+    });
+  }
+
+  on_applet_removed_from_panel() {
+    if (this.monitorsChangedId) global.screen.disconnect(this.monitorsChangedId)
   }
 
   on_applet_clicked(event) {
