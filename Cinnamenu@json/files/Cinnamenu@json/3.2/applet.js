@@ -306,7 +306,6 @@ CinnamenuApplet.prototype = {
 
       this._updateKeybinding();
       this.signals.connect(Main.themeManager, 'theme-set', Lang.bind(this, this._updateIconAndLabel));
-      this._updateIconAndLabel();
 
       this._iconTheme = Gtk.IconTheme.get_default();
       this.signals.connect(this._iconTheme, 'changed', Lang.bind(this, this._onIconsChanged));
@@ -327,6 +326,7 @@ CinnamenuApplet.prototype = {
       this._session = new GnomeSession.SessionManager();
       this._screenSaverProxy = new ScreenSaver.ScreenSaverProxy();
       this.recentManager = Gtk.RecentManager.get_default();
+      this._updateIconAndLabel();
       this._updateActivateOnHover();
     });
   },
