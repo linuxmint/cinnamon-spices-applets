@@ -270,7 +270,6 @@ class CinnamenuApplet extends TextIconApplet {
 
       this.updateKeybinding();
       this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
-      this.updateIconAndLabel();
 
       this.iconTheme = Gtk.IconTheme.get_default();
       this.signals.connect(this.iconTheme, 'changed', (...args) => this.onIconsChanged(...args));
@@ -291,6 +290,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.session = new SessionManager();
       this.screenSaverProxy = new ScreenSaverProxy();
       this.recentManager = Gtk.RecentManager.get_default();
+      this.updateIconAndLabel();
       this.updateActivateOnHover();
       this.init = true;
     });

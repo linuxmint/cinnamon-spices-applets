@@ -1,5 +1,9 @@
 Changelog
 
+### 4.0.2
+
+  * Fixed an issue with custom icons not rendering correctly.
+
 ### 4.0.1
 
   * Fixed an issue with the context menu not rendering when the menu expands near the monitor's height.
