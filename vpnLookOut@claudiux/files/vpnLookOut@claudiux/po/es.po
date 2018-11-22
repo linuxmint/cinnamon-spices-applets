@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.1.0~20181107\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-07 13:42+0100\n"
+"PO-Revision-Date: 2018-11-22 23:53+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -226,55 +226,67 @@ msgstr "es completamente funcional."
 msgid "All dependencies are installed"
 msgstr "Todas las dependencias están instaladas"
 
-#: 3.8/settings-schema.json:7
+#: 3.8/settings-schema.json:12
 msgid "VPN-related Apps Manager"
 msgstr "Administrador de aplicaciones relacionadas con VPN"
 
-#: 3.8/settings-schema.json:49
+#: 3.8/settings-schema.json:77
 msgid "Settings"
 msgstr "Ajustes"
 
-#: 3.8/settings-schema.json:54
+#: 3.8/settings-schema.json:84
 msgid "Managed Apps"
 msgstr "Aplicaciones gestionadas"
 
-#: 3.8/settings-schema.json:92
+#: 3.8/settings-schema.json:91
+msgid "Activity Logs"
+msgstr "Registros de actividades"
+
+#: 3.8/settings-schema.json:128
+msgid "Do not try to reconnect automatically if the VPN has been disconnected by the user."
+msgstr "No intente volver a conectarse automáticamente si el usuario ha desconectado la VPN."
+
+#: 3.8/settings-schema.json:129
+msgid "If, by this applet only, the user disconnects the VPN, then no automatic reconnection will be tried."
+msgstr "Si, solo por este applet, el usuario desconecta la VPN, no se intentará una reconexión automática."
+
+#: 3.8/settings-schema.json:139
 msgid "Refresh interval:"
 msgstr "Intervalo de actualización"
 
-#: 3.8/settings-schema.json:93
+#: 3.8/settings-schema.json:140
 msgid "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
 msgstr "Intervalo de tiempo, en segundos, entre dos verificaciones del estado del enlace VPN. Un valor bajo aumenta la seguridad pero provoca más actividad. Elija un valor que sea mayor ya que su computadora es lenta."
 
-#: 3.8/settings-schema.json:110
+#: 3.8/settings-schema.json:156
 msgid "Emit an audible alert when VPN shuts down."
 msgstr "Emite un señal sonoro cuando VPN se apaga."
 
-#: 3.8/settings-schema.json:111
+#: 3.8/settings-schema.json:157
 msgid "Checking this allows this applet to emit an audible alert when VPN shuts down."
 msgstr "Marcar este casilla permite que este applet emita una alerta sonora cuando VPN se apaga."
 
-#: 3.8/settings-schema.json:117
+#: 3.8/settings-schema.json:163
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
 msgstr "Emite esta alerta sonora cuando se inicia este Applet, si VPN está inactivo."
 
-#: 3.8/settings-schema.json:118
+#: 3.8/settings-schema.json:164
 msgid "Check this if you want to emit this audible alert when this Applet starts, if VPN is down."
 msgstr "Marque esto si desea emitir esta alerta sonora cuando se inicia este Applet, si VPN está inactivo."
 
-#: 3.8/settings-schema.json:130
+#: 3.8/settings-schema.json:176
 msgid "Manage VPN-related Apps"
 msgstr "Administrar aplicaciones relacionadas con VPN"
 
-#: 3.8/settings-schema.json:131
+#: 3.8/settings-schema.json:177
 msgid "This option allows this applet to manage the VPN-related applications you listed above."
 msgstr "Esta opción permite que este applet administre las aplicaciones relacionadas con VPN que mencionó anteriormente."
 
-#: 3.8/settings-schema.json:135
+#: 3.8/settings-schema.json:181
 msgid "Managed applications"
 msgstr "Aplicaciones gestionadas"
 
-#: 3.8/settings-schema.json:136
+#: 3.8/settings-schema.json:182
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
@@ -288,22 +300,74 @@ msgstr ""
 "Cerrar: TRUE si desea cerrar la aplicación tan pronto como se detenga el enlace VPN.\n"
 "Solo con VPN: TRUE si desea cerrar rápidamente esta aplicación si se inicia mientras la VPN está inactiva."
 
-#: 3.8/settings-schema.json:140
+#: 3.8/settings-schema.json:186
 msgid "Name"
 msgstr "Nombre"
 
-#: 3.8/settings-schema.json:145
+#: 3.8/settings-schema.json:191
 msgid "Command"
 msgstr "Comando"
 
-#: 3.8/settings-schema.json:150
+#: 3.8/settings-schema.json:196
 msgid "Restart"
 msgstr "Reiniciar"
 
-#: 3.8/settings-schema.json:155
+#: 3.8/settings-schema.json:201
 msgid "Shut down"
 msgstr "Cerrar"
 
-#: 3.8/settings-schema.json:160
+#: 3.8/settings-schema.json:206
 msgid "VPN only"
 msgstr "Solo con VPN"
+
+#: 3.8/settings-schema.json:225
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr "Registrar los cambios de estado de VPN y los cambios de estado de las aplicaciones relacionadas con VPN"
+
+#: 3.8/settings-schema.json:226
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Esta opción permite que este applet registre los cambios de estado de VPN y los cambios de estado de las aplicaciones relacionadas con VPN.\n"
+"Puede usted visualizar el archivo de registro para hacer diagnósticos."
+
+#: 3.8/settings-schema.json:249
+msgid "Lifetime (days)"
+msgstr "Vida útil (días)"
+
+#: 3.8/settings-schema.json:250
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Duración de un registro en el archivo de actividades, en días."
+
+#: 3.8/applet.js:331
+msgid "TRUE"
+msgstr "SI"
+
+#: 3.8/applet.js:332
+msgid "FALSE"
+msgstr "NO"
+
+#: 3.8/applet.js:922
+msgid "View Activity Logs"
+msgstr "Ver registros de actividad"
+
+#: 3.8/applet.js:994
+msgid "or Middle-Click to disconnect"
+msgstr "o botón central para desconectar"
+
+#: 3.8/applet.js:1025
+msgid "Started by vpnLookOut: "
+msgstr "Iniciado por VPN Atalaya: "
+
+#: 3.8/applet.js:1051
+msgid "Blocked by vpnLookOut: "
+msgstr "Bloqueado por VPN Atalaya: "
+
+#: 3.8/applet.js:1069
+msgid "or Middle-Click to connect"
+msgstr "o botón central para conectar"
+
+#: 3.8/applet.js:1101
+msgid "Stopped by vpnLookOut: "
+msgstr "Cesado por VPN Atalaya: "
