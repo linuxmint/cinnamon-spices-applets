@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-23 00:10+0100\n"
+"PO-Revision-Date: 2018-11-23 01:56+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -347,6 +347,10 @@ msgstr "SI"
 #: 3.8/applet.js:332
 msgid "FALSE"
 msgstr "NO"
+
+#: 3.8/applet.js:741
+msgid "Switching to: "
+msgstr "Passa a: "
 
 #: 3.8/applet.js:922
 msgid "View Activity Logs"

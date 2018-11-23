@@ -738,12 +738,12 @@ class vpnLookOut extends Applet.TextIconApplet {
             let [res, out, err, status] = GLib.spawn_command_line_sync('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'')
         }
 
+        this.activityLog.log(_("Switching to: ") + new_co);
         GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + new_co + '" > /dev/null \'');
 
         for (let i=0; i<l; i++) {
             if (this.SMCItems[i].label.text == new_co) {
                 this.SMCItems[i].setShowDot(true);
-                //this.SMCItems[i].setSensitive(false)
             } else {
                 this.SMCItems[i].setShowDot(false);
                 this.SMCItems[i].setSensitive(true)
@@ -872,7 +872,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                     let name=this.vpnNames[i];
                     this.SMCItems[i] = new PopupMenu.PopupIndicatorMenuItem(name);
                     this.SMCItems[i].connect('activate', (event) => this.change_connection(""+name));
-                    if (name==this.vpnName) {
+                    if (name===this.vpnName) {
                         //this.SMCItems[i].setOrnament(PopupMenu.OrnamentType.CHECK, true);
                         this.SMCItems[i].setShowDot(true);
                         this.SMCItems[i].setSensitive(false)
