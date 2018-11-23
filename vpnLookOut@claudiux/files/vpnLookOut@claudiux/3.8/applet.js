@@ -231,13 +231,13 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "reconnect",
                 this.on_settings_changed,
                 null);
-            
+
             this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "respectUserRequest",
                 "respectUserRequest",
                 this.on_settings_changed,
                 null);
-                
+
             this.disconnectedByUser = false;
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -406,9 +406,9 @@ class vpnLookOut extends Applet.TextIconApplet {
                 GLib.spawn_command_line_sync('sh ' + this.vpnscript + ' ' + this.vpnInterface);
                 // Get the VPN Status ('on', 'off' or 'waiting')
                 this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
-                if ( this.vpnStatus.trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
+                if ( this.vpnStatus.toString().trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
                      this.vpnStatusOld = this.vpnStatus;
-                     this.vpnStatus = this.vpnStatus.trim().substr(5); // removing 'true,'
+                     this.vpnStatus = this.vpnStatus.toString().trim().substr(5); // removing 'true,'
                 } else {
                      //this.vpnStatus =  this.vpnStatusOld;
                      this.vpnStatus = "waiting";
@@ -664,15 +664,15 @@ class vpnLookOut extends Applet.TextIconApplet {
     on_checkbox_reconnect_changed() {
         this.reconnect = !this.reconnect ; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
         if (this.reconnect) {
-			if (this.respectUserRequest) {
-				// The Connect button is then useful.
-				this.button_connect.actor.show();
-				this.button_connect2.actor.show()
-			} else {
-	            // The Connect button is then useless.
-	            this.button_connect.actor.hide();
-	            this.button_connect2.actor.hide();
-			}
+            if (this.respectUserRequest) {
+                // The Connect button is then useful.
+                this.button_connect.actor.show();
+                this.button_connect2.actor.show()
+            } else {
+                // The Connect button is then useless.
+                this.button_connect.actor.hide();
+                this.button_connect2.actor.hide();
+            }
         } else {
             // The Connect button is then useful.
             this.button_connect.actor.show();
@@ -738,12 +738,12 @@ class vpnLookOut extends Applet.TextIconApplet {
             let [res, out, err, status] = GLib.spawn_command_line_sync('bash -c \'/usr/bin/nmcli connection down "' + this.vpnName + '" > /dev/null \'')
         }
 
+        this.activityLog.log(_("Switching to: ") + new_co);
         GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + new_co + '" > /dev/null \'');
 
         for (let i=0; i<l; i++) {
             if (this.SMCItems[i].label.text == new_co) {
                 this.SMCItems[i].setShowDot(true);
-                //this.SMCItems[i].setSensitive(false)
             } else {
                 this.SMCItems[i].setShowDot(false);
                 this.SMCItems[i].setSensitive(true)
@@ -872,7 +872,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                     let name=this.vpnNames[i];
                     this.SMCItems[i] = new PopupMenu.PopupIndicatorMenuItem(name);
                     this.SMCItems[i].connect('activate', (event) => this.change_connection(""+name));
-                    if (name==this.vpnName) {
+                    if (name===this.vpnName) {
                         //this.SMCItems[i].setOrnament(PopupMenu.OrnamentType.CHECK, true);
                         this.SMCItems[i].setShowDot(true);
                         this.SMCItems[i].setSensitive(false)
@@ -960,12 +960,13 @@ class vpnLookOut extends Applet.TextIconApplet {
     // This updates the numerical display in the applet and in the tooltip
     updateUI() {
         let command;
+        var tip = "", kbdg = this.keybinding;
         //try {
             // Get the VPN Status ('on', 'off' or 'waiting')
             this.vpnStatusOld = this.vpnStatus;
             this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
-            if ( this.vpnStatus.trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
-                 this.vpnStatus = this.vpnStatus.trim().substr(5); // removing 'true,'
+            if ( this.vpnStatus.toString().trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
+                 this.vpnStatus = this.vpnStatus.toString().trim().substr(5); // removing 'true,'
                  //this.vpnStatusOld = this.vpnStatus;
             } else {
                  //this.vpnStatus = this.vpnStatusOld;
@@ -989,7 +990,8 @@ class vpnLookOut extends Applet.TextIconApplet {
                     if (this.reconnect && !this.respectUserRequest) {
                         this.button_connect.actor.hide()
                     } else {
-                        this.button_connect.actor.show()
+                        this.button_connect.actor.show();
+                        tip = kbdg + " " + _("or Middle-Click to disconnect")
                     }
                 }
                 this.alertFlag = false ;
@@ -1062,13 +1064,15 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.button_connect2.setToggleState(false)
 
                     if (this.reconnect) {
-						if (this.respectUserRequest || this.vpnStatus !== "on") {
-							this.button_connect.actor.show()
-						} else {
-							this.button_connect.actor.hide()
-						}
+                        if (this.respectUserRequest || this.vpnStatus !== "on") {
+                            this.button_connect.actor.show();
+                            tip = kbdg + " " + _("or Middle-Click to connect")
+                        } else {
+                            this.button_connect.actor.hide()
+                        }
                     } else {
-                        this.button_connect.actor.show()
+                        this.button_connect.actor.show();
+                        tip = kbdg + " " + _("or Middle-Click to connect")
                     }
                 }
 
@@ -1107,7 +1111,11 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.set_applet_icon_path(this.vpnIcon);
             }
             // set Tooltip
-            this.set_applet_tooltip(_("VPN:") + " " + this.vpnMessage ) ;
+            if (tip !== " ") {
+                this.set_applet_tooltip(_("VPN:") + " " + this.vpnMessage + "\n\n" + tip)
+            } else {
+                this.set_applet_tooltip(_("VPN:") + " " + this.vpnMessage)
+            }
             // set Menu Item Info
             this.menuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;
             this.contextmenuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;

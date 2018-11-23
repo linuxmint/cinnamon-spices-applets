@@ -1,5 +1,10 @@
 ## Changelog
 
+### 3.3.1~20181122
+  * Now showing in the tooltip (hovering the icon) the keyboard and mouse shortcuts to connect / disconnect.
+  * "Switch to" (another VPN) events are now registered in the log file.
+  * Update of French, Spanish and Italian translations.
+
 ### 3.3.0~20181120
   * New option in Settings (VPN layout):
    * "Do not try to reconnect automatically if the VPN has been disconnected by the user"

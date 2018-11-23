@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.3.0~20181120\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-21 00:19+0100\n"
+"PO-Revision-Date: 2018-11-23 01:58+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -348,18 +348,30 @@ msgstr "OUI"
 msgid "FALSE"
 msgstr "NON"
 
+#: 3.8/applet.js:741
+msgid "Switching to: "
+msgstr "Bascule vers : "
+
 #: 3.8/applet.js:922
 msgid "View Activity Logs"
 msgstr "Journal d'activité"
 
-#: 3.8/applet.js:1023
+#: 3.8/applet.js:994
+msgid "or Middle-Click to disconnect"
+msgstr "ou Clic-Molette pour se déconnecter"
+
+#: 3.8/applet.js:1025
 msgid "Started by vpnLookOut: "
 msgstr "Démarré par vpnLookOut: "
 
-#: 3.8/applet.js:1049
+#: 3.8/applet.js:1051
 msgid "Blocked by vpnLookOut: "
 msgstr "Bloqué par vpnLookOut: "
 
-#: 3.8/applet.js:1097
+#: 3.8/applet.js:1069
+msgid "or Middle-Click to connect"
+msgstr "ou Clic-Molette pour se connecter"
+
+#: 3.8/applet.js:1101
 msgid "Stopped by vpnLookOut: "
 msgstr "Fermé par vpnLookOut: "
