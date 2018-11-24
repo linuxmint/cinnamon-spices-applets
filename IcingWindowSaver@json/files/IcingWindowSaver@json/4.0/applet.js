@@ -5,6 +5,7 @@ const {MaximizeFlags} = imports.gi.Meta;
 const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const {AppletSettings} = imports.ui.settings;
 const {each, find} = imports.misc.util;
 const Main = imports.ui.main;
 
@@ -83,6 +84,21 @@ class WindowSaverApplet extends Applet.IconApplet {
       this.set_applet_tooltip(_('Window Position Saver'));
 
       this.windowStates = [];
+      this.state = {};
+      this.settings = new AppletSettings(this.state, metadata.uuid, instance_id);
+      let settingsProps = [
+        {key: 'windowStates', value: 'windowStates', cb: null},
+        {key: 'restoreOnMonitorChange', value: 'restoreOnMonitorChange', cb: null},
+        {key: 'saveHotkey', value: 'saveHotkey', cb: this.onHotkeysChanged},
+        {key: 'restoreHotkey', value: 'restoreHotkey', cb: this.onHotkeysChanged},
+      ];
+      each(settingsProps, (prop) =>  {
+        this.settings.bind(
+          prop.key,
+          prop.value,
+          prop.cb ? (...args) => prop.cb.call(this, ...args) : null
+        );
+      });
 
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -104,58 +120,74 @@ class WindowSaverApplet extends Applet.IconApplet {
       });
       this.menu.addMenuItem(item);
 
-      Main.keybindingManager.addHotKey('save-windows-positions', '<Shift><Ctrl>S', () => {
-        this.saveWindows();
-      });
-      Main.keybindingManager.addHotKey('restore-windows-positions', '<Shift><Ctrl>R', () => {
-        this.restoreWindows();
-      });
+      this.bindHotkeys();
     });
   }
 
   onMonitorsChanged() {
+    if (!this.state.restoreOnMonitorChange) return;
     setTimeout(() => this.restoreWindows(), 2000);
+  }
+
+  onHotkeysChanged() {
+    this.unbindHotkeys();
+    this.bindHotkeys();
+  }
+
+  bindHotkeys() {
+    Main.keybindingManager.addHotKey('save-windows-positions', this.state.saveHotkey, () => {
+      this.saveWindows();
+    });
+    Main.keybindingManager.addHotKey('restore-windows-positions', this.state.restoreHotkey, () => {
+      this.restoreWindows();
+    });
+  }
+
+  unbindHotkeys() {
+    Main.keybindingManager.removeHotKey('save-windows-positions');
+    Main.keybindingManager.removeHotKey('restore-windows-positions');
   }
 
   saveWindows() {
     let windows = global.display.list_windows(0);
     each(windows, (metaWindow) => {
-      let windowState = find(this.windowStates, function(window) {
+      let windowState = find(this.state.windowStates, function(window) {
         return metaWindow.get_xwindow() === window.id;
       });
 
       let metaWindowActor = metaWindow.get_compositor_private();
       let [x, y] = metaWindowActor.get_position();
       let [width, height] = metaWindowActor.get_size();
+      let maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
       if (windowState) {
         windowState.x = x;
         windowState.y = y;
         windowState.width = width;
         windowState.height = height;
-        windowState.maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
-        windowState.matched = false;
+        windowState.maximized = maximized;
       } else {
-        this.windowStates.push({
+        this.state.windowStates.push({
           x,
           y,
           width,
           height,
-          maximized: metaWindow.maximized_horizontally && metaWindow.maximized_vertically,
-          id: metaWindow.get_xwindow(),
-          matched: false
+          maximized,
+          id: metaWindow.get_xwindow()
         });
       }
     });
+
+    this.settings.setValue('windowStates', this.state.windowStates);
   }
 
   restoreWindows() {
     let windows = global.display.list_windows(0);
+    let windowStates = [];
     each(windows, (metaWindow) => {
-      let windowState = find(this.windowStates, function(window) {
+      let windowState = find(this.state.windowStates, function(window) {
         return metaWindow.get_xwindow() === window.id;
       });
       if (!windowState) return;
-      metaWindow.matched = true;
 
       let {x, y, width, height, maximized} = windowState;
 
@@ -164,11 +196,19 @@ class WindowSaverApplet extends Applet.IconApplet {
 
       if (maximized) metaWindow.maximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
       else metaWindow.unmaximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
+
+      windowStates.push(windowState);
     });
+
+    this.state.windowStates = windowStates;
+    this.settings.setValue('windowStates', this.state.windowStates);
   }
 
   on_applet_removed_from_panel() {
     if (this.monitorsChangedId) global.screen.disconnect(this.monitorsChangedId)
+
+    this.unbindHotkeys();
+    this.settings.finalize();
   }
 
   on_applet_clicked(event) {
