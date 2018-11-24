@@ -126,7 +126,7 @@ class WindowSaverApplet extends Applet.IconApplet {
 
   onMonitorsChanged() {
     if (!this.state.restoreOnMonitorChange) return;
-    setTimeout(() => this.restoreWindows(), 2000);
+    setTimeout(() => this.restoreWindows(false), 2000);
   }
 
   onHotkeysChanged() {
@@ -159,12 +159,15 @@ class WindowSaverApplet extends Applet.IconApplet {
       let [x, y] = metaWindowActor.get_position();
       let [width, height] = metaWindowActor.get_size();
       let maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
+      let {minimized} = metaWindow;
       if (windowState) {
         windowState.x = x;
         windowState.y = y;
         windowState.width = width;
         windowState.height = height;
         windowState.maximized = maximized;
+        windowState.minimized = minimized;
+
       } else {
         this.state.windowStates.push({
           x,
@@ -172,6 +175,7 @@ class WindowSaverApplet extends Applet.IconApplet {
           width,
           height,
           maximized,
+          minimized,
           id: metaWindow.get_xwindow()
         });
       }
@@ -180,7 +184,7 @@ class WindowSaverApplet extends Applet.IconApplet {
     this.settings.setValue('windowStates', this.state.windowStates);
   }
 
-  restoreWindows() {
+  restoreWindows(userAction = true) {
     let windows = global.display.list_windows(0);
     let windowStates = [];
     each(windows, (metaWindow) => {
@@ -189,13 +193,16 @@ class WindowSaverApplet extends Applet.IconApplet {
       });
       if (!windowState) return;
 
-      let {x, y, width, height, maximized} = windowState;
+      let {x, y, width, height, maximized, minimized} = windowState;
 
-      metaWindow.move(true, x, y);
-      metaWindow.resize(true, width, height);
+      metaWindow.move(userAction, x, y);
+      metaWindow.resize(userAction, width, height);
 
       if (maximized) metaWindow.maximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
       else metaWindow.unmaximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
+
+      if (minimized && !metaWindow.minimized) metaWindow.minimize();
+      else if (!minimized && metaWindow.minimized) metaWindow.unminimize();
 
       windowStates.push(windowState);
     });
