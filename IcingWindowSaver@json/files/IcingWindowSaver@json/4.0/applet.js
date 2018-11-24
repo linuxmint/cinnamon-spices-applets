@@ -10,6 +10,7 @@ const {each, find} = imports.misc.util;
 const Main = imports.ui.main;
 
 const UUID = 'IcingWindowSaver@json';
+const MAXIMIZE_FLAGS = MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
 
@@ -195,11 +196,16 @@ class WindowSaverApplet extends Applet.IconApplet {
 
       let {x, y, width, height, maximized, minimized} = windowState;
 
-      metaWindow.move(userAction, x, y);
-      metaWindow.resize(userAction, width, height);
+      if (!maximized && (metaWindow.maximized_horizontally || metaWindow.maximized_vertically)) {
+        metaWindow.unmaximize(MAXIMIZE_FLAGS);
+      }
 
-      if (maximized) metaWindow.maximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
-      else metaWindow.unmaximize(MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL);
+      metaWindow.resize(userAction, width, height);
+      metaWindow.move(userAction, x, y);
+
+      if (maximized && (!metaWindow.maximized_horizontally || !metaWindow.maximized_vertically)) {
+        metaWindow.maximize(MAXIMIZE_FLAGS);
+      }
 
       if (minimized && !metaWindow.minimized) metaWindow.minimize();
       else if (!minimized && metaWindow.minimized) metaWindow.unminimize();
