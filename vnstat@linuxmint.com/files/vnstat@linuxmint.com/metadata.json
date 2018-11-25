@@ -2,5 +2,6 @@
  "uuid": "vnstat@linuxmint.com",
  "name": "Network usage monitor",
  "description": "Network usage monitor using vnstat",
- "version": "1.0.0"
+ "multiversion": true,
+ "version": "1.0.1"
 }
