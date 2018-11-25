@@ -9,7 +9,7 @@ const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const GLib = imports.gi.GLib;
 
-// Code for selecting network manager thanks to Jason Hicks
+// Code for selecting network manager thanks to Jason Hicks - Not currently utilised
 let tryFn = function(fn, errCb) {
   try {
     return fn();
@@ -21,19 +21,12 @@ let tryFn = function(fn, errCb) {
 }
 
 let CONNECTED_STATE, NMClient_new, newNM;
-// Fallback to the new version.
-tryFn(function() {
-  const NMClient = imports.gi.NMClient;
-  const NetworkManager = imports.gi.NetworkManager;
-  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
-  NMClient_new = NMClient.Client.new;
-  newNM = false;
-}, function() {
+// Just remove use of try-catch function to force used of new NM - much of what remains can be rationised when Cinnamon 4.0 is available to allow full testing.
+
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.ACTIVATED;
   NMClient_new = NM.Client.new;
   newNM = true;
-});
 
 // l10n/translation
 const Gettext = imports.gettext;
@@ -71,10 +64,11 @@ MyApplet.prototype = {
             
             this._device = "null";
             this.vnstatImage = GLib.get_home_dir() + "/vnstatlmapplet.png";
-//            this._client = NMClient.Client.new();
             let args = newNM ? [null] : [];
             this._client = NMClient_new.apply(this, args);
-            
+
+//         this._client = NMClient_new(null);  // Ready to replace lines above 
+          
         }
         catch (e) {
             global.logError(e);
@@ -102,7 +96,6 @@ MyApplet.prototype = {
         if (interfaces != null) {
            for (let i = 0; i < interfaces.length; i++) {
                 let iname = interfaces[i].get_iface();
-//                if (iname == name && interfaces[i].state ==  NetworkManager.DeviceState.ACTIVATED) {
                 if (iname == name && interfaces[i].state == CONNECTED_STATE) {
 
                    return true;
@@ -160,3 +153,14 @@ function main(metadata, orientation) {
     return myApplet;      
 }
 
+/*
+# Change log since author changed to pdcurtis
+## 1.0.0
+  * Changes to check which network manager libraries are in use and choose which to use - addresses/solves issue #1647 with Fedora versions 27 and higher.
+  * Change "author" to "pdcurtis and set "original author" to clefebvre
+## 1.0.1
+  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion with folder 4.0 - Issues #2094 and #2097
+  * Remove Try-Catch as no longer required in 4.0 and associated changes.
+  * It is believed that all Distributions packaging Cinnamon 4.0 have changed to the new Network Manager Libraries
+  * Update README.md 
+*/
