@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.1.0~20181107\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-07 13:30+0100\n"
+"PO-Revision-Date: 2018-11-25 23:14+0300\n"
 "Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
 "Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
 "Language: tr\n"
@@ -279,23 +279,41 @@ msgstr "tam fonksiyonel."
 msgid "All dependencies are installed"
 msgstr "Tüm bağımlılıklar kurulu"
 
-#: 3.8/settings-schema.json:7
+#: 3.8/settings-schema.json:12
 msgid "VPN-related Apps Manager"
 msgstr "VPN İlişkili Uygulama Yöneticisi"
 
-#: 3.8/settings-schema.json:49
+#: 3.8/settings-schema.json:77
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: 3.8/settings-schema.json:54
+#: 3.8/settings-schema.json:84
 msgid "Managed Apps"
 msgstr "Yönetilen Uygulamalar"
 
-#: 3.8/settings-schema.json:92
+#: 3.8/settings-schema.json:91
+msgid "Activity Logs"
+msgstr "Etkinlik Günlüğü"
+
+#: 3.8/settings-schema.json:128
+msgid ""
+"Do not try to reconnect automatically if the VPN has been disconnected by "
+"the user."
+msgstr "VPN kullanıcı tarafından kesilmişse otomatik yeniden bağla çalışma."
+
+#: 3.8/settings-schema.json:129
+msgid ""
+"If, by this applet only, the user disconnects the VPN, then no automatic "
+"reconnection will be tried."
+msgstr ""
+"Eğer kullanıcı VPN bağlantısını, sadece bu uygulama ile keserse, otomatik "
+"yeniden bağlanma denenmeyecektir."
+
+#: 3.8/settings-schema.json:139
 msgid "Refresh interval:"
 msgstr "Yenileme aralığı:"
 
-#: 3.8/settings-schema.json:93
+#: 3.8/settings-schema.json:140
 msgid ""
 "Time interval, in seconds, between two verifications of VPN link status. A "
 "low value increases security but causes more activity. Choose a value that "
@@ -305,11 +323,11 @@ msgstr ""
 "aralığı. Düşük bir değer güvenliği artırır, ancak daha fazla aktiviteye "
 "neden olur. Bilgisayarınız yavaşsa daha büyük bir değer seçin."
 
-#: 3.8/settings-schema.json:110
+#: 3.8/settings-schema.json:156
 msgid "Emit an audible alert when VPN shuts down."
 msgstr "VPN kapatıldığında sesli bir uyarı ver."
 
-#: 3.8/settings-schema.json:111
+#: 3.8/settings-schema.json:157
 msgid ""
 "Checking this allows this applet to emit an audible alert when VPN shuts "
 "down."
@@ -317,12 +335,12 @@ msgstr ""
 "Bunu etkinleştirmek, VPN kapatıldığında bu uygulamacığın sesli uyarı "
 "vermesini sağlar."
 
-#: 3.8/settings-schema.json:117
+#: 3.8/settings-schema.json:163
 msgid "Emit this audible alert when this Applet starts, if VPN is down."
 msgstr ""
 "VPN kapalıysa, bu uygulamacık başlatıldığında bu ses uyarısını çıkarır."
 
-#: 3.8/settings-schema.json:118
+#: 3.8/settings-schema.json:164
 msgid ""
 "Check this if you want to emit this audible alert when this Applet starts, "
 "if VPN is down."
@@ -330,11 +348,11 @@ msgstr ""
 "Bunu etkinleştirdiğinizde, bu uygulamacık başlatıldığında eğer VPN kapalıysa "
 "bu sesli uyarının çıkartılmasını sağlar."
 
-#: 3.8/settings-schema.json:130
+#: 3.8/settings-schema.json:176
 msgid "Manage VPN-related Apps"
 msgstr "VPN İlişkili Uygulamaları Yönetin"
 
-#: 3.8/settings-schema.json:131
+#: 3.8/settings-schema.json:177
 msgid ""
 "This option allows this applet to manage the VPN-related applications you "
 "listed above."
@@ -342,11 +360,11 @@ msgstr ""
 "Bu seçenek, bu uygulamanın yukarıda listelenen VPN ile ilgili uygulamaları "
 "yönetmesine izin verir."
 
-#: 3.8/settings-schema.json:135
+#: 3.8/settings-schema.json:181
 msgid "Managed applications"
 msgstr "Yönetilen uygulamalar"
 
-#: 3.8/settings-schema.json:136
+#: 3.8/settings-schema.json:182
 msgid ""
 "Name: What you want.\n"
 "Command: The command to run the application, without its path.\n"
@@ -366,22 +384,82 @@ msgstr ""
 "Sadece VPN: Uygulama VPN boştayken başlatıldığında bu uygulamayı hızlıca "
 "durdurmak isterseniz, TRUE olarak ayarlayın."
 
-#: 3.8/settings-schema.json:140
+#: 3.8/settings-schema.json:186
 msgid "Name"
 msgstr "İsim"
 
-#: 3.8/settings-schema.json:145
+#: 3.8/settings-schema.json:191
 msgid "Command"
 msgstr "Komut"
 
-#: 3.8/settings-schema.json:150
+#: 3.8/settings-schema.json:196
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
-#: 3.8/settings-schema.json:155
+#: 3.8/settings-schema.json:201
 msgid "Shut down"
 msgstr "Kapat"
 
-#: 3.8/settings-schema.json:160
+#: 3.8/settings-schema.json:206
 msgid "VPN only"
 msgstr "Sadece VPN"
+
+#: 3.8/settings-schema.json:225
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr ""
+"VPN durum değişikliklerini ve VPN ile ilgili uygulamaların durumundaki "
+"değişiklikleri günlükle"
+
+#: 3.8/settings-schema.json:226
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-"
+"related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Bu seçenek, bu uygulamanın VPN durum değişikliklerini ve VPN ile ilgili "
+"uygulamaların durum değişikliklerini günlüklemesine izin verir.\n"
+"Tanılama yapmak için günlük dosyasını görüntüleyebilirsiniz."
+
+#: 3.8/settings-schema.json:249
+msgid "Lifetime (days)"
+msgstr "Kalış süresi (gün)"
+
+#: 3.8/settings-schema.json:250
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Bir kaydın günlük dosyasında kalış süresi, gün cinsinden."
+
+#: 3.8/applet.js:331
+msgid "TRUE"
+msgstr "DOĞRU"
+
+#: 3.8/applet.js:332
+msgid "FALSE"
+msgstr "YANLIŞ"
+
+#: 3.8/applet.js:741
+msgid "Switching to: "
+msgstr "Şuna geç: "
+
+#: 3.8/applet.js:922
+msgid "View Activity Logs"
+msgstr "Etkinlik Günlüğünü Göster"
+
+#: 3.8/applet.js:994
+msgid "or Middle-Click to disconnect"
+msgstr "ya da bağlantıyı kesmek için orta fare tuşuna tıklayın"
+
+#: 3.8/applet.js:1025
+msgid "Started by vpnLookOut: "
+msgstr "vpnLookOut tarafından başlatıldı: "
+
+#: 3.8/applet.js:1051
+msgid "Blocked by vpnLookOut: "
+msgstr "vpnLookOut tarafından engellendi: "
+
+#: 3.8/applet.js:1069
+msgid "or Middle-Click to connect"
+msgstr "ya da bağlanmak için orta fare tuşuna tıklayın"
+
+#: 3.8/applet.js:1101
+msgid "Stopped by vpnLookOut: "
+msgstr "vpnLookOut tarafından durduruldu: "
