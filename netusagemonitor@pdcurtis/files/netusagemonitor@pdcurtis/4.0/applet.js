@@ -13,7 +13,7 @@ const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
 
-// Code for selecting network manager thanks to Jason Hicks
+// Code for selecting network manager thanks to Jason Hicks - Not currently utilised
 let tryFn = function(fn, errCb) {
   try {
     return fn();
@@ -25,19 +25,13 @@ let tryFn = function(fn, errCb) {
 }
 
 let CONNECTED_STATE, NMClient_new, newNM;
-// Fallback to the new version.
-tryFn(function() {
-  const NMClient = imports.gi.NMClient;
-  const NetworkManager = imports.gi.NetworkManager;
-  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
-  NMClient_new = NMClient.Client.new;
-  newNM = false;
-}, function() {
+// Just remove use of try-catch function to force used of new NM - much of what remains can be rationised when Cinnamon 4.0 is available to allow full testing.
+
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.ACTIVATED;
   NMClient_new = NM.Client.new;
   newNM = true;
-});
+
 
 // Localisation/translation support - moved up and slightly non standard due to GTOP test which follows.
 var UUID = "netusagemonitor@pdcurtis";
@@ -1215,4 +1209,9 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
   * Changes to check which network manager libraries are in use and choose which to use - addresses/solves issue #1647 with Fedora versions 27 and higher.
   * Note that there may be problems with option of disconnecting the network manager when data usage limit is exceeded so checks are needed under NM before the issue can be marked as closed.
   * Use xdg-open in place of gedit or xed to allow use on more distros 
+## 3.2.6
+  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion with folder 4.0
+  * Remove Try-Catch as no longer required in 4.0 and associated changes.
+  * It is believed that all Distributions packaging Cinnamon 4.0 have changed to the new Network Manager Libraries
+  * Update README.md and CHANGELOG.md
 */
