@@ -115,12 +115,15 @@ CPUTemperatureApplet.prototype = {
     }
     let items = [];
     let tempInfo = null;
+    let temp = 0;
+
     if (this.sensorsPath) {
       let sensorsOutput = GLib.spawn_command_line_sync(this.sensorsPath); //get the output of the sensors command
 
       if (sensorsOutput[0]) {
         tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput[1].toString()); //get temperature from sensors
       }
+
       if (tempInfo) {
         let critical = 0;
         let high = 0;
@@ -128,7 +131,7 @@ CPUTemperatureApplet.prototype = {
         let packageCount = 0;
         let s = 0;
         let n = 0; //sum and count
-        let temp = 0;
+
         for (let i = 0; i < tempInfo.length; i++) {
           if (tempInfo[i].label.indexOf('Package') > -1) {
             critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
@@ -159,7 +162,9 @@ CPUTemperatureApplet.prototype = {
           this.title = label;
         }
       }
-    } else {
+    }
+
+    if (!tempInfo || !temp) {
       // if we don't have the temperature yet, use some known files
       tempInfo = this._findTemperatureFromFiles();
       if (tempInfo.temp) {
