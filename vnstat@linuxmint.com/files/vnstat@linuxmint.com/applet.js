@@ -71,7 +71,8 @@ MyApplet.prototype = {
             
             this._device = "null";
             this.vnstatImage = GLib.get_home_dir() + "/vnstatlmapplet.png";
-//            this._client = NMClient.Client.new();
+
+//          global.logError("Test output - Loaded from default position");   // Comment out unless testing
             let args = newNM ? [null] : [];
             this._client = NMClient_new.apply(this, args);
             
@@ -102,7 +103,6 @@ MyApplet.prototype = {
         if (interfaces != null) {
            for (let i = 0; i < interfaces.length; i++) {
                 let iname = interfaces[i].get_iface();
-//                if (iname == name && interfaces[i].state ==  NetworkManager.DeviceState.ACTIVATED) {
                 if (iname == name && interfaces[i].state == CONNECTED_STATE) {
 
                    return true;

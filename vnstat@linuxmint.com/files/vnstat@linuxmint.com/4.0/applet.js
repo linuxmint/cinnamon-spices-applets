@@ -21,7 +21,7 @@ let tryFn = function(fn, errCb) {
 }
 
 let CONNECTED_STATE, NMClient_new, newNM;
-// Just remove use of try-catch function to force used of new NM - much of what remains can be rationised when Cinnamon 4.0 is available to allow full testing.
+// Removed use of try-catch function to force used of new NM - some of what remains can be rationised when Cinnamon 4.0 is available to allow full testing.
 
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.ACTIVATED;
@@ -66,9 +66,8 @@ MyApplet.prototype = {
             this.vnstatImage = GLib.get_home_dir() + "/vnstatlmapplet.png";
             let args = newNM ? [null] : [];
             this._client = NMClient_new.apply(this, args);
-
-//         this._client = NMClient_new(null);  // Ready to replace lines above 
-          
+//          this._client = NMClient_new(null);  // Ready to replace lines above 
+//          global.logError("Test output - Loaded from Folder 4.0");   // Comment out unless testing          
         }
         catch (e) {
             global.logError(e);
