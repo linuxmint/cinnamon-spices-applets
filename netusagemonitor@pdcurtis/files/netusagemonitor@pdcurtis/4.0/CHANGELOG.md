@@ -1,8 +1,8 @@
 ### Changelog covering recent significant changes
 
-## 3.2.6
+## 3.2.6 
 
-  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion with folder 4.0
+  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion in folder 4.0
   * Remove Try-Catch as no longer required in 4.0 and associated changes.
   * It is believed that all Distributions packaging Cinnamon 4.0 have changed to the new Network Manager Libraries
   * Add cinnamon-version to metadata.json (Provides information on which Cinnamon versions can load it)
