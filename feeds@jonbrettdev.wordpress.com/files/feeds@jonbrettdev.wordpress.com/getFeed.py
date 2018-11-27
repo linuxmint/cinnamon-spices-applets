@@ -21,7 +21,11 @@
  https://pypi.python.org/pypi/feedparser
  https://pythonhosted.org/feedparser/
 '''
-import feedparser
+try:
+    from feedparser import parse
+except ImportError:
+    from simple_rss_reader import parse
+
 import sys
 import json
 
@@ -31,7 +35,7 @@ if __name__ == "__main__":
     info = {}
 
     try:
-        parser = feedparser.parse(rss)
+        parser = parse(rss)
         # check for permanent redirect
         if parser.status == 301:
             info['redirected_url'] = parser.href

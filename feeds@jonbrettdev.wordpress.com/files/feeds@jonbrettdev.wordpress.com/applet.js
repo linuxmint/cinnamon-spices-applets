@@ -224,7 +224,7 @@ FeedApplet.prototype = {
         /* Include setting menu item in Cinnamon < 2.0.0 */
         this.logger.debug("Cinnamon Version: " + CinnamonVersion);
         if (parseInt(CinnamonVersion) == 1) {
-            s = new Applet.MenuItem(
+            let s = new Applet.MenuItem(
                     _("Settings"),
                     "emblem-system-symbolic",
                     Lang.bind(this, function() {
@@ -323,7 +323,7 @@ FeedApplet.prototype = {
             });
         }
 
-        logging_level = this.settings.getValue("enable-verbose-logging");
+        let logging_level = this.settings.getValue("enable-verbose-logging");
         // notify only when the logging level has changed.
         if(this.logger.verbose != logging_level){
             this.logger.info("Logging changed to " + ((this.logger.verbose) ? "debug" : "info"));
@@ -486,7 +486,7 @@ FeedApplet.prototype = {
         }
 
         // Remove all notifications since they no longer apply
-        for (i in this.feeds){
+        for (var i in this.feeds){
             this._destroyMessage(this.feeds[i].reader);
         }
     },
