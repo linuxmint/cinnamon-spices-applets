@@ -1,5 +1,5 @@
 import urllib2
-import xml.etree.ElementTree as ET
+import xmltodict
 
 
 class Parser(object):
@@ -60,46 +60,44 @@ class Parser(object):
         return iter(self.__dict__)
 
 
-def get_element(element, xpath, default=''):
-    subs = element.findall(xpath)
-
-    if len(subs) > 0:
-        return subs[0].text
-
-    return default
-
-
 def parse(rss):
     parser = Parser(rss)
 
     handler = urllib2.urlopen(rss)
     parser.status = handler.code
-    element = ET.fromstring(handler.read())
+    element = xmltodict.parse(handler.read())
 
-    parser.feed['title'] = get_element(element, './channel/title')
-    parser.feed['description'] = get_element(element, './channel/description')
-    parser.feed['link'] = get_element(element, './channel/link')
-    parser.feed['subtitle'] = get_element(element, './channel/subtitle')
+    channel = element["rss"]["channel"]
 
-    subs = element.findall('./channel/image')
-    if len(subs) > 0:
-        image = subs[0]
-        parser.feed['image'] = {
-            'url': get_element(image, './url'),
-            'width': get_element(image, './width'),
-            'height': get_element(image, './height')
-        }
+    if "title" in channel:
+        parser.feed['title'] = channel["title"]
 
-    entries = element.findall('./channel/item')
+    if "description" in channel:
+        parser.feed['description'] = channel["description"]
 
-    for entry in entries:
-        parser['entries'].append({
-            'description': get_element(entry, './description'),
-            'link': get_element(entry, './link'),
-            'id': get_element(entry, './link'),
-            'pubDate': get_element(entry, './pubDate'),
-            'title': get_element(entry, './title')
-        })
+    if "link" in channel:
+        parser.feed['link'] = channel["link"]
+
+    if "subtitle" in channel:
+        parser.feed['subtitle'] = channel["subtitle"]
+
+    if "image" in channel:
+        image = channel["image"]
+        parser.feed['image']["url"] = image["url"]
+        if "width" in image:
+            parser.feed["image"]["width"] = image["width"]
+        if "height" in image:
+            parser.feed["image"]["height"] = image["height"]
+
+    if "item" in channel:
+        for entry in channel["item"]:
+            parser['entries'].append({
+                'description': entry['description'],
+                'link': entry['link'],
+                'id': entry['link'],
+                'pubDate': entry['pubDate'],
+                'title': entry['title']
+            })
 
     parser['entries'].sort(key=lambda x: x['pubDate'], reverse=True)
 
