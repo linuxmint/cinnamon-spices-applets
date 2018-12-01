@@ -1,0 +1,178 @@
+{
+    "name": "Regex",
+    "description": "Regular expressions cheatsheet",
+    "author": "Aymeric Deschard",
+    "email": "aymeric.deschard@disroot.org",
+    "repository": "",
+    "version": "0.1",
+    "sections": {
+        "Character classes": {
+			"Any character": {
+				"description": "",
+				"code": "."
+			},
+            "Control character": {
+                "description": "Example 1 description",
+                "code": "\\c"
+            },
+            "Whitespace": {
+                "description": "[ \\r\\n\\f], capitalized is not",
+                "code": "\\s"
+            },
+            "Digit": {
+                "description": "[0-9], capitalized is not",
+                "code": "\\d"
+            },
+            "Word": {
+                "description": "[A-Za-z0-9_], capitalized is not",
+                "code": "\\w"
+            },
+            "Hexadecimal digit": {
+                "description": "[A-Fa-f0-9]",
+                "code": "\\x"
+            }
+        },
+        "Quantifiers": {
+            "0 or more": {
+                "description": "",
+                "code": "*"
+            },
+            "1 or more": {
+                "description": "",
+                "code": "+"
+            },
+            "Exactly x times": {
+                "description": "",
+                "code": "{x}"
+            },
+            "x times or more": {
+                "description": "",
+                "code": "{x,}"
+            },
+            "range between x and y": {
+                "description": "",
+                "code": "{x, y}"
+            }
+        },
+        "Anchors": {
+            "Start of string or line": {
+                "description": "",
+                "code": "^"
+            },
+            "Start of string": {
+                "description": "",
+                "code": "\\A"
+            },
+            "End of string or line": {
+                "description": "",
+                "code": "$"
+            },
+            "End of string": {
+                "description": "",
+                "code": "\\Z"
+            },
+            "Word boundary": {
+                "description": "Capitalized is not",
+                "code": "\b"
+            },
+            "Start of word": {
+                "description": "",
+                "code": "\\<"
+            },
+            "End of word": {
+                "description": "",
+                "code": "\\>"
+            }
+        },
+        "Groups and Ranges": {
+            "group": {
+                "description": "",
+                "code": "(<something>)"
+            },
+            "or": {
+                "description": "a or b",
+                "code": "(a|b)"
+            },
+            "not": {
+                "description": "Everything, but <something>",
+                "code": "[^<something>]"
+            },
+            "Non-capturing group": {
+                "description": "Register as a group but discard it.",
+                "code": "(?:<something>)"
+            },
+            "Individual characters": {
+                "description": "a, b or c",
+                "code": "[abc]"
+            },
+            "Ranges": {
+                "description": "a to q",
+                "code": "[a-q]"
+            }
+        },
+		"Assertions": {
+			"Lookahead": {
+				"description": "",
+				"code": "?="
+			},
+			"Negative lookahead": {
+				"description": "",
+				"code": "?!"
+			},
+			"Lookbehind": {
+				"description": "",
+				"code": "?<="
+			},
+			"Negative lookbehind": {
+				"description": "",
+				"code": "?!= <or> ?<!"
+			},
+			"Once-only subexpression": {
+				"description": "",
+				"code": "?>"
+			},
+			"Condition (if then)": {
+				"description": "if then",
+				"code": "?()"
+			},
+			"Condition (if then else)": {
+				"description": "",
+				"code": "?()|"
+			},
+			"Comment": {
+				"description": "",
+				"code": "?#"
+			}
+		},
+		"Flags": {
+			"Global match": {
+				"description": "",
+				"code": "//g"
+			},
+			"Case-insensitive": {
+				"description": "",
+				"code": "//i"
+			},
+			"Multiline": {
+				"description": "",
+				"code": "//m"
+			},
+			"String as single line": {
+				"description": "",
+				"code": "//s"
+			},
+			"Allow comments and whitespaces": {
+				"description": "",
+				"code": "//x"
+			},
+			"Evaluate replacement": {
+				"description": "",
+				"code": "//e"
+			},
+			"Ungreedy pattern": {
+				"description": "",
+				"code": "//U"
+			}
+		}
+    }
+}

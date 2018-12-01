@@ -114,7 +114,7 @@ MyApplet.prototype = {
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else { 
-               this.textEd = "xed";
+                this.textEd = "xdg-open";
             }
 
             // ++ Build Context (Right Click) Menu
@@ -427,5 +427,7 @@ Version 2.1.0
  * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
  * CHANGELOG.md is a simplified version of the existing changelog.txt
  * Applet updated so CHANGELOG.md is displayed from context 
- * README.md in UUID is now symbolic link from UUID 
+ * README.md in UUID is now symbolic link from UUID
+## 2.1.1
+ * Use xdg-open in place of gedit or xed to allow use on more distros
 */

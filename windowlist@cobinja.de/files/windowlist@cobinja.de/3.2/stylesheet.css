@@ -1,3 +1,8 @@
+.window-list-item-box {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .window-list-box .window-list-item-box:neutral {
   background-gradient-start: rgba(255,255,255,0);
   background-gradient-end: rgba(255,255,255,0);

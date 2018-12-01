@@ -246,7 +246,7 @@ CobiPopupMenuItem.prototype = {
     this._icon.set_width(-1);
     this._icon.set_height(-1);
     let windowActor = metaWindow.get_compositor_private();
-    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
+    let monitor = this._appButton._applet.panel.monitor;
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
@@ -283,7 +283,7 @@ CobiPopupMenuItem.prototype = {
     this._closeBin.set_child(this._closeIcon);
     this._closeIcon.hide();
     
-    if (!Main.software_rendering && this._settings.getValue("hover-preview")) {
+    if (!Main.software_rendering && this._settings.getValue("show-previews")) {
       this._cloneBin = new St.Bin({min_width: 0, min_height: 0});
       this._box.add_actor(this._cloneBin);
       this._cloneBox = new St.Widget();
@@ -295,10 +295,10 @@ CobiPopupMenuItem.prototype = {
   },
   
   doSize: function(availWidth, availHeight) {
-    if (Main.software_rendering || !this._settings.getValue("hover-preview")) {
+    if (Main.software_rendering || !this._settings.getValue("show-previews")) {
       return;
     }
-    let monitor = Main.layoutManager.findMonitorForActor(this._menu.actor);
+    let monitor = this._appButton._applet.panel.monitor;
     let width = monitor.width;
     let height = monitor.height;
     let aspectRatio = width / height;
@@ -311,12 +311,12 @@ CobiPopupMenuItem.prototype = {
     this._cloneBox.remove_all_children();
     
     if (this._menu.box.get_vertical()) {
-      height = (availHeight - overheadHeight) * global.ui_scale;
+      height = (availHeight - overheadHeight);
       width = Math.floor(height * aspectRatio);
       this._cloneBin.natural_height = height;
     }
     else {
-      width = (availWidth - overheadWidth) * global.ui_scale;
+      width = (availWidth - overheadWidth);
       height = Math.floor(width / aspectRatio);
       this._cloneBin.natural_width = width;
     }
@@ -448,7 +448,7 @@ CobiPopupMenu.prototype = {
     
     if (this._appButton._applet.orientation == St.Side.LEFT ||
         this._appButton._applet.orientation == St.Side.RIGHT ||
-        !this._settings.getValue("hover-preview")) {
+        !this._settings.getValue("show-previews")) {
       this.box.set_vertical(true);
     }
   },
@@ -542,8 +542,8 @@ CobiPopupMenu.prototype = {
     overheadWidth += overheadWidthActor;
     overheadHeight += overheadHeightActor;
     
-    let monitor = Main.layoutManager.findMonitorForActor(this.actor);
-    let panels = Main.panelManager.getPanelsInMonitor(monitor.index);
+    let monitor = this._appButton._applet.panel.monitor;
+    let panels = Main.panelManager.getPanelsInMonitor(this._appButton._applet.panel.monitorIndex);
     for (let i = 0; i < panels.length; i++) {
       if (panels[i].panelPosition == Panel.PanelLoc.top || panels[i].panelPosition == Panel.PanelLoc.bottom) {
         overheadHeight += panels[i].actor.height;
@@ -567,10 +567,10 @@ CobiPopupMenu.prototype = {
     let numThumbs = this._settings.getValue("number-of-unshrunk-previews");
     
     if (this.box.get_vertical()) {
-      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+      itemHeight = (availHeight / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing * global.ui_scale);
     }
     else {
-      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing);
+      itemWidth = (availWidth / (Math.max(numItems, numThumbs))) - ((numItems - 1) * spacing * global.ui_scale);
     }
     
     for (let i = 0; i < numItems; i++) {
@@ -964,9 +964,9 @@ CobiAppButton.prototype = {
     if ((panelHeight - this.iconSize) & 1) {
       panelHeight--;
     }
-    this._iconBin.width = panelHeight;
-    this._iconBin.height = panelHeight;
-    this._labelNumberBox.width = panelHeight;
+    this._iconBin.natural_width = panelHeight;
+    this._iconBin.natural_height = panelHeight;
+    this._labelNumberBox.natural_width = panelHeight;
   },
   
   updateCaption: function() {
@@ -1172,21 +1172,16 @@ CobiAppButton.prototype = {
     // left mouse button
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
-        if (this._windows.length > 0) {
-          if (this._windows.length == 1 || !this._settings.getValue("click-preview")) {
-            if (_hasFocus(this._currentWindow)) {
-              this._currentWindow.minimize();
-            }
-            else {
-              Main.activateWindow(this._currentWindow);
-            }
+        if (this._windows.length == 1 || !(this._settings.getValue("menu-show-on-click"))) {
+          if (_hasFocus(this._currentWindow)) {
+            this._currentWindow.minimize();
           }
           else {
-            this.menu.open();
+            Main.activateWindow(this._currentWindow);
           }
         }
-        else {
-          this._startApp();
+        else if (this._settings.getValue("menu-show-on-click")) {
+          this.menu.open();
         }
       }
       else {
@@ -1236,7 +1231,7 @@ CobiAppButton.prototype = {
       this.actor.set_track_hover(false);
       this.actor.set_hover(false);
     }
-    if (this._windows.length > 0) {
+    if (this._windows.length > 0 && this._settings.getValue("menu-show-on-hover")) {
       this.menu.openDelay();
     }
   },
@@ -1594,7 +1589,7 @@ CobiWorkspace.prototype = {
   
   _windowAdded: function(metaWindow) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        Main.layoutManager.findMonitorForActor(this.actor).index != metaWindow.get_monitor()) {
+        this._applet.panel.monitorIndex != metaWindow.get_monitor()) {
       return;
     }
     
@@ -1667,7 +1662,7 @@ CobiWorkspace.prototype = {
         this._windowAdded(metaWindow);
       }
       else {
-        if (metaWindow.get_monitor() != Main.layoutManager.findMonitorForActor(this.actor).index) {
+        if (metaWindow.get_monitor() != this._applet.panel.monitorIndex) {
           this._windowRemoved(metaWindow);
         }
         else {
@@ -2142,7 +2137,7 @@ CobiWindowList.prototype = {
   
   _windowAdded: function(screen, metaWindow, monitor) {
     if (this._settings.getValue("show-windows-for-current-monitor") &&
-        monitor != Main.layoutManager.findMonitorForActor(this.actor).index) {
+        monitor != this.panel.monitorIndex) {
       return;
     }
     for (let i = 0; i < this._workspaces.length; i++) {
@@ -2183,7 +2178,7 @@ CobiWindowList.prototype = {
     if (!this._settings.getValue("show-windows-for-current-monitor")) {
       return;
     }
-    if (monitor == Main.layoutManager.findMonitorForActor(this.actor)) {
+    if (monitor == this.panel.monitorIndex) {
       this._windowAdded(screen, window, monitor);
     }
     else {

@@ -1,5 +1,55 @@
 Changelog
 
+### 4.0.2
+
+  * Fixed an issue with custom icons not rendering correctly.
+
+### 4.0.1
+
+  * Fixed an issue with the context menu not rendering when the menu expands near the monitor's height.
+
+### 4.0.0
+
+  * Improved search accuracy - keywords and application IDs are now considered in the results scoring.
+  * Fixed window titles not being fuzzy highlighted during search when they are matched by title and "Enable searching of open windows" is enabled.
+  * Fixed an issue with the fuzzy highlighting markup not resetting when ending a search.
+  * Migrated to newer JS syntax for Cinnamon 4.0, and re-used some Cinnamon 4 libs.
+  * 4.0: Made the height of the menu based on natural height, while constraining to the monitor height.
+  * 4.0: Fixed an issue causing duplicate filesystem completion entries populating the menu on search.
+  * 4.0: Added a vector box for preventing misselections when moving the cursor from the categories list to an app item.
+  * 4.0: Description placement options have been consolidated into a simple drop-down setting.
+  * 4.0: Added support for two instances.
+
+### 3.2.6
+
+  * Fixed issues with invalid access of C objects occurring with CJS git master.
+  * Fixed the list view container width not filling the parent scroll container width, and the button widths not filling their parent container's width.
+  * Fixed the dot offsetting the vertical alignment of labels in the list view.
+  * Made the positioning of the running app indicator dot consistent between list and grid views.
+
+### 3.2.5
+
+  * Fixed being unable to select a context menu option from the first app button in a category group.
+
+### 3.2.4
+
+  * Lowered the minimum possible custom height to 360px.
+  * Lowered the minimum possible number of columns to 2.
+  * Reduced the widths of the columns so the menu is more compact.
+
+### 3.2.3
+
+  * Fixed a bug that can prevent being able to open applications after exiting the context menu.
+
+### 3.2.2
+
+  * Fixed inability to uninstall applications due to gksu deprecation.
+
+### 3.2.1
+
+  * Addressed an issue with the context menu labels being truncated.
+  * Fixed search text clipping.
+
 ### 3.2.0
 
   * Added drag and drop category re-ordering.

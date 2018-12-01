@@ -1,0 +1,175 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-25 19:47+0100\n"
+"PO-Revision-Date: 2018-11-07 00:08+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "Uygulama gruplaması ve pencere önizlemesi içeren bir pencere listesi"
+
+msgid "Remove this applet"
+msgstr "Bu uygulamacığı sil"
+
+msgid "Open new window"
+msgstr "Yeni pencere aç"
+
+msgid "Captions"
+msgstr "Liste Başlıkları"
+
+msgid "Caption type"
+msgstr "Liste başlık tipi"
+
+msgid "Name"
+msgstr "Ad"
+
+msgid "Title"
+msgstr "Başlık"
+
+msgid "Display Caption For"
+msgstr "Liste başlığı görüntüleme tipi"
+
+msgid "None"
+msgstr "Hiçbiri"
+
+msgid "All"
+msgstr "Tümü"
+
+msgid "Running"
+msgstr "Çalışan"
+
+msgid "Focused"
+msgstr "Odanlanan"
+
+msgid "Label width"
+msgstr "Etiketle"
+
+msgid "Animate label"
+msgstr "Etiket animasyonu"
+
+msgid "Label animation time"
+msgstr "Etiket animasyon süresi"
+
+msgid "Display Number"
+msgstr "Sayı Gösterimi"
+
+msgid "Smart"
+msgstr "Akıllı"
+
+msgid "Group Windows"
+msgstr "Gruplanmış Pencereler"
+
+msgid "Display Favorites"
+msgstr "Sık Kullanılanları Göster"
+
+msgid "Animation Time"
+msgstr "Animasyon Süresi"
+
+msgid "Preview menu"
+msgstr "Menü özizlemeleri"
+
+msgid "Show on hover"
+msgstr "Üstüne gelince göster"
+
+msgid "Timeout Show"
+msgstr "Gösterim Zaman Aşımı"
+
+msgid "Timeout Hide"
+msgstr "Gizleme Zaman Aşımı"
+
+msgid "Pin to this workspace"
+msgstr "Bu çalışma alanına sabitle"
+
+msgid "Pin to other workspaces"
+msgstr "Diğer çalışma alanlarına sabitle"
+
+msgid "Unmaximize"
+msgstr "Tam Ekrandan Çık"
+
+msgid "Close window on mouse-wheel click"
+msgstr "Pencereyi orta fare tıklaması ile kapat"
+
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"Pencereler gruplandırılmışsa, bir uygulamadaki tüm pencereler aynı düğme "
+"tarafından yönetilir,\n"
+"gruplandırılmamışsa, tüm pencereler kendi düğmelerini sahip olur"
+
+msgid "The flashing time when a new window is opened via a button"
+msgstr "Düğme ile yeni bir pencere açıldığında yanıp sönme süresi"
+
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Etkinse, açılır menü pencere önizlemelerini gösterir\n"
+"(Cinnamon yazılımsal işleme kipindeyken her zaman devre dışıdır)"
+
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Bir düğmenin üzerine gelindiğinde açılır menü için bekleme süresi\n"
+"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
+
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Bir düğme üstünden ayrılırken açılır menü gizlemesi için bekleme süresi\n"
+"(Listedeki farklı bir düğme üzerine doğrudan geçildiğinde çalışmaz)"
+
+msgid "Only show windows on the same monitor"
+msgstr "Sadece aynı monitördeki pencereleri göster"
+
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Eğer etkinse, bu uygulama örneği yalnızca aynı monitörde\n"
+"görüntülenen pencereleri yönetir"
+
+msgid "Move to another monitor"
+msgstr "Başka bir monitöre taşı"
+
+msgid "Always"
+msgstr "Daima"
+
+msgid "2 or more windows"
+msgstr "2 ya da daha fazla pencere"
+
+msgid "Number of unshrunk previews"
+msgstr "Önizleme daraltma sayısı"
+
+msgid "Show on click"
+msgstr "Tıklayınca göster"
+
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"clicking\n"
+"(Only with 2 or more windows)"
+msgstr ""
+"Eğer etkinse, tıklandığında gruplanmış pencereleri listeleyen bir açılır "
+"menü görüntülenir\n"
+"(Sadece 2 veya daha fazla pencere ile)"
+
+msgid ""
+"If enabled, a popup menu with a list of current windows will show when "
+"hovering"
+msgstr ""
+"Eğer etkinse, listedeki mevcut pencerelerin üstüne gelindiğinde bir açılır "
+"menü görüntülenir"
+
+msgid "Show previews"
+msgstr "Önizlemeleri göster"

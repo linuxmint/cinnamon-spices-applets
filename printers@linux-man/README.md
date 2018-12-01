@@ -2,7 +2,7 @@
 ## printers@linux-man
 Cinnamon applet - Manage Jobs and Printers
 
-Czech translation by Radek71(<https://github.com/Radek71>)
+Czech translation by Radek71(<https://github.com/Radek71>), tweaked by p-bo(<https://github.com/p-bo>)
 
 German translation by NikoKrause(<https://github.com/NikoKrause>)
 
@@ -16,7 +16,12 @@ Croatian translation by [muzena](https://github.com/muzena)
 
 French corrections by Christophe Hortemel
 
+Danish translation by [Alan01](https://github.com/Alan01)
+
 ### Changelog
+
+### 0.9.1
+    Use pkexec to "Restart CUPS"
 
 ### 0.9
     Configuration: "Reload Applet" and "Restart CUPS" buttons

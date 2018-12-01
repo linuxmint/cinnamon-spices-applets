@@ -5,7 +5,7 @@ if (typeof require !== 'undefined') {
     Files = require('./files');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];
-    const Files = AppletDirectory.files;
+    Files = AppletDirectory.files;
 }
 
 

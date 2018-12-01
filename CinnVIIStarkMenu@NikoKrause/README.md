@@ -1,6 +1,8 @@
 # &#65279; ![CinnVIIStarkMenu Logo](https://git.io/vDWaq) CinnVIIStarkMenu
 
 #### Compatible Cinnamon Versions:
+&#10004; Cinnamon-Version 4.0 (Linux Mint 19.1) <br />
+&#10004; Cinnamon-Version 3.8 (Linux Mint 19)   <br />
 &#10004; Cinnamon-Version 3.6 (Linux Mint 18.3) <br />
 &#10004; Cinnamon-Version 3.4 (Linux Mint 18.2) <br />
 &#10004; Cinnamon-Version 3.2 (Linux Mint 18.1) <br />

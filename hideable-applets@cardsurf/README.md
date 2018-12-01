@@ -20,3 +20,6 @@ To toggle visibilities of applets using the applet popup:
 To toggle visibilities of applets using the context menu:
 1. Right click on the applet
 2. From "Visibility" submenu click on an applet name
+
+## Source code
+Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/hideable-applets).

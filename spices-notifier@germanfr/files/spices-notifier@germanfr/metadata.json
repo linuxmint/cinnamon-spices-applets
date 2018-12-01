@@ -1,0 +1,11 @@
+{
+	"uuid": "spices-notifier@germanfr",
+	"version": "4.0~20181106",
+	"name": "Spices notifier",
+	"description": "Notifies of comments on the Cinnamon Spices website",
+	"url": "https://github.com/germanfr/spices-notifier",
+	"cinnamon-version": [
+		"3.8",
+		"4.0"
+	]
+}

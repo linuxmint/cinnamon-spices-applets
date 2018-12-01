@@ -1,7 +1,0 @@
-{
-    "uuid": "sound-with-apps-volume@koutch", 
-    "name": "Sound with apps volume", 
-    "version": "1.3.1",
-    "icon": "stock_volume", 
-    "description": "Applications' volume, volume 150%, mute button, scrolling track time, custom launcher ..."
-}

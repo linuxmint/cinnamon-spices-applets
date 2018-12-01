@@ -6,8 +6,9 @@
 """
 Description:
 This script generates the vpnLookOut@claudiux.pol file from the contents
-of the metadata.json, settings-schema.json, and applet.js files,
-which are supposedly well-formed.
+of the metadata.json file, and settings-schema.json and applet.js files
+which are in version sub-directories (2.8, 3.8 and so on); all these
+files are supposedly well-formed.
 """
 from os import popen
 from os.path import *
@@ -16,14 +17,14 @@ from time import strftime
 applet_name = "vpnLookOut@claudiux"
 author_mail = "Claudiux <claude.clerc@gmail.com>"
 
+subdirs = ['2.8', '3.8'] ### Adapt it to development !!! ###
+
 home_path = expanduser("~")
 share_path = home_path + "/.local/share"
 applet_path = share_path + "/cinnamon/applets/" + applet_name
 
 pot_path = applet_path + "/po/" + applet_name + ".pot"
 metadata_json = applet_path + "/metadata.json"
-settings_schema_json = applet_path + "/settings-schema.json"
-applet_js = applet_path + "/applet.js"
 
 pot_file = open(pot_path, 'wt')
 
@@ -34,15 +35,15 @@ mj_file.close()
 
 metadata = eval("""\n""".join(lines).replace("true", "True").replace("false","False"))
 version = metadata["version"]
-applet_version = input("Version of %s ? (default: %s)" % (applet_name, version))
+applet_version = input("Version of %s (default: %s)? " % (applet_name, version))
 if applet_version.strip()=="":
     applet_version = version
 
 
 # Intro:
 pot_file.write(r'''# %s Applet POT File.
-# Copyright (C) 2017 %s
-# This file is distributed under the same license as the cinnamon package.
+# Copyright (C) 2017-2018 %s
+# This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR %s, 2017.
 #
 #, fuzzy
@@ -61,6 +62,13 @@ msgstr ""
 
 ''' % (applet_name, author_mail, author_mail, applet_name, applet_version, author_mail, strftime("%Y-%m-%d %H:%M%z")) )
 
+def isfloat(s):
+    try:
+        float(s)
+    except ValueError:
+        return False
+    return True
+# // End of isfloat
 
 ids = []
 
@@ -76,67 +84,70 @@ for line in lines:
         if not l in ids:
             ids.append(l)
             pot_file.write(r'#: metadata.json:'+str(i)+'\n')
-            pot_file.write('msgid '+ l + '\n')
+            pot_file.write(r'msgid '+ l + '\n')
             pot_file.write('msgstr ""\n\n')
 
 pot_file.flush()
 
-# settings-schema.json file:
+for subdir in subdirs:
+    settings_schema_json = applet_path + '/' + subdir + "/settings-schema.json"
+    applet_js = applet_path  + '/' + subdir + "/applet.js"
 
-sc_file = open(settings_schema_json, 'rt')
-lines = sc_file.readlines()
-sc_file.close()
+    # settings-schema.json file:
+
+    sc_file = open(settings_schema_json, 'rt')
+    lines = sc_file.readlines()
+    sc_file.close()
 
 
-i=0
-while i < len(lines):
-    line = lines[i]
-    i+=1
-    li=line.strip()
-    if li.startswith('"description"') or li.startswith('"tooltip"') or li.startswith('"units"') or li.startswith('"title"'):
-        #print(li)
-        l = li.split(":",1)[1].strip()
-        l = l[:l.rfind('"')+1]
-        if not l in ids:
-            ids.append(l)
-            pot_file.write(r'#: settings-schema.json:'+str(i)+'\n')
-            pot_file.write('msgid '+ l + '\n')
-            pot_file.write('msgstr ""\n\n')
-    elif li.startswith('"options"'):
-        while lines[i].strip().startswith('"'):
-            li = lines[i].strip()
-            i+=1
-            l = li.split(":",1)[0].strip()
+    i=0
+    while i < len(lines):
+        line = lines[i]
+        i+=1
+        li=line.strip()
+        if li.startswith('"description"') or li.startswith('"tooltip"') or li.startswith('"units"') or li.startswith('"title"'):
+            l = li.split(":",1)[1].strip()
             l = l[:l.rfind('"')+1]
             if not l in ids:
                 ids.append(l)
-                pot_file.write(r'#: settings-schema.json:'+str(i)+'\n')
-                pot_file.write('msgid '+ l + '\n')
+                pot_file.write(r'#: ' + subdir + '/settings-schema.json:'+str(i)+'\n')
+                pot_file.write(r'msgid '+ l + '\n')
                 pot_file.write('msgstr ""\n\n')
+        elif li.startswith('"options"'):
+            while lines[i].strip().startswith('"'):
+                li = lines[i].strip()
+                i+=1
+                l = li.split(":",1)[0].strip()
+                l = l[:l.rfind('"')+1]
+                if not l in ids and not isfloat(l[1:-1]):
+                    ids.append(l)
+                    pot_file.write(r'#: ' + subdir + '/settings-schema.json:'+str(i)+'\n')
+                    pot_file.write(r'msgid '+ l + '\n')
+                    pot_file.write('msgstr ""\n\n')
 
-pot_file.flush()
+    pot_file.flush()
 
-# applet.js file
+    # applet.js file
 
-ap_file = open(applet_js, 'rt')
-lines = ap_file.readlines()
-ap_file.close()
+    ap_file = open(applet_js, 'rt')
+    lines = ap_file.readlines()
+    ap_file.close()
 
-i=0
-while i < len(lines):
-    line = lines[i].strip()
-    i+=1
-    while line.count('_("')>0:
-        debut = line.index('_("') + 2
-        fin = line.find('")', debut) + 1
-        l = line[debut:fin]
-        if not l in ids:
-            ids.append(l)
-            pot_file.write(r'#: applet.js:'+str(i)+'\n')
-            pot_file.write('msgid '+ l + '\n')
-            pot_file.write('msgstr ""\n\n')
-        line = line[fin:]
-  
+    i=0
+    while i < len(lines):
+        line = lines[i].strip()
+        i+=1
+        while line.count('_("')>0:
+            debut = line.index('_("') + 2
+            fin = line.find('")', debut) + 1
+            l = line[debut:fin]
+            if not l in ids:
+                ids.append(l)
+                pot_file.write(r'#: ' + subdir + r'/applet.js:'+str(i)+'\n')
+                pot_file.write(r'msgid '+ l + '\n')
+                pot_file.write('msgstr ""\n\n')
+            line = line[fin:]
+
 pot_file.close()
 
 if exists(pot_path):
@@ -145,6 +156,6 @@ if exists(pot_path):
         poedit_it = input("Do you want to run poedit with this file? (Y/n)")
         if poedit_it.lower() in ["y", "yes", "o", "oui", ""]:
             popen("/usr/bin/poedit %s" % pot_path)
-    
+
 else:
     print("Something wrong append ! %s does'n exist." % pot_path)

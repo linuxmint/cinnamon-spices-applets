@@ -7,58 +7,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2018-04-09 19:04+0200\n"
-"PO-Revision-Date: 2018-04-10 17:06+0200\n"
+"POT-Creation-Date: 2017-12-02 19:59+0100\n"
+"PO-Revision-Date: 2018-11-21 18:30+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
+"Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: da\n"
 
-#: metadata.json:2
+#: metadata.json:4
+msgid "VPN Look-Out Applet"
+msgstr "VPN Look-Out"
+
+#: metadata.json:7
 msgid ""
 "A Cinnamon applet that watches over the VPN link, displays its status, "
 "allows to connect at start-up to the last VPN used, allows to reconnect the "
-"VPN link if it incidentally drops, and can stop or restart Transmission "
+"VPN link if it incidentally drops, and can stop or restart VPN-related apps "
 "according to the state of the VPN."
 msgstr ""
 "Overvåger VPN-forbindelsen, viser dens status, gør det muligt at oprette "
 "forbindelse ved opstart til den sidst anvendte VPN, giver mulighed for at "
 "genoprette VPN-forbindelsen, hvis den afbrydes, og kan stoppe eller "
-"genstarte Transmission i henhold til VPN'ens status."
+"genstarte VPN-relaterede programmer i henhold til VPN'ens status."
 
-#: metadata.json:7
-msgid "VPN Look-Out Applet"
-msgstr "VPN Look-Out"
-
-#: settings-schema.json:7
+#: 2.8/settings-schema.json:7
 msgid "Notifications"
 msgstr "Påmindelser"
 
-#: settings-schema.json:12
+#: 2.8/settings-schema.json:12
 msgid "VPN"
 msgstr "VPN"
 
-#: settings-schema.json:22
+#: 2.8/settings-schema.json:17
+msgid "Keyboard shortcuts"
+msgstr "Tastaturgenveje"
+
+#: 2.8/settings-schema.json:27
 msgid "Display"
 msgstr "Visning"
 
-#: settings-schema.json:27
+#: 2.8/settings-schema.json:32
 msgid "Sound Alert"
 msgstr "Lydalarm"
 
-#: settings-schema.json:33
+#: 2.8/settings-schema.json:38
 msgid "Transmission"
 msgstr "Transmission"
 
-#: settings-schema.json:41
+#: 2.8/settings-schema.json:44
+msgid "Shortcuts"
+msgstr "Genveje"
+
+#: 2.8/settings-schema.json:52
 msgid "VPN Network Interface"
 msgstr "VPN-netværksgrænseflade"
 
-#: settings-schema.json:42
+#: 2.8/settings-schema.json:53
 msgid ""
 "You should be able to leave this field empty. This applet will try to detect "
 "this."
@@ -66,11 +74,11 @@ msgstr ""
 "Det burde være muligt at lade feltet være tomt. Programmet vil forsøge at "
 "registrere det."
 
-#: settings-schema.json:47
+#: 2.8/settings-schema.json:58
 msgid "VPN Name"
 msgstr "VPN'ens navn"
 
-#: settings-schema.json:48
+#: 2.8/settings-schema.json:59
 msgid ""
 "This information is automatically changed when connecting to a VPN.\n"
 "It therefore contains the name of the last VPN to which you connected."
@@ -78,11 +86,11 @@ msgstr ""
 "Denne information ændres automatisk, når der forbindes til en VPN.\n"
 "Det indeholder derfor navnet på den VPN, du sidst var forbundet til."
 
-#: settings-schema.json:54
+#: 2.8/settings-schema.json:65
 msgid "Connect to VPN as this applet starts."
 msgstr "Forbind til VPN når programmet starter."
 
-#: settings-schema.json:55
+#: 2.8/settings-schema.json:66
 msgid ""
 "Checking this allows this applet to try to connect to the last VPN at start-"
 "up."
@@ -90,11 +98,11 @@ msgstr ""
 "Aktiveres denne, vil programmet forsøge at forbinde til den sidste VPN under "
 "opstart."
 
-#: settings-schema.json:61
+#: 2.8/settings-schema.json:72
 msgid "Try to reconnect to VPN when it shuts down incidentally."
 msgstr "Prøv at forbinde til VPN'en, hvis den afbrydes uventet."
 
-#: settings-schema.json:62
+#: 2.8/settings-schema.json:73
 msgid ""
 "Checking this allows this applet to try to reconnect to VPN when it shuts "
 "down incidentally."
@@ -102,15 +110,15 @@ msgstr ""
 "Aktiveres denne, vil programmet prøve at forbinde til VPN'en, hvis den "
 "afbrydes uventet."
 
-#: settings-schema.json:70
+#: 2.8/settings-schema.json:81
 msgid "seconds"
 msgstr "sekunder"
 
-#: settings-schema.json:71
+#: 2.8/settings-schema.json:82
 msgid "Refresh Interval for Display:"
 msgstr "Opdateringsinterval for visning:"
 
-#: settings-schema.json:72
+#: 2.8/settings-schema.json:83
 msgid ""
 "Increase or decrease this spinner value to change the refresh interval - use "
 "a slow refresh (ie high value) if you have a slow machine."
@@ -119,19 +127,19 @@ msgstr ""
 "Anvend en langsom opdatering (dvs. høj værdi), hvis du har en langsom "
 "maskine."
 
-#: settings-schema.json:79
+#: 2.8/settings-schema.json:90
 msgid "Classic - Icon and Text"
 msgstr "Klassisk - Ikon og tekst"
 
-#: settings-schema.json:80
+#: 2.8/settings-schema.json:91
 msgid "Compact - Icon Only"
 msgstr "Kompakt - Kun ikon"
 
-#: settings-schema.json:82
+#: 2.8/settings-schema.json:93
 msgid "Type of Display"
 msgstr "Visningstype"
 
-#: settings-schema.json:83
+#: 2.8/settings-schema.json:94
 msgid ""
 "This feature offers the Classic (default) display with icon and text, and "
 "compact display (Icon Only)."
@@ -139,31 +147,31 @@ msgstr ""
 "Denne funktion tillader valg mellem klassisk (standard) visning med ikon og "
 "tekst og kompakt visning (kun ikon)."
 
-#: settings-schema.json:89
+#: 2.8/settings-schema.json:100
 msgid "Emit a sound alert when VPN shuts down."
 msgstr "Udsend en lyd, når VPN'en lukker."
 
-#: settings-schema.json:90
+#: 2.8/settings-schema.json:101
 msgid ""
 "Checking this allows this applet to emit a sound alert when VPN shuts down."
 msgstr "Aktiveres denne, vil der blive udsendt en lyd, når VPN'en lukker."
 
-#: settings-schema.json:96
+#: 2.8/settings-schema.json:107
 msgid "Emit this sound alert when this Applet starts, if VPN is down."
 msgstr "Udsend denne lyd når programmet starter, hvis VPN'en er nede."
 
-#: settings-schema.json:97
+#: 2.8/settings-schema.json:108
 msgid ""
 "Check this if you want to emit this sound alert when this Applet starts, if "
 "VPN is down."
 msgstr ""
 "Aktiveres denne, udsendes en lyd når programmet starter, og VPN'en er nede."
 
-#: settings-schema.json:104
+#: 2.8/settings-schema.json:115
 msgid "Shut down properly Transmission as soon as VPN falls."
 msgstr "Luk Transmission, så snart VPN'en falder."
 
-#: settings-schema.json:105
+#: 2.8/settings-schema.json:116
 msgid ""
 "Checking this allows this applet to shut down Transmission (if it's running) "
 "as soon as VPN falls."
@@ -171,11 +179,11 @@ msgstr ""
 "Aktiveres denne, lukkes Transmission (hvis den kører), så snart VPN'en "
 "falder."
 
-#: settings-schema.json:111
+#: 2.8/settings-schema.json:122
 msgid "Try to restart Transmission as soon as VPN restarts."
 msgstr "Prøv at genstarte Transmission, så snart VPN'en genstarter."
 
-#: settings-schema.json:112
+#: 2.8/settings-schema.json:123
 msgid ""
 "Checking this allows this applet to restart Transmission (if it was stopped "
 "by this applet) as soon as VPN restarts."
@@ -183,11 +191,13 @@ msgstr ""
 "Aktiveres denne, genstartes Transmission (hvis den blev stoppet af dette "
 "program), så snart VPN'en genstarter."
 
-#: applet.js:72
-msgid "Ok"
-msgstr "OK"
+#: 2.8/settings-schema.json:127
+msgid "Set the keybinding here to activate/deactivate the last used VPN."
+msgstr ""
+"Angiv tastegenvejene til aktivering/deaktivering af den senest anvendte VPN "
+"her."
 
-#: applet.js:222
+#: 2.8/applet.js:214
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features including notifications and audible alerts."
@@ -195,70 +205,226 @@ msgstr ""
 "Det lader til, du mangler nogle af de programmet, som kræves for at alle "
 "funktioner, inkl. påmindelser og lydalarmer, virker."
 
-#: applet.js:222
+#: 2.8/applet.js:214
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Udfør kommandoerne i den nyligt åbnede terminal:"
 
-#: applet.js:223
+#: 2.8/applet.js:215
 msgid "Some dependencies are not installed!"
 msgstr "Nogle afhængigheder er ikke installerede!"
 
-#: applet.js:248
+#: 2.8/applet.js:241
 msgid "Waiting"
 msgstr "Venter"
 
-#: applet.js:508
+#: 2.8/applet.js:594
 msgid "Waiting for VPN interface information"
 msgstr "Venter på information om VPN-grænsefladen"
 
-#: applet.js:538
+#: 2.8/applet.js:624
 msgid "Connection ON/OFF"
 msgstr "Forbindelse TIL/FRA"
 
-#: applet.js:551
+#: 2.8/applet.js:637
 msgid "Help..."
-msgstr "Hjælp ..."
+msgstr "Hjælp …"
 
-#: applet.js:583
+#: 2.8/applet.js:669
 msgid "Network Settings"
 msgstr "Netværksindstillinger"
 
-#: applet.js:584
+#: 2.8/applet.js:670
 msgid "Connection Info"
 msgstr "Information om forbindelse"
 
-#: applet.js:587
+#: 2.8/applet.js:673
 msgid "Network Connections"
 msgstr "Netværksforbindelser"
 
-#: applet.js:630
+#: 2.8/applet.js:715
 msgid "Connections"
 msgstr "Forbindelser"
 
-#: applet.js:688
+#: 2.8/applet.js:771
 msgid "Click to disconnect from VPN"
 msgstr "Klik for at afbryde forbindelsen til VPN"
 
-#: applet.js:710
+#: 2.8/applet.js:793
 msgid "Connected"
 msgstr "Tilsluttet"
 
-#: applet.js:717
+#: 2.8/applet.js:800
 msgid "Disconnected"
 msgstr "Afbrudt"
 
-#: applet.js:719
+#: 2.8/applet.js:802
 msgid "Click to connect to VPN"
 msgstr "Klik for at forbinde til VPN"
 
-#: applet.js:748
+#: 2.8/applet.js:832
 msgid "VPN:"
 msgstr "VPN:"
 
-#: applet.js:776
+#: 2.8/applet.js:860
 msgid "is fully functional."
 msgstr "fungerer fuldt ud."
 
-#: applet.js:777
+#: 2.8/applet.js:861
 msgid "All dependencies are installed"
 msgstr "Alle afhængigheder er installerede"
+
+#: 3.8/settings-schema.json:12
+msgid "VPN-related Apps Manager"
+msgstr "Håndtering af VPN-relaterede programmer"
+
+#: 3.8/settings-schema.json:76
+msgid "Settings"
+msgstr "Indstillinger"
+
+#: 3.8/settings-schema.json:83
+msgid "Managed Apps"
+msgstr "Håndterede programmer"
+
+#: 3.8/settings-schema.json:90
+msgid "Activity Logs"
+msgstr "Aktivitetslogge"
+
+#: 3.8/settings-schema.json:130
+msgid "Refresh interval:"
+msgstr "Opdateringsinterval:"
+
+#: 3.8/settings-schema.json:131
+msgid ""
+"Time interval, in seconds, between two verifications of VPN link status. A "
+"low value increases security but causes more activity. Choose a value that "
+"is greater as your computer is slow."
+msgstr ""
+"Tidsinterval (i sekunder) mellem to bekræftelser af VPN-forbindelsens "
+"status. En lav værdi øger sikkerheden, men medfører mere aktivitet. Vælg en "
+"højere værdi, hvis din computer er langsom."
+
+#: 3.8/settings-schema.json:147
+msgid "Emit an audible alert when VPN shuts down."
+msgstr "Udsend en lyd, når VPN'en lukker."
+
+#: 3.8/settings-schema.json:148
+msgid ""
+"Checking this allows this applet to emit an audible alert when VPN shuts "
+"down."
+msgstr "Aktiveres denne, vil der blive udsendt en lyd, når VPN'en lukker."
+
+#: 3.8/settings-schema.json:154
+msgid "Emit this audible alert when this Applet starts, if VPN is down."
+msgstr "Udsend denne lyd, når programmet starter, hvis VPN'en er nede."
+
+#: 3.8/settings-schema.json:155
+msgid ""
+"Check this if you want to emit this audible alert when this Applet starts, "
+"if VPN is down."
+msgstr ""
+"Aktiveres denne, udsendes en lyd når programmet starter, og VPN'en er nede."
+
+#: 3.8/settings-schema.json:167
+msgid "Manage VPN-related Apps"
+msgstr "Håndtér VPN-relaterede programmer"
+
+#: 3.8/settings-schema.json:168
+msgid ""
+"This option allows this applet to manage the VPN-related applications you "
+"listed above."
+msgstr ""
+"Denne mulighed tillader, at dette panelprogram kan håndtere de ovenfor viste "
+"VPN-relaterede programmer."
+
+#: 3.8/settings-schema.json:172
+msgid "Managed applications"
+msgstr "Håndterede programmer"
+
+#: 3.8/settings-schema.json:173
+msgid ""
+"Name: What you want.\n"
+"Command: The command to run the application, without its path.\n"
+"Restart: Set to TRUE if you want to restart this application as soon as the "
+"VPN link becomes active again.\n"
+"Shutdown: Set to TRUE if you want to close the application as soon as the "
+"VPN link is stopped.\n"
+"VPN only: Set to TRUE if you want to quickly stop this application if it is "
+"started while the VPN is idle."
+msgstr ""
+"Navn: Dit eget valg.\n"
+"Kommando: Kommandoen til at køre programmet (uden dets sti).\n"
+"Genstart: Sæt til SAND, hvis du vil genstarte programmet, så snart VPN-"
+"forbindelsen bliver aktiv igen.\n"
+"Sluk: Sæt til SAND, hvis du vil lukke programmet, så snart VPN-forbindelsen "
+"afbrydes.\n"
+"Kun VPN: Sæt til SAND, hvis du hurtigt vil stoppe programmet, hvis det "
+"startes, mens VPN-forbindelsen er inaktiv."
+
+#: 3.8/settings-schema.json:177
+msgid "Name"
+msgstr "Navn "
+
+#: 3.8/settings-schema.json:182
+msgid "Command"
+msgstr "Kommando"
+
+#: 3.8/settings-schema.json:187
+msgid "Restart"
+msgstr "Genstart"
+
+#: 3.8/settings-schema.json:192
+msgid "Shut down"
+msgstr "Sluk"
+
+#: 3.8/settings-schema.json:197
+msgid "VPN only"
+msgstr "Kun VPN"
+
+#: 3.8/settings-schema.json:216
+msgid "Log the VPN status changes and the VPN-related Apps status changes"
+msgstr "Log ændringer i VPN'ens og de VPN-relaterede programmers status"
+
+#: 3.8/settings-schema.json:217
+msgid ""
+"This option allows this applet to log the VPN status changes and the VPN-"
+"related applications status changes.\n"
+"You will can display the log file to make diagnostics."
+msgstr ""
+"Denne mulighed tillader, at ændringer i VPN'ens og de VPN-relaterede "
+"programmers status logges.\n"
+"Du kan vise logfilen med henblik på diagnosticering."
+
+#: 3.8/settings-schema.json:240
+msgid "Lifetime (days)"
+msgstr "Levetid (dage)"
+
+#: 3.8/settings-schema.json:241
+msgid "Lifetime of a record in the log file, in days."
+msgstr "Levetiden (i dage) af en post i logfilen."
+
+#: 3.8/applet.js:311
+msgid "TRUE"
+msgstr "SAND"
+
+#: 3.8/applet.js:312
+msgid "FALSE"
+msgstr "FALSK"
+
+#: 3.8/applet.js:890
+msgid "View Activity Logs"
+msgstr "Vis aktivitetsloggen"
+
+#: 3.8/applet.js:991
+msgid "Started by vpnLookOut: "
+msgstr "Startet af vpnLookOut: "
+
+#: 3.8/applet.js:1017
+msgid "Blocked by vpnLookOut: "
+msgstr "Blokeret af vpnLookOut: "
+
+#: 3.8/applet.js:1061
+msgid "Stopped by vpnLookOut: "
+msgstr "Stoppet af vpnLookOut: "
+
+#~ msgid "Ok"
+#~ msgstr "OK"

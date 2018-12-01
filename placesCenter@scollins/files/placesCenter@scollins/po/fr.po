@@ -7,13 +7,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-08 02:06+0100\n"
-"PO-Revision-Date: 2018-02-08 02:51+0100\n"
+"POT-Creation-Date: 2017-12-19 21:13-0700\n"
+"PO-Revision-Date: 2018-10-27 01:05+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr\n"
@@ -84,7 +84,7 @@ msgstr "Suivre les liens symboliques"
 
 #: search.py:117
 msgid "Search hidden"
-msgstr "Rechercher aussi les fichiers cachés"
+msgstr "Rechercher également les fichiers cachés"
 
 #: search.py:121
 msgid "Use regular expressions"
@@ -112,7 +112,7 @@ msgstr "Recherche interrompue"
 
 #: search.py:215
 msgid "Searching: "
-msgstr "Recherche :"
+msgstr "Recherche : "
 
 #: search.py:220
 msgid "Error: insufficient permissions to read folder "
@@ -165,19 +165,19 @@ msgstr "Section Système"
 
 #. settings-schema.json->panelIcon->description
 msgid "Panel icon"
-msgstr "Icône affichée sur le tableau de bord"
+msgstr "Icône sur le tableau de bord"
 
 #. settings-schema.json->panelIcon->tooltip
 msgid "Accepts icon name or direct path (supports symbolic icons)"
-msgstr "Accepte le nom d'une icône ou un chemin direct (l'icône peut être symbolique)"
+msgstr "Accepte le nom d'une icône ou le chemin complet vers celle-ci (l'icône peut être symbolique)"
 
 #. settings-schema.json->panelText->description
 msgid "Panel text"
-msgstr "Texte affiché sur le tableau de bord"
+msgstr "Texte sur le tableau de bord"
 
 #. settings-schema.json->keyOpen->description
 msgid "Menu shortcut key"
-msgstr "Raccourci-clavier du menu"
+msgstr "Raccourci-clavier pour afficher le menu"
 
 #. settings-schema.json->iconSize->units
 msgid "px"
@@ -207,7 +207,11 @@ msgstr "Emplacements personnels"
 #. settings-schema.json->userCustomPlaces->tooltip
 #. settings-schema.json->systemCustomPlaces->tooltip
 msgid "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
-msgstr "Liste des chemins vers des fichiers à inclure. Les entrées peuvent être séparées par une virgule (,) ou par une nouvelle ligne. Vous pouvez définir le nom à afficher en ajoutant :le_nom_désiré après l'emplacement. Vous pouvez également définir un nom d'icône en ajoutant :nom_de_l_icône après le nom personnalisé."
+msgstr ""
+"Liste des emplacements des fichiers ou dossiers à inclure. Les entrées peuvent être séparées par une virgule (,) ou par un retour à la ligne. La structure d'une entrée est composée de trois parties séparées par un deux-points (:), les deux dernières parties étant optionnelles :\n"
+"Par exemple :\n"
+"/usr/share/icons/gnome/scalable:Icônes système:folder-symbolic\n"
+"pour accéder aux icônes du système."
 
 #. settings-schema.json->showTrash->description
 msgid "Show trash"
@@ -235,7 +239,7 @@ msgstr "Montrer le Système de fichiers"
 
 #. settings-schema.json->showVolumes->description
 msgid "Show volumes"
-msgstr "Montrer les volumes"
+msgstr "Montrer les Disques"
 
 #. settings-schema.json->onlyShowMounted->description
 msgid "Only show mounted drives"
@@ -251,19 +255,19 @@ msgstr "Montrer les Documents Récents"
 
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
-msgstr "Quantité à montrer"
+msgstr "Nombre de documents récents à afficher"
 
 #. metadata.json->name
 msgid "Places Center"
-msgstr "Accès rapides"
+msgstr "Accès direct (Places Center)"
 
 #. metadata.json->description
 msgid "Provides an easy-to-read layout to access your places"
-msgstr "Fournit un accès rapide et pratique à vos dossiers et documents favoris ou récents"
+msgstr "Procure une interface pratique pour accéder rapidement à vos dossiers et documents indispensables"
 
 #. metadata.json->comments
 msgid "Places Center is a feature-rich, cross-platform Cinnamon applet that provides easy access to all of your most-used places. Feel free to contribute by submitting pull requests, bug reports and feature requests to my github repo."
-msgstr "Places Center est une applet Cinnamon, multi-plateforme et riche en fonctionnalités, qui permet d'accéder rapidement et facilement à vos emplacements les plus utilisés. N'hésitez pas à contribuer sur mon dépôt Github en proposant vos modifications, en signalant des bugs ou en demandant de nouvelles fonctionnalités."
+msgstr "Places Center est une applet Cinnamon multi-plateforme et riche en fonctionnalités qui permet d'accéder facilement à tous vos emplacements préférés. N'hésitez pas à contribuer en effectuant des rapports de bugs ou en demandant ou proposant de nouvelles fonctionnalités sur mon compte github."
 
 #. metadata.json->contributors
 msgid "Stephen Collins - Author"
@@ -271,4 +275,4 @@ msgstr "Stephen Collins - Auteur"
 
 #. metadata.json->contributors
 msgid "kehugter - Added configurability to middle click"
-msgstr "kehugter - Ajout de la configuration du clic central"
+msgstr "kehugter - Ajout de la configurabilité du clic central"

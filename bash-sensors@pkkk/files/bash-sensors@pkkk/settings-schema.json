@@ -6,11 +6,11 @@
 	"refreshInterval": {
 		"type": "spinbutton",
 		"default": 10,
-		"min": 1,
+		"min": 0,
 		"max": 60,
 		"step": 1,
 		"units": "seconds",
-		"description": "Refresh interval"
+		"description": "Refresh interval [0 for no refresh]"
 	},
 	"script1": {
 		"type": "entry",
@@ -23,13 +23,23 @@
 		"default": true,
 		"description": "Two-line mode (command 2 enabled)"
 	},
-
 	"script2": {
 		"type": "entry",
 		"default": "echo 'configuration required'",
 		"description": "Command 2",
 		"tooltip": "second line of output (optional)",
         "dependency": "enableScript2"
+	},
+	"dynamicTooltip": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Dynamic tooltip (use output of tooltip command as tooltip)"
+	},
+	"tooltipScript": {
+		"type": "entry",
+		"default": "Bash sensors!",
+		"description": "Tooltip command or static tooltip text",
+		"tooltip": "tooltip (static or dynamic)"
 	},
 	"menuScript": {
 		"type": "entry",

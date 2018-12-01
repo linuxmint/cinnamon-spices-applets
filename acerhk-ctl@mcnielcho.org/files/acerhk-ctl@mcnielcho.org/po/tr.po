@@ -1,0 +1,52 @@
+# Turkish translations for acerhk-ctl package
+# acerhk-ctl paketi için Türkçe çeviriler.
+# Copyright (C) 2018 THE acerhk-ctl'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the acerhk-ctl package.
+# Muhammet Kara <muhammetk@gnome.org>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: acerhk-ctl\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 21:34+0800\n"
+"PO-Revision-Date: 2018-11-01 21:52+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"Language-Team: Türkçe <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: applet.js:54
+msgid "Acer Hardware Control"
+msgstr "Acer Donanım Denetimi"
+
+#: applet.js:62
+msgid "Activate Wireless Hardware"
+msgstr "Kablosuz Donanımını Aktifleştir"
+
+#: applet.js:63
+msgid "Deactivate Wireless Hardware"
+msgstr "Kablosuz Donanımını Pasifleştir"
+
+#: applet.js:65
+msgid "Activate Bluetooth Hardware"
+msgstr "Bluetooth Donanımını Aktifleştir"
+
+#: applet.js:66
+msgid "Deactivate Bluetooth Hardware"
+msgstr "Bluetooth Donanımını Pasifleştir"
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->description
+msgid ""
+"Provides software interface to Acer hardware keys.  Requires installation of "
+"acerhk.ko."
+msgstr ""
+"Acer donanım tuşlarına yazılım arayüzü sağlar.  acerhk.ko'nun kurulumunu "
+"gerektirir."
+
+#. acerhk-ctl@mcnielcho.org->metadata.json->name
+msgid "AcerHK Control"
+msgstr "AcerHK Denetimi"

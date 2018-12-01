@@ -315,7 +315,7 @@ MyApplet.prototype = {
 
 		this._addDefaultMenuItems();
 
-		for (i in repos) {
+		for (let i in repos) {
 			let name = repos[i].name;
 			let open_issues_count = repos[i].open_issues_count;
 

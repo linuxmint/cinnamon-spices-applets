@@ -1,0 +1,130 @@
+{
+    "layout": {
+        "type": "layout",
+        "pages": ["Alerts", "VPNpolicy", "Shortcut"],
+        "Alerts": {
+            "type": "page",
+            "title": "Notifications",
+            "sections": ["section2", "section3"]
+        },
+        "VPNpolicy": {
+            "type": "page",
+            "title": "VPN",
+            "sections": ["section1", "section4"]
+        },
+        "Shortcut": {
+            "type": "page",
+            "title": "Keyboard shortcuts",
+            "sections": ["section5"]
+        },
+        "section1": {
+            "type": "section",
+            "title": "VPN",
+            "keys": ["vpnInterface", "vpnName", "connectAtStartup", "reconnect"]
+        },
+        "section2": {
+            "type": "section",
+            "title": "Display",
+            "keys": ["refreshInterval-spinner", "displayType"]
+        },
+        "section3": {
+            "type": "section",
+            "title": "Sound Alert",
+            "keys": ["useSoundAlert", "useSoundAlertAtBeginning"]
+        },
+
+        "section4": {
+            "type": "section",
+            "title": "Transmission",
+            "keys": ["stopTransmission", "restartTransmission"]
+        },
+
+        "section5": {
+            "type": "section",
+            "title": "Shortcuts",
+            "keys": ["keybinding"]
+        }
+    },
+
+    "vpnInterface": {
+        "type": "entry",
+        "default": "",
+        "description": "VPN Network Interface",
+        "tooltip": "You should be able to leave this field empty. This applet will try to detect this."
+    },
+    "vpnName": {
+        "type": "entry",
+        "default": "",
+        "description": "VPN Name",
+        "tooltip": "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
+    },
+    "connectAtStartup": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Connect to VPN as this applet starts.",
+        "tooltip": "Checking this allows this applet to try to connect to the last VPN at start-up."
+    },
+    "reconnect": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Try to reconnect to VPN when it shuts down incidentally.",
+        "tooltip": "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
+    },
+    "refreshInterval-spinner": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 1,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval for Display:",
+        "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh (ie high value) if you have a slow machine."
+    },
+
+    "displayType" : {
+        "type": "combobox",
+        "default" : "classic",
+        "options" : {
+            "Classic - Icon and Text" : "classic",
+            "Compact - Icon Only" : "compact"
+         },
+        "description" : "Type of Display",
+        "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+    },
+    "useSoundAlert": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Emit a sound alert when VPN shuts down.",
+        "tooltip": "Checking this allows this applet to emit a sound alert when VPN shuts down."
+    },
+    "useSoundAlertAtBeginning": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Emit this sound alert when this Applet starts, if VPN is down.",
+        "tooltip": "Check this if you want to emit this sound alert when this Applet starts, if VPN is down.",
+        "dependency": "useSoundAlert"
+    },
+    "stopTransmission": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Shut down properly Transmission as soon as VPN falls.",
+        "tooltip": "Checking this allows this applet to shut down Transmission (if it's running) as soon as VPN falls."
+    },
+    "restartTransmission": {
+        "type": "checkbox",
+        "indent": true,
+        "default": false,
+        "description": "Try to restart Transmission as soon as VPN restarts.",
+        "tooltip": "Checking this allows this applet to restart Transmission (if it was stopped by this applet) as soon as VPN restarts."
+    },
+    "keybinding" : {
+        "type" : "keybinding",
+        "description" : "Set the keybinding here to activate/deactivate the last used VPN.",
+        "default" : "<Super>v"
+    }
+}

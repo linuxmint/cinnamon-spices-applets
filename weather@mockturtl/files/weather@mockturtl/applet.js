@@ -179,7 +179,7 @@ const WEATHER_CONV_ATM_IN_INHG = 33.421054e-3
 
 // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
 const _httpSession = new Soup.SessionAsync()
-//Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault())
+Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault())
 
 
 //----------------------------------------------------------------------

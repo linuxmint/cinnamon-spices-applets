@@ -8,14 +8,14 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 
 const uuid = "website-notifier@cardsurf";
-let AppletDirectory, AppletGui, AppletConstants, ShellUtils;
+let AppletDirectory, AppletGui, AppletConstants, ShellUtils, Dates;
 if (typeof require !== 'undefined') {
     AppletGui = require('./appletGui');
     AppletConstants = require('./appletConstants');
     ShellUtils = require('./shellUtils');
     Dates = require('./dates');
 } else {
-    const AppletDirectory = imports.ui.appletManager.applets[uuid];
+    AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletGui = AppletDirectory.appletGui;
     AppletConstants = AppletDirectory.appletConstants;
     ShellUtils = AppletDirectory.shellUtils;

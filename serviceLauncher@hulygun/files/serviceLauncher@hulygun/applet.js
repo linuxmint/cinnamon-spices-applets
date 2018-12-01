@@ -80,7 +80,7 @@ function checkService(service) {
     let [res, pid, in_fd, out_fd, err_fd] =
         GLib.spawn_async_with_pipes(
             null, ["pgrep", service], null, GLib.SpawnFlags.SEARCH_PATH, null);
-    out_reader = new Gio.DataInputStream({base_stream: new Gio.UnixInputStream({fd: out_fd})});
+    const out_reader = new Gio.DataInputStream({base_stream: new Gio.UnixInputStream({fd: out_fd})});
     let [out, size] = out_reader.read_line(null);
     var result = false;
     if (out != null) {

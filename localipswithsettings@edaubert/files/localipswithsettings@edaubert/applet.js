@@ -22,11 +22,11 @@ function _(str) {
 // Logging
 // ----------
 function log(message) {
-    global.log(UUID + '#' + log.caller.name + ': ' + message);
+    global.log(UUID + '#' + global.log.caller.name + ': ' + message);
 }
 
 function logError(error) {
-    global.logError(UUID + '#' + logError.caller.name + ': ' + error);
+    global.logError(UUID + '#' + global.logError.caller.name + ': ' + error);
 }
 
 // Applet
@@ -47,17 +47,17 @@ MyApplet.prototype = {
             this.set_applet_tooltip(_("Your local IPs."));
             this.set_applet_label("...");
         } catch (error) {
-            logError(error);
+            global.logError(error);
         }
     },
     log: function (message) {
         if (this.debug) {
-            log(message);
+            global.log(message);
         }
     },
     logError: function (message) {
         if (this.debug) {
-            logError(message);
+            global.logError(message);
         }
     },
     bindProperties: function () {
@@ -138,12 +138,14 @@ MyApplet.prototype = {
     processIps: function (out) {
         const INET_REGEX = new RegExp("[0-9]+: (" + this.inet.replace(/,/g, "|") +") +inet[46]? +(.*)");
 
-        this.log(INET_REGEX);
-
         var ipsSplitted = String(out).split("\n");
-        ips = "";
+        var ips = "";
         let first = true;
-        for (i = 0; i < ipsSplitted.length; i++) {
+
+        for (var i = 0; i < ipsSplitted.length; i++) {
+
+            this.log(ipsSplitted[i] + "\t" + INET_REGEX + "\t" + ipsSplitted[i].match(INET_REGEX));
+
             if (ipsSplitted[i].match(INET_REGEX)) {
                 if (!first) {
                     ips = ips + " - ";
@@ -156,6 +158,7 @@ MyApplet.prototype = {
                 ips = ips + ipsSplitted[i].replace(IP_REGEX, "$1");
             }
         }
+        
         this.log(ips);
 
         ips = String(ips).trim();

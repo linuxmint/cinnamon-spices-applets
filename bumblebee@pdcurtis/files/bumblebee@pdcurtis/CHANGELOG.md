@@ -1,5 +1,9 @@
 ## Changelog for recent versions
 
+### 3.2.5
+
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+
 ### 3.2.4
 
 Fix to allow use with early versions of Cinnamon

@@ -10,28 +10,35 @@ const ModalDialog = imports.ui.modalDialog;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Settings = imports.ui.settings;
 
 
 const Gettext = imports.gettext;
 const _ = Gettext.gettext;
 
-
+const TOGGLE_ITEMS = ['log-out',
+                      'lock-screen',
+                      'suspend',
+                      'hibernate',
+                      'restart',
+                      'shutdown',
+                      'restart-cinnamon'];
 
 function ConfirmDialog(){
     this._init();
 }
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(orientation, panel_height, instance_id) {
+    this._init(orientation, panel_height, instance_id);
 }
 
 MyApplet.prototype = {
 	__proto__: Applet.TextIconApplet.prototype,
 
-	_init: function(orientation) {        
-		Applet.TextIconApplet.prototype._init.call(this, orientation);
+	_init: function(orientation, panel_height, instance_id) {        
+		Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-    		this.ArrayActions = {};
+    	this.ArrayActions = {};
 		this.ArrayActions['lock-screen'] = 'Lock screen';
 		this.ArrayActions['log-out'] = 'Log Out';
 		this.ArrayActions['suspend'] = 'Suspend';
@@ -49,10 +56,10 @@ MyApplet.prototype = {
 		this.ArrayIcons['shutdown'] = 'system-shutdown';
 		this.ArrayIcons['restart-cinnamon'] = 'reload';
 
+        this.settings = new Settings.AppletSettings(this, "shutdown-timer@webum.by", instance_id);
 
-		this.setting = new Gio.Settings({ schema: 'org.cinnamon.applets.shutdown-timer@webum.by'});
-		this.enable_label = this.setting.get_boolean('show-time-on-panel');
-		
+        this.settings.bind("show-time-on-panel", "enable_label", this.set_label);
+
 		this.timerDuration = 0;
     		this.timerStopped = true;
 		this.applet_event = '';
@@ -106,10 +113,10 @@ MyApplet.prototype = {
 
 	create_menu_actions: function() {
 		this.menuActions.removeAll();
-		let items = this.setting.get_string('order').split(',');
-		for (let i=0; i<items.length; i++) {
-			let item = items[i];
-			if (this.setting.get_boolean(item)) {
+
+		for (let i=0; i<TOGGLE_ITEMS.length; i++) {
+			let item = TOGGLE_ITEMS[i];
+			if (this.settings.getValue(item)) {
 				this.menuActions.addAction(_(this.ArrayActions[item]), Lang.bind(this, function(event) {this.doEvent(item);}));
 			}
 		}
@@ -119,17 +126,16 @@ MyApplet.prototype = {
 	createContextMenu: function () {
 		this.MenuSettings.removeAll();
 		let switchButton = new PopupMenu.PopupSwitchMenuItem(_('Show time on panel'));
-		switchButton.setToggleState(this.setting.get_boolean('show-time-on-panel'));
-    		switchButton.connect('toggled', Lang.bind(this, this.set_label));
+		switchButton.setToggleState(this.enable_label);
+    	switchButton.connect('toggled', Lang.bind(this, this.set_label));
 
 		this.MenuSettings.addMenuItem(switchButton);
 		this.MenuSettings.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-		let items = this.setting.get_string('order').split(',');
-		for (let i=0; i<items.length; i++) {
-			let item = items[i];
+		for (let i=0; i<TOGGLE_ITEMS.length; i++) {
+			let item = TOGGLE_ITEMS[i];
 			let switchButton = new PopupMenu.PopupSwitchMenuItem(_(this.ArrayActions[item]));
-			switchButton.setToggleState(this.setting.get_boolean(item));
+			switchButton.setToggleState(this.settings.getValue(item));
     			switchButton.connect('toggled', Lang.bind(this, function(event) {this.switchEvent(item);}));
 			this.MenuSettings.addMenuItem(switchButton);
 		}
@@ -137,8 +143,7 @@ MyApplet.prototype = {
 	},
   
    	set_label: function() {
-		this.setting.set_boolean('show-time-on-panel', !this.setting.get_boolean('show-time-on-panel'));
-		this.enable_label = this.setting.get_boolean('show-time-on-panel');
+        this.enable_label = !this.enable_label;
 		if (!this.enable_label) {this.set_applet_label('');}
 		else {this.set_applet_label(this.timerDuration.toString());}
 	},	
@@ -300,7 +305,7 @@ MyApplet.prototype = {
 //----------------------------------------
 
 	switchEvent: function (item) {
-		this.setting.set_boolean(item, !this.setting.get_boolean(item));
+		this.settings.setValue(item, !this.settings.getValue(item));
 		//this.createContextMenu();
 		this.create_menu_actions();
 	},
@@ -357,7 +362,7 @@ MyApplet.prototype = {
 };
 
 
-function main(metadata, orientation) {  
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panel_height, instance_id) {  
+    let myApplet = new MyApplet(orientation, panel_height, instance_id);
     return myApplet;      
 }

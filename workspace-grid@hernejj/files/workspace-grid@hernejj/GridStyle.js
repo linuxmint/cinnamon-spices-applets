@@ -93,7 +93,7 @@ GridStyle.prototype = {
         this.table = new St.Table({homogeneous: false, reactive: true });
         this.applet.actor.add(this.table);
         
-        btn_height = this.height/this.rows;
+        let btn_height = this.height/this.rows;
         this.button = [];
         for(let r=0; r < this.rows; r++) {
             for(let c=0; c < this.cols; c++) {

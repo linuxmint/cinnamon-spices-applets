@@ -1,5 +1,67 @@
 ## Changelog
 
+### 3.3.1~20181122
+  * Now showing in the tooltip (hovering the icon) the keyboard and mouse shortcuts to connect / disconnect.
+  * "Switch to" (another VPN) events are now registered in the log file.
+  * Update of French, Spanish and Italian translations.
+
+### 3.3.0~20181120
+  * New option in Settings (VPN layout):
+   * "Do not try to reconnect automatically if the VPN has been disconnected by the user"
+   * This option appears only when the option "Try to reconnect to VPN when it shuts down incidentally" is checked.
+
+### 3.2.1~20181115
+  * Improves display and management of Activity Log.
+
+### 3.2.0~20181111
+  * Capability of logging:
+   * the status of the VPN link,
+   * the status of the VPN-related Apps.
+  * New entry in the menu to view the log file.
+  * Settings - New options in the VPN panel to:
+   * set logging on/off,
+   * set the lifetime of a record in the log file.
+
+### 3.1.0~20181107
+  * VPN-related Apps Management:
+   * New `VPN Only` option for each managed app: you can require that an application be shut down quickly if it is started while the VPN is idle.
+  * Improved translations into French, Spanish and Italian.
+
+### 3.0.1
+  * Now compatible with Cinnamon 4.0.
+
+### 3.0.0 (Only for Cinnamon 3.8 and over)
+  * VPN-related Apps Management : You can now manage all applications (for example, torrent clients) that you have registered in the list. (Cf. Settings)
+  * Many changes in code and messages. Please, help me by translating these messages into your language, using poedit and the .pot file.
+
+### 2.5.2
+  * Translations:
+   * Update of vpnLookOut@claudiux.pot
+   * Update of es.po, fr.po, it.po
+
+### 2.5.1
+  * Adds a keyboard shortcut option to enable / disable the last VPN used.
+
+### 2.5.0
+ * Becomes multi-version. For Cinnamon 3.8 (LM 19), the code has been changed to use classes instead of prototypes.
+ * Some scripts have been modified for more efficiency.
+ * Available languages: English, French, Spanish, Italian, Danish, Swedish.
+
+### 2.4.0
+ * Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files.
+
+### 2.3.0
+ * A middle click on the icon of this applet is now a quick way to:
+   * connect to the last VPN used if it is off;
+   * disconnect from the VPN if it is on.
+
+### 2.2.0
+ * Now compatible with Arch Linux.
+ * Improved compatibility with Fedora 27.
+
+### 2.1.0
+ * Now compatible with Fedora 27.
+
 ### 2.0.1
  * Bug fixed : Removes all bindings and disconnects all signals, after installing all dependencies (if any), before to reload this applet.
  * Improved installation of translation files.

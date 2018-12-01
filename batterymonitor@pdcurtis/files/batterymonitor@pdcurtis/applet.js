@@ -139,7 +139,7 @@ MyApplet.prototype = {
             if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.0") <= 0) {
                 this.textEd = "gedit";
             } else {
-                this.textEd = "xed";
+                this.textEd = "xdg-open";
             }
 
             // Check that all Dependencies Met by presence of sox and zenity 
@@ -149,7 +149,7 @@ MyApplet.prototype = {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
-                 Main.criticalNotify("Some Dependencies not Installed", "You appear to be missing some of the programs required for this applet to have all it's facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them.", icon);
+                 Main.criticalNotify("Some Dependencies not Installed", "Both 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them.", icon);
                  this.dependenciesMet = false;
             }
 
@@ -564,5 +564,7 @@ Bug Fix for use with early versions of Cinnamon
  * Revert change on handling empty battery
 ### 1.3.2.2
  * Remove instance of depreciated code giving a harmless warning in .xsession-errors.
+### 1.3.3
+  * Use xdg-open in place of gedit or xed to allow use on more distros
 */
 

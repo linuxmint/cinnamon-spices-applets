@@ -435,7 +435,7 @@ AppMenuButtonRightClickMenu.prototype = {
     let cmd = [
       'bash',
       '-c',
-      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.2/utils.py get_process ' + proc.toString()
+      'python ~/.local/share/cinnamon/applets/IcingTaskManager@json/3.4/utils.py get_process ' + proc.toString()
     ];
     Util.spawn_async(cmd, (stdout) => {
       if (stdout) {
@@ -927,6 +927,12 @@ WindowThumbnail.prototype = {
 
     // Cluter.CrossingEvent will always fire on every child actor of the actor connected to the signal, so we have
     // to filter the bogus child hover events so the hoverpeek effect only occurs once while inside this.actor.
+
+    this.actor.add_style_pseudo_class('selected');
+    this.button.set_opacity(255);
+
+    if (!e) return;
+
     let actorString = e.get_source().toString();
     if (actorString.indexOf('this.actor') > -1
       && (!this.lastEnterActor
@@ -937,9 +943,6 @@ WindowThumbnail.prototype = {
       this._hoverPeek(this.state.settings.peekOpacity);
     }
     this.lastEnterActor = actorString;
-
-    this.actor.add_style_pseudo_class('selected');
-    this.button.set_opacity(255);
   },
 
   handleLeaveEvent: function(){
