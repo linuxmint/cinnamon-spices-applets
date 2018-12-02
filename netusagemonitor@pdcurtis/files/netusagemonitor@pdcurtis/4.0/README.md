@@ -12,9 +12,9 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * For full facilities including use of notifications, audible alerts and statistics the ```gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``` libraries must be installed. They can be installed  by the synaptic package manager or with the terminal command:
             ```sudo apt-get install gir1.2-gtop-2.0 vnstat vnstati zenity sox libsox-fmt-mp3``
    * Cinnamon Version 2.2 or higher ie. It can be used with all supported versions of Mint.
-   * Version 3.2.4 require the NMClient and NetworkManager libraries to be in use as was the case in Mint versions up to 18.3 and most other current distro versions at that time.
-   * Version 3.2.5 will switch to the more recent NM library if the NetworkManager Library is not available.
-   * Version 3.2.6 and higher can only use the new NM libraries when Cinnamon 4.0 or higher is in use to avoid potential segfaults in Cinnamon 4.0. This should support all current Linux Distributions which support Cinnamon 4.0.
+   * Version 3.2.4 requires the NMClient and NetworkManager libraries to be in use as was the case in Mint versions up to 18.3 and most other current distro versions at that time.
+   * The applet will switch to the more recent NM library from the NetworkManager Library under Cinnamon versions up to 3.8.
+   * Only the new NM libraries can be used when Cinnamon 4.0 or higher is in use to avoid potential segfaults in Cinnamon 4.0. This should support all current Linux Distributions which support Cinnamon 4.0.
 
 ## Features:
 
@@ -49,7 +49,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
    * **The Settings Screen allows:**
       + Setting the Update Frequency (1 to 5 seconds)
       + The Resolution of displayed upload and downloads (0 to 2 decimal places)
-      + Change the units for Data Limits and Cumulative Offsets between Mbytes or Gbytes 
+      + Change the units for Data Limits and Cumulative Offsets between Mbytes or Gbytes
       + Setting an interface to use as Default if no other interface is active at start-up - for Wifi hotspots and Mobile Broadband where the connection is manual.
       + Enabling Alerts on the current monitored interface and setting the Data Limit for the current connection on that interface and
            - setting the Alert Level as a percentage of the Data Limit by a slider (duplicated in the left click menu as it is frequently used.
@@ -90,9 +90,9 @@ The author is committed to maintaining and developing the applet. The applet is 
 
 The internal changes required in the applet to allow translations are being implemented but no translations are available at this time. Translations are usually contributed by people fluent in the language and will be very much appreciated. Users please note I am unable to take responsibility for the accuracy of translations!
 
-Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes or from the Cinnamon Team. 
+Although comments and suggestions are always welcome any contributions which are contemplated should follow discussion. Changes can have many unintended consequences and the integrity of the applet is paramount. Unsolicited Pull Requests will never be authorised other than for urgent and critical bug fixes or from the Cinnamon Team.
 
-Thanks are given for the very useful contributions from @collinss and @Odyseus to help harmonise the menus with other applets.
+Thanks are given for the very useful contributions from @collinss and @Odyseus to help harmonise the menus with other applets and @jaszhix for the code selection for the Network manager changes.
 
 ## Manual Installation:
 
@@ -101,11 +101,6 @@ Thanks are given for the very useful contributions from @collinss and @Odyseus t
    * Install the additional programs required.
    * Enable the applet in Cinnamon Settings -> Applets
    * You can also access the Settings Screen from Cinnamon Settings -> Applets
-
-
-### Version information prior to the changes introduced by the new Cinnamon Spices Web site in January 2017
-
-There is a change log in the applet folder called CHANGELOG.md which can also be accessed through the Context (Right Click) menu in the Housekeeping sub-menu. The initial  development was carried out on Github along with my other applets at [github.com/pdcurtis/cinnamon-applets](https://github.com/pdcurtis/cinnamon-applets)
 
 ### Contact
 

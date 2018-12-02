@@ -1,5 +1,11 @@
 ### Changelog covering recent significant changes
 
+## 3.2.7
+  * Add multiversion 2.6 folder
+  * Use ModalDialog.NotifyDialog instead of internal function for 2.6+
+  * Change location of vnstatImage to home folder rather than applet folder.
+  * Tidy us some of text in Notifications and trailing spaces
+
 ## 3.2.6
 
   * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion with folder 4.0
@@ -17,14 +23,14 @@
 ## 3.2.4
 
  * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox.
- * Improved notification when vnstat and vnstati not installed 
+ * Improved notification when vnstat and vnstati not installed
  * Better formatting of CHANGELOG.md
 
 ## 3.2.3
 
  * Add check that GTop library is installed using a try and catch(e) technique
  * Remove duplicate let declarations occurances missed in 3.2.0 which could give difficulties in Cinnamon 3.4
- * Some changes in intialisation to remove CJS warnings 
+ * Some changes in intialisation to remove CJS warnings
 
 ## 3.2.2
 
