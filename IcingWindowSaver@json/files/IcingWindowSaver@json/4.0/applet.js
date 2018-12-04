@@ -1,5 +1,4 @@
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const {MaximizeFlags} = imports.gi.Meta;
 const Gettext = imports.gettext;
@@ -18,111 +17,53 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-const exec = function(command, cb) {
-  let subprocess = new Gio.Subprocess({
-    argv: ['bash', '-c', command],
-    flags: Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_MERGE,
-  });
-  subprocess.init(null);
-  subprocess.communicate_utf8_async(null, null, (obj, res) => {
-    let [success, out] = obj.communicate_utf8_finish(res);
-    if (typeof cb === 'function') {
-      cb(success, out);
-    }
-  });
-};
-
-const notifyDependencies = function(missing) {
-  let icon = new St.Icon({
-    icon_type: St.IconType.FULLCOLOR,
-    icon_size: 24 * global.ui_scale,
-    gicon: new Gio.FileIcon({
-      file: Gio.file_new_for_path(
-        GLib.get_home_dir() + '/.local/share/cinnamon/applets/' + UUID + '/icon.png'
-      )
-    })
-  });
-  let header = _('Dependency missing');
-  let pkg = _('package');
-  if (missing.length > 1) {
-    header = _('Dependencies missing');
-    pkg = _('packages');
-  }
-  Main.criticalNotify(
-    header,
-    _('Please install the ') + missing.join(', ') + ' ' + pkg + _(' to use Window Position Saver.'),
-    icon
-  );
-}
-
-const checkDependencies = function(cb) {
-  let missing = [];
-  exec('which wmctrl', (success, stdout) => {
-    if (!stdout) missing.push('wmctrl');
-    exec('which xwininfo', (success, stdout) => {
-      if (!stdout) missing.push('xwininfo');
-      cb(missing)
-    });
-  });
-}
-
 class WindowSaverApplet extends Applet.IconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
 
-    checkDependencies((missing) => {
-      if (missing.length > 0) {
-        notifyDependencies(missing);
-        this.set_applet_icon_path(metadata.path + '/icon.png');
-        this.set_applet_tooltip(metadata.description);
-        return;
-      }
-      this.orientation = orientation;
+    this.orientation = orientation;
 
-      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-      this.set_applet_icon_symbolic_name('view-restore');
-      this.set_applet_tooltip(_('Window Position Saver'));
+    this.set_applet_icon_symbolic_name('view-restore');
+    this.set_applet_tooltip(_('Window Position Saver'));
 
-      this.windowStates = [];
-      this.state = {};
-      this.settings = new AppletSettings(this.state, metadata.uuid, instance_id);
-      let settingsProps = [
-        {key: 'windowStates', value: 'windowStates', cb: null},
-        {key: 'restoreOnMonitorChange', value: 'restoreOnMonitorChange', cb: null},
-        {key: 'saveHotkey', value: 'saveHotkey', cb: this.onHotkeysChanged},
-        {key: 'restoreHotkey', value: 'restoreHotkey', cb: this.onHotkeysChanged},
-      ];
-      each(settingsProps, (prop) =>  {
-        this.settings.bind(
-          prop.key,
-          prop.value,
-          prop.cb ? (...args) => prop.cb.call(this, ...args) : null
-        );
-      });
-
-      this.menuManager = new PopupMenu.PopupMenuManager(this);
-      this.menu = new Applet.AppletPopupMenu(this, orientation);
-      this.menuManager.addMenu(this.menu);
-      this._contentSection = new PopupMenu.PopupMenuSection();
-      this.menu.addMenuItem(this._contentSection);
-
-      this.monitorsChangedId = global.screen.connect_after('monitors-changed', () => this.onMonitorsChanged());
-
-      var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
-      item.connect('activate', () => {
-        this.saveWindows();
-      });
-      this.menu.addMenuItem(item);
-
-      item = new PopupMenu.PopupIconMenuItem(_('Restore'), 'view-restore', St.IconType.SYMBOLIC);
-      item.connect('activate', () => {
-        this.restoreWindows();
-      });
-      this.menu.addMenuItem(item);
-
-      this.bindHotkeys();
+    this.windowStates = [];
+    this.state = {};
+    this.settings = new AppletSettings(this.state, metadata.uuid, instance_id);
+    let settingsProps = [
+      {key: 'windowStates', value: 'windowStates', cb: null},
+      {key: 'restoreOnMonitorChange', value: 'restoreOnMonitorChange', cb: null},
+      {key: 'saveHotkey', value: 'saveHotkey', cb: this.onHotkeysChanged},
+      {key: 'restoreHotkey', value: 'restoreHotkey', cb: this.onHotkeysChanged},
+    ];
+    each(settingsProps, (prop) =>  {
+      this.settings.bind(
+        prop.key,
+        prop.value,
+        prop.cb ? (...args) => prop.cb.call(this, ...args) : null
+      );
     });
+
+    this.menuManager = new PopupMenu.PopupMenuManager(this);
+    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menuManager.addMenu(this.menu);
+
+    this.monitorsChangedId = global.screen.connect_after('monitors-changed', () => this.onMonitorsChanged());
+
+    var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
+    item.connect('activate', () => {
+      this.saveWindows();
+    });
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_('Restore'), 'view-restore', St.IconType.SYMBOLIC);
+    item.connect('activate', () => {
+      this.restoreWindows();
+    });
+    this.menu.addMenuItem(item);
+
+    this.bindHotkeys();
   }
 
   onMonitorsChanged() {
