@@ -15,7 +15,7 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-const appletPath = '~/.local/share/cinnamon/applets/IcingWindowSaver@json/';
+const appletPath = '~/.local/share/cinnamon/applets/IcingWindowSaver@json/3.6';
 
 const exec = function(command, cb) {
   let subprocess = new Gio.Subprocess({
@@ -117,11 +117,11 @@ WindowSaverApplet.prototype = {
   },
 
   saveWindows: function() {
-    Util.trySpawnCommandLine(`bash -c '${appletPath}savewindows.sh'`);
+    Util.trySpawnCommandLine(`bash -c '${appletPath}/savewindows.sh'`);
   },
 
   restoreWindows: function() {
-    Util.trySpawnCommandLine(`bash -c '${appletPath}restorewindows.sh'`);
+    Util.trySpawnCommandLine(`bash -c '${appletPath}/restorewindows.sh'`);
   },
 
   on_applet_clicked: function(event) {
