@@ -1,29 +1,29 @@
-const GLib = imports.gi.GLib;
-const St = imports.gi.St;
+const {get_home_dir} = imports.gi.GLib;
+const {IconType} = imports.gi.St;
 const {MaximizeFlags} = imports.gi.Meta;
-const Gettext = imports.gettext;
-const Applet = imports.ui.applet;
-const PopupMenu = imports.ui.popupMenu;
+const {bindtextdomain, dgettext} = imports.gettext;
+const {IconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
+const {PopupMenuManager, PopupIconMenuItem} = imports.ui.popupMenu;
 const {AppletSettings} = imports.ui.settings;
 const {each, find} = imports.misc.util;
-const Main = imports.ui.main;
+const {keybindingManager} = imports.ui.main;
 
 const UUID = 'IcingWindowSaver@json';
 const MAXIMIZE_FLAGS = MaximizeFlags.HORIZONTAL | MaximizeFlags.VERTICAL;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
+bindtextdomain(UUID, get_home_dir() + '/.local/share/locale')
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+  return dgettext(UUID, str);
 }
 
-class WindowSaverApplet extends Applet.IconApplet {
+class WindowSaverApplet extends IconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
 
     this.orientation = orientation;
 
-    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    this.setAllowedLayout(AllowedLayout.BOTH);
 
     this.set_applet_icon_symbolic_name('view-restore');
     this.set_applet_tooltip(_('Window Position Saver'));
@@ -45,19 +45,19 @@ class WindowSaverApplet extends Applet.IconApplet {
       );
     });
 
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menuManager = new PopupMenuManager(this);
+    this.menu = new AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
     this.monitorsChangedId = global.screen.connect_after('monitors-changed', () => this.onMonitorsChanged());
 
-    var item = new PopupMenu.PopupIconMenuItem(_('Save'), 'media-floppy', St.IconType.SYMBOLIC);
+    var item = new PopupIconMenuItem(_('Save'), 'media-floppy', IconType.SYMBOLIC);
     item.connect('activate', () => {
       this.saveWindows();
     });
     this.menu.addMenuItem(item);
 
-    item = new PopupMenu.PopupIconMenuItem(_('Restore'), 'view-restore', St.IconType.SYMBOLIC);
+    item = new PopupIconMenuItem(_('Restore'), 'view-restore', IconType.SYMBOLIC);
     item.connect('activate', () => {
       this.restoreWindows();
     });
@@ -77,17 +77,17 @@ class WindowSaverApplet extends Applet.IconApplet {
   }
 
   bindHotkeys() {
-    Main.keybindingManager.addHotKey('save-windows-positions', this.state.saveHotkey, () => {
+    keybindingManager.addHotKey('save-windows-positions', this.state.saveHotkey, () => {
       this.saveWindows();
     });
-    Main.keybindingManager.addHotKey('restore-windows-positions', this.state.restoreHotkey, () => {
+    keybindingManager.addHotKey('restore-windows-positions', this.state.restoreHotkey, () => {
       this.restoreWindows();
     });
   }
 
   unbindHotkeys() {
-    Main.keybindingManager.removeHotKey('save-windows-positions');
-    Main.keybindingManager.removeHotKey('restore-windows-positions');
+    keybindingManager.removeHotKey('save-windows-positions');
+    keybindingManager.removeHotKey('restore-windows-positions');
   }
 
   saveWindows() {
