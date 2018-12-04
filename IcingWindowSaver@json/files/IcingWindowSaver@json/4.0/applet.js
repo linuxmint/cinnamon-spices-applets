@@ -97,9 +97,11 @@ class WindowSaverApplet extends IconApplet {
         return metaWindow.get_xwindow() === window.id;
       });
 
-      let metaWindowActor = metaWindow.get_compositor_private();
-      let [x, y] = metaWindowActor.get_position();
-      let [width, height] = metaWindowActor.get_size();
+      let clientRect = metaWindow.get_rect();
+      let {width, height, x, y} = metaWindow.get_outer_rect();
+      height -= (height - clientRect.height);
+      x -= (width - clientRect.width);
+
       let maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
       let {minimized} = metaWindow;
       if (windowState) {
@@ -142,7 +144,9 @@ class WindowSaverApplet extends IconApplet {
       }
 
       metaWindow.resize(userAction, width, height);
-      metaWindow.move(userAction, x, y);
+
+      if (metaWindow.decorated) metaWindow.move_frame(userAction, x, y);
+      else metaWindow.move(userAction, x, y);
 
       if (maximized && (!metaWindow.maximized_horizontally || !metaWindow.maximized_vertically)) {
         metaWindow.maximize(MAXIMIZE_FLAGS);
