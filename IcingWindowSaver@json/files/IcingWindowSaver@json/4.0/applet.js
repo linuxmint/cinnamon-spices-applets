@@ -17,6 +17,21 @@ function _(str) {
   return dgettext(UUID, str);
 }
 
+const getFramedWindowPosition = function(metaWindow) {
+  let clientRect = metaWindow.get_rect();
+  let {width, height, x, y} = metaWindow.get_outer_rect();
+  height -= (height - clientRect.height);
+  x -= (width - clientRect.width);
+  return [width, height, x, y];
+};
+
+const getWindowActorPosition = function(metaWindow) {
+  let metaWindowActor = metaWindow.get_compositor_private();
+  let [x, y] = metaWindowActor.get_position();
+  let [width, height] = metaWindowActor.get_size();
+  return [width, height, x, y];
+};
+
 class WindowSaverApplet extends IconApplet {
   constructor(metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -97,10 +112,12 @@ class WindowSaverApplet extends IconApplet {
         return metaWindow.get_xwindow() === window.id;
       });
 
-      let clientRect = metaWindow.get_rect();
-      let {width, height, x, y} = metaWindow.get_outer_rect();
-      height -= (height - clientRect.height);
-      x -= (width - clientRect.width);
+      let width, height, x, y;
+      if (metaWindow.decorated) {
+        [width, height, x, y] = getFramedWindowPosition(metaWindow);
+      } else {
+        [width, height, x, y] = getWindowActorPosition(metaWindow);
+      }
 
       let maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
       let {minimized} = metaWindow;
@@ -111,7 +128,6 @@ class WindowSaverApplet extends IconApplet {
         windowState.height = height;
         windowState.maximized = maximized;
         windowState.minimized = minimized;
-
       } else {
         this.state.windowStates.push({
           x,
