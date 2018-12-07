@@ -13,7 +13,7 @@ const Clutter = imports.gi.Clutter; // Needed for vnstat addition
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
 
-// Code for selecting network manager thanks to Jason Hicks - Not currently utilised
+// Code for selecting network manager thanks to Jason Hicks
 let tryFn = function(fn, errCb) {
   try {
     return fn();
@@ -25,13 +25,19 @@ let tryFn = function(fn, errCb) {
 }
 
 let CONNECTED_STATE, NMClient_new, newNM;
-// Just remove use of try-catch function to force used of new NM - much of what remains can be rationised when Cinnamon 4.0 is available to allow full testing.
-
+// Fallback to the new version.
+tryFn(function() {
+  const NMClient = imports.gi.NMClient;
+  const NetworkManager = imports.gi.NetworkManager;
+  CONNECTED_STATE = NetworkManager.DeviceState ? NetworkManager.DeviceState.ACTIVATED : 0;
+  NMClient_new = NMClient.Client.new;
+  newNM = false;
+}, function() {
   const NM = imports.gi.NM;
   CONNECTED_STATE = NM.DeviceState.ACTIVATED;
   NMClient_new = NM.Client.new;
   newNM = true;
-
+});
 
 // Localisation/translation support - moved up and slightly non standard due to GTOP test which follows.
 var UUID = "netusagemonitor@pdcurtis";
@@ -1194,5 +1200,4 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
   * Use ModalDialog.NotifyDialog instead of internal function for 2.6+
   * Change location of vnstatImage to home folder rather than applet folder.
   * Tidy us some of text in Notifications and trailing spaces
-
 */

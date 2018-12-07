@@ -63,7 +63,7 @@ try {
   GTopInstalled = false;
 }
 
-// Alert response using a Modal Dialog - approach thanks to Mark Bolin 
+// Alert response using a Modal Dialog - approach thanks to Mark Bolin
 
 function AlertDialog(value) {
     this._init(value);
@@ -257,7 +257,7 @@ MyApplet.prototype = {
             this.appletPath = metadata.path;
 
             this.applet_running = true; //** New
- 
+
 //          More code for selecting network manager thanks to Jason Hicks
             let args = newNM ? [null] : [];
             this._client = NMClient_new.apply(this, args);
@@ -265,7 +265,7 @@ MyApplet.prototype = {
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
-            } else { 
+            } else {
 //               this.textEd = "xed";
                this.textEd = "xdg-open";
             }
@@ -312,14 +312,14 @@ MyApplet.prototype = {
             this.textWidget = new St.Label(); // Only used to display error message if vnstat not loaded
 			this.menu.addActor(this.imageWidget);     // Actor added directly to menu
 //			this.menu.addActor(this.textWidget);      // Actor added directly to menu
-            this.vnstatImage = metadata.path + "/vnstatImage.png"; // path to image file in applet's folder
-
+//          this.vnstatImage = metadata.path + "/vnstatImage.png"; // path to image file in applet's folder
+            this.vnstatImage = GLib.get_home_dir() + "/vnstatImage.png"; // path to image file in home folder
             this.nullImage = metadata.path + "/transdot.gif"
- 
+
            // Initial conditions
             this.monitoredInterfaceName = null;
             let lastUsedInterface = this.monitoredIinterfaceBi;
-            if (this.dataUnit == 'gbytes') { 
+            if (this.dataUnit == 'gbytes') {
                 this.totalLimit = this.totalLimit1 * 1024;
                 this.cumulativeOffset1 = this.cumulativeOffsetA * 1024;
                 this.cumulativeOffset2 = this.cumulativeOffsetB * 1024;
@@ -341,7 +341,7 @@ MyApplet.prototype = {
             this.upOldC3 = 0;
             this.downOldC3 = 0;
             this.numa_style = 'numa-not-not-connected';
-            this.last_numa_style = 'numa-not-not-connected'; 
+            this.last_numa_style = 'numa-not-not-connected';
 
             this.set_applet_tooltip(_("No Interface being Monitored - right click to select"));
             if (this.useDefaultInterfaceIn) {
@@ -354,7 +354,7 @@ MyApplet.prototype = {
             this.rebuildFlag = true;
             this.firstTimeFlag  = true;
 
-            this.makeMenu();            
+            this.makeMenu();
             this.update();
         } catch (e) {
             global.logError(e);
@@ -371,8 +371,8 @@ MyApplet.prototype = {
             this.appletWidth = (this.appletWidthSetting / 2) + 11;
         }
 
-    // Code to change from Mbytes to Gbytes added here 
-        if (this.dataUnit == 'gbytes') { 
+    // Code to change from Mbytes to Gbytes added here
+        if (this.dataUnit == 'gbytes') {
             this.totalLimit = this.totalLimit1 * 1024;
             this.cumulativeOffset1 = this.cumulativeOffsetA * 1024;
             this.cumulativeOffset2 = this.cumulativeOffsetB * 1024;
@@ -400,7 +400,7 @@ MyApplet.prototype = {
             } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
                 return -1;
             }
-        } 
+        }
        return 0;
     },
 
@@ -446,7 +446,7 @@ MyApplet.prototype = {
     makeMenu: function () {
         this.isVnstatInstalled = true;
         try {
-            this.menu.removeAll(); // NOTE: Does not remove the Widgets only PopupMenuItems.  
+            this.menu.removeAll(); // NOTE: Does not remove the Widgets only PopupMenuItems.
             if (this.useVnstat) {
                if ( this.monitoredInterfaceName != null) {
                 GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
@@ -471,7 +471,7 @@ MyApplet.prototype = {
            // NOTE: Do not write errors to global log as usual with global.logError(e) as it would fill up!
         }
         if (this.useVnstat) {
-           if (this.isVnstatInstalled) { 
+           if (this.isVnstatInstalled) {
 
                this.menuitemHead0 = new PopupMenu.PopupMenuItem(_("NOTE: The last time the network traffic statistics were updated by vnStat is at the top right"), {
                reactive: false
@@ -483,7 +483,7 @@ MyApplet.prototype = {
                });
                this.menu.addMenuItem(this.menuitemHead1)
 
-            } else { 
+            } else {
 
                this.menuitemHead2 = new PopupMenu.PopupMenuItem(_("ERROR: Please make sure vnstat and vnstati are installed and that the vnstat daemon is running!"), {
                reactive: false
@@ -496,7 +496,7 @@ MyApplet.prototype = {
         }
 
         // Now write the Cumulative Usage monitors
-        // Inhibit header if no interface monitored. 
+        // Inhibit header if no interface monitored.
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "" || this.cumulativeInterface2 != "null" && this.cumulativeInterface2 != ""  || this.cumulativeInterface3 != "null" && this.cumulativeInterface3 != "") {
             this.menuitemHead3 = new PopupMenu.PopupMenuItem(_("Cumulative Data Usage Information:"), {
             reactive: false
@@ -570,7 +570,7 @@ MyApplet.prototype = {
             } else {
                 this.menuitemInfo1.label.text = "   " + this.cumulativeInterface1 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment1 + " = " + this.formatSentReceived(this.cumulativeTotal1 * 1024 * 1024);
             }
-        } 
+        }
 
         if (this.cumulativeInterface2 != "null" && this.cumulativeInterface2 != "") {
             if (this.cumulativeOffset2 != 0) {
@@ -578,7 +578,7 @@ MyApplet.prototype = {
             } else {
                 this.menuitemInfo4.label.text = "   " + this.cumulativeInterface2 + " - " + _("Cumulative Data Use") + " " + this.cumulativeComment2 + " = " + this.formatSentReceived(this.cumulativeTotal2 * 1024 * 1024);
             }
-        } 
+        }
 
         if (this.cumulativeInterface3 != "null" && this.cumulativeInterface3 != "") {
             if (this.cumulativeOffset3 != 0) {
@@ -586,7 +586,7 @@ MyApplet.prototype = {
             } else {
                this.menuitemInfo6.label.text = "   " + this.cumulativeInterface3 + " - " + "Cumulative Data Use " + this.cumulativeComment3 + " = " + this.formatSentReceived(this.cumulativeTotal3 * 1024 * 1024 );
             }
-        } 
+        }
     },
 
     // Build right click context menu
@@ -594,7 +594,7 @@ MyApplet.prototype = {
 
 /*
 The code following allows me to retain the 'standard' additions of 'About...' 'Configure...' and 'Remove' when rebuilding the Context menu.
-The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks. 
+The use of a PopupMenu.PopupMenuSection was suggested @collinss with implementation provided by @Odyseus in a way that allowed me to keep your code almost exactly as it was with a minimum number of tweaks.
 Note Odysius has used the index 0 (zero) to insert the menu section to position items in the correct order and avoid the menu section being added after all the default items.
 */
 
@@ -630,7 +630,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
                 this.myMenuSection.addMenuItem(menuitemdisp);
 //                this._applet_context_menu.addMenuItem(menuitemdisp);
             }
-        } 
+        }
         this.myMenuSection.addMenuItem(new PopupMenu.PopupMenuItem(_("or Select an independent interface to be monitored:"), {
             reactive: false
         }));
@@ -734,7 +734,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.subMenu1.menu.addMenuItem(this.subMenuItem3);
 
         this.subMenu1.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
- 
+
         if (this.displayExtraHousekeeping) {
             this.subMenuItem4 = new PopupMenu.PopupMenuItem(_("Open stylesheet.css  (Advanced Function)"));
             this.subMenuItem4.connect('activate', Lang.bind(this, function (event) {
@@ -824,12 +824,12 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
                alertModalNetworkingDisabled = new AlertDialog_(("THE DATA USAGE LIMIT HAS BEEN EXCEEDED\n\nAll Network connections managed by the Network Manager have been Disabled\n\nYou will need to use the Network Manager Applet to Re-enable them\nwhen the data usage problem has been resolved\n\n Some connections using ppp0 may not have been disabled or may need to be restarted manually"));
               alertModalNetworkingDisabled.open();
           } else {
-                GLib.spawn_command_line_async('zenity --info --text=_("You have aborted network disconnection despite the data usage limit being exceeded") --timeout=30');    
+                GLib.spawn_command_line_async('zenity --info --text=_("You have aborted network disconnection despite the data usage limit being exceeded") --timeout=30');
           }
       },
 
 
-    // Called when the total limit has just been exceeded. 
+    // Called when the total limit has just been exceeded.
     crisis: function () {
 
         if (this.crisisManagement == "notify") {
@@ -855,7 +855,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         }
     },
 
-    // This is the main update run in a loop with a timer 
+    // This is the main update run in a loop with a timer
     // The displays are made fixed width of 15 characters using padstring()
     update: function () {
 		if (!GTopInstalled) {return};
@@ -888,15 +888,15 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
 	    // Collect the three sets of cumulative usage data
             // and set a flag to update cinnamon-settings with new value at a latter time
-            this.update_ct1 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface1 == this.monitoredInterfaceName);		
+            this.update_ct1 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface1 == this.monitoredInterfaceName);
             if (this.update_ct1) {
 	        this.cT1 = this.cT1 + (downNow - this.downOld + upNow -this.upOld)/1048576;
             }
-            this.update_ct2 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface2 == this.monitoredInterfaceName);		
+            this.update_ct2 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface2 == this.monitoredInterfaceName);
             if (this.update_ct2) {
 	        this.cT2 = this.cT2 + (downNow - this.downOld + upNow -this.upOld)/1048576;
             }
-            this.update_ct3 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface3 == this.monitoredInterfaceName);		
+            this.update_ct3 = ((downNow > this.downOld) || (downNow > this.downOld)) && (this.cumulativeInterface3 == this.monitoredInterfaceName);
             if (this.update_ct3) {
 	        this.cT3 = this.cT3 + (downNow - this.downOld + upNow -this.upOld)/1048576;
             }
@@ -907,7 +907,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             this.downOld = downNow;
             this.timeOld = timeNow;
         }
- 
+
 
         // Now set up tooltip every cycle
         if (this.monitoredInterfaceName != null) {
@@ -921,7 +921,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             this.rebuildFlag = false;
             this.buildContextMenu();
         }
-        // Fix for Cinnamon 2.0 to remove Context Menu Items by running build context menu again next loop - note delay needed 
+        // Fix for Cinnamon 2.0 to remove Context Menu Items by running build context menu again next loop - note delay needed
         // No longer required thanks to alternative solution thanks to @Odyseus
         if (this.firstTimeFlag) {
            this.rebuildFlag = true;
@@ -961,8 +961,8 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             Mainloop.timeout_add((timer), Lang.bind(this, this.updateCumulative));
         }
     },
-    
-    // Delays cumulative updates into cinnamon-settings by using two mainloop timers of half the refresh interval     
+
+    // Delays cumulative updates into cinnamon-settings by using two mainloop timers of half the refresh interval
     updateCumulative: function() {
         if (this.update_ct1) {
             this.cumulativeTotal1 = this.cT1;
@@ -974,7 +974,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
             this.cumulativeTotal3 = this.cT3;
         }
         let timer2 = this.refreshIntervalIn * 500;
-        Mainloop.timeout_add((timer2), Lang.bind(this, this.update));         
+        Mainloop.timeout_add((timer2), Lang.bind(this, this.update));
     },
 
 formatSpeed: function (value) {
@@ -986,7 +986,7 @@ formatSpeed: function (value) {
         // Absolute value used because of potential for negative numbers now offset is included
 
     	let suffix = " KB";
-    	if (Math.abs(value) >= 0) {   
+    	if (Math.abs(value) >= 0) {
     	        value = value / 1024;
     		suffix = " KB";
     	}
@@ -994,11 +994,11 @@ formatSpeed: function (value) {
     		value = value / 1024;
     		suffix = " MB";
     	}
-    	if (Math.abs(value) >= 1000) {  
-    		value = value / 1024;  
+    	if (Math.abs(value) >= 1000) {
+    		value = value / 1024;
     		suffix = " GB";
     	}
-    	if (Math.abs(value) >= 1000) {  
+    	if (Math.abs(value) >= 1000) {
     		value = value / 1024;
     		suffix = " TB";
     	}
@@ -1007,15 +1007,15 @@ formatSpeed: function (value) {
     },
 
 
-    // Pad string to length padto symetrically starting from left - can also use unicode 
+    // Pad string to length padto symetrically starting from left - can also use unicode
     // figure space which is equivalent to the digit width of fonts with fixed-width digits
     padString: function (string1 , padto ) {
-       while (string1.length < padto) { 
+       while (string1.length < padto) {
               string1 =  ' ' + string1;
               if (string1.length  <  padto) {
                  string1  = string1 + ' ' ;
               }
-       }              
+       }
         return string1;
     },
 
@@ -1034,17 +1034,17 @@ function main(metadata, orientation, panel_height, instance_id) {
 
 /*
 Version 3.2.1
-1.0 Applet Settings now used for Update Rate, Resolution and Interface. 
-    Built in function used for left click menu. 
-1.1 Right click menu item added to open Settings Screen. 
-1.2 Default connection added. Warning on data limit exceeded added. 
-1.3 Slider and information lines added to left click menu to set Alarm level. 
-1.4 Three cumulative data monitors added. 
-1.5 Check for changed devices added to Right Click menu. 
-1.6  Alert display slider etc inhibited when inactive. 
+1.0 Applet Settings now used for Update Rate, Resolution and Interface.
+    Built in function used for left click menu.
+1.1 Right click menu item added to open Settings Screen.
+1.2 Default connection added. Warning on data limit exceeded added.
+1.3 Slider and information lines added to left click menu to set Alarm level.
+1.4 Three cumulative data monitors added.
+1.5 Check for changed devices added to Right Click menu.
+1.6  Alert display slider etc inhibited when inactive.
 1.7 Add const UUID, Rebuild left on various settings changes.
 1.7.1 Errors corrected
-1.7.2 Beautified at http://jsbeautifier.org/ 
+1.7.2 Beautified at http://jsbeautifier.org/
 1.8.0 Added green background when data has flowed on selected interface.
 1.8.1 Added more comments
 1.9.0 Cumulative Usage now independent of interface being monitored
@@ -1054,25 +1054,25 @@ Version 3.2.1
 1.10.0 Corrected error in handling tooltip at start-up  - V18_1 - as uploaded
 2.0.0 New version with addition of vnstat statistics
 2.0.1 Minor label and layout changes 03-07-2013
-2.0.2 mainBox added so I can use remove_actor to avoid the need for restart when vnstati is not used. 
+2.0.2 mainBox added so I can use remove_actor to avoid the need for restart when vnstati is not used.
 2.0.3 Error checking for installation of vnstat and vnstati and change of location of temp file to applet folder in applet
 2.0.4 U: and D: replaced by unicode up and down arrows to save space.
 2.0.5 New option of Compact Display of total only rather than Up and Down loads
 2.0.6 Test version - needs cinnamon restart
 2.0.7 Compact Display and Width set in settings and implemented fully without restart required.
 2.0.8 Added access to stylesheet.css and changelog.txt 09-07-2013
-2.0.9 Compact Display can be changed in Context menu 10-07-2013 
+2.0.9 Compact Display can be changed in Context menu 10-07-2013
 2.1.0 Uses tick \u2714 for selected interface - UPLOADED as development version on 11-07-2013
 2.1.1 Picks up UUID from metadata.uuid
 2.1.2 Puts Housekeeping and System items in a sub-menu 13-07-2013
 2.1.3 Minor correction in initialisation of cumulative data and layout/comments improved 14-07-2013
 2.2.0 Start of implementing some form of response to exceeding data limits - termed crisis management
 2.2.1 Crisis Management flag and 'terminal command' to be run now in Settings Panel.
-2.2.2 Facility for two preset scripts in addition to string added. Right click menu has additional housekeeping functions to edit and test these scripts added.  
+2.2.2 Facility for two preset scripts in addition to string added. Right click menu has additional housekeeping functions to edit and test these scripts added.
 2.2.3 Addition documentation
 2.2.4 Changed 'crisis' to 'suspend' for preset script and tested. Reorder advanced functions and added separators.
-2.2.5 Three special cases now in use - suspendscript, alertscript and modalalert. Function added to implement the modal dialog used by modal alert. Testing functions still 'exposed' to users on right click function submenu. 
-To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asynchronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used? 
+2.2.5 Three special cases now in use - suspendscript, alertscript and modalalert. Function added to implement the modal dialog used by modal alert. Testing functions still 'exposed' to users on right click function submenu.
+To think about - do we need the ability to have a terminal command option as any terminal command can be put into the alertScript file, in fact it can be a series of commands run asynchronously by ending them with a $ so a sound file could be played and a notification put up using zenity at the same time. This is a safer way ahead whilst leaving a huge flexibility for customisation. Should a different selection mechanism be used?
 Conclusion - change to a drop down selection of options, initially the three currently in use but consider adding sound and notification options. remove terminal string option as it can be in a script file.
 2.2.6 Implemented drop down alert handling plus change back to KB from kB and replace round with floor
 2.2.7 Scripts commented and checked. Extra options of notify and do nothing added. Use now made of Sox to play audio warnings and notify-send to add notifications. sox needs to be installed
@@ -1094,25 +1094,25 @@ Conclusion - change to a drop down selection of options, initially the three cur
        possible latest versions can segfault if interface not valid.
 2.3.9  Add fix for Applet not being fully halted when removed from panel (from dansie)
 2.3.10 Fudge to make NUMA behave the same for Cinnamon 1.8 and 2.0 by removing the
-       automatically added items from the context menu by calling rebuilding menu a second 
-       time during startup sequence after a one cycle delay. Long term solution is to use 
-       dansie's method of building everything as a submenu. 
+       automatically added items from the context menu by calling rebuilding menu a second
+       time during startup sequence after a one cycle delay. Long term solution is to use
+       dansie's method of building everything as a submenu.
 2.3.11 Default settings changed to start with cumulative monitoring off for all interfaces
        (null) in settings file.
 2.3.12 Revert to the old method of handling cumulative data and only update cumulative totals
        for the monitored interface. Slightly less flexible but intended to reduce the chances
        of segfaults until the problem is understood and resolved.
 2.3.13 Changes to Settings File to explicitly use real numbers for Cumulative Data
-2.3.14 Test of reset function including setting reset date and time 
+2.3.14 Test of reset function including setting reset date and time
        and avoid use of updating a Cinnamon Settings within a single expression
-       NB Interface 1 only 
+       NB Interface 1 only
        TEST at 10x speed - remember to reset!!!
 2.3.15 Now reset function on all 3 interfaces which also avoids use of updating a Cinnamon Settings
        within a single expression on all interfaces.
        Display simplified in left click menu to format of: interface - reset date and time - Cumulative data
        ie now a single line for each interface.
        Settings file changed to use generic bidirectional where interfaces are set from applet and defaults changed
-       Reset to run at correct speed 
+       Reset to run at correct speed
        UPLOADED VERSION 10 March 2014.
 2.3.16 Try delaying cumulative updates into cinnamon-settings by using two mainloop timers.
        Bug fix for when no default interface specified and default unchecked in settings.
@@ -1120,7 +1120,7 @@ Conclusion - change to a drop down selection of options, initially the three cur
 2.3.17 Some changes so cinnamon-settings values of cumulative total are only updated when changed in second part of loop
        Added interface name to reset menu item and rebuildFlag to on_interface_settings_changed()
        Changed 'Settings' to 'Configure' in Context Menu for consistency with Cinnamon 2.0
-2.4.0  Changes to automatically select first active interface at start-up But Only If a default interface was not specified 
+2.4.0  Changes to automatically select first active interface at start-up But Only If a default interface was not specified
        and the last interface was not PPP0.
        Added explanatory text to settings-schema.json comment for the useDefaultInterface flag
 2.4.1  Moved Configure to bottom of context menu
@@ -1128,10 +1128,10 @@ Conclusion - change to a drop down selection of options, initially the three cur
        Checked with Cinnamon 2.2 via LiveUSB
 2.4.2  Display of Header inhibited when no Cumulative Data being displayed.
 2.4.3.0   Multiple instances in metadata.json
-          Changes to minimise width of applet when not connected to go with multiple instances.     
+          Changes to minimise width of applet when not connected to go with multiple instances.
           Change to width in stylesheet.css to match
           New function to pad and center output to remove jitter rather use styles.
-2.4.3.1   General tidy up of commented out code 
+2.4.3.1   General tidy up of commented out code
 2.4.3.2   Add an offset which is set in settings but is also cleared by reset of usage
           Display includes offset when in use.
           Currently only available on Cumulative Data Usage 1
@@ -1146,8 +1146,8 @@ Conclusion - change to a drop down selection of options, initially the three cur
 2.4.4.2   Modified functions for formatSpeed and formatSentReceived to extend to [B,] GB and TB and make consistent
 2.5.0  Version with single instance but all other enhancements in preparation for upload
           max-instance changed in metadata.json to 1 to hopefully avoid need for hand crafting of
-          .cinnamon/configs/netusagemonitor@pdcurtis  
-          Changes to totalLimit and alertPercentage in settings-schema.json. 
+          .cinnamon/configs/netusagemonitor@pdcurtis
+          Changes to totalLimit and alertPercentage in settings-schema.json.
           Tested with Cinnamon 2.4.0
           Updates to changelog.
 2.6.0  Added support for Android Bluetooth tethered connections which use device bnep1 under Mint 17
@@ -1156,10 +1156,10 @@ Conclusion - change to a drop down selection of options, initially the three cur
           in the network manager does not work
           It ought to be possible to use bnep0 whenever the active interface contains semicolons
           but if it aint broke don't fix it!
-          Corrected formatSentReceiver to handle negative numbers resulting from offsets 
+          Corrected formatSentReceiver to handle negative numbers resulting from offsets
 3.0.0     Modifications for Mint 18 and higher with Cinnamon 3.0 and higher
           Changes to Suspend Script to work with SystemD as well as Dbus for suspend and changes to allow immediate suspend option in box.
-          Addition of version test to chose between xed for Mint 18 with Cinnamon 3.0 and gedit for earlier versions. 
+          Addition of version test to chose between xed for Mint 18 with Cinnamon 3.0 and gedit for earlier versions.
 3.0.2     NOTE 3.0.1 was not a separate version - it was a mechanism to overwrite a faulty zip upload of 3.0.0 to the cinnamon-spices web site
 3.0.3     Corrected icon.png in applet folder which is used by Add Applets and removed incorrect icon from metadata.json
 3.0.4     Increased maximum from 5000 mbytes to 100000 mbytes for totalLimit and cumulative offsets
@@ -1188,11 +1188,11 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
           Correct several spelling errors in comments and .md files.
 3.2.0     Remove duplicate let declarations occurances in common coding for Cinnamon 3.4 thanks to @NikoKraus  [#604]
 3.2.1     Harmonise with code writen by author for vnstat@cinnamon.org and revert 3.1.2 until further testing.
-          Updated netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot as string added. 
+          Updated netusagemonitor.pot using cinnamon-json-makepot --js po/netusagemonitor.pot as string added.
           Tidy up comments in applet.js
           Update README.md to remove a couple of references to Ubuntu from early days.
           Usual updates to new version in applet.js, changelog and metadata.json
-3.2.2     Removed unused this.UUID = metadata.uuid 
+3.2.2     Removed unused this.UUID = metadata.uuid
           Improved l10n translation support.
           Added CHANGELOG.md to applet folder and use it instead of changelog.txt in right click menu
           CHANGELOG.md based on recent entries to changelog.txt with last changes at the top. changelog.txt currently remains in applet folder but is not used.
@@ -1204,11 +1204,11 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
  * Update CHANGELOG.md, README.md, settings-schema.json and metadata.json
  * Update netusagemonitor.pot so translations can be updated.
 ## 3.2.3.1
- * Changes in intialisation to remove some CJS warnings 
+ * Changes in intialisation to remove some CJS warnings
 ## 3.2.4
  * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox which led to CJS warnings.
  * Improved notification when vnstat and vnstati not installed
- * Tidy up code 
+ * Tidy up code
  * Better formatting of CHANGELOG.md
 ## 3.2.4.1
   * Changes to README.md to alert users to problems on Fedora 27 with changes in network manager libraries - issue #1647
@@ -1221,5 +1221,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
   * Remove Try-Catch as no longer required in 4.0 and associated changes.
   * It is believed that all Distributions packaging Cinnamon 4.0 have changed to the new Network Manager Libraries
   * Add cinnamon-version to metadata.json (Provides information on which Cinnamon versions can load it)
-  * Update README.md and CHANGELOG.md 
+  * Update README.md and CHANGELOG.md
+## 3.2.7
+  * Add multiversion 2.6 folder
+  * Use ModalDialog.NotifyDialog instead of internal function for 2.6+
+  * Change location of vnstatImage to home folder rather than applet folder.
+  * Tidy us some of text in Notifications and trailing spaces
 */
