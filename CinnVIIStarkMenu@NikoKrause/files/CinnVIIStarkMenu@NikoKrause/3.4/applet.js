@@ -2448,9 +2448,6 @@ MyApplet.prototype = {
 
     _onOpenStateChanged: function(menu, open) {
         if (open) {
-            if (this._appletEnterEventId > 0) {
-                this.actor.handler_block(this._appletEnterEventId);
-            }
             this.menuIsOpening = true;
             this.actor.add_style_pseudo_class('active');
             global.stage.set_key_focus(this.searchEntry);
@@ -2486,10 +2483,6 @@ MyApplet.prototype = {
             this.fit_favsbox(this.resultsFoundButton.box);
 
         } else {
-            if (this._appletEnterEventId > 0) {
-                this.actor.handler_unblock(this._appletEnterEventId);
-            }
-
             this.actor.remove_style_pseudo_class('active');
             if (this.searchActive) {
                 this.resetSearch();
