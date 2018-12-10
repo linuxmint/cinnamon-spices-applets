@@ -24,8 +24,10 @@ const DND = imports.ui.dnd;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const SignalManager = imports.misc.signalManager;
+const {listDirAsync} = imports.misc.fileUtils;
+const ByteArray = imports.byteArray;
 
-const {each, findIndex, filter, isEqual, setTimeout, throttle, unref} = require('./utils');
+const {each, find, findIndex, filter, isEqual, setTimeout, throttle, unref, tryFn} = require('./utils');
 const constants = require('./constants');
 const AppList = require('./appList');
 const store = require('./store');
@@ -390,6 +392,10 @@ class ITMApplet extends Applet.Applet {
   // Should be looked into more, and see if this should be a fix in a future Cinnamon PR. the on_applet_removed_from_panel
   // method removes applets and calls this method, all while as far as the user knows, the applet state should remain the same.
   on_applet_added_to_panel() {
+    if (typeof this.on_applet_reloaded === 'function') {
+      this.notifyDeprecation();
+    }
+
     if (this.state.appletReady && this.state.panelEditMode) {
       return;
     }
@@ -446,6 +452,150 @@ class ITMApplet extends Applet.Applet {
     }
     this.settings.finalize();
     unref(this);
+  }
+
+  getNotificationIcon() {
+    return new St.Icon({
+      icon_type: St.IconType.FULLCOLOR,
+      icon_size: 24 * global.ui_scale,
+      gicon: new Gio.FileIcon({
+        file: Gio.file_new_for_path(
+          GLib.get_home_dir() + '/.local/share/cinnamon/applets/IcingTaskManager@json/icon.png'
+        )
+      })
+    });
+  }
+
+  notifyDeprecation() {
+    let icon = this.getNotificationIcon();
+    let header = _('Icing Task Manager is now Grouped Window List');
+    let body = _('Please open the applet\'s settings and click "Migrate Pinned Apps to Grouped Window List". ')
+      + _('Then from Applet Settings, replace Icing Task Manager with Grouped Window List.');
+    Main.criticalNotify(
+      header,
+      body,
+      icon
+    );
+    this.notifyIcon = icon;
+  }
+
+  migratePinnedToGWL() {
+    if (!this.notifyIcon) {
+      Main.criticalNotify(
+        _('Migration can only be performed on Cinnamon 4.0.'),
+        '',
+        this.getNotificationIcon()
+      );
+      return;
+    }
+
+    let gwlSettingsDir = Gio.file_new_for_path(GLib.get_home_dir() + '/.cinnamon/configs/grouped-window-list@cinnamon.org');
+    let itmSettingsDir = Gio.file_new_for_path(GLib.get_home_dir() + '/.cinnamon/configs/IcingTaskManager@json');
+    if (!gwlSettingsDir.query_exists(null)) {
+      Main.criticalNotify(
+        _('Please add Grouped Window List to a panel before proceeding with the migration.'),
+        '',
+        this.getNotificationIcon()
+      );
+      return;
+    }
+    if (!itmSettingsDir.query_exists(null)) {
+      Main.criticalNotify(
+        _('ITM settings directory could not be found!'),
+        '',
+        this.getNotificationIcon()
+      );
+      return;
+    }
+
+    // Find the ITM JSON file with the most pinned apps,
+    // then uniquely concatenate it to every GWL JSON file.
+    listDirAsync(itmSettingsDir, (itmJSONFiles) => {
+      listDirAsync(gwlSettingsDir, (gwlJSONFiles) => {
+        let itm = [], itmJson = [], errors = [];
+        each(itmJSONFiles, (file) => {
+          file = file.get_name();
+          file = Gio.file_new_for_path(GLib.get_home_dir() + '/.cinnamon/configs/IcingTaskManager@json/' + file);
+          let [success, json] = file.load_contents(null);
+          if (!success) {
+            errors.push(file.get_path());
+            return;
+          }
+          // Mozjs60 future proofing
+          if (json instanceof Uint8Array) {
+            json = ByteArray.toString(json);
+          } else {
+            json = json.toString();
+          }
+          tryFn(() => {
+            json = JSON.parse(json);
+            if (json['system-favorites'].value) {
+              Main.criticalNotify(
+                _('System favorites enabled - no migration is needed.'),
+                '',
+                this.getNotificationIcon()
+              );
+              return;
+            }
+            itm.push(json['pinned-apps'].value.length);
+            itmJson.push(json);
+          }, () => errors.push(file.get_path()));
+        });
+        let max = Math.max(...itm);
+        let ref = find(itmJson, (json) => json['pinned-apps'].value.length === max);
+        if (ref) {
+          let pinnedApps = ref['pinned-apps'].value;
+          each(gwlJSONFiles, (file) => {
+            file = file.get_name();
+            file = Gio.file_new_for_path(GLib.get_home_dir() + '/.cinnamon/configs/grouped-window-list@cinnamon.org/' + file);
+            let [success, json] = file.load_contents(null);
+            if (!success) {
+              errors.push(file.get_path());
+              return;
+            }
+            if (json instanceof Uint8Array) {
+              json = ByteArray.toString(json);
+            } else {
+              json = json.toString();
+            }
+            tryFn(() => {
+              json = JSON.parse(json);
+              each(pinnedApps, (item) => {
+                if (json['pinned-apps'].value.indexOf(item) === -1) {
+                  json['pinned-apps'].value.push(item);
+                }
+              });
+              json = JSON.stringify(json);
+              let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+              let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
+              Cinnamon.write_string_to_stream(out, json);
+              out.close(null);
+            }, () => errors.push(file.get_path()));
+          });
+        } else {
+          Main.criticalNotify(
+            _('Unable to find a suitable ITM settings file to migrate.'),
+            errors.join('\n'),
+            this.getNotificationIcon()
+          );
+          return;
+        }
+
+        if (errors.length > 0) {
+          Main.criticalNotify(
+            _('Migration complete. ') + errors.length + _(' settings file(s) could not be migrated.'),
+            errors.join('\n'),
+            this.getNotificationIcon()
+          );
+        } else {
+          Main.criticalNotify(
+            _('Migration was successful.'),
+            '',
+            this.getNotificationIcon()
+          );
+        }
+      });
+    });
   }
 
   // Override Applet._onButtonPressEvent due to the applet menu being replicated in AppMenuButtonRightClickMenu.

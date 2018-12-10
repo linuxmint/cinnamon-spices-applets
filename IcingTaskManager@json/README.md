@@ -1,6 +1,8 @@
 Icing Task Manager
 =============
 
+**Icing Task Manager is now deprecated for all Cinnamon 4.0 users. Please add the Grouped Window List applet to your panel, go to ITM's settings, and click "Migrate Pinned Apps to Grouped Window List".**
+
 **Issues should be opened on ITM's [dedicated repository](https://github.com/jaszhix/icingtaskmanager). All PRs should be submitted to the Cinnamon Spices repository.**
 
 This is a fork of the unfinished development branch of [Window List With App Grouping](https://github.com/jake-phy/WindowIconList/) applet, originally by jake-phy who forked the code from [GNOME Shell Window List](https://github.com/siefkenj/gnome-shell-windowlist/).
