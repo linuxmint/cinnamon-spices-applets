@@ -225,6 +225,31 @@ MyApplet.prototype = {
                 this.on_options_changed,
                 null);
 
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "useExtendedDisplay",
+                "useExtendedDisplay",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "extendedDisplay",
+                "extendedDisplay",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "useVnstatiCommandString",
+                "useVnstatiCommandString",
+                this.on_settings_changed,
+                null);
+
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "vnstatiCommandString",
+                "vnstatiCommandString",
+                this.on_settings_changed,
+                null);
+
             this.cssfile = metadata.path + "/stylesheet.css";
             this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
@@ -424,7 +449,23 @@ MyApplet.prototype = {
             this.menu.removeAll(); // NOTE: Does not remove the Widgets only PopupMenuItems.
             if (this.useVnstat) {
                if ( this.monitoredInterfaceName != null) {
-                GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage);
+if (this.useExtendedDisplay) {
+                         if(this.extendedDisplay == "classic" ) {
+                                GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage );
+                         }
+                         if(this.extendedDisplay == "classicPlus" ) {
+                               GLib.spawn_command_line_sync('vnstati -vs -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage );
+                         }
+                         if(this.extendedDisplay == "userDefined" ) {
+                               if (this.useVnstatiCommandString) {
+                                     GLib.spawn_command_line_sync('vnstati ' + this.vnstatiCommandString + ' -ne -i ' + this.monitoredInterfaceName + ' -o ' + this.vnstatImage );
+                               } else {
+                                     GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' +  this.vnstatImage );
+                               }
+                         }
+                   } else {
+                        GLib.spawn_command_line_sync('vnstati -s -ne -i ' + this.monitoredInterfaceName + ' -o ' +  this.vnstatImage );
+                   }
                 this.displayImage = this.vnstatImage
                 }
              } else {
@@ -1200,4 +1241,10 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
   * Use ModalDialog.NotifyDialog instead of internal function for 2.6+
   * Change location of vnstatImage to home folder rather than applet folder.
   * Tidy us some of text in Notifications and trailing spaces
+## 3.2.8
+  * Change Multiversion to start with 3.2 folder to allow use of pages and sections in the settings file
+  * Change Settings to use pages and sections to give a tabbed layout.
+  * Provide options to choose different vnstati formats including a user specified format (3.2 and 4.0)
+  *  Revert to internal function instead of Use ModalDialog.NotifyDialog instead for < 3.2
+  * Update CHANGELOG.md and README.md
 */
