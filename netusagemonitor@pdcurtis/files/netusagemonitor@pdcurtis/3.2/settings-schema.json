@@ -1,8 +1,59 @@
 {
-    "head": {
-        "type": "header",
-        "description": "General Settings for the Network Usage Monitor Applet"
+  "layout1": {
+        "type": "layout",
+        "pages": ["page1", "page2", "page3", "page4"],
+        "page1": {
+            "type": "page",
+            "title": "General",
+            "sections": ["section0"]
+        },
+        "page2": {
+            "type": "page",
+            "title": "Data Use, Alerts and Responses",
+            "sections": ["section1", "section4"]
+        },
+        "page3": {
+            "type": "page",
+            "title": "Cumulative Data",
+            "sections": ["section2"]
+        },
+
+        "page4": {
+            "type": "page",
+            "title": "Longer Term Statistics",
+            "sections": ["section3"]
+        },
+
+    "section0": {
+        "type": "section",
+        "title": "General Settings for the Network Usage Monitor Applet",
+        "keys": ["refreshInterval-spinner","decimalsToShow-spinner","monitored-interface","useDefaultInterface","defaultInterface","compactDisplay","appletWidthSetting","dataUnit", "displayExtraHousekeeping"]
     },
+    "section1": {
+        "type": "section",
+        "title": "Settings specific to Data Usage and Alert functions for Current Connection",
+        "keys": ["useTotalLimit","totalLimit","alertPercentage"]
+    },
+
+    "section2": {
+        "type": "section",
+        "title": "Settings specific to Cumulative Data Usage functions",
+        "keys": ["cumulativeInterface1", "cumulativeComment1", "cumulativeTotal1", "cumulativeOffset1", "cumulativeInterface2", "cumulativeComment2", "cumulativeTotal2", "cumulativeOffset2", "cumulativeInterface3", "cumulativeComment3", "cumulativeTotal3", "cumulativeOffset3"]
+    },
+
+    "section3": {
+        "type": "section",
+        "title": "Settings specific to Long Term Traffic Statistics",
+        "keys": ["useVnstat", "useExtendedDisplay", "extendedDisplay", "useVnstatiCommandString", "vnstatiCommandString"]
+    },
+
+    "section4": {
+        "type": "section",
+        "title": "Response to exceeding the current data usage limit",
+        "keys": ["useCrisisManagement", "crisisManagement", "disconnectDelay", "useAlertSound", "alertSound"]
+     }
+  },
+
     "refreshInterval-spinner": {
         "type": "spinbutton",
         "default": 2,
@@ -69,10 +120,7 @@
         "description" : "Data Unit used to set Alert Levels and Cumulative Offsets",
         "tooltip": "These are the units which will be used for setting the alert limit and cumulative offsets."
    },
-    "head1": {
-        "type": "header",
-        "description": "Settings specific to Data Usage and Alert functions for Current Connection"
-    },
+
     "useTotalLimit": {
         "type": "checkbox",
         "default": false,
@@ -103,10 +151,7 @@
         "description": "Percentage of Data Limit at which Orange Warning Displayed",
         "tooltip": "Percentage of Data Limit at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
     },
-    "head2": {
-        "type": "header",
-        "description": "Settings specific to Cumulative Data Usage functions"
-    },
+
     "cumulativeInterface1": {
         "type": "entry",
         "default": "null",
@@ -117,12 +162,12 @@
         "type": "generic",
         "default": "from initiation of applet"
     },
-    "cumulativeTotal1": { 
+    "cumulativeTotal1": {
         "type": "generic",
         "default": 0.0
     },
 
-    "cumulativeOffset1": { 
+    "cumulativeOffset1": {
         "type": "spinbutton",
         "default": 0,
         "min": 0,
@@ -144,11 +189,11 @@
         "type": "generic",
         "default": "from initiation of applet"
     },
-    "cumulativeTotal2": { 
+    "cumulativeTotal2": {
         "type": "generic",
         "default": 0.0
     },
-    "cumulativeOffset2": { 
+    "cumulativeOffset2": {
         "type": "spinbutton",
         "default": 0,
         "min": 0,
@@ -169,11 +214,11 @@
         "type": "generic",
         "default": "from initiation of applet"
     },
-    "cumulativeTotal3": { 
+    "cumulativeTotal3": {
         "type": "generic",
         "default": 0
     },
-    "cumulativeOffset3": { 
+    "cumulativeOffset3": {
         "type": "spinbutton",
         "default": 0,
         "min": 0,
@@ -184,20 +229,51 @@
         "description": "Offset applied to Cumulative Data Usage 3",
         "tooltip": "This can be used to offset the data usage to take into account usage on other machines or correct for other causes"
     },
-    "head3": {
-        "type": "header",
-        "description": "Settings specific to Long Term Traffic Statistics"
-    },
+
     "useVnstat": {
         "type": "checkbox",
         "default": false,
         "description": "Display long term traffic statistics (vnstat and vnstati Must be installed). ",
         "tooltip": "This requires vnstat and vnstati to be installed prior to being enabled."
     },
-    "head4": {
-        "type": "header",
-        "description": "Settings for response to exceeding the current data usage limits"
+
+    "useExtendedDisplay": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Enable Extended Display Options",
+        "tooltip": "This is new option version 1.0.2"
     },
+
+
+    "extendedDisplay" : {
+        "dependency": "useExtendedDisplay",
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic - Summary of Data Usage for last Days and Months" : "classic",
+            "Classic Plus - Classic with addition of breakdown by hour for last 24 hours": "classicPlus" ,
+            "Custom Display - requires enabling below": "userDefined"
+         },
+        "description" : "Type of Display - default 'classic'",
+        "tooltip": "This feature offers the Classic (original) display with optional of adding an hourly breakdown over the last 24 hours and an experimental option of a user defined string for vnstati when enabled below"
+   },
+
+    "useVnstatiCommandString": {
+        "dependency": "useExtendedDisplay",
+        "type": "checkbox",
+        "default": false,
+        "description": "Enable Custom Display Option",
+        "tooltip": "Check box"
+    },
+
+    "vnstatiCommandString": {
+        "dependency": "useVnstatiCommandString",
+        "type": "entry",
+        "default": "-vs",
+        "description": "Custom options to pass to vnstati - default is '-vs' ",
+        "tooltip": "The default is the options used for the extended display. Note: this is not the whole vnstati option string - the interface and output file options are added to it automatically. Please read the vnstati manual for further information on options avaiilable"
+    },
+
     "useCrisisManagement": {
         "type": "checkbox",
         "default": false,
@@ -213,13 +289,13 @@
             "Display a high priority notification" : "notify",
             "Put up a full screen 'modal dialog' warning" : "alertmodal",
             "Run a user configurable Script (alertScript)" : "alertscript",
-			"Disable All Networking managed by NMClient after opportunity to abort" : "disablenetworking",
+            "Disable All Networking managed by NMClient after opportunity to abort" : "disablenetworking",
             "Suspend Machine after a brief opportunity to abort (via suspendScript)" : "suspendscript"
          },
         "description" : "Action to take when Data Usage Limit exceeded:",
         "tooltip": "These are a mixture of preset options and scripts which can be changed by the user (Note: changes in scripts may not survive an update and should be backed up)"
    },
-    "disconnectDelay": { 
+    "disconnectDelay": {
         "type": "spinbutton",
         "default": 15,
         "min": 5,

@@ -78,9 +78,11 @@ The settings in this css file govern the width of the Applet and the font. Chang
 
 Note: These settings will be overwritten if the applet is reloaded.
 
-### Interfaces monitored by the optional ```vnstat``` display.
+### The optional ```vnstat``` display.
 
-The system program vnstat which provides the option of a graphic history of data used is automatically set up when it is installed to monitor the network devices/interfaces installed in the machine at the time. It is possible to add additional USB network devices and possibly bluetooth devices to the list of monitored interface ```man vnstat``` in a terminal will give details.
+The vnstat daemon runs in the background and collects info about your Internet usage all the time the machine is running and maintains a data set from once it is initially activated. It is automatically set up on installation to monitor the network devices/interfaces installed in the machine at the time. It is possible to add additional USB network devices and possibly bluetooth devices to the list of monitored interface ```man vnstat``` in a terminal will give details.
+
+Once vnstat is set up, tThe applet detects which device you're currently using, and exports a graph using vnstati. The latest version allows you to select the type of graph although for most users the default summary will be the most useful.
 
 ## Status
 

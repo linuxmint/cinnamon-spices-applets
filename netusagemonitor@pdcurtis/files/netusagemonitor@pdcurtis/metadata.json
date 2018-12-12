@@ -3,7 +3,7 @@
     "uuid": "netusagemonitor@pdcurtis",
     "name": "Network Data Usage Monitor",
     "description": "A Comprehensive Data Usage Monitor with alerts and cumulative data functions",
-    "version": "3.2.7",
+    "version": "3.2.8",
     "multiversion": true,
     "cinnamon-version": ["2.2","2.4","2.6","2.8","3.0","3.2","3.4","3.6","3.8","4.0"]
 }
