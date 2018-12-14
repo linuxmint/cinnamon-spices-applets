@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 00:43-0600\n"
+"POT-Creation-Date: 2018-12-13 18:37-0600\n"
 "PO-Revision-Date: 2018-05-16 13:55+0200\n"
 "Last-Translator: claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
@@ -18,53 +18,52 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: 3.8/applet.js:471
-msgid "Icing Task Manager is now Grouped Window List"
+#: 3.8/applet.js:476
+msgid "Icing Task Manager is deprecated"
 msgstr ""
 
-#: 3.8/applet.js:472
+#: 3.8/applet.js:477
 msgid ""
-"Please open the applet's settings and click \"Migrate Pinned Apps to Grouped "
-"Window List\". "
+"Please upgrade to Grouped Window List for a more stable, bug-free experience."
 msgstr ""
 
-#: 3.8/applet.js:473
+#: 3.8/applet.js:478
 msgid ""
-"Then from Applet Settings, replace Icing Task Manager with Grouped Window "
-"List."
+"Add GWL to your panel, open the applet's settings and click \"Migrate Pinned "
+"Apps to Grouped Window List\"."
 msgstr ""
 
-#: 3.8/applet.js:485
-msgid "Migration can only be performed on Cinnamon 4.0."
+#: 3.8/applet.js:490
+msgid "Migration can only be performed on Cinnamon 4.0+."
 msgstr ""
 
-#: 3.8/applet.js:496
+#: 3.8/applet.js:501
 msgid ""
 "Please add Grouped Window List to a panel before proceeding with the "
 "migration."
 msgstr ""
 
-#: 3.8/applet.js:504
+#: 3.8/applet.js:509
 msgid "ITM settings directory could not be found!"
 msgstr ""
 
-#: 3.8/applet.js:534
+#: 3.8/applet.js:539
 msgid "System favorites enabled - no migration is needed."
 msgstr ""
 
-#: 3.8/applet.js:577
+#: 3.8/applet.js:582
 msgid "Unable to find a suitable ITM settings file to migrate."
 msgstr ""
 
-#: 3.8/applet.js:586
+#: 3.8/applet.js:591
 msgid "Migration complete. "
 msgstr ""
 
-#: 3.8/applet.js:586
+#: 3.8/applet.js:591
 msgid " settings file(s) could not be migrated."
 msgstr ""
 
-#: 3.8/applet.js:592
+#: 3.8/applet.js:597
 msgid "Migration was successful."
 msgstr ""
 

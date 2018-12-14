@@ -1,7 +1,7 @@
 Icing Task Manager
 =============
 
-**Icing Task Manager is now deprecated for all Cinnamon 4.0 users. Please add the Grouped Window List applet to your panel, go to ITM's settings, and click "Migrate Pinned Apps to Grouped Window List".**
+**Icing Task Manager is deprecated for Cinnamon 4.0+. Please add the Grouped Window List applet to your panel, go to ITM's settings, and click "Migrate Pinned Apps to Grouped Window List".**
 
 **Issues should be opened on ITM's [dedicated repository](https://github.com/jaszhix/icingtaskmanager). All PRs should be submitted to the Cinnamon Spices repository.**
 

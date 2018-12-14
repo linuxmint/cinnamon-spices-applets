@@ -574,5 +574,9 @@
     "type": "button",
     "description": "Migrate Pinned Apps to Grouped Window List",
     "callback": "migratePinnedToGWL"
+  },
+  "deprecationNoticeRun": {
+    "type": "generic",
+    "default": false
   }
 }

@@ -291,6 +291,13 @@ class ITMApplet extends Applet.Applet {
 
     this.settings = new Settings.AppletSettings(this.state.settings, metadata.uuid, instance_id);
     this.bindSettings();
+
+    if (typeof this.on_applet_reloaded === 'function') {
+      this.isCinnamon4 = true;
+      this.notifyDeprecation();
+      global.log('Icing Task Manager is deprecated and has been forked as Grouped Window List in Cinnamon 4.0+. Please upgrade for improved stability.');
+    }
+
     // Passing an empty object instead of `this` because its only used by SignalManager to bind the callback, which
     // we already do here. Otherwise, it creates more circular references.
     this.signals = new SignalManager.SignalManager(null);
@@ -374,6 +381,7 @@ class ITMApplet extends Applet.Applet {
       {key: 'system-favorites', value: 'systemFavorites', cb: this._updateFavorites},
       {key: 'show-all-workspaces', value: 'showAllWorkspaces', cb: this.refreshAllAppLists},
       {key: 'list-monitor-windows', value: 'listMonitorWindows', cb: this.handleMonitorWindowsPrefsChange},
+      {key: 'deprecationNoticeRun', value: 'deprecationNoticeRun', cb: null},
     ];
 
     for (let i = 0, len = settingsProps.length; i < len; i++) {
@@ -392,10 +400,6 @@ class ITMApplet extends Applet.Applet {
   // Should be looked into more, and see if this should be a fix in a future Cinnamon PR. the on_applet_removed_from_panel
   // method removes applets and calls this method, all while as far as the user knows, the applet state should remain the same.
   on_applet_added_to_panel() {
-    if (typeof this.on_applet_reloaded === 'function') {
-      this.notifyDeprecation();
-    }
-
     if (this.state.appletReady && this.state.panelEditMode) {
       return;
     }
@@ -467,22 +471,23 @@ class ITMApplet extends Applet.Applet {
   }
 
   notifyDeprecation() {
+    if (this.state.settings.deprecationNoticeRun) return;
     let icon = this.getNotificationIcon();
-    let header = _('Icing Task Manager is now Grouped Window List');
-    let body = _('Please open the applet\'s settings and click "Migrate Pinned Apps to Grouped Window List". ')
-      + _('Then from Applet Settings, replace Icing Task Manager with Grouped Window List.');
+    let header = _('Icing Task Manager is deprecated');
+    let body = _('Please upgrade to Grouped Window List for a more stable, bug-free experience.')
+      + _('Add GWL to your panel, open the applet\'s settings and click "Migrate Pinned Apps to Grouped Window List".');
     Main.criticalNotify(
       header,
       body,
       icon
     );
-    this.notifyIcon = icon;
+    this.settings.setValue('deprecationNoticeRun', true);
   }
 
   migratePinnedToGWL() {
-    if (!this.notifyIcon) {
+    if (!this.isCinnamon4) {
       Main.criticalNotify(
-        _('Migration can only be performed on Cinnamon 4.0.'),
+        _('Migration can only be performed on Cinnamon 4.0+.'),
         '',
         this.getNotificationIcon()
       );
