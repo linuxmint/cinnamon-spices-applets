@@ -474,8 +474,8 @@ class ITMApplet extends Applet.Applet {
     if (this.state.settings.deprecationNoticeRun) return;
     let icon = this.getNotificationIcon();
     let header = _('Icing Task Manager is deprecated');
-    let body = _('Please upgrade to Grouped Window List for a more stable, bug-free experience.')
-      + _('Add GWL to your panel, open the applet\'s settings and click "Migrate Pinned Apps to Grouped Window List".');
+    let body = _('Please upgrade to Grouped Window List for a more stable, bug-free experience. ')
+      + _('Add GWL to your panel, then open ITM\'s settings and click "Migrate Pinned Apps to Grouped Window List".');
     Main.criticalNotify(
       header,
       body,
