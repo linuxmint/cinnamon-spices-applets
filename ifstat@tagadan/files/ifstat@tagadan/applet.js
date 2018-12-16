@@ -55,7 +55,7 @@ MyApplet.prototype = {
 			if (outa != "0.00" && outb =="0.00"){
 				printout="\u25bc\u25b3";}
 			if (outa == "undefined" && outb =="undefined"){
-				printout="";}
+				printout="\u25bd\u25b3";}
 
             		this.set_applet_tooltip(_(asd + "\nKB/s in: " + outa + "\nKB/s out: " + outb));
 			this.set_applet_label(printout);
