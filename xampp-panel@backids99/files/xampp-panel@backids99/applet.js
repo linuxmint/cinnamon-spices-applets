@@ -16,10 +16,10 @@ function _(str) {
 
 //applet command constants
 var CommandConstants = new function() {
-	this.COMMAND_START_XAMPP = "gksudo /opt/lampp/lampp start";
-	this.COMMAND_STOP_XAMPP = "gksudo /opt/lampp/lampp stop";
-	this.COMMAND_RESTART_XAMPP = "gksudo /opt/lampp/lampp restart";
-	this.COMMAND_PHP_CONFIG_EDIT = "gksudo xdg-open /opt/lampp/etc/php.ini";
+	this.COMMAND_START_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp start";
+	this.COMMAND_STOP_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stop";
+	this.COMMAND_RESTART_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart";
+	this.COMMAND_PHP_CONFIG_EDIT = "xed admin:///opt/lampp/etc/php.ini";
 	this.COMMAND_LAUNCH_PHPMYADMIN = "xdg-open http://localhost/phpmyadmin/";
 	this.COMMAND_LAUNCH_WEBDIR = "xdg-open http://localhost/";
 	this.COMMAND_OPEN_WEBDIR = "nemo /opt/lampp/htdocs/";
@@ -47,17 +47,17 @@ MyApplet.prototype = {
 		this.menuManager.addMenu(this.menu);
 
 		this.menu.addAction(_("XAMPP Start"), function(event) {
-						Util.spawnCommandLine(CommandConstants.COMMAND_START_XAMPP);
+                        Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_XAMPP,null,null);
 
 		});
 
 		this.menu.addAction(_("XAMPP Stop"), function(event) {
-						Util.spawnCommandLine(CommandConstants.COMMAND_STOP_XAMPP);
+                        Util.spawnCommandLineAsync(CommandConstants.COMMAND_STOP_XAMPP,null,null);
 
 		});
 
 		this.menu.addAction(_("XAMPP Restart"), function(event) {
-						Util.spawnCommandLine(CommandConstants.COMMAND_RESTART_XAMPP);
+                        Util.spawnCommandLineAsync(CommandConstants.COMMAND_RESTART_XAMPP,null,null);
 
 		});
 
