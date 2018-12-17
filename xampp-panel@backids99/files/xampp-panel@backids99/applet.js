@@ -16,6 +16,7 @@ function _(str) {
 
 //applet command constants
 var CommandConstants = new function() {
+    this.COMMAND_START_LINUX_MANAGER = "./.local/share/cinnamon/applets/xampp-panel@backids99/xamp_manager_wrap.sh";
 	this.COMMAND_START_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp start";
 	this.COMMAND_STOP_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp stop";
 	this.COMMAND_RESTART_XAMPP = "pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY /opt/lampp/lampp restart";
@@ -29,8 +30,6 @@ var CommandConstants = new function() {
 function MyApplet(orientation){
     this._init(orientation);
 }
-
-
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
@@ -46,19 +45,19 @@ MyApplet.prototype = {
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
 		this.menuManager.addMenu(this.menu);
 
+        this.menu.addAction(_("Start XAMPP manager"), function(event) {
+                        Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_LINUX_MANAGER,null,null);
+		});
 		this.menu.addAction(_("XAMPP Start"), function(event) {
                         Util.spawnCommandLineAsync(CommandConstants.COMMAND_START_XAMPP,null,null);
-
 		});
 
 		this.menu.addAction(_("XAMPP Stop"), function(event) {
                         Util.spawnCommandLineAsync(CommandConstants.COMMAND_STOP_XAMPP,null,null);
-
 		});
 
 		this.menu.addAction(_("XAMPP Restart"), function(event) {
                         Util.spawnCommandLineAsync(CommandConstants.COMMAND_RESTART_XAMPP,null,null);
-
 		});
 
 		//add a separator to separate the toggle buttons and actions
@@ -66,7 +65,6 @@ MyApplet.prototype = {
 
 		this.menu.addAction(_("Open Web Dir"), function(event) {
 						Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_WEBDIR);
-
 		});
 
 		this.menu.addAction(_("Launch Web Dir"), function(event) {
@@ -75,7 +73,6 @@ MyApplet.prototype = {
 
 		this.menu.addAction(_("Launch phpMyAdmin"), function(event) {
 						Util.spawnCommandLine(CommandConstants.COMMAND_LAUNCH_PHPMYADMIN);
-
 		});
 
 		this.menu.addAction(_("Edit default php.ini"), function(event) {
