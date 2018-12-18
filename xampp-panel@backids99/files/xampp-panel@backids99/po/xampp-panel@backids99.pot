@@ -17,11 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:42
+#: applet.js:40
 msgid "Xampp Panel"
 msgstr ""
 
-#: applet.js:50
+#: applet.js:48
+msgid "Start XAMPP manager"
+msgstr ""
+
+#: applet.js:51
 msgid "XAMPP Start"
 msgstr ""
 
@@ -29,23 +33,23 @@ msgstr ""
 msgid "XAMPP Stop"
 msgstr ""
 
-#: applet.js:60
+#: applet.js:59
 msgid "XAMPP Restart"
 msgstr ""
 
-#: applet.js:68
+#: applet.js:66
 msgid "Open Web Dir"
 msgstr ""
 
-#: applet.js:73
+#: applet.js:70
 msgid "Launch Web Dir"
 msgstr ""
 
-#: applet.js:77
+#: applet.js:74
 msgid "Launch phpMyAdmin"
 msgstr ""
 
-#: applet.js:82
+#: applet.js:78
 msgid "Edit default php.ini"
 msgstr ""
 
