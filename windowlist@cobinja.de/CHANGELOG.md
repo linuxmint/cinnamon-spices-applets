@@ -1,5 +1,9 @@
 Changelog
 
+2.4
+==
+- Switch to Cinnamon 4.0 as main supported version
+
 2.3.1
 ==
 Bugfix
