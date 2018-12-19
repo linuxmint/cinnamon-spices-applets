@@ -7,10 +7,9 @@ or to allow a reduced size width to save panel space.
 .numa-left {
 
 	text-align: center;
-	font-family: "Ubuntu Mono", Arial;
 	font-weight: bold;
 /*
-
+	font-family: "Ubuntu Mono", Arial;
 	min-width: 75px;
 	font-size: 95%;
 */
@@ -18,22 +17,20 @@ or to allow a reduced size width to save panel space.
 .numa-right {
 
 	text-align: center;
-	font-family: "Ubuntu Mono", Arial;
 	font-weight: bold;
-
 /*
+	font-family: "Ubuntu Mono", Arial;
 	min-width: 1px;
-    font-size: 95%;
+    	font-size: 95%;
 */
 }
 .numa-compact {
 	text-align: center;
-	font-family: "Ubuntu Mono", Arial;
 	font-weight: bold;
 /*
-
+	font-family: "Ubuntu Mono", Arial;
 	min-width: 1px;
-    font-size: 95%;
+    	font-size: 95%;
 */
 }
 
@@ -43,26 +40,27 @@ The colour parameters are red, green, blue, and transparency or a name
 
 .numa-not-connected {
 background-color: rgba(0,0,0,0.0);
- border-radius: 10px;
+ border-radius: 0px;
 
 }
 
 .numa-connected {
-background-color: rgba(0,255,0,0.3);
- border-radius: 10px;
+background-color: rgba(0,0,0,0.0);
+ border-radius: 0px;
 
 }
 
 .numa-alert {
 background-color: orange;
- border-radius: 10px;
+ border-radius: 0px;
 }
 
 .numa-limit-exceeded {
 background-color: red;
- border-radius: 10px;
+ border-radius: 0px;
 }
 /*
 06-09-2013 Initial version 
 04-05-2014 Modifications to reflect changes in way minimum display width is determined by padding rather than by using css 
+19-12-2018 Modifications to have the same look as other applets 
 */
