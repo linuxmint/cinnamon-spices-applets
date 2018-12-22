@@ -19,7 +19,7 @@ msgstr ""
 "Language: sv\n"
 
 #: applet.js:61
-msgid "Has never run succesfully!"
+msgid "Has never run successfully!"
 msgstr "Har aldrig slutförts!"
 
 #: applet.js:77

@@ -19,7 +19,7 @@ msgstr ""
 "Language: da\n"
 
 #: applet.js:61
-msgid "Has never run succesfully!"
+msgid "Has never run successfully!"
 msgstr "Er aldrig gennemført!"
 
 #: applet.js:77

@@ -47,7 +47,7 @@ BackupStateApplet.prototype = {
     refreshState: function refreshLocation() {
       if (this._findDate() == 'Has never run successfully!') {
         this.set_applet_icon_name("dialog-error-symbolic");
-        this.set_applet_tooltip(_("Has never run succesfully!"));
+        this.set_applet_tooltip(_("Has never run successfully!"));
       }
       else {
         let shortDate = new Date(this._findDate());

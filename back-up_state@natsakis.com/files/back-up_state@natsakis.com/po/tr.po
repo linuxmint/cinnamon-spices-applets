@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: applet.js:61
-msgid "Has never run succesfully!"
+msgid "Has never run successfully!"
 msgstr "Hiç başarıyla yürütülemedi!"
 
 #: applet.js:77

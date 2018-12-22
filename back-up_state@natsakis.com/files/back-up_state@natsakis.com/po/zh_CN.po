@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: applet.js:61
-msgid "Has never run succesfully!"
+msgid "Has never run successfully!"
 msgstr "从未成功运行！"
 
 #: applet.js:77
