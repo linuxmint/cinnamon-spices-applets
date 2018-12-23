@@ -292,6 +292,10 @@ class CinnamenuApplet extends TextIconApplet {
       this.updateIconAndLabel();
       this.updateActivateOnHover();
       this.init = true;
+
+  get gridWidth() {
+    return gridWidths[this.state.settings.appsGridColumnCount] * global.ui_scale;
+  }
     });
   }
 
@@ -1085,7 +1089,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.applicationsGridBox.hide();
       this.applicationsListBox.show();
     } else {
-      this.applicationsGridBox.width = gridWidths[this.state.settings.appsGridColumnCount];
+      this.applicationsGridBox.width = this.gridWidth;
       this.applicationsListBox.hide();
       this.applicationsGridBox.show();
     }
@@ -2228,7 +2232,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.applicationsGridBox = new Clutter.Actor({
       layout_manager: new Clutter.GridLayout(),
       reactive: true,
-      width: gridWidths[this.state.settings.appsGridColumnCount]
+      width: this.gridWidth
     });
     this.applicationsBoxWrapper = new St.BoxLayout({
       style_class: 'menu-applications-inner-box',
