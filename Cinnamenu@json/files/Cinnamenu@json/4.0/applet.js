@@ -275,7 +275,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
       this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
       this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
-      this.signals.connect(global, 'scale-changed', (...args) => this.state.set({menuHeight: 0}));
+      this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
 
       this.categoryButtons = [];
       this.powerGroupButtons = [];
@@ -824,7 +824,7 @@ class CinnamenuApplet extends TextIconApplet {
   *  |____\|C
   */
   getVectorInfo(buttonHeight) {
-    let [mx, my, mask] = global.get_pointer();
+    let [mx, my, , ] = global.get_pointer();
     // Slightly distance the polygon from the cursor so categories update quickly.
     if (!this.mxOffset) {
       let mxOffset = Math.floor(buttonHeight / 38);

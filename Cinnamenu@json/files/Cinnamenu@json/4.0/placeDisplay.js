@@ -1,6 +1,5 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
-const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Signals = imports.signals;
@@ -53,7 +52,7 @@ class PlaceInfo {
         info = this.file.query_info('standard::icon', 0, null);
         return info.get_icon();
       },
-      (e) => {
+      () => {
         // return a generic icon for this kind
         switch (this.kind) {
           case 'network':
@@ -109,7 +108,7 @@ const DEFAULT_DIRECTORIES = [
 ];
 
 class PlacesManager {
-  constructor(useSymbolic) {
+  constructor() {
     this.places = {
       special: [],
       devices: [],
@@ -130,7 +129,7 @@ class PlacesManager {
     for (let i = 0, len = DEFAULT_DIRECTORIES.length; i < len; i++) {
       let specialPath = GLib.get_user_special_dir(DEFAULT_DIRECTORIES[i]);
       if (specialPath) {
-        if (specialPath == homePath) {
+        if (specialPath === homePath) {
           continue;
         }
         this.places.special.push(

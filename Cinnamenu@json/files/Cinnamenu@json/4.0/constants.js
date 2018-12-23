@@ -42,3 +42,5 @@ const searchThresholds = {
 };
 
 const markdownProps = ['name', 'description'];
+
+module.exports = {_, REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode, fuzzyOptions, gridWidths, searchThresholds, markdownProps};

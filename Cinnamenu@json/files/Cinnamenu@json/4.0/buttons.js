@@ -110,7 +110,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     this.label.realize();
 
     this.actor._delegate = {
-      handleDragOver: (source, actor, x, y, time) => {
+      handleDragOver: (source, /* actor, x, y, time */) => {
         if (!source.index
           || source.index === this.index) {
           return DragMotionResult.NO_DROP;
@@ -119,7 +119,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.actor.set_opacity(50);
         return DragMotionResult.MOVE_DROP;
       },
-      acceptDrop: (source, actor, x, y, time) => {
+      acceptDrop: (source, /* actor, x, y, time */) => {
         if (!source.index
           || source.index === this.index) {
           this.state.set({dragIndex: -1});
@@ -287,7 +287,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
     this.setColumnWidths([8, 132])
   }
 
-  handleEnter(actor, event) {
+  handleEnter() {
     this.entered = true;
     this.actor.add_style_pseudo_class('active');
   }
@@ -309,6 +309,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
       this.buttonState.trigger('toggleMenu');
       return false;
     }
+    let destFile;
     switch (this.action) {
       case 'add_to_panel':
         if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
@@ -319,8 +320,8 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
           global.settings.set_strv('enabled-applets', enabled_applets);
         }
 
-        let launcherApplet = Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
-        launcherApplet.acceptNewLauncher(this.buttonState.app.get_id());
+        Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER)
+          .acceptNewLauncher(this.buttonState.app.get_id());
 
         this.buttonState.trigger('toggleMenu');
         if (this.state) {
@@ -328,10 +329,15 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         }
         break;
       case 'add_to_desktop':
-        let file = Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename());
-        let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
+        destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
         tryFn(function() {
-          file.copy(destFile, 0, null, function() {});
+          Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename())
+            .copy(
+              Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id()),
+              0,
+              null,
+              null
+          );
           changeModeGFile(destFile, 755);
         }, function(e) {
           global.log(e);
@@ -415,7 +421,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     // DND
     this.actor._delegate = {
-      handleDragOver: (source, actor, x, y, time) => {
+      handleDragOver: (source, /* actor, x, y, time */) => {
         if (!source.appIndex
           || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
@@ -427,7 +433,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.actor.set_opacity(50);
         return DragMotionResult.MOVE_DROP;
       },
-      acceptDrop: (source, actor, x, y, time) => {
+      acceptDrop: (source, /* actor, x, y, time */) => {
         if (!source.appIndex
           || source.appIndex === this.buttonState.appIndex
           || this.state.currentCategory !== 'favorites') {
@@ -1218,3 +1224,5 @@ class GroupButton extends PopupBaseMenuItem {
     unref(this);
   }
 };
+
+module.exports = {CategoryListButton, AppListGridButton, GroupButton};
