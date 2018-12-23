@@ -43,7 +43,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     this.connectIds = [
       this.state.connect({
         menuOpened: () => {
-          if (this.id === 'favorites') {
+          if (this.id === this.state.settings.currentCategory) {
             this.actor.set_style_class_name('menu-category-button-selected')
           }
         }
@@ -176,7 +176,6 @@ class CategoryListButton extends PopupBaseMenuItem {
     if (this.id) {
       this.state.set({currentCategory: this.id});
     }
-    Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.state.trigger('selectorMethod', this.selectorMethod, this.id));
   }
 
   handleEnter(actor, event) {

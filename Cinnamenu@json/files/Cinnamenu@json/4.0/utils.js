@@ -1,7 +1,7 @@
 const Gio = imports.gi.Gio;
 const {write_string_to_stream} = imports.gi.Cinnamon
 const {listDirAsync} = imports.misc.fileUtils;
-const {tryFn} = imports.misc.util;
+const {each, tryFn} = imports.misc.util;
 
 const sortBy = function(array = [], property = '', direction = 'asc') {
   let arg;
@@ -102,6 +102,7 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
   if (!changed || knownProviders.length === 0) {
     return next();
   }
+
   // The default title for the extensions section tells the user no extensions are found.
   schema.layout.extensionProvidersSection.title = 'Extensions';
   tryFn(function() {
@@ -123,13 +124,11 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
   next();
 };
 
-const setSchema = function(path, cb) {
-  let schema, shouldReturn;
+const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
+  let schema, shouldReturn, startupCategoryOptionsEmpty;
   let knownProviders = [];
   let enabledProviders = global.settings.get_strv('enabled-search-providers');
-  let schemaFile = Gio.File.new_for_path(path + '/' + 'settings-schema.json');
-  let backupSchemaFile = Gio.File.new_for_path(path + '/' + 'settings-schema-backup.json');
-  let next = () => cb(knownProviders, enabledProviders);
+  let next = () => cb(knownProviders, enabledProviders, startupCategoryOptionsEmpty);
   let [success, json] = schemaFile.load_contents(null);
   if (!success) return next();
 
@@ -141,6 +140,9 @@ const setSchema = function(path, cb) {
   if (shouldReturn) {
     return next();
   }
+
+  startupCategoryOptionsEmpty = Object.keys(schema.startupCategory.options).length < 2;
+
   // Back up the schema file if it doesn't have any modifications generated from this function.
   if (schema.layout.extensionProvidersSection.title !== 'Extensions') {
     success = schemaFile.copy(backupSchemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)

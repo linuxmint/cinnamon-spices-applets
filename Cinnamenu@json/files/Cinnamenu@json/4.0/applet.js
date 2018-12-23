@@ -19,7 +19,7 @@ const {Tooltip} = imports.ui.tooltips;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
-const {spawnCommandLine, latinise, find, findIndex, map, tryFn} = imports.misc.util;
+const {spawnCommandLine, latinise, each, find, findIndex, map, tryFn} = imports.misc.util;
 const {createStore} = imports.misc.state;
 const {sortBy, sortDirs, setSchema} = require('./utils');
 const fuzzy = require('./fuzzy');
@@ -93,7 +93,11 @@ class CinnamenuApplet extends TextIconApplet {
       this.init = false;
       this.set_applet_label(_('Initializing'));
     }
-    setSchema(metadata.path, (knownProviders, enabledProviders) => {
+
+    this.schemaFile = Gio.File.new_for_path(metadata.path + '/settings-schema.json');
+    this.backupSchemaFile = Gio.File.new_for_path(metadata.path + '/settings-schema-backup.json');
+
+    setSchema(metadata.path, this.schemaFile, this.backupSchemaFile, (knownProviders = [], enabledProviders = [], startupCategoryOptionsEmpty = false) => {
       this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
       this.appFavorites = getAppFavorites();
       this.state = createStore({
@@ -108,6 +112,7 @@ class CinnamenuApplet extends TextIconApplet {
         isListView: false,
         iconSize: 64,
         currentCategory: 'favorites',
+        startupCategoryOptionsEmpty,
         categoryDragged: false,
         fallbackDescription: '',
         appletReady: false,
@@ -123,14 +128,9 @@ class CinnamenuApplet extends TextIconApplet {
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
       this.state.connect({
-        currentCategory: () => {
-          for (let i = 0; i < this.categoryButtons.length; i++) {
-            if (this.categoryButtons[i].id === this.state.currentCategory) {
-              this.categoryButtons[i].actor.set_style_class_name('menu-category-button-selected');
-            } else {
-              this.categoryButtons[i].actor.set_style_class_name('menu-category-button');
-            }
-          }
+        currentCategory: ({currentCategory}) => {
+          this.setActiveCategoryStyle();
+          Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.selectCategory(currentCategory));
         },
         categoryDragged: ({categoryDragged}) => {
           if (categoryDragged && this.vectorBox) {
@@ -185,7 +185,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.searchBox.hide();
             this.selectedAppBox.show();
           }
-          this.state.trigger('currentCategory');
+          this.setActiveCategoryStyle();
         },
         selectorMethod: (method, id) => this[method](id),
         openMenu: () => this.menu.open(),
@@ -239,8 +239,7 @@ class CinnamenuApplet extends TextIconApplet {
 
       this.createMenu(orientation);
 
-      this.settings = new AppletSettings(this.state.settings, metadata.uuid, instance_id);
-      this.bindSettingsChanges();
+      this.loadSettings();
       this.state.set({
         isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
         fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
@@ -257,10 +256,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.tracker = Cinnamon.WindowTracker.get_default();
       this.appSystem = Cinnamon.AppSystem.get_default();
 
-      this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => {
-        this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
-        this.refresh();
-      });
+      this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
 
       // FS search
       this._fileFolderAccessActive = false;
@@ -293,9 +289,67 @@ class CinnamenuApplet extends TextIconApplet {
       this.updateActivateOnHover();
       this.init = true;
 
+      this.initCategories();
+    });
+  }
+
   get gridWidth() {
     return gridWidths[this.state.settings.appsGridColumnCount] * global.ui_scale;
   }
+
+  loadSettings() {
+    if (this.settings) {
+      this.settings.finalize();
+      this.state.settings = {};
+    }
+
+    // XletSettings loads an old version of the schema on applet reload after its updated
+    // in Cinnamenu, and the md5 mismatch overwrites it because it wasn't designed with the
+    // assumption applets would dynamcally modify their own schema at runtime. This carries
+    // over the previous settings instance to the next applet instance on reload to prevent it.
+    // Should be investigated and fixed in a future Cinnamon PR.
+    if (global.cinnamenuBuffer) {
+      this.settings = global.cinnamenuBuffer.settings;
+      this.state.settings = global.cinnamenuBuffer.state;
+      global.cinnamenuBuffer = null;
+      each(this.settings.bindings, (val, key) => this.settings.unbindAll(key))
+    } else {
+      this.settings = new AppletSettings(this.state.settings, __meta.uuid, this.instance_id);
+    }
+
+    this.bindSettingsChanges();
+  }
+
+  setStartupCategoryOptions(categoryButtons) {
+    this.schemaFile = Gio.File.new_for_path(__meta.path + '/settings-schema.json');
+    let {startupCategory} = this.state.settings;
+    let startupCategoryValid = false;
+    let [success, json] = this.schemaFile.load_contents(null);
+    if (!success) return;
+    let shouldReturn = tryFn(function() {
+      json = JSON.parse(json);
+    }, () => true);
+
+    if (shouldReturn || Object.keys(json.startupCategory.options).length === categoryButtons.length) return;
+
+    each(categoryButtons, function(category) {
+      json.startupCategory.options[category.categoryNameText] = category.id;
+      if (category.id === startupCategory) startupCategoryValid = true;
+    });
+
+    if (!startupCategoryValid) this.settings.setValue('startupCategory', 'favorites');
+
+    tryFn(() => {
+      json = JSON.stringify(json);
+      let raw = this.schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
+      let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
+      Cinnamon.write_string_to_stream(out, json);
+      out.close(null);
+      this.loadSettings();
+    }, (e) => {
+      if (this.backupSchemaFile.query_exists(null)) {
+        this.backupSchemaFile.copy(this.schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
+      }
     });
   }
 
@@ -305,6 +359,16 @@ class CinnamenuApplet extends TextIconApplet {
     } else {
       this.hide_applet_label(false);
     }
+  }
+
+  on_applet_reloaded() {
+    let {knownProviders, enabledProviders} = this.state
+    global.cinnamenuBuffer = {
+      settings: this.settings,
+      state: this.state.settings,
+      knownProviders,
+      enabledProviders
+    };
   }
 
   on_orientation_changed(orientation) {
@@ -328,7 +392,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.settings) {
       return;
     }
-    this.settings.finalize();
+    if (!global.cinnamenuBuffer) this.settings.finalize();
     this.destroy();
   }
 
@@ -573,6 +637,11 @@ class CinnamenuApplet extends TextIconApplet {
         cb: null
       },
       {
+        key: 'startupCategory',
+        value: 'startupCategory',
+        cb: null
+      },
+      {
         key: 'menu-icon-custom',
         value: 'menuIconCustom',
         cb: this.updateIconAndLabel
@@ -663,7 +732,7 @@ class CinnamenuApplet extends TextIconApplet {
       {
         key: 'show-places',
         value: 'showPlaces',
-        cb: this.refresh
+        cb: this.onEnablePlacesChange
       },
       {
         key: 'show-application-icons',
@@ -770,12 +839,30 @@ class CinnamenuApplet extends TextIconApplet {
     return true;
   }
 
+  onEnableRecentChange() {
+    this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
+    if (this.state.settings.startupCategory === 'recent') {
+      this.setStartupCategoryOptions(this.categoryButtons);
+    }
+    this.refresh();
+  }
+
+  onEnablePlacesChange() {
+    if (this.state.settings.startupCategory === 'places') {
+      this.setStartupCategoryOptions(this.categoryButtons);
+    }
+    this.refresh();
+  }
+
   onEnableBookmarksChange(enableBookmarks, fromInit = false) {
     if (enableBookmarks) {
       this.bookmarksManager = new bookmarksManager();
     } else if (this.bookmarksManager) {
       this.bookmarksManager.destroy();
       this.bookmarksManager = null;
+      if (this.state.settings.startupCategory === 'bookmarks') {
+        this.setStartupCategoryOptions(this.categoryButtons);
+      }
     }
     if (!fromInit) {
       this.refresh();
@@ -790,6 +877,8 @@ class CinnamenuApplet extends TextIconApplet {
       menuHeight: 0
     });
     this.mxOffset = null;
+    this.categoryButtons = [];
+    this.initCategories(false);
     this.display();
     this.clearEnteredActors();
     this.destroyAppButtons();
@@ -951,11 +1040,10 @@ class CinnamenuApplet extends TextIconApplet {
     this.buildCategories();
   }
 
-  buildCategories() {
-    let isReRender = this.categoryButtons.length > 0;
+  initCategories(isReRender) {
     let buttons = [];
+    let categoriesChanged = false;
     if (isReRender) {
-      this.categoriesBox.remove_all_children();
       buttons.push(find(this.categoryButtons, button => button.id === 'all'));
     } else {
       buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
@@ -1022,6 +1110,7 @@ class CinnamenuApplet extends TextIconApplet {
     // If a category option is enabled after the settings are set, or an application is installed
     // using a new category, we need to update the category order settings so it will render.
     if (buttons.length !== this.state.settings.categories.length) {
+      categoriesChanged = true;
       for (let i = 0; i < buttons.length; i++) {
         if (this.state.settings.categories.indexOf(buttons[i].id) === -1) {
           this.state.settings.categories.push(buttons[i].id);
@@ -1035,14 +1124,51 @@ class CinnamenuApplet extends TextIconApplet {
       }
       button.index = i;
       this.categoryButtons.push(button);
-      this.categoriesBox.add_actor(button.actor);
     }
+
+    if ((categoriesChanged || this.state.startupCategoryOptionsEmpty) && !isReRender) {
+      this.setStartupCategoryOptions(buttons);
+    }
+
     buttons = undefined;
   }
 
+  buildCategories() {
+    let isReRender = this.categoryButtons.length > 0;
+    if (isReRender) {
+      this.categoriesBox.remove_all_children();
+      this.initCategories(true);
+    }
+    each(this.categoryButtons, (button) => this.categoriesBox.add_actor(button.actor))
+  }
+
+  setActiveCategoryStyle() {
+    let {currentCategory} = this.state;
+    for (let i = 0; i < this.categoryButtons.length; i++) {
+      if (this.categoryButtons[i].id === currentCategory) {
+        this.categoryButtons[i].actor.set_style_class_name('menu-category-button-selected');
+      } else {
+        this.categoryButtons[i].actor.set_style_class_name('menu-category-button');
+      }
+    }
+  }
+
   selectCategory(categoryId) {
+    if (this.willUnmount) return;
     this.clearApplicationsBox();
-    this.displayApplications(this.listApplications(categoryId));
+    switch (categoryId) {
+      case 'places':
+        this.selectAllPlaces();
+        break;
+      case 'recent':
+        this.displayApplications(this.listRecent());
+        break;
+      case 'bookmarks':
+        this.displayApplications(this.listWebBookmarks());
+        break;
+      default:
+        this.displayApplications(this.listApplications(categoryId));
+    }
   }
 
   selectAllPlaces() {
@@ -1051,16 +1177,6 @@ class CinnamenuApplet extends TextIconApplet {
       .concat(this.listBookmarks())
       .concat(this.listDevices());
     this.displayApplications(places);
-  }
-
-  selectRecent() {
-    this.clearApplicationsBox();
-    this.displayApplications(this.listRecent());
-  }
-
-  selectWebBookmarks() {
-    this.clearApplicationsBox();
-    this.displayApplications(this.listWebBookmarks());
   }
 
   switchApplicationsView(fromToggle) {
@@ -1080,8 +1196,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
     this.state.set({
       isListView: isListView,
-      iconSize: iconSize,
-      currentCategory: 'favorites'
+      iconSize: iconSize
     });
     if (isListView) {
       this.lastGridWidth = this.applicationsGridBox.width
@@ -1362,12 +1477,12 @@ class CinnamenuApplet extends TextIconApplet {
       return [];
     }
     if (!this.state.searchWebErrorsShown && !Firefox.Gda) {
-      let notifyMessage = _('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.');
-      this.answerText.set_text(notifyMessage);
+      this.answerText.set_text(_('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.'));
       this.answerText.show();
     } else if (this.answerText.is_visible() && !this.state.expressionActive) {
-      this.answerText.hide();
+      this.answerText.hide()
     }
+
     this.state.set({searchWebErrorsShown: true});
 
     let res = []
@@ -1546,9 +1661,11 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   resetDisplayState() {
+    let {startupCategory} = this.state.settings;
     this.resetSearch();
-    this.state.set({currentCategory: 'favorites'});
-    this.selectCategory('favorites');
+    if (startupCategory === 'bookmarks') this.answerText.set_text(_('Please wait...'));
+    this.answerText.show();
+    this.state.set({currentCategory: startupCategory}, true);
   }
 
   onMenuKeyPress(actor, event) {
@@ -1907,6 +2024,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     if (this.state.searchActive && searchText.length === 0) {
       this.resetDisplayState();
+      return;
     }
 
     this.state.set({searchActive: searchText.length > 0});
@@ -2101,6 +2219,8 @@ class CinnamenuApplet extends TextIconApplet {
       }
     }
     this.columnsCount = columnsCount;
+
+    if (this.state.currentCategory === 'bookmarks') this.answerText.hide();
   }
 
   display() {
