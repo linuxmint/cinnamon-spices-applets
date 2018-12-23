@@ -19,10 +19,9 @@ const {Tooltip} = imports.ui.tooltips;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
-const {listDirAsync} = imports.misc.fileUtils;
 const {spawnCommandLine, latinise, find, findIndex, map, tryFn} = imports.misc.util;
 const {createStore} = imports.misc.state;
-const {sortBy, sortDirs} = require('./utils');
+const {sortBy, sortDirs, setSchema} = require('./utils');
 const fuzzy = require('./fuzzy');
 const {
   _,
@@ -94,7 +93,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.init = false;
       this.set_applet_label(_('Initializing'));
     }
-    this.setSchema(metadata.path, (knownProviders, enabledProviders) => {
+    setSchema(metadata.path, (knownProviders, enabledProviders) => {
       this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
       this.appFavorites = getAppFavorites();
       this.state = createStore({
@@ -294,132 +293,6 @@ class CinnamenuApplet extends TextIconApplet {
       this.updateActivateOnHover();
       this.init = true;
     });
-  }
-
-  setSchema(path, cb) {
-    let schema, shouldReturn;
-    let knownProviders = [];
-    let enabledProviders = global.settings.get_strv('enabled-search-providers');
-    let schemaFile = Gio.File.new_for_path(path + '/' + 'settings-schema.json');
-    let backupSchemaFile = Gio.File.new_for_path(path + '/' + 'settings-schema-backup.json');
-    let next = () => cb(knownProviders, enabledProviders);
-    let [success, json] = schemaFile.load_contents(null);
-    if (!success) return next();
-
-    tryFn(function() {
-      schema = JSON.parse(json);
-    }, () => {
-      shouldReturn = true;
-    });
-    if (shouldReturn) {
-      return next();
-    }
-    // Back up the schema file if it doesn't have any modifications generated from this function.
-    if (schema.layout.extensionProvidersSection.title !== 'Extensions') {
-      success = schemaFile.copy(backupSchemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
-      if (!success) return next();
-    }
-    let getMetaData = (dir, file, name) => {
-      if (name.indexOf('@') === -1) {
-        return null;
-      }
-      let fd = Gio.File.new_for_path(dir.get_path() + '/' + name + '/metadata.json');
-      if (!fd.query_exists(null)) {
-        return null;
-      }
-      let [success, json] = fd.load_contents(null);
-      if (!success) {
-        return null;
-      }
-
-      tryFn(function() {
-        file = JSON.parse(json);
-      }, function() {
-        shouldReturn = true;
-      });
-      if (shouldReturn) {
-        return null;
-      }
-
-      return file;
-    };
-    let buildSettings = (fds) => {
-      // Build the schema file with the available search provider UUIDs.
-      schema.layout.extensionProvidersSection.keys = [];
-      let changed = false;
-      for (let z = 0; z < fds.length; z++) {
-        let [dir, files] = fds[z];
-        for (let i = 0; i < files.length; i++) {
-          let name = files[i].get_name();
-          if (name.indexOf('@') === -1) {
-            continue;
-          }
-          files[i] = getMetaData(dir, files[i], name);
-          if (!files[i]) {
-            continue;
-          }
-          changed = true;
-          knownProviders.push(name);
-          schema.layout.extensionProvidersSection.keys.push(files[i].uuid);
-          schema[files[i].uuid] = {
-            type: 'checkbox',
-            default: false,
-            description: files[i].name,
-            tooltip: files[i].description,
-            dependency: 'enable-search-providers'
-          }
-        }
-      }
-
-      // Write to file if there is a change in providers
-      if (!changed || knownProviders.length === 0) {
-        return next();
-      }
-      // The default title for the extensions section tells the user no extensions are found.
-      schema.layout.extensionProvidersSection.title = 'Extensions';
-      tryFn(function() {
-        json = JSON.stringify(schema);
-        let raw = schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
-        let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
-        Cinnamon.write_string_to_stream(out, json);
-        out.close(null);
-      }, () => {
-        shouldReturn = true;
-      });
-      if (shouldReturn) {
-        // Restore from the backup schema if it exists
-        if (backupSchemaFile.query_exists(null)) {
-          backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
-        }
-        return next();
-      }
-      next();
-    };
-    let providerFiles = [];
-    let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
-    let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
-    if (dataDir.query_exists(null)) {
-      listDirAsync(dataDir, (files) => {
-        providerFiles = providerFiles.concat([[dataDir, files]]);
-        if (userDataDir.query_exists(null)) {
-          listDirAsync(userDataDir, (files) => {
-            providerFiles = providerFiles.concat([[userDataDir, files]]);
-            buildSettings(providerFiles);
-          });
-        } else {
-          buildSettings(providerFiles);
-        }
-      });
-    } else if (userDataDir.query_exists(null)) {
-      listDirAsync(userDataDir, (files) => {
-        buildSettings([[userDataDir, files]]);
-      });
-    } else {
-      if (backupSchemaFile.query_exists(null)) {
-        backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
-      }
-      next();
-    }
   }
 
   update_label_visible() {
