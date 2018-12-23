@@ -1,9 +1,7 @@
-const GObject = imports.gi.GObject;
 const Gio = imports.gi.Gio;
 const {write_string_to_stream} = imports.gi.Cinnamon
 const {listDirAsync} = imports.misc.fileUtils;
-const {find, tryFn} = imports.misc.util;
-const Mainloop = imports.mainloop;
+const {tryFn} = imports.misc.util;
 
 const sortBy = function(array = [], property = '', direction = 'asc') {
   let arg;
@@ -20,7 +18,7 @@ const sortBy = function(array = [], property = '', direction = 'asc') {
   });
 }
 
-const sortDirs = (dirs) => {
+const sortDirs = function(dirs) {
   dirs.sort(function(a, b) {
     let prefCats = ['administration', 'preferences'];
     let menuIdA = a.get_menu_id().toLowerCase();
@@ -46,6 +44,85 @@ const sortDirs = (dirs) => {
   return dirs;
 };
 
+const getMetaData = function(dir, name) {
+  let file, shouldReturn;
+  if (name.indexOf('@') === -1) {
+    return null;
+  }
+  let fd = Gio.File.new_for_path(dir.get_path() + '/' + name + '/metadata.json');
+  if (!fd.query_exists(null)) {
+    return null;
+  }
+  let [success, json] = fd.load_contents(null);
+  if (!success) {
+    return null;
+  }
+
+  tryFn(function() {
+    file = JSON.parse(json);
+  }, function() {
+    shouldReturn = true;
+  });
+  if (shouldReturn) {
+    return null;
+  }
+
+  return file;
+};
+
+const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSchemaFile, next) {
+  // Build the schema file with the available search provider UUIDs.
+  schema.layout.extensionProvidersSection.keys = [];
+  let changed = false, shouldReturn = false;
+  for (let z = 0; z < fds.length; z++) {
+    let [dir, files] = fds[z];
+    for (let i = 0; i < files.length; i++) {
+      let name = files[i].get_name();
+      if (name.indexOf('@') === -1) {
+        continue;
+      }
+      files[i] = getMetaData(dir, name);
+      if (!files[i]) {
+        continue;
+      }
+      changed = true;
+      knownProviders.push(name);
+      schema.layout.extensionProvidersSection.keys.push(files[i].uuid);
+      schema[files[i].uuid] = {
+        type: 'checkbox',
+        default: false,
+        description: files[i].name,
+        tooltip: files[i].description,
+        dependency: 'enable-search-providers'
+      }
+    }
+  }
+
+  // Write to file if there is a change in providers
+  if (!changed || knownProviders.length === 0) {
+    return next();
+  }
+  // The default title for the extensions section tells the user no extensions are found.
+  schema.layout.extensionProvidersSection.title = 'Extensions';
+  tryFn(function() {
+    let json = JSON.stringify(schema);
+    let raw = schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
+    let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
+    write_string_to_stream(out, json);
+    out.close(null);
+  }, () => {
+    shouldReturn = true;
+  });
+  if (shouldReturn) {
+    // Restore from the backup schema if it exists
+    if (backupSchemaFile.query_exists(null)) {
+      backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
+    }
+    return next();
+  }
+  next();
+};
+
 const setSchema = function(path, cb) {
   let schema, shouldReturn;
   let knownProviders = [];
@@ -69,82 +146,7 @@ const setSchema = function(path, cb) {
     success = schemaFile.copy(backupSchemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
     if (!success) return next();
   }
-  let getMetaData = (dir, file, name) => {
-    if (name.indexOf('@') === -1) {
-      return null;
-    }
-    let fd = Gio.File.new_for_path(dir.get_path() + '/' + name + '/metadata.json');
-    if (!fd.query_exists(null)) {
-      return null;
-    }
-    let [success, json] = fd.load_contents(null);
-    if (!success) {
-      return null;
-    }
 
-    tryFn(function() {
-      file = JSON.parse(json);
-    }, function() {
-      shouldReturn = true;
-    });
-    if (shouldReturn) {
-      return null;
-    }
-
-    return file;
-  };
-  let buildSettings = (fds) => {
-    // Build the schema file with the available search provider UUIDs.
-    schema.layout.extensionProvidersSection.keys = [];
-    let changed = false;
-    for (let z = 0; z < fds.length; z++) {
-      let [dir, files] = fds[z];
-      for (let i = 0; i < files.length; i++) {
-        let name = files[i].get_name();
-        if (name.indexOf('@') === -1) {
-          continue;
-        }
-        files[i] = getMetaData(dir, files[i], name);
-        if (!files[i]) {
-          continue;
-        }
-        changed = true;
-        knownProviders.push(name);
-        schema.layout.extensionProvidersSection.keys.push(files[i].uuid);
-        schema[files[i].uuid] = {
-          type: 'checkbox',
-          default: false,
-          description: files[i].name,
-          tooltip: files[i].description,
-          dependency: 'enable-search-providers'
-        }
-      }
-    }
-
-    // Write to file if there is a change in providers
-    if (!changed || knownProviders.length === 0) {
-      return next();
-    }
-    // The default title for the extensions section tells the user no extensions are found.
-    schema.layout.extensionProvidersSection.title = 'Extensions';
-    tryFn(function() {
-      json = JSON.stringify(schema);
-      let raw = schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
-      let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
-      write_string_to_stream(out, json);
-      out.close(null);
-    }, () => {
-      shouldReturn = true;
-    });
-    if (shouldReturn) {
-      // Restore from the backup schema if it exists
-      if (backupSchemaFile.query_exists(null)) {
-        backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
-      }
-      return next();
-    }
-    next();
-  };
   let providerFiles = [];
   let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
   let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
@@ -154,15 +156,15 @@ const setSchema = function(path, cb) {
       if (userDataDir.query_exists(null)) {
         listDirAsync(userDataDir, (files) => {
           providerFiles = providerFiles.concat([[userDataDir, files]]);
-          buildSettings(providerFiles);
+          buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
         });
       } else {
-        buildSettings(providerFiles);
+        buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
       }
     });
   } else if (userDataDir.query_exists(null)) {
     listDirAsync(userDataDir, (files) => {
-      buildSettings([[userDataDir, files]]);
+      buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
     });
   } else {
     if (backupSchemaFile.query_exists(null)) {
@@ -171,3 +173,5 @@ const setSchema = function(path, cb) {
     next();
   }
 };
+
+module.exports = {sortBy, sortDirs, getMetaData, buildSettings, setSchema};
