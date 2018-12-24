@@ -19,9 +19,9 @@ const {Tooltip} = imports.ui.tooltips;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
-const {spawnCommandLine, latinise, each, find, findIndex, map, tryFn} = imports.misc.util;
+const {spawnCommandLine, latinise, each, find, findIndex, map} = imports.misc.util;
 const {createStore} = imports.misc.state;
-const {sortBy, sortDirs, setSchema} = require('./utils');
+const {tryFn, sortBy, sortDirs, readJSONAsync, writeFileAsync, copyFileAsync, setSchema} = require('./utils');
 const fuzzy = require('./fuzzy');
 const {
   _,
@@ -324,33 +324,23 @@ class CinnamenuApplet extends TextIconApplet {
     this.schemaFile = Gio.File.new_for_path(__meta.path + '/settings-schema.json');
     let {startupCategory} = this.state.settings;
     let startupCategoryValid = false;
-    let [success, json] = this.schemaFile.load_contents(null);
-    if (!success) return;
-    let shouldReturn = tryFn(function() {
-      json = JSON.parse(json);
-    }, () => true);
+    readJSONAsync(this.schemaFile).then((json) => {
+      if (Object.keys(json.startupCategory.options).length === categoryButtons.length) return;
 
-    if (shouldReturn || Object.keys(json.startupCategory.options).length === categoryButtons.length) return;
+      each(categoryButtons, function(category) {
+        json.startupCategory.options[category.categoryNameText] = category.id;
+        if (category.id === startupCategory) startupCategoryValid = true;
+      });
 
-    each(categoryButtons, function(category) {
-      json.startupCategory.options[category.categoryNameText] = category.id;
-      if (category.id === startupCategory) startupCategoryValid = true;
-    });
+      if (!startupCategoryValid) this.settings.setValue('startupCategory', 'favorites');
 
-    if (!startupCategoryValid) this.settings.setValue('startupCategory', 'favorites');
-
-    tryFn(() => {
       json = JSON.stringify(json);
-      let raw = this.schemaFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
-      let out = Gio.BufferedOutputStream.new_sized(raw, 4096);
-      Cinnamon.write_string_to_stream(out, json);
-      out.close(null);
-      this.loadSettings();
-    }, (e) => {
-      if (this.backupSchemaFile.query_exists(null)) {
-        this.backupSchemaFile.copy(this.schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
-      }
-    });
+      writeFileAsync(this.schemaFile, json)
+        .then(() => this.loadSettings())
+        .catch(() => {
+          copyFileAsync(this.backupSchemaFile, this.schemaFile);
+        });
+    }).catch((e) => global.log(e))
   }
 
   update_label_visible() {
@@ -362,6 +352,7 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   on_applet_reloaded() {
+    if (!this.state) return;
     let {knownProviders, enabledProviders} = this.state
     global.cinnamenuBuffer = {
       settings: this.settings,
