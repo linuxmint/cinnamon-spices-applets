@@ -5,8 +5,10 @@ const Mainloop = imports.mainloop;
 const Signals = imports.signals;
 const Main = imports.ui.main;
 const {tryFn} = imports.misc.util;
+const ByteArray = imports.byteArray;
 
 const {_} = require('./constants');
+const {readFileAsync} = require('./utils');
 
 class PlaceInfo {
   constructor(kind, file, name, icon) {
@@ -274,56 +276,58 @@ class PlacesManager {
   reloadBookmarks() {
     this.bookmarks = [];
 
-    let [success, content] = this.bookmarksFile.load_contents(null);
-    if (!success) return;
-    let lines = content.toString().split('\n');
+    readFileAsync(this.bookmarksFile, (content) => {
+      if (content instanceof Uint8Array) content = ByteArray.toString(content);
+      else content = content.toString();
+      let lines = content.split('\n');
 
-    let bookmarks = [];
-    for (let i = 0, len = lines.length; i < len; i++) {
-      let line = lines[i];
-      let components = line.split(' ');
-      let bookmark = components[0];
+      let bookmarks = [];
+      for (let i = 0, len = lines.length; i < len; i++) {
+        let line = lines[i];
+        let components = line.split(' ');
+        let bookmark = components[0];
 
-      if (!bookmark) {
-        continue;
-      }
-
-      let file = Gio.File.new_for_uri(bookmark);
-      if (file.is_native() && !file.query_exists(null)) {
-        continue;
-      }
-
-      let duplicate = false;
-      for (let i = 0, len = this.places.special.length; i < len; i++) {
-        if (file.equal(this.places.special[i].file)) {
-          duplicate = true;
-          break;
+        if (!bookmark) {
+          continue;
         }
-      }
-      if (duplicate) {
-        continue;
-      }
-      for (let i = 0, len = bookmarks.length; i < len; i++) {
-        if (file.equal(bookmarks[i].file)) {
-          duplicate = true;
-          break;
+
+        let file = Gio.File.new_for_uri(bookmark);
+        if (file.is_native() && !file.query_exists(null)) {
+          continue;
         }
+
+        let duplicate = false;
+        for (let i = 0, len = this.places.special.length; i < len; i++) {
+          if (file.equal(this.places.special[i].file)) {
+            duplicate = true;
+            break;
+          }
+        }
+        if (duplicate) {
+          continue;
+        }
+        for (let i = 0, len = bookmarks.length; i < len; i++) {
+          if (file.equal(bookmarks[i].file)) {
+            duplicate = true;
+            break;
+          }
+        }
+        if (duplicate) {
+          continue;
+        }
+
+        let label = null;
+        if (components.length > 1) {
+          label = components.slice(1).join(' ');
+        }
+
+        bookmarks.push(new PlaceInfo('bookmarks', file, label));
       }
-      if (duplicate) {
-        continue;
-      }
 
-      let label = null;
-      if (components.length > 1) {
-        label = components.slice(1).join(' ');
-      }
+      this.places.bookmarks = bookmarks;
 
-      bookmarks.push(new PlaceInfo('bookmarks', file, label));
-    }
-
-    this.places.bookmarks = bookmarks;
-
-    this.emit('bookmarks-updated');
+      this.emit('bookmarks-updated');
+    });
   }
 
   addMount(kind, mount) {

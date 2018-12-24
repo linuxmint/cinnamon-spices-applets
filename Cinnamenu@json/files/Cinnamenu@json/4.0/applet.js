@@ -40,47 +40,36 @@ const {
   GroupButton
 } = require('./buttons');
 
-const Chromium = require('./webChromium');
-const Firefox = require('./webFirefox');
-const GoogleChrome = require('./webGoogleChrome');
-const Opera = require('./webOpera');
+const {readChromiumBookmarks, readFirefoxProfiles, Gda} = require('./browserBookmarks');
 const PlaceDisplay = require('./placeDisplay');
 
 const hintText = _('Type to search...');
 
 class bookmarksManager {
-  constructor() {
-    let bookmarks = Chromium._readBookmarks()
-      .concat(Firefox._readProfiles())
-      .concat(GoogleChrome._readBookmarks())
-      .concat(Opera._readBookmarks())
-
-    for (let i = 0, len = bookmarks.length; i < len; i++) {
-      bookmarks[i] = {
-        app: bookmarks[i].appInfo,
-        name: bookmarks[i].name,
-        icon: bookmarks[i].appInfo.get_icon(),
-        mime: null,
-        uri: bookmarks[i].uri,
-        description: bookmarks[i].uri,
-        type: ApplicationType._places
-      };
-    }
-
-    // Create a unique list of bookmarks across all browsers.
+  constructor(appSystem) {
+    let bookmarks = [];
+    this.arrKeys = [];
     this.state = {};
-    for (let i = 0, len = bookmarks.length; i < len; i++ ) {
-      this.state[bookmarks[i].uri] = bookmarks[i];
-    }
-    this.arrKeys = Object.keys(this.state);
-  }
+    Promise.all([
+      readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
+      readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem),
+      readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
+    ]).then(() => {
+      bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
 
-  destroy() {
-    Chromium._reset();
-    Firefox._reset();
-    GoogleChrome._reset();
-    Opera._reset();
-    this.state = null;
+        for (let i = 0, len = bookmarks.length; i < len; i++) {
+          bookmarks[i].icon = bookmarks[i].app.get_icon();
+          bookmarks[i].mime = null;
+          bookmarks[i].description = bookmarks[i].uri;
+          bookmarks[i].type = ApplicationType._places;
+        }
+
+        // Create a unique list of bookmarks across all browsers.
+        for (let i = 0, len = bookmarks.length; i < len; i++ ) {
+          this.state[bookmarks[i].uri] = bookmarks[i];
+        }
+        this.arrKeys = Object.keys(this.state);
+    }).catch((e) => global.log(e.message, e.stack));
   }
 };
 
@@ -847,9 +836,8 @@ class CinnamenuApplet extends TextIconApplet {
 
   onEnableBookmarksChange(enableBookmarks, fromInit = false) {
     if (enableBookmarks) {
-      this.bookmarksManager = new bookmarksManager();
+      this.bookmarksManager = new bookmarksManager(this.appSystem);
     } else if (this.bookmarksManager) {
-      this.bookmarksManager.destroy();
       this.bookmarksManager = null;
       if (this.state.settings.startupCategory === 'bookmarks') {
         this.setStartupCategoryOptions(this.categoryButtons);
@@ -1467,7 +1455,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.state.settings.enableBookmarks) {
       return [];
     }
-    if (!this.state.searchWebErrorsShown && !Firefox.Gda) {
+    if (!this.state.searchWebErrorsShown && !Gda) {
       this.answerText.set_text(_('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.'));
       this.answerText.show();
     } else if (this.answerText.is_visible() && !this.state.expressionActive) {
@@ -2615,10 +2603,6 @@ class CinnamenuApplet extends TextIconApplet {
     }
     this.activeContainer.destroy();
     this.destroyDisplayed();
-    if (this.bookmarksManager) {
-      this.bookmarksManager.destroy();
-    }
-
     this.menu.destroy();
   }
 };

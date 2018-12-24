@@ -1,5 +1,4 @@
 const Gio = imports.gi.Gio;
-const {write_string_to_stream} = imports.gi.Cinnamon
 const ByteArray = imports.byteArray;
 const {listDirAsync} = imports.misc.fileUtils;
 
@@ -119,7 +118,9 @@ const writeFileAsync = function(file, data) {
 
 const readJSONAsync = function(file) {
   return readFileAsync(file).then(function(json) {
-    return JSON.parse(json.toString());
+    if (json instanceof Uint8Array) json = ByteArray.toString(json);
+    else json = json.toString();
+    return JSON.parse(json);
   })
 };
 
@@ -225,4 +226,4 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
   }).catch((e) => next());
 };
 
-module.exports = {tryFn, sortBy, sortDirs, readJSONAsync, writeFileAsync, copyFileAsync, buildSettings, setSchema};
+module.exports = {tryFn, sortBy, sortDirs, readFileAsync, readJSONAsync, writeFileAsync, copyFileAsync, buildSettings, setSchema};
