@@ -192,8 +192,8 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
 
   readJSONAsync(schemaFile).then(function(schema) {
     startupCategoryOptionsEmpty = Object.keys(schema.startupCategory.options).length < 2;
-    // Back up the schema file if it doesn't have any modifications generated from this function.
-    if (schema.layout.extensionProvidersSection.title !== 'Extensions') {
+    // Back up the schema file if it doesn't exist.
+    if (!backupSchemaFile.query_exists(null)) {
       return copyFileAsync(schemaFile, backupSchemaFile, schema);
     }
     return this.resolve(schema);
@@ -223,7 +223,9 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
       }
       next();
     }
-  }).catch((e) => next());
+  }).catch(function(e) {
+    copyFileAsync(backupSchemaFile, schemaFile).then(next);
+  });
 };
 
 module.exports = {tryFn, sortBy, sortDirs, readFileAsync, readJSONAsync, writeFileAsync, copyFileAsync, buildSettings, setSchema};
