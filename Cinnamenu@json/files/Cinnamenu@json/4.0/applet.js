@@ -228,7 +228,7 @@ class CinnamenuApplet extends TextIconApplet {
 
       this.createMenu(orientation);
 
-      this.loadSettings();
+      this.loadSettings(true);
       this.state.set({
         isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
         fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
@@ -238,6 +238,7 @@ class CinnamenuApplet extends TextIconApplet {
 
       this.signals = new SignalManager(null);
       this.displaySignals = new SignalManager(null);
+
       this.appletEnterEventId = 0;
       this.appletLeaveEventId = 0;
       this.appletHoverDelayId = 0;
@@ -286,7 +287,7 @@ class CinnamenuApplet extends TextIconApplet {
     return gridWidths[this.state.settings.appsGridColumnCount] * global.ui_scale;
   }
 
-  loadSettings() {
+  loadSettings(init = false) {
     if (this.settings) {
       this.settings.finalize();
       this.state.settings = {};
@@ -306,7 +307,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.settings = new AppletSettings(this.state.settings, __meta.uuid, this.instance_id);
     }
 
-    this.bindSettingsChanges();
+    if (init) this.bindSettingsChanges();
   }
 
   setStartupCategoryOptions(categoryButtons) {
@@ -325,7 +326,10 @@ class CinnamenuApplet extends TextIconApplet {
 
       json = JSON.stringify(json);
       writeFileAsync(this.schemaFile, json)
-        .then(() => this.loadSettings())
+        .then(() => {
+          this.settings._doUpgrade(json, global.get_md5_for_string(json));
+          this.settings._saveToFile();
+        })
         .catch(() => {
           copyFileAsync(this.backupSchemaFile, this.schemaFile);
         });
