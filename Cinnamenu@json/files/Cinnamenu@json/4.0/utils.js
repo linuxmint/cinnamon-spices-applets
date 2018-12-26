@@ -196,7 +196,7 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
     if (!backupSchemaFile.query_exists(null)) {
       return copyFileAsync(schemaFile, backupSchemaFile, schema);
     }
-    return this.resolve(schema);
+    return Promise.resolve(schema);
   }).then(function(schema) {
     let providerFiles = [];
     let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
@@ -224,6 +224,7 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
       next();
     }
   }).catch(function(e) {
+    global.log(e);
     copyFileAsync(backupSchemaFile, schemaFile).then(next);
   });
 };
