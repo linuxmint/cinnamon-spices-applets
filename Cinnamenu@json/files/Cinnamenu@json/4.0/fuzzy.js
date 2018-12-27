@@ -24,7 +24,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-var fuzzy = function (q, str, opts) {
+const {stripMarkupRegex} = require('./constants');
+
+const fuzzy = function (q, str, opts) {
   if (typeof q !== 'string' || typeof str !== 'string') {
     return {
       score: 0,
@@ -45,6 +47,7 @@ var fuzzy = function (q, str, opts) {
       result: str
     };
   }
+  str = str.replace(stripMarkupRegex, '');
 
   // Keep original str for case
   let originalStr = str;
@@ -107,10 +110,7 @@ var fuzzy = function (q, str, opts) {
     // The biggest the score is the better
     const score = q.length / (steps + 1);
 
-    return {
-      score: score,
-      result: result
-    };
+    return {score, result};
   }
 
   return {

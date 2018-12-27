@@ -62,6 +62,7 @@
       "title": "Layout",
       "keys": [
         "startup-view-mode",
+        "startupCategory",
         "description-placement",
         "enable-custom-menu-height",
         "custom-menu-height",
@@ -95,6 +96,15 @@
   "categories": {
     "type": "generic",
     "default": []
+  },
+  "startupCategory": {
+    "type": "combobox",
+    "default": "favorites",
+    "description": "Startup category",
+    "options": {
+      "Favorite Apps": "favorites"
+    },
+    "tooltip": "Category first seen when the menu is opened"
   },
   "privacy-settings-button": {
     "type": "button",
