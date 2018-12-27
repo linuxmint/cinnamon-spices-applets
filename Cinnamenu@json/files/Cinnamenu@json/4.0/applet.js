@@ -140,11 +140,13 @@ class CinnamenuApplet extends TextIconApplet {
           } else {
             this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
           }
-          if (this.state.isListView) {
-            coords[0] = coords[0] + width + 80;
-            coords[1] -= 14;
-          } else {
-            coords[1] = coords[1] + height;
+          if (width && height) {
+            if (this.state.isListView) {
+              coords[0] = coords[0] + width + 80;
+              coords[1] -= 14;
+            } else {
+              coords[1] = coords[1] + height;
+            }
           }
 
           this.tooltip.mousePosition = coords;
