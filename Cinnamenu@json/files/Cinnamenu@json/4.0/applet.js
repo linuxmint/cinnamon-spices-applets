@@ -253,6 +253,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.allItems = [];
       this.activeContainer = null;
       this.placesManager = null;
+      this.lastRenderTime = 0;
 
       this.session = new SessionManager();
       this.screenSaverProxy = new ScreenSaverProxy();
@@ -815,14 +816,14 @@ class CinnamenuApplet extends TextIconApplet {
   onEnableRecentChange() {
     this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
     if (this.state.settings.startupCategory === 'recent') {
-      this.setStartupCategoryOptions(this.categoryButtons);
+      this.state.startupCategoryOptionsEmpty = true;
     }
     this.refresh();
   }
 
   onEnablePlacesChange() {
     if (this.state.settings.startupCategory === 'places') {
-      this.setStartupCategoryOptions(this.categoryButtons);
+      this.state.startupCategoryOptionsEmpty = true;
     }
     this.refresh();
   }
@@ -833,7 +834,7 @@ class CinnamenuApplet extends TextIconApplet {
     } else if (this.bookmarksManager) {
       this.bookmarksManager = null;
       if (this.state.settings.startupCategory === 'bookmarks') {
-        this.setStartupCategoryOptions(this.categoryButtons);
+        this.state.startupCategoryOptionsEmpty = true;
       }
     }
     if (!fromInit) {
@@ -842,6 +843,12 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   refresh() {
+    // TBD: For some reason the onEnable* settings callbacks get called several times per settings change,
+    // This is causing the start up category to reset, so throttling this function to 250ms prevents excess invocation.
+    let now = Date.now();
+    if ((now - this.lastRenderTime) <= 250) return;
+    this.lastRenderTime = now;
+
     this.clearAll();
     this.destroyDisplayed();
     this.state.set({
@@ -1081,7 +1088,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.categoryButtons = [];
     // If a category option is enabled after the settings are set, or an application is installed
     // using a new category, we need to update the category order settings so it will render.
-    if (buttons.length !== this.state.settings.categories.length) {
+    if (buttons.length !== this.state.settings.categories.length - 1) {
       categoriesChanged = true;
       for (let i = 0; i < buttons.length; i++) {
         if (this.state.settings.categories.indexOf(buttons[i].id) === -1) {
@@ -1100,6 +1107,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     if ((categoriesChanged || this.state.startupCategoryOptionsEmpty) && !isReRender) {
       this.setStartupCategoryOptions(buttons);
+      this.state.startupCategoryOptionsEmpty = false;
     }
 
     buttons = undefined;
