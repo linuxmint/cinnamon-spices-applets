@@ -277,8 +277,6 @@ class PlacesManager {
     this.bookmarks = [];
 
     readFileAsync(this.bookmarksFile, (content) => {
-      if (content instanceof Uint8Array) content = ByteArray.toString(content);
-      else content = content.toString();
       let lines = content.split('\n');
 
       let bookmarks = [];

@@ -65,8 +65,9 @@ const sortDirs = function(dirs) {
   return dirs;
 };
 
-const readFileAsync = function(file) {
-  return new Promise(function(resolve,  reject) {
+const readFileAsync = function(file, opts = {utf8: true}) {
+  const {utf8} = opts;
+  return new Promise(function(resolve, reject) {
     if (typeof file === 'string' || file instanceof String) {
       file = Gio.File.new_for_path(file);
     }
@@ -75,6 +76,10 @@ const readFileAsync = function(file) {
       tryFn(() => {
         let [success, data] = file.load_contents_finish(result);
         if (!success) return reject(new Error('File cannot be read.'));
+        if (utf8) {
+          if (data instanceof Uint8Array) data = ByteArray.toString(data);
+          else data = data.toString();
+        }
         resolve(data);
       }, (e) => reject(e));
     });
@@ -118,8 +123,6 @@ const writeFileAsync = function(file, data) {
 
 const readJSONAsync = function(file) {
   return readFileAsync(file).then(function(json) {
-    if (json instanceof Uint8Array) json = ByteArray.toString(json);
-    else json = json.toString();
     return JSON.parse(json);
   })
 };
