@@ -228,10 +228,6 @@ class CinnamenuApplet extends TextIconApplet {
       this.signals = new SignalManager(null);
       this.displaySignals = new SignalManager(null);
 
-      this.appletEnterEventId = 0;
-      this.appletLeaveEventId = 0;
-      this.appletHoverDelayId = 0;
-
       this.tracker = Cinnamon.WindowTracker.get_default();
       this.appSystem = Cinnamon.AppSystem.get_default();
 
@@ -789,9 +785,6 @@ class CinnamenuApplet extends TextIconApplet {
     if (global.settings.get_boolean('panel-edit-mode')) {
       return false;
     }
-    if (this.appletEnterEventId > 0) {
-      this.actor.handler_block(this.appletEnterEventId);
-    }
     if (open) {
       if (!this.state.displayed) {
         this.display();
@@ -810,10 +803,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.customMenuHeightChange(true);
       });
     } else {
-      // Clear 'entered' actor
-      if (this.appletEnterEventId > 0) {
-        this.actor.handler_unblock(this.appletEnterEventId);
-      }
       if (this.state.searchActive) {
         this.resetSearch();
       }
