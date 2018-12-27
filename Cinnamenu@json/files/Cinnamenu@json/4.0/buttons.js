@@ -22,11 +22,10 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
-const {_, ApplicationType} = require('./constants');
+const {_, ApplicationType, stripMarkupRegex} = require('./constants');
 const {tryFn} = require('./utils');
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
-const stripMarkupRegex = /(<([^>]+)>)/ig;
 const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 const wordWrap = function(text, limit) {
@@ -730,10 +729,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         || this.state.searchActive
         || this.buttonState.app.shouldHighlight)
         || opts.removeFormatting) {
-
-      // TODO: Determine source cause of this markup occurring.
-      if (markup.indexOf('</<') > -1) return;
-
       clutterText.set_markup(markup);
       clutterText.ellipsize = EllipsizeMode.END;
     }

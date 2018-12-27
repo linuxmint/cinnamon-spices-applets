@@ -170,7 +170,7 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
           if (children[i].type == 'url') {
             bookmarks.push({
               app: appInfo,
-              name: children[i].name.replace(/\//g, '|'),
+              name: children[i].name,
               score: 0,
               uri: children[i].url
             });

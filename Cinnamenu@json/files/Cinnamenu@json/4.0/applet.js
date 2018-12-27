@@ -1477,7 +1477,7 @@ class CinnamenuApplet extends TextIconApplet {
     let res = []
     let arr = this.bookmarksManager.state;
     let arrKeys = this.bookmarksManager.arrKeys;
-    let searchableProps = ['name', 'description'];
+    let searchableProps = ['name'];
 
     for (let i = 0, len = arrKeys.length; i < len; i++ ) {
       let bookmark = arr[arrKeys[i]];
@@ -2044,8 +2044,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
     this.previousSearchPattern = pattern;
 
-    let isMathExpression = pattern.search(/([-+]?[0-9]*\.?[0-9]+[/+\-*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1;
-    if (isMathExpression) {
+    // Convenience calculator
+    if (pattern.search(/([-+]?[0-9]*\.?[0-9]+[/+\-*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1) {
       tryFn(() => {
         let answer = eval(pattern);
         let answerText = pattern + ' = ' + answer;
@@ -2056,34 +2056,16 @@ class CinnamenuApplet extends TextIconApplet {
       }, () => this.state.set({expressionActive: false}));
     }
 
-
-    let appResults = this.listApplications(null, pattern);
-
-    let placesResults = [];
-
-    let places = this.listPlaces(pattern);
-
-    for (let i = 0, len = places.length; i < len; i++) {
-      placesResults.push(places[i]);
-    }
-
-    let webBookmarks = this.listWebBookmarks(pattern);
-
-    for (let i = 0, len = webBookmarks.length; i < len; i++) {
-      placesResults.push(webBookmarks[i]);
-    }
-
-    let recentResults = this.listRecent(pattern);
-
     let acResults = []; // search box autocompletion results
     if (this.state.settings.searchFilesystem) {
       // Don't use the pattern here, as filesystem is case sensitive
       acResults = this.getCompletions(text);
     }
 
-    let results = appResults
-      .concat(placesResults)
-      .concat(recentResults)
+    let results = this.listApplications(null, pattern)
+      .concat(this.listPlaces(pattern))
+      .concat(this.listWebBookmarks(pattern))
+      .concat(this.listRecent(pattern))
       .concat(acResults)
       .concat(this.listWindows(pattern));
 
@@ -2093,9 +2075,7 @@ class CinnamenuApplet extends TextIconApplet {
       this.displayApplications(results);
 
       let buttons = this.getActiveButtons();
-      if (buttons.length === 0) {
-        return;
-      }
+      if (buttons.length === 0) return;
       buttons[0].handleEnter();
     };
     if (this.state.settings.enableSearchProviders
