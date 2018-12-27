@@ -825,14 +825,14 @@ class CinnamenuApplet extends TextIconApplet {
   onEnableRecentChange() {
     this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
     if (this.state.settings.startupCategory === 'recent') {
-      this.state.startupCategoryOptionsEmpty = true;
+      this.setStartupCategoryOptions(this.categoryButtons);
     }
     this.refresh();
   }
 
   onEnablePlacesChange() {
     if (this.state.settings.startupCategory === 'places') {
-      this.state.startupCategoryOptionsEmpty = true;
+      this.setStartupCategoryOptions(this.categoryButtons);
     }
     this.refresh();
   }
@@ -843,7 +843,7 @@ class CinnamenuApplet extends TextIconApplet {
     } else if (this.bookmarksManager) {
       this.bookmarksManager = null;
       if (this.state.settings.startupCategory === 'bookmarks') {
-        this.state.startupCategoryOptionsEmpty = true;
+        this.setStartupCategoryOptions(this.categoryButtons);
       }
     }
     if (!fromInit) {

@@ -221,10 +221,6 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
         buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
       });
     } else {
-      if (backupSchemaFile.query_exists(null)) {
-        copyFileAsync(backupSchemaFile, schemaFile).then(next);
-        return;
-      }
       next();
     }
   }).catch(function(e) {
