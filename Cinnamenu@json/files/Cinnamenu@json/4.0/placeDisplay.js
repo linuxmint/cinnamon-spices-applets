@@ -1,14 +1,10 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
-const Mainloop = imports.mainloop;
-const Signals = imports.signals;
 const Main = imports.ui.main;
-const {tryFn} = imports.misc.util;
-const ByteArray = imports.byteArray;
 
 const {_} = require('./constants');
-const {readFileAsync} = require('./utils');
+const {readFileAsync, tryFn} = require('./utils');
 
 class PlaceInfo {
   constructor(kind, file, name, icon) {
@@ -149,22 +145,11 @@ class PlacesManager {
     this.updateMounts();
 
     this.bookmarksFile = this.findBookmarksFile();
-    this.bookmarkTimeoutId = 0;
     this.monitor = null;
 
     if (this.bookmarksFile) {
       this.monitor = this.bookmarksFile.monitor_file(Gio.FileMonitorFlags.NONE, null);
-      this.monitor.connect('changed', Lang.bind(this, function() {
-        if (this.bookmarkTimeoutId > 0) {
-          return;
-        }
-        // Defensive event compression
-        this.bookmarkTimeoutId = Mainloop.timeout_add(100, Lang.bind(this, function() {
-          this.bookmarkTimeoutId = 0;
-          this.reloadBookmarks();
-          return false;
-        }));
-      }));
+      this.monitor.connect('changed', () => setTimeout(() => this.reloadBookmarks(), 100));
       this.reloadBookmarks();
     }
   }
@@ -184,24 +169,12 @@ class PlacesManager {
   }
 
   updateMounts() {
-    this.places.devices = [];
-    this.places.network = [];
-
-    this.places.devices.push(
-      new PlaceInfo('devices',
-        Gio.File.new_for_path('/'),
-        _('Computer'),
-        'drive-harddisk'
-      )
-    );
-    this.places.network.push(
-      new PlaceInfo(
-        'network',
-        Gio.File.new_for_uri('network:///'),
-        _('Browse network'),
-        'network-workgroup'
-      )
-    );
+    this.places.devices = [
+      new PlaceInfo('devices', Gio.File.new_for_path('/'), _('Computer'), 'drive-harddisk')
+    ];
+    this.places.network = [
+      new PlaceInfo('network', Gio.File.new_for_uri('network:///'),  _('Browse network'), 'network-workgroup')
+    ];
 
     // first go through all connected drives
     let drives = this.volumeMonitor.get_connected_drives();
@@ -253,9 +226,6 @@ class PlacesManager {
 
       this.addMount(kind, mounts[i]);
     }
-
-    this.emit('devices-updated');
-    this.emit('network-updated');
   }
 
   findBookmarksFile() {
@@ -275,19 +245,15 @@ class PlacesManager {
 
   reloadBookmarks() {
     this.bookmarks = [];
-
-    readFileAsync(this.bookmarksFile, (content) => {
+    readFileAsync(this.bookmarksFile).then((content) =>{
       let lines = content.split('\n');
-
       let bookmarks = [];
       for (let i = 0, len = lines.length; i < len; i++) {
         let line = lines[i];
         let components = line.split(' ');
         let bookmark = components[0];
 
-        if (!bookmark) {
-          continue;
-        }
+        if (!bookmark) continue;
 
         let file = Gio.File.new_for_uri(bookmark);
         if (file.is_native() && !file.query_exists(null)) {
@@ -301,18 +267,14 @@ class PlacesManager {
             break;
           }
         }
-        if (duplicate) {
-          continue;
-        }
+        if (duplicate) continue;
         for (let i = 0, len = bookmarks.length; i < len; i++) {
           if (file.equal(bookmarks[i].file)) {
             duplicate = true;
             break;
           }
         }
-        if (duplicate) {
-          continue;
-        }
+        if (duplicate) continue;
 
         let label = null;
         if (components.length > 1) {
@@ -323,34 +285,12 @@ class PlacesManager {
       }
 
       this.places.bookmarks = bookmarks;
-
-      this.emit('bookmarks-updated');
-    });
+    }).catch((e) => global.logError(e))
   }
 
   addMount(kind, mount) {
     let devItem = new PlaceDeviceInfo(kind, mount);
     this.places[kind].push(devItem);
-  }
-
-  getPlace(kind) {
-    return this.places[kind];
-  }
-
-  getAllPlaces() {
-    return this.places.special.concat(this.places.bookmarks, this.places.devices);
-  }
-
-  getDefaultPlaces() {
-    return this.places.special;
-  }
-
-  getBookmarks() {
-    return this.places.bookmarks;
-  }
-
-  getMounts() {
-    return this.places.devices;
   }
 
   destroy() {
@@ -361,9 +301,5 @@ class PlacesManager {
     if (this.monitor) {
       this.monitor.cancel();
     }
-    if (this.bookmarkTimeoutId) {
-      Mainloop.source_remove(this.bookmarkTimeoutId);
-    }
   }
 };
-Signals.addSignalMethods(PlacesManager.prototype);

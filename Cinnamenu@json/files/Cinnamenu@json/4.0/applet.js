@@ -1393,7 +1393,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.placesManager || !this.state.settings.showPlaces) {
       return [];
     }
-    let places = this.placesManager.getDefaultPlaces();
+    let places = this.placesManager.places.special;
     let res = [];
     let match = null;
     for (let i = 0, len = places.length; i < len; i++) {
@@ -1415,7 +1415,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.placesManager || !this.state.settings.showPlaces) {
       return [];
     }
-    let bookmarks = this.placesManager.getBookmarks();
+    let bookmarks = this.placesManager.places.bookmarks;
     let res = [];
     let match = null;
     for (let i = 0, len = bookmarks.length; i < len; i++) {
@@ -1437,7 +1437,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.placesManager) {
       return [];
     }
-    let devices = this.placesManager.getMounts();
+    let devices = this.placesManager.places.devices;
     let res = [];
     let match = null;
     for (let i = 0, len = devices.length; i < len; i++) {
@@ -2307,7 +2307,8 @@ class CinnamenuApplet extends TextIconApplet {
     // Load Places
     if (PlaceDisplay && this.state.settings.showPlaces) {
       this.placesManager = new PlaceDisplay.PlacesManager(false);
-    } else {
+    } else if (this.placesManager) {
+      this.placesManager.destroy();
       this.placesManager = null;
     }
 
@@ -2601,6 +2602,7 @@ class CinnamenuApplet extends TextIconApplet {
 
   destroy() {
     this.signals.disconnectAllSignals();
+    if (this.placesManager) this.placesManager.destroy();
     this.destroyAppButtons();
     if (!this.activeContainer) {
       return;
