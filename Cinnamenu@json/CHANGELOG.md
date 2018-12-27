@@ -5,8 +5,9 @@ Changelog
   * Added startup category customization.
   * Fixed incorrect high DPI tile widths.
   * Fixed the places file monitors not being stopped when the option is disabled, or the applet is removed from the panel.
-  * Fixed system button tooltips now showing.
+  * Fixed system button tooltips not showing.
   * Fixed menu item tooltips covering menu items when the menu is oriented next to the right side of the monitor.
+  * Fixed some search results being excluded due to markup formatting.
   * Refactored file I/O so it works asynchronously.
 
 ### 4.0.2
