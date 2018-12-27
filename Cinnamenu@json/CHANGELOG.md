@@ -1,5 +1,12 @@
 Changelog
 
+### 4.1.0
+
+  * Added startup category customization.
+  * Fixed incorrect high DPI tile widths.
+  * Fixed the places file monitors not being stopped when the option is disabled, or the applet is removed from the panel.
+  * Refactored file I/O so it works asynchronously.
+
 ### 4.0.2
 
   * Fixed an issue with custom icons not rendering correctly.
