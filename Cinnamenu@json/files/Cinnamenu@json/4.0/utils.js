@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 const {listDirAsync} = imports.misc.fileUtils;
+const {each} = imports.misc.util;
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
@@ -187,14 +188,19 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
   }, finish);
 };
 
-const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
-  let startupCategoryOptionsEmpty;
+const setSchema = function(path, categoryButtons, startupCategory, cb) {
+  let schemaFile = Gio.File.new_for_path(path + '/settings-schema.json');
+  let backupSchemaFile = Gio.File.new_for_path(path + '/settings-schema-backup.json');
+  let startupCategoryValid = false;
   let knownProviders = [];
-  let enabledProviders = global.settings.get_strv('enabled-search-providers');
-  let next = () => cb(knownProviders, enabledProviders, startupCategoryOptionsEmpty);
+  let next = () => cb(knownProviders, startupCategoryValid);
 
   readJSONAsync(schemaFile).then(function(schema) {
-    startupCategoryOptionsEmpty = Object.keys(schema.startupCategory.options).length < 2;
+    each(categoryButtons, function(category) {
+      schema.startupCategory.options[category.categoryNameText] = category.id;
+      if (category.id === startupCategory) startupCategoryValid = true;
+    });
+
     // Back up the schema file if it doesn't exist.
     if (!backupSchemaFile.query_exists(null)) {
       return copyFileAsync(schemaFile, backupSchemaFile, schema);

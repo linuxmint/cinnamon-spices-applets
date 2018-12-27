@@ -83,206 +83,201 @@ class CinnamenuApplet extends TextIconApplet {
       this.set_applet_label(_('Initializing'));
     }
 
-    this.schemaFile = Gio.File.new_for_path(metadata.path + '/settings-schema.json');
-    this.backupSchemaFile = Gio.File.new_for_path(metadata.path + '/settings-schema-backup.json');
-
-    setSchema(metadata.path, this.schemaFile, this.backupSchemaFile, (knownProviders = [], enabledProviders = [], startupCategoryOptionsEmpty = false) => {
-      this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
-      this.appFavorites = getAppFavorites();
-      this.state = createStore({
-        cinnamon36: typeof this._newPanelId !== 'undefined',
-        orientation,
-        recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
-        settings: {},
-        favorites: this.appFavorites.getFavorites(),
-        knownProviders,
-        enabledProviders,
-        theme: null,
-        isListView: false,
-        iconSize: 64,
-        currentCategory: 'favorites',
-        startupCategoryOptionsEmpty,
-        categoryDragged: false,
-        fallbackDescription: '',
-        appletReady: false,
-        searchActive: false,
-        itemEntered: false,
-        contextMenuIsOpen: null,
-        menuHeight: 0,
-        expressionActive: false,
-        searchWebErrorsShown: false,
-        displayed: false,
-        isNewInstance: true,
-        dragIndex: -1,
-        isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
-      });
-      this.state.connect({
-        currentCategory: ({currentCategory}) => {
-          this.setActiveCategoryStyle();
-          Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.selectCategory(currentCategory));
-        },
-        categoryDragged: ({categoryDragged}) => {
-          if (categoryDragged && this.vectorBox) {
-            this.vectorBox.set_reactive(false);
-            this.vectorBox.hide();
-          }
-        },
-        clearEnteredActors: () => this.clearEnteredActors(),
-        makeVectorBox: (actor) => this.makeVectorBox(actor),
-        setTooltip: (coords, width, height, text) => {
-          if (!text) {
-            this.tooltip.hide();
-            return;
-          }
-          let [x, y] = coords;
-          let clutterText = this.tooltip._tooltip.get_clutter_text();
-          if (clutterText) {
-            clutterText.set_markup(text);
-          } else {
-            this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
-          }
-          if (width && height) {
-            if (this.state.isListView) {
-              x += width + 80;
-              y -= 14;
-              // Don't let the tooltip cover menu items when the menu
-              // is oriented next to the right side of the monitor.
-              let {style_class} = this._panelLocation;
-              if (style_class === 'panelRight' || style_class === 'panelLeft vertical') {
-                y += height;
-              }
-            } else {
+    this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
+    this.appFavorites = getAppFavorites();
+    this.state = createStore({
+      cinnamon36: typeof this._newPanelId !== 'undefined',
+      orientation,
+      recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
+      settings: {},
+      favorites: this.appFavorites.getFavorites(),
+      knownProviders: [],
+      enabledProviders: global.settings.get_strv('enabled-search-providers'),
+      theme: null,
+      isListView: false,
+      iconSize: 64,
+      currentCategory: 'favorites',
+      startupCategoryOptionsEmpty: true,
+      categoryDragged: false,
+      fallbackDescription: '',
+      appletReady: false,
+      searchActive: false,
+      itemEntered: false,
+      contextMenuIsOpen: null,
+      menuHeight: 0,
+      expressionActive: false,
+      searchWebErrorsShown: false,
+      displayed: false,
+      isNewInstance: true,
+      dragIndex: -1,
+      isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
+    });
+    this.state.connect({
+      currentCategory: ({currentCategory}) => {
+        this.setActiveCategoryStyle();
+        Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.selectCategory(currentCategory));
+      },
+      categoryDragged: ({categoryDragged}) => {
+        if (categoryDragged && this.vectorBox) {
+          this.vectorBox.set_reactive(false);
+          this.vectorBox.hide();
+        }
+      },
+      clearEnteredActors: () => this.clearEnteredActors(),
+      makeVectorBox: (actor) => this.makeVectorBox(actor),
+      setTooltip: (coords, width, height, text) => {
+        if (!text) {
+          this.tooltip.hide();
+          return;
+        }
+        let [x, y] = coords;
+        let clutterText = this.tooltip._tooltip.get_clutter_text();
+        if (clutterText) {
+          clutterText.set_markup(text);
+        } else {
+          this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
+        }
+        if (width && height) {
+          if (this.state.isListView) {
+            x += width + 80;
+            y -= 14;
+            // Don't let the tooltip cover menu items when the menu
+            // is oriented next to the right side of the monitor.
+            let {style_class} = this._panelLocation;
+            if (style_class === 'panelRight' || style_class === 'panelLeft vertical') {
               y += height;
             }
-          }
-
-          this.tooltip.mousePosition = [x, y];
-          if (!this.state.settings.tooltipDelay) {
-            this.tooltip.show();
-            return;
-          }
-          setTimeout(() => {
-            if (!this.state.itemEntered) {
-              return;
-            }
-            this.tooltip.show();
-          }, this.state.settings.tooltipDelay);
-        },
-        setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
-        setSelectedTitleText: (text) => this.selectedAppTitle.set_text(text),
-        setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
-        getSelectedTitleClutterText: () => this.selectedAppTitle.get_clutter_text(),
-        getSelectedDescriptionClutterText: () => this.selectedAppDescription.get_clutter_text(),
-        toggleSearchVisibility: (bool) => {
-          if (bool) {
-            this.selectedAppBox.hide();
-            this.searchBox.show();
-            global.stage.set_key_focus(this.searchEntry)
           } else {
-            global.stage.set_key_focus(this.actor)
-            this.searchBox.hide();
-            this.selectedAppBox.show();
-          }
-          this.setActiveCategoryStyle();
-        },
-        selectorMethod: (method, id) => this[method](id),
-        openMenu: () => this.menu.open(),
-        closeMenu: () => this.menu.close(),
-        getAppsGridBoxWidth: () => this.applicationsGridBox.width,
-        scrollToButton: (...args) => this.scrollToButton(...args),
-        isNotInScrollView: (button) => this.isNotInScrollView(button),
-        purgeRecentItems: () => this.recentManager.purge_items(),
-        getActiveButtons: () => this.getActiveButtons(),
-        isFavorite: (id) => this.appFavorites.isFavorite(id),
-        addFavorite: (id) => this.appFavorites.addFavorite(id),
-        moveFavoriteToPos: (id, index) => {
-          Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
-            this.appFavorites.moveFavoriteToPos(id, index);
-            return false;
-          });
-        },
-        moveCategoryToPos: (id1, id2) => {
-          let categories = this.state.settings.categories.slice();
-          let oldIndex = categories.indexOf(id1);
-          let newIndex = categories.indexOf(id2);
-          categories.splice(oldIndex, 1);
-          let categories1 = categories.slice(0, newIndex);
-          let categories2 = categories.slice(newIndex, categories.length);
-          categories = categories1.concat([id1]).concat(categories2);
-          this.settings.setValue('categories', categories);
-          this.state.set({dragIndex: -1});
-          this.buildCategories();
-          for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
-            if (this.categoryButtons[i].id === id2) {
-              this.categoryButtons[i].handleEnter();
-            } else if (this.categoryButtons[i].entered) {
-              this.categoryButtons[i].handleLeave();
-            }
-          }
-        },
-        removeFavorite: (id) => this.appFavorites.removeFavorite(id),
-        switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
-        setSettingsValue: (k, v) => this.settings.setValue(k, v),
-        setIsListView: () => {
-          if (this.state.isListView) {
-            this.state.set({iconSize: this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28});
-          } else {
-            this.state.set({iconSize: this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64});
+            y += height;
           }
         }
-      });
 
-      this.createMenu(orientation);
-
-      this.signals = new SignalManager(null);
-      this.displaySignals = new SignalManager(null);
-
-      this.tracker = Cinnamon.WindowTracker.get_default();
-      this.appSystem = Cinnamon.AppSystem.get_default();
-
-      this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
-
-      // FS search
-      this.pathCompleter = new Gio.FilenameCompleter();
-      this.pathCompleter.set_dirs_only(false);
-
-      this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
-
-      this.iconTheme = Gtk.IconTheme.get_default();
-      this.signals.connect(this.iconTheme, 'changed', (...args) => this.onIconsChanged(...args));
-      this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
-      this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
-      this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
-      this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
-
-      this.categoryButtons = [];
-      this.powerGroupButtons = [];
-      this.knownApps = [];
-      this.applicationsByCategory = {};
-      this.allItems = [];
-      this.activeContainer = null;
-      this.placesManager = null;
-      this.lastRenderTime = 0;
-
-      this.session = new SessionManager();
-      this.screenSaverProxy = new ScreenSaverProxy();
-      this.recentManager = Gtk.RecentManager.get_default();
-
-      this.init = true;
-
-      // Init settings
-      this.loadSettings(true);
-      this.state.set({
-        isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
-        fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
-      });
-      global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
-      this.onEnabledSearchProvidersChange();
-      this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
-      this.updateIconAndLabel();
-      this.updateActivateOnHover();
-      this.updateKeybinding();
+        this.tooltip.mousePosition = [x, y];
+        if (!this.state.settings.tooltipDelay) {
+          this.tooltip.show();
+          return;
+        }
+        setTimeout(() => {
+          if (!this.state.itemEntered) {
+            return;
+          }
+          this.tooltip.show();
+        }, this.state.settings.tooltipDelay);
+      },
+      setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
+      setSelectedTitleText: (text) => this.selectedAppTitle.set_text(text),
+      setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
+      getSelectedTitleClutterText: () => this.selectedAppTitle.get_clutter_text(),
+      getSelectedDescriptionClutterText: () => this.selectedAppDescription.get_clutter_text(),
+      toggleSearchVisibility: (bool) => {
+        if (bool) {
+          this.selectedAppBox.hide();
+          this.searchBox.show();
+          global.stage.set_key_focus(this.searchEntry)
+        } else {
+          global.stage.set_key_focus(this.actor)
+          this.searchBox.hide();
+          this.selectedAppBox.show();
+        }
+        this.setActiveCategoryStyle();
+      },
+      selectorMethod: (method, id) => this[method](id),
+      openMenu: () => this.menu.open(),
+      closeMenu: () => this.menu.close(),
+      getAppsGridBoxWidth: () => this.applicationsGridBox.width,
+      scrollToButton: (...args) => this.scrollToButton(...args),
+      isNotInScrollView: (button) => this.isNotInScrollView(button),
+      purgeRecentItems: () => this.recentManager.purge_items(),
+      getActiveButtons: () => this.getActiveButtons(),
+      isFavorite: (id) => this.appFavorites.isFavorite(id),
+      addFavorite: (id) => this.appFavorites.addFavorite(id),
+      moveFavoriteToPos: (id, index) => {
+        Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
+          this.appFavorites.moveFavoriteToPos(id, index);
+          return false;
+        });
+      },
+      moveCategoryToPos: (id1, id2) => {
+        let categories = this.state.settings.categories.slice();
+        let oldIndex = categories.indexOf(id1);
+        let newIndex = categories.indexOf(id2);
+        categories.splice(oldIndex, 1);
+        let categories1 = categories.slice(0, newIndex);
+        let categories2 = categories.slice(newIndex, categories.length);
+        categories = categories1.concat([id1]).concat(categories2);
+        this.settings.setValue('categories', categories);
+        this.state.set({dragIndex: -1});
+        this.buildCategories();
+        for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
+          if (this.categoryButtons[i].id === id2) {
+            this.categoryButtons[i].handleEnter();
+          } else if (this.categoryButtons[i].entered) {
+            this.categoryButtons[i].handleLeave();
+          }
+        }
+      },
+      removeFavorite: (id) => this.appFavorites.removeFavorite(id),
+      switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
+      setSettingsValue: (k, v) => this.settings.setValue(k, v),
+      setIsListView: () => {
+        if (this.state.isListView) {
+          this.state.set({iconSize: this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28});
+        } else {
+          this.state.set({iconSize: this.state.settings.appsGridIconSize > 0 ? this.state.settings.appsGridIconSize : 64});
+        }
+      }
     });
+
+    this.createMenu(orientation);
+
+    this.signals = new SignalManager(null);
+    this.displaySignals = new SignalManager(null);
+
+    this.tracker = Cinnamon.WindowTracker.get_default();
+    this.appSystem = Cinnamon.AppSystem.get_default();
+
+    this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
+
+    // FS search
+    this.pathCompleter = new Gio.FilenameCompleter();
+    this.pathCompleter.set_dirs_only(false);
+
+    this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
+
+    this.iconTheme = Gtk.IconTheme.get_default();
+    this.signals.connect(this.iconTheme, 'changed', (...args) => this.onIconsChanged(...args));
+    this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
+    this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
+    this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
+    this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
+
+    this.categoryButtons = [];
+    this.powerGroupButtons = [];
+    this.knownApps = [];
+    this.applicationsByCategory = {};
+    this.allItems = [];
+    this.activeContainer = null;
+    this.placesManager = null;
+    this.lastRenderTime = 0;
+
+    this.session = new SessionManager();
+    this.screenSaverProxy = new ScreenSaverProxy();
+    this.recentManager = Gtk.RecentManager.get_default();
+
+    this.init = true;
+
+    // Init settings
+    this.loadSettings(true);
+    this.state.set({
+      isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
+      fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
+    });
+    global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
+
+    this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
+    this.updateIconAndLabel();
+    this.updateActivateOnHover();
+    this.updateKeybinding();
   }
 
   get gridWidth() {
@@ -310,36 +305,24 @@ class CinnamenuApplet extends TextIconApplet {
       this.settings = new AppletSettings(this.state.settings, __meta.uuid, this.instance_id);
     }
 
+    this.bindSettingsChanges();
+
     if (init) {
-      this.bindSettingsChanges();
       this.initCategories();
     };
   }
 
   setStartupCategoryOptions(categoryButtons) {
-    this.schemaFile = Gio.File.new_for_path(__meta.path + '/settings-schema.json');
     let {startupCategory} = this.state.settings;
-    let startupCategoryValid = false;
-    readJSONAsync(this.schemaFile).then((json) => {
-      if (Object.keys(json.startupCategory.options).length === categoryButtons.length) return;
-
-      each(categoryButtons, function(category) {
-        json.startupCategory.options[category.categoryNameText] = category.id;
-        if (category.id === startupCategory) startupCategoryValid = true;
+    setSchema(__meta.path, categoryButtons, startupCategory, (knownProviders, startupCategoryValid) => {
+      this.state.set({
+        knownProviders,
+        startupCategoryOptionsEmpty: false
       });
-
+      if (this.state.isNewInstance) this.onEnabledSearchProvidersChange();
       if (!startupCategoryValid) this.settings.setValue('startupCategory', 'favorites');
-
-      json = JSON.stringify(json);
-      writeFileAsync(this.schemaFile, json)
-        .then(() => {
-          this.settings._doUpgrade(json, global.get_md5_for_string(json));
-          this.settings._saveToFile();
-        })
-        .catch(() => {
-          copyFileAsync(this.backupSchemaFile, this.schemaFile);
-        });
-    }).catch((e) => global.log(e))
+      else this.loadSettings();
+    });
   }
 
   update_label_visible() {
@@ -352,7 +335,7 @@ class CinnamenuApplet extends TextIconApplet {
 
   on_applet_reloaded() {
     if (!this.state) return;
-    let {knownProviders, enabledProviders} = this.state
+    let {knownProviders, enabledProviders} = this.state;
     global.cinnamenuBuffer = {
       settings: this.settings,
       state: this.state.settings,
@@ -824,17 +807,11 @@ class CinnamenuApplet extends TextIconApplet {
 
   onEnableRecentChange() {
     this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
-    if (this.state.settings.startupCategory === 'recent') {
-      this.setStartupCategoryOptions(this.categoryButtons);
-    }
-    this.refresh();
+    this.refresh(true);
   }
 
   onEnablePlacesChange() {
-    if (this.state.settings.startupCategory === 'places') {
-      this.setStartupCategoryOptions(this.categoryButtons);
-    }
-    this.refresh();
+    this.refresh(true);
   }
 
   onEnableBookmarksChange(enableBookmarks, fromInit = false) {
@@ -842,16 +819,13 @@ class CinnamenuApplet extends TextIconApplet {
       this.bookmarksManager = new bookmarksManager(this.appSystem);
     } else if (this.bookmarksManager) {
       this.bookmarksManager = null;
-      if (this.state.settings.startupCategory === 'bookmarks') {
-        this.setStartupCategoryOptions(this.categoryButtons);
-      }
     }
     if (!fromInit) {
-      this.refresh();
+      this.refresh(this.state.settings.startupCategory === 'bookmarks');
     }
   }
 
-  refresh() {
+  refresh(startupCategoryOptionsEmpty = false) {
     // TBD: For some reason the onEnable* settings callbacks get called several times per settings change,
     // This is causing the start up category to reset, so throttling this function to 250ms prevents excess invocation.
     let now = Date.now();
@@ -862,7 +836,8 @@ class CinnamenuApplet extends TextIconApplet {
     this.destroyDisplayed();
     this.state.set({
       displayed: false,
-      menuHeight: 0
+      menuHeight: 0,
+      startupCategoryOptionsEmpty
     });
     this.mxOffset = null;
     this.categoryButtons = [];
