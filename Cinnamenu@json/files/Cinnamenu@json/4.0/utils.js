@@ -222,7 +222,8 @@ const setSchema = function(path, schemaFile, backupSchemaFile, cb) {
       });
     } else {
       if (backupSchemaFile.query_exists(null)) {
-        backupSchemaFile.copy(schemaFile, Gio.FileCopyFlags.OVERWRITE, null, null)
+        copyFileAsync(backupSchemaFile, schemaFile).then(next);
+        return;
       }
       next();
     }

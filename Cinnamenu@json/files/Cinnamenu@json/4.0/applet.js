@@ -200,10 +200,7 @@ class CinnamenuApplet extends TextIconApplet {
           let categories1 = categories.slice(0, newIndex);
           let categories2 = categories.slice(newIndex, categories.length);
           categories = categories1.concat([id1]).concat(categories2);
-          this.settings.setValue(
-            'categories',
-            categories
-          );
+          this.settings.setValue('categories', categories);
           this.state.set({dragIndex: -1});
           this.buildCategories();
           for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
@@ -228,14 +225,6 @@ class CinnamenuApplet extends TextIconApplet {
 
       this.createMenu(orientation);
 
-      this.loadSettings(true);
-      this.state.set({
-        isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
-        fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
-      });
-      global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
-      this.onEnabledSearchProvidersChange();
-
       this.signals = new SignalManager(null);
       this.displaySignals = new SignalManager(null);
 
@@ -249,11 +238,9 @@ class CinnamenuApplet extends TextIconApplet {
       this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
 
       // FS search
-      this._fileFolderAccessActive = false;
       this.pathCompleter = new Gio.FilenameCompleter();
       this.pathCompleter.set_dirs_only(false);
 
-      this.updateKeybinding();
       this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
 
       this.iconTheme = Gtk.IconTheme.get_default();
@@ -271,19 +258,29 @@ class CinnamenuApplet extends TextIconApplet {
       this.activeContainer = null;
       this.placesManager = null;
 
-      this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
       this.session = new SessionManager();
       this.screenSaverProxy = new ScreenSaverProxy();
       this.recentManager = Gtk.RecentManager.get_default();
-      this.updateIconAndLabel();
-      this.updateActivateOnHover();
+
       this.init = true;
 
-      this.initCategories();
+      // Init settings
+      this.loadSettings(true);
+      this.state.set({
+        isListView: this.state.settings.startupViewMode === ApplicationsViewMode.LIST,
+        fallbackDescription: this.state.settings.descriptionPlacement === 2 || this.state.settings.descriptionPlacement < 4 ? _('No description available') : ''
+      });
+      global.settings.connect('changed::enabled-search-providers', (...args) => this.onEnabledSearchProvidersChange(...args));
+      this.onEnabledSearchProvidersChange();
+      this.onEnableBookmarksChange(this.state.settings.enableBookmarks, true);
+      this.updateIconAndLabel();
+      this.updateActivateOnHover();
+      this.updateKeybinding();
     });
   }
 
   get gridWidth() {
+    if (!this.state) return 0;
     return gridWidths[this.state.settings.appsGridColumnCount] * global.ui_scale;
   }
 
@@ -307,7 +304,10 @@ class CinnamenuApplet extends TextIconApplet {
       this.settings = new AppletSettings(this.state.settings, __meta.uuid, this.instance_id);
     }
 
-    if (init) this.bindSettingsChanges();
+    if (init) {
+      this.bindSettingsChanges();
+      this.initCategories();
+    };
   }
 
   setStartupCategoryOptions(categoryButtons) {

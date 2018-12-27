@@ -19,10 +19,11 @@ const {PopupBaseMenuItem, PopupSubMenu} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
-const {spawnCommandLine, spawn, unref, tryFn} = imports.misc.util;
+const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
 const {_, ApplicationType} = require('./constants');
+const {tryFn} = require('./utils');
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const stripMarkupRegex = /(<([^>]+)>)/ig;
