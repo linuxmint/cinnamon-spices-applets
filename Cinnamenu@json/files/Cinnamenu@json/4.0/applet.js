@@ -134,6 +134,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.tooltip.hide();
             return;
           }
+          let [x, y] = coords;
           let clutterText = this.tooltip._tooltip.get_clutter_text();
           if (clutterText) {
             clutterText.set_markup(text);
@@ -142,14 +143,20 @@ class CinnamenuApplet extends TextIconApplet {
           }
           if (width && height) {
             if (this.state.isListView) {
-              coords[0] = coords[0] + width + 80;
-              coords[1] -= 14;
+              x += width + 80;
+              y -= 14;
+              // Don't let the tooltip cover menu items when the menu
+              // is oriented next to the right side of the monitor.
+              let {style_class} = this._panelLocation;
+              if (style_class === 'panelRight' || style_class === 'panelLeft vertical') {
+                y += height;
+              }
             } else {
-              coords[1] = coords[1] + height;
+              y += height;
             }
           }
 
-          this.tooltip.mousePosition = coords;
+          this.tooltip.mousePosition = [x, y];
           if (!this.state.settings.tooltipDelay) {
             this.tooltip.show();
             return;
