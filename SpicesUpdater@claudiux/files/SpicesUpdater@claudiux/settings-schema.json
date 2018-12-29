@@ -25,7 +25,7 @@
     "General": {
       "type": "page",
       "title": "General",
-      "sections": ["section_general1", "section_general2", "section_general3"]
+      "sections": ["section_general1", "section_general2", "section_Log", "section_general3"]
     },
     "section_applets1": {
       "type": "section",
@@ -75,7 +75,15 @@
     "section_general2": {
       "type": "section",
       "title": "Notifications",
-      "keys": ["general_warning", "general_notifications"]
+      "keys": ["general_warning", "events_color", "general_notifications"]
+    },
+    "section_Log": {
+      "type": "section",
+      "title": "Activity Logs",
+      "keys": [
+        "doLogActivity",
+        "logLifetime"
+      ]
     },
     "section_general3": {
       "type": "section",
@@ -257,6 +265,14 @@
     "description": "Notify me by changing the icon when Spices need an update",
     "tooltip": "By checking this box, you allow this applet to modify its icon to warn you when at least one of the Spices requires an update."
   },
+    "events_color" : {
+      "type": "colorchooser",
+      "indent": true,
+      "default" : "DodgerBlue",
+      "dependency": "general_warning",
+      "description" : "The icon color when Spices need an update",
+      "tooltip" : "Click the button to select another color."
+  },
   "general_notifications": {
     "type": "checkbox",
     "indent": true,
@@ -274,5 +290,34 @@
      },
     "description" : "Type of Display",
     "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+  },
+  "doLogActivity": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "description": "Log events",
+    "tooltip": "This option allows this applet to log events during Spices automatic updates.\nYou will can display the log file to make diagnostics."
+  },
+  "logLifetime": {
+    "type": "combobox",
+    "default": 7,
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "15": 15,
+      "20": 20,
+      "30": 30
+    },
+    "description": "Lifetime (days)",
+    "tooltip": "Lifetime of a record in the log file, in days.",
+    "dependency": "doLogActivity"
   }
 }

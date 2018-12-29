@@ -16,6 +16,7 @@ const Extension = imports.ui.extension; // Needed to reload applets
 const Json = imports.gi.Json;
 const Soup = imports.gi.Soup;
 const Signals = imports.signals;
+const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
 var UUID="SpicesUpdater@claudiux";
 
@@ -199,6 +200,102 @@ function recursivelyMoveDir(srcDir, destDir) {
   }
 }
 
+class ActivityLogging {
+  constructor(metadata, nbdays=30, active=true) {
+    this.metadata = metadata;
+    this.uuid = metadata.uuid;
+    this.set_active(active);
+    this.set_lifetime(nbdays); // to cut logfile
+    this.time_options = {year: "numeric", month: "numeric", day: "numeric",
+      hour: "numeric", minute: "numeric", second: "numeric",
+      hour12: !this._get_system_use24h(), timeZone: this._get_timezone(), timeZoneName: "short"};
+
+    GLib.spawn_command_line_async("bash -c 'touch "+ this.log_file_path() +"'");
+  } // End of constructor
+
+  log_file_path() {
+    let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + this.uuid + "/SU_activity.log";
+    return ret
+  } // End of log_file_path
+
+  _get_epoch(d) {
+    return Math.round(Date.parse(d)/1000);
+  } // End of _get_epoch
+
+  _get_system_use24h() {
+    let _SETTINGS_SCHEMA='org.cinnamon.desktop.interface';
+    let _SETTINGS_KEY = 'clock-use-24h';
+    let _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+    let ret = _interface_settings.get_boolean(_SETTINGS_KEY);
+    return ret
+  } // End of get_system_icon_theme
+
+  _get_timezone() {
+    let [res, out, err, status] = GLib.spawn_command_line_sync("timedatectl show -p Timezone");
+      // res is a boolean : true if command line has been correctly executed
+      // out is the return of the script (as that is sent by 'echo' command in a bash script)
+      // err is the error message, if an error occured
+      // status is the status code (as that is sent by an 'exit' command in a bash script)
+    return out.toString().trim().split("=")[1];
+  } // End of _get_timezone
+
+  _get_user_language() {
+    return GLib.getenv("LANG").split(".")[0].replace("_","-")
+  } // End of get_user_language
+
+  set_active(active) {
+    this.is_active = active
+  } // End of set_active
+
+  set_lifetime(days) {
+    this.lifetime = 86400 * days; // 1 day = 84600 seconds
+  } // End of set_lifetime
+
+  truncate_log_file() {
+    if (this.is_active) {
+      let date = new Date();
+      let limit = this._get_epoch(date)-this.lifetime;
+      // Read file contents:
+      let contents = Cinnamon.get_file_contents_utf8_sync(this.log_file_path()).split("\n");
+      var line;
+      var epoch_date, new_contents = [];
+      // keep recent lines:
+      for (line of contents) {
+        if (line != '') {
+          epoch_date = eval(line.split(" - ")[0].valueOf());
+          if (epoch_date > limit) new_contents.push(line.trim());
+        }
+      }
+      // Write new contents in log file
+      if (new_contents.length !== contents.length) {
+        let file = Gio.file_new_for_path(this.log_file_path());
+        let raw = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+        let out = Gio.BufferedOutputStream.new_sized (raw, 4096);
+        for (line of new_contents) {
+          Cinnamon.write_string_to_stream(out, line + "\n")
+        }
+        out.close(null);
+      }
+      contents = []; new_contents = [];
+    }
+  } // End of truncate_log_file
+
+  display_logs() {
+    let command;
+    command = this.metadata.path + '/egSpawn.js';
+    GLib.spawn_command_line_async(command);
+  } // End of display_logs
+
+  log(s) {
+    if (this.is_active) {
+      let d = new Date();
+      let date_string = new Intl.DateTimeFormat(this._get_user_language(), this.time_options).format(d);
+      let command = "\"echo '"+ this._get_epoch(d).toString() + " - " + date_string + " - " + s + "' >> " + this.log_file_path() + "\"";
+      GLib.spawn_command_line_async("bash -c " + command);
+    }
+  } // End of log
+}; //End of class ActivityLogging
+
 class SpicesUpdater extends Applet.TextIconApplet {
   constructor (metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -207,9 +304,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
     this.appletPath = metadata.path;
     this.set_applet_icon_path(this.appletPath + "/icons/spices-updater-symbolic.svg");
     this._applet_icon.set_icon_size(22);
-    //this.set_applet_label("SpU");
     this.set_applet_tooltip(_("Spices Updater"));
-    //log(" !!! this._applet_icon.style = " + this._applet_icon.style);
 
     this.OKtoPopulateSettingsApplets = true;
     this.OKtoPopulateSettingsDesklets = true;
@@ -265,10 +360,10 @@ class SpicesUpdater extends Applet.TextIconApplet {
       "themes": false
     };
 
-    // Make folders to unzip the zip files:
-    for (let t of TYPES) {
-      GLib.mkdir_with_parents(SU_CONFIG_DIR + "/" + t.toString(), 0o777);
-    }
+    // Make folders to unzip the zip files: // (Became useless.)
+    //for (let t of TYPES) {
+      //GLib.mkdir_with_parents(SU_CONFIG_DIR + "/" + t.toString(), 0o777);
+    //}
 
     // ++ Settings
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -364,8 +459,26 @@ class SpicesUpdater extends Applet.TextIconApplet {
       null);
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
+      "events_color",
+      "events_color",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_notifications",
       "general_notifications",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "doLogActivity",
+      "doLogActivity",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "logLifetime",
+      "logLifetime",
       this.on_settings_changed,
       null);
 
@@ -374,6 +487,11 @@ class SpicesUpdater extends Applet.TextIconApplet {
       "displayType",
       this.on_settings_changed,
       null);
+
+    // Logging activity:
+    this.activityLog = new ActivityLogging(metadata, this.logLifetime, this.doLogActivity);
+    this.activityLog.truncate_log_file();
+    this.next_truncation = 86400;
 
     this.on_orientation_changed(orientation);
 
@@ -434,6 +552,13 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
     // Refresh intervall:
     this.refreshInterval = 3600*this.general_frequency;
+
+    this.activityLog.set_active(this.doLogActivity);
+    if (this.doLogActivity === true) {
+      this.activityLog.set_lifetime(this.logLifetime);
+      this.activityLog.truncate_log_file();
+      this.next_truncation = 86400; // 86400 seconds = 1 day
+    }
 
     // Types to check / to update
     this.types_to_check = [];
@@ -1015,6 +1140,8 @@ class SpicesUpdater extends Applet.TextIconApplet {
     let notifOK = this.general_notifications;
 
     _httpSession.queue_message(message, Lang.bind(this, function(session, message) {
+        var lm = "";
+        var ALog = this.activityLog;
         this.gotSpiceZipFile(session, message, type, uuid, newSpiceTmpDir, function() {
           //log("Download of zip file OK for one of the %s: %s".format(type, uuid));
           //Update the applet:
@@ -1025,24 +1152,32 @@ class SpicesUpdater extends Applet.TextIconApplet {
             null);
 
           if (!success) {
-            log('InstallSpiceError');
+            lm = _("Error while updating:") + " %s %s".format(type.substr(0, type.length-1), uuid);
+            log(lm);
+            ALog.log(lm);
             return;
           }
 
           GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, function(pid, status) {
             GLib.spawn_close_pid(pid);
 
-            if (status != 0)
-              log('InstallSpiceError');
-            else {
+            if (status != 0) {
+              lm = _("Error while updating:") + " %s %s".format(type.substr(0, type.length-1), uuid);
+              log(lm);
+              ALog.log(lm);
+            } else {
               recursivelyDeleteDir(newSpiceTmpDir, true); // Delete temp dir after install.
-              log("Successfully updated: %s %s".format(type.substr(0, type.length-1), uuid));
-              if (notifOK) notify_send(_("Successfully updated:") + " %s %s".format(type.substr(0, type.length-1), uuid));
+              lm = _("Successfully updated:") + " %s %s".format(type.substr(0, type.length-1), uuid);
+              log(lm);
+              ALog.log(lm);
+              if (notifOK) notify_send(lm);
             }
           });
 
         }, function(code, message) {
-          logError("Error while updating %s %s: %s (%s)".format(type.substr(0, type.length-1), uuid, code, message ? message : ''));
+          lm = _("Error while updating:") + " %s %s: %s (%s)".format(type.substr(0, type.length-1), uuid, code, message ? message : '');
+          logError(lm);
+          ALog.log(lm);
         });
     }));
   }; // End of download_zip_and_install_spice
@@ -1231,6 +1366,15 @@ class SpicesUpdater extends Applet.TextIconApplet {
       }
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+      // view log file
+      this.view_log = new PopupMenu.PopupIconMenuItem(_("View Activity Logs"), "folder-documents-symbolic", St.IconType.SYMBOLIC);
+      this.view_log.connect('activate', (event) => {
+        this.activityLog.display_logs();
+      });
+      this.menu.addMenuItem(this.view_log);
+
+      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
       // Restart Cinnamon Button
       this.restartButton = new PopupMenu.PopupIconMenuItem(_("Restart Cinnamon"), "emblem-synchronizing-symbolic", St.IconType.SYMBOLIC);
       this.restartButton.connect('activate', Lang.bind(this, function(event) {
@@ -1249,7 +1393,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
     if (this.general_warning === true) {
       for (let t of TYPES) {
         if (this.menuDots[t] === true) {
-          this._applet_icon.style = "color: DodgerBlue;";
+          this._applet_icon.style = "color: %s;".format(this.events_color);
           break;
         }
       }
@@ -1318,11 +1462,11 @@ class SpicesUpdater extends Applet.TextIconApplet {
           this.updateUI(); // update icon and tooltip
 
           // Force truncation of the log file, once a day:
-          //this.next_truncation -= this.general_frequency;
-          //if (this.next_truncation < 0) {
-            //this.next_truncation = 86400; // 86400 seconds = 1 day
-            //this.activityLog.truncate_log_file();
-          //}
+          this.next_truncation -= this.refreshInterval;
+          if (this.next_truncation < 0) {
+            this.next_truncation = 86400; // 86400 seconds = 1 day
+            this.activityLog.truncate_log_file();
+          }
         } else {
           this.refreshInterval = 120; // 120 seconds
           this.first_loop = false;
