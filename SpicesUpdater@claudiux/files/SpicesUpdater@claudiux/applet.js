@@ -56,10 +56,10 @@ const DIR_MAP = {
 }
 
 const DCONFCACHEUPDATED = {
-  'applets': "/org/cinnamon/applet-cache-updated",
-  'themes': "/org/cinnamon/theme/theme-cache-updated",
-  'desklets': "/org/cinnamon/desklet-cache-updated",
-  'extensions': "/org/cinnamon/extension-cache-updated"
+  'applets': "org.cinnamon",
+  'themes': "org.cinnamon.theme",
+  'desklets': "org.cinnamon",
+  'extensions': "org.cinnamon"
 }
 
 // ++ Needed if some http(s) requests are required
@@ -199,6 +199,47 @@ function recursivelyMoveDir(srcDir, destDir) {
       recursivelyMoveDir(srcChild, destChild);
   }
 }
+
+/**
+ * spawnCommandLineAsync:
+ * @command: a command
+ * @callback (function): called on success or failure
+ * @opts (object): options: argv, flags, input
+ *
+ * Runs @command in the background. Callback has three arguments -
+ * stdout, stderr, and exitCode.
+ *
+ * Returns (object): a Gio.Subprocess instance
+ */
+function spawnCommandLineAsync(command, callback, opts = {}) {
+    let {argv, flags, input} = opts;
+    if (!input) input = null;
+
+    let subprocess = new Gio.Subprocess({
+        argv: argv ? argv : ['bash', '-c', command],
+        flags: flags ? flags
+            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
+    });
+    subprocess.init(null);
+    let cancellable = new Gio.Cancellable();
+
+    subprocess.communicate_utf8_async(input, cancellable, (obj, res) => {
+        let success, stdout, stderr, exitCode;
+        // This will throw on cancel with "Gio.IOErrorEnum: Operation was cancelled"
+        tryFn(() => [success, stdout, stderr] = obj.communicate_utf8_finish(res));
+        if (typeof callback === 'function' && !cancellable.is_cancelled()) {
+            if (stderr && stderr.indexOf('bash: ') > -1) {
+                stderr = stderr.replace(/bash: /, '');
+            }
+            exitCode = success ? subprocess.get_exit_status() : -1;
+            callback(stdout, stderr, exitCode);
+        }
+        subprocess.cancellable = null;
+    });
+    subprocess.cancellable = cancellable;
+
+    return subprocess;
+}; // End of spawnCommandLineAsync
 
 class ActivityLogging {
   constructor(metadata, nbdays=30, active=true) {
@@ -828,7 +869,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
   }; // End of _get_singular_type
 
   are_dependencies_installed() {
-    return (GLib.find_program_in_path("unzip") && GLib.find_program_in_path("dconf") && GLib.find_program_in_path("notify-send"))
+    return (GLib.find_program_in_path("unzip") && GLib.find_program_in_path("notify-send"))
   }; // End of are_dependencies_installed
 
   get_terminal() {
@@ -877,7 +918,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
       let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
       let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
-      var _apt_install = _isFedora ? "sudo dnf install unzip dconf libnotify" : _isArchlinux ? "sudo pacman -Syu unzip dconf libnotify" : "sudo apt install unzip dconf-tools libnotify-bin";
+      var _apt_install = _isFedora ? "sudo dnf install unzip libnotify" : _isArchlinux ? "sudo pacman -Syu unzip libnotify" : "sudo apt install unzip libnotify-bin";
       let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
       // TRANSLATORS: The next message should not be translated.
@@ -1000,6 +1041,13 @@ class SpicesUpdater extends Applet.TextIconApplet {
     let metadataParser = new Json.Parser();
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
+
+    // For some themes, the metadata.json file is in the subfolder /cinnamon:
+    if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
+      metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
+      metadataFile = Gio.file_new_for_path(metadataFileName);
+    }
+
     if (metadataFile.query_exists(null)) {
       // substr(5) is needed to remove the 'true,' at begin:
       let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
@@ -1296,44 +1344,41 @@ class SpicesUpdater extends Applet.TextIconApplet {
   get_active_spices(type) {
     // Returns the list of active spices of type 'type'
     var dconfEnabled;
-    var elt = 0;
-    switch (type) {
-      case "applets":
-        dconfEnabled = "/org/cinnamon/enabled-applets";
-        elt = 3;
-        break;
-      case "themes":
-        dconfEnabled = "/org/cinnamon/theme/name";
-        break;
-      case "extensions":
-        dconfEnabled = "/org/cinnamon/enabled-extensions";
-        break;
-      case "desklets":
-        dconfEnabled = "/org/cinnamon/enabled-desklets";
-
-    }
-    let [res, out, err, status] = GLib.spawn_command_line_sync('dconf read "'+dconfEnabled+'"');
-    let enabled = "";
-    if (res) enabled = out.toString().trim();
-    if (enabled.startsWith('[')) {
-        enabled = enabled.substring(1, enabled.length-1); // removes '[' and ']'.
-    }
-    //log('enabled='+enabled);
+    var elt = (type.toString() === "applets") ? 3 : 0;
     let listCanBeUpdated = this.get_can_be_updated(type);
-    var listEnabled = [];
+    let enabled;
+    var listEnabled = new Array();
+    let _SETTINGS_SCHEMA, _SETTINGS_KEY;
+    let _interface_settings;
+
+    if (type.toString() === "themes") {
+      _SETTINGS_SCHEMA = "org.cinnamon.theme";
+      _SETTINGS_KEY = "name";
+      _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+      enabled = _interface_settings.get_string(_SETTINGS_KEY);
+      log('!!!!!!!!!!!! _SETTINGS_SCHEMA='+_SETTINGS_SCHEMA);
+      log('!!!!!!!!!!!! _SETTINGS_KEY='+_SETTINGS_KEY);
+      log('!!!!!!!!!!!! enabled='+enabled);
+      listEnabled.push(enabled);
+      log('!!!!!!!!!!!! listEnabled='+ listEnabled.toString());
+      return listEnabled
+    }
+
+    _SETTINGS_SCHEMA = "org.cinnamon";
+    _SETTINGS_KEY = "enabled-%s".format(type.toString());
+    _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+
+    enabled = _interface_settings.get_strv(_SETTINGS_KEY);
+    log('!!!!!!!!!!!! _SETTINGS_SCHEMA='+_SETTINGS_SCHEMA);
+    log('!!!!!!!!!!!! _SETTINGS_KEY='+_SETTINGS_KEY);
+    log('!!!!!!!!!!!! enabled='+enabled.toString());
     let xlet_uuid;
-    //for (let i=0; i<XLET_TYPE[type].toIgnore.length; i++)
-    //  log(XLET_TYPE[type].toIgnore[i]);
-    for (let xl of enabled.toString().split(', ')) {
+    for (let xl of enabled) {
       xlet_uuid = xl.split(':')[elt].toString().replace(/'/g,"");
-      //log(xlet_uuid);
-      //log(XLET_TYPE[type].toIgnore.indexOf(xlet_uuid)<0);
-      //FIXME:
       if (!xlet_uuid.endsWith("@cinnamon.org") && (listCanBeUpdated.indexOf(xlet_uuid)>-1))
         listEnabled.push(xlet_uuid);
     }
-
-    //log('listEnabled='+ listEnabled.toString());
+    log('!!!!!!!!!!!! listEnabled='+ listEnabled.toString());
     return listEnabled
   }; // End of get_active_spices
 
@@ -1420,6 +1465,8 @@ class SpicesUpdater extends Applet.TextIconApplet {
         if (!this.first_loop) {
           this.refreshInterval = 3600*this.general_frequency;
           var must_be_updated, ret;
+          var _SETTINGS_SCHEMA, _SETTINGS_KEY;
+          var _interface_settings;
           for (t of TYPES) {
             if (this.is_to_check(t)) {
               log("!!!! Are to check : " + t);
@@ -1444,7 +1491,11 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
                   //Changing the last cache update date in dconf:
                   let currentTime = Math.round(new Date().getTime()/1000.0);
-                  GLib.spawn_command_line_async('dconf write "'+ DCONFCACHEUPDATED[t] +'" ' + currentTime);
+                  _SETTINGS_SCHEMA = DCONFCACHEUPDATED[t];
+                  _SETTINGS_KEY = "%s-cache-updated".format(this._get_singular_type(t.toString()));
+                  _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
+                  _interface_settings.set_int(_SETTINGS_KEY, currentTime);
+
                   this.menuDots[t] = false;
                 } else {
                   this.menuDots[t] = true;
