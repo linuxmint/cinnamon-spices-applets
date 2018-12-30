@@ -999,31 +999,33 @@ class SpicesUpdater extends Applet.TextIconApplet {
     var lastEdited = null;
     let metadataParser = new Json.Parser();
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
-    // substr(5) is needed to remove the 'true,' at begin:
-    let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
-    //log("!!! metadataData = " + metadataData);
-    metadataParser.load_from_data(metadataData, -1);
-    let node = metadataParser.get_root();
-    if (node.get_node_type() === Json.NodeType.OBJECT) {
-      let obj = node.get_object();
-      try {
-        lastEdited = obj.get_member("last-edited").get_value();
-      } catch(e) {
-        // The last-edited member doesn't exist
-        lastEdited = null;
-        let message = "The last-edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
-        //log(message);
-        // Replace the last-edited member's value by the last modification time of the metadate file, in epoch format.
+    let metadataFile = Gio.file_new_for_path(metadataFileName);
+    if (metadataFile.query_exists(null)) {
+      // substr(5) is needed to remove the 'true,' at begin:
+      let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
+      //log("!!! metadataData = " + metadataData);
+      metadataParser.load_from_data(metadataData, -1);
+      let node = metadataParser.get_root();
+      if (node.get_node_type() === Json.NodeType.OBJECT) {
+        let obj = node.get_object();
         try {
-          let metadataFile = Gio.file_new_for_path(metadataFileName);
-          lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-          message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
-          //log(message)
+          lastEdited = obj.get_member("last-edited").get_value();
         } catch(e) {
-          // Sure, the metadata file doesn't exist!
+          // The last-edited member doesn't exist
           lastEdited = null;
-          message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
-          //log(message)
+          let message = "The last-edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
+          //log(message);
+          // Replace the last-edited member's value by the last modification time of the metadate file, in epoch format.
+          try {
+            lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
+            //log(message)
+          } catch(e) {
+            // Sure, the metadata file doesn't exist!
+            lastEdited = null;
+            message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
+            //log(message)
+          }
         }
       }
     }
