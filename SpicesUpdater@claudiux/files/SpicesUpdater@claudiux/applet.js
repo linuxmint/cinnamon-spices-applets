@@ -27,6 +27,8 @@ const HOME_DIR = GLib.get_home_dir();
 var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
 const DEBUG = _debug.query_exists(null);
 
+const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
+
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
@@ -200,47 +202,6 @@ function recursivelyMoveDir(srcDir, destDir) {
   }
 }
 
-/**
- * spawnCommandLineAsync:
- * @command: a command
- * @callback (function): called on success or failure
- * @opts (object): options: argv, flags, input
- *
- * Runs @command in the background. Callback has three arguments -
- * stdout, stderr, and exitCode.
- *
- * Returns (object): a Gio.Subprocess instance
- */
-function spawnCommandLineAsync(command, callback, opts = {}) {
-    let {argv, flags, input} = opts;
-    if (!input) input = null;
-
-    let subprocess = new Gio.Subprocess({
-        argv: argv ? argv : ['bash', '-c', command],
-        flags: flags ? flags
-            : Gio.SubprocessFlags.STDOUT_PIPE | Gio.SubprocessFlags.STDIN_PIPE | Gio.SubprocessFlags.STDERR_PIPE,
-    });
-    subprocess.init(null);
-    let cancellable = new Gio.Cancellable();
-
-    subprocess.communicate_utf8_async(input, cancellable, (obj, res) => {
-        let success, stdout, stderr, exitCode;
-        // This will throw on cancel with "Gio.IOErrorEnum: Operation was cancelled"
-        tryFn(() => [success, stdout, stderr] = obj.communicate_utf8_finish(res));
-        if (typeof callback === 'function' && !cancellable.is_cancelled()) {
-            if (stderr && stderr.indexOf('bash: ') > -1) {
-                stderr = stderr.replace(/bash: /, '');
-            }
-            exitCode = success ? subprocess.get_exit_status() : -1;
-            callback(stdout, stderr, exitCode);
-        }
-        subprocess.cancellable = null;
-    });
-    subprocess.cancellable = cancellable;
-
-    return subprocess;
-}; // End of spawnCommandLineAsync
-
 class ActivityLogging {
   constructor(metadata, nbdays=30, active=true) {
     this.metadata = metadata;
@@ -272,12 +233,8 @@ class ActivityLogging {
   } // End of get_system_icon_theme
 
   _get_timezone() {
-    let [res, out, err, status] = GLib.spawn_command_line_sync("timedatectl show -p Timezone");
-      // res is a boolean : true if command line has been correctly executed
-      // out is the return of the script (as that is sent by 'echo' command in a bash script)
-      // err is the error message, if an error occured
-      // status is the status code (as that is sent by an 'exit' command in a bash script)
-    return out.toString().trim().split("=")[1];
+    let [res, out, err, status] = GLib.spawn_command_line_sync('bash -c "%s/getTZ.sh"'.format(SCRIPTS_DIR));
+    return out.toString().trim();
   } // End of _get_timezone
 
   _get_user_language() {
@@ -323,7 +280,7 @@ class ActivityLogging {
 
   display_logs() {
     let command;
-    command = this.metadata.path + '/egSpawn.js';
+    command = 'bash -C "' + this.metadata.path + '/scripts/watchlog.sh"';
     GLib.spawn_command_line_async(command);
   } // End of display_logs
 
@@ -346,6 +303,9 @@ class SpicesUpdater extends Applet.TextIconApplet {
     this.set_applet_icon_path(this.appletPath + "/icons/spices-updater-symbolic.svg");
     this._applet_icon.set_icon_size(22);
     this.set_applet_tooltip(_("Spices Updater"));
+
+    // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
+    GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/scripts && chmod 755 *.sh'");
 
     this.OKtoPopulateSettingsApplets = true;
     this.OKtoPopulateSettingsDesklets = true;
@@ -400,11 +360,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
       "extensions": false,
       "themes": false
     };
-
-    // Make folders to unzip the zip files: // (Became useless.)
-    //for (let t of TYPES) {
-      //GLib.mkdir_with_parents(SU_CONFIG_DIR + "/" + t.toString(), 0o777);
-    //}
 
     // ++ Settings
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -540,12 +495,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
     this.populateSettingsUnprotectedDesklets();
     this.populateSettingsUnprotectedExtensions();
     this.populateSettingsUnprotectedThemes();
-    /*
-    for (let t of TYPES) {
-      log("t = " + t.toString());
-      this.populateSettingsUnprotected(t.toString());
-    }
-    */
 
     // Dependencies:
     this.dependenciesMet = this.are_dependencies_installed();
@@ -558,8 +507,8 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
     // Default icon color
     let themeNode = this.actor.get_theme_node();
-    this.icon_color = themeNode.get_icon_colors();
-    this.defaultColor = "rgba("+this.icon_color.red+","+this.icon_color.green+","+this.icon_color.blue+","+this.icon_color.alpha+")";
+    let icon_color = themeNode.get_icon_colors();
+    this.defaultColor = icon_color.foreground.to_string();
 
     this.testblink = [];
     this.forceRefresh = false;
@@ -660,10 +609,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
       this.update_extensions = false;
       this.menuDots['extensions'] = false;
     }
-    //log("this.types_to_check = " + this.types_to_check);
-    //log("this.types_to_update = " + this.types_to_update);
 
-    //this.settings._checkSettings();
     // Run the loop !
     this.updateLoop();
   }; // End of on_settings_changed
@@ -715,7 +661,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   populateSettingsUnprotectedApplets() {
     if (this.OKtoPopulateSettingsApplets === true) {
       this.OKtoPopulateSettingsApplets = false; // Prevents multiple access to the json config file of SpiceUpdater@claudiux.
-      //log("!!!! populate Settings APPLETS !!!!");
       this.unprotectedAppletsDico = {};
       this.unprotectedAppletsList = [];
       // populateSettings this.unprotectedApplets with the this.unprotected_applets elements:
@@ -742,7 +687,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
             }
           }
         }
-        //this.unprotected_applets = this.unprotectedAppletsList.sort((a,b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : ((b["name"].toLowerCase() > a["name"].toLowerCase()) ? -1 : 0)));
         this.unprotected_applets = this.unprotectedAppletsList.sort((a,b) => this._compare(a,b));
       }
     }
@@ -751,7 +695,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   populateSettingsUnprotectedDesklets() {
     if (this.OKtoPopulateSettingsDesklets === true) {
       this.OKtoPopulateSettingsDesklets = false;
-      //log("!!!! populate Settings DESKLETS !!!!");
       this.unprotectedDeskletsDico = {};
       this.unprotectedDeskletsList = [];
       // populateSettings this.unprotectedDesklets with the this.unprotected_desklets elements:
@@ -778,7 +721,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
             }
           }
         }
-        //this.unprotected_desklets = this.unprotectedDeskletsList.sort((a,b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : ((b["name"].toLowerCase() > a["name"].toLowerCase()) ? -1 : 0)));
         this.unprotected_desklets = this.unprotectedDeskletsList.sort((a,b) => this._compare(a,b));
       }
     }
@@ -787,7 +729,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   populateSettingsUnprotectedExtensions() {
     if (this.OKtoPopulateSettingsExtensions === true) {
       this.OKtoPopulateSettingsExtensions = false;
-      //log("!!!! populate Settings EXTENSIONS !!!!");
       this.unprotectedExtensionsDico = {};
       this.unprotectedExtensionsList = [];
       // populateSettings this.unprotectedExtensions with the this.unprotected_extensions elements:
@@ -814,7 +755,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
             }
           }
         }
-        //this.unprotected_extensions = this.unprotectedExtensionsList.sort((a,b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : ((b["name"].toLowerCase() > a["name"].toLowerCase()) ? -1 : 0)));
         this.unprotected_extensions = this.unprotectedExtensionsList.sort((a,b) => this._compare(a,b));
       }
     }
@@ -823,7 +763,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   populateSettingsUnprotectedThemes() {
     if (this.OKtoPopulateSettingsThemes === true) {
       this.OKtoPopulateSettingsThemes = false;
-      //log("!!!! populate Settings THEMES !!!!");
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populateSettings this.unprotectedThemes with the this.unprotected_themes elements:
@@ -850,7 +789,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
             }
           }
         }
-        //this.unprotected_themes = this.unprotectedThemesList.sort((a,b) => (a["name"].toLowerCase() > b["name"].toLowerCase() ? 1 : ((b["name"].toLowerCase() > a["name"].toLowerCase()) ? -1 : 0)));
         this.unprotected_themes = this.unprotectedThemesList.sort((a,b) => this._compare(a,b));
       }
     }
@@ -869,7 +807,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
   }; // End of _get_singular_type
 
   are_dependencies_installed() {
-    return (GLib.find_program_in_path("unzip") && GLib.find_program_in_path("notify-send"))
+    return (GLib.find_program_in_path("unzip") && GLib.find_program_in_path("notify-send") && GLib.find_program_in_path("zenity"))
   }; // End of are_dependencies_installed
 
   get_terminal() {
@@ -918,7 +856,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
       let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
       let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
-      var _apt_install = _isFedora ? "sudo dnf install unzip libnotify" : _isArchlinux ? "sudo pacman -Syu unzip libnotify" : "sudo apt install unzip libnotify-bin";
+      var _apt_install = _isFedora ? "sudo dnf install unzip libnotify zenity" : _isArchlinux ? "sudo pacman -Syu unzip libnotify zenity" : "sudo apt install unzip libnotify-bin zenity";
       let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
       // TRANSLATORS: The next message should not be translated.
@@ -937,7 +875,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
       GLib.file_set_contents(jsonFileName,"{}");
     }
     if (jsonFile.query_exists(null)) {
-      //let jsonParser = new Json.Parser();
       this.oldCache[type] = this.cache[type];
       this.cache[type] = GLib.file_get_contents(jsonFileName).toString().substr(5)
     } else {
@@ -976,7 +913,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   }; // End of download_cache
 
   _on_response_download_cache(session, message, type) {
-    //log(type + ': _on_response_download_cache()');
     if (message.status_code===Soup.KnownStatusCode.OK) {
       let data = message.response_body.data.toString();
       GLib.file_set_contents(CACHE_MAP[type], data); // Records the new cache in the right place.
@@ -995,12 +931,10 @@ class SpicesUpdater extends Applet.TextIconApplet {
       if (lastEdited) {
         ok = true;
         message = "The last_edited member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + lastEdited.toString();
-        //log(message);
       }
     } catch(e) {
       // The "last-edited" member doesn't exists
       message = "The last_edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
-      //log(message);
     }
 
     if (ok === true) {
@@ -1021,12 +955,10 @@ class SpicesUpdater extends Applet.TextIconApplet {
       if (memberValue) {
         ok = true;
         message = "The " + memberId + " member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + memberValue.toString();
-        //log(message);
       }
     } catch(e) {
       // The "last-edited" member doesn't exists
       message = "The " + memberId + " member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
-      //log(message);
     }
 
     if (ok === true) {
@@ -1051,7 +983,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
     if (metadataFile.query_exists(null)) {
       // substr(5) is needed to remove the 'true,' at begin:
       let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
-      //log("!!! metadataData = " + metadataData);
       metadataParser.load_from_data(metadataData, -1);
       let node = metadataParser.get_root();
       if (node.get_node_type() === Json.NodeType.OBJECT) {
@@ -1061,18 +992,18 @@ class SpicesUpdater extends Applet.TextIconApplet {
         } catch(e) {
           // The last-edited member doesn't exist
           lastEdited = null;
-          let message = "The last-edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
+          //let message = "The last-edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
           //log(message);
           // Replace the last-edited member's value by the last modification time of the metadate file, in epoch format.
           try {
             lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-            message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
-            //log(message)
+            //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
+            //log(message);
           } catch(e) {
             // Sure, the metadata file doesn't exist!
             lastEdited = null;
-            message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
-            //log(message)
+            //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
+            //log(message);
           }
         }
       }
@@ -1081,7 +1012,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
   }; // End of _get_last_edited_from_metadata
 
   download_image(type, uuid) {
-    //log("! download_image("+ type +", " + uuid + ")")
     let memberName, url, target;
     let is_theme = (type === "themes");
     if (is_theme) {
@@ -1093,9 +1023,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
     if (is_theme) {
       url = url.replace("/files/themes/", "/uploads/themes/thumbs/")
     }
-    //log(" ! url = " + url);
     target = CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-    //log(" ! target = " + target);
 
     // Variables for the progress bar
     var total_size = 0;
@@ -1121,7 +1049,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
         //log("Download icon "+percent+"% done ("+bytes_so_far+" / "+total_size+" bytes)");
 
         // write each chunk to file
-        //fstream.write(chunk.get_data(), null, chunk.length);
+        //fstream.write(chunk.get_data(), null, chunk.length); // OBSOLETE
         fstream.write(chunk.get_data(), null);
       }
     }));
@@ -1129,7 +1057,8 @@ class SpicesUpdater extends Applet.TextIconApplet {
     // Queue of the http request
     _httpSession.queue_message(request, Lang.bind(this, function(_httpSession, message) {
       // Download is done
-      log("Download of png file is done");
+      //log("Download of png file is done");
+
       // close the file
       fstream.close(null);
     }));
@@ -1179,9 +1108,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
   }; // End of gotSpiceZipFile
 
   download_zip_and_install_spice(type, uuid) {
-    //let oldSpiceTmpDir = GLib.dir_make_tmp('SpicesUpdaterXXXXXX_OLD');
     let newSpiceTmpDir = Gio.file_new_for_path(GLib.dir_make_tmp("SpicesUpdaterXXXXXX"));
-    //log(" !!!!!!!!!!!!!!!!!! newSpiceTmpDir = " + newSpiceTmpDir);
 
     let params = {};
 
@@ -1203,7 +1130,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
           if (!success) {
             lm = _("Error while updating:") + " %s %s".format(type.substr(0, type.length-1), uuid);
-            log(lm);
+            //log(lm);
             ALog.log(lm);
             return;
           }
@@ -1213,12 +1140,12 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
             if (status != 0) {
               lm = _("Error while updating:") + " %s %s".format(type.substr(0, type.length-1), uuid);
-              log(lm);
+              //log(lm);
               ALog.log(lm);
             } else {
               recursivelyDeleteDir(newSpiceTmpDir, true); // Delete temp dir after install.
               lm = _("Successfully updated:") + " %s %s".format(type.substr(0, type.length-1), uuid);
-              log(lm);
+              //log(lm);
               ALog.log(lm);
               if (notifOK) notify_send(lm);
             }
@@ -1226,7 +1153,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
 
         }, function(code, message) {
           lm = _("Error while updating:") + " %s %s: %s (%s)".format(type.substr(0, type.length-1), uuid, code, message ? message : '');
-          logError(lm);
+          //logError(lm);
           ALog.log(lm);
         });
     }));
@@ -1281,7 +1208,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
   */
 
   unzip(zipname, dir) {
-    log("!!!!! unziping "+ zipname + " in " + dir);
+    //log("!!!!! unziping "+ zipname + " in " + dir);
     let [success, pid] = GLib.spawn_async(null,
                                           ['unzip', '-uod', dir, '--', zipname],
                                           null,
@@ -1320,7 +1247,7 @@ class SpicesUpdater extends Applet.TextIconApplet {
         ret.push(s["name"])
       }
     }
-    log("can_be_updated("+ type + ") = " + JSON.stringify(ret));
+    //log("can_be_updated("+ type + ") = " + JSON.stringify(ret));
     return ret
   }; // End of get_can_be_updated
 
@@ -1337,7 +1264,6 @@ class SpicesUpdater extends Applet.TextIconApplet {
         }
       }
     }
-    //log("!!! get_must_be_updated("+ type + ") = " + ret);
     return ret
   }; // End of get_must_be_updated
 
@@ -1356,11 +1282,8 @@ class SpicesUpdater extends Applet.TextIconApplet {
       _SETTINGS_KEY = "name";
       _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
       enabled = _interface_settings.get_string(_SETTINGS_KEY);
-      log('!!!!!!!!!!!! _SETTINGS_SCHEMA='+_SETTINGS_SCHEMA);
-      log('!!!!!!!!!!!! _SETTINGS_KEY='+_SETTINGS_KEY);
-      log('!!!!!!!!!!!! enabled='+enabled);
       listEnabled.push(enabled);
-      log('!!!!!!!!!!!! listEnabled='+ listEnabled.toString());
+      //log('listEnabled='+ listEnabled.toString());
       return listEnabled
     }
 
@@ -1369,16 +1292,13 @@ class SpicesUpdater extends Applet.TextIconApplet {
     _interface_settings = new Gio.Settings({ schema_id: _SETTINGS_SCHEMA });
 
     enabled = _interface_settings.get_strv(_SETTINGS_KEY);
-    log('!!!!!!!!!!!! _SETTINGS_SCHEMA='+_SETTINGS_SCHEMA);
-    log('!!!!!!!!!!!! _SETTINGS_KEY='+_SETTINGS_KEY);
-    log('!!!!!!!!!!!! enabled='+enabled.toString());
     let xlet_uuid;
     for (let xl of enabled) {
       xlet_uuid = xl.split(':')[elt].toString().replace(/'/g,"");
       if (!xlet_uuid.endsWith("@cinnamon.org") && (listCanBeUpdated.indexOf(xlet_uuid)>-1))
         listEnabled.push(xlet_uuid);
     }
-    log('!!!!!!!!!!!! listEnabled='+ listEnabled.toString());
+    //log('listEnabled='+ listEnabled.toString());
     return listEnabled
   }; // End of get_active_spices
 
@@ -1469,17 +1389,16 @@ class SpicesUpdater extends Applet.TextIconApplet {
           var _interface_settings;
           for (t of TYPES) {
             if (this.is_to_check(t)) {
-              log("!!!! Are to check : " + t);
+              //log("!!!! Are to check : " + t);
               if (this.cache[t] === "{}") this._load_cache(t);
               //log(this.cache[t]);
               this.download_cache(t);
               must_be_updated = this.get_must_be_updated(t);
-              log(capitalize(t) + " that must be updated = " + must_be_updated);
+              //log(capitalize(t) + " that must be updated = " + must_be_updated);
               if (must_be_updated.length > 0) {
                 this.menuDots[t] = true;
                 var filePath, tempdir;
                 if (this.is_to_update(t)) {
-                  /*this.ready_to_unzip[t] = [];*/
                   for (let uuid of must_be_updated) {
                     // Download the zip file in a temp directory, unzip it and install spice:
                     this.download_zip_and_install_spice(t, uuid);
