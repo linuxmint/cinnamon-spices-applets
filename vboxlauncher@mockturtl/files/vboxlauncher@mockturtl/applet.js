@@ -241,10 +241,6 @@ MyApplet.prototype = {
 ,  startVboxImage: function(id) {
     let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
     Util.spawnCommandLine(cmd + id)
-      Util.spawnCommandLine(CMD_VBOX6_VM + id)
-    } else {
-      Util.spawnCommandLine(CMD_VBOX_VM + id)
-    }
   }
   
 ,  startVbox: function() {
