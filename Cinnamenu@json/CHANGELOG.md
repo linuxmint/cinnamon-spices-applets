@@ -1,5 +1,9 @@
 Changelog
 
+### 4.1.1
+
+  * Fixed the "Add to desktop" context menu option.
+
 ### 4.1.0
 
   * Added startup category customization.

@@ -329,7 +329,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         break;
       case 'add_to_desktop':
         destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
-        tryFn(function() {
+        tryFn(() => {
           Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename())
             .copy(
               Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id()),
