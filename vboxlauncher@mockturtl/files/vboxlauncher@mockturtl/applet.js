@@ -11,9 +11,13 @@ const UUID = "vboxlauncher@mockturtl"
 const ICON = "virtualbox"
 
 const CMD_VBOX = "virtualbox"
+const CMD_VBOXMANAGE = "vboxmanage"
+
 const CMD_VBOX_VM = CMD_VBOX + " --startvm "
-const CMD_VBOX_LIST = "vboxmanage list vms"
-const CMD_VBOX_LIST_RUN = "vboxmanage list runningvms"
+const CMD_VBOX6_VM = CMD_VBOXMANAGE + " startvm "
+const CMD_VBOX_LIST = CMD_VBOXMANAGE + " list vms"
+const CMD_VBOX_LIST_RUN = CMD_VBOXMANAGE + " list runningvms"
+const CMD_VBOX_VERSION = CMD_VBOXMANAGE + " -v"
 var VBOX_ISRUNNING = "0"
 
 const CMD_VMPLAYER = "vmplayer"
@@ -137,6 +141,11 @@ MyApplet.prototype = {
     return 1
   }
 
+, vboxMajorVersion: function() {
+  let [res, list, err, status] = GLib.spawn_command_line_sync(CMD_VBOX_VERSION)
+  return parseInt(list.toString()[0])
+}
+
 // add menu items for all Virtualbox images
 , parseVboxImages: function(out) {
     if (!this.isInstalled(CMD_VBOX))
@@ -230,7 +239,12 @@ MyApplet.prototype = {
   }
   
 ,  startVboxImage: function(id) {
-    Util.spawnCommandLine(CMD_VBOX_VM + id)
+    let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
+    Util.spawnCommandLine(cmd + id)
+      Util.spawnCommandLine(CMD_VBOX6_VM + id)
+    } else {
+      Util.spawnCommandLine(CMD_VBOX_VM + id)
+    }
   }
   
 ,  startVbox: function() {
