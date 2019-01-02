@@ -323,9 +323,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu);
 
     // Default icon color
-    let themeNode = this.actor.get_theme_node();
-    let icon_color = themeNode.get_icon_colors();
-    this.defaultColor = icon_color.foreground.to_string();
+    //let themeNode = this.actor.get_theme_node();
+    //let icon_color = themeNode.get_icon_colors();
+    //this.defaultColor = icon_color.foreground.to_string();
+    this.defaultColor = "#000000FF";
 
     // Monitoring metadata.json files
     this.monitors = new Array();
