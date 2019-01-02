@@ -1,0 +1,8 @@
+{
+  "uuid": "SpicesUpdate@claudiux",
+  "name": "Spices Update",
+  "max-instances": "1",
+  "hide-configuration": false,
+  "version": "1.0.0",
+  "description": "Warns you when your Spices (applets, desklets, extensions, themes) require an update."
+}
