@@ -176,6 +176,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.OKtoPopulateSettingsExtensions = true;
     this.OKtoPopulateSettingsThemes = true;
     this.notification = null;
+    this.old_message = "";
 
     this.OKtoPopulateSettings = {
       "applets": true,
@@ -277,20 +278,20 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_frequency",
       "general_frequency",
-      this.on_settings_changed,
+      this.on_frequency_changed,
       null);
       this.refreshInterval = 3600*this.general_frequency;
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
       "general_warning",
-      this.on_settings_changed,
+      this.updateUI,
       null);
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "events_color",
       "events_color",
-      this.on_settings_changed,
+      this.updateUI,
       null);
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -302,7 +303,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "displayType",
       "displayType",
-      this.on_settings_changed,
+      this.on_display_type_changed,
       null);
 
     this.on_orientation_changed(orientation);
@@ -363,8 +364,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.testblink = [];
     this.forceRefresh = false;
     this.applet_running = true;
+    this.loopId = 0;
     this.first_loop = true; // To do nothing for 1 minute.
     this.on_settings_changed();
+    // Run the loop !
+    this.updateLoop();
   }; // End of constructor
 
   on_orientation_changed (orientation) {
@@ -384,6 +388,20 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
   }; // End of _set_main_label
+
+  on_frequency_changed() {
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
+    this.refreshInterval = 3600*this.general_frequency;
+    this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+  }; // End of on_frequency_changed
+
+  on_display_type_changed() {
+    // Label
+    this._set_main_label();
+  }; // End of on_display_type_changed
 
   // ++ Function called when settings are changed
   on_settings_changed() {
@@ -440,8 +458,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.menuDots['extensions'] = false;
     }
 
-    // Run the loop !
-    this.updateLoop();
   }; // End of on_settings_changed
 
   // Buttons in settings:
@@ -912,7 +928,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of monitor_matadatajson
 
   _on_metadatajson_changed(type, uuid) {
-    this.updateLoop()
+    this._on_refresh_pressed()
   }; // End of _on_metadatajson_changed
 
   get_active_spices(type) {
@@ -984,6 +1000,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   _on_refresh_pressed() {
     this.first_loop = false;
+    //if (this.loopId > 0) {
+      //Mainloop.source_remove(this.loopId);
+    //}
+    //this.loopId = 0;
     this.updateLoop();
   }; // End of _on_refresh_pressed
 
@@ -1013,6 +1033,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
   updateLoop() {
     //this.set_icons();
     this.check_dependencies();
+    if (this.loopId > 0) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
 
     // Inhibits also after the applet has been removed from the panel
     if (this.applet_running == true) {
@@ -1054,7 +1078,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 } else {
                   message = "Some " + t + " need update:"
                 }
-                if (this.general_notifications) notify_send(_(message) + " " + must_be_updated.join(", "));
+                let new_message = _(message) + " " + must_be_updated.join(", ");
+                if (new_message != this.old_message) { // One notification is sufficient!
+                  if (this.general_notifications) notify_send(new_message);
+                  this.old_message = new_message.toString();
+                }
 
               } else {
                 this.menuDots[t] = false;
@@ -1068,7 +1096,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         }
       }
       // One more loop !
-      Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+      this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }; // End of updateLoop
 
