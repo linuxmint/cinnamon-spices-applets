@@ -6,10 +6,10 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: SpicesUpdate@claudiux v1.0.0\n"
+"Project-Id-Version: SpicesUpdate@claudiux v1.0.1\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2019-01-02 13:30+0100\n"
-"PO-Revision-Date: 2019-01-02 14:39+0100\n"
+"PO-Revision-Date: 2019-01-03 14:43+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -202,102 +202,110 @@ msgid "By checking this box, you allow this applet to display messages about Spi
 msgstr ""
 
 #: ./settings-schema.json:247
-msgid "Classic - Icon and Text"
+msgid "Show notification messages even if they are unchanged"
 msgstr ""
 
 #: ./settings-schema.json:248
+msgid "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
+msgstr ""
+
+#: ./settings-schema.json:254
+msgid "Classic - Icon and Text"
+msgstr ""
+
+#: ./settings-schema.json:255
 msgid "Compact - Icon Only"
 msgstr ""
 
-#: ./settings-schema.json:250
+#: ./settings-schema.json:257
 msgid "Type of Display"
 msgstr ""
 
-#: ./settings-schema.json:251
+#: ./settings-schema.json:258
 msgid "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
 msgstr ""
 
-#: ./applet.js:88
+#: ./applet.js:89
 msgid "Applet"
 msgstr ""
 
-#: ./applet.js:89
+#: ./applet.js:90
 msgid "Desklet"
 msgstr ""
 
-#: ./applet.js:90
+#: ./applet.js:91
 msgid "Extension"
 msgstr ""
 
-#: ./applet.js:91
+#: ./applet.js:92
 msgid "Theme"
 msgstr ""
 
-#: ./applet.js:96
+#: ./applet.js:97
 msgid "One desklet needs update:"
 msgstr ""
 
-#: ./applet.js:97
+#: ./applet.js:98
 msgid "One applet needs update:"
 msgstr ""
 
-#: ./applet.js:98
+#: ./applet.js:99
 msgid "One extension needs update:"
 msgstr ""
 
-#: ./applet.js:99
+#: ./applet.js:100
 msgid "One theme needs update:"
 msgstr ""
 
-#: ./applet.js:100
+#: ./applet.js:101
 msgid "Some desklets need update:"
 msgstr ""
 
-#: ./applet.js:101
+#: ./applet.js:102
 msgid "Some applets need update:"
 msgstr ""
 
-#: ./applet.js:102
+#: ./applet.js:103
 msgid "Some extensions need update:"
 msgstr ""
 
-#: ./applet.js:103
+#: ./applet.js:104
 msgid "Some themes need update:"
 msgstr ""
 
-#: ./applet.js:104
+#: ./applet.js:105
 msgid "Reloaded applet:"
 msgstr ""
 
-#: ./applet.js:105
+#: ./applet.js:106
 msgid "Reloaded desklet:"
 msgstr ""
 
-#: ./applet.js:106
+#: ./applet.js:107
 msgid "Reloaded extension:"
 msgstr ""
 
-#: ./applet.js:641
+#: ./applet.js:696
 msgid "is fully functional."
 msgstr ""
 
-#: ./applet.js:642
+#: ./applet.js:697
 msgid "All dependencies are installed"
 msgstr ""
 
-#: ./applet.js:662
+#: ./applet.js:717
 msgid "You appear to be missing some of the programs required for this applet to have all its features."
 msgstr ""
 
-#: ./applet.js:662
+#: ./applet.js:717
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: ./applet.js:663
+#: ./applet.js:718
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: ./applet.js:938
+#: ./applet.js:992
 msgid "Refresh"
 msgstr ""
 

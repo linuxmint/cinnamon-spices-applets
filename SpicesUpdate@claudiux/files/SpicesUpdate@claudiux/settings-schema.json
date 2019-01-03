@@ -75,7 +75,7 @@
     "section_general2": {
       "type": "section",
       "title": "Notifications",
-      "keys": ["general_warning", "events_color", "general_notifications"]
+      "keys": ["general_warning", "events_color", "general_notifications", "general_force_notifications"]
     },
     "section_general3": {
       "type": "section",
@@ -224,13 +224,13 @@
     "description": "Notify me by changing the icon when Spices need an update",
     "tooltip": "By checking this box, you allow this applet to modify its icon to warn you when at least one of the Spices requires an update."
   },
-    "events_color" : {
-      "type": "colorchooser",
-      "indent": true,
-      "default" : "DodgerBlue",
-      "dependency": "general_warning",
-      "description" : "The icon color when Spices need an update",
-      "tooltip" : "Click the button to select another color."
+  "events_color" : {
+    "type": "colorchooser",
+    "indent": true,
+    "default" : "DodgerBlue",
+    "dependency": "general_warning",
+    "description" : "The icon color when Spices need an update",
+    "tooltip" : "Click the button to select another color."
   },
   "general_notifications": {
     "type": "checkbox",
@@ -239,7 +239,14 @@
     "description": "Show notification messages about Spices updates",
     "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
   },
-
+  "general_force_notifications": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "dependency": "general_notifications",
+    "description": "Show notification messages even if they are unchanged",
+    "tooltip": "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
+  },
   "displayType" : {
     "type": "combobox",
     "default" : "classic",
