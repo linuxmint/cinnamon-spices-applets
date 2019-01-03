@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2019-01-03 20:14+0100\n"
-"PO-Revision-Date: 2019-01-03 21:06+0100\n"
+"POT-Creation-Date: 2019-01-02 13:30+0100\n"
+"PO-Revision-Date: 2019-01-03 22:57+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: \n"
+"Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"Language: hr\n"
 
 #: metadata.json:3
 msgid "Spices Update"
@@ -220,18 +220,30 @@ msgstr ""
 "je dostupna nadopuna dodatka."
 
 #: settings-schema.json:247
+msgid "Show notification messages even if they are unchanged"
+msgstr "Prikaži poruke obavijesti čak iako su nepromijenjene"
+
+#: settings-schema.json:248
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Odabirom ove mogućnosti, sve poruke obavijesti će biti prikazane, čak iako "
+"su identične prijašnjim porukama."
+
+#: settings-schema.json:254
 msgid "Classic - Icon and Text"
 msgstr "Klasičan - Ikona i tekst"
 
-#: settings-schema.json:248
+#: settings-schema.json:255
 msgid "Compact - Icon Only"
 msgstr "Zbijen - Samo ikona"
 
-#: settings-schema.json:250
+#: settings-schema.json:257
 msgid "Type of Display"
 msgstr "Način prikaza"
 
-#: settings-schema.json:251
+#: settings-schema.json:258
 msgid ""
 "This feature offers the Classic (default) display with icon and text, and "
 "compact display (Icon Only)."
@@ -239,89 +251,89 @@ msgstr ""
 "Ova značajka nudi klasičan (zadan) prikaz s ikonom i tekstom, i kompaktan "
 "prikaz (Samo ikona)."
 
-#: applet.js:88
+#: applet.js:89
 msgid "Applet"
 msgstr "Aplet"
 
-#: applet.js:89
+#: applet.js:90
 msgid "Desklet"
 msgstr "Desklet"
 
-#: applet.js:90
+#: applet.js:91
 msgid "Extension"
 msgstr "Proširenje"
 
-#: applet.js:91
+#: applet.js:92
 msgid "Theme"
 msgstr "Tema"
 
-#: applet.js:96
+#: applet.js:97
 msgid "One desklet needs update:"
 msgstr "Jedan desklet ima dostupnu nadopunu:"
 
-#: applet.js:97
+#: applet.js:98
 msgid "One applet needs update:"
 msgstr "Jedan aplet ima dostupnu nadopunu:"
 
-#: applet.js:98
+#: applet.js:99
 msgid "One extension needs update:"
 msgstr "Jedno proširenje ima dostupnu nadopunu:"
 
-#: applet.js:99
+#: applet.js:100
 msgid "One theme needs update:"
 msgstr "Jedna tema ima dostupnu nadopunu:"
 
-#: applet.js:100
+#: applet.js:101
 msgid "Some desklets need update:"
 msgstr "Nekoliko deskleta ima dostupnu nadopunu:"
 
-#: applet.js:101
+#: applet.js:102
 msgid "Some applets need update:"
 msgstr "Nekoliko apleta ima dostupnu nadopunu:"
 
-#: applet.js:102
+#: applet.js:103
 msgid "Some extensions need update:"
 msgstr "Nekoliko proširenja ima dostupnu nadopunu:"
 
-#: applet.js:103
+#: applet.js:104
 msgid "Some themes need update:"
 msgstr "Nekoliko tema ima dostupnu nadopunu:"
 
-#: applet.js:104
+#: applet.js:105
 msgid "Reloaded applet:"
 msgstr "Ponovno pokrenuti apleti:"
 
-#: applet.js:105
+#: applet.js:106
 msgid "Reloaded desklet:"
 msgstr "Ponovno pokrenuti deskleti:"
 
-#: applet.js:106
+#: applet.js:107
 msgid "Reloaded extension:"
 msgstr "Ponovno pokrenuta proširenja:"
 
-#: applet.js:641
+#: applet.js:696
 msgid "is fully functional."
 msgstr "je u potpunosti funkcionalan."
 
-#: applet.js:642
+#: applet.js:697
 msgid "All dependencies are installed"
 msgstr "Sve zavisnosti su instalirane"
 
-#: applet.js:662
+#: applet.js:717
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 "Izgleda da nedostaju određeni programi potrebni za sve značajke ovog apleta."
 
-#: applet.js:662
+#: applet.js:717
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Pokrenite, u upravo otvorenom terminalu naredbu:"
 
-#: applet.js:663
+#: applet.js:718
 msgid "Some dependencies are not installed!"
 msgstr "Određene zavisnosti nisu instalirane!"
 
-#: applet.js:938
+#: applet.js:992
 msgid "Refresh"
 msgstr "Osvježi"
