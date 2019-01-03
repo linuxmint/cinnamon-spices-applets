@@ -176,7 +176,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.OKtoPopulateSettingsExtensions = true;
     this.OKtoPopulateSettingsThemes = true;
     this.notification = null;
-    this.old_message = "";
+    this.old_message = {
+      "applets": "",
+      "desklets": "",
+      "extensions": "",
+      "themes": ""
+    }
 
     this.OKtoPopulateSettings = {
       "applets": true,
@@ -297,6 +302,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_notifications",
       "general_notifications",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "general_force_notifications",
+      "force_notifications",
       this.on_settings_changed,
       null);
 
@@ -1079,9 +1090,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
                   message = "Some " + t + " need update:"
                 }
                 let new_message = _(message) + " " + must_be_updated.join(", ");
-                if (new_message != this.old_message) { // One notification is sufficient!
+                if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
                   if (this.general_notifications) notify_send(new_message);
-                  this.old_message = new_message.toString();
+                  this.old_message[t] = new_message.toString();
                 }
 
               } else {
