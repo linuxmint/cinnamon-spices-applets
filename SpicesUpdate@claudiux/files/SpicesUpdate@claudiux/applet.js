@@ -335,7 +335,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu);
 
     // Default icon color
-    //let themeNode = this.actor.get_theme_node();
+    //let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (widget not on stage)
     //let icon_color = themeNode.get_icon_colors();
     //this.defaultColor = icon_color.foreground.to_string();
     this.defaultColor = "#000000FF";
@@ -472,6 +472,22 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of on_settings_changed
 
   // Buttons in settings:
+  on_btn_refresh_applets_pressed() {
+    this.OKtoPopulateSettingsApplets = true;
+    this.populateSettingsUnprotectedApplets()
+  }; // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_desklets_pressed() {
+    this.OKtoPopulateSettingsDesklets = true;
+    this.populateSettingsUnprotectedDesklets()
+  }; // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_extensions_pressed() {
+    this.OKtoPopulateSettingsExtensions = true;
+    this.populateSettingsUnprotectedExtensions()
+  }; // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_themes_pressed() {
+    this.OKtoPopulateSettingsThemes = true;
+    this.populateSettingsUnprotectedThemes()
+  }; // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed() {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings applets\'');
   }; // End of on_btn_cs_applets_pressed
@@ -520,12 +536,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.OKtoPopulateSettingsApplets = false; // Prevents multiple access to the json config file of SpiceUpdate@claudiux.
       this.unprotectedAppletsDico = {};
       this.unprotectedAppletsList = [];
-      // populate this.unprotectedApplets with the this.unprotected_applets elements:
-      let a;
+      // populate this.unprotectedApplets with the this.unprotected_applets elements, removing uninstalled applets:
+      let a, d;
       for (var i=0; i < this.unprotected_applets.length; i++) {
         a = this.unprotected_applets[i];
-        this.unprotectedAppletsDico[a["name"]] = a["isunprotected"];
-        this.unprotectedAppletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["applets"], a["name"]));
+        if (d.query_exists(null)) {
+          this.unprotectedAppletsDico[a["name"]] = a["isunprotected"];
+          this.unprotectedAppletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        }
       }
 
       // Are there new applets installed? If there are, then push them in this.unprotectedApplets:
@@ -555,11 +574,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedDeskletsDico = {};
       this.unprotectedDeskletsList = [];
       // populate this.unprotectedDesklets with the this.unprotected_desklets elements:
-      let a;
+      let a, d;
       for (var i=0; i < this.unprotected_desklets.length; i++) {
         a = this.unprotected_desklets[i];
-        this.unprotectedDeskletsDico[a["name"]] = a["isunprotected"];
-        this.unprotectedDeskletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["desklets"], a["name"]));
+        if (d.query_exists(null)) {
+          this.unprotectedDeskletsDico[a["name"]] = a["isunprotected"];
+          this.unprotectedDeskletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        }
       }
 
       // Are there new desklets installed? If there are, then push them in this.unprotectedDesklets:
@@ -589,11 +611,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedExtensionsDico = {};
       this.unprotectedExtensionsList = [];
       // populate this.unprotectedExtensions with the this.unprotected_extensions elements:
-      let a;
+      let a, d;
       for (var i=0; i < this.unprotected_extensions.length; i++) {
         a = this.unprotected_extensions[i];
-        this.unprotectedExtensionsDico[a["name"]] = a["isunprotected"];
-        this.unprotectedExtensionsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["extensions"], a["name"]));
+        if (d.query_exists(null)) {
+          this.unprotectedExtensionsDico[a["name"]] = a["isunprotected"];
+          this.unprotectedExtensionsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        }
       }
 
       // Are there new extensions installed? If there are, then push them in this.unprotectedExtensions:
@@ -623,11 +648,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populate this.unprotectedThemes with the this.unprotected_themes elements:
-      let a;
+      let a, d;
       for (var i=0; i < this.unprotected_themes.length; i++) {
         a = this.unprotected_themes[i];
-        this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
-        this.unprotectedThemesList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["themes"], a["name"]));
+        if (d.query_exists(null)) {
+          this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
+          this.unprotectedThemesList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
+        }
       }
 
       // Are there new themes installed? If there are, then push them in this.unprotectedThemes:
@@ -707,6 +735,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
         icon_size: 36 });
       // Got a terminal used on this system:
       let terminal = this.get_terminal();
+      // apturl is it present?
+      let _is_apturl_present = GLib.find_program_in_path("apturl");
       // Detects the distrib in use and make adapted message and notification:
       let _isFedora = GLib.find_program_in_path("dnf");
       let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
@@ -714,11 +744,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
       var _apt_install = _isFedora ? "sudo dnf install libnotify" : _isArchlinux ? "sudo pacman -Syu libnotify" : "sudo apt install libnotify-bin";
-      let criticalMessage = _("You appear to be missing some of the programs required for this applet to have all its features.")+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
+      let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
+      let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
-      // TRANSLATORS: The next message should not be translated.
-      if (terminal != "")
-        GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo vpnLookOut Applet message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+
+      if (!_is_apturl_present) {
+        // TRANSLATORS: The next message should not be translated.
+        if (terminal != "")
+          GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+      } else {
+        Util.spawnCommandLine("apturl apt://libnotify-bin");
+      }
       this.dependenciesMet = false;
     }
   }; // End of check_dependencies
@@ -909,7 +945,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         if (lm !== null) {
           if (lc > lm) {
             ret.push(uuid);
-            this.monitor_matadatajson(type, uuid);
+            this.monitor_metadatajson(type, uuid);
           }
         }
       }
@@ -917,7 +953,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return ret
   }; // End of get_must_be_updated
 
-  monitor_matadatajson(type, uuid) {
+  monitor_metadatajson(type, uuid) {
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
 
@@ -933,10 +969,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let Id = monitor.connect('changed', (type, uuid) => this._on_metadatajson_changed(type, uuid));
         this.monitors.push([monitor, Id]);
       } catch(e) {
-        log("!!!!!!!!!!!!" + e)
+        log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
       }
     }
-  }; // End of monitor_matadatajson
+  }; // End of monitor_metadatajson
 
   _on_metadatajson_changed(type, uuid) {
     this._on_refresh_pressed()
@@ -1007,16 +1043,33 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
+
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    // button Configure...
+    let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
+    configure.connect("activate", (event) => {
+        Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
+    });
+    this.menu.addMenuItem(configure);
+    if (DEBUG) {
+      let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
+      _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
+      this.menu.addMenuItem(_reload_button);
+    }
   }; // End of makeMenu
 
   _on_refresh_pressed() {
     this.first_loop = false;
-    //if (this.loopId > 0) {
-      //Mainloop.source_remove(this.loopId);
-    //}
-    //this.loopId = 0;
     this.updateLoop();
   }; // End of _on_refresh_pressed
+
+  _on_reload_this_applet_pressed() {
+    // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
+    this.on_applet_removed_from_panel();
+    // Reload this applet
+    Extension.reloadExtension(UUID, Extension.Type.APPLET);
+  }; // End of _on_reload_this_applet_pressed
 
   // This updates the display of the applet and the tooltip
   updateUI() {
@@ -1124,8 +1177,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   // ++ This finalizes the settings when the applet is removed from the panel
   on_applet_removed_from_panel() {
-    // inhibit the update timer when applet removed from panel
+    // When applet is removed from panel: stop the loop, inhibit the update timer,
+    // remove all bindings and disconnect all signals (if any) to avoid errors.
     this.applet_running = false;
+    if (this.loopId > 0) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
     this.settings.finalize();
     //Main.keybindingManager.removeHotKey(UUID);
   };
