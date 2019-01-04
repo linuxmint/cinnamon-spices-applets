@@ -167,8 +167,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.instanceId = instance_id;
     this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
     this.appletPath = metadata.path;
-    this.set_applet_icon_path(this.appletPath + "/icons/spices-update-symbolic.svg");
-    this._applet_icon.set_icon_size(22);
+    this.set_applet_icon_symbolic_name("spices-update");
     this.set_applet_tooltip(_("Spices Update"));
 
     this.OKtoPopulateSettingsApplets = true;

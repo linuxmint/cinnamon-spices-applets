@@ -2,6 +2,7 @@
   * Configure button added in menu, to open the settings.
   * Refresh button added in the settings, on each spice panel (applets, desklets ...) to force the refresh of the list.
   * Improved list refresh.
+  * Make this applet icon resizable. (Fixes #2180)
   * Available languages: English, French, Spanish, Croatian.
 
 ### v1.0.1~20190103
