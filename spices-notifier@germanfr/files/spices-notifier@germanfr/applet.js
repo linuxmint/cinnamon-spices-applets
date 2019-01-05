@@ -20,7 +20,11 @@ const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
-	return Gettext.dgettext(UUID, str);
+	let xlet_dom_transl = Gettext.dgettext(UUID, str);
+	if (xlet_dom_transl !== str)
+		return xlet_dom_transl;
+	// If the text was not found locally try with system-wide translations
+	return Gettext.gettext(str);
 }
 
 class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
@@ -73,6 +77,18 @@ class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
 		super.destroy();
 	}
 };
+
+class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
+	constructor(title, icon_name) {
+		super({ reactive: false });
+		if (typeof icon_name === 'string') {
+			let icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+			this.addActor(icon, { span: 0 });
+		}
+		this.label = new St.Label({ text: title, style_class: 'popup-subtitle-menu-item' });
+		this.addActor(this.label);
+	}
+}
 
 
 class SpicesNotifier extends Applet.TextIconApplet {
@@ -244,9 +260,14 @@ class SpicesNotifier extends Applet.TextIconApplet {
 			}
 		}
 		if (menuItems.length > 0) {
+			// Xlets names are already translated system-wide
+			let title = type[0].toUpperCase() + type.substring(1);
+			this.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
+
 			menuItems.sort((a,b) => a.xlet.name > b.xlet.name);
 			for(let item of menuItems)
 				this.menu.addMenuItem(item);
+
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 		}
 
