@@ -250,6 +250,14 @@ MyApplet.prototype = {
             this.crisisScript = metadata.path + "/crisisScript";
             this.appletPath = metadata.path;
 
+            // Check stylesheet file over-ride location and use
+            this.ccsfilePersistent = GLib.get_home_dir() + "/" + UUID + "/stylesheet.css"; // path to stylesheet file placed in user's home folder.
+            if (GLib.file_test(this.ccsfilePersistent, GLib.FileTest.EXISTS)) {
+                  Main.warningNotify(_("Network Usage Monitor with Alerts - Stylesheet persistence active"));
+                  //Over-ride code - currently a copy which needs an extra cinnamon restarts after any change
+                  GLib.spawn_command_line_async("cp  " + this.ccsfilePersistent + " " + metadata.path + "/stylesheet.css");
+            }
+
             this.applet_running = true; //** New
 
 //          More code for selecting network manager thanks to Jason Hicks
@@ -1238,4 +1246,7 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
 ## 3.2.8
   * Provide options to choose different vnstati formats including a user specified format (2.6 and 4.0)
   * Update CHANGELOG.md and README.md
+## 3.2.9
+  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded and less intrusive.
+  * Add an initial mechanism to provide persistence for user edits of the stylesheet.
 */
