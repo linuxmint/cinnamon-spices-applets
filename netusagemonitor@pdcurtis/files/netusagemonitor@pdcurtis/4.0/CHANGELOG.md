@@ -1,5 +1,8 @@
 ### Changelog covering recent significant changes
 
+## 3.2.9
+  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded and intrusive.
+
 ## 3.2.8
   * Change Multiversion to start with 3.2 folder to allow use of pages and sections in the settings file
   * Change Settings to use pages and sections to give a tabbed layout (3.2 and higher).
