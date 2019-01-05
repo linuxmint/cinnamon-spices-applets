@@ -134,6 +134,16 @@ MyApplet.prototype = {
                   this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga" // path to default sound file
             }
 
+            // Check stylesheet file over-ride location and use
+            this.ccsfilePersistent = GLib.get_home_dir() + "/" + UUID + "/stylesheet.css"; // path to stylesheet file placed in user's home folder.
+            if (GLib.file_test(this.ccsfilePersistent, GLib.FileTest.EXISTS)) {
+//                  Main.warningNotify(_("Battery Applet with Monitoring and Shutdown - Stylesheet persistence active"));
+                  //Over-ride code - currently a copy which needs an extra cinnamon restarts after any change
+                  GLib.spawn_command_line_async("cp  " + this.ccsfilePersistent + " " + metadata.path + "/stylesheet.css");
+            }
+
+
+
             // ++ Set up left click menu
             this.menuManager = new PopupMenu.PopupMenuManager(this);
             this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -552,5 +562,8 @@ Bug Fix for use with early versions of Cinnamon
   * Provide option of users sound file called batterymonitorwarning.mp3 in home folder
    - Checks for presence and uses if found otherwises uses default
    - puts up warning about high volumes and times in public spaces.
+### 1.3.5
+  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
+  * Add an initial mechanism to provide persistence for user edits of the stylesheet.
 */
 
