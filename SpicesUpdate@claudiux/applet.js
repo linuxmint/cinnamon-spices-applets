@@ -536,7 +536,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedAppletsDico = {};
       this.unprotectedAppletsList = [];
       // populate this.unprotectedApplets with the this.unprotected_applets elements, removing uninstalled applets:
-      let a, d;
+      var a, d;
       for (var i=0; i < this.unprotected_applets.length; i++) {
         a = this.unprotected_applets[i];
         d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["applets"], a["name"]));
@@ -573,7 +573,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedDeskletsDico = {};
       this.unprotectedDeskletsList = [];
       // populate this.unprotectedDesklets with the this.unprotected_desklets elements:
-      let a, d;
+      var a, d;
       for (var i=0; i < this.unprotected_desklets.length; i++) {
         a = this.unprotected_desklets[i];
         d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["desklets"], a["name"]));
@@ -610,7 +610,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedExtensionsDico = {};
       this.unprotectedExtensionsList = [];
       // populate this.unprotectedExtensions with the this.unprotected_extensions elements:
-      let a, d;
+      var a, d;
       for (var i=0; i < this.unprotected_extensions.length; i++) {
         a = this.unprotected_extensions[i];
         d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["extensions"], a["name"]));
@@ -647,7 +647,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populate this.unprotectedThemes with the this.unprotected_themes elements:
-      let a, d;
+      var a, d;
       for (var i=0; i < this.unprotected_themes.length; i++) {
         a = this.unprotected_themes[i];
         d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["themes"], a["name"]));
@@ -780,7 +780,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     //Should we renew the cache?
     let is_to_download = false;
-    if (this.forceRefresh===true) {
+    if (this.forceRefresh === true || DEBUG === true) {
       is_to_download = true;
     } else {
       if (jsonFile.query_exists(null)) {
@@ -795,7 +795,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         is_to_download = true
       }
     }
-
+    this.forceRefresh = false;
     if (is_to_download === true) {
       // replace local json cache file by the remote one
       let message = Soup.Message.new('GET', URL_MAP[type]);
@@ -863,15 +863,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
   _get_last_edited_from_metadata(type, uuid) {
     var lastEdited = null;
     let metadataParser = new Json.Parser();
-    let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
-    let metadataFile = Gio.file_new_for_path(metadataFileName);
+    var metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
+    var metadataFile = Gio.file_new_for_path(metadataFileName);
 
     // For some themes, the metadata.json file is in the subfolder /cinnamon:
-    if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
+    if (type === 'themes' && !metadataFile.query_exists(null)) {
       metadataFileName = DIR_MAP[type] + "/" + uuid + "/cinnamon/metadata.json";
       metadataFile = Gio.file_new_for_path(metadataFileName);
     }
-
+    //log("!!! " + metadataFileName);
     if (metadataFile.query_exists(null)) {
       // substr(5) is needed to remove the 'true,' at begin:
       let metadataData = GLib.file_get_contents(metadataFileName).toString().substr(5);
@@ -953,8 +953,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of get_must_be_updated
 
   monitor_metadatajson(type, uuid) {
-    let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
-    let metadataFile = Gio.file_new_for_path(metadataFileName);
+    var metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
+    var metadataFile = Gio.file_new_for_path(metadataFileName);
 
     // For some themes, the metadata.json file is in the subfolder /cinnamon:
     if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
@@ -1060,12 +1060,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   _on_refresh_pressed() {
     this.first_loop = false;
+    if (DEBUG) this.forceRefresh = true;
     this.updateLoop();
   }; // End of _on_refresh_pressed
 
   _on_reload_this_applet_pressed() {
     // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
-    this.on_applet_removed_from_panel();
+    this.applet_running = false;
+    if (this.loopId > 0) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
     // Reload this applet
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
   }; // End of _on_reload_this_applet_pressed
@@ -1116,7 +1121,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
           let monitor, Id;
           for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
-            monitor.disconnect(Id)
+            try {
+              monitor.disconnect(Id)
+            } catch(e) {
+              logError(e)
+            }
           }
           this.monitors = [];
 

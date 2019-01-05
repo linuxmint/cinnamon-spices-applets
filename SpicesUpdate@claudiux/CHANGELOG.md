@@ -1,3 +1,10 @@
+### v1.0.2~20190104
+  * Configure button added in menu, to open the settings.
+  * Refresh button added in the settings, on each spice panel (applets, desklets ...) to force the refresh of the list.
+  * Improved list refresh.
+  * Make this applet icon resizable. (Fixes #2180)
+  * Available languages: English, French, Spanish, Croatian.
+
 ### v1.0.1~20190103
   * Better management of notification messages.
   * A new option allows the user to choose whether identical messages are displayed or not.
