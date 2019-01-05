@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.3.5
+  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
+  * Add an initial mechanism to provide persistence for user edits of the stylesheet.
+
 ### 1.3.4
   * Use ModalDialog.NotifyDialog or main.criticalNotify in place of internal code for Alerts
   * Provide option of users sound file called batterymonitorwarning.mp3 in home folder
