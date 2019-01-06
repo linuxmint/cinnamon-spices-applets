@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.3.2~20190106
+  * Improves time zone detection.
+
 ### 3.3.1~20181122
   * Now showing in the tooltip (hovering the icon) the keyboard and mouse shortcuts to connect / disconnect.
   * "Switch to" (another VPN) events are now registered in the log file.
