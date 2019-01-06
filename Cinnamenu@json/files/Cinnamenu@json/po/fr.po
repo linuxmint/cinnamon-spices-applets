@@ -8,12 +8,12 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-06 01:08+0200\n"
-"PO-Revision-Date: 2018-04-06 02:49+0200\n"
+"PO-Revision-Date: 2019-01-06 02:58+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Language: fr\n"
@@ -204,7 +204,7 @@ msgstr "Fichiers récents et confidentialité"
 
 #. settings-schema.json->privacy-settings-button->tooltip
 msgid "Press this button to customize your privacy settings."
-msgstr "Pressez ce bouton pour accéder à vos paramètres de confidentialité"
+msgstr "Pressez ce bouton pour accéder à vos paramètres de confidentialité."
 
 #. settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
@@ -279,7 +279,7 @@ msgstr "millisecondes"
 
 #. settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
-msgstr "Délai d'ouverture du menu"
+msgstr "Délai d'ouverture du menu :"
 
 #. settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
@@ -299,7 +299,7 @@ msgstr "Ouvrir les catégories avec un clic"
 
 #. settings-schema.json->category-click->tooltip
 msgid "When enabled, category views are activated on click instead of on hover."
-msgstr "Préférez-vous ouvrir les catégories en cliquant dessus plutôt qu'en les survolant avec la souris ?"
+msgstr "Ouvrir les catégories en cliquant dessus plutôt qu'en les survolant avec la souris."
 
 #. settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
@@ -353,6 +353,34 @@ msgstr "Grille"
 #. settings-schema.json->apps-grid-column-count->units
 msgid "columns"
 msgstr "colonnes"
+
+#. settings-schema.json->startupCategory->description
+msgid "Startup category"
+msgstr "Catégorie en première position"
+
+#. settings-schema.json->startupCategory->tooltip
+msgid "Category first seen when the menu is opened"
+msgstr "Première catégorie vue à l'ouverture du menu"
+
+#. settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Emplacement de la description d'une application"
+
+#. settings-schema.json->description-placement->tooltip
+msgid "Choose where application descriptions will be placed, or select \"None\" to disable."
+msgstr "Choisir où la description de l'application sera placée, ou bien \"Aucun\"."
+
+#. settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Info-bulles"
+
+#. settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Sous les titres"
+
+#. settings-schema.json->description-placement->options
+msgid "Bottom pane"
+msgstr "Au bas du panneau"
 
 #. settings-schema.json->apps-grid-column-count->description
 #. settings-schema.json->apps-grid-column-count->tooltip
