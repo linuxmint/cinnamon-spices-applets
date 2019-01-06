@@ -24,7 +24,15 @@ const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 // ++ Always needed if you want localization/translation support
 // New l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
 
-var UUID;
+var UUID = "vpnLookOut@claudiux";
+const HOME_DIR = GLib.get_home_dir();
+const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
+
+// ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
+// ++ Set DEBUG to false in production.
+// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
+var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+const DEBUG = _debug.query_exists(null);
 
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
@@ -32,6 +40,21 @@ function _(str) {
         return customTrans;
     return Gettext.gettext(str);
 };
+
+// ++ Useful for logging in .xsession_errors
+/**
+ * Usage of log and logError:
+ * log("Any message here") to log the message only if DEBUG is set to true.
+ * log("Any message here", true) to log the message even if DEBUG is set to false.
+ * logError("Any error message") log the error message regardless of the DEBUG value.
+ */
+function log(message, alwaysLog=false) {
+  if (DEBUG || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
+}
+
+function logError(error) {
+  global.logError("\n[" + UUID + "]: " + error + "\n")
+}
 
 /**
  * criticalNotify:
@@ -81,12 +104,13 @@ class ActivityLogging {
     } // End of get_system_icon_theme
 
     _get_timezone() {
-        let [res, out, err, status] = GLib.spawn_command_line_sync("timedatectl show -p Timezone");
+        let [res, out, err, status] = GLib.spawn_command_line_sync('bash -c "%s/getTZ.sh"'.format(SCRIPTS_DIR));
             // res is a boolean : true if command line has been correctly executed
             // out is the return of the script (as that is sent by 'echo' command in a bash script)
             // err is the error message, if an error occured
             // status is the status code (as that is sent by an 'exit' command in a bash script)
-        return out.toString().trim().split("=")[1];
+        let tz = out.toString().trim();
+        return tz;
     } // End of _get_timezone
 
     _get_user_language() {
