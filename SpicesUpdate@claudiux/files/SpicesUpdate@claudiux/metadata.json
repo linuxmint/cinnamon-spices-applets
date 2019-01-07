@@ -1,8 +1,9 @@
 {
-  "uuid": "SpicesUpdate@claudiux",
-  "name": "Spices Update",
-  "max-instances": "1",
-  "hide-configuration": false,
-  "version": "1.0.2",
-  "description": "Warns you when your Spices (applets, desklets, extensions, themes) require an update."
+    "uuid": "SpicesUpdate@claudiux",
+    "name": "Spices Update",
+    "max-instances": "1",
+    "hide-configuration": false,
+    "version": "1.0.3",
+    "description": "Warns you when your Spices (applets, desklets, extensions, themes) require an update.",
+    "last-edited": 1546734061
 }
