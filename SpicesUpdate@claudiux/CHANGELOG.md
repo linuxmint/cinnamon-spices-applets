@@ -1,3 +1,9 @@
+### v1.0.3~20190107
+  * New icons.
+  * Detects the default symbolic-icon color from the current theme.
+  * Change the default color of the icon when spices need updates. This does not affect the choice made by the user.
+  * Available languages: English, French, Spanish, Croatian, German.
+
 ### v1.0.2~20190104
   * Configure button added in menu, to open the settings.
   * Refresh button added in the settings, on each spice panel (applets, desklets ...) to force the refresh of the list.

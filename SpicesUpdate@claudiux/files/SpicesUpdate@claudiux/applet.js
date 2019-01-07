@@ -334,9 +334,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu);
 
     // Default icon color
-    //let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (widget not on stage)
-    //let icon_color = themeNode.get_icon_colors();
-    //this.defaultColor = icon_color.foreground.to_string();
     this.defaultColor = "#000000FF";
 
     // Monitoring metadata.json files
@@ -1012,6 +1009,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return listEnabled
   }; // End of get_active_spices
 
+  get_default_icon_color() {
+    let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
+    let icon_color = themeNode.get_icon_colors();
+    this.defaultColor = icon_color.foreground.to_string();
+  }; // End of get_default_icon_color
+
   makeMenu() {
     this.menu.removeAll();
 
@@ -1065,13 +1068,24 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   _on_reload_this_applet_pressed() {
     // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
-    this.on_applet_removed_from_panel();
+    this.applet_running = false;
+    if (this.loopId > 0) {
+      Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
+    for (let tuple of this.monitors) {
+      [monitor, Id] = tuple;
+      monitor.disconnect(Id)
+    }
+    this.monitors = [];
     // Reload this applet
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
   }; // End of _on_reload_this_applet_pressed
 
   // This updates the display of the applet and the tooltip
   updateUI() {
+    this.get_default_icon_color();
+    log("defaultColor = " + this.defaultColor);
     this._applet_icon.style = "color: %s;".format(this.defaultColor);
     if (this.general_warning === true) {
       for (let t of TYPES) {
@@ -1183,7 +1197,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
-    this.settings.finalize();
+    for (let tuple of this.monitors) {
+      [monitor, Id] = tuple;
+      monitor.disconnect(Id)
+    }
+    this.monitors = [];
+    if (this.settings) this.settings.finalize();
     //Main.keybindingManager.removeHotKey(UUID);
   };
 } // End of class SpicesUpdate
