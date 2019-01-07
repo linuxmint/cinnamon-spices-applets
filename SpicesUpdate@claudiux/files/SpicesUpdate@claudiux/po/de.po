@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v1.0.1\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2019-01-02 13:30+0100\n"
-"PO-Revision-Date: 2019-01-05 01:47+0100\n"
+"PO-Revision-Date: 2019-01-06 23:40+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -27,8 +27,8 @@ msgid ""
 "Warns you when your Spices (applets, desklets, extensions, themes) require "
 "an update."
 msgstr ""
-"Benachrichtigt, wenn für manche Spices (Applets, Desklets, Erweiterungen, "
-"Themen) ein Update vorliegt."
+"Benachrichtigt, wenn für installierte Spices (Applets, Desklets, "
+"Erweiterungen, Themen) ein Update vorliegt."
 
 #: settings-schema.json:7
 msgid "Applets"
@@ -48,15 +48,15 @@ msgstr "Themen"
 
 #: settings-schema.json:27
 msgid "General"
-msgstr "Generell"
+msgstr "Allgemein"
 
 #: settings-schema.json:32
 msgid "Checking"
-msgstr "Prüfe"
+msgstr "Prüfen"
 
 #: settings-schema.json:37
 msgid "Monitoring"
-msgstr "Überwache"
+msgstr "Überwachen"
 
 #: settings-schema.json:72
 msgid "Frequency"
@@ -72,11 +72,11 @@ msgstr "Anzeigeart"
 
 #: settings-schema.json:90
 msgid "Let regularly check if your applets are up to date"
-msgstr "Lass regelmäßig überprüfen, ob deine Applets aktuell sind"
+msgstr "Regelmäßige Überprüfung, ob die installierten Applets aktuell sind"
 
 #: settings-schema.json:91
 msgid "If applets updates do not concern you, uncheck this box."
-msgstr "Ausschalten, wenn dich Updates für Applets nicht interessieren."
+msgstr "Ausschalten, wenn nicht auf Updates für Applets geprüft werden soll."
 
 #: settings-schema.json:95
 msgid "Update these applets:"
@@ -88,7 +88,7 @@ msgstr "Wenn ein Applet nicht überprüft werden soll, auf FALSE setzen."
 
 #: settings-schema.json:100
 msgid "Your Applets"
-msgstr "Deine Applets"
+msgstr "Installierte Applets"
 
 #: settings-schema.json:105
 msgid "Check for updates?"
@@ -100,11 +100,11 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Applets zu verwalten"
 
 #: settings-schema.json:121
 msgid "Let regularly check if your desklets are up to date"
-msgstr "Lass regelmäßig überprüfen, ob deine Desklets aktuell sind"
+msgstr "Regelmäßige Überprüfung, ob die installierten Desklets aktuell sind"
 
 #: settings-schema.json:122
 msgid "If desklets updates do not concern you, uncheck this box."
-msgstr "Ausschalten, wenn dich Updates für Desklets nicht interessieren."
+msgstr "Ausschalten, wenn nicht auf Updates für Desklets geprüft werden soll."
 
 #: settings-schema.json:126
 msgid "Update these desklets:"
@@ -116,7 +116,7 @@ msgstr "Wenn ein Desklet nicht überprüft werden soll, auf FALSE setzen."
 
 #: settings-schema.json:131
 msgid "Your Desklets"
-msgstr "Deine Desklets"
+msgstr "Installierte Desklets"
 
 #: settings-schema.json:144
 msgid "Open Cinnamon Settings to manage all the Desklets"
@@ -124,11 +124,13 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Desklets zu verwalten"
 
 #: settings-schema.json:152
 msgid "Let regularly check if your extensions are up to date"
-msgstr "Lass regelmäßig überprüfen, ob deine Erweiterungen aktuell sind"
+msgstr ""
+"Regelmäßige Überprüfung, ob die installierten Erweiterungen aktuell sind"
 
 #: settings-schema.json:153
 msgid "If extensions updates do not concern you, uncheck this box."
-msgstr "Ausschalten, wenn dich Updates für Erweiterungen nicht interessieren."
+msgstr ""
+"Ausschalten, wenn nicht auf Updates für Erweiterungen geprüft werden soll."
 
 #: settings-schema.json:157
 msgid "Update these extensions:"
@@ -140,7 +142,7 @@ msgstr "Wenn eine Erweiterung nicht überprüft werden soll, auf FALSE setzen."
 
 #: settings-schema.json:162
 msgid "Your Extensions"
-msgstr "Deine Erweiterungen"
+msgstr "Installierte Erweiterungen"
 
 #: settings-schema.json:175
 msgid "Open Cinnamon Settings to manage all the Extensions"
@@ -148,11 +150,11 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Erweiterungen zu verwalten"
 
 #: settings-schema.json:183
 msgid "Let regularly check if your themes are up to date"
-msgstr "Lass regelmäßig überprüfen, ob deine Themen aktuell sind"
+msgstr "Regelmäßige Überprüfung, ob die installierten Themen aktuell sind"
 
 #: settings-schema.json:184
 msgid "If themes updates do not concern you, uncheck this box."
-msgstr "Ausschalten, wenn dich Updates für Themen nicht interessieren."
+msgstr "Ausschalten, wenn nicht auf Updates für Themen geprüft werden soll."
 
 #: settings-schema.json:188
 msgid "Update these themes:"
@@ -164,7 +166,7 @@ msgstr "Wenn ein Thema nicht überprüft werden soll, auf FALSE setzen."
 
 #: settings-schema.json:193
 msgid "Your Themes"
-msgstr "Deine Themen"
+msgstr "Installierte Themen"
 
 #: settings-schema.json:206
 msgid "Open Cinnamon Settings to manage all the Themes"
@@ -188,39 +190,41 @@ msgstr ""
 
 #: settings-schema.json:224
 msgid "Notify me by changing the icon when Spices need an update"
-msgstr "Icon ändern, wenn für Spices Updates zur Verfügung stehen"
+msgstr "Icon ändern, wenn für installierte Spices Updates zur Verfügung stehen"
 
 #: settings-schema.json:225
 msgid ""
 "By checking this box, you allow this applet to modify its icon to warn you "
 "when at least one of the Spices requires an update."
 msgstr ""
-"Diesem Applet erlauben, das Icon zu ändern, wenn für mindestens eines der "
-"Spices ein Update zur Verfügung steht."
+"Diesem Applet erlauben, die Icon-Farbe zu ändern, wenn für installierte "
+"Spices Updates zur Verfügung stehen."
 
 #: settings-schema.json:232
 msgid "The icon color when Spices need an update"
-msgstr "Icon-Farbe, wenn Spices Updates benötigen"
+msgstr "Icon-Farbe, wenn Updates vorliegen"
 
 #: settings-schema.json:233
 msgid "Click the button to select another color."
-msgstr "Button klicken zur Auswahl einer anderen Farbe."
+msgstr "Button klicken zur Auswahl einer anderen Farbe"
 
 #: settings-schema.json:239
 msgid "Show notification messages about Spices updates"
-msgstr "Zeige Benachrichtigung bei Spices Updates"
+msgstr "Zeige Benachrichtigung bei Updates für Spices"
 
 #: settings-schema.json:240
 msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
 "updates in notifications viewer."
 msgstr ""
-"Diesem Applet erlauben, eine Benachrichtigung anzuzeigen, wenn Spices "
-"Updates zur Verfügung stehen."
+"Diesem Applet erlauben, eine Benachrichtigung anzuzeigen, wenn für "
+"installierte Spices Updates zur Verfügung stehen."
 
 #: settings-schema.json:247
 msgid "Show notification messages even if they are unchanged"
-msgstr "Benachrichtigung anzeigen, auch wenn es keine Updates gibt."
+msgstr ""
+"Benachrichtigung immer anzeigen (auch wenn es seit der letzten Meldung keine "
+"neuen Updates gibt)"
 
 #: settings-schema.json:248
 msgid ""
@@ -240,15 +244,15 @@ msgstr "Kompakt - nur Icon"
 
 #: settings-schema.json:257
 msgid "Type of Display"
-msgstr "Art der Anzeige"
+msgstr "Darstellung in der Leiste"
 
 #: settings-schema.json:258
 msgid ""
 "This feature offers the Classic (default) display with icon and text, and "
 "compact display (Icon Only)."
 msgstr ""
-"Diese Funktion bietet die klassische Anzeige (Standard) mit Icon und Text "
-"und die kompakte Anzeige (nur mit Icon)."
+"Auswahl zwischen klassischer Anzeige mit Icon und Text oder kompakter "
+"Anzeige (nur mit Icon)."
 
 #: applet.js:89
 msgid "Applet"
@@ -284,19 +288,19 @@ msgstr "Ein Thema benötigt ein Update:"
 
 #: applet.js:101
 msgid "Some desklets need update:"
-msgstr "Einige Desklets benötigen ein Update:"
+msgstr "Mehrere Desklets benötigen ein Update:"
 
 #: applet.js:102
 msgid "Some applets need update:"
-msgstr "Einige Applets benötigen ein Update:"
+msgstr "Mehrere Applets benötigen ein Update:"
 
 #: applet.js:103
 msgid "Some extensions need update:"
-msgstr "Einige Erweiterungen benötigen ein Update:"
+msgstr "Mehrere Erweiterungen benötigen ein Update:"
 
 #: applet.js:104
 msgid "Some themes need update:"
-msgstr "Einige Themen benötigen ein Update:"
+msgstr "Mehrere Themen benötigen ein Update:"
 
 #: applet.js:105
 msgid "Reloaded applet:"
