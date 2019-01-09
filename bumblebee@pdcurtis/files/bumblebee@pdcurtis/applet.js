@@ -141,7 +141,7 @@ MyApplet.prototype = {
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else {
-               this.textEd = "xed";
+                this.textEd = "xdg-open";
             }
 
             // Check that Bumblebee is installed by presence of optirun
@@ -475,4 +475,6 @@ v30_3.1.0  Changed help file from help.txt to README.md
 ### 3.2.4
 Fix to allow use with early versions of Cinnamon
  * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
+### 3.2.5
+  * Use xdg-open in place of gedit or xed to allow use on more distros
 */

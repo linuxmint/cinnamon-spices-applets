@@ -1,5 +1,6 @@
 
 const Applet = imports.ui.applet;
+const ModalDialog = imports.ui.modalDialog;
 const Settings = imports.ui.settings;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -44,6 +45,8 @@ MyApplet.prototype = {
 
         this.panel_height = panel_height;
         this.orientation = orientation;
+        this.python_name = "python";
+        this.espeak_name = "espeak";
         this.start_stop_keybind_id = uuid + instance_id + "start-stop";
         this.pause_resume_keybind_id = uuid + instance_id + "pause-resume";
 
@@ -71,6 +74,80 @@ MyApplet.prototype = {
         this.start_stop_keys = "";
         this.pause_resume_keys = "";
 
+        this._init_dependencies_satisfied();
+    },
+
+    _init_dependencies_satisfied: function () {
+        let satisfied = this._check_dependencies();
+        if(satisfied) {
+            this._run_dependencies_satisfied();
+        }
+    },
+
+    _check_dependencies: function() {
+        let dependencies = this._get_dependencies();
+        if(dependencies.length > 0) {
+            this._show_dialog_dependencies(dependencies);
+            return false;
+        }
+        return true;
+    },
+
+    _get_dependencies: function() {
+        let dependencies = [];
+        dependencies = this._check_python(dependencies);
+        dependencies = this._check_espeak(dependencies);
+        return dependencies;
+    },
+
+    _check_python: function(dependencies) {
+        let python_satisfied = this._python_available();
+        if(!python_satisfied) {
+            let dependency = this._get_dependency(this.python_name);
+            dependencies.push(dependency);
+        }
+        return dependencies;
+    },
+
+    _python_available: function() {
+        let process = new ShellUtils.ShellOutputProcess(["which", this.python_name]);
+        let output = process.spawn_sync_and_get_output();
+        return output.length > 0;
+    },
+
+    _get_dependency: function(dependency) {
+        return dependency;
+    },
+
+    _show_dialog_dependencies: function(dependencies) {
+        let str = dependencies.join("\n\n");
+        let dialog_message = uuid + "\n\n" + _("The following packages were not found:") + "\n\n" +
+                             str + "\n\n" + _("Please install the above packages to use the applet");
+        let dialog = new ModalDialog.NotifyDialog(dialog_message);
+        dialog.open();
+    },
+
+    _check_espeak: function(dependencies) {
+        let espeak_satisfied = this._espeak_available();
+        if(!espeak_satisfied) {
+            let dependency = this._get_dependency(this.espeak_name);
+            dependencies.push(dependency);
+        }
+        return dependencies;
+    },
+
+    _espeak_available: function() {
+        let process = new ShellUtils.ShellOutputProcess(["which", this.espeak_name]);
+        let output = process.spawn_sync_and_get_output();
+        return output.length > 0;
+    },
+
+
+
+
+
+
+    _run_dependencies_satisfied: function () {
         this._init_layout();
         this._init_translations();
         this._bind_settings();
@@ -229,7 +306,7 @@ MyApplet.prototype = {
     },
 
     _init_voice_process: function () {
-        this.voice_process = new ShellUtils.BackgroundProcess();
+        this.voice_process = new ShellUtils.BackgroundProcess([], false);
         this.voice_process.set_callback_process_finished(this, this.on_voice_process_finished);
     },
 
@@ -358,7 +435,7 @@ MyApplet.prototype = {
 
     get_text_to_read: function () {
         this.update_current_text();
-        text = this.get_lines_to_read();
+        let text = this.get_lines_to_read();
         text = this.remove_dash_from_beggining(text);
         return text;
     },
@@ -369,7 +446,7 @@ MyApplet.prototype = {
     },
 
     get_lines_to_read: function () {
-        text = this.current_text;
+        let text = this.current_text;
         if(this.read_lines_and_stop) {
             let start = this.get_start_line();
             let stop = this.get_stop_line(start);

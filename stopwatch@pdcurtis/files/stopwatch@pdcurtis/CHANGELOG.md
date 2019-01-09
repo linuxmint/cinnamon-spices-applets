@@ -1,13 +1,19 @@
 ## Changelog
 
+## 2.1.2
+ * Update stylesheet to better match Cinnamon 4.0 System Styles.
+
+### 2.1.1
+  * Use xdg-open in place of gedit or xed to allow use on more distros
+
 ### 2.1.0
 
  * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
  * CHANGELOG.md is a simplified version of the existing changelog.txt
  * Applet updated so CHANGELOG.md is displayed from context menu.
- * README.md in UUID is now symbolic link from UUID 
+ * README.md in UUID is now symbolic link from UUID
 
-### 2.0.5 
+### 2.0.5
 
 Improved translation (l10n) Support:
 
@@ -42,24 +48,24 @@ Changes for Mint 18/Cinnamon 2.8
 
 ### 1.2.3
 
- * Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window 
+ * Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window
 
-### 1.2.1 
+### 1.2.1
 
 Modifications for Cinnamon 2.0
 
  * Add cinnamonVersion to settings to allow Cinnamon Version to be specified and thus inhibit extra settings menu entry
 
-### 1.2.0 
+### 1.2.0
 
  * Inhibit counter updates after counter removed from panel
 
-### 1.1.1 
+### 1.1.1
 
- * Added radiused border to background colours and made them configurable via a stylesheet 
-      (stylesheet.css in the applet folder). 
+ * Added radiused border to background colours and made them configurable via a stylesheet
+      (stylesheet.css in the applet folder).
  * Changed from red background when days greater than 1 to a red border so one still knows if it is paused or counting.
- * Extra menu item added to open stylesheet.css 
+ * Extra menu item added to open stylesheet.css
  * Released 04-09-2013
 
 ### 1.0.0

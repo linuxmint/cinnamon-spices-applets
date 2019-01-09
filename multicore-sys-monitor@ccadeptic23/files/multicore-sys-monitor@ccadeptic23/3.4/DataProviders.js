@@ -1,8 +1,7 @@
-const GTop = imports.gi.GTop;
 const Gio = imports.gi.Gio;
 const GIRepository = imports.gi.GIRepository;
 
-let _, tryFn;
+let _, tryFn, GTop;
 if (typeof require !== 'undefined') {
   let utils = require('./utils');
   _ = utils._;
@@ -26,6 +25,10 @@ tryFn(function() {
   CONNECTED_STATE = NM.DeviceState.ACTIVATED;
   NMClient_new = NM.Client.new;
   newNM = true;
+});
+
+tryFn(function() {
+  GTop = imports.gi.GTop;
 });
 
 const formatBytes = (bytes, decimals)=>{

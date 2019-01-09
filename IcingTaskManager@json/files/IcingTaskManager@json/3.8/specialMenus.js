@@ -29,12 +29,12 @@ const setOpacity = (peekTime, window_actor, targetOpacity) => {
 };
 
 class AppMenuButtonRightClickMenu extends Applet.AppletPopupMenu {
-  constructor(params) {
-    super(params);
+  constructor(params, orientation) {
+    super(params, orientation);
     this.state = params.state;
     this.groupState = params.groupState;
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
     this.signals.connect(this, 'open-state-changed', (...args) => this._onToggled(...args));
   }
 
@@ -767,7 +767,7 @@ class AppThumbnailHoverMenu extends PopupMenu.PopupMenu {
         }
         this.appThumbnails[w].destroy(true);
         this.appThumbnails[w] = null;
-        this.appThumbnails.splice(w, 1)
+        this.appThumbnails.splice(w, 1);
       }
     }
     this.removeAll();
@@ -798,7 +798,8 @@ class WindowThumbnail {
         }
         this.isFocused = isEqual(this.groupState.lastFocused, this.metaWindow);
         this._focusWindowChange();
-      }
+      },
+      refreshThumbnails: () => this.refreshThumbnail()
     });
 
     this.metaWindow = params.metaWindow;
@@ -810,7 +811,7 @@ class WindowThumbnail {
     this.stopClick = false;
     this.entered = false;
     this.isFocused = false;
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
 
     // Inherit the theme from the alt-tab menu'
     this.actor = new St.BoxLayout({
@@ -877,7 +878,7 @@ class WindowThumbnail {
     this._focusWindowChange();
   }
 
-  handleEnterEvent(a, e){
+  handleEnterEvent(a, e) {
     this.entered = true;
     this.state.trigger('setThumbnailActorStyle', this.actor);
     this.state.trigger('setThumbnailCloseButtonStyle', this.button);
@@ -922,6 +923,7 @@ class WindowThumbnail {
   }
 
   _focusWindowChange() {
+    if (this.willUnmount) return;
     if (this.isFocused
       && this.state.settings.highlightLastFocusedThumbnail
       && this.groupState.metaWindows.length > 1) {
@@ -938,7 +940,7 @@ class WindowThumbnail {
     }
     if (this.groupState.metaWindows
       && this.groupState.metaWindows.length > 0) {
-      this.refreshThumbnail(this.metaWindow, this.groupState.metaWindows);
+      this.refreshThumbnail();
     }
   }
 
@@ -1000,7 +1002,12 @@ class WindowThumbnail {
     if (this.metaWindowActor) {
       let windowTexture = this.metaWindowActor.get_texture();
       let [width, height] = windowTexture.get_size();
-      this.signals.connect(this.metaWindowActor, 'size-changed', (...args) => this.refreshThumbnail(...args));
+      this.signals.connect(this.metaWindowActor, 'size-changed', () => this.refreshThumbnail());
+      this.signals.connect(this.metaWindowActor, 'destroy', () => {
+        if (this.willUnmount || !this.groupState.trigger) return;
+        this.groupState.trigger('removeThumbnailFromMenu', this.metaWindow);
+        this.metaWindowActor = null;
+      });
       let scale = Math.min(1.0, this.thumbnailWidth / width, this.thumbnailHeight / height);
       if (isUpdate) {
         this.thumbnailActor.child.source = windowTexture;
@@ -1062,7 +1069,7 @@ class WindowThumbnail {
         if (this.labelContainer) {
           this.labelContainer.set_width(this.thumbnailWidth);
         }
-        this._label.text = this.metaWindow.title;
+        this._label.text = this.metaWindow.title || '';
         this.getThumbnail();
       }
     };
@@ -1075,7 +1082,7 @@ class WindowThumbnail {
       return;
     }
     if (!this.metaWindowActor) {
-      return;
+      this.metaWindowActor = this.metaWindow.get_compositor_private();
     }
     this.state.set({
       overlayPreview: new Clutter.Clone({

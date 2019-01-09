@@ -1,228 +1,229 @@
 {
     "settings_start" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
     "configuration": {
-    	"type": "header",
-    	"description": "Configuration"
+        "type": "header",
+        "description": "Configuration"
     },
 
     "display_mode" : {
-    	"type": "combobox",
-    	"default" : 0,
-    	"description" : "Show",
-    	"options" : {
-    	    "Average speed per second" : 0,
-    	    "Amount of data transferred" : 1
-    	},
-    	"tooltip" : "Values shown in the panel"
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Show",
+        "options" : {
+            "Average speed per second" : 0,
+            "Amount of data transferred" : 1
+        },
+        "tooltip" : "Values shown in the panel"
     },
     "unit_type" : {
-    	"type": "combobox",
-    	"default" : 0,
-    	"description" : "Unit",
-    	"options" : {
-    	    "Bytes" : 0,
-    	    "Bits" : 1
-    	},
-    	"tooltip" : "Base data unit shown in the panel"
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Unit",
+        "options" : {
+            "Bytes" : 0,
+            "Bits" : 1
+        },
+        "tooltip" : "Base data unit shown in the panel"
     },
     "update_every": {
-    	"type": "spinbutton",
-    	"default": 1.0,
-    	"min": 0.0,
-    	"max": 60.0,
-    	"step": 0.1,
-    	"units": "seconds",
-    	"description": "Calculate every",
-    	"tooltip" : "How often to calculate download and upload speed"
+        "type": "spinbutton",
+        "default": 1.0,
+        "min": 0.0,
+        "max": 60.0,
+        "step": 0.1,
+        "units": "seconds",
+        "description": "Calculate every",
+        "tooltip" : "How often to calculate download and upload speed"
     },
     "configuration_end" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
     "gui_start": {
-    	"type": "header",
-    	"description": "Gui"
+        "type": "header",
+        "description": "Gui"
     },
 
 
 
     "gui_speed_type" : {
-    	"type": "combobox",
-    	"default" : 0,
-    	"description" : "Type",
-    	"options" : {
-    	    "Compact" : 0,
-    	    "Large" : 1
-    	},
-    	"tooltip" : "Applet Gui"
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Type",
+        "options" : {
+            "Compact" : 0,
+            "Large" : 1
+        },
+        "tooltip" : "Applet Gui"
     },
     "decimal_places" : {
-    	"type": "combobox",
-    	"default" : -1,
-    	"description" : "Decimal places",
-    	"options" : {
-    	    "Auto" : -1,
-    	    "0 " : 0,
-    		"1 " : 1,
-    		"2 " : 2,
-    		"3 " : 3
-    	},
-    	"tooltip" : "Decimal places of download and upload speed shown in the panel"
+        "type": "combobox",
+        "default" : -1,
+        "description" : "Decimal places",
+        "options" : {
+            "Auto" : -1,
+            "0 " : 0,
+        	"1 " : 1,
+        	"2 " : 2,
+        	"3 " : 3
+        },
+        "tooltip" : "Decimal places of download and upload speed shown in the panel"
     },
     "gui_text_css": {
-    	"type": "entry",
-    	"default": "font-weight: bold;",
-    	"description": "Text CSS",
-    	"tooltip": "A CSS style applied to the text in the panel"
+        "type": "entry",
+        "default": "font-weight: bold;",
+        "description": "Text CSS",
+        "tooltip": "A CSS style applied to the text in the panel"
     },
     "gui_received_icon_filename" : {
-    	"type" : "filechooser",
-    	"default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
-    	"description" : "Download icon",
-    	"tooltip": "An icon displayed next to download speed in the panel"
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
+        "description" : "Download icon",
+        "tooltip": "An icon displayed next to download speed in the panel"
     },
     "gui_sent_icon_filename" : {
-    	"type" : "filechooser",
-    	"default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
-    	"description" : "Upload icon",
-    	"tooltip": "An icon displayed next to upload speed in the panel"
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
+        "description" : "Upload icon",
+        "tooltip": "An icon displayed next to upload speed in the panel"
     },
     "hover_popup_text_css": {
-    	"type": "entry",
-    	"default": "font-size: 15px; padding: 5px; font-weight: normal;",
-    	"description": "Popup text CSS",
-    	"tooltip": "A CSS style applied to the description text in the hover popup"
+        "type": "entry",
+        "default": "font-size: 15px; padding: 5px; font-weight: normal;",
+        "description": "Popup text CSS",
+        "tooltip": "A CSS style applied to the description text in the hover popup"
     },
     "hover_popup_numbers_css": {
-    	"type": "entry",
-    	"default": "font-size: 15px; padding: 5px; font-weight: bold;",
-    	"description": "Popup numbers CSS",
-    	"tooltip": "A CSS style applied to numbers in the hover popup"
+        "type": "entry",
+        "default": "font-size: 15px; padding: 5px; font-weight: bold;",
+        "description": "Popup numbers CSS",
+        "tooltip": "A CSS style applied to numbers in the hover popup"
     },
     "gui_end" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
 
 
     "total_data_start": {
-    	"type": "header",
-    	"description": "Total data"
+        "type": "header",
+        "description": "Total data"
     },
     "show_hover" : {
-    	"type" : "checkbox",
-    	"default" : true,
-    	"description": "Show total download and upload on hover",
-    	"tooltip": "Show the hover popup with total amount of data downloaded and uploaded"
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Show total download and upload on hover",
+        "tooltip": "Show the hover popup with total amount of data downloaded and uploaded"
      },
      "bytes_start_time" : {
-    	"type": "combobox",
-    	"default" : -1,
-    	"description" : "Start",
-    	"options" : {
-    	    "Launch of applet" : -1,
-    	    "Today" : 0,
-    	    "Yesterday" : 1,
-    	    "3 days ago" : 3,
-    	    "5 days ago" : 5,
-    	    "7 days ago" : 7,
-    	    "10 days ago" : 10,
-    	    "14 days ago" : 14,
-    	    "30 days ago" : 30,
-    	    "Custom date" : -2
-    	},
-    	"tooltip" : "Start time to count total amount of data downloaded and uploaded"
+        "type": "combobox",
+        "default" : -1,
+        "description" : "Start",
+        "options" : {
+            "Launch of applet" : -1,
+            "Today" : 0,
+            "Yesterday" : 1,
+            "3 days ago" : 3,
+            "5 days ago" : 5,
+            "7 days ago" : 7,
+            "10 days ago" : 10,
+            "14 days ago" : 14,
+            "30 days ago" : 30,
+            "Custom date" : -2
+        },
+        "tooltip" : "Start time to count total amount of data downloaded and uploaded"
     },
     "custom_start_date": {
-    	"type": "entry",
-    	"default": "2000-01-01",
-    	"description": "Custom date ",
-    	"tooltip": "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox."
+        "type": "entry",
+        "default": "2000-01-01",
+        "description": "Custom date ",
+        "tooltip": "A custom date in YYYY-MM-DD format used as start time. The option is used if \"Custom date\" is selected in \"Start\" combobox."
     },
     "write_every": {
-    	"type": "spinbutton",
-    	"default": 600,
-    	"min": 0,
-    	"max": 85800,
-    	"step": 10,
-    	"units": "seconds",
-    	"description": "Save every",
-    	"tooltip": "How often to save total amount of data downloaded and uploaded to the file. 0 means no saving to the file."
+        "type": "spinbutton",
+        "default": 600,
+        "min": 0,
+        "max": 85800,
+        "step": 10,
+        "units": "seconds",
+        "description": "Save every",
+        "tooltip": "How often to save total amount of data downloaded and uploaded to the file. 0 means no saving to the file."
     },
     "total_data_end" : {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
 
 
     "data_limit_start": {
-    	"type": "header",
-    	"description": "Data limits"
+        "type": "header",
+        "description": "Data limits"
     },
     "data_limit": {
-    	"type": "spinbutton",
-    	"default": 0.0,
-    	"min": 0.0,
-    	"max": 100000.0,
-    	"step": 0.1,
-    	"units": "MB",
-    	"description": "Data limit",
-    	"tooltip": "The maximum amount of data to download and upload. 0 means no limits."
+        "type": "spinbutton",
+        "default": 0.0,
+        "min": 0.0,
+        "max": 100000.0,
+        "step": 0.1,
+        "units": "MB",
+        "description": "Data limit",
+        "tooltip": "The maximum amount of data to download and upload. 0 means no limits."
     },
     "gui_data_limit_type" : {
-    	"type": "combobox",
-    	"default" : 0,
-    	"description" : "Show data limit usage",
-    	"options" : {
-    	    "None" : 0,
-    	    "Circle" : 1,
-    	    "Text" : 2
-    	},
-    	"tooltip" : "Show the percentage of data limit used in the panel"
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Show data limit usage",
+        "options" : {
+            "None" : 0,
+            "Circle" : 1,
+            "Text" : 2
+        },
+        "tooltip" : "Show the percentage of data limit used in the panel"
     },
     "data_limit_command_enabled" : {
-    	"type" : "checkbox",
-    	"default" : false,
-    	"description": "Invoke command when data limit exceeded",
-    	"tooltip": "Invoke a command when amount of data downloaded and uploaded exceeded the limit"
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Invoke command when data limit exceeded",
+        "tooltip": "Invoke a command when amount of data downloaded and uploaded exceeded the limit"
      },
     "data_limit_command": {
-    	"type": "entry",
-    	"default": "echo \\\"Data limit exceeded. This terminal will close in 5 seconds.\\\"; sleep 5; exit 0;",
-    	"description": "Command",
-    	"tooltip": "A command to invoke"
+        "type": "entry",
+        "default": "echo \\\"Data limit exceeded. This terminal will close in 5 seconds.\\\"; sleep 5; exit 0;",
+        "description": "Command",
+        "tooltip": "A command to invoke"
     },
     "data_limit_end": {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
 
 
     "connections_start": {
-    	"type": "header",
-    	"description": "Connections"
+        "type": "header",
+        "description": "Connections"
     },
     "launch_terminal" : {
-    	"type" : "checkbox",
-    	"default" : true,
-    	"description": "List current Internet connections on left mouse click",
-    	"tooltip": "Open a terminal with a list of current connections on a left mouse click. The next click closes the terminal."
+        "type" : "checkbox",
+        "default" : true,
+        "description": "List current Internet connections on left mouse click",
+        "tooltip": "Open a terminal with a list of current connections on a left mouse click. The next click closes the terminal."
     },
     "list_connections_command": {
-    	"type": "entry",
-    	"default": "watch -n 1 lsof -i",
-    	"description": "Command ",
-    	"tooltip": "A command used to list current Internet connections"
+        "type": "entry",
+        "default": "watch -n 1 lsof -i",
+        "description": "Command ",
+        "tooltip": "A command used to list current Internet connections"
     },
     "connections_end": {
-    	"type" : "separator"
+        "type" : "separator"
     },
 
 
 
-    "network_interface" : {
-    	"type": "generic",
-    	"default" : "eth0"
+    "checked_interfaces_string" : {
+        "type": "generic",
+        "default" : "eth0"
     }
+
 }

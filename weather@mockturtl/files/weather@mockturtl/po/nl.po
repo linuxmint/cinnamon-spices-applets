@@ -1,15 +1,15 @@
-# Dutch translation for gnome-shell-extension-weather
-# Copyright (C) 2011
-# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Dutch translation for cinnamon-weather (weather@mockturtl)
+# Copyright (C) 2018
+# This file is distributed under the same license as the cinnamon-weather package.
 # Peter van Ieperen <p.v.ieperen77@gmail.com>, 2011.
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2016.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2018.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2016-06-20 10:00+0200\n"
+"PO-Revision-Date: 2018-06-30 10:00+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -301,9 +301,21 @@ msgstr "W"
 msgid "NW"
 msgstr "NW"
 
+#. weather@mockturtl->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl"
+msgstr "Instellingen voor weather@mockturtl"
+
+#. weather@mockturtl->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Stel toetsbinding in voor oproepen van menu"
+
 #. cinnamon-weather->settings-schema.json->woeidLookup->description
 msgid "Get WOEID"
 msgstr "WOEID verkrijgen"
+
+#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
+msgid "http://woeid.rosselliot.co.nz/"
+msgstr "http://woeid.rosselliot.co.nz/"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
@@ -332,6 +344,10 @@ msgstr "Fahrenheit"
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "Celsius"
+
+#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Toon hoogste temperatuur als eerste in de voorspelling"
 
 #. cinnamon-weather->settings-schema.json->translateCondition->description
 msgid "Translate condition"

@@ -79,7 +79,7 @@ msgstr "Animeringstid"
 msgid "Previews"
 msgstr "Förhandsgranskning"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "Visa vid hovring"
 
 msgid "Timeout Show"

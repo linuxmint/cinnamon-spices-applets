@@ -1,0 +1,50 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 11:15+0800\n"
+"PO-Revision-Date: 2018-11-04 18:09+0300\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:45
+msgid "Dependency missing"
+msgstr "Eksik bağımlılıklar var"
+
+#: applet.js:45
+msgid "Please install the GTop package\n"
+msgstr "Lütfen GTop paketini kurunuz\n"
+
+#: applet.js:49
+msgid "to use the applet %s"
+msgstr "%s uygulamacığını kullanmak için"
+
+#: applet.js:72
+msgid "Open System Monitor"
+msgstr "Sistem Gözlemcisini Aç"
+
+#: applet.js:283
+msgid "CPU"
+msgstr "İşlemci"
+
+#: applet.js:306
+msgid "MEM"
+msgstr "Hafıza"
+
+#. hwmonitor@sylfurd->metadata.json->description
+msgid "Displaying realtime CPU and memory load"
+msgstr "İşlemci ve hafıza yükünü gerçek zamanlı görüntüler"
+
+#. hwmonitor@sylfurd->metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr "Grafiksel donanım izleyici"

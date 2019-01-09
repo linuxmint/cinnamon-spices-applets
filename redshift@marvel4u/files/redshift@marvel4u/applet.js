@@ -159,6 +159,7 @@ MyApplet.prototype = {
 
         this.maxBrightness = 100;
         this.minBrightness = 10;
+        this.appletClicked = false;
 
         this.do_UI_update_slider();
         this.refreshRedshiftValues();
@@ -167,14 +168,14 @@ MyApplet.prototype = {
     on_applet_clicked: function (event) {
         // update brightness UI if values altered by system
         // todo: use watcher on dbus instead
-
+        this.appletClicked = true;
         this.do_UI_update_probe();
         this.menu.toggle();
     },
 
     getSystemBrightness: function () {
         try {
-            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
+            let currentBright = GLib.spawn_command_line_sync('gdbus call --session --dest org.cinnamon.SettingsDaemon.Power --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.GetPercentage'); //crashes if not hard coded
             currentBright = currentBright.toString();
 
             // (uint32 53,) std output of getbrightnesscmd, just want 53 value on end
@@ -199,9 +200,13 @@ MyApplet.prototype = {
 
     do_UI_update_probe: function () {
         let currentBrightness = this.getSystemBrightness();
-        this._brightnessSlider.setValue(currentBrightness); // slider position
-        this.brightness = currentBrightness * 100;
+        if (this.appletClicked) {
+            this._brightnessSlider.setValue(this.brightness / 100); // slider position
+        } else {
+            this._brightnessSlider.setValue(currentBrightness); // slider position
+        }
         this.do_UI_update_slider();
+        this.appletClicked = false;
     },
 
     do_UI_update_colortag: function () {
@@ -232,7 +237,7 @@ MyApplet.prototype = {
         this.brightnessMenuItem.label.text = brightnessStr; // GUI Label Brightness
 
         try {
-            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + this.brightness); //crashes if not hard coded
+            Util.spawnCommandLine('gdbus call --session --dest org.cinnamon.SettingsDaemon.Power --object-path /org/cinnamon/SettingsDaemon/Power --method org.cinnamon.SettingsDaemon.Power.Screen.SetPercentage ' + this.brightness); //crashes if not hard coded
         }
         catch (e) {
             global.logError(e);
@@ -331,7 +336,7 @@ MyApplet.prototype = {
     },
 
     updateTooltip: function () {
-        var tooltip = _('Brightness') + ': ' + this.brightness + '%\n';
+        let tooltip = _('Brightness') + ': ' + this.brightness + '%\n';
         tooltip += _('Redshift') + ': ' + _(this.enabled ? 'On' : 'Off');
         if (this.enabled) {
             tooltip += '\n';

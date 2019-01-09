@@ -76,7 +76,7 @@ msgstr "Vrsta animacije"
 msgid "Previews"
 msgstr "Pregledi"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "Prikaži pri prijelazu pokazivačem"
 
 msgid "Timeout Show"

@@ -76,7 +76,7 @@ msgstr "Време на анимация"
 msgid "Previews"
 msgstr "Преглед"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "Покажи при посочване"
 
 msgid "Timeout Show"

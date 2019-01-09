@@ -215,7 +215,7 @@ MyApplet.prototype = {
     },
 
     autodo: function(updalreadyH){
-        let postpone=this.actor.hover;
+        let postpone=this.actor.hover && this.hover_activates;
         let _children = this.cbox.get_children();
         let p = _children.indexOf(this.actor);
         for(let i = 0; i < p; i++){

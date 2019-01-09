@@ -1,0 +1,95 @@
+/*
+These styles are a compromise to match the system Themes (Mint-X and Mint-Y in light and dark forms)
+and the more popular of the other themes available.
+Changes may be required with some themes to avoid the display width being exceeded
+which leads to jitter with high network speeds and resolutions or to allow a reduced size
+ width to save panel space. The fonts are defined for the this reason.
+The stylesheet can be edited by the user but will be overwritten when the applet is updated.
+There is a way to gain 'persistence' described at the end of this file.
+*/
+
+/*
+The following define the text for the left, right and compact displays.
+Changes can be combined with the overall applet width which can be adjusted in settings.
+*/
+
+.numa-left {
+	text-align: center;
+    font-weight: bold;
+	font-family: "Ubuntu Mono", Arial;
+/*
+	min-width: 75px;
+	font-size: 95%;
+*/
+}
+.numa-right {
+
+	text-align: center;
+	font-weight: bold;
+    font-family: "Ubuntu Mono", Arial ;
+/*
+ 	min-width: 1px;
+    font-size: 95%;
+*/
+}
+.numa-compact {
+	text-align: center;
+	font-weight: bold;
+	font-family: "Ubuntu Mono", Arial;
+/*
+	min-width: 1px;
+    font-size: 95%;
+*/
+}
+/*
+The following are the styles for the Applet backgrounds - names are self explanatory
+The colour parameters are red, green, blue, and transparency or a name.
+The shapes match are a compromise to match the system Themes on a horizontal bottom panel.
+*/
+
+.numa-not-connected {
+    background-color: rgba(0,0,0,0.0);
+}
+
+.numa-connected {
+    background-color: rgba(0,0,0,0.0);
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(0,255,0,0.7);
+}
+
+.numa-alert {
+    background-color: orange;
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(0,0,0,1.0);
+}
+
+.numa-limit-exceeded {
+    background-color: red;
+    border: 2px;
+    margin: 2px, 1px, 0px, 1px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(0,0,0,1.0);
+}
+
+/*
+Persistence
+The applet checks for a file called stylesheet.css in folder netusagemonitor@pdcurtis in your Home Folder.
+if this is present then the default stylesheet is overwritten the next time the applet is started.
+A further restart of the applet is then required before the applet uses the new stylesheet.
+An extra restart of the applet is also required after an update.
+The quickest way to restart Cinnamon is by the keyboard shortcut Ctrl+Alt+Esc
+Login out and back in also restarts Cinnamon or a Right click on the Panel -> Troubleshoot -> Restart Cinnamon
+A way to avoid these restarts is being sought but it is intended to maintain the default position for a user stylesheet.
+*/
+
+/*
+Change Log
+06-09-2013 Initial version
+04-05-2014 Modifications to reflect changes in way minimum display width is determined by padding rather than by using css
+19-12-2018 Modifications suggested to have the same look as other applets in Cinammon 4.0 by @Mintulix
+05-01-2019 Further refinement by @pdcurtis
+*/

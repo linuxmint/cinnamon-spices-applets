@@ -18,15 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: sv\n"
 
-#: applet.js:29
+#: applet.js:33
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
-#: applet.js:67
-msgid "  Mem: "
-msgstr " Minne: "
-
-#: applet.js:68
+#: applet.js:72
 msgid "Click to open Gnome system monitor"
 msgstr "Klicka för att öppna systemövervakaren"
 
@@ -37,3 +33,7 @@ msgstr "Ett enkelt panelprogram som visar minnesanvändning."
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
 msgstr "Enkel minnesövervakare"
+
+#. mem-monitor-text@datanom.net->settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "Ange anpassad text att visa i panelen"

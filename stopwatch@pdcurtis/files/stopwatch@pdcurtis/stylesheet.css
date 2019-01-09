@@ -1,41 +1,70 @@
+/*
+Style sheet for the Stopwatch Applet with Monitoring and Shutdown.
+The stylesheet can be edited by the user but will be overwritten when the applet is updated.
+There is a way to gain 'persistence' described at the end of this file.
+*/
+
 .stopwatch-ready {
-background-color: rgba(63,63,63,0.2);
-padding: 3px;
- border-radius: 10px;
+background-color: rgba(127,127,127,0.3);
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(127,127,127,1);
+    font-size: 95%;
 }
 
 .stopwatch-running {
 background-color: rgba(0,255,0,0.3);
-padding: 3px;
- border-radius: 10px;
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(0,255,0,0.5);
+    font-size: 95%;
 }
 
 .stopwatch-paused {
-background-color: rgba(255,165,0,0.3);
-padding: 3px;
- border-radius: 10px;
+background-color: rgba(255,165,0,0.5);
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(255,165,0,0.7);
+    font-size: 95%;
 }
 
 .stopwatch-day-exceeded {
-background-color: rgba(255,0,0,0.3);
-border: 2px;
-border-color:red;
-padding: 2px;
- border-radius: 10px;
+background-color: rgba(127,127,127,0.3);
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: red;
+    font-size: 95%;
 }
 
 .stopwatch-running-day-exceeded {
 background-color: rgba(0,255,0,0.3);
-padding: 2px;
-border: 2px;
-border-color:red;
- border-radius: 10px;
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: red;
+    font-size: 95%;
 }
 
 .stopwatch-paused-day-exceeded {
 background-color: rgba(255,165,0,0.3);
-padding: 2px;
-border: 2px;
-border-color:red;
- border-radius: 10px;
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: red;
+    font-size: 95%;
+
+/*
+Persistence
+The applet checks for a file called stylesheet.css in folder stopwatch@pdcurtis in your Home Folder.
+if this is present then the default stylesheet is overwritten the next time the applet is started.
+A further restart of the applet is then required before the applet uses the new stylesheet.
+An extra restart of the applet is also required after an update.
+The quickest way to restart Cinnamon is by the keyboard shortcut Ctrl+Alt+Esc
+Login out and back in also restarts Cinnamon or a Right click on the Panel -> Troubleshoot -> Restart Cinnamon
+A way to avoid these restarts is being sought but it is intended to maintain the default position for a user stylesheet.
+*/
 }

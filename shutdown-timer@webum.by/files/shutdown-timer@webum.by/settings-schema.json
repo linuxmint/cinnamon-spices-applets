@@ -1,0 +1,42 @@
+{
+ "shutdown" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Shutdown event on menu"
+ },
+ "restart" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Restart event on menu"
+ },
+ "log-out" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Log out event on menu"
+ },
+ "hibernate" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Hibernate event on menu"
+ },
+ "suspend" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Suspend event on menu"
+ },
+ "lock-screen" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Lock screen event on menu"
+ },
+ "restart-cinnamon" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Restart Cinnamon event on menu"
+ },
+ "show-time-on-panel" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Show timer in panel"
+ }
+}

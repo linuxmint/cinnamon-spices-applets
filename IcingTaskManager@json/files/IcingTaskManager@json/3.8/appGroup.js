@@ -7,10 +7,9 @@ const Tweener = imports.ui.tweener;
 const DND = imports.ui.dnd;
 const Tooltips = imports.ui.tooltips;
 const PopupMenu = imports.ui.popupMenu;
-const Applet = imports.ui.applet;
 const SignalManager = imports.misc.signalManager;
 
-const {each, find, findIndex, isEqual, setTimeout, throttle, getFocusState, unref} = require('./utils');
+const {each, find, findIndex, isEqual, isFinalized, setTimeout, getFocusState, unref} = require('./utils');
 const {AppMenuButtonRightClickMenu, HoverMenuController, AppThumbnailHoverMenu} = require('./specialMenus');
 const constants = require('./constants');
 const store = require('./store');
@@ -95,7 +94,7 @@ class AppGroup {
       launchNewInstance: () => this.launchNewInstance()
     });
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
 
     // TODO: This needs to be in state so it can be updated more reliably.
     this.labelVisible = this.state.settings.titleDisplay !== constants.TitleDisplay.None && this.state.isHorizontal;
@@ -143,6 +142,7 @@ class AppGroup {
     });
     this._numLabel = new St.Label({
       style_class: 'window-list-item-label window-icon-list-numlabel',
+      text: ''
     });
     this._numLabel.clutter_text.ellipsize = false;
 
@@ -154,9 +154,9 @@ class AppGroup {
 
     this.rightClickMenu = new AppMenuButtonRightClickMenu({
       state: this.state,
-      groupState: this.groupState
-    });
-    Applet.AppletPopupMenu.prototype._init.call(this.rightClickMenu, {actor: this.actor}, this.state.orientation);
+      groupState: this.groupState,
+      actor: this.actor
+    }, this.state.orientation);
 
     // Set up the hover menu
     this.hoverMenuManager = new HoverMenuController({actor: this.actor});
@@ -526,6 +526,20 @@ class AppGroup {
       return false;
     }
 
+    this.resetHoverStatus();
+
+    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
+      this.hadClosedPseudoClass = false;
+      this.actor.add_style_pseudo_class('closed');
+    }
+
+    this._setFavoriteAttributes();
+    this.hoverMenu._onMenuLeave();
+  }
+
+  resetHoverStatus() {
+    if (isFinalized(this.actor)) return;
+
     let hoverPseudoClass = getPseudoClass(this.state.settings.hoverPseudoClass);
     let focusPseudoClass = getPseudoClass(this.state.settings.focusPseudoClass);
     let activePseudoClass = getPseudoClass(this.state.settings.activePseudoClass);
@@ -542,14 +556,6 @@ class AppGroup {
       && (hoverPseudoClass !== focusPseudoClass || hoverPseudoClass !== activePseudoClass)) {
       this.actor.remove_style_pseudo_class(hoverPseudoClass);
     }
-
-    if (this.hadClosedPseudoClass && this.groupState.metaWindows.length === 0) {
-      this.hadClosedPseudoClass = false;
-      this.actor.add_style_pseudo_class('closed');
-    }
-
-    this._setFavoriteAttributes();
-    this.hoverMenu._onMenuLeave();
   }
 
   setActiveStatus(windows){
@@ -597,6 +603,7 @@ class AppGroup {
     if (this.state.settings.showActive && this.groupState.metaWindows.length > 0) {
       this.actor.add_style_pseudo_class(getPseudoClass(this.state.settings.activePseudoClass));
     }
+    this.resetHoverStatus();
   }
 
   _onWindowDemandsAttention (metaWindow) {
@@ -857,6 +864,7 @@ class AppGroup {
 
     this.groupState.metaWindows.splice(refWindow, 1);
     this._calcWindowNumber(this.groupState.metaWindows);
+
     if (this.groupState.metaWindows.length > 0 && !this.groupState.willUnmount) {
       if (this.progressOverlay.visible && metaWindow.progress > 0) {
         this._progress = 0;
@@ -868,6 +876,7 @@ class AppGroup {
         lastFocused: this.groupState.metaWindows[this.groupState.metaWindows.length - 1]
       }, true);
       this.groupState.trigger('removeThumbnailFromMenu', metaWindow);
+      this.groupState.trigger('refreshThumbnails');
     } else {
       // This is the last window, so this group needs to be destroyed. We'll call back _windowRemoved
       // in appList to put the final nail in the coffin.
@@ -954,6 +963,8 @@ class AppGroup {
   }
 
   handleFavorite (changed) {
+    if (isFinalized(this.actor)) return;
+
     if (changed) {
       setTimeout(() => this.listState.trigger('updateAppGroupIndexes', this.groupState.appId), 0);
     }

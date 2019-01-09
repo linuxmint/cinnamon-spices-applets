@@ -24,4 +24,4 @@ To specify a disk:
 2. From "Disk" submenu click on a disk
 
 ## Source code
-Browse the source of the applet in the [original repository](https://github.com/cardsurf/disk-read-and-write-speed).  
+Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/disk-read-and-write-speed).

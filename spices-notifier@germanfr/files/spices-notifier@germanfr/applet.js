@@ -8,17 +8,23 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 
-const session = new Soup.SessionAsync();
+const session = new Soup.Session();
 const UUID = 'spices-notifier@germanfr';
 
 const SPICES_URL = 'https://cinnamon-spices.linuxmint.com';
+const HTML_COUNT_ID = 'count';
+const COMMENTS_REGEX = new RegExp(`<[a-z]+ id="${HTML_COUNT_ID}">([0-9]+)</[a-z]+>`);
 
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
-	return Gettext.dgettext(UUID, str);
+	let xlet_dom_transl = Gettext.dgettext(UUID, str);
+	if (xlet_dom_transl !== str)
+		return xlet_dom_transl;
+	// If the text was not found locally try with system-wide translations
+	return Gettext.gettext(str);
 }
 
 class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
@@ -72,15 +78,29 @@ class XletMenuItem extends PopupMenu.PopupBaseMenuItem {
 	}
 };
 
+class TitleSeparatorMenuItem extends PopupMenu.PopupBaseMenuItem {
+	constructor(title, icon_name) {
+		super({ reactive: false });
+		if (typeof icon_name === 'string') {
+			let icon = new St.Icon({ icon_name, icon_type: St.IconType.SYMBOLIC, style_class: 'popup-menu-icon' });
+			this.addActor(icon, { span: 0 });
+		}
+		this.label = new St.Label({ text: title, style_class: 'popup-subtitle-menu-item' });
+		this.addActor(this.label);
+	}
+}
+
 
 class SpicesNotifier extends Applet.TextIconApplet {
 	constructor(meta, orientation, panel_height, instance_id) {
 		super(orientation, panel_height, instance_id);
-		this.set_applet_icon_symbolic_name('spices-comments')
+		this.set_applet_icon_symbolic_name('spices-comments');
+		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
 		this.settings = new Settings.AppletSettings(this, meta.uuid, instance_id);
 		this.settings.bind('username', 'username', this.reload);
 		this.settings.bind('update-interval', 'update_interval', this.reload);
+		this.settings.bind('show-nonzero-only', 'show_nonzero_only', this.update_applet);
 
 		this.menuManager = new PopupMenu.PopupMenuManager(this);
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -107,17 +127,24 @@ class SpicesNotifier extends Applet.TextIconApplet {
 			Mainloop.source_remove(this.updateId);
 	}
 
-	update_label() {
-		if (this.unread > 0)
+	update_applet() {
+		if (this.unread > 0) {
 			this.set_applet_label(this.unread.toString())
-		else
-			this.set_applet_label('');
+			this.actor.show();
+		} else {
+			if (this.show_nonzero_only) {
+				this.actor.hide();
+			} else {
+				this.set_applet_label('');
+				this.actor.show();
+			}
+		}
 	}
 
 	reload() {
 		this.my_xlets = [];
 		this.unread = 0;
-		this.set_applet_label('');
+		this.update_applet();
 		this.menu.removeAll();
 		if(this.updateId > 0)
 			Mainloop.source_remove(this.updateId);
@@ -141,7 +168,9 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		}
 
 		let iteration = this.iteration;
-		let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json`);
+		/* The question mark at the end is a hack to force the server to not
+		   send us a very old cached version of the json file. */
+		let msg = Soup.Message.new('GET', `${SPICES_URL}/json/${type}.json?`);
 		session.queue_message(msg, (session, message) => {
 			if (message.status_code === 200 && iteration === this.iteration) {
 				let xlets = JSON.parse(message.response_body.data);
@@ -180,11 +209,18 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		let msg = Soup.Message.new('GET', xlet.page);
 		session.queue_message(msg, (session, message) => {
 			if (message.status_code === 200) {
-				let regex = /<[a-z]+ id="count">([0-9]+)<\/[a-z]+>/;
-				let result = regex.exec(message.response_body.data);
-				let count = result[1] ? parseInt(result[1]) : 0;
-				this.set_comments_cache(xlet, count, read);
-				item.update_comment_count(count - read);
+				let result = COMMENTS_REGEX.exec(message.response_body.data);
+				if (result && result[1]) {
+					let count = parseInt(result[1]);
+					this.set_comments_cache(xlet, count, read);
+					item.update_comment_count(count - read);
+				} else {
+					item.actor.hide();
+					global.logWarning(xlet.name + ": This xlet is cached in the "
+							+ "xlet.json file but doesn't actually exist in the "
+							+ "Spices now OR the Cinnamon Spices changed the ID "
+							+ "(please report if there are 0 items)");
+				}
 			}
 		});
 	}
@@ -215,17 +251,25 @@ class SpicesNotifier extends Applet.TextIconApplet {
 			let xlet = xlets[uuid];
 			if (xlet.author_user === this.username) {
 				xlet.type = type;
-				xlet.page = `${SPICES_URL}/${type}/view/${xlet['spices-id']}`;
+				xlet.page = `${SPICES_URL}/${type}/view/${xlet['spices-id']}#${HTML_COUNT_ID}`;
 				xlet.uuid = uuid; // Themes don't have UUIDs, use name
 
 				let menuItem = new XletMenuItem(this, xlet);
-				this.menu.addMenuItem(menuItem);
 				menuItems.push(menuItem);
 				this.my_xlets.push(xlet);
 			}
 		}
-		if (menuItems.length > 0)
+		if (menuItems.length > 0) {
+			// Xlets names are already translated system-wide
+			let title = type[0].toUpperCase() + type.substring(1);
+			this.menu.addMenuItem(new TitleSeparatorMenuItem(_(title), `spices-${type}-symbolic`));
+
+			menuItems.sort((a,b) => a.xlet.name > b.xlet.name);
+			for(let item of menuItems)
+				this.menu.addMenuItem(item);
+
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+		}
 
 		this.fetch_comments(menuItems);
 	}
@@ -237,7 +281,7 @@ class SpicesNotifier extends Applet.TextIconApplet {
 
 	add_unread(count) {
 		this.unread += count;
-		this.update_label();
+		this.update_applet();
 	}
 
 	mark_as_read(xlet) {
@@ -247,7 +291,7 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		if (count > read) {
 			this.set_comments_cache(xlet, count, count);
 			this.unread -= (count - read);
-			this.update_label();
+			this.update_applet();
 		}
 	}
 

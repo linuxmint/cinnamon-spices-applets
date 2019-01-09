@@ -1,0 +1,8 @@
+{
+ "mem-label" : {
+	"type" : "entry",
+	"default" : "mem:",
+	"description" : "Text:",
+	"tooltip" : "Enter custom text to show in the panel."
+ }
+}

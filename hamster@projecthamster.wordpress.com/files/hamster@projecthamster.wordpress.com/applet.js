@@ -26,12 +26,12 @@ const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext = imports.gettext;
+const Settings = imports.ui.settings;
 
 /* Local imports */
 const AppletDir = imports.ui.appletManager.appletMeta[AppletUUID].path;
 imports.searchPath.unshift(AppletDir);
 const Stuff = imports.stuff;
-const Convenience = imports.convenience;
 
 // dbus-send --session --type=method_call --print-reply --dest=org.gnome.Hamster /org/gnome/Hamster org.freedesktop.DBus.Introspectable.Introspect
 const ApiProxyIface = '<node> \
@@ -265,15 +265,15 @@ HamsterBox.prototype = {
 };
 
 
-function HamsterApplet(metadata, orientation, panel_height) {
-    this._init(metadata, orientation, panel_height);
+function HamsterApplet(metadata, orientation, panel_height, instance_id) {
+    this._init(metadata, orientation, panel_height, instance_id);
 }
 
 HamsterApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
-    _init: function(metadata, orientation, panel_height) {
-        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height);
+    _init: function(metadata, orientation, panel_height, instance_id) {
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         this._proxy = new ApiProxy(Gio.DBus.session, 'org.gnome.Hamster', '/org/gnome/Hamster');
         this._proxy.connectSignal('FactsChanged',      Lang.bind(this, this.refresh));
@@ -285,7 +285,8 @@ HamsterApplet.prototype = {
                                               "org.gnome.Hamster.WindowServer",
                                               "/org/gnome/Hamster/WindowServer");
 
-        this._settings = Convenience.getSettings();
+        this.settings = new Settings.AppletSettings(this, "hamster@projecthamster.wordpress.com", instance_id);
+
         this.path = metadata.path;
 
         // Set initial label, icon, activity
@@ -333,11 +334,6 @@ HamsterApplet.prototype = {
         item.connect('activate', Lang.bind(this, this._onShowSettingsActivate));
         this.menu.addMenuItem(item);
 
-        // applet settings
-        item = new PopupMenu.PopupMenuItem(_("Applet Settings"));
-        item.connect('activate', Lang.bind(this, this._onAppletSettingsActivate));
-        this.menu.addMenuItem(item);
-
         // focus menu upon display
         this.menu.connect('open-state-changed', Lang.bind(this,
             function(menu, open) {
@@ -349,15 +345,9 @@ HamsterApplet.prototype = {
             }
         ));
 
-        // Add global hotkey (works in Cinnamon >= 1.8)
-        this.hotkey = "" + this._settings.get_strv("show-hamster-dropdown");
-        try {
-            Main.keybindingManager.addHotKey("show-hamster-menu",
-                    this.hotkey,
-                    Lang.bind(this, this.on_hotkey_triggered));
-        } catch (e) {
-            global.logError(e);
-        }
+        this.settings.bind("panel-appearance", "panel_appearance", this.refresh);
+        this.settings.bind("show-hamster-dropdown", "hotkey", this.on_keybinding_changed);
+        this.on_keybinding_changed();
 
         // load data
         this.facts = null;
@@ -369,6 +359,16 @@ HamsterApplet.prototype = {
     on_applet_clicked: function(event) {
         this.menu.toggle();
         let text = this.activityEntry._textEntry.set_text('');
+    },
+
+    on_keybinding_changed: function() {
+        try {
+            Main.keybindingManager.addHotKey("show-hamster-menu",
+                                             this.hotkey,
+                                             Lang.bind(this, this.on_hotkey_triggered));
+        } catch (e) {
+            global.logError(e);
+        }
     },
 
     on_hotkey_triggered: function() {
@@ -507,9 +507,6 @@ HamsterApplet.prototype = {
 
 
     updatePanelDisplay: function(fact) {
-        // 0 = show label, 1 = show icon + duration, 2 = just icon
-        let appearance = this._settings.get_int("panel-appearance");
-
         /* Format label strings and icon */
         if (fact && !fact.endTime) {
             this._label_short = Stuff.formatDuration(fact.delta);
@@ -522,15 +519,18 @@ HamsterApplet.prototype = {
         }
 
         /* Configure based on appearance setting */
-        if (appearance == 0) {
-            this.set_applet_icon_symbolic_name("none");
-            this.set_applet_label(this._label_long);
-        } else if (appearance == 1) {
+        if (this.panel_appearance == 0) {
             this.set_applet_icon_symbolic_name(this._icon_name);
-            this.set_applet_label(this._label_short);
-        } else {
+            this._applet_icon.hide();
+            this.set_applet_label(this._label_long);
+        } else if (this.panel_appearance == 1) {
+            this._applet_icon.show();
             this.set_applet_icon_symbolic_name(this._icon_name);
             this.set_applet_label("");
+        } else {
+            this._applet_icon.show();
+            this.set_applet_icon_symbolic_name(this._icon_name);
+            this.set_applet_label(this._label_short);
         }
         this.set_applet_tooltip(this._label_long);
     },
@@ -560,10 +560,6 @@ HamsterApplet.prototype = {
         this._windowsProxy.preferencesSync();
     },
 
-    _onAppletSettingsActivate: function() {
-        GLib.spawn_command_line_async(this.path + '/prefs.js');
-    },
-
     _onActivityEntry: function() {
         let text = this.activityEntry._textEntry.get_text();
         this._proxy.AddFactRemote(text, 0, 0, false, Lang.bind(this, function(response, err) {
@@ -572,7 +568,7 @@ HamsterApplet.prototype = {
     }
 };
 
-function main(metadata, orientation, panel_height) {
+function main(metadata, orientation, panel_height, instance_id) {
     Gettext.bindtextdomain(AppletUUID, GLib.get_home_dir() + "/.local/share/locale");
-    return new HamsterApplet(metadata, orientation, panel_height);
+    return new HamsterApplet(metadata, orientation, panel_height, instance_id);
 }

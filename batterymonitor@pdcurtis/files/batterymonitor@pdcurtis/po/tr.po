@@ -1,0 +1,183 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan GÖKKAYA <gokhanlnx@gmail.com>.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-31 15:17+0100\n"
+"PO-Revision-Date: 2018-11-08 22:47+0300\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:55
+msgid "Ok"
+msgstr "Tamam"
+
+#: applet.js:173
+msgid "Waiting"
+msgstr "Bekleniyor"
+
+#: applet.js:239
+msgid "Open Power Statistics"
+msgstr "Güç İstatistiklerini Aç"
+
+#: applet.js:245
+msgid "Open System Monitor"
+msgstr "Sistem Gözlemcisini Aç"
+
+#: applet.js:254
+msgid "Housekeeping and System Sub Menu"
+msgstr "Düzenleme ve Sistem Alt Menüsü"
+
+#: applet.js:257
+msgid "View the Changelog"
+msgstr "Değişim Günlüğünü İncele"
+
+#: applet.js:263
+msgid "Open the Help file"
+msgstr "Yardım dosyasını aç"
+
+#: applet.js:269
+msgid "Open stylesheet.css  (Advanced Function)"
+msgstr "Stylesheet.css aç (Gelişmiş İşlev)"
+
+#. batterymonitor@pdcurtis->metadata.json->name
+#: applet.js:285
+msgid "Battery  Applet with Monitoring and Shutdown (BAMS)"
+msgstr "Pil İzleme ve Kapatma Uygulamacığı (BAMS)"
+
+#: applet.js:290
+msgid "Waiting for battery information"
+msgstr "Pil bilgileri bekleniyor"
+
+#: applet.js:353
+msgid "Battery Low - turn off or connect to mains"
+msgstr "Düşük Pil - kapat veya ana şebekeye bağla"
+
+#: applet.js:358
+msgid ""
+"The Battery Level has fallen to your alert level\n"
+"\n"
+" either reconnect to a power source\n"
+"or close down your work and suspend or shutdown the machine"
+msgstr ""
+"Pil Seviyesi belirlediğiniz uyarı seviyesine düştü\n"
+"\n"
+"  ya yeniden bir güç kaynağına bağlayın\n"
+"ya da işinizi sonlandırıp makineyi askıya alın ya da kapatın"
+
+#: applet.js:375
+msgid "Battery Critical will Suspend unless connected to mains"
+msgstr "Pil Kritik, şebekeye bağlanmazsa askıya alınacak"
+
+#: applet.js:393
+msgid "Charge:"
+msgstr "Şarj:"
+
+#: applet.js:393
+msgid "Alert:"
+msgstr "Uyarı:"
+
+#: applet.js:393
+msgid "Suspend:"
+msgstr "Askı:"
+
+#: applet.js:451
+msgid "Percentage Charge:"
+msgstr "Şarj Oranı:"
+
+#: applet.js:451
+msgid "Alert at:"
+msgstr "Uyarı durumu:"
+
+#: applet.js:451
+msgid "Suspend at:"
+msgstr "Askı durumu:"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid ""
+"Classic - Battery Percentage with extended messages for horizontal panel"
+msgstr "Klasik - Pil Oranı ve yatay panel için ek mesajlar"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Classic Plus - Classic with addition of Battery Icon"
+msgstr "Klasik Ek - Klasik ve ek Pil Simgesi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact Plus - Compact  with addition of Battery Icon"
+msgstr "Şıkışık Ek - Şıkışık ve ek Pil Simgesi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Compact - Battery Percentage without extended messages"
+msgstr "Sıkışık - Pil Yüzdesi, ek mesaj olmadan"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->options
+msgid "Icon Only on coloured background indicating status"
+msgstr "Sadece Simge - renkli arka plan üstünde durum gösterimi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (original) display with optional battery "
+"icon and some more compact displays suitable for a vertical panel "
+"(CompactCompact Plus and Icon Only)"
+msgstr ""
+"Bu özellik (varsayılan) Klasik görünüme ek olarak pil simgesi de sunmayı "
+"sağlar, (Sıkışık, Sıkışık Ek ve Sadece Simge seçenekleri ile birlikte) dikey "
+"panellere de uygun hale getirebilirsiniz."
+
+#. batterymonitor@pdcurtis->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Görünüm Tipi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->head->description
+msgid "General Settings for the Battery Applet with Monitoring and Shutdown"
+msgstr "Pil İzleme ve Kapatma Uygulamacığı Genel Ayarları"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->description
+msgid "Refresh Interval for Display:"
+msgstr "Görüntüleme için Yenileme Aralığı:"
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->tooltip
+msgid ""
+"Increase or decrease this spinner value to change the refresh interval - use "
+"a slow refresh if you have a slow machine. This also governs the flash speed."
+msgstr ""
+"Yenileme aralığını değiştirmek için bu değeri artırın veya azaltın - yavaş "
+"makineniz varsa (yüksek değer belirleyerek) yavaş bir yenileme kullanınız. "
+"Bu ayrıca vurgu hızını da yönetir."
+
+#. batterymonitor@pdcurtis->settings-schema.json->refreshInterval-
+#. spinner->units
+msgid "seconds"
+msgstr "saniye"
+
+#. batterymonitor@pdcurtis->settings-schema.json->head1->description
+msgid "Display Mode"
+msgstr "Görünüm Kipi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->description
+msgid "Percentage Battery Charge at which Alert Displayed"
+msgstr "Uyarı Gösterilecek Pil Şarj Yüzdesi"
+
+#. batterymonitor@pdcurtis->settings-schema.json->alertPercentage->tooltip
+msgid ""
+"Percentage of Battery Charge at which Orange Warning Background is displayed "
+"- It is also shown and can be adjusted in the Applet left click menu"
+msgstr ""
+"Turuncu Uyarı Arkaplanının gösterildiği Pil Şarj Oranı - Bu ayrıca "
+"uygulamacığın sol tıklama menüsünde gösterilir ve buradan ayarlanabilir"
+
+#. batterymonitor@pdcurtis->metadata.json->description
+msgid "Displays Charge as Percentage and allows Alerts and Actions"
+msgstr "Şarj Yüzdesini Gösterir, Uyarı ve Eylemlere Olanak Sağlar"

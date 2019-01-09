@@ -92,7 +92,7 @@ MyApplet.prototype = {
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
             } else { 
-               this.textEd = "xed";
+                this.textEd = "xdg-open";
             }
 
             // Check that Nvidia drivers are installed 
@@ -373,5 +373,7 @@ Major new version to support vertical panels and to use icons instead of text to
 ### 3.3.3
 Fix to allow use with early versions of Cinnamon
  * Inhibit use of hide_applet_label() unless Cinnamon version 3.2 or higher in use.
+### 3.3.4
+  * Use xdg-open in place of gedit or xed to allow use on more distros
 */
 

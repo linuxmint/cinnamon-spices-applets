@@ -5,56 +5,13 @@ var babel = require('gulp-babel');
 var clear = require('clear');
 var exec = require('child_process').exec;
 
-gulp.task('package', ()=> {
-  return gulp.src('./files/**/**/*')
-    .pipe(zip('IcingWindowSaver@json-dist-' + Date.now() + '.zip'))
-    .pipe(gulp.dest('./builds'));
-});
-
-gulp.task('copy', ()=> {
-  del.sync(['./files/**/**/*']);
-  return gulp.src('./src/**/**/*')
-    .pipe(gulp.dest('./files/'));
-});
-
-gulp.task('transpile', ['copy'], () =>
-  gulp.src('./src/*.js')
-    .pipe(babel({
-      presets: [
-        'es2015',
-        'mozjs24'
-      ],
-      plugins: [
-        [
-          'transform-es2015-classes',
-          {
-            loose: true
-          }
-        ],
-        [
-          'babel-plugin-transform-builtin-extend',
-          {
-            globals: ['Error', 'Array', 'Set', 'Object'],
-            approximate: false
-          }
-        ],
-        'transform-es2015-parameters',
-        'transform-es2015-destructuring'
-      ],
-      ignore: [
-        './src/lodash.js'
-      ]
-    }))
-    .pipe(gulp.dest('files'))
-);
-
-gulp.task('install', ['transpile'], (cb)=>{
-  exec('cp -avrf ./files/ ~/.local/share/cinnamon/applets/IcingWindowSaver@json && ./locale.sh', function (err, stdout, stderr) {
+gulp.task('install', (cb)=>{
+  exec('cp -arf ./files/IcingWindowSaver@json/* ~/.local/share/cinnamon/applets/IcingWindowSaver@json', function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
     cb(err);
   });
-})
+});
 
 gulp.task('reload', ['install'], (cb)=>{
   exec(`dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'IcingWindowSaver@json' string:'APPLET'`, function (err, stdout, stderr) {
@@ -65,7 +22,7 @@ gulp.task('reload', ['install'], (cb)=>{
 })
 
 gulp.task('watch', ()=> {
-  gulp.watch('./src/*.{js,json,py,css,md,po}', ['reload']);
+  gulp.watch('./files/IcingWindowSaver@json/**/**/**/**/*.{js,json,py,css,md,po}', ['reload']);
 });
 
 gulp.task('clear-terminal', ()=> {

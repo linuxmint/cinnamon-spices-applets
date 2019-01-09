@@ -22,28 +22,27 @@
 #
 import sys
 import subprocess
-import gtk.gdk
+import gi
+gi.require_version("Gdk", "3.0")
+from gi.repository import Gdk
 try:
     import Xlib
     from Xlib import X
     from Xlib import display
 except ImportError:
-    print "ImportError Xlib"
+    print("ImportError Xlib")
     sys.exit()
 try:
     import numpy
 except ImportError:
-    print "ImportError numpy"
+    print("ImportError numpy")
     sys.exit()
 
 
 def getPixelColor(x, y):
-    w = gtk.gdk.get_default_root_window()
-    sz = w.get_size()
-    pb = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, sz[0], sz[1])
-    pb = pb.get_from_drawable(w, w.get_colormap(), 0, 0, 0, 0, sz[0], sz[1])
-    pixel_array = pb.get_pixels_array()
-    return pixel_array[y][x]
+  w = Gdk.get_default_root_window()
+  pb = Gdk.pixbuf_get_from_window(w, x, y, 1, 1)
+  return pb.get_pixels()
 
 def mousePixel():
     data = display.Display().screen().root.query_pointer()._data
@@ -58,23 +57,23 @@ def getColor(ctype):
     elif ctype == 2:
         color = '#%02x%02x%02x' % (color[0], color[1], color[2])
         color = color.upper()
-    elif ctype == 4:
-        color = '('+str(color[0])+','+ str(color[1])+','+ str(color[2])+')'
     elif ctype == 3:
         color = str(color[0])+','+ str(color[1])+','+ str(color[2])
+    elif ctype == 4:
+        color = '('+str(color[0])+','+ str(color[1])+','+ str(color[2])+')'
 
     return color
 
 def copy2Clipboard(text):
     # "primary":
-    xsel_proc = subprocess.Popen(['xsel', '-pi'], stdin=subprocess.PIPE)
-    xsel_proc.communicate(text)
+    xclip_proc = subprocess.Popen(['xclip', '-selection', 'primary', '-f'], stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    xclip_proc.communicate(text.encode())
     # "clipboard":
-    xsel_proc = subprocess.Popen(['xsel', '-bi'], stdin=subprocess.PIPE)
-    xsel_proc.communicate(text)
+    xclip_proc = subprocess.Popen(['xclip', '-selection', 'clipboard', '-f'], stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    xclip_proc.communicate(text.encode())
 
 def waitClick():
-    display = Xlib.display.Display(':0')
+    display = Xlib.display.Display()
     root = display.screen().root
     root.grab_pointer(1, X.ButtonReleaseMask, X.GrabModeAsync, X.GrabModeAsync, X.NONE, X.NONE, X.CurrentTime)
 
@@ -89,6 +88,7 @@ def waitClick():
                 color = getColor(int(ctype))
 
             copy2Clipboard(color)
-            print color
+            print(color)
+
             sys.exit()
 waitClick()

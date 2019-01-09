@@ -1,5 +1,4 @@
 # Czech translation for PACKAGE package
-# Traduções portuguesas para o pacote PACKAGE.
 # Copyright (C) 2016 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Radek Otáhal <radek.otahal@email.cz>, 2016.
@@ -8,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-22 15:55+0200\n"
-"PO-Revision-Date: 2016-08-08 07:06+0100\n"
-"Last-Translator: Radek Otáhal radek.otahal@email.cz\n"
+"POT-Creation-Date: 2018-03-08 21:52+0000\n"
+"PO-Revision-Date: 2018-08-30 08:18+0200\n"
 "Language-Team: \n"
-"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Pavel Borecki pavel.borecki@gmail.com\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: cs\n"
 
 #: ../settings-schema.json:5
 msgid "Show icon"
-msgstr "Zobrazit ikonu"
+msgstr "Ikonu zobrazovat"
 
 #: ../settings-schema.json:6
 msgid "Always"
@@ -29,7 +28,7 @@ msgstr "Vždy"
 
 #: ../settings-schema.json:6
 msgid "When printers exist"
-msgstr "Pokud existuje tiskárna"
+msgstr "Pokud existují tiskárny"
 
 #: ../settings-schema.json:6
 msgid "When printing"
@@ -37,7 +36,7 @@ msgstr "Při tisku"
 
 #: ../settings-schema.json:7
 msgid "When to show the icon"
-msgstr "Kdy se má zobrazovat ikona"
+msgstr "Kdy zobrazovat ikonu"
 
 #: ../settings-schema.json:12
 msgid "Printer errors"
@@ -53,7 +52,7 @@ msgstr "Počet dokumentů"
 
 #: ../settings-schema.json:19
 msgid "Show documents count next to icon"
-msgstr "Zobrazovat počet dokumentů vedle ikony"
+msgstr "Zobrazovat vedle ikony počet dokumentů"
 
 #: ../settings-schema.json:24
 msgid "Document number"
@@ -61,15 +60,15 @@ msgstr "Číslo dokumentu"
 
 #: ../settings-schema.json:25
 msgid "Show each document number on print list"
-msgstr "Zobrazovat číslo dokumentu na seznamu tisku"
+msgstr "V seznamu tiskových úloh zobrazovat čísla dokumentů"
 
-#: ../settings-schema.json:30 ../applet.js:192
+#: ../settings-schema.json:30 ../applet.js:195
 msgid "Send to front"
 msgstr "Odeslat do tiskové fronty"
 
 #: ../settings-schema.json:31
 msgid "Documents can be sent to front"
-msgstr "Dokument bude odeslán do tiskové fronty"
+msgstr "Tisková fronta je připravena přijímat úlohy"
 
 #: ../settings-schema.json:36
 msgid "Symbolic icons"
@@ -77,20 +76,28 @@ msgstr "Symbolické ikony"
 
 #: ../settings-schema.json:37
 msgid "Use symbolic icons"
-msgstr "Použít symbolické ikony"
+msgstr "Používat symbolické ikony"
 
-#: ../applet.js:37 ../applet.js:131
+#: ../settings-schema.json:43
+msgid "Reload Applet"
+msgstr "Znovu načíst applet"
+
+#: ../settings-schema.json:49
+msgid "Restart CUPS"
+msgstr "Restartovat CUPS"
+
+#: ../metadata.json:10 ../applet.js:37 ../applet.js:134
 msgid "Printers"
 msgstr "Tiskárny"
 
-#: ../applet.js:156
+#: ../applet.js:159
 msgid "Cancel all jobs"
 msgstr "Zrušit všechny úlohy"
 
-#: ../applet.js:178
+#: ../applet.js:181
 msgid "at"
 msgstr "na"
 
 #. printers@linux-man->metadata.json->description
 msgid "Manage Jobs and Printers"
-msgstr "Správa tiskáren a tiskových úloh"
+msgstr "Spravovat tiskové úlohy a tiskárny"

@@ -1,37 +1,27 @@
 {
   "name": "icingwindowsaver",
   "version": "1.0.0",
-  "description": "Icing Window Saver",
+  "description": "Window Position Saver",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp copy && gulp transpile && npm run installApp",
-    "installApp": "cp -avrf  IcingWindowSaver@json ~/.local/share/cinnamon/applets/"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jaszhix/icingmenu.git"
+    "url": "https://github.com/linuxmint/cinnamon-spices-applets.git"
   },
   "author": "",
   "license": "GPL-2.0",
   "bugs": {
-    "url": "https://github.com/jaszhix/icingtaskmanager/issues"
+    "url": "https://github.com/linuxmint/cinnamon-spices-applets/issues?utf8=%E2%9C%93&q=is%3Aissue+is%3Aopen+IcingWindowSaver%40json"
   },
-  "homepage": "https://github.com/jaszhix/icingtaskmanager#readme",
+  "homepage": "https://cinnamon-spices.linuxmint.com/applets/view/273",
   "devDependencies": {
-    "babel-core": "^6.11.4",
-    "babel-plugin-transform-builtin-extend": "^1.1.0",
-    "babel-plugin-transform-es2015-classes": "^6.9.0",
-    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
-    "babel-plugin-transform-es2015-parameters": "^6.11.4",
-    "babel-preset-env": "0.0.7",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-preset-es2016": "^6.11.3",
-    "babel-preset-es2017": "^1.6.1",
     "clear": "0.0.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-zip": "^3.2.0"
-  }
+  },
+  "dependencies": {}
 }

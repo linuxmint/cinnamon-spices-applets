@@ -76,7 +76,7 @@ msgstr "动画时间"
 msgid "Previews"
 msgstr "预览"
 
-msgid "Show on Hover"
+msgid "Show on hover"
 msgstr "悬停时显示"
 
 msgid "Timeout Show"

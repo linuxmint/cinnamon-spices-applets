@@ -4,6 +4,7 @@ const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
+const Config = imports.misc.config;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
@@ -58,6 +59,10 @@ MyApplet.prototype = {
     this.printers = [];
     this.setIcon('printer-printing');
     this.onSettingsChanged();
+    let cinnamonVersion = Config.PACKAGE_VERSION.split('.');
+    let majorVersion = parseInt(cinnamonVersion[0]);
+    let minorVersion = parseInt(cinnamonVersion[1]);
+    this.pkexec = majorVersion > 3 || (majorVersion == 3 && minorVersion > 7);
   },
 
   on_reload_button: function() {
@@ -65,7 +70,8 @@ MyApplet.prototype = {
   },
 
   on_cups_button: function() {
-    Util.spawnCommandLine("gksudo 'systemctl restart cups.service'");
+    if(this.pkexec) Util.spawnCommandLine("sh -c 'pkexec systemctl restart cups.service'");
+    else Util.spawnCommandLine("gksudo 'systemctl restart cups.service'");
   },
 
   on_applet_clicked: function() {

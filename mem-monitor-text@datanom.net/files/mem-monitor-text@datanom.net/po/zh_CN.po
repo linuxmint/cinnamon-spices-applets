@@ -18,15 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Language: zh_CN\n"
 
-#: applet.js:29
+#: applet.js:33
 msgid "Open System Monitor"
 msgstr "打开系统监视器"
 
-#: applet.js:67
-msgid "  Mem: "
-msgstr "  内存："
-
-#: applet.js:68
+#: applet.js:72
 msgid "Click to open Gnome system monitor"
 msgstr "点击打开Gnome系统监视器"
 
@@ -37,3 +33,7 @@ msgstr "一个显示内存使用率的简单的小程序。"
 #. mem-monitor-text@datanom.net->metadata.json->name
 msgid "Simple Memory Monitor"
 msgstr "简单的内存监视器"
+
+#. mem-monitor-text@datanom.net->settings-schema.json->mem-label->tooltip
+msgid "Enter custom text to show in the panel."
+msgstr "输入要在面板中显示的自定义文本。"

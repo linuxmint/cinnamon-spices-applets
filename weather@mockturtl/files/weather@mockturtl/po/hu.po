@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2013-01-18 15:07+0100\n"
-"Last-Translator: Bojtos Péter <ptr@ulx.hu>\n"
+"PO-Revision-Date: 2018-12-02 02:24+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: applet.js:249
 msgid "..."
@@ -27,9 +27,8 @@ msgid "Click to open"
 msgstr "Megnyitás"
 
 #: applet.js:289
-#, fuzzy
 msgid "Settings"
-msgstr "Meteorológiai beállítások"
+msgstr "Beállítások"
 
 #: applet.js:555
 msgid "Sunrise"
@@ -53,12 +52,11 @@ msgstr "Betöltés ..."
 
 #: applet.js:677
 msgid "Refresh"
-msgstr ""
+msgstr "Frissítés"
 
 #: applet.js:740
-#, fuzzy
 msgid "Temperature:"
-msgstr "Hőmérsékleti egység"
+msgstr "Hőmérséklet:"
 
 #: applet.js:742
 msgid "Humidity:"
@@ -310,26 +308,23 @@ msgstr "WOEID beszerzése"
 
 #. cinnamon-weather->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr ""
+msgstr "Függőleges elhelyezkedés"
 
 #. cinnamon-weather->settings-schema.json->showTextInPanel->description
-#, fuzzy
 msgid "Display current temperature in panel"
 msgstr "Hőmérséklet kijelzése panelen"
 
 #. cinnamon-weather->settings-schema.json->woeid->description
-#, fuzzy
 msgid "WOEID"
-msgstr "WOEID beszerzése"
+msgstr "WOEID"
 
 #. cinnamon-weather->settings-schema.json->woeid->tooltip
 msgid "Where On Earth ID"
 msgstr "Helyazonosító (WOEID)"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->description
-#, fuzzy
 msgid "Temperature unit"
-msgstr "Hőmérséklet egysége"
+msgstr "Hőmérséklet mértékegysége"
 
 #. cinnamon-weather->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
@@ -340,7 +335,6 @@ msgid "celsius"
 msgstr "Celsius"
 
 #. cinnamon-weather->settings-schema.json->translateCondition->description
-#, fuzzy
 msgid "Translate condition"
 msgstr "Fordítási feltételek"
 
@@ -350,32 +344,31 @@ msgstr "Hely megjelenített neve"
 
 #. cinnamon-weather->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr "Idő 24 órás formátumban"
+msgstr "Huszonnégy órás időformátum"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr ""
+msgstr "Előrejelzés hossza"
 
 #. cinnamon-weather->settings-schema.json->forecastDays->units
 msgid "days"
-msgstr ""
+msgstr "nap"
 
 #. cinnamon-weather->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Napfelkelte/-nyugta kijelzése"
+msgstr "Napfelkelte, napnyugta kijelzése"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->description
-#, fuzzy
 msgid "Wind speed unit"
 msgstr "Szélerősség egység"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "kph"
-msgstr ""
+msgstr "km/h"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "m/s"
-msgstr ""
+msgstr "m/s"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "knots"
@@ -383,7 +376,7 @@ msgstr "csomó"
 
 #. cinnamon-weather->settings-schema.json->windSpeedUnit->options
 msgid "mph"
-msgstr ""
+msgstr "m/h"
 
 #. cinnamon-weather->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
@@ -395,35 +388,35 @@ msgstr "Légköri nyomás egysége"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "atm"
-msgstr ""
+msgstr "atm"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "kPa"
-msgstr ""
+msgstr "kPa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "Pa"
-msgstr ""
+msgstr "Pa"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
-msgstr ""
+msgstr "mm Hg"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "at"
-msgstr ""
+msgstr "at"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "mbar"
-msgstr ""
+msgstr "mbar"
 
 #. cinnamon-weather->settings-schema.json->pressureUnit->options
 msgid "in Hg"
-msgstr ""
+msgstr "in Hg"
 
 #. cinnamon-weather->settings-schema.json->refreshInterval->description
 msgid "Update interval"
@@ -434,17 +427,16 @@ msgid "minutes"
 msgstr "perc"
 
 #. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
-#, fuzzy
 msgid "Symbolic icons"
-msgstr "Jelképes ikonok"
+msgstr "Szimbolikus ikonok"
 
 #. cinnamon-weather->metadata.json->description
 msgid "View your local weather forecast"
-msgstr ""
+msgstr "Helyi időjárás-előrejelzés megtekintése"
 
 #. cinnamon-weather->metadata.json->name
 msgid "Weather"
-msgstr ""
+msgstr "Időjárás"
 
 #~ msgid "Show 5-day forecast"
 #~ msgstr "5 napos előrejelzés kijelzése"

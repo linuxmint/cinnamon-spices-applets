@@ -1,0 +1,339 @@
+# SpicesUpdate@claudiux Applet POT File.
+# Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the Cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2019-01-02 13:30+0100\n"
+"PO-Revision-Date: 2019-01-03 22:57+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: metadata.json:3
+msgid "Spices Update"
+msgstr "Nadopune dodataka"
+
+#: metadata.json:9
+msgid ""
+"Warns you when your Spices (applets, desklets, extensions, themes) require "
+"an update."
+msgstr ""
+"Upozorava vas kada vaši dodaci (apleti, deskleti, proširenja, teme) imaju "
+"dostupne nadopune."
+
+#: settings-schema.json:7
+msgid "Applets"
+msgstr "Apleti"
+
+#: settings-schema.json:12
+msgid "Desklets"
+msgstr "Deskleti"
+
+#: settings-schema.json:17
+msgid "Extensions"
+msgstr "Proširenja"
+
+#: settings-schema.json:22
+msgid "Themes"
+msgstr "Teme"
+
+#: settings-schema.json:27
+msgid "General"
+msgstr "Općenito"
+
+#: settings-schema.json:32
+msgid "Checking"
+msgstr "Provjera"
+
+#: settings-schema.json:37
+msgid "Monitoring"
+msgstr "Nadgledanje"
+
+#: settings-schema.json:72
+msgid "Frequency"
+msgstr "Vrijeme provjere"
+
+#: settings-schema.json:77
+msgid "Notifications"
+msgstr "Obavijesti"
+
+#: settings-schema.json:82
+msgid "Display type"
+msgstr "Vrsta prikaza"
+
+#: settings-schema.json:90
+msgid "Let regularly check if your applets are up to date"
+msgstr "Redovito provjeravaj nadopune apleta"
+
+#: settings-schema.json:91
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr "Ako ne želite najnovije nadopune apleta, isključite ovu mogućnost."
+
+#: settings-schema.json:95
+msgid "Update these applets:"
+msgstr "Nadopuni ove aplete:"
+
+#: settings-schema.json:96
+msgid "If you do not want an applet to be checked, set it to FALSE."
+msgstr "Ako ne želite provjeru nadopune apleta, postavite na FALSE."
+
+#: settings-schema.json:100
+msgid "Your Applets"
+msgstr "Vaš aplet"
+
+#: settings-schema.json:105
+msgid "Check for updates?"
+msgstr "Provjeri nadopune?"
+
+#: settings-schema.json:113
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr "Otvori Cinnamon postavke za upravljanje svim apletima"
+
+#: settings-schema.json:121
+msgid "Let regularly check if your desklets are up to date"
+msgstr "Redovito provjeravaj nadopune deskleta"
+
+#: settings-schema.json:122
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr "Ako ne želite najnovije nadopune deskleta, isključite ovu mogućnost."
+
+#: settings-schema.json:126
+msgid "Update these desklets:"
+msgstr "Nadopuni ove desklete:"
+
+#: settings-schema.json:127
+msgid "If you do not want a desklet to be checked, set it to FALSE."
+msgstr "Ako ne želite provjeru nadopune deskleta, postavite na FALSE."
+
+#: settings-schema.json:131
+msgid "Your Desklets"
+msgstr "Vaš desklet"
+
+#: settings-schema.json:144
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr "Otvori Cinnamon postavke za upravljanje svim deskletima"
+
+#: settings-schema.json:152
+msgid "Let regularly check if your extensions are up to date"
+msgstr "Redovito provjeravaj nadopune proširenja"
+
+#: settings-schema.json:153
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr "Ako ne želite najnovije nadopune proširenja, isključite ovu mogućnost."
+
+#: settings-schema.json:157
+msgid "Update these extensions:"
+msgstr "Nadopuni ova proširenja:"
+
+#: settings-schema.json:158
+msgid "If you do not want an extension to be checked, set it to FALSE."
+msgstr "Ako ne želite provjeru nadopune proširenja, postavite na FALSE."
+
+#: settings-schema.json:162
+msgid "Your Extensions"
+msgstr "Vaše proširenje"
+
+#: settings-schema.json:175
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Otvori Cinnamon postavke za upravljanje svim proširenjima"
+
+#: settings-schema.json:183
+msgid "Let regularly check if your themes are up to date"
+msgstr "Redovito provjeravaj nadopune tema"
+
+#: settings-schema.json:184
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr "Ako ne želite najnovije nadopune tema, isključite ovu mogućnost."
+
+#: settings-schema.json:188
+msgid "Update these themes:"
+msgstr "Nadopuni ove teme:"
+
+#: settings-schema.json:189
+msgid "If you do not want a theme to be checked, set it to FALSE."
+msgstr "Ako ne želite provjeru nadopune tema, postavite na FALSE."
+
+#: settings-schema.json:193
+msgid "Your Themes"
+msgstr "Vaša tema"
+
+#: settings-schema.json:206
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Otvori Cinnamon postavke za upravljanje svim temama"
+
+#: settings-schema.json:216
+msgid "hours"
+msgstr "sata"
+
+#: settings-schema.json:217
+msgid "Time interval between two checks"
+msgstr "Vremensko razdoblje između nadopuna"
+
+#: settings-schema.json:218
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Zapamtite da će prva provjera biti izvršena jednu minutu nakon pokretanja "
+"ovog apleta."
+
+#: settings-schema.json:224
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr "Obavijesti me promjenom boje ikone kada je dostupna nadopuna dodatka"
+
+#: settings-schema.json:225
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"Odabirom ove mogućnosti, dopuštate ovom apletu promjenu njegove ikone kako "
+"bi vas upozorio na dostupnost nadopune dodatka."
+
+#: settings-schema.json:232
+msgid "The icon color when Spices need an update"
+msgstr "Boja ikone kada je dostupna nadopuna dodatka"
+
+#: settings-schema.json:233
+msgid "Click the button to select another color."
+msgstr "Kliknite na tipku za odabir druge boje."
+
+#: settings-schema.json:239
+msgid "Show notification messages about Spices updates"
+msgstr "Prikaži poruku obavijesti kada je dostupna nadopuna dodatka"
+
+#: settings-schema.json:240
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Odabirom ove mogućnosti, dopuštate ovom apletu prikaz poruke obavijesti kada "
+"je dostupna nadopuna dodatka."
+
+#: settings-schema.json:247
+msgid "Show notification messages even if they are unchanged"
+msgstr "Prikaži poruke obavijesti čak iako su nepromijenjene"
+
+#: settings-schema.json:248
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Odabirom ove mogućnosti, sve poruke obavijesti će biti prikazane, čak iako "
+"su identične prijašnjim porukama."
+
+#: settings-schema.json:254
+msgid "Classic - Icon and Text"
+msgstr "Klasičan - Ikona i tekst"
+
+#: settings-schema.json:255
+msgid "Compact - Icon Only"
+msgstr "Zbijen - Samo ikona"
+
+#: settings-schema.json:257
+msgid "Type of Display"
+msgstr "Način prikaza"
+
+#: settings-schema.json:258
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Ova značajka nudi klasičan (zadan) prikaz s ikonom i tekstom, i kompaktan "
+"prikaz (Samo ikona)."
+
+#: applet.js:89
+msgid "Applet"
+msgstr "Aplet"
+
+#: applet.js:90
+msgid "Desklet"
+msgstr "Desklet"
+
+#: applet.js:91
+msgid "Extension"
+msgstr "Proširenje"
+
+#: applet.js:92
+msgid "Theme"
+msgstr "Tema"
+
+#: applet.js:97
+msgid "One desklet needs update:"
+msgstr "Jedan desklet ima dostupnu nadopunu:"
+
+#: applet.js:98
+msgid "One applet needs update:"
+msgstr "Jedan aplet ima dostupnu nadopunu:"
+
+#: applet.js:99
+msgid "One extension needs update:"
+msgstr "Jedno proširenje ima dostupnu nadopunu:"
+
+#: applet.js:100
+msgid "One theme needs update:"
+msgstr "Jedna tema ima dostupnu nadopunu:"
+
+#: applet.js:101
+msgid "Some desklets need update:"
+msgstr "Nekoliko deskleta ima dostupnu nadopunu:"
+
+#: applet.js:102
+msgid "Some applets need update:"
+msgstr "Nekoliko apleta ima dostupnu nadopunu:"
+
+#: applet.js:103
+msgid "Some extensions need update:"
+msgstr "Nekoliko proširenja ima dostupnu nadopunu:"
+
+#: applet.js:104
+msgid "Some themes need update:"
+msgstr "Nekoliko tema ima dostupnu nadopunu:"
+
+#: applet.js:105
+msgid "Reloaded applet:"
+msgstr "Ponovno pokrenuti apleti:"
+
+#: applet.js:106
+msgid "Reloaded desklet:"
+msgstr "Ponovno pokrenuti deskleti:"
+
+#: applet.js:107
+msgid "Reloaded extension:"
+msgstr "Ponovno pokrenuta proširenja:"
+
+#: applet.js:696
+msgid "is fully functional."
+msgstr "je u potpunosti funkcionalan."
+
+#: applet.js:697
+msgid "All dependencies are installed"
+msgstr "Sve zavisnosti su instalirane"
+
+#: applet.js:717
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Izgleda da nedostaju određeni programi potrebni za sve značajke ovog apleta."
+
+#: applet.js:717
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Pokrenite, u upravo otvorenom terminalu naredbu:"
+
+#: applet.js:718
+msgid "Some dependencies are not installed!"
+msgstr "Određene zavisnosti nisu instalirane!"
+
+#: applet.js:992
+msgid "Refresh"
+msgstr "Osvježi"

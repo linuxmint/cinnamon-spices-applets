@@ -1,6 +1,7 @@
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
+const UUID = "rancher@centurix";
 let Util, HomesteadYamlReader, TerminalReader;
 if (typeof require !== 'undefined') {
 	Util = require('./util');
@@ -48,7 +49,7 @@ Homestead.prototype = {
 		try {
 			// If this folder doesn't exist, default to the _project_folder
 			if (!GLib.file_test(Util.resolveHome(folder) + "/Homestead.yaml", GLib.FileTest.EXISTS)) {
-				folder = this._project_folder;
+				let folder = this._project_folder;
 			}
 			this._config_folder = folder;
 		} catch(e) {
@@ -100,7 +101,7 @@ Homestead.prototype = {
 
 	checkStatus: function(callback) {
 		try {
-			reader = new TerminalReader.TerminalReader(Util.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
+			let reader = new TerminalReader.TerminalReader(Util.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
 				reader.destroy();
 				if (new RegExp('Please change your Vagrant version').test(stdout)) {
 					if (typeof callback == 'function') {
@@ -213,7 +214,7 @@ Homestead.prototype = {
 
 	parseConfig: function() {
 		try {
-			yaml = new HomesteadYamlReader.HomesteadYamlReader(Util.resolveHome(this._config_folder) + "/Homestead.yaml");
+			let yaml = new HomesteadYamlReader.HomesteadYamlReader(Util.resolveHome(this._config_folder) + "/Homestead.yaml");
 
 			return {
 				ip: yaml.ip,

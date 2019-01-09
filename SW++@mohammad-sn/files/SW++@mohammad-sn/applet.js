@@ -132,7 +132,7 @@ MyApplet.prototype = {
         this.signals = new SignalManager.SignalManager(this);
         this.actor.connect('enter-event', Lang.bind(this, this._onEntered));
         this.actor.connect('leave-event', Lang.bind(this, this._onLEntered));
-        this.signals.connect(global.stage, 'notify::key-focus', this._onLEntered);
+        this.signals.connect(global.stage, 'notify::key-focus', Lang.bind(this, this._onLEntered));
         this.scroll_connector = this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
         this._applet_context_menu.connect('open-state-changed', Lang.bind(this, this._onToggled));
 

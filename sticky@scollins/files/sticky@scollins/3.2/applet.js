@@ -193,7 +193,7 @@ NoteBase.prototype = {
             if ( this.defaultTheme == "random" ) {
                 let options = settings.getOptions("theme")
                 let keys = Object.keys(options);
-                key = keys[Math.floor(Math.random()*(keys.length-1))];
+                let key = keys[Math.floor(Math.random()*(keys.length-1))];
                 this.theme = options[key];
             }
             else this.theme = this.defaultTheme;
@@ -633,6 +633,8 @@ Note.prototype = {
     },
 
     onButtonRelease: function(actor, event) {
+        noteBox.setChildOnTop(this);
+
         if ( event.get_button() == 3 ) return true;
 
         if ( this.pointerGrabbed ) {
@@ -898,6 +900,8 @@ CheckList.prototype = {
     },
 
     onButtonRelease: function(actor, event) {
+        noteBox.setChildOnTop(this);
+
         if ( event.get_button() == 3 ) return true;
 
         // clean up from onButtonPress
@@ -1261,7 +1265,7 @@ NoteBox.prototype = {
         this.stageEventIds = [];
         this.mouseTrackTimoutId = -1;
 
-        this.actor = new Clutter.Group();
+        this.actor = new Clutter.Actor();
         Main.uiGroup.add_actor(this.actor);
         this.actor._delegate = this;
 
@@ -1361,6 +1365,14 @@ NoteBox.prototype = {
     removeAll: function() {
         for ( let note of this.notes ) note.destroy();
         this.notes = [];
+    },
+
+    setChildOnTop: function(child) {
+        this.actor.set_child_above_sibling(child.actor, null);
+        let i = this.notes.indexOf(child);
+        this.notes.splice(i, 1);
+        this.notes.push(child);
+        this.update();
     },
 
     update: function(item, refresh) {
@@ -1797,7 +1809,7 @@ MyApplet.prototype = {
     },
 
     backupNotes: function() {
-        params = { directory: "~/", name: "notes-" + new Date().toJSON() + " .json" };
+        let params = { directory: "~/", name: "notes-" + new Date().toJSON() + " .json" };
         FileDialog.save(Lang.bind(this, function(path) {
             let file = Gio.file_new_for_path(path.slice(0,-1));
             if ( !file.query_exists(null) ) file.create(Gio.FileCreateFlags.NONE, null);
@@ -1806,7 +1818,7 @@ MyApplet.prototype = {
     },
 
     loadBackup: function() {
-        params = { directory: "~/" };
+        let params = { directory: "~/" };
         new ModalDialog.ConfirmDialog(_("This will permanently remove all existing notes. Are you sure you want to continue?"), Lang.bind(this, function() {
             FileDialog.open(Lang.bind(this, function(path) {
                 let file = Gio.file_new_for_path(path.slice(0,-1));

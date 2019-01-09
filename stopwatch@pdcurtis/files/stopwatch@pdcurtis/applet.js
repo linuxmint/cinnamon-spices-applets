@@ -1,12 +1,12 @@
 /* This applet provides a Simple Stopwatch.
 It is not only useful in its own right
 but is also provides a 'tutorial' framework for other more
-complex applets - for example it provides a settings screen 
-and a 'standard' right click (context) menu which opens 
+complex applets - for example it provides a settings screen
+and a 'standard' right click (context) menu which opens
 the settings panel and a Housekeeping submenu accessing
 help and a version/update files and also the gnome system monitor program
-in case you want to find out how much machine power this applet is 
-using at various update rates. It also an example of how to implement 
+in case you want to find out how much machine power this applet is
+using at various update rates. It also an example of how to implement
 l10n localisation/translation support.
 Items with a ++ in the comment are not specific to this applet and useful for re-use
 */
@@ -21,7 +21,7 @@ const Mainloop = imports.mainloop; // Needed for timer update loop
 
 /*
 // Old l10n/translation support thanks to @NikoKrause to be removed next update
-const Gettext = imports.gettext 
+const Gettext = imports.gettext
 const UUID = "stopwatch@pdcurtis"
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
@@ -113,9 +113,18 @@ MyApplet.prototype = {
             // Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.0" ) <= 0 ){
                this.textEd = "gedit";
-            } else { 
-               this.textEd = "xed";
+            } else {
+                this.textEd = "xdg-open";
             }
+
+            // Check stylesheet file over-ride location and use
+            this.ccsfilePersistent = GLib.get_home_dir() + "/" + UUID + "/stylesheet.css"; // path to stylesheet file placed in user's home folder.
+            if (GLib.file_test(this.ccsfilePersistent, GLib.FileTest.EXISTS)) {
+//                  Main.warningNotify(_("Stopwatch Applet - Stylesheet persistence active"));
+                  //Over-ride code - currently a copy which needs an extra cinnamon restarts after any change
+                  GLib.spawn_command_line_async("cp  " + this.ccsfilePersistent + " " + metadata.path + "/stylesheet.css");
+            }
+
 
             // ++ Build Context (Right Click) Menu
             this.buildContextMenu();
@@ -188,7 +197,7 @@ MyApplet.prototype = {
                 this.updateLoop();
             }
         }));
-        this._applet_context_menu.addMenuItem(menuitem); 
+        this._applet_context_menu.addMenuItem(menuitem);
 
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -247,7 +256,7 @@ MyApplet.prototype = {
             } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
                 return -1;
             }
-        } 
+        }
        return 0;
     },
 
@@ -300,7 +309,7 @@ MyApplet.prototype = {
         return string;
     },
 
-    // Handler for when the applet is clicked - cycles through states  
+    // Handler for when the applet is clicked - cycles through states
     on_applet_clicked: function (event) {
         this.updateUI(); // Update as could be delayed from updateLoop
         if (this.counterStatus == "ready") {
@@ -316,7 +325,7 @@ MyApplet.prototype = {
                 this.updateUI();
                 this.counterStatus = "running";
                 this.startTime = this.getCurrentTime() - this.pausedAt; // Fudge start time
-            } else {    
+            } else {
                 this.counterStatus = "ready"
             }
         }
@@ -329,7 +338,7 @@ MyApplet.prototype = {
             this.currentCount = this.getCurrentTime() - this.startTime;
             this.set_applet_label(this.formatTime(this.currentCount));
             this.set_applet_tooltip(this.counterTitle + ": " + _("Running for") + " " + this.verboseCount + " - " + _("Click to Pause"));
-              if (this.days > 0) {              
+              if (this.days > 0) {
                    this.actor.style_class = 'stopwatch-running-day-exceeded';
               } else {
                    this.actor.style_class = 'stopwatch-running';
@@ -342,7 +351,7 @@ MyApplet.prototype = {
             } else {
                 this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Reset"));
             }
-              if (this.days > 0) {              
+              if (this.days > 0) {
                    this.actor.style_class = 'stopwatch-paused-day-exceeded';
               } else {
                    this.actor.style_class = 'stopwatch-paused';
@@ -380,16 +389,15 @@ function main(metadata, orientation, panelHeight, instance_id) {
     return myApplet;
 }
 /*
-Version 2.1.0
 0.9.0 Release Candidate 30-07-2013
 0.9.1 Help file facility added and link to gnome-system-monitor
 0.9.2 Change Hold to Pause in Tooltip
 0.9.3 Beautified at http://jsbeautifier.org/ and a few more comments 14-08-2013
 0.9.4 Major improvement - only run updateLoop() when counter running to save processor
-      This is important if you have multiple instances as each would consume processor 
+      This is important if you have multiple instances as each would consume processor
       even when not running.
-0.9.5 Added a Checkbox to Settings giving option to continue counting from paused. 
-      Normal sequence on clicking is 'start -> pause -> reset' 
+0.9.5 Added a Checkbox to Settings giving option to continue counting from paused.
+      Normal sequence on clicking is 'start -> pause -> reset'
       In optional mode this changes to 'start -> pause -> continue -> pause etc'.
       In this mode one has to use th Right Click (Context) Menu to reset. 15-08-2013
 0.9.6 Refinement of Tooltip text. 15-08-2013
@@ -398,20 +406,20 @@ Version 2.1.0
 0.9.7 Major change to single counterStatus from a series of flags
 0.9.8 counterStatus, currentCount and startTime are now stored as Settings variables
       so the counter is not reset by a cinnamon reset.
-0.9.9 New variable pauseAt added and replaces currentCount in Settings to reduce the load on Settings 
+0.9.9 New variable pauseAt added and replaces currentCount in Settings to reduce the load on Settings
       as it is updated only at time of counter being paused.
       Changed to call a null function when a generic setting changed rather than a UI update. 25-08-2013
 1.0.0 Initial version on Cinnamon Spices web site 01-09-2013
 1.1.0 Quick fix to background colours to use transparency so they work with light and dark themes 02-09-2013
-1.1.1 Added radiused border to background colours and made them configurable via a stylesheet 
+1.1.1 Added radiused border to background colours and made them configurable via a stylesheet
       (stylesheet.css in the applet folder). Extra menu item added to open stylesheet.css 04-09-2013
 1.1.2 Took opportunity to change from red background when days greater than 1 to a red border
-      so one still knows if it is paused or counting 
+      so one still knows if it is paused or counting
 1.2.0 Inhibit counter updates after counter removed from panel
 1.2.1 Modifications for Cinnamon 2 by adding cinnamonVersion to settings
       to allow Cinnamon Version to be specified and thus inhibit extra settings menu entry
 1.2.2 Change 'Settings' to 'Configure..' and place after housekeping for consistency
-1.2.3 Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window 
+1.2.3 Pick up Cinnamon Version from environment variable CINNAMON_VERSION rather than settings window
 2.0.0 Use Cinnamon version to choose text editor to start to look at changelog etc
 2.0.2 01-02-2017 Change helpfile to use README.md instead of help.txt in applet folder
       Remove icon.png and help.txt from applet folder
@@ -426,6 +434,11 @@ Version 2.1.0
 ## 2.1.0
  * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
  * CHANGELOG.md is a simplified version of the existing changelog.txt
- * Applet updated so CHANGELOG.md is displayed from context 
- * README.md in UUID is now symbolic link from UUID 
+ * Applet updated so CHANGELOG.md is displayed from context
+ * README.md in UUID is now symbolic link from UUID
+## 2.1.1
+ * Use xdg-open in place of gedit or xed to allow use on more distros
+## 2.1.2
+ * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
+ * Add an initial mechanism to provide persistence for user edits of the stylesheet.
 */

@@ -1,3 +1,4 @@
+const GObject = imports.gi.GObject;
 const Gettext = imports.gettext;
 const Mainloop = imports.mainloop;
 
@@ -184,3 +185,7 @@ const getFocusState = function (metaWindow) {
   });
   return transientHasFocus;
 };
+
+const isFinalized = function(obj) {
+  return obj && GObject.Object.prototype.toString.call(obj).indexOf('FINALIZED') > -1;
+}

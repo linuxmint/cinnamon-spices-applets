@@ -66,7 +66,7 @@ function clone(object, refs = [], cache = null) {
 }
 
 function storeError(method, key, message) {
-  return new Error('[store -> ' + method + ' -> ' + key + '] ' + message);
+  global.log(new Error('[store -> ' + method + ' -> ' + key + '] ' + message));
 }
 
 function getByPath(key, state) {
@@ -205,13 +205,15 @@ function init(state = {}, listeners = [], connections = 0) {
   function trigger() {
     const [key, ...args] = Array.from(arguments);
     let matchedListeners = filter(listeners, function(listener) {
-      return listener.keys.indexOf(key) > -1;
+      return listener.keys.indexOf(key) > -1 && listener.callback;
     });
     if (matchedListeners.length === 0) {
-      throw storeError('trigger', key, 'Action not found.');
+      storeError('trigger', key, 'Action not found.');
     }
-    for (let i = 0; i < matchedListeners.length; i++) {
-      if (matchedListeners[i].callback) {
+    for (let i = 0, len = matchedListeners.length; i < len; i++) {
+      if (len > 1) {
+        matchedListeners[i].callback(...args);
+      } else {
         return matchedListeners[i].callback(...args);
       }
     }
@@ -263,7 +265,7 @@ function init(state = {}, listeners = [], connections = 0) {
     });
     let listenerIndex = listeners.indexOf(listener);
     if (listenerIndex === -1) {
-      throw storeError('disconnect', key, 'Invalid disconnect key.');
+      storeError('disconnect', key, 'Invalid disconnect key.');
     }
     listeners[listenerIndex] = undefined;
     listeners.splice(listenerIndex, 1);
@@ -283,16 +285,13 @@ function init(state = {}, listeners = [], connections = 0) {
         disconnectByKey(key[i]);
       }
     } else if (typeof key === 'number') {
-      let indexes = [];
-      for (let i = 0; i < listeners.length; i++) {
+      let len = listeners.slice().length;
+      for (let i = 0; i < len; i++) {
         if (!listeners[i] || listeners[i].id !== key) {
           continue;
         }
-        indexes.push(i);
-      }
-      for (let i = 0; i < indexes.length; i++) {
-        listeners[indexes[i]] = undefined;
-        listeners.splice(indexes[i], 1);
+        listeners[i] = undefined;
+        listeners.splice(i, 1);
       }
     }
   }

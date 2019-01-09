@@ -39,7 +39,7 @@ class AppList {
       }
     });
 
-    this.signals = new SignalManager.SignalManager({});
+    this.signals = new SignalManager.SignalManager(null);
     this.metaWorkspace = params.metaWorkspace;
 
     const managerOrientation = this.state.isHorizontal ? 'HORIZONTAL' : 'VERTICAL';
