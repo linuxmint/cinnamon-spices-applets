@@ -341,6 +341,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     // Count of Spices to update
     this.nb_to_update = 0;
+    this.nb_in_menu = {
+      "applets": 0,
+      "desklets": 0,
+      "extensions": 0,
+      "themes": 0
+    }
 
     // Badge
     this.badge = new St.BoxLayout({
@@ -1037,8 +1043,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.spicesMenuItems = {};
     let ts;
     for (let t of TYPES) {
-      ts = t.toString();
-      this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(_(capitalize(ts)));
+      ts = _(capitalize(t.toString()));
+      if (this.nb_in_menu[t] > 0) ts += " (%s)".format(this.nb_in_menu[t].toString());
+      this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
         Util.spawnCommandLine("cinnamon-settings " + t.toString());
       });
@@ -1073,6 +1080,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
+    var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
       monitor.disconnect(Id)
@@ -1097,6 +1105,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     if (this.nb_to_update > 0) {
       //this.set_applet_tooltip(_("Spices Update") + " (%s)".format(this.nb_to_update.toString()));
+      let _tooltip = _("Spices Update");
+      for (let type of TYPES) {
+        if (this.old_message[type] != "") _tooltip += "\n%s".format(this.old_message[type].replace(/, /gi, "\n\t"));
+      }
+      this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = this.nb_to_update.toString();
       this.badge.show();
     } else {
@@ -1144,8 +1157,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
               this.download_cache(t);
               must_be_updated = this.get_must_be_updated(t);
               //log(capitalize(t) + " that must be updated = " + must_be_updated);
+              this.nb_in_menu[t] = must_be_updated.length;
               if (must_be_updated.length > 0) {
-                this.nb_to_update += must_be_updated.length;
+                this.nb_to_update += this.nb_in_menu[t];
                 this.menuDots[t] = true;
                 var filePath, tempdir;
                 this.menuDots[t] = true;
