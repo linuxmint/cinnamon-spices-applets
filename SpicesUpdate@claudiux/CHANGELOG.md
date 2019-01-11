@@ -1,3 +1,8 @@
+### v1.0.4~20190110
+  * New icons. Back to the original color: #eb9122.
+  * The tooltip now contains the list of Spices to update.
+  * Fixes undeclared variable error.
+
 ### v1.0.3~20190107
   * New icons.
   * Detects the default symbolic-icon color from the current theme.

@@ -57,6 +57,8 @@ In the menu of this applet:
 
 The color of the icon changes when at least one of your Spices needs an update.
 
+Its tooltip (the message displayed when the icon is hovered) contains the list of spices to update, if any.
+
 ## Translations
 
 Any translation is welcome. Thank you for contributing to translate the applet's messages into new languages, or to improve or supplement existing translations.

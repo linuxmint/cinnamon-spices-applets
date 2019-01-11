@@ -247,7 +247,7 @@
   "events_color" : {
     "type": "colorchooser",
     "indent": true,
-    "default" : "#C17D11",
+    "default" : "#eb9122",
     "dependency": "general_warning",
     "description" : "The icon color when Spices need an update",
     "tooltip" : "Click the button to select another color."
