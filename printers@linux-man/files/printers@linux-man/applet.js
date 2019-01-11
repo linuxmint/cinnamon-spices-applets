@@ -38,7 +38,7 @@ MyApplet.prototype = {
     this.set_applet_tooltip(_('Printers'));
 
     this.menu = new Applet.AppletPopupMenu(this, orientation);
-    this.menu.connect('open-state-changed', Lang.bind(this, this.onMenuToggled));
+    this.menu.connect('open-state-changed', Lang.bind(this, this.onMenuOpened));
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menuManager.addMenu(this.menu);
@@ -56,6 +56,7 @@ MyApplet.prototype = {
     this.printError = false;
     this.printWarning = false;
     this.updating = false;
+    this.showLater = false;
     this.printers = [];
     this.setIcon('printer-printing');
     this.onSettingsChanged();
@@ -75,7 +76,12 @@ MyApplet.prototype = {
   },
 
   on_applet_clicked: function() {
+    if(!this.menu.isOpen && this.updating) {
+        this.showLater = true;
+        return;
+    }
     this.menu.toggle();
+    if(!this.printWarning && !this.menu.isOpen) this.update();
   },
 
   on_applet_removed_from_panel: function() {
@@ -99,8 +105,14 @@ MyApplet.prototype = {
     else this.set_applet_icon_name(iconName);
   },
 
-  onMenuToggled: function() {
-    if(!this.printWarning) this.update();
+  onMenuOpened: function() {
+    if(this.sendSubMenu != null) {
+      this.sendSubMenu.close();
+      this.sendSubMenu.open();
+    }
+    this.cancelSubMenu.close();
+    this.cancelSubMenu.open();
+    if(this.sendSubMenu != null) this.sendSubMenu.close();
   },
 
   onSettingsChanged: function() {
@@ -165,10 +177,15 @@ MyApplet.prototype = {
             let cancelAll = new PopupMenu.PopupIconMenuItem(_('Cancel all jobs'), 'edit-delete', this.iconType);
             cancelAll.connect('activate', Lang.bind(this, this.onCancelAllJobsClicked));
             this.menu.addMenuItem(cancelAll);
+
+            let _cancelSubMenu = new PopupMenu.PopupSubMenuMenuItem(null);
+            _cancelSubMenu.actor.set_style_class_name('');
+            this.cancelSubMenu = _cancelSubMenu.menu;
+            this.menu.addMenuItem(_cancelSubMenu);
           }
 //Cancel Job
           out = out.split(/\n/);
-          this.jobsCount = out.length - 1
+          this.jobsCount = out.length - 1;
           Util.spawn_async(['/usr/bin/lpq', '-a'], Lang.bind(this, function(out2) {
             out2 = out2.replace(/\n/g, ' ').split(/\s+/);
             let sendJobs = [];
@@ -189,7 +206,7 @@ MyApplet.prototype = {
               if(out2[out2.indexOf(job) - 2] == 'active') jobItem.addActor(new St.Icon({ style_class: 'popup-menu-icon',icon_name: 'emblem-default', icon_type: this.iconType }));
               jobItem.job = job;
               jobItem.connect('activate', Lang.bind(jobItem, this.onCancelJobClicked));
-              this.menu.addMenuItem(jobItem);
+              this.cancelSubMenu.addMenuItem(jobItem);
               if(this.send_to_front && out2[out2.indexOf(job) - 2] != 'active' && out2[out2.indexOf(job) - 2] != '1st') {
                 sendJobs.push(new PopupMenu.PopupIconMenuItem(text, 'go-up', this.iconType));
                 sendJobs[sendJobs.length - 1].job = job;
@@ -198,11 +215,17 @@ MyApplet.prototype = {
             }
 //Send to Front
             if(this.send_to_front && sendJobs.length > 0) {
-              let subMenu = new PopupMenu.PopupSubMenuMenuItem(_('Send to front'));
-              for(var n = 0; n < sendJobs.length; n++) subMenu.menu.addMenuItem(sendJobs[n]);
-              this.menu.addMenuItem(subMenu);
+              let _sendSubMenu = new PopupMenu.PopupSubMenuMenuItem(_('Send to front'));
+              this.sendSubMenu =_sendSubMenu.menu;
+              for(var n = 0; n < sendJobs.length; n++) this.sendSubMenu.addMenuItem(sendJobs[n]);
+              this.menu.addMenuItem(_sendSubMenu);
             }
             this.updating = false;
+            if(this.cancelSubMenu != null) this.cancelSubMenu.open();
+            if(this.showLater) {
+              this.showLater = false;
+              this.menu.open();
+            }
 //Update Icon
             if(this.jobsCount > 0 && this.show_jobs) this.set_applet_label(this.jobsCount.toString());
             else this.set_applet_label('');
