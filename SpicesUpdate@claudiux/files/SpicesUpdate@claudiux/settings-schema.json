@@ -75,7 +75,7 @@
     "section_general2": {
       "type": "section",
       "title": "Notifications",
-      "keys": ["general_warning", "events_color", "general_notifications", "general_force_notifications"]
+      "keys": ["general_warning", "events_color", "general_notifications", "general_notif_for_new", "general_force_notifications"]
     },
     "section_general3": {
       "type": "section",
@@ -258,6 +258,13 @@
     "default": true,
     "description": "Show notification messages about Spices updates",
     "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
+  },
+  "general_notif_for_new": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "description": "Warn me in the same way when new Spices are available",
+    "tooltip": "By checking this box, you allow this applet to display messages about new available Spices in notifications viewer."
   },
   "general_force_notifications": {
     "type": "checkbox",

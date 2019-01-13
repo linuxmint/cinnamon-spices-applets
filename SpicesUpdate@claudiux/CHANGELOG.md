@@ -1,3 +1,7 @@
+### v1.1.0~20190113
+  * New feature (requested by @sphh in #2202): This applet can also warn the user when new Spices are available. (New option in general settings.)
+  * Minor bug fixes.
+
 ### v1.0.4~20190110
   * New icons. Back to the original color: #eb9122.
   * The tooltip now contains the list of Spices to update.
