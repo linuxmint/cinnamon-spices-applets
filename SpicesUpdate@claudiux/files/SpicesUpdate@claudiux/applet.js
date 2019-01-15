@@ -960,6 +960,66 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return lastEdited
   }; // End of _get_last_edited_from_metadata
 
+  _on_forget_new_spices_pressed() {
+    for (let type of TYPES) {
+      for (let uuid of this.new_Spices[type]) this.download_image(type, uuid);
+    }
+  }; // End of _on_forget_new_spices_pressed
+
+  download_image(type, uuid) {
+    let memberName, url, target;
+    let is_theme = (type === "themes");
+    if (is_theme) {
+      memberName = "screenshot"
+    } else {
+      memberName = "icon"
+    }
+    url = URL_SPICES_HOME + this._get_member_from_cache(type, uuid, memberName);
+    if (is_theme) {
+      url = url.replace("/files/themes/", "/uploads/themes/thumbs/")
+    }
+    target = CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
+
+    // Variables for the progress bar
+    var total_size = 0;
+    var bytes_so_far = 0;
+
+    let file = Gio.file_new_for_path(target);
+    let fstream = file.replace(null, false, Gio.FileCreateFlags.NONE, null);
+
+    // Create an http message
+    var request = Soup.Message.new('GET', url);
+    // got_headers event
+    request.connect('got_headers', Lang.bind(this, function(message){
+      total_size = message.response_headers.get_content_length()
+    }));
+
+    // got_chunk event
+    var fraction = 0.0, percent = 0;
+    request.connect('got_chunk', Lang.bind(this, function(message, chunk){
+      bytes_so_far += chunk.length;
+      if (total_size) {
+        fraction = bytes_so_far / total_size;
+        percent = Math.floor(fraction * 100);
+        //log("Download icon "+percent+"% done ("+bytes_so_far+" / "+total_size+" bytes)");
+
+        // write each chunk to file
+        //fstream.write(chunk.get_data(), null, chunk.length); // OBSOLETE
+        fstream.write(chunk.get_data(), null);
+      }
+    }));
+
+    // Queue of the http request
+    _httpSession.queue_message(request, Lang.bind(this, function(_httpSession, message) {
+      // Download is done
+      //log("Download of png file is done");
+
+      // close the file
+      fstream.close(null);
+    }));
+  }; // End of download_image
+
+
   is_to_check(type) {
     return (this.types_to_check.indexOf(type) > -1);
   }; // End of is_to_check
@@ -1152,8 +1212,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     let ts;
     for (let t of TYPES) {
       ts = _(capitalize(t.toString()));
-      if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += " (\u21BB %s)".format((this.nb_in_menu[t] - this.new_Spices[t].length).toString());
-      if (this.new_Spices[t].length > 0) ts += " (\u23FF %s)".format((this.new_Spices[t].length).toString());
+      if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   \u21BB %s".format((this.nb_in_menu[t] - this.new_Spices[t].length).toString());
+      if (this.new_Spices[t].length > 0) ts += "   \u23FF %s".format((this.new_Spices[t].length).toString());
       this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
         Util.spawnCommandLine("cinnamon-settings " + t.toString());
@@ -1161,7 +1221,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
-
+    if (this.nb_to_watch > 0) {
+      let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u23FF-", "emblem-ok", St.IconType.SYMBOLIC);
+      _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
+      this.menu.addMenuItem(_forget_button);
+    }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
     // button Configure...
