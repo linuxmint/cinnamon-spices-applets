@@ -36,10 +36,9 @@ The first, _General_, allows you to:
 
   * Select the _Time interval between two checks_ (in hours). Please note that the first check will take place one minute after starting this applet.
   * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone.
-  * Choose whether or not you want to be notified of the availability of new spices.
   * Select the _Type of display_ of the icon: with or without text?
 
-For the content of the other tabs (_Applets_, _Desklets_, etc), please look  at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
+For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
 
 Set to _FALSE_ all the Spices you _do not want_ to check updates. There are two reasons to do this:
 

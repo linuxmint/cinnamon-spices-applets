@@ -30,7 +30,7 @@
     "section_applets1": {
       "type": "section",
       "title": "Checking",
-      "keys": ["check_applets"]
+      "keys": ["check_applets", "check_new_applets"]
     },
     "section_applets2": {
       "type": "section",
@@ -40,7 +40,7 @@
     "section_desklets1": {
       "type": "section",
       "title": "Checking",
-      "keys": ["check_desklets"]
+      "keys": ["check_desklets", "check_new_desklets"]
     },
     "section_desklets2": {
       "type": "section",
@@ -50,7 +50,7 @@
     "section_extensions1": {
       "type": "section",
       "title": "Checking",
-      "keys": ["check_extensions"]
+      "keys": ["check_extensions", "check_new_extensions"]
     },
     "section_extensions2": {
       "type": "section",
@@ -60,7 +60,7 @@
     "section_themes1": {
       "type": "section",
       "title": "Checking",
-      "keys": ["check_themes"]
+      "keys": ["check_themes", "check_new_themes"]
     },
     "section_themes2": {
       "type": "section",
@@ -75,7 +75,7 @@
     "section_general2": {
       "type": "section",
       "title": "Notifications",
-      "keys": ["general_warning", "events_color", "general_notifications", "general_notif_for_new", "general_force_notifications"]
+      "keys": ["general_warning", "events_color", "general_notifications", "general_force_notifications"]
     },
     "section_general3": {
       "type": "section",
@@ -89,6 +89,14 @@
     "default": true,
     "description": "Let regularly check if your applets are up to date",
     "tooltip": "If applets updates do not concern you, uncheck this box."
+  },
+  "check_new_applets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_applets",
+    "description": "Let regularly check if new applets are available",
+    "tooltip": "If new applets do not concern you, uncheck this box."
   },
   "btn_refresh_applets": {
     "type": "button",
@@ -126,6 +134,14 @@
     "description": "Let regularly check if your desklets are up to date",
     "tooltip": "If desklets updates do not concern you, uncheck this box."
   },
+  "check_new_desklets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_desklets",
+    "description": "Let regularly check if new desklets are available",
+    "tooltip": "If new desklets do not concern you, uncheck this box."
+  },
   "btn_refresh_desklets": {
     "type": "button",
     "description": "Refresh",
@@ -162,6 +178,14 @@
     "description": "Let regularly check if your extensions are up to date",
     "tooltip": "If extensions updates do not concern you, uncheck this box."
   },
+  "check_new_extensions": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_extensions",
+    "description": "Let regularly check if new extensions are available",
+    "tooltip": "If new extensions do not concern you, uncheck this box."
+  },
   "btn_refresh_extensions": {
     "type": "button",
     "description": "Refresh",
@@ -197,6 +221,14 @@
     "default": true,
     "description": "Let regularly check if your themes are up to date",
     "tooltip": "If themes updates do not concern you, uncheck this box."
+  },
+  "check_new_themes": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_themes",
+    "description": "Let regularly check if new themes are available",
+    "tooltip": "If new themes do not concern you, uncheck this box."
   },
   "btn_refresh_themes": {
     "type": "button",
@@ -258,13 +290,6 @@
     "default": true,
     "description": "Show notification messages about Spices updates",
     "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
-  },
-  "general_notif_for_new": {
-    "type": "checkbox",
-    "indent": true,
-    "default": false,
-    "description": "Warn me in the same way when new Spices are available",
-    "tooltip": "By checking this box, you allow this applet to display messages about new available Spices in notifications viewer."
   },
   "general_force_notifications": {
     "type": "checkbox",
