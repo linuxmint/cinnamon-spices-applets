@@ -235,8 +235,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "themes": false
     };
 
+
     // ++ Settings
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+    //this.settings._checkSettings();
+    //this.settings._ensureSettingsFiles();
 
     // Applets
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, // Setting type
@@ -244,6 +247,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "check_applets", // The property to manage (this.check_applets)
       this.on_settings_changed, // Callback when value changes
       null); // Optional callback data
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "check_new_applets",
+      "check_new_applets",
+      this.on_settings_changed,
+      null);
 
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
       "unprotected_applets",
@@ -255,6 +264,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
       "check_desklets",
       "check_desklets",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "check_new_desklets",
+      "check_new_desklets",
       this.on_settings_changed,
       null);
 
@@ -272,6 +287,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       null);
 
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "check_new_extensions",
+      "check_new_extensions",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
       "unprotected_extensions",
       "unprotected_extensions",
       this.populateSettingsUnprotectedExtensions,
@@ -281,6 +302,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
       "check_themes",
       "check_themes",
+      this.on_settings_changed,
+      null);
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "check_new_themes",
+      "check_new_themes",
       this.on_settings_changed,
       null);
 
@@ -316,13 +343,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_settings_changed,
       null);
 
-    this.settings.bindProperty(Settings.BindingDirection.IN,
-      "general_notif_for_new",
-      "notif_for_new",
-      this.on_notif_for_new_changed,
-      null);
+    //this.settings.bindProperty(Settings.BindingDirection.IN,
+      //"general_notif_for_new",
+      //"notif_for_new",
+      //this.on_notif_for_new_changed,
+      //null);
 
-      this.settings.bindProperty(Settings.BindingDirection.IN,
+    this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_force_notifications",
       "force_notifications",
       this.on_settings_changed,
@@ -480,6 +507,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     // Types to check
     this.types_to_check = [];
+    this.types_to_check_new = [];
 
     // Applets
     let _dir_applets = Gio.file_new_for_path(DIR_MAP["applets"]);
@@ -488,7 +516,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     if (this.check_applets) {
       this.types_to_check.push('applets');
+      if (this.check_new_applets)
+        this.types_to_check_new.push('applets');
     } else {
+      this.check_new_applets = false;
       this.menuDots['applets'] = false;
     }
 
@@ -499,19 +530,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     if (this.check_desklets) {
       this.types_to_check.push('desklets');
+      if (this.check_new_desklets)
+        this.types_to_check_new.push('desklets');
     } else {
+      this.check_new_desklets = false;
       this.menuDots['desklets'] = false;
-    }
-
-    // Themes
-    let _dir_themes = Gio.file_new_for_path(DIR_MAP["themes"]);
-    if (!_dir_themes.query_exists(null)) {
-      this.check_themes = false;
-    }
-    if (this.check_themes) {
-      this.types_to_check.push('themes');
-    } else {
-      this.menuDots['themes'] = false;
     }
 
     // Extensions
@@ -521,8 +544,25 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     if (this.check_extensions) {
       this.types_to_check.push('extensions');
+      if (this.check_new_extensions)
+        this.types_to_check_new.push('extensions');
     } else {
+      this.check_new_extensions = false;
       this.menuDots['extensions'] = false;
+    }
+
+    // Themes
+    let _dir_themes = Gio.file_new_for_path(DIR_MAP["themes"]);
+    if (!_dir_themes.query_exists(null)) {
+      this.check_themes = false;
+    }
+    if (this.check_themes) {
+      this.types_to_check.push('themes');
+      if (this.check_new_themes)
+        this.types_to_check_new.push('themes');
+    } else {
+      this.check_new_themes = false;
+      this.menuDots['themes'] = false;
     }
 
   }; // End of on_settings_changed
@@ -1024,6 +1064,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return (this.types_to_check.indexOf(type) > -1);
   }; // End of is_to_check
 
+  is_to_check_for_new(type) {
+    return (this.types_to_check_new.indexOf(type) > -1);
+  }; // End of is_to_check_for_new
+
   get_can_be_updated(type) {
     var ret = [];
     var spicesList = [];
@@ -1077,7 +1121,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of get_uuids_from_cache
 
   get_new_spices(type) {
-    if (!this.notif_for_new) return false;
+    //if (!this.notif_for_new) return false;
+    if (!this.is_to_check_for_new(type)) return false;
     var known_spices = [];
     let uuids = this.get_uuids_from_cache(type);
     let png_dir = Gio.file_new_for_path(HOME_DIR + "/.cinnamon/spices.cache/%s".format(this._get_singular_type(type)));
@@ -1356,7 +1401,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 this.menuDots[t] = false;
                 this.old_message[t] = "";
               }
-              if (this.get_new_spices(t)) {
+              if (this.is_to_check_for_new(t) && this.get_new_spices(t)) {
                 this.nb_in_menu[t] += this.new_Spices[t].length;
                 this.nb_to_watch += this.new_Spices[t].length;
                 this.menuDots[t] = true;
