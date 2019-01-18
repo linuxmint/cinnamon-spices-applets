@@ -788,7 +788,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of _get_singular_type
 
   are_dependencies_installed() {
-    return (GLib.find_program_in_path("notify-send"))
+    let _fonts_installed = (
+      Gio.file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
+      Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
+      Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null)
+    )
+    return (_fonts_installed && GLib.find_program_in_path("notify-send"))
   }; // End of are_dependencies_installed
 
   get_terminal() {
@@ -839,7 +844,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
       let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
-      var _apt_install = _isFedora ? "sudo dnf install libnotify" : _isArchlinux ? "sudo pacman -Syu libnotify" : "sudo apt install libnotify-bin";
+      var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify ttf-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
@@ -849,7 +854,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         if (terminal != "")
           GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
       } else {
-        Util.spawnCommandLine("apturl apt://libnotify-bin");
+        Util.spawnCommandLine("apturl apt://libnotify-bin,fonts-symbola");
       }
       this.dependenciesMet = false;
     }
