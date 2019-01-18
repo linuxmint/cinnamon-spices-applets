@@ -6,5 +6,6 @@
     "icon": "applications-graphics",
     "website": "https://github.com/collinss/cinnamon-graphics-center",
     "version": "2.0.2",
-    "contributors": "Stephen Collins - Author"
+    "contributors": "Stephen Collins - Author",
+    "max-instances": -1
 }
