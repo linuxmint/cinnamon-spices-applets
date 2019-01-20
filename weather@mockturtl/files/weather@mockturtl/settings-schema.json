@@ -8,17 +8,33 @@
   , "description": "Set the keybinding to call the menu"
   , "default": "<Super><Shift>w"
   }
-, "woeidLookup":
-  { "type": "button"
-  , "description": "Get WOEID"
-  , "callback": "woeidLookup"
-  , "tooltip": "http://woeid.rosselliot.co.nz/"
-  }
-, "woeid":
+, "dataService":
+  { "type": "radiogroup"
+  , "default": "OpenWeatherMap"
+  , "description": "Data service"
+  , "options":
+    { 
+      "OpenWeatherMap": "OpenWeatherMap"
+    }
+  },
+  "getLocation":
+  {
+    "type": "button",
+    "description": "Get LocationID",
+    "callback": "locationLookup",
+    "tooltip": "Gets the current Location for the API"
+  },
+  "location":
+  { "type": "entry"
+  , "default": "London,uk"
+  , "description": "Location"
+  , "tooltip": "Enter Like this: 'LocationID' or 'City,CountryCode' or Latitude,Longtitude"
+}
+, "apiKey":
   { "type": "entry"
   , "default": ""
-  , "description": "WOEID"
-  , "tooltip": "Where On Earth ID"
+  , "description": "API Key"
+  , "tooltip": "Of your choice of Data service"
   }
 , "temperatureUnit":
   { "type": "radiogroup"
@@ -42,22 +58,21 @@
     { "kph": "kph"
     , "mph": "mph"
     , "m/s": "m/s"
-    , "knots": "knots"
+    , "knots": "Knots"
     }
   }
 , "pressureUnit":
   { "type": "combobox"
-  , "default": "mbar"
+  , "default": "hPa"
   , "description": "Atmospheric pressure unit"
   , "options":
-    { "mbar": "mbar"
+    { "hPa": "hPa"
     , "in Hg": "in Hg"
     , "mm Hg": "mm Hg"
     , "psi": "psi"
     , "at": "at"
     , "atm": "atm"
     , "Pa": "Pa"
-    , "kPa": "kPa"
     }
   }
 , "verticalOrientation":
@@ -79,7 +94,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 7
+  , "max": 5
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"
