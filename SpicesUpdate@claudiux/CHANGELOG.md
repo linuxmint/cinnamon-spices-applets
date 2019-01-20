@@ -1,8 +1,11 @@
+### v1.1.3~20190118
+  * Dependencies: Added presence of `symbola` ttf font.
+
 ### v1.1.2~20190117
-  * New feature (requested by @sphh in Forget new spices #2210): Make support for new Spices Applet, Desklet, Extension and Theme specific.
+  * New feature (requested by @sphh in #2210): Make support for new Spices Applet, Desklet, Extension and Theme specific.
 
 ### v1.1.1~20190115
-  * New feature (requested by @sphh in Forget new spices #2213): When new Spices are available, an option _Forget new Spices_ appears in the menu of this applet. Clicking it will clear these notifications of new spices, until others arrive.
+  * New feature (requested by @sphh in #2213): When new Spices are available, an option _Forget new Spices_ appears in the menu of this applet. Clicking it will clear these notifications of new spices, until others arrive.
   * Available languages: English, French, Spanish, Croatian, German, Italian.
 
 ### v1.1.0~20190113

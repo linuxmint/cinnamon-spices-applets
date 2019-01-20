@@ -18,15 +18,15 @@ Fully supported by the author, under continuing development and in continuous us
 
 ## Requirements
 
-The Spices Update requires the tool ```notify-send```.
+The Spices Update requires the ```notify-send``` tool and the ```symbola``` TrueType font.
 
 To install it:
 
-  * Fedora: ```sudo dnf install libnotify```
-  * Arch: ```sudo pacman -Syu libnotify```
-  * Linux Mint: ```sudo apt install libnotify-bin```
+  * Fedora: ```sudo dnf install libnotify gdouros-symbola-fonts```
+  * Arch: ```sudo pacman -Syu libnotify ttf-symbola```
+  * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
 
-**This applet helps you to install this dependency, if any.**
+**This applet helps you to install this dependencies, if any.**
 
 ## Settings
 
