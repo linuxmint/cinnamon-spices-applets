@@ -7,6 +7,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
+const {getDocManager} = imports.misc.docInfo;
 const Mainloop = imports.mainloop;
 const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
@@ -262,6 +263,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     this.session = new SessionManager();
     this.screenSaverProxy = new ScreenSaverProxy();
+    this.recentManager = getDocManager();
     this.gtkRecentManager = Gtk.RecentManager.get_default();
 
     this.init = true;
@@ -1483,7 +1485,7 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.state.recentEnabled) {
       return [];
     }
-    let {_infosByTimestamp} = Main.recentManager;
+    let {_infosByTimestamp} = this.recentManager;
     let res = []
 
     for (let i = 0, len = _infosByTimestamp.length; i < len; i++) {
