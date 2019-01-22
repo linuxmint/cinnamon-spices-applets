@@ -27,7 +27,6 @@ const GLib = imports.gi.GLib;
 const Cinnamon = imports.gi.Cinnamon;
 
 const _appSystem = Cinnamon.AppSystem.get_default();
-//const _foundApps = _appSystem.initial_search(['chromium']);
 let _foundApps = _appSystem.lookup_desktop_wmclass('chromium');
 
 var _appInfo = null;
