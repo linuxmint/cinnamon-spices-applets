@@ -1,5 +1,9 @@
 Changelog
 
+### 4.1.2
+
+  * Switched recent file management over to Cinnamon's DocInfo manager.
+
 ### 4.1.1
 
   * Fixed the "Add to desktop" context menu option.

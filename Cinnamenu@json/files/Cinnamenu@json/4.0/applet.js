@@ -7,6 +7,7 @@ const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const Meta = imports.gi.Meta;
 const Main = imports.ui.main;
+const {getDocManager} = imports.misc.docInfo;
 const Mainloop = imports.mainloop;
 const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
@@ -21,7 +22,7 @@ const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
 const {spawnCommandLine, latinise, each, find, findIndex, map} = imports.misc.util;
 const {createStore} = imports.misc.state;
-const {tryFn, sortBy, sortDirs, readJSONAsync, writeFileAsync, copyFileAsync, setSchema} = require('./utils');
+const {tryFn, sortBy, sortDirs, setSchema} = require('./utils');
 const fuzzy = require('./fuzzy');
 const {
   _,
@@ -187,7 +188,7 @@ class CinnamenuApplet extends TextIconApplet {
       getAppsGridBoxWidth: () => this.applicationsGridBox.width,
       scrollToButton: (...args) => this.scrollToButton(...args),
       isNotInScrollView: (button) => this.isNotInScrollView(button),
-      purgeRecentItems: () => this.recentManager.purge_items(),
+      purgeRecentItems: () => this.gtkRecentManager.purge_items(),
       getActiveButtons: () => this.getActiveButtons(),
       isFavorite: (id) => this.appFavorites.isFavorite(id),
       addFavorite: (id) => this.appFavorites.addFavorite(id),
@@ -262,7 +263,8 @@ class CinnamenuApplet extends TextIconApplet {
 
     this.session = new SessionManager();
     this.screenSaverProxy = new ScreenSaverProxy();
-    this.recentManager = Gtk.RecentManager.get_default();
+    this.recentManager = getDocManager();
+    this.gtkRecentManager = Gtk.RecentManager.get_default();
 
     this.init = true;
 
@@ -1483,24 +1485,18 @@ class CinnamenuApplet extends TextIconApplet {
     if (!this.state.recentEnabled) {
       return [];
     }
-
-    let recentFiles = this.recentManager.get_items();
+    let {_infosByTimestamp} = this.recentManager;
     let res = []
 
-    for (let i = 0; i < 23; i++) {
-      if (!recentFiles[i]) {
-        continue;
-      }
-      let recentInfo = recentFiles[i];
-      if (recentInfo.exists()) {
-        res.push({
-          name: recentInfo.get_display_name(),
-          icon: recentInfo.get_gicon(),
-          uri: recentInfo.get_uri(),
-          description: recentInfo.get_uri(),
-          type: ApplicationType._recent
-        });
-      }
+    for (let i = 0, len = _infosByTimestamp.length; i < len; i++) {
+      let recentInfo = _infosByTimestamp[i];
+      res.push({
+        name: recentInfo.name,
+        icon: recentInfo.gicon,
+        uri: recentInfo.uri,
+        description: recentInfo.uriDecoded,
+        type: ApplicationType._recent
+      });
     }
 
     if (res.length > 0) {
@@ -2090,7 +2086,7 @@ class CinnamenuApplet extends TextIconApplet {
     this.activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
     this.state.contextMenuIsOpen = null;
 
-    let createAppButton = (app, appType, len, appIndex)=>{
+    const createAppButton = (app, appType, len, appIndex) => {
       let appButton;
       let refAppButton = -1;
       for (let i = 0, _len = this.allItems.length; i < _len; i++) {
@@ -2121,7 +2117,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (!gridLayout) {
           return false;
         }
-        appButton.buttonState.set({column: column});
+        appButton.buttonState.set({column});
         gridLayout.attach(appButton.actor, column, rownum, 1, 1);
         column++;
         if (column > columnsCount) {
