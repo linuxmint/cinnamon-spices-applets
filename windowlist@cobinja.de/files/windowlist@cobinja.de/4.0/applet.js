@@ -1651,9 +1651,6 @@ class CobiWorkspace {
     let app = null;
     if (appId) {
       app = this._appSys.lookup_app(appId);
-      if (!app) {
-        app = this._appSys.lookup_settings_app(appId);
-      }
     }
     return app;
   }

@@ -162,9 +162,6 @@ PinnedFavs.prototype = {
       opts.app = appSystem.lookup_app(opts.appId);
     }
     if (!opts.app) {
-      opts.app = appSystem.lookup_settings_app(opts.appId);
-    }
-    if (!opts.app) {
       opts.app = appSystem.lookup_desktop_wmclass(opts.appId);
     }
     if (!opts.app) {
@@ -692,9 +689,6 @@ MyApplet.prototype = {
       for (let i = 0, len = specialApps.length; i < len; i++) {
         if (specialApps[i].wmClass === wmclass) {
           app_final = this.appSystem.lookup_app(specialApps[i].id);
-          if (!app_final) {
-            app_final = this.appSystem.lookup_settings_app(specialApps[i].id);
-          }
           app_final.wmClass = wmclass;
         }
       }

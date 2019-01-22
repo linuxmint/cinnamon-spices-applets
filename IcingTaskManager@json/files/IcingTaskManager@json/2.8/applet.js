@@ -106,10 +106,6 @@ PinnedFavs.prototype = {
     }
 
     if (!opts.app) {
-      opts.app = this._applet._appSystem.lookup_settings_app(opts.appId);
-    }
-
-    if (!opts.app) {
       return false;
     }
 
@@ -375,9 +371,6 @@ MyApplet.prototype = {
       for (let i = 0, len = specialApps.length; i < len; i++) {
         if (specialApps[i].wmClass == wmclass) {
           app_final = this._appSystem.lookup_app(specialApps[i].id);
-          if (!app_final) {
-            app_final = this._appSystem.lookup_settings_app(specialApps[i].id);
-          }
           app_final.wmClass = wmclass;
         }
       }

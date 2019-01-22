@@ -322,7 +322,6 @@ PinnedFavs.prototype = {
             return false;
 
         let app = Cinnamon.AppSystem.get_default().lookup_app(appId);
-        if (!app) app = Cinnamon.AppSystem.get_default().lookup_settings_app(appId);
 
         if (!app)
             return false;
@@ -1079,7 +1078,6 @@ AppList.prototype = {
             appSys = Cinnamon.AppSystem.get_default();
         for (let i = 0; i < launchers.length; ++i) {
             let app = appSys.lookup_app(launchers[i]);
-            if (!app) app = appSys.lookup_settings_app(launchers[i]);
             if (!app) continue;
             this._windowAdded(this.metaWorkspace, null, app, true);
         }

@@ -3796,8 +3796,6 @@ MyApplet.prototype = {
                 if (!entry.get_app_info().get_nodisplay()) {
                     has_entries = true;
                     var app = appsys.lookup_app_by_tree_entry(entry);
-                    if (!app)
-                        app = appsys.lookup_settings_app_by_tree_entry(entry);
                     var app_key = app.get_id()
                     if (app_key == null) {
                         app_key = app.get_name() + ":" +

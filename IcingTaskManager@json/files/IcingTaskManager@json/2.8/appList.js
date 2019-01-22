@@ -297,9 +297,6 @@ AppList.prototype = {
     for (let i = 0, len = launchers.length; i < len; i++) {
       let app = this._applet._appSystem.lookup_app(launchers[i]);
       if (!app) {
-        app = this._applet._appSystem.lookup_settings_app(launchers[i]);
-      }
-      if (!app) {
         continue;
       }
       this._windowAdded(this.metaWorkspace, null, app, true);
