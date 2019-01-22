@@ -1014,37 +1014,35 @@ class CinnamenuApplet extends TextIconApplet {
       buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
     }
 
-    let trees = [this.appSystem.get_tree()];
-    for (let i = 0, len = trees.length; i < len; i++) {
-      let tree = trees[i];
-      let root = tree.get_root_directory();
-      let dirs = [];
-      let iter = root.iter();
-      let nextType;
-      while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
-        if (nextType === CMenu.TreeItemType.DIRECTORY) {
-          dirs.push(iter.get_directory());
-        }
+    let tree = new CMenu.Tree({ menu_basename: "cinnamon-applications.menu" });
+    tree.load_sync();
+    let root = tree.get_root_directory();
+    let dirs = [];
+    let iter = root.iter();
+    let nextType;
+    while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
+      if (nextType === CMenu.TreeItemType.DIRECTORY) {
+        dirs.push(iter.get_directory());
       }
-      dirs = sortDirs(dirs)
-      for (let z = 0, len = dirs.length; z < len; z++) {
-        let dir = dirs[z];
-        if (dir.get_is_nodisplay()) {
-          continue;
-        }
-        let dirId = dir.get_menu_id();
-        this.applicationsByCategory[dirId] = [];
-        this.loadAppCategories(dir, null, dirId);
-        if (this.applicationsByCategory[dirId].length > 0) {
-          if (isReRender) {
-            let button = find(this.categoryButtons, button => button.id === dirId);
-            if (!button) {
-              continue;
-            }
-            buttons.push(button);
-          } else {
-            buttons.push(new CategoryListButton(this.state, dir, dirId));
+    }
+    dirs = sortDirs(dirs)
+    for (let z = 0, len = dirs.length; z < len; z++) {
+      let dir = dirs[z];
+      if (dir.get_is_nodisplay()) {
+        continue;
+      }
+      let dirId = dir.get_menu_id();
+      this.applicationsByCategory[dirId] = [];
+      this.loadAppCategories(dir, null, dirId);
+      if (this.applicationsByCategory[dirId].length > 0) {
+        if (isReRender) {
+          let button = find(this.categoryButtons, button => button.id === dirId);
+          if (!button) {
+            continue;
           }
+          buttons.push(button);
+        } else {
+          buttons.push(new CategoryListButton(this.state, dir, dirId));
         }
       }
     }
