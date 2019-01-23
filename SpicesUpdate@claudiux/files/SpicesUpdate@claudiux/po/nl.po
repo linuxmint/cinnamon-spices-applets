@@ -27,8 +27,8 @@ msgid ""
 "Warns you when your Spices (applets, desklets, extensions, themes) require "
 "an update."
 msgstr ""
-"Waarschuwt u wanneer uw Spices(applets, desklets, extensies, thema's) een "
-"update vereisen"
+"Waarschuwt u wanneer er voor Spices (applets, desklets, extensies, thema's) "
+"updates zijn"
 
 #: settings-schema.json:7
 msgid "Applets"
@@ -232,8 +232,8 @@ msgstr ""
 #: settings-schema.json:276
 msgid "Notify me by changing the icon when Spices need an update"
 msgstr ""
-"Laat het me weten door het pictogram te wijzigen wanneer Spices een update "
-"nodig hebben"
+"Laat het me weten door het pictogram te wijzigen wanneer er voor Spices updates "
+"zijn"
 
 #: settings-schema.json:277
 msgid ""
@@ -241,12 +241,12 @@ msgid ""
 "when at least one of the Spices requires an update."
 msgstr ""
 "Door dit selectievakje aan te vinken, staat u toe dat deze applet het "
-"pictogram wijzigt om u te waarschuwen wanneer ten minste een van de spices "
-"een update vereist."
+"pictogram wijzigt om te waarschuwen wanneer er voor ten minste een van de spices "
+"een update is."
 
 #: settings-schema.json:284
 msgid "The icon color when Spices need an update"
-msgstr "De pictogramkleur wanneer Spices een update nodig hebben"
+msgstr "De pictogramkleur wanneer ervoor Spices een update is"
 
 #: settings-schema.json:285
 msgid "Click the button to select another color."
@@ -389,8 +389,8 @@ msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
-"Het lijkt erop dat sommige van de programma's die nodig zijn voor deze "
-"applet ontbreken om alle functies te hebben."
+"Het lijkt erop dat sommige van de programma's ontbreken die nodig zijn voor dit applet "
+"en daardoor mogelijk niet alle functies hebben."
 
 #: applet.js:844
 msgid "Please execute, in the just opened terminal, the commands:"
