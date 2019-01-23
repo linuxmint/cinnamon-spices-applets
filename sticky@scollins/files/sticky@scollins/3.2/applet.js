@@ -760,11 +760,11 @@ Note.prototype = {
         let text;
         if ( cursor == selection ) text = this.text.get_text();
         else text = this.text.get_selection();
-        St.Clipboard.get_default().set_text(text);
+        St.Clipboard.get_default().set_text(St.ClipboardType.CLIPBOARD, text);
     },
 
     paste: function() {
-        St.Clipboard.get_default().get_text(Lang.bind(this, function(cb, text) {
+        St.Clipboard.get_default().get_text(St.ClipboardType.CLIPBOARD, Lang.bind(this, function(cb, text) {
             let cursor = this.text.get_cursor_position();
             let selection = this.text.get_selection_bound();
             if ( cursor != selection ) this.text.delete_selection();
