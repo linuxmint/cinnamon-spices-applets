@@ -7,18 +7,43 @@
   { "type": "keybinding"
   , "description": "Set the keybinding to call the menu"
   , "default": "<Super><Shift>w"
+  },
+  "providerSettings":
+  { "type": "header"
+  , "description": "Weather Provider Settings"
   }
-, "woeidLookup":
-  { "type": "button"
-  , "description": "Get WOEID"
-  , "callback": "woeidLookup"
-  , "tooltip": "http://woeid.rosselliot.co.nz/"
-  }
-, "woeid":
+, "dataService":
+  { "type": "radiogroup"
+  , "default": "OpenWeatherMap"
+  , "description": "Data service"
+  , "options":
+    { 
+      "OpenWeatherMap": "OpenWeatherMap"
+    }
+  },
+  "apiKey":
   { "type": "entry"
   , "default": ""
-  , "description": "WOEID"
-  , "tooltip": "Where On Earth ID"
+  , "description": "API Key"
+  , "tooltip": "Copy this from your account on OpenWeatherMap and paste it here."
+  },
+  "location":
+  { "type": "entry"
+  , "default": "London,UK"
+  , "description": "Location"
+  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+},
+  "getLocation":
+  {
+    "type": "button",
+    "indent": true,
+    "description": "Setup API Key and Location",
+    "callback": "locationLookup",
+    "tooltip": "Opens webpage guide"
+  },
+  "personalSettings":
+  { "type": "header"
+  , "description": "Personal Settings"
   }
 , "temperatureUnit":
   { "type": "radiogroup"
@@ -42,22 +67,21 @@
     { "kph": "kph"
     , "mph": "mph"
     , "m/s": "m/s"
-    , "knots": "knots"
+    , "knots": "Knots"
     }
   }
 , "pressureUnit":
   { "type": "combobox"
-  , "default": "mbar"
+  , "default": "hPa"
   , "description": "Atmospheric pressure unit"
   , "options":
-    { "mbar": "mbar"
+    { "hPa": "hPa"
     , "in Hg": "in Hg"
     , "mm Hg": "mm Hg"
     , "psi": "psi"
     , "at": "at"
     , "atm": "atm"
     , "Pa": "Pa"
-    , "kPa": "kPa"
     }
   }
 , "verticalOrientation":
@@ -79,7 +103,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 7
+  , "max": 5
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"

@@ -25,7 +25,6 @@ const Gtk = imports.gi.Gtk
 const Soup = imports.gi.Soup
 // http://developer.gnome.org/st/stable/
 const St = imports.gi.St
-
 /**
  * /usr/share/cinnamon/js/
  */
@@ -34,6 +33,8 @@ const Config = imports.misc.config
 const PopupMenu = imports.ui.popupMenu
 const Settings = imports.ui.settings
 const Util = imports.misc.util
+
+"use strict";
 
 //----------------------------------------------------------------------
 //
@@ -44,8 +45,6 @@ const Util = imports.misc.util
 const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
-const WOEID_URL = "http://woeid.rosselliot.co.nz"
-const CMD_WOEID_LOOKUP = "xdg-open " + WOEID_URL
 
 // Conversion Factors
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629
@@ -57,14 +56,23 @@ const BLANK = '   '
 const ELLIPSIS = '...'
 const EN_DASH = '\u2013'
 
+const DATA_SERVICE = {
+  OPEN_WEATHER_MAP: "OpenWeatherMap"
+}
+
 // Query
-const QUERY_PARAMS = '?format=json&q=select '
-const QUERY_TABLE = 'weather.forecast'
-const QUERY_VIEW = '*'
-const QUERY_URL = 'http://query.yahooapis.com/v1/public/yql' + QUERY_PARAMS + QUERY_VIEW + ' from ' + QUERY_TABLE
+const SERVICE = {
+  "OpenWeatherMap": {
+    QUERY_URL : "http://api.openweathermap.org/data/2.5/weather?",
+    FORECAST_URL: "http://api.openweathermap.org/data/2.5/forecast?"
+  },
+};
 
 
 // Schema keys
+const WEATHER_LOCATION = "location"
+const WEATHER_DATA_SERVICE = "dataService"
+const WEATHER_API_KEY = "apiKey"
 const WEATHER_CITY_KEY = 'locationLabelOverride'
 const WEATHER_REFRESH_INTERVAL = 'refreshInterval'
 const WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel'
@@ -79,14 +87,15 @@ const WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst'
 const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit'
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
-const WEATHER_WOEID_KEY = 'woeid'
 
-const KEYS = [
+const KEYS = [,
+  WEATHER_LOCATION,
+  WEATHER_DATA_SERVICE,
+  WEATHER_API_KEY,
   WEATHER_TEMPERATURE_UNIT_KEY,
   WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
   WEATHER_WIND_SPEED_UNIT_KEY,
   WEATHER_CITY_KEY,
-  WEATHER_WOEID_KEY,
   WEATHER_TRANSLATE_CONDITION_KEY,
   WEATHER_VERTICAL_ORIENTATION_KEY,
   WEATHER_SHOW_TEXT_IN_PANEL_KEY,
@@ -135,20 +144,14 @@ const WeatherWindSpeedUnits = {
   KPH: 'kph',
   MPH: 'mph',
   MPS: 'm/s',
-  KNOTS: 'knots'
-}
-
-const WeatherPressureResponseUnits = {
-  MBAR: 'mb',
-  PSI: 'in'
+  KNOTS: 'Knots'
 }
 
 const WeatherPressureUnits = {
-  MBAR: 'mbar',
+  HPA: 'hPa',
   MMHG: 'mm Hg',
   INHG: 'in Hg',
   PA: 'Pa',
-  KPA: 'kPa',
   PSI: 'psi',
   ATM: 'atm',
   AT: 'at'
@@ -170,6 +173,87 @@ const WEATHER_CONV_MMHG_IN_INHG = 25.4
 const WEATHER_CONV_PSI_IN_INHG = 491.154152e-3
 const WEATHER_CONV_AT_IN_INHG = 34.531554e-3
 const WEATHER_CONV_ATM_IN_INHG = 33.421054e-3
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+///////////                                       ////////////
+///////////       Weather Data Storage            ////////////
+///////////                                       ////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+// 
+//  If you get the values in these objects correctly with correct units
+//  from a new API, Everything will work as intended.
+//
+
+// Store parsed values in unified json,
+// Translation layer is necessary with multiple API choices
+// Init with null, something we can check for
+var weather = {
+  dateTime: null,           // DateTime object
+  location: {
+    city: null,
+    country: null,          // Country code
+    id: null,               // API Specific ID, not used
+  },
+  coord: {
+    lat: 	null,
+    lon: null,
+  },
+  sunrise: null,             // Astronomical Time
+  sunset: null,              // Astronomical Time
+  wind: {
+    speed: null,             // MPS
+    degree: null,            // meteorlogical degrees
+  },
+  main: {
+    temperature: null,       // Kelvin
+    pressure: null,          // hPa
+    humidity: null,          // %
+    temp_min: null,          // Kelvin, not used
+    temp_max: null,          // Kelvin, not used
+  },
+  condition: {
+    id: null,                // ID, not used
+    main: null,              // See condition names
+    description: null,       // condition within condition group
+    icon: null,              // see GTK icon names
+  },
+  cloudiness: null,          // %
+}
+
+var forecasts = [];
+
+// a forecast template
+// Same units as weather, create an object like this then push into forecasts array
+
+/*var aForecast = { 
+  dateTime: null,             //Required
+  main: {
+    temp: null,
+    temp_min: null,           //Required
+    temp_max: null,           //Required
+    pressure: null,
+    sea_level: null,
+    grnd_level: null,
+    humidity: null,
+  },
+  condition: {
+    id: null,
+    main: null,               //Required
+    description: null,        //Required
+    icon: null,               //Required
+  },
+  clouds: null,
+  wind: {
+    speed: null,
+    deg: null,
+  }
+}*/
+
+///////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------
 //
@@ -205,6 +289,7 @@ function logError(error) {
 const GLib = imports.gi.GLib
 const Gettext = imports.gettext
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+const language = GLib.get_language_names()[0].substring(0, 2);
 
 function _(str) {
   return Gettext.dgettext(UUID, str)
@@ -219,6 +304,7 @@ function _(str) {
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
   this.settings = new Settings.AppletSettings(this, UUID, instanceId)
+  // Displaying forecasts from here
   this._init(orientation, panelHeight, instanceId)
 }
 
@@ -228,22 +314,29 @@ MyApplet.prototype = {
 , refreshAndRebuild: function refreshAndRebuild() {
     this.refreshWeather(false)
     this.rebuild()
-  }
+  },
 
-, dumpKeys: function dumpKeys() {
+  dumpKeys: function dumpKeys() {
     for (let k in KEYS) {
       let key = KEYS[k]
       let keyProp = "_" + key
       log(keyProp + "=" + this[keyProp])
     }
-  }
+  },
 
-, woeidLookup: function() {
-    Util.spawnCommandLine(CMD_WOEID_LOOKUP)
-  }
+  locationLookup: function locationLookup() {
+    let command = "xdg-open ";
+    switch(this._dataService) {
+      case DATA_SERVICE.OPEN_WEATHER_MAP:
+        Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
+        break;
+      default:
+        break;
+    }
+  },
 
     // Override Methods: TextIconApplet
-, _init: function _init(orientation, panelHeight, instanceId) {
+  _init: function _init(orientation, panelHeight, instanceId) {
     Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instanceId)
 
       // Interface: TextIconApplet
@@ -411,290 +504,212 @@ MyApplet.prototype = {
     _httpSession.queue_message(message, function soupQueue(session, message) {
       callback.call(context, JSON.parse(message.response_body.data))
     })
-  }
+  },
 
-, parseDay: function(abr) {
-    let yahoo_days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-    for (let i = 0; i < yahoo_days.length; i++) {
-      if (yahoo_days[i].substr(0, abr.length) == abr.toLowerCase()) {
-        return i
-      }
+  displayLabelError: function(errorMsg) {
+    this.set_applet_label(errorMsg);
+    this.set_applet_tooltip("Click to open");
+    this.set_applet_icon_name("");
+  },
+
+  refreshWeather: function refreshWeather(recurse) {  
+    // Adding resilience against bad user input
+    if (this._location == undefined || this._location == "") {
+      this.displayLabelError(_("No location provided"));
+      return false;
     }
-    return 0
-  }
-
-, refreshWeather: function refreshWeather(recurse) {
-    //log("recurse=" + recurse)
-    //this.dumpKeys()
-    this.loadJsonAsync(this.weatherUrl(), function(json) {
-      if (!json.query.results) {
-        // Polling for likely API throttling
-        Mainloop.timeout_add_seconds(5, Lang.bind(this, function() {
-          this.refreshWeather(false)
-        }))
-      }
-
-      let weather = json.query.results.channel
-
-      if (!weather.item) {
-        return false
-      }
-
-      let weather_c = weather.item.condition
-      let forecast = weather.item.forecast
-
-      let location = weather.location.city
-      if (this.nonempty(this._locationLabelOverride))
-        location = this._locationLabelOverride
-
-      this.set_applet_tooltip(_(location))
-
-      // Refresh current weather
-      let comment = weather_c.text
-      if (this._translateCondition)
-        comment = this.weatherCondition(weather_c.code)
-
-      let humidity = weather.atmosphere.humidity + ' %'
-
-      let pressure = weather.atmosphere.pressure
-      //let pressure_unit = weather.units.pressure
-      //log('pressure: ' + pressure + ' ' + pressure_unit)
-
-      let temperature = weather_c.temp
-
-      let wind = weather.wind.speed
-      let wind_chill = weather.wind.chill
-      let wind_direction = this.compassDirection(weather.wind.direction)
-      //let wind_unit = weather.units.speed
-
-      let iconname = this.weatherIconSafely(weather_c.code)
-      this._currentWeatherIcon.icon_name = iconname
-      this._icon_type == St.IconType.SYMBOLIC ?
-        this.set_applet_icon_symbolic_name(iconname) :
-        this.set_applet_icon_name(iconname)
-
-      if (this._showTextInPanel) {
-        if (this._showCommentInPanel) {
-          this.set_applet_label(comment + ' ' + temperature + ' ' + this.unitToUnicode())
-        } else {
-          this.set_applet_label(temperature + ' ' + this.unitToUnicode())
+    switch(this._dataService) {
+      case DATA_SERVICE.OPEN_WEATHER_MAP: 
+        if (this.noApiKey()) {
+          this.displayLabelError(_("No Api Key provided"));
+          return false;
         }
-      } else {
-        this.set_applet_label('')
-      }
-
-      try {
-          this.update_label_visible();
-      } catch(e) {
-          // vertical panel not supported
-      }
-
-
-      this._currentWeatherSummary.text = comment
-      this._currentWeatherTemperature.text = temperature + ' ' + this.unitToUnicode()
-      this._currentWeatherHumidity.text = humidity
-
-      // Override wind units with our preference
-      // Need to consider what units the Yahoo API has returned it in
-      switch (this._windSpeedUnit) {
-        case WeatherWindSpeedUnits.KPH:
-          // Round to whole units
-          if (this._temperatureUnit == WeatherUnits.FAHRENHEIT) {
-            wind = Math.round (wind / WEATHER_CONV_MPH_IN_MPS * WEATHER_CONV_KPH_IN_MPS)
-          }
-          // Otherwise no conversion needed - already in correct units
-          break
-        case WeatherWindSpeedUnits.MPH:
-          // Round to whole units
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            wind = Math.round (wind / WEATHER_CONV_KPH_IN_MPS * WEATHER_CONV_MPH_IN_MPS)
-          }
-          // Otherwise no conversion needed - already in correct units
-          break
-        case WeatherWindSpeedUnits.MPS:
-          // Precision to one decimal place as 1 m/s is quite a large unit
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            wind = Math.round ((wind / WEATHER_CONV_KPH_IN_MPS) * 10)/ 10
-          } else {
-            wind = Math.round ((wind / WEATHER_CONV_MPH_IN_MPS) * 10)/ 10
-          }
-          break
-        case WeatherWindSpeedUnits.KNOTS:
-          // Round to whole units
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            wind = Math.round (wind / WEATHER_CONV_KPH_IN_MPS * WEATHER_CONV_KNOTS_IN_MPS)
-          } else {
-            wind = Math.round (wind / WEATHER_CONV_MPH_IN_MPS * WEATHER_CONV_KNOTS_IN_MPS)
-          }
-          break
-      }
-      this._currentWeatherWind.text = (wind_direction ? wind_direction + ' ' : '') + wind + ' ' + _(this._windSpeedUnit)
-
-      // Override wind chill units with our preference
-      // Yahoo API always returns Fahrenheit
-      if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-        wind_chill = Math.round((wind_chill - 32) / 1.8)
-      }
-      this._currentWeatherWindChill.text = wind_chill + ' ' + this.unitToUnicode()
-
-      // Yahoo API returns values which are off by a factor of inHg to mbar
-      pressure = pressure * WEATHER_CONV_INHG_IN_MBAR
-
-      // Override pressure units with our preference
-      // Need to consider what units the Yahoo API has returned it in
-      switch (this._pressureUnit) {
-        case WeatherPressureUnits.MBAR:
-          if (this._temperatureUnit == WeatherUnits.FAHRENHEIT) {
-            pressure = pressure * WEATHER_CONV_MBAR_IN_INHG
-          }
-          // Otherwise no conversion needed - already in correct units
-          pressure = parseFloat(pressure).toFixed(2)
-          break
-        case WeatherPressureUnits.INHG:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_INHG_IN_MBAR
-          }
-          // Otherwise no conversion needed - already in correct units
-          pressure = parseFloat(pressure).toFixed(2)
-          break
-        case WeatherPressureUnits.PSI:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_PSI_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_PSI_IN_INHG
-          }
-          pressure = parseFloat(pressure).toFixed(3)
-          break
-        case WeatherPressureUnits.MMHG:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_MMHG_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_MMHG_IN_INHG
-          }
-          pressure = Math.round(pressure)
-          break
-        case WeatherPressureUnits.AT:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_AT_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_AT_IN_INHG
-          }
-          pressure = pressure.toFixed(4)
-          break
-        case WeatherPressureUnits.ATM:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_ATM_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_ATM_IN_INHG
-          }
-          pressure = pressure.toFixed(4)
-          break
-        case WeatherPressureUnits.PA:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_PA_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_PA_IN_INHG
-          }
-          pressure = Math.round(pressure)
-          break
-        case WeatherPressureUnits.KPA:
-          if (this._temperatureUnit == WeatherUnits.CELSIUS) {
-            pressure = pressure * WEATHER_CONV_KPA_IN_MBAR
-          } else {
-            pressure = pressure * WEATHER_CONV_KPA_IN_INHG
-          }
-          pressure = parseFloat(pressure).toFixed(2)
-          break
-      }
-      this._currentWeatherPressure.text = pressure + ' ' + _(this._pressureUnit)
-
-      // location is a button
-      let tmp = weather.link.split('*')
-      this._currentWeatherLocation.url = tmp.length > 1 ? tmp[1] : tmp[0]
-      this._currentWeatherLocation.label = _(location)
-
-      // gettext can't see these inline
-      let sunriseText = _('Sunrise')
-      let sunsetText = _('Sunset')
-
-      let astronomyJson = weather.astronomy
-      let sunriseTime = this.formatAstronomyTime(astronomyJson, 'sunrise')
-      let sunsetTime = this.formatAstronomyTime(astronomyJson, 'sunset')
-
-      this._currentWeatherSunrise.text = this._showSunrise ? (sunriseText + ': ' + sunriseTime ) : ''
-      this._currentWeatherSunset.text = this._showSunrise ? (sunsetText + ': ' + sunsetTime) : ''
-
-      // Refresh forecast
-      for (let i = 0; i < this._forecastDays; i++) {
-        let forecastUi = this._forecast[i]
-        let forecastData = forecast[i]
-
-        let code = forecastData.code
-        let t_low = forecastData.low
-        let t_high = forecastData.high
-
-        let first_temperature = this._temperatureHighFirst ? t_high : t_low
-        let second_temperature = this._temperatureHighFirst ? t_low : t_high
-
-        let comment = forecastData.text
-        if (this._translateCondition)
-          comment = this.weatherCondition(code)
-
-        forecastUi.Day.text = this.localeDay(forecastData.day)
-        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode()
-        forecastUi.Summary.text = comment
-        forecastUi.Icon.icon_name = this.weatherIconSafely(code)
-      }
-    })
-
+        this.getOpenWeatherCurrentWeather();
+        this.getOpenWeatherForecast();
+        break;
+      default:
+        return false;
+    }
     if (recurse) {
       Mainloop.timeout_add_seconds(this._refreshInterval * 60, Lang.bind(this, function() {
         this.refreshWeather(true)
       }))
     }
-  }
+  },
 
-, normalizeMinutes: function normalizeMinutes(timeStr) {
-    // verify expected time format
-    let result = timeStr.match(/^\d{1,2}:(\d{1,2}) [ap]m$/)
-
-    if (result != null) {
-      let minutes = result[1]
-      // single-digit minutes values need normalizing (zero-padding)
-      if (minutes.length < 2) {
-        let timeSegments = timeStr.split(':')
-        return timeSegments[0] + ':0' + timeSegments[1]
+  displayWeather: function() {
+    let mainCondition = "";
+    let descriptionCondition = "";
+    // Short Condition Name
+    if (weather.condition.main != null) {
+      mainCondition = weather.condition.main;
+      if (this._translateCondition) {
+        mainCondition = _(mainCondition);
+      }
+    }
+    // Condition Description
+    if (weather.condition.description != null) {
+      descriptionCondition = this.capitalizeFirstLetter(weather.condition.description);
+      if (this._translateCondition) {
+        descriptionCondition = _(descriptionCondition);
       }
     }
 
-    return timeStr
-  }
+    // Displaying Location   
+    let location = "";
+    if (weather.location.city != null && weather.location.country != null) {
+      location = weather.location.city + ", " + weather.location.country;
+    }
+    if (this.nonempty(this._locationLabelOverride)) {
+      location = this._locationLabelOverride;
+    }
+    this.set_applet_tooltip(location);
 
-, convertTo24: function convertTo24(timeStr) {
-    let s = timeStr.indexOf(':')
-    let t = timeStr.indexOf(' ')
-    let n = timeStr.length
-    let hh = timeStr.substr(0, s)
-    let mm = timeStr.substring(s + 1, t)
+    // Weather Condition
+    this._currentWeatherSummary.text = descriptionCondition;
 
-    if (parseInt(hh) < 10) // pad
-      hh = '0' + hh
+    // Weather icon
+    let iconname = weather.condition.icon;
+    if (iconname == null) {
+      iconname = "weather-severe-alert";
+    }
+    this._currentWeatherIcon.icon_name = iconname
+    this._icon_type == St.IconType.SYMBOLIC ?
+      this.set_applet_icon_symbolic_name(iconname) :
+      this.set_applet_icon_name(iconname)
 
-    let beforeNoon = timeStr.substr(n - 2).toLowerCase() == 'am'
-    if (beforeNoon) {
-      if (hh == '12') // 12 AM -> 00
-        hh = '00'
-
-      return hh + ':' + mm
+    // Temperature
+    let temp = "";
+    if (weather.main.temperature != null) {
+      temp = this.TempToUserUnits(weather.main.temperature);
+      this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
     }
 
-    if (hh == '12') // 12 PM -> ok
-      return hh + ':' + mm
+    // Set Applet Label, even if the variables are empty
+    let label = "";
+    if (this._showCommentInPanel) {
+      label += mainCondition;
+    }
+    if (this._showTextInPanel) {
+      if (label != "") {
+        label += " ";
+      }
+      label += (temp + ' ' + this.unitToUnicode());
+    }
+    this.set_applet_label(label);
 
-    return (parseInt(hh, 10) + 12).toString() + ':' + mm
-  }
+    try {
+      this.update_label_visible();
+    } catch(e) {
+        // vertical panel not supported
+    }
 
-, destroyCurrentWeather: function destroyCurrentWeather() {
+    // Displaying humidity
+    if (weather.main.humidity !=  null) {
+      this._currentWeatherHumidity.text = weather.main.humidity + "%";
+    }
+    
+    // Wind
+    let wind_direction = this.compassDirection(weather.wind.degree);
+    this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(weather.wind.speed) + ' ' + _(this._windSpeedUnit);
+   
+    // API Unique display
+    switch (this._dataService) {
+      case DATA_SERVICE.OPEN_WEATHER_MAP:
+        if (weather.cloudiness != null) {
+          this._currentWeatherApiUnique.text = weather.cloudiness + "%";
+          this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
+        }
+        break;
+      default: 
+        this._currentWeatherApiUnique.text = "";
+        this._currentWeatherApiUniqueCap.text = "";
+    }
+    
+    // Pressure
+    if (weather.main.pressure != null) {
+      this._currentWeatherPressure.text = this.PressToUserUnits(weather.main.pressure) + ' ' + _(this._pressureUnit);
+    }
+
+    // location is a button
+    // No URL is provided, disable it for now
+    //this._currentWeatherLocation.url = tmp.length > 1 ? tmp[1] : tmp[0];
+    this._currentWeatherLocation.label = _(location);
+
+    // Sunset/Sunrise
+    // gettext can't see these inline
+    let sunriseText = "";
+    let sunsetText = "";
+    if (weather.sunrise != null && weather.sunset != null) {
+      if (this._showSunrise) {
+        sunriseText = _('Sunrise');
+        sunsetText = _('Sunset');
+        if (this._translateCondition) {
+          sunriseText = _(sunriseText);
+          sunsetText = _(sunsetText);
+        }
+        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
+        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
+      }
+      sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
+      sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
+    }
+    
+    this._currentWeatherSunrise.text = sunriseText;
+    this._currentWeatherSunset.text = sunsetText;
+    //Reset weather object
+    weather.dateTime = null;
+    weather.location.city = null;
+    weather.location.country = null;
+    weather.location.id = null;
+    weather.coord.lat = null;
+    weather.coord.lon = null;
+    weather.sunrise = null;
+    weather.sunset = null;
+    weather.wind.degree = null;
+    weather.wind.speed = null;
+    weather.main.temperature = null;
+    weather.main.pressure = null;
+    weather.main.humidity = null;
+    weather.main.temp_max = null;
+    weather.main.temp_min = null;
+    weather.condition.id = null;
+    weather.condition.main = null;
+    weather.condition.description = null;
+    weather.condition.icon = null;
+    weather.cloudiness = null;
+  },
+
+  displayForecast: function() {
+    for (let i = 0; i < this._forecast.length; i++) {
+      let forecastData = forecasts[i];
+      let forecastUi = this._forecast[i];
+
+      let t_low = this.TempToUserUnits(forecastData.main.temp_min);
+      let t_high = this.TempToUserUnits(forecastData.main.temp_max);
+
+      let first_temperature = this._temperatureHighFirst ? t_high : t_low;
+      let second_temperature = this._temperatureHighFirst ? t_low : t_high;
+
+      let comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+        // This is ugly, but to place a forecast in a particular day we need to make an effort to 
+      // interpret the UTC timestamps in the context of the forecast location's timezone, which 
+      // we don't know. So we estimate, based on longitude  
+      let est_tz = Math.round(weather.coord.lon/15) * 3600;
+      let dayName = forecastData.dateTime;
+      dayName.setMilliseconds(dayName.getMilliseconds() + est_tz);
+      dayName = this.getDayName(dayName.getUTCDay());
+      
+      forecastUi.Day.text = dayName;
+      forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+      forecastUi.Summary.text = comment;
+      forecastUi.Icon.icon_name = forecastData.condition.icon;
+    }
+    // reset array
+    forecasts = [];
+  },
+
+  destroyCurrentWeather: function destroyCurrentWeather() {
     if (this._currentWeather.get_child() != null)
       this._currentWeather.get_child().destroy()
   }
@@ -783,8 +798,10 @@ MyApplet.prototype = {
     this._currentWeatherHumidity = new St.Label(textOb)
     this._currentWeatherPressure = new St.Label(textOb)
     this._currentWeatherWind = new St.Label(textOb)
-    this._currentWeatherWindChill = new St.Label(textOb)
+    this._currentWeatherApiUnique = new St.Label({text: ''})
 
+    // APi Unique Caption
+    this._currentWeatherApiUniqueCap = new St.Label({text: ''});
     let rb = new St.BoxLayout({
       style_class: STYLE_DATABOX
     })
@@ -807,8 +824,8 @@ MyApplet.prototype = {
     rb_values.add_actor(this._currentWeatherPressure)
     rb_captions.add_actor(new St.Label({text: _('Wind:')}))
     rb_values.add_actor(this._currentWeatherWind)
-    rb_captions.add_actor(new St.Label({text: _('Wind Chill:')}))
-    rb_values.add_actor(this._currentWeatherWindChill)
+    rb_captions.add_actor(this._currentWeatherApiUniqueCap);
+    rb_values.add_actor(this._currentWeatherApiUnique)
 
     let xb = new St.BoxLayout()
     xb.add_actor(bb)
@@ -865,135 +882,155 @@ MyApplet.prototype = {
       this._forecast[i] = forecastWeather
       this._forecastBox.add_actor(bb)
     }
-  }
+  },
 
   //----------------------------------------------------------------------
   //
-  // Properties
+  // Utility functions
   //
   //----------------------------------------------------------------------
 
-, unitToUrl: function() {
+  noApiKey: function() {
+    if (this._apiKey == undefined || this._apiKey == "") {
+      return true;
+    }
+    return false;
+  },
+
+  capitalizeFirstLetter: function (description) {
+    if ((description == undefined || description == null)) {
+      return "";
+    }
+    return description.charAt(0).toUpperCase() + description.slice(1);
+  },
+
+  // Takes Time in %H:%M string format
+  timeToUserUnits: function(time) {
+    time = time.split(':');
+    //Remove Leading 0
+    if (time[0].charAt(0) == "0") {
+      time[0] = time[0].substr(1);
+    }
+    //Returnt Time based on user preference
+    if(this._show24Hours) {
+      return time[0] + ":" + time[1];
+    }
+    else {
+      if (time[0] > 12) { // PM
+        return (time[0] - 12) + ":" + time[1] + " Pm";
+      }
+      else { //AM
+        return time[0] + ":" + time[1] + " Am";
+      }
+    }
+  },
+
+  KPHtoMPS: function KPHtoMPS(speed) {
+    return speed / WEATHER_CONV_KPH_IN_MPS;
+  },
+
+  MPHtoMPS: function MPHtoMPS(speed) {
+    return speed / WEATHER_CONV_MPH_IN_MPS;
+  },
+
+  MPStoUserUnits: function MPStoUserUnits(mps) {
+      // Override wind units with our preference, takes Meter/Second wind speed
+      switch (this._windSpeedUnit) {
+        case WeatherWindSpeedUnits.MPH:
+          //Rounding to 1 decimal
+          return Math.round ((mps * WEATHER_CONV_MPH_IN_MPS) * 10)/ 10;
+        case WeatherWindSpeedUnits.KPH:
+          //Rounding to 1 decimal
+          return Math.round ((mps * WEATHER_CONV_KPH_IN_MPS) * 10)/ 10;
+        case WeatherWindSpeedUnits.MPS:
+          // Rounding to 1 decimal just in case API does not return it in the same format
+          return Math.round (mps * 10)/ 10;
+        case WeatherWindSpeedUnits.KNOTS:
+          //Rounding to whole units
+          return Math.round (mps * WEATHER_CONV_KNOTS_IN_MPS);
+      }
+  },
+
+  // Conversion from Kelvin
+  TempToUserUnits: function(kelvin) {
+    if (this._temperatureUnit == WeatherUnits.CELSIUS) {
+      return Math.round((kelvin  - 273.15));
+    }
+    if (this._temperatureUnit == WeatherUnits.FAHRENHEIT) {
+      return Math.round((9/5*(kelvin - 273) + 32));
+    }
+  },
+
+  // Conversion from hPa
+  PressToUserUnits: function(hpa) {
+    switch (this._pressureUnit) {
+      case WeatherPressureUnits.HPA:
+        return hpa;
+      case WeatherPressureUnits.AT:
+        return Math.round((hpa * 0.001019716) * 1000)/ 1000;
+      case WeatherPressureUnits.ATM:
+        return Math.round((hpa * 0.0009869233) * 1000)/ 1000;
+      case WeatherPressureUnits.INHG:
+        return Math.round((hpa * 0.029529983071445) * 10)/ 10;
+      case WeatherPressureUnits.MMHG:
+        return Math.round((hpa * 0.7500638));
+      case WeatherPressureUnits.MBAR:
+        return Math.round((hpa * 0.029529983071445) * 10)/ 10;
+      case WeatherPressureUnits.PA:
+        return Math.round((hpa * 100));
+      case WeatherPressureUnits.PSI:
+        return Math.round((hpa * 0.01450377) * 100) / 100;
+    }
+  },
+
+  isNumeric: function(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+  },
+
+  isString: function(text) {
+    if(typeof text == 'string' || text instanceof String) {
+      return true;
+    }
+    return false;
+  },
+
+  isID: function(text) {
+    return this.isNumeric(text);
+  },
+
+  isLocation: function(text) {
+    text = text.split(',');
+    if (text.length != 2) {
+      return false;
+    }
+
+    if (this.isString(text[0]) && this.isString(text[1])) {
+      return true;
+    }
+    return false;
+  },
+
+  isCoordinate: function(text) {
+    text = text.split(',');
+    if (text.length != 2) {
+      return false;
+    }
+    if (this.isNumeric(text[0]) && this.isNumeric(text[1])) {
+      return true;
+    }
+    return false;
+  },
+
+  unitToUrl: function () {
     return this._temperatureUnit == WeatherUnits.FAHRENHEIT ? 'f' : 'c'
   }
 
 , unitToUnicode: function() {
     return this._temperatureUnit == WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103'
   }
-
-, weatherUrl: function weatherUrl() {
-    let output = QUERY_URL + ' where woeid="' + this._woeid + '" and u="' + this.unitToUrl() + '"'
-    //let output = QUERY_URL + this._woeid + '_' + this.unitToUrl() + '.xml"'
-    return output
-  }
-
-, weatherIcon: function(code) {
-    /* see http://developer.yahoo.com/weather/#codetable */
-    /* fallback icons are: weather-clear-night weather-clear weather-few-clouds-night weather-few-clouds weather-fog weather-overcast weather-severe-alert weather-showers weather-showers-scattered weather-snow weather-storm */
-    switch (parseInt(code, 10)) {
-      case 0:/* tornado */
-        return ['weather-severe-alert']
-      case 1:/* tropical storm */
-        return ['weather-severe-alert']
-      case 2:/* hurricane */
-        return ['weather-severe-alert']
-      case 3:/* severe thunderstorms */
-        return ['weather-severe-alert']
-      case 4:/* thunderstorms */
-        return ['weather-storm']
-      case 5:/* mixed rain and snow */
-        return ['weather-snow-rain', 'weather-snow']
-      case 6:/* mixed rain and sleet */
-        return ['weather-snow-rain', 'weather-snow']
-      case 7:/* mixed snow and sleet */
-        return ['weather-snow']
-      case 8:/* freezing drizzle */
-        return ['weather-freezing-rain', 'weather-showers']
-      case 9:/* drizzle */
-        return ['weather-fog']
-      case 10:/* freezing rain */
-        return ['weather-freezing-rain', 'weather-showers']
-      case 11:/* showers */
-        return ['weather-showers']
-      case 12:/* showers */
-        return ['weather-showers']
-      case 13:/* snow flurries */
-        return ['weather-snow']
-      case 14:/* light snow showers */
-        return ['weather-snow']
-      case 15:/* blowing snow */
-        return ['weather-snow']
-      case 16:/* snow */
-        return ['weather-snow']
-      case 17:/* hail */
-        return ['weather-snow']
-      case 18:/* sleet */
-        return ['weather-snow']
-      case 19:/* dust */
-        return ['weather-fog']
-      case 20:/* foggy */
-        return ['weather-fog']
-      case 21:/* haze */
-        return ['weather-fog']
-      case 22:/* smoky */
-        return ['weather-fog']
-      case 23:/* blustery */
-        return ['weather-few-clouds']
-      case 24:/* windy */
-        return ['weather-few-clouds']
-      case 25:/* cold */
-        return ['weather-few-clouds']
-      case 26:/* cloudy */
-        return ['weather-overcast']
-      case 27:/* mostly cloudy (night) */
-        return ['weather-clouds-night', 'weather-few-clouds-night']
-      case 28:/* mostly cloudy (day) */
-        return ['weather-clouds', 'weather-overcast']
-      case 29:/* partly cloudy (night) */
-        return ['weather-few-clouds-night']
-      case 30:/* partly cloudy (day) */
-        return ['weather-few-clouds']
-      case 31:/* clear (night) */
-        return ['weather-clear-night']
-      case 32:/* sunny */
-        return ['weather-clear']
-      case 33:/* fair (night) */
-        return ['weather-clear-night']
-      case 34:/* fair (day) */
-        return ['weather-clear']
-      case 35:/* mixed rain and hail */
-        return ['weather-snow-rain', 'weather-showers']
-      case 36:/* hot */
-        return ['weather-clear']
-      case 37:/* isolated thunderstorms */
-        return ['weather-storm']
-      case 38:/* scattered thunderstorms */
-        return ['weather-storm']
-      case 39:/* http://developer.yahoo.com/forum/YDN-Documentation/Yahoo-Weather-API-Wrong-Condition-Code/1290534174000-1122fc3d-da6d-34a2-9fb9-d0863e6c5bc6 */
-      case 40:/* scattered showers */
-        return ['weather-showers-scattered', 'weather-showers']
-      case 41:/* heavy snow */
-        return ['weather-snow']
-      case 42:/* scattered snow showers */
-        return ['weather-snow']
-      case 43:/* heavy snow */
-        return ['weather-snow']
-      case 44:/* partly cloudy */
-        return ['weather-few-clouds']
-      case 45:/* thundershowers */
-        return ['weather-storm']
-      case 46:/* snow showers */
-        return ['weather-snow']
-      case 47:/* isolated thundershowers */
-        return ['weather-storm']
-      case 3200:/* not available */
-      default:
-        return ['weather-severe-alert']
-    }
-  }
-
-, weatherIconSafely: function(code) {
-    let iconname = this.weatherIcon(code)
+    // Passing appropriate resolver function for the API, and the code
+, weatherIconSafely: function(code, iconResolver) {
+    let iconname = iconResolver(code);
     for (let i = 0; i < iconname.length; i++) {
       if (this.hasIcon(iconname[i]))
         return iconname[i]
@@ -1007,125 +1044,303 @@ MyApplet.prototype = {
 
 , nonempty: function(str) {
     return (str != null && str.length > 0)
-  }
+  },
 
-, weatherCondition: function(code) {
-    switch (parseInt(code, 10)){
-      case 0:/* tornado */
-        return _('Tornado')
-      case 1:/* tropical storm */
-        return _('Tropical storm')
-      case 2:/* hurricane */
-        return _('Hurricane')
-      case 3:/* severe thunderstorms */
-        return _('Severe thunderstorms')
-      case 4:/* thunderstorms */
-        return _('Thunderstorms')
-      case 5:/* mixed rain and snow */
-        return _('Mixed rain and snow')
-      case 6:/* mixed rain and sleet */
-        return _('Mixed rain and sleet')
-      case 7:/* mixed snow and sleet */
-        return _('Mixed snow and sleet')
-      case 8:/* freezing drizzle */
-        return _('Freezing drizzle')
-      case 9:/* drizzle */
-        return _('Drizzle')
-      case 10:/* freezing rain */
-        return _('Freezing rain')
-      case 11:/* showers */
-        return _('Showers')
-      case 12:/* showers */
-        return _('Showers')
-      case 13:/* snow flurries */
-        return _('Snow flurries')
-      case 14:/* light snow showers */
-        return _('Light snow showers')
-      case 15:/* blowing snow */
-        return _('Blowing snow')
-      case 16:/* snow */
-        return _('Snow')
-      case 17:/* hail */
-        return _('Hail')
-      case 18:/* sleet */
-        return _('Sleet')
-      case 19:/* dust */
-        return _('Dust')
-      case 20:/* foggy */
-        return _('Foggy')
-      case 21:/* haze */
-        return _('Haze')
-      case 22:/* smoky */
-        return _('Smoky')
-      case 23:/* blustery */
-        return _('Blustery')
-      case 24:/* windy */
-        return _('Windy')
-      case 25:/* cold */
-        return _('Cold')
-      case 26:/* cloudy */
-        return _('Cloudy')
-      case 27:/* mostly cloudy (night) */
-      case 28:/* mostly cloudy (day) */
-        return _('Mostly cloudy')
-      case 29:/* partly cloudy (night) */
-      case 30:/* partly cloudy (day) */
-        return _('Partly cloudy')
-      case 31:/* clear (night) */
-        return _('Clear')
-      case 32:/* sunny */
-        return _('Sunny')
-      case 33:/* fair (night) */
-      case 34:/* fair (day) */
-        return _('Fair')
-      case 35:/* mixed rain and hail */
-        return _('Mixed rain and hail')
-      case 36:/* hot */
-        return _('Hot')
-      case 37:/* isolated thunderstorms */
-        return _('Isolated thunderstorms')
-      case 38:/* scattered thunderstorms */
-        return _('Scattered thunderstorms')
-      case 39:/* http://developer.yahoo.com/forum/YDN-Documentation/Yahoo-Weather-API-Wrong-Condition-Code/1290534174000-1122fc3d-da6d-34a2-9fb9-d0863e6c5bc6 */
-      case 40:/* scattered showers */
-        return _('Scattered showers')
-      case 41:/* heavy snow */
-        return _('Heavy snow')
-      case 42:/* scattered snow showers */
-        return _('Scattered snow showers')
-      case 43:/* heavy snow */
-        return _('Heavy snow')
-      case 44:/* partly cloudy */
-        return _('Partly cloudy')
-      case 45:/* thundershowers */
-        return _('Thundershowers')
-      case 46:/* snow showers */
-        return _('Snow showers')
-      case 47:/* isolated thundershowers */
-        return _('Isolated thundershowers')
-      case 3200:/* not available */
-      default:
-        return _('Not available')
-    }
+  getDayName: function(dayNum) {
+    let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')]
+    return days[dayNum];
   }
-
-, localeDay: function(abr) {
-    let days = [_('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday'), _('Sunday')]
-    return days[this.parseDay(abr)]
-  }
-
 , compassDirection: function(deg) {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
     return directions[Math.round(deg / 45) % directions.length]
-  }
+  },
 
-, formatAstronomyTime: function(astronomyJson, key) {
-    let val = astronomyJson[key]
-    let pad = this.normalizeMinutes(val)
-    return this._show24Hours ? (this.convertTo24(pad)) : pad
-  }
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+///////////                                       ////////////
+///////////       OpenWeatherMap Functions        ////////////
+///////////                                       ////////////
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 
-}
+  // Only have Mainloop Polling in one of the functions with API calls
+  // because it will cause a exponential recursive loop otherwise
+
+  getOpenWeatherCurrentWeather: function() {  
+    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.QUERY_URL); 
+    if (query == "") {
+      return false;
+    }
+    this.loadJsonAsync(query, function(json) {
+      if (!this.isOpenWeatherResponseValid(json)) {
+        Mainloop.timeout_add_seconds(30, Lang.bind(this, function() {
+          this.refreshWeather(false)
+        }));
+        return false;
+      }
+      this.parseOpenWeather(json);
+      this.displayWeather();
+      return true;
+    })
+  },
+
+  getOpenWeatherForecast: function() {
+    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.FORECAST_URL);
+    if (query == "") {
+      return false;
+    }
+    this.loadJsonAsync(query, function(json) {
+      if (!this.isOpenWeatherResponseValid(json)) {
+        return false;
+      }
+      this.parseOpenWeatherForecast(json.list);
+      this.displayForecast();
+      return true;
+    })
+  },
+
+  isOpenWeatherResponseValid: function(response) {
+    if (!response) {
+      this.displayLabelError(_("Service Unavailable"));
+      return false;
+    }
+    if (response.cod != 200) {
+      this.displayLabelError(_("Service Error"));
+      if (response.cod == 401) {
+        this._currentWeatherSummary.text = _("Wrong API Key");
+      }
+      if (response.cod == 404) {
+        this._currentWeatherSummary.text = _("City Not found");
+      }
+      if (response.cod == 429) {
+        this._currentWeatherSummary.text = _("Key Temp. Blocked");
+      }
+      return false;
+    }
+    return true;      
+  },
+
+  parseOpenWeather: function(json) {
+    if (json.coord) {
+      weather.coord.lat = json.coord.lat;
+      weather.coord.lon = json.coord.lon;
+    }
+    weather.location.city = json.name;
+    weather.location.country = json.sys.country;
+    weather.dateTime = new Date(json.dt * 1000);
+    weather.sunrise = new Date(json.sys.sunrise * 1000);
+    weather.sunset = new Date(json.sys.sunset * 1000);
+    if (json.wind) {
+      weather.wind.speed = json.wind.speed;
+      weather.wind.degree = json.wind.deg;
+    }
+    if (json.main) {
+      weather.main.temperature = json.main.temp;
+      weather.main.pressure = json.main.pressure;
+      weather.main.humidity = json.main.humidity;
+      weather.main.temp_min = json.main.temp_min;
+      weather.main.temp_max = json.main.temp_max;
+    }
+    if (json.weather[0]) {
+      weather.condition.main = json.weather[0].main;
+      weather.condition.description = json.weather[0].description;
+      weather.condition.icon = this.weatherIconSafely(json.weather[0].icon, this.resolveOpenWeatherIcon); 
+    }
+    if (json.clouds) {
+      weather.cloudiness = json.clouds.all;
+    }    
+  },
+
+  parseOpenWeatherForecast: function(json) {
+    // We have to Compile Day data manually because
+    // we get 8 json blobs per day 
+    let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
+    let counter = 0;       // Start counter, incremented for new days
+
+    let forecast;
+    for (let i = 0; i < json.length; i++) {
+      let currentDate = new Date(json[i].dt * 1000);
+      // If a item belongs to a new day, push forecast to the array and reset it.
+      if (currentDate.getDate() != prevItemDate) {
+        counter++;
+        if (forecast != undefined) {
+          forecasts.push(forecast);
+        } 
+        forecast = {          // Blob Init
+          dateTime: null,             //Required
+          main: {
+            temp: null,
+            temp_min: null,           //Required
+            temp_max: null,           //Required
+            pressure: null,
+            sea_level: null,
+            grnd_level: null,
+            humidity: null,
+          },
+          condition: {
+            id: null,
+            main: null,               //Required
+            description: null,        //Required
+            icon: null,               //Required
+          },
+          clouds: null,
+          wind: {
+            speed: null,
+            deg: null,
+          }
+        };
+        // Set safe values for min/max to work properly
+        forecast.main.temp_min = 900;
+        forecast.main.temp_max = -5; 
+        // Return and display when we have got the required number of days
+        if (counter > this._forecastDays) {
+          return;
+        }    
+      }
+      forecast.dateTime = currentDate; // Time does not matter as long as its the same day
+      // Get min max temperatures for the day
+      if (json[i].main) {
+        forecast.main.temp_min = Math.min(forecast.main.temp_min, json[i].main.temp_min);
+        forecast.main.temp_max = Math.max(forecast.main.temp_max, json[i].main.temp_max);
+      }
+      // Get the worst weather conditions for the day
+      if (json[i].weather[0]) {
+        if (json[i].weather[0].id == this.getMoreSevereWeather(json[i].weather[0].id, forecast.condition.id)) {     
+          forecast.condition.id = json[i].weather[0].id;
+          forecast.condition.main = json[i].weather[0].main;
+          forecast.condition.description = json[i].weather[0].description;
+          // Replace night icons with day icons for the forecasts
+          if ((json[i].weather[0].icon).endsWith("n")) {
+            json[i].weather[0].icon = json[i].weather[0].icon.replace('n', 'd');
+          }
+          forecast.condition.icon = this.weatherIconSafely(json[i].weather[0].icon, this.resolveOpenWeatherIcon);
+        }
+    }
+      prevItemDate = currentDate.getDate();
+    }
+    // Ran out of items, display
+    forecasts.push(forecast);
+    forecast = {};
+  },
+
+  getOpenWeatherQueryString: function(url) {
+    let APIKey = this._apiKey;
+    let loc = this._location;
+    let query = "";
+    if (this.isCoordinate(loc)) {
+      let location = loc.replace(/ /g,'').split(',');
+      query = url + "lat=" + location[0] + "&lon=" + location[1] + "&APPID=" + APIKey;
+    }
+    else if (this.isLocation(loc)) {
+      loc = loc.split(',');
+      query = url + "q=" + loc[0].trim() + "," + loc[1].trim() + "&APPID=" + APIKey;
+    }
+    else if (this.isID(loc)) {
+      query = url + "id=" + loc + "&APPID=" + APIKey;
+    }
+    else { //bad string
+      query = "";
+    }
+
+    if (query == "") { //If couldn't construct string, return it empty
+      return query;
+    }
+    if (this._translateCondition && this.isLangSupportedByOpenW(language)) { // Append Language if supported and enabled
+      query = query + "&lang=" + language;
+    }
+    return query;
+  },
+
+  getMoreSevereWeather: function(newID, prevId) {
+    // https://openweathermap.org/weather-conditions
+    // get the more severe weather
+    if (prevId == null) {
+      prevId = 900;      //Set safe value to compare correctly
+    }
+
+    // if new number first digit is smaller, return that
+    if (parseInt(String(newID).substring(0, 1)) < parseInt(String(prevId).substring(0, 1))) { 
+      return newID;
+    }
+    //if same category, return higher one
+    else if (parseInt(String(newID).substring(0, 1)) == parseInt(String(prevId).substring(0, 1))) {
+      if (newID > prevId) {
+        return newID;
+      }
+      else {
+        return prevId;
+      }
+    }
+    else {
+      return prevId;  // old number is higher
+    }
+  },
+
+  isLangSupportedByOpenW: function(lang) {
+    let supported = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
+     "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
+      "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
+      if (supported.indexOf(lang) != -1) {
+        return true;
+      }
+      return false;
+  },
+
+  resolveOpenWeatherIcon: function(iconId) {
+    // https://openweathermap.org/weather-conditions
+        /* fallback icons are: weather-clear-night 
+        weather-clear weather-few-clouds-night weather-few-clouds 
+        weather-fog weather-overcast weather-severe-alert weather-showers 
+        weather-showers-scattered weather-snow weather-storm */
+    switch (iconId) {
+      case "10d":/* rain day */
+        return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
+      case "10n":/* rain night */
+        return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
+      case "09n":/* showers nigh*/
+        return ['weather-showers']
+      case "09d":/* showers day */
+        return ['weather-showers']
+      case "13d":/* snow day*/
+        return ['weather-snow']
+      case "13n":/* snow night */
+        return ['weather-snow']
+      case "50d":/* mist day */
+        return ['weather-fog']
+      case "50n":/* mist night */
+        return ['weather-fog']
+      case "04d":/* broken clouds day */
+        return ['weather_overcast', 'weather-clouds', "weather-few-clouds"]
+      case "04n":/* broken clouds night */
+        return ['weather_overcast', 'weather-clouds', "weather-few-clouds-night"]
+      case "03n":/* mostly cloudy (night) */
+        return ['weather-clouds-night', 'weather-few-clouds-night']
+      case "03d":/* mostly cloudy (day) */
+        return ['weather-clouds', 'weather-overcast', 'weather-few-clouds']
+      case "02n":/* partly cloudy (night) */
+        return ['weather-few-clouds-night']
+      case "02d":/* partly cloudy (day) */
+        return ['weather-few-clouds']
+      case "01n":/* clear (night) */
+        return ['weather-clear-night']
+      case "01d":/* sunny */
+        return ['weather-clear']
+      case "11d":/* storm day */
+        return ['weather-storm']
+      case "11n":/* storm night */
+        return ['weather-storm']
+      default:
+        return ['weather-severe-alert']
+    }
+  }
+};
+
+//
+// For Translators
+//
+
+const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
+_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky")];
 
 //----------------------------------------------------------------------
 //
