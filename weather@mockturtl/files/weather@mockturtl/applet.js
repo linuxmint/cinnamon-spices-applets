@@ -1,4 +1,4 @@
-//"use strict"
+"use strict";
 
 //----------------------------------
 // imports
@@ -63,8 +63,8 @@ const DATA_SERVICE = {
 // Query
 const SERVICE = {
   "OpenWeatherMap": {
-    QUERY_URL : "http://api.openweathermap.org/data/2.5/weather?",
-    FORECAST_URL: "http://api.openweathermap.org/data/2.5/forecast?"
+    QUERY_URL : "https://api.openweathermap.org/data/2.5/weather?",
+    FORECAST_URL: "https://api.openweathermap.org/data/2.5/forecast?"
   },
 };
 
@@ -191,11 +191,13 @@ const WEATHER_CONV_ATM_IN_INHG = 33.421054e-3
 // Translation layer is necessary with multiple API choices
 // Init with null, something we can check for
 var weather = {
-  dateTime: null,           // DateTime object
+  dateTime: null,           // DateTime object, UTC
   location: {
     city: null,
     country: null,          // Country code
     id: null,               // API Specific ID, not used
+    tzOffset: null,          // seconds
+    timezone: null
   },
   coord: {
     lat: 	null,
@@ -289,12 +291,11 @@ function logError(error) {
 const GLib = imports.gi.GLib
 const Gettext = imports.gettext
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-const language = GLib.get_language_names()[0].substring(0, 2);
+const language = GLib.get_language_names()[0].split('_')[0];
 
 function _(str) {
   return Gettext.dgettext(UUID, str)
 }
-
 
 //----------------------------------------------------------------------
 //
@@ -651,8 +652,6 @@ MyApplet.prototype = {
         sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
         sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
       }
-      sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
-      sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
     }
     
     this._currentWeatherSunrise.text = sunriseText;
@@ -692,12 +691,8 @@ MyApplet.prototype = {
       let second_temperature = this._temperatureHighFirst ? t_low : t_high;
 
       let comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
-        // This is ugly, but to place a forecast in a particular day we need to make an effort to 
-      // interpret the UTC timestamps in the context of the forecast location's timezone, which 
-      // we don't know. So we estimate, based on longitude  
-      let est_tz = Math.round(weather.coord.lon/15) * 3600;
       let dayName = forecastData.dateTime;
-      dayName.setMilliseconds(dayName.getMilliseconds() + est_tz);
+      dayName.setMilliseconds(dayName.getMilliseconds() + (weather.location.tzOffset * 1000));
       dayName = this.getDayName(dayName.getUTCDay());
       
       forecastUi.Day.text = dayName;
@@ -1093,7 +1088,7 @@ MyApplet.prototype = {
       if (!this.isOpenWeatherResponseValid(json)) {
         return false;
       }
-      this.parseOpenWeatherForecast(json.list);
+      this.parseOpenWeatherForecast(json);
       this.displayForecast();
       return true;
     })
@@ -1124,12 +1119,15 @@ MyApplet.prototype = {
     if (json.coord) {
       weather.coord.lat = json.coord.lat;
       weather.coord.lon = json.coord.lon;
+      weather.location.tzOffset = Math.round(json.coord.lon/15) * 3600;
     }
     weather.location.city = json.name;
     weather.location.country = json.sys.country;
-    weather.dateTime = new Date(json.dt * 1000);
-    weather.sunrise = new Date(json.sys.sunrise * 1000);
-    weather.sunset = new Date(json.sys.sunset * 1000);
+    // Keep UTC for now, it is converted to Locale what covers most of the users
+    // Need proper fix later
+    weather.dateTime = new Date((json.dt) * 1000);
+    weather.sunrise = new Date((json.sys.sunrise) * 1000);
+    weather.sunset = new Date((json.sys.sunset) * 1000);
     if (json.wind) {
       weather.wind.speed = json.wind.speed;
       weather.wind.degree = json.wind.deg;
@@ -1158,10 +1156,11 @@ MyApplet.prototype = {
     let counter = 0;       // Start counter, incremented for new days
 
     let forecast;
-    for (let i = 0; i < json.length; i++) {
-      let currentDate = new Date(json[i].dt * 1000);
+    weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
+    for (let i = 0; i < json.list.length; i++) {
+      let currentDate = new Date((json.list[i].dt + weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
       // If a item belongs to a new day, push forecast to the array and reset it.
-      if (currentDate.getDate() != prevItemDate) {
+      if (currentDate.getUTCDate() != prevItemDate) {
         counter++;
         if (forecast != undefined) {
           forecasts.push(forecast);
@@ -1199,24 +1198,24 @@ MyApplet.prototype = {
       }
       forecast.dateTime = currentDate; // Time does not matter as long as its the same day
       // Get min max temperatures for the day
-      if (json[i].main) {
-        forecast.main.temp_min = Math.min(forecast.main.temp_min, json[i].main.temp_min);
-        forecast.main.temp_max = Math.max(forecast.main.temp_max, json[i].main.temp_max);
+      if (json.list[i].main) {
+        forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
+        forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
       }
       // Get the worst weather conditions for the day
-      if (json[i].weather[0]) {
-        if (json[i].weather[0].id == this.getMoreSevereWeather(json[i].weather[0].id, forecast.condition.id)) {     
-          forecast.condition.id = json[i].weather[0].id;
-          forecast.condition.main = json[i].weather[0].main;
-          forecast.condition.description = json[i].weather[0].description;
+      if (json.list[i].weather[0]) {
+        if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
+          forecast.condition.id = json.list[i].weather[0].id;
+          forecast.condition.main = json.list[i].weather[0].main;
+          forecast.condition.description = json.list[i].weather[0].description;
           // Replace night icons with day icons for the forecasts
-          if ((json[i].weather[0].icon).endsWith("n")) {
-            json[i].weather[0].icon = json[i].weather[0].icon.replace('n', 'd');
+          if ((json.list[i].weather[0].icon).endsWith("n")) {
+            json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
           }
-          forecast.condition.icon = this.weatherIconSafely(json[i].weather[0].icon, this.resolveOpenWeatherIcon);
+          forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
         }
     }
-      prevItemDate = currentDate.getDate();
+      prevItemDate = currentDate.getUTCDate();
     }
     // Ran out of items, display
     forecasts.push(forecast);
