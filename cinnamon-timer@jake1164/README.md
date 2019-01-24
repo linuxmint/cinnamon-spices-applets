@@ -15,6 +15,9 @@ All settings can be changed by right clicking on the icon and selecting configur
 ## TODO:
 
 ## Changelog
+* 1.1.3
+  - Added support for Cinnamon 4.0
+
 * 1.1.2
   - Added legacy support for Cinnamon 2.6 - 3.2 (No dropdown or slider settings in settings window)
   
