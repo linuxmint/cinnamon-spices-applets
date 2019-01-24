@@ -134,8 +134,8 @@ msgid "SW"
 msgstr "SW"
 
 #: applet.js:1052
-msgid "WW"
-msgstr ""
+msgid "W"
+msgstr "W"
 
 #: applet.js:1052
 msgid "NW"
