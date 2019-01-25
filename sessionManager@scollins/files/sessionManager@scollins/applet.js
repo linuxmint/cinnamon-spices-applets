@@ -9,11 +9,20 @@ const Settings = imports.ui.settings;
 
 const ScreenSaver = imports.misc.screenSaver;
 const Util = imports.misc.util;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
-
 
 let button_path, menu_item_icon_size, use_symbolic_icons;
 let has_console_kit, has_upower, has_systemd, display_manager;
+let UUID;
+
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
+}
 
 let CommandDispatcher = {
     shutDown: function() {
@@ -79,32 +88,23 @@ let CommandDispatcher = {
     }
 }
 
-
-function CommandItem(commandId, title) {
-    this._init(commandId, title);
-}
-
-CommandItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    _init: function(commandId, title) {
+class CommandItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(commandId, title) {
         try {
+            super();
 
             this.commandId = commandId;
-
-            PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
 
             this.addActor(this.getIcon());
 
             let label = new St.Label({ text: title });
             this.addActor(label);
-
-        } catch (e){
+        } catch(e){
             global.logError(e);
         }
-    },
+    }
 
-    getIcon: function() {
+    getIcon() {
         let iconType, iconPath;
         if ( use_symbolic_icons ) {
             iconPath = button_path + this.commandId + "-symbolic.svg";
@@ -120,9 +120,9 @@ CommandItem.prototype = {
         let icon = new St.Icon({ gicon: gicon, icon_size: menu_item_icon_size, icon_type: iconType });
 
         return icon;
-    },
+    }
 
-    activate: function() {
+    activate() {
         try {
             this.emit("activate", this, false);
             CommandDispatcher[this.commandId]();
@@ -132,36 +132,17 @@ CommandItem.prototype = {
     }
 }
 
-// l10n/translation
-const Gettext = imports.gettext;
-let UUID;
-
-function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
-   if(customTranslation != str) {
-      return customTranslation;
-   }
-   return Gettext.gettext(str);
-};
-
-function MyApplet(metadata, orientation, panel_height, instanceId) {
-    this._init(metadata, orientation, panel_height, instanceId);
-}
-
-MyApplet.prototype = {
-    __proto__: Applet.TextIconApplet.prototype,
-
-    _init: function(metadata, orientation, panel_height, instanceId) {
+class MyApplet extends Applet.TextIconApplet {
+    constructor(metadata, orientation, panel_height, instanceId) {
         try {
+            super(orientation, panel_height);
 
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
+
             button_path = metadata.path + "/buttons/";
 
-            Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
-
-            // l10n/translation
             UUID = metadata.uuid;
             Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -179,17 +160,16 @@ MyApplet.prototype = {
             this.checkSession();
 
             this.buildMenu();
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    on_applet_clicked: function(event) {
+    on_applet_clicked(event) {
         this.menu.toggle();
-    },
+    }
 
-    checkSession: function() {
+    checkSession() {
         //check if systemd is being used
         let sessionSettings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.session" });
         has_systemd = sessionSettings.get_boolean("session-manager-uses-logind");
@@ -227,19 +207,18 @@ MyApplet.prototype = {
                 if ( found ) global.log("Unable to determine display manager");
             }
         }
-    },
+    }
 
-    bindSettings: function() {
+    bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
         this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "symbolicMenuIcons", "symbolicMenuIcons", this.buildMenu);
-    },
+    }
 
-    buildMenu: function() {
+    buildMenu() {
         try {
-
             this.menu.removeAll();
 
             menu_item_icon_size = this.iconSize;
@@ -288,13 +267,12 @@ MyApplet.prototype = {
             //shut down
             let shutDown = new CommandItem("shutDown", _("Shut Down"));
             this.menu.addMenuItem(shutDown);
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    setPanelIcon: function() {
+    setPanelIcon() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
              GLib.file_test(this.panelIcon, GLib.FileTest.EXISTS) ) ) {
@@ -306,9 +284,9 @@ MyApplet.prototype = {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_symbolic_name("system-shutdown");
-    },
+    }
 
-    setPanelText: function() {
+    setPanelText() {
         if ( this.panelText ) this.set_applet_label(this.panelText);
         else this.set_applet_label("");
     }
