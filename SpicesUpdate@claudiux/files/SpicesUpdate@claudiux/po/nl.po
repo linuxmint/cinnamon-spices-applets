@@ -27,16 +27,16 @@ msgid ""
 "Warns you when your Spices (applets, desklets, extensions, themes) require "
 "an update."
 msgstr ""
-"Waarschuwt u wanneer er voor Spices (applets, desklets, extensies, thema's) "
+"Waarschuwt u wanneer er voor Spices (hulptoepassingen, minitoepassingen, extensies, thema's) "
 "updates zijn"
 
 #: settings-schema.json:7
 msgid "Applets"
-msgstr "Applets"
+msgstr "Hulptoepassingen"
 
 #: settings-schema.json:12
 msgid "Desklets"
-msgstr "Desklets"
+msgstr "Minitoepassingen"
 
 #: settings-schema.json:17
 msgid "Extensions"
@@ -56,7 +56,7 @@ msgstr "Controleren"
 
 #: settings-schema.json:37
 msgid "Monitoring"
-msgstr "Controle"
+msgstr "Toezicht houden"
 
 #: settings-schema.json:72
 msgid "Frequency"
@@ -72,20 +72,20 @@ msgstr "Display type"
 
 #: settings-schema.json:90
 msgid "Let regularly check if your applets are up to date"
-msgstr "Laat regelmatig controleren of uw applets up to date zijn"
+msgstr "Laat regelmatig controleren of uw hulptoepassingen up to date zijn"
 
 #: settings-schema.json:91
 msgid "If applets updates do not concern you, uncheck this box."
-msgstr "Als applets-updates n.v.t zijn, schakelt u dit selectievakje uit"
+msgstr "Als hulptoepassingen-updates n.v.t zijn, schakelt u dit selectievakje uit"
 
 #: settings-schema.json:98
 msgid "Let regularly check if new applets are available"
-msgstr "Laat regelmatig controleren of er nieuwe applets beschikbaar zijn"
+msgstr "Laat regelmatig controleren of er nieuwe hulptoepassingen beschikbaar zijn"
 
 #: settings-schema.json:99
 msgid "If new applets do not concern you, uncheck this box."
 msgstr ""
-"Als er geen nieuwe applets worden gebruikt, schakelt u dit selectievakje uit"
+"Als er geen nieuwe hulptoepassingen worden gebruikt, schakelt u dit selectievakje uit"
 
 #: settings-schema.json:103
 msgid "Refresh"
@@ -93,16 +93,16 @@ msgstr "Verversen"
 
 #: settings-schema.json:108
 msgid "Update these applets:"
-msgstr "Werk deze applets bij:"
+msgstr "Werk deze hulptoepassingen bij:"
 
 #: settings-schema.json:109
 msgid "If you do not want an applet to be checked, set it to FALSE."
 msgstr ""
-"Als u niet wilt dat een applet wordt gecontroleerd, stelt u deze in op FALSE"
+"Als u niet wilt dat deze hulptoepassing wordt gecontroleerd, stelt u deze in op FALSE"
 
 #: settings-schema.json:113
 msgid "Your Applets"
-msgstr "Uw applets"
+msgstr "Uw hulptoepassingen"
 
 #: settings-schema.json:118
 msgid "Check for updates?"
@@ -110,41 +110,41 @@ msgstr "Controleren op updates?"
 
 #: settings-schema.json:126
 msgid "Open Cinnamon Settings to manage all the Applets"
-msgstr "Open Cinnamon Settings om alle applets te beheren"
+msgstr "Open Cinnamon Settings om alle hulptoepassingen te beheren"
 
 #: settings-schema.json:134
 msgid "Let regularly check if your desklets are up to date"
-msgstr "Laat regelmatig controleren of uw desklets up-to-date zijn"
+msgstr "Laat regelmatig controleren of uw minitoepassingen up-to-date zijn"
 
 #: settings-schema.json:135
 msgid "If desklets updates do not concern you, uncheck this box."
-msgstr "Als updates voor desklets n.v.t zijn,schakelt u dit selectievakje uit"
+msgstr "Als updates voor minitoepassingen n.v.t zijn,schakelt u dit selectievakje uit"
 
 #: settings-schema.json:142
 msgid "Let regularly check if new desklets are available"
-msgstr "Laat regelmatig controleren of nieuwe desklets beschikbaar zijn"
+msgstr "Laat regelmatig controleren of nieuwe minitoepassingen beschikbaar zijn"
 
 #: settings-schema.json:143
 msgid "If new desklets do not concern you, uncheck this box."
-msgstr "Als nieuwe desklets n.v.t zijn,schakelt u dit selectievakje uit"
+msgstr "Als nieuwe minitoepassingen n.v.t zijn,schakelt u dit selectievakje uit"
 
 #: settings-schema.json:152
 msgid "Update these desklets:"
-msgstr "Werk deze desklets bij:"
+msgstr "Werk deze minitoepassingen bij:"
 
 #: settings-schema.json:153
 msgid "If you do not want a desklet to be checked, set it to FALSE."
 msgstr ""
-"Als u niet wilt dat een desklet wordt gecontroleerd, stelt u deze in op "
+"Als u niet wilt dat deze minitoepassing wordt gecontroleerd, stelt u deze in op "
 "FALSE."
 
 #: settings-schema.json:157
 msgid "Your Desklets"
-msgstr "Jouw Desklets"
+msgstr "Jouw Minitoepassingen"
 
 #: settings-schema.json:170
 msgid "Open Cinnamon Settings to manage all the Desklets"
-msgstr "Open Cinnamon Settings om alle Desklets te beheren"
+msgstr "Open Cinnamon Settings om alle Minitoepassingen te beheren"
 
 #: settings-schema.json:178
 msgid "Let regularly check if your extensions are up to date"
@@ -169,7 +169,7 @@ msgstr "Werk deze extensies bij:"
 #: settings-schema.json:197
 msgid "If you do not want an extension to be checked, set it to FALSE."
 msgstr ""
-"Als u niet wilt dat een extensie wordt gecontroleerd, stelt u deze in op "
+"Als u niet wilt dat deze extensie wordt gecontroleerd, stelt u deze in op "
 "FALSE."
 
 #: settings-schema.json:201
@@ -261,7 +261,7 @@ msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
 "updates in notifications viewer."
 msgstr ""
-"Door dit selectievakje aan te vinken, staat u toe dat deze applet berichten "
+"Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten "
 "weergeeft over Spices-updates in de viewer voor meldingen."
 
 #: settings-schema.json:299
@@ -298,11 +298,11 @@ msgstr ""
 
 #: applet.js:89
 msgid "Applet"
-msgstr "Applet"
+msgstr "Hulptoepassing"
 
 #: applet.js:90
 msgid "Desklet"
-msgstr "Desklet"
+msgstr "Minitoepassing"
 
 #: applet.js:91
 msgid "Extension"
@@ -314,11 +314,11 @@ msgstr "Thema"
 
 #: applet.js:97
 msgid "One desklet needs update:"
-msgstr "Eén desklet moet worden bijgewerkt:"
+msgstr "Eén minitoepassing moet worden bijgewerkt:"
 
 #: applet.js:98
 msgid "One applet needs update:"
-msgstr "Een applet moet worden bijgewerkt"
+msgstr "Een hulptoepassing moet worden bijgewerkt"
 
 #: applet.js:99
 msgid "One extension needs update:"
@@ -330,11 +330,11 @@ msgstr "Een thema moet worden bijgewerkt"
 
 #: applet.js:101
 msgid "Some desklets need update:"
-msgstr "Sommige desklets moeten worden bijgewerkt"
+msgstr "Sommige minitoepassingen moeten worden bijgewerkt"
 
 #: applet.js:102
 msgid "Some applets need update:"
-msgstr "Sommige applets moeten worden bijgewerkt"
+msgstr "Sommige hulptoepassingen moeten worden bijgewerkt"
 
 #: applet.js:103
 msgid "Some extensions need update:"
@@ -346,11 +346,11 @@ msgstr "Sommige thema's moeten worden bijgewerkt"
 
 #: applet.js:105
 msgid "New desklet available:"
-msgstr "Nieuw desklet beschikbaar:"
+msgstr "Nieuwe minitoepassing beschikbaar:"
 
 #: applet.js:106
 msgid "New applet available:"
-msgstr "Nieuw applet beschikbaar:"
+msgstr "Nieuwe hulptoepassing beschikbaar:"
 
 #: applet.js:107
 msgid "New extension available:"
@@ -362,19 +362,19 @@ msgstr "Nieuw thema beschikbaar:"
 
 #: applet.js:109
 msgid "New desklets available:"
-msgstr "Nieuw desklet beschikbaar:"
+msgstr "Nieuwe minitoepassingen beschikbaar:"
 
 #: applet.js:110
 msgid "New applets available:"
-msgstr "Nieuw applet beschikbaar:"
+msgstr "Nieuwe hulptoepassingen beschikbaar:"
 
 #: applet.js:111
 msgid "New extensions available:"
-msgstr "Nieuw extensie beschikbaar:"
+msgstr "Nieuwe extensies beschikbaar:"
 
 #: applet.js:112
 msgid "New themes available:"
-msgstr "Nieuw thema beschikbaar:"
+msgstr "Nieuwe thema's beschikbaar:"
 
 #: applet.js:820
 msgid "is fully functional."
@@ -389,7 +389,7 @@ msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
-"Het lijkt erop dat sommige van de programma's ontbreken die nodig zijn voor dit applet "
+"Het lijkt erop dat sommige van de programma's ontbreken die nodig zijn voor deze hulptoepassing "
 "en daardoor mogelijk niet alle functies hebben."
 
 #: applet.js:844
@@ -416,14 +416,14 @@ msgid ""
 "By checking this box, you allow this applet to display messages about new "
 "available Spices in notifications viewer."
 msgstr ""
-"Door dit selectievakje aan te vinken, staat u toe dat deze applet berichten "
+"Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten "
 "weergeeft over nieuwe beschikbare spices in de viewer voor meldingen."
 
 msgid "Reloaded applet:"
-msgstr "Opnieuw geladen applet:"
+msgstr "Opnieuw geladen hulptoepassingen:"
 
 msgid "Reloaded desklet:"
-msgstr "Opnieuw geladen desklet:"
+msgstr "Opnieuw geladen minitoepassingen:"
 
 msgid "Reloaded extension:"
 msgstr "Opnieuw geladen extensie:"
