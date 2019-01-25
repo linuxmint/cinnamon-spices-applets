@@ -8,6 +8,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Util = imports.misc.util;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 
@@ -15,8 +16,6 @@ const SCALE_FACTOR = 0.8;
 const TRANSITION_TIME = 0.2;
 const NUMBER_OF_BOUNCES = 3;
 
-// l10n/translation
-const Gettext = imports.gettext;
 let UUID;
 
 function _(str) {
@@ -25,25 +24,17 @@ function _(str) {
       return customTranslation;
    }
    return Gettext.gettext(str);
-};
-
-function MyApplet(metadata, orientation, panelHeight, instanceId) {
-    this._init(metadata, orientation, panelHeight, instanceId);
 }
 
-MyApplet.prototype = {
-    __proto__: Applet.IconApplet.prototype,
-
-    _init: function(metadata, orientation, panelHeight, instanceId) {
+class MyApplet extends Applet.IconApplet {
+    constructor(metadata, orientation, panelHeight, instanceId) {
         try {
+            super(orientation, panelHeight);
 
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
 
-            Applet.IconApplet.prototype._init.call(this, this.orientation, panelHeight);
-
-            // l10n/translation
             UUID = metadata.uuid;
             Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -52,17 +43,16 @@ MyApplet.prototype = {
             //set up panel
             this.setPanelIcon();
             this.setTooltip();
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    on_applet_clicked: function(event) {
+    on_applet_clicked(event) {
         this.launch();
-    },
+    }
 
-    _bindSettings: function () {
+    _bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.metadata["uuid"], this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "tooltipText", "tooltipText", this.setTooltip);
@@ -73,16 +63,16 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "useAltEnv", "useAltEnv");
         this.settings.bindProperty(Settings.BindingDirection.IN, "altEnv", "altEnv");
         this.setKeybinding();
-    },
+    }
 
-    setKeybinding: function() {
+    setKeybinding() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         if ( this.keyLaunch == "" ) return;
         this.keyId = "commandLauncher-" + this.instanceId;
         Main.keybindingManager.addHotKey(this.keyId, this.keyLaunch, Lang.bind(this, this.launch));
-    },
+    }
 
-    launch: function() {
+    launch() {
         this._applet_icon.scale_gravity = Clutter.Gravity.CENTER;
         this._animate(NUMBER_OF_BOUNCES);
         if ( this.command == "" ) Util.spawnCommandLine("cinnamon-settings applets " + this.metadata.uuid + " " + this.instanceId);
@@ -111,9 +101,9 @@ MyApplet.prototype = {
                 return;
             }
         }
-    },
+    }
 
-    _animate:function(count) {
+    _animate(count) {
         if ( count < 1 ) return;
         Tweener.addTween(this._applet_icon, {
             scale_x: SCALE_FACTOR,
@@ -134,9 +124,9 @@ MyApplet.prototype = {
             },
             onCompleteScope: this
         });
-    },
+    }
 
-    setPanelIcon: function() {
+    setPanelIcon() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
              GLib.file_test(this.panelIcon, GLib.FileTest.EXISTS) ) ) {
@@ -148,13 +138,13 @@ MyApplet.prototype = {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_name("go-next");
-    },
+    }
 
-    setTooltip: function() {
+    setTooltip() {
         this.set_applet_tooltip(this.tooltipText);
-    },
+    }
 
-    onClosed: function(pid, status) {
+    onClosed(pid, status) {
         if ( this.showNotifications )
             Main.notify(_("Command Launcher") + ": " + _("Process ended"), _("Command") + ": "
                         + this.command + "\n" + _("Process Id") + ": " + pid);
