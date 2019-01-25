@@ -11,24 +11,26 @@ const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
 
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 
 const MENU_ITEM_TEXT_LENGTH = 25;
 
 let menu_item_icon_size;
+let UUID;
 
-
-function MenuItem(title, icon, tooltip){
-    this._init(title, icon, tooltip);
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
 }
 
-MenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    _init: function(title, icon, tooltipText){
+class MenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(title, icon, tooltipText){
         try {
-
-            PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
+            super();
             this.actor.add_style_class_name("xCenter-menuItem");
             if ( icon != null ) this.addActor(icon);
 
@@ -42,41 +44,30 @@ MenuItem.prototype = {
             let tooltip = new Tooltips.Tooltip(this.actor, tooltipText);
 
             this.connect("activate", Lang.bind(this, this.launch));
-
-        } catch (e) {
+        } catch(e) {
             global.logError(e);
         }
     }
 }
 
 
-function LauncherMenuItem(app_info) {
-    this._init(app_info);
-}
-
-LauncherMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-
-    _init: function(app_info) {
+class LauncherMenuItem extends MenuItem {
+    constructor(app_info) {
         try {
-
-            this.app_info = app_info;
-
             let title = app_info.get_display_name();
             let gicon = app_info.get_icon();
             let icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
-            MenuItem.prototype._init.call(this, title, icon);
+            super(title, icon);
 
+            this.app_info = app_info;
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    launch: function() {
+    launch() {
         try {
-
             this.app_info.launch([], null);
-
         } catch(e) {
             global.logError(e);
         }
@@ -84,32 +75,22 @@ LauncherMenuItem.prototype = {
 }
 
 
-function DocumentMenuItem(file) {
-    this._init(file);
-}
-
-DocumentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-
-    _init: function(file) {
+class DocumentMenuItem extends MenuItem {
+    constructor(file) {
         try {
-
             let fileInfo = file.query_info("*", Gio.FileQueryInfoFlags.NONE, null);
-            this.uri = file.get_uri();
-
             let icon = fileInfo.get_icon();
-            MenuItem.prototype._init.call(this, fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size), file.get_path());
+            super(fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size), file.get_path());
 
+            this.uri = file.get_uri();
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    launch: function(event) {
+    launch(event) {
         try {
-
             Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
-
         } catch(e) {
             global.logError(e);
         }
@@ -117,31 +98,21 @@ DocumentMenuItem.prototype = {
 }
 
 
-function RecentMenuItem(title, iName, file) {
-    this._init(title, iName, file);
-}
-
-RecentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-
-    _init: function(title, iName, file) {
+class RecentMenuItem extends MenuItem {
+    constructor(title, iName, file) {
         try {
+            let icon = new St.Icon({icon_name: iName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            super(title, icon);
 
             this.file = file;
-
-            let icon = new St.Icon({icon_name: iName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
-            MenuItem.prototype._init.call(this, title, icon);
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    launch: function(event) {
+    launch(event) {
         try {
-
             Gio.app_info_launch_default_for_uri(this.file, global.create_app_launch_context());
-
         } catch(e) {
             global.logError(e);
         }
@@ -149,66 +120,36 @@ RecentMenuItem.prototype = {
 }
 
 
-function ClearRecentMenuItem(recentManager) {
-    this._init(recentManager);
-}
-
-ClearRecentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-
-    _init: function(recentManager) {
+class ClearRecentMenuItem extends MenuItem {
+    constructor(recentManager) {
         try {
+            let icon = new St.Icon({icon_name: "edit-clear", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            super(_("Clear"), icon);
 
             this.recentManager = recentManager;
-
-            let icon = new St.Icon({icon_name: "edit-clear", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
-            MenuItem.prototype._init.call(this, _("Clear"), icon);
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    launch: function(event) {
+    launch(event) {
         try {
-
             this.recentManager.purge_items();
-
         } catch(e) {
             global.logError(e);
         }
     }
 }
 
-// l10n/translation
-const Gettext = imports.gettext;
-let UUID;
-
-function _(str) {
-   let customTranslation = Gettext.dgettext(UUID, str);
-   if(customTranslation != str) {
-      return customTranslation;
-   }
-   return Gettext.gettext(str);
-};
-
-
-function MyApplet(metadata, orientation, panel_height, instanceId) {
-    this._init(metadata, orientation, panel_height, instanceId);
-}
-
-MyApplet.prototype = {
-    __proto__: Applet.TextIconApplet.prototype,
-
-    _init: function(metadata, orientation, panel_height, instanceId) {
+class MyApplet extends Applet.TextIconApplet {
+    constructor(metadata, orientation, panel_height, instanceId) {
         try {
+            super(orientation, panel_height);
 
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
-            Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
 
-            // l10n/translation
             UUID = metadata.uuid;
             Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
@@ -229,27 +170,26 @@ MyApplet.prototype = {
             this.treeChangedId = this.tree.connect("changed", Lang.bind(this, this.buildLaunchersSection));
 
             this.buildMenu();
-
-        } catch (e) {
+        } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    on_applet_clicked: function(event) {
+    on_applet_clicked(event) {
         this.menu.toggle();
-    },
+    }
 
-    on_applet_removed_from_panel: function() {
+    on_applet_removed_from_panel() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         this.destroyMenu();
         this.tree.disconnect(this.treeChangedId);
-    },
+    }
 
-    openMenu: function(){
+    openMenu(){
         this.menu.toggle();
-    },
+    }
 
-    bindSettings: function() {
+    bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.metadata["uuid"], this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
@@ -262,18 +202,17 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.updateRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
         this.setKeybinding();
-    },
+    }
 
-    setKeybinding: function() {
+    setKeybinding() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         if ( this.keyOpen == "" ) return;
         this.keyId = "officeCenter-open";
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
-    },
+    }
 
-    buildMenu: function() {
+    buildMenu() {
         try {
-
             this.destroyMenu();
 
             menu_item_icon_size = this.iconSize;
@@ -371,20 +310,19 @@ MyApplet.prototype = {
 
                 this.updateRecentDocumentsSection();
             }
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    destroyMenu: function() {
+    destroyMenu() {
         if ( this.monitorId ) this.dirMonitor.disconnect(this.monitorId);
         if ( this.recentManagerId ) this.recentManager.disconnect(this.recentManagerId);
 
         if ( this.menu ) this.menu.destroy();
-    },
+    }
 
-    buildLaunchersSection: function() {
+    buildLaunchersSection() {
         this.launchersSection.removeAll();
 
         let root = this.tree.get_root_directory();
@@ -408,9 +346,9 @@ MyApplet.prototype = {
                 }
             }
         }
-    },
+    }
 
-    updateDocumentsSection: function() {
+    updateDocumentsSection() {
         if ( this.dirMonitor && this.monitorId ) {
             this.dirMonitor.disconnect(this.monitorId);
             this.dirMonitor = undefined;
@@ -431,14 +369,14 @@ MyApplet.prototype = {
 
         this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
         this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updateDocumentsSection));
-    },
+    }
 
-    getDocuments: function(dir) {
+    getDocuments(dir) {
         if ( this.documentCount >= this.docMax ) return;
         dir.enumerate_children_async("*", Gio.FileQueryInfoFlags.NONE, 0, null, Lang.bind(this, this.processDocuments));
-    },
+    }
 
-    processDocuments: function(dir, res) {
+    processDocuments(dir, res) {
         let gEnum = dir.enumerate_children_finish(res);
 
         let info;
@@ -460,9 +398,9 @@ MyApplet.prototype = {
         for ( let i = 0; i < directories.length; i++ ) {
             this.getDocuments(directories[i]);
         }
-    },
+    }
 
-    updateRecentDocumentsSection: function() {
+    updateRecentDocumentsSection() {
 
         if ( !this.recentSection ) return;
         this.recentSection.removeAll();
@@ -479,14 +417,14 @@ MyApplet.prototype = {
             this.recentSection.addMenuItem(recentItem);
         }
 
-    },
+    }
 
-    openDocumentsFolder: function() {
+    openDocumentsFolder() {
         this.menu.close();
         Gio.app_info_launch_default_for_uri("file://" + this.documentPath, global.create_app_launch_context());
-    },
+    }
 
-    setPanelIcon: function() {
+    setPanelIcon() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
              GLib.file_test(this.panelIcon, GLib.FileTest.EXISTS) ) ) {
@@ -498,14 +436,14 @@ MyApplet.prototype = {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_name("applications-office");
-    },
+    }
 
-    setPanelText: function() {
+    setPanelText() {
         if ( this.panelText ) this.set_applet_label(this.panelText);
         else this.set_applet_label("");
-    },
+    }
 
-    set_applet_icon_symbolic_path: function(icon_path) {
+    set_applet_icon_symbolic_path(icon_path) {
         if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
 
         if (icon_path){
