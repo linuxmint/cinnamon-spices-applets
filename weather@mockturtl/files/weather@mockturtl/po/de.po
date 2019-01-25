@@ -1,5 +1,5 @@
 # German translation originally for gnome-shell-extension-weather, now weather@mockturtl
-# Copyright (C) 2011, Evilandi666 and Kghbln
+# Copyright (C) 2011 to 2019, Evilandi666 and Kghbln
 # This file is distributed under the same license as weather@mockturtl.
 # Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
 # Kghbln <kgh@kgh.info>, 2015, 2017, 2019.
@@ -31,11 +31,11 @@ msgstr "Einstellungen"
 
 #: applet.js:518
 msgid "No location provided"
-msgstr "Es wurde kein Ort für die Vorhersage angegeben."
+msgstr "Vorhersageort fehlt"
 
 #: applet.js:524
 msgid "No Api Key provided"
-msgstr "Es wurde kein API-Schlüssel hinterlegt."
+msgstr "API-Schlüssel fehlt"
 
 #: applet.js:621
 msgid "Cloudiness:"
@@ -59,7 +59,7 @@ msgstr "Zukünftiges Wetter wird geladen ..."
 
 #: applet.js:746
 msgid "Loading ..."
-msgstr "Es wird geladen ..."
+msgstr "Wird geladen ..."
 
 #: applet.js:752
 msgid "Refresh"
