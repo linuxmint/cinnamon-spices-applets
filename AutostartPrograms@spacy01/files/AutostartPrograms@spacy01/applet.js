@@ -21,7 +21,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
         
         try {        
-            this.set_applet_icon_name("gnome-session");
+            this.set_applet_icon_name("cs-startup-programs");
             this.set_applet_tooltip(_("Click here to add or remove programs to start with the session."));                                                
         }
         catch (e) {
@@ -30,7 +30,7 @@ MyApplet.prototype = {
     },
     
     on_applet_clicked: function(event) {
-        GLib.spawn_command_line_async('gnome-session-properties');
+        GLib.spawn_command_line_async('cinnamon-settings startup');
     }
    
 };
