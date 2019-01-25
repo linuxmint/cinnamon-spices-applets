@@ -34,8 +34,6 @@ const PopupMenu = imports.ui.popupMenu
 const Settings = imports.ui.settings
 const Util = imports.misc.util
 
-"use strict";
-
 //----------------------------------------------------------------------
 //
 // Constants
@@ -56,6 +54,16 @@ const BLANK = '   '
 const ELLIPSIS = '...'
 const EN_DASH = '\u2013'
 
+
+/* Some Information on More Data Service options to stay in free limit:
+APIXU: 1 call every 268 seconds
+DarkSky: 1 call every 85 seconds
+WeatherBit: 1 call every 85 seconds, 16 Day foreast Call
+
+
+
+Openweather: max 60 calls per minute, Temporary ban and no charge
+*/
 const DATA_SERVICE = {
   OPEN_WEATHER_MAP: "OpenWeatherMap"
 }
@@ -197,7 +205,7 @@ var weather = {
     country: null,          // Country code
     id: null,               // API Specific ID, not used
     tzOffset: null,          // seconds
-    timezone: null
+    timeZone: null
   },
   coord: {
     lat: 	null,
@@ -291,7 +299,8 @@ function logError(error) {
 const GLib = imports.gi.GLib
 const Gettext = imports.gettext
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-const language = GLib.get_language_names()[0].split('_')[0];
+const currentLocale = GLib.get_language_names()[0];
+const language = currentLocale.split('_')[0];
 
 function _(str) {
   return Gettext.dgettext(UUID, str)
@@ -649,6 +658,9 @@ MyApplet.prototype = {
           sunriseText = _(sunriseText);
           sunsetText = _(sunsetText);
         }
+        // Adding ways to get proper tz support
+        // en-GB returns time in the correct format to use for our method
+        //global.log(weather.sunrise.toLocaleString("en-GB", {timeZone: weather.timeZone, hour: "2-digit", minute: "2-digit"}));
         sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
         sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
       }
