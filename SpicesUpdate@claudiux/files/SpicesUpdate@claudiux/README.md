@@ -51,7 +51,7 @@ In the menu of this applet:
 
   * a Refresh button allows you to force checking the availability of updates for your Spices;
   * a dot appears in front of each type of Spice when at least one update is available;
-  * a click on a type of Spice (Applets, Desklets, etc) opens the corresponding page in Cinnamon Settings;
+  * a click on a type of Spice (Applets, Desklets, etc) opens the Download tab of the corresponding page in Cinnamon Settings, with Spices sorted by date;
   * when new Spices are available, an option _Forget new Spices_ appears; clicking it will clear these notifications of new spices, until others arrive;
   * a Configure... button opens the Settings.
 

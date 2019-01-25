@@ -175,6 +175,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.set_applet_icon_symbolic_name("spices-update");
     this.set_applet_tooltip(_("Spices Update"));
 
+    // Be sure the scripts are executable:
+    GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py'".format(SCRIPTS_DIR));
+
     this.OKtoPopulateSettingsApplets = true;
     this.OKtoPopulateSettingsDesklets = true;
     this.OKtoPopulateSettingsExtensions = true;
@@ -1266,7 +1269,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       if (this.new_Spices[t].length > 0) ts += "   \u23FF %s".format((this.new_Spices[t].length).toString());
       this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
-        Util.spawnCommandLine("cinnamon-settings " + t.toString());
+        //Util.spawnCommandLine("cinnamon-settings " + t.toString());
+        Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, t.toString()));
       });
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
