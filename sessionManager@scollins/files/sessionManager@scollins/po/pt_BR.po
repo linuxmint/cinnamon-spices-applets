@@ -85,7 +85,7 @@ msgstr "Configurações Gerais"
 
 #. sessionManager@scollins->metadata.json->description
 msgid "Provides easy access to shut down, restart, etc"
-msgstr "Fornece acesso fácil para desligar, reiniciar, etc ""
+msgstr "Fornece acesso fácil para desligar, reiniciar, etc"
 
 #. sessionManager@scollins->metadata.json->contributors
 msgid "Stephen Collins - Author"
