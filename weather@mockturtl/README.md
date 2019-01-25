@@ -37,6 +37,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Known Issues
 * Translations in general and are in bad shape after the rework, contribute if you can, it is always much appreciated.
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location and system timezone
 
 ## Roadmap
 * Add BBC as a Weather Provider
