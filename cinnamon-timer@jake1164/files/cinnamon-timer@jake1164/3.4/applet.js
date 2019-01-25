@@ -41,8 +41,8 @@ MyApplet.prototype = {
 
     _init: function (orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-
         try {
+            
             if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.2") >= 0) {
                 this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             }
@@ -64,6 +64,7 @@ MyApplet.prototype = {
                 this.doTick();
             }
             this.doUpdateUI();
+            
         }
         catch (e) {
             global.logError(e);
@@ -353,6 +354,8 @@ MyApplet.prototype = {
                 Util.spawnCommandLine("play " + this.SoundPath);
             }
             catch (e) {
+                // spawnCommandLine does not actually throw exception when a sound fails to play
+                // ie. sox not installed.
                 global.logError(e);
             }
         }
