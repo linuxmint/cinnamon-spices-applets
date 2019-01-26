@@ -1,3 +1,6 @@
+### v1.2.1
+  * The icon applet can be hidden while nothing is to report.
+
 ### v1.2.0
   * Now, in the menu, a click on a type of Spice (Applets, Desklets, etc) opens the Download tab of the corresponding page in Cinnamon Settings, with Spices sorted by date.
 

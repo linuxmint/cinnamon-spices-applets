@@ -37,6 +37,7 @@ The first, _General_, allows you to:
   * Select the _Time interval between two checks_ (in hours). Please note that the first check will take place one minute after starting this applet.
   * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone.
   * Select the _Type of display_ of the icon: with or without text?
+  * Hide the icon applet while nothing is to report.
 
 For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
 

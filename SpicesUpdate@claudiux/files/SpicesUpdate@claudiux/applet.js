@@ -364,6 +364,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_display_type_changed,
       null);
 
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "general_hide",
+      "general_hide",
+      this.on_display_type_changed,
+      null);
+
     this.on_orientation_changed(orientation);
 
     // Init lists of Spices:
@@ -475,6 +481,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of on_orientation_changed
 
   _set_main_label() {
+    if (this.general_hide === true && this.nb_to_update === 0 && this.nb_to_watch === 0) {
+      this.set_applet_label("");
+      this.actor.hide();
+      return
+    }
+    this.actor.show();
     if (this.displayType === "compact") {
       this.set_applet_label("");
     } else {
@@ -1436,6 +1448,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
           this.first_loop = false;
         }
       }
+      this._set_main_label();
       // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }

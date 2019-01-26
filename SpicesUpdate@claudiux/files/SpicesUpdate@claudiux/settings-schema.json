@@ -80,7 +80,7 @@
     "section_general3": {
       "type": "section",
       "title": "Display type",
-      "keys": ["displayType"]
+      "keys": ["displayType", "general_hide"]
     }
   },
   "check_applets": {
@@ -299,7 +299,7 @@
     "description": "Show notification messages even if they are unchanged",
     "tooltip": "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
   },
-  "displayType" : {
+  "displayType": {
     "type": "combobox",
     "default" : "classic",
     "options" : {
@@ -308,5 +308,12 @@
      },
     "description" : "Type of Display",
     "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+  },
+  "general_hide": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "description": "Hide the icon as long as nothing is to report",
+    "tooltip": "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
   }
 }
