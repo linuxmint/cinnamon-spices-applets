@@ -56,11 +56,10 @@ const EN_DASH = '\u2013'
 
 
 /* Some Information on More Data Service options to stay in free limit:
-APIXU: 1 call every 268 seconds
-DarkSky: 1 call every 85 seconds
-WeatherBit: 1 call every 85 seconds, 16 Day foreast Call
-
-
+APIXU: 10000 calls a month
+DarkSky: 1000 calls a day free
+WeatherBit: 1000 calls a day, 16 Day foreast Call
+AccuWeather: 50 calls a day
 
 Openweather: max 60 calls per minute, Temporary ban and no charge
 */
@@ -326,14 +325,6 @@ MyApplet.prototype = {
     this.rebuild()
   },
 
-  dumpKeys: function dumpKeys() {
-    for (let k in KEYS) {
-      let key = KEYS[k]
-      let keyProp = "_" + key
-      log(keyProp + "=" + this[keyProp])
-    }
-  },
-
   locationLookup: function locationLookup() {
     let command = "xdg-open ";
     switch(this._dataService) {
@@ -506,14 +497,6 @@ MyApplet.prototype = {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
                         St.IconType.SYMBOLIC :
                         St.IconType.FULLCOLOR
-  }
-
-, loadJsonAsync: function loadJsonAsync(url, callback) {
-    let context = this
-    let message = Soup.Message.new('GET', url)
-    _httpSession.queue_message(message, function soupQueue(session, message) {
-      callback.call(context, JSON.parse(message.response_body.data))
-    })
   },
 
   displayLabelError: function(errorMsg) {
@@ -522,7 +505,7 @@ MyApplet.prototype = {
     this.set_applet_icon_name("");
   },
 
-  refreshWeather: function refreshWeather(recurse) {  
+  refreshWeather: async function(recurse) {  
     // Adding resilience against bad user input
     if (this._location == undefined || this._location == "") {
       this.displayLabelError(_("No location provided"));
@@ -534,20 +517,35 @@ MyApplet.prototype = {
           this.displayLabelError(_("No Api Key provided"));
           return false;
         }
-        this.getOpenWeatherCurrentWeather();
-        this.getOpenWeatherForecast();
+        let forecast = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.FORECAST_URL);
+        let weather = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.QUERY_URL); 
+        if (forecast == "" || weather == "") {  // Couldn't construct query, abort
+          return false;
+        }
+
+        if (await !this.getOpenWeatherCurrentWeather(weather) || await !this.getOpenWeatherForecast(forecast)) {
+          // One of the Requests/parsing failed, retry in 15 seconds
+          Mainloop.timeout_add_seconds(15, Lang.bind(this, function mainloopTimeout() {
+            this.refreshWeather(false);
+          }))
+          return false;
+        }      
         break;
       default:
         return false;
     }
+    // Everything was successful, display
+    this.displayWeather();
+    this.displayForecast();
     if (recurse) {
       Mainloop.timeout_add_seconds(this._refreshInterval * 60, Lang.bind(this, function() {
         this.refreshWeather(true)
       }))
     }
+    return true;
   },
 
-  displayWeather: function() {
+  displayWeather: async function() {
     let mainCondition = "";
     let descriptionCondition = "";
     // Short Condition Name
@@ -689,9 +687,10 @@ MyApplet.prototype = {
     weather.condition.description = null;
     weather.condition.icon = null;
     weather.cloudiness = null;
+    return true;
   },
 
-  displayForecast: function() {
+  displayForecast: async function() {
     for (let i = 0; i < this._forecast.length; i++) {
       let forecastData = forecasts[i];
       let forecastUi = this._forecast[i];
@@ -714,6 +713,7 @@ MyApplet.prototype = {
     }
     // reset array
     forecasts = [];
+    return true;
   },
 
   destroyCurrentWeather: function destroyCurrentWeather() {
@@ -1073,37 +1073,25 @@ MyApplet.prototype = {
   // Only have Mainloop Polling in one of the functions with API calls
   // because it will cause a exponential recursive loop otherwise
 
-  getOpenWeatherCurrentWeather: function() {  
-    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.QUERY_URL); 
-    if (query == "") {
-      return false;
+  getOpenWeatherCurrentWeather: async function(query) {  
+    // Can use Synchronous calls, we are already in async
+    let message = Soup.Message.new('GET', query);
+    _httpSession.send_message(message);
+    let json =  JSON.parse(message.response_body.data);
+    if (this.isOpenWeatherResponseValid(json)) {
+      return this.parseOpenWeather(json);
     }
-    this.loadJsonAsync(query, function(json) {
-      if (!this.isOpenWeatherResponseValid(json)) {
-        Mainloop.timeout_add_seconds(30, Lang.bind(this, function() {
-          this.refreshWeather(false)
-        }));
-        return false;
-      }
-      this.parseOpenWeather(json);
-      this.displayWeather();
-      return true;
-    })
+    return false;
   },
 
-  getOpenWeatherForecast: function() {
-    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.FORECAST_URL);
-    if (query == "") {
-      return false;
-    }
-    this.loadJsonAsync(query, function(json) {
-      if (!this.isOpenWeatherResponseValid(json)) {
-        return false;
-      }
-      this.parseOpenWeatherForecast(json);
-      this.displayForecast();
-      return true;
-    })
+  getOpenWeatherForecast: async function(query) {
+    let message = Soup.Message.new('GET', query);
+    _httpSession.send_message(message);
+    let json =  JSON.parse(message.response_body.data);
+    if (this.isOpenWeatherResponseValid(json)) {
+      return this.parseOpenWeatherForecast(json);
+    }     
+    return false;
   },
 
   isOpenWeatherResponseValid: function(response) {
@@ -1128,110 +1116,124 @@ MyApplet.prototype = {
   },
 
   parseOpenWeather: function(json) {
-    if (json.coord) {
-      weather.coord.lat = json.coord.lat;
-      weather.coord.lon = json.coord.lon;
-      weather.location.tzOffset = Math.round(json.coord.lon/15) * 3600;
+    try {
+      if (json.coord) {
+        weather.coord.lat = json.coord.lat;
+        weather.coord.lon = json.coord.lon;
+        weather.location.tzOffset = Math.round(json.coord.lon/15) * 3600;
+      }
+      weather.location.city = json.name;
+      weather.location.country = json.sys.country;
+      // Keep UTC for now, it is converted to Locale what covers most of the users
+      // Need proper fix later
+      weather.dateTime = new Date((json.dt) * 1000);
+      weather.sunrise = new Date((json.sys.sunrise) * 1000);
+      weather.sunset = new Date((json.sys.sunset) * 1000);
+      if (json.wind) {
+        weather.wind.speed = json.wind.speed;
+        weather.wind.degree = json.wind.deg;
+      }
+      if (json.main) {
+        weather.main.temperature = json.main.temp;
+        weather.main.pressure = json.main.pressure;
+        weather.main.humidity = json.main.humidity;
+        weather.main.temp_min = json.main.temp_min;
+        weather.main.temp_max = json.main.temp_max;
+      }
+      if (json.weather[0]) {
+        weather.condition.main = json.weather[0].main;
+        weather.condition.description = json.weather[0].description;
+        weather.condition.icon = this.weatherIconSafely(json.weather[0].icon, this.resolveOpenWeatherIcon); 
+      }
+      if (json.clouds) {
+        weather.cloudiness = json.clouds.all;
+      }   
+      return true; 
     }
-    weather.location.city = json.name;
-    weather.location.country = json.sys.country;
-    // Keep UTC for now, it is converted to Locale what covers most of the users
-    // Need proper fix later
-    weather.dateTime = new Date((json.dt) * 1000);
-    weather.sunrise = new Date((json.sys.sunrise) * 1000);
-    weather.sunset = new Date((json.sys.sunset) * 1000);
-    if (json.wind) {
-      weather.wind.speed = json.wind.speed;
-      weather.wind.degree = json.wind.deg;
+    catch(e) {  //parse failed
+      logError(e);
+      return false;
     }
-    if (json.main) {
-      weather.main.temperature = json.main.temp;
-      weather.main.pressure = json.main.pressure;
-      weather.main.humidity = json.main.humidity;
-      weather.main.temp_min = json.main.temp_min;
-      weather.main.temp_max = json.main.temp_max;
-    }
-    if (json.weather[0]) {
-      weather.condition.main = json.weather[0].main;
-      weather.condition.description = json.weather[0].description;
-      weather.condition.icon = this.weatherIconSafely(json.weather[0].icon, this.resolveOpenWeatherIcon); 
-    }
-    if (json.clouds) {
-      weather.cloudiness = json.clouds.all;
-    }    
   },
 
   parseOpenWeatherForecast: function(json) {
-    // We have to Compile Day data manually because
-    // we get 8 json blobs per day 
-    let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
-    let counter = 0;       // Start counter, incremented for new days
+    try {
+      // We have to Compile Day data manually because
+      // we get 8 json blobs per day 
+      let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
+      let counter = 0;       // Start counter, incremented for new days
 
-    let forecast;
-    weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
-    for (let i = 0; i < json.list.length; i++) {
-      let currentDate = new Date((json.list[i].dt + weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
-      // If a item belongs to a new day, push forecast to the array and reset it.
-      if (currentDate.getUTCDate() != prevItemDate) {
-        counter++;
-        if (forecast != undefined) {
-          forecasts.push(forecast);
-        } 
-        forecast = {          // Blob Init
-          dateTime: null,             //Required
-          main: {
-            temp: null,
-            temp_min: null,           //Required
-            temp_max: null,           //Required
-            pressure: null,
-            sea_level: null,
-            grnd_level: null,
-            humidity: null,
-          },
-          condition: {
-            id: null,
-            main: null,               //Required
-            description: null,        //Required
-            icon: null,               //Required
-          },
-          clouds: null,
-          wind: {
-            speed: null,
-            deg: null,
-          }
-        };
-        // Set safe values for min/max to work properly
-        forecast.main.temp_min = 900;
-        forecast.main.temp_max = -5; 
-        // Return and display when we have got the required number of days
-        if (counter > this._forecastDays) {
-          return;
-        }    
-      }
-      forecast.dateTime = currentDate; // Time does not matter as long as its the same day
-      // Get min max temperatures for the day
-      if (json.list[i].main) {
-        forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
-        forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
-      }
-      // Get the worst weather conditions for the day
-      if (json.list[i].weather[0]) {
-        if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
-          forecast.condition.id = json.list[i].weather[0].id;
-          forecast.condition.main = json.list[i].weather[0].main;
-          forecast.condition.description = json.list[i].weather[0].description;
-          // Replace night icons with day icons for the forecasts
-          if ((json.list[i].weather[0].icon).endsWith("n")) {
-            json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
-          }
-          forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
+      let forecast;
+      weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
+      for (let i = 0; i < json.list.length; i++) {
+        let currentDate = new Date((json.list[i].dt + weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
+        // If a item belongs to a new day, push forecast to the array and reset it.
+        if (currentDate.getUTCDate() != prevItemDate) {
+          counter++;
+          if (forecast != undefined) {
+            forecasts.push(forecast);
+          } 
+          forecast = {          // Blob Init
+            dateTime: null,             //Required
+            main: {
+              temp: null,
+              temp_min: null,           //Required
+              temp_max: null,           //Required
+              pressure: null,
+              sea_level: null,
+              grnd_level: null,
+              humidity: null,
+            },
+            condition: {
+              id: null,
+              main: null,               //Required
+              description: null,        //Required
+              icon: null,               //Required
+            },
+            clouds: null,
+            wind: {
+              speed: null,
+              deg: null,
+            }
+          };
+          // Set safe values for min/max to work properly
+          forecast.main.temp_min = 900;
+          forecast.main.temp_max = -5; 
+          // Return and display when we have got the required number of days
+          if (counter > this._forecastDays) {
+            return true;
+          }    
         }
+        forecast.dateTime = currentDate; // Time does not matter as long as its the same day
+        // Get min max temperatures for the day
+        if (json.list[i].main) {
+          forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
+          forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
+        }
+        // Get the worst weather conditions for the day
+        if (json.list[i].weather[0]) {
+          if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
+            forecast.condition.id = json.list[i].weather[0].id;
+            forecast.condition.main = json.list[i].weather[0].main;
+            forecast.condition.description = json.list[i].weather[0].description;
+            // Replace night icons with day icons for the forecasts
+            if ((json.list[i].weather[0].icon).endsWith("n")) {
+              json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
+            }
+            forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
+          }
+      }
+        prevItemDate = currentDate.getUTCDate();
+      }
+      // Ran out of items, display
+      forecasts.push(forecast);
+      forecast = {};
+      return true;
     }
-      prevItemDate = currentDate.getUTCDate();
+    catch(e) {
+      logError(e);
+      return false;
     }
-    // Ran out of items, display
-    forecasts.push(forecast);
-    forecast = {};
   },
 
   getOpenWeatherQueryString: function(url) {
