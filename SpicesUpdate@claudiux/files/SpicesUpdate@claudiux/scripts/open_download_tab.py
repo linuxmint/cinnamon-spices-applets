@@ -7,8 +7,8 @@
 
 import sys
 import urllib.request as urllib
-sys.path.append("/usr/share/cinnamon/cinnamon-settings")
-import config
+#sys.path.append("/usr/share/cinnamon/cinnamon-settings")
+#import config
 from cinnamon_settings import *
 
 class SUMainWindow(MainWindow):
@@ -21,7 +21,7 @@ class SUMainWindow(MainWindow):
                 self.window.set_icon_name(sidePage.icon)
             sidePage.build()
             if sidePage.stack:
-                current_page = sidePage.stack.get_visible_child_name()
+                #current_page = sidePage.stack.get_visible_child_name()
                 self.stack_switcher.set_stack(sidePage.stack)
                 l = sidePage.stack.get_children()
                 if len(l) > 0:
@@ -53,7 +53,8 @@ class SUMainWindow(MainWindow):
             self.current_sidepage = sidePage
             width = 0
             for widget in self.top_bar:
-                m, n = widget.get_preferred_width()
+                #m, n = widget.get_preferred_width()
+                n = widget.get_preferred_width()[1]
                 width += n
             self.top_bar.set_size_request(width + 20, -1)
             self.maybe_resize(sidePage)
