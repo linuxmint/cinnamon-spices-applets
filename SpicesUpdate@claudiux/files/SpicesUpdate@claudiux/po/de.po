@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v1.0.1\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2019-01-02 13:30+0100\n"
-"PO-Revision-Date: 2019-01-19 12:53+0100\n"
+"PO-Revision-Date: 2019-01-27 02:23+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -290,6 +290,18 @@ msgstr ""
 "Auswahl zwischen klassischer Anzeige mit Icon und Text oder kompakter "
 "Anzeige (nur mit Icon)."
 
+#: settings-schema.json:316
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Das Icon verbergen, solange es keine Meldungen gibt"
+
+#: settings-schema.json:317
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Das Spices Update Icon erscheint nicht auf der Leiste, wenn es nichts zu "
+"melden gibt."
+
 #: applet.js:89
 msgid "Applet"
 msgstr "Applet"
@@ -370,15 +382,15 @@ msgstr "Neue Erweiterungen verfügbar:"
 msgid "New themes available:"
 msgstr "Neue Themen verfügbar:"
 
-#: applet.js:820
+#: applet.js:840
 msgid "is fully functional."
 msgstr "ist voll funktionsfähig."
 
-#: applet.js:821
+#: applet.js:841
 msgid "All dependencies are installed"
 msgstr "Alle Abhängigkeiten sind installiert"
 
-#: applet.js:843
+#: applet.js:863
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -386,19 +398,19 @@ msgstr ""
 "Es scheinen einige Programme zu fehlen, die für die vollständige "
 "Funktionsfähigkeit dieses Applets benötigt werden."
 
-#: applet.js:844
+#: applet.js:864
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Bitte im gerade geöffneten Terminal folgende Kommandos ausführen:"
 
-#: applet.js:845
+#: applet.js:865
 msgid "Some dependencies are not installed!"
 msgstr "Einige Abhängigkeiten sind nicht installiert!"
 
-#: applet.js:1270
+#: applet.js:1291
 msgid "Forget new Spices"
 msgstr "Diese neuen Spices nicht wieder anzeigen "
 
-#: applet.js:1277
+#: applet.js:1298
 msgid "Configure"
 msgstr "Konfigurieren"
 
