@@ -66,6 +66,7 @@ Openweather: max 60 calls per minute, Temporary ban and no charge
 */
 const DATA_SERVICE = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
+  OPEN_WEATHER_MAP_PRE: "OpenWeatherMap_prem",
   DARK_SKY: "DarkSky",
 }
 
@@ -146,13 +147,6 @@ const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 
-const WeatherWindSpeedUnits = {
-  KPH: 'kph',
-  MPH: 'mph',
-  MPS: 'm/s',
-  KNOTS: 'Knots'
-}
-
 const WeatherPressureUnits = {
   HPA: 'hPa',
   MMHG: 'mm Hg',
@@ -218,6 +212,7 @@ function _(str) {
 }
 
 const darkSky = require("darkSky");
+const openWeatherMap = require("openWeatherMap");
 
 //----------------------------------------------------------------
 //
@@ -246,31 +241,16 @@ const err_notCityID = _("This is not a city ID");
 //----------------------------------------------------------------------
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
-  this.settings = new Settings.AppletSettings(this, UUID, instanceId)
-  this.log = new Log(instanceId);
-  this.currentLocale = GLib.get_language_names()[0];
-  this.systemLanguage = this.currentLocale.split('_')[0];
+    this.settings = new Settings.AppletSettings(this, UUID, instanceId)
+    this.log = new Log(instanceId);
+    this.currentLocale = GLib.get_language_names()[0];
+    this.systemLanguage = this.currentLocale.split('_')[0];
 
-  // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-  this._httpSession = new Soup.SessionAsync();
-  Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
+    this._httpSession = new Soup.SessionAsync();
+    Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
 
-  this.provider;  //API
-
-  this.WeatherUnits = {
-    CELSIUS: 'celsius',
-    FAHRENHEIT: 'fahrenheit'
-  }
-
-    ///
-    /// Cache
-    ///
-    this.coordinates = {
-      lat: null,
-      lon: null
-    }
-    this.TimeZone = null;
-    this.tzOffset = null;
+    this.provider;  //API
 
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -353,8 +333,49 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
     }*/
 
     ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////   
-  this._init(orientation, panelHeight, instanceId)
+    ///////////////////////////////////////////////////////////////////////  
+    
+     // Units
+     this.WeatherUnits = {
+      CELSIUS: 'celsius',
+      FAHRENHEIT: 'fahrenheit'
+    }
+
+    this.WeatherWindSpeedUnits = {
+      KPH: 'kph',
+      MPH: 'mph',
+      MPS: 'm/s',
+      KNOTS: 'Knots'
+    }
+
+    ///
+    /// Cache
+    ///
+    this.coordinates = {
+      lat: null,
+      lon: null
+    }
+    this.TimeZone = null;
+    this.tzOffset = null;
+
+    this.errMsg = { // Error messages to use
+      label: {
+        generic: _("Error"),
+        service: _("Service Error"),
+        noKey: _("No Api key Provided"),
+        noLoc: _("No Location provided"),
+      },
+      desc: {
+        keyBad: _("Wrong API Key"),
+        locBad: _("Wrong Location"),
+        locNotFound: _("Location Not found"),
+        parse: _("Parsing weather information failed :("),
+        keyBlock: _("Key Temp. Blocked"),
+        unknown: _("Unknown Error")
+      }
+    }
+
+    this._init(orientation, panelHeight, instanceId)
 }
 
 // Class Declaration
@@ -538,28 +559,30 @@ MyApplet.prototype = {
                         St.IconType.FULLCOLOR
   },
 
-  displayLabelError: function(errorMsg) {
-    this.set_applet_label(errorMsg);
+  showError: function(title, msg) {
+    this.set_applet_label(title);
     this.set_applet_tooltip("Click to open");
-    this.set_applet_icon_name("");
+    this.set_applet_icon_name("weather-severe-alert");
+    this._currentWeatherSunrise.text = msg;
   },
 
   refreshWeather: async function(recurse) {  
     try {
       // Adding resilience against bad user input
       if (this._location == undefined || this._location == "") {
-        this.displayLabelError(err_noLocation);
+        this.showError(err_noLocation, "");
         return false;
       }
       this.wipeCurrentData();
       this.wipeForecastData();
+      let refreshResult;
       switch(this._dataService) {
         case DATA_SERVICE.OPEN_WEATHER_MAP:
           //
           //  No Timezone information, fetch from geolocation api
           //
           if (this.noApiKey()) {
-            this.displayLabelError(err_noKey);
+            this.showError(err_noKey, "");
             return false;
           }
           // Constructing Query
@@ -569,64 +592,51 @@ MyApplet.prototype = {
           this.log.Error("Location provided in an incorrect format");
             return false;
           }
-          // Getting Current Weather
-          let result = await this.getOpenWeatherCurrentWeather(weatherQuery);
-          if (!result) {
-            Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
-              this.refreshWeather(false);
-            }));
-            this.log.Error("Unable to obtain Weather Information");
-            return false;
-          }
-
+          refreshResult = await this.getOpenWeatherCurrentWeather(weatherQuery);
           // get timezone if location changed, needed for processing forecasts
           if (this.coordinates.lat == null || this.coordinates.lat != this.weather.coord.lat || this.coordinates.lon != this.weather.coord.lon) {
             //this.TimeZone =
             //this.tzoffset = 
           }
-          // Get Forecast
-          result = await this.getOpenWeatherForecast(forecastQuery);
-          if (!result) {      
-            Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
-              this.refreshWeather(false);
-            }));
-            this.log.Error("Unable to obtain Forecast Information");
-            return false;
-          }
+          refreshResult = await this.getOpenWeatherForecast(forecastQuery);
           break;
         case DATA_SERVICE.DARK_SKY:
           //
           // No City and Country information, fetch from geolocation api
           //
           this.provider = new darkSky.DarkSky(this);
-          let thisResult = await this.provider.GetWeather();
-          if (!thisResult) {
-            this.log.Error("Unable to obtain Weather Information");
-            Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
-              this.refreshWeather(false);
-            }));
-            return false;
-          }
+          refreshResult = await this.provider.GetWeather();
+          break;
+        case DATA_SERVICE.OPEN_WEATHER_MAP_PRE:
+          this.provider = new openWeatherMap.OpenWeatherMap(this);
+          refreshResult = await this.provider.GetWeather();
           break;
         default:
-          return false;
+          return;
       }
-      
-      // Everything was successful, display
+
+      if (!refreshResult) {           // Failed
+        this.log.Error("Unable to obtain Weather Information");
+        Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
+          this.refreshWeather(false);
+        }));
+        return;
+      }
+
       this.displayWeather();
       this.displayForecast();
       this.log.Print("Weather Information refreshed");
     }
     catch(e) {  // Never break Main loop!!!!
       this.log.Error("Error while refreshing Weather info: " + e);
-      displayLabelError("Error while refresh");
     }
+
     if (recurse) {
       Mainloop.timeout_add_seconds(this._refreshInterval * 60, Lang.bind(this, function() {
         this.refreshWeather(true)
       }))
     }
-    return true;
+    return;
   },
 
   displayWeather: async function() {
@@ -675,9 +685,9 @@ MyApplet.prototype = {
       // Temperature
       let temp = "";
       if (this.weather.main.temperature != null) {
-        this.log.Debug("Temperature: " + this.weather.main.temperature);
         temp = this.TempToUserUnits(this.weather.main.temperature);
         this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+        this.log.Debug("Temperature: " + this.weather.main.temperature + " Kelvin is converted to " + temp + ' ' + this.unitToUnicode());
       }
 
       // Set Applet Label, even if the variables are empty
@@ -716,6 +726,12 @@ MyApplet.prototype = {
             this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
           }
           break;
+        case DATA_SERVICE.OPEN_WEATHER_MAP_PRE:
+          if (this.weather.cloudiness != null) {
+            this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
+            this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
+          }
+          break;
         case DATA_SERVICE.DARK_SKY:
           if (this.weather.main.feelsLike != null) {
             this._currentWeatherApiUnique.text = this.TempToUserUnits(this.weather.main.feelsLike) + this.unitToUnicode();
@@ -745,11 +761,16 @@ MyApplet.prototype = {
         if (this._showSunrise) {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
-          // Adding ways to get proper tz support
-          // en-GB returns time in the correct format to use for our method
-          //global.log(weather.sunrise.toLocaleString("en-GB", {timeZone: weather.timeZone, hour: "2-digit", minute: "2-digit"}));
-          sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.weather.sunrise.toLocaleFormat('%H:%M')));
-          sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.weather.sunset.toLocaleFormat('%H:%M')));
+          if (this.weather.timeZone != null) {     //have TZ, en-GB returns time in the correct format
+              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+              let sunset = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+              sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
+              sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
+          }
+          else {   // else We assume that System TZ and Location TZ is same, covers 95% of users   
+            sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.weather.sunrise.toLocaleFormat('%H:%M')));
+            sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.weather.sunset.toLocaleFormat('%H:%M')));
+          }         
         }
       }
       
@@ -774,16 +795,23 @@ MyApplet.prototype = {
 
         let first_temperature = this._temperatureHighFirst ? t_high : t_low;
         let second_temperature = this._temperatureHighFirst ? t_low : t_high;
-        let comment;
-        if (this._shortConditions) {
-          comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
-        }
-        else {
-          comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+        let comment = "";
+        if (forecastData.condition.main != null && forecastData.condition.description != null) {
+          if (this._shortConditions) {
+            comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
+          }
+          else {
+            comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+          }
         }
         let dayName = forecastData.dateTime;
-        dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-        dayName = this.getDayName(dayName.getUTCDay());
+        if (this.weather.timeZone != null) {
+           dayname = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
+        }
+        else {
+          dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
+          dayName = this.getDayName(dayName.getUTCDay());
+        }       
         
         forecastUi.Day.text = dayName;
         forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
@@ -804,6 +832,8 @@ MyApplet.prototype = {
         this.weather.location.city = null;
         this.weather.location.country = null;
         this.weather.location.id = null;
+        this.weather.location.timeZone = null;
+        this.weather.location.tzOffset = null;
         this.weather.coord.lat = null;
         this.weather.coord.lon = null;
         this.weather.sunrise = null;
@@ -1053,16 +1083,16 @@ MyApplet.prototype = {
   MPStoUserUnits: function MPStoUserUnits(mps) {
       // Override wind units with our preference, takes Meter/Second wind speed
       switch (this._windSpeedUnit) {
-        case WeatherWindSpeedUnits.MPH:
+        case this.WeatherWindSpeedUnits.MPH:
           //Rounding to 1 decimal
           return Math.round ((mps * WEATHER_CONV_MPH_IN_MPS) * 10)/ 10;
-        case WeatherWindSpeedUnits.KPH:
+        case this.WeatherWindSpeedUnits.KPH:
           //Rounding to 1 decimal
           return Math.round ((mps * WEATHER_CONV_KPH_IN_MPS) * 10)/ 10;
-        case WeatherWindSpeedUnits.MPS:
+        case this.WeatherWindSpeedUnits.MPS:
           // Rounding to 1 decimal just in case API does not return it in the same format
           return Math.round (mps * 10)/ 10;
-        case WeatherWindSpeedUnits.KNOTS:
+        case this.WeatherWindSpeedUnits.KNOTS:
           //Rounding to whole units
           return Math.round (mps * WEATHER_CONV_KNOTS_IN_MPS);
       }
@@ -1191,9 +1221,17 @@ MyApplet.prototype = {
 
   getOpenWeatherCurrentWeather: async function(query) {  
     // Can use Synchronous calls, we are already in async
-    let message = Soup.Message.new('GET', query);
-    this._httpSession.send_message(message);
-    let json =  JSON.parse(message.response_body.data);
+    this.log.Debug(query);
+    let json;
+    try {
+      let message = Soup.Message.new('GET', query);
+      this._httpSession.send_message(message);
+      json =  JSON.parse(message.response_body.data);
+    }
+    catch(e) {
+      this.log.Error("Unable to Call API: " + e);
+      return false;
+    }
     if (this.isOpenWeatherResponseValid(json)) {
       return this.parseOpenWeather(json);
     }
@@ -1201,9 +1239,17 @@ MyApplet.prototype = {
   },
 
   getOpenWeatherForecast: async function(query) {
-    let message = Soup.Message.new('GET', query);
-    this._httpSession.send_message(message);
-    let json =  JSON.parse(message.response_body.data);
+    this.log.Debug(query);
+    let json;
+    try {
+      let message = Soup.Message.new('GET', query);
+      this._httpSession.send_message(message);
+      json =  JSON.parse(message.response_body.data);
+    }
+    catch (e) {
+      this.log.Error("Unable to Call API: " + e);
+      return false;
+    }
     if (this.isOpenWeatherResponseValid(json)) {
       return this.parseOpenWeatherForecast(json);
     }     
@@ -1212,28 +1258,25 @@ MyApplet.prototype = {
 
   isOpenWeatherResponseValid: function(response) {
     if (!response) {
-      this.displayLabelError(err_noService);
+      this.showError(err_noService, "");
       return false;
     }
     let errorMsg = "OpenWeatherMap API: ";
     if (response.cod != 200) {
-      this.displayLabelError(err_service);
+      
       if (response.cod == 400) {
-        this.log.Error(errorMsg + response.message);
-        this._currentWeatherSummary.text = err_notCityID;
+        this.showError(err_service, err_notCityID);
       }
       if (response.cod == 401) {
-        this.log.Error(errorMsg + response.message);
-        this._currentWeatherSummary.text = err_wrongKey;
+        this.showError(err_service, err_wrongKey);
       }
       if (response.cod == 404) {
-        this.log.Error(errorMsg + response.message);
-        this._currentWeatherSummary.text = err_locError;
+        this.showError(err_service, err_locError);
       }
       if (response.cod == 429) {
-        this.log.Error(errorMsg + response.message);
-        this._currentWeatherSummary.text = err_keyBlocked;
+        this.showError(err_service, err_keyBlocked);
       }
+      this.log.Error(errorMsg + response.message);
       return false;
     }
     return true;      
@@ -1277,8 +1320,7 @@ MyApplet.prototype = {
     }
     catch(e) { 
       this.log.Error(e);
-      this.displayLabelError(err_parseLabel);
-      this._currentWeatherSunrise.text = err_parse;
+      this.showError(err_parseLabel, err_parse);
       return false; 
     }
   },
@@ -1359,8 +1401,7 @@ MyApplet.prototype = {
     }
     catch(e) {
       this.log.Error(e);
-      this.displayLabelError(err_parseLabel);
-      this._currentWeatherSunrise.text = err_parse;
+      this.showError(err_parseLabel, err_parse);
       return false;
     }
   },
@@ -1483,7 +1524,7 @@ const OWsupported = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
 //
 
 const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
-_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky")];
+_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky"), _("Sky is clear")];
 
 const icons = {
   clear_day: 'weather-clear',

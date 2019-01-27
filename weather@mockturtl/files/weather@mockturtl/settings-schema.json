@@ -19,6 +19,7 @@
   , "options":
     { 
       "OpenWeatherMap": "OpenWeatherMap",
+      "OpenWeatherMap (premium)": "OpenWeatherMap_prem",
       "DarkSky": "DarkSky"
     }
   },
@@ -147,6 +148,10 @@
   , "units": "minutes"
   , "step": 5
   , "description": "Update interval"
+  },
+  "credits": {
+    "type": "header",
+    "description": "powered by: OpenWeatherMap, DarkSky."
   }
 }
 

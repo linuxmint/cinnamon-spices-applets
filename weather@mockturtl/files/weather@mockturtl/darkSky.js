@@ -13,6 +13,7 @@ exports.DarkSky = function(app) {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
+    this.descriptionLinelength = 25;
     this.supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
         'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
@@ -20,7 +21,14 @@ exports.DarkSky = function(app) {
         'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'];
 
     this.query = "https://api.darksky.net/forecast/";
+    
 
+    this.queryUnits = {
+        scientific: 'si',       // speed meter/sec, temp C
+        imperial: 'us',         // speed miles/hour, temp F
+        uk: 'uk2'               // speed miles/hour, temp C
+    }
+    this.queryUnit = null;
 
     //--------------------------------------------------------
     //  Functions
@@ -66,9 +74,9 @@ exports.DarkSky = function(app) {
             app.weather.coord.lon = json.longitude;
             app.weather.sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
             app.weather.sunset = new Date(json.daily.data[0].sunsetTime * 1000);
-            app.weather.wind.speed = json.currently.windSpeed;
+            app.weather.wind.speed = this.ToMPS(json.currently.windSpeed);
             app.weather.wind.degree = json.currently.windBearing;
-            app.weather.main.temperature = app.CelsiusToKelvin(json.currently.temperature);
+            app.weather.main.temperature = this.ToKelvin(json.currently.temperature);
             app.weather.main.pressure = json.currently.pressure;
             app.weather.main.humidity = json.currently.humidity * 100;
                 // Using Summary for both, only short description available
@@ -76,7 +84,7 @@ exports.DarkSky = function(app) {
             app.weather.condition.description = json.currently.summary;
             app.weather.condition.icon = app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
             app.weather.condition.cloudiness = json.currently.cloudCover * 100;
-            app.weather.main.feelsLike = app.CelsiusToKelvin(json.currently.apparentTemperature); //convert
+            app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature); //convert
             // Forecast
             for (let i = 0; i < app._forecastDays; i++) {
                 // Object
@@ -105,8 +113,8 @@ exports.DarkSky = function(app) {
                   };
                   let day = json.daily.data[i];
                   forecast.dateTime = new Date(day.time * 1000);
-                  forecast.main.temp_min = app.CelsiusToKelvin(day.temperatureLow);
-                  forecast.main.temp_max = app.CelsiusToKelvin(day.temperatureHigh);
+                  forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
+                  forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                   forecast.condition.main = this.GetShortSummary(day.summary);
                   forecast.condition.description = this.ProcessSummary(day.summary);
                   forecast.condition.icon = app.weatherIconSafely(day.icon, this.ResolveIcon);
@@ -126,10 +134,11 @@ exports.DarkSky = function(app) {
 
 
     this.ConstructQuery = function() {
+        this.SetQueryUnit();
         let query;
         if (app.isCoordinate(app._location)) {
             query = this.query + app._apiKey + "/" + app._location + 
-            "?exclude=minutely,hourly,flags" + "&units=si";
+            "?exclude=minutely,hourly,flags" + "&units=" + this.queryUnit;
             if (app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + app.systemLanguage;
             }
@@ -161,15 +170,12 @@ exports.DarkSky = function(app) {
         let result = "";
         let linelength = 0;
         for (let i = 0; i < processed.length; i++) {
-            if (linelength + processed[i].length < 18) {
-                result = result + processed[i] + " ";
-                linelength = linelength + processed[i].length + 1;
-            }
-            else {
+            if (linelength + processed[i].length > this.descriptionLinelength) {
                 result = result + "\n";
                 linelength = 0;
-                result = result + processed[i] + " ";
             }
+            result = result + processed[i] + " ";
+            linelength = linelength + processed[i].length + 1;
         }
         return result;
     };
@@ -187,15 +193,11 @@ exports.DarkSky = function(app) {
 
     this.ResolveIcon = function(icon) {
         switch (icon) {
-            case "rain":/* rain day */
+            case "rain":
               return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
-            //case "09n":/* showers nigh*/
-              //return ['weather-showers']
-            //case "09d":/* showers day */
-              //return ['weather-showers']
-            case "snow":/* snow day*/
+            case "snow":
               return ['weather-snow']
-            case "fog":/* mist day */
+            case "fog":
               return ['weather-fog']
            // case "04d":/* broken clouds day */
            //   return ['weather_overcast', 'weather-clouds', "weather-few-clouds"]
@@ -204,23 +206,57 @@ exports.DarkSky = function(app) {
            // case "03n":/* mostly cloudy (night) */
            //   return ['weather-clouds-night', 'weather-few-clouds-night']
             case "cloudy":/* mostly cloudy (day) */
-              return ['weather-clouds', 'weather-overcast', 'weather-few-clouds']
-            case "partly-cloudy-night":/* partly cloudy (night) */
+              return ['weather-overcast', 'weather-clouds', , 'weather-few-clouds']
+            case "partly-cloudy-night":
               return ['weather-few-clouds-night']
-            case "partly-cloudy-day":/* partly cloudy (day) */
+            case "partly-cloudy-day":
               return ['weather-few-clouds']
-            case "clear-night":/* clear (night) */
+            case "clear-night":
               return ['weather-clear-night']
-            case "clear-day":/* sunny */
+            case "clear-day":
               return ['weather-clear']
-            //case "11d":/* storm day */
-            //  return ['weather-storm']
-            //case "11n":/* storm night */
-            //  return ['weather-storm']
+            // Have not seen Storm or Showers icons returned yet
+            case "storm":
+              return ['weather-storm']
+            case "showers":
+              return ['weather-showers']
             case "wind":
                 return ["weather-wind"]
             default:
               return ['weather-severe-alert']
           }
+    };
+
+    this.SetQueryUnit = function() {
+        if (app._temperatureUnit == app.WeatherUnits.CELSIUS){
+            if (app._windSpeedUnit == app.WeatherWindSpeedUnits.KPH || app._windSpeedUnit == app.WeatherWindSpeedUnits.MPS) {
+                this.queryUnit = this.queryUnits.scientific;
+            }
+            else {
+                this.queryUnit = this.queryUnits.uk;
+            }
+        }
+        else {
+            this.queryUnit = this.queryUnits.imperial;
+        }
+    };
+
+    this.ToKelvin = function(temp) {
+        if (this.queryUnit == this.queryUnits.imperial) {
+            return app.FahrenheitToKelvin(temp);
+        }
+        else {
+            return app.CelsiusToKelvin(temp);
+        }
+
+    };
+
+    this.ToMPS = function(speed) {
+        if (this.queryUnit == this.queryUnits.scientific) {
+            return speed;
+        }
+        else {
+            return app.MPHtoMPS(speed);
+        }
     };
 };

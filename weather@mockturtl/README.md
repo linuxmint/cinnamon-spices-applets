@@ -22,9 +22,21 @@ The following formats are supported:
 
 If the location you try does not work, try using [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates.
 
+
+
+------
+
 ### DarkSky API Key Setup
 
+Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.
+
 ### DarkSky Location
+
+DarkSky only supports Latitude, Longitude format! (e.g. 37.77,122.41)
+
+------
+
+
 
 ## Requirements
 
@@ -41,8 +53,8 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Known Issues
 * Translations in general and are in bad shape after the rework, contribute if you can, it is always much appreciated.
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location and system timezone
-* DarkSky verbose conditions are only in cm/celsius
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone
+* DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
 
 ###### Fedora 19 "Schrödinger's Cat" 
 
