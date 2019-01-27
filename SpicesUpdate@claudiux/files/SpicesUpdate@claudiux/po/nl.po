@@ -296,6 +296,14 @@ msgstr ""
 "Deze functie biedt de klassieke (standaard) weergave met pictogram en tekst "
 "en een compacte weergave (alleen pictogram)."
 
+#: ./settings-schema.json:316
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Verberg het pictogram zolang er niets te melden is"
+
+#: ./settings-schema.json:317
+msgid "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+msgstr "Door dit selectievakje in te schakelen, verschijnt het pictogram van Spices Update als er niets te melden is niet in het paneel"
+
 #: applet.js:89
 msgid "Applet"
 msgstr "Hulptoepassing"
