@@ -22,8 +22,10 @@ The Spices Update requires the ```notify-send``` tool and the ```symbola``` True
 
 To install it:
 
-  * Fedora: ```sudo dnf install libnotify gdouros-symbola-fonts```
-  * Arch: ```sudo pacman -Syu libnotify ttf-symbola```
+  * Fedora: `sudo dnf install libnotify gdouros-symbola-fonts`
+  * Arch:
+    * ```sudo pacman -Syu libnotify```
+    * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
   * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
 
 **This applet helps you to install this dependencies, if any.**
@@ -37,7 +39,7 @@ The first, _General_, allows you to:
   * Select the _Time interval between two checks_ (in hours). Please note that the first check will take place one minute after starting this applet.
   * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone.
   * Select the _Type of display_ of the icon: with or without text?
-  * Hide the icon applet while nothing is to report.
+  * Hide the icon applet while nothing is to report. _Please note that Spices Update settings are only accessible when the applet icon is visible or by opening the Cinnamon Settings-> Applets._
 
 For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
 
