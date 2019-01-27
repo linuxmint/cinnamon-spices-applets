@@ -98,9 +98,9 @@ const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit'
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
 const WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions'
+const WEATHER_MANUAL_LOCATION = "manualLocation"
 
 const KEYS = [,
-  WEATHER_LOCATION,
   WEATHER_DATA_SERVICE,
   WEATHER_API_KEY,
   WEATHER_TEMPERATURE_UNIT_KEY,
@@ -116,7 +116,8 @@ const KEYS = [,
   WEATHER_FORECAST_DAYS,
   WEATHER_REFRESH_INTERVAL,
   WEATHER_PRESSURE_UNIT_KEY,
-  WEATHER_SHORT_CONDITIONS_KEY
+  WEATHER_SHORT_CONDITIONS_KEY,
+  WEATHER_MANUAL_LOCATION
 ]
 
 // Signals
@@ -213,26 +214,14 @@ function _(str) {
 
 const darkSky = require("darkSky");
 const openWeatherMap = require("openWeatherMap");
+// Location lookup service
+const ipApi = require("ipApi");
 
 //----------------------------------------------------------------
 //
 // l10n
 //
 //----------------------------------------------------------------------
-
-// labelErrors
-const err_parseLabel = _("Error");
-const err_service = _("Service Error");
-const err_noService = _("Service Unavailable");
-const err_noLocation = _("No Location provided");
-const err_noKey = _("No Api key Provided");
-
-// Summary Errors
-const err_wrongKey = _("Wrong API Key");
-const err_locError = _("City Not found");
-const err_keyBlocked = _("Key Temp. Blocked");
-const err_parse = _("Cannot parse weather information :(");
-const err_notCityID = _("This is not a city ID");
 
 //----------------------------------------------------------------------
 //
@@ -248,24 +237,28 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
 
     // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
     this._httpSession = new Soup.SessionAsync();
+    this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
 
-    this.provider;  //API
+    this.provider;  // API
+    this.locProvider = new ipApi.IpApi(this); // IP location lookup
 
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
     ///////////                                       ////////////
-    ///////////       Weather Data Storage            ////////////
+    ///////////              Data Storage             ////////////
     ///////////                                       ////////////
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
+    // Translation layer is necessary with multiple API choices
+    // Init with null, something we can properly check for
 
     // 
     //  If you get the values in these objects correctly with correct units
     //  from a new API, Everything will work as intended.
     //
     this.weather = {
-      dateTime: null,           // DateTime object, UTC
+      dateTime: null,           // Date object, UTC
       location: {
         city: null,
         country: null,          // Country code
@@ -277,8 +270,8 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
         lat: 	null,
         lon: null,
       },
-      sunrise: null,             // Astronomical Time
-      sunset: null,              // Astronomical Time
+      sunrise: null,             // Date object, UTC
+      sunset: null,              // Date object, UTC
       wind: {
         speed: null,             // MPS
         degree: null,            // meteorlogical degrees
@@ -289,24 +282,22 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
         humidity: null,          // %
         temp_min: null,          // Kelvin, not used
         temp_max: null,          // Kelvin, not used
-        feelsLike: null         // kelvin
+        feelsLike: null          // kelvin
       },
       condition: {
         id: null,                // ID, not used
-        main: null,              // See condition names
-        description: null,       // condition within condition group
-        icon: null,              // see GTK icon names
+        main: null,              // What API returns
+        description: null,       // Longer description, if not available put the same whats in main
+        icon: null,              // GTK weather icon names
       },
       cloudiness: null,          // %
     }
     
     this.forecasts = [];
-    // Store parsed values in unified json,
-    // Translation layer is necessary with multiple API choices
-    // Init with null, something we can check for
 
     // a forecast template
-    // Same units as weather, create an object like this then push into forecasts array
+    // Same units as weather, 
+    // create an object like this then push into forecasts array
 
     /*var aForecast = { 
       dateTime: null,             //Required
@@ -348,22 +339,12 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
       KNOTS: 'Knots'
     }
 
-    ///
-    /// Cache
-    ///
-    this.coordinates = {
-      lat: null,
-      lon: null
-    }
-    this.TimeZone = null;
-    this.tzOffset = null;
-
     this.errMsg = { // Error messages to use
       label: {
         generic: _("Error"),
         service: _("Service Error"),
-        noKey: _("No Api key Provided"),
-        noLoc: _("No Location provided"),
+        noKey: _("No Api key"),
+        noLoc: _("No Location"),
       },
       desc: {
         keyBad: _("Wrong API Key"),
@@ -371,6 +352,7 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
         locNotFound: _("Location Not found"),
         parse: _("Parsing weather information failed :("),
         keyBlock: _("Key Temp. Blocked"),
+        cantGetLoc: _("Could not get location"),
         unknown: _("Unknown Error")
       }
     }
@@ -382,7 +364,7 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
 MyApplet.prototype = {
   __proto__: Applet.TextIconApplet.prototype
 
-, refreshAndRebuild: function refreshAndRebuild() {
+, refreshAndRebuild: function () {
     this.refreshWeather(false).then(this.rebuild());
   },
 
@@ -414,6 +396,10 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, key, keyProp,
                                    this.refreshAndRebuild, null)
       }
+
+      this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+         WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
+
       this.settings.bindProperty(Settings.BindingDirection.IN,
                                  "keybinding",
                                  "keybinding",
@@ -490,7 +476,7 @@ MyApplet.prototype = {
       }
    },
 
-   locationLookup: function locationLookup() {
+   locationLookup: async function locationLookup() {
     let command = "xdg-open ";
     switch(this._dataService) {
       case DATA_SERVICE.OPEN_WEATHER_MAP:
@@ -567,14 +553,33 @@ MyApplet.prototype = {
   },
 
   refreshWeather: async function(recurse) {  
+    //Reset
+    this.wipeCurrentData();
+    this.wipeForecastData();
+    
+    // Making sure location is in place
     try {
-      // Adding resilience against bad user input
-      if (this._location == undefined || this._location == "") {
-        this.showError(err_noLocation, "");
-        return false;
+      if (!this._manualLocation) {    // Autmatic location
+        // Have to check every time to make sure location is the same
+        let haveLocation = await this.locProvider.GetLocation();
+        if (!haveLocation) {
+          this.log.Error("Couldn't obtain location, retry in 30 seconds...");
+          this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
+          Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
+            this.refreshWeather(false);
+          }));
+          return;
+        }
       }
-      this.wipeCurrentData();
-      this.wipeForecastData();
+      else {        // Manual Location
+        // Adding resilience against bad user input
+        if (this._location == undefined || this._location == "") {
+          this.showError(this.errMsg.label.noLoc, "");
+          this.log.Error("No location given when setting is on Manual error");
+          return;
+        }
+      }
+
       let refreshResult;
       switch(this._dataService) {
         case DATA_SERVICE.OPEN_WEATHER_MAP:
@@ -582,7 +587,7 @@ MyApplet.prototype = {
           //  No Timezone information, fetch from geolocation api
           //
           if (this.noApiKey()) {
-            this.showError(err_noKey, "");
+            this.showError(this.errMsg.label.noKey, "");
             return false;
           }
           // Constructing Query
@@ -593,8 +598,8 @@ MyApplet.prototype = {
             return false;
           }
           refreshResult = await this.getOpenWeatherCurrentWeather(weatherQuery);
-          // get timezone if location changed, needed for processing forecasts
-          if (this.coordinates.lat == null || this.coordinates.lat != this.weather.coord.lat || this.coordinates.lon != this.weather.coord.lon) {
+          // kick off call for timezone if it was not obtained previously
+          if (this.weather.location.timeZone == null) {
             //this.TimeZone =
             //this.tzoffset = 
           }
@@ -748,10 +753,8 @@ MyApplet.prototype = {
         this._currentWeatherPressure.text = this.PressToUserUnits(this.weather.main.pressure) + ' ' + _(this._pressureUnit);
       }
 
-      // location is a button
-      // No URL is provided, disable it for now
-      //this._currentWeatherLocation.url = tmp.length > 1 ? tmp[1] : tmp[0];
-      this._currentWeatherLocation.label = location;
+      // Location
+      this._currentWeatherLocation.text = location;
 
       // Sunset/Sunrise
       // gettext can't see these inline
@@ -896,24 +899,12 @@ MyApplet.prototype = {
       style_class: STYLE_SUMMARY
     })
 
-    this._currentWeatherLocation = new St.Button({
+    this._currentWeatherLocation = new St.Label({
       reactive: true,
-      label: _('Refresh')
+      text: ''
     })
 
     this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK
-
-    // link to the details page
-    this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function() {
-      if (this._currentWeatherLocation.url == null) {
-        this.refreshWeather(false)
-      } else {
-        Gio.app_info_launch_default_for_uri(
-          this._currentWeatherLocation.url,
-          global.create_app_launch_context()
-        )
-      }
-    }))
 
     let bb = new St.BoxLayout({
       vertical: true,
@@ -1258,23 +1249,23 @@ MyApplet.prototype = {
 
   isOpenWeatherResponseValid: function(response) {
     if (!response) {
-      this.showError(err_noService, "");
+      this.showError(this.errMsg.label.service, "");
       return false;
     }
     let errorMsg = "OpenWeatherMap API: ";
     if (response.cod != 200) {
       
       if (response.cod == 400) {
-        this.showError(err_service, err_notCityID);
+        this.showError(this.errMsg.label.service, this.errMsg.desc.locNotFound);
       }
       if (response.cod == 401) {
-        this.showError(err_service, err_wrongKey);
+        this.showError(this.errMsg.label.service, this.errMsg.desc.keyBad);
       }
       if (response.cod == 404) {
-        this.showError(err_service, err_locError);
+        this.showError(this.errMsg.label.service, this.errMsg.desc.locBad);
       }
       if (response.cod == 429) {
-        this.showError(err_service, err_keyBlocked);
+        this.showError(this.errMsg.label.service, this.errMsg.desc.keyBlock);
       }
       this.log.Error(errorMsg + response.message);
       return false;
@@ -1320,7 +1311,7 @@ MyApplet.prototype = {
     }
     catch(e) { 
       this.log.Error(e);
-      this.showError(err_parseLabel, err_parse);
+      this.showError(this.errMsg.label.generic, this.errMsg.desc.parse);
       return false; 
     }
   },
@@ -1401,7 +1392,7 @@ MyApplet.prototype = {
     }
     catch(e) {
       this.log.Error(e);
-      this.showError(err_parseLabel, err_parse);
+      this.showError(this.errMsg.label.generic, this.errMsg.desc.parse);
       return false;
     }
   },

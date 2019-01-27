@@ -36,17 +36,27 @@ exports.DarkSky = function(app) {
     this.GetWeather = async function() {
         let query = this.ConstructQuery();
         let json;
-        if (query != "" | query != null) {
+        let message;
+        if (query != "" && query != null) {
             app.log.Debug("DarkSky API query: " + query);
             try {
-                let message = Soup.Message.new('GET', query);
+                message = Soup.Message.new('GET', query);
                 app._httpSession.send_message(message);
+            }
+            catch(e) {
+                    app.log.Error("Unable to Call API: " + e);
+                    return false;
+                }
+            try {
+                // We get parsing error on persmission denied event
                 json =  JSON.parse(message.response_body.data);
             }
             catch(e) {
-                app.log.Error("Unable to Call API: " + e);
+                app.log.Error("DarkSky: Unable to parse Response payload: " + e);
+                app.showError(app.errMsg.label.service, app.errMsg.desc.keyBad);
                 return false;
             }
+            
             if (!json) {
                 app.log.Error("No Response from API");
                 return false;
@@ -60,7 +70,7 @@ exports.DarkSky = function(app) {
                 return false;
             }
         }
-        app.log.Error("Location provided in an incorrect format");
+        app.log.Error("DarkSky: Could not construct query, insufficent information");
         return false;
     };
 
@@ -80,7 +90,7 @@ exports.DarkSky = function(app) {
             app.weather.main.pressure = json.currently.pressure;
             app.weather.main.humidity = json.currently.humidity * 100;
                 // Using Summary for both, only short description available
-            app.weather.condition.main = json.currently.summary;        
+            app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);        
             app.weather.condition.description = json.currently.summary;
             app.weather.condition.icon = app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
             app.weather.condition.cloudiness = json.currently.cloudCover * 100;
@@ -136,10 +146,14 @@ exports.DarkSky = function(app) {
     this.ConstructQuery = function() {
         this.SetQueryUnit();
         let query;
+        if (app.noApiKey()) {
+            app.showError(app.errMsg.label.noKey, "");
+            return "";
+        }
         if (app.isCoordinate(app._location)) {
             query = this.query + app._apiKey + "/" + app._location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.queryUnit;
-            if (app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
+            if (app.isLangSupported(app.systemLanguage, this.supportedLanguages) && app._translateCondition) {
                 query = query + "&lang=" + app.systemLanguage;
             }
             return query;
@@ -191,6 +205,19 @@ exports.DarkSky = function(app) {
         return result;
     };
 
+    this.GetShortCurrentSummary = function(summary) {
+        let processed = summary.split(" ");
+        let result = "";
+        let maxLoop;
+        (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
+        for (let i = 0; i < maxLoop; i++) {
+            if (processed[i] != "and") {
+                result = result + processed[i] + " ";
+            }
+        }
+        return result;
+    }
+
     this.ResolveIcon = function(icon) {
         switch (icon) {
             case "rain":
@@ -208,7 +235,7 @@ exports.DarkSky = function(app) {
             case "cloudy":/* mostly cloudy (day) */
               return ['weather-overcast', 'weather-clouds', , 'weather-few-clouds']
             case "partly-cloudy-night":
-              return ['weather-few-clouds-night']
+              return ['weather-few-clouds-night', "weather-few-clouds"]
             case "partly-cloudy-day":
               return ['weather-few-clouds']
             case "clear-night":
@@ -220,8 +247,9 @@ exports.DarkSky = function(app) {
               return ['weather-storm']
             case "showers":
               return ['weather-showers']
+            // There is no guarantee that there is a wind icon
             case "wind":
-                return ["weather-wind"]
+                return ["weather-wind", "wind", "weather-breeze", 'weather-clouds', 'weather-few-clouds']
             default:
               return ['weather-severe-alert']
           }

@@ -68,6 +68,9 @@ exports.OpenWeatherMap = function(app) {
                 this.HandleResponseErrors(json);
                 return false;
             }
+        }
+        else {
+
         }       
     };
 
@@ -167,9 +170,22 @@ exports.OpenWeatherMap = function(app) {
         let locString = this.ParseLocation();
         let key = null;
         (app.noApiKey()) ? key = this.apiKey : key = app._apiKey;
-        if (locString != null && key != null) {
-            return query + locString + "&APPID=" + key;
+        if (key == null) {
+            app.showError(app.errMsg.label.noKey, "");
+            app.log.Error("OpenWeatherMap: No Api Key was provided");
+            return null;
         }
+        if (locString != null) {
+            query = query + locString + "&APPID=" + key;
+             // Append Language if supported and enabled
+            if (app._translateCondition && app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
+                query = query + "&lang=" + app.systemLanguage;
+            }
+            return query;
+        }
+        
+        app.showError(app.errMsg.label.noLoc, "");
+        app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
     };
 

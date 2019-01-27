@@ -27,11 +27,18 @@
   { "type": "entry"
   , "default": ""
   , "description": "API Key"
-  , "tooltip": "Copy this from your account on OpenWeatherMap and paste it here."
+  , "tooltip": "Copy this from your account of the used Data service and paste it here."
+  },
+  "manualLocation":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Manual Location"
+  , "tooltip": "Enable this if your location is not accurate"
   },
   "location":
   { "type": "entry"
   , "default": "London,UK"
+  , "dependency": "manualLocation"
   , "description": "Location"
   , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
 },
@@ -151,7 +158,7 @@
   },
   "credits": {
     "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky."
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi."
   }
 }
 
