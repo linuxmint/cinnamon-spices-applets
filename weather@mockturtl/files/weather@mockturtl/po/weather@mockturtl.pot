@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-26 10:44+0000\n"
+"POT-Creation-Date: 2019-01-27 00:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,223 +17,227 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:215
+#: applet.js:240
 msgid "Error"
 msgstr ""
 
-#: applet.js:216
+#: applet.js:241
 msgid "Service Error"
 msgstr ""
 
-#: applet.js:217
+#: applet.js:242
 msgid "Service Unavailable"
 msgstr ""
 
-#: applet.js:218
+#: applet.js:243
 msgid "No Location provided"
 msgstr ""
 
-#: applet.js:219
+#: applet.js:244
 msgid "No Api key Provided"
 msgstr ""
 
-#: applet.js:222
+#: applet.js:247
 msgid "Wrong API Key"
 msgstr ""
 
-#: applet.js:223
+#: applet.js:248
 msgid "City Not found"
 msgstr ""
 
-#: applet.js:224
+#: applet.js:249
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: applet.js:225
+#: applet.js:250
 msgid "Cannot parse weather information :("
 msgstr ""
 
-#: applet.js:226
+#: applet.js:251
 msgid "This is not a city ID"
 msgstr ""
 
-#: applet.js:356
+#: applet.js:384
 msgid "..."
 msgstr ""
 
-#: applet.js:357
+#: applet.js:385
 msgid "Click to open"
 msgstr ""
 
-#: applet.js:408
+#: applet.js:435
 msgid "Settings"
 msgstr ""
 
-#: applet.js:653
+#: applet.js:726
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:677
+#: applet.js:732
+msgid "Feels like:"
+msgstr ""
+
+#: applet.js:756
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:678
+#: applet.js:757
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:757
+#: applet.js:852
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:758
+#: applet.js:853
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:780
+#: applet.js:875
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:786
+#: applet.js:881
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:851
+#: applet.js:946
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:853
+#: applet.js:948
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:855
+#: applet.js:950
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:857
+#: applet.js:952
 msgid "Wind:"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Sunday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Monday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Tuesday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Wednesday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Thursday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Friday"
 msgstr ""
 
-#: applet.js:1078
+#: applet.js:1185
 msgid "Saturday"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "N"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "NE"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "E"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "SE"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "S"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "SW"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "W"
 msgstr ""
 
-#: applet.js:1083
+#: applet.js:1190
 msgid "NW"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Clouds"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Mist"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Thunderstorm"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Rain"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Snow"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Drizzle"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Haze"
 msgstr ""
 
-#: applet.js:1384
+#: applet.js:1495
 msgid "Sleet"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Smoke"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Fog"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Sand"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Dust"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Sqalls"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Tornado"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Volcanic ash"
 msgstr ""
 
-#: applet.js:1385
+#: applet.js:1496
 msgid "Clear Sky"
 msgstr ""
 
@@ -255,6 +259,10 @@ msgstr ""
 
 #. settings-schema.json->dataService->options
 msgid "OpenWeatherMap"
+msgstr ""
+
+#. settings-schema.json->dataService->options
+msgid "DarkSky"
 msgstr ""
 
 #. settings-schema.json->apiKey->description
@@ -376,7 +384,11 @@ msgid "Forecast length"
 msgstr ""
 
 #. settings-schema.json->translateCondition->description
-msgid "Translate condition"
+msgid "Translate conditions"
+msgstr ""
+
+#. settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
 msgstr ""
 
 #. settings-schema.json->useSymbolicIcons->description

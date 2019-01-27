@@ -18,7 +18,8 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap": "OpenWeatherMap"
+      "OpenWeatherMap": "OpenWeatherMap",
+      "DarkSky": "DarkSky"
     }
   },
   "apiKey":
@@ -69,8 +70,8 @@
     , "m/s": "m/s"
     , "knots": "Knots"
     }
-  }
-, "pressureUnit":
+  },
+  "pressureUnit":
   { "type": "combobox"
   , "default": "hPa"
   , "description": "Atmospheric pressure unit"
@@ -111,7 +112,12 @@
 , "translateCondition":
   { "type": "checkbox"
   , "default": true
-  , "description": "Translate condition"
+  , "description": "Translate conditions"
+  },
+  "shortConditions":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Less verbose conditions"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"

@@ -16,11 +16,15 @@ Copy this key and paste it into the "API Key" field in the applet configuration 
 ### OpenWeatherMap Location
 The following formats are supported:
 
-* City, Country Code (e.g. London, UK)
-* Zipcode, Country Code (e.g. 94111, US)
-* Latitude, Longitude (e.g. 37.77, 122.41)
+* City, Country Code (e.g. London,UK)
+* Zipcode, Country Code (e.g. 94111,US)
+* Latitude, Longitude (e.g. 37.77,122.41)
 
 If the location you try does not work, try using [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates.
+
+### DarkSky API Key Setup
+
+### DarkSky Location
 
 ## Requirements
 
@@ -38,9 +42,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 ## Known Issues
 * Translations in general and are in bad shape after the rework, contribute if you can, it is always much appreciated.
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location and system timezone
-
-## Roadmap
-* Add BBC as a Weather Provider
+* DarkSky verbose conditions are only in cm/celsius
 
 ###### Fedora 19 "Schrödinger's Cat" 
 
