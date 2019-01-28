@@ -242,6 +242,7 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
 
     this.provider;  // API
     this.locProvider = new ipApi.IpApi(this); // IP location lookup
+    this.lastUpdated = null;
 
     //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
@@ -463,9 +464,7 @@ MyApplet.prototype = {
       //------------------------------
       // run
       //------------------------------
-      Mainloop.timeout_add_seconds(3, Lang.bind(this, function mainloopTimeout() {
-        this.refreshWeather(true)
-      }))
+      this.refreshLoop();
 
       this.orientation = orientation;
       try {
@@ -485,6 +484,21 @@ MyApplet.prototype = {
       default:
         break;
     }
+  },
+
+  refreshLoop: function refreshLoop() {
+    // Main independent Loop
+    try {
+      if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval*60000) < new Date()) {
+        this.refreshWeather(false);
+      }
+    }
+    catch (e) {
+      this.log.Error("Error in Main loop: " + e);
+    }
+    Mainloop.timeout_add_seconds(15, Lang.bind(this, function mainloopTimeout() {
+      this.refreshLoop();
+    }))
   },
 
   update_label_visible: function () {
@@ -553,7 +567,6 @@ MyApplet.prototype = {
   },
 
   refreshWeather: async function(recurse) {  
-    //Reset
     this.wipeCurrentData();
     this.wipeForecastData();
     
@@ -565,9 +578,6 @@ MyApplet.prototype = {
         if (!haveLocation) {
           this.log.Error("Couldn't obtain location, retry in 30 seconds...");
           this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
-          Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
-            this.refreshWeather(false);
-          }));
           return;
         }
       }
@@ -622,9 +632,6 @@ MyApplet.prototype = {
 
       if (!refreshResult) {           // Failed
         this.log.Error("Unable to obtain Weather Information");
-        Mainloop.timeout_add_seconds(30, Lang.bind(this, function mainloopTimeout() {
-          this.refreshWeather(false);
-        }));
         return;
       }
 
@@ -632,15 +639,12 @@ MyApplet.prototype = {
       this.displayForecast();
       this.log.Print("Weather Information refreshed");
     }
-    catch(e) {  // Never break Main loop!!!!
+    catch(e) { 
       this.log.Error("Error while refreshing Weather info: " + e);
+      return;
     }
 
-    if (recurse) {
-      Mainloop.timeout_add_seconds(this._refreshInterval * 60, Lang.bind(this, function() {
-        this.refreshWeather(true)
-      }))
-    }
+    this.lastUpdated = new Date();
     return;
   },
 
