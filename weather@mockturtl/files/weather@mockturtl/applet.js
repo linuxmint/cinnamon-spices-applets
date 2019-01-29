@@ -1,4 +1,5 @@
 "use strict";
+const DEBUG = false;
 
 //----------------------------------
 // imports
@@ -34,8 +35,6 @@ const PopupMenu = imports.ui.popupMenu
 const Settings = imports.ui.settings
 const Util = imports.misc.util
 
-"use strict";
-
 //----------------------------------------------------------------------
 //
 // Constants
@@ -56,8 +55,19 @@ const BLANK = '   '
 const ELLIPSIS = '...'
 const EN_DASH = '\u2013'
 
+
+/* Some Information on More Data Service options to stay in free limit:
+APIXU: 10000 calls a month
+DarkSky: 1000 calls a day free
+WeatherBit: 1000 calls a day, 16 Day foreast Call
+AccuWeather: 50 calls a day
+
+Openweather: max 60 calls per minute, Temporary ban and no charge
+*/
 const DATA_SERVICE = {
-  OPEN_WEATHER_MAP: "OpenWeatherMap"
+  OPEN_WEATHER_MAP: "OpenWeatherMap",
+  OPEN_WEATHER_MAP_PRE: "OpenWeatherMap_prem",
+  DARK_SKY: "DarkSky",
 }
 
 // Query
@@ -87,9 +97,10 @@ const WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst'
 const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit'
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
+const WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions'
+const WEATHER_MANUAL_LOCATION = "manualLocation"
 
 const KEYS = [,
-  WEATHER_LOCATION,
   WEATHER_DATA_SERVICE,
   WEATHER_API_KEY,
   WEATHER_TEMPERATURE_UNIT_KEY,
@@ -104,7 +115,9 @@ const KEYS = [,
   WEATHER_SHOW_24HOURS_KEY,
   WEATHER_FORECAST_DAYS,
   WEATHER_REFRESH_INTERVAL,
-  WEATHER_PRESSURE_UNIT_KEY
+  WEATHER_PRESSURE_UNIT_KEY,
+  WEATHER_SHORT_CONDITIONS_KEY,
+  WEATHER_MANUAL_LOCATION
 ]
 
 // Signals
@@ -135,18 +148,6 @@ const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 
-const WeatherUnits = {
-  CELSIUS: 'celsius',
-  FAHRENHEIT: 'fahrenheit'
-}
-
-const WeatherWindSpeedUnits = {
-  KPH: 'kph',
-  MPH: 'mph',
-  MPS: 'm/s',
-  KNOTS: 'Knots'
-}
-
 const WeatherPressureUnits = {
   HPA: 'hPa',
   MMHG: 'mm Hg',
@@ -157,130 +158,46 @@ const WeatherPressureUnits = {
   AT: 'at'
 }
 
-// Pressure conversion factors
-const WEATHER_CONV_KPA_IN_MBAR = 0.1
-const WEATHER_CONV_PA_IN_MBAR = 100
-const WEATHER_CONV_MMHG_IN_MBAR = 750.0615613e-3
-const WEATHER_CONV_INHG_IN_MBAR = 2.952998307e-2
-const WEATHER_CONV_AT_IN_MBAR = 1.019716213e-3
-const WEATHER_CONV_ATM_IN_MBAR = 0.986923169e-3
-const WEATHER_CONV_PSI_IN_MBAR = 14.5037738e-3
-
-const WEATHER_CONV_MBAR_IN_INHG = 3.3863886667e+1
-const WEATHER_CONV_KPA_IN_INHG = 3.386389
-const WEATHER_CONV_PA_IN_INHG = 3.386389e+3
-const WEATHER_CONV_MMHG_IN_INHG = 25.4
-const WEATHER_CONV_PSI_IN_INHG = 491.154152e-3
-const WEATHER_CONV_AT_IN_INHG = 34.531554e-3
-const WEATHER_CONV_ATM_IN_INHG = 33.421054e-3
-
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-///////////                                       ////////////
-///////////       Weather Data Storage            ////////////
-///////////                                       ////////////
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-
-// 
-//  If you get the values in these objects correctly with correct units
-//  from a new API, Everything will work as intended.
-//
-
-// Store parsed values in unified json,
-// Translation layer is necessary with multiple API choices
-// Init with null, something we can check for
-var weather = {
-  dateTime: null,           // DateTime object, UTC
-  location: {
-    city: null,
-    country: null,          // Country code
-    id: null,               // API Specific ID, not used
-    tzOffset: null,          // seconds
-    timezone: null
-  },
-  coord: {
-    lat: 	null,
-    lon: null,
-  },
-  sunrise: null,             // Astronomical Time
-  sunset: null,              // Astronomical Time
-  wind: {
-    speed: null,             // MPS
-    degree: null,            // meteorlogical degrees
-  },
-  main: {
-    temperature: null,       // Kelvin
-    pressure: null,          // hPa
-    humidity: null,          // %
-    temp_min: null,          // Kelvin, not used
-    temp_max: null,          // Kelvin, not used
-  },
-  condition: {
-    id: null,                // ID, not used
-    main: null,              // See condition names
-    description: null,       // condition within condition group
-    icon: null,              // see GTK icon names
-  },
-  cloudiness: null,          // %
-}
-
-var forecasts = [];
-
-// a forecast template
-// Same units as weather, create an object like this then push into forecasts array
-
-/*var aForecast = { 
-  dateTime: null,             //Required
-  main: {
-    temp: null,
-    temp_min: null,           //Required
-    temp_max: null,           //Required
-    pressure: null,
-    sea_level: null,
-    grnd_level: null,
-    humidity: null,
-  },
-  condition: {
-    id: null,
-    main: null,               //Required
-    description: null,        //Required
-    icon: null,               //Required
-  },
-  clouds: null,
-  wind: {
-    speed: null,
-    deg: null,
-  }
-}*/
-
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
-//----------------------------------------------------------------------
-//
-// Soup
-//
-//----------------------------------------------------------------------
-
-// Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-const _httpSession = new Soup.SessionAsync()
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault())
-
-
 //----------------------------------------------------------------------
 //
 // Logging
 //
 //----------------------------------------------------------------------
 
-function log(message) {
-  global.log(UUID + "#" + log.caller.name + ": " + message)
+function Log(_instanceId) {
+  this.ID = _instanceId;
+  this.debug = DEBUG;
 }
 
-function logError(error) {
-  global.logError(UUID + "#" + logError.caller.name + ": " + error)
-}
+Log.prototype = {
+  Print: function(message) {
+    let msg = UUID + "#" + this.ID + ": " + message.toString();
+    let debug = "";
+    if (this.debug) {
+      debug = this.GetErrorLine();
+      global.log(msg, '\n', "On Line:", debug);
+    }
+    else {
+      global.log(msg);
+    }   
+  },
+
+  Error: function(error) {
+    global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+  },
+
+  Debug: function(message) {
+    if (this.debug) {
+      this.Print(message);
+    }
+  },
+
+  GetErrorLine: function() {
+      // Couldnt be more ugly, but it returns the file and line number
+      let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
+      return arr;
+    }
+};
 
 //----------------------------------------------------------------
 //
@@ -290,12 +207,21 @@ function logError(error) {
 
 const GLib = imports.gi.GLib
 const Gettext = imports.gettext
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
-const language = GLib.get_language_names()[0].split('_')[0];
-
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
   return Gettext.dgettext(UUID, str)
 }
+
+const darkSky = require("darkSky");
+const openWeatherMap = require("openWeatherMap");
+// Location lookup service
+const ipApi = require("ipApi");
+
+//----------------------------------------------------------------
+//
+// l10n
+//
+//----------------------------------------------------------------------
 
 //----------------------------------------------------------------------
 //
@@ -304,36 +230,143 @@ function _(str) {
 //----------------------------------------------------------------------
 
 function MyApplet(metadata, orientation, panelHeight, instanceId) {
-  this.settings = new Settings.AppletSettings(this, UUID, instanceId)
-  // Displaying forecasts from here
-  this._init(orientation, panelHeight, instanceId)
+    this.settings = new Settings.AppletSettings(this, UUID, instanceId)
+    this.log = new Log(instanceId);
+    this.currentLocale = GLib.get_language_names()[0];
+    this.systemLanguage = this.currentLocale.split('_')[0];
+
+    // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
+    this._httpSession = new Soup.SessionAsync();
+    this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+    Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+
+    this.provider;  // API
+    this.locProvider = new ipApi.IpApi(this); // IP location lookup
+    this.lastUpdated = null;
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+    ///////////                                       ////////////
+    ///////////              Data Storage             ////////////
+    ///////////                                       ////////////
+    //////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////
+    // Translation layer is necessary with multiple API choices
+    // Init with null, something we can properly check for
+
+    // 
+    //  If you get the values in these objects correctly with correct units
+    //  from a new API, Everything will work as intended.
+    //
+    this.weather = {
+      dateTime: null,           // Date object, UTC
+      location: {
+        city: null,
+        country: null,          // Country code
+        id: null,               // API Specific ID, not used
+        tzOffset: null,          // seconds
+        timeZone: null
+      },
+      coord: {
+        lat: 	null,
+        lon: null,
+      },
+      sunrise: null,             // Date object, UTC
+      sunset: null,              // Date object, UTC
+      wind: {
+        speed: null,             // MPS
+        degree: null,            // meteorlogical degrees
+      },
+      main: {
+        temperature: null,       // Kelvin
+        pressure: null,          // hPa
+        humidity: null,          // %
+        temp_min: null,          // Kelvin, not used
+        temp_max: null,          // Kelvin, not used
+        feelsLike: null          // kelvin
+      },
+      condition: {
+        id: null,                // ID, not used
+        main: null,              // What API returns
+        description: null,       // Longer description, if not available put the same whats in main
+        icon: null,              // GTK weather icon names
+      },
+      cloudiness: null,          // %
+    }
+    
+    this.forecasts = [];
+
+    // a forecast template
+    // Same units as weather, 
+    // create an object like this then push into forecasts array
+
+    /*var aForecast = { 
+      dateTime: null,             //Required
+      main: {
+        temp: null,
+        temp_min: null,           //Required
+        temp_max: null,           //Required
+        pressure: null,
+        sea_level: null,
+        grnd_level: null,
+        humidity: null,
+      },
+      condition: {
+        id: null,
+        main: null,               //Required
+        description: null,        //Required
+        icon: null,               //Required
+      },
+      clouds: null,
+      wind: {
+        speed: null,
+        deg: null,
+      }
+    }*/
+
+    ///////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////  
+    
+     // Units
+     this.WeatherUnits = {
+      CELSIUS: 'celsius',
+      FAHRENHEIT: 'fahrenheit'
+    }
+
+    this.WeatherWindSpeedUnits = {
+      KPH: 'kph',
+      MPH: 'mph',
+      MPS: 'm/s',
+      KNOTS: 'Knots'
+    }
+
+    this.errMsg = { // Error messages to use
+      label: {
+        generic: _("Error"),
+        service: _("Service Error"),
+        noKey: _("No Api key"),
+        noLoc: _("No Location"),
+      },
+      desc: {
+        keyBad: _("Wrong API Key"),
+        locBad: _("Wrong Location"),
+        locNotFound: _("Location Not found"),
+        parse: _("Parsing weather information failed :("),
+        keyBlock: _("Key Temp. Blocked"),
+        cantGetLoc: _("Could not get location"),
+        unknown: _("Unknown Error")
+      }
+    }
+
+    this._init(orientation, panelHeight, instanceId)
 }
 
+// Class Declaration
 MyApplet.prototype = {
   __proto__: Applet.TextIconApplet.prototype
 
-, refreshAndRebuild: function refreshAndRebuild() {
-    this.refreshWeather(false)
-    this.rebuild()
-  },
-
-  dumpKeys: function dumpKeys() {
-    for (let k in KEYS) {
-      let key = KEYS[k]
-      let keyProp = "_" + key
-      log(keyProp + "=" + this[keyProp])
-    }
-  },
-
-  locationLookup: function locationLookup() {
-    let command = "xdg-open ";
-    switch(this._dataService) {
-      case DATA_SERVICE.OPEN_WEATHER_MAP:
-        Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
-        break;
-      default:
-        break;
-    }
+, refreshAndRebuild: function () {
+    this.refreshWeather(false).then(this.rebuild());
   },
 
     // Override Methods: TextIconApplet
@@ -364,6 +397,10 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, key, keyProp,
                                    this.refreshAndRebuild, null)
       }
+
+      this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+         WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
+
       this.settings.bindProperty(Settings.BindingDirection.IN,
                                  "keybinding",
                                  "keybinding",
@@ -373,7 +410,6 @@ MyApplet.prototype = {
                                        this.keybinding,
                                        Lang.bind(this,
                                                  this.on_applet_clicked))
-      //log("bound settings")
 
       this.updateIconType()
 
@@ -428,9 +464,7 @@ MyApplet.prototype = {
       //------------------------------
       // run
       //------------------------------
-      Mainloop.timeout_add_seconds(3, Lang.bind(this, function mainloopTimeout() {
-        this.refreshWeather(true)
-      }))
+      this.refreshLoop();
 
       this.orientation = orientation;
       try {
@@ -439,35 +473,61 @@ MyApplet.prototype = {
       } catch(e) {
           // vertical panel not supported
       }
-   }
+   },
 
-, update_label_visible: function () {
+   locationLookup: async function locationLookup() {
+    let command = "xdg-open ";
+    switch(this._dataService) {
+      case DATA_SERVICE.OPEN_WEATHER_MAP:
+        Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
+        break;
+      default:
+        break;
+    }
+  },
+
+  refreshLoop: function refreshLoop() {
+    // Main independent Loop
+    try {
+      if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval*60000) < new Date()) {
+        this.refreshWeather(false);
+      }
+    }
+    catch (e) {
+      this.log.Error("Error in Main loop: " + e);
+    }
+    Mainloop.timeout_add_seconds(15, Lang.bind(this, function mainloopTimeout() {
+      this.refreshLoop();
+    }))
+  },
+
+  update_label_visible: function () {
     if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
       this.hide_applet_label(true);
     else
       this.hide_applet_label(false);
-  }
+  },
 
-, on_orientation_changed: function (orientation) {
+  on_orientation_changed: function (orientation) {
       this.orientation = orientation;
       this.refreshWeather()
-  }
+  },
 
   // Override Methods: Applet
-, _onKeySettingsUpdated: function _onKeySettingsUpdated() {
+  _onKeySettingsUpdated: function _onKeySettingsUpdated() {
     if (this.keybinding != null) {
       Main.keybindingManager.addHotKey(UUID,
                                        this.keybinding,
                                        Lang.bind(this,
                                                  this.on_applet_clicked))
     }
-  }
+  },
 
-, on_applet_clicked: function on_applet_clicked(event) {
+  on_applet_clicked: function on_applet_clicked(event) {
     this.menu.toggle()
-  }
+  },
 
-, _onSeparatorAreaRepaint: function onSeparatorAreaRepaint(area) {
+  _onSeparatorAreaRepaint: function onSeparatorAreaRepaint(area) {
     let cr = area.get_context()
     let themeNode = area.get_theme_node()
     let [width, height] = area.get_surface_size()
@@ -485,7 +545,7 @@ MyApplet.prototype = {
     cr.setSource(pattern)
     cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
     cr.fill()
-  }
+  },
 
   //----------------------------------------------------------------------
   //
@@ -493,215 +553,314 @@ MyApplet.prototype = {
   //
   //----------------------------------------------------------------------
 
-, updateIconType: function updateIconType() {
+  updateIconType: function updateIconType() {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
                         St.IconType.SYMBOLIC :
                         St.IconType.FULLCOLOR
-  }
-
-, loadJsonAsync: function loadJsonAsync(url, callback) {
-    let context = this
-    let message = Soup.Message.new('GET', url)
-    _httpSession.queue_message(message, function soupQueue(session, message) {
-      callback.call(context, JSON.parse(message.response_body.data))
-    })
   },
 
-  displayLabelError: function(errorMsg) {
-    this.set_applet_label(errorMsg);
+  showError: function(title, msg) {
+    this.set_applet_label(title);
     this.set_applet_tooltip("Click to open");
-    this.set_applet_icon_name("");
+    this.set_applet_icon_name("weather-severe-alert");
+    this._currentWeatherSunrise.text = msg;
   },
 
-  refreshWeather: function refreshWeather(recurse) {  
-    // Adding resilience against bad user input
-    if (this._location == undefined || this._location == "") {
-      this.displayLabelError(_("No location provided"));
+  refreshWeather: async function(recurse) {  
+    this.wipeCurrentData();
+    this.wipeForecastData();
+    
+    // Making sure location is in place
+    try {
+      if (!this._manualLocation) {    // Autmatic location
+        // Have to check every time to make sure location is the same
+        let haveLocation = await this.locProvider.GetLocation();
+        if (!haveLocation) {
+          this.log.Error("Couldn't obtain location, retry in 30 seconds...");
+          this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
+          return;
+        }
+      }
+      else {        // Manual Location
+        // Adding resilience against bad user input
+        if (this._location == undefined || this._location == "") {
+          this.showError(this.errMsg.label.noLoc, "");
+          this.log.Error("No location given when setting is on Manual error");
+          return;
+        }
+      }
+
+      let refreshResult;
+      switch(this._dataService) {
+        case DATA_SERVICE.OPEN_WEATHER_MAP:
+          //
+          //  No Timezone information, fetch from geolocation api
+          //
+          if (this.noApiKey()) {
+            this.showError(this.errMsg.label.noKey, "");
+            return false;
+          }
+          // Constructing Query
+          let forecastQuery = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.FORECAST_URL);
+          let weatherQuery = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.QUERY_URL); 
+          if (forecastQuery == "" || weatherQuery == "") {  // Couldn't construct query, abort
+          this.log.Error("Location provided in an incorrect format");
+            return false;
+          }
+          refreshResult = await this.getOpenWeatherCurrentWeather(weatherQuery);
+          // kick off call for timezone if it was not obtained previously
+          if (this.weather.location.timeZone == null) {
+            //this.TimeZone =
+            //this.tzoffset = 
+          }
+          refreshResult = await this.getOpenWeatherForecast(forecastQuery);
+          break;
+        case DATA_SERVICE.DARK_SKY:
+          //
+          // No City and Country information, fetch from geolocation api
+          //
+          this.provider = new darkSky.DarkSky(this);
+          refreshResult = await this.provider.GetWeather();
+          break;
+        case DATA_SERVICE.OPEN_WEATHER_MAP_PRE:
+          this.provider = new openWeatherMap.OpenWeatherMap(this);
+          refreshResult = await this.provider.GetWeather();
+          break;
+        default:
+          return;
+      }
+
+      if (!refreshResult) {           // Failed
+        this.log.Error("Unable to obtain Weather Information");
+        return;
+      }
+
+      this.displayWeather();
+      this.displayForecast();
+      this.log.Print("Weather Information refreshed");
+    }
+    catch(e) { 
+      this.log.Error("Error while refreshing Weather info: " + e);
+      return;
+    }
+
+    this.lastUpdated = new Date();
+    return;
+  },
+
+  displayWeather: async function() {
+    try {
+      let mainCondition = "";
+      let descriptionCondition = "";
+      // Short Condition Name
+      if (this.weather.condition.main != null) {
+        mainCondition = this.weather.condition.main;
+        if (this._translateCondition) {
+          mainCondition = _(mainCondition);
+        }
+      }
+      // Condition Description
+      if (this.weather.condition.description != null) {
+        descriptionCondition = this.capitalizeFirstLetter(this.weather.condition.description);
+        if (this._translateCondition) {
+          descriptionCondition = _(descriptionCondition);
+        }
+      }
+
+      // Displaying Location   
+      let location = "";
+      if (this.weather.location.city != null && this.weather.location.country != null) {
+        location = this.weather.location.city + ", " + this.weather.location.country;
+        if (this.nonempty(this._locationLabelOverride)) {
+          location = this._locationLabelOverride;
+        }
+      }
+  
+      this.set_applet_tooltip(location);
+
+      // Weather Condition
+      this._currentWeatherSummary.text = descriptionCondition;
+
+      // Weather icon
+      let iconname = this.weather.condition.icon;
+      if (iconname == null) {
+        iconname = "weather-severe-alert";
+      }
+      this._currentWeatherIcon.icon_name = iconname
+      this._icon_type == St.IconType.SYMBOLIC ?
+        this.set_applet_icon_symbolic_name(iconname) :
+        this.set_applet_icon_name(iconname)
+
+      // Temperature
+      let temp = "";
+      if (this.weather.main.temperature != null) {
+        temp = this.TempToUserUnits(this.weather.main.temperature);
+        this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+        this.log.Debug("Temperature: " + this.weather.main.temperature + " Kelvin is converted to " + temp + ' ' + this.unitToUnicode());
+      }
+
+      // Set Applet Label, even if the variables are empty
+      let label = "";
+      if (this._showCommentInPanel) {
+        label += mainCondition;
+      }
+      if (this._showTextInPanel) {
+        if (label != "") {
+          label += " ";
+        }
+        label += (temp + ' ' + this.unitToUnicode());
+      }
+      this.set_applet_label(label);
+
+      try {
+        this.update_label_visible();
+      } catch(e) {
+          // vertical panel not supported
+      }
+
+      // Displaying humidity
+      if (this.weather.main.humidity !=  null) {
+        this._currentWeatherHumidity.text = this.weather.main.humidity + "%";
+      }
+      
+      // Wind
+      let wind_direction = this.compassDirection(this.weather.wind.degree);
+      this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(this.weather.wind.speed) + ' ' + _(this._windSpeedUnit);
+    
+      // API Unique display
+      switch (this._dataService) {
+        case DATA_SERVICE.OPEN_WEATHER_MAP:
+          if (this.weather.cloudiness != null) {
+            this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
+            this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
+          }
+          break;
+        case DATA_SERVICE.OPEN_WEATHER_MAP_PRE:
+          if (this.weather.cloudiness != null) {
+            this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
+            this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
+          }
+          break;
+        case DATA_SERVICE.DARK_SKY:
+          if (this.weather.main.feelsLike != null) {
+            this._currentWeatherApiUnique.text = this.TempToUserUnits(this.weather.main.feelsLike) + this.unitToUnicode();
+            this._currentWeatherApiUniqueCap.text = _("Feels like:");
+          }
+          break;
+        default: 
+          this._currentWeatherApiUnique.text = "";
+          this._currentWeatherApiUniqueCap.text = "";
+      }
+      
+      // Pressure
+      if (this.weather.main.pressure != null) {
+        this._currentWeatherPressure.text = this.PressToUserUnits(this.weather.main.pressure) + ' ' + _(this._pressureUnit);
+      }
+
+      // Location
+      this._currentWeatherLocation.text = location;
+
+      // Sunset/Sunrise
+      // gettext can't see these inline
+      let sunriseText = "";
+      let sunsetText = "";
+      if (this.weather.sunrise != null && this.weather.sunset != null) {
+        if (this._showSunrise) {
+          sunriseText = _('Sunrise');
+          sunsetText = _('Sunset');
+          if (this.weather.timeZone != null) {     //have TZ, en-GB returns time in the correct format
+              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+              let sunset = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+              sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
+              sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
+          }
+          else {   // else We assume that System TZ and Location TZ is same, covers 95% of users   
+            sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.weather.sunrise.toLocaleFormat('%H:%M')));
+            sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.weather.sunset.toLocaleFormat('%H:%M')));
+          }         
+        }
+      }
+      
+      this._currentWeatherSunrise.text = sunriseText;
+      this._currentWeatherSunset.text = sunsetText;
+      return true;
+    }
+    catch(e) {
+      this.log.Error("DisplayWeatherError: " + e);
       return false;
     }
-    switch(this._dataService) {
-      case DATA_SERVICE.OPEN_WEATHER_MAP: 
-        if (this.noApiKey()) {
-          this.displayLabelError(_("No Api Key provided"));
-          return false;
-        }
-        this.getOpenWeatherCurrentWeather();
-        this.getOpenWeatherForecast();
-        break;
-      default:
-        return false;
-    }
-    if (recurse) {
-      Mainloop.timeout_add_seconds(this._refreshInterval * 60, Lang.bind(this, function() {
-        this.refreshWeather(true)
-      }))
-    }
   },
 
-  displayWeather: function() {
-    let mainCondition = "";
-    let descriptionCondition = "";
-    // Short Condition Name
-    if (weather.condition.main != null) {
-      mainCondition = weather.condition.main;
-      if (this._translateCondition) {
-        mainCondition = _(mainCondition);
-      }
-    }
-    // Condition Description
-    if (weather.condition.description != null) {
-      descriptionCondition = this.capitalizeFirstLetter(weather.condition.description);
-      if (this._translateCondition) {
-        descriptionCondition = _(descriptionCondition);
-      }
-    }
-
-    // Displaying Location   
-    let location = "";
-    if (weather.location.city != null && weather.location.country != null) {
-      location = weather.location.city + ", " + weather.location.country;
-    }
-    if (this.nonempty(this._locationLabelOverride)) {
-      location = this._locationLabelOverride;
-    }
-    this.set_applet_tooltip(location);
-
-    // Weather Condition
-    this._currentWeatherSummary.text = descriptionCondition;
-
-    // Weather icon
-    let iconname = weather.condition.icon;
-    if (iconname == null) {
-      iconname = "weather-severe-alert";
-    }
-    this._currentWeatherIcon.icon_name = iconname
-    this._icon_type == St.IconType.SYMBOLIC ?
-      this.set_applet_icon_symbolic_name(iconname) :
-      this.set_applet_icon_name(iconname)
-
-    // Temperature
-    let temp = "";
-    if (weather.main.temperature != null) {
-      temp = this.TempToUserUnits(weather.main.temperature);
-      this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
-    }
-
-    // Set Applet Label, even if the variables are empty
-    let label = "";
-    if (this._showCommentInPanel) {
-      label += mainCondition;
-    }
-    if (this._showTextInPanel) {
-      if (label != "") {
-        label += " ";
-      }
-      label += (temp + ' ' + this.unitToUnicode());
-    }
-    this.set_applet_label(label);
-
+  displayForecast: async function() {
     try {
-      this.update_label_visible();
-    } catch(e) {
-        // vertical panel not supported
-    }
+      for (let i = 0; i < this._forecast.length; i++) {
+        let forecastData = this.forecasts[i];
+        let forecastUi = this._forecast[i];
 
-    // Displaying humidity
-    if (weather.main.humidity !=  null) {
-      this._currentWeatherHumidity.text = weather.main.humidity + "%";
-    }
-    
-    // Wind
-    let wind_direction = this.compassDirection(weather.wind.degree);
-    this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(weather.wind.speed) + ' ' + _(this._windSpeedUnit);
-   
-    // API Unique display
-    switch (this._dataService) {
-      case DATA_SERVICE.OPEN_WEATHER_MAP:
-        if (weather.cloudiness != null) {
-          this._currentWeatherApiUnique.text = weather.cloudiness + "%";
-          this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
+        let t_low = this.TempToUserUnits(forecastData.main.temp_min);
+        let t_high = this.TempToUserUnits(forecastData.main.temp_max);
+
+        let first_temperature = this._temperatureHighFirst ? t_high : t_low;
+        let second_temperature = this._temperatureHighFirst ? t_low : t_high;
+        let comment = "";
+        if (forecastData.condition.main != null && forecastData.condition.description != null) {
+          if (this._shortConditions) {
+            comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
+          }
+          else {
+            comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+          }
         }
-        break;
-      default: 
-        this._currentWeatherApiUnique.text = "";
-        this._currentWeatherApiUniqueCap.text = "";
-    }
-    
-    // Pressure
-    if (weather.main.pressure != null) {
-      this._currentWeatherPressure.text = this.PressToUserUnits(weather.main.pressure) + ' ' + _(this._pressureUnit);
-    }
-
-    // location is a button
-    // No URL is provided, disable it for now
-    //this._currentWeatherLocation.url = tmp.length > 1 ? tmp[1] : tmp[0];
-    this._currentWeatherLocation.label = _(location);
-
-    // Sunset/Sunrise
-    // gettext can't see these inline
-    let sunriseText = "";
-    let sunsetText = "";
-    if (weather.sunrise != null && weather.sunset != null) {
-      if (this._showSunrise) {
-        sunriseText = _('Sunrise');
-        sunsetText = _('Sunset');
-        if (this._translateCondition) {
-          sunriseText = _(sunriseText);
-          sunsetText = _(sunsetText);
+        let dayName = forecastData.dateTime;
+        if (this.weather.timeZone != null) {
+           dayname = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
         }
-        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(weather.sunrise.toLocaleFormat('%H:%M')));
-        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(weather.sunset.toLocaleFormat('%H:%M')));
+        else {
+          dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
+          dayName = this.getDayName(dayName.getUTCDay());
+        }       
+        
+        forecastUi.Day.text = dayName;
+        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+        forecastUi.Summary.text = comment;
+        forecastUi.Icon.icon_name = forecastData.condition.icon;
       }
+      return true;
     }
-    
-    this._currentWeatherSunrise.text = sunriseText;
-    this._currentWeatherSunset.text = sunsetText;
-    //Reset weather object
-    weather.dateTime = null;
-    weather.location.city = null;
-    weather.location.country = null;
-    weather.location.id = null;
-    weather.coord.lat = null;
-    weather.coord.lon = null;
-    weather.sunrise = null;
-    weather.sunset = null;
-    weather.wind.degree = null;
-    weather.wind.speed = null;
-    weather.main.temperature = null;
-    weather.main.pressure = null;
-    weather.main.humidity = null;
-    weather.main.temp_max = null;
-    weather.main.temp_min = null;
-    weather.condition.id = null;
-    weather.condition.main = null;
-    weather.condition.description = null;
-    weather.condition.icon = null;
-    weather.cloudiness = null;
+    catch(e) {
+      this.log.Error("DisplayForecastError" + e);
+      return false;
+    }
   },
 
-  displayForecast: function() {
-    for (let i = 0; i < this._forecast.length; i++) {
-      let forecastData = forecasts[i];
-      let forecastUi = this._forecast[i];
+  wipeCurrentData: function() {
+        //Reset weather object
+        this.weather.dateTime = null;
+        this.weather.location.city = null;
+        this.weather.location.country = null;
+        this.weather.location.id = null;
+        this.weather.location.timeZone = null;
+        this.weather.location.tzOffset = null;
+        this.weather.coord.lat = null;
+        this.weather.coord.lon = null;
+        this.weather.sunrise = null;
+        this.weather.sunset = null;
+        this.weather.wind.degree = null;
+        this.weather.wind.speed = null;
+        this.weather.main.temperature = null;
+        this.weather.main.pressure = null;
+        this.weather.main.humidity = null;
+        this.weather.main.temp_max = null;
+        this.weather.main.temp_min = null;
+        this.weather.condition.id = null;
+        this.weather.condition.main = null;
+        this.weather.condition.description = null;
+        this.weather.condition.icon = null;
+        this.weather.cloudiness = null;
+  },
 
-      let t_low = this.TempToUserUnits(forecastData.main.temp_min);
-      let t_high = this.TempToUserUnits(forecastData.main.temp_max);
-
-      let first_temperature = this._temperatureHighFirst ? t_high : t_low;
-      let second_temperature = this._temperatureHighFirst ? t_low : t_high;
-
-      let comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
-      let dayName = forecastData.dateTime;
-      dayName.setMilliseconds(dayName.getMilliseconds() + (weather.location.tzOffset * 1000));
-      dayName = this.getDayName(dayName.getUTCDay());
-      
-      forecastUi.Day.text = dayName;
-      forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
-      forecastUi.Summary.text = comment;
-      forecastUi.Icon.icon_name = forecastData.condition.icon;
-    }
-    // reset array
-    forecasts = [];
+  wipeForecastData: function() {
+    this.forecasts = [];
   },
 
   destroyCurrentWeather: function destroyCurrentWeather() {
@@ -744,24 +903,12 @@ MyApplet.prototype = {
       style_class: STYLE_SUMMARY
     })
 
-    this._currentWeatherLocation = new St.Button({
+    this._currentWeatherLocation = new St.Label({
       reactive: true,
-      label: _('Refresh')
+      text: ''
     })
 
     this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK
-
-    // link to the details page
-    this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function() {
-      if (this._currentWeatherLocation.url == null) {
-        this.refreshWeather(false)
-      } else {
-        Gio.app_info_launch_default_for_uri(
-          this._currentWeatherLocation.url,
-          global.create_app_launch_context()
-        )
-      }
-    }))
 
     let bb = new St.BoxLayout({
       vertical: true,
@@ -832,10 +979,10 @@ MyApplet.prototype = {
     box.add_actor(this._currentWeatherIcon)
     box.add_actor(xb)
     this._currentWeather.set_child(box)
-  }
+  },
 
-, rebuildFutureWeatherUi: function rebuildFutureWeatherUi() {
-    this.destroyFutureWeather()
+  rebuildFutureWeatherUi: function() {
+    this.destroyFutureWeather();
 
     this._forecast = []
     this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation })
@@ -931,16 +1078,16 @@ MyApplet.prototype = {
   MPStoUserUnits: function MPStoUserUnits(mps) {
       // Override wind units with our preference, takes Meter/Second wind speed
       switch (this._windSpeedUnit) {
-        case WeatherWindSpeedUnits.MPH:
+        case this.WeatherWindSpeedUnits.MPH:
           //Rounding to 1 decimal
           return Math.round ((mps * WEATHER_CONV_MPH_IN_MPS) * 10)/ 10;
-        case WeatherWindSpeedUnits.KPH:
+        case this.WeatherWindSpeedUnits.KPH:
           //Rounding to 1 decimal
           return Math.round ((mps * WEATHER_CONV_KPH_IN_MPS) * 10)/ 10;
-        case WeatherWindSpeedUnits.MPS:
+        case this.WeatherWindSpeedUnits.MPS:
           // Rounding to 1 decimal just in case API does not return it in the same format
           return Math.round (mps * 10)/ 10;
-        case WeatherWindSpeedUnits.KNOTS:
+        case this.WeatherWindSpeedUnits.KNOTS:
           //Rounding to whole units
           return Math.round (mps * WEATHER_CONV_KNOTS_IN_MPS);
       }
@@ -948,12 +1095,24 @@ MyApplet.prototype = {
 
   // Conversion from Kelvin
   TempToUserUnits: function(kelvin) {
-    if (this._temperatureUnit == WeatherUnits.CELSIUS) {
+    if (this._temperatureUnit == this.WeatherUnits.CELSIUS) {
       return Math.round((kelvin  - 273.15));
     }
-    if (this._temperatureUnit == WeatherUnits.FAHRENHEIT) {
-      return Math.round((9/5*(kelvin - 273) + 32));
+    if (this._temperatureUnit == this.WeatherUnits.FAHRENHEIT) {
+      return Math.round((9/5*(kelvin - 273.15) + 32));
     }
+  },
+
+  CelsiusToKelvin: function(celsius) {
+    return (celsius + 273.15);
+  },
+
+  FahrenheitToKelvin: function(fahr) {
+    return ((fahr-32) / 1.8 + 273.15);
+  },
+
+  MPHtoMPS: function(speed) {
+    return speed * 0.44704;
   },
 
   // Conversion from hPa
@@ -1016,12 +1175,8 @@ MyApplet.prototype = {
     return false;
   },
 
-  unitToUrl: function () {
-    return this._temperatureUnit == WeatherUnits.FAHRENHEIT ? 'f' : 'c'
-  }
-
-, unitToUnicode: function() {
-    return this._temperatureUnit == WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103'
+  unitToUnicode: function() {
+    return this._temperatureUnit == this.WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103'
   }
     // Passing appropriate resolver function for the API, and the code
 , weatherIconSafely: function(code, iconResolver) {
@@ -1044,8 +1199,9 @@ MyApplet.prototype = {
   getDayName: function(dayNum) {
     let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')]
     return days[dayNum];
-  }
-, compassDirection: function(deg) {
+  },
+  
+  compassDirection: function(deg) {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
     return directions[Math.round(deg / 45) % directions.length]
   },
@@ -1058,168 +1214,191 @@ MyApplet.prototype = {
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-  // Only have Mainloop Polling in one of the functions with API calls
-  // because it will cause a exponential recursive loop otherwise
-
-  getOpenWeatherCurrentWeather: function() {  
-    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.QUERY_URL); 
-    if (query == "") {
+  getOpenWeatherCurrentWeather: async function(query) {  
+    // Can use Synchronous calls, we are already in async
+    this.log.Debug(query);
+    let json;
+    try {
+      let message = Soup.Message.new('GET', query);
+      this._httpSession.send_message(message);
+      json =  JSON.parse(message.response_body.data);
+    }
+    catch(e) {
+      this.log.Error("Unable to Call API: " + e);
       return false;
     }
-    this.loadJsonAsync(query, function(json) {
-      if (!this.isOpenWeatherResponseValid(json)) {
-        Mainloop.timeout_add_seconds(30, Lang.bind(this, function() {
-          this.refreshWeather(false)
-        }));
-        return false;
-      }
-      this.parseOpenWeather(json);
-      this.displayWeather();
-      return true;
-    })
+    if (this.isOpenWeatherResponseValid(json)) {
+      return this.parseOpenWeather(json);
+    }
+    return false;
   },
 
-  getOpenWeatherForecast: function() {
-    let query = this.getOpenWeatherQueryString(SERVICE.OpenWeatherMap.FORECAST_URL);
-    if (query == "") {
+  getOpenWeatherForecast: async function(query) {
+    this.log.Debug(query);
+    let json;
+    try {
+      let message = Soup.Message.new('GET', query);
+      this._httpSession.send_message(message);
+      json =  JSON.parse(message.response_body.data);
+    }
+    catch (e) {
+      this.log.Error("Unable to Call API: " + e);
       return false;
     }
-    this.loadJsonAsync(query, function(json) {
-      if (!this.isOpenWeatherResponseValid(json)) {
-        return false;
-      }
-      this.parseOpenWeatherForecast(json);
-      this.displayForecast();
-      return true;
-    })
+    if (this.isOpenWeatherResponseValid(json)) {
+      return this.parseOpenWeatherForecast(json);
+    }     
+    return false;
   },
 
   isOpenWeatherResponseValid: function(response) {
     if (!response) {
-      this.displayLabelError(_("Service Unavailable"));
+      this.showError(this.errMsg.label.service, "");
       return false;
     }
+    let errorMsg = "OpenWeatherMap API: ";
     if (response.cod != 200) {
-      this.displayLabelError(_("Service Error"));
+      
+      if (response.cod == 400) {
+        this.showError(this.errMsg.label.service, this.errMsg.desc.locNotFound);
+      }
       if (response.cod == 401) {
-        this._currentWeatherSummary.text = _("Wrong API Key");
+        this.showError(this.errMsg.label.service, this.errMsg.desc.keyBad);
       }
       if (response.cod == 404) {
-        this._currentWeatherSummary.text = _("City Not found");
+        this.showError(this.errMsg.label.service, this.errMsg.desc.locBad);
       }
       if (response.cod == 429) {
-        this._currentWeatherSummary.text = _("Key Temp. Blocked");
+        this.showError(this.errMsg.label.service, this.errMsg.desc.keyBlock);
       }
+      this.log.Error(errorMsg + response.message);
       return false;
     }
     return true;      
   },
 
   parseOpenWeather: function(json) {
-    if (json.coord) {
-      weather.coord.lat = json.coord.lat;
-      weather.coord.lon = json.coord.lon;
-      weather.location.tzOffset = Math.round(json.coord.lon/15) * 3600;
+    try {
+      if (json.coord) {
+        this.weather.coord.lat = json.coord.lat;
+        this.weather.coord.lon = json.coord.lon;
+        this.weather.location.tzOffset = Math.round(json.coord.lon/15) * 3600;
+      }
+      this.weather.location.city = json.name;
+      this.weather.location.country = json.sys.country;
+      // Keep UTC for now, it is converted to Locale what covers most of the users
+      // Need proper fix later
+      this.weather.dateTime = new Date((json.dt) * 1000);
+      this.log.Debug(this.weather.dateTime.toUTCString());
+      this.weather.sunrise = new Date((json.sys.sunrise) * 1000);
+      this.weather.sunset = new Date((json.sys.sunset) * 1000);
+      if (json.wind) {
+        this.weather.wind.speed = json.wind.speed;
+        this.weather.wind.degree = json.wind.deg;
+      }
+      if (json.main) {
+        this.weather.main.temperature = json.main.temp;
+        this.weather.main.pressure = json.main.pressure;
+        this.weather.main.humidity = json.main.humidity;
+        this.weather.main.temp_min = json.main.temp_min;
+        this.weather.main.temp_max = json.main.temp_max;
+      }
+      if (json.weather[0]) {
+        this.weather.condition.main = json.weather[0].main;
+        this.weather.condition.description = json.weather[0].description;
+        this.weather.condition.icon = this.weatherIconSafely(json.weather[0].icon, this.resolveOpenWeatherIcon); 
+      }
+      if (json.clouds) {
+        this.weather.cloudiness = json.clouds.all;
+      }   
+      return true; 
     }
-    weather.location.city = json.name;
-    weather.location.country = json.sys.country;
-    // Keep UTC for now, it is converted to Locale what covers most of the users
-    // Need proper fix later
-    weather.dateTime = new Date((json.dt) * 1000);
-    weather.sunrise = new Date((json.sys.sunrise) * 1000);
-    weather.sunset = new Date((json.sys.sunset) * 1000);
-    if (json.wind) {
-      weather.wind.speed = json.wind.speed;
-      weather.wind.degree = json.wind.deg;
+    catch(e) { 
+      this.log.Error(e);
+      this.showError(this.errMsg.label.generic, this.errMsg.desc.parse);
+      return false; 
     }
-    if (json.main) {
-      weather.main.temperature = json.main.temp;
-      weather.main.pressure = json.main.pressure;
-      weather.main.humidity = json.main.humidity;
-      weather.main.temp_min = json.main.temp_min;
-      weather.main.temp_max = json.main.temp_max;
-    }
-    if (json.weather[0]) {
-      weather.condition.main = json.weather[0].main;
-      weather.condition.description = json.weather[0].description;
-      weather.condition.icon = this.weatherIconSafely(json.weather[0].icon, this.resolveOpenWeatherIcon); 
-    }
-    if (json.clouds) {
-      weather.cloudiness = json.clouds.all;
-    }    
   },
 
   parseOpenWeatherForecast: function(json) {
-    // We have to Compile Day data manually because
-    // we get 8 json blobs per day 
-    let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
-    let counter = 0;       // Start counter, incremented for new days
+    try {
+      // We have to Compile Day data manually because
+      // we get 8 json blobs per day 
+      let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
+      let counter = 0;       // Start counter, incremented for new days
 
-    let forecast;
-    weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
-    for (let i = 0; i < json.list.length; i++) {
-      let currentDate = new Date((json.list[i].dt + weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
-      // If a item belongs to a new day, push forecast to the array and reset it.
-      if (currentDate.getUTCDate() != prevItemDate) {
-        counter++;
-        if (forecast != undefined) {
-          forecasts.push(forecast);
-        } 
-        forecast = {          // Blob Init
-          dateTime: null,             //Required
-          main: {
-            temp: null,
-            temp_min: null,           //Required
-            temp_max: null,           //Required
-            pressure: null,
-            sea_level: null,
-            grnd_level: null,
-            humidity: null,
-          },
-          condition: {
-            id: null,
-            main: null,               //Required
-            description: null,        //Required
-            icon: null,               //Required
-          },
-          clouds: null,
-          wind: {
-            speed: null,
-            deg: null,
-          }
-        };
-        // Set safe values for min/max to work properly
-        forecast.main.temp_min = 900;
-        forecast.main.temp_max = -5; 
-        // Return and display when we have got the required number of days
-        if (counter > this._forecastDays) {
-          return;
-        }    
-      }
-      forecast.dateTime = currentDate; // Time does not matter as long as its the same day
-      // Get min max temperatures for the day
-      if (json.list[i].main) {
-        forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
-        forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
-      }
-      // Get the worst weather conditions for the day
-      if (json.list[i].weather[0]) {
-        if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
-          forecast.condition.id = json.list[i].weather[0].id;
-          forecast.condition.main = json.list[i].weather[0].main;
-          forecast.condition.description = json.list[i].weather[0].description;
-          // Replace night icons with day icons for the forecasts
-          if ((json.list[i].weather[0].icon).endsWith("n")) {
-            json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
-          }
-          forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
+      let forecast;
+      this.weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
+      for (let i = 0; i < json.list.length; i++) {
+        let currentDate = new Date((json.list[i].dt + this.weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
+        // If a item belongs to a new day, push forecast to the array and reset it.
+        if (currentDate.getUTCDate() != prevItemDate) {
+          counter++;
+          if (forecast != undefined) {
+            this.forecasts.push(forecast);
+          } 
+          forecast = {          // Blob Init
+            dateTime: null,             //Required
+            main: {
+              temp: null,
+              temp_min: null,           //Required
+              temp_max: null,           //Required
+              pressure: null,
+              sea_level: null,
+              grnd_level: null,
+              humidity: null,
+            },
+            condition: {
+              id: null,
+              main: null,               //Required
+              description: null,        //Required
+              icon: null,               //Required
+            },
+            clouds: null,
+            wind: {
+              speed: null,
+              deg: null,
+            }
+          };
+          // Set safe values for min/max to work properly
+          forecast.main.temp_min = 900;
+          forecast.main.temp_max = -5; 
+          // Return and display when we have got the required number of days
+          if (counter > this._forecastDays) {
+            return true;
+          }    
         }
+        forecast.dateTime = currentDate; // Time does not matter as long as its the same day
+        // Get min max temperatures for the day
+        if (json.list[i].main) {
+          forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
+          forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
+        }
+        // Get the worst weather conditions for the day
+        if (json.list[i].weather[0]) {
+          if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
+            forecast.condition.id = json.list[i].weather[0].id;
+            forecast.condition.main = json.list[i].weather[0].main;
+            forecast.condition.description = json.list[i].weather[0].description;
+            // Replace night icons with day icons for the forecasts
+            if ((json.list[i].weather[0].icon).endsWith("n")) {
+              json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
+            }
+            forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
+          }
+      }
+        prevItemDate = currentDate.getUTCDate();
+      }
+      // Ran out of items, display
+      this.forecasts.push(forecast);
+      forecast = {};
+      return true;
     }
-      prevItemDate = currentDate.getUTCDate();
+    catch(e) {
+      this.log.Error(e);
+      this.showError(this.errMsg.label.generic, this.errMsg.desc.parse);
+      return false;
     }
-    // Ran out of items, display
-    forecasts.push(forecast);
-    forecast = {};
   },
 
   getOpenWeatherQueryString: function(url) {
@@ -1244,8 +1423,8 @@ MyApplet.prototype = {
     if (query == "") { //If couldn't construct string, return it empty
       return query;
     }
-    if (this._translateCondition && this.isLangSupportedByOpenW(language)) { // Append Language if supported and enabled
-      query = query + "&lang=" + language;
+    if (this._translateCondition && this.isLangSupported(this.systemLanguage, OWsupported)) { // Append Language if supported and enabled
+      query = query + "&lang=" + this.systemLanguage;
     }
     return query;
   },
@@ -1275,11 +1454,8 @@ MyApplet.prototype = {
     }
   },
 
-  isLangSupportedByOpenW: function(lang) {
-    let supported = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
-     "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
-      "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
-      if (supported.indexOf(lang) != -1) {
+  isLangSupported: function(lang, languages) {
+      if (languages.indexOf(lang) != -1) {
         return true;
       }
       return false;
@@ -1334,12 +1510,33 @@ MyApplet.prototype = {
   }
 };
 
+const OWsupported = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
+     "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
+      "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
+
 //
 // For Translators
 //
 
 const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
-_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky")];
+_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky"), _("Sky is clear")];
+
+const icons = {
+  clear_day: 'weather-clear',
+  clear_night: 'weather-clear-night',
+  few_clouds_day: 'weather-few-clouds',
+  few_clouds_night: 'weather-few-clouds-night',
+  clouds: 'weather-clouds',
+  overcast: 'weather_overcast',
+  showers_scattered: 'weather-showers-scattered',
+  showers: 'weather-showers',
+  rain: 'weather-rain',
+  rain_freezing: 'weather-freezing-rain',
+  snow: 'weather-snow',
+  storm: 'weather-storm',
+  fog: 'weather-fog',
+  alert: 'weather-severe-alert'
+}
 
 //----------------------------------------------------------------------
 //
