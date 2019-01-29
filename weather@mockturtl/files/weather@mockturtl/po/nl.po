@@ -2,14 +2,14 @@
 # Copyright (C) 2019
 # This file is distributed under the same license as the cinnamon-weather package.
 # Peter van Ieperen <p.v.ieperen77@gmail.com>, 2011.
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2018.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 22:40+0000\n"
-"PO-Revision-Date: 2019-01-28 16:00+0100\n"
+"PO-Revision-Date: 2019-01-29 12:00+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -159,7 +159,7 @@ msgstr "Stad niet gevonden"
 
 #: applet.js:1114
 msgid "Key Temp. Blocked"
-msgstr "Sleutel tijdelijk geblokkeerd."
+msgstr "Sleutel tijd. geblokkeerd."
 
 #: applet.js:1340
 msgid "Clouds"
@@ -167,7 +167,7 @@ msgstr "Wolken"
 
 #: applet.js:1340
 msgid "Mist"
-msgstr "Mist"
+msgstr "Mistig"
 
 #: applet.js:1340
 msgid "Thunderstorm"
@@ -199,7 +199,7 @@ msgstr "Rook"
 
 #: applet.js:1341
 msgid "Fog"
-msgstr "Mist"
+msgstr "Dichte mist"
 
 #: applet.js:1341
 msgid "Sand"
@@ -261,8 +261,8 @@ msgstr "Locatie"
 msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longtitude"
-msgstr "Toegestane invoer: Stad,Landcode of Postcode,Landcode of"
-"Breedtegraad,Lengtegraad"
+msgstr "Toegest. invoer: Stad,Landcode (bv. Oss,NL) of "
+"Postcode,Landcode of Breedtegraad,Lengtegraad"
 
 #. settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
