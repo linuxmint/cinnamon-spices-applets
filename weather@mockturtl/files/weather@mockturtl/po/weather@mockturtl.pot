@@ -1,6 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
+# YOUR-LANGUAGE-NAME translation originally for gnome-shell-extension-weather, now weather@mockturtl
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
@@ -87,11 +87,11 @@ msgstr ""
 
 #: applet.js:1048
 msgid "Monday"
-msgstr ""
+msgstr "Måndag"
 
 #: applet.js:1048
 msgid "Tuesday"
-msgstr ""
+msgstr "Tisdag"
 
 #: applet.js:1048
 msgid "Wednesday"
@@ -166,63 +166,224 @@ msgid "Clouds"
 msgstr ""
 
 #: applet.js:1340
-msgid "Mist"
-msgstr ""
-
-#: applet.js:1340
-msgid "Thunderstorm"
-msgstr ""
-
-#: applet.js:1340
 msgid "Rain"
 msgstr ""
 
-#: applet.js:1340
-msgid "Snow"
+#: applet.js:1340 applet.js:1341 OpenWeatherMap Weather Condition 200 from
+#: https://openweathermap.org/weather-conditions
+msgid "Thunderstorm with light rain"
 msgstr ""
 
-#: applet.js:1340
+#: OpenWeatherMap Weather Condition 201
+msgid "Thunderstorm with rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 202
+msgid "Thunderstorm with heavy rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 210
+msgid "Light thunderstorm"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 211
+msgid "Thunderstorm"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 212
+msgid "Heavy thunderstorm"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 221
+msgid "Ragged thunderstorm"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 230
+msgid "Thunderstorm with light drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 231
+msgid "Thunderstorm with drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 232
+msgid "Thunderstorm with heavy drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 300
+msgid "Light intensity drizzle"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 301
 msgid "Drizzle"
 msgstr ""
 
-#: applet.js:1340
-msgid "Haze"
+#: OpenWeatherMap Weather Condition 302
+msgid "Heavy intensity drizzle"
 msgstr ""
 
-#: applet.js:1340
+#: OpenWeatherMap Weather Condition 310
+msgid "Light intensity drizzle rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 311
+msgid "Drizzle rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 312
+msgid "Heavy intensity drizzle rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 313
+msgid "Shower rain and drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 314
+msgid "Heavy shower rain and drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 321
+msgid "Shower drizzle"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 500
+msgid "Light rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 501
+msgid "Moderate rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 502
+msgid "Heavy intensity rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 503
+msgid "Very heavy rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 504
+msgid "Extreme rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 511
+msgid "Freezing rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 520
+msgid "Light intensity shower rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 521
+msgid "Shower rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 522
+msgid "Heavy intensity shower rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 531
+msgid "Ragged shower rain"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 600
+msgid "Light snow"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 601
+msgid "Snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 602
+msgid "Heavy snow"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 611
 msgid "Sleet"
 msgstr ""
 
-#: applet.js:1341
+#: OpenWeatherMap Weather Condition 612
+msgid "Shower sleet"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 615
+msgid "Light rain and snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 616
+msgid "Rain and snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 620
+msgid "Light shower snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 621
+msgid "Shower snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 622
+msgid "Heavy shower snow"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 701
+msgid "Mist"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 711
 msgid "Smoke"
 msgstr ""
 
-#: applet.js:1341
+#: applet.js:1340 and OpenWeatherMap Weather Condition 721
+msgid "Haze"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 731
+msgid "Sand, dust whirls"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 741
 msgid "Fog"
 msgstr ""
 
-#: applet.js:1341
+#: applet.js:1340 and OpenWeatherMap Weather Condition 751
 msgid "Sand"
 msgstr ""
 
-#: applet.js:1341
+#: applet.js:1340 and OpenWeatherMap Weather Condition 761
 msgid "Dust"
 msgstr ""
 
-#: applet.js:1341
-msgid "Sqalls"
-msgstr ""
-
-#: applet.js:1341
-msgid "Tornado"
-msgstr ""
-
-#: applet.js:1341
+#: applet.js:1340 and OpenWeatherMap Weather Condition 762
 msgid "Volcanic ash"
 msgstr ""
 
-#: applet.js:1341
-msgid "Clear Sky"
+#: applet.js:1340 and OpenWeatherMap Weather Condition 771
+msgid "Squalls"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 781
+msgid "Tornado"
+msgstr ""
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 800
+msgid "Clear sky"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 801
+msgid "Few clouds"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 802
+msgid "Scattered clouds"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 803
+msgid "Broken clouds"
+msgstr ""
+
+#: OpenWeatherMap Weather Condition 803
+msgid "Overcast clouds"
 msgstr ""
 
 #. settings-schema.json->head->description
@@ -258,9 +419,7 @@ msgid "Location"
 msgstr ""
 
 #. settings-schema.json->location->tooltip
-msgid ""
-"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or "
-"Latitude,Longtitude"
+msgid "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
 msgstr ""
 
 #. settings-schema.json->getLocation->description
