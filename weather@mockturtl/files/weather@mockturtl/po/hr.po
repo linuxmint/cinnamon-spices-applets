@@ -31,11 +31,11 @@ msgstr "Postavke"
 
 #: applet.js:518
 msgid "No location provided"
-msgstr "Nema određene lokacije"
+msgstr "Nema postavljene lokacije"
 
 #: applet.js:524
 msgid "No Api Key provided"
-msgstr "Nema određenog Api ključa"
+msgstr "Nema Api ključa lokacije"
 
 #: applet.js:621
 msgid "Cloudiness:"
