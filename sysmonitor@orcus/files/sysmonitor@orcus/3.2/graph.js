@@ -156,6 +156,7 @@ Graph.prototype = {
             cr.rectangle(0.5, 0.5, width - 1, height - 1);
             cr.stroke();
         }
+        cr.$dispose();
     },
     
     setAutoScale: function(minScale)
