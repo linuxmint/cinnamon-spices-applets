@@ -157,7 +157,7 @@
   },
   "credits": {
     "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, ipapi."
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
   }
 }
 

@@ -344,7 +344,8 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
         parse: _("Parsing weather information failed :("),
         keyBlock: _("Key Temp. Blocked"),
         cantGetLoc: _("Could not get location"),
-        unknown: _("Unknown Error")
+        unknown: _("Unknown Error"),
+        noResponse: _("No response from Data Service")
       }
     }
 
@@ -467,13 +468,7 @@ MyApplet.prototype = {
 
    locationLookup: async function locationLookup() {
     let command = "xdg-open ";
-    switch(this._dataService) {
-      case DATA_SERVICE.OPEN_WEATHER_MAP:
-        Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
-        break;
-      default:
-        break;
-    }
+    Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
   },
 
   refreshLoop: function refreshLoop() {
@@ -485,6 +480,7 @@ MyApplet.prototype = {
     }
     catch (e) {
       this.log.Error("Error in Main loop: " + e);
+      this.lastUpdated = null;
     }
     Mainloop.timeout_add_seconds(15, Lang.bind(this, function mainloopTimeout() {
       this.refreshLoop();
@@ -568,14 +564,16 @@ MyApplet.prototype = {
         if (!haveLocation) {
           this.log.Error("Couldn't obtain location, retry in 30 seconds...");
           this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
+          this.lastUpdated = null;
           return;
         }
       }
       else {        // Manual Location
         // Adding resilience against bad user input
+        let loc = this._location.replace(" ", "");
         if (this._location == undefined || this._location == "") {
           this.showError(this.errMsg.label.noLoc, "");
-          this.log.Error("No location given when setting is on Manual error");
+          this.log.Error("No location given when setting is on Manual Location");
           return;
         }
       }
@@ -599,6 +597,7 @@ MyApplet.prototype = {
 
       if (!refreshResult) {           // Failed
         this.log.Error("Unable to obtain Weather Information");
+        this.lastUpdated = null;
         return;
       }
 
@@ -608,6 +607,7 @@ MyApplet.prototype = {
     }
     catch(e) { 
       this.log.Error("Error while refreshing Weather info: " + e);
+      this.lastUpdated = null;
       return;
     }
 
@@ -697,12 +697,6 @@ MyApplet.prototype = {
       // API Unique display
       switch (this._dataService) {
         case DATA_SERVICE.OPEN_WEATHER_MAP:
-          if (this.weather.cloudiness != null) {
-            this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
-            this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
-          }
-          break;
-        case DATA_SERVICE.OPEN_WEATHER_MAP_PRE:
           if (this.weather.cloudiness != null) {
             this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
             this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
@@ -1116,27 +1110,14 @@ MyApplet.prototype = {
   },
 
   isID: function(text) {
-    return this.isNumeric(text);
-  },
-
-  isLocation: function(text) {
-    text = text.split(',');
-    if (text.length != 2) {
-      return false;
-    }
-
-    if (this.isString(text[0]) && this.isString(text[1])) {
+    if (text.length == 7 && this.isNumeric(text)) {
       return true;
     }
     return false;
   },
 
   isCoordinate: function(text) {
-    text = text.split(',');
-    if (text.length != 2) {
-      return false;
-    }
-    if (this.isNumeric(text[0]) && this.isNumeric(text[1])) {
+    if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
       return true;
     }
     return false;

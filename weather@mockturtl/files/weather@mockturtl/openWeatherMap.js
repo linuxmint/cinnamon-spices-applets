@@ -168,7 +168,7 @@ exports.OpenWeatherMap = function(app) {
         if (locString != null) {
             query = query + locString + "&APPID=";
              // Append Language if supported and enabled
-             query += "1c73f8259a86c6fd43c7163b543c8640";
+            query += "1c73f8259a86c6fd43c7163b543c8640";
             if (app._translateCondition && app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + app.systemLanguage;
             }
@@ -181,45 +181,39 @@ exports.OpenWeatherMap = function(app) {
     };
 
     this.ParseLocation = function() {
-        let loc = app._location;
+        let loc = app._location.replace(/ /g, "");
         if (app.isCoordinate(loc)) {
-            let location = loc.replace(/ /g,'').split(',');
-            return "lat=" + location[0] + "&lon=" + location[1];
-        }
-        else if (app.isLocation(loc)) {
             loc = loc.split(',');
-            return "q=" + loc[0].trim() + "," + loc[1].trim();
+            return "lat=" + loc[0] + "&lon=" + loc[1];
         }
         else if (app.isID(loc)) {
             return "id=" + loc;
         }
-        else { //bad string
-            app.log.Error("OpenWeatherMap: Location provided in incorrect format");
-            app.ShowError(app.errMsg.label.service, app.errMsg.desc.locBad);
-           return null;
-        }
+        else  // try as a normal query
+            return "q=" + loc;
     };
 
 
     this.HandleResponseErrors = function(json) {
         let errorMsg = "OpenWeather API: ";
         switch (json.cod) {
-            case(400):
+            case("400"):
                 app.showError(app.errMsg.label.service, app.errMsg.desc.locBad);
                 break;
-            case(401):
+            case("401"):
                 app.showError(app.errMsg.label.service, app.errMsg.desc.keyBad);
                 break;
-            case(404):
+            case("404"):
                 app.showError(app.errMsg.label.service, app.errMsg.desc.locNotFound);
                 break;
-            case(429):
+            case("429"):
                 app.showError(app.errMsg.label.service, app.errMsg.desc.blocked);
                 break;
             default:
                 app.showError(app.errMsg.label.service, app.errMsg.desc.unknown);
                 break;
         };
+        app.log.Debug("OpenWeatherMap Error Code: " + json.cod)
         app.log.Error(errorMsg + json.message);
     };
 

@@ -59,6 +59,7 @@ exports.DarkSky = function(app) {
             
             if (!json) {
                 app.log.Error("No Response from API");
+                app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
                 return false;
             } 
             
@@ -71,6 +72,7 @@ exports.DarkSky = function(app) {
             }
         }
         app.log.Error("DarkSky: Could not construct query, insufficent information");
+        app.showError(app.errMsg.label.service, app.errMsg.desc.locBad);
         return false;
     };
 
@@ -137,6 +139,7 @@ exports.DarkSky = function(app) {
         }
         catch(e) {
             app.log.Error("DarkSky payload parsing error: " + e)
+            app.showError(app.errMsg.label.generic, app.errMsg.desc.parse);
             return false;
         }
         return true;
@@ -146,12 +149,14 @@ exports.DarkSky = function(app) {
     this.ConstructQuery = function() {
         this.SetQueryUnit();
         let query;
+        let key = app._apiKey.replace(" ", "");
+        let location = app._location.replace(" ", "");
         if (app.noApiKey()) {
             app.showError(app.errMsg.label.noKey, "");
             return "";
         }
-        if (app.isCoordinate(app._location)) {
-            query = this.query + app._apiKey + "/" + app._location + 
+        if (app.isCoordinate(location)) {
+            query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.queryUnit;
             if (app.isLangSupported(app.systemLanguage, this.supportedLanguages) && app._translateCondition) {
                 query = query + "&lang=" + app.systemLanguage;
@@ -170,7 +175,7 @@ exports.DarkSky = function(app) {
         let errorMsg = "DarkSky API: "
         app.log.Debug("DarksSky API error payload: " + json);
         switch(code) {
-            case 400:
+            case "400":
                 app.log.Error(errorMsg + error);
                 break;
             default:
