@@ -18,18 +18,27 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap": "OpenWeatherMap"
+      "OpenWeatherMap": "OpenWeatherMap",
+      "OpenWeatherMap (premium)": "OpenWeatherMap_prem",
+      "DarkSky": "DarkSky"
     }
   },
   "apiKey":
   { "type": "entry"
   , "default": ""
   , "description": "API Key"
-  , "tooltip": "Copy this from your account on OpenWeatherMap and paste it here."
+  , "tooltip": "Copy this from your account of the used Data service and paste it here."
+  },
+  "manualLocation":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Manual Location"
+  , "tooltip": "Enable this if your location is not accurate"
   },
   "location":
   { "type": "entry"
   , "default": "London,UK"
+  , "dependency": "manualLocation"
   , "description": "Location"
   , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
 },
@@ -69,8 +78,8 @@
     , "m/s": "m/s"
     , "knots": "Knots"
     }
-  }
-, "pressureUnit":
+  },
+  "pressureUnit":
   { "type": "combobox"
   , "default": "hPa"
   , "description": "Atmospheric pressure unit"
@@ -111,7 +120,12 @@
 , "translateCondition":
   { "type": "checkbox"
   , "default": true
-  , "description": "Translate condition"
+  , "description": "Translate conditions"
+  },
+  "shortConditions":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Less verbose conditions"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"
@@ -136,11 +150,15 @@
 , "refreshInterval":
   { "type": "spinbutton"
   , "default": 15
-  , "min": 1
+  , "min": 5
   , "max": 360
   , "units": "minutes"
   , "step": 5
   , "description": "Update interval"
+  },
+  "credits": {
+    "type": "header",
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi."
   }
 }
 
