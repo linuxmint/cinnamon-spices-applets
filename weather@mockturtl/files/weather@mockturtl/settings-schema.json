@@ -18,8 +18,7 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap": "OpenWeatherMap",
-      "OpenWeatherMap (premium)": "OpenWeatherMap_prem",
+      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
       "DarkSky": "DarkSky"
     }
   },

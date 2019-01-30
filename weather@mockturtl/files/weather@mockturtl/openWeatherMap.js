@@ -17,9 +17,6 @@ exports.OpenWeatherMap = function(app) {
      "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
       "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
 
-    // For FOSS key
-    this.apiKey = null;
-
     this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
     this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
 
@@ -168,16 +165,10 @@ exports.OpenWeatherMap = function(app) {
     this.ConstructQuery = function(baseUrl) {
         let query = baseUrl;
         let locString = this.ParseLocation();
-        let key = null;
-        (app.noApiKey()) ? key = this.apiKey : key = app._apiKey;
-        if (key == null) {
-            app.showError(app.errMsg.label.noKey, "");
-            app.log.Error("OpenWeatherMap: No Api Key was provided");
-            return null;
-        }
         if (locString != null) {
-            query = query + locString + "&APPID=" + key;
+            query = query + locString + "&APPID=";
              // Append Language if supported and enabled
+             query += "1c73f8259a86c6fd43c7163b543c8640";
             if (app._translateCondition && app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + app.systemLanguage;
             }
