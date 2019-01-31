@@ -75,7 +75,7 @@
     "section_general2": {
       "type": "section",
       "title": "Notifications",
-      "keys": ["general_warning", "events_color", "general_notifications", "general_force_notifications"]
+      "keys": ["general_warning", "events_color", "general_notifications", "general_details_requested", "general_force_notifications", "general_type_notif", "general_test_notif"]
     },
     "section_general3": {
       "type": "section",
@@ -116,6 +116,7 @@
             {
                 "id": "isunprotected",
                 "title": "Check for updates?",
+                "align": 0.5,
                 "type": "boolean"
             }
     ],
@@ -291,6 +292,14 @@
     "description": "Show notification messages about Spices updates",
     "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
   },
+  "general_details_requested": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "dependency": "general_notifications",
+    "description": "Display the description of each update or new Spice",
+    "tooltip": "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
+  },
   "general_force_notifications": {
     "type": "checkbox",
     "indent": true,
@@ -299,14 +308,31 @@
     "description": "Show notification messages even if they are unchanged",
     "tooltip": "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
   },
+  "general_type_notif": {
+    "type": "combobox",
+    "default": "minimal",
+    "options": {
+      "Minimal (text only)": "minimal",
+      "With button opening the System Settings": "button"
+     },
+    "dependency": "general_notifications",
+    "description": "Notification style",
+    "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith button opening the System Settings:\n\tNotifications also contain a button which has the same role of the menu one:\n\tOpen the Download tab in System Settings for the concerned type of Spices, with the Spices sorted by date."
+  },
+  "general_test_notif": {
+    "type": "button",
+    "dependency": "general_notifications",
+    "description": "Send a fake notification to test the style",
+    "callback": "on_btn_test_notif_pressed"
+  },
   "displayType": {
     "type": "combobox",
-    "default" : "classic",
-    "options" : {
-      "Classic - Icon and Text" : "classic",
-      "Compact - Icon Only" : "compact"
+    "default": "classic",
+    "options": {
+      "Classic - Icon and Text": "classic",
+      "Compact - Icon Only": "compact"
      },
-    "description" : "Type of Display",
+    "description": "Type of Display",
     "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
   },
   "general_hide": {
