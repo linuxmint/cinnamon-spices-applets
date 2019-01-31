@@ -1,229 +1,248 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
 # Copyright (C) 2019
 # This file is distributed under the same license as the cinnamon-weather package.
-# Peter van Ieperen <p.v.ieperen77@gmail.com>, 2011.
 # Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 22:40+0000\n"
-"PO-Revision-Date: 2019-01-29 12:00+0100\n"
+"Report-Msgid-Bugs-To: Attila 'Gr3q' Greguss <floyd0122@gmail.com>\n"
+"POT-Creation-Date: 2019-01-30 03:50+0000\n"
+"PO-Revision-Date: 2019-01-31 12:00+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: nl\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: applet.js:344
-msgid "..."
-msgstr "..."
+msgid "Error"
+msgstr "Fout"
 
 #: applet.js:345
-msgid "Click to open"
-msgstr "Klik om te openen"
-
-#: applet.js:396
-msgid "Settings"
-msgstr "Instellingen"
-
-#: applet.js:518
-msgid "No location provided"
-msgstr "Geen locatie opgegeven"
-
-#: applet.js:524
-msgid "No Api Key provided"
-msgstr "Geen API-sleutel opgegeven"
-
-#: applet.js:621
-msgid "Cloudiness:"
-msgstr "Bewolking:"
-
-#: applet.js:645
-msgid "Sunrise"
-msgstr "Zonsopgang"
-
-#: applet.js:646
-msgid "Sunset"
-msgstr "Zonsondergang"
-
-#: applet.js:723
-msgid "Loading current weather ..."
-msgstr "Huidig weer aan het laden..."
-
-#: applet.js:724
-msgid "Loading future weather ..."
-msgstr "Weersverwachting aan het laden..."
-
-#: applet.js:746
-msgid "Loading ..."
-msgstr "Bezig met laden..."
-
-#: applet.js:752
-msgid "Refresh"
-msgstr "Verversen"
-
-#: applet.js:817
-msgid "Temperature:"
-msgstr "Temperatuur:"
-
-#: applet.js:819
-msgid "Humidity:"
-msgstr "Luchtvochtigheid:"
-
-#: applet.js:821
-msgid "Pressure:"
-msgstr "Luchtdruk:"
-
-#: applet.js:823
-msgid "Wind:"
-msgstr "Wind:"
-
-#: applet.js:1048
-msgid "Sunday"
-msgstr "Zondag"
-
-#: applet.js:1048
-msgid "Monday"
-msgstr "Maandag"
-
-#: applet.js:1048
-msgid "Tuesday"
-msgstr "Dinsdag"
-
-#: applet.js:1048
-msgid "Wednesday"
-msgstr "Woensdag"
-
-#: applet.js:1048
-msgid "Thursday"
-msgstr "Donderdag"
-
-#: applet.js:1048
-msgid "Friday"
-msgstr "Vrijdag"
-
-#: applet.js:1048
-msgid "Saturday"
-msgstr "Zaterdag"
-
-#: applet.js:1052
-msgid "N"
-msgstr "N"
-
-#: applet.js:1052
-msgid "NE"
-msgstr "NO"
-
-#: applet.js:1052
-msgid "E"
-msgstr "O"
-
-#: applet.js:1052
-msgid "SE"
-msgstr "ZO"
-
-#: applet.js:1052
-msgid "S"
-msgstr "Z"
-
-#: applet.js:1052
-msgid "SW"
-msgstr "ZW"
-
-#: applet.js:1052
-msgid "W"
-msgstr "W"
-
-#: applet.js:1052
-msgid "NW"
-msgstr "NW"
-
-#: applet.js:1102
-msgid "Service Unavailable"
-msgstr "Dienst niet beschikbaar"
-
-#: applet.js:1106
 msgid "Service Error"
 msgstr "Dienstfout"
 
-#: applet.js:1108
+#: applet.js:346
+msgid "No Api key"
+msgstr "Geen API-sleutel"
+
+#: applet.js:347
+msgid "No Location"
+msgstr "Geen locatie"
+
+#: applet.js:350
 msgid "Wrong API Key"
 msgstr "Verkeerde API-sleutel"
 
-#: applet.js:1111
-msgid "City Not found"
-msgstr "Stad niet gevonden"
+#: applet.js:351
+msgid "Wrong Location"
+msgstr "Verkeerde locatie"
 
-#: applet.js:1114
+#: applet.js:352
+msgid "Location Not found"
+msgstr "Locatie niet gevonden"
+
+#: applet.js:353
+msgid "Parsing weather information failed :("
+msgstr "Lezen van weerinformatie is helaas mislukt"
+
+#: applet.js:354
 msgid "Key Temp. Blocked"
-msgstr "Sleutel tijd. geblokkeerd."
+msgstr "Sleutel tijd. geblokkeerd"
 
-#: applet.js:1340
+#: applet.js:355
+msgid "Could not get location"
+msgstr "Kon geen locatie verkrijgen"
+
+#: applet.js:356
+msgid "Unknown Error"
+msgstr "Onbekende fout"
+
+#: applet.js:377
+msgid "..."
+msgstr "..."
+
+#: applet.js:378
+msgid "Click to open"
+msgstr "Klik om te openen"
+
+#: applet.js:432
+msgid "Settings"
+msgstr "Instellingen"
+
+#: applet.js:731 applet.js:737
+msgid "Cloudiness:"
+msgstr "Bewolking:"
+
+#: applet.js:743
+msgid "Feels like:"
+msgstr "Voelt aan als:"
+
+#: applet.js:765
+msgid "Sunrise"
+msgstr "Zonsopgang"
+
+#: applet.js:766
+msgid "Sunset"
+msgstr "Zonsondergang"
+
+#: applet.js:875
+msgid "Loading current weather ..."
+msgstr "Huidig weer aan het laden..."
+
+#: applet.js:876
+msgid "Loading future weather ..."
+msgstr "Weersverwachting aan het laden..."
+
+#: applet.js:898
+msgid "Loading ..."
+msgstr "Bezig met laden..."
+
+#: applet.js:957
+msgid "Temperature:"
+msgstr "Temperatuur:"
+
+#: applet.js:959
+msgid "Humidity:"
+msgstr "Luchtvochtigheid:"
+
+#: applet.js:961
+msgid "Pressure:"
+msgstr "Luchtdruk:"
+
+#: applet.js:963
+msgid "Wind:"
+msgstr "Wind:"
+
+#: applet.js:1196
+msgid "Sunday"
+msgstr "Zondag"
+
+#: applet.js:1196
+msgid "Monday"
+msgstr "Maandag"
+
+#: applet.js:1196
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+#: applet.js:1196
+msgid "Wednesday"
+msgstr "Woensdag"
+
+#: applet.js:1196
+msgid "Thursday"
+msgstr "Donderdag"
+
+#: applet.js:1196
+msgid "Friday"
+msgstr "Vrijdag"
+
+#: applet.js:1196
+msgid "Saturday"
+msgstr "Zaterdag"
+
+#: applet.js:1201
+msgid "N"
+msgstr "N"
+
+#: applet.js:1201
+msgid "NE"
+msgstr "NO"
+
+#: applet.js:1201
+msgid "E"
+msgstr "O"
+
+#: applet.js:1201
+msgid "SE"
+msgstr "ZO"
+
+#: applet.js:1201
+msgid "S"
+msgstr "Z"
+
+#: applet.js:1201
+msgid "SW"
+msgstr "ZW"
+
+#: applet.js:1201
+msgid "W"
+msgstr "W"
+
+#: applet.js:1201
+msgid "NW"
+msgstr "NW"
+
+#: applet.js:1517
 msgid "Clouds"
 msgstr "Wolken"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Mist"
 msgstr "Mistig"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Thunderstorm"
 msgstr "Onweer"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Rain"
 msgstr "Regen"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Snow"
 msgstr "Sneeuw"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Drizzle"
 msgstr "Motregen"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Haze"
 msgstr "Nevel"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Sleet"
 msgstr "Natte sneeuw"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Smoke"
 msgstr "Rook"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Fog"
-msgstr "Dichte mist"
+msgstr "Mist"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sand"
 msgstr "Zand"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Dust"
 msgstr "Stof"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sqalls"
 msgstr "Windstoten"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Tornado"
 msgstr "Tornado"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Volcanic ash"
 msgstr "Vulkanische as"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Clear Sky"
 msgstr "Heldere lucht"
+
+#: applet.js:1518
+msgid "Sky is clear"
+msgstr "Luch is helder"
 
 #. settings-schema.json->head->description
 msgid "Settings for weather@mockturtl"
@@ -231,7 +250,7 @@ msgstr "Instellingen voor weather@mockturtl"
 
 #. settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr "Stel toetsbinding in voor oproepen van menu"
+msgstr "Stel de toetsbinding in voor het oproepen van het menu"
 
 #. settings-schema.json->providerSettings->description
 msgid "Weather Provider Settings"
@@ -245,13 +264,29 @@ msgstr "Gegevensdienst"
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap (premium)"
+msgstr "OpenWeatherMap (betaald)"
+
+#. settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr "DarkSky"
+
 #. settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr "API-sleutel"
 
 #. settings-schema.json->apiKey->tooltip
-msgid "Copy this from your account on OpenWeatherMap and paste it here."
-msgstr "Kopieer deze vanuit uw account bij OpenWeatherMap en plak hem hier."
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem hier."
+
+#. settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Handmatige locatie"
+
+#. settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Schakel dit in indien uw locatie niet accuraat is"
 
 #. settings-schema.json->location->description
 msgid "Location"
@@ -261,8 +296,9 @@ msgstr "Locatie"
 msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longtitude"
-msgstr "Toegest. invoer: Stad,Landcode (bv. Oss,NL) of "
-"Postcode,Landcode of Breedtegraad,Lengtegraad"
+msgstr ""
+"Toegestane invoer: Stad,Landcode (bv. Oss,NL) of Postcode,Landcode of "
+"Breedtegraad,Lengtegraad"
 
 #. settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
@@ -365,8 +401,12 @@ msgid "Forecast length"
 msgstr "Reikwijdte van voorspelling"
 
 #. settings-schema.json->translateCondition->description
-msgid "Translate condition"
+msgid "Translate conditions"
 msgstr "Weersgesteldheid vertalen"
+
+#. settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Kortere beschrijving van weersomstandigheden"
 
 #. settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
@@ -393,6 +433,10 @@ msgstr "minuten"
 msgid "Update interval"
 msgstr "Tussenpoze voor bijwerken"
 
+#. settings-schema.json->credits->description
+msgid "powered by: OpenWeatherMap, DarkSky, ipapi."
+msgstr "werkzaam door: OpenWeatherMap, DarkSky, ipapi."
+
 #. metadata.json->name
 msgid "Weather"
 msgstr "Weer"
@@ -400,6 +444,15 @@ msgstr "Weer"
 #. metadata.json->description
 msgid "View your local weather forecast"
 msgstr "Bekijk uw plaatselijke weersvoorspelling"
+
+#~ msgid "No location provided"
+#~ msgstr "Geen locatie opgegeven"
+
+#~ msgid "Refresh"
+#~ msgstr "Verversen"
+
+#~ msgid "Service Unavailable"
+#~ msgstr "Dienst niet beschikbaar"
 
 #~ msgid "Wind Chill:"
 #~ msgstr "Gevoelstemperatuur:"
