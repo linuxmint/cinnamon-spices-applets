@@ -18,8 +18,7 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap": "OpenWeatherMap",
-      "OpenWeatherMap (premium)": "OpenWeatherMap_prem",
+      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
       "DarkSky": "DarkSky"
     }
   },
@@ -158,7 +157,7 @@
   },
   "credits": {
     "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, ipapi."
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
   }
 }
 

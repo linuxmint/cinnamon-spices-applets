@@ -4,21 +4,24 @@ Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome
 
 cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
 
+### The applet is only compatible with Cinnamon 3.8+ at the moment! For compatibility with Cinnamon 1.8+, use this version [here](https://github.com/Gr3q/cinnamon-spices-applets/blob/weather@mockturtl-2.0.1/weather@mockturtl/README.md)
+
 ----
+
+
 ## Setup
-### OpenWeatherMap API Key Setup
-Go to [OpenWeatherMap](https://openweathermap.org/) and create an account. Select their free tier. Then go your [API keys section](https://home.openweathermap.org/api_keys) where you should find one key already created.
 
-![openweathermap_api_guide_screenshot](https://user-images.githubusercontent.com/3834659/51523797-48ef4c00-1de1-11e9-9e5b-39d0116b1468.png)
+### OpenWeatherMap API Key
 
-Copy this key and paste it into the "API Key" field in the applet configuration window.
+**OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!**
 
 ### OpenWeatherMap Location
 The following formats are supported:
 
-* City, Country Code (e.g. London,UK)
-* Zipcode, Country Code (e.g. 94111,US)
-* Latitude, Longitude (e.g. 37.77,122.41)
+- Zipcode, Country Code (e.g. 94111,US)
+- Latitude, Longitude (e.g. 37.77,122.41)
+
+* City, Country Code (e.g. London,UK), or ZIP, Country Code
 
 If the location you try does not work, try using [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates.
 
@@ -40,9 +43,9 @@ DarkSky only supports Latitude, Longitude format! (e.g. 37.77,122.41)
 
 ## Requirements
 
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 1.8+ 
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.8+
 
-For compatibility with Cinnamon 1.7 or earlier, use an [archived](https://github.com/mockturtl/cinnamon-weather/tags) version.
+For compatibility with Cinnamon 1.8+, use this version [here](https://github.com/Gr3q/cinnamon-spices-applets/blob/weather@mockturtl-2.0.1/weather@mockturtl/README.md)
 
 ## Configuration
 
