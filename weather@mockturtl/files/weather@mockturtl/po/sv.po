@@ -1,470 +1,560 @@
-# Swedish translation for gnome-shell-extension-weather
-# Copyright (C) 2011
+# Swedish translation originally for gnome-shell-extension-weather, now weather@mockturtl
+# Copyright (C) 2011 to 2019, Mauricio Barraza, jorgenqv and Åke Engelbrektson
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Mauricio Barraza <mauricio@barraza.se>, 2011.
-# Minor updates by jorgenqv https://github.com/jorgenqv - 2014, 2016, 2017
+# Minor updates by jorgenqv https://github.com/jorgenqv - 2014, 2016, 2017, 2019
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-15 07:22+0200\n"
-"PO-Revision-Date: 2017-08-15 07:23+0200\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"POT-Creation-Date: 2019-01-27 09:23+0200\n"
+"PO-Revision-Date: 2019-01-29 19:32+0100\n"
+"Last-Translator: jorgenqv https://github.com/jorgenqv\n"
 "Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#: applet.js:249
+#: applet.js:344
 msgid "..."
 msgstr "..."
 
-#: applet.js:250
+#: applet.js:345
 msgid "Click to open"
 msgstr "Klicka för att öppna"
 
-#: applet.js:289
+#: applet.js:396
 msgid "Settings"
 msgstr "Inställningar"
 
-#: applet.js:555
+#: applet.js:518
+msgid "No location provided"
+msgstr "Ingen plats angiven"
+
+#: applet.js:524
+msgid "No Api Key provided"
+msgstr "API-nyckel saknas"
+
+#: applet.js:621
+msgid "Cloudiness:"
+msgstr "Molninghet:"
+
+#: applet.js:645
 msgid "Sunrise"
 msgstr "Soluppgång"
 
-#: applet.js:556
+#: applet.js:646
 msgid "Sunset"
 msgstr "Solnedgång"
 
-#: applet.js:648
+#: applet.js:723
 msgid "Loading current weather ..."
 msgstr "Läser in aktuellt väder..."
 
-#: applet.js:649
+#: applet.js:724
 msgid "Loading future weather ..."
 msgstr "Läser in kommande väder..."
 
-#: applet.js:671
+#: applet.js:746
 msgid "Loading ..."
-msgstr "Läser in..."
+msgstr "Läser in ..."
 
-#: applet.js:677
+#: applet.js:752
 msgid "Refresh"
 msgstr "Uppdatera"
 
-#: applet.js:740
+#: applet.js:817
 msgid "Temperature:"
 msgstr "Temperatur:"
 
-#: applet.js:742
+#: applet.js:819
 msgid "Humidity:"
 msgstr "Luftfuktighet:"
 
-#: applet.js:744
+#: applet.js:821
 msgid "Pressure:"
 msgstr "Lufttryck:"
 
-#: applet.js:746
+#: applet.js:823
 msgid "Wind:"
 msgstr "Vind:"
 
-#: applet.js:748
-msgid "Wind Chill:"
-msgstr "Känns som:"
-
-#: applet.js:953
-msgid "Tornado"
-msgstr "Tornado"
-
-#: applet.js:955
-msgid "Tropical storm"
-msgstr "Tropisk storm"
-
-#: applet.js:957
-msgid "Hurricane"
-msgstr "Orkan"
-
-#: applet.js:959
-msgid "Severe thunderstorms"
-msgstr "Kraftig åska"
-
-#: applet.js:961
-msgid "Thunderstorms"
-msgstr "Åska"
-
-#: applet.js:963
-msgid "Mixed rain and snow"
-msgstr "Snöblandat regn"
-
-#: applet.js:965
-msgid "Mixed rain and sleet"
-msgstr "Regn och slask"
-
-#: applet.js:967
-msgid "Mixed snow and sleet"
-msgstr "Snö och slask"
-
-#: applet.js:969
-msgid "Freezing drizzle"
-msgstr "Underkylt duggregn"
-
-#: applet.js:971
-msgid "Drizzle"
-msgstr "Duggregn"
-
-#: applet.js:973
-msgid "Freezing rain"
-msgstr "Underkylt regn"
-
-#: applet.js:975 applet.js:977
-msgid "Showers"
-msgstr "Regnskurar"
-
-#: applet.js:979
-msgid "Snow flurries"
-msgstr "Snöbyar"
-
-#: applet.js:981
-msgid "Light snow showers"
-msgstr "Lätta snöbyar"
-
-#: applet.js:983
-msgid "Blowing snow"
-msgstr "Snöstorm"
-
-#: applet.js:985
-msgid "Snow"
-msgstr "Snö"
-
-#: applet.js:987
-msgid "Hail"
-msgstr "Hagel"
-
-#: applet.js:989
-msgid "Sleet"
-msgstr "Slask"
-
-#: applet.js:991
-msgid "Dust"
-msgstr "Damm"
-
-#: applet.js:993
-msgid "Foggy"
-msgstr "Dimma"
-
-#: applet.js:995
-msgid "Haze"
-msgstr "Dis"
-
-#: applet.js:997
-msgid "Smoky"
-msgstr "Rök"
-
-#: applet.js:999
-msgid "Blustery"
-msgstr "Vindbyar"
-
-#: applet.js:1001
-msgid "Windy"
-msgstr "Blåsigt"
-
-#: applet.js:1003
-msgid "Cold"
-msgstr "Kallt"
-
-#: applet.js:1005
-msgid "Cloudy"
-msgstr "Molnigt"
-
-#: applet.js:1008
-msgid "Mostly cloudy"
-msgstr "Mest molnigt"
-
-#: applet.js:1011 applet.js:1037
-msgid "Partly cloudy"
-msgstr "Delvis molnigt"
-
-#: applet.js:1013
-msgid "Clear"
-msgstr "Klart"
-
-#: applet.js:1015
-msgid "Sunny"
-msgstr "Soligt"
-
-#: applet.js:1018
-msgid "Fair"
-msgstr "Uppehåll"
-
-#: applet.js:1020
-msgid "Mixed rain and hail"
-msgstr "Regn och hagel"
-
-#: applet.js:1022
-msgid "Hot"
-msgstr "Varmt"
-
-#: applet.js:1024
-msgid "Isolated thunderstorms"
-msgstr "Lokala åskbyar"
-
-#: applet.js:1027
-msgid "Scattered thunderstorms"
-msgstr "Spridda åskbyar"
-
-#: applet.js:1029
-msgid "Scattered showers"
-msgstr "Spridda skurar"
-
-#: applet.js:1031 applet.js:1035
-msgid "Heavy snow"
-msgstr "Tung snö"
-
-#: applet.js:1033
-msgid "Scattered snow showers"
-msgstr "Spridda snöbyar"
-
-#: applet.js:1039
-msgid "Thundershowers"
-msgstr "Åskbyar"
-
-#: applet.js:1041
-msgid "Snow showers"
-msgstr "Snöbyar"
-
-#: applet.js:1043
-msgid "Isolated thundershowers"
-msgstr "Lokala åskskurar"
-
-#: applet.js:1046
-msgid "Not available"
-msgstr "Inte tillgänglig"
-
-#: applet.js:1051
-msgid "Monday"
-msgstr "Måndag"
-
-#: applet.js:1051
-msgid "Tuesday"
-msgstr "Tisdag"
-
-#: applet.js:1051
-msgid "Wednesday"
-msgstr "Onsdag"
-
-#: applet.js:1051
-msgid "Thursday"
-msgstr "Torsdag"
-
-#: applet.js:1051
-msgid "Friday"
-msgstr "Fredag"
-
-#: applet.js:1051
-msgid "Saturday"
-msgstr "Lördag"
-
-#: applet.js:1051
+#: applet.js:1048
 msgid "Sunday"
 msgstr "Söndag"
 
-#: applet.js:1056
+#: applet.js:1048
+msgid "Monday"
+msgstr "Måndag"
+
+#: applet.js:1048
+msgid "Tuesday"
+msgstr "Tisdag"
+
+#: applet.js:1048
+msgid "Wednesday"
+msgstr "Onsdag"
+
+#: applet.js:1048
+msgid "Thursday"
+msgstr "Torsdag"
+
+#: applet.js:1048
+msgid "Friday"
+msgstr "Fredag"
+
+#: applet.js:1048
+msgid "Saturday"
+msgstr "Lördag"
+
+#: applet.js:1052
 msgid "N"
 msgstr "N"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "NE"
 msgstr "NO"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "E"
-msgstr "Ö"
+msgstr "O"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "SE"
 msgstr "SO"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "S"
 msgstr "S"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "SW"
 msgstr "SV"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "W"
 msgstr "V"
 
-#: applet.js:1056
+#: applet.js:1052
 msgid "NW"
 msgstr "NV"
 
-#. weather@mockturtl->settings-schema.json->head->description
+#: applet.js:1102
+msgid "Service Unavailable"
+msgstr "Tjänsten svarar inte"
+
+#: applet.js:1106
+msgid "Service Error"
+msgstr "Tjänst fel"
+
+#: applet.js:1108
+msgid "Wrong API Key"
+msgstr "Felaktig API-nyckel"
+
+#: applet.js:1111
+msgid "City Not found"
+msgstr "Orten hittades inte"
+
+#: applet.js:1114
+msgid "Key Temp. Blocked"
+msgstr "Nyckel Temp. Blockerad"
+
+#: applet.js:1340
+msgid "Clouds"
+msgstr "Moln"
+
+#: applet.js:1340
+msgid "Rain"
+msgstr "Regn"
+
+#: applet.js:1340 applet.js:1341 OpenWeatherMap Weather Condition 200 from
+#: https://openweathermap.org/weather-conditions
+msgid "Thunderstorm with light rain"
+msgstr "Åska med lättare regn"
+
+#: OpenWeatherMap Weather Condition 201
+msgid "Thunderstorm with rain"
+msgstr "Åska med regn"
+
+#: OpenWeatherMap Weather Condition 202
+msgid "Thunderstorm with heavy rain"
+msgstr "Åska med kraftigt regn"
+
+#: OpenWeatherMap Weather Condition 210
+msgid "Light thunderstorm"
+msgstr "Lättare Åska"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 211
+msgid "Thunderstorm"
+msgstr "Åska"
+
+#: OpenWeatherMap Weather Condition 212
+msgid "Heavy thunderstorm"
+msgstr "Kraftig åska"
+
+#: OpenWeatherMap Weather Condition 221
+msgid "Ragged thunderstorm"
+msgstr "Ruskig åska"
+
+#: OpenWeatherMap Weather Condition 230
+msgid "Thunderstorm with light drizzle"
+msgstr "Åska med lättare duggregn"
+
+#: OpenWeatherMap Weather Condition 231
+msgid "Thunderstorm with drizzle"
+msgstr "Åska med duggregn"
+
+#: OpenWeatherMap Weather Condition 232
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Åska med kraftigt duggregn"
+
+#: OpenWeatherMap Weather Condition 300
+msgid "Light intensity drizzle"
+msgstr "Lättare smådugg"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 301
+msgid "Drizzle"
+msgstr "Smådugg"
+
+#: OpenWeatherMap Weather Condition 302
+msgid "Heavy intensity drizzle"
+msgstr "Kraftigt smådugg"
+
+#: OpenWeatherMap Weather Condition 310
+msgid "Light intensity drizzle rain"
+msgstr "Lättare duggregn"
+
+#: OpenWeatherMap Weather Condition 311
+msgid "Drizzle rain"
+msgstr "Duggregn"
+
+#: OpenWeatherMap Weather Condition 312
+msgid "Heavy intensity drizzle rain"
+msgstr "Kraftigt duggregn"
+
+#: OpenWeatherMap Weather Condition 313
+msgid "Shower rain and drizzle"
+msgstr "Skurar och duggregn"
+
+#: OpenWeatherMap Weather Condition 314
+msgid "Heavy shower rain and drizzle"
+msgstr "Kraftiga skurar och duggregn"
+
+#: OpenWeatherMap Weather Condition 321
+msgid "Shower drizzle"
+msgstr "Skurduggregn"
+
+#: OpenWeatherMap Weather Condition 500
+msgid "Light rain"
+msgstr "Lättare regn"
+
+#: OpenWeatherMap Weather Condition 501
+msgid "Moderate rain"
+msgstr "Måttligt regn"
+
+#: OpenWeatherMap Weather Condition 502
+msgid "Heavy intensity rain"
+msgstr "Kraftigt intesitets regn"
+
+#: OpenWeatherMap Weather Condition 503
+msgid "Very heavy rain"
+msgstr "Mycket kraftigt regn"
+
+#: OpenWeatherMap Weather Condition 504
+msgid "Extreme rain"
+msgstr "Extremt kraftigt regn"
+
+#: OpenWeatherMap Weather Condition 511
+msgid "Freezing rain"
+msgstr "Frysande regn"
+
+#: OpenWeatherMap Weather Condition 520
+msgid "Light intensity shower rain"
+msgstr "Lätta intensitets regnskurar"
+
+#: OpenWeatherMap Weather Condition 521
+msgid "Shower rain"
+msgstr "Regnskurar"
+
+#: OpenWeatherMap Weather Condition 522
+msgid "Heavy intensity shower rain"
+msgstr "Kraftiga intensitets regnskurar"
+
+#: OpenWeatherMap Weather Condition 531
+msgid "Ragged shower rain"
+msgstr "Störtregnskurar"
+
+#: OpenWeatherMap Weather Condition 600
+msgid "Light snow"
+msgstr "Lätt snöfall"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 601
+msgid "Snow"
+msgstr "Snöfall"
+
+#: OpenWeatherMap Weather Condition 602
+msgid "Heavy snow"
+msgstr "Kraftig snöfall"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 611
+msgid "Sleet"
+msgstr "Slask"
+
+#: OpenWeatherMap Weather Condition 612
+msgid "Shower sleet"
+msgstr "Slaskskurar"
+
+#: OpenWeatherMap Weather Condition 615
+msgid "Light rain and snow"
+msgstr "Lättare snöblandat regn"
+
+#: OpenWeatherMap Weather Condition 616
+msgid "Rain and snow"
+msgstr "Snöblandat regn"
+
+#: OpenWeatherMap Weather Condition 620
+msgid "Light shower snow"
+msgstr "Lätta snöbyar"
+
+#: OpenWeatherMap Weather Condition 621
+msgid "Shower snow"
+msgstr "Snöbyar"
+
+#: OpenWeatherMap Weather Condition 622
+msgid "Heavy shower snow"
+msgstr "Kraftiga snöbyar"
+
+#: OpenWeatherMap Weather Condition 701
+msgid "Mist"
+msgstr "Disigt"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 711
+msgid "Smoke"
+msgstr "Rök"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 721
+msgid "Haze"
+msgstr "Dis"
+
+#: OpenWeatherMap Weather Condition 731
+msgid "Sand, dust whirls"
+msgstr "Sand, dammvirvlar"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 741
+msgid "Fog"
+msgstr "Dimma"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 751
+msgid "Sand"
+msgstr "Sand"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 761
+msgid "Dust"
+msgstr "Damm"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 762
+msgid "Volcanic ash"
+msgstr "Vulkanisk aska"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 771
+msgid "Squalls"
+msgstr "Stormbyar"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 781
+msgid "Tornado"
+msgstr "Tromb"
+
+#: applet.js:1340 and OpenWeatherMap Weather Condition 800
+msgid "Clear sky"
+msgstr "Klar himmel"
+
+#: OpenWeatherMap Weather Condition 801
+msgid "Few clouds"
+msgstr "Lättare moln"
+
+#: OpenWeatherMap Weather Condition 802
+msgid "Scattered clouds"
+msgstr "Spridda moln"
+
+#: OpenWeatherMap Weather Condition 803
+msgid "Broken clouds"
+msgstr "Växlande molnighet"
+
+#: OpenWeatherMap Weather Condition 803
+msgid "Overcast clouds"
+msgstr "Mulet"
+
+#. settings-schema.json->head->description
 msgid "Settings for weather@mockturtl"
 msgstr "Inställningar för weather@mockturtl"
 
-#. weather@mockturtl->settings-schema.json->keybinding->description
+#. settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr "Ange snabbtangent för att öppna menyn"
+msgstr "Koppla tangent att aktivera meny"
 
-#. cinnamon-weather->settings-schema.json->woeidLookup->description
-msgid "Get WOEID"
-msgstr "Hämta WOEID"
+#. settings-schema.json->providerSettings->description
+msgid "Weather Provider Settings"
+msgstr "Inställningar Väderprognos leverantör"
 
-#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
-msgid "http://woeid.rosselliot.co.nz/"
-msgstr "http://woeid.rosselliot.co.nz/"
+#. settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Datatjänst"
 
-#. cinnamon-weather->settings-schema.json->verticalOrientation->description
-msgid "Vertical orientation"
-msgstr "Vertikal orientering"
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
 
-#. cinnamon-weather->settings-schema.json->showTextInPanel->description
-msgid "Display current temperature in panel"
-msgstr "Visa aktuell temperatur i panelen"
+#. settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "API-nyckel"
 
-#. cinnamon-weather->settings-schema.json->woeid->description
-msgid "WOEID"
-msgstr "WOEID"
+#. settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account on OpenWeatherMap and paste it here."
+msgstr "Kopiera från ditt konto på OpenWeatherMap och klistra in här."
 
-#. cinnamon-weather->settings-schema.json->woeid->tooltip
-msgid "Where On Earth ID"
-msgstr "Var på jorden-ID"
+#. settings-schema.json->location->description
+msgid "Location"
+msgstr "Plats"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#. settings-schema.json->location->tooltip
+msgid "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+msgstr "Tillåten input: Ort,Landskod eller Postnummer,Landskod eller Latitud,Longtitud"
+
+#. settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "Inställningar API-nycket och plats"
+
+#. settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Öppnar web-guide"
+
+#. settings-schema.json->personalSettings->description
+msgid "Personal Settings"
+msgstr "Personliga inställningar"
+
+#. settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
-msgstr "Enhet för temperatur:"
+msgstr "Temperaturenhet"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
-msgstr "fahrenheit"
-
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+#. settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "celsius"
 
-#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+#. settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "fahrenheit"
+
+#. settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
-msgstr "Visa hög temperatur först, i prognoser"
+msgstr "Visa hög temeratur först i prognos"
 
-#. cinnamon-weather->settings-schema.json->translateCondition->description
-msgid "Translate condition"
-msgstr "Översätt väderförhållanden"
-
-#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
-msgid "Override location label"
-msgstr "Åsidosätt platsnamn"
-
-#. cinnamon-weather->settings-schema.json->show24Hours->description
-msgid "Display time in 24 hour format"
-msgstr "Visa tid i 24-timmarsformat"
-
-#. cinnamon-weather->settings-schema.json->forecastDays->description
-msgid "Forecast length"
-msgstr "Prognoslängd"
-
-#. cinnamon-weather->settings-schema.json->forecastDays->units
-msgid "days"
-msgstr "dagar"
-
-#. cinnamon-weather->settings-schema.json->showSunrise->description
-msgid "Show sunrise / sunset times"
-msgstr "Visa tid för soluppgång / solnedgång"
-
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+#. settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr "Enhet för vidhastighet"
+msgstr "Enhet för vindhastighet"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
 msgid "kph"
-msgstr "kph"
+msgstr "km/h"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "mi/h"
+
+#. settings-schema.json->windSpeedUnit->options
 msgid "m/s"
 msgstr "m/s"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
 msgid "knots"
 msgstr "knop"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
-msgid "mph"
-msgstr "mph"
-
-#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
-msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Visa väderförhållande (dvs \"Blåsigt\", \"Klart\") i panelen"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->description
+#. settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr "Enhet för atmosfäriskt tryck"
+msgstr "Enhet för lufttryck"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
+#. settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
+
+#. settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "inHg"
+
+#. settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mmHG"
+
+#. settings-schema.json->pressureUnit->options
 msgid "psi"
 msgstr "psi"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "atm"
-msgstr "atm"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "kPa"
-msgstr "kPa"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "Pa"
-msgstr "Pa"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mm Hg"
-msgstr "mm Hg"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
+#. settings-schema.json->pressureUnit->options
 msgid "at"
 msgstr "at"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mbar"
-msgstr "mbar"
+#. settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "in Hg"
-msgstr "in Hg"
+#. settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
 
-#. cinnamon-weather->settings-schema.json->refreshInterval->description
-msgid "Update interval"
-msgstr "Uppdateringsintervall"
+#. settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "Vertikal orientering"
 
-#. cinnamon-weather->settings-schema.json->refreshInterval->units
-msgid "minutes"
-msgstr "minuter"
+#. settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Visa tid soluppgång / solnedgång"
 
-#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+#. settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Visa tid i 24-timmarsformat"
+
+#. settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "dagar"
+
+#. settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Längd på prognos"
+
+#. settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Översätt väderförhållanden"
+
+#. settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
 msgstr "Symboliska ikoner"
 
-#. cinnamon-weather->metadata.json->description
-msgid "View your local weather forecast"
-msgstr "Visa din lokala väderprognos"
+#. settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Visa aktuell temperatur i panel"
 
-#. cinnamon-weather->metadata.json->name
+#. settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "Visa väderförhållande (dvs \"Blåsigt\", \"Klart\") i panelen"
+
+#. settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Åsidosätt platsnamn"
+
+#. settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "minuter"
+
+#. settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Uppdateringsintervall"
+
+#. metadata.json->name
 msgid "Weather"
 msgstr "Väder"
 
-#~ msgid "Show 5-day forecast"
-#~ msgstr "Visa 5-dygnsprognos"
-
-#~ msgid "Please wait"
-#~ msgstr "Vänligen vänta"
-
-#~ msgid "Today"
-#~ msgstr "Idag"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Imorgon"
-
-#~ msgid "http://edg3.co.uk/snippets/weather-location-codes/"
-#~ msgstr "http://edg3.co.uk/snippets/weather-location-codes/"
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Visa din lokala väderprognos"
