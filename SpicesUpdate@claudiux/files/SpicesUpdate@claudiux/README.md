@@ -37,9 +37,11 @@ There are five tabs in settings.
 The first, _General_, allows you to:
 
   * Select the _Time interval between two checks_ (in hours). Please note that the first check will take place one minute after starting this applet.
-  * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone.
+  * Select the ways to warn you : changing the appearance (by color changing) of the icon of this applet and/or displaying messages in the notification zone. You can also choose the type of notification: Minimal or With a button to open the Download tab in System Settings. If desired, the notification may contain the description of each update or new Spice.
   * Select the _Type of display_ of the icon: with or without text?
-  * Hide the icon applet while nothing is to report. _Please note that Spices Update settings are only accessible when the applet icon is visible or by opening the Cinnamon Settings-> Applets._ ![system_settings_applet](https://github.com/claudiux/docs/blob/master/SpicesUpdate/images/System_Settings_Applets.png)
+  * Hide the icon applet while nothing is to report. _Please note that Spices Update settings are only accessible when the applet icon is visible or by opening the Cinnamon Settings-> Applets._
+
+![system_settings_applet](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets.png)
 
 For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
 

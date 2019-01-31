@@ -1,7 +1,12 @@
-### v1.2.1
+### v2.0.0~20190131
+  * Now the notifications can contain a button to open Download page for applets/desklets/extensions/themes in Date sort order. (Feature request #2231.)
+  * Now the notifications can contain the description of an update or new Spice. (Feature request #2243.)
+  * If the Symbola font is not already installed on Arch, then its installation is now made locally (into `~/.local/share/fonts/`) to avoid using AUR repositories, which are not used on all Arch system.
+
+### v1.2.1~20190126
   * The icon applet can be hidden while nothing is to report.
 
-### v1.2.0
+### v1.2.0~20190122
   * Now, in the menu, a click on a type of Spice (Applets, Desklets, etc) opens the Download tab of the corresponding page in Cinnamon Settings, with Spices sorted by date.
 
 ### v1.1.3~20190118
