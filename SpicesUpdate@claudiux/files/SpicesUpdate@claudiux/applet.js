@@ -479,9 +479,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
                                                                 Math.round(notification.IMAGE_SIZE/2));
       notification.setImage(image);
       let buttonLabel = "%s".format(capitalize(type.toString()));
+      let buttonLabel2 = _("Refresh");
       notification.addButton("spices-update", _(buttonLabel));
-      notification.connect('action-invoked',
-          () => {Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, type.toString()));});
+      notification.addButton("refresh", _(buttonLabel2));
+      notification.connect('action-invoked', Lang.bind(this, function(self, action) {
+            if (action == "spices-update") {
+              Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, type.toString()));
+            } else {
+              this._on_refresh_pressed();
+            }
+          }));
       source.notify(notification);
     }
   }; // End of notify_with_button
