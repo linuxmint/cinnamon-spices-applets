@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2019-01-02 13:30+0100\n"
-"PO-Revision-Date: 2019-01-31 12:48+0100\n"
-"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2019-01-31 23:37+0100\n"
 "Language-Team: \n"
-"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it\n"
 
 #: metadata.json:3
 msgid "Spices Update"
@@ -24,11 +24,11 @@ msgstr "Spices Update"
 
 #: metadata.json:7
 msgid ""
-"Warns you when your Spices (applets, desklets, extensions, themes) require "
-"an update."
+"Warns you when installed Spices (applets, desklets, extensions, themes) "
+"require an update or new Spices are available."
 msgstr ""
-"Ti avverte quando le tue Spices (applet, desktop, estensioni, temi) "
-"richiedono un aggiornamento."
+"Avvisa quando installato Spices (applet, desktop, estensioni, temi) "
+"richiedono un aggiornamento o sono disponibili nuove Spices."
 
 #: settings-schema.json:7
 msgid "Applets"
@@ -437,23 +437,23 @@ msgstr "Nuove estensioni disponibili:"
 msgid "New themes available:"
 msgstr "Nuovi temi disponibili:"
 
-#: applet.js:619
+#: applet.js:626
 msgid "With details here, when available."
 msgstr "Con i dettagli qui, quando sono disponibili."
 
-#: applet.js:620
+#: applet.js:627
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr "Questa è una notifica falsa, solo per il test. Non importa."
 
-#: applet.js:891
+#: applet.js:898
 msgid "is fully functional."
 msgstr "è completamente funzionante."
 
-#: applet.js:892
+#: applet.js:899
 msgid "All dependencies are installed"
 msgstr "Tutte le dipendenze sono installate"
 
-#: applet.js:914
+#: applet.js:921
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -461,26 +461,26 @@ msgstr ""
 "Sembra che manchino alcuni dei programmi richiesti per questa applet per "
 "avere tutte le sue funzionalità."
 
-#: applet.js:915
+#: applet.js:922
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Si prega di eseguire, nel terminale appena aperto, i comandi:"
 
-#: applet.js:916
+#: applet.js:923
 msgid "Some dependencies are not installed!"
 msgstr "Alcune dipendenze non sono installate!"
 
-#: applet.js:1211
+#: applet.js:1218
 msgid "(Description unavailable)"
 msgstr "(Descrizione non disponibile)"
 
-#: applet.js:1214
+#: applet.js:1221
 msgid "(Refresh to see the description)"
 msgstr "(Aggiorna per vedere la descrizione)"
 
-#: applet.js:1395
+#: applet.js:1402
 msgid "Forget new Spices"
 msgstr "Dimentica le nuove Spices"
 
-#: applet.js:1402
+#: applet.js:1409
 msgid "Configure"
 msgstr "Configurazione"

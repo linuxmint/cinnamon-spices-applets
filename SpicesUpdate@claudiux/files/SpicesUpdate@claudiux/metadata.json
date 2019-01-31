@@ -4,5 +4,5 @@
     "max-instances": "1",
     "hide-configuration": false,
     "version": "2.0.0",
-    "description": "Warns you when your Spices (applets, desklets, extensions, themes) require an update."
+    "description": "Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available."
 }
