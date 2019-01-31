@@ -4,8 +4,13 @@ Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome
 
 cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
 
+### The applet is only compatible with Cinnamon 3.8+ at the moment! For compatibility with Cinnamon 1.8+, use this version [here](https://github.com/Gr3q/cinnamon-spices-applets/blob/weather@mockturtl-2.0.1/weather@mockturtl/README.md)
+
 ----
+
+
 ## Setup
+
 ### OpenWeatherMap API Key
 
 **OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!**
@@ -38,9 +43,9 @@ DarkSky only supports Latitude, Longitude format! (e.g. 37.77,122.41)
 
 ## Requirements
 
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 1.8+ 
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.8+
 
-For compatibility with Cinnamon 1.7 or earlier, use an [archived](https://github.com/mockturtl/cinnamon-weather/tags) version.
+For compatibility with Cinnamon 1.8+, use this version [here](https://github.com/Gr3q/cinnamon-spices-applets/blob/weather@mockturtl-2.0.1/weather@mockturtl/README.md)
 
 ## Configuration
 
