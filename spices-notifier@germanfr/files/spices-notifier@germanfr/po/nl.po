@@ -39,7 +39,7 @@ msgstr "minuten"
 
 #. settings-schema.json->show-nonzero-only->description
 msgid "Hide panel icon when there are no unread comments"
-msgstr "Verberg paneelpictogram wanneer er geen ongelezen opmerkingen zijn"
+msgstr "Verberg paneelpictogram wanneer er geen nieuwe reacties zijn"
 
 #. metadata.json->name
 msgid "Spices notifier"
