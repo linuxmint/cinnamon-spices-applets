@@ -1,3 +1,6 @@
+### v2.0.1~20190201
+  * Delete old notifications when a new one arrives.
+
 ### v2.0.0~20190131
   * Now the notifications can contain a button to open Download page for applets/desklets/extensions/themes in Date sort order. (Feature request #2231.)
   * Now the notifications can contain the description of an update or new Spice. (Feature request #2243.)

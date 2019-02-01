@@ -454,6 +454,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.actor.add_child(this.badge);
 
     this.details_by_uuid = {};
+    this.notifications = new Array();
     this.testblink = [];
     this.forceRefresh = false;
     this.applet_running = true;
@@ -472,6 +473,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let icon = new St.Icon({ gicon: gicon, 'icon-size': 32});
       let notification = new MessageTray.Notification(source, _("Spices Update"), message, {icon: icon});
       notification.setTransient(false);
+      notification.setResident(true);
       Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
       notification.setUseActionIcons(true);
       let image = St.TextureCache.get_default().load_uri_async(GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null),
@@ -482,10 +484,21 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let buttonLabel2 = _("Refresh");
       notification.addButton("spices-update", _(buttonLabel));
       notification.addButton("refresh", _(buttonLabel2));
+      this.notifications.push(notification);
       notification.connect('action-invoked', Lang.bind(this, function(self, action) {
             if (action == "spices-update") {
               Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, type.toString()));
             } else {
+              if (this.force_notifications === true) {
+                while (this.notifications.length != 0) {
+                  let n = this.notifications.pop();
+                  n.destroy(3)
+                }
+              } else {
+                this.old_message[type] = "";
+                this.old_watch_message[type] = "";
+                notification.destroy(3)
+              }
               this._on_refresh_pressed();
             }
           }));
