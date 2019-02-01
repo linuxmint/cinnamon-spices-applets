@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 22:40+0000\n"
-"PO-Revision-Date: 2019-01-30 00:39+0100\n"
+"Report-Msgid-Bugs-To: Attila 'Gr3q' Greguss <floyd0122@gmail.com>\n"
+"POT-Creation-Date: 2019-01-27 19:50+0000\n"
+"PO-Revision-Date: 2019-02-01 21:08+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -18,211 +18,231 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: applet.js:344
-msgid "..."
-msgstr "..."
+msgid "Error"
+msgstr "Greška"
 
 #: applet.js:345
-msgid "Click to open"
-msgstr "Klikni za otvaranje"
-
-#: applet.js:396
-msgid "Settings"
-msgstr "Postavke"
-
-#: applet.js:518
-msgid "No location provided"
-msgstr "Nema postavljene lokacije"
-
-#: applet.js:524
-msgid "No Api Key provided"
-msgstr "Nema Api ključa lokacije"
-
-#: applet.js:621
-msgid "Cloudiness:"
-msgstr "Naoblaka:"
-
-#: applet.js:645
-msgid "Sunrise"
-msgstr "Izlazak sunca"
-
-#: applet.js:646
-msgid "Sunset"
-msgstr "Zalazak sunca"
-
-#: applet.js:723
-msgid "Loading current weather ..."
-msgstr "Učitavanje trenutne prognoze..."
-
-#: applet.js:724
-msgid "Loading future weather ..."
-msgstr "Učitavanje buduće prognoze..."
-
-#: applet.js:746
-msgid "Loading ..."
-msgstr "Učitavanje..."
-
-#: applet.js:752
-msgid "Refresh"
-msgstr "Osvježi"
-
-#: applet.js:817
-msgid "Temperature:"
-msgstr "Temperatura:"
-
-#: applet.js:819
-msgid "Humidity:"
-msgstr "Vlažnost:"
-
-#: applet.js:821
-msgid "Pressure:"
-msgstr "Tlak:"
-
-#: applet.js:823
-msgid "Wind:"
-msgstr "Vjetar:"
-
-#: applet.js:1048
-msgid "Sunday"
-msgstr "Nedjelja"
-
-#: applet.js:1048
-msgid "Monday"
-msgstr "Ponedjeljak"
-
-#: applet.js:1048
-msgid "Tuesday"
-msgstr "Utorak"
-
-#: applet.js:1048
-msgid "Wednesday"
-msgstr "Srijeda"
-
-#: applet.js:1048
-msgid "Thursday"
-msgstr "Četvrtak"
-
-#: applet.js:1048
-msgid "Friday"
-msgstr "Petak"
-
-#: applet.js:1048
-msgid "Saturday"
-msgstr "Subota"
-
-#: applet.js:1052
-msgid "N"
-msgstr "S"
-
-#: applet.js:1052
-msgid "NE"
-msgstr "SI"
-
-#: applet.js:1052
-msgid "E"
-msgstr "I"
-
-#: applet.js:1052
-msgid "SE"
-msgstr "JI"
-
-#: applet.js:1052
-msgid "S"
-msgstr "J"
-
-#: applet.js:1052
-msgid "SW"
-msgstr "JZ"
-
-#: applet.js:1052
-msgid "W"
-msgstr "Z"
-
-#: applet.js:1052
-msgid "NW"
-msgstr "SZ"
-
-#: applet.js:1102
-msgid "Service Unavailable"
-msgstr "Usluga nedostupna"
-
-#: applet.js:1106
 msgid "Service Error"
 msgstr "Greška usluge"
 
-#: applet.js:1108
+#: applet.js:346
+msgid "No Api key"
+msgstr "Nema API ključa"
+
+#: applet.js:347
+msgid "No Location"
+msgstr "Nema lokacije"
+
+#: applet.js:350
 msgid "Wrong API Key"
 msgstr "Neispravan API ključ"
 
-#: applet.js:1111
-msgid "City Not found"
-msgstr "Grad nije pronađen"
+#: applet.js:351
+msgid "Wrong Location"
+msgstr "Pogrešna lokacija"
 
-#: applet.js:1114
+#: applet.js:352
+msgid "Location Not found"
+msgstr "Lokacija nije pronađena"
+
+#: applet.js:353
+msgid "Parsing weather information failed :("
+msgstr "Neuspjela obrada informacije prognoze :("
+
+#: applet.js:354
 msgid "Key Temp. Blocked"
 msgstr "Ključ temp. blokiran"
 
-#: applet.js:1340
+#: applet.js:355
+msgid "Could not get location"
+msgstr "Nemoguće dobivanje lokacije"
+
+#: applet.js:356
+msgid "Unknown Error"
+msgstr "Nepoznata greška"
+
+#: applet.js:377
+msgid "..."
+msgstr "..."
+
+#: applet.js:378
+msgid "Click to open"
+msgstr "Klikni za otvaranje"
+
+#: applet.js:432
+msgid "Settings"
+msgstr "Postavke"
+
+#: applet.js:731 applet.js:737
+msgid "Cloudiness:"
+msgstr "Naoblaka:"
+
+#: applet.js:743
+msgid "Feels like:"
+msgstr "Kao da je:"
+
+#: applet.js:765
+msgid "Sunrise"
+msgstr "Izlazak sunca"
+
+#: applet.js:766
+msgid "Sunset"
+msgstr "Zalazak sunca"
+
+#: applet.js:875
+msgid "Loading current weather ..."
+msgstr "Učitavanje trenutne prognoze..."
+
+#: applet.js:876
+msgid "Loading future weather ..."
+msgstr "Učitavanje buduće prognoze..."
+
+#: applet.js:898
+msgid "Loading ..."
+msgstr "Učitavanje..."
+
+#: applet.js:957
+msgid "Temperature:"
+msgstr "Temperatura:"
+
+#: applet.js:959
+msgid "Humidity:"
+msgstr "Vlažnost:"
+
+#: applet.js:961
+msgid "Pressure:"
+msgstr "Tlak:"
+
+#: applet.js:963
+msgid "Wind:"
+msgstr "Vjetar:"
+
+#: applet.js:1196
+msgid "Sunday"
+msgstr "Nedjelja"
+
+#: applet.js:1196
+msgid "Monday"
+msgstr "Ponedjeljak"
+
+#: applet.js:1196
+msgid "Tuesday"
+msgstr "Utorak"
+
+#: applet.js:1196
+msgid "Wednesday"
+msgstr "Srijeda"
+
+#: applet.js:1196
+msgid "Thursday"
+msgstr "Četvrtak"
+
+#: applet.js:1196
+msgid "Friday"
+msgstr "Petak"
+
+#: applet.js:1196
+msgid "Saturday"
+msgstr "Subota"
+
+#: applet.js:1201
+msgid "N"
+msgstr "S"
+
+#: applet.js:1201
+msgid "NE"
+msgstr "SI"
+
+#: applet.js:1201
+msgid "E"
+msgstr "I"
+
+#: applet.js:1201
+msgid "SE"
+msgstr "JI"
+
+#: applet.js:1201
+msgid "S"
+msgstr "J"
+
+#: applet.js:1201
+msgid "SW"
+msgstr "JZ"
+
+#: applet.js:1201
+msgid "W"
+msgstr "Z"
+
+#: applet.js:1201
+msgid "NW"
+msgstr "SZ"
+
+#: applet.js:1517
 msgid "Clouds"
 msgstr "Oblačno"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Mist"
-msgstr "Izmaglica"
+msgstr "Sumaglica"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Thunderstorm"
 msgstr "Oluja s grmljavinom"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Rain"
 msgstr "Kiša"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Snow"
 msgstr "Snijeg"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Drizzle"
 msgstr "Rominjanje"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Haze"
 msgstr "Izmaglica"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Sleet"
 msgstr "Susnježica"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Smoke"
 msgstr "Dim"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Fog"
 msgstr "Magla"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sand"
 msgstr "Pijesak"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Dust"
 msgstr "Prašina"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sqalls"
 msgstr "Iznenadni naleti vjetra"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Tornado"
 msgstr "Tornado"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Volcanic ash"
 msgstr "Vulkanski pepeo"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Clear Sky"
+msgstr "Vedro"
+
+#: applet.js:1518
+msgid "Sky is clear"
 msgstr "Vedro"
 
 #. settings-schema.json->head->description
@@ -245,14 +265,29 @@ msgstr "Usluga prognoze"
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap (premium)"
+msgstr "OpenWeatherMap (premium)"
+
+#. settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr "DarkSky"
+
 #. settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr "API ključ"
 
 #. settings-schema.json->apiKey->tooltip
-msgid "Copy this from your account on OpenWeatherMap and paste it here."
-msgstr ""
-"Kopirajte ključ s vašeg OpenWeatherMap računa i zalijepite ga ovdje."
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "API ključ kopirajte ovdje iz vašeg računa pružatelja usluge."
+
+#. settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Ručna lokacija"
+
+#. settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Omogućite ovo ako vaša lokacija nije točna"
 
 #. settings-schema.json->location->description
 msgid "Location"
@@ -367,8 +402,12 @@ msgid "Forecast length"
 msgstr "Duljina prognoze"
 
 #. settings-schema.json->translateCondition->description
-msgid "Translate condition"
-msgstr "Prikaži prevedeno trentno stanje vremena"
+msgid "Translate conditions"
+msgstr "Prevedi vremenska stanja"
+
+#. settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Manje opširna vremenska stanja"
 
 #. settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
@@ -394,6 +433,10 @@ msgstr "minute"
 msgid "Update interval"
 msgstr "Razdoblje nadopunjavanja"
 
+#. settings-schema.json->credits->description
+msgid "powered by: OpenWeatherMap, DarkSky, ipapi."
+msgstr "pogonjeno od strane: OpenWeatherMap, DarkSky, ipapi."
+
 #. metadata.json->name
 msgid "Weather"
 msgstr "Vrijeme"
@@ -401,6 +444,28 @@ msgstr "Vrijeme"
 #. metadata.json->description
 msgid "View your local weather forecast"
 msgstr "Pogledajte vašu lokalnu vremensku prognozu"
+
+#~ msgid "No location provided"
+#~ msgstr "Nema postavljene lokacije"
+
+#~ msgid "No Api Key provided"
+#~ msgstr "Nema Api ključa lokacije"
+
+#~ msgid "Refresh"
+#~ msgstr "Osvježi"
+
+#~ msgid "Service Unavailable"
+#~ msgstr "Usluga nedostupna"
+
+#~ msgid "City Not found"
+#~ msgstr "Grad nije pronađen"
+
+#~ msgid "Copy this from your account on OpenWeatherMap and paste it here."
+#~ msgstr ""
+#~ "Kopirajte ključ s vašeg OpenWeatherMap računa i zalijepite ga ovdje."
+
+#~ msgid "Translate condition"
+#~ msgstr "Prikaži prevedeno trentno stanje vremena"
 
 #~ msgid "Wind Chill:"
 #~ msgstr "Kao da je:"
