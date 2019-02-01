@@ -6,235 +6,247 @@
 # giwhub, 2015-2017.
 # Kiat, 2017
 # Echizen Ryoma <echizenryoma.zhang@gmail.com>, 2018.
-
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0.1\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-23 22:40+0000\n"
-"PO-Revision-Date: 2019-01-28 21:19+0800\n"
+"Project-Id-Version: 2.1.0\n"
+"Report-Msgid-Bugs-To: Attila 'Gr3q' Greguss <floyd0122@gmail.com>\n"
+"POT-Creation-Date: 2019-01-27 19:50+0000\n"
+"PO-Revision-Date: 2019-02-01 08:39+0800\n"
 "Last-Translator: Echizen Ryoma <echizenryoma.zhang@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: applet.js:344
-msgid "..."
-msgstr "..."
+msgid "Error"
+msgstr "错误"
 
 #: applet.js:345
-msgid "Click to open"
-msgstr "点击打开"
-
-#: applet.js:396
-msgid "Settings"
-msgstr "设置"
-
-#: applet.js:518
-msgid "No location provided"
-msgstr "未提供位置信息"
-
-#: applet.js:524
-msgid "No Api Key provided"
-msgstr "未提供API密钥"
-
-#: applet.js:621
-msgid "Cloudiness:"
-msgstr "云量："
-
-#: applet.js:645
-msgid "Sunrise"
-msgstr "日出"
-
-#: applet.js:646
-msgid "Sunset"
-msgstr "日落"
-
-#: applet.js:723
-msgid "Loading current weather ..."
-msgstr "正在加载当前天气情况 ..."
-
-#: applet.js:724
-msgid "Loading future weather ..."
-msgstr "正在加载未来天气情况 ..."
-
-#: applet.js:746
-msgid "Loading ..."
-msgstr "正在加载 ..."
-
-#: applet.js:752
-msgid "Refresh"
-msgstr "刷新"
-
-#: applet.js:817
-msgid "Temperature:"
-msgstr "温度："
-
-#: applet.js:819
-msgid "Humidity:"
-msgstr "湿度："
-
-#: applet.js:821
-msgid "Pressure:"
-msgstr "气压："
-
-#: applet.js:823
-msgid "Wind:"
-msgstr "风力："
-
-#: applet.js:1048
-msgid "Sunday"
-msgstr "星期日"
-
-#: applet.js:1048
-msgid "Monday"
-msgstr "星期一"
-
-#: applet.js:1048
-msgid "Tuesday"
-msgstr "星期二"
-
-#: applet.js:1048
-msgid "Wednesday"
-msgstr "星期三"
-
-#: applet.js:1048
-msgid "Thursday"
-msgstr "星期四"
-
-#: applet.js:1048
-msgid "Friday"
-msgstr "星期五"
-
-#: applet.js:1048
-msgid "Saturday"
-msgstr "星期六"
-
-#: applet.js:1052
-msgid "N"
-msgstr "北"
-
-#: applet.js:1052
-msgid "NE"
-msgstr "东北"
-
-#: applet.js:1052
-msgid "E"
-msgstr "东"
-
-#: applet.js:1052
-msgid "SE"
-msgstr "东南"
-
-#: applet.js:1052
-msgid "S"
-msgstr "南"
-
-#: applet.js:1052
-msgid "SW"
-msgstr "西南"
-
-#: applet.js:1052
-msgid "W"
-msgstr "西"
-
-#: applet.js:1052
-msgid "NW"
-msgstr "西北"
-
-#: applet.js:1102
-msgid "Service Unavailable"
-msgstr "服务不可用"
-
-#: applet.js:1106
 msgid "Service Error"
 msgstr "服务错误"
 
-#: applet.js:1108
+#: applet.js:346
+msgid "No Api key"
+msgstr "没有API密钥"
+
+#: applet.js:347
+msgid "No Location"
+msgstr "没有位置信息"
+
+#: applet.js:350
 msgid "Wrong API Key"
 msgstr "API密钥错误"
 
-#: applet.js:1111
-msgid "City Not found"
-msgstr "城市未找到"
+#: applet.js:351
+msgid "Wrong Location"
+msgstr "位置错误"
 
-#: applet.js:1114
+#: applet.js:352
+msgid "Location Not found"
+msgstr "位置不存在"
+
+#: applet.js:353
+msgid "Parsing weather information failed :("
+msgstr "解析天气信息失败"
+
+#: applet.js:354
 msgid "Key Temp. Blocked"
 msgstr "API密钥被临时禁止"
 
-#: applet.js:1340
-#, fuzzy
-#| msgid "Cloudy"
+#: applet.js:355
+msgid "Could not get location"
+msgstr "无法获取位置"
+
+#: applet.js:356
+msgid "Unknown Error"
+msgstr "未知错误"
+
+#: applet.js:377
+msgid "..."
+msgstr ""
+
+#: applet.js:378
+msgid "Click to open"
+msgstr "点击打开"
+
+#: applet.js:432
+msgid "Settings"
+msgstr "设置"
+
+#: applet.js:731 applet.js:737
+msgid "Cloudiness:"
+msgstr "云量："
+
+#: applet.js:743
+msgid "Feels like:"
+msgstr ""
+
+#: applet.js:765
+msgid "Sunrise"
+msgstr "日出"
+
+#: applet.js:766
+msgid "Sunset"
+msgstr "日落"
+
+#: applet.js:875
+msgid "Loading current weather ..."
+msgstr "正在加载当前天气情况…"
+
+#: applet.js:876
+msgid "Loading future weather ..."
+msgstr "正在加载未来天气情况…"
+
+#: applet.js:898
+msgid "Loading ..."
+msgstr "正在加载…"
+
+#: applet.js:957
+msgid "Temperature:"
+msgstr "温度："
+
+#: applet.js:959
+msgid "Humidity:"
+msgstr "湿度："
+
+#: applet.js:961
+msgid "Pressure:"
+msgstr "气压："
+
+#: applet.js:963
+msgid "Wind:"
+msgstr "风力："
+
+#: applet.js:1196
+msgid "Sunday"
+msgstr "星期日"
+
+#: applet.js:1196
+msgid "Monday"
+msgstr "星期一"
+
+#: applet.js:1196
+msgid "Tuesday"
+msgstr "星期二"
+
+#: applet.js:1196
+msgid "Wednesday"
+msgstr "星期三"
+
+#: applet.js:1196
+msgid "Thursday"
+msgstr "星期四"
+
+#: applet.js:1196
+msgid "Friday"
+msgstr "星期五"
+
+#: applet.js:1196
+msgid "Saturday"
+msgstr "星期六"
+
+#: applet.js:1201
+msgid "N"
+msgstr "北"
+
+#: applet.js:1201
+msgid "NE"
+msgstr "东北"
+
+#: applet.js:1201
+msgid "E"
+msgstr "东"
+
+#: applet.js:1201
+msgid "SE"
+msgstr "东南"
+
+#: applet.js:1201
+msgid "S"
+msgstr "南"
+
+#: applet.js:1201
+msgid "SW"
+msgstr "西南"
+
+#: applet.js:1201
+msgid "W"
+msgstr "西"
+
+#: applet.js:1201
+msgid "NW"
+msgstr "西北"
+
+#: applet.js:1517
 msgid "Clouds"
 msgstr "多云"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Mist"
 msgstr "薄雾"
 
-#: applet.js:1340
-#, fuzzy
-#| msgid "Thunderstorms"
+#: applet.js:1517
 msgid "Thunderstorm"
 msgstr "雷阵雨"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Rain"
 msgstr "雨"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Snow"
 msgstr "雪"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Drizzle"
 msgstr "小雨"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Haze"
 msgstr "霾"
 
-#: applet.js:1340
+#: applet.js:1517
 msgid "Sleet"
 msgstr "雨夹雪"
 
-#: applet.js:1341
-#, fuzzy
-#| msgid "Smoky"
+#: applet.js:1518
 msgid "Smoke"
 msgstr "烟雾"
 
-#: applet.js:1341
-#, fuzzy
-#| msgid "Foggy"
+#: applet.js:1518
 msgid "Fog"
 msgstr "雾"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sand"
 msgstr "扬沙"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Dust"
 msgstr "浮尘"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Sqalls"
 msgstr "大风"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Tornado"
 msgstr "龙卷风"
 
-#: applet.js:1341
+#: applet.js:1518
 msgid "Volcanic ash"
 msgstr "火山灰"
 
-#: applet.js:1341
-#, fuzzy
+#: applet.js:1518
 msgid "Clear Sky"
+msgstr "晴"
+
+#: applet.js:1518
+#, fuzzy
+msgid "Sky is clear"
 msgstr "晴"
 
 #. settings-schema.json->head->description
@@ -257,13 +269,29 @@ msgstr "数据服务来源"
 msgid "OpenWeatherMap"
 msgstr ""
 
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap (premium)"
+msgstr "OpenWeatherMap (高级版)"
+
+#. settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr ""
+
 #. settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr "API密钥"
 
 #. settings-schema.json->apiKey->tooltip
-msgid "Copy this from your account on OpenWeatherMap and paste it here."
+msgid "Copy this from your account of the used Data service and paste it here."
 msgstr "从您的OpenWeatherMap帐户中复制API密钥至此。"
+
+#. settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "手动设置位置"
+
+#. settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "如果自动获取不正确，则启用此功能"
 
 #. settings-schema.json->location->description
 msgid "Location"
@@ -281,7 +309,7 @@ msgstr "设置API密钥和位置信息"
 
 #. settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
-msgstr "打开网页帮助"
+msgstr "打开帮助网页"
 
 #. settings-schema.json->personalSettings->description
 msgid "Personal Settings"
@@ -376,8 +404,12 @@ msgid "Forecast length"
 msgstr "预报时长"
 
 #. settings-schema.json->translateCondition->description
-msgid "Translate condition"
+msgid "Translate conditions"
 msgstr "翻译天气状况"
+
+#. settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "使用简短的天气状况"
 
 #. settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
@@ -389,7 +421,7 @@ msgstr "在系统面板显示当前气温"
 
 #. settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "在系统面板显示天气情况（例如, \"多风\", \"晴朗\"）"
+msgstr "在系统面板显示天气情况（例如, \"多风\", \"晴\"）"
 
 #. settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
@@ -403,10 +435,14 @@ msgstr "分钟"
 msgid "Update interval"
 msgstr "更新时间间隔"
 
+#. settings-schema.json->credits->description
+msgid "powered by: OpenWeatherMap, DarkSky, ipapi."
+msgstr ""
+
 #. metadata.json->name
 msgid "Weather"
 msgstr "天气"
 
 #. metadata.json->description
 msgid "View your local weather forecast"
-msgstr "查看您当地的天气预报"
+msgstr "查看当地的天气预报"
