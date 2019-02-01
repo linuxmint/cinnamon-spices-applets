@@ -264,6 +264,14 @@ msgstr ""
 "Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten "
 "weergeeft over Spices-updates in de viewer voor meldingen."
 
+#: ./settings-schema.json:300
+msgid "Display the description of each update or new Spice"
+msgstr "Geef de beschrijving weer van elke update of nieuwe Spice"
+
+#: ./settings-schema.json:301
+msgid "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
+msgstr "Door dit selectievakje aan te vinken, weet u wanneer een update beschikbaar is en krijgt u een beschrijving van nieuwe Spice.\nDeze informatie wordt in het Engels weergegeven"
+
 #: settings-schema.json:299
 msgid "Show notification messages even if they are unchanged"
 msgstr "Toon meldingen, zelfs als ze ongewijzigd zijn"
@@ -275,6 +283,26 @@ msgid ""
 msgstr ""
 "Door dit selectievakje in te schakelen, worden alle meldingsberichten "
 "weergegeven, zelfs als deze identiek zijn aan de vorige."
+
+#: ./settings-schema.json:315
+msgid "Minimal (text only)"
+msgstr "Minimaal (alleen tekst)"
+
+#: ./settings-schema.json:316
+msgid "With button opening the System Settings"
+msgstr "M.b.v knop systeeminstellingen openen"
+
+#: ./settings-schema.json:319
+msgid "Notification style"
+msgstr "Meldings weergave"
+
+#: ./settings-schema.json:320
+msgid "Minimal:\n\tDisplays simple and short notifications.\nWith button opening the System Settings:\n\tNotifications also contain a button which has the same role of the menu one:\n\tOpen the Download tab in System Settings for the concerned type of Spices, with the Spices sorted by date."
+msgstr "Minimaal:\n\tGeeft eenvoudige en korte meldingen weer.\nWanneer de knop de Systeeminstellingen opent:\n\tNotificaties deze bevat ook een knop met dezelfde functie als die van het menu:\n\tOpen het tabblad Downloaden in Systeeminstellingen voor de betreffende soort Spices, met de Spices gesorteerd op datum."
+
+#: ./settings-schema.json:325
+msgid "Send a fake notification to test the style"
+msgstr "Stuur een nep melding om de stijl te testen"
 
 #: settings-schema.json:306
 msgid "Classic - Icon and Text"
@@ -384,6 +412,14 @@ msgstr "Nieuwe extensies beschikbaar:"
 msgid "New themes available:"
 msgstr "Nieuwe thema's beschikbaar:"
 
+#: ./applet.js:626
+msgid "With details here, when available."
+msgstr "Met details hier, indien beschikbaar"
+
+#: ./applet.js:627
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "Maakt niet uit. Dit is een NEP-melding, bedoeld als test"
+
 #: applet.js:820
 msgid "is fully functional."
 msgstr "is volledig functioneel."
@@ -408,6 +444,14 @@ msgstr "Voer in de geopende terminal de opdrachten uit:"
 msgid "Some dependencies are not installed!"
 msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
 
+#: ./applet.js:1218
+msgid "(Description unavailable)"
+msgstr "(Beschrijving niet beschikbaar)"
+
+#: ./applet.js:1221
+msgid "(Refresh to see the description)"
+msgstr "(Vernieuw om de beschrijving te zien)"
+
 #: applet.js:1270
 msgid "Forget new Spices"
 msgstr "Vergeet nieuwe spices"
@@ -416,22 +460,4 @@ msgstr "Vergeet nieuwe spices"
 msgid "Configure"
 msgstr "Configureren"
 
-msgid "Warn me in the same way when new Spices are available"
-msgstr ""
-"Waarschuw mij op dezelfde manier wanneer nieuwe spices beschikbaar zijn"
 
-msgid ""
-"By checking this box, you allow this applet to display messages about new "
-"available Spices in notifications viewer."
-msgstr ""
-"Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten "
-"weergeeft over nieuwe beschikbare spices in de viewer voor meldingen."
-
-msgid "Reloaded applet:"
-msgstr "Opnieuw geladen hulptoepassingen:"
-
-msgid "Reloaded desklet:"
-msgstr "Opnieuw geladen minitoepassingen:"
-
-msgid "Reloaded extension:"
-msgstr "Opnieuw geladen extensie:"
