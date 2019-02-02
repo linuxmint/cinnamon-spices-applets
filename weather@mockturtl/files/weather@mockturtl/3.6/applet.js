@@ -64,7 +64,7 @@ const DATA_SERVICE = {
 const SERVICE = {
   "OpenWeatherMap": {
     QUERY_URL : "https://api.openweathermap.org/data/2.5/weather?",
-    FORECAST_URL: "https://api.openweathermap.org/data/2.5/forecast?"
+    FORECAST_URL: "https://api.openweathermap.org/data/2.5/forecast/daily?"
   },
 };
 
@@ -72,7 +72,6 @@ const SERVICE = {
 // Schema keys
 const WEATHER_LOCATION = "location"
 const WEATHER_DATA_SERVICE = "dataService"
-const WEATHER_API_KEY = "apiKey"
 const WEATHER_CITY_KEY = 'locationLabelOverride'
 const WEATHER_REFRESH_INTERVAL = 'refreshInterval'
 const WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel'
@@ -91,7 +90,6 @@ const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
 const KEYS = [,
   WEATHER_LOCATION,
   WEATHER_DATA_SERVICE,
-  WEATHER_API_KEY,
   WEATHER_TEMPERATURE_UNIT_KEY,
   WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
   WEATHER_WIND_SPEED_UNIT_KEY,
@@ -327,13 +325,7 @@ MyApplet.prototype = {
 
   locationLookup: function locationLookup() {
     let command = "xdg-open ";
-    switch(this._dataService) {
-      case DATA_SERVICE.OPEN_WEATHER_MAP:
-        Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
-        break;
-      default:
-        break;
-    }
+    Util.spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/tree/master/weather%40mockturtl");
   },
 
     // Override Methods: TextIconApplet
@@ -521,10 +513,6 @@ MyApplet.prototype = {
     }
     switch(this._dataService) {
       case DATA_SERVICE.OPEN_WEATHER_MAP: 
-        if (this.noApiKey()) {
-          this.displayLabelError(_("No Api Key provided"));
-          return false;
-        }
         this.getOpenWeatherCurrentWeather();
         this.getOpenWeatherForecast();
         break;
@@ -885,13 +873,6 @@ MyApplet.prototype = {
   //
   //----------------------------------------------------------------------
 
-  noApiKey: function() {
-    if (this._apiKey == undefined || this._apiKey == "") {
-      return true;
-    }
-    return false;
-  },
-
   capitalizeFirstLetter: function (description) {
     if ((description == undefined || description == null)) {
       return "";
@@ -1150,21 +1131,8 @@ MyApplet.prototype = {
   },
 
   parseOpenWeatherForecast: function(json) {
-    // We have to Compile Day data manually because
-    // we get 8 json blobs per day 
-    let prevItemDate = 35;  // initialise to safe value so it never equals for the first time
-    let counter = 0;       // Start counter, incremented for new days
-
     let forecast;
-    weather.location.tzOffset = Math.round(json.city.coord.lon/15) * 3600;
-    for (let i = 0; i < json.list.length; i++) {
-      let currentDate = new Date((json.list[i].dt + weather.location.tzOffset) * 1000); // Check its correctness in different tz-s
-      // If a item belongs to a new day, push forecast to the array and reset it.
-      if (currentDate.getUTCDate() != prevItemDate) {
-        counter++;
-        if (forecast != undefined) {
-          forecasts.push(forecast);
-        } 
+    for (let i = 0; i < this._forecastDays; i++) {
         forecast = {          // Blob Init
           dateTime: null,             //Required
           main: {
@@ -1188,42 +1156,24 @@ MyApplet.prototype = {
             deg: null,
           }
         };
-        // Set safe values for min/max to work properly
-        forecast.main.temp_min = 900;
-        forecast.main.temp_max = -5; 
-        // Return and display when we have got the required number of days
-        if (counter > this._forecastDays) {
-          return;
-        }    
+        let day = json.list[i];
+        forecast.dateTime = new Date(day.dt * 1000);
+        forecast.main.temp_min = day.temp.min;
+        forecast.main.temp_max = day.temp.max;
+        forecast.main.pressure = day.pressure;
+        forecast.main.humidity = day.humidity;
+        forecast.clouds = day.clouds;
+        if (day.weather[0].id) {
+            forecast.condition.main = day.weather[0].main;
+            forecast.condition.description = day.weather[0].description;
+            forecast.condition.icon = this.weatherIconSafely(day.weather[0].icon, this.resolveOpenWeatherIcon);
+        }          
+      forecasts.push(forecast);
       }
-      forecast.dateTime = currentDate; // Time does not matter as long as its the same day
-      // Get min max temperatures for the day
-      if (json.list[i].main) {
-        forecast.main.temp_min = Math.min(forecast.main.temp_min, json.list[i].main.temp_min);
-        forecast.main.temp_max = Math.max(forecast.main.temp_max, json.list[i].main.temp_max);
-      }
-      // Get the worst weather conditions for the day
-      if (json.list[i].weather[0]) {
-        if (json.list[i].weather[0].id == this.getMoreSevereWeather(json.list[i].weather[0].id, forecast.condition.id)) {     
-          forecast.condition.id = json.list[i].weather[0].id;
-          forecast.condition.main = json.list[i].weather[0].main;
-          forecast.condition.description = json.list[i].weather[0].description;
-          // Replace night icons with day icons for the forecasts
-          if ((json.list[i].weather[0].icon).endsWith("n")) {
-            json.list[i].weather[0].icon = json.list[i].weather[0].icon.replace('n', 'd');
-          }
-          forecast.condition.icon = this.weatherIconSafely(json.list[i].weather[0].icon, this.resolveOpenWeatherIcon);
-        }
-    }
-      prevItemDate = currentDate.getUTCDate();
-    }
-    // Ran out of items, display
-    forecasts.push(forecast);
-    forecast = {};
   },
 
   getOpenWeatherQueryString: function(url) {
-    let APIKey = this._apiKey;
+    let APIKey = "1c73f8259a86c6fd43c7163b543c8640";
     let loc = this._location;
     let query = "";
     if (this.isCoordinate(loc)) {
