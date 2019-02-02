@@ -5,8 +5,8 @@
 .weather-current-location-link:selected,
 .weather-current-location-link:hover {
     background-gradient-direction: vertical;
-    background-gradient-start: rgba(255, 255, 255, 0.4);
-    background-gradient-end: rgba(255, 255, 255, 0.2);
+    background-gradient-start: rgba(255, 255, 255, 0.1);
+    background-gradient-end: rgba(255, 255, 255, 0.1);
 }
 
 .weather-current-summarybox {
