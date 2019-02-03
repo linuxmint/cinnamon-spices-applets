@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.3.3~20190202
+  * Improves responsiveness.
+
 ### 3.3.2~20190106
   * Improves time zone detection.
 
