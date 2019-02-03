@@ -189,7 +189,7 @@ function DarkSky(app) {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i])) {
+            if (!/[\(\)]/.test(processed[i]) && (processed[i] != "and")) {
                 result = result + processed[i] + " ";
             }
         }

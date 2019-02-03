@@ -203,7 +203,7 @@ function _(str) {
 }
 
 
-const AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
 const darkSky = AppletDir.darkSky;
 const openWeatherMap = AppletDir.openWeatherMap;
 // Location lookup service
