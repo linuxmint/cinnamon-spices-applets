@@ -202,10 +202,12 @@ function _(str) {
   return Gettext.dgettext(UUID, str)
 }
 
-const darkSky = require("darkSky");
-const openWeatherMap = require("openWeatherMap");
+
+const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
+const darkSky = AppletDir.darkSky;
+const openWeatherMap = AppletDir.openWeatherMap;
 // Location lookup service
-const ipApi = require("ipApi");
+const ipApi = AppletDir.ipApi;
 
 //----------------------------------------------------------------
 //
@@ -345,7 +347,7 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
         keyBlock: _("Key Temp. Blocked"),
         cantGetLoc: _("Could not get location"),
         unknown: _("Unknown Error"),
-        noResponse: _("No response from Data Service")
+        noResponse: _("No/Bad response from Data Service")
       }
     }
 
@@ -354,10 +356,37 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
 
 // Class Declaration
 MyApplet.prototype = {
-  __proto__: Applet.TextIconApplet.prototype
+  __proto__: Applet.TextIconApplet.prototype,
 
-, refreshAndRebuild: function () {
-    this.refreshWeather(false).then(this.rebuild());
+  refreshAndRebuild: function() {
+    this.refreshWeather().then(this.rebuild());
+  },
+
+  LoadJsonAsync: async function(query) {
+    let json = await new Promise((resolve, reject) => {
+      let message = Soup.Message.new('GET', query);
+      this._httpSession.queue_message(message, (session, message) => {
+          if (message) {
+            this.log.Debug("API full response: " + message.response_body.data.toString());
+            try {
+              let payload = JSON.parse(message.response_body.data);
+              resolve(payload);
+            }
+            catch(e) {    // Payload is not JSON
+              this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
+              if (this._dataService == DATA_SERVICE.DARK_SKY) {
+                this.log.Error("DarkSky: This usually indicates that API key is invalid.");
+              }
+              reject(null);
+            }            
+          }
+          else {  // No response
+              this.log.Error("Error: No Response from API");
+              reject(null);
+          }   
+        });
+    });
+    return json;
   },
 
     // Override Methods: TextIconApplet
@@ -411,7 +440,7 @@ MyApplet.prototype = {
         for (let i = 0; i < this._forecastDays; i++) {
           this._forecast[i].Icon.icon_type = this._icon_type
         }
-        this.refreshWeather(false)
+        this.refreshWeather()
       }))
 
       // configuration via context menu is automatically provided in Cinnamon 2.0+
@@ -475,7 +504,7 @@ MyApplet.prototype = {
     // Main independent Loop
     try {
       if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval*60000) < new Date()) {
-        this.refreshWeather(false);
+        this.refreshWeather();
       }
     }
     catch (e) {
@@ -552,17 +581,18 @@ MyApplet.prototype = {
     this._currentWeatherSunrise.text = msg;
   },
 
-  refreshWeather: async function(recurse) {  
+  refreshWeather: async function() {  
     this.wipeCurrentData();
     this.wipeForecastData();
     
     // Making sure location is in place
     try {
+      
       if (!this._manualLocation) {    // Autmatic location
         // Have to check every time to make sure location is the same
         let haveLocation = await this.locProvider.GetLocation();
         if (!haveLocation) {
-          this.log.Error("Couldn't obtain location, retry in 30 seconds...");
+          this.log.Error("Couldn't obtain location, retry in 15 seconds...");
           this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
           this.lastUpdated = null;
           return;
@@ -571,13 +601,13 @@ MyApplet.prototype = {
       else {        // Manual Location
         // Adding resilience against bad user input
         let loc = this._location.replace(" ", "");
-        if (this._location == undefined || this._location == "") {
+        if (loc == undefined || loc == "") {
           this.showError(this.errMsg.label.noLoc, "");
           this.log.Error("No location given when setting is on Manual Location");
           return;
         }
       }
-
+          
       let refreshResult;
       switch(this._dataService) {
         case DATA_SERVICE.DARK_SKY:
@@ -588,6 +618,9 @@ MyApplet.prototype = {
           refreshResult = await this.provider.GetWeather();
           break;
         case DATA_SERVICE.OPEN_WEATHER_MAP:
+          //
+          //  No TZ information
+          //
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           refreshResult = await this.provider.GetWeather();
           break;
@@ -601,9 +634,9 @@ MyApplet.prototype = {
         return;
       }
 
-      this.displayWeather();
-      this.displayForecast();
-      this.log.Print("Weather Information refreshed");
+      if (await this.displayWeather() && await this.displayForecast()) {
+        this.log.Print("Weather Information refreshed");
+      }    
     }
     catch(e) { 
       this.log.Error("Error while refreshing Weather info: " + e);
@@ -687,7 +720,7 @@ MyApplet.prototype = {
 
       // Displaying humidity
       if (this.weather.main.humidity !=  null) {
-        this._currentWeatherHumidity.text = this.weather.main.humidity + "%";
+        this._currentWeatherHumidity.text = Math.round(this.weather.main.humidity) + "%";
       }
       
       // Wind
@@ -719,7 +752,17 @@ MyApplet.prototype = {
       }
 
       // Location
-      this._currentWeatherLocation.text = location;
+      this._currentWeatherLocation.label = location;
+      switch (this._dataService) {
+        case DATA_SERVICE.OPEN_WEATHER_MAP:
+          this._currentWeatherLocation.url = "https://openweathermap.org/city/" + this.weather.location.id;
+          break;
+        case DATA_SERVICE.DARK_SKY:
+          this._currentWeatherLocation.url = "https://darksky.net/forecast/" + this.weather.coord.lat + "," + this.weather.coord.lon;
+          break;
+        default:
+          this._currentWeatherLocation.url = null;
+      }
 
       // Sunset/Sunrise
       // gettext can't see these inline
@@ -774,7 +817,7 @@ MyApplet.prototype = {
         }
         let dayName = forecastData.dateTime;
         if (this.weather.timeZone != null) {
-           dayname = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
+           dayname = this.dayName.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
         }
         else {
           dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
@@ -864,12 +907,23 @@ MyApplet.prototype = {
       style_class: STYLE_SUMMARY
     })
 
-    this._currentWeatherLocation = new St.Label({
+    this._currentWeatherLocation = new St.Button({
       reactive: true,
-      text: ''
-    })
+      label: _('Refresh'),
+    });
 
     this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK
+    this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function() {
+      if (this._currentWeatherLocation.url == null) {
+        // Freezes cinnamon if this function called from here
+        this.refreshWeather();
+      } else {
+        Gio.app_info_launch_default_for_uri(
+          this._currentWeatherLocation.url,
+          global.create_app_launch_context()
+        )
+      }
+    }));
 
     let bb = new St.BoxLayout({
       vertical: true,

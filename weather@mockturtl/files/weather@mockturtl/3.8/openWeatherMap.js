@@ -1,5 +1,3 @@
-var exports = module.exports = {}
-const Soup = imports.gi.Soup;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -9,7 +7,7 @@ const Soup = imports.gi.Soup;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-exports.OpenWeatherMap = function(app) {
+function OpenWeatherMap(app) {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
@@ -44,19 +42,16 @@ exports.OpenWeatherMap = function(app) {
         if (query != null) {
             app.log.Debug("Query: " + query);
             try {
-                let message = Soup.Message.new('GET', query);
-                app._httpSession.send_message(message);
-                json =  JSON.parse(message.response_body.data);
+                json = await app.LoadJsonAsync(query);
+                if (json == null) {
+                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse)
+                    return false;                 
+                }
             }
             catch(e) {
                 app.log.Error("Unable to call API:", e);
                 return false;
             }
-
-            if (!json) {
-                app.log.Error("No Response from API");
-                return false;
-            } 
 
             if (json.cod == 200) {   // Request Success
                 return ParseFunction(json, this);
@@ -80,6 +75,7 @@ exports.OpenWeatherMap = function(app) {
             }
             app.weather.location.city = json.name;
             app.weather.location.country = json.sys.country;
+            app.weather.location.id = json.id;
             app.weather.dateTime = new Date((json.dt) * 1000);
             app.weather.sunrise = new Date((json.sys.sunrise) * 1000);
             app.weather.sunset = new Date((json.sys.sunset) * 1000);

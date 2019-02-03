@@ -1,6 +1,3 @@
-var exports = module.exports = {}
-const Soup = imports.gi.Soup;
-
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -9,7 +6,7 @@ const Soup = imports.gi.Soup;
 ///////////                                       ////////////
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-exports.DarkSky = function(app) {
+function DarkSky(app) {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
@@ -40,29 +37,18 @@ exports.DarkSky = function(app) {
         if (query != "" && query != null) {
             app.log.Debug("DarkSky API query: " + query);
             try {
-                message = Soup.Message.new('GET', query);
-                app._httpSession.send_message(message);
-            }
-            catch(e) {
-                    app.log.Error("Unable to Call API: " + e);
+                json = await app.LoadJsonAsync(query);
+                if (json == null) {
+                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
                     return false;
-                }
-            try {
-                // We get parsing error on persmission denied event
-                json =  JSON.parse(message.response_body.data);
+                } 
             }
             catch(e) {
-                app.log.Error("DarkSky: Unable to parse Response payload: " + e);
-                app.showError(app.errMsg.label.service, app.errMsg.desc.keyBad);
-                return false;
-            }
-            
-            if (!json) {
-                app.log.Error("No Response from API");
-                app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
-                return false;
-            } 
-            
+                    app.log.Error("DarkSky: API call failed: " + e);
+                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                    return false;
+            }            
+         
             if (!json.code) {                   // No code, Request Success
                 return this.ParseWeather(json);
             }
@@ -203,7 +189,7 @@ exports.DarkSky = function(app) {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i])) {
+            if (!/[\(\)]/.test(processed[i]) && (processed[i] != "and")) {
                 result = result + processed[i] + " ";
             }
         }
