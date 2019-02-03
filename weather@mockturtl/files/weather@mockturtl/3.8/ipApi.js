@@ -1,5 +1,3 @@
-var exports = module.exports = {}
-const Soup = imports.gi.Soup;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -9,23 +7,21 @@ const Soup = imports.gi.Soup;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-exports.IpApi = function(app) {
+function IpApi(app) {
     this.query = "https://ipapi.co/json";
 
     this.GetLocation = async function() {
         let json;
         try {
-            let message = Soup.Message.new('GET', this.query);
-                app._httpSession.send_message(message);
-                json = JSON.parse(message.response_body.data);
+            json = await app.LoadJsonAsync(this.query);
+            if (json == null) {                         // Bad response
+                app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                return false;
+            }
         }
         catch(e) {
             app.log.Error("IpApi service error: " + e);
             app.showError(app.errMsg.label.generic, app.errMsg.desc.cantGetLoc);
-            return false;
-        }
-
-        if (!json) {
             return false;
         }
 
@@ -35,6 +31,7 @@ exports.IpApi = function(app) {
         }
 
         return this.ParseInformation(json);
+        
     };
 
     this.ParseInformation = function(json) {

@@ -1,7 +1,4 @@
 /* taken from gnome-shell.css, .dash-search-button */
-.weather-current-location-link {
-    text-align: center;
-}
 .weather-current-location-link:selected,
 .weather-current-location-link:hover {
     background-gradient-direction: vertical;
