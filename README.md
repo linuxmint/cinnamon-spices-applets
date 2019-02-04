@@ -1,26 +1,26 @@
 # cinnamon-spices-applets
 
-This repository hosts all the applets available for the Cinnamon desktop environment.
+Deze repository bevat alle applets die beschikbaar zijn voor de Cinnamon-bureaubladomgeving.
 
-Users can install spices from https://cinnamon-spices.linuxmint.com, or directly from within Cinnamon -> System Settings.
+Gebruikers kunnen Spices installeren vanuit https://cinnamon-spices.linuxmint.com, of rechtstreeks vanuit Cinnamon -> Systeeminstellingen.
 
-# Definitions
+# Definities
 
 ## UUID
 
-Each spice is given a name which uniquely identifies them.
+Elke spice krijgt een unieke naam waarmee deze wordt geïdentificeerd.
 
-That name is their UUID and it is unique.
+Die naam is hun UUID en het is uniek.
 
-## Author
+## Auteur
 
-Each spice has an author.
+Elke spice heeft een auteur.
 
-The github username of the author is specified in the spice's info.json file.
+De github-gebruikersnaam van de auteur is opgegeven in het info.json-bestand van de spice.
 
-# File structure
+# Bestandsstructuur
 
-A spice can contain many files, but it should have the following file structure:
+Een spice kan veel bestanden bevatten, maar het zou de volgende bestandsstructuur moeten hebben:
 
 - UUID/
 - UUID/info.json
@@ -32,112 +32,112 @@ A spice can contain many files, but it should have the following file structure:
 - UUID/files/UUID/metadata.json
 - UUID/files/UUID/applet.js
 
-There are two important directories:
+Er zijn twee belangrijke mappen:
 
-- UUID/ is the root level directory, it includes files which are used by the website and on github.
-- UUID/files/ represents the content of the ZIP archive which users can download from https://cinnamon-spices.linuxmint.com or which is sent to Cinnamon when installing the spice from System Settings. This is the content which is interpreted by Cinnamon itself.
+- UUID/ is de hoofdmap map, het bevat bestanden die worden gebruikt door de website en op github.
+- UUID/bestanden/ vertegenwoordigt de inhoud van het ZIP-archief waar gebruikers van kunnen downloaden https://cinnamon-spices.linuxmint.com of die naar Cinnamon wordt gestuurd wanneer het spice wordt geïnstalleerd vanuit Systeeminstellingen. Dit is de inhoud die wordt geïnterpreteerd door Cinnamon zelf.
 
-As you can see, the content of the spice isn't placed inside UUID/files/ directly, but inside UUID/files/UUID/ instead. This guarantees files aren't extracted directly onto the file system, but placed in the proper UUID directory. The presence of this UUID directory, inside of files/ isn't actually needed by Cinnamon (as Cinnamon creates it if it's missing), but it is needed to guarantee a proper manual installation (i.e. when users download the ZIP from the Cinnamon Spices website).
+Zoals je ziet, wordt de inhoud van de specerij niet in UUID /bestanden/ rechtstreeks geplaatst, maar in plaats daarvan in UUID/ bestanden /UUID/. Dit garandeert dat bestanden niet direct in het bestandssysteem worden uitgepakt, maar in de juiste UUID-map worden geplaatst. De aanwezigheid van deze UUID-map, binnenkant van bestanden / is eigenlijk niet nodig door Cinnamon (omdat Cinnamon deze maakt als deze ontbreekt), maar het is nodig om een goede handmatige installatie te garanderen (dat wil zeggen wanneer gebruikers de ZIP downloaden van de Cinnamon Spices-website ).
 
-Important note:
+Belangrijke opmerking:
 
-- The UUID/files/ directory has to be "empty", which means that it should contain ONLY the UUID directory. Else the spice won't be installable through System Settings.
+- De UUID/bestanden/ map moet "leeg" zijn, wat betekent dat deze ALLEEN de UUID-map zou moeten bevatten. Anders kuunen spices niet worden geïnstalleerd via Systeeminstellingen.
 
-At the root level:
+Op het hoogste niveau (root):
 
-- info.json contains information about the spice. For instance, this is the file which contains the github username of the spice's author.
-- icon.png is the icon associated with the spice.
-- screenshot.png is a screenshot of the spice in action.
-- README.md is optional and can be used to show instructions and information about the spice. It appears both in Github and on the website.
+-info.json bevat informatie over de spice. Dit is b.v het bestand dat de github-gebruikersnaam van de spices auteur bevat.
+- icon.png is het pictogram dat is gekoppeld aan de spice.
+- screenshot.png is een screenshot van de spice in actie.
+- README.md is optioneel en kan worden gebruikt om instructies en informatie over de spice weer te geven. Het verschijnt zowel in Github als op de website.
 
-## Validation
+## Validatie
 
-To check if a spice with UUID satifies those requirements run the `validate-spice` script in this repo:
+ Controleren of een spice met UUID voldoet aan de gestelde eisen `validate-spice` script in deze repo:
 ```
 ./validate-spice UUID
 ```
 
-# Rights and responsibility of the author
+# Rechten en verantwoordelijkheid van de auteur
 
-The author is in charge of the development of the spice.
+De auteur is verantwoordelijk voor de ontwikkeling van de spice.
 
-Authors can modify their spice under the following conditions:
+Auteurs kunnen hun spices aanpassen onder de volgende voorwaarden:
 
-- They need to respect the file structure and workflow defined here
-- They cannot introduce malicious code or code which would have a negative impact on the environment
+- Ze moeten de hier gedefinieerde bestandsstructuur en workflow respecteren
+- Ze kunnen geen schadelijke code of code introduceren die een negatief effect op de gebruikers omgeving zou hebben
 
-Authors are able to accept or refuse changes from other people which modify the features or the look of their spice.
+Auteurs kunnen wijzigingen van andere mensen accepteren of weigeren die de functies of het uiterlijk van hun spice wijzigen.
 
-Authors may choose to pass on development of their applet to someone else. In that case, the "author" field in UUID/info.json will be changed to the new developer and the "original_author" field will be added to give credit to the original developer.
+Auteurs kunnen ervoor kiezen de ontwikkeling van hun applet door te geven aan iemand anders. In dat geval wordt het veld "author" in UUID /info.json gewijzigd in de nieuwe ontwikkelaar en wordt het veld "original_author" toegevoegd om de oorspronkelijke ontwikkelaar de eer te geven.
 
-If an author abandons their applet, the Linux Mint team will take over maintenance of the applet or pass it on to someone else. Several factors are used to determine if an applet is abandoned, including prolonged activity, failure to respond to requests, and serious breakages that have occurred due to changes in API, etc. If you plan to abandon an applet, please notify us, so we don't have to guess as to whether it is abandoned or not.
+Als een auteur zijn applet verlaat, neemt het Linux Mint-team het onderhoud van de applet over of geeft deze door aan iemand anders. Verschillende factoren worden gebruikt om te bepalen of een applet wordt verlaten, zoals langdurige activiteit, het niet reageren op verzoeken en ernstige problemen die zijn opgetreden als gevolg van wijzigingen in de API, enzovoort. Als u van plan bent een applet niet meer te onderhouden, laat dit ons weten.
 
-# Pull requests from authors and workflow
+# Pull-verzoeken van auteurs en workflow
 
-To modify a spice, developers create a Pull Request.
+Om een spice te wijzigen, dienen ontwikkelaars een Pull-aanvraag in.
 
-Members of the cinnamon-spices-developers team review the pull request.
+Leden van het team van spices-ontwikkelaars bekijken het pull-verzoek.
 
-If the author of the pull request is the spice author (his github username matches the author field in UUID/info.json), the reviewer only has to perform the following checks:
+Als de auteur van het pull-verzoek de auteur van de spice is (zijn github-gebruikersnaam komt overeen met het auteurveld in UUID /info.json), hoeft de beoordelaar alleen de volgende controles uit te voeren:
 
-- The changes only impact spices which belong to that author
-- The changes respect the spices file structure
-- The changes do not introduce malicious code or code which would negatively impact the desktop environment
+- De veranderingen zijn alleen van invloed op spices die bij die auteur horen
+- De wijzigingen respecteren de bestandsstructuur van de spices
+- De wijzigingen introduceren geen schadelijke code of code die de desktopomgeving negatief zou beïnvloeden
 
-If everything is fine, the PR is merged, the website is updated and users can see a spice update in System Settings.
+Als alles in orde is, wordt de PR samengevoegd, wordt de website bijgewerkt en kunnen gebruikers een spices-update zien in Systeeminstellingen.
 
-# Pull requests from other people
+# Pull verzoeken van andere
 
-In addition to the checks specified above, if the pull request comes from somebody other than the author, it will be held until the author reviews it or gives a thumbs-up, with the following exceptions:
+Naast de hierboven gespecificeerde controles, wordt het pull-verzoek van iemand anders dan de auteur afkomstig vastgehouden, totdat de auteur het bekijkt of een thumbs-up geeft, met de volgende uitzonderingen:
 
-- If it is a bug fix, the PR may be merged, though if the bug is minor, or the fix could potentially impact the way the applet works, we may wait for author approval before merging.
-- If the pull request adds translations it will likewise be merged. These are not going to effect the functionality of the code, and will make the applet available to many users who couldn't use it before due to a language barrier. We view this a essentially a bugfix, but it is included here for clarification.
-- If the author fails to respond in a reasonable time, we will assume the applet is abandoned (as mentioned above) and the pull request will be merged assuming it meets all other requirements.
+- Als het een bugfix is, kan de PR worden samengevoegd, maar als de bug klein is of de fix mogelijk invloed heeft op de manier waarop de applet werkt, wachten we mogelijk op goedkeuring van de auteur voordat deze wordt samengevoegd.
+-Als het pull-verzoek vertalingen toevoegt, wordt het ook samengevoegd. Deze gaan de functionaliteit van de code niet beïnvloeden en zullen de applet beschikbaar maken voor veel gebruikers die het eerder niet konden gebruiken vanwege een taalbarrière. We beschouwen dit in wezen als een bugfix, maar het is hier opgenomen ter verduidelijking.
+- Als de auteur niet binnen een redelijke termijn reageert, nemen we aan dat de toepassing niet meer wordt onderhouden (zoals hierboven vermeld) en dat het pull-verzoek wordt samengevoegd, ervan uitgaande dat het aan alle andere vereisten voldoet.
 
-If the changes represent a change in functionality, or in look and feel, or if their implementation could be questioned and/or discussed, the reviewer should leave the PR open and ask the author to review it.
+Als de wijzigingen een verandering in functionaliteit, uiterlijk vertegenwoordigen, of als de implementatie ervan in twijfel kan worden getrokken en/of besproken moet worden , moet de beoordelaar de PR open laten en de auteur vragen het te herzien.
 
-If the author is happy with the PR, it can then be merged. If he's not, it can either be closed or updated to reflect any changes the author requested, at which point it will either be merged or the author may be asked to review the changes depending on whether it is clear the changes fully meet the author's requirements.
+Als de auteur tevreden is met de PR, kan deze worden samengevoegd. Als dat niet het geval is, kan het worden gesloten of bijgewerkt om de door de auteur gewenste wijzigingen weer te geven. Op dat moment wordt het samengevoegd of kan de auteur worden gevraagd de wijzigingen te beoordelen, afhankelijk van het feit of de wijzigingen volledig voldoen aan de vereisten van de auteur. .
 
-# Deletions
+# Verwijderingen
 
-Authors are entitled to remove their spice.
+Auteurs hebben het recht om hun spices te verwijderen.
 
-The Cinnamon team is also entitled to do so. Common reasons are lack of maintenance, critical bugs, or if the features are already provided, either by Cinnamon itself, or by another spice which is more successful.
+Het Cinnamon-team heeft ook het recht om dit te doen. Veelvoorkomende redenen zijn gebrek aan onderhoud, kritieke fouten of als de functies al bestaand zijn, hetzij door Cinnamon zelf, hetzij door een spice dat succesvoller is.
 
-# Additions
+# Aanvullingen
 
-New spices can be added by Pull Request.
+Nieuwe spices kunnen worden toegevoegd door een Pull Request.
 
-The Cinnamon team can accept or reject the addition and should give justification in the PR comments section.
+Het Cinnamon-team kan de toevoeging accepteren of afwijzen en moet een motivering geven in het gedeelte PR-opmerkingen.
 
-# Reporting Bugs and Creating Pull Requests
+# Meldingen melden en Pull Requests opstellen
 
-See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
+Zie de [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
 
-# Translations
+# Vertalingen
 
-The script `cinnamon-spices-makepot` in this repo was written to help authors to update their translation template (`.pot`) file and to help translators to test their translations.
+het script `cinnamon-spices-makepot` in deze repository is geschreven om auteurs te helpen hun vertaalsjabloon bij te werken (`.pot`) bestand om vertalers te helpen hun vertalingen te testen.
 
-Updating a translation template `.pot`:
+Een vertaalsjabloon bijwerken `.pot`:
 ```
 ./cinnamon-spices-makepot UUID
 ```
 
-Test your translations `.po` locally before uploading to Spices:"
+Test vertaling `.po` lokaal voordat u deze upload naar Spices:"
 ```
 ./cinnamon-spices-makepot UUID --install
 ```
 
-More info:
+Meer info:
 ```
 ./cinnamon-spices-makepot --help
 ```
 
-# Auto-reloading applets
+# Applets automatisch opnieuw laden
 
-A utility script using Gulp is provided that can automatically reload applets on code change. To use, install the [latest NodeJS LTS release](https://github.com/nodesource/distributions).
-- Run `npm install -g gulp@^4.0.0`
-- In the root of this repo's directory run `npm install`.
-- To use the script, run ```gulp watch --uuid="<applet uuid>"```
+Er is een gebruiksscript met Gulp meegeleverd dat automatisch applets bij het wijzigen van de code kan herladen. Om te gebruiken, installeert u de [latest NodeJS LTS release](https://github.com/nodesource/distributions).
+- Voer uit `npm install -g gulp@^4.0.0`
+- In de hoofdmap van de directory van deze repo voer uit `npm install`.
+- Om het script te gebruiken, voer uit ```gulp watch --uuid="<applet uuid>"```
 
-For more info run ```gulp help```.
+Voor meer informatie voer uit ```gulp help```.
