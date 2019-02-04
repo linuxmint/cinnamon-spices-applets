@@ -1014,8 +1014,7 @@ class CinnamenuApplet extends TextIconApplet {
       buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
     }
 
-    let tree = new CMenu.Tree({ menu_basename: "cinnamon-applications.menu" });
-    tree.load_sync();
+    let tree = this.appSystem.get_tree();
     let root = tree.get_root_directory();
     let dirs = [];
     let iter = root.iter();
