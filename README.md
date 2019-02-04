@@ -37,7 +37,7 @@ Er zijn twee belangrijke mappen:
 - UUID/ is de hoofdmap map, het bevat bestanden die worden gebruikt door de website en op github.
 - UUID/bestanden/ vertegenwoordigt de inhoud van het ZIP-archief waar gebruikers van kunnen downloaden https://cinnamon-spices.linuxmint.com of die naar Cinnamon wordt gestuurd wanneer het spice wordt geïnstalleerd vanuit Systeeminstellingen. Dit is de inhoud die wordt geïnterpreteerd door Cinnamon zelf.
 
-Zoals je ziet, wordt de inhoud van de specerij niet in UUID /bestanden/ rechtstreeks geplaatst, maar in plaats daarvan in UUID/ bestanden /UUID/. Dit garandeert dat bestanden niet direct in het bestandssysteem worden uitgepakt, maar in de juiste UUID-map worden geplaatst. De aanwezigheid van deze UUID-map, binnenkant van bestanden / is eigenlijk niet nodig door Cinnamon (omdat Cinnamon deze maakt als deze ontbreekt), maar het is nodig om een goede handmatige installatie te garanderen (dat wil zeggen wanneer gebruikers de ZIP downloaden van de Cinnamon Spices-website ).
+Zoals je ziet, wordt de inhoud van de spice niet in UUID /bestanden/ rechtstreeks geplaatst, maar in plaats daarvan in UUID/ bestanden /UUID/. Dit garandeert dat bestanden niet direct in het bestandssysteem worden uitgepakt, maar in de juiste UUID-map worden geplaatst. De aanwezigheid van deze UUID-map, binnenkant van bestanden / is eigenlijk niet nodig door Cinnamon (omdat Cinnamon deze maakt als deze ontbreekt), maar het is nodig om een goede handmatige installatie te garanderen (dat wil zeggen wanneer gebruikers de ZIP downloaden van de Cinnamon Spices-website ).
 
 Belangrijke opmerking:
 
