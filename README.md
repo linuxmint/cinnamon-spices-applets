@@ -45,7 +45,7 @@ Belangrijke opmerking:
 
 Op het hoogste niveau (root):
 
--info.json bevat informatie over de spice. Dit is b.v het bestand dat de github-gebruikersnaam van de spices auteur bevat.
+- info.json bevat informatie over de spice. Dit is b.v het bestand dat de github-gebruikersnaam van de spices auteur bevat.
 - icon.png is het pictogram dat is gekoppeld aan de spice.
 - screenshot.png is een screenshot van de spice in actie.
 - README.md is optioneel en kan worden gebruikt om instructies en informatie over de spice weer te geven. Het verschijnt zowel in Github als op de website.
