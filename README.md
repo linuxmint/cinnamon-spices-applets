@@ -91,7 +91,7 @@ Als alles in orde is, wordt de PR samengevoegd, wordt de website bijgewerkt en k
 Naast de hierboven gespecificeerde controles, wordt het pull-verzoek van iemand anders dan de auteur afkomstig vastgehouden, totdat de auteur het bekijkt of een thumbs-up geeft, met de volgende uitzonderingen:
 
 - Als het een bugfix is, kan de PR worden samengevoegd, maar als de bug klein is of de fix mogelijk invloed heeft op de manier waarop de applet werkt, wachten we mogelijk op goedkeuring van de auteur voordat deze wordt samengevoegd.
--Als het pull-verzoek vertalingen toevoegt, wordt het ook samengevoegd. Deze gaan de functionaliteit van de code niet beïnvloeden en zullen de applet beschikbaar maken voor veel gebruikers die het eerder niet konden gebruiken vanwege een taalbarrière. We beschouwen dit in wezen als een bugfix, maar het is hier opgenomen ter verduidelijking.
+- Als het pull-verzoek vertalingen toevoegt, wordt het ook samengevoegd. Deze gaan de functionaliteit van de code niet beïnvloeden en zullen de applet beschikbaar maken voor veel gebruikers die het eerder niet konden gebruiken vanwege een taalbarrière. We beschouwen dit in wezen als een bugfix, maar het is hier opgenomen ter verduidelijking.
 - Als de auteur niet binnen een redelijke termijn reageert, nemen we aan dat de toepassing niet meer wordt onderhouden (zoals hierboven vermeld) en dat het pull-verzoek wordt samengevoegd, ervan uitgaande dat het aan alle andere vereisten voldoet.
 
 Als de wijzigingen een verandering in functionaliteit, uiterlijk vertegenwoordigen, of als de implementatie ervan in twijfel kan worden getrokken en/of besproken moet worden , moet de beoordelaar de PR open laten en de auteur vragen het te herzien.
