@@ -2,16 +2,16 @@
 # Copyright (C) 2011 to 2019, Mauricio Barraza, jorgenqv and Åke Engelbrektson
 # This file is distributed under the same license as the gnome-shell-extension-weather package.
 # Mauricio Barraza <mauricio@barraza.se>, 2011.
-# Minor updates by jorgenqv https://github.com/jorgenqv - 2014, 2016, 2017, 2019
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017
+# Updated by jorgenqv https://github.com/jorgenqv - 2014, 2016, 2017, 2019
+# Åke Engelbrektson <eson@svenskasprakfiler.se> - 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 3.0\n"
+"Project-Id-Version: weather@mockturtl 2.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-27 09:23+0200\n"
-"PO-Revision-Date: 2019-01-29 19:32+0100\n"
+"POT-Creation-Date: 2019-01-27 19:50+0000\n"
+"PO-Revision-Date: 2019-02-03 19:21+0100\n"
 "Last-Translator: jorgenqv https://github.com/jorgenqv\n"
-"Language-Team: \n"
+"Language-Team: sv\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,159 +19,240 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #: applet.js:344
-msgid "..."
-msgstr "..."
+msgid "Error"
+msgstr "Fel"
 
 #: applet.js:345
-msgid "Click to open"
-msgstr "Klicka för att öppna"
-
-#: applet.js:396
-msgid "Settings"
-msgstr "Inställningar"
-
-#: applet.js:518
-msgid "No location provided"
-msgstr "Ingen plats angiven"
-
-#: applet.js:524
-msgid "No Api Key provided"
-msgstr "API-nyckel saknas"
-
-#: applet.js:621
-msgid "Cloudiness:"
-msgstr "Molninghet:"
-
-#: applet.js:645
-msgid "Sunrise"
-msgstr "Soluppgång"
-
-#: applet.js:646
-msgid "Sunset"
-msgstr "Solnedgång"
-
-#: applet.js:723
-msgid "Loading current weather ..."
-msgstr "Läser in aktuellt väder..."
-
-#: applet.js:724
-msgid "Loading future weather ..."
-msgstr "Läser in kommande väder..."
-
-#: applet.js:746
-msgid "Loading ..."
-msgstr "Läser in ..."
-
-#: applet.js:752
-msgid "Refresh"
-msgstr "Uppdatera"
-
-#: applet.js:817
-msgid "Temperature:"
-msgstr "Temperatur:"
-
-#: applet.js:819
-msgid "Humidity:"
-msgstr "Luftfuktighet:"
-
-#: applet.js:821
-msgid "Pressure:"
-msgstr "Lufttryck:"
-
-#: applet.js:823
-msgid "Wind:"
-msgstr "Vind:"
-
-#: applet.js:1048
-msgid "Sunday"
-msgstr "Söndag"
-
-#: applet.js:1048
-msgid "Monday"
-msgstr "Måndag"
-
-#: applet.js:1048
-msgid "Tuesday"
-msgstr "Tisdag"
-
-#: applet.js:1048
-msgid "Wednesday"
-msgstr "Onsdag"
-
-#: applet.js:1048
-msgid "Thursday"
-msgstr "Torsdag"
-
-#: applet.js:1048
-msgid "Friday"
-msgstr "Fredag"
-
-#: applet.js:1048
-msgid "Saturday"
-msgstr "Lördag"
-
-#: applet.js:1052
-msgid "N"
-msgstr "N"
-
-#: applet.js:1052
-msgid "NE"
-msgstr "NO"
-
-#: applet.js:1052
-msgid "E"
-msgstr "O"
-
-#: applet.js:1052
-msgid "SE"
-msgstr "SO"
-
-#: applet.js:1052
-msgid "S"
-msgstr "S"
-
-#: applet.js:1052
-msgid "SW"
-msgstr "SV"
-
-#: applet.js:1052
-msgid "W"
-msgstr "V"
-
-#: applet.js:1052
-msgid "NW"
-msgstr "NV"
-
-#: applet.js:1102
-msgid "Service Unavailable"
-msgstr "Tjänsten svarar inte"
-
-#: applet.js:1106
 msgid "Service Error"
-msgstr "Tjänst fel"
+msgstr "Tjänstfel"
 
-#: applet.js:1108
+#: applet.js:346
+msgid "No Api key"
+msgstr "Ingen Api-nyckel"
+
+#: applet.js:347
+msgid "No Location"
+msgstr "Ingen plats"
+
+#: applet.js:350
 msgid "Wrong API Key"
-msgstr "Felaktig API-nyckel"
+msgstr "Fel API-nyckel"
 
-#: applet.js:1111
-msgid "City Not found"
-msgstr "Orten hittades inte"
+#: applet.js:351
+msgid "Wrong Location"
+msgstr "Fel plats"
 
-#: applet.js:1114
+#: applet.js:352
+msgid "Location Not found"
+msgstr "Platsen hittades inte"
+
+#: applet.js:353
+msgid "Parsing weather information failed :("
+msgstr "Inläsning av väderinformation misslyckades :("
+
+#: applet.js:354
 msgid "Key Temp. Blocked"
 msgstr "Nyckel Temp. Blockerad"
 
-#: applet.js:1340
+#: applet.js:355
+msgid "Could not get location"
+msgstr "Kunde inte hämta plats"
+
+#: applet.js:356
+msgid "Unknown Error"
+msgstr "Okänt fel"
+
+#: applet.js:377
+msgid "..."
+msgstr "..."
+
+#: applet.js:378
+msgid "Click to open"
+msgstr "Nyckel Temp. Blockerad"
+
+#: applet.js:432
+msgid "Settings"
+msgstr "Inställningar"
+
+#: applet.js:731 applet.js:737
+msgid "Cloudiness:"
+msgstr "Molnighet:"
+
+#: applet.js:743
+msgid "Feels like:"
+msgstr "Känns som:"
+
+#: applet.js:765
+msgid "Sunrise"
+msgstr "Soluppgång"
+
+#: applet.js:766
+msgid "Sunset"
+msgstr "Solnedgång"
+
+#: applet.js:875
+msgid "Loading current weather ..."
+msgstr "Läser in aktuellt väder..."
+
+#: applet.js:876
+msgid "Loading future weather ..."
+msgstr "Läser in kommande väder..."
+
+#: applet.js:898
+msgid "Loading ..."
+msgstr "Läser in ..."
+
+#: applet.js:957
+msgid "Temperature:"
+msgstr "Temperatur:"
+
+#: applet.js:959
+msgid "Humidity:"
+msgstr "Luftfuktighet:"
+
+#: applet.js:961
+msgid "Pressure:"
+msgstr "Lufttryck:"
+
+#: applet.js:963
+msgid "Wind:"
+msgstr "Vind:"
+
+#: applet.js:1196
+msgid "Sunday"
+msgstr "Söndag"
+
+#: applet.js:1196
+msgid "Monday"
+msgstr "Måndag"
+
+#: applet.js:1196
+msgid "Tuesday"
+msgstr "Tisdag"
+
+#: applet.js:1196
+msgid "Wednesday"
+msgstr "Onsdag"
+
+#: applet.js:1196
+msgid "Thursday"
+msgstr "Torsdag"
+
+#: applet.js:1196
+msgid "Friday"
+msgstr "Fredag"
+
+#: applet.js:1196
+msgid "Saturday"
+msgstr "Lördag"
+
+#: applet.js:1201
+msgid "N"
+msgstr "N"
+
+#: applet.js:1201
+msgid "NE"
+msgstr "NO"
+
+#: applet.js:1201
+msgid "E"
+msgstr "O"
+
+#: applet.js:1201
+msgid "SE"
+msgstr "SO"
+
+#: applet.js:1201
+msgid "S"
+msgstr "S"
+
+#: applet.js:1201
+msgid "SW"
+msgstr "SV"
+
+#: applet.js:1201
+msgid "W"
+msgstr "V"
+
+#: applet.js:1201
+msgid "NW"
+msgstr "NV"
+
+#: applet.js:1517
 msgid "Clouds"
 msgstr "Moln"
 
-#: applet.js:1340
+#: applet.js:1517 and OpenWeatherMap Weather Condition 701 from
+#: https://openweathermap.org/weather-conditions
+msgid "Mist"
+msgstr "Disigt"
+
+#: applet.js:1517 and OpenWeatherMap Weather Condition 211
+msgid "Thunderstorm"
+msgstr "Åska"
+
+#: applet.js:1517
 msgid "Rain"
 msgstr "Regn"
 
-#: applet.js:1340 applet.js:1341 OpenWeatherMap Weather Condition 200 from
-#: https://openweathermap.org/weather-conditions
+#: applet.js:1517 and OpenWeatherMap Weather Condition 601
+msgid "Snow"
+msgstr "Snöfall"
+
+#: applet.js:1517 and OpenWeatherMap Weather Condition 301
+msgid "Drizzle"
+msgstr "Smådugg"
+
+#: applet.js:1517 and OpenWeatherMap Weather Condition 721
+msgid "Haze"
+msgstr "Dis"
+
+#: applet.js:1517 and OpenWeatherMap Weather Condition 611
+msgid "Sleet"
+msgstr "Slask"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 711
+msgid "Smoke"
+msgstr "Rök"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 741
+msgid "Fog"
+msgstr "Dimma"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 751
+msgid "Sand"
+msgstr "Sand"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 761
+msgid "Dust"
+msgstr "Damm"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 771
+msgid "Sqalls"
+msgstr "Stormbyar"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 781
+msgid "Tornado"
+msgstr "Tromb"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 762
+msgid "Volcanic ash"
+msgstr "Vulkanisk aska"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 800 short needed for
+#: panel
+msgid "Clear"
+msgstr "Klart"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 800
+msgid "Clear Sky"
+msgstr "Klar himmel"
+
+#: applet.js:1518 and OpenWeatherMap Weather Condition 800
+msgid "Sky is clear"
+msgstr "Klar himmel"
+
+#: OpenWeatherMap Weather Condition 200
 msgid "Thunderstorm with light rain"
 msgstr "Åska med lättare regn"
 
@@ -186,10 +267,6 @@ msgstr "Åska med kraftigt regn"
 #: OpenWeatherMap Weather Condition 210
 msgid "Light thunderstorm"
 msgstr "Lättare Åska"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 211
-msgid "Thunderstorm"
-msgstr "Åska"
 
 #: OpenWeatherMap Weather Condition 212
 msgid "Heavy thunderstorm"
@@ -214,10 +291,6 @@ msgstr "Åska med kraftigt duggregn"
 #: OpenWeatherMap Weather Condition 300
 msgid "Light intensity drizzle"
 msgstr "Lättare smådugg"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 301
-msgid "Drizzle"
-msgstr "Smådugg"
 
 #: OpenWeatherMap Weather Condition 302
 msgid "Heavy intensity drizzle"
@@ -291,17 +364,9 @@ msgstr "Störtregnskurar"
 msgid "Light snow"
 msgstr "Lätt snöfall"
 
-#: applet.js:1340 and OpenWeatherMap Weather Condition 601
-msgid "Snow"
-msgstr "Snöfall"
-
 #: OpenWeatherMap Weather Condition 602
 msgid "Heavy snow"
 msgstr "Kraftig snöfall"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 611
-msgid "Sleet"
-msgstr "Slask"
 
 #: OpenWeatherMap Weather Condition 612
 msgid "Shower sleet"
@@ -327,49 +392,9 @@ msgstr "Snöbyar"
 msgid "Heavy shower snow"
 msgstr "Kraftiga snöbyar"
 
-#: OpenWeatherMap Weather Condition 701
-msgid "Mist"
-msgstr "Disigt"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 711
-msgid "Smoke"
-msgstr "Rök"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 721
-msgid "Haze"
-msgstr "Dis"
-
 #: OpenWeatherMap Weather Condition 731
 msgid "Sand, dust whirls"
 msgstr "Sand, dammvirvlar"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 741
-msgid "Fog"
-msgstr "Dimma"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 751
-msgid "Sand"
-msgstr "Sand"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 761
-msgid "Dust"
-msgstr "Damm"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 762
-msgid "Volcanic ash"
-msgstr "Vulkanisk aska"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 771
-msgid "Squalls"
-msgstr "Stormbyar"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 781
-msgid "Tornado"
-msgstr "Tromb"
-
-#: applet.js:1340 and OpenWeatherMap Weather Condition 800
-msgid "Clear sky"
-msgstr "Klar himmel"
 
 #: OpenWeatherMap Weather Condition 801
 msgid "Few clouds"
@@ -407,13 +432,29 @@ msgstr "Datatjänst"
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
+#. settings-schema.json->dataService->options
+msgid "OpenWeatherMap (premium)"
+msgstr "OpenWeatherMap (premium)"
+
+#. settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr "DarkSky"
+
 #. settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr "API-nyckel"
 
 #. settings-schema.json->apiKey->tooltip
-msgid "Copy this from your account on OpenWeatherMap and paste it here."
+msgid "Copy this from your account of the used Data service and paste it here."
 msgstr "Kopiera från ditt konto på OpenWeatherMap och klistra in här."
+
+#. settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Manuell plats"
+
+#. settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Aktivera detta om din plats inte stämmer"
 
 #. settings-schema.json->location->description
 msgid "Location"
@@ -429,7 +470,7 @@ msgstr "Inställningar API-nycket och plats"
 
 #. settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
-msgstr "Öppnar web-guide"
+msgstr "Öppnar webbsides-guide"
 
 #. settings-schema.json->personalSettings->description
 msgid "Personal Settings"
@@ -524,8 +565,12 @@ msgid "Forecast length"
 msgstr "Längd på prognos"
 
 #. settings-schema.json->translateCondition->description
-msgid "Translate condition"
+msgid "Translate conditions"
 msgstr "Översätt väderförhållanden"
+
+#. settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Mindre mångordiga väderförhållanden"
 
 #. settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
@@ -550,6 +595,10 @@ msgstr "minuter"
 #. settings-schema.json->refreshInterval->description
 msgid "Update interval"
 msgstr "Uppdateringsintervall"
+
+#. settings-schema.json->credits->description
+msgid "powered by: OpenWeatherMap, DarkSky, ipapi."
+msgstr "drivs av: OpenWeatherMap, DarkSky, ipapi."
 
 #. metadata.json->name
 msgid "Weather"
