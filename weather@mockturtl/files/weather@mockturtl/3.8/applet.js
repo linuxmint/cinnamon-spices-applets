@@ -351,6 +351,9 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
       }
     }
 
+    // DarkSky Filter words for short conditions, won't work on every language
+    this.DarkSkyFilterWords = [_("and"), _("until")];
+
     this._init(orientation, panelHeight, instanceId)
 }
 
