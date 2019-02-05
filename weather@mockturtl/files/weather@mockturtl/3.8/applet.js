@@ -1,5 +1,5 @@
 "use strict";
-const DEBUG = false;
+const DEBUG = true;
 
 //----------------------------------
 // imports
