@@ -1,0 +1,481 @@
+# SpicesUpdate@claudiux Applet PO File.
+# Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the Cinnamon package.
+# FIRST AUTHOR Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2019-01-02 13:30+0100\n"
+"PO-Revision-Date: 2019-02-05 15:48+0100\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: metadata.json:3
+msgid "Spices Update"
+msgstr "Spices Update"
+
+#: metadata.json:7
+msgid ""
+"Warns you when installed Spices (applets, desklets, extensions, themes) "
+"require an update or new Spices are available."
+msgstr ""
+"Varnar när installerade Spices (panelprogram, skrivbordsprogram, tillägg och "
+"teman) behöver uppdateras, eller när nya Spices finns tillgängliga."
+
+#: settings-schema.json:7
+msgid "Applets"
+msgstr "Panelprogram"
+
+#: settings-schema.json:12
+msgid "Desklets"
+msgstr "Skrivbordsprogram"
+
+#: settings-schema.json:17
+msgid "Extensions"
+msgstr "Tillägg"
+
+#: settings-schema.json:22
+msgid "Themes"
+msgstr "Teman"
+
+#: settings-schema.json:27
+msgid "General"
+msgstr "Allmänt"
+
+#: settings-schema.json:32
+msgid "Checking"
+msgstr "Kontroll"
+
+#: settings-schema.json:37
+msgid "Monitoring"
+msgstr "Övervakning"
+
+#: settings-schema.json:72
+msgid "Frequency"
+msgstr "Frekvens"
+
+#: settings-schema.json:77
+msgid "Notifications"
+msgstr "Aviseringar"
+
+#: settings-schema.json:82
+msgid "Display type"
+msgstr "Visningstyp"
+
+#: settings-schema.json:90
+msgid "Let regularly check if your applets are up to date"
+msgstr "Kontrollera regelbundet mina panelprogram är uppdaterade"
+
+#: settings-schema.json:91
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om uppdateringar för panelprogram inte berör dig."
+
+#: settings-schema.json:98
+msgid "Let regularly check if new applets are available"
+msgstr "Kontrollera regelbundet om nya panelprogram finns tillgängliga"
+
+#: settings-schema.json:99
+msgid "If new applets do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om nya panelprogram inte intresserar dig."
+
+#: settings-schema.json:103
+msgid "Refresh"
+msgstr "Uppdatera"
+
+#: settings-schema.json:108
+msgid "Update these applets:"
+msgstr "Uppdatera dessa panelprogram:"
+
+#: settings-schema.json:109
+msgid "If you do not want an applet to be checked, set it to FALSE."
+msgstr ""
+"Om du inte vill att ett panelprogram skall kontrolleras, anger du det som "
+"FALSE."
+
+#: settings-schema.json:113
+msgid "Your Applets"
+msgstr "Dina panelprogram"
+
+#: settings-schema.json:118
+msgid "Check for updates?"
+msgstr "Vill du söka efter uppdateringar?"
+
+#: settings-schema.json:127
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr "Öppna Cinnamons inställningar för att hantera alla panelprogram"
+
+#: settings-schema.json:135
+msgid "Let regularly check if your desklets are up to date"
+msgstr "Kontrollera regelbundet mina skrivbordsprogram är uppdaterade"
+
+#: settings-schema.json:136
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr ""
+"Avaktivera detta, om uppdateringar för skrivbordsprogram inte berör dig."
+
+#: settings-schema.json:143
+msgid "Let regularly check if new desklets are available"
+msgstr "Kontrollera regelbundet om nya skrivbordsprogram finns tillgängliga"
+
+#: settings-schema.json:144
+msgid "If new desklets do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om nya skrivbordsprogram inte intresserar dig."
+
+#: settings-schema.json:153
+msgid "Update these desklets:"
+msgstr "Uppdatera dessa skrivbordsprogram:"
+
+#: settings-schema.json:154
+msgid "If you do not want a desklet to be checked, set it to FALSE."
+msgstr ""
+"Om du inte vill att ett skrivbordsprogram skall kontrolleras, anger du det "
+"som FALSE."
+
+#: settings-schema.json:158
+msgid "Your Desklets"
+msgstr "Dina skrivbordsprogram"
+
+#: settings-schema.json:171
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr "Öppna Cinnamons inställningar för att hantera alla skrivbordsprogram"
+
+#: settings-schema.json:179
+msgid "Let regularly check if your extensions are up to date"
+msgstr "Kontrollera regelbundet mina tillägg är uppdaterade"
+
+#: settings-schema.json:180
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om uppdateringar för tillägg inte berör dig."
+
+#: settings-schema.json:187
+msgid "Let regularly check if new extensions are available"
+msgstr "Kontrollera regelbundet om nya tillägg finns tillgängliga"
+
+#: settings-schema.json:188
+msgid "If new extensions do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om nya tillägg inte intresserar dig."
+
+#: settings-schema.json:197
+msgid "Update these extensions:"
+msgstr "Uppdatera dessa tillägg:"
+
+#: settings-schema.json:198
+msgid "If you do not want an extension to be checked, set it to FALSE."
+msgstr ""
+"Om du inte vill att ett tillägg skall kontrolleras, anger du det som FALSE."
+
+#: settings-schema.json:202
+msgid "Your Extensions"
+msgstr "Dina tillägg"
+
+#: settings-schema.json:215
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Öppna Cinnamons inställningar för att hantera alla tillägg"
+
+#: settings-schema.json:223
+msgid "Let regularly check if your themes are up to date"
+msgstr "Kontrollera regelbundet mina teman är uppdaterade"
+
+#: settings-schema.json:224
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om uppdateringar för teman inte berör dig."
+
+#: settings-schema.json:231
+msgid "Let regularly check if new themes are available"
+msgstr "Kontrollera regelbundet om nya teman finns tillgängliga"
+
+#: settings-schema.json:232
+msgid "If new themes do not concern you, uncheck this box."
+msgstr "Avaktivera detta, om nya teman inte intresserar dig."
+
+#: settings-schema.json:241
+msgid "Update these themes:"
+msgstr "Uppdatera dessa teman:"
+
+#: settings-schema.json:242
+msgid "If you do not want a theme to be checked, set it to FALSE."
+msgstr ""
+"Om du inte vill att ett tema skall kontrolleras, anger du det som FALSE."
+
+#: settings-schema.json:246
+msgid "Your Themes"
+msgstr "Dina teman"
+
+#: settings-schema.json:259
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Öppna Cinnamons inställningar för att hantera alla teman"
+
+#: settings-schema.json:269
+msgid "hours"
+msgstr "timmar"
+
+#: settings-schema.json:270
+msgid "Time interval between two checks"
+msgstr "Tidsintervall mellan två kontroller"
+
+#: settings-schema.json:271
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Notera att den första kontrollen kommer att ske, en minut efter att detta "
+"panelprogram startats."
+
+#: settings-schema.json:277
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr "Avisera genom att ändra ikonfärgen, när Spices behöver uppdateras"
+
+#: settings-schema.json:278
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"Vid aktivering, tillåter du detta panelprogram att ändra sin panelikon, för "
+"att meddela dig när det finns minst en Spices-uppdatering."
+
+#: settings-schema.json:285
+msgid "The icon color when Spices need an update"
+msgstr "Ikonfärg när Spices behöver uppdateras"
+
+#: settings-schema.json:286
+msgid "Click the button to select another color."
+msgstr "Klicka på knappen för att välja en annan färg."
+
+#: settings-schema.json:292
+msgid "Show notification messages about Spices updates"
+msgstr "Visa aviseringsmeddelanden om Spices-uppdateringar"
+
+#: settings-schema.json:293
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Vid aktivering, tillåter du detta panelprogram att visa meddelanden om "
+"Spices-uppdateringar i systemets aviseringsvisare."
+
+#: settings-schema.json:300
+msgid "Display the description of each update or new Spice"
+msgstr "Visa beskrivning av varje uppdatering eller ny Spice"
+
+#: settings-schema.json:301
+msgid ""
+"By checking this box, you'll know why an update is available, and get a "
+"description of any new Spice.\n"
+"This information will be displayed in English."
+msgstr ""
+"Vid aktivering, får du veta varför en uppdatering finns tillgänglig och en "
+"beskrivning av varje ny Spice.\n"
+"Denna information visas på Engelska."
+
+#: settings-schema.json:308
+msgid "Show notification messages even if they are unchanged"
+msgstr "Visa aviseringsmeddelanden även om de är ofärändrade"
+
+#: settings-schema.json:309
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Vid aktivering, kommer alla aviseringsmeddelanden att visas, även om de är "
+"identiska med föregående avisering."
+
+#: settings-schema.json:315
+msgid "Minimal (text only)"
+msgstr "Minimal (endast text)"
+
+#: settings-schema.json:316
+msgid "With button opening the System Settings"
+msgstr "Med knapp som öppnar systeminställningarna"
+
+#: settings-schema.json:319
+msgid "Notification style"
+msgstr "Aviseringsstil"
+
+#: settings-schema.json:320
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With button opening the System Settings:\n"
+"\tNotifications also contain a button which has the same role of the menu "
+"one:\n"
+"\tOpen the Download tab in System Settings for the concerned type of Spices, "
+"with the Spices sorted by date."
+msgstr ""
+"Minimal:\n"
+"\tVisar enkla och korta aviseringar.\n"
+"Med knapp för att öppna systeminställningarna:\n"
+"\tAviseringar innehåller också en knapp med samma funktion som den i menyn:\n"
+"\tÖppnar nerladdningsfliken i systeminställningen för den berörda Spices-"
+"typen, med Spices sorterade efter datum."
+
+#: settings-schema.json:325
+msgid "Send a fake notification to test the style"
+msgstr "Skicka en fake-avisering för att testa stilen"
+
+#: settings-schema.json:332
+msgid "Classic - Icon and Text"
+msgstr "Klassisk - Ikon och text"
+
+#: settings-schema.json:333
+msgid "Compact - Icon Only"
+msgstr "Kompakt - Endast ikon"
+
+#: settings-schema.json:335
+msgid "Type of Display"
+msgstr "Visningstyp"
+
+#: settings-schema.json:336
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Denna funktion erbjuder klassisk visning (standard) med ikon och text och "
+"kompakt visning (endast ikon)."
+
+#: settings-schema.json:342
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Dölj ikonen så länge som inget finns att rapportera"
+
+#: settings-schema.json:343
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Vid aktivering, visas inte ikonen för Spices Update, förrän det finns något "
+"att rapportera."
+
+#: applet.js:91
+msgid "Applet"
+msgstr "Panelprogram"
+
+#: applet.js:92
+msgid "Desklet"
+msgstr "Skrivbordsprogram"
+
+#: applet.js:93
+msgid "Extension"
+msgstr "Tillägg"
+
+#: applet.js:94
+msgid "Theme"
+msgstr "Tema"
+
+#: applet.js:99
+msgid "One desklet needs update:"
+msgstr "Ett skrivbordsprogram behöver uppdateras:"
+
+#: applet.js:100
+msgid "One applet needs update:"
+msgstr "Ett panelprogram behöver uppdateras:"
+
+#: applet.js:101
+msgid "One extension needs update:"
+msgstr "Ett tillägg behöver uppdateras:"
+
+#: applet.js:102
+msgid "One theme needs update:"
+msgstr "Ett tema behöver uppdateras:"
+
+#: applet.js:103
+msgid "Some desklets need update:"
+msgstr "Några skrivbordsprogram behöver uppdateras:"
+
+#: applet.js:104
+msgid "Some applets need update:"
+msgstr "Några panelprogram behöver uppdateras:"
+
+#: applet.js:105
+msgid "Some extensions need update:"
+msgstr "Några tillägg behöver uppdateras:"
+
+#: applet.js:106
+msgid "Some themes need update:"
+msgstr "Några teman behöver uppdateras:"
+
+#: applet.js:107
+msgid "New desklet available:"
+msgstr "Nytt skrivbordsprogram tillgängligt:"
+
+#: applet.js:108
+msgid "New applet available:"
+msgstr "Nytt panelprogram tillgängligt:"
+
+#: applet.js:109
+msgid "New extension available:"
+msgstr "Nytt tillägg tillgängligt:"
+
+#: applet.js:110
+msgid "New theme available:"
+msgstr "Nytt tema tillgängligt:"
+
+#: applet.js:111
+msgid "New desklets available:"
+msgstr "Nya skrivbordsprogram tillgängliga:"
+
+#: applet.js:112
+msgid "New applets available:"
+msgstr "Nya panelprogram tillgängliga:"
+
+#: applet.js:113
+msgid "New extensions available:"
+msgstr "Nya tillägg tillgängliga:"
+
+#: applet.js:114
+msgid "New themes available:"
+msgstr "Nya teman tillgängliga:"
+
+#: applet.js:626
+msgid "With details here, when available."
+msgstr "Detaljerat här, om tillgängligt."
+
+#: applet.js:627
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "Bry dig inte! Detta är en FAKE-avisering, för att testa."
+
+#: applet.js:898
+msgid "is fully functional."
+msgstr "är fullt fungerande."
+
+#: applet.js:899
+msgid "All dependencies are installed"
+msgstr "Alla beroenden är installerade"
+
+#: applet.js:921
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Du verkar sakna vissa program, som krävs för detta panelprograms alla "
+"funktioner."
+
+#: applet.js:922
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Kör följande kommandon i det just öppnade terminalfönstret:"
+
+#: applet.js:923
+msgid "Some dependencies are not installed!"
+msgstr "Vissa beroenden är inte installerade!"
+
+#: applet.js:1218
+msgid "(Description unavailable)"
+msgstr "(Beskrivning ej tillgänglig)"
+
+#: applet.js:1221
+msgid "(Refresh to see the description)"
+msgstr "(Uppdatera för att se beskrivningen)"
+
+#: applet.js:1402
+msgid "Forget new Spices"
+msgstr "Glöm nya Spices"
+
+#: applet.js:1409
+msgid "Configure"
+msgstr "Konfigurera"
