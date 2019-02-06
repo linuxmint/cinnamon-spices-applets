@@ -755,6 +755,9 @@ MyApplet.prototype = {
       }
 
       // Location
+      if (location == "") {
+        location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
+      }
       this._currentWeatherLocation.label = location;
       switch (this._dataService) {
         case DATA_SERVICE.OPEN_WEATHER_MAP:
@@ -821,11 +824,11 @@ MyApplet.prototype = {
         let dayName = forecastData.dateTime;
         if (this.weather.location.timeZone != null) {
            this.log.Debug(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone}));
-           dayName = dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, weekday: "long"});
+           dayName = _(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, weekday: "long"}));
         }
         else {
           dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-          dayName = this.getDayName(dayName.getUTCDay());
+          dayName = _(this.getDayName(dayName.getUTCDay()));
         }       
         
         forecastUi.Day.text = dayName;
