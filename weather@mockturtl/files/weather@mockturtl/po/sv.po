@@ -245,7 +245,7 @@ msgid "Clear"
 msgstr "Klart"
 
 #: applet.js:1518 and OpenWeatherMap Weather Condition 800
-msgid "Clear Sky"
+msgid "Clear sky"
 msgstr "Klar himmel"
 
 #: applet.js:1518 and OpenWeatherMap Weather Condition 800
