@@ -775,9 +775,9 @@ MyApplet.prototype = {
         if (this._showSunrise) {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
-          if (this.weather.timeZone != null) {     //have TZ, en-GB returns time in the correct format
-              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
-              let sunset = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+          if (this.weather.location.timeZone != null) {     //have TZ, en-GB returns time in the correct format
+              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
+              let sunset = this.weather.sunset.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
               sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
               sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
           }
@@ -819,8 +819,9 @@ MyApplet.prototype = {
           }
         }
         let dayName = forecastData.dateTime;
-        if (this.weather.timeZone != null) {
-           dayname = this.dayName.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
+        if (this.weather.location.timeZone != null) {
+           this.log.Debug(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone}));
+           dayName = dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, weekday: "long"});
         }
         else {
           dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
