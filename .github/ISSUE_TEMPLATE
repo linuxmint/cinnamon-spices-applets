@@ -6,8 +6,8 @@
  * Distribution - (Mint 17.2, Arch, Fedora 25, etc...)
  * Graphics hardware *and* driver used
  * Snippet or attachment of ~/.cinnamon/glass.log
- * Snippet or attachment of ~/.xsession-errors
-
+ * Snippet or attachment of ~/.xsession-errors or /var/log/syslog
+ * Screenshots using imgur for example
  ```
 
 <!-- Author list: https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CODEOWNERS -->
@@ -28,3 +28,7 @@
 
 
 **Other information**
+ 
+ 
+**Screenshots**
+![Screenshot](https://i.imgur.com/******.png"Screenshot")
