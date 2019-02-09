@@ -1,7 +1,7 @@
 {
   "head":
   { "type": "header"
-  , "description": "Settings for weather@mockturtl"
+  , "description": "Settings for weather@mockturtl 3.6"
   }
 ,  "keybinding":
   { "type": "keybinding"
@@ -21,12 +21,6 @@
       "OpenWeatherMap": "OpenWeatherMap"
     }
   },
-  "apiKey":
-  { "type": "entry"
-  , "default": ""
-  , "description": "API Key"
-  , "tooltip": "Copy this from your account on OpenWeatherMap and paste it here."
-  },
   "location":
   { "type": "entry"
   , "default": "London,UK"
@@ -37,7 +31,7 @@
   {
     "type": "button",
     "indent": true,
-    "description": "Setup API Key and Location",
+    "description": "Setup Location",
     "callback": "locationLookup",
     "tooltip": "Opens webpage guide"
   },
@@ -103,7 +97,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 5
+  , "max": 7
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"
@@ -136,7 +130,7 @@
 , "refreshInterval":
   { "type": "spinbutton"
   , "default": 15
-  , "min": 1
+  , "min": 5
   , "max": 360
   , "units": "minutes"
   , "step": 5
