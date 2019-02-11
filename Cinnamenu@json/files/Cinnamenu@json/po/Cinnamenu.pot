@@ -438,3 +438,35 @@ msgstr ""
 #. settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
 msgstr ""
+
+#. settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr ""
+
+#. settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr ""
+
+#. settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr ""
+
+#. settings-schema.json->description-placement->options
+msgid "Bottom pane"
+msgstr ""
+
+#. settings-schema.json->description-placement->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->description-placement->tooltip
+msgid "Choose where application descriptions will be placed, or select \"None\" to disable."
+msgstr ""
+
+#. settings-schema.json->startupCategory->description
+msgid "Startup category"
+msgstr ""
+
+#. settings-schema.json->startupCategory->tooltip
+msgid "Category first seen when the menu is opened"
+msgstr ""
