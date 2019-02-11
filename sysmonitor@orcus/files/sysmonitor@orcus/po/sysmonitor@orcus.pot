@@ -192,6 +192,14 @@ msgstr ""
 msgid "IOWait color"
 msgstr ""
 
+#. sysmonitor@orcus->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr ""
+
+#. sysmonitor@orcus->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr ""
+
 #. sysmonitor@orcus->settings-schema.json->mem_color_1->description
 msgid "Cached color"
 msgstr ""
