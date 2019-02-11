@@ -674,10 +674,15 @@ MyApplet.prototype = {
       let location = "";
       if (this.weather.location.city != null && this.weather.location.country != null) {
         location = this.weather.location.city + ", " + this.weather.location.country;
-        if (this.nonempty(this._locationLabelOverride)) {
+      }
+      else {
+          location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
+      }
+
+      // Overriding Location
+      if (this.nonempty(this._locationLabelOverride)) {
           location = this._locationLabelOverride;
         }
-      }
   
       this.set_applet_tooltip(location);
 
@@ -755,9 +760,6 @@ MyApplet.prototype = {
       }
 
       // Location
-      if (location == "") {
-        location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
-      }
       this._currentWeatherLocation.label = location;
       switch (this._dataService) {
         case DATA_SERVICE.OPEN_WEATHER_MAP:
