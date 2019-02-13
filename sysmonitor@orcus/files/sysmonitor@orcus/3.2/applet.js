@@ -319,7 +319,6 @@ MyApplet.prototype = {
     on_cfg_changed_graph_enabled: function(enabled, graph_idx) {
         let enable = (i) => {
             let graph_id = this.graph_ids[i];
-            global.log("Enabling " + graph_id);
             if (this["cfg_" + graph_id + "_enabled"]) {
                 if (this.graphs[i])
                     return;
@@ -400,12 +399,12 @@ MyApplet.prototype = {
         this.repaint();
     },
 
-    on_cfg_changed_graph_width: function(width) {
+    on_cfg_changed_graph_width: function() {
         this.resizeArea();
         this.repaint();
     },
 
-    on_cfg_changed_graph_spacing: function(spacing) {
+    on_cfg_changed_graph_spacing: function() {
         this.resizeArea();
         this.repaint();
     },

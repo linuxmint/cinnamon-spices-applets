@@ -17,8 +17,6 @@ Graph.prototype = {
         this.scale = 1;
         this.width = 1;
         this.height = 1;
-        this.x = 0;
-        this.y = 0;
         this.draw_border = true;
         this.resize_data = false;
     },

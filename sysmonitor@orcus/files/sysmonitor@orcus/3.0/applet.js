@@ -92,30 +92,32 @@ MyApplet.prototype = {
                 ["bg_color", this.on_cfg_changed_bg_border_color],
                 ["border_color", this.on_cfg_changed_bg_border_color],
                 ["graph_width", this.on_cfg_changed_graph_width],
+                ["graph_spacing", this.on_cfg_changed_graph_spacing],
                 ["cpu_enabled", this.on_cfg_changed_graph_enabled, 0],
                 ["cpu_override_graph_width", this.on_cfg_changed_graph_width, 0],
                 ["cpu_graph_width", this.on_cfg_changed_graph_width, 0],
+                ["cpu_tooltip_decimals", this.on_cfg_changed_tooltip_decimals, 0],
                 ["cpu_color_0", this.on_cfg_changed_color, 0],
                 ["cpu_color_1", this.on_cfg_changed_color, 0],
                 ["cpu_color_2", this.on_cfg_changed_color, 0],
                 ["cpu_color_3", this.on_cfg_changed_color, 0],
                 ["mem_enabled", this.on_cfg_changed_graph_enabled, 1],
                 ["mem_override_graph_width", this.on_cfg_changed_graph_width, 1],
-                ["mem_graph_width", this.on_cfg_changed_graph_width, 1],
+                ["mem_graph_width", this.on_cfg_changed_graph_width],
                 ["mem_color_0", this.on_cfg_changed_color, 1],
                 ["mem_color_1", this.on_cfg_changed_color, 1],
                 ["swap_enabled", this.on_cfg_changed_graph_enabled, 2],
                 ["swap_override_graph_width", this.on_cfg_changed_graph_width, 2],
-                ["swap_graph_width", this.on_cfg_changed_graph_width, 2],
+                ["swap_graph_width", this.on_cfg_changed_graph_width],
                 ["swap_color_0", this.on_cfg_changed_color, 2],
                 ["net_enabled", this.on_cfg_changed_graph_enabled, 3],
                 ["net_override_graph_width", this.on_cfg_changed_graph_width, 3],
-                ["net_graph_width", this.on_cfg_changed_graph_width, 3],
+                ["net_graph_width", this.on_cfg_changed_graph_width],
                 ["net_color_0", this.on_cfg_changed_color, 3],
                 ["net_color_1", this.on_cfg_changed_color, 3],
                 ["load_enabled", this.on_cfg_changed_graph_enabled, 4],
                 ["load_override_graph_width", this.on_cfg_changed_graph_width, 4],
-                ["load_graph_width", this.on_cfg_changed_graph_width, 4],
+                ["load_graph_width", this.on_cfg_changed_graph_width],
                 ["load_color_0", this.on_cfg_changed_color, 4]
             ];
             let use_bind = typeof this.settings.bind === "function";
@@ -137,16 +139,16 @@ MyApplet.prototype = {
             this.border_color = colorToArray(this.cfg_border_color);
             this.areas = new Array(this.graph_ids.length)
             this.graphs = new Array(this.graph_ids.length)
-            this.graph_indices = new Array(this.graph_ids.length)
-            for (let i = 0; i < this.graph_ids.length; i++) {
-                this.areas[i] = null;
+            for (let i = 0; i < this.graph_ids.length; i++)
                 this.graphs[i] = null;
-                this.graph_indices[i] = null;
-            }
-            this.graph_order = [0,1,2,3,4];
+            this.resolution_needs_update = true;
+
+            this.area = new St.DrawingArea();
+            this.actor.add_child(this.area);
+            this.area.connect("repaint", Lang.bind(this, function() { this.paint(); }));
             
-            this.on_cfg_changed_padding();
             this.on_cfg_changed_graph_enabled();
+            this.on_cfg_changed_padding();
             this.update();
         }
         catch (e) {
@@ -155,21 +157,18 @@ MyApplet.prototype = {
     },
     
     addGraph: function(provider, graph_idx) {
-        let graph_id = this.graph_ids[graph_idx];
-
-        let area = new St.DrawingArea();
-        this.actor.insert_child_at_index(area, this.graph_indices[graph_idx]);
-        let graph = new Graph(area, provider);
-        this.areas[graph_idx] = area;
+        let graph = new Graph(provider);
         this.graphs[graph_idx] = graph;
 
         provider.refresh_rate = this.cfg_refresh_rate;
-        graph.smooth = this.cfg_smooth;
-        graph.setWidth(this.getGraphWidth(graph_idx), this.vertical);
-        graph.setColors(this.getGraphColors(graph_idx));
+        graph.setSmooth(this.cfg_smooth);
         graph.setDrawBorder(this.cfg_draw_border);
-        graph.bg_color = this.bg_color;
-        graph.border_color = this.border_color;
+        graph.setColors(this.getGraphColors(graph_idx));
+        graph.setBGColor(this.bg_color);
+        graph.setBorderColor(this.border_color);
+        let tooltip_decimals = this.getGraphTooltipDecimals(graph_idx);
+        if (typeof tooltip_decimals !== "undefined")
+            provider.setTextDecimals(tooltip_decimals);
         
         return graph;
     },
@@ -193,18 +192,44 @@ MyApplet.prototype = {
             this.tooltip.set_text(tooltip);
         else
             this.set_applet_tooltip(tooltip);
+
+        this.repaint();
+
         this.update_timeout_id = Mainloop.timeout_add(Math.max(100, this.cfg_refresh_rate), Lang.bind(this, this.update));
     },
-    
-    recalcGraphIndices: function() {
-        let idx = 0;
-        for (let i = 0; i < this.graph_ids.length; i++) {
-            let graph_id = this.graph_ids[i];
-            let enabled = this["cfg_" + graph_id + "_enabled"];
-            if (!enabled)
-                continue;
-            this.graph_indices[i] = idx++;
+
+    paint: function() {
+        if (this.resolution_needs_update) {
+            // Drawing area size can be reliably retrieved only in repaint callback
+            let [area_width, area_height] = this.area.get_size();
+            for (let i = 0; i < this.graphs.length; i++) {
+                if (this.graphs[i])
+                    this.updateGraphResolution(i, area_width, area_height);
+            }
+            this.resolution_needs_update = false;
         }
+
+        let cr = this.area.get_context();
+        let graph_offset = 0;
+
+        for (let i = 0; i < this.graphs.length; i++) {
+            if (this.graphs[i]) {
+                if (this.vertical)
+                    cr.translate(0, graph_offset);
+                else
+                    cr.translate(graph_offset, 0);
+
+                this.graphs[i].paint(cr, this.cfg_graph_spacing == -1 && i > 0);
+
+                graph_offset = this.getGraphWidth(i) + this.cfg_graph_spacing;
+            }
+        }
+
+        cr.$dispose();
+    },
+
+    repaint: function() {
+        this.area.queue_repaint();
     },
 
     getGraphWidth: function(graph_idx) {
@@ -224,6 +249,40 @@ MyApplet.prototype = {
         }
         return c;
     },
+
+    getGraphTooltipDecimals: function(graph_idx) {
+        let graph_id = this.graph_ids[graph_idx];
+        let prop = "cfg_" + graph_id + "_tooltip_decimals";
+        if (this.hasOwnProperty(prop))
+            return this[prop];
+    },
+
+    resizeArea: function() {
+        let total_graph_width = 0;
+        let enabled_graphs = 0;
+        for (let i = 0; i < this.graphs.length; i++) {
+            if (this.graphs[i]) {
+                total_graph_width += this.getGraphWidth(i);
+                enabled_graphs++;
+            }
+        }
+        if (enabled_graphs > 1)
+            total_graph_width += this.cfg_graph_spacing * (enabled_graphs - 1);
+
+        if (this.vertical)
+            this.area.set_size(-1, total_graph_width);
+        else
+            this.area.set_size(total_graph_width, -1);
+
+        this.resolution_needs_update = true;
+    },
+
+    updateGraphResolution: function(graph_idx, area_width, area_height) {
+        if (this.vertical)
+            this.graphs[graph_idx].setResolution(area_width, this.getGraphWidth(graph_idx));
+        else
+            this.graphs[graph_idx].setResolution(this.getGraphWidth(graph_idx), area_height);
+    },
     
     //Cinnamon callbacks
     on_applet_clicked: function(event) {
@@ -241,13 +300,11 @@ MyApplet.prototype = {
     },
 
     on_orientation_changed: function(orientation) {
-        global.log("Orientation changed");
         this.on_cfg_changed_graph_width();
     },
 
     //Configuration change callbacks
     on_cfg_changed_graph_enabled: function(enabled, graph_idx) {
-        this.recalcGraphIndices();
         let enable = (i) => {
             let graph_id = this.graph_ids[i];
             if (this["cfg_" + graph_id + "_enabled"]) {
@@ -266,28 +323,25 @@ MyApplet.prototype = {
                     this.addGraph(new Providers.LoadAvgData(), i).setAutoScale(2 * ncpu);
                 }
             }
-            else {
-                if (!this.graphs[i])
-                    return;
-                this.actor.remove_child(this.areas[i]);
+            else if (this.graphs[i]) {
                 this.graphs[i] = null;
-                this.areas[i] = null;
             }
         };
-        if (graph_idx)
+        if (typeof graph_idx !== "undefined")
             enable(graph_idx);
         else
             for (let i = 0; i < this.graphs.length; i++)
                 enable(i);
+
+        this.resizeArea();
     },
 
     on_cfg_changed_smooth: function() {
         for (let g of this.graphs) {
-            if (g) {
+            if (g)
                 g.smooth = this.cfg_smooth;
-                g.repaint();
-            }
         }
+        this.repaint();
     },
 
     on_cfg_changed_refresh_rate: function() {
@@ -303,11 +357,10 @@ MyApplet.prototype = {
 
     on_cfg_changed_draw_border: function() {
         for (let g of this.graphs) {
-            if (g) {
+            if (g)
                 g.setDrawBorder(this.cfg_draw_border);
-                g.repaint();
-            }
         }
+        this.repaint();
     },
 
     on_cfg_changed_padding: function() {
@@ -317,9 +370,9 @@ MyApplet.prototype = {
         }
         else
             this.actor.set_style("");
-        for (let g of this.graphs)
-            if (g)
-                g.updateSize();
+
+        this.resolution_needs_update = true;
+        this.repaint();
     },
 
     on_cfg_changed_bg_border_color: function() {
@@ -329,24 +382,38 @@ MyApplet.prototype = {
             if (g) {
                 g.bg_color = this.bg_color;
                 g.border_color = this.border_color;
-                g.repaint();
             }
         }
+        this.repaint();
     },
 
-    on_cfg_changed_graph_width: function(width, graph_idx) {
-        if (graph_idx) {
-            if (this.graphs[graph_idx])
-                this.graphs[graph_idx].setWidth(this.getGraphWidth(graph_idx), this.vertical);
+    on_cfg_changed_graph_width: function() {
+        this.resizeArea();
+        this.repaint();
+    },
+
+    on_cfg_changed_graph_spacing: function() {
+        this.resizeArea();
+        this.repaint();
+    },
+
+    on_cfg_changed_tooltip_decimals: function(decimals, graph_idx) {
+        if (typeof graph_idx !== "undefined") {
+            let provider = this.graphs[graph_idx].provider;
+            if ("setTextDecimals" in provider)
+                provider.setTextDecimals(this.getGraphTooltipDecimals(graph_idx));
         }
         else
             for (let i = 0; i < this.graphs.length; i++)
-                if (this.graphs[i])
-                    this.graphs[i].setWidth(this.getGraphWidth(i), this.vertical);
+                if (this.graphs[i]) {
+                    let provider = this.graphs[i].provider;
+                    if ("setTextDecimals" in provider)
+                        provider.setTextDecimals(this.getGraphTooltipDecimals(i));
+                }
     },
 
     on_cfg_changed_color: function(width, graph_idx) {
-        if (graph_idx) {
+        if (typeof graph_idx !== "undefined") {
             if (this.graphs[graph_idx])
                 this.graphs[graph_idx].setColors(this.getGraphColors(graph_idx));
         }
@@ -354,6 +421,7 @@ MyApplet.prototype = {
             for (let i = 0; i < this.graphs.length; i++)
                 if (this.graphs[i])
                     this.graphs[i].setColors(this.getGraphColors(i));
+        this.repaint();
     }
 };
 

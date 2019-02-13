@@ -1,12 +1,11 @@
 const Lang = imports.lang;
 
-function Graph(area, provider, colors) {
-    this._init(area, provider, colors);
+function Graph(provider) {
+    this._init(provider);
 }
 
 Graph.prototype = {
-    _init: function(area, provider) {
-        this.area = area;
+    _init: function(provider) {
         this.provider = provider;
         this.colors = [[1,1,1,1]];
         this.bg_color = [0,0,0,1];
@@ -17,9 +16,9 @@ Graph.prototype = {
         this.autoScale = false;
         this.scale = 1;
         this.width = 1;
+        this.height = 1;
         this.draw_border = true;
-        this.paint_queued = false;
-        this.area.connect('repaint', Lang.bind(this, function() {this.paint();}));
+        this.resize_data = false;
     },
     
     _setColor: function(cr, i) {
@@ -42,31 +41,31 @@ Graph.prototype = {
             this.data = this.data.slice(this.data.length - datasize);
     },
 
-    updateSize: function() {
-        this.width = null;
-        this.repaint();
-    },
-
-    setWidth: function(width, vertical) {
-        if (vertical) {
-            this.area.set_width(-1);
-            this.area.set_height(width);
-        }
-        else {
-            this.area.set_width(width);
-            this.area.set_height(-1);
-        }
-        this.updateSize();
+    setResolution: function(width, height) {
+        this.width = width;
+        this.height = height;
+        this.resize_data = true;
     },
 
     setDrawBorder: function(draw_border) {
         this.draw_border = draw_border;
-        this.updateSize();
+        this.resize_data = true;
+    },
+
+    setSmooth: function(smooth) {
+        this.smooth = smooth;
     },
     
     setColors: function(c) {
         this.colors = c;
-        this.repaint();
+    },
+
+    setBGColor: function(c) {
+        this.bg_color = c;
+    },
+
+    setBorderColor: function(c) {
+        this.border_color = c;
     },
 
     refresh: function() {
@@ -85,7 +84,6 @@ Graph.prototype = {
             }
             this.scale = 1.0 / maxVal;
         }
-        this.repaint();
     },
     
     dataSum: function(i, depth) {
@@ -95,24 +93,15 @@ Graph.prototype = {
         return sum;
     },
     
-    repaint: function() {
-        if (!this.paint_queued) {
-            this.paint_queued = true;
-            this.area.queue_repaint();
-        }
-    },
-    
-    paint: function() {
-        this.paint_queued = false;
-        let cr = this.area.get_context();
-        let [width, height] = this.area.get_size();
-        if (!this.width) {
-            this.width = width;
+    paint: function(cr, no_left_border) {
+        if (this.resize_data) {
             this._resizeData();
+            this.resize_data = false;
         }
         let border_width = this.draw_border ? 1 : 0;
-        let graph_width = width - 2 * border_width;
-        let graph_height = height - 2 * border_width;
+        let graph_width = this.width - 2 * border_width;
+        let graph_height = this.height - 2 * border_width;
+        cr.setLineWidth(1);
         //background
         cr.setSourceRGBA(this.bg_color[0], this.bg_color[1], this.bg_color[2], this.bg_color[3]);
         cr.rectangle(border_width, border_width, graph_width, graph_height);
@@ -121,11 +110,16 @@ Graph.prototype = {
         if (this.smooth)
         {
             for (let j = this.dim - 1; j >= 0; --j) {
-                cr.moveTo(border_width, graph_height + border_width);
                 this._setColor(cr, j);
+                cr.moveTo(border_width, graph_height + border_width);
                 for (let i = 0; i < this.data.length; ++i) {
                     let v = Math.round(graph_height * Math.min(1, this.scale * this.dataSum(i, j)));
-                    cr.lineTo(i + border_width, graph_height + border_width - v);
+                    v = graph_height + border_width - v;
+                    if (i == 0)
+                        cr.lineTo(i + border_width, v);
+                    cr.lineTo(i + border_width + 0.5, v);
+                    if (i == this.data.length - 1)
+                        cr.lineTo(i + border_width + 1, v);
                 }
                 cr.lineTo(graph_width + border_width, graph_height + border_width);
                 cr.lineTo(border_width, graph_height + border_width);
@@ -137,7 +131,7 @@ Graph.prototype = {
             for (let i = 0; i < this.data.length; ++i) {
                 for (let j = this.dim - 1; j >= 0; --j) {
                     this._setColor(cr, j);
-                    cr.moveTo(i + border_width, graph_height + border_width);
+                    cr.moveTo(i + border_width + 0.5, graph_height + border_width);
                     let v = Math.round(graph_height * Math.min(1, this.scale * this.dataSum(i, j)));
                     cr.relLineTo(0, -v);
                     cr.stroke();
@@ -147,10 +141,14 @@ Graph.prototype = {
         //border
         if (this.draw_border) {
             cr.setSourceRGBA(this.border_color[0], this.border_color[1], this.border_color[2], this.border_color[3]);
-            cr.rectangle(0, 0, width, height);
+            cr.moveTo(0.5, 0.5);
+            cr.lineTo(this.width - 0.5, 0.5);
+            cr.lineTo(this.width - 0.5, this.height - 0.5);
+            cr.lineTo(0.5, this.height - 0.5);
+            if (!no_left_border)
+                cr.closePath();
             cr.stroke();
         }
-        cr.$dispose();
     },
     
     setAutoScale: function(minScale)
