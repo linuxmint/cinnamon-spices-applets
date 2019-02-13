@@ -15,6 +15,10 @@ All settings can be changed by right clicking on the icon and selecting configur
 ## TODO:
 
 ## Changelog
+* 1.2.0
+  - The time of the alarm is displayed (configurable).
+  - Changed the order of the default Preset Times to be strictly descending.
+
 * 1.1.3
   - Added support for Cinnamon 4.0
 

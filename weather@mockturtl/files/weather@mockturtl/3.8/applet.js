@@ -351,6 +351,9 @@ function MyApplet(metadata, orientation, panelHeight, instanceId) {
       }
     }
 
+    // DarkSky Filter words for short conditions, won't work on every language
+    this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+
     this._init(orientation, panelHeight, instanceId)
 }
 
@@ -671,10 +674,15 @@ MyApplet.prototype = {
       let location = "";
       if (this.weather.location.city != null && this.weather.location.country != null) {
         location = this.weather.location.city + ", " + this.weather.location.country;
-        if (this.nonempty(this._locationLabelOverride)) {
+      }
+      else {
+          location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
+      }
+
+      // Overriding Location
+      if (this.nonempty(this._locationLabelOverride)) {
           location = this._locationLabelOverride;
         }
-      }
   
       this.set_applet_tooltip(location);
 
@@ -772,9 +780,9 @@ MyApplet.prototype = {
         if (this._showSunrise) {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
-          if (this.weather.timeZone != null) {     //have TZ, en-GB returns time in the correct format
-              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
-              let sunset = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.timeZone, hour: "2-digit", minute: "2-digit"});
+          if (this.weather.location.timeZone != null) {     //have TZ, en-GB returns time in the correct format
+              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
+              let sunset = this.weather.sunset.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
               sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
               sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
           }
@@ -816,12 +824,13 @@ MyApplet.prototype = {
           }
         }
         let dayName = forecastData.dateTime;
-        if (this.weather.timeZone != null) {
-           dayname = this.dayName.toLocaleString("en-GB", {timeZone: this.weather.timeZone, weekday: "long"});
+        if (this.weather.location.timeZone != null) {
+           this.log.Debug(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone}));
+           dayName = _(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, weekday: "long"}));
         }
         else {
           dayName.setMilliseconds(dayName.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-          dayName = this.getDayName(dayName.getUTCDay());
+          dayName = _(this.getDayName(dayName.getUTCDay()));
         }       
         
         forecastUi.Day.text = dayName;

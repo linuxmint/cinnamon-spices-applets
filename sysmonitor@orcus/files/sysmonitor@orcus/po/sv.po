@@ -7,65 +7,243 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sysmonitor@orcus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-01 16:59+0200\n"
-"PO-Revision-Date: 2017-06-01 17:04+0200\n"
+"POT-Creation-Date: 2017-06-30 20:10+0200\n"
+"PO-Revision-Date: 2019-02-10 08:34+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: sv\n"
 
-#: applet.js:128
-msgid "Settings"
-msgstr "Inställningar"
+#: providers.js:46
+msgid "CPU:"
+msgstr "CPU:"
 
-#: applet.js:322
-msgid "CPU: "
-msgstr "CPU: "
-
-#: applet.js:348
-msgid "Memory: "
-msgstr "Minne: "
-
-#: applet.js:349 applet.js:375
+#: providers.js:68 providers.js:94
 msgid " MB"
 msgstr " MB"
 
-#: applet.js:374
-msgid "Swap: "
-msgstr "Växlingsutrymme: "
+#: providers.js:73
+msgid "Memory:"
+msgstr "Minne:"
 
-#: applet.js:409
-msgid "Network D/U: "
-msgstr "Nätverk U/N: "
+#: providers.js:99
+msgid "Swap:"
+msgstr "Växlingsutrymme:"
 
-#: applet.js:409
+#: providers.js:135
 msgid " KB/s"
 msgstr " KB/s"
 
-#: applet.js:446
-msgid "Load average: "
-msgstr "Medelbelastning: "
+#: providers.js:140
+msgid "Network D/U:"
+msgstr "Nätverk U/N:"
 
-#: settings.js:99
+#: providers.js:179
+msgid "Load average:"
+msgstr "Medelbelastning:"
+
+#. sysmonitor@orcus->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Rita kanter"
+
+#. sysmonitor@orcus->settings-
+#. schema.json->mem_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->load_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->swap_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->net_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->cpu_override_graph_width->description
+msgid "Override graph width"
+msgstr "Åsidosätt grafens bredd"
+
+#. sysmonitor@orcus->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Utjämnade grafer"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->description
+msgid "Graph width"
+msgstr "Grafbredd"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->graph_width->units
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
+msgid "pixels"
+msgstr "bildpunkter"
+
+#. sysmonitor@orcus->settings-schema.json->load_enabled->description
+#. sysmonitor@orcus->settings-schema.json->mem_enabled->description
+#. sysmonitor@orcus->settings-schema.json->swap_enabled->description
+#. sysmonitor@orcus->settings-schema.json->cpu_enabled->description
+#. sysmonitor@orcus->settings-schema.json->net_enabled->description
+msgid "Enable"
+msgstr "Aktivera"
+
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Vänster-/Högerkantsutfyllnad"
+
+#. sysmonitor@orcus->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Program att starta vid klick"
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Använd anpassad panelprogramsutfyllnad"
+
+#. sysmonitor@orcus->settings-schema.json->load->title
+msgid "Load"
+msgstr "Belastning"
+
+#. sysmonitor@orcus->settings-schema.json->swap_c->title
+#. sysmonitor@orcus->settings-schema.json->cpu_c->title
+#. sysmonitor@orcus->settings-schema.json->load_c->title
+#. sysmonitor@orcus->settings-schema.json->net_c->title
+#. sysmonitor@orcus->settings-schema.json->common_c->title
+#. sysmonitor@orcus->settings-schema.json->mem_c->title
+msgid "Colors"
+msgstr "Färger"
+
+#. sysmonitor@orcus->settings-schema.json->swap_g->title
+#. sysmonitor@orcus->settings-schema.json->cpu_g->title
+#. sysmonitor@orcus->settings-schema.json->load_g->title
+#. sysmonitor@orcus->settings-schema.json->mem_g->title
+#. sysmonitor@orcus->settings-schema.json->common_g->title
+#. sysmonitor@orcus->settings-schema.json->net_g->title
+msgid "General"
+msgstr "Allmänt"
+
+#. sysmonitor@orcus->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "Minne"
+
+#. sysmonitor@orcus->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. sysmonitor@orcus->settings-schema.json->common->title
+msgid "Common"
+msgstr "Normal"
+
+#. sysmonitor@orcus->settings-schema.json->net->title
+msgid "Network"
+msgstr "Nätverk"
+
+#. sysmonitor@orcus->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "Växlingsutrymme"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Uppdateringsintervall"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. sysmonitor@orcus->settings-schema.json->swap_color_0->description
+#. sysmonitor@orcus->settings-schema.json->mem_color_0->description
+msgid "Used color"
+msgstr "Färg för använt"
+
+#. sysmonitor@orcus->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Färg"
+
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Över-/Underkantsutfyllnad"
+
+#. sysmonitor@orcus->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Kantfärg"
+
+#. sysmonitor@orcus->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Bakgrundsfärg"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Användarfärg"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Fin färg"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kärnfärg"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait-färg"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_tooltip_decimals->description
+msgid "Show this many decimals in the tooltip"
+msgstr "Visa så här många decimaler i hovringsinformationen"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_tooltip_decimals->units
+msgid "decimals"
+msgstr "decimaler"
+
+#. sysmonitor@orcus->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Färg för cache-lagrat"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Normal grafbredd"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
 msgid ""
-"Cinnamon should be restarted for changes to take effect.\n"
-"Restart now?"
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
 msgstr ""
-"Cinnamon måste startas om för att tillämpa ändringar.\n"
-"Vill du starta om nu?"
+"Om panelprogrammet är i en vertikal panel, anger detta grafens höjd. "
+"Grafens bredd är då panelbredd minus utfyllnad."
 
-#: settings.js:192
-msgid "Error while saving file: "
-msgstr "Kunde inte spara filen: "
+#. sysmonitor@orcus->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Uppladdningsfärg"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Nerladdningsfärg"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr ""
+"Visar CPU-, minnes-, växlingsutrymmes-, och nätverksanvändning samt "
+"belastning, i grafer."
 
 #. sysmonitor@orcus->metadata.json->name
 msgid "System Monitor"
 msgstr "Systemövervakare"
 
-#. sysmonitor@orcus->metadata.json->description
-msgid "Displays CPU, memory, swap and network usage and load in graphs"
-msgstr "Visar CPU-, minnes-, växlings-, och nätverksanvändning samt belastning, i diagram."
+#~ msgid "Settings"
+#~ msgstr "Inställningar"
+
+#~ msgid ""
+#~ "Cinnamon should be restarted for changes to take effect.\n"
+#~ "Restart now?"
+#~ msgstr ""
+#~ "Cinnamon måste startas om för att tillämpa ändringar.\n"
+#~ "Vill du starta om nu?"
+
+#~ msgid "Error while saving file: "
+#~ msgstr "Kunde inte spara filen: "
