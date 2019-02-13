@@ -131,8 +131,8 @@
     "refresh_rate": {
         "type": "spinbutton",
         "default": 1000,
-        "min": 10,
-        "max": 10000,
+        "min": 100,
+        "max": 60000,
         "step": 50,
         "description": "Refresh rate",
         "units": "ms"
