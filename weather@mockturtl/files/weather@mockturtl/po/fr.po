@@ -224,6 +224,10 @@ msgstr "Cendres volcaniques"
 msgid "Clear Sky"
 msgstr "Ciel clair"
 
+#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1233
+msgid "Clear"
+msgstr "Clair"
+
 #: 3.8/applet.js:337
 msgid "Error"
 msgstr "Erreur"
