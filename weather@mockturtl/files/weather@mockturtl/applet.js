@@ -1284,13 +1284,6 @@ MyApplet.prototype = {
   }
 };
 
-//
-// For Translators
-//
-
-const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
-_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky")];
-
 //----------------------------------------------------------------------
 //
 // Entry point
