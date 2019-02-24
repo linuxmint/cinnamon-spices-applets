@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-23 12:21+0000\n"
+"POT-Creation-Date: 2019-02-24 10:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,167 +209,107 @@ msgstr ""
 msgid "Feels like:"
 msgstr ""
 
-#: 3.8/applet.js:1232
-msgid "Clouds"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Mist"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Thunderstorm"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Rain"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Snow"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Drizzle"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Haze"
-msgstr ""
-
-#: 3.8/applet.js:1232
-msgid "Sleet"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Smoke"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Fog"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Sand"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Dust"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Sqalls"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Tornado"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Volcanic ash"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Clear Sky"
-msgstr ""
-
-#: 3.8/applet.js:1233
-msgid "Sky is clear"
-msgstr ""
-
-#: 3.8/applet.js:1238
+#: 3.8/applet.js:1234
 msgid "Thunderstorm with light rain"
 msgstr ""
 
-#: 3.8/applet.js:1239
+#: 3.8/applet.js:1235
 msgid "Thunderstorm with rain"
 msgstr ""
 
-#: 3.8/applet.js:1240
+#: 3.8/applet.js:1236
 msgid "Thunderstorm with heavy rain"
 msgstr ""
 
-#: 3.8/applet.js:1241
+#: 3.8/applet.js:1237
 msgid "Light thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1242
+#: 3.8/applet.js:1238
+msgid "Thunderstorm"
+msgstr ""
+
+#: 3.8/applet.js:1239
 msgid "Heavy thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1243
+#: 3.8/applet.js:1240
 msgid "Ragged thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1244
+#: 3.8/applet.js:1241
 msgid "Thunderstorm with light drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1245
+#: 3.8/applet.js:1242
 msgid "Thunderstorm with drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1246
+#: 3.8/applet.js:1243
 msgid "Thunderstorm with heavy drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1248
+#: 3.8/applet.js:1245
 msgid "Light intensity drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1249
+#: 3.8/applet.js:1246
+msgid "Drizzle"
+msgstr ""
+
+#: 3.8/applet.js:1247
 msgid "Heavy intensity drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1250
+#: 3.8/applet.js:1248
 msgid "Light intensity drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1251
+#: 3.8/applet.js:1249
 msgid "Drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1252
+#: 3.8/applet.js:1250
 msgid "Heavy intensity drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1253
+#: 3.8/applet.js:1251
 msgid "Shower rain and drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1254
+#: 3.8/applet.js:1252
 msgid "Heavy shower rain and drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1255
+#: 3.8/applet.js:1253
 msgid "Shower drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1257
+#: 3.8/applet.js:1255
 msgid "Light rain"
 msgstr ""
 
-#: 3.8/applet.js:1258
+#: 3.8/applet.js:1256
 msgid "Moderate rain"
 msgstr ""
 
-#: 3.8/applet.js:1259
+#: 3.8/applet.js:1257
 msgid "Heavy intensity rain"
 msgstr ""
 
-#: 3.8/applet.js:1260
+#: 3.8/applet.js:1258
 msgid "Very heavy rain"
 msgstr ""
 
-#: 3.8/applet.js:1261
+#: 3.8/applet.js:1259
 msgid "Extreme rain"
 msgstr ""
 
-#: 3.8/applet.js:1262
+#: 3.8/applet.js:1260
 msgid "Freezing rain"
 msgstr ""
 
-#: 3.8/applet.js:1262
+#: 3.8/applet.js:1261
 msgid "Light intensity shower rain"
 msgstr ""
 
@@ -377,27 +317,119 @@ msgstr ""
 msgid "Shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1262
+#: 3.8/applet.js:1263
 msgid "Heavy intensity shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1262
+#: 3.8/applet.js:1264
 msgid "Ragged shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1264
-msgid "Few clouds"
-msgstr ""
-
-#: 3.8/applet.js:1265
-msgid "Scattered clouds"
-msgstr ""
-
 #: 3.8/applet.js:1266
-msgid "Broken clouds"
+msgid "Light snow"
 msgstr ""
 
 #: 3.8/applet.js:1267
+msgid "Snow"
+msgstr ""
+
+#: 3.8/applet.js:1268
+msgid "Heavy snow"
+msgstr ""
+
+#: 3.8/applet.js:1269
+msgid "Sleet"
+msgstr ""
+
+#: 3.8/applet.js:1270
+msgid "Shower sleet"
+msgstr ""
+
+#: 3.8/applet.js:1271
+msgid "Light rain and snow"
+msgstr ""
+
+#: 3.8/applet.js:1272
+msgid "Rain and snow"
+msgstr ""
+
+#: 3.8/applet.js:1273
+msgid "Light shower snow"
+msgstr ""
+
+#: 3.8/applet.js:1274
+msgid "Shower snow"
+msgstr ""
+
+#: 3.8/applet.js:1275
+msgid "Heavy shower snow"
+msgstr ""
+
+#: 3.8/applet.js:1277
+msgid "Mist"
+msgstr ""
+
+#: 3.8/applet.js:1278
+msgid "Smoke"
+msgstr ""
+
+#: 3.8/applet.js:1279
+msgid "Haze"
+msgstr ""
+
+#: 3.8/applet.js:1280
+msgid "Sand, dust whirls"
+msgstr ""
+
+#: 3.8/applet.js:1281
+msgid "Fog"
+msgstr ""
+
+#: 3.8/applet.js:1282
+msgid "Sand"
+msgstr ""
+
+#: 3.8/applet.js:1283
+msgid "Dust"
+msgstr ""
+
+#: 3.8/applet.js:1284
+msgid "Volcanic ash"
+msgstr ""
+
+#: 3.8/applet.js:1285
+msgid "Squalls"
+msgstr ""
+
+#: 3.8/applet.js:1286
+msgid "Tornado"
+msgstr ""
+
+#: 3.8/applet.js:1288
+msgid "Clear"
+msgstr ""
+
+#: 3.8/applet.js:1289
+msgid "Clear sky"
+msgstr ""
+
+#: 3.8/applet.js:1290
+msgid "Sky is clear"
+msgstr ""
+
+#: 3.8/applet.js:1292
+msgid "Few clouds"
+msgstr ""
+
+#: 3.8/applet.js:1293
+msgid "Scattered clouds"
+msgstr ""
+
+#: 3.8/applet.js:1294
+msgid "Broken clouds"
+msgstr ""
+
+#: 3.8/applet.js:1295
 msgid "Overcast clouds"
 msgstr ""
 
