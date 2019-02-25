@@ -1229,9 +1229,72 @@ MyApplet.prototype = {
 // For Translators
 //
 
-const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
-_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky"), _("Sky is clear")];
+const openWeatherMapConditionLibrary = [
+  // Group 2xx: Thunderstorm
+  _("Thunderstorm with light rain"),
+  _("Thunderstorm with rain"),
+  _("Thunderstorm with heavy rain"),
+  _("Light thunderstorm"), 
+  _("Thunderstorm"),
+  _("Heavy thunderstorm"),
+  _("Ragged thunderstorm"),
+  _("Thunderstorm with light drizzle"),
+  _("Thunderstorm with drizzle"),
+  _("Thunderstorm with heavy drizzle"),
+  // Group 3xx: Drizzle
+  _("Light intensity drizzle"), 
+  _("Drizzle"),
+  _("Heavy intensity drizzle"),
+  _("Light intensity drizzle rain"),
+  _("Drizzle rain"),
+  _("Heavy intensity drizzle rain"),
+  _("Shower rain and drizzle"),
+  _("Heavy shower rain and drizzle"),
+  _("Shower drizzle"),
+  // Group 5xx: Rain
+  _("Light rain"),
+  _("Moderate rain"),
+  _("Heavy intensity rain"),
+  _("Very heavy rain"),
+  _("Extreme rain"),
+  _("Freezing rain"), 
+  _("Light intensity shower rain"), 
+  _("Shower rain"), 
+  _("Heavy intensity shower rain"), 
+  _("Ragged shower rain"), 
+  // Group 6xx: Snow 
+  _("Light snow"), 
+  _("Snow"), 
+  _("Heavy snow"), 
+  _("Sleet"), 
+  _("Shower sleet"), 
+  _("Light rain and snow"), 
+  _("Rain and snow"), 
+  _("Light shower snow"), 
+  _("Shower snow"), 
+  _("Heavy shower snow"), 
+  // Group 7xx: Atmosphere 
+  _("Mist"), 
+  _("Smoke"), 
+  _("Haze"), 
+  _("Sand, dust whirls"), 
+  _("Fog"), 
+  _("Sand"), 
+  _("Dust"), 
+  _("Volcanic ash"), 
+  _("Squalls"), 
+  _("Tornado"), 
+  // Group 800: Clear 
+  _("Clear"), 
+  _("Clear sky"), 
+  _("Sky is clear"),
+  // Group 80x: Clouds
+  _("Few clouds"),
+  _("Scattered clouds"),
+  _("Broken clouds"),
+  _("Overcast clouds")];
 
+  
 const icons = {
   clear_day: 'weather-clear',
   clear_night: 'weather-clear-night',
