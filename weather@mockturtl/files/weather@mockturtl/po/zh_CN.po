@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-06 21:34+0000\n"
-"PO-Revision-Date: 2019-02-17 18:43+0800\n"
+"POT-Creation-Date: 2019-02-24 10:42+0000\n"
+"PO-Revision-Date: 2019-02-27 12:47+0800\n"
 "Last-Translator: Echizen Ryoma <echizenryoma.zhang@gmail.com>\n"
 "Language-Team: Chinese (simplified)\n"
 "Language: zh_CN\n"
@@ -36,107 +36,107 @@ msgstr "设置"
 msgid "No location provided"
 msgstr "没有提供位置信息"
 
-#: applet.js:610 3.6/applet.js:610 3.8/applet.js:738
+#: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
 msgid "Cloudiness:"
 msgstr "云量："
 
-#: applet.js:634 3.6/applet.js:634 3.8/applet.js:779
+#: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
 msgid "Sunrise"
 msgstr "日出"
 
-#: applet.js:635 3.6/applet.js:635 3.8/applet.js:780
+#: applet.js:635 3.6/applet.js:635 3.8/applet.js:782
 msgid "Sunset"
 msgstr "日落"
 
-#: applet.js:708 3.6/applet.js:708 3.8/applet.js:890
+#: applet.js:708 3.6/applet.js:708 3.8/applet.js:892
 msgid "Loading current weather ..."
 msgstr "正在加载当前天气情况…"
 
-#: applet.js:709 3.6/applet.js:709 3.8/applet.js:891
+#: applet.js:709 3.6/applet.js:709 3.8/applet.js:893
 msgid "Loading future weather ..."
 msgstr "正在加载未来天气情况…"
 
-#: applet.js:731 3.6/applet.js:731 3.8/applet.js:913
+#: applet.js:731 3.6/applet.js:731 3.8/applet.js:915
 msgid "Loading ..."
 msgstr "正在加载…"
 
-#: applet.js:737 3.6/applet.js:737 3.8/applet.js:919
+#: applet.js:737 3.6/applet.js:737 3.8/applet.js:921
 msgid "Refresh"
 msgstr "刷新"
 
-#: applet.js:802 3.6/applet.js:802 3.8/applet.js:983
+#: applet.js:802 3.6/applet.js:802 3.8/applet.js:985
 msgid "Temperature:"
 msgstr "温度："
 
-#: applet.js:804 3.6/applet.js:804 3.8/applet.js:985
+#: applet.js:804 3.6/applet.js:804 3.8/applet.js:987
 msgid "Humidity:"
 msgstr "湿度："
 
-#: applet.js:806 3.6/applet.js:806 3.8/applet.js:987
+#: applet.js:806 3.6/applet.js:806 3.8/applet.js:989
 msgid "Pressure:"
 msgstr "气压："
 
-#: applet.js:808 3.6/applet.js:808 3.8/applet.js:989
+#: applet.js:808 3.6/applet.js:808 3.8/applet.js:991
 msgid "Wind:"
 msgstr "风力："
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Sunday"
 msgstr "星期日"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Monday"
 msgstr "星期一"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Tuesday"
 msgstr "星期二"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Wednesday"
 msgstr "星期三"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Thursday"
 msgstr "星期四"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Friday"
 msgstr "星期五"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Saturday"
 msgstr "星期六"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "N"
 msgstr "北"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "NE"
 msgstr "东北"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "E"
 msgstr "东"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "SE"
 msgstr "东南"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "S"
 msgstr "南"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "SW"
 msgstr "西南"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "W"
 msgstr "西"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1214
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "NW"
 msgstr "西北"
 
@@ -159,70 +159,6 @@ msgstr "城市不存在"
 #: applet.js:1092 3.6/applet.js:1092 3.8/applet.js:347
 msgid "Key Temp. Blocked"
 msgstr "API密钥被临时禁止"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Clouds"
-msgstr "多云"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Mist"
-msgstr "轻雾"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Thunderstorm"
-msgstr "雷阵雨"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Rain"
-msgstr "雨"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Snow"
-msgstr "雪"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Drizzle"
-msgstr "小雨"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Haze"
-msgstr "霾"
-
-#: applet.js:1291 3.6/applet.js:1291 3.8/applet.js:1230
-msgid "Sleet"
-msgstr "雨夹雪"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Smoke"
-msgstr "烟雾"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Fog"
-msgstr "雾"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Sand"
-msgstr "扬沙"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Dust"
-msgstr "浮尘"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Sqalls"
-msgstr "大风"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Tornado"
-msgstr "龙卷风"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Volcanic ash"
-msgstr "火山灰"
-
-#: applet.js:1292 3.6/applet.js:1292 3.8/applet.js:1231
-msgid "Clear Sky"
-msgstr "晴"
 
 #: 3.8/applet.js:337
 msgid "Error"
@@ -269,16 +205,241 @@ msgid "until"
 msgstr "直到"
 
 #: 3.8/applet.js:355
+#, fuzzy
 msgid "in"
 msgstr "在"
 
-#: 3.8/applet.js:744
+#: 3.8/applet.js:749
 msgid "Feels like:"
-msgstr "似乎是："
+msgstr "似乎："
 
-#: 3.8/applet.js:1231
+#: 3.8/applet.js:1234
+msgid "Thunderstorm with light rain"
+msgstr "小雨，伴有雷电"
+
+#: 3.8/applet.js:1235
+msgid "Thunderstorm with rain"
+msgstr "雨，伴有雷电"
+
+#: 3.8/applet.js:1236
+msgid "Thunderstorm with heavy rain"
+msgstr "大雨，伴有雷电"
+
+#: 3.8/applet.js:1237
+msgid "Light thunderstorm"
+msgstr "雷电"
+
+#: 3.8/applet.js:1238
+msgid "Thunderstorm"
+msgstr "雷暴"
+
+#: 3.8/applet.js:1239
+msgid "Heavy thunderstorm"
+msgstr "强雷暴"
+
+#: 3.8/applet.js:1240
+msgid "Ragged thunderstorm"
+msgstr "局部雷暴"
+
+#: 3.8/applet.js:1241
+msgid "Thunderstorm with light drizzle"
+msgstr "微毛雨，伴有雷电"
+
+#: 3.8/applet.js:1242
+msgid "Thunderstorm with drizzle"
+msgstr "毛毛雨，伴有雷电"
+
+#: 3.8/applet.js:1243
+msgid "Thunderstorm with heavy drizzle"
+msgstr "强毛雨，伴有雷电"
+
+#: 3.8/applet.js:1245
+msgid "Light intensity drizzle"
+msgstr "微毛雨"
+
+#: 3.8/applet.js:1246
+msgid "Drizzle"
+msgstr "毛毛雨"
+
+#: 3.8/applet.js:1247
+msgid "Heavy intensity drizzle"
+msgstr "强毛雨"
+
+#: 3.8/applet.js:1248
+msgid "Light intensity drizzle rain"
+msgstr "毛毛细雨"
+
+#: 3.8/applet.js:1249
+msgid "Drizzle rain"
+msgstr "细雨"
+
+#: 3.8/applet.js:1250
+msgid "Heavy intensity drizzle rain"
+msgstr "强细雨"
+
+#: 3.8/applet.js:1251
+msgid "Shower rain and drizzle"
+msgstr "毛毛雨，时有阵雨"
+
+#: 3.8/applet.js:1252
+msgid "Heavy shower rain and drizzle"
+msgstr "毛毛雨，时有强阵雨"
+
+#: 3.8/applet.js:1253
+msgid "Shower drizzle"
+msgstr "毛阵雨"
+
+#: 3.8/applet.js:1255
+msgid "Light rain"
+msgstr "小雨"
+
+#: 3.8/applet.js:1256
+msgid "Moderate rain"
+msgstr "中雨"
+
+#: 3.8/applet.js:1257
+msgid "Heavy intensity rain"
+msgstr "大雨"
+
+#: 3.8/applet.js:1258
+msgid "Very heavy rain"
+msgstr "暴雨"
+
+#: 3.8/applet.js:1259
+msgid "Extreme rain"
+msgstr "大暴雨"
+
+#: 3.8/applet.js:1260
+msgid "Freezing rain"
+msgstr "冻雨"
+
+#: 3.8/applet.js:1261
+msgid "Light intensity shower rain"
+msgstr "小阵雨"
+
+#: 3.8/applet.js:1262
+msgid "Shower rain"
+msgstr "阵雨"
+
+#: 3.8/applet.js:1263
+msgid "Heavy intensity shower rain"
+msgstr "强阵雨"
+
+#: 3.8/applet.js:1264
+msgid "Ragged shower rain"
+msgstr "局部阵雨"
+
+#: 3.8/applet.js:1266
+msgid "Light snow"
+msgstr "小雪"
+
+#: 3.8/applet.js:1267
+msgid "Snow"
+msgstr "雪"
+
+#: 3.8/applet.js:1268
+msgid "Heavy snow"
+msgstr "大雪"
+
+#: 3.8/applet.js:1269
+msgid "Sleet"
+msgstr "冰雹"
+
+#: 3.8/applet.js:1270
+msgid "Shower sleet"
+msgstr "短时冰雹"
+
+#: 3.8/applet.js:1271
+msgid "Light rain and snow"
+msgstr "小雨夹雪"
+
+#: 3.8/applet.js:1272
+msgid "Rain and snow"
+msgstr "雨夹雪"
+
+#: 3.8/applet.js:1273
+msgid "Light shower snow"
+msgstr "小阵雪"
+
+#: 3.8/applet.js:1274
+msgid "Shower snow"
+msgstr "阵雪"
+
+#: 3.8/applet.js:1275
+msgid "Heavy shower snow"
+msgstr "强阵雪"
+
+#: 3.8/applet.js:1277
+msgid "Mist"
+msgstr "霭"
+
+#: 3.8/applet.js:1278
+msgid "Smoke"
+msgstr "烟"
+
+#: 3.8/applet.js:1279
+msgid "Haze"
+msgstr "霾"
+
+#: 3.8/applet.js:1280
+msgid "Sand, dust whirls"
+msgstr "沙尘暴"
+
+#: 3.8/applet.js:1281
+msgid "Fog"
+msgstr "雾"
+
+#: 3.8/applet.js:1282
+msgid "Sand"
+msgstr "扬沙"
+
+#: 3.8/applet.js:1283
+msgid "Dust"
+msgstr "浮尘"
+
+#: 3.8/applet.js:1284
+msgid "Volcanic ash"
+msgstr "火山灰"
+
+#: 3.8/applet.js:1285
+msgid "Squalls"
+msgstr "暴风"
+
+#: 3.8/applet.js:1286
+msgid "Tornado"
+msgstr "龙卷风"
+
+#: 3.8/applet.js:1288
+#, fuzzy
+msgid "Clear"
+msgstr "晴"
+
+#: 3.8/applet.js:1289
+#, fuzzy
+#| msgid "Clear Sky"
+msgid "Clear sky"
+msgstr "晴"
+
+#: 3.8/applet.js:1290
+#, fuzzy
 msgid "Sky is clear"
 msgstr "晴"
+
+#: 3.8/applet.js:1292
+msgid "Few clouds"
+msgstr "少云"
+
+#: 3.8/applet.js:1293
+msgid "Scattered clouds"
+msgstr "疏云"
+
+#: 3.8/applet.js:1294
+msgid "Broken clouds"
+msgstr "多云"
+
+#: 3.8/applet.js:1295
+msgid "Overcast clouds"
+msgstr "阴"
 
 #. settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 1.8"
@@ -450,7 +611,7 @@ msgstr "纵向排列"
 #. 3.6->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "显示日出/日落时间"
+msgstr "显示日出和日落时间"
 
 #. settings-schema.json->show24Hours->description
 #. 3.6->settings-schema.json->show24Hours->description
@@ -541,7 +702,7 @@ msgstr "API密钥"
 
 #. 3.8->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
-msgstr "从您的OpenWeatherMap帐户中复制API密钥至此。"
+msgstr "从数据提供商的帐户中复制API密钥至此。"
 
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
