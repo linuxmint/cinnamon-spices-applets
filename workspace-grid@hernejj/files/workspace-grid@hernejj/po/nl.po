@@ -48,3 +48,23 @@ msgstr "Gebruik sneltoetsen (Ctrl+Alt+Up/Down) om van bureaublad te wisselen"
 
 #. workspace-grid@hernejj->settings-
 #. schema.json->registerUpDownKeyBindings->tooltip
+msgid ""
+"This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
+msgstr "Dit voorkomt het gebruik van de sneltoetsen Expo en Scale in Cinnamon"
+
+#. workspace-grid@hernejj->settings-schema.json->numCols->description
+msgid "Number of columns:"
+msgstr "Aantal columns:"
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->scrollWheelBehavior->description
+msgid "Scroll Wheel Behavior:"
+msgstr "Muis wiel gedrag:"
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Column"
+msgstr "Scroll op kolom"
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Row"
+msgstr "Scroll op rij"
