@@ -1,72 +1,77 @@
 # Swedish translation for IcingTaskManager@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: IcingTaskManager@json\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-13 18:37-0600\n"
-"PO-Revision-Date: 2017-10-16 14:48-0500\n"
+"PO-Revision-Date: 2019-03-01 08:16+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.8/applet.js:476
-#, fuzzy
 msgid "Icing Task Manager is deprecated"
-msgstr "Icing Task Manager"
+msgstr "Icing Task Manager är föråldrad"
 
 #: 3.8/applet.js:477
 msgid ""
 "Please upgrade to Grouped Window List for a more stable, bug-free experience."
 msgstr ""
+"Uppgradera till Grupperad fönsterlista för en stabilare, mer felfri "
+"upplevelse."
 
 #: 3.8/applet.js:478
 msgid ""
 "Add GWL to your panel, open the applet's settings and click \"Migrate Pinned "
 "Apps to Grouped Window List\"."
 msgstr ""
+"Lägg till GF i din panel, öppna panelprogrammets inställningar och klicka på "
+"\"Migrera fästa program till Grupperad fönsterlista\"."
 
 #: 3.8/applet.js:490
 msgid "Migration can only be performed on Cinnamon 4.0+."
-msgstr ""
+msgstr "Migrering kan bara utföras i Cinnamon 4.0+."
 
 #: 3.8/applet.js:501
 msgid ""
 "Please add Grouped Window List to a panel before proceeding with the "
 "migration."
 msgstr ""
+"Lägg till Grupperad fönsterlista i en panel innan du fortsätter med "
+"migreringen."
 
 #: 3.8/applet.js:509
 msgid "ITM settings directory could not be found!"
-msgstr ""
+msgstr "ITM inställningsmapp kunde inte hittas!"
 
 #: 3.8/applet.js:539
 msgid "System favorites enabled - no migration is needed."
-msgstr ""
+msgstr "Systemfavoriter aktiverat - Migrering behövs inte."
 
 #: 3.8/applet.js:582
 msgid "Unable to find a suitable ITM settings file to migrate."
-msgstr ""
+msgstr "Kan inte hitta passande ITM-inställningsfil att migrera."
 
 #: 3.8/applet.js:591
 msgid "Migration complete. "
-msgstr ""
+msgstr "Migrering slutförd. "
 
 #: 3.8/applet.js:591
 msgid " settings file(s) could not be migrated."
-msgstr ""
+msgstr " inställningsfile(er) kunde inte migreras."
 
 #: 3.8/applet.js:597
 msgid "Migration was successful."
-msgstr ""
+msgstr "Migreringen lyckades."
 
 #: 3.8/specialMenus.js:90 3.4/specialMenus.js:118
 msgid "Move to the other monitor"
@@ -74,7 +79,7 @@ msgstr "Flytta till andra skärmen"
 
 #: 3.8/specialMenus.js:90 3.4/specialMenus.js:118
 msgid "Move to monitor "
-msgstr "Flytta till skärm"
+msgstr "Flytta till skärm "
 
 #: 3.8/specialMenus.js:98 3.4/specialMenus.js:126
 msgid "Only on this workspace"
@@ -94,7 +99,7 @@ msgstr "Platser"
 
 #: 3.8/specialMenus.js:179 3.4/specialMenus.js:207
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
-msgstr ""
+msgstr "Bokmärken/Historik kräver gir1.2-gda-5.0"
 
 #: 3.8/specialMenus.js:199 3.4/specialMenus.js:227
 msgid "Recent"
@@ -117,9 +122,8 @@ msgid "Remove"
 msgstr "Ta bort"
 
 #: 3.8/specialMenus.js:259 3.4/specialMenus.js:287
-#, fuzzy
 msgid "New Window"
-msgstr "Inkludera alla programfönster"
+msgstr "Nytt fönster"
 
 #: 3.8/specialMenus.js:277 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
@@ -447,7 +451,7 @@ msgstr "Visa miniatyrer"
 #. 3.8->settings-schema.json->show-thumbnails->tooltip
 #. 3.4->settings-schema.json->show-thumbnails->tooltip
 msgid "Show window thumbnails when hovering over an app button."
-msgstr "Visa fönsterminiatyr vid hovring över en programknapp."
+msgstr "Visa fönsterminiatyr vid översvep på en programknapp."
 
 #. 2.8->settings-schema.json->animate-thumbnails->description
 #. 3.8->settings-schema.json->animate-thumbnails->description
@@ -519,7 +523,7 @@ msgstr ""
 
 #. 2.8->settings-schema.json->AppMenu->description
 msgid "Context Menu Settings"
-msgstr "Inställningar för kontextmenyn"
+msgstr "Inställningar för snabbtmenyn"
 
 #. 2.8->settings-schema.json->show-recent->description
 #. 3.8->settings-schema.json->show-recent->description
@@ -531,7 +535,7 @@ msgstr "Visa tidigare objekt"
 #. 3.8->settings-schema.json->show-recent->tooltip
 #. 3.4->settings-schema.json->show-recent->tooltip
 msgid "Controls whether recent items will appear in the context menu."
-msgstr "Avgör om tidigare objekt skall visas i kontextmenyn."
+msgstr "Avgör om tidigare objekt skall visas i snabbmenyn."
 
 #. 2.8->settings-schema.json->menuItemType->description
 #. 3.8->settings-schema.json->menuItemType->description
@@ -570,7 +574,7 @@ msgstr ""
 #. 3.8->settings-schema.json->firefox-menu->description
 #. 3.4->settings-schema.json->firefox-menu->description
 msgid "Firefox context menu"
-msgstr "Firefox kontextmeny"
+msgstr "Firefox snabbmeny"
 
 #. 2.8->settings-schema.json->firefox-menu->options
 #. 3.8->settings-schema.json->firefox-menu->options
@@ -610,7 +614,7 @@ msgstr "Visa autostartalternativ"
 #. 3.8->settings-schema.json->autostart-menu-item->tooltip
 #. 3.4->settings-schema.json->autostart-menu-item->tooltip
 msgid "Shows the autostart toggle option in an app's context menu."
-msgstr "Visar autostartalternativ i ett programs kontextmeny"
+msgstr "Visar autostartalternativ i ett programs snabbmeny."
 
 #. 2.8->settings-schema.json->monitor-move-all-windows->description
 #. 3.8->settings-schema.json->monitor-move-all-windows->description
@@ -625,25 +629,25 @@ msgid ""
 "When clicking \"Move to monitor\" in the context menu, this option will move "
 "all of an app's windows instead of just the last focused window from the app."
 msgstr ""
-"Vid klick på \"Flytta till skärm\" i kontextmenyn, flyttas alla öppna "
-"fönster från ett program, istället för enbart det senast fokuserade fönstret "
-"från det programmet."
+"Vid klick på \"Flytta till skärm\" i snabbmenyn, flyttas alla öppna fönster "
+"från ett program, istället för enbart det senast fokuserade fönstret från "
+"det programmet."
 
 #. 2.8->settings-schema.json->HoverPeek->description
 msgid "Hover Peek Settings"
-msgstr "Hovringsinställningar"
+msgstr "Översvepsinställningar"
 
 #. 2.8->settings-schema.json->enable-hover-peek->description
 #. 3.8->settings-schema.json->enable-hover-peek->description
 #. 3.4->settings-schema.json->enable-hover-peek->description
 msgid "Show windows when hovered over"
-msgstr "Visa fönster vid hovring"
+msgstr "Visa fönster vid översvep"
 
 #. 2.8->settings-schema.json->enable-hover-peek->tooltip
 #. 3.8->settings-schema.json->enable-hover-peek->tooltip
 #. 3.4->settings-schema.json->enable-hover-peek->tooltip
 msgid "Controls whether or not windows display when hovered over."
-msgstr "Avgör om fönster skall visas vid hovring över miniatyren."
+msgstr "Avgör om fönster skall visas vid översvep på miniatyren."
 
 #. 2.8->settings-schema.json->hover-peek-time->description
 #. 3.8->settings-schema.json->hover-peek-time->description
@@ -656,7 +660,7 @@ msgstr "Fönstertoningstid"
 #. 3.4->settings-schema.json->hover-peek-time->tooltip
 msgid "Controls how quickly a window will fade on hover."
 msgstr ""
-"Avgör hur fort ett fönster skall tonas in/ut vid hovring över miniatyren."
+"Avgör hur fort ett fönster skall tonas in/ut vid översvep på miniatyren."
 
 #. 2.8->settings-schema.json->hover-peek-opacity->units
 #. 3.8->settings-schema.json->hover-peek-opacity->units
@@ -674,7 +678,7 @@ msgstr "Fönsteropacitet"
 #. 3.8->settings-schema.json->hover-peek-opacity->tooltip
 #. 3.4->settings-schema.json->hover-peek-opacity->tooltip
 msgid "Opacity of the windows on hover."
-msgstr "Fönsteropacitet vid hovring"
+msgstr "Fönsteropacitet vid översvep."
 
 #. 2.8->settings-schema.json->ThemeSettings->description
 msgid "Theme Settings"
@@ -774,7 +778,7 @@ msgstr "Ange ikonstorlek"
 #. 3.8->settings-schema.json->hoverPseudoClass->description
 #. 3.4->settings-schema.json->hoverPseudoClass->description
 msgid "App button hover pseudo class"
-msgstr "Pseudoklass för programknapp vid hovring"
+msgstr "Pseudoklass för programknapp vid översvep"
 
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
@@ -786,7 +790,7 @@ msgstr "Pseudoklass för programknapp vid hovring"
 #. 3.4->settings-schema.json->focusPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
 msgid "hover"
-msgstr "hovring"
+msgstr "översvep"
 
 #. 2.8->settings-schema.json->hoverPseudoClass->options
 #. 2.8->settings-schema.json->focusPseudoClass->options
@@ -840,7 +844,7 @@ msgstr "markerad"
 #. 3.8->settings-schema.json->hoverPseudoClass->tooltip
 #. 3.4->settings-schema.json->hoverPseudoClass->tooltip
 msgid "Overrides the pseudo class for app buttons on hover."
-msgstr "Åsidosätter pseudoklassen för programknappar vid hovring."
+msgstr "Åsidosätter pseudoklassen för programknappar vid översvep."
 
 #. 2.8->settings-schema.json->focusPseudoClass->description
 #. 3.8->settings-schema.json->focusPseudoClass->description
@@ -872,7 +876,7 @@ msgstr "Använd panelstartklassen för fastnålade program"
 
 #. 2.8->settings-schema.json->panelLauncherClass->tooltip
 msgid "Enabling this helps with certain themes."
-msgstr "Aktivering hjälper i vissa teman"
+msgstr "Aktiverar denna hjälp i vissa teman."
 
 #. 2.8->settings-schema.json->close-button-style->description
 msgid "Allow themes to control the thumbnail close button"
@@ -882,7 +886,7 @@ msgstr "Låt teman kontrollera miniatyrens stängknapp"
 msgid ""
 "Controls whether or not the theme controls the window thumbnail's close "
 "button."
-msgstr "avgör om temat kontrollerar fönsterminiatyrers stängningsknapp."
+msgstr "Avgör om temat kontrollerar fönsterminiatyrers stängningsknapp."
 
 #. 2.8->settings-schema.json->useSystemTooltips->description
 msgid "Use system tooltips for closed apps"
@@ -893,13 +897,13 @@ msgid ""
 "Controls whether or not system tooltips are in use when hovering over closed "
 "pinned apps."
 msgstr ""
-"Avgör om systemets verktygsbeskrivningar används vid hovring över stängda "
+"Avgör om systemets verktygsbeskrivningar används vid översvep på stängda "
 "fastnålade program."
 
 #. 3.8->settings-schema.json->generalPage->title
 #. 3.4->settings-schema.json->generalPage->title
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 #. 3.8->settings-schema.json->panelPage->title
 #. 3.4->settings-schema.json->panelPage->title
@@ -916,7 +920,7 @@ msgstr "Miniatyrer"
 #. 3.8->settings-schema.json->contextMenuPage->title
 #. 3.4->settings-schema.json->contextMenuPage->title
 msgid "Context Menu"
-msgstr "Kontextmeny"
+msgstr "Snabbmeny"
 
 #. 3.8->settings-schema.json->themePage->title
 #. 3.4->settings-schema.json->themePage->title
@@ -926,7 +930,7 @@ msgstr "Temasättning"
 #. 3.8->settings-schema.json->generalSection->title
 #. 3.4->settings-schema.json->generalSection->title
 msgid "Behavior"
-msgstr ""
+msgstr "Beteende"
 
 #. 3.8->settings-schema.json->appButtonsSection->title
 #. 3.4->settings-schema.json->appButtonsSection->title
@@ -941,7 +945,7 @@ msgstr "Snabbtangenter"
 #. 3.8->settings-schema.json->hoverPeekSection->title
 #. 3.4->settings-schema.json->hoverPeekSection->title
 msgid "Hover Peek"
-msgstr "Hovringsminiatyr"
+msgstr "Översvepsminiatyr"
 
 #. 3.8->settings-schema.json->stylingSection->title
 #. 3.4->settings-schema.json->stylingSection->title
@@ -961,20 +965,19 @@ msgstr "Rekommenderade förinställningar"
 #. 3.8->settings-schema.json->scroll-behavior->description
 #. 3.4->settings-schema.json->scroll-behavior->description
 msgid "Mouse wheel scroll behavior"
-msgstr ""
+msgstr "Mushjulets rullningsbeteende"
 
 #. 3.8->settings-schema.json->scroll-behavior->options
 #. 3.4->settings-schema.json->scroll-behavior->options
 msgid "Cycle apps"
-msgstr ""
+msgstr "Cirkulera program"
 
 #. 3.8->settings-schema.json->scroll-behavior->options
 #. 3.8->settings-schema.json->left-click-action->options
 #. 3.4->settings-schema.json->scroll-behavior->options
 #. 3.4->settings-schema.json->left-click-action->options
-#, fuzzy
 msgid "Cycle windows"
-msgstr "Inkludera alla programfönster"
+msgstr "Cirkulera fönster"
 
 #. 3.8->settings-schema.json->scroll-behavior->tooltip
 #. 3.4->settings-schema.json->scroll-behavior->tooltip
@@ -982,6 +985,8 @@ msgid ""
 "Choose if scrolling the mouse wheel cycles running apps, an app button's "
 "windows on hover, or is disabled."
 msgstr ""
+"Välj om mushjulsrullning skall cirkulera aktiva programfönster, en "
+"programknapps fönster vid översvep eller inaktiveras."
 
 #. 3.8->settings-schema.json->left-click-action->description
 #. 3.8->settings-schema.json->left-click-action->tooltip
@@ -990,30 +995,29 @@ msgstr ""
 #. 3.4->settings-schema.json->left-click-action->tooltip
 #. 3.4->settings-schema.json->launcher-animation-effect->tooltip
 msgid "Left click action"
-msgstr ""
+msgstr "Åtgärd vid vänsterklick"
 
 #. 3.8->settings-schema.json->left-click-action->options
 #. 3.4->settings-schema.json->left-click-action->options
 msgid "Toggle activation of last focused window"
-msgstr ""
+msgstr "Växla på/av för senast fokuserade fönstret"
 
 #. 3.8->settings-schema.json->middle-click-action->description
 #. 3.8->settings-schema.json->middle-click-action->tooltip
 #. 3.4->settings-schema.json->middle-click-action->description
 #. 3.4->settings-schema.json->middle-click-action->tooltip
 msgid "Middle click action"
-msgstr ""
+msgstr "Åtgärd vid mushjulsklick"
 
 #. 3.8->settings-schema.json->middle-click-action->options
 #. 3.4->settings-schema.json->middle-click-action->options
 msgid "Launch new app instance"
-msgstr ""
+msgstr "Starta ny programinstans"
 
 #. 3.8->settings-schema.json->middle-click-action->options
 #. 3.4->settings-schema.json->middle-click-action->options
-#, fuzzy
 msgid "Close last focused window in group"
-msgstr "Färgmarkera det senast fokuserade fönstret i en programgrupp"
+msgstr "Stäng senast fokuserade fönster i gruppen"
 
 #. 3.8->settings-schema.json->system-favorites->description
 #. 3.4->settings-schema.json->system-favorites->description
@@ -1031,9 +1035,8 @@ msgstr ""
 #. 3.8->settings-schema.json->show-all-workspaces->tooltip
 #. 3.4->settings-schema.json->show-all-workspaces->description
 #. 3.4->settings-schema.json->show-all-workspaces->tooltip
-#, fuzzy
 msgid "Show windows from all workspaces"
-msgstr "Synlig på alla arbetsytor"
+msgstr "Visa fönster från alla arbetsytor"
 
 #. 3.8->settings-schema.json->enable-app-button-dragging->description
 #. 3.8->settings-schema.json->enable-app-button-dragging->tooltip
@@ -1045,17 +1048,17 @@ msgstr "Aktivera dra och släpp för programknappar"
 #. 3.8->settings-schema.json->launcher-animation-effect->description
 #. 3.4->settings-schema.json->launcher-animation-effect->description
 msgid "Launcher animation effect"
-msgstr ""
+msgstr "Startares animeringseffekt"
 
 #. 3.8->settings-schema.json->launcher-animation-effect->options
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Fade"
-msgstr ""
+msgstr "Tona"
 
 #. 3.8->settings-schema.json->launcher-animation-effect->options
 #. 3.4->settings-schema.json->launcher-animation-effect->options
 msgid "Scale"
-msgstr ""
+msgstr "Skala"
 
 #. 3.8->settings-schema.json->list-monitor-windows->description
 #. 3.4->settings-schema.json->list-monitor-windows->description
@@ -1117,7 +1120,7 @@ msgstr ""
 #. 3.8->settings-schema.json->thumbnail-scroll-behavior->description
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
 msgid "Cycle windows on mouse wheel scroll"
-msgstr ""
+msgstr "Cirkulera fönster vid mushjulsrullning"
 
 #. 3.8->settings-schema.json->thumbnail-scroll-behavior->tooltip
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
@@ -1125,17 +1128,18 @@ msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
+"Välj om mushjulsrullning skall cirkulera fönster vid översvep på en "
+"miniatyrmeny."
 
 #. 3.8->settings-schema.json->show-icons->description
 #. 3.4->settings-schema.json->show-icons->description
-#, fuzzy
 msgid "Show icons"
-msgstr "Inga ikoner"
+msgstr "Visa ikoner"
 
 #. 3.8->settings-schema.json->show-icons->tooltip
 #. 3.4->settings-schema.json->show-icons->tooltip
 msgid "Show the window's icon next to the title."
-msgstr ""
+msgstr "Visa fönsterikon intill titeln."
 
 #. 3.8->settings-schema.json->highlight-last-focused-thumbnail->description
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
@@ -1146,13 +1150,12 @@ msgstr "Färgmarkera det senast fokuserade fönstret i en programgrupp"
 #. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
 msgid ""
 "When enabled, the last window that was interacted with will be indicated."
-msgstr "Vid aktivering, indikeras det senast använda fönstret."
+msgstr "Vid aktivering indikeras det senast använda fönstret."
 
 #. 3.8->settings-schema.json->launch-new-instance-menu-item->description
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->description
-#, fuzzy
 msgid "Show new window option"
-msgstr "Visa autostartalternativ"
+msgstr "Visa alternativet \"Nytt fönster\""
 
 #. 3.8->settings-schema.json->launch-new-instance-menu-item->tooltip
 #. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
@@ -1160,6 +1163,8 @@ msgid ""
 "Shows the \"New Window\" option in an app's context menu if it doesn't "
 "already have one from the app's own action menu items."
 msgstr ""
+"Visar alternativet \"Nytt fönster\" i ett programs snabbmeny om det inte "
+"redan har ett från programmets egen åtgärdsmeny."
 
 #. 3.8->settings-schema.json->hoverPseudoClass->options
 #. 3.8->settings-schema.json->focusPseudoClass->options
@@ -1168,18 +1173,17 @@ msgstr ""
 #. 3.4->settings-schema.json->focusPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
 msgid "checked"
-msgstr ""
+msgstr "checkad"
 
 #. 3.8->settings-schema.json->app-button-transition-duration->units
 #. 3.4->settings-schema.json->app-button-transition-duration->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. 3.8->settings-schema.json->app-button-transition-duration->description
 #. 3.4->settings-schema.json->app-button-transition-duration->description
-#, fuzzy
 msgid "App button transition duration"
-msgstr "Programknappsbredd"
+msgstr "Övergångstid för programknapp"
 
 #. 3.8->settings-schema.json->app-button-transition-duration->tooltip
 #. 3.4->settings-schema.json->app-button-transition-duration->tooltip
@@ -1187,6 +1191,8 @@ msgid ""
 "Overrides the theme's animation time for app buttons. If set to zero, the "
 "theme's transition duration will be used."
 msgstr ""
+"Åsidosätter temats animeringstid för programknappar. Om värdet är noll "
+"kommer temats övergångstid att användas."
 
 #. 3.8->settings-schema.json->mintYPreset->description
 #. 3.8->settings-schema.json->mintYPreset->tooltip
@@ -1199,13 +1205,12 @@ msgstr "Mint Y och varianter"
 #. 3.8->settings-schema.json->mintXPreset->tooltip
 #. 3.4->settings-schema.json->mintXPreset->description
 #. 3.4->settings-schema.json->mintXPreset->tooltip
-#, fuzzy
 msgid "Mint X, Linux Mint, and Variants"
-msgstr "Mint Y och varianter"
+msgstr "Mint X, Linux Mint och varianter"
 
 #. 3.8->settings-schema.json->migrationButton->description
 msgid "Migrate Pinned Apps to Grouped Window List"
-msgstr ""
+msgstr "Migrera fästa program till Grupperad fönsterlista"
 
 #, fuzzy
 #~ msgid "Icing Task Manager is deprecated - please use Grouped Window List"
