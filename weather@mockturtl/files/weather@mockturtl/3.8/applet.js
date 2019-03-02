@@ -659,7 +659,7 @@ MyApplet.prototype = {
       if (this.weather.condition.main != null) {
         mainCondition = this.weather.condition.main;
         if (this._translateCondition) {
-          mainCondition = _(mainCondition);
+          mainCondition = this.capitalizeFirstLetter(_(mainCondition));
         }
       }
       // Condition Description
@@ -694,7 +694,7 @@ MyApplet.prototype = {
       if (iconname == null) {
         iconname = "weather-severe-alert";
       }
-      this._currentWeatherIcon.icon_name = iconname
+      this._currentWeatherIcon.icon_name = iconname;
       this._icon_type == St.IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
@@ -704,7 +704,6 @@ MyApplet.prototype = {
       if (this.weather.main.temperature != null) {
         temp = this.TempToUserUnits(this.weather.main.temperature);
         this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
-        this.log.Debug("Temperature: " + this.weather.main.temperature + " Kelvin is converted to " + temp + ' ' + this.unitToUnicode());
       }
 
       // Set Applet Label, even if the variables are empty
@@ -733,7 +732,7 @@ MyApplet.prototype = {
       
       // Wind
       let wind_direction = this.compassDirection(this.weather.wind.degree);
-      this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(this.weather.wind.speed) + ' ' + _(this._windSpeedUnit);
+      this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(this.weather.wind.speed) + ' ' + this._windSpeedUnit;
     
       // API Unique display
       switch (this._dataService) {
@@ -773,7 +772,6 @@ MyApplet.prototype = {
       }
 
       // Sunset/Sunrise
-      // gettext can't see these inline
       let sunriseText = "";
       let sunsetText = "";
       if (this.weather.sunrise != null && this.weather.sunset != null) {
@@ -814,15 +812,25 @@ MyApplet.prototype = {
 
         let first_temperature = this._temperatureHighFirst ? t_high : t_low;
         let second_temperature = this._temperatureHighFirst ? t_low : t_high;
+
+        // Weather Condition
         let comment = "";
         if (forecastData.condition.main != null && forecastData.condition.description != null) {
           if (this._shortConditions) {
-            comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
+            comment = this.capitalizeFirstLetter(forecastData.condition.main);
+            if (this._translateCondition) {
+              comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
+            }
           }
           else {
-            comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+            comment = this.capitalizeFirstLetter(forecastData.condition.description);
+            if (this._translateCondition) {
+              comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
+            }         
           }
         }
+
+        // Day Names
         let dayName = forecastData.dateTime;
         if (this.weather.location.timeZone != null) {
            this.log.Debug(dayName.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone}));
@@ -1229,9 +1237,72 @@ MyApplet.prototype = {
 // For Translators
 //
 
-const shortConditionLibrary = [_("Clouds"), _("Mist"), _("Thunderstorm"), _("Rain"), _("Snow"), _("Drizzle"), _("Haze"), _("Sleet"),
-_("Smoke"), _("Fog"), _("Sand"), _("Dust"), _("Sqalls"), _("Tornado"), _("Volcanic ash"), _("Clear Sky"), _("Sky is clear")];
+const openWeatherMapConditionLibrary = [
+  // Group 2xx: Thunderstorm
+  _("Thunderstorm with light rain"),
+  _("Thunderstorm with rain"),
+  _("Thunderstorm with heavy rain"),
+  _("Light thunderstorm"), 
+  _("Thunderstorm"),
+  _("Heavy thunderstorm"),
+  _("Ragged thunderstorm"),
+  _("Thunderstorm with light drizzle"),
+  _("Thunderstorm with drizzle"),
+  _("Thunderstorm with heavy drizzle"),
+  // Group 3xx: Drizzle
+  _("Light intensity drizzle"), 
+  _("Drizzle"),
+  _("Heavy intensity drizzle"),
+  _("Light intensity drizzle rain"),
+  _("Drizzle rain"),
+  _("Heavy intensity drizzle rain"),
+  _("Shower rain and drizzle"),
+  _("Heavy shower rain and drizzle"),
+  _("Shower drizzle"),
+  // Group 5xx: Rain
+  _("Light rain"),
+  _("Moderate rain"),
+  _("Heavy intensity rain"),
+  _("Very heavy rain"),
+  _("Extreme rain"),
+  _("Freezing rain"), 
+  _("Light intensity shower rain"), 
+  _("Shower rain"), 
+  _("Heavy intensity shower rain"), 
+  _("Ragged shower rain"), 
+  // Group 6xx: Snow 
+  _("Light snow"), 
+  _("Snow"), 
+  _("Heavy snow"), 
+  _("Sleet"), 
+  _("Shower sleet"), 
+  _("Light rain and snow"), 
+  _("Rain and snow"), 
+  _("Light shower snow"), 
+  _("Shower snow"), 
+  _("Heavy shower snow"), 
+  // Group 7xx: Atmosphere 
+  _("Mist"), 
+  _("Smoke"), 
+  _("Haze"), 
+  _("Sand, dust whirls"), 
+  _("Fog"), 
+  _("Sand"), 
+  _("Dust"), 
+  _("Volcanic ash"), 
+  _("Squalls"), 
+  _("Tornado"), 
+  // Group 800: Clear 
+  _("Clear"), 
+  _("Clear sky"), 
+  _("Sky is clear"),
+  // Group 80x: Clouds
+  _("Few clouds"),
+  _("Scattered clouds"),
+  _("Broken clouds"),
+  _("Overcast clouds")];
 
+  
 const icons = {
   clear_day: 'weather-clear',
   clear_night: 'weather-clear-night',
