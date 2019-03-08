@@ -25,11 +25,30 @@ const getFramedWindowPosition = function(metaWindow) {
   return [width, height, x, y];
 };
 
-const getWindowActorPosition = function(metaWindow) {
-  let metaWindowActor = metaWindow.get_compositor_private();
+const getWindowActorPosition = function(metaWindowActor) {
   let [x, y] = metaWindowActor.get_position();
   let [width, height] = metaWindowActor.get_size();
   return [width, height, x, y];
+};
+
+const getFocusState = function(metaWindow) {
+  if (!metaWindow || metaWindow.minimized) {
+      return false;
+  }
+
+  if (metaWindow.appears_focused) {
+      return true;
+  }
+
+  let transientHasFocus = false;
+  metaWindow.foreach_transient(function(transient) {
+      if (transient && transient.appears_focused) {
+          transientHasFocus = true;
+          return false;
+      }
+      return true;
+  });
+  return transientHasFocus;
 };
 
 class WindowSaverApplet extends IconApplet {
@@ -48,6 +67,7 @@ class WindowSaverApplet extends IconApplet {
     this.settings = new AppletSettings(this.state, metadata.uuid, instance_id);
     let settingsProps = [
       {key: 'windowStates', value: 'windowStates', cb: null},
+      {key: 'restartOccurred', value: 'restartOccurred', cb: null},
       {key: 'restoreOnMonitorChange', value: 'restoreOnMonitorChange', cb: null},
       {key: 'saveHotkey', value: 'saveHotkey', cb: this.onHotkeysChanged},
       {key: 'restoreHotkey', value: 'restoreHotkey', cb: this.onHotkeysChanged},
@@ -65,6 +85,8 @@ class WindowSaverApplet extends IconApplet {
     this.menuManager.addMenu(this.menu);
 
     this.monitorsChangedId = global.screen.connect_after('monitors-changed', () => this.onMonitorsChanged());
+    this.restartId = global.display.connect('restart', () => this.onRestart());
+    this.shutdownId = global.connect('shutdown', () => this.onShutdown());
 
     var item = new PopupIconMenuItem(_('Save'), 'media-floppy', IconType.SYMBOLIC);
     item.connect('activate', () => {
@@ -79,11 +101,26 @@ class WindowSaverApplet extends IconApplet {
     this.menu.addMenuItem(item);
 
     this.bindHotkeys();
+
+    if (this.state.restartOccurred) this.restoreWindows(false);
+  }
+
+  get windows() {
+    return global.window_group.get_children();
   }
 
   onMonitorsChanged() {
     if (!this.state.restoreOnMonitorChange) return;
-    setTimeout(() => this.restoreWindows(false), 2000);
+    setTimeout(() => this.restoreWindows(false), 4000);
+  }
+
+  onRestart() {
+    this.settings.setValue('restartOccurred', true);
+    this.saveWindows();
+  }
+
+  onShutdown() {
+    this.settings.setValue('restartOccurred', false);
   }
 
   onHotkeysChanged() {
@@ -106,9 +143,12 @@ class WindowSaverApplet extends IconApplet {
   }
 
   saveWindows() {
-    let windows = global.display.list_windows(0);
-    each(windows, (metaWindow) => {
-      let windowState = find(this.state.windowStates, function(window) {
+    let {windows, state} = this;
+    let {windowStates} = state;
+
+    each(windows, (metaWindowActor) => {
+      let metaWindow = metaWindowActor.meta_window;
+      let windowState = find(windowStates, function(window) {
         return metaWindow.get_xwindow() === window.id;
       });
 
@@ -116,11 +156,12 @@ class WindowSaverApplet extends IconApplet {
       if (metaWindow.decorated) {
         [width, height, x, y] = getFramedWindowPosition(metaWindow);
       } else {
-        [width, height, x, y] = getWindowActorPosition(metaWindow);
+        [width, height, x, y] = getWindowActorPosition(metaWindowActor);
       }
 
       let maximized = metaWindow.maximized_horizontally && metaWindow.maximized_vertically;
       let {minimized} = metaWindow;
+      let focused = getFocusState(metaWindow);
       if (windowState) {
         windowState.x = x;
         windowState.y = y;
@@ -128,32 +169,36 @@ class WindowSaverApplet extends IconApplet {
         windowState.height = height;
         windowState.maximized = maximized;
         windowState.minimized = minimized;
+        windowState.focused = focused;
       } else {
-        this.state.windowStates.push({
+        windowStates.push({
           x,
           y,
           width,
           height,
           maximized,
           minimized,
+          focused,
           id: metaWindow.get_xwindow()
         });
       }
     });
 
-    this.settings.setValue('windowStates', this.state.windowStates);
+    this.settings.setValue('windowStates', windowStates);
   }
 
   restoreWindows(userAction = true) {
-    let windows = global.display.list_windows(0);
-    let windowStates = [];
-    each(windows, (metaWindow) => {
-      let windowState = find(this.state.windowStates, function(window) {
+    let {windows, state} = this;
+    let {windowStates, restartOccurred} = state;
+    let newWindowStates = [];
+    each(windows, (metaWindowActor) => {
+      let metaWindow = metaWindowActor.meta_window;
+      let windowState = find(windowStates, function(window) {
         return metaWindow.get_xwindow() === window.id;
       });
       if (!windowState) return;
 
-      let {x, y, width, height, maximized, minimized} = windowState;
+      let {x, y, width, height, maximized, minimized, focused} = windowState;
 
       if (!maximized && (metaWindow.maximized_horizontally || metaWindow.maximized_vertically)) {
         metaWindow.unmaximize(MAXIMIZE_FLAGS);
@@ -171,21 +216,24 @@ class WindowSaverApplet extends IconApplet {
       if (minimized && !metaWindow.minimized) metaWindow.minimize();
       else if (!minimized && metaWindow.minimized) metaWindow.unminimize();
 
-      windowStates.push(windowState);
+      if (focused) metaWindow.activate(global.get_current_time());
+
+      newWindowStates.push(windowState);
     });
 
-    this.state.windowStates = windowStates;
-    this.settings.setValue('windowStates', this.state.windowStates);
+    this.settings.setValue('windowStates', newWindowStates);
+    if (restartOccurred) this.settings.setValue('restartOccurred', false);
   }
 
   on_applet_removed_from_panel() {
-    if (this.monitorsChangedId) global.screen.disconnect(this.monitorsChangedId)
+    if (this.monitorsChangedId) global.screen.disconnect(this.monitorsChangedId);
+    if (this.restartId) global.display.disconnect(this.restartId);
 
     this.unbindHotkeys();
     this.settings.finalize();
   }
 
-  on_applet_clicked(event) {
+  on_applet_clicked() {
     if (!this.menu) return;
     this.menu.toggle();
   }

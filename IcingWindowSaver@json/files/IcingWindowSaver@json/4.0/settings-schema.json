@@ -21,6 +21,10 @@
     "type": "generic",
     "default": []
   },
+  "restartOccurred": {
+    "type": "generic",
+    "default": false
+  },
   "saveHotkey": {
     "type": "keybinding",
     "default": "<Ctrl><Shift>S",
