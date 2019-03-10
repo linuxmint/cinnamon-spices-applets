@@ -105,7 +105,7 @@
     },
     "draw_border": {
         "type": "switch",
-        "default": false,
+        "default": true,
         "description": "Draw border"
     },
     "graph_width": {
@@ -129,12 +129,12 @@
     },
     "use_padding": {
         "type": "switch",
-        "default": false,
+        "default": true,
         "description": "Use custom applet padding"
     },
     "padding_lr": {
         "type": "spinbutton",
-        "default": 1,
+        "default": 3,
         "min": 0,
         "max": 100,
         "step": 1,
@@ -144,7 +144,7 @@
     },
     "padding_tb": {
         "type": "spinbutton",
-        "default": 1,
+        "default": 3,
         "min": 0,
         "max": 100,
         "step": 1,
