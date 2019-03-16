@@ -78,6 +78,8 @@ FeedApplet.prototype = {
 
     _init: function(metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+        // Check for dependencies up front
+        this._check_dependencies();
         // Initialize the settings early so we can use them
         this._init_settings();
         this.open_menu = null;
@@ -127,6 +129,28 @@ FeedApplet.prototype = {
                 Lang.bind(this, this._process_feeds));
 
         this.logger.debug("timer_id: " + this.timer_id);
+    },
+
+    notify_send: function(notification, iconPath) {
+        if (iconPath == null)
+            iconPath = this.appletPath + '/icon.png';
+        Util.spawnCommandLine('notify-send "' + notification + '" -i ' + iconPath);
+    },
+
+    notify_installation: function(packageName) {
+        this.notify_send(_("Please install the '%s' package.").format(packageName), null);
+    },
+
+    _check_feedparser: function(output) {
+        if (output == "FAIL") {
+            this.notify_installation('python-feedparser');
+            Util.spawnCommandLine("apturl apt://python-feedparser");
+        }
+    },
+
+    /* private function to check, confirm and install any dependencies */
+    _check_dependencies: function() {
+       Util.spawn_async(['python', APPLET_PATH + '/check_feedparser.py'], Lang.bind(this, this._check_feedparser));
     },
 
     /* private function that connects to the settings-schema and initializes the variables */

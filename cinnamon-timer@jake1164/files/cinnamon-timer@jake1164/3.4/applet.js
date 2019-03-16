@@ -41,8 +41,8 @@ MyApplet.prototype = {
 
     _init: function (orientation, panel_height, instance_id) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-
         try {
+            
             if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.2") >= 0) {
                 this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             }
@@ -64,6 +64,7 @@ MyApplet.prototype = {
                 this.doTick();
             }
             this.doUpdateUI();
+            
         }
         catch (e) {
             global.logError(e);
@@ -104,8 +105,32 @@ MyApplet.prototype = {
             null);
 
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-            "time_display_enable",
-            "time_display_enable",
+            "duration-display-enable",
+            "duration_display_enable",
+            this._on_settings_changed,
+            null);
+
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+            "alarmtime-display-enable",
+            "alarmtime_display_enable",
+            this._on_settings_changed,
+            null);
+
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+            "alarmtime-format-small",
+            "alarmtime_format_small",
+            this._on_settings_changed,
+            null);
+
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+            "alarmtime-format-large",
+            "alarmtime_format_large",
+            this._on_settings_changed,
+            null);
+
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+            "alarmtime-format-switchover",
+            "alarmtime_format_switchover",
             this._on_settings_changed,
             null);
 
@@ -170,7 +195,8 @@ MyApplet.prototype = {
                 // vertical
                 this.isHorizontal = false;
                 // No room in a vertical display to show the time label.
-                this.time_display_enable = false;
+                this.duration_display_enable = false;
+                this.alarmtime_display_enable = false;
             } else {
                 // horizontal
                 this.isHorizontal = true;
@@ -192,7 +218,7 @@ MyApplet.prototype = {
 
         this.buildTimePresetMenu();
 
-        this.timerMenuItem = new PopupMenu.PopupMenuItem(_("Minutes") + ": 0", { reactive: false });
+        this.timerMenuItem = new PopupMenu.PopupMenuItem("0 " + _("Hours") + "," + " 00 " + _("Minutes") + " " +_("and") + " 00 " + _("Seconds"), { reactive: false});
         this.menu.addMenuItem(this.timerMenuItem);
 
         this._timerSlider = new PopupMenu.PopupSliderMenuItem(0);
@@ -323,15 +349,37 @@ MyApplet.prototype = {
         let min = Math.floor((this.timerDuration % 3600) / 60);
         let sec = this.timerDuration % 60;
 
-        this.timerMenuItem.label.text = hr + " " + _("Hours") + "," + " " + min.pad(2) + " " + _("Minutes") + " " + _("and") + " " + sec.pad(2) + " " + _("Seconds");
-        let timeStr = hr + ":" + min.pad(2) + ":" + sec.pad(2);
-        this.set_applet_tooltip(_("Timer") + ":" + " " + timeStr);
+        let durationShortStr = hr + ":" + min.pad(2) + ":" + sec.pad(2);
+        let durationLongStr = hr + " " + _("Hours") + "," + " " + min.pad(2) + " " + _("Minutes") + " " + _("and") + " " + sec.pad(2) + " " + _("Seconds");
 
-        if (this.time_display_enable) {
+        let timeFormat = "%X";
+        if (this.timerDuration < this.alarmtime_format_switchover*60)
+            timeFormat = this.alarmtime_format_small;
+        else
+            timeFormat = this.alarmtime_format_large;
+
+        let alarmtimeExpectedStr = "";
+        if (this.timerDuration != 0)
+            alarmtimeExpectedStr = "[" + GLib.DateTime.new_now_local().add_seconds(this.timerDuration).format(timeFormat) + "]";
+
+        let alarmtimeStr = "";
+        if (!this.timerStopped)
+            alarmtimeStr = "[" + GLib.DateTime.new_from_unix_local(this.alarm_end/1000).format(timeFormat) + "]";
+
+        let applet_label = "";
+        if (this.duration_display_enable)
+            applet_label += durationShortStr;
+        if (this.alarmtime_display_enable)
+            applet_label += " " + alarmtimeStr;
+        
+        this.timerMenuItem.label.text = durationLongStr + " " + alarmtimeExpectedStr;
+        this.set_applet_tooltip(_("Timer") + ":" + " " + durationShortStr + " " + alarmtimeStr);
+
+        if (this.duration_display_enable || this.alarmtime_display_enable) {
             if (this.timerStopped && this.timerDuration == 0)
                 this.set_applet_label("");
             else
-                this.set_applet_label(timeStr);
+                this.set_applet_label(applet_label.trim());
         } else {
             this.set_applet_label("");
         }
@@ -353,6 +401,8 @@ MyApplet.prototype = {
                 Util.spawnCommandLine("play " + this.SoundPath);
             }
             catch (e) {
+                // spawnCommandLine does not actually throw exception when a sound fails to play
+                // ie. sox not installed.
                 global.logError(e);
             }
         }

@@ -1,0 +1,46 @@
+{
+    "head": {
+        "type": "header",
+        "description": "Settings for the Network Usage Applet (uses vnstati)"
+    },
+
+
+    "useExtendedDisplay": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Enable Extended Display Options",
+        "tooltip": "This is new option version 1.0.2"
+    },
+
+
+    "extendedDisplay" : {
+        "dependency": "useExtendedDisplay",
+        "type": "combobox",
+        "default": "classic",
+        "options": {
+            "Classic - Summary of Data Usage for last Days and Months" : "classic",
+            "Classic Plus - Classic with addition of breakdown by hour for last 24 hours": "classicPlus" ,
+            "Custom Display - requires enabling below": "userDefined"
+         },
+        "description" : "Type of Display - default 'classic'",
+        "tooltip": "This feature offers the Classic (original) display with optional of adding an hourly breakdown over the last 24 hours and an experimental option of a user defined string for vnstati when enabled below"
+   },
+
+    "useVnstatiCommandString": {
+        "dependency": "useExtendedDisplay",
+        "type": "checkbox",
+        "default": false,
+        "description": "Enable Custom Display Option",
+        "tooltip": "Check box"
+    },
+
+    "vnstatiCommandString": {
+        "dependency": "useVnstatiCommandString",
+        "type": "entry",
+        "default": "-vs",
+        "description": "Custom options to pass to vnstati - default is '-vs' ",
+        "tooltip": "The default is the options used for the extended display. Note: this is not the whole vnstati option string - the interface and output file options are added to it automatically. Please read the vnstati manual for further information on options avaiilable"
+    }
+
+}
+

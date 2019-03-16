@@ -1,0 +1,39 @@
+{
+  "layout": {
+    "type" : "layout",
+    "pages": ["generalPage"],
+    "generalPage": {
+      "type" : "page",
+      "title" : "General",
+      "sections": ["generalSection"]
+    },
+    "generalSection": {
+      "type" : "section",
+      "title" : "General",
+      "keys": [
+        "restoreOnMonitorChange",
+        "saveHotkey",
+        "restoreHotkey"
+      ]
+    }
+  },
+  "windowStates": {
+    "type": "generic",
+    "default": []
+  },
+  "saveHotkey": {
+    "type": "keybinding",
+    "default": "<Ctrl><Shift>S",
+    "description": "Global hotkey for saving window positions"
+  },
+  "restoreHotkey": {
+    "type": "keybinding",
+    "default": "<Ctrl><Shift>R",
+    "description": "Global hotkey for restoring window positions"
+  },
+  "restoreOnMonitorChange": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Restore windows on monitor change"
+  }
+}

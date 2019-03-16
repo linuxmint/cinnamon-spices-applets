@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-15 08:23-0500\n"
+"POT-Creation-Date: 2018-12-04 02:02-0600\n"
 "PO-Revision-Date: 2018-11-13 13:34+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
@@ -18,46 +18,63 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:44
-msgid "Dependency missing"
-msgstr "Manglende afhængighed"
-
-#: applet.js:45
-msgid "package"
-msgstr "pakke"
-
-#: applet.js:47
-msgid "Dependencies missing"
-msgstr "Manglende afhængigheder"
-
-#: applet.js:48
-msgid "packages"
-msgstr "pakker"
-
-#: applet.js:52
-msgid "Please install the "
-msgstr "Installér venligst"
-
-#: applet.js:52
-msgid " to use Window Position Saver."
-msgstr " for at bruge Vinduesplaceringgemmer"
-
 #. metadata.json->name
-#: applet.js:90
+#: 4.0/applet.js:29 3.6/applet.js:90
 msgid "Window Position Saver"
 msgstr "Vinduesplaceringgemmer"
 
-#: applet.js:98
+#: 4.0/applet.js:54 3.6/applet.js:98
 msgid "Save"
 msgstr "Gem"
 
-#: applet.js:104
+#: 4.0/applet.js:60 3.6/applet.js:104
 msgid "Restore"
 msgstr "Gendan"
+
+#: 3.6/applet.js:44
+msgid "Dependency missing"
+msgstr "Manglende afhængighed"
+
+#: 3.6/applet.js:45
+msgid "package"
+msgstr "pakke"
+
+#: 3.6/applet.js:47
+msgid "Dependencies missing"
+msgstr "Manglende afhængigheder"
+
+#: 3.6/applet.js:48
+msgid "packages"
+msgstr "pakker"
+
+#: 3.6/applet.js:52
+msgid "Please install the "
+msgstr "Installér venligst"
+
+#: 3.6/applet.js:52
+msgid " to use Window Position Saver."
+msgstr " for at bruge Vinduesplaceringgemmer"
 
 #. metadata.json->description
 msgid "Window position save and restore utility."
 msgstr "Gemmer og gendanner vinduesplacering."
+
+#. 4.0->settings-schema.json->generalPage->title
+#. 4.0->settings-schema.json->generalSection->title
+msgid "General"
+msgstr ""
+
+#. 4.0->settings-schema.json->saveHotkey->description
+msgid "Global hotkey for saving window positions"
+msgstr ""
+
+#. 4.0->settings-schema.json->restoreHotkey->description
+msgid "Global hotkey for restoring window positions"
+msgstr ""
+
+#. 4.0->settings-schema.json->restoreOnMonitorChange->description
+msgid "Restore windows on monitor change"
+msgstr ""
 
 #~ msgid "Window Saver"
 #~ msgstr "Vinduesplacering"

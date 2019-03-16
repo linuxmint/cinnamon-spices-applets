@@ -140,8 +140,8 @@ MyApplet.prototype = {
         let listedDesktopFiles = new Array();
         for (let y = 0; y < allApps.length; y++) {
             let app = allApps[y];
-            let entry = app.get_tree_entry();
-            let path = entry.get_desktop_file_path();
+            let info = app.get_app_info();
+            let path = info.get_filename();
             //Get Application Desktop Files
             for (var p = 0; p < compatible_Apps.length; p++) {
                 let desktopFile = compatible_Apps[p] + ".desktop";

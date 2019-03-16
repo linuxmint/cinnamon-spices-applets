@@ -1,0 +1,484 @@
+# SpicesUpdate@claudiux Applet POT File.
+# Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the Cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2019-01-02 13:30+0100\n"
+"PO-Revision-Date: 2019-01-31 23:33+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#: metadata.json:3
+msgid "Spices Update"
+msgstr "Spices Update"
+
+#: metadata.json:7
+msgid ""
+"Warns you when installed Spices (applets, desklets, extensions, themes) "
+"require an update or new Spices are available."
+msgstr ""
+"Le avisa cuando las Spices instaladas (applets, desklets, extensiones, "
+"temas) requieren una actualización o hay nuevas Spices disponibles."
+
+#: settings-schema.json:7
+msgid "Applets"
+msgstr "Applets"
+
+#: settings-schema.json:12
+msgid "Desklets"
+msgstr "Desklets"
+
+#: settings-schema.json:17
+msgid "Extensions"
+msgstr "Extensiones"
+
+#: settings-schema.json:22
+msgid "Themes"
+msgstr "Temas"
+
+#: settings-schema.json:27
+msgid "General"
+msgstr "General"
+
+#: settings-schema.json:32
+msgid "Checking"
+msgstr "Verificación"
+
+#: settings-schema.json:37
+msgid "Monitoring"
+msgstr "Monitoreo"
+
+#: settings-schema.json:72
+msgid "Frequency"
+msgstr "Frecuencia"
+
+#: settings-schema.json:77
+msgid "Notifications"
+msgstr "Notificaciones"
+
+#: settings-schema.json:82
+msgid "Display type"
+msgstr "Tipo de visualización"
+
+#: settings-schema.json:90
+msgid "Let regularly check if your applets are up to date"
+msgstr "Comprobar regularmente si sus applets están actualizadas."
+
+#: settings-schema.json:91
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr ""
+"Si las actualizaciones de applets no conciernen usted, desmarque esta "
+"casilla."
+
+#: settings-schema.json:98
+msgid "Let regularly check if new applets are available"
+msgstr "Comprobar regularmente si hay nuevos applets disponibles"
+
+#: settings-schema.json:99
+msgid "If new applets do not concern you, uncheck this box."
+msgstr "Si los nuevos applets no le conciernen, desactive esta casilla."
+
+#: settings-schema.json:103
+msgid "Refresh"
+msgstr "Actualizar"
+
+#: settings-schema.json:108
+msgid "Update these applets:"
+msgstr "Actualizar estas applets:"
+
+#: settings-schema.json:109
+msgid "If you do not want an applet to be checked, set it to FALSE."
+msgstr "Si no desea que se compruebe una applet, configúrela en FALSE."
+
+#: settings-schema.json:113
+msgid "Your Applets"
+msgstr "Sus applets"
+
+#: settings-schema.json:118
+msgid "Check for updates?"
+msgstr "¿Buscar actualizaciones?"
+
+#: settings-schema.json:127
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las applets."
+
+#: settings-schema.json:135
+msgid "Let regularly check if your desklets are up to date"
+msgstr "Comprobar regularmente si sus desklets están actualizadas."
+
+#: settings-schema.json:136
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr ""
+"Si las actualizaciones de desklets no conciernen usted, desmarque esta "
+"casilla."
+
+#: settings-schema.json:143
+msgid "Let regularly check if new desklets are available"
+msgstr "Comprobar regularmente si hay nuevos desklets disponibles"
+
+#: settings-schema.json:144
+msgid "If new desklets do not concern you, uncheck this box."
+msgstr "Si no le preocupan los nuevos desklets, desmarque esta casilla."
+
+#: settings-schema.json:153
+msgid "Update these desklets:"
+msgstr "Actualizar estas desklets:"
+
+#: settings-schema.json:154
+msgid "If you do not want a desklet to be checked, set it to FALSE."
+msgstr "Si no desea que se compruebe una desklet, configúrela en FALSE."
+
+#: settings-schema.json:158
+msgid "Your Desklets"
+msgstr "Sus Desklets"
+
+#: settings-schema.json:171
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las desklets."
+
+#: settings-schema.json:179
+msgid "Let regularly check if your extensions are up to date"
+msgstr "Comprobar regularmente si sus extenciones están actualizadas."
+
+#: settings-schema.json:180
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr ""
+"Si las actualizaciones de extensiones no conciernen usted, desmarque esta "
+"casilla."
+
+#: settings-schema.json:187
+msgid "Let regularly check if new extensions are available"
+msgstr "Comprobar regularmente si hay nuevas extensiones disponibles"
+
+#: settings-schema.json:188
+msgid "If new extensions do not concern you, uncheck this box."
+msgstr "Si las nuevas extensiones no le conciernen, desmarque esta casilla."
+
+#: settings-schema.json:197
+msgid "Update these extensions:"
+msgstr "Actualizar estas extensiones:"
+
+#: settings-schema.json:198
+msgid "If you do not want an extension to be checked, set it to FALSE."
+msgstr "Si no desea que se compruebe una extensión, configúrela en FALSE."
+
+#: settings-schema.json:202
+msgid "Your Extensions"
+msgstr "Sus Extensiones"
+
+#: settings-schema.json:215
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las extensiones."
+
+#: settings-schema.json:223
+msgid "Let regularly check if your themes are up to date"
+msgstr "Comprobar regularmente si sus temas están actualizados."
+
+#: settings-schema.json:224
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr ""
+"Si las actualizaciones de temas no conciernen usted, desmarque esta casilla."
+
+#: settings-schema.json:231
+msgid "Let regularly check if new themes are available"
+msgstr "Comprobar regularmente si hay nuevos temas disponibles."
+
+#: settings-schema.json:232
+msgid "If new themes do not concern you, uncheck this box."
+msgstr "Si los nuevos temas no le conciernen, desmarque esta casilla."
+
+#: settings-schema.json:241
+msgid "Update these themes:"
+msgstr "Actualizar estos temas:"
+
+#: settings-schema.json:242
+msgid "If you do not want a theme to be checked, set it to FALSE."
+msgstr "Si no desea que se compruebe un tema, configúrelo en FALSE."
+
+#: settings-schema.json:246
+msgid "Your Themes"
+msgstr "Sus Temas"
+
+#: settings-schema.json:259
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Abrir Ajustes de Cinnamon para gestionar todos los temas."
+
+#: settings-schema.json:269
+msgid "hours"
+msgstr "horas"
+
+#: settings-schema.json:270
+msgid "Time interval between two checks"
+msgstr "Intervalo de tiempo entre dos verificaciones"
+
+#: settings-schema.json:271
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Tenga en cuenta que la primera comprobación se realizará un minuto después "
+"de iniciar este applet."
+
+#: settings-schema.json:277
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr ""
+"Notifícame cambiando el ícono cuando las Spices necesiten una actualización."
+
+#: settings-schema.json:278
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"Al marcar esta casilla, permite que este applet modifique su icono para "
+"advertirle cuando al menos una de las Spices requiera una actualización."
+
+#: settings-schema.json:285
+msgid "The icon color when Spices need an update"
+msgstr "El color del icono cuando las Spices necesitan una actualización."
+
+#: settings-schema.json:286
+msgid "Click the button to select another color."
+msgstr "Haga clic en el botón para seleccionar otro color."
+
+#: settings-schema.json:292
+msgid "Show notification messages about Spices updates"
+msgstr "Mostrar mensajes de notificación sobre actualizaciones de especias"
+
+#: settings-schema.json:293
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Al marcar esta casilla, permite que este applet muestre mensajes sobre las "
+"actualizaciones de Spices en el visor de notificaciones."
+
+#: settings-schema.json:300
+msgid "Display the description of each update or new Spice"
+msgstr "Muestra la descripción de cada actualización o nueva Spice"
+
+#: settings-schema.json:301
+msgid ""
+"By checking this box, you'll know why an update is available, and get a "
+"description of any new Spice.\n"
+"This information will be displayed in English."
+msgstr ""
+"Al marcar esta casilla, sabrá usted por qué hay una actualización disponible "
+"y obtendrá una descripción de cualquier Spice nueva.\n"
+"Esta información se mostrará en inglés."
+
+#: settings-schema.json:308
+msgid "Show notification messages even if they are unchanged"
+msgstr "Mostrar mensajes de notificación incluso si no se han modificado."
+
+#: settings-schema.json:309
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Al marcar esta casilla, se mostrarán todos los mensajes de notificación, "
+"incluso si son idénticos a los anteriores."
+
+#: settings-schema.json:315
+msgid "Minimal (text only)"
+msgstr "Mínimo (sólo texto)"
+
+#: settings-schema.json:316
+msgid "With button opening the System Settings"
+msgstr "Con botón de apertura de la configuración del sistema."
+
+#: settings-schema.json:319
+msgid "Notification style"
+msgstr "Estilo de notificación"
+
+#: settings-schema.json:320
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With button opening the System Settings:\n"
+"\tNotifications also contain a button which has the same role of the menu "
+"one:\n"
+"\tOpen the Download tab in System Settings for the concerned type of Spices, "
+"with the Spices sorted by date."
+msgstr ""
+"Mínimo:\n"
+"\tMuestra notificaciones simples y cortas.\n"
+"Con el botón de apertura de la configuración del sistema:\n"
+"\n"
+"Las notificaciones también contienen un botón que tiene la misma función que "
+"el botón en el menú:\n"
+"Abra la pestaña Descargar en Configuración del sistema para el tipo "
+"correspondiente de Spices, con las Spices ordenadas por fecha."
+
+#: settings-schema.json:325
+msgid "Send a fake notification to test the style"
+msgstr "Enviar una notificación falsa para probar el estilo."
+
+#: settings-schema.json:332
+msgid "Classic - Icon and Text"
+msgstr "Clásico - Icono y texto"
+
+#: settings-schema.json:333
+msgid "Compact - Icon Only"
+msgstr "Compacto - Solo icono"
+
+#: settings-schema.json:335
+msgid "Type of Display"
+msgstr "Tipo de visualización"
+
+#: settings-schema.json:336
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Esta característica ofrece la visualización clásica (predeterminada) con "
+"icono y texto, y visualización compacta (solo icono)."
+
+#: settings-schema.json:342
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Oculta el ícono siempre que no haya nada que informar"
+
+#: settings-schema.json:343
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Al marcar esta casilla, si no hay nada que informar, el icono de Spices "
+"Update no aparece en el panel."
+
+#: applet.js:91
+msgid "Applet"
+msgstr "Applet"
+
+#: applet.js:92
+msgid "Desklet"
+msgstr "Desklet"
+
+#: applet.js:93
+msgid "Extension"
+msgstr "Extensión"
+
+#: applet.js:94
+msgid "Theme"
+msgstr "Tema"
+
+#: applet.js:99
+msgid "One desklet needs update:"
+msgstr "Una desklet necesita actualización:"
+
+#: applet.js:100
+msgid "One applet needs update:"
+msgstr "Una applet necesita actualización:"
+
+#: applet.js:101
+msgid "One extension needs update:"
+msgstr "Una extensión necesita actualización:"
+
+#: applet.js:102
+msgid "One theme needs update:"
+msgstr "Un tema necesita actualización:"
+
+#: applet.js:103
+msgid "Some desklets need update:"
+msgstr "Algunas desklets necesitan actualización:"
+
+#: applet.js:104
+msgid "Some applets need update:"
+msgstr "Algunas applets necesitan actualización:"
+
+#: applet.js:105
+msgid "Some extensions need update:"
+msgstr "Algunas extensiones necesitan actualización:"
+
+#: applet.js:106
+msgid "Some themes need update:"
+msgstr "Algunos temas necesitan actualización:"
+
+#: applet.js:107
+msgid "New desklet available:"
+msgstr "Nueva desklet disponible:"
+
+#: applet.js:108
+msgid "New applet available:"
+msgstr "Nueva applet disponible:"
+
+#: applet.js:109
+msgid "New extension available:"
+msgstr "Nueva extensión disponible:"
+
+#: applet.js:110
+msgid "New theme available:"
+msgstr "Nuevo tema disponible:"
+
+#: applet.js:111
+msgid "New desklets available:"
+msgstr "Nuevas desklets disponibles:"
+
+#: applet.js:112
+msgid "New applets available:"
+msgstr "Nuevas applets disponibles:"
+
+#: applet.js:113
+msgid "New extensions available:"
+msgstr "Nuevas extensiones disponibles:"
+
+#: applet.js:114
+msgid "New themes available:"
+msgstr "Nuevos temas disponibles:"
+
+#: applet.js:626
+msgid "With details here, when available."
+msgstr "Con detalles aquí, cuando estén disponibles."
+
+#: applet.js:627
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "No importa. Esta es una notificación FALSA, solo para la prueba."
+
+#: applet.js:898
+msgid "is fully functional."
+msgstr "es completamente funcional."
+
+#: applet.js:899
+msgid "All dependencies are installed"
+msgstr "Todas las dependencias están instaladas"
+
+#: applet.js:921
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Parece que le faltan algunos de los programas necesarios para que este "
+"applet tenga todas sus características."
+
+#: applet.js:922
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Ejecute, en la terminal recién abierta, los comandos:"
+
+#: applet.js:923
+msgid "Some dependencies are not installed!"
+msgstr "¡Algunas dependencias no están instaladas!"
+
+#: applet.js:1218
+msgid "(Description unavailable)"
+msgstr "(Descripción no disponible)"
+
+#: applet.js:1221
+msgid "(Refresh to see the description)"
+msgstr "(Actualiza para ver la descripción)"
+
+#: applet.js:1402
+msgid "Forget new Spices"
+msgstr "Olvidar las nuevas Spices"
+
+#: applet.js:1409
+msgid "Configure"
+msgstr "Configurar"

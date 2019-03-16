@@ -1,0 +1,228 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-30 20:10+0200\n"
+"PO-Revision-Date: 2018-12-02 02:58+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.6\n"
+
+#: providers.js:46
+msgid "CPU:"
+msgstr "CPU:"
+
+#: providers.js:68 providers.js:94
+msgid " MB"
+msgstr " MB"
+
+#: providers.js:73
+msgid "Memory:"
+msgstr "Memória:"
+
+#: providers.js:99
+msgid "Swap:"
+msgstr "Cserehely:"
+
+#: providers.js:135
+msgid " KB/s"
+msgstr " KB/s"
+
+#: providers.js:140
+msgid "Network D/U:"
+msgstr "Hálózat L/F:"
+
+#: providers.js:179
+msgid "Load average:"
+msgstr "Load átlag:"
+
+#. sysmonitor@orcus->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Szegély rajzolása"
+
+#. sysmonitor@orcus->settings-
+#. schema.json->mem_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->load_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->swap_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->net_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->cpu_override_graph_width->description
+msgid "Override graph width"
+msgstr "Grafikon szélességének megadása"
+
+#. sysmonitor@orcus->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Simább grafikon"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->description
+msgid "Graph width"
+msgstr "Grafikon szélessége"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->graph_width->units
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
+msgid "pixels"
+msgstr "képpont"
+
+#. sysmonitor@orcus->settings-schema.json->load_enabled->description
+#. sysmonitor@orcus->settings-schema.json->mem_enabled->description
+#. sysmonitor@orcus->settings-schema.json->swap_enabled->description
+#. sysmonitor@orcus->settings-schema.json->cpu_enabled->description
+#. sysmonitor@orcus->settings-schema.json->net_enabled->description
+msgid "Enable"
+msgstr "Engedélyezés"
+
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Szélső térköz"
+
+#. sysmonitor@orcus->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Kattintásra elindítandó alkalmazás"
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Egyéni kisalkalmazás térköz"
+
+#. sysmonitor@orcus->settings-schema.json->load->title
+msgid "Load"
+msgstr "Betöltés"
+
+#. sysmonitor@orcus->settings-schema.json->swap_c->title
+#. sysmonitor@orcus->settings-schema.json->cpu_c->title
+#. sysmonitor@orcus->settings-schema.json->load_c->title
+#. sysmonitor@orcus->settings-schema.json->net_c->title
+#. sysmonitor@orcus->settings-schema.json->common_c->title
+#. sysmonitor@orcus->settings-schema.json->mem_c->title
+msgid "Colors"
+msgstr "Színek"
+
+#. sysmonitor@orcus->settings-schema.json->swap_g->title
+#. sysmonitor@orcus->settings-schema.json->cpu_g->title
+#. sysmonitor@orcus->settings-schema.json->load_g->title
+#. sysmonitor@orcus->settings-schema.json->mem_g->title
+#. sysmonitor@orcus->settings-schema.json->common_g->title
+#. sysmonitor@orcus->settings-schema.json->net_g->title
+msgid "General"
+msgstr "Általános"
+
+#. sysmonitor@orcus->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "Memória"
+
+#. sysmonitor@orcus->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "CPU"
+
+#. sysmonitor@orcus->settings-schema.json->common->title
+msgid "Common"
+msgstr "Közös"
+
+#. sysmonitor@orcus->settings-schema.json->net->title
+msgid "Network"
+msgstr "Hálózat"
+
+#. sysmonitor@orcus->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "Cserehely"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Frissítés gyakorisága"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. sysmonitor@orcus->settings-schema.json->swap_color_0->description
+#. sysmonitor@orcus->settings-schema.json->mem_color_0->description
+msgid "Used color"
+msgstr "Használt szín"
+
+#. sysmonitor@orcus->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Szín"
+
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Felső és alsó térköz"
+
+#. sysmonitor@orcus->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Szegélyszín"
+
+#. sysmonitor@orcus->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Háttérszín"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "User szín"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Nice szín"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kernel szín"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "IOWait szín"
+
+#. sysmonitor@orcus->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Cached szín"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Közös grafikon szélessége"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"Amennyiben a kisalkalmazás függőleges Panelen jelenik meg, ez az érték "
+"beállítja a grafikon szélességét. A grafikon szélessége megegyezik a térköz "
+"értékével csökkentett Panel szélességgel"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Feltöltési szín"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Letöltési szín"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr ""
+"Megjeleníti a CPU, a memória, a cserehely, a hálózati leterheltséget és a "
+"load értékét grafikonokon"
+
+#. sysmonitor@orcus->metadata.json->name
+msgid "System Monitor"
+msgstr "Rendszerfigyelő"

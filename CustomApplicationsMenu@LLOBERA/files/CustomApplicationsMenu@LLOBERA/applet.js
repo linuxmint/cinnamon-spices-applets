@@ -135,11 +135,6 @@ MyApplet.prototype = {
         let appInfo = null;
         let desktopFile = application.desktopFile + ".desktop";
         let app = AppSys.lookup_app(desktopFile);
-        if (!app) {
-            // for cinnamon-settings for instance
-            app = AppSys.lookup_settings_app(desktopFile);
-        }
-
         if (app)
             appInfo = app.get_app_info();
         else {

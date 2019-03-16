@@ -1,0 +1,163 @@
+{
+  "head":
+  { "type": "header"
+  , "description": "Settings for weather@mockturtl 3.8"
+  }
+,  "keybinding":
+  { "type": "keybinding"
+  , "description": "Set the keybinding to call the menu"
+  , "default": "<Super><Shift>w"
+  },
+  "providerSettings":
+  { "type": "header"
+  , "description": "Weather Provider Settings"
+  }
+, "dataService":
+  { "type": "radiogroup"
+  , "default": "OpenWeatherMap"
+  , "description": "Data service"
+  , "options":
+    { 
+      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
+      "DarkSky": "DarkSky"
+    }
+  },
+  "apiKey":
+  { "type": "entry"
+  , "default": ""
+  , "description": "API Key"
+  , "tooltip": "Copy this from your account of the used Data service and paste it here."
+  },
+  "manualLocation":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Manual Location"
+  , "tooltip": "Enable this if your location is not accurate"
+  },
+  "location":
+  { "type": "entry"
+  , "default": "London,UK"
+  , "dependency": "manualLocation"
+  , "description": "Location"
+  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+},
+  "getLocation":
+  {
+    "type": "button",
+    "indent": true,
+    "description": "Setup API Key and Location",
+    "callback": "locationLookup",
+    "tooltip": "Opens webpage guide"
+  },
+  "personalSettings":
+  { "type": "header"
+  , "description": "Personal Settings"
+  }
+, "temperatureUnit":
+  { "type": "radiogroup"
+  , "default": "celsius"
+  , "description": "Temperature unit"
+  , "options":
+    { "celsius": "celsius"
+    , "fahrenheit": "fahrenheit"
+    }
+  }
+, "temperatureHighFirst":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show high temperature first in forecast"
+  }
+, "windSpeedUnit":
+  { "type": "combobox"
+  , "default": "kph"
+  , "description": "Wind speed unit"
+  , "options":
+    { "kph": "kph"
+    , "mph": "mph"
+    , "m/s": "m/s"
+    , "knots": "Knots"
+    }
+  },
+  "pressureUnit":
+  { "type": "combobox"
+  , "default": "hPa"
+  , "description": "Atmospheric pressure unit"
+  , "options":
+    { "hPa": "hPa"
+    , "in Hg": "in Hg"
+    , "mm Hg": "mm Hg"
+    , "psi": "psi"
+    , "at": "at"
+    , "atm": "atm"
+    , "Pa": "Pa"
+    }
+  }
+, "verticalOrientation":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Vertical orientation"
+  }
+, "showSunrise":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Show sunrise / sunset times"
+  }
+, "show24Hours":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Display time in 24 hour format"
+  }
+, "forecastDays":
+  { "type": "spinbutton"
+  , "default": 2
+  , "min": 2
+  , "max": 5
+  , "units": "days"
+  , "step": 1
+  , "description": "Forecast length"
+  }
+, "translateCondition":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Translate conditions"
+  },
+  "shortConditions":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Less verbose conditions"
+  }
+, "useSymbolicIcons":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Symbolic icons"
+  }
+, "showTextInPanel":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Display current temperature in panel"
+  }
+, "showCommentInPanel":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+  }
+, "locationLabelOverride":
+  { "type": "entry"
+  , "default": ""
+  , "description": "Override location label"
+  }
+, "refreshInterval":
+  { "type": "spinbutton"
+  , "default": 15
+  , "min": 5
+  , "max": 360
+  , "units": "minutes"
+  , "step": 5
+  , "description": "Update interval"
+  },
+  "credits": {
+    "type": "header",
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
+  }
+}
+

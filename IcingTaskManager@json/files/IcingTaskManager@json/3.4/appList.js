@@ -208,9 +208,6 @@ AppList.prototype = {
     for (let i = 0; i < favorites.length; i++) {
       let app = appSystem.lookup_app(favorites[i].id);
       if (!app) {
-        app = appSystem.lookup_settings_app(favorites[i].id);
-      }
-      if (!app) {
         continue;
       }
       this._windowAdded(this.metaWorkspace, null, app, true);

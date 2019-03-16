@@ -28,16 +28,9 @@ function _(str) {
    return Gettext.gettext(str);
 }
 
-
-function IconMenuItem(text, icon){
-    this._init(text, icon);
-}
-
-IconMenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    _init: function(text, icon){
-        PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
+class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(text, icon){
+        super();
 
         this.actor.add_style_class_name("xCenter-menuItem");
 
@@ -54,16 +47,9 @@ IconMenuItem.prototype = {
     }
 }
 
-
-function FolderTypeMenuItem(text, icon, location){
-    this._init(text, icon, location);
-}
-
-FolderTypeMenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    _init: function(text, icon, location){
-        PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
+class FolderTypeMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(text, icon, location){
+        super();
 
         this.actor.add_style_class_name("xCenter-menuItem");
 
@@ -77,17 +63,10 @@ FolderTypeMenuItem.prototype = {
     }
 }
 
-
-function VolumeMenuItem(volume, mounted) {
-    this._init(volume, mounted);
-}
-
-VolumeMenuItem.prototype = {
-    __proto__: IconMenuItem.prototype,
-
-    _init: function(volume, mounted) {
+class VolumeMenuItem extends IconMenuItem {
+    constructor(volume, mounted) {
         let icon = volume.get_icon();
-        IconMenuItem.prototype._init.call(this, volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
+        super(volume.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
 
         if ( mounted ) {
             let ejectIcon = new St.Icon({ icon_name: "media-eject", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR });
@@ -116,17 +95,8 @@ VolumeMenuItem.prototype = {
     }
 }
 
-
-function PlaceMenuItem(text, uri, iconName) {
-    this._init(text, uri, iconName);
-}
-
-PlaceMenuItem.prototype = {
-    __proto__: FolderTypeMenuItem.prototype,
-
-    _init: function(uri, text, iconName) {
-        this.uri = uri;
-
+class PlaceMenuItem extends FolderTypeMenuItem {
+    constructor(uri, text, iconName) {
         let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
 
         let icon;
@@ -139,30 +109,24 @@ PlaceMenuItem.prototype = {
 
         if ( !text ) text = fileInfo.get_name()
 
-        FolderTypeMenuItem.prototype._init.call(this, text, icon);
+        super(text, icon);
+
+        this.uri = uri;
 
         this.connect("activate", Lang.bind(this, this.launch));
-    },
+    }
 
-    launch: function(event) {
+    launch(event) {
         Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
     }
 }
 
-
-function MyApplet(metadata, orientation, panel_height, instanceId) {
-    this._init(metadata, orientation, panel_height, instanceId);
-}
-
-MyApplet.prototype = {
-    __proto__: Applet.TextIconApplet.prototype,
-
-    _init: function(metadata, orientation, panel_height, instanceId) {
+class MyApplet extends Applet.TextIconApplet {
+    constructor(metadata, orientation, panel_height, instanceId) {
         try {
-
+            super(orientation, panel_height, instanceId);
             this.metadata = metadata;
             this.instanceId = instanceId;
-            Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instanceId);
             this.setAllowedLayout(Applet.AllowedLayout.BOTH);
             this.on_orientation_changed(orientation);
 
@@ -189,29 +153,28 @@ MyApplet.prototype = {
             this.volumeMonitor.connect("mount-removed", Lang.bind(this, this.updateVolumes));
 
             this.buildMenu();
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    _onButtonPressEvent: function(actor, event) {
+    _onButtonPressEvent(actor, event) {
         if ( event.get_button() == 2 ) {
             let uri = this.getMiddleClickUri();
             if ( uri ) Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
         }
-        return Applet.Applet.prototype._onButtonPressEvent.call(this, actor, event);
-    },
+        return super._onButtonPressEvent(actor, event);
+    }
 
-    on_applet_clicked: function(event) {
+    on_applet_clicked(event) {
         this.menu.toggle();
-    },
+    }
 
-    on_applet_removed_from_panel: function() {
+    on_applet_removed_from_panel() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
-    },
+    }
 
-    on_orientation_changed: function(orientation) {
+    on_orientation_changed(orientation) {
         this.orientation = orientation;
         if (orientation == St.Side.LEFT || orientation == St.Side.RIGHT) {
             this.hide_applet_label(true);
@@ -219,13 +182,13 @@ MyApplet.prototype = {
         else {
             this.hide_applet_label(false);
         }
-    },
+    }
 
-    openMenu: function() {
+    openMenu() {
         this.menu.toggle();
-    },
+    }
 
-    bindSettings: function() {
+    bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.metadata.uuid, this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
@@ -244,18 +207,17 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
         this.setKeybinding();
-    },
+    }
 
-    setKeybinding: function() {
+    setKeybinding() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         if ( this.keyOpen == "" ) return;
         this.keyId = "placesCenter-open";
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
-    },
+    }
 
-    buildMenu: function() {
+    buildMenu() {
         try {
-
             if ( this.menu ) this.menu.destroy();
 
             menu_item_icon_size = this.iconSize;
@@ -367,13 +329,12 @@ MyApplet.prototype = {
 
                 this.buildRecentDocumentsSection();
             }
-
         } catch(e) {
             global.logError(e);
         }
-    },
+    }
 
-    buildUserSection: function() {
+    buildUserSection() {
         this.userSection.removeAll();
         this.trashItem = null;
 
@@ -396,9 +357,9 @@ MyApplet.prototype = {
 
         //trash
         this.buildTrashItem();
-    },
+    }
 
-    buildSystemSection: function() {
+    buildSystemSection() {
         this.systemSection.removeAll();
 
         //computer
@@ -435,9 +396,9 @@ MyApplet.prototype = {
                 bookmark.launch();
             }));
         }
-    },
+    }
 
-    buildCustomPlaces: function(list, container) {
+    buildCustomPlaces(list, container) {
         if ( list == "" ) return;
         let uris = [];
         let customPlace;
@@ -462,9 +423,9 @@ MyApplet.prototype = {
 
             } catch(e) { continue; }
         }
-    },
+    }
 
-    buildDevicesSection: function() {
+    buildDevicesSection() {
         this.devicesSection.removeAll();
 
         let volumes = this.volumeMonitor.get_volumes();
@@ -480,9 +441,9 @@ MyApplet.prototype = {
             let volumeMenuItem = new VolumeMenuItem(volume, mounted);
             this.devicesSection.addMenuItem(volumeMenuItem);
         }
-    },
+    }
 
-    buildRecentDocumentsSection: function() {
+    buildRecentDocumentsSection() {
         if ( !this.showRecentDocuments ) return;
         this.recentSection.removeAll();
 
@@ -500,17 +461,17 @@ MyApplet.prototype = {
                 Gio.app_info_launch_default_for_uri(recentInfo.get_uri(), global.create_app_launch_context());
             }))
         }
-    },
+    }
 
-    updateVolumes: function() {
+    updateVolumes() {
         if ( this.updatingDevices ) return;
         this.updatingDevices = true;
         this.buildDevicesSection();
         this.updatingDevices = false;
         this.buildUserSection();
-    },
+    }
 
-    buildTrashItem: function() {
+    buildTrashItem() {
         if ( this.trashItem ) this.trashItem.destroy();
         if ( this.showTrash == 0 ) return;
 
@@ -530,9 +491,9 @@ MyApplet.prototype = {
 
         this.trashItem = new PlaceMenuItem(uri, _("Trash"), iName);
         this.userSection.addMenuItem(this.trashItem);
-    },
+    }
 
-    setPanelIcon: function() {
+    setPanelIcon() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
              GLib.file_test(this.panelIcon, GLib.FileTest.EXISTS) ) ) {
@@ -544,14 +505,14 @@ MyApplet.prototype = {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_name("folder");
-    },
+    }
 
-    setPanelText: function() {
+    setPanelText() {
         if ( this.panelText ) this.set_applet_label(this.panelText);
         else this.set_applet_label("");
-    },
+    }
 
-    getMiddleClickUri: function() {
+    getMiddleClickUri() {
         if ( this.middleClickPath == "") return false;
 
         let path = this.middleClickPath.replace("~", GLib.get_home_dir());
@@ -563,16 +524,16 @@ MyApplet.prototype = {
         }
 
         return Gio.file_new_for_path(GLib.get_home_dir()).get_uri();
-    },
+    }
 
-    search: function(a, b, directory) {
+    search(a, b, directory) {
         this.menu.close();
         let command = this.metadata.path + "/search.py ";
         if ( directory ) command += directory;
         Util.spawnCommandLine(command);
-    },
+    }
 
-    set_applet_icon_symbolic_path: function(icon_path) {
+    set_applet_icon_symbolic_path(icon_path) {
         if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
 
         if (icon_path){

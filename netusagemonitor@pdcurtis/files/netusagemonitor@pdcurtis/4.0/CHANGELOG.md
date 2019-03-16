@@ -1,8 +1,24 @@
 ### Changelog covering recent significant changes
 
-## 3.2.6 
+## 3.2.9
+  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded and intrusive.
 
-  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion in folder 4.0
+## 3.2.8
+  * Change Multiversion to start with 3.2 folder to allow use of pages and sections in the settings file
+  * Change Settings to use pages and sections to give a tabbed layout (3.2 and higher).
+  * Provide options to choose different vnstati formats including a user specified format (3.2 and higher).
+  * Revert to internal function instead of Use ModalDialog.NotifyDialog (3.0 and lower).
+  * Update CHANGELOG.md and README.md
+
+## 3.2.7
+  * Add multiversion folder
+  * Use ModalDialog.NotifyDialog instead of internal function in newer version of cinnamon.
+  * Change location of vnstatImage to home folder rather than applet folder.
+  * Tidy us some of text in Notifications and trailing spaces
+
+## 3.2.6
+
+  * Changes for Cinnamon 4.0 and higher to avoid segfaults when old Network Manager Library is no longer available by using multiversion with folder 4.0
   * Remove Try-Catch as no longer required in 4.0 and associated changes.
   * It is believed that all Distributions packaging Cinnamon 4.0 have changed to the new Network Manager Libraries
   * Add cinnamon-version to metadata.json (Provides information on which Cinnamon versions can load it)
@@ -17,14 +33,14 @@
 ## 3.2.4
 
  * Change method of inhibiting display of vnstati image when vnstati not installed or enabled in settings by substituting a tiny image instead of use of an extra mainBox.
- * Improved notification when vnstat and vnstati not installed 
+ * Improved notification when vnstat and vnstati not installed
  * Better formatting of CHANGELOG.md
 
 ## 3.2.3
 
  * Add check that GTop library is installed using a try and catch(e) technique
  * Remove duplicate let declarations occurances missed in 3.2.0 which could give difficulties in Cinnamon 3.4
- * Some changes in intialisation to remove CJS warnings 
+ * Some changes in intialisation to remove CJS warnings
 
 ## 3.2.2
 

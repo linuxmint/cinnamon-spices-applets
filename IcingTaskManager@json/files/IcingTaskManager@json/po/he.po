@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-23 21:32-0600\n"
+"POT-Creation-Date: 2018-12-13 18:37-0600\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Pandiora <Pandiora@github.com>\n"
 "Language-Team: \n"
@@ -13,553 +13,228 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.4/specialMenus.js:118
+#: 3.8/applet.js:476
+#, fuzzy
+msgid "Icing Task Manager is deprecated"
+msgstr "Icing Task Manager"
+
+#: 3.8/applet.js:477
+msgid ""
+"Please upgrade to Grouped Window List for a more stable, bug-free experience."
+msgstr ""
+
+#: 3.8/applet.js:478
+msgid ""
+"Add GWL to your panel, open the applet's settings and click \"Migrate Pinned "
+"Apps to Grouped Window List\"."
+msgstr ""
+
+#: 3.8/applet.js:490
+msgid "Migration can only be performed on Cinnamon 4.0+."
+msgstr ""
+
+#: 3.8/applet.js:501
+msgid ""
+"Please add Grouped Window List to a panel before proceeding with the "
+"migration."
+msgstr ""
+
+#: 3.8/applet.js:509
+msgid "ITM settings directory could not be found!"
+msgstr ""
+
+#: 3.8/applet.js:539
+msgid "System favorites enabled - no migration is needed."
+msgstr ""
+
+#: 3.8/applet.js:582
+msgid "Unable to find a suitable ITM settings file to migrate."
+msgstr ""
+
+#: 3.8/applet.js:591
+msgid "Migration complete. "
+msgstr ""
+
+#: 3.8/applet.js:591
+msgid " settings file(s) could not be migrated."
+msgstr ""
+
+#: 3.8/applet.js:597
+msgid "Migration was successful."
+msgstr ""
+
+#: 3.8/specialMenus.js:90 3.4/specialMenus.js:118
 #, fuzzy
 msgid "Move to the other monitor"
 msgstr "העבר לשולחן עבודה %d"
 
-#: 3.4/specialMenus.js:118
+#: 3.8/specialMenus.js:90 3.4/specialMenus.js:118
 #, fuzzy
 msgid "Move to monitor "
 msgstr "העבר לשולחן עבודה %d"
 
-#: 3.4/specialMenus.js:126
+#: 3.8/specialMenus.js:98 3.4/specialMenus.js:126
 msgid "Only on this workspace"
 msgstr "רק בשולחן העבודה הזה"
 
-#: 3.4/specialMenus.js:133
+#: 3.8/specialMenus.js:105 3.4/specialMenus.js:133
 #, fuzzy
 msgid "Visible on all workspaces"
 msgstr "רק בשולחן העבודה הזה"
 
-#: 3.4/specialMenus.js:140
+#: 3.8/specialMenus.js:112 3.4/specialMenus.js:140
 #, fuzzy
 msgid "Move to another workspace"
 msgstr "העבר לשולחן עבודה השמאלי"
 
-#: 3.4/specialMenus.js:168
+#: 3.8/specialMenus.js:140 3.4/specialMenus.js:168
 msgid "Places"
 msgstr ""
 
-#: 3.4/specialMenus.js:207
+#: 3.8/specialMenus.js:179 3.4/specialMenus.js:207
 msgid "Bookmarks/History requires gir1.2-gda-5.0"
 msgstr ""
 
-#: 3.4/specialMenus.js:227
+#: 3.8/specialMenus.js:199 3.4/specialMenus.js:227
 #, fuzzy
 msgid "Recent"
 msgstr "אחוזים"
 
-#: 3.4/specialMenus.js:246
+#: 3.8/specialMenus.js:218 3.4/specialMenus.js:246
 msgid "Preferences"
 msgstr ""
 
-#: 3.4/specialMenus.js:249
+#: 3.8/specialMenus.js:221 3.4/specialMenus.js:249
 msgid "About..."
 msgstr ""
 
-#: 3.4/specialMenus.js:253
+#: 3.8/specialMenus.js:225 3.4/specialMenus.js:253
 msgid "Configure..."
 msgstr ""
 
-#: 3.4/specialMenus.js:257
+#: 3.8/specialMenus.js:229 3.4/specialMenus.js:257
 msgid "Remove"
 msgstr ""
 
-#: 3.4/specialMenus.js:287
+#: 3.8/specialMenus.js:259 3.4/specialMenus.js:287
 #, fuzzy
 msgid "New Window"
 msgstr "כלול את כל חלונות האפליקציה"
 
-#: 3.4/specialMenus.js:305
+#: 3.8/specialMenus.js:277 3.4/specialMenus.js:305
 msgid "Unpin from Panel"
 msgstr "בטל את ההצמדה מהשורת משימות"
 
-#: 3.4/specialMenus.js:305
+#: 3.8/specialMenus.js:277 3.4/specialMenus.js:305
 msgid "Pin to Panel"
 msgstr "הצמד לשורת משימות"
 
-#: 3.4/specialMenus.js:311
+#: 3.8/specialMenus.js:283 3.4/specialMenus.js:311
 msgid "Remove from Autostart"
 msgstr "הסר Autostart"
 
-#: 3.4/specialMenus.js:311
+#: 3.8/specialMenus.js:283 3.4/specialMenus.js:311
 msgid "Add to Autostart"
 msgstr "הוסף Autostart"
 
-#: 3.4/specialMenus.js:318
+#: 3.8/specialMenus.js:290 3.4/specialMenus.js:318
 msgid "Create Shortcut"
 msgstr "צור קיצור דרך"
 
-#: 3.4/specialMenus.js:329
+#: 3.8/specialMenus.js:301 3.4/specialMenus.js:329
 msgid "Restore to full opacity"
 msgstr ""
 
-#: 3.4/specialMenus.js:337
+#: 3.8/specialMenus.js:309 3.4/specialMenus.js:337
 msgid "Restore"
 msgstr "שחזר"
 
-#: 3.4/specialMenus.js:342
+#: 3.8/specialMenus.js:314 3.4/specialMenus.js:342
 msgid "Minimize"
 msgstr "מזער"
 
-#: 3.4/specialMenus.js:350
+#: 3.8/specialMenus.js:322 3.4/specialMenus.js:350
 msgid "Unmaximize"
 msgstr "הקטן חלון"
 
-#: 3.4/specialMenus.js:355
+#: 3.8/specialMenus.js:327 3.4/specialMenus.js:355
 msgid "Maximize"
 msgstr "הגדל"
 
-#: 3.4/specialMenus.js:365
+#: 3.8/specialMenus.js:337 3.4/specialMenus.js:365
 msgid "Close others"
 msgstr ""
 
-#: 3.4/specialMenus.js:375
+#: 3.8/specialMenus.js:347 3.4/specialMenus.js:375
 #, fuzzy
 msgid "Close all"
 msgstr "סגור הכל"
 
-#: 3.4/specialMenus.js:385
+#: 3.8/specialMenus.js:357 3.4/specialMenus.js:385
 msgid "Close"
 msgstr "סגור"
 
-#. 2.8->settings-schema.json->thumbnail-size->description
-#. 3.4->settings-schema.json->thumbnail-size->description
-msgid "Thumbnail size"
-msgstr "גודל תמונה ממוזערת"
-
-#. 2.8->settings-schema.json->thumbnail-size->tooltip
-#. 3.4->settings-schema.json->thumbnail-size->tooltip
-msgid "Controls the size of the thumbnails."
-msgstr "שולט בגודל של התמונות הממוזערות."
-
-# should not be set, just leave it blank and insert one white-space character
-#. 2.8->settings-schema.json->thumbnail-size->units
-#. 3.4->settings-schema.json->thumbnail-size->units
-msgid "size"
-msgstr " "
-
-#. 2.8->settings-schema.json->focusPseudoClass->description
-#. 3.4->settings-schema.json->focusPseudoClass->description
-msgid "App button focus pseudo class"
-msgstr "בכיתה פסאודו מוקד אפליקציה '"
-
-#. 2.8->settings-schema.json->focusPseudoClass->tooltip
-#. 3.4->settings-schema.json->focusPseudoClass->tooltip
-msgid "Overrides the pseudo class for app button on focus."
-msgstr "עוקף את הכיתה פסאודו עבור כפתור האפליקציה על המוקד."
-
-#. 2.8->settings-schema.json->focusPseudoClass->options
-#. 2.8->settings-schema.json->hoverPseudoClass->options
-#. 2.8->settings-schema.json->activePseudoClass->options
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
-msgid "active"
-msgstr ""
-
-#. 2.8->settings-schema.json->focusPseudoClass->options
-#. 2.8->settings-schema.json->hoverPseudoClass->options
-#. 2.8->settings-schema.json->activePseudoClass->options
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
-msgid "outlined"
-msgstr ""
-
-#. 2.8->settings-schema.json->focusPseudoClass->options
-#. 2.8->settings-schema.json->hoverPseudoClass->options
-#. 2.8->settings-schema.json->activePseudoClass->options
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
-msgid "hover"
-msgstr ""
-
-#. 2.8->settings-schema.json->focusPseudoClass->options
-#. 2.8->settings-schema.json->hoverPseudoClass->options
-#. 2.8->settings-schema.json->activePseudoClass->options
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
+#. metadata.json->description
 #, fuzzy
-msgid "focus"
-msgstr "רק בחלון שבפוקוס"
-
-#. 2.8->settings-schema.json->focusPseudoClass->options
-#. 2.8->settings-schema.json->hoverPseudoClass->options
-#. 2.8->settings-schema.json->activePseudoClass->options
-#. 3.4->settings-schema.json->focusPseudoClass->options
-#. 3.4->settings-schema.json->hoverPseudoClass->options
-#. 3.4->settings-schema.json->activePseudoClass->options
-msgid "selected"
+msgid "Window list with app grouping and thumbnails"
 msgstr ""
+"שורת משימות עם קיבוץ אפליקציות והצגת חלונות ממוזערים תכלס - כמו בווינדוס"
 
-#. 2.8->settings-schema.json->icon-spacing->description
-#. 3.4->settings-schema.json->icon-spacing->description
-msgid "Icon spacing"
-msgstr "מרווח אייקון"
+#. metadata.json->name
+msgid "Icing Task Manager"
+msgstr "Icing Task Manager"
 
-#. 2.8->settings-schema.json->icon-spacing->tooltip
-#. 3.4->settings-schema.json->icon-spacing->tooltip
-msgid "Controls how much space is between the icons."
-msgstr "בקרת כמה מקום הוא בין הסמלים."
-
-#. 2.8->settings-schema.json->icon-spacing->units
-#. 2.8->settings-schema.json->icon-size->units
-#. 2.8->settings-schema.json->icon-padding->units
-#. 3.4->settings-schema.json->icon-spacing->units
-#. 3.4->settings-schema.json->thumbnail-padding->units
-#. 3.4->settings-schema.json->icon-size->units
-#. 3.4->settings-schema.json->app-button-width->units
-#. 3.4->settings-schema.json->thumbnail-close-button-size->units
-#. 3.4->settings-schema.json->icon-padding->units
-msgid "px"
-msgstr ""
-
-#. 2.8->settings-schema.json->show-thumbnails->description
-#. 3.4->settings-schema.json->show-thumbnails->description
-msgid "Show thumbnails"
-msgstr "הראה תמונה ממוזערת"
-
-#. 2.8->settings-schema.json->show-thumbnails->tooltip
-#. 3.4->settings-schema.json->show-thumbnails->tooltip
-msgid "Show window thumbnails when hovering over an app button."
-msgstr "הראה תמונה ממוזערת של חלון פתוח בעת נגיעה בסמל שלו"
-
-#. 2.8->settings-schema.json->icon-size->description
-#. 3.4->settings-schema.json->icon-size->description
-msgid "Icon size"
-msgstr "גודל אייקון"
-
-#. 2.8->settings-schema.json->icon-size->tooltip
-#. 3.4->settings-schema.json->icon-size->tooltip
-msgid "Set icon size"
-msgstr "גודל גדר סמל"
-
-#. 2.8->settings-schema.json->hover-peek-time->description
-#. 3.4->settings-schema.json->hover-peek-time->description
-msgid "Window fade time"
-msgstr "זמן לאפקט"
-
-#. 2.8->settings-schema.json->hover-peek-time->tooltip
-#. 3.4->settings-schema.json->hover-peek-time->tooltip
-msgid "Controls how quickly a window will fade on hover."
-msgstr "תוך כמה זמן מהנגיעה בתמונה הממוזערת תופעל תצוגה מקדימה"
-
-#. 2.8->settings-schema.json->hover-peek-time->units
-#. 2.8->settings-schema.json->thumbnail-timeout->units
-#. 2.8->settings-schema.json->show-apps-order-timeout->units
-#. 3.4->settings-schema.json->hover-peek-time->units
-#. 3.4->settings-schema.json->thumbnail-timeout->units
-#. 3.4->settings-schema.json->show-apps-order-timeout->units
-msgid "milliseconds"
-msgstr "מילישניות"
-
-#. 2.8->settings-schema.json->close-button-style->description
-msgid "Allow themes to control the thumbnail close button"
-msgstr "אפשר נושאים לשלוט על לחצן התמונה הממוזערת קרוב"
-
-#. 2.8->settings-schema.json->close-button-style->tooltip
-msgid ""
-"Controls whether or not the theme controls the window thumbnail's close "
-"button."
-msgstr "קובע אם לאו הנושא שולט לחצן הסגירה של החלון הממוזער."
-
-#. 2.8->settings-schema.json->title-display->description
-#. 3.4->settings-schema.json->title-display->description
-msgid "Title display"
-msgstr "הצגת כותרת"
-
-#. 2.8->settings-schema.json->title-display->tooltip
-#. 3.4->settings-schema.json->title-display->tooltip
-msgid ""
-"focused: show focused window title, title: display the window title, app: "
-"diplay app name, none: don't display anything"
-msgstr ""
-"ממוקדת: תכנית ממוקדת כותרת החלון, הכותרת: להציג את כותרת החלון, האפליקציה: "
-"שם יישום תצוגה, בבול: לא יציג דבר"
-
-#. 2.8->settings-schema.json->title-display->options
-#. 2.8->settings-schema.json->number-display->options
-#. 3.4->settings-schema.json->title-display->options
-#. 3.4->settings-schema.json->launcher-animation-effect->options
-#. 3.4->settings-schema.json->number-display->options
-#. 3.4->settings-schema.json->middle-click-action->options
-#. 3.4->settings-schema.json->scroll-behavior->options
-#. 3.4->settings-schema.json->left-click-action->options
-msgid "None"
-msgstr "הסתר כותרת"
-
-#. 2.8->settings-schema.json->title-display->options
-#. 3.4->settings-schema.json->title-display->options
-msgid "Focused"
-msgstr "רק בחלון שבפוקוס"
-
-#. 2.8->settings-schema.json->title-display->options
-#. 3.4->settings-schema.json->title-display->options
-msgid "App"
-msgstr "אפליקציה"
-
-#. 2.8->settings-schema.json->title-display->options
-#. 3.4->settings-schema.json->title-display->options
-msgid "Title"
-msgstr "כותרת"
-
-#. 2.8->settings-schema.json->hoverPseudoClass->description
-#. 3.4->settings-schema.json->hoverPseudoClass->description
-msgid "App button hover pseudo class"
-msgstr "בכיתה פסאודו לרחף אפליקציה '"
-
-#. 2.8->settings-schema.json->hoverPseudoClass->tooltip
-#. 3.4->settings-schema.json->hoverPseudoClass->tooltip
-msgid "Overrides the pseudo class for app buttons on hover."
-msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה על לרחף."
-
-#. 2.8->settings-schema.json->show-alerts->description
-#. 3.4->settings-schema.json->show-alerts->description
-msgid "Show app alerts and notifications"
-msgstr "צג התראות אפליקציה והודעות"
-
-#. 2.8->settings-schema.json->show-alerts->tooltip
-#. 3.4->settings-schema.json->show-alerts->tooltip
-msgid "If enabled, notifications and alerts will appear."
-msgstr "אם מאופשר, הודעות והתראות תופענה."
-
-#. 2.8->settings-schema.json->pinOnDrag->description
-#. 2.8->settings-schema.json->pinOnDrag->tooltip
-#. 3.4->settings-schema.json->pinOnDrag->description
-#. 3.4->settings-schema.json->pinOnDrag->tooltip
-msgid "Pin apps when dragged to a new position"
-msgstr "הצמד את היישומים כאשר גררו למיקום חדש"
-
-#. 2.8->settings-schema.json->show-apps-order-hotkey->description
-#. 3.4->settings-schema.json->show-apps-order-hotkey->description
-msgid "Global hotkey to show the order of apps"
-msgstr "מקשי קיצור דרך עולמיים להראות את סדר האפליקציות"
-
-#. 2.8->settings-schema.json->show-apps-order-hotkey->tooltip
-#. 3.4->settings-schema.json->show-apps-order-hotkey->tooltip
-msgid ""
-"When triggered, the window count label will be replaced with its order in "
-"the app list temporarily."
-msgstr ""
-"כאשר מופעל, התווית חלון הספירה תוחלף מהזמנתו ברשימת היישומים באופן זמני."
-
-#. 2.8->settings-schema.json->menuItemType->description
-#. 3.4->settings-schema.json->menuItemType->description
-msgid "Menu item type"
-msgstr "סוג פריט בתפריט"
-
-#. 2.8->settings-schema.json->menuItemType->tooltip
-#. 3.4->settings-schema.json->menuItemType->tooltip
-msgid ""
-"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
-msgstr "קובע אם סמלי פריט בתפריט הם סמליים, הלא סמליים, או לא לראות."
-
-#. 2.8->settings-schema.json->menuItemType->options
-#. 3.4->settings-schema.json->menuItemType->options
-msgid "Symbolic icons"
-msgstr "סמלים סמליים"
-
-#. 2.8->settings-schema.json->menuItemType->options
-#. 3.4->settings-schema.json->menuItemType->options
-msgid "No icons"
-msgstr "לא נמצאו סמלים"
-
-#. 2.8->settings-schema.json->menuItemType->options
-#. 3.4->settings-schema.json->menuItemType->options
-msgid "Non-symbolic icons"
-msgstr "סמלים ללא סמלי"
-
-#. 2.8->settings-schema.json->hover-peek-opacity->description
-#. 3.4->settings-schema.json->hover-peek-opacity->description
-msgid "Window opacity"
-msgstr "שקיפות החלון"
-
-#. 2.8->settings-schema.json->hover-peek-opacity->tooltip
-#. 3.4->settings-schema.json->hover-peek-opacity->tooltip
-msgid "Opacity of the windows on hover."
-msgstr "שקיפות החלון בתצוגה מקדימה"
-
-#. 2.8->settings-schema.json->hover-peek-opacity->units
-#. 3.4->settings-schema.json->hover-peek-opacity->units
-msgid "percent"
-msgstr "אחוזים"
-
-#. 2.8->settings-schema.json->enable-hover-peek->description
-#. 3.4->settings-schema.json->enable-hover-peek->description
-msgid "Show windows when hovered over"
-msgstr "הצג חלונות כאשר ריחפה מעל"
-
-#. 2.8->settings-schema.json->enable-hover-peek->tooltip
-#. 3.4->settings-schema.json->enable-hover-peek->tooltip
-msgid "Controls whether or not windows display when hovered over."
-msgstr "הגדרה זו קובעת אם או לא להציג חלונות כאשר ריחפה מעל."
-
-#. 2.8->settings-schema.json->activePseudoClass->description
-#. 3.4->settings-schema.json->activePseudoClass->description
-msgid "App button active pseudo class"
-msgstr "App כפתור בכיתה פסאודו פעילה"
-
-#. 2.8->settings-schema.json->activePseudoClass->tooltip
-#. 3.4->settings-schema.json->activePseudoClass->tooltip
-msgid "Overrides the pseudo class for app buttons when they are active."
-msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה כאשר הם פעילים."
-
-#. 2.8->settings-schema.json->animate-thumbnails->description
-#. 3.4->settings-schema.json->animate-thumbnails->description
-msgid "Animate thumbnails"
-msgstr "הנפשת תמונות ממוזערות"
-
-#. 2.8->settings-schema.json->animate-thumbnails->tooltip
-#. 3.4->settings-schema.json->animate-thumbnails->tooltip
-msgid "If enabled, thumbnails will animate when appearing and disappearing."
-msgstr "אם מאופשר, תמונות ממוזערות יהיה להנפיש כאשר מופיעה ונעלמת."
-
-#. 2.8->settings-schema.json->autostart-menu-item->description
-#. 3.4->settings-schema.json->autostart-menu-item->description
-msgid "Show autostart option"
-msgstr "אפשרות autostart צג"
-
-#. 2.8->settings-schema.json->autostart-menu-item->tooltip
-#. 3.4->settings-schema.json->autostart-menu-item->tooltip
-msgid "Shows the autostart toggle option in an app's context menu."
-msgstr "מציג את האפשרות לעבור autostart ב תפריט ההקשר של יישום."
-
-#. 2.8->settings-schema.json->show-pinned->description
-#. 3.4->settings-schema.json->show-pinned->description
-msgid "Show pinned apps"
-msgstr "הראה אפליקציות צמודות (שאינן פועלות)"
-
-#. 2.8->settings-schema.json->show-pinned->tooltip
-#. 3.4->settings-schema.json->show-pinned->tooltip
-msgid ""
-"Controls whether or not the pinned apps appear in the panel if they are not "
-"open."
-msgstr "קובע אם לאו היישומים המוצמדים מופיעים בלוח אם הם אינם פתוחים."
-
-#. 2.8->settings-schema.json->useSystemTooltips->description
-msgid "Use system tooltips for closed apps"
-msgstr "השתמש ובטיפי מערכת עבור יישומים סגורים"
-
-#. 2.8->settings-schema.json->useSystemTooltips->tooltip
-msgid ""
-"Controls whether or not system tooltips are in use when hovering over closed "
-"pinned apps."
-msgstr ""
-"הגדרה זו קובע אם ובטיפי מערכת או לא נמצאים בשימוש כאשר מרחפים מעל יישומים "
-"מוצמדים סגורים."
+#. 2.8->settings-schema.json->ITM->description
+msgid "ITM Settings"
+msgstr "הגדרות ITM"
 
 #. 2.8->settings-schema.json->WindowList->description
 msgid "Window List Settings"
 msgstr "הגדרות של רשימת החלונות"
 
-#. 2.8->settings-schema.json->AppMenu->description
-msgid "Context Menu Settings"
-msgstr "הגדרות תפריט ההקשר"
-
-#. 2.8->settings-schema.json->Thumbnails->description
-msgid "Thumbnail Settings"
-msgstr "הגדרת התמונה ממוצערת"
-
-#. 2.8->settings-schema.json->show-recent->description
-#. 3.4->settings-schema.json->show-recent->description
-msgid "Show recent items"
-msgstr "הצג את הפריטים האחרונים"
-
-#. 2.8->settings-schema.json->show-recent->tooltip
-#. 3.4->settings-schema.json->show-recent->tooltip
-msgid "Controls whether recent items will appear in the context menu."
-msgstr "קובע אם הפריטים האחרונים יופיעו בתפריט ההקשר."
-
-#. 2.8->settings-schema.json->vertical-thumbnails->description
-#. 3.4->settings-schema.json->vertical-thumbnails->description
-msgid "Enable vertical thumbnails"
-msgstr "אפשר תמונות ממוזערות אנכיות"
-
-#. 2.8->settings-schema.json->vertical-thumbnails->tooltip
-#. 3.4->settings-schema.json->vertical-thumbnails->tooltip
-msgid "If enabled, thumbnails will stack vertically."
-msgstr "אם מאופשר, תמונות ממוזערות תהיינה מחסנית אנכית."
-
-#. 2.8->settings-schema.json->thumbnail-timeout->description
-#. 3.4->settings-schema.json->thumbnail-timeout->description
-msgid "Thumbnail timeout"
-msgstr "פסק זמן של תמונה ממוזערת"
-
-#. 2.8->settings-schema.json->thumbnail-timeout->tooltip
-#. 3.4->settings-schema.json->thumbnail-timeout->tooltip
-msgid ""
-"Controls how quickly an app's set of window thumbnails will fade out when "
-"the mouse leaves the app button."
-msgstr ""
-"כיצד הסט של אפליקציה במהירות של תמונות ממוזערות חלון יהיה לדהות כאשר העכבר "
-"עוזב את כפתור האפליקציה."
-
-#. 2.8->settings-schema.json->ThemeSettings->description
-msgid "Theme Settings"
-msgstr "הגדרות נושא"
-
-#. 2.8->settings-schema.json->onclick-thumbnails->description
-#. 3.4->settings-schema.json->onclick-thumbnails->description
-msgid "Open thumbnails on click"
-msgstr "תמונות ממוזערות דף בלחיצה"
-
-#. 2.8->settings-schema.json->onclick-thumbnails->tooltip
-#. 3.4->settings-schema.json->onclick-thumbnails->tooltip
-msgid "Open the thumbnails on click if there is more than one window open."
-msgstr "פתח את התמונות הממוזערות על קליק אם יש יותר מאחד חלון פתוח."
-
-#. 2.8->settings-schema.json->panelLauncherClass->description
-msgid "Use the panel launcher class for pinned apps"
-msgstr "השתמש בכיתה משגר לוח עבור יישומים המוצמדים"
-
-#. 2.8->settings-schema.json->panelLauncherClass->tooltip
-msgid "Enabling this helps with certain themes."
-msgstr "הפעלת המדיניות הזו מסייעת עם נושאים מסוימים."
-
-#. 2.8->settings-schema.json->include-all-windows->description
-#. 3.4->settings-schema.json->include-all-windows->description
-msgid "Include all app windows"
-msgstr "כלול את כל חלונות האפליקציה"
-
-#. 2.8->settings-schema.json->include-all-windows->tooltip
-#. 3.4->settings-schema.json->include-all-windows->tooltip
-msgid ""
-"Controls whether or not thumbnails for smalller child windows, such as exit "
-"confirmations and file dialogues will be included in the thumbnail list."
-msgstr ""
-"הגדרה זו קובעת אם או לא תמונות ממוזערות עבור חלונות ילד קטן, כגון אישורי "
-"יציאה ודיאלוגים קובץ ייכלל ברשימת ממוזערת."
-
-#. 2.8->settings-schema.json->cycleMenusHotkey->description
-#. 3.4->settings-schema.json->cycleMenusHotkey->description
-msgid "Global hotkey for cycling through thumbnail menus"
-msgstr "מקשי קיצור דרך עולמיים לרכיבה על אופניים דרך תפריטים ממוזערים"
-
-#. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
-#. 3.4->settings-schema.json->cycleMenusHotkey->tooltip
-msgid "This allows you to cycle through the menus without activating a window."
-msgstr "זה מאפשר לך לעבור בין התפריטים ללא הפעלת חלון."
-
-#. 2.8->settings-schema.json->enable-iconSize->description
-#. 3.4->settings-schema.json->enable-iconSize->description
-msgid "Adjust icon size"
-msgstr "התאם גודל סמל"
-
-#. 2.8->settings-schema.json->enable-iconSize->tooltip
-#. 3.4->settings-schema.json->enable-iconSize->tooltip
-msgid "Adjust icon size independent of Cinnamon's panel scaling."
-msgstr "התאם גודל סמל עצמאי של אבנית הלוח של הקינמון."
-
 #. 2.8->settings-schema.json->number-display->description
+#. 3.8->settings-schema.json->number-display->description
 #. 3.4->settings-schema.json->number-display->description
 msgid "Number display"
 msgstr "מספר שולחנות עבודה"
 
+#. 2.8->settings-schema.json->number-display->options
+#. 3.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "Smart"
+msgstr "חכם"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 3.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "Normal"
+msgstr "רגיל"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 2.8->settings-schema.json->title-display->options
+#. 3.8->settings-schema.json->number-display->options
+#. 3.8->settings-schema.json->title-display->options
+#. 3.8->settings-schema.json->scroll-behavior->options
+#. 3.8->settings-schema.json->left-click-action->options
+#. 3.8->settings-schema.json->middle-click-action->options
+#. 3.8->settings-schema.json->launcher-animation-effect->options
+#. 3.4->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
+#. 3.4->settings-schema.json->middle-click-action->options
+#. 3.4->settings-schema.json->launcher-animation-effect->options
+msgid "None"
+msgstr "הסתר כותרת"
+
+#. 2.8->settings-schema.json->number-display->options
+#. 3.8->settings-schema.json->number-display->options
+#. 3.4->settings-schema.json->number-display->options
+msgid "All"
+msgstr "הכל"
+
 #. 2.8->settings-schema.json->number-display->tooltip
+#. 3.8->settings-schema.json->number-display->tooltip
 #. 3.4->settings-schema.json->number-display->tooltip
 msgid ""
 "normal: display window number, smart: display window number if more than one "
@@ -569,42 +244,94 @@ msgstr ""
 "רגיל: הראה מספר חלון, חכם: הראה מספר חלון אם יש יותר מחלון חכם, כלום: אל "
 "תראה מספר חלון, הכל: הראה מספר חלון למועדפים"
 
-#. 2.8->settings-schema.json->number-display->options
-#. 3.4->settings-schema.json->number-display->options
-msgid "All"
-msgstr "הכל"
+#. 2.8->settings-schema.json->title-display->description
+#. 3.8->settings-schema.json->title-display->description
+#. 3.4->settings-schema.json->title-display->description
+msgid "Title display"
+msgstr "הצגת כותרת"
 
-#. 2.8->settings-schema.json->number-display->options
-#. 3.4->settings-schema.json->number-display->options
-msgid "Smart"
-msgstr "חכם"
+#. 2.8->settings-schema.json->title-display->options
+#. 3.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "App"
+msgstr "אפליקציה"
 
-#. 2.8->settings-schema.json->number-display->options
-#. 3.4->settings-schema.json->number-display->options
-msgid "Normal"
-msgstr "רגיל"
+#. 2.8->settings-schema.json->title-display->options
+#. 3.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "Title"
+msgstr "כותרת"
 
-#. 2.8->settings-schema.json->ITM->description
-msgid "ITM Settings"
-msgstr "הגדרות ITM"
+#. 2.8->settings-schema.json->title-display->options
+#. 3.8->settings-schema.json->title-display->options
+#. 3.4->settings-schema.json->title-display->options
+msgid "Focused"
+msgstr "רק בחלון שבפוקוס"
 
-#. 2.8->settings-schema.json->HoverPeek->description
-msgid "Hover Peek Settings"
-msgstr "הגדרות תצוגה מקדימה בנגיעה"
-
-#. 2.8->settings-schema.json->icon-padding->description
-#. 3.4->settings-schema.json->icon-padding->description
-msgid "Icon padding"
-msgstr "רווח מצדדי האיקונים"
-
-#. 2.8->settings-schema.json->icon-padding->tooltip
-#. 3.4->settings-schema.json->icon-padding->tooltip
+#. 2.8->settings-schema.json->title-display->tooltip
+#. 3.8->settings-schema.json->title-display->tooltip
+#. 3.4->settings-schema.json->title-display->tooltip
 msgid ""
-"Controls how much horizontal padding is inside the app buttons. Padding is "
-"only applied to instances of this applet on horizontal panels."
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
 msgstr ""
-"Controls כמה ריפוד אופקי הוא בתוך כפתורי האפליקציה. ריפוד מוחל רק על מקרים "
-"של יישומון זה על לוחות אופקיים."
+"ממוקדת: תכנית ממוקדת כותרת החלון, הכותרת: להציג את כותרת החלון, האפליקציה: "
+"שם יישום תצוגה, בבול: לא יציג דבר"
+
+#. 2.8->settings-schema.json->group-apps->description
+#. 3.8->settings-schema.json->group-apps->description
+#. 3.4->settings-schema.json->group-apps->description
+msgid "Group apps"
+msgstr "אפליקציות קבוצה"
+
+#. 2.8->settings-schema.json->group-apps->tooltip
+#. 3.8->settings-schema.json->group-apps->tooltip
+#. 3.4->settings-schema.json->group-apps->tooltip
+msgid "Group each app's set of windows."
+msgstr "קבוצה כל קבוצה של חלונות של האפליקציה."
+
+#. 2.8->settings-schema.json->show-alerts->description
+#. 3.8->settings-schema.json->show-alerts->description
+#. 3.4->settings-schema.json->show-alerts->description
+msgid "Show app alerts and notifications"
+msgstr "צג התראות אפליקציה והודעות"
+
+#. 2.8->settings-schema.json->show-alerts->tooltip
+#. 3.8->settings-schema.json->show-alerts->tooltip
+#. 3.4->settings-schema.json->show-alerts->tooltip
+msgid "If enabled, notifications and alerts will appear."
+msgstr "אם מאופשר, הודעות והתראות תופענה."
+
+#. 2.8->settings-schema.json->show-pinned->description
+#. 3.8->settings-schema.json->show-pinned->description
+#. 3.4->settings-schema.json->show-pinned->description
+msgid "Show pinned apps"
+msgstr "הראה אפליקציות צמודות (שאינן פועלות)"
+
+#. 2.8->settings-schema.json->show-pinned->tooltip
+#. 3.8->settings-schema.json->show-pinned->tooltip
+#. 3.4->settings-schema.json->show-pinned->tooltip
+msgid ""
+"Controls whether or not the pinned apps appear in the panel if they are not "
+"open."
+msgstr "קובע אם לאו היישומים המוצמדים מופיעים בלוח אם הם אינם פתוחים."
+
+#. 2.8->settings-schema.json->arrange-pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr "הזז אפליקציות צמודות"
+
+#. 2.8->settings-schema.json->arrange-pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order."
+msgstr "שנה את סדר האפליקציות הצמודות."
+
+#. 2.8->settings-schema.json->pinOnDrag->description
+#. 2.8->settings-schema.json->pinOnDrag->tooltip
+#. 3.8->settings-schema.json->pinOnDrag->description
+#. 3.8->settings-schema.json->pinOnDrag->tooltip
+#. 3.4->settings-schema.json->pinOnDrag->description
+#. 3.4->settings-schema.json->pinOnDrag->tooltip
+msgid "Pin apps when dragged to a new position"
+msgstr "הצמד את היישומים כאשר גררו למיקום חדש"
 
 #. 2.8->settings-schema.json->middle-click-action->description
 msgid "Middle clicking app buttons creates new app instances"
@@ -619,12 +346,252 @@ msgstr ""
 "קובע את ההתנהגות של לחיצות כפתור עכבר אמצעי על כפתורי אפליקציה. ההגדרה הזו "
 "השווא תסגור את החלון האחרון ממוקד מקבוצת האפליקציה בלחיצה באמצע."
 
+#. 2.8->settings-schema.json->cycleMenusHotkey->description
+#. 3.8->settings-schema.json->cycleMenusHotkey->description
+#. 3.4->settings-schema.json->cycleMenusHotkey->description
+msgid "Global hotkey for cycling through thumbnail menus"
+msgstr "מקשי קיצור דרך עולמיים לרכיבה על אופניים דרך תפריטים ממוזערים"
+
+#. 2.8->settings-schema.json->cycleMenusHotkey->tooltip
+#. 3.8->settings-schema.json->cycleMenusHotkey->tooltip
+#. 3.4->settings-schema.json->cycleMenusHotkey->tooltip
+msgid "This allows you to cycle through the menus without activating a window."
+msgstr "זה מאפשר לך לעבור בין התפריטים ללא הפעלת חלון."
+
+#. 2.8->settings-schema.json->show-apps-order-hotkey->description
+#. 3.8->settings-schema.json->show-apps-order-hotkey->description
+#. 3.4->settings-schema.json->show-apps-order-hotkey->description
+msgid "Global hotkey to show the order of apps"
+msgstr "מקשי קיצור דרך עולמיים להראות את סדר האפליקציות"
+
+#. 2.8->settings-schema.json->show-apps-order-hotkey->tooltip
+#. 3.8->settings-schema.json->show-apps-order-hotkey->tooltip
+#. 3.4->settings-schema.json->show-apps-order-hotkey->tooltip
+msgid ""
+"When triggered, the window count label will be replaced with its order in "
+"the app list temporarily."
+msgstr ""
+"כאשר מופעל, התווית חלון הספירה תוחלף מהזמנתו ברשימת היישומים באופן זמני."
+
+#. 2.8->settings-schema.json->show-apps-order-timeout->units
+#. 2.8->settings-schema.json->thumbnail-timeout->units
+#. 2.8->settings-schema.json->hover-peek-time->units
+#. 3.8->settings-schema.json->show-apps-order-timeout->units
+#. 3.8->settings-schema.json->thumbnail-timeout->units
+#. 3.8->settings-schema.json->hover-peek-time->units
+#. 3.4->settings-schema.json->show-apps-order-timeout->units
+#. 3.4->settings-schema.json->thumbnail-timeout->units
+#. 3.4->settings-schema.json->hover-peek-time->units
+msgid "milliseconds"
+msgstr "מילישניות"
+
+#. 2.8->settings-schema.json->show-apps-order-timeout->description
+#. 3.8->settings-schema.json->show-apps-order-timeout->description
+#. 3.4->settings-schema.json->show-apps-order-timeout->description
+msgid "Duration of the apps order display on hotkey press"
+msgstr "משך אפליקציות סדר תצוגה על עיתונות hotkey"
+
+#. 2.8->settings-schema.json->show-apps-order-timeout->tooltip
+#. 3.8->settings-schema.json->show-apps-order-timeout->tooltip
+#. 3.4->settings-schema.json->show-apps-order-timeout->tooltip
+msgid ""
+"Determines the duration the window count labels are replaced with the app's "
+"order number."
+msgstr ""
+"קובע את המשך זמן תוויות ספירת חלון מוחלפות עם מספר ההזמנה של האפליקציה."
+
+#. 2.8->settings-schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr "הגדרת התמונה ממוצערת"
+
+#. 2.8->settings-schema.json->thumbnail-timeout->description
+#. 3.8->settings-schema.json->thumbnail-timeout->description
+#. 3.4->settings-schema.json->thumbnail-timeout->description
+msgid "Thumbnail timeout"
+msgstr "פסק זמן של תמונה ממוזערת"
+
+#. 2.8->settings-schema.json->thumbnail-timeout->tooltip
+#. 3.8->settings-schema.json->thumbnail-timeout->tooltip
+#. 3.4->settings-schema.json->thumbnail-timeout->tooltip
+msgid ""
+"Controls how quickly an app's set of window thumbnails will fade out when "
+"the mouse leaves the app button."
+msgstr ""
+"כיצד הסט של אפליקציה במהירות של תמונות ממוזערות חלון יהיה לדהות כאשר העכבר "
+"עוזב את כפתור האפליקציה."
+
+# should not be set, just leave it blank and insert one white-space character
+#. 2.8->settings-schema.json->thumbnail-size->units
+#. 3.8->settings-schema.json->thumbnail-size->units
+#. 3.4->settings-schema.json->thumbnail-size->units
+msgid "size"
+msgstr " "
+
+#. 2.8->settings-schema.json->thumbnail-size->description
+#. 3.8->settings-schema.json->thumbnail-size->description
+#. 3.4->settings-schema.json->thumbnail-size->description
+msgid "Thumbnail size"
+msgstr "גודל תמונה ממוזערת"
+
+#. 2.8->settings-schema.json->thumbnail-size->tooltip
+#. 3.8->settings-schema.json->thumbnail-size->tooltip
+#. 3.4->settings-schema.json->thumbnail-size->tooltip
+msgid "Controls the size of the thumbnails."
+msgstr "שולט בגודל של התמונות הממוזערות."
+
+#. 2.8->settings-schema.json->show-thumbnails->description
+#. 3.8->settings-schema.json->show-thumbnails->description
+#. 3.4->settings-schema.json->show-thumbnails->description
+msgid "Show thumbnails"
+msgstr "הראה תמונה ממוזערת"
+
+#. 2.8->settings-schema.json->show-thumbnails->tooltip
+#. 3.8->settings-schema.json->show-thumbnails->tooltip
+#. 3.4->settings-schema.json->show-thumbnails->tooltip
+msgid "Show window thumbnails when hovering over an app button."
+msgstr "הראה תמונה ממוזערת של חלון פתוח בעת נגיעה בסמל שלו"
+
+#. 2.8->settings-schema.json->animate-thumbnails->description
+#. 3.8->settings-schema.json->animate-thumbnails->description
+#. 3.4->settings-schema.json->animate-thumbnails->description
+msgid "Animate thumbnails"
+msgstr "הנפשת תמונות ממוזערות"
+
+#. 2.8->settings-schema.json->animate-thumbnails->tooltip
+#. 3.8->settings-schema.json->animate-thumbnails->tooltip
+#. 3.4->settings-schema.json->animate-thumbnails->tooltip
+msgid "If enabled, thumbnails will animate when appearing and disappearing."
+msgstr "אם מאופשר, תמונות ממוזערות יהיה להנפיש כאשר מופיעה ונעלמת."
+
+#. 2.8->settings-schema.json->vertical-thumbnails->description
+#. 3.8->settings-schema.json->vertical-thumbnails->description
+#. 3.4->settings-schema.json->vertical-thumbnails->description
+msgid "Enable vertical thumbnails"
+msgstr "אפשר תמונות ממוזערות אנכיות"
+
+#. 2.8->settings-schema.json->vertical-thumbnails->tooltip
+#. 3.8->settings-schema.json->vertical-thumbnails->tooltip
+#. 3.4->settings-schema.json->vertical-thumbnails->tooltip
+msgid "If enabled, thumbnails will stack vertically."
+msgstr "אם מאופשר, תמונות ממוזערות תהיינה מחסנית אנכית."
+
+#. 2.8->settings-schema.json->sort-thumbnails->description
+#. 3.8->settings-schema.json->sort-thumbnails->description
+#. 3.4->settings-schema.json->sort-thumbnails->description
+msgid "Sort windows for each app by last focused"
+msgstr "חלונות מיין עבור כל יישום על ידי ממוקד האחרון"
+
+#. 2.8->settings-schema.json->sort-thumbnails->tooltip
+#. 3.8->settings-schema.json->sort-thumbnails->tooltip
+#. 3.4->settings-schema.json->sort-thumbnails->tooltip
+msgid ""
+"Controls whether the order windows appear for an app is by last focused, or "
+"the order they were opened."
+msgstr ""
+"הגדרה זו קובע אם ההסדר חלונות להופיע על אפליקציה הוא ממוקד האחרון, או בסדר "
+"פתיחתם."
+
+#. 2.8->settings-schema.json->onclick-thumbnails->description
+#. 3.8->settings-schema.json->onclick-thumbnails->description
+#. 3.4->settings-schema.json->onclick-thumbnails->description
+msgid "Open thumbnails on click"
+msgstr "תמונות ממוזערות דף בלחיצה"
+
+#. 2.8->settings-schema.json->onclick-thumbnails->tooltip
+#. 3.8->settings-schema.json->onclick-thumbnails->tooltip
+#. 3.4->settings-schema.json->onclick-thumbnails->tooltip
+msgid "Open the thumbnails on click if there is more than one window open."
+msgstr "פתח את התמונות הממוזערות על קליק אם יש יותר מאחד חלון פתוח."
+
+#. 2.8->settings-schema.json->include-all-windows->description
+#. 3.8->settings-schema.json->include-all-windows->description
+#. 3.4->settings-schema.json->include-all-windows->description
+msgid "Include all app windows"
+msgstr "כלול את כל חלונות האפליקציה"
+
+#. 2.8->settings-schema.json->include-all-windows->tooltip
+#. 3.8->settings-schema.json->include-all-windows->tooltip
+#. 3.4->settings-schema.json->include-all-windows->tooltip
+msgid ""
+"Controls whether or not thumbnails for smalller child windows, such as exit "
+"confirmations and file dialogues will be included in the thumbnail list."
+msgstr ""
+"הגדרה זו קובעת אם או לא תמונות ממוזערות עבור חלונות ילד קטן, כגון אישורי "
+"יציאה ודיאלוגים קובץ ייכלל ברשימת ממוזערת."
+
+#. 2.8->settings-schema.json->AppMenu->description
+msgid "Context Menu Settings"
+msgstr "הגדרות תפריט ההקשר"
+
+#. 2.8->settings-schema.json->show-recent->description
+#. 3.8->settings-schema.json->show-recent->description
+#. 3.4->settings-schema.json->show-recent->description
+msgid "Show recent items"
+msgstr "הצג את הפריטים האחרונים"
+
+#. 2.8->settings-schema.json->show-recent->tooltip
+#. 3.8->settings-schema.json->show-recent->tooltip
+#. 3.4->settings-schema.json->show-recent->tooltip
+msgid "Controls whether recent items will appear in the context menu."
+msgstr "קובע אם הפריטים האחרונים יופיעו בתפריט ההקשר."
+
+#. 2.8->settings-schema.json->menuItemType->description
+#. 3.8->settings-schema.json->menuItemType->description
+#. 3.4->settings-schema.json->menuItemType->description
+msgid "Menu item type"
+msgstr "סוג פריט בתפריט"
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "Symbolic icons"
+msgstr "סמלים סמליים"
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "Non-symbolic icons"
+msgstr "סמלים ללא סמלי"
+
+#. 2.8->settings-schema.json->menuItemType->options
+#. 3.8->settings-schema.json->menuItemType->options
+#. 3.4->settings-schema.json->menuItemType->options
+msgid "No icons"
+msgstr "לא נמצאו סמלים"
+
+#. 2.8->settings-schema.json->menuItemType->tooltip
+#. 3.8->settings-schema.json->menuItemType->tooltip
+#. 3.4->settings-schema.json->menuItemType->tooltip
+msgid ""
+"Determines whether menu item icons are symbolic, non-symbolic, or not shown."
+msgstr "קובע אם סמלי פריט בתפריט הם סמליים, הלא סמליים, או לא לראות."
+
 #. 2.8->settings-schema.json->firefox-menu->description
+#. 3.8->settings-schema.json->firefox-menu->description
 #. 3.4->settings-schema.json->firefox-menu->description
 msgid "Firefox context menu"
 msgstr "תפריט ההקשר פיירפוקס"
 
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Most Visited"
+msgstr "הכי מבוקרים"
+
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Recent History"
+msgstr "דפים אחרונים"
+
+#. 2.8->settings-schema.json->firefox-menu->options
+#. 3.8->settings-schema.json->firefox-menu->options
+#. 3.4->settings-schema.json->firefox-menu->options
+msgid "Bookmarks"
+msgstr "מועדפים"
+
 #. 2.8->settings-schema.json->firefox-menu->tooltip
+#. 3.8->settings-schema.json->firefox-menu->tooltip
 #. 3.4->settings-schema.json->firefox-menu->tooltip
 msgid ""
 "Most Visited: show the sites you visit most, Recent History: display the the "
@@ -633,20 +600,141 @@ msgstr ""
 "המבוקרים ביותר - האתרים שביקרת בהם הכי הרבה, האחרונים - האתרים האחרונים "
 "שביקרת בהם, מועדפים - מראה את המועדפים"
 
-#. 2.8->settings-schema.json->firefox-menu->options
-#. 3.4->settings-schema.json->firefox-menu->options
-msgid "Bookmarks"
-msgstr "מועדפים"
+#. 2.8->settings-schema.json->autostart-menu-item->description
+#. 3.8->settings-schema.json->autostart-menu-item->description
+#. 3.4->settings-schema.json->autostart-menu-item->description
+msgid "Show autostart option"
+msgstr "אפשרות autostart צג"
 
-#. 2.8->settings-schema.json->firefox-menu->options
-#. 3.4->settings-schema.json->firefox-menu->options
-msgid "Most Visited"
-msgstr "הכי מבוקרים"
+#. 2.8->settings-schema.json->autostart-menu-item->tooltip
+#. 3.8->settings-schema.json->autostart-menu-item->tooltip
+#. 3.4->settings-schema.json->autostart-menu-item->tooltip
+msgid "Shows the autostart toggle option in an app's context menu."
+msgstr "מציג את האפשרות לעבור autostart ב תפריט ההקשר של יישום."
 
-#. 2.8->settings-schema.json->firefox-menu->options
-#. 3.4->settings-schema.json->firefox-menu->options
-msgid "Recent History"
-msgstr "דפים אחרונים"
+#. 2.8->settings-schema.json->monitor-move-all-windows->description
+#. 3.8->settings-schema.json->monitor-move-all-windows->description
+#. 3.4->settings-schema.json->monitor-move-all-windows->description
+msgid "Apply the monitor move option to all windows"
+msgstr "החל את אפשרות המעבר לפקח על כל החלונות"
+
+#. 2.8->settings-schema.json->monitor-move-all-windows->tooltip
+#. 3.8->settings-schema.json->monitor-move-all-windows->tooltip
+#. 3.4->settings-schema.json->monitor-move-all-windows->tooltip
+msgid ""
+"When clicking \"Move to monitor\" in the context menu, this option will move "
+"all of an app's windows instead of just the last focused window from the app."
+msgstr ""
+"כאשר לחיצה \"הזז לפקח \" בתפריט ההקשר, אפשרות זו יעביר את כל חלונות של "
+"אפליקציה במקום רק את הממוקד האחרון חלון מהאפליקציה."
+
+#. 2.8->settings-schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr "הגדרות תצוגה מקדימה בנגיעה"
+
+#. 2.8->settings-schema.json->enable-hover-peek->description
+#. 3.8->settings-schema.json->enable-hover-peek->description
+#. 3.4->settings-schema.json->enable-hover-peek->description
+msgid "Show windows when hovered over"
+msgstr "הצג חלונות כאשר ריחפה מעל"
+
+#. 2.8->settings-schema.json->enable-hover-peek->tooltip
+#. 3.8->settings-schema.json->enable-hover-peek->tooltip
+#. 3.4->settings-schema.json->enable-hover-peek->tooltip
+msgid "Controls whether or not windows display when hovered over."
+msgstr "הגדרה זו קובעת אם או לא להציג חלונות כאשר ריחפה מעל."
+
+#. 2.8->settings-schema.json->hover-peek-time->description
+#. 3.8->settings-schema.json->hover-peek-time->description
+#. 3.4->settings-schema.json->hover-peek-time->description
+msgid "Window fade time"
+msgstr "זמן לאפקט"
+
+#. 2.8->settings-schema.json->hover-peek-time->tooltip
+#. 3.8->settings-schema.json->hover-peek-time->tooltip
+#. 3.4->settings-schema.json->hover-peek-time->tooltip
+msgid "Controls how quickly a window will fade on hover."
+msgstr "תוך כמה זמן מהנגיעה בתמונה הממוזערת תופעל תצוגה מקדימה"
+
+#. 2.8->settings-schema.json->hover-peek-opacity->units
+#. 3.8->settings-schema.json->hover-peek-opacity->units
+#. 3.4->settings-schema.json->hover-peek-opacity->units
+msgid "percent"
+msgstr "אחוזים"
+
+#. 2.8->settings-schema.json->hover-peek-opacity->description
+#. 3.8->settings-schema.json->hover-peek-opacity->description
+#. 3.4->settings-schema.json->hover-peek-opacity->description
+msgid "Window opacity"
+msgstr "שקיפות החלון"
+
+#. 2.8->settings-schema.json->hover-peek-opacity->tooltip
+#. 3.8->settings-schema.json->hover-peek-opacity->tooltip
+#. 3.4->settings-schema.json->hover-peek-opacity->tooltip
+msgid "Opacity of the windows on hover."
+msgstr "שקיפות החלון בתצוגה מקדימה"
+
+#. 2.8->settings-schema.json->ThemeSettings->description
+msgid "Theme Settings"
+msgstr "הגדרות נושא"
+
+#. 2.8->settings-schema.json->show-active->description
+#. 3.8->settings-schema.json->show-active->description
+#. 3.4->settings-schema.json->show-active->description
+msgid "Show active app indicators"
+msgstr "צג מחווני אפליקציה פעילים"
+
+#. 2.8->settings-schema.json->show-active->tooltip
+#. 3.8->settings-schema.json->show-active->tooltip
+#. 3.4->settings-schema.json->show-active->tooltip
+msgid "Active app styling will indicate if an app is active."
+msgstr "סטיילינג אפליקציות הפעיל יציין אם אפליקציה פעילה."
+
+#. 2.8->settings-schema.json->icon-spacing->units
+#. 2.8->settings-schema.json->icon-padding->units
+#. 2.8->settings-schema.json->icon-size->units
+#. 3.8->settings-schema.json->app-button-width->units
+#. 3.8->settings-schema.json->thumbnail-close-button-size->units
+#. 3.8->settings-schema.json->thumbnail-padding->units
+#. 3.8->settings-schema.json->icon-spacing->units
+#. 3.8->settings-schema.json->icon-padding->units
+#. 3.8->settings-schema.json->icon-size->units
+#. 3.4->settings-schema.json->app-button-width->units
+#. 3.4->settings-schema.json->thumbnail-close-button-size->units
+#. 3.4->settings-schema.json->thumbnail-padding->units
+#. 3.4->settings-schema.json->icon-spacing->units
+#. 3.4->settings-schema.json->icon-padding->units
+#. 3.4->settings-schema.json->icon-size->units
+msgid "px"
+msgstr ""
+
+#. 2.8->settings-schema.json->icon-spacing->description
+#. 3.8->settings-schema.json->icon-spacing->description
+#. 3.4->settings-schema.json->icon-spacing->description
+msgid "Icon spacing"
+msgstr "מרווח אייקון"
+
+#. 2.8->settings-schema.json->icon-spacing->tooltip
+#. 3.8->settings-schema.json->icon-spacing->tooltip
+#. 3.4->settings-schema.json->icon-spacing->tooltip
+msgid "Controls how much space is between the icons."
+msgstr "בקרת כמה מקום הוא בין הסמלים."
+
+#. 2.8->settings-schema.json->icon-padding->description
+#. 3.8->settings-schema.json->icon-padding->description
+#. 3.4->settings-schema.json->icon-padding->description
+msgid "Icon padding"
+msgstr "רווח מצדדי האיקונים"
+
+#. 2.8->settings-schema.json->icon-padding->tooltip
+#. 3.8->settings-schema.json->icon-padding->tooltip
+#. 3.4->settings-schema.json->icon-padding->tooltip
+msgid ""
+"Controls how much horizontal padding is inside the app buttons. Padding is "
+"only applied to instances of this applet on horizontal panels."
+msgstr ""
+"Controls כמה ריפוד אופקי הוא בתוך כפתורי האפליקציה. ריפוד מוחל רק על מקרים "
+"של יישומון זה על לוחות אופקיים."
 
 #. 2.8->settings-schema.json->themePadding->description
 msgid "Use theme padding to center button icons"
@@ -656,213 +744,351 @@ msgstr "השתמש ריפוד נושא למרכז סמלים כפתור"
 msgid "If button icons look off-centered, toggling this may help."
 msgstr "אם סמלים כפתורים נראים מחוץ מרוכזים, החלפה זה עשויה לעזור."
 
-#. 2.8->settings-schema.json->group-apps->description
-#. 3.4->settings-schema.json->group-apps->description
-msgid "Group apps"
-msgstr "אפליקציות קבוצה"
+#. 2.8->settings-schema.json->enable-iconSize->description
+#. 3.8->settings-schema.json->enable-iconSize->description
+#. 3.4->settings-schema.json->enable-iconSize->description
+msgid "Adjust icon size"
+msgstr "התאם גודל סמל"
 
-#. 2.8->settings-schema.json->group-apps->tooltip
-#. 3.4->settings-schema.json->group-apps->tooltip
-msgid "Group each app's set of windows."
-msgstr "קבוצה כל קבוצה של חלונות של האפליקציה."
+#. 2.8->settings-schema.json->enable-iconSize->tooltip
+#. 3.8->settings-schema.json->enable-iconSize->tooltip
+#. 3.4->settings-schema.json->enable-iconSize->tooltip
+msgid "Adjust icon size independent of Cinnamon's panel scaling."
+msgstr "התאם גודל סמל עצמאי של אבנית הלוח של הקינמון."
 
-#. 2.8->settings-schema.json->show-active->description
-#. 3.4->settings-schema.json->show-active->description
-msgid "Show active app indicators"
-msgstr "צג מחווני אפליקציה פעילים"
+#. 2.8->settings-schema.json->icon-size->description
+#. 3.8->settings-schema.json->icon-size->description
+#. 3.4->settings-schema.json->icon-size->description
+msgid "Icon size"
+msgstr "גודל אייקון"
 
-#. 2.8->settings-schema.json->show-active->tooltip
-#. 3.4->settings-schema.json->show-active->tooltip
-msgid "Active app styling will indicate if an app is active."
-msgstr "סטיילינג אפליקציות הפעיל יציין אם אפליקציה פעילה."
+#. 2.8->settings-schema.json->icon-size->tooltip
+#. 3.8->settings-schema.json->icon-size->tooltip
+#. 3.4->settings-schema.json->icon-size->tooltip
+msgid "Set icon size"
+msgstr "גודל גדר סמל"
 
-#. 2.8->settings-schema.json->show-apps-order-timeout->description
-#. 3.4->settings-schema.json->show-apps-order-timeout->description
-msgid "Duration of the apps order display on hotkey press"
-msgstr "משך אפליקציות סדר תצוגה על עיתונות hotkey"
+#. 2.8->settings-schema.json->hoverPseudoClass->description
+#. 3.8->settings-schema.json->hoverPseudoClass->description
+#. 3.4->settings-schema.json->hoverPseudoClass->description
+msgid "App button hover pseudo class"
+msgstr "בכיתה פסאודו לרחף אפליקציה '"
 
-#. 2.8->settings-schema.json->show-apps-order-timeout->tooltip
-#. 3.4->settings-schema.json->show-apps-order-timeout->tooltip
-msgid ""
-"Determines the duration the window count labels are replaced with the app's "
-"order number."
-msgstr ""
-"קובע את המשך זמן תוויות ספירת חלון מוחלפות עם מספר ההזמנה של האפליקציה."
-
-#. 2.8->settings-schema.json->arrange-pinnedApps->description
-msgid "Arrange pinned apps"
-msgstr "הזז אפליקציות צמודות"
-
-#. 2.8->settings-schema.json->arrange-pinnedApps->tooltip
-msgid "Arrange pinned apps into a different order."
-msgstr "שנה את סדר האפליקציות הצמודות."
-
-#. 2.8->settings-schema.json->monitor-move-all-windows->description
-#. 3.4->settings-schema.json->monitor-move-all-windows->description
-msgid "Apply the monitor move option to all windows"
-msgstr "החל את אפשרות המעבר לפקח על כל החלונות"
-
-#. 2.8->settings-schema.json->monitor-move-all-windows->tooltip
-#. 3.4->settings-schema.json->monitor-move-all-windows->tooltip
-msgid ""
-"When clicking \"Move to monitor\" in the context menu, this option will move "
-"all of an app's windows instead of just the last focused window from the app."
-msgstr ""
-"כאשר לחיצה \"הזז לפקח \" בתפריט ההקשר, אפשרות זו יעביר את כל חלונות של "
-"אפליקציה במקום רק את הממוקד האחרון חלון מהאפליקציה."
-
-#. 2.8->settings-schema.json->sort-thumbnails->description
-#. 3.4->settings-schema.json->sort-thumbnails->description
-msgid "Sort windows for each app by last focused"
-msgstr "חלונות מיין עבור כל יישום על ידי ממוקד האחרון"
-
-#. 2.8->settings-schema.json->sort-thumbnails->tooltip
-#. 3.4->settings-schema.json->sort-thumbnails->tooltip
-msgid ""
-"Controls whether the order windows appear for an app is by last focused, or "
-"the order they were opened."
-msgstr ""
-"הגדרה זו קובע אם ההסדר חלונות להופיע על אפליקציה הוא ממוקד האחרון, או בסדר "
-"פתיחתם."
-
-#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->hoverPseudoClass->options
+#. 2.8->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
 #. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
 #. 3.4->settings-schema.json->activePseudoClass->options
-msgid "checked"
+msgid "hover"
 msgstr ""
 
-#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
-msgid "Highlight the last focused window within an app group"
+#. 2.8->settings-schema.json->hoverPseudoClass->options
+#. 2.8->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+#, fuzzy
+msgid "focus"
+msgstr "רק בחלון שבפוקוס"
+
+#. 2.8->settings-schema.json->hoverPseudoClass->options
+#. 2.8->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "active"
 msgstr ""
 
-#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+#. 2.8->settings-schema.json->hoverPseudoClass->options
+#. 2.8->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "outlined"
+msgstr ""
+
+#. 2.8->settings-schema.json->hoverPseudoClass->options
+#. 2.8->settings-schema.json->focusPseudoClass->options
+#. 2.8->settings-schema.json->activePseudoClass->options
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "selected"
+msgstr ""
+
+#. 2.8->settings-schema.json->hoverPseudoClass->tooltip
+#. 3.8->settings-schema.json->hoverPseudoClass->tooltip
+#. 3.4->settings-schema.json->hoverPseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons on hover."
+msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה על לרחף."
+
+#. 2.8->settings-schema.json->focusPseudoClass->description
+#. 3.8->settings-schema.json->focusPseudoClass->description
+#. 3.4->settings-schema.json->focusPseudoClass->description
+msgid "App button focus pseudo class"
+msgstr "בכיתה פסאודו מוקד אפליקציה '"
+
+#. 2.8->settings-schema.json->focusPseudoClass->tooltip
+#. 3.8->settings-schema.json->focusPseudoClass->tooltip
+#. 3.4->settings-schema.json->focusPseudoClass->tooltip
+msgid "Overrides the pseudo class for app button on focus."
+msgstr "עוקף את הכיתה פסאודו עבור כפתור האפליקציה על המוקד."
+
+#. 2.8->settings-schema.json->activePseudoClass->description
+#. 3.8->settings-schema.json->activePseudoClass->description
+#. 3.4->settings-schema.json->activePseudoClass->description
+msgid "App button active pseudo class"
+msgstr "App כפתור בכיתה פסאודו פעילה"
+
+#. 2.8->settings-schema.json->activePseudoClass->tooltip
+#. 3.8->settings-schema.json->activePseudoClass->tooltip
+#. 3.4->settings-schema.json->activePseudoClass->tooltip
+msgid "Overrides the pseudo class for app buttons when they are active."
+msgstr "עוקף את הכיתה פסאודו לכפתורי אפליקציה כאשר הם פעילים."
+
+#. 2.8->settings-schema.json->panelLauncherClass->description
+msgid "Use the panel launcher class for pinned apps"
+msgstr "השתמש בכיתה משגר לוח עבור יישומים המוצמדים"
+
+#. 2.8->settings-schema.json->panelLauncherClass->tooltip
+msgid "Enabling this helps with certain themes."
+msgstr "הפעלת המדיניות הזו מסייעת עם נושאים מסוימים."
+
+#. 2.8->settings-schema.json->close-button-style->description
+msgid "Allow themes to control the thumbnail close button"
+msgstr "אפשר נושאים לשלוט על לחצן התמונה הממוזערת קרוב"
+
+#. 2.8->settings-schema.json->close-button-style->tooltip
 msgid ""
-"When enabled, the last window that was interacted with will be indicated."
-msgstr ""
+"Controls whether or not the theme controls the window thumbnail's close "
+"button."
+msgstr "קובע אם לאו הנושא שולט לחצן הסגירה של החלון הממוזער."
 
-#. 3.4->settings-schema.json->app-button-transition-duration->description
-msgid "App button transition duration"
-msgstr ""
-
-#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
-msgid ""
-"Overrides the theme's animation time for app buttons. If set to zero, the "
-"theme's transition duration will be used."
-msgstr ""
-
-#. 3.4->settings-schema.json->app-button-transition-duration->units
-msgid "ms"
-msgstr ""
-
-#. 3.4->settings-schema.json->thumbnail-padding->description
-#, fuzzy
-msgid "Thumbnail padding"
-msgstr "הגדרת התמונה ממוצערת"
-
-#. 3.4->settings-schema.json->thumbnail-padding->tooltip
-#, fuzzy
-msgid "Controls how much space will be around the window preview thumbnails."
-msgstr "בקרת כמה מקום הוא בין הסמלים."
-
-#. 3.4->settings-schema.json->system-favorites->description
-#, fuzzy
-msgid "Use system favorites for pinned apps"
+#. 2.8->settings-schema.json->useSystemTooltips->description
+msgid "Use system tooltips for closed apps"
 msgstr "השתמש ובטיפי מערכת עבור יישומים סגורים"
 
-#. 3.4->settings-schema.json->system-favorites->tooltip
-#, fuzzy
+#. 2.8->settings-schema.json->useSystemTooltips->tooltip
 msgid ""
-"Controls whether or not pinned apps consist of the system favorites list."
-msgstr "קובע אם לאו היישומים המוצמדים מופיעים בלוח אם הם אינם פתוחים."
+"Controls whether or not system tooltips are in use when hovering over closed "
+"pinned apps."
+msgstr ""
+"הגדרה זו קובע אם ובטיפי מערכת או לא נמצאים בשימוש כאשר מרחפים מעל יישומים "
+"מוצמדים סגורים."
 
-#. 3.4->settings-schema.json->generalSection->title
-msgid "Behavior"
+#. 3.8->settings-schema.json->generalPage->title
+#. 3.4->settings-schema.json->generalPage->title
+msgid "General"
 msgstr ""
 
+#. 3.8->settings-schema.json->panelPage->title
+#. 3.4->settings-schema.json->panelPage->title
+msgid "Panel"
+msgstr ""
+
+#. 3.8->settings-schema.json->thumbnailsPage->title
+#. 3.8->settings-schema.json->thumbnailsSection->title
 #. 3.4->settings-schema.json->thumbnailsPage->title
 #. 3.4->settings-schema.json->thumbnailsSection->title
 #, fuzzy
 msgid "Thumbnails"
 msgstr "גודל תמונה ממוזערת"
 
-#. 3.4->settings-schema.json->presetSection->title
-msgid "Recommended Presets"
-msgstr ""
-
-#. 3.4->settings-schema.json->appButtonsSection->title
-msgid "App Buttons"
-msgstr ""
-
-#. 3.4->settings-schema.json->generalPage->title
-msgid "General"
-msgstr ""
-
-#. 3.4->settings-schema.json->hoverPeekSection->title
-#, fuzzy
-msgid "Hover Peek"
-msgstr "הגדרות תצוגה מקדימה בנגיעה"
-
-#. 3.4->settings-schema.json->panelPage->title
-msgid "Panel"
-msgstr ""
-
-#. 3.4->settings-schema.json->iconSection->title
-#, fuzzy
-msgid "Icons"
-msgstr "גודל אייקון"
-
-#. 3.4->settings-schema.json->hotKeysSection->title
-msgid "Hot Keys"
-msgstr ""
-
-#. 3.4->settings-schema.json->stylingSection->title
-msgid "Styling"
-msgstr ""
-
+#. 3.8->settings-schema.json->contextMenuPage->title
 #. 3.4->settings-schema.json->contextMenuPage->title
 #, fuzzy
 msgid "Context Menu"
 msgstr "הגדרות תפריט ההקשר"
 
+#. 3.8->settings-schema.json->themePage->title
 #. 3.4->settings-schema.json->themePage->title
 #, fuzzy
 msgid "Theming"
 msgstr "הגדרות נושא"
 
-#. 3.4->settings-schema.json->mintYPreset->description
-#. 3.4->settings-schema.json->mintYPreset->tooltip
-msgid "Mint Y and Variants"
+#. 3.8->settings-schema.json->generalSection->title
+#. 3.4->settings-schema.json->generalSection->title
+msgid "Behavior"
 msgstr ""
 
-#. 3.4->settings-schema.json->show-icons->description
+#. 3.8->settings-schema.json->appButtonsSection->title
+#. 3.4->settings-schema.json->appButtonsSection->title
+msgid "App Buttons"
+msgstr ""
+
+#. 3.8->settings-schema.json->hotKeysSection->title
+#. 3.4->settings-schema.json->hotKeysSection->title
+msgid "Hot Keys"
+msgstr ""
+
+#. 3.8->settings-schema.json->hoverPeekSection->title
+#. 3.4->settings-schema.json->hoverPeekSection->title
 #, fuzzy
-msgid "Show icons"
-msgstr "לא נמצאו סמלים"
+msgid "Hover Peek"
+msgstr "הגדרות תצוגה מקדימה בנגיעה"
 
-#. 3.4->settings-schema.json->show-icons->tooltip
-msgid "Show the window's icon next to the title."
+#. 3.8->settings-schema.json->stylingSection->title
+#. 3.4->settings-schema.json->stylingSection->title
+msgid "Styling"
 msgstr ""
 
+#. 3.8->settings-schema.json->iconSection->title
+#. 3.4->settings-schema.json->iconSection->title
+#, fuzzy
+msgid "Icons"
+msgstr "גודל אייקון"
+
+#. 3.8->settings-schema.json->presetSection->title
+#. 3.4->settings-schema.json->presetSection->title
+msgid "Recommended Presets"
+msgstr ""
+
+#. 3.8->settings-schema.json->scroll-behavior->description
+#. 3.4->settings-schema.json->scroll-behavior->description
+msgid "Mouse wheel scroll behavior"
+msgstr ""
+
+#. 3.8->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->scroll-behavior->options
+msgid "Cycle apps"
+msgstr ""
+
+#. 3.8->settings-schema.json->scroll-behavior->options
+#. 3.8->settings-schema.json->left-click-action->options
+#. 3.4->settings-schema.json->scroll-behavior->options
+#. 3.4->settings-schema.json->left-click-action->options
+#, fuzzy
+msgid "Cycle windows"
+msgstr "כלול את כל חלונות האפליקציה"
+
+#. 3.8->settings-schema.json->scroll-behavior->tooltip
+#. 3.4->settings-schema.json->scroll-behavior->tooltip
+msgid ""
+"Choose if scrolling the mouse wheel cycles running apps, an app button's "
+"windows on hover, or is disabled."
+msgstr ""
+
+#. 3.8->settings-schema.json->left-click-action->description
+#. 3.8->settings-schema.json->left-click-action->tooltip
+#. 3.8->settings-schema.json->launcher-animation-effect->tooltip
+#. 3.4->settings-schema.json->left-click-action->description
+#. 3.4->settings-schema.json->left-click-action->tooltip
+#. 3.4->settings-schema.json->launcher-animation-effect->tooltip
+msgid "Left click action"
+msgstr ""
+
+#. 3.8->settings-schema.json->left-click-action->options
+#. 3.4->settings-schema.json->left-click-action->options
+msgid "Toggle activation of last focused window"
+msgstr ""
+
+#. 3.8->settings-schema.json->middle-click-action->description
+#. 3.8->settings-schema.json->middle-click-action->tooltip
+#. 3.4->settings-schema.json->middle-click-action->description
+#. 3.4->settings-schema.json->middle-click-action->tooltip
+msgid "Middle click action"
+msgstr ""
+
+#. 3.8->settings-schema.json->middle-click-action->options
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Launch new app instance"
+msgstr ""
+
+#. 3.8->settings-schema.json->middle-click-action->options
+#. 3.4->settings-schema.json->middle-click-action->options
+msgid "Close last focused window in group"
+msgstr ""
+
+#. 3.8->settings-schema.json->system-favorites->description
+#. 3.4->settings-schema.json->system-favorites->description
+#, fuzzy
+msgid "Use system favorites for pinned apps"
+msgstr "השתמש ובטיפי מערכת עבור יישומים סגורים"
+
+#. 3.8->settings-schema.json->system-favorites->tooltip
+#. 3.4->settings-schema.json->system-favorites->tooltip
+#, fuzzy
+msgid ""
+"Controls whether or not pinned apps consist of the system favorites list."
+msgstr "קובע אם לאו היישומים המוצמדים מופיעים בלוח אם הם אינם פתוחים."
+
+#. 3.8->settings-schema.json->show-all-workspaces->description
+#. 3.8->settings-schema.json->show-all-workspaces->tooltip
+#. 3.4->settings-schema.json->show-all-workspaces->description
+#. 3.4->settings-schema.json->show-all-workspaces->tooltip
+#, fuzzy
+msgid "Show windows from all workspaces"
+msgstr "רק בשולחן העבודה הזה"
+
+#. 3.8->settings-schema.json->enable-app-button-dragging->description
+#. 3.8->settings-schema.json->enable-app-button-dragging->tooltip
 #. 3.4->settings-schema.json->enable-app-button-dragging->description
 #. 3.4->settings-schema.json->enable-app-button-dragging->tooltip
 msgid "Enable app button dragging"
 msgstr ""
 
-#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
-#, fuzzy
-msgid "Show new window option"
-msgstr "אפשרות autostart צג"
-
-#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
-msgid ""
-"Shows the \"New Window\" option in an app's context menu if it doesn't "
-"already have one from the app's own action menu items."
+#. 3.8->settings-schema.json->launcher-animation-effect->description
+#. 3.4->settings-schema.json->launcher-animation-effect->description
+msgid "Launcher animation effect"
 msgstr ""
 
+#. 3.8->settings-schema.json->launcher-animation-effect->options
+#. 3.4->settings-schema.json->launcher-animation-effect->options
+msgid "Fade"
+msgstr ""
+
+#. 3.8->settings-schema.json->launcher-animation-effect->options
+#. 3.4->settings-schema.json->launcher-animation-effect->options
+msgid "Scale"
+msgstr ""
+
+#. 3.8->settings-schema.json->list-monitor-windows->description
+#. 3.4->settings-schema.json->list-monitor-windows->description
+msgid "Only list windows from the monitor displaying this instance"
+msgstr ""
+
+#. 3.8->settings-schema.json->list-monitor-windows->tooltip
+#. 3.4->settings-schema.json->list-monitor-windows->tooltip
+msgid ""
+"This option will only come into effect for monitors displaying an ITM "
+"instance."
+msgstr ""
+
+#. 3.8->settings-schema.json->enable-app-button-width->description
+#. 3.4->settings-schema.json->enable-app-button-width->description
+msgid "Use a custom width for app buttons"
+msgstr ""
+
+#. 3.8->settings-schema.json->enable-app-button-width->tooltip
+#. 3.4->settings-schema.json->enable-app-button-width->tooltip
+msgid "When disabled, the app button width is determined by the panel height."
+msgstr ""
+
+#. 3.8->settings-schema.json->app-button-width->description
 #. 3.4->settings-schema.json->app-button-width->description
 msgid "App button width"
 msgstr ""
 
+#. 3.8->settings-schema.json->app-button-width->tooltip
 #. 3.4->settings-schema.json->app-button-width->tooltip
 #, fuzzy
 msgid ""
@@ -870,119 +1096,124 @@ msgid ""
 "horizontal panels."
 msgstr "שולט בגודל של התמונות הממוזערות."
 
-#. 3.4->settings-schema.json->mintXPreset->description
-#. 3.4->settings-schema.json->mintXPreset->tooltip
-msgid "Mint X, Linux Mint, and Variants"
-msgstr ""
-
-#. 3.4->settings-schema.json->launcher-animation-effect->description
-msgid "Launcher animation effect"
-msgstr ""
-
-#. 3.4->settings-schema.json->launcher-animation-effect->tooltip
-#. 3.4->settings-schema.json->left-click-action->description
-#. 3.4->settings-schema.json->left-click-action->tooltip
-msgid "Left click action"
-msgstr ""
-
-#. 3.4->settings-schema.json->launcher-animation-effect->options
-msgid "Scale"
-msgstr ""
-
-#. 3.4->settings-schema.json->launcher-animation-effect->options
-msgid "Fade"
-msgstr ""
-
-#. 3.4->settings-schema.json->enable-app-button-width->description
-msgid "Use a custom width for app buttons"
-msgstr ""
-
-#. 3.4->settings-schema.json->enable-app-button-width->tooltip
-msgid "When disabled, the app button width is determined by the panel height."
-msgstr ""
-
-#. 3.4->settings-schema.json->list-monitor-windows->description
-msgid "Only list windows from the monitor displaying this instance"
-msgstr ""
-
-#. 3.4->settings-schema.json->list-monitor-windows->tooltip
-msgid ""
-"This option will only come into effect for monitors displaying an ITM "
-"instance."
-msgstr ""
-
+#. 3.8->settings-schema.json->thumbnail-close-button-size->description
 #. 3.4->settings-schema.json->thumbnail-close-button-size->description
 #, fuzzy
 msgid "Close button size"
 msgstr "גודל גדר סמל"
 
+#. 3.8->settings-schema.json->thumbnail-close-button-size->tooltip
 #. 3.4->settings-schema.json->thumbnail-close-button-size->tooltip
 #, fuzzy
 msgid "Controls how large the thumbnail close button is."
 msgstr "אפשר נושאים לשלוט על לחצן התמונה הממוזערת קרוב"
 
-#. 3.4->settings-schema.json->middle-click-action->description
-#. 3.4->settings-schema.json->middle-click-action->tooltip
-msgid "Middle click action"
-msgstr ""
-
-#. 3.4->settings-schema.json->middle-click-action->options
-msgid "Launch new app instance"
-msgstr ""
-
-#. 3.4->settings-schema.json->middle-click-action->options
-msgid "Close last focused window in group"
-msgstr ""
-
-#. 3.4->settings-schema.json->scroll-behavior->description
-msgid "Mouse wheel scroll behavior"
-msgstr ""
-
-#. 3.4->settings-schema.json->scroll-behavior->tooltip
-msgid ""
-"Choose if scrolling the mouse wheel cycles running apps, an app button's "
-"windows on hover, or is disabled."
-msgstr ""
-
-#. 3.4->settings-schema.json->scroll-behavior->options
-msgid "Cycle apps"
-msgstr ""
-
-#. 3.4->settings-schema.json->scroll-behavior->options
-#. 3.4->settings-schema.json->left-click-action->options
+#. 3.8->settings-schema.json->thumbnail-padding->description
+#. 3.4->settings-schema.json->thumbnail-padding->description
 #, fuzzy
-msgid "Cycle windows"
-msgstr "כלול את כל חלונות האפליקציה"
+msgid "Thumbnail padding"
+msgstr "הגדרת התמונה ממוצערת"
 
-#. 3.4->settings-schema.json->show-all-workspaces->description
-#. 3.4->settings-schema.json->show-all-workspaces->tooltip
+#. 3.8->settings-schema.json->thumbnail-padding->tooltip
+#. 3.4->settings-schema.json->thumbnail-padding->tooltip
 #, fuzzy
-msgid "Show windows from all workspaces"
-msgstr "רק בשולחן העבודה הזה"
+msgid "Controls how much space will be around the window preview thumbnails."
+msgstr "בקרת כמה מקום הוא בין הסמלים."
 
+#. 3.8->settings-schema.json->thumbnail-scroll-behavior->description
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->description
 msgid "Cycle windows on mouse wheel scroll"
 msgstr ""
 
+#. 3.8->settings-schema.json->thumbnail-scroll-behavior->tooltip
 #. 3.4->settings-schema.json->thumbnail-scroll-behavior->tooltip
 msgid ""
 "Choose whether or not scrolling the mouse wheel cycles windows when hovering "
 "over a thumbnail menu."
 msgstr ""
 
-#. 3.4->settings-schema.json->left-click-action->options
-msgid "Toggle activation of last focused window"
-msgstr ""
-
-#. IcingTaskManager@json->metadata.json->name
-msgid "Icing Task Manager"
-msgstr "Icing Task Manager"
-
-#. IcingTaskManager@json->metadata.json->description
+#. 3.8->settings-schema.json->show-icons->description
+#. 3.4->settings-schema.json->show-icons->description
 #, fuzzy
-msgid "Window list with app grouping and thumbnails"
+msgid "Show icons"
+msgstr "לא נמצאו סמלים"
+
+#. 3.8->settings-schema.json->show-icons->tooltip
+#. 3.4->settings-schema.json->show-icons->tooltip
+msgid "Show the window's icon next to the title."
 msgstr ""
-"שורת משימות עם קיבוץ אפליקציות והצגת חלונות ממוזערים תכלס - כמו בווינדוס"
+
+#. 3.8->settings-schema.json->highlight-last-focused-thumbnail->description
+#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->description
+msgid "Highlight the last focused window within an app group"
+msgstr ""
+
+#. 3.8->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+#. 3.4->settings-schema.json->highlight-last-focused-thumbnail->tooltip
+msgid ""
+"When enabled, the last window that was interacted with will be indicated."
+msgstr ""
+
+#. 3.8->settings-schema.json->launch-new-instance-menu-item->description
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->description
+#, fuzzy
+msgid "Show new window option"
+msgstr "אפשרות autostart צג"
+
+#. 3.8->settings-schema.json->launch-new-instance-menu-item->tooltip
+#. 3.4->settings-schema.json->launch-new-instance-menu-item->tooltip
+msgid ""
+"Shows the \"New Window\" option in an app's context menu if it doesn't "
+"already have one from the app's own action menu items."
+msgstr ""
+
+#. 3.8->settings-schema.json->hoverPseudoClass->options
+#. 3.8->settings-schema.json->focusPseudoClass->options
+#. 3.8->settings-schema.json->activePseudoClass->options
+#. 3.4->settings-schema.json->hoverPseudoClass->options
+#. 3.4->settings-schema.json->focusPseudoClass->options
+#. 3.4->settings-schema.json->activePseudoClass->options
+msgid "checked"
+msgstr ""
+
+#. 3.8->settings-schema.json->app-button-transition-duration->units
+#. 3.4->settings-schema.json->app-button-transition-duration->units
+msgid "ms"
+msgstr ""
+
+#. 3.8->settings-schema.json->app-button-transition-duration->description
+#. 3.4->settings-schema.json->app-button-transition-duration->description
+msgid "App button transition duration"
+msgstr ""
+
+#. 3.8->settings-schema.json->app-button-transition-duration->tooltip
+#. 3.4->settings-schema.json->app-button-transition-duration->tooltip
+msgid ""
+"Overrides the theme's animation time for app buttons. If set to zero, the "
+"theme's transition duration will be used."
+msgstr ""
+
+#. 3.8->settings-schema.json->mintYPreset->description
+#. 3.8->settings-schema.json->mintYPreset->tooltip
+#. 3.4->settings-schema.json->mintYPreset->description
+#. 3.4->settings-schema.json->mintYPreset->tooltip
+msgid "Mint Y and Variants"
+msgstr ""
+
+#. 3.8->settings-schema.json->mintXPreset->description
+#. 3.8->settings-schema.json->mintXPreset->tooltip
+#. 3.4->settings-schema.json->mintXPreset->description
+#. 3.4->settings-schema.json->mintXPreset->tooltip
+msgid "Mint X, Linux Mint, and Variants"
+msgstr ""
+
+#. 3.8->settings-schema.json->migrationButton->description
+msgid "Migrate Pinned Apps to Grouped Window List"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Icing Task Manager is deprecated - please use Grouped Window List"
+#~ msgstr "Icing Task Manager"
 
 # Should not be set, just leave it blank by setting one white-space character
 #~ msgid "number"

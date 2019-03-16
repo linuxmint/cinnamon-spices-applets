@@ -20,6 +20,10 @@ Danish translation by [Alan01](https://github.com/Alan01)
 
 ### Changelog
 
+### 1.0
+    Implement Scrollbars on cancel jobs list
+    Wait for update to finish to display the menu
+
 ### 0.9.1
     Use pkexec to "Restart CUPS"
 

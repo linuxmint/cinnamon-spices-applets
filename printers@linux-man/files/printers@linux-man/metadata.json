@@ -4,7 +4,7 @@
     "contributors": "Caldas Lopes",
     "max-instances": "-1",
     "uuid": "printers@linux-man",
-    "version": "0.9.1",
+    "version": "1.0",
     "icon": "printer",
     "name": "Printers"
 }

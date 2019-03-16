@@ -1,5 +1,10 @@
 Changelog
 
+### 6.3.14
+
+  * Added a deprecation notice notification for Cinnamon 4.0 users.
+  * Added migration functionality for moving local pinned apps from ITM to Grouped Window List in Cinnamon 4.0. This can be accessed by clicking "Migrate Pinned Apps to Grouped Window List" from ITM's settings.
+
 ### 6.3.11
 
   * Fixed an issue with the applet not initializing when an open app can't be resolved by wm_class.

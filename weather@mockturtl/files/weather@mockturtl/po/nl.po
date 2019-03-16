@@ -1,458 +1,816 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
-# Copyright (C) 2018
+# Copyright (C) 2019
 # This file is distributed under the same license as the cinnamon-weather package.
-# Peter van Ieperen <p.v.ieperen77@gmail.com>, 2011.
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2018.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2018-06-30 10:00+0200\n"
+"POT-Creation-Date: 2019-02-24 10:42+0000\n"
+"PO-Revision-Date: 2019-03-03 12:00+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
-"Language-Team: \n"
+"Language-Team: nl\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:249
+#: applet.js:337 3.6/applet.js:337 3.8/applet.js:401
 msgid "..."
 msgstr "..."
 
-#: applet.js:250
+#: applet.js:338 3.6/applet.js:338 3.8/applet.js:402
 msgid "Click to open"
 msgstr "Klik om te openen"
 
-#: applet.js:289
+#: applet.js:389 3.6/applet.js:389 3.8/applet.js:456
 msgid "Settings"
 msgstr "Instellingen"
 
-#: applet.js:555
+#: applet.js:511 3.6/applet.js:511
+msgid "No location provided"
+msgstr "Geen locatie opgegeven"
+
+#: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
+msgid "Cloudiness:"
+msgstr "Bewolking:"
+
+#: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
 msgid "Sunrise"
 msgstr "Zonsopgang"
 
-#: applet.js:556
+#: applet.js:635 3.6/applet.js:635 3.8/applet.js:782
 msgid "Sunset"
 msgstr "Zonsondergang"
 
-#: applet.js:648
+#: applet.js:708 3.6/applet.js:708 3.8/applet.js:892
 msgid "Loading current weather ..."
 msgstr "Huidig weer aan het laden..."
 
-#: applet.js:649
+#: applet.js:709 3.6/applet.js:709 3.8/applet.js:893
 msgid "Loading future weather ..."
 msgstr "Weersverwachting aan het laden..."
 
-#: applet.js:671
+#: applet.js:731 3.6/applet.js:731 3.8/applet.js:915
 msgid "Loading ..."
 msgstr "Bezig met laden..."
 
-#: applet.js:677
+#: applet.js:737 3.6/applet.js:737 3.8/applet.js:921
 msgid "Refresh"
 msgstr "Verversen"
 
-#: applet.js:740
+#: applet.js:802 3.6/applet.js:802 3.8/applet.js:985
 msgid "Temperature:"
 msgstr "Temperatuur:"
 
-#: applet.js:742
+#: applet.js:804 3.6/applet.js:804 3.8/applet.js:987
 msgid "Humidity:"
 msgstr "Luchtvochtigheid:"
 
-#: applet.js:744
+#: applet.js:806 3.6/applet.js:806 3.8/applet.js:989
 msgid "Pressure:"
 msgstr "Luchtdruk:"
 
-#: applet.js:746
+#: applet.js:808 3.6/applet.js:808 3.8/applet.js:991
 msgid "Wind:"
 msgstr "Wind:"
 
-#: applet.js:748
-msgid "Wind Chill:"
-msgstr "Gevoelstemperatuur:"
-
-#: applet.js:953
-msgid "Tornado"
-msgstr "Tornado"
-
-#: applet.js:955
-msgid "Tropical storm"
-msgstr "Tropische storm"
-
-#: applet.js:957
-msgid "Hurricane"
-msgstr "Orkaan"
-
-#: applet.js:959
-msgid "Severe thunderstorms"
-msgstr "Zware onweersbuien"
-
-#: applet.js:961
-msgid "Thunderstorms"
-msgstr "Onweersbuien"
-
-#: applet.js:963
-msgid "Mixed rain and snow"
-msgstr "Gemengde regen en sneeuw"
-
-#: applet.js:965
-msgid "Mixed rain and sleet"
-msgstr "Gemengde regen en natte sneeuw"
-
-#: applet.js:967
-msgid "Mixed snow and sleet"
-msgstr "Gemengde sneeuw en natte sneeuw"
-
-#: applet.js:969
-msgid "Freezing drizzle"
-msgstr "Motijzel"
-
-#: applet.js:971
-msgid "Drizzle"
-msgstr "Motregen"
-
-#: applet.js:973
-msgid "Freezing rain"
-msgstr "IJzel"
-
-#: applet.js:975 applet.js:977
-msgid "Showers"
-msgstr "Regenbuien"
-
-#: applet.js:979
-msgid "Snow flurries"
-msgstr "Sneeuwvlagen"
-
-#: applet.js:981
-msgid "Light snow showers"
-msgstr "Lichte sneeuwbuien"
-
-#: applet.js:983
-msgid "Blowing snow"
-msgstr "Opwaaiende sneeuw"
-
-#: applet.js:985
-msgid "Snow"
-msgstr "Sneeuw"
-
-#: applet.js:987
-msgid "Hail"
-msgstr "Hagel"
-
-#: applet.js:989
-msgid "Sleet"
-msgstr "Natte sneeuw"
-
-#: applet.js:991
-msgid "Dust"
-msgstr "Stof"
-
-#: applet.js:993
-msgid "Foggy"
-msgstr "Mistig"
-
-#: applet.js:995
-msgid "Haze"
-msgstr "Nevel"
-
-#: applet.js:997
-msgid "Smoky"
-msgstr "Rokerig"
-
-#: applet.js:999
-msgid "Blustery"
-msgstr "Windvlagen"
-
-#: applet.js:1001
-msgid "Windy"
-msgstr "Winderig"
-
-#: applet.js:1003
-msgid "Cold"
-msgstr "Koud"
-
-#: applet.js:1005
-msgid "Cloudy"
-msgstr "Bewolkt"
-
-#: applet.js:1008
-msgid "Mostly cloudy"
-msgstr "Overwegend bewolkt"
-
-#: applet.js:1011 applet.js:1037
-msgid "Partly cloudy"
-msgstr "Deels bewolkt"
-
-#: applet.js:1013
-msgid "Clear"
-msgstr "Helder"
-
-#: applet.js:1015
-msgid "Sunny"
-msgstr "Zonnig"
-
-#: applet.js:1018
-msgid "Fair"
-msgstr "Helder"
-
-#: applet.js:1020
-msgid "Mixed rain and hail"
-msgstr "Gemengde regen en hagel"
-
-#: applet.js:1022
-msgid "Hot"
-msgstr "Heet"
-
-#: applet.js:1024
-msgid "Isolated thunderstorms"
-msgstr "Plaatselijke onweersbuien"
-
-#: applet.js:1027
-msgid "Scattered thunderstorms"
-msgstr "Verspreide onweersbuien"
-
-#: applet.js:1029
-msgid "Scattered showers"
-msgstr "Verspreide regenbuien"
-
-#: applet.js:1031 applet.js:1035
-msgid "Heavy snow"
-msgstr "Zware sneeuwval"
-
-#: applet.js:1033
-msgid "Scattered snow showers"
-msgstr "Verspreide sneeuwbuien"
-
-#: applet.js:1039
-msgid "Thundershowers"
-msgstr "Onweersbuien"
-
-#: applet.js:1041
-msgid "Snow showers"
-msgstr "Sneeuwbuien"
-
-#: applet.js:1043
-msgid "Isolated thundershowers"
-msgstr "Plaatselijke onweersbuien"
-
-#: applet.js:1046
-msgid "Not available"
-msgstr "Niet beschikbaar"
-
-#: applet.js:1051
-msgid "Monday"
-msgstr "Maandag"
-
-#: applet.js:1051
-msgid "Tuesday"
-msgstr "Dinsdag"
-
-#: applet.js:1051
-msgid "Wednesday"
-msgstr "Woensdag"
-
-#: applet.js:1051
-msgid "Thursday"
-msgstr "Donderdag"
-
-#: applet.js:1051
-msgid "Friday"
-msgstr "Vrijdag"
-
-#: applet.js:1051
-msgid "Saturday"
-msgstr "Zaterdag"
-
-#: applet.js:1051
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
 msgid "Sunday"
 msgstr "Zondag"
 
-#: applet.js:1056
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Monday"
+msgstr "Maandag"
+
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Tuesday"
+msgstr "Dinsdag"
+
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Wednesday"
+msgstr "Woensdag"
+
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Thursday"
+msgstr "Donderdag"
+
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Friday"
+msgstr "Vrijdag"
+
+#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+msgid "Saturday"
+msgstr "Zaterdag"
+
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "N"
 msgstr "N"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "NE"
 msgstr "NO"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "E"
 msgstr "O"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "SE"
 msgstr "ZO"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "S"
 msgstr "Z"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "SW"
 msgstr "ZW"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "W"
 msgstr "W"
 
-#: applet.js:1056
+#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
 msgid "NW"
 msgstr "NW"
 
-#. weather@mockturtl->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl"
-msgstr "Instellingen voor weather@mockturtl"
+#: applet.js:1080 3.6/applet.js:1080
+msgid "Service Unavailable"
+msgstr "Dienst niet beschikbaar"
 
-#. weather@mockturtl->settings-schema.json->keybinding->description
+#: applet.js:1084 3.6/applet.js:1084 3.8/applet.js:338
+msgid "Service Error"
+msgstr "Dienstfout"
+
+#: applet.js:1086 3.6/applet.js:1086 3.8/applet.js:343
+msgid "Wrong API Key"
+msgstr "Verkeerde API-sleutel"
+
+#: applet.js:1089 3.6/applet.js:1089
+msgid "City Not found"
+msgstr "Stad niet gevonden"
+
+#: applet.js:1092 3.6/applet.js:1092 3.8/applet.js:347
+msgid "Key Temp. Blocked"
+msgstr "Sleutel tijd. geblokkeerd"
+
+#: 3.8/applet.js:337
+msgid "Error"
+msgstr "Fout"
+
+#: 3.8/applet.js:339
+msgid "No Api key"
+msgstr "Geen API-sleutel"
+
+#: 3.8/applet.js:340
+msgid "No Location"
+msgstr "Geen locatie"
+
+#: 3.8/applet.js:344
+msgid "Wrong Location"
+msgstr "Verkeerde locatie"
+
+#: 3.8/applet.js:345
+msgid "Location Not found"
+msgstr "Locatie niet gevonden"
+
+#: 3.8/applet.js:346
+msgid "Parsing weather information failed :("
+msgstr "Lezen van weerinformatie is helaas mislukt"
+
+#: 3.8/applet.js:348
+msgid "Could not get location"
+msgstr "Kon geen locatie verkrijgen"
+
+#: 3.8/applet.js:349
+msgid "Unknown Error"
+msgstr "Onbekende fout"
+
+#: 3.8/applet.js:350
+msgid "No/Bad response from Data Service"
+msgstr "Geen of gebrekkig antwoord van gegevensdienst"
+
+#: 3.8/applet.js:355
+msgid "and"
+msgstr "en"
+
+#: 3.8/applet.js:355
+msgid "until"
+msgstr "tot"
+
+#: 3.8/applet.js:355
+msgid "in"
+msgstr "in"
+
+#: 3.8/applet.js:749
+msgid "Feels like:"
+msgstr "Voelt aan als:"
+
+#: 3.8/applet.js:1234
+msgid "Thunderstorm with light rain"
+msgstr "Onweer met lichte regenval"
+
+#: 3.8/applet.js:1235
+msgid "Thunderstorm with rain"
+msgstr "Onweer met regen"
+
+#: 3.8/applet.js:1236
+msgid "Thunderstorm with heavy rain"
+msgstr "Onweer met zware regenval"
+
+#: 3.8/applet.js:1237
+msgid "Light thunderstorm"
+msgstr "Licht onweer"
+
+#: 3.8/applet.js:1238
+msgid "Thunderstorm"
+msgstr "Onweer"
+
+#: 3.8/applet.js:1239
+msgid "Heavy thunderstorm"
+msgstr "Zwaar onweer"
+
+#: 3.8/applet.js:1240
+msgid "Ragged thunderstorm"
+msgstr "Plaatselijke onweersbuien"
+
+#: 3.8/applet.js:1241
+msgid "Thunderstorm with light drizzle"
+msgstr "Onweer met lichte motregen"
+
+#: 3.8/applet.js:1242
+msgid "Thunderstorm with drizzle"
+msgstr "Onweer met motregen"
+
+#: 3.8/applet.js:1243
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Onweer met zware motregen"
+
+#: 3.8/applet.js:1245
+msgid "Light intensity drizzle"
+msgstr "Motregen met lichte intensiteit"
+
+#: 3.8/applet.js:1246
+msgid "Drizzle"
+msgstr "Motregen"
+
+#: 3.8/applet.js:1247
+msgid "Heavy intensity drizzle"
+msgstr "Motregen met zware intensiteit"
+
+#: 3.8/applet.js:1248
+msgid "Light intensity drizzle rain"
+msgstr "Druilregen met lichte intensiteit"
+
+#: 3.8/applet.js:1249
+msgid "Drizzle rain"
+msgstr "Druilregen"
+
+#: 3.8/applet.js:1250
+msgid "Heavy intensity drizzle rain"
+msgstr "Druilregen met zware intensiteit"
+
+#: 3.8/applet.js:1251
+msgid "Shower rain and drizzle"
+msgstr "Regen- en motregenbuien"
+
+#: 3.8/applet.js:1252
+msgid "Heavy shower rain and drizzle"
+msgstr "Zware regen- en motregenbuien"
+
+#: 3.8/applet.js:1253
+msgid "Shower drizzle"
+msgstr "Motregenbuien"
+
+#: 3.8/applet.js:1255
+msgid "Light rain"
+msgstr "Lichte regenval"
+
+#: 3.8/applet.js:1256
+msgid "Moderate rain"
+msgstr "Matige regenval"
+
+#: 3.8/applet.js:1257
+msgid "Heavy intensity rain"
+msgstr "Zware regenval"
+
+#: 3.8/applet.js:1258
+msgid "Very heavy rain"
+msgstr "Zeer zware regenval"
+
+#: 3.8/applet.js:1259
+msgid "Extreme rain"
+msgstr "Extreme regenval"
+
+#: 3.8/applet.js:1260
+msgid "Freezing rain"
+msgstr "IJzel"
+
+#: 3.8/applet.js:1261
+msgid "Light intensity shower rain"
+msgstr "Lichte regenbuien"
+
+#: 3.8/applet.js:1262
+msgid "Shower rain"
+msgstr "Regenbuien"
+
+#: 3.8/applet.js:1263
+msgid "Heavy intensity shower rain"
+msgstr "Zware regenbuien"
+
+#: 3.8/applet.js:1264
+msgid "Ragged shower rain"
+msgstr "Verspreide regenbuien"
+
+#: 3.8/applet.js:1266
+msgid "Light snow"
+msgstr "Lichte sneeuwval"
+
+#: 3.8/applet.js:1267
+msgid "Snow"
+msgstr "Sneeuw"
+
+#: 3.8/applet.js:1268
+msgid "Heavy snow"
+msgstr "Zware sneeuwval"
+
+#: 3.8/applet.js:1269
+msgid "Sleet"
+msgstr "Natte sneeuw"
+
+#: 3.8/applet.js:1270
+msgid "Shower sleet"
+msgstr "Ijzelbuien"
+
+#: 3.8/applet.js:1271
+msgid "Light rain and snow"
+msgstr "Lichte regen- en sneeuwval"
+
+#: 3.8/applet.js:1272
+msgid "Rain and snow"
+msgstr "Regen en sneeuw"
+
+#: 3.8/applet.js:1273
+msgid "Light shower snow"
+msgstr "Lichte sneeuwbuien"
+
+#: 3.8/applet.js:1274
+msgid "Shower snow"
+msgstr "Sneeuwbuien"
+
+#: 3.8/applet.js:1275
+msgid "Heavy shower snow"
+msgstr "Zware sneeuwbuien"
+
+#: 3.8/applet.js:1277
+msgid "Mist"
+msgstr "Mistig"
+
+#: 3.8/applet.js:1278
+msgid "Smoke"
+msgstr "Rook"
+
+#: 3.8/applet.js:1279
+msgid "Haze"
+msgstr "Nevel"
+
+#: 3.8/applet.js:1280
+msgid "Sand, dust whirls"
+msgstr "Zand- en stofwervelwinden"
+
+#: 3.8/applet.js:1281
+msgid "Fog"
+msgstr "Mist"
+
+#: 3.8/applet.js:1282
+msgid "Sand"
+msgstr "Zand"
+
+#: 3.8/applet.js:1283
+msgid "Dust"
+msgstr "Stof"
+
+#: 3.8/applet.js:1284
+msgid "Volcanic ash"
+msgstr "Vulkanische as"
+
+#: 3.8/applet.js:1285
+msgid "Squalls"
+msgstr "Windstoten"
+
+#: 3.8/applet.js:1286
+msgid "Tornado"
+msgstr "Tornado"
+
+#: 3.8/applet.js:1288
+msgid "Clear"
+msgstr "Helder"
+
+#: 3.8/applet.js:1289
+msgid "Clear sky"
+msgstr "Heldere lucht"
+
+#: 3.8/applet.js:1290
+msgid "Sky is clear"
+msgstr "Lucht is helder"
+
+#: 3.8/applet.js:1292
+msgid "Few clouds"
+msgstr "Weinig bewolking"
+
+#: 3.8/applet.js:1293
+msgid "Scattered clouds"
+msgstr "Verspreide bewolking"
+
+#: 3.8/applet.js:1294
+msgid "Broken clouds"
+msgstr "Wisselend bewolkt"
+
+#: 3.8/applet.js:1295
+msgid "Overcast clouds"
+msgstr "Laaghangende bewolking"
+
+#. settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 1.8"
+msgstr "Instellingen voor weather@mockturtl 1.8"
+
+#. settings-schema.json->keybinding->description
+#. 3.6->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
-msgstr "Stel toetsbinding in voor oproepen van menu"
+msgstr "Stel de toetsbinding in voor het oproepen van het menu"
 
-#. cinnamon-weather->settings-schema.json->woeidLookup->description
-msgid "Get WOEID"
-msgstr "WOEID verkrijgen"
+#. settings-schema.json->providerSettings->description
+#. 3.6->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->providerSettings->description
+msgid "Weather Provider Settings"
+msgstr "instellingen voor leverancier van weergegevens"
 
-#. weather@mockturtl->settings-schema.json->woeidLookup->tooltip
-msgid "http://woeid.rosselliot.co.nz/"
-msgstr "http://woeid.rosselliot.co.nz/"
+#. settings-schema.json->dataService->description
+#. 3.6->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Gegevensdienst"
 
-#. cinnamon-weather->settings-schema.json->verticalOrientation->description
-msgid "Vertical orientation"
-msgstr "Verticale oriëntatie"
+#. settings-schema.json->dataService->options
+#. 3.6->settings-schema.json->dataService->options
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
 
-#. cinnamon-weather->settings-schema.json->showTextInPanel->description
-msgid "Display current temperature in panel"
-msgstr "Toon huidige temperatuur in werkbalk"
+#. settings-schema.json->location->description
+#. 3.6->settings-schema.json->location->description
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "Locatie"
 
-#. cinnamon-weather->settings-schema.json->woeid->description
-msgid "WOEID"
-msgstr "WOEID"
+#. settings-schema.json->location->tooltip
+#. 3.6->settings-schema.json->location->tooltip
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
+"Longtitude"
+msgstr ""
+"Toegestane invoer: Stad,Landcode (bv. Oss,NL) of Postcode,Landcode of "
+"Breedtegraad,Lengtegraad"
 
-#. cinnamon-weather->settings-schema.json->woeid->tooltip
-msgid "Where On Earth ID"
-msgstr "Waar ter wereld ID"
+#. settings-schema.json->getLocation->description
+#. 3.6->settings-schema.json->getLocation->description
+msgid "Setup Location"
+msgstr "Locatie instellen"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+#. settings-schema.json->getLocation->tooltip
+#. 3.6->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Opent handleiding op een webpagina"
+
+#. settings-schema.json->personalSettings->description
+#. 3.6->settings-schema.json->personalSettings->description
+#. 3.8->settings-schema.json->personalSettings->description
+msgid "Personal Settings"
+msgstr "Persoonlijke instellingen"
+
+#. settings-schema.json->temperatureUnit->description
+#. 3.6->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
 msgstr "Temperatuureenheid"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
-msgstr "Fahrenheit"
-
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+#. settings-schema.json->temperatureUnit->options
+#. 3.6->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "Celsius"
 
-#. cinnamon-weather->settings-schema.json->temperatureHighFirst->description
+#. settings-schema.json->temperatureUnit->options
+#. 3.6->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "Fahrenheit"
+
+#. settings-schema.json->temperatureHighFirst->description
+#. 3.6->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
 msgstr "Toon hoogste temperatuur als eerste in de voorspelling"
 
-#. cinnamon-weather->settings-schema.json->translateCondition->description
-msgid "Translate condition"
-msgstr "Weersgesteldheid vertalen"
-
-#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
-msgid "Override location label"
-msgstr "Eigen locatienaam gebruiken"
-
-#. cinnamon-weather->settings-schema.json->show24Hours->description
-msgid "Display time in 24 hour format"
-msgstr "Tijd tonen in 24-uurs-opmaak"
-
-#. cinnamon-weather->settings-schema.json->forecastDays->description
-msgid "Forecast length"
-msgstr "Reikwijdte van voorspelling"
-
-#. cinnamon-weather->settings-schema.json->forecastDays->units
-msgid "days"
-msgstr "dagen"
-
-#. cinnamon-weather->settings-schema.json->showSunrise->description
-msgid "Show sunrise / sunset times"
-msgstr "Tijdstippen tonen van zonsopgang en zonsondergang"
-
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+#. settings-schema.json->windSpeedUnit->description
+#. 3.6->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
 msgstr "Eenheid voor windsnelheid"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "kph"
 msgstr "km/u"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
-msgid "m/s"
-msgstr "m/s"
-
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
-msgid "knots"
-msgstr "knopen"
-
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "mph"
 msgstr "mijl/u"
 
-#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+#. settings-schema.json->windSpeedUnit->options
+#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr "m/s"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr "knopen"
+
+#. settings-schema.json->pressureUnit->description
+#. 3.6->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "Eenheid voor luchtdruk"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr "in Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. settings-schema.json->verticalOrientation->description
+#. 3.6->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "Verticale oriëntatie"
+
+#. settings-schema.json->showSunrise->description
+#. 3.6->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Tijdstippen tonen van zonsopgang en zonsondergang"
+
+#. settings-schema.json->show24Hours->description
+#. 3.6->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Tijd tonen in 24-uurs-opmaak"
+
+#. settings-schema.json->forecastDays->units
+#. 3.6->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "dagen"
+
+#. settings-schema.json->forecastDays->description
+#. 3.6->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Reikwijdte van voorspelling"
+
+#. settings-schema.json->translateCondition->description
+#. 3.6->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Weersgesteldheid vertalen"
+
+#. settings-schema.json->useSymbolicIcons->description
+#. 3.6->settings-schema.json->useSymbolicIcons->description
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Symbolische pictogrammen"
+
+#. settings-schema.json->showTextInPanel->description
+#. 3.6->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Toon huidige temperatuur in werkbalk"
+
+#. settings-schema.json->showCommentInPanel->description
+#. 3.6->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr ""
 "Toon de weersomstandigheden (bijv. 'Winderig', 'Helder') in de werkbalk"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->description
-msgid "Atmospheric pressure unit"
-msgstr "Eenheid voor luchtdruk"
+#. settings-schema.json->locationLabelOverride->description
+#. 3.6->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Eigen locatienaam gebruiken"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "psi"
-msgstr "psi"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "atm"
-msgstr "atm"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "kPa"
-msgstr "kPa"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "Pa"
-msgstr "Pa"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mm Hg"
-msgstr "mm Hg"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "at"
-msgstr "at"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mbar"
-msgstr "mbar"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "in Hg"
-msgstr "in Hg"
-
-#. cinnamon-weather->settings-schema.json->refreshInterval->description
-msgid "Update interval"
-msgstr "Tussenpoze voor bijwerken"
-
-#. cinnamon-weather->settings-schema.json->refreshInterval->units
+#. settings-schema.json->refreshInterval->units
+#. 3.6->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
 msgid "minutes"
 msgstr "minuten"
 
-#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
-msgid "Symbolic icons"
-msgstr "Symbolische pictogrammen"
+#. settings-schema.json->refreshInterval->description
+#. 3.6->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Tussenpoze voor bijwerken"
 
-#. cinnamon-weather->metadata.json->description
+#. metadata.json->name
+msgid "Weather"
+msgstr "Weer"
+
+#. metadata.json->description
 msgid "View your local weather forecast"
 msgstr "Bekijk uw plaatselijke weersvoorspelling"
 
-#. cinnamon-weather->metadata.json->name
-msgid "Weather"
-msgstr "Weer"
+#. 3.6->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.6"
+msgstr "Instellingen voor weather@mockturtl 3.6"
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8"
+msgstr "Instellingen voor weather@mockturtl 3.8"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap (no key needed)"
+msgstr "OpenWeatherMap (geen sleutel nodig)"
+
+#. 3.8->settings-schema.json->dataService->options
+msgid "DarkSky"
+msgstr "DarkSky"
+
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "API-sleutel"
+
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr ""
+"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
+"hier."
+
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Handmatige locatie"
+
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Schakel dit in indien uw locatie niet accuraat is"
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "API-sleutel en locatie instellen"
+
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Weersgesteldheden vertalen"
+
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Kortere beschrijving van weersomstandigheden"
+
+#. 3.8->settings-schema.json->credits->description
+msgid ""
+"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for "
+"their support!"
+msgstr ""
+"werkzaam door: OpenWeatherMap, DarkSky, ipapi. Veel dank aan OpenWeatherMap "
+"voor hun steun!"
+
+#~ msgid "Rain"
+#~ msgstr "Regen"
+
+#~ msgid "Wind Chill:"
+#~ msgstr "Gevoelstemperatuur:"
+
+#~ msgid "Tropical storm"
+#~ msgstr "Tropische storm"
+
+#~ msgid "Hurricane"
+#~ msgstr "Orkaan"
+
+#~ msgid "Mixed rain and sleet"
+#~ msgstr "Gemengde regen en natte sneeuw"
+
+#~ msgid "Mixed snow and sleet"
+#~ msgstr "Gemengde sneeuw en natte sneeuw"
+
+#~ msgid "Snow flurries"
+#~ msgstr "Sneeuwvlagen"
+
+#~ msgid "Blowing snow"
+#~ msgstr "Opwaaiende sneeuw"
+
+#~ msgid "Hail"
+#~ msgstr "Hagel"
+
+#~ msgid "Blustery"
+#~ msgstr "Windvlagen"
+
+#~ msgid "Windy"
+#~ msgstr "Winderig"
+
+#~ msgid "Cold"
+#~ msgstr "Koud"
+
+#~ msgid "Mostly cloudy"
+#~ msgstr "Overwegend bewolkt"
+
+#~ msgid "Partly cloudy"
+#~ msgstr "Deels bewolkt"
+
+#~ msgid "Sunny"
+#~ msgstr "Zonnig"
+
+#~ msgid "Fair"
+#~ msgstr "Helder"
+
+#~ msgid "Hot"
+#~ msgstr "Heet"
+
+#~ msgid "Scattered thunderstorms"
+#~ msgstr "Verspreide onweersbuien"
+
+#~ msgid "Scattered snow showers"
+#~ msgstr "Verspreide sneeuwbuien"
+
+#~ msgid "Thundershowers"
+#~ msgstr "Onweersbuien"
+
+#~ msgid "Snow showers"
+#~ msgstr "Sneeuwbuien"
+
+#~ msgid "Isolated thundershowers"
+#~ msgstr "Plaatselijke onweersbuien"
+
+#~ msgid "Get WOEID"
+#~ msgstr "WOEID verkrijgen"
+
+#~ msgid "http://woeid.rosselliot.co.nz/"
+#~ msgstr "http://woeid.rosselliot.co.nz/"
+
+#~ msgid "WOEID"
+#~ msgstr "WOEID"
+
+#~ msgid "Where On Earth ID"
+#~ msgstr "Waar ter wereld ID"
+
+#~ msgid "kPa"
+#~ msgstr "kPa"
+
+#~ msgid "mbar"
+#~ msgstr "mbar"
 
 #~ msgid "Show 5-day forecast"
 #~ msgstr "Toon vijfdaagse weersvoorspelling"

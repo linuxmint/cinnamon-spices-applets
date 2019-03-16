@@ -129,7 +129,7 @@ MyApplet.prototype = {
     notify_send: function(notification, iconPath) {
         if (iconPath == null)
             iconPath = this.appletPath + '/icon.png';
-        Util.spawnCommandLine('notify-send "' + notification + '" -i ' + iconPath);
+        Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" -i ' + iconPath);
     },
 
     notify_installation: function(packageName) {

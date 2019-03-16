@@ -26,6 +26,7 @@ MyApplet.prototype = {
   _init: function(orientation, panel_height, instance_id) {
     Main.Util.spawnCommandLine("mocp");
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+    this.set_applet_icon_symbolic_path(GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID + "/icons/radio.svg");
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
