@@ -13,7 +13,7 @@ const ICON = "virtualbox"
 const CMD_VBOX = "virtualbox"
 const CMD_VBOXMANAGE = "vboxmanage"
 
-const CMD_VBOX_VM = CMD_VBOX + " --startvm "
+const CMD_VBOX_VM = CMD_VBOXMANAGE + " startvm "
 const CMD_VBOX6_VM = CMD_VBOXMANAGE + " startvm "
 const CMD_VBOX_LIST = CMD_VBOXMANAGE + " list vms"
 const CMD_VBOX_LIST_RUN = CMD_VBOXMANAGE + " list runningvms"
@@ -112,9 +112,17 @@ MyApplet.prototype = {
     return INSTALLED_PROGRAMS[cmd]
   }
 
-, addLauncher: function(label, callback) {
-    let i = new PopupMenu.PopupMenuItem(label)
-    i.connect(SIGNAL_ACTIVATE, Lang.bind(this, callback))
+, addLauncher: function(label, callback, callbackHeadless) {
+    let i;
+    if (callbackHeadless) {
+      i = new PopupMenu.PopupSubMenuMenuItem(label)
+      i.menu.addAction(_("Display"), callback)
+      i.menu.addAction(_("Headless"), callbackHeadless)
+    } else {
+      i = new PopupMenu.PopupMenuItem(label)
+      i.connect(SIGNAL_ACTIVATE, Lang.bind(this, callback))
+    }
+
     this.menu.addMenuItem(i)
   }
 
@@ -183,7 +191,10 @@ MyApplet.prototype = {
       name = (name+"   \uE226");
     }
     let id = info[1].replace('}', '')
-    this.addLauncher(name, Lang.bind(this, function() { this.startVboxImage(id) }))
+    this.addLauncher(name,
+      Lang.bind(this, function() { this.startVboxImage(id) }),
+      Lang.bind(this, function() { this.startVboxImageHeadless(id) })
+    )
   }
 
 // add menu items for all VMWare Player images
@@ -242,7 +253,12 @@ MyApplet.prototype = {
     let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
     Util.spawnCommandLine(cmd + id)
   }
-  
+
+,  startVboxImageHeadless: function(id) {
+    let cmd = this.vboxMajorVersion() >= 6 ? CMD_VBOX6_VM : CMD_VBOX_VM
+    Util.spawnCommandLine(cmd + id + " --type headless")
+  }
+
 ,  startVbox: function() {
     Util.spawnCommandLine(CMD_VBOX)
   }
