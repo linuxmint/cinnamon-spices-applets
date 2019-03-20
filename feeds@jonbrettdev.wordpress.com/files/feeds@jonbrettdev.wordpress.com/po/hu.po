@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-05 01:50+0800\n"
-"PO-Revision-Date: 2019-03-15 07:58+0100\n"
+"PO-Revision-Date: 2019-03-20 10:18+0100\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -59,7 +59,7 @@ msgstr "Következő jelölése "
 
 #: applet.js:757
 msgid " Posts Read"
-msgstr " Bejegyzés olvasása"
+msgstr " bejegyzés olvasása"
 
 #: applet.js:763
 msgid "Update feed URL"
@@ -83,7 +83,7 @@ msgstr "h) "
 
 #: applet.js:937
 msgid "(<1h) "
-msgstr "(kevesebb mint egy órája)"
+msgstr "(nemrég)"
 
 #: feedreader.js:151
 msgid "Invalid feed url"
@@ -91,7 +91,7 @@ msgstr "Érvénytelen hírforrás URL"
 
 #: feedreader.js:220
 msgid " unread items!"
-msgstr "olvasatlan bejegyzések"
+msgstr " olvasatlan bejegyzés"
 
 #: feedreader.js:362 feedreader.js:375
 msgid "Loading feed"
@@ -128,7 +128,7 @@ msgstr "Új bejegyzés érkezésekor értesítés megjelenítése"
 #. feeds@jonbrettdev.wordpress.com->settings-
 #. schema.json->max_items->description
 msgid "Maximum number of items"
-msgstr "c"
+msgstr "Bejegyzések száma"
 
 #. feeds@jonbrettdev.wordpress.com->settings-schema.json->max_items->tooltip
 msgid "Maximum number of items to display for this feed"
