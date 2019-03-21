@@ -39,6 +39,10 @@ msgstr "Východ slnka"
 msgid "Sunset"
 msgstr "Západ slnka"
 
+#: applet.js:621
+msgid "Cloudiness:"
+msgstr "Oblačnosť:"
+
 #: applet.js:648
 msgid "Loading current weather ..."
 msgstr "Načítava sa aktuálne počasie ..."
