@@ -1379,14 +1379,13 @@ class CobiAppButton {
       if (nMonitors > 1) {
         item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another monitor"));
         this._contextMenu.addMenuItem(item);
-        let xrandrMonitors = getMonitors();
         let monitor = this._currentWindow.get_monitor();
         for (let i = 0; i < nMonitors; i++) {
           if (i == monitor) {
             continue;
           }
           let j = i;
-          let name = _("Monitor") + " " + j + " (" + xrandrMonitors[j] + ")";
+          let name = _("Monitor") + " " + j + " (" + this._applet.xrandrMonitors[j] + ")";
           let monitorItem = new PopupMenu.PopupMenuItem(name);
           monitorItem.connect("activate", Lang.bind(this, function() {
             this._currentWindow.move_to_monitor(j);
@@ -2076,6 +2075,7 @@ class CobiWindowList extends Applet.Applet {
   }
   
   _updateMonitor() {
+    this.xrandrMonitors = getMonitors();
     this._monitor = Main.layoutManager.findMonitorForActor(this.actor);
   }
   
