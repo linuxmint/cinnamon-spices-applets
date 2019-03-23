@@ -22,6 +22,7 @@ const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Tweener = imports.ui.tweener;
 const Signals = imports.signals;
@@ -39,6 +40,7 @@ const WindowUtils = imports.misc.windowUtils;
 const DND = imports.ui.dnd;
 const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 const UUID = "windowlist@cobinja.de";
 
@@ -174,6 +176,21 @@ function getOverheadSize(actor) {
   height += themeNode.get_margin(St.Side.BOTTOM);
   
   return [width, height];
+}
+
+function getMonitors() {
+  let gdkScreen = Gdk.Screen.get_default();
+  let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
+  let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
+  let outputInfos = currentConfig.get_outputs();
+  let result = [];
+  for (let index = 0; index < outputInfos.length; index++) {
+    let output = outputInfos[index];
+    if (output.is_active()) {
+      result.push(output.get_display_name());
+    }
+  }
+  return result;
 }
 
 const dummy = {};
@@ -1362,18 +1379,19 @@ class CobiAppButton {
       if (nMonitors > 1) {
         item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another monitor"));
         this._contextMenu.addMenuItem(item);
+        let xrandrMonitors = getMonitors();
         let monitor = this._currentWindow.get_monitor();
         for (let i = 0; i < nMonitors; i++) {
           if (i == monitor) {
             continue;
           }
           let j = i;
-          let name = _("Monitor") + " " + j;
-          let mon = new PopupMenu.PopupMenuItem(name);
-          mon.connect("activate", Lang.bind(this, function() {
+          let name = _("Monitor") + " " + j + " (" + xrandrMonitors[j] + ")";
+          let monitorItem = new PopupMenu.PopupMenuItem(name);
+          monitorItem.connect("activate", Lang.bind(this, function() {
             this._currentWindow.move_to_monitor(j);
           }));
-          item.menu.addMenuItem(mon);
+          item.menu.addMenuItem(monitorItem);
         }
       }
       
