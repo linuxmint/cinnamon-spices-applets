@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-21 20:34+0200\n"
-"PO-Revision-Date: 2018-12-01 12:58+0100\n"
+"PO-Revision-Date: 2019-03-23 07:26+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: hu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.0.6\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
@@ -459,13 +459,13 @@ msgstr "Adjon meg a gyorsindítóhoz parancsot"
 #. 2.6->settings-schema.json->all-programs-label->description
 #. 3.4->settings-schema.json->all-programs-label->description
 msgid "'All Programs'-Button label"
-msgstr ""
+msgstr "„Minden alkalmazás” gomb címke"
 
 #. 3.2->settings-schema.json->all-programs-label->tooltip
 #. 2.6->settings-schema.json->all-programs-label->tooltip
 #. 3.4->settings-schema.json->all-programs-label->tooltip
 msgid "Enter custom text for the 'All Programs' button."
-msgstr ""
+msgstr "Adja meg a „Minden alkalmazás” gombon megjelenítendő szöveget."
 
 #. 3.2->settings-schema.json->menu-appear->title
 #. 3.4->settings-schema.json->menu-appear->title
@@ -610,6 +610,8 @@ msgid ""
 "Select an icon file or type an icon name into the entry box for the "
 "quicklauncher"
 msgstr ""
+"Válasszon ki egy ikon-fájlt, vagy írja be az ikon nevét a beviteli mezőbe "
+"gyorsindítóhoz."
 
 #. 3.2->settings-schema.json->search-filesystem->description
 #. 2.6->settings-schema.json->search-filesystem->description
@@ -651,7 +653,7 @@ msgstr "MATE menü"
 #. 2.6->settings-schema.json->menu-layout->tooltip
 #. 3.4->settings-schema.json->menu-layout->tooltip
 msgid "Choose between Stark-Menu and MATE-Menu layout"
-msgstr ""
+msgstr "Válasszon a Stark menü és a MATE menü elrendezések közül"
 
 #. 3.2->settings-schema.json->menu-layout->description
 #. 2.6->settings-schema.json->menu-layout->description
@@ -680,19 +682,19 @@ msgstr "Menü elrendezés"
 #. 2.6->settings-schema.json->quicklauncher-0-command->tooltip
 #. 2.6->settings-schema.json->quicklauncher-18-command->tooltip
 msgid "Enter command to start the quicklauncher"
-msgstr ""
+msgstr "Adjon meg a gyorsindítóhoz parancsot"
 
 #. 3.2->settings-schema.json->show-favorite-icons->description
 #. 2.6->settings-schema.json->show-favorite-icons->description
 #. 3.4->settings-schema.json->show-favorite-icons->description
 msgid "Show favorite icons"
-msgstr ""
+msgstr "Kedvenc ikonok megjelenítése"
 
 #. 3.2->settings-schema.json->show-favorite-icons->tooltip
 #. 2.6->settings-schema.json->show-favorite-icons->tooltip
 #. 3.4->settings-schema.json->show-favorite-icons->tooltip
 msgid "Choose whether or not to show icons on favorites."
-msgstr ""
+msgstr "Válassza ki, hogy bekapcsolja-e a kedvencek ikonjainak megjelenítését."
 
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
@@ -705,26 +707,29 @@ msgstr "Ikonok megjelenítése a helyi menüben"
 #. 3.4->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
 msgstr ""
+"Válassza ki, hogy bekapcsolja-e a ikonok megjelenítését a helyi menüben."
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
 #. 3.4->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application's description under their titles"
-msgstr ""
+msgstr "Alkalmazás leírások megjelenítése"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid ""
-"Choose whether or not to show the application description on the "
-"application buttons."
+"Choose whether or not to show the application description on the application "
+"buttons."
 msgstr ""
+"Válassza ki, hogy bekapcsolja-e az alkalmazás leírások megjelenítését a "
+"gombokon."
 
 #. 3.2->settings-schema.json->menu-label->description
 #. 2.6->settings-schema.json->menu-label->description
 #. 3.4->settings-schema.json->menu-label->description
 msgid "'Menu'-Button label"
-msgstr "„Menü” gomb címkéje"
+msgstr "„Menü” gomb címke"
 
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 2.6->settings-schema.json->menu-label->tooltip
@@ -756,6 +761,8 @@ msgstr "Gyorsindító gombok stílusa"
 msgid ""
 "Choose whether to show icons and/or labels on the quicklauncher buttons."
 msgstr ""
+"Válassza ki, hogy bekapcsolja-e az az ikonok és címkék megjelenítését a "
+"gyorsindító gombokon."
 
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
@@ -773,13 +780,13 @@ msgstr "Csak ikonok"
 #. 2.6->settings-schema.json->user-box-layout->description
 #. 3.4->settings-schema.json->user-box-layout->description
 msgid "User account info box style"
-msgstr ""
+msgstr "Felhasználói fiók információk megjelenítésének stílusa"
 
 #. 3.2->settings-schema.json->user-box-layout->tooltip
 #. 2.6->settings-schema.json->user-box-layout->tooltip
 #. 3.4->settings-schema.json->user-box-layout->tooltip
 msgid "Choose whether to show the user name and/or user picture."
-msgstr ""
+msgstr "Válassza ki, hogy megjelenjen-e a felhasználói név és a fiók kép."
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
@@ -809,7 +816,7 @@ msgstr "Kilépés gombok elrendezése"
 #. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
 #. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
 msgid "Choose the layout of the quit options."
-msgstr ""
+msgstr "Válassza ki a kilépési lehetőségek elrendezését."
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
@@ -858,8 +865,7 @@ msgstr "Automatikus görgetés az alkalmazás listában"
 #. 2.6->settings-schema.json->enable-autoscroll->tooltip
 #. 3.4->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application "
-"list."
+"Choose whether or not to enable smooth autoscrolling in the application list."
 msgstr ""
 "Válassza ki, hogy bekapcsolja-e az automatikus görgetést az alkalmazás "
 "listában."
@@ -898,7 +904,7 @@ msgstr "„Kilépés” gomb címke"
 #. 2.6->settings-schema.json->shutdown-label->tooltip
 #. 3.4->settings-schema.json->shutdown-label->tooltip
 msgid "Enter custom text for the 'Quit' button."
-msgstr ""
+msgstr "Adja meg a „Kilépés” gombon megjelenítendő szöveget."
 
 #. 3.2->settings-schema.json->show-category-icons->description
 #. 2.6->settings-schema.json->show-category-icons->description
@@ -957,25 +963,25 @@ msgstr "ezredmásodperc"
 #. 2.6->settings-schema.json->show-sidebar->description
 #. 3.4->settings-schema.json->show-sidebar->description
 msgid "Show sidebar on menu"
-msgstr ""
+msgstr "Oldalsáv vagy menü megjelenítése"
 
 #. 3.2->settings-schema.json->show-sidebar->tooltip
 #. 2.6->settings-schema.json->show-sidebar->tooltip
 #. 3.4->settings-schema.json->show-sidebar->tooltip
 msgid "Choose whether or not to show the sidebar."
-msgstr ""
+msgstr "Megjelenjen-e ez az oldalsáv."
 
 #. 3.2->settings-schema.json->favorites-label->description
 #. 2.6->settings-schema.json->favorites-label->description
 #. 3.4->settings-schema.json->favorites-label->description
 msgid "'Favorites'-Button label"
-msgstr ""
+msgstr "„Kedvencek” gomb címke"
 
 #. 3.2->settings-schema.json->favorites-label->tooltip
 #. 2.6->settings-schema.json->favorites-label->tooltip
 #. 3.4->settings-schema.json->favorites-label->tooltip
 msgid "Enter custom text for the 'Favorites' button."
-msgstr ""
+msgstr "Adja meg a „Kedvencek” gombon megjelenítendő szöveget."
 
 #. 2.6->settings-schema.json->head-menu-layout->description
 msgid "Stark-Menu/MATE-Menu"
@@ -991,7 +997,7 @@ msgstr "Ikonok"
 
 #. 2.6->settings-schema.json->hover-delay->description
 msgid "Category hover delay"
-msgstr ""
+msgstr "Kategória megjelenés késleltetése"
 
 #. 2.6->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
@@ -999,7 +1005,7 @@ msgstr "Késleltetés a kategóriák közötti váltásnál"
 
 #. 3.4->settings-schema.json->custom-quicklauncher-places->title
 msgid "Quicklauncher Places"
-msgstr ""
+msgstr "Gyorsindító helyek"
 
 #. 3.4->settings-schema.json->custom-quicklauncher-apps->title
 msgid "Quicklauncher Applications"
@@ -1011,21 +1017,21 @@ msgstr "Gyorsindító elválasztók"
 
 #. 3.4->settings-schema.json->quicklauncher-separator1->description
 msgid "Separator below user account info box"
-msgstr ""
+msgstr "Elválasztó megjelenítése a felhasználói fiók információk terület alatt"
 
 #. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
 #. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
 #. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
 msgid "Choose whether or not to show this separator."
-msgstr ""
+msgstr "Válassza ki, hogy bekapcsolja-e az elválasztók megjelenítését."
 
 #. 3.4->settings-schema.json->quicklauncher-separator3->description
 msgid "Separator above quit buttons"
-msgstr ""
+msgstr "Elválasztó megjelenítése a kilépés gombok felett"
 
 #. 3.4->settings-schema.json->quicklauncher-separator2->description
 msgid "Separator below quicklauncher places"
-msgstr ""
+msgstr "Elválasztó megjelenítése a gyorsindító terület alatt"
 
 #. 3.4->settings-schema.json->quicklauncher-apps->description
 msgid "Custom Quicklauncher Applications"
