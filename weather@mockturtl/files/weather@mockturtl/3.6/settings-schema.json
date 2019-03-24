@@ -1,7 +1,7 @@
 {
   "head":
   { "type": "header"
-  , "description": "Settings for weather@mockturtl 3.6"
+  , "description": "Settings for weather@mockturtl 3.8"
   }
 ,  "keybinding":
   { "type": "keybinding"
@@ -18,12 +18,26 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap": "OpenWeatherMap"
+      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
+      "DarkSky": "DarkSky"
     }
+  },
+  "apiKey":
+  { "type": "entry"
+  , "default": ""
+  , "description": "API Key"
+  , "tooltip": "Copy this from your account of the used Data service and paste it here."
+  },
+  "manualLocation":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Manual Location"
+  , "tooltip": "Enable this if your location is not accurate"
   },
   "location":
   { "type": "entry"
   , "default": "London,UK"
+  , "dependency": "manualLocation"
   , "description": "Location"
   , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
 },
@@ -31,7 +45,7 @@
   {
     "type": "button",
     "indent": true,
-    "description": "Setup Location",
+    "description": "Setup API Key and Location",
     "callback": "locationLookup",
     "tooltip": "Opens webpage guide"
   },
@@ -63,8 +77,8 @@
     , "m/s": "m/s"
     , "knots": "Knots"
     }
-  }
-, "pressureUnit":
+  },
+  "pressureUnit":
   { "type": "combobox"
   , "default": "hPa"
   , "description": "Atmospheric pressure unit"
@@ -97,7 +111,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 7
+  , "max": 5
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"
@@ -105,7 +119,12 @@
 , "translateCondition":
   { "type": "checkbox"
   , "default": true
-  , "description": "Translate condition"
+  , "description": "Translate conditions"
+  },
+  "shortConditions":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Less verbose conditions"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"
@@ -135,6 +154,10 @@
   , "units": "minutes"
   , "step": 5
   , "description": "Update interval"
+  },
+  "credits": {
+    "type": "header",
+    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
   }
 }
 
