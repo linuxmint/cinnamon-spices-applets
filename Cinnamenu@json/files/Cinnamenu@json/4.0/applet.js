@@ -1,3 +1,4 @@
+const GObject = imports.gi.GObject;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -45,6 +46,12 @@ const {readChromiumBookmarks, readFirefoxProfiles, Gda} = require('./browserBook
 const PlaceDisplay = require('./placeDisplay');
 
 const hintText = _('Type to search...');
+
+if (!window.isFinalized) {
+  window.isFinalized = function isFinalized(gObject) {
+    return GObject.Object.prototype.toString.call(gObject).indexOf('FINALIZED') > -1;
+  };
+}
 
 class bookmarksManager {
   constructor(appSystem) {
@@ -928,7 +935,7 @@ class CinnamenuApplet extends TextIconApplet {
       lrc_x: vi.w,
       lrc_y: vi.h
     };
-    if (!this.vectorBox || this.vectorBox.is_finalized()) {
+    if (!this.vectorBox || isFinalized(this.vectorBox)) {
       this.vectorBox = new St.Polygon(config);
       this.vectorBox._delegate = actor._delegate;
       this.draggableVectorBox = makeDraggable(this.vectorBox);
@@ -1293,7 +1300,7 @@ class CinnamenuApplet extends TextIconApplet {
       }
     }
 
-    if (this.applicationsGridBox && !this.applicationsGridBox.is_finalized()) {
+    if (this.applicationsGridBox && !isFinalized(this.applicationsGridBox)) {
       let gridActors = this.applicationsGridBox.get_children();
       if (gridActors) {
         for (let i = 0, len = gridActors.length; i < len; i++) {
@@ -2493,7 +2500,7 @@ class CinnamenuApplet extends TextIconApplet {
   }
 
   destroyContainer(container) {
-    if (!container || container.is_finalized()) {
+    if (!container || isFinalized(container)) {
       return false;
     }
     let children = container.get_children();

@@ -937,7 +937,7 @@ class AppListGridButton extends PopupBaseMenuItem {
   }
 
   onStateChanged() {
-    if (!this.buttonState.app || this.dot.is_finalized()) {
+    if (!this.buttonState.app || isFinalized(this.dot)) {
       return false;
     }
     if (this.buttonState.appType === ApplicationType._applications) {
@@ -1108,7 +1108,7 @@ class GroupButton extends PopupBaseMenuItem {
   }
 
   onUserChanged() {
-    if (!this.user || !this.user.is_loaded || this.icon.is_finalized()) {
+    if (!this.user || !this.user.is_loaded || isFinalized(this.icon)) {
       return;
     }
     this.name = this.user.get_real_name();
