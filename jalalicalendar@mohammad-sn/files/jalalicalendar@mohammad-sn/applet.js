@@ -1,3 +1,4 @@
+const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
@@ -19,24 +20,6 @@ const CinnamonDesktop = imports.gi.CinnamonDesktop;
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
-
-function _onVertSepRepaint (area)
-{
-    let cr = area.get_context();
-    let themeNode = area.get_theme_node();
-    let [width, height] = area.get_surface_size();
-    let stippleColor = themeNode.get_color('-stipple-color');
-    let stippleWidth = themeNode.get_length('-stipple-width');
-    let x = Math.floor(width/2) + 0.5;
-    cr.moveTo(x, 0);
-    cr.lineTo(x, height);
-    Clutter.cairo_set_source_color(cr, stippleColor);
-    cr.setDash([1, 3], 1); // Hard-code for now
-    cr.setLineWidth(stippleWidth);
-    cr.stroke();
-
-    cr.$dispose();
-};
 
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
@@ -160,7 +143,7 @@ MyApplet.prototype = {
             label_string = Calendar.toLocaleFormat(now, this.custom_format);
             if (!label_string) {
                 global.logError("Calendar applet: bad time format string - check your string.");
-                label_string = "~CLOCK FORMAT ERROR~ " + now.toLocaleFormat("%l:%M %p");
+                label_string = "~CLOCK FORMAT ERROR~ " + Calendar._toLocaleFormat(now, "%l:%M %p");
             }
             this.set_applet_label(label_string);
             if(this.custom_format.search("%S") > 0 || this.custom_format.search("%c") > 0 || this.custom_format.search("%T") > 0 || this.custom_format.search("%X") > 0) {
@@ -168,7 +151,7 @@ MyApplet.prototype = {
             }
         }
         else if (in_vertical_panel) {
-            label_string = now.toLocaleFormat("%H%n%M"); // this is all that will fit in a vertical panel with a typical default font
+            label_string = Calendar._toLocaleFormat(now, "%H%n%M"); // this is all that will fit in a vertical panel with a typical default font
             this.set_applet_label(label_string);
         }
         else {
@@ -183,7 +166,7 @@ MyApplet.prototype = {
         }
 
         // Applet content
-        let dateFormattedFull = now.toLocaleFormat(this._dateFormatFull).capitalize();
+        let dateFormattedFull = Calendar._toLocaleFormat(now, this._dateFormatFull).capitalize();
         if (dateFormattedFull !== this._lastDateFormattedFull) {
             this._date.set_text(dateFormattedFull);
             this._jdate.set_text(Calendar.FarsiNumbers(Calendar.toLocaleFormat(now,"%A %e %B %Y")));

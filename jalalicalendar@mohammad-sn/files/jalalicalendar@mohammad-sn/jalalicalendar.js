@@ -22,6 +22,10 @@ const AppletDir = imports.ui.appletManager.appletMeta['jalalicalendar@mohammad-s
 const EventsFile = AppletDir + "/sevents.json";
 const EventsFile2 = AppletDir + "/mevents.json";
 
+const _toLocaleFormat = function _toLocaleFormat(date, format) {
+    return Cinnamon.util_format_date(format, date.getTime());
+};
+
 ////
 
 
@@ -389,14 +393,14 @@ function _formatEventTime(event, clockFormat) {
         switch (clockFormat) {
             case '24h':
                 /* Translators: Shown in calendar event list, if 24h format */
-                ret = event.date.toLocaleFormat(C_("event list time", "%H:%M"));
+                ret = _toLocaleFormat(event.date, C_("event list time", "%H:%M"));
                 break;
 
             default:
                 /* explicit fall-through */
             case '12h':
                 /* Transators: Shown in calendar event list, if 12h format */
-                ret = event.date.toLocaleFormat(C_("event list time", "%l:%M %p"));
+                ret = _toLocaleFormat(event.date, C_("event list time", "%l:%M %p"));
                 break;
         }
     }
@@ -995,7 +999,7 @@ function toLocaleFormat(jdate, strFormat) {
     dateResult = dateResult.replace("%b", FarsiMonthNamesShort[jdate.getMonth()].charRefToUnicode());
     dateResult = dateResult.replace("%A", FarsiDayNamesFull[jdate.getDay()].charRefToUnicode());
     dateResult = dateResult.replace("%a", FarsiDayNamesFull[jdate.getDay()].charRefToUnicode());
-    dateResult = jdate.toLocaleFormat(dateResult);
+    dateResult = _toLocaleFormat(jdate, dateResult);
 
     return dateResult;
 };
