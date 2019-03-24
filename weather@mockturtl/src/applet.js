@@ -1,6 +1,12 @@
 "use strict";
 const DEBUG = false;
 
+
+const AppletDir = imports.ui.appletManager.applets['weather@mockuturtl'];
+const regenerator = AppletDir.regenerator;
+const regeneratorRuntime = regenerator.runtime;
+
+
 //----------------------------------
 // imports
 //----------------------------------
