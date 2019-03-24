@@ -202,7 +202,7 @@ MyApplet.prototype = {
 
         if (!label_string) {
             global.logError("Calendar applet: bad time format string - check your string.");
-            label_string = "~CLOCK FORMAT ERROR~ " + displayDate.toLocaleFormat(DEFAULT_FORMAT);
+            label_string = "~CLOCK FORMAT ERROR~ " + Calendar.toLocaleFormat(displayDate, DEFAULT_FORMAT);
         }
         this.set_applet_label(label_string);
 
