@@ -1,3 +1,4 @@
+const Cinnamon = imports.gi.Cinnamon
 const Applet = imports.ui.applet;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
@@ -8,6 +9,7 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
+
 let Calendar;
 if (typeof require !== 'undefined') {
     Calendar = require('./calendar');
@@ -212,7 +214,7 @@ MyApplet.prototype = {
 
         // Applet label
         if (this.use_custom_format) {
-            label_string = now.toLocaleFormat(this.custom_format);
+            label_string = Cinnamon.util_format_date(this.custom_format, now.getTime());
             if (!label_string) {
                 global.logError("Calendar applet: bad time format string - check your string.");
                 label_string = "~CLOCK FORMAT ERROR~";
@@ -223,7 +225,7 @@ MyApplet.prototype = {
             }
         }
         else if (in_vertical_panel) {
-            label_string = now.toLocaleFormat("%H%n%M"); // this is all that will fit in a vertical panel with a typical default font
+            label_string = Cinnamon.util_format_date('%H%n%M', now.getTime()); // this is all that will fit in a vertical panel with a typical default font
             this.set_applet_label(label_string);
         }
         else {
@@ -238,7 +240,7 @@ MyApplet.prototype = {
         }
 
         // Applet content
-        let dateFormattedFull = now.toLocaleFormat(this._dateFormatFull).capitalize();
+        let dateFormattedFull = Cinnamon.util_format_date(this._dateFormatFull, now.getTime()).capitalize();
         if (dateFormattedFull !== this._lastDateFormattedFull) {
             this._date.set_text(dateFormattedFull);
             this.set_applet_tooltip(dateFormattedFull);
