@@ -1,3 +1,4 @@
+const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
@@ -43,6 +44,9 @@ const APPLET_ICON_NAME_NOTIF = "diaspora_asterisk_32_notif.png";
 const NOTIFS_FILE_NAME = "notifs.json";
 const NOTIFICATION_URL = "/notifications";
 
+const toLocaleFormat = function toLocaleFormat(date, format) {
+	return Cinnamon.util_format_date(format, date.getTime());
+};
 
 function DiasporaNotif(metadata, orientation, panelHeight, instanceId) {
 	this.settings = new Settings.AppletSettings(this, UUID, instanceId);
@@ -187,7 +191,7 @@ DiasporaNotif.prototype = {
 
 
 					let date = new Date(notif.time);
-					let dateStr = date.toLocaleFormat("%e/%m/%Y %H:%M");
+					let dateStr = toLocaleFormat(date, "%e/%m/%Y %H:%M");
 
 					let notifLabel = new St.Label({style_class:"notifLabel"});
 					notifLabel.set_text(notif.text + " | " + dateStr);
