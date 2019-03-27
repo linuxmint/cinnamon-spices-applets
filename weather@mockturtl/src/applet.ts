@@ -6,7 +6,7 @@ interface Forecast {
     temp: number,
     temp_min: number,           //Required
     temp_max: number,           //Required
-    pressure: number,
+    pressure?: number,
     sea_level: number,
     grnd_level: number,
     humidity: number,
@@ -268,7 +268,7 @@ function _(str: string): string {
 
 
 const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
-const darkSky = require('./darkSky');
+const darkSky = AppletDir.darkSky;
 const openWeatherMap = AppletDir.openWeatherMap;
 // Location lookup service
 const ipApi = AppletDir.ipApi;
@@ -286,34 +286,6 @@ const ipApi = AppletDir.ipApi;
 //----------------------------------------------------------------------
 
 class MyApplet extends Applet.TextIconApplet {
-    settings: any;
-    log: Log;
-    currentLocale: any = null
-    systemLanguage: any = null;
-
-    // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-    _httpSession = new Soup.SessionAsync();
-    
-    
-
-    provider: any;  // API
-    locProvider = new ipApi.IpApi(this); // IP location lookup
-    lastUpdated: Date = null;
-
-    //////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////
-    ///////////                                       ////////////
-    ///////////              Data Storage             ////////////
-    ///////////                                       ////////////
-    //////////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////////
-    // Translation layer is necessary with multiple API choices
-    // Init with null, something we can properly check for
-
-    // 
-    //  If you get the values in these objects correctly with correct units
-    //  from a new API, Everything will work as intended.
-    //
     weather: Weather = {
       dateTime: null,           // Date object, UTC
       location: {
@@ -355,7 +327,7 @@ class MyApplet extends Applet.TextIconApplet {
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////  
     
-     // Units
+
      WeatherUnits = {
       CELSIUS: 'celsius',
       FAHRENHEIT: 'fahrenheit'
@@ -390,17 +362,13 @@ class MyApplet extends Applet.TextIconApplet {
     // DarkSky Filter words for short conditions, won't work on every language
     DarkSkyFilterWords = [_("and"), _("until"), _("in")];
 
-    menu: any;
-    menuManager: any;
 
+    // UI elements
     _currentWeather: any;
     _separatorArea: any;
     _futureWeather: any;
     _applet_context_menu: any;
-    _refreshInterval: any;
-    _icon_type: any;
-
-    // UI elements
+    _icon_type: string;
     _currentWeatherIcon: any;
     _currentWeatherSummary: any;
     _currentWeatherLocation: any;
@@ -415,7 +383,8 @@ class MyApplet extends Applet.TextIconApplet {
     _forecast: Array<any>;
     _forecastBox: any;
 
-    // Settings
+    // Settings properties to bind
+    _refreshInterval: number;
     _manualLocation: boolean;
     _dataService: string;
     _location: string;
@@ -433,9 +402,20 @@ class MyApplet extends Applet.TextIconApplet {
     _showCommentInPanel: boolean;
     _showTextInPanel: boolean;
     _locationLabelOverride: string;
+    
     keybinding: any;
+    menu: any;
+    menuManager: any;
+    settings: any;
+    log: Log;
+    currentLocale: string = null;
+    systemLanguage: string = null;
+    // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
+    _httpSession = new Soup.SessionAsync();
 
-
+    provider: any;  // API
+    locProvider = new ipApi.IpApi(this); // IP location lookup
+    lastUpdated: Date = null;
     orientation: any;
 
     constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
@@ -449,9 +429,9 @@ class MyApplet extends Applet.TextIconApplet {
       
 
        // Interface: TextIconApplet
-       this.set_applet_icon_name(APPLET_ICON)
-       this.set_applet_label(_("..."))
-       this.set_applet_tooltip(_("Click to open"))
+       this.set_applet_icon_name(APPLET_ICON);
+       this.set_applet_label(_("..."));
+       this.set_applet_tooltip(_("Click to open"));
  
        // PopupMenu
        this.menuManager = new PopupMenu.PopupMenuManager(this)
@@ -467,24 +447,20 @@ class MyApplet extends Applet.TextIconApplet {
        //----------------------------------
  
        for (let k in KEYS) {
-         let key = KEYS[k]
-         let keyProp = "_" + key
-         this.settings.bindProperty(Settings.BindingDirection.IN, key, keyProp,
-                                    this.refreshAndRebuild, null)
+         let key = KEYS[k];
+         let keyProp = "_" + key;
+         this.settings.bindProperty(Settings.BindingDirection.IN, 
+            key, keyProp, this.refreshAndRebuild, null);
        }
  
        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
           WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
  
-       this.settings.bindProperty(Settings.BindingDirection.IN,
-                                  "keybinding",
-                                  "keybinding",
-                                  this._onKeySettingsUpdated,
-                                  null)
-       Main.keybindingManager.addHotKey(UUID,
-                                        this.keybinding,
-                                        Lang.bind(this,
-                                                  this.on_applet_clicked))
+       this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", 
+        "keybinding", this._onKeySettingsUpdated, null);
+
+       Main.keybindingManager.addHotKey(
+         UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
  
        this.updateIconType()
  

@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "lib": ["es2017"],
-        "module": "none",
+        "module": "es6",
         "target": "es2017",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        //"outFile": "files/weather@mockturtl/3.8/applet.js",
+        //"outFile": "dst/applet.js",
         "sourceMap": false,
         //"alwaysStrict": true,
         "experimentalDecorators": true,

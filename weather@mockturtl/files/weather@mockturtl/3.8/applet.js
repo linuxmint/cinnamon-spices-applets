@@ -135,17 +135,12 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
-const darkSky = require('./darkSky');
+const darkSky = AppletDir.darkSky;
 const openWeatherMap = AppletDir.openWeatherMap;
 const ipApi = AppletDir.ipApi;
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.currentLocale = null;
-        this.systemLanguage = null;
-        this._httpSession = new Soup.SessionAsync();
-        this.locProvider = new ipApi.IpApi(this);
-        this.lastUpdated = null;
         this.weather = {
             dateTime: null,
             location: {
@@ -211,6 +206,11 @@ class MyApplet extends Applet.TextIconApplet {
             }
         };
         this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+        this.currentLocale = null;
+        this.systemLanguage = null;
+        this._httpSession = new Soup.SessionAsync();
+        this.locProvider = new ipApi.IpApi(this);
+        this.lastUpdated = null;
         this.currentLocale = GLib.get_language_names()[0];
         this.systemLanguage = this.currentLocale.split('_')[0];
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);

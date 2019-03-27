@@ -197,7 +197,7 @@ declare class global {
              *
              * Inherits: PopupMenu.PopupMenu
              */
-            export class AppletPopupMenu extends PopupMenu.PopupIconMenuItem {
+            export class AppletPopupMenu extends popupMenu.PopupIconMenuItem {
                 constructor(context: any, orinentation: string);
 
                 _onOrientationChanged(a: any, orientation: string): void;
@@ -237,7 +237,7 @@ declare class global {
                 constructor(context: any);
             }
             export class PopupMenu {
-
+                constructor();
             }
             export class PopupIconMenuItem {
 

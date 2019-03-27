@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class DarkSky {
     constructor(_app) {
         this.descriptionLinelength = 25;
