@@ -81,7 +81,7 @@ function DarkSky(app) {
             app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);        
             app.weather.condition.description = json.currently.summary;
             app.weather.condition.icon = app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
-            app.weather.condition.cloudiness = json.currently.cloudCover * 100;
+            app.weather.cloudiness = json.currently.cloudCover * 100;
             app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature); //convert
             // Forecast
             for (let i = 0; i < app._forecastDays; i++) {

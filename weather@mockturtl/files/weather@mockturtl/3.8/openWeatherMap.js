@@ -49,7 +49,7 @@ function OpenWeatherMap(app) {
                 }
             }
             catch(e) {
-                app.log.Error("Unable to call API:", e);
+                app.log.Error("Unable to call API:" + e);
                 return false;
             }
 
@@ -203,7 +203,7 @@ function OpenWeatherMap(app) {
                 app.showError(app.errMsg.label.service, app.errMsg.desc.locNotFound);
                 break;
             case("429"):
-                app.showError(app.errMsg.label.service, app.errMsg.desc.blocked);
+                app.showError(app.errMsg.label.service, app.errMsg.desc.keyBlock);
                 break;
             default:
                 app.showError(app.errMsg.label.service, app.errMsg.desc.unknown);
