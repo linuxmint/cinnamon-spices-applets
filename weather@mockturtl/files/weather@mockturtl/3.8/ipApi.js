@@ -1,17 +1,20 @@
-function IpApi(app) {
-    this.query = "https://ipapi.co/json";
-    this.GetLocation = async function () {
+class IpApi {
+    constructor(_app) {
+        this.query = "https://ipapi.co/json";
+        this.app = _app;
+    }
+    async GetLocation() {
         let json;
         try {
-            json = await app.LoadJsonAsync(this.query);
+            json = await this.app.LoadJsonAsync(this.query);
             if (json == null) {
-                app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
                 return false;
             }
         }
         catch (e) {
-            app.log.Error("IpApi service error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.cantGetLoc);
+            this.app.log.Error("IpApi service error: " + e);
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
             return false;
         }
         if (json.error) {
@@ -19,27 +22,30 @@ function IpApi(app) {
             return false;
         }
         return this.ParseInformation(json);
-    };
-    this.ParseInformation = function (json) {
+    }
+    ;
+    ParseInformation(json) {
         try {
             let loc = json.latitude + "," + json.longitude;
-            app.settings.setValue('location', loc);
-            app.weather.location.timeZone = json.timezone;
-            app.weather.location.city = json.city;
-            app.weather.location.country = json.country;
-            app.log.Print("Location obtained");
-            app.log.Debug("Location:" + json.latitude + "," + json.longitude);
-            app.log.Debug("Location setting is now: " + app._location);
+            this.app.settings.setValue('location', loc);
+            this.app.weather.location.timeZone = json.timezone;
+            this.app.weather.location.city = json.city;
+            this.app.weather.location.country = json.country;
+            this.app.log.Print("Location obtained");
+            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
+            this.app.log.Debug("Location setting is now: " + this.app._location);
             return true;
         }
         catch (e) {
-            app.log.Error("IPapi parsing error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.cantGetLoc);
+            this.app.log.Error("IPapi parsing error: " + e);
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
             return false;
         }
-    };
-    this.HandleErrorResponse = function (json) {
-        app.log.Error("IpApi error response: " + json.reason);
-    };
+    }
+    ;
+    HandleErrorResponse(json) {
+        this.app.log.Error("IpApi error response: " + json.reason);
+    }
+    ;
 }
 ;

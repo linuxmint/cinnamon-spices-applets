@@ -7,21 +7,28 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-function IpApi(app: MyApplet) {
-    this.query = "https://ipapi.co/json";
+class IpApi {
+    query = "https://ipapi.co/json";
+    app: MyApplet;
 
-    this.GetLocation = async function() {
-        let json;
+
+    constructor(_app: MyApplet) {
+        this.app = _app;
+    }
+
+
+    async GetLocation() {
+        let json: IpApiPayload;
         try {
-            json = await app.LoadJsonAsync(this.query);
+            json = await this.app.LoadJsonAsync(this.query);
             if (json == null) {                         // Bad response
-                app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
                 return false;
             }
         }
         catch(e) {
-            app.log.Error("IpApi service error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.cantGetLoc);
+            this.app.log.Error("IpApi service error: " + e);
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
             return false;
         }
 
@@ -34,32 +41,52 @@ function IpApi(app: MyApplet) {
         
     };
 
-    this.ParseInformation = function(json: any) {
+    ParseInformation(json: any) {
         try {
             let loc = json.latitude + "," + json.longitude;
-            //app._location == (json.latitude + "," + json.longitude);
-            app.settings.setValue('location', loc);
-            app.weather.location.timeZone = json.timezone;
-            app.weather.location.city = json.city;
-            app.weather.location.country = json.country;
-            app.log.Print("Location obtained");
-            app.log.Debug("Location:" + json.latitude + "," + json.longitude);
-            app.log.Debug("Location setting is now: " + app._location);
+            //this.app._location == (json.latitude + "," + json.longitude);
+            this.app.settings.setValue('location', loc);
+            this.app.weather.location.timeZone = json.timezone;
+            this.app.weather.location.city = json.city;
+            this.app.weather.location.country = json.country;
+            this.app.log.Print("Location obtained");
+            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
+            this.app.log.Debug("Location setting is now: " + this.app._location);
             return true;
         }
         catch(e) {
-            app.log.Error("IPapi parsing error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.cantGetLoc);
+            this.app.log.Error("IPapi parsing error: " + e);
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
             return false;
         }
     };
 
-    this.HandleErrorResponse = function(json: any) {
-        app.log.Error("IpApi error response: " + json.reason);       
+    HandleErrorResponse(json: any) {
+        this.app.log.Error("IpApi error response: " + json.reason);       
     };
 };
 
-
+interface IpApiPayload {
+    ip: string,
+    city: string,
+    region: string,
+    region_code: string,
+    country: string,
+    country_name: string,
+    continent_code: string,
+    in_eu: boolean,
+    postal: string,
+    latitude: number,
+    longitude: number,
+    timezone: string,
+    utc_offset: string,
+    country_calling_code: string,
+    currency: string,
+    languages: string,
+    asn: string,
+    org: string,
+    error?: string
+}
 /*
 
 Half sanitized example payload, courtesy of gr3q

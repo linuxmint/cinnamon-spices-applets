@@ -82,6 +82,7 @@ const Mainloop = imports.mainloop
  */
 const Gio = imports.gi.Gio
 const Gtk = imports.gi.Gtk
+const Cinnamon = imports.gi.Cinnamon;
 // http://developer.gnome.org/libsoup/stable/libsoup-client-howto.html
 const Soup = imports.gi.Soup
 // http://developer.gnome.org/st/stable/
@@ -550,7 +551,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     async refreshAndRebuild(): Promise<void> {
-      await this.refreshWeather()
+      await this.refreshWeather();
       this.rebuild();
     };
 
@@ -874,8 +875,8 @@ class MyApplet extends Applet.TextIconApplet {
               sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
           }
           else {   // else We assume that System TZ and Location TZ is same, covers 95% of users   
-            //sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.weather.sunrise.toLocaleFormat('%H:%M')));
-            //sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.weather.sunset.toLocaleFormat('%H:%M')));
+            sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
+            sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
           }         
         }
       }
@@ -1159,6 +1160,10 @@ rebuildFutureWeatherUi(): void {
 //
 //----------------------------------------------------------------------
 
+toLocaleFormat(date: Date, format: string): string {
+  return Cinnamon.util_format_date(format, date.getTime());
+};
+
 noApiKey(): boolean {
   if (this._apiKey == undefined || this._apiKey == "") {
     return true;
@@ -1287,7 +1292,7 @@ unitToUnicode(): string {
   return this._temperatureUnit == this.WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103'
 }
   // Passing appropriate resolver function for the API, and the code
-weatherIconSafely(code: string, iconResolver: (icon: string) => string): string {
+weatherIconSafely(code: string, iconResolver: (icon: string) => Array<string>): string {
   let iconname = iconResolver(code);
   for (let i = 0; i < iconname.length; i++) {
     if (this.hasIcon(iconname[i]))

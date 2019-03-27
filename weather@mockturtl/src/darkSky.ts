@@ -1,3 +1,4 @@
+import { DataProvider } from "./dataProvider";
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -6,46 +7,47 @@
 ///////////                                       ////////////
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
-function DarkSky(app: MyApplet) {
+class DarkSky implements DataProvider {
+
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    this.descriptionLinelength = 25;
-    this.supportedLanguages = [
+    descriptionLinelength = 25;
+    supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
         'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
         'kw', 'lv', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
         'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'];
 
-    this.query = "https://api.darksky.net/forecast/";
+    query = "https://api.darksky.net/forecast/";
     
+    unit: queryUnits = null;
 
-    this.queryUnits = {
-        scientific: 'si',       // speed meter/sec, temp C
-        imperial: 'us',         // speed miles/hour, temp F
-        uk: 'uk2'               // speed miles/hour, temp C
+    app: MyApplet
+
+    constructor(_app: MyApplet) {
+        this.app = _app;
     }
-    this.queryUnit = null;
+
 
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    this.GetWeather = async function() {
+    async GetWeather() {
         let query = this.ConstructQuery();
         let json;
-        let message;
         if (query != "" && query != null) {
-            app.log.Debug("DarkSky API query: " + query);
+            this.app.log.Debug("DarkSky API query: " + query);
             try {
-                json = await app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query);
                 if (json == null) {
-                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                    this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
                     return false;
                 } 
             }
             catch(e) {
-                    app.log.Error("DarkSky: API call failed: " + e);
-                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse);
+                    this.app.log.Error("DarkSky: API call failed: " + e);
+                    this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
                     return false;
             }            
          
@@ -57,34 +59,34 @@ function DarkSky(app: MyApplet) {
                 return false;
             }
         }
-        app.log.Error("DarkSky: Could not construct query, insufficent information");
-        app.showError(app.errMsg.label.service, app.errMsg.desc.locBad);
+        this.app.log.Error("DarkSky: Could not construct query, insufficent information");
+        this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
         return false;
     };
 
 
-    this.ParseWeather = function(json: any) {
+    ParseWeather(json: any) {
         try {
             // Current Weather
-            app.weather.dateTime = new Date(json.currently.time * 1000);
-            app.weather.location.timeZone = json.timezone;
-            app.weather.coord.lat = json.latitude;
-            app.weather.coord.lon = json.longitude;
-            app.weather.sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
-            app.weather.sunset = new Date(json.daily.data[0].sunsetTime * 1000);
-            app.weather.wind.speed = this.ToMPS(json.currently.windSpeed);
-            app.weather.wind.degree = json.currently.windBearing;
-            app.weather.main.temperature = this.ToKelvin(json.currently.temperature);
-            app.weather.main.pressure = json.currently.pressure;
-            app.weather.main.humidity = json.currently.humidity * 100;
+            this.app.weather.dateTime = new Date(json.currently.time * 1000);
+            this.app.weather.location.timeZone = json.timezone;
+            this.app.weather.coord.lat = json.latitude;
+            this.app.weather.coord.lon = json.longitude;
+            this.app.weather.sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
+            this.app.weather.sunset = new Date(json.daily.data[0].sunsetTime * 1000);
+            this.app.weather.wind.speed = this.ToMPS(json.currently.windSpeed);
+            this.app.weather.wind.degree = json.currently.windBearing;
+            this.app.weather.main.temperature = this.ToKelvin(json.currently.temperature);
+            this.app.weather.main.pressure = json.currently.pressure;
+            this.app.weather.main.humidity = json.currently.humidity * 100;
                 // Using Summary for both, only short description available
-            app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);        
-            app.weather.condition.description = json.currently.summary;
-            app.weather.condition.icon = app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
-            app.weather.cloudiness = json.currently.cloudCover * 100;
-            app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature); //convert
+            this.app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);        
+            this.app.weather.condition.description = json.currently.summary;
+            this.app.weather.condition.icon = this.app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
+            this.app.weather.cloudiness = json.currently.cloudCover * 100;
+            this.app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature); //convert
             // Forecast
-            for (let i = 0; i < app._forecastDays; i++) {
+            for (let i = 0; i < this.app._forecastDays; i++) {
                 // Object
                 let forecast: Forecast = {          
                     dateTime: null,             //Required
@@ -115,37 +117,37 @@ function DarkSky(app: MyApplet) {
                   forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                   forecast.condition.main = this.GetShortSummary(day.summary);
                   forecast.condition.description = this.ProcessSummary(day.summary);
-                  forecast.condition.icon = app.weatherIconSafely(day.icon, this.ResolveIcon);
+                  forecast.condition.icon = this.app.weatherIconSafely(day.icon, this.ResolveIcon);
                   forecast.main.pressure = day.pressure;
                   forecast.main.humidity = day.humidity * 100;
 
 
-                  app.forecasts.push(forecast);
+                  this.app.forecasts.push(forecast);
             }
         }
         catch(e) {
-            app.log.Error("DarkSky payload parsing error: " + e)
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.parse);
+            this.app.log.Error("DarkSky payload parsing error: " + e)
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.parse);
             return false;
         }
         return true;
     };
 
 
-    this.ConstructQuery = function() {
+    ConstructQuery() {
         this.SetQueryUnit();
         let query;
-        let key = app._apiKey.replace(" ", "");
-        let location = app._location.replace(" ", "");
-        if (app.noApiKey()) {
-            app.showError(app.errMsg.label.noKey, "");
+        let key = this.app._apiKey.replace(" ", "");
+        let location = this.app._location.replace(" ", "");
+        if (this.app.noApiKey()) {
+            this.app.showError(this.app.errMsg.label.noKey, "");
             return "";
         }
-        if (app.isCoordinate(location)) {
+        if (this.app.isCoordinate(location)) {
             query = this.query + key + "/" + location + 
-            "?exclude=minutely,hourly,flags" + "&units=" + this.queryUnit;
-            if (app.isLangSupported(app.systemLanguage, this.supportedLanguages) && app._translateCondition) {
-                query = query + "&lang=" + app.systemLanguage;
+            "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+            if (this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
+                query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
         }
@@ -155,22 +157,22 @@ function DarkSky(app: MyApplet) {
     };
 
 
-    this.HandleResponseErrors = function(json: any) {
+    HandleResponseErrors(json: any) {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: "
-        app.log.Debug("DarksSky API error payload: " + json);
+        this.app.log.Debug("DarksSky API error payload: " + json);
         switch(code) {
             case "400":
-                app.log.Error(errorMsg + error);
+                this.app.log.Error(errorMsg + error);
                 break;
             default:
-                app.log.Error(errorMsg + error);
+                this.app.log.Error(errorMsg + error);
                 break
         }
     };
 
-    this.ProcessSummary = function(summary: string) {
+    ProcessSummary(summary: string) {
         let processed = summary.split(" ");
         let result = "";
         let linelength = 0;
@@ -185,18 +187,18 @@ function DarkSky(app: MyApplet) {
         return result;
     };
 
-    this.GetShortSummary = function(summary: string) {
+    GetShortSummary(summary: string) {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !(app.DarkSkyFilterWords.includes(processed[i]))) {
+            if (!/[\(\)]/.test(processed[i]) && !(this.app.DarkSkyFilterWords.includes(processed[i]))) {
                 result = result + processed[i] + " ";
             }
         }
         return result;
     };
 
-    this.GetShortCurrentSummary = function(summary: string) {
+    GetShortCurrentSummary(summary: string) {
         let processed = summary.split(" ");
         let result = "";
         let maxLoop;
@@ -209,7 +211,7 @@ function DarkSky(app: MyApplet) {
         return result;
     }
 
-    this.ResolveIcon = function(icon: string) {
+    ResolveIcon(icon: string) {
         switch (icon) {
             case "rain":
               return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
@@ -246,36 +248,44 @@ function DarkSky(app: MyApplet) {
           }
     };
 
-    this.SetQueryUnit = function() {
-        if (app._temperatureUnit == app.WeatherUnits.CELSIUS){
-            if (app._windSpeedUnit == app.WeatherWindSpeedUnits.KPH || app._windSpeedUnit == app.WeatherWindSpeedUnits.MPS) {
-                this.queryUnit = this.queryUnits.scientific;
+    SetQueryUnit() {
+        if (this.app._temperatureUnit == this.app.WeatherUnits.CELSIUS){
+            if (this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.KPH || this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.MPS) {
+                this.unit = 'si';
             }
             else {
-                this.queryUnit = this.queryUnits.uk;
+                this.unit = 'uk2';
             }
         }
         else {
-            this.queryUnit = this.queryUnits.imperial;
+            this.unit = 'us';
         }
     };
 
-    this.ToKelvin = function(temp: number) {
-        if (this.queryUnit == this.queryUnits.imperial) {
-            return app.FahrenheitToKelvin(temp);
+    ToKelvin(temp: number) {
+        if (this.unit == 'us') {
+            return this.app.FahrenheitToKelvin(temp);
         }
         else {
-            return app.CelsiusToKelvin(temp);
+            return this.app.CelsiusToKelvin(temp);
         }
 
     };
 
-    this.ToMPS = function(speed: number) {
-        if (this.queryUnit == this.queryUnits.scientific) {
+    ToMPS(speed: number) {
+        if (this.unit == 'si') {
             return speed;
         }
         else {
-            return app.MPHtoMPS(speed);
+            return this.app.MPHtoMPS(speed);
         }
     };
 };
+
+/**
+ * - 'si' returns meter/sec and Celsius
+ * - 'us' returns miles/hour and Farhenheit
+ * - 'uk2' return miles/hour and Celsius
+ */
+type queryUnits = 'si' | 'us' | 'uk2';
+

@@ -276,6 +276,9 @@ declare class global {
                 has_icon(iconName: string): boolean;
             }
         }
+        export module Cinnamon {
+            function util_format_date(format: string, milliseconds: number): string;
+        }
         export module Soup {
             export class SessionAsync {
                 user_agent: string;

@@ -1,3 +1,4 @@
+import { DataProvider } from "./dataProvider";
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -7,49 +8,55 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-function OpenWeatherMap(app: MyApplet) {
+class OpenWeatherMap implements DataProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
+    supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
      "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
       "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
 
-    this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
-    this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+    current_url = "https://api.openweathermap.org/data/2.5/weather?";
+    daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+
+    app: MyApplet
+    constructor (_app: MyApplet) {
+      this.app = _app;
+    }
+
 
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
 
-    this.GetWeather = async function() {
+    async GetWeather(): Promise<boolean> {
         let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
         let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
         if (currentResult && forecastResult) {
             return true;
         }
         else {
-            app.log.Error("OpenWeatherMap: Could not get Weather information");
+            this.app.log.Error("OpenWeatherMap: Could not get Weather information");
             return false;
         }
     };
 
     // A function as a function parameter 2 levels deep does not know
     // about the top level object information, has to pass it in as a paramater
-    this.GetData = async function(baseUrl: string, ParseFunction: (json: any, context: any) => boolean) {
+    async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => boolean): Promise<boolean> {
         let query = this.ConstructQuery(baseUrl);
         let json;
         if (query != null) {
-            app.log.Debug("Query: " + query);
+            this.app.log.Debug("Query: " + query);
             try {
-                json = await app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query);
                 if (json == null) {
-                    app.showError(app.errMsg.label.service, app.errMsg.desc.noResponse)
+                    this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse)
                     return false;                 
                 }
             }
             catch(e) {
-                app.log.Error("Unable to call API:" + e);
+                this.app.log.Error("Unable to call API:" + e);
                 return false;
             }
 
@@ -62,54 +69,54 @@ function OpenWeatherMap(app: MyApplet) {
             }
         }
         else {
-
+          return false;
         }       
     };
 
 
-    this.ParseCurrent = function(json: any, self: any) {
+    ParseCurrent(json: any, self: any): boolean {
         try {
             if (json.coord) {
-              app.weather.coord.lat = json.coord.lat;
-              app.weather.coord.lon = json.coord.lon;
+              self.app.weather.coord.lat = json.coord.lat;
+              self.app.weather.coord.lon = json.coord.lon;
             }
-            app.weather.location.city = json.name;
-            app.weather.location.country = json.sys.country;
-            app.weather.location.id = json.id;
-            app.weather.dateTime = new Date((json.dt) * 1000);
-            app.weather.sunrise = new Date((json.sys.sunrise) * 1000);
-            app.weather.sunset = new Date((json.sys.sunset) * 1000);
+            self.app.weather.location.city = json.name;
+            self.app.weather.location.country = json.sys.country;
+            self.app.weather.location.id = json.id;
+            self.app.weather.dateTime = new Date((json.dt) * 1000);
+            self.app.weather.sunrise = new Date((json.sys.sunrise) * 1000);
+            self.app.weather.sunset = new Date((json.sys.sunset) * 1000);
             if (json.wind) {
-              app.weather.wind.speed = json.wind.speed;
-              app.weather.wind.degree = json.wind.deg;
+              self.app.weather.wind.speed = json.wind.speed;
+              self.app.weather.wind.degree = json.wind.deg;
             }
             if (json.main) {
-              app.weather.main.temperature = json.main.temp;
-              app.weather.main.pressure = json.main.pressure;
-              app.weather.main.humidity = json.main.humidity;
-              app.weather.main.temp_min = json.main.temp_min;
-              app.weather.main.temp_max = json.main.temp_max;
+              self.app.weather.main.temperature = json.main.temp;
+              self.app.weather.main.pressure = json.main.pressure;
+              self.app.weather.main.humidity = json.main.humidity;
+              self.app.weather.main.temp_min = json.main.temp_min;
+              self.app.weather.main.temp_max = json.main.temp_max;
             }
             if (json.weather[0]) {
-              app.weather.condition.main = json.weather[0].main;
-              app.weather.condition.description = json.weather[0].description;
-              app.weather.condition.icon = app.weatherIconSafely(json.weather[0].icon, self.ResolveIcon); 
+              self.app.weather.condition.main = json.weather[0].main;
+              self.app.weather.condition.description = json.weather[0].description;
+              self.app.weather.condition.icon = self.app.weatherIconSafely(json.weather[0].icon, self.ResolveIcon); 
             }
             if (json.clouds) {
-              app.weather.cloudiness = json.clouds.all;
+              self.app.weather.cloudiness = json.clouds.all;
             }   
             return true; 
           }
           catch(e) { 
-            app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.parse);
+            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
+            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
             return false; 
           }
     };
 
-    this.ParseForecast = function(json: any, self: any) {
+    ParseForecast(json: any, self: any): boolean {
         try {
-            for (let i = 0; i < app._forecastDays; i++) {
+            for (let i = 0; i < self.app._forecastDays; i++) {
                 // Object
                 let forecast: Forecast = {          
                     dateTime: null,             //Required
@@ -145,44 +152,44 @@ function OpenWeatherMap(app: MyApplet) {
                 if (day.weather[0].id) {
                     forecast.condition.main = day.weather[0].main;
                     forecast.condition.description = day.weather[0].description;
-                    forecast.condition.icon = app.weatherIconSafely(day.weather[0].icon, self.ResolveIcon);
+                    forecast.condition.icon = self.app.weatherIconSafely(day.weather[0].icon, self.ResolveIcon);
                 }     
-                app.forecasts.push(forecast);         
+                self.app.forecasts.push(forecast);         
             }
             return true;
         }
         catch(e) {
-            app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            app.showError(app.errMsg.label.generic, app.errMsg.desc.parse);
+            self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
+            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
             return false; 
         }
     };
 
-    this.ConstructQuery = function(baseUrl: string) {
+    ConstructQuery(baseUrl: string): string {
         let query = baseUrl;
         let locString = this.ParseLocation();
         if (locString != null) {
             query = query + locString + "&APPID=";
              // Append Language if supported and enabled
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (app._translateCondition && app.isLangSupported(app.systemLanguage, this.supportedLanguages)) {
-                query = query + "&lang=" + app.systemLanguage;
+            if (this.app._translateCondition && this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
+                query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
         }
         
-        app.showError(app.errMsg.label.noLoc, "");
-        app.log.Error("OpenWeatherMap: No Location was provided");
+        this.app.showError(this.app.errMsg.label.noLoc, "");
+        this.app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
     };
 
-    this.ParseLocation = function() {
-        let loc = app._location.replace(/ /g, "");
-        if (app.isCoordinate(loc)) {
+    ParseLocation(): string {
+        let loc = this.app._location.replace(/ /g, "");
+        if (this.app.isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
         }
-        else if (app.isID(loc)) {
+        else if (this.app.isID(loc)) {
             return "id=" + loc;
         }
         else  // try as a normal query
@@ -190,31 +197,31 @@ function OpenWeatherMap(app: MyApplet) {
     };
 
 
-    this.HandleResponseErrors = function(json: any) {
+    HandleResponseErrors(json: any): void {
         let errorMsg = "OpenWeather API: ";
         switch (json.cod) {
             case("400"):
-                app.showError(app.errMsg.label.service, app.errMsg.desc.locBad);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
                 break;
             case("401"):
-                app.showError(app.errMsg.label.service, app.errMsg.desc.keyBad);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBad);
                 break;
             case("404"):
-                app.showError(app.errMsg.label.service, app.errMsg.desc.locNotFound);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locNotFound);
                 break;
             case("429"):
-                app.showError(app.errMsg.label.service, app.errMsg.desc.keyBlock);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBlock);
                 break;
             default:
-                app.showError(app.errMsg.label.service, app.errMsg.desc.unknown);
+                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.unknown);
                 break;
         };
-        app.log.Debug("OpenWeatherMap Error Code: " + json.cod)
-        app.log.Error(errorMsg + json.message);
+        this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod)
+        this.app.log.Error(errorMsg + json.message);
     };
 
 
-    this.ResolveIcon = function(icon: string) {
+    ResolveIcon(icon: string): Array<string> {
         // https://openweathermap.org/weather-conditions
        /* fallback icons are: weather-clear-night 
        weather-clear weather-few-clouds-night weather-few-clouds 

@@ -5,6 +5,7 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Cinnamon = imports.gi.Cinnamon;
 const Soup = imports.gi.Soup;
 const St = imports.gi.St;
 const Applet = imports.ui.applet;
@@ -534,6 +535,8 @@ class MyApplet extends Applet.TextIconApplet {
                         sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
                     }
                     else {
+                        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
+                        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
                     }
                 }
             }
@@ -768,6 +771,10 @@ class MyApplet extends Applet.TextIconApplet {
             this._forecastBox.add_actor(bb);
         }
     }
+    toLocaleFormat(date, format) {
+        return Cinnamon.util_format_date(format, date.getTime());
+    }
+    ;
     noApiKey() {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
