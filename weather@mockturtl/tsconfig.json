@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "lib": ["es2017"],
+        "module": "none",
+        "target": "es2017",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        //"outFile": "files/weather@mockturtl/3.8/applet.js",
+        "sourceMap": false,
+        //"alwaysStrict": true,
+        "experimentalDecorators": true,
+        //"types": ["node"]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "files",
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
