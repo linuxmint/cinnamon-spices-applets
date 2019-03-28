@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "lib": ["es2017"],
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        //"outFile": "dst/applet.js",
+        "sourceMap": false,
+        //"alwaysStrict": true,
+        "experimentalDecorators": true,
+        //"types": ["node"]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "files",
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
