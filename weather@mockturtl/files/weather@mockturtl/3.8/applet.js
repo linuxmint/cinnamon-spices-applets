@@ -274,9 +274,8 @@ class MyApplet extends Applet.TextIconApplet {
         catch (e) {
         }
     }
-    async refreshAndRebuild() {
-        await this.refreshWeather();
-        this.rebuild();
+    refreshAndRebuild() {
+        this.refreshWeather().then(this.rebuild);
     }
     ;
     async LoadJsonAsync(query) {
