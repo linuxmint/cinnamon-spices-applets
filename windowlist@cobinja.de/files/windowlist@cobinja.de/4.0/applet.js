@@ -598,12 +598,17 @@ const CobiMenuManager = class CobiMenuManager extends PopupMenu.PopupMenuManager
   
   constructor(owner) {
     super(owner);
-    DND.addDragMonitor(this);
     this.dragMotion = this.dragMotionHandler.bind(this);
     this._signals.connect(Main.xdndHandler, "drag-end", this.onDragEnd, this);
+    this._signals.connect(Main.xdndHandler, "drag-begin", this.onDragBegin, this);
+  }
+  
+  onDragBegin() {
+    DND.addDragMonitor(this);
   }
   
   onDragEnd() {
+    DND.removeDragMonitor(this);
     this._closeMenu();
   }
   
@@ -748,11 +753,6 @@ const CobiMenuManager = class CobiMenuManager extends PopupMenu.PopupMenuManager
       }
     }
     return null;
-  }
-  
-  destroy() {
-    PopupMenu.PopupMenuManager.destroy.apply(this);
-    DND.removeDragMonitor(this);
   }
 }
 
@@ -915,6 +915,7 @@ class CobiAppButton {
     this._signalManager.disconnect("notify::demands-attention", metaWindow);
     this._signalManager.disconnect("notify::gtk-application-id", metaWindow);
     this._signalManager.disconnect("notify::wm-class", metaWindow);
+    this._signalManager.disconnect("workspace-changed", metaWindow);
     
     let arIndex = this._windows.indexOf(metaWindow);
     if (arIndex >= 0) {

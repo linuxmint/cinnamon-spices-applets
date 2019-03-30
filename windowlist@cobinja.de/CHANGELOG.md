@@ -1,5 +1,9 @@
 Changelog
 
+2.5.1
+==
+- Fix: the last window on an applet instance left the number label on the icon
+
 2.5
 ==
 - Allow Drag'n'Drop operations from one window to another
