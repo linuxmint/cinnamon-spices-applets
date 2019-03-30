@@ -326,12 +326,14 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     if (this._menu.box.get_vertical()) {
       height = (availHeight - overheadHeight);
       width = Math.floor(height * aspectRatio);
-      this._cloneBin.natural_height = height;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     else {
       width = (availWidth - overheadWidth);
       height = Math.floor(width / aspectRatio);
-      this._cloneBin.natural_width = width;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     
     this._descBox.natural_width = width;
