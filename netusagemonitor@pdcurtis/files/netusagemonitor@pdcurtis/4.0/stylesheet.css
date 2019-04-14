@@ -48,7 +48,11 @@ The shapes match are a compromise to match the system Themes on a horizontal bot
 */
 
 .numa-not-connected {
-    background-color: rgba(0,0,0,0.0);
+background-color: rgba(127,127,127,0.3);
+    margin: 2px, 1px, 0px, 1px;
+    border: 2px;
+    border-radius: 4px, 4px, 1px, 1px;
+    border-color: rgba(127,127,127,1);
 }
 
 .numa-connected {

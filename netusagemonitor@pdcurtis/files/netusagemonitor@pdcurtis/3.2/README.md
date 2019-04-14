@@ -20,9 +20,9 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
 
   * **The Applet:**
        + Continuously displays Upload and Download rate in a fixed width 'steady' display
-       + The Applet Background color is:
-          - Black when Current Interface not active
-          - Green when Current connection and interface has provided data
+       + The Applet Background color and rounding varies slightly with Cinnamon Version:
+          - Black or Light Gray with Dark Gray edge when Current Interface not active
+          - Green or Green edge when Current connection and interface has provided data
           - Orange when the Alert level (as percentage of the Data Limit) has been exceeded
           - Red when the Data Limit for the current connection has been exceeded
    * **Hover over Applet:**
@@ -64,7 +64,7 @@ The Network Usage Monitor Applet (NUMA) enables one to continuously display the 
           - __Suspend the Machine after a brief period during which you can abort__. This is also implemented by a script (suspendScript) so the user can fine tune it but the version provided uses Zenity for the warning message which has a 30 second timeout to allow you to abort. Another message is put up before suspending which should be on display when you wake up the machine.
          - __Disable Networking for all connections managed by the Network Manager__.  This puts up a warning message and you can abort for a short period by clicking the Applet - not the OK button on the warning screen.
    * Set a delay before disabling Network Connections
-    Enable a warning sound
+       + Enable a warning sound
        + Set the sound file to be played
    * Add or hide the Advanced functions from Housekeeping drop down menu
 
@@ -86,7 +86,7 @@ Once vnstat is set up, tThe applet detects which device you're currently using, 
 
 ## Status
 
-The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running under Mint 15 with a variety of themes. The current Version has been tested with Cinnamon 2.2 - 3.6 under Mint 17 - 18.3. But see Warnings above about use under Fedora 27 which have yet to be addressed.
+The author is committed to maintaining and developing the applet. The applet is based on a well tried core from the netspeed applet and has been tested on various systems initially running under Mint 15 with a variety of themes. The current Version has been tested with Cinnamon 2.2 - 4.0 under Mint 17 - 19.1.
 
 ## Translations and other Contributions
 
