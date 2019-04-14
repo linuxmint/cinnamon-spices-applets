@@ -63,11 +63,40 @@ MyApplet.prototype = {
                 this.on_settings_changed,
                 null);
 
+
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 "displayType",
                 "displayType",
                 this.on_settings_changed,
                 null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "useBatteryLowSound",
+                "useBatteryLowSound",
+                this.on_settings_changed,
+                null);
+
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "chooseBatteryLowSound",
+                "chooseBatteryLowSound",
+                this.on_settings_changed,
+                null);
+
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "batteryLowSound",
+                "batteryLowSound1",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "batteryShutdownSound",
+                "batteryShutdownSound1",
+                this.on_settings_changed,
+                null);
+
+
 
             // ++ Make metadata values available within applet for context menu.
 
@@ -125,7 +154,7 @@ MyApplet.prototype = {
                  this.dependenciesMet = false;
             }
 
-
+/*
             // Set sound file locations
             this.batteryLowSound = GLib.get_home_dir() + "/batterymonitorwarning.mp3"; // path to sound file in user's home folder
             if (GLib.file_test(this.batteryLowSound, GLib.FileTest.EXISTS)) {
@@ -133,6 +162,16 @@ MyApplet.prototype = {
             } else {
                   this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga" // path to default sound file
             }
+*/
+             if (!this.chooseBatteryLowSound) {
+                  // paths to default sound files
+                         this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
+                         this.batteryShutdownSound = "/usr/share/sounds/freedesktop/stereo/complete.oga";
+             } else {
+                   Main.warningNotify(_("Battery Monitor Applet"), _("A User Defined Sound File has been Specified for Low Battery\n\nPlease ensure the volume is set sensibly in public places\nespecially if a long loud file is specifed\n"));
+                        this.batteryLowSound = this.batteryLowSound1;
+                        this.batteryShutdownSound = this.batteryShutdownSound1;
+              }
 
             // Check stylesheet file over-ride location and use
             this.ccsfilePersistent = GLib.get_home_dir() + "/" + UUID + "/stylesheet.css"; // path to stylesheet file placed in user's home folder.
@@ -208,8 +247,15 @@ MyApplet.prototype = {
     // ++ Function called when settings are changed
     on_settings_changed: function() {
         this.slider_demo.setValue((this.alertPercentage - 10) / 30);
-
-        this.updateLoop();
+        if (!this.chooseBatteryLowSound) {
+             // paths to default sound files
+             this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
+             this.batteryShutdownSound = "/usr/share/sounds/freedesktop/stereo/complete.oga";
+         } else {
+              this.batteryLowSound = this.batteryLowSound1;
+              this.batteryShutdownSound = this.batteryShutdownSound1
+         }
+         this.updateLoop();
     },
 
     // ++ Null function called when Generic (internal) Setting changed
@@ -344,7 +390,8 @@ MyApplet.prototype = {
                     if ( !this.alertFlag) {
                        this.alertFlag = true;  // Reset above when out of warning range
                        // Audible alert - type set earlier
-                       GLib.spawn_command_line_async('play ' + this.batteryLowSound);
+                       if (this.useBatteryLowSound) {GLib.spawn_command_line_async('play ' + this.batteryLowSound)} ;
+
                        // Choose Alert type depending on whether Cinnamon 2.6 or higher when modal alerts available
                        if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "2.6") <= 0) {
                             Main.criticalNotify(_("Battery Monitor Applet Alert"), _("The Battery Level has fallen to your alert level\n\neither reconnect to a power source,\n\nclose down your work and suspend or shutdown the machine\n\n"));
@@ -368,7 +415,7 @@ MyApplet.prototype = {
                     this.batteryMessage = _("Battery Critical will Suspend unless connected to mains") + " "
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
                        // Audible alert moved from suspendScript in v32_1.0.0
-                       GLib.spawn_command_line_async('play ' + this.batteryLowSound);
+                       if (this.useBatteryLowSound) {GLib.spawn_command_line_async('play ' + this.batteryShutdownSound)};
                        GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
                     }
                  }
@@ -568,6 +615,6 @@ Bug Fix for use with early versions of Cinnamon
   * Translation File update
 ### 1.3.7
   * Change to allow Multiversion 3.2
-  * Change to selection of audible alert file in Applet Settings for 3.2 and higher instead of mechanism introduced in 1.3.4.
+  * Change to selection of audible alert file in Applet Settings for 3.2 and higher.
 */
 
