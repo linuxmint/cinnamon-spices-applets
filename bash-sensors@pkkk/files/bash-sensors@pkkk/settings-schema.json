@@ -3,6 +3,12 @@
 		"type": "header",
 		"description": "Settings - Bash Sensors (write commands in Bash!)"
 	},
+	"title": {
+		"type": "entry",
+		"default": "Bash sensors",
+		"description": "Title",
+		"tooltip": "Title used when displaying notifications"
+	},
 	"refreshInterval": {
 		"type": "spinbutton",
 		"default": 10,
@@ -39,6 +45,21 @@
 		"description": "Command 2",
 		"tooltip": "second line of output (optional)",
         "dependency": "enableScript2"
+	},
+	"head2": {
+		"type": "header",
+		"description": "Icon"
+	},
+        "dynamicIcon": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Dynamic icon (use output of icon command as icon)"
+	},
+	"iconScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Static icon or command returning the full path to an icon",
+		"tooltip": "command should return an icon (leave empty for no icon)"
 	},
 	"head3": {
 		"type": "header",

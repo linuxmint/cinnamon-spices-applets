@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
+const Gtk = imports.gi.Gtk;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
@@ -21,10 +22,10 @@ function MyApplet(metadata, orientation, panelHeight, instance_id) {
 };
 
 MyApplet.prototype = {
-    __proto__: Applet.TextApplet.prototype,
+    __proto__: Applet.TextIconApplet.prototype,
 
     _init: function (metadata, orientation, panelHeight, instance_id) {
-        Applet.TextApplet.prototype._init.call(this, orientation);
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
 
         try {
             this.path = metadata.path;
@@ -40,6 +41,7 @@ MyApplet.prototype = {
 
             this.wait_for_clicked_cmd = false;
             this.wait_for_label_cmd = [false, false];
+            this.wait_for_icon_cmd = false;
             this.wait_for_tooltip_cmd = false;
             this.labels = ['', '',]
             this.autoupdate();
@@ -99,6 +101,25 @@ MyApplet.prototype = {
         this.wait_for_label_cmd[1] = false;
     },
 
+    update_icon: function (cmd_output) {
+        let icon = cmd_output.toString().trim();
+        if (icon) {
+            // from placesCenter@scollins
+            if (Gtk.IconTheme.get_default().has_icon(icon)) {
+                if (icon.search("-symbolic") != -1) {
+                    this.set_applet_icon_symbolic_name(icon);
+                } else {
+                    this.set_applet_icon_name(icon);
+                }
+            } else {
+                this.set_applet_icon_path(icon);
+            }
+        } else {
+            this.hide_applet_icon();
+        }
+        this.wait_for_icon_cmd = false;
+    },
+
     update_tooltip: function (cmd_output) {
         this.set_applet_tooltip(cmd_output.toString().trim());
         this.wait_for_tooltip_cmd = false;
@@ -124,6 +145,18 @@ MyApplet.prototype = {
             Util.spawn_async([this.shell, '-c', this.script2], Lang.bind(this, this.update_cmd2));
         }
 
+        if (this.iconScript && this.iconScript.trim()) {
+            if (this.dynamicIcon) {
+                if (!this.wait_for_icon_cmd) {
+                    this.wait_for_icon_cmd = true;
+                    Util.spawn_async([this.shell, '-c', this.iconScript], Lang.bind(this, this.update_icon));
+                }
+            } else {
+                this.set_applet_icon_path(this.iconScript);
+            }
+        } else {
+            this.hide_applet_icon();
+        }
     },
 
     autoupdate: function () {
@@ -134,8 +167,9 @@ MyApplet.prototype = {
     },
 
     bind_settings: function () {
-        for (let str of ["refreshInterval", "shell",
+        for (let str of ["title", "refreshInterval", "shell",
                          "script1", "enableScript2", "script2",
+                         "dynamicIcon", "iconScript",
                          "dynamicTooltip", "tooltipScript",
                          "menuScript", "menuScriptDisplay"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
