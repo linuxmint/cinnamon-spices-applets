@@ -66,7 +66,7 @@ MyApplet.prototype = {
             if (!this.wait_for_clicked_cmd) {
                 this.wait_for_clicked_cmd = true;
             let cmd = (this.menuScript && this.menuScript.trim()) ? this.menuScript : this.script1;
-                Util.spawn_async(['bash', '-c', cmd], Lang.bind(this, this.update_clicked));
+                Util.spawn_async([this.shell, '-c', cmd], Lang.bind(this, this.update_clicked));
             } else {
                 this.menuLabel.set_text(_("Error: Still waiting for command to finish!"));
             }
