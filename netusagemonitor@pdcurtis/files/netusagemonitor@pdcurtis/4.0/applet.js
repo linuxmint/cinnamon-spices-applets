@@ -342,8 +342,8 @@ MyApplet.prototype = {
             this.downOldC2 = 0;
             this.upOldC3 = 0;
             this.downOldC3 = 0;
-            this.numa_style = 'numa-not-not-connected';
-            this.last_numa_style = 'numa-not-not-connected';
+            this.numa_style = 'numa-not-connected';
+            this.last_numa_style = 'numa-not-connected';
 
             this.set_applet_tooltip(_("No Interface being Monitored - right click to select"));
             if (this.useDefaultInterfaceIn) {
@@ -891,7 +891,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
                 }
                 //Code for ultra compact display when not connected and a compact display
                 //Better integration posible??
-                if (this.numa_style == 'numa-not-not-connected' &&  this.compactDisplay) {
+                if (this.numa_style == 'numa-not-connected' &&  this.compactDisplay) {
                      this.labelOne.set_text(" \u21f5");
                      this.labelTwo.set_text("");
                 }
@@ -946,7 +946,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
 
         // Set background colour - green when data has flowed, orange when alert level reached and red when data limit reached
 
-       this.numa_style = 'numa-not-not-connected';
+       this.numa_style = 'numa-not-connected';
         if ((this.downOld + this.upOld) > 0) {
            this.numa_style = 'numa-connected';
         }
@@ -965,7 +965,7 @@ Note Odysius has used the index 0 (zero) to insert the menu section to position 
         this.actor.set_style('width:' + this.appletWidth + 'px');
 
          // New Code for ultra compact display when not connected
-         if (this.numa_style == 'numa-not-not-connected' &&  this.compactDisplay) {
+         if (this.numa_style == 'numa-not-connected' &&  this.compactDisplay) {
              this.actor.set_style('width:' + 20 + 'px');
          }
 
@@ -1249,4 +1249,8 @@ Transition to new cinnamon-spices-applets repository from github.com/pdcurtis/ci
 ## 3.2.9
   * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded and less intrusive.
   * Add an initial mechanism to provide persistence for user edits of the stylesheet.
+## 3.3.0
+  * Correct code for style .numa-not-connected in applet.js
+  * Further enhancement in styles to match Cinnamon 4.0
+  * Change selection of audible warning to use soundfilechooser widget in settings-schema.json for 3.2 and 4.0
 */

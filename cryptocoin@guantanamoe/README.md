@@ -4,12 +4,13 @@ Cinnamon applet that shows the current values of configured cryptos.
 
 ## Getting Started
 
-To install for the local user:
+Install via Cinnamon's Applets settings module Download tab.
 
-```
-cd ~/.local/share/cinnamon/applets
-git clone https://github.com/imDeprecated/cryptocoin-applet.git cryptocoin@guantanamoe
-```
+or
+
+Download the applet's zip file using the Download button on the applet's Cinnamon Spices web-pages and unzip to `~/.local/share/cinnamon/applets/`
+
+Once installed add the applet to your panel via the Applets settings module.
 
 ## Versioning
 

@@ -470,7 +470,7 @@ TerminalProcess.prototype = {
     },
 
     generate_tmp_filename: function() {
-        let process = new ShellOutputProcess(['tempfile']);
+        let process = new ShellOutputProcess(['mktemp']);
         let output = process.spawn_sync_and_get_output();
         output = output.trim();
         return output;

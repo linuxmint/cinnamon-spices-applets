@@ -368,7 +368,6 @@ MyApplet.prototype = {
                     this.batteryMessage = _("Battery Critical will Suspend unless connected to mains") + " "
                     if ( this.batteryPercentage < this.lastBatteryPercentage ) {
                        // Audible alert moved from suspendScript in v32_1.0.0
-                       //GLib.spawn_command_line_async('play "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"');
                        GLib.spawn_command_line_async('play ' + this.batteryLowSound);
                        GLib.spawn_command_line_async('sh ' + this.appletPath + '/suspendScript');
                     }
@@ -565,5 +564,10 @@ Bug Fix for use with early versions of Cinnamon
 ### 1.3.5
   * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
   * Add an initial mechanism to provide persistence for user edits of the stylesheet.
+### 1.3.6
+  * Translation File update
+### 1.3.7
+  * Change to allow Multiversion 3.2
+  * Change to selection of audible alert file in Applet Settings for 3.2 and higher instead of mechanism introduced in 1.3.4.
 */
 

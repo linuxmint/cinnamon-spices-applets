@@ -22,6 +22,7 @@ const St = imports.gi.St;
 const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const Gio = imports.gi.Gio;
 const Tweener = imports.ui.tweener;
 const Signals = imports.signals;
@@ -39,6 +40,7 @@ const WindowUtils = imports.misc.windowUtils;
 const DND = imports.ui.dnd;
 const Settings = imports.ui.settings;
 const SignalManager = imports.misc.signalManager;
+const CinnamonDesktop = imports.gi.CinnamonDesktop;
 
 const UUID = "windowlist@cobinja.de";
 
@@ -77,7 +79,7 @@ function _(text) {
   return locText;
 }
 
-function _hasFocus(metaWindow) {
+function hasFocus(metaWindow) {
   if (metaWindow.appears_focused) {
     return true;
   }
@@ -174,6 +176,21 @@ function getOverheadSize(actor) {
   height += themeNode.get_margin(St.Side.BOTTOM);
   
   return [width, height];
+}
+
+function getMonitors() {
+  let gdkScreen = Gdk.Screen.get_default();
+  let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
+  let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
+  let outputInfos = currentConfig.get_outputs();
+  let result = [];
+  for (let index = 0; index < outputInfos.length; index++) {
+    let output = outputInfos[index];
+    if (output.is_active()) {
+      result.push(output.get_display_name());
+    }
+  }
+  return result;
 }
 
 const dummy = {};
@@ -284,6 +301,12 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     this._signalManager.connect(this, "activate", this._onActivate, this);
   }
   
+  handleDragOver(source, actor, x, y, time) {
+    this.actor.hover = true;
+    Main.activateWindow(this._metaWindow);
+    return DND.DragMotionResult.COPY_DROP;
+  }
+  
   doSize(availWidth, availHeight) {
     if (Main.software_rendering || !this._settings.getValue("show-previews")) {
       return;
@@ -303,12 +326,14 @@ class CobiPopupMenuItem extends PopupMenu.PopupBaseMenuItem {
     if (this._menu.box.get_vertical()) {
       height = (availHeight - overheadHeight);
       width = Math.floor(height * aspectRatio);
-      this._cloneBin.natural_height = height;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     else {
       width = (availWidth - overheadWidth);
       height = Math.floor(width / aspectRatio);
-      this._cloneBin.natural_width = width;
+      this._cloneBin.height = height;
+      this._cloneBin.width = width;
     }
     
     this._descBox.natural_width = width;
@@ -569,10 +594,46 @@ class CobiPopupMenu extends PopupMenu.PopupMenu {
   }
 }
 
-class CobiMenuManager extends PopupMenu.PopupMenuManager {
+const CobiMenuManager = class CobiMenuManager extends PopupMenu.PopupMenuManager {
   
   constructor(owner) {
     super(owner);
+    this.dragMotion = this.dragMotionHandler.bind(this);
+    this._signals.connect(Main.xdndHandler, "drag-end", this.onDragEnd, this);
+    this._signals.connect(Main.xdndHandler, "drag-begin", this.onDragBegin, this);
+  }
+  
+  onDragBegin() {
+    DND.addDragMonitor(this);
+  }
+  
+  onDragEnd() {
+    DND.removeDragMonitor(this);
+    this._closeMenu();
+  }
+  
+  dragMotionHandler(dragEvent) {
+    if (dragEvent) {
+      if (dragEvent.source instanceof CobiAppButton || dragEvent.source.isDraggableApp || dragEvent.source instanceof DND.LauncherDraggable) {
+        return DND.DragMotionResult.CONTINUE;
+      }
+      let hoverMenu = this._findMenuForActor(dragEvent);
+      if (hoverMenu) {
+        if (hoverMenu !== this._activeMenu) {
+          if (hoverMenu._appButton._windows.length > 1) {
+            this._changeMenu(hoverMenu);
+          }
+          else if (hoverMenu._appButton._windows.length === 1) {
+            this._closeMenu();
+            Main.activateWindow(hoverMenu._appButton._currentWindow);
+          }
+        }
+      }
+      else {
+        this._closeMenu();
+      }
+    }
+    return DND.DragMotionResult.CONTINUE;
   }
   
   addMenu(menu, position) {
@@ -677,6 +738,21 @@ class CobiMenuManager extends PopupMenu.PopupMenuManager {
       this._changeMenu(menu);
     }
     return false;
+  }
+  
+  _findMenuForActor(dragEvent) {
+    let actor = global.stage.get_actor_at_pos(Clutter.PickMode.ALL, dragEvent.x, dragEvent.y);
+    
+    if (actor.is_finalized()) {
+      return null;
+    }
+    for (let i = 0; i < this._menus.length; i++) {
+      let menu = this._menus[i];
+      if (menu.actor.contains(actor) || menu.sourceActor.contains(actor)) {
+        return menu;
+      }
+    }
+    return null;
   }
 }
 
@@ -791,24 +867,6 @@ class CobiAppButton {
     return this.actor;
   }
   
-  handleDragOver(source, actor, x, y, time) {
-    if (this._draggable && this._draggable.inhibit) {
-      return DND.DragMotionResult.MOVE_DROP;
-    }
-    if (source instanceof CobiAppButton || source.isDraggableApp || source instanceof DND.LauncherDraggable) {
-      return DND.DragMotionResult.CONTINUE;
-    }
-    if (this._currentWindow) {
-      Main.activateWindow(this._currentWindow);
-      return DND.DragMotionResult.COPY_DROP;
-    }
-    return DND.DragMotionResult.CONTINUE;
-  }
-  
-  acceptDrop(source, actor, x, y, time) {
-    return false;
-  }
-  
   getPinnedIndex() {
     let pinSetting = this._settings.getValue("pinned-apps")[this._workspace._wsNum];
     return this._pinned ? pinSetting.indexOf(this._app.get_id()) : -1;
@@ -857,6 +915,7 @@ class CobiAppButton {
     this._signalManager.disconnect("notify::demands-attention", metaWindow);
     this._signalManager.disconnect("notify::gtk-application-id", metaWindow);
     this._signalManager.disconnect("notify::wm-class", metaWindow);
+    this._signalManager.disconnect("workspace-changed", metaWindow);
     
     let arIndex = this._windows.indexOf(metaWindow);
     if (arIndex >= 0) {
@@ -1090,7 +1149,7 @@ class CobiAppButton {
   _updateFocus() {
     for (let i = 0; i < this._windows.length; i++) {
       let metaWindow = this._windows[i];
-      if (_hasFocus(metaWindow) && !metaWindow.minimized) {
+      if (hasFocus(metaWindow) && !metaWindow.minimized) {
         this.actor.add_style_pseudo_class("focus");
         this._currentWindow = metaWindow;
         this._updateLabel();
@@ -1152,7 +1211,7 @@ class CobiAppButton {
     if (event.get_state() & Clutter.ModifierType.BUTTON1_MASK) {
       if (this._currentWindow) {
         if (this._windows.length == 1 || !(this._settings.getValue("menu-show-on-click"))) {
-          if (_hasFocus(this._currentWindow)) {
+          if (hasFocus(this._currentWindow)) {
             this._currentWindow.minimize();
           }
           else {
@@ -1250,7 +1309,7 @@ class CobiAppButton {
   
   _hasFocus() {
     for (let i = 0; i < this._windows.length; i++) {
-      if (_hasFocus(this._windows[i])) {
+      if (hasFocus(this._windows[i])) {
         return true;
       }
     }
@@ -1368,18 +1427,18 @@ class CobiAppButton {
             continue;
           }
           let j = i;
-          let name = _("Monitor") + " " + j;
-          let mon = new PopupMenu.PopupMenuItem(name);
-          mon.connect("activate", Lang.bind(this, function() {
+          let name = _("Monitor") + " " + j + " (" + this._applet.xrandrMonitors[j] + ")";
+          let monitorItem = new PopupMenu.PopupMenuItem(name);
+          monitorItem.connect("activate", Lang.bind(this, function() {
             this._currentWindow.move_to_monitor(j);
           }));
-          item.menu.addMenuItem(mon);
+          item.menu.addMenuItem(monitorItem);
         }
       }
       
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       // window specific
-      if (!_hasFocus(this._currentWindow)) {
+      if (!hasFocus(this._currentWindow)) {
         item = new PopupMenu.PopupIconMenuItem(_("Restore"), "view-sort-descending", St.IconType.SYMBOLIC);
         item.connect("activate", Lang.bind(this, function() { Main.activateWindow(this._currentWindow); }));
         this._contextMenu.addMenuItem(item);
@@ -2058,6 +2117,7 @@ class CobiWindowList extends Applet.Applet {
   }
   
   _updateMonitor() {
+    this.xrandrMonitors = getMonitors();
     this._monitor = Main.layoutManager.findMonitorForActor(this.actor);
   }
   
