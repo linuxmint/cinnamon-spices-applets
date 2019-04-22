@@ -266,12 +266,12 @@ function _(str: string): string {
   return Gettext.dgettext(UUID, str)
 }
 
-
-const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
-var darkSky = AppletDir.darkSky;
-var openWeatherMap = AppletDir.openWeatherMap;
+var darkSky: any;
+var openWeatherMap: any;
 // Location lookup service
-var ipApi = AppletDir.ipApi;
+const ipApi = require('./ipApi');
+
+
 
 //----------------------------------------------------------------
 //
@@ -681,6 +681,9 @@ class MyApplet extends Applet.TextIconApplet {
           //
           // No City and Country information, fetch from geolocation api
           //
+          if (darkSky == null) {
+            darkSky = require('./darkSky');
+          }
           this.provider = new darkSky.DarkSky(this);
           refreshResult = await this.provider.GetWeather();
           break;
@@ -688,6 +691,9 @@ class MyApplet extends Applet.TextIconApplet {
           //
           //  No TZ information
           //
+          if (openWeatherMap == null) {
+            openWeatherMap = require('./openWeatherMap');
+          }
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           refreshResult = await this.provider.GetWeather();
           break;
