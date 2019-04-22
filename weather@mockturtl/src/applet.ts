@@ -268,10 +268,10 @@ function _(str: string): string {
 
 
 const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
-const darkSky = AppletDir.darkSky;
-const openWeatherMap = AppletDir.openWeatherMap;
+var darkSky = AppletDir.darkSky;
+var openWeatherMap = AppletDir.openWeatherMap;
 // Location lookup service
-const ipApi = AppletDir.ipApi;
+var ipApi = AppletDir.ipApi;
 
 //----------------------------------------------------------------
 //
@@ -527,7 +527,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     refreshAndRebuild(): void {
-      this.refreshWeather().then(this.rebuild);
+      this.refreshWeather();
     };
 
     async LoadJsonAsync(query: string): Promise<any> {
@@ -701,6 +701,7 @@ class MyApplet extends Applet.TextIconApplet {
         return;
       }
 
+      this.rebuild();
       if (await this.displayWeather() && await this.displayForecast()) {
         this.log.Print("Weather Information refreshed");
       }    

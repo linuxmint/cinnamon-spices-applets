@@ -135,9 +135,9 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 const AppletDir = imports.ui.appletManager.applets['weather@mockturtl/3.8'];
-const darkSky = AppletDir.darkSky;
-const openWeatherMap = AppletDir.openWeatherMap;
-const ipApi = AppletDir.ipApi;
+var darkSky = AppletDir.darkSky;
+var openWeatherMap = AppletDir.openWeatherMap;
+var ipApi = AppletDir.ipApi;
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -275,7 +275,7 @@ class MyApplet extends Applet.TextIconApplet {
         }
     }
     refreshAndRebuild() {
-        this.refreshWeather().then(this.rebuild);
+        this.refreshWeather();
     }
     ;
     async LoadJsonAsync(query) {
@@ -415,6 +415,7 @@ class MyApplet extends Applet.TextIconApplet {
                 this.lastUpdated = null;
                 return;
             }
+            this.rebuild();
             if (await this.displayWeather() && await this.displayForecast()) {
                 this.log.Print("Weather Information refreshed");
             }
