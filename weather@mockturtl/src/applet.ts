@@ -104,6 +104,7 @@ const Util = imports.misc.util
 
 const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"
+const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
 // Conversion Factors
@@ -474,19 +475,12 @@ class MyApplet extends Applet.TextIconApplet {
          this.refreshWeather()
        }))
  
-       // configuration via context menu is automatically provided in Cinnamon 2.0+
-       let cinnamonVersion = Config.PACKAGE_VERSION.split('.')
-       let majorVersion = parseInt(cinnamonVersion[0])
-       //log("cinnamonVersion=" + cinnamonVersion +  "; majorVersion=" + majorVersion)
- 
-       // for Cinnamon 1.x, build a menu item
-       if (majorVersion < 2) {
-         let itemLabel = _("Settings")
-         let settingsMenuItem = new Applet.MenuItem(itemLabel, Gtk.STOCK_EDIT, Lang.bind(this, function() {
-             Util.spawnCommandLine(CMD_SETTINGS)
-         }))
-         this._applet_context_menu.addMenuItem(settingsMenuItem)
-       }
+       // Refresh Button in context menu
+       let itemLabel = _("Refresh")
+       let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function() {
+          this.refreshWeather();
+       }))
+       this._applet_context_menu.addMenuItem(refreshMenuItem)
  
        //------------------------------
        // render graphics container
@@ -535,17 +529,19 @@ class MyApplet extends Applet.TextIconApplet {
         let message = Soup.Message.new('GET', query);
         this._httpSession.queue_message(message, (session: any, message: any) => {
             if (message) {
-              this.log.Debug("API full response: " + message.response_body.data.toString());
               try {
+                if (message.status_code != 200) {
+                  reject("http response Code: " + message.status_code + ", reason: " + message.reason_phrase);
+                  return;
+                }
+                
+                this.log.Debug("API full response: " + message.response_body.data.toString());
                 let payload = JSON.parse(message.response_body.data);
                 resolve(payload);
               }
               catch(e) {    // Payload is not JSON
                 this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-                if (this._dataService == DATA_SERVICE.DARK_SKY) {
-                  this.log.Error("DarkSky: This usually indicates that API key is invalid.");
-                }
-                reject(null);
+                reject(e);
               }            
             }
             else {  // No response

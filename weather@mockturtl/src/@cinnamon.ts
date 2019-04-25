@@ -270,7 +270,10 @@ declare class global {
             export class IconTheme {
                 static get_default(): Theme;
             }
+            /** DEPRECATED */
             export const STOCK_EDIT: any;
+            /** DEPRECATED */
+            export const STOCK_REFRESH: string;
 
             export class Theme {
                 has_icon(iconName: string): boolean;

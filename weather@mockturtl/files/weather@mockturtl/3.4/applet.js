@@ -1,4 +1,54 @@
-var __extends = (this && this.__extends) || (function () {
+// https://tc39.github.io/ecma262/#sec-array.prototype.includes
+if (!Array.prototype.includes) {
+  Object.defineProperty(Array.prototype, 'includes', {
+    value: function(valueToFind, fromIndex) {
+
+      if (this == null) {
+        throw new TypeError('"this" is null or not defined');
+      }
+
+      // 1. Let O be ? ToObject(this value).
+      var o = Object(this);
+
+      // 2. Let len be ? ToLength(? Get(O, "length")).
+      var len = o.length >>> 0;
+
+      // 3. If len is 0, return false.
+      if (len === 0) {
+        return false;
+      }
+
+      // 4. Let n be ? ToInteger(fromIndex).
+      //    (If fromIndex is undefined, this step produces the value 0.)
+      var n = fromIndex | 0;
+
+      // 5. If n ≥ 0, then
+      //  a. Let k be n.
+      // 6. Else n < 0,
+      //  a. Let k be len + n.
+      //  b. If k < 0, let k be 0.
+      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+      function sameValueZero(x, y) {
+        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+      }
+
+      // 7. Repeat, while k < len
+      while (k < len) {
+        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
+        // b. If SameValueZero(valueToFind, elementK) is true, return true.
+        if (sameValueZero(o[k], valueToFind)) {
+          return true;
+        }
+        // c. Increase k by 1. 
+        k++;
+      }
+
+      // 8. Return false
+      return false;
+    }
+  });
+}var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -183,11 +233,9 @@ Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
-/*var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-global.log("applet: " + AppletDir)
-var darkSky = AppletDir['darksky'];
-var openWeatherMap = AppletDir.openWeatherMap;
-var ipApi = AppletDir.ipApi;*/
+var darkSky;
+var openWeatherMap;
+//var ipApi = require("./ipApi");
 var MyApplet = (function (_super) {
     __extends(MyApplet, _super);
     function MyApplet(metadata, orientation, panelHeight, instanceId) {
@@ -327,17 +375,7 @@ var MyApplet = (function (_super) {
         return _this;
     }
     MyApplet.prototype.refreshAndRebuild = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.refreshWeather()];
-                    case 1:
-                        _a.sent();
-                        this.rebuild();
-                        return [2];
-                }
-            });
-        });
+        this.refreshWeather();
     };
     ;
     MyApplet.prototype.LoadJsonAsync = function (query) {
@@ -350,16 +388,17 @@ var MyApplet = (function (_super) {
                             var message = Soup.Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (message) {
-                                    _this.log.Debug("API full response: " + message.response_body.data.toString());
                                     try {
+                                        if (message.status_code != 200) {
+                                            reject("http response Code: " + message.status_code + ", reason: " + message.reason_phrase);
+                                            return;
+                                        }
+                                        _this.log.Debug("API full response: " + message.response_body.data.toString());
                                         var payload = JSON.parse(message.response_body.data);
                                         resolve(payload);
                                     }
                                     catch (e) {
                                         _this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-                                        if (_this._dataService == DATA_SERVICE.DARK_SKY) {
-                                            _this.log.Error("DarkSky: This usually indicates that API key is invalid.");
-                                        }
                                         reject(null);
                                     }
                                 }
@@ -493,12 +532,18 @@ var MyApplet = (function (_super) {
                         }
                         return [3, 9];
                     case 5:
+                        /*if (darkSky == null) {
+                            darkSky = require('./darkSky');
+                        }*/
                         this.provider = new DarkSky(this);
                         return [4, this.provider.GetWeather()];
                     case 6:
                         refreshResult = _c.sent();
                         return [3, 10];
                     case 7:
+                        /*if (openWeatherMap == null) {
+                            openWeatherMap = require('./openWeatherMap');
+                        }*/
                         this.provider = new OpenWeatherMap(this);
                         return [4, this.provider.GetWeather()];
                     case 8:
@@ -511,6 +556,7 @@ var MyApplet = (function (_super) {
                             this.lastUpdated = null;
                             return [2];
                         }
+                        this.rebuild();
                         return [4, this.displayWeather()];
                     case 11:
                         _b = (_c.sent());
@@ -636,17 +682,13 @@ var MyApplet = (function (_super) {
                 if (this._showSunrise) {
                     sunriseText = _('Sunrise');
                     sunsetText = _('Sunset');
-                    if (this.weather.location.timeZone != null) {
-                        var sunrise = this.weather.sunrise.toLocaleString("en-GB", { 
-                            //timeZone: this.weather.location.timeZone,
-                             hour: "2-digit", minute: "2-digit" });
-                        var sunset = this.weather.sunset.toLocaleString("en-GB", { 
-                            //timeZone: this.weather.location.timeZone, 
-                            hour: "2-digit", minute: "2-digit" });
+                    /*if (this.weather.location.timeZone != null) {
+                        var sunrise = this.weather.sunrise.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
+                        var sunset = this.weather.sunset.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
                         sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
                         sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
                     }
-                    else {
+                    else */{
                         sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
                         sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
                     }
@@ -687,15 +729,11 @@ var MyApplet = (function (_super) {
                     }
                 }
                 var dayName = "";
-                if (this.weather.location.timeZone != null) {
-                    this.log.Debug(forecastData.dateTime.toLocaleString("en-GB", {
-                        // timeZone: this.weather.location.timeZone 
-                    }));
-                    dayName = _(forecastData.dateTime.toLocaleString("en-GB", { 
-                        //timeZone: this.weather.location.timeZone,
-                         weekday: "long" }));
+                /*if (this.weather.location.timeZone != null) {
+                    this.log.Debug(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone }));
+                    dayName = _(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, weekday: "long" }));
                 }
-                else {
+                else */ {
                     forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
                     dayName = _(this.getDayName(forecastData.dateTime.getUTCDay()));
                 }
@@ -1031,7 +1069,142 @@ var MyApplet = (function (_super) {
     ;
     return MyApplet;
 }(Applet.TextIconApplet));
-
+var openWeatherMapConditionLibrary = [
+    _("Thunderstorm with light rain"),
+    _("Thunderstorm with rain"),
+    _("Thunderstorm with heavy rain"),
+    _("Light thunderstorm"),
+    _("Thunderstorm"),
+    _("Heavy thunderstorm"),
+    _("Ragged thunderstorm"),
+    _("Thunderstorm with light drizzle"),
+    _("Thunderstorm with drizzle"),
+    _("Thunderstorm with heavy drizzle"),
+    _("Light intensity drizzle"),
+    _("Drizzle"),
+    _("Heavy intensity drizzle"),
+    _("Light intensity drizzle rain"),
+    _("Drizzle rain"),
+    _("Heavy intensity drizzle rain"),
+    _("Shower rain and drizzle"),
+    _("Heavy shower rain and drizzle"),
+    _("Shower drizzle"),
+    _("Light rain"),
+    _("Moderate rain"),
+    _("Heavy intensity rain"),
+    _("Very heavy rain"),
+    _("Extreme rain"),
+    _("Freezing rain"),
+    _("Light intensity shower rain"),
+    _("Shower rain"),
+    _("Heavy intensity shower rain"),
+    _("Ragged shower rain"),
+    _("Light snow"),
+    _("Snow"),
+    _("Heavy snow"),
+    _("Sleet"),
+    _("Shower sleet"),
+    _("Light rain and snow"),
+    _("Rain and snow"),
+    _("Light shower snow"),
+    _("Shower snow"),
+    _("Heavy shower snow"),
+    _("Mist"),
+    _("Smoke"),
+    _("Haze"),
+    _("Sand, dust whirls"),
+    _("Fog"),
+    _("Sand"),
+    _("Dust"),
+    _("Volcanic ash"),
+    _("Squalls"),
+    _("Tornado"),
+    _("Clear"),
+    _("Clear sky"),
+    _("Sky is clear"),
+    _("Few clouds"),
+    _("Scattered clouds"),
+    _("Broken clouds"),
+    _("Overcast clouds")
+];
+var icons = {
+    clear_day: 'weather-clear',
+    clear_night: 'weather-clear-night',
+    few_clouds_day: 'weather-few-clouds',
+    few_clouds_night: 'weather-few-clouds-night',
+    clouds: 'weather-clouds',
+    overcast: 'weather_overcast',
+    showers_scattered: 'weather-showers-scattered',
+    showers: 'weather-showers',
+    rain: 'weather-rain',
+    rain_freezing: 'weather-freezing-rain',
+    snow: 'weather-snow',
+    storm: 'weather-storm',
+    fog: 'weather-fog',
+    alert: 'weather-severe-alert'
+};
+var IpApi = (function () {
+    function IpApi(_app) {
+        this.query = "https://ipapi.co/json";
+        this.app = _app;
+    }
+    IpApi.prototype.GetLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var json, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, this.app.LoadJsonAsync(this.query)];
+                    case 1:
+                        json = _a.sent();
+                        if (json == null) {
+                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
+                            return [2, false];
+                        }
+                        return [3, 3];
+                    case 2:
+                        e_1 = _a.sent();
+                        this.app.log.Error("IpApi service error: " + e_1);
+                        this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+                        return [2, false];
+                    case 3:
+                        if (json.error) {
+                            this.HandleErrorResponse(json);
+                            return [2, false];
+                        }
+                        return [2, this.ParseInformation(json)];
+                }
+            });
+        });
+    };
+    ;
+    IpApi.prototype.ParseInformation = function (json) {
+        try {
+            var loc = json.latitude + "," + json.longitude;
+            this.app.settings.setValue('location', loc);
+            this.app.weather.location.timeZone = json.timezone;
+            this.app.weather.location.city = json.city;
+            this.app.weather.location.country = json.country;
+            this.app.log.Print("Location obtained");
+            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
+            this.app.log.Debug("Location setting is now: " + this.app._location);
+            return true;
+        }
+        catch (e) {
+            this.app.log.Error("IPapi parsing error: " + e);
+            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            return false;
+        }
+    };
+    ;
+    IpApi.prototype.HandleErrorResponse = function (json) {
+        this.app.log.Error("IpApi error response: " + json.reason);
+    };
+    ;
+    return IpApi;
+}());
+;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.descriptionLinelength = 25;
@@ -1289,70 +1462,6 @@ var DarkSky = (function () {
     return DarkSky;
 }());
 ;
-
-var IpApi = (function () {
-    function IpApi(_app) {
-        this.query = "https://ipapi.co/json";
-        this.app = _app;
-    }
-    IpApi.prototype.GetLocation = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var json, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4, this.app.LoadJsonAsync(this.query)];
-                    case 1:
-                        json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
-                        return [3, 3];
-                    case 2:
-                        e_1 = _a.sent();
-                        this.app.log.Error("IpApi service error: " + e_1);
-                        this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
-                        return [2, false];
-                    case 3:
-                        if (json.error) {
-                            this.HandleErrorResponse(json);
-                            return [2, false];
-                        }
-                        return [2, this.ParseInformation(json)];
-                }
-            });
-        });
-    };
-    ;
-    IpApi.prototype.ParseInformation = function (json) {
-        try {
-            var loc = json.latitude + "," + json.longitude;
-            this.app.settings.setValue('location', loc);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.location.city = json.city;
-            this.app.weather.location.country = json.country;
-            this.app.log.Print("Location obtained");
-            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
-            this.app.log.Debug("Location setting is now: " + this.app._location);
-            return true;
-        }
-        catch (e) {
-            this.app.log.Error("IPapi parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
-            return false;
-        }
-    };
-    ;
-    IpApi.prototype.HandleErrorResponse = function (json) {
-        this.app.log.Error("IpApi error response: " + json.reason);
-    };
-    ;
-    return IpApi;
-}());
-;
-
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
         this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
@@ -1614,82 +1723,6 @@ var OpenWeatherMap = (function () {
     return OpenWeatherMap;
 }());
 ;
-
-
-var openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
-];
-var icons = {
-    clear_day: 'weather-clear',
-    clear_night: 'weather-clear-night',
-    few_clouds_day: 'weather-few-clouds',
-    few_clouds_night: 'weather-few-clouds-night',
-    clouds: 'weather-clouds',
-    overcast: 'weather_overcast',
-    showers_scattered: 'weather-showers-scattered',
-    showers: 'weather-showers',
-    rain: 'weather-rain',
-    rain_freezing: 'weather-freezing-rain',
-    snow: 'weather-snow',
-    storm: 'weather-storm',
-    fog: 'weather-fog',
-    alert: 'weather-severe-alert'
-};
 function main(metadata, orientation, panelHeight, instanceId) {
     return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }
