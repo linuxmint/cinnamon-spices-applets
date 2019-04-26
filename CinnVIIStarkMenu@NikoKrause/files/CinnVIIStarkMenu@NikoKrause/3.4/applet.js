@@ -25,6 +25,8 @@ const Settings = imports.ui.settings;
 const Pango = imports.gi.Pango;
 const AccountsService = imports.gi.AccountsService;
 const SearchProviderManager = imports.ui.searchProviderManager;
+const SignalManager = imports.misc.signalManager;
+const Params = imports.misc.params;
 
 const Tooltips = imports.ui.tooltips;
 const Session = new GnomeSession.SessionManager();
@@ -259,8 +261,8 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     activate (event) {
-        switch (this._action){
-            case "add_to_panel": {
+        switch (this._action) {
+            case "add_to_panel":
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
                     let new_applet_id = global.settings.get_int("next-applet-id");
                     global.settings.set_int("next-applet-id", (new_applet_id + 1));
@@ -274,7 +276,7 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
 
                 this._appButton.toggleMenu();
                 break;
-            } case "add_to_desktop": {
+            case "add_to_desktop":
                 let file = Gio.file_new_for_path(this._appButton.app.get_app_info().get_filename());
                 let destFile = Gio.file_new_for_path(USER_DESKTOP_PATH+"/"+this._appButton.app.get_id());
                 try{
@@ -285,23 +287,22 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
                 }
                 this._appButton.toggleMenu();
                 break;
-            } case "add_to_favorites": {
+            case "add_to_favorites":
                 AppFavorites.getAppFavorites().addFavorite(this._appButton.app.get_id());
                 this._appButton.toggleMenu();
                 break;
-            } case "remove_from_favorites": {
+            case "remove_from_favorites":
                 AppFavorites.getAppFavorites().removeFavorite(this._appButton.app.get_id());
                 this._appButton.toggleMenu();
                 break;
-            } case "uninstall": {
+            case "uninstall":
                 Util.spawnCommandLine("/usr/bin/cinnamon-remove-application '" + this._appButton.app.get_app_info().get_filename() + "'");
                 this._appButton.appsMenuButton.menu.close();
                 break;
-            } case "run_with_nvidia_gpu": {
+            case "run_with_nvidia_gpu":
                 Util.spawnCommandLine("optirun gtk-launch " + this._appButton.app.get_id());
                 this._appButton.appsMenuButton.menu.close();
                 break;
-            }
         }
         return false;
     }
