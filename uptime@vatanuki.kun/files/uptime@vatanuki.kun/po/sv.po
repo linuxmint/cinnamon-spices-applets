@@ -37,3 +37,18 @@ msgstr "Ett enkelt panelprogram som visar upptid"
 #. uptime@vatanuki.kun->metadata.json->name
 msgid "Up Time"
 msgstr "Upptid"
+
+msgid "years"
+msgstr "år"
+
+msgid "days"
+msgstr "dagar"
+
+msgid "hours"
+msgstr "timmar"
+
+msgid "minutes"
+msgstr "minuter"
+
+msgid "and"
+msgstr "och"
