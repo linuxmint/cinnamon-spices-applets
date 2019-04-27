@@ -203,8 +203,8 @@ BackgroundProcess.prototype = {
 
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
-                        	 this.pid,
-                        	 Lang.bind(this, this._on_exit));
+                             this.pid,
+                             Lang.bind(this, this._on_exit));
     },
 
     _on_exit: function(pid, status) {

@@ -72,7 +72,8 @@ MyApplet.prototype = {
         this.unit_type = AppletConstants.UnitType.BYTES;
         this.update_every = 1.0;
         this.custom_start_date = "";
-        this.gui_speed_type = 0;
+        this.gui_speed_type = AppletConstants.GuiSpeedType.COMPACT;
+        this.gui_value_order = AppletConstants.GuiValueOrder.DOWNLOAD_FIRST;
         this.gui_data_limit_type = 0;
         this.decimal_places = AppletConstants.DecimalPlaces.AUTO;
         this.show_hover = true;
@@ -168,6 +169,7 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "data_limit_command", null],
                         [Settings.BindingDirection.IN, "data_limit", this.on_data_limit_changed],
                         [Settings.BindingDirection.IN, "data_limit_command_enabled", this.on_data_limit_changed],
+                        [Settings.BindingDirection.IN, "gui_value_order", this.on_gui_value_order_changed],
                         [Settings.BindingDirection.IN, "decimal_places", this.on_decimal_places_changed],
                         [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
                         [Settings.BindingDirection.IN, "gui_data_limit_type", this.on_gui_data_limit_type_changed],
@@ -261,6 +263,11 @@ MyApplet.prototype = {
 
     on_gui_data_limit_type_changed: function () {
         this.gui_data_limit.set_gui(this.gui_data_limit_type);
+    },
+
+    on_gui_value_order_changed: function () {
+        this._init_hover_popup();
+        this._init_gui();
     },
 
     on_decimal_places_changed: function () {
@@ -577,13 +584,13 @@ MyApplet.prototype = {
     },
 
     _init_hover_popup: function () {
-        this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation);
+        this.hover_popup = new AppletGui.HoverMenuTotalBytes(this, this.orientation, this.gui_value_order);
         this.on_hover_popup_css_changed();
         this.on_show_hover_changed();
     },
 
     _init_gui: function () {
-        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.decimal_places);
+        this.gui_speed = new AppletGui.GuiSpeed(this._panelHeight, this.gui_speed_type, this.gui_value_order, this.decimal_places);
         this.gui_data_limit = new AppletGui.GuiDataLimit(this._panelHeight, this.gui_data_limit_type);
         this.actor.destroy_all_children();
         this._add_gui_speed();

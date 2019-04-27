@@ -57,6 +57,16 @@
         },
         "tooltip" : "Applet Gui"
     },
+    "gui_value_order" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Value order",
+        "options" : {
+            "Download first" : 0,
+            "Upload first" : 1
+        },
+        "tooltip" : "An order of values shown in the panel and in the hover popup"
+    },
     "decimal_places" : {
         "type": "combobox",
         "default" : -1,
@@ -64,9 +74,9 @@
         "options" : {
             "Auto" : -1,
             "0 " : 0,
-        	"1 " : 1,
-        	"2 " : 2,
-        	"3 " : 3
+            "1 " : 1,
+            "2 " : 2,
+            "3 " : 3
         },
         "tooltip" : "Decimal places of download and upload speed shown in the panel"
     },

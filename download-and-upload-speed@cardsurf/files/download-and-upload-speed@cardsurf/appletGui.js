@@ -87,16 +87,17 @@ IconLabel.prototype = {
 
 
 
-function GuiSpeed(panel_height, gui_speed_type, decimal_places) {
-    this._init(panel_height, gui_speed_type, decimal_places);
+function GuiSpeed(panel_height, gui_speed_type, gui_value_order, decimal_places) {
+    this._init(panel_height, gui_speed_type, gui_value_order, decimal_places);
 };
 
 GuiSpeed.prototype = {
 
-    _init: function(panel_height, gui_speed_type, decimal_places) {
+    _init: function(panel_height, gui_speed_type, gui_value_order, decimal_places) {
 
         this.panel_height = panel_height;
         this.gui_speed_type = gui_speed_type;
+        this.gui_value_order = gui_value_order;
         this.decimal_places = decimal_places;
         this.text_spacing = 5;
 
@@ -112,8 +113,22 @@ GuiSpeed.prototype = {
         if(this.gui_speed_type == AppletConstants.GuiSpeedType.COMPACT) {
             this.actor.set_vertical(true);
         }
+        if(this.gui_value_order == AppletConstants.GuiValueOrder.DOWNLOAD_FIRST) {
+            this._init_actor_download_first();
+        }
+        else {
+            this._init_actor_upload_first();
+        }
+    },
+
+    _init_actor_download_first: function(){
         this.actor.add(this.iconlabel_received.actor);
         this.actor.add(this.iconlabel_sent.actor);
+    },
+
+    _init_actor_upload_first: function(){
+        this.actor.add(this.iconlabel_sent.actor);
+        this.actor.add(this.iconlabel_received.actor);
     },
 
     set_reveived_icon: function(icon_path) {
@@ -421,16 +436,17 @@ CheckboxMenuItem.prototype = {
 
 
 
-function HoverMenuTotalBytes(applet, orientation){
-    this._init(applet, orientation);
+function HoverMenuTotalBytes(applet, orientation, gui_value_order){
+    this._init(applet, orientation, gui_value_order);
 }
 
 HoverMenuTotalBytes.prototype={
 
-    _init: function(applet, orientation) {
+    _init: function(applet, orientation, gui_value_order) {
 
         this.applet = applet;
         this.orientation = orientation;
+        this.gui_value_order = gui_value_order;
 
         this.default_handler_id = 0;
         this.enter_handler_id = this.default_handler_id;
@@ -481,10 +497,26 @@ HoverMenuTotalBytes.prototype={
     },
 
     _init_actor: function(){
+        if(this.gui_value_order == AppletConstants.GuiValueOrder.DOWNLOAD_FIRST) {
+            this._init_actor_download_first();
+        }
+        else {
+            this._init_actor_upload_first();
+        }
+    },
+
+    _init_actor_download_first: function(){
         this.actor.add(this.label_text_received, {row: 0, col: 0});
         this.actor.add(this.label_bytes_received, {row: 0, col: 1});
         this.actor.add(this.label_text_sent, {row: 1, col: 0});
         this.actor.add(this.label_bytes_sent, {row: 1, col: 1});
+    },
+
+    _init_actor_upload_first: function(){
+        this.actor.add(this.label_text_sent, {row: 0, col: 0});
+        this.actor.add(this.label_bytes_sent, {row: 0, col: 1});
+        this.actor.add(this.label_text_received, {row: 1, col: 0});
+        this.actor.add(this.label_bytes_received, {row: 1, col: 1});
     },
 
     _init_menu: function(){
