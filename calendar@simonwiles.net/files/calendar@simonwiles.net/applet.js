@@ -188,8 +188,8 @@ MyApplet.prototype = {
     },
 
     on_settings_changed: function() {
-        this._updateClockAndDate();
         this._updateFormatString();
+        this._updateClockAndDate();
     },
 
     // reads system clock setting to apply "24h" and "seconds" setting to this applet
