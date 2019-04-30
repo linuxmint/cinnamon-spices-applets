@@ -14,6 +14,11 @@ var GuiSpeedType = {
     LARGE: 1
 }
 
+var GuiValueOrder = {
+    DOWNLOAD_FIRST: 0,
+    UPLOAD_FIRST: 1
+}
+
 var GuiDataLimitType = {
     NONE: 0,
     CIRCLE: 1,

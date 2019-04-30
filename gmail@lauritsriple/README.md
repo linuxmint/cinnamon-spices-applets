@@ -10,9 +10,13 @@ sudo pip3 install feedparser
 sudo pip3 install keyring
 sudo pip3 install keyrings-alt
 ```
+If you are using Cinnamon on Linux Mint you can install the required python libraries via apt
+```
+apt install python3-feedparser python3-keyring python3-keyrings.alt
+```
 ## Storage of username and password
 Uses the system keyring service (gnome-keyring) to store and extract the password, so they are not stored in cleartext. You might have to install this.
-
+If you are using 2-step authentication for your google account you will need to create an app password to use in the applet at [https://myaccount.google.com/u/0/apppasswords](https://myaccount.google.com/u/0/apppasswords)
 ## Gmail atom feed
 Uses the gmail atom feed to get info from gmail. You might have to enable access for less secure apps in gmail. Test in your browser if you have access with one of these links. https://mail.google.com/mail/feed/atom or https://username:password@mail.google.com/mail/feed/atom
 

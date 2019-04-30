@@ -29,6 +29,7 @@ if (typeof require !== 'undefined') {
     Calendar = AppletDir.calendar;
 }
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 
 let DEFAULT_FORMAT = _("%l:%M %p");
 
@@ -137,6 +138,15 @@ MyApplet.prototype = {
             this._dateFormat = DEFAULT_FORMAT;
             this._dateFormatFull = _("%A %B %e, %Y");
 
+            // connect to system clock settings
+            this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
+            this.desktop_settings.connect("changed::clock-use-24h", Lang.bind(this, function(key) {
+                this.on_settings_changed();
+            }));
+            this.desktop_settings.connect("changed::clock-show-seconds", Lang.bind(this, function(key) {
+                this.on_settings_changed();
+            }));
+
             this.settings.bindProperty(Settings.BindingDirection.IN, "use-custom-format", "use_custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
@@ -178,12 +188,32 @@ MyApplet.prototype = {
     },
 
     on_settings_changed: function() {
+        this._updateFormatString();
+        this._updateClockAndDate();
+    },
+
+    // reads system clock setting to apply "24h" and "seconds" setting to this applet
+    _updateFormatString() {
         if (this.use_custom_format) {
             this._dateFormat = this.custom_format;
         } else {
-            this._dateFormat = DEFAULT_FORMAT;
+            let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
+            let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");            
+
+            if (use_24h) {
+                if (show_seconds) {
+                    this._dateFormat = "%H:%M:%S";
+                } else {
+                    this._dateFormat = "%H:%M%";
+                }
+            } else {
+                if (show_seconds) {
+                    this._dateFormat = "%l:%M:%S %p";
+                } else {
+                    this._dateFormat = DEFAULT_FORMAT;
+                }
+            }
         }
-        this._updateClockAndDate();
     },
 
     on_custom_format_button_pressed: function() {
