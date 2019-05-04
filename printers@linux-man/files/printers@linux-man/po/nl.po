@@ -47,3 +47,59 @@ msgid "Show printer error icon"
 msgstr "Toon printer foutpictogram"
 
 #: ../settings-schema.json:18
+msgid "Documents count"
+msgstr "Documenten tellen"
+
+#: ../settings-schema.json:19
+msgid "Show documents count next to icon"
+msgstr "Toon aantal documenten naast pictogram"
+
+#: ../settings-schema.json:24
+msgid "Document number"
+msgstr "Document Nummer"
+
+#: ../settings-schema.json:25
+msgid "Show each document number on print list"
+msgstr "Toon elk documentnummer op de printlijst"
+
+#: ../settings-schema.json:30 ../applet.js:195
+msgid "Send to front"
+msgstr "Stuur naar de voorgrond"
+
+#: ../settings-schema.json:31
+msgid "Documents can be sent to front"
+msgstr "Documenten kunnen naar de voorgrond worden verstuurd"
+
+#: ../settings-schema.json:36
+msgid "Symbolic icons"
+msgstr "Symbolische pictogrammen"
+
+#: ../settings-schema.json:37
+msgid "Use symbolic icons"
+msgstr "Gebruik symbolische pictogrammen"
+
+#: ../settings-schema.json:43
+msgid "Reload Applet"
+msgstr "Hulptoepassing opnieuw laden"
+
+#: ../settings-schema.json:49
+msgid "Restart CUPS"
+msgstr "CUPS opnieuw opstarten"
+
+#: ../metadata.json:10 ../applet.js:37 ../applet.js:134
+msgid "Printers"
+msgstr "Printers"
+
+#: ../applet.js:159
+msgid "Cancel all jobs"
+msgstr "Annuleer alle taken"
+
+#: ../applet.js:181
+msgid "at"
+msgstr "op"
+
+#. printers@linux-man->metadata.json->description
+msgid "Manage Jobs and Printers"
+msgstr "Beheer opdrachten en printers"
+
+
