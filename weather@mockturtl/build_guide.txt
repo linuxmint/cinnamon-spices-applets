@@ -16,7 +16,10 @@ FOR 3.8:
     (It compiles to the correct JS target and moves the files into the folder 3.8)
 
 FOR 3.4: Just leave it be, but IF you REALLY need to:
-    Run "build-3.4.py". requires Python 3.5+
+    Run "build-3.4.py". requires Python 3.5+  
+    !!! (Build script is not included in the repo as it is unsafe.
+        You can ask (Gr3q floyd0122@gmail.com) for the script or just do it manually, 
+        it simply puts all files into one file without the generators before main and cleans up the unneeded files from the folder.
     Then modify the output js ( 3.4/applet.js):
         *   Remove Requires and use normal class Initialisations
             for the previously imported modules (no "new ipApi.IpApi(this)", just  )
