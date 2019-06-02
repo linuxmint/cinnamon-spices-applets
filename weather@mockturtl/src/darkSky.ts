@@ -111,6 +111,10 @@ class DarkSky {
                   };
                   let day = json.daily.data[i];
                   forecast.dateTime = new Date(day.time * 1000);
+                  // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
+                  // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
+                  // So we offset the date 
+                  forecast.dateTime.setHours(forecast.dateTime.getHours() + 12);
                   forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
                   forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                   forecast.condition.main = this.GetShortSummary(day.summary);

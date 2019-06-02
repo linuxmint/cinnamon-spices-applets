@@ -586,6 +586,13 @@ class MyApplet extends Applet.TextIconApplet {
                     forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
                     dayName = _(this.getDayName(forecastData.dateTime.getUTCDay()));
                 }
+                if (forecastData.dateTime) {
+                    let now = new Date();
+                    if (forecastData.dateTime.getDate() == now.getDate())
+                        dayName = _("Today");
+                    if (forecastData.dateTime.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
+                        dayName = _("Tomorrow");
+                }
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
                 forecastUi.Summary.text = comment;

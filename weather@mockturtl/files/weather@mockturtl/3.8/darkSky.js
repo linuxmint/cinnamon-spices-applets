@@ -85,6 +85,7 @@ class DarkSky {
                 };
                 let day = json.daily.data[i];
                 forecast.dateTime = new Date(day.time * 1000);
+                forecast.dateTime.setHours(forecast.dateTime.getHours() + 12);
                 forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
                 forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                 forecast.condition.main = this.GetShortSummary(day.summary);
