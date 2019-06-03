@@ -17,14 +17,16 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         this.server = "smart";
-        this.is_connected = false;
+        this.is_connected = null;
         this.process = null;
         this.icon_connected = metadata.path + '/icon.png';
         this.icon_disconnected = metadata.path + '/icon-grey.png';
+        // expressvpn installed status
+        this.service_is_installed = false;
 
         try {
             this.settings = new Settings.AppletSettings(this, UUID, instance_id);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "server", "server", this._onServerChange);       
+            this.settings.bindProperty(Settings.BindingDirection.IN, "server", "server", this._onServerChange);
             this.set_applet_icon_path(this.icon_disconnected);
             this._onServerChange();
             this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
@@ -33,10 +35,10 @@ MyApplet.prototype = {
         catch (e) {
             global.logError(e);
         }
-        
+
     },
 
-    _onServerChange: function() {        
+    _onServerChange: function() {
         this._getConnectionStatus()
     },
 
@@ -46,7 +48,14 @@ MyApplet.prototype = {
                 if (!this._draggable.inhibit) {
                     return false;
                 } else {
-                    let command = "expressvpn " + (this.is_connected ? "disconnect" : "connect " + this.server);                    
+                    if (!this.service_is_installed) {
+                        this._getConnectionStatus();
+                        if (!this.service_is_installed) {
+                            // expressvpn is not installed
+                            return false;
+                        }
+                    }
+                    let command = "expressvpn " + (this.is_connected ? "disconnect" : "connect " + this.server);
                     this.process = MainLoop.timeout_add(2500, Lang.bind(this, this._onTimerAction));
                     this.set_applet_icon_name("network-vpn");
                     this.set_applet_tooltip("Please wait...");
@@ -67,11 +76,30 @@ MyApplet.prototype = {
     },
 
     _getConnectionStatus: function() {
-        let statusStr = ("" + GLib.spawn_command_line_sync("expressvpn status")[1]).split("\n")[0].replace(
-            /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+        let statusStr;
+        try{
+            statusStr = ("" + GLib.spawn_command_line_sync("expressvpn status")[1]).split("\n")[0].replace(
+                /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '');
+
+        } catch (e) {
+            this.set_applet_icon_path(this.icon_disconnected);
+
+            if (e.message.indexOf("“expressvpn”") > -1) {
+                // No such file or directory
+                this.service_is_installed = false;
+                global.logError(e.message);
+                this.set_applet_tooltip("You need to install expressvpn to use this applet");
+                return false;
+            }
+
+            global.logError(e);
+            return false;
+        }
+        this.service_is_installed = true;
+
         let is_connected = statusStr.indexOf("Connected to") > -1;
-        
-        if (is_connected === this.is_connected) 
+
+        if (is_connected === this.is_connected)
             return false;
         this.is_connected = is_connected;
         if (is_connected) {
@@ -86,7 +114,7 @@ MyApplet.prototype = {
                 this.set_applet_tooltip(statusStr +  "\nConnect to location: " + this.server.toUpperCase());
                 this.set_applet_icon_path(this.icon_disconnected);
             }
-            
+
         }
         return true;
     },
