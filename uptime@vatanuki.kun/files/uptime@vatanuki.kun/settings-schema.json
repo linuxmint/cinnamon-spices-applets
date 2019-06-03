@@ -1,0 +1,35 @@
+{
+	"main-section": {
+		"type": "section",
+		"description": "Appearance"
+	},
+	"display": {
+		"type": "combobox",
+		"default": "classic",
+		"options": {
+			"Classic": "classic",
+			"Simple": "simple",
+			"Complex": "complex"
+		},
+		"description": "Display mode",
+		"tooltip": "Classic mode: The way the Uptime applet have always worked.\n\nSimple mode: The first two non-zero values of year,day,hour and minute.\n\nComplex mode: Use %y,%d,%h and %d to insert time values into the pattern field. Use %H and %M to insert hours and minutes with a leading zero for values less than ten."
+	},
+	"prefix": {
+		"type": "entry",
+		"default": "",
+		"description": "Prefix (all modes)",
+		"tooltip": "Text shown before the uptime text, for example 'Uptime :'."
+	},
+	"pattern": {
+		"type": "entry",
+		"default": "%y years, %d days, %h hours and %m minutes",
+		"description": "Pattern (complex mode)",
+		"tooltip": "Use %y,%d,%h and %d to insert time values. Use %H and %M to insert hours and minutes with a leading zero for values less than ten."
+	},
+	"text_css": {
+		"type": "entry",
+		"default": "font-size: 15px; font-weight: bold;",
+		"description": "Text CSS",
+		"tooltip": "A CSS style applied to the text in the panel."
+	}
+}
