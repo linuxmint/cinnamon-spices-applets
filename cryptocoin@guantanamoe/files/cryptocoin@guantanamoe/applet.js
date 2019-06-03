@@ -185,7 +185,7 @@ MyApplet.prototype = {
                                                       currency_config.precision);
                 break;
             case 'name':
-                value = `${value} ${this.currency}`;
+                value = Accounting.formatMoney(value, '', 2) + ` ${this.currency}`;
                 break;
         }
         return value;
