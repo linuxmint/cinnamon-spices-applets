@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 10:42+0000\n"
+"POT-Creation-Date: 2019-06-02 17:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,419 +17,427 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:337 3.6/applet.js:337 3.8/applet.js:401
+#: applet.js:337 3.8/applet.js:221 3.4/applet.js:320
 msgid "..."
 msgstr ""
 
-#: applet.js:338 3.6/applet.js:338 3.8/applet.js:402
+#: applet.js:338 3.8/applet.js:222 3.4/applet.js:321
 msgid "Click to open"
 msgstr ""
 
-#: applet.js:389 3.6/applet.js:389 3.8/applet.js:456
+#: applet.js:389 3.4/applet.js:350
 msgid "Settings"
 msgstr ""
 
-#: applet.js:511 3.6/applet.js:511
+#: applet.js:511
 msgid "No location provided"
 msgstr ""
 
-#: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
+#: applet.js:610 3.8/applet.js:501 3.4/applet.js:652
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
+#: applet.js:634 3.8/applet.js:532 3.4/applet.js:683
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.6/applet.js:635 3.8/applet.js:782
+#: applet.js:635 3.8/applet.js:533 3.4/applet.js:684
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.6/applet.js:708 3.8/applet.js:892
+#: applet.js:708 3.8/applet.js:649 3.4/applet.js:793
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.6/applet.js:709 3.8/applet.js:893
+#: applet.js:709 3.8/applet.js:650 3.4/applet.js:794
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.6/applet.js:731 3.8/applet.js:915
+#: applet.js:731 3.8/applet.js:666 3.4/applet.js:810
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.6/applet.js:737 3.8/applet.js:921
+#: applet.js:737 3.8/applet.js:248 3.8/applet.js:671 3.4/applet.js:815
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.6/applet.js:802 3.8/applet.js:985
+#: applet.js:802 3.8/applet.js:720 3.4/applet.js:864
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.6/applet.js:804 3.8/applet.js:987
+#: applet.js:804 3.8/applet.js:722 3.4/applet.js:866
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.6/applet.js:806 3.8/applet.js:989
+#: applet.js:806 3.8/applet.js:724 3.4/applet.js:868
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.6/applet.js:808 3.8/applet.js:991
+#: applet.js:808 3.8/applet.js:726 3.4/applet.js:870
 msgid "Wind:"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Sunday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Monday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Tuesday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Wednesday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Thursday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Friday"
 msgstr ""
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.8/applet.js:912 3.4/applet.js:1056
 msgid "Saturday"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "N"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "NE"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "E"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "SE"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "S"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "SW"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "W"
 msgstr ""
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.8/applet.js:916 3.4/applet.js:1060
 msgid "NW"
 msgstr ""
 
-#: applet.js:1080 3.6/applet.js:1080
+#: applet.js:1080
 msgid "Service Unavailable"
 msgstr ""
 
-#: applet.js:1084 3.6/applet.js:1084 3.8/applet.js:338
+#: applet.js:1084 3.8/applet.js:193 3.4/applet.js:292
 msgid "Service Error"
 msgstr ""
 
-#: applet.js:1086 3.6/applet.js:1086 3.8/applet.js:343
+#: applet.js:1086 3.8/applet.js:198 3.4/applet.js:297
 msgid "Wrong API Key"
 msgstr ""
 
-#: applet.js:1089 3.6/applet.js:1089
+#: applet.js:1089
 msgid "City Not found"
 msgstr ""
 
-#: applet.js:1092 3.6/applet.js:1092 3.8/applet.js:347
+#: applet.js:1092 3.8/applet.js:202 3.4/applet.js:301
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: 3.8/applet.js:337
+#: 3.8/applet.js:192 3.4/applet.js:291
 msgid "Error"
 msgstr ""
 
-#: 3.8/applet.js:339
+#: 3.8/applet.js:194 3.4/applet.js:293
 msgid "No Api key"
 msgstr ""
 
-#: 3.8/applet.js:340
+#: 3.8/applet.js:195 3.4/applet.js:294
 msgid "No Location"
 msgstr ""
 
-#: 3.8/applet.js:344
+#: 3.8/applet.js:199 3.4/applet.js:298
 msgid "Wrong Location"
 msgstr ""
 
-#: 3.8/applet.js:345
+#: 3.8/applet.js:200 3.4/applet.js:299
 msgid "Location Not found"
 msgstr ""
 
-#: 3.8/applet.js:346
+#: 3.8/applet.js:201 3.4/applet.js:300
 msgid "Parsing weather information failed :("
 msgstr ""
 
-#: 3.8/applet.js:348
+#: 3.8/applet.js:203 3.4/applet.js:302
 msgid "Could not get location"
 msgstr ""
 
-#: 3.8/applet.js:349
+#: 3.8/applet.js:204 3.4/applet.js:303
 msgid "Unknown Error"
 msgstr ""
 
-#: 3.8/applet.js:350
+#: 3.8/applet.js:205 3.4/applet.js:304
 msgid "No/Bad response from Data Service"
 msgstr ""
 
-#: 3.8/applet.js:355
+#: 3.8/applet.js:208 3.4/applet.js:307
 msgid "and"
 msgstr ""
 
-#: 3.8/applet.js:355
+#: 3.8/applet.js:208 3.4/applet.js:307
 msgid "until"
 msgstr ""
 
-#: 3.8/applet.js:355
+#: 3.8/applet.js:208 3.4/applet.js:307
 msgid "in"
 msgstr ""
 
-#: 3.8/applet.js:749
+#: 3.8/applet.js:507 3.4/applet.js:658
 msgid "Feels like:"
 msgstr ""
 
-#: 3.8/applet.js:1234
+#: 3.8/applet.js:592
+msgid "Today"
+msgstr ""
+
+#: 3.8/applet.js:594
+msgid "Tomorrow"
+msgstr ""
+
+#: 3.8/applet.js:928 3.4/applet.js:1073
 msgid "Thunderstorm with light rain"
 msgstr ""
 
-#: 3.8/applet.js:1235
+#: 3.8/applet.js:929 3.4/applet.js:1074
 msgid "Thunderstorm with rain"
 msgstr ""
 
-#: 3.8/applet.js:1236
+#: 3.8/applet.js:930 3.4/applet.js:1075
 msgid "Thunderstorm with heavy rain"
 msgstr ""
 
-#: 3.8/applet.js:1237
+#: 3.8/applet.js:931 3.4/applet.js:1076
 msgid "Light thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1238
+#: 3.8/applet.js:932 3.4/applet.js:1077
 msgid "Thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1239
+#: 3.8/applet.js:933 3.4/applet.js:1078
 msgid "Heavy thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1240
+#: 3.8/applet.js:934 3.4/applet.js:1079
 msgid "Ragged thunderstorm"
 msgstr ""
 
-#: 3.8/applet.js:1241
+#: 3.8/applet.js:935 3.4/applet.js:1080
 msgid "Thunderstorm with light drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1242
+#: 3.8/applet.js:936 3.4/applet.js:1081
 msgid "Thunderstorm with drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1243
+#: 3.8/applet.js:937 3.4/applet.js:1082
 msgid "Thunderstorm with heavy drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1245
+#: 3.8/applet.js:938 3.4/applet.js:1083
 msgid "Light intensity drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1246
+#: 3.8/applet.js:939 3.4/applet.js:1084
 msgid "Drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1247
+#: 3.8/applet.js:940 3.4/applet.js:1085
 msgid "Heavy intensity drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1248
+#: 3.8/applet.js:941 3.4/applet.js:1086
 msgid "Light intensity drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1249
+#: 3.8/applet.js:942 3.4/applet.js:1087
 msgid "Drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1250
+#: 3.8/applet.js:943 3.4/applet.js:1088
 msgid "Heavy intensity drizzle rain"
 msgstr ""
 
-#: 3.8/applet.js:1251
+#: 3.8/applet.js:944 3.4/applet.js:1089
 msgid "Shower rain and drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1252
+#: 3.8/applet.js:945 3.4/applet.js:1090
 msgid "Heavy shower rain and drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1253
+#: 3.8/applet.js:946 3.4/applet.js:1091
 msgid "Shower drizzle"
 msgstr ""
 
-#: 3.8/applet.js:1255
+#: 3.8/applet.js:947 3.4/applet.js:1092
 msgid "Light rain"
 msgstr ""
 
-#: 3.8/applet.js:1256
+#: 3.8/applet.js:948 3.4/applet.js:1093
 msgid "Moderate rain"
 msgstr ""
 
-#: 3.8/applet.js:1257
+#: 3.8/applet.js:949 3.4/applet.js:1094
 msgid "Heavy intensity rain"
 msgstr ""
 
-#: 3.8/applet.js:1258
+#: 3.8/applet.js:950 3.4/applet.js:1095
 msgid "Very heavy rain"
 msgstr ""
 
-#: 3.8/applet.js:1259
+#: 3.8/applet.js:951 3.4/applet.js:1096
 msgid "Extreme rain"
 msgstr ""
 
-#: 3.8/applet.js:1260
+#: 3.8/applet.js:952 3.4/applet.js:1097
 msgid "Freezing rain"
 msgstr ""
 
-#: 3.8/applet.js:1261
+#: 3.8/applet.js:953 3.4/applet.js:1098
 msgid "Light intensity shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1262
+#: 3.8/applet.js:954 3.4/applet.js:1099
 msgid "Shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1263
+#: 3.8/applet.js:955 3.4/applet.js:1100
 msgid "Heavy intensity shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1264
+#: 3.8/applet.js:956 3.4/applet.js:1101
 msgid "Ragged shower rain"
 msgstr ""
 
-#: 3.8/applet.js:1266
+#: 3.8/applet.js:957 3.4/applet.js:1102
 msgid "Light snow"
 msgstr ""
 
-#: 3.8/applet.js:1267
+#: 3.8/applet.js:958 3.4/applet.js:1103
 msgid "Snow"
 msgstr ""
 
-#: 3.8/applet.js:1268
+#: 3.8/applet.js:959 3.4/applet.js:1104
 msgid "Heavy snow"
 msgstr ""
 
-#: 3.8/applet.js:1269
+#: 3.8/applet.js:960 3.4/applet.js:1105
 msgid "Sleet"
 msgstr ""
 
-#: 3.8/applet.js:1270
+#: 3.8/applet.js:961 3.4/applet.js:1106
 msgid "Shower sleet"
 msgstr ""
 
-#: 3.8/applet.js:1271
+#: 3.8/applet.js:962 3.4/applet.js:1107
 msgid "Light rain and snow"
 msgstr ""
 
-#: 3.8/applet.js:1272
+#: 3.8/applet.js:963 3.4/applet.js:1108
 msgid "Rain and snow"
 msgstr ""
 
-#: 3.8/applet.js:1273
+#: 3.8/applet.js:964 3.4/applet.js:1109
 msgid "Light shower snow"
 msgstr ""
 
-#: 3.8/applet.js:1274
+#: 3.8/applet.js:965 3.4/applet.js:1110
 msgid "Shower snow"
 msgstr ""
 
-#: 3.8/applet.js:1275
+#: 3.8/applet.js:966 3.4/applet.js:1111
 msgid "Heavy shower snow"
 msgstr ""
 
-#: 3.8/applet.js:1277
+#: 3.8/applet.js:967 3.4/applet.js:1112
 msgid "Mist"
 msgstr ""
 
-#: 3.8/applet.js:1278
+#: 3.8/applet.js:968 3.4/applet.js:1113
 msgid "Smoke"
 msgstr ""
 
-#: 3.8/applet.js:1279
+#: 3.8/applet.js:969 3.4/applet.js:1114
 msgid "Haze"
 msgstr ""
 
-#: 3.8/applet.js:1280
+#: 3.8/applet.js:970 3.4/applet.js:1115
 msgid "Sand, dust whirls"
 msgstr ""
 
-#: 3.8/applet.js:1281
+#: 3.8/applet.js:971 3.4/applet.js:1116
 msgid "Fog"
 msgstr ""
 
-#: 3.8/applet.js:1282
+#: 3.8/applet.js:972 3.4/applet.js:1117
 msgid "Sand"
 msgstr ""
 
-#: 3.8/applet.js:1283
+#: 3.8/applet.js:973 3.4/applet.js:1118
 msgid "Dust"
 msgstr ""
 
-#: 3.8/applet.js:1284
+#: 3.8/applet.js:974 3.4/applet.js:1119
 msgid "Volcanic ash"
 msgstr ""
 
-#: 3.8/applet.js:1285
+#: 3.8/applet.js:975 3.4/applet.js:1120
 msgid "Squalls"
 msgstr ""
 
-#: 3.8/applet.js:1286
+#: 3.8/applet.js:976 3.4/applet.js:1121
 msgid "Tornado"
 msgstr ""
 
-#: 3.8/applet.js:1288
+#: 3.8/applet.js:977 3.4/applet.js:1122
 msgid "Clear"
 msgstr ""
 
-#: 3.8/applet.js:1289
+#: 3.8/applet.js:978 3.4/applet.js:1123
 msgid "Clear sky"
 msgstr ""
 
-#: 3.8/applet.js:1290
+#: 3.8/applet.js:979 3.4/applet.js:1124
 msgid "Sky is clear"
 msgstr ""
 
-#: 3.8/applet.js:1292
+#: 3.8/applet.js:980 3.4/applet.js:1125
 msgid "Few clouds"
 msgstr ""
 
-#: 3.8/applet.js:1293
+#: 3.8/applet.js:981 3.4/applet.js:1126
 msgid "Scattered clouds"
 msgstr ""
 
-#: 3.8/applet.js:1294
+#: 3.8/applet.js:982 3.4/applet.js:1127
 msgid "Broken clouds"
 msgstr ""
 
-#: 3.8/applet.js:1295
+#: 3.8/applet.js:983 3.4/applet.js:1128
 msgid "Overcast clouds"
 msgstr ""
 
@@ -438,229 +446,226 @@ msgid "Settings for weather@mockturtl 1.8"
 msgstr ""
 
 #. settings-schema.json->keybinding->description
-#. 3.6->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
+#. 3.4->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
 msgstr ""
 
 #. settings-schema.json->providerSettings->description
-#. 3.6->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->providerSettings->description
+#. 3.4->settings-schema.json->providerSettings->description
 msgid "Weather Provider Settings"
 msgstr ""
 
 #. settings-schema.json->dataService->description
-#. 3.6->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
+#. 3.4->settings-schema.json->dataService->description
 msgid "Data service"
 msgstr ""
 
 #. settings-schema.json->dataService->options
-#. 3.6->settings-schema.json->dataService->options
 msgid "OpenWeatherMap"
 msgstr ""
 
 #. settings-schema.json->location->description
-#. 3.6->settings-schema.json->location->description
 #. 3.8->settings-schema.json->location->description
+#. 3.4->settings-schema.json->location->description
 msgid "Location"
 msgstr ""
 
 #. settings-schema.json->location->tooltip
-#. 3.6->settings-schema.json->location->tooltip
 #. 3.8->settings-schema.json->location->tooltip
+#. 3.4->settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or "
 "Latitude,Longtitude"
 msgstr ""
 
 #. settings-schema.json->getLocation->description
-#. 3.6->settings-schema.json->getLocation->description
 msgid "Setup Location"
 msgstr ""
 
 #. settings-schema.json->getLocation->tooltip
-#. 3.6->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
+#. 3.4->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
 msgstr ""
 
 #. settings-schema.json->personalSettings->description
-#. 3.6->settings-schema.json->personalSettings->description
 #. 3.8->settings-schema.json->personalSettings->description
+#. 3.4->settings-schema.json->personalSettings->description
 msgid "Personal Settings"
 msgstr ""
 
 #. settings-schema.json->temperatureUnit->description
-#. 3.6->settings-schema.json->temperatureUnit->description
 #. 3.8->settings-schema.json->temperatureUnit->description
+#. 3.4->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
 msgstr ""
 
 #. settings-schema.json->temperatureUnit->options
-#. 3.6->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
+#. 3.4->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr ""
 
 #. settings-schema.json->temperatureUnit->options
-#. 3.6->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
+#. 3.4->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
 msgstr ""
 
 #. settings-schema.json->temperatureHighFirst->description
-#. 3.6->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
+#. 3.4->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
 msgstr ""
 
 #. settings-schema.json->windSpeedUnit->description
-#. 3.6->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
+#. 3.4->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
 msgstr ""
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.4->settings-schema.json->windSpeedUnit->options
 msgid "kph"
 msgstr ""
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.4->settings-schema.json->windSpeedUnit->options
 msgid "mph"
 msgstr ""
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.4->settings-schema.json->windSpeedUnit->options
 msgid "m/s"
 msgstr ""
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
+#. 3.4->settings-schema.json->windSpeedUnit->options
 msgid "knots"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->description
-#. 3.6->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
+#. 3.4->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "hPa"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "in Hg"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "psi"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "at"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "atm"
 msgstr ""
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
+#. 3.4->settings-schema.json->pressureUnit->options
 msgid "Pa"
 msgstr ""
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.6->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
+#. 3.4->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr ""
 
 #. settings-schema.json->showSunrise->description
-#. 3.6->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
+#. 3.4->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
 msgstr ""
 
 #. settings-schema.json->show24Hours->description
-#. 3.6->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
+#. 3.4->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
 msgstr ""
 
 #. settings-schema.json->forecastDays->units
-#. 3.6->settings-schema.json->forecastDays->units
 #. 3.8->settings-schema.json->forecastDays->units
+#. 3.4->settings-schema.json->forecastDays->units
 msgid "days"
 msgstr ""
 
 #. settings-schema.json->forecastDays->description
-#. 3.6->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
+#. 3.4->settings-schema.json->forecastDays->description
 msgid "Forecast length"
 msgstr ""
 
 #. settings-schema.json->translateCondition->description
-#. 3.6->settings-schema.json->translateCondition->description
 msgid "Translate condition"
 msgstr ""
 
 #. settings-schema.json->useSymbolicIcons->description
-#. 3.6->settings-schema.json->useSymbolicIcons->description
 #. 3.8->settings-schema.json->useSymbolicIcons->description
+#. 3.4->settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
 msgstr ""
 
 #. settings-schema.json->showTextInPanel->description
-#. 3.6->settings-schema.json->showTextInPanel->description
 #. 3.8->settings-schema.json->showTextInPanel->description
+#. 3.4->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
 msgstr ""
 
 #. settings-schema.json->showCommentInPanel->description
-#. 3.6->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
+#. 3.4->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr ""
 
 #. settings-schema.json->locationLabelOverride->description
-#. 3.6->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
+#. 3.4->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
 msgstr ""
 
 #. settings-schema.json->refreshInterval->units
-#. 3.6->settings-schema.json->refreshInterval->units
 #. 3.8->settings-schema.json->refreshInterval->units
+#. 3.4->settings-schema.json->refreshInterval->units
 msgid "minutes"
 msgstr ""
 
 #. settings-schema.json->refreshInterval->description
-#. 3.6->settings-schema.json->refreshInterval->description
 #. 3.8->settings-schema.json->refreshInterval->description
+#. 3.4->settings-schema.json->refreshInterval->description
 msgid "Update interval"
 msgstr ""
 
@@ -672,53 +677,63 @@ msgstr ""
 msgid "View your local weather forecast"
 msgstr ""
 
-#. 3.6->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.6"
-msgstr ""
-
 #. 3.8->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.8"
 msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
+#. 3.4->settings-schema.json->dataService->options
 msgid "OpenWeatherMap (no key needed)"
 msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
+#. 3.4->settings-schema.json->dataService->options
 msgid "DarkSky"
 msgstr ""
 
 #. 3.8->settings-schema.json->apiKey->description
+#. 3.4->settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr ""
 
 #. 3.8->settings-schema.json->apiKey->tooltip
+#. 3.4->settings-schema.json->apiKey->tooltip
 msgid ""
 "Copy this from your account of the used Data service and paste it here."
 msgstr ""
 
 #. 3.8->settings-schema.json->manualLocation->description
+#. 3.4->settings-schema.json->manualLocation->description
 msgid "Manual Location"
 msgstr ""
 
 #. 3.8->settings-schema.json->manualLocation->tooltip
+#. 3.4->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
 msgstr ""
 
 #. 3.8->settings-schema.json->getLocation->description
+#. 3.4->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
 msgstr ""
 
 #. 3.8->settings-schema.json->translateCondition->description
+#. 3.4->settings-schema.json->translateCondition->description
 msgid "Translate conditions"
 msgstr ""
 
 #. 3.8->settings-schema.json->shortConditions->description
+#. 3.4->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
 msgstr ""
 
 #. 3.8->settings-schema.json->credits->description
+#. 3.4->settings-schema.json->credits->description
 msgid ""
 "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for"
 " their support!"
+msgstr ""
+
+#. 3.4->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.4"
 msgstr ""

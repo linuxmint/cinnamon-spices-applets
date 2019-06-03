@@ -30,7 +30,7 @@
   },
   "manualLocation":
   { "type": "checkbox"
-  , "default": true
+  , "default": false
   , "description": "Manual Location"
   , "tooltip": "Enable this if your location is not accurate"
   },
