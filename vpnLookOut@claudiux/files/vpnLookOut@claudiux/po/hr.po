@@ -220,7 +220,7 @@ msgstr "Pokrenite, u upravo otvorenom terminalu, naredbe:"
 
 #: 2.8/applet.js:215
 msgid "Some dependencies are not installed!"
-msgstr "Određene zavisnosti nisu instalirane!"
+msgstr "Potrebne zavisnosti nisu instalirane!"
 
 #: 2.8/applet.js:241
 msgid "Waiting"
