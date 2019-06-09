@@ -173,11 +173,11 @@ class QRedshift extends Applet.TextIconApplet {
                 this.gm_Slider._onScrollEvent(actor, event);
             }
             
-            qLOG('Scroll', this.opt.labelScrollAction);
+            // qLOG('Scroll', this.opt.labelScrollAction);
             
-            let key = event.get_key_symbol();
+            // let key = event.get_key_symbol();
             
-            qLOG('Key', key);
+            // qLOG('Key', key);
             
         });
         
