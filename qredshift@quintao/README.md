@@ -10,6 +10,7 @@ An Cinnamon applet that sets brightness, gamma levels and color temperature with
 * Temperature from 1000k to 9000k.
 * Gamma from 1 to 5.
 * Custom location option.
+* Ready to Redshift 1.12
 
 ## Installation
 1. Install Redshift:
@@ -22,5 +23,6 @@ An Cinnamon applet that sets brightness, gamma levels and color temperature with
 ![](screenshot2.png)
 
 ![](screenshot3.png)
+
 
 
