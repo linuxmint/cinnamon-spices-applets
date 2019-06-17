@@ -20,7 +20,7 @@ function _(str) {
 
 /* global values */
 let icon_path = "/usr/share/cinnamon/theme/";
-let compatible_Apps = ["skype", "pidgin", "empathy", "xchat", "kmess", "gajim", "emesene", "qutim", "amsn", "openfetion", "gwibber", "qwit", "turpial", "birdie", "pino", "fbmessenger"];
+let compatible_Apps = ["skype", "skypeforlinux", "pidgin", "empathy", "xchat", "kmess", "gajim", "emesene", "qutim", "amsn", "openfetion", "gwibber", "qwit", "turpial", "birdie", "pino", "slack", "fbmessenger", "fbmessengerdesktop", "telegramdesktop", "whatsdesk", "whatsie"];
 let compatible_Emails = ["evolution", "postler", "geary", "thunderbird", "KMail2", "claws-mail"];
 let compose_Commands = ["evolution mailto:", "postler mailto:", "geary mailto:", "thunderbird -compose", "kmail -compose", "claws-mail --compose"];
 let contact_Commands = ["evolution -c contacts", null, null, "thunderbird -addressbook", null, null];
