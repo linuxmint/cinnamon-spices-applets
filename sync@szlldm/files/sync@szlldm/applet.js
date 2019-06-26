@@ -22,6 +22,7 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 const UUID = "sync@szlldm";
+const AppletDir = imports.ui.appletManager.appletMeta["sync@szlldm"].path;
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
 
