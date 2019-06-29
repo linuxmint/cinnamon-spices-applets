@@ -1,0 +1,229 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-30 20:10+0200\n"
+"PO-Revision-Date: 2019-03-10 00:53+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: pl_PL\n"
+
+#: providers.js:46
+msgid "CPU:"
+msgstr "Procesor:"
+
+#: providers.js:68 providers.js:94
+msgid " MB"
+msgstr " MB"
+
+#: providers.js:73
+msgid "Memory:"
+msgstr "Pamięć:"
+
+#: providers.js:99
+msgid "Swap:"
+msgstr "Swap:"
+
+#: providers.js:135
+msgid " KB/s"
+msgstr " KB/s"
+
+#: providers.js:140
+msgid "Network D/U:"
+msgstr "Sieć P/W:"
+
+#: providers.js:179
+msgid "Load average:"
+msgstr "Średnie obciążenie:"
+
+#. sysmonitor@orcus->settings-schema.json->draw_border->description
+msgid "Draw border"
+msgstr "Rysuj obramowanie"
+
+#. sysmonitor@orcus->settings-
+#. schema.json->mem_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->load_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->swap_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->net_override_graph_width->description
+#. sysmonitor@orcus->settings-
+#. schema.json->cpu_override_graph_width->description
+msgid "Override graph width"
+msgstr "Zastąp szerokość wykresu"
+
+#. sysmonitor@orcus->settings-schema.json->smooth->description
+msgid "Smooth graphs"
+msgstr "Wygładź wykresy"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->description
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->description
+msgid "Graph width"
+msgstr "Szerokość wykresu"
+
+#. sysmonitor@orcus->settings-schema.json->load_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->swap_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_lr->units
+#. sysmonitor@orcus->settings-schema.json->net_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->padding_tb->units
+#. sysmonitor@orcus->settings-schema.json->cpu_graph_width->units
+#. sysmonitor@orcus->settings-schema.json->graph_width->units
+#. sysmonitor@orcus->settings-schema.json->mem_graph_width->units
+msgid "pixels"
+msgstr "pikseli"
+
+#. sysmonitor@orcus->settings-schema.json->load_enabled->description
+#. sysmonitor@orcus->settings-schema.json->mem_enabled->description
+#. sysmonitor@orcus->settings-schema.json->swap_enabled->description
+#. sysmonitor@orcus->settings-schema.json->cpu_enabled->description
+#. sysmonitor@orcus->settings-schema.json->net_enabled->description
+msgid "Enable"
+msgstr "Włącz"
+
+#. sysmonitor@orcus->settings-schema.json->padding_lr->description
+msgid "Left/right padding"
+msgstr "Lewy/prawy odstęp"
+
+#. sysmonitor@orcus->settings-schema.json->onclick_program->description
+msgid "Program to launch on click"
+msgstr "Program uruchamiany po kliknięciu"
+
+#. sysmonitor@orcus->settings-schema.json->use_padding->description
+msgid "Use custom applet padding"
+msgstr "Użyj innego odstępu w aplecie"
+
+#. sysmonitor@orcus->settings-schema.json->load->title
+msgid "Load"
+msgstr "Obciążenie"
+
+#. sysmonitor@orcus->settings-schema.json->swap_c->title
+#. sysmonitor@orcus->settings-schema.json->cpu_c->title
+#. sysmonitor@orcus->settings-schema.json->load_c->title
+#. sysmonitor@orcus->settings-schema.json->net_c->title
+#. sysmonitor@orcus->settings-schema.json->common_c->title
+#. sysmonitor@orcus->settings-schema.json->mem_c->title
+msgid "Colors"
+msgstr "Kolory"
+
+#. sysmonitor@orcus->settings-schema.json->swap_g->title
+#. sysmonitor@orcus->settings-schema.json->cpu_g->title
+#. sysmonitor@orcus->settings-schema.json->load_g->title
+#. sysmonitor@orcus->settings-schema.json->mem_g->title
+#. sysmonitor@orcus->settings-schema.json->common_g->title
+#. sysmonitor@orcus->settings-schema.json->net_g->title
+msgid "General"
+msgstr "Ogólnie"
+
+#. sysmonitor@orcus->settings-schema.json->mem->title
+msgid "Memory"
+msgstr "Pamięć"
+
+#. sysmonitor@orcus->settings-schema.json->cpu->title
+msgid "CPU"
+msgstr "Procesor"
+
+#. sysmonitor@orcus->settings-schema.json->common->title
+msgid "Common"
+msgstr "Wspólne"
+
+#. sysmonitor@orcus->settings-schema.json->net->title
+msgid "Network"
+msgstr "Sieć"
+
+#. sysmonitor@orcus->settings-schema.json->swap->title
+msgid "Swap"
+msgstr "Plik wymiany"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->description
+msgid "Refresh rate"
+msgstr "Częstotliwość odświeżania"
+
+#. sysmonitor@orcus->settings-schema.json->refresh_rate->units
+msgid "ms"
+msgstr "ms"
+
+#. sysmonitor@orcus->settings-schema.json->swap_color_0->description
+#. sysmonitor@orcus->settings-schema.json->mem_color_0->description
+msgid "Used color"
+msgstr "Kolor użytej pamięci"
+
+#. sysmonitor@orcus->settings-schema.json->load_color_0->description
+msgid "Color"
+msgstr "Kolor"
+
+#. sysmonitor@orcus->settings-schema.json->padding_tb->description
+msgid "Top/bottom padding"
+msgstr "Górny/dolny odstęp"
+
+#. sysmonitor@orcus->settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Kolor obramowania"
+
+#. sysmonitor@orcus->settings-schema.json->bg_color->description
+msgid "Background color"
+msgstr "Kolor tła"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_0->description
+msgid "User color"
+msgstr "Kolor użytkownika"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_1->description
+msgid "Nice color"
+msgstr "Miły kolor (Nice color)"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_2->description
+msgid "Kernel color"
+msgstr "Kolor jądra"
+
+#. sysmonitor@orcus->settings-schema.json->cpu_color_3->description
+msgid "IOWait color"
+msgstr "Kolor oczekiwania wejścia wyjścia (IOWait)"
+
+#. sysmonitor@orcus->settings-schema.json->mem_color_1->description
+msgid "Cached color"
+msgstr "Kolor pamięci zbuforowanej"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->description
+msgid "Common graph width"
+msgstr "Wspólna szerokość wykresu"
+
+#. sysmonitor@orcus->settings-schema.json->graph_width->tooltip
+msgid ""
+"If the applet is in a vertical panel, this sets the graph height. The graph "
+"width is then the panel width minus padding"
+msgstr ""
+"Jeśli aplet znajduje się na panelu pionowym, ustawiana jest wysokość "
+"wykresu. Szerokość wykresu jest wtedy różnicą szerokości panelu oraz odstępu"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_1->description
+msgid "Upload color"
+msgstr "Kolor wysyłania"
+
+#. sysmonitor@orcus->settings-schema.json->net_color_0->description
+msgid "Download color"
+msgstr "Kolor pobierania"
+
+#. sysmonitor@orcus->metadata.json->description
+msgid "Displays CPU, memory, swap and network usage and load in graphs"
+msgstr ""
+"Wyświetla użycie procesora, pamięci, pliku wymiany oraz sieci w postaci "
+"wykresu"
+
+#. sysmonitor@orcus->metadata.json->name
+msgid "System Monitor"
+msgstr "Monitor systemu"

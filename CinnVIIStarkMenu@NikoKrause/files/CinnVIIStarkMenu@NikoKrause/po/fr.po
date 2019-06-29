@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-08 14:36+0200\n"
 "PO-Revision-Date: 2017-05-08 14:36+0200\n"
-"Last-Translator: Christian Medel <cmedelahumada@gmail.com>\n"
+"Last-Translator: Med Amine <amine.griche77@protonmail.ch>\n"
 "Language-Team: French <fr@li.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -21,8 +21,7 @@ msgstr ""
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
-msgstr ""
-"Veuillez fournir votre mot de passe afin de désinstaller cette application"
+msgstr "Veuillez fournir votre mot de passe afin de désinstaller cette application"
 
 #: 3.2/applet.js:258 2.6/applet.js:259
 msgid "Add to panel"
@@ -581,18 +580,15 @@ msgstr "Icône du raccourci"
 #. 2.6->settings-schema.json->quicklauncher-18-icon->tooltip
 #. 2.6->settings-schema.json->quicklauncher-9-icon->tooltip
 #. 2.6->settings-schema.json->quicklauncher-10-icon->tooltip
-msgid ""
-"Select an icon file or type an icon name into the entry box for the "
+msgid "Select an icon file or type an icon name into the entry box for the "
 "quicklauncher"
-msgstr ""
-"Choisissez une icône pour le raccourci (entrez le chemin du fichier ou "
+msgstr "Choisissez une icône pour le raccourci (entrez le chemin du fichier ou "
 "sélectionnez-le)"
 
 #. 3.2->settings-schema.json->search-filesystem->description
 #. 2.6->settings-schema.json->search-filesystem->description
 msgid "Enable filesystem path entry in search box"
-msgstr ""
-"Activer l'entrée du chemin du système de fichier dans la boîte de recherche"
+msgstr "Activer l'entrée du chemin du système de fichier dans la boîte de recherche"
 
 #. 3.2->settings-schema.json->search-filesystem->tooltip
 #. 2.6->settings-schema.json->search-filesystem->tooltip
@@ -679,8 +675,7 @@ msgstr "Afficher la description du programme sous son icône"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
+msgid "Choose whether or not to show the application description on the application "
 "buttons."
 msgstr "Afficher ou masquer la description du programme sous son icône"
 
@@ -711,10 +706,8 @@ msgstr "Agencement des boutons de raccourcis"
 
 #. 3.2->settings-schema.json->quicklauncher-layout->tooltip
 #. 2.6->settings-schema.json->quicklauncher-layout->tooltip
-msgid ""
-"Choose whether to show icons and/or labels on the quicklauncher buttons."
-msgstr ""
-"Afficher ou masquer les icônes et/ou le texte des boutons de raccourcis"
+msgid "Choose whether to show icons and/or labels on the quicklauncher buttons."
+msgstr "Afficher ou masquer les icônes et/ou le texte des boutons de raccourcis"
 
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
@@ -729,27 +722,27 @@ msgstr "Icônes uniquement"
 #. 3.2->settings-schema.json->user-box-layout->description
 #. 2.6->settings-schema.json->user-box-layout->description
 msgid "User account info box style"
-msgstr ""
+msgstr "Le style de la boîte d'info du compte utilisateur"
 
 #. 3.2->settings-schema.json->user-box-layout->tooltip
 #. 2.6->settings-schema.json->user-box-layout->tooltip
 msgid "Choose whether to show the user name and/or user picture."
-msgstr ""
+msgstr "Afficher le nom d'utilisateur et / ou la photo de l'utilisateur."
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
 msgid "Hide"
-msgstr ""
+msgstr "Masquer"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
 msgid "User picture only"
-msgstr ""
+msgstr "Photo utilisateur uniquement"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
 msgid "User picture and user name"
-msgstr ""
+msgstr "Photo utilisateur et nom d'utilisateur"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->description
 #. 2.6->settings-schema.json->shutdown-menu-layout->description
@@ -798,10 +791,8 @@ msgstr "Activer le défilement automatique dans la liste des applications"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 2.6->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Permet le défilement naturel automatique dans la liste des applications."
+msgid "Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "Permet le défilement naturel automatique dans la liste des applications."
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 2.6->settings-schema.json->enable-animation->description
@@ -811,9 +802,7 @@ msgstr "Animer l'ouverture et la fermeture du menu"
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 2.6->settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
-msgstr ""
-"Autoriser les effets d'animation lors de l'ouverture et de la fermeture du "
-"menu"
+msgstr "Autoriser les effets d'animation lors de l'ouverture et de la fermeture du menu"
 
 #. 3.2->settings-schema.json->show-places->description
 #. 2.6->settings-schema.json->show-places->description
@@ -823,8 +812,7 @@ msgstr "Afficher les signets et les emplacements"
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 2.6->settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
-"Choisir d'afficher ou non les favoris et les emplacements dans le menu."
+msgstr "Choisir d'afficher ou non les favoris et les emplacements dans le menu."
 
 #. 3.2->settings-schema.json->shutdown-label->description
 #. 2.6->settings-schema.json->shutdown-label->description
@@ -920,11 +908,8 @@ msgid "Delay between switching categories"
 msgstr "Délai d'affichage sur sélection de catégorie"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
-msgid ""
-"Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
-msgstr ""
-"Menu Cinnamon avec l'apparence du menu Démarrer de Windows 7 ou "
-"du menu MATE"
+msgid "Cinnamon Menu with the look of the Windows 7 Start Menu or the MATE Menu"
+msgstr "Menu Cinnamon avec l'apparence du menu Démarrer de Windows 7 ou du menu MATE"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->name
 msgid "CinnVIIStarkMenu"

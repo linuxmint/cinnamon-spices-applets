@@ -1,5 +1,11 @@
 ### Changelog covering recent significant changes
 
+
+## 3.3.0
+  * Correct code for style .numa-not-connected in applet.js
+  * Further enhancement in styles to match Cinnamon 4.0
+  * Change selection of audible warning to use soundfilechooser widget in settings-schema.json for 3.2 and 4.0
+
 ## 3.2.9
   * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded and intrusive.
 

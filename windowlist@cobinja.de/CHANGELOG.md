@@ -1,5 +1,15 @@
 Changelog
 
+2.5.1
+==
+- Fix: the last window on an applet instance left the number label on the icon
+
+2.5
+==
+- Allow Drag'n'Drop operations from one window to another
+- Better monitor naming for moving windows around
+- Adjust thumbnail position so that the title/name is at the top of the menu
+
 2.4
 ==
 - Switch to Cinnamon 4.0 as main supported version

@@ -28,7 +28,7 @@ To install it:
     * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
   * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
 
-**This applet helps you to install this dependencies, if any.**
+**This applet helps you to install these dependencies, if needed.**
 
 ## Settings
 
@@ -65,6 +65,26 @@ In the menu of this applet:
 The color of the icon changes when at least one of your Spices needs an update.
 
 Its tooltip (the message displayed when the icon is hovered) contains the list of spices to update, if any.
+
+![hovering_icon](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon.png)
+
+## Notifications
+There are two types of notifications: _Minimal_ or _With buttons_. Each of them may or may not contain details: the reason for an update or the description of a new spice.
+### Minimal notifications
+Here with the reason for update:
+
+![notif_simple_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details.png)
+
+### Notifications with buttons
+Two buttons: firstly a button to open the System Settings page to download updates; secondly a button to refresh the notification to obtain details, if any.
+
+Here without details:
+
+![notif_without_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_without_details.png)
+
+After refreshing, the reason for the update appears:
+
+![notif_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2.png)
 
 ## Translations
 

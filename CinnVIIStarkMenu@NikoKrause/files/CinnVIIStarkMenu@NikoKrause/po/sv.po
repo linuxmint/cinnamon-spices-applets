@@ -1,14 +1,14 @@
-# Swedish translation for cinnviistarkmenu
+# Swedish translation for CinnVIIStarkMenu@NikoKrause
 # Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
 # This file is distributed under the same license as the cinnviistarkmenu package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2019.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: cinnviistarkmenu\n"
+"Project-Id-Version: CinnVIIStarkMenu@NikoKrause\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-08 14:37+0200\n"
-"PO-Revision-Date: 2017-05-08 14:37+0200\n"
+"POT-Creation-Date: 2017-10-21 20:34+0200\n"
+"PO-Revision-Date: 2019-03-02 08:03+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -17,167 +17,176 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Launchpad-Export-Date: 2017-05-01 10:32+0000\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
 msgstr "Ange ditt lösenord för att avinstallera detta program"
 
-#: 3.2/applet.js:258 2.6/applet.js:259
+#: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258
 msgid "Add to panel"
 msgstr "Lägg till i panelen"
 
-#: 3.2/applet.js:261 2.6/applet.js:262
+#: 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261
 msgid "Add to desktop"
 msgstr "Lägg till på skrivbordet"
 
-#: 3.2/applet.js:265 2.6/applet.js:266
+#: 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265
 msgid "Remove from favorites"
 msgstr "Ta bort från Favoriter"
 
-#: 3.2/applet.js:268 2.6/applet.js:269
+#: 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268
 msgid "Add to favorites"
 msgstr "Lägg till i Favoriter"
 
-#: 3.2/applet.js:272 2.6/applet.js:273
+#: 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#: 3.2/applet.js:276 2.6/applet.js:277
+#: 3.2/applet.js:276 2.6/applet.js:277 3.4/applet.js:276
 msgid "Run with NVIDIA GPU"
 msgstr "Kör med NVIDIA GPU"
 
 #: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
+#: 3.4/applet.js:436 3.4/applet.js:470
 msgid "No description available"
 msgstr "Ingen beskrivning tillgänglig"
 
-#: 3.2/applet.js:740 2.6/applet.js:3289
+#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737
 msgid "This file is no longer available"
 msgstr "Filen är inte längre tillgänglig"
 
-#: 3.2/applet.js:790 2.6/applet.js:761
+#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787
 msgid "Open with"
 msgstr "Öppna med"
 
-#: 3.2/applet.js:836 2.6/applet.js:807
+#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833
 msgid "Other application..."
 msgstr "Annat program..."
 
-#: 3.2/applet.js:911 2.6/applet.js:884
+#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908
 msgid "Clear list"
 msgstr "Rensa listan"
 
-#: 3.2/applet.js:957 2.6/applet.js:932
+#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954
 msgid "All Applications"
 msgstr "Alla program"
 
-#: 3.2/applet.js:986 2.6/applet.js:960
+#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983
 msgid "Places"
 msgstr "Platser"
 
-#: 3.2/applet.js:1010 2.6/applet.js:984
+#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007
 msgid "Recent Files"
 msgstr "Tidigare filer"
 
-#: 3.2/applet.js:1609 3.2/applet.js:1792 2.6/applet.js:1583 2.6/applet.js:1759
+#: 3.2/applet.js:1637 3.2/applet.js:1831 2.6/applet.js:1611 2.6/applet.js:1798
+#: 3.4/applet.js:1635 3.4/applet.js:1829
 msgid "Logout"
 msgstr "Logga ut"
 
-#: 3.2/applet.js:1611 2.6/applet.js:1585
+#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1637
 msgid "Lock Screen"
 msgstr "Lås skärmen"
 
-#: 3.2/applet.js:1785 2.6/applet.js:1752
+#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1822
 msgid "Shutdown the computer"
 msgstr "Stäng av datorn"
 
-#: 3.2/applet.js:1786 2.6/applet.js:1753
+#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1823
 msgid "Leave the session"
 msgstr "Avsluta sessionen"
 
-#: 3.2/applet.js:1787 2.6/applet.js:1754
+#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1824
 msgid "Lock the screen"
 msgstr "Lås skärmen"
 
-#: 3.2/applet.js:1789 3.2/applet.js:1790 2.6/applet.js:1756 2.6/applet.js:1757
+#: 3.2/applet.js:1828 3.2/applet.js:1829 2.6/applet.js:1795 2.6/applet.js:1796
+#: 3.4/applet.js:1826 3.4/applet.js:1827
 msgid "Quit"
 msgstr "Stäng av"
 
-#: 3.2/applet.js:1801 3.2/applet.js:1805 2.6/applet.js:1768 2.6/applet.js:1772
+#: 3.2/applet.js:1840 3.2/applet.js:1844 2.6/applet.js:1807 2.6/applet.js:1811
+#: 3.4/applet.js:1838 3.4/applet.js:1842
 msgid "Lock screen"
 msgstr "Lås skärmen"
 
-#: 3.2/applet.js:2012
+#: 3.2/applet.js:2051
 msgid "All Programs"
 msgstr "Alla program"
 
-#: 3.2/applet.js:2012
+#: 3.2/applet.js:2051
 msgid "Favorites"
 msgstr "Favoriter"
 
-#: 3.2/applet.js:2013
+#: 3.2/applet.js:2052
 msgid "Documents"
 msgstr "Dokument"
 
-#: 3.2/applet.js:2013
+#: 3.2/applet.js:2052
 msgid "nemo Documents"
 msgstr "nemo Dokument"
 
-#: 3.2/applet.js:2014
+#: 3.2/applet.js:2053
 msgid "Pictures"
 msgstr "Bilder"
 
-#: 3.2/applet.js:2014
+#: 3.2/applet.js:2053
 msgid "nemo Pictures"
 msgstr "nemo Bilder"
 
-#: 3.2/applet.js:2015
+#: 3.2/applet.js:2054
 msgid "Music"
 msgstr "Musik"
 
-#: 3.2/applet.js:2015
+#: 3.2/applet.js:2054
 msgid "nemo Music"
 msgstr "nemo Musik"
 
-#: 3.2/applet.js:2016
+#: 3.2/applet.js:2055
 msgid "Videos"
 msgstr "Video"
 
-#: 3.2/applet.js:2016
+#: 3.2/applet.js:2055
 msgid "nemo Videos"
 msgstr "nemo Video"
 
-#: 3.2/applet.js:2017
+#: 3.2/applet.js:2056
 msgid "Downloads"
 msgstr "Hämtningar"
 
-#: 3.2/applet.js:2017
+#: 3.2/applet.js:2056
 msgid "nemo Downloads"
 msgstr "nemo Hämtningar"
 
 #. 3.2->settings-schema.json->menu->title
-#: 3.2/applet.js:2033 2.6/applet.js:1983
+#. 3.4->settings-schema.json->menu->title
+#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:2062
 msgid "Menu"
 msgstr "Meny"
 
-#: 3.2/applet.js:3473 2.6/applet.js:3321
+#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3540
 msgid "No recent documents"
 msgstr "Inga tidigare dokument"
 
-#: 3.2/applet.js:3861 2.6/applet.js:3634
+#: 3.2/applet.js:3901 2.6/applet.js:3672 3.4/applet.js:3925
 msgid "Type to search..."
 msgstr "Skriv för att söka..."
 
-#: 3.2/applet.js:4380 2.6/applet.js:4136
+#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4453
 msgid "No results found"
 msgstr "Inga träffar"
 
-#: 3.2/applet.js:4382 2.6/applet.js:4138
+#: 3.2/applet.js:4431 2.6/applet.js:4176 3.4/applet.js:4455
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
 msgstr[0] "%d träff"
 msgstr[1] "%d träffar"
+
+#: 3.4/applet.js:174
+msgid "Please provide your password to uninstall this application"
+msgstr "Ange ditt lösenord för att avinstallera det här programmet"
 
 #. 3.2->settings-schema.json->quicklauncher-9-checkbox->description
 #. 3.2->settings-schema.json->quicklauncher-3-checkbox->description
@@ -353,26 +362,31 @@ msgstr "Ange namn på snabbstartaren"
 
 #. 3.2->settings-schema.json->favorite-button-size->description
 #. 2.6->settings-schema.json->favorite-button-size->description
+#. 3.4->settings-schema.json->favorite-button-size->description
 msgid "Size of the favorite buttons"
 msgstr "Storlek på favoritikonenerna"
 
 #. 3.2->settings-schema.json->favorite-button-size->tooltip
 #. 2.6->settings-schema.json->favorite-button-size->tooltip
+#. 3.4->settings-schema.json->favorite-button-size->tooltip
 msgid "Change the size of the favorite buttons"
 msgstr "Ändra storlek på favoritikonerna"
 
 #. 3.2->settings-schema.json->favorite-button-size->units
 #. 2.6->settings-schema.json->favorite-button-size->units
+#. 3.4->settings-schema.json->favorite-button-size->units
 msgid "pixels"
 msgstr "pixlar"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 2.6->settings-schema.json->activate-on-hover->description
+#. 3.4->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
 msgstr "Öppna menyn när jag för muspekaren över den"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 2.6->settings-schema.json->activate-on-hover->tooltip
+#. 3.4->settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr "Aktivera menyn när muspekaren förs över panelikonen"
 
@@ -444,29 +458,36 @@ msgstr "Ange kommando för snabbstartaren"
 
 #. 3.2->settings-schema.json->all-programs-label->description
 #. 2.6->settings-schema.json->all-programs-label->description
+#. 3.4->settings-schema.json->all-programs-label->description
 msgid "'All Programs'-Button label"
-msgstr "Namn på knappen för \"Alla program\""
+msgstr "Knapptext för \"Alla program\""
 
 #. 3.2->settings-schema.json->all-programs-label->tooltip
 #. 2.6->settings-schema.json->all-programs-label->tooltip
+#. 3.4->settings-schema.json->all-programs-label->tooltip
 msgid "Enter custom text for the 'All Programs' button."
 msgstr "Ange anpassad text för knappen \"Alla program\"."
 
 #. 3.2->settings-schema.json->menu-appear->title
+#. 3.4->settings-schema.json->menu-appear->title
 msgid "Layout and content"
 msgstr "Layout och innehåll"
 
 #. 3.2->settings-schema.json->sidebar-layout->title
 #. 2.6->settings-schema.json->head-sidebar-layout->description
+#. 3.4->settings-schema.json->sidebar-layout->title
 msgid "Sidebar Layout"
 msgstr "Layout för sidofältet"
 
 #. 3.2->settings-schema.json->quicklauncher->title
+#. 3.4->settings-schema.json->quicklauncher->title
 msgid "Quicklauncher"
 msgstr "Snabbstartare"
 
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->panel-behave->title
+#. 3.4->settings-schema.json->menu-behave->title
+#. 3.4->settings-schema.json->panel-behave->title
 msgid "Behavior"
 msgstr "Beteende"
 
@@ -476,24 +497,30 @@ msgid "Custom Quicklauncher"
 msgstr "Anpassad snabbstartare"
 
 #. 3.2->settings-schema.json->quitmenu-layout->title
+#. 3.4->settings-schema.json->quitmenu-layout->title
 msgid "Quit Menu Layout"
 msgstr "Layout för avstängningsmenyn"
 
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->menu-icons->title
 msgid "Icons and Labels"
 msgstr "Ikoner och text"
 
 #. 3.2->settings-schema.json->panel-appear->title
+#. 3.4->settings-schema.json->panel-appear->title
 msgid "Appearance"
 msgstr "Utseende"
 
 #. 3.2->settings-schema.json->sidebar->title
+#. 3.4->settings-schema.json->sidebar->title
 msgid "Sidebar"
 msgstr "Sidofält"
 
 #. 3.2->settings-schema.json->panel->title
+#. 3.4->settings-schema.json->panel->title
 msgid "Panel"
 msgstr "Panel"
 
@@ -587,41 +614,49 @@ msgstr "Välj en ikonfil eller ange ett ikonnamn för snabbstartaren"
 
 #. 3.2->settings-schema.json->search-filesystem->description
 #. 2.6->settings-schema.json->search-filesystem->description
+#. 3.4->settings-schema.json->search-filesystem->description
 msgid "Enable filesystem path entry in search box"
 msgstr "Aktivera filsystemsökvägar i sökfältet"
 
 #. 3.2->settings-schema.json->search-filesystem->tooltip
 #. 2.6->settings-schema.json->search-filesystem->tooltip
+#. 3.4->settings-schema.json->search-filesystem->tooltip
 msgid "Allows path entry in the menu search box."
 msgstr "Tillåt filsystemsökvägar i menyns sökfält."
 
 #. 3.2->settings-schema.json->show-shutdown-menu->description
 #. 2.6->settings-schema.json->show-shutdown-menu->description
+#. 3.4->settings-schema.json->show-shutdown-menu->description
 msgid "Show quit buttons"
 msgstr "Visa avstängningsknappar"
 
 #. 3.2->settings-schema.json->show-shutdown-menu->tooltip
 #. 2.6->settings-schema.json->show-shutdown-menu->tooltip
+#. 3.4->settings-schema.json->show-shutdown-menu->tooltip
 msgid "Choose whether or not to show the quit buttons."
 msgstr "Välj om avstängningsknappar skall visas."
 
 #. 3.2->settings-schema.json->menu-layout->options
 #. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
 msgid "Stark-Menu"
 msgstr "Stark-meny"
 
 #. 3.2->settings-schema.json->menu-layout->options
 #. 2.6->settings-schema.json->menu-layout->options
+#. 3.4->settings-schema.json->menu-layout->options
 msgid "MATE-Menu"
 msgstr "MATE-meny"
 
 #. 3.2->settings-schema.json->menu-layout->tooltip
 #. 2.6->settings-schema.json->menu-layout->tooltip
+#. 3.4->settings-schema.json->menu-layout->tooltip
 msgid "Choose between Stark-Menu and MATE-Menu layout"
 msgstr "Välj mellan Stark-meny och MATE-menylayout"
 
 #. 3.2->settings-schema.json->menu-layout->description
 #. 2.6->settings-schema.json->menu-layout->description
+#. 3.4->settings-schema.json->menu-layout->description
 msgid "Menu layout"
 msgstr "Menylayout"
 
@@ -650,31 +685,37 @@ msgstr "Ange kommando för snabbstartaren"
 
 #. 3.2->settings-schema.json->show-favorite-icons->description
 #. 2.6->settings-schema.json->show-favorite-icons->description
+#. 3.4->settings-schema.json->show-favorite-icons->description
 msgid "Show favorite icons"
 msgstr "Visa favoritikoner"
 
 #. 3.2->settings-schema.json->show-favorite-icons->tooltip
 #. 2.6->settings-schema.json->show-favorite-icons->tooltip
+#. 3.4->settings-schema.json->show-favorite-icons->tooltip
 msgid "Choose whether or not to show icons on favorites."
 msgstr "Välj om favoritkoner skall visas."
 
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
+#. 3.4->settings-schema.json->show-context-menu-icons->description
 msgid "Show context menu icons"
 msgstr "Visa ikoner i högerklicksmenyn"
 
 #. 3.2->settings-schema.json->show-context-menu-icons->tooltip
 #. 2.6->settings-schema.json->show-context-menu-icons->tooltip
+#. 3.4->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
 msgstr "Välj om ikoner skall visas i högerklicksmenyn."
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application's description under their titles"
 msgstr "Visa programbeskrivningar under programnamnen"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #. 2.6->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.4->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid ""
 "Choose whether or not to show the application description on the application "
 "buttons."
@@ -682,211 +723,253 @@ msgstr "Välj om programbeskrivningar skall visas på programknappar."
 
 #. 3.2->settings-schema.json->menu-label->description
 #. 2.6->settings-schema.json->menu-label->description
+#. 3.4->settings-schema.json->menu-label->description
 msgid "'Menu'-Button label"
-msgstr "Menyknappstext"
+msgstr "Menyknapptext"
 
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 2.6->settings-schema.json->menu-label->tooltip
+#. 3.4->settings-schema.json->menu-label->tooltip
 msgid "Enter custom text to show in the panel."
-msgstr "Ange anpassad text att visas i panelen"
+msgstr "Ange anpassad text att visa i panelen."
 
 #. 3.2->settings-schema.json->menu-icon->description
 #. 2.6->settings-schema.json->menu-icon->description
+#. 3.4->settings-schema.json->menu-icon->description
 msgid "Icon"
 msgstr "Ikon"
 
 #. 3.2->settings-schema.json->menu-icon->tooltip
 #. 2.6->settings-schema.json->menu-icon->tooltip
+#. 3.4->settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
 msgstr "Välj en ikon att visas i panelen."
 
 #. 3.2->settings-schema.json->quicklauncher-layout->description
 #. 2.6->settings-schema.json->quicklauncher-layout->description
+#. 3.4->settings-schema.json->quicklauncher-layout->description
 msgid "Quicklauncher button style"
 msgstr "Stil på snabbstartknapp"
 
 #. 3.2->settings-schema.json->quicklauncher-layout->tooltip
 #. 2.6->settings-schema.json->quicklauncher-layout->tooltip
+#. 3.4->settings-schema.json->quicklauncher-layout->tooltip
 msgid ""
 "Choose whether to show icons and/or labels on the quicklauncher buttons."
 msgstr "Välj om ikoner och/eller text skall visas på snabbstartknappar."
 
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
 msgid "Labels only"
 msgstr "Endast text"
 
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 #. 2.6->settings-schema.json->quicklauncher-layout->options
+#. 3.4->settings-schema.json->quicklauncher-layout->options
 msgid "Icons only"
 msgstr "Endast ikoner"
 
 #. 3.2->settings-schema.json->user-box-layout->description
 #. 2.6->settings-schema.json->user-box-layout->description
+#. 3.4->settings-schema.json->user-box-layout->description
 msgid "User account info box style"
 msgstr "Stil på användares kontodetaljer"
 
 #. 3.2->settings-schema.json->user-box-layout->tooltip
 #. 2.6->settings-schema.json->user-box-layout->tooltip
+#. 3.4->settings-schema.json->user-box-layout->tooltip
 msgid "Choose whether to show the user name and/or user picture."
 msgstr "Välj om användarnamn och/eller användarbild skall visas."
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
 msgid "Hide"
 msgstr "Dölj"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
 msgid "User picture only"
 msgstr "Endast bild"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
+#. 3.4->settings-schema.json->user-box-layout->options
 msgid "User picture and user name"
 msgstr "Bild och användarnamn"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->description
 #. 2.6->settings-schema.json->shutdown-menu-layout->description
+#. 3.4->settings-schema.json->shutdown-menu-layout->description
 msgid "Quit buttons layout"
 msgstr "Layout för avstängningsknappar"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->tooltip
 #. 2.6->settings-schema.json->shutdown-menu-layout->tooltip
+#. 3.4->settings-schema.json->shutdown-menu-layout->tooltip
 msgid "Choose the layout of the quit options."
 msgstr "Välj layout för avstängningsalternativen."
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
 msgid "Horizontal"
 msgstr "Horisontell"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
 msgid "Vertical"
 msgstr "Vertikal"
 
 #. 3.2->settings-schema.json->shutdown-menu-layout->options
 #. 2.6->settings-schema.json->shutdown-menu-layout->options
+#. 3.4->settings-schema.json->shutdown-menu-layout->options
 msgid "DropDown"
 msgstr "Rullgardin"
 
 #. 3.2->settings-schema.json->show-application-icons->description
 #. 2.6->settings-schema.json->show-application-icons->description
+#. 3.4->settings-schema.json->show-application-icons->description
 msgid "Show application icons"
 msgstr "Visa programikoner"
 
 #. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 2.6->settings-schema.json->show-application-icons->tooltip
+#. 3.4->settings-schema.json->show-application-icons->tooltip
 msgid "Choose whether or not to show icons on applications."
 msgstr "Välj om programikoner skall visas."
 
 #. 3.2->settings-schema.json->overlay-key->description
 #. 2.6->settings-schema.json->overlay-key->description
+#. 3.4->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 2.6->settings-schema.json->enable-autoscroll->description
+#. 3.4->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivera automatisk skrollning i programlistan"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 2.6->settings-schema.json->enable-autoscroll->tooltip
+#. 3.4->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
 msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 2.6->settings-schema.json->enable-animation->description
+#. 3.4->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr "Använd menyanimering"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 2.6->settings-schema.json->enable-animation->tooltip
+#. 3.4->settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
 msgstr "Tillåt animering när menyn öppnas och stängs"
 
 #. 3.2->settings-schema.json->show-places->description
 #. 2.6->settings-schema.json->show-places->description
+#. 3.4->settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
 msgstr "Visa bokmärken och platser"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 2.6->settings-schema.json->show-places->tooltip
+#. 3.4->settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
 msgstr "Välj om bokmärken och platser skall visas i menyn."
 
 #. 3.2->settings-schema.json->shutdown-label->description
 #. 2.6->settings-schema.json->shutdown-label->description
+#. 3.4->settings-schema.json->shutdown-label->description
 msgid "'Quit'-Button label"
 msgstr "Text för avstängningsknapp"
 
 #. 3.2->settings-schema.json->shutdown-label->tooltip
 #. 2.6->settings-schema.json->shutdown-label->tooltip
+#. 3.4->settings-schema.json->shutdown-label->tooltip
 msgid "Enter custom text for the 'Quit' button."
 msgstr "Ange anpassad text för avstängningsknappen."
 
 #. 3.2->settings-schema.json->show-category-icons->description
 #. 2.6->settings-schema.json->show-category-icons->description
+#. 3.4->settings-schema.json->show-category-icons->description
 msgid "Show category icons"
 msgstr "Visa kategoriikoner"
 
 #. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 2.6->settings-schema.json->show-category-icons->tooltip
+#. 3.4->settings-schema.json->show-category-icons->tooltip
 msgid "Choose whether or not to show icons on categories."
 msgstr "Välj om kategoriikoner skall visas."
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 2.6->settings-schema.json->menu-editor-button->description
+#. 3.4->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Öppna menyredigeraren"
 
 #. 3.2->settings-schema.json->menu-editor-button->tooltip
 #. 2.6->settings-schema.json->menu-editor-button->tooltip
+#. 3.4->settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
 msgstr "Tryck på denna knapp för att anpassa dina menyposter."
 
 #. 3.2->settings-schema.json->menu-icon-custom->description
 #. 2.6->settings-schema.json->menu-icon-custom->description
+#. 3.4->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
 msgstr "Använd en anpassad ikon"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 2.6->settings-schema.json->menu-icon-custom->tooltip
+#. 3.4->settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
 msgstr "Inaktivering innebär att temat anger ikon"
 
 #. 3.2->settings-schema.json->hover-delay->description
+#. 3.4->settings-schema.json->hover-delay->description
 msgid "Menu hover delay"
 msgstr "Menyfördröjning"
 
 #. 3.2->settings-schema.json->hover-delay->tooltip
+#. 3.4->settings-schema.json->hover-delay->tooltip
 msgid "Delay before the menu opens when hovered"
 msgstr "Fördröjning innan menyn öppnas, vid hovring"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 2.6->settings-schema.json->hover-delay->units
+#. 3.4->settings-schema.json->hover-delay->units
 msgid "milliseconds"
 msgstr "millisekunder"
 
 #. 3.2->settings-schema.json->show-sidebar->description
 #. 2.6->settings-schema.json->show-sidebar->description
+#. 3.4->settings-schema.json->show-sidebar->description
 msgid "Show sidebar on menu"
 msgstr "Visa sidofält på menyn"
 
 #. 3.2->settings-schema.json->show-sidebar->tooltip
 #. 2.6->settings-schema.json->show-sidebar->tooltip
+#. 3.4->settings-schema.json->show-sidebar->tooltip
 msgid "Choose whether or not to show the sidebar."
-msgstr "Välj om sidofältet skall visas"
+msgstr "Välj om sidofältet skall visas eller inte."
 
 #. 3.2->settings-schema.json->favorites-label->description
 #. 2.6->settings-schema.json->favorites-label->description
+#. 3.4->settings-schema.json->favorites-label->description
 msgid "'Favorites'-Button label"
-msgstr "Text för favoritknappen"
+msgstr "Knapptext för \"Favoriter\""
 
 #. 3.2->settings-schema.json->favorites-label->tooltip
 #. 2.6->settings-schema.json->favorites-label->tooltip
+#. 3.4->settings-schema.json->favorites-label->tooltip
 msgid "Enter custom text for the 'Favorites' button."
 msgstr "Ange anpassad text för knappen \"Favoriter\"."
 
@@ -909,6 +992,67 @@ msgstr "Kategorifördröjning"
 #. 2.6->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
 msgstr "Fördröjning vid växling mellan kategorier"
+
+#. 3.4->settings-schema.json->custom-quicklauncher-places->title
+msgid "Quicklauncher Places"
+msgstr "Snabbstartikon Platser"
+
+#. 3.4->settings-schema.json->custom-quicklauncher-apps->title
+msgid "Quicklauncher Applications"
+msgstr "Snabbstartikon Program"
+
+#. 3.4->settings-schema.json->quicklauncher-separator-layout->title
+msgid "Quicklauncher Separators"
+msgstr "Avdelare för snabbstartikoner"
+
+#. 3.4->settings-schema.json->quicklauncher-separator1->description
+msgid "Separator below user account info box"
+msgstr "Avdelare under användarkontots infofält"
+
+#. 3.4->settings-schema.json->quicklauncher-separator1->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator3->tooltip
+#. 3.4->settings-schema.json->quicklauncher-separator2->tooltip
+msgid "Choose whether or not to show this separator."
+msgstr "Välj om denna avgränsare skall visas eller inte."
+
+#. 3.4->settings-schema.json->quicklauncher-separator3->description
+msgid "Separator above quit buttons"
+msgstr "Avdelare över avstängningsknappar"
+
+#. 3.4->settings-schema.json->quicklauncher-separator2->description
+msgid "Separator below quicklauncher places"
+msgstr "Avdelare under snabbstart för platser"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->description
+msgid "Custom Quicklauncher Applications"
+msgstr "Anpassad snabbstartare för program"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Visible"
+msgstr "Synlig"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+msgid "Command"
+msgstr "Kommando"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Custom Label"
+msgstr "Anpassad textetikett"
+
+#. 3.4->settings-schema.json->quicklauncher-apps->columns->title
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Custom Icon"
+msgstr "Anpassad ikon"
+
+#. 3.4->settings-schema.json->quicklauncher-places->description
+msgid "Custom Quicklauncher Places"
+msgstr "Anpassad snabbstartare för platser"
+
+#. 3.4->settings-schema.json->quicklauncher-places->columns->title
+msgid "Directory"
+msgstr "Mapp"
 
 #. CinnVIIStarkMenu@NikoKrause->metadata.json->description
 msgid ""

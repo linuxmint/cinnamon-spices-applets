@@ -103,7 +103,7 @@ SwapData.prototype = {
     
     getData: function() {
         GTop.glibtop_get_swap(this.gtop);
-        let used = this.gtop.used / this.gtop.total;
+        let used = this.gtop.total > 0 ? (this.gtop.used / this.gtop.total) : 0;
         this.text = Math.round(this.gtop.used / (1024 * 1024))
             + " / " + Math.round(this.gtop.total / (1024 * 1024)) + _(" MB");
         return [used];

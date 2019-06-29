@@ -40,10 +40,10 @@ const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
 const TYPES = ['applets', 'desklets', 'extensions', 'themes'];
 
 const URL_MAP = {
-  'applets': URL_SPICES_HOME + "/json/applets.json",
-  'themes': URL_SPICES_HOME + "/json/themes.json",
-  'desklets': URL_SPICES_HOME + "/json/desklets.json",
-  'extensions': URL_SPICES_HOME + "/json/extensions.json"
+  'applets': URL_SPICES_HOME + "/json/applets.json?",
+  'themes': URL_SPICES_HOME + "/json/themes.json?",
+  'desklets': URL_SPICES_HOME + "/json/desklets.json?",
+  'extensions': URL_SPICES_HOME + "/json/extensions.json?"
 }
 
 const CACHE_MAP = {

@@ -1,13 +1,13 @@
-DESCRIPTION
-========
+# Custom Application Menu
+
+## Description
+
 This applet adds an icon in the cinnamon panel which toogle a list of applications when you click on the icon.
 This applications list is completly customisable.
 To edit the applications list, right click on the icon and select Edit.
-To know how to edit the setting file, read the following instructions : 
 
+## Settings
 
-SETTINGS
-========
 The applications.json file is a data representation of the Custom Applications Menu.
 Each line represent an applications entry.
 
@@ -24,12 +24,12 @@ Each line represent an applications entry.
  * active:
     true or false. Allow to deactivate an application. Useful because JSON doesn't allow comments.
 
-Special command
-========
+## Special command
+
 { "command":"S" } is used to create a separator
 
-Special entry
-========
+## Special entry
+
 menu may be used to create a sub-menu:
 { "displayName":"sub-menu", "iconName":"applications-internet", "menu": [
     { "desktopFile":"firefox" },
@@ -37,7 +37,28 @@ menu may be used to create a sub-menu:
 ]}
 By default the iconName is 'image-missing' and displayName is 'sub-menu'
 
+## non-ASCII characters
 
-non-ASCII caracters
-========
 There is a problem with non-ASCII caracters in properties.
+
+## Icon
+
+This application use an icon named "help-about".
+If you don't have an icon with this name in your icons theme, a question mark icon is displayed instead.
+You have 2 possibilities to change the icon:
+
+1. Copy the star icon in your icons folder:
+Copy the file "~/.local/share/cinnamon/applets/CustomApplicationsMenu@LLOBERA/icon.png"
+to "~/.icons" and rename it as "help-about.png".
+Then logout.
+
+OR
+
+2. Change to an icon you already have in your icons theme:
+Go to "/usr/share/icons/<YOUR THEME>"
+Take a look into folders and choose an icon you like.
+Open the file "~/.local/share/cinnamon/applets/CustomApplicationsMenu@LLOBERA/applet.js"
+Line 97
+this.set_applet_icon_name("help-about");
+Replace "help-about" by your icon name (without the extension).
+Then logout.

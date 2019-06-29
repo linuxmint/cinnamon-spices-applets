@@ -427,8 +427,16 @@ class vpnLookOut extends Applet.TextIconApplet {
             // If required, connect on last VPN
             if (this.connectAtStartup && this.vpnName != "" && this.vpnInterface != "") {
                 // Get VPN Status via asyncronous script
-                GLib.spawn_command_line_sync('sh ' + this.vpnscript + ' ' + this.vpnInterface);
+                //GLib.spawn_command_line_sync('sh ' + this.vpnscript + ' ' + this.vpnInterface);
+
                 // Get the VPN Status ('on', 'off' or 'waiting')
+                if (this.vpnInterface != "") {
+                    let iface = Gio.file_new_for_path("/sys/class/net/%s".format(this.vpnInterface));
+                    this.vpnStatus = iface.query_exists(null) ? "on" : "off";
+                } else {
+                    this.vpnStatus = "waiting"
+                }
+                /*
                 this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
                 if ( this.vpnStatus.toString().trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
                      this.vpnStatusOld = this.vpnStatus;
@@ -437,11 +445,18 @@ class vpnLookOut extends Applet.TextIconApplet {
                      //this.vpnStatus =  this.vpnStatusOld;
                      this.vpnStatus = "waiting";
                 }
+                */
                 if (this.vpnStatus != "on") {
                     GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'')
                 }
             }
 
+            // Monitoring /var/lib/NetworkManager/timestamps file
+            this.monitors = new Array();
+            //this.monitorTimestamps();
+            this.monitorTun0();
+
+            this.loopId = 0;
             this.on_settings_changed()   // This starts the MainLoop timer loop
         //} catch (e) {
         //    global.logError('vpnLookOut'+e);
@@ -544,6 +559,8 @@ class vpnLookOut extends Applet.TextIconApplet {
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
             this.system_icon_theme = 'Mint-X';
+        if (this.system_icon_theme.startsWith('Mint-Y'))
+            this.system_icon_theme = 'Mint-Y';
         if (this.old_system_icon_theme == null || this.system_icon_theme != this.old_system_icon_theme) {
             this.old_system_icon_theme = this.system_icon_theme;
             this.icon_theme_path = this.appletPath + '/../icons/byTheme/' + this.system_icon_theme;
@@ -707,19 +724,10 @@ class vpnLookOut extends Applet.TextIconApplet {
         this.checkbox_reconnect2.setToggleState(this.reconnect); // in right-click menu
     } // End of on_checkbox_reconnect_changed
 
-    //on_checkbox_stopTransmission_changed() {
-        //this.stopTransmission = !this.stopTransmission ; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
-        //this.checkbox_stopTransmission.setToggleState(this.stopTransmission); // update Left Click Menu
-        //this.checkbox_stopTransmission2.setToggleState(this.stopTransmission);// update Right Click Context Menu
-    //} // End of on_checkbox_stopTransmission_changed
-
-    //on_checkbox_restartTransmission_changed() {
-        //this.restartTransmission = !this.restartTransmission ; // This is our BIDIRECTIONAL setting - by updating our configuration file will also be updated
-        //this.checkbox_restartTransmission.setToggleState(this.restartTransmission); // update Left Click Menu
-        //this.checkbox_restartTransmission2.setToggleState(this.restartTransmission);// update Right Click Context Menu
-    //} // End of on_checkbox_restartTransmission_changed
-
     on_button_connect(toggleMenu=true) {
+        this.vpnIcon = this.vpnwait;
+        this.set_applet_icon_path(this.vpnIcon);
+
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
             this.SMCItems[i].setSensitive(false)
@@ -727,8 +735,8 @@ class vpnLookOut extends Applet.TextIconApplet {
 
         if (this.vpnInterface != "" && this.vpnName != "") {
             if (this.vpnStatus != "on") {
-                this.vpnIcon = this.vpnwait;
-                this.set_applet_icon_path(this.vpnIcon);
+                //this.vpnIcon = this.vpnwait;
+                //this.set_applet_icon_path(this.vpnIcon);
                 this.vpnStatusOld = this.vpnStatus;
                 this.vpnStatus = "waiting";
                 GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'');
@@ -776,6 +784,31 @@ class vpnLookOut extends Applet.TextIconApplet {
         this.vpnName = new_co;
     } // End of change_connection
 
+    monitorTimestamps() {
+        let timestampsFile = Gio.file_new_for_path("/var/lib/NetworkManager/timestamps");
+        if (timestampsFile.query_exists(null)) {
+            try {
+                let monitor = timestampsFile.monitor(0, null);
+                let Id = monitor.connect('changed', () => this.updateLoop());
+                this.monitors.push([monitor, Id]);
+            } catch(e) {
+                log("Unable to monitor the /var/lib/NetworkManager/timestamps file!", e)
+            }
+        }
+    } // End of monitorTimestamps
+
+    monitorTun0() {
+        let sysClassNet = Gio.file_new_for_path("/sys/class/net");
+        if (sysClassNet.query_exists(null)) {
+            try {
+                let monitor = sysClassNet.monitor_directory(0, null);
+                let Id = monitor.connect('changed', () => this.updateLoop());
+                this.monitors.push([monitor, Id]);
+            } catch(e) {
+                log("Unable to monitor the /sys/class/net directory!", e)
+            }
+        }
+    } // End of monitorTun0
 
     // ++ Build the Right Click Context Menu
     buildContextMenu() {
@@ -988,6 +1021,14 @@ class vpnLookOut extends Applet.TextIconApplet {
         //try {
             // Get the VPN Status ('on', 'off' or 'waiting')
             this.vpnStatusOld = this.vpnStatus;
+
+            if (this.vpnInterface != "") {
+                let iface = Gio.file_new_for_path("/sys/class/net/%s".format(this.vpnInterface));
+                this.vpnStatus = iface.query_exists(null) ? "on" : "off";
+            } else {
+                this.vpnStatus = "waiting"
+            }
+            /*
             this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
             if ( this.vpnStatus.toString().trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
                  this.vpnStatus = this.vpnStatus.toString().trim().substr(5); // removing 'true,'
@@ -996,6 +1037,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                  //this.vpnStatus = this.vpnStatusOld;
                  this.vpnStatus = "waiting"
             }
+            */
 
             this.vpnMessage = " " ; // let it with space character ; not empty.
 
@@ -1153,6 +1195,10 @@ class vpnLookOut extends Applet.TextIconApplet {
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
+        if (this.loopId > 0) {
+            Mainloop.source_remove(this.loopId);
+        }
+        this.loopId = 0;
         this.set_icons();
         if (!this.dependenciesMet && this.are_dependencies_installed()) {
             // At this time, the user just finished to install all dependencies.
@@ -1191,7 +1237,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             // One more loop !
-            Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+            this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         }
     } // End of updateLoop
 
@@ -1199,7 +1245,14 @@ class vpnLookOut extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         // inhibit the update timer when applet removed from panel
         this.applet_running = false;
+        var monitor, Id;
+        for (let tuple of this.monitors) {
+            [monitor, Id] = tuple;
+            monitor.disconnect(Id)
+        }
+        this.monitors = [];
         this.settings.finalize();
+        this.loopId = 0;
         Main.keybindingManager.removeHotKey(UUID);
     }
 

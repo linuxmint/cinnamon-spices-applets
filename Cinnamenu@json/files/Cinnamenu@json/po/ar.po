@@ -5,9 +5,9 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-31 01:03-0500\n"
 "PO-Revision-Date: 2017-03-22 11:08+0100\n"
-"Last-Translator: Mosaab Alzoubi <moceap@hotmail.com>\n"
+"Last-Translator: Med Amine <amine.griche77@protonmail.ch>\n"
 "Language-Team: Arabic <>\n"
-"Language: en_US\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -16,31 +16,31 @@ msgstr ""
 
 #: buttons.js:382
 msgid "Please provide your password to uninstall this application"
-msgstr ""
+msgstr "رجاء. أدخل كلمة مرورك لإلغاء تثبيت هذا التطبيق"
 
 #: buttons.js:1020
 msgid "Add to panel"
-msgstr ""
+msgstr "إضافة إلى القائمة"
 
 #: buttons.js:1022
 msgid "Add to desktop"
-msgstr ""
+msgstr "إضافة إلى المكتب"
 
 #: buttons.js:1025
 msgid "Remove from favorites"
-msgstr ""
+msgstr "إزالة من المفضلة"
 
 #: buttons.js:1027
 msgid "Add to favorites"
-msgstr ""
+msgstr "إضافة الى المفضلة"
 
 #: buttons.js:1029
 msgid "Uninstall"
-msgstr ""
+msgstr "الغاء التثبيت"
 
 #: buttons.js:1031
 msgid "Run with NVIDIA GPU"
-msgstr ""
+msgstr "تشغيل  مع NVIDIA GPU"
 
 #: buttons.js:1228 applet.js:2253
 msgid "List View"
@@ -60,7 +60,7 @@ msgstr ""
 
 #: placeDisplay.js:57
 #, javascript-format
-msgid "Failed to launch \"%s\""
+msgid "فشل في تشغيل \"%s\""
 msgstr ""
 
 #: placeDisplay.js:146
@@ -73,7 +73,7 @@ msgstr "الحاسوب"
 
 #: placeDisplay.js:224
 msgid "Browse network"
-msgstr "استعرض الشبكة"
+msgstr "تصفح الشبكة"
 
 #: applet.js:84
 msgid "Type to search..."
@@ -81,11 +81,11 @@ msgstr "اكتب لتبحث..."
 
 #: applet.js:149
 msgid "Initializing"
-msgstr ""
+msgstr "تهيئة الجهاز"
 
 #: applet.js:275
 msgid "No description available"
-msgstr ""
+msgstr "لا يوجد وصف متاح"
 
 #: applet.js:956
 msgid "All Applications"
@@ -97,11 +97,11 @@ msgstr "الأماكن"
 
 #: applet.js:995
 msgid "Recent Files"
-msgstr "الحديثة"
+msgstr "الملفات الأخيرة"
 
 #: applet.js:996
 msgid "Bookmarks"
-msgstr ""
+msgstr "العناوين"
 
 #: applet.js:997
 msgid "Favorite Apps"
@@ -109,240 +109,235 @@ msgstr "التطبيقات المفضلة"
 
 #: applet.js:1282
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
+msgstr "حزمة gir1.2-gda-5.0 مطلوبة ل Firefox و Midori bookmarks."
 
 #: applet.js:1362
 msgid "Clear List"
-msgstr ""
+msgstr "حذف القائمة"
 
 #: applet.js:1373
 msgid "No recent documents"
-msgstr ""
+msgstr "لا توجد مستندات حديثة"
 
 #: applet.js:2246
 msgid "Account details"
-msgstr ""
+msgstr "تفاصيل الحساب"
 
 #: applet.js:2260
 msgid "Lock Screen"
-msgstr "اقفل"
+msgstr "قفل الشاشة"
 
 #: applet.js:2261
 msgid "Lock the screen"
-msgstr ""
+msgstr "إقفل الشاشة"
 
 #: applet.js:2282
 msgid "Logout"
-msgstr ""
+msgstr "تسجيل الخروج"
 
 #: applet.js:2283
 msgid "Leave the session"
-msgstr ""
+msgstr "الخروج"
 
 #: applet.js:2290
 msgid "Quit"
-msgstr ""
+msgstr "Quit"
 
 #: applet.js:2291
 msgid "Shutdown the computer"
-msgstr ""
+msgstr "إيقاف تشغيل الكمبيوتر"
 
 #. metadata.json->name
 #. settings-schema.json->cinnamenuProvidersSection->title
 msgid "Cinnamenu"
-msgstr ""
+msgstr "Cinnamenu"
 
 #. metadata.json->description
-msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
-msgstr ""
+msgid "A flexible menu providing formatting options, web bookmarks, open window lookup, and search provider support with fuzzy searching."
+msgstr "قائمة مرنة توفر خيارات التنسيق ،  المواقع على شبكة الإنترنت ،فتح نافذة البحث ،ودعم مزود البحث مع البحث غامض."
 
 #. settings-schema.json->panel->title
 msgid "Behavior"
-msgstr ""
+msgstr "سلوك"
 
 #. settings-schema.json->appearance->title
 msgid "Appearance"
-msgstr ""
+msgstr "مظهر"
 
 #. settings-schema.json->menu->title
 msgid "Layout and Content"
-msgstr ""
+msgstr "تخطيط والمحتوى"
 
 #. settings-schema.json->providers->title
 msgid "Search Providers"
-msgstr ""
+msgstr "بحث عن مزودين"
 
 #. settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
-msgstr ""
+msgstr "لم يتم العثور على مزودين ملحقات"
 
 #. settings-schema.json->panel-appear->title
 #. settings-schema.json->panel-behave->title
 msgid "Panel"
-msgstr ""
+msgstr "لوحة"
 
 #. settings-schema.json->menu-behave->title
 #. settings-schema.json->menu-icons->title
 msgid "Menu"
-msgstr ""
+msgstr "قائمة"
 
 #. settings-schema.json->menu-layout->title
 msgid "Layout"
-msgstr ""
+msgstr "مخطط"
 
 #. settings-schema.json->menu-content->title
 msgid "Content"
-msgstr ""
+msgstr "محتوى"
 
 #. settings-schema.json->privacy-settings-button->description
 #, fuzzy
 msgid "Toggle recent files"
-msgstr "الحديثة"
+msgstr " الملفات الحديثة"
 
 #. settings-schema.json->privacy-settings-button->tooltip
 msgid "Press this button to customize your privacy settings."
-msgstr ""
+msgstr "اضغط على هذا الزر لتخصيص إعدادات الخصوصية الخاصة بك"
 
 #. settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr ""
+msgstr "افتح محرر القائمة"
 
 #. settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
-msgstr ""
+msgstr "اضغط على هذا الزر لتخصيص إدخالات القائمة الخاصة بك."
 
 #. settings-schema.json->resetCategoryOrder-button->description
 msgid "Reset category order"
-msgstr ""
+msgstr "إعادة ترتيب الفئة"
 
 #. settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
-msgstr ""
+msgstr "استخدم أيقونة مخصصة"
 
 #. settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
-msgstr ""
+msgstr "إلغاء هذه يسمح للتصميم بوضع الأيقونة"
 
 #. settings-schema.json->menu-icon->description
 msgid "Icon"
-msgstr ""
+msgstr "أيقونة"
 
 #. settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
-msgstr ""
+msgstr "إختر أيقونة لإظهارها في اللوحة"
 
 #. settings-schema.json->menu-label->description
 #. settings-schema.json->menu-label->tooltip
 msgid "Set the custom menu button icon name"
-msgstr ""
+msgstr "تعيين اسم رمز زر القائمة المخصصة"
 
 #. settings-schema.json->category-icon-size->units
 #. settings-schema.json->apps-list-icon-size->units
 #. settings-schema.json->apps-grid-icon-size->units
 msgid "pixels"
-msgstr ""
+msgstr "بكسلات"
 
 #. settings-schema.json->category-icon-size->description
 #. settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size"
-msgstr ""
+msgstr "حجم أيقونة الفئة"
 
 #. settings-schema.json->apps-list-icon-size->description
 #. settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
-msgstr ""
+msgstr "حجم أيقونة قائمة التطبيقات"
 
 #. settings-schema.json->apps-grid-icon-size->description
 #. settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
-msgstr ""
+msgstr "حجم أيقونة شبكة التطبيقات"
 
 #. settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "اختصار لوحة المفاتيح لفتح وإغلاق القائمة"
 
 #. settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
-msgstr ""
+msgstr "افتح القائمة عندما أحرك الماوس فوقها"
 
 #. settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
-msgstr ""
+msgstr "تمكين فتح القائمة عندما يدخل الماوس الآبلات"
 
 #. settings-schema.json->hover-delay->units
 #. settings-schema.json->tooltip-delay->units
 msgid "milliseconds"
-msgstr ""
+msgstr "ميلي ثانية"
 
 #. settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
-msgstr ""
+msgstr "تأخير تحويم القائمة:"
 
 #. settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
-msgstr ""
+msgstr "التأخير بين تبديل الفئات"
 
 #. settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr ""
+msgstr "استخدام الرسوم المتحركة القائمة"
 
 #. settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
-msgstr ""
+msgstr "السماح للقائمة لتنشيط فتح وإغلاق"
 
 #. settings-schema.json->category-click->description
 msgid "Activate categories on click"
-msgstr ""
+msgstr "تنشيط الفئات عند النقر"
 
 #. settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
+msgid "When enabled, category views are activated on click instead of on hover."
+msgstr "عند التمكين ، يتم تنشيط طرق عرض الفئات عند النقر على زر التحويم."
 
 #. settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
-msgstr ""
+msgstr "تمكين autoscrolling في قائمة التطبيق"
 
 #. settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
+msgid "Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "اختر ما إذا كنت تريد تمكين التمرير السلس في قائمة التطبيقات أم لا."
 
 #. settings-schema.json->enable-bookmarks->description
 msgid "Show web bookmarks"
-msgstr ""
+msgstr "إظهار إشارات الويب"
 
 #. settings-schema.json->enable-bookmarks->tooltip
 msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr ""
+msgstr "اختر ما إذا كانت الإشارات المرجعية مفهرسة في القائمة أم لا."
 
 #. settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
-msgstr ""
+msgstr "تمكين البحث عن النوافذ المفتوحة"
 
 #. settings-schema.json->enable-windows->tooltip
 msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
+msgstr "اختر ما إذا كان سيتم فهرسة الإطارات المفتوحة أم لا في عمليات بحث القائمة."
 
 #. settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
-msgstr ""
+msgstr "تمكين موفري البحث"
 
 #. settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
-msgstr ""
+msgid "Choose whether or not search provider results are indexed in menu searches."
+msgstr "اختر ما إذا كانت نتائج موفر البحث مفهرسة في عمليات بحث القائمة أم لا."
 
 #. settings-schema.json->get-providers->description
 msgid "Example Search Providers"
-msgstr ""
+msgstr "مثال موفري البحث"
 
 #. settings-schema.json->startup-view-mode->description
 #. settings-schema.json->startup-view-mode->tooltip
 msgid "Startup applications view mode"
-msgstr ""
+msgstr "وضع عرض تطبيقات بدء التشغيل"
 
 #. settings-schema.json->startup-view-mode->options
 msgid "List"
@@ -354,84 +349,79 @@ msgstr "الشبكة"
 
 #. settings-schema.json->apps-grid-column-count->units
 msgid "columns"
-msgstr ""
+msgstr "أعمدة"
 
 #. settings-schema.json->apps-grid-column-count->description
 #. settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
-msgstr ""
+msgstr "عدد الأعمدة في شبكة التطبيقات"
 
 #. settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
-msgstr ""
+msgstr "عرض الإشارات المرجعية والأماكن"
 
 #. settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
+msgstr "اختر ما إذا كنت تريد إظهار إشارات مرجعية وأماكن في القائمة أم لا."
 
 #. settings-schema.json->show-application-icons->description
 msgid "Show application icons"
-msgstr ""
+msgstr "عرض أيقونات التطبيق"
 
 #. settings-schema.json->show-application-icons->tooltip
 msgid "Choose whether or not to show icons on applications."
-msgstr ""
+msgstr "اختر ما إذا كنت تريد إظهار الرموز على التطبيقات أم لا."
 
 #. settings-schema.json->show-category-icons->description
 msgid "Show category icons"
-msgstr ""
+msgstr "إظهار أيقونات الفئة"
 
 #. settings-schema.json->show-category-icons->tooltip
 msgid "Choose whether or not to show icons on categories."
-msgstr ""
+msgstr "اختر ما إذا كنت تريد إظهار الرموز على الفئات أم لا."
 
 #. settings-schema.json->search-filesystem->description
 msgid "Enable filesystem path entry in search box"
-msgstr ""
+msgstr "تمكين إدخال مسار نظام الملفات في مربع البحث"
 
 #. settings-schema.json->search-filesystem->tooltip
 msgid "Allows path entry in the menu search box."
-msgstr ""
+msgstr "السماح بإدخال المسار في مربع البحث في القائمة."
 
 #. settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application descriptions under titles"
-msgstr ""
+msgstr "عرض وصف التطبيق تحت العناوين"
 
 #. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
+msgid "Choose whether or not to show the application description on the application buttons."
+msgstr "اختر ما إذا كنت تريد إظهار وصف التطبيق على أزرار التطبيق أم لا"
 
 #. settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
-msgstr ""
+msgstr "Show tooltips"
 
 #. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
+msgid "When enabled, tooltips containing the item's name or description is shown when hovered over."
+msgstr "عند التمكين ، تظهر تلميحات الأدوات التي تحتوي على اسم العنصر أو الوصف عند التمرير فوقه."
 
 #. settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
-msgstr ""
+msgstr "تأخير تلميح "
 
 #. settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
+msgid "The delay time in milliseconds for tooltips when hovering over a menu item."
+msgstr "وقت التأخير بالمللي ثانية للحصول على تلميحات الأدوات عند التحويم فوق عنصر قائمة."
 
 #. settings-schema.json->enable-custom-menu-height->description
 #. settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
-msgstr ""
+msgstr "استخدام ارتفاع القائمة المخصصة"
 
 #. settings-schema.json->custom-menu-height->units
 msgid "px"
-msgstr ""
+msgstr "px"
 
 #. settings-schema.json->custom-menu-height->description
 #. settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
-msgstr ""
+msgstr "Custom menu height"

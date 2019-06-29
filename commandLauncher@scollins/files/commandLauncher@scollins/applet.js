@@ -29,7 +29,7 @@ function _(str) {
 class MyApplet extends Applet.IconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         try {
-            super(orientation, panelHeight);
+            super(orientation, panelHeight, instanceId);
 
             this.metadata = metadata;
             this.instanceId = instanceId;

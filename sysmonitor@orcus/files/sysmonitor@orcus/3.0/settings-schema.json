@@ -28,11 +28,21 @@
         "units": "pixels",
         "tooltip": "If the applet is in a vertical panel, this sets the graph height. The graph width is then the panel width minus padding"
     },
+    "graph_spacing": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": -1,
+        "max": 100,
+        "step": 1,
+        "description": "Graph spacing",
+        "units": "pixels",
+        "tooltip": "The number of pixels between each graph. Can be set to -1 to allow single line borders between graphs if borders are enabled"
+    },
     "refresh_rate": {
         "type": "spinbutton",
         "default": 1000,
         "min": 100,
-        "max": 10000,
+        "max": 60000,
         "step": 50,
         "description": "Refresh rate",
         "units": "ms"
@@ -98,6 +108,15 @@
         "description": "Graph width",
         "units": "pixels",
         "dependency": "cpu_override_graph_width"
+    },
+    "cpu_tooltip_decimals": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "description": "Show this many decimals in the tooltip",
+        "units": "decimals"
     },
     "cpu_color_0": {
         "type": "colorchooser",

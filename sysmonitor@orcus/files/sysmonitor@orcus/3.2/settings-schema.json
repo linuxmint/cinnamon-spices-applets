@@ -10,7 +10,7 @@
         "common_g": {
             "type": "section",
             "title": "General",
-            "keys": ["onclick_program", "smooth", "draw_border", "graph_width", "refresh_rate", "use_padding", "padding_lr", "padding_tb"]
+            "keys": ["onclick_program", "smooth", "draw_border", "graph_width", "graph_spacing", "refresh_rate", "use_padding", "padding_lr", "padding_tb"]
         },
         "common_c": {
             "type": "section",
@@ -118,11 +118,21 @@
         "units": "pixels",
         "tooltip": "If the applet is in a vertical panel, this sets the graph height. The graph width is then the panel width minus padding"
     },
+    "graph_spacing": {
+        "type": "spinbutton",
+        "default": 3,
+        "min": -1,
+        "max": 100,
+        "step": 1,
+        "description": "Graph spacing",
+        "units": "pixels",
+        "tooltip": "The number of pixels between each graph. Can be set to -1 to allow single line borders between graphs if borders are enabled"
+    },
     "refresh_rate": {
         "type": "spinbutton",
         "default": 1000,
         "min": 100,
-        "max": 10000,
+        "max": 60000,
         "step": 50,
         "description": "Refresh rate",
         "units": "ms"

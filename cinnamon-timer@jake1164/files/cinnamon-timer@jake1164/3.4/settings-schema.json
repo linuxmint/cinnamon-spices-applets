@@ -30,7 +30,11 @@
                 "message-prompt-enable", 
                 "display-message", 
                 "display-menu-enable", 
-                "time_display_enable"
+                "duration-display-enable",
+                "alarmtime-display-enable",
+                "alarmtime-format-small",
+                "alarmtime-format-large",
+                "alarmtime-format-switchover"
             ]
         },
         "section2": {
@@ -86,11 +90,42 @@
         "description" : "Show the timer menu when time is elapsed",
         "tooltip" : "Show the timer menu when time is elapsed"
     },
-    "time_display_enable" : {
+    "duration-display-enable" : {
         "type" : "checkbox",
         "default" : true,
         "description" : "Display remaining time in panel",
         "tooltip" : "Display remaining time in panel"
+    },
+    "alarmtime-display-enable" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description" : "Display alarm time in panel",
+        "tooltip" : "Display alarm time in panel"
+    },
+    "alarmtime-format-small" : {
+        "type" : "entry",
+        "default" : "%_I:%M:%S%P",
+        "indent" : true,
+        "description" : "Format used to display alarm time in the near future",
+        "tooltip" : "If the alarm time is less than the minutes specified below away,\nthe alarm time can be displayed with more details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+    },
+    "alarmtime-format-large" : {
+        "type" : "entry",
+        "default" : "%_I:%M%P",
+        "indent" : true,
+        "description" : "Format used to display alarm time in the not so near future",
+        "tooltip" : "If the alarm time is more than the minutes specified below away,\nthe alarm time can be displayed with less details\n(see https://developer.gnome.org/glib/stable/glib-GDateTime.html#g-date-time-format)"
+    },
+    "alarmtime-format-switchover" : {
+        "type" : "spinbutton",
+        "default" : 10,
+        "min" : 0,
+        "max" : 1440,
+        "step" : 1,
+        "units" : "minutes",
+        "indent" : true,
+        "description" : "Time when switching from small to large time format",
+        "tooltip" : "Switch over time between the two formats specified above"
     },
     "alarm_end" : {
         "type" : "generic",
@@ -138,8 +173,8 @@
         "default": [
             {"seconds": 0, "minutes": 0, "hours": 5},           
             {"seconds": 0, "minutes": 0, "hours": 4},
-            {"seconds": 0, "minutes": 0, "hours": 2},            
-            {"seconds": 0, "minutes": 0, "hours": 3},             
+            {"seconds": 0, "minutes": 0, "hours": 3},            
+            {"seconds": 0, "minutes": 0, "hours": 2},             
             {"seconds": 0, "hours":1, "minutes": 30},
             {"seconds": 0, "minutes": 0, "hours": 1},
             {"seconds": 0, "minutes": 45, "hours": 0},

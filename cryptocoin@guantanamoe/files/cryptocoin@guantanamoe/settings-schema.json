@@ -1,7 +1,39 @@
 {
-    "main-settings" : {
-        "type" : "header",
-        "description" : "Cryptocoin Settings"
+    "layout" : {
+        "type" : "layout",
+        "pages" : ["general-page", "graph-page"],
+        "general-page" : {
+            "type" : "page",
+            "title" : "Currency",
+            "sections" : ["currency-section"]
+        },
+        "graph-page" : {
+            "type" : "page",
+            "title" : "Graph",
+            "sections" : ["graph-section"]
+        },
+        "currency-section" : {
+            "type" : "section",
+            "title" : "Currency",
+            "keys" : [
+                "currency",
+                "ticker",
+                "show-ticker-icon",
+                "show-ticker-name",
+                "show-currency"
+            ]
+        },
+        "graph-section" : {
+            "type" : "section",
+            "title" : "Graph",
+            "keys" : [
+                "graph-unit",
+                "graph-length",
+                "graph-width",
+                "graph-height",
+                "graph-color"
+            ]
+        }
     },
     "currency" : {
         "type" : "entry",
@@ -34,5 +66,44 @@
             "Symbol": "symbol",
             "None": "none"
         }
+    },
+    "graph-unit" : {
+		"type" : "combobox",
+        "default" : "histohour",
+        "description" : "Unit for Graph History",
+		"options" : {
+			"Minutes" : "histominute",
+			"Hours" : "histohour",
+			"Days" : "histoday"
+		}
+	},
+    "graph-length": {
+        "type" : "spinbutton",
+        "default" : 48,
+        "min" : 1,
+        "max" : 2000,
+        "step" : 1,
+        "description" : "Graph History Length"
+    },
+    "graph-width": {
+        "type" : "spinbutton",
+        "default" : 320,
+        "min" : 100,
+        "max" : 8192,
+        "step" : 10,
+        "description" : "Graph Popup Width"
+    },
+    "graph-height": {
+        "type" : "spinbutton",
+        "default" : 240,
+        "min" : 100,
+        "max" : 4096,
+        "step" : 10,
+        "description" : "Graph Popup Height"
+    },
+    "graph-color" : {
+        "type" : "colorchooser",
+        "default" : "red",
+        "description" : "The Graph Foreground Color"
     }
 }

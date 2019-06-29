@@ -203,8 +203,8 @@ BackgroundProcess.prototype = {
 
     _add_exit_callback: function() {
         GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE,
-                        	 this.pid,
-                        	 Lang.bind(this, this._on_exit));
+                             this.pid,
+                             Lang.bind(this, this._on_exit));
     },
 
     _on_exit: function(pid, status) {
@@ -470,7 +470,7 @@ TerminalProcess.prototype = {
     },
 
     generate_tmp_filename: function() {
-        let process = new ShellOutputProcess(['tempfile']);
+        let process = new ShellOutputProcess(['mktemp']);
         let output = process.spawn_sync_and_get_output();
         output = output.trim();
         return output;
