@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.3.4~20190702
+  * Now compatible with Cinnamon 4.2.
+
 ### 3.3.3~20190202
   * Improves responsiveness.
 
