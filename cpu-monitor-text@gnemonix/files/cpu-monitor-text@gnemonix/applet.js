@@ -96,7 +96,7 @@ MyApplet.prototype = {
 		let percent = Math.round(this.max_percentage - this.usage);
 		this.set_applet_label("  " + this.cpu_label + " " + this._pad(percent) + "%");
 		
-		this.actor.style = "width: " + (this.max_percentage.toString().length + 3.5) + "em";
+		this.actor.style = "width: " + (this.max_percentage.toString().length + 1.5) + "em";
 	},
 
 	_updateLoop: function () {
