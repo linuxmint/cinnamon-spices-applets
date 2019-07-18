@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   sodipodi:docname="allow-notifications-symbolic.svg"
+   inkscape:export-filename="/home/sam/dev/RESOURCES/gnome-icon-theme-symbolic/src/gnome-stencils.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   height="16"
+   id="svg7384"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   viewBox="0 0 16 16"
+   width="16">
+  <metadata
+     id="metadata90">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Gnome Symbolic Icon Theme</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     inkscape:bbox-nodes="true"
+     inkscape:bbox-paths="true"
+     bordercolor="#666666"
+     borderopacity="1"
+     inkscape:current-layer="svg7384"
+     inkscape:cx="-12.817497"
+     inkscape:cy="3.43866"
+     inkscape:document-rotation="0"
+     inkscape:document-units="px"
+     gridtolerance="10"
+     inkscape:guide-bbox="true"
+     guidetolerance="10"
+     id="namedview88"
+     inkscape:measure-end="0,0"
+     inkscape:measure-start="-190.687,-191.14"
+     inkscape:object-nodes="true"
+     inkscape:object-paths="false"
+     objecttolerance="10"
+     pagecolor="#ffffff"
+     inkscape:pageopacity="1"
+     inkscape:pageshadow="2"
+     showborder="true"
+     showgrid="false"
+     showguides="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="false"
+     inkscape:snap-global="true"
+     inkscape:snap-grids="true"
+     inkscape:snap-nodes="true"
+     inkscape:snap-others="false"
+     inkscape:snap-to-guides="true"
+     inkscape:window-height="717"
+     inkscape:window-maximized="1"
+     inkscape:window-width="1366"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:zoom="11.313708"
+     inkscape:pagecheckerboard="true">
+    <inkscape:grid
+       dotted="false"
+       empspacing="2"
+       enabled="true"
+       id="grid4866"
+       originx="-82.02888"
+       originy="432.02581"
+       snapvisiblegridlinesonly="true"
+       spacingx="1px"
+       spacingy="1px"
+       type="xygrid"
+       visible="true" />
+  </sodipodi:namedview>
+  <title
+     id="title9167">Gnome Symbolic Icon Theme</title>
+  <defs
+     id="defs7386">
+    <linearGradient
+       gradientTransform="matrix(-2.7365795,0.28202934,-0.18908311,-0.99988321,239.54008,-879.45557)"
+       id="linearGradient19282"
+       osb:paint="solid">
+      <stop
+         id="stop19284"
+         offset="0"
+         style="stop-color:#666666;stop-opacity:1;" />
+    </linearGradient>
+  </defs>
+  <path
+     style="opacity:1;fill:#3eff00;fill-opacity:1;stroke:none;stroke-width:1.42857146;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 11,6 a 5,5 0 0 0 -5,5 5,5 0 0 0 5,5 5,5 0 0 0 5,-5 5,5 0 0 0 -5,-5 z m 2.207031,2.0507814 1.364398,1.3643972 -3.853238,3.8532374 -0.680802,0.680803 -0.683595,-0.680803 -1.925223,-1.928015 1.364398,-1.3643967 1.24442,1.2444197 z"
+     class="success"
+     id="path2564"
+     inkscape:connector-curvature="0" />
+  <path
+     inkscape:connector-curvature="0"
+     style="color:#bebebe;overflow:visible;isolation:auto;mix-blend-mode:normal;fill:#bebebe;fill-opacity:1;marker:none"
+     d="m 6,0.990234 a 1,1 0 0 0 -1,1 v 0.00977 c -1.764,0.4559956 -2.998,2.16823 -3,3.99023 0,0 -1.562e-4,4.999094 -1.66015625,5.621094 -0.016,0.01 -0.0220625,0.02997 -0.0390625,0.04297 a 0.726,0.726 0 0 0 -0.16210937,0.175781 c -0.018,0.027 -0.03873438,0.04717 -0.05273438,0.07617 A 0.738,0.738 0 0 0 0,12.240234 c 0,0.415 0.335,0.75 0.75,0.75 H 5.3476562 A 6,6 0 0 1 5,11 6,6 0 0 1 9.890625,5.1074215 C 9.5660844,3.6417397 8.4743027,2.380896 7,1.9999996 v -0.00977 A 1,1 0 0 0 6,0.990234 Z m -1.9335938,13 A 2,2 0 0 0 6,15.490234 2,2 0 0 0 6.8320312,15.306641 6,6 0 0 1 5.8066406,13.990234 Z"
+     id="path2" />
+</svg>
