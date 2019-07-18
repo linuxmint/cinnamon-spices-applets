@@ -1,6 +1,5 @@
 {
-    "description": "Click to mute notifications, click again to unmute",
     "uuid": "notification-mute@jgillula",
     "name": "Notification Mute",
-    "max-instances": "-1"
+    "description": "Click to mute notifications, click again to unmute",
 }
