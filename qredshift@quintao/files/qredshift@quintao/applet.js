@@ -46,11 +46,18 @@ class QRedshift extends Applet.TextIconApplet {
             redshift_version: 0,
             enabled: true,
             autoUpdate: false,
+<<<<<<< HEAD
             autoUpdateInterval: 5,
             adjustmentMethod: 'randr',
             labelScrollAction: 'disabled',
             iconLabel: false,
             iconLabelAlways: true,
+=======
+            adjustmentMethod: 'randr',
+            labelScrollAction: 'disabled',
+            iconLabel: false,
+            iconLabelAlways: false,
+>>>>>>> master
             
             dayTemp: 6500,
             dayBrightness: 1,
@@ -76,7 +83,10 @@ class QRedshift extends Applet.TextIconApplet {
         
         this.settings.bind('enabled', 'enabled', this.onSettChange.bind(this));
         this.settings.bind('autoUpdate', 'autoUpdate', this.onSettChange.bind(this));
+<<<<<<< HEAD
         this.settings.bind('autoUpdateInterval', 'autoUpdateInterval', this.onSettChange.bind(this));
+=======
+>>>>>>> master
         this.settings.bind('adjustmentMethod', 'adjustmentMethod', this.onSettChange.bind(this));
         this.settings.bind('labelScrollAction', 'labelScrollAction');
         this.settings.bind('iconLabel', 'iconLabel', () => {
@@ -102,7 +112,11 @@ class QRedshift extends Applet.TextIconApplet {
             this.set_applet_icon_path(metadata.path + ICON_OFF);
             this.set_applet_label('REDSHIFT NOT INSTALLED!');
             this.set_applet_tooltip('Requires Redshift: sudo apt-get install redshift');
+<<<<<<< HEAD
             
+=======
+     
+>>>>>>> master
             // Reload BTN
             let reload_btn = new PopupMenu.PopupMenuItem('Reload Applet', {hover: true});
             reload_btn.connect('activate', this.reloadApplet.bind(this));
@@ -128,10 +142,17 @@ class QRedshift extends Applet.TextIconApplet {
         
         
         
+<<<<<<< HEAD
         qLOG("QRedshift");
         
         this.maxBrightness = 100;
         this.minBrightness = 10;
+=======
+        qLOG("QRedShift");
+        
+        this.maxBrightness = 100;
+        this.minBrightness = 5;
+>>>>>>> master
         this.maxColor = 9000;
         this.minColor = 1000;
         
@@ -176,9 +197,15 @@ class QRedshift extends Applet.TextIconApplet {
             }
             
             // qLOG('Scroll', this.opt.labelScrollAction);
+<<<<<<< HEAD
             //
             // let key = event.get_key_symbol();
             //
+=======
+            
+            // let key = event.get_key_symbol();
+            
+>>>>>>> master
             // qLOG('Key', key);
             
         });
@@ -266,13 +293,22 @@ class QRedshift extends Applet.TextIconApplet {
         }
         
         if (this.opt.enabled && this.opt.autoUpdate) {
+<<<<<<< HEAD
             this.timeout = Mainloop.timeout_add_seconds(this.opt.autoUpdateInterval, this.doUpdate.bind(this), null);
             // qLOG('auto update', this.opt.autoUpdateInterval);
+=======
+            this.timeout = Mainloop.timeout_add_seconds(3, this.doUpdate.bind(this), null);
+            qLOG('auto update');
+>>>>>>> master
         }
     }
     
     
     
+<<<<<<< HEAD
+=======
+    
+>>>>>>> master
     onSettChange() {
         // qLOG('SETTINGS CHANGED', arguments);
         
@@ -315,8 +351,12 @@ class QRedshift extends Applet.TextIconApplet {
         
         
         
+<<<<<<< HEAD
         // region -- DAY Settings --
         
+=======
+        // region DAY Settings
+>>>>>>> master
         this.enabledDay = new QPopupSwitch({
             label: this.settings.getDesc('enabled'),
             active: this.opt.enabled
@@ -361,8 +401,12 @@ class QRedshift extends Applet.TextIconApplet {
         
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         
+<<<<<<< HEAD
         // region -- Night Settings --
         
+=======
+        // region Night Settings
+>>>>>>> master
         this.enabledNight = new QPopupSwitch({
             label: this.settings.getDesc('enabledNight'),
             active: this.opt.enabledNight
@@ -387,16 +431,23 @@ class QRedshift extends Applet.TextIconApplet {
             value: this.opt.nightBrightness, min: this.minBrightness, max: 100, step: 1
         });
         this.nb_Slider.connect('value-changed', this.nightBrightChange.bind(this));
+<<<<<<< HEAD
         this.nb_Slider.connect('right-click', (actor, value) => {
             actor._setValueEmit('100');
         });
+=======
+>>>>>>> master
         this.menu.addMenuItem(this.nb_Slider);
         // endregion
         
         
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
         
+<<<<<<< HEAD
         // region -- Bottom Bar --
+=======
+        // region Bottom Bar
+>>>>>>> master
         this.bottomBar = new QPopupIconBar();
         this.menu.addMenuItem(this.bottomBar);
         
@@ -441,8 +492,11 @@ class QRedshift extends Applet.TextIconApplet {
         // endregion
     }
     
+<<<<<<< HEAD
     //region -- ON Slider Changes --
     
+=======
+>>>>>>> master
     autoUpdateChange(switcher, value) {
         this.opt.autoUpdate = value;
         this.doUpdate();
@@ -491,7 +545,10 @@ class QRedshift extends Applet.TextIconApplet {
         this.doUpdate();
     }
     
+<<<<<<< HEAD
     //endregion
+=======
+>>>>>>> master
     
     
     on_applet_added_to_panel() {
@@ -511,8 +568,12 @@ class QRedshift extends Applet.TextIconApplet {
         }
         
         Util.killall('redshift');
+<<<<<<< HEAD
         Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
         
+=======
+        Util.spawnCommandLine('redshift -x');
+>>>>>>> master
     }
     
     
@@ -560,7 +621,11 @@ class QRedshift extends Applet.TextIconApplet {
             
         } else {
             // if(this.opt.period !== '' ){
+<<<<<<< HEAD
             Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
+=======
+            Util.spawnCommandLine('redshift -x');
+>>>>>>> master
             this.set_applet_icon_path(this.metadata.path + ICON_OFF);
             this.opt.period = '';
             
@@ -599,6 +664,7 @@ class QRedshift extends Applet.TextIconApplet {
             
             // Label text
             
+<<<<<<< HEAD
         }
         if (this.opt.enabledNight && this.opt.period.toLowerCase() == 'night') {
             labeltext = `${this.opt.nightTemp}k - ${this.opt.nightBrightness}% - `;
@@ -606,6 +672,11 @@ class QRedshift extends Applet.TextIconApplet {
             labeltext = `${this.opt.dayTemp}k - ${this.opt.dayBrightness}% - `;
         }
         labeltext += `${this.opt.gammaMix.toFixed(2)}`;
+=======
+            labeltext = `${this.opt.dayTemp}k - ${this.opt.dayBrightness}% - `;
+            labeltext += `${this.opt.gammaMix.toFixed(2)}`;
+        }
+>>>>>>> master
         
         this.set_applet_tooltip(tooltiptext);
         

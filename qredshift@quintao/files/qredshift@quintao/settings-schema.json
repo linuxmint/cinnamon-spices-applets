@@ -2,7 +2,11 @@
   "layout": {
     "type": "layout",
     "pages": ["panel-options", "panel-location"],
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     "panel-options": {
       "type": "page",
       "title": "Settings",
@@ -25,13 +29,20 @@
       "keys": [
         "enabled",
         "autoUpdate",
+<<<<<<< HEAD
         "autoUpdateInterval",
+=======
+>>>>>>> master
         "adjustmentMethod",
         "labelScrollAction",
         "iconLabel"
       ]
     },
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     "day-section": {
       "type": "section",
       "title": "Day Settings",
@@ -41,7 +52,11 @@
         "gammaMix"
       ]
     },
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     "night-section": {
       "type": "section",
       "title": "Night Settings",
@@ -49,7 +64,11 @@
         "enabledNight", "nightTemp", "nightBrightness"
       ]
     },
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> master
     "location-section": {
       "type": "section",
       "title": "Location Settings",
@@ -58,7 +77,11 @@
       ]
     }
   },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> master
   "enabled": {
     "type": "checkbox",
     "default": false,
@@ -67,6 +90,7 @@
   "autoUpdate": {
     "type": "checkbox",
     "default": false,
+<<<<<<< HEAD
     "description": "Auto Update",
     "tooltip": "Continuously adjust color temperature"
   },
@@ -79,6 +103,9 @@
     "units": "Sec",
     "step": 1,
     "description": "Update interval"
+=======
+    "description": "Auto Update"
+>>>>>>> master
   },
   "adjustmentMethod": {
     "type": "combobox",
@@ -121,7 +148,11 @@
   "dayBrightness": {
     "type": "spinbutton",
     "default": 100,
+<<<<<<< HEAD
     "min": 10,
+=======
+    "min": 5,
+>>>>>>> master
     "max": 100,
     "units": "%",
     "step": 1,
@@ -156,13 +187,21 @@
     "type": "spinbutton",
     "dependency": "enabledNight=true",
     "default": 100,
+<<<<<<< HEAD
     "min": 10,
+=======
+    "min": 5,
+>>>>>>> master
     "max": 100,
     "units": "%",
     "step": 1,
     "description": "Brightness"
   },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> master
   "locationRemote": {
     "type": "checkbox",
     "default": true,
