@@ -2,7 +2,7 @@
   "layout": {
     "type": "layout",
     "pages": ["panel-options", "panel-location"],
-
+    
     "panel-options": {
       "type": "page",
       "title": "Settings",
@@ -25,12 +25,13 @@
       "keys": [
         "enabled",
         "autoUpdate",
+        "autoUpdateInterval",
         "adjustmentMethod",
         "labelScrollAction",
         "iconLabel"
       ]
     },
-
+    
     "day-section": {
       "type": "section",
       "title": "Day Settings",
@@ -40,7 +41,7 @@
         "gammaMix"
       ]
     },
-
+    
     "night-section": {
       "type": "section",
       "title": "Night Settings",
@@ -48,7 +49,7 @@
         "enabledNight", "nightTemp", "nightBrightness"
       ]
     },
-
+    
     "location-section": {
       "type": "section",
       "title": "Location Settings",
@@ -57,7 +58,7 @@
       ]
     }
   },
-
+  
   "enabled": {
     "type": "checkbox",
     "default": false,
@@ -66,7 +67,18 @@
   "autoUpdate": {
     "type": "checkbox",
     "default": false,
-    "description": "Auto Update"
+    "description": "Auto Update",
+    "tooltip": "Continuously adjust color temperature"
+  },
+  "autoUpdateInterval": {
+    "type": "spinbutton",
+    "dependency": "autoUpdate=true",
+    "default": 5,
+    "min": 1,
+    "max": 60,
+    "units": "Sec",
+    "step": 1,
+    "description": "Update interval"
   },
   "adjustmentMethod": {
     "type": "combobox",
@@ -109,7 +121,7 @@
   "dayBrightness": {
     "type": "spinbutton",
     "default": 100,
-    "min": 5,
+    "min": 10,
     "max": 100,
     "units": "%",
     "step": 1,
@@ -144,13 +156,13 @@
     "type": "spinbutton",
     "dependency": "enabledNight=true",
     "default": 100,
-    "min": 5,
+    "min": 10,
     "max": 100,
     "units": "%",
     "step": 1,
     "description": "Brightness"
   },
-
+  
   "locationRemote": {
     "type": "checkbox",
     "default": true,
