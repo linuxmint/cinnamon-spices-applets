@@ -113,7 +113,7 @@ q=$(grep q= etc/rwall.ini | cut -f2- -d '=')
 res=$(grep res= etc/rwall.ini | cut -f2- -d '=')
 
 # Download the html based on our search parameters
-wget "http://alpha.wallhaven.cc/search?q=$q&categories=111&purity=100&resolutions=$res&sorting=random&order=asc" -O tmp/wallhaven.html
+wget "http://wallhaven.cc/search?q=$q&categories=111&purity=100&resolutions=$res&sorting=random&order=asc" -O tmp/wallhaven.html
 
 # grep the image ID
 #id=$(grep -o -m 1 '<a href="javascript:;" data-id=".*" ' tmp/wallhaven.html | grep -o [0-9].*[0-9])
