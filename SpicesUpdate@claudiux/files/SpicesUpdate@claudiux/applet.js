@@ -1056,6 +1056,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return _(this._get_member_from_cache(type, uuid, "description"), uuid)
   }; // End of get_spice_name
 
+  _rewrite_metadataFile(fileName, lastEdited) {
+    let metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    let newData = JSON.parse(metadataData);
+    newData["last-edited"] = lastEdited;
+    let message = JSON.stringify(newData, null, 2);
+    GLib.file_set_contents(fileName, message);
+    log("Added missing last-edited field into " + fileName.toString())
+  }; // End of _rewrite_metadataFile
+
   _get_last_edited_from_metadata(type, uuid) {
     var lastEdited = null;
     let metadataParser = new Json.Parser();
@@ -1074,6 +1083,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       metadataParser.load_from_data(metadataData, -1);
       let node = metadataParser.get_root();
       if (node.get_node_type() === Json.NodeType.OBJECT) {
+        var lastEditedIsToSet = false;
         let obj = node.get_object();
         try {
           lastEdited = obj.get_member("last-edited").get_value();
@@ -1087,12 +1097,19 @@ class SpicesUpdate extends Applet.TextIconApplet {
             lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
             //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
             //log(message);
+            lastEditedIsToSet = true;
+            //obj.set_member("last-edited", lastEdited);
+            //log("obj = " + JSON.stringify(obj, null, 2));
+            //log("obj = " + JSON.stringify(obj))
           } catch(e) {
             // Sure, the metadata file doesn't exist!
             lastEdited = null;
             //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
             //log(message);
           }
+        }
+        if (lastEditedIsToSet === true) {
+          this._rewrite_metadataFile(metadataFileName, lastEdited)
         }
       }
     }

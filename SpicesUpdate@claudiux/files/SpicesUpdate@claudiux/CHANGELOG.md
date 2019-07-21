@@ -1,3 +1,6 @@
+### v2.1.0~20190721
+  * Allows user to update even downloaded applets from the Download button on the site.
+
 ### v2.0.1~20190201
   * Delete old notifications when a new one arrives.
 
