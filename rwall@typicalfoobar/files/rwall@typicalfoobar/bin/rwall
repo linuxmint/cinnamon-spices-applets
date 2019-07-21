@@ -113,7 +113,7 @@ q=$(grep q= etc/rwall.ini | cut -f2- -d '=')
 res=$(grep res= etc/rwall.ini | cut -f2- -d '=')
 
 # Download the html based on our search parameters
-wget "http://alpha.wallhaven.cc/search?q=$q&categories=111&purity=100&resolutions=$res&sorting=random&order=asc" -O tmp/wallhaven.html
+wget "http://wallhaven.cc/search?q=$q&categories=111&purity=100&resolutions=$res&sorting=random&order=asc" -O tmp/wallhaven.html
 
 # grep the image ID
 #id=$(grep -o -m 1 '<a href="javascript:;" data-id=".*" ' tmp/wallhaven.html | grep -o [0-9].*[0-9])
@@ -126,7 +126,7 @@ file_type=""
 # JPG
 if [ $image_found -eq 1 ];
 then
-	wget_image=$(wget http://alpha.wallhaven.cc/wallpapers/full/wallhaven-$id.jpg -O tmp/wallpaper-$id.jpg)
+	wget_image=$(wget http://w.wallhaven.cc/full/${id:0:2}/wallhaven-$id.jpg -O tmp/wallpaper-$id.jpg)
 	if [ $? -eq 0 ]
 	then
 		image_found=0
@@ -137,7 +137,7 @@ fi
 # PNG
 if [ $image_found -eq 1 ];
 then
-	wget_image=$(wget http://alpha.wallhaven.cc/wallpapers/full/wallhaven-$id.png -O tmp/wallpaper-$id.png)
+	wget_image=$(wget http://w.wallhaven.cc/full/${id:0:2}/wallhaven-$id.png -O tmp/wallpaper-$id.png)
 	if [ $? -eq 0 ]
 	then
 		image_found=0
@@ -148,7 +148,7 @@ fi
 # Set $DBUS_SESSION_BUS_ADDRESS enviroment variable if it is not set
 if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]
 then
-    PID=$(pidof "cinnamon-session")
+    PID=$(pidof "cinnamon")
     export DBUS_SESSION_BUS_ADDRESS=$(grep -z DBUS_SESSION_BUS_ADDRESS /proc/$PID/environ|cut -d= -f2-)
 fi
 
