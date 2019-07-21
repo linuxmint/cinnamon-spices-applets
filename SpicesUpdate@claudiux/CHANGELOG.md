@@ -1,5 +1,6 @@
 ### v2.1.0~20190721
-  * Allows user to update even downloaded applets from the Download button on the site.
+  * Allows user to update even downloaded xlets from the Download button on the site.
+  * Compatible with Cinnamon 3.8, 4.0 and 4.2.
 
 ### v2.0.1~20190201
   * Delete old notifications when a new one arrives.
