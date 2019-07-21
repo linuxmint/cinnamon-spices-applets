@@ -257,7 +257,7 @@ class ApplicationContextMenuItem extends PopupMenu.PopupBaseMenuItem {
         this._action = action;
         this.label = new St.Label({ text: label });
 
-        if (iconName != null) {
+        if (iconName != null && appButton.applet.showContextMenuIcons) {
             this.icon = new St.Icon({ icon_name: iconName, icon_size: 12, icon_type: St.IconType.SYMBOLIC });
             if (this.icon)
                 this.addActor(this.icon);
@@ -720,7 +720,7 @@ class RecentButton extends SimpleMenuItem {
 
 class CategoryButton extends SimpleMenuItem {
     constructor(applet, categoryId, label, icon) {
-        super(applet, { name: label || _("All Applications"), 
+        super(applet, { name: label || _("All Applications"),
                         styleClass: 'menu-category-button',
                         categoryId: categoryId });
         this.actor.accessible_role = Atk.Role.LIST_ITEM;
@@ -736,7 +736,7 @@ class CategoryButton extends SimpleMenuItem {
 }
 
 class FavoritesButton extends GenericApplicationButton {
-    constructor(applet, app, nbFavorites, iconSize, showIcon, showContextIcon) {
+    constructor(applet, app, nbFavorites, iconSize, showIcon) {
         super(applet, app, true, 'menu-favorites-button');
         let monitorHeight = Main.layoutManager.primaryMonitor.height;
         let real_size = (0.7 * monitorHeight) / nbFavorites;
@@ -754,8 +754,6 @@ class FavoritesButton extends GenericApplicationButton {
         this._draggable = DND.makeDraggable(this.actor);
         this._signals.connect(this._draggable, 'drag-end', Lang.bind(this, this._onDragEnd));
         this.isDraggableApp = true;
-
-        this.showContextIcon = showContextIcon;
 
         if (applet.showAppsDescriptionOnButtons) {
             this.addDescription(this.name, this.description);
@@ -3035,12 +3033,19 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         this._recentButtons = [];
 
-        if (this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)) {
-            if (this.recentButton == null) {
-                this.recentButton = new CategoryButton(this, 'recent', _('Recent Files'), 'folder-recent');
-                this._categoryButtons.push(this.recentButton);
-                this.categoriesBox.add_actor(this.recentButton.actor);
+        for (let i = 0; i < this._categoryButtons.length; i++) {
+            if (this._categoryButtons[i].categoryId === "recent") {
+                this._categoryButtons[i].destroy();
+                this._categoryButtons.splice(i, 1);
+                this.recentButton = null;
+                break;
             }
+        }
+
+        if (this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)) {
+            this.recentButton = new CategoryButton(this, 'recent', _('Recent Files'), 'folder-recent');
+            this._categoryButtons.push(this.recentButton);
+            this.categoriesBox.add_actor(this.recentButton.actor);
 
             /* Make sure the recent category is at the bottom (can happen when refreshing places
              * or apps, since we don't destroy the recent category button each time we refresh recents,
@@ -3193,7 +3198,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         for ( let i = 0; i < launchers.length; ++i ) {
             let app = appSys.lookup_app(launchers[i]);
             if (app) {
-                let button = new FavoritesButton(this, app, launchers.length, this.favorite_button_size, this.showFavoriteIcons, this.showContextMenuIcons); // + 3 because we're adding 3 system buttons at the bottom
+                let button = new FavoritesButton(this, app, launchers.length, this.favorite_button_size, this.showFavoriteIcons); // + 3 because we're adding 3 system buttons at the bottom
                 this._favoritesButtons.push(button);
                 this.favoritesBox.add(button.actor, { y_align: St.Align.END, y_fill: false });
             }
